@@ -51,8 +51,6 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
 ## Storing Information
 
-<box type="info" seamless>
-
 EventTory provides users a way to keep track of events and vendors.
 The details of what information can be stored for a vendor/event are as shown below.
 
@@ -79,21 +77,13 @@ The details of what information can be stored for a vendor/event are as shown be
 
 The input fields of vendors and events have varying constraints and are as listed below. Note that leading and trailing whitespaces in inputs will be removed.
 
-### Name
+**Name** : Names must start with an alphanumeric character and must not contain `/`.
 
-Names must start with an alphanumeric character and must not contain `/`.
+**Phone Number** : Phone numbers should only contain numbers, and it should be at least 3 digits long.
 
-### Phone Number
+**Description** : Descriptions can take in any characters but cannot be blank.
 
-Phone numbers should only contain numbers, and it should be at least 3 digits long.
-
-### Description
-
-Descriptions can take in any characters but cannot be blank.
-
-### Date
-
-Date inputs can be in any of the following formats:
+**Date** : Date inputs can be in any of the following formats:
 1. `dd-MM-uuuu`
 2. `uuuu-MM-dd`
 3. `dd MMM uuuu`
@@ -101,16 +91,14 @@ Date inputs can be in any of the following formats:
 
 `uuuu` is equivalent to `yyyy` denoting the year in a date.
 
-### Tags
-
-Tags can contain alphanumeric characters, hyphens `-`, and underscores `_` only, but cannot be made up of only hyphens `-` and underscores `_`.<br>
+**Tags** : Tags can contain alphanumeric characters, hyphens `-`, and underscores `_` only, but cannot be made up of only hyphens `-` and underscores `_`.<br>
 Tags also only accepts a **maximum** of 30 characters.
 
 ## Features
 
 <box type="info" seamless>
 
-### Command Formats
+Notes on Command Formats:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. `create v/ n/VENDOR_NAME`, `VENDOR_NAME` is a parameter which is specified by the user:
@@ -153,23 +141,24 @@ Tags also only accepts a **maximum** of 30 characters.
 <p>
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </box>
 
 ### Creating Vendors & Events: `create`
 
 Creates a vendor or event in EventTory.
 
-#### Format:
+Format:
 * To create a vendor: `create v/ n/VENDOR_NAME d/DESCRIPTION p/PHONE_NUMBER [t/TAG]…​`
 * To create en event: `create e/ n/EVENT_NAME on/DATE [t/TAG]…​`
 
-#### Notes:
+Notes:
 If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 <box type="tip" seamless><br>
 **Tip:** A vendor or event can have any number of tags (including 0).
 </box>
 
-#### Examples:
+Examples:
 * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew`
 * `create e/ n/Jubilee Concert on/24 Jan 2025 t/annual`
 
@@ -177,11 +166,11 @@ If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 
 Edits an existing vendor or event in EventTory.
 
-#### Format:
+Format:
 * To edit a vendor: `edit v/INDEX [n/NAME] [p/PHONE] [d/DESCRIPTION] [t/TAG]…​`
 * To edit an event: `edit e/INDEX [n/NAME] [on/DATE] [t/TAG]…​`
 
-#### Notes:
+Notes:
 * Edits the vendor/event at the specified `INDEX`.
     * The index refers to the index number shown in the vendor or event list.
     * The index **must be a positive integer** 1, 2, 3, …​
@@ -194,7 +183,7 @@ Edits an existing vendor or event in EventTory.
     * Tags cannot be added cumulatively.
     * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
 
-#### Examples:
+Examples:
 *  `edit v/1 p/58623042 ` : Edits the phone number of the 1st vendor to be `58623042`.
 *  `edit e/2 n/Baby Shower t/` : Edits the name of the 2nd event to be `Baby Shower`, and clears all existing tags.
 
@@ -202,7 +191,7 @@ Edits an existing vendor or event in EventTory.
 
 Deletes a vendor or an event from EventTory.
 
-#### Format: `delete [v/INDEX]` or `delete [e/INDEX]`
+Format: `delete [v/INDEX]` or `delete [e/INDEX]`
 
 * Deletes the event or vendor at the specified `INDEX`.
     * The index refers to the index number shown in the displayed event/vendor list respectively.
@@ -213,7 +202,7 @@ Deletes a vendor or an event from EventTory.
 * If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
 * If the current viewed vendor/event is deleted, the application will return you to the main list screen.
 
-#### Examples:
+Examples:
 * `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
 * `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
 
@@ -221,15 +210,15 @@ Deletes a vendor or an event from EventTory.
 
 Displays the list of vendors and/or events in EventTory.
 
-#### Format: `list [v/] [e/]`
+Format: `list [v/] [e/]`
 
-#### Notes:
+Notes:
 * The list(s) displayed depends on whether the `v/` and/or `e/` prefix(es) is specified.
 * If no prefixes are specified, both the vendor and event lists will be displayed.
 * The prefixes can be specified in any order.
 * If values are specified after the prefixes (e.g. `v/2`, `e/Party`), the value is ignored.
 
-#### Examples:
+Examples:
 * `list v/` will display the list of vendors.
 * `list e/` will display the list of events.
 * `list v/ e/` and `list` will display both vendor and event lists.
@@ -238,7 +227,7 @@ Displays the list of vendors and/or events in EventTory.
 
 Views the details of a vendor or event.
 
-#### Format: `view v/INDEX` or `view e/INDEX`
+Format: `view v/INDEX` or `view e/INDEX`
 
 * Views the details of the vendor/event at the specified `INDEX`.
   * The index refers to the index number shown in the displayed vendor/event list.
@@ -247,7 +236,7 @@ Views the details of a vendor or event.
 * The operation will succeed even if the specified vendor/event is not visible on screen.
   * e.g. `view v/2` can be run after `view v/1`. Even though the 1st vendor will not be visible when viewing the 2nd vendor, it can still be accessed and viewed.
 
-#### Examples:
+Examples:
 * `view v/2` will show the details of the 2nd vendor.
 * `view e/1` will show the details of the 1st event.
 
@@ -255,16 +244,16 @@ Views the details of a vendor or event.
 
 Assigns vendors to events and vice versa.
 
-#### Format: `assign INDEX`
+Format: `assign INDEX`
 
-#### Notes:
+Notes:
 * Assigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
   * The index refers to the index number shown in the **assignable** vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are already associated (assigned to each other), the operation will fail.
 
-#### Examples:
+Examples:
 * `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
 
@@ -272,16 +261,16 @@ Assigns vendors to events and vice versa.
 
 Unassigns vendors from events and vice versa.
 
-#### Format: `unassign INDEX`
+Format: `unassign INDEX`
 
-#### Notes:
+Notes:
 * Unassigns the vendor/event specified at `INDEX` to the current viewed event/vendor.
   * The index refers to the index number shown in the **assigned** vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
 * The command only works when the user is viewing a vendor/event using the `view` command. Otherwise, the operation will fail.
 * If the specified vendor-event pair are not already associated (not assigned to each other), the operation will fail.
 
-#### Examples:
+Examples:
 * `view v/2` then `unassign 1` will unassign the 1st event from the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `unassign 3` will unassign the 3rd vendor from the current viewed event, which is the 1st event.
 
@@ -289,9 +278,9 @@ Unassigns vendors from events and vice versa.
 
 Finds vendors or events whose attributes contain any of the space-separated keywords provided.
 
-#### Format: `find v/ KEYWORD [MORE_KEYWORDS]` or `find e/ KEYWORD [MORE_KEYWORDS]`
+Format: `find v/ KEYWORD [MORE_KEYWORDS]` or `find e/ KEYWORD [MORE_KEYWORDS]`
 
-#### Notes:
+Notes:
 * The search is case-insensitive. e.g. `party` will match `Party`
 * Any partial matches will still be matched e.g. `par` will match `party`
 * The order of the keywords does not matter.
@@ -301,7 +290,7 @@ Finds vendors or events whose attributes contain any of the space-separated keyw
   * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
 * If no matches are found, the user will be informed and the current view will remain unchanged.
 
-#### Examples:
+Examples:
 * `find v/ catering` returns `catering` and `Catering Solutions`
 * `find e/ party wedding` returns `Birthday Party` and `John's Wedding`<br>
 
@@ -309,7 +298,7 @@ Finds vendors or events whose attributes contain any of the space-separated keyw
 
 Clears all vendor and event entries from EventTory.
 
-#### Format: `clear`
+Format: `clear`
 
 ### Accessing Help : `help`
 
@@ -317,13 +306,13 @@ Opens a window with instructions on how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-#### Format: `help`
+Format: `help`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-#### Format: `exit`
+Format: `exit`
 
 ### Saving Data
 
