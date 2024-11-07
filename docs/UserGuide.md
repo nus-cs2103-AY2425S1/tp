@@ -35,14 +35,14 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 ## Quick start
 
 
-1. **Check for Java Installation**  
+1. **Check for Java Installation** 
    Ensure you have Java **17** or above installed on your computer:
    - Open a terminal or command prompt and run the following command:
      - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
      - On Mac/Linux: Open the Terminal from your Applications.
        ```bash
        java -version
-       ```  
+       ```
    - If you see a version like `java version "17.x.x"` or higher, you're all set!
    - If Java is not installed or the version is lower than 17:
       - Download and install the latest Java Development Kit (JDK) **17** from [Oracle's official site](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or [OpenJDK](https://openjdk.org/).
@@ -56,7 +56,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 1. Open your computer's command terminal
 
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file (e.g. `C:/Users/Your_Name/Your_Folder`), then run the following command:
-   
+
    `java -jar NAME_OF_JAR_FILE`. For example, `java -jar volunsync-v1.5.jar`.
 
 1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
@@ -162,7 +162,7 @@ Format : `export`
 ![Export File](images/ExportCommand.png)
 
 * After running the export command, check the `/output` folder located in the same directory as your .jar file. You’ll find two CSV files: events.csv and volunteers.csv.
-* 
+
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 ### Exiting the program : `exit`
@@ -211,7 +211,7 @@ Format: `/v find KEYWORD`
 * Only the name is searched
 * The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
     * e.g. `Joe` will match `Joelle`, `Enjoeline` and `Joe`
- 
+
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
 
@@ -361,7 +361,7 @@ Input Requirements:
 - Event Name: Alphanumeric characters and spaces only, 1-50 characters.
 - Location: Alphanumeric characters and spaces only, 1-100 characters.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01),
-- Start Time: 24-hour format HH:mm (e.g., 12:00). 
+- Start Time: 24-hour format HH:mm (e.g., 12:00).
 - End Time: Format HH:mm (e.g., 15:00). Start time must be before end time.
 - Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
 
