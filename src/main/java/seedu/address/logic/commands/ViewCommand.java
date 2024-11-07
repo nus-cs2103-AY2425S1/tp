@@ -17,14 +17,21 @@ import seedu.address.model.person.Person;
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views details of a contact.\n"
-                    + "Parameters: "
-                    + PREFIX_NAME
-                    + "NAME\n"
-                    + "Example: "
-                    + COMMAND_WORD
-                    + " "
-                    + PREFIX_NAME + "JohnDoe";
+    public static final String COMMAND_WORD_SHORT_FORM = "v";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
+            + ": Views details of a contact.\n"
+            + "Parameters: "
+            + PREFIX_NAME
+            + "NAME\n"
+            + "Example: "
+            + COMMAND_WORD
+            + " "
+            + PREFIX_NAME + "John Doe\n"
+            + "Example: "
+            + COMMAND_WORD_SHORT_FORM
+            + " "
+            + PREFIX_NAME + "John Doe";
 
     public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact";
     public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact";
