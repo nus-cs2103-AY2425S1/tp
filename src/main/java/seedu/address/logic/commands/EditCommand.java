@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 
@@ -35,7 +36,7 @@ public abstract class EditCommand<T> extends Command {
           .map(Prefix::toString).toArray(String[]::new)) + "\n"
         + "Allowed field tags for pets: "
         + String.join(", ", Arrays.stream(new Prefix[]{PREFIX_NAME, PREFIX_SPECIES, PREFIX_BREED, PREFIX_AGE,
-            PREFIX_SEX}).map(Prefix::toString).toArray(String[]::new)) + "\n";
+            PREFIX_SEX, PREFIX_TAG}).map(Prefix::toString).toArray(String[]::new)) + "\n";
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 

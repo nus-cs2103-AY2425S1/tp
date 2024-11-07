@@ -1,9 +1,12 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.owner.Owner;
@@ -42,6 +45,8 @@ public class PetCard extends UiPart<Region> {
     @FXML
     private Label sex;
     @FXML
+    private FlowPane tags;
+    @FXML
     private Label linkedOwner; // Label to display linked pets
 
     private ObservableList<Owner> ownerList;
@@ -57,7 +62,11 @@ public class PetCard extends UiPart<Region> {
         species.setText("Species: " + pet.getSpecies().value);
         breed.setText("Breed: " + pet.getBreed().value);
         age.setText("Age: " + pet.getAge().value);
-        sex.setText("Sex: " + pet.getSex().toString()); // toString() will convert single char sex value to a full word
+        sex.setText("Sex: " + pet.getSex().value);
+        pet.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
         // Set the linked pets using the toString() of each pet
         linkedOwner.setText(formatLinkedOwner(pet.getLinkedOwner()));
 
