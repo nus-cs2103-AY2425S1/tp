@@ -45,7 +45,7 @@
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\AddressBook`
        </box>
        
-     * For mac user, type:
+     * For Mac users, type:
        ```
        cd /path/to/your/folder
        ```
