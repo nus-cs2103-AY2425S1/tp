@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "d:ViewTutorChartCommand" as ViewTutorChartCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "h:CommandHistory" as CommandHistory LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute("vtc")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("vtc")
+activate AddressBookParser
+
+create ViewTutorChartCommand
+AddressBookParser -> ViewTutorChartCommand
+activate ViewTutorChartCommand
+
+ViewTutorChartCommand --> AddressBookParser : vtc
+deactivate ViewTutorChartCommand
+
+AddressBookParser --> LogicManager : vtc
+deactivate AddressBookParser
+
+LogicManager -> ViewTutorChartCommand : execute(m)
+activate ViewTutorChartCommand
+
+ViewTutorChartCommand -> Model : updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> ViewTutorChartCommand
+deactivate Model
+
+ViewTutorChartCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ViewTutorChartCommand : fullList
+deactivate Model
+
+ref over ViewTutorChartCommand : sort tutor by hours
+
+create CommandResult
+ViewTutorChartCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewTutorChartCommand
+deactivate CommandResult
+
+ViewTutorChartCommand --> LogicManager
+deactivate ViewTutorChartCommand
+
+LogicManager -> CommandHistory : CommandHistory.add("vtc"))
+activate CommandHistory
+
+CommandHistory --> LogicManager
+deactivate CommandHistory
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
