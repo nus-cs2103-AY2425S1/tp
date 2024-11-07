@@ -117,8 +117,8 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandException(String inputCommand) {
-        assertCommandFailure(inputCommand, CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    private void assertCommandException(String inputCommand, String expectedMessage) {
+        assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
     }
 
     /**
