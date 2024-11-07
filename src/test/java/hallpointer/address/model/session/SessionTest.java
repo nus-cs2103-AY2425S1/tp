@@ -38,7 +38,7 @@ public class SessionTest {
 
         // same name, all other attributes different -> returns true
         Session updatedSession = new SessionBuilder(REHEARSAL)
-                .withDate("20 Jan 2025").withPoints("123").build();
+                .withDate("20 Jan 2025").withPoints("100").build();
         assertTrue(session.isSameSession(updatedSession));
 
         // different name, all other attributes same -> returns false
@@ -48,7 +48,7 @@ public class SessionTest {
 
         // name differs in case, all other attributes different -> returns true
         updatedSession = new SessionBuilder(REHEARSAL)
-                .withSessionName("reHEARSAL W1").withDate("20 Jan 2025").withPoints("123").build();
+                .withSessionName("reHEARSAL W1").withDate("20 Jan 2025").withPoints("100").build();
         assertTrue(session.isSameSession(updatedSession));
     }
 
