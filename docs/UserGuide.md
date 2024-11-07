@@ -8,7 +8,13 @@ pageNav: 3
 
 KnottyPlanners is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, KnottyPlanners can make organising weddings a walk in the park!
 
-_Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently._
+### What is Command Line Interface? 🤔
+Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently on a computer. Don't worry if you are still unsure about CLI, we will walk you through in this User Guide! 😊
+
+### Why use Command Line Interface ? 
+* **Efficiency:** Perform tasks faster by replacing multiple mouse clicks into a single line of text ✅
+* **Precision:** Avoid mis-clicking and mistakes as CLI will execute the exact command you type 💯
+* **Offline:** CLI does not require internet and allows you to use it anywhere 👩‍💻
 
 <!-- * Table of Contents -->
 ## Table of Contents
@@ -456,7 +462,6 @@ There is no need to save manually.
 
 * KnottyPlanners data are saved automatically as a JSON file `[JAR file location]/data/knottyplanners.json`.
 * Advanced users are welcome to update data directly by editing that data file.
-
 <box type="warning" seamless>
 
 **<span style="color: red;">CAUTION:</span>**
