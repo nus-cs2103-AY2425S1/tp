@@ -272,10 +272,10 @@ public class StudentTest {
         AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, GRADE_90);
 
         // Perform the edit operation
-        Assignment oldAssignmentQuery = student.editAssignment(ASSIGNMENT_NAME_A, query);
+        Assignment oldAssignment2 = student.editAssignment(ASSIGNMENT_NAME_A, query);
 
         // Verify the old assignment details are returned
-        assertEquals(new AssignmentQuery(oldAssignment), oldAssignmentQuery);
+        assertEquals(oldAssignment, oldAssignment2);
 
         // Verify that the assignment is now updated
         Assignment updatedAssignment = student.getAssignments().get(0);
