@@ -77,7 +77,7 @@ public class Messages {
                 .append(event.getVenue().map(Venue::toString).orElse("[To be added]"))
                 .append("; Celebrity: ")
                 .append(event.getCelebrityName())
-                .append("; Contacts: ")
+                .append(";\nContacts: ")
                 .append(event.getContacts().isEmpty() ? "[To be added]" : event.getContactsString());
         return builder.toString();
     }

@@ -121,7 +121,7 @@ public class Person {
     /**
      * Returns a string representation of the tags.
      */
-    public String getTagsString() {
+    public String getTagString() {
         return tags.stream().findFirst().map(t -> t.tagName).orElse("-");
     }
 
