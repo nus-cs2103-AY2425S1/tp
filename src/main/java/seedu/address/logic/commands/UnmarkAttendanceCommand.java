@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -67,7 +66,7 @@ public class UnmarkAttendanceCommand extends Command {
 
         Person studentUnmarked = studentToUnmark.removeAttendance(classDate);
         model.setPerson(studentToUnmark, studentUnmarked);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(
                 String.format(MESSAGE_UNMARK_ATTENDANCE_SUCCESS, studentUnmarked.getName(), dateString));
     }
