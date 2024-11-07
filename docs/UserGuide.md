@@ -97,6 +97,8 @@ of replacing S00001).
 
 * Commands are case-sensitive (e.g., `add` is not the same as `Add`). Hence, commands should be in lowercase.
 
+* Prefixes are case-sensitive (e.g., `n\` is not the same as `N\`). Hence, prefixes should be in lowercase.
+
 * Parameters are case-insensitive (e.g., `Science`, `SCIENCE`, `science` are treated as the same).
 
 * Leading and trailing spaces will be removed from the parameters. Hence, the length of the parameters is not affected by the leading and trailing spaces.
