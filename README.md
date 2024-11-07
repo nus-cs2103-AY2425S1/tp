@@ -9,9 +9,9 @@ This product is for Financial Advisors who engage frequently or specialise prima
 
 ## Features
 Our product:
-* Allows advisors to keep track of who they have and have not contacted recently
+* Allows advisors to keep track of clients policies and payment dates
 * Sorts clients based on various categories and allow advisors to filter by these categories
-* Automates the process of sending an automatic reminder to the advisor if a client has not been contacted in a while
+* Enables effective outreach by providing comprehensive contact details and ready-to-go messaging templates that one simply can copy and paste.
 
 * For the detailed documentation of this project, please see the **[F.A.R.T. Product Website](https://ay2425s1-cs2103t-f14b-4.github.io/tp/)**.
 
