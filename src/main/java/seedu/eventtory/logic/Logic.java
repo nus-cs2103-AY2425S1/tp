@@ -6,7 +6,6 @@ import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
-import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.commands.CommandResult;
 import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.logic.parser.exceptions.ParseException;
@@ -25,13 +24,12 @@ public interface Logic {
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException If an error occurs during parsing.
+     * @throws ParseException   If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
      * Returns the EventTory.
-     *
      * @see seedu.eventtory.model.Model#getEventTory()
      */
     ReadOnlyEventTory getEventTory();
@@ -67,10 +65,13 @@ public interface Logic {
     ObservableIntegerValue getStartingIndexOfAssignedEvents();
 
     /** Return the display index of the given vendor in the filtered list */
-    Index getRelativeIndexOfVendor(Vendor vendor);
+    int getRelativeIndexOfVendor(Vendor vendor);
 
     /** Return the display index of the given event in the filtered list */
-    Index getRelativeIndexOfEvent(Event event);
+    int getRelativeIndexOfEvent(Event event);
+
+    /** Return the display index of the selected object */
+    ObservableIntegerValue getIndexOfSelectedObject();
 
     /**
      * Returns the user prefs' EventTory file path.

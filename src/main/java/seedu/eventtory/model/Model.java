@@ -136,12 +136,17 @@ public interface Model {
     /**
      * Returns the relative index of the vendor in the filtered list.
      */
-    Index getRelativeIndexOfVendor(Vendor vendor);
+    int getRelativeIndexOfVendor(Vendor vendor);
 
     /**
      * Returns the relative index of the event in the filtered list.
      */
-    Index getRelativeIndexOfEvent(Event event);
+    int getRelativeIndexOfEvent(Event event);
+
+    /**
+     * Returns the relative index of the selected object in the filtered list.
+     */
+    ObservableIntegerValue getIndexOfSelectedObject();
 
     /**
      * Sets the selected vendor.
