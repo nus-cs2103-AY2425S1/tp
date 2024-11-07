@@ -325,7 +325,7 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 
 ## 5.2 Data Modification Commands
 
-### 5.2.1 Adding a new client {#add-command}
+### 5.2.1 Adding a new client
 
 **Purpose:** Save detailed records of a new client.
 
@@ -564,7 +564,7 @@ filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIE
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
-    - See [Filtering By Income](#523-filter-clients-by-details--find-a-client) for more information.
+    - See [Filtering By Income](#filter-by-income) for more information.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -597,7 +597,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
     - **Example:**  
       If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
-- **Filtering by Income (Using Comparison Operators):**
+- **Filtering by Income (Using Comparison Operators):** <a id="filter-by-income"></a>
   Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
 
     - **Equal to (`=`):**  
@@ -637,7 +637,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 ## 5.4 General Commands
 
-### 5.4.1 Viewing a Client's Details {#view-command}
+### 5.4.1 Viewing a Client's Details
 
 **Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remark(s) and additional details.
 
@@ -669,7 +669,7 @@ view index
 > You can use the split view to compare client details side by side with the main list, making it easier to reference multiple clients at once.
 
 
-### 5.4.2 Closing a Client's Details {#close-command}
+### 5.4.2 Closing a Client's Details 
 
 **Purpose:** Close the split view of client details and return to the full list view.
 
@@ -687,7 +687,7 @@ close
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open
 
-### 5.4.3 Help Menu {#help-command}
+### 5.4.3 Help Menu 
 
 **Purpose:** Provides quick access to a command summary and the user guide for AgentAssist.
 
@@ -702,7 +702,7 @@ help
 
 
 
-### 5.4.4 Exiting AgentAssist {#exit}
+### 5.4.4 Exiting AgentAssist 
 
 **Purpose:** Exit the application directly from the command line, providing a quick and easy way to close the program without using external controls.
 
