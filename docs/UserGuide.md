@@ -13,9 +13,8 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
@@ -43,10 +42,10 @@ If you can type fast, GamerBook can get your contact management tasks done faste
    * `exit` : Exits the app.
 
 Refer to the [Features](#features) below for more details.
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
+
 
 ## Features
 
@@ -115,6 +114,8 @@ Underneath each suggested command is the syntax for that command and what parame
 | **Exit**       | `exit`                                                                                                                                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Commands
 
