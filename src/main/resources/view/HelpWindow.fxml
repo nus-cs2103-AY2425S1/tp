@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minWidth="900" minHeight="700" resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -20,8 +20,8 @@
       <stylesheets>
         <URL value="@HelpWindow.css" />
       </stylesheets>
-      <VBox prefWidth="900.0" prefHeight="610">
-      <HBox alignment="TOP_RIGHT" fx:id="helpMessageContainer">
+      <VBox prefWidth="900.0" minHeight="650">
+      <HBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
           <Label fx:id="helpMessage" text="Label">
             <HBox.margin>
