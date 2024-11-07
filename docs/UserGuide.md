@@ -69,7 +69,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
 * Prefixes are **case-insensitive**!<br>
   e.g. `i/INDEX` and `I/INDEX` will be recognised.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be **supplied by the user**.<br>
   e.g. in `as sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as `as sn/John Doe`.
 
 * Items in square brackets are **optional**.<br>
@@ -82,25 +82,14 @@ If you are on the PDF, use the table of contents below to navigate the site.
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
   acceptable.
 
-* Extraneous parameters for commands that **do not take in parameters** (such as `help`, `list`, `exit` and `clear`)
-  will be **ignored**.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* Extraneous parameters for commands that **do take in parameters** (such as `add_s`, `del_s`) will be recognised as
-  *invalid* input parameters.<br>
-  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as a invalid command structure.
+* **Extraneous parameters** for commands will be recognised as *invalid* input parameters.<br>
+  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as a invalid command structure due to extra `gn/`.
 
 **Important**
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
-
-<box type="warning" seamless>
-
-**Note:** Screenshots have not been updated to their latest iterations.
-
-</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
