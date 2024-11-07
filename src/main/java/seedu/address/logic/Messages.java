@@ -43,8 +43,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_NUMBER_OF_ARGS = "There should be at least one argument";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_MORE_THAN_FOUR_DUPLICATE_FIELDS =
-            "There should not be more than four duplicate fields for group (g/)";
+    public static final String MESSAGE_MORE_THAN_TEN_DUPLICATE_FIELDS =
+            "There should not be more than ten duplicate fields for group (g/)";
     public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";
     public static final String MESSAGE_INVALID_STUDENT_ID_FORMAT = "Invalid Student ID format. It should be 9"
             + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";

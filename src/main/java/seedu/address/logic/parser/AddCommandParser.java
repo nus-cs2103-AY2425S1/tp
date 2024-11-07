@@ -44,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID,
                 PREFIX_NETID, PREFIX_MAJOR, PREFIX_YEAR);
-        argMultimap.verifyLessThanFourDuplicatePrefixesFor(PREFIX_GROUP);
+        argMultimap.verifyLessThanTenDuplicatePrefixesFor(PREFIX_GROUP);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
 

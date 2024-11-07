@@ -41,7 +41,7 @@ public class GroupContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_groupNameContainsKeywords_returnsTrue() {
         // One keyword
         GroupContainsKeywordsPredicate predicate =
                 new GroupContainsKeywordsPredicate(Collections.singletonList("1"));
@@ -50,10 +50,14 @@ public class GroupContainsKeywordsPredicateTest {
         // Only one matching keyword
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("2", "3"));
         assertTrue(predicate.test(new PersonBuilder().withGroups("group 2").build()));
+
+        // Matches the first few letters
+        predicate = new GroupContainsKeywordsPredicate(Arrays.asList("gro"));
+        assertTrue(predicate.test(new PersonBuilder().withGroups("group 2").build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_groupNameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withGroups("group 1").build()));
@@ -62,7 +66,7 @@ public class GroupContainsKeywordsPredicateTest {
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("4"));
         assertFalse(predicate.test(new PersonBuilder().withGroups("group 6").build()));
 
-        // Keyword that contains the number but is not equal
+        // Keyword that contains the substring but does not begin with the substring
         predicate = new GroupContainsKeywordsPredicate(Arrays.asList("5"));
         assertFalse(predicate.test(new PersonBuilder().withGroups("group 51").build()));
 
