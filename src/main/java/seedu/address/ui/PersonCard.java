@@ -60,8 +60,8 @@ public class PersonCard extends UiPart<Region> {
      * Creates a detailed view of the contact
      */
     @FXML
-    void handleOnClick() {
-        PersonDetailedView personDetailedView = new PersonDetailedView(person);
+    private void handleOnClick() {
+        PersonDetailedView personDetailedView = new PersonDetailedView(person, mainWindow.resultDisplay);
         mainWindow.updatePersonDetailedView(personDetailedView);
     }
 }

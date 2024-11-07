@@ -34,7 +34,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private ResultDisplay resultDisplay;
+    // making ResultDisplay package-private so PersonCard can access it
+    ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
     @FXML
