@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  * Represents a set of tags that belongs to a Person.
  */
 public class Tags {
-    public final Set<Tag> tags;
+    private final Set<Tag> tags;
     public Tags(Set<Tag> tags) {
         this.tags = tags;
     }
@@ -24,11 +24,11 @@ public class Tags {
     public boolean tagExists(Tags otherTags) {
 
         Set<String> tagNamesLower = tags.stream()
-                .map(tag -> tag.tagName.toLowerCase())
+                .map(tag -> tag.getTagName().toLowerCase())
                 .collect(Collectors.toSet());
 
         Set<String> otherTagsLower = otherTags.tags.stream()
-                .map(tag -> tag.tagName.toLowerCase())
+                .map(tag -> tag.getTagName().toLowerCase())
                 .collect(Collectors.toSet());
 
         return tagNamesLower.stream()
@@ -74,11 +74,11 @@ public class Tags {
         Tags otherTags = (Tags) other;
 
         Set<String> tagNamesLower = this.tags.stream()
-                .map(tag -> tag.tagName.toLowerCase())
+                .map(tag -> tag.getTagName().toLowerCase())
                 .collect(Collectors.toSet());
 
         Set<String> otherTagNamesLower = otherTags.tags.stream()
-                .map(tag -> tag.tagName.toLowerCase())
+                .map(tag -> tag.getTagName().toLowerCase())
                 .collect(Collectors.toSet());
 
         return tagNamesLower.equals(otherTagNamesLower);
