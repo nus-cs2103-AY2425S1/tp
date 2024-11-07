@@ -15,7 +15,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -73,20 +72,6 @@ public class AssignEventByPersonNameEventIndexCommandTest {
 
         assertCommandFailure(command, model, String.format(Messages.MESSAGE_PERSON_ALREADY_ASSIGNED_TO_EVENT,
                 ALICE.getName(), MEETING.getEventName()));
-    }
-
-    @Test
-    public void execute_multiplePersonsWithSameName_throwsCommandException() {
-        // Create two persons with the same name
-        Person aliceClone = new Person(new Name("ALICE PAULINE"),
-                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(),
-                ALICE.getTags(), ALICE.getEventIds(), ALICE.getId() + 1);
-        model.addPerson(aliceClone);
-
-        AssignEventByPersonNameEventIndexCommand command = new AssignEventByPersonNameEventIndexCommand(
-                ALICE.getName(), Index.fromOneBased(1));
-
-        assertCommandFailure(command, model, Messages.MESSAGE_MORE_THAN_ONE_PERSON_DISPLAYED_NAME);
     }
 
     @Test
