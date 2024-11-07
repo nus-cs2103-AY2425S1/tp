@@ -1,117 +1,159 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [
-    {
-      "name" : "Alice Pauline",
-      "phone" : "94351253",
-      "email" : "alice@example.com",
-      "roles" : [ "Athlete - COM - Volleyball Women, Floorball Women" ]
-    },
-    {
-      "name" : "Benson Meier",
-      "phone" : "98765432",
-      "email" : "johnd@example.com",
-      "roles" : [ "Volunteer - Emcee", "Athlete - FASS - Swimming Men" ]
-    },
-    {
-      "name" : "Carl Kurz",
-      "phone" : "95352563",
-      "email" : "heinz@example.com",
-      "roles" : [ "friends" ]
-    },
-    {
-      "name" : "Daniel Meier",
-      "phone" : "87652533",
-      "email" : "cornelia@example.com",
-      "roles" : [ "Sponsor - OATSIDE" ]
-    },
-    {
-      "name" : "Elle Meyer",
-      "phone" : "94822224",
-      "email" : "werner@example.com",
-      "roles" : [ "colleagues "]
-    },
-    {
-      "name" : "Fiona Kunz",
-      "phone" : "94822427",
-      "email" : "lydia@example.com",
-      "roles" : [ "Committee - Publicity - Project Director"]
-    },
-    {
-      "name" : "George Best",
-      "phone" : "94822442",
-      "email" : "anna@example.com",
-      "roles" : [ "Committee - Sports - Vice Sports Director - BIZ"]
-    }
-  ],
+  "persons" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "roles" : [
+      {
+        "name": "Athlete - COM - Volleyball Women, Floorball Women"
+      } ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "roles" : [
+      {
+        "name": "Volunteer - Emcee"
+      },
+      {
+        "name": "Athlete - DEN - Swimming Men"
+      } ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "roles" : [ {
+      "name": "Referee - MED - Tchoukball, Squash"
+    } ]
+  }, {
+    "name" : "Daniel Meier",
+    "phone" : "87652533",
+    "email" : "cornelia@example.com",
+    "roles" : [
+      {
+        "name": "Sponsor - OATSIDE"
+      } ]
+  }, {
+    "name" : "Elle Meyer",
+    "phone" : "9482224",
+    "email" : "werner@example.com",
+    "roles" : [
+      {
+        "name": "Committee - Marketing - Project Director"
+      } ]
+  }, {
+    "name" : "Fiona Kunz",
+    "phone" : "9482427",
+    "email" : "lydia@example.com",
+    "roles" : [
+      {
+        "name": "Committee - Publicity - Project Director"
+      } ]
+  }, {
+    "name" : "George Best",
+    "phone" : "9482442",
+    "email" : "anna@example.com",
+    "roles" : [
+      {
+        "name": "Committee - Sports - Vice Sports Director - BIZ"
+      } ]
+  } ],
   "events": [
     {
-      "name": "IFG",
       "sport": "Chess",
-      "venue": "Stadium",
+      "teams": ["COM", "NUSC"],
+      "venue": "UT AUD2",
+      "dateTime": "2024 09 20 1000",
       "persons": [
         {
           "name" : "Alice Pauline",
           "phone" : "94351253",
           "email" : "alice@example.com",
-          "roles" : [ "Athlete - COM - Volleyball Women, Floorball Women" ]
+          "roles" : [
+            {
+              "name": "Athlete - COM - Volleyball Women, Floorball Women"
+            } ]
         },
         {
           "name" : "Elle Meyer",
           "phone" : "94822224",
           "email" : "werner@example.com",
-          "roles" : [ "colleagues" ]
+          "roles" : [ {
+            "name": "Committee - Marketing - Project Director"
+          } ]
         }
       ]
     },
     {
-      "name": "AUG",
-      "sport": "Basketball Women",
+      "sport": "Squash",
+      "teams": ["FASS", "YNC"],
       "venue": "Arena",
+      "dateTime": "2024 09 20 1400",
       "persons": [
         {
           "name" : "Carl Kurz",
           "phone" : "95352563",
           "email" : "heinz@example.com",
-          "roles" : [ "friends "]
+          "roles" : [
+            {
+              "name": "Referee - MED - Tchoukball, Squash"
+            } ]
         }
       ]
     },
     {
-      "name": "SUNIG",
       "sport": "Swimming Men",
+      "teams": ["MED", "DEN"],
       "venue": "Pool",
+      "dateTime": "2024 09 20 1600",
       "persons": [
         {
           "name" : "Benson Meier",
           "phone" : "98765432",
           "email" : "johnd@example.com",
-          "roles" : [ "Volunteer - Emcee", "Athlete - FASS - Swimming Men" ]
+          "roles" : [
+            {
+              "name": "Volunteer - Emcee"
+            },
+            {
+              "name": "Athlete - DEN - Swimming Men"
+            } ]
         },
         {
           "name" : "Fiona Kunz",
           "phone" : "94822427",
           "email" : "lydia@example.com",
-          "roles" : [ "Committee - Publicity - Project Director"]
+          "roles" : [
+            {
+              "name": "Committee - Publicity - Project Director"
+            } ]
         }
       ]
     },
     {
-      "name": "IVP",
-      "sport": "Chess",
+      "sport": "Table Tennis",
+      "teams": ["LAW", "BIZ"],
       "venue": "Court",
+      "dateTime": "2024 09 21 1000",
       "persons": [
         {
           "name" : "Daniel Meier",
           "phone" : "87652533",
           "email" : "cornelia@example.com",
-          "roles" : [ "Sponsor - OATSIDE" ]
+          "roles" : [
+            {
+              "name": "Sponsor - OATSIDE"
+            } ]
         },
         {
           "name" : "George Best",
           "phone" : "94822442",
           "email" : "anna@example.com",
-          "roles" : [ "Committee - Sports - Vice Sports Director - BIZ"]
+          "roles" : [
+            {
+              "name": "Committee - Sports - Vice Sports Director - BIZ"
+            } ]
         }
       ]
     }
