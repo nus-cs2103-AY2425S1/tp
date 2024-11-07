@@ -17,45 +17,45 @@ public class AssignmentQueryTest {
 
     @Test
     public void equals_sameAttributes_returnsTrue() {
-        AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
-        AssignmentQuery queryB = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
+        AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_80);
+        AssignmentQuery queryB = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_80);
         assertTrue(queryA.equals(queryB));
         assertTrue(queryA.equals(queryA));
     }
 
     @Test
     public void equals_differentAttributes_returnsFalse() {
-        AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
-        AssignmentQuery queryB = new AssignmentQuery(ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_N, STATUS_N, GRADE_90);
+        AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_80);
+        AssignmentQuery queryB = new AssignmentQuery(ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_N, GRADE_90);
         assertFalse(queryA.equals(queryB));
     }
 
     @Test
     public void equals_differentObject_returnsFalse() {
-        AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
+        AssignmentQuery queryA = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_80);
         assertFalse(queryA.equals(1));
         assertFalse(queryA.equals("OMEGA"));
     }
 
     @Test
     public void matchQuery_queryWithMatchingAssignment_returnsTrue() {
-        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
-        Assignment matchingAssignment = new Assignment(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
+        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_80);
+        Assignment matchingAssignment = new Assignment(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_80);
         assertTrue(query.match(matchingAssignment));
     }
 
     @Test
     public void matchQuery_queryWithNonMatchingAssignment_returnsFalse() {
-        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_80);
-        Assignment nonMatchingAssignment = new Assignment(ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_N, STATUS_Y, GRADE_90);
+        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_80);
+        Assignment nonMatchingAssignment = new Assignment(ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_N, GRADE_90);
         assertFalse(query.match(nonMatchingAssignment));
     }
 
     @Test
     public void matchQuery_queryWithEmptyFields_returnsTrue() {
         // Empty fields should match any corresponding field in assignment
-        AssignmentQuery query = new AssignmentQuery(null, null, null, null, null);
-        Assignment assignment = new Assignment(ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_N, STATUS_Y, GRADE_90);
+        AssignmentQuery query = new AssignmentQuery(null, null, null, null);
+        Assignment assignment = new Assignment(ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_N, GRADE_90);
         assertTrue(query.match(assignment));
     }
 }

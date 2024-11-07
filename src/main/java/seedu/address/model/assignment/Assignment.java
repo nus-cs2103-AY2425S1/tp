@@ -13,7 +13,6 @@ public class Assignment {
     private AssignmentName assignmentName;
     private Deadline deadline;
     private Status submissionStatus;
-    private Status gradingStatus;
     private Grade grade;
 
     /**
@@ -22,16 +21,14 @@ public class Assignment {
      * @param assignmentName A valid name
      * @param deadline A valid date
      * @param submissionStatus A valid subsmission status
-     * @param gradingStatus A valid grading status
      * @param grade A valid grade
      */
     public Assignment(AssignmentName assignmentName, Deadline deadline, Status submissionStatus,
-                      Status gradingStatus, Grade grade) {
-        requireAllNonNull(assignmentName, deadline, submissionStatus, gradingStatus);
+                      Grade grade) {
+        requireAllNonNull(assignmentName, deadline, submissionStatus);
         this.assignmentName = assignmentName;
         this.deadline = deadline;
         this.submissionStatus = submissionStatus;
-        this.gradingStatus = gradingStatus;
         this.grade = grade;
     }
 
@@ -63,15 +60,6 @@ public class Assignment {
     }
 
     /**
-     * Returns the {@code Grading Status} of the assignment.
-     *
-     * @return The grading status of the assignment.
-     */
-    public Status getGradingStatus() {
-        return gradingStatus;
-    }
-
-    /**
      * Returns the {@code Grade} of the assignment.
      *
      * @return The grade of the assignment.
@@ -84,6 +72,10 @@ public class Assignment {
         return assignmentName.equals(other.assignmentName);
     }
 
+    public boolean isValid() {
+        return submissionStatus.isSubmitted() || !grade.isGraded();
+    }
+
     /**
      * Edits relevant fields
      *
@@ -92,7 +84,6 @@ public class Assignment {
     public void edit(AssignmentQuery assignmentQuery) {
         this.deadline = assignmentQuery.queryDeadline.orElse(this.deadline);
         this.submissionStatus = assignmentQuery.querySubmissionStatus.orElse(this.submissionStatus);
-        this.gradingStatus = assignmentQuery.queryGradingStatus.orElse(this.gradingStatus);
         this.grade = assignmentQuery.queryGrade.orElse(this.grade);
     }
 
@@ -102,7 +93,6 @@ public class Assignment {
                 .add("name", assignmentName)
                 .add("deadline", deadline)
                 .add("submission status", submissionStatus)
-                .add("grading status", gradingStatus)
                 .add("grade", grade)
                 .toString();
     }
@@ -121,7 +111,6 @@ public class Assignment {
         return this.assignmentName.equals(otherAssignment.assignmentName)
                 && this.deadline.equals(otherAssignment.deadline)
                 && this.submissionStatus.equals(otherAssignment.submissionStatus)
-                && this.gradingStatus.equals(otherAssignment.gradingStatus)
                 && this.grade.equals(otherAssignment.grade);
     }
 }

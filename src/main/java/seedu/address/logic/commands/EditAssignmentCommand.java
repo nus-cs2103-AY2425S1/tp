@@ -13,8 +13,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
@@ -32,7 +35,6 @@ public class EditAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
             + PREFIX_DEADLINE + "DEADLINE (OPTIONAL) "
             + PREFIX_STATUS + "SUBMISSION STATUS (OPTIONAL) "
-            + PREFIX_STATUS + "GRADING STATUS (OPTIONAL) "
             + PREFIX_GRADE + "GRADE (OPTIONAL) "
             + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (OPTIONAL) "
             + "\n"
@@ -47,6 +49,10 @@ public class EditAssignmentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name \n"
             + "Their student numbers are as follows: %1$s \n"
             + MESSAGE_USAGE;
+
+    public static final String MESSAGE_INVALID_ASSIGNMENT =
+            "Assignment cannot be graded and not submitted at the same time! "
+            + "Assignment is currently %s and %s";
 
     public final AssignmentName assignmentName;
     public final Name name;
@@ -91,29 +97,35 @@ public class EditAssignmentCommand extends Command {
             }
 
             student = filteredStudentList.get(0);
-            oldAssignment = student.editAssignment(assignmentName, assignmentQuery);
-            if (oldAssignment == null) {
-                throw new CommandException(MESSAGE_NO_ASSIGNMENT_FOUND);
+        } else {
+            if (studentList.isEmpty()) {
+                throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, assignmentName, student.getName()));
+
+            if (studentList.size() > 1) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT,
+                        studentList.stream()
+                                .map(s -> s.getStudentNumber().toString())
+                                .collect(Collectors.joining(", "))));
+            }
+
+            student = studentList.get(0);
         }
 
-        if (studentList.isEmpty()) {
-            throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
-        }
-
-        if (studentList.size() > 1) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT,
-                    studentList.stream()
-                            .map(s -> s.getStudentNumber().toString())
-                            .collect(Collectors.joining(", "))));
-        }
-
-        student = studentList.get(0);
-        oldAssignment = student.editAssignment(assignmentName, assignmentQuery);
-        if (oldAssignment == null) {
+        Assignment assignment = student.getAssignment(assignmentName);
+        if (assignment == null) {
             throw new CommandException(MESSAGE_NO_ASSIGNMENT_FOUND);
         }
+
+        Status status = assignmentQuery.querySubmissionStatus.orElse(assignment.getSubmissionStatus());
+        Grade grade = assignmentQuery.queryGrade.orElse(assignment.getGrade());
+        if ((!status.isSubmitted()) && grade.isGraded()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_ASSIGNMENT,
+                    assignment.getSubmissionStatus().isSubmitted() ? "submitted" : "not submitted",
+                    assignment.getGrade().isGraded() ? "graded" : "ungraded"));
+        }
+
+        oldAssignment = student.editAssignment(assignmentName, assignmentQuery);
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignmentName, student.getName()));
     }
 
