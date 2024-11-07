@@ -318,6 +318,8 @@ manage student profiles more efficiently.
 
 - **Adding Multiple Tags**: Users can specify multiple subject tags and one level tag for a student. Each time tags are
   added, they will override any previously existing tags on the profile, ensuring that only the latest tags are retained.
+- **Clearing of Tags**: Users can remove all tags from a student's profile by entering l/NONE s/NONE, which effectively
+  resets both level and subject tags, leaving the profile with no active tags.
 - **Invalid Input**: If an invalid student name, level, or subject is inputted, EduManage displays the constraints and
   guidelines for tag parameters. Additionally, if there is a mismatch between the tagged subjects and the specified level,
   an error message will highlight the incompatibility.

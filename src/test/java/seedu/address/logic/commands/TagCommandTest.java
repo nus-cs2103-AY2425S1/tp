@@ -181,10 +181,11 @@ public class TagCommandTest {
         UpdateStudentDescriptor descriptor =
                 new UpdateStudentDescriptorBuilder()
                         .withLevel("S3 Express")
+                        .withSubjects("science")
                         .build();
 
         String expectedMessage = "Subject is not valid for given level. "
-                + "Valid subjects for S3 EXPRESS: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "Valid subjects for S3 EXPRESS: [MATH, A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
                 + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";

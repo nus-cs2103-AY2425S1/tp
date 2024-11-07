@@ -82,7 +82,7 @@ public class SubjectTest {
     @Test
     public void getValidSubjectMessage_validLevel() {
         String expectedMessageUpperSec = "Subject is not valid for given level. "
-                + "Valid subjects for %s: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "Valid subjects for %s: [MATH, A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
                 + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";

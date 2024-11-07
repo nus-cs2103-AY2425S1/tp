@@ -56,12 +56,12 @@ public class AddCommandTest {
     @Test
     public void execute_invalidSubjectStudent_throwsCommandException() {
         // upper secondary
-        Student invalidStudent = new StudentBuilder().withLevel("S3 NA").withSubjects("Math").build();
+        Student invalidStudent = new StudentBuilder().withLevel("S3 NA").withSubjects("Science").build();
         AddCommand addCommand = new AddCommand(invalidStudent);
         ModelStub modelStub = new ModelStubWithStudent(invalidStudent);
 
         String expectedMessageUpperSec = "Subject is not valid for given level. "
-                + "Valid subjects for S3 NA: [A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
+                + "Valid subjects for S3 NA: [MATH, A_MATH, E_MATH, PHYSICS, CHEMISTRY, "
                 + "BIOLOGY, COMBINED_SCIENCE, ACCOUNTING, LITERATURE, HISTORY, GEOGRAPHY, "
                 + "SOCIAL_STUDIES, MUSIC, ART, ENGLISH, CHINESE, HIGHER_CHINESE, MALAY, "
                 + "HIGHER_MALAY, TAMIL, HIGHER_TAMIL, HINDI]";

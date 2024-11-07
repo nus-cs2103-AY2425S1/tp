@@ -37,10 +37,10 @@ public class Subject {
     );
 
     private static final EnumSet<Subjects> validUpperSecondarySubjects = EnumSet.of(
-            Subjects.ENGLISH, Subjects.A_MATH, Subjects.E_MATH, Subjects.PHYSICS, Subjects.CHEMISTRY, Subjects.BIOLOGY,
-            Subjects.COMBINED_SCIENCE, Subjects.GEOGRAPHY, Subjects.HISTORY, Subjects.LITERATURE, Subjects.ACCOUNTING,
-            Subjects.SOCIAL_STUDIES, Subjects.CHINESE, Subjects.HIGHER_CHINESE, Subjects.MALAY, Subjects.HIGHER_MALAY,
-            Subjects.TAMIL, Subjects.HIGHER_TAMIL, Subjects.HINDI, Subjects.MUSIC, Subjects.ART
+            Subjects.ENGLISH, Subjects.A_MATH, Subjects.E_MATH, Subjects.MATH, Subjects.PHYSICS, Subjects.CHEMISTRY,
+            Subjects.BIOLOGY, Subjects.COMBINED_SCIENCE, Subjects.GEOGRAPHY, Subjects.HISTORY, Subjects.LITERATURE,
+            Subjects.ACCOUNTING, Subjects.SOCIAL_STUDIES, Subjects.CHINESE, Subjects.HIGHER_CHINESE, Subjects.MALAY,
+            Subjects.HIGHER_MALAY, Subjects.TAMIL, Subjects.HIGHER_TAMIL, Subjects.HINDI, Subjects.MUSIC, Subjects.ART
     );
     static {
         validSubjectsByLevel.put(new Level("S1 EXPRESS"), validLowerSecondarySubjects);
