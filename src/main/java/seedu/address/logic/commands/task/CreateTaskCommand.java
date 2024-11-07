@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.task;
 
 
 import static java.util.Objects.requireNonNull;
@@ -8,6 +8,8 @@ import java.util.HashSet;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
@@ -21,13 +23,18 @@ public class CreateTaskCommand extends Command {
 
     public static final String COMMAND_KEYWORD = "ctask";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a task in the address book. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates one or more tasks in the address book. \n"
             + "Parameters: "
-            + PREFIX_TASK + "TASK_TYPE TASK_DESCRIPTION [ADDITIONAL_FIELDS]\n"
+            + PREFIX_TASK + "TASK_DESCRIPTION [DATE_FIELDS]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK + "todo Setup venue decorations\n"
+            + PREFIX_TASK + "Setup venue decorations\n"
             + COMMAND_WORD + " "
-            + PREFIX_TASK + "deadline Submit proposal /by 2024-10-31";
+            + PREFIX_TASK + "Submit proposal d/2024-10-31\n"
+            + COMMAND_WORD + " "
+            + PREFIX_TASK + "Buy limited time items d/2024-10-31 d/2024-12-30\n"
+            + COMMAND_WORD + " "
+            + PREFIX_TASK + "Secure venue d/2024-10-31 "
+            + PREFIX_TASK + "Inform groom of itinerary";
 
     public static final String MESSAGE_SUCCESS = "New task(s) added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
