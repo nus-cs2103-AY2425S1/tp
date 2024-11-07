@@ -387,6 +387,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 1.
 * 1b. No users in the existing data pass the filter
     * 1b1. AgentAssist shows a blank list.
+      
+      Use case ends.
 
 **Use case: U4 - Edit a Client**
 
@@ -468,6 +470,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. User declines confirmation.
   * 3a1. AgentAssist shows cancellation message to user.
   * 3a2. No change is made.
+  
+    Use case ends.
 
 **Use case: U9 - Undo the most recent change**
 
@@ -482,6 +486,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. There was no recorded last change
   * 2a1. AgentAssist shows an error message to user.
   * 2a2. No change is made.
+  
+    Use case ends.
 
 **Use case: U10 - Exit**
 
