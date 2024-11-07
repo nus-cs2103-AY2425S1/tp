@@ -65,6 +65,7 @@ Back to [Quick Start](#quick-start)
 
 **Q:** After running the app, some messages appear on my terminal, should I be concerned? <br>
 **A:** If a window similar to the one in the image above appears, then the app is working well and you can safely ignore any messages on the terminal.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Commands
@@ -245,7 +246,7 @@ Clears all your students entries from Teacher's Pet.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 All students stored in Teacher's Pet will be deleted permanently and this command cannot be undone.
-If you wish to save a copy of the data, refer to [FAQ](#faq) for more info)
+If you wish to save a copy of the data, refer to [FAQ](#faq) for more info
 </div>
 
 
@@ -282,11 +283,8 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 **Q**: Where is my data saved?<br>
 **A**: The data file for Teacher's Pet is named `students.json` and is saved in `[JAR file location]/data/students.json` by default. (ie, if your `teacherspet.jar` file is in `Documents` then the data file is found in `Documents/data/students.json`)
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: 
-1. Install the app on the other computer 
-2. Run the app on the other computer (See [Quick Start](#quick-start) above) 
-3. Find the data file on the other computer (See above) and replace the `students.json` file with the `students.json` file from the previous computer
+**Q**: How do I transfer my data to another device?<br>
+**A**: Install and run the app on the other device (See [Quick Start](#quick-start) above). Then, find the data file on the other device (See above) and replace the `students.json` file with the `students.json` file from the previous device.
 
 **Q**: How do I keep a copy of my data?<br>
 **A**: Find the `students.json` file and copy it to your desired location/storage device
@@ -311,7 +309,7 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/E1234567 m/Computer Science y/2 g/Group 4`
+**Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/e1234567 m/Computer Science y/2 g/Group 4`
 **Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
 **Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
 **List** | `list`
