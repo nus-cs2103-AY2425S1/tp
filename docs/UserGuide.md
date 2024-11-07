@@ -13,6 +13,7 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
   * Features
   * FAQ
   * Known Issues
+  
 ---
 
 ## Quick start
