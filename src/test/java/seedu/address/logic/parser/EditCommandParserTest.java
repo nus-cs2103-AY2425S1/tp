@@ -52,7 +52,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NRIC_EMPTY;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
@@ -83,10 +82,6 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
 
 
 public class EditCommandParserTest {
-  
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-
     private static final String MESSAGE_EMPTY_NRIC = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NRIC_EMPTY);
 
     private static final String MESSAGE_WRONG_NRIC_FORMAT =
