@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
@@ -208,6 +209,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public List<Lesson> getAssociatedLessons(Person person) {
         return lessons.getAssociatedLessons(person);
+    }
+
+    public Set<Subject> getUniqueSubjectsInLessons(Person person) {
+        return lessons.getUniqueSubjectsInLessons(person);
     }
 
     public Person getPersonById(int personId) {
