@@ -13,7 +13,12 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+Libraries used in this project:
+
+- [JavaFX](https://openjfx.io/)
+- [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -562,8 +567,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Command**: A command is a specific instruction that you give to `GOATS` to perform a certain action, like adding a new participant to the list. Commands will be the primary way that you will interact with `GOATS`.
 * **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell `GOATS` which actions to perform. For example, the done command requires a single integer as a parameter so that it knows which event to mark as done.
 * **Prefix**: Prefixes are unique identifiers in front of parameters so that `GOATS` understands what kind of values they are. For example, the prefix "n/" lets `GOATS` know that a name is expected to follow behind it, while the prefix "d/" lets `GOATS` know that a date is expected.
+* **Archive**: A command that stores and removes all unused contact for later use, which can be retrieved by un-archiving.
 * **Parent**: A person that is responsible for a Student.
 * **Student**: A person studying under `user`
+* **Education**: The education level of the Student
+* **Grade**: The grade of the Student
+* **LessonTime**: The tuition lesson time of the Student.
 
 --------------------------------------------------------------------------------------------------------------------
 
