@@ -362,7 +362,8 @@ Examples:
 
 ##### Warning
 
-Filtering the order list by status and changing an order's status will cause the order to not be displayed under the filtered list.
+Filtering the order list by status and changing an order's status will cause the order to not be displayed under the filtered list.<br>
+e.g. `filterorder pending` followed by marking the first order in the filtered list as completed will cause that completed order to not be displayed in the current filtered list. 
 
 </box>
 
