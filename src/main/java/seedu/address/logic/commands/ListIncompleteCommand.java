@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+
 import seedu.address.model.Model;
 
 /**
@@ -12,6 +14,7 @@ public class ListIncompleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.updateFilteredTaskList(task -> !task.isCompleteProperty().get());
         return new CommandResult(MESSAGE_SUCCESS);
     }
