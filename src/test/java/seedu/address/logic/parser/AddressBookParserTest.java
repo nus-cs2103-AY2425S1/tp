@@ -7,25 +7,33 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddTuteeCommand;
 import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindSubjectCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewTutorChartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -129,6 +137,38 @@ public class AddressBookParserTest {
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
         assertTrue(parser.parseCommand("undo 3") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_viewCommandWord_returnsViewCommand() throws Exception {
+        assertTrue(parser.parseCommand("view 1") instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_addLessonCommandWord_returnsAddLessonCommand() throws Exception {
+        assertTrue(parser.parseCommand("addLesson 1 2 \\s math") instanceof AddLessonCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteLessonCommandWord_returnsDeleteCommand() throws Exception {
+        assertTrue(parser.parseCommand("deleteLesson 1 2 \\s math") instanceof DeleteLessonCommand);
+    }
+
+    @Test
+    public void parseCommand_importCommandWord_returnsImportCommand() throws Exception {
+        Path testFolder = Paths.get("src", "test", "data", "CsvImportTest");
+        Path filePath = testFolder.resolve("typicalPersonsCsv.csv");
+        assertTrue(parser.parseCommand("import \\f " + filePath) instanceof ImportCommand);
+    }
+
+    @Test
+    public void parseCommand_viewTutorChartCommandWord_returnsViewTutorChartCommand() throws Exception {
+        assertTrue(parser.parseCommand(ViewTutorChartCommand.COMMAND_WORD) instanceof ViewTutorChartCommand);
+    }
+
+    @Test
+    public void parseCommand_findSubjectCommandWord_returnsFindCommand() throws Exception {
+        assertTrue(parser.parseCommand("findSubject english") instanceof FindSubjectCommand);
     }
 
     @Test

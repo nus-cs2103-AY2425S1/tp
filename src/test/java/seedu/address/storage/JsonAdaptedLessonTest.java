@@ -36,6 +36,22 @@ public class JsonAdaptedLessonTest {
     }
 
     @Test
+    public void constructor_fromLesson_returnsJsonAdaptedLesson() {
+        Lesson lesson = new Lesson(VALID_TUTOR, VALID_TUTEE, VALID_SUBJECT);
+        JsonAdaptedLesson copy = new JsonAdaptedLesson(lesson);
+
+        assertEquals(copy.getTutorId(), VALID_TUTOR.getId());
+        assertEquals(copy.getTuteeId(), VALID_TUTEE.getId());
+    }
+
+    @Test
+    public void toModelType_nullSubject_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_TUTOR.getId(), VALID_TUTEE.getId(), null);
+        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT, "Subject");
+        assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(null));
+    }
+
+    @Test
     public void toModelType_invalidTutorId_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableAddressBook.class).get();
