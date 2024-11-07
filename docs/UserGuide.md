@@ -815,7 +815,6 @@ as the assignment is not specified `assignment.json`
 Calling `addGrade` without any fields will show the list of assignments in `assignment.json`.
 </box>
 
-{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 

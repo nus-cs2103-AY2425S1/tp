@@ -368,6 +368,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
+{{ newPage }}
+
 **Use case: UC05 - Edit contacts**
 
 **MSS**
@@ -633,6 +635,8 @@ Duplicate names)
     Use case ends.
 
     <br>
+
+{{ newPage }}
 
 **Use case: UC14 - Create automatic flags for students’ work if marked**
 
