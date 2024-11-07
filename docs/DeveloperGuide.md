@@ -495,13 +495,10 @@ For all use cases below, refer to the [User Guide](UserGuide.md) for more detail
 ### Glossary
 
 - **Wedding Organizer:** A professional responsible for planning and managing wedding events, coordinating with clients and vendors.
-- **Vendor:** A service provider involved in the wedding (e.g., florist, caterer, photographer).
 - **Client:** The individuals who have hired the wedding organizer, typically the bride and groom.
 - **Stakeholders:** All parties involved in the wedding event, including clients, vendors, and participants.
 - **Role:** A role assigned to contacts to categorize and filter them (e.g., "Florist", "Photographer").
 - **Contact:** An entry in the system containing information about a person or vendor.
-- **Event Timeline:** A schedule outlining all tasks and deadlines related to a wedding event.
-- **RSVP:** A confirmation from an invited guest about their attendance at the wedding.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -857,6 +854,98 @@ Persons who are involved in the wedding will also be unassigned. Timestamp in th
        Expected (Unique Alice): The wedding of `Alice` will be deleted. Success action will be carried out for that wedding.<br>
        Expected (Duplicated Alice): Weddings with name field containing `Alice` exactly will be shown. Status message prompts user to re-input using index according to the newly filtered list to specify which wedding of `Alice` they want to delete. <br>
        Expected (No Alice): No wedding is deleted. Error details is shown in the status message, as the NAME does not belong to any wedding in the address book.
+       Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br>
+
+### Assigning roles and weddings
+
+Success action: When a person is successfully assigned:
+- If role assigned: Person's role is updated and shown in person list
+- If wedding assigned: Person is added to wedding's participants list
+- Status message shows successful assignment
+
+#### Assigning by INDEX
+
+1. Assigning a role
+
+    1. Prerequisites: List all persons using `list` command. Multiple persons in the list.
+
+    1. Test case: `assign 1 r/photographer`<br>
+       Expected: First person in list is assigned photographer role. Success action carried out.
+
+    1. Test case: `assign 1 r/invalid role name`<br>
+       Expected: Error message shown about invalid role format (must be one word).
+
+    1. Test case: `assign 0 r/photographer`<br>
+       Expected: Error message shown about invalid person index.
+
+    1. Test case: `assign x r/photographer` (where x is an invalid index (< 0, 0 , larger than list size)))<br>
+       Expected: Error message shown about invalid person index.
+
+2. Assigning to weddings
+
+    1. Prerequisites: Multiple weddings exist in wedding list.
+
+    1. Test case: `assign 1 w/1 w/2`<br>
+       Expected: First person assigned to both wedding 1 and 2. Success action carried out.
+
+    1. Test case: `assign 1 w/0 w/2`<br>
+       Expected: Error message shown about invalid wedding index.
+
+    1. Test case: `assign 1 w/-1 w/2`<br>
+       Expected: Error message shown about invalid wedding index.
+
+    1. Test case: `assign 1 w/999 w/2` (where 999 > wedding list size)<br>
+       Expected: Error message shown about invalid wedding index.
+
+3. Assigning both role and weddings
+
+    1. Test case: `assign 1 r/photographer w/1 w/2`<br>
+       Expected: First person gets photographer role and is assigned to weddings 1 and 2. Success action carried out.
+
+4. Invalid commands
+
+    1. Test case: `assign`<br>
+       Expected: Error message showing command format.
+
+    1. Test case: `assign 1`<br>
+       Expected: Error message showing need for role and/or wedding assignment.
+
+    1. Test case: `assign -1 r/photographer`<br>
+       Expected: Error message about invalid person index.
+
+#### Assigning by NAME
+
+1. Using contact name
+
+    1. Test case: `assign Alice r/photographer`<br>
+       Expected (Unique Alice): Alice is assigned photographer role. Success action carried out.<br>
+       Expected (Multiple matches): Person list filtered to show matches. Message prompts to use index.<br>
+       Expected (No matches): Error message that no such person exists.
+
+    1. Test case: `assign Al!ce r/photographer` (name with special characters)<br>
+       Expected: Error message that no such person exists.
+
+2. Complex name assignments
+
+    1. Test case: `assign Alice r/photographer w/1 w/2`<br>
+       Expected (Unique Alice): Alice gets role and both wedding assignments. Success action carried out.<br>
+       Expected (Multiple matches): Person list filtered to show matches. Message prompts to use index.
+
+#### Special Cases
+
+1. Client assignments
+
+    1. Prerequisites: Person is client of wedding 1
+
+    1. Test case: `assign 1 w/1`<br>
+       Expected: Error message that client cannot be assigned to their own wedding.
+
+2. Multiple wedding assignments
+
+    1. Prerequisites: Person already assigned to wedding 1
+
+    1. Test case: `assign 1 w/1 w/2`<br>
+       Expected: Error message about already being assigned to wedding 1.
 
 
 ### Saving data
