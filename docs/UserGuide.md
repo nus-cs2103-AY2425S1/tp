@@ -265,12 +265,6 @@ If your changes to the data file makes its format invalid, DorManagerPro will di
 Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 
 --------------------------------------------------------------------------------------------------------------------
 
