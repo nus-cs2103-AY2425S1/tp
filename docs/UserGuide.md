@@ -287,6 +287,11 @@ Format: `archive INDEX`
 Examples:
 * `list` followed by `archive 2` archives the 2nd person in the address book.
 
+<box type="info" seamless>
+
+**Info:** It is still possible to make changes to archived people
+</box>
+
 ### Unarchiving person : `unarchive`
 
 Unarchives the specified person from the address book.
@@ -349,7 +354,7 @@ Action           | Format, Examples
 **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**        | `clear`
 **Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`
-**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
 **Undo**         | `undo`
