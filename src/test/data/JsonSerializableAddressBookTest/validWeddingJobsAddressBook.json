@@ -6,7 +6,7 @@
       "email": "alice@example.com",
       "address": "123 Main St",
       "role": "client",
-      "ownWedding": 123456789,
+      "ownWedding": 1972025403,
       "weddingJobs": []
     },
     {
@@ -16,7 +16,7 @@
       "address": "456 Worker St",
       "role": "vendor",
       "ownWedding": 0,
-      "weddingJobs": [123456789]
+      "weddingJobs": [1972025403]
     }
   ],
   "weddings": [
@@ -28,7 +28,7 @@
         "email": "alice@example.com",
         "address": "123 Main St",
         "role": "client",
-        "ownWedding": 123456789,
+        "ownWedding": 0,
         "weddingJobs": []
       },
       "date": "2024-12-25",
