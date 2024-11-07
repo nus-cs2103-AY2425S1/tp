@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "John Doe's Project Portfolio Page"
+  title: "Isaac's Project Portfolio Page"
 ---
 
 ### Project: GOATS (Greatest Offline Address-book for Tutorial Students)
