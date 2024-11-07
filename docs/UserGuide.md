@@ -1,5 +1,5 @@
 ---
-layout: default.md
+  layout: default.md
   title: "User Guide"
   pageNav: 3
 ---
@@ -83,6 +83,8 @@ If you can type fast, GOATS can get your student management tasks done faster th
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+</box>
+
 ### Adding a student: `adds`
 
 Adds a student to the address book.
@@ -98,7 +100,6 @@ Examples:
 
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/Primary`
 * `adds n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal edu/Secondary`
-
 
 ### Adding a parent: `addp`
 
@@ -140,7 +141,6 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
-
 
 ### Deleting a person : `delete`
 
@@ -285,7 +285,6 @@ Examples:
 * `listarchive` followed by `unarchive 2` unarchives the 2nd person in the address book archives.
 * `listarchive` followed by `find Betsy` followed by `unarchive 1` unarchives the 1st person in the results of the `find` command.
 * `listarchive` followed by `unarchive 2 3 4 5` unarchives the 2nd, 3rd, 4th and 5th people in the address book.
-
 
 ### Listing all persons : `list`
 
