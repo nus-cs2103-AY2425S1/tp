@@ -399,18 +399,17 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. If the group has students, their group names will be updated too.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario 
 
-Add more scenarios if necessary
-
-###### Scenario #1
+###### Scenario #1: Editing `CS2103-F12-1` to `CS2103-F12-3`
 
 This screenshot shows the result of executing `edit_g i/1 gn/CS2103-F12-3`.
+
+![edit_g.png](images/screenshots/edit_g.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
