@@ -36,8 +36,8 @@ public class CommandTextFlowTest extends Application {
     public void testCommandTextFlowConstruction() {
         assertNotNull(commandTextFlow);
         assertEquals("add", commandTextFlow.getCommandText());
-        assertEquals("add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... "
-                + "[pt/PREFERRED_TIME]...", commandTextFlow.getDetailText());
+        assertEquals("add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]..."
+                + " [pt/PREFERRED_TIME]...", commandTextFlow.getDetailText());
     }
 
     @Test
@@ -52,8 +52,8 @@ public class CommandTextFlowTest extends Application {
     public void testDetailText() {
         // Check that the detail text is correctly set
         Text detailText = (Text) commandTextFlow.getChildren().get(2);
-        assertEquals("add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]... [t/TAG]... "
-                + "[pt/PREFERRED_TIME]...", detailText.getText());
+        assertEquals("add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]..."
+                + " [pt/PREFERRED_TIME]...", detailText.getText());
     }
 
     @Test
