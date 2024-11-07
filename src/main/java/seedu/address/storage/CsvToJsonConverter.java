@@ -135,13 +135,15 @@ public class CsvToJsonConverter {
 
         for (int i = 0; i < headers.length; i++) {
             if (jsonObject.has(headers[i]) && !jsonObject.get(headers[i]).isNull()) {
-                System.out.println("this");
                 continue;
             } else if (!Arrays.asList(this.personFieldNames).contains(headers[i])) {
-                System.out.println("that");
                 continue;
             }
-            System.out.println(headers[i] + ": " + values[i]);
+
+            if (values.length != headers.length) {
+                continue;
+            }
+
             if (values[i].isBlank()) {
                 values[i] = null;
             }

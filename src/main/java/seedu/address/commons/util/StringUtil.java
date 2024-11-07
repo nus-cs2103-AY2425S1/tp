@@ -82,7 +82,6 @@ public class StringUtil {
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
 
-            // Convert the first capital letter to lowercase
             if (Character.isUpperCase(c) && !firstCapitalFound) {
                 camelCaseString.append(Character.toLowerCase(c));
                 firstCapitalFound = true;
@@ -92,5 +91,20 @@ public class StringUtil {
         }
 
         return camelCaseString.toString();
+    }
+
+    /**
+     * Checks if a string is contained within the enum class.
+     * @param value String to be checked for
+     * @param enumClass enumClass (comprised of Strings) that is being checked
+     * @return true if enumClass contains String, false if not
+     */
+    public static <E extends Enum<E>> boolean isStringInEnumIgnoreCase(String value, Class<E> enumClass) {
+        for (E enumValue : enumClass.getEnumConstants()) {
+            if (enumValue.name().equalsIgnoreCase(value)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

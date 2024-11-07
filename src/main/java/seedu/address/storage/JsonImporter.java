@@ -18,7 +18,6 @@ import seedu.address.storage.exceptions.ImporterException;
  * A class that does all the importing of data from a group of .json files to AddressBook.json
  */
 public class JsonImporter {
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<File> jsonFiles = new ArrayList<>();
 
     /**
@@ -46,7 +45,7 @@ public class JsonImporter {
         }
 
         try {
-            model.addAllPersons(jsonAddressBook.get().toModelType());
+            model.addAllPersons(jsonAddressBook.get().toModelType(true));
             return model;
         } catch (IllegalValueException ive) {
             throw new ImporterException(ive);
