@@ -6,7 +6,7 @@ title: GRUB
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103-F12-3/tp/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://github.com/AY2425S1-CS2103-F12-3/tp/pulls)
 
-![Ui](images/Uii.png)
+![Ui](images/Ui.png)
 
 **Grub is a desktop application for managing your favourite restaurants contact details for quick searches on where to eat.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 

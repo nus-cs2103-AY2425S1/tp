@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 GRUB is a quick and efficient solution to search for local dining options, tailored to personal preferences.
 
 * Table of Contents
