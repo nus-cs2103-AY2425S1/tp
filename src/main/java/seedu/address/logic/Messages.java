@@ -19,8 +19,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is out of range of the displayed"
             + " list";
-    public static final String MESSAGE_INVALID_INDEX_RANGE = "The provided index is invalid. "
-            + "Please enter a positive integer within the displayed list's range.";
     public static final String MESSAGE_INVALID_ENTITY = "Invalid entity '%1$s'. Valid entities are 'company', "
             + "'contact', 'job', or 'all'";
     public static final String MESSAGE_OPERATION_NOT_ALLOWED = "Command '%1$s' is not allowed on entity '%2$s'.";

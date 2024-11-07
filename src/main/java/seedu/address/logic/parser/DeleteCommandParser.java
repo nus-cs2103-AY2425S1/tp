@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_RANGE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -36,7 +36,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand<?>> {
         try {
             index = ParserUtil.parseIndex(indexString);
         } catch (ParseException e) {
-            throw new ParseException(MESSAGE_INVALID_INDEX_RANGE);
+            throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         switch (entity) {
         case DeleteContactCommand.ENTITY_WORD:
