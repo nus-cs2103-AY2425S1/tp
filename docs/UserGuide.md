@@ -425,17 +425,39 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
-| Action                 | Format, Examples                                                                                                                                                                          |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/High Risk t/colleague`   |
-| **Clear**              | `clear`                                                                                                                                                                                   |
-| **Delete**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Edit**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
-| **Find**               | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **Filter**             | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY] [atleast one parameter]`<br> e.g., `filter t/High Risk`                                                       |
-| **View**               | `view`                                                                                                                                                                                    |
-| **Help**               | `help`                                                                                                                                                                                    |
-| **Appointment Date**   | `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE_TIME`                                                                                                                                    |
-| **Schedule**           | `schedule d/DATE_ONLY`                                                                                                                                                                    |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+
+- **Add**: Adds a new entry with details like name, phone, email, address, tags, allergies, and dates.
+    - Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY d/DATE…​`
+    - Example: `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/High Risk t/colleague`
+
+- **Clear**: Clears all entries from the list.
+    - Format: `clear`
+
+- **Delete**: Deletes an entry at the specified index.
+    - Format: `delete INDEX`
+    - Example: `delete 3`
+
+- **Edit**: Edits an entry at the specified index with updated fields such as name, phone, email, address, or tags.
+    - Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+    - Example: `edit 2 n/James Lee e/jameslee@example.com`
+
+- **Find**: Finds entries that match the given keywords.
+    - Format: `find KEYWORD [MORE_KEYWORDS]`
+    - Example: `find James Jake`
+
+- **Filter**: Filters entries based on at least one parameter, such as name, phone, email, address, tag, or allergy.
+    - Format: `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY]`
+    - Example: `filter t/High Risk`
+
+- **View**: Displays all entries in the list.
+    - Format: `view`
+
+- **Help**: Shows help information for available commands.
+    - Format: `help`
+
+- **Appointment Date**: Sets an appointment date and time for an entry.
+    - Format: `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE_TIME`
+
+- **Schedule**: Schedules an entry for a specific date.
+    - Format: `schedule d/DATE_ONLY`
 
