@@ -43,7 +43,7 @@ public class HealthService {
     public HealthService(String healthServiceName) {
         requireNonNull(healthServiceName);
         healthServiceName = healthServiceName.trim().toUpperCase();
-        checkArgument(isValidHealthServiceName(healthServiceName.toUpperCase()), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidHealthServiceName(healthServiceName), MESSAGE_CONSTRAINTS);
         this.healthServiceName = healthServiceName;
     }
 
@@ -52,6 +52,7 @@ public class HealthService {
      */
     public static boolean isValidHealthServiceName(String test) {
         requireNonNull(test);
+        test = test.strip().toUpperCase();
         for (HealthScreeningServices service : HealthScreeningServices.values()) {
             if (test.equals(service.toString())) {
                 return true;
