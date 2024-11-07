@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INSURANCE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,10 +27,10 @@ public class DeleteInsuranceCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteInsuranceCommand() {
         // Valid user input with client index and insurance ID
-        String userInput = INDEX_FOURTH_CLIENT.getOneBased() + " "
+        String userInput = INDEX_THIRD_CLIENT.getOneBased() + " "
                 + PREFIX_INSURANCE_ID + VALID_INSURANCE_ID;
 
-        DeleteInsuranceCommand expectedCommand = new DeleteInsuranceCommand(INDEX_FOURTH_CLIENT, VALID_INSURANCE_ID);
+        DeleteInsuranceCommand expectedCommand = new DeleteInsuranceCommand(INDEX_THIRD_CLIENT, VALID_INSURANCE_ID);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -41,7 +43,7 @@ public class DeleteInsuranceCommandParserTest {
         // Invalid index input (non-numeric)
         String invalidUserInput = "invalidIndex " + PREFIX_INSURANCE_ID + VALID_INSURANCE_ID;
         assertParseFailure(parser, invalidUserInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
     /**
@@ -51,7 +53,7 @@ public class DeleteInsuranceCommandParserTest {
     @Test
     public void parse_missingInsuranceId_throwsParseException() {
         // Missing insurance ID
-        String missingInsuranceIdInput = INDEX_FOURTH_CLIENT + " " + PREFIX_INSURANCE_ID;
+        String missingInsuranceIdInput = INDEX_THIRD_CLIENT.getOneBased() + " " + PREFIX_INSURANCE_ID;
         assertParseFailure(parser, missingInsuranceIdInput,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
     }
@@ -63,8 +65,8 @@ public class DeleteInsuranceCommandParserTest {
     @Test
     public void parse_invalidInsuranceId_throwsParseException() {
         // Invalid insurance ID (non-numeric)
-        String invalidInsuranceIdInput = INDEX_FOURTH_CLIENT + " " + PREFIX_INSURANCE_ID + "invalidId";
+        String invalidInsuranceIdInput = INDEX_THIRD_CLIENT.getOneBased() + " " + PREFIX_INSURANCE_ID + "invalidId";
         assertParseFailure(parser, invalidInsuranceIdInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
+                MESSAGE_INVALID_INSURANCE_ID);
     }
 }
