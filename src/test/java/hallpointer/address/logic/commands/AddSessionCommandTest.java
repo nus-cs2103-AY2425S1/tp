@@ -87,7 +87,7 @@ class AddSessionCommandTest {
         indices.add(INDEX_FIRST_MEMBER);
         indices.add(INDEX_SECOND_MEMBER);
         modelStub.addMember(new MemberBuilder().build());
-        modelStub.addMember(new MemberBuilder().withName("Bob").build());
+        modelStub.addMember(new MemberBuilder().withName("Bob").withTelegram("BobTheBuilder").build());
 
         CommandResult commandResult = new AddSessionCommand(validSession, indices).execute(modelStub);
 
