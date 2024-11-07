@@ -2,11 +2,17 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
+import seedu.address.model.person.EventIdsContainsIdsPredicate;
+import seedu.address.model.person.TempPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,7 +37,20 @@ public class SearchCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        if (!(this.predicate instanceof TempPredicate)) {
+            model.updateFilteredPersonList(predicate);
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        }
+        TempPredicate tempPredicate = (TempPredicate) this.predicate;
+        List<String> keywords = tempPredicate.getKeywords();
+        List<EventName> eventNames = keywords.stream().map(EventName::new).toList();
+        List<Event> events = eventNames.stream().flatMap(
+                eventName -> model.findEventsWithName(eventName).stream()).toList();
+        List<Integer> eventIds = events.stream().map(Event::getEventId).toList();
+        List<Integer> uniqueEventIds = new HashSet<Integer>(eventIds).stream().toList();
+        EventIdsContainsIdsPredicate eventIdsContainsIdsPredicate = new EventIdsContainsIdsPredicate(uniqueEventIds);
+        model.updateFilteredPersonList(eventIdsContainsIdsPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
