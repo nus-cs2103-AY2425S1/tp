@@ -44,19 +44,19 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
 2. If you do not have Java installed, you can download it from [here](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html). 
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-3/tp/releases/).
+3. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F08-3/tp/releases/).
 
     Scroll to the very bottom of the page to find the latest release. Under the `Assets` section, download the `.jar` file by clicking on it.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your FindingbrUdders app. This can be any folder on your computer, it can also be an empty folder.
+4. Copy the file to the folder you want to use as the _home folder_ for your FindingbrUdders app. This can be any folder on your computer, it can also be an empty folder.
 
-1. Right click on the `.jar` file and select `Open with` and then `Java(TM) Platform SE binary`. 
+5. Right-click on the `.jar` file and select `Open with` and then `Java(TM) Platform SE binary`. 
 
    Alternatively, you can also run the `.jar` file by opening a command terminal, typing `cd` into the folder you put the jar file in, and using the `java -jar findingbrudders.jar` command to run the application.
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
 
-![Ui](images/Ui3.png) 
+![Ui](images/Ui4.png) 
 
 1. Type the command in the command box at the bottom and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -67,11 +67,11 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all Udders.
+   * `clear` : Deletes all Udders and meetings.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+2. Refer to the [Features](#features) below for details of each command.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 Shows a message via a popup window explaining how to access the help page.
 Access the url shown on the popup window to be redirected to the help screen.
 
-![help message](images/helpMessage2.png)
+![help message](images/helpMessage3.png)
 
 **Format:** `help`
 
@@ -187,13 +187,16 @@ Finds Udders by specified keywords for each field.
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
-* **IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+
+<box type="warning">
+**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+</box>
 
 **Examples:**
-* `find John` returns `johnny` and `John Doe`<br>
-* `find friend` returns `Charlie Brown` and `Betsy Crowe`<br>
+* `find n/John` returns Udders: `John Mayer` and `John Nissins`<br>
+* `find t/friend` returns `Alex Yeoh` and `Bernice Yu`<br>
 
-![result for 'find John'](images/findCommand3.png)
+![result for 'find n/John'](images/findCommand4.png)
 
 ### Delete meeting with an Udder: `deletem` 🗑️
 
@@ -218,7 +221,7 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd Udder in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st Udder in the results of the `find` command.
+* `find Bernice` followed by `delete 1` deletes the 1st Udder in the results of the `find` command.
 
 ### Clearing all Udders : `clear` 🧹
 
@@ -269,9 +272,9 @@ _Details coming soon ..._
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. 
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. <br>
 Solution: delete the `preferences.json` file created by the application before running the application again to prevent this problem.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. 
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. <br>
 Solution: manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
