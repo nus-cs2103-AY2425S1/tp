@@ -644,22 +644,6 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Patient Management commands
-
-1. Lets start by adding in your first new patient using the `add` command. Type in the command `add n/John Doe i/P00001 w/A1 d/Type 1 Diabetes m/Metformin`. Scroll down the patients window to see your newly added patient
-2. Add in a few more patients using the add command and changing the parameter values. You may use the following `add` commands
-   1. `add n/Kathy Prince i/P00002 w/B1 d/Gastrisitis m/Antacids`
-   2. `add n/John Doe i/P00001 w/A1 d/Influenza m/Zyrtec`
-3. Let's try editing a patient using the `edit` command. type in the command `edit 1 n/Jack Mack w/A2`
-4. Now that you've edited your first patient, lets view that patient to check if their information was edited correctly. Use the `view` command to do so. Type in `view 1` and the patient information should be displayed on the command result box.
-5. You can also delete patients by using the `delete` command. Type in `delete 1` to delete the first patient in the list.
-6. Next, let's try searching for specific patients using the `find` command. Assuming you've been using the above commands, type in `find n/kathy` and it should only show the patient "Kathy Prince" in the patients list
-7. To show all patients again, use the `list` command
-
-### Notes commands
-
-1. To add patient notes to a patient, use the `addnotes` command. 
-
 ### Launch and shutdown
 
 1. Initial launch
@@ -675,7 +659,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Adding a patient
 
