@@ -52,7 +52,7 @@ the process of accessing and updating resident student details. What's more, Dor
 > [!Tip]
 > You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
 
-4. Double click the `.jar` file to run it. Alternatively, open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+4. Open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
 and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following UI.<br>
 ![Ui](images/TemplateUi.png)
 
@@ -146,7 +146,7 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags’’
+Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/TAG’’
 
 * any possible orders and combinations of the 3 parameters name, phone number and room number are applicable
 
@@ -158,13 +158,13 @@ Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tags’’
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Only full words will be matched for room_number and phone_number, the arguments
   should be exactly the same as the person's room number and phone number
-* order of the tags doesn't matter `t/friends colleagues` works the same
+* Order of the tags do not matter `t/friends colleagues` works the same
   as `t/colleagues friends`
 
 Examples:
-* `find p/test_number n/test_name r/08-1234 t/friends colleagues`  
+* `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues`  
 finds people whose both your friend and colleagues. 
-He has test_name in their name and test_number as their contact number, and at room 08-1234
+They have Alex Jones as their name, 94509592 as their contact number, and lives in room 08-1234.
 
 ### Deleting a person : `delete`
 
