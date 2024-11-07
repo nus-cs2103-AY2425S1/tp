@@ -13,10 +13,10 @@ public class Name {
         "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * \\p{L}: match any kind of letter from any language
+     * [ '-/oO]+: allows spaces, hyphens, apostrophes, forward slashes, and the letter 'o' and 'O'
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{L}\\p{N}]+([ '-/oO]+[\\p{L}\\p{N}]+)*";
 
     public final String fullName;
 

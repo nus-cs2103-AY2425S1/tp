@@ -36,17 +36,17 @@ public class TypicalOwners {
         .withEmail("heinz@example.com").withAddress("wall street").withIcNumber("S0000003E").build();
     public static final Owner DANIEL = new OwnerBuilder().withName("Daniel Meier").withPhone("87652533")
         .withEmail("cornelia@example.com").withAddress("10th street").withIcNumber("S0000004C").build();
-    public static final Owner ELLE = new OwnerBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Owner ELLE = new OwnerBuilder().withName("Elle Meyer").withPhone("94822224")
         .withEmail("werner@example.com").withAddress("michegan ave").withIcNumber("S0000005A").build();
-    public static final Owner FIONA = new OwnerBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Owner FIONA = new OwnerBuilder().withName("Fiona Kunz").withPhone("94824227")
         .withEmail("lydia@example.com").withAddress("little tokyo").withIcNumber("S0000006Z").build();
-    public static final Owner GEORGE = new OwnerBuilder().withName("George Best").withPhone("9482442")
+    public static final Owner GEORGE = new OwnerBuilder().withName("George Best").withPhone("94824242")
         .withEmail("anna@example.com").withAddress("4th street").withIcNumber("S0000007H").build();
 
     // Manually added
-    public static final Owner HOON = new OwnerBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Owner HOON = new OwnerBuilder().withName("Hoon Meier").withPhone("84824241")
         .withEmail("stefan@example.com").withAddress("little india").withIcNumber("S0000008F").build();
-    public static final Owner IDA = new OwnerBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Owner IDA = new OwnerBuilder().withName("Ida Mueller").withPhone("84821311")
         .withEmail("hans@example.com").withAddress("chicago ave").withIcNumber("S0000009D").build();
 
     // Manually added - Owner's details found in {@code CommandTestUtil}
