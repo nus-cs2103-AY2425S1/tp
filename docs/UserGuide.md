@@ -184,7 +184,7 @@ Examples:
 * `find n/ John` returns `johnny` and `John Doe`
 * `find n/ benson carl` returns `Benson Meier`, `Carl Kurz`<br>
 * `find a/ serangoon` will return `Bernice Yu` with address `Blk 30 Lorong Serangoon Gardens, #07-18` and `David Li` with address `Blk 436 Serangoon Gardens 26, #16-43`
-  ![result for 'find benson carl'](images/findBensonCarlResult.png)
+  ![result for 'find'](images/findResult.png)
 
 
 ### Deleting a client : `delete`
@@ -200,6 +200,32 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd client in the case management system.
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
+
+
+### Adding a log entry : `addlog`
+
+Adds a log entry to the specified client in the case management system.
+
+Format: `addlog INDEX r/REMARK [d/DATE]`
+* Adds a log entry to the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The remark is mandatory. It can be any non-empty string. e.g. `Client is doing well`
+* The date is optional and defaults to the current date and time if not provided.
+* The date must be in the format `yyyy-MM-dd HH:mm` e.g. `2022-12-12 14:00`
+
+
+### Deleting a log entry : `deletelog`
+
+Deletes the specified log entry from the specified client in the case management system.
+
+Format: `deletelog INDEX l/LOG_INDEX`
+* Deletes the log entry at the specified `LOG_INDEX` from the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The `LOG_INDEX` refers to the index number shown in the displayed log list.
+* The log index **must be a positive integer** 1, 2, 3, …​
+* The log index is specific to the client at the specified `INDEX`.
 
 ### Clearing all entries : `clear`
 
@@ -236,10 +262,6 @@ If your changes to the data file makes its format invalid, CareConnect will disc
 Furthermore, certain edits can cause the CareConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -252,7 +274,6 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -260,11 +281,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `delete 3`
-**Help** | `help`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Add Log** | `addlog INDEX r/REMARK [d/DATE]`<br> e.g., `addlog 2 r/Client is doing well d/2022-12-12 14:00`
+**Delete Log** | `deletelog INDEX l/LOG_INDEX`<br> e.g., `deletelog 2 l/3`
+**Clear** | `clear`
+**Exit** | `exit`
