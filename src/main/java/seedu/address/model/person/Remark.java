@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+// Solution below adapted from https://se-education.org/guides/tutorials/ab3AddRemark.html
 /**
  * Represents a Remark of a person in the address book.
  * Guarantees: immutable
