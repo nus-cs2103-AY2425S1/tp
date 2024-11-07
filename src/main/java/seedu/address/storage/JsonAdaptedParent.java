@@ -22,7 +22,7 @@ import seedu.address.model.tag.Tag;
  */
 public class JsonAdaptedParent extends JsonAdaptedPerson {
 
-    private final String childName;
+    private final List<String> childrensNames;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given details.
@@ -30,10 +30,10 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedParent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("childName") String childName, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("childrensNames") List<String> childrensNames, @JsonProperty("tags") List<JsonAdaptedTag> tags,
             @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArchived") boolean isArchived) {
         super("Parent", name, phone, email, address, tags, isPinned, isArchived);
-        this.childName = childName;
+        this.childrensNames = childrensNames;
     }
 
     /**
@@ -41,7 +41,7 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
      */
     public JsonAdaptedParent(Parent source) {
         super(source);
-        childName = Optional.ofNullable(source.getChildName()).map(c -> c.fullName).orElse(null);
+        this.childrensNames = source.getChildrensNames().stream().map(n -> n.fullName).toList();
     }
 
     @Override
@@ -92,18 +92,10 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Name modelChildName;
-        if (childName != null) {
-            if (!Name.isValidName(childName)) {
-                throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-            }
-            modelChildName = new Name(childName);
-        } else {
-            modelChildName = null;
-        }
+        final Set<Name> modelChildrensNames = new HashSet<>(childrensNames.stream().map(Name::new).toList());
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Parent(modelName, modelPhone, modelEmail, modelAddress, modelChildName, modelTags,
+        return new Parent(modelName, modelPhone, modelEmail, modelAddress, modelChildrensNames, modelTags,
                 isPinned, isArchived);
     }
 }

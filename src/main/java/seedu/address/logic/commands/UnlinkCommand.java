@@ -63,7 +63,7 @@ public class UnlinkCommand extends Command {
         if (personToEdit instanceof Student studentToEdit) {
             counterPartName = studentToEdit.getParentName();
         } else if (personToEdit instanceof Parent parentToEdit) {
-            counterPartName = parentToEdit.getChildName();
+            counterPartName = parentToEdit.getChildrensNames().stream().findFirst().get();
         } else {
             throw new IllegalPersonTypeException(personToEdit);
         }

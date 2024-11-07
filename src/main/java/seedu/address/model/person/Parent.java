@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,38 +12,39 @@ import seedu.address.model.tag.Tag;
  * Represents a parent in the address book
  */
 public class Parent extends Person {
-    private final Name childName;
+    private final Set<Name> childrensNames;
 
     /**
      * Constructs a {@code Parent} with the given details.
      * Parents initialised with this constructor will have isPinned set to false by default
      */
-    public Parent(Name name, Phone phone, Email email, Address address, Name childName, Set<Tag> tags) {
+    public Parent(Name name, Phone phone, Email email, Address address, Set<Name> childrensNames, Set<Tag> tags) {
         super(name, phone, email, address, tags);
-        this.childName = childName;
+        requireNonNull(childrensNames);
+        this.childrensNames = childrensNames;
     }
 
     /**
      * Constructs a {@code Parent} with the given details.
      */
-    public Parent(Name name, Phone phone, Email email, Address address, Name childName, Set<Tag> tags, boolean isPinned,
-            boolean isArchived) {
+    public Parent(Name name, Phone phone, Email email, Address address,  Set<Name> childrensNames, Set<Tag> tags,
+            boolean isPinned, boolean isArchived) {
         super(name, phone, email, address, tags, isPinned, isArchived);
-        this.childName = childName;
+        this.childrensNames = childrensNames;
     }
 
     /**
      * Constructs a {@code Parent} with the given {@code Person} as a base
      */
-    public Parent(Person person, Name childName) {
+    public Parent(Person person, Set<Name> childrensNames) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
                 person.getPinned(), person.isArchived());
-        this.childName = childName;
+        this.childrensNames = childrensNames;
     }
 
 
-    public Name getChildName() {
-        return childName;
+    public Set<Name> getChildrensNames() {
+        return childrensNames;
     }
 
     @Override
@@ -56,14 +59,13 @@ public class Parent extends Person {
         }
 
         Parent otherParent = (Parent) other;
-        return super.equals(otherParent) && ((childName == null && otherParent.childName == null)
-                || (childName != null && childName.equals(otherParent.childName)));
+        return super.equals(otherParent) && childrensNames.equals(otherParent.childrensNames);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
-                this.getChildName(), this.getTags());
+                this.getChildrensNames(), this.getTags());
     }
 
     @Override
@@ -73,7 +75,7 @@ public class Parent extends Person {
                 .add("phone", this.getPhone())
                 .add("email", this.getEmail())
                 .add("address", this.getAddress())
-                .add("child", this.getChildName())
+                .add("children", this.getChildrensNames())
                 .add("tags", this.getTags())
                 .toString();
     }
@@ -88,8 +90,8 @@ public class Parent extends Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; Child: ")
-                .append(getChildName())
+                .append("; Children: ")
+                .append(getChildrensNames())
                 .append("; Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
