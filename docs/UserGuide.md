@@ -85,7 +85,7 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
         [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
 - `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
-- `NAME`: The contact's full name.
+- `NAME`: The contact's full name (case-insensitive).
 - `PHONE_NUMBER`: The contact's phone number.
 - `EMAIL`: The contact's email address.
 - `ADDRESS`: The contact's physical address.
@@ -233,7 +233,7 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
 * Adds the persons at the specified `INDICES` to the group. 
   Indices refer to the index numbers shown in the displayed person list.
   There must be at least one index provided, and indices should be separated by a space.
-* There cannot be two groups with the same name. If a group
+* There cannot be two groups with the same name (case-insensitive). If a group
   with the given `GROUP_NAME` currently exists, the command will fail.
 
 Example:
