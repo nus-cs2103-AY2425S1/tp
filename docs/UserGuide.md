@@ -16,6 +16,27 @@
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+## Callouts Convention
+
+The callout boxes below are used in documentation to enhance readability and provide important contextual information.
+
+<box type="info" seamless>
+
+**Info Box:**
+Provides additional information or context.
+</box>
+
+<box type="tip" seamless>
+
+**Tip Box:**
+Offers helpful tips or suggestions.
+</box>
+
+<box type="warning" seamless>
+
+**Caution Box:**
+Alerts you to potential issues or problems that may arise.
+</box>
 
 ## Quick start
 
@@ -46,6 +67,8 @@
        cd \path\to\your\folder
        ```
        <box type="warning" seamless>
+
+       **Caution:**
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\AddressBook`
        </box>
        
@@ -54,6 +77,8 @@
        cd /path/to/your/folder
        ```
        <box type="warning" seamless>
+
+       **Caution:**
        Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/AddressBook`
        </box>
    * Run the application with the following command:
@@ -78,21 +103,6 @@
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
-## Callouts Convention
-
-The callout boxes below are used in documentation to enhance readability and provide important contextual information.
-
-<box type="info" seamless>
-**Info Box:** Provides additional information or context.
-</box>
-
-<box type="tip" seamless>
-**Tip Box:** Offers helpful tips or suggestions.
-</box>
-
-<box type="warning" seamless>
-**Caution Box:** Alerts you to potential issues or problems that may arise.
-</box>
 
 ## Features
 
@@ -168,7 +178,7 @@ The command accepts either one phone number, one email, or both.
 
 <box type="info" seamless>
 
-**Info: Duplicate Handling:**
+**Info: Duplicate Handling**
 - A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
 - For the same reason, the app will prevent the user from changing the email address or phone number of a contact to one that is already in use by another contact.
 
@@ -231,9 +241,9 @@ Examples:
 * `edit 1 r/-CS2103T` deletes any role related to module `CS2103T` from the first person.
 * `edit 1 r/-CS1101S-Student MA1521-TA` deletes the role "Student of CS1101S" and "TA of MA1521" from the first person.
 
-<box type="warning" seamless>
+<box type="tip" seamless>
 
-**Caution:**
+**Tip:**
 - Omitting the role type intentionally leads to two different behaviors for adding and deleting roles:
   - For adding roles, the role type is assumed to be `Student`.
   - For deleting roles, **any role associated with the module code** will be deleted, regardless of the role type.
