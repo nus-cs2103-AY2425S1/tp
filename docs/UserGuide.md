@@ -97,7 +97,8 @@ Remarks:
 * Add a contact with the specified details.
 * `NAME` should only contain alphanumeric characters, spaces and round brackets.
 * Duplicated names is strictly not allowed. Please include a unique identifier like "Ryan Tan (Sec 1)".
-* `NAME` with symbols like "s/o" and "d/o" will not be allowed. Please write without these symbols.
+* `NAME` with symbols like "s/o" and "d/o" will not be allowed. However, so and do are accepted, please write without these symbols.
+* `NAME` that are duplicated will be prompted to add a unique identifier.
 * `NAME` with additional white spaces in between terms will be taken as it is.
 * `PHONE_NUMBER` can must be a non-negative integers
 * `PHONE_NUMBER` can start with any number.
@@ -112,6 +113,7 @@ Remarks:
     * end with a `domain` label at least 2 characters long
     * have each `domain` label start and end with alphanumeric characters
     * have each `domain` label consist of alphanumeric characters, separated only by hyphens, if any.
+* `NAME` and `EMAIL` are case-insensitive.
 * `ADDRESS` can be in any form with any amount of characters.
 * `ADDRESS` with non-alphanumeric characters are accepted like "😁" too.
 * `ROLE` can only be Student or Guardian.
