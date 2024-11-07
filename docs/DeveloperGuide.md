@@ -22,6 +22,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -116,6 +117,9 @@ It enhances the `CommandBox` functionality by allowing users to navigate through
 promoting modularity and adhering to good OOP practices.
 
 The stylesheet used for the UI can be found in `src/main/java/resources/view/LightTheme.css`.
+
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
