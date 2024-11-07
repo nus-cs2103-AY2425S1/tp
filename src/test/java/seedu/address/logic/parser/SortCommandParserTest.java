@@ -3,13 +3,14 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Collections;
 import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.ComparatorUtil;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Person;
 
 public class SortCommandParserTest {
@@ -29,10 +30,7 @@ public class SortCommandParserTest {
         SortCommand command = parser.parse("attendance");
         Comparator<? super Person> expectedComparator = Comparator.comparing(
                 Person::getDaysAttended,
-                Comparator.comparing(
-                        DaysAttended::getValue,
-                        Comparator.nullsLast(Comparator.reverseOrder())
-                )
+                ComparatorUtil.getDaysAttendedComparator()
         );
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);
@@ -49,7 +47,9 @@ public class SortCommandParserTest {
     @Test
     public void parse_validArgsClasses_returnsSortCommand() throws Exception {
         SortCommand command = parser.parse("class");
-        Comparator<? super Person> expectedComparator = Comparator.comparing(person -> person.getClasses().toString());
+        Comparator<? super Person> expectedComparator = Comparator.comparing(person ->
+                ComparatorUtil.getPrimaryClassForSorting(Collections.singletonList(person.getClasses().toString()))
+        );
         SortCommand expectedCommand = new SortCommand(expectedComparator);
         assertEquals(expectedCommand, command);
     }

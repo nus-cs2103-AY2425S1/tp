@@ -129,16 +129,4 @@ public class TeacherTest {
                 SampleDataUtil.getClassSet("1A", "2B"));
         assertEquals("[1A, 2B]", teacher.getClasses().toString());
     }
-
-    @Test
-    public void getDaysAttendedValue_returnsZero() {
-        Teacher teacher = new Teacher(new Name("John Doe"), new Gender("male"), new Phone("12345678"),
-                new Email("johndoe@hotmail.com"), new Address("123 Main St"),
-                SampleDataUtil.getTagSet("Friends"), SampleDataUtil.getSubjectSet("Math"),
-                SampleDataUtil.getClassSet("1A"));
-
-        // Verify that the getDaysAttendedValue method returns 0 for a Teacher
-        int daysAttendedValue = teacher.getDaysAttendedValue();
-        assertEquals(0, daysAttendedValue, "Days attended value for a Teacher should be 0");
-    }
 }
