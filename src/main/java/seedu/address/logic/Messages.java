@@ -27,6 +27,10 @@ public class Messages {
     public static final String MESSAGE_USER_SEARCH_QUERY_ROLES = "Displaying search results for all persons "
             + "with the roles: %s";
 
+    public static final String SEARCHMODE_UNKNOWN_COMMAND = "\nYou are in searchmode."
+            + "\nUse only search, exitsearch (es), "
+            + "add-all, exclude, checkexcluded, clearexcluded or exit";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

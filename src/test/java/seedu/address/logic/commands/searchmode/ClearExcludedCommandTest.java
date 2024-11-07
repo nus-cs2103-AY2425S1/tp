@@ -30,7 +30,7 @@ public class ClearExcludedCommandTest {
     public void execute_empty() {
         ClearExcludedCommand clearExcludedCommand = new ClearExcludedCommand();
 
-        assertEquals("No persons are currently excluded.",
+        assertEquals(ClearExcludedCommand.MESSAGE_EMPTY,
                 clearExcludedCommand.execute(model, model.getEventManager()).getFeedbackToUser());
     }
 

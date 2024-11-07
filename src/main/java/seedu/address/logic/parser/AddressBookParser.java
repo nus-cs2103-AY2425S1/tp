@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -54,6 +55,8 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
+
 
     /**
      * Parses user input into command for execution.
@@ -171,9 +174,9 @@ public class AddressBookParser {
         case EventAddAllCommand.COMMAND_WORD:
             return new EventAddAllCommandParser().parse(arguments);
         default:
+
             throw new ParseException(
-                    MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse only search, exitsearch (es), "
-                            + "add-all, exclude, checkexcluded, clearexcluded or exit");
+                    MESSAGE_UNKNOWN_COMMAND + Messages.SEARCHMODE_UNKNOWN_COMMAND);
         }
     }
 

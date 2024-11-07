@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -187,8 +188,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseSearchModeCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse "
-                + "only search, exitsearch (es), add-all or exit", () ->
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND
+                + Messages.SEARCHMODE_UNKNOWN_COMMAND, () ->
                 parser.parseSearchModeCommand("random"));
     }
 
