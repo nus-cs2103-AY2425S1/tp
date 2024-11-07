@@ -450,26 +450,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Tuteez` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC1 - Add a student**
 
 **MSS**
 
-1. User types `add` keyword followed by student details into textbox
-2. App acknowledges that a new student has been added
+1. User types add keyword followed by student details into the textbox
+2. Tuteez acknowledges that a new student has been added
 3. Use case ends
 
 **Extensions**
 
-- 2a. App detects similar/identical name
+- 2a. Tuteez detects similar/identical name
 
-    - 2a1. App rejects the new addition
-    - 2a2. Use case ends
+    - 2a1. Tuteez rejects the new addition and show error message
+    Use case ends
 
-- 2b. App detects clashing lesson
-    - 2b1. App rejects the new addition
-    - 2b2. Use case ends
+- 2b. Tuteez detects clashing lesson
+    - 2b1. Tuteez rejects the new addition and show error message
+    Use case ends
 
 
 **Use case: UC2 - List all students**
@@ -477,17 +477,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User types keyword
-2. App displays all students address book in alphabetical order
+2. Tuteez displays all students in alphabetical order
 3. Use case ends
 
-**Use case: UC3 - Delete a person**
+**Use case: UC3 - Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons <u>(UC2)</u>
+1.  User requests to list students
+2.  Tuteez shows a list of student <u>(UC2)</u>
 3.  User types keyword followed by delete index or name
-4.  AddressBook deletes the person
+4.  Tuteez deletes the person
 5. Use case ends
 
 
@@ -499,12 +499,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+  - 3a1. Tuteez shows an error message.
 
       Use case resumes at step 2.
 - 3b. The given name does not exist
-  - 3b1 AddressBook shows an error message.
-  - 3b2. Use case resumes from step 2
+  - 3b1. Tuteez shows an error message.
+        
+      Use case resumes at step 2
 
 
 ### Non-Functional Requirements
