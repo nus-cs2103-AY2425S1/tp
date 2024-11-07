@@ -504,23 +504,28 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch 
+#### 1. Initial launch 
 
-**For Mac**
+* **For Mac**
 
-    1. Download the jar file and copy into an empty folder called `ClientHu`b in `Desktop`. 
+    1. Download the jar file and copy into an empty folder called `ClientHub` in `Desktop`. 
     2. Open Terminal 
     3. Inside the terminal enter: `cd/Desktop/ClientHub`
-    4. Then run:`java -jar clienthub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    4. Then enter:`java -jar clienthub.jar`
+       * Expected: Shows the GUI with a set of sample clients. 
+       * The window size may not be optimum.
 
-**For Windows**
 
-    1.Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
-    2.Open PowerShell
-    3.Inside the Command Prompt enter: `cd Downloads\ClientHub`
-    4. Then run:`java -jar clienthub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+* **For Windows**
 
-2. Saving window preferences
+    1. Download the jar file and copy into an empty folder called `ClientHub` in `Downloads`. 
+    2. Open PowerShell
+    3. Inside the Command Prompt enter: `cd Downloads\ClientHub`
+    4. Then enter:`java -jar clienthub.jar` 
+       * Expected: Shows the GUI with a set of sample clients. 
+       * The window size may not be optimum.
+
+#### 2. Saving window preferences
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
@@ -528,22 +533,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a contact
 
-1. Deleting a contact while all contacts are being shown
+1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete Ahmad`<br>
-      Expected: Contact with name "Ahmad" is deleted. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: Contact with name "Ahmad" is deleted. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete x` (where x is a number) <br>
-      Expected: No contact is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a contact not in the list) <br>
+   1. Other incorrect delete commands to try: `delete` `delete [NAME]` (with a client not in the list) <br>
       Expected: Similar to previous.
 
-1. Deleting a contact with the same name
 
-    1. Test case: `delete Jeremy` with more than one contact with the name `Jeremy` <br>
+1. Deleting a client with the same name
+    1. Test case: `delete Jeremy` with more than one client with the name `Jeremy` <br>
         Expected: User is prompted to be more specific. Details of the required change are shown in the status message. Status bar remains the same.
 
 ### Saving data
