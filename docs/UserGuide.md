@@ -60,20 +60,17 @@ Equipped with features like **attendance marking**, **contact management**, **co
 <details>
   <summary style="font-weight:600;font-size:20px;">Notes about the command format:</summary>
 
-  + Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-  + Items in square brackets are optional.<br>
-    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-  + Items in square brackets are optional.<br>
-    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-  + Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
-  e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc.
-
-  + Parameters can be in any order.<br>
-      e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
+  - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+    - e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br><br>
+  - Items in square brackets are optional.<br>
+    - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.<br><br>
+  - Items in square brackets are optional.<br>
+    - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.<br><br>
+  - Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
+    - e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc. <br><br>
+  - Parameters can be in any order.<br>
+    - e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.<br><br>
+  - The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
 </details>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**<br/>
@@ -106,14 +103,14 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/]
 
 #### Parameters
 
-|Parameter|Prefix|Compulsory?| Remarks                                                                                                                                    |
-|---------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------|
-|`NAME`|`n/`|Yes| Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                          |
-|`PHONE_NUMBER`|`p/`|Yes| Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9). |
-|`EMAIL`|`e/`|Yes| Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).           |
-|`TELEGRAM`|`t/`|Yes| Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                  |
-|`ROLE`|`r/`|No| Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                   
-|      |`f/`|No| Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.|
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                      |
+|----------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                            |
+| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).   |
+| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).             |
+| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                    |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                     |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact. |
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 A person is uniquely identified by his/her **telegram handle**
@@ -153,16 +150,16 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 `e` can be used in place of `edit`.
 
 #### Parameters
-|Parameter|Prefix| Compulsory? | Remarks                                                                                                                                                                                                      |
-|---------|------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`INDEX`|   | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).|        
-|`NAME`|`n/`| No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                            |
-|`PHONE_NUMBER`|`p/`| No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                   |
-|`EMAIL`|`e/`| No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                             |
-|`TELEGRAM`|`t/`| No          | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                    |
-|`ROLE`|`r/`| No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative.|
-|      |`f/`| No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                 |
-|      |`nf/`| No         | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                         |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                       |
+|----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).        |        
+| `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                             |
+| `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                    |
+| `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                              |
+| `TELEGRAM`     | `t/`   | No          | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                                     |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative. |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                  |
+|                | `nf/`  | No          | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                          |
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Only one of `f/` or `nf/` should be present in the command at once, not both.
@@ -196,12 +193,12 @@ When using `find`, at least **one** of the optional parameters must be included.
 `f` can be used in place of `find`.
 
 #### Parameters
-|Parameter|Prefix|Compulsory?| Remarks                                                                                                                                                                    |
-|---------|------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`NAMEKEYWORD`|`n/`|No| Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name                                                                                 |
-|`ROLEKEYWORD`|`r/`|No| Represents the role to be searched.<br/> `ROLEKEYWORD` has to match exactly with the role. <br/> Contacts with roles matching at least one `ROLEKEYWORD` will be returned. |
-|`TELEGRAMKEYWORD`|`t/`|No| Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle                                                        |
-|                |`f/`|No| Represents finding all contacts that have been favourited                                                                                                                  |
+| Parameter         | Prefix | Compulsory? | Remarks                                                                                                                                                                    |
+|-------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAMEKEYWORD`     | `n/`   | No          | Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name                                                                                 |
+| `ROLEKEYWORD`     | `r/`   | No          | Represents the role to be searched.<br/> `ROLEKEYWORD` has to match exactly with the role. <br/> Contacts with roles matching at least one `ROLEKEYWORD` will be returned. |
+| `TELEGRAMKEYWORD` | `t/`   | No          | Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle                                                        |
+|                   | `f/`   | No          | Represents finding all contacts that have been favourited                                                                                                                  |
 
 * The search is case-insensitive for all parameters. E.g `hans` will match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -239,9 +236,9 @@ Sorting works together with the `find` command, meaning that if you sort after r
 `so` can be used in place of `sort`
 
 #### Parameters
-|Parameter|Prefix|Compulsory?| Remarks                                                                                    |
-|---------|------|-----------|--------------------------------------------------------------------------------------------|
-|`ORDER` |      | Yes        |`ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts.|
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                    |
+|-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ORDER`   |        | Yes         | `ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts. |
 
 ### Example
 * `sort asc` sorts the current list of contacts by name, in ascending order
@@ -263,9 +260,9 @@ delete INDEX
 `d` can be used in place of `delete`.
 
 #### Parameters
-|Parameter|Prefix|Compulsory?| Remarks                                                                                                                  |
-|---------|------|-----------|--------------------------------------------------------------------------------------------------------------------------|
-|`INDEX`|        |Yes        | Deletes the person at the specified `INDEX`.<br/> The index **must be a positive integer**, e.g. 1, 2, 3, …​, 2147483647.|
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                   |
+|-----------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------|
+| `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> The index **must be a positive integer**, e.g. 1, 2, 3, …​, 2147483647. |
 
 * The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`
 
@@ -306,10 +303,10 @@ mark t/TELEGRAM…​ d/DATE
 `m` can be used in place of `mark`.
 
 #### Parameters
-| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                                                                                                                            |
-|------------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `TELEGRAM` |`t/`|Yes| `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** 
-|`DATE`|`d/`|Yes| `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
+| Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
+|------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
+| `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
 
 #### Example
 * `mark t/toom t/maary d/2024-11-02`
@@ -339,10 +336,10 @@ unmark t/TELEGRAM…​ d/DATE
 
 
 #### Parameters
-| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                                                                                                                            |
-|------------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `TELEGRAM` |`t/`|Yes| `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** 
-|`DATE`|`d/`|Yes| `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
+| Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
+|------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
+| `DATE`     | `d/`   | Yes         | `DATE` follows the format YYYY-MM-DD, e.g. `2024-10-11`, and should be an actual date no later than the current date. <br/> If multiple dates are included in the command, only the last one will be recorded as the attendance date.                                                                                                                              |
 
 ### Clearing all entries : `clear`
 
@@ -403,9 +400,9 @@ switch PROFILE
 `sw` can be used in place of `switch`
 
 #### Parameters
-| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                                                        |
-|------------|------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`PROFILE` |       |Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                        |
+|-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
 
 #### Example
   - `switch john-doe` switches to a profile named 'john-doe'
@@ -425,9 +422,9 @@ deleteProfile PROFILE
 `delp` can be used in place of `deleteProfile`
 
 #### Parameters
-| Parameter  |Prefix|Compulsory?| Remarks                                                                                                                                                                                                                                                            |
-|------------|------|-----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`PROFILE` |       |Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all requirements from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
+| Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                            |
+|-----------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all requirements from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
 
 
 #### Example
@@ -469,19 +466,19 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action | Format                                                                  | Example Usage|
---------|-------------------------------------------------------------------------|-------------|
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​`                |`add n/James Ho p/82224444 e/jamesho@example.com t/jamesho r/logistics`
-**Clear** | `clear`                                                                 |`clear`
-**Delete** | `delete INDEX`                                                          | `delete 3`
-**Delete Profile** | `deleteProfile PROFILE`                                                 |`deleteProfile alice`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​` |`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`   | `find n/James Jake`
-**Sort** | `sort ORDER`                                                            |`sort ASC`
-**Switch** | `switch PROFILE`                                                        |`switch alice`
-**List** | `list`                                                                  |`list`
-**Help** | `help`                                                                  |`help`
-**Attendance** | `attendance`                                                            |`attendance`
-**Mark Attendance** | `mark t/TELEGRAM…​ d/DATE`                                              |`mark t/berniceYu t/alexYeoh d/2024-11-02`
-**Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            |`unmark t/berniceYu d/2024-11-02`
-**View** | `view t/TELEGRAM_HANDLE`<br> e.g., `view t/bob123`
+| Action                | Format                                                                  | Example Usage                                                           |
+|-----------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE]…​`                | `add n/James Ho p/82224444 e/jamesho@example.com t/jamesho r/logistics` |
+| **Clear**             | `clear`                                                                 | `clear`                                                                 |
+| **Delete**            | `delete INDEX`                                                          | `delete 3`                                                              |
+| **Delete Profile**    | `deleteProfile PROFILE`                                                 | `deleteProfile alice`                                                   |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​` | `edit 2 n/James Lee e/jameslee@example.com`                             |
+| **Find**              | `find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]`   | `find n/James Jake`                                                     |
+| **Sort**              | `sort ORDER`                                                            | `sort ASC`                                                              |
+| **Switch**            | `switch PROFILE`                                                        | `switch alice`                                                          |
+| **List**              | `list`                                                                  | `list`                                                                  |
+| **Help**              | `help`                                                                  | `help`                                                                  |
+| **Attendance**        | `attendance`                                                            | `attendance`                                                            |
+| **Mark Attendance**   | `mark t/TELEGRAM…​ d/DATE`                                              | `mark t/berniceYu t/alexYeoh d/2024-11-02`                              |
+| **Unmark Attendance** | `unmark t/TELEGRAM…​ d/DATE`                                            | `unmark t/berniceYu d/2024-11-02`                                       |
+| **View**              | `view t/TELEGRAM_HANDLE`<br> e.g., `view t/bob123`                      |                                                                         |
