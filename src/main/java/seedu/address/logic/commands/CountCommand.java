@@ -33,7 +33,7 @@ public class CountCommand extends Command {
     public static final String MESSAGE_NO_MATCHES = "No persons match the given criteria.";
     public static final String ERROR_INVALID_FILTER = "Invalid filter format. Use 'name/<prefix>' or 'tag/<tag>'.";
 
-    private static final Logger logger = Logger.getLogger(CountCommand.class.getName());
+    private static final Logger logger = Logger.getLogger(CountCommand.class.getName()); //create logger
 
     private final Optional<String> namePrefix;
     private final Optional<String> tag;
