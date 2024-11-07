@@ -152,7 +152,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 #### Parameters
 | Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                       |
 |----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).        |        
+| `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).        |
 | `NAME`         | `n/`   | No          | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                                             |
 | `PHONE_NUMBER` | `p/`   | No          | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                                    |
 | `EMAIL`        | `e/`   | No          | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                              |
@@ -182,7 +182,7 @@ Search for contact(s) whose contact details satisfy either of the following:
 
 #### Format
 ```
-find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/] 
+find [n/NAMEKEYWORD]…​ [r/ROLEKEYWORD]…​ [t/TELEGRAMKEYWORD]…​ [f/]
 ```
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
@@ -315,7 +315,7 @@ mark t/TELEGRAM…​ d/DATE
 
 * Mark attendance of contact with telegram `toom` first, then input command `mark t/toom t/maary d/2024-11-02`
 
-  ![img_3.png](images/RepeatedMarkCommandResult.png)  
+  ![img_3.png](images/RepeatedMarkCommandResult.png)
 
 * Mark attendance of a non-member contact `mark t/jerry d/2024-11-02`
 
@@ -412,7 +412,7 @@ switch PROFILE
 ### Deleting a profile: `deleteProfile`
 
 The `deleteProfile` command removes an existing profile from the system.
-  
+
 #### Format
 ```
 deleteProfile PROFILE
