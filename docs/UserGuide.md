@@ -2,7 +2,6 @@
 layout: page
 title: User Guide
 ---
-# BakeBuddy
 * Table of Contents
 {:toc}
 
@@ -34,7 +33,7 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
 --------------------------------------------------------------------------------------------------------------------
-# Welcome to BakeBuddy
+<div style="page-break-after: always;"></div>
 ## Before You Begin ✔️
 ### Step 1: Check if Your Computer is Ready
 First, we need to make sure your computer has Java 17 installed. Here's how to check:
@@ -62,7 +61,6 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 2. Create a home for BakeBuddy:
   - Create a new folder on your computer named `BakeBuddy`
   - Move the downloaded `bakebuddy.jar` file into this folder
-<div style="page-break-after: always;"></div>
 
 3. Start BakeBuddy:
   - Open your terminal (like in Step 1)
@@ -101,6 +99,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 | [List](#list-command) | `list` | `list` |
 | [Remark](#remark-command) | `remark INDEX r/REMARK` | `remark 1 r/Regular customer` |
 
+<div style="page-break-after: always;"></div>
 #### Customer Specific
 
 | Command | Format | Example |
@@ -112,6 +111,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 | Command | Format | Example |
 | --- | --- | --- |
 | [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
+
 <div style="page-break-after: always;"></div>
 
 ### Order Management
@@ -124,6 +124,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 | [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX` | `markCustomerOrder 1` |
 | [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX` | `unmarkCustomerOrder 1` |
 
+<div style="page-break-after: always;"></div>
 #### Supply Orders
 
 | Command | Format | Example |
@@ -132,7 +133,6 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 | [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX` | `deleteSupplyOrder 1` |
 | [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX` | `markSupplyOrder 1` |
 | [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX` | `unmarkSupplyOrder 1` |
-<div style="page-break-after: always;"></div>
 
 ### Catalogue Management
 #### Ingredient Catalogue
@@ -151,6 +151,8 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 | [Remove Pastry](#remove-pastry-command) | `removePastry NAME` | `removePastry Croissant` |
 | [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue` | `viewPastryCatalogue` |
 
+<div style="page-break-after: always;"></div>
+
 ### Inventory Management
 
 | Command | Format | Example |
@@ -158,6 +160,7 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 | [Check Ingredient Stock](#check-ingredient-stock-command) | `checkIngredientStock INGREDIENT` | `checkIngredientStock Flour` |
 | [Check Pastry Stock](#check-pastry-stock-command) | `checkPastryStock PASTRY` | `checkPastryStock Croissant` |
 | [View Inventory](#view-inventory-command) | `viewInventory` | `viewInventory` |
+
 <div style="page-break-after: always;"></div>
 
 ### General Commands
