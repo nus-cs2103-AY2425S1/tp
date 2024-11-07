@@ -22,7 +22,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 3. Copy the file to the folder you want to use as the _home folder_ for your F.A.R.T.
    1. A good home folder would be the Downloads folder as it makes the next step easier.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar F.A.R.T_in_a.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fart_in_a.jar` command to run the application.<br>
    1. To open the command terminal, open the terminal app for Linux/macOS users, and Windows Powershell for Windows Users.
    2. For most users, type `cd Downloads` in the terminal window to navigate to the Downloads folder.
    3. Alternatively, you may navigate to the folder using File Explorer, then right click it and select `Open in Terminal`
@@ -100,14 +100,14 @@ Examples:
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/11 09 2001 t/criminal`
 
 **Note:**
-1. As of version 1.4, only valid email address (in the form name@domain.com) and **Singapore** phone numbers are accepted.
+1. As of version 1.5, only valid email address (in the form name@domain.com) and **Singapore** phone numbers are accepted.
 Birthdays should be added in DD MM YYYY format.
 2. You may add duplicate contacts (i.e., contacts with the same name, case-insensitive) but the F.A.R.T book will prompt you
 to confirm that you are adding a duplicate contact.
 
 ### Listing all clients : `list`
 
-Need to have a quick view of everyone in your F.A.R.T book? This command displays a list of all clients in the F.A.R.T book.
+Need to have a quick view of everyone in your F.A.R.T book or reset it after filtering? This command displays a list of all clients in the F.A.R.T book.
 
 Format: `list`
 
@@ -160,7 +160,8 @@ Examples:
 
 **Note:**
 1. As a `delete` command cannot be undone, the F.A.R.T Book will first prompt you to confirm if the
- contact that you want to delete is correct. If you select `No`, the operation will be aborted and the contact will not be deleted.
+ contact that you want to delete is correct. If you select `No`, the operation will be aborted and the client will not be deleted.
+![Delete confirmation window](images/deletewindow.png)
 
 ### Clearing all entries : `clear`
 
