@@ -85,15 +85,15 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
 Please refer to this table
 for list of valid tags:
 
-| Tag | Interview Stage                 |
-|-----|---------------------------------|
-| N   | New                             |
-| TP  | Technical Interview in Progress |
-| TC | Technical Interview Confirmed |
-| BP | Behavioral Interview in Progress |
-| BC | Behavioral Interview Confirmed |
-| A| Accepted|
-| R | Rejected |
+| Tag | Interview Stage                 | Definition                                               |
+|-----|---------------------------------|----------------------------------------------------------|
+| N   | New                             | New applicant                                            |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled |
+| TC | Technical Interview Confirmed | Technical interview has been schedule|                                           
+| BP | Behavioral Interview in Progress |Behavioral interview is in the progress of being scheduled|
+| BC | Behavioral Interview Confirmed |Behavioral interview has been scheduled|
+| A| Accepted|Applicant has been accepted|
+| R | Rejected |Applicant has been rejected|
 
 
 Examples:
@@ -149,13 +149,13 @@ Format:
 `delete n/NAME`
 `delete e/EMAIL`
 `delete p/PHONE`
-`delete n/NAME p/PHONE`
-`delete n/NAME e/EMAIL`
 
-* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`/`NAME` and `PHONE`/`NAME` and `EMAIL`
+
+* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`
+
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are contacts with duplicate names, user must specify `NAME` and `PHONE`/`NAME` and `EMAIL`.
+* If there are contacts with duplicate names, user must use `delete e/EMAIL` or `delete p/PHONE`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -285,16 +285,23 @@ _Details coming soon ..._
 - The input job code will be converted to uppercase (e.g., "swe2023-intern" will become "SWE2023-INTERN").
 
 ### TAG
-- Must be one of the following tag:
-    - **N** = New
-    - **BP** = Behavioral Interview in Progress
-    - **BC** = Behavioral Interview Confirmed
-    - **TP** = Technical Interview in Progress
-    - **TC** = Technical Interview Confirmed
-    - **A** = Accepted
-    - **R** = Rejected
+
+Please refer to this table
+for list of valid tags:
+
+| Tag | Interview Stage                 | Definition                                               |
+|-----|---------------------------------|----------------------------------------------------------|
+| N   | New                             | New applicant                                            |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled |
+| TC | Technical Interview Confirmed | Technical interview has been schedule|                                           
+| BP | Behavioral Interview in Progress |Behavioral interview is in the progress of being scheduled|
+| BC | Behavioral Interview Confirmed |Behavioral interview has been scheduled|
+| A| Accepted|Applicant has been accepted|
+| R | Rejected |Applicant has been rejected|
+
 - Input tag code is case-insensitive. (e.g., "bp" will be treated the same as "BP").
 - Spaces within the tag will be removed (e.g., "T P" will become "TP"), and hence tags with spaces is still valid as long as it is one of the tags listed above. 
+
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
