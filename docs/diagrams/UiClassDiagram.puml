@@ -44,8 +44,8 @@ MainWindow *-down-> "1" StatusBarFooter
 
 Dashboard -down-> "*" TutorialCard
 PersonListPanel -down-> "*" PersonCard
-PersonCard --down-> "1" PaymentCard
-PersonCard --down-> "1" AttendanceContainer
+PersonCard -down-> "1" PaymentCard
+PersonCard -down-> "1" AttendanceContainer
 AttendanceContainer *-down-> "*" AttendanceCard
 MainWindow -left-|> UiPart
 
@@ -62,12 +62,15 @@ TutorialCard --|> UiPart
 PersonListPanel --|> UiPart
 
 Dashboard ..> Model
-PersonCard ..> Model
+PersonCard ..down> Model
+TutorialCard ..down> Model
+AttendanceContainer ..down> Model
+AttendanceCard ..up> Model
 UiManager -right-> Logic
 MainWindow -right-> Logic
 
-TutorialCard -[hidden]left- PersonCard
-PaymentCard -[hidden]left- AttendanceContainer
+TutorialCard -[hidden]right- PersonCard
+PaymentCard -[hidden]right- AttendanceContainer
 PersonListPanel -[hidden]left- Dashboard
 Dashboard -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
