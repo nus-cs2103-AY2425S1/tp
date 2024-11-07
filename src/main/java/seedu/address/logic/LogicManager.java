@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ConcreteCommand;
 import seedu.address.logic.commands.FileAccessCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -62,6 +63,8 @@ public class LogicManager implements Logic {
         // No need to check for success as the command will exit through an exception if it fails
         if (command instanceof ConcreteCommand) {
             model.pushToUndoStack((ConcreteCommand) command);
+        } else if (command instanceof ImportCommand) {
+            model.clearUndoStack();
         }
 
         try {

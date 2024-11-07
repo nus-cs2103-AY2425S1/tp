@@ -62,7 +62,7 @@ the process of accessing and updating resident student details. What's more, Dor
 > [!Tip]
 > You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
 
-4. Double click the `.jar` file to run it. Alternatively, open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
+4. Open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
    and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following UI.<br>
    ![Ui](images/TemplateUi.png)
 
@@ -168,6 +168,7 @@ Format: `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tag`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Only full words will be matched for room_number and phone_number, the arguments
   should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER
+
 * Order of the tags do not matter `t/friends colleagues` works the same
   as `t/colleagues friends`
 
