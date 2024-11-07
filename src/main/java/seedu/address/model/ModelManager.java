@@ -240,19 +240,25 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Filters the list of volunteers to only include those whose names contain the specified search string,
-     * ignoring case. Updates the filtered volunteer list in the model to reflect this criteria.
+     * Filters the list of volunteers to only include those matching the given predicate.
+     * If no volunteers match the predicate, this method resets the filtered list to show all volunteers.
      *
-     * @param searchString The string to search for within volunteer names. This search is case-insensitive.
-     * @return An observable list of volunteers that contain the search string in their names.
+     * @param predicate The condition used to filter volunteers.
+     * @return {@code true} if any volunteers match the predicate, else {@code false}.
      */
-    public ObservableList<Volunteer> filterVolunteersByName(String searchString) {
-        Predicate<Volunteer> volunteerContainsSearchString = volunteer ->
-                volunteer.getName().toString().toLowerCase().contains(searchString.toLowerCase());
-        updateFilteredVolunteerList(volunteerContainsSearchString);
+    public boolean filterVolunteersByName(Predicate<Volunteer> predicate) {
+        filteredVolunteers.setPredicate(predicate);
+        // Check if any volunteers match the predicate
+        boolean hasMatches = !filteredVolunteers.isEmpty();
 
-        return getFilteredVolunteerList();
+        // If no volunteers match, reset to show all volunteers
+        if (!hasMatches) {
+            filteredVolunteers.setPredicate(PREDICATE_SHOW_ALL_VOLUNTEERS);
+        }
+
+        return hasMatches;
     }
+
 
 
 
@@ -277,18 +283,23 @@ public class ModelManager implements Model {
         filteredEvents.setPredicate(predicate);
     }
     /**
-     * Filters the list of events to only include those whose names contain the specified search string,
-     * ignoring case. Updates the filtered event list in the model to reflect this criteria.
+     * Filters the list of events to only include those matching the given predicate.
+     * If no events match the predicate, this method resets the filtered list to show all events.
      *
-     * @param searchString The string to search for within event names. This search is case-insensitive.
-     * @return An observable list of events that contain the search string in their names.
+     * @param predicate The condition used to filter events.
+     * @return {@code true} if any events match the predicate else {@code false}
      */
-    public ObservableList<Event> filterEventsByName(String searchString) {
-        Predicate<Event> eventContainsSearchString = event ->
-                event.getName().toString().toLowerCase().contains(searchString.toLowerCase());
-        updateFilteredEventList(eventContainsSearchString);
+    public boolean filterEventsByName(Predicate<Event> predicate) {
+        filteredEvents.setPredicate(predicate);
+        // Check if any events match the predicate
+        boolean hasMatches = !filteredEvents.isEmpty();
 
-        return getFilteredEventList();
+        // If no events match, reset to show all events
+        if (!hasMatches) {
+            filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
+        }
+
+        return hasMatches;
     }
 
     @Override

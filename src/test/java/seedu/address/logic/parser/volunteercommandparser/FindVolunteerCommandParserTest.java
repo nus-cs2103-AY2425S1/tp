@@ -1,6 +1,5 @@
 package seedu.address.logic.parser.volunteercommandparser;
 
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -8,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
+import seedu.address.model.volunteer.VolunteerNameContainsKeywordPredicate;
 
 public class FindVolunteerCommandParserTest {
 
@@ -16,29 +16,39 @@ public class FindVolunteerCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // single word
-        assertParseSuccess(parser, "John", new FindVolunteerCommand("John"));
+        String searchString = "John";
+        VolunteerNameContainsKeywordPredicate predicate = new VolunteerNameContainsKeywordPredicate(searchString);
+        assertParseSuccess(parser, searchString, new FindVolunteerCommand(predicate));
 
         // multiple words
-        assertParseSuccess(parser, "John Doe Smith", new FindVolunteerCommand("John Doe Smith"));
+        String multiWordSearch = "John Doe Smith";
+        predicate = new VolunteerNameContainsKeywordPredicate(multiWordSearch);
+        assertParseSuccess(parser, multiWordSearch, new FindVolunteerCommand(predicate));
 
         // leading and trailing whitespace
-        assertParseSuccess(parser, "   John   ", new FindVolunteerCommand("John"));
+        String searchWithWhitespace = "   John   ";
+        predicate = new VolunteerNameContainsKeywordPredicate("John");
+        assertParseSuccess(parser, searchWithWhitespace, new FindVolunteerCommand(predicate));
 
         // mixed case
-        assertParseSuccess(parser, "jOhN dOe", new FindVolunteerCommand("jOhN dOe"));
+        String mixedCaseSearch = "jOhN dOe";
+        predicate = new VolunteerNameContainsKeywordPredicate("jOhN dOe");
+        assertParseSuccess(parser, mixedCaseSearch, new FindVolunteerCommand(predicate));
 
         // numbers in search term
-        assertParseSuccess(parser, "John123", new FindVolunteerCommand("John123"));
+        String searchWithNumbers = "John123";
+        predicate = new VolunteerNameContainsKeywordPredicate("John123");
+        assertParseSuccess(parser, searchWithNumbers, new FindVolunteerCommand(predicate));
 
-        // special characters
+        // special characters (invalid case)
         assertParseFailure(parser, "John@Doe", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindVolunteerCommand.MESSAGE_USAGE));
 
-        // chinese characters
+        // chinese characters (invalid case)
         assertParseFailure(parser, "张三", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindVolunteerCommand.MESSAGE_USAGE));
 
-        // mix of different character types
+        // mix of different character types (invalid case)
         assertParseFailure(parser, "John张三@123", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindVolunteerCommand.MESSAGE_USAGE));
     }
@@ -52,13 +62,14 @@ public class FindVolunteerCommandParserTest {
         // only spaces
         assertParseFailure(parser, "   ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindVolunteerCommand.MESSAGE_USAGE));
-
     }
 
     @Test
     public void parse_edgeCases_returnsFindCommand() {
         // single character
-        assertParseSuccess(parser, "a", new FindVolunteerCommand("a"));
+        String singleCharSearch = "a";
+        VolunteerNameContainsKeywordPredicate predicate = new VolunteerNameContainsKeywordPredicate("a");
+        assertParseSuccess(parser, singleCharSearch, new FindVolunteerCommand(predicate));
 
         // very long search term (100 characters)
         String longSearchTerm = "a".repeat(1000);
@@ -66,7 +77,9 @@ public class FindVolunteerCommandParserTest {
                 FindVolunteerCommand.MESSAGE_USAGE));
 
         // multiple spaces between words
-        assertParseSuccess(parser, "John    Doe", new FindVolunteerCommand("John    Doe"));
+        String searchWithSpaces = "John    Doe";
+        predicate = new VolunteerNameContainsKeywordPredicate("John    Doe");
+        assertParseSuccess(parser, searchWithSpaces, new FindVolunteerCommand(predicate));
 
         // tab characters
         assertParseFailure(parser, "John\tDoe", String.format(MESSAGE_INVALID_COMMAND_FORMAT,

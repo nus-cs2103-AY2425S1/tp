@@ -205,7 +205,7 @@ public class EventNewCommandTest {
         }
 
         @Override
-        public ObservableList<Event> filterEventsByName(String searchString) {
+        public boolean filterEventsByName(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -240,7 +240,7 @@ public class EventNewCommandTest {
             throw new AssertionError("This method should not be called.");
         }
         @Override
-        public ObservableList<Volunteer> filterVolunteersByName(String searchString) {
+        public boolean filterVolunteersByName(Predicate<Volunteer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
