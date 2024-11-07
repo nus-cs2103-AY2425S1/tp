@@ -77,7 +77,8 @@ public class UnmarkAttendanceByStudentCommandTest {
         List<Attendance> attendanceList = new ArrayList<Attendance>();
         attendanceList.add(attendance);
 
-        model.setParticipation(model.getParticipationList().get(0), new Participation(student, tutorial, attendanceList));
+        model.setParticipation(model.getParticipationList().get(0), new Participation(student, tutorial,
+                attendanceList));
 
         UnmarkAttendanceByStudentCommand unmarkAttendanceByStudentCommand =
                 new UnmarkAttendanceByStudentCommand(index, attendance, tutorial);
