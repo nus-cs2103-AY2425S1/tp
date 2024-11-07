@@ -34,7 +34,8 @@ public class ListClaimsCommandTest {
     }
 
     private ReadOnlyPrudy getModelWithClaims() {
-        return setUpPrudyWithClaims(INDEX_SECOND_CLIENT, PolicyType.HEALTH, new Claim(ClaimStatus.PENDING, "Hospitalization"));
+        return setUpPrudyWithClaims(INDEX_SECOND_CLIENT, PolicyType.HEALTH, new Claim(ClaimStatus.PENDING,
+                "Hospitalization"));
     }
 
     private ReadOnlyPrudy getModelWithNoClaims() {
@@ -114,7 +115,8 @@ public class ListClaimsCommandTest {
      * Generates the expected success message for a client with claims.
      */
     private String getExpectedMessageWithClaims(Client client, PolicyType policyType, String claimsDetails) {
-        return String.format(ListClaimsCommand.MESSAGE_LIST_CLAIMS_SUCCESS, policyType, client.getName(), claimsDetails);
+        return String.format(ListClaimsCommand.MESSAGE_LIST_CLAIMS_SUCCESS, policyType, client.getName(),
+                claimsDetails);
     }
 
     /**
