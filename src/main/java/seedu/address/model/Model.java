@@ -77,8 +77,8 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the unfiltered person list */
-    ObservableList<Person> getUnfilteredPersonList();
+    /** Returns an unmodifiable view of the unsorted and unfiltered person list */
+    ObservableList<Person> getUnsortedAndUnfilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

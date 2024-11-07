@@ -30,7 +30,7 @@ public class AddAttendanceTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_addAttendanceUnfilteredList_success() {
+    public void execute_addAttendanceUnsortedAndUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HashMap<AbsentDate, AbsentReason> attendances = new HashMap<>();
         attendances.put(new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
@@ -75,8 +75,8 @@ public class AddAttendanceTest {
     }
 
     @Test
-    public void execute_deleteAttendanceUnfilteredList_success() {
-        Person secondPerson = model.getUnfilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+    public void execute_deleteAttendanceUnsortedAndUnfilteredList_success() {
+        Person secondPerson = model.getUnsortedAndUnfilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         HashMap<AbsentDate, AbsentReason> attendances = secondPerson.getAttendances();
 
         List<AbsentDate> absentDateList = new ArrayList<>(attendances.keySet());
@@ -94,7 +94,7 @@ public class AddAttendanceTest {
     }
 
     @Test
-    public void execute_deleteAttendanceWhenAttendanceIsEmptyUnfilteredList_failure() {
+    public void execute_deleteAttendanceWhenAttendanceIsEmptyUnsortedAndUnfilteredList_failure() {
         AddAttendanceCommand deleteAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_PERSON,
                 new AbsentDate("10-10-2024"), new AbsentReason(""));
         assertCommandFailure(deleteAttendanceCommand, model, AddAttendanceCommand.MESSAGE_ABSENT_DATE_NOT_FOUND);
@@ -118,8 +118,8 @@ public class AddAttendanceTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getUnfilteredPersonList().size() + 1);
+    public void execute_invalidPersonIndexUnsortedAndUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getUnsortedAndUnfilteredPersonList().size() + 1);
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(outOfBoundIndex,
                 new AbsentDate("10-10-2024"), new AbsentReason("Sick"));
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
