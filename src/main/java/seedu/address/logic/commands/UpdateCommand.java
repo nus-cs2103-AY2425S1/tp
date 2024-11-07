@@ -26,7 +26,7 @@ import seedu.address.model.person.Person;
 /**
  * Updates an Event in the address book.
  */
-public class EditEventCommand extends Command {
+public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates an event in the address book. "
@@ -62,15 +62,15 @@ public class EditEventCommand extends Command {
     private final Index indexToUpdate;
 
     /**
-     * Creates an EditEventCommand to update an event to the specified {@code Event}
+     * Creates an UpdateCommand to update an event to the specified {@code Event}
      */
-    public EditEventCommand(String newName,
-                            LocalDate newStartDate,
-                            LocalDate newEndDate,
-                            Address newLocation,
-                            Set<Index> addIndices,
-                            Set<Index> removeIndices,
-                            Index indexToUpdate) {
+    public UpdateCommand(String newName,
+                         LocalDate newStartDate,
+                         LocalDate newEndDate,
+                         Address newLocation,
+                         Set<Index> addIndices,
+                         Set<Index> removeIndices,
+                         Index indexToUpdate) {
         this.newName = newName;
         this.newStartDate = newStartDate;
         this.newEndDate = newEndDate;
@@ -141,18 +141,18 @@ public class EditEventCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditEventCommand)) {
+        if (!(other instanceof UpdateCommand)) {
             return false;
         }
 
-        EditEventCommand otherEditEventCommand = (EditEventCommand) other;
-        return newName.equals(otherEditEventCommand.newName)
-                && (indexToUpdate == otherEditEventCommand.indexToUpdate)
-                && (newStartDate == otherEditEventCommand.newStartDate)
-                && (newEndDate == otherEditEventCommand.newEndDate)
-                && (newLocation.equals(otherEditEventCommand.newLocation))
-                && (addIndices.equals(otherEditEventCommand.addIndices))
-                && (removeIndices.equals(otherEditEventCommand.removeIndices));
+        UpdateCommand otherUpdateCommand = (UpdateCommand) other;
+        return newName.equals(otherUpdateCommand.newName)
+                && (indexToUpdate == otherUpdateCommand.indexToUpdate)
+                && (newStartDate == otherUpdateCommand.newStartDate)
+                && (newEndDate == otherUpdateCommand.newEndDate)
+                && (newLocation.equals(otherUpdateCommand.newLocation))
+                && (addIndices.equals(otherUpdateCommand.addIndices))
+                && (removeIndices.equals(otherUpdateCommand.removeIndices));
     }
 
     @Override
