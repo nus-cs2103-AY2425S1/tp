@@ -46,8 +46,8 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        Predicate<Person> predicateMatch = this::test;
-        Comparator<Person> sortOrderComparator = this::compare;
+        Predicate<Person> predicateMatch = this::predicateMatch;
+        Comparator<Person> sortOrderComparator = this::sortOrderComparator;
         model.updateFilteredPersonList(predicateMatch, sortOrderComparator);
         List<Person> filteredList = model.getFilteredPersonList();
         if (filteredList.isEmpty()) {
@@ -81,13 +81,13 @@ public class SortCommand extends Command {
                 || (tagName != null && tagName.equals(otherCommand.tagName));
     }
 
-    private boolean test(Person person) {
+    private boolean predicateMatch(Person person) {
         return tagName != null
                 && !tagName.isEmpty()
                 && person.getTags().stream().anyMatch(tag -> tag.tagName.equalsIgnoreCase(tagName));
     }
 
-    private int compare(Person p1, Person p2) {
+    private int sortOrderComparator(Person p1, Person p2) {
         Optional<Tag> p1Tag = p1.getTags()
                 .stream()
                 .filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
@@ -132,11 +132,13 @@ public class SortCommand extends Command {
             compareResult = 1;
         }
 
-        if (sortOrder.equalsIgnoreCase(ASCENDING_KEYWORD)) {
-            return compareResult;
-        } else {
-            return -compareResult;
-        }
+        return determineComparisonOrder(compareResult, sortOrder.equalsIgnoreCase(ASCENDING_KEYWORD));
+    }
+
+    private int determineComparisonOrder(int compareResult, boolean isAscending) {
+        return isAscending
+                ? compareResult
+                : -compareResult;
     }
 
     @Override
