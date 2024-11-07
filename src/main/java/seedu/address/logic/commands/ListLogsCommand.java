@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
 
@@ -58,17 +57,6 @@ public class ListLogsCommand extends Command {
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, identityNumber));
         }
 
-        // Note: this sb is temporary for the duration that the command is not properly hooked up to the gui.
-        StringBuilder sb = new StringBuilder();
-        sb.append("The NRIC you inputted is: ").append(this.identityNumber).append("\n");
-        sb.append("The logs for this person are:\n");
-
-        for (Log log : model.getSessionLog(personIndex)) {
-            sb.append("Appointment Date: ").append(log.getAppointmentDate())
-                    .append(", Entry: ").append(log.getEntry()).append("\n");
-        }
-
-        model.getSessionLog(personIndex);
         return new CommandResult(String.format(MESSAGE_LIST_LOG_SUCCESS,
                 person.getName(), identityNumber),
                 false, false, false, true, personIndex, false, null, null, null);
