@@ -129,23 +129,24 @@ Assigns vendors to events.
 * `view v/2` then `assign 1` will assign the 1st event to the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `assign 3` will assign the 3rd vendor to the current viewed event, which is the 1st event.
 
-### Find items by keywords: `find`
+### Searching for Vendors & Events: `find`
 
-Finds vendors or events whose attributes contain any of the space separated keywords given.
+Finds vendors or events whose attributes contain any of the space-separated keywords provided.
 
-Format: `find v/KEYWORD [MORE_KEYWORDS]` or `find e/KEYWORD [MORE_KEYWORDS]`
+#### Format: `find v/KEYWORD [MORE_KEYWORDS]` or `find e/KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* Any partial matches will still be matched e.g. `han` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* All attributes of the `Vendor` or `Event` are searched, ie. name, phone number, date, descriptions and tags.
+#### Notes:
+* The search is case-insensitive. e.g. `party` will match `Party`
+* Any partial matches will still be matched e.g. `par` will match `party`
+* The order of the keywords does not matter. e.g. `party birthday` will match `birthday party`
+* All attributes of the `Vendor` or `Event` are searched, i.e. name, phone number, date, descriptions and tags.
 * Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* If no matches are found, no changes will be made to the current view, and a message will be shown to the user indicating that no vendors/events were found.
+  * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
+* If no matches are found, the user will be informed and the current view will remain unchanged.
 
-Examples:
-* `find v/John` returns `john` and `John Doe`
-* `find e/alex david` returns `Alex Yeoh`, `David Li`<br>
+#### Examples:
+* `find v/catering` returns `catering` and `Catering Solutions`
+* `find e/party wedding` returns `Birthday Party` and `John's Wedding`<br>
 
 ### Deleting a person : `delete`
 
@@ -210,12 +211,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find v/ KEYWORD [MORE_KEYWORDS] or e/ KEYWORD [MORE_KEYWORDS]` <br> e.g., `find v/James Jake`, `find e/Party at Alice's`
-**List**   | `list`
-**Help**   | `help`
+| Action     | Format, Examples                                                                                                                                                      |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                                               |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**   | `find v/KEYWORD [MORE_KEYWORDS] or e/KEYWORD [MORE_KEYWORDS]` <br> e.g., `find v/Catering Band`, `find e/Party Wedding`                                               |
+| **List**   | `list`                                                                                                                                                                |
+| **Help**   | `help`                                                                                                                                                                |
