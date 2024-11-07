@@ -3,8 +3,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
 <GridPane fx:id="view" xmlns:fx="http://javafx.com/fxml/1">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" maxWidth="120.0" />
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="300.0" />
+    </columnConstraints>
+
     <Label text="Name:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <Label fx:id="name" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
