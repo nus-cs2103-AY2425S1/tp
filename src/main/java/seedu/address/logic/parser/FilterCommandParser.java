@@ -2,23 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.ArgumentTokenizer.checkPrefixPresentAndValidPrefix;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMOVEALLERGY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 import java.time.LocalDate;
@@ -42,7 +27,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
 
-        checkPrefixPresentAndValidPrefix(args, PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_HEALTHSERVICE);
+        checkPrefixPresentAndValidPrefix(args, FilterCommand.MESSAGE_USAGE,
+                PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_HEALTHSERVICE);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_STARTDATE, PREFIX_ENDDATE, PREFIX_HEALTHSERVICE);

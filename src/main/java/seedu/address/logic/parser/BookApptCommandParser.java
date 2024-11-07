@@ -3,22 +3,8 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.ArgumentTokenizer.checkPrefixPresentAndValidPrefix;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -47,7 +33,8 @@ public class BookApptCommandParser implements Parser<BookApptCommand> {
         assert args != null : "Arguments cannot be null";
         logger.info("Parsing BookApptCommand");
 
-        checkPrefixPresentAndValidPrefix(args, PREFIX_DATETIME, PREFIX_HEALTHSERVICE);
+        checkPrefixPresentAndValidPrefix(args, BookApptCommand.MESSAGE_USAGE,
+                PREFIX_DATETIME, PREFIX_HEALTHSERVICE);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME,
             PREFIX_HEALTHSERVICE);

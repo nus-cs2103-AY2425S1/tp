@@ -38,7 +38,8 @@ public class ArgumentTokenizer {
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
      * @param prefixes   Prefixes to tokenize the arguments string with
      */
-    public static void checkPrefixPresentAndValidPrefix(String argsString, Prefix... prefixes) throws ParseException {
+    public static void checkPrefixPresentAndValidPrefix(String argsString, String messageUsage, Prefix... prefixes)
+            throws ParseException {
         String[] splitArgs = argsString.split("\\|");
 
         checkPrefixesPresent(splitArgs, prefixes);
@@ -66,10 +67,16 @@ public class ArgumentTokenizer {
      */
     public static void checkValidPrefix(String[] splitArgs, Prefix... prefixes) throws ParseException {
         List<String> prefixesPresent = Arrays.stream(splitArgs, 0, splitArgs.length - 1)
-                .map(arg -> arg.substring(arg.length() - 1)).toList();
+                .map(ArgumentTokenizer::getPrefix).toList();
+
         for (String prefixString : prefixesPresent) {
             checkEachPrefix(prefixString, prefixes);
         }
+    }
+
+    public static String getPrefix(String arg) {
+        String[] splitSingleArg = arg.split(" ");
+        return splitSingleArg[splitSingleArg.length - 1];
     }
 
     /**
@@ -79,11 +86,14 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      */
     public static void checkEachPrefix(String prefixString, Prefix... prefixes) throws ParseException {
-        Stream<String> prefixStrings = Arrays.stream(prefixes).map(prefix -> prefix.getPrefix().substring(0,1));
+
+        Stream<String> prefixStrings = Arrays.stream(prefixes).map(Prefix::getPrefix)
+                .map(prefix -> prefix.substring(0, prefix.length() - 1));
+
         boolean isValid = prefixStrings.anyMatch(prefixString::equals);
 
         if (!isValid) {
-            throw new ParseException("Prefix " + prefixString + " is invalid" );
+            throw new ParseException("Prefix " + prefixString + " is invalid");
         }
     }
 

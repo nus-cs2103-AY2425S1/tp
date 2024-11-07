@@ -7,11 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXISTINGCONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHRISK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOKPHONE;
@@ -45,9 +43,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         logger.info("Attempting to parse EditCommand arguments.");
         requireNonNull(args);
 
-        checkPrefixPresentAndValidPrefix(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX,
-                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
-                PREFIX_ALLERGY, PREFIX_REMOVEALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION, PREFIX_NOTE);
+        checkPrefixPresentAndValidPrefix(args, EditCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE,
+                PREFIX_SEX, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_BLOODTYPE, PREFIX_NOKNAME,
+                PREFIX_NOKPHONE, PREFIX_ALLERGY, PREFIX_REMOVEALLERGY, PREFIX_HEALTHRISK, PREFIX_EXISTINGCONDITION,
+                PREFIX_NOTE);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_BIRTHDATE, PREFIX_SEX,

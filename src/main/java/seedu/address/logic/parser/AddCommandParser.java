@@ -30,7 +30,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        checkPrefixPresentAndValidPrefix(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
+        checkPrefixPresentAndValidPrefix(args, AddCommand.MESSAGE_USAGE, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
                 PREFIX_BIRTHDATE, PREFIX_PHONE);
 
         ArgumentMultimap argMultimap =
