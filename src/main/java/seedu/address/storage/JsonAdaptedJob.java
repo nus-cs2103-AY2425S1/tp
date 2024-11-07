@@ -15,7 +15,6 @@ import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
 import seedu.address.model.job.JobSalary;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
