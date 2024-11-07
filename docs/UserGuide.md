@@ -354,6 +354,6 @@ Action     | Format, Examples
 **Remark** | `remark INDEX -a REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 -a Great progress in Math`<br> `remark INDEX -d REMARK_INDEX` to delete a specific remark from the student at `INDEX`<br> e.g., `remark 1 -d 2` to delete the second remark of student 1.
 **Add Lesson** | `addlesson INDEX l/LESSON [l/LESSON]`<br> e.g., `addlesson 1 l/Monday 0900-1100`
 **Delete Lesson** | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]`<br> e.g., `deletelesson 1 li/1`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`<br> e.g., `find n/James jake t/science`
 **List**   | `list`
 **Help**   | `help`
