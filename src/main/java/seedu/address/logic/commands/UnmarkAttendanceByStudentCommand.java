@@ -41,7 +41,7 @@ public class UnmarkAttendanceByStudentCommand extends Command {
             "Unmarked attendance of %1$s student for %2$s tutorial for %3$s";
 
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
-            "The student does not take %1$s tutorial";
+            "Student %1$s is not enrolled in %2$s tutorial";
 
     public static final String MESSAGE_ATTENDANCE_NOT_MARKED =
             "%1$s's attendance for date %2$s for %3$s tutorial has not been marked before.";
@@ -142,8 +142,8 @@ public class UnmarkAttendanceByStudentCommand extends Command {
                     logger.warning(String.format(MESSAGE_LOGGER_FOR_EXCEPTION, MarkAttendanceByStudentCommand.class
                             + "\n - No participation found for " + student.getFullName()
                             + " for tutorial: " + tutorial.getSubject()));
-                    return new CommandException(
-                            String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject()));
+                    return new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT,
+                                    student.getFullName(), tutorial.getSubject()));
                 });
     }
 
