@@ -12,6 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
+// Solution below adapted from https://se-education.org/guides/tutorials/ab3AddRemark.html
 /**
  * Changes the remark of an existing person in the address book.
  */

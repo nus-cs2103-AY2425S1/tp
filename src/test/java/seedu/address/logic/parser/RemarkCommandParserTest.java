@@ -12,7 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.model.person.Remark;
 
-
+// Solution below adapted from https://se-education.org/guides/tutorials/ab3AddRemark.html
 public class RemarkCommandParserTest {
 
     private final RemarkCommandParser parser = new RemarkCommandParser();
