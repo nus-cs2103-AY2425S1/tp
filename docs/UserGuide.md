@@ -260,7 +260,7 @@ Searches T_Assistant for students with fields that match the search query.
     * Email
     * Group name
         * **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
-      > `!nogroup` is a special query that searches for students with no groups.
+      > `!nogroup` is a special query that searches for students with no groups, it is also case-insensitive.
 
 <box type="info" seamless>
 Take note that if any other student with a group happens to have a field that matches the special keyword, they will also appear in the results.
