@@ -1,6 +1,6 @@
 ---
   layout: default.md
-    title: "Chen Le's Project Portfolio Page"
+  title: "Chen Le's Project Portfolio Page"
 ---
 
 

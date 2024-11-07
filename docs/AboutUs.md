@@ -15,9 +15,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/jeremychiaaaaa.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/jeremychiaaaa)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/jeremychiaaaaa)]
+[[portfolio](team/jeremy.md)]
 
 * Role: Code Quality 
 
@@ -26,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/verakohh.png" width="200px">
 
 [[github](https://github.com/verakohh)]
-[[portfolio](https://www.linkedin.com/in/verarkwj/)]
+[[portfolio](team/vera.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -35,7 +34,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/arnav12344.png" width="200px">
 
-[[github](https://github.com/arnav12344)] [[portfolio](team/johndoe.md)]
+[[github](https://github.com/arnav12344)] 
+[[portfolio](team/arnav.md)]
 
 * Role: Developer, Admin
 * Responsibilities: Data
@@ -55,7 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/chenle228.png" width="200px">
 
 [[github](https://github.com/chenle228)]
-[[portfolio](https://github.com/chenle228)]
+[[portfolio](team/chenle.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines

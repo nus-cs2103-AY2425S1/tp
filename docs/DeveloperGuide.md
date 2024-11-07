@@ -14,7 +14,20 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Generative AI tools like ChatGPT were heavily used for creating detailed Javadocs, commit messages, test creation, and occasional code refactoring throughout the development of UniVerse. These tools provided valuable assistance in streamlining documentation and improving code quality.
+
+Additionally, we acknowledge the following resources and tools that contributed to the success of this project:
+
+* **PlantUML**: Used for designing UML diagrams, including class and sequence diagrams, to visualize the architecture and interactions within UniVerse.
+* **JavaFX**: Utilized for building the Graphical User Interface (GUI) components to ensure a user-friendly experience.
+* **JUnit 5**: Leveraged for comprehensive unit and integration testing, helping us maintain code reliability and robustness.
+* **Gradle**: Employed as the build automation tool for dependency management and project builds.
+* **IntelliJ IDEA**: The primary Integrated Development Environment (IDE) used for writing and debugging the codebase.
+* **MarkBind**: Used for generating and maintaining the project’s documentation website, ensuring an organized and accessible layout.
+* **GitHub Actions**: Implemented for continuous integration and automated testing to catch potential issues early in the development cycle.
+* **Various open-source Java libraries**, including Apache Commons and Google Guava, were utilized for utility functions and collections enhancements.
+
+Special thanks to the **CS2103/T teaching team** for their structured guidance, feedback, and provision of relevant learning materials that helped shape this project.
 
 --------------------------------------------------------------------------------------------------------------------
 
