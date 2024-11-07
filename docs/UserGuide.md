@@ -285,8 +285,7 @@ Edits the name of a group that currently exists.
 
 Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
 
-* Changes the group with the name `OLD_GROUP_NAME` to
-  `NEW_GROUP_NAME`.
+* Changes the group with `OLD_GROUP_NAME` to `NEW_GROUP_NAME`.
 * The old group name must exist, and the new group name must not already be in use.
 * If either of the above conditions are not met, the command will fail.
 
