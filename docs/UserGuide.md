@@ -131,7 +131,7 @@ Examples:
 
 Finds persons that match the specified filters.
 
-Format: `find [n/StartOfName]... [a/PartOfAddress]... [pri/PRIORITY]... [income/INCOME]...`
+Format: `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`
 
 * The search is case-insensitive. e.g `n/alice` will match `Alice`.
 * At least one filter must be specified (i.e. no empty `find` command).
@@ -151,17 +151,18 @@ Examples:
 
 Sorts persons in the order of the specified parameter.
 
-Format: `sort [name] [address] [priority] [income] [updated]`
+Format: `sort PARAMETER`
 
-* Whenever SocialBook is launched, the persons are auto-sorted in order of their priority from HIGH to LOW.
+* The only valid parameters are: name, address, priority, income, updated.
+* Only one parameter can be specified at any time.
 * The parameter is case-insensitive. e.g `sort name` works the same as `sort NAME`.
+* Whenever SocialBook is launched, the persons are auto-sorted in order of their priority from HIGH to LOW.
 * For name, the sorting is in alphabetical order.
 * For address, the sorting is in lexicographical order (similar to alphabetical order but also takes the special characters and numerical digits into account). 
   * Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` `sort address` will sort the contact list of those staying in Clementi in order of their address. 
 * For priority, the sorting is in order from HIGH to LOW.
 * For income, the sorting order is in increasing order from the lowest to highest.
 * For updated, the sorting order is from the person updated least recently to the one updated most recently.
-* Only one parameter can be specified at any time.
 
 Examples:
 * `sort name`
@@ -370,22 +371,22 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action           | Format, Examples
------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**        | `clear`
-**Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`
-**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**         | `find [n/START_OF_NAME] [a/PART_OF_ADDRESS]`<br> e.g., `find James Jake`
-**Sort**         | `sort `
-**Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
-**Undo**         | `undo`
-**List**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`
-**Statistics**   | `statistics` <br> Shows general statistics
-**Scheme**       | `scheme INDEX` <br> e.g., `scheme 1`
-**AddScheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`
-**ViewScheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`
-**DeleteScheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`
-**Archive**      | `archive INDEX` <br> e.g., `archive 1`
-**Unarchive**      | `unarchive INDEX` <br> e.g., `unarchive 1`
-**Help**         | `help`
+| Action           | Format, Examples                                                                                                                                                                                                |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                           |
+| **Clear**        | `clear`                                                                                                                                                                                                         |
+| **Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`                                                                                                              |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Get**          | `get PARAMETERS`<br> e.g.,`get email phone`                                                                                                                                                                     |
+| **Find**         | `find [n/START_OF_NAME]... [a/PART_OF_ADDRESS]... [pri/PRIORITY]... [income/INCOME]...`<br> e.g.,`find n/A n/B a/clementi pri/High`                                                                             |
+| **Sort**         | `sort [name] [address] [priority] [income] [updated]`<br> e.g.,`sort name`                                                                                                                                      |
+| **Undo**         | `undo`                                                                                                                                                                                                          |
+| **List**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                                        |
+| **Statistics**   | `statistics` <br> Shows general statistics                                                                                                                                                                      |
+| **Scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                            |
+| **AddScheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                            |
+| **ViewScheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                                    |
+| **DeleteScheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                                      |
+| **Archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                          |
+| **Unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                      |
+| **Help**         | `help`                                                                                                                                                                                                          |
