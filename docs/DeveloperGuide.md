@@ -511,7 +511,7 @@ Priorities:
 
 1.  User requests to list clients
 2.  AddressBook shows a list of clients
-3.  User requests to delete a client’s data and inputs of the client's attributes (name, phone number, or email).
+3.  User requests to delete a client’s data and inputs the client's attributes (name, phone number, and/or email).
 4.  AddressBook validates the input
 5.  AddressBook deletes the person
 
@@ -534,11 +534,123 @@ Priorities:
 
   Use case ends.
 
-* 4c. Information mismatch
+* 4c. Client Does Not Exist
 
-    * 4c1. AddressBook shows an error message
+    * 4c1. AddressBook shows an error message.
 
   Use case ends.
+
+**Use case: Edit client data** <br>
+Preconditions: AddressBook has correct view, including client to edit
+
+**MSS**
+
+1.  User requests to edit details and inputs index and updated client's information
+2.  AddressBook validates the input
+3.  AddressBook confirms the successful edit of client's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid Input Format
+  * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+* 2b. Duplicate Client
+    * 2b1. AddressBook detects multiple entries matching the provided attribute (name, phone number, or email).
+    * 2b2. AddressBook shows an error message indicating that multiple clients match the input
+    * 2b3. User requests to edit the client's data without matching details 
+    * 2b4. AddressBook validates the input
+    * 2b5. Addressbook edits the person
+
+  Use case ends.
+
+**Use case: Add appointment date for client**
+
+**MSS**
+
+1. User requests to add date and inputs the client's attributes (name, phone number, and/or email) and appointment date.
+2. AddressBook validates the input.
+3. AddressBook confirms the successful addition of appointment date to client. 
+4. AddressBook shows a list of all clients.
+
+    Use case ends.
+
+**Extensions**
+
+* 4a.  Invalid Input Format
+    * 4a1. AddressBook shows an error message.
+
+  Use case ends.
+
+* 4b. Appointment Date Overlaps
+
+    * 4b1. AddressBook detects existing person with date inputted.
+    * 4b2. AddressBook displays information on existing person with overlapped date.
+    * 4b3. AddressBook shows an error message indicating that there is a clash in appointment time.
+
+  Use case ends.
+
+* 4c. Client Does Not Exist
+
+    * 4c1. AddressBook shows an error message.
+
+  Use case ends.
+
+**Use case: Show schedule for the day**
+
+**MSS**
+
+1.  User requests to see the schedule for the day and inputs the date.
+2.  AddressBook validates the input.
+3.  AddressBook shows the schedule for the day.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.  Invalid Input Format
+    * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+**Use case: Find client's name by keywords**
+
+**MSS**
+
+1. User requests to find client and inputs keywords to find name.
+2. AddressBook shows the list of persons whose name matches the keywords.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No Matches
+  * 1a1. AddressBook shows message.
+  * 1a2. AddressBook displays nothing in the list.
+
+  Use case ends.
+
+**Use case: Filter clients by parameters**
+
+**MSS**
+
+1. User requests to filter client and inputs parameters to filter by.
+2. AddressBook validates the input.
+3. AddressBook shows list of persons that matches parameters provided.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.  Invalid Input Format
+    * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+**To be added as potential future enhancements:**
 
 **Use case: Record Client Payment**
 
@@ -561,47 +673,6 @@ Priorities:
 
 * 4b.  Name and Phone Number mismatch
     * 4b1. AddressBook shows an error message.
-
-  Use case ends.
-
-**Use case: Tag a client’s priority**
-
-**MSS**
-
-1.  User requests to list clients
-2.  AddressBook shows a list of clients
-3.  User requests to tag a specific person and specifies their name, number and the tag.
-4.  AddressBook validates the input.
-5.  AddressBook tags the client's priority.
-
-    Use case ends.
-
-**Extensions**
-
-* 4a.  Invalid Input Format
-    * 4a1. AddressBook shows an error message.
-
-  Use case ends.
-
-* 4b.  Name and Phone Number mismatch
-    * 4b1. AddressBook shows an error message.
-
-  Use case ends.
-
-**Use case: Show schedule for the day**
-
-**MSS**
-
-1.  User requests to see the schedule for the day and inputs the date.
-2.  AddressBook validates the input.
-3.  AddressBook shows the schedule for the day.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a.  Invalid Input Format
-    * 2a1. AddressBook shows an error message.
 
   Use case ends.
 
