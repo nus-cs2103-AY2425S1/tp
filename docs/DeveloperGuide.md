@@ -404,14 +404,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The criteria is missing from the given input.
 
-    * 1a1. ResearchRoster shows a message indicating the filtered list is empty.
-    * 1a2. ResearchRoster shows an empty filtered list.
+    * 2a1. ResearchRoster shows an error message.
 
       Use case restarts.
 
 * 2a. No person records that matches the criteria.
 
-    * 2a1. ResearchRoster shows an error message.
+    * 2a1. ResearchRoster shows a message indicating the filtered list is empty.
+    * 2a2. ResearchRoster shows an empty filtered list.
 
       Use case ends.
 
@@ -746,10 +746,10 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
-   
+
    1. Open a command window. Run the `java -version` command to ensure that you are using Java 17.
 
-   1. Launch the jar file using the `java -jar` command. Use double-clicking as a last resort.<br> 
+   1. Launch the jar file using the `java -jar` command. Use double-clicking as a last resort.<br>
    Expected: Shows the GUI with a set of sample contacts.
 
 1. Saving window preferences
@@ -761,8 +761,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Exiting
     1. Test case: `exit`<br>
-       Expected: Exit message is displayed, followed by the application closing. 
-   
+       Expected: Exit message is displayed, followed by the application closing.
+
 
 ### Adding a person: `add`
 
@@ -776,12 +776,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add n/Emma Lee e/emma@gmail.com`<br>
        Expected: Error message "Invalid command format!" is displayed due to missing mandatory fields.
-   
+
 ### Editing a person : `edit`
 
 1. Edits an existing person in the address book
 
-    1. Test case: `edit 1 n/Betsy Crower t/1B -t/2B`<br> 
+    1. Test case: `edit 1 n/Betsy Crower t/1B -t/2B`<br>
        Expected: Edits the name of the 1st person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`.
 
     1. Test case: `edit 1`<br>
@@ -855,7 +855,7 @@ in order to figure out how we can modify it, work with it, or work around it to 
 * This resulted in us putting in a high amount of effort to maintain good OOP and use/build off the existing classes
 and methods in AB3, rather than simply creating new classes, methods and solutions that may have overlapped with
 existing classes and methods.
-* The high effort was also because some of the existing classes methods posed limitations to what we wanted to 
+* The high effort was also because some of the existing classes methods posed limitations to what we wanted to
 implement, and we had to come up with workarounds to achieve our desired modifications.
 * For example, `Edit` command class and `EditPersonDescriptor` class needed lots of reworking because the initial
 functionality only allowed to overwrite list of tags whilst our product aimed to append to the list and delete from
