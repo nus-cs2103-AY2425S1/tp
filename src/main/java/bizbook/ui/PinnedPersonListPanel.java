@@ -17,7 +17,9 @@ import javafx.scene.layout.Region;
  */
 public class PinnedPersonListPanel extends UiPart<Region> {
     private static final String FXML = "PinnedPersonListPanel.fxml";
+    private static final Integer INITIAL_INDEX_VALUE = -1;
     private final Logger logger = LogsCenter.getLogger(PinnedPersonListPanel.class);
+
 
     @FXML
     private ListView<Person> pinnedPersonListView;
@@ -39,7 +41,7 @@ public class PinnedPersonListPanel extends UiPart<Region> {
         int index = pinnedPersonListView.getSelectionModel().getSelectedIndex();
         Person selectedPerson = pinnedPersonListView.getSelectionModel().getSelectedItem();
 
-        if (index != -1) {
+        if (index != INITIAL_INDEX_VALUE) {
             focusedPerson.set(selectedPerson);
             logger.info("Clicked on pinned person: " + selectedPerson + " at index " + index);
         } else {
