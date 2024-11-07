@@ -19,7 +19,6 @@ import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.index.Index;
-import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.EditCommand.EditCompanyDescriptor;
 import seedu.internbuddy.model.AddressBook;
 import seedu.internbuddy.model.Model;
