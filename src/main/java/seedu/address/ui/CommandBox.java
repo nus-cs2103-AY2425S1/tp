@@ -51,14 +51,14 @@ public class CommandBox extends UiPart<Region> {
                         + "ecrs/EMERGENCY_CONTACT_RELATIONSHIP");
         commandSyntaxMap.put("archive", "archive [DESCRIPTION]");
         commandSyntaxMap.put("clear", "clear");
-        commandSyntaxMap.put("delete", "delete INDEX");
+        commandSyntaxMap.put("delete", "delete INDEX [ec/EMERGENCY_CONTACT_INDEX]");
         commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/ECINDEX "
                 + "ecname/EMERGENCY_CONTACT_NAME ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME "
                 + "dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("find", "find KEYWORD [MORE_KEYWORDS]");
         commandSyntaxMap.put("finddoc", "finddoc KEYWORD [MORE_KEYWORDS]");
         commandSyntaxMap.put("help", "help");
-        commandSyntaxMap.put("list", "list");
+        commandSyntaxMap.put("list", "list [SORT_ORDER]");
         commandSyntaxMap.put("listarchives", "listarchives");
         commandSyntaxMap.put("loadarchive", "loadarchive FILE_NAME");
         commandSyntaxMap.put("deletearchive", "deletearchive FILE_NAME");

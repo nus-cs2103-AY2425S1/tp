@@ -129,9 +129,68 @@ By following these sections, you can quickly find the information you need and m
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+---
+
+### Suggestion and Autocomplete Feature
+
+### Overview
+
+The CommandBox in the MedConnect application offers two major features to assist users while typing commands:
+
+- **Suggestion**: Provides visible hints about the expected command syntax as the user types.
+- **Autocomplete**: Helps complete partially typed commands when pressing the `Control` key.
+
+These features aim to enhance the user's command entry experience, reduce the need for memorizing syntax, and avoid typing errors.
+
+---
+
+### Suggestion Feature
+![suggestion](images/Suggestion.png)
+
+> **Description**: As you begin typing a command, suggestions are displayed to provide context about the expected syntax. For example, if you start typing `add`, the suggestion will provide all required and optional parameters related to the `add` command. This is enforced by dynamically checking substring of input to the expected output, except areas where personal details are to be filled.
+
+**Usage**:
+- As soon as you begin typing a valid command (e.g., `add`, `edit`, `find`), a suggestion will be displayed showing the entire command syntax.
+- If you make an incorrect entry (e.g., type `adding`), the suggestion will be hidden to indicate a problem with the syntax.
+
+**Example**:
+```
+add (n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)
+
+add n/Saajid Shaik p/82617860 (e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ...)
+
+where the words in brackets "()", are suggested by the system
+```
+This suggestion will be displayed as soon as you start typing `add`.
+
+### Autocomplete Feature
+![Autocomplete demonstration](images/autocomplete.gif)
+
+> **Description**: The Autocomplete feature allows the user to complete partially typed commands or parameters by pressing the `Control` key.
+
+**Usage**:
+- When a command is partially typed (e.g., `ad`), pressing `Control` will automatically complete it to the full command (`add`).
+- When the command word 'add' is typed, we move on to the slash commands where the autocompletes stops at the slash to allow users to type their personal details. E.g. `add` ->`add n/`
+- Autocomplete works for command words as well as parameters, helping you quickly complete complex entries without fully typing each part.
+- Autocomplete will only work if the input before pressing `Control` is a valid substring of a command.
+
+Do take note, for commands like `delete index`, since index can be any number, there will be no autocomplete as there is no meaning to autocomplete the name "INDEX" itself.
+Other examples include `add n/` -> `add n/ p/` as there is no value in autocomplete the name "NAME" itself.
+
+**Example**:
+- Type `add`, and then press `Control` to autocomplete `add n/`.
+- Type `add n/Saajid Shaik`, and then press `Control` to autocomplete `add n/Saajid Shaik p/`.
+
+### Additional Notes
+
+- **Incorrect Inputs**: If the input is incorrect or deviates from the expected syntax, suggestions will disappear, and autocomplete will not work. This helps users recognize mistakes early.
+- **Separation**: The suggestion is a passive visual cue, while autocomplete requires user action (pressing `Control`). Both features work together but serve different purposes.
+
+---
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpWindow.png)
 
@@ -408,10 +467,9 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. **When typing commands in the CommandBox**, inserting a space, e.g. `he lp` in between `he` and `lp`, will cause the suggestion and autocorrection to bug out and display incorrecty.
 [↑ Back to top](#table-of-contents)
 
----
 
 ## Glossary
 
