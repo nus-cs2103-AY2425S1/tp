@@ -929,6 +929,29 @@ testers are expected to do more _exploratory_ testing.
 
 3. *{ more test cases... }*
    
+
+### Managing Attendance 
+1. Marking students as present 
+    1. Prerequisites: Student enrolled in course MA1521, tutorial T17 
+   2. Test case: `attend-present m/A2345678Y c/MA1521 tut/T17 w/5` <br>
+Expected: Student marked present for week 5. Success message shown.
+   4. Test case: `attend-present m/A2345678Y c/MA1521 tut/T17 w/5` (marking again) <br>
+Expected: Error message shown. Attendance already marked.
+
+
+2. Marking students as absent 
+    1. Prerequisites: Student enrolled in course MA1521, tutorial T17 
+   2. Test case: `attend-absent m/A2345678Y c/MA1521 tut/T17 w/5` <br>
+Expected: Student marked absent for week 5. Success message shown.
+    3. Test case: `attend-absent m/A9999999X c/MA1521 tut/T17 w/5` <br>
+Expected: Error message shown. Student not found.
+
+
+3. Clearing attendance records
+
+    1. Prerequisites: Student has existing attendance record 
+   2. Test case: `attend-clear m/A2345678Y c/MA1521 tut/T17 w/5` <br>
+Expected: Week 5 attendance cleared. Success message shown.
    
 ### Saving data
 
