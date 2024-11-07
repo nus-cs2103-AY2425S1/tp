@@ -201,7 +201,7 @@ It implements the following operations:
 
 * `Model#updateTransactionListPredicate(Predicate<Transaction>)` — Updates the transaction list to contain transactions that match any of the keywords.
 
-The following sequence diagram shows an example execution of command `findt 1 ...`, where `...` represents any number of keywords.
+The following sequence diagram shows an example execution of command `findt 1 keys`, where `keys` represents any number of keywords.
 
 <puml src="diagrams/FindTransactionsDiagram.puml" />
 
