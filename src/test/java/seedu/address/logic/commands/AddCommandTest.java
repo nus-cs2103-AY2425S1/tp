@@ -182,6 +182,16 @@ public class AddCommandTest {
         public Command getPreviousCommand() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addInputToLog(String input) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousInput() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -234,6 +244,10 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-    }
 
+        @Override
+        public void addInputToLog(String input) {
+
+        }
+    }
 }

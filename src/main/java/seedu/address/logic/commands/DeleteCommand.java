@@ -24,6 +24,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    private static final boolean IS_UNDOABLE = true;
 
     private final Index targetIndex;
 
@@ -48,7 +49,6 @@ public class DeleteCommand extends Command {
                 model.getAddressBookIndex(targetIndex.getZeroBased()));
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
-        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
@@ -58,6 +58,11 @@ public class DeleteCommand extends Command {
         assert !model.hasPerson(deletedPerson) : "Deleted person should not be in AddressBook";
 
         model.insertPerson(deletedPerson, deletedPersonIndex.getZeroBased());
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     @Override

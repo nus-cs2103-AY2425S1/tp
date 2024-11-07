@@ -13,8 +13,10 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes previous user command.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Undid previous command.";
+    //public static final String MESSAGE_SUCCESS = "Undid previous command.";
+    public static final String MESSAGE_SUCCESS = "Undid previous command: %1$s";
     public static final String MESSAGE_INVALID_PREVIOUS_COMMAND = "No Command found to undo";
+    private static final boolean IS_UNDOABLE = false;
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -23,11 +25,16 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PREVIOUS_COMMAND);
         }
         previousCommand.undo(model);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getPreviousInput()));
     }
 
     @Override
     public void undo(Model model) {
 
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 }

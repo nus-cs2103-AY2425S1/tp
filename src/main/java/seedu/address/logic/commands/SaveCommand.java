@@ -9,6 +9,9 @@ import seedu.address.model.Model;
 public class SaveCommand extends Command {
     public static final String COMMAND_WORD = "save";
     public static final String MESSAGE_SUCCESS = "Address book has been saved!";
+    private static final boolean IS_UNDOABLE = false;
+
+    @Override
     public CommandResult execute(Model model) throws CommandException {
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
@@ -16,5 +19,10 @@ public class SaveCommand extends Command {
     @Override
     public void undo(Model model) {
 
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 }

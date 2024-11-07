@@ -24,6 +24,7 @@ public class FindTimeCommand extends Command {
             + "Tips: RANGE has format HHmm, same ending time as starting time is allowed.\n"
             + "Parameters: RANGE [MORE_RANGES]...\n"
             + "Example: " + COMMAND_WORD + " 1100-1230 2130-2245";
+    private static final boolean IS_UNDOABLE = true;
 
     private final PreferredTimeOverlapsRangesPredicate predicate;
     private Predicate<Person> previousPredicate;
@@ -37,7 +38,6 @@ public class FindTimeCommand extends Command {
         requireNonNull(model);
         previousPredicate = model.getCurrentPredicate();
         model.updateFilteredPersonList(predicate);
-        model.addCommandToLog(this);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -46,6 +46,11 @@ public class FindTimeCommand extends Command {
     public void undo(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(previousPredicate);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     @Override
