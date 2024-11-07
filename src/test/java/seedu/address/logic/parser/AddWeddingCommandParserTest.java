@@ -86,8 +86,4 @@ public class AddWeddingCommandParserTest {
                 expectedMessage);
     }
 
-    @Test
-    public void parse_repeatedNonTagValue_failure() {
-        // Assuming you have repeated values in your commands, you could create cases here
-    }
 }

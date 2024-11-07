@@ -52,6 +52,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_NO_MATCH_FOUND = "No contact with the name '%1$s' found.";
+    public static final String MESSAGE_TAG_UNEDITABLE = "The tag of a contact cannot be edited.";
 
     private final Name currentName;
     private final Name newName;

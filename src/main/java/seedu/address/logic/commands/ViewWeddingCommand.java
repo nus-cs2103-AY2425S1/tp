@@ -20,7 +20,7 @@ public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD_SHORT = "vw";
     public static final String COMMAND_FUNCTION = COMMAND_WORD_SHORT
             + ": Shows all persons involved in the weddings of the specified "
-            + "keywords (case-insensitive).\n";
+            + "keywords (case-insensitive).";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "Parameters: NAME & NAME\n"

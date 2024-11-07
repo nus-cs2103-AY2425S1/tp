@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Creates a DeleteCommand to delete the Person with the specified {@code Name}
-     * @param name
+     * @param name name of person to delete
      */
     public DeleteCommand(String name) {
         this.name = name.trim();

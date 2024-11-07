@@ -93,7 +93,7 @@ public class TagAddCommand extends Command {
         if (message.isEmpty()) {
             return new CommandResult(generateSuccessMessage(personToEdit, editedPerson));
         } else {
-            return new CommandResult(message + generateSuccessMessage(personToEdit, editedPerson));
+            return new CommandResult(message + "\n" + generateSuccessMessage(personToEdit, editedPerson));
         }
     }
 

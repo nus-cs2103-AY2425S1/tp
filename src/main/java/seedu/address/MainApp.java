@@ -187,13 +187,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting KnottyPlanner " + MainApp.VERSION);
+        logger.info("Starting KnottyPlanners " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping KnottyPlanner ] =============================");
+        logger.info("============================ [ Stopping KnottyPlanners ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
