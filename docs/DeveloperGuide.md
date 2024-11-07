@@ -250,23 +250,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo & redo executes**
 
 * **Alternative 1 (current choice):** Saves the entire CampusConnect.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** Each command that changes the state stores the change that it has made.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+  * Cons: Difficult and tedious to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,7 +276,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:  university students   
+**Target user profile**:  NUS undergraduate students
    
 * has a need to manage a significant number of contacts  
 * prefer desktop apps over other types   
@@ -540,8 +532,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -557,32 +547,28 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
-
 --------------------------------------------------------------------------------------------------------------------
-## **Future features**
+## **Appendix: Future features**
 Below is a list of features that we feel would further enhance the user experience.
 
-  | Feature                                                                         | Description                                                                         |
-  |---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-  | Clustering of tags                                                              | Group tags of the same categories together in the UI's display of the tags list.    |
-  | Pin contacts                                                                    | Keep selected contacts constantly shown at the top of the contacts list.            |
-  | Customize category colors                                                       | Change the colors of the categories to the user's preference.                       |
-  | Multiple numbers per contact                                                    | Allow more than one number per contact to accommodate multiple contact numbers.     |
-  | Custom fields for contacts                                                      | Add custom fields to the contacts added.                                            |
-  | Custom shortcut commands                                                        | Add custom shortcut commands to streamline actions within the application.          |
-  | Delete tag from all contacts                                                    | Remove a specific tag from all contacts at once.                                    |
-  | Dark mode                                                                       | Include a dark mode theme for easier viewing in low light conditions.               |
-  | Copy contact information                                                        | Enable copying of contact information to reduce errors from manual copying.         |
-  | Export contacts                                                                 | Provide an option to export contact information for easier sharing.                 |
+  |                                    Feature                                     | Description                                                                        |
+  |:------------------------------------------------------------------------------:|------------------------------------------------------------------------------------|
+  |                               Clustering of tags                               | Group tags of the same categories together in the UI's display of the tags list.   |
+  |                                  Pin contacts                                  | Keep selected contacts constantly shown at the top of the contacts list.           |
+  |                           Customize category colors                            | Change the colors of the categories to the user's preference.                      |
+  |                          Multiple numbers per contact                          | Allow more than one number per contact to accommodate multiple contact numbers.    |
+  |                           Custom fields for contacts                           | Add custom fields to the contacts added.                                           |
+  |                            Custom shortcut commands                            | Add custom shortcut commands to streamline actions within the application.         |
+  |                          Delete tag from all contacts                          | Remove a specific tag from all contacts at once.                                   |
+  |                                   Dark mode                                    | Include a dark mode theme for easier viewing in low light conditions.              |
+  |                            Copy contact information                            | Enable copying of contact information to reduce errors from manual copying.        |
+  |                                Export contacts                                 | Provide an option to export contact information for easier sharing.                |
 
 --------------------------------------------------------------------------------------------------------------------
 
