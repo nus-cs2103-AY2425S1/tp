@@ -150,7 +150,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     private void collectKeywords(ArgumentMultimap argMultimap, Prefix prefixTag, String keywordCannotBeEmpty,
-                                 ArrayList keywords) throws ParseException {
+                                 ArrayList<String> keywords) throws ParseException {
         for (String field : argMultimap.getAllValues(prefixTag)) {
             String prefixTagInput = field.trim();
             if (prefixTagInput.isEmpty()) {
