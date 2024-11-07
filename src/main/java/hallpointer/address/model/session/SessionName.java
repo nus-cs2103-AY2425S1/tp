@@ -10,7 +10,8 @@ import static java.util.Objects.requireNonNull;
 public class SessionName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Session names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Session names should only contain alphanumeric characters and spaces,\n"
+                    + "and at least one alphanumeric character should be present.";
 
     /*
      * The first character of the session name must not be a whitespace,

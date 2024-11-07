@@ -79,7 +79,7 @@ public class DeleteMemberCommandTest {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
 
         Index outOfBoundIndex = INDEX_SECOND_MEMBER;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of hall pointer list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getHallPointer().getMemberList().size());
 
         DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(outOfBoundIndex);
