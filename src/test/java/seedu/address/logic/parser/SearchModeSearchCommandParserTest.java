@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ATTENDEE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -68,7 +69,7 @@ public class SearchModeSearchCommandParserTest {
             AddressContainsKeywordsPredicate addressPredicate = new AddressContainsKeywordsPredicate(
                     new ArrayList<>(Arrays.asList("123", "Road")));
             PersonIsRolePredicate rolePredicate = new PersonIsRolePredicate(
-                    Collections.singletonList(RoleHandler.getRole("attendee")));
+                    Collections.singletonList(RoleHandler.getRole(VALID_ROLE_ATTENDEE)));
             Set<Predicate<Person>> predicates = new HashSet<>(Arrays.asList(namePredicate, phonePredicate,
                     emailPredicate, addressPredicate, rolePredicate));
             expectedCommand = new SearchModeSearchCommand(predicates);

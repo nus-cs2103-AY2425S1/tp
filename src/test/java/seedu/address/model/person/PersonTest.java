@@ -3,10 +3,13 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ROLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_ATTENDEE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_VENDOR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -120,7 +123,7 @@ public class PersonTest {
 
 
 
-        editedAlice = new PersonBuilder(ALICE).withRoles("vendor").build();
+        editedAlice = new PersonBuilder(ALICE).withRoles(VALID_ROLE_VENDOR).build();
         assertFalse(ALICE.equals(editedAlice));
 
         editedAlice = new PersonBuilder(ALICE).withTelegramUsername("al1ice").build();
@@ -153,9 +156,9 @@ public class PersonTest {
 
     @Test
     public void getRoles_oneRole() {
-        Person person = new PersonBuilder().withRoles("attendee").build();
+        Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
         try {
-            assertTrue(person.getRoles().contains(RoleHandler.getRole("attendee")));
+            assertTrue(person.getRoles().contains(RoleHandler.getRole(VALID_ROLE_ATTENDEE)));
 
         } catch (InvalidRoleException e) {
             e.printStackTrace();
@@ -164,9 +167,9 @@ public class PersonTest {
 
     @Test
     public void hasRole_oneRole() {
-        Person person = new PersonBuilder().withRoles("attendee").build();
+        Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
         try {
-            assertTrue(person.hasRole(RoleHandler.getRole("attendee")));
+            assertTrue(person.hasRole(RoleHandler.getRole(VALID_ROLE_ATTENDEE)));
 
         } catch (InvalidRoleException e) {
             e.printStackTrace();
@@ -175,10 +178,10 @@ public class PersonTest {
 
     @Test
     public void hasRole_twoRole() {
-        Person person = new PersonBuilder().withRoles("attendee", "speaker").build();
+        Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE, INVALID_ROLE).build();
         try {
-            assertTrue(person.hasRole(RoleHandler.getRole("attendee")));
-            assertTrue(person.hasRole(RoleHandler.getRole("speaker")));
+            assertTrue(person.hasRole(RoleHandler.getRole(VALID_ROLE_ATTENDEE)));
+            assertTrue(person.hasRole(RoleHandler.getRole(INVALID_ROLE)));
 
         } catch (InvalidRoleException e) {
             e.printStackTrace();
@@ -187,9 +190,9 @@ public class PersonTest {
 
     @Test
     public void equals_sameRole() {
-        Person person = new PersonBuilder().withRoles("attendee").build();
+        Person person = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
 
-        Person personCopy = new PersonBuilder().withRoles("attendee").build();
+        Person personCopy = new PersonBuilder().withRoles(VALID_ROLE_ATTENDEE).build();
         assertTrue(person.equals(personCopy));
 
     }

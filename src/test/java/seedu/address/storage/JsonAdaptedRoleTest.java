@@ -33,7 +33,7 @@ public class JsonAdaptedRoleTest {
 
     @Test
     public void jsonAdaptedRole_validRoleDetails_returnsRole() {
-        assertDoesNotThrow(() -> new JsonAdaptedRole("attendee"));
+        assertDoesNotThrow(() -> new JsonAdaptedRole(VALID_ROLE_ATTENDEE));
     }
 
     //    @Test
