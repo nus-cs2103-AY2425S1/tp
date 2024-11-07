@@ -27,8 +27,9 @@ import seedu.internbuddy.model.company.Company;
  */
 public class TypicalCompanies {
 
-    public static final Company APPLE = new CompanyBuilder().withName("Apple").withPhone("4089961010")
-            .withEmail("contact@apple.com").withAddress("1 Apple Park Way, Cupertino, CA").build();
+    public static final Company APPLE_FAVOURITED = new CompanyBuilder().withName("Apple").withPhone("4089961010")
+            .withEmail("contact@apple.com").withAddress("1 Apple Park Way, Cupertino, CA")
+            .withIsFavourite(true).build();
     public static final Company AMAZON = new CompanyBuilder().withName("Amazon").withPhone("2062661000")
             .withEmail("contact@amazon.com").withAddress("410 Terry Ave N, Seattle, WA")
             .withTags("ecommerce", "cloud")
@@ -76,6 +77,6 @@ public class TypicalCompanies {
     }
 
     public static List<Company> getTypicalCompanies() {
-        return new ArrayList<>(Arrays.asList(APPLE, AMAZON, FACEBOOK, TESLA, NETFLIX, SAP));
+        return new ArrayList<>(Arrays.asList(APPLE_FAVOURITED, AMAZON, FACEBOOK, TESLA, NETFLIX, SAP));
     }
 }

@@ -37,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Company editedCompany = new CompanyBuilder().build();
+        Company editedCompany = new CompanyBuilder().withIsFavourite(true).build();
         EditCompanyDescriptor descriptor = new EditCompanyDescriptorBuilder(editedCompany).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, descriptor);
         Company companyToEdit = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
