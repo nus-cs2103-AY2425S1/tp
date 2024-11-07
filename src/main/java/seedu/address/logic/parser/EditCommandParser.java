@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_FIELD_INPUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NICKNAME;
@@ -103,7 +104,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             Name name = ParserUtil.parseName(strPreamble);
             return new EditCommand(name, editContactDescriptor);
         } catch (Exception exp) { // to try
-            throw new ParseException(exp.getMessage());
+            throw new ParseException(MESSAGE_INVALID_NAME_FIELD_INPUT);
             // considered invalid name if it isn't an Integer
         }
     }
