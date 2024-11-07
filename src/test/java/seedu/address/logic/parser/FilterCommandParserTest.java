@@ -20,6 +20,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonHasFeaturePredicate;
@@ -278,6 +279,12 @@ public class FilterCommandParserTest {
 
         // Verify that the ParseException is thrown due to no valid input provided
         assertThrows(ParseException.class, () -> new FilterCommandParser().parse(userInput));
+    }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        assertParseFailure(parser, " t/ High Risk + d/23/02/2024 1320",
+              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
 }
