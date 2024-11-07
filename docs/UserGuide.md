@@ -21,7 +21,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactsforgood.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -177,7 +177,7 @@ Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 * The order of the prefixes provided does not affect search results. e.g. `search n/alex t/friends` will return the same result as `search t/friends n/alex`.
 * Only full words will be matched e.g. `friend` will not match `friends`.
 * For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
-* For name searches, persons matching any of the keyswords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
+* For name searches, persons matching any of the keywords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
 <box type="tip" seamless>
@@ -285,8 +285,7 @@ Edits the name of a group that currently exists.
 
 Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
 
-* Changes the group with the name `OLD_GROUP_NAME`'s name to
-  `NEW_GROUP_NAME`.
+* Changes the group with `OLD_GROUP_NAME` to `NEW_GROUP_NAME`.
 * The old group name must exist, and the new group name must not already be in use.
 * If either of the above conditions are not met, the command will fail.
 
@@ -335,13 +334,13 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ContactsForGood data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ContactsForGood will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ContactsForGood to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
