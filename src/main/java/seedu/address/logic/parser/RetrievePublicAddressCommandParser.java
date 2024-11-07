@@ -25,7 +25,9 @@ public class RetrievePublicAddressCommandParser implements Parser<RetrievePublic
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_PUBLIC_ADDRESS_LABEL, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_NAME);
 
-        if (argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).isEmpty()
+                || argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get().isEmpty()
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RetrievePublicAddressCommand.MESSAGE_USAGE));
         }
