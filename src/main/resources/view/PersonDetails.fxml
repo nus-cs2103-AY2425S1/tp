@@ -9,40 +9,32 @@
 
 <VBox prefHeight="700.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
 <children>
-    <Label alignment="TOP_LEFT" text="Name:" />
-    <Label fx:id="nameLabel" prefHeight="37.0" prefWidth="499.0" />
-      <HBox prefHeight="23.0" prefWidth="419.0">
+    <Label fx:id="nameLabel" prefHeight="26.0" prefWidth="499.0" />
+      <HBox prefHeight="20.0" prefWidth="419.0">
          <children>
             <FlowPane fx:id="tags" prefHeight="6.0" prefWidth="419.0" />
          </children>
       </HBox>
-      <Separator prefHeight="1.0" prefWidth="336.0" />
 
-      <HBox prefHeight="23.0" prefWidth="419.0"  spacing="10.0">
+      <HBox prefHeight="20.0" prefWidth="419.0"  spacing="4.0">
          <children>
-            <Label text="Birthday:" />
+            <Label fx:id="birthdayTitleLabel" text="Birthday:" />
             <Label fx:id="birthdayLabel" />
          </children>
       </HBox>
-      <Separator prefHeight="1.0" prefWidth="336.0" />
-      <HBox prefHeight="23.0" prefWidth="419.0"  spacing="10.0">
+      <HBox prefHeight="20.0" prefWidth="419.0"  spacing="4.0">
          <children>
-
-                <Label text="Phone:" />
+                <Label fx:id="phoneTitleLabel" text="Phone:" />
           <Label fx:id="phoneLabel" />
          </children>
       </HBox>
-      <Separator prefHeight="1.0" prefWidth="336.0" />
-
-    <Label text="Email:" />
+    <Label fx:id="emailTitleLabel" text="Email:" />
     <Label fx:id="emailLabel" />
-      <Separator prefHeight="1.0" prefWidth="336.0" />
 
-    <Label text="Address:" />
+    <Label fx:id="addressTitleLabel" text="Address:" />
     <Label fx:id="addressLabel" />
-      <Separator prefHeight="1.0" prefWidth="336.0" />
 
-    <Label text="Remarks:" />
+    <Label fx:id="remarkTitleLabel" text="Remarks:" />
     <ScrollPane fitToWidth="true">
         <content>
             <Label fx:id="remarkLabel" wrapText="true" />
@@ -51,13 +43,13 @@
     <Label fx:id="propertyListLabel" text="Properties:" />
     <ScrollPane fx:id="propertyListScrollPane" fitToWidth="true" minHeight="75.0" maxHeight="400.0" styleClass="hidden-scrollbar">
         <content>
-            <VBox fx:id="propertyList" spacing="10.0"/>
+            <VBox fx:id="propertyList" spacing="4.0"/>
         </content>
     </ScrollPane>
     <Label fx:id="historyLabel" text="History:" />
     <ScrollPane fx:id="historyScrollPane" fitToWidth="true" maxHeight="400.0" styleClass="hidden-scrollbar">
         <content>
-            <VBox fx:id="history" prefWidth="419.0" spacing="10.0">
+            <VBox fx:id="history" minHeight="75.0" prefWidth="419.0" spacing="4.0">
             </VBox>
         </content>
     </ScrollPane>

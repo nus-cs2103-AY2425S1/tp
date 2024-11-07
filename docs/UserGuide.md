@@ -165,12 +165,12 @@ Format: `log INDEX [d/DATE] l/LOG`
 
 Examples:
 * `log 1 d/2024-08-08 l/meet up` add a log entry to the first person in the address book, `meet up` on 2024-08-08.
-  ![result for 'log 1 d/2024-08-08 l/meet up'](images/wxy2003-xy.png)
-  ![result for 'view 1'](images/wxy2003-xy.png)
+  ![result for 'log 1 d/2024-08-08 l/meet up'](images/Log.png)
+  ![result for 'view 1'](images/LogView.png)
 
 * `log 2 l/had lunch together` add a log entry to the 2nd person in the address book, `had lunch together` on today.
-  ![result for 'log 2 l/had lunch together'](images/wxy2003-xy.png)
-  ![result for 'view 2'](images/wxy2003-xy.png)
+  ![result for 'log 2 l/had lunch together'](images/Log2.png)
+  ![result for 'view 2'](images/Log2View2.png)
 
 ### Remarking a person : `remark`
 
@@ -182,6 +182,7 @@ Format: `remark INDEX r/REMARK`
 
 Examples:
 * `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
+  ![result for 'remark 1 r/remark message'](images/Remark.png)
 
 ### Single page person view: `view`
 
@@ -195,7 +196,7 @@ Format: `view INDEX`
 
 Examples:
 *   `view 1` Shows the person located as index position 1 in the address book.
-    ![result for 'viewWindow'](images/viewWindow.png)
+    ![result for 'ViewWindow'](images/ViewWindow.png)
 
 
 ### Adding a Property: `addProperty`
@@ -239,8 +240,9 @@ Finds persons whose names contain any of the given keywords.
 
 **Examples:**
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find John'](images/FindJohn.png)
+- `find Amy go` returns `Amy Wee`, `William Go`<br>
+  ![result for 'find Amy go'](images/FindAmyGo.png)
 
 ### Marking a person as favourite: `favourite`
 
@@ -248,13 +250,14 @@ Mark a specific person from the address book as favourite by assigning a special
 
 Format: `favourite INDEX`
 
-* Mark the person at the specified `INDEX` as favourite.
+* Mark the person at the specified `INDEX` as favourite. 
+* If the person is already marked favourite, the person is removed from favourite.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `favourite 2` marks the 2nd person in the address book as favourite.
-  ![result for 'favourite 2'](images/wxy2003-xy.png)
+  ![result for 'favourite 2'](images/Favourite2.png)
 
 Format: `favourite`
 
@@ -262,7 +265,11 @@ Format: `favourite`
 
 Examples:
 * `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
-  ![result for 'favourite'](images/wxy2003-xy.png)
+  ![result for 'favourite'](images/Favourite.png)
+
+Examples:
+* `favourite 1` when person at index 1 is already favourite.
+  ![result for 'favourite'](images/Unfavourite.png)
 
 ### Deleting a person : `delete`
 
@@ -330,7 +337,7 @@ Displays a contacts' birthday if they are happening within a week from the syste
 **Command Format:**
 None, as it is an automatic feature.
 
-![Birthday Reminder Example](images/birthday_reminder.png)
+![Birthday Reminder Example](images/Birthday.png)
 
 ---
 
