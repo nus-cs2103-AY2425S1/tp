@@ -214,7 +214,7 @@ Format: `deltag INDEX t/TAG`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * Only one tag can be deleted at a time.
-
+* The list of the tag will be updated accordingly.
 Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
@@ -229,7 +229,6 @@ Categorizes a tag under a defined category.
 Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
 * Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
-* 
 * Currently available categories with their respective keywords and colours are:
 
     Category      | Keyword (case sensitive) | Colour
