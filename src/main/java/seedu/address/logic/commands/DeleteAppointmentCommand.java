@@ -24,13 +24,13 @@ public class DeleteAppointmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes an appointment "
             + "between the relevant doctor and patient. "
             + COMMAND_WORD + " "
-            + PREFIX_DATE + "[APPOINTMENT_TIME] "
             + PREFIX_ID + "[PATIENT_ID] "
-            + PREFIX_ID + "[DOCTOR_ID]\n"
+            + PREFIX_ID + "[DOCTOR_ID] "
+            + PREFIX_DATE + "[APPOINTMENT_TIME]\n "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATE + "2024-12-31 15:23 "
             + PREFIX_ID + "1234 "
-            + PREFIX_ID + "5678";
+            + PREFIX_ID + "5678 "
+            + PREFIX_DATE + "2024-12-31 15:23";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Successfully "
             + "deleted appointment to a patient";
     public static final String MESSAGE_DELETE_APPOINTMENT_FAIL = "The appointment doesn't exist!";
