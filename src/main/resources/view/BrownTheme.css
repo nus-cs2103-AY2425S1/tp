@@ -153,6 +153,13 @@
 .cell_big_label_event {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 20px;
+    -fx-max-height: 4.5em;  /* Allow exactly 3 lines worth of height for text wrapping*/
+    -fx-text-fill: #010504;
+}
+
+.cell_big_label_event_index {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
     -fx-text-fill: #010504;
 }
 
