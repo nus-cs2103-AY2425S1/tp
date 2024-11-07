@@ -596,19 +596,19 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 1. Viewing a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `view 1` <br>
-       Expected: First contact from the list is viewed. Success action will be carried out for that contact.<br><br>
+       Expected: First contact from the list is viewed. Success action will be carried out for that contact.
 
     1. Test case: `view 0`<br>
-       Expected: No person is viewed. `view` command format is shown in the status message. <br><br>
+       Expected: No person is viewed. `view` command format is shown in the status message.
 
     1. Test case: `view x` (where x is larger than the size of person list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
+       Expected: Error message prompting the user to choose an index within the range shown.
 
     1. Other incorrect view commands to try: `view`, `view x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii). <br><br>
+       Expected: Similar to point #1(iii). 
 
 1. Viewing a person while a partial list of contacts is shown.
 
@@ -632,19 +632,19 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.<br><br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. `delete` command format is shown in the status message.<br><br>
+      Expected: No person is deleted. `delete` command format is shown in the status message.
 
    1. Test case: `delete x` (where x is larger than the size of person list)<br>
-      Expected: Error message prompting the user to choose an index within the range shown.<br><br>
+      Expected: Error message prompting the user to choose an index within the range shown.
 
    1. Other incorrect delete commands to try: `delete`, `delete x` (where x is a negative integer)<br>
-      Expected: Similar to point #1(iii).<br><br>
+      Expected: Similar to point #1(iii).
 
 1. Deleting a person while a partial list of contacts is shown.
 
@@ -666,38 +666,38 @@ Timestamp in the status bar is updated. The weddings involved of the person will
 
 1. Filtering while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     2. Test case: `filter n/John`<br>
-       Expected: All the contacts with the exact name match "John" (case-insensitive matching) are shown.<br><br>
+       Expected: All the contacts with the exact name match "John" (case-insensitive matching) are shown.
 
     3. Test case: `filter r/vendor e/gmail`<br>
-       Expected: All the contacts who have the role "vendor" OR have "gmail" in their email are shown.<br><br>
+       Expected: All the contacts who have the role "vendor" OR have "gmail" in their email are shown.
 
     4. Test case: `filter n/Alex Tan`<br>
-       Expected: Error message is shown as the name field must be a single word. Error details shown in the status message.<br><br>
+       Expected: Error message is shown as the name field must be a single word. Error details shown in the status message.
 
 2. Invalid filter commands to try:
 
     1. Test case: `filter`<br>
-       Expected: `filter` command format is shown in the status message, since at least one filter criteria must be provided.<br><br>
+       Expected: `filter` command format is shown in the status message, since at least one filter criteria must be provided.
 
     2. Test case: `filter n/`<br>
-       Expected: `filter` command format is shown in the status message, since parameter cannot be left empty.<br><br>
+       Expected: `filter` command format is shown in the status message, since parameter cannot be left empty.
 
     3. Test case: `filter x/value`<br>
-       Expected: `filter` command format is shown in the status message, since there is an unknown prefix.<br><br>
+       Expected: `filter` command format is shown in the status message, since there is an unknown prefix.
 
 3. Edge cases to test:
 
     1. Test case: `filter n/john`<br>
-       Expected: The names of contacts will be matched and shown regardless of case (e.g., "John", "JOHN", "JoHn").<br><br>
+       Expected: The names of contacts will be matched and shown regardless of case (e.g., "John", "JOHN", "JoHn").
 
     2. Test case: `filter e/gmail a/street`<br>
-       Expected: All the contacts with either "gmail" in email OR "street" in address will be shown.<br><br>
+       Expected: All the contacts with either "gmail" in email OR "street" in address will be shown.
 
     3. Test case: `filter p/91234567`<br>
-       Expected: Only the contacts with the exact phone number will be shown.<br><br>
+       Expected: Only the contacts with the exact phone number will be shown.
 
 4. Filtering a person while a filtered list of contacts is shown
 
@@ -712,34 +712,34 @@ Success action: When wedding is successfully added, the details of the added wed
 #### Inputting CLIENT using INDEX
 1. Adding a wedding while all persons and weddings are shown.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `addw n/Church Wedding c/1 d/2024-12-12 v/Church of the Holy Spirit`<br>
-       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Success action will be carried out.<br><br>
+       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Success action will be carried out.
 
     1. Test case: `addw n/Church Wedding c/1`<br>
-       Expected: Wedding added with first person in the persons list set as client, with no date and venue. Success action will be carried out.<br><br>
+       Expected: Wedding added with first person in the persons list set as client, with no date and venue. Success action will be carried out.
 
     1. Test case: `addw`<br>
        Test case: `addw n/Church Wedding`<br>
        Test case: `addw c/1`<br>
-       Expected: No wedding added. `addw` command format is shown in the status message.<br><br>
+       Expected: No wedding added. `addw` command format is shown in the status message.
 
     1. Test case: `addw n/Wedding 1 c/1`<br>
-       Expected: No wedding added. Error message with restrictions on WEDDING_NAME shown in status message.<br><br>
+       Expected: No wedding added. Error message with restrictions on WEDDING_NAME shown in status message.
 
     1. Test case: `addw n/Wedding c/1.5`<br>
-       Expected: No wedding added. Error message with CLIENT input options shown in status message.<br><br>
+       Expected: No wedding added. Error message with CLIENT input options shown in status message.
 
     1. Test case: `addw n/Wedding c/1 d/2024-13-50`<br>
-       Expected: No wedding added. Error message with restrictions on DATE shown in status message.<br><br>
+       Expected: No wedding added. Error message with restrictions on DATE shown in status message.
 
     1. Test case: `addw n/Wedding c/1 v/`<br>
-       Expected: No wedding added. Error message with restrictions on VENUE shown in status message.<br><br>
+       Expected: No wedding added. Error message with restrictions on VENUE shown in status message.
 
     1. Test case: `addw n/Church Wedding c/0`<br>
        Test case: `addw n/Church Wedding c/x` (where x is a negative number) <br>
-       Expected: No wedding added. Error message about invalid index shown, as x is not a non-zero unsigned integer.<br><br>
+       Expected: No wedding added. Error message about invalid index shown, as x is not a non-zero unsigned integer.
 
     1. Test case: `addw n/Church Wedding c/x` (where x is larger than the size of the wedding list)<br>
        Expected: No wedding added. Error message prompting the user to choose an index within the range shown.
@@ -758,19 +758,19 @@ Success action: When wedding is successfully edited, the details of the updated 
 
 1. Editing a Wedding with all persons and weddings shown.<br>
 
-    1. Prerequisites: List all contacts and weddings using the `list` command. Multiple persons in the list.<br><br>
+    1. Prerequisites: List all contacts and weddings using the `list` command. Multiple persons in the list.
 
     1. Test case: `editw w/1 [n/NAME] [d/DATE] [v/VENUE]`<br>
-       Expected: First wedding in list is edited with the given inputs. Success action will be carried out.<br><br>
+       Expected: First wedding in list is edited with the given inputs. Success action will be carried out.
 
     1. Test case: `editw`<br>
        Test case: `editw w/1`<br>
        Test case: `editw w/1 c/1` <br>
-       Expected: No wedding edited. `editw` command format is shown in the status message.<br><br>
+       Expected: No wedding edited. `editw` command format is shown in the status message.
 
     1. Test case: `editw w/0 [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]`<br>
        Test case: `editw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is a negative number) <br>
-       Expected: No wedding edited. `editw` command format is shown in the status message.<br><br>
+       Expected: No wedding edited. `editw` command format is shown in the status message.
 
     1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is larger than the size of the wedding list)<br>
        Expected: No wedding edited. Error message prompting the user to choose an index within the range shown.
@@ -785,19 +785,19 @@ The persons involved in the viewed wedding will be shown in the person list. Tim
 
 1. Viewing of a wedding while all weddings are being shown
 
-    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.<br><br>
+    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.
 
     1. Test case: `vieww 1` <br>
-       Expected: First wedding from the wedding list is viewed. Success action will be carried out for that wedding.<br><br>
+       Expected: First wedding from the wedding list is viewed. Success action will be carried out for that wedding.
 
     1. Test case: `vieww 0`<br>
-       Expected: No wedding is viewed. `vieww` command format is shown in the status message.<br><br>
+       Expected: No wedding is viewed. `vieww` command format is shown in the status message.
 
     1. Test case: `vieww x` (where x is larger than the size of wedding list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
+       Expected: Error message prompting the user to choose an index within the range shown.
 
     1. Other incorrect vieww commands to try: `vieww`, `vieww x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).<br><br>
+       Expected: Similar to point #1(iii).
 
 1. Viewing of a wedding while a partial list of weddings is shown. 
 
@@ -826,19 +826,19 @@ Persons who are involved in the wedding will also be unassigned. Timestamp in th
 
 1. Deleting a wedding while all weddings are being shown
 
-    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.<br><br>
+    1. Prerequisites: List all weddings using the `list` command. Multiple weddings in the list.
 
     1. Test case: `deletew 1`<br>
-       Expected: First wedding is deleted from the list. Success action will be carried out for that wedding.<br><br>
+       Expected: First wedding is deleted from the list. Success action will be carried out for that wedding.
 
     1. Test case: `deletew 0`<br>
-       Expected: No wedding is deleted. `deletew` command format is shown in the status message.<br><br>
+       Expected: No wedding is deleted. `deletew` command format is shown in the status message.
 
     1. Test case: `deletew x` (where x is larger than the size of wedding list)<br>
-       Expected: Error message prompting the user to choose an index within the range shown.<br><br>
+       Expected: Error message prompting the user to choose an index within the range shown.
 
     1. Other incorrect deletew commands to try: `deletew`, `deletew x` (where x is a negative integer)<br>
-       Expected: Similar to point #1(iii).<br><br>
+       Expected: Similar to point #1(iii).
 
 1. Deleting of a wedding while a partial list of weddings is shown.
 
