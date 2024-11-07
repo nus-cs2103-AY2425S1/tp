@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Comparator;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -61,6 +63,15 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_sort() throws Exception {
+        Comparator<Person> comparatorForName = Comparator.comparing(person
+                -> person.getName().fullName);
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " name");
+        assertEquals(new SortCommand("name", comparatorForName), command);
+    }
+
+
+    @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
@@ -98,11 +109,6 @@ public class AddressBookParserTest {
         assertEquals(new UnmarkCommand(INDEX_FIRST_PERSON), command);
     }
 
-    @Test
-    public void parseCommand_sort() throws Exception {
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
-        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " 3") instanceof SortCommand);
-    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
