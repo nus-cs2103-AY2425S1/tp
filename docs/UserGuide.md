@@ -252,7 +252,7 @@ Finds persons whose names and module-role pairs contain any combination of the g
 
 Format: `find (n/KEYWORD | r/KEYWORD)+`
 
-* Person matching at least one name keyword AND at least one module-role keyword will be returned (i.e. AND search).
+* Person matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) will be returned (i.e. AND search).
 
 Examples:
 * `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
