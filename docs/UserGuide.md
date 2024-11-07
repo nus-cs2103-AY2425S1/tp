@@ -51,19 +51,20 @@ NomNomNotifier brings powerful features right to your desktop, enabling quick an
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                          |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`      |
-| **Clear**           | `clear`                                                                                                                                                                   |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                       |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                              |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                |
-| **List**            | `list`                                                                                                                                                                    |
-| **Help**            | `help`                                                                                                                                                                    |
-| **Add Shortcut**    | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                                  |
-| **Delete Shortcut** | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                                  |
-| **List Shortcuts**  | `listShortCut`                                                                                                                                                            |
-| **Filter**          | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                              |
+| Action              | Format, Examples                                                                                                                                                     |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**           | `clear`                                                                                                                                                              |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                  |
+| **Download**       | `download [t/TAG1] [t/TAG2] …​`<br> e.g., `download t/vegan`                                                                                                         |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                           |
+| **List**            | `list`                                                                                                                                                               |
+| **Help**            | `help`                                                                                                                                                               |
+| **Add Shortcut**    | `addShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `addShortCut al/v tn/Vegan`                                                                                             |
+| **Delete Shortcut** | `delShortCut al/ALIAS tn/TAG_NAME`<br> e.g., `delShortCut al/v tn/Vegan`                                                                                             |
+| **List Shortcuts**  | `listShortCut`                                                                                                                                                       |
+| **Filter**          | `filter`<br> e.g., `filter Vegan Vegetarian`                                                                                                                         |
 
 > **Note**: NomNomNotifier only accepts inputs in english without any emojis
 
@@ -541,6 +542,7 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 - The exported file will be saved in the same directory as the application.
 - Tags can be specified using the `t/` prefix to filter the download results, allowing for a more customized data export.
 - If no tags are specified, all data will be exported.
+- If the filtered result is empty (no matching entries), an error will be returned, and no file will be generated.
 
 **Examples:**
 - `download` — Exports all contacts or orders.
@@ -556,7 +558,7 @@ Exports Address Book as a CSV file with optional tag-based filtering.
 <div style="text-align: center;">
     <img src="images/download_shortcuts.png" alt="download shortcuts" width="350"/>
     <br>
-    <em>Figure 21: Shows shortcut being added</em>
+    <em>Figure 21: Shows only people with vegan tag being added</em>
 </div>
 
 ---
