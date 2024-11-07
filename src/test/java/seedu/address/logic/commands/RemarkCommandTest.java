@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.testutil.PersonBuilder;
 
+// Solution below inspired from https://se-education.org/guides/tutorials/ab3AddRemark.html
 public class RemarkCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
