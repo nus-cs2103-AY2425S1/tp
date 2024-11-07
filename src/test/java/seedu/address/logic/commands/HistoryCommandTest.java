@@ -8,6 +8,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 public class HistoryCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager();
@@ -32,5 +34,5 @@ public class HistoryCommandTest {
                 String.join("\n", command3, command2, command1));
         assertCommandSuccess(new HistoryCommand(), model, commandHistory, expectedMessage, expectedModel);
     }
-
 }
+//@@author

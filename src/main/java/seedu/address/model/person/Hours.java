@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Hours {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Hours should be non-negative, and in numerics.";
-    public static final String VALIDATION_REGEX = "^\\d+(\\.\\d+)?$";
+            "Hours should be non-negative integers, with a maximum of 876,000.";
+    public static final String VALIDATION_REGEX = "^(?:\\d{1,5}|[1-7]\\d{5}|8[0-6]\\d{4}|87[0-5]\\d{3}|876000)$";
     public final String value;
 
     /**
