@@ -7,8 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Creates a alias for a tag
  */
 public class Alias {
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*[\\p{Alnum}]?$";
+    public static final String MESSAGE_CONSTRAINTS = "Alias should be alphanumeric and within 10 characters";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]{0,8}[\\p{Alnum}]?$";
     private String alias;
 
     /**

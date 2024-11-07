@@ -7,8 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents the name of a tag
  */
 public class FullTagName {
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*[\\p{Alnum}]?$";
+    public static final String MESSAGE_CONSTRAINTS = "Tags Names should be alphanumeric and within 30 characters";
+    public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]{0,28}[\\p{Alnum}]?$";
     private String fullTagName;
 
     /**
