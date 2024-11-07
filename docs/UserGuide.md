@@ -264,7 +264,7 @@ the constraints of each parameter when used in a command.
 | `GENDER`           | Gender of the patient.                                                                                     | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). <br> - Should not be blank                                                                                                                            | :white_check_mark: `m`<br> :white_check_mark: `F`<br> :x: `Male`                                                                   |
 | `EMAIL`            | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank.                                                                                                                                                         | :white_check_mark: `raj@gmail.com`<br>:x: `raj`                                                                                    |
 | `ADDRESS`          | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                               |
-| `PHONE_NUMBER`     | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - There is no limit on the length of phone number accepted, in order to accommodate international phone numbers.            | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
+| `PHONE`            | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - There is no limit on the length of phone number accepted, in order to accommodate international phone numbers.            | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                               |
 | `ALLERGY`          | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                 | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                      |
 | `PRIORITY`         | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                      | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                   |
 | `CONDITION`        | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                        | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp` <br>:x: `abcde fghijklmnopqrstuvwxyzabcde`                            |
@@ -280,19 +280,19 @@ the constraints of each parameter when used in a command.
 > **:information_source: Notes about the command format:**
 > 
 > * Words in `UPPER_CASE` are the parameters to be supplied by the user.
-> e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
+> e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
 >
 > * Items in square brackets are optional.
->  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
+>  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
 >
 > * Items with `…` after them can be used multiple times.
 >  e.g. `c/CONDITION…` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
 >
 > * Parameters that have a prefix can be in any order.
-> e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+> e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 >
 > * Parameters that have no prefix must follow the specified order in the command format.
-> e.g. if the command specifies `NRIC n/NAME p/PHONE_NUMBER`, `NRIC` must take precedence over `n/NAME` and `p/PHONE_NUMBER`.
+> e.g. if the command specifies `NRIC n/NAME p/PHONE`, `NRIC` must take precedence over `n/NAME` and `p/PHONE`.
 > 
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 > e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -316,7 +316,7 @@ the constraints of each parameter when used in a command.
 
 Adds a patient and his/her relevant details to MediBase3.
 
-**Format**: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
+**Format**: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`
 
 {: .alert .alert-info}
 > :information_source: **Notes:**
@@ -327,8 +327,7 @@ Adds a patient and his/her relevant details to MediBase3.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 **Examples**:
-* `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
-* `add n/Betsy Crowe i/s1234567b g/F e/betsycrowe@example.com a/Bukit Merah, Block 123, #01-01 p/1234567 d/2002-11-10`
+* `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number, email and address provided into MediBase3.
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
@@ -368,7 +367,7 @@ Deletes a patient and his/her details from MediBase3.
 
 Edits an existing patient details in MediBase3.
 
-**Format**: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+**Format**: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
 {: .alert .alert-info}
 > :information_source: **Notes:**
@@ -745,7 +744,6 @@ Format: `help`
 > 
 > You can also access this message by clicking on the `Help` button or by pressing `F1` on your keyboard.
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Clearing all entries : `clear`
 
@@ -758,7 +756,6 @@ Format: `clear`
 >
 > Using the clear command will **REMOVE** all your patient and appointment data from MediBase3. This action is irreversible.
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Exiting the program : `exit`
 
@@ -766,13 +763,11 @@ Exits the program.
 
 Format: `exit`
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Saving the data
 
 MediBase3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-[Back to Table of Contents](#table-of-contents)
 
 #### Editing the data file
 
@@ -792,7 +787,7 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 
 ## FAQ
 
-#### **Q**: How do I transfer my data to another Computer?
+#### **Q**: How do I transfer my data to another computer?
  - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.
 
 #### **Q**: How do we open the command terminal?
@@ -898,24 +893,24 @@ This means that your machine is running Java version 17.0.11, which means that J
 
 ## Command summary
 
-| Action           | Format                                                                                  | Examples                                                                                                       |
-|------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`                     | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **AddAllergy**   | `addAllergy i/NRIC al/ALLERGY…`                                                         | `addAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **AddAppt**      | `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`               | `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200`                                                        |
-| **AddMedCon**    | `addMedCon i/NRIC c/CONDITION...`                                                       | `addMedCon i/S1234567A c/High Blood Pressure`                                                                  |
-| **Clear**        | `clear`                                                                                 | -                                                                                                              |
-| **Delete**       | `delete NRIC`                                                                           | `delete S1234567A`                                                                                             |
-| **DelAllergy**   | `delAllergy i/NRIC al/ALLERGY…`                                                         | `delAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
-| **DelAppt**      | `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`                                | `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200`                                                               |
-| **DelMedCon**    | `delMedCon i/NRIC c/CONDITION...`                                                       | `delMedCon i/S1234567A c/High Blood Pressure`                                                                  |
-| **Edit**         | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`                                                          | `find James Jake`                                                                                              |
-| **FindNric**     | `findNric NRIC`                                                                         | `findNric S1234567A`                                                                                           |
-| **FindMedCon**   | `findMedCon KEYWORD [MORE_KEYWORDS]`                                                    | `findMedCon diabetes arthritis`                                                                                |
-| **List**         | `list`                                                                                  | -                                                                                                              |
-| **ListPrio**     | `listPrio !/PRIORITY`                                                                   | `listPrio !/High`                                                                                              |
-| **Help**         | `help`                                                                                  | -                                                                                                              |
+| Action           | Format                                                                              | Examples                                                                                                       |
+|------------------|-------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`                        | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
+| **AddAllergy**   | `addAllergy i/NRIC al/ALLERGY…`                                                     | `addAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
+| **AddAppt**      | `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`           | `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200`                                                        |
+| **AddMedCon**    | `addMedCon i/NRIC c/CONDITION...`                                                   | `addMedCon i/S1234567A c/High Blood Pressure`                                                                  |
+| **Clear**        | `clear`                                                                             | -                                                                                                              |
+| **Delete**       | `delete NRIC`                                                                       | `delete S1234567A`                                                                                             |
+| **DelAllergy**   | `delAllergy i/NRIC al/ALLERGY…`                                                     | `delAllergy i/S1234567A al/Dust al/Pollen`                                                                     |
+| **DelAppt**      | `delAppt i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`                            | `delAppt i/S1234567A @d/2024-10-27 @t/1100-1200`                                                               |
+| **DelMedCon**    | `delMedCon i/NRIC c/CONDITION...`                                                   | `delMedCon i/S1234567A c/High Blood Pressure`                                                                  |
+| **Edit**         | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS]`    | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`                                                      | `find James Jake`                                                                                              |
+| **FindNric**     | `findNric NRIC`                                                                     | `findNric S1234567A`                                                                                           |
+| **FindMedCon**   | `findMedCon KEYWORD [MORE_KEYWORDS]`                                                | `findMedCon diabetes arthritis`                                                                                |
+| **List**         | `list`                                                                              | -                                                                                                              |
+| **ListPrio**     | `listPrio !/PRIORITY`                                                               | `listPrio !/High`                                                                                              |
+| **Help**         | `help`                                                                              | -                                                                                                              |
 
 
 
