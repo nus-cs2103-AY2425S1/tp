@@ -141,7 +141,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         Meetings personMeetings = p.getMeetings();
         for (int i = 0; i < personMeetings.getMeetingsCount(); i++) {
             Meeting m = personMeetings.getMeeting(i);
-            System.out.println(m);
             for (int j = 0; j < meetings.getMeetingsCount(); j++) {
                 if (m.equals(meetings.getMeeting(j))) {
                     Meeting toDelete = meetings.getMeeting(j);
