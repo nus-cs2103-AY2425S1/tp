@@ -19,6 +19,7 @@ public class PaidCommandParser implements Parser<PaidCommand> {
      */
     public PaidCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POLICY);
         try {
             Index personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
             Index policyIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_POLICY).orElseThrow(() ->
