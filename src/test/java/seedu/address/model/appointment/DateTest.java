@@ -40,5 +40,10 @@ public class DateTest {
         otherDate = new Date("131224");
         assertFalse(date.equals(otherDate));
     }
+    @Test
+    public void parseDate_invalidFormat_throwsIllegalArgumentException() {
+        String invalidDate = "32-12-24";
 
+        assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
+    }
 }

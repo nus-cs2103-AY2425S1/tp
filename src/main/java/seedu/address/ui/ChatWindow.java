@@ -275,6 +275,11 @@ public class ChatWindow {
                     + "Command: moreinfo {name}\n"
                     + "Example: moreinfo Amy\n"
                     + "Opens a window displaying detailed information about the specified client.";
+        } else if (Pattern.compile("\\b(c+l+e+a+r+|reset|wipe)\\b").matcher(message).find()) {
+            return "It seems you want to clear some data.\n"
+                    + "Can you specify which you are referring to?\n"
+                    + "• Clear all client data and listings - clear\n"
+                    + "• Clear only listings - clearlistings";
         } else if (Pattern.compile("\\bh+e+l+p+\\b").matcher(message).find()) {
             return "Sure! What do you need help with?";
         } else {

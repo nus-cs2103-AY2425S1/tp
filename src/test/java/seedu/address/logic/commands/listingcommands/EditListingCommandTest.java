@@ -2,6 +2,7 @@ package seedu.address.logic.commands.listingcommands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -18,15 +19,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.listingcommands.EditListingCommand.EditListingDescriptor;
 import seedu.address.model.Listings;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.listing.Listing;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditListingDescriptorBuilder;
 import seedu.address.testutil.ListingBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class EditListingCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
@@ -176,5 +180,30 @@ public class EditListingCommandTest {
         String expected = EditListingCommand.class.getCanonicalName() + "{listingName=" + PASIR_RIS.getName()
                 + ", editListingDescriptor=" + editListingDescriptor + "}";
         assertEquals(expected, editListingCommand.toString());
+    }
+    @Test
+    public void execute_nonSellerSpecified_throwsCommandException() {
+        Model model = new ModelManager();
+        Person nonSellerPerson = new PersonBuilder().withName("NonSeller").buildSeller();
+        model.addPerson(nonSellerPerson);
+
+        EditListingCommand.EditListingDescriptor descriptor = new EditListingDescriptorBuilder()
+                .withName("NonSeller").build();
+        EditListingCommand command = new EditListingCommand(new Name("SampleListing"), descriptor);
+
+        assertThrows(CommandException.class, () -> command.execute(model),
+                "The specified person is not a seller.");
+    }
+
+    @Test
+    public void execute_sellerNotFound_throwsCommandException() {
+        Model model = new ModelManager();
+
+        EditListingCommand.EditListingDescriptor descriptor = new EditListingDescriptorBuilder()
+                .withName("MissingSeller").build();
+        EditListingCommand command = new EditListingCommand(new Name("SampleListing"), descriptor);
+
+        assertThrows(CommandException.class, () -> command.execute(model),
+                "Seller not found in the system.");
     }
 }
