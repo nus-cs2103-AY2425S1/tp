@@ -36,6 +36,7 @@ public class ExportCommandTest {
     @Test
     public void validExportCommandResult_success() throws CommandException, IOException {
         // Get the project root directory path
+
         String projectDir = System.getProperty("user.dir");
         String filePath = projectDir + "/src/test/data/testExport.csv";
 
@@ -72,6 +73,7 @@ public class ExportCommandTest {
      */
     @Test
     public void createDirectories_pathConflict_exception() throws IOException {
+
         String projectDir = System.getProperty("user.dir");
         File tempFile = new File(projectDir + "/conflict.txt");
         tempFile.createNewFile(); // Create the file to simulate a conflict
