@@ -42,6 +42,14 @@ public class Vendor extends Person {
                 && otherVendor.getName().equals(getName());
     }
 
+    /**
+     * Checks whether the number of tasks assigned is greater than 0
+     */
+    @Override
+    public boolean hasTasks() {
+        return !this.getTasks().isEmpty();
+    }
+
     @Override
     public boolean isVendor() {
         return true;

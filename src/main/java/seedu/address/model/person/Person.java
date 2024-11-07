@@ -97,6 +97,20 @@ public class Person {
     }
 
     /**
+     * Returns false, as a Person object should not have tasks assigned
+     */
+    public boolean hasTasks() {
+        return false;
+    }
+
+    /**
+     * Removes all tasks from the Person's task list
+     */
+    public void clearTasks() {
+        this.tasks.clear();
+    }
+
+    /**
      * Checks if this person has the specified task assigned.
      *
      * @param task The task to check.
