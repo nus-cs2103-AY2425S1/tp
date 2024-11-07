@@ -79,6 +79,20 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resultDisplay = new ResultDisplay();
+
+
+        primaryStage.getScene().heightProperty().addListener((observable, oldHeight, newHeight) -> {
+            double heightDifference = newHeight.doubleValue() - oldHeight.doubleValue();
+
+            // Check if the height difference is at least 3 cm (approximately 113.4 pixels)
+            if (Math.abs(heightDifference) >= 113.4) {
+                double resultDisplayIncrement = 28; // Increase by 1 cm (approx. 37.8 pixels)
+                double newResultHeight = resultDisplayPlaceholder.getHeight() + resultDisplayIncrement;
+
+                resultDisplay.setPrefHeight(Math.max(newResultHeight, 100));
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
