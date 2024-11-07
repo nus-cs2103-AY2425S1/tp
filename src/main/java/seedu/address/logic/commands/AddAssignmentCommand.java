@@ -26,7 +26,7 @@ public class AddAssignmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an Assignment to the app. "
             + "\nParameters: "
-            + PREFIX_STUDENT_INDEX + "STUDENT INDEX "
+            + PREFIX_STUDENT_INDEX + "INDEX "
             + PREFIX_ASSIGNMENT_NAME + "ASSIGNMENT NAME "
             + PREFIX_ASSIGNMENT_MAX_SCORE + "MAX SCORE "
             + "\nExample: " + COMMAND_WORD + " "
