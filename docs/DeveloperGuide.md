@@ -423,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a new event, specifying the event name, date, and optionally tags.
+1. User enters command to create a new event, specifying the event name, date, and optionally tags.
 2. System verifies the input format.
 3. System creates the event.
 4. System displays a success message.
@@ -648,6 +648,35 @@ Preconditions: User is viewing an item.
 
 * 2a. No items match the search keywords.
     * 2a1. System displays a message indicating no items were found.
+    * Use case ends.
+
+**Use case: UC08 - Create a vendor**
+
+**MSS**
+
+1. User enters command to create a new vendor, with the vendor's name, description, phone number, and optionally tags.
+2. System verifies the input format.
+3. System creates the vendor.
+4. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+    * 1a1. System shows an error message and displays the correct command format.
+    * Use case ends.
+
+* 2a. The vendor name is invalid.
+    * 2a1. System shows an error message indicating the name format is incorrect.
+    * Use case ends.
+
+* 2b. The phone number format is invalid.
+    * 2b1. System shows an error message indicating the phone number format is incorrect.
+    * Use case ends.
+
+* 2c. The vendor already exists in the system.
+    * 2c1. System shows an error message indicating a duplicate vendor.
     * Use case ends.
 
 ### Non-Functional Requirements
