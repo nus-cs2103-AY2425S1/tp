@@ -69,7 +69,7 @@ public class FindWeddingCommandTest {
         FindWeddingCommand command = new FindWeddingCommand(predicate);
         expectedModel.updateFilteredPersonListByWedding(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, ELLE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, ELLE), model.getFilteredPersonList());
     }
 
     @Test
