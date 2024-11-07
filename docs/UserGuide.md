@@ -45,15 +45,15 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T14-2/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T14-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AdmiNUS.
+3. Copy the file to the folder you want to use as the _home folder_ for your AdmiNUS.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar adminus.jar` command to run the application.<br>
+4. Open a command terminal, type `cd your_file_path` into the folder you put the jar file in, and use the `java -jar adminus.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/viewContactUI.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command into the command box and press "Enter" to execute it. e.g. typing **`help`** and pressing "Enter" will open the help window.<br>
    Some example commands you can try:
 
    - `list`: Lists all contacts.
@@ -66,7 +66,7 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 
    - `exit`: Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -82,8 +82,13 @@ AdmiNUS is a contact management tool designed for NUS club administrators, stude
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-- Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- Items with `…`​ after them can be used from zero times to multiple times.<br>
+  e.g. `[t/TAG]…​` can be used as:
+
+  - ` ` (i.e. 0 times),
+  - `t/paid` (i.e. 1 times),
+  - `t/paid t/Computing` (i.e. 2 times), or
+  - `t/paid t/Computing t/year2 t/CS2103T t/SWE` (i.e. 5 times) etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -196,6 +201,11 @@ company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 | `t/TAG`          | Tags to categorize contact (cannot contain spaces) | Optional   |
 
 <div markdown="span" class="alert alert-info"> 🔔 **Note**: Each company is uniquely identified by a combination of its name and industry, meaning you cannot add multiple companies with the same name and the same industry. However, companies with the same name but different industries are allowed. </div>
+
+Example:
+
+- Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry: `Education` is acceptable.
+- Company name: `Tesla`, Industry:`Automotives` and Company name: `Tesla`, Industry:`Automotives` is NOT acceptable.
 
 <div markdown="span" class="alert alert-primary">💡 **Tip:**
 A company can have any number of tags (including 0)
@@ -377,20 +387,7 @@ Format: `tag INDEX t/TAG [t/MORE_TAG]`
 
 </div>
 
-<div markdown="block" class="alert alert-info">
-
-🔔 **Notes**: <br>
-
-- The tag is case-insensitive. For example, `partner` will match `PartnEr`.
-
-- Only full words will be matched e.g. `partner` will not match `partners`.
-
-- The added tags are displayed on the contact in alphabetical order. <br>
-  e.g. `t/partner t/education` will display `education` before `partner`.
-
-</div>
-
-Examples:
+**Examples**:
 
 - `tag 1 t/computerScience t/Y2` adds the tags `computerScience` and `Y2` to the first contact in the list
 
@@ -403,6 +400,7 @@ Tag labelled with "paid" will have green background to indicate student has paid
 
 Deletes the specified tag(s) from the specified contact.
 
+
 Format 1: `deletetag INDEX t/TAG [t/MORE_TAG]`
 
 * Deletes specified `TAG` (and `MORE_TAG` if present) from the contact at the specified `INDEX` provided the tag already exists.
@@ -413,10 +411,10 @@ Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
 
 * Deletes specified `TAG` (and `MORE_TAG` if present) from all contacts in the list provided the tag already exists.
 
+**Examples**:
 
 * `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
 * `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
-
 
 ---
 
@@ -484,8 +482,6 @@ If your changes to the data file makes its format invalid, AdminNUS will discard
 Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-_Details coming soon ..._
-
 ---
 
 ## Glossary
@@ -518,11 +514,11 @@ _Details coming soon ..._
 
 | Action            | Format                                                                                             | Example                                                                                                            |
 | ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| **Add a student** | `student n/NAME s/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho s/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add a student** | `student n/NAME id/STUDENT ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                           | `student n/James Ho id/A0123456X p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Add a company** | `company n/NAME i/INDUSTRY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                             | `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility`     |
 | **Clear**         | `clear`                                                                                            | `clear`                                                                                                            |
 | **Delete**        | `delete INDEX [MORE_INDEX]`                                                                        | `delete 3` or `delete 2 4`                                                                                         |
-| **Edit**          | `edit INDEX [n/NAME] [s/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
+| **Edit**          | `edit INDEX [n/NAME] [id/STUDENT ID] [i/INDUSTRY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                                        |
 | **Filtertag**     | `filtertag KEYWORD`                                                                                | `filtertag bestie`                                                                                                 |
 | **Find**          | `find KEYWORD [MORE_KEYWORDS]`                                                                     | `find James Jake`                                                                                                  |
 | **List**          | `list`                                                                                             | `list`                                                                                                             |

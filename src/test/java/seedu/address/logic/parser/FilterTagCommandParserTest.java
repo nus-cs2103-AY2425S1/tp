@@ -23,13 +23,19 @@ public class FilterTagCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterTagCommand() {
-        // no leading and trailing whitespaces
+        // No leading and trailing whitespaces
         FilterTagCommand expectedFilterTagCommand =
                 new FilterTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("Sponsor", "Friend")));
         assertParseSuccess(parser, "Sponsor Friend", expectedFilterTagCommand);
 
-        // multiple whitespaces between keywords
+        // Multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Sponsor \n \t Friend  \t", expectedFilterTagCommand);
     }
 
+    @Test
+    public void parse_duplicateArgs_throwsParseException() {
+        // Expect an error due to duplicate keywords
+        String duplicateKeywords = "Sponsor Friend Sponsor";
+        assertParseFailure(parser, duplicateKeywords, FilterTagCommandParser.MESSAGE_DUPLICATE_KEYWORDS);
+    }
 }
