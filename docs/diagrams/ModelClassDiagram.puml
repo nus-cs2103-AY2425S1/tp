@@ -22,6 +22,7 @@ Class Tag
 Class Birthday
 Class Age
 Class Frequency
+Class ProfilePicFilePath
 
 Class I #FFFFFF
 }
@@ -47,7 +48,9 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> Birthday
 Person *--> Age
+Age ..> Birthday
 Person *--> Frequency
+Person *--> ProfilePicFilePath
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

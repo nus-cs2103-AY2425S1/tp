@@ -9,10 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.ConfirmationHandler;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.ui.DuplicateWarningWindow;
 
 /**
  * Adds a person to the address book.
@@ -39,9 +41,12 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON =
+            "Person by the name of:\n %s\n already exists in the address book. Are you sure you want to proceed?";
 
     private final Person toAdd;
+
+    private ConfirmationHandler confirmationHandler;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -49,16 +54,31 @@ public class AddCommand extends Command {
     public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
+        this.confirmationHandler = new DefaultConfirmationHandler();
+    }
+
+    /**
+     * Constructor for a {@code AddCommand} object for unit tests
+     * @param person
+     * @param confirmationHandler
+     */
+    public AddCommand(Person person, ConfirmationHandler confirmationHandler) {
+        requireNonNull(person);
+        toAdd = person;
+        this.confirmationHandler = confirmationHandler;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // wrap this block in a try-catch
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            // note to self: currently duplicate person is case sensitive
+            // i.e. Alex Yeoh is different from alex yeoh
+            boolean isConfirmed = confirmationHandler.confirm(toAdd);
+            if (!isConfirmed) {
+                throw new CommandException(Messages.MESSAGE_USER_CANCEL);
+            }
         }
-
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
@@ -83,5 +103,21 @@ public class AddCommand extends Command {
         return new ToStringBuilder(this)
                 .add("toAdd", toAdd)
                 .toString();
+    }
+
+    /**
+     * Nested class for testing purposes
+     */
+    public static class DefaultConfirmationHandler implements ConfirmationHandler {
+        /**
+         * Bypasses UI popup for testing purposes
+         * @param person The duplicated person to be added
+         * @return Whether the addition proceeds or not
+         */
+        public boolean confirm(Person person) {
+            DuplicateWarningWindow duplicateWarningWindow = new DuplicateWarningWindow();
+            duplicateWarningWindow.show(person);
+            return duplicateWarningWindow.isConfirmed();
+        }
     }
 }

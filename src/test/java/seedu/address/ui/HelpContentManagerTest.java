@@ -64,4 +64,29 @@ public class HelpContentManagerTest {
         assertEquals("Quick Start", tableOfContents.get(1),
                 "Second item in the TOC should be 'Quick Start'");
     }
+
+    @Test
+    public void contentMap_sizeAndKeys() {
+        // Ensure the content map has the expected number of entries
+        assertEquals(13, helpContentManager.getTableOfContents().size(), "Content map should contain 13 sections");
+
+        // Verify that all expected keys are present
+        String[] expectedKeys = {
+            "Introduction", "Quick Start", "Command Format Guidelines", "Adding a Contact",
+            "Listing All Contacts", "Editing a Contact", "Finding Contacts", "Deleting a Contact",
+            "Clearing All Entries", "Marking a Person as Paid/Unpaid", "Saving and Editing Data",
+            "Exiting the Program", "Command Summary"
+        };
+
+        for (String key : expectedKeys) {
+            assertNotNull(helpContentManager.getContent(key), "Content for key '" + key + "' should not be null");
+        }
+    }
+
+    @Test
+    public void emptyContentHandling_nonExistentEntry_returnsNull() {
+        // Check if a non-existent entry returns null
+        String missingContent = helpContentManager.getContent("NonExistentEntry");
+        assertNull(missingContent, "Content for a non-existent entry should be null");
+    }
 }
