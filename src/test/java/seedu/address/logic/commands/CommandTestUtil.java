@@ -31,8 +31,8 @@ public class CommandTestUtil {
     public static final int VALID_ID_BOB = 9;
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
+    public static final String VALID_PHONE_AMY = "81111111";
+    public static final String VALID_PHONE_BOB = "92222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1, 123456";
@@ -43,8 +43,8 @@ public class CommandTestUtil {
     public static final int VALID_ID_DEACON = 11;
     public static final String VALID_NAME_CLARA = "Clara Doe";
     public static final String VALID_NAME_DEACON = "Deacon Smith";
-    public static final String VALID_PHONE_CLARA = "33333333";
-    public static final String VALID_PHONE_DEACON = "44444444";
+    public static final String VALID_PHONE_CLARA = "93333333";
+    public static final String VALID_PHONE_DEACON = "84444444";
     public static final String VALID_EMAIL_CLARA = "clara@example.com";
     public static final String VALID_EMAIL_DEACON = "deacon@example.com";
     public static final String VALID_ADDRESS_CLARA = "Block 456, Clara Street 5, 123456";
