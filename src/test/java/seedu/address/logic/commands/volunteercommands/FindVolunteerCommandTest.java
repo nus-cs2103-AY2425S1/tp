@@ -23,7 +23,6 @@ public class FindVolunteerCommandTest {
         // Search for a volunteer name that exists in the volunteer list
         String searchString = "Alice"; // Replace with an actual volunteer name in getTypicalVolunteerList()
         FindVolunteerCommand command = new FindVolunteerCommand(searchString);
-        System.out.println(command);
         // Update expected model to show volunteers containing the search string
         expectedModel.updateFilteredVolunteerList(volunteer -> volunteer.getName().toString().toLowerCase()
                 .contains(searchString.toLowerCase()));

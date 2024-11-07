@@ -59,8 +59,6 @@ public class EventNewCommand extends Command {
 
         model.addEvent(toAdd);
 
-        model.getFilteredEventList().stream().forEach(event -> System.out.println(event));
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

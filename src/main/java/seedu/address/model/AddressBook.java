@@ -48,7 +48,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         volunteerManager.setVolunteers(newData.getVolunteerList());
         eventManager.setEvents(newData.getEventList());
-        validateAllData();
     }
 
     /**
@@ -96,8 +95,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes the first event that overlaps with another event.
      */
     public void removeOverlappingEvents() {
-        System.out.println("Checking for overlapping events...");
-
         // check to ensure that no volunteer is assigned to overlapping events
         // this is only used when the data is being reset
         for (Volunteer v : volunteerManager.getVolunteers()) {
@@ -114,8 +111,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                 boolean hasOverlappingEvents = false;
                 for (Event otherEvent : eventsInvolvedIn) {
                     if (event != otherEvent && event.isOverlappingWith(otherEvent)) {
-                        System.out.println("Unassigning " + v.getName().fullName + " from "
-                                + event.getName().toString());
                         unassignVolunteerFromEvent(v, event);
                         eventsInvolvedIn.remove(event);
                         hasOverlappingEvents = true;
