@@ -138,3 +138,4 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new EditCommand(ID_FIRST_PERSON, DESC_BOB)));
     }
 }
+

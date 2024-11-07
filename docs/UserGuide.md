@@ -18,17 +18,19 @@ With **MedDict**, we believe we can revolutionise your work and management exper
 
 With all that said, let's start you on your journey towards a new peak level of efficiency! 💯
 
-If you would like to skip to any specific part of the User Guide, you can refer to the table below! 😊 <br><br><br><br><br><br><br><br>
+If you would like to skip to any specific part of the User Guide, you can refer to the table below! 😊
+
+<div style="page-break-after: always;"></div>
 
 <img src="images/table_of_contents_banner.png" alt="MedDict Logo" style="width: 75%; margin: 0; display: block; margin: 0 auto;" /><br>
 * Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 🛠️ Quick Start 🛠️
 
-This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-beginner-friendly-detailed) or scroll past this section.
+This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#-quick-start-beginner-friendly-detailed-) or scroll past this section.
 
 1. Ensure you have Java `17` or above installed in your device.
 
@@ -56,7 +58,7 @@ This section is for users who are experienced in installing and using Java execu
 
 6. That's all for the setup! If you require a more detailed set-up guide, you can scroll down to our [detailed quick start guide](#-quick-start-beginner-friendly-detailed-). Otherwise, you can refer to the [Features Section below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 🛠️⚙️ Quick Start (beginner-friendly, detailed) ⚙️🛠️
 
@@ -150,7 +152,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
            ```bash
            java -jar meddict-v1.6.jar
            ```
-    <br>
+           ---
    After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the Operating System (OS) and the presence of data.<br>
    <img src="images/StartUpPage.png" alt="MacOS Start-Up" style="width: 36%;" />
    <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br><br>
@@ -170,7 +172,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 <br><br>
 6. That's all for the setup! Refer to the [Features Section below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -196,10 +198,16 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div class="alert alert-block alert-success">
 
-### Viewing Help : `help`
+For your convenience and easy reference, you can click on the header for the command to go to the [command summary table!](#command-summary)<br><br>
 
-Displays a message with instructions on accessing the help page.
+For example, try clicking on "Viewing Help" in the "Viewing Help: `help`" section below!
+</div>
+
+### [Viewing Help](#command-summary): `help`
+
+Displays a message with a link to the User Guide (you're here right now!).
 
 Format: `help`
 
@@ -208,63 +216,65 @@ Examples:
   **Output**: <br>
 ![help message](images/helpMessage.png)
 
-### Creating and Adding a Doctor : `createD`
+### [Creating and Adding a Doctor](#command-summary): `createD`
 
-Creates a doctor with given details and add the doctor to the MedDict database in the address book.
+Creates a doctor with given details and adds the doctor to the MedDict database.
 
 Format: `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
-* **Name**: Only alphanumeric characters and spaces; cannot be blank.
-* **Phone number:** Numeric only; minimum of 3 digits.
-* **Email**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
+* **NAME**: Only alphanumeric characters and spaces; cannot be blank.
+* **PHONE_NUMBER:** Numeric only; minimum of 3 digits.
+* **EMAIL**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
   but cannot start or end with these special characters (+_.-). The domain consists of labels separated by periods,
   ending with a label at least two characters long, with each label starting and ending with an alphanumeric character and allowing hyphens in between.
-* **Doctor**: Duplicate doctors (same name, phone, or email) are not allowed.
-* A _notification message_ will be output if there is failure in creating doctor.
+* **ADDRESS**: Address of the doctor.
+* **Note:**: Duplicate doctors (same name, phone, and email) are not allowed.
+* A _notification message_ will be displayed if MedDict could not create the doctor with the given information.
 
 Examples:
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
-    Successfully created a new doctor of ID: #1 : <br>
+    Successfully created a new doctor with ID: #1 : <br>
     Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: Specialist in physiotherapy
 
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
-  This doctor already exists
+  This doctor already exists.
 
 
-### Creating and Adding a Patient : `createP`
+### [Creating and Adding a Patient](#command-summary): `createP`
 
-Creates a patient with given details and add the patient to the MedDict database in the address book.
+Creates a patient with given details and adds the patient to the MedDict database.
 
 Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
-* **Name**: Only alphanumeric characters and spaces; cannot be blank.
-* **Phone number:** Numeric only; minimum of 3 digits.
-* **Email**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
+* **NAME**: Only alphanumeric characters and spaces; cannot be blank.
+* **PHONE_NUMBER:** Numeric only; minimum of 3 digits.
+* **EMAIL**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
   but cannot start or end with these special characters (+_.-). The domain consists of labels separated by periods,
   ending with a label at least two characters long, with each label starting and ending with an alphanumeric character and allowing hyphens in between.
-* **Patient**: Duplicate patients (same name, phone, or email) are not allowed.
-* A _notification message_ will be output if there is failure in creating patient.
+* * **ADDRESS**: Address of the doctor.
+* **Note**: Duplicate patients (same name, phone, or email) are not allowed.
+* A _notification message_ will be displayed if MedDict could not create the patient with the given information.
 
 
 Examples:
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br> 
-    Successfully created a new patient of ID: #0 : <br>
+    Successfully created a new patient with ID: #0 : <br>
     John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
-This patient already exists
+This patient already exists.
 
-### Deleting a Person : `deleteP`
+### [Deleting a Person](#command-summary): `deleteP`
 
-Deletes the person with the specified `ID` from the MedDict database in the address book.
+Deletes the person with the specified `ID` from the MedDict database.
 
 Format: `deleteP z/PERSON_ID`
 
-* **Person ID**: Must be valid, present in the MedDict database.
-* A _notification message_ will be output if there is failure in deleting person.
+* **PERSON_ID**: Must be valid, present in the MedDict database.
+* A _notification message_ will be displayed if MedDict could not delete the person with the given ID.
 
 Examples:
 * `deleteP 0` <br>
@@ -274,14 +284,14 @@ Examples:
   **Output**: <br>
   Unable to delete the person, check the ID entered!
 
-### Add a Remark to a Patient : `addR`
+### [Add a Remark to a Patient](#command-summary): `addR`
 
 Adds a remark to an existing patient with the specified `PATIENT_ID` in the MedDict database in address book.
 
 Format: `addR z/PATIENT_ID r/REMARK`
 
-* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
-* A _notification message_ will be output if there is failure in adding notes to the patient.
+* **PATIENT_ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
+* A _notification message_ will be displayed if MedDict could not add remarks to the patient with the given ID.
 
 Examples:
 *  `addR z/0 r/cancer` <br>
@@ -291,7 +301,7 @@ Examples:
    **Output**: <br>
    Unable to add remarks! Check the ID entered!
 
-### Listing All Persons : `list`
+### (Listing All Persons(#command-summary): `list`
 
 Displays a list of all persons in the address book.
 
@@ -302,20 +312,19 @@ Examples:
     **Output**: <br>
     ![list](images/list.png)
 
-### Editing a Person : `edit`
+### [Editing a Person](#command-summary): `edit`
 
-Edits an existing person with the specified `ID` in the address book.
+Edits an existing person with the specified `ID` in the database.
 
 Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
-* **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **ID**: The Person ID must be valid, present in the MedDict database, and an _integer_ (0, 1, 2, …​).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* Editing the person with the detail same as the existing detail is not allowed.
-* A _notification message_ will be output if there is failure in editing person in MedDict database in address book.
+* Editing the person with the same details as the existing detail is not allowed.
+* A _notification message_ will be displayed if MedDict could not edit the person with the given ID.
 
 Examples:
 *  `edit z/1 p/91234567 e/johndoe@example.com` <br>
@@ -328,7 +337,7 @@ Examples:
   **Output**: <br>
   This person already exists in the address book.
 
-### Getting ID of Doctor or Patient by Name: `get`
+### [Getting ID of Doctor or Patient by Name](#command-summary): `get`
 
 Gets the ID of a doctor or patient whose names contain any of the given keywords.
 
@@ -340,7 +349,7 @@ Format: `get KEYWORD`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* A _notification message_ will be output if there is failure in retrieving ID from MedDict database in address book.
+* A _notification message_ will be displayed if MedDict could not find a person associated with the KEYWORD.
 
 Examples:
 * `get john` <br>
@@ -354,7 +363,7 @@ Examples:
   Two persons listed that suits your keyword! <br>
   enters more specific name keywords to retrieve the ID of the person
 
-### Finding Doctor or Patient by Name: `find`
+### [Finding Doctor or Patient by Name](#command-summary): `find`
 
 Finds a doctor or patient whose names contain any of the given keywords.
 
@@ -366,7 +375,7 @@ Format: `find KEYWORD`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* A _notification message_ will be displayed if there is a failure in retrieving ID from MedDict database in address book.
+* A _notification message_ will be displayed if MedDict could not find a person associated with the KEYWORD.
 
 Examples:
 * `find john` <br>
@@ -381,9 +390,9 @@ Examples:
   Two persons listed that suits your keyword! <br>
   enters more specific name keywords to retrieve the ID of the person
 
-### Adding an Appointment : `addA`
+### [Adding an Appointment](#command-summary): `addA`
 
-Adds an appointment to an existing patient with the specified `PATIENT_ID` and doctor with the specified `DOCTOR_ID` in the MedDict database in address book.
+Adds an appointment to an existing patient with the specified `PATIENT_ID` and doctor with the specified `DOCTOR_ID` in the MedDict database.
 
 Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 
@@ -410,15 +419,15 @@ Examples:
    **Output**: <br>
    The doctor already has another appointment!
 
-### View History of a Person : `view`
+### [View History of a Person](#command-summary): `view`
 
-Displays the history of an existing person with the specified `ID` in the MedDict database in address book.
+Displays the history of an existing person with the specified `ID` in the MedDict database.
 
 Format: `view z/ID [x/DATE_TIME]`
 
 * **ID**: Must be valid, present in the MedDict database.
 * **DateTime**: Optional, user can view history of the patient on a specific date by adding `[x/DATE_TIME]` when calling the command.
-* A _notification message_ will be output if there are no histories found for the doctor.
+* A _notification message_ will be displayed if MedDict could not find any history or appointments associated with the person's ID.
 
 Examples:
 *  `view z/0 x/2024-12-31 15:23` <br>
@@ -432,14 +441,14 @@ Examples:
    **Output**: <br>
    No history found for the person.
 
-### Check Appointment of a Person : `checkA`
+### [Check Appointments of a Person](#command-summary): `checkA`
 
-Checks the appointments of an existing person with the specified `ID` in the MedDict database in address book.
+Checks the appointments of an existing person with the specified `ID` in the MedDict database.
 
 Format: `checkA z/ID y/DATE`
 
 * **ID**: Must be valid, present in the MedDict database.
-* A _notification message_ will be output if there are no appointments found for the person.
+* A _notification message_ will be displayed if MedDict could not find any appointments associated with the person's ID.
 
 Examples:
 *  `checkA z/1 y/2024-12-31` <br>
@@ -450,16 +459,15 @@ Examples:
    **Output**: <br>
    No appointment found for Doctor: `Amy Bee`
 
-### Mark Appointment of a Doctor : `mark`
+### [Mark Appointment of a Doctor](#command-summary): `mark`
 
-Marks appointment of an existing patients with the specified `PATIENT_ID`  
-with a doctor with the specified `DOCTOR_ID` in the MedDict database in address book.
+Marks appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE_TIME` in the MedDict database.
 
 Format: `marK z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
-* A _notification message_ will be output if there is failure in marking appointments.
+* A _notification message_ will be displayed if MedDict could not find the appointment to mark.
 
 Examples:
 *  `mark z/0 z/1 x/2024-12-31 15:23` <br>
@@ -469,16 +477,15 @@ Examples:
    **Output**: <br>
    No appointments found on this date!
 
-### Delete Appointment : `deleteA`
+### [Delete Appointment](#command-summary): `deleteA`
 
-Deletes appointment of an existing patient with the specified `PATIENT_ID` 
-with a doctor with the specified `DOCTOR_ID` in the MedDict database in address book.
+Deletes appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE_TIME` from the MedDict database.
 
 Format: `deleteA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
-* A _notification message_ will be output if there is failure in deleting appointment.
+* A _notification message_ will be displayed if MedDict could not find the appointment to delete.
 
 Examples:
 *  `deleteA z/0 z/1 x/2024-12-31 15:23` <br>
@@ -488,9 +495,9 @@ Examples:
    **Output**: <br>
    The appointment doesn't exist!
 
-### Clearing All Entries : `clear`
+### [Clearing All Entries](#command-summary): `clear`
 
-Clears all entries from the address book.
+Clears all entries from the database.
 
 Format: `clear`
 
@@ -499,7 +506,7 @@ Examples:
   **Output**: <br>
   ![clear message](images/clearMessage.png)
 
-### Exiting the Program : `exit`
+### [Exiting the Program](#command-summary): `exit`
 
 Exits the program.
 
@@ -523,11 +530,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
 **Q**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
-**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start)!
+**A**: To open and run MedDict, please refer to the [Quick Start Guide](#-quick-start-)!
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -535,10 +543,10 @@ _Details coming soon ..._
 **Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
 **A**: No worries, you can easily transfer your data! Refer to the steps below.
 
-1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
+1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#-quick-start-beginner-friendly-detailed-))
 2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
 3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (e.g. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
-4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start) if needed)
+4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#-quick-start-) if needed)
 5. Open / run the application once.
 6. Close the application.
 7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
@@ -557,19 +565,19 @@ _Details coming soon ..._
 
 | Action                                                          | Format, Examples                                                                                                                                          |
 |-----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help--help)**                                 | `help` <br> Shows help page                                                                                                                               |
-| **[Create Doctor](#creating-and-adding-a-doctor--created)**     | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
-| **[Create Patient](#creating-and-adding-a-patient--createp)**   | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                     |
-| **[Delete Person](#deleting-a-person--deletep)**                | `deleteP z/PERSON_ID` <br> e.g., `deleteP z/2`                                                                                                            |
-| **[Add Notes](#add-a-remark-to-a-patient--addr)**               | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
-| **[List](#listing-all-persons--list)**                          | `list` <br> Shows all persons in address book                                                                                                             |
-| **[Edit](#editing-a-person--edit)**                             | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
+| **[Help](#viewing-help-help)**                                  | `help` <br> Shows help page                                                                                                                               |
+| **[Create Doctor](#creating-and-adding-a-doctor-created)**      | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
+| **[Create Patient](#creating-and-adding-a-patient-createp)**    | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                     |
+| **[Delete Person](#deleting-a-person-deletep)**                 | `deleteP z/PERSON_ID` <br> e.g., `deleteP z/2`                                                                                                            |
+| **[Add Notes](#add-a-remark-to-a-patient-addr)**                | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
+| **[List](#listing-all-personscommand-summary-list)**            | `list` <br> Shows all persons in address book                                                                                                             |
+| **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
 | **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                                       |
-| **[Add Appointment](#adding-an-appointment--adda)**             | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                           |
-| **[View History](#view-history-of-a-person--view)**             | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                                 |
-| **[Check Appointment](#check-appointment-of-a-person--checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                          |
-| **[Mark Appointment](#mark-appointment-of-a-doctor--mark)**     | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                           |
-| **[Delete Appointment](#delete-appointment--deletea)**          | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                          |
-| **[Clear](#clearing-all-entries--clear)**                       | `clear` <br> Clears all entries                                                                                                                           |
-| **[Exit](#exiting-the-program--exit)**                          | `exit` <br> Exits the program                                                                                                                             |
+| **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                           |
+| **[View History](#view-history-of-a-person-view)**              | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                                 |
+| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                          |
+| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                           |
+| **[Delete Appointment](#delete-appointment-deletea)**           | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                          |
+| **[Clear](#clearing-all-entries-clear)**                        | `clear` <br> Clears all entries                                                                                                                           |
+| **[Exit](#exiting-the-program-exit)**                           | `exit` <br> Exits the program                                                                                                                             |
 
