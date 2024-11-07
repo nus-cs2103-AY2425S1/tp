@@ -34,7 +34,7 @@ tasks done faster than traditional GUI apps.
 
     * `contact list` : Lists all contacts.
 
-    * `contact add /n John Doe /p 98765432 /e johnd@example.com /a John street, block 123, #01-01 /r Student /tfriends`:
+    * `contact add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 r/Student t/friends t/owesMoney`:
       Adds a contact named `John Doe` to the Address Book.
 
     * `contact delete 3` : Deletes the 3rd contact shown in the current list.
@@ -119,6 +119,8 @@ Remarks:
 * `TAGS` have no limits on quantity.
 * `TAGS` can only have alphanumeric characters with no spacing.
 
+> **Note:** Lessons can only be added to contacts with the role of student. Therefore, if you want to add a lesson to a contact, you must first add the contact with the role of student.
+
 Examples:
 
 * `contact add n/Norbeast p/987654322131 e/norbeast@example.com a/John street, block 123, #01-01 r/Student`
@@ -197,6 +199,10 @@ Examples:
 
 * `contact list` followed by `contact delete 2` deletes the 2nd person in the address book.
 * `contact find Betsy` followed by `contact delete 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a lesson : `lesson add`
+
+Adds a lesson to the lesson schedule.
 
 Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
 
