@@ -60,7 +60,7 @@ public class BatchUnmarkCommand extends Command {
             model.setPerson(p, markedStudent);
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        String selectedPersons = formatStudentsToUnmark(students);
+        String selectedPersons = formatUnmarkedStudents(students);
 
         return new CommandResult(String.format(MESSAGE_BATCH_UNMARK_SUCCESS, selectedPersons));
     }
@@ -92,10 +92,10 @@ public class BatchUnmarkCommand extends Command {
     /**
      * Formats a list of student names into a comma-separated string for display.
      *
-     * @param students The list of students to be unmarked.
+     * @param students The list of students unmarked.
      * @return A comma-separated string of student names, or "none" if the list is empty.
      */
-    private static String formatStudentsToUnmark(List<Student> students) {
+    public static String formatUnmarkedStudents(List<Student> students) {
         return students.stream()
                 .map(person -> person.getName().toString())
                 .reduce((s1, s2) -> s1 + ", " + s2)

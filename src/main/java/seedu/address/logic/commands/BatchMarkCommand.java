@@ -63,7 +63,7 @@ public class BatchMarkCommand extends Command {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        String studentsMarked = formatStudentsToMark(students);
+        String studentsMarked = formatMarkedStudents(students);
 
         return new CommandResult(String.format(MESSAGE_BATCH_MARK_SUCCESS, studentsMarked));
     }
@@ -90,10 +90,10 @@ public class BatchMarkCommand extends Command {
     /**
      * Formats a list of student names into a comma-separated string for display.
      *
-     * @param students The list of students to be marked.
+     * @param students The list of students marked.
      * @return A comma-separated string of selected persons' names, or "none" if the list is empty.
      */
-    public static String formatStudentsToMark(List<Student> students) {
+    public static String formatMarkedStudents(List<Student> students) {
         return students.stream()
                 .map(person -> person.getName().toString()) // Convert Name object to String
                 .reduce((s1, s2) -> s1 + ", " + s2)
