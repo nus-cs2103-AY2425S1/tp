@@ -193,60 +193,41 @@ public class CommandResultTest {
     @Test
     public void toStringMethod() {
         CommandResult defaultCommandResult = new DefaultCommandResult("feedback");
-        String defaultCommandResultToString = DefaultCommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + defaultCommandResult.getFeedbackToUser()
-                + ", isShowHelp=" + defaultCommandResult.isShowHelp()
-                + ", isShowPatientInfo=" + defaultCommandResult.isShowPatientInfo()
-                + ", isShowFilteredAppts=" + defaultCommandResult.isShowFilteredAppts()
-                + ", keyword=" + defaultCommandResult.getKeyword()
-                + ", patient=" + defaultCommandResult.getPatient()
-                + ", isExit=" + defaultCommandResult.isExit() + "}";
+        String defaultCommandResultToString = showCommandResultToString(
+                DefaultCommandResult.class.getCanonicalName(), defaultCommandResult);
         assertEquals(defaultCommandResultToString, defaultCommandResult.toString());
 
         CommandResult exitCommandResult = new ExitCommandResult("feedback", true);
-        String exitCommandResultToString = ExitCommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + exitCommandResult.getFeedbackToUser()
-                + ", isShowHelp=" + exitCommandResult.isShowHelp()
-                + ", isShowPatientInfo=" + exitCommandResult.isShowPatientInfo()
-                + ", isShowFilteredAppts=" + exitCommandResult.isShowFilteredAppts()
-                + ", keyword=" + exitCommandResult.getKeyword()
-                + ", patient=" + exitCommandResult.getPatient()
-                + ", isExit=" + exitCommandResult.isExit() + "}";
+        String exitCommandResultToString = showCommandResultToString(ExitCommandResult.class.getCanonicalName(),
+                exitCommandResult);
         assertEquals(exitCommandResultToString, exitCommandResult.toString());
 
         CommandResult keywordCommandResult = new KeywordCommandResult("feedback", "add");
-        String keywordCommandResultToString = KeywordCommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + keywordCommandResult.getFeedbackToUser()
-                + ", isShowHelp=" + keywordCommandResult.isShowHelp()
-                + ", isShowPatientInfo=" + keywordCommandResult.isShowPatientInfo()
-                + ", isShowFilteredAppts=" + keywordCommandResult.isShowFilteredAppts()
-                + ", keyword=" + keywordCommandResult.getKeyword()
-                + ", patient=" + keywordCommandResult.getPatient()
-                + ", isExit=" + keywordCommandResult.isExit() + "}";
+        String keywordCommandResultToString = showCommandResultToString(
+                KeywordCommandResult.class.getCanonicalName(), keywordCommandResult);
         assertEquals(keywordCommandResultToString, keywordCommandResult.toString());
 
         CommandResult isShowPatientInfoCommandResult =
                 new ShowPatientInfoCommandResult("feedback", KEANU, true);
-        String addCommandResultToString = ShowPatientInfoCommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + isShowPatientInfoCommandResult.getFeedbackToUser()
-                + ", isShowHelp=" + isShowPatientInfoCommandResult.isShowHelp()
-                + ", isShowPatientInfo=" + isShowPatientInfoCommandResult.isShowPatientInfo()
-                + ", isShowFilteredAppts=" + isShowPatientInfoCommandResult.isShowFilteredAppts()
-                + ", keyword=" + isShowPatientInfoCommandResult.getKeyword()
-                + ", patient=" + isShowPatientInfoCommandResult.getPatient()
-                + ", isExit=" + isShowPatientInfoCommandResult.isExit() + "}";
+        String addCommandResultToString = showCommandResultToString(
+                ShowPatientInfoCommandResult.class.getCanonicalName(), isShowPatientInfoCommandResult);
         assertEquals(addCommandResultToString, isShowPatientInfoCommandResult.toString());
 
         CommandResult isShowFilteredApptsCommandResult =
                 new ShowFilteredApptsCommandResult("feedback", true);
-        String showFilteredApptsCommandResultToString = ShowFilteredApptsCommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + isShowFilteredApptsCommandResult.getFeedbackToUser()
-                + ", isShowHelp=" + isShowFilteredApptsCommandResult.isShowHelp()
-                + ", isShowPatientInfo=" + isShowFilteredApptsCommandResult.isShowPatientInfo()
-                + ", isShowFilteredAppts=" + isShowFilteredApptsCommandResult.isShowFilteredAppts()
-                + ", keyword=" + isShowFilteredApptsCommandResult.getKeyword()
-                + ", patient=" + isShowFilteredApptsCommandResult.getPatient()
-                + ", isExit=" + isShowFilteredApptsCommandResult.isExit() + "}";
+        String showFilteredApptsCommandResultToString = showCommandResultToString(
+                ShowFilteredApptsCommandResult.class.getCanonicalName(), isShowFilteredApptsCommandResult);
         assertEquals(showFilteredApptsCommandResultToString, isShowFilteredApptsCommandResult.toString());
+    }
+
+    String showCommandResultToString(String canonicalName, CommandResult commandResult) {
+        return canonicalName
+                + "{feedbackToUser=" + commandResult.getFeedbackToUser()
+                + ", isShowHelp=" + commandResult.isShowHelp()
+                + ", isShowPatientInfo=" + commandResult.isShowPatientInfo()
+                + ", isShowFilteredAppts=" + commandResult.isShowFilteredAppts()
+                + ", keyword=" + commandResult.getKeyword()
+                + ", patient=" + commandResult.getPatient()
+                + ", isExit=" + commandResult.isExit() + "}";
     }
 }

@@ -16,9 +16,9 @@ import seedu.address.model.patient.Patient;
 
 
 public class FilteredAppointmentTest {
-    private static Appt appt = new Appt(LocalDateTime.parse("2000-10-10T14:00"), new HealthService("Blood Test"));
-    private static Patient patient = AMY;
-    private static Patient patient2 = BOB;
+    private Appt appt = new Appt(LocalDateTime.parse("2000-10-10T14:00"), new HealthService("Blood Test"));
+    private Patient patient = AMY;
+    private Patient patient2 = BOB;
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -46,7 +46,7 @@ public class FilteredAppointmentTest {
         // different types -> returns false
         assertFalse(filteredAppointment.equals(5));
 
-        // different values -> returns false
+        // different patient value -> returns false
         assertFalse(filteredAppointment.equals(filteredAppointmentDifferentPatient));
     }
 

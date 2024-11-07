@@ -18,7 +18,6 @@ public class JsonAdaptedPatientTest {
     private static final String INVALID_NRIC = "T012345678910112223";
     private static final String INVALID_BIRTHDATE = " 2050-10-12";
     private static final String INVALID_SEX = "female";
-    private static final String INVALID_HEALTHSERVICE = "";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_NRIC = BENSON.getNric().toString();
@@ -110,18 +109,4 @@ public class JsonAdaptedPatientTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthdate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, patient::toModelType);
     }
-
-    /*
-    @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedHealthService> invalidHealthServices = new ArrayList<>(VALID_SERVICES);
-        invalidHealthServices.add(new JsonAdaptedHealthService(INVALID_HEALTHSERVICE));
-        JsonAdaptedPatient patient =
-                new JsonAdaptedPatient(VALID_NAME, VALID_NRIC, VALID_SEX, VALID_BIRTHDATE, invalidHealthServices,
-                    null, null, null, null, null, null,
-                    null, null, null, null, null);
-        assertThrows(IllegalValueException.class, patient::toModelType);
-    }
-    */
-
 }

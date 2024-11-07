@@ -63,7 +63,8 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String homeCommand = HomeCommand.COMMAND_WORD;
-        assertCommandSuccess(homeCommand, HomeCommand.MESSAGE_SUCCESS, model);
+        String homeCommandSuccess = String.format(HomeCommand.MESSAGE_SUCCESS, model.getPatientSize());
+        assertCommandSuccess(homeCommand, homeCommandSuccess, model);
     }
 
     @Test

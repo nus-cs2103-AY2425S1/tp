@@ -100,8 +100,7 @@ public class Appt {
         }
 
         Appt e = (Appt) other;
-        return dateTime.isEqual(e.dateTime)
-                && healthService.equals(e.healthService);
+        return dateTime.isEqual(e.dateTime);
     }
 
     /**
@@ -178,6 +177,7 @@ public class Appt {
      * @return
      */
     public boolean isBetweenDates(LocalDate start, LocalDate end) {
+        assert end != null;
         return isAfterOrOn(start) && isBeforeOrOn(end);
     }
 

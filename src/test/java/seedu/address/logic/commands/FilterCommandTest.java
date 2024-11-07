@@ -28,8 +28,9 @@ import seedu.address.model.healthservice.HealthService;
 
 
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
+    private final TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
 
     @Test
     public void equals() {
@@ -55,7 +56,7 @@ public class FilterCommandTest {
         // null -> returns false
         assertFalse(firstFilterCommand.equals(null));
 
-        // different patient -> returns false
+        // no start date and health service -> returns false
         assertFalse(firstFilterCommand.equals(secondFilterCommand));
     }
 
@@ -74,13 +75,10 @@ public class FilterCommandTest {
 
         FilterCommand command = new FilterCommand(dateFilter);
 
-        expectedModel.filterAppts(dateFilter);
-        TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
         appointments.add(new FilteredAppointment(ALICE.getImmutableApptList().get(0), ALICE));
         appointments.add(new FilteredAppointment(CARL.getImmutableApptList().get(0), CARL));
 
-        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        executeAssertions(dateFilter, expectedMessage);
     }
 
     @Test
@@ -92,16 +90,10 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
-        FilterCommand command = new FilterCommand(dateFilter);
-
-        expectedModel.filterAppts(dateFilter);
-        TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
         appointments.add(new FilteredAppointment(BENSON.getImmutableApptList().get(0), BENSON));
         appointments.add(new FilteredAppointment(CARL.getImmutableApptList().get(0), CARL));
 
-        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(appointments, model.getFilteredAppts());
+        executeAssertions(dateFilter, expectedMessage);
     }
 
     @Test
@@ -112,14 +104,9 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "1 appt found " + dateFilter + RETURN_TO_HOME;
 
-        FilterCommand command = new FilterCommand(dateFilter);
-
-        expectedModel.filterAppts(dateFilter);
-        TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
         appointments.add(new FilteredAppointment(BENSON.getImmutableApptList().get(0), BENSON));
 
-        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        executeAssertions(dateFilter, expectedMessage);
     }
 
     @Test
@@ -130,11 +117,18 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "No appts found " + dateFilter + RETURN_TO_HOME;
 
+        executeAssertions(dateFilter, expectedMessage);
+    }
+
+    private void executeAssertions(AppointmentDateFilter dateFilter, String expectedMessage) {
         FilterCommand command = new FilterCommand(dateFilter);
 
         expectedModel.filterAppts(dateFilter);
+
         CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(new TreeSet<>(APPOINTMENT_COMPARATOR), model.getFilteredAppts());
+        assertEquals(appointments, model.getFilteredAppts());
+
+        appointments.clear();
     }
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.commandresult.CommandResult;
@@ -25,6 +26,7 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views full profile of identified patient in the system\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+    private static final Logger logger = Logger.getLogger(ViewCommand.class.getName());
 
     private final Nric targetNric;
 
@@ -47,12 +49,14 @@ public class ViewCommand extends Command {
                 .findFirst();
 
         if (!optionalPatient.isPresent()) {
+            logger.warning("Patient with NRIC " + targetNric + " not found");
             throw new CommandException(MESSAGE_PATIENT_NOT_FOUND);
         }
 
         Patient patient = optionalPatient.get();
         assert patient != null : "Patient should not be null after being found";
 
+        logger.info("Retrieved patient info of : " + patient);
         return new ShowPatientInfoCommandResult(generateSuccessMessage(patient), patient, true);
     }
 

@@ -239,12 +239,12 @@ Format: `bookappt NRIC dt/APPOINTMENT_DATE_TIME h/HEALTH_SERVICE`
 NRIC provided must be a valid NRIC in the system.
 </li>
 <li>
-All paramters are compulsory
+All parameters are compulsory
 </li></ul>
 </div>
 
 
-Example: `bookappt S9758366N dt/2024-12-29 h/Vaccination`
+Example: `bookappt S9758366N dt/2024-12-29 13:00 h/Vaccination`
 <br>
 Books a Vaccination appointment for the given patient by NRIC at the specified time.
 
@@ -261,7 +261,7 @@ Format: `list`
 
 Identifies the specific patient using NRIC and deletes the appointment specified.
 
-Format: `deleteappt NRIC dt/APPOINTMENT DATE-TIME`
+Format: `deleteappt NRIC dt/APPOINTMENT_DATE_TIME`
 
 <box type="info" seamless>
 

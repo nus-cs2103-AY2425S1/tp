@@ -89,6 +89,8 @@ public class PatientInfoPanel extends UiPart<Region> {
         allergiesHeader.setText("Allergies");
         furtherDetailsHeader.setText("Further Details");
         setPatientInfoContent(patient);
+
+        logger.info("PatientInfoPanel initialized successfully for patient: " + patient.getNric());
     }
 
     private void setPatientInfoContent(Patient patient) {

@@ -4,8 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
+import seedu.address.model.filteredappointment.FilteredAppointment;
 
 /**
  * Represents a Patient in the address book.
@@ -236,6 +239,10 @@ public class Patient {
      */
     public void checkAllergyAlreadyExists(Allergy allergy) {
         allergies.checkAllergyAlreadyExists(allergy);
+    }
+
+    public Stream<FilteredAppointment> getFilteredAppointments(AppointmentDateFilter dateFilter) {
+        return this.appts.filterAppts(dateFilter).map(appt -> new FilteredAppointment(appt, this));
     }
 
     /**

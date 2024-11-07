@@ -25,3 +25,5 @@ docs/_site/
 # VSCode files
 .vscode/
 
+# Class files
+*.class
