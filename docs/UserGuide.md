@@ -312,7 +312,7 @@ Updates the amount of tuition fee paid and the amount of tuition fee owed by the
 **Format:** `settle INDEX amount/AMOUNT`
 
 **Example:**
-* `settle 1 amount/500.00`
+* `settle 1 amount/50.00`
 
 **Output:**
 ![settleResult.jpg](images%2FsettleResult.jpg)
