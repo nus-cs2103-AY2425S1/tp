@@ -493,6 +493,36 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Sorting properties for a person
+
+1. Sorting properties for a person
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `sorti 1 f/Price o/H`<br>
+      Expected: Properties - both properties to buy and sell - for the first person are sorted based on property price. Details of the how the properties are sorted shown in the status message.
+
+   1. Test case: `sorti 0 f/Price o/L`<br>
+      Expected: No properties are sorted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect sort commands to try: `sorti`, `sorti x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Adding a new property to buy or sell for a person
+
+1. Adding a new property to buy or sell for a person
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `addSell 1 ht/a sp/1200000 pc/431244 un/12-24 t/Near MRT`<br>
+      Expected: A new property to buy is added for the first person. Details of the new property shown in the status message.
+
+   1. Test case: `addBuy 0 ht/a sp/1205000 pc/455677 un/1-45`<br>
+      Expected: No property is added. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect add property commands to try: `addBuy`, `addSell x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
