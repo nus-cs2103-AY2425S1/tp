@@ -268,7 +268,7 @@ specifying any tags after it. </div>
 
 Deletes the contact(s) at the specified indices from AdmiNUS.
 
-Format: `delete INDEX [MORE_INDEX]`
+Format 1: `delete INDEX [MORE_INDEX]`
 
 | Parameter Name | Description                                                         | Required   |
 | -------------- | ------------------------------------------------------------------- | ---------- |
@@ -283,14 +283,21 @@ Format: `delete INDEX [MORE_INDEX]`
 
 - The index refers to the index number shown in the displayed person list.
 
-- The index must be a positive integer (1, 2, 3, ...).
+* The index must be a positive integer (1, 2, 3, ...).
+
+* `delete all` deletes all contacts currently shown in the list, not all contacts in the database.
 
 </div>
 
+<div markdown="span" class="alert alert-primary">💡 **Tip**:
+
+To delete all students with the `oneYearMembership` tag, simply use `filtertag t/oneYearMembership` followed by `delete all`
+ </div>
+
 **Examples**:
 
-- `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
+* `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
+* `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
 
 ---
 
