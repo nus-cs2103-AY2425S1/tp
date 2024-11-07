@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalPrudy;
@@ -41,9 +43,8 @@ public class DeleteClaimsCommandTest {
 
     @Test
     public void execute_invalidClientIndex_throwsCommandException() {
-        // set an out-of-bounds client index
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
-        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(outOfBoundsIndex, validPolicyType,
+        DeleteClaimsCommand deleteClaimsCommand = createDeleteClaimsCommand(outOfBoundsIndex, validPolicyType,
                 validClaimIndex);
 
         assertCommandFailure(deleteClaimsCommand, model, DeleteClaimsCommand.MESSAGE_INVALID_CLIENT_INDEX);
@@ -51,69 +52,69 @@ public class DeleteClaimsCommandTest {
 
     @Test
     public void execute_noPolicyOfType_throwsCommandException() {
-        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.LIFE,
+        DeleteClaimsCommand deleteClaimsCommand = createDeleteClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.LIFE,
                 validClaimIndex);
-        assertCommandFailure(deleteClaimsCommand, model, String.format(DeleteClaimsCommand.MESSAGE_NO_POLICY_OF_TYPE,
-                PolicyType.LIFE, model.getFilteredClientList().get(0).getName()));
+        assertCommandFailure(deleteClaimsCommand, model, getNoPolicyOfTypeMessage(PolicyType.LIFE,
+                model.getFilteredClientList().get(0)));
     }
 
     @Test
     public void execute_claimIndexOutOfBounds_throwsCommandException() {
-        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(INDEX_SECOND_CLIENT, validPolicyType,
+        DeleteClaimsCommand deleteClaimsCommand = createDeleteClaimsCommand(INDEX_SECOND_CLIENT, validPolicyType,
                 validClaimIndex);
         assertCommandFailure(deleteClaimsCommand, model, DeleteClaimsCommand.MESSAGE_NO_CLAIM_FOUND);
     }
 
     @Test
     public void execute_validClaimDeletion_updatesModelAndReturnsSuccessMessage() {
-        // create a client with a health policy and a claim
-        Client clientWithClaim = createClientWithHealthPolicyAndClaim(
-                "John Doe", "98765432", "john@example.com", "123 Main St");
-
-        // replace the client in the model with the client that includes a claim
+        Client clientWithClaim = createClientWithHealthPolicyAndClaim("John Doe", "98765432",
+                "john@example.com", "123 Main St");
         model.setClient(model.getFilteredClientList().get(INDEX_SECOND_CLIENT.getZeroBased()), clientWithClaim);
 
-        DeleteClaimsCommand deleteClaimsCommand = new DeleteClaimsCommand(INDEX_SECOND_CLIENT, PolicyType.HEALTH,
+        DeleteClaimsCommand deleteClaimsCommand = createDeleteClaimsCommand(INDEX_SECOND_CLIENT, PolicyType.HEALTH,
                 INDEX_FIRST_CLAIM);
 
-        String expectedMessage = String.format(DeleteClaimsCommand.MESSAGE_DELETE_CLAIM_SUCCESS, PolicyType.HEALTH,
-                clientWithClaim.getName(), ClaimStatus.PENDING, "Surgery claim");
+        String expectedMessage = getDeleteClaimSuccessMessage(clientWithClaim, PolicyType.HEALTH, ClaimStatus.PENDING,
+                "Surgery claim");
 
         assertCommandSuccess(deleteClaimsCommand, model, expectedMessage, model);
     }
 
-
-
     @Test
     public void equals() {
-        DeleteClaimsCommand deleteClaimCommand1 = new DeleteClaimsCommand(INDEX_FIRST_CLIENT, validPolicyType,
+        DeleteClaimsCommand command1 = createDeleteClaimsCommand(INDEX_FIRST_CLIENT, validPolicyType, validClaimIndex);
+        DeleteClaimsCommand command2 = createDeleteClaimsCommand(INDEX_FIRST_CLIENT, validPolicyType, validClaimIndex);
+        DeleteClaimsCommand commandDifferentIndex = createDeleteClaimsCommand(INDEX_SECOND_CLIENT, validPolicyType,
                 validClaimIndex);
-        DeleteClaimsCommand deleteClaimCommand2 = new DeleteClaimsCommand(INDEX_FIRST_CLIENT, validPolicyType,
+        DeleteClaimsCommand commandDifferentPolicy = createDeleteClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.LIFE,
                 validClaimIndex);
+        DeleteClaimsCommand commandDifferentClaimIndex = createDeleteClaimsCommand(INDEX_FIRST_CLIENT, validPolicyType,
+                Index.fromOneBased(2));
 
-        // same object -> returns true
-        assert(deleteClaimCommand1.equals(deleteClaimCommand1));
-
-        // same values -> returns true
-        assert(deleteClaimCommand1.equals(deleteClaimCommand2));
-
-        // different index -> returns false
-        DeleteClaimsCommand deleteClaimDifferentIndex = new DeleteClaimsCommand(INDEX_SECOND_CLIENT, validPolicyType,
-                validClaimIndex);
-        assert(!deleteClaimCommand1.equals(deleteClaimDifferentIndex));
-
-        // different policy type -> returns false
-        DeleteClaimsCommand deleteClaimDifferentPolicy = new DeleteClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.LIFE,
-                validClaimIndex);
-        assert(!deleteClaimCommand1.equals(deleteClaimDifferentPolicy));
-
-        // different claim index -> returns false
-        DeleteClaimsCommand deleteClaimDifferentClaimIndex = new DeleteClaimsCommand(INDEX_FIRST_CLIENT,
-                validPolicyType, Index.fromOneBased(2));
-        assert(!deleteClaimCommand1.equals(deleteClaimDifferentClaimIndex));
+        assertEquals(command1, command1); // same object -> returns true
+        assertEquals(command1, command2); // same values -> returns true
+        assertNotEquals(command1, commandDifferentIndex); // different index -> returns false
+        assertNotEquals(command1, commandDifferentPolicy); // different policy type -> returns false
+        assertNotEquals(command1, commandDifferentClaimIndex); // different claim index -> returns false
+        assertNotEquals(null, command1); // null -> returns false
+        assertNotEquals(command1, new ClearCommand()); // different type -> returns false
     }
 
-    public static Client createClientWithHealthPolicyAndClaim(String name, String phone, String email, String address) {
+    private DeleteClaimsCommand createDeleteClaimsCommand(Index clientIndex, PolicyType policyType, Index claimIndex) {
+        return new DeleteClaimsCommand(clientIndex, policyType, claimIndex);
+    }
+
+    private String getNoPolicyOfTypeMessage(PolicyType policyType, Client client) {
+        return String.format(DeleteClaimsCommand.MESSAGE_NO_POLICY_OF_TYPE, policyType, client.getName());
+    }
+
+    private String getDeleteClaimSuccessMessage(Client client, PolicyType policyType, ClaimStatus claimStatus,
+                                                String claimDescription) {
+        return String.format(DeleteClaimsCommand.MESSAGE_DELETE_CLAIM_SUCCESS, policyType, client.getName(),
+                claimStatus, claimDescription);
+    }
+
+    private Client createClientWithHealthPolicyAndClaim(String name, String phone, String email, String address) {
         Claim claim = new Claim(ClaimStatus.PENDING, "Surgery claim");
 
         HealthPolicy healthPolicy = new HealthPolicy(null, null, null,
@@ -121,9 +122,7 @@ public class DeleteClaimsCommandTest {
         PolicySet policySet = new PolicySet();
         policySet.add(healthPolicy.addClaim(claim));
 
-        return new Client(new Name(name), new Phone(phone), new Email(email),
-                new Address(address), Set.of(), policySet);
+        return new Client(new Name(name), new Phone(phone), new Email(email), new Address(address), Set.of(),
+                policySet);
     }
-
-
 }
