@@ -67,11 +67,11 @@ public class DeleteCommand extends ConcreteCommand {
                 throw new CommandException(String.format(MESSAGE_DELETE_PERSON_FAILURE));
             }
         }
-        logger.info("delete successful");
+
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
         isExecuted = true;
-        assert personToDelete != null;
+        logger.info("delete successful");
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
