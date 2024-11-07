@@ -707,6 +707,7 @@ Preconditions: AddressBook has correct view, including client to edit
 * **Allergy**: A known medical condition or sensitivity that a client has to specific substances or environmental factors (e.g., certain foods, medications, pollen).
     This information is recorded in the client’s profile to help healthcare providers avoid potential triggers and deliver appropriate care during visits.
 * **Inactive Client**: A client who is no longer receiving care or whose records have not been accessed in a significant amount of time.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
