@@ -296,10 +296,8 @@ Key attributes of the target user include:
 * **Role and Responsibilities:** The user is a Prudential insurance agent who needs to efficiently oversee and update client records, including individual policies and claims
 * **Client Management Requirements:** The user regularly manages a large number of clients and requires an organized and efficient system to track and access client information swiftly
 * **Application Preference:** The user prefers desktop applications due to their stability and reliability in handling client data and other sensitive information in a local environment
-* **Interaction Style:** As a proficient typist, the user prefers a command-line interface (CLI) for its speed and efficiency over traditional mouse-based interactions.
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* **Interaction Style:** The user is able to type fast and prefers a command-line interface (CLI) for its speed and efficiency over traditional mouse-based interactions.
+
 
 **Value proposition**: We firstly improve efficiency through easy client management. Agents can quickly retrieve key information such as a client's insurance policy. Next, also improve client's relationships. Ensures agents never miss a client policy renewal. Manage clients' pending claims effectively.
 
@@ -308,27 +306,25 @@ Key attributes of the target user include:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                        | I want to …​                                      | So that I can…​                                                                 |
-|----------|--------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|
-| `* * *`  | Insurance agent                | quickly retrieve a client’s insurance policy details | efficiently provide relevant information during meetings or calls               |
-| `* * *`  | Responsible insurance agent    | receive timely reminders for clients' policies which are expiring soon | remind individual clients to renew their policies           |
-| `* * *`  | Forgetful insurance agent      | track the status of my clients' claims           | keep track of pending claims that require my attention                          |
-| `* * *`  | Insurance agent                | store all my client contact information in one place | easily access their details and communicate with them without searching across multiple platforms |
-| `* * *`  | Insurance agent                | track clients' claims and their status    | ensure all client issues are addressed promptly and effectively                 |
-| `* * *`  | Insurance agent                | Remove clients who are no longer insured under my policies | I can declutter Prudy. |
-| `* * *`  | New user                       | see a list of available commands                 | have a brief idea of the app capabilities                                       |
-| `* * *`  | Insurance agent                        | add new claims or resolve old ones                | I can organize my actionables. |
-| `* *`    | Busy insurance agent           | have a powerful search function that allows me to quickly find clients by name, policy type, or claims | respond promptly to inquiries                                                   |
-| `* *`    | Busy insurance agent           | receive notifications when a client’s claim has not been resolved after a long time | be reminded to prioritize actioning these claims                                 |
-| `* *`    | Organized insurance agent      | have a visual dashboard that shows me a summary of my client portfolio at a glance, including policy types, claims, and follow-up tasks | plan my activities without having to navigate too much                           |
-| `* *`    | Insurance agent                | Filter my client list by policy type, claim status | I can quickly create a targeted list for campaigns or follow-up actions.|
-| `*`      | Eager insurance agent          | receive reminders for key client milestones (e.g., birthdays, policy anniversaries) | send personalized messages or offers, strengthening client relationships         |
-| `*`      | Responsible insurance agent    | Track the status of any claims my clients have made | I can provide updates and assistance throughout the claim process. |
-| `*`      | Insurance agent                | import and export client data                    | work with the data outside of the platform when necessary                       |
-| `*`      | Forgetful insurance agent      | set reminders for client meetings                | never miss important meetings or calls                                          |
-| `*`      | Insurance agent                | view detailed information about client referrals and their referees | know which of my clients are related and show my appreciation to clients with large referrals |
-| `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date | prioritize my work and focus on the most important or time-sensitive client needs |
-
+| Priority | As a …​                        | I want to …​                                                                                                                            | So that I can…​                                                                                   |
+|----------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | Insurance agent                | quickly retrieve a client’s insurance policy details                                                                                    | efficiently provide relevant information during meetings or calls                                 |
+| `* * *`  | Insurance agent                | store all my client contact information in one place                                                                                    | easily access their details and communicate with them without searching across multiple platforms |
+| `* * *`  | Insurance agent                | track clients' claims and their status                                                                                                  | ensure all client issues are addressed promptly and effectively                                   |
+| `* * *`  | Insurance agent                | remove clients who are no longer insured under my policies                                                                              | declutter Prudy                                                                                   |
+| `* * *`  | New user                       | see a list of available commands                                                                                                        | have a brief idea of the app capabilities                                                         |
+| `* * *`  | Insurance agent                | add new claims or resolve old ones                                                                                                      | organize my actionables.                                                                          |
+| `* * *`  | Insurance agent                | see a list of policies held by a particular client                                                                                      | provide tailored service and information relevant to the client's portfolio                       |
+| `* * *`  | Insurance agent                | delete policies that are outdated                                                                                                       | keep the records up to date and relevant                                                          |
+| `* *`    | Busy insurance agent           | have a powerful search function that allows me to quickly find clients by name, policy type, or claims                                  | respond promptly to inquiries                                                                     |
+| `* *`    | Organized insurance agent      | have a visual dashboard that shows me a summary of my client portfolio at a glance, including policy types, claims, and follow-up tasks | plan my activities without having to navigate too much                                            |
+| `* *`    | Insurance agent                | filter my client list by policy type, claim status                                                                                      | quickly create a targeted list for campaigns or follow-up actions.                                |
+| `* *`    | Insurance agent                | filter policies expiring within a certain time frame                                                                                    | prioritize outreach to clients whose policies are up for renewal soon                             |
+| `* *`    | Insurance agent                | edit my clients' existing policies                                                                                                      | update policy information as needed to keep records accurate                                      |
+| `* *`    | Insurance agent                | edit my client's existing claims                                                                                                        | update claim information as needed to keep records accurate                                       |
+| `*`      | Responsible insurance agent    | track the status of any claims my clients have made                                                                                     | provide updates and assistance throughout the claim process.                                      |
+| `*`      | Insurance agent                | import and export client data                                                                                                           | work with the data outside of the platform when necessary                                         |
+| `*`      | Time-efficient insurance agent | assign different priority levels to my clients based on factors like policy value or renewal date                                       | prioritize my work and focus on the most important or time-sensitive client needs                 |
 
 
 *{More to be added}*
@@ -336,11 +332,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 <box type="info" seamless>
-**Note:** For all use cases below, the **System** is `Prudy` and the **Actor** is the `user`.
+Note: For all use cases below, the System is <code>Prudy</code> and the Actor is the user.
 </box>
 
 <box type="info" seamless>
-**Note:** For all use cases below, if the user enters an invalid input, or there is an error when executing the command, the use case simply ends.
+Note: For all use cases below, if the user enters an invalid input, or there is an error when executing the command, the use case simply ends.
 </box>
 
 **Use case: UC1 - List clients (Find client has a similar use case)**
@@ -412,16 +408,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e., not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  Should be intuitive, agents can perform core functions with 30 minutes training
-5.  The system should provide feedback for user inputs for basic commands (eg. add client, update client) within 1 second.
-6.  The app should not exceed 500MB of memory.
-7.  Should give clear actionable error messages that would guide the user in correcting invalid inputs
-8.  Input data should have checks to prevent wrong entries.
+1.**Platform Compatibility**: Should work on any mainstream OS with Java 17 or above installed.
+2.**Performance**: Should be able to hold up to 1000 clients without noticeable sluggishness in typical usage.
+3.**Efficiency**: A user with average typing speed should be able to perform tasks faster using commands than using a mouse-based interface.
+4.**Ease of Use**: Core functions should be intuitive enough for a new user to learn within 30 minutes.
+5.**Response Time**: Basic commands (e.g., add client, update client) should provide feedback within 1 second.
+6.**Memory Usage**: The app should not exceed 500MB of memory usage.
+7.**Error Messaging**: Should provide clear error messages that guide the user in correcting invalid inputs.
+8.**Data Persistence**: All client data should be saved and remain intact between application sessions to prevent data loss.
+9.**Reliability**: The application should handle typical user errors gracefully without crashing or requiring a restart.
+10.**Documentation**: Basic user instructions and command descriptions should be available to help new users understand and use core features effectively.
+11.**Backup**: Users should be able to easily save a copy of all data manually to prevent accidental loss.
 
-*{More to be added}*
+
 
 ### Glossary
 
@@ -435,6 +434,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Coverage**: Maximum amount an insurance company will pay under a policy.
 * **Claim Status**: The current state of a claim, such as Pending, Approved, or Rejected.
 * **Error Message**: Message displayed to the user providing guidance on how to correct the issue.
+* **Sequence Diagram**: A visual representation showing how different components of the app interact in a specific order during a process
+* **Class Diagram**: A type of UML (Unified Modeling Language) diagram that visually represents the structure of the app by showing its classes, their attributes, methods, and relationships to one another.
+* **Activity Diagram**: A UML diagram that represents workflows or processes in the app, illustrating the sequence of actions and decision points for a particular operation.
+* **Facade Pattern**: A design pattern used to simplify complex system interactions by providing a unified interface that acts as a "facade" for multiple components, reducing dependencies between components.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
