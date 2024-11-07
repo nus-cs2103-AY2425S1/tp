@@ -9,19 +9,24 @@ pageNav: 3
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This application reuses/adapts ideas, code, and documentation from various sources. Below is a list of external libraries and references used in the development of TechConnect:
 
---------------------------------------------------------------------------------------------------------------------
+- **JavaFX** for the graphical interface.
+- **PlantUML** for generating UML diagrams in documentation.
+- **JUnit** for unit testing.
+- **GSON** for JSON serialization and deserialization.
+
+---
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [_Setting up and getting started_](SettingUp.md) for installation and setup instructions.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
@@ -29,68 +34,55 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of the app.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is an overview of the main components and their interactions.
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+- **`Main`**: This component consists of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It handles the launch and shutdown of the app.
+    - At app launch, it initializes other components in the correct sequence and connects them.
+    - At shutdown, it triggers cleanup operations for other components.
 
-The bulk of the app's work is done by the following four components:
+- **Core Components**:
+    - **[UI](#ui-component)**: Provides the graphical interface and command line interface for user interactions.
+    - **[Logic](#logic-component)**: Responsible for parsing and executing commands.
+    - **[Model](#model-component)**: Manages the application data and state.
+    - **[Storage](#storage-component)**: Handles data storage and retrieval.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+- **Commons**: A set of utility classes used by multiple components.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+**Component Interactions**
 
-**How the architecture components interact with each other**
-
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows the interactions among components for the command `delete 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each main component defines its API through an interface, with a `Manager` class implementing each API.
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements it in the `LogicManager.java` class. Other components interact with a component via its interface to reduce coupling with specific implementations.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+The sections below provide more details of each component.
 
-<puml src="diagrams/ComponentManagers.puml" width="300" />
+### UI Component
 
-The sections below give more details of each component.
-
-### UI component
-
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of multiple components, including the `MainWindow`, `CommandBox`, `ResultDisplay`, `CompanyListPanel`, and `StatusBarFooter`. Each of these components inherits from `UiPart`.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+- The `UI` component interacts with `Logic` to execute user commands.
+- It also listens for changes in the `Model` to update the UI accordingly.
+- The UI component is built using JavaFX, and layout files are stored as `.fxml` files in the `view` directory.
 
-The `UI` component,
-
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
-
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
-
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The following sequence diagram demonstrates interactions within `Logic` when executing `delete 1`.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -102,20 +94,17 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a company).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g., to delete a company).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g., during testing.
 
-### Model component
+### Model Component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -137,7 +126,7 @@ The `Model` component,
 </box>
 
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -148,11 +137,11 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Implementation**
 
@@ -160,286 +149,220 @@ This section describes some noteworthy details on how certain features are imple
 
 ### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+...
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+**[Developer Notes]** For a more complete integration with the User Guide commands and example use cases, developers may wish to review the parsing logic in `XYZCommandParser` classes, specifically how tags and parameters are handled. This includes cases for special tags (e.g., `t/salary_HIGH`, `t/wlb_MEDIUM`), as outlined in the User Guide.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th company in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new company. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the company was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the company being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- [Documentation guide](Documentation.md)
+- [Testing guide](Testing.md)
+- [Logging guide](Logging.md)
+- [Configuration guide](Configuration.md)
+- [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
-**Target user profile**:
+**Target User Profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Students or recent graduates who are actively looking for job opportunities, specifically internships in the tech industry.
+* Users who prefer using a desktop app over mobile or web applications.
+* Users comfortable with typing commands, benefiting from a Command Line Interface (CLI) for faster data entry.
+* Users looking for an organized way to manage a list of companies, contact statuses, and related job application data.
 
-**Value proposition**: TechConnect is targeted at students who are looking at jobs in the tech industry.
-TechConnect helps students to organize a list of companies that they are interested in and find relevant companies that matches their needs.
+**Value Proposition**:
+TechConnect assists students in managing and organizing their internship and job applications efficiently. The app enables users to bookmark, tag, and retrieve company information with ease, all through a simple, efficient command-based interface.
 
+---
 
-### User stories
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+### User Stories
 
 | Priority | As a …​                                                 | I want to …​                                    | So that I can…​                                                                   |
 |----------|---------------------------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------|
-| `* * *`  | new user                                                | see usage instructions                          | refer to instructions when I forget how to use the App                            |
-| `* * *`  | user                                                    | add a new company                               | refer to the company later                                                        |
-| `* * *`  | user                                                    | delete a company                                | remove entries that I no longer need                                              |
-| `* * *`  | user                                                    | find a company by name                          | locate details of the company without having to go through the entire list        |
-| `* *`    | user                                                    | bookmark a company                              | locate a company that I am interested in                                          |
-| `*`      | user with many companies in the address book            | filter companies by a criterion                 | locate a company relevant to my needs easily                                      |
-| `*`      | user with many bookmarked companies in the address book | see all my bookmarked companies                 | locate a company easily                                                           |
-| `*`      | user                                                    | tag a company                                   | associate them with the given tag                                                 |
-| `*`      | user                                                    | see which company I have contacted              | keep track of which companies I have contacted                                    |
-| `*`      | user                                                    | receive news about companies in my address book | stay informed about events or job opportunities from companies in my address book |
-| `*`      | new user                                                | create a personal profile with my skills        | find a company that matches my profile                                            |
-### Use cases
+| `* * *`  | new user                                                | view usage instructions                         | quickly get started with the app and learn available commands                     |
+| `* * *`  | user                                                    | add a new company                               | keep a record of companies I'm interested in applying to                          |
+| `* * *`  | user                                                    | delete a company                                | remove outdated or irrelevant entries from my list                                |
+| `* * *`  | user                                                    | find a company by name or tag                   | quickly locate specific company details without searching manually                |
+| `* * *`  | user                                                    | add tags to companies                           | organize companies by categories like salary or work-life balance                 |
+| `* *`    | user                                                    | bookmark a company                              | prioritize companies that I’m particularly interested in                          |
+| `* *`    | user                                                    | edit information of a company                   | keep company data up-to-date                                                      |
+| `* *`    | user                                                    | list all bookmarked companies                   | easily access my top-priority companies                                           |
+| `*`      | user with many companies in the address book            | filter companies by tag or status               | narrow down my list based on specific criteria (e.g., high salary, applied)       |
+| `*`      | user                                                    | update application status for a company         | track my progress with each company                                               |
+| `*`      | user                                                    | clear all entries                               | start over with a fresh list when needed                                          |
 
-**System: TechConnect (TC)**
-<br/>
-**Use case: UC1 - Add a Company**
-<br/>
-**Actor: User**
+---
 
-**MSS**
+### Use Cases
 
-1.  User enters the detail of a company into the system
-2.  TC add the company to the contact list, and shows a success message to the user.
+#### **System: TechConnect (TC)**
 
-    Use case ends.
+---
 
-**Extensions**
+**Use Case: UC1 - Add a Company**
 
-* 1a. The input format is not correct.
+**Actor**: User
 
-    * 1a1. TC shows an error message.
+**MSS**:
 
-    Use case resumes at step 1.
+1. User enters the details of a company (e.g., name, contact information, tags) into the system.
+2. TC adds the company to the contact list and confirms successful addition.
 
-* 3a. The given company already exists in the contact list.
+   Use case ends.
 
-    * 3a1. TC will not add the company to the contact list.
+**Extensions**:
 
-    Use case ends.
+* 1a. The input format is incorrect.
+    * 1a1. TC displays an error message.
+    * Use case resumes at step 1.
 
-<br/>
+* 2a. The company already exists in the list.
+    * 2a1. TC notifies the user and does not add a duplicate entry.
+    * Use case ends.
 
-**System: TechConnect (TC)**
-<br/>
-**Use case: UC2 - Remove a Company**
-<br/>
-**Actor: User**
+---
 
-**MSS**
+**Use Case: UC2 - Edit a Company**
 
-1.  User choose a company to remove from the contact list.
-2.  TC removes the company from the contact list, and shows a success message to the user.
+**Actor**: User
 
-    Use case ends.
+**MSS**:
 
-**Extensions**
+1. User selects a company to edit from the list.
+2. TC updates the company details and confirms successful modification.
 
-* 1a. The input format is not correct.
+   Use case ends.
 
-    * 1a1. TC shows an error message.
+**Extensions**:
 
-    Use case resumes at step 1.
+* 1a. The specified company does not exist.
+    * 1a1. TC displays an error message.
+    * Use case ends.
 
-<br/>
+* 1b. The input format is incorrect.
+    * 1b1. TC displays an error message.
+    * Use case resumes at step 1.
 
-**System: TechConnect (TC)**
-<br/>
-**Use case: UC3 - Show all Company**
-<br/>
-**Actor: User**
+---
 
-**MSS**
+**Use Case: UC3 - Bookmark a Company**
 
-1.  User requests to see all companies in the contact list.
-2.  TC shows all companies in the contact list.
+**Actor**: User
 
-    Use case ends.
+**MSS**:
 
+1. User selects a company to bookmark.
+2. TC adds the company to the bookmarked list and confirms the addition.
+
+   Use case ends.
+
+**Extensions**:
+
+* 1a. The company is already bookmarked.
+    * 1a1. TC notifies the user that the company is already bookmarked.
+    * Use case ends.
+
+---
+
+**Use Case: UC4 - Find Companies by Tag or Name**
+
+**Actor**: User
+
+**MSS**:
+
+1. User enters a tag or name keyword.
+2. TC filters the list and displays all matching companies.
+
+   Use case ends.
+
+**Extensions**:
+
+* 1a. No companies match the search criteria.
+    * 1a1. TC displays a message indicating no matches found.
+    * Use case ends.
+
+---
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  File storing user's data should be small and not exceed 10MB per 1000 companies and 10,000 tags
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The app should have a simple and intuitive user interface.
-5. Data retrieval and saving should be reliable to prevent data loss
-6. The code should be modular and easily maintainable, following Java coding standards.
-7. The app should not require internet access, ensuring that the user's data remain private within their local system.
-8. The app should efficiently handle up to 1000 companies and 10,000 tags without a noticeable performance degradation.
-9. The application should be well-tested, with automated tests to ensure reliability and maintainability
+1. Should work on all mainstream operating systems (Windows, macOS, Linux) with Java 17 or later installed.
+2. The application should run efficiently with up to 1000 company entries and 10,000 tags without a noticeable performance degradation.
+3. Application data should be saved locally in JSON format, ensuring user privacy.
+4. The application should have a user-friendly interface with clear command structure and informative error messages.
+5. Modifications should be automatically saved, preventing data loss if the app closes unexpectedly.
+6. Should be modular, following Java coding standards, for ease of maintenance and updates.
+7. TechConnect should work offline to allow users to manage applications without an internet connection.
+8. Data storage requirements should be minimal, under 10MB per 1000 company entries.
 
+---
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Index**: A numeric value that acts as an identifier to refer to a specific entity in the system.
-* **Tag**: A label to categorize the contacts in the address book.
-* **Bookmark**: A feature to allow users to save a company for future reference. This also provides users quick access to these companies.
+| Term                      | Definition                                                                                                 |
+|---------------------------|------------------------------------------------------------------------------------------------------------|
+| **Mainstream OS**         | Refers to operating systems like Windows, macOS, and Linux.                                                |
+| **Bookmark**              | A feature to mark a company for priority access or future reference.                                       |
+| **Command Line Interface (CLI)** | A text-based interface that allows users to type commands to interact with the app.              |
+| **Tag**                   | A label for categorizing and filtering companies (e.g., salary_HIGH, wlb_LOW).                             |
+| **Company List**          | The main list in TechConnect where company information is stored and displayed.                            |
+| **Bookmark List**         | A separate list within TechConnect to store high-priority or favorited companies.                          |
 
---------------------------------------------------------------------------------------------------------------------
+---
 
-## **Appendix: Instructions for manual testing**
-
-Given below are instructions to test the app manually.
+## **Appendix: Instructions for Manual Testing**
 
 <box type="info" seamless />
 
-**Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+**Note:** These instructions provide a starting point for exploratory testing. Testers should expand beyond the provided cases to ensure robust coverage.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
-1. Initial launch
+1. **Initial Launch**:
+    - Download the latest `.jar` file and save it to a new folder.
+    - Run the app by double-clicking the `.jar` file.
+    - **Expected Result**: The GUI opens with sample data displayed.
 
-   1. Download the jar file and copy into an empty folder
+2. **Saving Window Preferences**:
+    - Resize the application window and move it to a preferred location.
+    - Close and re-open the app by double-clicking the `.jar` file.
+    - **Expected Result**: Window size and position are retained.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+### Adding and Deleting Companies
 
-1. Saving window preferences
+1. **Adding a Company**:
+    - Use the `add` command with company details (e.g., `add n/Google p/98765432 ...`).
+    - **Expected Result**: New company is added and displayed in the list.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+2. **Deleting a Company**:
+    - Use `delete INDEX` to remove a specific company.
+    - **Expected Result**: Company is removed, and a success message is shown.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+    - **Edge Cases**:
+        - `delete 0`: Displays an error message.
+        - `delete x` (where `x` exceeds list size): Displays an error message.
 
-1. _{ more test cases …​ }_
+3. **Editing a Company**:
+    - Use `edit INDEX` with updated information (e.g., `edit 1 p/91234567`).
+    - **Expected Result**: Company details are updated in the list.
 
-### Deleting a company
+### Bookmarking and Finding Companies
 
-1. Deleting a company while all companies are being shown
+1. **Bookmarking a Company**:
+    - Use `bookmark INDEX` to mark a company as bookmarked.
+    - **Expected Result**: Company appears in the bookmarked list.
+    - **Edge Case**: Attempting to bookmark an already bookmarked company should display a notification.
 
-   1. Prerequisites: List all companies using the `list` command. Multiple companies in the list.
+2. **Finding Companies**:
+    - Use `find TAG/NAME` to search.
+    - **Expected Result**: Only companies matching the search criteria are displayed.
+    - **Edge Case**: Searching for non-existent terms should display a "No matches found" message.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No company is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+---
