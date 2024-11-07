@@ -25,7 +25,8 @@ import seedu.address.model.person.Person;
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the person, identified by the index number used in the displayed person list or NRIC, "
+            + ": Marks the elderly, identified by the index number used "
+            + "in the displayed person list or NRIC, "
             + "as contacted.\n"
             + "Note: If date parameter is not provided, the current date will be used.\n"
             + "Parameters: INDEX (must be a positive integer) or NRIC (must be government issued) "
@@ -36,7 +37,7 @@ public class MarkCommand extends Command {
             + PREFIX_NOTES + "Feeling sad "
             + "or " + COMMAND_WORD + " S6253285H "
             + PREFIX_NOTES + "Feeling happy";
-    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Person: %1$s\nFor contact on %2$s";
+    public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked Elderly: %1$s\nFor contact on %2$s";
 
     private final Index targetIndex;
     private final Nric targetNric;
