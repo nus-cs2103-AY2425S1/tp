@@ -36,7 +36,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyCampusConnect campusConnect, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(campusConnect, userPrefs);
 
-        logger.fine("Initializing with campus connect: " + campusConnect + " and user prefs " + userPrefs);
+        logger.fine("Initializing CampusConnect: " + campusConnect + " and user prefs " + userPrefs);
 
         this.campusConnect = new CampusConnect(campusConnect);
         this.userPrefs = new UserPrefs(userPrefs);
