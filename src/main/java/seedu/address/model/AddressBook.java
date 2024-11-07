@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Meetings;
 import seedu.address.model.person.Person;
@@ -93,7 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);

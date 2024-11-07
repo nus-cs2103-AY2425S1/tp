@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditMeetingDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -69,6 +70,8 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditMeetingCommand.EditMeetingDescriptor DESC_MEETING_ONE;
+    public static final EditMeetingCommand.EditMeetingDescriptor DESC_MEETING_TWO;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -80,6 +83,14 @@ public class CommandTestUtil {
                 .withRole(VALID_ROLE_BOB).withMajor(VALID_MAJOR_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_MEETING_ONE = new EditMeetingDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withStartTime("10-10-2024 10:00")
+                .withEndTime("10-10-2024 11:00")
+                .withLocation("COM2").build();
+        DESC_MEETING_TWO = new EditMeetingDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withStartTime("12-10-2024 12:00")
+                .withEndTime("12-10-2024 13:00")
+                .withLocation("COM3").build();
     }
 
     /**
