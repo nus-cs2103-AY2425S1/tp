@@ -13,9 +13,9 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200"/>
     </columnConstraints>
-    <VBox minHeight="105" spacing="12" GridPane.columnIndex="0">
+    <VBox minHeight="105" minWidth="200" spacing="12" GridPane.columnIndex="0">
       <HBox spacing="8" alignment="CENTER_LEFT">
         <HBox HBox.hgrow="NEVER" alignment="CENTER" minHeight="26" maxHeight="26" minWidth="26" maxWidth="26"
               style="-fx-background-color: #F2F2F2; -fx-background-radius: 20">
