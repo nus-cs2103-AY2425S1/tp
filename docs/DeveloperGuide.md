@@ -12,7 +12,7 @@ title: Developer Guide
 * This project builds upon [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
 
 * We would like to express our sincere gratitude to:
-   * Professor [Damith C. Hewage](https://www.comp.nus.edu.sg/~damithch) and the CS2103T teaching team for their guidance and for providing the foundation for this project
+   * Professor [Damith](https://www.comp.nus.edu.sg/~damithch) and the CS2103T teaching team for their guidance and for providing the foundation for this project
    * The original developers of AddressBook-Level3 for creating a robust codebase that made our enhancements possible
    * The SE-EDU initiative for maintaining the original codebase and documentation
 
