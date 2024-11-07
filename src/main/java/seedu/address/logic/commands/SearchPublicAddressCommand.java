@@ -28,7 +28,7 @@ public class SearchPublicAddressCommand extends Command {
         + "Parameters: PUBLIC_ADDRESS (must be a string) " + PREFIX_PUBLIC_ADDRESS
         + "PUBLIC_ADDRESS\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_PUBLIC_ADDRESS + "0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2";
+        + PREFIX_PUBLIC_ADDRESS + "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA";
 
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND = "Successfully found Persons with public "
         + "address inputted: %1$s";
@@ -42,9 +42,6 @@ public class SearchPublicAddressCommand extends Command {
             + "public substring inputted:\n%1$s";
 
 
-    //ETH PA length 42
-    //SOL PA length 32-44
-    //BTC PA length 26-35
     public static final String MESSAGE_ARGUMENTS = "Public Address: %1$s";
 
 
@@ -70,6 +67,7 @@ public class SearchPublicAddressCommand extends Command {
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());
         }
+
 
         List<Person> lastShownList = model.getFilteredPersonList();
 

@@ -26,8 +26,10 @@ public class TypicalPublicAddresses {
         "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA"; //this is a real SOL public address
     public static final String VALID_PUBLIC_ADDRESS_SOL_SUB_STRING =
         "44wP1ZSKZX4PDADKU2i14EyU8TsXdjZahxGNMryvv3Ty"; //this is a real SOL public address
-
-    //teting purposes
+    //ETH PA length 42
+    //SOL PA length 32-44
+    //BTC PA length 26-35
+    //testing purposes
     public static final String INVALID_PUBLIC_ADDRESS_INVALID_CHAR_STRING = "0x!@#$%^&*()";
     public static final String INVALID_PUBLIC_ADDRESS_TOO_LONG_STRING =
         "0x0B1C9E1Fb5Ec797c7f0134641810E9A7ca14d2wjrenlkewrngilsdfjdshfsdkfewrkhgnilwerkngiwrengiwrhngirwengiwrengiwer";
