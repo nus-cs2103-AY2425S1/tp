@@ -12,6 +12,12 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 # Quick start
 
+<div markdown="block" class="alert alert-info">
+
+**:information_desk_person: If you are an experienced user, and know how to set up jar files, you may wish to skip to the [command summary](#command-summary) and get started.**
+
+</div>
+
 1. Ensure you have Java `17` or above installed in your Computer.
 
 2. Download the latest `ClientelePlus.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14A-3/tp/releases).
@@ -27,13 +33,19 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
     * `list` : Lists all clients' contacts.
 
-    * `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan py/pending cs/active d/09-09-2024` : Adds a client contact named `John Dimon` to Clientele+.
+    * `add n/John Dimon p/98765432 e/johnd@gmail.com a/Maxwell Street, #05-01 t/JP Morgan py/pending cs/active d/09-09-2024` : Adds a client contact named `John Dimon` with pending payment to Clientele+.
 
     * `delete id/3` : Deletes the 3rd client contact shown in the current list.
 
-    * `clear` : Deletes all client contacts.
+    * `blacklist 1` : Blacklists the 1st client contact shown in the current list.
 
-    * `exit` : Exits the app.
+    * `archive 2` : Archives the 2nd client contact shown in the current list.
+
+    * `edit n/James Thompson d/11-05-2025` : Set a client's deadline, and automatically update reminder manager
+
+    * `find n/Jeremy` : Finds all clients whose name matches Jeremy
+
+    * `edit n/Joseph Wharton py/late` : Update client's payment status (will display as red $ on GUI)
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -73,7 +85,7 @@ Field | Accepted input values | Examples | Exceptions
 `ADDRESS` | Any non-empty string | `Singapore`, `42 Wallaby Way, Sydney` | None
 `DEADLINE` | Any valid date in the format dd-mm-[yy]yy<br>Day and Month must be a valid combination (so no 31st of February for example)<br>Year can be either 2-digit or 4-digit<br>Dashes (-), Slashes (/), underscores (_) and vertical bars (&#124;) can be used as delimiters | `1-1-25` (represents "January 1, 2025"), `10/8/2040` (represents "August 10, 2040"), <code>29&#124;2&#124;28</code> (represents "February 29, 2028") | None
 `TAG` | Any non-empty alphanumeric string (spaces allowed) | `friends`, `CEO of IMB`, `Born 2017` | None
-`CLIENT_STATUS` | Must be `old`, `potential`, `unresponsive` or `active`. | `old`, `potential`, `unresponsive`, `active` | `blacklisted` is a also valid client status but can only be set using the `blacklist` command ([see here](#blacklist-a-client-blacklist)).
+`CLIENT_STATUS` | Must be `old`, `potential`, `unresponsive` or `active`. | `old`, `potential`, `unresponsive`, `active` | `blacklisted` is also a valid client status but can only be set using the `blacklist` command ([see here](#blacklist-a-client-blacklist)).
 `PROJECT_STATUS` | Must be `in progress` or `completed` (note the past tense) | `in progress`, `completed` | None
 `PAYMENT_STATUS` | Must be `pending`, `partial`, `paid` or `late` | `pending`, `partial`, `paid`, `late` | None
 
@@ -148,7 +160,8 @@ Examples:
 
 <br>1. The deadline could be the date you need to submit the project to the client. <br>
 2. The deadline could instead be the date by which you need to follow up with a potential client. <br>
-3. You may hover over the Payment Status Icon to view the payment status as text.
+3. Payment status values are displayed as an icon with the colours orange, yellow, green and red for the values pending, partial, paid and late respectively. <br>
+4. You may hover over the Payment Status Icon to view the payment status as text.
 
 </div>
 
@@ -250,11 +263,11 @@ Format: `blacklist INDEX`
 Examples:
 * `blacklist 2` marks the second person in the list as blacklisted
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+![blacklisted image](images/blacklisted.png)
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 <br>
 Entering `blacklist` on its own without any other parameters will filter and display all clients who have been blacklisted.
-
 </div>
 
 ### Whitelist a Client: `whitelist`
@@ -378,6 +391,14 @@ Furthermore, **certain edits can cause the Clientele+ to behave in unexpected wa
 
 </div>
 
+### Undo Command `[coming in v2.0]`
+
+_Details coming soon ..._
+
+### Add Notes for a Client `[coming in v2.0]`
+
+_Details coming soon ..._
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -391,7 +412,7 @@ Furthermore, **certain edits can cause the Clientele+ to behave in unexpected wa
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding/editing a client after filtering**, the application resets to showing _all_ clients, and the filter may need to be applied again. This is to work around the issue that rises when the client that is added or edited may not match the filter and would not be shown to you which makes it confusing to understand if the command has been executed successfully.
+3. **When adding/editing a client after filtering**, the application resets to showing _all_ clients, removing the initial filter. This is because newly added/edited clients may not match the current filter. The remedy is to reapply the initial filter.
 
 --------------------------------------------------------------------------------------------------------------------
 
