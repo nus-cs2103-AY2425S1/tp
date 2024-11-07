@@ -259,6 +259,10 @@ public class AddWeddingCommandTest {
         public void setPersonInWedding(Person editedPerson, Person personToEdit) {
             throw new AssertionError("This method should not be called.");
         }
+        @Override
+        public void deleteTagsWithWedding(Wedding weddingToDelete) {
+            throw new AssertionError("This method should not be called.");
+        };
 
         @Override
         public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
@@ -277,6 +281,15 @@ public class AddWeddingCommandTest {
 
         @Override
         public List<Wedding> getWeddingFromTags(Set<Tag> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void clearAllPersonTags() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAllWeddingParticipants() {
             throw new AssertionError("This method should not be called.");
         }
     }

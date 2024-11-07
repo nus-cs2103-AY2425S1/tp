@@ -166,6 +166,12 @@ public interface Model {
     void setPersonInWedding(Person editedPerson, Person personToEdit);
 
     /**
+     * Deletes the tag of the wedding from the participants associated in the wedding to be deleted.
+     * @param weddingToDelete wedding to deleted
+     */
+    void deleteTagsWithWedding(Wedding weddingToDelete);
+
+    /**
      * Updates the rest of the list of weddings with the editedPerson.
      *
      * @param personToEdit Person whose details are currently being edited.
@@ -195,4 +201,14 @@ public interface Model {
      * @return List of weddings that match the tag.
      */
     List<Wedding> getWeddingFromTags(Set<Tag> tags);
+
+    /**
+     * Removes all tags from every person by removing them from all tagged wedding
+     */
+    void clearAllPersonTags();
+
+    /**
+     * Removes all participants of every wedding by removing all their tags
+     */
+    void clearAllWeddingParticipants();
 }
