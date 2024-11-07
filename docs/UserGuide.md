@@ -175,7 +175,8 @@ Edits the details of a student.
 
 1. `edit_s` edits the student identified by the index. It only accepts a valid index
    based on the list when `list_s` is called.
-2. For information on the constraints for each parameter used in this command, go
+2. Tags are replaced if included in the argument, not appended.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
