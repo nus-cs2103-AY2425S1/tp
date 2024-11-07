@@ -8,6 +8,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -48,6 +50,8 @@ public class DeleteClaimsCommand extends Command {
             + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
 
+    private static final Logger LOGGER = Logger.getLogger(DeleteClaimsCommand.class.getName());
+
     private final Index clientIndex;
     private final PolicyType policyType;
     private final Index claimIndex;
@@ -78,6 +82,8 @@ public class DeleteClaimsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        LOGGER.log(Level.INFO, "Executing DeleteClaimsCommand with clientIndex={0}, policyType={1}, claimIndex={2}",
+                new Object[]{clientIndex, policyType, claimIndex});
 
         Client client = getClientFromModel(model);
         Policy policy = findPolicyByType(client, policyType);
@@ -101,6 +107,8 @@ public class DeleteClaimsCommand extends Command {
      */
     private Client getClientFromModel(Model model) throws CommandException {
         List<Client> lastShownList = model.getFilteredClientList();
+        assert lastShownList != null : "Client list should not be null";
+
         if (clientIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_CLIENT_INDEX);
         }
@@ -115,6 +123,7 @@ public class DeleteClaimsCommand extends Command {
      * @throws CommandException If no matching claim is found.
      */
     private Policy deleteClaimFromPolicy(Policy policy) throws CommandException {
+        assert policy != null : "Policy should not be null";
         try {
             return policy.removeClaim(claimIndex.getZeroBased());
         } catch (IndexOutOfBoundsException e) {
@@ -130,6 +139,8 @@ public class DeleteClaimsCommand extends Command {
      * @return The updated client.
      */
     private Client createUpdatedClient(Client client, Policy updatedPolicy) {
+        assert client != null : "Client should not be null";
+        assert updatedPolicy != null : "Updated policy should not be null";
         PolicySet updatedPolicySet = new PolicySet(client.getPolicies());
         updatedPolicySet.replace(updatedPolicy);
         return new Client(client.getName(), client.getPhone(), client.getEmail(),
@@ -137,6 +148,7 @@ public class DeleteClaimsCommand extends Command {
     }
 
     private void updateModel(Model model, Client originalClient, Client updatedClient) {
+        assert model != null : "Model should not be null";
         model.setClient(originalClient, updatedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
@@ -163,11 +175,15 @@ public class DeleteClaimsCommand extends Command {
      * @throws CommandException If no policy of the specified type is found.
      */
     private Policy findPolicyByType(Client client, PolicyType policyType) throws CommandException {
+        assert client != null : "Client should not be null";
+        assert policyType != null : "PolicyType should not be null";
         Optional<Policy> policyOptional = client.getPolicies().stream()
                 .filter(policy -> policy.getType().equals(policyType))
                 .findFirst();
 
         if (policyOptional.isEmpty()) {
+            LOGGER.log(Level.WARNING, "No policy of type {0} found for client {1}",
+                    new Object[]{policyType, client.getName()});
             throw new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, client.getName()));
         }
         return policyOptional.get();
