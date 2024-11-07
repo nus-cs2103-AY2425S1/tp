@@ -44,15 +44,15 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 ## Summary of Features
 ### Command summary
 
-| Action                                                 | Format, Examples                                                                                                                                                    |
-|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-contact-add)**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President` |
-| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                             |
-| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                 |
-| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [nn/NICKNAME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                      |
-| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                |
-| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                              |
-| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                              |
+| Action                                                 | Format, Examples                                                                                                                                                                              |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-contact-add)**                       | `add n/NAME th/TELEGRAM_HANDLE e/EMAIL ss/STUDENT_STATUS r/ROLE…​ [nn/NICKNAME]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Admin t/President` |
+| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                                                       |
+| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                           |
+| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                        |
+| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                                          |
+| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                                                        |
+| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 
