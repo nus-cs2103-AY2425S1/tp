@@ -260,7 +260,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTask(Task key) {
         tasks.remove(key);
-        System.out.println(tasks);
     }
 
     /**

@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalTasks;
 
@@ -34,8 +35,8 @@ public class DeleteTaskCommandTest {
         for (Task task : taskList) {
             model.addTask(task);
         }
-        Person newPerson = new PersonBuilder().withTasks("todo: buy groceries").build();
-        model.addPerson(newPerson);
+        Person newTodoPerson = new PersonBuilder().withTasks("todo: buy groceries").build();
+        model.addPerson(newTodoPerson);
     }
 
     @Test
@@ -69,6 +70,84 @@ public class DeleteTaskCommandTest {
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, ()
                 -> deleteTaskCommand.execute(model));
     }
+
+    @Test
+    public void execute_personListUpdatedIfTaskAssignedToPerson() throws Exception {
+        model.addTask(new Todo("buy groceries"));
+        Person newPerson = new PersonBuilder().withName("test").withTasks("todo: buy groceries").build();
+        model.addPerson(newPerson);
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+
+        deleteTaskCommand.execute(model);
+
+        // Verify that the person list update is only triggered if any person had the task
+        boolean anyPersonHadTask = false;
+        for (Person person : model.getFilteredPersonList()) {
+            if (person.hasTask(taskToDelete)) {
+                anyPersonHadTask = true;
+                break;
+            }
+        }
+
+        if (anyPersonHadTask) {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        }
+        model.deletePerson(newPerson);
+    }
+
+    @Test
+    public void execute_taskNotAssignedToPerson_noChangeToPerson() throws Exception {
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        Person personWithoutTask = new PersonBuilder().withName("Unrelated Person").build();
+        model.addPerson(personWithoutTask);
+
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+        deleteTaskCommand.execute(model);
+
+        // Verify that the unrelated person remains unchanged
+        assertFalse(personWithoutTask.hasTask(taskToDelete), "Person without task should remain unaffected.");
+    }
+
+    @Test
+    public void execute_taskNotAssignedToAnyPerson_success() throws Exception {
+        Task unassignedTask = new Todo("unassigned task");
+        model.addTask(unassignedTask);
+        Index unassignedTaskIndex = Index.fromOneBased(model.getFilteredTaskList().size());
+
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(unassignedTaskIndex);
+        CommandResult result = deleteTaskCommand.execute(model);
+
+        String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS, unassignedTask);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+
+        // Verify task is deleted from the model
+        assertFalse(model.getFilteredTaskList().contains(unassignedTask),
+                "The task should be removed from the model.");
+    }
+
+    @Test
+    public void execute_taskRemovedFromAllRelevantPersons() throws Exception {
+        Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        Person personWithTask = new PersonBuilder().withName("task person").withTasks("todo: buy groceries").build();
+        Person personWithoutTask = new PersonBuilder().withName("Unrelated Person").build();
+        model.addPerson(personWithTask);
+        model.addPerson(personWithoutTask);
+
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
+        deleteTaskCommand.execute(model);
+
+        // Verify the task is removed from person with the task
+        assertFalse(personWithTask.hasTask(taskToDelete), "Person with the task should have it removed.");
+
+        // Verify the unrelated person remains unaffected
+        assertFalse(personWithoutTask.hasTask(taskToDelete), "Person without task should remain unaffected.");
+
+        model.deletePerson(personWithTask);
+        model.deletePerson(personWithoutTask);
+    }
+
+
 
     @Test
     public void toString_validIndex_returnsCorrectString() {
