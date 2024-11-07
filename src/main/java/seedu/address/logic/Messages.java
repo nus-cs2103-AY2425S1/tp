@@ -36,8 +36,8 @@ public class Messages {
             + "were not found in the person's task list.";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
 
-    public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "The index specified does not refer "
-            + "to a Vendor, tasks can only be assigned to vendors.";
+    public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "%1$s is not a Vendor, "
+            + "tasks can only be assigned to vendors.";
     public static final String MESSAGE_ADD_WEDDING_SUCCESS = "Added wedding(s) %1$s to %2$s.";
     public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
     public static final String MESSAGE_WEDDING_NOT_FOUND = "One or more specified weddings do not exist in "

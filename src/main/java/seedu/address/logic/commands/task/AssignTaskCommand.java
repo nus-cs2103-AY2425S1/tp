@@ -80,7 +80,7 @@ public class AssignTaskCommand extends Command {
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
 
         if (!personToEdit.isVendor()) {
-            throw new CommandException(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK);
+            throw new CommandException(String.format(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK, personToEdit.getName()));
         }
 
         Set<Task> tasksToAdd = new HashSet<>();
