@@ -10,8 +10,8 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class StudentMatchesQueryPredicate implements Predicate<Student> {
 
-    private final List<String> keywords;
     private static final String noGroupKey = "!nogroup";
+    private final List<String> keywords;
 
     public StudentMatchesQueryPredicate(List<String> keywords) {
         this.keywords = keywords;
