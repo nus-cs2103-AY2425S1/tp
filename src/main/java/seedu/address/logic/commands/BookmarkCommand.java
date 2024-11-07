@@ -61,7 +61,6 @@ public class BookmarkCommand extends Command {
                 companyToBookmark.getTags(), new Bookmark(true), companyToBookmark.getRemark());
 
         model.setCompany(companyToBookmark, companyBookmarked);
-        model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
         return new CommandResult(String.format(MESSAGE_BOOKMARK_SUCCESS,
                 Messages.format(companyToBookmark)));

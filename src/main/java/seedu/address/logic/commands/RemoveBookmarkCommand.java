@@ -61,7 +61,6 @@ public class RemoveBookmarkCommand extends Command {
                 companyToRemoveBookmark.getTags(), new Bookmark(false), companyToRemoveBookmark.getRemark());
 
         model.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
-        model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
         return new CommandResult(String.format(MESSAGE_REMOVE_BOOKMARK_SUCCESS,
                 Messages.format(companyToRemoveBookmark)));

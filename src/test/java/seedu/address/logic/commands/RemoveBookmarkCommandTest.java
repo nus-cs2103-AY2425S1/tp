@@ -86,6 +86,7 @@ public class RemoveBookmarkCommandTest {
         ModelManager expectedModel = new ModelManager(bookmarkedModel.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
+        showCompanyAtIndex(expectedModel, INDEX_FIRST_COMPANY);
 
         // Assert that the command works
         assertCommandSuccess(removeBookmarkCommand, bookmarkedModel, expectedMessage, expectedModel);
