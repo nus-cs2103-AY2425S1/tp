@@ -1,0 +1,77 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":RatingCommandParser" as RatingCommandParser LOGIC_COLOR
+participant "rt:RatingCommand" as RatingCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("rate 1 r/10")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("rate 1 r/10")
+activate AddressBookParser
+
+create RatingCommandParser
+AddressBookParser -> RatingCommandParser
+activate RatingCommandParser
+
+RatingCommandParser --> AddressBookParser
+deactivate RatingCommandParser
+
+AddressBookParser -> RatingCommandParser : parse("1 r/10")
+activate RatingCommandParser
+
+create RatingCommand
+RatingCommandParser -> RatingCommand
+activate RatingCommand
+
+RatingCommand --> RatingCommandParser
+deactivate RatingCommand
+
+RatingCommandParser --> AddressBookParser : rt
+deactivate RatingCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RatingCommandParser -[hidden]-> AddressBookParser
+destroy RatingCommandParser
+
+AddressBookParser --> LogicManager : rt
+deactivate AddressBookParser
+
+LogicManager -> RatingCommand : execute(m)
+activate RatingCommand
+
+RatingCommand -> Model : setRestaurant(old, new)
+activate Model
+
+Model --> RatingCommand
+deactivate Model
+
+RatingCommand -> Model : updateFilteredRestaurantList(rt)
+activate Model
+
+Model --> RatingCommand
+deactivate Model
+
+create CommandResult
+RatingCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> RatingCommand
+deactivate CommandResult
+
+RatingCommand --> LogicManager : r
+deactivate RatingCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
