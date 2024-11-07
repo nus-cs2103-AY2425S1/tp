@@ -784,7 +784,7 @@ testers are expected to do more *exploratory* testing.
    1. Clear data with the `clear` command.
    2. Add a new elderly. Refer to the [adding an elderly](#adding-an-elderly) section.
    3. Close the app.
-   4. Re-launch the app.<br>G
+   4. Re-launch the app.<br>
        Expected: The newly added elderly is still present.
 
 2. Dealing with missing/corrupted data files
