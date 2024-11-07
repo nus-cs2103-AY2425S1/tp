@@ -480,9 +480,9 @@ Examples:
 
 ### Sorting all entries : `sort`
 
-Sorts all entries from the address book according to name in alphabetical order.
+Sorts all entries from the address book according to name in alphabetical order or order of addition.
 
-Format: `sort`
+Format: `sort name` or `sort latest`
 
 <!--TODO: Bryan-->
 
