@@ -197,7 +197,7 @@ Explanation:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -225,14 +225,14 @@ A wedding planner who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                                    | So that I can…​                                                                  |
-|----------|-----------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                    | easily track and manage guests/vendors for the wedding                           |
-| `* * *`  | organized wedding planner   | view a list of guests/vendors                                   | easily access and reference their details                                        |
-| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need             | keep my contact list organised and clutter-free                                  |
+| Priority | As a …​                     | I want to …​                                                     | So that I can…​                                                                  |
+|----------|-----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
+| `* * *`  | organized wedding planner   | view a list of guests/vendors                                    | easily access and reference their details                                        |
+| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
 | `* * *`  | meticulous wedding planner  | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
-| `* *`    | organized wedding planner   | find guests/vendors based on a specific attribute               | efficiently retrieve guest/vendor details when required                          |
-| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people) | quickly assess the current status of wedding planning                            |
+| `* *`    | organized wedding planner   | find guests/vendors based on a specific attribute                | efficiently retrieve guest/vendor details when required                          |
+| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people)  | quickly assess the current status of wedding planning                            |
 
 ### Use cases
 
@@ -409,6 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 **Technical**
+* **Java**: Java is a programming language that BridalBuddy is written in. It is required to run the application.
 *  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
 *  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
 *  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
@@ -424,7 +425,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix B: Planned Enhancements**
+
+In developing BridalBuddy, we've identified areas that can benefit from enhancement. We believe in transparency and keeping our users informed, so we want to acknowledge these feature limitations.
+
+### Enhance name to accept special characters
+
+**Feature Flaw in Current Implementation**
+
+Currently, names do not accept `.` and `/` and other special characters which might belong in a person's legal name.
+
+**Proposed Enhancement**
+
+ We should omit alphanumeric checks for names to be more inclusive.
+
+### Make Guest/Vendor phone, email and address fields optional
+
+**Feature Flaw in Current Implementation**
+
+Currently, the phone, email and address are compulsory parameters as inputs for `add_guest` and `add_vendor` commands. However, not all contacts require full details.
+
+A planner might only have a name and no contact information for certain guests, especially in cases where a plus-one or placeholder name is added.
+Similarly, a planner might also not have every contact information of a vendor. 
+
+**Proposed Enhancement**
+
+The phone, email and address fields should be changed to optional parameters in the `add_guest` and `add_vendor` commands.
+
+### Enhance Flexibility in Phone Number Parameter Input
+
+**Feature Flaw in Current Implementation**
+
+Currently, the phone number only accepts integers as valid user inputs. 
+However, planners might encounter scenarios, such as keeping track of guests from overseas, where they would want to include symbols like `()`, `+`, `-` and `.` in the phone number parameter.
+The current restriction prevents users from indicating country codes, and might cause confusion about the origin of the number. 
+
+**Proposed Enhancement**
+
+We can relax the checks for phone number, to allow for symbols such as `()`, `+`, `-` and `.`.
+
+### Enhance Find Feature to Allow for Partial and Substring Search
+
+**Feature Flaw in Current Implementation**
+
+Currently, the `find` features requires an exact or specific keyword match for searching guests or vendors.
+This limits the flexibility of the search functionality, as users cannot retrieve entries that partially match the search term.
+
+**Proposed Enhancement**
+
+Enhance the find feature to allow partial and substring searches. 
+With this enhancement, a search query would return all results containing the specified character(s) or substring, regardless of its position in the name or other fields.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix C: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -464,3 +518,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix D: Efforts**
