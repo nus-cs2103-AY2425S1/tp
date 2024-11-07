@@ -142,8 +142,12 @@ Symbol     | Parameter     | Constraints
 **`w`**| `WARD`        |- Must contain at least 1 alphanumeric character and has a character limit of 50.
 **`d`**| `DIAGNOSIS`   |- Must contain at least 1 alphabetic character and has a character limit of 80.
 **`m`**| `MEDICATION`  |- Must contain at least 1 alphanumeric character and has a character limit of 80. <br> - Allows alphanumeric characters, spaces, commas, hyphen, forward-slashes, rounded brackets, periods.
-**`pn`**| `NOTES`       |- Allows any characters.
-**`a`**| `APPOINTMENT` |- Refer to [Appointment Parameters](#appointment-parameters) table below.
+
+### Notes Parameters
+
+Symbol     | Parameter        | Constraints
+-----------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**`pn`**| `NOTES`          |- Allows any characters and has a character limit or 80.<br/>
 
 ### Appointment Parameters
 
