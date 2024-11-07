@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-Clientele+ is developed based on the AddressBook Level-3 application. Learn more about that project [here](https://se-education.org/addressbook-level3/).  
+Clientele+ is developed based on the AddressBook Level-3 application. Learn more about that project [here](https://se-education.org/addressbook-level3/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -234,18 +234,9 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: May have performance issues in terms of memory usage.
 
 
-* **Alternative 2:** Individual command knows how to undo/redo by itself. 
+* **Alternative 2:** Individual command knows how to undo/redo by itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
-
-
-### \[Proposed\] Data archiving
-The following sequence diagram shows how an archive operation goes through the `Logic` component:
-![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
-
-
-`Storage` Class Diagram with support for archive:
-![StorageClassDiagramWithArchive](images/StorageClassDiagramWithArchive.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -321,7 +312,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    * 1a1. Clientele+ shows an error message.
    * 1a2. User reenters new command.
-   
+
         Steps 1a1-1a2 are repeated until the command entered is correct.
 
     Use case resumes at step 1.
@@ -329,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1b. Input fields are incorrectly formatted.
 
     * 1b1. Clientele+ shows an error message.
-    * 1b2. User reenters command. 
+    * 1b2. User reenters command.
 
       Steps 1b1-1b2 are repeated until the command entered is correct.
 
@@ -357,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   * 2a1. Clientele+ shows an error message.
-  
+
   Use case ends.
 
 * 3a. The given index or name is invalid.
@@ -392,7 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
 
   * 2a1. Clientele+ shows an error message.
 
@@ -429,7 +420,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 1a1-1a2 are repeated until the command entered is correct.
 
   Use case resumes at step 1.
-  
+
 
 
 ### Non-Functional Requirements
@@ -497,7 +488,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Client with name `John Doe` is deleted. Details of the deleted client shown in the status message. <br>
       If multiple `John Doe`s exist, list of all `John Doe`s is displayed. <br>
       User prompted to delete by index in status message.
-   
+
    5. Other incorrect delete commands to try: `delete`, `delete p/x` (incorrect prefixes), `delete id/y`, `...` (where y is larger than the list size)<br>
       Expected: Similar to previous.
 
@@ -508,24 +499,24 @@ testers are expected to do more *exploratory* testing.
    1. `preferences.json`
       1. Move `preferences.json` to another folder.
       2. Relaunch the app.
-      
+
       Expected: Application launches with the default window size.
 
    2.  `config.json`
        1. Move `config.json` to another folder.
        2. Relaunch the app.
-       
+
        Expected: Application launches, config file is re-created with default configuration.
 
    3.  `addressbook.json`
        1. Corrupted:
           1. Manually modify `addressbook.json`
-          2. Relaunch the app 
-          
+          2. Relaunch the app
+
           Expected: Application fails to read from the file and loads without any data.
-       
+
        2. Missing:
           1. Move `data` folder to another directory.
-          2. Relaunch the app. 
-          
+          2. Relaunch the app.
+
           Expected: Application loads with the sample data.
