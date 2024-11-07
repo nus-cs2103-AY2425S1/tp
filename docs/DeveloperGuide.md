@@ -506,4 +506,4 @@ testers are expected to do more *exploratory* testing.
        1. Open the data file `data/addressbook.json` in a text editor.
        2. Introduce invalid JSON syntax into the file.
        3. Save the corrupted file and launch the application.<br>
-       Expected: Application will display an error message to the user, indicating that the data is corrupted.
+    Expected: Application will display an error message to the user, indicating that the data is corrupted.
