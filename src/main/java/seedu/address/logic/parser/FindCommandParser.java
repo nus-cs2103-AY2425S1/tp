@@ -29,21 +29,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (trimmedArgs.startsWith(PREFIX_TELEHANDLE.getPrefix())) {
-            String handleArgs = trimmedArgs.substring(PREFIX_TELEHANDLE.getPrefix().length()).trim();
-            if (handleArgs.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            String[] handleKeywords = handleArgs.split("\\s+");
-            for (String keyword : handleKeywords) {
-                if (!TelegramHandle.isValidTelegramHandle(keyword)) {
-                    throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
-                }
-            }
-            return new FindCommand(new TelegramHandleContainsKeywordsPredicate(Arrays.asList(handleKeywords)));
-        }
-
         String[] nameKeywords = trimmedArgs.split("\\s+");
         for (String keyword : nameKeywords) {
             if (!Name.isValidName(keyword)) {
