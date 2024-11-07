@@ -65,7 +65,8 @@ public class LinkCommandTest {
                 String.format(
                         LinkCommand.MESSAGE_SUCCESS,
                         linkIndexes.size(),
-                        Messages.format(validOwner),
+                        validOwner.getName().toString(),
+                        validPet.getName().toString(),
                         LinkCommand.MESSAGE_RETURN_TO_MAIN_MENU
                 ),
                 commandResult.getFeedbackToUser()

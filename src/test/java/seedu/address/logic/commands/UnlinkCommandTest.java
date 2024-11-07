@@ -61,7 +61,8 @@ public class UnlinkCommandTest {
         //System.out.println(unlinkIndexes.size());
         CommandResult commandResult = new UnlinkCommand(INDEX_FIRST_OWNER, unlinkIndexes).execute(modelStub);
 
-        assertEquals(String.format(UnlinkCommand.MESSAGE_SUCCESS, unlinkIndexes.size(), Messages.format(validOwner)),
+        assertEquals(String.format(UnlinkCommand.MESSAGE_SUCCESS, unlinkIndexes.size(),
+                validOwner.getName().toString(), validPet.getName().toString()),
                 commandResult.getFeedbackToUser());
     }
 

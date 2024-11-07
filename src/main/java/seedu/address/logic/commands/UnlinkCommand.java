@@ -85,7 +85,8 @@ public class UnlinkCommand extends Command {
         );
     }
 
-    private Set<Link> getValidatedLinks(Model model, Owner owner, List<Pet> petList, List<Pet> validatedPetList) throws CommandException {
+    private Set<Link> getValidatedLinks(Model model, Owner owner, List<Pet> petList, List<Pet> validatedPetList)
+            throws CommandException {
         validatedPetList.clear();
 
         Set<Link> links = new HashSet<>();
