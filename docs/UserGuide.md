@@ -324,7 +324,7 @@ Format: `deletemeeting mt/MEETING_TITLE d/MEETING_DATE`
 Examples:
 * `deletemeeting mt/Meeting 1 d/01-01-2025` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2025`.
 
-  ![result for 'deletemeeting mt/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
+  ![result for 'deletemeeting mt/Meeting 1 d/01-01-2025'](images/deletemeeting.png)
 
 ### Exiting the program : `exit`
 

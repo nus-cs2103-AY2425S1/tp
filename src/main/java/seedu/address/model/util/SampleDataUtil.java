@@ -73,13 +73,13 @@ public class SampleDataUtil {
 
     public static Meeting[] getSampleMeetings() {
         return new Meeting[] {
-            new Meeting(new MeetingTitle("Meeting 1"), new MeetingDate("01-01-2024"), new Phone("91234567"),
+            new Meeting(new MeetingTitle("Meeting 1"), new MeetingDate("01-01-2025"), new Phone("91234567"),
                     new Phone("81234567"),
                     new Type("HDB"), new PostalCode("111111")),
-            new Meeting(new MeetingTitle("Meeting 2"), new MeetingDate("02-01-2024"), new Phone("91234567"),
+            new Meeting(new MeetingTitle("Meeting 2"), new MeetingDate("02-01-2025"), new Phone("91234567"),
                     new Phone("81234567"),
                     new Type("HDB"), new PostalCode("111111")),
-            new Meeting(new MeetingTitle("Meeting 3"), new MeetingDate("03-01-2024"),
+            new Meeting(new MeetingTitle("Meeting 3"), new MeetingDate("03-01-2025"),
                     new Phone("81234567"), new Phone("91234567"),
                     new Type("HDB"), new PostalCode("111111")),
         };

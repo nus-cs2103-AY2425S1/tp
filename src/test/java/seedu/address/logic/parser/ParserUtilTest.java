@@ -44,7 +44,7 @@ public class ParserUtilTest {
     private static final String VALID_MEETING_TITLE = "Project Meeting";
     private static final String INVALID_MEETING_TITLE = "Project@Meeting"; // Invalid due to special character
     private static final String VALID_MEETING_DATE = "01-01-2025";
-    private static final String INVALID_MEETING_DATE = "32-13-2024"; // Invalid due to incorrect day and month
+    private static final String INVALID_MEETING_DATE = "32-13-2025"; // Invalid due to incorrect day and month
 
 
     private static final String WHITESPACE = " \t\r\n";
