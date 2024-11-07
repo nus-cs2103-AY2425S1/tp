@@ -160,8 +160,9 @@ public class EditCommandTest {
         Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, null,
                 new EditPersonDescriptorBuilder(personInList).build());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, expectedModel, EditCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test

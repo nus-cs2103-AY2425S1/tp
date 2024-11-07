@@ -24,31 +24,8 @@
     "role" : "florist",
     "ownWedding" : 0,
     "weddingJobs" : [ 528684710 ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "role" : "baker",
-    "ownWedding" : 0,
-    "weddingJobs" : [ ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "94822244",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "role" : "florist",
-    "ownWedding" : 0,
-    "weddingJobs" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "94824277",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "role" : "florist",
-    "ownWedding" : 0,
-    "weddingJobs" : [ ]
-  }, {
+  },
+    {
     "name" : "George Best",
     "phone" : "94824422",
     "email" : "anna@example.com",
@@ -56,15 +33,7 @@
     "role" : "Client",
     "ownWedding" : 528684710,
     "weddingJobs" : [ ]
-  }, {
-    "name" : "John",
-    "phone" : "94351253",
-    "email" : "example@test.com",
-    "address" : "Main St",
-    "role" : "tailor",
-    "ownWedding" : 0,
-    "weddingJobs" : [ ]
-  } ],
+  }],
   "weddings" : [ {
     "name" : "Alice Adam Wedding",
     "client" : {

@@ -129,7 +129,8 @@ public class PersonTest {
 
         expected = Person.class.getCanonicalName() + "{name=" + BENSON.getName() + ", phone=" + BENSON.getPhone()
                 + ", email=" + BENSON.getEmail() + ", address=" + BENSON.getAddress() + ", roles=" + BENSON.getRole()
-                + ", wedding=NA" + ", wedding jobs=" + BENSON.getWeddingJobs() + "}";
+                + ", wedding=" + (BENSON.getOwnWedding() == null ? "NA" : BENSON.getOwnWedding())
+                + ", wedding jobs=" + BENSON.getWeddingJobs() + "}";
         assertEquals(expected, BENSON.toString());
     }
 }

@@ -104,6 +104,8 @@ public interface Model {
      */
     boolean hasWedding(Wedding wedding);
 
+    void updatePersonEditedWedding(Wedding target, Wedding editedWedding);
+
     /**
      * Deletes the given wedding.
      * The wedding must exist in the address book.

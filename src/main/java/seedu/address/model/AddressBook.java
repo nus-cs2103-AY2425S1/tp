@@ -132,6 +132,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Updates the wedding of all persons in the address book that are involved in the edited wedding.
+     */
+    public void updatePersonEditedWedding(Wedding target, Wedding editedWedding) {
+        requireNonNull(editedWedding);
+        persons.updatePersonInvolveInEditedWedding(target, editedWedding);
+    }
+
+    /**
      * Adds a wedding to the address book.
      * The wedding must not already exist in the address book.
      */

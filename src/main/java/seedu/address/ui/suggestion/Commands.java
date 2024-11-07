@@ -10,19 +10,21 @@ public enum Commands {
     DELETE("delete", "delete INDEX/NAME", new String[]{}),
     CLEAR("clear", "clear", new String[]{}),
     VIEW("view", "view INDEX/NAME", new String[]{}),
-    FILTER("filter", "filter KEYWORD [MORE_KEYWORDS...]", new String[]{}),
+    FILTER("filter", "filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...",
+            new String[]{"n/", "r/", "e/", "p/", "a/"}),
     LIST("list", "list", new String[]{}),
     EXIT("exit", "exit", new String[]{}),
     HELP("help", "help", new String[]{}),
-    ADDWEDDING("addw", "addw n/WEDDINGNAME c/CLIENT [d/DATE] [v/VENUE]",
-            new String[]{"d/", "v/", "c/", "n/"}),
-    EDIT("edit", "edit INDEX/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
+    EDIT("edit", "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]",
             new String[]{"n/", "p/", "e/", "a/"}),
-    VIEWWEDDING("vieww", "vieww INDEX/WEDDINGNAME", new String[]{}),
+    ADDWEDDING("addw", "addw n/WEDDING_NAME c/CLIENT [d/DATE] [v/VENUE]",
+            new String[]{"n/", "c/", "d/", "v/"}),
     EDITWEDDING("editw", "editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]",
-            new String[]{"w/", "n/", "d/", "v/"}),
-    DELETEWEDDING("deletew", "deletew INDEX/WEDDINGNAME", new String[]{}),
-    ASSIGN("assign", "assign INDEX/NAME [r/ROLE] [w/WEDDING...]", new String[]{"w/", "r/"});
+            new String[]{"n/", "d/", "v/", "w/"}),
+    VIEWWEDDING("vieww", "vieww INDEX/WEDDING_NAME", new String[]{}),
+    DELETEWEDDING("deletew", "deletew INDEX", new String[]{}),
+    ASSIGN("assign", "assign INDEX/NAME [r/ROLE] [w/WEDDING_INDEX...]",
+            new String[]{"r/", "w/"});
 
     private final String commandName;
     private final String formatExample;

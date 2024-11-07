@@ -133,6 +133,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updatePersonEditedWedding(Wedding target, Wedding editedWedding) {
+        requireAllNonNull(target, editedWedding);
+        addressBook.updatePersonEditedWedding(target, editedWedding);
+    }
+
+    @Override
     public void deleteWedding(Wedding target) {
         addressBook.removeWedding(target);
     }

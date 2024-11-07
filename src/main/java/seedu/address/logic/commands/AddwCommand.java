@@ -30,7 +30,13 @@ public class AddwCommand extends Command {
             + PREFIX_NAME + "WEDDING'S NAME "
             + PREFIX_CLIENT + "CLIENT "
             + "[" + PREFIX_DATE + "DATE" + "] "
-            + "[" + PREFIX_VENUE + "VENUE" + "] ";
+            + "[" + PREFIX_VENUE + "VENUE" + "], "
+            + "where client can be INDEX (must be positive integer) or KEYWORD (the name of contact, "
+            + "case-insensitive)\n"
+            + "Example: \n"
+            + COMMAND_WORD + " " + PREFIX_NAME + "Alice Wedding " + PREFIX_CLIENT + "1 " + PREFIX_VENUE + "Hotel\n"
+            + COMMAND_WORD + " " + PREFIX_NAME + "Alice Wedding " + PREFIX_CLIENT + "Alice " + PREFIX_DATE
+            + "2024-12-12";
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
@@ -47,7 +53,14 @@ public class AddwCommand extends Command {
     private Wedding toAdd;
 
     /**
-     * Creates an AddwCommand to add the specified {@code Wedding}
+     * Creates a new AddwCommand to add the specified wedding.
+     * Either index or predicate must be provided to identify the client,
+     * but not both.
+     *
+     * @param index The index of the person to set as client. Can be null if using name matching.
+     * @param predicate The predicate to match person by name. Can be null if using index.
+     * @param wedding The wedding to be added to the address book.
+     * @throws NullPointerException if the wedding parameter is null
      */
     public AddwCommand(Index index, NameMatchesKeywordPredicate predicate, Wedding wedding) {
         requireNonNull(wedding);
@@ -56,6 +69,22 @@ public class AddwCommand extends Command {
         this.toAdd = wedding;
     }
 
+    /**
+     * Executes the command to add a new wedding to the address book.
+     * This method will:
+     * 1. Identify the client using either index or name matching
+     * 2. Verify the client is not already associated with another wedding
+     * 3. Create a new wedding with the identified client
+     * 4. Add the wedding to the model if it's not a duplicate
+     *
+     * @param model The model which the command should operate on.
+     * @return A CommandResult indicating the outcome of the command execution
+     * @throws CommandException if:
+     *         - The specified person does not exist
+     *         - The person is already a client for another wedding
+     *         - The wedding is a duplicate
+     *         - Multiple persons match the provided name
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -126,6 +155,16 @@ public class AddwCommand extends Command {
         }
     }
 
+    /**
+     * Compares this AddwCommand with another object for equality.
+     * Two AddwCommand objects are considered equal if they have:
+     * - The same index (or both null)
+     * - The same predicate (or both null)
+     * - Equal wedding objects
+     *
+     * @param other The object to compare with
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -148,6 +187,12 @@ public class AddwCommand extends Command {
 
     }
 
+    /**
+     * Returns a string representation of the AddwCommand object.
+     * Includes the index, predicate, and wedding to be added.
+     *
+     * @return A string representation of this command
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
