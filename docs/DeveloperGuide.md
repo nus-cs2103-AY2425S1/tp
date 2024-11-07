@@ -666,6 +666,21 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `list -s`<br>
       Expected: All suppliers are shown in the list.
 
+### Mark supplier status
+
+1. Marking a supplier as active/inactive
+
+   1. Prerequisites: List all suppliers using the `list -s` command. Multiple suppliers in the list.
+
+   1. Test case: `mark -s 1 active`<br>
+      Expected: The status of the first supplier is changed to active.
+
+   1. Test case: `mark -s 1 inactive`<br>
+      Expected: The status of the first supplier is changed to inactive.
+
+   1. Test case: `mark -s 0 active`<br>
+      Expected: Error message is shown. Status of suppliers is not changed.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
