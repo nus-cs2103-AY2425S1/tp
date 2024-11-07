@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.util.PrefixPresenceUtil.arePrefixesPresent;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_NAME;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -23,8 +24,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates a new AddScheduleCommand object.
  */
 public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
-
-    private static final String MESSAGE_EMPTY_NAME = "The event name cannot be empty.";
 
     @Override
     public AddScheduleCommand parse(String args) throws ParseException {
