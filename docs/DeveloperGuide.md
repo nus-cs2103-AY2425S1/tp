@@ -386,13 +386,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. System cannot find the specified student.
-    * 1a1. User <ins>adds the student to the system (UC01)</ins>.<br>
-      Use case resumes from step 1.<br><br>
-  
-* 2a. System detects error in entered command.
-    * 2a1. System displays error message and does not clear command line.
-    * 2a2. User enters new command.<br>
+* 1a. System detects error in entered command.
+    * 1a1. System displays error message and does not clear command line.
+    * 1a2. User enters new command.<br>
   Steps 1a1-1a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 2.
 
