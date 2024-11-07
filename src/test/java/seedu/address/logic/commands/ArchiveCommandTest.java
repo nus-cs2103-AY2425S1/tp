@@ -77,7 +77,7 @@ public class ArchiveCommandTest {
         ArchiveCommand archiveCommand = new ArchiveCommand(INDEX_FIRST_PERSON, true);
 
         assertThrows(CommandException.class, () -> archiveCommand.execute(model),
-                ArchiveCommand.MESSAGE_PERSON_IS_ALREADY_ARCHIVED);
+                ArchiveCommand.MESSAGE_PERSON_IS_CURRENTLY_ARCHIVED);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ArchiveCommandTest {
         ArchiveCommand unarchiveCommand = new ArchiveCommand(INDEX_FIRST_PERSON, false);
 
         assertThrows(CommandException.class, () -> unarchiveCommand.execute(model),
-                ArchiveCommand.MESSAGE_PERSON_IS_ALREADY_UNARCHIVED);
+                ArchiveCommand.MESSAGE_PERSON_IS_CURRENTLY_NOT_ARCHIVED);
     }
 
     @Test

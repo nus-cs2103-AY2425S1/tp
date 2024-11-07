@@ -29,13 +29,13 @@ public class ArchiveCommand extends Command {
             + "Examples: " + COMMAND_WORD_ARCHIVE + " 1, " + COMMAND_WORD_UNARCHIVE + " 1";
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
 
-    public static final String MESSAGE_PERSON_IS_ALREADY_ARCHIVED =
-            "This person is already archived in the address book.";
+    public static final String MESSAGE_PERSON_IS_CURRENTLY_ARCHIVED =
+            "This person is currently archived in the address book.";
 
     public static final String MESSAGE_UNARCHIVE_PERSON_SUCCESS = "Unarchived Person: %1$s";
 
-    public static final String MESSAGE_PERSON_IS_ALREADY_UNARCHIVED =
-            "This person is already unarchived in the address book.";
+    public static final String MESSAGE_PERSON_IS_CURRENTLY_NOT_ARCHIVED =
+            "This person is currently not archived in the address book.";
 
     private final Index index;
     private final boolean shouldArchive;
@@ -43,6 +43,7 @@ public class ArchiveCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(ArchiveCommand.class);
 
     private Person personToModify;
+    private Person modifiedPerson;
 
     /**
      * @param index of the person in the filtered person list to archive/unarchive
@@ -68,11 +69,11 @@ public class ArchiveCommand extends Command {
 
         if (shouldArchive == personToModify.isArchived()) {
             throw new CommandException(shouldArchive
-                    ? MESSAGE_PERSON_IS_ALREADY_ARCHIVED
-                    : MESSAGE_PERSON_IS_ALREADY_UNARCHIVED);
+                    ? MESSAGE_PERSON_IS_CURRENTLY_ARCHIVED
+                    : MESSAGE_PERSON_IS_CURRENTLY_NOT_ARCHIVED);
         }
 
-        Person modifiedPerson = modifyPerson(personToModify);
+        modifiedPerson = modifyPerson(personToModify);
         model.setPerson(personToModify, modifiedPerson);
         logArchiveInfo(modifiedPerson);
         return generateCommandResult(modifiedPerson);
@@ -104,6 +105,7 @@ public class ArchiveCommand extends Command {
                 personToModify.getIncome(),
                 personToModify.getFamilySize(),
                 personToModify.getTags(),
+                personToModify.getSchemes(),
                 personToModify.getUpdatedAt(),
                 shouldArchive
         );
@@ -123,6 +125,15 @@ public class ArchiveCommand extends Command {
     }
 
     @Override
+    public String undo(Model model, CommandHistory pastCommands) {
+        model.setPerson(modifiedPerson, personToModify);
+        pastCommands.remove();
+        return String.format(
+                shouldArchive ? MESSAGE_UNARCHIVE_PERSON_SUCCESS : MESSAGE_ARCHIVE_PERSON_SUCCESS,
+                Messages.format(personToModify));
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -135,15 +146,5 @@ public class ArchiveCommand extends Command {
 
         return this.index.equals(otherArchiveCommand.index)
                 && this.shouldArchive == otherArchiveCommand.shouldArchive;
-    }
-
-    @Override
-    public String undo(Model model, CommandHistory pastCommands) {
-        Person afterArchive = modifyPerson(personToModify);
-        model.setPerson(afterArchive, personToModify);
-        pastCommands.remove();
-        return String.format(
-                shouldArchive ? MESSAGE_UNARCHIVE_PERSON_SUCCESS : MESSAGE_ARCHIVE_PERSON_SUCCESS,
-                Messages.format(personToModify));
     }
 }

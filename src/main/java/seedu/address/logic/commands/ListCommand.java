@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST_ARCHIVE;
 
 import java.util.function.Predicate;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -24,10 +23,12 @@ public class ListCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_LIST_ARCHIVE + "] "
             + "[" + PREFIX_LIST_ALL + "]\n"
-            + "Examples: " + COMMAND_WORD + ", " + COMMAND_WORD + " archive/, " + COMMAND_WORD + " all/";
+            + "Examples: " + COMMAND_WORD + ", "
+            + COMMAND_WORD + " " + PREFIX_LIST_ARCHIVE + ", "
+            + COMMAND_WORD + " " + PREFIX_LIST_ALL;
 
     public static final String MESSAGE_SUCCESS_ALL = "Listed all persons";
-    public static final String MESSAGE_SUCCESS_CURRENT = "Listed all current persons";
+    public static final String MESSAGE_SUCCESS_CURRENT = "Listed all current persons (i.e. not archived)";
     public static final String MESSAGE_SUCCESS_ARCHIVE = "Listed all archived persons";
 
     private final Predicate<Person> predicate;
@@ -61,8 +62,8 @@ public class ListCommand extends Command {
             return false;
         }
 
-        return this.predicate.equals(otherListCommand.predicate)
-                && this.successMessage.equals(otherListCommand.successMessage);
+        return predicate.equals(otherListCommand.predicate)
+               && successMessage.equals(otherListCommand.successMessage);
     }
 
     public static ListCommand ofCurrent() {
@@ -75,9 +76,5 @@ public class ListCommand extends Command {
 
     public static ListCommand ofArchive() {
         return new ListCommand(Model.PREDICATE_SHOW_ARCHIVED_PERSONS, MESSAGE_SUCCESS_ARCHIVE);
-    }
-
-    public String undo(Model model, CommandHistory pastCommands) {
-        return null;
     }
 }
