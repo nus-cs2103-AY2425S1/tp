@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ArgumentTokenizer.checkPrefixPresentAndValidPrefix;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
@@ -28,6 +30,9 @@ public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
         requireNonNull(args);
         assert args != null : "Arguments cannot be null";
         logger.info("Parsing DeleteApptCommand");
+
+        checkPrefixPresentAndValidPrefix(args, PREFIX_DATETIME);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATETIME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATETIME)

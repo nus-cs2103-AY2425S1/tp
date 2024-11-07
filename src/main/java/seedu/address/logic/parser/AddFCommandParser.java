@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ArgumentTokenizer.checkPrefixPresentAndValidPrefix;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
@@ -47,6 +48,11 @@ public class AddFCommandParser implements Parser<AddFCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddFCommand parse(String args) throws ParseException {
+        checkPrefixPresentAndValidPrefix(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
+                PREFIX_BIRTHDATE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_ALLERGY,
+                PREFIX_BLOODTYPE, PREFIX_EXISTINGCONDITION, PREFIX_NOTE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
+                PREFIX_HEALTHRISK);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX,
                 PREFIX_BIRTHDATE, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_ALLERGY,
                 PREFIX_BLOODTYPE, PREFIX_EXISTINGCONDITION, PREFIX_NOTE, PREFIX_NOKNAME, PREFIX_NOKPHONE,
