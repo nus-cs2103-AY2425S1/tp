@@ -98,7 +98,9 @@ The closeat command is currently not undoable (planned for future versions).
 
 Format: `undo`
 
-# Student Commands
+<div style="page-break-after: always;"></div>
+
+## Student Commands
 
 ### Adding a student: `adds`
 
@@ -169,7 +171,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-# Attendance Commands
+## Attendance Commands
 
 <box type="tip" seamless>
 
@@ -225,7 +227,7 @@ Closes all attendance windows if any is currently open.
 
 <div style="page-break-after: always;"></div>
 
-# Assignment Commands
+## Assignment Commands
 
 ### Adding Assignments : `adda`
 
