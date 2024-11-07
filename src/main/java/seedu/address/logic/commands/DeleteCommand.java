@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,8 +27,14 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " alex";
 
-    public static final String MESSAGE_DELETE_EMPTY_LIST_ERROR = "There is nothing to delete.";
+    public static final String MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR = "There is no person to delete.";
+    public static final String MESSAGE_DELETE_EMPTY_WEDDING_LIST_ERROR =
+            "There is no wedding to assign as the wedding list is empty.\n"
+                    + "Please refresh the list with a command (e.g. list, vieww).";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
+    public static final String MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS = "Removed wedding jobs from person: %1$s";
+
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to delete.\n"
                     + "Find the index from the list below and type delete INDEX\n"
@@ -36,37 +43,53 @@ public class DeleteCommand extends Command {
             "Cannot delete this person as they are a client in a wedding.\n"
             + "Please delete their wedding first.";
 
+    public static final String MESSAGE_PERSON_NOT_ASSIGNED_WEDDING =
+            "Cannot unassign wedding(s) from this person because they are not assigned to the specified wedding(s)";
+
     private final Index targetIndex;
     private final NameMatchesKeywordPredicate predicate;
+    private final Set<Index> weddingIndices;
+
 
     /**
      * Creates a DeleteCommand object to delete the person at the specified {@code Index} or keyword.
      */
-    public DeleteCommand(Index targetIndex, NameMatchesKeywordPredicate predicate) {
+    public DeleteCommand(Index targetIndex, NameMatchesKeywordPredicate predicate, Set<Index> weddingIndices) {
         this.targetIndex = targetIndex;
         this.predicate = predicate;
+        this.weddingIndices = weddingIndices;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Person personToDelete;
 
         if (this.targetIndex != null) {
-            Person personToDelete = getPersonByIndex(model);
+            personToDelete = getPersonByIndex(model);
+        } else {
+            personToDelete = getPersonByKeyword(model);
+        }
+
+        boolean isDeleteWedding = weddingIndices != null;
+
+        if (personToDelete == null) {
+            return new CommandResult(String.format(MESSAGE_DUPLICATE_HANDLING));
+        }
+
+        if (isDeleteWedding) {
+            checkValidWeddingIndices(model);
+            // check if person was assigned to those weddings
+            checkPersonIsAssignedWeddings(personToDelete, model);
+            // delete those weddings
+            removeWeddingJobs(personToDelete, model);
+            return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
+                    Messages.format(personToDelete)));
+        } else {
             validatePersonIsNotClient(personToDelete, model);
             model.deletePerson(personToDelete);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Reset filter
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-        } else {
-            Person personToDelete = getPersonByKeyword(model);
-            if (personToDelete != null) {
-                validatePersonIsNotClient(personToDelete, model);
-                model.deletePerson(personToDelete);
-                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Reset filter
-                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
-            } else {
-                return new CommandResult(String.format(MESSAGE_DUPLICATE_HANDLING));
-            }
         }
     }
 
@@ -76,7 +99,7 @@ public class DeleteCommand extends Command {
     private Person getPersonByIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+            throw new CommandException(MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR);
         }
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -95,7 +118,7 @@ public class DeleteCommand extends Command {
         List<Person> filteredList = model.getFilteredPersonList();
 
         if (filteredList.isEmpty()) {
-            throw new CommandException(MESSAGE_DELETE_EMPTY_LIST_ERROR);
+            throw new CommandException(MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR);
         } else if (filteredList.size() == 1) {
             return filteredList.get(0);
         } else {
@@ -114,6 +137,58 @@ public class DeleteCommand extends Command {
             if (wedding.getClient() != null && wedding.getClient().getPerson().equals(person)) {
                 throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
             }
+        }
+    }
+
+    /**
+     * Check if wedding indices inputs are valid
+     *
+     * @param model {@code Model} which the command should operate on
+     * @throws CommandException if the list is empty or if the index is invalid
+     */
+    public void checkValidWeddingIndices(Model model) throws CommandException {
+        List<Wedding> lastShownList = model.getFilteredWeddingList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(MESSAGE_DELETE_EMPTY_WEDDING_LIST_ERROR);
+        }
+
+        for (Index index : weddingIndices) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
+                        lastShownList.size()));
+            }
+        }
+    }
+
+    /**
+     * Checks if person is assigned to weddings before attempting to remove them.
+     *
+     * @param personToDelete person to check assigned weddings
+     * @param model The model containing the list of weddings.
+     * @throws CommandException if person is not assigned weddings
+     */
+    public void checkPersonIsAssignedWeddings(Person personToDelete, Model model) throws CommandException {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
+        for (Index index : weddingIndices) {
+            Wedding wedding = weddingList.get(index.getZeroBased());
+            if (!personToDelete.isAssignedToWedding(wedding)) {
+                throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
+            }
+        }
+
+    }
+
+    /**
+     * Removes specified wedding jobs from person
+     *
+     * @param personToDelete person to remove wedding jobs
+     * @param model The model containing the list of weddings.
+     */
+    public void removeWeddingJobs(Person personToDelete, Model model) {
+        List<Wedding> weddingList = model.getFilteredWeddingList();
+        for (Wedding wedding : weddingList) {
+            personToDelete.removeWeddingJob(wedding);
         }
     }
 

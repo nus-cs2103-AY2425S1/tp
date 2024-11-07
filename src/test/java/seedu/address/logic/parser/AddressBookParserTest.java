@@ -57,13 +57,13 @@ public class AddressBookParserTest {
         // delete INDEX
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, null), command);
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON, null, null), command);
 
         // delete KEYWORD
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new DeleteCommand(null, new NameMatchesKeywordPredicate(keywords)), command);
+        assertEquals(new DeleteCommand(null, new NameMatchesKeywordPredicate(keywords), null), command);
     }
 
     @Test

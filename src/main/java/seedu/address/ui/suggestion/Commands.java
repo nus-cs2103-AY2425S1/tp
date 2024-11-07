@@ -7,7 +7,7 @@ package seedu.address.ui.suggestion;
 public enum Commands {
     ADD("add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING...]",
             new String[]{"n/", "p/", "e/", "a/", "r/", "w/"}),
-    DELETE("delete", "delete INDEX/NAME", new String[]{}),
+    DELETE("delete", "delete INDEX/NAME [w/WEDDING...]", new String[]{}),
     CLEAR("clear", "clear", new String[]{}),
     VIEW("view", "view INDEX/NAME", new String[]{}),
     FILTER("filter", "filter [n/NAME] [r/ROLE] [e/EMAIL] [p/PHONE] [a/ADDRESS]...",
