@@ -375,7 +375,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to add a specific profile, specifying name and contact number.
+1. User requests to add a specific profile, specifying name, contact number and email address.
 2. DorManagerPro adds the profile.
 
    Use case ends.
@@ -493,9 +493,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to view profiles.
-2. User requests to view certain profiles based on the profiles features (tags, roomNumber, number, name)
-3. DorManagerPro displays all profiles with all attached information.
+1. User requests to view all profiles.
+2. DorManagerPro displays all profiles.
+3. User requests to view certain profiles based on the profiles features (tags, roomNumber, number, name)
+4. DorManagerPro displays all profiles with all attached information.
 
    Use case ends.
 
@@ -507,6 +508,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Steps 1a1-1a2 are repeated until the command is correct.
   Use case resumes from step 2.
+
+* 3a. DorManagerPro detects an error in the command format.
+  * 3a1. DorManagerPro requests for the correct command format.
+  * 3a2. User enters command again.
+
+  Steps 3a1-3a2 are repeated until the command is correct.
+  Use case resumes from step 4.
 
 * *a. At any time, User chooses to stop viewing a profile.
   Use case ends.
@@ -547,15 +555,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Steps 1c1-1c2 are repeated until the parameters are valid.
   Use case resumes from step 2.
 
-* 3a. DorManagerPro detects an error in the confirmation message sent by the User
-    * 3a1. DorManagerPro asks the user for confirmation to delete the profile again.
-    * 3a2. User confirms again.
-
-  Steps 3a1-3a2 are repeated until the confirmation is correct.
-  Use case resumes from step 4.
-
-* 3b. User expresses they do not want to delete the profile after all.
-    * 3b1. DorManagerPro acknowledges the rejection.
+* 3a. User expresses they do not want to delete the profile after all.
+    * 3a1. DorManagerPro acknowledges the rejection.
 
   Use case ends.
 
