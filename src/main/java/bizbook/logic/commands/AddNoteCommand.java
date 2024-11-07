@@ -60,8 +60,10 @@ public class AddNoteCommand extends Command {
 
         ArrayList<Note> notesList = new ArrayList<>(personToEdit.getNotes());
 
-        if (notesList.contains(note)) {
-            throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
+        for (Note existingNote : notesList) {
+            if (existingNote.toString().equalsIgnoreCase(note.toString())) {
+                throw new CommandException(DUPLICATE_MESSAGE_CONSTRAINTS);
+            }
         }
 
         notesList.add(note);
