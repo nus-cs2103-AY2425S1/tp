@@ -215,7 +215,7 @@ Format: `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 
 * short form: `dellsn INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`
 * Deletes lesson(s) from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* Lessons are indexed based on the order they were added to the student, starting from 1.
+* Lessons are indexed starting from 1 and sorted in ascending order based on their day and time.
 * If the `LESSON_INDEX` is not valid, an error will be shown.
 
 Examples:
