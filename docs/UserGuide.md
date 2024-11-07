@@ -48,11 +48,11 @@ This app is a desktop app for managing candidates and job roles, **optimised for
     - [Exiting the Program: `exit`](#exiting-the-program-exit)
     - [Saving Data](#saving-data)
     - [Editing the Data File](#editing-the-data-file)
+    - [Bug Report](#how-to-report-a-bug)
     - [Archiving Data Files](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
-- [Known Issues](#known-issues)
 - [Glossary](#glossary)
-- [Feedback and Support](#how-to-report-a-bug)
+
 
 
 ---
@@ -171,6 +171,7 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 
 
 <strong>[Caution]</strong>: The required information except tags cannot be empty.
+
 ---
 
 ### Viewing Help: `help`
@@ -383,6 +384,7 @@ When using the `view` command, the applicant's details will appear in the right 
 This allows you to conveniently access all the specific details about an applicant in one view.
 
 <strong>[Tip]</strong>: Use the `view` command frequently to ensure you have the most updated and detailed information about each applicant during your recruitment process.
+
 ---
 
 ### Filtering Applicants by Status: `filter`
@@ -518,7 +520,6 @@ Advanced users can edit the data file located at `[JAR file location]/data/addre
 - It is recommended to take a backup of the file before editing it.
 - Certain edits can cause TalentSG to behave unexpectedly (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
-
 ---
 
 ### Reporting a Bug: `report bug`
@@ -554,7 +555,6 @@ Below is an example of the Report Bug pop-up window that will appear when you ac
 
 ---
 
-
 ### Archiving Data Files `[coming in v2.0]`
 
 _Details coming soon ..._
@@ -577,13 +577,6 @@ _Details coming soon ..._
 
 **Q**: How do I update to the latest version of TalentSG?<br>
 **A**: Simply download the latest `.jar` file released on our GitHub page.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known Issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
