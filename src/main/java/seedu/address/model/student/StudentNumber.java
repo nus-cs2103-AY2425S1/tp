@@ -10,10 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class StudentNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Student numbers should be of the format A01234567X "
+        "Student numbers should be of the format A0123456X "
             + "and adhere to the following constraints:\n"
             + "1. The student number should start with A0.\n"
-            + "2. This is followed by exactly 7 numerical digits.\n"
+            + "2. This is followed by exactly 6 numerical digits.\n"
             + "3. Lastly, it ends with another letter, which could be A or any other uppercase letter.";
 
     private static final String START_PART_REGEX = "(?i)^A0";

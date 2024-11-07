@@ -8,9 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.addcommands.AddStudentToGroupCommand;
@@ -52,13 +50,13 @@ public class AddStudentToGroupCommandParser implements Parser<AddStudentToGroupC
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_GROUP_NAME);
-        Set<StudentNumber> studentNumberSet = new LinkedHashSet<>();
+        List<StudentNumber> studentNumberList = new ArrayList<StudentNumber>();
         for (String s : argMultimap.getAllValues(PREFIX_STUDENT_NUMBER)) {
-            studentNumberSet.add(ParserUtil.parseStudentNumber(s));
+            studentNumberList.add(ParserUtil.parseStudentNumber(s));
         }
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
-        return new AddStudentToGroupCommand(studentNumberSet, groupName);
+        return new AddStudentToGroupCommand(studentNumberList, groupName);
     }
 
     /**
