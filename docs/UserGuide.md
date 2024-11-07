@@ -229,8 +229,9 @@ Statistics include:
 * Number of HIGH Priority People
 * Number of MEDIUM Priority People
 * Number of LOW Priority People
-* Number of People With Monthly Household Income < 2500
-* Number of Appointments Within a Week From Current Date
+* Number of People With Monthly Household Income <= 4000
+* Number of Appointments Scheduled Within Next 7 Days From Current Date
+* Number Of People Eligible For At Least One Scheme
 
 Format: `statistics`
 
