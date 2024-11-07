@@ -37,7 +37,7 @@ public class FilterCommand extends Command {
             COMMAND_WORD + ": Filter the transaction book.\n" + "Parameters: "
                     + "[INDEX] " + "[" + PREFIX_AMOUNT + "AMOUNT] " + "[" + PREFIX_DESCRIPTION
                     + "DESCRIPTION] " + "[" + PREFIX_DATE + "DATE] " + "[" + PREFIX_STATUS
-                    + "STATUS] " + "[" + PREFIX_AMOUNT_SIGN + "AMOUNT_SIGN]"
+                    + "STATUS] " + "[" + PREFIX_AMOUNT_SIGN + "AMOUNT_SIGN] "
                     + "[" + PREFIX_CATEGORY + "CATEGORY]\n"
                     + "At least one of the above filtering criteria is needed\n"
                     + "Example: " + COMMAND_WORD + " 1";
