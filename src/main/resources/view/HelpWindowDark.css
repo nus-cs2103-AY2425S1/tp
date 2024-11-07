@@ -21,6 +21,7 @@
 
 .help-textbox {
   -fx-text-fill: white;
+  -fx-fill: white;
 }
 
 #errorMessageLabel {
