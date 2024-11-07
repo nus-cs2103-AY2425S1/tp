@@ -85,7 +85,7 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
         [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
 - `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
-- `NAME`: The contact's full name.
+- `NAME`: The contact's full name (case-insensitive).
 - `PHONE_NUMBER`: The contact's phone number.
 - `EMAIL`: The contact's email address.
 - `ADDRESS`: The contact's physical address.
@@ -170,22 +170,26 @@ Examples:
 
 Search persons whose fields match the keywords given.
 
-Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
+Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
 * Search is restricted to the fields indicated by the provided prefixes.
-* The order of the prefixes provided does not affect search results. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`.
+* The order of the prefixes provided does not affect search results. e.g. `search n/alex t/friends` will return the same result as `search t/friends n/alex`.
 * Only full words will be matched e.g. `friend` will not match `friends`.
 * For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
-* For name searches, persons matching any of the keyswords given will be returned (eg., `search n/ Alex Yeoh` returns both `Alex Yeoh` and `Alex Tan`)
-* For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
+* For name searches, persons matching any of the keyswords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
+* For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
-Tip: Support search prefixes include:
+<box type="tip" seamless>
+
+**Tip:** Supported search prefixes include:
 * `NAME`: n/
 * `TAG`: t/
 * `PHONE_NUMBER`: p/
 * `GROUP`: g/
 * `ROLE`: r/
+
+</box>
 
 Examples: <br>
 1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
@@ -194,6 +198,8 @@ Examples: <br>
 * `search n/john` returns persons with the name `john` like `John Doe`
 * `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
 * `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
+    ![result for 'search alex david'](images/search_alex_david.png)
+
 
 ### Deleting a person : `delete`
 
@@ -233,7 +239,7 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
 * Adds the persons at the specified `INDICES` to the group. 
   Indices refer to the index numbers shown in the displayed person list.
   There must be at least one index provided, and indices should be separated by a space.
-* There cannot be two groups with the same name. If a group
+* There cannot be two groups with the same name (case-insensitive). If a group
   with the given `GROUP_NAME` currently exists, the command will fail.
 
 Example:
@@ -284,10 +290,14 @@ Example:
 * `deleteGroup g/blood drive 2024`
 
 ### Listing groups: `listGroups`
-
-Lists out all existing Group names.
+Shows a list of all existing groups.
 
 Format: `listGroups`
+
+* The group size and up to three members are displayed for each group.
+* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
+
+![result for 'list groups'](images/list-groups.png)
 
 ### Getting emails: `email`
 
@@ -345,7 +355,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
+**Search**   | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`<br> e.g., `search n/john`
 **List**   | `list`
 **Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`

@@ -44,7 +44,7 @@ public class Group extends UniquePersonList {
      */
     public boolean isSameName(Group group) {
         requireNonNull(group);
-        return name.equals(group.name);
+        return name.equalsIgnoreCase(group.name);
     }
 
     /**
