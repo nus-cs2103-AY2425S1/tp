@@ -167,7 +167,7 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containsNumber_invalidPhoneNumber_validInput_returnFalse() {
+    public void containsNumber_invalidPhoneNumber_returnsFalse() {
         assertFalse(StringUtil.containsNumber("1234a567", "3456"));
         assertFalse(StringUtil.containsNumber("1234a567", "890"));
     }
