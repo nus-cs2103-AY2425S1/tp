@@ -19,10 +19,10 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies by company name, tag,"
             + " or contact number."
-            + "\nParameters: find [/c <Company name>] or [/t <Tag name>] or [/num <Contact number>]"
-            + "\nExample: " + COMMAND_WORD + " /c Google"
-            + "\nExample: " + COMMAND_WORD + " /t Tech"
-            + "\nExample: " + COMMAND_WORD + " /num 12345678";
+            + "\nParameters: find KEYWORD"
+            + "\nExample: " + COMMAND_WORD + " WLB:HIGH"
+            + "\nExample: " + COMMAND_WORD + " Google"
+            + "\nExample: " + COMMAND_WORD + " Google WLB:HIGH";
 
     private final NameContainsKeywordsPredicate predicate;
 
