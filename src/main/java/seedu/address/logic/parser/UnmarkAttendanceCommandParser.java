@@ -17,8 +17,13 @@ public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCom
      * @throws ParseException if the user input does not conform the expected format
      */
     public UnmarkAttendanceCommand parse(String args) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceCommand.MESSAGE_USAGE));
+        }
         try {
             String[] parts = args.trim().split("\\s+");
+            assert parts.length > 0 : "Parts array should not be empty";
             Index[] indexes = new Index[parts.length];
             for (int i = 0; i < parts.length; i++) {
                 indexes[i] = ParserUtil.parseIndex(parts[i]);

@@ -33,6 +33,7 @@ public class UnmarkAttendanceCommand extends Command {
      * @param targetIndexArray of the student in the filtered person list to unmark attendance
      */
     public UnmarkAttendanceCommand(Index[] targetIndexArray) {
+        requireNonNull(targetIndexArray);
         this.targetIndexArray = targetIndexArray;
     }
 
@@ -40,6 +41,7 @@ public class UnmarkAttendanceCommand extends Command {
      * @param targetIndex of the student in the filtered person list to unmark attendance
      */
     public UnmarkAttendanceCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndexArray = new Index[] { targetIndex };
     }
     @Override

@@ -17,6 +17,10 @@ public class SortCommandParser implements Parser<SortCommand> {
     @Override
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim().toLowerCase();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
         Comparator<Person> comparator;
 
         switch (trimmedArgs) {
