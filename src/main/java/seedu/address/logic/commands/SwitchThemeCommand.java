@@ -25,7 +25,7 @@ public class SwitchThemeCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         ThemeController.switchTheme(theme);
-        String themeMessage = theme.substring(0,1).toUpperCase() + theme.substring(1).toLowerCase();
+        String themeMessage = theme.substring(0, 1).toUpperCase() + theme.substring(1).toLowerCase();
         return new CommandResult(String.format(MESSAGE_SUCCESS, themeMessage));
     }
 
