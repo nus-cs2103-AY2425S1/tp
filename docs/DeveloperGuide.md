@@ -360,14 +360,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to <ins>list students(UC02)</ins>.
+1. User requests to <ins>find a student(UC05)</ins>.
 1. User enters command to delete a specific student.
 1. System displays list with specified student deleted from the list.
 
    Use case ends.
 
 **Extensions**
-
+* 1a. System cannot find the specified student.<br>
+    Use case ends.<br><br>
+  
 * 2a. System detects error in format of entered command.
     * 2a1. System displays error message and does not clear command line.
     * 2a2. User enters command with new index.<br>
@@ -379,16 +381,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters command to find students.
+1. User enters command to find students based on the specified keywords.
 1. System displays list with students with matching details.
 
    Use case ends.
 
 **Extensions**
-
-* 1a. System detects error in entered command.
-    * 1a1. System displays error message and does not clear command line.
-    * 1a2. User enters new command.<br>
+* 1a. System cannot find any student with the specified keyword.
+    * 1a1. System displays an empty list.<br>
+  Use case ends.<br><br>
+    
+* 1b. System detects error in entered command.
+    * 1b1. System displays error message and does not clear command line.
+    * 1b2. User enters new command.<br>
   Steps 1a1-1a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 2.
 
@@ -499,6 +504,7 @@ Given below are instructions to test the app manually.
 testers are expected to do more *exploratory* testing.
 
 </box>
+
 
 ### Launch and shutdown
 
