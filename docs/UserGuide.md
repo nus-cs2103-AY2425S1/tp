@@ -62,8 +62,8 @@ Parameter     | Notes
 **`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
 **`EMAIL`** | should be of the format `local-part@domain`
 **`SKILL`**   | should be alphanumeric
-**`INTERVIEW_SCORE`**   | should be a number ranging from 0.0 to 10.0 with a maximum of a single decimal place
-**`TAG`**   | should be alphanumeric and should not contain any spaces
+**`INTERVIEW_SCORE`**   | should be a number ranging from 0.0 to 10.0 with a maximum of a single decimal place. If a decimal point is included then all zeroes must be present i.e. `0.5` instead of `.5` and `9` or `9.0` instead of `9.`
+**`TAG`**   | should be alphanumeric and should not contain any spaces. `Hired`, `Rejected` or `Pending` also should not be manually added as tags.
 **`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
 **`ORDER`**   | should be either `a` (ascending) or `d` (descending)
 
@@ -144,7 +144,7 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 * Existing values will be updated to the input values.
 * When editing tags/skills, the existing tags/skills of the candidate will be removed i.e. adding of tags/skills is not cumulative.
 * You can remove all the candidate’s tags by typing `t/` without
-    specifying any tags after it.
+    specifying any tags after it. This does not change the candidate's status.
 * You can remove all the candidate’s skills by typing `s/` without
   specifying any skills after it.
 
