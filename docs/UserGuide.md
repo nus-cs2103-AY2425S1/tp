@@ -326,8 +326,6 @@ Updates the amount of tuition fee paid by the student and the amount of tuition 
 
 </box>
 
-<div style="page-break-after: always;"></div>
-
 ### Showing income data: `income`
 
 Shows the total amount of tuition fee that you have been paid, as well as the total amount that is owed.
