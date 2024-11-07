@@ -654,10 +654,6 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
