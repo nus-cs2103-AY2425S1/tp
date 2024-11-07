@@ -7,7 +7,7 @@
 # TutorEase User Guide
 
 TutorEase is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while
-still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management
+still having the benefits of a Graphical User Interface (GUI). If you can type fast, TutorEase can get your contact management
 tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -198,11 +198,9 @@ Examples:
 * `contact list` followed by `contact delete 2` deletes the 2nd person in the address book.
 * `contact find Betsy` followed by `contact delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding a lesson : `lesson add`
-
-Adds a lesson tied to a student with start and end date time.
-
 Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
+
+Remarks:
 
 * Add a lesson with the student at specified `STUDENTID`.
 * The student ID refers to the index number shown in the displayed person list.
@@ -210,9 +208,22 @@ Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
 * The lesson is held at the address of the student.
 * The price per hour refers to the price of the lesson per hour.
 * The price per hour **must be a non-negative integer**.
-* The duration **must be a decimal number or an integer** between 0 and 24 inclusive.
+* The duration **must be a decimal number or an integer** in multiples of 0.5.
+* The duration have to be more than 0 and be at most 24.
 * The duration of the lesson is specified by the `DURATION` in hours.
-* The student ID **must be a positive integer** 1, 2, 3, …​
+* The student ID **must be a positive integer** 1, 2, 3, …​, within the range of the number of students in the address book.
+* The student location will automatically be set to the address of the student.
+* We allow past lessons to be added as way to keep track of past lessons.
+* The date time format is `dd-MM-yyyy HH:mm` and the locale is not fixed to any timezones.
+* The lesson added will be in sorted order of the start date time.
+* Addresses that are too long will be displayed fully in multiple lines in the lesson panel as tutors would need the full location of the student.
+* Lessons can only be added to contacts with the role of student.
+
+Examples: `lesson add sid/1 f/10 d/23-10-2024 12:00 h/1`
+
+Adds a lesson with the student at index 1, price per hour of 10, starting on 23rd October 2024 at 12:00 and lasting 1 hour to the lesson panel.
+
+![add lesson](images/addLessonUg/add_lesson.png)
 
 ### Listing all lessons : `lesson list`
 
@@ -222,9 +233,11 @@ Format: `lesson list`
 
 ### Deleting a lesson : `lesson delete`
 
-Deletes the lesson at the specified index from the lesson schedule.
+Deletes the lesson at the specified index from the lesson schedule. Deleting a student will also delete all lessons associated with the student.
 
 Format: `lesson delete INDEX`
+
+Remarks:
 
 * Deletes the lesson at the specified `INDEX`.
 * The index refers to the index number shown in the displayed lesson schedule.
@@ -239,6 +252,8 @@ Examples:
 Find lessons with students whose names contain any of the specified keywords.
 
 Format: `lesson find KEYWORD [MORE_KEYWORDS]`
+
+Remarks:
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
@@ -259,7 +274,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from TutorEase which includes all contacts and lessons.
 
 Format: `clear`
 
@@ -271,20 +286,20 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+TutorEase data are saved in the hard disk automatically after any command that changes the data. There is no need to
 save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
+TutorEase data are saved automatically as a JSON file `[JAR file location]/data/tutorease.json` and `[JAR file location]/data/lessonschedule.json`. Advanced users are
 welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty
+If your changes to the data file makes its format invalid, TutorEase will discard all data and start with an empty
 data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside
+Furthermore, certain edits can cause TutorEase to behave in unexpected ways (e.g., if a value entered is outside
 the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -298,7 +313,7 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous AddressBook home folder.
+the data of your previous TutorEase home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -328,3 +343,29 @@ the data of your previous AddressBook home folder.
  **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`
  **Find Lessons**   | `lesson find KEYWORD [MORE_KEYWORDS]` <br> e.g., `lesson find John Alice`
  **Help**           | `help`                                                                                                                                                                
+
+## Prefix Table
+
+Prefix | Description
+-------|-------------
+n/     | Name
+p/     | Phone Number
+e/     | Email
+a/     | Address
+r/     | Role
+t/     | Tag
+sid/   | Student ID
+f/     | Price per hour
+d/     | Start date time of lesson
+h/     | Duration of lesson
+
+## Glossary
+Term       | Meaning
+-----------|-------------
+Parameters | Information that must be supplied by the user.
+Hard disk  | The primary storage device of a computer.
+JSON       | JavaScript Object Notation, a structure for reading and writing data from a file.
+JAR        | Java Archive, a file format used for TutorEase.
+GUI        | Graphical User Interface.
+
+

@@ -32,7 +32,7 @@ public class DeleteLessonCommand extends LessonCommand {
     /**
      * Creates an DeleteLessonCommand to delete the lesson at a specified index.
      *
-     * @param targetIndex     The index of the lesson to be deleted. Must not be null
+     * @param targetIndex The index of the lesson to be deleted. Must not be null.
      */
     public DeleteLessonCommand(Index targetIndex) {
         if (targetIndex == null) {
