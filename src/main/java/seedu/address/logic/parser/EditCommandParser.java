@@ -71,25 +71,6 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> publicAddresses} into a {@code Map<Network, Set<PublicAddress>>}
-     * if {@code publicAddresses} is non-empty.
-     * If {@code publicAddresses} contain only one element which is an empty string, it will be parsed into a
-     * {@code Map<Network, Set<PublicAddress>>} containing zero networks.
-     */
-    private Optional<PublicAddressesComposition> parsePublicAddressesForEdit(Collection<String> publicAddresses)
-            throws ParseException {
-        assert publicAddresses != null;
-
-        if (publicAddresses.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = publicAddresses.size() == 1 && publicAddresses.contains("") ? Collections.emptySet()
-                : publicAddresses;
-        return Optional.of(ParserUtil.parsePublicAddresses(tagSet));
-    }
-
-
-    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
