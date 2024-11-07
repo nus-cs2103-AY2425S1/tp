@@ -41,8 +41,10 @@ public class TaskStatusModifierTest {
 
     @Test
     public void modifyTasks_markTasks_success() throws Exception {
-        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), true);
-        Task taskToMark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
+        Task taskToMark = new Task("todo: call vendors");
+        model.addTask(taskToMark);
+        Index index = Index.fromZeroBased(model.getFilteredTaskList().size() - 1);
+        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(index), true);
 
         Set<Task> modifiedTasks = modifier.modifyTasks(model);
 
@@ -105,8 +107,6 @@ public class TaskStatusModifierTest {
         }
     }
 
-
-
     @Test
     public void modifyTasks_unmarkTasks_success() throws Exception {
         TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), false);
@@ -122,9 +122,11 @@ public class TaskStatusModifierTest {
 
     @Test
     public void modifyTasks_markTasksAssignedToPerson_success() throws Exception {
-        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), true);
-        Task taskToMark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
-        Person personWithSameTask = new PersonBuilder().withName("newperson").withTasks("todo: buy groceries").build();
+        Task taskToMark = new Task("todo: call vendors");
+        model.addTask(taskToMark);
+        Index index = Index.fromZeroBased(model.getFilteredTaskList().size() - 1);
+        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(index), true);
+        Person personWithSameTask = new PersonBuilder().withName("newperson").withTasks("todo: call vendors").build();
         model.addPerson(personWithSameTask);
         model.assignVendor(personWithSameTask);
 
@@ -146,8 +148,10 @@ public class TaskStatusModifierTest {
 
     @Test
     public void modifyTasks_updatesPersonsWithMarkedTask() throws Exception {
-        Task taskToMark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
-        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(INDEX_FIRST), true);
+        Task taskToMark = new Task("todo: call vendors");
+        model.addTask(taskToMark);
+        Index index = Index.fromZeroBased(model.getFilteredTaskList().size() - 1);
+        TaskStatusModifier modifier = new TaskStatusModifier(Set.of(index), true);
         modifier.modifyTasks(model);
 
         for (Person person : model.getFilteredPersonList()) {
