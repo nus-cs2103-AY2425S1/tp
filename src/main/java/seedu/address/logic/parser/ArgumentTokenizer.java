@@ -29,6 +29,21 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Checks if the argument string contains any prefixes outside the allowed prefixes.
+     *
+     * @param argsString      The argument string to check, which may contain prefixes and values.
+     * @param allowedPrefixes The prefixes that are permitted in the argument string.
+     * @return true if any prefixes outside the allowed set are present, false otherwise;
+     */
+    public static boolean containsExtraPrefixes(String argsString, Prefix... allowedPrefixes) {
+        List<PrefixPosition> allowedPositions = findAllPrefixPositions(argsString, allowedPrefixes);
+        List<PrefixPosition> allPositions =
+                findAllPrefixPositions(argsString, CliSyntax.getAllPrefixes().toArray(new Prefix[0]));
+
+        return allPositions.size() != allowedPositions.size();
+    }
+
+    /**
      * Finds all zero-based prefix positions in the given arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
@@ -72,7 +87,7 @@ public class ArgumentTokenizer {
     private static int findPrefixPosition(String argsString, String prefix, int fromIndex) {
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
-                : prefixIndex + 1; // +1 as offset for whitespace
+                                 : prefixIndex + 1; // +1 as offset for whitespace
     }
 
     /**
