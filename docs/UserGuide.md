@@ -250,6 +250,6 @@ Action | Format, Examples
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
-**Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `find James Jake`
+**Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **List** | `list`
 **Help** | `help`
