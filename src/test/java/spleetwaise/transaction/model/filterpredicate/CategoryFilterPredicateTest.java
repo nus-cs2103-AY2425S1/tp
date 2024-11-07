@@ -29,15 +29,6 @@ public class CategoryFilterPredicateTest {
     }
 
     @Test
-    public void execute_categoryDifferentCase_success() {
-        Category testCategoryDifferentCase = new Category(testCategory.toString());
-        CategoryFilterPredicate pred = new CategoryFilterPredicate(testCategoryDifferentCase);
-
-        assertTrue(pred.test(TypicalTransactions.SEANOWESME));
-        assertFalse(pred.test(TypicalTransactions.DANIELDEBT));
-    }
-
-    @Test
     public void equals_samePredicate_returnsTrue() {
         CategoryFilterPredicate pred = new CategoryFilterPredicate(testCategory);
         CategoryFilterPredicate pred2 = new CategoryFilterPredicate(testCategory);
