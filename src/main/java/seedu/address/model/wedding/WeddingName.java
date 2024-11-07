@@ -1,10 +1,9 @@
 package seedu.address.model.wedding;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents a {@code Wedding}'s name in the address book.

@@ -1,14 +1,11 @@
 package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
-import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 
 /**
  * Represents a Wedding in the system.
