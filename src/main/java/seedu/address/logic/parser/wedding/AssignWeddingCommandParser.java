@@ -5,8 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -63,17 +63,24 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
             throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
         }
 
-        // Convert wedding values to Wedding objects
-        HashSet<Wedding> weddings = new HashSet<>(weddingValues.stream()
-                .map(WeddingName::new) // Convert each string to a TagName object
-                .map(Wedding::new)
-                .collect(Collectors.toList()));
+        Map<Wedding, String> weddings = weddingValues.stream()
+                .collect(Collectors.toMap(
+                        value -> new Wedding(new WeddingName(value.split(" p[12]/")[0])),
+                        // Key: Wedding object with the name before "/p1" or "/p2"
+                        value -> {
+                            // Determine the type ("p1", "p2", or "g")
+                            if (value.contains(" p1/")) {
+                                return "p1";
+                            } else if (value.contains(" p2/")) {
+                                return "p2";
+                            } else {
+                                return "g";
+                            }
+                        }
+                ));
 
-        if (arePrefixesPresent(argMultimap, PREFIX_FORCE)) {
-            return new AssignWeddingCommand(index, weddings, true);
-        } else {
-            return new AssignWeddingCommand(index, weddings);
-        }
+        return new AssignWeddingCommand(index, weddings, arePrefixesPresent(argMultimap, PREFIX_FORCE));
+
 
     }
 

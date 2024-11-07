@@ -23,7 +23,6 @@ public class Messages {
     public static final String MESSAGE_TASK_NOT_FOUND_IN_AB = "Task does not exist in the address book.";
     public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
@@ -44,13 +43,13 @@ public class Messages {
     public static final String MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT = "Some weddings were not found in "
             + "the person's wedding list.";
     public static final String MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT = "Use f/ to force the assignment of wedding(s)."
-            + " This will create the required Wedding objects.";
+            + " This will automatically help you create the wedding required.";
     public static final String MESSAGE_FORCE_DELETE_WEDDING = "Use f/ to force the deletion of wedding."
-            + " This will unassign all people for the Wedding object.";
+            + " This will unassign all people currently assigned to this Wedding.";
     public static final String MESSAGE_FORCE_TAG_TO_CONTACT = "Use f/ to force the tagging of contacts."
             + " This will create the require Tags.";
     public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
-            + " This will unassign all contacts with the Tag.";
+            + " This will unassign all people currently with the Tag.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -87,9 +86,7 @@ public class Messages {
      * Formats the {@code tag} for display to the user.
      */
     public static String format(Tag tag) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(tag.getTagName());
-        return builder.toString();
+        return String.valueOf(tag.getTagName());
     }
 
     public static String format(Wedding wedding) {
