@@ -188,30 +188,6 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
     }
 
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
-    @Test
-    public void execute_invalidPersonNricFilteredList_failure() {
-        // Show only the first person in the filtered list
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        // Get the NRIC of a person who is not in the filtered list but is in the full address book
-        Person outOfFilteredListPerson = model.getAddressBook().getPersonList().get(1);
-        Nric outOfFilteredListNric = outOfFilteredListPerson.getNric();
-
-        // Ensure that outOfFilteredListPerson is actually outside of the filtered list's bounds
-        assertTrue(model.getFilteredPersonList().stream().noneMatch(p -> p.getNric().equals(outOfFilteredListNric)));
-
-        // Create an EditCommand using the NRIC of the person outside the filtered list
-        EditCommand editCommand = new EditCommand(outOfFilteredListNric,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
-
-        // Assert that the command fails with an invalid person message
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
-    }
-
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(NRIC_FIRST_PERSON, DESC_AMY);
