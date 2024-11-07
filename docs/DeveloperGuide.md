@@ -299,11 +299,11 @@ the same `Company` but with its `IsFavourite` set to `true` or `false` depending
 
 Step 1. The user selects a company and executes the `XXfav` command with the corresponding company list index. 
 
-Step 2. The `XXFavCommand` fetches the selected company and creates an identical `Company` but with the updated `IsFavourite` field and
-calls `Model#SetCompany()` to replace the old company in the model with the updated one.
+Step 2. The `XXFavCommand` fetches the selected company `companyToEdit` and creates an identical company `editedCompany` but with the updated `IsFavourite` field and
+calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
 
-Step 3. The changes are committed to the address book by calling `AddressBook#SetCompany()`; the address book replaces
-the old company in its `UniqueCompanyList` sorting by `IsFavourite` in the process by calling `UniqueCompanyList#SetCompany`.
+Step 3. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`; the address book replaces
+the old company in its `UniqueCompanyList` sorting by `isFavourite` in the process by calling `UniqueCompanyList#setCompany(companyToEdit, editedCompany)`.
 
 <puml src="diagrams/FavSequenceDiagram.puml" alt="FavSequenceDiagram" />
 
@@ -312,7 +312,7 @@ the old company in its `UniqueCompanyList` sorting by `IsFavourite` in the proce
 **Aspect: How to show favourite companies at the top of the company list:**
 
 * **Alternative 1 (current choice):** Uniformly ensure that companies are always sorted by favourites in all
-methods of `UniqueComanyList` that manipulates its `internalList`.
+methods of `UniqueCompanyList` that manipulates its `internalList`.
 * Pros: Simple to implement and ensures that favourited companies always remain on top.
 * Cons: Some time cost is incurred for all commands that modify the company list as list is always sorted by favourites.
 
