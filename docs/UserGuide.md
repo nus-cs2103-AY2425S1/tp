@@ -262,12 +262,16 @@ The `export` command will directly and immediately save the contents of the data
 
 Format: `export`
 
-Examples of usage:
+> <span style="color:Gray"> NOTE! </span> <br>
+> This exports the data of DorManagerPro to a file `NOW.json` into the data folder of the home folder. 
+> `NOW` is the time at the point of `export`, in the format MM-dd-yyyy-HHmmssPM.
+
+Example:
 
 `export`
 
-This exports the data of DorManagerPro to a file NOW.json in 
-
+The following screenshots shows the results of executing `export`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
