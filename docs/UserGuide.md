@@ -305,11 +305,16 @@ Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 [Parameter Constraints](#parameter-constraints).
 
 Additional Details:
-* Adds or updates the next appointment date of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`
-* If the attribute provided matches more than one person, two of the attributes need to be provided to uniquely match to a person
-* To remove the date and time from a person, use `d/None`.
+* Adds or updates the next appointment date and time of person that uniquely matches at least one of the following three attributes `NAME`, `PHONE` and `EMAIL`
+* If the attribute provided matches more than one person, more attributes need to be provided to uniquely match to a person
+* To remove the date and time from a person, use `d/None` in the command.
 * 2 patients cannot have the same date and time for the appointment
-* The date command supports the year 0001 onwards. Any years before that is not supported.
+* When no date and time is set, no date and time is displayed.
+* This feature supports the year 0001 onwards. Any years before that is not supported.
+* The month must be between 1 and 12.
+* The day must match the number of dates in a month. This takes into account months when there are only 30 days and February when there are 28 or 29 days, depending on if it is a leap year.
+* The time is in the 24-hour format. (e.g. 1800 for 6:00 PM)
+* The format of the date and time, as well the values must be valid, or there will be an error.
 
 
 Examples:
@@ -409,5 +414,5 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Filter**           | `filter [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [m/ALLERGY] [atleast one parameter]`<br> e.g., `filter t/High Risk`                                                     |
 | **View**             | `view`                                                                                                                                                                                  |
 | **Help**             | `help`                                                                                                                                                                                  |
-| **Appointment Date** | `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE`                                                                                                                                       |
-| **Schedule**         | `schedule d/DATE`                                                                                                                                                                       |
+| **Appointment Date** | `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE_TIME`                                                                                                                                  |
+| **Schedule**         | `schedule d/DATE_ONLY`                                                                                                                                                                  |
