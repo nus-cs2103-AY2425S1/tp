@@ -170,7 +170,7 @@ Examples:
 
 Search persons whose fields match the keywords given.
 
-Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
+Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * Search is restricted to the fields indicated by the provided prefixes.
@@ -295,7 +295,7 @@ Shows a list of all existing groups.
 Format: `listGroups`
 
 * The group size and up to three members are displayed for each group.
-* If a group has more than three members, only the first three are shown, followed by "..." to indicate additional members.
+* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
 
 ![result for 'list groups'](images/list-groups.png)
 
