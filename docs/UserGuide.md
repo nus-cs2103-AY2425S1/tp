@@ -116,7 +116,7 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 | [**find**](#locating-clients-find)                                          | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG]...`                                                                                 | `find k/Tan n/Steven Tan p/98765432`                                         |
 | [**cdelete**](#deleting-a-client-cdelete)                                   | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                         | `cdelete 3`                                                                  |
 | [**rdelete**](#deleting-a-rental-information-rdelete)                       | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                        | `rdelete c/1 r/2`                                                            |
-| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                         | -                                                                            |
+| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                         | `sort name`                                                                  |
 | [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
 | [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                    | -                                                                            |
 | [**import**](#importing-data-import)                                        | Import all client's details             | `import`                                                                                                                                                       | -                                                                            |
@@ -491,19 +491,11 @@ Examples:
 * `list` followed by `rdelete c/2 r/1` deletes the 1st rental information from the 2nd client in the address book.
 * `find Betsy` followed by `rdelete c/1 r/2` deletes the 2nd rental information from the 1st client in the results of the `find` command.
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
-
 ### Sorting all entries : `sort`
 
-Sorts all entries from the address book according to name in alphabetical order.
+Sorts all entries in the application according to name in alphabetical order.
 
 Format: `sort`
-
-<!--TODO: Bryan-->
 
 <div style="text-align: right;">
   <a href="#command-summary">
