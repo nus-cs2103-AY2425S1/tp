@@ -7,7 +7,7 @@ plugins {
 }
 
 application {
-    mainClassName = 'seedu.address.Main'
+    mainClass.set('seedu.address.Main')
     applicationDefaultJvmArgs = ['-ea']  // Enable assertions
 }
 

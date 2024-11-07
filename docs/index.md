@@ -3,13 +3,12 @@ layout: page
 title: VolunSync
 ---
 
-# VolunSync
-
 ![Java CI](https://github.com/AY2425S1-CS2103T-W12-2/tp/workflows/Java%20CI/badge.svg) [![Codecov](https://codecov.io/gh/nus-cs2103-AY2425S1/tp/graph/badge.svg?token=JA7RQH158C)](https://codecov.io/gh/nus-cs2103-AY2425S1/tp)
 
 ![VolunSync UI](images/Ui.png)
 
-**VolunSync** is a volunteer-focused Human Resource Management System (HRMS) tailored to meet the unique needs of nonprofits. VolunSync offers a streamlined approach to managing volunteers, coordinating events, tracking hours, and enhancing communication – all from a single, intuitive platform.
+## What is VolunSync?
+**VolunSync** is a volunteer-focused Human Resource Management System (HRMS) tailored to meet the unique needs of **nonprofits**. VolunSync offers a streamlined approach to managing volunteers, coordinating events, tracking hours, and enhancing communication – all from a single, intuitive platform.
 
 ## Key Features
 
@@ -41,4 +40,7 @@ With **VolunSync**, nonprofits can optimize volunteer management, simplify event
 
 ---
 
+## Download VolunSync
+
 **Get started with VolunSync** today to streamline volunteer management and enhance the impact of your nonprofit operations.
+Installation instructions can be found [here](UserGuide.md#quick-start).

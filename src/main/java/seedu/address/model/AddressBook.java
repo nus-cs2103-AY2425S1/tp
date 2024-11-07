@@ -48,7 +48,46 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         volunteerManager.setVolunteers(newData.getVolunteerList());
         eventManager.setEvents(newData.getEventList());
+    }
+
+    /**
+     * Validates all data in the address book.
+     */
+    public void validateAllData() {
+        validateAllVolunteers();
+        validateAllEvents();
         removeOverlappingEvents();
+    }
+
+    /**
+     * Validates all volunteers in all events. If a volunteer has no records in the json file, they are unassigned.
+     * This is to prevent non-existent volunteers from being assigned to events when the data is loaded from the json
+     * file, in the event that the json file is corrupted or tampered with.
+     */
+    public void validateAllVolunteers() {
+        for (Event event : eventManager.getEvents()) {
+            for (String volunteerName : event.getVolunteers()) {
+                if (!volunteerManager.hasVolunteer(volunteerName)) {
+                    event.unassignVolunteer(volunteerName);
+                }
+            }
+        }
+    }
+
+    /**
+     * Validates all events volunteers are involved in. If an event has no records in the json file,
+     * they are unassigned.
+     * This is to prevent volunteers from being assigned to non-existent events when the data is loaded from the json
+     * file, in the event that the json file is corrupted or tampered with.
+     */
+    public void validateAllEvents() {
+        for (Volunteer volunteer : volunteerManager.getVolunteers()) {
+            for (String eventName : volunteer.getEvents()) {
+                if (!eventManager.hasEvent(eventName)) {
+                    volunteer.removeEvent(eventName);
+                }
+            }
+        }
     }
 
     /**
@@ -72,8 +111,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                 boolean hasOverlappingEvents = false;
                 for (Event otherEvent : eventsInvolvedIn) {
                     if (event != otherEvent && event.isOverlappingWith(otherEvent)) {
-                        System.out.println("Unassigning " + v.getName().fullName + " from "
-                                + event.getName().toString());
                         unassignVolunteerFromEvent(v, event);
                         eventsInvolvedIn.remove(event);
                         hasOverlappingEvents = true;

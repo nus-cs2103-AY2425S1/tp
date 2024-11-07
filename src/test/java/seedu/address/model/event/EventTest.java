@@ -125,4 +125,31 @@ public class EventTest {
     public void hasEvent_eventDoesNotExist_returnsFalse() {
         assertFalse(eventManager.hasEvent(eventOne));
     }
+
+    @Test
+    public void isOverlappingWith_partialOverlap_returnsTrue() {
+        Event event1 = new EventBuilder().withEventName("Overlapping Event").withDate("2021-01-01")
+                .withStartTime("09:00").withEndTime("10:00").build();
+        Event event2 = new EventBuilder().withEventName("Overlapping Event").withDate("2021-01-01")
+                        .withStartTime("09:30").withEndTime("10:30").build();
+        assertTrue(event1.isOverlappingWith(event2));
+    }
+
+    @Test
+    public void isOverlappingWith_noOverlap_returnsFalse() {
+        Event event1 = new EventBuilder().withEventName("Non overlapping Event").withDate("2021-01-01")
+                .withStartTime("09:00").withEndTime("10:00").build();
+        Event event2 = new EventBuilder().withEventName("Non overlapping Event").withDate("2021-01-01")
+                        .withStartTime("10:01").withEndTime("11:00").build();
+        assertFalse(event1.isOverlappingWith(event2));
+    }
+
+    @Test
+    public void isOverlappingWith_fullOverlap_returnsTrue() {
+        Event event1 = new EventBuilder().withEventName("Overlapping Event").withDate("2021-01-01")
+                .withStartTime("09:00").withEndTime("10:00").build();
+        Event event2 = new EventBuilder().withEventName("Overlapping Event").withDate("2021-01-01")
+                        .withStartTime("09:00").withEndTime("10:00").build();
+        assertTrue(event1.isOverlappingWith(event2));
+    }
 }

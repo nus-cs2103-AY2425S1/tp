@@ -94,6 +94,8 @@ class JsonSerializableAddressBook {
                     + " They will not be imported.");
         }
 
+        addressBook.validateAllData();
+
         return addressBook;
     }
 

@@ -50,6 +50,18 @@ public class TypicalVolunteers {
             .withAvailableDate("2023-10-22")
             .build();
 
+    // To be manually added
+
+    public static final Volunteer GRACE = new VolunteerBuilder().withName("Grace Tan")
+            .withPhone("91234512").withEmail("grace@example.com")
+            .withAvailableDate("2023-09-14")
+            .build();
+
+    public static final Volunteer HENRY = new VolunteerBuilder().withName("Henry Tan")
+            .withPhone("91234512").withEmail("henry@example.com")
+            .withAvailableDate("2023-09-14")
+            .build();
+
     // Keyword for testing search
     public static final String KEYWORD_MATCHING_VOLUNTEER = "Charlie"; // A keyword that matches CHARLIE
 
