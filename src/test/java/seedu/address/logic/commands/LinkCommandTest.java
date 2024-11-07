@@ -265,12 +265,22 @@ public class LinkCommandTest {
         }
 
         @Override
-        public void updateFilteredOwnerList(Predicate<Owner> predicate) {
+        public void updateFilteredOwnerList(Predicate<? super Owner> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPetList(Predicate<Pet> predicate) {
+        public void updateFilteredPetList(Predicate<? super Pet> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Owner> getCurrentOwnerPredicate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Pet> getCurrentPetPredicate() {
             throw new AssertionError("This method should not be called.");
         }
     }

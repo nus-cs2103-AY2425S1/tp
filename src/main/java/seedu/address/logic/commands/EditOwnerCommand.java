@@ -68,7 +68,7 @@ public class EditOwnerCommand extends EditCommand<Owner> {
         }
 
         model.setOwner(ownerToEdit, editedOwner);
-        model.updateFilteredOwnerList(Model.PREDICATE_SHOW_ALL_OWNERS);
+        model.updateFilteredOwnerList(model.getCurrentOwnerPredicate());
         return new CommandResult(String.format(MESSAGE_EDIT_OWNER_SUCCESS, Messages.format(editedOwner)));
     }
 

@@ -60,6 +60,7 @@ public class AddPetCommand extends Command {
         }
 
         model.addPet(toAdd);
+        model.updateFilteredPetList(Model.PREDICATE_SHOW_ALL_PETS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

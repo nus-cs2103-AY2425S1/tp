@@ -55,6 +55,7 @@ public class AddOwnerCommand extends Command {
         }
 
         model.addOwner(toAdd);
+        model.updateFilteredOwnerList(Model.PREDICATE_SHOW_ALL_OWNERS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
