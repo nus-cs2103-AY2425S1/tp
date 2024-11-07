@@ -3,13 +3,16 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -30,8 +33,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     @Override
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-              ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ALLERGY);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ALLERGY, PREFIX_DATE);
 
+        //ensure no invalid prefixes are used
+        if (Parser.areAnyPrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_NAME)) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    FilterCommand.MESSAGE_USAGE));
+        }
 
         //you can only filter for one value per feature
         if (argMultimap.getAllValues(PREFIX_TAG).size() > 1
