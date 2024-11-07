@@ -240,7 +240,7 @@ numeric-only tag value for premium, then the contact with the largest alphanumer
 that has empty tag value for premium.
 * `sort t\premium desc` would show all contacts that have the tag of premium, beginning with the contact that has the largest
 alphanumeric tag value for premium, then the contact with the smallest numeric-only tag value for premium, and lastly contact
-that has empty tag value for premium.
+that has empty tag value for premium. <br>
   <img src="images/UG_Images/sortpremium.png" alt="result for 'sort t/premium asc'" width="600"/>
 
 <box type="tip" seamless>
