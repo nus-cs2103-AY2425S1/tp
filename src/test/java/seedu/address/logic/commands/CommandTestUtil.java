@@ -58,9 +58,28 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final String VALID_PUBLIC_ADDRESS_ETH =
-            "0x0B1C9E1Fb5E13c797c7f0134641810E9A7ca14d2"; //this is a real ETH public address
-    public static final String VALID_PUBLIC_ADDRESS_BTC =
-            "3DHSS7YojEruwgjcGCEEQL7qnBcijqimWE"; //this is a real BTC public address
+        "0x0B1C9E1Fb5E13c797c7f0134641810E9A7ca14d2"; //this is a real ETH public address
+    public static final String VALID_PUBLIC_ADDRESS_BTC_MAIN =
+        "bc1qak5yzzvn7va9qmkp7g5uykg2msc5kt0z0uhv2k"; //this is a real BTC public address
+    public static final String VALID_PUBLIC_ADDRESS_BTC_SUB =
+        "bc1qrcpwxgwmy7yp73eq9xmnr9t43ncl7ms8jly0tt"; //this is a real BTC public address
+    public static final String VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_NOT =
+        "bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9"; //this is a real BTC public address
+    public static final String VALID_PUBLIC_ADDRESS_SOL_MAIN =
+        "2rB4kogqBNwCxmDXwRCNRPijV94g5udCb7Bp435fvfBA"; //this is a real SOL public address
+    public static final String VALID_PUBLIC_ADDRESS_SOL_SUB =
+        "44wP1ZSKZX4PDADKU2i14EyU8TsXdjZahxGNMryvv3Ty"; //this is a real SOL public address
+
+
+    public static final String SIMPLE_PUBLIC_ADDRESS_1234 =
+        "1234"; // for use in testing
+    public static final String SIMPLE_PUBLIC_ADDRESS_12345 =
+        "12345"; // for use in testing
+
+    public static final String INVALID_PUBLIC_ADDRESS_INVALID_CHAR = "0x!@#$%^&*()";
+    public static final String INVALID_PUBLIC_ADDRESS_TOO_LONG =
+        "0x0B1C9E1Fb5Ec797c7f0134641810E9A7ca14d2wjrenlkewrngilsdfjdshfsdkfewrkhgnilwerkngiwrengiwrhngirwengiwrengiwer";
+    public static final String PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK = "TEJfF77NnSEBj5CnFYo4iHGcQGbjiEzNrv";
 
 
     public static final AbstractEditCommand.EditPersonDescriptor DESC_AMY;
@@ -68,11 +87,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

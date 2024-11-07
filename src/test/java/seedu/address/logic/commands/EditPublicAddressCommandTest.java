@@ -2,9 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.BTC_DAILY_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.BTC_MAIN_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
 
 import org.junit.jupiter.api.Test;
@@ -33,24 +34,45 @@ public class EditPublicAddressCommandTest {
         Index index = Index.fromOneBased(model.getFilteredPersonList().size());
 
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
-        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC, VALID_PUBLIC_ADDRESS_1,
-            BTC_DAILY_ADDRESS.label);
+        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC,
+            VALID_PUBLIC_ADDRESS_1,
+            BTC_MAIN_ADDRESS.label);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person editedPerson = personToEdit.withUpdatedPublicAddress(
-            PublicAddressFactory.createPublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_1, BTC_DAILY_ADDRESS.label));
+            PublicAddressFactory.createPublicAddress(Network.BTC, VALID_PUBLIC_ADDRESS_1,
+                BTC_MAIN_ADDRESS.label));
+
         expectedModel.setPerson(personToEdit, editedPerson);
 
-        String expectedMessage = String.format(EditPublicAddressCommand.MESSAGE_SUCCESS, Messages.format(editedPerson));
+        String expectedMessage = String.format(EditPublicAddressCommand.MESSAGE_SUCCESS,
+            Messages.format(editedPerson));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+
+        index = Index.fromOneBased(model.getFilteredPersonList().size());
+
+        personToEdit = model.getFilteredPersonList().get(index.getZeroBased());
+        editCommand = new EditPublicAddressCommand(index, Network.BTC, VALID_PUBLIC_ADDRESS_BTC_MAIN,
+            BTC_MAIN_ADDRESS.label);
+
+
+        editedPerson = personToEdit.withUpdatedPublicAddress(
+            PublicAddressFactory.createPublicAddress(Network.BTC,
+                VALID_PUBLIC_ADDRESS_BTC_MAIN, BTC_MAIN_ADDRESS.label));
+        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedMessage = String.format(EditPublicAddressCommand.MESSAGE_SUCCESS, Messages.format(editedPerson));
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EditPublicAddressCommand editCommand = new EditPublicAddressCommand(outOfBoundIndex,
-            Network.BTC, VALID_PUBLIC_ADDRESS_1, BTC_DAILY_ADDRESS.label);
+            Network.BTC, VALID_PUBLIC_ADDRESS_1, BTC_MAIN_ADDRESS.label);
+
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -59,9 +81,9 @@ public class EditPublicAddressCommandTest {
     public void execute_nonExistentLabel_throwsCommandException() {
         model.addPerson(JOE);
         Index index = Index.fromOneBased(model.getFilteredPersonList().size());
+        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index,
+            Network.BTC, VALID_PUBLIC_ADDRESS_1,
 
-        EditPublicAddressCommand editCommand = new EditPublicAddressCommand(index, Network.BTC,
-            VALID_PUBLIC_ADDRESS_1,
             "nonExistentLabel");
 
         Person personToEdit = model.getFilteredPersonList().get(index.getZeroBased());

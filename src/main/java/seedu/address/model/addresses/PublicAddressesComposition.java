@@ -122,7 +122,6 @@ public class PublicAddressesComposition {
     public boolean containsPublicAddressLabel(Network network, String label) {
         assert network != null;
         assert label != null;
-
         return publicAddresses
                 .getOrDefault(network, Collections.emptySet())
                 .stream()
@@ -139,6 +138,7 @@ public class PublicAddressesComposition {
         return publicAddresses.values().stream()
                 .flatMap(Set::stream)
                 .anyMatch(pa -> pa.isPublicAddressStringEquals(publicAddress.getPublicAddressString()));
+
     }
 
     /**

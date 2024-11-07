@@ -1,17 +1,35 @@
 package seedu.address.logic.commands;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.commons.util.StringUtil.INDENT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PUBLIC_ADDRESS_INVALID_CHAR;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PUBLIC_ADDRESS_TOO_LONG;
+import static seedu.address.logic.commands.CommandTestUtil.PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_SUB;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
+import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Map;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddressesComposition;
+import seedu.address.model.addresses.SolAddress;
+import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SearchPublicAddressCommand.
@@ -19,75 +37,194 @@ import seedu.address.model.UserPrefs;
 public class SearchPublicAddressCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    //    @Test
-    //    public void execute_searchPublicAddress_success() {
-    //        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-    //        PublicAddress SamplePublicAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC, "BTC");
-    //        SearchPublicAddressCommand searchPublicAddressCommand = new SearchPublicAddressCommand("123");
-    //        String expectedMessage =
-    //        String.format(SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS, secondPerson);
-    //
-    //
-    //        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
-    //    }
+    //---------------- Tests for execute method ----------------
 
-    //    @Test
-    //    public void execute_deleteRemarkUnfilteredList_success() {
-    //        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        Person editedPerson = new PersonBuilder(firstPerson).withRemark("").build();
-    //        RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON,
-    //                new Remark(editedPerson.getRemark().toString()));
-    //        String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedPerson);
-    //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-    //        expectedModel.setPerson(firstPerson, editedPerson);
-    //        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
-    //    }
-    //    @Test
-    //    public void execute_filteredList_success() {
-    //        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-    //        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //        Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
-    //                .get(INDEX_FIRST_PERSON.getZeroBased()))
-    //                .withRemark(REMARK_STUB).build();
-    //        RemarkCommand remarkCommand =
-    //        new RemarkCommand(INDEX_FIRST_PERSON, new Remark(editedPerson.getRemark().value));
-    //        String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
-    //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-    //        expectedModel.setPerson(firstPerson, editedPerson);
-    //        assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
-    //    }
-    //    @Test
-    //    public void execute_invalidPersonIndexUnfilteredList_failure() {
-    //        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-    //        RemarkCommand remarkCommand = new RemarkCommand(outOfBoundIndex, new Remark(VALID_REMARK_BOB));
-    //        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    //    }
-    //    /**
-    //     * Edit filtered list where index is larger than size of filtered list,
-    //     * but smaller than size of address book
-    //     */
-    //    @Test
-    //    public void execute_invalidPersonIndexFilteredList_failure() {
-    //        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-    //        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-    //        // ensures that outOfBoundIndex is still in bounds of address book list
-    //        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-    //        RemarkCommand remarkCommand = new RemarkCommand(outOfBoundIndex, new Remark(VALID_REMARK_BOB));
-    //        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    //    }
+    //EP: valid public address with single match
+    @Test
+    public void execute_searchPublicAddressUnique_success() {
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_SOL_SUB);
+
+        PublicAddressesComposition publicAddressesComposition =
+            new PublicAddressesComposition(Map.of(Network.SOL,
+                Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_SUB, "Sub wallet"))));
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
+                VALID_PUBLIC_ADDRESS_SOL_SUB + "\n"
+                    + secondPerson.getName() + "\n" + INDENT
+                    + publicAddressesComposition.toStringIndented());
+
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: valid public address with multiple matches
+    @Test
+    public void execute_searchPublicAddressMultiplePersons_success() {
+        //Initialise third person with SOL PublicAddress
+        Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+
+        //Initialise second person with SOL PublicAddress
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_SOL_MAIN);
+
+        PublicAddressesComposition publicAddressesCompositionSol =
+            new PublicAddressesComposition(Map.of(Network.SOL,
+                Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN, "Main wallet"))));
+
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
+                VALID_PUBLIC_ADDRESS_SOL_MAIN + "\n"
+                    + secondPerson.getName() + "\n" + INDENT
+                    + publicAddressesCompositionSol.toStringIndented() + "\n"
+                    + thirdPerson.getName() + "\n" + INDENT
+                    + publicAddressesCompositionSol.toStringIndented());
+
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: valid public address with no matches
+    @Test
+    public void execute_searchPublicAddressNoMatch_success() {
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand(PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND,
+                PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: invalid input with special characters
+    @Test
+    public void execute_searchPublicAddressInvalidChar_failure() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_INVALID_CHAR));
+    }
+
+
+    //EP: invalid input with length > 100 characters
+    @Test
+    public void execute_searchPublicAddressTooLong_failure() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(INVALID_PUBLIC_ADDRESS_TOO_LONG));
+    }
+    //---------------- Tests for other equivalence partitions ----------------
+
+    //EP: empty string input
+    @Test
+    public void execute_searchPublicAddressEmpty_failure() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(""));
+    }
+
+    //EP: null input
+    @Test
+    public void execute_searchPublicAddressNull_failure() {
+        assertThrows(NullPointerException.class, () ->
+            new SearchPublicAddressCommand(null));
+    }
+
+    //EP: string with only spaces
+    @Test
+    public void execute_searchPublicAddressOnlySpaces_failure() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand("   "));
+    }
+
+    //EP: string with leading/trailing spaces
+    @Test
+    public void execute_searchPublicAddressWithSpaces_failure() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(" abc123 "));
+    }
+
+    //EP: border case length (exactly 100 chars)
+    @Test
+    public void execute_searchPublicAddressBorderLength_success() {
+        String addressWith100Chars = "a".repeat(100);
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand(addressWith100Chars);
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND, addressWith100Chars);
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: very short length (1-2 chars)
+    @Test
+    public void execute_searchPublicAddressVeryShort_success() {
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand("a1");
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND, "a1");
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: typical crypto address length
+    @Test
+    public void execute_searchPublicAddressTypicalLength_success() {
+        // Typical ETH address length (42 chars)
+        String typicalEthAddress = "0x" + "a".repeat(40);
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand(typicalEthAddress);
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND, typicalEthAddress);
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: only numbers
+    @Test
+    public void execute_searchPublicAddressOnlyNumbers_success() {
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand("123456");
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND, "123456");
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: only letters
+    @Test
+    public void execute_searchPublicAddressOnlyLetters_success() {
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand("abcdef");
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND, "abcdef");
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+
+    //EP: mixed case with hex prefix
+    @Test
+    public void execute_searchPublicAddressHexPrefix_success() {
+        SearchPublicAddressCommand searchPublicAddressCommand =
+            new SearchPublicAddressCommand("0xAbC123DeF");
+        String expectedMessage =
+            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND, "0xAbC123DeF");
+        assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
+    }
+    //---------------- Tests for equals() method ----------------
+
     @Test
     public void equals() {
-        final SearchPublicAddressCommand standardCommand = new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
+        final SearchPublicAddressCommand standardCommand =
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
+
         // same values -> returns true
-        SearchPublicAddressCommand commandWithSameValues = new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
+        SearchPublicAddressCommand commandWithSameValues =
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
         assertEquals(standardCommand, commandWithSameValues);
+
         // same object -> returns true
         assertEquals(standardCommand, standardCommand);
+
         // null -> returns false
         assertNotEquals(null, standardCommand);
+
         // different types -> returns false
         assertNotEquals(standardCommand, new ClearCommand());
+
         // different publicAddress -> returns false
-        assertNotEquals(standardCommand, new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC));
+        assertNotEquals(standardCommand,
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN));
     }
 }

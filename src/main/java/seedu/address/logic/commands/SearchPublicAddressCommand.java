@@ -4,10 +4,10 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.INDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+import static seedu.address.model.addresses.PublicAddress.validatePublicAddress;
 
 import java.util.List;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Person;
@@ -28,10 +28,11 @@ public class SearchPublicAddressCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_PUBLIC_ADDRESS + "0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2";
 
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS = "Successfully found Persons with public "
-        + "address inputted:\n%1$s";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAIL = "Can't find any Person with public address of"
-        + " inputted:\n%1$s";
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND = "Successfully found Persons with public "
+        + "address inputted: %1$s";
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND =
+        "Can't find any Person with public address"
+            + " inputted: %1$s";
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUBSTRING_SUCCESS = "Successfully found Persons with "
         + "public "
         + "address containing the substring inputted:\n%1$s";
@@ -39,6 +40,10 @@ public class SearchPublicAddressCommand extends Command {
         "Can't find any Person with public address of"
             + " containing the "
             + "public substring inputted:\n%1$s";
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR =
+        "Public Address contains only alphanumeric characters";
+    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG =
+        "Public Address length should be around 40 characters";
 
 
     public static final String MESSAGE_ARGUMENTS = "Public Address: %1$s";
@@ -51,12 +56,17 @@ public class SearchPublicAddressCommand extends Command {
      */
     public SearchPublicAddressCommand(String publicAddressString) {
         requireAllNonNull(publicAddressString);
+
+        validatePublicAddress(publicAddressString);
+
+
         this.publicAddressString = publicAddressString;
+
 
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -65,30 +75,32 @@ public class SearchPublicAddressCommand extends Command {
             .toList();
 
 
-        if (personsWithPublicAddressMatch.isEmpty()) {
-            throw new CommandException("No person with the public address found.");
-        }
-
-        return new CommandResult(generateSuccessMessage(personsWithPublicAddressMatch));
+        return generateResult(personsWithPublicAddressMatch);
     }
 
 
     /**
-     * Generates a command execution success message based on whether
-     * the remark is added to or removed from
+     * Generates a Result object success message based on whether
+     * success of searching for a public address.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(List<Person> personsWithPublicAddressMatch) {
-        String message = !personsWithPublicAddressMatch.isEmpty() ? MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS
-            : MESSAGE_SEARCH_PUBLIC_ADDRESS_FAIL;
-        // parses peron object and returns index+name+full public address of the person+label
+    private CommandResult generateResult(List<Person> personsWithPublicAddressMatch) {
+        String output;
+        if (!personsWithPublicAddressMatch.isEmpty()) {
+            String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
+            String personsDetails = personsWithPublicAddressMatch.stream()
+                .map(person -> person.getName() + "\n" + INDENT + generateStringForPublicAddressesForPersonMap(person,
+                    publicAddressString))
+                .reduce((a, b) -> a + "\n" + b)
+                .orElse("");
+            output = String.format(message, publicAddressString + "\n" + personsDetails);
+        } else {
+            String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
+            output = String.format(message, publicAddressString);
+        }
+        return new CommandResult(output);
 
-        String personsDetails = personsWithPublicAddressMatch.stream()
-            .map(person -> person.getName() + "\n" + INDENT + generateStringForPublicAddressesForPersonMap(person,
-                publicAddressString))
-            .reduce((a, b) -> a + "\n" + b)
-            .orElse("");
-        return String.format(message, personsDetails);
+
     }
 
     private String generateStringForPublicAddressesForPersonMap(Person person, String publicAddressString) {

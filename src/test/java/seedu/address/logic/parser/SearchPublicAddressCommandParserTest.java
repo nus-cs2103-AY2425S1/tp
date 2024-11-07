@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -18,7 +18,7 @@ public class SearchPublicAddressCommandParserTest {
     public void parse_publicAddressSpecified_success() {
         // have public address
         String userInput = SearchPublicAddressCommand.COMMAND_WORD + " "
-                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_ETH;
+            + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_ETH;
         SearchPublicAddressCommand expectedCommand = new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -28,7 +28,7 @@ public class SearchPublicAddressCommandParserTest {
     @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SearchPublicAddressCommand.MESSAGE_USAGE);
+            SearchPublicAddressCommand.MESSAGE_USAGE);
         // no parameters
         assertParseFailure(parser, SearchPublicAddressCommand.COMMAND_WORD, expectedMessage);
         // no parameters + space (white space is stripped in command's parser, this a extra precaution)
@@ -38,10 +38,10 @@ public class SearchPublicAddressCommandParserTest {
     @Test
     public void parse_excessFields_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                SearchPublicAddressCommand.MESSAGE_USAGE);
+            SearchPublicAddressCommand.MESSAGE_USAGE);
         String userInput = SearchPublicAddressCommand.COMMAND_WORD + " "
-                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_ETH + " "
-                + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC;
+            + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_ETH + " "
+            + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS_BTC_MAIN;
         // no duplicate parameters
         assertParseFailure(parser, userInput, expectedMessage);
 
