@@ -9,7 +9,17 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project, EduVault, builds upon the Address Book Level 3 (AB3) project, originally developed by the [SE-EDU initiative](https://se-education.org/). Our team would like to extend our gratitude to the developers of AB3 for their work, which has significantly contributed to the structure and functionality of this project.
+
+In addition, we acknowledge and thank the creators of the following resources, libraries, and tools that were instrumental in the development of EduVault:
+
+* [AB3 Codebase](https://github.com/se-edu/addressbook-level3)
+* [JavaFX](https://openjfx.io/)
+* [JUnit](https://junit.org/junit5/)
+* [Jackson Library](https://github.com/FasterXML/jackson)
+* Other code segments and ideas that we have adopted from Stack Overflow, YouTube, and other online sources
+
+We deeply appreciate the contributions of these resources and their developers, which made our work possible and helped us bring EduVault to life.
 
 --------------------------------------------------------------------------------------------------------------------
 
