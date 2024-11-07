@@ -22,7 +22,7 @@ public class DeletewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the wedding identified by the index number used in the displayed wedding list or keyword.\n"
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of wedding)\n"
-            + "Example: " + COMMAND_WORD + " 1" + "or " + COMMAND_WORD + " alex";
+            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " alex";
 
     public static final String MESSAGE_DELETE_EMPTY_LIST_ERROR = "There is nothing to delete.";
     public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding: %1$s";
