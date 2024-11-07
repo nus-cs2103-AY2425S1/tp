@@ -97,7 +97,10 @@ public class LogicManager implements Logic {
     private void updateModelWithStorage(Command command, Storage storage, Model model) throws CommandException {
         try {
             if (command instanceof LoadCommand) {
-                model.setAddressBook(storage.readAddressBook(((LoadCommand) command).getLoadPath()).get());
+                ReadOnlyAddressBook readOnlyAddressBook = storage.readAddressBook(((LoadCommand) command)
+                        .getLoadPath()).get();
+                model.setAddressBook(readOnlyAddressBook);
+                model.updateAddressBook(readOnlyAddressBook);
             }
         } catch (DataLoadingException e) {
             throw new CommandException(String.format(LOAD_ERROR_FORMAT, e.getMessage()), e);

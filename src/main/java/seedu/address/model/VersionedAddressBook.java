@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class VersionedAddressBook extends AddressBook {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private List<ReadOnlyAddressBook> addressBookStateList;
     private int currentStatePointer;
 
     /**
@@ -78,8 +78,22 @@ public class VersionedAddressBook extends AddressBook {
     /**
      * Clears all states from the Versioned Address Book.
      */
-    public VersionedAddressBook clear() {
-        return new VersionedAddressBook(new AddressBook());
+    public void clear() {
+        this.addressBookStateList = new ArrayList<>();
+        this.currentStatePointer = 0;
+        AddressBook newState = new AddressBook();
+        addressBookStateList.add(newState);
+    }
+
+    /**
+     * Updates the addressBookStateList with a new state - used exclusively by LoadCommand
+     * @param readOnlyAddressBook new state to be saved
+     */
+    public void update(ReadOnlyAddressBook readOnlyAddressBook) {
+        this.addressBookStateList = new ArrayList<>();
+        this.currentStatePointer = 0;
+        AddressBook newState = new AddressBook(readOnlyAddressBook);
+        addressBookStateList.add(newState);
     }
 
     /**
