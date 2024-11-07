@@ -8,7 +8,7 @@ pageNav: 3
 
 # HallPointer User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+HallPointer is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, it can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -21,7 +21,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://ay2425s1-cs2103t-w14-3.github.io/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your .
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar hallpointer.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -32,7 +32,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list_members` : Lists all contacts.
 
-   * `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics` : Adds a contact named `John Doe` to the Address Book.
+   * `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics` : Adds a contact named `John Doe` to Hall Pointer.
 
    * `delete_member 3` : Deletes the 3rd contact shown in the current list.
 
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a member: `add_member`
 
-Adds a member to the address book.
+Adds a member to Hall Pointer.
 
 Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
@@ -92,15 +92,15 @@ Examples:
 * `add_member n/John Doe r/4-3-301 t/johndoe123`
 * `add_member n/Betsy Crowe r/2-5-120 t/betsy_crowe tag/logistics`
 
-### Listing all members : ` list_members`
+### Listing all members : ` list`
 
-Shows a list of all members in the address book.
+Shows a list of all members in Hall Pointer.
 
-Format: `list_members `
+Format: `list`
 
 ### Updating a member : `update_member`
 
-Updates an existing member in the address book.
+Updates an existing member in Hall Pointer.
 
 Format: `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​​`
 
@@ -135,7 +135,7 @@ Examples:
 
 ### Deleting a member : `delete_member`
 
-Deletes the specified member from the address book.
+Deletes the specified member from Hall Pointer.
 
 Format: `delete_member INDEX`
 
@@ -144,12 +144,12 @@ Format: `delete_member INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list_members` followed by `delete_member 2` deletes the 2nd member in the address book.
+* `list_members` followed by `delete_member 2` deletes the 2nd member in Hall Pointer.
 * `find_members Betsy` followed by `delete_member 1` deletes the 1st member in the results of the `find` command.
 
 ### Adding a Session: `add_session`
 
-Adds a session to the address book and associates it with specified members.
+Adds a session to Hall Pointer and associates it with specified members.
 
 Format: `add_session s/NAME d/DATE p/POINTS m/INDEX...`
 
@@ -162,7 +162,7 @@ Examples:
 
 ### Deleting a Session: `delete_session`
 
-Deletes a session associated with one or more specified members in the address book.
+Deletes a session associated with one or more members in Hall Pointer.
 
 Format: `delete_session s/NAME m/INDEX...`
 
@@ -175,7 +175,7 @@ Format: `delete_session s/NAME m/INDEX...`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Hall Pointer.
 
 Format: `clear`
 
@@ -187,17 +187,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to edit data directly by editing that data file.
+HallPointer data are saved automatically as a JSON file `[JAR file location]/data/hallpointer.json`. Advanced users are welcome to edit data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, HallPointer will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the Hall Pointer system to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
@@ -210,7 +210,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HallPointer home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

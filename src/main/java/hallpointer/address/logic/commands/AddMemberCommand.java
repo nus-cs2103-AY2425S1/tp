@@ -12,7 +12,7 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
 
 /**
- * Adds a member to the CCA system.
+ * Adds a member to HallPointer.
  */
 public class AddMemberCommand extends Command {
 
