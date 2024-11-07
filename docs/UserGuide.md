@@ -515,6 +515,10 @@ Have a whole list of contacts to add? We will introduce a bulk importing feature
 Want to ensure you do not schedule multiple schedules on the same date and time?
 We will add more flexibility to our `schedule` feature next!
 
+### Country Code in Phone Numbers
+Have contacts from different parts of the world?
+We aim to bring even more flexibility for the phone numbers of contacts by allowing you to key in country codes in the app's next iteration!
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
