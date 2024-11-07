@@ -14,7 +14,8 @@ public class PublicAddressFactory {
      * @return a PublicAddress instance specific to the provided network
      * @throws IllegalArgumentException if the network type is unsupported
      */
-    public static PublicAddress createPublicAddress(Network network, String address, String label) {
+    public static PublicAddress createPublicAddress(Network network, String address, String label)
+            throws IllegalArgumentException {
         assert network != null;
 
         switch (network) {

@@ -133,7 +133,7 @@ public class AddressBookParserTest {
             EditPublicAddressCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PREFIX_PUBLIC_ADDRESS_NETWORK + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "label "
                 + PREFIX_PUBLIC_ADDRESS + VALID_PUBLIC_ADDRESS);
-        assertEquals(new EditPublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, VALID_PUBLIC_ADDRESS, "label"),
+        assertEquals(new EditPublicAddressCommand(INDEX_FIRST_PERSON, new BtcAddress(VALID_PUBLIC_ADDRESS, "label")),
             command);
     }
 
