@@ -17,6 +17,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INDEX_EXCEEDS_SIZE = "Index is too large! (Should not exceed %d)";
     public static final String MESSAGE_COMPANIES_LISTED_OVERVIEW = "%1$d companies listed!";
+    public static final String MESSAGE_COMPANY_LIST_EMPTY = "Company list is empty!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 

@@ -33,7 +33,8 @@ public class UpdateCommand extends Command {
             + "Example: " + COMMAND_WORD + " c/1 app/1 "
             + PREFIX_APP_STATUS + "OA";
 
-    public static final String MESSAGE_UPDATE_APPLICATION_SUCCESS = "Updated application: %1$s";
+    public static final String MESSAGE_UPDATE_APPLICATION_SUCCESS = "Updated application for %2$s: %1$s";
+    public static final String MESSAGE_NO_APPLICATION = "%s has no applications to update!";
 
     private final Index companyIndex;
     private final Index applicationIndex;
@@ -59,6 +60,9 @@ public class UpdateCommand extends Command {
         requireNonNull(model);
         List<Company> lastShownList = model.getFilteredCompanyList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_COMPANY_LIST_EMPTY);
+        }
         if (companyIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException("Company "
                     + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
@@ -67,6 +71,9 @@ public class UpdateCommand extends Command {
         Company companyToEdit = lastShownList.get(companyIndex.getZeroBased());
         List<Application> applicationList = new ArrayList<>(companyToEdit.getApplications());
 
+        if (applicationList.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_NO_APPLICATION, companyToEdit.getName()));
+        }
         if (applicationIndex.getZeroBased() >= applicationList.size()) {
             throw new CommandException("Application "
                     + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, applicationList.size()));
@@ -81,7 +88,8 @@ public class UpdateCommand extends Command {
                 companyToEdit.getStatus(), applicationList, companyToEdit.getIsFavourite(), false);
         model.setCompany(companyToEdit, editedCompany);
 
-        return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS, editedApplication));
+        return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS,
+                Messages.format(editedApplication), companyToEdit.getName()));
     }
 
     @Override

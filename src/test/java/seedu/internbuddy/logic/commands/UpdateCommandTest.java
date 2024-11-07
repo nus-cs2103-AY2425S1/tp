@@ -15,6 +15,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.index.Index;
+import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
@@ -51,9 +52,10 @@ public class UpdateCommandTest {
         Application updatedApplication = applicationToUpdate.setAppStatus(newAppStatus);
 
         CommandResult result = updateCommand.execute(model);
+        String expectedMessage = String.format(UpdateCommand.MESSAGE_UPDATE_APPLICATION_SUCCESS,
+                Messages.format(updatedApplication), companyToUpdate.getName());
 
-        assertEquals(String.format(UpdateCommand.MESSAGE_UPDATE_APPLICATION_SUCCESS, updatedApplication),
-                result.getFeedbackToUser());
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 
     @Test

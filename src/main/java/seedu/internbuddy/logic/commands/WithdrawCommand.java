@@ -30,6 +30,7 @@ public class WithdrawCommand extends Command {
             + "Example: " + COMMAND_WORD + " c/1 app/1";
 
     public static final String MESSAGE_WITHDRAW_APPLICATION_SUCCESS = "Withdrawn application for %2$s: %1$s";
+    public static final String MESSAGE_NO_APPLICATION = "%s has no applications to update!";
 
     private final Index companyIndex;
     private final Index applicationIndex;
@@ -50,6 +51,9 @@ public class WithdrawCommand extends Command {
         requireNonNull(model);
         List<Company> lastShownList = model.getFilteredCompanyList();
 
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_COMPANY_LIST_EMPTY);
+        }
         if (companyIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException("Company "
                     + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
@@ -58,6 +62,9 @@ public class WithdrawCommand extends Command {
         Company companyToEdit = lastShownList.get(companyIndex.getZeroBased());
         List<Application> applicationList = new ArrayList<>(companyToEdit.getApplications());
 
+        if (applicationList.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_NO_APPLICATION, companyToEdit.getName()));
+        }
         if (applicationIndex.getZeroBased() >= applicationList.size()) {
             throw new CommandException("Application "
                     + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, applicationList.size()));
