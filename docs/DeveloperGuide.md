@@ -143,7 +143,7 @@ How the undo works:
 
 * When the `undo` command is called, the `LogicManager` pops the latest command 
 
-<puml src="diagrams/UndoRedoState3.puml" width = "600"/>
+<puml src="diagrams/UndoRedoState2.puml" width = "600"/>
 
 
 ### Model component
