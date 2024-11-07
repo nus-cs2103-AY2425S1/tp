@@ -40,14 +40,15 @@ public class FavCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
         }
 
         Company companyToFav = lastShownList.get(index.getZeroBased());
         Company editedCompany = new Company(companyToFav.getName(), companyToFav.getPhone(), companyToFav.getEmail(),
                 companyToFav.getAddress(), companyToFav.getTags(),
                 companyToFav.getStatus(), companyToFav.getApplications(),
-                true);
+                true, false);
 
         model.setCompany(companyToFav, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);

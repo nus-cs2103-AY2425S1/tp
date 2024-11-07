@@ -4,6 +4,7 @@ import static seedu.internbuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.internbuddy.commons.util.ToStringBuilder;
 import seedu.internbuddy.model.name.Name;
 
 /**
@@ -49,13 +50,11 @@ public class Application {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Description: ")
-                .append(getDescription())
-                .append("; App Status: ")
-                .append(getAppStatus());
-        return builder.toString();
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("description", description)
+                .add("appStatus", appStatus)
+                .toString();
     }
 
     /**

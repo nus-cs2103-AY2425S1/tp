@@ -3,6 +3,7 @@ package seedu.internbuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.internbuddy.logic.Messages.MESSAGE_INDEX_EXCEEDS_SIZE;
 import static seedu.internbuddy.logic.commands.WithdrawCommand.getNewStatus;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
@@ -53,7 +54,7 @@ public class WithdrawCommandTest {
         CommandResult result = withdrawCommand.execute(model);
 
         assertEquals(String.format(WithdrawCommand.MESSAGE_WITHDRAW_APPLICATION_SUCCESS,
-            applicationToWithdraw), result.getFeedbackToUser());
+            Messages.format(applicationToWithdraw), company.getName()), result.getFeedbackToUser());
     }
 
     @Test
@@ -64,7 +65,9 @@ public class WithdrawCommandTest {
         try {
             withdrawCommand.execute(model);
         } catch (CommandException e) {
-            assertEquals(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX, e.getMessage());
+            String expectedMessage = "Company " + String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                    model.getFilteredCompanyList().size());
+            assertEquals(expectedMessage, e.getMessage());
         }
     }
 
@@ -76,7 +79,10 @@ public class WithdrawCommandTest {
         try {
             withdrawCommand.execute(model);
         } catch (CommandException e) {
-            assertEquals(Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX, e.getMessage());
+            Company firstCompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+            String expectedMessage = "Application " + String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                    firstCompany.getApplications().size());
+            assertEquals(expectedMessage, e.getMessage());
         }
     }
 

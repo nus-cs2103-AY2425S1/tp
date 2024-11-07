@@ -60,14 +60,16 @@ public class UpdateCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (companyIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException("Company "
+                    + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
         }
 
         Company companyToEdit = lastShownList.get(companyIndex.getZeroBased());
         List<Application> applicationList = new ArrayList<>(companyToEdit.getApplications());
 
         if (applicationIndex.getZeroBased() >= applicationList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
+            throw new CommandException("Application "
+                    + String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, applicationList.size()));
         }
 
         applicationToEdit = applicationList.get(applicationIndex.getZeroBased());
@@ -76,7 +78,7 @@ public class UpdateCommand extends Command {
 
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getTags(),
-                companyToEdit.getStatus(), applicationList, companyToEdit.getIsFavourite());
+                companyToEdit.getStatus(), applicationList, companyToEdit.getIsFavourite(), false);
         model.setCompany(companyToEdit, editedCompany);
 
         return new CommandResult(String.format(MESSAGE_UPDATE_APPLICATION_SUCCESS, editedApplication));

@@ -111,7 +111,7 @@ public class CompanyCard extends UiPart<Region> {
                         i + 1,
                         applications.get(i).getName(),
                         applications.get(i).getAppStatus()))
-                .collect(Collectors.joining(", ")));
+                .collect(Collectors.joining()));
     }
 
     private void setTags() {

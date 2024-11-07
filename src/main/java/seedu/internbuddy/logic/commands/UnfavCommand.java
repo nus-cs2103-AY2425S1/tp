@@ -40,7 +40,8 @@ public class UnfavCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
         }
 
         Company companyToUnfav = lastShownList.get(index.getZeroBased());
@@ -48,7 +49,7 @@ public class UnfavCommand extends Command {
                 companyToUnfav.getPhone(), companyToUnfav.getEmail(),
                 companyToUnfav.getAddress(), companyToUnfav.getTags(),
                 companyToUnfav.getStatus(), companyToUnfav.getApplications(),
-                false);
+                false, false);
 
         model.setCompany(companyToUnfav, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);

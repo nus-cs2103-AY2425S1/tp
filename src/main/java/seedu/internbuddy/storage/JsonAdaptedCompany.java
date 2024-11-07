@@ -37,6 +37,7 @@ public class JsonAdaptedCompany {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedApplication> applications = new ArrayList<>();
     private final Boolean isFavourite;
+    private final Boolean isShowingDetails;
 
     /**
      * Constructs a {@link JsonAdaptedCompany} with the given company details.
@@ -47,13 +48,15 @@ public class JsonAdaptedCompany {
                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
                  @JsonProperty("status") String status,
                  @JsonProperty("applications") List<JsonAdaptedApplication> applications,
-                 @JsonProperty("isFavourite") Boolean isFavourite) {
+                 @JsonProperty("isFavourite") Boolean isFavourite,
+                 @JsonProperty("isShowingDetails") Boolean isShowingDetails) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
         this.isFavourite = isFavourite;
+        this.isShowingDetails = isShowingDetails;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -78,6 +81,7 @@ public class JsonAdaptedCompany {
                 .map(JsonAdaptedApplication::new)
                 .toList());
         isFavourite = source.getIsFavourite();
+        isShowingDetails = source.getIsShowingDetails();
     }
 
     /**
@@ -156,8 +160,10 @@ public class JsonAdaptedCompany {
         }
         final Boolean modelIsFavourite = isFavourite;
 
+        // final Boolean modelIsShowingDetails = isShowingDetails;
+
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelStatus, modelApplications, modelIsFavourite);
+            modelStatus, modelApplications, modelIsFavourite, false);
     }
 
 }

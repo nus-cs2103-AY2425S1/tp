@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.internbuddy.logic.Messages.MESSAGE_INDEX_EXCEEDS_SIZE;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
@@ -14,7 +15,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.index.Index;
-import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
@@ -38,7 +38,8 @@ public class UpdateCommandTest {
 
         Company updatedCompany = new Company(companyToUpdate.getName(), companyToUpdate.getPhone(),
                 companyToUpdate.getEmail(), companyToUpdate.getAddress(), companyToUpdate.getTags(),
-                companyToUpdate.getStatus(), updatedApplications, companyToUpdate.getIsFavourite());
+                companyToUpdate.getStatus(), updatedApplications, companyToUpdate.getIsFavourite(),
+                companyToUpdate.getIsShowingDetails());
 
         model.setCompany(companyToUpdate, updatedCompany);
 
@@ -60,8 +61,9 @@ public class UpdateCommandTest {
         AppStatus newAppStatus = new AppStatus("INTERVIEWED");
         UpdateCommand updateCommand = new UpdateCommand(Index.fromOneBased(999),
                 Index.fromOneBased(1), newAppStatus);
-        assertThrows(CommandException.class, () -> updateCommand.execute(model),
-                Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        String expectedMessage = "Company " + String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size());
+        assertThrows(CommandException.class, () -> updateCommand.execute(model), expectedMessage);
     }
 
     @Test
@@ -69,8 +71,10 @@ public class UpdateCommandTest {
         AppStatus newAppStatus = new AppStatus("INTERVIEWED");
         UpdateCommand updateCommand = new UpdateCommand(INDEX_FIRST_COMPANY,
                 Index.fromOneBased(999), newAppStatus);
-        assertThrows(CommandException.class, () -> updateCommand.execute(model),
-                Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX);
+        Company firstCompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        String expectedMessage = "Application " + String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
+                firstCompany.getApplications().size());
+        assertThrows(CommandException.class, () -> updateCommand.execute(model), expectedMessage);
     }
 
     @Test

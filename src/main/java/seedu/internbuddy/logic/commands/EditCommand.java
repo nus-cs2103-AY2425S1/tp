@@ -76,7 +76,8 @@ public class EditCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
         }
 
         Company companyToEdit = lastShownList.get(index.getZeroBased());
@@ -108,9 +109,10 @@ public class EditCommand extends Command {
         Status updatedStatus = companyToEdit.getStatus();
         List<Application> updatedApplications = companyToEdit.getApplications();
         Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
+        Boolean updatedIsLong = false;
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, updatedApplications, updatedIsFavourite);
+                updatedStatus, updatedApplications, updatedIsFavourite, updatedIsLong);
     }
 
     /**
@@ -159,9 +161,10 @@ public class EditCommand extends Command {
         Status updatedStatus = new Status(StatusType.APPLIED);
         List<Application> applications = companyToEdit.getApplications();
         Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
+        Boolean updatedIsLong = false;
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, applications, updatedIsFavourite);
+                updatedStatus, applications, updatedIsFavourite, updatedIsLong);
     }
 
     public static Company setStatusClosed(Company companyToEdit) {
@@ -173,9 +176,10 @@ public class EditCommand extends Command {
         Status updatedStatus = new Status(StatusType.CLOSED);
         List<Application> updatedApplications = companyToEdit.getApplications();
         Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
+        Boolean updatedIsLong = false;
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, updatedApplications, updatedIsFavourite);
+                updatedStatus, updatedApplications, updatedIsFavourite, updatedIsLong);
     }
 
     @Override
@@ -215,6 +219,7 @@ public class EditCommand extends Command {
         private Status status;
         private List<Application> applications;
         private Boolean isFavourite;
+        private Boolean isShowingDetails;
 
         public EditCompanyDescriptor() {}
 
@@ -231,6 +236,7 @@ public class EditCommand extends Command {
             setStatus(toCopy.status);
             setApplications(toCopy.applications);
             setIsFavourite(toCopy.isFavourite);
+            setIsShowingDetails();
         }
 
         /**
@@ -278,6 +284,10 @@ public class EditCommand extends Command {
 
         public Optional<Boolean> getIsFavourite() {
             return Optional.ofNullable(isFavourite);
+        }
+
+        public void setIsShowingDetails() {
+            this.isShowingDetails = false;
         }
 
         /**

@@ -54,7 +54,8 @@ public class ApplyCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE, lastShownList.size()));
         }
 
         Company companyToEdit = lastShownList.get(index.getZeroBased());
@@ -63,7 +64,7 @@ public class ApplyCommand extends Command {
 
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getTags(), new Status(StatusType.APPLIED),
-                editedApplications, companyToEdit.getIsFavourite());
+                editedApplications, companyToEdit.getIsFavourite(), false);
 
         model.setCompany(companyToEdit, editedCompany);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedCompany.getName(), Messages.format(toAdd)));
