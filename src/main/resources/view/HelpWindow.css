@@ -57,8 +57,9 @@
 }
 
 .table-view .table-row-cell {
+    -fx-font-weight: bold;
     -fx-border-color: black;
-    -fx-border-width: 0 1 1 0; /* Only bottom border */
+    -fx-border-width: 0 0 1 0; /* Only bottom border */
     -fx-pref-height: 30;
 }
 
