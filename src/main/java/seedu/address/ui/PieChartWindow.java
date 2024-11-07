@@ -7,6 +7,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -28,6 +30,11 @@ public class PieChartWindow extends UiPart<Stage> {
      */
     public PieChartWindow(Stage root) {
         super(FXML, root);
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                root.close();
+            }
+        });
     }
 
     /**

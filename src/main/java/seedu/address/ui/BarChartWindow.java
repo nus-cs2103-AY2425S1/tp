@@ -6,6 +6,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -27,6 +29,11 @@ public class BarChartWindow extends UiPart<Stage> {
      */
     public BarChartWindow(Stage root) {
         super(FXML, root);
+        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                root.close();
+            }
+        });
     }
 
     /**
