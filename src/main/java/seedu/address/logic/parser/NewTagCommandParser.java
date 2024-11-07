@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new {@code NewtagCommand} object.
+ * Parses input arguments and creates a new {@code NewTagCommand} object.
  */
 public class NewTagCommandParser implements Parser<NewTagCommand> {
 
@@ -26,6 +26,9 @@ public class NewTagCommandParser implements Parser<NewTagCommand> {
      *                       as determined by the {@code isValidTagName} method.
      */
     private List<Tag> parseTagsFromArgs(List<String> arguments) throws ParseException {
+        requireAllNonNull(arguments);
+        assert !arguments.isEmpty();
+
         List<Tag> argumentsAsTags = new ArrayList<>();
         for (String argument : arguments) {
             validateTagName(argument); // Validate each tag name before creating Tag object
@@ -73,11 +76,11 @@ public class NewTagCommandParser implements Parser<NewTagCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the {@code NewtagCommand}
-     * and returns a {@code NewtagCommand} object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code NewTagCommand}
+     * and returns a {@code NewTagCommand} object for execution.
      *
      * @param args The input string containing the arguments to parse.
-     * @return A {@code NewtagCommand} object containing the tags to be added.
+     * @return A {@code NewTagCommand} object containing the tags to be added.
      * @throws ParseException If the user input does not conform to the expected format,
      *                       including invalid tag names or lack of arguments.
      */
@@ -88,6 +91,7 @@ public class NewTagCommandParser implements Parser<NewTagCommand> {
         validateArgumentLength(arguments);
 
         List<Tag> tagsToAdd = parseTagsFromArgs(arguments);
+        assert !tagsToAdd.isEmpty();
         return new NewTagCommand(tagsToAdd);
     }
 }

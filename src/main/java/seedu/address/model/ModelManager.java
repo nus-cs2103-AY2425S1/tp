@@ -187,9 +187,10 @@ public class ModelManager implements Model {
         Set<Tag> tagsSuccessfullyDeleted = new HashSet<>();
         for (Tag tag : tags) {
             boolean isSuccessful = deleteTag(tag);
-            if (isSuccessful) {
-                tagsSuccessfullyDeleted.add(tag);
+            if (!isSuccessful) {
+                continue;
             }
+            tagsSuccessfullyDeleted.add(tag);
         }
         return tagsSuccessfullyDeleted;
     }
@@ -224,7 +225,7 @@ public class ModelManager implements Model {
     @Override
     public Set<Person> removeTagFromPersons(Tag tag) {
         List<Person> persons = getFullPersonList();
-        Set<Person> removedPersons = new HashSet<>();
+        Set<Person> updatedPersons = new HashSet<>();
         for (Person person : persons) {
             if (!person.hasTag(tag)) {
                 continue;
@@ -235,9 +236,9 @@ public class ModelManager implements Model {
             Person updatedPerson = new Person(person.getName(), person.getPhone(),
                     person.getEmail(), person.getRsvpStatus(), newTags);
             setPerson(person, updatedPerson);
-            removedPersons.add(updatedPerson);
+            updatedPersons.add(updatedPerson);
         }
-        return removedPersons;
+        return updatedPersons;
     }
 
     @Override
@@ -269,8 +270,8 @@ public class ModelManager implements Model {
 
     @Override
     public void updateTagList() {
-        ObservableList<Tag> tl = this.addressBook.getTagList();
-        tagList.setAll(FXCollections.observableArrayList(tl));
+        ObservableList<Tag> tagList = this.addressBook.getTagList();
+        tagList.setAll(FXCollections.observableArrayList(tagList));
     }
 
     @Override

@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagList;
 
 /**
- * Adds a new predefined tag.
+ * Adds a new tag to the tag list.
  */
 public class NewTagCommand extends UndoableCommand {
     public static final String COMMAND_WORD = "newtag";
@@ -40,6 +40,7 @@ public class NewTagCommand extends UndoableCommand {
 
     /**
      * Constructs a NewTagCommand to add the specified {@code tags}.
+     *
      * @param tags The {@code List} of tags to be added.
      */
     public NewTagCommand(List<Tag> tags) {
@@ -63,7 +64,9 @@ public class NewTagCommand extends UndoableCommand {
 
     /**
      * Adds the tags to the model and checks for duplicates.
+     *
      * @param model The model to which tags will be added.
+     * @return The set of tags which were successfully added.
      */
     private Set<Tag> addTagsToModel(Model model) {
         requireAllNonNull(model);
@@ -73,7 +76,7 @@ public class NewTagCommand extends UndoableCommand {
     }
 
     /**
-     * Creates a CommandResult based on the success of adding tags to the model.
+     * Creates a CommandResult based on the tags which were successfully added to the model.
      *
      * @param tagsSuccessfullyAdded The tags that were successfully added.
      * @return The corresponding CommandResult.
