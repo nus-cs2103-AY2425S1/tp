@@ -112,17 +112,17 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 | Command       | Shortcut |
 |---------------|----------|
 | `mark`        | `m`      |
-| `unmark`        | `um`     |
-| `import`        | `im`     |
-| `export`        | `ex`     |
+| `unmark`      | `um`     |
+| `import`      | `im`     |
+| `export`      | `ex`     |
 | `find`        | `fd`     |
-| `filter`        | `f`      |
+| `filter`      | `f`      |
 | `view`        | `v`      |
-| `addGrade`        | `ag`     |
-| `removeGrade`        | `rg`     |
-| `delete`        | `rm`     |
+| `addGrade`    | `ag`     |
+| `removeGrade` | `rg`     |
+| `delete`      | `rm`     |
 | `edit`        | `e`      |
-| `GitHub`        | `git`    |
+| `gitHub`      | `git`    |
 
 --------------------------------------------------------------------------------------------------------------------
 
