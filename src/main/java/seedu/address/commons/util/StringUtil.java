@@ -10,8 +10,8 @@ import java.io.StringWriter;
  * Helper functions for handling strings.
  */
 public class StringUtil {
-    public static int TRUNCATED_LINE_NUMBER = 3;
-    public static int TRUNCATED_STRING_LENGTH = 80;
+    private static final int TRUNCATED_LINE_NUMBER = 3;
+    private static final int TRUNCATED_STRING_LENGTH = 80;
 
     /**
      * Returns true if the {@code sentence} contains the {@code substring}.
@@ -108,7 +108,7 @@ public class StringUtil {
         // If text does not need to be truncated
         if (s.length() < TRUNCATED_STRING_LENGTH && !s.contains("\n")) {
             return s;
-        } else if (s.contains("\n")){
+        } else if (s.contains("\n")) {
             StringBuilder ans = new StringBuilder();
             int lineCount = 1;
 
@@ -126,7 +126,7 @@ public class StringUtil {
             }
             return ans.toString();
         } else {
-            return s.substring(0,TRUNCATED_STRING_LENGTH) + "...";
+            return s.substring(0, TRUNCATED_STRING_LENGTH) + "...";
         }
     }
 }
