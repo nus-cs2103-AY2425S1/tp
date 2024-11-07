@@ -102,44 +102,6 @@ public class LessonTimeTest {
     }
 
     @Test
-    public void contains() {
-        // contained fully
-        assertTrue(LessonTime.contains(
-            new LessonTime("1500"),
-            new LessonTime("2000"),
-            new LessonTime("1730")
-        ));
-
-        // left border
-        assertTrue(LessonTime.contains(
-            new LessonTime("1700"),
-            new LessonTime("1850"),
-            new LessonTime("1700")
-        ));
-
-        // right border
-        assertTrue(LessonTime.contains(
-            new LessonTime("0500"),
-            new LessonTime("2320"),
-            new LessonTime("2320")
-        ));
-
-        // both
-        assertTrue(LessonTime.contains(
-            new LessonTime("2359"),
-            new LessonTime("2359"),
-            new LessonTime("2359")
-        ));
-
-        // null
-        assertThrows(NullPointerException.class, () -> LessonTime.contains(
-            new LessonTime("2359"),
-            null,
-            new LessonTime("2359")
-        ));
-    }
-
-    @Test
     public void equals() {
         LessonTime time = new LessonTime("1200");
 

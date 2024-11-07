@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.edulog.commons.exceptions.IllegalValueException;
 import seedu.edulog.model.EduLog;
 import seedu.edulog.model.ReadOnlyEduLog;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.storage.lesson.JsonAdaptedLesson;
@@ -69,9 +68,6 @@ class JsonSerializableEduLog {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
             }
 
-            if (!eduLog.checkTimeslot(lesson)) {
-                throw new IllegalValueException(EdulogCalendar.OVERLOAD_SIMULTANEOUS_TIMING);
-            }
             eduLog.addLesson(lesson);
         }
 

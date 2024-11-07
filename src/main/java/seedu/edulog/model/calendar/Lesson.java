@@ -91,29 +91,6 @@ public class Lesson {
                 && otherLesson.description.equals(description);
     }
 
-    /**
-     * Returns true if the current lesson has an overlapping time with the provided lesson.
-     * @param otherLesson Other Lesson to check with overlaps for.
-     */
-    public boolean hasOverlap(Lesson otherLesson) {
-        if (spansTwoDays()) {
-            /*
-             split Lesson into time slot before and at/after midnight.
-             This simplifies the problem to detecting
-             overlap in time slot before midnight or/and overlap in time slot at/after midnight.
-             */
-            Lesson slot1 = new Lesson(description, startDay, startTime, LessonTime.LATEST_TIME);
-            Lesson slot2 = new Lesson(description, startDay.plus(1), LessonTime.EARLIEST_TIME, endTime);
-
-            return slot1.hasOverlap(otherLesson) || slot2.hasOverlap(otherLesson);
-        } else if (otherLesson.spansTwoDays()) {
-            return otherLesson.hasOverlap(this);
-        } else {
-            return LessonTime.contains(startTime, endTime, otherLesson.startTime)
-                || LessonTime.contains(startTime, endTime, otherLesson.endTime);
-        }
-    }
-
     // Utility, Identity, and printing methods ===================================================================
     private boolean spansTwoDays() {
         return LessonTime.spansTwoDays(startTime, endTime);

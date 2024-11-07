@@ -254,6 +254,8 @@ Example:
 
 * `addc d/Sec 4 Math Class day/mon from/2230 to/0030`
 
+Lessons cannot share the same description - but may overlap in time together.
+
 ### Listing all lessons : `dc`
 
 Shows a list of all lessons in the edulog.
