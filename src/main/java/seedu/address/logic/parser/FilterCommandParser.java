@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -27,6 +28,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE, PREFIX_COURSE);
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_MODULE, PREFIX_COURSE);
         validateArguments(argMultimap);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -42,27 +44,38 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
     private void validateArguments(ArgumentMultimap argMultimap) throws ParseException {
         if (!argMultimap.getPreamble().isEmpty()
-                || argMultimap.getValue(PREFIX_NAME).isPresent()
-                    && argMultimap.getValue(PREFIX_NAME).get().isEmpty()
-                || argMultimap.getValue(PREFIX_MODULE).isPresent()
-                    && argMultimap.getValue(PREFIX_MODULE).get().isEmpty()
-                || argMultimap.getValue(PREFIX_COURSE).isPresent()
-                    && argMultimap.getValue(PREFIX_COURSE).get().isEmpty()) {
+                || (argMultimap.getValue(PREFIX_NAME).isPresent()
+                && argMultimap.getValue(PREFIX_NAME).get().isEmpty())
+                || (argMultimap.getValue(PREFIX_MODULE).isPresent()
+                && argMultimap.getValue(PREFIX_MODULE).get().isEmpty())
+                || (argMultimap.getValue(PREFIX_COURSE).isPresent()
+                && argMultimap.getValue(PREFIX_COURSE).get().isEmpty())) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
+        long prefixCount = Stream.of(PREFIX_NAME, PREFIX_MODULE, PREFIX_COURSE)
+                .filter(prefix -> argMultimap.getValue(prefix).isPresent())
+                .count();
+
+        if (prefixCount > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
     }
 
     private FilterCommand createFilterCommandByName(ArgumentMultimap argMultimap) {
+        assert argMultimap.getValue(PREFIX_NAME).isPresent() : "PREFIX_NAME should be present";
         List<String> nameKeywords = Arrays.asList(argMultimap.getValue(PREFIX_NAME).get().split("\\s+"));
         return new FilterCommand(new NameContainsKeywordsPredicate(nameKeywords));
     }
 
     private FilterCommand createFilterCommandByModule(ArgumentMultimap argMultimap) {
+        assert argMultimap.getValue(PREFIX_MODULE).isPresent() : "PREFIX_MODULE should be present";
         String moduleKeyword = argMultimap.getValue(PREFIX_MODULE).get();
         return new FilterCommand(new ModuleContainsKeywordsPredicate(moduleKeyword));
     }
 
     private FilterCommand createFilterCommandByCourse(ArgumentMultimap argMultimap) {
+        assert argMultimap.getValue(PREFIX_COURSE).isPresent() : "PREFIX_COURSE should be present";
         List<String> courseKeywords = Arrays.asList(argMultimap.getValue(PREFIX_COURSE).get().split("\\s+"));
         return new FilterCommand(new CourseContainsKeywordsPredicate(courseKeywords));
     }

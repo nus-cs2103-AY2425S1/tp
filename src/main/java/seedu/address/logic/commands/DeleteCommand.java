@@ -34,7 +34,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
 
-    public static final String MESSAGE_PERSON_NOT_FOUND = "No student is found with Student ID: %1$s";
+    public static final String MESSAGE_PERSON_NOT_FOUND =
+            "No student with Student ID: %1$s is currently being displayed";
     public static final String MESSAGE_MODULE_NOT_FOUND = "No module is found for this student: %1$s";
     private final StudentId studentId;
     private final Module module;
