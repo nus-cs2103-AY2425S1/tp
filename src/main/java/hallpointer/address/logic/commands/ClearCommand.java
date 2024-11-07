@@ -12,7 +12,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
-    public static final String MESSAGE_SUCCESS = "Hall Pointer system has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Hall Pointer has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {
