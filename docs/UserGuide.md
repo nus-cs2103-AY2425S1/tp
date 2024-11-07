@@ -237,6 +237,11 @@ Examples:
 * `export format\csv` exports a copy of your contact data to `data/addressbook.csv`.
 * `export format\txt` exports a copy of your contact data to `data/addressbook.txt`.
 
+  **Tip:** Use the command button for Export to export your contact data to your preferred file format in the click of a button.
+<div style="text-align: left;">
+    <img src="images/exportGUIEg.png" alt="Using filter button" width=545 />
+</div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
