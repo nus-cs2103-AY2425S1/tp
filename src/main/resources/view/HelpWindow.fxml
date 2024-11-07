@@ -21,7 +21,7 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
       <VBox prefWidth="900.0" prefHeight="610">
-      <HBox alignment="CENTER" fx:id="helpMessageContainer">
+      <HBox alignment="TOP_RIGHT" fx:id="helpMessageContainer">
         <children>
           <Label fx:id="helpMessage" text="Label">
             <HBox.margin>
