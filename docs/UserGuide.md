@@ -181,6 +181,8 @@ Examples:
 
 Format: `view NRIC`
 
+![view page](images/ViewWindow.png)
+
 ### Deleting a patient profile : `delete`
 
 Deletes the specified patient profile from the database.
