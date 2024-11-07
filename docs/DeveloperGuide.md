@@ -456,18 +456,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types keyword followed by student details into textbox
-2. App acknowledges that a new user has been added
+1. User types `add` keyword followed by student details into textbox
+2. App acknowledges that a new student has been added
 3. Use case ends
 
 **Extensions**
 
-- 2a. App detects similar/identical name or phone number in records
+- 2a. App detects similar/identical name
 
-    - 2a1. Asks user to confirm action
-    - 2a2. User confirms/denies
-    - 2a3. App adds new entry and acknowledges / returns to home screen
-    - 2a4. Use case ends
+    - 2a1. App rejects the new addition
+    - 2a2. Use case ends
+
+- 2b. App detects clashing lesson
+    - 2b1. App rejects the new addition
+    - 2b2. Use case ends
 
 
 **Use case: UC2 - List all students**
@@ -524,18 +526,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Student**: A person who is taking lessons from the tutor
 * **Tutor**: The user of the application
-* **Parent**: A person who is the parent or guardian of the student
-* **Add student**: A feature that allows users to create a new student entry along with their information in the application
-* **Delete student**: A feature that allows users to remove a student entry and their information from the application
-* **Search student**: A feature that allows users to find a particular student by entering their name
-* **Private student details**: Student details and contact information that are not meant to be shared with others
-* **Private parent details**: Parent details and contact information that are not meant to be shared with others
-* **Notes tab**: A section within the application where users can record additional information about their students
-* **Tutoring schedule**: A timetable that shows the dates and times of lessons with students
+* **Add student**: A feature that allows tutors to create a new student entry along with their information in the application
+* **Delete student**: A feature that allows tutors to remove a student entry and their information from the application
+* **Find student**: A feature that allows tutors to find a particular student by entering their name
 * **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
 * **Tags**: Labels that can be assigned to students to group them based on common characteristics
-* **Filtering**: A feature that allows users to view specific groups of students based on their tags or specific criteria
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -574,10 +569,10 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`, `delete`<br>
+   1. Test case: `delete`<br>
       Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete x` (where x is larger than the list size), `delete something`<br>
+   1. Other incorrect delete commands to try: `delete 0`, `delete x` (where x is larger than the list size), `delete something`<br>
       Expected: Invalid student index error is shown in the status message.
 
 1. _Deleting a student by name
@@ -596,4 +591,4 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. Test case: Delete the data file from the directory containing tuteez.jar to simulate missing file.
-      Expected: A new data file will be automatically created with default set of "dummy" students when the tuteez.jar is run.
+      Expected: A new data file will be automatically created with default set of "dummy" students when tuteez.jar is run.
