@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIAGNOSIS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WARD;
 
 import java.util.Arrays;
@@ -31,14 +32,14 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_WARD, PREFIX_DIAGNOSIS,
-                        PREFIX_MEDICATION);
+                        PREFIX_MEDICATION, PREFIX_NOTES);
 
         if (argMultimap.numberOfUniquePrefixes() != 1 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ID, PREFIX_WARD, PREFIX_DIAGNOSIS,
-                PREFIX_MEDICATION);
+                PREFIX_MEDICATION, PREFIX_NOTES);
 
         FieldContainsKeywordsPredicate predicate = null;
         String[] keywords;
@@ -58,6 +59,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else if (argMultimap.hasSingleValidString(PREFIX_MEDICATION)) {
             keywords = argMultimap.getValue(PREFIX_MEDICATION).get().split("\\s+");
             predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "medication");
+        } else if (argMultimap.hasSingleValidString(PREFIX_NOTES)) {
+            keywords = argMultimap.getValue(PREFIX_NOTES).get().split("\\s+");
+            predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "patientnotes");
         } else {
             logger.warning("Invalid input for find command detected!");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

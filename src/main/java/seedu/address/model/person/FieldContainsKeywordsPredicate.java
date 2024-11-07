@@ -31,15 +31,18 @@ public class FieldContainsKeywordsPredicate implements Predicate<Person> {
         requireNonNull(person);
         return switch (this.field) {
         case "name" -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword));
         case "id" -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getId().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getId().toString(), keyword));
         case "ward" -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getWard().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getWard().toString(), keyword));
         case "diagnosis" -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getDiagnosis().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getDiagnosis().toString(), keyword));
         case "medication" -> keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getMedication().toString(), keyword));
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getMedication().toString(),
+                        keyword));
+        case "patientnotes" -> keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(person.getNotes().toString(), keyword));
         default -> false;
         };
     }
