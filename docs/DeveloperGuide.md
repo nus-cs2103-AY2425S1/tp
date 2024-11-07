@@ -504,7 +504,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a new student with all parameters specified
 
-   1. Simply type `add` into the command box and click `Enter`.
+   1. Type `add` and press `Enter` on your keyboard.
 
    1. You will see an error message in the result display area that shows you how to use this command.
 
@@ -526,12 +526,12 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add n/a lucky Tester p/87903288 e/suchANiceApp@meta.sg a/COM1 B1 r/10 paid/0 owed/0 t/Tuesday-1500-1600
    s/Physics`.
 
-   1. Expected: An error message shown: `This student already exists in the address book`. You can then refer [Finding a
+   1. Expected: An error message shown: `This student already exists in the address book`. You can then refer to [Finding a
 student]() to search for student details.
 
 1. Adding a new student with a clashing schedule
 
-   1. Test case: `add n/software Developer p/65894545 e/coderwithoutbug@gmail.com a/Jurong West Condo r/100 t/Sunday-1130-1330 s/PE`
+   1. Test case: `add n/software Developer p/65894545 e/coderwithoutbug@gmail.com a/Jurong West Condo r/100 t/Sunday-1130-1330 s/GP`
 
    1. Expected: The new student is successfully added with a warning message.
 
@@ -558,7 +558,7 @@ student]() to search for student details.
 
    1. Test case: `edit 1 n/Jonathan e/jonjon4343@canadian.com`
    
-   1. Expected: The first student in the list's name and email will be updated. The list shows all students instead of the previous filtered list.
+   1. Expected: The **NAME** and **EMAIL** of the first student in the current list will be updated. The list shows all students instead of the previous filtered list.
 
 1. Editing a student with invalid values
 
@@ -566,7 +566,7 @@ student]() to search for student details.
       Expected: An error message displayed reminds you that **RATE** must be from $0.01 to $1000.00.
    
    1. Test case: `edit 1 n/ p/654321234` <br/>
-      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE** are invalid the error message is shown in the order that the attributes shown in the app.
+      Expected: An error message displayed reminds you that **NAME** must not be empty. <br/>Notice that both values of **NAME** and **PHONE** are invalid; however, the error message is shown in the order that the attributes shown in the app.
 
 
 ### Deleting a student
