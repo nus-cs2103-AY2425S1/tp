@@ -41,6 +41,18 @@ public class DeleteCommand extends Command {
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> personsToDelete = getPersonsToDelete(lastShownList);
+
+        StringBuilder deletedPersons = new StringBuilder();
+        for (Person personToDelete : personsToDelete) {
+            model.deletePerson(personToDelete);
+            deletedPersons.append(Messages.format(personToDelete)).append("\n");
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons.toString().trim()));
+    }
+
+    private List<Person> getPersonsToDelete(List<Person> lastShownList) throws CommandException {
         List<Person> personsToDelete = new ArrayList<>();
 
         for (Index index : targetIndexArray) {
@@ -55,14 +67,7 @@ public class DeleteCommand extends Command {
             }
             personsToDelete.add(personToDelete);
         }
-
-        StringBuilder deletedPersons = new StringBuilder();
-        for (Person personToDelete : personsToDelete) {
-            model.deletePerson(personToDelete);
-            deletedPersons.append(Messages.format(personToDelete)).append("\n");
-        }
-
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons.toString().trim()));
+        return personsToDelete;
     }
 
     @Override
