@@ -54,8 +54,6 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
     e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-    e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
@@ -281,7 +279,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
 **Clear**  | `clear`
-**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE_NUMBET` e.g. `delete n/Alex Yeoh p/88306733`
+**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find n/FULL_NAME` `find j/JOB_CODE_APPLIED_FOR` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
 **List**   | `list`
