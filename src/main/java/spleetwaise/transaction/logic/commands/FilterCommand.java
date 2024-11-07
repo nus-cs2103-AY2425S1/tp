@@ -3,6 +3,7 @@ package spleetwaise.transaction.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT_SIGN;
+import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DATE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -37,6 +38,7 @@ public class FilterCommand extends Command {
                     + "[INDEX] " + "[" + PREFIX_AMOUNT + "AMOUNT] " + "[" + PREFIX_DESCRIPTION
                     + "DESCRIPTION] " + "[" + PREFIX_DATE + "DATE] " + "[" + PREFIX_STATUS
                     + "STATUS] " + "[" + PREFIX_AMOUNT_SIGN + "AMOUNT_SIGN]\n"
+                    + "[" + PREFIX_CATEGORY + "CATEGORY]\n"
                     + "At least one of the above filtering criteria is needed\n"
                     + "Example: " + COMMAND_WORD + " 1";
 
