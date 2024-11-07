@@ -17,7 +17,7 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 This project uses [JavaFX](https://openjfx.io/) for the GUI and [JUnit5](https://junit.org/junit5/) for testing. The project is built using [Gradle](https://gradle.org/).
 
-This project uses Github Copilot extensively for code completion throughout the project by [@InfinityTwo](http://github.com/infinitytwo), [@KiKusaurus](https://github.com/kikuasaurus) and [@thortol](http://github.com/thortol).
+This project uses Github Copilot extensively for code completion throughout the project by [@InfinityTwo](http://github.com/infinitytwo) and [@KiKusaurus](https://github.com/kikuasaurus).
 
 This project also makes use of [Google's Material Icons](https://fonts.google.com) and Fonts for styling under the [SIL Open Font License](https://developers.google.com/fonts/faq#can_i_use_any_font_in_a_commercial_product) for Fonts and [Apache License 2.0](https://fonts.google.com/icons) for Icons.
 
@@ -63,7 +63,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -114,8 +114,8 @@ The sequence diagram below illustrates another interaction within the `Logic` co
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteEmployeeCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g. `DeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteEmployeeCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -125,8 +125,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g. `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g. `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g. `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -137,7 +137,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g. results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -183,21 +183,21 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 **Target user profile**:
 
-* has a need to manage a significant number of employees and potential hires
-* has a need to match potential hires with available job openings
-* has a need to find details about an employee or potential hire quickly
-* has a need to search for employees or potential hires with relevant details
-* forgets commands and requires a list of commands to use the application
-* prefer desktop applications over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage a significant number of employees and potential hires.
+* Has a need to match potential hires with available job openings.
+* Has a need to find details about an employee or potential hire quickly.
+* Has a need to search for employees or potential hires with relevant details.
+* Forgets commands and requires a list of commands to use the application.
+* Prefer desktop applications over other types.
+* Can type fast.
+* Prefers typing to mouse interactions.
+* Is reasonably comfortable using CLI apps.
 
 **Value proposition**:
-* manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app
-* find details about an employee or potential hire faster than a spreadsheet
-* matches potential hires with available job openings faster than a spreadsheet
-* for organizations seeking to manage employees and potential hires, our application offers a more specialized solution than an address book application
+* Manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app.
+* Find details about an employee or potential hire faster than a spreadsheet.
+* Matches potential hires with available job openings faster than a spreadsheet.
+* For organizations seeking to manage employees and potential hires, our application offers a more specialized solution than an address book application.
 
 
 ### User stories
@@ -206,18 +206,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority             | As a …​    | I want to …​                                                     | So that I can…​                                                   |
 |----------------------|------------|------------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`              | HR Manager | View phone number of my employees/potential hire                 | I can easily contact them if required                             |
-| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their phone number if required                     |
-| `* * *`              | HR Manager | View email addresses of employees/potential hire                 | I can contact them if its not an emergency                        |
-| `* * *`              | HR Manager | Insert phone number of my employees/potential hire               | I can retrieve their email address if required                    |
-| `* * *`              | HR Manager | Delete data through the UI                                       | I can delete users who are incorrectly added                      |
-| `* * *`              | HR Manager | View address of employees/potential hire                         | I can view the address of the user to decide where to deploy them |
-| `* *`                | New user   | Be shown some basic functions                                    | I can learn the basic functions of the product                    |
-| `* *`                | New user   | View the user guide easily                                       | I can learn more functions of the product whenever I want         |
-| `* *`                | New user   | Purge the sample data in the tutorial                            | I can input my own data to use                                    |
-| `*`                  | HR Manager | View the emergency contact details of employees                  | I can quickly respond in case of an emergency                     |
-| `*`                  | HR Manager | Sort the employee information by when their contract will expire | I can better plan out when to resign contracts                    |
-*{More to be added}*
+| `* * *`              | HR Manager | view phone number of my employees/potential hire.                 | easily contact them if required.                             |
+| `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their phone number if required.                     |
+| `* * *`              | HR Manager | view email addresses of employees/potential hire.                 | contact them if its not an emergency.                        |
+| `* * *`              | HR Manager | insert phone number of my employees/potential hire.               | retrieve their email address if required.                    |
+| `* * *`              | HR Manager | delete data through the UI.                                       | delete users who are incorrectly added.                      |
+| `* * *`              | HR Manager | view address of employees/potential hire.                         | view the address of the user to decide where to deploy them. |
+| `* *`                | New user   | be shown some basic functions.                                    | learn the basic functions of the product.                    |
+| `* *`                | New user   | view the user guide easily.                                       | learn more functions of the product whenever I want.         |
+| `* *`                | New user   | purge the sample data in the tutorial.                            | input my own data to use.                                    |
+| `*`                  | HR Manager | view the emergency contact details of employees.                  | quickly respond in case of an emergency.                     |
+| `*`                  | HR Manager | sort the employee information by when their contract will expire. | better plan out when to resign contracts.                    |
+
 
 ### Use cases
 
@@ -228,9 +228,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  StaffSync shows a list of persons
+2.  System shows a list of persons
 3.  User requests to delete a specific person in the list of the correct shown type
-4.  StaffSync deletes the person
+4.  System deletes the person
 
    Use case ends.
 
@@ -242,13 +242,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-   * 3a1. StaffSync shows an error message.
+   * 3a1. System shows an error message.
 
       Use case resumes at step 2.
 
 * 3b. The given index is not of the correct person type.
 
-   * 3b1. StaffSync shows an error message.
+   * 3b1. System shows an error message.
 
       Use case resumes at step 2.
 
@@ -257,7 +257,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add an employee.
-2. StaffSync saves the employee's information.
+2. System saves the employee's information.
 
     Use case ends.
 
@@ -265,13 +265,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *1a. The input syntax is invalid.
 
-    * 1a1. StaffSync shows an error message.
+    * 1a1. System shows an error message.
 
     Use case resumes at step 1.
 
 *1b. The user requests to add a potential hire.
 
-    *1b1. StaffSync saves the potential hire's information.
+    *1b1. System saves the potential hire's information.
 
     Use case ends.
 
@@ -280,7 +280,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to find based on name.
-2. StaffSync displays a list of people who have the name.
+2. System displays a list of people who have the name.
 
 Use case ends.
 
@@ -288,7 +288,7 @@ Use case ends.
 
 *1a. The input syntax is invalid
 
-    *1a1. StaffSync shows an error message.
+    *1a1. System shows an error message.
 
     Use case resumes at step 1.
 
@@ -303,7 +303,7 @@ Use case ends.
 **MSS**
 
 1. User requests for help.
-2. StaffSync gives a list of commands.
+2. System gives a list of commands.
 
 Use case ends.
 
@@ -312,7 +312,7 @@ Use case ends.
 **MSS**
 
 1. User requests to exit the program.
-2. StaffSync closes.
+2. System closes.
 
 
 ### Non-Functional Requirements
@@ -325,8 +325,8 @@ Use case ends.
 6. The software should be backward compatible for version changes and previous saved data should be able to be loaded without any issues.
 7. Our software should have an _MVP_ by the end of v1.3, around the end of week 9.
 8. Our software should have an _Alpha Release_ by the end of v1.4, around the end of week 10.
-9. Our software should have a _Release Candidate_ by the end of v1.5, around the end of week 11.
-10. Our software should have a _Public Release_ by the end of v1.6, around the end of week 12.
+9. Our software should have a _Release Candidate_ by the end of v1.5, around the end of week 12.
+10. Our software should have a _Public Release_ by the end of v1.6, around the end of week 13.
 11. Our software will NOT handle any security or privacy related to data inserted into the software. It is the user's responsibility to ensure that the data is not sensitive or private and that it will not be leaked.
 12. Our software should not have any memory leaks and should not consume more memory than necessary.
 13. Our software should not crash with any user input.
@@ -373,10 +373,10 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 3. Closing the application
-   
+
    1. Click the close button on the top right of the window.<br>
       Expected: The window closes and the application terminates.
-   
+
    2. Alternatively, type `exit` in the command box and press Enter.<br>
       Expected: The window closes and the application terminates.
 
@@ -387,41 +387,41 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: The application should be empty. List all employees using the `list e` command.
 
    2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-      Expected: John Doe is added into the list
+      Expected: John Doe is added into the list.
 
    3. Test case: `employee n/John@Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-      Expected: No employee added, error details shown in the status message
+      Expected: No employee added, error details shown in the status message.
 
    4. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-      Expected: No employee added, error details shown in the status message
+      Expected: No employee added, error details shown in the status message.
 
    5. Test case: `employee n/John Doe p/98765432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-      Expected: No employee added, error details shown in the status message
+      Expected: No employee added, error details shown in the status message.
 
    6. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/ d/IT r/SWE ced/2024-10-09`<br>
-      Expected: No employee added, error details shown in the status message
+      Expected: No employee added, error details shown in the status message.
 
    7. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/ r/SWE ced/2024-10-09`<br>
-      Expected: No employee added, error details shown in the status message
+      Expected: No employee added, error details shown in the status message.
 
    8. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/ ced/2024-10-09`<br>
-      Expected: No employee added, error details shown in the status message
+      Expected: No employee added, error details shown in the status message.
 
    9. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/01-09-2023`<br>
-      Expected: No employee added, error details shown in the status message
+      Expected: No employee added, error details shown in the status message.
 
 2. Adding a duplicate employee
 
     1. Prerequisites: The employee `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09` should already be added
 
     2. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-       Expected: John Doe should not be added since he already exists
+       Expected: John Doe should not be added since he already exists.
 
     3. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-       Expected: John Doe should not be added since he already exists in employee
+       Expected: John Doe should not be added since he already exists in employee.
 
     4. Test case: `employee n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-       Expected: John Doe2 should be added as he has a different name
+       Expected: John Doe2 should be added as he has a different name.
 
 ### Adding a potential hire
 
@@ -430,38 +430,38 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The application should be empty. List all potential hires using the `list ph` command.
 
     2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-       Expected: John Doe is added into the list
+       Expected: John Doe is added into the list.
 
     3. Test case: `potential n/John@Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-       Expected: No potential hire added, error details shown in the status message
+       Expected: No potential hire added, error details shown in the status message.
 
     4. Test case: `potential n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-       Expected: No potential hire added, error details shown in the status message
+       Expected: No potential hire added, error details shown in the status message.
 
     5. Test case: `potential n/John Doe p/98765432 e/johnd@example-.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-       Expected: No potential hire added, error details shown in the status message
+       Expected: No potential hire added, error details shown in the status message.
 
     6. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/ d/IT r/SWE`<br>
-       Expected: No potential hire added, error details shown in the status message
+       Expected: No potential hire added, error details shown in the status message.
 
     7. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/ r/SWE`<br>
-       Expected: No potential hire added, error details shown in the status message
+       Expected: No potential hire added, error details shown in the status message.
 
     8. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/`<br>
-       Expected: No potential hire added, error details shown in the status message
+       Expected: No potential hire added, error details shown in the status message.
 
 2. Adding a duplicate potential hire
 
     1. Prerequisites: The potential hire `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE` should already be added
 
     2. Test case: `potential n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-       Expected: John Doe should not be added since he already exists
+       Expected: John Doe should not be added since he already exists.
 
     3. Test case: `employee n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-       Expected: John Doe should not be added since he already exists in potential hire
+       Expected: John Doe should not be added since he already exists in potential hire.
 
     4. Test case: `potential n/John Doe2 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-       Expected: John Doe2 should be added as he has a different name
+       Expected: John Doe2 should be added as he has a different name.
 
 ### Editing an employee or potential hire
 
@@ -470,23 +470,23 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: An employee has to be added and list all employees using the `list e` command. There should be an employee at index 1.
 
    2. Test case: `edit 1 n/John Doe3 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/2024-10-09`<br>
-      Expected: The employee at index 1 should be edited into John Doe3
+      Expected: The employee at index 1 should be edited into John Doe3.
 
    3. Test case: `edit 1 n/John@Doe`<br>
-      Expected: Edit failed, error details shown in the status message
+      Expected: Edit failed, error details shown in the status message.
 
 2. Editing a potential hire
 
    1. Prerequisites: A potential hire has to be added and list all potential hires using the `list ph` command. There should be a potential hire at index 1.
 
    2. Test case: `edit 1 n/John Doe4 p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE`<br>
-      Expected: The employee at index 1 should be edited into John Doe4
+      Expected: The employee at index 1 should be edited into John Doe4.
 
    3. Test case: `edit 1 n/John@Doe`<br>
-      Expected: Edit failed, error details shown in the status message
+      Expected: Edit failed, error details shown in the status message.
 
    4. Test case: `edit 1 ced/2020-01-01`<br>
-      Expected: Edit failed, error details shown in the status message
+      Expected: Edit failed, error details shown in the status message.
 
 ### Listing the contents of StaffSync
 
@@ -587,7 +587,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `find e d/IT r/SWE`<br>
    Expected: Number of employees with department `IT` and role `SWE` listed shown in the status message.
-   Displays the list of employees found
+   Displays the list of employees found.
 
    5. Test case: `Find e n/john`, `Find ph p/12345678`, `Find all john@example.com`<br>
    Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
@@ -604,7 +604,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Demoting an employee
 
-1. Demoting an employee while all employees are being shown
+1. Demoting an employee while all employees are being shown.
 
     1. Prerequisites: List all employees using the `list e` command. Employees are in the list.
 
@@ -623,14 +623,14 @@ testers are expected to do more *exploratory* testing.
     6. Other incorrect demote commands to try: `demote randomstring`,`demote x`, `demote 1 2` (where x is larger than the list size)<br>
        Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
-2. Demoting a person while no employees are being shown (due to having 0 entries or only potential hire entries)
+2. Demoting a person while no employees are being shown (due to having 0 entries or only potential hire entries).
 
     1. Test case: `demote 1`<br>
-     Expected: No employees are demoted. Error details shown in the status message
+     Expected: No employees are demoted. Error details shown in the status message.
 
 ### Promoting a potential hire
 
-1. Promoting a potential hire while all potential hires are being shown
+1. Promoting a potential hire while all potential hires are being shown.
 
     1. Prerequisites: List all potential hire using the `list ph` command. Potential hires are in the list.
 
@@ -658,10 +658,10 @@ testers are expected to do more *exploratory* testing.
     9. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2`, `promote a b`  (where x is larger than the list size)<br>
        Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
 
-2. Promoting a person while no potential hires are being shown (due to having 0 entries or only employee entries)
+2. Promoting a person while no potential hires are being shown (due to having 0 entries or only employee entries).
 
     1. Test case: `promote 1 2024-12-20`<br>
-       Expected: No potential hires are promoted. Error details shown in the status message
+       Expected: No potential hires are promoted. Error details shown in the status message.
 
 ### Sorting the contents of StaffSync
 
@@ -705,7 +705,7 @@ testers are expected to do more *exploratory* testing.
       Expected: The shown contacts are sorted by role in descending order. Contacts that were filtered out will not be shown.
 
    5. Test case: `sort dept asc`<br>
-      Expected: The shown contacts are sorted by department in ascending order. Contacts that were filtered out will not be shown. 
+      Expected: The shown contacts are sorted by department in ascending order. Contacts that were filtered out will not be shown.
 
    4. Test case: `sort`<br>
       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
@@ -734,21 +734,21 @@ The project was really challenging as we were working on an existing codebase he
 would need to know how all the functionalities and classes are connected to one another.
 
 ### Challenges Faced:
-1. The original AB3 has many different classes that are all coupled together so making a single change would require an 
+1. The original AB3 has many different classes that are all coupled together so making a single change would require an
 understanding of how the different classes work together, making tracing long codes essential.
 
-2. JavaFX is weirdly restrictive in the things that can be done, such as when it becomes scrollable and no animations 
+2. JavaFX is weirdly restrictive in the things that can be done, such as when it becomes scrollable and no animations
 allowed, whereas AB3 seem to have done it seamlessly (except animation) for each component.
 
 3. The way that the frontend pulls data from the backend makes it hard to perform operations on the list.
 
 4. Understanding how AB3 code works from the start to implement our features.
 
-5. The way AB3 handled Person felt like it had a lot of dependency on person. I was in charge of adding new fields to 
-Person and I had to create the new fields (Department, Role, Contract End Date), update the parser to parse the new 
+5. The way AB3 handled Person felt like it had a lot of dependency on person. I was in charge of adding new fields to
+Person and I had to create the new fields (Department, Role, Contract End Date), update the parser to parse the new
 fields, change the JsonAdaptedPerson to convert a json to the new person, update json test cases to have the new fields,
-update personBuilder in the testutil to generate new persons, update TypicalPersons to have new persons with department, 
-role, contract end date and update SampleDataUtil.java to have people with the right sample data. This was extremely 
+update personBuilder in the testutil to generate new persons, update TypicalPersons to have new persons with department,
+role, contract end date and update SampleDataUtil.java to have people with the right sample data. This was extremely
 time consuming as just to update Person with new fields you had to update a lot of files with the updated tests.
 
 6. As someone who is inexperienced with Git, there was a very steep learning curve, especially for fixing merge conflicts.
@@ -760,18 +760,18 @@ for developers as well as for clear standardization.
 2. **User Guide**: Crafting a detailed user guide was essential to ensure clear understanding of the usage and purpose of
 our application and its features for both technical and non-technical users.
 
-3. **Testing**: Extensive and efficient test cases has to be written and executed to ensure that our application is 
+3. **Testing**: Extensive and efficient test cases has to be written and executed to ensure that our application is
 bug-free.
 
 4. **Familiarizing with existing codebase**: Careful and thorough analysis of existing codebase is important to ensure
 bug-free implementation of new features as well as improving existing ones.
 
 ### Achievements
-1. **Excellent Product**: Able to produce a well-working application that solves all intended problems and 
-proposed user stories
+1. **Excellent Product**: Able to produce a well-working application that solves all intended problems and
+proposed user stories.
 
 2. **Smooth Performance**: Optimized our code for the application such that it is able to handle large amounts of data
-without any performance issues
+without any performance issues.
 
 ### Reuse and Effort Savings
 1. **Storage component**
@@ -786,11 +786,11 @@ without any performance issues
 
 Team Size: 5
 
-1. Make the scrolling to commands in helpWindow more accurate: The current dropdown jumps to the correct command, but 
-the command box is not standardized. We plan to make it more accurate ensuring that it jumps to most command boxes with 
+1. Make the scrolling to commands in helpWindow more accurate: The current dropdown jumps to the correct command, but
+the command box is not standardized. We plan to make it more accurate ensuring that it jumps to most command boxes with
 it at the very top of the helpWindow screen.
 
-2. We will separate potential hires and employees into two different columns in the UI. This makes delete more sensible 
+2. We will separate potential hires and employees into two different columns in the UI. This makes delete more sensible
 as right now, the inclusion of ph or e parameter is not as relevant.
 
 3. We plan to add colours to the help and command output text to improve readability.
