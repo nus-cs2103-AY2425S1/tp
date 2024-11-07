@@ -106,6 +106,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return addressBook.hasEmail(person);
+    }
+
+    @Override
     public boolean hasGraduatedBefore(String year) {
         return addressBook.hasGraduatedPeople(year);
     }
@@ -188,5 +194,11 @@ public class ModelManager implements Model {
         }
         ConcreteCommand command = undoStack.pop();
         return command.undo(this);
+    }
+
+    @Override
+    public void clearUndoStack() {
+        assert undoStack != null;
+        undoStack.clear();
     }
 }
