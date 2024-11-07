@@ -217,7 +217,7 @@ Lists all logs of a specific patient.
 - **Format**: `logs i/[IDENTITY_NUMBER]`
 
 Example:
-* `logs i/` <br>
+* `logs i/S3054081F` <br>
   ![result for 'logs i/S3054081F'](images/logsAlexResult.png)
 
 ### Adding a log: `addlog`
