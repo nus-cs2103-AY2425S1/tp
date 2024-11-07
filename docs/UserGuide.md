@@ -1,5 +1,5 @@
 ---
-layout: default.md
+  layout: default.md
   title: "User Guide"
   pageNav: 3
 ---
@@ -62,8 +62,10 @@ If you can type fast, GOATS can get your student management tasks done faster th
 | **List Archive**  | `listarchive`                                                                                                                                                                                  |
 | **List Students** | `liststudents`                                                                                                                                                                                 |
 | **List Parents**  | `listparents`                                                                                                                                                                                  |
-| **Link**          | `link ch/STUDENT_NAME pa/PARENT_NAME`<br> e.g., `link ch/James Ho pa/Jane Doe`                                                                                                                     |
-| **Unlink**        | `unlink ch/STUDENT_NAME`<br> e.g., `unlink ch/James Ho`                                                                                                                                |
+| **Link**          | `link ch/STUDENT_NAME pa/PARENT_NAME`<br> e.g., `link ch/James Ho pa/Jane Doe`                                                                                                                 |
+| **Unlink**        | `unlink ch/STUDENT_NAME`<br> e.g., `unlink ch/James Ho`                                                                                                                                        |
+| **Sort**          | `sort`                                                                                                                                                                                         |
+| **Exit**          | `exit`                                                                                                                                                                                         |
 
 ## Features
 
@@ -318,6 +320,12 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Listing all archived persons : `listarchive`
+
+Shows a list of all archived persons in the address book.
+
+Format: `listarchive`
+
 ### Listing students : `liststudents`
 
 Lists all students in the address book.
@@ -330,11 +338,11 @@ Lists all parents in the address book.
 
 Format: `liststudents`
 
-### Listing all archived persons : `listarchive`
+### Sorting all persons: `sort`
 
-Shows a list of all archived persons in the address book.
+Sorts all person in the address book, keeping pinned persons on top.
 
-Format: `listarchive`
+Format: `sort`
 
 ### Exiting the program : `exit`
 

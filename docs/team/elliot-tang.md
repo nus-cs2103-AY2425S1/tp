@@ -9,7 +9,7 @@ GOATS is a desktop address book application built upon AddressBook Level 3, targ
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
