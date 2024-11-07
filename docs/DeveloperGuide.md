@@ -272,8 +272,6 @@ Two `Participations` are considered to be duplicates if the `Student` and `Tutor
 
 There is no enforcement of duplicate `Attendance` in storage.
 
-#### Storage 
-
 ##### Uniqueness of objects
 For the purposes of storage into JSON format, EduVault defines two objects as distinct based on these factors:
 
