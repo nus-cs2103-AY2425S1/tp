@@ -53,6 +53,20 @@ public class Person {
     }
 
     /**
+     * Duplicates a {@code Person}.
+     *
+     * @param person  The person to be duplicated.
+     */
+    public Person(Person person) {
+        this.name = person.name;
+        this.phone = person.phone;
+        this.email = person.email;
+        this.address = person.address;
+        this.remark = person.remark;
+        this.tags.addAll(person.tags);
+    }
+
+    /**
      * Retrieves the orders associated with this person as a formatted string.
      *
      * @return A formatted string of all orders.

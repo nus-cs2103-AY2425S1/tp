@@ -26,30 +26,40 @@ public class AddPastryCommandParser implements Parser<AddPastryCommand> {
     public AddPastryCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Extract name, cost, and ingredient parts
+        // Split the arguments into tokens
         String[] splitArgs = args.trim().split("\\s+");
 
-        if (splitArgs.length < 3) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPastryCommand.MESSAGE_USAGE));
+        // Locate the cost, which should be the first valid double encountered
+        double cost = -1;
+        int costIndex = -1;
+        for (int i = 0; i < splitArgs.length; i++) {
+            try {
+                cost = Double.parseDouble(splitArgs[i]);
+                costIndex = i;
+                break; // Found the cost, break out of the loop
+            } catch (NumberFormatException e) {
+                // Not a double, continue checking
+            }
         }
 
-        // First argument is the pastry name
-        String name = splitArgs[0];
-
-        // Second argument is the cost; must be a valid double
-        double cost;
-        try {
-            cost = Double.parseDouble(splitArgs[1]);
-        } catch (NumberFormatException e) {
+        if (costIndex == -1) {
             throw new ParseException("The cost must be a valid number.");
         }
 
-        // Remaining arguments are the ingredient names
-        List<String> ingredientNames = Stream.of(splitArgs).skip(2).collect(Collectors.toList());
+        if (cost <= 0) {
+            throw new ParseException("The cost must be a positive number.");
+        }
+
+        // Extract the pastry name, which is everything before the cost
+        String name = String.join(" ", List.of(splitArgs).subList(0, costIndex));
+
+        // Extract the ingredient names, which are everything after the cost
+        List<String> ingredientNames = List.of(splitArgs).subList(costIndex + 1, splitArgs.length);
         ArrayList<Ingredient> ingredients = parseIngredients(ingredientNames);
 
         return new AddPastryCommand(name, cost, ingredients);
     }
+
 
     /**
      * Parses a list of ingredient names into a list of {@code Ingredient} objects.

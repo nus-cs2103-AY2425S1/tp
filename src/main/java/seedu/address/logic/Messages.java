@@ -53,13 +53,15 @@ public class Messages {
         // Check if the person is a Customer and append the information
         if (person instanceof Customer) {
             Customer customer = (Customer) person;
-            builder.append("Information: ").append(customer.getInformation()).append("\n");
+            builder.append("\n").append("Information: ").append(customer.getInformation()).append("\n");
         }
 
         // Check if the person is a Supplier and append the ingredients supplied
         if (person instanceof Supplier) {
             Supplier supplier = (Supplier) person;
-            builder.append("Ingredients Supplied: ").append(supplier.getIngredientsSupplied()).append("\n");
+            builder.append("\n").append("Ingredients Supplied: ")
+                    .append("\n")
+                    .append(supplier.getIngredientsSupplied()).append("\n");
         }
         return builder.toString();
     }

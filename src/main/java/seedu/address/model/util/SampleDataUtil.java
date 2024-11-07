@@ -5,19 +5,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.order.CustomerOrderList;
-import seedu.address.model.order.SupplyOrderList;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Customer;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Information;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Pastry;
-import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.order.*;
+import seedu.address.model.person.*;
+import seedu.address.model.product.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,18 +22,35 @@ public class SampleDataUtil {
                 new Remark("I enjoy movies"), getTagSet("Customer"));
         return c;
     }
+
+    private static Supplier sampleSupplier() {
+        Supplier s = new Supplier(new Name("Alice Tan"),
+                new Phone("91234567"),
+                new Email("alice.tan@example.com"),
+                new Address("Blk 123 Clementi Ave 3, #12-34"),
+                new Ingredients(List.of(
+                        new Ingredient(1, "Flour", 1.50),
+                        new Ingredient(2, "Sugar", 0.80)
+                )),
+                new Remark("Reliable supplier"),
+                getTagSet("Supplier")
+        );
+        return s;
+    }
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     new Remark("I love cakes"), getTagSet("Customer")),
             sampleCustomer(),
+            sampleSupplier(),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     new Remark("I watch football"), getTagSet("Customer")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new Remark("Pastries are cool"), getTagSet("Customer")),
+                    new Remark("Ingredients are cool"), getTagSet("Supplier")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
                     new Remark("I do not like sweet stuff"), getTagSet("Customer")),
@@ -65,11 +72,25 @@ public class SampleDataUtil {
     }
 
     public static CustomerOrderList getSampleCustomerOrderList() {
-        return new CustomerOrderList();
+        Ingredient flour = new Ingredient(1, "Flour", 1.50);
+        Ingredient sugar = new Ingredient(2, "Sugar", 0.80);
+        Ingredient strawberry = new Ingredient(3, "Strawberry", 3.00);
+        Ingredient chocolate = new Ingredient(4, "Chocolate", 2.50);
+        Pastry strawberryWaffle = new Pastry(1, "Strawberry Waffle", 5.50, new ArrayList<>(List.of(strawberry, flour, sugar)));
+        Pastry chocolatedonut = new Pastry(2, "Chocolate Donut", 4.00, new ArrayList<>(List.of(chocolate, flour, sugar)));
+        List<Product> pastryList = List.of(strawberryWaffle, chocolatedonut);
+        CustomerOrderList customerOrderList = new CustomerOrderList();
+        customerOrderList.addOrder(new CustomerOrder(sampleCustomer(), pastryList, OrderStatus.PENDING, EMPTY_REMARK));
+        return customerOrderList;
     }
 
     public static SupplyOrderList getSampleSupplyOrderList() {
-        return new SupplyOrderList();
+        Ingredient flour = new Ingredient(1, "Flour", 1.50);
+        Ingredient sugar = new Ingredient(2, "Sugar", 0.80);
+        List<Product> ingredientList = List.of(flour, sugar);
+        SupplyOrderList supplyOrderList = new SupplyOrderList();
+        supplyOrderList.addOrder(new SupplyOrder(sampleSupplier(), ingredientList, OrderStatus.PENDING, EMPTY_REMARK));
+        return supplyOrderList;
     }
 
     /**

@@ -2,7 +2,7 @@ title: "BakeBuddy"
 theme: minima
 
 header_pages:
-  - OldUserGuide.md
+  - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
   - ryan.md

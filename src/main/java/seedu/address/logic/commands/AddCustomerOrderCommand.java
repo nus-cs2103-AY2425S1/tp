@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +28,14 @@ public class AddCustomerOrderCommand extends Command {
     public static final String COMMAND_WORD = "addCustomerOrder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new customer order to the bakery's order list. "
-            + "Parameters: PHONE_NUMBER PRODUCT_ID\n"
-            + "Example: " + COMMAND_WORD + " 87654321 1";
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME] "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_ORDER + "PASTRYID] "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_ORDER + "1 1 2";
 
     public static final String MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS = "New customer order added: \n%1$s";
 
@@ -43,7 +52,11 @@ public class AddCustomerOrderCommand extends Command {
      * @param idList a list of product IDs for the order (must not be null).
      */
     public AddCustomerOrderCommand(Name name, Phone phone, ArrayList<Integer> idList, Remark remark) {
+        requireAllNonNull(name);
         requireAllNonNull(phone);
+        requireAllNonNull(idList);
+        requireAllNonNull(remark);
+
         this.name = name;
         this.phone = phone;
         this.idList = idList;
@@ -56,16 +69,24 @@ public class AddCustomerOrderCommand extends Command {
 
         PastryCatalogue pastryCatalogue = model.getPastryCatalogue();
 
+        // Check if all product IDs exist in the catalogue
+        for (Integer id : idList) {
+            if (pastryCatalogue.getProductById(id) == null) {
+                throw new CommandException("One or more specified pastries do not exist in the pastry catalogue.");
+            }
+        }
+
         List<Product> productList = idList.stream()
                                         .map(pastryCatalogue::getProductById)
                                         .filter(Objects::nonNull)
                                         .toList();
 
         List<Person> personList = model.getFilteredPersonList();
-        Person person = null;
 
+        // Check if the person exits in the personList by unique phone number
+        Person person = null;
         for (Person p : personList) {
-            if (p.getPhone().equals(phone)) {
+            if (phone.equals(p.getPhone())) {
                 person = p;
             }
         }
@@ -77,7 +98,6 @@ public class AddCustomerOrderCommand extends Command {
         CustomerOrder customerOrder = new CustomerOrder(person, productList, OrderStatus.PENDING, remark);
 
         person.addOrder(customerOrder);
-
         model.addCustomerOrder(customerOrder);
 
         return new CommandResult(String.format(MESSAGE_ADD_CUSTOMER_ORDER_SUCCESS, customerOrder.viewOrder()));

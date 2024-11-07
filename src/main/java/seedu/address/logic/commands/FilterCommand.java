@@ -14,7 +14,7 @@ import seedu.address.model.person.PersonContainsTagsPredicate;
  */
 public class FilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "filter";
+    public static final String COMMAND_WORD = "filterContact";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose tags contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

@@ -44,6 +44,8 @@ public class SupplyOrderCard extends UiPart<Region> {
      */
     public SupplyOrderCard(SupplyOrder order, int displayedIndex) {
         super(FXML);
+        assert order != null : "SupplyOrder should never be null";
+
         this.order = order;
         id.setText(displayedIndex + ". ");
         name.setText(order.getPerson().getName().fullName);
