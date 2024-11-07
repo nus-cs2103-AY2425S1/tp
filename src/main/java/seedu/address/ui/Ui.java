@@ -11,7 +11,7 @@ public interface Ui {
      * States of UI display.
      */
     public enum UiState {
-        DETAILS, TASKS, SPECIFIC_DETAILS
+        DETAILS, TASKS, SPECIFIC_DETAILS, NO_CHANGE
     }
 
     /** Starts the UI (and the App).  */

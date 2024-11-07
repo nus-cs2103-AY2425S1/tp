@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -49,6 +50,8 @@ public class ViewCommand extends Command {
         if (studentToView == null) {
             throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
         }
+
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         return new CommandResult(String.format(MESSAGE_VIEW_SUCCESS, name),
                 studentToView);

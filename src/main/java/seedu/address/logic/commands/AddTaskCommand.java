@@ -19,6 +19,7 @@ import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Subject;
+import seedu.address.model.student.predicate.TaskListNotEmptyPredicate;
 import seedu.address.model.student.task.Task;
 import seedu.address.model.student.task.TaskList;
 import seedu.address.ui.Ui.UiState;
@@ -74,9 +75,11 @@ public class AddTaskCommand extends Command {
         Student updatedStudent = createUpdatedStudent(targetStudent, taskToAdd);
 
         model.setStudent(targetStudent, updatedStudent);
+        model.updateFilteredStudentList(new TaskListNotEmptyPredicate());
+
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 taskToAdd.getTaskDescription(), targetStudent.getName(), taskToAdd.getTaskDeadline()),
-                UiState.DETAILS);
+                UiState.TASKS);
     }
 
     /**

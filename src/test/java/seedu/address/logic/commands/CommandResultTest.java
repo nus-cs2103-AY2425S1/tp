@@ -14,10 +14,10 @@ import seedu.address.ui.Ui.UiState;
 public class CommandResultTest {
     @Test
     public void equals() {
-        CommandResult commandResult1 = new CommandResult("feedback", UiState.DETAILS);
+        CommandResult commandResult1 = new CommandResult("feedback", UiState.NO_CHANGE);
 
         // same values -> returns true
-        assertTrue(commandResult1.equals(new CommandResult("feedback", UiState.DETAILS)));
+        assertTrue(commandResult1.equals(new CommandResult("feedback", UiState.NO_CHANGE)));
         assertTrue(commandResult1.equals(new CommandResult("feedback", false, false)));
 
         // same object -> returns true
@@ -30,7 +30,7 @@ public class CommandResultTest {
         assertFalse(commandResult1.equals(0.5f));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult1.equals(new CommandResult("different", UiState.DETAILS)));
+        assertFalse(commandResult1.equals(new CommandResult("different", UiState.NO_CHANGE)));
 
         // different showHelp value -> returns false
         assertFalse(commandResult1.equals(new CommandResult("feedback", true, false)));

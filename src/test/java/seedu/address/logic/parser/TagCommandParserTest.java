@@ -99,6 +99,10 @@ public class TagCommandParserTest {
         //Invalid prefix being parsed as preamble
         assertParseFailure(parser, "1 i/somestring", MESSAGE_INVALID_FORMAT);
 
+        // non-empty preamble
+        assertParseFailure(parser, TagCommand.COMMAND_WORD + " asdasdadcad" + NAME_DESC_BOB,
+                MESSAGE_INVALID_FORMAT);
+
     }
 
     @Test

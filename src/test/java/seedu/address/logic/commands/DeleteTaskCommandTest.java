@@ -20,6 +20,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicate.TaskListNotEmptyPredicate;
 import seedu.address.model.student.task.Task;
 import seedu.address.model.student.task.TaskDeadline;
 import seedu.address.model.student.task.TaskDescription;
@@ -69,9 +70,10 @@ public class DeleteTaskCommandTest {
         updatedTaskList.remove(targetTask);
         expectedModel.setStudent(targetStudent, updatedStudent);
         assertEquals(expectedModel, new ModelManager(getTypicalAddressBook(), new UserPrefs()));
+        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
         assertNotEquals(model, expectedModel);
 
-        assertCommandSuccess(deleteTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+        assertCommandSuccess(deleteTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
     }
 
     @Test

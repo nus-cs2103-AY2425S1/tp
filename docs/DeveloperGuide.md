@@ -158,21 +158,51 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Lesson Time Parameter
+This parameter allows users to keep track of a student's lesson timings. Multiple lesson times can be added for a single student.
+
+#### Design Considerations
+**Treatment of clashing timings**
+
+- **Current Implementation (Alternative 1):**
+    - **Description**: Clashing lesson timings are permitted across all students and within each student's schedule.
+    - **Pros**: Provides greater user flexibility, allowing all specified timings to be stored in EduManage, even if they overlap.
+      Suitable for accommodating different schedules for alternate weeks or varying lesson arrangements.
+    - **Cons**: Incorrect or conflicting lesson timings are not flagged out to the user, which could lead to scheduling confusion.
+
+- **Alternative 2:**
+    - **Description**: Clashing lesson timings are rejected across all students and within each student's schedule.
+    - **Pros**: Ensures that incorrect or conflicting timings are flagged, helping the user avoid scheduling errors.
+    - **Cons**: Reduces flexibility for users who need to store complex schedules with occasional overlapping times.
+
+**Association between lesson timings and subjects**
+
+- **Current Implementation (Alternative 1):**
+    - **Description**: Each lesson timing is not associated with any subject.
+    - **Pros**: Promotes greater user flexibility, allowing users to adjust subject focus within each lesson as needed.
+      Suitable for scenarios where multiple subjects may be covered in a single lesson.
+    - **Cons**: Users might prefer to have the association made clear.
+
+- **Alternative 2:**
+    - **Description**: Associate each lesson timing with a specific subject.
+    - **Pros**: Clarifies what subject is to be taught during each lesson, helping users stay organised.
+    - **Cons**: Reduces user flexibility in arranging lesson times for different subjects.
+
 ### Tag Feature - Level and Subject Tagging
-This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and 
-subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can 
+This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and
+subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can
 manage student profiles more efficiently.
 
-- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified 
+- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified
   tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
-- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and 
+- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and
   guidelines for tag parameters.
-- **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in 
-  value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary 
+- **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in
+  value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary
   duplication.
 
 #### Implementation - Sequence Diagrams
-The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note 
+The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note
 that while the TagCommandParser lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
 lifeline till the diagram's end.
 
@@ -184,9 +214,9 @@ lifeline till the diagram's end.
 **Parsing Tag Input**
 
 - **Current Implementation (Alternative 1):**
-    - **Description**: Tag validation is managed by the ParserUtil class, centralizing validation logic for improved 
+    - **Description**: Tag validation is managed by the ParserUtil class, centralizing validation logic for improved
       maintainability and modularity.
-    - **Pros**: By isolating validation in ParserUtil, updates and modifications are easier to manage, promoting a 
+    - **Pros**: By isolating validation in ParserUtil, updates and modifications are easier to manage, promoting a
       consistent approach across commands.
     - **Cons**: Adds a layer of abstraction, which may slightly increase the system’s complexity.
 
@@ -197,14 +227,14 @@ lifeline till the diagram's end.
 
 **Design of Tag Constraints**
 - **Current Implementation (Alternative 1)**:
-    - **Description**: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1 NA` and 
+    - **Description**: Tags are restricted to pre-defined values, and they are case-insensitive (e.g., `S1 NA` and
       `s1 na` are treated as identical, and `math` and `MATH` are treated as identical).
     - **Pros**: Enforces a standardized format for tags, ensuring brevity and uniformity.
     - **Cons**: Reduces user flexibility in customizing tags.
 
 - **Alternative 2**:
     - **Description**: Users can create tags without specific constraints.
-    - **Pros**: Provides greater flexibility for users to create custom tags. 
+    - **Pros**: Provides greater flexibility for users to create custom tags.
     - **Cons**: Increases complexity in managing and validating user input, potentially leading to errors and inconsistencies.
 
 ***
@@ -318,8 +348,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Target user profile**: Tuition teachers
 
+* teaches secondary school students
+* teaches in one-on-one sessions
 * has a need to manage a significant number of students and student details
-* prefer desktop apps over other types
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
@@ -363,7 +395,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Tuition teacher requests to add a student by inputting the student's name, phone number, emergency contact, address and any optional fields.
-2. EduManage adds the student's information and indicates success. 
+2. EduManage adds the student's information and indicates success.
 
    Use case ends.
 
@@ -372,10 +404,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. EduManage shows an error message indicating that the student already exists in EduManage.
 
       Use case resumes at step 1.
-  
+
 * 1b. The inputted student's information is missing fields that are not optional.
   * 1b1. EduManage shows an error message and informs the user of the correct command format.
-  
+
     Use case resumes at step 1.
 
 ***
@@ -391,7 +423,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions** 
+**Extensions**
 
 * 2a. The list is empty.
 
@@ -464,7 +496,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Tuition teacher requests to list students.
 2. EduManage shows a list of students.
-    
+
     Use case ends.
 
 ***
@@ -578,10 +610,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Tuition teacher requests to list students.
-2.  EduManage shows a list of students.
+1.  Tuition teacher requests to view all tasks for all students.
+2.  EduManage shows a list of students and their tasks.
 3.  Tuition teacher requests to add a task to a specific student's task list by inputting the student's name, task description and task deadline.
-4.  EduManage adds the task to the student’s outstanding task list and indicates success.
+4.  EduManage adds the task to the student’s task list and indicates success.
 
     Use case ends.
 
@@ -740,9 +772,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Emergency contact**: The contact to use if an emergency happens during the tutoring period
-* **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`)
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Emergency contact**: The contact to use if an emergency happens during the tutoring period.
+* **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`).
 * **Subject**: The subject the student is receiving tuition for, e.g. `Math`, `English`, `Literature`. The Subject must correspond with the Level of the student.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -775,47 +807,91 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
+### Adding a student
+
+1. Prerequisites: Delete any student named `Alice Lee` before and between test cases. Ensure there is a student named `Alex Yeoh` in the list of students.
+
+2. **Valid Test Cases**
+
+    1. Add a student with only compulsory fields: `add n/alice lee p/91234567 e/91234567 a/123 Clementi`<br>
+       Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
+       and address `123 Clementi` is added. No level, subject(s) or lesson time(s) are specified.
+
+    2. Add a student with compulsory fields, level, subject and lesson times:
+       `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`<br>
+       Expected: New student with name `Alice Lee`, phone and emergency contact number `91234567`,
+       address `123 Clementi`, subject tags `S1 NA MATH` and `S1 NA PHYSICS`, and lesson times `WED-17:00-19:00` and `SUN-12:00-14:00` is added.
+
+    3. Other valid test cases: Change the capitalisation and spacing between words for the name, level, subject for
+       any of the above test cases.<br>
+       Expected: The expected result is the same as the unaltered test case.
+
+3. **Invalid Test Cases**
+
+    1. Add a student with subject without level: `add n/Alice Lee p/91234567 e/91234567 a/123 Clementi s/MATH`<br>
+       Expected: No student is added. Error details shown in the status message. Status bar remains the same.
+       
+    2. Add an existing student: `add n/Alex Yeoh p/91234567 e/91234567 a/123 Clementi`<br>
+       Expected: Similar to previous.
+
+    3. Other invalid test cases: Add a student without compulsory fields or with invalid values for any field.
+       The valid value range can be found in the User guide.<br>
+       Expected: Similar to previous.
+
+***
+
 ### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+2. Test case: `delete 1`<br>
+   Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
 
-    2. Test case: `delete 1`<br>
-       Expected: First student is deleted from the list. Details of the deleted student shown in the status message.
+3. Test case: `delete 0`<br>
+   Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
-    3. Test case: `delete 0`<br>
-       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
-
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ***
 
 ### Finding specific students
 
-1. Finding specific students while all students are being shown
+1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
+2. **Valid Test Cases**
 
-    2. **Valid Test Cases**
+    1. Find by name: `find n/Alex`<br>
+       Expected: Only students with the name `Alex` are displayed. Number of students found is reflected in the status message.
 
-        1. Find by name:`find n/Alex`<br>
-           Expected: Only students with the name `Alex` are displayed. Number of students found is reflected in the status message.
+    2. Find by level: `find l/S1 NA`<br>
+       Expected: Only students tagged with the level `S1 NA` are displayed. Number of students found is reflected in the status message.
 
-        2. Find by level: `find l/S1 NA`<br>
-           Expected: Only students tagged with the level `S1 NA` are displayed. Number of students found is reflected in the status message.
+    3. Find by subject: `find s/MATH`<br>
+       Expected: Only students tagged with the subject `MATH` are displayed. Number of students found is reflected in the status message.
 
-        3. Find by subject: `find s/MATH`<br>
-           Expected: Only students tagged with the subject `MATH` are displayed. Number of students found is reflected in the status message.
+3. **Invalid Test Cases**
 
-    3. **Invalid Test Cases**
+   1. Find by name: `find n/!@!`, `find n/1e12#>`, `...`<br>
+      Expected: All students still listed. Error details shown in the status message. Status bar remains the same.
 
-       1. Find by name:`find n/!@!`, `find n/1e12#>`, `...`<br>
-          Expected: All students still listed. Error details shown in the status message. Status bar remains the same.
+   2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
+      Expected: Similar to previous.
 
-       2. Find by level and track: `find l/S1` (no track entered), `find l/IP` (no level entered), `...`<br>
-          Expected: Similar to previous.
-    
-       3. Find by subject: `find s/ENGINEERING`, `find s/?@!@#a`, `...`<br>
-          Expected: Similar to previous.
+   3. Find by subject: `find s/ENGINEERING`, `find s/?@!@#a`, `...`<br>
+      Expected: Similar to previous.
+
+***
+
+### Adding a task for a student
+
+1. Prerequisites: Ensure that student `Alex Yeoh` exists.
+
+2. Test case: `addtask n/alex yeoh t/Mark homework d/2024-11-06`<br>
+   Expected: New task with description `Mark homework` and deadline `2024-11-06` is added to student `Alex Yeoh`.
+
+3. Test case: `addtask n/alex yeoh t/Mark homework d/tmr`<br>
+   Expected: No task is added. Error details shown in the status message. Status bar remains the same.
+
+4. Test case: `addtask n/alex yeoh t/  d/2024-11-06`<br>
+   Expected: Similar to previous.

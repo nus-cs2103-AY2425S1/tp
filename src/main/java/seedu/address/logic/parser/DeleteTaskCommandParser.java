@@ -30,7 +30,7 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_TASK_INDEX);
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
+        Index index = ParserUtil.parseTaskIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
 
         return new DeleteTaskCommand(name, index);
     }

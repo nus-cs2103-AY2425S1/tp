@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -101,7 +102,12 @@ public class TagCommand extends Command {
         Address updatedAddress = tagsToAdd.getAddress().orElse(studentToTag.getAddress());
         Note updatedNote = tagsToAdd.getNote().orElse(studentToTag.getNote());
         Level updatedLevel = tagsToAdd.getLevel().orElse(studentToTag.getLevel());
-        Set<Subject> updatedSubjects = tagsToAdd.getSubjects().orElse(studentToTag.getSubjects());
+        Optional<Set<Subject>> newSubjects = tagsToAdd.getSubjects();
+        Set<Subject> updatedSubjects = newSubjects.orElse(studentToTag.getSubjects());
+
+        if (updatedLevel.equals(new Level("None None")) && newSubjects.isEmpty()) {
+            updatedSubjects = new HashSet<Subject>();
+        }
 
         if (!updatedSubjects.isEmpty()) {
             if (!Subject.isValidSubjectsByLevel(updatedLevel,

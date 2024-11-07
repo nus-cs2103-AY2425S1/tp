@@ -22,6 +22,7 @@ import seedu.address.model.student.Note;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Subject;
+import seedu.address.model.student.predicate.TaskListNotEmptyPredicate;
 import seedu.address.model.student.task.Task;
 import seedu.address.model.student.task.TaskList;
 import seedu.address.ui.Ui.UiState;
@@ -82,11 +83,13 @@ public class DeleteTaskCommand extends Command {
         //Creates a new Student with the task removed
         Student updatedStudent = createUpdatedStudent(targetStudent, taskToDelete);
         model.setStudent(targetStudent, updatedStudent);
+        model.updateFilteredStudentList(new TaskListNotEmptyPredicate());
+
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS,
                 taskToDelete.getTaskDescription(),
                 targetStudent.getName(),
                 taskToDelete.getTaskDeadline()),
-                UiState.DETAILS);
+                UiState.TASKS);
     }
 
     /**

@@ -22,7 +22,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_TASK_INDEX;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,7 +64,7 @@ public class UpdateTaskCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid task index
-        assertParseFailure(parser, NAME_DESC_AMY + INVALID_TASK_INDEX, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, NAME_DESC_AMY + INVALID_TASK_INDEX, MESSAGE_INVALID_TASK_INDEX);
 
         // invalid task description
         assertParseFailure(parser, NAME_DESC_AMY + TASK_INDEX_DESC + INVALID_TASK_DESC,

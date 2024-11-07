@@ -20,6 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicate.TaskListNotEmptyPredicate;
 import seedu.address.model.student.task.Task;
 import seedu.address.model.student.task.TaskDeadline;
 import seedu.address.model.student.task.TaskDescription;
@@ -97,9 +98,10 @@ public class UpdateTaskCommand extends Command {
                 .orElse(originalTask.getTaskDescription());
         TaskDeadline updatedTaskDeadline = updateTaskDescriptor.getTaskDeadline()
                 .orElse(originalTask.getTaskDeadline());
+        model.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
         return new CommandResult(String.format(MESSAGE_UPDATE_TASK_SUCCESS, updatedTaskDescription,
-                updatedStudent.getName(), updatedTaskDeadline), UiState.DETAILS);
+                updatedStudent.getName(), updatedTaskDeadline), UiState.TASKS);
     }
 
     /**

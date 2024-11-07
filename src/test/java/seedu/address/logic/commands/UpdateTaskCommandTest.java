@@ -14,8 +14,6 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -26,6 +24,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicate.TaskListNotEmptyPredicate;
 import seedu.address.model.student.task.Task;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.TaskBuilder;
@@ -64,7 +63,7 @@ public class UpdateTaskCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(targetStudent, updatedStudent);
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
     }
 
     @Test
@@ -88,8 +87,9 @@ public class UpdateTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(targetStudent, updatedStudent);
+        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
     }
 
     @Test
@@ -113,8 +113,9 @@ public class UpdateTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(targetStudent, updatedStudent);
+        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
     }
 
     @Test
@@ -139,8 +140,9 @@ public class UpdateTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
+        expectedModel.updateFilteredStudentList(new TaskListNotEmptyPredicate());
 
-        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+        assertCommandSuccess(updateTaskCommand, model, expectedMessage, UiState.TASKS, expectedModel);
     }
 
     @Test
