@@ -156,7 +156,8 @@ Format: `sort PARAMETER`
 * The only valid parameters are: name, address, priority, income, updated.
 * Only one parameter can be specified at any time.
 * The parameter is case-insensitive. e.g `sort name` works the same as `sort NAME`.
-* Whenever SocialBook is launched, the persons are auto-sorted in order of their priority from HIGH to LOW.
+* Whenever SocialBook is launched, persons are automatically sorted in order of their priority from HIGH to LOW. 
+  * Therefore, if the sorting order is changed, SocialBook should be kept open for as long as the new sorting order is required, as closing it and relaunching will mean that the persons are sorted once again in the above stated priority order. 
 * For name, the sorting is in alphabetical order.
 * For address, the sorting is in lexicographical order (similar to alphabetical order but also takes the special characters and numerical digits into account). 
   * Because numbers are considered "smaller" than letters in this ordering, sorting by address is perhaps best used after filtering the contact list by a region e.g. `find a/clementi` `sort address` will sort the contact list of those staying in Clementi in order of their address. 
