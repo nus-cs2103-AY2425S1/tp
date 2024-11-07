@@ -289,6 +289,11 @@ table-view .column-header .label {
     -fx-text-fill: white;
 }
 
-.scroll-bar {
-    -fx-pref-width: 1px;
+.result-display .scroll-bar {
+    -fx-pref-width: 8px; /* Hides the vertical scrollbar */
+    -fx-pref-height: 8px; /* Hides the horizontal scrollbar */
+}
+
+.overview-panel {
+    -fx-font-family: "PT Serif";
 }

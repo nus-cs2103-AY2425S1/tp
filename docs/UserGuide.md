@@ -83,7 +83,7 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
 1. **Check Java Installation**: Ensure you have **Java 17** or above installed on your computer.
     - [Check Java version on Windows](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line)
     - [Check Java version on Mac](https://www.wikihow.com/Check-Java-Version-on-a-Mac)
-    - If your computer does not have Java or its version is below Java 17, you may refer to: 
+    - If your computer does not have Java or its version is below Java 17, you may refer to:
       - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
       - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
     - <strong>[Note]</strong>: If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
@@ -122,7 +122,7 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
     - `exit` : Exits the app.
 
 8. **Explore Features**: Refer to the [Features](#features) section for detailed information on each command.
-   
+
 
 
 ---
@@ -524,7 +524,7 @@ If you encounter any issues or bugs while using TalentSG, you can easily report 
 
 2. **Copy the URL**:
     - Click the **Copy URL** button in the Report Bug window to copy the Google Form link to your clipboard.
-    - The message displayed will be:  
+    - The message displayed will be:
       _"Let us know the bug through this Google Form: https://forms.gle/cGnn2jZ2fdfhWc3q7"_
 
 3. **Access the Google Form**:

@@ -755,7 +755,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       prompts the recruiter to input a new person
     - 2c2. Recruiter inputs add command with new person details
     - 2c3. Steps 2c1-2c2 are repeated until the data entered is correct
-    
+
       Use case resumes at step 3.
 
 
