@@ -27,7 +27,7 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
       + [Clearing all entries : `clear`](#clearing-all-entries-clear)
       + [Exiting the program : `exit`](#exiting-the-program-exit)
    * [Key details for Users  ](#key-details-for-users)
-      + [`Lesson` Constraints](#lesson-constraints)
+      + [Lesson Constraints](#lesson-constraints)
       + [Saving the data](#saving-the-data)
       + [Editing the data file](#editing-the-data-file)
    * [Future Features](#future-features)
@@ -295,9 +295,9 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Key details for Users  
+## Key details
 
-### `Lesson` Constraints
+### Lesson Constraints
 
 Unfortunately, as of `V1.5` there are a few important constraints regarding lessons:  
 
@@ -306,8 +306,8 @@ Unfortunately, as of `V1.5` there are a few important constraints regarding less
 
 This means the following constraints apply:
 
-  1. Lesson start time must be before end time  
-  1. Lesson start and end time cannot be identical  
+  1. Lesson start time must be before end time (e.g. `1600-1500`)
+  1. Lesson start and end time cannot be identical (e.g. `1300-1300`)
   1. The latest lesson start time is `2358`
   1. The latest lesson end time is `2359`, `0000` is treated as the start of a new day
 
