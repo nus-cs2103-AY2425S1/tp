@@ -197,10 +197,11 @@ Format: `hire n/NAME j/JOB`
 * Changes the candidate's status to `Hired`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Hired` status.
-* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`.
-* Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`.
+
+<box type="tip">
+
+**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `hire n/Hans j/Software Engineer` and `hire n/hans j/SOFTWARE engineer` will mark the candidate as hired.
+</box>
 <br><br>
 
 ### Rejecting a candidate: `reject`
@@ -212,25 +213,27 @@ Format: `reject n/NAME j/JOB`
 * Changes the candidate's status to `Rejected`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Rejected` status.
-* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`.
-* Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`.
+
+<box type="tip">
+
+**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `reject n/Hans j/Software Engineer` and `reject n/hans j/SOFTWARE engineer` will mark the candidate as rejected.
+</box>
 <br><br>
 
 ### View a candidate's status: `view`
 
-Shows a candidate's status in HiredFiredPro.
+Shows a candidate's status and details in HiredFiredPro.
 
 Format: `view n/NAME j/JOB`
 
-* Views the candidate's status (Hired / Rejected / Pending).
+* Views the candidate's status (Hired / Rejected / Pending) and full details.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
-* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`.
-* Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`.
 * Details of the candidate being viewed will be displayed in the display panel.
+
+<box type="tip">
+
+**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `view n/Hans j/Software Engineer` and `view n/hans j/SOFTWARE engineer` will show the candidate's status and details.
+</box>
 
 Examples:
 * `view n/Alex Yeoh j/Software Engineer` displays the details of candidate Alex Yeoh in the display panel, as shown below:
