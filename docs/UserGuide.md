@@ -108,9 +108,7 @@ Underneath each suggested command is the syntax for that command and what parame
 | **Exit**       | `exit`                                                                                                                                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
-## Commands 
-
-<br><br>
+## Commands
 
 ### Viewing help : `help`
 
