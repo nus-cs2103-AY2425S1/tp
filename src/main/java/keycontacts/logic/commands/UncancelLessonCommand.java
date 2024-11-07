@@ -83,6 +83,7 @@ public class UncancelLessonCommand extends Command {
                             .findFirst().get().toDisplay()));
         }
 
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, cancelledLesson.getLessonDate().toDisplay(),
                 Messages.format(studentToUpdate)));
     }
