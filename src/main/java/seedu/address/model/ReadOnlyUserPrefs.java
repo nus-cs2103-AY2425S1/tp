@@ -26,8 +26,8 @@ public interface ReadOnlyUserPrefs {
     /**
      * Returns the user's sort preference
      *
-     * @return The sort preference as a {@code String}
+     * @return The sort preference as a {@code SortPreference}
      */
-    String getSortPreference();
+    SortPreference getSortPreference();
 
 }

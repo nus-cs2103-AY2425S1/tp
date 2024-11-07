@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyReminderAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.SortPreference;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Reminder;
 import seedu.address.testutil.PersonBuilder;
@@ -159,7 +160,7 @@ public class AddReminderCommandTest {
         }
 
         @Override
-        public void setSortPreference(String sortPreference) {
+        public void setSortPreference(SortPreference sortPreference) {
             throw new AssertionError("This method should not be called.");
         }
 

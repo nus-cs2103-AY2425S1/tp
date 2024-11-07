@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.SortPreference;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
@@ -190,7 +191,7 @@ public class ParserUtil {
      * Parses a {@code String description} into a {@code String trimmedDescription}
      * Leading and trailing whitespaces are trimmed
      *
-     * @throws ParseException if the give {@code String description} is invalid
+     * @throws ParseException if the given {@code String description} is invalid
      */
     public static String parseReminderDescription(String description) throws ParseException {
         requireNonNull(description);
@@ -199,5 +200,20 @@ public class ParserUtil {
             throw new ParseException(Reminder.MESSAGE_CONSTRAINTS_DESCRIPTION);
         }
         return trimmedDescription;
+    }
+
+    /**
+     * Parses a {@code String preference} into a {@code SortPreference}
+     * Leading and trailing whitespaces are trimmed
+     *
+     * @throws ParseException if the given {@code preference is invalid}
+     */
+    public static SortPreference parseSortPreference(String preference) throws ParseException {
+        requireNonNull(preference);
+        String trimmedPreference = preference.trim();
+        if (!SortPreference.isValidSortPreference(trimmedPreference)) {
+            throw new ParseException(SortPreference.MESSAGE_CONSTRAINTS);
+        }
+        return new SortPreference(trimmedPreference);
     }
 }

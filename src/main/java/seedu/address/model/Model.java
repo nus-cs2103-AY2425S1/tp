@@ -126,7 +126,7 @@ public interface Model {
      * Sets the user's sort preference to the given value
      * @param sortPreference The sort preference to set.
      */
-    void setSortPreference(String sortPreference);
+    void setSortPreference(SortPreference sortPreference);
 
     /**
      * Applies the saved sort preference (e.g., by priority or last seen date) from the user preferences

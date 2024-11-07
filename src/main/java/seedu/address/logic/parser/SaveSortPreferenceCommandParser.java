@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SaveSortPreferenceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.SortPreference;
 
 /**
  * Parses input arguments and creates a new {@code SaveSortPreference} object
@@ -13,21 +14,10 @@ public class SaveSortPreferenceCommandParser implements Parser<SaveSortPreferenc
     @Override
     public SaveSortPreferenceCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
-
-        String args = userInput.trim().toLowerCase();
-
-        switch (args) {
-        case "high":
-            return new SaveSortPreferenceCommand("high");
-        case "low":
-            return new SaveSortPreferenceCommand("low");
-        case "distant":
-            return new SaveSortPreferenceCommand("distant");
-        case "recent":
-            return new SaveSortPreferenceCommand("recent");
-        case "default":
-            return new SaveSortPreferenceCommand("default");
-        default:
+        try {
+            SortPreference sortPreference = ParserUtil.parseSortPreference(userInput.toLowerCase());
+            return new SaveSortPreferenceCommand(sortPreference);
+        } catch (ParseException e) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveSortPreferenceCommand.MESSAGE_USAGE));
         }

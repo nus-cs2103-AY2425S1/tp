@@ -180,7 +180,7 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs2 = new UserPrefs();
         differentUserPrefs2.setGuiSettings(userPrefs.getGuiSettings());
         differentUserPrefs2.setAddressBookFilePath(userPrefs.getAddressBookFilePath());
-        differentUserPrefs2.setSortPreference("recent");
+        differentUserPrefs2.setSortPreference(new SortPreference("recent"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs2, reminderAddressBook)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, reminderAddressBook)));
     }

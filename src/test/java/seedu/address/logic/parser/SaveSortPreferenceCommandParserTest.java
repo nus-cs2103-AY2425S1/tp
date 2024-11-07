@@ -7,49 +7,55 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SaveSortPreferenceCommand;
+import seedu.address.model.SortPreference;
 
 public class SaveSortPreferenceCommandParserTest {
+    private SortPreference high = new SortPreference("high");
+    private SortPreference low = new SortPreference("low");
+    private SortPreference recent = new SortPreference("recent");
+    private SortPreference distant = new SortPreference("distant");
+    private SortPreference standard = new SortPreference("default");
 
     private SaveSortPreferenceCommandParser parser = new SaveSortPreferenceCommandParser();
 
     @Test
     public void parse_high_returnsCommand() {
-        assertParseSuccess(parser, "high", new SaveSortPreferenceCommand("high"));
+        assertParseSuccess(parser, "high", new SaveSortPreferenceCommand(high));
     }
 
     @Test
     public void parse_highInvalid_returnsCommand() {
-        assertParseSuccess(parser, " high ", new SaveSortPreferenceCommand("high"));
+        assertParseSuccess(parser, " high ", new SaveSortPreferenceCommand(high));
     }
 
     @Test
     public void parse_low_returnsCommand() {
-        assertParseSuccess(parser, "low", new SaveSortPreferenceCommand("low"));
+        assertParseSuccess(parser, "low", new SaveSortPreferenceCommand(low));
     }
 
     @Test
     public void parse_lowInvalid_returnsCommand() {
-        assertParseSuccess(parser, " low ", new SaveSortPreferenceCommand("low"));
+        assertParseSuccess(parser, " low ", new SaveSortPreferenceCommand(low));
     }
 
     @Test
     public void parse_distant_returnsCommand() {
-        assertParseSuccess(parser, "distant", new SaveSortPreferenceCommand("distant"));
+        assertParseSuccess(parser, "distant", new SaveSortPreferenceCommand(distant));
     }
 
     @Test
     public void parse_distantInvalid_returnsCommand() {
-        assertParseSuccess(parser, " distant ", new SaveSortPreferenceCommand("distant"));
+        assertParseSuccess(parser, " distant ", new SaveSortPreferenceCommand(distant));
     }
 
     @Test
     public void parse_recent_returnsCommand() {
-        assertParseSuccess(parser, "recent", new SaveSortPreferenceCommand("recent"));
+        assertParseSuccess(parser, "recent", new SaveSortPreferenceCommand(recent));
     }
 
     @Test
     public void parse_recentInvalid_returnsCommand() {
-        assertParseSuccess(parser, " recent ", new SaveSortPreferenceCommand("recent"));
+        assertParseSuccess(parser, " recent ", new SaveSortPreferenceCommand(recent));
     }
 
     @Test

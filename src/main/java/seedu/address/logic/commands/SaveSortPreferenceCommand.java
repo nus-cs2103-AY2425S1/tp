@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.SortPreference;
 
 /**
  * Saves the sort preference to UserPrefs
@@ -17,16 +18,16 @@ public class SaveSortPreferenceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves your desired sorting preference as priority "
             + "or by last seen date based on the parameter.\n"
-            + "Parameters: high/low/recent/distant\n"
+            + "Parameters: high/low/recent/distant/default\n"
             + "Example: " + COMMAND_WORD + " high";
 
-    private final String sortPreference;
+    private final SortPreference sortPreference;
 
     /**
      * Creates a SaveSortPreferenceCommand to save the given {@code sortPreference}
      * @param sortPreference The {@code String} sortPreference that is being passed in
      */
-    public SaveSortPreferenceCommand(String sortPreference) {
+    public SaveSortPreferenceCommand(SortPreference sortPreference) {
         this.sortPreference = sortPreference;
     }
 
