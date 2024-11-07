@@ -115,8 +115,8 @@ public interface Model {
     Set<Tag> addTags(List<Tag> tags);
 
     /**
-     * Deletes a variable number of tags from the tag list.
-     * @param tag The tag to be deleted
+     * Deletes a tag from the tag list.
+     * @param tag The tag to be deleted.
      * @return true if the tag was successfully deleted, false if the tag does not exist.
      */
     boolean deleteTag(Tag tag);

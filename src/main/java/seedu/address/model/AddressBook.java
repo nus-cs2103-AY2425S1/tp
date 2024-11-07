@@ -118,11 +118,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param t The tag to be added.
      */
     public boolean addTag(Tag t) {
-        if (this.hasTag(t)) {
-            return false;
-        }
-        tags.addTag(t);
-        return true;
+        return tags.addTag(t);
     }
 
     /**
@@ -130,11 +126,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param t The tag to be deleted.
      */
     public boolean deleteTag(Tag t) {
-        if (!this.hasTag(t)) {
-            return false;
-        }
-        tags.deleteTag(t);
-        return true;
+        return tags.deleteTag(t);
     }
 
     /**

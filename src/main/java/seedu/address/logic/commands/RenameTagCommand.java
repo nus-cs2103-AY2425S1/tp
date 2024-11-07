@@ -24,6 +24,7 @@ public class RenameTagCommand extends UndoableCommand {
     private final String newTagName;
 
     /**
+     * Constructs a RenameTagCommand to rename the specified {@code tag}.
      * @param existingTag The tag to be renamed.
      * @param newTagName The new name of the tag, after renaming.
      */

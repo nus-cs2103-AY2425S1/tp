@@ -170,9 +170,10 @@ public class ModelManager implements Model {
         Set<Tag> tagsSuccessfullyAdded = new HashSet<>();
         for (Tag tag : tags) {
             boolean isSuccessful = addTag(tag);
-            if (isSuccessful) {
-                tagsSuccessfullyAdded.add(tag);
+            if (!isSuccessful) {
+                continue;
             }
+            tagsSuccessfullyAdded.add(tag);
         }
         return tagsSuccessfullyAdded;
     }
@@ -225,15 +226,16 @@ public class ModelManager implements Model {
         List<Person> persons = getFullPersonList();
         Set<Person> removedPersons = new HashSet<>();
         for (Person person : persons) {
-            if (person.hasTag(tag)) {
-                Set<Tag> newTags = new HashSet<>(person.getTags());
-                newTags.remove(tag);
-
-                Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                        person.getEmail(), person.getRsvpStatus(), newTags);
-                setPerson(person, updatedPerson);
-                removedPersons.add(updatedPerson);
+            if (!person.hasTag(tag)) {
+                continue;
             }
+            Set<Tag> newTags = new HashSet<>(person.getTags());
+            newTags.remove(tag);
+
+            Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getRsvpStatus(), newTags);
+            setPerson(person, updatedPerson);
+            removedPersons.add(updatedPerson);
         }
         return removedPersons;
     }
@@ -244,9 +246,10 @@ public class ModelManager implements Model {
         for (Person person : persons) {
             Set<Tag> tags = new HashSet<>(person.getTags());
             for (Tag tag : tags) {
-                if (tag.equals(existingTag)) {
-                    tag.setTagName(newTagName);
+                if (!tag.equals(existingTag)) {
+                    continue;
                 }
+                tag.setTagName(newTagName);
             }
             Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                     person.getRsvpStatus(), tags);
