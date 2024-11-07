@@ -304,7 +304,7 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 
 When working with commands in **AgentAssist**, it's important to understand **how the command format is structured**. Commands consist of specific components like **flags** and **arguments**, and some parts of the command can be **optional**.
 
-If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 4.1](#command-structure-overview) for more details on how flags, arguments, and placeholders work together.
+If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 4.1](#41-command-structure-overview) for more details on how flags, arguments, and placeholders work together.
 
 ### Command Syntax
 
