@@ -42,7 +42,12 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_NUMBER_OF_ARGS = "There should be at least one argument";
     public static final String MESSAGE_DUPLICATE_FIELDS =
-                "Multiple values specified for the following single-valued field(s): ";
+            "The following duplicate fields are detected and is not permitted: ";
+    public static final String MESSAGE_DUPLICATE_EXPLANATION =
+            "The above is considered duplicate fields because they have a preceding space.";
+    public static final String MESSAGE_DUPLICATE_SOLUTION =
+            "If you are trying to use the field values as part of a string, remove the preceding space";
+
     public static final String MESSAGE_MORE_THAN_FOUR_DUPLICATE_FIELDS =
             "There should not be more than four duplicate fields for group (g/)";
     public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";
@@ -66,7 +71,9 @@ public class Messages {
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
-        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
+        return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields)
+                + "\n" + MESSAGE_DUPLICATE_EXPLANATION
+                + "\n" + MESSAGE_DUPLICATE_SOLUTION;
     }
 
     /**
