@@ -24,8 +24,8 @@ public class MedCon implements Comparable<MedCon> {
     public MedCon(String medConName) {
         requireNonNull(medConName);
         checkArgument(!medConName.isEmpty(), MESSAGE_EMPTY_FIELD);
-        checkArgument(isValidLength(medConName), MESSAGE_CONSTRAINTS_LENGTH);
         checkArgument(isAlphanumeric(medConName), MESSAGE_CONSTRAINTS_ALPHANUMERIC);
+        checkArgument(isValidLength(medConName), MESSAGE_CONSTRAINTS_LENGTH);
         this.medConName = medConName.toUpperCase();
     }
 

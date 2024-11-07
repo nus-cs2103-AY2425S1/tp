@@ -210,10 +210,10 @@ public class ParserUtil {
         requireNonNull(medConStr);
         if (medConStr.isEmpty()) {
             throw new ParseException("Medical condition " + MESSAGE_EMPTY_FIELD);
-        } else if (medConStr.length() > 30) {
-            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_LENGTH);
         } else if (!medConStr.matches(MedCon.VALIDATION_REGEX)) {
             throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_ALPHANUMERIC);
+        } else if (medConStr.length() > 30) {
+            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_LENGTH);
         }
         return new MedCon(medConStr);
     }
