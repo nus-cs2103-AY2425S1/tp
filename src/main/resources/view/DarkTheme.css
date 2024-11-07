@@ -141,7 +141,7 @@
 
 .list-cell:filled:selected {
     -fx-border-width: 2px;
-    -fx-border-color: #ffd700;
+    -fx-border-color: #97681b;
     -fx-border-radius: 1em;
 }
 
