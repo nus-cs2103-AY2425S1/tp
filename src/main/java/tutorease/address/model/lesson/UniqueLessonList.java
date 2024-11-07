@@ -21,7 +21,7 @@ import tutorease.address.model.person.Student;
  * A lesson is considered unique by comparing using {@code Lesson#isOverlapping(Lesson)}. As such, adding and updating
  * of lessons uses Lesson#isOverlapping(Lesson) for equality so as to ensure that the lesson being added or updated is
  * unique in terms of overlapping with other lessons in the UniqueLessonList.
- * <p>
+ *
  * Supports a minimal set of list operations.
  *
  * @see Lesson#isOverlapping(Lesson)
@@ -64,7 +64,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * Removes the specified lesson from the list.
      *
      * @param lesson The lesson to be removed.
-     * @throws LessonNotInList If the lesson is not in the list
+     * @throws LessonNotInList If the lesson is not in the list.
      */
     public void remove(Lesson lesson) {
         requireNonNull(lesson);

@@ -3,7 +3,7 @@ package tutorease.address.model;
 import javafx.collections.ObservableList;
 import tutorease.address.model.lesson.Lesson;
 /**
- * Unmodifiable view of a lesson schedule
+ * Gives an unmodifiable view of a lesson schedule.
  */
 public interface ReadOnlyLessonSchedule {
 
