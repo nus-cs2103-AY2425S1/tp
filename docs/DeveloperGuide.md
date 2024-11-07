@@ -168,6 +168,15 @@ Person (Suppliers) will,
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Export 
+
+1. The export command modifies the userPref variable ```exportFilterGoods``` to true when called
+2. When the command is executed, ```LogicManager``` will check this variable
+3. If the variable is true, ```LogicManager``` will call ```saveFilteredGoods``` from the storage class
+4. Effectively creating/updating the ```filteredGoods.csv``` file
+5. ```LogicManager``` then sets ```exportFilterGoods``` to false
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
