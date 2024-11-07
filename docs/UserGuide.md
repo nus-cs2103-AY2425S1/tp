@@ -88,7 +88,7 @@ Action     | Format, Examples
 **Find by contact information**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
 **Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
 **Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
-**Categorize tag** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**Categorize tag** | `cattag t/TAG [t/MORE_TAGS…]​ CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
 **Undo action** | `undo`
 **Redo action** | `redo`
 **List**   | `list`

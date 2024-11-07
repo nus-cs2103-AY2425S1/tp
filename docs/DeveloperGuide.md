@@ -559,6 +559,22 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a tag
+1. Deleting a tag while all tags are being shown
+   1. Prerequisites: There are 2 person in the list. First person on the list has tag `CS2100`, second person has tags `floortball` and `friends`. 
+   1. Test case: `addtag 1 t/CS2040S`<br>
+      Expected: The first person now has 2 tags `CS2100` and `CS2040S`. The tag lists are updated accordingly.
+   1. Test case: `addtag 2 t/homie t/homie`
+      Expected: The second person now has 3 tags `floortball`, `friends` and `homie`. 
+   1. With the following test case:
+      1. `addtag 1 t/CS2040s`
+      1. Test case: `addtag 1 t/CS2030s t/CS2040S`
+      1. Test case: `addtag 0 t/volleyball` <br>
+      1. Test case: `addtag 3 t/homie` <br>
+      1. Test case: `addtag 2` <br>
+         Expected: No new tag added. Error details shown in the status message. All status bar remain the same.
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
