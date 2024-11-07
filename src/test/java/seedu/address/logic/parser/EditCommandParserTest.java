@@ -258,10 +258,13 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_emptyMonthPaidInput_failure() {
+    public void parse_emptyMonthPaidInput_success() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " m/";
 
-        assertParseFailure(parser, userInput, MonthPaid.MESSAGE_CONSTRAINTS);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withMonthsPaid("").build();
+        EditCommand expectedCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
 
