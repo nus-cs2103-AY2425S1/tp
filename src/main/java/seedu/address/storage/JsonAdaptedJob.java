@@ -66,7 +66,6 @@ class JsonAdaptedJob {
      */
     public Job toModelType() throws IllegalValueException {
 
-        // TODO: Input validation
         Name modelName = new Name(name);
 
         List<Tag> jobRequirements = new ArrayList<>();
