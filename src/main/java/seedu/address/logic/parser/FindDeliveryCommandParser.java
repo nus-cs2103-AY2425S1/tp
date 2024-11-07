@@ -12,7 +12,6 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindDeliveryCommand;
-import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;

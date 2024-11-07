@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindDeliveryCommand;
-import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
@@ -89,7 +88,7 @@ public class FindDeliveryCommandParserTest {
     public void parse_invalidStatusFilter_throwsParseException() {
         String userInput = " " + PREFIX_STATUS + "INVALID";
         assertParseFailure(
-                parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkSupplierCommand.MESSAGE_USAGE));
+                parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDeliveryCommand.MESSAGE_USAGE));
     }
 
     @Test
