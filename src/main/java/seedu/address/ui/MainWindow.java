@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -26,6 +27,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private boolean isVisualsEnabled = true;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -54,6 +56,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personDetailedViewPlaceholder;
+
+    @FXML
+    private CheckMenuItem toggleVisualsItem;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -115,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this, isVisualsEnabled);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -172,6 +177,24 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Handles the action when the "Enable Visuals" menu item is toggled.
+     */
+    @FXML
+    private void handleToggleVisuals() {
+        isVisualsEnabled = toggleVisualsItem.isSelected();
+        refreshPersonList();
+    }
+
+    /**
+     * Refreshes the Person List Panel to apply the latest visuals toggle setting.
+     */
+    private void refreshPersonList() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this, isVisualsEnabled);
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     public PersonListPanel getPersonListPanel() {
