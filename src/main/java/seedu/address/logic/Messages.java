@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Person;
 
 /**
@@ -53,8 +54,13 @@ public class Messages {
         if (person.getTag() != null) {
             builder.append("; Tag: ").append(person.getTag());
         }
-        builder.append("; Allergies: ");
-        person.getAllergies().forEach(builder::append);
+
+        String allergiesString = person.getAllergies()
+                .stream()
+                .map(Allergy::toString)
+                .collect(Collectors.joining(", "));
+        allergiesString = "[" + allergiesString + "]";
+        builder.append("; Allergies: ").append(allergiesString);
         return builder.toString();
     }
 }
