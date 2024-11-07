@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteSchemeCommand;
-import seedu.address.logic.commands.SchemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
@@ -28,11 +27,11 @@ public class DeleteSchemeCommandParser implements Parser<DeleteSchemeCommand> {
         try {
             personIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SchemeCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSchemeCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(CliSyntax.PREFIX_INDEX).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SchemeCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSchemeCommand.MESSAGE_USAGE));
         }
 
         String indexes = argMultimap.getValue(CliSyntax.PREFIX_INDEX).get();
@@ -43,7 +42,7 @@ public class DeleteSchemeCommandParser implements Parser<DeleteSchemeCommand> {
                 schemeIndex.add(ParserUtil.parseIndex(index));
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SchemeCommand.MESSAGE_USAGE), pe);
+                        DeleteSchemeCommand.MESSAGE_USAGE), pe);
             }
         }
         return new DeleteSchemeCommand(personIndex, schemeIndex);
