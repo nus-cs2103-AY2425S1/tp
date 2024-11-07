@@ -266,42 +266,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TeleTutors App` and the **Actor** is the `tutor`, unless specified otherwise)
 
-**Use case: Add a new Task**
+**Use case: Grading an assignment (for one student)**
+
+**Actor: Tutor, Student**
 
 **MSS**
 
-1.  Tutor requests to add a new task.
-2.  Teletutors App prompts for the task details.
-3.  Tutor provides the required task details.
-4.  Teletutors App confirms the task has been successfully added.
+1.  Tutor requests to add a new assignment for the specified student upon release of the assignment.
+2.  Teletutors App confirms the assignment has been successfully added and displays the newly added assignment.
+3.  Student completes and submits the assignment.
+4.  Tutor requests to mark the assignment's submission status as submitted.
+5.  Teletutors App confirms the assignment has been successfully marked as submitted and displays the assignment as submitted.
+6.  Tutor requests to give the assignment a grade.
+7.  Teletutors App confirms the assignment has been successfully graded and displays the grade for the assignment.
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. Specified student does not exist.
+    * 1a1. Teletutors App informs the tutor that the student cannot be found.
+    * 1a2. Tutor adds the student if the student has not been added yet or enters the student name again if he misspelled it before.
+
+    Use case resumes from step 2.
+
+* 1b. There are multiple students specified by the same name.
+    * 1b1. Teletutors App prompts the tutor for a student number to uniquely identify the student.
+    * 1b2. Tutor enters the student number for the student he wants to add the assignment for.
+
+    Use case resumes from step 2.
+
+* 1c. Tutor enters an invalid deadline for the assignment.
+    * 1c1. Teletutors App prompts the user to enter a valid deadline.
+    * 1c2. Tutor re-enters a valid date for the deadline or uses the correct format if he typed it in the wrong format previously.
+  
+    Use case resumes from step 2.
+
+**Use case: Mark attendance for a class that most students attended**
+
+**MSS**
+
+1.  Tutor requests to mark everyone as present for a selected tutorial session.
+2.  Teletutors App confirms everyone in that tutorial group has been marked present for that session.
+3.  Tutor requests to mark a specific student who did not attend the session as absent.
+4.  Teletutors App updates the attendance record and confirms the action.
+    Step 3-4 is repeated for each student who did not show up until they have all been marked absent.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. Tutor enters an invalid deadline
-    * 3a1. Teletutors App displays an error message: `Invalid date format. Please use 'YYYY-MM-DD'.`
-    * 3a2. Tutor re-enters the correct date.
+* 1a. Specified tutorial group does not exist.
+    * 1a1. Teletutors App informs tutor that the tutorial group cannot be found.
+    * 1a2. Tutor enters the correct tutorial group if he misspelled it originally or adds students in that tutorial group if it was empty previously and reenters the request.
 
-      Use case resumes from Step 4.
+    Use case resumes from step 2.
 
-**Use case: Mark student Attendance**
+* 3a. Specified student does not exist.
+    * 3a1. Teletutors App informs the tutor that the student cannot be found.
+    * 3a2. Tutor adds the student if the student has not been added yet or enters the student name again if he misspelled it before.
 
-**MSS**
-1. Tutor requests to mark attendance for a student in a selected tutorial session.
+    Use case resumes from step 4.
 
-2. Teletutors App displays the list of students for the session.
+* 3b. There are multiple students specified by the same name.
+    * 3b1. Teletutors App prompts the tutor for a student number to uniquely identify the student.
+    * 3b2. Tutor enters the student number for the student he wants to mark absent.
 
-3. Tutor selects the student and specifies whether they are present or absent.
-
-4. Teletutors App updates the attendance record and confirms the action.
-
-   Use Case Ends.
-
-**Extensions**
-* 3a. Student is not found in the session list
-    * 3a1. Teletutors App displays an default placeholder message: `No students found.`
-      Use case resumes from Step 2
+    Use case resumes from step 4.
 
 **Use case: Add student details**
 
