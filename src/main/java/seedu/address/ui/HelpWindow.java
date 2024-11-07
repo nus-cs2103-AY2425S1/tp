@@ -142,7 +142,8 @@ public class HelpWindow extends UiPart<Stage> {
                 + "3. findtask\n"
                 + "4. listtask\n"
                 + "5. marktask\n"
-                + "6. listincomplete\n";
+                + "6. unmarktask\n"
+                + "7. listincomplete\n";
     }
 
     /**

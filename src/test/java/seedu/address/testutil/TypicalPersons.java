@@ -78,8 +78,6 @@ public class TypicalPersons {
             .withPriorityLevel(VALID_PRIORITY_LEVEL)
             .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-
     private TypicalPersons() {} // prevents instantiation
 
     /**
