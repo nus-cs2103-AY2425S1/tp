@@ -151,7 +151,7 @@ public class RemovePersonFromEventCommandTest {
                 Index.fromOneBased(1), INDEX_FIRST_PERSON);
         model.updateFilteredPersonList(p -> p.getName().fullName.contains("Alice"));
 
-        // filtered list should have length
+        // filtered list should have length 1 (only alice)
         assertEquals(model.getFilteredPersonList().size(), 1);
         try {
             removePersonFromEventCommand.execute(model, eventManager);
@@ -164,6 +164,8 @@ public class RemovePersonFromEventCommandTest {
         //check no. of people in ART_EXHIBITION
         Event artExhibition = eventManager.getEventList().get(1);
         assertEquals(6, artExhibition.getAllPersons().size());
+        //check that displayed list is the same
+        assertEquals(model.getFilteredPersonList().size(), 1);
     }
 
     @Test
