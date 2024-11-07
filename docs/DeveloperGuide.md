@@ -674,7 +674,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. **Data Persistence**: The application should ensure that data **persists** after the user closes the application.
 7. **Data Integrity**: Upon reopening the application, the **loaded data** should be identical to the **last saved state** and should not be volatile.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -771,9 +770,8 @@ testers are expected to do more *exploratory* testing.
 
 ### Clearing all internship applications
 1. Clear all internship applications
+    1. Prerequisites: Ensure that the list is not empty. 
 
-    1. Prerequisites: Ensure that the list is not empty. Reduce the view size of list by executing an arbitrary '\find' command. e.g. `\find a`.
-   
     2. Test case: `/clear`<br>
        Expected: A success message stating that HireMe has been cleared.
    
@@ -832,7 +830,7 @@ testers are expected to do more *exploratory* testing.
 
 ### List
 1. List all internship applications
-    1. Prerequisites: Ensure that the list is not empty. Reduce the view size of list by executing an arbitrary '\find' command. e.g. `\find a`.
+    1. Prerequisites: Ensure that the list is not empty. 
    
     2. Test case: `/list`<br>
        Expected: The list should display all internship applications.
@@ -840,22 +838,20 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `/list x`<br>
        Expected: An error message stating the valid use of the `/list` command.
 
-### Deleting an internship application
 
+### Deleting an internship application
 1. Deleting an internship application while all internship applications are being shown
 
    1. Prerequisites: List all internship applications using the `/list` command. Multiple internship applications in the list.
 
    1. Test case: `/delete 1`<br>
-      Expected: First application is deleted from the list. Details of the deleted application shown in the status message. Timestamp in the status bar is updated.
+      Expected: First application is deleted from the list. Details of the deleted application shown.
 
    1. Test case: `/delete 0`<br>
-      Expected: No internship application is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No internship application is deleted. An error message indicating that the index is invalid.
 
-   1. Other incorrect delete commands to try: `/delete`, `/delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
+   1. Other incorrect delete commands to try: `/delete`, `/delete x`, `...`, `/delete a` (where x is larger than the list size)<br>
+      Expected: An error message should be shown which explains how to use the delete command and what parameters are valid.
 
 
 ### Sorting the list of internship applications
@@ -940,9 +936,6 @@ testers are expected to do more *exploratory* testing.
    
     2. Test case: `/reject 1`<br>
        Expected: The status of the 1st application (e.g., "Google") is updated to `REJECTED`.
-   
-    3. Test case: `/reject 0`<br>
-       Expected: An error message indicating that the index is invalid.
 
 ### Chart Window
 1. Open chart window
@@ -990,16 +983,17 @@ testers are expected to do more *exploratory* testing.
 
 2. Filter with a valid status in mixed case
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application with `PENDING` status.
-   
+       Expected: The list of internship applications remains empty.
+    
    2. Test case `/filter Pending`<br>
       Expected: The list of internship applications should only display entries with `PENDING` status.
 
 3. Filter an empty list
     1. Prerequisites: Clear all internship applications using the `/clear` command.
-   
+
     2. Test case `/filter PENDING`<br>
        Expected: The list of internship applications remains empty.
-
+       
 4. Filter with an invalid status
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that the list is not empty.
    
@@ -1012,23 +1006,18 @@ testers are expected to do more *exploratory* testing.
    2. Test case `/filter`<br>
       Expected: An error message indicating that the status is invalid.
 
-
-[//]: # (Delete section here)
-
-
 ### Saving data
+1. **Auto saves file**
+    1. Prerequisites: List all internship applications using the `/list` command. Ensure that the list is not empty.
+   2. Test case: `/exit` and open the HireMe application again
+      Expected: The list of internship applications previously saved are displayed
 
-1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
-### Shutdown
-1. Shutdown via Window's close button
-   1. Close the window by clicking on the Window's close button.<br>
+### Exit HireMe Application
+1. Exit via Window's close button
+   1. Test case: Close the window by clicking on the Window's close button.<br>
    Expected: The window should close.
 
-2. Shutdown via Command Line
-   1. Type `/exit` to close the window.<br>
+2. Exit via exit command 
+   1. Test case: `/exit` to close the window.<br>
    Expected: The window should close.

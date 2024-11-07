@@ -94,7 +94,7 @@ Format: `/help`
 
 ### Adding an internship application: `/add`
 
-Adds your internship application to HireMe.
+Adds your internship application to HireMe with required details such as company's name, internship role, email and date of application.
 
 Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 
