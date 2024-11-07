@@ -161,6 +161,9 @@ Adds a person to the ConcertPhonebook.
 
 Format: `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
 
+- `ROLE` Roles that can be assigned are: STAGE_MANAGER, SOUND_TECHNICIAN, ORGANISER,
+  ARTIST, PROMOTER, VENUE, SECURITY, LOGISTICS, MEDIA. 
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
