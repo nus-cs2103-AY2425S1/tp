@@ -151,7 +151,6 @@ Before continuing, here are some important information you need to know about th
 | **List**     | `list`                                                                                                                                                                            |
 | **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                            |
 | **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
-| **View**     | `view INDEX`                                                                                                                                                                      |
 
 [back to top](#internbuddy-user-guide)
 
@@ -403,18 +402,6 @@ The index refers to the index number shown in the displayed company list. The in
 
 **tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
 </box>
-
---------------------------------------------------------------------------------------------------------------------
-
-### Viewing application details of a company: 'view'
-
-Displays the details of all applications of a specific company.
-
-Format: `view INDEX`
-
-* Displays only the company at INDEX. The index **must be a positive integer** 1, 2, 3, …​
-
-![view_command](images/viewCommand.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
