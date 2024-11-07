@@ -205,9 +205,7 @@ Examples:
     * Home address: John street, block 123, #01-01
     * Client birthday: 2000-12-12
     * Client next appointment: 2024-12-12 12:00
-    ```
-    add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00
-    ```
+    `add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
 
 * The command below adds a new client to the client list with the following information:
     * Client name: Betsy Crowe
@@ -216,9 +214,7 @@ Examples:
     * Home address: Newgate Prison
     * Client birthday: 2001-10-10
     * Client next appointment: 2024-12-01 09:00
-    ```
-    add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00
-    ```
+    `add n/Betsy Crowe e/betsycrowe@example.com addr/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
     ![result for 'find alex david'](images/addUI.png)
 
 ---
@@ -263,9 +259,7 @@ Format: `list`
 Edits an existing client in the address book.
 
 Format: 
-`
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAY_DATE amt/AMOUNT]…​
-`
+`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAY_DATE amt/AMOUNT]…​`
 
 - **Parameters**:
 
