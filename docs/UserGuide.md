@@ -17,7 +17,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
    1. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
    1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
    1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign)
-   1. [Unassigning a volunteer from an event](#removing-a-volunteer-from-an-event-unassign)
+   1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign)
 1. [Event-related Commands](#event-related-commands)
    1. [Adding an event](#adding-an-event-e-new)
    1. [Finding events by name](#finding-events-by-name--e-find)
@@ -27,8 +27,8 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 
 ## Other Resources
 1. [FAQ](#faq)
-1. [Known Issues](#known-issues-1)
-1. [Saving the data](#saving-the-data-1)
+1. [Known Issues](#known-issues)
+1. [Saving the data](#saving-the-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -147,8 +147,6 @@ Format: `list`
 
 <div style="page-break-after: always;"></div>
 
-[[Back to top]](#learn-about-commands-supported-by-volunsync)
-
 ### Export database to a CSV file : `export`
 
 Exports all records within the database to a Comma Separated Value (.csv) file. This allows you to print the records or transfer the data to another computer for external use. Note that the **import function is not yet implemented**, so exported files cannot be directly re-imported into VolunSync at this time.
@@ -159,7 +157,7 @@ Format : `export`
     - `events.csv` — Contains all event records.
     - `volunteers.csv` — Contains all volunteer records.
 
-[[Back to top]](#learn-about-commands-supported-by-volunsync)
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 ### Exiting the program : `exit`
 
@@ -193,7 +191,7 @@ Running the command successfully, you should see:
 ### Finding volunteers by name : `/v find`
 
 Find volunteers whose name contains the given keyword.<br/>
-After using the command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers.
+If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
 
 Format: `/v find KEYWORD`
 
@@ -201,18 +199,16 @@ Format: `/v find KEYWORD`
 * Only the name is searched
 * The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
     * e.g. `Joe` will match `Joelle`, `Enjoeline` and `Joe`
-
+ 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
-</div>
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
 
 Examples:
 * `/v find Anne` returns `Anne Khoo`, `Annebette Tan` and `Jonanne Tan`
 
 ![Finding Volunteers](images/commandDemo/FindVolunteerDemo.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**
-you can use `list` command to show all volunteers and events again!</div>
+
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -279,12 +275,14 @@ Examples:
 ### Listing all events a volunteer is participating in: `/v view`
 
 Displays all events the volunteer at the specified `INDEX` under the `Volunteers` display is participating in.<br/>
-After using the command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all events.
 
 Format: `/e view EVENT_INDEX`
 
 * The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
 
 Examples:
 * `/e view 1` displayes the volunteers participating in the first event in the event list.
@@ -313,8 +311,8 @@ Examples:
 
 ### Finding events by name : `/e find`
 
-Find events with names containing the given keyword.
-After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all events.
+Find events with names containing the given keyword.<br>
+If there are no volunteers whose names match the keyword in the database, the entire list of volunteers will be displayed.
 
 Format: `/e find KEYWORD`
 
@@ -323,11 +321,11 @@ Format: `/e find KEYWORD`
 * The searching algorithm returns events with any part of their name matching the `KEYWORD`
     * e.g. `Group` will match `Group Project`, `Grouping Task` and `Group`.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
+
 Examples:
 * `/v find beach` returns `Beach Cleanup` and `beach clean2`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Note:**
-you can use `list` command to show all volunteers and events again!</div>
 
 ![Finding Events](images/commandDemo/FindEventDemo.png)
 
@@ -361,12 +359,14 @@ Examples:
 ### Listing all volunteers participating in an event: `/e view`
 
 Displays all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.<br/>
-After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers.
 
 Format: `/e view EVENT_INDEX`
 
 * The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+you can use <a href="#listing-all-volunteers-and-events--list">`list`</a> command to show all volunteers and events again!</div>
 
 Examples:
 * `/e view 1` displayes the volunteers participating in the first event in the event list.
