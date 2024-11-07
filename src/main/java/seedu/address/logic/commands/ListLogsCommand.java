@@ -53,6 +53,10 @@ public class ListLogsCommand extends Command {
             }
         }
 
+        if (personIndex == -1 || person == null) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, identityNumber));
+        }
+
         return new CommandResult(String.format(MESSAGE_LIST_LOG_SUCCESS,
                 person.getName(), identityNumber),
                 false, false, false, true, personIndex, false, null, null, null);
