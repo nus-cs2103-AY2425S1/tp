@@ -27,8 +27,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
-import seedu.address.model.wedding.Wedding;
-import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
