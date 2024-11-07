@@ -22,7 +22,7 @@ public class FindTimeCommand extends Command {
             + "overlap with the specified time ranges "
             + "and displays them as a list with index numbers.\n"
             + "Tips: RANGE has format HHmm, same ending time as starting time is allowed.\n"
-            + "Parameters: RANGE [MORE_RANGES]...\n"
+            + "Parameters: TIME-TIME [TIME-TIME]...\n"
             + "Example: " + COMMAND_WORD + " 1100-1230 2130-2245";
     private static final boolean IS_UNDOABLE = true;
 
