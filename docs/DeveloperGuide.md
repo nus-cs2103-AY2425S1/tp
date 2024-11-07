@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+EduConnect was developed based on the project codebase of Address Book 3 (AB3). This project builds upon the foundational architecture and core functionalities established in AB3, while introducing new features and customizations tailored for managing student and teacher data.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -511,16 +511,30 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
+   2. Type `cd` followed by the folder location where you saved the EduConnect file.
+   3. Type and enter the command `java -jar educonnect.jar`
+   
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by following the instructions from 1ii onwards.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a Student
+1. Adding a Student
+    1. Prerequisities: There is no existing person (student or teacher) in EduConnect with the same contact or email as the student we're adding.
+    1. Test case: `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321`
+   
+        **Expected**: A student is added to EduConnect with the specified details. A new blue colored card is added to the GUI with the student's details.
+   2. Test case: `student` (missing required fields like name, contact, etc. )
+   
+        **Expected**: No student is added. An error is thrown indicating the command given has an invalid format.
+   3. Other incorrect `student` commands to try:
+   4. 
 
 ### Deleting a person
 
