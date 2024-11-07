@@ -3,26 +3,36 @@ layout: page
 title: User Guide
 ---
 
-MedDict is a _desktop application designed for physiotherapists_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application supports a streamlined process for tracking medical history, patient appointments, and treatment progress.
+### Welcome to the MedDict User Guide! 
+
+MedDict is a _desktop application designed for medical staff_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application is designed with large databases in mind, supporting a streamlined process for tracking medical history, patient appointments, and treatment progress.
+
+Unlike most other applications who predominantly function on a Graphical User Interface (GUI) where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a Command Line Interface (CLI) -- where all features and utility can be achieved via typed-in commands -- would be far more efficeint.
+
+With all that said, let's get you started on your journey towards a new peak level of efficiency!
+
+If you would like to skip to any specific part of the User Guide, you can refer to the table below! 😊
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
+
+This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-detailed) or scroll past this section.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your MedDict.
+3. Copy the file to the folder you want to use as the _home folder_ for your MedDict.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -35,20 +45,20 @@ MedDict is a _desktop application designed for physiotherapists_ who manage a la
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start (detailed)
+## Quick Start (beginner-friendly, detailed)
 
 1. **Make sure Java 17 or higher is installed on your computer.**
 
-   * To Check if Java is Installed:
+    * To Check if Java is Installed:
 
         1. Open your terminal:
-            - Windows: Press `Windows + R`, type `cmd`, and press Enter.
-            - Mac: Press `Command + Space`, type `Terminal`, and press Enter.
-            - Linux: Press `Ctrl + Alt + T`, or look for "Terminal" in your applications menu.
+            - **Windows**: Press `Windows + R`, type `cmd`, and press Enter.
+            - **Mac**: Press `Command + Space`, type `Terminal`, and press Enter.
+            - **Linux**: Press `Ctrl + Alt + T`, or look for "Terminal" in your applications menu.
 
         2. In the terminal, enter the following command and press Enter:
 
@@ -64,77 +74,91 @@ MedDict is a _desktop application designed for physiotherapists_ who manage a la
 
         4. If the version is below 17, continue with the next steps to install Java.
 
-   * To Install Java 17 (if Needed):
-
+    * To Install Java 17 (if Needed):
         1. Visit [Oracle’s Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
         2. Download and install the correct Java Development Kit (JDK) for your operating system by following the on-screen instructions.
         3. Once installed, run the `java -version` command again to confirm that Java is installed correctly.
 
-
 <br><br>
+
 2. **Download the latest `.jar` file as follows:**
 
     1. Go to the [GitHub releases page](https://github.com/) for the latest version.
-    1. Download the `.jar` file (for example, `MedDict.jar`) from the latest release.
+    2. Download the `.jar` file (for example, `MedDict.jar`) from the latest release.
     3. Save the `.jar` file in the folder where you want to keep your MedDict project.
 
 <br><br>
+
 3. **Copy the `.jar` file to the folder you want to use as the home folder for MedDict.**
 
-    * Windows:
-      1. Open the Downloads folder and locate the `.jar` file. 
-      2. Right-click on the `.jar` file and select Copy. 
-      3. Go to the folder where you want to store MedDict, right-click, and select Paste.
+    * **Windows:**
+        1. Open the Downloads folder and locate the `.jar` file.
+        2. Right-click on the `.jar` file and select Copy.
+        3. Go to the folder where you want to store MedDict, right-click, and select Paste.
 
-    * Mac
-      1. Open Finder and navigate to your Downloads folder.
-      2. Right-click (or use `Control + Click`) on the `.jar` file and choose Copy.
-      3. Go to the folder where you want to keep the file, right-click, and select Paste.
+    * **Mac:**
+        1. Open Finder and navigate to your Downloads folder.
+        2. Right-click (or use `Control + Click`) on the `.jar` file and choose Copy.
+        3. Go to the folder where you want to keep the file, right-click, and select Paste.
 
-    * Linux:
-      1. Open your file manager and go to the Downloads directory.
-      2. Right-click on the `.jar` file and choose Copy.
-      3. Go to the destination folder, right-click, and select Paste.
+    * **Linux:**
+        1. Open your file manager and go to the Downloads directory.
+        2. Right-click on the `.jar` file and choose Copy.
+        3. Go to the destination folder, right-click, and select Paste.
 
 <br><br>
+
 4. **Open a command terminal, navigate to the folder where the `.jar` file is saved using the `cd` command, and then run the application with the following command.**
 
-   * Windows:
-     1. Open the folder where the `.jar` file is saved.
-     2. To get the full path of this folder:
-        1. Right-click on the folder and select Properties.
-        2. In the General tab, locate the Location field and copy the path. (Alternatively, open the folder, click on the address bar, and copy the full path, e.g., `C:\Users\YourName\Documents\MedDict`). 
-     3. Open the Command Prompt:
-           1. Press `Windows + R`, type `cmd`, and press Enter.
-        2. Use the `cd` command and paste the copied path to navigate to the folder where the `.jar` file is saved. For example:
+    * **Windows:**
+        1. Open the folder where the `.jar` file is saved.
+        2. To get the full path of this folder:
+            - Right-click on the folder and select Properties.
+            - In the General tab, locate the Location field and copy the path. (Alternatively, open the folder, click on the address bar, and copy the full path, e.g., `C:\Users\YourName\Documents\MedDict`).
+        3. Open the Command Prompt:
+            - Press `Windows + R`, type `cmd`, and press Enter.
+            - Use the `cd` command and paste the copied path to navigate to the folder where the `.jar` file is saved. For example:
 
-          ```bash
-          cd C:\Users\YourName\Documents\MedDict
-          ```
+               ```bash
+               cd C:\Users\YourName\Documents\MedDict
+               ```
 
-     4. Run the application with:
+        4. Run the application according to the name of the jar file downloaded:
 
-          ```bash
-          java -jar MedDict.jar
-          ```
+           ```bash
+           java -jar MedDict.jar
+           ```
 
-    * Mac/Linux:
-      1. Open the Terminal by searching for it or by pressing `Ctrl + Alt + T`.
-      2. To get the full path of the folder where the `.jar` file is located:
-         1. Open Finder (Mac) or File Explorer (Linux).
-         2. Navigate to the folder where you saved the `.jar` file.
-         3. Right-click on the folder and choose Get Info (Mac) or Properties (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy it.
-      3. Use the `cd` command and paste the copied path to go to the folder where the `.jar` file is saved. For example:
+           Note: For example, if the name of the jar file is `meddict-v1.6.jar`, type the following instead:
 
-          ```bash
-          cd /Users/YourName/Documents/MedDict
-          ```
+           ```bash
+           java -jar meddict-v1.6.jar
+           ```
 
-      4. Run the application with:
+    * **Mac/Linux:**
+        1. Open the Terminal by searching for it or by pressing `Ctrl + Alt + T`.
+        2. To get the full path of the folder where the `.jar` file is located:
+            - Open Finder (Mac) or File Explorer (Linux).
+            - Navigate to the folder where you saved the `.jar` file.
+            - Right-click on the folder and choose Get Info (Mac) or Properties (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy it.
+        3. Use the `cd` command and paste the copied path to go to the folder where the `.jar` file is saved. For example:
 
-          ```bash
-          java -jar MedDict.jar
-          ```
+           ```bash
+           cd /Users/YourName/Documents/MedDict
+           ```
+
+        4. Run the application according to the name of the jar file downloaded:
+
+           ```bash
+           java -jar MedDict.jar
+           ```
+           
+           Note: For example, if the name of the jar file is `meddict-v1.6.jar`, type the following instead:
+
+           ```bash
+           java -jar meddict-v1.6.jar
+           ```
+
 
 After a few seconds, a GUI similar to the one below should appear:
 ![StartUpPage](images/StartUpPage.png)
@@ -153,7 +177,30 @@ After a few seconds, a GUI similar to the one below should appear:
     * `exit` : Exits the app.
 
 <br><br>
-6. **Refer to the [Features](#features) below for details of each command.**
+
+6. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -479,9 +526,14 @@ _Details coming soon ..._
 
 ## FAQ
 
+**Q**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
+**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start)!
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
+**A**: No worries, you can easily transfer your data! Go to where the MedDict .jar file is currently located in and find the data folder. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. Afterwards, after downloading the new release or version of MedDict, run it once (you can refer to the [Quick Start Guide](#quick-start) if needed), then exit or close the application. Next, go to where the new MedDict .jar file is located in, replace the new addressbook.json file in the data folder with the previous addressbook.json file that you have copied or saved. Alternatively, you can use a text editor of your choice to edit the addressbook.json file, then copy paste all the content from the old addressbook.json file to the new one.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues

@@ -10,3 +10,19 @@
     height: 21px;
     width: 21px
 }
+
+.logo-site-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-site-logo img {
+  height: 50px; /* Adjust the logo size as needed */
+}
+
+.logo-site-title {
+  font-size: 2em;
+  margin: 0;
+}
+
