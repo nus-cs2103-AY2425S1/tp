@@ -88,14 +88,8 @@ public class SortCommand extends Command {
     }
 
     private int sortOrderComparator(Person p1, Person p2) {
-        Optional<Tag> p1Tag = p1.getTags()
-                .stream()
-                .filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
-                .findFirst();
-        Optional<Tag> p2Tag = p2.getTags()
-                .stream()
-                .filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
-                .findFirst();
+        Optional<Tag> p1Tag = getTagByName(p1);
+        Optional<Tag> p2Tag = getTagByName(p2);
 
         int compareResult = 0;
 
@@ -133,6 +127,12 @@ public class SortCommand extends Command {
         }
 
         return determineComparisonOrder(compareResult, sortOrder.equalsIgnoreCase(ASCENDING_KEYWORD));
+    }
+
+    private Optional<Tag> getTagByName(Person person) {
+        return person.getTags().stream()
+                .filter(tag -> tag.tagName.equalsIgnoreCase(tagName))
+                .findFirst();
     }
 
     private int determineComparisonOrder(int compareResult, boolean isAscending) {
