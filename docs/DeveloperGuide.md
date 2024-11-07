@@ -6,26 +6,41 @@
 
 # EduManage Developer Guide
 
-<!-- * Table of Contents -->
+## Table of Contents
 
+[1. Acknowledgements](#1-acknowledgements)
+
+[2. Setting up, getting started](#2-setting-up-getting-started)
+
+[3. Design](#3-design)
+* [3.1 Architecture](#3-1-architecture)
+* [3.2 UI Component](#3-2-ui-component)
+* [3.3 Logic Component](#3-3-logic-component)
+* [3.4 Model Component](#3-4-model-component)
+* [3.5 Storage Component](#3-5-storage-component)
+* [3.6 Common Classes](#3-6-common-classes)
+
+[4. FAQ](#4-faq)
+
+[5. Known Issues](#5-known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## 1. Acknowledgements
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## 2. Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## 3. Design
 
-### Architecture
+### 3.1 Architecture
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
@@ -67,7 +82,7 @@ The sections below give more details of each component.
 
 ***
 
-### UI component
+### 3.2 UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -86,7 +101,7 @@ The `UI` component,
 
 ***
 
-### Logic component
+### 3.3 Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -121,7 +136,7 @@ How the parsing works:
 
 ***
 
-### Model component
+### 3.4 Model Component
 
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -144,7 +159,7 @@ The `Model` component,
 
 ***
 
-### Storage component
+### 3.5 Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -157,23 +172,22 @@ The `Storage` component,
 
 ***
 
-### Common classes
+### 3.6 Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Implementation
+## 4. Implementation
 
 This section describes some noteworthy details on how certain features and parameters are implemented. For all examples
 below, the user is the tuition teacher, unless specified otherwise.
 
-### Lesson Time Parameter
+### 4.1 Lesson Time Parameter
 This parameter allows users to keep track of a student's lesson timings. Multiple lesson times can be added for a single student.
 
-#### Design Considerations
+#### 4.1.1 Design Considerations
 **Treatment of clashing timings**
-
 - **Current Implementation (Alternative 1):**
     - **Description**: Clashing lesson timings are permitted across all students and within each student's schedule.
     - **Pros**: Provides greater user flexibility, allowing all specified timings to be stored in EduManage, even if they overlap.
@@ -186,7 +200,6 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
     - **Cons**: Reduces flexibility for users who need to store complex schedules with occasional overlapping times.
 
 **Association between lesson timings and subjects**
-
 - **Current Implementation (Alternative 1):**
     - **Description**: Each lesson timing is not associated with any subject.
     - **Pros**: Promotes greater user flexibility, allowing users to adjust subject focus within each lesson as needed.
@@ -200,7 +213,7 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
 
 ***
 
-### Add Feature - Adding a Student
+### 4.2 Add Feature - Adding a Student
 The Add feature allows users to register a new student in the system with a range of details, such as name, phone number, emergency contact, address, level, subject(s), and lesson time(s). Users can specify a single level, multiple subjects, and multiple lesson timings per student to tailor profile details for academic tracking and scheduling.
 
 - **Duplicate Prevention**: If a student with identical details already exists, the system will prevent the addition and
@@ -210,12 +223,15 @@ The Add feature allows users to register a new student in the system with a rang
 - **Flexible Optional Fields**: Fields like level, subject, and lesson time are optional, providing flexibility in the
   amount of detail added for each student.
 
-In the activity diagram for the "Add Student" feature below, the sequence of actions involved in adding a student to the
-system is illustrated, covering validation, error handling, and the addition of the student.
+#### 4.2.1 Implementation - Activity Diagram
+The activity diagram below highlights the various decision points during the process of adding a student, including
+checks for valid command formats, parameter validity, matching subjects and levels, and whether the student already
+exists in EduManage. If all checks pass, the student is successfully added to the EduManage, and the user receives a
+success message. If any check fails, the user is notified with an appropriate error message.
 
 <puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
 
-#### Design Considerations
+#### 4.2.2 Design Considerations
 **Centralized Validation in Subject Class**
 - **Current Implementation (Alternative 1)**:
     - **Description**: Validation logic within the Subject class ensures that the list of valid subjects by level remains consistent. This makes it straightforward to update validation rules or allowed subjects.
@@ -229,9 +245,40 @@ system is illustrated, covering validation, error handling, and the addition of 
 
 ***
 
-### Tag Feature - Level and Subject Tagging
+### 4.3 Delete Feature
+This feature allows users to delete a student from EduManage based on their index in the displayed student list. The
+process involves identifying the student by their index and removing their details from the database.
+
+- **Index Validation**: The system checks if the provided index is valid and within the bounds of the current student
+  list. If the index is out of bounds or invalid, an error message is shown.
+- **Student Deletion**: Upon valid index input, the student is deleted from the model and the filtered student list is
+  updated to reflect this change and a success message is shown.
+
+#### 4.3.1 Implementation - Sequence Diagram
+The sequence diagram below illustrates the interaction between various components during the execution of the
+`DeleteCommand`. This includes validation of the index, the deletion of the student from the model, and updating the
+filtered student list.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
+
+#### 4.3.2 Design Considerations
+**Name vs Index for Deletion**
+- **Current Implementation (Alternative 1):**
+    - **Description**: The user identifies the student by their index in the displayed student list.
+    - **Pros**: Simple, fast, and unambiguous with unique indexes.
+    - **Cons**: Users must visually track and remember the index number of the student, which can be cumbersome if the list is long or filtered.
+
+- **Alternative 2**:
+    - **Description**: The user specifies the student’s name for deletion..
+    - **Pros**: Names are easier for users to remember and identify, making the deletion process more intuitive.
+    - **Cons**: Searching for a student by name may be slower, especially when there is a large number of contacts, and will require
+      additional validation logic to handle variations in case, spelling, and extra spaces.
+
+***
+
+### 4.4 Tag Feature
 This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and
-subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can
+subject(s) (e.g., `MATH`). By entering the student's name and specifying tags for level or subject(s) (or both), users can
 manage student profiles more efficiently.
 
 - **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified
@@ -242,7 +289,7 @@ manage student profiles more efficiently.
   value (e.g., `Math` and `MATH`), only one instance of each unique tag will be added, preventing unnecessary
   duplication.
 
-#### Implementation - Sequence Diagrams
+#### 4.4.1 Implementation - Sequence Diagrams
 The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note
 that while the `TagCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
 lifeline till the diagram's end.
@@ -251,7 +298,7 @@ lifeline till the diagram's end.
 
 <puml src="diagrams/TagSequenceDiagram-Model.puml" alt="TagSequenceDiagram-Model" />
 
-#### Design Considerations
+#### 4.4.2 Design Considerations
 **Parsing Tag Input**
 - **Current Implementation (Alternative 1):**
     - **Description**: Tag validation is managed by the `ParserUtil` class, centralizing validation logic for improved
@@ -279,7 +326,7 @@ lifeline till the diagram's end.
 
 ***
 
-### Add Task Feature
+### 4.5 Add Task Feature
 
 This feature allows users to add specific tasks to a student's profile, enhancing the ability to track individual
 assignments, exams, or goals for each student. By entering the student's name, task description and due date, users
@@ -292,14 +339,14 @@ can manage and monitor students' progress more efficiently.
 - **Fixed Date Format**: Due dates must be entered in a strict `YYYY-MM-DD` format. This format avoids ambiguity and
   enforces consistency, helping users easily interpret task deadlines.
 
-#### Implementation - Sequence Diagrams
+#### 4.5.1 Implementation - Sequence Diagrams
 The sequence diagrams below illustrate the interactions among various classes when an add task command is executed.
 Note that while the `AddTaskCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML
 extend the lifeline till the diagram’s end.
 
 <puml src="diagrams/AddTaskSequenceDiagram-Logic.puml" alt="AddTaskSequenceDiagram-Logic" />
 
-#### Design Considerations
+#### 4.5.2 Design Considerations
 **Parsing Task Input**
 - **Current Implementation (Alternative 1)**:
     - **Description**: The `ParserUtil` class manages validation for task attributes, including date format checking,
@@ -327,7 +374,7 @@ extend the lifeline till the diagram’s end.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## 5. Documentation, logging, testing, configuration, dev-ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -337,9 +384,9 @@ extend the lifeline till the diagram’s end.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## 6. Appendix: Requirements
 
-### Product scope
+### 6.1 Product scope
 
 **Target user profile**: Tuition teachers
 
@@ -355,7 +402,7 @@ extend the lifeline till the diagram’s end.
 
 ***
 
-### User stories
+### 6.2 User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -380,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### Use cases
+### 6.3 Use cases
 
 (For all use cases below, the **System** is `EduManage` and the **Actor** is the `tuition teacher`, unless specified otherwise)
 
@@ -748,7 +795,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### Non-Functional Requirements
+### 6.4 Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -765,7 +812,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### Glossary
+### 6.5 Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
@@ -775,7 +822,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## 7. Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
@@ -786,7 +833,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### 7.1 Launch and shutdown
 
 1. Initial launch
 
@@ -803,7 +850,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Adding a student
+### 7.2 Adding a student
 
 1. Prerequisites: Delete any student named `Alice Lee` before and between test cases. Ensure there is a student named `Alex Yeoh` in the list of students.
 
@@ -836,7 +883,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Deleting a student
+### 7.3 Deleting a student
 
 1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
@@ -851,7 +898,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Finding specific students
+### 7.4 Finding specific students
 
 1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
 
@@ -879,7 +926,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Adding a task for a student
+### 7.5 Adding a task for a student
 
 1. Prerequisites: Ensure that student `Alex Yeoh` exists.
 

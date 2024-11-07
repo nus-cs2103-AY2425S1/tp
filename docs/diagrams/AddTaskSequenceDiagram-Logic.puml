@@ -6,12 +6,12 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddTaskCommandParser" as AddTaskCommandParser LOGIC_COLOR
-participant "command:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
+participant "a:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":Model" as Model MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("addtask n/John t/Mark homework d/2024-11-11")
@@ -37,16 +37,16 @@ activate AddTaskCommand
 AddTaskCommand --> AddTaskCommandParser :
 deactivate AddTaskCommand
 
-AddTaskCommandParser --> AddressBookParser : command
+AddTaskCommandParser --> AddressBookParser : a
 deactivate AddTaskCommandParser
 
 AddTaskCommandParser -[hidden]-> AddressBookParser
 destroy AddTaskCommandParser
 
-AddressBookParser --> LogicManager : command
+AddressBookParser --> LogicManager : a
 deactivate AddressBookParser
 
-LogicManager -> AddTaskCommand : execute()
+LogicManager -> AddTaskCommand : execute(m)
 activate AddTaskCommand
 
 AddTaskCommand -> Model : setStudent(targetStudent, updatedStudent)
