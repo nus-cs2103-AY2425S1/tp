@@ -36,9 +36,11 @@ public class FindCommandTest {
     @Test
     public void equals() {
         PersonContainsKeywordsPredicate firstPredicate =
-                new PersonContainsKeywordsPredicate("first", null, null, null, null, null, null);
+                new PersonContainsKeywordsPredicate("first", null, null, null, null,
+                        null, null);
         PersonContainsKeywordsPredicate secondPredicate =
-                new PersonContainsKeywordsPredicate("second", null, null, null, null, null, null);
+                new PersonContainsKeywordsPredicate("second", null, null, null, null,
+                        null, null);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -64,7 +66,8 @@ public class FindCommandTest {
     public void execute_oneField_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate("someone", null, null, null, null, null, null);
+                new PersonContainsKeywordsPredicate("someone", null, null, null, null,
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -75,7 +78,8 @@ public class FindCommandTest {
     public void execute_oneField_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, null, "cs", null, null);
+                new PersonContainsKeywordsPredicate(null, null, null, null, "cs",
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -86,7 +90,8 @@ public class FindCommandTest {
     public void execute_nameField_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate("A", null, null, null, null, null, null);
+                new PersonContainsKeywordsPredicate("A", null, null, null, null,
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -97,7 +102,8 @@ public class FindCommandTest {
     public void execute_nameField_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate("Alice", null, null, null, null, null, null);
+                new PersonContainsKeywordsPredicate("Alice", null, null, null, null,
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -108,7 +114,8 @@ public class FindCommandTest {
     public void execute_phoneField_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, "9482", null, null, null, null, null);
+                new PersonContainsKeywordsPredicate(null, "9482", null, null, null,
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -119,7 +126,8 @@ public class FindCommandTest {
     public void execute_phoneField_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, "12312312", null, null, null, null, null);
+                new PersonContainsKeywordsPredicate(null, "12312312", null, null, null,
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -130,7 +138,8 @@ public class FindCommandTest {
     public void execute_emailField_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, "alice@example.com", null, null, null, null);
+                new PersonContainsKeywordsPredicate(null, null, "alice@example.com", null,
+                        null, null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -141,7 +150,8 @@ public class FindCommandTest {
     public void execute_emailField_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, "hoohoohaahaa@example.com", null, null, null, null);
+                new PersonContainsKeywordsPredicate(null, null, "hoohoohaahaa@example.com", null,
+                        null, null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -152,7 +162,8 @@ public class FindCommandTest {
     public void execute_roleField_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, "mUdder", null, null, null);
+                new PersonContainsKeywordsPredicate(null, null, null, "mUdder", null,
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -163,7 +174,8 @@ public class FindCommandTest {
     public void execute_majorField_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, null, "cs", null, null);
+                new PersonContainsKeywordsPredicate(null, null, null, null, "cs",
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -174,7 +186,8 @@ public class FindCommandTest {
     public void execute_addressField_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, null, null, "wall street", null);
+                new PersonContainsKeywordsPredicate(null, null, null, null, null,
+                        "wall street", null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -185,7 +198,8 @@ public class FindCommandTest {
     public void execute_addressField_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, null, null, "somenonexistentplace", null);
+                new PersonContainsKeywordsPredicate(null, null, null, null, null,
+                        "somenonexistentplace", null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -197,7 +211,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         List<String> expectedTags = List.of("friend");
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, null, null, null, expectedTags);
+                new PersonContainsKeywordsPredicate(null, null, null, null, null,
+                        null, expectedTags);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -209,7 +224,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         List<String> expectedTags = List.of("friends", "owesMoney");
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, null, null, null, expectedTags);
+                new PersonContainsKeywordsPredicate(null, null, null, null, null,
+                        null, expectedTags);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -221,7 +237,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         List<String> expectedTags = List.of("friends", "owesMoney", "gymBrother");
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, null, null, null, expectedTags);
+                new PersonContainsKeywordsPredicate(null, null, null, null, null,
+                        null, expectedTags);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -232,7 +249,8 @@ public class FindCommandTest {
     public void execute_multipleFields_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate("Benson", null, null, "brUdder", null, null, null);
+                new PersonContainsKeywordsPredicate("Benson", null, null, "brUdder", null,
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -243,7 +261,8 @@ public class FindCommandTest {
     public void execute_multipleFields_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate(null, null, null, "brUdder", "cs", null, null);
+                new PersonContainsKeywordsPredicate(null, null, null, "brUdder", "cs",
+                        null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -254,7 +273,8 @@ public class FindCommandTest {
     public void execute_multipleFields_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate("Peter Orlando", null, null, "brUdder", "cs", null, null);
+                new PersonContainsKeywordsPredicate("Peter Orlando", null, null, "brUdder",
+                        "cs", null, null);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -264,7 +284,8 @@ public class FindCommandTest {
     @Test
     public void toStringMethod() {
         PersonContainsKeywordsPredicate predicate =
-                new PersonContainsKeywordsPredicate("test", null, null, null, null, null, null);
+                new PersonContainsKeywordsPredicate("test", null, null, null, null,
+                        null, null);
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());

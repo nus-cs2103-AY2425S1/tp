@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.ModelClearObserver;
 
 public class AddCommandTest {
 
@@ -156,6 +157,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addObserver(ModelClearObserver observer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void notifyUddersListCleared() {
             throw new AssertionError("This method should not be called.");
         }
 
