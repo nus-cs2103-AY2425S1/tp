@@ -169,7 +169,7 @@ Examples:
 Finds persons whose **telegram handles** contain any of the specified keywords.
 
 Format: <br>
-`find TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br>
+`findtele TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br>
 
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -188,7 +188,7 @@ Examples:
 Finds persons whose **tags** contain any of the specified keywords.
 
 Format: <br>
-`find TAG [MORE_TAG_KEYWORDS]`<br>
+`findtag TAG [MORE_TAG_KEYWORDS]`<br>
 
 
 * The search is case-insensitive. e.g `friend` will match `Friend`
