@@ -248,11 +248,11 @@ Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg
 
 Parameters:
 
-- `DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
-- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
-- `PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
-- `QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
-- `COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
+- `on/DELIVERY_DATE_TIME`: Must be in dd-MM-yyyy hh:mm format and must not be blank.
+- `s/SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `pro/PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
+- `q/QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
+- `c/COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
 <box type="tip" seamless>
 
 **Tip:** Day and month of date must be in double digits!
@@ -264,6 +264,7 @@ Parameters:
 - A spacing between `add` and `-d` is compulsory
 - Duplicate delivery will not be added again
 - No duplicate prefix can be used
+- Units for QUANTITY is case-sensitive
 </box>
 
 #### Example
@@ -388,8 +389,8 @@ before or after a given date.
 Format: `upcoming aft/START_DATE bef/END_DATE`
 Parameters:
 
-- `START_DATE`: Must be in dd-mm-yyyy hh:mm format.
-- `END_DATE`: Must be in dd-mm-yyyy hh:mm format.
+- `aft/START_DATE`: Must be in dd-MM-yyyy hh:mm format.
+- `bef/END_DATE`: Must be in dd-MM-yyyy hh:mm format.
 
 <box type="tip" seamless>
 
