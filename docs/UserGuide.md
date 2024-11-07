@@ -376,7 +376,7 @@ This command will help you add a new guest to the bottom of the existing overall
 
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
-Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
+Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command and scrolling to the bottom of the guest list returns the following result on your screen:
 
 ![add_guest command](images/addGuestCommand.png)
 
@@ -393,11 +393,11 @@ This command will allow you to edit the details of the guest identified by the `
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
-   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `edit_guest 1 p/91234567 e/johndoe@example.com` would still edit the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
-**Example Usage:** `edit_guest 1 p/91234567 e/johndoe@example.com`
+**Example Usage:** `edit_guest 4 p/91234567 e/johndoe@example.com`
 
-Entering the `edit_guest 1 p/91234567 e/johndoe@example.com` command returns the following result on your screen:
+Entering the `edit_guest 4 p/91234567 e/johndoe@example.com` command and scrolling to the bottom of your guest list returns the following result on your screen:
 
 ![edit_guest command](images/editGuestCommand.png)
 
@@ -412,11 +412,11 @@ This command will help you delete a guest from your existing guest list, identif
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to delete on the **exact guest list currently displayed on your screen**.
 
-   * Even if a `guest` `John Doe` has an `INDEX` of 3 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
+   * Even if a `guest` `John Doe` has an `INDEX` of 4 on the overall guest list, entering `find n/John` followed by `delete 1` would still delete the details of `John Doe`, assuming that there is only 1 guest with `John` in their name.
 
 **Example Usage:** `delete_guest 1`
 
-Entering the `delete_guest 1` command returns the following result on your screen:
+Assuming that `Guest` `Tony Stark` has an `INDEX` of 1 on the existing guest list, entering the `delete_guest 1` command returns the following result on your screen:
 
 ![delete_guest command](images/deleteGuestCommand.png)
 
