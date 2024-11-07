@@ -53,10 +53,10 @@ public class MarkAttendanceByStudentCommandTest {
         // current participation of second person
         Participation currentParticipation = BENSON_MATH;
 
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 17));
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)));
+        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 17)));
 
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
@@ -81,11 +81,11 @@ public class MarkAttendanceByStudentCommandTest {
         // current participation of second person with attendance for 12/12/2024
         Participation currentParticipation = BENSON_MATH;
 
-        // create participation to mark attendance for sun of previous week of 12/12/2024
-        Attendance attendance = new Attendance(LocalDate.parse("08/12/2024", Attendance.VALID_DATE_FORMAT));
+        // create participation to mark attendance for sun of previous week of 10/10/2024
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 6));
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.parse("08/12/2024", Attendance.VALID_DATE_FORMAT)));
+        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 6)));
 
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
@@ -107,14 +107,14 @@ public class MarkAttendanceByStudentCommandTest {
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Tutorial tutorial = new Tutorial("Math");
 
-        // current participation of second person with attendance for 12/12/2024
+        // current participation of second person with attendance for 10/10/2024
         Participation currentParticipation = BENSON_MATH;
 
-        // create participation to mark attendance for mon of next week of 12/12/2024
-        Attendance attendance = new Attendance(LocalDate.parse("16/12/2024", Attendance.VALID_DATE_FORMAT));
+        // create participation to mark attendance for mon of next week of 10/10/2024
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 14));
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.parse("16/12/2024", Attendance.VALID_DATE_FORMAT)));
+        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 14)));
 
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
@@ -122,13 +122,13 @@ public class MarkAttendanceByStudentCommandTest {
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setParticipation(currentParticipation, updatedParticipation);
 
-        MarkAttendanceByStudentCommand markAttendanceCommand1 =
+        MarkAttendanceByStudentCommand markAttendanceCommand =
                 new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
 
         String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
                 studentToMarkAttendance.getName(), tutorial.getSubject(), attendance);
 
-        assertCommandSuccess(markAttendanceCommand1, model, expectedMessage, expectedModel);
+        assertCommandSuccess(markAttendanceCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -136,7 +136,7 @@ public class MarkAttendanceByStudentCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
                 outOfBoundIndex,
-                new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)),
+                new Attendance(LocalDate.of(2024, 10, 14)),
                 new Tutorial("Math"));
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -147,7 +147,7 @@ public class MarkAttendanceByStudentCommandTest {
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
 
         Tutorial tutorial = new Tutorial("Science");
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 14));
 
         MarkAttendanceByStudentCommand markAttendanceCommand =
                 new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance, tutorial);
@@ -164,10 +164,10 @@ public class MarkAttendanceByStudentCommandTest {
 
         Tutorial tutorial = new Tutorial("Math");
 
-        // mon of week for 12/12/2024
-        Attendance attendance1 = new Attendance(LocalDate.parse("09/12/2024", Attendance.VALID_DATE_FORMAT));
-        // sun of week for 12/12/2024
-        Attendance attendance2 = new Attendance(LocalDate.parse("15/12/2024", Attendance.VALID_DATE_FORMAT));
+        // mon of week for 10/10/2024
+        Attendance attendance1 = new Attendance(LocalDate.of(2024, 10, 7));
+        // sun of week for 10/10/2024
+        Attendance attendance2 = new Attendance(LocalDate.of(2024, 10, 13));
 
         MarkAttendanceByStudentCommand markAttendanceCommand1 =
                 new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance1, tutorial);
@@ -175,9 +175,9 @@ public class MarkAttendanceByStudentCommandTest {
                 new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON, attendance2, tutorial);
 
         String expectedMessage1 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance1);
+                studentToMarkAttendance.getName(), attendance1, tutorial.getSubject());
         String expectedMessage2 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance2);
+                studentToMarkAttendance.getName(), attendance2, tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand1, model, expectedMessage1);
         assertCommandFailure(markAttendanceCommand2, model, expectedMessage2);
@@ -189,12 +189,12 @@ public class MarkAttendanceByStudentCommandTest {
 
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Tutorial tutorial = new Tutorial("Math");
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 17));
 
         Participation currentParticipation = BENSON_MATH;
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
-        updatedAttendance.add(new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)));
+        updatedAttendance.add(new Attendance(LocalDate.of(2024, 10, 17)));
 
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
                 currentParticipation.getTutorial(), updatedAttendance);
@@ -221,7 +221,7 @@ public class MarkAttendanceByStudentCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
-                outOfBoundIndex, new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT)),
+                outOfBoundIndex, new Attendance(LocalDate.of(2024, 10, 10)),
                 new Tutorial("Math"));
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -233,7 +233,7 @@ public class MarkAttendanceByStudentCommandTest {
         Person studentToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Tutorial tutorial = new Tutorial("Science");
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 10));
 
         MarkAttendanceByStudentCommand markAttendanceCommand =
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance, tutorial);
@@ -251,10 +251,10 @@ public class MarkAttendanceByStudentCommandTest {
 
         Tutorial tutorial = new Tutorial("Math");
 
-        // mon of week for 12/12/2024
-        Attendance attendance1 = new Attendance(LocalDate.parse("09/12/2024", Attendance.VALID_DATE_FORMAT));
-        // sun of week for 12/12/2024
-        Attendance attendance2 = new Attendance(LocalDate.parse("15/12/2024", Attendance.VALID_DATE_FORMAT));
+        // mon of week for 10/10/2024
+        Attendance attendance1 = new Attendance(LocalDate.of(2024, 10, 7));
+        // sun of week for 10/10/2024
+        Attendance attendance2 = new Attendance(LocalDate.of(2024, 10, 13));
 
         MarkAttendanceByStudentCommand markAttendanceCommand1 =
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance1, tutorial);
@@ -262,9 +262,9 @@ public class MarkAttendanceByStudentCommandTest {
                 new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON, attendance2, tutorial);
 
         String expectedMessage1 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance1);
+                studentToMarkAttendance.getName(), attendance1, tutorial.getSubject());
         String expectedMessage2 = String.format(MESSAGE_DUPLICATE_WEEKLY_ATTENDANCE,
-                studentToMarkAttendance.getName(), attendance2);
+                studentToMarkAttendance.getName(), attendance2, tutorial.getSubject());
 
         assertCommandFailure(markAttendanceCommand1, model, expectedMessage1);
         assertCommandFailure(markAttendanceCommand2, model, expectedMessage2);
@@ -273,10 +273,10 @@ public class MarkAttendanceByStudentCommandTest {
     @Test
     public void equals() {
         MarkAttendanceByStudentCommand markAttendanceFirstCommand = new MarkAttendanceByStudentCommand(
-                INDEX_FIRST_PERSON, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
+                INDEX_FIRST_PERSON, new Attendance(LocalDate.of(2024, 10, 10)),
                 new Tutorial("Math"));
         MarkAttendanceByStudentCommand markAttendanceSecondCommand = new MarkAttendanceByStudentCommand(
-                INDEX_SECOND_PERSON, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
+                INDEX_SECOND_PERSON, new Attendance(LocalDate.of(2024, 10, 10)),
                 new Tutorial("Chemistry"));
 
         // same object -> returns true
@@ -284,7 +284,7 @@ public class MarkAttendanceByStudentCommandTest {
 
         // same values -> returns true
         MarkAttendanceByStudentCommand markAttendanceFirstCommandCopy = new MarkAttendanceByStudentCommand(
-                INDEX_FIRST_PERSON, new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
+                INDEX_FIRST_PERSON, new Attendance(LocalDate.of(2024, 10, 10)),
                 new Tutorial("Math"));
         assertTrue(markAttendanceFirstCommand.equals(markAttendanceFirstCommandCopy));
 
@@ -301,7 +301,7 @@ public class MarkAttendanceByStudentCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 10));
         Tutorial tutorial = new Tutorial("Math");
 
         MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(
@@ -319,7 +319,7 @@ public class MarkAttendanceByStudentCommandTest {
     public void execute_nullModel_throwsNullPointerException() {
         MarkAttendanceByStudentCommand command = new MarkAttendanceByStudentCommand(
                 Index.fromZeroBased(0),
-                new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)),
+                new Attendance(LocalDate.of(2024, 10, 10)),
                 new Tutorial("Math"));
 
         assertThrows(NullPointerException.class, () -> command.execute(null));
@@ -327,7 +327,7 @@ public class MarkAttendanceByStudentCommandTest {
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 10));
         Tutorial tutorial = new Tutorial("Math");
 
         // null index

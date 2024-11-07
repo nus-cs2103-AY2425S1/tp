@@ -44,7 +44,7 @@ public class MarkAttendanceByTutorialCommandTest {
     @Test
     public void execute_noStudentsWithDuplicateWeeklyAttendance_success() {
         Tutorial tutorial = new Tutorial("Math");
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 17));
 
         List<Participation> participationList = model.getParticipationList()
                 .filtered(participation -> participation.getTutorial().equals(tutorial));
@@ -73,8 +73,8 @@ public class MarkAttendanceByTutorialCommandTest {
 
     @Test
     public void execute_someStudentsWithDuplicateWeeklyAttendance_success() {
-        // add new attendance for Benson on 11/10/2024
-        Attendance attendanceBenson = new Attendance(LocalDate.parse("11/10/2024", Attendance.VALID_DATE_FORMAT));
+        // add new attendance for Benson on 17/10/2024
+        Attendance attendanceBenson = new Attendance(LocalDate.of(2024, 10, 17));
 
         List<Attendance> updatedAttendanceBenson = new ArrayList<>(BENSON_MATH.getAttendanceList());
         updatedAttendanceBenson.add(attendanceBenson);
@@ -84,7 +84,7 @@ public class MarkAttendanceByTutorialCommandTest {
         model.setParticipation(BENSON_MATH, updatedParticipationBenson);
 
         Tutorial tutorial = new Tutorial("Math");
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 17));
 
         // add updated participation for Alice
         List<Attendance> updatedAttendanceAlice = new ArrayList<>(ALICE_MATH.getAttendanceList());
@@ -110,9 +110,8 @@ public class MarkAttendanceByTutorialCommandTest {
     @Test
     public void execute_allStudentsWithDuplicateWeeklyAttendance_throwsCommandException() {
         Tutorial tutorial = new Tutorial("Math");
-        // new attendance with date in same week and year with as current attendance with date 12/12/2024
-        Attendance attendance = new Attendance(LocalDate.parse("13/12/2024", Attendance.VALID_DATE_FORMAT));
-
+        // new attendance with date in same week and year with as current attendance with date 10/10/2024
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 11));
         MarkAttendanceByTutorialCommand markAttendanceCommand =
                 new MarkAttendanceByTutorialCommand(tutorial, attendance);
 
@@ -126,7 +125,7 @@ public class MarkAttendanceByTutorialCommandTest {
     @Test
     public void execute_noSuchTutorial_throwsCommandException() {
         Tutorial tutorialToMark = new Tutorial("CS2103T");
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 10));
 
         assertFalse(model.getTutorialList().stream().anyMatch(tutorial -> tutorial.equals(tutorialToMark)));
 
@@ -140,7 +139,7 @@ public class MarkAttendanceByTutorialCommandTest {
     @Test
     public void execute_noStudentsTakingTutorial_throwsCommandException() {
         Tutorial tutorialToMark = new Tutorial("Science");
-        Attendance attendance = new Attendance(LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 10));
 
         assertTrue(model.getTutorialList().stream().anyMatch(tutorial -> tutorial.equals(tutorialToMark)));
 
@@ -156,10 +155,10 @@ public class MarkAttendanceByTutorialCommandTest {
     public void equals() {
         MarkAttendanceByTutorialCommand markAttendanceFirstCommand = new MarkAttendanceByTutorialCommand(
                 new Tutorial("Math"),
-                new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)));
+                new Attendance(LocalDate.of(2024, 10, 10)));
         MarkAttendanceByTutorialCommand markAttendanceSecondCommand = new MarkAttendanceByTutorialCommand(
                 new Tutorial("Chemistry"),
-                new Attendance(LocalDate.parse("13/12/2024", Attendance.VALID_DATE_FORMAT)));
+                new Attendance(LocalDate.of(2024, 10, 10)));
 
         // same object -> returns true
         assertTrue(markAttendanceFirstCommand.equals(markAttendanceFirstCommand));
@@ -167,7 +166,7 @@ public class MarkAttendanceByTutorialCommandTest {
         // same values -> returns true
         MarkAttendanceByTutorialCommand markAttendanceFirstCommandCopy = new MarkAttendanceByTutorialCommand(
                 new Tutorial("Math"),
-                new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)));
+                new Attendance(LocalDate.of(2024, 10, 10)));
         assertTrue(markAttendanceFirstCommand.equals(markAttendanceFirstCommandCopy));
 
         // different types -> returns false
@@ -183,7 +182,7 @@ public class MarkAttendanceByTutorialCommandTest {
     @Test
     public void toStringMethod() {
         Tutorial tutorial = new Tutorial("Math");
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 10));
 
         MarkAttendanceByTutorialCommand markAttendanceCommand = new MarkAttendanceByTutorialCommand(
                 tutorial, attendance);
@@ -199,14 +198,14 @@ public class MarkAttendanceByTutorialCommandTest {
     public void execute_nullModel_throwsNullPointerException() {
         MarkAttendanceByTutorialCommand command = new MarkAttendanceByTutorialCommand(
                 new Tutorial("Math"),
-                new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT)));
+                new Attendance(LocalDate.of(2024, 10, 10)));
 
         assertThrows(NullPointerException.class, () -> command.execute(null));
     }
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
-        Attendance attendance = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance = new Attendance(LocalDate.of(2024, 10, 10));
         Tutorial tutorial = new Tutorial("Math");
 
         // null tutorial
