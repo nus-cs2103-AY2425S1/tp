@@ -15,10 +15,7 @@ public class TempPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        Set<Integer> eventIds = person.getEventIds();
-        return keywords.stream()
-                .anyMatch(keyword -> eventIds.stream().anyMatch(eventId ->
-                        eventId.equals(Integer.valueOf(keyword))));
+        return false;
     }
 
     public List<String> getKeywords() {
