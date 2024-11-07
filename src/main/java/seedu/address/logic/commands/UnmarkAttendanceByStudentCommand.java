@@ -43,6 +43,9 @@ public class UnmarkAttendanceByStudentCommand extends Command {
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
             "The student does not take %1$s tutorial";
 
+    public static final String MESSAGE_ATTENDANCE_NOT_MARKED =
+            "%1$s's attendance for date %2$s for %3$s tutorial has not been marked before.";
+
     private final Logger logger = LogsCenter.getLogger(UnmarkAttendanceByStudentCommand.class);
     private final Index targetIndex;
     private final Attendance attendance;
@@ -77,6 +80,11 @@ public class UnmarkAttendanceByStudentCommand extends Command {
                 studentToUnmarkAttendance);
 
         List<Attendance> updatedAttendance = new ArrayList<>(currentParticipation.getAttendanceList());
+
+        if (!containsAttendance(updatedAttendance)) {
+            throw new CommandException(String.format(MESSAGE_ATTENDANCE_NOT_MARKED,
+                    studentToUnmarkAttendance.getName(), attendance, tutorial.getSubject()));
+        }
         updatedAttendance.remove(attendance);
 
         Participation updatedParticipation = new Participation(currentParticipation.getStudent(),
@@ -137,5 +145,15 @@ public class UnmarkAttendanceByStudentCommand extends Command {
                     return new CommandException(
                             String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial.getSubject()));
                 });
+    }
+
+    private boolean containsAttendance(List<Attendance> attendanceList) {
+        assert attendanceList != null;
+        for (Attendance currentAttendance : attendanceList) {
+            if (currentAttendance.equals(attendance)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

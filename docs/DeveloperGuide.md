@@ -492,7 +492,7 @@ This product is for admin at tuition centres and has to track a large number of 
 
 **Value proposition**:
 
-Enable easy management and fast access to student records for administrators working at tuition centres. We aim to provide easy tracking of payments to send reminders, learning progress of students and shifting of classes etc. This also helps tuition centres save time by reducing administrative burdens on their staff.
+Enable easy management and fast access to student records for administrators working at tuition centres. We aim to provide easy tracking of payments and attendance, along with classes enrollment. This also helps tuition centres save time by reducing administrative burdens on their staff.
 
 
 
@@ -554,8 +554,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UC03).
-
 **MSS:**
 1. Admin prompts the system to list all students' details.
 2. System returns a list of all students with their respective details with their names.
@@ -567,108 +565,424 @@ Use case ends.
 
 **Actor: Admin**
 
-**Preconditions:** Admin is logged in (UC03).
-
 **MSS:**
 1. Admin prompts the system to add a student.
-2. System prompts the admin to key in details of the student.
-3. Admin key in details.
-4. System adds the student and display success status.
+2. Admin inputs details.
+3. System adds the student and display success status.
 
 Use case ends.
 
 **Extensions:**
-* 3a. Admin keyed in the information in the wrong format.
-    * 3a1. System display wrong format status.
-    * 3a2. System prompt admin to key in information again.
-    * 3a3. Admin key in information again.
+* 2a. Admin inputs information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to key in information again.
+    * 2a3. Admin inputs information again.
 
-        Repeat 3a1 to 3a3 until Admin key in the right information.
-    * 3a4. System adds the student and display success status.
-
-    Use case ends.
-
-<br><br>
-**UC03 - Log into system**
-
-**Actor: Admin**
-
-**MSS:**
-
-1. Admin enters username.
-2. Admin enters password.
-3. Admin gets logged in.
-
-Use case ends.
-
-**Extensions:**
-* 3a. System detects mismatch in either username or password or both.
-    * 3a1. System notifies user of wrong username or password.
-    * 3a2. System requests for correct username and password.
-    * 3a3. User enters new username and password.
-
-        Repeat 3a1 to 3a3 until the data entered is correct.
+        Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System adds the student and displays success status.
 
     Use case ends.
 
 <br><br>
-**UC04 - Mark payment of students**
+**UC03 - Mark payment of students**
 
 **Actor: Admin**
-
-**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 
 1. Admin prompts the system to mark payment.
-2. System prompts the admin to key in details of this student.
-3. Admin key in details.
-4. System marks the payment for the student and returns a success message.
+2. Admin inputs details.
+3. System marks the payment for the student and returns a success message.
 
 Use case ends.
 
 **Extensions:**
 
-* 3a. Admin keyed in the information in the wrong format.
-  * 3a1. System display wrong format status.
-  * 3a2. System prompt admin to key in information again.
-  * 3a3. Admin key in information again.
+* 2a. Admin inputs the information in the wrong format.
+  * 2a1. System display wrong format status.
+  * 2a2. System prompt admin to key in information again.
+  * 2a3. Admin inputs information again.
 
-    Repeat 3a1 to 3a3 until Admin key in the right information.
-  * 3a4. System adds the student and display success status
+    Repeat 3a1 to 3a3 until Admin inputs the right information.
+  * 2a4. System adds the student and displays success status
 
   Use case ends.
 
-* 4a. Payment of the student has already being marked.
-  * 4a1. System returns a message on payment of student being marked already.
-  * 4a2. System returns a fail status.
+* 3a. Payment of the student has already being marked.
+  * 3a1. System returns a message on payment of student being marked already.
+  * 3a2. System returns a fail status.
 
   Use case ends.
 
 <br><br>
-**UC05 - Delete student from system**
+**UC04 - Delete student from system**
 
 **Actor: Admin**
-
-**Preconditions:** Admin is logged in (UC03).
 
 **MSS:**
 
 1. Admin decides student to be deleted from the system.
-2. Admin selects that student.
-3. System requests for confirmation.
-4. Admin confirms.
-5. System deletes the student information.
+2. Admin inputs student to be deleted.
+3. System deletes the student information.
+
+**Extensions**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to key in information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System deletes the student and displays success status.
+    
+    Use case ends.
 
 Use case ends.
 
+<br><br>
+
+**UC05 - Create new tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides tutorial to add to system.
+2. Admin adds the tutorial.
+3. System records the tutorial and displays success status.
+
 **Extensions:**
 
-* *a. At any time, user chooses to cancel the deletion.
-    * *a1. System requests to confirm the cancellation.
-    * *a2. Admin confirms the cancellation.
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the tutorial and displays success status.
 
   Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC06 - Enroll student in tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student to be added to a tutorial.
+2. Admin enrolls the student in the tutorial.
+3. System records student as enrolled in tutorial and displays success status.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompts admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System enrolls the student and displays success status.
+
+  Use case ends.
+
+
+* 2b. Admin inputs student or tutorial that do not exist.
+  * 2b1. System displays errors status.
+  * 2b2. System prompts admin to key in information again.
+  * 2b3. Admin inputs information again.
+    
+    Repeat 2b1 to 2b3 until Admin inputs student and/or tutorial that exist.
+  * 2b4. System enrolls the student and displays success status.
+  
+  Use case ends.
+
+Use case ends. 
+
+<br><br>
+
+**UC07 - Unenroll student from tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student to be removed from a tutorial.
+2. Admin unenrolls the student from the tutorial.
+3. Systems records student as no longer part of the tutorial and displays success status.
+
+**Extensions:**
+
+* 2a. Admin keyed in the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System unenrolls the student and displays success status.
+
+  Use case ends.
+
+
+* 2b. Admin keys in student or tutorial that do not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+  
+        Repeat 2b1 to 2b3 until Admin inputs student and/or tutorial that exist.
+    * 2b4. System enrolls the student and displays success status. 
+  
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC08 - Edit student information**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student and information to be edited.
+2. Admin inputs information to be edited for student.
+3. System records edited information for student and shows success status.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System edits the student and displays success status.
+
+  Use case ends.
+
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System edits the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC09 - Search for a student in system**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student or criteria to search for.
+2. Admin inputs criteria to be searched for.
+3. System displays search results that match inputted criteria.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System shows search results and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC10 - Delete tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides tutorial to delete from system.
+2. Admin inputs the tutorial.
+3. System deletes the tutorial and displays success status.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System deletes the tutorial and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC11 - Add fees to student**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student to add fees for.
+2. Admin inputs information of student and fees.
+3. System adds fees to student's information.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the tutorial and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System adds fees for the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC12 - Marking attendance of student**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student for whom attendance is to be marked.
+2. Admin inputs information about student and date.
+3. System marks attendance for student for specified date.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the attendance and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System marks attendance for the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC13 - Marking attendance of tutorial**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides tutorial for whom attendance is to be marked.
+2. Admin inputs information about tutorial and date.
+3. System marks attendance for all students in tutorial for specified date.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System records the attendance and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs tutorial that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System marks attendance for the tutorial and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC14 - Unmarking attendance of student**
+
+**Actor: Admin**
+
+**MSS:**
+
+1. Admin decides student for whom attendance is to be unmarked.
+2. Admin inputs information about student and date.
+3. System unmarks attendance for student for specified date.
+
+**Extensions:**
+
+* 2a. Admin inputs the information in the wrong format.
+    * 2a1. System display wrong format status.
+    * 2a2. System prompt admin to input information again.
+    * 2a3. Admin inputs information again.
+
+      Repeat 2a1 to 2a3 until Admin inputs the right information.
+    * 2a4. System unmarks the attendance and displays success status.
+
+  Use case ends.
+
+* 2b. Admin inputs student that does not exist.
+    * 2b1. System displays errors status.
+    * 2b2. System prompts admin to input information again.
+    * 2b3. Admin inputs information again.
+
+      Repeat 2b1 to 2b3 until Admin inputs student that exists.
+    * 2b4. System unmarks attendance for the student and displays success status.
+
+  Use case ends.
+
+Use case ends.
+
+<br><br>
+
+**UC015 - Clearing all students**
+
+**Actor: Admin**
+
+**MSS:**
+1. Admin prompts the system to clear all students' from system.
+2. System deletes all students.
+
+Use case ends.
 
 <br><br>
 ### Non-Functional Requirements
@@ -691,7 +1005,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Admin**: Admin at the tuition center who is in charge of all administrative processes
 * **System**: The Eduvault application
-* **Student**: Current and pat students who attended the tuition centre
+* **Student**: Current students who attend the tuition centre
 
 
 --------------------------------------------------------------------------------------------------------------------
