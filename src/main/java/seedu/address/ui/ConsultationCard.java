@@ -63,7 +63,10 @@ public class ConsultationCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
                 .forEach(this::createLabel);
 
-        Platform.runLater(() -> cardPane.getParent().requestLayout());
+        // Ui Doesn't Properly Update Unless this Line of Code is run multiple times
+        for (int i = 0; i < 5; i++) {
+            Platform.runLater(() -> cardPane.getParent().requestLayout());
+        }
     }
 
     private void createLabel(Student student) {
