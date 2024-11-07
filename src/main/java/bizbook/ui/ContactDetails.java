@@ -49,13 +49,6 @@ public class ContactDetails extends UiPart<Region> {
         person.addListener((observable, oldValue, newValue) -> displayPerson(newValue));
     }
 
-    private void addNote(String note) {
-        Label label = new Label("• " + note);
-        // TODO: use classes instead
-        label.setId("notes-label");
-        notesList.getChildren().add(label);
-    }
-
     /**
      * Sets the person object as the contact to be displayed on the panel.
      *
