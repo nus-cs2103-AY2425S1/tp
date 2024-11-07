@@ -25,7 +25,7 @@ public class DeleteNoteCommand extends Command {
             + ": Deletes the note of the person identified "
             + "by the index number used in the person listing and the index of the note.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "i/[NOTE_INDEX]\n"
+            + "i/NOTE_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "i/1";
 

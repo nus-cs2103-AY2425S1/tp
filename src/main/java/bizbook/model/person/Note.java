@@ -44,13 +44,13 @@ public class Note {
 
         Note otherNotes = (Note) other;
 
-        return note.equals(otherNotes.note);
+        return note.equalsIgnoreCase(otherNotes.note);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(note);
+        return Objects.hash(note.toLowerCase());
     }
 
     /**
