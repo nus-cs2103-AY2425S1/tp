@@ -18,7 +18,7 @@ public class FindRoleCommand extends Command {
     public static final String COMMAND_WORD = "find-role";
     public static final String COMMAND_WORD_SHORT_FORM = "fr";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all persons who are of a certain role "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches for all contacts who are of a certain role "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: ROLE [MORE_ROLES]...\n"
             + "Example: " + COMMAND_WORD + " attendee vendor";
