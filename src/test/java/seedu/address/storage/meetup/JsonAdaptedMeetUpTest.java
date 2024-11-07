@@ -84,7 +84,6 @@ public class JsonAdaptedMeetUpTest {
         assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
     }
 
-
     @Test
     public void toModelType_nullFrom_throwsIllegalValueException() {
         JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, null, VALID_TO, VALID_ADDED_BUYER);
@@ -123,4 +122,13 @@ public class JsonAdaptedMeetUpTest {
                 new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, VALID_FROM, VALID_TO, invalidAddedBuyers);
         assertThrows(IllegalValueException.class, meetUp::toModelType);
     }
+
+    @Test
+    public void toModelType_inValidToFrom_throwsIllegalValueException() {
+        JsonAdaptedMeetUp meetUp = new JsonAdaptedMeetUp(VALID_NAME, VALID_INFO, VALID_FROM,
+                VALID_FROM, VALID_ADDED_BUYER);
+        String expectedMessage = To.MESSAGE_CONSTRAINTS_TO_FROM;
+        assertThrows(IllegalValueException.class, expectedMessage, meetUp::toModelType);
+    }
+
 }
