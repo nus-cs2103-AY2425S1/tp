@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.DeletePublicAddressCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,7 +44,7 @@ public class DeletePublicAddressCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         // Create and add the public address
         Network network = Network.BTC;
-        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network,
             publicAddress, PublicAddress.DEFAULT_LABEL);
 
@@ -60,7 +60,7 @@ public class DeletePublicAddressCommandTest {
 
         String expectedMessage = String.format(
             MESSAGE_DELETE_PERSON_SUCCESS, personWithAddress.getName(),
-                personWithAddress.getPublicAddressesByNetwork(network)
+            personWithAddress.getPublicAddressesByNetwork(network)
         );
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
@@ -75,7 +75,7 @@ public class DeletePublicAddressCommandTest {
 
         // Create and add the public address
         Network network = Network.BTC;
-        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
         String label = "default";
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
 
@@ -102,7 +102,7 @@ public class DeletePublicAddressCommandTest {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         // Create and add the public address
         Network network = Network.BTC;
-        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN;
+        String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
         String label = "default";
         PublicAddress publicAddressToAdd = PublicAddressFactory.createPublicAddress(network, publicAddress, label);
 

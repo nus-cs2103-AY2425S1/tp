@@ -4,16 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.commons.util.StringUtil.INDENT;
-import static seedu.address.logic.commands.CommandTestUtil.PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH_MAIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_SHORT;
 import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING;
 
 import java.util.Map;
 import java.util.Set;
@@ -64,15 +64,15 @@ public class SearchPublicAddressCommandTest {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
 
         SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_SOL_MAIN);
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING);
 
         PublicAddressesComposition publicAddressesCompositionSol =
             new PublicAddressesComposition(Map.of(Network.SOL,
-                Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN, "Main wallet"))));
+                Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING, "main"))));
 
         String expectedMessage =
             String.format(SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
-                VALID_PUBLIC_ADDRESS_SOL_MAIN.toLowerCase() + "\n"
+                VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING.toLowerCase() + "\n"
                     + secondPerson.getName() + "\n" + INDENT
                     + publicAddressesCompositionSol.toStringIndented() + "\n"
                     + thirdPerson.getName() + "\n" + INDENT
@@ -85,10 +85,10 @@ public class SearchPublicAddressCommandTest {
     @Test
     public void execute_searchPublicAddressNoMatch_success() {
         SearchPublicAddressCommand searchPublicAddressCommand =
-            new SearchPublicAddressCommand(PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_STRING);
         String expectedMessage =
             String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND,
-                PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
+                VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_STRING);
         assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
     }
 
@@ -213,10 +213,10 @@ public class SearchPublicAddressCommandTest {
     @Test
     public void equals() {
         final SearchPublicAddressCommand standardCommand =
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN);
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING);
         // same values -> returns true
         SearchPublicAddressCommand commandWithSameValues =
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN);
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING);
 
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -231,7 +231,7 @@ public class SearchPublicAddressCommandTest {
 
         // different publicAddress -> returns false
         assertNotEquals(standardCommand,
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN));
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING));
     }
 
 

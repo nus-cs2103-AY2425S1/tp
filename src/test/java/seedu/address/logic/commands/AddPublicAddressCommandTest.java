@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_SUB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
 
 import java.util.Map;
 import java.util.Set;
@@ -69,7 +69,7 @@ public class AddPublicAddressCommandTest {
 
         // First add an address
         Network network = Network.BTC;
-        PublicAddress address = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, "wallet1");
+        PublicAddress address = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "wallet1");
 
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition(Map.of(network, Set.of(address)));
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -79,7 +79,7 @@ public class AddPublicAddressCommandTest {
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
 
         // Try to add another address with the same label
-        PublicAddress duplicateAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, "wallet1");
+        PublicAddress duplicateAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "wallet1");
         PublicAddressesComposition duplicateAddresses =
             new PublicAddressesComposition(Map.of(network, Set.of(duplicateAddress)));
 
@@ -107,7 +107,7 @@ public class AddPublicAddressCommandTest {
     public void execute_invalidPersonIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Network network = Network.BTC;
-        PublicAddress address = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, "test");
+        PublicAddress address = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "test");
 
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition(
             Map.of(network, Set.of(address)));
@@ -123,8 +123,8 @@ public class AddPublicAddressCommandTest {
     @Test
     public void equals() {
         Network network = Network.BTC;
-        PublicAddress address1 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN, "wallet1");
-        PublicAddress address2 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_SUB, "wallet2");
+        PublicAddress address1 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "wallet1");
+        PublicAddress address2 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_SUB_STRING, "wallet2");
 
         PublicAddressesComposition publicAddresses1 = new PublicAddressesComposition(Map.of(network, Set.of(address1)));
         PublicAddressesComposition publicAddresses2 = new PublicAddressesComposition(Map.of(network, Set.of(address2)));
