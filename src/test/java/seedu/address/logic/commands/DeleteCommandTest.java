@@ -44,7 +44,7 @@ public class DeleteCommandTest {
         Nric invalidNric = new Nric("S1234567A");
         DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
-        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_PATIENT_NOT_FOUND, invalidNric));
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, invalidNric));
     }
 
     @Test

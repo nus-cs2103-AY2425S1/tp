@@ -67,7 +67,7 @@ public class DeleteApptCommand extends Command {
                     nric)));
         if (patientToDeleteAppt == null) {
             logger.warning("Patient not found");
-            throw new CommandException(Messages.MESSAGE_PATIENT_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_NRIC);
         }
 
         Appt apptToDelete = patientToDeleteAppt.getImmutableApptList().stream()
