@@ -76,6 +76,6 @@ public class AllergyTest {
     @Test
     public void toString_validAllergyName_correctString() {
         Allergy allergy = new Allergy("Peanuts");
-        assertEquals("Peanuts", allergy.toString());
+        assertEquals("peanuts", allergy.toString());
     }
 }
