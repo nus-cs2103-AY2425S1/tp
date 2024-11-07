@@ -147,4 +147,19 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Checks if the list contains a person with the given phone number.
+     *
+     * @param phone The phone number to check for.
+     * @return True if a person with the given phone number exists in the list, false otherwise.
+     */
+    public boolean hasPhoneNumber(Phone phone) {
+        for (Person person : internalList) {
+            if (person.getPhone().isPresent() && person.getPhone().get().equals(phone)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
