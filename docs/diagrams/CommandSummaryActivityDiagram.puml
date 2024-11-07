@@ -44,5 +44,4 @@ else ([unknown command])
   :UI displays invalid command;
   stop
 endif
-
 @enduml
