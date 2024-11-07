@@ -12,10 +12,10 @@ end box
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
-[-> LogicManager : execute(find)
+[-> LogicManager : execute("find n/Alex ...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(find)
+LogicManager -> AddressBookParser : parseCommand("find n/Alex ...")
 activate AddressBookParser
 
 create FindCommandParser
@@ -25,7 +25,7 @@ activate FindCommandParser
 FindCommandParser --> AddressBookParser
 deactivate FindCommandParser
 
-AddressBookParser -> FindCommandParser : parse(find)
+AddressBookParser -> FindCommandParser : parse("n/Alex ...")
 activate FindCommandParser
 
 create FindCommand
@@ -47,7 +47,7 @@ deactivate AddressBookParser
 LogicManager -> FindCommand : execute(m)
 activate FindCommand
 
-FindCommand -> Model : updateFilteredList(predicate)
+FindCommand -> Model : updateFilteredList(...)
 activate Model
 
 Model --> FindCommand

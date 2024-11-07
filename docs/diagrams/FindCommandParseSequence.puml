@@ -8,7 +8,7 @@ participant "PredicateFactory" as PredicateFactory << class >> LOGIC_COLOR
 participant "f:FindCommand" as FindCommand LOGIC_COLOR
 end box
 
-[-> FindCommandParser : parse(find)
+[-> FindCommandParser : parse("n/Alex tut/Science ...")
 activate FindCommandParser
 
 FindCommandParser -> PredicateFactory : createPredicates(argMultimap)
