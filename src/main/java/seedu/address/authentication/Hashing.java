@@ -18,6 +18,9 @@ public class Hashing {
      * @return a hash
      */
     public static String hash(String input) {
+        //@@author AlexanderObregon
+        //Reused from https://medium.com/@AlexanderObregon/what-is-sha-256-hashing-in-java-0d46dfb83888
+        // with minor modifications
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(input.getBytes());
@@ -34,5 +37,6 @@ public class Hashing {
             logger.info(e.toString());
             throw new RuntimeException("This should never happen");
         }
+        //@@author
     }
 }
