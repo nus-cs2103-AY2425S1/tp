@@ -8,7 +8,7 @@
 
 Are you a freelance **wedding planner**? Then DDD is just the right tool for you! Managing hundreds of clients and vendors can be troublesome, and **Dream Day Designer (DDD)** is our **answer** to your problems!
 
-DDD is a desktop app for **wedding planners** to keep track of their **clients**, **vendors** and **events**, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+DDD is a desktop app for **wedding planners** to keep track of their **clients**, **vendors** and **events**, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 DDD is tailored specifically to the needs of **wedding planners**, and is designed to streamline your workflows. If you can type fast, DDD can even help you manage your contacts faster than traditional GUI apps! Furthermore, DDD offers features designed to alleviate the hassle of managing disparate sets of contacts!
 
@@ -25,7 +25,7 @@ DDD is tailored specifically to the needs of **wedding planners**, and is design
 
 3. Copy the file to the folder you want to use as the _home folder_ for your DDD.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ddd.jar` command to run the application.<br>
+4. Open a command terminal, use `cd path_to_folder` command to access the folder you put the jar file in, and use the `java -jar ddd.jar` command to run the application.<br>
 
 A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -490,6 +490,10 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 ## Glossary
 
 In case you need more information on the command parameters, here's a more comprehensive explanation of each parameter:
+
+- `Vendor`: A person who provides certain kinds of services
+- `Client`: A person who is getting married
+- `Event`: The wedding event
 
 ### Flags
 
