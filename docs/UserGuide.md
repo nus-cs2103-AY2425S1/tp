@@ -84,9 +84,13 @@ Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 A person can have any number of tags (including 0)
 </div>
 
+#### Address format
+>**[Block Number]** [Street Name]**#[Unit Level]-[Unit No.]** [Building Name] Singapore [Postal Code]
+>>[Block Number] & #[Unit Level]-[Unit No.] **are optional**
+
 Examples:
-* `add n/John Doe p/98765432 a/John street, Block 123, #01-01`
-* `add n/Betsy Crowe p/99991111 a/Yishun Street, Block 122, #02-01 p/1234567 t/Vegetable`
+* `add n/John Doe p/98765432 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456`
+* `add n/Betsy Crowe p/99991111 a/421 Marina Bay Road #12-34 Tan Kim PTE Building Singapore 123456 p/12345678 t/Vegetable`
 
 ### Listing all suppliers : `list`
 
