@@ -46,8 +46,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_EXPLANATION =
             "The above is considered duplicate fields because they have a preceding space.";
     public static final String MESSAGE_DUPLICATE_SOLUTION =
-            "Instead you should remove preceding white spaces, then the above can be used as string"
-                        + " values and wont be considered as duplicates";
+            "If you are trying to use the field values as part of a string, remove the preceding space";
+
     public static final String MESSAGE_MORE_THAN_FOUR_DUPLICATE_FIELDS =
             "There should not be more than four duplicate fields for group (g/)";
     public static final String MESSAGE_NAME_CANNOT_BE_EMPTY = "Name cannot be empty.";
