@@ -36,6 +36,15 @@ public class RemarkCommandParserTest {
     }
 
     @Test
+    public void parse_missingRemarkPrefix_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
+
+        // Index provided but missing 'r/' prefix
+        String userInput = "1 " + VALID_REMARK;
+        assertParseFailure(parser, userInput, expectedMessage);
+    }
+
+    @Test
     public void parse_noIndexSpecified_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
 
