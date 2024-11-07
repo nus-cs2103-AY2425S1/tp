@@ -2,7 +2,6 @@ package seedu.internbuddy.ui;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -92,12 +91,13 @@ public class CompanyCard extends UiPart<Region> {
     }
 
     private void setStatus() {
-        status.setText(company.getStatus().toString());
-        if (Objects.equals(status.getText(), StatusType.INTERESTED.name())) {
+        String companyStatus = company.getStatus().toString();
+        status.setText(companyStatus);
+        if (status.getText().equals(StatusType.INTERESTED.name())) {
             status.setStyle("-fx-background-color: purple;");
-        } else if (Objects.equals(status.getText(), StatusType.APPLIED.name())) {
+        } else if (status.getText().equals(StatusType.APPLIED.name())) {
             status.setStyle("-fx-background-color: green;");
-        } else if (Objects.equals(status.getText(), StatusType.CLOSED.name())) {
+        } else if (status.getText().equals(StatusType.CLOSED.name())) {
             status.setStyle("-fx-background-color: #db0303;");
         }
         tags.getChildren().add(status);
@@ -105,13 +105,47 @@ public class CompanyCard extends UiPart<Region> {
 
     private void setApplication() {
         List<Application> applications = company.getApplications();
-        application.setText(applications.isEmpty() ? "Applications: CLOSED"
-                : "Applications: " + IntStream.range(0, applications.size())
-                .mapToObj(i -> String.format("\n\t%d. %s (%s)",
-                        i + 1,
-                        applications.get(i).getName(),
-                        applications.get(i).getAppStatus()))
-                .collect(Collectors.joining()));
+        application.setText("Applications: ");
+        if (applications.isEmpty()) {
+            assert status.getText() != null;
+            appendLabel(application, status.getText().equals(StatusType.CLOSED.name())
+                    ? "Closed"
+                    : "Have not applied");
+        } else {
+            String applicationString = company.getIsShowingDetails()
+                    ? getDetailedApplication(applications)
+                    : getStandardApplication(applications);
+            appendLabel(application, applicationString);
+        }
+    }
+
+    private String getDetailedApplication(List<Application> applications) {
+        return IntStream.range(0, applications.size())
+                .mapToObj(i -> {
+                    Application app = applications.get(i);
+                    return String.format("\n\t%d. %s (%s)\n\t\t%s",
+                             i + 1,
+                             app.getName(),
+                             app.getAppStatus(),
+                             app.getDescription());
+                })
+                .collect(Collectors.joining());
+    }
+
+    private String getStandardApplication(List<Application> applications) {
+        return IntStream.range(0, applications.size())
+                .mapToObj(i -> {
+                    Application app = applications.get(i);
+                    return String.format("\n\t%d. %s (%s)",
+                            i + 1,
+                            app.getName(),
+                            app.getAppStatus());
+                })
+                .collect(Collectors.joining());
+    }
+
+    private void appendLabel(Label label, String text) {
+        label.setText(label.getText() + text);
     }
 
     private void setTags() {
