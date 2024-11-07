@@ -160,8 +160,22 @@ public class StringUtilTest {
     }
 
     @Test
+    public void containsNumber_validInput_returnFalse() {
+        // inputNumber does not contain in phoneNumber
+        assertFalse(StringUtil.containsNumber("123456", "789"));
+        assertFalse(StringUtil.containsNumber("234567", "0189"));
+    }
+
+    @Test
+    public void containsNumber_invalidPhoneNumber_validInput_returnFalse() {
+        assertFalse(StringUtil.containsNumber("1234a567", "3456"));
+        assertFalse(StringUtil.containsNumber("1234a567", "890"));
+    }
+
+    @Test
     public void containsNumber_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsNumber("12345678", null));
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsNumber("12345678", null));
     }
 
     @Test
