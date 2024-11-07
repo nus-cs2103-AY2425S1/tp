@@ -17,7 +17,8 @@ import seedu.address.model.person.Person;
 public class AddLogEntryCommand extends Command {
 
     public static final String COMMAND_WORD = "addentry";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a log entry for a person identified by the "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Opens a text box to input log entry "
+            + "for a person identified by the "
             + "NRIC. Parameters: NRIC, DATE\n"
             + "Example: " + COMMAND_WORD + " i/S1234567D d/20 Nov 2024";
     public static final String MESSAGE_ADD_LOG_SUCCESS = "Added log for Person: %1$s";
@@ -96,6 +97,4 @@ public class AddLogEntryCommand extends Command {
                 .add("appointmentDate", appointmentDate)
                 .toString();
     }
-
-
 }

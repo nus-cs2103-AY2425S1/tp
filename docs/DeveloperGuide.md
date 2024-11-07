@@ -277,28 +277,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                                                   | So that I can…​                                                   |
-|----------|---------|----------------------------------------------------------------|-------------------------------------------------------------------|
-| `* * *`  | user    | add a patient contact                                          | track the details of a specific patient under my care             |
-| `* * *`  | user    | delete a patient contact                                       | get rid of patient details that are no longer under my care       |
-| `* * *`  | user    | add a session log                                              | record the session details with a specific patient                |
-| `* * *`  | user    | delete session log                                             | remove unwanted session log                                       |
-| `* * *`  | user    | store data locally                                             | keep patient data private                                         |
-| `* *`    | user    | see my next appointment’s detail (patient info, date and time) | plan my treatment procedure                                       |
-| `* *`    | user    | get a manual all the available commands (-help command)        | learn all the possible commands to fully utilize the app          |
-| `* *`    | user    | edit session log/ patient information                          | change incorrect or out of date information                       |
-| `* *`    | user    | be able to classify my patient as cleared/uncleared            | cross reference their progress                                    |
-| `* *`    | user    | group session based on patient                                 | see each session with a specific patient                          |
-| `* *`    | user    | delete all logs related to a patient                           | remove specific patient session log efficiently                   |
-| `* *`    | user    | able to export data                                            | so that I can transfer necessary data to another professional     |
-| `* *`    | user    | able to import data                                            | so that I can receive my patient’s data from another professional |
-| `* *`    | user    | log time, date of sessions                                     | to keep track of progress and frequency of patient                |
-| `*`      | user    | be able create my own macros                                   | be more productive                                                |
-| `*`      | user    | search/filter for specific patient using keyword               | quickly find relevant details of patient                          |
-| `*`      | user    | add tags to session and patients                               | filter and review related cases                                   |
-| `*`      | user    | be able to find free time                                      | slot in last minute patients                                      |
-| `*`      | user    | undo progress using command                                    | easily correct errors                                             |
-| `*`      | user    | get reminder for my next appointment                           | be reminded in case i forget                                      |
+| Priority | As a …​ | I want to …​                                            | So that I can…​                                             |
+|----------|---------|---------------------------------------------------------|-------------------------------------------------------------|
+| `* * *`  | user    | add a patient contact                                   | track the details of a specific patient under my care       |
+| `* * *`  | user    | delete a patient contact                                | get rid of patient details that are no longer under my care |
+| `* * *`  | user    | add a session log                                       | record the session details with a specific patient          |
+| `* * *`  | user    | delete session log                                      | remove unwanted session log                                 |
+| `* * *`  | user    | store data locally                                      | keep patient data private                                   |
+| `* *`    | user    | get a manual all the available commands (-help command) | learn all the possible commands to fully utilize the app    |
+| `* *`    | user    | clear the list of patients                              | start from an empty patient list                            |
+| `* *`    | user    | edit session log/ patient information                   | change incorrect or out of date information                 |
+| `* *`    | user    | confirm a command                                       | verify if I really want to do an action                     |
+| `* *`    | user    | cancel a command                                        | reverse an action that I did not intend to do               |
+| `* *`    | user    | be able to classify my patient as discharged/new        | cross reference their progress                              |
+| `* *`    | user    | group session based on patient                          | see each session with a specific patient                    |
+| `* *`    | user    | delete logs related to a patient                        | remove specific patient session log efficiently             |
+| `* *`    | user    | log time, date of sessions                              | to keep track of progress and frequency of patient          |
+| `*`      | user    | search/filter for specific patient using keyword        | quickly find relevant details of patient                    |
+
 
 ### Use cases
 
