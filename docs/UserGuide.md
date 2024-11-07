@@ -5,16 +5,59 @@ pageNav: 3
 ---
 <h2 style="color: #FF6347;">NovaCare</h2>
 
-A **desktop app for managing patients, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, NovaCare can get your patient management tasks done faster than traditional GUI apps.
+A **desktop app for private nurses to manage patients, optimized for use via a Command Line Interface** [(CLI)](#glossary) while still having the benefits of a Graphical User Interface [(GUI)](#glossary).
+Tailored to handle the demanding workload of private nurses managing numerous patients, NovaCare is built for speed—ideal for users who type quickly, enabling faster patient management than traditional GUI-based applications.
+
+In this guide, users will be able to learn the following details:
+
+1) **Set up NovaCare** using **Mac/Linux** or **Windows**.
+2) **Explore and use features** that are available in NovaCare to add and delete your first private patient details and task details.
+3) Quickly learn and master various [commands](#command-summary) and actions available in NovaCare.
+4) General [FAQs](#faq) (Frequently asked questions) of NovaCare.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
-
-Refer to the sidebar if you are on the website.
-
 <!-- * Table of Contents -->
-<page-nav-print />
+1. [How to use NovaCare](#how-to-use-novacare)
+2. [Annotation Box](#annotations-box)
+3. [Quick start](#quick-start)
+4. [Overview of GUI](#overview-of-gui)
+5. [Get started with NovaCare](#get-started-with-novacare)
+6. [Features](#features)
+    - 6.1 [Parameter information](#parameter-information)
+    - 6.2 [Patient commands](#patient-commands)
+      - 6.2.1 [Adding a patient](#adding-a-patient-add)
+      - 6.2.2 [Listing all patients](#listing-all-patients--list)
+      - 6.2.3 [Editing a patient](#editing-a-patient--edit)
+      - 6.2.4 [Locating patients by name](#locating-patients-by-name-find)
+      - 6.2.5 [Deleting a patient](#deleting-a-patient--delete)
+      - 6.2.6 [Adding emergency contact](#adding-emergency-contact--emergency)
+      - 6.2.7 [Deleting emergency contact](#deleting-emergency-contact--delemergency)
+      - 6.2.8 [Adding priority level](#adding-priority-level--priority)
+      - 6.2.9 [Deleting priority level](#deleting-priority-level--deletelevel) 
+    - 6.3 [Task commands](#task-commands)
+      - 6.3.1 [Adding a task](#adding-a-task--addtask)
+      - 6.3.2 [Deleting a task](#deleting-a-task--deletetask)
+      - 6.3.3 [Marking a task](#marking-a-task--marktask)
+      - 6.3.4 [Finding a task](#finding-a-task--findtask)
+      - 6.3.5 [Listing tasks](#listing-tasks--listtask)
+      - 6.3.6 [Listing incomplete tasks](#listing-incomplete-tasks--listincomplete)
+    - 6.4 [General commands](#general-commands)
+      - 6.4.1 [Viewing help](#viewing-help--help)
+      - 6.4.2 [Clearing all entries](#clearing-all-entries--clear)
+      - 6.4.3 [Exiting the program](#exiting-the-program--exit)
+    - 6.5 [Data Management](#data-management)
+      - 6.5.1 [Saving the data](#saving-the-data)
+      - 6.5.2 [Editing the data file](#editing-the-data-file)
+      - 6.5.3 [Archiving data files](#archiving-data-files-coming-in-v20)
+7. [FAQ](#faq)
+8. [Known Issues](#known-issues)
+9. [Command Summary](#command-summary)
+   - 9.1 [Patient-Related Commands](#patient-related-commands)
+   - 9.2 [Task-Related Commands](#task-related-commands)
+   - 9.3 [Other Commands](#other-commands)
+10. [Glossary](#glossary)
+      
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -27,23 +70,9 @@ If you are new to NovaCare, we recommend you to start with the [Quick Start](#qu
 
 If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#command-summary) section.
 
-### Glossary
-As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
+[⬆️ Back to Table of Contents](#table-of-contents)
 
-| Term               | Definition                                                                                                                                                                         |
-|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **JAR**            | A Java ARchive (JAR) is a package file that compresses many Java files into a single executable file used for Java applications.                                                   |
-| **CLI**            | A Command Line Interface (CLI) is a text-based interface used to interact with software using text commands.                                                                       |
-| **PARAMETER**      | A parameter is the text that is passed to a software to perform a specific action.                                                                                                 |
-| **Prefix**         | A prefix is a keyword that is used to identify the type of parameter that is being passed to the software.                                                                         |
-| **GUI**            | A Graphical User Interface (GUI) is a visual interface that allows users to interact with software using graphical icons and indicators.                                           |
-| **Command**        | A command is an input action given to the software to perform a specific action.                                                                                                   |
-| **Index**          | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                                                                |
-| **Tag**            | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                                                           |
-| **Priority Level** | A priority level is a value assigned to a patient to indicate the urgency of their medical condition. 1 indicates a critical condition while 3 indicates a non-critical condition. |
-| **[word]**         | Words in square brackets are optional parameters that can be included in the command.                                                                                              |
-
-### Annotations box
+## Annotations box
 The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
 
 <box type="info" seamless>
@@ -60,6 +89,8 @@ The following are annotations throughout this user guide that provide additional
 
 **Warning:** Warns you about potential errors that you may face when using the NovaCare.
 </box>
+
+[⬆️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -95,6 +126,8 @@ Upon successful installation, you should see something like this:
 
 Upon successful execution, you should see the GUI of NovaCare covered in the next section.
 
+[⬆️ Back to Table of Contents](#table-of-contents)
+
 ## Overview of GUI
 
 The GUI is broken down into different **sections** as shown in the image below:
@@ -105,6 +138,8 @@ The GUI is broken down into different **sections** as shown in the image below:
 3. **Patient List:** Displays all the patients in the application.
 4. **Task List:** Displays all the task for all patients.
 5. **Menu Bar:** Contains the `File` and `Help` menu. (to exit or view the help menu)
+
+[⬆️ Back to Table of Contents](#table-of-contents)
 
 ## Get started with NovaCare
 Here will be a basic guide on how to use the application.
@@ -137,6 +172,8 @@ Here will be a basic guide on how to use the application.
         > `exit`
 
 Refer to the [Features](#features) below for details of each command.
+
+[⬆️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -171,6 +208,8 @@ This section provides a detailed explanation of the features available in NovaCa
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+[⬆️ Back to Table of Contents](#table-of-contents)
+
 ### Parameter Information
 The table below explains each of the parameter available in NovaCare.
 It will provide the limitations and examples of the parameter.
@@ -194,6 +233,10 @@ Otherwise, the command will not be executed and display an error message in Resu
 | **DESCRIPTION** | Description of task | * Description should not be blank.<br/> * Description can take any values.                                                                                                                                                                                                                                                                                            | :white_check_mark: `Eat paracetamol 1000mg`<br/>                                        |
 |**PRIORITY_LEVEL** | Priority level of patient | * Priority level should be either 1, 2, 3 or reset.                                                                                                                                                                                                                                                                                                                   | :white_check_mark: `1`<br/>:x: `4`                                                      |
 
+[⬆️ Back to Table of Contents](#table-of-contents)
+
+## Patient Commands
+In NovaCare, these commands will allow you to modify your list of patients to suit your needs.
 
 ### Adding a patient: `add`
 
@@ -228,6 +271,9 @@ Examples:
 Shows a list of all patients in the system.
 
 :pencil: Format: `list`
+
+Example:
+* `list` lists all the patients in the system and displays them.
 
 ### Editing a patient : `edit`
 
@@ -268,8 +314,8 @@ Finds patients whose names contain any of the given keywords.
 </box>
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` returns any patient that has the name John inside, for instance `john` and `John Doe`
+* `find alex david` returns any patient with names containing either "Alex" or "David". This means it will return any patient whose name includes either "Alex" or "David" as part of their name. `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a patient : `delete`
@@ -305,7 +351,7 @@ Adds an emergency contact and details to a patient in the system.
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
-Examples:
+Example:
 * `emergency 1 n/tom tan p/91237171` adds an emergency contact `tom tan` with contact number `91237171` to 1st index in the patient list.
 
 ### Deleting emergency contact : `delemergency`
@@ -322,9 +368,8 @@ Deletes an emergency contact and its details from a patient in the system.
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
-Examples:
+Example:
 * `delemergency 1` deletes the emergency contact of the 1st indexed patient in the patient list.
-
 
 ### Adding priority level : `priority`
 
@@ -341,7 +386,7 @@ Adds an priority level to a patient in the system.
 * The priority level **must be a positive integer** and only from **1, 2, 3**
 </box>
 
-Examples:
+Example:
 * `priority 1 /level 2` adds priority level `2` to 1st index in patient list.
 
 ### Deleting priority level : `deletelevel`
@@ -362,6 +407,10 @@ Examples:
 * `deletelevel 1` deletes priority level of the 1st indexed patient in the patient list.
 * `priority 1 l/reset` resets the priority level of the 1st indexed patient in the patient list.
 
+[⬆️ Back to Table of Contents](#table-of-contents)
+
+## Task commands
+In NovaCare, these commands will allow you to modify your list of tasks, each task being specific to each patient to suit your needs.
 
 ### Adding a task : `addtask`
 
@@ -397,10 +446,10 @@ Deletes a task for a patient in the system.
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
-Examples:
+Example:
 * `deletetask 1` deletes the 1st task in the task list.
 
-### Mark Task : `marktask`
+### Marking a Task : `marktask`
 
 Marks a task at a specific index.
 
@@ -414,30 +463,40 @@ Marks a task at a specific index.
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
-Examples:
+Example:
 * `marktask 1` marks a task of the 1st index in task list.
 
-### Find Task : `findtask`
+### Finding a Task : `findtask`
 
 Finds all task for a particular Patient specific index.
 
 :pencil: Format: `findtask INDEX`
 
-Examples:
+Example:
 * `marktask 1` marks a task of the 1st index in task list.
 
-### List Task : `listtask`
+### Listing Tasks : `listtask`
 
 List all tasks for all patients in the system.
 
 :pencil: Format: `listtask`
 
-### List Incomplete Task : `listincomplete`
+Example:
+* `listtask` lists all tasks in the system and displays them.
+
+### Listing Incomplete Tasks : `listincomplete`
 
 List all incomplete tasks for all patients in the system.
 
 :pencil: Format: `listincomplete`
 
+Example:
+* `listincomplete` lists all incomplete tasks in the system and displays them.
+
+[⬆️ Back to Table of Contents](#table-of-contents)
+
+## General commands
+In NovaCare, these are the default commands for getting help, clearing and saving your patient and task data.
 
 ### Viewing help : `help`
 
@@ -454,6 +513,9 @@ Format: `help`
 
 ![helpWindow](images/helpWindow.png)
 
+Example:
+* `help` shows the help window which displays all commands available in NovaCare.
+
 ### Clearing all entries : `clear`
 
 Clears all patient and tasks entry from NovaCare.
@@ -467,40 +529,54 @@ Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
 **This action is irreversible!**
 </box>
 
+Example:
+* `clear` clears all available data in NovaCare, both patients and tasks.
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 :pencil: Format: `exit`
 
+Example:
+* `exit` automatically saves and exit NovaCare.
+
+[⬆️ Back to Table of Contents](#table-of-contents)
+
+## Data Management
+
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+NovaCare data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+NovaCare data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
+[⬆️ Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I **transfer my data** to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NovaCare home folder.
 
 **Q**: What should I do if NovaCare **doesn't start** after double-clicking the JAR file? <br>
 **A**: Ensure Java is correctly installed by typing `[java -version]` in your command prompt or terminal. If Java is not recognized, install it from Oracle's official site.
+
+[⬆️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -508,6 +584,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+[⬆️ Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -543,3 +621,23 @@ _Details coming soon ..._
 |**Help**               | `help`                 |
 |**Clear**              | `clear`                |
 |**Exit**               | `exit`                 |
+
+[⬆️ Back to Table of Contents](#table-of-contents)
+
+### Glossary
+As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
+
+| Term               | Definition                                                                                                                                                                         |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **JAR**            | A Java Archive (JAR) is a package file that compresses many Java files into a single executable file used for Java applications.                                                   |
+| **CLI**            | A Command Line Interface (CLI) is a text-based interface used to interact with software using text commands.                                                                       |
+| **PARAMETER**      | A parameter is the text that is passed to a software to perform a specific action.                                                                                                 |
+| **Prefix**         | A prefix is a keyword that is used to identify the type of parameter that is being passed to the software.                                                                         |
+| **GUI**            | A Graphical User Interface (GUI) is a visual interface that allows users to interact with software using graphical icons and indicators.                                           |
+| **Command**        | A command is an input action given to the software to perform a specific action.                                                                                                   |
+| **Index**          | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                                                                |
+| **Tag**            | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                                                           |
+| **Priority Level** | A priority level is a value assigned to a patient to indicate the urgency of their medical condition. 1 indicates a critical condition while 3 indicates a non-critical condition. |
+| **[word]**         | Words in square brackets are optional parameters that can be included in the command.                                                                                              |
+
+[⬆️ Back to Table of Contents](#table-of-contents)
