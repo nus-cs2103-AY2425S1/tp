@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFORMATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENTS_SUPPLIED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENTS_SUPPLIED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -32,12 +32,13 @@ import seedu.address.model.person.Information;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.util.Remark;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Remark;
+
 
 /**
  * Edits the details of an existing person, customer, or supplier in the address book.
@@ -46,7 +47,8 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "editContact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person, customer or supplier identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Edits the details of the person, customer or supplier identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -64,9 +66,12 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_INVALID_INFORMATION_EDIT = "Cannot edit the information field for a non-customer.";
-    public static final String MESSAGE_INVALID_INGREDIENTS_EDIT = "Cannot edit the ingredients supplied field for a non-supplier.";
-    public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Ingredient '%s' not found in the catalogue. Please add it using the addIngredient command.";
+    public static final String MESSAGE_INVALID_INFORMATION_EDIT =
+            "Cannot edit the information field for a non-customer.";
+    public static final String MESSAGE_INVALID_INGREDIENTS_EDIT =
+            "Cannot edit the ingredients supplied field for a non-supplier.";
+    public static final String MESSAGE_INGREDIENT_NOT_FOUND =
+            "Ingredient '%s' not found in the catalogue. Please add it using the addIngredient command.";
 
 
     private final Index index;
@@ -121,7 +126,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor, IngredientCatalogue catalogue) throws CommandException {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor,
+                                             IngredientCatalogue catalogue) throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -132,11 +138,16 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         if (personToEdit instanceof Customer) {
-            Information updatedInformation = editPersonDescriptor.getInformation().orElse(((Customer) personToEdit).getInformation());
-            return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation, updatedRemark, updatedTags);
+            Information updatedInformation = editPersonDescriptor.getInformation()
+                    .orElse(((Customer) personToEdit)
+                    .getInformation());
+            return new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation,
+                    updatedRemark, updatedTags);
         } else if (personToEdit instanceof Supplier) {
-            Ingredients updatedIngredients = getUpdatedIngredients(editPersonDescriptor, (Supplier) personToEdit, catalogue);
-            return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIngredients, updatedRemark, updatedTags);
+            Ingredients updatedIngredients = getUpdatedIngredients(editPersonDescriptor,
+                    (Supplier) personToEdit, catalogue);
+            return new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                    updatedIngredients, updatedRemark, updatedTags);
         }
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
@@ -144,7 +155,8 @@ public class EditCommand extends Command {
     /**
      * Retrieves and updates the ingredients supplied based on the provided ingredient names.
      */
-    private static Ingredients getUpdatedIngredients(EditPersonDescriptor editPersonDescriptor, Supplier supplier, IngredientCatalogue catalogue) throws CommandException {
+    private static Ingredients getUpdatedIngredients(EditPersonDescriptor editPersonDescriptor, Supplier supplier,
+                                                     IngredientCatalogue catalogue) throws CommandException {
         if (editPersonDescriptor.getIngredientsSupplied().isEmpty()) {
             return supplier.getIngredientsSupplied();
         }

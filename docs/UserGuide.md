@@ -175,6 +175,10 @@ Refer to the [Features](#features) below for details of each command.
 * Parameter values are case-insensitive
 
 --------------------------------------------------------------------------------------------------------------------
+## FAQ
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -734,26 +738,5 @@ umarkSupplyOrder 1
 ![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
 ----------------------------------------------------------------------------------------------------------------------
-## Key New Features Summary
 
-Action | Format, Examples
--------|------------------
-**Add Customer** | addCustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INFORMATION [t/TAG] <br> e.g., addCustomer n/John Doe p/12345678 e/john@example.com a/456 Pastry Street i/Allergic to dairy
-**Add Supplier** | addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG] <br> e.g., addSupplier n/Tim p/81234567 e=tim@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
-**Add Ingredient** | addIngredient NAME COST <br> e.g., addIngredient Flour 1.50
-**Add Pastry** | addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...] <br> e.g., addPastry Croissant 3.50 Flour Cream Sugar
-**Remove Ingredient** | removeIngredient NAME <br> e.g., removeIngredient Flour
-**Remove Pastry** | removePastry NAME <br> e.g., removePastry Croissant
-**Add Customer Order** | addCustomerOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addCustomerOrder 12345678 1 2 3
-**Delete Customer Order** | deleteCustomerOrder INDEX <br> e.g., deleteCustomerOrder 1
-**Add Supply Order** | addSupplyOrder PHONE_NUMBER PRODUCTID [MORE_PRODUCTIDs...] <br> e.g., addSupplyOrder 98765432 1 2 3
-**Delete Supply Order** | deleteSupplyOrder INDEX <br> e.g., deleteSupplyOrder 1
-**View Orders** | viewOrder
-**View Ingredient Catalogue** | viewIngredientCatalogue
-**View Pastry Catalogue** | viewPastryCatalogue
-**View Inventory** | viewInventory
-**Check Pastry Stock** | checkPastryStock PASTRY <br> e.g., checkPastryStock Croissant
-**Check Ingredient Stock** | checkIngredientStock INGREDIENT <br> e.g., checkIngredientStock Flour
-**Mark Customer Order** | markCustomerOrder INDEX <br> e.g., markCustomerOrder 1
-**Mark Supplier Order** | markSupplierOrder INDEX <br> e.g., markSupplierOrder 1
 
