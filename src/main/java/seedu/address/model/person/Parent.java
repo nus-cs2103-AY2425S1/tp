@@ -38,7 +38,7 @@ public class Parent extends Person {
      */
     public Parent(Person person, Set<Name> childrensNames) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
-                person.getPinned(), person.isArchived());
+                person.isPinned(), person.isArchived());
         this.childrensNames = childrensNames;
     }
 

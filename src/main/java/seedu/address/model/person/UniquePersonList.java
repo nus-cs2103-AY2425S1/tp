@@ -149,7 +149,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the list by placing all the pinned people to the top of the list.
      */
     public void sortByPin() {
-        FXCollections.sort(internalList, Comparator.comparing(Person::getPinned).reversed());
+        FXCollections.sort(internalList, Comparator.comparing(Person::isPinned).reversed());
     }
 
     /**

@@ -56,7 +56,7 @@ public abstract class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-        isPinned = source.getPinned();
+        isPinned = source.isPinned();
         isArchived = source.isArchived();
     }
 
@@ -70,7 +70,7 @@ public abstract class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-        isPinned = source.getPinned();
+        isPinned = source.isPinned();
         isArchived = source.isArchived();
     }
 

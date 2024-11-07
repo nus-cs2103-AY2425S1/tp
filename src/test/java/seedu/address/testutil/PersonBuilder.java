@@ -54,7 +54,7 @@ public abstract class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        isPinned = personToCopy.getPinned();
+        isPinned = personToCopy.isPinned();
     }
 
     /**
