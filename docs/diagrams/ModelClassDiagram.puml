@@ -21,6 +21,7 @@ Class StudentID
 Class Comment
 Class Year
 Class Group
+Class GroupList
 
 Class I #FFFFFF
 }
@@ -44,7 +45,8 @@ Person *--> "1" StudentID
 Person *--> "0...1" Major
 Person *--> "0...1" Email
 Person *--> "0...1" Year
-Person *--> "0...1" Group
+Person *--> "1" GroupList
+GroupList *--> "*" Group
 Person *--> "0...1" Comment
 
 Person -[hidden]up--> I

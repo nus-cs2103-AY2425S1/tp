@@ -29,7 +29,8 @@ You can refer to the [FAQ](#frequently-asked-questions-quick-start) section belo
 
 4. Open a command terminal, enter `cd Downloads/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
    A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   
+   <img width="1000" alt="image" src="https://github.com/user-attachments/assets/eba34e61-93a6-4ccd-afad-1e3eb37560d2">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -119,17 +120,23 @@ Here are some examples for you to try!
 
 ### Editing a student : `edit`
 
-Edits an existing student in Teacher's Pet.
+Made a mistake? You can edit an existing student in Teacher's Pet.
 
-Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
+Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive unsigned integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If no arguments are provided after the prefix (eg. `g/`), the information of that field would be reset. This works for all fields except Name and Student ID.
+</div>
+
+Continuing from the previous example in `add`, you could try this
 *  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st student to be `Science` and `e1234567` respectively.
-*  `edit 2 n/Betsy Crower g/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing groups.
+*  `edit 2 n/Betsy Tan g/` Edits the name of the 2nd student to be `Betsy Tan` and clears all of Betsy's groups.
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/e3ba5f4a-e849-4f62-ae7e-5718de7d0db5">
 
 ---
 
@@ -155,26 +162,36 @@ Examples:
 
 ### Listing all students : `list`
 
-Shows a list of all students in Teachers' Pet.
+You can view a list of all students stored in Teachers' Pet.
 
 Format: `list`
+
+* Note that there should be no additional arguments after `list` (eg. `list all`)
+
+Here is an example of what you might see, our lists would be different, of course!:
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/c9d071e2-9e10-4a43-a86c-3414bb0035f9">
 
 ---
 
 ### Displaying students in a group : `show`
 
-Shows a list of students in the same group(s)
+You can view a list of students in the same group(s)
 
 <span style="color:#4CAF50;">Format: show KEYWORDS</span>
 
 * The KEYWORDS is the name of the group you would like to search for in your current list. For instance, use `group 1` (for group 1) …​
 * The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
 * The order of the keywords does not matter. e.g., `1 group` will match `group 1`.
-* Only full words will be matched for names. e.g., `gro` will not match `group 1`.
 
-Examples:
-* `show 1` returns students with who are in group 1.
-  ![result for 'show 1'](images/show_feature.png)
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can search for substrings within the content, but the search will only return results where the content starts with the entered text. For example, searching for "gro" will match "group 1", but will not match "1 group".
+</div>
+
+Here is an example you could try:
+* `show group 2` returns students who are in groups containing the words `group` or `2` (or both).
+
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/2861ca50-565a-48ad-91ed-29f3ef29dbe8">
 
 ---
 
@@ -581,7 +598,7 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Add** | `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]` <br> e.g., `add n/James Ho id/A1234567X nid/e1234567 m/Computer Science y/2 g/Group 4`
-**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`<br> e.g.,`edit 1 n/James Lee m/4`
+**Edit** | `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/GROUP_NAME]`<br> e.g.,`edit 1 n/James Lee m/4`
 **Comment** | `comment INDEX c/COMMENT`<br> e.g., `comment 1 c/Is always late to class`
 **List** | `list`
 **Show** | `show GROUP_NAME`
