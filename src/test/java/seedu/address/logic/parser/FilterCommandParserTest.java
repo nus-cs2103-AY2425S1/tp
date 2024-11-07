@@ -17,7 +17,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOW_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MEDIUM_RISK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Assertions;

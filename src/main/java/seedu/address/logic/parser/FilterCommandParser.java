@@ -39,7 +39,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         //ensure no invalid prefixes are used
         if (Parser.areAnyPrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_NAME)) {
             throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    FilterCommand.MESSAGE_USAGE));
+                  FilterCommand.MESSAGE_USAGE));
+
         }
 
         //you can only filter for one value per feature

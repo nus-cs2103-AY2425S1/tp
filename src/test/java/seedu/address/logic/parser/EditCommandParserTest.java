@@ -236,4 +236,12 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput,
               Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
     }
+
+    @Test
+    public void parse_invalidPrefix_failure() {
+        String userInputHigh = INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + "High Risk";
+        assertParseFailure(parser, userInputHigh + " d/12/2/2023 1230",
+              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
+    }
 }
