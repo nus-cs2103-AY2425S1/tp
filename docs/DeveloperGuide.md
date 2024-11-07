@@ -240,6 +240,7 @@ Next, if a user executes an `add` command (e.g., `add n/David ...`), a new state
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#saveAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
+
 ---
 
 #### Step 4. Undoing the Addition
