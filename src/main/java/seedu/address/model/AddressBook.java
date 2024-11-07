@@ -72,6 +72,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
+        if (this.hasPerson(p)) {
+            return;
+        }
         persons.add(p);
     }
 

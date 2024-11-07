@@ -27,11 +27,14 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    private static final String DEFAULT_PHONE = "00000000";
+    private static final String DEFAULT_EMAIL = "default@email.net";
+    private static final String DEFAULT_TELEGRAMHANDLE = "@defaulthandle";
 
     private final String name;
-    private final String phone;
-    private final String email;
-    private final String telegramHandle;
+    private String phone;
+    private String email;
+    private String telegramHandle;
     private final String moduleName;
     private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -145,4 +148,53 @@ class JsonAdaptedPerson {
                 modelModuleName, modelRemark, modelTags);
     }
 
+    public boolean isValidPerson() {
+        boolean hasValidContactInfo = phone != null && Phone.isValidPhone(phone)
+                || telegramHandle != null && TelegramHandle.isValidTelegramHandle(telegramHandle)
+                || email != null && Email.isValidEmail(email);
+        return name != null && Name.isValidName(name)
+                && hasValidContactInfo
+                && moduleName != null && ModuleName.isValidModName(moduleName)
+                && contactType != null && ContactType.isValidContactType(contactType);
+    }
+
+    /**
+     * @return true if either email, telegramHandle, or email are empty
+     */
+    public boolean hasEmptyContactInfo() {
+        return phone == null
+                || telegramHandle == null
+                || email == null;
+
+    }
+
+    /**
+     * Replaces invalid contact info with default values
+     */
+    public void clearInvalidContactInfo() {
+        if (!Phone.isValidPhone(phone)) {
+            phone = DEFAULT_PHONE;
+        }
+        if (!Email.isValidEmail(email)) {
+            email = DEFAULT_EMAIL;
+        }
+        if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
+            telegramHandle = DEFAULT_TELEGRAMHANDLE;
+        }
+    }
+
+    /**
+     * Fills empty contactInfo with default values
+     */
+    public void fillEmptyContactInfo() {
+        if (phone == null) {
+            this.phone = DEFAULT_PHONE;
+        }
+        if (email == null) {
+            this.email = DEFAULT_EMAIL;
+        }
+        if (telegramHandle == null) {
+            this.telegramHandle = DEFAULT_TELEGRAMHANDLE;
+        }
+    }
 }
