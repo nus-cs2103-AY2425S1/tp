@@ -946,11 +946,11 @@ testers are expected to do more *exploratory* testing.
        duplicated groups. The other group is also added into the application, and the result of this change is shown to you
        in the group list.
 
-    1. Test case: `ag gn/cs2103-f16-1 gn/cs2103-f16-1 gn/cs2103-f15-2`<br> (Execute this command only after the previous one has been executed)
+    1. Test case: `ag gn/cs2103-f16-1 gn/cs2103-f16-1 gn/cs2103-f15-2` (Execute this command only after the previous one has been executed)
        Expected: Here, observe that the first two instances of group inputs are duplicates. In such a case, the application
        ignores the duplicated instance and adds one instance into its group data, displaying a warning message regarding
        duplicated groups. The other group also cannot be added as it is already in the application. This will be reflected
-       as a warning message to you.
+       as a warning message to you.<br>
    
     1. Test case: `ag gn/cs2103-f16-1 gn/cs2103-f16-1 gn/cs2103-f15-2`<br> (Execute this command only after the previous one has been executed)
        Expected: An error message will be yielded as all groups already exist in the model.
@@ -993,14 +993,179 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `dg cs2103-f12-1`, `...` (incorrect inputs, missing inputs, or incorrect prefixes used)<br>
        Expected: Similar to previous.<br>
 
+### Adding a task to a group
 
-### Saving data
+1. Adding a task to a single group
 
-1. Dealing with missing/corrupted data files
+    1. Test case: `atg gn/cs2103-f12-1 tn/test td/2024-09-09 1900`<br>
+       Expected: The task with the corresponding name and deadline is added to the group.
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: `atg gn/cs2103-f12-1 tn/test td/2024-09-09 1900` (Execute this command after executing the above test)<br>
+       Expected: After doing the above step, repeating this command again will yield an error message because the task 
+       already exists.
 
-1. _{ more test cases …​ }_
+    1. Test case: `atg gn/cs2103-f50-1 tn/test td/2024-09-09 1900`<br> 
+       Expected: This will yield an error message because the group does not exist.
+
+    1. Other incorrect commands to try: Try inputs containing invalid group names and/or task deadlines. Error messages 
+       should be displayed to you.
+
+1. Adding a task to multiple groups
+
+    1. Prerequisites: Add a few dummy groups into the application by executing the command: 
+       `ag gn/cs2103-f19-1`
+
+    1. Test case: `atg gn/cs2103-f12-1 gn/cs2103-f11-1 tn/tasktest td/2024-09-09 1900`<br>
+       Expected: The task with the corresponding name and deadline is added to both groups.
+
+    1. Test case: `atg gn/cs2103-f12-1 gn/cs2103-f19-1 tn/tasktest td/2024-09-09 1900`<br>
+       Expected: There will be a warning message shown to you because `CS2103-F12-1` already has the task. The system 
+       will add the task to the other group.
+
+    1. Test case: `atg gn/cs2103-f12-1 gn/cs2103-f12-1 gn/cs2103-f19-1 tn/helloworld td/2024-09-09 1900`<br>
+       Expected: There will be a warning message shown to you because `CS2103-F12-1` is entered twice. However, the 
+       system will ignore this duplicated instance and add the task into both groups that are entered.
+
+    1. Test case: `atg gn/cs2103-f11-1 gn cs2103-f11-1 gn/cs2103-f19-1 tn/helloworld td/2024-09-09 1900` (Execute this 
+       command after executing the command above)<br>
+       Expected: There will be an error message because the task already exists.
+
+    1. Test case: `atg gn/cs2103-f100-1 gn cs2103-f100-1 gn/cs2103-f101-1 tn/helloworld td/2024-09-09 1900`<br>
+       Expected: Notice the duplicated instance of the group `CS2103-F100-1`. However, in this instance the duplication
+       does not matter as the groups entered both do not exist. This is a more dire mistake, hence an error message will
+       be displayed.
+
+    1. Other incorrect commands to try: Try inputs containing invalid group names, task names, and/or task deadlines. 
+       Try also to mix different invalid inputs to trigger errors/warnings.
+
+### Adding an existing task to a group
+
+1. Adding an existing task to a single group
+
+    1. Test case: `aetg gn/cs2103-f12-1 i/1`<br>
+       Expected: The task with the corresponding name and deadline is added to the group.
+
+    1. Test case: `aetg gn/cs2103-f12-1 i/1` (Execute this command after executing the above test)<br>
+       Expected: After doing the above step, repeating this command again will yield an error message because the task
+       has already been added to the group.
+
+    1. Test case: `aetg gn/cs2103-f50-1 i/100`<br>
+       Expected: This will yield an error message because the task does not exist.
+
+    1. Other incorrect commands to try: Try inputs containing invalid group names and/or task deadlines. Error messages
+       should be displayed to you.
+
+1. Adding an existing task to multiple groups
+
+    1. Test case: `aetg gn/cs2103-f12-1 gn/cs2103-f11-1 i/1`<br>
+       Expected: The task with the corresponding name and deadline is added to both groups.
+
+    1. Test case: `aetg gn/cs2103-f12-1 gn/cs2103-f19-1 i/1`<br>
+       Expected: There will be a warning message shown to you because `CS2103-F12-1` already has the task. The system
+       will add the task to the other group.
+
+    1. Test case: `atg gn/cs2103-f12-1 gn/cs2103-f12-1 gn/cs2103-f19-1 i/2`<br>
+       Expected: There will be a warning message shown to you because `CS2103-F12-1` is entered twice. However, the
+       system will ignore this duplicated instance and add the task into both groups that are entered.
+
+    1. Test case: `atg gn/cs2103-f11-1 gn cs2103-f11-1 gn/cs2103-f19-1 i/2` (Execute this
+       command after executing the command above)<br>
+       Expected: There will be a warning message for the duplicated instance of `CS2103-F11-1` entered, as well as a 
+       warning message for the `CS2103-F19-1` because it already contains the task. The system will ignore the duplicated
+       instance and add the task to `CS2103-F11-1` only.
+
+### Adding a task to all groups
+
+1. Adding an existing task 
+
+    1. Prerequisites: Execute command `atg gn/cs2103-f12-1 tn/dummytest td/2024-09-09 1900`, which adds the given task 
+       into the group.
+
+    1. Test case: `at tn/dummytest td/2024-09-09 1900`<br>
+       Expected: The given task will be added into all groups. The system will reflect this change to you on the task
+       list.
+
+    1. Test case: `at tn/dummytest` or `at td/2024-09-09 1900`<br>
+       Expected: This will yield an error message because of the invalid command format.
+
+    1. Test case: `at td/2024-09-09`<br>
+       Expected: This will yield an error message because of the invalid deadline format.
+
+1. Adding a new task
+    1. Test case: `at tn/dummytest2 td/2024-09-09 1900`<br>
+       Expected: The given task will be added into all groups. The system will reflect this change to you on the task
+       list.
+
+### Deleting a task from all groups
+
+1. Deleting task from all groups which have this task
+
+    1. Prerequisites: This command works either for tasks which all groups have, or tasks which all groups have. In any 
+       case, the specified task will be removed from the application and all the groups that have it. To undergo this 
+       test, we will start with the sample data. Execute command `at tn/newTaskTest td/2024-09-09 1900`.<br>
+
+    1. Test case: `dt i/1`<br>
+       Expected: The given task will be deleted from all groups which have it. The task will also be deleted from the 
+       task list. 
+
+    1. Test case: `dt i/2` (Execute this command after the first test case above has been executed)<br> 
+       Expected: This command will delete the newly added dummy task created as a prerequisite. It will have the same 
+       behavior as the above test case. 
+
+    1. Test case: `dt i/100`<br>
+       Expected: There will be an error message displayed to the user because the task index provided is invalid.
+
+    1. Other incorrect commands to try: `dt`, `dt tn/...`, and any other commands with incorrect format or prefixes.
+       Expected: Similar to previous
+
+### Deleting a task from a single group
+
+1. Deleting task from a single group.
+
+    1. Prerequisites: We will work with the sample data given.
+
+    1. Test case: `dtg gn/cs2103-f12-1 i/1`<br>
+       Expected: The specified task given by the index will be deleted from the group. This change will be reflected in
+       the group task list.
+
+    1. Test case: `dtg gn/cs2103-f12-1 i/100`<br>
+       Expected: This command will yield an error message because of the invalid task index.
+
+    1. Test case: `dtg i/100`<br>
+       Expected: This command will yield an error message displayed to the user because the group name is not specified.
+
+    1. Test case: `dtg gn/cs2103-f12-1`<br>
+       Expected: This command will yield an error message displayed to the user because the task index is not specified. 
+
+    1. Other incorrect commands to try: Any other commands with incorrect format or prefixes.
+       Expected: Similar to previous
+
+### Undo
+
+1. Undoes a previously executed command.
+
+    1. Prerequisites: We will work with the sample data given. It is important to open a fresh T_Assistant application.
+
+    1. Test case: `undo`<br>
+       Expected: This command will yield an error message because there is nothing to undo.
+
+    1. Test case: `ag cs2103-f13-1`, then `undo`<br>
+       Expected: The add command will add a group which is reflected in the group list. The undo command then restores 
+       the previous data, removing this group. The removal is also reflected in the group list shown to you.
+
+### Redo
+
+1. Redoes a previously undone command.
+
+    1. Prerequisites: We will work with the sample data given. It is important to open a fresh T_Assistant application.
+
+    1. Test case: `redo`<br>
+       Expected: This command will yield an error message because there is nothing to redo.
+
+    1. Test case: `ag cs2103-f13-1`, `undo`, then `redo`<br>
+       Expected: The add command will add a group which is reflected in the group list. The undo command then restores
+       the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into 
+       the group list shown to you.
 
 --------------------------------------------------------------------------------------------------------------------
 
