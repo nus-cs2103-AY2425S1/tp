@@ -1,3 +1,4 @@
+// Originally implemented by teammate @frymash, code was reused in order perform code coverage for ExportCommandParser
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
