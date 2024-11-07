@@ -13,7 +13,7 @@ import seedu.address.model.person.Listing;
 
 
 /**
- * Parses input arguments and creates a new RemarkCommand object.
+ * Parses input arguments and creates a new ListingAddCommand object.
  */
 public class ListingAddCommandParser implements Parser<ListingAddCommand> {
 
