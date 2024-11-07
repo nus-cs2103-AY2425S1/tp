@@ -28,7 +28,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
+//import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -115,13 +115,13 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete_delivery() throws Exception {
         DeleteDeliveryCommand command = (DeleteDeliveryCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + PREFIX_DELIVERY + " " + INDEX_FIRST_DELIVERY.getOneBased());
+                DeleteSupplierCommand.COMMAND_WORD + " " + PREFIX_DELIVERY + " " + INDEX_FIRST_DELIVERY.getOneBased());
         assertEquals(new DeleteDeliveryCommand(INDEX_FIRST_DELIVERY), command);
     }
     @Test
     public void parseCommand_delete_supplier() throws Exception {
         DeleteSupplierCommand command = (DeleteSupplierCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " -s " + INDEX_FIRST_SUPPLIER.getOneBased());
+                DeleteSupplierCommand.COMMAND_WORD + " -s " + INDEX_FIRST_SUPPLIER.getOneBased());
         assertEquals(new DeleteSupplierCommand(INDEX_FIRST_SUPPLIER), command);
     }
     @Test

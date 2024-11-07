@@ -15,7 +15,6 @@ import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDeliveryCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -80,7 +79,7 @@ public class AddressBookParser {
                         AddSupplierCommand.MESSAGE_USAGE + "\nOR\n" + AddDeliveryCommand.MESSAGE_USAGE));
             }
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteSupplierCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
                 return new DeleteSupplierCommandParser().parse(arguments.trim());
             } else if (arguments.trim().startsWith("-d")) {

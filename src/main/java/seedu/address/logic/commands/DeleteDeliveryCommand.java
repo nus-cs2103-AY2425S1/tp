@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -42,6 +43,7 @@ public class DeleteDeliveryCommand extends Command {
 
         // Delete the delivery
         model.deleteDelivery(deliveryToDelete);
+        model.updateFilteredDeliveryList(PREDICATE_SHOW_ALL_DELIVERIES);
 
         // Return success message
         return new CommandResult(String.format(MESSAGE_DELETE_DELIVERY_SUCCESS, Messages.format(deliveryToDelete)));
