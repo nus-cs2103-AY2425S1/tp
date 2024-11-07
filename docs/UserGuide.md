@@ -64,6 +64,8 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
 
+**Note**: We have a default database for you to try out and test commands! If you prefer not to have it, you can use the commands `clear-ab` and `clear-wb` to clear the address book and wedding book respectively.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
@@ -144,6 +146,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 <box type="warning" seamless>
 
 **TAKE NOTE:** `PHONE_NUMBER` only accepts integers between 0 and 9 as valid inputs. Allowing a broader range of characters could introduce inconsistencies and potential misuse, such as the entry of text in place of numbers.
+This is a known limitation as although multiple numbers with labels cannot be saved, one phone number can be saved, which is the intended scope so the product's use is not degraded.
 
 </box>
 
