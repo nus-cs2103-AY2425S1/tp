@@ -18,7 +18,7 @@ Paired also with a revolutionary AutoComplete feature, StoreClass helps you mana
 
 ## Quick start
 
-1. Before you can start using our program, ensure you have Java `17` or above installed in your Computer. 
+1. Before you use our program, ensure you have Java `17` or above installed in your Computer. 
    - If you are using Windows 11, see [here](https://www.youtube.com/watch?v=ykAhL1IoQUM) for an installation guide.
    - If you are using MacOS, see [here](https://www.youtube.com/watch?v=lYKHFz8YaD4) instead.
 
@@ -267,7 +267,7 @@ The file name must end with ".json", must not contain any slashes "/" and must p
 There should be only one file name provided.
 
 <div markdown="span" class="alert alert-primary">:rotating_light: **Warning:**
-It is recommended that you avoid loading non-StoreClass .json files, as it may result in unexpected behaviours
+It is recommended that you avoid loading non-StoreClass .json files, as it may result in unexpected behaviors
 
 When you execute the load command, all the entries in the current StoreClass will be overwritten. So, it is recommended that you archive the current data in StoreClass before loading.
 </div>
