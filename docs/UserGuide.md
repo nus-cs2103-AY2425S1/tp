@@ -40,6 +40,7 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+7. Do note that users should open only one instance of AB3 My Guest at a time.
 
 --------------------------------------------------------------------------------------------------------------------
 
