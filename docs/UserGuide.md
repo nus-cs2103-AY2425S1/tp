@@ -277,14 +277,17 @@ Solution: manually restore the minimized Help Window.
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE m/MAJOR [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/is r/brUdder t/friend`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/KEYWORD] [p/KEYWORD] [e/KEYWORD] [a/KEYWORD] [r/KEYWORD] [m/KEYWORD] [t/KEYWORD]…​`<br> e.g., `find n/James Jake`
-**Schedule**   | `schedule UDDER_INDEX st/YYYY-MM-DD HH:MM et/YYYY-MM-DD HH:MM l/LOCATION`
-**List**   | `list`
-**Meetings**   | `meetings`
-**Help**   | `help`
+| Action              | Format, Examples                                                                                                                                                                        |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE m/MAJOR [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 m/is r/brUdder t/friend` |
+| **Clear**           | `clear`                                                                                                                                                                                 |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/ROLE] [m/MAJOR] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find**            | `find [n/KEYWORD] [p/KEYWORD] [e/KEYWORD] [a/KEYWORD] [r/KEYWORD] [m/KEYWORD] [t/KEYWORD]…​`<br> e.g., `find n/James Jake`                                                              |
+| **Schedule**        | `schedule UDDER_INDEX st/DD-MM-YYYY HH:MM et/DD-MM-YYYY HH:MM l/LOCATION`                                                                                                               |
+| **List**            | `list`                                                                                                                                                                                  |
+| **Meetings**        | `meetings`                                                                                                                                                                              |
+| **Delete Meetings** | `deletem INDEX`<br> e.g., `deletem 1`                                                                                                                                                   |
+| **Edit Meetings**   | `editm INDEX [n/NAME] [st/DD-MM-YYYY HH:MM] [et/DD-MM-YYYY HH:MM] [l/LOCATION]`<br> e.g., `editm 1 l/The Deck st/09-10-2024 09:30`                                                      |
+| **Help**            | `help`                                                                                                                                                                                  |
+
