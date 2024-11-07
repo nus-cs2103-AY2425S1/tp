@@ -167,11 +167,13 @@ Constraints:
     - Must be a positive integer: 1, 2, 3, ...
     - Must be an index number shown in the displayed patient list
 
-* **DATE**
+* **DATE_TIME**
     - Must follow the format of dd/MM/YYYY HHmm
+    - Can only contain numbers, '/', and spaces.
 
 * **DATE_ONLY**
     - Must follow the format of dd/MM/YYYY
+    - Can only contain numbers and '/'
 
 ### Viewing help: `help`
 
@@ -298,7 +300,7 @@ Examples:
 
 Adds or updates the next appointment date and time of the specified person in the address book.
 
-Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE`
+Format: `date [n/NAME] [p/PHONE] [e/EMAIL] d/DATE_TIME`
 
 [Parameter Constraints](#parameter-constraints).
 
@@ -307,6 +309,7 @@ Additional Details:
 * If the attribute provided matches more than one person, two of the attributes need to be provided to uniquely match to a person
 * To remove the date and time from a person, use `d/None`.
 * 2 patients cannot have the same date and time for the appointment
+* The date command supports the year 0001 onwards. Any years before that is not supported.
 
 
 Examples:

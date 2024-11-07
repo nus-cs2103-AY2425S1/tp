@@ -63,7 +63,7 @@ public class ScheduleCommandParserTest {
     void parseInvalidDateFormatWrongDelimiter_throwsParseException() {
         String invalidDate = "2-12-2024 1800";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(" d/" + invalidDate));
-        assertEquals("Invalid date format! Please use 'd/M/yyyy'. For example, '2/12/2024'.",
+        assertEquals("Invalid date characters detected! Only numbers and '/' are allowed.",
                 thrown.getMessage());
     }
 

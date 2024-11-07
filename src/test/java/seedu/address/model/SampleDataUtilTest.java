@@ -27,7 +27,7 @@ public class SampleDataUtilTest {
         assertEquals("High Risk", person1.getTag().toString());
         assertTrue(person1.getAllergies().contains(new Allergy("None")),
                 "Allergy set should contain 'None' for Alex Yeoh.");
-        assertEquals(SampleDataUtil.EMPTY_DATE, person1.getDate());
+        assertEquals("31/12/2024 1430", person1.getDate().toString());
 
         // Check the second person: Bernice Yu
         Person person2 = samplePersons[1];
@@ -37,5 +37,7 @@ public class SampleDataUtilTest {
         assertEquals("Blk 30 Lorong 3 Serangoon Gardens, #07-18", person2.getAddress().toString());
         assertEquals("Low Risk", person2.getTag().toString());
         assertEquals(Set.of(new Allergy("Peanuts")), person2.getAllergies()); // Peanuts allergy
+        assertEquals(SampleDataUtil.EMPTY_DATE, person2.getDate());
+
     }
 }

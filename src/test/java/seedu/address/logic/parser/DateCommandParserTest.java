@@ -31,15 +31,15 @@ public class DateCommandParserTest {
 
         // Only Name provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " n/Nayana",
-                "A date is required. Please include a date. " + expectedMessage);
+                "A date and time is required. Please include a date and time. " + expectedMessage);
 
         // Only Phone provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " p/12345678",
-                "A date is required. Please include a date. " + expectedMessage);
+                "A date and time is required. Please include a date and time. " + expectedMessage);
 
         // Only Email provided, but no date prefix
         assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/email@example.com",
-                "A date is required. Please include a date. " + expectedMessage);
+                "A date and time is required. Please include a date and time. " + expectedMessage);
     }
 
     @Test
@@ -50,7 +50,8 @@ public class DateCommandParserTest {
 
         // Invalid Email format
         expectedMessage = Messages.MESSAGE_INVALID_EMAIL_DETAILS;
-        assertParseFailure(parser, DateCommand.COMMAND_WORD + " e/invalid email " + nonEmptyDate, expectedMessage);
+        assertParseFailure(parser, DateCommand.COMMAND_WORD
+                + " e/invalid email " + nonEmptyDate, expectedMessage);
     }
 
     @Test

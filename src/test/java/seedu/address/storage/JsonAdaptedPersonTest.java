@@ -165,8 +165,8 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedDate invalidDateFormat = new JsonAdaptedDate(INVALID_DATE_FORMAT);
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAG, VALID_ALLERGIES, invalidDateFormat);
-        String expectedMessage = "Invalid date format! Please use 'd/M/yyyy HHmm'. "
-                + "For example, '2/12/2024 1800'.";
+        String expectedMessage = "Invalid date and time characters detected! "
+                + "Only numbers, '/' and spaces are allowed.";;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

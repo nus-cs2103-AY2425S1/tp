@@ -98,7 +98,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 </div>
 
 
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -161,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Feature
 Users can seamlessly add patients to their Health Connect application.
 Patients must have a name, phone number, address, email, tag, and allergy assigned to them.
-#### Features Architechture Design
+#### Features Architecture Design
 1. Parsing handled by AddCommandParser: The logic for parsing is contained within the AddCommandParser to ensure the arguments are consistently handled before passing the
 relevant parameters to the AddCommand class.
 
