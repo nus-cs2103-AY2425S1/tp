@@ -28,6 +28,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents(20);
 
         robot = new FxRobot();
+        robot.clickOn();
         robot.clickOn("#commandTextField");
         robot.write("seller n/Tester p/98765432 e/test@testing.com");
         robot.type(KeyCode.ENTER);
@@ -40,7 +41,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
     @Test
     void testShowDeleteConfirmation_acceptsAndRejectsConfirmationCorrectly() {
         robot.clickOn("#commandTextField");
-        robot.write("deleteclient Tester");
+        robot.write("deleteclient 8");
         robot.type(KeyCode.ENTER);
 
         WaitForAsyncUtils.waitForFxEvents(20);
@@ -55,7 +56,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         commandTextField.setText("");
 
         robot.clickOn("#commandTextField");
-        robot.write("deleteclient Tester");
+        robot.write("deleteclient 8");
         robot.type(KeyCode.ENTER);
 
         WaitForAsyncUtils.waitForFxEvents(20);
