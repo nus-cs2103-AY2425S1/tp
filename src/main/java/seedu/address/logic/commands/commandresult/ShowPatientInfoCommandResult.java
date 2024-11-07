@@ -11,7 +11,7 @@ public class ShowPatientInfoCommandResult extends CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and specified {@code patient},
      * and other fields set to their default value.
      */
-    public ShowPatientInfoCommandResult(String feedbackToUser, Patient patient, boolean showPatientInfo) {
-        super(feedbackToUser, null, false, patient, showPatientInfo, false);
+    public ShowPatientInfoCommandResult(String feedbackToUser, Patient patient, boolean isShowPatientInfo) {
+        super(feedbackToUser, null, false, patient, isShowPatientInfo, false, false);
     }
 }

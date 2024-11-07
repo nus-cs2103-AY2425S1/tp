@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.commandresult.CommandResult;
@@ -9,6 +12,8 @@ import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
+
+
 
 /**
  * Adds a patient to the address book with optional fields.
@@ -25,8 +30,10 @@ public class AddFCommand extends Command {
             + "Input \"home\" to return to home page";
 
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the address book";
+    private static Logger logger = Logger.getLogger("Foo");
 
     private final Patient toAdd;
+
 
     /**
      * Creates an AddFCommand to add the specified {@code Patient}
@@ -41,10 +48,12 @@ public class AddFCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPatient(toAdd)) {
+            logger.log(Level.WARNING, "Attempted to add a duplicate patient");
             throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
         model.addPatient(toAdd);
+        logger.log(Level.INFO, "New patient (" + toAdd.getNric() + ") has been added to the system");
         return new ShowPatientInfoCommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
                 toAdd, true);
     }

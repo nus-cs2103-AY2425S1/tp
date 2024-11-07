@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -20,25 +21,25 @@
             <stylesheets>
                 <URL value="@HelpWindow.css" />
             </stylesheets>
-            <AnchorPane prefHeight="400" prefWidth="500">
-                <children>
-                    <VBox fx:id="helpContainer" prefHeight="400.0" prefWidth="500.0" spacing="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="400.0" prefWidth="500.0">
+                <content>
+                    <VBox fx:id="helpContainer" prefWidth="500.0" spacing="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <children>
 
-                            <Label fx:id="helpMessage" alignment="TOP_LEFT" prefHeight="60.0" prefWidth="500.0" text="Help Message" wrapText="true">
+                            <Label fx:id="helpMessage" alignment="TOP_LEFT" prefWidth="500.0" minHeight="-Infinity" text="Help Message" wrapText="true">
                                 <padding>
                                     <Insets left="10.0" right="10.0" top="10.0" />
                                 </padding>
                             </Label>
 
-                            <HBox prefHeight="40.0" prefWidth="500.0" spacing="0">
-                                <Label fx:id="commandKeywordsHeader" alignment="CENTER" prefHeight="50.0" prefWidth="80.0" text="Command Keywords" textAlignment="CENTER" wrapText="true">
+                            <HBox prefWidth="500.0" spacing="0">
+                                <Label fx:id="commandKeywordsHeader" alignment="CENTER" minHeight="-Infinity" prefWidth="80.0" text="Command Keywords" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="12.0" />
                            </font>
                                 </Label>
 
-                                <Label fx:id="functionsHeader" alignment="CENTER" prefHeight="60.0" prefWidth="420.0" text="Functions" textAlignment="CENTER" wrapText="true">
+                                <Label fx:id="functionsHeader" alignment="CENTER" minHeight="-Infinity" prefWidth="420.0" text="Functions" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="12.0" />
                            </font>
@@ -47,14 +48,14 @@
                            <Insets left="10.0" right="10.0" />
                         </padding>
                             </HBox>
-                     <HBox prefHeight="300.0" prefWidth="500.0" spacing="0">
+                     <HBox prefWidth="500.0" spacing="0">
                         <children>
-                           <Label fx:id="commandKeywords" alignment="TOP_CENTER" lineSpacing="5.0" prefHeight="290.0" prefWidth="80.0" text="Command Keywords" wrapText="true">
+                           <Label fx:id="commandKeywords" alignment="TOP_CENTER" lineSpacing="5.0" minHeight="-Infinity" prefWidth="80.0" text="Command Keywords" wrapText="true">
                               <padding>
                                  <Insets left="10.0" top="2.0" />
                               </padding>
                            </Label>
-                           <Label fx:id="functions" alignment="TOP_LEFT" lineSpacing="5.0" prefHeight="290.0" prefWidth="420.0" text="Functions" wrapText="true">
+                           <Label fx:id="functions" alignment="TOP_LEFT" lineSpacing="5.0" minHeight="-Infinity" prefWidth="420.0" text="Functions" wrapText="true">
                               <padding>
                                  <Insets top="2.0" />
                               </padding>
@@ -63,8 +64,8 @@
                      </HBox>
                         </children>
                     </VBox>
-                </children>
-            </AnchorPane>
+                </content>
+            </ScrollPane>
         </Scene>
     </scene>
 </fx:root>

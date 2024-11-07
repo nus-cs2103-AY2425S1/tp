@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.commandresult.CommandResult;
-import seedu.address.logic.commands.commandresult.KeywordCommandResult;
+import seedu.address.logic.commands.commandresult.ShowFilteredApptsCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
@@ -48,8 +48,7 @@ public class FilterCommand extends Command {
 
         msg += RETURN_TO_HOME;
 
-        //yugan please change this
-        return new KeywordCommandResult(msg, "appts");
+        return new ShowFilteredApptsCommandResult(msg, true);
     }
 
     @Override
