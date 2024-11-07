@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +18,7 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
-    private Model model;
+    private ReadOnlyAddressBook addressBook;
 
     @FXML
     private ListView<Person> personListView;
@@ -26,11 +26,11 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList, Model model) {
+    public PersonListPanel(ObservableList<Person> filteredPersonList, ReadOnlyAddressBook addressBook) {
         super(FXML);
-        personListView.setItems(personList);
+        personListView.setItems(filteredPersonList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
-        this.model = model;
+        this.addressBook = addressBook;
     }
 
     /**
@@ -45,7 +45,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(PersonCard.of(person, getIndex() + 1, model).getRoot());
+                setGraphic(PersonCard.of(person, getIndex() + 1, addressBook).getRoot());
             }
         }
     }
