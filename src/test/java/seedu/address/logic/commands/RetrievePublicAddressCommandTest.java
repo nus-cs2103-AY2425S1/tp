@@ -95,7 +95,6 @@ public class RetrievePublicAddressCommandTest {
         model.addPerson(personWithoutPublicAddresses);
 
         RetrievePublicAddressCommand retrieveCommand =
-
             new RetrievePublicAddressCommand(Index.fromOneBased(1), Network.BTC);
 
 

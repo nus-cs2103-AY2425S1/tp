@@ -47,14 +47,8 @@ public class Messages {
             .append(person.getAddress())
             .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        builder.append("; Public Addresses: ");
-        // fix mess
-        person.getPublicAddressesComposition().getPublicAddresses().forEach(((
-                network, publicAddresses) -> publicAddresses.forEach(address -> {
-                    builder.append(network).append(": ").append(address).append("; ");
-                }
-            ))
-        );
+        builder.append(";\nPublic Addresses:\n")
+                .append(person.getPublicAddressesComposition().toStringIndented());
         return builder.toString();
     }
 

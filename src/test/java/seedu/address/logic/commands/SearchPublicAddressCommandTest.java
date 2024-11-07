@@ -8,11 +8,11 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PUBLIC_ADDRES
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PUBLIC_ADDRESS_TOO_LONG;
 import static seedu.address.logic.commands.CommandTestUtil.PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_ETH_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_MAIN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PUBLIC_ADDRESS_SOL_SUB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
+import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG;
 import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -36,7 +36,6 @@ import seedu.address.model.person.Person;
  */
 public class SearchPublicAddressCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
     //---------------- Tests for execute method ----------------
 
     //EP: valid public address with single match
@@ -46,14 +45,14 @@ public class SearchPublicAddressCommandTest {
         SearchPublicAddressCommand searchPublicAddressCommand =
             new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_SOL_SUB);
 
-        PublicAddressesComposition publicAddressesComposition =
-            new PublicAddressesComposition(Map.of(Network.SOL,
-                Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_SUB, "Sub wallet"))));
+        PublicAddressesComposition publicAddressesComposition = new PublicAddressesComposition(Map.of(Network.SOL,
+            Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_SUB, "Sub wallet"))));
         String expectedMessage =
-            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
+            String.format(SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
                 VALID_PUBLIC_ADDRESS_SOL_SUB + "\n"
                     + secondPerson.getName() + "\n" + INDENT
                     + publicAddressesComposition.toStringIndented());
+
 
         assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
     }
@@ -75,7 +74,7 @@ public class SearchPublicAddressCommandTest {
                 Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN, "Main wallet"))));
 
         String expectedMessage =
-            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
+            String.format(SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
                 VALID_PUBLIC_ADDRESS_SOL_MAIN + "\n"
                     + secondPerson.getName() + "\n" + INDENT
                     + publicAddressesCompositionSol.toStringIndented() + "\n"
@@ -91,10 +90,18 @@ public class SearchPublicAddressCommandTest {
         SearchPublicAddressCommand searchPublicAddressCommand =
             new SearchPublicAddressCommand(PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
         String expectedMessage =
-            String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND,
+            String.format(SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND,
                 PUBLIC_ADDRESS_NOT_USED_IN_ADDRESS_BOOK);
         assertCommandSuccess(searchPublicAddressCommand, model, expectedMessage, model);
     }
+
+
+    @Test
+    public void execute_searchPublicAddressTooLong_faliure() {
+        assertThrows(IllegalArgumentException.class, () ->
+            new SearchPublicAddressCommand(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG));
+    }
+
 
     //EP: invalid input with special characters
     @Test
@@ -207,11 +214,11 @@ public class SearchPublicAddressCommandTest {
     @Test
     public void equals() {
         final SearchPublicAddressCommand standardCommand =
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
-
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN);
         // same values -> returns true
         SearchPublicAddressCommand commandWithSameValues =
-            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH);
+            new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_ETH_MAIN);
+
         assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
@@ -227,4 +234,6 @@ public class SearchPublicAddressCommandTest {
         assertNotEquals(standardCommand,
             new SearchPublicAddressCommand(VALID_PUBLIC_ADDRESS_BTC_MAIN));
     }
+
+
 }

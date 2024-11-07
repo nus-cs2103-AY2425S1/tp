@@ -74,7 +74,6 @@ public class SearchPublicAddressCommand extends Command {
             .filter(person -> person.hasPublicAddressStringAmongAllNetworks(publicAddressString))
             .toList();
 
-
         return generateResult(personsWithPublicAddressMatch);
     }
 
