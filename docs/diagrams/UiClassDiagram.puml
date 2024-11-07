@@ -19,6 +19,7 @@ Class PersonListPanel
 Class PersonCard
 Class SessionLogPanel
 Class SessionLogCard
+Class AddLogPopup
 }
 
 package Model <<Rectangle>> {
@@ -44,6 +45,7 @@ MainWindow *-down-> "1" ResultDisplay
 MainWindow *-down-> "1" CentralDisplay
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" AddLogPopup
 
 'Components for CentralDisplay'
 CentralDisplay *-down-> "1" PersonListPanel
@@ -66,6 +68,7 @@ HelpWindow --|> UiPart
 PersonCard --|> UiPart
 SessionLogPanel --|> UiPart
 SessionLogCard --|> UiPart
+AddLogPopup --|> UiPart
 
 PersonCard ..> Model
 UiManager -right-> Logic
