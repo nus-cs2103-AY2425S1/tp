@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
@@ -85,7 +84,8 @@ public class ModuleCommandTest {
 
         String expectedMessage = String.format(ModuleCommand.MESSAGE_SUCCESS, studentId);
 
-        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs(), expectedStudent);
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()),
+                new UserPrefs(), expectedStudent);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
 
         assertCommandSuccess(moduleCommand, model, expectedMessage, expectedModel);
