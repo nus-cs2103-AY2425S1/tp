@@ -211,7 +211,8 @@ Examples:
 
 * This command adds a new client to the client list with the following information:
     * Client name: Betsy Crowe
-    * Client email: 1234567
+    * Phone number: 1234567
+    * Email
     * Home address: Newgate Prison
     * Client birthday: 2001-10-10
     * Client next appointment: 2024-12-01 09:00

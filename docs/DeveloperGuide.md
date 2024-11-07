@@ -114,6 +114,10 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Here is the activity diagram when a user interacts with AgentConnect.
+
+<img src="images/CommandSummaryActivityDiagram.png" width="600"/>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -222,7 +226,8 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/CommitActivityDiagram.png" width="" />
+
 
 #### Design considerations:
 
@@ -282,12 +287,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|---------|----------------------------------------------------|-------------------------------------------------------------------------------|
 | `* * *`  | user    | add clients to my existing addressbook             | store their contacts and respective information                               |
 | `* * *`  | user    | know if client has been added successfully         | so that I can proceed with the next steps or take corrective action if needed |
-| `* * *`  | user    | know my last and next appointment dates            | remember to attend to the appointment                                         |
+| `* * *`  | user    | mark a client’s insurance payment as paid          | keep their due date up to date and know when they’ve fully paid               |
 | `* * *`  | user    | update existing client details                     | keep their information up to date.                                            |
 | `* * *`  | user    | record client's email address                      | contact them through email                                                    |
 | `* * *`  | user    | sort clients by renewal dates                      | prioritize my outreach efforts                                                |
 | `* * *`  | user    | remove clients should they change insurance agents |                                                                               |
-| `* * *`  | user    | categorise my clients based on policies            | easily organise and filter my client list                                     |
 | `* * *`  | user    | know when was my client's last appointment         | track when to follow up                                                       |
 | `* * *`  | user    | know when is my client's birthday                  | reach out to build rapport                                                    |
 | `* * *`  | user    | know when is my client's next insurance payment    | so that I can keep track of client's payment                                  |
@@ -318,7 +322,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. Duplicate person detected (same name + address).
     * 2b1. AgentConnect shows a warning message about the duplicate entry.
-    * 2b2. User decides whether to overwrite or cancel the operation.
     * Use case resumes at step 2 if user decides to proceed
 
 
@@ -589,7 +592,6 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: There must be at least one client showing in the list with no Policy Name "PolicyOne".
    2. Test Case: `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
       - Expected: "Policy successfully assigned to Alex Yeoh; Phone: 87438807; Email: alexyeoh@example.com; Address: Blk 30 Geylang Street 29, #06-40; Birthday: 1990-05-20; Appointment: 2024-10-15 14:00; Tags: [friends]"
-
    3. Test Case: `assign 1 pon/PoicyOne pos/2025-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
       - Expected: "End date cannot be before start date!"
    4. Test Case: `assign 1 pon/PoicyOne pos/2022-12-12 poe/2023-12-12 paydate/2021-11-01 amt/300.00`
