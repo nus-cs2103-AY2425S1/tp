@@ -83,9 +83,8 @@ public class Messages {
         String formattedTags = property.getTags().stream()
                 .map(Tag::toString) // Convert each Tag object to its String representation
                 .collect(Collectors.joining(", ")); // Join with a comma and space
-        String actualPrice = (property.getActualPrice() != null) ? property.getActualPrice().value : "null";
         return "Postal Code: " + property.getPostalCode() + "; " + " Unit Number: " + property.getUnitNumber()
-                + "; " + " Price: " + actualPrice + "; Tags: " + formattedTags;
+                + "; " + " Price: " + property.getActualPrice() + "; Tags: " + formattedTags;
     }
 
 }
