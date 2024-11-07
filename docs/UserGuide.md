@@ -79,8 +79,10 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT] [vip/IS_VIP]`
 
+* `IS_VIP` should either be `true` or `false`, corresponding to whether the person being added is initialized as VIP.
+* Person added is by default a non-VIP if the `vip/` command is omitted.
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
@@ -88,7 +90,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [c/COMMENT]`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/life sentence`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/life sentence vip/false`
 
 ### Listing all persons : `list`
 
