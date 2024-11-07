@@ -131,9 +131,7 @@ public class Transaction {
         return this.person.equals(otherTransaction.getPerson())
                 && this.amount.equals(otherTransaction.getAmount())
                 && this.description.equals(otherTransaction.getDescription())
-                && this.date.equals(otherTransaction.getDate())
-                && this.categories.equals(otherTransaction.getCategories())
-                && this.status.equals(otherTransaction.getStatus());
+                && this.date.equals(otherTransaction.getDate());
     }
 
     /**
