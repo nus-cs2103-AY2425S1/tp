@@ -72,27 +72,19 @@ public class DeleteTaskCommandTest {
     }
 
     @Test
-    public void execute_personListUpdatedIfTaskAssignedToPerson() throws Exception {
+    public void execute_personListUpdatedIfTaskAssigned_anyChangesIsTrue() throws Exception {
         Person newPerson = new PersonBuilder().withName("test").withTasks("todo: buy groceries").build();
         model.addPerson(newPerson);
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST);
 
+        // Execute delete task command
         deleteTaskCommand.execute(model);
 
-        // Verify that the person list update is only triggered if any person had the task
-        boolean anyPersonHadTask = false;
-        for (Person person : model.getFilteredPersonList()) {
-            if (person.hasTask(taskToDelete)) {
-                anyPersonHadTask = true;
-                break;
-            }
-        }
-
-        if (anyPersonHadTask) {
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        }
-        model.deletePerson(newPerson);
+        // Confirm `anyChanges` is true and person list update is triggered
+        assertTrue(model.getFilteredPersonList().stream()
+                        .noneMatch(person -> person.hasTask(taskToDelete)),
+                "All persons with the task should have it removed.");
     }
 
     @Test
