@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.AddPublicAddressCommand.MESSAGE_USAGE
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,29 +13,29 @@ import seedu.address.logic.commands.AddPublicAddressCommand;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class AddPublicAddressCommandParserTest {
-    private AddPublicAddressCommandParser parser = new AddPublicAddressCommandParser();
+    private final AddPublicAddressCommandParser parser = new AddPublicAddressCommandParser();
 
     @Test
     public void parse_validArgs_returnsAddAddressCommand() {
         assertParseSuccess(
-                parser,
-                "1 c/BTC l/wallet1 pa/12345",
-                new AddPublicAddressCommand(INDEX_FIRST_PERSON,
-                        new EditPersonDescriptorBuilder()
-                                .withPublicAddress("BTC", "wallet1", "12345")
-                                .build()
-                )
+            parser,
+            "1 c/BTC l/wallet1 pa/" + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            new AddPublicAddressCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder()
+                    .withPublicAddress("BTC", "wallet1", VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING)
+                    .build()
+            )
         );
 
         // multiple whitespaces between preamble and prefix
         assertParseSuccess(
-                parser,
-                "  1    c/BTC    l/wallet1   pa/12345",
-                new AddPublicAddressCommand(INDEX_FIRST_PERSON,
-                        new EditPersonDescriptorBuilder()
-                                .withPublicAddress("BTC", "wallet1", "12345")
-                                .build()
-                )
+            parser,
+            "  1    c/BTC    l/wallet1   pa/" + VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING,
+            new AddPublicAddressCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptorBuilder()
+                    .withPublicAddress("BTC", "wallet1", VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING)
+                    .build()
+            )
         );
     }
 

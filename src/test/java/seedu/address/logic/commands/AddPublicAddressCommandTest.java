@@ -8,6 +8,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,18 +41,18 @@ public class AddPublicAddressCommandTest {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         AddPublicAddressCommand addPublicAddressCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
 
         // Edit the person
-        Person editedPerson = personToAddAddress.withAddedPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        Person editedPerson = personToAddAddress.withAddedPublicAddress(VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK);
 
         // Expected message
         String expectedMessage =
-                String.format(AddPublicAddressCommand.MESSAGE_ADDPA_SUCCESS, Messages.format(editedPerson));
+            String.format(AddPublicAddressCommand.MESSAGE_ADDPA_SUCCESS, Messages.format(editedPerson));
 
         // Expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -64,23 +67,27 @@ public class AddPublicAddressCommandTest {
     public void execute_duplicateAddressLabel_throwsCommandException() {
         Person personToAddAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
+
         // Create the first descriptor with a valid address
+
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         // Create the second descriptor with the same address
         EditPersonDescriptor duplicateDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition duplicatePublicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         duplicateDescriptor.setPublicAddresses(duplicatePublicAddresses);
 
         // Create the first command
         AddPublicAddressCommand firstCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
 
+
         // Create the second command
+
         AddPublicAddressCommand duplicateCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, duplicateDescriptor);
 
@@ -92,11 +99,13 @@ public class AddPublicAddressCommandTest {
 
         // Expected message
         String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-                String.format(
-                        PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
-                        VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
-                        Network.BTC
-                )
+
+
+            String.format(
+                PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
+                VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
+                Network.BTC
+            )
         );
 
         assertCommandFailure(duplicateCommand, model, expectedMessage);
@@ -107,9 +116,10 @@ public class AddPublicAddressCommandTest {
     public void execute_invalidPersonIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
+
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         AddPublicAddressCommand addPublicAddressCommand =
@@ -121,8 +131,8 @@ public class AddPublicAddressCommandTest {
     @Test
     public void equals() {
         Network network = Network.BTC;
-        PublicAddress address1 = new BtcAddress("12345", "wallet1");
-        PublicAddress address2 = new BtcAddress("67890", "wallet2");
+        PublicAddress address1 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "wallet1");
+        PublicAddress address2 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_SUB_STRING, "wallet2");
 
         PublicAddressesComposition publicAddresses1 = new PublicAddressesComposition().addPublicAddress(address1);
         PublicAddressesComposition publicAddresses2 = new PublicAddressesComposition().addPublicAddress(address2);
@@ -132,10 +142,14 @@ public class AddPublicAddressCommandTest {
         descriptor1.setPublicAddresses(publicAddresses1);
         descriptor2.setPublicAddresses(publicAddresses2);
 
-        AddPublicAddressCommand addCommand1 = new AddPublicAddressCommand(INDEX_FIRST_PERSON, descriptor1);
-        AddPublicAddressCommand addCommand2 = new AddPublicAddressCommand(INDEX_FIRST_PERSON, descriptor2);
-        AddPublicAddressCommand addCommand1Copy = new AddPublicAddressCommand(INDEX_FIRST_PERSON, descriptor1);
-        AddPublicAddressCommand differentIndexCommand = new AddPublicAddressCommand(INDEX_SECOND_PERSON, descriptor1);
+        AddPublicAddressCommand addCommand1 =
+            new AddPublicAddressCommand(INDEX_FIRST_PERSON, descriptor1);
+        AddPublicAddressCommand addCommand2 =
+            new AddPublicAddressCommand(INDEX_FIRST_PERSON, descriptor2);
+        AddPublicAddressCommand addCommand1Copy =
+            new AddPublicAddressCommand(INDEX_FIRST_PERSON, descriptor1);
+        AddPublicAddressCommand differentIndexCommand =
+            new AddPublicAddressCommand(INDEX_SECOND_PERSON, descriptor1);
 
         AddPublicAddressCommand addCommand1Ref = addCommand1;
         // same object -> returns true
