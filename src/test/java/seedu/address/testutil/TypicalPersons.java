@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Person;
 
 
@@ -39,30 +40,30 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTag("High Risk").withAllergies("Soy", "Fish")
-            .withDate(LocalDateTime.of(2024, 12, 3, 16, 30)).build();
+            .withDate(LocalDateTime.of(2024, 12, 3, 14, 30)).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("94351253")
             .withEmail("heinz@example.com").withAddress("wall street").withAllergies("None")
-            .withDate(LocalDateTime.MIN).build();
+            .withDate(Date.NO_DATE.value).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTag("Low Risk").withAllergies("Gluten")
-            .withDate(LocalDateTime.MIN).build();
+            .withDate(Date.NO_DATE.value).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94822242")
             .withEmail("werner@example.com").withAddress("michegan ave").withTag("Low Risk").withAllergies("Lactose")
-            .withDate(LocalDateTime.MIN).build();
+            .withDate(Date.NO_DATE.value).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94824272")
             .withEmail("lydia@example.com").withAddress("little tokyo").withTag("Low Risk").withAllergies("Soy", "Eggs")
-            .withDate(LocalDateTime.MIN).build();
+            .withDate(Date.NO_DATE.value).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94824422")
             .withEmail("anna@example.com").withAddress("4th street").withTag("Low Risk").withAllergies("Peanuts")
-            .withDate(LocalDateTime.MIN).build();
+            .withDate(Date.NO_DATE.value).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84824242")
             .withEmail("stefan@example.com").withAddress("little india").withTag("High Risk").withAllergies("None")
-            .withDate(LocalDateTime.MIN).build();
+            .withDate(Date.NO_DATE.value).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84821312")
             .withEmail("hans@example.com").withAddress("chicago ave").withTag("High Risk")
-            .withAllergies("Penicillin", "Fish").withDate(LocalDateTime.MIN).build();
+            .withAllergies("Penicillin", "Fish").withDate(Date.NO_DATE.value).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

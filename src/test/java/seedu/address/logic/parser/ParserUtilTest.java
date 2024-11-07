@@ -241,7 +241,7 @@ public class ParserUtilTest {
         Date expectedDate = new Date(LocalDateTime.of(2024, 5, 26, 19, 0));
         assertEquals(expectedDate, ParserUtil.parseDateAndTime(VALID_DATE_1));
 
-        expectedDate = new Date(LocalDateTime.MIN);
+        expectedDate = Date.NO_DATE;
         assertEquals(expectedDate, ParserUtil.parseDateAndTime(VALID_DATE_2));
     }
 
@@ -250,7 +250,7 @@ public class ParserUtilTest {
         Date expectedDate = new Date(LocalDateTime.of(2024, 5, 26, 19, 0));
         assertEquals(expectedDate, ParserUtil.parseDateAndTime(WHITESPACE + VALID_DATE_1 + WHITESPACE));
 
-        expectedDate = new Date(LocalDateTime.MIN);
+        expectedDate = Date.NO_DATE;
         assertEquals(expectedDate, ParserUtil.parseDateAndTime(WHITESPACE + VALID_DATE_2 + WHITESPACE));
     }
 
