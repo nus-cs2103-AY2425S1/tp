@@ -44,7 +44,8 @@ public class EditEventCommand extends EditCommand {
             + "[" + PREFIX_EVENT_NAME + "EVENT NAME] "
             + "[" + PREFIX_EVENT_TIME + "TIME] "
             + "[" + PREFIX_EVENT_VENUE + "VENUE] "
-            + "[" + PREFIX_EVENT_CELEBRITY + "CELEBRITY]...\n"
+            + "[" + PREFIX_EVENT_CELEBRITY + "CELEBRITY] "
+            + "[" + PREFIX_EVENT_CONTACTS + "CONTACT NAME]...\n"
             + "Example: " + COMMAND_WORD
             + " " + COMMAND_FIELD + " 1 "
             + PREFIX_EVENT_TIME + "2024-03-01 13:10 to 2024-03-01 19:30 "

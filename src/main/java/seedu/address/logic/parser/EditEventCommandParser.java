@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
@@ -61,8 +63,13 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
                     ParserUtil.parseEventCelebrity(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get()));
         }
         if (argMultimap.getValue(PREFIX_EVENT_CONTACTS).isPresent()) {
-            editEventDescriptor.setContactsNames(
-                    ParserUtil.parseEventContacts(argMultimap.getAllValues(PREFIX_EVENT_CONTACTS)));
+            if (argMultimap.getAllValues(PREFIX_EVENT_CONTACTS).size() == 1
+                    && argMultimap.getValue(PREFIX_EVENT_CONTACTS).get().isEmpty()) {
+                editEventDescriptor.setContactsNames(Set.of());
+            } else {
+                editEventDescriptor.setContactsNames(
+                        ParserUtil.parseEventContacts(argMultimap.getAllValues(PREFIX_EVENT_CONTACTS)));
+            }
         }
 
         if (!editEventDescriptor.isAnyFieldEdited()) {
