@@ -25,7 +25,7 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
@@ -169,6 +169,8 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+- Dates supplied by the user are assumed to be in Anno Domini or the Common Era. In other words, the user will not be able to enter a date before the year 0001 AD. 
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
