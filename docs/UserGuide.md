@@ -202,7 +202,7 @@ Format: `/v new n/NAME p/PHONE_NUMBER em/EMAIL d/AVAILABLE_DATE`
 What you'll need:
 - Name: Alphanumeric and spaces only, 1-100 characters.
 - Phone Number: Digits only, 3-15 characters.
-- Email: Must follow local-part@domain format.
+- Email: Must follow username@domain format.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01)
 
 Examples:
@@ -225,7 +225,7 @@ Format: `/v find KEYWORD`
 
 * It doesn't matter if you use capital or small letters
 * It finds parts of names too - typing "Tan" can find "Stanley" or "Tanya"
-* If no one is found, you'll see all volunteers again
+* If no one is found, you'll be informed via an error message, and you'll see all volunteers again
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
@@ -380,7 +380,7 @@ What you'll need:
 - Location: Alphanumeric characters and spaces only, 1-100 characters.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01),
 - Start Time: 24-hour format HH:mm (e.g., 12:00).
-- End Time: Format HH:mm (e.g., 15:00). Start time must be before end time.
+- End Time: 24-hour Format HH:mm (e.g., 15:00). Start time must be before end time.
 - Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
 
 Examples:
@@ -401,13 +401,13 @@ Format: `/e find KEYWORD`
 
 * It doesn't matter if you use capital or small letters
 * It finds partial matches too - typing `food` can find `Food Drive` or `Seafood Party`
-* If nothing matches, you'll see all events again
+* If nothing matches, you'll be informed via an error message, and you'll see all events again
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
 After you're done, type <a href="#listing-all-volunteers-and-events--list">`list`</a> to see all events again!</div>
 
 Examples:
-* `/v find beach` returns `Beach Cleanup` and `beach clean2`
+* `/e find beach` returns `Beach Cleanup` and `beach clean2`
 
 ![Finding Events](images/commandDemo/FindEventDemo.png)
 
@@ -503,6 +503,11 @@ Don't worry about saving - VolunSync automatically saves everything you do! Ever
     - The program might open off-screen next time
     - To fix this, just find and delete the `preferences.json` file
     - Start VolunSync again, and it'll open on your main screen
+
+1. **Trying To Modify Data Files?**
+   - **Don't** modify the data files in the `data` folder
+   - Doing so may result in unexpected behaviour when using VolunSync
+   - You may lose your data permanently
 
 These known issues are actively being worked on, and we are continuously improving VolunSync to provide a better experience. Please stay tuned for future updates!
 
