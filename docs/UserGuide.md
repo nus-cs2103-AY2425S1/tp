@@ -549,31 +549,34 @@ When editing employee and project IDs directly in the data file, take extra caut
 ## Command Summary
 
 ### Employee Commands
-| Action                          | Format, Examples                                                                                                                                                                                                         |
-|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+| Action                          | Format, Examples                                                                                                                                                                                                        |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Employee**                | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
-| **Clear Employees**             | `clear`                                                                                                                                                                                                                  |
-| **Delete Employee**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
+| **Clear Employees**             | `clear`                                                                                                                                                                                                                 |
+| **Delete Employee**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
 | **Edit Employee**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
-| **Filter Employees (by skill)** | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
-| **Find Employees (by name)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
-| **List Employees**              | `listemployees`                                                                                                                                                                                                          |
+| **Filter Employees (by skill)** | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                    |
+| **Find Employees (by name)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                              |
+| **List Employees**              | `listemployees`                                                                                                                                                                                                         |
 
 [Return to Top](#table-of-contents)
 
 ### Project Commands
-| Action                          | Format, Examples                                                                                                                                                                                                         |
-|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Project**                 | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                                |
-| **Clear Projects**              | `clearproject`                                                                                                                                                                                                           |
-| **Delete Project**              | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
-| **Edit Project**                | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity`                                                                                                                       |
-| **Find Projects**               | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
-| **List Projects**               | `listproject`                                                                                                                                                                                                            |
+
+| Action             | Format, Examples                                                                                  |
+|--------------------|---------------------------------------------------------------------------------------------------|
+| **Add Project**    | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`         |
+| **Clear Projects** | `clearproject`                                                                                    |
+| **Delete Project** | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                 |
+| **Edit Project**   | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity` |
+| **Find Projects**  | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                          |
+| **List Projects**  | `listproject`                                                                                     |
 
 [Return to Top](#table-of-contents)
 
 ### Assignment Commands
+
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Assignment**              | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/1 id/1`                                                                                                                             |
@@ -583,6 +586,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 [Return to Top](#table-of-contents)
 
 ### Other Commands
+
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                                                                                                   |
