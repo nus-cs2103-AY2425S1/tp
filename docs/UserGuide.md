@@ -120,7 +120,7 @@ Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close t
 
 Format: `help`
 
-<br>
+<br><br>
 
 ### Listing all persons : `list`
 
