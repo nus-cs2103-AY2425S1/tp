@@ -1,6 +1,7 @@
 package bizbook.model.person;
 
 import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_HIGH_PROFILE_CLIENT;
+import static bizbook.logic.commands.CommandTestUtil.VALID_NOTE_HIGH_PROFILE_CLIENT_LOWERCASE;
 import static bizbook.testutil.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,6 +51,9 @@ public class NoteTest {
 
         // same object -> returns true
         assertTrue(note.equals(note));
+
+        // capitalised and non capitalised -> returns true
+        assertTrue(note.equals(new Note(VALID_NOTE_HIGH_PROFILE_CLIENT_LOWERCASE)));
 
         // null -> returns false
         assertFalse(note.equals(null));
