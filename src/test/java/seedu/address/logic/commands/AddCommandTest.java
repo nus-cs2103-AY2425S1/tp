@@ -68,6 +68,20 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder().build();
+        Person validPersonWithDupeEmail = new PersonBuilder()
+                .withName("Dummy")
+                .withPhone("+123 12345")
+                .withEmail(validPerson.getEmail().toString())
+                .build();
+        AddCommand addCommand = new AddCommand(validPersonWithDupeEmail);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_EMAIL, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void undo_commandExecuted_success() throws Exception {
         ModelStubAddDelete modelStub = new ModelStubAddDelete();
         Person validPerson = new PersonBuilder().build();
@@ -183,6 +197,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasGraduatedBefore(String year) {
             throw new AssertionError("This method should not be called.");
         }
@@ -245,6 +264,12 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSameNumber(person);
         }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return this.person.isSameEmail(person);
+        }
     }
 
     /**
@@ -263,6 +288,12 @@ public class AddCommandTest {
         public boolean hasPhone(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSameNumber);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameEmail);
         }
 
         @Override
@@ -293,6 +324,12 @@ public class AddCommandTest {
         public boolean hasPhone(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSameNumber);
+        }
+
+        @Override
+        public boolean hasEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::isSameEmail);
         }
 
         @Override
