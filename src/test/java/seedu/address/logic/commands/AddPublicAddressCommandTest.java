@@ -3,14 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
-import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
 
-import java.util.Map;
-import java.util.Set;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -34,84 +33,93 @@ import seedu.address.model.person.Person;
 public class AddPublicAddressCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    //    @Test
-    //    public void execute_validIndexValidNetwork_success() throws Exception {
-    //        Person personToAddAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-    //
-    //        Network network = Network.BTC;
-    //        PublicAddress address = new BtcAddress("12345", "test");
-    //
-    //        PublicAddressesComposition publicAddressesComposition = new PublicAddressesComposition(Map.of(network,
-    //                Set.of(address)));
-    //        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-    //
-    //        editPersonDescriptor.setPublicAddresses(publicAddressesComposition);
-    //
-    //        AddPublicAddressCommand addPublicAddressCommand =
-    //                new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
-    //        //this causes all persons to be aliased
-    //        ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook().), new UserPrefs());
-    //        Person updatedPerson = new PersonBuilder(personToAddAddress).build();
-    //        Set<PublicAddress> addresses = new HashSet<>(updatedPerson.getPublicAddressesByNetwork(network));
-    //        addresses.add(address);
-    //        updatedPerson.addPublicAddressToNetwork(network, addresses);
-    //        expectedModel.setPerson(personToAddAddress, updatedPerson);
-    //
-    //        String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_ADDPA_SUCCESS,
-    //                Messages.format(updatedPerson));
-    //        assertCommandSuccess(addPublicAddressCommand, model, expectedMessage, expectedModel);
-    //    }
+    // EP: valid index, valid public address (BTC main)
+    @Test
+    public void execute_validIndexValidPublicAddress_success() {
+        Person personToAddAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
+                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        editPersonDescriptor.setPublicAddresses(publicAddresses);
 
+        AddPublicAddressCommand addPublicAddressCommand =
+            new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
+
+        // Edit the person
+        Person editedPerson = personToAddAddress.withAddedPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+
+        // Expected message
+        String expectedMessage =
+                String.format(AddPublicAddressCommand.MESSAGE_ADDPA_SUCCESS, Messages.format(editedPerson));
+
+        // Expected model
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToAddAddress, editedPerson);
+
+        // Execute the command and compare the result
+        assertCommandSuccess(addPublicAddressCommand, model, expectedMessage, expectedModel);
+    }
+
+    // EP: valid index, invalid label (duplicate)
     @Test
     public void execute_duplicateAddressLabel_throwsCommandException() {
         Person personToAddAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        // First add an address
-        Network network = Network.BTC;
-        PublicAddress address = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "wallet1");
 
-        PublicAddressesComposition publicAddresses = new PublicAddressesComposition(Map.of(network, Set.of(address)));
+        // Create the first descriptor with a valid address
+
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
+                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
+        // Create the second descriptor with the same address
+        EditPersonDescriptor duplicateDescriptor = new EditPersonDescriptor();
+        PublicAddressesComposition duplicatePublicAddresses = new PublicAddressesComposition()
+                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        duplicateDescriptor.setPublicAddresses(duplicatePublicAddresses);
+
+        // Create the first command
         AddPublicAddressCommand firstCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
 
-        // Try to add another address with the same label
-        PublicAddress duplicateAddress = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "wallet1");
-        PublicAddressesComposition duplicateAddresses =
-            new PublicAddressesComposition(Map.of(network, Set.of(duplicateAddress)));
 
-        EditPersonDescriptor duplicateDescriptor = new EditPersonDescriptor();
-        duplicateDescriptor.setPublicAddresses(duplicateAddresses);
+        // Create the second command
 
         AddPublicAddressCommand duplicateCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, duplicateDescriptor);
 
-        // Execute first command
         try {
             firstCommand.execute(model);
         } catch (CommandException ce) {
             // Ignore any exceptions from first command
         }
 
+        // Expected message
         String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-            String.format(PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL, duplicateAddress.getLabel(),
-                Network.BTC));
+
+
+                String.format(
+                        PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
+                        VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
+                        Network.BTC
+                )
+        );
 
         assertCommandFailure(duplicateCommand, model, expectedMessage);
     }
 
+    // EP: invalid index, valid public address (BTC main)
     @Test
     public void execute_invalidPersonIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        Network network = Network.BTC;
-        PublicAddress address = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "test");
 
-        PublicAddressesComposition publicAddresses = new PublicAddressesComposition(
-            Map.of(network, Set.of(address)));
+
+
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
+                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         AddPublicAddressCommand addPublicAddressCommand =
@@ -126,8 +134,8 @@ public class AddPublicAddressCommandTest {
         PublicAddress address1 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING, "wallet1");
         PublicAddress address2 = new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_SUB_STRING, "wallet2");
 
-        PublicAddressesComposition publicAddresses1 = new PublicAddressesComposition(Map.of(network, Set.of(address1)));
-        PublicAddressesComposition publicAddresses2 = new PublicAddressesComposition(Map.of(network, Set.of(address2)));
+        PublicAddressesComposition publicAddresses1 = new PublicAddressesComposition().addPublicAddress(address1);
+        PublicAddressesComposition publicAddresses2 = new PublicAddressesComposition().addPublicAddress(address2);
 
         EditPersonDescriptor descriptor1 = new EditPersonDescriptor();
         EditPersonDescriptor descriptor2 = new EditPersonDescriptor();
@@ -143,8 +151,9 @@ public class AddPublicAddressCommandTest {
         AddPublicAddressCommand differentIndexCommand =
             new AddPublicAddressCommand(INDEX_SECOND_PERSON, descriptor1);
 
+        AddPublicAddressCommand addCommand1Ref = addCommand1;
         // same object -> returns true
-        assertEquals(addCommand1, addCommand1);
+        assertEquals(addCommand1, addCommand1Ref);
 
         // same values -> returns true
         assertEquals(addCommand1, addCommand1Copy);
