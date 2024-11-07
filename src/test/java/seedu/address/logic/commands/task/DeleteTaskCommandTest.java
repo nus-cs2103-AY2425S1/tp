@@ -73,7 +73,6 @@ public class DeleteTaskCommandTest {
 
     @Test
     public void execute_personListUpdatedIfTaskAssignedToPerson() throws Exception {
-        model.addTask(new Todo("buy groceries"));
         Person newPerson = new PersonBuilder().withName("test").withTasks("todo: buy groceries").build();
         model.addPerson(newPerson);
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
