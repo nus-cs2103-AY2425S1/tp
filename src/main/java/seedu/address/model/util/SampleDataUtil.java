@@ -55,7 +55,7 @@ public class SampleDataUtil {
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("hairstylist"),
                 getWeddingSet("Tom's Wedding"),
-                getTaskSet(""))
+                getTaskSet())
 
         };
     }
