@@ -174,12 +174,12 @@ public class EzstatesParserTest {
     public void parseCommand_addListing() throws Exception {
         Command command =
                 parser.parseCommand("listing n/Pasir Ris Condo "
-                        + "price/700000 "
-                        + "area/75 "
-                        + "address/543 Pasir Ris Street 11 "
-                        + "p/2000000 "
-                        + "region/EAST "
-                        + "seller/ Benson");
+                        + "pr/700000 "
+                        + "ar/75 "
+                        + "add/543 Pasir Ris Street 11 "
+                        + "pr/2000000 "
+                        + "reg/EAST "
+                        + "sel/ Benson");
         assertEquals(AddListingCommand.class, command.getClass());
     }
 
@@ -211,14 +211,14 @@ public class EzstatesParserTest {
     @Test
     public void parseCommand_addBuyersToListing() throws Exception {
         Command command =
-                parser.parseCommand("addlistingbuyers Warton House buyer/John Doe");
+                parser.parseCommand("addlistingbuyers Warton House buy/John Doe");
         assertEquals(AddBuyersToListingCommand.class, command.getClass());
     }
 
     @Test
     public void parseCommand_removeBuyersFromListing() throws Exception {
         Command command =
-                parser.parseCommand("removelistingbuyers Warton House buyer/John Doe");
+                parser.parseCommand("removelistingbuyers Warton House buy/John Doe");
         assertEquals(RemoveBuyersFromListingCommand.class, command.getClass());
     }
 

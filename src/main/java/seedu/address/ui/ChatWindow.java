@@ -155,16 +155,16 @@ public class ChatWindow {
                         + "(?" + "=.*\\bb+u+y+e+r+s*\\b)")
                 .matcher(message).find()) {
             return "This is how to add buyers to a listing!\n"
-                    + "addlistingbuyers {listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
-                    + "Example: addlistingbuyers Warton House buyer/Alice buyer/Bob\n"
-                    + "Adds the specified buyers to the listing identified by its name.";
+                    + "addlistingbuyers {listing index} buy/{buyer index} [buy/{additional buyer indexes}...]\n"
+                    + "Example: addlistingbuyers 1 buy/ 2 buy/ 3\n"
+                    + "Adds the specified buyers to the listing identified by its index.";
         } else if (Pattern.compile("(?=.*\\b(r+e+m+o+v+e+|removing)\\b)(?=.*\\bl+i+s+t+i+n+g+s*\\b)"
                         + "(?=.*\\bb+u+y+e+r+s*\\b)")
                 .matcher(message).find()) {
             return "This is how to remove buyers from a listing!\n"
-                    + "removelistingbuyers {listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
-                    + "Example: removelistingbuyers Warton House buyer/Alice buyer/Bob\n"
-                    + "Removes the specified buyers from the listing identified by their name.";
+                    + "removelistingbuyers {listing index} buy/{buyer index} [buy/{additional buyer indexes}...]\n"
+                    + "Example: removelistingbuyers 1 buy/ 2 buy/ 3\n"
+                    + "Removes the specified buyers from the listing identified by their index.";
         } else if (isGoodbyeMessage(message)) {
             return "Goodbye! Have a great day!";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b")
@@ -184,12 +184,12 @@ public class ChatWindow {
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*l+i+s+t+i+n+g+\\b")
                 .matcher(message).find()) {
             return "This is how to add a listing!\n"
-                    + "listing n/{name} p/{price} a/{area} addr/{address} r/{region} seller/{seller} "
-                    + "(Optional: buyer/{buyer1} buyer/{buyer2} ...)";
+                    + "listing n/{name} pr/{price} ar/{area} add/{address} reg/{region} sel/{seller} "
+                    + "(Optional: buy/{buyer1} buy/{buyer2} ...)";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
                 .matcher(message).find()) {
             return "This is how to add an appointment!\n"
-                    + "apt {name} d/{date} fr/{start time} to/{end time}";
+                    + "apt {index} d/{date} fr/{start time} to/{end time}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*c+l+i+e+n+t+\\b")
                 .matcher(message).find()) {
             return "We categorise clients into buyers and sellers for clarity of our users!\n"
@@ -199,27 +199,27 @@ public class ChatWindow {
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*b+u+y+e+r+\\b")
                 .matcher(message).find()) {
             return "This is how to delete a buyer!\n"
-                    + "deleteclient {name}";
+                    + "deleteclient {index}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*s+e+l+e+r+\\b")
                 .matcher(message).find()) {
             return "This is how to delete a seller!\n"
-                    + "deleteclient {name}";
+                    + "deleteclient {index}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
                 .matcher(message).find()) {
             return "This is how to delete an appointment!\n"
-                    + "delapt {name}";
+                    + "delapt {index}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*l+i+s+t+i+n+g+\\b")
                 .matcher(message).find()) {
             return "This is how to delete a listing!\n"
-                    + "deletelisting {name}";
+                    + "deletelisting {index}";
         } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*c+l+i+e+n+t+\\b").matcher(message).find()) {
             return "This is how to edit a client!\n"
-                    + "editclient {name} [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
+                    + "editclient {client index} [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
                     + "Note: At least one field must be specified to edit a client.";
         } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*l+i+s+t+i+n+g+\\b").matcher(message).find()) {
             return "This is how to edit a listing!\n"
-                    + "editlisting {listing name} [n/{listing name} p/{price}] [a/{area}]"
-                    + " [addr/{address}] [r/{region}]\n"
+                    + "editlisting {listing index} [n/{listing name} pr/{price}] [ar/{area}]"
+                    + " [add/{address}] [reg/{region}]\n"
                     + "Note: At least one field must be specified to edit a listing.";
         } else if (Pattern.compile("\\b(s+h+o+w+|display|view)\\b.*c+l+i+e+n+t+s*\\b").matcher(message).find()) {
             return "This is how to show your clients!\n"
@@ -272,8 +272,8 @@ public class ChatWindow {
         } else if (Pattern.compile("\\b(m+o+r+e+\\s*i+n+f+o+|i+n+f+o+|v+i+e+w+\\s*d+e+t+a+i+l+s*)\\b")
                 .matcher(message).find()) {
             return "This is how to view more information about a client!\n"
-                    + "Command: moreinfo {name}\n"
-                    + "Example: moreinfo Amy\n"
+                    + "Command: moreinfo {index}\n"
+                    + "Example: moreinfo 1\n"
                     + "Opens a window displaying detailed information about the specified client.";
         } else if (Pattern.compile("\\b(c+l+e+a+r+|reset|wipe)\\b").matcher(message).find()) {
             return "It seems you want to clear some data.\n"

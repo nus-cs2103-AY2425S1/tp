@@ -25,32 +25,36 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String COMMANDS_INFO = """
             Common Commands:
 
-            1. Adding a contact:
-               add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...
-               Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends
+            1. Adding a buyer:
+               buyer n/NAME p/PHONE e/EMAIL
+               Example: buyer n/John Doe p/98765432 e/johnd@example.com
 
-            2. Listing all contacts:
-               list
+            2. Adding a seller:
+               seller n/NAME p/PHONE e/EMAIL
+               Example: seller n/John Doe p/98765432 e/johnd@example.com
 
-            3. Editing a contact:
-               edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...
-               Example: edit 1 p/91234567 e/johndoe@example.com
+            3. Listing all clients:
+               showclients
 
-            4. Finding contacts:
-               find KEYWORD [MORE_KEYWORDS]
-               Example: find alice bob charlie
+            4. Deleting a client:
+               deleteclient INDEX
+               Example: deleteclient 1
 
-            5. Deleting a contact:
-               delete INDEX
-               Example: delete 1
+            5. Adding a listing:
+               listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER buy/BUYER
+               Example: listing n/NAME pr/400000 ar/2400 add/134 Pasir Ris reg/east sel/Alex buy/Bernice
 
-            6. Clearing all entries:
-               clear
+            6. Listing all listings:
+               showlistings
 
-            7. Help:
+            7. Deleting a listing:
+               deletelisting INDEX
+               Example: deletelisting 1
+
+            8. Help:
                help
 
-            8. Exit:
+            9. Exit:
                exit
             """;
     private static final String FXML = "HelpWindow.fxml";

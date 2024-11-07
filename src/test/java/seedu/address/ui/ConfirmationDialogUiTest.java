@@ -33,15 +33,15 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         robot.write("seller n/Tester p/98765432 e/test@testing.com");
         robot.type(KeyCode.ENTER);
         robot.clickOn("#commandTextField");
-        robot.write("listing n/Testing Site price/123456 area/123 address/123 AVENUE "
-                + "region/east seller/Tester");
+        robot.write("listing n/Testing Site pr/123456 ar/123 add/123 AVENUE "
+                + "reg/east sel/Tester");
         robot.type(KeyCode.ENTER);
     }
 
     @Test
     void testShowDeleteConfirmation_acceptsAndRejectsConfirmationCorrectly() {
         robot.clickOn("#commandTextField");
-        robot.write("deleteclient 8");
+        robot.write("deleteclient 7");
         robot.type(KeyCode.ENTER);
 
         WaitForAsyncUtils.waitForFxEvents(20);
@@ -56,7 +56,7 @@ public class ConfirmationDialogUiTest extends ApplicationTest {
         commandTextField.setText("");
 
         robot.clickOn("#commandTextField");
-        robot.write("deleteclient 8");
+        robot.write("deleteclient 7");
         robot.type(KeyCode.ENTER);
 
         WaitForAsyncUtils.waitForFxEvents(20);
