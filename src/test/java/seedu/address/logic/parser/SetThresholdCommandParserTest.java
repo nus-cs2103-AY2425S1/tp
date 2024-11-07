@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_SYNTAX;
 import static seedu.address.logic.Messages.MESSAGE_MISSING_REQUIRED_PREFIXES;
 import static seedu.address.logic.Messages.MESSAGE_UNEXPECTED_PREAMBLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_STOCK_LEVEL;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.SetThresholdCommand;
 import seedu.address.model.product.ProductName;
 
@@ -82,7 +84,8 @@ public class SetThresholdCommandParserTest {
         assertParseFailure(parser, " pr/Product1 max/", "Stock level is empty, please provide a value.");
 
         // invalid product name
-        assertParseFailure(parser, " pr/Product#1 min/50", ProductName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " pr/Product/ min/50",
+                String.format(MESSAGE_INVALID_SYNTAX, SetThresholdCommand.MESSAGE_USAGE));
 
         // invalid min stock level (non-numeric)
         assertParseFailure(parser, " pr/Product min/abc",
