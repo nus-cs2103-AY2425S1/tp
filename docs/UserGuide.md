@@ -29,9 +29,9 @@ If you can type fast, PawPatrol can manage patient owner and pet data faster tha
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list both` : Lists all owners and pets.
+   * `list` : Lists all owners and pets.
 
-   * `owner n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25` : Adds a contact named `John Doe` to PawPatrol.
+   * `owner i/S0000001I n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 ` : Adds a contact named `John Doe` to PawPatrol.
 
    * `delete o3` : Deletes the 3rd owner shown in the current list.
 
