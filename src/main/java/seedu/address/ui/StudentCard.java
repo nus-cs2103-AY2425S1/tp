@@ -18,6 +18,7 @@ public class StudentCard extends UiPart<Region> {
     private static final String GRADED = "-fx-background-color: #029e1e";
     private static final String SUBMITTED = "-fx-background-color: #c7a900";
     private static final String PENDING = "-fx-background-color: #9e1402";
+    private static final String LATE = "-fx-background-color: #101010";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -77,10 +78,17 @@ public class StudentCard extends UiPart<Region> {
     }
 
     public String getAssignmentColor(Assignment assignment) {
-        return assignment.getState() == Assignment.State.GRADED
-                ? GRADED
-                : assignment.getState() == Assignment.State.SUBMITTED
-                ? SUBMITTED
-                : PENDING;
+        switch (assignment.getState()) {
+        case LATE:
+            return LATE;
+        case GRADED:
+            return GRADED;
+        case PENDING:
+            return PENDING;
+        case SUBMITTED:
+            return SUBMITTED;
+        default:
+            return "";
+        }
     }
 }

@@ -2,6 +2,8 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -21,7 +23,8 @@ public class Assignment {
     public enum State {
         GRADED,
         SUBMITTED,
-        PENDING
+        PENDING,
+        LATE
     }
 
     /**
@@ -112,7 +115,9 @@ public class Assignment {
                 ? State.GRADED
                 : submissionStatus.isSubmitted()
                     ? State.SUBMITTED
-                    : State.PENDING;
+                    : LocalDate.now().isBefore(deadline.deadline)
+                        ? State.PENDING
+                        : State.LATE;
     }
 
     public String getLabelName() {
