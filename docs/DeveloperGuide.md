@@ -277,6 +277,51 @@ Step 3. The GUI displays the list of companies filtered by the given search term
 
 ---
 
+### Favourite/unfavourite feature
+
+#### Implementation
+
+The `fav`/`unfav` command allows users to mark specified a `Company` as favourites or not. Companies that are favourited
+will appear at the top of the company list at all times along with other favourited companies (provided that they are not hidden by other commands like `find`).
+
+The `fav` command is facilitated by `FavCommand` and `FavCommandParser`. Similarly, `unfav` command is facilitated by
+`UnfavCommand` and `UnfavCommandParser`. For brevity, we refer to both using `XXFavCommand` and `XXFavCommanParser`
+Since they function similarly.
+
+The following methods and operations are involved:
+* `XXFavCommand#execute(Model model)` &mdash; (Un)Favourites the specified `Company`.
+* `Model#setCompany(Company targetCompany, Company updatedCompany` &mdash; Replaces the existing company in the model with
+the same `Company` but with its `IsFavourite` set to `true` or `false` depending on `XXFavCommand`
+* `AddressBook#setCompany(Company target, Company editedCompany` &mdash; Commits the changes to the address book.
+* `UniqueCompanyList#setCompany(Company target, Company editedCompany)` &mdash; Updates internal list, sorting by favourited companies.
+
+#### Example usage scenario:
+
+Step 1. The user selects a company and executes the `XXfav` command with the corresponding company list index. 
+
+Step 2. The `XXFavCommand` fetches the selected company and creates an identical `Company` but with the updated `IsFavourite` field and
+calls `Model#SetCompany()` to replace the old company in the model with the updated one.
+
+Step 3. The changes are committed to the address book by calling `AddressBook#SetCompany()`; the address book replaces
+the old company in its `UniqueCompanyList` sorting by `IsFavourite` in the process by calling `UniqueCompanyList#SetCompany`.
+
+<puml src="diagrams/FavSequenceDiagram.puml" alt="FavSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: How to show favourite companies at the top of the company list:**
+
+* **Alternative 1 (current choice):** Uniformly ensure that companies are always sorted by favourites in all
+methods of `UniqueComanyList` that manipulates its `internalList`.
+* Pros: Simple to implement and ensures that favourited companies always remain on top.
+* Cons: Some time cost is incurred for all commands that modify the company list as list is always sorted by favourites.
+
+* **Alternative 2:** Have a specific method in `AddressBook` that sorts the companies.
+* Pros: More flexible which allows different methods of sorting the future.
+* Cons: More effort by developers to ensure that the list is sorted by favourites when it should be. 
+
+---
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
