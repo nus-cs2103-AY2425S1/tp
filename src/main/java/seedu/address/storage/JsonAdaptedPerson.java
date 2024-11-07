@@ -82,6 +82,7 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType(List<Wedding> weddingList) throws IllegalValueException {
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -124,7 +125,6 @@ class JsonAdaptedPerson {
         }
 
         Wedding modelOwnWedding = ownWedding != 0 ? lookupWeddingByHashCode(ownWedding, weddingList) : null;
-
         Set<Wedding> modelWeddingJobs = new HashSet<>();
         for (Integer weddingHashCode : weddingJobs) {
             Wedding wedding = lookupWeddingByHashCode(weddingHashCode, weddingList);
@@ -145,6 +145,27 @@ class JsonAdaptedPerson {
             }
         }
         return null;
+    }
+
+    /**
+     * Gets the wedding jobs hashcodes list.
+     */
+    public List<Integer> getWeddingJobs() {
+        return new ArrayList<>(weddingJobs);
+    }
+
+    /**
+     * Gets the own wedding hashcode.
+     */
+    public int getOwnWedding() {
+        return ownWedding;
+    }
+
+    /**
+     * Gets the name of the person.
+     */
+    public String getName() {
+        return name;
     }
 
     @Override

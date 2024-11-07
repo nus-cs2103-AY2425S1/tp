@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -51,6 +52,24 @@ public class EditCommandTest {
                 .withWeddingJobs(personAtFirstIndex.getWeddingJobs()).build();
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedPerson);
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(expectedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+
+        editedPerson = new PersonBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        editCommand = new EditCommand(INDEX_SECOND_PERSON, null, descriptor);
+
+        // Expected behaviour: Only name, address, phone, email gets edited.
+        // Role, ownWedding and weddingJobs stay the same.
+        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Person personAtSecondIndex = model.getFilteredPersonList().get(1);
+        expectedPerson = new PersonBuilder(editedPerson)
+                .withRole(personAtSecondIndex.getRole().map(role -> role.roleName).orElse(null))
+                .withOwnWedding(personAtSecondIndex.getOwnWedding())
+                .withWeddingJobs(personAtSecondIndex.getWeddingJobs()).build();
+        expectedModel.setPerson(model.getFilteredPersonList().get(1), expectedPerson);
+        expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 Messages.format(expectedPerson));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

@@ -1,0 +1,38 @@
+{
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123 Main St",
+      "role": "client",
+      "ownWedding": 123456789,
+      "weddingJobs": []
+    },
+    {
+      "name": "Bob Worker",
+      "phone": "98765432",
+      "email": "bob@example.com",
+      "address": "456 Worker St",
+      "role": "vendor",
+      "ownWedding": 0,
+      "weddingJobs": [123456789]
+    }
+  ],
+  "weddings": [
+    {
+      "name": "Alice Wedding",
+      "client": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123 Main St",
+        "role": "client",
+        "ownWedding": 123456789,
+        "weddingJobs": []
+      },
+      "date": "2024-12-25",
+      "venue": "Test Venue"
+    }
+  ]
+}
