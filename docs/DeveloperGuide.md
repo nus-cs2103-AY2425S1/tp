@@ -9,7 +9,15 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the [AddressBook Level 3](https://github.com/se-edu/addressbook-level3) project by SE-EDU. 
+It includes reused and adapted ideas, code, and documentation from the AddressBook Level 3 project.
+
+
+* Reused/adapted components:
+    * UI component structure
+    * Command structure in Logic
+    * Storage management
+    * Project architecture and organization
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -484,6 +492,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. Simulating a Missing Data File
+       1. Locate the data file used by the application `data/addressbook.json`
+       2. Move or delete this file before launching the application<br>
+       Expected: The application should automatically create an empty data file, without displaying any errors and the application should function normally.
+    2. Simulating a Corrupted Data File
+       1. Open the data file `data/addressbook.json` in a text editor.
+       2. Introduce invalid JSON syntax into the file.
+       3. Save the corrupted file and launch the application.<br>
+       Expected: Application will display an error message to the user, indicating that the data is corrupted.
+       
+          
