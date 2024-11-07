@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TelegramHandle;
@@ -32,5 +33,13 @@ public interface ReadOnlyAddressBook {
      * @return True if a person with the given telegram handle exists in the address book, false otherwise.
      */
     boolean hasTelegramHandle(TelegramHandle telegramHandle);
+
+    /**
+     * Checks if the address book contains a person with the given email.
+     *
+     * @param email The email to check for.
+     * @return True if a person with the given email exists in the address book, false otherwise.
+     */
+    boolean hasEmail(Email email);
 
 }

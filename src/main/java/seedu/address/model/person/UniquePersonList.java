@@ -177,4 +177,19 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return false;
     }
+
+    /**
+     * Checks if the list contains a person with the given email.
+     *
+     * @param email The email to check for.
+     * @return True if a person with the given email exists in the list, false otherwise.
+     */
+    public boolean hasEmail(Email email) {
+        for (Person person : internalList) {
+            if (person.getEmail().isPresent() && person.getEmail().get().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

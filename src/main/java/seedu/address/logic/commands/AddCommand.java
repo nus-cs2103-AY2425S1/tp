@@ -79,6 +79,12 @@ public class AddCommand extends Command {
                     + "Please use a different telegram handle.");
         }
 
+        // Check for duplicate email
+        if (toAdd.getEmail().isPresent() && model.getAddressBook().hasEmail(toAdd.getEmail().get())) {
+            throw new CommandException("This email address already exists in the address book. "
+                    + "Please use a different email address.");
+        }
+
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
