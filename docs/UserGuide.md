@@ -138,7 +138,8 @@ Find or create a folder on your computer where you want to store the AgentAssist
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
 
-4. 🎉 **Congratulations! AgentAssist is now up and running!** You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity.
+4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
+   You're all set to start using AgentAssist to manage your client contacts, track your sales, and boost your productivity.
 
 <div style="page-break-after: always;"></div>
 
@@ -170,6 +171,7 @@ Let's take a look at the structure in more detail:
 | **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
 
 Here's an example that uses multiple flags and arguments:
+Here's an example that uses multiple flags and arguments:
 ```
 add n/ John Doe e/ john@example.com
 ```
@@ -179,7 +181,7 @@ add n/ John Doe e/ john@example.com
 
 
 ## 4.2 Commands
-A command is the action that AgentAssist will perform, such as adding, deleting, or editing a contact.
+A command is the action that AgentAssist will perform, such as adding, deleting, or editing a client's contact.
 
 Here is a reference table that briefly summarizes available commands:
 
@@ -233,7 +235,6 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
-
 | **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
 |----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             |
@@ -242,13 +243,11 @@ Refer to the table below for more details.
 | `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Must be numeric<br/> • Cannot include commas and decimal points<br/> • Cannot be fractional |
-| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject, Na                                                |
-| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent, Na                                                       |
+| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • `Gold`, `Silver`, `Bronze`, `Reject` or `NA`                                    |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • `Urgent`, `Non_Urgent` or `NA`                                               |
 | `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                                                   |
 | `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                                                   |
-
-
 **Note:** All of the above arguments are case-insensitive.
 
 > 💡 **Pro Tip:**
@@ -290,8 +289,10 @@ The GUI will dynamically update to show the results of your commands, making it 
 
 Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
-> 💡 **Pro Tip:**  
+> 💡 **Pro Tip:**
+>
 > Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
+>
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
 
 [↑ Return to Table of Contents](#table-of-contents)
@@ -381,7 +382,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         ```
 
 > **Note on Duplicates:**
-
+>
 > AgentAssist will prevent duplicate entries if a client with the **same name, email and phone number** is already saved.  
 > When this happens, you will see the following message:
 >
@@ -583,7 +584,7 @@ list
 ```
 filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIER> i/ <INCOME> s/ <STATUS>
 ```
-- **Mandatory Field**: One or more flags with corresponding search terms.
+- **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
@@ -649,7 +650,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   
       Parameters: <FLAG>/ <SEARCH TERM>
     
-      Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, r/ REMARK i/ (=/</>) INCOME s/ STATUS
+      Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
     
       Example: filter n/ Alice p/ 91112222 i/ >2000
       ```
@@ -778,14 +779,14 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 ### How do I transfer my data to another Computer?
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
-### How do I change the remarks or credit card tier of an existing client?
-Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s).
+### How do I change the remarks, credit card tier, or status of an existing client?
+Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the visible `Tier` or `Status` label of a client, use `t/ NA` or `s/ NA` with the `edit` command.
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
 
 ### What do the different tier colors represent in the UI?
-Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a red banner. This makes it easy to see at a glance the tier of each client.
+Each credit card tier is visually distinguished in the UI: Gold is marked with a gold banner, Silver with a silver banner, Bronze with a bronze banner, and Reject with a maroon banner. This makes it easy to see at a glance the tier of each client.
 
 ### What do the different status colors represent in the UI?
 Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
