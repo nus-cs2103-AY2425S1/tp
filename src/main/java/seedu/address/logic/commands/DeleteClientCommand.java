@@ -16,7 +16,7 @@ public abstract class DeleteClientCommand extends Command {
      * Command restrictions indicating that the phone number must be an
      * 8-digit positive integer starting with 8 or 9.
      */
-    public static final String CLIENT_RESTRICTIONS = String.format("Restrictions: %s", Phone.MESSAGE_CONSTRAINTS);
+    public static final String CLIENT_RESTRICTIONS = String.format("Restrictions: \n\t%s", Phone.MESSAGE_CONSTRAINTS);
 
 
     /** The phone number of the client to delete. */
