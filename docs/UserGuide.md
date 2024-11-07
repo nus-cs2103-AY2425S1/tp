@@ -6,8 +6,12 @@
 
 # ContactCS User Guide
 
-**ContactCS** is a **desktop app designed for NUS Computer Science freshmen** to efficiently manage and locate important contact details, including those of professors, teaching assistants, classmates, school offices, and more.
-
+**ContactCS** is a **desktop application designed for NUS Computer Science freshmen** to help them efficiently manage and locate essential contact details. The app is designed to store and organize contacts for key individuals relevant to their academic journey, including:
+* Professors and teaching assistants for specific modules
+* Classmates for collaborative projects and study groups
+* School offices for administrative matters
+* Emergency contacts for urgent situations
+* and more!
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -41,12 +45,28 @@
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Callouts Convention
+
+This convention outlines the use of callout boxes in documentation to enhance readability and provide important contextual information.
+Each type of callout box serves a unique purpose, helping readers quickly identify and act on relevant content.
+
+<box type="info" seamless>
+**Info Box:** Provides additional information or context that is relevant to the content.
+</box>
+
+<box type="tip" seamless>
+**Tip Box:** Offers helpful tips or suggestions to enhance the user experience.
+</box>
+
+<box type="warning" seamless>
+**Caution Box:** Alerts users to potential issues or problems that may arise.
+</box>
 
 ## Features
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Info: Notes about the command format**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -109,9 +129,9 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADD
 * `TAG` can take any alphanumeric values and can not be blank.
 * `DESCRIPTION` can take any values but cannot exceed 500 characters.
 
-<box type="tip" seamless>
+<box type="info" seamless>
 
-**Duplicate Handling:**
+**Info: Duplicate Handling:**
 A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
 </box>
 
@@ -135,7 +155,7 @@ is explained below.
 
 The module-role pairs can be edited by adding, deleting, or replacing.
 
-##### Add new module-role pairs
+##### Adding new module-role pairs
 
 Format: `edit INDEX r/+(MODULECODE[-ROLETYPE])+`
 
@@ -152,13 +172,13 @@ Examples:
 
 <box type="warning" seamless>
 
-**Common Mistakes:**
+**Caution: Common Mistakes**
 - If you are adding multiple module-role pairs, only the first pair should have a `+` sign before the module-role pair. 
 The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +MA1521-TA` is unnecessary and will cause an error.
 - You only need to specify one `r/`. i.e. `r/+CS1101S r/+MA1521-TA` is unnecessary and will cause an error.
 </box>
 
-##### Delete existing module-role pairs
+##### Deleting existing module-role pairs
 
 Format: `edit INDEX r/-(MODULECODE[-ROLETYPE])+`
 * Deletes existing roles from the person at the specified `INDEX`. The index refers to the index number shown in the
@@ -175,7 +195,7 @@ Examples:
 
 <box type="warning" seamless>
 
-**Be careful:**
+**Caution:**
 - Omitting the role type intentionally leads to two different behaviors for adding and deleting roles:
   - For adding roles, the role type is assumed to be `Student`.
   - For deleting roles, **any role associated with the module code** will be deleted, regardless of the role type.
@@ -183,7 +203,7 @@ Examples:
 If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
-#### All other fields
+#### Editing All other fields
 
 Except for the module-role pairs, all other fields can only be edited by complete replacement.
 
@@ -248,15 +268,25 @@ Format: `find (n/KEYWORD)+ (r/KEYWORD)+`
 
 * Person matching at least one name keyword AND one module-role keyword will be returned (i.e. AND search).
 
-Examples:
+Example:
 * `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
   ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
 
 <box type="info" seamless>
 
-**Chained Find:**
-To further filter the previous search results, use `find chained`.<br>
-Example: `find n/John` followed by `find chained n/Doe` will return all persons whose name contains `John` and `Doe`.
+**Info: Chained Find**
+The Chained Find feature allows you to narrow down previous search results by applying additional filters,
+making it easier to locate specific entries that meet multiple criteria.<br>
+
+**How to Use Chained Find**
+
+* Start with an Initial Search:
+  * Begin by using the find command with your first search criterion.
+  * Example: `find n/John` will display all entries with the name "John."
+
+* Apply Additional Filters with find chained:
+  * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
+  * Example: After using find n/John, you can type find chained n/Doe. This will display only the entries that contain both "John" and "Doe" in their names.
 
 </box>
 
@@ -283,7 +313,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Undo latest change to contact data: `undo`
+### Undoing latest change to contact data: `undo`
 Undoes the effect done by the latest data-modifying command, if any.
 
 Format: `undo`
