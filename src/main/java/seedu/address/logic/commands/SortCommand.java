@@ -95,16 +95,13 @@ public class SortCommand extends Command {
             return 0;
         }
         if (isEitherTagNull(p1Tag, p2Tag)) {
-            return compareNullTagValues(p1Tag, p2Tag);
+            Integer x = compareNullTagValues(p1Tag, p2Tag);
+            if (x != null) {
+                return x;
+            }
         }
 
         int compareResult = 0;
-
-        if (p1Tag.get().tagValue == null) {
-            return 1;
-        } else if (p2Tag.get().tagValue == null) {
-            return -1;
-        }
 
         Double p1TagDouble = tryParseDouble(p1Tag.get().tagValue);
         Double p2TagDouble = tryParseDouble(p2Tag.get().tagValue);
@@ -135,15 +132,21 @@ public class SortCommand extends Command {
     }
 
     private boolean isEitherTagNull(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        return (p1Tag.get().tagValue == null || p2Tag.get().tagValue == null);
+    }
+    private boolean areBothTagsNull(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
         return (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null);
     }
 
-    private int compareNullTagValues(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
-        if (p1Tag.get().tagValue == null) {
+    private Integer compareNullTagValues(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+        if (areBothTagsNull(p1Tag, p2Tag)) {
+            return 0;
+        } else if (p1Tag.get().tagValue == null) {
             return 1;
-        } else {
+        } else if (p2Tag.get().tagValue == null) {
             return -1;
         }
+        return null;
     }
 
     private Optional<Tag> getTagByName(Person person) {
