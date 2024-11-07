@@ -19,6 +19,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         case "name" -> comparator = Comparator.comparing(person -> person.getName().toString());
         case "subject" -> comparator = Comparator.comparing(person -> person.getSubjects().toString());
         case "class" -> comparator = Comparator.comparing(person -> person.getClasses().toString());
+        case "attendance" -> comparator = Comparator.comparing(
+                person -> person.getDaysAttended() != null ? person.getDaysAttended().toString() : null,
+                Comparator.nullsLast(Comparator.naturalOrder())
+        );
         default -> throw new ParseException(SortCommand.MESSAGE_USAGE);
         }
 

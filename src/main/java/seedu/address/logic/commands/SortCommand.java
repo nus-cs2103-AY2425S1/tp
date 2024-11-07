@@ -18,7 +18,7 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of persons by the specified parameter. "
-            + "Parameters: name/subject/classes\n"
+            + "Parameters: name/subject/class/attendance\n"
             + "Example: " + COMMAND_WORD + " name";
 
     private final Comparator<? super Person> comparator;
