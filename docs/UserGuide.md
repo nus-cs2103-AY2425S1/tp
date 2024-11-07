@@ -49,9 +49,10 @@ By following these sections, you can quickly find the information you need and m
 
 3. Copy the file to the folder you want to use as the _home folder_. The _home folder_ will be where all the data files will be saved.
 
-4. Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br><br>
-
-<img src="images/Quickstart-new-terminal.png" alt="NewTerminal">
+4. *Windows:* Open the home folder and right click anywhere in the red box, as shown in the image below. Click "Open in Terminal". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br>
+<img src="images/Quickstart-new-terminal.png" alt="New terminal on Windows">
+*MacOS:* Right click home folder. Hover over "Services". Select "New Terminal at folder". A terminal window will pop up, then type in the command `java -jar medconnect.jar` to run the application.<br>
+   <img src="images/Quickstart-new-terminal-MacOS.png" alt="New terminal on MacOS">
 
 5. Type the command in the [command box](#command-box) and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -145,16 +146,11 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE
 ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
-
-Valid inputs for relationship: `Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse,
-Husband, Wife, Partner, Cousin, Relative, Uncle, Aunt, Grandparent, Grandmother, Grandfather, Grandchild, Grandson, Granddaughter`
-
-</div>
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
+
+* Valid inputs for `EMERGENCY_CONTACT_RELATIONSHIP` can be found in the [glossary](#glossary).
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 ecname/Charlotte Lim ecphone/94681352 ecrs/daughter dname/Ronald Lee dphone/99441234 demail/ronaldlee@gmail.com`<br>
@@ -196,6 +192,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ec/ECINDEX] [ecnam
 
 * Edits the person at the specified `INDEX`. Existing values will be updated to the input values.
 * `INDEX` refers to the index number shown in the displayed person list. `INDEX` **must be a positive integer** (e.g. 1, 2, 3, …)
+* Valid inputs for `EMERGENCY_CONTACT_RELATIONSHIP` can be found in the [glossary](#glossary).
 * At least one of the optional fields must be provided.
 * When editing an emergency contact, the index of the emergency contact to edit and at least one emergency contact field must be provided
 * When editing tags, all the existing tags of the person will be removed (i.e adding of tags is not cumulative.)
@@ -272,6 +269,8 @@ Examples:
 Adds an emergency contact to a specified person in the address book.
 
 Format: `addec INDEX ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP`
+
+* Valid inputs for `EMERGENCY_CONTACT_RELATIONSHIP` can be found in the [glossary](#glossary).
 
 Examples:
 * `addec 1 ecname/Shannon Wong ecphone/84651325 ecrs/Daughter` Adds a new emergency contact Shannon Wong to the 1st person in the address book.
@@ -416,14 +415,15 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Glossary
 
-| Term            | Details      | Example |
-|-----------------|--------------|---------|
-| **Alphanumeric**|Characters that are either numbers or letters.|1, 2, 3, A, b, c are alphanumeric characters.|
-| **Command**|Instructions that are given to MedConnect to execute.|[Features](#features) are commands that MedConnect can execute. [`add`](#adding-a-person-add) is one such command!|
-| **Command Line Interface (CLI)**<a name="cli" /> |A Command Line Interface allows users to interact with an application by typing commands to execute actions.|The command line acts as a CLI in MedConnect.|
-| **Graphical User Interface (GUI)**<a name="gui" /> |A Graphical User Interface allows users to interact with an application through graphics like buttons or icons.|MedConnect acts as a GUI.|
-| **Keyword**|The word you want to search for in a `find` or `finddoc` command.|Searching for a patient named Bernice Yu could be done by using keywords `Bern` or `Yu`.|
-| **Parameter**|Information that you are required to provide to the MedConnect command.|`NAME` and `EMAIL` are examples of parameters you have to provide in an [`add`](#adding-a-person-add) command.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters.|
+| Term                                               | Details                                                                                                                                                                                                                                                                       | Example                                                                                                                                                                                                                                              |
+|----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Alphanumeric**                                   | Characters that are either numbers or letters.                                                                                                                                                                                                                                | 1, 2, 3, A, b, c are alphanumeric characters.                                                                                                                                                                                                        |
+| **Command**                                        | Instructions that are given to MedConnect to execute.                                                                                                                                                                                                                         | [Features](#features) are commands that MedConnect can execute. [`add`](#adding-a-person-add) is one such command!                                                                                                                                   |
+| **Command Line Interface (CLI)**<a name="cli" />   | A Command Line Interface allows users to interact with an application by typing commands to execute actions.                                                                                                                                                                  | The command line acts as a CLI in MedConnect.                                                                                                                                                                                                        |
+| **Graphical User Interface (GUI)**<a name="gui" /> | A Graphical User Interface allows users to interact with an application through graphics like buttons or icons.                                                                                                                                                               | MedConnect acts as a GUI.                                                                                                                                                                                                                            |
+| **Keyword**                                        | The word you want to search for in a `find` or `finddoc` command.                                                                                                                                                                                                             | Searching for a patient named Bernice Yu could be done by using keywords `Bern` or `Yu`.                                                                                                                                                             |
+| **Parameter**                                      | Information that you are required to provide to the MedConnect command.                                                                                                                                                                                                       | `NAME` and `EMAIL` are examples of parameters you have to provide in an [`add`](#adding-a-person-add) command.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters.                                     |
+| **`ecrs/` EMERGENCY_CONTACT_RELATIONSHIP**         | This field accepts the following valid inputs:<br/>`Parent, Mother, Father, Child, Son, Daughter, Sibling, Brother, Sister, Friend, Spouse,Husband, Wife, Partner, Cousin, Relative, Uncle, Aunt, Grandparent, Grandmother, Grandfather, Grandchild, Grandson, Granddaughter` | `Spouse` and `GRANDcHILD` are examples of relationships you can provide in an [`add`](#adding-a-person-add) [`edit`](#editing-a-person--edit) command `ecrs/` parameter.<br><br>`Paul` and `paul@gmail.com` are possible examples to provide to the respective parameters. 
 
 [↑ Back to top](#table-of-contents)
 

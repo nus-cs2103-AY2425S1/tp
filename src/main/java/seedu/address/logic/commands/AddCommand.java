@@ -50,8 +50,8 @@ public class AddCommand extends Command {
             + PREFIX_DOC_NAME + "Tan Wei Ming "
             + PREFIX_DOC_PHONE + "62345678 "
             + PREFIX_DOC_EMAIL + "tanweiming@gmail.com "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "needs mobility support "
+            + PREFIX_TAG + "short-term stay";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
