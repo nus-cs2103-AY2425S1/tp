@@ -22,6 +22,8 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_STUDENT_INDEX = "Only Students can have their attendance unmarked";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_INVALID_ATTENDANCE = "Only students who have attended at "
+            + "least one day can be unmarked.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -57,6 +59,10 @@ public class Messages {
                 .append(String.join(", ", student.getClasses()))
                 .append("; Days attended: ")
                 .append(student.getDaysAttended())
+                .append("; Next of Kin: ")
+                .append(student.getNextOfKinName())
+                .append("; Emergency Contact: ")
+                .append(student.getEmergencyContact())
                 .append("; Tags: ");
         student.getTags().forEach(builder::append);
         return builder.toString();

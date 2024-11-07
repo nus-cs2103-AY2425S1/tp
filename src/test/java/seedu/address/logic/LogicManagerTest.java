@@ -24,6 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -178,5 +179,20 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedStudent);
         assertCommandFailure(addStudentCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void executeUnmarkAttendanceZeroAttendanceThrowsCommandException() {
+        // Arrange: Create and add a student with zero days attended to the model
+        Student studentWithZeroAttendance = new StudentBuilder().withName("Zero Attendance Student")
+                .withDaysAttended(0).build();
+        model.addPerson(studentWithZeroAttendance);
+
+        // Prepare the unmark command for this student
+        Index studentIndex = Index.fromZeroBased(model.getFilteredPersonList().indexOf(studentWithZeroAttendance));
+        String unmarkCommand = "unmark " + (studentIndex.getOneBased());
+
+        // Act & Assert: Execute the command and expect a CommandException with the correct message
+        assertCommandFailure(unmarkCommand, CommandException.class, Messages.MESSAGE_INVALID_ATTENDANCE);
     }
 }

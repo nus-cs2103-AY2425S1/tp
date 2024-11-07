@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+EduConnect was developed based on the project codebase of Address Book 3 (AB3). This project builds upon the foundational architecture and core functionalities established in AB3, while introducing new features and customizations tailored for managing student and teacher data.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,11 +155,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. It also stores a `predicateStateList` for the Predicates used for each state. Additionally, it implements the following operations:
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
@@ -173,11 +173,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `executeCommand` method in the Command class calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `student /name David …​` to add a new person. The `executeCommand` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -189,8 +189,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command indirectly uses `VersionedAddressBook#undo()` which checks if the `currentStatePointer` is at index 0. If so, it will return an error to the user rather than attempting to perform the undo.
 
 </div>
 
@@ -208,40 +207,21 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command indirectly uses `VersionedAddressBook#redo()` to check if `currentStatePointer` is at index `addressBookStateList.size() - 1`. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `help`. Commands that do not modify the address book, such as `help`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `student /name David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -309,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Add a student**
 
 **Preconditions**
-* User has the student’s details, i.e. name, gender, contact, classes, subject and email
+* User has the student’s details, i.e. name, gender, contact, classes, subject, email, address, attendance, next of kin and emergency contact
 
 **MSS**
 
@@ -322,30 +302,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. Parameter(s) missing in command format
-  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+* 2a. Required parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message.
   
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
+  * 2b1. EduConnect displays an error message.
 
     Use case ends.
 
 * 2c. Invalid argument for a parameter given
-  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
 
     Use case ends.
 
 * 2d. Existing contact or email given
-  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
     
     Use case ends.
 
 **Use case: UC02 - Add a teacher**
 
 **Preconditions**
-* User has the teacher’s details, i.e. name, gender, contact, classes, subject and email.
+* User has the teacher’s details, i.e. name, gender, contact, classes, subject, email and address.
 
 **MSS**
 1. Teacher enters the add teacher command
@@ -356,23 +336,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-* 2a. Parameter(s) missing in command format
-  * 2a1. EduConnect displays an error message, e.g. “Email parameter is missing! Ensure that you give values for /name /gender /contact /classes /subject /email”
+* 2a. Required parameter(s) missing in command format
+  * 2a1. EduConnect displays an error message.
     
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to add! Please use the following options: name, gender, contact, classes, subject, email”
+  * 2b1. EduConnect displays an error message
     
     Use case ends.
 
 * 2c. Invalid argument for a parameter given 
-  * 2c1. EduConnect displays an error message, e.g. “Name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+  * 2c1. EduConnect displays an error message, e.g. “Names should only contain alphanumeric characters and spaces, and it should not be blank”
     
     Use case ends.
 
 * 2d. Existing contact or email given
-  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
     
     Use case ends.
 
@@ -392,14 +372,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. Invalid index provided
-  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+  * 2a1. EduConnect displays an error message, e.g. “The person index provided is invalid: 2”
     
     Use case ends.
 
 **Use case: UC-04 List contacts**
-
-**Preconditions**
-* User may optionally specify filter criteria using tags
 
 **MSS**
 1. Teacher enters the list command
@@ -531,16 +508,48 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Open the “Command Prompt” (for Windows) or “Terminal” (for Mac/Linux).
+   2. Type `cd` followed by the folder location where you saved the EduConnect file.
+   3. Type and enter the command `java -jar educonnect.jar`
+   
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by following the instructions from 1ii onwards.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a Student
+1. Adding a Student
+    1. Prerequisities: There is no existing person (student or teacher) in EduConnect with the same contact or email as the student we're adding.
+    1. Test case: `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321`
+   
+        **Expected**: A student is added to EduConnect with the specified details. A new blue colored card is added to the GUI with the student's details.
+   2. Test case: `student` (missing required fields like name, contact, etc. )
+   
+        **Expected**: No student is added. An error is thrown indicating the command given has an invalid format.
+   3. Other incorrect `student` commands to try:
+      - `student /name John Doe` (missing other required fields)
+      - `student /name John Doe /contact 12345 ...` (invalid phone format)
+   
+      **Expected**: Similar to previous case. No student is added. If all required fields are provided but an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
+
+### Adding a Teacher
+1. Adding a Teacher
+    1. Prerequisities: There is no existing person (student or teacher) in EduConnect with the same contact or email as the teacher we're adding.
+    1. Test case: `teacher /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B`
+
+       **Expected**: A teacher is added to EduConnect with the specified details. A new green colored card is added to the GUI with the teacher's details.
+    2. Test case: `teacher` (missing required fields like name, contact, etc. )
+
+       **Expected**: No teacher is added. An error is thrown indicating the command given has an invalid format.
+    3. Other incorrect `teacher` commands to try:
+        - `teacher /name John Doe` (missing other required fields)
+        - `teacher /name John Doe /contact 12345 ...` (invalid phone format)
+
+       **Expected**: Similar to previous case. No teacher is added. If all required fields are provided but an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
 ### Deleting a person
 
@@ -549,20 +558,158 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      **Expected**: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      **Expected**: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size, negative or a non-integer)<br>
+      **Expected**: Similar to previous.
+   
+   1. Test case: `delete 1 2`<br>
+        **Expected**: First and second contact is deleted from the list. Details of the deleted contacts are shown in the status message.
 
-1. _{ more test cases …​ }_
+1. Deleting a person while only some persons are shown
+    1. Prerequisites: Possibly only some persons are shown, using the `find` command. Not all persons may be shown.
+   2. Test case: `delete 1`<br>
+   **Expected**: First contact in the filtered list is deleted from EduConnect. Details of the deleted contact shown in the status message.
+   3. Similar test cases as before, but now relative to the current filtered shown list.
 
-### Saving data
+### Editing a person
+1. Editing a person while all persons are shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `edit 1 /name Bob`<br>
+        **Expected**: First contact's name is edited to "Bob". Details of the edited contact shown in the status message.
+   3. Test case: `edit 3 /name Bob /contact 12345678`<br>
+        **Expected**: Third contact's name is edited to "Bob" and contact number is edited to 12345678. Details of the edited contact shown in the status message.
+   4. Test case: `edit 0 /name Bob`<br>
+        **Expected**: No person is edited. Error details shown in the status message. 
+   5. Other incorrect edit commands to try: `edit`, `edit x` (where x is larger than the list size, negative or non-integer), `edit 1 /contact 111` (invalid phone format)<br>
+        **Expected**: Similar to previous case. No person is edited. If an invalid format was used, specific error details for that will be given. For example, "Phone numbers should only contain numbers, and it should be exactly 8 digits long".
 
-1. Dealing with missing/corrupted data files
+### Clearing EduConnect
+1. Clearing data from EduConnect with at least one person
+    1. Prerequisites: There exists at least one person in EduConnect.
+   2. Test case: `clear`<br>
+        **Expected**: All contacts are cleared from EduConnect.
+   3. Test case: `clear /name John`<br>
+        **Expected**: All contacts that have "John" in their name will be cleared from EduConnect. If there are no existing contacts with "John" in their name, an error will be thrown.
+   4. Test case: `clear /name John Doe`<br>
+        **Expected**: All contacts that have _either_ "John" _or_ "Doe" in their name will be cleared from EduConnect. As before, if there are no existing contacts that fit that criteria, an error will be thrown.
+   5. Test case: `clear /name John /subject Physics`<br>
+        **Expected**: All contacts that either have "John" in their name or "Physics" in their subjects will be cleared from EduConnect. As before, if there are no existing contacts that fit that criteria, an error will be thrown.
+   6. Test case: `clear /x` (where x is an invalid TAG)<br>
+        **Expected**: No contacts are deleted. Error details shown in the status message.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Listing
+1. Listing all persons in EduConnect
+    1. Test case: `list`<br>
+    **Expected**: All persons in EduConnect are listed out in the GUI.
+   2. Test case: `list x` (where x is some other random input)<br>
+        **Expected**: Same as case before. Random input `x` is ignored.
 
-1. _{ more test cases …​ }_
+### Sorting
+1. Sorting EduConnect while all persons are shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `sort name`<br>
+        **Expected**: All the persons in EduConnect are sorted by their name in alphabetical order.
+   3. Test case: `sort subject`<br>
+      **Expected**: All the persons in EduConnect are sorted by their subjects in alphabetical order.
+   4. Test case: `sort class`<br>
+      **Expected**: All the persons in EduConnect are sorted by their classes in alphabetical order.
+   5. Test case: `sort attendance`<br>
+      **Expected**: All the persons in EduConnect are sorted by their attendance in alphabetical order. Teachers (who don't have attendance) are pushed to the end.
+   6. Test case: `sort x` (where x is some random input that isn't any of the earlier test cases)<br>
+        **Expected**: EduConnect is not sorted. Error details shown in the status message.
+2. Sorting EduConnect while only some persons are shown
+   1. Prerequisites: Possibly only some persons are shown, using the `find` command. Not all persons may be shown.
+   2. Similar test cases as before but only the filtered persons are sorted and shown in the GUI.
+
+### Finding people in EduConnect
+1. Finding people in EduConnect while all persons are shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `find /name John`<br>
+   **Expected**: All persons who have "John" in their name are shown in the GUI and the rest are hidden.
+   3. Test case: `find /name John Doe`<br>
+   **Expected**: All persons who have either John or Doe in their name are shown in the GUI and the rest are hidden.
+   4. Test case: `find /name John /subject Physics`<br>
+   **Expected**: All persons who have either John in their name or Physics among their subjects are shown in the GUI and the rest are hidden.
+   5. Test case: `find`<br>
+   **Expected**: EduConnect remains the same. Error details shown in the status message.
+   6. Other incorrect `find` commands to try:
+      - `find John` (where the command is missing a TAG to find with)
+   
+      **Expected**: Similar to previous case. EduConnect remains the same. Error details shown in the status message.
+
+2. Finding people in EduConnect while only some persons are shown
+    1. Prerequisites: Possibly only some persons are shown, using the `find` command. Not all persons may be shown.
+   2. Similar test cases as before. `find` does not take into account the current state of EduConnect, i.e. if a person isn't currently displayed on the GUI but fits the next `find` command's criteria, it will still be displayed.
+
+### Undoing
+1. Undoing a previous command
+   1. Prerequisites: At least one undo-able command has been executed in EduConnect.
+   2. Test case: `undo` <br>
+   **Expected**: The previous command is undone and EduConnect returns to its previous state.
+   3. Test case: `undo x` (where x is some random input)<br>
+   **Expected**: Similar to previous case. The random input x is ignored.
+
+### Redoing
+1. Redoing a previously undone command
+    1. Prerequisites: At least one command has been undone in EduConnect.
+   2. Test case: `redo`<br>
+   **Expected**: The previously undone command is redone and EduConnect returns to its previously original state.
+   3. Test case: `redo x` (where x is some random input)<br>
+      **Expected**: Similar to previous case. The random input x is ignored.
+
+### Marking Attendance
+1. Marking attendance in EduConnect
+   1. Prerequisites: None.
+   2. Test case: `mark`<br>
+   **Expected**: All students in EduConnect have their attendance incremented by 1.
+   3. Test case: `mark x` (where x is some random input)<br>
+   **Expected**: Similar to previous case. The random input x is ignored.
+
+### Unmarking Attendance
+1. Unmarking attendance while all persons are shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `unmark 1`<br>
+   **Expected**: The student at index 1 has their attendance decremented by 1.
+   3. Test case: `unmark 0` <br>
+   **Expected**: No students' attendance are affected. Error details shown in the status message.
+   4. Other incorrect `unmark` commands to try:
+      - `unmark`, `unmark x` (where x is larger than the list size, negative or a non-integer)
+   
+      **Expected**: Similar to previous case. Error details shown in the status message.
+   5. Test case: `unmark 1` (where index 1 is a teacher) <br>
+   **Expected**: Similar to previous case. Error details shown in the status message.
+
+2. Unmarking attendance while only some persons are shown
+    1. Prerequisites: Possibly only some persons are shown, using the find command. Not all persons may be shown.
+   2. Similar test cases as before, but now relative to the current filtered shown list.
+
+### Resetting Attendance
+1. Resetting attendance while all persons are shown
+    1. Prerequisites: List all persons using the list command. Multiple persons in the list.
+   2. Test case: `resetAttendance`<br>
+   **Expected**: All students' attendance are reset to 0.
+   3. Test case: `resetAttendance x` (where x is some random input)<br>
+   **Expected**: Similar to previous case. The random input x is ignored.
+2. Resetting attendance while only some persons are shown
+   1. Prerequisites: Possibly only some persons are shown, using the find command. Not all persons may be shown.
+   2. Similar test cases as before. `resetAttendance` does not take into account the current state of EduConnect, i.e. if a student isn't currently displayed on the GUI and `resetAttendance` is executed, their attendance is also reset to 0.
+
+### Help
+1. Executing the `help` command
+   1. Prerequisites: None.
+   2. Test case: `help`<br>
+   **Expected**: A separate window is opened with a URL to the user guide. Users can click "Copy URL" to copy the URL to their clipboard.
+   3. Test case: `help x` (where x is some random input)<br>
+   **Expected**: Similar to previous case. The random input x is ignored.
+
+### Exiting EduConnect
+1. Executing the `exit` command
+    1. Prerequisites: None.
+    2. Test case: `exit`<br>
+       **Expected**: The current EduConnect window is closed.
+    3. Test case: `exit x` (where x is some random input)<br>
+       **Expected**: Similar to previous case. The random input x is ignored.

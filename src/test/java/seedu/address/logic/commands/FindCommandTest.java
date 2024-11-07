@@ -18,7 +18,6 @@ import static seedu.address.testutil.TypicalPersons.TEACHER_DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -106,7 +105,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_phonePrefix_personFound() throws ParseException {
-        String expectedMessage = FindCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
         PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_PHONE + " 94351253");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -116,7 +115,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_addressPrefix_personFound() throws ParseException {
-        String expectedMessage = FindCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
         PersonContainsKeywordsPredicate predicate =
                 preparePredicate(PREFIX_ADDRESS + " 123, Jurong West Ave 6, #08-111");
         FindCommand command = new FindCommand(predicate);
@@ -136,8 +135,26 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_genderPrefix_personFound() throws ParseException {
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
+        PersonContainsKeywordsPredicate predicate = preparePredicate("/gender Male");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(List.of(STUDENT_BENSON, STUDENT_CARL, TEACHER_DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_genderPrefix_noPersonFound() throws ParseException {
+        String expectedMessage = FindCommand.MESSAGE_NO_ACTION;
+        PersonContainsKeywordsPredicate predicate = preparePredicate("/gender NonExistentGender");
+        FindCommand command = new FindCommand(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_tagPrefix_personFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
         PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_TAG + " friends");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -147,23 +164,19 @@ public class FindCommandTest {
 
     @Test
     public void execute_noMatchingTag_noPersonFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
+        String expectedMessage = FindCommand.MESSAGE_NO_ACTION;
         PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_TAG + " nonExistentTag");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multiplePrefixes_noPersonFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
+        String expectedMessage = FindCommand.MESSAGE_NO_ACTION;
         PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_NAME + " NonExistent"
-                + PREFIX_PHONE + " 00000000");
+            + PREFIX_PHONE + " 00000000");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
