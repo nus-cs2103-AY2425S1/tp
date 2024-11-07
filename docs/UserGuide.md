@@ -13,15 +13,8 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 <!-- Table of Content -->
 ## Table of Contents
-<details>
-  <summary style="font-weight:600;font-size:30px;">Table of Contents</summary>
-
-+ <a href="#quick-start" style="font-size:20px;">Quick Start</a>
-+ <a href="#features" style="font-size:20px;">Features</a>
-+ <a href="#faq" style="font-size:20px;">FAQ</a>
-+ <a href="#known-issues" style="font-size:20px;">Known Issues</a>
-+ <a href="#command-summary" style="font-size:20px;">Command Summary</a>
-</details>
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,18 +65,17 @@ Equipped with features like **attendance marking**, **contact management**, **co
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
   + Items in square brackets are optional.<br>
     e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  + Items in square brackets are optional.<br>
+    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
+  + Items with `…`​ after them can be used multiple times. If the item is optional, e.g. `[r/ROLE]…​`, it can also be used zero times<br>
   e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/exco`, `r/member r/exco` etc.
 
   + Parameters can be in any order.<br>
       e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * The parameter prefixes (e.g. `n/`) with leading spaces are considered restricted keywords, and may not be present within existing parameters. However, for some parameters, using it within the parameter without a leading space (e.g. `n/a` within `ROLE`) is allowed
-</div>
+</details>
 
 [!Warning]
 > If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -128,7 +120,7 @@ A person is uniquely identified by his/her **telegram handle**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of roles (including 0)
-
+</div>
 
 #### Example
 * `add n/John Doe p/98765432 e/johnd@example.com t/johnDoe12`
@@ -355,9 +347,9 @@ unmark t/TELEGRAM…​ d/DATE
 
 Clears all entries from the address book.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This action permanently deletes all the entries from the address book! **Use with extreme caution**.
-</div>
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
+    This action permanently deletes all the entries from the address book! **Use with extreme caution**.
+</div> 
 
 #### Format
 ```
