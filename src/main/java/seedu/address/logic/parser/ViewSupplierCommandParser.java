@@ -25,10 +25,6 @@ public class ViewSupplierCommandParser implements Parser<ViewSupplierCommand> {
             return new ViewSupplierCommand(PREDICATE_SHOW_ALL_SUPPLIERS);
         }
 
-        if (trimmedArgs.contains("/")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_SYNTAX, ViewSupplierCommand.MESSAGE_USAGE));
-        }
-
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
         return new ViewSupplierCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));

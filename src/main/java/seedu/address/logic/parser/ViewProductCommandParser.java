@@ -25,10 +25,6 @@ public class ViewProductCommandParser implements Parser<ViewProductCommand> {
             return new ViewProductCommand(PREDICATE_SHOW_ALL_PRODUCTS);
         }
 
-        if (trimmedArgs.contains("/")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_SYNTAX, ViewProductCommand.MESSAGE_USAGE));
-        }
-
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
         return new ViewProductCommand(new ProductNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
