@@ -54,7 +54,7 @@
        cd /path/to/your/folder
        ```
        <box type="warning" seamless>
-       Replace path\to\your\folder with the actual path. e.g. `cd ~/Documents/AddressBook`
+       Replace path/to/your/folder with the actual path. e.g. `cd ~/Documents/AddressBook`
        </box>
    * Run the application with the following command:
      ```
