@@ -320,6 +320,7 @@ Automatically displays the top 3 upcoming appointments for all contacts when you
 
 * This feature operates automatically upon application launch, so there is no need for any user commands.
 * If there are fewer than three upcoming appointments, the list will show all available appointments.
+* This will only show appointments that are in the **future** (compared to local time now).
 
 Example display:
 ![display for upcoming appointments](images/upcomingAppointments.png)
@@ -341,17 +342,18 @@ Furthermore, certain edits can cause the PhysioPal to behave in unexpected ways 
 
 ## Glossary
 
+* **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
+* **Appointment details**: Information on the appointment including date, time, notes and payment details.
 * **Client**: A person receiving services from the physiotherapist. He/she should have 
 a unique name (not case-sensitive).
 * **Client contact detail**: A contact detail that includes name, phone number, email address,
   address, appointment details, tags etc.
-* **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
-* **Appointment details**: Information on the appointment including date, time, notes and payment details.
 * **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement,
 strength, flexibility, or overall physical function.
-* **Tag**: A label to indicate the treatment type of the client.
 * **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
-* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the phyisotherapist keep track of when they need to follow up with the client. 
+* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the physiotherapist keep track of when they need to follow up with the client.
+* **Tag**: A label to indicate the treatment type of the client.
+
 
 --------------------------------------------------------------------------------------------------------------------
 

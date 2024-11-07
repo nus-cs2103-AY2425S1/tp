@@ -345,24 +345,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Physiotherapist requests to list clients
-2.  PhysioPal shows a list of clients
-3.  Physiotherapist requests to delete a specific clients in the list
-4.  PhysioPal deletes the client
+1. Physiotherapist requests to delete a specific client.
+2. PhysioPal deletes the client.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. PhysioPal detects an empty input for name.
 
-  Use case ends.
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      
+      Use case resumes from step 2.
 
-* 3a. The given index is invalid.
+* 1b. PhysioPal detects an invalid name.
 
-    * 3a1. PhysioPal shows an error message.
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
 
-      Use case resumes at step 2.
+      Use case resumes from step 2.
 
 **Use case: UC02 - Schedule an appointment**
 
@@ -381,39 +385,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PhysioPal displays error message.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
-
+      
+      Use case resumes from step 2.
 
 * 1b. PhysioPal detects an invalid name.
 
     * 1b1. PhysioPal displays error message.
     * 1b2. Physiotherapist enters new data.
     * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
-
+      
+      Use case resumes from step 2.
 
 * 1c. PhysioPal detects an empty input for date and time.
 
     * 1c1. PhysioPal displays error message.
     * 1c2. Physiotherapist enters new data.
     * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
-
+      
+      Use case resumes from step 2.
 
 * 1d. PhysioPal detects an invalid date and time or the given date and time already contains an appointment.
 
     * 1d1. PhysioPal displays error message.
     * 1d2. Physiotherapist enters new data.
     * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
-
+      
+      Use case resumes from step 2.
 
 * 1e. PhysioPal detects an empty input for note.
 
     * 1e1. PhysioPal displays error message.
     * 1e2. Physiotherapist enters new data.
     * Steps 1e1-1e2 are repeated until a valid note is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 **Use case: UC03- Setting a reminder note for an appointment**
 
@@ -433,28 +438,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. PhysioPal displays error message.
     * 1a2. Physiotherapist enters new data.
-    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
-
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
 
 * 1b. PhysioPal detects an invalid name.
 
     * 1b1. PhysioPal displays error message.
     * 1b2. Physiotherapist enters new data.
-    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
-
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
 
 * 1c. PhysioPal detects an empty input for reminder time.
 
     * 1c1. PhysioPal displays error message.
-    * 1c2. Physiotherapist enters new data
-    * Steps 1c1-1c2 are repeated until a valid reminder time is input by the Physiotherapist. Use case resumes from step 2.
-
+    * 1c2. Physiotherapist enters new data.
+    * Steps 1c1-1c2 are repeated until a valid reminder time is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
 
 * 1d. PhysioPal detects an invalid reminder time or the appointment already has the same reminder time.
 
     * 1d1. PhysioPal displays error message.
     * 1d2. Physiotherapist enters new data.
-    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist. Use case resumes from step 2.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
+  
+      Use case resumes from step 2.
 
 **Use case: UC04 - Deleting a reminder note**
 
@@ -473,19 +483,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PhysioPal displays error message.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 * 1b. PhysioPal detects an invalid name.
 
     * 1b1. PhysioPal displays error message.
     * 1b2. Physiotherapist enters new data.
     * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 * 1c. PhysioPal detects that the client does not have a reminder note set.
 
     * 1c1. PhysioPal displays error message.
-      <br>Use case ends.<br>
+      
+      Use case ends.
 
 **Use case: UC05 - Deleting an appointment**
 
@@ -506,32 +519,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PhysioPal displays error message.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 * 1b. PhysioPal detects an invalid name.
 
     * 1b1. PhysioPal displays error message.
     * 1b2. Physiotherapist enters new data.
     * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 * 1c. PhysioPal detects an empty input for date and time.
 
     * 1c1. PhysioPal displays error message.
     * 1c2. Physiotherapist enters new data.
     * Steps 1c1-1c2 are repeated until a valid date and time is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 * 1d. PhysioPal detects that the client does not have an appointment on given date and time.
 
     * 1d1. PhysioPal displays error message.
     * 1d2. Physiotherapist enters new data.
     * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 **Use case: UC06 - Deleting an appointment**
 
-**Preconditions: Client has one appointment.**
+**Preconditions: Client has exactly one appointment.**
 
 **MSS**
 
@@ -545,6 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case: UC07 - Displaying upcoming appointments on launch screen**
 
 **MSS**
+
 1. Physiotherapist launches PhysioPal.
 2. PhysioPal retrieves the top three upcoming appointments.
 3. PhysioPal displays the top three upcoming appointments in the result display box.
@@ -554,68 +572,87 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. No upcoming appointments are found.
+
     * 2a1. PhysioPal displays a message indicating no upcoming appointments.
   
-        Use case ends.
+      Use case ends.
 
 **Use case: UC08 - List all upcoming appointments**
 
 **MSS**
 
 1.  Physiotherapist requests to list all upcoming appointments
-2.  PhysioPal displays a list of all upcoming appointments, ordered by date and time from the closest next appointment.
+2.  PhysioPal displays a list of all upcoming appointments, ordered chronologically starting from the soonest upcoming appointment relative to the current time.
 
     Use case ends.
 
+**Extensions**
+
+* 1a. No upcoming appointments are found.
+
+    * 1a1. PhysioPal displays a message indicating no upcoming appointments.
+
+      Use case ends.
 
 **Use case: UC09 - List upcoming appointments on a specified date**
 
 **MSS**
 
 1.  Physiotherapist requests to list all upcoming appointments on specified date.
-2.  PhysioPal displays a list of upcoming appointments on the specified date, ordered by date and time from the closest next appointment
+2.  PhysioPal displays a list of upcoming appointments on the specified date, ordered chronologically starting from the soonest upcoming appointment relative to the current time.
 
     Use case ends.
 
-
 **Extensions**
-* 1a. The format for date is wrong
-  * 1a1. PhysioPal requests for correct data.
-  * 1a2. Physiotherapist enters new data.
-  * Steps 1a1-1a2 are repeated until the data entered are correct.
-           Use case resumes from step 2.
+
+* 1a. The format for date is wrong.
+
+    * 1a1. PhysioPal requests for correct data.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+      
+      Use case resumes from step 2.
+
+* 1b. No upcoming appointments are found.
+
+    * 1b1. PhysioPal displays a message indicating no upcoming appointments.
+
+      Use case ends.
 
 **Use case: UC10 - Marking payment for appointment as paid**
 
 **MSS**
 
-1. Physiotherapist requests to mark payment for an appointment of a client as paid
+1. Physiotherapist requests to mark payment for an appointment of a client as paid.
 2. PhysioPal marks payment status of the appointment as paid and displays a success status message.
 
    Use case ends.
 
 **Extensions**
+
 * 1a. Client do not exist.
 
     * 1a1. PhysioPal requests for correct data.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
+      
       Use case resumes from step 2.
 
-* 1b. The format for date is wrong
+* 1b. The format for date is incorrect.
+
     * 1b1. PhysioPal requests for correct data.
     * 1b2. Physiotherapist enters new data.
-    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Steps 1b1-1b2 are repeated until the data entered are correct.
+      
       Use case resumes from step 2.
 
-* 1c. The appointment does not exist
+* 1c. The appointment does not exist.
+
     * 1c1. PhysioPal displays an error message that no such appointment found.
     
-    Use case ends.
+      Use case ends.
 
 **Use case: UC11 - Viewing a person**
-
-**Preconditions**: Client’s name is correctly recorded in PhysioPal.
 
 **MSS**
 
@@ -631,15 +668,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PhysioPal displays an error message.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 * 1b. PhysioPal detects that the name does not match any recorded clients.
     * 1b1. PhysioPal displays an error message indicating no matches found.
     * 1b2. Physiotherapist enters new data.
     * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
-
----
+      
+      Use case resumes from step 2.
 
 **Use case: UC12 - Locating persons**
 
@@ -657,11 +694,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. PhysioPal displays an error message indicating that keywords are required.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until valid keywords are input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
+      
+      Use case resumes from step 2.
 
 * 1b. PhysioPal detects no matches for the entered keywords.
+
     * 1b1. PhysioPal displays a message indicating no results found.
 
+      Use case ends.
 
 
 ### Non-Functional Requirements
@@ -677,18 +717,19 @@ and Personal Data Protection Act (PDPA), so that I manage client data in a compl
 
 ### Glossary
 
+* **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
+* **Appointment details**: Information on the appointment including date, time, notes and payment details.
+* **API**: Application Programming Interface.
 * **Client**: A person receiving services from the physiotherapist. He/she should have a unique name (not case-sensitive).
 * **Client contact detail**: A contact detail that includes name, phone number, email address,
   address, appointment details, tags etc.
-* **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
-* **Appointment details**: Information on the appointment including date, time, notes and payment details.
 * **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement, strength, flexibility, or overall physical function.
-* **Tag**: A label to indicate the treatment type of the client.
-* **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
-* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the phyisotherapist keep track of when they need to follow up with the client.
-* **API**: Application Programming Interface.
 * **GUI**: Graphical User Interface.
 * **MSS**: Main Success Scenario.
+* **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
+* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the physiotherapist keep track of when they need to follow up with the client.
+* **Tag**: A label to indicate the treatment type of the client.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -744,7 +785,7 @@ and does not accept duplicate names, so there will never be a case where more th
     1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
     1. **Test case**: `delete John Doe`<br>
-       **Expected**: The contact named John Doe is deleted from the list. Details of the deleted contact shown in the status message.
+       **Expected**: The contact named john doe is deleted from the list. Details of the deleted contact shown in the status message.
 
     1. **Test case**: `delete John Doe`<br>
        **Expected**: No contact is deleted. Error details shown in the status message.
@@ -797,7 +838,7 @@ and does not accept duplicate names, so there will never be a case where more th
         - Address
         - Condition
         - Schedule
-        - Reminder Note
+        - Reminder Note<br>
 
     1. **Test case**: `view John`<br>**Expected**: No window will pop up. Error details shown in the status message.
 
