@@ -236,7 +236,7 @@ Format: `delete <INDEX>` or `delete <NAME>`
     * The index **must be a positive integer** 1, 2, 3, …​
     * The name of the client is case-sensitive and must be an exact match.
 
-<div markdown="span" class="alert alert-info"> **Tip:**
+<div markdown="span" class="alert alert-info">💡**Tip:**
 Always verify the client’s index number or exact name before executing the delete command to prevent accidental removals.
 Best Practice: Use the list or find command to confirm the exact client you intend to delete.
 </div>
@@ -281,7 +281,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/A
   * When editing appointment, the date and time format should be `yyyy-mm-dd hh:mm` in 24-hour notation
   * When editing policy, all fields of policy must be included
 
-<div markdown="span" class="alert alert-info"> **Tip:**
+<div markdown="span" class="alert alert-info">💡 **Tip:**
 Although tags are optional, using them can be useful if you want to store additional information about the client.
 For example, if a client is a VIP, you can include it in the client's information using the edit command.
 </div>
@@ -330,7 +330,7 @@ sort <CRITERIA> <ORDER>
     - **Appointment Sorting**: Orders the client list by the dates of upcoming appointments.
     - **Payment Due Date Sorting**: Orders the client list by the policy payment due dates. This sort can only be used in ascending order.
 
-<div markdown="span" class="alert alert-info"> **Tip:**
+<div markdown="span" class="alert alert-info">💡 **Tip:**
 Regularly sorting your client list based on different criteria can help you manage your clients more efficiently and keep track of important information.
 </div>
 
@@ -393,7 +393,7 @@ find <KEYWORD> [MORE_KEYWORDS]
   * Clients matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-<div markdown="span" class="alert alert-info"> **Tip:**
+<div markdown="span" class="alert alert-info">💡 **Tip:**
 When using the find command, incorporating multiple keywords can help narrow down search results more effectively.
 </div>
 
@@ -501,7 +501,7 @@ search p/ <POLICY_NAME>
   - `POLICY_NAME`: A specific policy name.
   - `POLICY_NAME` is not case-sensitive and whitespaces are ignored. 
 
-<div markdown="span" class="alert alert-info"> **Tip:**
+<div markdown="span" class="alert alert-info">💡 **Tip:**
 For quicker search, if the policy name is "Health Advantage Policy 3", 
 you can type "healthadvantagepolicy3" instead. The search result will be the same.
 </div>
@@ -579,7 +579,7 @@ Deletes the policy at the specified `POLICY_INDEX` of the client at the specifie
     - The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
     - The policy index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 
-<div markdown="span" class="alert alert-info"> **Tip:**
+<div markdown="span" class="alert alert-info">💡 **Tip:**
 Always verify the policy’s index number before executing the delete command to prevent accidental removals.
 Best Practice: Use the list command to confirm the exact policy you intend to delete.
 </div>
