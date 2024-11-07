@@ -86,7 +86,7 @@ public class AddAppointmentCommand extends Command {
         Person patientToEdit = patient.orElseThrow(() ->
                 new CommandException(MESSAGE_INVALID_PATIENT_DISPLAYED_NAME + patientName));
 
-        checkForClashingAppointments((Patient) patientToEdit, (Doctor) doctorToEdit);
+        checkForClashingAppointments((Patient) patientToEdit, (Doctor) doctorToEdit, this.date, this.time);
 
         Person editedPatient;
         Person editedDoctor;
@@ -148,20 +148,23 @@ public class AddAppointmentCommand extends Command {
      * @throws CommandException
      */
 
-    private void checkForClashingAppointments(Patient patient, Doctor doctor) throws CommandException {
-        for (Appointment appointment : patient.getAppointments()) {
-            Time patientAppointmentTime = appointment.getTime();
-            Date patientAppointmentDate = appointment.getDate();
-            for (Appointment doctorAppointment : doctor.getAppointments()) {
-                Time doctorAppointmentTime = doctorAppointment.getTime();
-                Date doctorAppointmentDate = appointment.getDate();
-                if (doctorAppointmentTime.equals(patientAppointmentTime) && doctorAppointmentTime.equals(this.time)) {
-                    if (doctorAppointmentDate.equals(patientAppointmentDate)
-                            && doctorAppointmentDate.equals(this.date)) {
-                        throw new CommandException(MESSAGE_CLASHING_APPOINTMENT);
-                    }
-                }
+    private void checkForClashingAppointments(Patient patient, Doctor doctor,
+                                              Date date, Time time) throws CommandException {
+        for (Appointment patientAppointment : patient.getAppointments()) {
+            Time patientAppointmentTime = patientAppointment.getTime();
+            Date patientAppointmentDate = patientAppointment.getDate();
+            if (patientAppointmentDate.equals(date) && patientAppointmentTime.equals(time)) {
+                throw new CommandException(MESSAGE_CLASHING_APPOINTMENT);
+            }
+        }
+
+        for (Appointment doctorAppointment : doctor.getAppointments()) {
+            Time doctorAppointmentTime = doctorAppointment.getTime();
+            Date doctorAppointmentDate = doctorAppointment.getDate();
+            if (doctorAppointmentDate.equals(date) && doctorAppointmentTime.equals(time)) {
+                throw new CommandException(MESSAGE_CLASHING_APPOINTMENT);
             }
         }
     }
+
 }
