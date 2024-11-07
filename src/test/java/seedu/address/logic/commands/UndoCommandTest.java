@@ -93,16 +93,20 @@ public class UndoCommandTest {
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
 
     }
+
     @Test
     public void execute_undoAddAppointmentCommand() throws CommandException {
         ADDA_COMMAND_LAST.getCommandInputHistory().get(ADDA_COMMAND_LAST.getSize() - 1).execute(model);
 
         UndoCommand undoCommand = new UndoCommand(ADDA_COMMAND_LAST);
+        Appointment appointment = model.getFilteredAppointmentList().get(0);
 
-        String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS,
-                String.format(MESSAGE_UNDO_ADD_APPOINTMENT, model.getFilteredAppointmentList().get(0)));
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        String feedback = String.format(MESSAGE_UNDO_ADD_APPOINTMENT, appointment.name(),
+                Messages.format(appointment));
+        String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, feedback);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true, false, false);
 
+        assertCommandSuccess(undoCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -117,10 +121,12 @@ public class UndoCommandTest {
         DELETEA_COMMAND_LAST.getCommandInputHistory().get(DELETEA_COMMAND_LAST.getSize() - 1).execute(model);
         UndoCommand undoCommand = new UndoCommand(DELETEA_COMMAND_LAST);
 
-        String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS,
-                String.format(MESSAGE_UNDO_DELETE_APPOINTMENT, testAppointment));
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        String feedback = String.format(MESSAGE_UNDO_DELETE_APPOINTMENT, testAppointment.name(),
+                Messages.format(testAppointment));
+        String expectedMessage = String.format(MESSAGE_UNDO_COMMAND_SUCCESS, feedback);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true, false, false);
 
+        assertCommandSuccess(undoCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
