@@ -13,6 +13,7 @@ import seedu.address.model.student.Student;
 public class AttendanceRow {
     public final Student student;
     private final String studentName;
+    private final String studentNumber;
     private final Map<LocalDate, String> attendanceByDate;
 
     /**
@@ -22,6 +23,7 @@ public class AttendanceRow {
     public AttendanceRow(Student student) {
         this.student = student;
         this.studentName = student.getName().fullName;
+        this.studentNumber = student.getStudentNumber().value;
         this.attendanceByDate = new HashMap<>();
         for (AttendanceRecord record : student.getAttendanceRecord()) {
             attendanceByDate.put(record.getDate(), record.getAttendance().toString());
@@ -31,6 +33,10 @@ public class AttendanceRow {
 
     public String getStudentName() {
         return studentName;
+    }
+
+    public String getStudentNumber() {
+        return studentNumber;
     }
 
     public void addAttendance(LocalDate date, String attendance) {
