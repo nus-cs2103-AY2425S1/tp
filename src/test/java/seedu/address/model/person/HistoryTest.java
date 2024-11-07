@@ -60,7 +60,7 @@ public class HistoryTest {
         history.addActivity(creationDate, message);
         List<Activity> activities = history.getActivitiesOnDay(creationDate);
         assertEquals(1, activities.size());
-        assertEquals("[2024-01-01] Task on creation date", activities.get(0).toString());
+        assertEquals(message, activities.get(0).toString());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class HistoryTest {
 
         // Verify the activity
         assertEquals(1, activities.size());
-        assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+        assertEquals(message, activities.get(0).toString());
     }
 
     @Test
@@ -104,7 +104,7 @@ public class HistoryTest {
 
         // Verify the activity
         assertEquals(1, activities.size());
-        assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+        assertEquals(message, activities.get(0).toString());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class HistoryTest {
         // Ensure the new history contains the new activity
         List<Activity> activities = newHistory.getActivitiesOnDay(validDate);
         assertEquals(1, activities.size());
-        assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+        assertEquals("Completed task A", activities.get(0).toString());
     }
 
     @Test
@@ -212,7 +212,7 @@ public class HistoryTest {
         // Add an activity
         history.addActivity(validDate, message);
         // Verify the toString output
-        String expectedString = "Date of Creation: 2024-01-01\n[2024-01-10]:\n  [2024-01-10] Completed task A\n";
+        String expectedString = "Date of Creation: 2024-01-01\n[2024-01-10]:\n  Completed task A\n";
         assertEquals(expectedString, history.toString());
     }
 }

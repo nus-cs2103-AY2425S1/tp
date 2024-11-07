@@ -55,6 +55,6 @@ public class Activity {
      */
     @Override
     public String toString() {
-        return "[" + date + "] " + message;
+        return message;
     }
 }
