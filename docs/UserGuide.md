@@ -262,8 +262,19 @@ F.A.R.T data is saved automatically as a JSON file `[JAR file location]/data/add
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, F.A.R.T will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the F.A.R.T to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause F.A.R.T to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* Command Line Interface: All instructions are done via typing into a textbox at the bottom of your screen
+* Command Terminal: 
+  * If you are a Windows user, press the Windows key and in the search bar, type in Powershell. Click on it and that will be your Command Terminal
+  * For Mac/Linux users, look for Terminal under applications and that will be your Command Terminal
+* Parameter: Something that must be typed into the Command Line for the command to be properly recognised
+* Index: The number found beside the client's name in the F.A.R.T book
 
 --------------------------------------------------------------------------------------------------------------------
 
