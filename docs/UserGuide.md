@@ -110,6 +110,7 @@ Shows a message explaining the various commands available.
 
 ![Help Command UI](images/helpCommandUI.png)
 
+
 #### Link to the user guide: `helpwindow`
 
 Pops up a window, where there is a link to the user guide for the user to easily access.
@@ -118,11 +119,13 @@ Pops up a window, where there is a link to the user guide for the user to easily
 
 ![](images/helpWindowUI.png)
 
+
 #### Listing all contacts: `list`
 
 Shows a list of all persons in AdmiNUS.
 
 **Format**: `list`
+
 
 #### Viewing a contact: `view`
 
@@ -181,6 +184,7 @@ A student can have any number of tags (including 0).
 
 - `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a student named John Doe to AdmiNUS
 
+
 #### Adding a company: `company`
 
 Adds a company to AdmiNUS.
@@ -214,6 +218,7 @@ A company can have any number of tags (including 0)
 Examples:
 
 - `company n/Newgate Prison i/Security e/newgateprison@example.com a/Newgate Prison p/1234567 t/prison facility` adds a company name Newgate Prison to AdmiNUS
+
 
 #### Editing a contact: `edit`
 
@@ -254,25 +259,26 @@ edit INDEX [n/NAME] [id/STUDENT_ID] [i/INDUSTRY] [p/PHONE] [e/EMAIL] [a/ADDRESS]
 
 </div>
 
-<div markdown="span" class="alert alert-primary">💡 **Tip**:
-
-You can remove all the person’s tags by typing `t/` without
-specifying any tags after it. </div>
-
 **Examples**:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+<div markdown="span" class="alert alert-primary">💡 **Tip**:
+
+You can remove all the person’s tags by typing `t/` without
+specifying any tags after it. </div>
+
+
 #### Deleting contact(s): `delete`
 
 Deletes the contact(s) at the specified indices from AdmiNUS.
 
-Format: `delete INDEX [MORE_INDEX]`
+**Format**: `delete INDEX [MORE_INDEX]…​`
 
 | Parameter Name | Description                                                         | Required   |
 | -------------- | ------------------------------------------------------------------- | ---------- |
-| `INDEX`        | Index number of the contact to delete                               | Compulsory |
+| `INDEX`        | Index number of the contact to delete or `all` to delete all contacts from the list                               | Compulsory |
 | `MORE_INDEX`   | Additional index numbers of contacts to delete (separate by spaces) | Optional   |
 
 <div markdown="block" class="alert alert-info">
@@ -283,14 +289,21 @@ Format: `delete INDEX [MORE_INDEX]`
 
 - The index refers to the index number shown in the displayed person list.
 
-- The index must be a positive integer (1, 2, 3, ...).
+* The index must be a positive integer (1, 2, 3, ...).
+
+* `delete all` deletes all contacts currently shown in the list, not all contacts in the database.
 
 </div>
 
+<div markdown="span" class="alert alert-primary">💡 **Tip**:
+
+To delete all students with the `oneYearMembership` tag, simply use `filtertag t/oneYearMembership` followed by `delete all`
+ </div>
+
 **Examples**:
 
-- `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
-- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
+* `list` followed by `delete 2 3` deletes the 2nd and 3rd contacts in AdmiNUS
+* `find Betsy` followed by `delete all` deletes all contacts in the results of the `find` command.
 
 ---
 
@@ -300,7 +313,12 @@ Format: `delete INDEX [MORE_INDEX]`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**Format**: `find KEYWORD [MORE_KEYWORDS]…​`
+
+| Parameter Name | Description                                       | Required   |
+|----------------|---------------------------------------------------| ---------- |
+| `KEYWORD`      | Keyword of the contact's name to search           | Compulsory |
+| `MORE_KEYWORD` | Additional keyword to search (separate by spaces) | Optional   |
 
 <div markdown="block" class="alert alert-info">
 
@@ -330,21 +348,27 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Finds contacts whose tags are the same as the specified keyword.
 
-Format: `filtertag KEYWORD [KEYWORD]`
+**Format**: `filtertag KEYWORD [MORE_KEYWORD]…​`
 
-- Filters through the list of contacts by the specified `KEYWORD`.
+| Parameter Name | Description                                                       | Required   |
+|----------------|-------------------------------------------------------------------| ---------- |
+| `KEYWORD`      | Keyword of the tag's name to filter through the list of contacts. | Compulsory |
+| `MORE_KEYWORD` | More keywords to filter                                           | Optional   |
 
-Examples:
+**Examples**:
 
-- `filtertag buddies` finds contacts who have tags saved as `buddies`
+- `filtertag paidFee` finds contacts who have tags saved as `paidFee`
+
 
 #### Tracking contacts by category: `track`
 
 Tracks and lists all contacts who are in the category of the specified keyword.
 
-- Allows users to filter or sort contacts by `CATEGORY` (student or company), making it easier to track specific groups.
+| Parameter Name | Description                         | Required   |
+|----------------|-------------------------------------| ---------- |
+| `CATEGORY`     | Either student or company to filter | Compulsory |
 
-Examples:
+**Examples**:
 
 - `track student` finds contacts with category `student`
 - `track company` finds contacts with category `company`
@@ -363,26 +387,38 @@ Examples:
 
 </div>
 
+
 #### Adding tag(s) to contact: `tag`
+Adds additional specified tag(s) to the specified contact or all contacts without overwriting existing tags.
 
-Adds additional specified tag(s) to the specified contact without overwriting existing tags.
+**Format 1**: `tag INDEX t/TAG [t/MORE_TAG]…​`
 
-Format: `tag INDEX t/TAG [t/MORE_TAG]`
+| Parameter Name | Description                         | Required   |
+|----------------|-------------------------------------|------------|
+| `INDEX`        | Index number of the contact to tag  | Compulsory |
+| `t/TAG`        | Tag to add to the specified contact | Compulsory |
+| `t/MORE_TAG` |  More tags to add | Optional|
 
+**Format 2**: `tag all t/TAG [t/MORE_TAG]…​`
 
- * Add specified `TAG` (and `MORE_TAG` if present) to the contact at specified `INDEX`
- * The index refers to the index number shown in the displayed person list.
- * The index **must be a positive integer** 1, 2, 3, …​
+| Parameter Name | Description                                                              | Required   |
+|----------------|--------------------------------------------------------------------------|------------|
+| `all`          | Indicates that the tagging operation applies to all contacts in the list | Compulsory |
+| `t/TAG`        | Tag to add to every contact in the list                                  | Compulsory |
+| `t/MORE_TAG`   | More tags to add                                                         | Optional|
+
+* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided <br>
+  no duplicate tag(s) are found in all contacts.
 
 <div markdown="block" class="alert alert-info">
 
 🔔 **Notes**: <br>
 
-- The tag is case-insensitive. For example, `partner` will match `PartnEr`.
-
-- Only full words will be matched e.g. `partner` will not match `partners`.
-
-- The added tags are displayed on the contact in alphabetical order. <br>
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The tag is case-insensitive. For example, `partner` will match `PartnEr`.
+* Only full words will be matched e.g. `partner` will not match `partners`.
+* The added tags are displayed on the contact in alphabetical order. <br>
   e.g. `t/partner t/education` will display `education` before `partner`.
 
 </div>
@@ -396,20 +432,36 @@ Tag labelled with "paid" will have green background to indicate student has paid
 </div>
 ![View Contact UI](images/paidTag.png)
 
+
 #### Deleting tag(s) from contact: `deletetag`
 
 Deletes the specified tag(s) from the specified contact.
 
+**Format 1**: `deletetag INDEX t/TAG [t/MORE_TAG]`
 
-Format 1: `deletetag INDEX t/TAG [t/MORE_TAG]`
+| Parameter Name | Description                                  | Required   |
+|----------------|----------------------------------------------|------------|
+| `INDEX`        | Index number of the contact to delete tag    | Compulsory |
+| `t/TAG`        | Tag to be deleted from the specified contact | Compulsory |
+| `t/MORE_TAG` | More tags to be deleted                      | Optional|
 
-* Deletes specified `TAG` (and `MORE_TAG` if present) from the contact at the specified `INDEX` provided the tag already exists.
+<div markdown="block" class="alert alert-info">
+
+🔔 **Notes**: <br>
+
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
+</div>
 
-* Deletes specified `TAG` (and `MORE_TAG` if present) from all contacts in the list provided the tag already exists.
+**Format 2**: `deletetag ALL t/TAG [t/MORE_TAG]`
+
+| Parameter Name | Description                                                               | Required   |
+|----------------|---------------------------------------------------------------------------|------------|
+| `ALL`          | Indicates that the deletion operation applies to all contacts in the list | Compulsory |
+| `t/TAG`        | Tag to be deleted from every contact in the list associated with the tag  | Compulsory |
+| `t/MORE_TAG`   | More tags to be deleted                                                   | Optional   |
+
 
 **Examples**:
 
@@ -420,7 +472,7 @@ Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
 
 ### File Operations
 
-### Importing CSV Files: `import`
+#### Importing CSV Files: `import`
 
 **Format**: `import FILE_PATH`
 
@@ -446,7 +498,7 @@ Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
 **Troubleshooting**:
 - For errors like "file not found," confirm the path type (absolute vs. relative) and the file's existence.
 
-### Exporting CSV Files: `export`
+#### Exporting CSV Files: `export`
 
 **Format**: `export FILE_PATH`
 
@@ -489,15 +541,16 @@ Furthermore, certain edits can cause AdmiNUS to behave in unexpected ways (e.g.,
 
 ## Glossary
 
+- **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
 - **_Category_** : A label that represents the type of contact (e.g., student, company) used for filtering and sorting contacts.
 - **_CLI (Command Line Interface)_** : A text-based user interface through which users interact with the application by typing commands.
 - **_CSV (Comma-separated values)_** : A text file format that uses commas to separate values, and newlines to separate records.
 - **_GUI (Graphical User Interface)_** : The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 - **_NUS Club Administrator_** : An NUS club admin user responsible for managing contacts of students, companies, etc.
-- **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z)
-- **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
 - **_Relative Path_** : A file path that is relative to the current working directory of the user or application.
-- **_Absolute Path_** : A full path that specifies the exact location of a file or directory from the root of the file system.
+- **_Student ID_** : The student ID associated with each student in NUS. It has the format AxxxxxxxX (e.g. A0123456Z).
+- **_Tag_** : A keyword or label associated with a contact that allows for easy grouping and filtering.
+
 ---
 
 ## FAQ
