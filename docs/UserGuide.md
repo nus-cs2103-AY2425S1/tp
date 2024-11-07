@@ -10,7 +10,7 @@ NUStates is a **desktop application designed to streamline contact and property 
 Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
 With NUStates, agents can:
-- **Manage and Tag Clients**: Easily add, tag, and retrieve client and seller details.
+- **Manage and Tag Clients**: Easily add, tag, and retrieve client (buyer/seller) details.
 - **Search and Filter**: Quickly find contacts by name, phone number, or tags, and sort by various criteria.
 - **Pin and Unpin Clients**: Keep high-priority clients at the top for quick access.
 - **Scroll through Command History**: Effortlessly scroll through previous commands, making repetitive tasks quicker.
@@ -185,7 +185,7 @@ Examples:
 
 ### Adding a property to buy: `addBuy`
 
-Adds a property which has to be bought to the address book. The property is associated to a contact in the Address Book.
+Adds a property which a client wants to buy to the address book. The property is associated to the specified contact in the Address Book.
 
 ![addBuy message](images/addBuy.png)
 
@@ -202,7 +202,7 @@ Examples:
 
 ### Adding a property to sell: `addSell`
 
-Adds a property which has to be sold to the address book. The property is associated to a contact in the Address Book.
+Adds a property which a client wants to sell to the address book. The property is associated to the specified contact in the Address Book.
 
 ![addSell message](images/addSell.png)
 
@@ -256,24 +256,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Deleting a property to be sold : `delSell`
-
-Deletes the specified property to be sold under specified person from the address book.
-
-![delete sell](images/delSell.png)
-
-Format: `delSell INDEX_PERSON INDEX_PROPERTY`
-
-* Deletes the property to be sold at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
-* The index refers to the index number displayed in the selling properties list and person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
-
 ### Deleting a property to be bought : `delBuy`
 
-Deletes the specified property to be bought under specified person from the address book.
+Deletes the specified property which the specified person wants to buy from the address book.
 
 ![delete buy](images/delBuy.png)
 
@@ -285,6 +270,21 @@ Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 
 Examples:
 * `list` followed by `delBuy 2 1` deletes the 1st buying property under 2nd person in the address book.
+
+### Deleting a property to be sold : `delSell`
+
+Deletes the specified property which the specified person wants to sell from the address book.
+
+![delete sell](images/delSell.png)
+
+Format: `delSell INDEX_PERSON INDEX_PROPERTY`
+
+* Deletes the property to be sold at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
+* The index refers to the index number displayed in the selling properties list and person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
 
 ## Finding Entries Command
 
@@ -330,7 +330,7 @@ Examples:
 
 ### Finding persons by tags assigned to them: `findtc`
 
-Finds persons whose phone number contain any of the given keywords.
+Finds persons whose tags matches any of the given keywords.
 
 ![find tag](images/findCommand.png)
 
@@ -349,7 +349,7 @@ Examples:
 
 ## Finding persons based on properties to buy: `findBuy`
 
-Finds properties in the buy list whose housing type, unit number, address, pin code and buying price  contain any of the given keywords.
+Finds properties in the buy list whose housing type, unit number, address, postal code and buying price contain any of the given keywords.
 
 ![find property_to_buy](images/findProperty.png)
 
@@ -371,7 +371,7 @@ Examples:
 
 ## Finding persons based on properties to sell: `findSell`
 
-Finds properties in the sell list whose housing type, unit number, address, pin code and buying price  contain any of the given keywords.
+Finds properties in the sell list whose housing type, unit number, address, postal code and buying price contain any of the given keywords.
 
 ![find property_to_sell](images/findProperty.png)
 
@@ -400,7 +400,7 @@ Format: `list`
 
 ### Sort all persons: `sort`
 
-Sorts the list of contacts by a specified field and order
+Sorts the list of contacts by a specified field and order, with pinned contacts appearing before unpinned contacts.
 
 ![sort_command](images/SortCommand.png)
 
@@ -408,7 +408,7 @@ Format: `sort f/FIELD o/ORDER`
 
 * The parameters FIELD and ORDER are case-sensitive.
 * The FIELD parameter can be `Name` or `NumProp`.
-* The ORDER parameter can be `L` for ascending and `H` for descending.
+* The ORDER parameter can be `L` for ascending (Low to High) and `H` for descending (High to Low).
 
 Examples:
 * `sort f/Name o/L` returns the contact list sorted in ascending order with respect to the name associated with a contact.
@@ -459,7 +459,7 @@ Examples:
 * `sold 1 1 ap/1110000` marks property to sell 1 for contact 1 as sold and removes from list.
 
 ### Pin Contact `pin`
-Pins a contact at a particular index to the top of the list.
+Pins an unpinned contact at a particular index to the top of the list.
 
 ![pin_command](images/pinCommand.png)
 
@@ -472,7 +472,7 @@ Examples:
 
 ### Unpin Contact `unpin`
 
-Unpins a contact at a particular index from the top of the list to its original sorted position.
+Unpins a pinned contact at a particular index from the top of the list to its sorted position.
 
 ![unpin command](images/unpinCommand.png)
 
@@ -597,8 +597,8 @@ Action     | Format, Examples
 **List**   | `list`
 **Sort Person**   | `sort f/FIELD o/ORDER`<br> e.g., `sort f/Name o/L`
 **Sort Property**   | `sorti INDEX f/FIELD o/ORDER`<br> e.g., `sorti 1 f/Price o/L`
-**Mark Property**   | `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL PRICE`<br> e.g., `bought 1 2 ap/1250000`
-**Mark Property**   | `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL PRICE`<br> e.g., `sold 2 2 ap/1050000`
+**Mark Property as bought**   | `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL PRICE`<br> e.g., `bought 1 2 ap/1250000`
+**Mark Property as sold**   | `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL PRICE`<br> e.g., `sold 2 2 ap/1050000`
 **Pin** | `pin INDEX`<br> e.g., `pin 3`
 **Unpin** | `unpin INDEX`<br> e.g., `unpin 1`
 
