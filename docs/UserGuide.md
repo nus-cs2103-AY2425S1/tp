@@ -65,8 +65,9 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
 * Command words come with **shorthands** <br>
   e.g. `add_s...` and `as...` will both be recognised as commands to add a new student.
-* Prefixes are **case-sensitive**!<br>
-  e.g. `i/INDEX` will be recognised but `I/INDEX` will not be recognised.
+
+* Prefixes are **case-insensitive**!<br>
+  e.g. `i/INDEX` and `I/INDEX` will be recognised.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `as sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as `as sn/John Doe`.
@@ -94,6 +95,12 @@ If you are on the PDF, use the table of contents below to navigate the site.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
+
+<box type="warning" seamless>
+
+**Note:** Screenshots have not been updated to their latest iterations.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -175,7 +182,9 @@ Edits the details of a student.
 
 1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list when `list_s` is called.
 2. Since `Student Number` is the unique identifier for each student, `Student Number` can't be edited.
-3. For information on the constraints for each parameter used in this command, go
+3. Tags are replaced if included in the argument, not appended.
+4. Tags are removed by entering `t/` without specifying any tags after it.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -260,7 +269,7 @@ Searches T_Assistant for students with fields that match the search query.
     * Email
     * Group name
         * **Bonus:** If you wish to filter for students with no groups, use the following command: `find_s q/!nogroup`
-      > `!nogroup` is a special query that searches for students with no groups.
+      > `!nogroup` is a special query that searches for students with no groups, it is also case-insensitive.
 
 <box type="info" seamless>
 Take note that if any other student with a group happens to have a field that matches the special keyword, they will also appear in the results.
@@ -329,8 +338,8 @@ Adds a group to the T_Assistant。
 
 1. `Group Name` is the unique identifier for each group, so no 2 groups can have the same group name.
 2. Group names must follow a three-part format: course type: either `CS2103` or `CS2103T`;
-tutorial group: a letter followed by a number;
-group number: any number
+   tutorial group: a letter followed by a number;
+   group number: any number
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -488,9 +497,9 @@ Adds a task to a group or multiple groups.
 
 1. This command allows only the addition of a single task to one or multiple groups at the same time.
 2. The group name inputs are case-insensitive. `cs2103-f11-1` will yield the same result as `CS2103-F11-1`.
-3. This command is relatively flexible in terms of the input parameters. You can input duplicate group names. 
+3. This command is relatively flexible in terms of the input parameters. You can input duplicate group names.
    The application simply ignores the duplicates and adds the task to the desired group.
-4. The command checks for the existence of the task, hence you cannot input a task which already exists. A task is 
+4. The command checks for the existence of the task, hence you cannot input a task which already exists. A task is
    equal to another task when it has the same task name and deadline as it.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
@@ -724,7 +733,7 @@ Marks a task as done or undone.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario 
+##### Usage Scenario
 
 ###### Scenario #1: Marking an undone task
 
@@ -795,9 +804,10 @@ Undoes the previous command ran.
 
 ##### Notes
 
-1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo 
+1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo
    after you have made changes to the application.
-2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands), and 
+2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
+   and
    not the commands which do not make any changes (find, list, help, exit commands).
 3. For every change you make to the application, it will be added to the version history of the application.
 4. The application stores up to 100 version histories. Hence you will only be able to undo up to 100 of your most recent
@@ -813,9 +823,10 @@ Format: `redo`
 
 ##### Notes
 
-1. If you first open the application, you will be unable to redo because there is no data to redo. You can only 
+1. If you first open the application, you will be unable to redo because there is no data to redo. You can only
    redo the application after at least one undo has been executed.
-2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands), and
+2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
+   and
    not the commands which do not make any changes (find, list, help, exit commands).
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
@@ -909,17 +920,17 @@ This section will inform you about what parameters are used in T_Assistant and t
 All parameters are case-insensitive when used for comparison unless stated otherwise.
 </box>
 
-| Parameter                | Constraints                                                                                                                                                                                                                                                           | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
-|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
-| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                                          | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
-| `sn/`<br>Student Name    | Only contain alphanumeric characters and spaces                                                                                                                                                                                                                       | `John Doe`                                    | `J0hn Doe$$`                                     |
-| `e/`<br>Email            | Format: `local-part@domain-part` <br>`local-part` should contain only alphanumeric characters and the following special characters `+`, `_`, `-`, `.` <br>`local-part` must not start and end with any special characters <br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
-| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                                  | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
-| `gn/`<br>Group Name      | Only contain alphanumeric characters, spaces and `-`                                                                                                                                                                                                                  |                                               |                                                  |
-| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                       | `Release tP v1.6`                             |                                                  |
-| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                                | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
-| `q/`<br>Query            | Must contain only 1 word                                                                                                                                                                                                                                              | `iP`<br>`tP`                                  | `Complete iP`                                    |
-| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                              | `1`<br>`10`                                   | `-1`<br>`test`                                   |
+| Parameter                | Constraints                                                                                                                                                                                                                                                                                        | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
+| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                                                                       | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
+| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                                                                         | `John Doe`                                    | `J0hn Doe$$`                                     |
+| `e/`<br>Email            | Format: `local-part@domain-part` <br>`local-part` follows NUS email constraints<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
+| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                                                               | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
+| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a number<br>`Group Number` should be a number                                                                                              | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
+| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                                                    | `Release tP v1.6`                             |                                                  |
+| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                                                             | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
+| `q/`<br>Query            | Must contain only 1 word                                                                                                                                                                                                                                                                           | `iP`<br>`tP`                                  | `Complete iP`                                    |
+| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                                                           | `1`<br>`10`                                   | `-1`<br>`test`                                   |
 
 --------------------------------------------------------------------------------------------------------------------
 

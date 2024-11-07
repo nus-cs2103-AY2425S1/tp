@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -57,10 +58,15 @@ public class EditStudentCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_TAG = "No changes made to the existing tag(s): [%1$s].";
+    public static final String MESSAGE_DUPLICATE_EMAIL = "Student email [%1$s] is not edited.";
+    public static final String MESSAGE_DUPLICATE_NAME = "Student name [%1$s] is not edited.";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "The given student number is not found in the address book.";
     public static final String MESSAGE_INVALID_FIELD_GROUP_NAME =
         "Group assignment should not be changed via edit student function.";
     public static final String MESSAGE_INVALID_FIELD_STUDENT_NUMBER = "Student number should not be changed.";
+    public static final String MESSAGE_DUPLICATE_FIELD_WARNING =
+        "ATTENTION: No changes detected in the following fields:";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -86,11 +92,31 @@ public class EditStudentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
+        boolean isSameName = editPersonDescriptor.getName().isPresent()
+            && studentToEdit.getName().equals(editedStudent.getName());
+        boolean isSameEmail = editPersonDescriptor.getEmail().isPresent()
+            && studentToEdit.getEmail().equals(editedStudent.getEmail());
+        boolean hasDuplicatedTags = editPersonDescriptor.getTags().isPresent()
+            && !Collections.disjoint(studentToEdit.getTags(), editedStudent.getTags());
+        List<String> errorMessages = new ArrayList<>();
 
         if (studentToEdit.equals(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            errorMessages.add(MESSAGE_DUPLICATE_PERSON);
+        }
+        if (isSameName) {
+            errorMessages.add(String.format(MESSAGE_DUPLICATE_NAME, editedStudent.getName()));
+        }
+        if (isSameEmail) {
+            errorMessages.add(String.format(MESSAGE_DUPLICATE_EMAIL, editedStudent.getEmail()));
+        }
+        if (hasDuplicatedTags) {
+            String duplicatedTags = getDuplicatedTags(studentToEdit.getTags(), editedStudent.getTags());
+            errorMessages.add(String.format(MESSAGE_DUPLICATE_TAG, duplicatedTags));
+        }
+        if (studentToEdit.equals(editedStudent)) {
+            String errorMessage = String.join("\n", errorMessages);
+            throw new CommandException(errorMessage);
         }
         model.setPerson(studentToEdit, editedStudent);
         if (studentToEdit.getGroupName().isPresent()) {
@@ -98,11 +124,29 @@ public class EditStudentCommand extends Command {
             originalStudentGroup.delete(studentToEdit);
             model.addPersonToGroup(editedStudent, originalStudentGroup);
         }
-
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        if (!errorMessages.isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent)) + "\n"
+                + MESSAGE_DUPLICATE_FIELD_WARNING + "\n" + String.join("\n", errorMessages),
+                LIST_STUDENT_MARKER);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent)),
             LIST_STUDENT_MARKER);
     }
+
+    private String getDuplicatedTags(Set<Tag> currentTags, Set<Tag> newTags) {
+        StringBuilder duplicatedTags = new StringBuilder();
+        Set<Tag> intersection = new HashSet<>(currentTags);
+        intersection.retainAll(newTags);
+        if (!intersection.isEmpty()) {
+            for (Tag tag : intersection) {
+                duplicatedTags.append(tag.toString()).append(", ");
+            }
+            duplicatedTags.setLength(duplicatedTags.length() - 2);
+        }
+        return duplicatedTags.toString();
+    }
+
 
     /**
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}

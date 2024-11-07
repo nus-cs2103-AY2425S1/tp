@@ -4,8 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -16,7 +16,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GroupName;
+import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new AddExistingTaskToGroupCommand object.
@@ -40,12 +40,12 @@ public class AddExistingTaskToGroupCommandParser implements Parser<AddExistingTa
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_INDEX);
         Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-        Set<GroupName> groupNameSet = new LinkedHashSet<>(); // preserve insertion order
+        List<Group> groupList = new ArrayList<>();
         for (String s : argMultimap.getAllValues(PREFIX_GROUP_NAME)) {
-            groupNameSet.add(ParserUtil.parseGroupName(s));
+            groupList.add(new Group(ParserUtil.parseGroupName(s)));
         }
 
-        return new AddExistingTaskToGroupCommand(index, groupNameSet);
+        return new AddExistingTaskToGroupCommand(index, groupList);
 
     }
 
