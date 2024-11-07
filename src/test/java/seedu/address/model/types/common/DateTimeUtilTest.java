@@ -38,8 +38,6 @@ public class DateTimeUtilTest {
         KeyFrame keyFrame = timeline.getKeyFrames().get(0);
         keyFrame.getOnFinished().handle(new ActionEvent());
         assertTrue(actionExecuted.get());
-
-        timeline.stop();
     }
 
     @Test
@@ -55,8 +53,6 @@ public class DateTimeUtilTest {
         KeyFrame keyFrame = timeline.getKeyFrames().get(0);
         keyFrame.getOnFinished().handle(new ActionEvent());
         assertTrue(actionExecuted.get());
-
-        timeline.stop();
     }
 
     @Test
@@ -72,7 +68,5 @@ public class DateTimeUtilTest {
         KeyFrame keyFrame = timeline.getKeyFrames().get(0);
         keyFrame.getOnFinished().handle(new ActionEvent());
         assertTrue(actionExecuted.get());
-
-        timeline.stop();
     }
 }
