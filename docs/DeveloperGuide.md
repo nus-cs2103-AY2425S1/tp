@@ -548,44 +548,95 @@ testers are expected to do more _exploratory_ testing.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the `.jar` file and copy it into an empty folder.
+    2. Open a terminal window and navigate to the directory where the `.jar` file is located.
+    3. Execute `java -jar hallpointer.jar`.<br>
+       **Expected:** Shows the GUI with a set of sample data. The window size may not be optimal.
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-2. Saving window preferences
+2. Saving Window Preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    2. Re-launch the app by double-clicking the `.jar` file.<br>
+       **Expected:** The most recent window size and location is retained.
 
-    2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Managing Members
 
-### Deleting a member
+1. Adding a member
 
-1. Deleting a member while all members are being shown
+    1. Test case: `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics`<br>
+       **Expected:** Adds a contact named "John Doe" with specified room number and tags. Details of the added member shown in the status message.
+
+    2. Test case: `add_member n/John Doe`<br>
+       **Expected:** Displays an error message.
+
+2. Deleting a member
 
     1. Prerequisites: List all members using the `list_members` command. Multiple members in the list.
+    2. Test case: `delete_member 1`<br>
+       **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
 
-    2. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    3. Test case: `delete_member 0`<br>
+       **Expected:** No member is deleted. Error details shown in the status message.
 
-    3. Test case: `delete 0`<br>
-       Expected: No member is deleted. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect delete commands to try: `delete_member`, `delete_member x`, `...` (where `x` is larger than the list size).<br>
+       **Expected:** Similar to previous.
 
-    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+3. Updating a member
 
-2. _{ more test cases …​ }_
+    1. Test case: `update_member 1 t/johndoe123_updated n/John Doe`<br>
+       **Expected:** Updates the telegram handle and name for the member at index 1.
 
-### Saving data
+    2. Test case: `update_member 2 tag/`<br>
+       **Expected:** Clears all tags for the member at index 2.
+
+
+### Managing Sessions
+
+1. Adding a session
+
+    1. Test case: `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`<br>
+       **Expected:** Adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with members at indexes 1 and 3 in the displayed list.
+
+2. Deleting a session
+
+    1. Prerequisites: Ensure a session with the specified name exists for members.
+    2. Test case: `delete_session s/Rehearsal m/1 m/3`<br>
+       **Expected:** Deletes the session "Rehearsal" for members at indexes 1 and 3 in the displayed list.
+
+### Saving Data
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Open the hallpointer.json file located in the data directory (this file is created after the app is first launched). Modify it by deleting the name of the first entry.
+       **Expected:** Upon restarting, all data should be cleared, and an empty Hall Pointer should be displayed.
 
-2. _{ more test cases …​ }_
+2. Confirming data persistence
+
+    1. Add or modify member/session data.
+    2. Exit the app and re-launch it.<br>
+       **Expected:** All previous data should be saved and displayed upon restart.
+
+### Other Features
+
+1. Clearing all entries
+
+    1. Test case: `clear`<br>
+       **Expected:** Deletes all entries from the Hall Pointer. The list should be empty.
+
+2. Exiting the program
+
+    1. Test case: `exit`<br>
+       **Expected:** Closes the application.
+
+3. Viewing help
+
+    1. Test case: `help`<br>
+       **Expected:** Displays a message explaining how to access the help page.
+
+
+---
