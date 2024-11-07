@@ -259,7 +259,9 @@ Examples:
 * `appointment-list`<br>
   ![appointment list](images/appointmentList.png)<br>
 * `appointment-list d/2024-10-17`
-* `appointment-list d/2024-10-18 1000`
+   <br>Displays all appointments scheduled for October 17, 2024, if this date has not yet passed the current local date.
+* `appointment-list d/2024-10-18 1000` 
+   <br>Displays the appointment scheduled for October 17, 2024, 10:00am, if this date and time has not yet passed the current local date and time
 
 ### Setting a reminder note: `reminder`
 
