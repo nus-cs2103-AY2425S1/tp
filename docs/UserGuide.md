@@ -232,7 +232,7 @@ The designated names for each component of the User Interface will be used consi
 #### 3.2.2 Additional UI Components:
 
 <a id="additional-ui-components"></a>
-![AdditionalUIComponents.png](images/additionalUIComponents.png)
+![AdditionalUIComponents.png](images/AdditionalUIComponents.png)
 
 * **Index:** This component indicates the position of each student in the Student List Panel.
 
