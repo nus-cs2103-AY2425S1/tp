@@ -18,6 +18,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
+        model.notifyUddersListCleared(); // send notification for observer indicating that udders list has been cleared.
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
