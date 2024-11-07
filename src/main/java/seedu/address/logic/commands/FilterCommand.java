@@ -16,15 +16,16 @@ import seedu.address.model.person.NameOrJobContainsKeywordsPredicate;
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD
+    public static final String COMMAND_WORD_SHORT = "fil";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD_SHORT
             + ": Filters all persons whose names or jobs contain any of the specified "
             + "keywords (case-insensitive).";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: "
             + PREFIX_NAME + "KEYWORD or " + PREFIX_JOB + "KEYWORD\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John OR "
-            + COMMAND_WORD + " " + PREFIX_JOB + "Photographer";
+            + "Example: " + COMMAND_WORD_SHORT + " " + PREFIX_NAME + "John OR "
+            + COMMAND_WORD_SHORT + " " + PREFIX_JOB + "Photographer";
 
     private final NameOrJobContainsKeywordsPredicate predicate;
 

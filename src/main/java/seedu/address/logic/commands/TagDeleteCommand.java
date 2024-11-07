@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.HashSet;
@@ -21,16 +23,17 @@ import seedu.address.model.person.Tag;
 public class TagDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "tag-del";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD
+    public static final String COMMAND_WORD_SHORT = "td";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD_SHORT
             + ": Deletes the specified tag from the person identified "
             + "by their name.\n"
             + "Also deletes them as a participant from the wedding given by the specified tag.";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
             + "\nParameters: "
-            + "n/NAME t/[TAG]\n"
-            + "Example: " + COMMAND_WORD + " n/Li Sirui "
-            + "t/Jane Lim & Tom Koh";
+            + PREFIX_NAME + "NAME " + PREFIX_TAG + "[TAG]\n"
+            + "Example: " + COMMAND_WORD_SHORT + " " + PREFIX_NAME + "Li Sirui "
+            + PREFIX_TAG + "Jane Lim & Tom Koh";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Removed existing Tag(s): '%1$s' from Contact: '%2$s'."
             + "\n" + "Contact: '%2$s' has been removed from Wedding(s): '%1$s'.";
