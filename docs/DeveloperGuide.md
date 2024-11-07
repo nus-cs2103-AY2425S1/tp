@@ -1115,7 +1115,7 @@ Our project presented a higher level of complexity compared to AB3. Our project 
 Our project involved substantial effort in several key areas:
 - **Design and Refactoring**: Extending the AB3 framework to handle two separate entity types required refactoring and designing new classes. 
 - **Command Implementation**: In creating patient- and appointment-specific commands, we implemented additional parser classes and commands.
-- **Testing and Debugging**: To ensure robust funtionality, we implemented comprehensive test cases. This was necessary to ensure 
+- **Testing and Debugging**: To ensure robust functionality, we implemented comprehensive test cases. This was necessary to ensure 
   that each command and feature worked as expected for both entity types.
 
 #### Achievements
