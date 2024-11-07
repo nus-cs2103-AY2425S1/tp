@@ -23,7 +23,7 @@ import seedu.address.model.person.PersonComparator;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final String RESORT_ERROR = "Error: User Prefs had an invalid sort parameter. "
-            + "Resorting after changes were made to the addressbook was abandoned.";
+            + "Re-sorting after changes were made to the addressbook was abandoned.";
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -118,7 +118,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        resortPersonList(getSortSettings());
+        reSortPersonList(getSortSettings());
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -126,7 +126,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
-        resortPersonList(getSortSettings());
+        reSortPersonList(getSortSettings());
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -169,7 +169,7 @@ public class ModelManager implements Model {
         setSortSettings(new SortSettings(parameter, isAscending));
     }
 
-    private void resortPersonList(SortSettings sortSettings) {
+    private void reSortPersonList(SortSettings sortSettings) {
         String parameter = sortSettings.getSortParameter();
         boolean isAscending = sortSettings.isAscendingOrder();
         try {
