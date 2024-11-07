@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import tahub.contacts.logic.commands.course.CourseDeleteCommand;
 import tahub.contacts.model.course.CourseCode;
 
-public class CoursePersonPersonDeleteCommandParserTest {
+public class CourseDeleteCommandParserTest {
 
     private final CourseDeleteCommandParser parser = new CourseDeleteCommandParser();
 

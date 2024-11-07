@@ -18,6 +18,7 @@ import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.course.UniqueCourseList;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 
@@ -31,9 +32,9 @@ public class PersonDeleteCommandTest {
             new StudentCourseAssociationList());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validMatricNumberUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(INDEX_FIRST_PERSON);
+        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(personToDelete.getMatricNumber());
 
         String expectedMessage = String.format(PersonDeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -46,19 +47,19 @@ public class PersonDeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(outOfBoundIndex);
+    public void execute_invalidMatricNumberUnfilteredList_throwsCommandException() {
+        MatriculationNumber invalidMatricNumber = new MatriculationNumber("A0000000X");
+        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(invalidMatricNumber);
 
-        assertCommandFailure(personDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(personDeleteCommand, model, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
+    public void execute_validMatricNumberFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(INDEX_FIRST_PERSON);
+        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(personToDelete.getMatricNumber());
 
         String expectedMessage = String.format(PersonDeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -72,28 +73,31 @@ public class PersonDeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidMatricNumberFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(outOfBoundIndex);
+        MatriculationNumber invalidMatricNumber = new MatriculationNumber("A0000000X");
+        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(invalidMatricNumber);
 
-        assertCommandFailure(personDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(personDeleteCommand, model, Messages.MESSAGE_PERSON_NOT_FOUND);
     }
 
     @Test
     public void equals() {
-        PersonDeleteCommand deleteFirstCommand = new PersonDeleteCommand(INDEX_FIRST_PERSON);
-        PersonDeleteCommand deleteSecondCommand = new PersonDeleteCommand(INDEX_SECOND_PERSON);
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        PersonDeleteCommand deleteFirstCommand = new PersonDeleteCommand(firstPerson.getMatricNumber());
+        PersonDeleteCommand deleteSecondCommand = new PersonDeleteCommand(secondPerson.getMatricNumber());
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        PersonDeleteCommand deleteFirstCommandCopy = new PersonDeleteCommand(INDEX_FIRST_PERSON);
+        PersonDeleteCommand deleteFirstCommandCopy = new PersonDeleteCommand(firstPerson.getMatricNumber());
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -109,8 +113,10 @@ public class PersonDeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(targetIndex);
-        String expected = PersonDeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        Person personToDelete = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        PersonDeleteCommand personDeleteCommand = new PersonDeleteCommand(personToDelete.getMatricNumber());
+        String expected = PersonDeleteCommand.class.getCanonicalName()
+                + "{matriculationNumber=" + personToDelete.getMatricNumber() + "}";
         assertEquals(expected, personDeleteCommand.toString());
     }
 
