@@ -13,8 +13,8 @@ title: Developer Guide
   - [Model component](#model-component)
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
-- [Implementation](#implementation)
 - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+- [Planned Enhancements](#planned-enhancements)
 - [Appendix: Requirements](#appendix-requirements)
   - [Product scope](#product-scope)
   - [User stories](#user-stories)
@@ -198,6 +198,14 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 - [Logging guide](Logging.md)
 - [Configuration guide](Configuration.md)
 - [DevOps guide](DevOps.md)
+
+[Return to Top](#table-of-contents)
+
+---
+
+## **Planned Enhancements**
+
+Team size: 5
 
 [Return to Top](#table-of-contents)
 
@@ -441,6 +449,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 [Return to Top](#table-of-contents)
 
+---
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -508,6 +518,8 @@ testers are expected to do more *exploratory* testing.
       - Expected: The changes you made are still displayed in the app.
 
 [Return to Top](#table-of-contents)
+
+---
 
 ## Appendix: Effort
 
