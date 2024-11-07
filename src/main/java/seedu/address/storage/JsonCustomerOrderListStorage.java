@@ -14,16 +14,25 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.order.CustomerOrderList;
 
+/**
+ * A class to access CustomerOrderList data stored as a JSON file on the hard disk.
+ */
 public class JsonCustomerOrderListStorage implements CustomerOrderListStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonCustomerOrderListStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
+    /**
+     * Constructs a {@code JsonCustomerOrderListStorage} with the specified file path.
+     *
+     * @param filePath Path to the data file.
+     */
     public JsonCustomerOrderListStorage(Path filePath) {
         this.filePath = filePath;
     }
 
+    @Override
     public Path getCustomerOrderListFilePath() {
         return filePath;
     }
@@ -33,6 +42,13 @@ public class JsonCustomerOrderListStorage implements CustomerOrderListStorage {
         return readCustomerOrderList(filePath);
     }
 
+    /**
+     * Reads CustomerOrderList data from the specified file path.
+     *
+     * @param filePath Path to the data file.
+     * @return An {@code Optional<CustomerOrderList>} containing the data if successful.
+     * @throws DataLoadingException If the data file is not in the correct format or contains illegal values.
+     */
     public Optional<CustomerOrderList> readCustomerOrderList(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
@@ -55,6 +71,13 @@ public class JsonCustomerOrderListStorage implements CustomerOrderListStorage {
         saveCustomerOrderList(customerOrderList, filePath);
     }
 
+    /**
+     * Saves the given {@code CustomerOrderList} to the specified file path.
+     *
+     * @param customerOrderList The data to save.
+     * @param filePath Path to the data file.
+     * @throws IOException If an error occurs while saving to the file.
+     */
     public void saveCustomerOrderList(CustomerOrderList customerOrderList, Path filePath) throws IOException {
         requireNonNull(customerOrderList);
         requireNonNull(filePath);
