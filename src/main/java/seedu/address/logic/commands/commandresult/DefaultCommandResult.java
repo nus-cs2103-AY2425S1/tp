@@ -9,6 +9,6 @@ public class DefaultCommandResult extends CommandResult {
      * and other fields set to their default value.
      */
     public DefaultCommandResult(String feedbackToUser) {
-        super(feedbackToUser, null, false, null, false, false);
+        super(feedbackToUser, null, false, null, false, false, false);
     }
 }

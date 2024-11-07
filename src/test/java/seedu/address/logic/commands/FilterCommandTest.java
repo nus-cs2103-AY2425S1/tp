@@ -18,7 +18,7 @@ import java.util.TreeSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.commandresult.CommandResult;
-import seedu.address.logic.commands.commandresult.KeywordCommandResult;
+import seedu.address.logic.commands.commandresult.ShowFilteredApptsCommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -79,7 +79,7 @@ public class FilterCommandTest {
         appointments.add(new FilteredAppointment(ALICE.getAppts().get(0), ALICE));
         appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
 
-        CommandResult expectedCommandResult = new KeywordCommandResult(expectedMessage, "appts");
+        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
@@ -99,7 +99,7 @@ public class FilterCommandTest {
         appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
         appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
 
-        CommandResult expectedCommandResult = new KeywordCommandResult(expectedMessage, "appts");
+        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(appointments, model.getFilteredAppts());
     }
@@ -118,7 +118,7 @@ public class FilterCommandTest {
         TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
         appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
 
-        CommandResult expectedCommandResult = new KeywordCommandResult(expectedMessage, "appts");
+        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
     }
 
@@ -133,7 +133,7 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(dateFilter);
 
         expectedModel.filterAppts(dateFilter);
-        CommandResult expectedCommandResult = new KeywordCommandResult(expectedMessage, "appts");
+        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(new TreeSet<>(APPOINTMENT_COMPARATOR), model.getFilteredAppts());
     }

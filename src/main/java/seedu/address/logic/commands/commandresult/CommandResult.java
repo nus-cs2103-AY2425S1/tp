@@ -17,28 +17,32 @@ public abstract class CommandResult {
     private final String keyword;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isShowHelp;
 
     /** Full patient info should be shown to the user. */
-    private final boolean showPatientInfo;
+    private final boolean isShowPatientInfo;
+
+    /** Filtered Appointments to be displayed */
+    private final boolean isShowFilteredAppts;
 
     /** Target patient whose info is to be displayed */
     private final Patient patient;
 
-    /** The application should exit. */
-    private final boolean exit;
+    /** The application should isExit. */
+    private final boolean isExit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, String keyword, boolean showHelp, Patient patient,
-            boolean showPatientInfo, boolean exit) {
+    public CommandResult(String feedbackToUser, String keyword, boolean isShowHelp, Patient patient,
+            boolean isShowPatientInfo, boolean isExit, boolean isShowFilteredAppts) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.keyword = keyword;
-        this.showHelp = showHelp;
+        this.isShowHelp = isShowHelp;
         this.patient = patient;
-        this.showPatientInfo = showPatientInfo;
-        this.exit = exit;
+        this.isShowPatientInfo = isShowPatientInfo;
+        this.isExit = isExit;
+        this.isShowFilteredAppts = isShowFilteredAppts;
     }
 
     public String getFeedbackToUser() {
@@ -54,15 +58,19 @@ public abstract class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isShowHelp;
     }
 
     public boolean isShowPatientInfo() {
-        return showPatientInfo;
+        return isShowPatientInfo;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExit;
+    }
+
+    public boolean isShowFilteredAppts() {
+        return isShowFilteredAppts;
     }
 
     @Override
@@ -78,27 +86,30 @@ public abstract class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && showPatientInfo == otherCommandResult.showPatientInfo
+                && isShowHelp == otherCommandResult.isShowHelp
+                && isShowPatientInfo == otherCommandResult.isShowPatientInfo
                 && Objects.equals(patient, otherCommandResult.patient)
-                && exit == otherCommandResult.exit
+                && isExit == otherCommandResult.isExit
+                && isShowFilteredAppts == otherCommandResult.isShowFilteredAppts
                 && Objects.equals(keyword, otherCommandResult.keyword);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, keyword, showHelp, showPatientInfo, patient, exit);
+        return Objects.hash(feedbackToUser, keyword, isShowHelp, isShowPatientInfo,
+                patient, isShowFilteredAppts, isExit);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
-                .add("showHelp", showHelp)
-                .add("showPatientInfo", showPatientInfo)
+                .add("isShowHelp", isShowHelp)
+                .add("isShowPatientInfo", isShowPatientInfo)
+                .add("isShowFilteredAppts", isShowFilteredAppts)
                 .add("keyword", keyword)
                 .add("patient", patient)
-                .add("exit", exit)
+                .add("isExit", isExit)
                 .toString();
     }
 
