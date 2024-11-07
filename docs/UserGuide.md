@@ -281,7 +281,7 @@ This command will show you a guest list consisting of all invited guests and a v
 
 **Example Usage:** `list`
 
-Entering the `list` command returns the following result on your screen:
+Entering the `list` command returns the following result on your screen (with sample `Guest` data and  `Vendor` data):
 
 ![list command](images/listCommand.png)
 
