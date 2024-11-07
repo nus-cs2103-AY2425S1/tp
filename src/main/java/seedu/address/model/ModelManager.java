@@ -156,6 +156,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearAddressBook() {
+        versionedAddressBook.clear();
+        logger.info("Cleared the address book.");
+    }
+
+    @Override
     public boolean canUndoAddressBook() {
         return versionedAddressBook.canUndo();
     }

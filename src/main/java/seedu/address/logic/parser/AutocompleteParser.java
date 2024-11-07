@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.io.File;
@@ -15,10 +16,12 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -46,6 +49,8 @@ public class AutocompleteParser {
         GradeCommand.COMMAND_WORD,
         UndoCommand.COMMAND_WORD,
         RedoCommand.COMMAND_WORD,
+        LoadCommand.COMMAND_WORD,
+        FilterCommand.COMMAND_WORD,
     };
 
     /**
@@ -54,7 +59,8 @@ public class AutocompleteParser {
     private static final Prefix[] prefixes = {
         PREFIX_MODULE,
         PREFIX_TAG,
-        PREFIX_GENDER
+        PREFIX_GENDER,
+        PREFIX_PATH
     };
 
     /**
@@ -64,6 +70,25 @@ public class AutocompleteParser {
         "male",
         "female"
     };
+
+    private String filePath = "archived";
+
+    /**
+     * Overloaded constructor for AutocompleteParser. Only used for testing purposes.
+     *
+     * @param filePath File directory to use when matching for file paths.
+     */
+    public AutocompleteParser(String filePath) {
+        if (!filePath.isEmpty()) {
+            this.filePath = filePath;
+        }
+    }
+
+    /**
+     * Constructor for AutocompleteParser.
+     */
+    public AutocompleteParser() {
+    }
 
     /**
      * Parses user input for a list of suggestions for autocompletion.
@@ -85,6 +110,10 @@ public class AutocompleteParser {
         int startIndex = getPreviousWhitespaceIndex(userInput, caretPosition);
         int endIndex = getNextWhitespaceIndex(userInput, caretPosition);
 
+        if (isCaretOnFirstWord(userInput, caretPosition)) {
+            return getCommandSuggestions(userInput, wordUnderCaret, startIndex, endIndex);
+        }
+
         if (argMultimap.getValue(PREFIX_MODULE).isPresent()) {
             return getModuleSuggestions(userInput, wordUnderCaret, ab, startIndex, endIndex, argMultimap);
         }
@@ -97,7 +126,11 @@ public class AutocompleteParser {
             return getGenderSuggestions(userInput, wordUnderCaret, startIndex, endIndex, argMultimap);
         }
 
-        return getCommandSuggestions(userInput, wordUnderCaret, startIndex, endIndex);
+        if (argMultimap.getValue(PREFIX_PATH).isPresent()) {
+            return getPathSuggestions(userInput, wordUnderCaret, startIndex, endIndex, argMultimap);
+        }
+
+        return new HashMap<>();
     }
 
     /**
@@ -187,6 +220,28 @@ public class AutocompleteParser {
     }
 
     /**
+     * Generates suggestions for file paths based on the current user input.
+     *
+     * @param userInput The full user input string.
+     * @param wordUnderCaret The word that is currently being typed under the caret.
+     * @param startIndex The index of the start of the word under the caret.
+     * @param endIndex The index of the end of the word under the caret.
+     * @param argMultimap The tokenized argument multimap containing the parsed user input.
+     * @return A HashMap of file path suggestions.
+     */
+    private HashMap<String, String> getPathSuggestions(String userInput, String wordUnderCaret,
+                                                         int startIndex, int endIndex, ArgumentMultimap argMultimap) {
+        HashMap<String, String> suggestionList = new HashMap<>();
+        for (String file : getAllFilesInArchiveDirectory()) {
+            if (file.startsWith(argMultimap.getValue(PREFIX_PATH).get())) {
+                suggestionList.put(file, getCompleteStringWithReplacement(userInput, wordUnderCaret, file,
+                        startIndex, endIndex));
+            }
+        }
+        return suggestionList;
+    }
+
+    /**
      * Generates suggestions for commands based on the current user input.
      *
      * @param userInput The full user input string.
@@ -218,11 +273,18 @@ public class AutocompleteParser {
         return text.substring(startIndex + 1);
     }
 
+    private boolean isCaretOnFirstWord(String fullInput, int caretPosition) {
+        int startIndex = getPreviousWhitespaceIndex(fullInput, 0);
+        int endIndex = getNextWhitespaceIndex(fullInput, 0);
+
+        return caretPosition >= startIndex && caretPosition <= endIndex;
+    }
+
     private int getPreviousWhitespaceIndex(String text, int caretPosition) {
         int index = caretPosition - 1;
         while (index >= 0 && !Character.isWhitespace(text.charAt(index))) {
             index--;
-        };
+        }
 
         return index;
     }
@@ -232,7 +294,7 @@ public class AutocompleteParser {
         while (endIndex < text.length()
                 && !Character.isWhitespace(text.charAt(endIndex))) {
             endIndex++;
-        };
+        }
 
         return endIndex;
     }
@@ -264,7 +326,7 @@ public class AutocompleteParser {
      */
 
     private ArrayList<String> getAllFilesInArchiveDirectory() {
-        File directory = Paths.get("archived").toFile();
+        File directory = Paths.get(filePath).toFile();
 
         // Check if the directory exists and is indeed a directory
         if (directory.exists() && directory.isDirectory()) {
@@ -302,15 +364,11 @@ public class AutocompleteParser {
         return file.isFile() && file.getName().toLowerCase().endsWith(".json");
     }
 
-
-
     private String getStringWithPrefix(String word, String command) {
-        if (word.length() <= 1) {
-            return command;
-        }
-        // Add prefix to beginning if it's a field
-        if (word.charAt(1) == '/') {
-            return word.substring(0, 2) + command;
+        for (Prefix prefix : prefixes) {
+            if (word.startsWith(prefix.getPrefix())) {
+                return prefix.getPrefix() + command;
+            }
         }
         return command;
     }

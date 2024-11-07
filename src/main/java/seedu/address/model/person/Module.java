@@ -9,10 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Module {
     public static final String MESSAGE_CONSTRAINTS = "Modules should consist of alphanumeric characters only,"
-            + "and it should not be blank.";
+            + "and it should be between 1 and 30 characters.";
     public static final String GRADE_CONSTRAINTS = "Grade should be a number between 0 and 100.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
+    private static final int MIN_MODULE_LENGTH = 1;
+    private static final int MAX_MODULE_LENGTH = 30;
     private static final int MIN_GRADE = 0;
     private static final int MAX_GRADE = 100;
     private static final int UNGRADED = -1;
@@ -27,6 +29,7 @@ public class Module {
     public Module(String module) {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidLength(module), MESSAGE_CONSTRAINTS);
         this.module = module;
         this.grade = UNGRADED;
         this.isGraded = false;
@@ -66,6 +69,17 @@ public class Module {
      */
     public static boolean isValidModule(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Checks if the input value is of valid length.
+     * @param test the module value to be tested.
+     * @return the result of the test.
+     */
+    private boolean isValidLength(String test) {
+        boolean isValidMinLength = test.length() >= MIN_MODULE_LENGTH;
+        boolean isValidMaxLength = test.length() <= MAX_MODULE_LENGTH;
+        return isValidMinLength && isValidMaxLength;
     }
 
     @Override

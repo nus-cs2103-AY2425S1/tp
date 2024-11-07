@@ -38,7 +38,7 @@
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94820224",
     "gender": "female",
     "modules" : [ {
       "module" : "MA1522",
@@ -47,7 +47,7 @@
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824207",
     "gender": "female",
     "modules" : [ {
       "module" : "MA1522",
@@ -56,7 +56,7 @@
     "tags" : [ ]
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824402",
     "gender": "male",
     "modules" : [ {
       "module" : "EL1101",

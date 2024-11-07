@@ -5,6 +5,7 @@ import java.util.Comparator;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -62,9 +63,40 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(module -> module.module))
                 .forEach(moduleCode -> {
                     Label moduleLabel = new Label(moduleCode.module);
+
+                    // Color-coding based on grade
+                    String gradeString = moduleCode.getGrade();
+                    int gradeValue = 0; // Default to 0 if parsing is needed
+
+                    if (gradeString.equalsIgnoreCase("Ungraded")) {
+                        // Set style for ungraded modules
+                        moduleLabel.setStyle("-fx-background-color: #B0BEC5; -fx-background-radius: 5; "
+                                + "-fx-text-fill: black; -fx-padding: 5 10; -fx-font-weight: bold;");
+                        moduleLabel.setTooltip(new Tooltip(moduleCode.module + " (Ungraded)"));
+                    } else {
+                        try {
+                            gradeValue = Integer.parseInt(gradeString);
+                            // Set color based on grade range
+                            if (gradeValue >= 50) {
+                                moduleLabel.setStyle("-fx-background-color: #4CAF50; -fx-background-radius: 5; "
+                                        + "-fx-text-fill: white; -fx-padding: 5 10; -fx-font-weight: bold;");
+                            } else {
+                                moduleLabel.setStyle("-fx-background-color: #F44336; -fx-background-radius: 5; "
+                                        + "-fx-text-fill: white; -fx-padding: 5 10; -fx-font-weight: bold;");
+                            }
+                            // Tooltip for graded modules
+                            moduleLabel.setTooltip(new Tooltip("Module: " + moduleCode.module + "\nGrade: "
+                                    + gradeValue));
+                        } catch (NumberFormatException e) {
+                            // Handle unexpected non-numeric grades gracefully
+                            moduleLabel.setStyle("-fx-background-color: #B0BEC5; -fx-background-radius: 5; "
+                                    + "-fx-text-fill: black; -fx-padding: 5 10; -fx-font-weight: bold;");
+                            moduleLabel.setTooltip(new Tooltip(moduleCode.module + " (Invalid grade)"));
+                        }
+                    }
+
+                    // Add the moduleLabel directly to the modules FlowPane
                     modules.getChildren().add(moduleLabel);
-                    Label gradeLabel = new Label("(" + moduleCode.getGrade() + ")");
-                    grades.getChildren().add(gradeLabel);
                 });
         gender.textFillProperty().bind(
                 Bindings.when(gender.textProperty().isEqualTo("♂"))

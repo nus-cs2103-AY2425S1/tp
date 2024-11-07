@@ -93,6 +93,12 @@ public interface Model {
     void saveAddressBook();
 
     /**
+     * Clears the current state of the address book.
+     * This clears all state in the undo/redo stack.
+     */
+    void clearAddressBook();
+
+    /**
      * Restores the previous state of the address book.
      * This allows the user to undo the last change made to the address book.
      *

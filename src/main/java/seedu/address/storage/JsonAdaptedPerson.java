@@ -81,6 +81,10 @@ class JsonAdaptedPerson {
         for (JsonAdaptedModule module : modules) {
             personModules.add(module.toModelType());
         }
+
+        if (personModules.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }

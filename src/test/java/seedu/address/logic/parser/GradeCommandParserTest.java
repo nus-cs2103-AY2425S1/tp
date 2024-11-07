@@ -9,6 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -26,8 +29,10 @@ public class GradeCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         String userinput = "1" + " " + PREFIX_MODULE + VALID_MODULE_AMY + " " + PREFIX_GRADE + VALID_GRADE_AMY;
-        assertParseSuccess(parser, userinput,
-                new GradeCommand(Index.fromOneBased(1), VALID_MODULE_AMY, VALID_GRADE_AMY));
+        Map<String, Integer> moduleGrades = new LinkedHashMap<>();
+        moduleGrades.put(VALID_MODULE_AMY, VALID_GRADE_AMY);
+        GradeCommand expectedCommand = new GradeCommand(Index.fromOneBased(1), moduleGrades);
+        assertParseSuccess(parser, userinput, expectedCommand);
     }
     @Test
     public void parse_missingModule_failure() {

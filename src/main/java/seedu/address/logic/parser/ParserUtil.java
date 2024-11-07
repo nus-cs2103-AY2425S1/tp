@@ -26,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_FILE_NOT_EXIST = "The target file is not a file or does not exits!";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -165,9 +166,10 @@ public class ParserUtil {
         requireNonNull(path);
         path = path.trim();
         final Path parsedPath = Paths.get("archived", path);
-        if (!path.endsWith(".json") || path.contains("/") || !Files.exists(parsedPath)
-                || !Files.isRegularFile(parsedPath)) {
+        if (!path.endsWith(".json") || path.contains("/")) {
             throw new ParseException(LoadCommand.MESSAGE_USAGE);
+        } else if (!Files.exists(parsedPath) || !Files.isRegularFile(parsedPath)) {
+            throw new ParseException(MESSAGE_FILE_NOT_EXIST);
         }
         return parsedPath;
     }

@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -33,21 +35,24 @@ public class GradeCommandTest {
 
     @Test
     public void constructor_nullFields_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new GradeCommand(null,
-                VALID_MODULE_AMY, VALID_GRADE_AMY));
-        assertThrows(NullPointerException.class, () -> new GradeCommand(Index.fromOneBased(1),
-                null, VALID_GRADE_AMY));
+        assertThrows(NullPointerException.class, () -> new GradeCommand(Index.fromOneBased(1), null));
+        Map<String, Integer> validModuleGrades = new LinkedHashMap<>();
+        validModuleGrades.put(VALID_MODULE_AMY, VALID_GRADE_AMY);
+        assertThrows(NullPointerException.class, () -> new GradeCommand(null, validModuleGrades));
     }
 
     @Test
     public void execute_validGrade_success() throws Exception {
         ModelStubAcceptingGradeAdded modelStub = new ModelStubAcceptingGradeAdded();
         Person validPerson = new PersonBuilder().withModules(VALID_MODULE_AMY).build();
+        Map<String, Integer> validModuleGrades = new LinkedHashMap<>();
+        validModuleGrades.put(VALID_MODULE_AMY, VALID_GRADE_AMY);
 
         CommandResult commandResult = new GradeCommand(Index.fromOneBased(1),
-                VALID_MODULE_AMY, VALID_GRADE_AMY).execute(modelStub);
+                validModuleGrades).execute(modelStub);
 
-        assertEquals(String.format(GradeCommand.MESSAGE_GRADE_SUCCESS, VALID_MODULE_AMY, validPerson.getName()),
+        assertEquals(String.format(GradeCommand.MESSAGE_GRADE_SUCCESS, validPerson.getName(),
+                        VALID_MODULE_AMY + ": " + VALID_GRADE_AMY),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsUpdated);
     }
@@ -55,7 +60,10 @@ public class GradeCommandTest {
     @Test
     public void execute_invalidPersonIndex_throwsCommandException() {
         ModelStub modelStub = new ModelStubWithPerson(ALICE);
-        GradeCommand gradeCommand = new GradeCommand(Index.fromOneBased(99), VALID_MODULE_AMY, VALID_GRADE_AMY);
+        Map<String, Integer> validModuleGrades = new LinkedHashMap<>();
+        validModuleGrades.put(VALID_MODULE_AMY, VALID_GRADE_AMY);
+
+        GradeCommand gradeCommand = new GradeCommand(Index.fromOneBased(99), validModuleGrades);
 
         CommandException exception = assertThrows(CommandException.class, () -> gradeCommand.execute(modelStub));
         assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, exception.getMessage());
@@ -65,35 +73,25 @@ public class GradeCommandTest {
     public void execute_invalidModule_throwsCommandException() {
         ModelStub modelStub = new ModelStubWithPerson(ALICE);
         String invalidModule = "INVALID_MODULE";
-        GradeCommand gradeCommand = new GradeCommand(Index.fromOneBased(1), invalidModule, VALID_GRADE_AMY);
+        Map<String, Integer> invalidModuleGrades = new LinkedHashMap<>();
+        invalidModuleGrades.put(invalidModule, VALID_GRADE_AMY);
+        GradeCommand gradeCommand = new GradeCommand(Index.fromOneBased(1), invalidModuleGrades);
 
         CommandException exception = assertThrows(CommandException.class, () -> gradeCommand.execute(modelStub));
-        assertEquals(GradeCommand.MESSAGE_INVALID_MODULE, exception.getMessage());
+        assertEquals(GradeCommand.MESSAGE_INVALID_MODULE + " (" + invalidModule + ")", exception.getMessage());
     }
-
-    @Test
-    public void execute_invalidGrade_throwsCommandException() {
-        ModelStub modelStub = new ModelStubWithPerson(ALICE);
-        int invalidGrade = -10; // Negative grade, invalid
-        GradeCommand gradeCommand = new GradeCommand(Index.fromOneBased(1), VALID_MODULE_AMY, invalidGrade);
-
-        CommandException exception = assertThrows(CommandException.class, () -> gradeCommand.execute(modelStub));
-        assertEquals(GradeCommand.MESSAGE_INVALID_GRADE, exception.getMessage());
-    }
-
     @Test
     public void equals() {
-        GradeCommand gradeFirstCommand = new GradeCommand(Index.fromOneBased(1),
-                VALID_MODULE_AMY, VALID_GRADE_AMY);
-        GradeCommand gradeSecondCommand = new GradeCommand(Index.fromOneBased(2),
-                VALID_MODULE_AMY, VALID_GRADE_AMY);
+        Map<String, Integer> moduleGrades = new LinkedHashMap<>();
+        moduleGrades.put(VALID_MODULE_AMY, VALID_GRADE_AMY);
+        GradeCommand gradeFirstCommand = new GradeCommand(Index.fromOneBased(1), moduleGrades);
+        GradeCommand gradeSecondCommand = new GradeCommand(Index.fromOneBased(2), moduleGrades);
 
         // same object -> returns true
         assertTrue(gradeFirstCommand.equals(gradeFirstCommand));
 
         // same values -> returns true
-        GradeCommand gradeFirstCommandCopy = new GradeCommand(Index.fromOneBased(1),
-                VALID_MODULE_AMY, VALID_GRADE_AMY);
+        GradeCommand gradeFirstCommandCopy = new GradeCommand(Index.fromOneBased(1), moduleGrades);
         assertTrue(gradeFirstCommand.equals(gradeFirstCommandCopy));
 
         // different types -> returns false
@@ -219,6 +217,10 @@ public class GradeCommandTest {
         }
         @Override
         public void saveAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void clearAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -9,10 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone {
 
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should only contain numbers and be exactly 8 digits long.";
+    public static final String VALIDATION_REGEX = "\\d{8}$";
+
+    private static final int PHONE_LENGTH = 8;
     public final String value;
 
     /**
@@ -23,6 +24,7 @@ public class Phone {
     public Phone(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        checkArgument(isLengthValid(phone), MESSAGE_CONSTRAINTS);
         value = phone;
     }
 
@@ -31,6 +33,15 @@ public class Phone {
      */
     public static boolean isValidPhone(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string has a valid length of 8.
+     * @param test the phone string to be tested.
+     * @return result of the check.
+     */
+    public boolean isLengthValid(String test) {
+        return test.length() == PHONE_LENGTH;
     }
 
     @Override
