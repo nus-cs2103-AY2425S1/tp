@@ -75,19 +75,29 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 
 #### Command Box Component
 
-The `CommandBox` component is responsible for handling user command inputs. Below is the sequence diagram illustrating how the `CommandBox` processes user commands:
+The `CommandBox` component is responsible for handling user command inputs and managing command history navigation.
 
-<puml src="diagrams/CommandBoxSequenceDiagram.puml" alt="Sequence Diagram for CommandBox"/>
+**Handling user inputs:**
+Below is the sequence diagram illustrating how the `CommandBox` processes user inputs:
 
-The command execution flow:
+<puml src="diagrams/CommandBoxSequenceDiagram.puml" alt="Sequence Diagram for CommandBox command execution"/>
+
+How command execution works:
 1. When the user types a command and presses Enter, the `CommandBox` retrieves the command text from the `TextField`.
 2. If the command is not empty, it is passed to the `CommandExecutor` for execution.
 3. Upon successful execution:
    - The command is added to the `CommandHistory` for tracking previous commands
    - The text field is cleared
 4. If a `CommandException` or `ParseException` occurs:
-   - The command box styling is updated to indicate the error
-   - The error style class is added to the text field
+   - The error style class is added to the text field to indicate error.
+
+**Command History Navigation:**
+Below is the sequence diagram showing the command history navigation:
+<puml src="diagrams/CommandBoxSequenceDiagram2.puml" alt="Sequence Diagram for CommandBox history navigation"/>
+
+- UP Arrow Key: Retrieves the previous command from the `CommandHistory` when pressed.
+- DOWN Arrow Key: Retrieves the next command from the `CommandHistory` when pressed.
+- After retrieving a command (previous or next), the `CommandBox` updates the `TextField` with this command and moves the caret (cursor) to the end of the text.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
