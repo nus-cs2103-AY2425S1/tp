@@ -63,7 +63,7 @@ public class DeleteApptCommand extends Command {
         Patient patientToDeleteAppt = lastShownList.stream()
                 .filter(patient -> patient.getNric().equals(nric))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC, 
+                .orElseThrow(() -> new CommandException(String.format(Messages.MESSAGE_INVALID_PATIENT_NRIC,
                     nric)));
         if (patientToDeleteAppt == null) {
             logger.warning("Patient not found");
