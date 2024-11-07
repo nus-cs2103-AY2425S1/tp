@@ -43,25 +43,6 @@ public class ClaimTest {
     }
 
     @Test
-    public void setClaimDescription_validDescription_success() {
-        String newValidDescription = "New Valid Description";
-        claim.setClaimDescription(newValidDescription);
-        assertEquals(newValidDescription, claim.getClaimDescription());
-    }
-
-    @Test
-    public void setClaimDescription_invalidDescription_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> claim.setClaimDescription(invalidDescription));
-    }
-
-    @Test
-    public void setStatus_validStatus_success() {
-        ClaimStatus newStatus = ClaimStatus.APPROVED;
-        claim.setStatus(newStatus);
-        assertEquals(newStatus, claim.getStatus());
-    }
-
-    @Test
     public void equals_sameClaim_returnsTrue() {
         Claim otherClaim = new Claim(validStatus, validDescription);
         assertTrue(claim.equals(otherClaim));

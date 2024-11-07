@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.claim.ClaimList;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EditPolicyDescriptor;
@@ -70,9 +71,8 @@ public class EditPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        PolicySet clientPolicies = new PolicySet();
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-        clientPolicies.addAll(clientToEdit.getPolicies());
+        PolicySet clientPolicies = new PolicySet(clientToEdit.getPolicies());
 
         PolicyType policyTypeToEdit = editPolicyDescriptor.getPolicyType();
         Policy policyToRemove = findPolicyByType(clientPolicies, policyTypeToEdit);
@@ -114,8 +114,12 @@ public class EditPolicyCommand extends Command {
         CoverageAmount updatedCoverageAmount = descriptor.getCoverageAmount().orElse(policyToEdit.getCoverageAmount());
         ExpiryDate updatedExpiryDate = descriptor.getExpiryDate().orElse(policyToEdit.getExpiryDate());
 
+        // claims cannot be edited using this command
+        ClaimList claimList = new ClaimList();
+        claimList.addAll(policyToEdit.getClaimList());
+
         return Policy.makePolicy(descriptor.getPolicyType(), updatedPremiumAmount,
-                updatedCoverageAmount, updatedExpiryDate, policyToEdit.getClaimList());
+                updatedCoverageAmount, updatedExpiryDate, claimList);
     }
 
     @Override

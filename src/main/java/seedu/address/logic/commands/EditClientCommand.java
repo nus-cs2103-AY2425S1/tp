@@ -102,8 +102,7 @@ public class EditClientCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         // edit command should not be able to edit policies
-        PolicySet policies = new PolicySet();
-        policies.addAll(clientToEdit.getPolicies());
+        PolicySet policies = new PolicySet(clientToEdit.getPolicies());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 policies);

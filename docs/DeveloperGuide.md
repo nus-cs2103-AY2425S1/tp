@@ -153,6 +153,12 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+### Command Parsing and Execution Flow
+
+The following UML activity diagram illustrates the command parsing and execution process within Prudy.
+It depicts how commands are parsed, validated, and executed, along with the corresponding UI interactions for success or error messages.
+<puml src="diagrams/FlowActivityDiagram.puml" width="550" />
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
@@ -284,11 +290,13 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**:
+The target user is an insurance agent working with Prudential, responsible for managing a substantial portfolio of clients. This user has specific needs and preferences for effectively managing clients, policies, and claims in a high-volume environment.
 
-* is a Prudential insurance agent
-* has a need to manage a significant number of clients
-* has a need to manage clients' policies and claims
-* prefer desktop apps over other types
+Key attributes of the target user include:
+* **Role and Responsibilities:** The user is a Prudential insurance agent who needs to efficiently oversee and update client records, including individual policies and claims
+* **Client Management Requirements:** The user regularly manages a large number of clients and requires an organized and efficient system to track and access client information swiftly
+* **Application Preference:** The user prefers desktop applications due to their stability and reliability in handling client data and other sensitive information in a local environment
+* **Interaction Style:** As a proficient typist, the user prefers a command-line interface (CLI) for its speed and efficiency over traditional mouse-based interactions.
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps

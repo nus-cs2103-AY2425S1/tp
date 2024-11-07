@@ -2,16 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
-import seedu.address.model.policy.Policy;
 
 /**
  * Wraps all data in the Prudy level
@@ -109,15 +105,6 @@ public class Prudy implements ReadOnlyPrudy {
     @Override
     public ObservableList<Client> getClientList() {
         return clients.asUnmodifiableObservableList();
-    }
-
-    public ObservableList<Policy> getPolicyList() {
-        List<Policy> allPolicies = new ArrayList<>();
-        for (Client client : clients) {
-            Set<Policy> pset = client.getPolicies();
-            allPolicies.addAll(pset);
-        }
-        return FXCollections.unmodifiableObservableList(FXCollections.observableList(allPolicies));
     }
 
     @Override
