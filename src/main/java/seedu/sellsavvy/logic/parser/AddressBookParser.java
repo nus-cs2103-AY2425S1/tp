@@ -9,6 +9,11 @@ import java.util.regex.Pattern;
 
 import seedu.sellsavvy.commons.core.LogsCenter;
 import seedu.sellsavvy.logic.commands.Command;
+import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.DeleteCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.FindCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.ListCustomerCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
@@ -19,11 +24,6 @@ import seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.UnmarkOrderCommand;
-import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.DeletePersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.FindPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.ListPersonCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,28 +60,28 @@ public class AddressBookParser {
 
         switch (commandWord.toLowerCase()) {
 
-        case AddPersonCommand.COMMAND_WORD:
-        case AddPersonCommand.COMMAND_ALIAS:
-            return new AddPersonCommandParser().parse(arguments);
+        case AddCustomerCommand.COMMAND_WORD:
+        case AddCustomerCommand.COMMAND_ALIAS:
+            return new AddCustomerCommandParser().parse(arguments);
 
-        case EditPersonCommand.COMMAND_WORD:
-        case EditPersonCommand.COMMAND_ALIAS:
-            return new EditPersonCommandParser().parse(arguments);
+        case EditCustomerCommand.COMMAND_WORD:
+        case EditCustomerCommand.COMMAND_ALIAS:
+            return new EditCustomerCommandParser().parse(arguments);
 
-        case DeletePersonCommand.COMMAND_WORD:
-        case DeletePersonCommand.COMMAND_ALIAS:
-            return new DeletePersonCommandParser().parse(arguments);
+        case DeleteCustomerCommand.COMMAND_WORD:
+        case DeleteCustomerCommand.COMMAND_ALIAS:
+            return new DeleteCustomerCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindPersonCommand.COMMAND_WORD:
-        case FindPersonCommand.COMMAND_ALIAS:
-            return new FindPersonCommandParser().parse(arguments);
+        case FindCustomerCommand.COMMAND_WORD:
+        case FindCustomerCommand.COMMAND_ALIAS:
+            return new FindCustomerCommandParser().parse(arguments);
 
-        case ListPersonCommand.COMMAND_WORD:
-        case ListPersonCommand.COMMAND_ALIAS:
-            return new ListPersonCommand();
+        case ListCustomerCommand.COMMAND_WORD:
+        case ListCustomerCommand.COMMAND_ALIAS:
+            return new ListCustomerCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

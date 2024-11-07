@@ -5,17 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.commons.util.StringUtil.normalise;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.showCustomerAtIndex;
 import static seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand.MESSAGE_DUPLICATE_ORDER_WARNING;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
 import static seedu.sellsavvy.model.order.Date.MESSAGE_OUTDATED_WARNING;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import static seedu.sellsavvy.testutil.TypicalOrders.CAMERA;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,9 +25,9 @@ import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
-import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.OrderBuilder;
 
 public class AddOrderCommandTest {
@@ -40,15 +40,15 @@ public class AddOrderCommandTest {
     }
 
     @Test
-    public void execute_validPersonIndexUnfilteredList_success() {
+    public void execute_validCustomerIndexUnfilteredList_success() {
         AddOrderCommand addFirstOrder = new AddOrderCommand(INDEX_FIRST, ABACUS);
 
         Model expectedModel = model.createCopy();
-        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
+        Customer customerToAddUnder = expectedModel.getFilteredCustomerList().get(0);
         String firstExpectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(ABACUS));
-        personToAddUnder.getOrderList().add(ABACUS);
-        expectedModel.updateSelectedPerson(personToAddUnder);
+                customerToAddUnder.getName(), Messages.format(ABACUS));
+        customerToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedCustomer(customerToAddUnder);
 
         // First order
         assertCommandSuccess(addFirstOrder, model, firstExpectedMessage, expectedModel);
@@ -56,8 +56,8 @@ public class AddOrderCommandTest {
         // Second order, no warning messages
         AddOrderCommand addSecondOrder = new AddOrderCommand(INDEX_FIRST, BLOCKS);
         String secondExpectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(BLOCKS));
-        personToAddUnder.getOrderList().add(BLOCKS);
+                customerToAddUnder.getName(), Messages.format(BLOCKS));
+        customerToAddUnder.getOrderList().add(BLOCKS);
 
         assertCommandSuccess(addSecondOrder, model, secondExpectedMessage, expectedModel);
     }
@@ -65,22 +65,22 @@ public class AddOrderCommandTest {
     @Test
     public void execute_duplicatePendingOrder_warningGiven() {
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
-        // add the first order to the person's order list
-        model.getFilteredPersonList().get(0).getOrderList().add(ABACUS.createCopy());
+        // add the first order to the customer's order list
+        model.getFilteredCustomerList().get(0).getOrderList().add(ABACUS.createCopy());
 
         Model expectedModel = model.createCopy();
-        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
-        personToAddUnder.getOrderList().add(ABACUS);
-        expectedModel.updateSelectedPerson(personToAddUnder);
+        Customer customerToAddUnder = expectedModel.getFilteredCustomerList().get(0);
+        customerToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedCustomer(customerToAddUnder);
         String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
-                + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(ABACUS));
+                + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, customerToAddUnder.getName(), Messages.format(ABACUS));
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_similarPendingOrder_warningGiven() {
-        // add something similar(but not identical) to the first order to the person's order list
+        // add something similar(but not identical) to the first order to the customer's order list
         String editedItemString = normalise(ABACUS.getItem().fullDescription);
         Order toAdd = new OrderBuilder(ABACUS).withItem(editedItemString).build();
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, toAdd);
@@ -88,14 +88,14 @@ public class AddOrderCommandTest {
         //ensures it is not equal to ABACUS
         assertNotEquals(toAdd, ABACUS);
 
-        model.getFilteredPersonList().get(0).getOrderList().add(ABACUS);
+        model.getFilteredCustomerList().get(0).getOrderList().add(ABACUS);
 
         Model expectedModel = model.createCopy();
-        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
-        personToAddUnder.getOrderList().add(toAdd);
-        expectedModel.updateSelectedPerson(personToAddUnder);
+        Customer customerToAddUnder = expectedModel.getFilteredCustomerList().get(0);
+        customerToAddUnder.getOrderList().add(toAdd);
+        expectedModel.updateSelectedCustomer(customerToAddUnder);
         String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
-                + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(toAdd));
+                + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, customerToAddUnder.getName(), Messages.format(toAdd));
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -108,14 +108,14 @@ public class AddOrderCommandTest {
     public void execute_duplicateCompletedOrder_success() {
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
         Order completedAbacus = new OrderBuilder(ABACUS).withStatus(Status.COMPLETED).build();
-        model.getFilteredPersonList().get(0).getOrderList().add(completedAbacus);
+        model.getFilteredCustomerList().get(0).getOrderList().add(completedAbacus);
 
         Model expectedModel = model.createCopy();
-        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
-        personToAddUnder.getOrderList().add(ABACUS);
-        expectedModel.updateSelectedPerson(personToAddUnder);
+        Customer customerToAddUnder = expectedModel.getFilteredCustomerList().get(0);
+        customerToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedCustomer(customerToAddUnder);
         String expectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(ABACUS));
+                customerToAddUnder.getName(), Messages.format(ABACUS));
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
@@ -125,46 +125,46 @@ public class AddOrderCommandTest {
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, CAMERA);
 
         Model expectedModel = model.createCopy();
-        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
+        Customer customerToAddUnder = expectedModel.getFilteredCustomerList().get(0);
         String expectedMessage = String.format(MESSAGE_OUTDATED_WARNING + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(CAMERA));
-        personToAddUnder.getOrderList().add(CAMERA);
-        expectedModel.updateSelectedPerson(personToAddUnder);
+                customerToAddUnder.getName(), Messages.format(CAMERA));
+        customerToAddUnder.getOrderList().add(CAMERA);
+        expectedModel.updateSelectedCustomer(customerToAddUnder);
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void execute_invalidCustomerIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
         AddOrderCommand addOrderCommand = new AddOrderCommand(outOfBoundIndex, ABACUS);
 
-        assertCommandFailure(addOrderCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addOrderCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_validPersonIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
+    public void execute_validCustomerIndexFilteredList_success() {
+        showCustomerAtIndex(model, INDEX_FIRST);
         AddOrderCommand addOrderCommand = new AddOrderCommand(INDEX_FIRST, ABACUS);
 
         Model expectedModel = model.createCopy();
-        showPersonAtIndex(expectedModel, INDEX_FIRST);
-        Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
+        showCustomerAtIndex(expectedModel, INDEX_FIRST);
+        Customer customerToAddUnder = expectedModel.getFilteredCustomerList().get(0);
         String expectedMessage = String.format(AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(ABACUS));
-        personToAddUnder.getOrderList().add(ABACUS);
-        expectedModel.updateSelectedPerson(personToAddUnder);
+                customerToAddUnder.getName(), Messages.format(ABACUS));
+        customerToAddUnder.getOrderList().add(ABACUS);
+        expectedModel.updateSelectedCustomer(customerToAddUnder);
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void executeInvalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void executeInvalidCustomerIndexFilteredList_failure() {
+        showCustomerAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCustomerList().size() + 1);
         AddOrderCommand addOrderCommand = new AddOrderCommand(outOfBoundIndex, ABACUS);
 
-        assertCommandFailure(addOrderCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addOrderCommand, model, Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test

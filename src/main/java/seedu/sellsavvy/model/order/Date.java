@@ -10,7 +10,7 @@ import seedu.sellsavvy.logic.parser.ParserUtil;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 
 /**
- * Represents the deliver-by date of a Person's Order in the address book.
+ * Represents the deliver-by date of a Customer's Order in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateRegex(String)}
  * and {@link #isValidCalendarDate(String)}
  */

@@ -7,10 +7,10 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderListByIndex;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +20,11 @@ import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -33,13 +33,13 @@ import seedu.sellsavvy.model.person.Person;
 public class DeleteOrderCommandTest {
 
     private Model model;
-    private Person personToDeleteOrderUnder;
+    private Customer customerToDeleteOrderUnder;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        personToDeleteOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH.getZeroBased());
-        model.updateSelectedPerson(personToDeleteOrderUnder);
+        customerToDeleteOrderUnder = model.getFilteredCustomerList().get(INDEX_FOURTH.getZeroBased());
+        model.updateSelectedCustomer(customerToDeleteOrderUnder);
     }
 
     @Test
@@ -58,7 +58,7 @@ public class DeleteOrderCommandTest {
 
     @Test
     public void execute_validIndexFilteredOrderList_success() {
-        personToDeleteOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+        customerToDeleteOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
         Model expectedModel = model.createCopy();
 
         OrderList expectedFilteredOrderList = getOrderListByIndex(expectedModel, INDEX_FOURTH);
@@ -83,7 +83,7 @@ public class DeleteOrderCommandTest {
     public void execute_invalidIndexFilteredOrderList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOrderList().size());
 
-        personToDeleteOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
+        customerToDeleteOrderUnder.updateFilteredOrderList(new StatusEqualsKeywordPredicate(Status.COMPLETED));
 
         assertTrue(outOfBoundIndex.getZeroBased() >= model.getFilteredOrderList().size());
 
@@ -95,7 +95,7 @@ public class DeleteOrderCommandTest {
     @Test
     public void execute_noOrderListDisplayed_throwsCommandException() {
         DeleteOrderCommand deleteOrderCommand = new DeleteOrderCommand(INDEX_FIRST);
-        model.updateSelectedPerson(null);
+        model.updateSelectedCustomer(null);
 
         assertCommandFailure(deleteOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
     }
@@ -118,7 +118,7 @@ public class DeleteOrderCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different customer -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 

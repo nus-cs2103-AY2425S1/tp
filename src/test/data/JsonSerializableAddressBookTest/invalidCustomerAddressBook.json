@@ -1,0 +1,15 @@
+{
+  "customers": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street",
+    "tags": [ "friends" ],
+    "orderList" : [ {
+      "item" : "Abacus",
+      "quantity" : "2",
+      "date" : "10-10-2025",
+      "status": "Pending"
+    } ]
+  } ]
+}

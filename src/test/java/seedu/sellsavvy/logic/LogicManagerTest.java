@@ -3,14 +3,14 @@ package seedu.sellsavvy.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX;
 import static seedu.sellsavvy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.NAME_DESC_AMY;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.PHONE_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.NAME_DESC_AMY;
+import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.PHONE_DESC_AMY;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalPersons.AMY;
+import static seedu.sellsavvy.testutil.TypicalCustomers.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -21,19 +21,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.sellsavvy.logic.commands.CommandResult;
+import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.ListCustomerCommand;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
-import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
-import seedu.sellsavvy.logic.commands.personcommands.ListPersonCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
 import seedu.sellsavvy.model.UserPrefs;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.storage.JsonAddressBookStorage;
 import seedu.sellsavvy.storage.JsonUserPrefsStorage;
 import seedu.sellsavvy.storage.StorageManager;
-import seedu.sellsavvy.testutil.PersonBuilder;
+import seedu.sellsavvy.testutil.CustomerBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -63,13 +63,13 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCustomerCommand = "deletec 9";
-        assertCommandException(deleteCustomerCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCustomerCommand, MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListPersonCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListPersonCommand.MESSAGE_SUCCESS, model);
+        String listCommand = ListCustomerCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ListCustomerCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -85,15 +85,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCustomerList().remove(0));
     }
 
     @Test
-    public void getSelectedPersonProperty_innerContent_isNullInitially() {
-        assertNotNull(logic.getSelectedPersonProperty());
-        //ensures that when first initiated no person's order will be displayed
-        assertNull(logic.getSelectedPersonProperty().get());
+    public void getSelectedCustomerProperty_innerContent_isNullInitially() {
+        assertNotNull(logic.getSelectedCustomerProperty());
+        //ensures that when first initiated no customer's order will be displayed
+        assertNull(logic.getSelectedCustomerProperty().get());
     }
 
     /**
@@ -174,11 +174,11 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddPersonCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+        String addCommand = AddCustomerCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Customer expectedCustomer = new CustomerBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addCustomer(expectedCustomer);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

@@ -11,10 +11,10 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.model.customer.Customer;
 
 /**
- * Lists all orders of a specified person to the user.
+ * Lists all orders of a specified customer to the user.
  */
 public class ListOrderCommand extends Command {
     public static final String COMMAND_WORD = "listorder";
@@ -31,9 +31,9 @@ public class ListOrderCommand extends Command {
     private final Index index;
 
     /**
-     * Creates a {@code ListOrderCommand} to list all orders of a specified person.
+     * Creates a {@code ListOrderCommand} to list all orders of a specified customer.
      *
-     * @param index The index of the person in the filtered person list whose orders will be displayed.
+     * @param index The index of the customer in the filtered customer list whose orders will be displayed.
      */
     public ListOrderCommand(Index index) {
         this.index = index;
@@ -42,15 +42,15 @@ public class ListOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Customer> lastShownList = model.getFilteredCustomerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
-        Person selectedPerson = lastShownList.get(index.getZeroBased());
-        model.updateSelectedPerson(selectedPerson);
-        selectedPerson.resetFilteredOrderList();
-        return new CommandResult(String.format(MESSAGE_LIST_ORDER_SUCCESS, selectedPerson.getName().fullName));
+        Customer selectedCustomer = lastShownList.get(index.getZeroBased());
+        model.updateSelectedCustomer(selectedCustomer);
+        selectedCustomer.resetFilteredOrderList();
+        return new CommandResult(String.format(MESSAGE_LIST_ORDER_SUCCESS, selectedCustomer.getName().fullName));
     }
 
     @Override

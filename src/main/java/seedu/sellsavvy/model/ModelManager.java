@@ -13,9 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.commons.core.LogsCenter;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,8 +25,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
-    private final ReadOnlyObjectWrapper<Person> selectedPersonProperty;
+    private final FilteredList<Customer> filteredCustomers;
+    private final ReadOnlyObjectWrapper<Customer> selectedCustomerProperty;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,8 +38,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        selectedPersonProperty = new ReadOnlyObjectWrapper<>(); // initially no order is displayed
+        filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
+        selectedCustomerProperty = new ReadOnlyObjectWrapper<>(); // initially no order is displayed
     }
 
     public ModelManager() {
@@ -94,114 +94,114 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasCustomer(Customer customer) {
+        requireNonNull(customer);
+        return addressBook.hasCustomer(customer);
     }
 
     @Override
-    public boolean hasSimilarPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasSimilarPerson(person);
+    public boolean hasSimilarCustomer(Customer customer) {
+        requireNonNull(customer);
+        return addressBook.hasSimilarCustomer(customer);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteCustomer(Customer target) {
+        addressBook.removeCustomer(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addCustomer(Customer customer) {
+        addressBook.addCustomer(customer);
+        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setCustomer(Customer target, Customer editedCustomer) {
+        requireAllNonNull(target, editedCustomer);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setCustomer(target, editedCustomer);
     }
 
     @Override
     public Model createCopy() {
         Model modelCopy = new ModelManager(addressBook.createCopy(), userPrefs);
-        Person selectedPersonCopy = modelCopy.findEquivalentPerson(getSelectedPerson());
-        modelCopy.updateSelectedPerson(selectedPersonCopy);
+        Customer selectedCustomerCopy = modelCopy.findEquivalentCustomer(getSelectedCustomer());
+        modelCopy.updateSelectedCustomer(selectedCustomerCopy);
         return modelCopy;
     }
 
     @Override
-    public Person findEquivalentPerson(Person person) {
-        if (person == null) {
+    public Customer findEquivalentCustomer(Customer customer) {
+        if (customer == null) {
             return null;
         }
-        return addressBook.findEquivalentPerson(person);
+        return addressBook.findEquivalentCustomer(customer);
     }
 
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Customer List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Customer> getFilteredCustomerList() {
+        return filteredCustomers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredCustomers.setPredicate(predicate);
     }
 
-    //=========== Selected Person Accessors ==================================================================
+    //=========== Selected Customer Accessors ==================================================================
 
     @Override
-    public ReadOnlyObjectProperty<Person> getSelectedPersonProperty() {
-        return selectedPersonProperty.getReadOnlyProperty();
-    }
-
-    @Override
-    public void updateSelectedPerson(Person person) {
-        selectedPersonProperty.set(person);
+    public ReadOnlyObjectProperty<Customer> getSelectedCustomerProperty() {
+        return selectedCustomerProperty.getReadOnlyProperty();
     }
 
     @Override
-    public boolean isSelectedPerson(Person person) {
-        if (getSelectedPerson() == null) {
-            return person == null;
+    public void updateSelectedCustomer(Customer customer) {
+        selectedCustomerProperty.set(customer);
+    }
+
+    @Override
+    public boolean isSelectedCustomer(Customer customer) {
+        if (getSelectedCustomer() == null) {
+            return customer == null;
         }
-        return getSelectedPerson().equals(person);
+        return getSelectedCustomer().equals(customer);
     }
 
     @Override
-    public Person getSelectedPerson() {
-        return selectedPersonProperty.get();
+    public Customer getSelectedCustomer() {
+        return selectedCustomerProperty.get();
     }
 
     @Override
     public OrderList getSelectedOrderList() {
-        if (getSelectedPerson() == null) {
+        if (getSelectedCustomer() == null) {
             return null;
         }
-        return getSelectedPerson().getOrderList();
+        return getSelectedCustomer().getOrderList();
     }
 
     @Override
     public FilteredList<Order> getFilteredOrderList() {
-        if (getSelectedPerson() == null) {
+        if (getSelectedCustomer() == null) {
             return null;
         }
-        return getSelectedPerson().getFilteredOrderList();
+        return getSelectedCustomer().getFilteredOrderList();
     }
 
     @Override
     public void setOrder(Order target, Order editedOrder) {
-        assert getSelectedPerson() != null; // we shouldn't be calling this method if there is no selectedPerson
-        OrderList orderList = getSelectedPerson().getOrderList();
+        assert getSelectedCustomer() != null; // we shouldn't be calling this method if there is no selectedCustomer
+        OrderList orderList = getSelectedCustomer().getOrderList();
         orderList.setOrder(target, editedOrder);
     }
 
@@ -218,14 +218,14 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
 
-        boolean isSameDisplayedPerson = getSelectedPerson() == null
-                ? otherModelManager.getSelectedPerson() == null
-                : getSelectedPerson().equals(otherModelManager.getSelectedPerson());
+        boolean isSameDisplayedCustomer = getSelectedCustomer() == null
+                ? otherModelManager.getSelectedCustomer() == null
+                : getSelectedCustomer().equals(otherModelManager.getSelectedCustomer());
 
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
-                && isSameDisplayedPerson;
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && isSameDisplayedCustomer;
     }
 
 }
