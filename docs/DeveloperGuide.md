@@ -157,7 +157,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## Future Features
 
 ### Being able to add new Insurance Plan Types
-As of now we know that it can be cumbersome to wait for updates for new types of insurance plans to be added. Thus, we have planned in a future update, we will allow users to create their own Insurance Plan Types to add to their clients. Do note that as these plans are created by users and not validated by us, we will not be held liable for any unintended record-keeping issues such as claim ID not being validated correctly or the claim amount not being calculated correctly!
+As of now, we know that it can be cumbersome for users to wait for updates for new types of insurance plans to be added by us the developers. Thus, we have planned in a future update, we will allow users to create their own Insurance Plan Types to add to their clients. Do note that as these plans are created by users and not validated by us, we will not be held liable for any unintended record-keeping issues such as claim ID not being validated correctly or the claim amount not being calculated correctly!
 
 
 --------------------------------------------------------------------------------------------------------------------
