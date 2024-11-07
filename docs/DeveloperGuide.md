@@ -427,7 +427,7 @@ Use case ends.
 * **Actor**: User
 * **Use Case**: UC06 - Remove “Completed” Marking from Order
 * **Guarantees**:
-    * Specified order will have “Completed” Marking removed if the input parameters are valid..
+    * Specified order will have “Completed” Marking removed if the input parameters are valid.
 
 **MSS**
 
@@ -457,8 +457,25 @@ Use case ends.
 
 1.  User wants to delete an order.
 2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
-3.  User deletes the customer by the customer name and the order index.
+3.  User deletes the order by the customer name and the order index.
 4.  SellSavvy updates the status of the order and indicates that the action is successful.
+
+Use case ends.
+
+**Use case 8: Filter order list by order status**
+
+* **System**: SellSavvy
+* **Actor**: User
+* **Use Case**: UC08 - Filter an Order List by Order Status
+* **Guarantees**:
+    * Orders with specified status made by specific customer will be displayed as a list, if input parameters are valid.
+
+**MSS**
+
+1.  User wants to filter an order list.
+2.  User chooses to <ins>view all orders of a specified customer from contacts list (UC04)</ins>.
+3.  User filters the order list of the customer by the status keyword.
+4.  SellSavvy displays the orders with specified status in a list in GUI.
 
 Use case ends.
 
@@ -481,6 +498,7 @@ Use case ends.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
 
 --------------------------------------------------------------------------------------------------------------------
 
