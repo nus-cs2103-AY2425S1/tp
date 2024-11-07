@@ -41,6 +41,7 @@
                         <Label fx:id="email" styleClass="label-bright" text="\$email" />
                         <Label fx:id="remark" styleClass="label-bright" text="\$remark" />
                         <Label fx:id="nric" styleClass="label-bright" text="\$nric"  />
+                        <Label fx:id="appointment" styleClass="label-bright" text="\$appointment" />
                     </VBox>
                 </VBox>
                 <VBox styleClass="pane-with-border">

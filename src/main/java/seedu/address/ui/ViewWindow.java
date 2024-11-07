@@ -40,6 +40,8 @@ public class ViewWindow extends UiPart<Stage> {
     @FXML
     private Label nric;
     @FXML
+    private Label appointment;
+    @FXML
     private FlowPane tags;
     @FXML
     private VBox logListContainer;
@@ -56,6 +58,7 @@ public class ViewWindow extends UiPart<Stage> {
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
         nric.setText(person.getNric().value);
+        appointment.setText("Appointment on " + person.getAppointment().formatDateTime());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
