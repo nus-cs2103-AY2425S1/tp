@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. WardWatch shows an invalid patient information error message.
 
       Use case resumes at step 1.
 
@@ -343,21 +343,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty
 
-    * 2a1. WardWatch shows that list is empty
+    * 2a1. WardWatch shows an empty list
 
       Use case ends.
 
 * 3a. The given field is invalid
 
-    * 2a1. WardWatch shows an error message.
+    * 2a1. WardWatch shows an invalid field message.
 
       Use case resumes at step 2.
-
-* 3b. The parameter field is invalid.
-
-    * 2b1. WardWatch shows an error message.
-
-      Use case resumes at step 2. 
 
 **Use case: UC03 - Update a patient**
 
@@ -372,7 +366,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. AddressBook shows an invalid format error message.
 
       Use case resumes at step 1.
 
@@ -388,19 +382,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The search field is invalid.
-    * 2a1. AddressBook shows an error message.
+    * 2a1. AddressBook shows an invalid field error message.
         
         Use case resumes at step 1.
 
-* 2b. The parameter field is invalid.
+* 2b. There is no patient that matches the search
 
-    * 2b1. AddressBook shows an error message.
-  
-        Use case resumes at step 1.
-
-* 2c. There is no patient that matches the search
-
-    * 2c1. AddressBook shows that there is no matching patient.
+    * 2b1. AddressBook shows that there is no matching patient.
 
         Use case ends.
 
@@ -425,7 +413,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The patient entered does not exist
 
-    * 3a1. WardWatch shows an error message.
+    * 3a1. WardWatch shows an invalid index error message.
 
       Use case resumes at step 2.
 
@@ -466,13 +454,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. WardWatch shows an error message.
+    * 1a1. WardWatch shows an invalid description error message.
 
       Use case resumes at step 1.
 
 * 2a. The Appointment date format is invalid.
 
-    * 2a1. WardWatch shows an error message.
+    * 2a1. WardWatch shows an invalid date format error message.
 
       Use case resumes at step 1.
 
@@ -497,7 +485,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
 * 3b. The Appointment does not exist
 *
-    * 2a1. WardWatch shows a appointment does not exist error message.
+    * 2a1. WardWatch shows an appointment does not exist error message.
 
       Use case resumes at step 3.
 
