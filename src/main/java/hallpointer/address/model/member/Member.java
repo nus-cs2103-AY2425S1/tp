@@ -163,7 +163,7 @@ public class Member {
     }
 
     /**
-     * Returns true if both members have the same name (not case-sensitive).
+     * Returns true if both members have the same name or same telegram (not case-sensitive).
      * This is used to check for duplicates in HallPointer.
      */
     public boolean isSameMember(Member otherMember) {
@@ -171,9 +171,10 @@ public class Member {
             return true;
         }
 
-        // Check for duplicate based only on name
+        // Check for duplicate based only on name and telegram
         return otherMember != null
-                && otherMember.getName().equals(getName());
+                && (otherMember.getName().equals(getName())
+                || otherMember.getTelegram().equals(getTelegram()));
     }
 
     /**
