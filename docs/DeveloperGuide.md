@@ -475,7 +475,7 @@ None.
 
 6.  **Tag:**\
     Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
-    
+
 7.  **Command:**\
     A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
@@ -545,7 +545,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: List all members using the `list_members` command. Multiple members in the list.
     2. Test case: `delete_member 1`<br>
-       **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
+       **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message.
 
     3. Test case: `delete_member 0`<br>
        **Expected:** No member is deleted. Error details shown in the status message.
