@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag names should be a single word, " +
-            "and can consist of both letters and numbers.";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names should be a single word, "
+            + "and can consist of both letters and numbers.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
