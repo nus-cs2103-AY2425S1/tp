@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
@@ -74,19 +75,18 @@ public class ModuleCommandTest {
 
     @Test
     public void execute_moduleAddedWhenPersonDisplayed_success() {
-        Person student = model.getFilteredPersonList().get(0);
-        Person expectedStudent = new PersonBuilder(student).build();
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person expectedStudent = new PersonBuilder(personToDelete).build();
         model.setPersonToDisplay(expectedStudent);
-        StudentId studentId = student.getStudentId();
         Module validModule = new Module(VALID_MODULE_AMY);
         expectedStudent = expectedStudent.addModule(validModule);
-        ModuleCommand moduleCommand = new ModuleCommand(studentId, validModule);
+        ModuleCommand moduleCommand = new ModuleCommand(personToDelete.getStudentId(), validModule);
 
-        String expectedMessage = String.format(ModuleCommand.MESSAGE_SUCCESS, studentId);
+        String expectedMessage = String.format(ModuleCommand.MESSAGE_SUCCESS, personToDelete.getStudentId());
 
         Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()),
                 new UserPrefs(), expectedStudent);
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), expectedStudent);
 
         assertCommandSuccess(moduleCommand, model, expectedMessage, expectedModel);
     }
