@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a contact**
+**Use case: UC01 - Add a contact**
 
 **MSS**
 
@@ -360,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: Delete a contact**
+**Use case: UC02 - Delete a contact**
 
 **MSS**
 
@@ -383,7 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: List all contacts**
+**Use case: UC03 - List all contacts**
 
 **MSS**
 
@@ -400,7 +400,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Search for a contact**
+**Use case: UC04 - Search for a contact**
 
 **MSS**
 
@@ -422,6 +422,217 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AddressBook shows a message indicating no contacts were found.
 
       Use case ends.
+
+**Use case: Edit a contact**
+
+**MSS**
+
+1.  User requests to edit an existing contact by providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook updates the existing contact in the list with the new details.
+4.  AddressBook shows a success message with the contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: Add a Property-To-Sell**
+
+**MSS**
+
+1.  User requests to add a new `Property-To-Sell` to the specified existing contact by providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook adds the new `Property-To-Sell` to the specified existing contact in the list.
+4.  AddressBook shows a success message with the contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2b. The existing contact in the AddressBook already has the same `Property-To-Sell` in the list.
+    * 2b1. AddressBook shows an error message indicating the duplicate `Property-To-Sell`.
+    * 2b2. User corrects the invalid details.
+    * 2b3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2c. Required fields are missing.
+    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c2. User provides the missing details.
+    * 2c3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2d. Someone in the AddressBook is already wanting to sell the `Property-To-Sell` that the user specified.
+    * 2d1. AddressBook shows an error message indicating the existing `Property-To-Sell`
+    * 2d2. User corrects the invalid details.
+    * 2d3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: Add a Property-To-Buy**
+
+**MSS**
+
+1.  User requests to add a new `Property-To-Buy` to the specified existing contact by providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook adds the new `Property-To-Buy` to the specified existing contact in the list.
+4.  AddressBook shows a success message with the contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2b. The existing contact in the AddressBook already has the same `Property-To-Buy` in the list.
+    * 2b1. AddressBook shows an error message indicating the duplicate `Property-To-Buy`.
+    * 2b2. User corrects the invalid details.
+    * 2b3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2c. Required fields are missing.
+    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c2. User provides the missing details.
+    * 2c3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: Delete a Property-To-Sell**
+
+**MSS**
+
+1.  User requests to delete a new `Property-To-Sell` from the specified existing contact by providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook deletes the new `Property-To-Sell` from the specified existing contact in the list.
+4.  AddressBook shows a success message with the contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2b. The existing contact in the AddressBook does not have the specified `Property-To-Sell` in the list.
+    * 2b1. AddressBook shows an error message indicating the missing `Property-To-Sell`.
+    * 2b2. User corrects the invalid details.
+    * 2b3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2c. Required fields are missing.
+    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c2. User provides the missing details.
+    * 2c3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: Delete a Property-To-Buy**
+
+**MSS**
+
+1.  User requests to delete a new `Property-To-Buy` from the specified existing contact by providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook deletes the new `Property-To-Buy` from the specified existing contact in the list.
+4.  AddressBook shows a success message with the contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2b. The existing contact in the AddressBook does not have the specified `Property-To-Buy` in the list.
+    * 2b1. AddressBook shows an error message indicating the missing `Property-To-Buy`.
+    * 2b2. User corrects the invalid details.
+    * 2b3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2c. Required fields are missing.
+    * 2c1. AddressBook shows an error message indicating the missing fields.
+    * 2c2. User provides the missing details.
+    * 2c3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: Pin a Contact**
+
+**MSS**
+
+1.  User requests to pin a contact providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook pins the contact to the back of the pinned contacts section of the list.
+4.  AddressBook shows a success message with the contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+* 2b. The provided details are trying to pin an already pinned contact.
+    * 2b1. AddressBook shows an error message indicating the invalid fields.
+    * 2b2. User corrects the invalid details.
+    * 2b3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
+**Use case: Unpin a Contact**
+
+**MSS**
+
+1.  User requests to unpin a contact providing the required details.
+2.  AddressBook validates the provided details.
+3.  AddressBook unpins the contact from the pinned contacts section of the list.
+4.  AddressBook shows a success message with the contact details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided details are invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid fields.
+    * 2a2. User corrects the invalid details.
+    * 2a3. AddressBook re-validates the details.
+
+      Use case resumes at step 3.
+
 
 
 ### Non-Functional Requirements

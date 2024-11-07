@@ -23,7 +23,7 @@ public class PinContactCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins contact at a particular  "
             + "index to the top of the list.\n"
             + "Parameters: INDEX \n"
-            + "Example: " + COMMAND_WORD + "5";
+            + "Example: " + COMMAND_WORD + " 5";
 
     public static final String MESSAGE_PIN_PERSON_SUCCESS = "Pinned Person: %1$s";
 

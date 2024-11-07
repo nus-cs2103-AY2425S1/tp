@@ -25,7 +25,9 @@ public class SortCommand extends Command {
             + "[" + PREFIX_ORDER + "ORDER]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_FIELD + "Name "
-            + PREFIX_ORDER + "L";
+            + PREFIX_ORDER + "L\n\n"
+            + "Valid FIELD parameters: NumProp, Name\n"
+            + "Valid ORDER parameters: L, H";
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n";
 
@@ -34,7 +36,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_INVALID_ORDER =
             "Sort contacts using L for low to high order and H for high to low order";
 
-    public static final String MESSAGE_SORT_SUCCESS = "Contacts sorted by %1$s in %2$s order";
+    public static final String MESSAGE_SORT_SUCCESS = "Contacts are now sorted by %1$s in %2$s order";
 
     private static final Logger logger = Logger.getLogger(SortCommand.class.getName());
 
