@@ -39,6 +39,21 @@ public class Date {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        //instance of handles nulls
+        if (!(other instanceof Date)) {
+            return false;
+        }
+
+        Date otherDate = (Date) other;
+        return value.equals(otherDate.value);
+    }
+
+    @Override
     public String toString() {
         return "Date Ordered: " + value;
     }

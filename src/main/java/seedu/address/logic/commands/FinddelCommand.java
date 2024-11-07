@@ -23,7 +23,7 @@ public class FinddelCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " monitor keyboard";
 
-    public static final String MESSAGE_NOT_IN_INSPECT = "This command can only be used in the inspect window!";
+    public static final String MESSAGE_NOT_IN_INSPECT = "Finddel command can only be used in the inspect window!";
 
     private final ItemNameContainsKeywordPredicate predicate;
 
