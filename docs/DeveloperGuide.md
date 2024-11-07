@@ -286,6 +286,50 @@ Step 3. The GUI displays the list of companies filtered by the given search term
 
 --------------------------------------------------------------------------------------------------------------------
 
+### View feature
+
+#### Implementation
+
+The `view` command allows users to see full application details of a specified `Company`.
+
+The following methods and operations are involved:
+
+* `ViewCommand#execute(Model model)` &mdash; Displays the specified company along with its full details.
+* `CompanyToViewPredicate(Company companyToView)` &mdash; A predicate used to show only the specified company.
+* `Model#viewAppDetails(Company companyToView)` &mdash; Sets the specified company to show its full details in the company list.
+* `Model#updateFiledCompanyList(Predicate predicate)` &mdash; Only show the specified company and its full details.
+
+#### Example usage scenario:
+
+Step 1: The user selects a company and executes the `view` command with the corresponding company list index.
+
+Step 2: The `ViewCommand` selected company `companyToView` and creates a predicate `p` to only show this company.
+
+Step 3: The `ViewCommand` then calls `Model#viewAppDetails(companyToView)` and `Model#updateFilteredCompanyList(p)` which
+causes the UI to display only the specified company and its full application details.
+
+<box type="info" seamless>
+
+**Note:** `Model#hideAppDetailsForAll()` is executed at the start of `LogicManager#execute(String commandText)`
+to ensure that full application details are only shown for the `view` command.
+</box>
+
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
+
+#### Design considerations:
+
+**Aspect: How to display the results of `view`:**
+
+* **Alternative 1:** Display results in the results box.
+  * Pros: Easier and simpler to implement
+  * Cons: Users edit the viewed company after using the view command (ie: they have to manually search for it again)
+
+* **Alternative 2 (current choice):** Show the singular company with full details in the company list.
+  * Pros: Users can use other commands after using `view` to manipulate the company.
+  * Cons: Harder to implement as the full application details should be hidden after running additional commands.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Favourite/unfavourite feature
 
 #### Implementation
