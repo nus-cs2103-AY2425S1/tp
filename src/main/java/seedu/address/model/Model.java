@@ -83,6 +83,12 @@ public interface Model {
     void addStudent(Student student);
 
     /**
+     * Get the current filter for the student list
+     * @return {@code Predicate<Student>} for the student list
+     */
+    Predicate<Student> getPredicate();
+
+    /**
      * Adds the given student at the given index.
      * {@code student} must not already exist in the address book.
      */

@@ -25,6 +25,8 @@ public class ViewStudentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Viewing %1$d students with name %2$s";
     public static final String MESSAGE_NO_SUCH_STUDENT = "There is no such student with that name.";
 
+    private Predicate<Student> previousFilter;
+
     private final Name name;
 
     /**
@@ -46,6 +48,8 @@ public class ViewStudentCommand extends Command {
         }
 
         Predicate<Student> predicate = student -> student.getName().equals(name);
+
+        previousFilter = model.getPredicate();
         model.updateFilteredStudentList(predicate);
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredStudentList().size(), name));
     }
@@ -74,7 +78,7 @@ public class ViewStudentCommand extends Command {
 
     @Override
     public boolean undo(Model model) {
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredStudentList(previousFilter);
         return true;
     }
 }
