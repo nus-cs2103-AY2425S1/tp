@@ -192,15 +192,9 @@ Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 
 
 Examples:
-*  Adds the handle `[ig-charlotteo]` to the third contact Charlotte. <br>
-   `socialMedia 3 ig/charlotteo` <br>
-   ![result for 'rename tag1'](images/socialMediaResult1.png)
 *  Updates the first contact Alex's social media to `[cs-alexsells]`. <br>
    `socialMedia 1 cs/alexsells` <br>
    ![result for 'rename tag2'](images/socialMediaResult2.png)
-*  Updates the second contact Bernice's social media to `[fb-berniceyu]`. <br>
-   `socialMedia 2 fb/berniceyu` <br>
-   ![result for 'social media 3'](images/socialMediaResult3.png)
 
 #### Scheduling Contacts : `schedule`
 
@@ -323,20 +317,9 @@ Format: `sort {n/[ORDER], sch/[ORDER]}`
 Examples:
 * Sort by persons names alphabetically in ascending order <br>
   `sort n/`
-* Sort by schedule in ascending order <br>
-  `sort sch/`
-* Sort by persons names alphabetically in ascending order. <br>
-  `sort n/ascending` <br>
-  ![result for 'sort and sort ascending'](images/sortResult.png)
-* Sort by persons names alphabetically in descending order. <br>
-  `sort n/descending`<br>
-  ![result for 'sort descending'](images/sortDescendingResult.png)
 * Sort by schedule in ascending order. <br>
   `sort sch/ascending` <br>
   ![result for 'sort and sort ascending'](images/sortByScheduleAsc.png)
-* Sort by schedule in descending order. <br>
-  `sort sch/descending` <br>
-  ![result for 'sort descending'](images/sortByScheduleDesc.png)
 
 #### Filter persons by tag : `filter`
 
@@ -357,12 +340,8 @@ Format: `filter [t/TAG]...`
 </div>
 
 Examples:
-* `filter t/friends` will filter for contacts that has tag `friends`<br>
-  ![result for 'filter_friends'](images/filterFriendsResult.png)
-* `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`<br>
+* `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`. In this example, only one contact has both tags provided.<br>
   ![result for 'filter_friends'](images/filterMultipleTags.png)
-* `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
-  ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
 
 #### Locating persons by name : `find`
 
@@ -417,9 +396,9 @@ Examples:
 `search b/2024-11-11 12:00`
 * Search for the list of persons with schedules before 2024-11-12 12:00. <br>
 `search en/2024-11-12 12:00`
-* Search for the list of persons with schedules between 2024-11-11 12:00 and 2024-11-12 12:00. <br>
-`search b/2024-11-11 12:00 en/2024-11-12 12:00` <br>
-  ![result for 'search b/2024-11-11 12:00 en/2024-11-12 12:00'](images/searchCommandSuccess.png)
+* Search for the list of persons with schedules between 2024-10-21 04:00 and 2024-10-27 23:59. <br>
+`search b/2024-10-21 04:00 en/2024-10-27 23:59` <br>
+  ![result for 'search b/2024-10-21 04:00 en/2024-10-27 23:59'](images/searchCommandSuccess.png)
 
 ### Utility Features
 
