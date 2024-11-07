@@ -178,10 +178,16 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags/skills, the existing tags/skills of the candidate will be removed i.e. adding of tags/skills is not cumulative.
-* You can remove all the candidate’s tags by typing `t/` without
-    specifying any tags after it. This does not change the candidate's status.
-* You can remove all the candidate’s skills by typing `s/` without
-  specifying any skills after it.
+
+<box type="tip">
+
+**Tip:** You can remove all the candidate’s tags by typing `t/` without specifying any tags after it. This does not change the candidate's status.
+</box>
+
+<box type="tip">
+
+**Tip:** You can remove all the candidate’s skills by typing `s/` without specifying any skills after it.
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st candidate to be `91234567` and `johndoe@example.com` respectively.
@@ -200,7 +206,7 @@ Format: `hire n/NAME j/JOB`
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `hire n/Hans j/Software Engineer` and `hire n/hans j/SOFTWARE engineer` will mark the candidate as hired.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `hire n/Hans j/Software Engineer` and `hire n/hans j/SOFTWARE engineer` will mark the candidate as hired.
 </box>
 <br><br>
 
@@ -216,7 +222,7 @@ Format: `reject n/NAME j/JOB`
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `reject n/Hans j/Software Engineer` and `reject n/hans j/SOFTWARE engineer` will mark the candidate as rejected.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `reject n/Hans j/Software Engineer` and `reject n/hans j/SOFTWARE engineer` will mark the candidate as rejected.
 </box>
 <br><br>
 
@@ -232,7 +238,7 @@ Format: `view n/NAME j/JOB`
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are case-insensitive, i.e. Both `view n/Hans j/Software Engineer` and `view n/hans j/SOFTWARE engineer` will show the candidate's status and details.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `view n/Hans j/Software Engineer` and `view n/hans j/SOFTWARE engineer` will show the candidate's status and details.
 </box>
 
 Examples:
@@ -247,7 +253,7 @@ Finds candidates whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* The search is **case-insensitive**. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * Candidates matching at least one keyword will be returned (i.e. `OR` search).
@@ -339,13 +345,13 @@ Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways 
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When there are long parameters**, the condensed data displayed on the left side of the GUI may cut off any parameters with a large number of characters, for instance a skill with 1000 characters. However, when the `view` command is used, the full length of all parameters of that particular candidate are displayed in the view panel on the right side of the GUI.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again. <br><br>
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window. <br><br>
+3. **When there are long parameters**, the condensed data displayed on the left side of the GUI may cut off any parameters with a large number of characters, for instance a skill with 1000 characters. However, when the `view` command is used, the full length of all parameters of that particular candidate are displayed in the view panel on the right side of the GUI. <br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
