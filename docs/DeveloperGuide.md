@@ -2,6 +2,11 @@
 layout: page
 title: Developer Guide
 ---
+
+This **EduVault Developer Guide** provides a comprehensive overview for developers who wishes to build on the current EduVault system, or anyone who is interested to learn about the internal structure of EduVault. It includes details on the architectural structure, key classes, and design patterns used to support EduVault’s functionalities, such as student and tutorial management.  This guide also covers some planned enhancements that our team have in mind.
+
+---
+
 * Table of Contents
 {:toc}
 
@@ -31,7 +36,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" class="alert alert-success">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -46,7 +51,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -78,13 +83,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -95,17 +100,19 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+<br>
+
+The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
@@ -124,8 +131,14 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+For more information on the interactions of features with the Logic Component, please refer [here](#implementation).
+</div>
+
+
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -134,20 +147,21 @@ The `Model` component,
 * stores the currently ‘selected’ `Person` objects (e.g., results of a search query) as a separate *filtered* list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be ‘observed’ e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores `Tutorial` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Tutorial>` that can be observed.
 * stores `Participation` objects as a separate list which is exposed to outsiders as an unmodifiable `ObservableList<Participation>` that can be observed.
-* Each `Participation` object is also composed of a `Tutorial` object, a `Person` object, and a `List<Attendance>` object. More information on this [here](?tab=t.0#heading=h.k3pglksfd2of).
+* Each `Participation` object is also composed of a `Tutorial` object, a `Person` object, and a `List<Attendance>` object. More information on this [here](#storage-feature).
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
 
+
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W08-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -170,24 +184,19 @@ This section describes some noteworthy details on how certain features are imple
 `Students` are named as `Persons` due to Legacy code.
 </div>
 
-* stores the address book data i.e.,
-    * all `Person` objects (which are contained in a `UniquePersonList` object).
-    * all Tutorial objects (contained in a UniqueTutorialList object)
-    * all Participation objects (contained in a UniqueParticipationList object)
-* Participation is an association class and contains the relationship between Person and Tutorial, as well as a List\<Attendance\> object
-
-<img src="images/ParticipationAsAssociationDiagram.png" width="400" />
+---
 
 ### Storage feature
 
-#### Storage format
-Eduvault stores data in JSON file using the Jackson library.
+EduVault stores data in JSON file using the Jackson library.
 
-Eduvault stores four types of objects:
-* Student (person)
+EduVault stores four types of objects:
+* Student (Person)
 * Tutorial
 * Participation
 * Attendance
+
+An overarching structure of the JSON file is as shown below:
 
 ```dtd
 {
@@ -196,6 +205,10 @@ Eduvault stores four types of objects:
     "participations" : [...]
 }
 ```
+
+<br>
+
+Within each of the different objects (Student, Tutorial, Participation), data is stored in the following format as shown below. Conditions for storage are also included.
 
 `Student`
 ```dtd
@@ -212,9 +225,8 @@ Eduvault stores four types of objects:
     ...
 ]
 ```
-There may be no duplicate `Students`.
+**Condition:** There may be no duplicate `Students`.
 Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
-
 
 `Tutorial`
 ```dtd
@@ -226,7 +238,7 @@ Two `Students` are considered to be duplicates if they have matching `name` and 
     ...
 ]
 ```
-There may be no duplicate `Tutorials`.
+**Condition:** There may be no duplicate `Tutorials`.
 Two `Tutorials` are considered to be duplicates if they have matching `subject`.
 
 `Participation`
@@ -241,10 +253,10 @@ Two `Tutorials` are considered to be duplicates if they have matching `subject`.
     },
 ]
 ```
+**Condition:**
+1. Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
 
-Each `Participation` must have a `Student` with matching `Name` and `Phone`, and `Tutorial` with matching `Subject`, to be considered valid.
-
-There may be no duplicate `Participations`.
+2. There may be no duplicate `Participations`.
 Two `Participations` are considered to be duplicates if the `Student` and `Tutorial` are the same.
 
 `Attendance`
@@ -262,7 +274,7 @@ There is no enforcement of duplicate `Attendance` in storage.
 #### Storage 
 
 ##### Uniqueness of objects
-For the purposes of storage into JSON format, Eduvault defines two objects as distinct based on these factors:
+For the purposes of storage into JSON format, EduVault defines two objects as distinct based on these factors:
 
 * Two `Students` are considered to be duplicates if they have matching `name` and `phone`.
 * Two `Tutorials` are considered to be duplicates if they have matching `subject`.
@@ -277,6 +289,8 @@ The order which storage loads `Person`, `Tutorial` and `Participation` is shown 
 
 The `Participation` objects are created using corresponding `Person` and `Tutorial` objects in the `AddressBook`
 based on [uniqueness](#uniqueness-of-objects).
+
+---
 
 ### Find Command Implementation
 
@@ -293,6 +307,76 @@ predicates to create a `FindCommand` object.
 
 `Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
 
+---
+
+### **Enroll and Unenroll feature**
+
+The implementation of the Enroll and Unenroll feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Enroll feature when the user inputs `enroll 1 tut/math` will be shown below.
+
+![EnrollStudentSequenceDiagram-Logic](images/EnrollStudentSequenceDiagram.png)
+
+
+The main steps for this execution are:
+
+1. The user inputs the command `enroll 1 tut/math` to enroll the student at index 1 into a math tutorial.
+2. **LogicManager** receives the command and calls `parseCommand("enroll 1 tut/math")` on AddressBookParser to interpret the input.
+3. **AddressBookParser** receives the command and identifies that it’s an enrollment command. It calls `parse("1 tut/math")` on EnrollCommandParser to parse the specific details.
+4. **EnrollCommandParser** processes the arguments `("1 tut/math")` and creates an instance of EnrollCommand, which is configured to enroll the specified student in the math tutorial.
+5. **LogicManager** then calls `execute(model)` on the created EnrollCommand to carry out the enrollment operation.
+6. **EnrollCommand** proceeds to retrieve the relevant data from the Model instance, and then adding the student to the math tutorial, by creating a `Participation` object. 
+
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+
+Details of the Participation class are included [below](#participation-class).
+</div>
+
+7. Once the enrollment is completed, EnrollCommand returns a **CommandResult** with a message indicating the successful enrollment.
+8. The result then flows back through **LogicManager**.
+
+<br>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Unenroll feature is similar to that of the example given above, but instead of `addParticipation(...)` method of the Model Component being called, `deleteParticipation(...)` is called.
+
+</div>
+
+<br>
+
+#### **Participation Class**
+`Participation` is an **association** class used to represent the relationship between a student and a tutorial, as well as his/her attendance, which is stored in a List. Below is a class diagram denoting such a relationship.
+
+<img src="images/ParticipationAsAssociationDiagram.png" width="400" />
+
+When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
+
+---
+
+### **List and Clear feature**  
+
+The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](?tab=t.0#heading=h.e3816ie7ouik). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
+
+![ListCommandSequenceDiagram-Logic](images/ListCommandSequenceDiagram.png)
+
+The main steps for this execution are:
+
+1. The user inputs the command `list` to display all students.
+2. **LogicManager** receives the command and calls `parseCommand("list")` on AddressBookParser to interpret the input.
+3. **AddressBookParser** receives the command and identifies that it is a list command. It directly creates an instance of **ListCommand**, since there are no arguments to parse.
+4. **LogicManager** then calls `execute(model)` on the created **ListCommand** to perform the listing operation.
+5. **ListCommand** then retrieves and update the list.
+6. After updating the list, **ListCommand** returns a **CommandResult** with a message indicating that the list operation has been completed successfully.
+7. The result then flows back to **LogicManager**.
+
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Clear feature is similar to that of the example given above, but instead of `updateFilteredPersonList(...)` method of the Model Component being called, `setAddressBook(...)` is called.
+
+</div>
+
+---
 
 ### \[Proposed\] Undo/redo feature
 
@@ -320,7 +404,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
@@ -328,7 +412,7 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -337,7 +421,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -347,7 +431,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
@@ -611,7 +695,7 @@ Use case ends.
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 </div>
 

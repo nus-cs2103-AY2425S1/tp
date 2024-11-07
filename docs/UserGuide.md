@@ -198,13 +198,13 @@ Invalid usages
 
 Command: `createtut`
 
-Usage: `createtut tut/TUTORIAL_NAME`
+Usage: `createtut tut/TUTORIAL`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
 Fields
 
-* `TUTORIAL_NAME`: Name of the tutorial to create
+* `TUTORIAL`: Name of the tutorial to create
   * Must only contain alphanumeric characters
 </div>
 {% endraw %}
@@ -229,7 +229,7 @@ Invalid usages
 
 Command:  `enroll`
 
-Usage: `enroll INDEX tut/TUTORIAL_NAME`
+Usage: `enroll INDEX tut/TUTORIAL`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
@@ -237,7 +237,7 @@ Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
-* `TUTORIAL_NAME:` Name of the tutorial
+* `TUTORIAL:` Name of the tutorial
 </div>
 {% endraw %}
 
@@ -293,7 +293,7 @@ This command is best used with reference to its usages in the [Prefix Table](#11
 
 Command:  `find`
 
-Usage: `find [n/NAME] [e/EMAIL] [p/PHONE] [a/ADDRESS] [pay/PAYMENT] [a/ATTENDANCE] [t/TAG] [tut/TUTORIAL_NAME]`
+Usage: `find [n/NAME] [e/EMAIL] [p/PHONE] [a/ADDRESS] [pay/PAYMENT] [attend/ATTENDANCE] [t/TAG] [tut/TUTORIAL]`
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
@@ -323,7 +323,7 @@ Fields
 * `TAG:` Search based on the tag associated to the student
     * Allows multiple uses of this prefix together in the command.
 
-* `TUTORIAL_NAME:` Name of the tutorial to search
+* `TUTORIAL:` Name of the tutorial to search
     * Search with multiple keywords is allowed, and students matching all keywords will be displayed.
     * Allows multiple uses of this prefix together in the command.
 
@@ -638,7 +638,7 @@ Invalid usages
 
 Command:  `unenroll`
 
-Usage: `unenroll` `INDEX tut/TUTORIAL_NAME`
+Usage: `unenroll` `INDEX tut/TUTORIAL`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
@@ -646,7 +646,7 @@ Fields
 
 * `INDEX:` Index number as shown in the displayed list of the students.
     * Must be a positive integer 1, 2, 3…
-* `TUTORIAL_NAME:` Name of the tutorial
+* `TUTORIAL:` Name of the tutorial
 </div>
 {% endraw %}
 
@@ -713,13 +713,13 @@ Invalid usages
 
 Command:  `closetut`
 
-Usage: `closetut tut/TUTORIAL_NAME`
+Usage: `closetut tut/TUTORIAL`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
 Fields
 
-* `TUTORIAL_NAME`: Name of the tutorial to close
+* `TUTORIAL`: Name of the tutorial to close
   * Must only contain alphanumeric characters
 </div>
 {% endraw %}
@@ -741,18 +741,16 @@ Example usages
 Invalid usages
 
 * Closing a tutorial that does not exist
-    * *Error Message: No tutorial class with the name TUTORIAL_NAME  is found.*
+    * *Error Message: No tutorial class with the name TUTORIAL is found.*
 * Format errors, check [here](#12-format-errors)
 </div>
 {% endraw %}
 
 #### **6.3 Clearing all entries**
 
-*Deleting all tutorial and student records*
+Deletes all tutorial, student and participation records
 
 Command:  `clear`
-
-Clears all entries from Eduvault.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
 EduVault immediately saves once the command resolves. Hence, it is recommended to create a backup of the file `[JAR file location]/data/addressbook.json` before executing.
@@ -784,7 +782,7 @@ There is no need to save manually.
 ---
 
 ### **10. Editing the data file**
-Eduvalt data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`.
+EduVault data is saved automatically as a JSON file at `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
