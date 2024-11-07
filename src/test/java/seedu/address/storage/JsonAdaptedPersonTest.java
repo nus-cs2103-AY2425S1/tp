@@ -12,12 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Birthday;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Frequency;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -151,6 +146,16 @@ public class JsonAdaptedPersonTest {
                         VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_HASPAID,
                         VALID_LASTPAIDDATE, INVALID_FREQUENCY, VALID_PIC);
         String expectedMessage = Frequency.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidLastPaidDate_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                        VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_HASPAID,
+                        INVALID_LASTPAIDDATE, VALID_FREQUENCY, VALID_PIC);
+        String expectedMessage = LastPaidDate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
