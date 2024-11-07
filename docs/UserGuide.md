@@ -141,6 +141,8 @@ Deletes a vendor or an event from EventTory.
     * The index refers to the index number shown in the displayed event/vendor list respectively.
     * The index **must be a positive integer** 1, 2, 3, ...
     * The index for each vendor/event is relative and can change depending on previous operations.
+* The operation will succeed even if the specified vendor/event is not visible onscreen.
+  * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion.
 * If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
 * If the current viewed vendor/event is deleted, the application will return you to the main list screen.
 
