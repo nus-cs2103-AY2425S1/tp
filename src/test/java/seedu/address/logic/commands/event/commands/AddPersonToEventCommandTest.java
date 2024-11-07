@@ -88,7 +88,7 @@ public class AddPersonToEventCommandTest {
         sponsors.add(Index.fromZeroBased(0));
 
         AddPersonToEventCommand addPersonToEventCommand = new
-                AddPersonToEventCommand(Index.fromZeroBased(2), //invalid index
+                AddPersonToEventCommand(Index.fromZeroBased(3), //invalid index
                 attendees, volunteers, vendors, sponsors);
         assertThrows(CommandException.class, () -> addPersonToEventCommand.execute(this.model,
                 this.eventManager));

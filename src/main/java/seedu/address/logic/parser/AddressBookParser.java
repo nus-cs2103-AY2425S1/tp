@@ -94,9 +94,11 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case FindNameCommand.COMMAND_WORD:
+        case FindNameCommand.COMMAND_WORD_SHORT_FORM:
             return new FindNameCommandParser().parse(arguments);
 
         case FindRoleCommand.COMMAND_WORD:
+        case FindRoleCommand.COMMAND_WORD_SHORT_FORM:
             return new FindRoleCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
@@ -116,12 +118,14 @@ public class AddressBookParser {
             return new InitSearchModeCommand();
 
         case FindEventCommand.COMMAND_WORD:
+        case FindEventCommand.COMMAND_WORD_SHORT_FORM:
             return new FindEventCommandParser().parse(arguments);
 
         case RemovePersonFromEventCommand.COMMAND_WORD:
             return new RemovePersonFromEventParser().parse(arguments);
 
         case AddPersonToEventCommand.COMMAND_WORD:
+        case AddPersonToEventCommand.COMMAND_WORD_SHORT_FORM:
             return new AddPersonToEventParser().parse(arguments);
 
         case DeleteEventCommand.COMMAND_WORD:
@@ -166,12 +170,15 @@ public class AddressBookParser {
         case ExcludePersonCommand.COMMAND_WORD:
             return new ExcludePersonCommandParser().parse(arguments);
         case ClearExcludedCommand.COMMAND_WORD:
+        case ClearExcludedCommand.COMMAND_WORD_SHORT_FORM:
             return new ClearExcludedCommand();
         case CheckExcludedCommand.COMMAND_WORD:
+        case CheckExcludedCommand.COMMAND_WORD_SHORT_FORM:
             return new CheckExcludedCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case EventAddAllCommand.COMMAND_WORD:
+        case EventAddAllCommand.COMMAND_WORD_SHORT_FORM:
             return new EventAddAllCommandParser().parse(arguments);
         default:
 
