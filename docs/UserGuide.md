@@ -251,7 +251,7 @@ Format: `sort [ATTRIBUTE]`
 * `sort name` Sorts the results by name in alphabetical order.
 * `sort subject` Sorts the results by the subjects they take in alphabetical order. Only the **first subject** in each person's list of subjects is considered when sorting.
 * `sort class` Sorts the results by class in alphanumerical order. Only the **first class** in each person's list of classes is considered when sorting. 
-* `sort attendance` Sorts the results by the number of days attended by students in ascending order. Teachers, who do not have an attendance count, are placed at the end of the list
+* `sort attendance` Sorts the results by the number of days attended by students in descending order. Teachers, who do not have an attendance count, are placed at the end of the list
 * The command applies to the current list of displayed results. 
 * Sorting is case-insensitive.
 
