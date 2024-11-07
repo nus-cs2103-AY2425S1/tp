@@ -90,11 +90,21 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing Items : `list`
 
-Shows a list of all persons in the address book.
+Displays the list of vendors and/or events in EventTory.
 
-Format: `list`
+#### Format: `list [v/] [e/]`
+
+* The list(s) displayed depends on whether the `v/` and/or `e/` prefix(es) is specified.
+* If no prefixes are specified, both the vendor and event lists will be displayed.
+* The prefixes can be specified in any order.
+* If values are specified after the prefixes (e.g. `v/2`, `e/Party`), the value is ignored.
+
+#### Examples
+* `list v/` will display the list of vendors.
+* `list e/` will display the list of events.
+* `list v/ e/` and `list` will display both lists.
 
 ### Editing a person : `edit`
 
