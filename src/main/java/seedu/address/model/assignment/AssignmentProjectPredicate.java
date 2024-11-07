@@ -23,6 +23,8 @@ public class AssignmentProjectPredicate implements Predicate<Assignment> {
     public boolean test(Assignment assignment) {
         Project project = assignment.getProject();
         return project.getName().equals(this.proposedProjectName);
+
+
     }
 
     @Override
