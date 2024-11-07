@@ -3,27 +3,27 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.client.exceptions.ClientNotFoundException;
+import seedu.address.model.client.exceptions.DuplicateClientException;
 
 /**
- * Wraps all data at the client-book level
- * Duplicates are not allowed (by .isSameClient comparison)
+ * Wraps all data at the client-book level.
+ * Duplicates are not allowed (by .isSameClient comparison).
  */
 public class ClientBook implements ReadOnlyClientBook {
 
+    private static final Logger logger = LogsCenter.getLogger(ClientBook.class);
+
     private final UniqueClientList clients;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
     {
         clients = new UniqueClientList();
     }
@@ -37,7 +37,7 @@ public class ClientBook implements ReadOnlyClientBook {
      */
     public ClientBook(ReadOnlyClientBook toBeCopied) {
         this();
-        requireNonNull(toBeCopied, "The data to be copied cannot be null.");
+        requireNonNull(toBeCopied, "toBeCopied cannot be null.");
         resetData(toBeCopied);
     }
 
@@ -48,14 +48,22 @@ public class ClientBook implements ReadOnlyClientBook {
      * {@code clients} must not contain duplicate clients and must not be null.
      *
      * @param clients The new list of clients.
+     * @throws DuplicateClientException if {@code clients} contains duplicate clients.
      */
     public void setClients(List<Client> clients) {
         requireNonNull(clients, "Client list cannot be null.");
-        // Ensure the list does not contain null elements
         for (Client client : clients) {
             requireNonNull(client, "Client in the list cannot be null.");
         }
-        this.clients.setClients(clients);
+
+        try {
+            this.clients.setClients(clients);
+        } catch (DuplicateClientException e) {
+            logger.log(Level.WARNING, "Attempted to set client list with duplicates.", e);
+            throw e;
+        }
+
+        assert this.clients.asUnmodifiableObservableList().equals(clients) : "Client list was not set correctly!";
     }
 
     /**
@@ -66,6 +74,7 @@ public class ClientBook implements ReadOnlyClientBook {
     public void resetData(ReadOnlyClientBook newData) {
         requireNonNull(newData, "New data cannot be null.");
         setClients(newData.getClientList());
+        assert getClientList().equals(newData.getClientList()) : "Client data was not reset correctly!";
     }
 
     //// client-level operations
@@ -73,23 +82,49 @@ public class ClientBook implements ReadOnlyClientBook {
     /**
      * Returns true if a client with the same identity as {@code client} exists in the client book.
      *
-     * @param client The client to check for existence.
+     * @param clientToCheck The client to check for existence.
      * @return True if the client exists, false otherwise.
      */
-    public boolean hasClient(Client client) {
-        requireNonNull(client, "Client cannot be null.");
-        return clients.contains(client);
+    public boolean hasClient(Client clientToCheck) {
+        requireNonNull(clientToCheck, "Client cannot be null.");
+        boolean exists = clients.contains(clientToCheck);
+        assert exists == clients.contains(clientToCheck) : "Client existence check failed!";
+        return exists;
+    }
+
+    /**
+     * Returns true if {@code clientToCheck} is a Buyer and a Buyer with the same email as {@code client}
+     * exists in the client book or if {@code clientToCheck} is a Seller and a Seller with the same
+     * email as {@code clientToCheck} exists in the client book, false otherwise.
+     *
+     * @param clientToCheck The client to check for duplicate email.
+     * @return True if {@code clientToCheck} has the same email as an existing client of the same, false otherwise.
+     */
+    public boolean sameEmailExists(Client clientToCheck) {
+        requireNonNull(clientToCheck, "Client cannot be null.");
+        boolean exists = clients.containsEmail(clientToCheck);
+        assert exists == clients.containsEmail(clientToCheck) : "Duplicate email check failed!";
+        return exists;
     }
 
     /**
      * Adds a client to the client book.
      * The client must not already exist in the client book.
      *
-     * @param p The client to add.
+     * @param client The client to add.
+     * @throws DuplicateClientException if the client already exists in the client book.
      */
-    public void addClient(Client p) {
-        requireNonNull(p, "Client to add cannot be null.");
-        clients.add(p);
+    public void addClient(Client client) {
+        requireNonNull(client, "Client to add cannot be null.");
+
+        try {
+            clients.add(client);
+        } catch (DuplicateClientException e) {
+            logger.log(Level.WARNING, "Attempted to add a duplicate client: " + client, e);
+            throw e;
+        }
+
+        assert hasClient(client) : "Client was not added successfully!";
     }
 
     /**
@@ -99,11 +134,24 @@ public class ClientBook implements ReadOnlyClientBook {
      *
      * @param target The client to replace.
      * @param editedClient The new client details to replace with.
+     * @throws ClientNotFoundException if {@code target} does not exist in the client book.
+     * @throws DuplicateClientException if the {@code editedClient} conflicts with another client's identity.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(target, "Target client cannot be null.");
         requireNonNull(editedClient, "Edited client cannot be null.");
-        clients.setClient(target, editedClient);
+
+        try {
+            clients.setClient(target, editedClient);
+        } catch (ClientNotFoundException e) {
+            logger.log(Level.SEVERE, "Attempted to replace a non-existent client: " + target, e);
+            throw e;
+        } catch (DuplicateClientException e) {
+            logger.log(Level.WARNING, "Attempted to replace with a duplicate client: " + editedClient, e);
+            throw e;
+        }
+
+        assert clients.contains(editedClient) : "Client replacement failed!";
     }
 
     /**
@@ -111,10 +159,19 @@ public class ClientBook implements ReadOnlyClientBook {
      * {@code key} must exist in the client book.
      *
      * @param key The client to remove.
+     * @throws ClientNotFoundException if {@code key} does not exist in the client book.
      */
     public void removeClient(Client key) {
         requireNonNull(key, "Client to remove cannot be null.");
-        clients.remove(key);
+
+        try {
+            clients.remove(key);
+        } catch (ClientNotFoundException e) {
+            logger.log(Level.SEVERE, "Attempted to remove a non-existent client: " + key, e);
+            throw e;
+        }
+
+        assert !hasClient(key) : "Client was not removed successfully!";
     }
 
     //// util methods
@@ -137,13 +194,14 @@ public class ClientBook implements ReadOnlyClientBook {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ClientBook)) {
             return false;
         }
 
         ClientBook otherClientBook = (ClientBook) other;
-        return clients.equals(otherClientBook.clients);
+        boolean isEqual = clients.equals(otherClientBook.clients);
+        assert isEqual == clients.equals(otherClientBook.clients) : "Equality check failed!";
+        return isEqual;
     }
 
     @Override

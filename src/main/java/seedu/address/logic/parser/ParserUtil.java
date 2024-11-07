@@ -2,11 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.meeting.MeetingDate;
 import seedu.address.model.meeting.MeetingTitle;
@@ -15,6 +17,7 @@ import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -50,6 +53,123 @@ public class ParserUtil {
         }
         return new PostalCode(trimmedPostalCode);
     }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap The argument multimap that holds the parsed arguments.
+     * @param prefixes The prefixes to check for presence.
+     * @return True if all prefixes contain non-empty values, false otherwise.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if number of tokens in args string exceeds specified prefixes.
+     */
+    public static boolean hasExcessToken(String args, Prefix... prefixes) {
+        String[] splits = args.trim().split("\\s(?=\\S+/)");
+        if (splits[0].equals("/")) {
+            return false;
+        }
+        return splits.length > prefixes.length;
+    }
+    /**
+     * Determines if there are more valid tokens in the input arguments than allowed by the specified prefixes.
+     *
+     * @param args The input arguments as a single string.
+     * @param prefixes The allowed prefixes that define valid tokens.
+     * @return True if there are excess tokens beyond the allowed prefixes, false otherwise.
+     */
+    public static boolean hasExcessTokenName(String args, Prefix... prefixes) {
+        String[] tokens = splitArgsByPrefix(args);
+        int validTokenCount = countValidTokens(tokens);
+
+        return isInvalidTokenSequence(tokens) || hasMoreTokensThanPrefixes(validTokenCount, prefixes.length);
+    }
+
+    /**
+     * Splits the input arguments into tokens based on prefix pattern.
+     *
+     * @param args The input arguments as a single string.
+     * @return An array of tokens split by prefix pattern.
+     */
+    private static String[] splitArgsByPrefix(String args) {
+        return args.trim().split("\\s(?=\\S+/)");
+    }
+
+    /**
+     * Counts the number of valid tokens in the array, excluding any tokens that contain
+     * "s/o" or "d/o" in invalid positions.
+     *
+     * @param tokens The array of tokens to analyze.
+     * @return The count of valid tokens, or Integer.MAX_VALUE if an invalid token is found.
+     */
+    private static int countValidTokens(String[] tokens) {
+        int validTokenCount = 0;
+        String previousPrefix = "";
+
+        for (String token : tokens) {
+            if (isInvalidToken(token, previousPrefix)) {
+                return Integer.MAX_VALUE; // Exceeds valid count immediately if invalid
+            }
+
+            if (!containsRelationshipToken(token)) {
+                validTokenCount++;
+            }
+
+            previousPrefix = token;
+        }
+
+        return validTokenCount;
+    }
+
+    /**
+     * Determines if a token is invalid due to containing a relationship identifier ("s/o" or "d/o")
+     * that appears without an "n/" prefix.
+     *
+     * @param token The current token to check.
+     * @param previousPrefix The previous token's prefix to verify context.
+     * @return True if the token is invalid, false otherwise.
+     */
+    private static boolean isInvalidToken(String token, String previousPrefix) {
+        return (token.contains("s/o") || token.contains("d/o")) && !previousPrefix.contains("n/");
+    }
+
+    /**
+     * Checks if a token contains a relationship identifier, such as "s/o" or "d/o".
+     *
+     * @param token The token to check.
+     * @return True if the token contains a relationship identifier, false otherwise.
+     */
+    private static boolean containsRelationshipToken(String token) {
+        return token.toLowerCase().contains("s/o") || token.toLowerCase().contains("d/o");
+    }
+
+    /**
+     * Determines if the token sequence is invalid based on the starting character.
+     * An invalid sequence starts with a standalone "/".
+     *
+     * @param tokens The array of tokens to check.
+     * @return True if the sequence is invalid, false otherwise.
+     */
+    private static boolean isInvalidTokenSequence(String[] tokens) {
+        return tokens[0].equals("/");
+    }
+
+    /**
+     * Checks if the number of valid tokens exceeds the count of allowed prefixes.
+     *
+     * @param validTokenCount The count of valid tokens.
+     * @param prefixCount The count of allowed prefixes.
+     * @return True if there are more valid tokens than allowed prefixes, false otherwise.
+     */
+    private static boolean hasMoreTokensThanPrefixes(int validTokenCount, int prefixCount) {
+        return validTokenCount > prefixCount;
+    }
+
 
     /**
      * Parses a {@code String unitNumber} into a {@code unitNumber}.
@@ -111,21 +231,80 @@ public class ParserUtil {
         return new Bid(trimmedBid);
     }
 
-
     /**
-     * Parses a {@code String name} into a {@code Name}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a client name, ensuring it does not contain numbers and follows naming constraints.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @param name The input name to be parsed.
+     * @return A new NameWithoutNumber instance if the name is valid.
+     * @throws ParseException If the name does not meet the required constraints.
      */
-    public static seedu.address.model.client.Name parseClientName(String name) throws ParseException {
+    public static NameWithoutNumber parseClientNameWithoutNumber(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+
+        if (containsRelationshipPrefix(trimmedName, "s/o")) {
+            return parseRelationshipName(trimmedName, "s/o");
+        } else if (containsRelationshipPrefix(trimmedName, "d/o")) {
+            return parseRelationshipName(trimmedName, "d/o");
+        } else {
+            validateName(trimmedName);
+            return new NameWithoutNumber(trimmedName);
         }
-        return new seedu.address.model.client.Name(trimmedName);
     }
+
+    /**
+     * Checks if the name contains a specified relationship prefix (e.g., "s/o" or "d/o").
+     *
+     * @param name The name to check.
+     * @param prefix The relationship prefix to look for.
+     * @return True if the name contains the specified prefix, false otherwise.
+     */
+    private static boolean containsRelationshipPrefix(String name, String prefix) {
+        return name.contains(prefix);
+    }
+
+    /**
+     * Parses a name containing a relationship prefix and validates each part.
+     *
+     * @param name The name containing the relationship prefix.
+     * @param prefix The relationship prefix (e.g., "s/o" or "d/o").
+     * @return A new NameWithoutNumber instance if both parts of the name are valid.
+     * @throws ParseException If any part of the name does not meet the required constraints.
+     */
+    private static NameWithoutNumber parseRelationshipName(String name, String prefix) throws ParseException {
+        String[] parts = name.split(prefix.toLowerCase(), 2);
+        String beforePrefix = parts[0].trim();
+        String afterPrefix = parts[1].trim();
+
+        if (!isValidNamePart(beforePrefix) || !isValidNamePart(afterPrefix)) {
+            throw new ParseException(NameWithoutNumber.MESSAGE_CONSTRAINTS);
+        }
+
+        return new NameWithoutNumber(name);
+    }
+
+    /**
+     * Validates a name part to ensure it meets naming constraints.
+     *
+     * @param namePart The part of the name to validate.
+     * @return True if the name part is valid, false otherwise.
+     */
+    private static boolean isValidNamePart(String namePart) {
+        return NameWithoutNumber.isValidNameWithoutNumber(namePart);
+    }
+
+    /**
+     * Validates the name as a whole, throwing an exception if it does not meet the required constraints.
+     *
+     * @param name The name to validate.
+     * @throws ParseException If the name does not meet the required constraints.
+     */
+    private static void validateName(String name) throws ParseException {
+        if (!NameWithoutNumber.isValidNameWithoutNumber(name)) {
+            throw new ParseException(NameWithoutNumber.MESSAGE_CONSTRAINTS);
+        }
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.

@@ -40,8 +40,23 @@ public class ListBuyersCommand extends ListCommand {
         model.setDisplayClients();
         logger.info("Client display set to show buyer list");
 
-        return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
+        // Check if resulting filtered list is empty and set response message accordingly
+        boolean isListEmpty = model.isFilteredClientListEmpty();
+        String responseMessage = String.format(
+                isListEmpty ? ListCommand.MESSAGE_SUCCESS_EMPTY_LIST : ListCommand.MESSAGE_SUCCESS,
+                KEY_WORD
+        );
+
+        // Log the state of the filtered client list and the response message
+        if (isListEmpty) {
+            logger.info(String.format("Filtered client list is empty. Sending response: %s", responseMessage));
+        } else {
+            logger.info(String.format("Filtered client list is not empty. Sending response: %s", responseMessage));
+        }
+
+        return new CommandResult(responseMessage);
     }
+
 
     /**
      * Compares this ListBuyersCommand to another object for equality.

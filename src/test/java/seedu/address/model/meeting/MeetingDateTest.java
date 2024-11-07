@@ -28,23 +28,24 @@ public class MeetingDateTest {
         assertFalse(MeetingDate.isValidMeetingDate("")); // empty string
         assertFalse(MeetingDate.isValidMeetingDate(" ")); // spaces only
         assertFalse(MeetingDate.isValidMeetingDate("12-34-5678")); // invalid date components
-        assertFalse(MeetingDate.isValidMeetingDate("31-02-2023")); // invalid date (Feb 31st)
-        assertFalse(MeetingDate.isValidMeetingDate("01/01/2023")); // wrong format (slashes)
-        assertFalse(MeetingDate.isValidMeetingDate("2023-01-01")); // wrong format (year first)
-        assertFalse(MeetingDate.isValidMeetingDate("1-1-2023")); // incorrect format (single digits)
+        assertFalse(MeetingDate.isValidMeetingDate("31-02-2030")); // invalid date (Feb 31st)
+        assertFalse(MeetingDate.isValidMeetingDate("01-01-1999")); // invalid date (in the past)
+        assertFalse(MeetingDate.isValidMeetingDate("01/01/2030")); // wrong format (slashes)
+        assertFalse(MeetingDate.isValidMeetingDate("2030-01-01")); // wrong format (year first)
+        assertFalse(MeetingDate.isValidMeetingDate("1-1-2030")); // incorrect format (single digits)
 
         // valid meeting dates
-        assertTrue(MeetingDate.isValidMeetingDate("01-01-2023")); // exactly in dd-MM-yyyy format
-        assertTrue(MeetingDate.isValidMeetingDate("29-02-2028")); // leap year check (valid date)
-        assertTrue(MeetingDate.isValidMeetingDate("31-12-1999")); // valid date
+        assertTrue(MeetingDate.isValidMeetingDate("01-01-2035")); // exactly in dd-MM-yyyy format
+        assertTrue(MeetingDate.isValidMeetingDate("29-02-2032")); // leap year check (valid date)
+        assertTrue(MeetingDate.isValidMeetingDate("31-12-2030")); // valid date
     }
 
     @Test
     public void equals() {
-        MeetingDate meetingDate = new MeetingDate("01-01-2023");
+        MeetingDate meetingDate = new MeetingDate("01-01-2025");
 
         // same values -> returns true
-        assertTrue(meetingDate.equals(new MeetingDate("01-01-2023")));
+        assertTrue(meetingDate.equals(new MeetingDate("01-01-2025")));
 
         // same object -> returns true
         assertTrue(meetingDate.equals(meetingDate));
@@ -56,7 +57,7 @@ public class MeetingDateTest {
         assertFalse(meetingDate.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(meetingDate.equals(new MeetingDate("02-01-2023")));
+        assertFalse(meetingDate.equals(new MeetingDate("02-01-2025")));
     }
 }
 

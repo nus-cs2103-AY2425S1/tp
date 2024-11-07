@@ -19,6 +19,7 @@ public interface Model {
     Predicate<Client> PREDICATE_SHOW_ALL_BUYERS_ONLY = Client::isBuyer;
     Predicate<Client> PREDICATE_SHOW_ALL_SELLERS_ONLY = Client::isSeller;
     Predicate<Meeting> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
+    Predicate<Property> PREDICATE_SHOW_ALL_PROPERTIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -48,7 +49,7 @@ public interface Model {
     /**
      * Sets the user prefs' client book file path.
      */
-    void setClientBookFilePath(Path addressBookFilePath);
+    void setClientBookFilePath(Path clientBookFilePath);
 
     /**
      * Replaces client book data with the data in {@code clientBook}.
@@ -59,9 +60,16 @@ public interface Model {
     ReadOnlyClientBook getClientBook();
 
     /**
-     * Returns true if a Client with the same identity as {@code Client} exists in the address book.
+     * Returns true if a Client with the same identity as {@code client} exists in the client book.
      */
     boolean hasClient(Client client);
+
+    /**
+     * Returns true if {@code client} is a Buyer and a Buyer with the same email as {@code client}
+     * exists in the client book or if {@code client} is a Seller and a Seller with the same email
+     * as {@code client} exists in the client book.
+     */
+    boolean sameEmailExists(Client client);
 
     /**
      * Deletes the given client.
@@ -78,12 +86,19 @@ public interface Model {
     /**
      * Replaces the given client {@code target} with {@code editedClient}.
      * {@code target} must exist in the client book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the client book.
      */
     void setClient(Client target, Client editedClient);
 
     /** Returns an unmodifiable view of the filtered client list */
     ObservableList<Client> getFilteredClientList();
+
+    /**
+     * Checks if the filtered client list is empty.
+     *
+     * @return {@code true} if the filtered client list is empty, {@code false} otherwise.
+     */
+    boolean isFilteredClientListEmpty();
 
     /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.
@@ -125,6 +140,13 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered property list */
     ObservableList<Property> getFilteredPropertyList();
+
+    /**
+     * Checks if the filtered meeting list is empty.
+     *
+     * @return {@code true} if the filtered meeting list is empty, {@code false} otherwise.
+     */
+    boolean isFilteredMeetingListEmpty();
 
     /**
      * Updates the filter of the filtered property list to filter by the given {@code predicate}.
@@ -171,6 +193,13 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered meeting list */
     ObservableList<Meeting> getFilteredMeetingList();
+
+    /**
+     * Checks if the filtered property list is empty.
+     *
+     * @return {@code true} if the filtered property list is empty, {@code false} otherwise.
+     */
+    boolean isFilteredPropertyListEmpty();
 
     /**
      * Updates the filter of the filtered meeting list to filter by the given {@code predicate}.

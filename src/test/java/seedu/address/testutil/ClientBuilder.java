@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 
@@ -17,7 +17,7 @@ public class ClientBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
 
-    private Name name;
+    private NameWithoutNumber name;
     private Phone phone;
     private Email email;
 
@@ -25,7 +25,7 @@ public class ClientBuilder {
      * Creates a {@code ClientBuilder} with the default details.
      */
     public ClientBuilder() {
-        name = new Name(DEFAULT_NAME);
+        name = new NameWithoutNumber(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
     }
@@ -43,7 +43,7 @@ public class ClientBuilder {
      * Sets the {@code Name} of the {@code Client} that we are building.
      */
     public ClientBuilder withName(String name) {
-        this.name = new seedu.address.model.client.Name(name);
+        this.name = new seedu.address.model.client.NameWithoutNumber(name);
         return this;
     }
 

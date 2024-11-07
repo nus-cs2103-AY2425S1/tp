@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_KEY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KEY_BUYERS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KEY_CLIENTS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_KEY_MEETINGS_DESC;
@@ -31,6 +32,13 @@ public class ListCommandParserTest {
         assertParseSuccess(parser, VALID_KEY_SELLERS_DESC, new ListSellersCommand());
         assertParseSuccess(parser, VALID_KEY_PROPERTIES_DESC, new ListPropertiesCommand());
         assertParseSuccess(parser, VALID_KEY_MEETINGS_DESC, new ListMeetingsCommand());
+    }
+
+    @Test
+    public void parse_validKeyWithExtraPrefix_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE);
+        String userInput = VALID_KEY_BUYERS_DESC + NAME_DESC_AMY;
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
 

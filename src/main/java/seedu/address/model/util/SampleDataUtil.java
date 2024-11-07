@@ -9,7 +9,7 @@ import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
@@ -28,16 +28,16 @@ import seedu.address.model.property.Unit;
 public class SampleDataUtil {
     public static Client[] getSampleClients() {
         return new Client[] {
-            new Buyer(new Name("Alex Yeoh"),
+            new Buyer(new NameWithoutNumber("Alex Yeoh"),
                     new Phone("87438807"),
                     new Email("alexyeoh@example.com")),
-            new Seller(new Name("Bernice Yu"),
+            new Seller(new NameWithoutNumber("Bernice Yu"),
                     new Phone("99272758"),
                     new Email("berniceyu@example.com")),
-            new Buyer(new Name("Charlotte Oliveiro"),
+            new Buyer(new NameWithoutNumber("Charlotte Oliveiro"),
                     new Phone("93210283"),
                     new Email("charlotte@example.com")),
-            new Seller(new Name("David Li"),
+            new Seller(new NameWithoutNumber("David Li"),
                     new Phone("91031282"),
                     new Email("lidavid@example.com"))
         };
@@ -73,13 +73,13 @@ public class SampleDataUtil {
 
     public static Meeting[] getSampleMeetings() {
         return new Meeting[] {
-            new Meeting(new MeetingTitle("Meeting 1"), new MeetingDate("01-01-2024"), new Phone("91234567"),
+            new Meeting(new MeetingTitle("Meeting 1"), new MeetingDate("01-01-2025"), new Phone("91234567"),
                     new Phone("81234567"),
                     new Type("HDB"), new PostalCode("111111")),
-            new Meeting(new MeetingTitle("Meeting 2"), new MeetingDate("02-01-2024"), new Phone("91234567"),
+            new Meeting(new MeetingTitle("Meeting 2"), new MeetingDate("02-01-2025"), new Phone("91234567"),
                     new Phone("81234567"),
                     new Type("HDB"), new PostalCode("111111")),
-            new Meeting(new MeetingTitle("Meeting 3"), new MeetingDate("03-01-2024"),
+            new Meeting(new MeetingTitle("Meeting 3"), new MeetingDate("03-01-2025"),
                     new Phone("81234567"), new Phone("91234567"),
                     new Type("HDB"), new PostalCode("111111")),
         };

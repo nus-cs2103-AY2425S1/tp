@@ -5,9 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 
@@ -24,6 +27,8 @@ import seedu.address.model.client.exceptions.DuplicateClientException;
  */
 public class UniqueClientList implements Iterable<Client> {
 
+    private static final Logger logger = LogsCenter.getLogger(UniqueClientList.class);
+
     private final ObservableList<Client> internalList = FXCollections.observableArrayList();
     private final ObservableList<Client> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -32,8 +37,20 @@ public class UniqueClientList implements Iterable<Client> {
      * Returns true if the list contains an equivalent client as the given argument.
      */
     public boolean contains(Client toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameClient);
+        requireNonNull(toCheck, "Client to check cannot be null.");
+        boolean isSameClient = internalList.stream().anyMatch(toCheck::isSameClient);
+        assert isSameClient == internalList.stream().anyMatch(toCheck::isSameClient)
+                : "Client existence check failed!";
+        return isSameClient;
+    }
+
+    /**
+     * Returns true if the list contains a client with the same client type and email.
+     */
+    public boolean containsEmail(Client toCheck) {
+        requireNonNull(toCheck, "Client to check cannot be null.");
+        boolean isDuplicateEmail = internalList.stream().anyMatch(toCheck::isDuplicateEmail);
+        return isDuplicateEmail;
     }
 
     /**
@@ -41,11 +58,14 @@ public class UniqueClientList implements Iterable<Client> {
      * The client must not already exist in the list.
      */
     public void add(Client toAdd) {
-        requireNonNull(toAdd);
+        requireNonNull(toAdd, "Client to add cannot be null.");
         if (contains(toAdd)) {
+            logger.log(Level.WARNING, "Attempted to add duplicate client: " + toAdd);
             throw new DuplicateClientException();
         }
         internalList.add(toAdd);
+        assert internalList.contains(toAdd) : "Client was not added successfully!";
+        logger.log(Level.INFO, "Client added: " + toAdd);
     }
 
     /**
@@ -58,14 +78,18 @@ public class UniqueClientList implements Iterable<Client> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
+            logger.log(Level.SEVERE, "Client not found: " + target);
             throw new ClientNotFoundException();
         }
 
         if (!target.isSameClient(editedClient) && contains(editedClient)) {
+            logger.log(Level.WARNING, "Attempted to replace with a duplicate client: " + editedClient);
             throw new DuplicateClientException();
         }
 
         internalList.set(index, editedClient);
+        assert internalList.get(index).equals(editedClient) : "Client was not replaced successfully!";
+        logger.log(Level.INFO, "Client replaced: " + target + " with " + editedClient);
     }
 
     /**
@@ -73,15 +97,25 @@ public class UniqueClientList implements Iterable<Client> {
      * The client must exist in the list.
      */
     public void remove(Client toRemove) {
-        requireNonNull(toRemove);
+        requireNonNull(toRemove, "Client to remove cannot be null.");
         if (!internalList.remove(toRemove)) {
+            logger.log(Level.SEVERE, "Client to remove not found: " + toRemove);
             throw new ClientNotFoundException();
         }
+        assert !internalList.contains(toRemove) : "Client was not removed successfully!";
+        logger.log(Level.INFO, "Client removed: " + toRemove);
     }
 
-    public void setClients(UniqueClientList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+    /**
+     * Replaces the contents of this list with the provided {@code newClientList}.
+     *
+     * @param newClientList The new UniqueClientList to replace the current list.
+     */
+    public void setClients(UniqueClientList newClientList) {
+        requireNonNull(newClientList, "New client list cannot be null.");
+        internalList.setAll(newClientList.internalList);
+        assert internalList.equals(newClientList.internalList) : "Clients were not set successfully!";
+        logger.log(Level.INFO, "Client list replaced with new client list.");
     }
 
     /**
@@ -91,10 +125,13 @@ public class UniqueClientList implements Iterable<Client> {
     public void setClients(List<Client> clients) {
         requireAllNonNull(clients);
         if (!clientsAreUnique(clients)) {
+            logger.log(Level.WARNING, "Attempted to set clients with duplicate entries.");
             throw new DuplicateClientException();
         }
 
         internalList.setAll(clients);
+        assert internalList.equals(clients) : "Client list was not replaced successfully!";
+        logger.log(Level.INFO, "Client list replaced with provided list of clients.");
     }
 
     /**
@@ -115,13 +152,14 @@ public class UniqueClientList implements Iterable<Client> {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof UniqueClientList)) {
             return false;
         }
 
         UniqueClientList otherUniqueClientList = (UniqueClientList) other;
-        return internalList.equals(otherUniqueClientList.internalList);
+        boolean isEqual = internalList.equals(otherUniqueClientList.internalList);
+        assert isEqual == internalList.equals(otherUniqueClientList.internalList) : "Equality check failed!";
+        return isEqual;
     }
 
     @Override
@@ -137,10 +175,12 @@ public class UniqueClientList implements Iterable<Client> {
     /**
      * Returns true if {@code clients} contains only unique clients.
      */
-    private boolean clientsAreUnique(List<Client> clients) {
+    public boolean clientsAreUnique(List<Client> clients) {
         for (int i = 0; i < clients.size() - 1; i++) {
             for (int j = i + 1; j < clients.size(); j++) {
                 if (clients.get(i).isSameClient(clients.get(j))) {
+                    logger.log(Level.WARNING, "Duplicate client detected during uniqueness check: "
+                            + clients.get(i));
                     return false;
                 }
             }

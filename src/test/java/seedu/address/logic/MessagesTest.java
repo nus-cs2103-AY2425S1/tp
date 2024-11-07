@@ -8,7 +8,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
+import seedu.address.model.client.NameWithoutNumber;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
@@ -51,7 +51,8 @@ class MessagesTest {
     @Test
     void formatBuyer_success() {
         // Arrange
-        Client buyer = new Buyer(new Name("Alice Bee"), new Phone("98765432"), new Email("alice@example.com"));
+        Client buyer = new Buyer(new NameWithoutNumber("Alice Bee"),
+                new Phone("98765432"), new Email("alice@example.com"));
 
         // Act
         String result = Messages.format(buyer);
@@ -64,7 +65,8 @@ class MessagesTest {
     @Test
     void formatSeller_success() {
         // Arrange
-        Client seller = new Seller(new Name("Bob Bee"), new Phone("87654321"), new Email("bob@example.com"));
+        Client seller = new Seller(new NameWithoutNumber("Bob Bee"),
+                new Phone("87654321"), new Email("bob@example.com"));
 
         // Act
         String result = Messages.format(seller);
@@ -92,14 +94,14 @@ class MessagesTest {
     @Test
     void formatMeeting_success() {
         // Arrange
-        Meeting meeting = new Meeting(new MeetingTitle("Project Meeting"), new MeetingDate("01-01-2024"),
+        Meeting meeting = new Meeting(new MeetingTitle("Project Meeting"), new MeetingDate("01-01-2030"),
                 new Phone("81234567"), new Phone("91234567"), new Type("hdb"), new PostalCode("123456"));
 
         // Act
         String result = Messages.format(meeting);
 
         // Assert
-        String expected = "MeetingTitle: Project Meeting; MeetingDate: 01-01-2024; Buyer's Phone Number: 81234567; "
+        String expected = "MeetingTitle: Project Meeting; MeetingDate: 01-01-2030; Buyer's Phone Number: 81234567; "
                 + "Seller's Phone Number: 91234567; "
                 + "Type: HDB; PostalCode: 123456";
         assertEquals(expected, result);

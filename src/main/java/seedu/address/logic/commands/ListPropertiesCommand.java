@@ -38,10 +38,24 @@ public class ListPropertiesCommand extends ListCommand {
         logger.info("Executing ListPropertiesCommand to list all properties");
 
         // Logic to display properties
+        model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTIES);
+        logger.info("Filtered property list updated to show all properties");
+
         model.setDisplayProperties();
         logger.info("Display updated to show all properties");
 
-        return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
+        // Check if the resulting filtered list is empty and set response message accordingly
+        boolean isListEmpty = model.isFilteredPropertyListEmpty();
+        String responseMessage = String.format(
+                isListEmpty ? ListCommand.MESSAGE_SUCCESS_EMPTY_LIST : ListCommand.MESSAGE_SUCCESS,
+                KEY_WORD
+        );
+
+        // Log the state of the filtered property list and the response message
+        logger.info(String.format("Filtered property list is %s. Sending response: %s",
+                isListEmpty ? "empty" : "not empty", responseMessage));
+
+        return new CommandResult(responseMessage);
     }
 
     /**

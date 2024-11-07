@@ -29,22 +29,48 @@ public class UniqueClientListTest {
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_clientNotInList_returnsFalse() {
         assertFalse(uniqueClientList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_clientInList_returnsTrue() {
         uniqueClientList.add(ALICE);
         assertTrue(uniqueClientList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_clientWithSameIdentityFieldsInList_returnsTrue() {
         uniqueClientList.add(ALICE);
-        Client editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_AMY)
-                .buildBuyer();
+        Client editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_AMY).buildBuyer();
         assertTrue(uniqueClientList.contains(editedAlice));
+    }
+
+    @Test
+    public void containsEmail_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueClientList.containsEmail(null));
+    }
+
+    @Test
+    public void containsEmail_noClientWithSameEmail_returnsFalse() {
+        uniqueClientList.add(ALICE);
+        Client clientWithDifferentEmail = new ClientBuilder(BOB).withEmail("unique@example.com").buildBuyer();
+        assertFalse(uniqueClientList.containsEmail(clientWithDifferentEmail));
+    }
+
+    @Test
+    public void containsEmail_sameEmailSameType_returnsTrue() {
+        uniqueClientList.add(ALICE);
+        Client clientWithSameEmailAndType = new ClientBuilder(ALICE).withEmail(ALICE.getEmail().value).buildBuyer();
+        assertTrue(uniqueClientList.containsEmail(clientWithSameEmailAndType));
+    }
+
+    @Test
+    public void containsEmail_sameEmailDifferentType_returnsFalse() {
+        uniqueClientList.add(ALICE);
+        Client clientWithSameEmailDifferentType = new ClientBuilder(ALICE)
+                .withEmail(ALICE.getEmail().value).buildSeller();
+        assertFalse(uniqueClientList.containsEmail(clientWithSameEmailDifferentType));
     }
 
     @Test
@@ -85,8 +111,8 @@ public class UniqueClientListTest {
     @Test
     public void setClient_editedClientHasSameIdentity_success() {
         uniqueClientList.add(ALICE);
-        Client editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_AMY).withPhone(VALID_PHONE_AMY)
-                .buildBuyer();
+        Client editedAlice = new ClientBuilder(ALICE)
+                .withEmail(VALID_EMAIL_AMY).withPhone(VALID_PHONE_AMY).buildBuyer();
         uniqueClientList.setClient(ALICE, editedAlice);
         UniqueClientList expectedUniqueClientList = new UniqueClientList();
         expectedUniqueClientList.add(editedAlice);
@@ -115,7 +141,7 @@ public class UniqueClientListTest {
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsClientNotFoundException() {
+    public void remove_clientDoesNotExist_throwsClientNotFoundException() {
         assertThrows(ClientNotFoundException.class, () -> uniqueClientList.remove(ALICE));
     }
 
@@ -149,8 +175,8 @@ public class UniqueClientListTest {
     @Test
     public void setClients_list_replacesOwnListWithProvidedList() {
         uniqueClientList.add(ALICE);
-        List<Client> personList = Collections.singletonList(BOB);
-        uniqueClientList.setClients(personList);
+        List<Client> clientList = Collections.singletonList(BOB);
+        uniqueClientList.setClients(clientList);
         UniqueClientList expectedUniqueClientList = new UniqueClientList();
         expectedUniqueClientList.add(BOB);
         assertEquals(expectedUniqueClientList, uniqueClientList);
@@ -164,12 +190,26 @@ public class UniqueClientListTest {
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueClientList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> uniqueClientList.asUnmodifiableObservableList()
+                .remove(0));
     }
 
     @Test
-    public void toStringMethod() {
-        assertEquals(uniqueClientList.asUnmodifiableObservableList().toString(), uniqueClientList.toString());
+    public void toStringMethod_correctStringRepresentation() {
+        uniqueClientList.add(ALICE);
+        String expectedString = uniqueClientList.asUnmodifiableObservableList().toString();
+        assertEquals(expectedString, uniqueClientList.toString());
+    }
+
+    @Test
+    public void clientsAreUnique_uniqueClients_returnsTrue() {
+        List<Client> uniqueClients = Arrays.asList(ALICE, BOB);
+        assertTrue(uniqueClientList.clientsAreUnique(uniqueClients));
+    }
+
+    @Test
+    public void clientsAreUnique_duplicateClients_returnsFalse() {
+        List<Client> duplicateClients = Arrays.asList(ALICE, ALICE);
+        assertFalse(uniqueClientList.clientsAreUnique(duplicateClients));
     }
 }
