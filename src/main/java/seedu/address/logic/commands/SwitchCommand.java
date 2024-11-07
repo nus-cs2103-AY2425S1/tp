@@ -33,7 +33,7 @@ public class SwitchCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Switched to the profile '%1$s'";
     public static final String MESSAGE_SHOW_PROFILES = "Switch to one of the other profiles in this list: [%1$s]\n"
             + "Example: " + COMMAND_WORD + " %2$s";
-    public static final String MESSAGE_NO_SWITCH = "Already on: %1$s";
+    public static final String MESSAGE_NO_SWITCH = "Already on '%1$s'";
     public static final String MESSAGE_ILLEGAL_MODIFICATION =
             "switch command does not support illegal file modifications."
                     + " Please ensure the existing profile name fits our constraints before switching.\n"
@@ -47,43 +47,64 @@ public class SwitchCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Profile curProfile = getProfileFromModel(model);
 
-        // display help usage or all other profiles
-        if (profile instanceof Profile.EmptyProfile) {
-            Set<Profile> profiles = model.getProfiles();
-            if (profiles.isEmpty()) {
-                throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
-            }
-            List<String> profilesList = profiles.stream()
-                    .map(Profile::toPath)
-                    .flatMap(Profile::extractNameFromPathOrIgnore)
-                    .toList();
-            assert !profilesList.isEmpty() : "There is no profile to switch to. Message usage should have been thrown";
-            throw new CommandException(String.format(
-                    MESSAGE_SHOW_PROFILES,
-                    String.join(", ", profilesList),
-                    profilesList.get(0)
-            ));
-
-        }
-
-        Path filePath = profile.toPath();
-        // updates the model to track the profile switch
-        String curProfileName;
-        try {
-            curProfileName = extractProfileNameFromPathOrThrow(model.getAddressBookFilePath());
-        } catch (IllegalProfilePathException | IllegalProfileNameException e) {
-            throw new CommandException(MESSAGE_ILLEGAL_MODIFICATION);
-        }
-        if (curProfileName.equals(profile.toString())) {
+        // deny switch to same profile
+        if (curProfile.equals(profile)) {
             throw new CommandException(String.format(MESSAGE_NO_SWITCH, profile));
         }
 
+        // display help usage or all other profiles
+        if (profile instanceof Profile.EmptyProfile) {
+            throwEmptyInputException(model);
+        }
+
         //add curProfile to other profiles, then update cur file path.
-        model.addToProfiles(new Profile(curProfileName));
+        Path filePath = profile.toPath();
+        model.addToProfiles(curProfile);
+        model.removeFromProfiles(profile);
         model.setAddressBookFilePath(filePath);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, profile)).markProfileSwitched();
+    }
+
+    /**
+     * Extracts the current {@code Profile} from the given {@code Model}'s address book file path.
+     *
+     * @param model The model containing the address book file path.
+     * @return The {@code Profile} based on the file path's profile name.
+     * @throws CommandException if the file path or profile name is invalid.
+     */
+    private Profile getProfileFromModel(Model model) throws CommandException {
+        try {
+            String curProfileName = extractProfileNameFromPathOrThrow(model.getAddressBookFilePath());
+            return new Profile(curProfileName);
+        } catch (IllegalProfilePathException | IllegalProfileNameException e) {
+            throw new CommandException(MESSAGE_ILLEGAL_MODIFICATION);
+        }
+    }
+
+    /**
+     * Throws a {@code CommandException} with an invalid command message if the profile set is empty,
+     * otherwise, throws an exception listing available profiles for the user to choose from.
+     *
+     * @param model The {@code Model} containing the set of profiles.
+     */
+    private void throwEmptyInputException(Model model) throws CommandException {
+        Set<Profile> profiles = model.getProfiles();
+        if (profiles.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        }
+        List<String> profilesList = profiles.stream()
+                .map(Profile::toPath)
+                .flatMap(Profile::extractNameFromPathOrIgnore)
+                .toList();
+        assert !profilesList.isEmpty() : "There is no profile to switch to. Message usage should have been thrown";
+        throw new CommandException(String.format(
+                MESSAGE_SHOW_PROFILES,
+                String.join(", ", profilesList),
+                profilesList.get(0)
+        ));
     }
 
     @Override
