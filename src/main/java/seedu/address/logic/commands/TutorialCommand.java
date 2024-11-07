@@ -104,7 +104,8 @@ public abstract class TutorialCommand extends Command {
         }
         finalSuccessMessage = finalSuccessMessage.trim();
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(finalSuccessMessage);
+        return new CommandResult(finalSuccessMessage.isEmpty()
+                ? Messages.MESSAGE_NO_CHANGES : finalSuccessMessage);
     }
 
     @Override

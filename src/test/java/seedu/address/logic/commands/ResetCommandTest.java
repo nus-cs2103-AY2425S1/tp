@@ -42,9 +42,7 @@ public class ResetCommandTest {
                         new Tutorial(VALID_TUTORIAL_ONE)).execute(markedModel));
     }
 
-    /**
-     * Reset a person's attendance which is already not taken place.
-     */
+    // EP: Invalid Person
     @Test
     public void execute_tutorialAlreadyReset_failure() {
         ResetCommand resetCommand = new ResetCommand(INDEX_FIRST_PERSON, new Tutorial(VALID_TUTORIAL_ONE));
@@ -59,6 +57,7 @@ public class ResetCommandTest {
         }
     }
 
+    // EP: Valid Index, Valid Tutorial, Valid Person
     @Test
     public void execute_success() {
         Tutorial tutorialToBeAdded = new Tutorial(VALID_TUTORIAL_ONE);
@@ -95,11 +94,9 @@ public class ResetCommandTest {
         assertCommandSuccess(resetCommand, typicalModel, expectedMessage, expectedModel);
     }
 
-    /**
-     * Reset all persons in the list.
-     */
+    // EP: Wildcard Index
     @Test
-    public void execute_shouldResetAll_success() {
+    public void execute_shouldResetAll() {
         Tutorial tutorialToBeReset = new Tutorial(VALID_TUTORIAL_ONE);
 
         ResetCommand resetCommand = new ResetCommand(INDEX_ALL, tutorialToBeReset);
@@ -133,6 +130,14 @@ public class ResetCommandTest {
                         .map(personToEdit -> String.format(Messages.MESSAGE_RESET_SUCCESS,
                                 Messages.format(personToEdit), tutorialToBeReset.tutorial)).toArray(String[]::new));
         Model typicalModel = new ModelManager(getMarkedAddressBook(VALID_TUTORIAL_ONE), new UserPrefs());
+        assertCommandSuccess(resetCommand, typicalModel, expectedMessage, expectedModel);
+
+        // EP: Wildcard Index, Valid tutorial, Invalid Persons (already reset)
+        // Run the above command again, tutorials already reset
+        expectedMessage = String.join("\n",
+                markedModel.getFilteredPersonList().stream()
+                        .map(personToEdit -> String.format(Messages.MESSAGE_RESET_UNNECESSARY,
+                                personToEdit.getName(), tutorialToBeReset.tutorial)).toArray(String[]::new));
         assertCommandSuccess(resetCommand, typicalModel, expectedMessage, expectedModel);
     }
 

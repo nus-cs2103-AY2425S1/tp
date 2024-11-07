@@ -30,6 +30,7 @@ public class Messages {
 
     public static final String MESSAGE_RESET_SUCCESS = "Marked not taken place in Tutorial: %2$s for Person: %1$s";
 
+    public static final String MESSAGE_NO_CHANGES = "No Persons to modify";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
