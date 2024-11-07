@@ -139,7 +139,7 @@ Format: `add -s n/NAME p/PHONE e/EMAIL com/COMPANY [t/TAG]…​ [pro/PRODUCT]�
 Parameters:
 
 - `n/NAME`: Must be alphanumeric, and must not be blank.
-- `p/PHONE`: Must be numeric, and must contain at least 3 digits.
+- `p/PHONE`: Must be numeric, must contain at least 3 digits, and must not be blank.
 - `e/EMAIL`: Must be a valid email address, and must not be blank.
 - `com/COMPANY`: Must be alphanumeric, and must not be blank.
 - `[t/TAG]`: Must be alphanumeric, and must be between 1 and 50 (inclusive) characters long.
