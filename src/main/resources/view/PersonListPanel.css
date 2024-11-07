@@ -7,7 +7,7 @@
 }
 
 .separator {
-    -fx-padding: 0 10 10 12;
+    -fx-padding: 0 10 11 12;
 }
 
 .separator *.line {
@@ -50,25 +50,52 @@
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 15 0;
-    -fx-background-insets: 0 0 15 0;
-    -fx-border-insets: 0 0 15 0;
     -fx-border-width: 2.2;
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    -fx-background-radius: 11;
+    -fx-border-radius: 11;
     -fx-border-color: transparent;
     -fx-background-color: #F0A89F;
 }
 
 .list-cell:filled {
-    -fx-background-color: #f8d3ca;
+    -fx-background-color: #F8D3CA;
+    -fx-padding: 8 8 18 8;
+    -fx-background-insets: 0 0 18 0;
+    -fx-border-insets: 0 0 18 0;
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #f8d3ca;
-    -fx-border-color: #795548;
+    -fx-background-color: #F8D3CA;
+    -fx-border-color: #543b32;
 }
 
 .list-cell .label {
     -fx-text-fill: black;
+}
+
+#horizontalSb {
+    -fx-padding: 3.5 10 0 6;
+    -fx-background-insets: 3.5 0 0 0;
+    -fx-border-insets: 3.5 0 0 0;
+    -fx-background-color: transparent;
+}
+
+#horizontalSb .increment-button,
+#horizontalSb .decrement-button {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+    -fx-cursor: null;
+    -fx-background-color: null;
+}
+
+#horizontalSb .track {
+    -fx-background-color: #FEF7F7;
+    -fx-background-insets: 6 10 6 10;
+}
+
+#horizontalSb .thumb {
+    -fx-background-radius: 7;
+    -fx-border-radius: 7;
 }
