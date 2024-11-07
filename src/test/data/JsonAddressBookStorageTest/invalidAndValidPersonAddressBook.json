@@ -3,7 +3,10 @@
     "name": "Valid Person",
     "phone": "9482424",
     "email": "hans@example.com",
-    "roles": [ "Committee - Publicity - Project Director"]
+    "roles": [
+      {
+        "name": "Committee - Publicity - Project Director"
+      }]
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
