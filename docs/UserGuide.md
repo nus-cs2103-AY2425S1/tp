@@ -61,7 +61,7 @@ In this guide, users will be able to learn the following details:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## How to use NovaCare
+## 1. How to use NovaCare
 
 This user guide is tailored for new and existing users of NovaCare.
 
@@ -72,7 +72,7 @@ If you are an existing user looking for a specific feature, you can jump to the 
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-## Annotations box
+## 2. Annotations box
 The following are annotations throughout this user guide that provide additional information to help you understand the NovaCare features better.
 
 <box type="info" seamless>
@@ -94,8 +94,7 @@ The following are annotations throughout this user guide that provide additional
 
 --------------------------------------------------------------------------------------------------------------------
 
-
-## Quick start
+## 3. Quick start
 
 This section provides a quick overview of how to set up and run NovaCare on your computer.
 
@@ -128,7 +127,7 @@ Upon successful execution, you should see the GUI of NovaCare covered in the nex
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-## Overview of GUI
+## 4. Overview of GUI
 
 The GUI is broken down into different **sections** as shown in the image below:
 
@@ -141,7 +140,7 @@ The GUI is broken down into different **sections** as shown in the image below:
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-## Get started with NovaCare
+## 5. Get started with NovaCare
 Here will be a basic guide on how to use the application.
 1. **Launch help guide**:
    * Type the following command in the command box and press Enter to **view help window**:
@@ -177,7 +176,7 @@ Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 6. Features
 
 This section provides a detailed explanation of the features available in NovaCare.
 
@@ -210,7 +209,7 @@ This section provides a detailed explanation of the features available in NovaCa
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### Parameter Information
+### 6.1 Parameter Information
 The table below explains each of the parameter available in NovaCare.
 It will provide the limitations and examples of the parameter.
 <box type = "warning" seamless>
@@ -237,11 +236,11 @@ Otherwise, the command will not be executed and display an error message in Resu
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### Patient Commands
+### 6.2 Patient Commands
 In NovaCare, these commands will allow you to modify your list of patients to suit your needs.
 <br></br>
 
-#### Adding a patient: `add`
+#### 6.2.1 Adding a patient: `add`
 
 Adds a patient's details to the system.
 
@@ -270,7 +269,7 @@ Examples:
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tagges as `Diabetic` to the system.
 <br></br>
 
-#### Listing all patients: `list`
+#### 6.2.2 Listing all patients: `list`
 
 Shows a list of all patients in the system.
 
@@ -280,7 +279,7 @@ Example:
 * `list` lists and displays all the patients in the system.
 <br></br>
 
-#### Editing a patient: `edit`
+#### 6.2.3 Editing a patient: `edit`
 
 Edits an existing patient's details in the system.
 
@@ -302,7 +301,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 <br></br>
 
-#### Locating patients by name: `find`
+#### 6.2.4 Locating patients by name: `find`
 
 Finds patients whose name contains any of the given keywords.
 
@@ -326,7 +325,7 @@ Examples:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
     <div style="text-align: center;"><i>Screenshot of NovaCare after running the `find alex david` command.</i></div><br>
 
-#### Deleting a patient: `delete`
+#### 6.2.5 Deleting a patient: `delete`
 
 Deletes the specified patient and tasks associated to that patient from the system.
 
@@ -345,7 +344,7 @@ Examples:
 * `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
 <br></br>
 
-#### Adding emergency contact: `emergency`
+#### 6.2.6 Adding emergency contact: `emergency`
 
 Adds an emergency contact and details to a patient in the system.
 
@@ -363,7 +362,7 @@ Example:
 * `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
 <br></br>
 
-#### Deleting emergency contact: `deleteemergency`
+#### 6.2.7 Deleting emergency contact: `deleteemergency`
 
 Deletes an emergency contact and its details from a patient in the system.
 
@@ -381,7 +380,7 @@ Example:
 * `deleteemergency 1` deletes the emergency contact of the 1st-indexed patient in the patient list.
 <br></br>
 
-#### Adding priority level: `priority`
+#### 6.2.8 Adding priority level: `priority`
 
 Adds an priority level to a patient in the system.
 
@@ -400,7 +399,7 @@ Example:
 * `priority 1 l/2` adds priority level `2` to 1st-indexed patient in the patient list.
 <br></br>
 
-#### Deleting priority level: `deletelevel`
+#### 6.2.9 Deleting priority level: `deletelevel`
 
 Delete a priority level to a patient in the system, resetting it to the default value **3**.
 
@@ -420,11 +419,11 @@ Examples:
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### Task commands
+### 6.3 Task commands
 In NovaCare, these commands will allow you to modify your list of tasks, with each task being specific to each patient to suit your needs.
 <br></br>
 
-#### Adding a task: `addtask`
+#### 6.3.1 Adding a task: `addtask`
 
 Adds a task to a patient in the system.
 
@@ -446,7 +445,7 @@ Examples:
   ![Task List](images/TaskListExample.png)
 <br></br>
 
-#### Deleting a task: `deletetask`
+#### 6.3.2 Deleting a task: `deletetask`
 
 Deletes a task for a patient in the system.
 
@@ -464,7 +463,7 @@ Example:
 * `deletetask 1` deletes the 1st-indexed task in the task list.
 <br></br>
 
-#### Marking a Task: `marktask`
+#### 6.3.3 Marking a Task: `marktask`
 
 Marks a task at a specific index.
 
@@ -482,7 +481,7 @@ Example:
 * `marktask 1` marks the 1st-indexed task in the task list as `Complete`.
 <br></br>
 
-#### Finding a Task: `findtask`
+#### 6.3.4 Finding a Task: `findtask`
 
 Finds all task for a particular patient specific index.
 
@@ -492,7 +491,7 @@ Example:
 * `findtask1 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
 <br></br>
 
-#### Listing Tasks: `listtask`
+#### 6.3.5 Listing Tasks: `listtask`
 
 List all tasks for all patients in the system.
 
@@ -502,7 +501,7 @@ Example:
 * `listtask` lists and displays all tasks in the system.
 <br></br>
 
-#### Listing Incomplete Tasks: `listincomplete`
+#### 6.3.6 Listing Incomplete Tasks: `listincomplete`
 
 List all incomplete tasks for all patients in the system.
 
@@ -513,11 +512,11 @@ Example:
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### General commands
+### 6.4 General commands
 In NovaCare, these are the default commands for getting help, clearing and saving your patient and task data.
 <br></br>
 
-#### Viewing help: `help`
+#### 6.4.1 Viewing help: `help`
 
 Shows a message explaning how to access the help page.
 
@@ -536,7 +535,7 @@ Example:
 * `help` shows the help window which displays all commands available in NovaCare.
 <br></br>
 
-#### Clearing all entries: `clear`
+#### 6.4.2 Clearing all entries: `clear`
 
 Clears all patient and tasks entry from NovaCare.
 
@@ -553,7 +552,7 @@ Example:
 * `clear` clears all available data in NovaCare, both patients and tasks.
 <br></br>
 
-#### Exiting the program: `exit`
+#### 6.4.3 Exiting the program: `exit`
 
 Exits the program.
 
@@ -564,14 +563,14 @@ Example:
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### Data Management
+### 6.5 Data Management
 
-#### Saving the data
+#### 6.5.1 Saving the data
 
 NovaCare data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 <br></br>
 
-#### Editing the data file
+#### 6.5.2 Editing the data file
 
 NovaCare data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -583,7 +582,7 @@ Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (
 </box>
 <br></br>
 
-#### Archiving data files `[coming in v2.0]`
+#### 6.5.3 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -591,7 +590,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 7. FAQ
 
 **Q**: How do I **transfer my data** to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous NovaCare home folder.
@@ -603,7 +602,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known Issues
+## 8. Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -612,9 +611,9 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command Summary
+## 9. Command Summary
 
-### Patient-Related Commands:
+### 9.1 Patient-Related Commands:
 | Action                    | Format Examples                                                                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/diabetes` |
@@ -627,7 +626,7 @@ _Details coming soon ..._
 | **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                      |
 | **Find**                  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                     |
 
-### Task-Related Commands:
+### 9.2 Task-Related Commands:
 | Action              | Format, Examples                                                                   |
 |---------------------|------------------------------------------------------------------------------------|
 | **Add Task**        | `addtask INDEX d/TASK_DESCRIPTION` <br> e.g., `addtask 1 d/Eat paracetamol 1000mg` |
@@ -638,7 +637,7 @@ _Details coming soon ..._
 | **List Incomplete** | `listincomplete`                                                                   |
 
 
-### Other Commands:
+### 9.3 Other Commands:
 | Action                | Format, Examples       |
 |-----------------------|------------------------|
 |**Help**               | `help`                 |
@@ -647,7 +646,7 @@ _Details coming soon ..._
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
-### Glossary
+### 10. Glossary
 As you read through the user guide, you may come across some terms that are unfamiliar to you. Here is a glossary of terms that you may encounter:
 
 | Term               | Definition                                                                                                                                                                         |
