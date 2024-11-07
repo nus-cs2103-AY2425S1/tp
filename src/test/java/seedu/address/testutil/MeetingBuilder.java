@@ -13,7 +13,7 @@ import seedu.address.model.property.Type;
 public class MeetingBuilder {
 
     public static final String DEFAULT_MEETINGTITLE = "Testing";
-    public static final String DEFAULT_MEETINGDATE = "10-10-2024";
+    public static final String DEFAULT_MEETINGDATE = "10-10-2030";
     public static final String DEFAULT_BUYER = "94351253";
     public static final String DEFAULT_SELLER = "98765432";
     public static final String DEFAULT_TYPE = "CONDO";

@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  */
 public class MeetingDate {
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting dates need to be in the format dd-MM-yyyy and must be a valid date.";
+            "Meeting dates need to be in the format dd-MM-yyyy and must be a valid date. "
+                    + "The date must be today or in the future.";
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu")
             .withResolverStyle(ResolverStyle.STRICT);
     private static final Logger logger = Logger.getLogger(MeetingDate.class.getName());
@@ -37,8 +38,8 @@ public class MeetingDate {
      */
     public static boolean isValidMeetingDate(String test) {
         try {
-            LocalDate.parse(test, DATE_FORMATTER);
-            return true;
+            LocalDate date = LocalDate.parse(test, DATE_FORMATTER);
+            return !date.isBefore(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }
