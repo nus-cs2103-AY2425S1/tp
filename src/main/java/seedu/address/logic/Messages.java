@@ -102,7 +102,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(reminder.getPersonName())
                 .append("; Date and Time: ")
-                .append(reminder.getDateTime())
+                .append(reminder.getFormattedDateTime())
                 .append("; Description: ")
                 .append(reminder.getDescription());
         return builder.toString();
