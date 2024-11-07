@@ -335,7 +335,7 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 
 **Purpose:** Save detailed records of a new client.
 
-Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark(s) here. Otherwise, new users are assigned a default value of "NA".
+Each client's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier, status and remark(s) here. Otherwise, new users are assigned a default value of "NA".
 
 **Command Format:**
 ```
@@ -409,9 +409,9 @@ All client information, including contact details, address, job information, and
 
 **Command Format:**
 ```
-edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]
+edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]
 ```
-- Mandatory Field: `<INDEX>`
+- Mandatory Field: `<INDEX>`, at least one of the Optional Fields
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
 - **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command.
 
@@ -484,7 +484,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > 💡 **Pro Tip:**  
 > No need to worry about duplicate indexes—AgentAssist guarantees that every client has a unique index automatically.
-- **Note:** If the value for either `Tier` and `Status` is the default value (`NA`), they will not be shown.
+- **Note:** If the value for `Tier`, `Status` or `REMARK` is the default value (`NA`), they will not be shown.
 
 
 
@@ -585,7 +585,7 @@ list
 
 **Command Format:**
 ```
-filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIER> i/ <INCOME> s/ <STATUS>
+filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>
 ```
 - **Mandatory Field**: One or more flags with corresponding search terms. The search term cannot be left empty.
 - **Special Syntax for Income (i/)**:
@@ -812,18 +812,18 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 
 ## 8. Command Summary
 
-| **Action**                 | **Command Format**                                                                                                                        | **Example**                                                                                                         |
-|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| **Add New Client**         | `add n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [r/<REMARK>] [s/<STATUS>]`                                    | `add n/ GORDON MOORE p/ 99007766 e/ gmoore@ntu.sg a/ COM3 j/ engineer i/ 99999 t/ gold r/ remark s/ urgent`         |
-| **Delete Existing Client** | `delete <INDEX>`                                                                                                                          | `delete 69`                                                                                                         |
-| **Edit Existing Client**   | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [rn/<NEW REMARK>] [ra/<APPEND REMARK>] [s/<STATUS>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info s/ urgent` |
-| **List All Clients**       | `list`                                                                                                                                    | `list`                                                                                                              |
-| **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]`            | `filter n/ GORDON MOORE j/ doctor t/ gold s/ urgent`                                                                |
-| **View Client Details**    | `view <INDEX>`                                                                                                                            | `view 1`                                                                                                            |
-| **Close Client Details**   | `close`                                                                                                                                   | `close`                                                                                                             |
-| **Clear All Data**         | `clear`                                                                                                                                   | `clear`                                                                                                             |
-| **Undo Command**           | `undo`                                                                                                                                    | `undo`                                                                                                              |
-| **View Help**              | `help`                                                                                                                                    | `help`                                                                                                              |
-| **Exit Application**       | `exit`                                                                                                                                    | `exit`                                                                                                              |
+| **Action**                 | **Command Format**                                                                                                                                                      | **Example**                                                                                                         |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **Add New Client**         | `add n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [r/<REMARK>] [s/<STATUS>]`                                                                  | `add n/ GORDON MOORE p/ 99007766 e/ gmoore@ntu.sg a/ COM3 j/ engineer i/ 99999 t/ gold r/ remark s/ urgent`         |
+| **Delete Existing Client** | `delete <INDEX>`                                                                                                                                                        | `delete 69`                                                                                                         |
+| **Edit Existing Client**   | `edit <INDEX> [n/ <NAME>] [p/ <PHONE>] [e/ <EMAIL>] [a/ <ADDRESS>] [j/ <JOB>] [i/ <INCOME>] [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED>] [s/ <STATUS>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info s/ urgent` |
+| **List All Clients**       | `list`                                                                                                                                                                  | `list`                                                                                                              |
+| **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/ (=/</>) <INCOME>] [s/<STATUS>]`                                          | `filter n/ GORDON MOORE j/ doctor t/ gold s/ urgent`                                                                |
+| **View Client Details**    | `view <INDEX>`                                                                                                                                                          | `view 1`                                                                                                            |
+| **Close Client Details**   | `close`                                                                                                                                                                 | `close`                                                                                                             |
+| **Clear All Data**         | `clear`                                                                                                                                                                 | `clear`                                                                                                             |
+| **Undo Command**           | `undo`                                                                                                                                                                  | `undo`                                                                                                              |
+| **View Help**              | `help`                                                                                                                                                                  | `help`                                                                                                              |
+| **Exit Application**       | `exit`                                                                                                                                                                  | `exit`                                                                                                              |
 
 [↑ Return to Table of Contents](#table-of-contents)
