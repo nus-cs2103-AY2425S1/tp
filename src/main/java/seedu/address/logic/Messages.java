@@ -52,6 +52,8 @@ public class Messages {
             + " This will create the require Tags.";
     public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
             + " This will unassign all people currently with the Tag.";
+    public static final String MESSAGE_FORCE_UNASSIGN_VENDOR = "Use f/ to force the unassignment of vendors."
+            + " This will unassign all tasks currently with the Vendor.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

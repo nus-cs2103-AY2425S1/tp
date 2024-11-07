@@ -31,9 +31,8 @@ public class UnassignVendorCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
-    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "This vendor cannot be unassigned "
-        + "as it still has a task.";
-
+    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "The Vendor: %1$s still has tasks"
+            + " assigned to them";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
     private final Index targetIndex;
     private boolean force = false;
@@ -81,7 +80,10 @@ public class UnassignVendorCommand extends Command {
             if (this.force) {
                 personToUnassign.clearTasks();
             } else {
-                throw new CommandException(MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS);
+                throw new CommandException(String.format(MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS,
+                        personToUnassign.getName())
+                + ".\n"
+                + Messages.MESSAGE_FORCE_UNASSIGN_VENDOR);
             }
         }
 
