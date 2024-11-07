@@ -630,7 +630,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   
       Parameters: <FLAG>/ <SEARCH TERM>
     
-      Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, r/ REMARK i/ (=/</>) INCOME s/ STATUS
+      Flags: n/ NAME, p/ PHONE, e/ EMAIL, a/ ADDRESS, j/ JOB, i/ (=/</>) INCOME r/ REMARK t/ TIER s/ STATUS
     
       Example: filter n/ Alice p/ 91112222 i/ >2000
       ```
