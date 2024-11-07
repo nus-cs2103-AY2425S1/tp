@@ -4,7 +4,12 @@
   pageNav: 3
 ---
 
-# KonTActs User Guide
+<center>
+<pic src="images/kontactsLogo.png" width="300" alt="Logo" lazy>
+
+# **KonTActs User Guide**
+</pic>
+</center>
 
 KonTActs is a **desktop app for managing your contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 
@@ -107,17 +112,17 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 | Command       | Shortcut |
 |---------------|----------|
 | `mark`        | `m`      |
-| `unmark`        | `um`     |
-| `import`        | `im`     |
-| `export`        | `ex`     |
+| `unmark`      | `um`     |
+| `import`      | `im`     |
+| `export`      | `ex`     |
 | `find`        | `fd`     |
-| `filter`        | `f`      |
+| `filter`      | `f`      |
 | `view`        | `v`      |
-| `addGrade`        | `ag`     |
-| `removeGrade`        | `rg`     |
-| `delete`        | `rm`     |
+| `addGrade`    | `ag`     |
+| `removeGrade` | `rg`     |
+| `delete`      | `rm`     |
 | `edit`        | `e`      |
-| `GitHub`        | `git`    |
+| `gitHub`      | `git`    |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -443,7 +448,9 @@ Opens a window at the side with the full details of the specified person from th
 * View the full details of the contact you specify.
 * `NAME` refers to the full name of the person shown in the displayed person list.
 * Calling `view` without any name parameter closes any windows previously opened by `view`.
+* Deleting or editing name of the current contact opened by `view` closes `view`.
   </box>
+
 
 <box type="definition" icon=":fa-solid-book:" light>
 
@@ -451,7 +458,7 @@ Opens a window at the side with the full details of the specified person from th
 
 * `view n/John Doe` opens a window at the side showing the full details of the person named `John Doe`.
 * Calling `view n/John Doe` followed by `view` closes the window showing the full contact details of `John Doe`.
-  ![viewing John Doe's contact detail in the view window](images/viewWindowScreenshot.png)
+  ![viewing John Doe's contact detail in the view window](images/quickStartLaunchScreenshot.png)
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -516,7 +523,7 @@ Unmarks a student as present for a particular week.
 
 <md>**Examples:**</md>
 
-* `unmarks n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
+* `unmark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
   ![result for unmark](images/markAlexAbsent.png)
   </box>
 
@@ -716,7 +723,10 @@ Adds an assignment and its grades to a contact.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
-* Assignments that can be added to a contact are specified in path `data/assignment.json`.
+* Assignments that can be added to a contact are specified in path `/data/assignment.json`.
+* If `assignment.json` is missing from `/data`, KonTActs will load a default assignment database.
+* `assignment.json` needs to be manually created in `/data`.
+* Each assignment must have a unique `ASSIGNMENT_NAME`.
 
   </box>
 

@@ -13,7 +13,9 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+* We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
+* ChatGPT was used to check for errors and generate some test cases.
 
 ---
 
@@ -254,12 +256,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Precondition**
 
-1. The task that the user wants to delete exists.
+1. The contact that the user wants to delete exists.
 
 **MSS**
 
-1. User indicates to delete a task.
-2. KonTActs deletes the tasks and indicates success.
+1. User indicates to delete a contact.
+2. KonTActs deletes the contact and indicates success.
 
    Use case ends.
 

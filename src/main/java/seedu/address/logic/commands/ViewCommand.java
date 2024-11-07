@@ -19,8 +19,8 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD_SHORT_FORM = "v";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
-            + ": Views details of a contact.\n"
+    public static final String MESSAGE_USAGE = "Views details of a contact.\n"
+            + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
             + "Parameters: "
             + PREFIX_NAME
             + "NAME\n"
@@ -31,7 +31,7 @@ public class ViewCommand extends Command {
             + "Example: "
             + COMMAND_WORD_SHORT_FORM
             + " "
-            + PREFIX_NAME + "John Doe";
+            + PREFIX_NAME.getShortPrefix() + "John Doe";
 
     public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact";
     public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact";
@@ -40,6 +40,8 @@ public class ViewCommand extends Command {
 
     private final Name personName;
     private final boolean isClose;
+
+
 
     /**
      * @param name Name of the contact.
@@ -73,15 +75,22 @@ public class ViewCommand extends Command {
             throw new CommandException("Person " + personName + " not in address book");
         }
 
+        return createCommandResult(model);
+    }
+
+    private CommandResult createCommandResult(Model model) {
         ObjectProperty<Person> person = new SimpleObjectProperty<>(model.getPerson(personName).orElseThrow());
-        model.getAddressBook().getPersonList().addListener((ListChangeListener<Person>) change -> {
+        ListChangeListener<Person> listener = change -> {
             while (change.next()) {
                 if (change.wasAdded() || change.wasRemoved()) {
                     person.set(null);
-                    model.getPerson(personName).ifPresentOrElse(person::set, () -> {});
+                    model.getPerson(personName).ifPresentOrElse(
+                            person::set, () -> {});
+
                 }
             }
-        });
+        };
+        model.getAddressBook().getPersonList().addListener(listener);
         return new CommandResult(VIEW_ACKNOWLEDGMENT, person, false);
     }
 
