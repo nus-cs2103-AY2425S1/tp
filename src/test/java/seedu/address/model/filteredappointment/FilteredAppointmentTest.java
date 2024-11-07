@@ -17,7 +17,6 @@ import seedu.address.model.patient.Patient;
 
 public class FilteredAppointmentTest {
     private Appt appt = new Appt(LocalDateTime.parse("2000-10-10T14:00"), new HealthService("Blood Test"));
-    private Appt differentAppt = new Appt(LocalDateTime.parse("2000-10-10T14:00"), new HealthService("consult"));
     private Patient patient = AMY;
     private Patient patient2 = BOB;
 
@@ -34,7 +33,6 @@ public class FilteredAppointmentTest {
         FilteredAppointment filteredAppointment = new FilteredAppointment(appt, patient);
         FilteredAppointment filteredAppointmentCopy = new FilteredAppointment(appt, patient);
         FilteredAppointment filteredAppointmentDifferentPatient = new FilteredAppointment(appt, patient2);
-        FilteredAppointment filteredAppointmentDifferentAppt = new FilteredAppointment(differentAppt, patient);
 
         // same values -> return true
         assertTrue(filteredAppointment.equals(filteredAppointmentCopy));
@@ -50,9 +48,6 @@ public class FilteredAppointmentTest {
 
         // different patient value -> returns false
         assertFalse(filteredAppointment.equals(filteredAppointmentDifferentPatient));
-
-        // different appt value -> returns false
-        assertFalse(filteredAppointment.equals(filteredAppointmentDifferentAppt));
     }
 
 

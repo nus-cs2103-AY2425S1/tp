@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PATIENT_NRIC = "The patient with the NRIC %1$s does not exist in the "
             + "system.";
     public static final String MESSAGE_INVALID_APPT_DATETIME = "The appointment with the date and time"
-            + "does not exist for this patient.";
+            + " does not exist for this patient.";
     public static final String MESSAGE_INVALID_ALLERGY_TO_DELETE = "The allergy \"%1$s\" cannot be deleted as it is "
             + "not an allergy of this patient.";
     public static final String MESSAGE_INVALID_ALLERGY_TO_ADD = "The allergy \"%1$s\" already exists for this patient.";
