@@ -26,8 +26,7 @@ public class UnassignContactFromWeddingCommandParser implements Parser<UnassignC
 
         if (!multimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Wedding indexes are not required in the unassign command, "
-                            + "view a wedding to unassign contacts from it."));
+                    UnassignContactFromWeddingCommand.MESSAGE_USAGE));
         }
 
         //Reformatting error message for duplicate c/ instances

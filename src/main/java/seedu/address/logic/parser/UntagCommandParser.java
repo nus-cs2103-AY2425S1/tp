@@ -45,7 +45,7 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException("Error: " + Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".");
+            throw new ParseException("Error: " + Messages.MESSAGE_INVALID_NEGATIVE_INDEX);
         }
 
         if (argMultimap.getAllValues(PREFIX_TAG).size() == 1
