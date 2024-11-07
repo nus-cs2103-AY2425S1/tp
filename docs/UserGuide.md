@@ -168,9 +168,8 @@ Format: `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/Tag`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Only full words will be matched for room_number and phone_number, the arguments
   should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER
-
-* Order of the tags do not matter `t/friends colleagues` works the same
-  as `t/colleagues friends`
+* Order of the tags do not matter `t/friends t/colleagues` works the same
+  as `t/colleagues t/friends`
 
 Examples:
 * `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues`  
