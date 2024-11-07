@@ -990,11 +990,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-<<<<<<< HEAD
-2.  Should be able to hold up to 100 persons without a noticeable sluggishness in performance for typical usage.
-=======
 2.  Should be able to hold up to 400 students' information without a noticeable sluggishness in performance for typical usage.
->>>>>>> f8d0a4526ffd5c0a5c16e1800ab6ce33d5fccf50
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should retrieve and display student information for typical queries within 2 seconds.
 6. Data should be stored in a local human text editable file.
