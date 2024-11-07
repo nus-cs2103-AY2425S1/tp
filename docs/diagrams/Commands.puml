@@ -25,6 +25,14 @@ class UndoCommand {
     # boolean requiresCommit()
 }
 
+class RedoCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    + CommandResult executeCommand(Model)
+    # boolean requiresCommit()
+}
+
 class HelpCommand {
     + {static} String COMMAND_WORD
     + {static} String MESSAGE_USAGE
@@ -110,18 +118,49 @@ class EditCommand {
     + String toString()
 }
 
+class MarkAttendanceCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    + CommandResult executeCommand(Model)
+    # boolean requiresCommit()
+}
+
+class UnmarkAttendanceCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    + CommandResult executeCommand(Model)
+    # boolean requiresCommit()
+}
+
+class ResetAttendanceCommand {
+    + {static} String COMMAND_WORD
+    + {static} String MESSAGE_USAGE
+    + {static} String MESSAGE_SUCCESS
+    + CommandResult executeCommand(Model)
+    # boolean requiresCommit()
+}
+
 ' Inheritance relationships from the abstract Command class
 Command <|-- ClearCommand
-Command <|-- UndoCommand
-Command <|-- HelpCommand
-Command <|-- ExitCommand
-Command <|-- FindCommand
-Command <|-- AddStudentCommand
-Command <|-- AddTeacherCommand
-Command <|-- ListCommand
-Command <|-- SortCommand
-Command <|-- DeleteCommand
-Command <|-- EditCommand
+Command <|-down- UndoCommand
+Command <|-down- RedoCommand
+Command <|-down- HelpCommand
+Command <|-down- ExitCommand
+
+Command <|-up- FindCommand
+Command <|-u- AddStudentCommand
+Command <|-u- AddTeacherCommand
+Command <|-u- ListCommand
+Command <|-u- SortCommand
+
+Command <|-d- DeleteCommand
+Command <|-d- EditCommand
+Command <|-u- MarkAttendanceCommand
+Command <|-u- UnmarkAttendanceCommand
+Command <|-u- ResetAttendanceCommand
+
 
 ' Exception handling
 exceptions.Exception <|-- exceptions.CommandException
