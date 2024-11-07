@@ -239,7 +239,7 @@ How this feature works:
 1. Every minute, UI calls `Person#nextLessonBasedOnCurrentTime` on every student to consistently keep track of a students next lesson
 1. `Person#nextLessonBasedOnCurrentTime` calls `Lesson#durationTillLesson` for all of student's lessons which returns `Duration` objects
 1. Then leverage `Duration#compareTo` to get the lesson with the shortest duration
-1. Return lesson with shortest duration or `null` if student has no lessons
+1. `Person#nextLessonBasedOnCurrentTime` returns lesson with shortest duration or `null` if student has no lessons
 
 
 ### Display feature
@@ -468,14 +468,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. App displays all students address book in alphabetical order
 3. Use case ends
 
-**Use case: UC3 - Delete a person**
+**Use case: UC3 - Delete a student**
 
 **MSS**
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons <u>(UC2)</u>
 3.  User types keyword followed by delete index or name
-4.  AddressBook deletes the person
+4.  AddressBook deletes the student
 5. Use case ends
 
 
@@ -494,6 +494,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 3b1 AddressBook shows an error message.
   - 3b2. Use case resumes from step 2
 
+**Use case: UC4 - Add a lesson to a student**
+
+**MSS**
+
+1. User requests to list persons
+1. AddressBook shows a list of persons <u>(UC2)</u>
+1. User types keyword followed by index then lesson day and time
+1. AddressBook adds lesson to student
+
+**Extensions**
+
+* 3a. The lesson clashes with an existing lesson(s)
+
+   * 3a1. AddressBook shows error message with timings of the lessons that it clashes with
+
+   Use case resumes at step 2
+
+* 3b. The lesson has invalid day or times
+
+   * 3b1. AddressBook shows error message specifying the error
+
+   Use case resumes at step 2
+
+* 3c. The given index is invalid.
+
+   * 3c1. AddressBook shows an error message.
+
+   Use case resumes at step 2
 
 ### Non-Functional Requirements
 
