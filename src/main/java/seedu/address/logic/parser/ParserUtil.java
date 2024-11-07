@@ -18,6 +18,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index provided is invalid.";
+    public static final String MESSAGE_INVALID_INPUT = "Input is not of the correct format.";
 
     /**
      * Checks if a given string is of the form "px", where "x" is an integer of up to 3 digits.
@@ -27,9 +28,9 @@ public class ParserUtil {
      */
 
     public static boolean isValidInput(String input) {
-        // The pattern matches 'p' or 'o' followed by an integer (1 to 3 digits)
-        String pattern1 = "^p\\d{1,3}$";
-        String pattern2 = "^o\\d{1,3}$";
+        // The pattern matches 'p' or 'o' followed by an optional '-' and then an integer (1 to 3 digits)
+        String pattern1 = "^p-?\\d{1,3}$";
+        String pattern2 = "^o-?\\d{1,3}$";
         return input.matches(pattern1) || input.matches(pattern2);
     }
 
@@ -41,12 +42,14 @@ public class ParserUtil {
     public static Pair parseIndexAndType(String oneBasedIndexAndType) throws ParseException {
         String trimmedIndex = oneBasedIndexAndType.trim();
         if (!isValidInput(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INPUT);
+        }
+        if (Integer.parseInt(trimmedIndex.substring(1)) <= 0) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         Pair res = new Pair(Index.fromOneBased(Integer.parseInt(trimmedIndex.substring(1))),
                 Character.toString(trimmedIndex.charAt(0)));
         return res;
-        //return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
