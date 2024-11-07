@@ -54,6 +54,7 @@ public class Telegram {
         }
 
         Telegram otherTelegram = (Telegram) other;
+        System.out.println(value.equals(otherTelegram.value));
         return value.equals(otherTelegram.value);
     }
 
