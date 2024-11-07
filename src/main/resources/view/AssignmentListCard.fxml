@@ -25,10 +25,11 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="assignmentId" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true" />
       </HBox>
-      <Label fx:id="projectId" styleClass="cell_small_label" text="\$projectId" />
-      <Label fx:id="employeeId" styleClass="cell_small_label" text="\$employeeId" />
+      <Label fx:id="assignmentId" styleClass="cell_small_label" text="\$assignmentId" wrapText="true" />
+      <Label fx:id="projectId" styleClass="cell_small_label" text="\$projectId" wrapText="true" />
+      <Label fx:id="employeeId" styleClass="cell_small_label" text="\$employeeId" wrapText="true" />
     </VBox>
   </GridPane>
 </HBox>
