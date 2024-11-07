@@ -15,6 +15,12 @@ pageNav: 3
 ### Use of Generative AI
 Generative AI tools, including ChatGPT, were heavily used for creating detailed Javadocs, commit messages, test suite creation and occasional code refactoring throughout the development of ClientGrid.
 
+### Mockito
+[Mockito](https://site.mockito.org/) has been used to mock unit tests.
+
+### AB3
+Aspects of the original [AB3](https://nus-cs2103-ay2425s1.github.io/tp/) has been reused in our code.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -207,7 +213,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClientGrid` and the **Actor** is the `real estate agent`, unless specified otherwise)
 
-**Use case: UC1 - List existing buyers, sellers, clients (i.e., buyers and sellers combined), properties, or meetings in ClientGrid**
+**Use case: UC1 - List existing buyers, sellers, clients (i.e. buyers and sellers combined), properties, or meetings in ClientGrid**
 
 MSS:
 1. Real estate agent requests to view a list of buyers, sellers, clients (i.e., buyers and sellers combined), properties, or meetings.
@@ -217,12 +223,16 @@ MSS:
 Extensions:
 
 * 1a. ClientGrid detects that there are no existing records for the specified key.
+
     * 1a1. ClientGrid responds by indicating that there are no existing entries for that key yet.
+  
       Use case ends.
 
 * 1b. ClientGrid detects an invalid key, multiple keys, or additional inputs beyond the valid command.
-    * 1b1. ClientGrid displays an error message informing the real estate agent of the correct command usage, specifying that only one of the following valid keys is allowed: `buyers`, `sellers`, `clients`, `properties`, or `meetings`.
-      Use case ends.
+
+    * 1b1. ClientGrid displays an error message informing the real estate agent of the correct command usage, specifying that only one of the following valid keys is allowed: `buyers`, `sellers`, `clients`, `properties`, or `meetings`. 
+  
+       Use case ends.
 
 **Use case: UC2 - Add Buyer/ Seller**
 
@@ -483,8 +493,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Use the `exit` command or press the red button at the top left hand corner of the application window to close the application.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
