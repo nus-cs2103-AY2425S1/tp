@@ -24,7 +24,6 @@ public class ListProjectsCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook());
         expectedModel = new ModelManager(model.getAddressBook(), model.getCommandTextHistory(), new UserPrefs());
-        ListProjectsCommand.setFeedbackToUser(model.getFilteredProjectList().size());
     }
 
     @Test
