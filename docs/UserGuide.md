@@ -93,11 +93,11 @@ Examples:
 * `help add`
 * `help edit`
 
-### Adding a person : `add`
+### Adding a person: `add`
 
 Adds a person to SocialBook.
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE OF BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY SIZE = 1] [r/REMARK] [t/TAG]...​`
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [r/REMARK] [t/TAG]...​`
 * Parameters can be inputted in any order.
 * Duplicated names are not allowed to be added.
 * Blank parameters are not allowed.
@@ -146,7 +146,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Finding persons : `find`
+### Finding persons: `find`
 
 Finds persons that match the specified filters.
 
@@ -182,7 +182,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
-### Getting the parameters of these people : `get` 
+### Getting the parameters of these people: `get` 
 
 Gets the specified parameters of each individual person in current person list.
 
@@ -399,7 +399,7 @@ Format: `unarchive INDEX`
 Examples:
 * `list archive/` followed by `unarchive 1` unarchives the 1st person in the address book.
 
-### Undo the previous command : `undo`
+### Undo the previous command: `undo`
 
 Undoes the previous command from SocialBook.
 
