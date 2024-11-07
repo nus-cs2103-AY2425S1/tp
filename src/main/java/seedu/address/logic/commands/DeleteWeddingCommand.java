@@ -16,10 +16,10 @@ import seedu.address.model.wedding.Wedding;
 public class DeleteWeddingCommand extends Command {
     public static final String COMMAND_WORD = "del-wed";
     public static final String COMMAND_WORD_SHORT = "dw";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD_SHORT
-            + ": Deletes the wedding identified by the wedding name used in the address book.\n";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + " OR " + COMMAND_WORD_SHORT
+            + ": Deletes the wedding identified by the wedding name used in the address book.";
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: w/NAME & NAME\n"
+            + "\nParameters: w/NAME & NAME\n"
             + "Example: " + COMMAND_WORD_SHORT + " w/Jonus Ho & Izzat Syazani";
     public static final String MESSAGE_NO_MATCH_FOUND = """
             No wedding with the name '%1$s' found.

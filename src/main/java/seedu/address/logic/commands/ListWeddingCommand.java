@@ -12,7 +12,8 @@ public class ListWeddingCommand extends Command {
 
     public static final String COMMAND_WORD = "list-wed";
     public static final String COMMAND_WORD_SHORT = "lw";
-    public static final String COMMAND_FUNCTION = COMMAND_WORD_SHORT + ": Lists out the entire wedding book.";
+    public static final String COMMAND_FUNCTION = COMMAND_WORD + " OR "
+            + COMMAND_WORD_SHORT + ": Lists out the entire wedding book.";
     public static final String MESSAGE_SUCCESS = "Listed all weddings";
     public static final String MESSAGE_EMPTY = " Your wedding book is empty";
 
