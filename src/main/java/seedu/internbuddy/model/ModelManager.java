@@ -113,8 +113,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void hideAllDetails() {
-        addressBook.hideAllDetails();
+    public void hideAppDetailsForAll() {
+        addressBook.hideAppDetailsForAll();
     }
 
     @Override

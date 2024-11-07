@@ -139,10 +139,10 @@ public class JsonAdaptedCompany {
 
         final Boolean modelIsFavourite = isFavourite;
 
-        final Boolean modelIsShowingDetails = isShowingDetails;
+        // final Boolean modelIsShowingDetails = isShowingDetails;
 
         return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelStatus, modelApplications, modelIsFavourite, modelIsShowingDetails);
+            modelStatus, modelApplications, modelIsFavourite, false);
     }
 
 }

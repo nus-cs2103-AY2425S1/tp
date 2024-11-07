@@ -159,7 +159,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void hideAllDetails() {
+        public void hideAppDetailsForAll() {
             throw new AssertionError("This method should not be called.");
         }
 

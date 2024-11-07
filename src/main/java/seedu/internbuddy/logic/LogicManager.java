@@ -47,7 +47,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        model.hideAllDetails();
+        model.hideAppDetailsForAll();
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 

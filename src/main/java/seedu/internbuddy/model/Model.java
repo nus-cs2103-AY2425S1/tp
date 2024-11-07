@@ -86,7 +86,7 @@ public interface Model {
      */
     void updateFilteredCompanyList(Predicate<Company> predicate);
 
-    void hideAllDetails();
+    void hideAppDetailsForAll();
 
     void viewAppDetails(Company company);
 }
