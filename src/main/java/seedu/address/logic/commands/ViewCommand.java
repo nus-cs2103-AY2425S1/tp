@@ -82,6 +82,11 @@ public class ViewCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Generates a success message for viewing the patient.
+     * @param patient Patient to be viewed.
+     * @return Success message.
+     */
     private String generateSuccessMessage(Patient patient) {
         assert patient != null : "Patient should not be null when generating success message";
         return String.format(MESSAGE_VIEW_SUCCESS, patient.getName());

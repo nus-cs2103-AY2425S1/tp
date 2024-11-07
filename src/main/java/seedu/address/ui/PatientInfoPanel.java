@@ -79,7 +79,7 @@ public class PatientInfoPanel extends UiPart<Region> {
     /**
      * Creates a new PatientInfoPanel.
      *
-     * @param patient
+     * @param patient Patient to display information of.
      */
     public PatientInfoPanel(Patient patient) {
         super(FXML);
@@ -93,6 +93,10 @@ public class PatientInfoPanel extends UiPart<Region> {
         logger.info("PatientInfoPanel initialized successfully for patient: " + patient.getNric());
     }
 
+    /**
+     * Sets the content of the PatientInfoPanel.
+     * @param patient Patient to display information of.
+     */
     private void setPatientInfoContent(Patient patient) {
         name.setText("Name: " + (patient.getName() == null ? "" : patient.getName().toString()));
         nric.setText("NRIC: " + patient.getNric().toString());
