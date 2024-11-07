@@ -5,10 +5,10 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
-//Solution below inspired by ChatGPT
 /**
  * A UI component that displays detailed information of a selected {@code Person}.
  */
@@ -19,7 +19,7 @@ public class PersonPane extends UiPart<VBox> {
     public final Person person;
 
     @FXML
-    private VBox cardPane;
+    private GridPane view;
     @FXML
     private Label name;
     @FXML
