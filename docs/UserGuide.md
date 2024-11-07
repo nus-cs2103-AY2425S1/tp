@@ -115,8 +115,10 @@ A client can have any number of tags (including no tags)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/looking for HDB`
-* `add n/Betsy Crowe t/condo e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/looking for HDB` adds a client named `John Doe` with a phone number of `98765432`, an email of `johnd@example.com`, an address of `John street, block 123, #01-01` and a remark of `looking for HDB`.
+
+
+* `add n/Betsy Crowe t/condo e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567` adds a client named `Betsy Crowe` with a tag of `Condo`, and email of `betsycrowe@example.com`, an address of `Flatbush Avenue, block 81, #02-02` and a phone number of `1234567`.
 
 Visual example of correct output:
 
@@ -143,9 +145,13 @@ Use `t/` to add new tags and `dt/` to delete specific tags from a person.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
-* `edit 2 t/condo` Adds the tag `condo` to the 2nd client
+* `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the `1st` client to be `91234567` and `johndoe@example.com` respectively.
+
+
+* `edit 2 n/Betsy Crower t/` edits the name of the `2nd` client to be `Betsy Crower` and clears all existing tags.
+
+
+* `edit 2 t/condo` edits the tag of the `2nd` client to be `condo`.
 
 Visual example of correct output:
 
@@ -167,7 +173,9 @@ Use the `list` or `find` command to determine the `INDEX` of the person you want
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd client in PROperty.
+* `list` followed by `delete 2` deletes the 2nd client listed in PROperty.
+
+
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 Visual example of correct output:
@@ -184,19 +192,27 @@ Format: `list`
 Use `list` for a quick overview of all your contacts. 
 </div>
 
+Example:
+
+* `list` shows your full client listing in PROperty.
+
 Visual example of correct output:
 
 ![ListCommandShowcase.png](images/user-guide-images/ListCommandShowcase.png)
 
 ### Sorting all clients : `sort`
 
-Sorts the list of all clients in the address book by name in alphabetical order.
+Sorts the list of all clients in PROperty by name in alphabetical order.
 
 Format: `sort`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Sorting is helpful after adding or editing many contacts so that your data remains neat. 
 </div>
+
+Example:
+
+* `sort` sorts all your client list in PROperty in alphabetical order.
 
 Visual example of correct output:
 
@@ -219,6 +235,9 @@ Use `show` to view a person in-depth.
 Examples:
 
 - `show 2` shows the name, client information, tags, and property listings of the second client in the PROperty.
+
+
+- `show 7` shows the name, client information, tags, and property listings of the seventh client in the PROperty.
 
 Visual example of correct output:
 
@@ -248,10 +267,16 @@ Use `find s/KEYWORD` if you have contacts with very similar names.
 
 Examples:
 
-* `find John` returns `John` and `John Doe`.
-* `find s/John` returns only `John`.
-* `find alex david` returns `Alex Yeoh`, `David Li`.
-* `find s/Alex Yeoh s/23 Smith Street` returns `Alex Yeoh` who has `23 Smith Street` as his address.
+* `find John` is a general find which returns `John` and `John Doe`.
+
+
+* `find s/John` is a specific find which only returns `John`.
+
+
+* `find alex david` is a general find which returns `Alex Yeoh`, `David Li`.
+
+
+* `find s/Alex Yeoh s/23 Smith Street` is a specific find which only returns `Alex Yeoh` who has `23 Smith Street` as his address.
 
 Visual example of correct output (General Find):
 
@@ -279,6 +304,8 @@ Tags make it easy for you to categorise your contacts into different groups.
 Examples:
 
 * `findtag HDB` returns clients tagged with `HDB`.
+
+
 * `findtag HDB buyer` returns clients tagged with either `HDB` or `buyer`.
 
 Visual example of correct output:
@@ -294,6 +321,10 @@ Format: `clear`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 `clear` cannot be undone! 
 </div>
+
+Example:
+
+* `clear` clears all clients and their data from PROperty.
 
 Visual example of correct output:
 
@@ -316,8 +347,10 @@ Remarks are useful for adding free-form details to a contact.
 
 Examples:
 
-* `remark 1 r/Prefers a higher floor apartment` adds a remark "Prefers a higher floor apartment" to the client at index `1`
-* `remark 1 r/` deletes the remark of client at index `1`
+* `remark 1 r/Prefers a higher floor apartment` adds a remark "Prefers a higher floor apartment" to the client at index `1`.
+
+
+* `remark 1 r/` deletes the remark of client at index `1`.
 
 Visual example of correct output (Add Remark):
 
@@ -340,7 +373,10 @@ Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 
 Examples:
 
-- `listing add 1 t/condo a/NUS street 123` adds a property listing to the client at index `1` with a listing type of `condo` and address of `NUS street 123`
+- `listing add 1 t/condo a/NUS street 123` adds a property listing to the client at index `1` with a listing type of `condo` and address of `NUS street 123`.
+
+
+- `listing add 2 t/HDB a/Clementi Road 321` adds a property listing to the client at index `2` with a listing type of `HDB` and address of `Clementi Road 321`. 
 
 Visual example of correct output:
 
@@ -359,7 +395,10 @@ Format: `listing delete INDEX LISTING_INDEX`
 
 Examples:
 
-- `listing delete 1 1` deletes the `1`st property listing from the client with index `1`
+- `listing delete 1 1` deletes the `1st` property listing from the client with index `1`.
+
+
+- `listing delete 2 3` deletes the `3rd` property listing from the client with index `2`.
 
 Visual example of correct output:
 
@@ -378,6 +417,9 @@ Format: `export`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 `export` is useful if you want to view your contacts in Excel.
 </div>
+Example:
+
+- `export` exports your current client data in PROperty into a CSV file.
 
 Visual example of correct output:
 
@@ -391,11 +433,19 @@ Format: `exit`
 
 * There is no visual example as the programme will close after inputting the `exit` command.
 
+Example:
+
+* `exit` exits PROperty.
+
 ### Open help menu: `help`
 
 Shows commands in a help menu for quick reference during use of PROperty.
 
 Format: `help`
+
+Example:
+
+- `help` results in a popup window which contains all the commands in PROperty for easy reference during use.
 
 Visual example of correct output:
 
