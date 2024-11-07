@@ -150,6 +150,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 `e` can be used in place of `edit`.
 
 #### Parameters
+
 | Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                                       |
 |----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `INDEX`        |        | Yes         | Edits the person at the specified `INDEX`.<br/> The index refers to the index number shown in the displayed person list.<br/> The index **must be a positive integer** (e.g. 1, 2, 3, …​, 2147483647).        |
@@ -160,6 +161,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE]…​
 | `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.<br/> When editing roles, the existing roles of the person will be removed. I.e. Adding of roles is *not* cumulative. |
 |                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                                  |
 |                | `nf/`  | No          | Represents unfavouriting of a contact. <br/> This keyword should be included only if you intend for this contact to be unfavourited.                                                                          |
+
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Only one of `f/` or `nf/` should be present in the command at once, not both.
@@ -193,6 +195,7 @@ When using `find`, at least **one** of the optional parameters must be included.
 `f` can be used in place of `find`.
 
 #### Parameters
+
 | Parameter         | Prefix | Compulsory? | Remarks                                                                                                                                                                    |
 |-------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `NAMEKEYWORD`     | `n/`   | No          | Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name                                                                                 |
@@ -236,6 +239,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 `so` can be used in place of `sort`
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                    |
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `ORDER`   |        | Yes         | `ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts. |
@@ -260,6 +264,7 @@ delete INDEX
 `d` can be used in place of `delete`.
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                   |
 |-----------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------|
 | `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> The index **must be a positive integer**, e.g. 1, 2, 3, …​, 2147483647. |
@@ -303,6 +308,7 @@ mark t/TELEGRAM…​ d/DATE
 `m` can be used in place of `mark`.
 
 #### Parameters
+
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
@@ -336,6 +342,7 @@ unmark t/TELEGRAM…​ d/DATE
 
 
 #### Parameters
+
 | Parameter  | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                                                                                            |
 |------------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> `mark` accepts multiple handles separated by spaces, each beginning with `t/`. E.g. `... t/usera t/userb ...`.<br/> **Only telegram handles of contacts with the role of `Member` can be marked.** |
@@ -400,6 +407,7 @@ switch PROFILE
 `sw` can be used in place of `switch`
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                                                        |
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
@@ -422,6 +430,7 @@ deleteProfile PROFILE
 `delp` can be used in place of `deleteProfile`
 
 #### Parameters
+
 | Parameter | Prefix | Compulsory? | Remarks                                                                                                                                                                                                                                                            |
 |-----------|--------|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `deleteProfile` will attempt to delete.<br/> `PROFILE` must meet all requirements from the `switch` command, and should be an existing profile. <br/> Additionally, `PROFILE` must not refer to the currently active profile. |
