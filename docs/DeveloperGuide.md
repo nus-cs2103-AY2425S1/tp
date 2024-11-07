@@ -357,7 +357,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 3b. User enters a duplicate name.
-    * 3b1. System displays an error message notifying that the name already exists in the system.<br>
+    * 3b1. System displays an error message notifying that the name already exists in the system.
       Use case ends.
 
 
