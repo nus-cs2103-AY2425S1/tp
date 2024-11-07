@@ -820,7 +820,7 @@ This means that your machine is running Java version 17.0.11, which means that J
 >:information_source: **Note**
 >Linux users with Wayland compositors should install OpenJFX 21 for compatibility.
 
-[Return to Quick Start](#Quick-Start)
+[Return to Quick Start](#quick-start)
 
 #### **Q**: Is there a limit to the number of patients/appointments we can add?
  - **A**: As of right now, We do not have a limit to the number of patients/appointments but is dependent on the hardware specification.
