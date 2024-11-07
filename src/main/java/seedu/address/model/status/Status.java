@@ -38,7 +38,7 @@ public class Status {
      */
     public static boolean isValidStatus(String test) {
         if (test.isEmpty()) {
-            return true; // assign NA
+            return false;
         }
         for (StatusEnum currentEnum: StatusEnum.values()) {
             if (currentEnum.name().equals(test.toUpperCase())) {
