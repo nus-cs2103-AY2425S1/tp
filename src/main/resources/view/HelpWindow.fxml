@@ -30,7 +30,7 @@
                 <Insets right="5.0" />
               </HBox.margin>
             </Label>
-            <Button fx:id="urlButton" mnemonicParsing="false" onAction="#openUrlInBrowser" text="Open In Browser">
+            <Button fx:id="urlButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy the URL">
               <HBox.margin>
                 <Insets left="5.0" />
               </HBox.margin>

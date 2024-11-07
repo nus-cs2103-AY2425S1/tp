@@ -10,6 +10,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -119,5 +121,14 @@ public class HelpWindow extends UiPart<Stage> {
         } catch (IOException | URISyntaxException e) {
             logger.warning("Failed to open URL: " + USERGUIDE_URL);
         }
+    }
+
+    @FXML
+    private void copyUrl() {
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(USERGUIDE_URL);
+        clipboard.setContent(content);
+        System.out.println("URL copied to clipboard: " + USERGUIDE_URL);
     }
 }

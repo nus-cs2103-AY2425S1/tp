@@ -29,6 +29,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
+
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -36,6 +38,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -79,12 +83,18 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
-        String validExpectedPersonString = NAME_DESC_BOB + SEX_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+
+        String validExpectedPersonString = NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // multiple roles
+        assertParseFailure(parser, ROLE_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
 
         // multiple phones
         assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
@@ -104,16 +114,22 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + SEX_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
-                        + ADDRESS_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_SEX, PREFIX_ADDRESS, PREFIX_EMAIL,
-                        PREFIX_PHONE));
+
+                validExpectedPersonString + SEX_DESC_AMY + PHONE_DESC_AMY + ROLE_DESC_AMY + EMAIL_DESC_AMY
+                        + NAME_DESC_AMY + ADDRESS_DESC_AMY
+                        + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_SEX + PREFIX_ROLE, PREFIX_ADDRESS,
+                        PREFIX_EMAIL, PREFIX_PHONE));
 
         // invalid value followed by valid value
 
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // invalid role
+        assertParseFailure(parser, INVALID_ROLE_DESC + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
 
         // invalid email
         assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
@@ -136,6 +152,11 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // invalid role
+        assertParseFailure(parser, validExpectedPersonString + INVALID_ROLE_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ROLE));
+
 
         // invalid email
         assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
@@ -168,28 +189,38 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB,
+                expectedMessage);
+
+        // missing role prefix
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB,
+                expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
-                        + ADDRESS_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB
+                        + ADDRESS_DESC_BOB,
+                expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
-                        + ADDRESS_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB
+                        + ADDRESS_DESC_BOB,
+                expectedMessage);
 
         // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                        + VALID_ADDRESS_BOB, expectedMessage);
-
+        assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                        + VALID_ADDRESS_BOB,
+                expectedMessage);
+      
         // missing sex prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_SEX_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_SEX_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_SEX_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
-                        + VALID_ADDRESS_BOB, expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB
+                        + VALID_ADDRESS_BOB,
+                expectedMessage);
     }
 
     @Test
