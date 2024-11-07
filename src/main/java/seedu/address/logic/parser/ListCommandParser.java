@@ -48,7 +48,7 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListAllCommand();
         default:
             String exceptionMessage = String.format(Messages.MESSAGE_OPERATION_NOT_ALLOWED,
-                    AddCommand.COMMAND_WORD, entity);
+                    ListCommand.COMMAND_WORD, entity);
             throw new ParseException(exceptionMessage);
         }
     }
