@@ -456,7 +456,93 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
+**Use case: UC07 - Add Appointment**
+
+**MSS**
+
+1. Doctor submits new Appointment information tied to a patient
+2. WardWatch displays Appointment information tied to that patient
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The information format entered is invalid
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The Appointment date format is invalid.
+
+    * 2a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC08 - Delete Appointment**
+
+**MSS**
+
+1. Doctor request today's appointments
+2. WardWatch displays Appointments for the day
+3. Doctor request to delete a specific appointment tied to a patient
+4. WardWatch deletes Appointment
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The delete appointment command format entered is invalid
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 3.
+  
+* 3b. The Appointment does not exist
+*
+    * 2a1. WardWatch shows an error message.
+
+      Use case resumes at step 3.
+
+**Use case: UC09 - Change Appointment**
+
+**MSS**
+
+1. Doctor request to delete a specific appointment tied to a patient
+2. WardWatch deletes Appointment
+3. Doctor submits new Appointment information tied to a patient
+4. WardWatch displays Appointment information tied to that patient
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The information format entered is invalid
+
+    * 3a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC10 - See Schedule for a certain day**
+
+**MSS**
+
+1. Doctor request to see schedule for a certain day
+2. WardWatch displays all appointments for that day
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The date format is invalid
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+* 
+
+
+
 
 ### Non-Functional Requirements
 
