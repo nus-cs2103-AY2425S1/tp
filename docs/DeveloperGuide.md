@@ -312,9 +312,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. Some fields are invalid (e.g., name, phone, email).
-  * 2a1. AgentConnect shows an error message for the invalid fields.
-  * 2a2. User corrects the fields and resubmits the command.
-  * Use case resumes from step 2.
+    * 2a1. AgentConnect shows an error message for the invalid fields.
+    * 2a2. User corrects the fields and resubmits the command.
+    * Use case resumes from step 2.
 
 * 2b. Duplicate person detected (same name + address).
     * 2b1. AgentConnect shows a warning message about the duplicate entry.
@@ -335,13 +335,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. Contact not found (Invalid Index or Name).
-  * 2a1. AgentConnect shows an error message indicating Index or Name is invalid.
-  * 2a2. User can retry with a valid Index or valid Name.
-  * Use case resumes from step 2.
+    * 2a1. AgentConnect shows an error message indicating Index or Name is invalid.
+    * 2a2. User can retry with a valid Index or valid Name.
+    * Use case resumes from step 2.
 * 2b. Duplicate Person detected (same name)
-  * 2b1. AgentConnect updates the list in the GUI with the duplicates and prompts the user to delete by index.
-  * 2b2. User selects the index to delete the duplicate person.
-  * 2b3. Use case resumes from step 3.
+    * 2b1. AgentConnect updates the list in the GUI with the duplicates and prompts the user to delete by index.
+    * 2b2. User selects the index to delete the duplicate person.
+    * 2b3. Use case resumes from step 3.
 
 **Use case: Delete a policy**
 
@@ -355,13 +355,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. Client not found (Invalid Index).
-  * 2a1. AgentConnect shows an error message indicating Index is invalid.
-  * 2a2. User can retry with a valid Index.
-  * Use case resumes from step 2.
+    * 2a1. AgentConnect shows an error message indicating Index is invalid.
+    * 2a2. User can retry with a valid Index.
+    * Use case resumes from step 2.
 * 2b. Policy not found (Invalid policy Index).
-  * 2b1. AgentConnect shows an error message indicating policy Index is invalid.
-  * 2b2. User can retry with a valid policy Index.
-  * Use case resumes from step 2.
+    * 2b1. AgentConnect shows an error message indicating policy Index is invalid.
+    * 2b2. User can retry with a valid policy Index.
+    * Use case resumes from step 2.
 
 **Use case: Undo a Command**
 
@@ -376,8 +376,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. No commands to undo.
-  * 2a1. AgentConnect shows an error message indicating no commands to undo.
-  * Use case ends.
+    * 2a1. AgentConnect shows an error message indicating no commands to undo.
+    * Use case ends.
 
 **Use case: Redo a Command**
 
@@ -392,8 +392,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. No commands to redo.
-  * 2a1. AgentConnect shows an error message indicating no commands to redo.
-  * Use case ends.
+    * 2a1. AgentConnect shows an error message indicating no commands to redo.
+    * Use case ends.
 
 **Use case: Sort Clients**
 
@@ -408,10 +408,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-
 **Extensions**
 
-* 2a. Sorting parameter are missing or invalid (e.g., name, insurance type, address, policy renewal date).
+* 2a. Sorting parameter are missing or invalid (e.g., name, birthday, appointment date, policy payment due date).
     * 2a1. AgentConnect shows an error message for the invalid sorting parameter.
     * 2a2. User corrects the sorting parameter and resubmits the command.
     * Use case resumes from step 2.
@@ -421,6 +420,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User corrects the sorting order and resubmits the command.
     * Use case resumes from step 2.
 
+**Use case: Mark a policy payment installment of client as paid**
+
+**MSS**
+
+1. User marks a policy payment installment as paid by entering the paid command with the index of the client and the index of the policy.
+2. AgentConnect validates the input.
+3. AgentConnect updates the next policy payment due date of the client.
+4. AgentConnect shows a success message confirming the policy payment installment has been marked as paid.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Client not found (Invalid Index).
+    * 2a1. AgentConnect shows an error message indicating Index is invalid.
+    * 2a2. User can retry with a valid Index.
+    * Use case resumes from step 2.
+
+* 2b. Policy not found (Invalid policy Index).
+    * 2b1. AgentConnect shows an error message indicating policy Index is invalid.
+    * 2b2. User can retry with a valid policy Index.
+    * Use case resumes from step 2.
 
 **Use case: Edit Client Details**
 
