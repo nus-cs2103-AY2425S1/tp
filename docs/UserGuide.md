@@ -257,7 +257,8 @@ Finds vendors or events whose attributes contain any of the space-separated keyw
 #### Notes:
 * The search is case-insensitive. e.g. `party` will match `Party`
 * Any partial matches will still be matched e.g. `par` will match `party`
-* The order of the keywords does not matter. e.g. `party birthday` will match `birthday party`
+* The order of the keywords does not matter.
+  * e.g. searching with keywords `party birthday` will match result `birthday party`
 * All attributes of the `Vendor` or `Event` are searched, i.e. name, phone number, date, descriptions and tags.
 * Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
   * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
