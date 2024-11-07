@@ -20,7 +20,7 @@ Class Course
 Class Email
 Class Name
 Class Phone
-Class Tag
+Class Role
 Class Module
 Class Grade
 
@@ -46,7 +46,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *--> "*" Role
 Person *--> Course
 Person *--> Module
 
