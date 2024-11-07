@@ -31,7 +31,15 @@ public class FilterStatusCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        try {
+            model.updateFilteredPersonList(predicate);
+        } catch (Exception e) {
+            throw new CommandException("Error occurred while filtering persons by status.");
+        }
+
+        assert model.getFilteredPersonList() != null : "Filtered person list should not be null after update";
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
