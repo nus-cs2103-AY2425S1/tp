@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.listcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class ListProjectMembersCommand extends ListCommand {
     public static final String COMMAND_WORD = COMMAND_PREFIX + "projectmembers";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all members of the specified project.\n"
-            + "Parameters: PROJECT_NAME\n"
-            + "Example: " + COMMAND_WORD + " Alpha";
+            + "Parameters: " + PREFIX_PROJECT_NAME + "PROJECT_NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PROJECT_NAME + " Alpha";
 
     private final AssignmentProjectPredicate predicate;
 

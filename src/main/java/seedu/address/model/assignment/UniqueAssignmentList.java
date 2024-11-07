@@ -57,11 +57,10 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      * Returns true if the list contains an equivalent assignment as the given
      * argument.
      */
-    public boolean contains(ProjectId projectToCheck, EmployeeId employeeToCheck) {
-        requireNonNull(projectToCheck);
-        requireAllNonNull(employeeToCheck);
+    public boolean contains(ProjectId projectIdToCheck, EmployeeId employeeIdToCheck) {
+        requireAllNonNull(projectIdToCheck, employeeIdToCheck);
         return internalList.stream().anyMatch(assignment ->
-                assignment.isSameAssignment(projectToCheck, employeeToCheck));
+                assignment.hasSameId(projectIdToCheck, employeeIdToCheck));
     }
 
 
@@ -105,7 +104,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     public Assignment getAssignment(AssignmentId assignmentId) {
         requireNonNull(assignmentId);
         Assignment assignment = internalList.stream()
-                .filter(a -> a.isSameAssignment(assignmentId))
+                .filter(a -> a.hasSameId(assignmentId))
                 .findFirst().orElse(null);
         if (assignment == null) {
             throw new AssignmentNotFoundException();
@@ -121,7 +120,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         requireNonNull(employeeId);
         Assignment assignment = internalList
                 .stream()
-                .filter(a -> a.isSameAssignment(projectId, employeeId))
+                .filter(a -> a.hasSameId(projectId, employeeId))
                 .findFirst().orElse(null);
         if (assignment == null) {
             throw new AssignmentNotFoundException();
@@ -144,13 +143,12 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      * Removes the equivalent assignment from the list.
      * The assignment must exist in the list.
      */
-    public void remove(AssignmentId toRemove) {
-        requireNonNull(toRemove);
+    public void remove(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
         if (!internalList
                 .remove(internalList
                         .stream()
-                        .filter(assignment -> assignment
-                                .isSameAssignment(toRemove))
+                        .filter(assignment -> assignment.hasSameId(assignmentId))
                         .findFirst()
                         .orElse(null))) {
             throw new AssignmentNotFoundException();
@@ -165,7 +163,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         requireNonNull(projectId);
         requireAllNonNull(employeeId);
         if (!internalList.remove(internalList.stream().filter(assignment ->
-                assignment.isSameAssignment(projectId, employeeId))
+                assignment.hasSameId(projectId, employeeId))
                 .findFirst().orElse(null))) {
             throw new AssignmentNotFoundException();
         }

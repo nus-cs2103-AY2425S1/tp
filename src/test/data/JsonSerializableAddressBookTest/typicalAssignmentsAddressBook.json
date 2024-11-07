@@ -26,19 +26,19 @@
     }],
   "projects" : [ {
     "name" : "Project Alpha",
-    "id" : "A0276123J"
+    "id" : "1"
   } , {
     "name" : "Project Beta",
-    "id" : "A0276123K"
+    "id" : "2"
   }],
   "assignments": [ {
     "assignmentId": "1",
     "employeeId": "1",
-    "projectId": "A0276123J"
+    "projectId": "1"
   }, {
     "assignmentId": "2",
     "employeeId": "2",
-    "projectId": "A0276123K"
+    "projectId": "2"
   }]
 }
 

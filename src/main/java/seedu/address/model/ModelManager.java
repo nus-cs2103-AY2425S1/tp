@@ -250,6 +250,12 @@ public class ModelManager implements Model {
         addressBook.addAssignment(assignment);
     }
 
+    @Override
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        requireAllNonNull(target, editedAssignment);
+        addressBook.setAssignment(target, editedAssignment);
+    }
+
     // =========== CommandTextHistory ==============================================
 
     @Override
