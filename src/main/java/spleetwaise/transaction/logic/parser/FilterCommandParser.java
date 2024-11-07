@@ -67,42 +67,77 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         ArrayList<Predicate<Transaction>> filterSubPredicates = new ArrayList<>();
 
-        if (!argMultimap.getPreamble().isEmpty()) {
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            Person person = ParserUtil.getPersonByFilteredPersonListIndex(index);
-            filterSubPredicates.add(new PersonFilterPredicate(person));
-        }
+        parsePersonFilter(argMultimap, filterSubPredicates);
 
-        if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
-            Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-            filterSubPredicates.add(new AmountFilterPredicate(amount));
-        }
+        parseAmountFilter(argMultimap, filterSubPredicates);
 
-        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-            filterSubPredicates.add(new DescriptionFilterPredicate(description));
-        }
+        parseDescriptionFilter(argMultimap, filterSubPredicates);
 
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            filterSubPredicates.add(new DateFilterPredicate(date));
-        }
+        parseDateFilter(argMultimap, filterSubPredicates);
 
-        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            filterSubPredicates.add(new StatusFilterPredicate(status));
-        }
+        parseStatusFilter(argMultimap, filterSubPredicates);
 
-        if (argMultimap.getValue(PREFIX_AMOUNT_SIGN).isPresent()) {
-            AmountSignFilterPredicate amtSignPred = ParserUtil.parseAmountSign(
-                    argMultimap.getValue(PREFIX_AMOUNT_SIGN).get());
-            filterSubPredicates.add(amtSignPred);
-        }
+        parseAmountSignFilter(argMultimap, filterSubPredicates);
 
         assert !filterSubPredicates.isEmpty();
 
         FilterCommandPredicate filterPredicate = new FilterCommandPredicate(filterSubPredicates);
 
         return new FilterCommand(filterPredicate);
+    }
+
+    private static void parsePersonFilter(ArgumentMultimap argMultimap,
+                                          ArrayList<Predicate<Transaction>> filterSubPredicates)
+            throws ParseException {
+        if (!argMultimap.getPreamble().isEmpty()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Person person = ParserUtil.getPersonByFilteredPersonListIndex(index);
+            filterSubPredicates.add(new PersonFilterPredicate(person));
+        }
+    }
+
+    private static void parseAmountFilter(ArgumentMultimap argMultimap,
+                                          ArrayList<Predicate<Transaction>> filterSubPredicates)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
+            Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+            filterSubPredicates.add(new AmountFilterPredicate(amount));
+        }
+    }
+
+    private static void parseDescriptionFilter(ArgumentMultimap argMultimap,
+                                               ArrayList<Predicate<Transaction>> filterSubPredicates)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            filterSubPredicates.add(new DescriptionFilterPredicate(description));
+        }
+    }
+
+    private static void parseDateFilter(ArgumentMultimap argMultimap,
+                                        ArrayList<Predicate<Transaction>> filterSubPredicates) throws ParseException {
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            filterSubPredicates.add(new DateFilterPredicate(date));
+        }
+    }
+
+    private static void parseStatusFilter(ArgumentMultimap argMultimap,
+                                          ArrayList<Predicate<Transaction>> filterSubPredicates)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            filterSubPredicates.add(new StatusFilterPredicate(status));
+        }
+    }
+
+    private static void parseAmountSignFilter(ArgumentMultimap argMultimap,
+                                              ArrayList<Predicate<Transaction>> filterSubPredicates)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_AMOUNT_SIGN).isPresent()) {
+            AmountSignFilterPredicate amtSignPred = ParserUtil.parseAmountSign(
+                    argMultimap.getValue(PREFIX_AMOUNT_SIGN).get());
+            filterSubPredicates.add(amtSignPred);
+        }
     }
 }
