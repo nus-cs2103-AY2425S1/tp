@@ -328,7 +328,7 @@ Adds a patient and their relevant details to MediBase3.
 > :bulb: **Tip:**
 > 
 > * Remember that `NRIC` and `GENDER` are case-insensitive.
->  - e.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
+>   -  e.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
 > * Made a mistake or a typo? You can use the [`edit` command](#editing-a-patient--edit) to update the patient's details.
 
 [Back to Table of Contents](#table-of-contents)
@@ -344,7 +344,7 @@ Removes a patient and their details from MediBase3.
 > 
 > * Deletes the patient with the specified `NRIC` from MediBase3.
 > * The `NRIC` provided must be complete, 
->  - e.g. `S1234567A` (not partial, like `S123`).
+>   - e.g. `S1234567A` (not partial, like `S123`).
 > * You can delete a patient even if they’re not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for NRIC constraints.
 
@@ -370,9 +370,9 @@ Edits an existing patient details in MediBase3.
 > 
 > * Edits the patient with the specified `NRIC` in MediBase3.
 > * The NRIC provided must be the full NRIC of the patient to be edited. 
->  - e.g. `S1234567A` and not `S123`.
+>   - e.g. `S1234567A` and not `S123`.
 > * **At least one** of the optional fields must be provided. 
->  - e.g. `edit S1234567A` is invalid.
+>   - e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
 > * You can edit a patient's details even if they’re not currently displayed in the Patient List Panel but doing so will refresh the panel to display all patients after the patient's details have been edited.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
@@ -478,7 +478,7 @@ Adds one or more medical conditions to an existing patient in MediBase3.
 >
 > * Adds the specified `CONDITION` to the patient identified by `NRIC` in MediBase3.
 > * **At least one** `CONDITION` must be provided. 
->  - e.g. `addMedCon i/S1234567A` is invalid.
+>   - e.g. `addMedCon i/S1234567A` is invalid.
 > * Each medical condition can only be added once per patient.
 > * You can add a medical condition even if the patient is not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
@@ -493,9 +493,9 @@ Adds one or more medical conditions to an existing patient in MediBase3.
 > :bulb: **Tip:**
 > 
 > * `CONDITION` is case-insensitive.
->  - e.g. `addMedCon i/S1234567A c/Flu` will add the medical condition `FLU` to the patient with the NRIC `S1234567A`.
+>   - e.g. `addMedCon i/S1234567A c/Flu` will add the medical condition `FLU` to the patient with the NRIC `S1234567A`.
 > * You can add multiple medical conditions to a patient by using multiple `c/CONDITION`parameters
->  - e.g. `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+>   - e.g. `addMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -510,7 +510,7 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 >
 > * Deletes the specified `CONDITION` from the patient identified by `NRIC` in MediBase3.
 > * **At least one** `CONDITION` must be provided. 
->  - e.g. `delMedCon i/S1234567A` is invalid.
+>   - e.g. `delMedCon i/S1234567A` is invalid.
 > * The patient must have the specified condition for it to be removed; otherwise, an error message will display.
 > * You can delete a medical condition even if the patient is not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
@@ -521,9 +521,9 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 {: .alert .alert-success}
 > :bulb: **Tip:**
 > * `CONDITION` is case-insensitive.
->  - e.g. `delMedCon i/S1234567A c/Flu` will delete the medical condition `FLU` from the patient with the NRIC `S1234567A`.
+>   - e.g. `delMedCon i/S1234567A c/Flu` will delete the medical condition `FLU` from the patient with the NRIC `S1234567A`.
 > * You can delete multiple medical conditions from a patient by using multiple `c/CONDITION`parameters
->  - e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
+>   - e.g. `delMedCon i/S1234567C c/High Blood Pressure c/Osteoporosis`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -542,7 +542,7 @@ Adds one or more allergies to an existing patient in MediBase3.
 >
 > * Adds the specified `ALLERGY` to the patient identified by `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. 
->  - e.g. `addAllergy i/S1234567A` is invalid.
+>   - e.g. `addAllergy i/S1234567A` is invalid.
 > * Each allergy can only be added once per patient.
 > * You can add an allergy even if the patient is not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
@@ -556,9 +556,9 @@ Adds one or more allergies to an existing patient in MediBase3.
 > :bulb: **Tip:**
 > 
 > * `ALLERGY` is case-insensitive.
->  - e.g. `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
+>   - e.g. `addAllergy i/S1234567A al/Peanuts` will add the allergy `PEANUTS` to the patient with the NRIC `S1234567A`.
 > * You can add multiple allergies to a patient by using multiple `al/ALLERGY` parameters.
->  - e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+>   - e.g. `addAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 
 [Back to Table of Contents](#table-of-contents)
@@ -574,7 +574,7 @@ Deletes one or more allergies from an existing patient in MediBase3.
 >
 > * Deletes the specified `ALLERGY` for the patient identified by `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. 
->  - e.g. `delAllergy i/S1234567A` is invalid.
+>   - e.g. `delAllergy i/S1234567A` is invalid.
 > * The patient must have the specified `ALLERGY` for it to be removed; otherwise, an error message will display.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
@@ -585,9 +585,9 @@ Deletes one or more allergies from an existing patient in MediBase3.
 > :bulb: **Tip:**
 >
 > * `ALLERGY` is case-insensitive.
->  - e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
+>   - e.g. `delAllergy i/S1234567A al/Peanuts` will delete the allergy `PEANUTS` from the patient with the NRIC `S1234567A`.
 > * You can delete multiple allergies from a patient by using multiple `al/ALLERGY` parameters.
->  - e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
+>   - e.g. `delAllergy i/S1234567A al/Peanuts al/Dust al/Pollen`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -671,7 +671,7 @@ Finds patients whose names contain any of the given keywords.
 > * Only the name is searched.
 > * Only **full words** will be matched e.g. `Han` will not match `Hans`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+>   - e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 
 **Example**:
