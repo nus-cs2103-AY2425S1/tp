@@ -9,7 +9,7 @@
 
 <VBox prefHeight="700.0" prefWidth="545.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
 <children>
-    <Label fx:id="nameLabel" prefHeight="26.0" prefWidth="499.0" />
+    <Label fx:id="nameLabel" prefHeight="26.0" prefWidth="499.0" wrapText="true" />
       <HBox prefHeight="20.0" prefWidth="419.0">
          <children>
             <FlowPane fx:id="tags" prefHeight="6.0" prefWidth="419.0" />
