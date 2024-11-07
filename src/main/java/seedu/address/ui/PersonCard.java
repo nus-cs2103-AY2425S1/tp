@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
 /**
@@ -46,7 +48,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, String eventName) {
+    public PersonCard(Person person, int displayedIndex, Set<Event> associatedEvents) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -57,13 +59,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (eventName != "No Event") {
-            eventNameTag.getChildren().add(new Label(eventName));
-            eventNameTag.setVisible(true);
-            eventNameTag.setManaged(true);
-        } else {
-            eventNameTag.setVisible(false); // Hides the eventName FlowPane
-            eventNameTag.setManaged(false); // Prevents eventName from occupying space in the layout
-        }
+        associatedEvents.stream()
+            .sorted(Comparator.comparing(event -> event.getName().toString()))
+            .forEach(event -> eventNameTag.getChildren().add(new Label(event.getName().toString())));
     }
 }

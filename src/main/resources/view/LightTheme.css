@@ -372,6 +372,11 @@
     -fx-font-size: 11;
 }
 
+#eventNameTag {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
 #eventNameTag .label {
     -fx-text-fill: white;
     -fx-background-color: #9f7aea;

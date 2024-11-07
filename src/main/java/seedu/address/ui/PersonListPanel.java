@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -46,23 +48,24 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                String eventName = findEventNameForPerson(person);
-                setGraphic(new PersonCard(person, getIndex() + 1, eventName).getRoot());
+                Set<Event> associatedEvents = findEventsForPerson(person);
+                setGraphic(new PersonCard(person, getIndex() + 1, associatedEvents).getRoot());
             }
         }
     }
 
     /**
-     * Finds the event name associated with the given person.
+     * Finds all event names associated with the given person.
      */
-    private String findEventNameForPerson(Person person) {
+    private Set<Event> findEventsForPerson(Person person) {
+        Set<Event> events = new HashSet<>();
         for (Event event : personEventAssociationMap.keySet()) {
             ArrayList<Person> persons = personEventAssociationMap.get(event);
             if (persons != null && persons.contains(person)) {
-                return event.getEventName(); // Assuming Event has a getEventName() method
+                events.add(event);
             }
         }
-        return "No Event";
+        return events;
     }
 
     public void refreshPersonListView() {
