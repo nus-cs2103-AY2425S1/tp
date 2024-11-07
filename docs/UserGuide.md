@@ -51,9 +51,9 @@ experience to their clients without being weighed down by administrative burdens
 
    * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for john doe on October 14, 2024, at 12pm as paid.
 
-   * `reminder John Doe r/1 hour` : Sets a reminder for john doe 1 hour before his scheduled appointment.
+   * `reminder John Doe r/1 hour` : Sets a reminder note for john doe 1 hour before his scheduled appointment.
 
-   * `reminder-delete John Doe` : Deletes the reminder set for john doe.
+   * `reminder-delete John Doe` : Deletes the reminder note set for john doe.
 
    * `clear` : Deletes all contacts.
 
@@ -128,8 +128,8 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
   specifying any tags after it.
 
 Examples:
-*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `John Doe` to be `91234567` and `johndoe@example.com` respectively.
-*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `Betsy Crowe` to be `Betsy Crower` and clears all existing tags.
+*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `john doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `betsy crowe` to be `betsy crower` and clears all existing tags.
 
 ### Deleting a person : `delete`
 
