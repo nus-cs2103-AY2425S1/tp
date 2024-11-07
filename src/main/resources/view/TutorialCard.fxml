@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefWidth="150" spacing="5" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      style="-fx-border-color: #EDEDED; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 5;">
-    <Label fx:id="tutorial" text="$tutorial" style="-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: #262626"/>
-    <HBox spacing="30">
+<VBox spacing="5" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      style="-fx-border-color: #EDEDED; -fx-border-width: 1; -fx-border-radius: 5; -fx-padding: 8;">
+    <Label fx:id="tutorial" wrapText="true" text="$tutorial" style="-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: #262626"/>
+    <HBox spacing="60">
         <Label text="Students enrolled" style="-fx-font-size: 13; -fx-text-fill: #4C4C4C"/>
         <Label fx:id="studentsEnrolled" text="\$students enrolled" style="-fx-font-size: 13; -fx-text-fill: #4C4C4C"/>
     </HBox>

@@ -32,10 +32,10 @@ public class MarkAttendanceByStudentCommand extends Command {
             + ": Marks the attendance of the student identified "
             + "by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_ATTENDANCE + "ATTENDANCE"
+            + PREFIX_ATTENDANCE + "ATTENDANCE "
             + PREFIX_TUTORIAL + "TUTORIAL\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ATTENDANCE + "20/10/2024"
+            + PREFIX_ATTENDANCE + "20/10/2024 "
             + PREFIX_TUTORIAL + "Math";
 
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS =
