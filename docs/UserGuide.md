@@ -47,7 +47,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
       1. Hold down the `Control` key and click on the folder (<kbd>Control</kbd> + <kbd>Click</kbd>).
       1. Click on `New Terminal at Folder` as highlighted below.
          ![MacCmdOpen.jpg](images%2FMacCmdOpen.jpg)
-1. In the command terminal you just opened in Step 5, type the `java -jar contactmate.jar` command and press Enter to run the application.<br>
+1. In the command terminal you just opened in Step 5, type `java -jar contactmate.jar` and press Enter to run the application.<br>
    1. When you first open the application, the list will contain the sample data. 
    2. The GUI will resemble the picture below. The next time you open ContactMate, the data will still be there for you to see.<br>
             ![Ui](images/Ui.png)
