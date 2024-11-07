@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -61,6 +62,7 @@ public class LessonCard extends UiPart<Region> {
         lesson.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
                 .forEach(this::createLabel);
+        Platform.runLater(() -> cardPane.getParent().requestLayout());
     }
 
     private void createLabel(Student student) {
