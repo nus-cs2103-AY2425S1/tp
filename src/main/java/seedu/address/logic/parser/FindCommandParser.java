@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEHANDLE;
 
 import java.util.Arrays;
 
@@ -9,8 +8,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.TelegramHandle;
-import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -27,21 +24,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        if (trimmedArgs.startsWith(PREFIX_TELEHANDLE.getPrefix())) {
-            String handleArgs = trimmedArgs.substring(PREFIX_TELEHANDLE.getPrefix().length()).trim();
-            if (handleArgs.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-            String[] handleKeywords = handleArgs.split("\\s+");
-            for (String keyword : handleKeywords) {
-                if (!TelegramHandle.isValidTelegramHandle(keyword)) {
-                    throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
-                }
-            }
-            return new FindCommand(new TelegramHandleContainsKeywordsPredicate(Arrays.asList(handleKeywords)));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");

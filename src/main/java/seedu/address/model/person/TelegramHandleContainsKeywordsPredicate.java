@@ -23,8 +23,9 @@ public class TelegramHandleContainsKeywordsPredicate implements Predicate<Person
             return false;
         }
 
-        String telegramHandleString = person.getTelegramHandle().toString().toLowerCase();
+        String telegramHandleString = telegramHandle.get().value.toLowerCase();
 
+        // Compare each keyword with the telegram handle
         return keywords.stream()
             .map(String::toLowerCase)
             .anyMatch(telegramHandleString::contains);
