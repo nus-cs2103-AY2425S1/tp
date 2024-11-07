@@ -1297,9 +1297,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
+   1. If you encounter an unexpected empty TAHub (no students, consults or lessons) upon startup or your data
+is replaced by sample data, your data file may be corrupted.
+   2. If you wish to try and salvage your data, **do not** perform any command yet. **This will overwrite your data.**
+   3. Copy your data file to make a safe backup first, and rename it something other than `addressbook`. You can open
+this file to view your data in JSON format.
+   4. TAHub will generate a new data file with sample data. In the meantime, if you are experienced
+with JSON, you can attempt to recover your data file by fixing issues in the file, usually syntax/formatting.
 
 ### Exporting data
 

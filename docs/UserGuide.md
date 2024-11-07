@@ -136,7 +136,7 @@ Examples:
 
 Deletes the specified student from TAHub.
 
-Format: `delete INDEX[;INDEX]...`
+Format: `delete INDEX[;INDEX]…`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
@@ -176,10 +176,11 @@ Displays a list of all consultations in TAHub.
 
 Adds students to an existing consultation, specified by its index.
 
-**Format**: `addtoconsult INDEX [n/NAME]... [i/INDEX]...`
+**Format**: `addtoconsult INDEX [n/NAME]… [i/INDEX]…`
 
 * `INDEX` specifies the consultation to add students to.
-* Student names (`n/NAME`) and/or student indices (`i/INDEX`) can be used to specify students.
+* Student names (`n/NAME`) and/or student indices (`i/INDEX`) can be used to specify students. At least one name or
+index must be provided.
 * Students already in the consultation will not be added again, and an error message will be shown.
 
 **Examples**:
@@ -192,10 +193,9 @@ Adds students to an existing consultation, specified by its index.
 
 Removes specified students from a consultation, identified by its index.
 
-**Format**: `removefromconsult INDEX n/NAME...`
+**Format**: `removefromconsult INDEX n/NAME [n/NAME]…`
 
 * `INDEX` is the index of the consultation from which the students will be removed.
-* Specify one or more students to remove by their names.
 
 **Examples**:
 * `removefromconsult 1 n/John Doe n/Harry Ng` (removes students named John Doe and Harry Ng from the 1st consultation)
@@ -206,7 +206,7 @@ Removes specified students from a consultation, identified by its index.
 
 Deletes one or more consultations from TAHub by their indices.
 
-**Format**: `deleteconsult INDEX[;INDEX]...`
+**Format**: `deleteconsult INDEX[;INDEX]…`
 
 * `INDEX` specifies the consultation to delete. You can delete multiple consultations by separating indices with semicolons (`;`).
 
