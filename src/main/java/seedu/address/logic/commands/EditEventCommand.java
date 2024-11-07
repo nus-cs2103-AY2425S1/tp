@@ -23,6 +23,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.ui.CommandDetailChange;
@@ -85,8 +86,6 @@ public class EditEventCommand extends EditCommand {
                 updatedCelebrity = model.findPerson(editEventDescriptor.celebrityName);
             } catch (PersonNotFoundException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
-            } catch (IllegalArgumentException e) {
-                throw new CommandException(Messages.MESSAGE_INVALID_NAME);
             }
             editEventDescriptor.setCelebrity(updatedCelebrity);
         }
@@ -99,8 +98,6 @@ public class EditEventCommand extends EditCommand {
                         .toList());
             } catch (PersonNotFoundException e) {
                 throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
-            } catch (IllegalArgumentException e) {
-                throw new CommandException(Messages.MESSAGE_INVALID_NAME);
             }
             editEventDescriptor.setContacts(newSet);
         }
@@ -177,9 +174,9 @@ public class EditEventCommand extends EditCommand {
         private Time time;
         private Venue venue;
         private boolean isVenueEdited;
-        private String celebrityName;
+        private Name celebrityName;
         private Person celebrity;
-        private Set<String> contactsNames;
+        private Set<Name> contactsNames;
         private Set<Person> contacts;
 
         public EditEventDescriptor() {}
@@ -246,11 +243,11 @@ public class EditEventCommand extends EditCommand {
             return Optional.ofNullable(celebrity);
         }
 
-        public void setCelebrityName(String celebrityName) {
+        public void setCelebrityName(Name celebrityName) {
             this.celebrityName = celebrityName;
         }
 
-        public void setContactsNames(Set<String> contactsNames) {
+        public void setContactsNames(Set<Name> contactsNames) {
             this.contactsNames = contactsNames;
         }
 
