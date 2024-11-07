@@ -17,7 +17,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
 ### Installation
 
-1. Ensure Java `17` or above installed on your computer. If not you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).                                            
+1. Ensure Java `17` or above installed on your computer. If not you can download it from [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).                                      
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W14-2/tp/releases).
 
@@ -25,7 +25,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 
 ### Launching BA€
 
-1. **Open Your Command Terminal** 
+1. **Open Your Command Terminal**
    - Navigate to the folder where you saved the `.jar` file using the `cd` command.
    - For more info on how to use the `cd` command, visit the following links:
      - For [Windows users](https://www.wikihow.com/Change-Directories-in-Command-Prompt)
@@ -98,13 +98,13 @@ Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS fi\FINANCIALINFO s\SOCIALME
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0). 
+**Tip:** A person can have any number of tags (including 0).
 A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
 </box>
 
 <box type="warning" seamless>
 
-**Tag constraints:** <br>
+Tag Constraints: <br>
 * Only alphanumeric characters (alphabets and numbers) are supported in tags<br>
 * Multiple of the same tags are not supported for a single contact<br>
 * Negative numbers are not supported in tag values<br>
@@ -132,7 +132,7 @@ Format: `edit INDEX [n\NAME] [p\PHONE] [e\EMAIL] [a\ADDRESS] [t\TAG]…​`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the person’s tags by typing `t\` without
     specifying any tags after it.
 
 Examples:
@@ -178,9 +178,10 @@ Filters the contact list by name and/or tags.
 Format: `filter [n\NAME] [t\TAG]…​`
 
 * Filters the contact list by name and/or tags.
-* n\NAME specifies a name (or partial name) to filter by.
-* t\TAG specifies a tag to filter by. You can provide multiple tags.
-* If both n\NAME and t\TAG are provided, the command will display contacts matching both the name and tags.
+* `n\NAME` specifies a name (or partial name) to filter by.
+* `t\TAG` specifies a tag to filter by. You can provide multiple tags.
+* Filter is not case-sensitive.
+* If both `n\NAME` and `t\TAG` are provided, the command will display contacts matching both the name and tags.
 * If no parameters are provided, an unfiltered list of contacts will be displayed.
 
 Examples:
@@ -204,6 +205,7 @@ Examples:
 Filters contacts by tag values, with an operator.
 Format: `advfilter [t\TAG] [operator] [value]`
 * Filters the contact list by tags values, comparing with the operator.
+* Advfilter is not case-sensitive.
 * Available operators include: `=, !=, <, <=, >, >=`
 
 Examples:
@@ -273,7 +275,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## FAQ
 
-**Q**: How can I open my contact data in another application, such as Microsoft Excel?  
+**Q**: How can I open my contact data in another application, such as Microsoft Excel?
 
 1. Create a data export in your preferred file format.
     * For CSV exports: type the command `export format\csv` or click `Export` > `Export to CSV`.
@@ -283,7 +285,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 3. Open the `/data/` folder.
 4. Open your data export file (`addressbook.csv`/`addressbook.txt`) in your application of choice.
 
-**Q**: How can I open my data in BA€ on a different computer?  
+**Q**: How can I open my data in BA€ on a different computer?
 
 1. Install BA€ on your secondary computer.
 2. Copy your data file (`addressbook.json`) from BA€'s `/data/` folder on your primary computer.
@@ -316,3 +318,17 @@ Action     | Format, Examples
 **Filter** | `filter [n\NAME] [t\TAG]…​`<br> e.g., `filter n\John t\client t\friend`
 **Advanced Filter** | `advfilter [t\TAG] [operator] [value]…​`<br> e.g., `advfilter t\premium > 1000`
 **Export** | `export format\EXPORT_FORMAT`<br> e.g., `export format\csv`
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Glossary
+
+* **Above-average Typing Speed**: A typing speed that is higher than the average user (40 words per minute), allowing the user to input commands and data more efficiently.
+* **Case-sensitive**: The application differentiates between capital and small letters. For instance, `John Doe`, `jOhN dOe` and `john doe` would be regarded as different.
+* **Command-line Interface (CLI)**: A text-based user interface where the user interacts with the application by typing commands.
+* **CSV**: Type of format of file that stores data in an ordered fashion using rows and columns. Often used in third-party spreadsheet software such as Microsoft Excel.
+* **Filter**: A way to quickly find the contacts you need by narrowing down the list based on specific details, like tags or names.
+* **Financial Info**: Any details related to a contact’s finances, like income level or whether they are a high-value customer.
+* **Index**: The number next to each contact in the list that helps you refer to them when you want to make changes.
+* **Social Media Handle**: A person's username on social platforms like Twitter or Instagram, for example, @john_doe.
+* **Tag**: Form of text-based labelling to categorise persons or data for organisation.
