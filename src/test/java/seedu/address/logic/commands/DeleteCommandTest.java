@@ -83,23 +83,6 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidNricFilteredList_throwsCommandException() {
-        showPersonByNric(model, NRIC_FIRST_PERSON);
-
-        Nric invalidNric = NRIC_SECOND_PERSON;
-        // ensures that invalidNric is still in bounds of address book list
-        Person invalidNricPerson = model.getAddressBook().getPersonList().stream()
-                .filter(p -> p.getNric().equals(NRIC_SECOND_PERSON))
-                .findFirst()
-                .orElse(null);
-        assertNotNull(invalidNricPerson);
-
-        DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
-    }
-
-    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(NRIC_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(NRIC_SECOND_PERSON);

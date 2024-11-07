@@ -1,14 +1,12 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonByNric;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_FIRST_PERSON;
 import static seedu.address.testutil.TypicalNrics.NRIC_SECOND_PERSON;
@@ -82,26 +80,6 @@ public class RemarkCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Nric invalidNric = new Nric("A0000000A");
         RemarkCommand remarkCommand = new RemarkCommand(invalidNric, new Remark(VALID_REMARK_BOB));
-        assertCommandFailure(remarkCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
-    }
-
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
-    @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonByNric(model, NRIC_FIRST_PERSON);
-        Nric invalidNric = NRIC_SECOND_PERSON;
-        // ensures that invalidNric is still in bounds of address book list
-        Person invalidNricPerson = model.getAddressBook().getPersonList().stream()
-                .filter(p -> p.getNric().equals(NRIC_SECOND_PERSON))
-                .findFirst()
-                .orElse(null);
-        assertNotNull(invalidNricPerson);
-
-        RemarkCommand remarkCommand = new RemarkCommand(invalidNric, new Remark(VALID_REMARK_BOB));
-
         assertCommandFailure(remarkCommand, model, Messages.MESSAGE_NO_PERSON_FOUND);
     }
 

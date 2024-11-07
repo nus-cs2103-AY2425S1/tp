@@ -41,11 +41,11 @@ public class SampleDataUtil {
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK,
                 getTagSet("family"), new Appointment("29-10-2024 23:59"), new LogList()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Nric("S0123456Z"),
+                new Nric("S1234567E"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK,
                 getTagSet("classmates"), null, new LogList()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Nric("S1234567E"),
+                new Nric("S1234567F"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK,
                 getTagSet("colleagues"), null, new LogList())
         };
