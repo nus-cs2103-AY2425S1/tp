@@ -32,6 +32,13 @@ public class DeleteCommand extends Command {
         this.targetIndices = targetIndices;
     }
 
+    /**
+     * Validates that each index in the list of target indices is within the bounds of the last displayed person list.
+     *
+     * @param targetIndices A list of indices to be validated.
+     * @param lastShownListSize The size of the last displayed person list.
+     * @throws CommandException if any index in targetIndices is out of bounds (i.e., equal to or greater than lastShownListSize).
+     */
     private void validateIndices(List<Index> targetIndices, Integer lastShownListSize) throws CommandException {
         for (Index targetIndex : targetIndices) {
             if (targetIndex.getZeroBased() >= lastShownListSize) {
@@ -40,6 +47,12 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Deletes the specified persons from the model.
+     *
+     * @param model The model from which persons will be deleted.
+     * @param personToDeleteList A list of persons to be deleted from the model.
+     */
     private void deletePersonsFromModel(Model model, List<Person> personToDeleteList) {
         for (Person personToDelete : personToDeleteList) {
             model.deletePerson(personToDelete);

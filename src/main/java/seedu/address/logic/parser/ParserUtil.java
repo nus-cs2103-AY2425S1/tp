@@ -62,7 +62,6 @@ public class ParserUtil {
      */
     public static List<Index> parseRange(String range) throws ParseException {
         String[] bounds = range.split("-");
-        System.out.println(bounds.toString());
         // Validate that the range contains exactly two parts
         if (bounds.length != 2) {
             throw new ParseException(MESSAGE_INVALID_INTERVAL_FORMAT);
