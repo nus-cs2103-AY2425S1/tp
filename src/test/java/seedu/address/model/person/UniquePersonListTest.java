@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -10,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,11 @@ public class UniquePersonListTest {
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.contains(null));
+    }
+
+    @Test
+    public void contains_idLessThanZero_returnsFalse() {
+        assertFalse(uniquePersonList.contains(-1));
     }
 
     @Test
@@ -54,6 +61,16 @@ public class UniquePersonListTest {
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.add(ALICE));
+    }
+
+    @Test
+    public void get_personIdLessThanZero_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.get(-1));
+    }
+
+    @Test
+    public void get_personNotInList_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.get(0));
     }
 
     @Test
@@ -157,6 +174,88 @@ public class UniquePersonListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
+
+    @Test
+    public void iterator_emptyList_returnsNoElements() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        Iterator<Person> iterator = uniquePersonList.iterator();
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void iterator_nonEmptyList_returnsElementsInOrder() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        uniquePersonList.add(ALICE);
+        uniquePersonList.add(BOB);
+
+        Iterator<Person> iterator = uniquePersonList.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals(ALICE, iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(BOB, iterator.next());
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        assertTrue(uniquePersonList.equals(uniquePersonList));
+    }
+
+    @Test
+    public void equals_nullObject_returnsFalse() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        assertFalse(uniquePersonList.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        UniquePersonList uniquePersonList = new UniquePersonList();
+        assertFalse(uniquePersonList.equals("some string"));
+    }
+
+    @Test
+    public void equals_differentUniquePersonList_returnsFalse() {
+        UniquePersonList uniquePersonList1 = new UniquePersonList();
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        uniquePersonList1.add(ALICE);
+        uniquePersonList2.add(BOB);
+        assertFalse(uniquePersonList1.equals(uniquePersonList2));
+    }
+
+    @Test
+    public void equals_sameUniquePersonList_returnsTrue() {
+        UniquePersonList uniquePersonList1 = new UniquePersonList();
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        uniquePersonList1.add(ALICE);
+        uniquePersonList2.add(ALICE);
+        assertTrue(uniquePersonList1.equals(uniquePersonList2));
+    }
+
+    @Test
+    public void hashCode_sameInternalList_returnsSameHashCode() {
+        UniquePersonList uniquePersonList1 = new UniquePersonList();
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        uniquePersonList1.add(ALICE);
+        uniquePersonList2.add(ALICE);
+        assertEquals(uniquePersonList1.hashCode(), uniquePersonList2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentInternalList_returnsDifferentHashCode() {
+        UniquePersonList uniquePersonList1 = new UniquePersonList();
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        uniquePersonList1.add(ALICE);
+        uniquePersonList2.add(BOB);
+        assertNotEquals(uniquePersonList1.hashCode(), uniquePersonList2.hashCode());
+    }
+
+    @Test
+    public void hashCode_emptyList_returnsSameHashCode() {
+        UniquePersonList uniquePersonList1 = new UniquePersonList();
+        UniquePersonList uniquePersonList2 = new UniquePersonList();
+        assertEquals(uniquePersonList1.hashCode(), uniquePersonList2.hashCode());
     }
 
     @Test

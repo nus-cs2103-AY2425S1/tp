@@ -77,6 +77,14 @@ public class EditCommand extends Command {
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
+    public Set<Subject> getMinSet(List<Person> lastShownList, Index index, ObservableList<Lesson> lessonList) {
+        return lessonList.stream()
+                .filter(lesson -> lesson.getTutor().equals(lastShownList.get(index.getZeroBased()))
+                        || lesson.getTutee().equals(lastShownList.get(index.getZeroBased())))
+                .map(Lesson::getSubject)
+                .collect(HashSet::new, Set::add, Set::addAll);
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -85,11 +93,7 @@ public class EditCommand extends Command {
         // Verify if person to be edited has a lesson already in the address book
         Set<Subject> subjects = editPersonDescriptor.getSubjectsOp().orElse(null);
         ObservableList<Lesson> lessonList = model.getAddressBook().getLessonList();
-        Set<Subject> minSet = lessonList.stream()
-                .filter(lesson -> lesson.getTutor().equals(lastShownList.get(index.getZeroBased()))
-                        || lesson.getTutee().equals(lastShownList.get(index.getZeroBased())))
-                .map(Lesson::getSubject)
-                .collect(HashSet::new, Set::add, Set::addAll);
+        Set<Subject> minSet = getMinSet(lastShownList, index, lessonList);
         if (subjects != null) {
             if (!subjects.containsAll(minSet)) {
                 throw new CommandException(MESSAGE_PERSON_HAS_LESSON);

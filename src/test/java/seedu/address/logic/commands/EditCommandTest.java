@@ -11,12 +11,20 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_PERSON_HAS_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithLesson;
+
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -28,19 +36,23 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
+
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TuteeBuilder;
+import seedu.address.testutil.TutorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookWithLesson(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -55,9 +67,17 @@ public class EditCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
 
+        for (Lesson l : model.getAssociatedLessons(model.getFilteredPersonList().get(0))) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
+
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
-
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
@@ -65,11 +85,9 @@ public class EditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexFirstPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .build(); //is tutor
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexFirstPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -77,6 +95,15 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
         expectedModel.commitAddressBook();
+
+        for (Lesson l : model.getAssociatedLessons(lastPerson)) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -91,6 +118,15 @@ public class EditCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
+        for (Lesson l : model.getAssociatedLessons(editedPerson)) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
+
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
@@ -100,14 +136,22 @@ public class EditCommandTest {
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.commitAddressBook();
+
+        for (Lesson l : model.getAssociatedLessons(personInFilteredList)) {
+            expectedModel.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                expectedModel.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                expectedModel.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -225,6 +269,54 @@ public class EditCommandTest {
         // redo -> edits same second person in unfiltered person list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void getMinSet_tutorHasLessons_success() {
+        Tutor tutor = new TutorBuilder().withName("Tutor").withSubjects("Math", "Science").build();
+        Tutee tutee = new TuteeBuilder().withName("Tutee").withSubjects("Math", "Science").build();
+        Lesson lesson1 = new Lesson(tutor, tutee, new Subject("Math"));
+        Lesson lesson2 = new Lesson(tutor, tutee, new Subject("Science"));
+        ObservableList<Lesson> lessonList = FXCollections.observableArrayList(lesson1, lesson2);
+        List<Person> lastShownList = List.of(tutor);
+
+        // Act
+        Set<Subject> minSet = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor())
+                .getMinSet(lastShownList, INDEX_FIRST_PERSON, lessonList);
+
+        // Assert
+        assertEquals(2, minSet.size());
+        assertTrue(minSet.contains(new Subject("Math")));
+        assertTrue(minSet.contains(new Subject("Science")));
+    }
+
+    @Test
+    public void getMinSet_tuteeHasLessons_success() {
+        Tutor tutor = new TutorBuilder().withName("Tutor").withSubjects("Math", "Science").build();
+        Tutee tutee = new TuteeBuilder().withName("Tutee").withSubjects("Math", "Science").build();
+        Lesson lesson1 = new Lesson(tutor, tutee, new Subject("Math"));
+        Lesson lesson2 = new Lesson(tutor, tutee, new Subject("Science"));
+        ObservableList<Lesson> lessonList = FXCollections.observableArrayList(lesson1, lesson2);
+        List<Person> lastShownList = List.of(tutee);
+
+        Set<Subject> minSet = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor())
+                .getMinSet(lastShownList, INDEX_FIRST_PERSON, lessonList);
+
+        assertEquals(2, minSet.size());
+        assertTrue(minSet.contains(new Subject("Math")));
+        assertTrue(minSet.contains(new Subject("Science")));
+    }
+
+    @Test
+    public void getMinSet_noLessons_emptySet() {
+        Person person = new PersonBuilder().withName("Person").build();
+        ObservableList<Lesson> lessonList = FXCollections.observableArrayList();
+        List<Person> lastShownList = List.of(person);
+
+        Set<Subject> minSet = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditPersonDescriptor())
+                .getMinSet(lastShownList, INDEX_FIRST_PERSON, lessonList);
+
+        assertTrue(minSet.isEmpty());
     }
 
     @Test
