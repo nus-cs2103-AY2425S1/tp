@@ -281,7 +281,7 @@ This command will show you a guest list consisting of all invited guests and a v
 
 **Example Usage:** `list`
 
-Entering the `list` command returns the following result on your screen (with sample `Guest` data and  `Vendor` data):
+Entering the `list` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
 ![list command](images/listCommand.png)
 
@@ -303,9 +303,9 @@ This command will help you find guests and vendors that match any of the given k
 - Only full words will be matched e.g. `Jo` will not match `John`
 - Guest/Vendor matching **any** of the keywords will be returned (e.g. `John Tan` will return `John Doe` and `Alan Tan`)
 
-**Example Usage:** `find n/John`
+**Example Usage:** `find n/Steve`
 
-Entering the `find n/John` command returns the following result on your screen:
+Entering the `find n/Steve` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
 ![find command](images/findCommand.png)
 
@@ -335,7 +335,7 @@ This command will display to you the total number of guests invited to the weddi
 
 **Example Usage:** `stats`
 
-Entering the `stats` command returns the following result on your screen:
+Entering the `stats` command returns the following result on your screen (using sample `Guest` data and  `Vendor` data):
 
 ![stats command](images/statsCommand.png)
 
