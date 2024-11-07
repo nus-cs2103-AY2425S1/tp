@@ -50,7 +50,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "   Format: exit\n\n"
             + "For more detailed information, click the buttons below to open:\n"
             + "- User Guide\n"
-            + "- Product Website";
+            + "- Product Website\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
