@@ -42,14 +42,6 @@ public class JsonAdaptedAppt {
         this.healthService = source.getHealthService().toString();
     }
 
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public String getHealthServiceName() {
-        return healthService;
-    }
-
     /**
      * Converts this Jackson-friendly adapted appointment object into the model's {@code Appt} object.
      * @return Appt
