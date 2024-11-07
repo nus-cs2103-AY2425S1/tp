@@ -54,6 +54,7 @@ public class TaskCard extends UiPart<Region> {
         }
 
         isDone.setText(task.getIsDone() ? "Completed" : "Incomplete");
+        isDone.setStyle(task.getIsDone() ? "-fx-text-fill: #008000" : "-fx-text-fill: #800020");
     }
 
     public Label getDescriptionLabel() {

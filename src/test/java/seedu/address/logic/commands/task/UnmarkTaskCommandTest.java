@@ -3,6 +3,7 @@ package seedu.address.logic.commands.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
@@ -38,6 +40,8 @@ public class UnmarkTaskCommandTest {
             model.addTask(task);
         }
         Person personWithTask = new PersonBuilder().withTasks("todo: buy groceries").build();
+        Task task = new Task(new Description("buy groceries"));
+        model.addTask(task);
         model.addPerson(personWithTask);
         model.assignVendor(personWithTask);
     }
@@ -66,14 +70,13 @@ public class UnmarkTaskCommandTest {
     }
 
     @Test
-    public void execute_taskAlreadyUnmarked_doesNotChangeStatus() throws Exception {
+    public void execute_taskAlreadyUnmarked_throwsErrir() throws Exception {
         Task taskToUnmark = model.getFilteredTaskList().get(INDEX_FIRST.getZeroBased());
         taskToUnmark.markAsUndone();
 
         UnmarkTaskCommand command = new UnmarkTaskCommand(Set.of(INDEX_FIRST));
-        command.execute(model);
 
-        assertFalse(taskToUnmark.getIsDone(), "The task should remain unmarked as not done.");
+        assertCommandFailure(command, model, Messages.MESSAGE_TASK_ALREADY_UNCOMPLETED);
     }
 
     @Test
