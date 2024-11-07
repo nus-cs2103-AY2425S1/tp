@@ -37,7 +37,7 @@ public class AddCommand extends Command {
             + "Optional Parameters:"
             + " [" + PREFIX_EMAIL + "EMAIL]"
             + " [" + PREFIX_ADDRESS + "ADDRESS]"
-            + " [" + PREFIX_TELEGRAM + "TELEGRAM USERNAME]"
+            + " [" + PREFIX_TELEGRAM + "TELEGRAM_USERNAME]"
             + " [" + PREFIX_TAG + "TAG]..."
             + " [" + PREFIX_LESSON + "LESSON]...\n"
             + "Example: " + COMMAND_WORD + " "

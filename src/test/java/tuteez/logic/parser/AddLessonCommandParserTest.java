@@ -59,8 +59,8 @@ public class AddLessonCommandParserTest {
     @Test
     public void parse_invalidPersonIndex_throwsParseException() {
         String userInput = "0 " + PREFIX_LESSON + VALID_LESSON_MONDAY;
-        assertParseFailure(parser, userInput,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_INVALID_PERSON_INDEX_FORMAT));
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, "0")));
     }
 
     @Test

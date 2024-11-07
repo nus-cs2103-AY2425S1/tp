@@ -1,6 +1,8 @@
 package tuteez.logic.parser;
 
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
+import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static tuteez.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -66,32 +68,35 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_AMY, EditCommand.MESSAGE_NOT_EDITED);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
 
         // No index but valid command otherwise
-        assertParseFailure(parser, " t/math", Messages.MESSAGE_MISSING_PERSON_INDEX);
+        assertParseFailure(parser, " t/math", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MESSAGE_MISSING_PERSON_INDEX));
 
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + NAME_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, "-5")));
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, "0")));
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 some random string", EditCommand.MESSAGE_NOT_EDITED);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 i/ string", EditCommand.MESSAGE_NOT_EDITED);
     }
 
     @Test
