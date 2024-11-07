@@ -22,6 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.exceptions.IllegalPersonTypeException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
@@ -66,9 +67,12 @@ public class DeleteCommand extends Command {
 
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToDelete) {
-            removeLinks(person, model);
             model.deletePerson(person);
             resultMessages.add(Messages.format(person));
+        }
+
+        for (Person person : peopleToDelete) {
+            removeLinks(person, model);
         }
 
         assert resultMessages.size() == targetIndices.size();
@@ -81,31 +85,56 @@ public class DeleteCommand extends Command {
     }
 
     private void removeLinks(Person person, Model model) throws CommandException {
-        if (person instanceof Student student) {
-            Person link = model.personFromName(student.getParentName());
+        if (person instanceof Student) {
+            removeLinksForStudent((Student) person, model);
+            return;
+        }
+
+        if (person instanceof Parent) {
+            removeLinksForParent((Parent) person, model);
+            return;
+        }
+
+        throw new IllegalPersonTypeException(person);
+    }
+
+    private void removeLinksForStudent(Student student, Model model) throws CommandException {
+        Name parentName = student.getParentName();
+        if (parentName == null) {
+            return; // Student has no parent in AddressBook
+        }
+
+        try {
+            Person link = model.personFromName(parentName);
             if (!(link instanceof Parent parent)) {
                 throw new CommandException("Invalid linked parent found: " + Messages.format(link));
             }
-            Parent unlinkedParent = createUnlinkedParent(parent, person);
+            Parent unlinkedParent = createUnlinkedParent(parent, student);
             model.setPerson(parent, unlinkedParent);
-        } else if (person instanceof Parent parent) {
-            Set<Name> childrenNames = parent.getChildrensNames();
-            Set<Student> children = new HashSet<>();
+        } catch (PersonNotFoundException e) {
+            // Do nothing: Parent has already been deleted from AddressBook
+        }
+    }
 
-            for (Name childName : childrenNames) {
+    private void removeLinksForParent(Parent parent, Model model) throws CommandException {
+        Set<Name> childrenNames = parent.getChildrensNames();
+        Set<Student> children = new HashSet<>();
+
+        for (Name childName : childrenNames) {
+            try {
                 Person link = model.personFromName(childName);
                 if (!(link instanceof Student child)) {
-                    throw new CommandException("Invalid linked child found: " + Messages.format(person));
+                    throw new CommandException("Invalid linked child found: " + Messages.format(link));
                 }
                 children.add(child);
+            } catch (PersonNotFoundException e) {
+                // Do nothing: Child has already been deleted from AddressBook
             }
+        }
 
-            for (Student child : children) {
-                Student unlinkedChild = createUnlinkedChild(child);
-                model.setPerson(child, unlinkedChild);
-            }
-        } else {
-            throw new IllegalPersonTypeException(person);
+        for (Student child : children) {
+            Student unlinkedChild = createUnlinkedChild(child);
+            model.setPerson(child, unlinkedChild);
         }
     }
 
