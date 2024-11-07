@@ -331,8 +331,8 @@ The main steps for this execution are:
 Details of the Participation class are included [below](#participation-class).
 </div>
 
-7. **Command Result:** Once the enrollment is completed, EnrollCommand returns a CommandResult with a message indicating the successful enrollment.
-8. **Return Flow:** The result then flows back through LogicManager.
+7. Once the enrollment is completed, EnrollCommand returns a **CommandResult** with a message indicating the successful enrollment.
+8. The result then flows back through **LogicManager**.
 
 <br>
 
@@ -351,6 +351,30 @@ The implementation of the Unenroll feature is similar to that of the example giv
 
 When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
 
+---
+
+### **List and Clear feature**  
+
+The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](?tab=t.0#heading=h.e3816ie7ouik). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
+
+![ListCommandSequenceDiagram-Logic](images/ListCommandSequenceDiagram.png)
+
+The main steps for this execution are:
+
+1. The user inputs the command `list` to display all students.
+2. **LogicManager** receives the command and calls `parseCommand("list")` on AddressBookParser to interpret the input.
+3. **AddressBookParser** receives the command and identifies that it is a list command. It directly creates an instance of **ListCommand**, since there are no arguments to parse.
+4. **LogicManager** then calls `execute(model)` on the created **ListCommand** to perform the listing operation.
+5. **ListCommand** then retrieves and update the list.
+6. After updating the list, **ListCommand** returns a **CommandResult** with a message indicating that the list operation has been completed successfully.
+7. The result then flows back to **LogicManager**.
+
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Clear feature is similar to that of the example given above, but instead of `updateFilteredPersonList(...)` method of the Model Component being called, `setAddressBook(...)` is called.
+
+</div>
 
 ---
 
