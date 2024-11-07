@@ -3,8 +3,9 @@
   title: "User Guide"
   pageNav: 3
 ---
+![Logo](images/KeyContacts_Logo_WithText.png)
 
-# KeyContacts User Guide
+# User Guide
 
 <box type="info" light theme="primary">
 <b>KeyContacts</b> is a lightweight and responsive desktop app for <b>piano tutors</b> to quickly access and manage their students' information.
@@ -118,14 +119,20 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 ## Student Commands
 
+A student has a **name**, **phone number**, **address**, **grade level** and optionally, a **group**. <br> Students with
+the same group name _(case-insensitive)_ will have synced [lessons](#lesson-commands).
 
-<br>
+<box type="tip" light seamless >
 
+**Note:**
+
+Students with the same name _(case-insensitive)_ and phone number will be counted as **duplicate** students.
+</box>
 Listed below are the currently supported student commands.
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-student-add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL g/GROUP` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
+**[Add](#adding-a-student-add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
 **[Delete](#deleting-a-student-delete)** | `delete INDEX`<br> e.g. `delete 3`
 **[Edit](#editing-a-student-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`<br> e.g.`edit 2 n/James Lee p/81234567`
 **[Assign](#assigning-piano-pieces-to-a-student-assign)** | `assign INDEX pn/PIECE_NAME...`<br> e.g.`assign 1 pn/Moonlight Sonata pn/Canon in D`
@@ -216,7 +223,16 @@ Examples:
 
 ## Lesson Commands
 
+Each student can have **one regular lesson** in the same timeslot every week. You can create make-up lessons and cancel
+lessons for each student. 
 
+<box type="info" light theme="primary">
+
+**Tip:**
+
+We will let you know if any two lessons clash with each other!<br>
+If you try to run a command which results in 2 lessons clashing, an error will be shown.
+</box>
 <br>
 
 Listed below are the currently supported lesson commands.
@@ -295,9 +311,6 @@ Example:
 * `uncancel 1 dt/20-10-2024` Uncancels a regular lesson on 20-10-2024 for the 1st student.
 
 ## General Commands
-
-
-<br>
 
 Listed below are the currently supported general commands.
 
@@ -470,7 +483,7 @@ Furthermore, certain edits can cause KeyContacts to behave in unexpected ways (e
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-student-add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL g/GROUP` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
+**[Add](#adding-a-student-add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
 **[Delete](#deleting-a-student-delete)** | `delete INDEX`<br> e.g. `delete 3`
 **[Edit](#editing-a-student-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`<br> e.g.`edit 2 n/James Lee p/81234567`
 **[Assign](#assigning-piano-pieces-to-a-student-assign)** | `assign INDEX pn/PIECE_NAME...`<br> e.g.`assign 1 pn/Moonlight Sonata pn/Canon in D`
