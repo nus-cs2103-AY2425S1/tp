@@ -200,29 +200,6 @@ Format: `exit`
 
 
 
-### Locating persons by name or phone number: `find`
-
-Finds persons whose names or phone numbers contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and phone number is searched.
-* Partial words will be matched e.g. `Han` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
-        `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
-
-Examples:
-* `find John` returns `john` and `Johnny Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-* `find olive 87438` returns 
-* `87438807`, `Charlotte Oliveiro`<br>
-  ![result for 'find olive 87438'](images/findOlive.png)
-
-
-
 ### Filtering persons by age group or appointment dates: `filter`
 
 Filter persons whose age and/or appointment dates are within the specified range.
@@ -245,6 +222,29 @@ Examples:
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`
+
+
+
+### Locating persons by name or phone number: `find`
+
+Finds persons whose names or phone numbers contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name and phone number is searched.
+* Partial words will be matched e.g. `Han` will match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
+        `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
+
+Examples:
+* `find John` returns `john` and `Johnny Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find olive 87438` returns 
+* `87438807`, `Charlotte Oliveiro`<br>
+  ![result for 'find olive 87438'](images/findOlive.png)
 
 
 
