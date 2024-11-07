@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonPredicate;
 
 /**
@@ -65,9 +67,10 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
 
-        assert model.getFilteredPersonList() != null;
+        List<Person> filteredPersons = model.getFilteredPersonList();
+        assert filteredPersons != null;
 
-        int filterCount = model.getFilteredPersonList().size();
+        int filterCount = filteredPersons.size();
         logger.log(Level.INFO, "FilterCommand execution completed. Number of persons listed: {0}", filterCount);
 
         return new CommandResult(

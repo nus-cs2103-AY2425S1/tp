@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -21,6 +22,8 @@ import seedu.address.model.person.EcName;
 
 public class AddEcNameCommandParserTest {
 
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            AddEcNameCommand.MESSAGE_USAGE);
     private AddEcNameCommandParser parser = new AddEcNameCommandParser();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -41,8 +44,8 @@ public class AddEcNameCommandParserTest {
 
     @Test
     public void parse_missingParams_failure() {
-        String expectedIndexMessage = "Index is not a non-zero unsigned integer.";
-        String expectedParamMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEcNameCommand.MESSAGE_USAGE);
+        String expectedIndexMessage = MESSAGE_INVALID_INDEX;
+        String expectedParamMessage = MESSAGE_INVALID_FORMAT;
 
         // EP: no index
         String userInput = AddEcNameCommand.COMMAND_WORD + " " + PREFIX_ECNAME

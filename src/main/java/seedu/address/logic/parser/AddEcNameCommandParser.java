@@ -32,7 +32,7 @@ public class AddEcNameCommandParser implements Parser<AddEcNameCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ECNAME);
 
         if (!argMultimap.getValue(PREFIX_ECNAME).isPresent()) {
-            logger.log(Level.WARNING, "Emergency contact name not present in arguments.");
+            logger.log(Level.WARNING, "EcName prefix is not present in the command.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddEcNameCommand.MESSAGE_USAGE));
         }

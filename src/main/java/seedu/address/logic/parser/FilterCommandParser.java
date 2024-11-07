@@ -45,7 +45,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform to the expected format and if predicates are empty.
      */
     public FilterCommand parse(String args) throws ParseException {
-        assert args != null;
 
         logger.log(Level.INFO, "Parsing arguments for FilterCommand: {0}", args);
 
