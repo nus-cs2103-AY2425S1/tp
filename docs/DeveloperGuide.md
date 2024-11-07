@@ -328,9 +328,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `NUStates application` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a contact**
+**Use case: UC01 - Add a contact to address book**
 
 **MSS**
 
@@ -366,7 +366,8 @@ The following activity diagram summarizes the steps involved in adding a contact
 
 <puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram" />
 
-**Use case: Delete a contact**
+
+**Use case: UC02 - Delete a contact**
 
 **MSS**
 
@@ -389,7 +390,7 @@ The following activity diagram summarizes the steps involved in adding a contact
 
       Use case ends.
 
-**Use case: List all contacts**
+**Use case: UC03 - List all contacts**
 
 **MSS**
 
@@ -406,13 +407,13 @@ The following activity diagram summarizes the steps involved in adding a contact
 
       Use case ends.
 
-**Use case: Search for a contact**
+**Use case: UC04 - Search for a contact using name**
 
 **MSS**
 
-1.  User requests to search for a contact by providing a keyword.
+1.  User requests to search for a contact by providing a keyword related to contact's name.
 2.  AddressBook validates the provided keyword.
-3.  AddressBook searches for contacts matching the keyword.
+3.  AddressBook performs a case-insensitive search for contacts where the name begins with the keyword.
 4.  AddressBook shows a list of matching contacts with their details.
 
     Use case ends.
@@ -424,12 +425,121 @@ The following activity diagram summarizes the steps involved in adding a contact
 
       Use case ends.
 
-* 3a. No contacts match the provided keyword.
+* 3a. No contacts have names that match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+      
+**Use case: UC05 - Search for a contact using phone number**
+
+**MSS**
+
+1.  User requests to search for a contact by providing a keyword related to contact's phone number.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook performs the search for contacts where the phone number begins with the keyword.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No contacts have phone number that match the provided keyword.
     * 3a1. AddressBook shows a message indicating no contacts were found.
 
       Use case ends.
 
+**Use case: UC06 - Search for a contact using tag assigned to it**
 
+**MSS**
+
+1.  User requests to search for a contact by providing a keyword related to contact's tag.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook performs a case-insensitive search for contacts where the tag begins with the keyword.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No contacts have tags that match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+
+**Use case: UC07 - Search for a property using a keyword**
+
+**MSS**
+
+1.  User requests to search for a property by providing a keyword.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook performs a case-insensitive search for properties.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No properties match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+    
+**Use case: UC08 - Pin contact**
+
+**MSS**
+
+1.  User requests to pin a specific contact by providing the index number
+2.  AddressBook validates the provided index number.
+3.  AddressBook pins the contact at the provided index, moving it to the top of the list view.
+4.  AddressBook shows a confirmation message that the item has been successfully pinned.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index number is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid index number.
+
+* 3a. The item is already pinned.
+    * 3a1. AddressBook shows a message indicating that the item is already pinned.
+
+      Use case ends.
+      
+**Use case: UC09 - Unpin contact**
+
+**MSS**
+
+1.  User requests to unpin a specific contact by providing the index number
+2.  AddressBook validates the provided index number.
+3.  AddressBook unpins the contact at the provided index, moving it back to the bottom of the pinned list.
+4.  AddressBook shows a confirmation message that the item has been successfully unpinned.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index number is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid index number.
+
+* 3a. The item is already unpinned.
+    * 3a1. AddressBook shows a message indicating that the item is already unpinned.
+
+      Use case ends.
 ### Non-Functional Requirements
 
 1.  Should work on any mainstream OS_ as long as it has Java `17` or above installed.
@@ -449,8 +559,9 @@ The following activity diagram summarizes the steps involved in adding a contact
 * **Property**: A real estate asset associated to a contact. Each property has details such as name, address, price, number of rooms and optional tags(property type/condition/ownership type, etc.)
 * **Index**: A numerical identifier used to refer to a specific contact or property in the system. These are used for operations like deletion, updating, or viewing details.
 * **Tag**: A label used to categorize contacts or properties. Examples can include "Investor", "Luxury", "Renter", etc. They are used to provide additional context and for easy filtering and searching.
-* **Seller Preferred Range (SPR)**: A price range that indicates the seller's preferred selling range for properties. Used for matching potential sellers with buyers.
-* **Buyer Preferred Range (BPR)**: A price range that indicates the buyer's preferred range for purchasing properties. Helps in identifying properties that match a buyer's preference.
+* **Selling Price**: The price in which the seller is willing to sell the property.
+* **Buying Price**: The price in which the buyer is willing to buy the property.
+* **Actual Price**: The price for which the property is actually bought or sold.
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
 
 --------------------------------------------------------------------------------------------------------------------
