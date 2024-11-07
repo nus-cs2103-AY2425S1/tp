@@ -47,7 +47,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 - Run UniLink by typing `java -jar UniLink.jar`
 - The app should open within a few seconds, showing some sample data that you can explore! 
 
-- **Using the Command Line**: New to the command line? Check out this [Beginner's Guide to the Command Line](https://tutorials.commandline.com)
+- **Using the Command Line**: New to the command line? Check out this [Command Line for Beginners](https://www.freecodecamp.org/news/command-line-for-beginners/) guide!
 
 ![Ui](images/Ui.png)
 
@@ -159,7 +159,7 @@ Format: <br>
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find h/ @alexyeoh` will return `Alex Yeoh`
+* `find h/@alexyeoh` will return `Alex Yeoh`
 * `find alex david` returns `Alex Yeoh`, `David Li`
   ![result for 'find alex david'](images/findAlexDavid.png)
 
@@ -261,7 +261,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
-**Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br> `find h/ TELEGRAM_HANDLE` e.g., `find h/ @james_lake`
+**Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br> `find h/TELEGRAM_HANDLE` e.g., `find h/@james_lake`
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
 **List**   | `list`
 **Switch** | `switch [THEME]`<br> e.g., `switch LIGHT`, `switch DARK`
