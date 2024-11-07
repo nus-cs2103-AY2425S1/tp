@@ -126,18 +126,6 @@ public class PublicAddressesComposition {
     }
 
     /**
-     * Adds a set of public addresses to the specified network.
-     *
-     * @param network   The network to add the public addresses to.
-     * @param addresses The set of public addresses to be added.
-     */
-    public void addPublicAddressesToNetwork(Network network, Set<PublicAddress> addresses) {
-        assert network != null : "Network cannot be null.";
-        assert addresses != null : "Addresses cannot be null.";
-        this.publicAddresses.computeIfAbsent(network, k -> new HashSet<>()).addAll(addresses);
-    }
-
-    /**
      * Checks if a public address exists in any network.
      *
      * @param publicAddressString The public address string to check.
