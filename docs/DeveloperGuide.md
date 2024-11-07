@@ -28,8 +28,22 @@ title: Developer Guide
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
   - [Launch and shutdown](#launch-and-shutdown)
-  - [Deleting a person](#deleting-a-person)
-  - [Saving data](#saving-data)
+  - [Viewing help](#viewing-help)
+  - [Listing all contacts](#listing-all-contacts)
+  - [Viewing a contact](#viewing-a-contact)
+  - [Clearing all entries](#clearing-all-entries)
+  - [Exiting the program](#exiting-the-program)
+  - [Adding a student](#adding-a-student)
+  - [Adding a company](#adding-a-company)
+  - [Editing a contact](#editing-a-contact)
+  - [Deleting contact(s)](#deleting-contacts)
+  - [Locating persons by name](#locating-persons-by-name)
+  - [Filtering contacts by tags](#filtering-contacts-by-tags)
+  - [Tracking contacts by category](#tracking-contacts-by-category)
+  - [Adding tag(s) to contact](#adding-tags-to-contact)
+  - [Deleting tag(s) from contact](#deleting-tags-from-contact)
+  - [Importing CSV files](#importing-csv-files)
+  - [Exporting CSV files](#exporting-csv-files)
 
 ---
 
@@ -186,94 +200,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-- `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-- `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-- `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-- **Alternative 1 (current choice):** Saves the entire address book.
-
-  - Pros: Easy to implement.
-  - Cons: May have performance issues in terms of memory usage.
-
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  - Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ---
 
@@ -582,27 +508,148 @@ testers are expected to do more *exploratory* testing.
    2. Click the "Exit" item.
       Expected: Application closes without errors.
 
-### Deleting a person
+### Viewing help
 
-1. Deleting a person while all persons are being shown
+1. **Viewing help instructions**
+    - **Prerequisites**: Ensure that AdmiNUS is running.
+    - **Test case**: `help`  
+      **Expected**: A message explaining the various commands available is shown. No changes to the contact list. Status message updates to indicate the help command was executed.
+    - **Test case**: `help extra`  
+      **Expected**: Command is interpreted as `help`, and the help message is shown. Status message updates as expected.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Listing all contacts
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. **Listing contacts in AdmiNUS**
+    - **Prerequisites**: Ensure that AdmiNUS is running and there are contacts present in the list.
+    - **Test case**: `list`  
+      **Expected**: All contacts are displayed in the list. Status message updates to indicate the command was executed.
+    - **Test case**: `list 123`  
+      **Expected**: Command is interpreted as `list`, and the contact list is shown. Status bar remains the same.
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Viewing a contact
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. **Viewing details of a specific contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `view 1`  
+      **Expected**: Details of the first contact in the list are shown. Status message updates with relevant details.
+    - **Test case**: `view 0`  
+      **Expected**: No contact details shown. Error message displayed, status bar remains unchanged.
+    - **Other incorrect commands to try**: `view`, `view x` (where x exceeds list size)  
+      **Expected**: Error details shown in the status message. Status bar remains the same.
 
-2. _{ more test cases …​ }_
+### Clearing all entries
 
-### Saving data
+1. **Clearing all contacts in AdmiNUS**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `clear`  
+      **Expected**: All entries in AdmiNUS are cleared. Status message updates confirming the action, timestamp is updated.
+    - **Test case**: `clear extra`  
+      **Expected**: Command is interpreted as `clear`. Status message updates confirming the action, timestamp is updated.
 
-1. Dealing with missing/corrupted data files
+### Exiting the program
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. **Exiting AdmiNUS**
+    - **Prerequisites**: Ensure that AdmiNUS is running.
+    - **Test case**: `exit`  
+      **Expected**: Program closes gracefully.
+    - **Test case**: `exit extra`  
+      **Expected**: Command is interpreted as `exit`, and the program closes.
 
-2. _{ more test cases …​ }_
+### Adding a student
+
+1. **Adding a student contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and the contact list is visible.
+    - **Test case**: `student n/John Doe id/A0123456X p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
+      **Expected**: A student named John Doe is added. Status message updates to show success. Timestamp in the status bar is updated.
+    - **Test case**: `student n/John id/invalid_id p/98765432 e/john@example.com a/Some Address`  
+      **Expected**: No contact is added. Error message shown in status. Status bar remains unchanged.
+
+### Adding a company
+
+1. **Adding a company contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and the contact list is visible.
+    - **Test case**: `company n/Newgate Prison i/Security p/1234567 e/newgateprison@example.com a/Newgate Prison t/prison facility`  
+      **Expected**: Company contact added successfully. Status message updates with details, timestamp updated.
+    - **Test case**: `company n/Newgate p/invalid_phone e/email@domain.com a/Address`  
+      **Expected**: No contact added. Error message shown in the status message. Status bar remains unchanged.
+
+### Editing a contact
+
+1. **Editing an existing contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and a contact list is visible.
+    - **Test case**: `edit 1 p/91234567 e/johndoe@example.com`  
+      **Expected**: First contact is updated. Status message confirms the update, timestamp updated.
+    - **Test case**: `edit 0 p/12345678`  
+      **Expected**: No contact edited. Error message shown. Status bar unchanged.
+
+### Deleting contact(s)
+
+1. **Deleting one or more contacts**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `delete 2 3`  
+      **Expected**: 2nd and 3rd contacts are deleted. Status message confirms the action, timestamp updated.
+    - **Test case**: `delete 0`  
+      **Expected**: No contact deleted. Error message shown. Status bar unchanged.
+
+### Locating persons by name
+
+1. **Finding contacts by name**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `find John`  
+      **Expected**: Contacts with "John" in their name are shown. Status message updates.
+    - **Test case**: `find unknown`  
+      **Expected**: No contacts found. Status message updates with no results.
+
+### Filtering contacts by tags
+
+1. **Filtering contacts by tag**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed with tags.
+    - **Test case**: `filtertag buddies`  
+      **Expected**: Contacts with the tag "buddies" are shown. Status message updates.
+    - **Test case**: `filtertag non-existent-tag`  
+      **Expected**: No contacts found. Status message updates with no results.
+
+### Tracking contacts by category
+
+1. **Tracking contacts by category**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `track student`  
+      **Expected**: All student contacts are shown. Status message updates.
+    - **Test case**: `track non-category`  
+      **Expected**: No contacts found. Error message shown. Status bar unchanged.
+
+### Adding tag(s) to contact
+
+1. **Adding tags to an existing contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `tag 1 t/Y2 t/computerScience`  
+      **Expected**: Tags added to the first contact. Status message updates. Timestamp updated.
+    - **Test case**: `tag 0 t/invalid`  
+      **Expected**: No tags added. Error message shown. Status bar unchanged.
+
+### Deleting tag(s) from contact
+
+1. **Deleting tags from an existing contact**
+    - **Prerequisites**: Ensure that AdmiNUS is running and contacts are listed.
+    - **Test case**: `deletetag 1 t/Y2 t/computerScience`  
+      **Expected**: Tags removed from the first contact. Status message updates. Timestamp updated.
+    - **Test case**: `deletetag 0 t/invalid`  
+      **Expected**: No tags removed. Error message shown. Status bar unchanged.
+
+### Importing CSV files
+
+1. **Importing a CSV file with correct format**
+    - **Prerequisites**: Ensure that AdmiNUS is running and the CSV file exists.
+    - **Test case**: `import /path/to/data.csv`  
+      **Expected**: Data imported successfully. Status message confirms import, timestamp updated.
+    - **Test case**: `import /invalid/path.csv`  
+      **Expected**: No data imported. Error message shown. Status bar unchanged.
+
+### Exporting CSV files
+
+1. **Exporting data to a CSV file**
+    - **Prerequisites**: Ensure that AdmiNUS is running and there is data to export.
+    - **Test case**: `export /path/to/output.csv`  
+      **Expected**: Data exported successfully. Status message confirms export, timestamp updated.
+    - **Test case**: `export /invalid/path/output.csv`  
+      **Expected**: No data exported. Error message shown. Status bar unchanged.

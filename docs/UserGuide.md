@@ -268,7 +268,7 @@ specifying any tags after it. </div>
 
 Deletes the contact(s) at the specified indices from AdmiNUS.
 
-**Format**: `delete INDEX [MORE_INDEX]`
+**Format**: `delete INDEX [MORE_INDEX]…​`
 
 | Parameter Name | Description                                                         | Required   |
 | -------------- | ------------------------------------------------------------------- | ---------- |
@@ -348,6 +348,7 @@ Finds contacts whose tags are the same as the specified keyword.
 |----------------|-------------------------------------------------------------------| ---------- |
 | `KEYWORD`      | Keyword of the tag's name to filter through the list of contacts. | Compulsory |
 | `MORE_KEYWORD` | More keywords to filter                                           | Optional   |
+
 **Examples**:
 
 - `filtertag paidFee` finds contacts who have tags saved as `paidFee`
