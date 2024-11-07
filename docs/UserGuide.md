@@ -40,7 +40,7 @@ VolunSync is a desktop app for **Non-Governmental Organisations** that require k
 <div class="alert alert-primary">
   <p>:question: What is my Java's version?</p>
     <p>
-        Open your computer's command terminal: 
+        Open your computer's command terminal:
         - On Windows: Press <kbd>Windows + R</kbd>, type <kbd>cmd</kbd>, and hit Enter.<br>
         - On Mac/Linux: Open the Terminal from your Applications.<br>
         Then, type <kbd>java -version</kbd> and press Enter. You should see something like <code>java version "17" 2021-09-14</code>.<br>
@@ -362,7 +362,7 @@ Examples:
 ### Listing all volunteers participating in an event: `/e view`
 
 Displays all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.<br/>
-After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers. 
+After using this command, you should use the [`list`](#listing-all-volunteers-and-events--list) command to display all volunteers.
 
 Format: `/e view EVENT_INDEX`
 
