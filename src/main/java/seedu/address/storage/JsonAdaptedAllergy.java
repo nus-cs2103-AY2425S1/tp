@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
-import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -41,10 +43,18 @@ class JsonAdaptedAllergy {
      * @throws IllegalValueException if there were any data constraints violated in the adapted allergy.
      */
     public Allergy toModelType() throws IllegalValueException {
-        if (!Allergy.isValidAllergyName(allergyName)) {
-            throw new IllegalValueException(MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
+        requireNonNull(allergyName);
+
+        if (!Allergy.isAlphanumeric(allergyName)) {
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS_ALPHANUMERIC);
         }
+
+        if (!Allergy.isValidLength(allergyName)) {
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS_LENGTH);
+        }
+
         return new Allergy(allergyName);
     }
+
 
 }
