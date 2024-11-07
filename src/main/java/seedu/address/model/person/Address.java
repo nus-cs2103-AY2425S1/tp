@@ -3,8 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.regex.Pattern;
-
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
@@ -14,13 +12,10 @@ public class Address {
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the address must not be a whitespace (ie start with alphanumeric or #)
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
-    public static final String DOOR_NUMBER_REGEX = "#\\d{2,3}-\\d{2,4}";
-    public static final String POSTAL_CODE_REGEX = "S\\d{6}"; // postal code must be Sxxxxxx
-
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9#].*";
 
     public final String value;
 
@@ -36,13 +31,17 @@ public class Address {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid address.
      */
     public static boolean isValidAddress(String test) {
-        boolean isValid = Pattern.compile(DOOR_NUMBER_REGEX).matcher(test).find();
+        String trimmedInput = test.trim();
 
-        return test.matches(VALIDATION_REGEX) && isValid;
+        // If input was " ", trimmedInput would be empty ie invalid address
+        if (trimmedInput.isEmpty()) {
+            return false;
+        }
 
+        return trimmedInput.matches(VALIDATION_REGEX);
     }
 
     @Override
