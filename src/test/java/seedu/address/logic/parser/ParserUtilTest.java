@@ -24,7 +24,8 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_MAJOR = " ";
     private static final String INVALID_NETID = "e12345";
-    private static final String INVALID_TAG = "the only group that is not allowed is one that is longer than 15 chars";
+    private static final String INVALID_TAG =
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper sollicitudin sem, ut abc";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_STUDENTID = "A1234567P";

@@ -60,8 +60,9 @@ public class CommandTestUtil {
     public static final String INVALID_STUDENTID_DESC = " " + PREFIX_STUDENTID + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_NETID + "12345678"; // first character is a number
     public static final String INVALID_MAJOR_DESC = " " + PREFIX_MAJOR; // empty string not allowed for major
+    // Test case with 101 characters
     public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP
-            + "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+            + "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ullamcorper sollicitudin sem, ut abc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
