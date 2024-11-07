@@ -21,7 +21,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "   H E L P   M E N U\n"
             + "============================================================================================\n"
             + "\n1. Add Student\n"
-            + "   - add ID n/NAME p/PHONE_NUMBER a/ADDRESS c/COURSE t/ROLES\n"
+            + "   - add ID n/NAME p/PHONE_NUMBER a/ADDRESS c/COURSE t/ROLE\n"
             + "\n2. Add a Student Grade\n"
             + "   - grade ID m/MODULE g/GRADE\n"
             + "\n3. Add Module\n"
