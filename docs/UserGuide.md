@@ -58,6 +58,16 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
+* An `INDEX` refers to the person at the index number shown in the **last displayed person list**.<br>
+  The index **must be a positive integer** 1, 2, 3, …​ and must be
+  within range of the last displayed person list.
+
+* `INDICES` takes in multiple `INDEX`s<br>
+  * In this case, each `INDEX` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`)
+  * Each `INDEX` is separated by spaces (e.g. of an `INDICES`, `1 2 3 5-9`).
+  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, but `5 - 9` or `5 -9` or `5- 9` is invalid).
+  * `INDICES` expects at least one `INDEX` unless the `INDICES` item is optional.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -69,7 +79,7 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -152,7 +162,7 @@ Edits an existing person in the address book.
 Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
          [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * The result of an edit can be identical to the original person, but it **cannot be identical to any other existing user in the address book**.
@@ -210,12 +220,7 @@ Deletes the specified person from the address book.
 Format: `delete INDICES`
 
 * Deletes the person(s) at the specified `INDICES`.
-* `INDICES` refers to the index numbers shown in the **last displayed person list**.
-* `INDICES` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`), separated by spaces (e.g., `1 2 3 5-9`).
-  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
-    but `5 - 9` or `5 -9` or `5- 9` is invalid).
-* `INDICES` should not be empty.
-* The index **must be a positive integer** 1, 2, 3, …​
+
 
 <box type="tip" seamless>
 
@@ -281,7 +286,7 @@ Format: `removeFromGroup g/GROUP_NAME m/[INDICES]`
 * If either of the above conditions are not met, the command will fail.
 
 Example:
-* `reemoveFromGroup g/blood drive 2024 m/1 2 5 6` removes the persons at index 1, 2, 5 and 6 of
+* `removeFromGroup g/blood drive 2024 m/1 2 5 6` removes the persons at index 1, 2, 5 and 6 of
   the current list in view from the existing group named `blood drive`.
 
 

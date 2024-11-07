@@ -35,7 +35,7 @@ public class AddToGroupCommand extends Command {
     public static final String MESSAGE_ADD_TO_GROUP_SUCCESS = "The following users were added to the group %s:\n";
     public static final String MESSAGE_NO_PERSON_ADDED = "No users were added to the group %s.\n";
     public static final String MESSAGE_ADD_TO_GROUP_DUPLICATES = "The following users were already in the group %s "
-            + "and will remain in the group, the rest of the users have been added accordingly: \n";
+            + "and will remain in the group: \n";
     public static final String MESSAGE_GROUP_NOT_EXISTS = "There is no group with name %s.";
     public static final String MESSAGE_PERSON_INDEX_NOT_EXISTS = "Index %s does not exist in the last shown list!";
 
