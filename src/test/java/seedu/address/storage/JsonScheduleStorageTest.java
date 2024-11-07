@@ -64,13 +64,14 @@ public class JsonScheduleStorageTest {
         assertEquals(original, new ScheduleList(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addMeeting(TEAM_SYNC_1);
         original.removeMeeting(TEAM_SYNC);
+        original.addMeeting(TEAM_SYNC_1);
         jsonScheduleStorage.saveScheduleList(original, filePath);
         readBack = jsonScheduleStorage.readScheduleList(filePath).get();
         assertEquals(original, new ScheduleList(readBack));
 
         // Save and read without specifying file path
+        original.removeMeeting(TEAM_SYNC_1);
         original.addMeeting(TEAM_SYNC_2);
         jsonScheduleStorage.saveScheduleList(original); // file path not specified
         readBack = jsonScheduleStorage.readScheduleList().get(); // file path not specified

@@ -1,0 +1,45 @@
+#associatedContacts {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#associatedContacts .label {
+    -fx-text-fill: white;
+    -fx-background-color: #f2a007;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#weeklyCalendarView .list-view {
+    -fx-background-insets: 0 ;
+    -fx-padding: 0;
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#weeklyCalendarView .list-cell:filled {
+
+}
+
+.cell_day {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-border-color: derive(#000000, 20%);
+}
+
+#calendarCardPane {
+    -fx-padding: 0 1 0 0;
+    -fx-border-width: 1;
+    -fx-border-color: derive(#000000, 20%);
+}
+
+#weekHeader {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #FFFFFF;
+}
+
+

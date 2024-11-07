@@ -11,7 +11,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
 import seedu.address.ui.PersonListPanel;
 import seedu.address.ui.UiPart;
@@ -24,7 +24,7 @@ public class DailySchedulePanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     private final FilteredList<Meeting> originalList;
-    private final ReadOnlyAddressBook addressBook;
+    private final ObservableList<Person> personList;
 
     @FXML
     private ListView<Meeting> dailyCalendarView;
@@ -35,11 +35,13 @@ public class DailySchedulePanel extends UiPart<Region> {
     /**
      * Creates a {@code DailySchedulePanel} with the given {@code ObservableList}.
      */
-    public DailySchedulePanel(ObservableList<Meeting> calendarList, ReadOnlyAddressBook addressBook, int day) {
+    public DailySchedulePanel(ObservableList<Meeting> calendarList, ObservableList<Person> personList, int day) {
         super(FXML);
-        this.addressBook = addressBook;
-        dayLabel.setText(DayOfWeek.of(day).toString());
+        this.personList = personList;
         originalList = (FilteredList<Meeting>) calendarList;
+
+        dayLabel.setText(DayOfWeek.of(day).toString());
+
         dailyCalendarView.setItems(calendarList);
         dailyCalendarView.setCellFactory(listView -> new CalendarListViewCell());
     }
@@ -58,7 +60,7 @@ public class DailySchedulePanel extends UiPart<Region> {
             } else {
                 setGraphic(new CalendarCard(meeting,
                         originalList.getSourceIndex(getIndex()) + 1,
-                        addressBook).getRoot());
+                        personList).getRoot());
             }
         }
     }
