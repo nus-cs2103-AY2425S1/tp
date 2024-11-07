@@ -9,7 +9,6 @@ import static bizbook.testutil.PersonBuilder.DEFAULT_ADDRESS;
 import static bizbook.testutil.PersonBuilder.DEFAULT_EMAIL;
 import static bizbook.testutil.PersonBuilder.DEFAULT_NAME;
 import static bizbook.testutil.PersonBuilder.DEFAULT_PHONE;
-import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_NOTE;
 import static bizbook.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static bizbook.testutil.TypicalIndexes.INDEX_OUTOFBOUND_PERSON;
 import static bizbook.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
