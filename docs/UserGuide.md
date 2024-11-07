@@ -81,18 +81,18 @@ any traditional point-and-click management app.
 
 Action     | Format, Examples
 :--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find by contact information**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
-**Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
-**Categorize tag** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
-**Undo action** | `undo`
-**Redo action** | `redo`
-**List**   | `list`
-**Help**   | `help`
+**[Add](#adding-a-person-add)**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
+**[Clear](#clearing-all-entries--clear)**  | `clear`
+**[Delete](#deleting-a-person--delete)** | `delete INDEX`<br> e.g., `delete 3`
+**[Edit](#editing-a-person--edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Find by contact information](#locating-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
+**[Delete tag](#deleting-a-persons-tag--deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
+**[Add tag](#adds-tags-to-a-specific-person--addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
+**[Categorize tag](#categorizing-a-tag--cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**[Undo action](#undo-a-command--undo)** | `undo`
+**[Redo action](#redo-a-command-redo)** | `redo`
+**[List](#listing-all-persons--list)**   | `list`
+**[Help](#viewing-help--help)**   | `help` 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -242,9 +242,9 @@ Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 * Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
 
 Examples:
-* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and color of `t/CS2100` become `Gold`.
-* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with color `Blue`. 
-* Not-yet categorized tags have color `Grey` by default.
+* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and colour of `t/CS2100` become `Gold`.
+* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with colour `Blue`. 
+* Not-yet categorized tags have category `General` and colour `Grey` by default.
 
 ![cattag response image](images/cattagResponse.png)
 ### Undo a command : `undo`
