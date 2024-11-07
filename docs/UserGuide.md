@@ -158,14 +158,17 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. 
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Only the name or full NRIC is searched.
+* For Names:
 * Only full words will be matched e.g. `Han` will not match `Hans`
+* For NRIC:
+* Only the Full NRIC will be matched .e.g `S123` will not match `S1234567J`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -253,6 +256,11 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: Can the new **M** FIN series introduced in Singapore From 1 January 2022 onwards be used?<br>
+**A**:Unfortunately, no. Our application only supports the format of the **F** and **G** FIN series, and for the **S** and **T** series for the NRIC. Also note that while most valid NRIC/FIN are able to be recognised by our application, some would inevitably fail as the Singapore Government does not disclose the true method to verify NRIC/FIN.
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -264,15 +272,37 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Confirm**| `confirm`
-**Cancel** | `cancel`
-**List**   | `list`
-**List Logs**| `logs [i/NRIC]` <br> e.g., `logs i/ S8613282F`
-**Help**   | `help`
+| **Action**       | **Description**                       | **Format**                                         | **Example**                                                                                   |
+|------------------|---------------------------------------|----------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Add**          | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**        | Clears all entries                    | `clear`                                            |                                                                                               |
+| **Delete**       | Deletes a person                      | `delete INDEX`                                     | `delete 3`                                                                                    |
+| **Edit**         | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com`                                                   |
+| **Find**         | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                     | `find James Jake`                                                                             |
+| **Confirm**      | Confirms a deletion or clear action   | `confirm`                                          |                                                                                               |
+| **Cancel**       | Cancels a delete or clear action      | `cancel`                                           |                                                                                               |
+| **List**         | Lists all persons in the address book | `list`                                             |                                                                                               |
+| **List Logs**    | Lists logs for a specific person      | `logs i/NRIC`                                      | `logs i/S8613282F`                                                                            |
+| **Help**         | Displays help message                 | `help`                                             |                                                                                               |
+
+---
+
+### Additional Notes:
+
+* **Parameters**:
+    - `n/NAME` - Full name of the person.
+    - `p/PHONE_NUMBER` - Person's phone number.
+    - `e/EMAIL` - Email address.
+    - `a/ADDRESS` - Address details.
+    - `t/TAG` - Tags such as friend, colleague, etc. Can add multiple tags.
+
+* **Commands**:
+    - **Add** allows any number of tags (`[t/TAG]…​`), including none.
+    - **Edit** and **Delete** require the `INDEX` number displayed in the list of persons.
+    - **Clear** and **Delete** actions require `confirm` to complete or `cancel` to abort.
+
+* **Other Commands**:
+    - **List** shows all persons in the address book.
+    - **List Logs** shows all logs for a specific person based on their NRIC.
+    - **Help** shows a guide for using all commands.
+
