@@ -88,8 +88,9 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Contact Management
 #### General Contacts
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Add Contact](#add-contact-command) | `addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]` | `addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road` |
 | [Delete Contact](#delete-contact-command) | `deleteContact INDEX` | `deleteContact 1` |
 | [Edit Contact](#edit-contact-command) | `editContact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]` | `editContact 1 p/91150335` |
@@ -99,27 +100,31 @@ Refer to the [Features](#features) below for details of each command.
 | [Remark](#remark-command) | `remark INDEX r/REMARK` | `remark 1 r/Regular customer` |
 
 #### Customer Specific
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
 
 #### Supplier Specific
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
 
 ### Order Management
 #### Customer Orders
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Add Customer Order](#add-customer-order-command) | `addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDSs...] [r/REMARK]` | `addCustomerOrder n/John p/98765432 o/1 2 3 r/Delivery at 6pm` |
 | [Delete Customer Order](#delete-customer-order-command) | `deleteCustomerOrder INDEX` | `deleteCustomerOrder 2` |
 | [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX` | `markCustomerOrder 1` |
 | [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX` | `unmarkCustomerOrder 1` |
 
 #### Supply Orders
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Add Supply Order](#add-supply-order-command) | `addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
 | [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX` | `deleteSupplyOrder 1` |
 | [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX` | `markSupplyOrder 1` |
@@ -127,29 +132,33 @@ Refer to the [Features](#features) below for details of each command.
 
 ### Catalogue Management
 #### Ingredient Catalogue
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Add Ingredient](#add-ingredient-command) | `addIngredient NAME COST` | `addIngredient Syrup 3.50` |
 | [Remove Ingredient](#remove-ingredient-command) | `removeIngredient NAME` | `removeIngredient Flour` |
 | [View Ingredient Catalogue](#view-ingredientcatalogue-command) | `viewIngredientCatalogue` | `viewIngredientCatalogue` |
 
 #### Pastry Catalogue
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Add Pastry](#add-pastry-command) | `addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...]` | `addPastry Croissant 3.50 Flour Cream Sugar` |
 | [Remove Pastry](#remove-pastry-command) | `removePastry NAME` | `removePastry Croissant` |
 | [View Pastry Catalogue](#view-pastrycatalogue-command) | `viewPastryCatalogue` | `viewPastryCatalogue` |
 
 ### Inventory Management
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Check Ingredient Stock](#check-ingredient-stock-command) | `checkIngredientStock INGREDIENT` | `checkIngredientStock Flour` |
 | [Check Pastry Stock](#check-pastry-stock-command) | `checkPastryStock PASTRY` | `checkPastryStock Croissant` |
 | [View Inventory](#view-inventory-command) | `viewInventory` | `viewInventory` |
 
 ### General Commands
+
 | Command | Format | Example |
-|---------|---------|---------|
+| --- | --- | --- |
 | [Help](#help-command) | `help` | `help` |
 | [Clear](#clearing-all-entries--clear) | `clear` | `clear` |
 | [Exit](#exit-command) | `exit` | `exit` |
