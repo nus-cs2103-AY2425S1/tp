@@ -38,7 +38,7 @@ public class ParserUtil {
         + " (0 < a <= b)";
     public static final String MESSAGE_INVALID_INTERVAL = "Invalid range: start index must be less than or equal"
             + " to end index.";
-    public static final String MESSAGE_EMPTY_INDICES = "Indices should not be empty; at least one index or range "
+    public static final String MESSAGE_EMPTY_INDICES = "INDICES should not be empty; at least one index or range "
             + "must be provided.";
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
