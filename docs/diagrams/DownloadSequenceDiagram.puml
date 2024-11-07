@@ -50,13 +50,15 @@ deactivate AddressBookParser
 LogicManager -> DownloadCommand : execute(m)
 activate DownloadCommand
 
-DownloadCommand -> Model : getFilteredPersonListFromAddressBook(tagList)
+DownloadCommand -> Model : getFilteredPersonList()
 activate Model
 
 Model --> DownloadCommand : addressBookJson
 deactivate Model
 
-DownloadCommand -> StorageManager : saveCsvToFile(addressBookCsv)
+DownloadCommand -> DownloadCommand : filterByTags(addressBookJson)
+
+DownloadCommand -> StorageManager : saveCsvToFile(filteredAddressBook)
 activate StorageManager
 destroy StorageManager
 

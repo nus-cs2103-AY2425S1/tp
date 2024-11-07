@@ -87,7 +87,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -308,6 +308,71 @@ Additional Info
 * This implementation allows users to create new shortcuts while enforcing uniqueness. It provides meaningful error feedback if a conflict exists, and updates the model with new shortcuts. The `Tag.updateShortCutMappings` method ensures all components are aware of the new mapping, maintaining consistency across the application.
 
 ---
+
+### Download Command
+
+#### Implementation
+The `download` command allows users to export customer data in CSV format. Users can also filter the exported data by specific tags to narrow down the content. The generated CSV file contains customer details such as name, phone, email, postal code, address, and tags.
+
+#### Usage
+```plaintext
+download [t/TAG_NAME...] 
+```
+- `t/TAG_NAME`: Optional. Specifies the tags to filter customers. Only customers with the specified tags will be included in the exported file.
+- If no tags are provided, all customer data will be exported.
+
+#### Example
+1. Export all customer data:
+   ```plaintext
+   download
+   ```
+   **Expected Outcome:** A CSV file containing all customer data is created in the default output location.
+
+2. Export data for customers tagged with "VIP":
+   ```plaintext
+   download t/VIP
+   ```
+   **Expected Outcome:** A CSV file containing only customers tagged with "VIP" is created in the default output location.
+
+3. Export data for customers with multiple tags:
+   ```plaintext
+   download t/VIP t/Regular
+   ```
+   **Expected Outcome:** A CSV file containing customers tagged with either "VIP" or "Regular" is created.
+4. Export data with non-matching tags:
+   ```plaintext
+   download t/NonExistentTag
+   ```
+   **Expected Outcome:** An error message is displayed and no file is generated.
+
+#### Implementation Steps
+1. **Command Execution:**
+    - The `LogicManager` receives the `download` command and forwards it to `AddressBookParser`.
+2. **Command Parsing:**
+    - `AddressBookParser` creates a `DownloadCommandParser`, which:
+        - Tokenizes the input to extract the `TAG_NAME` arguments.
+        - Validates the arguments using `ParserUtil`.
+        - Creates a new `DownloadCommand` with the extracted tag names.
+3. **File Generation:**
+    - `DownloadCommand` is executed with access to the `Model`:
+        - Retrieves the list of customers using `Model#getFilteredPersonList`.
+        - Filters the customers based on the provided tags, if any.
+        - **Empty Result Handling**:
+          - If the filtered list is empty:
+              - Return an error message.
+              - Skip the CSV generation process.
+          - If the list is not empty:
+              - Converts the customer data to CSV format.
+              - Writes the CSV data to a file in the default output location.
+        
+
+#### Sequence Diagram
+Below is the sequence diagram for the `download` command:
+
+![DownloadSequenceDiagram](images/DownloadSequenceDiagram.png)
+
+---
+
 ### List Shortcut feature
 #### Implementation
 The `listShortCut` feature allows users to view all existing shortcuts for tags in the address book. This process involves parsing the command input, retrieving the list of shortcuts from the `Model`, formatting the shortcuts into a readable format, and displaying them to the user.
