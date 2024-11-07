@@ -23,6 +23,6 @@ public class ListTasksCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(Messages.MESSAGE_LIST_SUCCESS, SwitchView.TASK);
+        return new CommandResult(Messages.MESSAGE_LIST_TASK_SUCCESS, SwitchView.TASK);
     }
 }

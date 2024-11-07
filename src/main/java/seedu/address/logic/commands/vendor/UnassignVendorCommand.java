@@ -86,7 +86,7 @@ public class UnassignVendorCommand extends Command {
         assert !model.hasVendor(personToUnassign) : "Vendor was not unassigned correctly";
 
         return new CommandResult(String.format(
-                Messages.MESSAGE_UNASSIGN_TASK_SUCCESS, Messages.format(personToUnassign)
+                Messages.MESSAGE_UNASSIGN_VENDOR_SUCCESS, Messages.format(personToUnassign)
         ));
     }
 

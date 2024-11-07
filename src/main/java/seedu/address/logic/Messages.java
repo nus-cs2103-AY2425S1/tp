@@ -48,12 +48,20 @@ public class Messages {
     /**
      * Messages specific to Wedding
      */
-    public static final String MESSAGE_ADD_WEDDING_SUCCESS = "Added wedding(s) %1$s to %2$s.";
+    public static final String MESSAGE_ASSIGN_WEDDING_SUCCESS = "Assigned wedding(s) %1$s to %2$s.";
+    public static final String MESSAGE_CREATE_WEDDING_SUCCESS = "New wedding created: %1$s";
+    public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding: %1$s";
+    public static final String MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED = "The Wedding: %1$s is still used";
+    public static final String MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND = "The Wedding: %1$s does not exist";
+    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
+    public static final String MESSAGE_EDIT_WEDDING_SUCCESS = "Edited Wedding: %1$s";
+    public static final String MESSAGE_WEDDING_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT = "Use f/ to force the assignment of wedding(s)."
             + " This will automatically help you create the wedding required.";
     public static final String MESSAGE_FORCE_DELETE_WEDDING = "Use f/ to force the deletion of wedding."
             + " This will unassign all people currently assigned to this Wedding.";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
+    public static final String MESSAGE_LIST_WEDDING_SUCCESS = "Listed all weddings";
     public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
     public static final String MESSAGE_WEDDING_NOT_FOUND = "One or more specified weddings do not exist in "
             + "the Wedlinker.";
@@ -70,7 +78,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided (%d) is invalid. \n"
             + MESSAGE_ENTER_VALID_INDEX;
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
-    public static final String MESSAGE_LIST_SUCCESS = "Listed all tasks";
+    public static final String MESSAGE_LIST_TASK_SUCCESS = "Listed all tasks";
     public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task: %1$s";
     public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "%1$s is not a Vendor, "
             + "tasks can only be assigned to vendors.";

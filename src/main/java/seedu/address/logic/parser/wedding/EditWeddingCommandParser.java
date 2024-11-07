@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -66,7 +67,7 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
         }
         //if no edits, throw error
         if (!editWeddingDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditWeddingCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(Messages.MESSAGE_WEDDING_NOT_EDITED);
         }
         return new EditWeddingCommand(index, editWeddingDescriptor);
     }
