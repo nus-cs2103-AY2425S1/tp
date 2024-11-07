@@ -31,22 +31,28 @@ public class UpdateCommandParser implements Parser<UpdateCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX, PREFIX_APP_STATUS);
 
-        AppStatus appStatus;
-        Index companyIndex;
-        Index applicationIndex;
 
         if (!argMultimap.arePrefixesPresent(PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX, PREFIX_APP_STATUS)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         }
 
+        Index companyIndex;
         try {
             companyIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_COMPANY_INDEX).get());
-            applicationIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_APP_INDEX).get());
-            appStatus = ParserUtil.parseAppStatus(argMultimap.getValue(PREFIX_APP_STATUS).get());
-            return new UpdateCommand(companyIndex, applicationIndex, appStatus);
         } catch (ParseException pe) {
             logger.warning("Update Command Failed: Syntax Error by user");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
         }
+
+        Index applicationIndex;
+        try {
+            applicationIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_APP_INDEX).get());
+        } catch (ParseException pe) {
+            logger.warning("Update Command Failed: Syntax Error by user");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE), pe);
+        }
+
+        AppStatus appStatus = ParserUtil.parseAppStatus(argMultimap.getValue(PREFIX_APP_STATUS).get());
+        return new UpdateCommand(companyIndex, applicationIndex, appStatus);
     }
 }

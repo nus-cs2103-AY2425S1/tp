@@ -1,6 +1,7 @@
 package seedu.internbuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -29,7 +30,8 @@ public class ApplyCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_APP_STATUS + "APP_STATUS" + "]"
+            + "\nExample: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Full Stack Engineer "
             + PREFIX_DESCRIPTION + "Requires knowledge in ReactJS and ExpressJS";
 
