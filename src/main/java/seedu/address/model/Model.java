@@ -97,4 +97,6 @@ public interface Model {
     void setFilteredAppts(TreeSet<FilteredAppointment> filteredAppointments);
 
     TreeSet<FilteredAppointment> getFilteredAppts();
+
+    int getPatientSize();
 }

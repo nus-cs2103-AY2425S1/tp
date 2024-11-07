@@ -177,6 +177,7 @@ public class Appt {
      * @return
      */
     public boolean isBetweenDates(LocalDate start, LocalDate end) {
+        assert end != null;
         return isAfterOrOn(start) && isBeforeOrOn(end);
     }
 

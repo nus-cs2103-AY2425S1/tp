@@ -18,17 +18,17 @@ import seedu.address.model.appointmentdatefilter.AppointmentDateFilter;
 import seedu.address.model.healthservice.HealthService;
 
 public class FilterCommandParserTest {
-    private FilterCommandParser parser = new FilterCommandParser();
-    private String validStartdate = " " + PREFIX_STARTDATE + "2000-10-10";
-    private String validEnddate = " " + PREFIX_ENDDATE + "2025-10-10";
-    private String validHealthService = " " + PREFIX_HEALTHSERVICE + "BLOOD TYPE";
-    private String validFilterString = validStartdate + validEnddate + validHealthService;
+    private final FilterCommandParser parser = new FilterCommandParser();
+    private final String validStartdate = " " + PREFIX_STARTDATE + "2000-10-10";
+    private final String validEnddate = " " + PREFIX_ENDDATE + "2025-10-10";
+    private final String validHealthService = " " + PREFIX_HEALTHSERVICE + "BLOOD TYPE";
+    private final String validFilterString = validStartdate + validEnddate + validHealthService;
 
-    private String invalidEndDateWithNoStartDate = " " + PREFIX_ENDDATE + "2010-10-10";
-    private String invalidStartDate = " " + PREFIX_STARTDATE + "2000-10/10";
-    private String invalidEndDate = " " + PREFIX_ENDDATE + "2025-10/10";
-    private String invalidHealthSerivce = " " + PREFIX_HEALTHSERVICE + "burger";
-    private String endDateBeforeStartDate = " " + PREFIX_ENDDATE + "1990-10-10";
+    private final String invalidEndDateWithNoStartDate = " " + PREFIX_ENDDATE + "2010-10-10";
+    private final String invalidStartDate = " " + PREFIX_STARTDATE + "2000-10/10";
+    private final String invalidEndDate = " " + PREFIX_ENDDATE + "2025-10/10";
+    private final String invalidHealthSerivce = " " + PREFIX_HEALTHSERVICE + "burger";
+    private final String endDateBeforeStartDate = " " + PREFIX_ENDDATE + "1990-10-10";
 
     @Test
     public void parse_emptyArg_throwsParseException() {

@@ -137,12 +137,13 @@ public class ModelManager implements Model {
 
     @Override
     public void filterAppts(AppointmentDateFilter dateFilter) {
+        assert dateFilter != null;
+
         TreeSet<FilteredAppointment> filteredAppts = filteredPatients.stream()
-                .flatMap(patient -> patient.getAppts().stream()
-                        .filter(appt -> appt.isBetweenDatesAndMatchService(dateFilter))
-                        .map(appt -> new FilteredAppointment(appt, patient)))
+                .flatMap(patient -> patient.getFilteredAppointments(dateFilter))
                 .collect(Collectors.toCollection(() -> new TreeSet<>(APPOINTMENT_COMPARATOR)));
-        this.setFilteredAppts(filteredAppts);;
+
+        this.setFilteredAppts(filteredAppts);
     }
 
     @Override
@@ -154,6 +155,11 @@ public class ModelManager implements Model {
     @Override
     public TreeSet<FilteredAppointment> getFilteredAppts() {
         return this.filteredAppts;
+    }
+
+    @Override
+    public int getPatientSize() {
+        return this.filteredPatients.size();
     }
 
     @Override

@@ -175,6 +175,11 @@ public class AddCommandTest {
         public TreeSet<FilteredAppointment> getFilteredAppts() {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public int getPatientSize() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**
