@@ -163,6 +163,8 @@ public class AddressBookParser {
             } else {
                 return ListCommand.MESSAGE_USAGE + "\n" + LinkPersonCommand.MESSAGE_HINT;
             }
+        } else if (userInput.startsWith("u")) {
+            return UnlinkPersonCommand.MESSAGE_USAGE;
         } else if (userInput.startsWith("c")) {
             return getClearHint(userInput);
         } else {
