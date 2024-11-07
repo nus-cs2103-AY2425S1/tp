@@ -491,7 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 1.  User requests to <u>list students (UC1)</u>.
 2. User selects the specific student from the list to update.
 3. User enters the new information.
-4. StoreClass updates the student's details and display a success message. </br>
+4. StoreClass updates the student's details and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -509,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 1. User requests to <u>list students (UC1)</u>.
 2. User selects the specific student to record a grade.
 3. User enters the grade information.
-4. StoreClass updates the student's grades and display a success message. </br>
+4. StoreClass updates the student's grades and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -528,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 2. User selects one or more students to be categorized.
 3. StoreClass requests for the group to assign the students to.
 4. User selects the group.
-5. StoreClass categorize the student(s) and display a success message. </br>
+5. StoreClass categorize the student(s) and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -548,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 2. User selects one or more students to be tagged.
 3. StoreClass requests for the tag(s) to assign the students to.
 4. User enters the tag(s)
-5. StoreClass applies the tags to the selected student(s) and display a success message. </br>
+5. StoreClass applies the tags to the selected student(s) and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -556,8 +556,8 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 * 4a. StoreClass detects an invalid tag(s).
 
     * 4a1. StoreClass requests a valid tag.
-    * 4a2. User enters a valid tag. </br>
-      Steps 4a1-4a2 are repeated until a valid tag is entered. </br>
+    * 4a2. User enters a valid tag. <br>
+      Steps 4a1-4a2 are repeated until a valid tag is entered. <br>
       Use case resumes from step 6.
 
 #### **Use case 9: Archive Student Data**
@@ -568,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 2.  StoreClass requests confirmation for archiving.
 3. User confirms.
 4. StoreClass archives the students data and removes them from the current interface.
-5. StoreClass displays a success message. </br>
+5. StoreClass displays a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -588,7 +588,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 1.  User chooses to export student data.
 2.  StoreClass requests confirmation for exporting.
 3. User confirms.
-4. StoreClass exports the students data and displays a success message. </br>
+4. StoreClass exports the students data and displays a success message. <br>
    Use case ends.
 
 **Extensions**
@@ -605,7 +605,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 1.  User performs an action/command.
 2.  User chooses to undo the action.
-3. StoreClass reverses the action and displays a success message. </br>
+3. StoreClass reverses the action and displays a success message. <br>
    Use case ends.
 
 **Extensions**
@@ -621,12 +621,12 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 **Main Success Scenario**
 
 1.  User request to filter a list of student based on specified conditions.
-2.  StoreClass displays all students that match all conditions. </br>
+2.  StoreClass displays all students that match all conditions. <br>
     Use case ends.
 
 **Extensions**
 * 1a. No matching student found.
-    * 1a1. StoreClass display a message indicating that no students match the search query. </br>
+    * 1a1. StoreClass display a message indicating that no students match the search query. <br>
       Use case ends.
   
 ### Non-Functional Requirements
