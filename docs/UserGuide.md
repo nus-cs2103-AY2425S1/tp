@@ -258,7 +258,8 @@ Example:
 Note:
 
 - Lessons cannot share the same description - but may overlap in time together.
-- Lessons are allowed to go past midnight from day to another.
+- Lessons are allowed to go past midnight from day to another - in that case, the lesson would be written to span
+exactly 2 days, ending the day after the start day.
 - However, lessons are not allowed to have exactly the same start and end time.
 
 ### Listing all lessons : `dc`

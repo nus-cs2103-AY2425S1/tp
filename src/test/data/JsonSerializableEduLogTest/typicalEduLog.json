@@ -9,6 +9,7 @@
     "email" : "alice@example.com",
     "tags" : [ "friends" ],
     "address" : "123, Jurong West Ave 6, #08-111",
+    "hasPaid" : "false",
     "fee" : "100"
   }, {
     "name" : "Benson Meier",
@@ -16,6 +17,7 @@
     "email" : "johnd@example.com",
     "tags" : [ "owesMoney", "friends" ],
     "address" : "311, Clementi Ave 2, #02-25",
+    "hasPaid" : "false",
     "fee" : "100"
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "email" : "heinz@example.com",
     "tags" : [  ],
     "address" : "wall street",
+    "hasPaid" : "false",
     "fee" : "100"
   }, {
     "name" : "Daniel Meier",
@@ -30,6 +33,7 @@
     "email" : "cornelia@example.com",
     "tags" : [ "friends" ],
     "address" : "10th street",
+    "hasPaid" : "false",
     "fee" : "100"
   }, {
     "name" : "Elle Meyer",
@@ -37,6 +41,7 @@
     "email" : "werner@example.com",
     "tags" : [  ],
     "address" : "michegan ave",
+    "hasPaid" : "false",
     "fee" : "100"
   }, {
     "name" : "Fiona Kunz",
@@ -44,6 +49,7 @@
     "email" : "lydia@example.com",
     "tags" : [  ],
     "address" : "little tokyo",
+    "hasPaid" : "false",
     "fee" : "100"
   }, {
     "name" : "George Best",
@@ -51,6 +57,7 @@
     "email" : "anna@example.com",
     "tags" : [  ],
     "address" : "4th street",
+    "hasPaid" : "false",
     "fee" : "100"
   } ],
   "lessons" : [ {
