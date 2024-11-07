@@ -84,9 +84,10 @@ public class Event {
     }
 
     public String getContactsString() {
-        return contacts.stream().collect(StringBuilder::new, (sb, p) -> sb.append(p.getTagsString())
+        return contacts.stream().collect(StringBuilder::new, (sb, p) -> sb.append("(")
+                        .append(p.getTagString()).append(") ")
                         .append(p.getName().fullName)
-                        .append(" ").append(p.getPhone().value).append("\n"),
+                        .append(" ").append(p.getPhone().value).append(", "),
                 StringBuilder::append).toString();
     }
 
