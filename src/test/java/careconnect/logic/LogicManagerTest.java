@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import careconnect.logic.Logic.ValidateSyntaxResultEnum;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.AddCommand;
 import careconnect.logic.commands.ClearCommand;
@@ -117,14 +118,14 @@ public class LogicManagerTest {
 
     @Test
     public void validateSyntax_validInputs_correctResults() {
-        assertEquals(false, logic.validateSyntax("fa"));
-        assertEquals(false, logic.validateSyntax("add n/"));
-        assertEquals(true, logic.validateSyntax("add"));
-        assertEquals(true, logic.validateSyntax("add n/Betsy Crowe t/friend e/betsycrowe@example.com"
-                + " a/Newgate Prison p/1234567 t/criminal"));
+        assertEquals(ValidateSyntaxResultEnum.INVALID_COMMAND, logic.validateSyntax("fa"));
+        assertEquals(ValidateSyntaxResultEnum.INVALID_COMMAND, logic.validateSyntax("add n/"));
+        assertEquals(ValidateSyntaxResultEnum.VALID_COMMAND_WORD, logic.validateSyntax("add"));
+        assertEquals(ValidateSyntaxResultEnum.VALID_FULL_COMMAND, logic.validateSyntax("add n/Betsy Crowe "
+                + "t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal"));
 
         // extra spaces should not invalidate syntax
-        assertEquals(true, logic.validateSyntax("add "));
+        assertEquals(ValidateSyntaxResultEnum.VALID_COMMAND_WORD, logic.validateSyntax("add "));
     }
 
     /**

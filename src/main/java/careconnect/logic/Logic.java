@@ -17,6 +17,10 @@ import javafx.collections.ObservableList;
  * API of the Logic component
  */
 public interface Logic {
+
+    /**
+     * Represents results of validating syntax
+     */
     enum ValidateSyntaxResultEnum {
         VALID_COMMAND_WORD,
         VALID_FULL_COMMAND,
@@ -41,12 +45,12 @@ public interface Logic {
     String autocompleteCommand(String commandText) throws AutocompleteException;
 
     /**
-     * Checks if given string is valid syntax
+     * Checks if given string is valid syntax.
      *
      * @param syntax The syntax to check
      * @return true if given string is valid syntax; else false
      */
-     ValidateSyntaxResultEnum validateSyntax(String syntax);
+    ValidateSyntaxResultEnum validateSyntax(String syntax);
 
     /**
      * Returns the AddressBook.
