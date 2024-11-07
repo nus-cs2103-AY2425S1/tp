@@ -7,12 +7,12 @@ title: User Guide
 VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailored to meet the unique needs of nonprofits. VolunSync offers a streamlined approach to managing volunteers, coordinating events, tracking hours, and enhancing communication – all from a single, intuitive platform.
 ## Learn About Commands Supported By VolunSync
 1. [Command Format Guidelines](#command-format-guidelines)
-2. [General Commands](#general-commands)
+1. [General Commands](#general-commands)
    1. [Viewing help](#viewing-help--help)
-   2. [Listing all volunteers and events](#listing-all-volunteers-and-events--list)
-   3. [Export database to a CSV file](#export-database-to-a-csv-file--export)
-   4. [Exiting the program](#exiting-the-program--exit)
-3. [Volunteer-related Commands](#volunteer-related-commands)
+   1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list)
+   1. [Export database to a CSV file](#export-database-to-a-csv-file--export)
+   1. [Exiting the program](#exiting-the-program--exit)
+1. [Volunteer-related Commands](#volunteer-related-commands)
    1. [Adding a volunteer](#adding-a-volunteer-v-new)
    1. [Finding volunteers by name](#finding-volunteers-by-name--v-find)
    1. [Deleting a volunteer](#deleting-a-volunteer--v-del)
@@ -50,7 +50,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-2/tp/releases).
 
-2. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
+1. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
 
 1. Open your computer's command terminal
 
@@ -58,10 +58,10 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 
    `java -jar NAME_OF_JAR_FILE`. For example, `java -jar volunsync-v1.5.jar`.
 
-5. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
+1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
    ![Ui](images/VolunSyncUi.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
    Some example commands you can try:
 
     * `list` : Lists all volunteers and events in the VolunSync database.
@@ -76,7 +76,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 
     * `exit` : Exits the app.
 
-7. Refer to the [Command Format](#command-format) below for details of each command.
+1. Refer to the [Command Format](#command-format) below for details of each command.
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -466,7 +466,7 @@ VolunSync's data are saved in the hard disk automatically after any command that
     - To fix this, locate and delete the `preferences.json` file, which stores the app's window position.
     - After deleting the file, restart the application, and the GUI will open correctly on the primary screen.
 
-2. **Help Window Remaining Minimized**
+1. **Help Window Remaining Minimized**
    **Problem:** If you minimize the Help Window and run the `help` command (or use the `Help` menu or press the `F1` key), the Help Window will remain minimized instead of reopening.
    **Solution:**
     - Manually restore the Help Window from your taskbar or dock.
