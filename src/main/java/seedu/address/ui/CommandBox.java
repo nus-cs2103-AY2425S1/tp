@@ -29,15 +29,15 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         commandTextArea.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
-        // Add this key event listener to handle Enter key
+
         commandTextArea.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case ENTER:
-                    handleCommandEntered();
-                    event.consume(); // Prevents Enter from adding a new line in the TextArea
-                    break;
-                default:
-                    break;
+            case ENTER:
+                handleCommandEntered();
+                event.consume();
+                break;
+            default:
+                break;
             }
         });
     }
