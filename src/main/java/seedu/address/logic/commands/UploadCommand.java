@@ -79,6 +79,10 @@ public class UploadCommand extends Command {
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
 
+            if (!selectedFile.getName().toLowerCase().endsWith(".png")) {
+                return new CommandResult(MESSAGE_UPLOAD_ERROR);
+            }
+
             ProfilePicFilePath newPath = new ProfilePicFilePath(selectedFile.toPath());
             Person editedPerson = new Person(
                     personToUpload.getName(), personToUpload.getPhone(), personToUpload.getEmail(),
