@@ -64,7 +64,7 @@ public class BoughtPropertyCommandTest {
         BoughtPropertyCommand boughtCommand = new BoughtPropertyCommand(personIndex, buyingPropertiesIndex,
                 new Price("1010101"));
 
-        Property expectedProperty = new PropertyToBuyBuilder().withHousingType("h").withPostalCode("522522")
+        Property expectedProperty = new PropertyToBuyBuilder().withHousingType("h").withPostalCode("123456")
                 .withUnitNumber("10-01").withPrice("1500000").withActualPrice("1010101").build();
 
         Person expectedPerson = new PersonBuilder().withName("Alice Pauline")
