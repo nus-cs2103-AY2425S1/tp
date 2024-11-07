@@ -290,10 +290,14 @@ Example:
 * `deleteGroup g/blood drive 2024`
 
 ### Listing groups: `listGroups`
-
-Lists out all existing Group names.
+Shows a list of all existing groups.
 
 Format: `listGroups`
+
+* The group size and up to three members are displayed for each group.
+* If a group has more than three members, only the first three are shown, followed by "..." to indicate additional members.
+
+![result for 'list groups'](images/list-groups.png)
 
 ### Getting emails: `email`
 
