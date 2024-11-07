@@ -307,9 +307,9 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 | Typical   | Hiring Manager | search for candidates based on keywords (skills, position etc.)  | quickly find the right profiles                                                       |
                                                    
 
-### Use cases
+## Use cases
 
-## Use Case 1: Add Candidate to Shortlist
+### Use Case 1: Add Candidate to Shortlist
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -326,13 +326,10 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
   - Steps 1a1-1a2 are repeated until the data entered are correct.
   - Use case resumes from step 2.
 
-**Command Example**:  
-`add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com a/123 Main St`
-
 
 ---
 
-## Use Case 2: Delete Candidate from Shortlist
+### Use Case 2: Delete Candidate from Shortlist
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -352,14 +349,10 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 
     Use case ends.
 
-**Command Example**:  
-`delete 1`
-
-
 
 ---
 
-## Use Case 3: View Candidate List
+### Use Case 3: View Candidate List
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -375,12 +368,9 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 Use case ends.
 
 
-**Command Example**:  
-`list`
-
 ---
 
-## Use Case 4: View Candidate Status
+### Use Case 4: View Candidate Status
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -400,12 +390,10 @@ Use case ends.
     
     Use case ends.
 
-**Command Example**:  
-`view n/John Doe j/Software Engineer`
 
 ---
 
-## Use Case 5: Mark Candidate Status as Hired or Rejected
+### Use Case 5: Mark Candidate Status as Hired or Rejected
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -426,15 +414,10 @@ Use case ends.
     
     Use case ends.
 
-    
-
-**Command Example**:  
-`hire n/John Doe j/Software Engineer`  
-`reject n/Jane Smith j/Data Analyst`
 
 ---
 
-## Use Case 6: Sort list of candidates in ascending/descending order
+### Use Case 6: Sort list of candidates in ascending/descending order
 **Actor**: Hiring Manager
 
 **Main Success Scenario**:
@@ -443,11 +426,8 @@ Use case ends.
 
    Use case ends.
 
-**Command Example**:  
-`sort a`  
-`sort d`
 
-
+---
 
 ### Non-Functional Requirements
 
@@ -461,6 +441,8 @@ Use case ends.
 8. Sensitive information, like candidate emails and phone numbers, should be stored securely and not exposed in error logs or publicly accessible files.
 9. The application interface should be adaptable to different screen sizes and resolutions, ensuring usability on both standard and high-definition displays.
 
+
+---
 
 ### Glossary
 
@@ -497,29 +479,88 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a candidate
 
-### Deleting a person
+1. Adding a candidate to hiredfiredpro
 
-1. Deleting a person while all persons are being shown
+    1. Test case: `add n/Adib j/Developer p/12345678 e/example@example i/1`<br>
+       Expected: New candidate will be added at the end of the list ie. if there are 6 people in the list, he will be 7<sup>th<sup>
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Test case: `add n/Adib p/12345678 e/example@example i/1`<br>
+       Expected: Error details shown in the result panel.
+
+    1. Test case: `add n/Adib j/Developer p/phone_number e/example@example i/100`, `...` (invalid parameters for certain fields)<br>
+       Expected: Similar to previous.
+
+    1. Other incorrect add commands to try: `add`, `add i/1`, `...`(missing one or more compulsory fields)<br>
+       Expected: Similar to previous.
+
+### Deleting a candidate
+
+1. Deleting a candidate while all candidates are being shown
+
+   1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No candidate is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+1. Viewing a candidate while no candidates are being shown
 
-1. _{ more test cases …​ }_
+   1. Prerequisites: List all candidates using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
+
+   1. Test case: `delete 1`<br>
+      Expected: No candidate will be deleted. Error details shown in the result panel.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data folder.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Open the folder where hiredfiredpro.jar is located.
 
-1. _{ more test cases …​ }_
+   1. Data folder containing json file does not exist.
+ 
+   1. Upon making any changes to hiredfiredpro, data folder with json file will be created with updated information.
+
+1. Deleting existing hiredfiredpro.json file in existing data folder.
+
+   1. Open the folder where hiredfiredpro.jar is located. 
+      
+   1. Click into the data folder and delete the existing json file inside. There should only be one file in the data folder
+
+   1. Upon launching hiredfiredpro, our sample data of 6 people will be shown. Changes made up to that point will be discarded.
+
+1. Saving data after changes are made.
+
+   1. Prerequisites: HiredFiredPro should be opened.
+
+   1. Make any changes (e.g `delete 1`).
+
+   1. Close the app.
+
+   1. Open the hiredfiredpro.json file which would be in the same folder as your jar file. <br>
+      
+   1. All changes made are reflected in the json file.
+
+### Viewing Candidates
+
+   1. Viewing a candidate while all candidates are being shown
+
+      1. Prerequisites: List all candidates using the `list` command. Multiple candidates in the list. 
+
+      1. Test case: `view n/Adib j/Developer`<br>
+         Expected: Candidate with their details will be shown on the display panel.
+
+      1. Test case: `view n/Adib`, `...` (missing compulsory fields)<br>
+         Expected: No candidate displayed on display panel. Error details shown in the result panel.
+
+   1. Viewing a candidate while no candidates are being shown
+
+       1. Prerequisites: List all candidates using the `find xxx` where xxx is a name not existing in current candidates list. Multiple candidates existing.
+
+       1. Test case: `view n/Adib j/Developer`<br>
+          Expected: No candidate displayed on display panel. Error details shown in the result panel.
