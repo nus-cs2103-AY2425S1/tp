@@ -32,18 +32,18 @@ public class ParserUtilTest {
     private static final String INVALID_LONG_PHONE = "123456789";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_EMERGENCY_CONTACT = INVALID_PHONE;
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "  ";
     private static final String INVALID_DATEOFLASTVISIT = "13/13/2024";
 
     private static final String NO_ENTRY = "";
 
     private static final String VALID_NAME = "Rachel Walker-Runner";
-    private static final String VALID_PHONE = "12345678";
+    private static final String VALID_PHONE = "92345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_EMERGENCY_CONTACT = "12345678";
+    private static final String VALID_EMERGENCY_CONTACT = "62345678";
     private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TAG_2 = "nut allergy";
     private static final String VALID_DATEOFLASTVISIT = "02-02-2024";
 
     private static final String WHITESPACE = " \t\r\n";

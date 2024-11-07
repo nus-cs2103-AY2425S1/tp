@@ -26,15 +26,15 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CONVICT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATEOFLASTVISIT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CONVICT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFLASTVISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -74,9 +74,9 @@ public class AddCommandParserTest {
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_CONVICT).build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_CONVICT
                         + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB,
                 new AddCommand(expectedPersonMultipleTags));
     }
@@ -261,7 +261,7 @@ public class AddCommandParserTest {
     public void parse_nameWithNonAlphanumeric_success() {
         Person expectedPerson = new PersonBuilder(BOB).build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_CONVICT
                         + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB + EMERGENCY_CONTACT_DESC_BOB,
                 new AddCommand(expectedPerson));
     }
@@ -271,24 +271,32 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(
                 parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
+                        + TAG_DESC_CONVICT + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(
                 parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
+                        + TAG_DESC_CONVICT + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(
                 parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
+                        + TAG_DESC_CONVICT + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
                 Email.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // single invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND + DATEOFLASTVISIT_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+                + INVALID_TAG_DESC + DATEOFLASTVISIT_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+
+        // valid tag followed by invalid tag
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + TAG_DESC_CONVICT + INVALID_TAG_DESC + DATEOFLASTVISIT_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid tag followed by valid tag
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + INVALID_TAG_DESC + TAG_DESC_CONVICT + DATEOFLASTVISIT_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
@@ -296,20 +304,20 @@ public class AddCommandParserTest {
 
         // invalid dateOfLastVisit
         assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_CONVICT
                         + TAG_DESC_FRIEND + INVALID_DATEOFLASTVISIT_DESC,
                 DateOfLastVisit.MESSAGE_CONSTRAINTS);
 
         // invalid emergency contact
         assertParseFailure(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_CONVICT
                         + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB + INVALID_EMERGENCY_CONTACT_DESC,
                 EmergencyContact.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser,
                 PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
+                        + TAG_DESC_CONVICT + TAG_DESC_FRIEND + DATEOFLASTVISIT_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

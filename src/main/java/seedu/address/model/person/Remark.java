@@ -11,7 +11,7 @@ public class Remark {
     /**
      * Constructs a {@code Remark}.
      *
-     * @param remark A valid date.
+     * @param remark A valid remark.
      */
     public Remark(String remark) {
         requireNonNull(remark);

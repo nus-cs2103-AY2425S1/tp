@@ -11,8 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class PersonComparator {
     public static final String NAME = "name";
     public static final String DATE_OF_LAST_VISIT = "date of last visit";
-    public static final String EARLIEST_VALID_DATE = "01-01-0001";
-    public static final String LATEST_VALID_DATE = "31-12-9999";
     private static final String SORT_EXCEPTION = "The specified parameter is invalid.";
 
     public PersonComparator() {
@@ -40,7 +38,7 @@ public class PersonComparator {
             if (isAscending) {
                 return new PersonDateOfLastVisitAscendingComparator();
             } else {
-                return new PersonDateOfLastVisitDescendingComparator().reversed();
+                return new PersonDateOfLastVisitDescendingComparator();
             }
 
         default:
@@ -69,22 +67,36 @@ class PersonNameComparator implements Comparator<Person> {
 class PersonDateOfLastVisitAscendingComparator implements Comparator<Person> {
     @Override
     public int compare(Person p1, Person p2) {
-        return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE))
-                .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE)));
+        if (p1.getDateOfLastVisit().isEmpty() && p2.getDateOfLastVisit().isEmpty()) {
+            return 0;
+        }
+        if (p1.getDateOfLastVisit().isEmpty()) {
+            return 1;
+        }
+        if (p2.getDateOfLastVisit().isEmpty()) {
+            return -1;
+        }
+        return p1.getDateOfLastVisit().get().compareTo(p2.getDateOfLastVisit().get());
     }
 }
 
 /**
  * Represents a class for comparing persons by DateOfLastVisit.
- * Where the person has no date of last visit they will be in the front
- * of the list given ascending order, therefore reversing this comparator
- * gives a descending order whereby persons with no date of last visit
- * are in the back.
+ * Where the person has no date of last visit they will be in the back
+ * of the list given descending order.
  */
 class PersonDateOfLastVisitDescendingComparator implements Comparator<Person> {
     @Override
     public int compare(Person p1, Person p2) {
-        return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.EARLIEST_VALID_DATE))
-                .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.EARLIEST_VALID_DATE)));
+        if (p1.getDateOfLastVisit().isEmpty() && p2.getDateOfLastVisit().isEmpty()) {
+            return 0;
+        }
+        if (p1.getDateOfLastVisit().isEmpty()) {
+            return 1;
+        }
+        if (p2.getDateOfLastVisit().isEmpty()) {
+            return -1;
+        }
+        return p2.getDateOfLastVisit().get().compareTo(p1.getDateOfLastVisit().get());
     }
 }

@@ -21,7 +21,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ],
+    "tags" : [ "owes money", "friends" ],
     "dateOfLastVisit" : "01-02-2024",
     "emergencyContact" : "92173902",
     "remark": ""

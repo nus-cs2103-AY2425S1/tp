@@ -118,7 +118,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="650" height="1000"/>
 
 
 The `Model` component,
@@ -274,8 +274,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* social worker
-* has a need to manage a significant number of beneficiaries
+* social worker in Singapore
+* need to manage around 100 beneficiaries
+* job scope is to befriend beneficiaries and provide emotional support and assistance where required
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -309,6 +310,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | forgetful individual                      | add tags which explain what service the person needs                       | remember and be able to meet the needs of beneficiaries                                                |
 | `* *`    | holder of sensitive information           | lock the SocialBook behind a password                                     | avoid having unsolicited sharing of personal information                                               |
 | `* *`    | max/expert user                           | add the medicinal information of beneficiaries                             | to know when to follow up on critical medicines                                                        |
+| `* *` | new user | see a sample of the product features on display | so that I know how a feature can be used to maximise the value |
 | `*`      | has rotating beneficiaries                | remove several contacts at once, when beneficiaries no longer require care | so that I can make space for new benficiaries and not keep track of old ones                           |
 | `*`      | max/expert user                           | know the households I need to visit on a certain day                       | so that I can schedule my day and not forget to visit any households                                   |
 | `*`      | user short on time                        | visit households that are geographically close in the same day/visit       | minimise the travelling time for myself                                                                |
@@ -323,7 +325,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | experienced social worker                 | locate a link where I can share my views and suggestions on the app        | help the app be more user centered and helpful over time                                               |
 | `*`      | efficient person                          | create visit paths based on proximity of beneficiaries                     | to be able to serve the most beneficiaries a day                                                       |
 | `*`      | social person                             | add notes of on conversations with beneficiaries                           | develop stronger relationships by building rapport                                                     |
-
 
 
 *{More to be added}*
@@ -444,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given specified field is/are empty.
 
   * 3a1. SocialBook shows an error message.
-  
+
     Use case resumes at step 2.
 
 * 3b. The given index is invalid.
@@ -452,11 +453,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. SocialBook shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 3c. There is an error in any of the specified fields.
-    
+
   * 3c1. SocialBook shows an error message.
-      
+
     Use case resumes at step 2.
 
 ##### **Use case: Find a contact**
@@ -508,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 200 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should not require an additional installer to use.
 5. Should be packaged entirely into a single JAR file (i.e. the user will only need to download a single JAR file to use the product).
@@ -533,6 +534,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Hard disk**: data storage device in laptops and computers.
 * **.JSON file**: JavaScript Object Notation, stores and transports data using a human-readable text format.
 * **SocialBook**: SocialBook is an address book hence SocialBook and AddressBook are interchangable. SocialBook is used to reference the product while AddressBook refers to the Class object in source code.
+* **Social worker**: refers to full-time employees of the [Ministry of Social and Family Developement (MSF) or its subsidaries](https://www.msf.gov.sg)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -581,7 +583,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting a person while found persons are being shown
 
-    1. Prerequisites: Find people with names matching a particular keyword using the `find` command. 
+    1. Prerequisites: Find people with names matching a particular keyword using the `find` command.
 
     1. Test case: `delete x`<br> (where x is less than or equal to the number of found persons)
        Expected: Contact x is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
@@ -602,7 +604,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete x y`<br> (where x,y are greater than the number of listed persons)
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Test case: `delete 0 1`<br> 
+    1. Test case: `delete 0 1`<br>
        Expected: First contact is deleted from the list. Name of the deleted contact and invalidity of the index 0 is shown in the status message. Timestamp in the status bar is updated.
 
 ### Saving data

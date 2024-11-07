@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -49,8 +49,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_DATEOFLASTVISIT + "DATEOFLASTVISIT] \n"
-            + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_CONTACT] \n"
+            + "[" + PREFIX_DATEOFLASTVISIT + "DATEOFLASTVISIT] "
+            + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_CONTACT] "
+            + "[" + PREFIX_REMARK + "REMARK] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -91,7 +92,6 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -112,11 +112,10 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getDateOfLastVisit());
         Optional<EmergencyContact> updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
                 .orElse(personToEdit.getEmergencyContact());
-        // remark not edited in edit command; Use remark command to edit remarks
-        Remark remark = personToEdit.getRemark();
+        Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, updatedDateOfLastVisit, updatedEmergencyContact, remark);
+                updatedTags, updatedDateOfLastVisit, updatedEmergencyContact, updatedRemark);
     }
 
     @Override
@@ -153,6 +152,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Optional<DateOfLastVisit> dateOfLastVisit;
         private Optional<EmergencyContact> emergencyContact;
+        private Remark remark;
 
         public EditPersonDescriptor() {}
 
@@ -167,6 +167,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setDateOfLastVisit(toCopy.dateOfLastVisit);
             setEmergencyContact(toCopy.emergencyContact);
+            setRemark(toCopy.remark);
         }
 
         /**
@@ -174,7 +175,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, dateOfLastVisit,
-                    emergencyContact);
+                    emergencyContact, remark);
         }
 
         public void setName(Name name) {
@@ -248,6 +249,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(emergencyContact);
         }
 
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -266,14 +275,16 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(dateOfLastVisit, otherEditPersonDescriptor.dateOfLastVisit)
-                    && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact);
+                    && Objects.equals(emergencyContact, otherEditPersonDescriptor.emergencyContact)
+                    && Objects.equals(remark, otherEditPersonDescriptor.remark);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this).add("name", name).add("phone", phone).add("email", email)
                     .add("address", address).add("tags", tags).add("dateOfLastVisit", dateOfLastVisit)
-                    .add("emergencyContact", emergencyContact).toString();
+                    .add("emergencyContact", emergencyContact)
+                    .add("remark", remark).toString();
         }
     }
 }

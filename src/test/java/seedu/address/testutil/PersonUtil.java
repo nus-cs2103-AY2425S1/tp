@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -65,6 +66,8 @@ public class PersonUtil {
                 .ifPresent(date -> sb.append(PREFIX_DATEOFLASTVISIT).append(date.get().value).append(" "));
         descriptor.getEmergencyContact().ifPresent(emergencyContact -> sb.append(PREFIX_EMERGENCY_CONTACT)
                 .append(emergencyContact.get().value.toString()).append(" "));
+        descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK)
+                .append(remark.value).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

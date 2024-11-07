@@ -139,6 +139,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Updates the displayed person list for the user.
+     * Will only be called if {@code indexToView} is not empty.
      */
     @FXML
     public void handleView(Optional<Index> indexToView) {

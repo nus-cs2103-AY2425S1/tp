@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -38,6 +39,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonComparator;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -84,36 +86,143 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         // Test find on name
-        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
+        List<String> nameKeywords = Arrays.asList("foo", "bar");
         FindCommand nameCommand = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + nameKeywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME
+                        + nameKeywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(nameKeywords)), nameCommand);
 
         // Test find on phone
-        List<String> phoneKeywords = Arrays.asList("12345678", "92631731");
+        List<String> phoneKeywords = Arrays.asList("12345678", "87654321");
         FindCommand phoneCommand = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + PREFIX_PHONE
                         + phoneKeywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new PhoneContainsKeywordsPredicate(phoneKeywords)), phoneCommand);
 
         // Test find on address
-        List<String> addressKeywords = Arrays.asList("blk 50", "blk 49");
+        List<String> addressKeywords = Arrays.asList("blk 50", "blk 51");
         FindCommand addressCommand = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS
                         + addressKeywords.stream().collect(Collectors.joining("_")));
-        assertEquals(new FindCommand(new AddressContainsKeywordsPredicate(addressKeywords)),
-                addressCommand);
+        assertEquals(new FindCommand(new AddressContainsKeywordsPredicate(addressKeywords)), addressCommand);
 
-        // Test find on multiple fields (name, phone, address)
-        FindCommand combinedCommand = (FindCommand) parser.parseCommand(
+        // Test find on tag
+        List<String> tagKeywords = Arrays.asList("friends", "colleagues");
+        FindCommand tagCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_TAG
+                        + tagKeywords.stream().collect(Collectors.joining("_")));
+        assertEquals(new FindCommand(new TagContainsKeywordsPredicate(tagKeywords)), tagCommand);
+
+        // Test find on name and phone
+        FindCommand namePhoneCommand = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo bar "
-                        + PREFIX_PHONE + "12345678 " + PREFIX_ADDRESS + "blk 50");
+                        + PREFIX_PHONE + "12345678");
+        assertEquals(new FindCommand(
+                        new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar")),
+                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345678"))),
+                namePhoneCommand);
 
+        // Test find on name and address
+        FindCommand nameAddressCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo bar "
+                        + PREFIX_ADDRESS + "blk 50");
+        assertEquals(new FindCommand(
+                        new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar")),
+                        new AddressContainsKeywordsPredicate(Arrays.asList("blk 50"))),
+                nameAddressCommand);
+
+        // Test find on name and tag
+        FindCommand nameTagCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo bar "
+                        + PREFIX_TAG + "friends");
+        assertEquals(new FindCommand(
+                        new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends"))),
+                nameTagCommand);
+
+        // Test find on phone and address
+        FindCommand phoneAddressCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_PHONE + "12345678 "
+                        + PREFIX_ADDRESS + "blk 50");
+        assertEquals(new FindCommand(
+                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345678")),
+                        new AddressContainsKeywordsPredicate(Arrays.asList("blk 50"))),
+                phoneAddressCommand);
+
+        // Test find on phone and tag
+        FindCommand phoneTagCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_PHONE + "12345678 "
+                        + PREFIX_TAG + "friends");
+        assertEquals(new FindCommand(
+                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345678")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends"))),
+                phoneTagCommand);
+
+        // Test find on address and tag
+        FindCommand addressTagCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_ADDRESS + "blk 50 "
+                        + PREFIX_TAG + "friends");
+        assertEquals(new FindCommand(
+                        new AddressContainsKeywordsPredicate(Arrays.asList("blk 50")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends"))),
+                addressTagCommand);
+
+        // Test find on name, phone and address
+        FindCommand namePhoneAddressCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo bar "
+                        + PREFIX_PHONE + "12345678 "
+                        + PREFIX_ADDRESS + "blk 50");
         assertEquals(new FindCommand(
                         new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar")),
                         new PhoneContainsKeywordsPredicate(Arrays.asList("12345678")),
                         new AddressContainsKeywordsPredicate(Arrays.asList("blk 50"))),
-                combinedCommand);
+                namePhoneAddressCommand);
+
+        // Test find on name, phone and tag
+        FindCommand namePhoneTagCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo bar "
+                        + PREFIX_PHONE + "12345678 "
+                        + PREFIX_TAG + "friends");
+        assertEquals(new FindCommand(
+                        new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar")),
+                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345678")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends"))),
+                namePhoneTagCommand);
+
+        // Test find on name, address and tag
+        FindCommand nameAddressTagCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo bar "
+                        + PREFIX_ADDRESS + "blk 50 "
+                        + PREFIX_TAG + "friends");
+        assertEquals(new FindCommand(
+                        new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar")),
+                        new AddressContainsKeywordsPredicate(Arrays.asList("blk 50")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends"))),
+                nameAddressTagCommand);
+
+        // Test find on phone, address and tag
+        FindCommand phoneAddressTagCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_PHONE + "12345678 "
+                        + PREFIX_ADDRESS + "blk 50 "
+                        + PREFIX_TAG + "friends");
+        assertEquals(new FindCommand(
+                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345678")),
+                        new AddressContainsKeywordsPredicate(Arrays.asList("blk 50")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends"))),
+                phoneAddressTagCommand);
+
+        // Test find on all fields
+        FindCommand allFieldsCommand = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo bar "
+                        + PREFIX_PHONE + "12345678 "
+                        + PREFIX_ADDRESS + "blk 50 "
+                        + PREFIX_TAG + "friends");
+        assertEquals(new FindCommand(
+                        new NameContainsKeywordsPredicate(Arrays.asList("foo", "bar")),
+                        new PhoneContainsKeywordsPredicate(Arrays.asList("12345678")),
+                        new AddressContainsKeywordsPredicate(Arrays.asList("blk 50")),
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends"))),
+                allFieldsCommand);
     }
 
     @Test

@@ -17,3 +17,57 @@
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+#commandTable {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-text-fill: white;
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+}
+
+#commandTable .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: gray;
+    -fx-border-width: 0 1px 1px 0;
+}
+
+#commandTable .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
+}
+
+#commandTable .column-header-background {
+    -fx-background-color: derive(#1d1d1d, 10%);
+}
+
+#commandTable .table-cell {
+    -fx-text-fill: white;
+    -fx-border-color: gray;
+    -fx-border-width: 0 1px 1px 0;
+    -fx-padding: 5px;
+}
+
+#commandTable .table-row-cell {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#commandTable .table-row-cell:hover {
+    -fx-background-color: derive(#1d1d1d, 30%);
+}
+
+#commandTable:focused {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#commandTable .table-row-cell:selected {
+    -fx-background-color: derive(#1d1d1d, 30%);
+}
+
+#commandTable .scroll-bar:vertical,
+#commandTable .scroll-bar:horizontal {
+    -fx-scale-x: 0;
+    -fx-scale-y: 0;
+    -fx-opacity: 0;
+    -fx-padding: -7;
+}

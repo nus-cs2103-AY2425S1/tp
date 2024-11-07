@@ -13,6 +13,7 @@ import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,6 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setTags(person.getTags());
         descriptor.setDateOfLastVisit(person.getDateOfLastVisit());
         descriptor.setEmergencyContact(person.getEmergencyContact());
+        descriptor.setRemark(person.getRemark());
     }
 
     /**
@@ -99,6 +101,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmergencyContact(String emergencyContact) {
         descriptor.setEmergencyContact(Optional.of(new EmergencyContact(emergencyContact)));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRemark(String remark) {
+        descriptor.setRemark(new Remark(remark));
         return this;
     }
 
