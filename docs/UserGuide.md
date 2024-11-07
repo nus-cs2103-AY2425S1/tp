@@ -264,7 +264,9 @@ Format: `import`
 * Upon first loading UniLink you will find an Import folder
 * Download a spreadsheet (`.csv`) file containing important contact info
 * Move the spreadsheet(s) to the Import folder
-* running the import command will import all valid contacts to the program's addressbook
+* Running the import command will import all valid contacts to the program's addressbook
+  ![.csv file in Import folder](images/csvInImport.png)
+  ![Successful import command](images/ImportCommand.png)
 
 <box type="tip" seamless>
 
@@ -324,6 +326,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
 **Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br><br> `findtele TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br> e.g., `findtele @james_lake`<br><br> `findtag TAG [MORE_TAG_KEYWORDS]`<br> e.g., `findtag friend`
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
+**Import** | `import`
 **List**   | `list`
 **Switch** | `switch [THEME]`<br> e.g., `switch LIGHT`, `switch DARK`
 **Help**   | `help`
