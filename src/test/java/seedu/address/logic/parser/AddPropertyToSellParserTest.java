@@ -1,17 +1,32 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.HOUSING_TYPE_DESC_HDB;
+import static seedu.address.logic.commands.CommandTestUtil.POSTAL_CODE_DESC_567510;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.SELLING_PRICE_DESC_1500000;
+import static seedu.address.logic.commands.CommandTestUtil.UNIT_NUMBER_DESC_03_11;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_NUMBER;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.AddPropertyToSellCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Hdb;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.person.Price;
+import seedu.address.model.person.Property;
+import seedu.address.model.person.UnitNumber;
+import seedu.address.model.util.SampleDataUtil;
 
 public class AddPropertyToSellParserTest {
 
@@ -135,5 +150,30 @@ public class AddPropertyToSellParserTest {
 
         // No exception should be thrown
         parser.parse(userInput);
+    }
+
+    @Test
+    public void parse_tagLengthExceedsLimit_throwsParseException() {
+        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + SELLING_PRICE_DESC_1500000
+                        + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + " t/thisisaverylongtag",
+                Property.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT);
+    }
+
+    @Test
+    public void parse_tagCountExceedsLimit_throwsParseException() {
+        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + SELLING_PRICE_DESC_1500000
+                        + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11
+                        + " t/tag1 t/tag2 t/tag3 t/tag4 t/tag5 t/tag6",
+                Property.MESSAGE_PROPERTY_TAG_LIMIT);
+    }
+
+    @Test
+    public void parse_validTags_success() throws ParseException {
+        Property expectedProperty = new Hdb(new PostalCode("567510"), new UnitNumber("03-11"),
+                new Price("1650000"), SampleDataUtil.getTagSet("tag1", "tag2"));
+
+        assertParseSuccess(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + SELLING_PRICE_DESC_1500000
+                        + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + " t/tag1 t/tag2",
+                new AddPropertyToSellCommand(Index.fromOneBased(1), expectedProperty));
     }
 }
