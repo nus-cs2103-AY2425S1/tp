@@ -97,13 +97,13 @@ public class ExportCommand extends Command {
 
     /**
      * Parses a single tag from its JSON representation to its CSV representation.
-     * e.g. {\n \"friends\" : null\n} -> friends
+     * e.g. {\n \"friends\" : null\n} -> friends : null
      * @param tagString
      * @return a single parsed tag
      */
     static String parseTags(String tagString) {
-        // Remove leading and trailing whitespace
-        tagString = tagString.trim();
+        // Remove leading and trailing whitespace (including carriage returns).
+        tagString = tagString.replaceAll("\\s+", "");
 
         // Check if the string starts with { and ends with }
         if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
