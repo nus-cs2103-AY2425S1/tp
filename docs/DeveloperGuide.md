@@ -368,6 +368,24 @@ The main steps for execution are similar to the Enroll and Unenroll feature docu
 Between Add Student and Create Tutorial feature, the main difference is with regard to how they access the Model Component. Create Tutorial calls `hasTutorial(...)` and `createTutorial(...)`  method from the Model Component instead.
 </div>
 
+### **Delete Student and Close Tutorial feature**
+
+The implementation of the Delete Student and Close Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Delete Student feature when the user inputs `delete 1` will be shown below. 
+
+Note that this sequence diagram is the same as the one used in [Logic Component](#logic-component), but it is added here for easier referencing.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+The main steps for execution are similar to the Enroll and Unenroll feature documented [above](#enroll-and-unenroll-feature), ignoring the difference in parsers and commands being executed.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Between Delete Student and Close Tutorial feature, the main difference is with regard to how they access the Model Component. Instead of calling student-related methods such as `getFilteredPersonList()` and `deletePerson(...),` Close Tutorial calls tutorial-related methods like `getTutorialList()` and `deleteTutorial(...)` instead.
+</div>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+`Student` are named as `Person` due to Legacy code.
+</div>
 
 ### List and Clear feature
 
