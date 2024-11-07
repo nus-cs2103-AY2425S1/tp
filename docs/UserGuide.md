@@ -60,13 +60,21 @@ title: User Guide
    6.2. [Closing a tutorial](#62-closing-a-tutorial)
 
    6.3. [Clearing all entries](#63-clearing-all-entries)
+
 7. [Viewing help](#7-viewing-help)
+
 8. [Exiting the program](#8-exiting-the-program)
+
 9. [Saving the data](#9-saving-data)
+
 10. [Editing the data file](#10-editing-the-data-file)
+
 11. [Prefix Table](#11-prefix-table)
+
 12. [Format Errors](#12-format-errors)
+
 13. [FAQ](#13-faq)
+
 14. [Known issues](#14-known-issues)
 
 ---
