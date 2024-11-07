@@ -539,40 +539,40 @@ Success action: Details of edited contact shown in the status message, person in
 
 1. Editing a person while all persons are being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `edit`<br>
       Test case: `edit 1`<br>
-      Expected: No person is edited. `edit` command format is shown in the status message.<br><br>
+      Expected: No person is edited. `edit` command format is shown in the status message.
     
    1. Test case: `edit 0 [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]`<br>
       Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is a negative number) <br>
-      Expected: No wedding added. `edit` command format is shown in the status message.<br><br>
+      Expected: No wedding added. `edit` command format is shown in the status message.
 
    1. Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is larger than the size of the wedding list)<br>
-      Expected: No wedding added. Error message prompting the user to choose an index within the range shown.<br><br>
+      Expected: No wedding added. Error message prompting the user to choose an index within the range shown.
 
     1. Test case: `edit 1 n/NEW NAME`<br>
        Expected (Valid Name): First person has name field edited to NEW NAME. Success action will be carried out.<br>
-       Expected (Invalid Name): No person is edited. Error message with name restrictions shown in status message.<br><br>
+       Expected (Invalid Name): No person is edited. Error message with name restrictions shown in status message.
 
    1. Test case: `edit 1 p/NEW PHONE`<br>
       Expected (Valid Phone): First contact has phone field edited to NEW PHONE. Success action will be carried out.<br>
-      Expected (Invalid Phone): No person is edited. Error message with phone restrictions shown in status message.<br><br>
+      Expected (Invalid Phone): No person is edited. Error message with phone restrictions shown in status message.
 
    1. Test case: `edit 1 e/NEW EMAIL`<br>
       Expected (Valid Email): First contact has email field edited to NEW EMAIL. Success action will be carried out.<br>
-      Expected (Invalid Email): No person is edited. Error message with email restrictions shown in status message.<br><br>
+      Expected (Invalid Email): No person is edited. Error message with email restrictions shown in status message.
 
    1. Test case: `edit 1 a/NEW ADDRESS`<br>
       Expected (Valid Address): First contact has address field edited to NEW ADDRESS. Success action will be carried out.<br>
-      Expected (Invalid Address): No person is edited. Error message with address restrictions shown in status message.<br><br>
+      Expected (Invalid Address): No person is edited. Error message with address restrictions shown in status message.
 
    1. Test case: `edit 1 n/EXISTING NAME p/EXITING PHONE e/EXISTING EMAIL a/EXISTING ADDRESS`<br>
-      Expected: No person is edited. Error message shows person already exist in status message.<br><br>
+      Expected: No person is edited. Error message shows person already exist in status message.
 
    1. Test case: `edit 1 p/EXITING PHONE`<br>
-      Expected: No person is edited. Error message shows phone already exist in status message.<br><br>
+      Expected: No person is edited. Error message shows phone already exist in status message.
 
    1. Test case: `edit 1 e/EXISTING EMAIL`<br>
       Expected: No person is edited. Error message shows email already exist in status message.
