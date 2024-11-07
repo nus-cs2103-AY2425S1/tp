@@ -158,19 +158,14 @@ public class LinkedPetList implements Iterable<Pet> {
     public String getAsField() {
         StringBuilder formattedPets = new StringBuilder();
 
-        formattedPets.append("Pets: ");
+        formattedPets.append("Pet(s): ");
 
         if (internalList.size() == 0) {
             formattedPets.append("warning! this owner is not linked to any pets");
             return formattedPets.toString();
         }
 
-        for (Pet pet : internalList) {
-            if (formattedPets.length() > 6) { // Account for "Pets: "
-                formattedPets.append(" | ");
-            }
-            formattedPets.append(pet.getName());
-        }
+        formattedPets.append(String.join(" | ", internalList.stream().map(p -> p.getName().toString()).toList()));
 
         return formattedPets.toString();
     }
