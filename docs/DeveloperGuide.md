@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CustomerListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CustomerListPanel`, `OrderListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Customer` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Customer` and `Order` objects residing in the `Model`.
 
 ### Logic component
 
@@ -126,6 +126,8 @@ The `Model` component,
 
 * stores the address book data i.e., all `Customer` objects (which are contained in a `UniqueCustomerList` object).
 * stores the currently 'selected' `Customer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Customer>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a particular `Customer` whose orders will be displayed in a `ReadOnlyObjectWrapper<Customer>` which is exposed to outsiders as an unmodifiable `ReadOnlyObjectProperty<Customer>` that can be 'observed' e.g. the UI can be bound to this object property so that the UI automatically updates when selected customer change.
+  * Each `Customer` stores the currently 'selected' `Order` objects (e.g., results of a filter query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Order>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -508,18 +510,29 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Saving changes in data
 
+   1. Prerequisites: Has at least 1 customer listed using `listcustomer` in the GUI
+    
+   1.  Add an order under a customer using the `addorder` command.<br>
+      Example: `addorder 1 i/Lamp d/20-11-2024 q/3`
+      Expected: Order added under the first customer in the customer list and all his orders will be displayed. 
+
+   1.  Re-launch the app by double-clicking the jar file.<br>
+       Expected: The newest order added is retained.
+
+1. _{ more test cases …​ }_
+   
 ### Deleting a customer
 
 1. Deleting a customer while all customers are being shown
 
-   1. Prerequisites: List all customers using the `list` command. Multiple customers in the list.
+   1. Prerequisites: List all customers using the `listcustomer` command. Multiple customers in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `deletecustomer 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `deletecustomer 0`<br>
       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
