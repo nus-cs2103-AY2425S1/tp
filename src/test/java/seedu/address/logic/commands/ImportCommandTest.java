@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -59,5 +61,29 @@ public class ImportCommandTest {
         String expectedMessage = expectedMessageBuilder.toString();
 
         assertCommandSuccess(importCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        Path typicalPersons = TEST_DATA_FOLDER.resolve("typicalPersonsCsv.csv");
+        Path failedPersons = TEST_DATA_FOLDER.resolve("failedPersonsCsv.csv");
+        ImportCommand importCommand = new ImportCommand(typicalPersons.toString());
+        ImportCommand otherImportCommand = new ImportCommand(failedPersons.toString());
+
+        // same object -> returns true
+        assertTrue(importCommand.equals(importCommand));
+
+        // same values -> returns true
+        ImportCommand importCommandCopy = new ImportCommand(typicalPersons.toString());
+        assertTrue(importCommand.equals(importCommandCopy));
+
+        // different types -> returns false
+        assertFalse(importCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(importCommand.equals(null));
+
+        // different import command -> returns false
+        assertFalse(importCommand.equals(otherImportCommand));
     }
 }

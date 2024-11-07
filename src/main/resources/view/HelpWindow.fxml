@@ -9,7 +9,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -21,23 +25,37 @@
 
       <HBox alignment="CENTER" fx:id="helpMessageContainer">
         <children>
-          <Label fx:id="helpMessage" text="Label">
-            <HBox.margin>
-              <Insets right="5.0" />
-            </HBox.margin>
-          </Label>
-          <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-            <HBox.margin>
-              <Insets left="5.0" />
-            </HBox.margin>
-          </Button>
+          <VBox>
+            <padding>
+              <Insets bottom="10" right="10" top="10" left="10" />
+            </padding>
+            <Label text="Command Summary" styleClass="header-label"/>
+            <TableView fx:id="tableView" prefHeight="500" prefWidth="815">
+              <columns>
+                <TableColumn fx:id="action" text="Action" />
+                <TableColumn fx:id="format" text="Format, Example" />
+              </columns>
+            </TableView>
+
+            <HBox>
+              <padding>
+                <Insets top="10" />
+              </padding>
+              <Label fx:id="helpMessage" text="Label">
+                <HBox.margin>
+                  <Insets right="100" top="5" />
+                </HBox.margin>
+              </Label>
+
+              <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+                <HBox.margin>
+                  <Insets left="85" />
+                </HBox.margin>
+              </Button>
+            </HBox>
+
+          </VBox>
         </children>
-        <opaqueInsets>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </opaqueInsets>
-        <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </padding>
       </HBox>
     </Scene>
   </scene>

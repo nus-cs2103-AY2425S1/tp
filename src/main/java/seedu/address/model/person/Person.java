@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Person {
-    private static int index = 0;
+    private static int index;
     // Identity fields
     protected final int id;
     private final Name name;
@@ -52,7 +52,6 @@ public abstract class Person {
         this.hours = hours;
         this.subjects.addAll(subjects);
         this.id = id;
-        index = id++;
     }
 
     public abstract boolean isTutor();
@@ -89,6 +88,10 @@ public abstract class Person {
 
     public static void initialiseIndex(int index) {
         Person.index = index;
+    }
+
+    public static int getNextIndex() {
+        return index++;
     }
 
     /**
