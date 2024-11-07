@@ -1,0 +1,55 @@
+/* Chart container styles */
+.chart-container {
+    -fx-background-color: #1C1C1C;
+    -fx-padding: 2;
+}
+
+/* Chart title styles */
+.chart-title {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 0 0 -2 0;
+    -fx-font-weight: bold;
+}
+
+/* General pie chart styles */
+.chart-pie {
+    -fx-border-width: 0;
+    -fx-padding: 0 0 0 2;
+}
+
+/* Data-specific styles for pie slices */
+.chart-pie.data0 {
+    -fx-pie-color: #009E60;
+}
+
+.chart-pie.data1 {
+    -fx-pie-color: #c46210;
+}
+
+.chart-pie.data2 {
+    -fx-pie-color: #FF2400;
+}
+
+/* Legend styles */
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 10 5 5 5;
+}
+
+.chart-legend-item {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.chart-legend-item-symbol {
+    -fx-padding: 3px;
+    -fx-min-width: 8px;
+    -fx-min-height: 8px;
+}
+
+/* Status chart placeholder dimensions */
+.status-chart-placeholder {
+    -fx-min-height: 220px;
+    -fx-max-height: 220px;
+}

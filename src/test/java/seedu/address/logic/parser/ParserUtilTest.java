@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
+import java.math.BigInteger;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -163,14 +165,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseIncome_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Income expectedIncome = new Income(Integer.parseInt(VALID_INCOME));
+        Income expectedIncome = new Income(new BigInteger(VALID_INCOME));
         assertEquals(expectedIncome, ParserUtil.parseIncome(VALID_INCOME));
     }
 
     @Test
     public void parseIncome_validValueWithWhitespace_returnsTrimmedIncome() throws Exception {
         String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
-        Income expectedIncome = new Income(Integer.parseInt(VALID_INCOME));
+        Income expectedIncome = new Income(new BigInteger(VALID_INCOME));
         assertEquals(expectedIncome, ParserUtil.parseIncome(incomeWithWhitespace));
     }
 

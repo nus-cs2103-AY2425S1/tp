@@ -67,34 +67,50 @@ public class ClientCard extends UiPart<Region> {
     }
 
     private void createTier() {
-        // Create a label for the tier
-        Label tierLabel = new Label(client.getTier().toParsableString().toUpperCase());
+        String tierText = client.getTier().toParsableString();
+        if (!tierText.isEmpty()) {
+            Label tierLabel = new Label(tierText.toUpperCase());
 
-        // Apply the existing style classes
-        tierLabel.getStyleClass().add("label");
+            // Apply the existing style classes
+            tierLabel.getStyleClass().add("label");
 
-        // Add the tier-specific style class
-        String tier = client.getTier().toParsableString().toLowerCase();
-        tierLabel.getStyleClass().add(tier + "-tier");
+            // Add the tier-specific style class
+            String tier = client.getTier().toParsableString().toLowerCase();
+            tierLabel.getStyleClass().add(tier + "-tier");
 
-        // Add the label to the FlowPane
-        assignedTier.getChildren().add(tierLabel);
+            // Add the label to the FlowPane
+            assignedTier.getChildren().add(tierLabel);
+        } else {
+            assignedTier.setVisible(false); // Hide the FlowPane if it's empty
+            assignedTier.setManaged(false); // Exclude it from layout calculations
+        }
     }
 
     private void createStatus() {
-        Label statusLabel = new Label(client.getStatus().toParsableString());
-
-        // Apply a different style class based on the status value
         Status.StatusEnum status = client.getStatus().status;
-        switch (status) {
-        case NONE -> statusLabel.getStyleClass().add("none-status");
-        case NON_URGENT -> statusLabel.getStyleClass().add("nonUrgent-status");
-        case URGENT -> statusLabel.getStyleClass().add("urgent-status");
-        default -> statusLabel = null;
-        }
-        if (statusLabel != null) {
-            assignedStatus.getChildren().add(statusLabel);
 
+        // Only create a label if the status is relevant
+        if (status == Status.StatusEnum.NA) {
+            assignedStatus.setVisible(false);
+            assignedStatus.setManaged(false);
+            return;
         }
+
+        // Create and configure the label for relevant statuses
+        Label statusLabel = new Label(client.getStatus().toParsableString());
+        statusLabel.getStyleClass().add(getStatusStyleClass(status));
+
+        // Add the label to assignedStatus and ensure it’s visible and managed
+        assignedStatus.getChildren().add(statusLabel);
+        assignedStatus.setVisible(true);
+        assignedStatus.setManaged(true);
+    }
+
+    private String getStatusStyleClass(Status.StatusEnum status) {
+        return switch (status) {
+        case URGENT -> "urgent-status";
+        case NON_URGENT -> "nonUrgent-status";
+        default -> ""; // This case won’t occur due to the check in createStatus
+        };
     }
 }

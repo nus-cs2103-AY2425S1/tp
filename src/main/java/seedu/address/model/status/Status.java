@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Status {
 
-    public static final String MESSAGE_CONSTRAINTS = "The Statuses are None, Non_Urgent and Urgent. Please use "
-            + "one of them.";
+    public static final String MESSAGE_CONSTRAINTS = "Status can be left blank, or set to 'non_urgent' or 'urgent'. "
+            + "Please use one of these options if specifying a status.";
+
 
     public final StatusEnum status;
 
@@ -23,7 +24,7 @@ public class Status {
         requireNonNull(statusString);
         checkArgument(isValidStatus(statusString), MESSAGE_CONSTRAINTS);
         if (statusString.isEmpty()) {
-            this.status = StatusEnum.NONE;
+            this.status = StatusEnum.NA;
         } else {
             this.status = StatusEnum.valueOf(statusString.toUpperCase());
         }
@@ -37,7 +38,7 @@ public class Status {
      */
     public static boolean isValidStatus(String test) {
         if (test.isEmpty()) {
-            return true; // assign None
+            return true; // assign NA
         }
         for (StatusEnum currentEnum: StatusEnum.values()) {
             if (currentEnum.name().equals(test.toUpperCase())) {
@@ -83,8 +84,8 @@ public class Status {
      * Represent what values Status can take.
      */
     public enum StatusEnum {
-        NONE,
+        URGENT,
         NON_URGENT,
-        URGENT
+        NA
     }
 }

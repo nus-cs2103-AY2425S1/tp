@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tier {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "The Tiers are Gold, Silver, Bronze and Reject. Please use one of them.";
+            "The Tiers are gold, silver, bronze and reject. Please use one of them.";
 
     public final TierEnum tierName;
 

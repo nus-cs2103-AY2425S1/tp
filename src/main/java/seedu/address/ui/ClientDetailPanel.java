@@ -5,13 +5,15 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.status.Status;
 
 /**
  * A UI component that displays detailed information about a {@code Client}.
- * Shows all available fields including name, phone, address, email, job, income, tier, and remarks.
+ * Shows all available fields including name, phone, address, email, job, income, tier, status, and remarks.
  * Fields can be shown or hidden based on the presence of a client's data.
  */
 public class ClientDetailPanel extends UiPart<Region> {
@@ -32,6 +34,12 @@ public class ClientDetailPanel extends UiPart<Region> {
     private Label incomeLabel;
     @FXML
     private FlowPane tierPane;
+    @FXML
+    private FlowPane statusPane;
+    @FXML
+    private HBox tagsContainer;
+    @FXML
+    private HBox tagsGroup;
     @FXML
     private Label remarkLabel;
 
@@ -57,6 +65,22 @@ public class ClientDetailPanel extends UiPart<Region> {
         jobLabel = jobLabel == null ? new Label() : jobLabel;
         incomeLabel = incomeLabel == null ? new Label() : incomeLabel;
         remarkLabel = remarkLabel == null ? new Label() : remarkLabel;
+        tagsSetting();
+    }
+
+    /**
+     * Setting up group of tag(s) for alignment setup
+     */
+    private void tagsSetting() {
+        if (tagsGroup == null) {
+            tagsGroup = new HBox();
+            tagsGroup.setSpacing(10);
+        }
+        if (tagsContainer == null) {
+            tagsContainer = new HBox();
+            tagsContainer.setAlignment(javafx.geometry.Pos.CENTER);
+            tagsContainer.getChildren().add(tagsGroup);
+        }
     }
 
     /**
@@ -70,7 +94,7 @@ public class ClientDetailPanel extends UiPart<Region> {
         setManagedAndVisible(emailLabel, false);
         setManagedAndVisible(jobLabel, false);
         setManagedAndVisible(incomeLabel, false);
-        setManagedAndVisible(tierPane, false);
+        setManagedAndVisible(tagsContainer, false);
         setManagedAndVisible(remarkLabel, false);
     }
 
@@ -103,7 +127,13 @@ public class ClientDetailPanel extends UiPart<Region> {
             setLabelText(jobLabel, client.getJob().value);
             setLabelText(incomeLabel, String.valueOf(client.getIncome()));
             setTier(client.getTier().toParsableString());
+            setStatus(client.getStatus());
             setLabelText(remarkLabel, client.getRemark().value);
+            tagsGroup.getChildren().clear();
+            setTier(client.getTier().toParsableString());
+            setStatus(client.getStatus());
+            boolean hasTags = !tagsGroup.getChildren().isEmpty();
+            setManagedAndVisible(tagsContainer, hasTags);
         } else {
             hideAllFields();
         }
@@ -128,10 +158,30 @@ public class ClientDetailPanel extends UiPart<Region> {
      * @param tier The tier value to display
      */
     private void setTier(String tier) {
-        tierPane.getChildren().clear();
-        Label tierLabel = new Label(tier.toUpperCase());
-        tierLabel.getStyleClass().addAll("label", "detail-tier-label", tier.toLowerCase() + "-tier");
-        tierPane.getChildren().add(tierLabel);
+        if (!tier.isEmpty()) {
+            Label tierLabel = new Label(tier.toUpperCase());
+            tierLabel.getStyleClass().addAll("label", tier.toLowerCase() + "-tier");
+            tagsGroup.getChildren().add(tierLabel);
+        }
+    }
+
+    /**
+     * Sets the status display in the detail panel.
+     * Creates a new styled label for the status and adds it to the status pane.
+     *
+     * @param status The status to display
+     */
+    private void setStatus(Status status) {
+        if (status.status != Status.StatusEnum.NA) {
+            Label statusLabel = new Label(status.toParsableString());
+            String styleClass = switch (status.status) {
+            case URGENT -> "urgent-status";
+            case NON_URGENT -> "nonUrgent-status";
+            default -> "";
+            };
+            statusLabel.getStyleClass().addAll("label", styleClass);
+            tagsGroup.getChildren().add(statusLabel);
+        }
     }
 
     /**
@@ -145,7 +195,7 @@ public class ClientDetailPanel extends UiPart<Region> {
         setManagedAndVisible(emailLabel, true);
         setManagedAndVisible(jobLabel, true);
         setManagedAndVisible(incomeLabel, true);
-        setManagedAndVisible(tierPane, true);
+        setManagedAndVisible(tagsContainer, true);
         setManagedAndVisible(remarkLabel, true);
     }
 }

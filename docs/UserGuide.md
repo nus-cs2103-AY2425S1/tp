@@ -356,8 +356,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       ```
       New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>.
       ```
-    - If "Tier" and "Remark" are not provided, they will be set to "NA" and displayed as such in the success message.
-    - If "Status" is not provided, it will be set to "NONE".
+    - If `Tier`, `Status` or `Remark` is not provided, they will be set to "NA" and displayed as such in the success message.
 
 - **On Error**
   - Error caused by missing mandatory fields
@@ -373,7 +372,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
       - Message:
         ```
         Invalid command format!
-        <INDIVIDUAL FIELD'S ERROR MESSAGES>...
+        <INDIVIDUAL FIELD'S ERROR MESSAGES>..``.
         add: Adds a client to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS j/JOB i/INCOME [t/TIER]...
         [r/REMARK]...[s/STATUS]...
         Example: 'add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 j/doctor i/300 t/GOLD r/He is very smart s/NON_URGENT'    
@@ -381,7 +380,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > **Note on Duplicates:**
 >
-> AgentAssist will prevent duplicate entries if a client with the **same name, email and phone number** is already saved.  
+> AgentAssist will prevent duplicate entries if a client with t``he **same name, email and phone number** is already saved.  
 > When this happens, you will see the following message:
 >
 > ```
@@ -409,11 +408,11 @@ edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [
 - Mandatory Field: `<INDEX>`
 - Optional Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`, `t/`, `rn/`, `ra/`, `s/`
 - **Note:** `rn/` (new remark(s)) and `ra/` (append remark(s)) cannot be used simultaneously in a single command.
-- **Note:** Assigning an empty value to `t/` or `s/` flags will remove the existing value for either of these flags and assign a default value to both. In the case of tier, it defaults to `N.A` and for status, it defaults to `None`.
+- **Note:** Assigning an empty value to `t/` or `s/` flags will remove the existing value for either of these flags and assign a default value to both. The default value for both `Tier` and `Status` is `NA`. 
 
-For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
+For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)`
 
-**Examples:**
+`**Examples:**
 - Edit only 1 specific field:
   ```
   edit 12 a/ Ridge View Residential College
@@ -422,7 +421,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   edit 12 t/ gold
   ```
   ```
-  edit 12 s/ urgent 
+  edit 12 s/ urgent ``
 - ```
 - Edit multiple fields at the same time:
   ```
@@ -765,6 +764,7 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran' 
+4.  **Using non-english text input can cause visual bugs**. This release fully supports English text input only**. Using non-English characters or text may cause display issues, including incorrect text direction and character rendering. We are actively working to expand international language support in future releases.
 
 [↑ Return to Table of Contents](#table-of-contents)
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+
+<VBox fx:id="chartContainer" alignment="CENTER" spacing="0" fillWidth="true"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@css/DarkTheme.css" />
+        <URL value="@css/StatusPieChart.css" />
+    </stylesheets>
+
+    <Label fx:id="chartTitle" styleClass="chart-title"/>
+    <PieChart fx:id="statusChart" VBox.vgrow="ALWAYS" legendSide="BOTTOM"/>
+</VBox>

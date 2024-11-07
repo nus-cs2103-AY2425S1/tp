@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -73,7 +74,7 @@ public class FilterCommandParserTest {
     public void parse_jobFlag_returnsRemarkFilterCommand() {
         List<Predicate<Client>> expectedPredicates = new ArrayList<>();
         IncomeComparisonOperator operator = new IncomeComparisonOperator(">");
-        expectedPredicates.add(new IncomeComparisonPredicate(operator, 5000));
+        expectedPredicates.add(new IncomeComparisonPredicate(operator, BigInteger.valueOf(5000)));
 
         FilterCommand expectedFilterCommand = new FilterCommand(new CombinedPredicate(expectedPredicates));
 
@@ -126,7 +127,7 @@ public class FilterCommandParserTest {
         expectedPredicates.add(new AddressContainsSubstringPredicate("Block 123"));
         expectedPredicates.add(new JobContainsSubstringPredicate("Software Engineer"));
         IncomeComparisonOperator operator = new IncomeComparisonOperator(">");
-        expectedPredicates.add(new IncomeComparisonPredicate(operator, 5000));
+        expectedPredicates.add(new IncomeComparisonPredicate(operator, BigInteger.valueOf(5000)));
         expectedPredicates.add(new RemarkContainsSubstringPredicate("is a celebrity"));
         expectedPredicates.add(new TierStartsWithSubstringPredicate("GOLD"));
 

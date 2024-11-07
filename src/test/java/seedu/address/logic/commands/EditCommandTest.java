@@ -81,6 +81,7 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
+
     @Test
     public void execute_appendRemarkFieldsSpecifiedUnfilteredList_success() {
         Index indexLastClient = Index.fromOneBased(model.getFilteredClientList().size());
@@ -88,7 +89,7 @@ public class EditCommandTest {
 
         ClientBuilder clientInList = new ClientBuilder(lastClient);
         Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTier(VALID_TIER_REJECT).withRemark(CommandCommons.DEFAULT_REMARK + "\nTest\n").build();
+                .withTier(VALID_TIER_REJECT).withRemark(CommandCommons.DEFAULT_REMARK + "\nTest").build();
 
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTier(VALID_TIER_REJECT)
@@ -138,6 +139,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(new AgentAssist(model.getAgentAssist()), new UserPrefs());
+        showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
         expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

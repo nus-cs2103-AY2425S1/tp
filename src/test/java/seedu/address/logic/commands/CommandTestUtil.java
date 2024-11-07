@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,8 +69,8 @@ public class CommandTestUtil {
     public static final String NEW_REMARK_DESC_BOB = " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB;
     public static final String APPEND_REMARK_DESC_BOB = " " + PREFIX_APPEND_REMARK + VALID_REMARK_BOB;
     public static final String VALID_STATUS_NON_URGENT = "non_urgent";
-    public static final String VALID_STATUS_NONE = "none";
-    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_NONE;
+    public static final String VALID_STATUS_NA = "na";
+    public static final String STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_STATUS_NA;
     public static final String STATUS_DESC_BOB = " " + PREFIX_STATUS + VALID_STATUS_NON_URGENT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -95,12 +96,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withJob(VALID_JOB_AMY).withIncome(Integer.parseInt(VALID_INCOME_AMY))
+                .withJob(VALID_JOB_AMY).withIncome(new BigInteger(VALID_INCOME_AMY))
                 .withTier(VALID_TIER_GOLD).withNewRemark(VALID_REMARK_AMY).build();
 
         DESC_BOB = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withJob(VALID_JOB_BOB).withIncome(Integer.parseInt(VALID_INCOME_BOB))
+                .withJob(VALID_JOB_BOB).withIncome(new BigInteger(VALID_INCOME_BOB))
                 .withTier(VALID_TIER_REJECT).withNewRemark(VALID_REMARK_BOB).build();
     }
 
@@ -142,7 +143,7 @@ public class CommandTestUtil {
         AgentAssist expectedAgentAssist = new AgentAssist(actualModel.getAgentAssist());
         List<Client> expectedFilteredList = new ArrayList<>(actualModel.getFilteredClientList());
 
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel, false));
         assertEquals(expectedAgentAssist, actualModel.getAgentAssist());
         assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
     }

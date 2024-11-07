@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         title="AgentAssist" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="AgentAssist" minWidth="800" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/agent_assist_logo.png" />
   </icons>
@@ -21,6 +21,7 @@
     <Scene>
       <stylesheets>
         <URL value="@css/DarkTheme.css" />
+        <URL value="@css/ClientListCard.css" />
         <URL value="@css/Extensions.css" />
       </stylesheets>
 
@@ -34,18 +35,27 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+        <SplitPane fx:id="topSplitPane" VBox.vgrow="NEVER" styleClass="top-split-pane">
+          <VBox minWidth="400">
+            <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border" minHeight="50">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+            <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
+          </VBox>
+
+          <StackPane fx:id="statusChartPlaceholder" styleClass="chart-container" minWidth="150">
+            <padding>
+              <Insets top="2" right="2" bottom="2" left="2" />
+            </padding>
+          </StackPane>
+        </SplitPane>
 
         <SplitPane fx:id="splitPane" VBox.vgrow="ALWAYS" dividerPositions="0.5">
           <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="340" prefWidth="340">
@@ -63,6 +73,7 @@
             </ImageView>
           </StackPane>
         </SplitPane>
+
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

@@ -63,23 +63,27 @@ public class LogicManagerTest {
     @Test
     public void execute_deleteCommandRequiresConfirmation_displaysDeleteConfirmationMessage()
             throws CommandException, ParseException {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete 1";
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + INCOME_DESC_AMY;
+        logic.execute(addCommand);
         assertCommandSuccess(deleteCommand, MESSAGE_DELETE_CONFIRMATION, model);
     }
 
     @Test
     public void execute_cancelDeleteCommand_success() throws CommandException, ParseException {
-        String[] deleteCommand = {"delete 9", "no"};
-        Model expectedModel = new ModelManager(model.getAgentAssist(), new UserPrefs());
-        assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, expectedModel);
+        String[] deleteCommand = {"delete 1", "no"};
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + INCOME_DESC_AMY;
+        logic.execute(addCommand);
+        assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, model);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
-        String[] deleteCommand = {"delete 9", "y"};
-        logic.execute(deleteCommand[0]);
+        String deleteCommand = "delete 9";
         assertThrows(CommandException.class, MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX, () ->
-                logic.execute(deleteCommand[1]));
+                logic.execute(deleteCommand));
     }
 
     @Test
@@ -104,25 +108,6 @@ public class LogicManagerTest {
     public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredClientList().remove(0));
     }
-
-    /**
-     * Executes the command (which requires a confirmation) and confirms that
-     * - the {@code expectedException} is thrown <br>
-     * - the resulting error message is equal to {@code expectedMessage} <br>
-     * @see #assertCommandSuccess(String, String, Model)
-     */
-    private void assertDeleteCommandFailure(Class<? extends Throwable> expectedException, String expectedMessage,
-                                            String... inputCommand) throws CommandException, ParseException {
-        for (int i = 0; i < inputCommand.length; i++) {
-            if (i == inputCommand.length - 1) {
-                assertThrows(expectedException, expectedMessage, () ->
-                        logic.execute(inputCommand[inputCommand.length - 1]));
-            } else {
-                logic.execute(inputCommand[i]);
-            }
-        }
-    }
-
 
     /**
      * Executes the command and confirms that

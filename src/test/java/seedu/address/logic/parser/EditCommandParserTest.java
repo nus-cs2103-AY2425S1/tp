@@ -45,6 +45,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_CLIENT;
 
+import java.math.BigInteger;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -202,13 +204,13 @@ public class EditCommandParserTest {
 
         // income
         userInput = targetIndex.getOneBased() + INCOME_DESC_AMY;
-        descriptor = new EditClientDescriptorBuilder().withIncome(Integer.parseInt(VALID_INCOME_AMY)).build();
+        descriptor = new EditClientDescriptorBuilder().withIncome(new BigInteger(VALID_INCOME_AMY)).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // income but 0 dollars
         userInput = targetIndex.getOneBased() + INCOME_DESC_BOB;
-        descriptor = new EditClientDescriptorBuilder().withIncome(Integer.parseInt(VALID_INCOME_BOB)).build();
+        descriptor = new EditClientDescriptorBuilder().withIncome(new BigInteger(VALID_INCOME_BOB)).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

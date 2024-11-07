@@ -24,11 +24,10 @@ public class DeleteCommand extends Command {
             + "Example: '" + COMMAND_WORD + " 1'";
 
     public static final String MESSAGE_DELETE_CLIENT_SUCCESS = "Deleted Client: %1$s";
-    public static final String MESSAGE_DELETE_CONFIRMATION = "This will permanently delete this contact. "
+    public static final String MESSAGE_DELETE_CONFIRMATION = "This will permanently delete this client's contact. "
             + "Are you sure you want to execute this command? (y/n)";
 
     private static final boolean requiresConfirmation = true;
-
 
     private final Index targetIndex;
 
@@ -41,21 +40,49 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Client> lastShownList = model.getFilteredClientList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
-        }
-
         Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteClient(clientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, Messages.format(clientToDelete)));
+        String message = String.format(MESSAGE_DELETE_CLIENT_SUCCESS, Messages.format(clientToDelete));
+
+        // For test compatibility, use the old constructor format
+        return new CommandResult(message);
     }
 
     @Override
     public CommandResult execute(Model model, Boolean confirmationReceived) throws CommandException {
         if (confirmationReceived.equals(requiresConfirmation)) {
-            return this.execute(model);
+            List<Client> lastShownList = model.getFilteredClientList();
+            Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deleteClient(clientToDelete);
+
+            // Use the new constructor with deletion flags for the UI
+            return new CommandResult(
+                    String.format(MESSAGE_DELETE_CLIENT_SUCCESS, Messages.format(clientToDelete)),
+                    false,
+                    false,
+                    false,
+                    null,
+                    true,
+                    clientToDelete,
+                    false
+            );
         }
-        return new CommandResult(MESSAGE_DELETE_CONFIRMATION, false, false, false, null, true);
+
+        if (targetIndex.getZeroBased() >= model.getFilteredClientList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+        }
+
+        // For confirmation prompt
+        return new CommandResult(
+                MESSAGE_DELETE_CONFIRMATION,
+                false,
+                false,
+                false,
+                null,
+                false,
+                null,
+                true
+        );
     }
 
     @Override
@@ -64,7 +91,6 @@ public class DeleteCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof DeleteCommand)) {
             return false;
         }
