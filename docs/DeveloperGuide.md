@@ -186,7 +186,6 @@ This section describes some noteworthy details on how certain features are imple
 `Students` are named as `Persons` due to Legacy code.
 </div>
 
----
 
 ### Storage feature
 
@@ -292,9 +291,8 @@ The order which storage loads `Person`, `Tutorial` and `Participation` is shown 
 The `Participation` objects are created using corresponding `Person` and `Tutorial` objects in the `AddressBook`
 based on [uniqueness](#uniqueness-of-objects).
 
----
 
-### Find Command Implementation
+### Find feature
 
 The following sequence diagram shows how a find operation goes through the `Logic` component
 ![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
@@ -309,7 +307,6 @@ predicates to create a `FindCommand` object.
 
 `Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
 
----
 
 ### Enroll and Unenroll feature
 
@@ -353,7 +350,6 @@ The implementation of the Unenroll feature is similar to that of the example giv
 
 When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
 
----
 
 ### List and Clear feature
 
@@ -378,7 +374,7 @@ The implementation of the Clear feature is similar to that of the example given 
 
 </div>
 
----
+
 
 ### Help and Exit feature
 
