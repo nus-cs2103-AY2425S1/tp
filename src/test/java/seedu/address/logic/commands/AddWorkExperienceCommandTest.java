@@ -29,7 +29,7 @@ public class AddWorkExperienceCommandTest {
     }
 
     @Test
-    public void execute_addWorkExperience_successful() throws Exception {
+    public void execute_replaceWorkExperience_successful() throws Exception {
         Person personToEdit = model.getFilteredPersonList().get(0);
         Index index = Index.fromZeroBased(0);
         AddWorkExperienceCommand command = new AddWorkExperienceCommand(index, VALID_WORK_EXP);
@@ -39,11 +39,34 @@ public class AddWorkExperienceCommandTest {
 
         // Execute command and verify output
         CommandResult result = command.execute(model);
-        assertEquals(String.format(AddWorkExperienceCommand.MESSAGE_SUCCESS, personToEdit.getName(), VALID_WORK_EXP),
+        assertEquals(String.format(AddWorkExperienceCommand.MESSAGE_REPLACED, personToEdit.getName(), VALID_WORK_EXP),
                 result.getFeedbackToUser());
 
         // Verify that the person in the model has been updated
         assertEquals(editedPerson, model.getFilteredPersonList().get(0));
+
+        // Additional check to cover the last assertion
+        assertTrue(model.getFilteredPersonList().contains(editedPerson));
+    }
+
+    @Test
+    public void execute_addNewWorkExperience_successful() throws Exception {
+        // Create a person without work experience
+        Person personWithoutWorkExp = new PersonBuilder().withName("Alice").withNoWorkExp().build();
+        model.addPerson(personWithoutWorkExp);
+        Index index = Index.fromZeroBased(model.getFilteredPersonList().indexOf(personWithoutWorkExp));
+        AddWorkExperienceCommand command = new AddWorkExperienceCommand(index, VALID_WORK_EXP);
+
+        // Create the expected edited person with the new work experience
+        Person editedPerson = new PersonBuilder(personWithoutWorkExp).withWorkExp(VALID_WORK_EXP.toString()).build();
+
+        // Execute command and verify output
+        CommandResult result = command.execute(model);
+        assertEquals(String.format(AddWorkExperienceCommand.MESSAGE_ADDED, personWithoutWorkExp.getName(),
+                        VALID_WORK_EXP), result.getFeedbackToUser());
+
+        // Verify that the person in the model has been updated
+        assertEquals(editedPerson, model.getFilteredPersonList().get(index.getZeroBased()));
 
         // Additional check to cover the last assertion
         assertTrue(model.getFilteredPersonList().contains(editedPerson));
