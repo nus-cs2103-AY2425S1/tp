@@ -10,7 +10,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
 
 /**
  * Controller for a help keyword page.
