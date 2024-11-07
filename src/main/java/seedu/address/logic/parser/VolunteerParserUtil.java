@@ -77,18 +77,37 @@ public class VolunteerParserUtil {
      */
     public static VolunteerDates parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.replaceAll("\\s+", "").trim();
-        String[] datesArr = trimmedDate.split(",");
+        // Split into dates first before removing internal spaces
+        String[] datesArr = date.split(",");
+
+        // Check each date's format and uniqueness
         Set<String> uniqueDates = new HashSet<>();
-        for (String d : datesArr) {
+        StringBuilder validatedDates = new StringBuilder();
+
+        for (int i = 0; i < datesArr.length; i++) {
+            String d = datesArr[i].trim(); // Only trim outer spaces
+
+            // Check if date contains any internal spaces
+            if (d.contains(" ")) {
+                throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
+            }
+
             if (!VolunteerDates.isValidDate(d)) {
                 throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
             }
+
             if (!uniqueDates.add(d)) {
                 throw new ParseException((new VolunteerDuplicateDateException(d)).getMessage());
             }
+
+            // Add to result
+            validatedDates.append(d);
+            if (i < datesArr.length - 1) {
+                validatedDates.append(", "); // Maintain consistent format
+            }
         }
-        return new VolunteerDates(trimmedDate);
+
+        return new VolunteerDates(validatedDates.toString());
     }
 
     /**
@@ -100,19 +119,37 @@ public class VolunteerParserUtil {
      */
     public static String checkStringListOfDates(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.replaceAll("\\s+", "").trim();
-        String[] datesArr = trimmedDate.split(",");
+        // Split into dates first before removing internal spaces
+        String[] datesArr = date.split(",");
+
+        // Check each date's format and uniqueness
         Set<String> uniqueDates = new HashSet<>();
-        for (String d : datesArr) {
+        StringBuilder validatedDates = new StringBuilder();
+
+        for (int i = 0; i < datesArr.length; i++) {
+            String d = datesArr[i].trim(); // Only trim outer spaces
+
+            // Check if date contains any internal spaces
+            if (d.contains(" ")) {
+                throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
+            }
+
             if (!VolunteerDates.isValidDate(d)) {
                 throw new ParseException(VolunteerDates.MESSAGE_CONSTRAINTS);
             }
+
             if (!uniqueDates.add(d)) {
                 throw new ParseException((new VolunteerDuplicateDateException(d)).getMessage());
             }
+
+            // Add to result
+            validatedDates.append(d);
+            if (i < datesArr.length - 1) {
+                validatedDates.append(", "); // Maintain consistent format
+            }
         }
 
-        return trimmedDate;
+        return validatedDates.toString();
     }
 
     /**
