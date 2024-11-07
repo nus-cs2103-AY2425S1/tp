@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 
@@ -24,7 +25,7 @@ public class NotesCommandParser implements Parser<NotesCommand> {
      */
     public NotesCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_VIEW, PREFIX_DELETE, PREFIX_ADD, PREFIX_NOTES);
+                ArgumentTokenizer.tokenize(args, PREFIX_VIEW, PREFIX_DELETE, PREFIX_ADD, PREFIX_EDIT, PREFIX_NOTES);
 
         try {
             // Check if exactly one command prefix is present
@@ -36,6 +37,9 @@ public class NotesCommandParser implements Parser<NotesCommand> {
                 commandPrefixes++;
             }
             if (isPrefixPresent(argMultimap, PREFIX_ADD)) {
+                commandPrefixes++;
+            }
+            if (isPrefixPresent(argMultimap, PREFIX_EDIT)) {
                 commandPrefixes++;
             }
 
@@ -53,6 +57,11 @@ public class NotesCommandParser implements Parser<NotesCommand> {
             if (isPrefixPresent(argMultimap, PREFIX_DELETE)) {
                 identifier = argMultimap.getValue(PREFIX_DELETE).get();
                 return createCommand(identifier, NotesCommand.Mode.DELETE, null);
+            }
+
+            if (isPrefixPresent(argMultimap, PREFIX_EDIT)) {
+                identifier = argMultimap.getValue(PREFIX_EDIT).get();
+                return createCommand(identifier, NotesCommand.Mode.EDIT, null);
             }
 
             // Must be add command at this point

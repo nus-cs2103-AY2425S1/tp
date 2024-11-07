@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 
@@ -16,30 +17,34 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
+import seedu.address.ui.NotesWindow;
 
 /**
- * Views, adds, or deletes notes of a person identified using the person's name or index in the address book.
+ * Views, adds, edits, or deletes notes of a person identified using the person's name or index in the address book.
  */
 public class NotesCommand extends Command {
 
     public static final String COMMAND_WORD = "notes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views, adds, or deletes the notes of the person identified by their name or index.\n"
+            + ": Views, adds, edits, or deletes the notes of the person identified by their name or index.\n"
             + "Parameters: \n"
             + "View: [" + PREFIX_VIEW + "NAME] or [" + PREFIX_VIEW + "INDEX]\n"
-            + "Add: [" + PREFIX_ADD + "NAME " + PREFIX_NOTES + "NOTES] or [" + PREFIX_ADD
-            + "INDEX " + PREFIX_NOTES + "NOTES]\n"
+            + "Add: [" + PREFIX_ADD + "NAME " + PREFIX_NOTES + "NOTES] or ["
+            + PREFIX_ADD + "INDEX " + PREFIX_NOTES + "NOTES]\n"
+            + "Edit: [" + PREFIX_EDIT + "NAME] or [" + PREFIX_EDIT + "INDEX]\n"
             + "Delete: [" + PREFIX_DELETE + "NAME] or [" + PREFIX_DELETE + "INDEX]\n"
             + "Example: \n"
             + COMMAND_WORD + " " + PREFIX_VIEW + "John Doe OR " + PREFIX_VIEW + "1\n"
             + COMMAND_WORD + " " + PREFIX_ADD + "John Doe " + PREFIX_NOTES + "Prefers email contact OR "
             + PREFIX_ADD + "1 " + PREFIX_NOTES + "Prefers email contact\n"
+            + COMMAND_WORD + " " + PREFIX_EDIT + "John Doe OR " + PREFIX_EDIT + "1\n"
             + COMMAND_WORD + " " + PREFIX_DELETE + "John Doe OR " + PREFIX_DELETE + "1";
 
-    public static final String MESSAGE_VIEW_NOTES_SUCCESS = "Notes for %1$s: %2$s";
+    public static final String MESSAGE_VIEW_NOTES_SUCCESS = "Notes for %1$s: \n%2$s";
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Deleted notes for %1$s";
-    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: %2$s";
+    public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: \n%2$s";
+    public static final String MESSAGE_EDIT_NOTES_SUCCESS = "Edited notes for %1$s: \n%2$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with name: %1$s";
 
     private final Mode mode;
@@ -52,6 +57,7 @@ public class NotesCommand extends Command {
      * VIEW - displays the notes of a person
      * ADD - adds or updates the notes of a person
      * DELETE - removes the notes of a person
+     * EDIT - uses a pop-up window to edit notes
      */
     public enum Mode {
         /**
@@ -67,18 +73,23 @@ public class NotesCommand extends Command {
         /**
          * Removes the notes of the specified person.
          */
-        DELETE
+        DELETE,
+
+        /**
+         * Edit the notes of the specified person using a pop-up window.
+         */
+        EDIT
     }
 
     /**
-     * Creates command to view or delete notes using index.
+     * Creates command to view, edit, or delete notes using index.
      */
     public NotesCommand(Index targetIndex, Mode mode) {
         this(targetIndex, mode, null);
     }
 
     /**
-     * Creates command to view or delete notes using name.
+     * Creates command to view, edit, or delete notes using name.
      */
     public NotesCommand(Name targetName, Mode mode) {
         this(targetName, mode, null);
@@ -153,6 +164,16 @@ public class NotesCommand extends Command {
             model.setPerson(personToEdit, personWithNewNotes);
             return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS,
                     personToEdit.getName(), newNotes.toString()));
+
+        case EDIT:
+            NotesWindow notesWindow = new NotesWindow();
+            Notes editedNotes = new Notes(notesWindow.showNotesWindow(personToEdit));
+            Person personWithEditedNotes = new Person(personToEdit.getName(), personToEdit.getPhone(),
+                    personToEdit.getEmail(), personToEdit.getAddress(), editedNotes,
+                    personToEdit.getTags(), personToEdit.getIncome(), personToEdit.getAge());
+            model.setPerson(personToEdit, personWithEditedNotes);
+            return new CommandResult(String.format(MESSAGE_EDIT_NOTES_SUCCESS,
+                    personWithEditedNotes.getName(), personWithEditedNotes.getNotes().toString()));
 
         default:
             throw new AssertionError("Unknown mode: " + mode);
