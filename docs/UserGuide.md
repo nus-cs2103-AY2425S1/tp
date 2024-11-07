@@ -299,19 +299,21 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+| **Action**    | **Description**                       | **Format**                                                                | **Example**                                                                          |
+|---------------|---------------------------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **Add**       | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/999999999 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
+| **Clear**     | Clears all entries                    | `clear`                                                                   |                                                                                      |
+| **Delete**    | Deletes a person                      | `delete INDEX`                                                            | `delete 3`                                                                           |
+| **Edit**      | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                    |
+| **Find**      | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                    |
+| **Confirm**   | Confirms a deletion or clear action   | `confirm`                                                                 |                                                                                      |
+| **Cancel**    | Cancels a delete or clear action      | `cancel`                                                                  |                                                                                      |
+| **List**      | Lists all persons in the address book | `list`                                                                    |                                                                                      |
+| **List Logs** | Lists logs for a specific person      | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                   |
+| **Add Log**   | Adds a log for a person               | `addlog i/NRIC d/DATE l/LOG_ENTRY`                                        | `addlog i/S8613282F d/01 Nov 2024 l/Checked in at clinic`                            |
+| **Add Entry** | Adds a log entry via a second window  | `addentry i/NRIC d/DATE`                                                  | `addentry i/S0000001i d/01 Nov 2024`                                                 |
+| **Help**      | Displays help message                 | `help`                                                                    |                                                                                      |
 
-| **Action**       | **Description**                       | **Format**                                                                | **Example**                                                                         |
-|------------------|---------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| **Add**          | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
-| **Clear**        | Clears all entries                    | `clear`                                                                   |                                                                                     |
-| **Delete**       | Deletes a person                      | `delete INDEX`                                                            | `delete 3`                                                                          |
-| **Edit**         | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                   |
-| **Find**         | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                   |
-| **Confirm**      | Confirms a deletion or clear action   | `confirm`                                                                 |                                                                                     |
-| **Cancel**       | Cancels a delete or clear action      | `cancel`                                                                  |                                                                                     |
-| **List**         | Lists all persons in the address book | `list`                                                                    |                                                                                     |
-| **List Logs**    | Lists logs for a specific person      | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                  |
-| **Help**         | Displays help message                 | `help`                                                                    |                                                                                     |
 
  #### Additional Notes
 
