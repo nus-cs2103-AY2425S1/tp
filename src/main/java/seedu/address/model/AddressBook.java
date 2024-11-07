@@ -206,6 +206,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lessons.getAssociatedPeople(person);
     }
 
+    public List<Lesson> getAssociatedLessons(Person person) {
+        return lessons.getAssociatedLessons(person);
+    }
+
     public Person getPersonById(int personId) {
         return persons.get(personId);
     }

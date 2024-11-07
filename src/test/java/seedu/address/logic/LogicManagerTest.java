@@ -145,6 +145,8 @@ public class LogicManagerTest {
         assertEquals(expectedModel, model);
     }
 
+    //@@author estellelim-reused
+    //Reused from https://github.com/se-edu/addressbook-level4.git
     /**
      * Asserts that the result display shows all the {@code expectedCommands} upon the execution of
      * {@code HistoryCommand}.
@@ -159,6 +161,7 @@ public class LogicManagerTest {
             throw new AssertionError("Parsing and execution of HistoryCommand.COMMAND_WORD should succeed.", e);
         }
     }
+    //@@author
 
     /**
      * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.

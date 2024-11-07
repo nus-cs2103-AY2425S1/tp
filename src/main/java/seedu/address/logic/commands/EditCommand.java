@@ -108,6 +108,15 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        for (Lesson l : model.getAssociatedLessons(personToEdit)) {
+            model.deleteLesson(l);
+            if (editedPerson.isTutor()) {
+                model.addLesson(new Lesson((Tutor) editedPerson, l.getTutee(), l.getSubject()));
+            } else {
+                model.addLesson(new Lesson(l.getTutor(), (Tutee) editedPerson, l.getSubject()));
+            }
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();

@@ -10,6 +10,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+//@@author estellelim-reused
+//Reused from https://github.com/se-edu/addressbook-level4.git
 public class CommandHistoryTest {
     private CommandHistory commandHistory;
 
@@ -77,3 +79,4 @@ public class CommandHistoryTest {
         assertNotEquals(commandHistoryWithA.hashCode(), commandHistoryWithB.hashCode());
     }
 }
+//@@author

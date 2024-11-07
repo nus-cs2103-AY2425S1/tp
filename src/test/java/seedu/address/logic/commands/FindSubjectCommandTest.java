@@ -23,7 +23,7 @@ public class FindSubjectCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_validSubjectMath_PersonFound() {
+    public void execute_validSubjectMath_personFound() {
         FindSubjectCommand command = new FindSubjectCommand(new PersonHaveSubjectPredicate("Math"));
         expectedModel.updateFilteredPersonList(new PersonHaveSubjectPredicate("Math"));
         assertCommandSuccess(command, model, commandHistory,
@@ -31,7 +31,7 @@ public class FindSubjectCommandTest {
     }
 
     @Test
-    public void execute_validSubjectEnglish_PersonFound() {
+    public void execute_validSubjectEnglish_personFound() {
         FindSubjectCommand command = new FindSubjectCommand(new PersonHaveSubjectPredicate("English"));
         expectedModel.updateFilteredPersonList(new PersonHaveSubjectPredicate("English"));
         assertCommandSuccess(command, model, commandHistory,

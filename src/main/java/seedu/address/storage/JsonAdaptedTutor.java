@@ -58,6 +58,7 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tutor.
      */
     public Tutor toModelType() throws IllegalValueException {
+        int id = this.getId();
         String name = this.getName();
         String phone = this.getPhone();
         String email = this.getEmail();
