@@ -65,7 +65,7 @@ public class AddIngredientCommand extends Command {
     private boolean isDuplicateIngredient(Map<Integer, Product> catalogue, Ingredient newIngredient) {
         return catalogue.values().stream()
                 .filter(product -> product instanceof Ingredient) // Filter only Ingredient objects
-                .map(product -> (Ingredient) product)             // Cast to Ingredient
+                .map(product -> (Ingredient) product) // Cast to Ingredient
                 .anyMatch(existingIngredient ->
                         existingIngredient.getName().equalsIgnoreCase(newIngredient.getName()) &&
                                 Double.compare(existingIngredient.getCost(), newIngredient.getCost()) == 0);

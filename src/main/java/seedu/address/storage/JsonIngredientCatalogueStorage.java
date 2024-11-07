@@ -12,10 +12,13 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * A class to access IngredientCatalogue data stored as a json file on the hard disk.
+ */
 public class JsonIngredientCatalogueStorage implements IngredientCatalogueStorage {
 
-    private final Path filePath;
     private static final Logger logger = LogsCenter.getLogger(JsonIngredientCatalogueStorage.class);
+    private final Path filePath;
 
     public JsonIngredientCatalogueStorage(Path filePath) {
         this.filePath = filePath;
