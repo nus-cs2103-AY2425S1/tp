@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.getParentOnlyAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -18,9 +20,13 @@ import seedu.address.model.person.Student;
 public class ResetAttendanceCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private Model parentsOnlyModel = new ModelManager(getParentOnlyAddressBook(), new UserPrefs());
+
+
     @Test
     public void execute_resetAttendance_success() {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
         for (Person p : expectedModel.getFilteredPersonList()) {
             Person personWithResetAttendance = new Person(p.getName(), p.getRole(),
                     p.getPhone(), p.getEmail(), p.getAddress(), p.getTags(), new AttendanceCount("0"));
@@ -28,9 +34,17 @@ public class ResetAttendanceCommandTest {
         }
         ResetAttendanceCommand resetAttendanceCommandCommand = new ResetAttendanceCommand();
 
-        String expectedMessage = String.format(ResetAttendanceCommand.MESSAGE_RESET_ATTENDANCE_SUCCESS);
+        String expectedMessage = String.format(ResetAttendanceCommand.MESSAGE_RESET_ATTENDANCE_SUCCESS,
+                "Alice Pauline, Benson Meier, "
+                + "Carl Kurz, Elle Meyer, Fiona Kunz");
 
         assertCommandSuccess(resetAttendanceCommandCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_unfilteredListWithoutStudents_throwsCommandException() {
+        BatchMarkCommand batchMarkCommand = new BatchMarkCommand();
+        assertCommandFailure(batchMarkCommand, parentsOnlyModel, BatchMarkCommand.MESSAGE_BATCH_MARK_NO_STUDENT_LIST);
     }
 
     @Test

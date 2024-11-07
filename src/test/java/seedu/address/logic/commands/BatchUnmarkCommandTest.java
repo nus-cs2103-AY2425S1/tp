@@ -148,7 +148,7 @@ public class BatchUnmarkCommandTest {
         List<Student> students = new ArrayList();
         students.add(ALICE);
         students.add(BENSON);
-        assertEquals(expectedString, BatchMarkCommand.formatStudentsToMark(students));
+        assertEquals(expectedString, BatchUnmarkCommand.formatUnmarkedStudents(students));
     }
 
     @Test
