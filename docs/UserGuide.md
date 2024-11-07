@@ -186,6 +186,21 @@ Edits an existing vendor or event in EventTory.
 *  `edit v/1 p/58623042 ` : Edits the phone number of the 1st vendor to be `58623042`.
 *  `edit e/2 n/Baby Shower t/` : Edits the name of the 2nd event to be `Baby Shower`, and clears all existing tags.
 
+### Viewing Vendors & Events: `view`
+
+Views the details of a vendor or event.
+
+#### Format: `view v/INDEX` or `view e/INDEX`
+
+* Views the details of the vendor/event at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed vendor/event list.
+  * The index **must be a positive integer** 1, 2, 3, ...
+* The details page includes assigned events/vendors as well as a list of assignable events/vendors.
+
+#### Examples:
+* `view v/2` will show the details of the 2nd vendor.
+* `view e/1` will show the details of the 1st event.
+
 ### Assigning Vendors & Events: `assign`
 
 Assigns vendors to events and vice versa.
@@ -220,37 +235,43 @@ Unassigns vendors from events and vice versa.
 * `view v/2` then `unassign 1` will unassign the 1st event from the current viewed vendor, which is the 2nd vendor.
 * `view e/1` then `unassign 3` will unassign the 3rd vendor from the current viewed event, which is the 1st event.
 
-### Locating persons by name: `find`
+### Searching for Vendors & Events: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds vendors or events whose attributes contain any of the space-separated keywords provided.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Format: `find v/ KEYWORD [MORE_KEYWORDS]` or `find e/ KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+#### Notes:
+* The search is case-insensitive. e.g. `party` will match `Party`
+* Any partial matches will still be matched e.g. `par` will match `party`
+* The order of the keywords does not matter. e.g. `party birthday` will match `birthday party`
+* All attributes of the `Vendor` or `Event` are searched, i.e. name, phone number, date, descriptions and tags.
+* Vendors and Events matching at least one keyword will be returned (i.e. `OR` search).
+  * e.g. `party wedding` will return `Birthday Party`, `John's Wedding`
+* If no matches are found, the user will be informed and the current view will remain unchanged.
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+#### Examples:
+* `find v/ catering` returns `catering` and `Catering Solutions`
+* `find e/ party wedding` returns `Birthday Party` and `John's Wedding`<br>
 
-### Deleting a person : `delete`
+### Deleting Items : `delete`
 
-Deletes the specified person from the address book.
+Deletes a vendor or an event from EventTory.
 
-Format: `delete INDEX`
+#### Format: `delete [v/INDEX]` or `delete [e/INDEX]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the event or vendor at the specified `INDEX`.
+    * The index refers to the index number shown in the displayed event/vendor list respectively.
+    * The index **must be a positive integer** 1, 2, 3, ...
+    * The index for each vendor/event is relative and can change depending on previous operations.
+* The operation will succeed even if the specified vendor/event is not visible onscreen.
+  * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion.
+* If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
+* If the current viewed vendor/event is deleted, the application will return you to the main list screen.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+#### Examples:
+* `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
+* `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
 
 ### Clearing All Entries : `clear`
 
@@ -314,7 +335,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **View**     | `view v/INDEX` or `view e/INDEX`<br> e.g. `view v/1`                                                                                                                                                                                              |
 | **Delete**   | `delete v/INDEX` or `delete e/INDEX` <br> e.g., `delete v/3`, `delete e/2`                                                                                                                                                                        |
 | **Edit**     | -`edit v/INDEX [n/VENDOR_NAME] [p/PHONE_NUMBER] [d/DESCRIPTION] [t/TAG]…​` or,<br> -`edit e/INDEX [n/EVENT_NAME] [on/DATE] [t/TAG]…​` <br><br> e.g., `edit v/2 n/PC Parts Trading d/Sells PC Parts` or, <br> `edit e/3 n/Hackathon on/2024-10-12` |
-| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find e/ wedding banquet`                                                                                                                            |
+| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                   |
 | **Clear**    | `clear`                                                                                                                                                                                                                                           |
 | **Help**     | `help`                                                                                                                                                                                                                                            |
 | **Exit**     | `exit`                                                                                                                                                                                                                                            |
