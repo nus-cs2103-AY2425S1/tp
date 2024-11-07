@@ -68,9 +68,6 @@ public class UnfavouriteGameCommand extends Command {
         prevGameIsFavourite = targetGame.getFavouriteStatus();
         targetGame.removeFavourite();
         model.setPerson(targetPerson, targetPerson);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(String.format(MESSAGE_UNFAVOURITE_GAME_SUCCESS, gameName));
     }
 

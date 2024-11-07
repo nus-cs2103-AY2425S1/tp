@@ -69,9 +69,6 @@ public class AddCommand extends Command {
 
         previousPredicate = model.getCurrentPredicate();
         model.addPerson(toAdd);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

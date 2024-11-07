@@ -36,9 +36,6 @@ public class FindCommand extends Command {
         requireNonNull(model);
         previousPredicate = model.getCurrentPredicate();
         model.updateFilteredPersonList(predicate);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }

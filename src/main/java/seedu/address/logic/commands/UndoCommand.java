@@ -25,9 +25,6 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PREVIOUS_COMMAND);
         }
         previousCommand.undo(model);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, model.getPreviousInput()));
     }
 

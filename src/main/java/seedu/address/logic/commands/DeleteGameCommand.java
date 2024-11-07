@@ -70,9 +70,6 @@ public class DeleteGameCommand extends Command {
 
         deletedGame = gameMap.remove(gameName);
         model.setPerson(personToEdit, personToEdit);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, Messages.format(deletedGame)));
     }
 

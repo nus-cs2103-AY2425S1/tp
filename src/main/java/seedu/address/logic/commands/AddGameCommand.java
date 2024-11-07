@@ -86,9 +86,6 @@ public class AddGameCommand extends Command {
         Game editedGame = createNewGame(gameName, addGameDescriptor);
         gameMap.put(gameName, editedGame);
         model.setPerson(personToEdit, personToEdit);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(String.format(MESSAGE_ADD_GAME_SUCCESS, Messages.format(editedGame)));
     }
 

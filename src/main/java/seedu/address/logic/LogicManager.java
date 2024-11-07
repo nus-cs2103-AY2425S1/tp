@@ -52,6 +52,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
         if (command.canBeUndone()) {
             model.addInputToLog(commandText);
+            model.addCommandToLog(command);
         }
 
         if (commandResult.isLoad()) {

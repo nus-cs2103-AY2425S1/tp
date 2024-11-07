@@ -25,9 +25,6 @@ public class ListCommand extends Command {
         requireNonNull(model);
         previousPredicate = model.getCurrentPredicate();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

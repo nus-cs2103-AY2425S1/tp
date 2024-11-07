@@ -23,9 +23,6 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         previousAddressBook = new AddressBook(model.getAddressBook());
         model.setAddressBook(new AddressBook());
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

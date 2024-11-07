@@ -49,9 +49,6 @@ public class DeleteCommand extends Command {
                 model.getAddressBookIndex(targetIndex.getZeroBased()));
         model.deletePerson(personToDelete);
         deletedPerson = personToDelete;
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

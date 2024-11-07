@@ -67,9 +67,6 @@ public class FavouriteGameCommand extends Command {
         prevGameIsFavourite = targetGame.getFavouriteStatus();
         targetGame.setAsFavourite();
         model.setPerson(targetPerson, targetPerson);
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(String.format(MESSAGE_FAVOURITE_GAME_SUCCESS, gameName));
     }
 

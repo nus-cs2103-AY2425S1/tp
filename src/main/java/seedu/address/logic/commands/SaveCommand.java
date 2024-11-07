@@ -13,9 +13,6 @@ public class SaveCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (IS_UNDOABLE) {
-            model.addCommandToLog(this);
-        }
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
 
