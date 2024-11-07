@@ -20,12 +20,12 @@
     "tags" : [ "owesMoney", "friends" ],
     "logs" : [
       {
-        "date":"2021-10-10T11:00:00.000+0000",
-        "remark":"Meeting 1"
+      "date":"2022-10-10T11:00:00.000+0000",
+      "remark":"Follow up"
       },
       {
-        "date":"2022-10-10T11:00:00.000+0000",
-        "remark":"Follow up"
+        "date":"2021-10-10T11:00:00.000+0000",
+        "remark":"Meeting 1"
       }
     ],
     "appointmentDate": ""

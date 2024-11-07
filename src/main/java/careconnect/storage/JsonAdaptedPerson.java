@@ -1,6 +1,7 @@
 package careconnect.storage;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -95,6 +96,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedLog log : logs) {
             personLogs.add(log.toModelType());
             personLogs.sort(Log::compareTo);
+            personLogs.sort(Comparator.reverseOrder());
         }
 
         if (name == null) {

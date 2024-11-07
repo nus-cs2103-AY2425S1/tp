@@ -1,6 +1,7 @@
 package careconnect.testutil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -114,6 +115,8 @@ public class PersonBuilder {
     public PersonBuilder withLog(String date, String time) {
         try {
             this.logs.add(new Log(ParserUtil.parseLogDate(date), time));
+            this.logs.sort(Log::compareTo);
+            this.logs.sort(Collections.reverseOrder());
         } catch (ParseException e) {
             assert(false);
         }
@@ -125,6 +128,8 @@ public class PersonBuilder {
      */
     public PersonBuilder withLogs(ArrayList<Log> logs) {
         this.logs.addAll(logs);
+        this.logs.sort(Log::compareTo);
+        this.logs.sort(Collections.reverseOrder());
         return this;
     }
 

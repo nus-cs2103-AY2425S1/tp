@@ -4,6 +4,7 @@ import static careconnect.commons.util.CollectionUtil.requireAllNonNull;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -70,6 +71,7 @@ public class AddLogCommand extends Command {
 
         updatedLogs.add(newLog);
         updatedLogs.sort(Log::compareTo);
+        updatedLogs.sort(Comparator.reverseOrder());
 
         return new Person(name, phone, email, address, tags, updatedLogs, appointmentDate);
     }
