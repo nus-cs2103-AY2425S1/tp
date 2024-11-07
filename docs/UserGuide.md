@@ -130,6 +130,8 @@ Users engage with the AgentConnect application by inputting a series of commands
 * The parameters for the commands does not matter and you can enter the parameters in any order.
   Example: `n/John p/123` is the same as `p/123 n/John`.
 
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
+e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
@@ -227,7 +229,8 @@ Format: `delete <INDEX>` or `delete <NAME>`
 - **Parameters**:
     * Deletes the client at the specified `INDEX` or the specific `NAME`.
     * The index and name refers to the index number or name shown in the displayed client list.
-    * The index **must be a positive integer** 1, 2, 3, …​
+    * The index **must be a positive integer** 1, 2, 3, …​ 
+    * Any input after the first index will be ignored. Eg. `delete 1 2` or `delete 1 test` will be interpreted as `delete 1`.
     * The name of the client is case-sensitive and must be an exact match.
 
 <div markdown="span" class="alert alert-info">💡**Tip:**
