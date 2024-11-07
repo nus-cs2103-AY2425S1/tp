@@ -213,7 +213,7 @@ Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]â€¦â
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have any number of points of contact or none at all!
-The venue fields is also optional!
+The venue field is also optional!
 </div>
 
 Examples:
@@ -250,7 +250,7 @@ You can delete a event's venue or points of contact of the person by leaving the
 Examples:
 
 - `edit event 1 t/2024-03-21 v/Jane's Salon` Edits the time and venue of the 1st event to be `2024-03-21` and `Jane's Salon` respectively.
-- `edit event 2 n/Movie Screening v/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue.
+- `edit event 2 n/Movie Screening v/ p/` Edits the name of the 2nd event to be `Movie Screening` and clears the venue and points of contact of the person.
 
 ![result for 'edit event'](images/edit_event.png)
 
