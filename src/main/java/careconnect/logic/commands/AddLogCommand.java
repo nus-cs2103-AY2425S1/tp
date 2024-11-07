@@ -115,6 +115,7 @@ public class AddLogCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("log", log)
+                .add("targetIndex", targetIndex)
                 .toString();
     }
 

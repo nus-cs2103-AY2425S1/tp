@@ -130,6 +130,8 @@ public class DeleteLogCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("personIndex", personIndex)
+                .add("logIndex", logIndex)
                 .add("deletedLog", deletedLog)
                 .toString();
     }
