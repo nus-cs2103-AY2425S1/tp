@@ -32,7 +32,7 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        String expectedMessage = "No valid prefixes found \n" + FilterCommand.MESSAGE_USAGE;
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE);
         assertParseFailure(parser, " ", expectedMessage);
     }
 
