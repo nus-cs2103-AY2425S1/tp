@@ -164,7 +164,6 @@ public class AddListingCommand extends Command {
         return new ToStringBuilder(this)
                 .add("toAdd", this.listingName)
                 .add("address", this.address)
-                .add("seller", this.sellerIndex)
                 .toString();
     }
 }

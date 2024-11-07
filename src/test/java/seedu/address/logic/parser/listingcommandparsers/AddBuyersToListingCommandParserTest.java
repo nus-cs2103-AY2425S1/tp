@@ -34,7 +34,7 @@ public class AddBuyersToListingCommandParserTest {
         AddBuyersToListingCommand expectedCommand =
                 new AddBuyersToListingCommand(Index.fromOneBased(Integer.parseInt(VALID_LISTING_INDEX)),
                         expectedBuyerIndexes);
-
+        System.out.println(expectedCommand);
         AddBuyersToListingCommand result = parser.parse(userInput);
         assertEquals(expectedCommand, result);
     }

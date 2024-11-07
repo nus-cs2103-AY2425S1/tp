@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SEVENTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_LISTING;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalIndexes.LISTING_INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.PERSON_INDEX_OUT_OF_BOUNDS;
@@ -31,6 +32,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -67,12 +69,12 @@ public class AddBuyersToListingCommandTest {
     }
 
     @Test
-    public void execute_buyerAddedToListingUnfilteredList_success() {
+    public void execute_buyerAddedToListingUnfilteredListingList_success() {
         AddBuyersToListingCommand addBuyersToListingCommand =
                 new AddBuyersToListingCommand(INDEX_FIRST_LISTING, VALID_BUYER_INDEXES);
 
         String expectedMessage = String.format(AddBuyersToListingCommand.MESSAGE_ADD_BUYERS_SUCCESS,
-                VALID_LISTING_NAME);
+                Messages.format(VALID_LISTING));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
         Listing editedListing = new ListingBuilder(VALID_LISTING).withBuyers(DANIEL, ELLE).build();
@@ -83,19 +85,21 @@ public class AddBuyersToListingCommandTest {
     }
 
     @Test
-    void execute_buyerAddedToListingFilteredList_success() {
+    void execute_buyerAddedToListingFilteredListingList_success() {
         showListingAtIndex(model, INDEX_FIRST_LISTING);
         AddBuyersToListingCommand addBuyersToListingCommand =
                 new AddBuyersToListingCommand(INDEX_FIRST_LISTING, VALID_BUYER_INDEXES);
 
         String expectedMessage = String.format(AddBuyersToListingCommand.MESSAGE_ADD_BUYERS_SUCCESS,
-                VALID_LISTING_NAME);
+                Messages.format(VALID_LISTING));
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(),
+                new UserPrefs(), getTypicalListings());
+        showListingAtIndex(expectedModel, INDEX_FIRST_LISTING);
+
         Listing editedListing = new ListingBuilder(VALID_LISTING).withBuyers(DANIEL, ELLE).build();
 
         expectedModel.setListing(VALID_LISTING, editedListing);
-        showListingAtIndex(model, INDEX_FIRST_LISTING);
         assertCommandSuccess(addBuyersToListingCommand, model, expectedMessage,expectedModel);
     }
 
@@ -126,7 +130,7 @@ public class AddBuyersToListingCommandTest {
     public void execute_listingIndexOutOfBoundsFilteredListingList_throwsCommandException() {
         showListingAtIndex(model, INDEX_SECOND_LISTING);
         AddBuyersToListingCommand addBuyersToListingCommand =
-                new AddBuyersToListingCommand(INDEX_FIRST_LISTING, VALID_BUYER_INDEXES);
+                new AddBuyersToListingCommand(INDEX_THIRD_LISTING, VALID_BUYER_INDEXES);
         assertCommandFailure(addBuyersToListingCommand, model, Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
     }
 
@@ -135,7 +139,8 @@ public class AddBuyersToListingCommandTest {
         AddBuyersToListingCommand addBuyersToListingCommand =
                 new AddBuyersToListingCommand(INDEX_FIRST_LISTING, SELLER_INDEX);
         assertCommandFailure(addBuyersToListingCommand, model,
-                String.format(AddBuyersToListingCommand.MESSAGE_PERSON_NOT_BUYER, SELLER_NAME));
+                String.format(AddBuyersToListingCommand.MESSAGE_PERSON_NOT_BUYER,
+                        INDEX_FIRST_PERSON.getOneBased(), SELLER_NAME));
     }
 
     @Test

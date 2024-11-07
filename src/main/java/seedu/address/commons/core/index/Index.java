@@ -74,4 +74,9 @@ public class Index {
     public String toStringZeroBased() {
         return String.format("%d", getZeroBased());
     }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(zeroBasedIndex);
+    }
 }

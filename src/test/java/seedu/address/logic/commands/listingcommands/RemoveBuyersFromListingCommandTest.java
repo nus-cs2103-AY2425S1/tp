@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalIndexes.LISTING_INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalIndexes.PERSON_INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.getTypicalListings;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
@@ -42,6 +43,7 @@ public class RemoveBuyersFromListingCommandTest {
     private static final Name FOURTH_BUYER_NAME = DANIEL.getName();
     private static final Set<Index> BUYER_INDEXES_OUT_OF_BOUNDS = Set.of(PERSON_INDEX_OUT_OF_BOUNDS);
     private static final Set<Index> SELLER_INDEX = Set.of(INDEX_FIRST_LISTING);
+    private static final Name SELLER_NAME = ALICE.getName();
     private static final Set<Index> EMPTY_SET = new HashSet<>();
     private static final Set<Index> NOT_BUYER_OF_LISTING = Set.of(INDEX_FIFTH_PERSON);
     private static final Listing VALID_LISTING = PASIR_RIS;
@@ -111,8 +113,10 @@ public class RemoveBuyersFromListingCommandTest {
     public void execute_inputSeller_throwsCommandException() {
         RemoveBuyersFromListingCommand removeBuyersFromListingCommand =
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, SELLER_INDEX);
+        System.out.println(INDEX_FIRST_LISTING.getOneBased());
+        System.out.println(SELLER_NAME);
         assertCommandFailure(removeBuyersFromListingCommand, model,
-                String.format(RemoveBuyersFromListingCommand.MESSAGE_PERSON_NOT_BUYER, SELLER_INDEX));
+                String.format(RemoveBuyersFromListingCommand.MESSAGE_PERSON_NOT_BUYER, INDEX_FIRST_LISTING.getOneBased(), SELLER_NAME));
     }
 
     @Test
@@ -121,7 +125,7 @@ public class RemoveBuyersFromListingCommandTest {
                 new RemoveBuyersFromListingCommand(INDEX_FIRST_LISTING, NOT_BUYER_OF_LISTING);
         assertCommandFailure(removeBuyersFromListingCommand, model,
                 String.format(RemoveBuyersFromListingCommand.MESSAGE_NOT_BUYER_FOR_LISTING,
-                        ELLE.getName(), VALID_LISTING_NAME));
+                        ELLE.getName(), Messages.format(VALID_LISTING)));
     }
 
     @Test

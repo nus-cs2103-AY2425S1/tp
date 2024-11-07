@@ -1,8 +1,15 @@
 package seedu.address.testutil;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.listingcommands.EditListingCommand.EditListingDescriptor;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
@@ -11,12 +18,16 @@ import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+import static seedu.address.testutil.TypicalListings.getTypicalListings;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 /**
  * A utility class to help with building EditListingDescriptor objects.
  * Used ChatGPT to assist in writing JavaDocs
  */
 public class EditListingDescriptorBuilder {
     private EditListingDescriptor descriptor;
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
 
     /**
      * Creates a new {@code EditListingDescriptorBuilder} with an empty {@code EditListingDescriptor}.
@@ -44,7 +55,8 @@ public class EditListingDescriptorBuilder {
         descriptor.setAddress(listing.getAddress());
         descriptor.setArea(listing.getArea());
         descriptor.setRegion(listing.getRegion());
-        descriptor.setSellerName(listing.getSeller().getName());
+        System.out.println(findSellerIndexByName(listing.getSeller().getName()));
+        descriptor.setSellerIndex(Index.fromZeroBased(findSellerIndexByName(listing.getSeller().getName())));
     }
 
     /**
@@ -164,7 +176,7 @@ public class EditListingDescriptorBuilder {
      * @return This EditListingDescriptorBuilder object for method chaining.
      */
     public EditListingDescriptorBuilder withSeller(Name sellerName) {
-        descriptor.setSellerName(sellerName);
+        descriptor.setSellerIndex(Index.fromZeroBased(findSellerIndexByName(sellerName)));
         return this;
     }
 
@@ -175,8 +187,16 @@ public class EditListingDescriptorBuilder {
      * @return This EditListingDescriptorBuilder object for method chaining.
      */
     public EditListingDescriptorBuilder withSeller(Person seller) {
-        descriptor.setSellerName(seller.getName());
+        descriptor.setSellerIndex(Index.fromZeroBased(findSellerIndexByName(seller.getName())));
         return this;
+    }
+
+    private int findSellerIndexByName(Name sellerName) {
+        List<Person> filteredList = model.getFilteredPersonList();
+
+        return IntStream.range(0, filteredList.size())
+                .filter(x -> filteredList.get(x).getName().equals(sellerName))
+                .findFirst().orElse(-1);
     }
 
     /**

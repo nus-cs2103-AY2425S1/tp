@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showListingAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.*;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Listings;
@@ -29,7 +31,7 @@ public class DeleteListingCommandTest {
         DeleteListingCommand deleteListingCommand = new DeleteListingCommand(INDEX_FIRST_LISTING);
 
         String expectedMessage = String.format(DeleteListingCommand.MESSAGE_DELETE_LISTING_SUCCESS,
-                listingToDelete.getName());
+                Messages.format(listingToDelete));
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getListings());
         expectedModel.deleteListing(listingToDelete);
@@ -38,10 +40,17 @@ public class DeleteListingCommandTest {
     }
 
     @Test
-    public void execute_invalidListingUnfilteredList_throwsCommandException() {
+    public void execute_listingIndexOutOfBoundsUnfilteredListingList_throwsCommandException() {
         DeleteListingCommand deleteListingCommand = new DeleteListingCommand(LISTING_INDEX_OUT_OF_BOUNDS);
 
-        assertCommandFailure(deleteListingCommand, model, DeleteListingCommand.MESSAGE_LISTING_NOT_FOUND);
+        assertCommandFailure(deleteListingCommand, model, Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_listingIndexOutOfBoundsFilteredListingList_throwsCommandException() {
+        showListingAtIndex(model, INDEX_FIRST_LISTING);
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX, () ->
+                new DeleteListingCommand(INDEX_SECOND_LISTING).execute(model));
     }
 
     @Test
@@ -50,18 +59,12 @@ public class DeleteListingCommandTest {
         DeleteListingCommand deleteListingCommand = new DeleteListingCommand(INDEX_SECOND_LISTING);
 
         String expectedMessage = String.format(DeleteListingCommand.MESSAGE_DELETE_LISTING_SUCCESS,
-                listingToDelete.getName());
+                Messages.format(listingToDelete));
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getListings());
         expectedModel.deleteListing(listingToDelete);
 
         assertCommandSuccess(deleteListingCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidListingFilteredList_throwsCommandException() {
-        assertThrows(CommandException.class, DeleteListingCommand.MESSAGE_LISTING_NOT_FOUND, () ->
-                new DeleteListingCommand(LISTING_INDEX_OUT_OF_BOUNDS).execute(model));
     }
 
     @Test

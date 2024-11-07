@@ -28,7 +28,9 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.listingcommands.AddListingCommand;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Price;
@@ -59,13 +61,13 @@ public class AddListingCommandParserTest {
         String userInput = NAME_DESC_PASIR_RIS + PRICE_DESC_PASIR_RIS + AREA_DESC_PASIR_RIS
                 + ADDRESS_DESC_PASIR_RIS + REGION_DESC_PASIR_RIS + SELLER_DESC_PASIR_RIS + " " + PREFIX_BUYER;
 
-        assertParseFailure(parser, userInput, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
 
         // missing seller
         userInput = NAME_DESC_PASIR_RIS + PRICE_DESC_PASIR_RIS + AREA_DESC_PASIR_RIS
                 + ADDRESS_DESC_PASIR_RIS + REGION_DESC_PASIR_RIS + " " + PREFIX_SELLER + " " + BUYER_DESC_PASIR_RIS;
 
-        assertParseFailure(parser, userInput, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
     }
 
     @Test

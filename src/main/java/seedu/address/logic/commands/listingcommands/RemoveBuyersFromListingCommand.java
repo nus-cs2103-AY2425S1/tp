@@ -83,12 +83,13 @@ public class RemoveBuyersFromListingCommand extends Command {
 
             // Check if the person is actually an instance of Buyer
             if (!buyerToRemove.getRole().equals(Role.BUYER)) {
-                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER, oneBasedBuyer));
+                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
+                        oneBasedBuyer, buyerToRemove.getName()));
             }
 
             if (!existingBuyers.contains(buyerToRemove)) {
                 throw new CommandException(String.format(MESSAGE_NOT_BUYER_FOR_LISTING,
-                        buyerToRemove.getName(), listingToEdit));
+                        buyerToRemove.getName(), Messages.format(listingToEdit)));
             }
 
             buyersToRemoveSet.add(buyerToRemove);
