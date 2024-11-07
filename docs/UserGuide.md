@@ -17,7 +17,10 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
       + [Adding a person: `add`](#adding-a-person-add)
       + [Listing all persons : `list`](#listing-all-persons-list)
       + [Editing a person : `edit`](#editing-a-person-edit)
-      + [Adding or Deleting a Remark: `remark`](#adding-or-deleting-a-remark-remark)
+      + [Adding a Remark: `addremark` or `addrmk`](#adding-a-remark-addremark-or-addrmk)
+      + [Deleting a Remark: `deleteremark` or `delrmk`](#deleting-a-remark-deleteremark-or-delrmk)
+      + [Adding Lessons: `addlesson` or `addlsn`](#adding-lessons-addlesson-or-addlsn)
+      + [Deleting Lessons: `deletelesson` or `dellsn`](#deleting-lessons-deletelesson-or-dellsn)
       + [Locating persons by name: `find`](#locating-persons-by-name-find)
       + [Deleting a person : `delete`](#deleting-a-person-delete)
       + [Displaying Student Information: `display`](#displaying-student-information-display)
@@ -158,28 +161,34 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 l/tuesday 0900-1100` Edits the lesson of the 3rd student to be `MONDAY 0900-1100`.
 
-### Adding or Deleting a Remark: `remark`
+### Adding a Remark: `addremark` or `addrmk`
 
 Allows the tutor to add or delete a remark for a specific student in Tuteez.
 
-Format:
-- `remark INDEX -a REMARK` to add a remark to the student at the specified `INDEX`.
-- `remark INDEX -d REMARK_INDEX` to delete a remark at the specified `REMARK_INDEX` from the student at `INDEX`.
+Format: `addremark INDEX r/REMARK` to add a remark to the student at the specified `INDEX`.
 
 * Adds a new remark to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
-* When deleting, if the `REMARK_INDEX` is not valid, an error will be shown.
 * You can add any text as a remark, and remarks are displayed in the order they were added.
 
 <box type="tip" seamless>
 
-**Tip:** You can also use the abbreviated command `rmk` as a shortcut for `remark`.
+**Tip:** You can also use the abbreviated command `addrmk` as a shortcut for `addremark`.
 </box>
 
 Examples:
-* `remark 1 -a Great progress in Math` Adds the remark "Great progress in Math" to the first student.
-* `remark 2 -a Needs improvement in English` Adds the remark "Needs improvement in English" to the second student.
-* `remark 1 -d 2` Deletes the second remark of the first student.
+* `remark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
+
+### Deleting a Remark: `deleteremark` or `delrmk`
+
+Allows the tutor to delete a remark for a specific student in Tuteez.
+
+Format: `deleteremark INDEX ri/REMARK_INDEX` to add a remark to the student at the specified `INDEX`.
+
+* Deletes an existing remark from the student at the specified `REMARK_INDEX`. The remark index refers to the order in which the remarks were added.
+* When deleting, if the `REMARK_INDEX` is not valid, an error will be shown.
+
+Examples:
+* `deleteremark 1 ri/2` Deletes the second remark of the first student in the displayed student list.
 
 ### Adding Lessons: `addlesson` or `addlsn`
 
@@ -351,9 +360,10 @@ Action     | Format, Examples
 **Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
 **Display**| `display INDEX` <br> e.g., `display 1`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
-**Remark** | `remark INDEX -a REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 -a Great progress in Math`<br> `remark INDEX -d REMARK_INDEX` to delete a specific remark from the student at `INDEX`<br> e.g., `remark 1 -d 2` to delete the second remark of student 1.
-**Add Lesson** | `addlesson INDEX l/LESSON [l/LESSON]`<br> e.g., `addlesson 1 l/Monday 0900-1100`
-**Delete Lesson** | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]`<br> e.g., `deletelesson 1 li/1`
+**Add Remark** | `remark INDEX r/REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 r/Great progress in Math`
+**Delete Remark** |  `remark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from the student at `INDEX`<br> e.g., `remark 1 ri/2` to delete the second remark of student 1.
+**Add Lesson** | `addlesson INDEX l/LESSON [l/LESSON]…​`<br> e.g., `addlesson 1 l/Monday 0900-1100`
+**Delete Lesson** | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`<br> e.g., `deletelesson 1 li/1`
 **Find**   | `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`<br> e.g., `find n/James jake t/science`
 **List**   | `list`
 **Help**   | `help`
