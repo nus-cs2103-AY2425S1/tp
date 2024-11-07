@@ -3,13 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.logging.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -64,6 +61,7 @@ public class BatchMarkCommand extends Command {
             Student markedStudent = createNewStudentWithMarkedAttendance(p);
             model.setPerson(p, markedStudent);
         }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         String studentsMarked = formatStudentsToMark(students);
 
@@ -95,7 +93,7 @@ public class BatchMarkCommand extends Command {
      * @param students The list of students to be marked.
      * @return A comma-separated string of selected persons' names, or "none" if the list is empty.
      */
-    private static String formatStudentsToMark(List<Student> students) {
+    public static String formatStudentsToMark(List<Student> students) {
         return students.stream()
                 .map(person -> person.getName().toString()) // Convert Name object to String
                 .reduce((s1, s2) -> s1 + ", " + s2)
