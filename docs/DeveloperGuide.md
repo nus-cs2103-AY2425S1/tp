@@ -26,7 +26,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -158,9 +158,9 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -242,9 +242,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
+
+The archive functionality in MedConnect is facilitated by the `ModelManager` class. It handles the archiving, listing, loading, and deleting of archived contact data. The `ModelManager` interacts with the `Model` and `Storage` components to manage archived data.
+
+For example, the sequence diagram below illustrates the interactions within the `ModelManager` component when the `archive` command is executed.
 
 ![ArchiveSequenceDiagram.png](images%2FArchiveSequenceDiagram.png)
 
@@ -297,30 +301,28 @@ MedConnect offers a **streamlined contact management system** tailored for healt
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 ### Beginner User Stories
 
-| Priority | As a …​                  | I want to …​                                 | So that I can…​                                                            |
-|----------|--------------------------|----------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new user                 | familiarise myself with the app              | play around with dummy data without compromising real patient data         |
-| `* * *`  | healthcare administrator | add new hospital staff and patients          | easily reach out to them when needed                                       |
-| `* * *`  | healthcare administrator | update contact details                       | ensure all contact information is accurate and current                     |
-| `* *`    | healthcare administrator | search contacts by name, role, or department | quickly find and connect with the right person in high-pressure situations |
-| `* * *`  | healthcare administrator | view patient emergency contact details       | notify next-of-kin during urgent medical events                            |
-| `* *`    | healthcare administrator | add multiple contact methods for each person | reach them through different channels when needed                          |
-| `* *`    | healthcare administrator | assign doctors to patients                   | easily track which doctor is responsible for each patient                  |
+| Priority | As a …                   | I want to …                                | So that I can…                                                               |
+|----------|--------------------------|--------------------------------------------|------------------------------------------------------------------------------|
+| `* * *`  | new user                 | familiarise myself with the app            | play around with dummy data without compromising real patient data           |
+| `* * *`  | healthcare administrator | add new patients and their contact details | easily reach out to them when needed                                         |
+| `* * *`  | healthcare administrator | update patients' contact details           | ensure all contact information is accurate and current                       |
+| `* *`    | healthcare administrator | search patients by name                    | quickly find a patient and their contact details in high-pressure situations |
+| `* * *`  | healthcare administrator | view patients' emergency contact details   | notify next-of-kin during urgent medical events                              |
+| `* *`    | healthcare administrator | assign doctors to patients                 | easily track which doctor is responsible for each patient                    |
+| `* * *`  | healthcare administrator | delete outdated patient/staff contacts     | ensure all information is relevant and current                               |
 
 ### Intermediate User Stories
 
-| Priority | As a …​                  | I want to …​                             | So that I can…​                                                              |
+| Priority | As a …                   | I want to …                              | So that I can…                                                               |
 |----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
-| `* *`    | healthcare administrator | filter contacts by department            | streamline communication during different situations                         |
+| `* *`    | healthcare administrator | filter patients' contacts                | streamline communication during different situations                         |
 | `*`      | healthcare administrator | create custom groups                     | efficiently contact the right team during emergencies                        |
-| `* *`    | healthcare administrator | mark on-call staff                       | know whom to contact during off-hours                                        |
 | `* *`    | healthcare administrator | access frequently contacted individuals  | save time during routine interactions                                        |
-| `* *`    | healthcare administrator | filter contacts by shift or availability | quickly reach staff who are currently on duty                                |
 | `* *`    | healthcare administrator | archive outdated contacts                | maintain a clean and relevant contact list without losing historical records |
 
 ### Advanced User Stories
 
-| Priority | As a …​                  | I want to …​                                  | So that I can…​                                                      |
+| Priority | As a …                   | I want to …                                   | So that I can…                                                       |
 |----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
 | `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
 | `*`      | healthcare administrator | set reminders for follow-up actions           | ensure I don’t miss important tasks                                  |
@@ -328,7 +330,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | healthcare administrator | export contact information                    | provide it to others or have a backup in case of system failures     |
 | `* *`    | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
 | `*`      | healthcare administrator | secure access with user authentication        | ensure only authorized personnel can access or update sensitive data |
-| `* * *`  | healthcare administrator | delete outdated patient/staff contacts        | ensure all information is relevant and current                       |
 
 ---
 
@@ -340,6 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use Case: Add a New Contact
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 #### **Main Success Scenario (MSS):**
@@ -381,6 +383,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use Case: Delete a Contact
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 
@@ -397,7 +400,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### **Extensions:**
 
 **2a.** The contact list is empty.
-- **Use case ends.**
+
+**Use case ends.**
 
 **3a.** The given index is invalid (e.g., out of range).
 - **3a1.** MedConnect informs the user of the invalid index.
@@ -408,10 +412,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **3b1.** MedConnect acknowledges the cancellation.
 
   **Use case ends.**
+
 ---
+
 ### Use Case: View Emergency Contacts
 
 **System:** MedConnect
+
 **Actor:** Healthcare Administrator
 
 #### **Main Success Scenario (MSS):**
@@ -436,6 +443,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **3b2.** User provides the required additional information.
 
   **Use case resumes from step 4.**
+
 ---
 
 ### Use Case: Archive Outdated Contacts
@@ -463,6 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **3b1.** MedConnect acknowledges the cancellation.
 
   **Use case ends.**
+
 ---
 
 ### Use Case: Multiple Contact Methods
@@ -496,6 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **3c1.** MedConnect ignores the invalid modifiers and proceeds with the valid one.
 
   **Use case resumes from step 4.**
+
 ---
 
 ### Use Case: Delete Outdated Contacts (Hard Delete)
@@ -523,6 +533,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **3b1.** MedConnect acknowledges the cancellation of the deletion.
 
   **Use case ends.**
+
 ---
 
 ### Non-Functional Requirements (NFRs)
