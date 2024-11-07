@@ -25,8 +25,8 @@ public class PastryCatalogue extends Catalogue {
     /**
      * Adds a pastry to the catalogue with a specified name, cost, and list of ingredients.
      *
-     * @param name The name of the pastry.
-     * @param cost The cost of the pastry.
+     * @param name        The name of the pastry.
+     * @param cost        The cost of the pastry.
      * @param ingredients The list of ingredients required to make the pastry.
      */
     public void addPastry(String name, double cost, ArrayList<Ingredient> ingredients) {

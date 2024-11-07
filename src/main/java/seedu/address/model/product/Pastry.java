@@ -11,25 +11,27 @@ import java.util.Comparator;
 public class Pastry extends Product {
     private final ArrayList<Ingredient> ingredients;
 
-    // Default constructor for Jackson
+    /**
+     * Default constructor for Jackson.
+     * Initializes the Pastry object with default values.
+     */
     public Pastry() {
-        super(0, "", 0.0);  // Set default values for fields
-        this.ingredients = new ArrayList<>();  // Initialize empty list
+        super(0, "", 0.0); // Set default values for fields
+        this.ingredients = new ArrayList<>(); // Initialize empty list
     }
-
 
     /**
      * Constructs a {@code Pastry} object with specified ID, name, cost, and ingredients list.
      *
-     * @param productId The unique ID for the pastry.
-     * @param name The name of the pastry.
-     * @param cost The cost of the pastry.
+     * @param productId   The unique ID for the pastry.
+     * @param name        The name of the pastry.
+     * @param cost        The cost of the pastry.
      * @param ingredients The list of ingredients required for the pastry.
      */
     public Pastry(int productId, String name, double cost, ArrayList<Ingredient> ingredients) {
         super(productId, name, cost);
         this.ingredients = new ArrayList<>(ingredients);
-        Collections.sort(ingredients, Comparator.comparingInt(Ingredient::getProductId));
+        Collections.sort(this.ingredients, Comparator.comparingInt(Ingredient::getProductId));
     }
 
     /**
@@ -51,8 +53,9 @@ public class Pastry extends Product {
         StringBuilder ingredientsString = new StringBuilder();
         Collections.sort(ingredients, Comparator.comparingInt(Ingredient::getProductId));
         for (Ingredient ingredient : ingredients) {
-            ingredientsString.append("          ");
-            ingredientsString.append(ingredient.toShortString()).append("\n");
+            ingredientsString.append("          ")
+                    .append(ingredient.toShortString())
+                    .append("\n");
         }
         return super.toString() + "\n     Ingredients: \n" + ingredientsString;
     }

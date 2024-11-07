@@ -17,10 +17,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.util.Remark;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Remark;
 
 /**
  * Parses input arguments and creates a new AddCustomerCommand object.
