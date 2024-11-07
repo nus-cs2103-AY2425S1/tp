@@ -19,8 +19,11 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* NomNomNotifier is adapted from the AddressBook Level-3 created by the SE-EDU initiative.
 
+* Below are the Java libraries used in this project:
+  * JavaFX for UI
+  * JUnit5 and TestFX for Testing
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -633,6 +636,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * Tag: A label or keyword that can be associated with a customer to categorize or describe them (e.g., “vegetarian”, “loyalty-programme”)
 * Parameter: Information provided by the user as part of a command, such as name, email, or phone number
 * CSV (Comma-Separated Values): A common format for storing and exchanging tabular data, where each row represents a record, and each field is separated by a comma
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
