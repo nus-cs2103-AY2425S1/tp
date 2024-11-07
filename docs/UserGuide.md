@@ -66,32 +66,32 @@ To get started,
 6. Refer to the [Features](#features) below for details of each command.
    <br><br>
 
-{{ newPageBetween }}
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Summary of commands
 
-| Action                                                          | Format, Examples                                                                                                                                                                          |
-|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action                                                          | Format, Examples                                                                                                                                                                            |
+|-----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-person-add)                                 | `add name/NAME email/EMAIL telegram/TELEGRAM [tag/TAG]…​ github/GITHUB` <br> e.g., `add name/James Ho email/jamesho@example.com telegram/@James tag/friend tag/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                   |
-| [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                          |
-| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                        |
-| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter tag/[TAG] tag/[MORE_TAG]…​`<br> e.g., `filter tag/friends tag/family`                                                                                                             |
-| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                                    |
-| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                    |
-| [**View**](#viewing-a-contact-s-full-details-view)              | `view [name/NAME]` <br> e.g., `view name/John Doe`                                                                                                                                        |
-| [**Github**](#launching-github-repository-github)               | `github name/NAME`  <br> e.g., `github name/Harry`                                                                                                                                        |
-| [**Mark**](#marking-a-student-as-present-mark)                  | `mark name/NAME week/WEEK NUMBER` <br> e.g. `mark name/John Doe week/1`                                                                                                                   |
-| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark name/NAME week/WEEK NUMBER` <br> e.g. `unmark name/John Doe week/1`                                                                                                               |
-| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                  |
-| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                      |
-| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                           |
-| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                                             |## Features
-| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade name/NAME assignment/ASSIGNMENT_NAME score/SCORE` <br> e.g. `addGrade n/JohnDoe assignment/Ex01 score/5`                                                                        |
-| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade name/NAME assignment/ASSIGNMENT_NAME` <br> e.g. `removeGrade name/John Doe assignment/Ex01`                                                                                        |
+| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                     |
+| [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                            |
+| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                          |
+| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter tag/[TAG] tag/[MORE_TAG]…​`<br> e.g., `filter tag/friends tag/family`                                                                                                               |
+| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                                      |
+| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                      |
+| [**View**](#viewing-a-contact-s-full-details-view)              | `view [name/NAME]` <br> e.g., `view name/John Doe`                                                                                                                                          |
+| [**Github**](#launching-github-repository-github)               | `github name/NAME`  <br> e.g., `github name/Harry`                                                                                                                                          |
+| [**Mark**](#marking-a-student-as-present-mark)                  | `mark name/NAME week/WEEK_NUMBER` <br> e.g. `mark name/John Doe week/1`                                                                                                                     |
+| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark name/NAME week/WEEK_NUMBER` <br> e.g. `unmark name/John Doe week/1`                                                                                                                 |
+| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                    |
+| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                        |
+| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                             |
+| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                                               |## Features
+| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade name/NAME assignment/ASSIGNMENT_NAME score/SCORE` <br> e.g. `addGrade n/JohnDoe assignment/Ex01 score/5`                                                                          |
+| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade name/NAME assignment/ASSIGNMENT_NAME` <br> e.g. `removeGrade name/John Doe assignment/Ex01`                                                                                    |
 
 {{ newPage }}
 
@@ -354,7 +354,7 @@ Find all persons whose names contains any of the given keywords.
   ![result for 'find alex charlotte'](images/findAlexCharlotte.png)
 </box>
 
-{{ newPageBetween }}
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -382,6 +382,8 @@ Finds persons whose names contain any of the given tag keywords.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `t/friends t/family` will return any contact tagged with `friend` or `family`.
 </box>
+
+{{ newPageBetween }}
 
 <box type="definition" icon=":fa-solid-book:" light>
 
@@ -423,7 +425,7 @@ Deletes the specified person from the address book.
 * `delete n/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
 </box>
 
-{{ newPageBetween }}
+{{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -500,12 +502,12 @@ Marks a student as present for a particular week.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `mark name/NAME week/[WEEK_NUMBER]`**</md>
+<md>**Format: `mark name/NAME week/WEEK_NUMBER`**</md>
 </box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Shortcut: `m n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Shortcut: `m n/NAME w/WEEK_NUMBER`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -533,14 +535,13 @@ Unmarks a student as present for a particular week.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `unmark n/NAME w/[WEEK_NUMBER]`**</md>
-<md>**Format: `unmark n/NAME week/[WEEK_NUMBER]`**</md>
+<md>**Format: `unmark n/NAME w/WEEK_NUMBER`**</md>
 
 </box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Shortcut: `um n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Shortcut: `um n/NAME w/WEEK_NUMBER`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
