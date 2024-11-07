@@ -39,6 +39,7 @@ public class AddLogPopup extends UiPart<Stage> {
 
         TextArea logEntryArea = new TextArea();
         logEntryArea.setPromptText("Enter your log entry here...");
+        logEntryArea.setWrapText(true); // Enable wrapping without new lines
 
         VBox.setVgrow(logEntryArea, Priority.ALWAYS);
 
@@ -54,6 +55,17 @@ public class AddLogPopup extends UiPart<Stage> {
         saveButton.setOnAction(e -> {
             logEntry[0] = logEntryArea.getText();
             window.close();
+        });
+
+        // Add Ctrl+Enter (or Cmd+Enter) as a shortcut for saving
+        logEntryArea.setOnKeyPressed(event -> {
+            if ((event.isControlDown() || event.isMetaDown()) && event.getCode().toString().equals("ENTER")) {
+                if (!saveButton.isDisabled()) {
+                    logEntry[0] = logEntryArea.getText();
+                    window.close();
+                }
+                event.consume();
+            }
         });
 
         Button cancelButton = new Button("Cancel");
@@ -72,6 +84,11 @@ public class AddLogPopup extends UiPart<Stage> {
 
         Scene scene = new Scene(layout, 300, 250);
         window.setScene(scene);
+
+        // Set minimum window size
+        window.setMinWidth(400);
+        window.setMinHeight(300);
+
         window.showAndWait();
 
         return LogEntry.convertToStorageString(logEntry[0]);
