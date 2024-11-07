@@ -45,6 +45,14 @@ public class Date {
         return dateTime.format(PATTERN_WRITE);
     }
 
+    /**
+     * Checks if the current date has passed.
+     * Considers the dateTime in real-time.
+     */
+    public boolean hasPassed() {
+        return this.dateTime.isBefore(LocalDateTime.now());
+    }
+
     @Override
     public String toString() {
         return dateTime.format(PATTERN_READ);

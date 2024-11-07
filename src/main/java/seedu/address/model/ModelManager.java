@@ -46,12 +46,13 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.goodsList = new ReceiptLog(goodsList);
+        this.goodsList.updateReceiptsDeliveryStatus();
         DeliveredPredicate deliveredPredicate = new DeliveredPredicate(false);
         filterIllegalSupplierNames();
-        filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
-        filteredReceipts.setPredicate(deliveredPredicate);
+        this.filteredReceipts = new FilteredList<>(this.goodsList.getReceiptList());
+        this.filteredReceipts.setPredicate(deliveredPredicate);
     }
 
     public ModelManager() {
@@ -261,6 +262,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredReceiptsList(Predicate<GoodsReceipt> predicate) {
         requireNonNull(predicate);
+        this.goodsList.updateReceiptsDeliveryStatus();
         filteredReceipts.setPredicate(predicate);
     }
 
@@ -273,12 +275,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteGoods(GoodsReceipt goodsReceipt) {
         requireNonNull(goodsReceipt);
-        goodsList.deleteReceipt(goodsReceipt);
+        this.goodsList.deleteReceipt(goodsReceipt);
     }
 
     @Override
     public Optional<GoodsReceipt> findGoodsReceipt(Predicate<GoodsReceipt> predicate) {
-        return goodsList.getReceiptList().stream().filter(predicate).findAny();
+        return this.goodsList.getReceiptList().stream().filter(predicate).findAny();
     }
 
     @Override
@@ -298,7 +300,11 @@ public class ModelManager implements Model {
                 .anyMatch(personName -> personName.equals(goodsReceipt.getSupplierName()));
     }
 
+    /**
+     * Remove invalid receipts if {@code Name}
+     *     does not match an existing one.
+     */
     private void filterIllegalSupplierNames() {
-        goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
+        this.goodsList.removeIf(receipt -> !hasExistingSupplier(receipt));
     }
 }

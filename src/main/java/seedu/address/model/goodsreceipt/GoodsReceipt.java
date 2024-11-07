@@ -9,12 +9,14 @@ import static seedu.address.storage.CsvConverters.PersonNameConverter;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
 import com.opencsv.bean.CsvNumber;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.goods.Goods;
 import seedu.address.model.person.Name;
 
@@ -179,6 +181,11 @@ public class GoodsReceipt {
      * Return a new goods object with the new delivery status.
      */
     public GoodsReceipt markAsDelivered() {
+        // For proper checking
+        Logger logger = LogsCenter.getLogger(GoodsReceipt.class);
+        logger.info(this.goods + " with arrival date "
+                + this.arrivalDate.getReadableDateTimeString() + " has been marked as delivered.");
+
         return new GoodsReceipt(this.goods, this.supplierName, this.procurementDate, this.arrivalDate, true,
                 this.quantity, this.price);
     }
@@ -226,5 +233,4 @@ public class GoodsReceipt {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(goods, supplierName, arrivalDate, procurementDate, quantity, price);
     }
-
 }

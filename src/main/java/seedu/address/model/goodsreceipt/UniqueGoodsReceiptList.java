@@ -82,7 +82,6 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
         internalList.setAll(replacement.internalList);
     }
 
-
     /**
      * Replaces the contents of this list with {@code receipts}.
      * {@code receipt} must not contain duplicate receipts.
@@ -95,7 +94,6 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
         internalList.setAll(receipts);
     }
 
-
     /**
      * Replaces the contents of this list with {@code receipts}.
      * {@code receipts} must not contain duplicate receipts.
@@ -107,6 +105,27 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
         }
 
         internalList.setAll(goodsReceipts);
+    }
+
+    /**
+     * Checks and marks the deliivered items.
+     * Considers time passed in real time.
+     */
+    public void autoMarkCompletedDeliveries() {
+        final Predicate<GoodsReceipt> checkDatePredicate = new Predicate<GoodsReceipt>() {
+            @Override
+            public boolean test(GoodsReceipt receipt) {
+                return !receipt.isDelivered() && receipt.getArrivalDate().hasPassed();
+            }
+        };
+
+        List<GoodsReceipt> goodsReceipts = internalList.stream()
+                .map(receipt -> {
+                    return checkDatePredicate.test(receipt) ? receipt.markAsDelivered() : receipt;
+                })
+                .toList();
+
+        setGoodsReceipts(goodsReceipts);
     }
 
     /**

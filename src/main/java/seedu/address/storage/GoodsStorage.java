@@ -37,7 +37,6 @@ public interface GoodsStorage {
     Optional<ReadOnlyReceiptLog> readGoods(Path filePath) throws DataLoadingException;
 
     /**
-     * TODO: Add ReadOnly Feature to the parameter
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
      * @param goods cannot be null.
      * @throws IOException if there was any problem writing to the file.
@@ -45,7 +44,6 @@ public interface GoodsStorage {
     void saveGoods(ReadOnlyReceiptLog goods) throws IOException;
 
     /**
-     * TODO: Add ReadOnly Feature to the parameter
      * @see #saveGoods(List)
      */
     void saveGoods(ReadOnlyReceiptLog goods, Path filePath) throws IOException;
