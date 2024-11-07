@@ -376,6 +376,28 @@ public class ChatWindowUiTest extends ApplicationTest {
 
     @Test
     @Order(32)
+    public void getResponse_clearCommandSuggestions_success() {
+        assertEquals("It seems you want to clear some data.\n"
+                        + "Can you specify which you are referring to?\n"
+                        + "• Clear all client data and listings - clear\n"
+                        + "• Clear only listings - clearlistings",
+                chatWindow.getResponse("clear"));
+
+        assertEquals("It seems you want to clear some data.\n"
+                        + "Can you specify which you are referring to?\n"
+                        + "• Clear all client data and listings - clear\n"
+                        + "• Clear only listings - clearlistings",
+                chatWindow.getResponse("reset all"));
+
+        assertEquals("It seems you want to clear some data.\n"
+                        + "Can you specify which you are referring to?\n"
+                        + "• Clear all client data and listings - clear\n"
+                        + "• Clear only listings - clearlistings",
+                chatWindow.getResponse("wipe listings"));
+    }
+
+    @Test
+    @Order(33)
     public void handleSendButtonAction_exitOnGoodbye_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn(userInput);
