@@ -4,9 +4,9 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# Knotty Planner 💍🎀
+# KnottyPlanners 💍🎀
 
-Knotty Planner is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planner can make organising weddings a walk in the park!
+KnottyPlanners is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, KnottyPlanners can make organising weddings a walk in the park!
 
 _Command Line Interface (CLI) allows you to type text commands to perform specific tasks quickly and efficiently._
 
@@ -34,15 +34,15 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 
 5. After successfully completing the installation, repeat steps 1 to 3 to ensure that you have Java 17.
 
-6. Download the latest `KnottyPlanner.jar` file under the Assets tab from [here](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
+6. Download the latest `KnottyPlanners.jar` file under the Assets tab from [here](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
 
-7. Create a new folder in your Desktop and copy the `KnottyPlanner.jar` file into that folder.
+7. Create a new folder in your Desktop and copy the `KnottyPlanners.jar` file into that folder.
 
 8. Repeat step 1 to open up a new terminal.
 
 9. Type in `cd Desktop\NEW_FOLDER_NAME` where `NEW_FOLDER_NAME` is the name of the folder you created in step 7 and hit enter.
 
-10. Type in `java -jar KnottyPlanner.jar` and hit enter to run the application.
+10. Type in `java -jar KnottyPlanners.jar` and hit enter to run the application.
 
 11. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details regarding each command.
 
@@ -52,9 +52,9 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Knotty Planner.
+3. Copy the file to the folder you want to use as the _home folder_ for your KnottyPlanners.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanner.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanners.jar` command to run the application.
 
 5. You can refer to the [Command Summary](#command-summary) for an overview of the available commands. If you need more information, the [Features](#features) section below contains more details reagarding each command.
 
@@ -87,7 +87,7 @@ _Command Line Interface (CLI) allows you to type text commands to perform specif
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Tags in Knotty Planners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
+* Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `John Loh & Jean Tan`, `Stacy & Sam` etc.
@@ -122,7 +122,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 * A person can have any number of tags (including 0). Tags are associated to the weddings this person is
   involved in. Weddings must already exist in the wedding book to successfully tag a person to a wedding.
   
-* To make adding a person easier, Knotty Planner will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+* To make adding a person easier, KnottyPlanners will format their names for you! Person name will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
   
   Examples:`john doe`, `JOHN    doe` will all be formatted to `John Doe`
 
@@ -130,7 +130,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 **IMPORTANT:**
 
-* If you are worried about adding duplicated people, fret not! Knotty Planner will alert you when an identical person is added
+* If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
 * We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
 
 </box>
@@ -184,7 +184,7 @@ You can edit an existing contact's details (name, phone number, email, address a
 Format: `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`
 
 * You have to provide at least one of the optional fields.
-* If you accidentally type the name of the contact in all capitals or add one too many spaces, don't worry! Knotty Planner will
+* If you accidentally type the name of the contact in all capitals or add one too many spaces, don't worry! KnottyPlanners will
   automatically format the name by removing the extra spacing and correctly capitalizing it 🤩
 
 <box type="important" seamless>
@@ -225,9 +225,9 @@ You can add a wedding to the list of weddings.
 
 Format: `add-wed w/NAME & NAME v/VENUE d/DATE`
 
-* If you are worried about adding duplicated weddings, fret not! Knotty Planner will alert you when an identical wedding is added.
+* If you are worried about adding duplicated weddings, fret not! KnottyPlanners will alert you when an identical wedding is added.
 * We will also alert you when you add a different wedding with the same name, we need your help to change their input name in these situations 😊.
-* To make adding a wedding easier, Knotty Planner will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
+* To make adding a wedding easier, KnottyPlanners will format the names for you! Wedding names will be automatically capitalised and separated with 1 space. Trailing spaces and extra space in between will be removed.
 
 <box type="important" seamless>
 
@@ -437,21 +437,21 @@ Format: `exit`
 
 ### Saving the Data
 
-Knotty Planner data will be saved in the hard disk automatically after any command that changes the data.
+KnottyPlanners data will be saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 ### Editing the Data File
 
-* Knotty Planner data are saved automatically as a JSON file `[JAR file location]/data/knottyplanner.json`.
+* KnottyPlanners data are saved automatically as a JSON file `[JAR file location]/data/knottyplanners.json`.
 * Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **<span style="color: red;">CAUTION:</span>**
   
-* If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+* If your changes to the data file makes its format invalid, KnottyPlanners will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 
-* Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+* Furthermore, certain edits can cause the KnottyPlanners to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 </box>
 
@@ -464,7 +464,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KnottyPlanner home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KnottyPlanners home folder.
 
 **Q**: What should I do if the application does not start?<br>
 **A**: If you are using a Mac, you may need to right-click the jar file and select `Open` to run the application. If you are using Windows, you may need to run the jar file as an administrator.
