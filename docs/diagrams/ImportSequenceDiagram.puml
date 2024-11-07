@@ -1,0 +1,25 @@
+@startuml
+actor User
+
+participant ImportCommand
+participant CsvImport
+participant Model
+participant CommandResult
+
+User -> ImportCommand : execute(model, history)
+ImportCommand -> ImportCommand : requireNonNull(model)
+ImportCommand -> CsvImport : new CsvImport(importFilePath)
+ImportCommand -> CsvImport : readCsv(model)
+
+alt FileNotFoundException or ImproperFormatException
+    CsvImport -> ImportCommand : throw Exception
+    ImportCommand -> User : throw CommandException
+else personsAdded != 0
+    ImportCommand -> Model : commitAddressBook()
+end
+
+ImportCommand -> ImportCommand : returnMessage(personsAdded, importer)
+ImportCommand -> CommandResult : new CommandResult(message)
+
+return CommandResult
+@enduml
