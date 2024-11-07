@@ -265,10 +265,16 @@ Format: `erase EVENT INDEX`
 Example:
 * `erase 1`
 
+#### Clear all events: `clear-event`
+Clear all events from the event list.
+
+Format: `clear-event`
+
 ### Search Mode for Event Management : `searchmode`/`sm`
 Search Mode allows you to search for contacts based on multiple criteria,
 enabling you to add multiple contacts to an event simultaneously. 
 You can search using criteria such as:
+
 - Name
 - Phone Number
 - Email
@@ -425,6 +431,7 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 
 --------------------------------------------------------------------------------------------------------------------
 
+
 ## Known Issues
 
 1. **When using multiple screens**: If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen. **Solution**: Delete the `preferences.json` file created by the application before running it again.
@@ -449,7 +456,8 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 | **Add Contact to Event** | `event-add ei/EVENT INDEX [a/ or s/ or ve/ or vo/] CONTACT INDEX ` <br> e.g., `e.g. event-add ei/1 a/1,2,3`                                                                        |
 | **Find Contacts in Event** | `find-event EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                 |
 | **Remove Contact from Event** | `remove ei/EVENT_INDEX ci/CONTACT_INDEX` <br> e.g., `remove ei/1 ci/1`                                                                                                             |
-| **Delete Event**     | `erase [EVENT INDEX]`                                                                                                                                                              |
+| **Delete Event**     | `erase [EVENT INDEX]`   
+| **Clear-Event**      | `clear-event`|
 | **List Contacts**    | `list`                                                                                                                                                                             |
 | **Help**             | `help`                                                                                                                                                                             |
 
@@ -463,4 +471,3 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 | **Check Excluded Contacts** | `checkexcluded`                                             |
 | **Clear Excluded Contacts** | `clearexcluded`                                             |
 | **Exit Search Mode**     | `exitsearch` / `es`                                         |
-
