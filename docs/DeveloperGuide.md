@@ -1090,11 +1090,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/addressbook.json`)
 
-1. _{ more test cases …​ }_
+  * Test case: Rename, move, or delete the save file
+
+    - Expected: Launching EduVault creates a new save file with default entries.
+
+2. Dealing with corrupt data files
+
+  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/addressbook.json`)
+
+  * Test case: Edit the save file to be an invalid JSON format (eg. removing the closing brace `}` at the end of the file), 
+or adding an invalid object as outlined in [Storage feature](#storage-feature).
+
+    - Expected: Launching EduVault creates a new empty address book.
 
 ### Adding a student
 
