@@ -202,7 +202,6 @@ public class ParserUtilTest {
     @Test
     public void parseGoodsQuantity_validFormat_success() {
         assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1"));
-        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("0"));
         assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1234567890"));
     }
 
@@ -222,9 +221,10 @@ public class ParserUtilTest {
 
     @Test
     public void parseGoodsPrice_validFormat_success() {
-        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1"));
-        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("0"));
-        assertDoesNotThrow(() -> ParserUtil.parseGoodsQuantity("1234567890"));
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsPrice("1"));
+        // Price can be 0 in "free" scenarios
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsPrice("0"));
+        assertDoesNotThrow(() -> ParserUtil.parseGoodsPrice("1234567890"));
     }
 
     @Test
@@ -240,5 +240,14 @@ public class ParserUtilTest {
         Date now = new Date();
         String dateString = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(now);
         assertDoesNotThrow(() -> ParserUtil.parseProcurementDate(dateString));
+    }
+
+    @Test
+    public void parseArrivalDate_beforeProcurementDate_failure() {
+        String procurementDate = "2024-12-12 12:00";
+        String arrivalDate = "2024-11-12 12:00";
+
+        assertThrows(ParseException.class, () -> ParserUtil.parseArrivalDate(arrivalDate,
+                ParserUtil.parseProcurementDate(procurementDate)));
     }
 }
