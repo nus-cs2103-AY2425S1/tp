@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://junit.org/junit5/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -18,6 +18,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -51,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `/e delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="544"  alt=""/>
 
@@ -60,11 +61,15 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <img src="images/ComponentManagers.png" width="314" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -72,7 +77,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EventListPanel`, `VolunteerListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +86,9 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Event` and `Volunteer` objects residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -93,18 +100,21 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteVolunteerSequenceDiagram.png)
+![Supporting sd Frame](images/DeleteVolunteerSequenceDiagramSdFrame.png)
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `VolunteerDeleteCommandParser`) and uses it to parse the command.
+   - However, if it is a command that creates a new event (e.g. /v new), AddressBookParser creates an instance of `VolunteerCommandParser`, which then creates the `VolunteerNewCommandParser` to parse the command.
 2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a volunteer).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+<div style="page-break-after: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -114,6 +124,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -122,17 +134,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Event` and `Volunteer` objects (which are contained in a `UniqueEventList` and `UniqueVolunteerList` object respectively).
+* stores the currently 'selected' `Event` and `Volunteer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Event>` and `ObservableList<Volunteer` respectively, that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="472"  alt=""/>
-
-</div>
-
 
 ### Storage component
 
@@ -147,102 +152,15 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.address.commons` package.
+Classes used by multiple components are in the [`seedu.address.commons`](https://github.com/AY2425S1-CS2103T-W12-2/tp/tree/master/src/main/java/seedu/address/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="308"  alt=""/>
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -301,68 +219,132 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | General user                             | Dark mode                              | Enhance the app's user experience for those who prefer a darker interface            |
 | `*`      | General user                             | Accessibility features                 | Improve usability for visually impaired users through larger fonts and color changes |
 
-*{More to be added}*
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
-# UML Use Cases: Contact Management Application for Volunteer Organizations
+<br/>
+For the following use cases, the `Actors` are defined as the Management Staff of Volunteer Organisations, and the `System` is defined as VolunSync, unless specified otherwise.
 
-## Actors
-- Management Staff
+#### UC01. Create Event
 
-## Use Cases
+**Description**: Create a new event in the system.
 
-### 1. Create Volunteer Event
+**Preconditions**: NA
 
-**Actor**: Management Staff
+**MSS**:
+1. User enters the event's details.
+2. User submits the event's details to the system.
+3. System checks if all required information is present, and that all information is valid.
+4. System creates the new event and confirms creation to the user.
 
-**Description**: Create a new volunteer event in the system.
+**Extensions**:
+- 3a. Information provided is incomplete or invalid.
+  - 3ai. System displays error and returns to step 1.
+    Use Case Ends.
+- 4a. Event creation fails.
+  - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
+    Use Case Ends.
 
-**Preconditions**:
-- User is logged in with management privileges
+**Guarantees**:
+- New event is stored in the system if all required information is present and valid.
 
-**Main Flow**:
-1. User selects "Create New Event" option
-2. System displays event creation form
-3. User enters event details (eventName, date, time, location, required roles)
-4. User submits the form
-5. System validates the information
-6. System creates the new event and confirms creation to the user
+<div style="page-break-after: always;"></div>
 
-**Alternative Flows**:
-- 5a. If information is invalid, system displays error and returns to step 3
-- 6a. If event creation fails, system notifies user and provides option to try again
+#### UC02. Create Volunteer
 
-**Postconditions**:
-- New event is stored in the system
+**Description**: Create a new Volunteer in the system.
 
-### 2. Add Volunteer to Event
+**Preconditions**: NA
 
-**Actor**: Management Staff
+**MSS**:
+1. User enters the volunteer's details.
+2. User submits the volunteer's details to the system.
+3. System checks if all required information is present, and that all information is valid.
+4. System creates the new event and confirms creation to the user.
+   Use Case Ends.
+
+**Extensions**:
+- 3a. Information provided is incomplete or invalid.
+   - 3ai. System displays error and returns to step 1.
+     Use Case Ends.
+- 4a. Volunteer creation fails.
+   - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
+     Use Case Ends.
+
+**Guarantees**:
+- New volunteer is stored in the system if all required information is present and valid.
+
+#### UC03. Assign Volunteer to Event
 
 **Description**: Assign a volunteer to a specific event.
 
 **Preconditions**:
-- Volunteer event exists in the system
-- Volunteer is registered in the system
+- Event exists in the system.
+- Volunteer is registered in the system.
 
-**Main Flow**:
-1. User navigates to the event details page
-2. User selects "Add Volunteer" option
-3. System displays list of available volunteers
-4. User selects a volunteer
-5. System prompts for role assignment and availability
-6. User provides role and availability information
-7. System adds the volunteer to the event and confirms addition
+**MSS**:
+1. User queries all volunteers and events.
+2. System displays list of all volunteers and events.
+3. User selects the desired volunteer and event to assign the volunteer to.
+4. User submits the information to the system.
+5. System adds the volunteer to the event and confirms addition.<br/>
+   Use Case Ends.
+
+<div style="page-break-after: always;"></div>
 
 **Extensions**:
-- 4a. If desired volunteer is not in the list, user can add a new volunteer
-- 7a. If addition fails, system notifies user and provides option to try again
+- 2a. No volunteers and/or events are found.
+  - 2ai. System notifies user and prompts user to create a new volunteer ([UC02 - Create Volunteer](#uc02-create-volunteer)) and / or event ([UC01 - Create Event](#uc01-create-event)).<br/>
+   Use Case Ends.<br/><br/>
+- 5a. Volunteer is already assigned to the event.
+  - 5ai. System notifies user.
+  - 5aii. Volunteer remains assigned to the event.<br/>
+    Use Case Ends.<br/><br/>
+- 5b. Volunteer is assigned to another event occurring at the same time.
+  - 5bi. System notifies user.
+  - 5bii. Volunteer is not assigned to the event.<br/>
+    Use Case Ends.
 
-**Postconditions**:
-- Volunteer is associated with the event in the system
+**Guarantees**:
+- Volunteer is associated with the event in the system if the volunteer is not assigned to another event occurring at the same time.
 
-## UML Use Case Diagram
+#### UC04. Find Event by Name
+
+**Description**: Search for an event by their name.
+
+**Preconditions**: NA
+
+**MSS**:
+1. User enters a keyword to search for.
+2. System looks up all events with names containing the keyword.
+3. System notifies the number of matches found and displays the list of events whose names contains the keyword.<br/>
+   Use Case Ends.
+
+**Extensions**:
+- 2a. No events with names containing the keyword are found.
+    - 2ai. System notifies user and displays all events.<br/>
+      Use Case Ends.
+
+
+#### UC05. Find Volunteer by Name
+
+**Description**: Search for a volunteer by their name.
+
+**Preconditions**: NA
+
+**MSS**:
+1. User enters a keyword to search for.
+2. System looks up all volunteers whose names contain the keyword.
+3. System notifies the number of matches found and displays the list of volunteers whose names contains the keyword.<br/>
+   Use Case Ends.
+
+**Extensions**:
+- 2a. No volunteers whose names contains the keyword are found.
+  - 2ai. System notifies user and displays all volunteers.<br/>
+    Use Case Ends.
+
+#### UML Use Case Diagram
 
 ```mermaid
 graph TD
@@ -373,6 +355,8 @@ graph TD
 ```
 
 This diagram shows the main actor (Management Staff) and their interactions with the three primary use cases we've defined. The arrows indicate the relationships between the actor and the use cases, as well as dependencies between use cases.
+
+<div style="page-break-after: always;"></div>
 
 
 ### Non-Functional Requirements
@@ -399,6 +383,8 @@ This diagram shows the main actor (Management Staff) and their interactions with
 * **CLI (Command-Line Interface)**: A text-based interface where users input commands to interact with the application.
 * **NFR (Non-Functional Requirement)**: System attributes like performance, scalability, and usability that don’t affect specific functional behaviors.
 * **Duplicate Handling**: A system feature that prevents the creation of identical entries.
+* **MSS**: Main Success Scenario, the primary flow of events in a use case.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -416,43 +402,166 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file to launch VolunSync. <br/>
+   Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
+   <br/><img src="images/ui.png" width="400" />
+
+   3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start)
 
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+   2. Re-launch the app by double-clicking the jar file. <br/>
+   Expected: The most recent window size and location should be retained.
 
-3. _{ more test cases …​ }_
+3. Exiting the app
 
-### Deleting a person
+   1. Click the close button in the top right corner of the window or using the `exit` command.<br/>
+    Expected: The application should close without any errors.
 
-1. Deleting a person while all persons are being shown
+   2. Upon re-launching the application, the window should appear in the same size and location as when the app was last closed.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Adding an event
 
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+1. Adding an event while all events are being shown
 
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
 
-   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    2. Test case: `/e new n/ Sail the Seven Seas s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ Changi Beach des/ on board Queen Anns Revenge`<br>
+       Expected: The new event is added to the end of the list. The status message should reflect the successful creation of the event.
+
+    3. Test case: `/e new`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect add commands to try: `new`, `/e new [missing fields]`, `...`, where missing fields represents user inputs with some fields (e.g. `n/`, `d/`) missing or left empty.<br>
+       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
+
+### Adding a volunteer
+
+1. Adding a volunteer while all events are being shown
+
+    1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
+
+    2. Test case: `/v new n/ Aramado Salazar p/ 91234567 em/ getjaggusbarrow@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`<br>
+       Expected: The new volunteer is added to the end of the list. The status message should reflect the successful creation of the volunteer.
+
+    3. Test case: `/v new`<br>
+       Expected: No volunteer is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect add commands to try: `new`, `/v new [missing fields]`, `...`, where missing fields represents user inputs with some fields (e.g. `n/`, `d/`) missing or left empty.<br>
+       Expected: Similar to previous.
+
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
+
+    2. Test case: `/e del 1`<br>
+       Expected: First event is deleted from the list. The status message should reflect the successful deletion of the event.
+
+    3. Test case: `/e del 0`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `del 1`, `/e del x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Deleting a volunteer
+
+1. Deleting a volunteer while all volunteers are being shown
+
+   1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
+
+   2. Test case: `/v del 1`<br>
+      Expected: First volunteer is deleted from the list. The status message should reflect the successful deletion of the volunteer.
+
+   3. Test case: `/v del 0`<br>
+      Expected: No volunteer is deleted. Error details shown in the status message. Status bar remains the same.
+
+   4. Other incorrect delete commands to try: `del 1`, `/v del x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
+<div style="page-break-after: always;"></div>
 
-### Saving data
+### Assigning a volunteer to an event
 
-1. Dealing with missing/corrupted data files
+1. Assigning a volunteer to an event while all volunteers and events are being shown
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: List all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
 
-2. _{ more test cases …​ }_
+   2. Test case: `assign e/ 1 v/ 1`<br>
+       Expected: The volunteer is assigned to the event. The status message should reflect the successful assignment of the volunteer to the event. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
+       ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
 
-## Appendix: Effort
+   3. Test case: `assign e/ 1 v/ 0`<br>
+       Expected: The volunteer is not assigned to the event. Error details shown in the status message. The event should not be reflected in the list of events of the volunteer, and the volunteer should not be reflected in the list of volunteers of the event as shown below.<br/>
+       ![Volunteer not Assigned to Event](images/UnassignVolunteerFromEvent.png)
+
+   4. Other incorrect assign commands to try: `assign`, `assign e/ 1`, `...`<br>
+      Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
+
+### Un-assigning a volunteer from an event
+
+1. Un-assigning a volunteer from an event while all volunteers and events are being shown
+
+    1. Prerequisites: List all volunteers and events using the `list` command. Multiple volunteers and events should be shown in the list.
+
+    2. Test case: `unassign e/ 1 v/ 1`<br>
+       Expected: The volunteer is unassigned from the event. The status message should reflect the successful un-assignment of the volunteer from the event. The event should be removed from the list of events of the volunteer, and the volunteer should be removed from the list of volunteers of the event as shown below.<br/>
+       ![Volunteer not Assigned to Event](images/UnassignVolunteerFromEvent.png)
+
+   3. Test case: `unassign e/ 1 v/ 0`<br>
+       Expected: The volunteer remains assigned to the event. Error details shown in the status message. The event should be reflected in the list of events of the volunteer, and the volunteer should be reflected in the list of volunteers of the event as shown below.<br/>
+       ![Volunteer Assigned to Event](images/AssignVolunteerToEvent.png)
+
+   4. Other incorrect unassign commands to try: `unassign`, `unassign e/ 1`, `...`<br>
+      Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
+
+### Finding an event by keyword
+
+1. Finding event(s) with names containing a keyword
+
+    1. Prerequisites: List all events using the `list` command. Multiple events should be shown in the list.
+
+    2. Test case: `/e find n/ Sail`<br>
+       Expected: The event with the name containing the keyword "Sail" is shown in the list. The status message should reflect the successful search for the event.
+
+    3. Test case: `/e find n/ [non-existent keyword]`<br>
+       Expected: No event is found. The status message should reflect the absence of any events with the keyword, and all events should be shown in the list.
+
+    4. Other incorrect find commands to try: `find`, `/e find n/`, `...`<br>
+       Expected: Similar to previous.
+
+### Finding a volunteer by keyword
+
+1. Finding volunteer(s) with names containing a keyword
+
+    1. Prerequisites: List all volunteers using the `list` command. Multiple volunteers should be shown in the list.
+
+    2. Test case: `/v find n/ Aramado`<br>
+       Expected: The volunteer with the name containing the keyword "Aramado" is shown in the list. The status message should reflect the successful search for the volunteer.
+
+    3. Test case: `/v find n/ [non-existent keyword]`<br>
+       Expected: No volunteer is found. The status message should reflect the absence of any volunteers with the keyword, and all volunteers should be shown in the list.
+
+    4. Other incorrect find commands to try: `find`, `/v find n/`, `...`<br>
+       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
+
+### Listing all Events And Volunteers
+
+1. Test case: `list`<br>
+   Expected: All events and volunteers are shown in the list. The status message should reflect the successful listing of all events and volunteers.
+
+## **Appendix: Effort**
 
 ### Project Scope and Difficulty
 This project was significantly more challenging than the Address Book 3 (AB3) reference project due to its broader scope and the complexity of managing multiple entity types. While AB3 focuses on a single entity type (Persons), our project, **VolunSync**, had to manage and integrate multiple entities such as **Volunteers** and **Events**. This increased the difficulty of implementing features such as assignment, scheduling, and cross-entity dependencies, requiring a robust data model and additional logic.
@@ -461,6 +570,8 @@ This project was significantly more challenging than the Address Book 3 (AB3) re
 - **Entity Relationships**: Implementing relationships between entities (e.g., assigning volunteers to events, tracking event participants) posed significant challenges, especially when ensuring data consistency and avoiding duplication.
 - **User Experience**: Developing a command-line interface that is both intuitive and efficient for users with varying technical skills was a considerable effort.
 - **Testing and Coverage**: Achieving high test coverage for a complex system with multiple interdependent features added to the project workload.
+
+<div style="page-break-after: always;"></div>
 
 ### Effort Required
 The project involved **approximately 1.5x the effort required for AB3**, primarily due to the increased complexity of handling multiple entities and implementing advanced features such as:
@@ -487,7 +598,7 @@ For example, the **storage module** leverages Jackson for JSON parsing. Our work
 ### Conclusion
 The project demonstrated a high level of effort and collaboration, resulting in a feature-rich and robust application that addresses the real-world challenges faced by nonprofit organizations. It serves as a testament to the team’s ability to deliver a product that is both scalable and user-focused.
 
-## Appendix: Planned Enhancements
+## **Appendix: Planned Enhancements**
 
 **Team size: 5**
 
