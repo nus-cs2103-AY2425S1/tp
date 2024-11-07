@@ -427,6 +427,39 @@
     -fx-font-size: 11;
 }
 
+#telegramUsername {
+    -fx-text-fill: blue;
+}
+
+#phone {
+    -fx-text-fill: #0d719d
+}
+
+#address {
+    -fx-text-fill: green
+}
+
+#email {
+    -fx-text-fill: purple
+}
+
+#attendees {
+    -fx-text-fill: green;
+}
+
+#vendors {
+    -fx-text-fill: #b62606
+}
+
+#sponsors {
+    -fx-text-fill: blue
+}
+
+#volunteers {
+    -fx-text-fill: purple
+}
+
+
 
 
 
