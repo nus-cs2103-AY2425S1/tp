@@ -114,14 +114,14 @@ The general interactions within the `Logic` component is shown in the sequence d
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person and his/her [participation](#participation-class)).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -349,6 +349,24 @@ The implementation of the Unenroll feature is similar to that of the example giv
 <img src="images/ParticipationAsAssociationDiagram.png" width="400" />
 
 When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
+
+### **Add Student and Create Tutorial feature**
+
+The implementation of the Add Student and Create Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for **Add Student** feature when the user inputs `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  will be shown below.   
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+For simplicity's sake, we use `add n/…` to represent the user input in the sequence diagram below.
+</div>
+
+![AddCommandSequenceDiagram-Logic](images/AddCommandSequenceDiagram.png)
+
+The main steps for execution are similar to the Enroll and Unenroll feature documented [above](#enroll-and-unenroll-feature). The main difference is that **AddCommandParser** does not process the index and the `tut` prefix, but instead, it processes other prefixes like `n/` and  `e/`.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+Between Add Student and Create Tutorial feature, the main difference is with regard to how they access the Model Component. Create Tutorial calls `hasTutorial(...)` and `createTutorial(...)`  method from the Model Component instead.
+</div>
 
 
 ### List and Clear feature
