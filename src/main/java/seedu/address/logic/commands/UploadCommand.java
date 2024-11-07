@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.io.File;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -56,22 +57,22 @@ public class UploadCommand extends Command {
         fileChooser.setDialogTitle("Select Profile Picture");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        //adapted from https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser
-        //        fileChooser.setFileFilter(new FileFilter() {
-        //
-        //            public String getDescription() {
-        //                return "PNG Images (*.png)";
-        //            }
-        //
-        //            public boolean accept(File f) {
-        //                if (f.isDirectory()) {
-        //                    return true;
-        //                } else {
-        //                    String filename = f.getName().toLowerCase();
-        //                    return filename.endsWith(".png");
-        //                }
-        //            }
-        //        });
+        // adapted from https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser
+        fileChooser.setFileFilter(new FileFilter() {
+
+            public String getDescription() {
+                return "PNG Images (*.png)";
+            }
+
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    String filename = f.getName().toLowerCase();
+                    return filename.endsWith(".png");
+                }
+            }
+        });
 
         int userSelection = fileChooser.showOpenDialog(null);
 
