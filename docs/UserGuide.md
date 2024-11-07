@@ -44,33 +44,51 @@ operate than graphical user interfaces commonly found in smartphones.
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer. If not, you can download Java `17` [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+### Step 1: Check if Your Computer is Ready
+First, we need to make sure your computer has Java 17 installed. Here's how to check:
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases).
+1. Open your computer's terminal:
+   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
+   - **For Mac**: Press Command + Space, type `terminal`, and press Enter
+2. In the black window that appears, type exactly:
+   ```
+   java --version
+   ```
+   and press Enter
+3. What you should see:
+   - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
+   - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
-3. Copy the file to the folder you want to use as the _home folder_ for your PROperty.
+### Step 2: Install PROperty
 
-4. Double-click on the `.jar` file to run it
-   - **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
+1. Download PROperty:
+   - Click [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases) to download the latest PROperty
+   - Look for the file named `PROperty.jar` and click on it to download
+2. Create a home folder for PROperty:
+   - Create a new folder on your computer named `PROperty`
+   - Copy the downloaded `PROperty.jar` file into this folder
+3. Start PROperty:
+   - Double-click on the `PROperty.jar` file to run it
+     **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
+   - You should see the PROperty window appear as follows below! Note how the app contains some sample data.<br>
 
-- A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/user-guide-images/Ui.png)
 
-![Ui](images/user-guide-images/Ui.png)
+### Step 3: Try Your First Commands
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-   
-   * `list` : Lists all clients in your address book.
-   
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
-   
-   * `delete 3` : Deletes the 3rd client shown in your current list.
-   
-   * `clear` : Deletes all clients.
-   
-   * `exit` : Exits the app.
+Now that PROperty is running, let's try using the different commands available. All you have to do is to type the command in the command box and press Enter to execute it. 
+Some example commands you can try are:
+* `list` : Lists all clients in your address book.
 
-6. Refer to the [Features](#features) below for details of each command.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
+
+* `delete 3` : Deletes the 3rd client shown in your current list.
+
+* `clear` : Deletes all clients.
+
+* `exit` : Exits the app.
+
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
