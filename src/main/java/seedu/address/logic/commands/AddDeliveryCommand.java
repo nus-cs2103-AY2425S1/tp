@@ -30,7 +30,7 @@ public class AddDeliveryCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
             + " : Adds a delivery to the address book. "
             + "Parameters: "
-            + PREFIX_DATETIME + "dd-mm-yyyy hh:mm "
+            + PREFIX_DATETIME + "DELIVERY_DATE_TIME "
             + PREFIX_SUPPLIER_INDEX + "SUPPLIER_INDEX "
             + PREFIX_PRODUCT + "PRODUCT "
             + PREFIX_QUANTITY + "QUANTITY kg/g/L/mL/units "

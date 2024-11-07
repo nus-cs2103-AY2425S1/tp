@@ -77,9 +77,11 @@ Action     | Format, Examples
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**Add**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
 **Delete** | `delete -d INDEX`<br> e.g., `delete -d 3`
 **Mark**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**Upcoming** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
+
 
 
 ### General Commands
@@ -218,8 +220,15 @@ To find the supplier whose name contains "link" and company contains "NU":
 
 Adds a delivery to the address book.
 
-Format: `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/litres/ml/units c/COST`
+Format: `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST`
 
+Parameters:
+
+- `DELIVERY_DATE_TIME`: Must be in dd-mm-yyyy hh:mm format and must not be blank.
+- `SUPPLIER_INDEX`: Must be a number greater than 0 and must not be blank.
+- `PRODUCT`: Must only consist of alphanumeric characters and must not be blank.
+- `QUANTITY`: Must be a number greater than 0 followed by a space and unit and must not be blank.
+- `COST`: Must be a number greater than 0 with up to 2 decimal places allowed. Must not be blank.
 <box type="tip" seamless>
 
 **Tip:** Day and month of date must be in double digits!
@@ -230,15 +239,12 @@ Format: `add -d on/dd-mm-yyyy hh:mm s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g
 **Warnings**:
 - A spacing between `add` and `-d` is compulsory
 - Duplicate delivery will not be added again
+- No duplicate prefix can be used
 </box>
 
-Examples:
-* `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-* `add -d on/19-12-2024 08:00 s/2 pro/soap q/10 units c/39.50`
+#### Example
 
-Expected output:
-* `New delivery added: John Doe; Date & time: 18-06-2024 17:00; Product: bread; Quantity: 500 g; Cost: 5.50; Status: PENDING`
-* `New delivery added: Betsy Crowe; Date & time: 19-12-2024 08:00; Product: soap; Quantity: 10 units; Cost: 39.50; Status: PENDING`
+    add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50
 
 #### Here's how it would look like in the app:
 ![add delivery command](images/addDeliveryCommand.png)
@@ -349,8 +355,38 @@ To sort deliveries by cost in ascending order:
 #### Here's how it would look like in the app:
 ![sort command](images/sortDeliveryCommand.png)
 
----
+### Upcoming deliveries: `upcoming`
 
+The `upcoming` command is used to view pending deliveries in VendorVault.
+You can choose to view all pending deliveries within a specified date range or
+before or after a given date.
+
+Format: `upcoming aft/START_DATE bef/END_DATE`
+Parameters:
+
+- `START_DATE`: Must be in dd-mm-yyyy hh:mm format.
+- `END_DATE`: Must be in dd-mm-yyyy hh:mm format.
+
+<box type="tip" seamless>
+
+**Tip:** You can provide both START_DATE and END_DATE!
+
+**Warnings**:
+- A spacing between `upcoming` and the first parameter is compulsory
+- At least one parameter must be provided
+- No duplicate prefix can be used
+- The prefixes `aft/` and `bef/` are **case-sensitive**
+</box>
+
+#### Example
+
+To view pending deliveries between two dates:
+
+    upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00
+
+#### Here's how it would look like in the app:
+![upcoming command](images/upcomingCommand.png)
+---
 ### Exiting the program : `exit`
 
 Exits the program.
