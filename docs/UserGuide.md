@@ -834,12 +834,12 @@ For advanced users, feel free to update patient and appointment data directly by
 ## **FAQ**
 
 **Q**: How is my data stored?<br>
-**A**: Your data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, 
-while the appointments are stored in the `appointmentbook.json` file.
+**A**: Your data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` 
+folder. The details of the persons are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
 
 Examples:
 
-An example of how the persons are stored:
+An example of how the persons are stored in the `addressbook.json` file:
 
 ```json
 {
@@ -871,7 +871,7 @@ An example of how the persons are stored:
 }
 ```
 
-An example of how the appointments are stored:
+An example of how the appointments are stored in the `appointmentbook.json` file:
 
 ```json
 {
