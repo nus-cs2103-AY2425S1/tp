@@ -26,6 +26,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
+import seedu.address.model.person.Meeting;
+import seedu.address.model.person.Meetings;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -79,7 +81,6 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            System.out.println("Print from Edit Command Class: " + index.getZeroBased());
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -90,7 +91,18 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Meetings meetings = personToEdit.getMeetings();
+        int meetingCount = meetings.getMeetingsCount();
+
+        for (int i = 0; i < meetingCount; i++) {
+            Meeting meeting = meetings.getMeeting(0);
+            model.deleteMeeting(personToEdit, meeting);
+            model.addMeeting(editedPerson, new Meeting(editedPerson.getName(), meeting.getStartTime(),
+                    meeting.getEndTime(), meeting.getLocation()));
+        }
+
         model.setPerson(personToEdit, editedPerson);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }

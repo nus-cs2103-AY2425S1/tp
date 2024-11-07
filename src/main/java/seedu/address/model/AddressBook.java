@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Meetings;
 import seedu.address.model.person.Person;
@@ -93,7 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
@@ -104,6 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        deletePersonMeetings(key);
         persons.remove(key);
     }
 
@@ -131,6 +133,22 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public Meeting getMeeting(int index) {
         return meetings.getMeeting(index);
+    }
+
+    /**
+     * Deletes all meetings that contains (@code p).
+     */
+    public void deletePersonMeetings(Person p) {
+        Meetings personMeetings = p.getMeetings();
+        for (int i = 0; i < personMeetings.getMeetingsCount(); i++) {
+            Meeting m = personMeetings.getMeeting(i);
+            for (int j = 0; j < meetings.getMeetingsCount(); j++) {
+                if (m.equals(meetings.getMeeting(j))) {
+                    Meeting toDelete = meetings.getMeeting(j);
+                    deleteMeeting(toDelete);
+                }
+            }
+        }
     }
 
     /**

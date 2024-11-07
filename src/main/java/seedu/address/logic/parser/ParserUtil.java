@@ -187,7 +187,7 @@ public class ParserUtil {
             LocalDateTime time = LocalDateTime.parse(trimmedTimeString, formatter);
             return time;
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid start time format. Please use the correct format: 'dd-MM-yyyy HH:mm'");
+            throw new ParseException("Invalid time format. Please use the correct format: 'dd-MM-yyyy HH:mm'");
         }
     }
 }

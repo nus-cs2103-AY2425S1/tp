@@ -54,7 +54,7 @@ public class EditMeetingDescriptorBuilder {
      */
     public EditMeetingDescriptorBuilder withEndTime(String endTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        descriptor.setStartTime(LocalDateTime.parse(endTime, formatter));
+        descriptor.setEndTime(LocalDateTime.parse(endTime, formatter));
         return this;
     }
 
