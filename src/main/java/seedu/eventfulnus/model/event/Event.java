@@ -22,7 +22,7 @@ import seedu.eventfulnus.model.person.role.athlete.SportString;
  * Represents an {@code Event} in the {@link AddressBook} of the {@link ModelManager}.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Event {
+public class Event implements Comparable<Event> {
     // Class fields
     public static final DateTimeFormatter DATE_TIME_PARSE_FORMATTER = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
     public static final DateTimeFormatter DATE_TIME_DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -186,5 +186,10 @@ public class Event {
                 .add("dateTime", dateTime.format(DATE_TIME_DISPLAY_FORMATTER))
                 .add("participants", participants)
                 .toString();
+    }
+
+    @Override
+    public int compareTo(Event otherEvent) {
+        return this.dateTime.compareTo(otherEvent.dateTime);
     }
 }
