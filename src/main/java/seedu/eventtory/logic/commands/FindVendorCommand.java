@@ -11,6 +11,7 @@ import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.vendor.Vendor;
 import seedu.eventtory.model.vendor.VendorContainsKeywordsPredicate;
+import seedu.eventtory.ui.UiState;
 
 /**
  * Finds and lists all vendors in EventTory whose fields contain any of the argument keywords.
@@ -24,6 +25,8 @@ public class FindVendorCommand extends FindCommand {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: " + PREFIX_VENDOR + " KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VENDOR + " alice bob charlie\n";
+    public static final String MESSAGE_FIND_VENDOR_FAILURE_INVALID_VIEW =
+            "You have to be viewing a vendor list to use the find vendor command";
 
 
     private final VendorContainsKeywordsPredicate predicate;
@@ -36,8 +39,12 @@ public class FindVendorCommand extends FindCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        FilteredList<Vendor> vendors = getPreviewOfFilteredVendors(model, predicate);
+        UiState uiState = model.getUiState().getValue();
+        if (uiState.isVendorDetails() || uiState.isEventList()) {
+            throw new CommandException(MESSAGE_FIND_VENDOR_FAILURE_INVALID_VIEW);
+        }
 
+        FilteredList<Vendor> vendors = getPreviewOfFilteredVendors(model, predicate);
         if (vendors.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_VENDORS_FOUND);
         }
