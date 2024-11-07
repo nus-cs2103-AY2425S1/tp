@@ -6,7 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Undoes the previous concrete command.
+ * Undoes the previous undoable command.
  */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
