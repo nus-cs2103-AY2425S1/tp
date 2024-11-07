@@ -22,7 +22,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
-        return new ViewCommand(trimmedArgs.toUpperCase()); // Normalize to uppercase
+        return new ViewCommand(trimmedArgs.toUpperCase());
     }
 
     /**

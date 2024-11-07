@@ -9,7 +9,15 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the [AddressBook Level 3](https://github.com/se-edu/addressbook-level3) project by SE-EDU.
+It includes reused and adapted ideas, code, and documentation from the AddressBook Level 3 project.
+
+
+* Reused/adapted components:
+    * UI component structure
+    * Command structure in Logic
+    * Storage management
+    * Project architecture and organization
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -426,6 +434,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. Data should be stored in a local file in a format that is easy to read and edit manually.
 5. The app should be able to recover from common errors (e.g. invalid user input) gracefully, without crashing.
 6. The app should avoid very high usage of system resources (CPU, memory) to ensure it can run efficiently even on systems with limited hardware capacity.
+7. The app should provide a consistent user interface experience across different screen sizes and resolutions.
+8. The application should be highly modular and well-documented to facilitate easy modification and maintenance from new developers.
 
 ### Glossary
 
@@ -434,6 +444,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Patient ID**: A unique identifier for a patient in a medical system
 * **Medical record**: A collection of data about a patient’s health history
 * **Description**: A textual summary associated with a appointment or medical record
+* **Timestamp**: A record of the date and time an event occurred
+* **Tag**: A keyword or term assigned to a piece of information (e.g., a patient) to describe or categorize it
+* **Command Line Interface**: A text-based interface for interacting with a computer program
+* **Graphical User Interface**: A visual interface for interacting with a computer program
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -484,6 +498,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. Simulating a Missing Data File
+       1. Locate the data file used by the application `data/addressbook.json`
+       2. Move or delete this file before launching the application<br>
+       Expected: The application should automatically create an empty data file, without displaying any errors and the application should function normally.
+    2. Simulating a Corrupted Data File
+       1. Open the data file `data/addressbook.json` in a text editor.
+       2. Introduce invalid JSON syntax into the file.
+       3. Save the corrupted file and launch the application.<br>
+    Expected: Application will display an error message to the user, indicating that the data is corrupted.

@@ -21,7 +21,6 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 4. [Known Issues](#known-issues)
 5. [Command Summary](#command-summary)
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -105,7 +104,7 @@ Adds a remark to a specified patient profile.
 
 Format: `remark NRIC r/REMARK`
 
-Examples: 
+Examples:
 * `remark S1234567A r/allergic to dogs`
 * `remark T1231231D r/keep away from flashing lights`
 
@@ -195,6 +194,20 @@ Format: `delete NRIC`
 Examples:
 * `delete S1234567A` deletes the patient profile of the patient with `NRIC S1234567A`.
 
+### Sort list of patients: `sort`
+
+Sorts the list of patients based on the specified criteria.
+
+Format: `sort [name | appointment]`
+
+Examples:
+* `sort name` sorts the list of patients in alphabetical order by their names.
+* `sort appointment` sorts the list of patients by their upcoming appointment dates in chronological order.
+
+#### Notes
+- If the list is already sorted by the specified criteria, the command will maintain the current order.
+- Sorting by `appointment` will only consider patients with scheduled appointments. Patients without appointments will appear at the end of the list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the database.
@@ -230,7 +243,11 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Murphy's List home folder.
-
+**Q**: What should I do if the application does not start?<br>
+**A**: Ensure you have Java `17` or above installed in your Computer. If the problem persists, contact the developers.
+You can check your Java version by running `java -version` in the command terminal.
+**Q**: How do I recover data if I accidentally delete a patient profile?
+**A**: Unfortunately, there is no built-in undo feature for deleted data. It is recommended to back up your data by making a copy of the data file periodically.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
