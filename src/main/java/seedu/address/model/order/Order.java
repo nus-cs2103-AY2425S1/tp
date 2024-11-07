@@ -1,5 +1,7 @@
 package seedu.address.model.order;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -29,6 +31,7 @@ public abstract class Order {
      * @param status The initial status of the order.
      */
     public Order(Person person, List<? extends Product> items, OrderStatus status, Remark remark) {
+        requireAllNonNull(person, items, status, remark);
         this.orderDate = LocalDateTime.now();
         this.items = items;
         this.status = status;
