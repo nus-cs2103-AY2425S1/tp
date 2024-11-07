@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
@@ -123,6 +122,22 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_editToDuplicateModule_failure() {
+        Person editedPerson = model.getFilteredPersonList().get(0);
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setOldModule(editedPerson.getModules().get(0));
+        descriptor.setNewModule(editedPerson.getModules().get(1));
+        StudentId studentId = editedPerson.getStudentId();
+
+        EditCommand editCommand = new EditCommand(studentId, descriptor);
+
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MODULE);
+    }
+
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -191,29 +206,6 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        Person secondPerson = model.getFilteredPersonList().get(1);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
-        StudentId secondPersonId = secondPerson.getStudentId();
-        EditCommand editCommand = new EditCommand(secondPersonId, descriptor);
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
-
-    @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        StudentId studentId = model.getFilteredPersonList().get(0).getStudentId();
-
-        // edit person in filtered list into a duplicate in EduContacts
-        Person personInList = model.getEduContacts().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(studentId,
-                new EditPersonDescriptorBuilder(personInList).build());
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
 
     @Test
     public void execute_invalidPersonIdUnfilteredList_failure() {
