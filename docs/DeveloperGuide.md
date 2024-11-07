@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `SupplierListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `SupplierListPanel`, `StatusBarFooter`, `DeliveryListPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Supplier` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Supplier`  and `Delivery` object(s) residing in the `Model`.
 
 ### Logic component
 
@@ -280,8 +280,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
-Manage and track deliveries faster than using a typical mouse/GUI driven app. 
+**Value proposition**:
+Manage and track deliveries faster than using a typical mouse/GUI driven app.
 Plan and allocate manpower more effectively to prepare for future deliveries.
 Match with the appropriate suppliers to find products correctly.
 
@@ -289,26 +289,33 @@ Match with the appropriate suppliers to find products correctly.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​     | I want to …​                                      | So that I can…​                                                                                            |
-|----------|-------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `* * *`  | shop owner  | view all my supplier contacts                     |                                                                                                            |
-| `* * *`  | shop owner  | add supplier contact                              |                                                                                                            |
-| `* * *`  | shop owner  | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
-| `* * *`  | shop owner  | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
-| `* *`    | shop owner  | Search for my supplier contacts by name           | I can find the contact information of the supplier I am looking for through names                            |
-| `*`      | shop owner  | Search for my supplier contacts by contact number | I can find the contact information of the supplier I am looking for through a contact number                 |
-| `*`      | shop owner  | Search for my supplier contacts by product        | I can find the contact information of the supplier I am looking for based on the product they supply       |
-| `* *`    | shop owner  | have custom tags for my suppliers                 | I can keep track of special details about my suppliers                                                     |
-| `* * *`  | shop owner  | add delivery information                          | I can track of the upcoming deliveries                                                                     |
-| `* *`    | shop owner  | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
-| `* * *`  | shop owner  | delete delivery information                       | I can delete deliveries that are no longer happening                                                       |
-| `* *`    | shop owner  | mark delivery with completion status              | I know if a delivery has been completed/postponed/cancelled                                                |
-| `*`      | shop owner  | Search for my deliveries by date                  | I can find the deliveries happening on a certain date                                                      |
-| `*`      | shop owner  | Search for my deliveries by supplier name         | I can find the deliveries associated with a supplier                                                       |
-| `* *`    | shop owner  | view past deliveries                              | I can keep track of deliveries that have been completed                                                    |
-| `* *`    | shop owner  | view list of products                             | I know what products I am currently selling                                                                |
-
-*{More to be added}*
+| Priority | As a …​                | I want to …​                                      | So that I can…​                                                                                            |
+|----------|------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| `* * *`  | first time shop owner  | can get help on using the application             | I can quickly get up to speed with all the commands                                                        |
+| `* * *`  | shop owner             | view all my supplier contacts                     |                                                                                                            |
+| `* * *`  | shop owner             | add supplier contact                              |                                                                                                            |
+| `* * *`  | shop owner             | delete supplier contact                           | I can remove suppliers from the past who are no longer of interest                                         |
+| `* * *`  | shop owner             | have custom tags for my suppliers                 | I can keep track of special details about my suppliers                                                     |
+| `* * *`  | shop owner             | have products linked to my suppliers              | I can keep track of products that are sold by my suppliers                                                 |
+| `* * *`  | shop owner             | mark suppliers with active status                 | I can view which suppliers are currently active/inactive                                                   |
+| `* * *`  | shop owner             | view all my deliveries                            |                                                                                                            |
+| `* * *`  | shop owner             | add delivery information                          | I can track of the upcoming deliveries                                                                     |
+| `* * *`  | shop owner             | delete delivery information                       | I can delete deliveries that are no longer happening                                                       |
+| `* * *`  | shop owner             | mark delivery with completion status              | I know if a delivery has been delivered/pending/cancelled                                                  |
+| `* *`    | shop owner             | find supplier contacts by name                    | I can find the contact information of the supplier I am looking for through names                          |
+| `* *`    | shop owner             | find supplier contacts by product                 | I can find the contact information of the supplier I am looking for based on the product they supply       |
+| `* *`    | shop owner             | find supplier contacts by company name            | I can find the contact information of the supplier I am looking for based on the company they are from     |
+| `* *`    | shop owner             | sort list of suppliers by name                    | I can view the suppliers in ascending/descending order by name                                             |
+| `* *`    | shop owner             | find deliveries by date                           | I can find the deliveries happening on a certain date                                                      |
+| `* *`    | shop owner             | find deliveries by supplier                       | I can find the deliveries associated with a supplier                                                       |
+| `* *`    | shop owner             | find deliveries by supplier status                | I can find the deliveries that are pending or have been delivered or cancelled                             |
+| `* *`    | shop owner             | sort list of deliveries by delivery cost          | I can view the deliveries in ascending/descending order sorted by delivery cost                            |
+| `* *`    | shop owner             | sort list of deliveries by delivery date and time | I can view the deliveries in ascending/descending order sorted by delivery date and time                   |
+| `* *`    | shop owner             | sort list of deliveries by delivery status        | I can view the deliveries in ascending/descending order sorted by delivery status                          |
+| `* *`    | shop owner             | view deliveries that are upcoming                 | I can view the deliveries that are within a certain time period                                            |
+| `* `     | shop owner             | edit supplier contact                             | I can easily alter contact information in the address book when suppliers change their contact information |
+| `* `     | shop owner             | edit delivery information                         | I can edit upcoming deliveries without changing other fields                                               |
+| `*`      | shop owner             | view list of products                             | I know what products I am currently selling                                                                |
 
 ### Use cases
 
@@ -316,11 +323,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use Case**: UC01 - Add Supplier Information
 
-**Actor**: Grocer
+**Actor**: Shop Owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to add supplier information with the required supplier details (name, contact, email, company, products).
-2. VV successfully adds the supplier and displays the updated list of suppliers.  
+1. User requests to add a new supplier
+2. VV successfully adds the supplier and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
@@ -328,66 +335,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - **1a1.** VV displays an appropriate error message.  
       Use case ends.
 
-
 - **1b.** User enters duplicate supplier information.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
-
-- **1c.** User omits supplier name.
-    - **1c1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1d.** User omits or provides an invalid contact number.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1e.** User omits or provides an invalid email address.
-    - **1e1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1f.** User omits the address or provides an invalid format.
-    - **1f1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1g.** User omits the company name.
-    - **1g1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1h.** User omits product information entry.
-    - **1h1.** VV displays an error message.  
-      Use case ends.
-
-      
-- **1i.** User provides duplicate supplier information (e.g., an entry with the same name and contact details already exists).
-    - **1i1.** VV displays an error message.  
-      Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
 **Use Case**: UC02 - Delete Supplier
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to delete a supplier.
-2. VV deletes the supplier and displays the updated supplier list.  
+1. User requests to delete a specific supplier.
+2. VV deletes the supplier and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the supplier index is missing or invalid.
+- **1a.** VV detects that the supplier is missing or invalid.
     - **1a1.** VV displays an error message.  
-      Use case ends.
-
-      
-- **1b.** The entered supplier index does not exist in the supplier list.
-    - **1b1.** VV displays an error message.  
       Use case ends.
 
 ___
@@ -395,75 +362,101 @@ ___
 
 **Use Case**: UC03 - Mark Supplier Status
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to mark a supplier's status as active or inactive.
-2. VV updates the supplier's status and displays the updated supplier list.  
+1. User requests to mark a specific supplier with a specific status.
+2. VV updates the supplier's status and displays the updated list of all suppliers.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the supplier index is missing or invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
-
-- **1b.** VV detects that the supplier index does not exist in the list.
+- **1b.** VV detects that one or more parameters are missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
+- **1c.** VV detects that the current status of the specified supplier is the same as the requested status.
+    - **1c1.** VV displays an error message.
+      Use case ends.
 
-- **1c.** VV detects that the status (active/inactive) is missing or invalid.
-    - **1c1.** VV displays an error message.  
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC04 - Find Supplier by given parameters
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find suppliers by keyword in one or more parameters.
+2. VV updates the supplier's list and displays the updated list of all suppliers that contain given keywords in all their respective parameters .  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that the keyword is missing.
+    - **1b1.** VV displays an error message.  
       Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC04 - Add Deliveries
+**Use Case**: UC05 - Sort Suppliers
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to add a new delivery by entering the details for the new delivery (date and time, supplier index, product name, quantity, cost).
+1. User requests to sort suppliers by a specified field in a specified order.
+2. VV sorts the suppliers and displays the sorted list of suppliers.  
+   Use case ends.
+   **Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC06 - Add Deliveries
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User request to add a new delivery
 2. VV adds the delivery entry to the list and displays the updated list of deliveries.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the date or time format is invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
-
-- **1b.** VV detects that the supplier index is missing or invalid.
+- **1b.** VV detects that one or more parameters are missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
-
-- **1c.** VV detects that the product name is missing.
+- **1c.** VV detects a duplicate delivery.
     - **1c1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1d.** VV detects that the quantity or cost is missing or invalid.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-
-- **1e.** VV detects a duplicate delivery (matching date, time, supplier index, and product name).
-    - **1e1.** VV displays an error message.  
       Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC05 - Delete Delivery
+**Use Case**: UC07 - Delete Delivery
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to delete a delivery entry.
-2. VV removes the delivery entry from the list and displays the updated list of deliveries.  
+1. User requests to delete a delivery.
+2. VV removes the delivery entry from the list and displays the updated list of all deliveries.
    Use case ends.
 
 **Extensions**:
@@ -475,40 +468,96 @@ ___
 - **1b.** VV detects invalid formatting.
     - **1b1.** VV displays an error message.  
       Use case ends.
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC08 - Mark the Status of Deliveries
+
+**Actor**: Shop Owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to set the status of a delivery
+2. VV displays a confirmation message and then shows an updated list of all deliveries.  
+   Use case ends.
+
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters are missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
+
+- **1c.** VV detects that the current status of the specified delivery is the same as the requested status.
+    - **1c1.** VV displays an error message.
+      Use case ends.
+
+
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC09 - Find Deliveries by given parameters
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find deliveries by keyword in one or more parameters.
+2. VV updates the delivery list and displays the updated list of all deliveries that contain given keywords in all their respective parameters .  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that the keyword is missing.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
 ___
 **System**: Vendor Vault (VV)
 
-**Use Case**: UC06 - Set the Status of Deliveries
+**Use Case**: UC10 - Sort Deliveries
 
-**Actor**: Grocer
+**Actor**: Shop owner
 
 **Main Success Scenario (MSS)**:
-1. User chooses to set the status of a delivery as pending, delivered, or cancelled.
-2. VV displays a confirmation message and the updated list of deliveries.  
+1. User requests to sort deliveries by a specified field in a specified order.
+2. VV sorts the deliveries and displays the sorted list of deliveries.  
    Use case ends.
 
 **Extensions**:
-- **1a.** VV detects that the delivery index is missing or invalid.
+- **1a.** VV detects an invalid command format.
     - **1a1.** VV displays an error message.  
       Use case ends.
 
+- **1b.** VV detects that one or more parameters is missing or invalid.
+    - **1b1.** VV displays an error message.  
+      Use case ends.
 
-- **1b.** VV detects that the status is missing.
+___
+**System**: Vendor Vault (VV)
+
+**Use Case**: UC10 - UpcomingDeliveries
+
+**Actor**: Shop owner
+
+**Main Success Scenario (MSS)**:
+1. User requests to find all deliveries with a certain time frame
+2. VV filters the deliveries and displays the filtered list of deliveries within the given time frame.  
+   Use case ends.
+
+**Extensions**:
+- **1a.** VV detects an invalid command format.
+    - **1a1.** VV displays an error message.  
+      Use case ends.
+
+- **1b.** VV detects that one or more parameters is missing or invalid.
     - **1b1.** VV displays an error message.  
       Use case ends.
 
 
-- **1c.** VV detects that the status is not one of the accepted values (pending, delivered, or cancelled).
-    - **1c1.** VV displays an error message.  
-      Use case ends.
 
 
-- **1d.** VV detects invalid formatting.
-    - **1d1.** VV displays an error message.  
-      Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 

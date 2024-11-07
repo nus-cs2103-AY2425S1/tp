@@ -98,13 +98,11 @@
 .list-cell {
     -fx-label-padding: 1 1 1 1;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 10;
     -fx-background-insets: 5; /* Background insets */
     -fx-background-radius: 20; /* Rounded corners */
     -fx-border-radius: 10; /* Rounded border corners */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 1, 0.5, 2, 2);
-    -fx-padding: 10;
-
 }
 
 .list-cell:filled:even {
@@ -402,22 +400,26 @@
     -fx-text-fill: white;
     -fx-background-color: #913e3e;
     -fx-padding: 3 6 3 6;
-    -fx-border-radius: 30;
-    -fx-background-radius: 30;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     -fx-font-size: 11;
+    -fx-wrap-text: true;
+    -fx-max-width: 300px;
 }
 
 #products {
-    -fx-hgap: 10;
-    -fx-vgap: 20;
+    -fx-hgap: 7;
+    -fx-vgap: 3;
 }
 
 #products .label {
     -fx-text-fill: white;
     -fx-background-color: #34a6ed;
-    -fx-padding: 3 6 3 6;
-    -fx-border-radius: 30;
-    -fx-background-radius: 30;
+    -fx-padding: 3 6 6 3;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     -fx-font-size: 11;
+    -fx-wrap-text: true;
+    -fx-max-width: 300px;
 }
 

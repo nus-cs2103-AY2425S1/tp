@@ -1,0 +1,21 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Delivery --> "1" Product
+Delivery -up-> "1" DateTime
+Delivery --> "1" Supplier
+Delivery -up-> "1" Quantity
+Delivery -up-> "1" Cost
+Delivery -up-> "1" Status
+
+Supplier -down-> "*" Tag
+Supplier --> "1" Name
+Supplier --> "1" Phone
+Supplier --> "1" Email
+Supplier --> "1" Company
+Supplier --> "*" Product
+Supplier -right-> "1" SupplierStatus
+@enduml
