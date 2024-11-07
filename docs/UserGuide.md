@@ -272,20 +272,31 @@ Example:
 
 The following screenshots shows the results of executing `export`
 ![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
+![ExportToFolderExample.png](images/ExportToFolderExample.png)
 
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
 
 Format: `import f/FILE_PATH`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * `FILE_PATH` must correspond to an actual json file in the device.
+> * Use as `.` a folder to refer to the home folder.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+
 Examples:
 
 * `import fp/C:/SaveFile3.json` imports data from the file at `C:/SaveFile3.json` into the application.
+* `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
-<box type="tip" seamless>
+The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 
-**Tip:** Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
-</box>
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
+> Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
+> However, if you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+
 
 ### Editing the data file
 
