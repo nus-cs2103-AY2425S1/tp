@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.SortSettings;
 
 /**
  * Represents User's preferences.
@@ -14,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
+    private SortSettings sortSettings = new SortSettings();
     private Path addressBookFilePath = Paths.get("data", "socialbook.json");
 
     /**
@@ -35,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
+        setSortSettings(newUserPrefs.getSortSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
     }
 
@@ -42,9 +45,18 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return guiSettings;
     }
 
+    public SortSettings getSortSettings() {
+        return sortSettings;
+    }
+
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         this.guiSettings = guiSettings;
+    }
+
+    public void setSortSettings(SortSettings sortSettings) {
+        requireNonNull(sortSettings);
+        this.sortSettings = sortSettings;
     }
 
     public Path getAddressBookFilePath() {
@@ -74,7 +86,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, sortSettings);
     }
 
     @Override
@@ -82,6 +94,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nSort settings : ");
         return sb.toString();
     }
 
