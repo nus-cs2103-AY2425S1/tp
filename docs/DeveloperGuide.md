@@ -514,6 +514,8 @@ testers are expected to do more *exploratory* testing.
 
    1.  Re-launch the app by double-clicking the jar file.<br>
        Expected: The newest order added is retained.
+
+1. _{ more test cases …​ }_
    
 ### Deleting a customer
 
