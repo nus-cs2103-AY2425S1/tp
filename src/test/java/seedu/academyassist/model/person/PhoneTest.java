@@ -31,10 +31,14 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
-        assertFalse(Phone.isValidPhone("124293842033123")); // more than 8 numbers
+        assertFalse(Phone.isValidPhone("123")); // 3 digits
+        assertFalse(Phone.isValidPhone("+6512345678")); // number with symbols
+        assertFalse(Phone.isValidPhone("123456789123456789123")); // more than 20 numbers
 
         // valid phone numbers
-        assertTrue(Phone.isValidPhone("93121534"));
+        assertTrue(Phone.isValidPhone("93121534")); // 8 digits
+        assertTrue(Phone.isValidPhone("1234")); // 4 digits
+        assertTrue(Phone.isValidPhone("12345678912345678912")); // 20 digits
         assertTrue(Phone.isValidPhone("00000000")); // numbers all the same
     }
 
