@@ -50,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane buyingProperties;
     @FXML
+    private ImageView pinIcon;
+    @FXML
     private ImageView phoneIcon;
     @FXML
     private ImageView addressIcon;
@@ -65,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex, Image phoneImage, Image addressImage, Image emailImage,
-                      Image sellingPropertiesImage, Image buyingPropertiesImage) {
+                      Image sellingPropertiesImage, Image buyingPropertiesImage, Image pinImage) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -80,6 +82,8 @@ public class PersonCard extends UiPart<Region> {
         phoneIcon.setImage(phoneImage);
         addressIcon.setImage(addressImage);
         emailIcon.setImage(emailImage);
+        pinIcon.setImage(pinImage);
+        pinIcon.setVisible(person.isPinned());
         sellingPropertiesIcon.setImage(sellingPropertiesImage);
         buyingPropertiesIcon.setImage(buyingPropertiesImage);
         // Initialize the properties display

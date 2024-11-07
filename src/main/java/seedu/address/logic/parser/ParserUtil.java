@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,41 +46,12 @@ public class ParserUtil {
     }
 
     /**
-     * Returns an {@code Index} of personIndex from an argument String.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * Returns an {@code ArrayList<String>} of parameters consisting of
+     * PersonIndex and propertyIndex from an argument String.
      */
-    public static Index parsePersonIndex(String args) throws ParseException {
-        ArrayList<Index> indexArrayList = getIndexList(args);
-        return indexArrayList.get(0);
-    }
-
-    /**
-     * Returns an {@code Index} of propertyIndex from an argument String.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parsePropertyIndex(String args) throws ParseException {
-        ArrayList<Index> indexArrayList = getIndexList(args);
-        return indexArrayList.get(1);
-    }
-
-    /**
-     * Returns an {@code ArrayList<Index>} of personIndex and propertyIndex from an argument String.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    private static ArrayList<Index> getIndexList(String args) throws ParseException {
-        String[] indexList = args.trim().split("\\s+");
-        ArrayList<Index> indexArrayList = new ArrayList<>();
-        if (indexList.length != ARGUMENT_COUNT) {
-            throw new ParseException(MESSAGE_INCORRECT_INDEXES);
-        }
-        for (String i : indexList) {
-            Index index = parseIndex(i);
-            indexArrayList.add(index);
-        }
-        return indexArrayList;
+    public static ArrayList<String> getParametersList(String args) {
+        String[] parametersList = args.trim().split("\\s+");
+        return new ArrayList<>(Arrays.asList(parametersList));
     }
 
     /**
@@ -172,6 +144,14 @@ public class ParserUtil {
      * Checks if the number of property tags is valid.
      */
     public static boolean isValidNumberOfPropertyTags(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        return tags.size() <= 2;
+    }
+
+    /**
+     * Checks if the length of property tags is valid.
+     */
+    public static boolean isValidLengthPropertyTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         for (String tagName : tags) {
             if (tagName.length() > 9) {
