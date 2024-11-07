@@ -1,8 +1,8 @@
 {
   "baseUrl": "",
   "titlePrefix": "GOATS",
-  "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "titleSuffix": "For Your Tutoring Needs",
+  "faviconPath": "images/GOATS_icon.png",
   "style": {
     "codeTheme": "light"
   },
