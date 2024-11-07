@@ -9,6 +9,7 @@ import static seedu.address.model.addresses.PublicAddress.validatePublicAddress;
 
 import java.util.List;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Person;
@@ -62,12 +63,12 @@ public class SearchPublicAddressCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
 
         try {
             validatePublicAddress(publicAddressString);
         } catch (IllegalArgumentException e) {
-            return new CommandResult(e.getMessage());
+            throw new CommandException(e.getMessage());
         }
 
         List<Person> lastShownList = model.getFilteredPersonList();
