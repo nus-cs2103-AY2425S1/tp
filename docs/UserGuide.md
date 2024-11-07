@@ -191,8 +191,8 @@ Format: `history INDEX/NRIC`
 Examples:
 * `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
 * `find Betsy` followed by `history 1` shows the call history of the 1st elderly in the results of the `find` command.
-* `history S6878830G` shows the call history of the elderly with NRIC S6878830G.
-  ![result for 'history S6878830G'](images/historyAlice.png)
+* `history S7495552E` shows the call history of the elderly with NRIC S7495552E.
+  ![result for 'history S7495552E'](images/historyRoy.png)
 
 ### Clearing all entries : `clear`
 
