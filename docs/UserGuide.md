@@ -1,6 +1,6 @@
 ---
 layout: page
-title: MediBase3 User Guide
+title: User Guide
 ---
 
 MediBase3 (MB3) is a **desktop app for doctors, offering an all-in-one solution to manage patient records with ease.** From tracking medical conditions, allergies, and priorities to even scheduling appointments, MediBase3 takes care of it so you can focus more on your patients.
@@ -138,7 +138,7 @@ seen in the image below. Here’s an overview of the key panels:
 - **Command Box:** Where you can type and enter commands.
 - **Result Display:** Shows the result of the command you entered.
 - **Patient List:** Displays all the patients currently stored in the system.
-- **Appointment List:** Displays the scheduled appointments for patients.
+- **Appointment List:** Displays the scheduled appointments for patients in chronological order.
 - **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
 - **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
 
@@ -154,7 +154,7 @@ Each command in MediBase3 follows a structured format to ensure consistency and 
 
 The example below demonstrates this structure:
 
-![CommandPromptFormat.jpg](images/CommandPromptFormat.jpg)
+![CommandAnatomy](diagrams/CommandAnatomy.svg)
 
 This example shows how a typical command might look in MediBase3, with three main components:
 
@@ -163,6 +163,7 @@ This example shows how a typical command might look in MediBase3, with three mai
 | **Command**   | The action you want to perform (e.g., `add`, `edit`)    |
 | **Prefix**    | Identifies the data being entered (e.g., `n/` for name) |
 | **Parameter** | The value associated with the prefix (e.g., `John Doe`) |
+| **Preamble**  | The value associated with the prefix (e.g., `John Doe`) |
 
 {: .alert .alert-info}
 > :information_source: **Note:**
@@ -418,31 +419,23 @@ Schedules an appointment for a patient in MediBase3.
 **Example**:
 * `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` schedules a `Dental` appointment for the patient with `NRIC` `S1234567A` on `2024-10-27`, from `1100` to `1200`.
 
-
-![result for addAppt command example](images/addApptCommand.png)
+{: .alert .alert-secondary}
+> ![result for addAppt command example](images/addApptCommand.png)
+>   
+> **Success message, with the "Dental" appointment in the details of patient "Alex Yeoh (S1234567A)" in the patient list panel, as well as in the appointment list panel as the second entry.**
 
 {: .alert .alert-success}
 > :bulb: **Tips:**
 >
 > * Adding a new appointment will update the Appointment List Panel on the right with the new appointment details.
-> * The Appointment List Panel displays appointments in chronological order.
 > * Appointment names need not be unique.
 > * Different patients may have overlapping appointment timings, as long as those appointments are not from the same patient.
-
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> For appointments that span across date boundaries, add two appointments:
-> * End the first appointment at `2359` (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`).
-> * Start the next appointment at `0000` on the following date (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`).
-
-{: .alert .alert-success}
-> :bulb: **Tip:**
->
-> Appointment end times are **exclusive**. For example:
-> * If _Appointment A_ is scheduled from `1200` to `1300`, _Appointment B_ can start at `1300`.
-> * _Appointment B_ cannot start between `1200` and `1259`, nor end between `1201` and `1300`.
+> * For appointments that span across date boundaries, add two appointments:
+>   * End the first appointment at `2359` (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-23 @t/2200-2359`).
+>   * Start the next appointment at `0000` on the following date (e.g., `addAppt Transfusion i/S1234567A @d/2024-10-24 @t/0000-0100`).
+> * Appointment end times are **exclusive**. For example:
+>   * If _Appointment A_ is scheduled from `1200` to `1300`, _Appointment B_ can start at `1300`.
+>   * _Appointment B_ cannot start between `1200` and `1259`, nor end between `1201` and `1300`.
 
 [Back to Table of Contents](#table-of-contents)
 
