@@ -27,7 +27,7 @@ ClinicConnectSystem is a **desktop app for managing contacts, optimized for use 
 
    * `home` : Lists all patients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the ClinicConnect system.
+   * `add n|John Doe i|T0123456A p|98765432 s|M d|1990-12-29` : Adds a patient named `John Doe` to the ClinicConnect system.
 
    * `delete T0123456A` : Deletes the patient with the NRIC "T0123456A" shown in the current list.
 
@@ -65,16 +65,16 @@ Provides you with tips to use our system more effectively.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [al/ALLERGY` can be used as `n/John Doe al/friend` or as `n/John Doe`.
+  e.g `n|NAME [al|ALLERGY` can be used as `n|John Doe al|friend` or as `n|John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[al/ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al/Nuts`, `al/Wheat al/Penicillin` etc.
+  e.g. `[al|ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al|Nuts`, `al|Wheat al|Penicillin` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `home`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -101,7 +101,7 @@ Examples:
 
 Adds a new patient record into the system.
 
-Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NUMBER`
+Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NUMBER`
 
 
 <div markdown="block" class="alert alert-info">
@@ -114,7 +114,7 @@ ClinicConnect does not allow two patients with the same NRIC to exist in the sys
 Use this command to quickly add a patient with only the required information.
 </div>
 
-Example: `add n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666`
+Example: `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 <br>
 Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone No.
 
@@ -124,8 +124,8 @@ For more information on each individual parameter click here
 
 Adds a new patient record into the system with additional information.
 
-Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NO [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE]
-[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rl/RISK_LEVEL] [ec/EXISTING_CONDITIONS] [no/NOTES]`
+Format: `add n|NAME i|NRIC s|SEX d|DATE_OF_BIRTH p|PHONE_NO [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
+[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rl|RISK_LEVEL] [ec|EXISTING_CONDITIONS] [no|NOTES]`
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -139,14 +139,16 @@ Use this command if you want to add a patient with additional information in add
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Multiple allergies can be added using amultiple "al/" prefix
+Multiple allergies can be added using amultiple "al|" prefix
 </div>
 
 Examples:
 <ol>
-<li>`addf n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666
-e/abramhamtan@gmail.com a/Blk 123, NUS Road, S123123 b/A+ nokn/Licoln Tan nokp/91234567
-al/nuts al/shellfish rl/HIGH ec/Diabetes no/Patient needs extra care`
+<li>
+
+`addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
+e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
+al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`
 <ul>
 <li>
 Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
@@ -154,11 +156,10 @@ Next-of-Kin Name, Next-of-Kin Phone, Risk Level, Existing Conditions, Notes and 
 </li>
 </ul>
 </li>
-</ol>
-<ol start="2">
 <li>
-`addf n/Lincoln Park i/S9751269M s/M d/1980-04-01 p/87296619
-  e/linkinpark@gmail.com a/Blk 516, Clementi Road, S661836 b/AB- al/wheat`
+
+`addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
+  e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat`
 </li>
 <ul>
 <li>
@@ -173,9 +174,9 @@ For more information on each individual parameter click here
 
 Edit the information of an existing patient in the system.
 
-Format: `edit NRIC [n/NAME] [i/NRIC] [s/SEX] [d/DATE_OF_BIRTH] [p/PHONE_NO] [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE]
-[nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rmal/ALLERGY_TO_BE_REMOVED]…​ [rl/RISK_LEVEL]
-[ec/EXISTING_CONDITIONS] [no/NOTES]`
+Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NO] [e|EMAIL] [a|ADDRESS] [b|BLOOD_TYPE]
+[nokn|NEXT_OF_KIN_NAME] [nokp|NEXT_OF_KIN_PHONE] [al|ALLERGY]…​ [rmal|ALLERGY_TO_BE_REMOVED]…​ [rl|RISK_LEVEL]
+[ec|EXISTING_CONDITIONS] [no|NOTES]`
 
 
 <div markdown="block" class="alert alert-info">
@@ -201,7 +202,9 @@ are current allergies of the patient
 
 Examples:
 <ol>
-<li>`edit S9758366N n/Abraham Lee d/1997-10-28
+<li>
+
+`edit S9758366N n|Abraham Lee d|1997-10-28`
 <ul>
 <li>
 Edits the name and date-of-birth of the patient with NRIC S9758366N.
@@ -209,7 +212,8 @@ Edits the name and date-of-birth of the patient with NRIC S9758366N.
 </ul>
 </li>
 <li>
-`edit S9758366N p/91234123 a/Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918`
+
+`edit S9758366N p|91234123 a|Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918`
 </li>
 <ul>
 <li>
@@ -229,7 +233,7 @@ Format: `home`
 
 Book an appointment for an existing patient in the system for a health service provided by the clinic.
 
-Format: `bookappt NRIC dt/APPOINTMENT_DATE_TIME h/HEALTH_SERVICE`
+Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
 
 <div markdown="block" class="alert alert-info">
@@ -244,7 +248,7 @@ All parameters are compulsory
 </div>
 
 
-Example: `bookappt S9758366N dt/2024-12-29 13:00 h/Vaccination`
+Example: `bookappt S9758366N dt|2024-12-29 13:00 h|Vaccination`
 <br>
 Books a Vaccination appointment for the given patient by NRIC at the specified time.
 
@@ -261,7 +265,7 @@ Format: `list`
 
 Identifies the specific patient using NRIC and deletes the appointment specified.
 
-Format: `deleteappt NRIC dt/APPOINTMENT_DATE_TIME`
+Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 
 <box type="info" seamless>
 
@@ -273,13 +277,13 @@ Format: `deleteappt NRIC dt/APPOINTMENT_DATE_TIME`
 </box>
 
 Examples:
-* `deleteappt T01234567A dt/2024-11-05 16:00`
+* `deleteappt T01234567A dt|2024-11-05 16:00`
 
 ### Filter appointments : `filter`
 
 Filters existing patient records based on the specified parameters.
 
-Format: `filter [sd/START DATE] ed/END DATE [h/HEALTH SERVICE]`
+Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
 
 Start date and health service parameters are optional.
 End date parameter is compulsory.
@@ -294,14 +298,14 @@ When end date is specified, it returns all appointments from today's date to end
 **Tip:** <br>
 
 To retrieve appointments on a single date e.g. 2024/10/20, the user can input the same start and end date
-`filter sd/2024-10-20 ed/2024-10-10`
+`filter sd|2024-10-20 ed|2024-10-10`
 
 </box>
 
 Examples:
-*  `filter sd/2012-10-01 ed/2012-11-01 h/blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
-*  `filter ed/2024-12-12 h/vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
-*  `filter sd/2012-10-01 ed/2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
+*  `filter sd|2012-10-01 ed|2012-11-01 h|blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
+*  `filter ed|2024-12-12 h|vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
+*  `filter sd|2012-10-01 ed|2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
 
 ### View patients full profile: `view`
 
@@ -395,12 +399,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete S0123456Z`<br> e.g., `delete S0123456Z`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Home** | `home`
-**Help** | `help`
+ Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                  
+------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n\|NAME i\|NRIC s\|SEX d\|DATE_OF_BIRTH p\|PHONE_NUMBER` <br> e.g., `add n\|Abraham Tan i\|S9758366N s\|M d\|1997-10-27 p\|87596666`                                                                                                                                                                                                                                                                         
+ **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                                                                           
+ **Delete** | `delete S0123456Z`<br> e.g., `delete S0123456Z`                                                                                                                                                                                                                                                                                                                                                                   
+ **Edit**   | `edit NRIC \[n\|NAME] \[i\|NRIC] \[s\|SEX] \[d\|DATE_OF_BIRTH] \[p\|PHONE_NO] \[e\|EMAIL] \[a\|ADDRESS] \[b\|BLOOD_TYPE] \[nokn\|NEXT_OF_KIN_NAME] \[nokp\|NEXT_OF_KIN_PHONE] \[al\|ALLERGY]…​ \[rmal\|ALLERGY_TO_BE_REMOVED]…​ \[rl\|RISK_LEVEL] \[ec\|EXISTING_CONDITIONS] \[no\|NOTES]`<br> e.g., `edit S9758366N p\|91234123 a\|Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918` 
+ **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                                                                                                                        
+ **Home**   | `home`                                                                                                                                                                                                                                                                                                                                                                                                            
+ **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                                                            
