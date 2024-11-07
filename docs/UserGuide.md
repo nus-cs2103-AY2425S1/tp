@@ -253,10 +253,21 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-**Q**: How do I use the data in another application, such as Microsoft Excel?<br>
-**A**: Type in the command `export format\csv` or click on the Export button followed by CSV. Then, from the folder in which you installed BA€, navigate to the data folder, copy the file named `addressbook.csv` over to your desired file location. Finally, open the file using Microsoft Excel.
+**Q**: How can I open my contact data in another application, such as Microsoft Excel?  
+**A**:
+1. Create a data export in your preferred file format.
+    * For CSV exports: type the command `export format\csv` or click `Export` > `Export to CSV`.
+    * For TXT exports: type the command `export format\txt` or click `Export` > `Export to TXT`.
+    * A confirmation message will appear onscreen after the export is complete.
+2. Navigate to the folder where BA€ was installed.
+3. Open the `/data/` folder.
+4. Open your data export file (`addressbook.csv`/`addressbook.txt`) in your application of choice.
+
+**Q**: I have created a data export file in CSV/TXT. How can I open my data in BA€ on a different computer?  
+**A**:
+1. Install BA€ on your secondary computer.
+2. Copy your data export file (`addressbook.csv`/`addressbook.txt`) from BA€'s `/data/` folder on your primary computer.
+3. Place the copied file in BA€'s `/data/` folder on your secondary computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
