@@ -73,16 +73,10 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
-        FilterCommand command = new FilterCommand(dateFilter);
-
-        expectedModel.filterAppts(dateFilter);
         appointments.add(new FilteredAppointment(ALICE.getAppts().get(0), ALICE));
         appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
 
-        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(appointments, model.getFilteredAppts());
-        appointments.clear();
+        executeAssertions(dateFilter, expectedMessage);
     }
 
     @Test
@@ -94,15 +88,10 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
-        FilterCommand command = new FilterCommand(dateFilter);
-
-        expectedModel.filterAppts(dateFilter);
         appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
         appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
 
-        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-        assertEquals(appointments, model.getFilteredAppts());
+        executeAssertions(dateFilter, expectedMessage);
     }
 
     @Test
@@ -113,13 +102,9 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "1 appt found " + dateFilter + RETURN_TO_HOME;
 
-        FilterCommand command = new FilterCommand(dateFilter);
-
-        expectedModel.filterAppts(dateFilter);
         appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
 
-        CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
-        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        executeAssertions(dateFilter, expectedMessage);
     }
 
     @Test
@@ -130,17 +115,18 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "No appts found " + dateFilter + RETURN_TO_HOME;
 
+        executeAssertions(dateFilter, expectedMessage);
+    }
+
+    private void executeAssertions(AppointmentDateFilter dateFilter, String expectedMessage) {
         FilterCommand command = new FilterCommand(dateFilter);
 
         expectedModel.filterAppts(dateFilter);
 
-        extracted(expectedMessage, command);
-    }
-
-    private void extracted(String expectedMessage, FilterCommand command) {
         CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(appointments, model.getFilteredAppts());
+
         appointments.clear();
     }
 }
