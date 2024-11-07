@@ -143,7 +143,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* After editing the person, there should be no duplicate contact in the campus connect.
+* After editing the person, there should be no duplicate contact in CampusConnect.
 * Two contacts are considered duplicates if they share the same name, email, or phone number.
 
 Examples:
@@ -259,7 +259,7 @@ Format: `undo`
 
 * Reverts the state of CampusConnect to the one before the most recent command, if any.
 * When the oldest version of CampusConnect is reached, `undo` command will cause an exception to be thrown
-* Only the command that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
+* Only commands that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
 
 ### Redo a command: `redo`
 
@@ -268,7 +268,7 @@ Reapplies a command that was previously undone by `undo`.
 Format: `redo`
 
 * Advances CampusConnect to the state it was in before the most recent `undo` command, if any.
-* Only the command that modify the data of CampusConnect can be redone. Commands such as `list` and `find` will not be redone.
+* Only commands that modify the data of CampusConnect can be redone. Commands such as `list` and `find` will not be redone.
 * Note: If a new command (excluding `redo` or `undo`) is executed after an `undo`, the redo history is cleared, and further `redo` will not be possible.
 
 ### Clearing all entries : `clear`
