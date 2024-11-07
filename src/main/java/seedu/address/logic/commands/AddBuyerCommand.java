@@ -24,7 +24,7 @@ public class AddBuyerCommand extends AddClientCommand {
      * Includes name, phone number, and email.
      */
     public static final String BUYER_PARAMETERS = String.format(
-            "%BUYER_NAME %BUYER_PHONE_NUMBER %BUYER_EMAIL",
+            "%sBUYER_NAME %sBUYER_PHONE_NUMBER %sBUYER_EMAIL",
             PREFIX_NAME,
             PREFIX_PHONE,
             PREFIX_EMAIL
