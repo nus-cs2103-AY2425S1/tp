@@ -209,12 +209,12 @@ Deletes the specified person from the address book.
 
 Format: `delete INDICES`
 
-* Deletes the person(s) at the specified `INDEX` or range of indices.
-* The index refers to the index number shown in the **last displayed person list**.
+* Deletes the person(s) at the specified `INDICES`.
+* `INDICES` refers to the index numbers shown in the **last displayed person list**.
 * `INDICES` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`), separated by spaces (e.g., `1 2 3 5-9`).
   * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
     but `5 - 9` or `5 -9` or `5- 9` is invalid).
-* `INDICES` should not be empty; at least one `INDEX` or `range` must be provided.
+* `INDICES` should not be empty.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
