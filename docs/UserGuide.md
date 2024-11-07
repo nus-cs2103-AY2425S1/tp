@@ -9,7 +9,21 @@
 UniLink is a desktop app that allows university students to manage their contacts. With UniLink, students can categorise
 their contacts into 'work', 'personal' and 'school' contacts to better manage their lives!
 
-<!-- * Table of Contents -->
+## Table of Contents
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Viewing help](#viewing-help--help)
+  - [Adding a person](#adding-a-person--add)
+  - [Editing a person](#editing-a-person--edit)
+  - [Locating persons by name](#locating-persons-by-name--find)
+  - [Filtering persons by contact type](#filtering-persons-by-contact-type--filter)
+  - [Deleting a person](#deleting-a-person--delete)
+  - [Switching display theme](#switching-display-theme--switch)
+  - [Exiting the program](#exiting-the-program--exit)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -32,6 +46,8 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
     - E.g. If my jar file is in a folder called 'Contacts' in a folder called 'Uni' on my Desktop, I can navigate to it with `cd Desktop/Uni/Contacts`
 - Run UniLink by typing `java -jar UniLink.jar`
 - The app should open within a few seconds, showing some sample data that you can explore! 
+
+- **Using the Command Line**: New to the command line? Check out this [Beginner's Guide to the Command Line](https://tutorials.commandline.com)
 
 ![Ui](images/Ui.png)
 
