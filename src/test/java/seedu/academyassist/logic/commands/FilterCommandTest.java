@@ -34,7 +34,8 @@ public class FilterCommandTest {
         YearGroup yg = new YearGroup("2");
         FilterCommand command = new FilterCommand(new FilterParam("yearGroup"), yg);
         expectedModel.updateFilteredPersonList(new PersonInYearPredicate((YearGroup) yg));
-        CommandResult cr = new CommandResult(String.format(MESSAGE_SUCCESS, "yearGroup", yg.toString()));
+        CommandResult cr = new CommandResult(String.format(MESSAGE_SUCCESS, "yearGroup", yg.toString(),
+                expectedModel.getFilteredPersonList().size()));
         assertCommandSuccess(command, model, cr, expectedModel);
         assertEquals(Arrays.asList(ALICE, ELLE), expectedModel.getFilteredPersonList());
     }
@@ -44,7 +45,8 @@ public class FilterCommandTest {
         Subject subj = new Subject("English");
         FilterCommand command = new FilterCommand(new FilterParam("subject"), subj);
         expectedModel.updateFilteredPersonList(new PersonTakeSubjectPredicate((Subject) subj));
-        CommandResult cr = new CommandResult(String.format(MESSAGE_SUCCESS, "subject", subj.toString()));
+        CommandResult cr = new CommandResult(String.format(MESSAGE_SUCCESS, "subject", subj.toString(),
+                expectedModel.getFilteredPersonList().size()));
         assertCommandSuccess(command, model, cr, expectedModel);
         assertEquals(Arrays.asList(ALICE, DANIEL, ELLE, FIONA), expectedModel.getFilteredPersonList());
     }
