@@ -68,19 +68,21 @@ public class DeleteYCommand extends Command {
         requireNonNull(model);
 
         if (StaticContext.isClearAddressBookPending()) {
+            model.clearAllPersonTags();
             model.setAddressBook(new AddressBook());
             StaticContext.setClearAddressBookPending(false);
             return new CommandResult(MESSAGE_DELETE_ADDRESS_BOOK_SUCCESS);
         }
 
         if (StaticContext.isClearWeddingBookPending()) {
+            model.clearAllWeddingParticipants();
             model.setWeddingBook(new WeddingBook());
             StaticContext.setClearWeddingBookPending(false);
             return new CommandResult(MESSAGE_DELETE_WEDDING_BOOK_SUCCESS);
         }
 
         if (!(weddingToDelete == null)) {
-            deleteTagsWithWedding(model);
+            model.deleteTagsWithWedding(weddingToDelete);
             model.deleteWedding(weddingToDelete);
             // Clear history of weddingToDelete from StaticContext once delete operation is done
             StaticContext.setWeddingToDelete(null);
@@ -97,22 +99,6 @@ public class DeleteYCommand extends Command {
         }
 
         return new CommandResult(MESSAGE_NO_PENDING_OPERATION);
-    }
-
-    /**
-     * Deletes the tag of the wedding from the participants associated in the wedding to be deleted.
-     * @param model {@code Model} which the command should operate on.
-     */
-    private void deleteTagsWithWedding(Model model) {
-        Set<Person> weddingParticipants = weddingToDelete.getParticipants();
-        for (Person participant : weddingParticipants) {
-            participant.getTags().removeIf(tag -> tag.getTagName().equals(weddingToDelete.getWeddingName().toString()));
-            Person newPerson = new Person(
-                    participant.getName(), participant.getPhone(), participant.getEmail(),
-                    participant.getAddress(), participant.getJob(),
-                    participant.getTags());
-            model.setPerson(participant, newPerson);
-        }
     }
 
     @Override

@@ -266,6 +266,18 @@ public class ModelManager implements Model {
             set.add(editedPerson);
         }
     }
+    @Override
+    public void deleteTagsWithWedding(Wedding weddingToDelete) {
+        Set<Person> weddingParticipants = weddingToDelete.getParticipants();
+        for (Person participant : weddingParticipants) {
+            participant.getTags().removeIf(tag -> tag.getTagName().equals(weddingToDelete.getWeddingName().toString()));
+            Person newPerson = new Person(
+                    participant.getName(), participant.getPhone(), participant.getEmail(),
+                    participant.getAddress(), participant.getJob(),
+                    participant.getTags());
+            setPerson(participant, newPerson);
+        }
+    }
 
     @Override
     public void updatePersonInWedding(Person personToEdit, Person editedPerson) {
@@ -321,5 +333,23 @@ public class ModelManager implements Model {
         setPerson(personToEdit, editedPerson);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return editedPerson;
+    }
+    @Override
+    public void clearAllPersonTags() {
+        for (Person person : addressBook.getPersonList()) {
+            Set<Tag> currentTags = new HashSet<>(person.getTags());
+            deletePersonInWedding(person, currentTags);
+            Person personToDelete = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getAddress(), person.getJob(), Collections.emptySet());
+            setPerson(person, personToDelete);
+        }
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+    @Override
+    public void clearAllWeddingParticipants() {
+        for (Wedding wedding : weddingBook.getWeddingList()) {
+            deleteTagsWithWedding(wedding);
+        }
+        updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
     }
 }
