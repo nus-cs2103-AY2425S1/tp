@@ -12,8 +12,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Birthday {
 
-    public static final String MESSAGE_CONSTRAINTS = "Birthdays should be in the format 'yyyy-MM-dd', "
-            + "and must be a valid date.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Birthdays should be in the format 'yyyy-MM-dd', "
+                    + "must be a valid date, and must be a date after today's date.";
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -50,8 +51,8 @@ public class Birthday {
     public static boolean isValidBirthday(String test) {
         requireNonNull(test);
         try {
-            LocalDate.parse(test, FORMATTER);
-            return true;
+            LocalDate testBirthday = LocalDate.parse(test, FORMATTER);
+            return testBirthday.isBefore(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }

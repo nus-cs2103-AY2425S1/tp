@@ -28,6 +28,7 @@ public class BirthdayTest {
         assertFalse(Birthday.isValidBirthday("")); // empty string
         assertFalse(Birthday.isValidBirthday(" ")); // spaces only
         assertFalse(Birthday.isValidBirthday("birthday")); // non-date string
+        assertFalse(Birthday.isValidBirthday("2030-12-12")); // future baby
     }
 
     @Test
@@ -48,5 +49,7 @@ public class BirthdayTest {
 
         // different values -> returns false
         assertFalse(birthday.equals(new Birthday("1991-04-25")));
+
+
     }
 }

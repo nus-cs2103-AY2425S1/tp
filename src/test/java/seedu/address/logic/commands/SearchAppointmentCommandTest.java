@@ -113,7 +113,7 @@ public class SearchAppointmentCommandTest {
 
     @Test
     public void execute_oneMatch_personFound() {
-        String dateTime = "2024-10-10 11:00"; // Assume AMY has an appointment on this date and time
+        String dateTime = "2024-12-11 11:00"; // Assume AMY has an appointment on this date and time
         String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_APPOINTMENT, "on " + dateTime);
 
         try {
@@ -151,16 +151,16 @@ public class SearchAppointmentCommandTest {
     @Test
     public void execute_dateTimeRange_matchesPersonsInRange() {
         Model model = new ModelManager();
-        Person alice = new PersonBuilder().withName("Alice").withAppointment("2024-10-10 10:00").build();
+        Person alice = new PersonBuilder().withName("Alice").withAppointment("2025-10-10 10:00").build();
         model.addPerson(alice);
-        Person bob = new PersonBuilder().withName("Bob").withAppointment("2024-10-10 12:00").build();
+        Person bob = new PersonBuilder().withName("Bob").withAppointment("2025-10-10 12:00").build();
         model.addPerson(bob);
-        Person charles = new PersonBuilder().withName("Charles").withAppointment("2024-11-20 12:00").build();
+        Person charles = new PersonBuilder().withName("Charles").withAppointment("2025-11-20 12:00").build();
         model.addPerson(charles);
 
-        String dateTimeRange = "2024-10-10 00:00 to 2024-10-10 23:59";
+        String dateTimeRange = "2025-10-10 00:00 to 2025-10-10 23:59";
         String expectedMessage = String.format(MESSAGE_SUCCESS_SEARCH_APPOINTMENT,
-                "from 2024-10-10 00:00 to 2024-10-10 23:59");
+                "from 2025-10-10 00:00 to 2025-10-10 23:59");
 
         try {
             SearchAppointmentCommand command = new SearchAppointmentCommand(dateTimeRange);
@@ -182,8 +182,8 @@ public class SearchAppointmentCommandTest {
                 } catch (DateTimeParseException e) {
                     return false;
                 }
-                LocalDateTime start = LocalDateTime.parse("2024-10-10 10:00", formatter);
-                LocalDateTime end = LocalDateTime.parse("2024-10-10 12:00", formatter);
+                LocalDateTime start = LocalDateTime.parse("2025-10-10 10:00", formatter);
+                LocalDateTime end = LocalDateTime.parse("2025-10-10 12:00", formatter);
                 return (!appointmentDateTime.isBefore(start) && !appointmentDateTime.isAfter(end));
             });
 
