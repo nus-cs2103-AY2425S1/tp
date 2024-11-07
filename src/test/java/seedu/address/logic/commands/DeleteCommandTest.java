@@ -272,4 +272,5 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
+
 }
