@@ -512,7 +512,6 @@ testers are expected to do more *exploratory* testing.
     2. Open Terminal 
     3. Inside the terminal enter: `cd/Desktop/ClientHub`
     4. Then run:`java -jar clienthub.jar` Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-   
 
 **For Windows**
 
