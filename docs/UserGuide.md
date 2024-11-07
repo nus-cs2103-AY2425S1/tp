@@ -240,8 +240,8 @@ No duplicate properties are allowed. Duplicate properties are checked based on:
 **Unit Defaults:**
 The Unit parameter for `LANDED` properties will default to `00-00` regardless of the unit value placed. This is because, a landed property is not segmented into multiple apartments and therefore, deemed to be a unit in itself.
 
-**Ask and Bid Prices:**
-Ask And Bid prices cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are at least in the thousands.
+**Ask And Bid Prices:**
+Ask and Bid prices cannot be less than $1 (thousand) as the prices of almost all properties in Singapore are at least in the thousands.
 </box>
 
 Examples:
