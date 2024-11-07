@@ -87,19 +87,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("person-delete m/A1234570L")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/PersonDeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `person-delete m/A1234570L` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `PersonDeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `PersonDeleteCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `PersonDeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -183,11 +183,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `person-delete m/A1234570L` command to delete the person with matriculation number A1234570L in the address book. The `person-delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `person-delete m/A1234570L` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `person-add m/A1234570L n/David …​` to add a new person. The `person-add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -252,7 +252,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `person-delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -365,9 +365,7 @@ Priorities:
 
    Use case ends.</panel>
 
-<<<<<<< HEAD
 **Use case: Delete a contact**
-=======
 <panel header="#### Use Case: Get Warnings Before Making Major Changes" expanded>
 
 **Main Success Scenario (MSS):**
@@ -386,31 +384,13 @@ Priorities:
   * 2a1. System shows a message, "No contacts available."
       Use case ends.</panel>
 
-<panel header="#### Use case: Delete a contact" expanded>
->>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
-
-**Main Success Scenario (MSS):**
-
-1. User requests to delete a contact by providing the index of the contact in the list.
-2. System validates the provided index.
-3. System deletes the contact if the index is valid.
-4. System displays a success message, "Deleted contact: [Contact details]."
-
-   Use case ends.
-
-**Extensions:**
-
-* 2a. The index is out of bounds.
-  * 2a1. System shows an error message, "Invalid index."
-      Use case resumes at step 1.</panel>
-
 <panel header="#### Use case: Edit a contact" expanded>
 
 **Main Success Scenario (MSS):**
 
-1. User requests to edit the contact by providing the index of the contact and the fields to update (name, phone, email, address, tags).
-2. System validates the provided index and input fields:
-    * a. Checks if the contact at the given index exists.
+1. User requests to edit the contact by providing the matriculation number of the contact and the fields to update (name, phone, email, address, tags).
+2. System validates the provided matriculation number and input fields:
+    * a. Checks if the contact with the given matriculation number exists.
     * b. Validates the new name, email, phone, address, and tags as per the same rules as in the add contact case.
 3. System updates the contact with the new details if all validations pass.
 4. System displays a success message, "Contact updated: [Updated contact details]."
@@ -419,8 +399,8 @@ Priorities:
 
 **Extensions:**
 
-* 2a. The index is out of bounds.
-  * 2a1. System shows an error message, "Invalid index."
+* 2a. The student with matriculation number does not exist.
+  * 2a1. System shows an error message, "Student does not exist."
       Use case resumes at step 1.
 
 * 2b. The new name is invalid.
@@ -610,7 +590,6 @@ Priorities:
   * System displays a message: "Operation cancelled."
   * **Use case ends.**</panel>
 
-<<<<<<< HEAD
 **Use Case: Get Warnings Before Making Major Changes**
 
 1. Tutor initiates a major change (e.g., deleting a student record or modifying multiple student details at once).
@@ -628,9 +607,7 @@ Priorities:
       Use case ends.
 
 **Use Case: Explore App with Sample Student Data**
-=======
 <panel header="#### Use Case: Explore App with Sample Student Data" expanded>
->>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
