@@ -5,25 +5,72 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+    Package order {
+        Class CustomerOrder
+        Class CustomerOrderList
+        Class Order
+        Class OrderList
+        Class OrderStatus <<enumeration>>
+        Class SupplyOrder
+        Class SupplyOrderList
+    }
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    Package person {
+        Class Address
+        Class Customer
+        Class Email
+        Class Information
+        Class Name
+        Class NameContainsKeywordsPredicate
+        Class Person
+        Class PersonContainsTagsPredicate
+        Class Phone
+        Class Supplier
+        Class UniquePersonList
+    }
 
-Class I #FFFFFF
+    Package product {
+        Class Catalogue
+        Class Ingredient
+        Class IngredientCatalogue
+        Class Ingredients
+        Class Inventory
+        Class Pastry
+        Class PastryCatalogue
+        Class Product
+    }
+
+    Package tag {
+        Class Tag
+    }
+
+    Package util {
+        Class Remark
+        Class SampleDataUtil
+        Class AddressBook
+        Class ModelManager
+        Class UserPrefs
+        Class "<<interface>>\nModel" as Model
+        Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+        Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    }
+
+    Class I #FFFFFF
+    Class HiddenOutside #FFFFFF
 }
 
-Class HiddenOutside #FFFFFF
+IngredientCatalogue -up-|> Catalogue
+PastryCatalogue -up-|> Catalogue
+Ingredient -up-|> Product
+Pastry -up-|> Product
+
+Inventory --> "1..*" Ingredient
+Inventory --> "1..*" Pastry
+IngredientCatalogue --> "1..*" Ingredient
+PastryCatalogue --> "1..*" Pastry
+Catalogue --> "1..*" Product
+Ingredients *-- Ingredient
+
 HiddenOutside ..> Model
 
 AddressBook .up.|> ReadOnlyAddressBook
@@ -44,12 +91,24 @@ Person *--> Address
 Person *--> Information
 Person *--> "*" Tag
 
+CustomerOrderList -up-|> OrderList
+SupplyOrderList -up-|> OrderList
+Customer -up-|> Person
+Supplier -up-|> Person
+
+CustomerOrderList --> "1..*" CustomerOrder
+OrderList --> "1..*" Order
+SupplyOrderList --> "1..*" SupplyOrder
+CustomerOrder *--> OrderStatus
+SupplyOrder *--> OrderStatus
+Customer *--> Address
+Supplier *--> Address
+ModelManager --> "~* filtered" Person
+
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
-
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
 @enduml
