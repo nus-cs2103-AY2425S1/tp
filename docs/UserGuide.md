@@ -87,25 +87,25 @@ Underneath each suggested command is the syntax for that command and what parame
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                                                                    |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**       | `help`                                                                                                                                                                                                              |
-| **List**       | `list`                                                                                                                                                                                                              |
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130-2359` |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| **AddGame**    | `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`addgame 1 g/Overwatch u/Potato`                                                                                                              |
-| **EditGame**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                            |
-| **DeleteGame** | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch`                                                                                                                                                       |
-| **FavGame**    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                             |
-| **UnFavGame**  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                         |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                          |
-| **FindTime**   | `find TIME-TIME [TIME-TIME]`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                              |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                 |
-| **Clear**      | `clear`                                                                                                                                                                                                             |
-| **Undo**       | `undo`                                                                                                                                                                                                              |
-| **Save**       | `save`                                                                                                                                                                                                              |
-| **Load**       | `load`                                                                                                                                                                                                              |
-| **Exit**       | `exit`                                                                                                                                                                                                              |
+| Action         | Format, Examples                                                                                                                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**       | `help`                                                                                                                                                                                                                   |
+| **List**       | `list`                                                                                                                                                                                                                   |
+| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]… [pt/TIME-TIME]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague pt/2130-2359` |
+| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]… [pt/TIME-TIME]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
+| **AddGame**    | `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`addgame 1 g/Overwatch u/Potato`                                                                                                                   |
+| **EditGame**   | `editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`<br> e.g.,`editgame 1 g/Overwatch u/Potato`                                                                                                                 |
+| **DeleteGame** | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch`                                                                                                                                                            |
+| **FavGame**    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                  |
+| **UnFavGame**  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                              |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
+| **FindTime**   | `find TIME-TIME [TIME-TIME]`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                   |
+| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
+| **Clear**      | `clear`                                                                                                                                                                                                                  |
+| **Undo**       | `undo`                                                                                                                                                                                                                   |
+| **Save**       | `save`                                                                                                                                                                                                                   |
+| **Load**       | `load`                                                                                                                                                                                                                   |
+| **Exit**       | `exit`                                                                                                                                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
@@ -130,12 +130,12 @@ Format: `list`
 
 Adds a person to the address book.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/PREFERRED TIME]…​`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]... [pt/TIME-TIME]…​`
 
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags, games and preferred times (including 0)   
-**Tip:** PREFERRED TIME should be in the form of "HHmm-HHmm"
+**Tip:** Preferred time `pt/` TIME-TIME should be in the form of "HHmm-HHmm" and a valid time range that is not overnight
 </box>
 
 Examples:
@@ -248,15 +248,19 @@ Examples:
 
 Finds persons whose preferred time ranges overlap with any of given time range.
 
-Format: `findtime RANGE [MORE_RANGE]`
+Format: `findtime TIME-TIME...`
 
 <box type="tip" seamless>
 
-**Tip:** RANGE should be in the form of "HHmm-HHmm" with no extra space 
-and `HHmm` should be valid 0000-2359 4-digit number, while the first time should be before the second time
+**Tips:** TIME-TIME should be in the form of "HHmm-HHmm" with no extra space 
+and `HHmm` should be a valid 4-digit number within 0000-2359, while the first time should be before the second time.
+
+You can enter more than one time range to search for.
+
+You can enter the same time twice e.g. `2300-2300` to only search that time.
 </box>
 
-* The search is border-insensitive. e.g. `1200-1300` will not match `1300-1400`
+* The search is border-sensitive. e.g. `1200-1300` will match `1300-1400`
 * The order of ranges does not matter.
 * Persons matching at least one range will be returned(i.e. `OR` search).
 
