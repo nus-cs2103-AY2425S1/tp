@@ -3,12 +3,9 @@ package seedu.address.ui;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.student.Student;
 
@@ -18,6 +15,9 @@ import seedu.address.model.student.Student;
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
+    private static final String GRADED = "-fx-background-color: #029e1e";
+    private static final String SUBMITTED = "-fx-background-color: #c7a900";
+    private static final String PENDING = "-fx-background-color: #9e1402";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -28,9 +28,6 @@ public class StudentCard extends UiPart<Region> {
      */
 
     public final Student student;
-    public final Color GRADED = Color.BLUE;
-    public final Color SUBMITTED = Color.YELLOW;
-    public final Color PENDING = Color.RED;
 
     @FXML
     private HBox cardPane;
@@ -47,14 +44,6 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane assignments;
 
-    public Color getAssignmentColor(Assignment assignment) {
-        return assignment.getState() == Assignment.State.GRADED
-                ? GRADED
-                : assignment.getState() == Assignment.State.SUBMITTED
-                    ? SUBMITTED
-                    : PENDING;
-    }
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -68,12 +57,8 @@ public class StudentCard extends UiPart<Region> {
         studentNumber.setText(student.getStudentNumber().value);
 
         student.getAssignments().forEach(assignment -> {
-            Label label = new Label(assignment.getAssignmentName().toString());
-            label.setBackground(new Background(new BackgroundFill(
-                    getAssignmentColor(assignment),
-                    null,
-                    null
-            )));
+            Label label = new Label(assignment.getLabelName());
+            label.setStyle(getAssignmentColor(assignment));
             assignments.getChildren().add(label);
         });
 
@@ -83,15 +68,19 @@ public class StudentCard extends UiPart<Region> {
                 assignments.getChildren().clear();
                 student.getAssignments().forEach(
                         assignment -> {
-                            Label label = new Label(assignment.getAssignmentName().toString());
-                            label.setBackground(new Background(new BackgroundFill(
-                                    getAssignmentColor(assignment),
-                                    null,
-                                    null
-                            )));
+                            Label label = new Label(assignment.getLabelName());
+                            label.setStyle(getAssignmentColor(assignment));
                             assignments.getChildren().add(label);
                         });
             }
         });
+    }
+
+    public String getAssignmentColor(Assignment assignment) {
+        return assignment.getState() == Assignment.State.GRADED
+                ? GRADED
+                : assignment.getState() == Assignment.State.SUBMITTED
+                ? SUBMITTED
+                : PENDING;
     }
 }

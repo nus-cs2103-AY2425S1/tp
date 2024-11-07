@@ -215,13 +215,13 @@ public class Student {
      * @param assignmentQuery A valid assignment query.
      * @return the deleted assignment
      */
-    public AssignmentQuery editAssignment(AssignmentName assignmentName, AssignmentQuery assignmentQuery) {
+    public Assignment editAssignment(AssignmentName assignmentName, AssignmentQuery assignmentQuery) {
         requireAllNonNull(assignmentName);
-        for (Assignment assignment : assignments) {
+        for (int i = 0; i < assignments.size(); i++) {
+            Assignment assignment = assignments.get(i);
             if (assignment.getAssignmentName().equals(assignmentName)) {
-                AssignmentQuery oldAssignment = new AssignmentQuery(assignment);
-                assignment.edit(assignmentQuery);
-                return oldAssignment;
+                assignments.set(i, assignment.edit(assignmentQuery));
+                return assignment;
             }
         }
         return null;

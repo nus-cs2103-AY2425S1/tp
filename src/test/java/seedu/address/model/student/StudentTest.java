@@ -259,7 +259,7 @@ public class StudentTest {
         AssignmentName nonExistentName = new AssignmentName("Nonexistent Homework");
         AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, GRADE_90);
 
-        AssignmentQuery result = student.editAssignment(nonExistentName, query);
+        Assignment result = student.editAssignment(nonExistentName, query);
 
         // Verify that the method returns null
         assertNull(result);
@@ -272,7 +272,7 @@ public class StudentTest {
         AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, GRADE_90);
 
         // Perform the edit operation
-        AssignmentQuery oldAssignmentQuery = student.editAssignment(ASSIGNMENT_NAME_A, query);
+        Assignment oldAssignmentQuery = student.editAssignment(ASSIGNMENT_NAME_A, query);
 
         // Verify the old assignment details are returned
         assertEquals(new AssignmentQuery(oldAssignment), oldAssignmentQuery);

@@ -14,6 +14,10 @@ public class Assignment {
     private Deadline deadline;
     private Status submissionStatus;
     private Grade grade;
+
+    /**
+     * Represents if the assignment has been graded and submitted.
+     */
     public enum State {
         GRADED,
         SUBMITTED,
@@ -35,6 +39,13 @@ public class Assignment {
         this.deadline = deadline;
         this.submissionStatus = submissionStatus;
         this.grade = grade;
+    }
+
+    /**
+     * Constructs an empty {@code Assignment}
+     */
+    private Assignment() {
+
     }
 
     /**
@@ -86,10 +97,14 @@ public class Assignment {
      *
      * @param assignmentQuery fields to edit
      */
-    public void edit(AssignmentQuery assignmentQuery) {
-        this.deadline = assignmentQuery.queryDeadline.orElse(this.deadline);
-        this.submissionStatus = assignmentQuery.querySubmissionStatus.orElse(this.submissionStatus);
-        this.grade = assignmentQuery.queryGrade.orElse(this.grade);
+    public Assignment edit(AssignmentQuery assignmentQuery) {
+        Assignment assignment = new Assignment();
+
+        assignment.assignmentName = this.assignmentName;
+        assignment.deadline = assignmentQuery.queryDeadline.orElse(this.deadline);
+        assignment.submissionStatus = assignmentQuery.querySubmissionStatus.orElse(this.submissionStatus);
+        assignment.grade = assignmentQuery.queryGrade.orElse(this.grade);
+        return assignment;
     }
 
     public State getState() {
@@ -98,6 +113,11 @@ public class Assignment {
                 : submissionStatus.isSubmitted()
                     ? State.SUBMITTED
                     : State.PENDING;
+    }
+
+    public String getLabelName() {
+        return assignmentName.fullName
+                + (grade.isGraded() ? String.format(": %s", grade) : "");
     }
 
     @Override
