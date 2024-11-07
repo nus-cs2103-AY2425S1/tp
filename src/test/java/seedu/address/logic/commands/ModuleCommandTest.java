@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
@@ -70,6 +71,24 @@ public class ModuleCommandTest {
 
         assertThrows(CommandException.class, ModuleCommand.MESSAGE_PERSON_NOT_FOUND, ()
                 -> moduleCommand.execute(model));
+    }
+
+    @Test
+    public void execute_moduleAddedWhenPersonDisplayed_success() {
+        Person student = model.getFilteredPersonList().get(0);
+        Person expectedStudent = new PersonBuilder(student).build();
+        model.setPersonToDisplay(expectedStudent);
+        StudentId studentId = student.getStudentId();
+        Module validModule = new Module(VALID_MODULE_AMY);
+        expectedStudent = expectedStudent.addModule(validModule);
+        ModuleCommand moduleCommand = new ModuleCommand(studentId, validModule);
+
+        String expectedMessage = String.format(ModuleCommand.MESSAGE_SUCCESS, studentId);
+
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs(), expectedStudent);
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
+
+        assertCommandSuccess(moduleCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
