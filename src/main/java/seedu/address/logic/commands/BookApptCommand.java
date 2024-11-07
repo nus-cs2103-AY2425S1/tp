@@ -26,7 +26,7 @@ public class BookApptCommand extends Command {
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully for %1$s\n"
             + "Input \"home\" to return to home page";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
-    public static final String MESSAGE_PAST_DATE = "Appointment date and time cannot be in the past";
+    public static final String MESSAGE_PAST_DATETIME = "Appointment date and time cannot be in the past";
     public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date and time";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointments under a specified health service "
             + " for registered patients\n"
@@ -82,10 +82,10 @@ public class BookApptCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPT);
         }
 
-        // Check for past dates;
+        // Check for past date and time
         if (!this.appt.isAfterOrOn(LocalDateTime.now())) {
-            logger.warning("Past date found");
-            throw new CommandException(MESSAGE_PAST_DATE);
+            logger.warning("Past date and time found");
+            throw new CommandException(MESSAGE_PAST_DATETIME);
         }
 
         // Add the appointment to the patient's list of appointments
