@@ -96,10 +96,12 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of persons in the address book, automatically sorted by their priority from HIGH to LOW.
+Shows a list of persons in the address book, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
 - `list`: Shows a list of people who are current contacts (i.e. not archived)
 - `list archive/`: Shows a list of people who are archived
 - `list all/`: Shows a list of all people
+
+Format: `list [archive/] [all/]`
 
 <box type="warning" seamless>
 
@@ -107,8 +109,6 @@ Shows a list of persons in the address book, automatically sorted by their prior
 - Should not be used with both `archive/` and `all/` concurrently, e.g. `list archive/ all/` ❌, `list archive/` ✅
 - `archive/` and `all/` should not have parameter values, e.g. `list archive/bob` ❌, `list archive/` ✅
 </box>
-
-Format: `list [archive/] [all/]`
 
 ### Editing a person : `edit`
 
@@ -246,7 +246,7 @@ Unarchives the specified person from the address book.
 
 Format: `unarchive INDEX`
 
-* Archives the person at the specified `INDEX`.
+* Unarchives the person at the specified `INDEX`.
 * The index refer to the index number shown in the displayed person list.
 * The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …
 * The specified person must be currently archived.
