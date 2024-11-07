@@ -41,6 +41,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -48,7 +49,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        initializeHelpMessage(); // Initialize the help messages
+        logger.info("Initializing HelpWindow with custom root stage");
+        initializeHelpMessage();
     }
 
     /**
@@ -56,12 +58,14 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
+        logger.info("Initializing HelpWindow with new stage");
     }
 
     /**
      * Initializes the help message to display in the help window.
      */
     private void initializeHelpMessage() {
+        logger.fine("Setting up help message content");
         StringBuilder helpContent = new StringBuilder();
         helpContent.append(HELP_MESSAGE).append("\n\n");
         helpContent.append(ADD_PERSON_HELP).append("\n");
@@ -75,36 +79,44 @@ public class HelpWindow extends UiPart<Stage> {
         helpContent.append(EXIT_HELP).append("\n");
 
         helpMessage.setText(helpContent.toString());
+        logger.fine("Help message content initialized successfully");
     }
 
     /**
      * Shows the help window.
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.info("Showing help window");
         getRoot().show();
         getRoot().centerOnScreen();
+        logger.fine("Help window displayed and centered on screen");
     }
 
     /**
      * Returns true if the help window is currently being shown.
      */
     public boolean isShowing() {
-        return getRoot().isShowing();
+        boolean showing = getRoot().isShowing();
+        logger.fine("Help window showing status checked: " + showing);
+        return showing;
     }
 
     /**
      * Hides the help window.
      */
     public void hide() {
+        logger.info("Hiding help window");
         getRoot().hide();
+        logger.fine("Help window hidden");
     }
 
     /**
      * Focuses on the help window.
      */
     public void focus() {
+        logger.fine("Setting focus to help window");
         getRoot().requestFocus();
+        logger.fine("Help window focus requested");
     }
 
     /**
@@ -112,9 +124,11 @@ public class HelpWindow extends UiPart<Stage> {
      */
     @FXML
     private void copyUrl() {
+        logger.info("Copying user guide URL to clipboard");
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+        logger.fine("User guide URL copied to clipboard successfully");
     }
 }
