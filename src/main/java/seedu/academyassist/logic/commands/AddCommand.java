@@ -31,7 +31,8 @@ public class AddCommand extends Command {
             + PREFIX_YEARGROUP + "YEARGROUP  e.g. 1\n"
             + PREFIX_EMAIL + "EMAIL  e.g. john.smith@example.com\n"
             + PREFIX_ADDRESS + "ADDRESS  e.g. 311, Clementi Ave 2, #02-25\n"
-            + PREFIX_SUBJECT + "SUBJECT  e.g. English, s/Science" + "\n";
+            + PREFIX_SUBJECT + "SUBJECT  e.g. English" + "\n"
+            + "[" + PREFIX_SUBJECT + "MORE_SUBJECTS]...  e.g. Chinese";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
 
