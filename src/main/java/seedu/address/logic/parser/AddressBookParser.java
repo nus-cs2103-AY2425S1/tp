@@ -82,7 +82,7 @@ public class AddressBookParser {
             return new FindTimeCommandParser().parse(arguments);
 
         case FindGameCommand.COMMAND_WORD:
-                return new FindGameCommandParser().parse(arguments);
+            return new FindGameCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
