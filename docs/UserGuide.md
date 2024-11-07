@@ -18,22 +18,22 @@ pageNav: 3
 ### Introduction
 
 
-TalentSG is a desktop application designed for HR professionals and recruiters who need to efficiently manage candidates and job roles. Built with productivity in mind, TalentSG is optimized for those who prefer a Command Line Interface (CLI) experience while still benefiting from a Graphical User Interface (GUI). This combination allows users to perform tasks through concise, text-based commands and receive visual feedback for each command executed.
+TalentSG is a desktop application designed for HR professionals and recruiters who need to efficiently manage candidates and job roles. Built with productivity in mind, TalentSG is optimised for those who prefer a Command Line Interface (CLI) experience while still benefiting from a Graphical User Interface (GUI). This combination allows users to perform tasks through concise, text-based commands and receive visual feedback for each command executed.
 
 TalentSG streamlines the process of tracking candidates, organizing job roles, and filtering based on status or skillsets. With a flexible command structure, users can work intuitively without having to remember overly complex commands, making TalentSG both powerful and user-friendly.
 
-If you’re a fast typist, TalentSG can significantly speed up your candidate management workflow compared to traditional GUI-only applications. It is especially useful for those who value precision and speed, as the CLI minimizes the clicks and steps required to complete various HR tasks.
+If you’re a fast typist, TalentSG can significantly speed up your candidate management workflow compared to traditional GUI-only applications. It is especially useful for those who value precision and speed, as the CLI minimises the clicks and steps required to complete various HR tasks.
 
-This document provides an in-depth guide to using TalentSG’s features and commands, ensuring that users can maximize their experience with the app. We currently support both Windows and Mac operating systems, so feel free to jump to [Quick Start](#quick-start) to begin.
+This document provides an in-depth guide to using TalentSG’s features and commands, ensuring that users can maximise their experience with the app. We currently support both Windows and Mac operating systems, so feel free to jump to [Quick Start](#quick-start) to begin.
 
 We hope TalentSG becomes an indispensable tool in your recruitment and candidate management journey!
 
-This app is a desktop app for managing candidates and job roles, **optimized for use via a Command Line Interface (CLI)** while still providing the benefits of a Graphical User Interface (GUI). If you can type fast, this app can help you manage your candidates and job roles faster than traditional GUI apps.
+This app is a desktop app for managing candidates and job roles, **optimised for use via a Command Line Interface (CLI)** while still providing the benefits of a Graphical User Interface (GUI). If you can type fast, this app can help you manage your candidates and job roles faster than traditional GUI apps.
 
 ---
 ## Table of Contents
 - [Command Summary](#command-summary)
-- [Symbols and Tips](#symbols-and-tips)
+- [Symbols and Tips](#key-symbols-and-tips-for-a-smooth-experience)
 - [Quick Start](#quick-start)
 - [Features](#features)
     - [Notes About the Command Format](#notes-about-the-command-format)
@@ -43,7 +43,7 @@ This app is a desktop app for managing candidates and job roles, **optimized for
     - [Editing a Person: `edit`](#editing-a-person-edit)
     - [Finding Persons by Name: `find`](#finding-persons-by-name-find)
     - [Deleting a Person: `delete`](#deleting-a-person-delete)
-    - [Filtering Applicant by Status: `filter`](#filtering-contacts-by-status-filter)
+    - [Filtering Applicants by Status: `filter`](#filtering-applicants-by-status-filter)
     - [Displaying Summary: `summary`](#summary-summary)
     - [Clearing All Entries: `clear`](#clearing-all-entries-clear)
     - [Exiting the Program: `exit`](#exiting-the-program-exit)
@@ -53,7 +53,7 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Glossary](#glossary)
-- [Feedback and Support](#feedback-and-support)
+- [Feedback and Support](#how-to-report-a-bug)
 
 
 ---
@@ -98,8 +98,8 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
       - [Install Java on Windows](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-microsoft-windows-platforms.html)
       - [Install Java on Mac](https://docs.oracle.com/en/java/javase/17/install/installation-jdk-macos.html)
     - <strong>[Note]</strong>: If you’re using an older version of Java, certain features might not work as expected. Updating to the latest version is recommended.
-2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.4).
-![downloadPage.png](images%2FdownloadPage.png)[**Tip**] To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
+2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.5).
+![downloadPage.png](images%2FdownloadPage.png)<strong>[Tip]</strong>: To avoid typing the full path every time, place the TalentSG.jar file in a frequently accessed folder or create an alias for it on your system.
    <br><br>
 3. **Set Up Home Folder**: Copy the `TalentSG.jar` file to the Desktop to launch.
    <br><br>
@@ -113,7 +113,7 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
       java -jar TalentSg.jar
       ```
       ![launch instruction.png](images%2Flaunch%20instruction.png)
-[⚠**Caution**]:Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error. <br><br>
+<strong>[Caution]</strong>: Ensure you’re in the correct directory before running the `TalentSG.jar` command. Running it in an incorrect directory will result in a "file not found" error. <br><br>
 
 5. 🎉 A GUI similar to the one below should appear in a few seconds! 🎉
 
@@ -171,8 +171,7 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 | **Tags**         | Optional and can be multiple               | `Must have`                                                                                              |
 
 
-[**Caution**]: The required information except tags cannot be empty.
-
+<strong>[Caution]</strong>: The required information except tags cannot be empty.
 ---
 
 ### Viewing Help: `help`
@@ -210,7 +209,7 @@ Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4,
 <img src="images/afteradd.png" alt="afteradd" width="800">
 
 
-[**Caution**]: You cannot add the same candidate twice. (same name and phone)
+<strong>[Caution]</strong>: You cannot add the same candidate twice. (same name and phone)
 
 ---
 
@@ -234,7 +233,7 @@ Command: ` list `
 <img src="images/afterlist.png" alt="afterlist.png" width="800">
 
 
-[**Tip**]:Regularly listing all Applicants helps you review the information stored and identify any duplicates or mistakes early.
+<strong>[Tip]</strong>: Regularly listing all Applicants helps you review the information stored and identify any duplicates or mistakes early.
 
 
   ---
@@ -271,7 +270,7 @@ Command: ` edit 1 st/Rejected note/arrogant `
 <img src="images/afteredit.png" alt="afteredit.png" width="800">
 
 
-[**Caution**]: You cannot edit a candidate to be a duplicate of another existing candidate.
+<strong>[Caution]</strong>: You cannot edit a candidate to be a duplicate of another existing candidate.
 
 ---
 
@@ -293,7 +292,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
 
-[**Caution**]:  If you search for "Han," Applicants named "Hans" will not appear in the results. Always search by full words.
+<strong>[Caution]</strong>:  If you search for "Han," Applicants named "Hans" will not appear in the results. Always search by full words.
 
 #### Image Example
 
@@ -339,7 +338,7 @@ Command: ` delete 2 `
 <img src="images/afterdelete.png" alt="afterdelete.png" width="800">
 
 
-[**Caution**]: Deleted entries cannot be recovered.
+<strong>[Caution]</strong>: Deleted entries cannot be recovered.
 
 ---
 ### Viewing Applicant Details: `view`
@@ -384,7 +383,7 @@ When using the `view` command, the applicant's details will appear in the right 
 
 This allows you to conveniently access all the specific details about an applicant in one view.
 
-[**Tip**]: Use the `view` command frequently to ensure you have the most updated and detailed information about each applicant during your recruitment process.
+<strong>[Tip]</strong>: Use the `view` command frequently to ensure you have the most updated and detailed information about each applicant during your recruitment process.
 ---
 
 ### Filtering Applicants by Status: `filter`
@@ -463,9 +462,9 @@ The summary will display information such as:
 
 This quick view allows you to monitor the distribution of candidates across different stages.
 
-[**Tip**]: Use the summary command regularly to keep track of your recruitment pipeline's health and quickly identify any bottlenecks in the process.
+<strong>[Tip]</strong>: Use the summary command regularly to keep track of your recruitment pipeline's health and quickly identify any bottlenecks in the process.
 
-[**Caution**]: Please call the summary command again after modifying data to refresh the changes.
+<strong>[Caution]</strong>: Please call the summary command again after modifying data to refresh the changes.
 
 ---
 
@@ -486,7 +485,7 @@ Removes all candidates from TalentSG.
 
 <img src="images/afterclear.png" alt="afterclear.png" width="800">
 
-[**Caution**]: Clearing all entries is irreversible. Make sure you have a backup if you want to retain the data for future reference.
+<strong>[Caution]</strong>: Clearing all entries is irreversible. Make sure you have a backup if you want to retain the data for future reference.
 
 ---
 
@@ -514,7 +513,7 @@ Data is automatically saved in the hard disk after any command that changes the 
 
 Advanced users can edit the data file located at `[JAR file location]/data/addressbook.json`.
 
-[**Caution**]:
+<strong>[Caution]</strong>:
 
 - If your changes to the data file make its format invalid, TalentSG will discard all data and start with an empty data file at the next run.
 - It is recommended to take a backup of the file before editing it.
@@ -552,7 +551,7 @@ Below is an example of the Report Bug pop-up window that will appear when you ac
 - **Internet Connection**: Ensure that your device has an active internet connection before accessing the Google Form.
 - **Privacy**: Your feedback will be used solely for improving TalentSG. Any personal information provided will be handled according to our privacy policy.
 
-[**Tip**]: Reporting bugs with detailed steps and screenshots (if applicable) can help speed up the troubleshooting process.
+<strong>[Tip]</strong>: Reporting bugs with detailed steps and screenshots (if applicable) can help speed up the troubleshooting process.
 
 ---
 
@@ -569,10 +568,10 @@ _Details coming soon ..._
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 **Q**: Help! Double-clicking TalentSG.jar does not launch the application - what should I do?<br>
-**A**: Trying running the application from the command line using the following command: `java -jar TalentSg.jar`. Windows users can use the Command Prompt application to do this while Mac users can use the Terminal application.
+**A**: Try running the application from the command line using the following command: `java -jar TalentSg.jar`. Windows users can use the Command Prompt application to do this while Mac users can use the Terminal application.
 
 **Q**: When I minimise the application, the entire application has shrunk and now it is gone! Help!<br>
-**A**: Currently our application do not allow diagonal or vertical resizing of the it. It is best not to resize the application at all and leave it as the maximized mode. For the this problem, we suggest that you try to maximise the application from the task manager or try to split the screen with another application so that StudyBuddyPro will resize back to normal. If the mentioned solutions fail, please do download TalentSg again!
+**A**: Currently our application do not allow diagonal or vertical resizing of it. It is best not to resize the application at all and leave it as the maximised mode. For this problem, we suggest that you try to maximise the application from the task manager or try to split the screen with another application so that TalentSG will resize back to normal. If the mentioned solutions fail, please do download TalentSg again!
 
 **Q**: How do I save my data?<br>
 **A**: TalentSG saves your data automatically after every command.
@@ -585,7 +584,7 @@ _Details coming soon ..._
 ## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimised Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -605,7 +604,7 @@ _Details coming soon ..._
   The structure in which commands are entered in the CLI. It includes keywords, parameters, and optional elements that allow flexibility in entering information.
 
 - **Command Parameters**:
-  Specific data (e.g., `NAME`, `PHONE_NUMBER`, `EMAIL`) you supply when using commands to customize their actions. Parameters may be required or optional, depending on the command.
+  Specific data (e.g., `NAME`, `PHONE_NUMBER`, `EMAIL`) you supply when using commands to customise their actions. Parameters may be required or optional, depending on the command.
 
 - **Placeholder Value**:
   A generic example value in command formats (e.g., `n/NAME`, `p/PHONE_NUMBER`) that shows where users should insert their own specific information.
