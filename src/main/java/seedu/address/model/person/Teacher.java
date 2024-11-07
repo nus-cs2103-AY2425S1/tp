@@ -134,7 +134,7 @@ public class Teacher extends Person {
     }
 
     @Override
-    public int getDaysAttendedValue(){
+    public int getDaysAttendedValue() {
         return 0;
     }
 }
