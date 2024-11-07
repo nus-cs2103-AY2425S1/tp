@@ -5,6 +5,16 @@ title: User Guide
 
 ## What is VolunSync?
 VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailored to meet the unique needs of nonprofits. VolunSync offers a streamlined approach to managing volunteers, coordinating events, tracking hours, and enhancing communication – all from a single, intuitive platform.
+
+## Before You Start
+
+<div class="alert alert-block alert-danger">
+:exclamation: <b>IMPORTANT:</b><br>
+<b>DO NOT</b> modify the data files in the `data` folder. Doing so may result in unexpected behaviour when using VolunSync and you may lose your data permanently.
+</div>
+
+<div style="page-break-after: always;"></div>
+
 ## Learn About Commands Supported By VolunSync
 1. [Command Format Guidelines](#command-format-guidelines)
 1. [General Commands](#general-commands)
@@ -31,6 +41,8 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 1. [Saving the data](#saving-the-data)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
