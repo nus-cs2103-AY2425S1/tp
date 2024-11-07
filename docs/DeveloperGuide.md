@@ -118,23 +118,15 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T08-2/tp/tree/master/src/main/java/keycontacts/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
 
-* stores the student directory data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the versioned student directory data i.e., all `StudentDirectory` objects (which each represent a single version of the student directory)
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Piece` list in the `StudentDirectory`, which `Student` references. This allows `StudentDirectory` to only require one `Piece` object per unique piece, instead of each `Student` needing their own `Piece` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
 
 
 ### Storage component
@@ -158,46 +150,44 @@ Classes used by multiple components are in the `keycontacts.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+The undo/redo mechanism is facilitated by `VersionedStudentDirectory`. It extends `StudentDirectory` with an undo/redo history, stored internally as an `studentDirectoryStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+* `VersionedStudentDirectory#commit()` — Saves the current student directory state in its history.
+* `VersionedStudentDirectory#undo()` — Restores the previous student directory state from its history.
+* `VersionedStudentDirectory#redo()` — Restores a previously undone student directory state from its history.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitStudentDirectory()`, `Model#undoStudentDirectory()` and `Model#redoStudentDirectory()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application. The `VersionedStudentDirectory` will be initialized with the initial student directory state, and the `currentStatePointer` pointing to that single student directory state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the student directory. The `delete` calls `Model#commitStudentDirectory()`, causing the modified state of the student directory after the `delete 5` command executes to be saved in the `studentDirectoryStateList`, and the `currentStatePointer` is shifted to the newly inserted student directory state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command calls `Model#commitStudentDirectory()`, causing another modified student directory state to be saved into the `studentDirectoryStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not call `Model#commitStudentDirectory()`, so the student directory state will not be saved into the `studentDirectoryStateList`.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoStudentDirectory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous student directory state, and restores the student directory to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial StudentDirectory state, then there are no previous StudentDirectory states to restore. The `undo` command uses `Model#canUndoStudentDirectory()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </box>
@@ -216,19 +206,19 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoStudentDirectory()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the student directory to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `studentDirectoryStateList.size() - 1`, pointing to the latest student directory state, then there are no undone StudentDirectory states to restore. The `redo` command uses `Model#canRedoStudentDirectory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the student directory, such as `list`, will not call `Model#commitStudentDirectory()`. Thus, the `studentDirectoryStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitStudentDirectory()`. Since the `currentStatePointer` is not pointing at the end of the `studentDirectoryStateList`, all student directory states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -240,20 +230,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Current:** Saves the entire student directory.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Alternative:** Individual command knows how to undo/redo by
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -284,7 +268,6 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**:
 * Manage students' schedules faster than a typical mouse/GUI driven app
-* Track income and the sale of learning materials, ensuring they get reimbursed while managing inventory effectively
 * Accommodate students who need to reschedule, making for a flexible scheduling tool
 * Track students' learning over time, enabling piano teachers to monitor students' grade and progress on piano pieces
 
@@ -292,117 +275,112 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​          | I want to …​                                                   | So that I can…​                              |
-|----------|------------------|----------------------------------------------------------------|----------------------------------------------|
-| `* * *`  | user             | cancel a particular lesson session                             | respond to special circumstances effectively |
-| `* * *`  | user             | schedule a make-up lesson for students who missed              | manage lesson rescheduling efficiently       |
-| `* * *`  | user             | save a student’s lesson timing                                 | know when I will meet them                   |
-| `* * *`  | user             | save the data and retrieve them after restarting the app       | ensure my data is persistent                 |
-| `* * *`  | user             | view a list of all my students                                 | keep track of all my students                |
-| `* * *`  | user             | delete a student when they stop taking lessons                 | keep my records clean                        |
-| `* * *`  | new user         | view the list of commands                                      | know what commands I can run                 |
-| `* * *`  | user             | add a piano piece to a student                                 | track what piece they are working on         |
-| `* * *`  | user             | save a student’s address                                       | know where to travel for tutoring            |
-| `* * *`  | user             | see the grade level of a student                               | be more prepared for lessons                 |
-| `* * *`  | user             | save a person's contact                                        | contact them easily for tutoring             |
-| `* *`    | user             | modify the details of each record                              | change particulars when needed               |
-| `* *`    | user             | sort the record by student name, lesson day, contact, etc.     | find specific records easily                 |
-| `* *`    | user             | see students scheduled for a particular day                    | know my schedule for the day                 |
-| `* *`    | user             | search students based on name, day of lesson, or category      | locate a student efficiently                 |
-| `* *`    | user             | export my student data to a CSV file                           | back up my records or share them with others |
-| `*`      | user             | track the purchase and sale of learning materials              | manage inventory and ensure reimbursement    |
-| `*`      | user             | generate reports on each student’s progress                    | share them with parents or guardians         |
-| `*`      | user             | view a timetable for the week                                  | prepare my schedule                          |
-| `*`      | new user         | receive prompts/suggestions when I type a command wrongly      | get help using the system                    |
-| `*`      | experienced user | use shortcuts/aliases for commands                             | perform common tasks faster                  |
-| `*`      | user             | group my students together if they are in the same class       | view their information easier                |
-| `*`      | user             | track whether each student has paid for the month              | collect my fees on time                      |
-| `*`      | user             | keep track of how much each student should pay for lessons     | manage fees easier                           |
-| `*`      | user             | write down miscellaneous notes for each student                | recall them before each lesson               |
-| `*`      | user             | view a summary of my income for the month                      | track my earnings                            |
-| `*`      | user             | track attendance for each student                              | see how consistent they are with lessons     |
-| `*`      | user             | track the progress of each student on their assigned pieces    | monitor their improvement                    |
+| Priority | As a …​          | I want to …​                                                | So that I can…​                              |
+|----------|------------------|-------------------------------------------------------------|----------------------------------------------|
+| `* * *`  | user             | cancel a particular lesson session                          | respond to special circumstances effectively |
+| `* * *`  | user             | schedule a make-up lesson for students who missed           | manage lesson rescheduling efficiently       |
+| `* * *`  | user             | save a student’s lesson timing                              | know when I will meet them                   |
+| `* * *`  | user             | save the data and retrieve them after restarting the app    | ensure my data is persistent                 |
+| `* * *`  | user             | view a list of all my students                              | keep track of all my students                |
+| `* * *`  | user             | delete a student when they stop taking lessons              | keep my records clean                        |
+| `* * *`  | new user         | view the list of commands                                   | know what commands I can run                 |
+| `* * *`  | user             | add a piano piece to a student                              | track what piece they are working on         |
+| `* * *`  | user             | save a student’s address                                    | know where to travel for tutoring            |
+| `* * *`  | user             | see the grade level of a student                            | be more prepared for lessons                 |
+| `* * *`  | user             | save a person's contact                                     | contact them easily for tutoring             |
+| `* * *`  | user             | undo my last command                                        | revert the effects of a wrong command        |
+| `* * *`  | user             | redo a command that I undid                                 | revert the effects of a wrong undo           |
+| `* *`    | user             | modify the details of each record                           | change particulars when needed               |
+| `* *`    | user             | sort the record by student name, lesson day, contact, etc.  | find specific records easily                 |
+| `* *`    | user             | see students scheduled for a particular day                 | know my schedule for the day                 |
+| `* *`    | user             | search students based on name, day of lesson, or category   | locate a student efficiently                 |
+| `* *`    | user             | export my student data to a CSV file                        | back up my records or share them with others |
+| `*`      | user             | track the purchase and sale of learning materials           | manage inventory and ensure reimbursement    |
+| `*`      | user             | generate reports on each student’s progress                 | share them with parents or guardians         |
+| `*`      | user             | view a timetable for the week                               | prepare my schedule                          |
+| `*`      | new user         | receive prompts/suggestions when I type a command wrongly   | get help using the system                    |
+| `*`      | experienced user | use shortcuts/aliases for commands                          | perform common tasks faster                  |
+| `*`      | user             | group my students together if they are in the same class    | view their information easier                |
+| `*`      | user             | track whether each student has paid for the month           | collect my fees on time                      |
+| `*`      | user             | keep track of how much each student should pay for lessons  | manage fees easier                           |
+| `*`      | user             | write down miscellaneous notes for each student             | recall them before each lesson               |
+| `*`      | user             | view a summary of my income for the month                   | track my earnings                            |
+| `*`      | user             | track attendance for each student                           | see how consistent they are with lessons     |
+| `*`      | user             | track the progress of each student on their assigned pieces | monitor their improvement                    |
 
 ### Use cases
 
 (For all use cases below, the **System** is `KeyContacts` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Save a student
+#### Use case: Add a student
 
 **MSS**
 
-1. User enters command to save a student's contact and address.
-2. KeyContacts parses the contact details from the user's command.
-3. KeyContacts saves the contact and notifies the user.
+1. User enters the command to add a student, including their details.
+2. KeyContacts adds the student and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. KeyContacts detects an error in the entered data.
-  * 2a1. KeyContacts requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
+* 1a. KeyContacts detects an error in the entered data.
+  * 1a1. KeyContacts requests for the correct data.
+  * 1a2. User enters new data.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+  * Use case resumes from step 2.
 
----
-
-#### Use case: Save a student's regular lesson timing
-
-**MSS**
-
-1. User enters command to save a student's lesson timing.
-2. KeyContacts parses the lesson timing details from the user's command.
-3. KeyContacts saves the lesson timing and notifies the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. KeyContacts detects an error in the entered data.
-  * 2a1. KeyContacts requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
-
----
-
-#### Use case: Add a piano piece to a student
-
-**MSS**
-
-1. User enters command to add a piano piece to a student.
-2. KeyContacts parses the piano piece details from the user's command.
-3. KeyContacts adds the piano piece to the student's record and notifies the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 2a. KeyContacts detects an error in the entered data.
-  * 2a1. KeyContacts requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
-
----
-
-#### Use case: View a student's details
-
-**MSS**
-
-1. User enters command to view a student's details, such as grade level, and pieces.
-2. KeyContacts parses the student's index from the user's command.
-3. KeyContacts retrieves the student's details from the list.
-4. KeyContacts displays the student's details to the user.
-
-   Use case ends.
-
-**Extensions**
-
-* 3a. KeyContacts detects an error while retrieving the details.
-  * 3a1. KeyContacts shows an error message.
+* 1b. KeyContacts detects an existing student that is a duplicate of the student the user is trying to add.
+  * 1b1. KeyContacts alerts the user that the student already exists
   * Use case ends.
+
+---
+
+#### Use case: Edit a student
+
+**MSS**
+
+1. User enters the command to edit a student with new data.
+2. KeyContacts edits the student and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
+
+---
+
+#### Use case: Delete a student
+
+**MSS**
+
+1. User enters command to delete a student.
+2. KeyContacts deletes the student from the list and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
+
+---
+
+#### Use case: Clear the student directory
+
+**MSS**
+
+1. User enters command to clear the student directory.
+2. KeyContacts clears the student directory.
+
+   Use case ends.
 
 ---
 
@@ -411,36 +389,129 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to view a list of all students.
-2. KeyContacts retrieves the list of students from the list.
-3. KeyContacts displays the list of students to the user.
+2. KeyContacts displays the list of students to the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. KeyContacts detects an error while retrieving the list.
-  * 2a1. KeyContacts shows an error message.
-  * Use case ends.
-
+* 1a. KeyContacts detects an error while retrieving the list.
+    * 1a1. KeyContacts shows an error message.
+    * Use case ends.
+    *
 ---
 
-#### Use case: Cancel a lesson session
+#### Use case: Find a student
 
 **MSS**
 
-1. User enters command to cancel a lesson session.
-2. KeyContacts parses the lesson session details from the user's command.
-3. KeyContacts cancels the lesson session and notifies the user.
+1. User enters the command to find a student, providing one or more search terms.
+2. KeyContacts displays the students that fit the search term.
+3. User scrolls through the displayed list to find the student they are looking for. 
 
    Use case ends.
 
 **Extensions**
 
-* 2a. KeyContacts detects an error in the entered data.
-  * 2a1. KeyContacts requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
+
+---
+
+#### Use case: Sort students
+
+**MSS**
+
+1. User enters the command to sort, providing the sorting details. 
+2. KeyContacts displays the students sorted in the given order.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
+
+---
+
+#### Use case: Schedule a student's regular lesson
+
+**MSS**
+
+1. User enters command to schedule a student's regular lesson, including the day of the week, starting time and ending time.
+2. KeyContacts schedules the regular lesson at the given day and time period for the student with the associated index and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+  * 1a1. KeyContacts requests for the correct data.
+  * 1a2. User enters new data.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+  * Use case resumes from step 2.
+
+---
+
+#### Use case: Assign piano piece to a student
+
+**MSS**
+
+1. User enters command to assign piano pieces to a student.
+2. KeyContacts assigns the piano pieces to the student and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+  * 1a1. KeyContacts requests for the correct data.
+  * 1a2. User enters new data.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+  * Use case resumes from step 2.
+---
+
+#### Use case: Unassign piano pieces from a student
+
+**MSS**
+
+1. User enters command to unassign piano pieces from a student.
+2. KeyContacts unassigns the piano pieces from the student and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
+
+---
+
+#### Use case: View the calendar
+
+**MSS**
+
+1. User enters command to view the calendar for a specified week.
+2. KeyContacts displays the calendar view for the given week.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
 
 ---
 
@@ -449,37 +520,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters command to schedule a make-up lesson.
-2. KeyContacts parses the make-up lesson details from the user's command.
-3. KeyContacts schedules the make-up lesson and notifies the user.
+2. KeyContacts schedules the make-up lesson and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. KeyContacts detects an error in the entered data.
-  * 2a1. KeyContacts requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
 ---
 
-#### Use case: Delete a student
+#### Use case: Cancel a lesson session
 
 **MSS**
 
-1. User enters command to delete a student.
-2. KeyContacts parses the student index from the user's command.
-3. KeyContacts deletes the student from the list and notifies the user.
+1. User enters command to cancel a lesson session.
+2. KeyContacts cancels the lesson session and notifies the user.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. KeyContacts detects an error in the entered data.
-  * 2a1. KeyContacts requests for the correct data.
-  * 2a2. User enters new data.
-  * Steps 2a1-2a2 are repeated until the data entered are correct.
-  * Use case resumes from step 3.
+* 1a. KeyContacts detects an error in the entered data.
+  * 1a1. KeyContacts requests for the correct data.
+  * 1a2. User enters new data.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+  * Use case resumes from step 2.
+
+---
+
+#### Use case: Uncancel a lesson session
+
+**MSS**
+
+1. User enters command to uncancel a lesson session.
+2. KeyContacts uncancels the lesson session and notifies the user.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. KeyContacts detects an error in the entered data.
+    * 1a1. KeyContacts requests for the correct data.
+    * 1a2. User enters new data.
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+    * Use case resumes from step 2.
 
 ---
 
@@ -489,6 +577,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User enters command to view the list of commands.
 2. KeyContacts displays the dialog box with a link to the user guide.
+
+   Use case ends.
+
+---
+
+#### Use case: Undo the last command
+
+**MSS**
+
+1. User enters command to undo the last command.
+2. KeyContacts undoes the last command.
+
+   Use case ends.
+
+* 1a. KeyContacts detects that there are no prior versions to undo to.
+    * 1a1. KeyContacts alerts the user that they are at the earliest version.
+    * Use case ends.
+
+---
+
+#### Use case: Redo the last undone command
+
+**MSS**
+
+1. User enters command to redo the last undone command.
+2. KeyContacts redoes the last undone command.
+
+   Use case ends.
+
+* 1a. KeyContacts detects that there are no undone commands to redo.
+    * 1a1. KeyContacts alerts the user that they are at the latest version.
+    * Use case ends.
+
+---
+
+#### Use case: Exit
+
+**MSS**
+
+1. User enters command to exit KeyContacts.
+2. KeyContacts closes.
 
    Use case ends.
 
@@ -533,38 +662,175 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file <br>
+      **Expected**: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       **Expected**: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a student
+1. Adding a student with basic details
 
-### Deleting a student
+    1. Test case (standard): `add n/John Doe p/83143234 a/74 Acorn Street 11 653203 #02-02 gl/abrsm 1 g/` <br>
+       **Expected**: Student "John Doe" is added to the student directory with correct details.
 
-1. Deleting a student while all students are being shown
+    2. Test case (with group): `add n/Mary Sue p/9732123 a/51 Mangrove Drive 11 642371 #01-03 gl/abrsm 2 g/Group one` <br>
+       **Expected**: Student "Mary Sue" is added to the student directory, assigned to "Group one".
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+2. Adding a duplicate student
+    1. Test case (name and phone clashing): `add n/john doe p/83143234 a/Acorn Street #02-02 gl/abrsm 1 g/` <br>
+       **Expected**: Error is thrown as student already exists (note the lower case)
+   
+    2. Test case (only name is clashing): `add n/John Doe p/8923921 a/Acorn Street #03-01 gl/abrsm 1 g/` <br>
+       **Expected**: Student "John Doe" is added to the student directory, as the duplicate criteria is name and phone number
 
-   1. Test case: `delete 1`<br>
-      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+### Editing a student
+1. Editing a student’s details
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Prerequisites: List all students using the list command. Ensure there is at least one student in the list.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   2. Test case: `edit 1 n/Jane Doe p/91234567` <br>
+      **Expected**: The first student's name and phone number are updated to "Jane Doe" and "91234567", respectively.
 
-1. _{ more test cases …​ }_
+   3. Test case: `edit 1 g/Group one`<br>
+      **Expected**: The first student's group is updated to "Group one".
+
+### Assigning Piano Pieces to a Student
+1. Assign piano pieces
+
+    1. Test case: `assign 1 pn/Moonlight Sonata pn/Fur Elise` <br>
+       **Expected**: "Moonlight Sonata" and "Fur Elise" are assigned to the first student.
+   
+    2. Test case: `assign 1 pn/Moonlight Sonata pn/Claire de Lune`<br>
+       **Expected**: Throws an error not allowing you to assign the same piece twice
+   
+    3. Test case: `assign 2 pn/Waltz pn/Etude`<br>
+       **Expected**: "Waltz" and "Etude" are assigned to the second student.
+   
+### Unassigning Piano Pieces from a Student
+1. Unassign piano pieces
+
+    1. Test case: `unassign 1 pn/Moonlight Sonata pn/Fur Elise` <br>
+       **Expected**: "Moonlight Sonata" and "Fur Elise" are unassigned from the first student.
+   
+    2. Test case: `unassign 2`
+       **Expected**: All pieces are unassigned from the second student
+
+### Scheduling a Regular Lesson
+1. Schedule a lesson
+
+    1. Test case: `schedule 1 d/Monday st/12:00 et/14:00` <br>
+       **Expected**: A regular lesson is scheduled for the first student on Monday from 12:00 to 14:00.
+
+    1. Test case: `schedule 2 d/Friday st/09:00 et/10:30`<br>
+       **Expected**: A regular lesson is scheduled for the second student on Friday from 09:00 to 10:30.
+
+### Cancelling a Regular Lesson
+1. Cancel a scheduled lesson
+
+    1. Test case: `cancel 1 dt/15-10-2024 st/12:00` <br>
+       **Expected**: The first student's lesson on October 15, 2024, at 12:00 is canceled.
+
+    1. Test case: `cancel 2 dt/20-10-2024 st/09:00`<br>
+       **Expected**: The second student's lesson on October 20, 2024, at 09:00 is canceled.
+
+### Scheduling a Makeup Lesson
+1. Schedule a makeup lesson
+
+    1. Test case: `makeup 1 dt/25-12-2024 st/12:00 et/14:00` <br>
+       **Expected**: A makeup lesson is scheduled for the first student on December 25, 2024, from 12:00 to 14:00.
+
+    1. Test case: `makeup 2 dt/26-12-2024 st/10:00 et/11:30`<br>
+       **Expected**: A makeup lesson is scheduled for the second student on December 26, 2024, from 10:00 to 11:30.
+    1. Test case: `makeup 1 dt/31-02-2024 st/10:00 et/12:00` <br>
+       **Expected**: An error is thrown as 31st Feb is not a valid date.
+
+### Viewing the Schedule
+1. View current week’s schedule
+
+    1. Test case: `view` <br>
+       **Expected**: The schedule for the current week is displayed, showing all lessons and makeup lessons.
+
+2. View a specific week’s schedule
+
+   1. Test case: `view dt/01-12-2024` <br>
+      **Expected**: The schedule for the week starting December 1, 2024, is displayed, showing all lessons for that period.
+### Finding Students
+1. Find by name
+
+    1. Test case: `find n/John` <br>
+       **Expected**: Students with "John" in their name are displayed.
+
+2. Find by multiple details
+
+    1. Test case: `find n/John gl/ABRS`M<br>
+    **Expected**: Students with "John" in their name and "ABRSM" in their grade level are displayed.
+
+### Sorting Students
+1. Sort by name in ascending order
+
+    1. Test case: `sort n/ASC` <br>
+       **Expected**: The list of students is sorted alphabetically by name in ascending order.
+
+2. Sort by grade level in descending order and name in ascending order
+
+    1. Test case: `sort gl/DESC n/ASC` <br>
+       **Expected**: Students are first sorted by grade level in descending order, and those with the same grade level are sorted by name in ascending order.
+
+### Undoing the Last Command
+1. Undo previous modification
+
+    1. Test case: `undo` after performing any modification (e.g., adding a student). <br>
+       **Expected**: The last modification is reverted, and the student directory reflects this change.
+
+### Redoing the Last Undo Command
+1. Redo last undone action
+
+    1. Test case: `redo` after an undo command. <br>
+       **Expected**: The previously undone action is reapplied, and the student directory reflects the re-application of the change.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Files are corrupted in the following cases:
+      1. Invalid values
+      2. Clashing lessons
+      3. Duplicate students
+      4. Incorrect group syncing
+      5. Invalid file format
+      6. Invalid JSON object structure
+   <br><br>
+   1. **Expected**: KeyContacts will load an empty list. Upon performing any command, a new data file will be written to override the corrupted data file. 
 
-1. _{ more test cases …​ }_
+---
+
+## **Appendix: Planned Enhancements**
+To be added in v1.6
+
+---
+
+## **Appendix: Effort**
+
+### Difficulty Level
+Our project was significantly more complex when compared to AB3. We have introduced various new commands to support new functionalities. Our student objects involve more fields, with certain fields (lessons) requiring syncing across multiple students. Our UI is also more complicated, with the introduction of a new calendar view that updates based on students' lesson data.
+
+### Challenges Faced
+Command Planning: Planning for multiple commands, which enhance the product, while fitting together cohesively, required careful thought and deliberation.
+Lesson-related Logic: Logic for syncing lessons across students in the same group, as well as checking for lesson clashes, needed to be developed.
+UI Refactoring: Designing a UI which could show all existing information, while also displaying a calendar view required multiple drafts and discussions.
+
+### Effort Required
+Our project involved substantial effort in several key areas:
+
+Refactoring: Modifying existing AB3 features to suit our product (e.g. removing extra fields)
+Command Implementation: Implementing multiple new commands
+Model Implementation: Updating the model with new fields, and implementing lesson-related logic.
+Testing and Debugging: Testing and debugging the new features, as well as performing regression testing
+
+### Achievements
+We have extended AB3 with multiple new features and a better UI, to make the app more specialised and suitable for piano tutors.

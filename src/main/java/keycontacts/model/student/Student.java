@@ -10,7 +10,11 @@ import java.util.Set;
 
 import keycontacts.commons.util.ToStringBuilder;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Date;
+import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 
 /**
@@ -24,21 +28,27 @@ public class Student {
     private final Phone phone;
     private final Address address;
     private final GradeLevel gradeLevel;
+    private final Group group;
 
     // Associations
     private final Set<PianoPiece> pianoPieces = new HashSet<>();
     private final RegularLesson regularLesson;
+    private final Set<CancelledLesson> cancelledLessons = new HashSet<>();
+    private final Set<MakeupLesson> makeupLessons = new HashSet<>();
 
     /**
      * Constructor for a new student. Uses default associations.
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel) {
-        requireAllNonNull(name, phone, address, gradeLevel);
+    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel, Group group) {
+        requireAllNonNull(name, phone, address, gradeLevel, group);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gradeLevel = gradeLevel;
+        this.group = group;
+
+        // by default, students are created with no regular lesson
         this.regularLesson = null;
     }
 
@@ -46,15 +56,19 @@ public class Student {
      * Constructor for a new student with non-default student associations. Identity and data fields must be
      * present and not null.
      */
-    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel,
-                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson) {
-        requireAllNonNull(name, phone, address, gradeLevel, pianoPieces);
+    public Student(Name name, Phone phone, Address address, GradeLevel gradeLevel, Group group,
+                   Set<PianoPiece> pianoPieces, RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons,
+                   Set<MakeupLesson> makeupLessons) {
+        requireAllNonNull(name, phone, address, gradeLevel, group, pianoPieces, cancelledLessons, makeupLessons);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.gradeLevel = gradeLevel;
+        this.group = group;
         this.pianoPieces.addAll(pianoPieces);
         this.regularLesson = regularLesson;
+        this.cancelledLessons.addAll(cancelledLessons);
+        this.makeupLessons.addAll(makeupLessons);
     }
 
     public Name getName() {
@@ -73,6 +87,10 @@ public class Student {
         return gradeLevel;
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
     /**
      * Returns an immutable piano piece set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -81,23 +99,41 @@ public class Student {
         return Collections.unmodifiableSet(pianoPieces);
     }
 
-    public Optional<RegularLesson> getRegularLesson() {
+    public RegularLesson getRegularLesson() {
+        return regularLesson;
+    }
+
+    /**
+     * Returns {@code regularLesson} wrapped in a Optional.
+     */
+    public Optional<RegularLesson> getRegularLessonOptional() {
         return Optional.ofNullable(regularLesson);
+    }
+
+    /**
+     * Returns an immutable cancelled lesson set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<CancelledLesson> getCancelledLessons() {
+        return Collections.unmodifiableSet(cancelledLessons);
+    }
+
+    public Set<MakeupLesson> getMakeupLessons() {
+        return Collections.unmodifiableSet(makeupLessons);
     }
 
     /**
      * Returns string representation of the {@code regularLesson}
      */
     public String getRegularLessonString() {
-        return Optional.ofNullable(regularLesson).map(RegularLesson::toString).orElse(null);
+        return getRegularLessonOptional().map(RegularLesson::toString).orElse(null);
     }
 
     /**
      * Returns user-friendly display string of the {@code regularLesson}.
      */
     public String getRegularLessonDisplay() {
-        return Optional.ofNullable(regularLesson).map(RegularLesson::toDisplay)
-                .orElse("No regular lesson scheduled");
+        return getRegularLessonOptional().map(RegularLesson::toDisplay).orElse(RegularLesson.MESSAGE_NO_REGULAR_LESSON);
     }
 
     /**
@@ -107,15 +143,15 @@ public class Student {
         Name updatedName = editStudentDescriptor.getName().orElse(name);
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(phone);
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(address);
-        GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(this.gradeLevel);
-        return new Student(updatedName, updatedPhone, updatedAddress, updatedGradeLevel, pianoPieces, regularLesson);
-    }
+        GradeLevel updatedGradeLevel = editStudentDescriptor.getGradeLevel().orElse(gradeLevel);
+        Group updatedGroup = editStudentDescriptor.getGroup().orElse(group);
 
-    /**
-     * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
-     */
-    public Student withRegularLesson(RegularLesson regularLesson) {
-        return new Student(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return new Updater().withName(updatedName)
+                .withPhone(updatedPhone)
+                .withAddress(updatedAddress)
+                .withGradeLevel(updatedGradeLevel)
+                .withGroup(updatedGroup)
+                .update();
     }
 
     /**
@@ -125,11 +161,92 @@ public class Student {
         Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
         updatedPianoPieces.addAll(addedPianoPieces);
 
-        return new Student(name, phone, address, gradeLevel, updatedPianoPieces, regularLesson);
+        return new Updater().withPianoPieces(updatedPianoPieces).update();
     }
 
     /**
-     * Returns true if both students have the same name.
+     * Creates and returns a new {@code Student} with the {@code removedPianoPieces} removed.
+     */
+    public Student withRemovedPianoPieces(Set<PianoPiece> removedPianoPieces) {
+        Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
+        updatedPianoPieces.removeAll(removedPianoPieces);
+
+        return new Updater().withPianoPieces(updatedPianoPieces).update();
+    }
+
+
+    /**
+     * Creates and returns a new {@code Student} with the updated {@code regularLesson}.
+     */
+    public Student withRegularLesson(RegularLesson regularLesson) {
+        return new Updater().withRegularLesson(regularLesson).update();
+    }
+
+    /**
+     * Creates and returns a new student with an additional {@code cancelledLesson}.
+     */
+    public Student withAddedCancelledLesson(CancelledLesson cancelledLesson) {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
+        updatedCancelledLessons.add(cancelledLesson);
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code cancelledLesson} removed.
+     */
+    public Student withoutCancelledLesson(CancelledLesson cancelledLesson) {
+        assert (cancelledLessons.contains(cancelledLesson));
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>(cancelledLessons);
+        updatedCancelledLessons.remove(cancelledLesson);
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with all {@code CancelledLessons} removed.
+     */
+    public Student withoutCancelledLessons() {
+        Set<CancelledLesson> updatedCancelledLessons = new HashSet<>();
+
+        return new Updater().withCancelledLessons(updatedCancelledLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code makeupLesson} added.
+     */
+    public Student withAddedMakeupLesson(MakeupLesson makeupLesson) {
+        Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
+        updatedMakeupLessons.add(makeupLesson);
+
+        return new Updater().withMakeupLessons(updatedMakeupLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code makeupLesson} removed.
+     */
+    public Student withoutMakeupLesson(MakeupLesson makeupLesson) {
+        assert (makeupLessons.contains(makeupLesson));
+        Set<MakeupLesson> updatedMakeupLessons = new HashSet<>(makeupLessons);
+        updatedMakeupLessons.remove(makeupLesson);
+
+        return new Updater().withMakeupLessons(updatedMakeupLessons).update();
+    }
+
+    /**
+     * Creates and returns a new {@code Student} with the {@code regularLesson}, {@code cancelledLessons}
+     * and {@code makeupLessons}.
+     */
+    public Student withLessons(RegularLesson regularLesson, Set<CancelledLesson> cancelledLessons,
+                               Set<MakeupLesson> makeupLessons) {
+        return new Updater().withRegularLesson(regularLesson)
+                .withCancelledLessons(cancelledLessons)
+                .withMakeupLessons(makeupLessons)
+                .update();
+    }
+
+    /**
+     * Returns true if both students have the same name (case-insensitive) and same phone number.
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
@@ -138,7 +255,8 @@ public class Student {
         }
 
         return otherStudent != null
-                && otherStudent.getName().equals(getName());
+                && otherStudent.getName().fullName.equalsIgnoreCase(getName().fullName)
+                && otherStudent.getPhone().equals(getPhone());
     }
 
     /**
@@ -162,13 +280,17 @@ public class Student {
                 && address.equals(otherStudent.address)
                 && gradeLevel.equals(otherStudent.gradeLevel)
                 && pianoPieces.equals(otherStudent.pianoPieces)
-                && getRegularLesson().equals(otherStudent.getRegularLesson());
+                && group.equals(otherStudent.group)
+                && getRegularLessonOptional().equals(otherStudent.getRegularLessonOptional())
+                && cancelledLessons.equals(otherStudent.cancelledLessons)
+                && makeupLessons.equals(otherStudent.makeupLessons);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, address, gradeLevel, pianoPieces, regularLesson);
+        return Objects.hash(name, phone, address, gradeLevel, group, pianoPieces, regularLesson,
+            cancelledLessons, makeupLessons);
     }
 
     @Override
@@ -178,9 +300,96 @@ public class Student {
                 .add("phone", phone)
                 .add("address", address)
                 .add("gradeLevel", gradeLevel)
+                .add("group", group)
                 .add("pianoPieces", pianoPieces)
                 .add("regularLesson", regularLesson)
+                .add("cancelledLessons", cancelledLessons)
+                .add("makeupLessons", makeupLessons)
                 .toString();
     }
 
+    /**
+     * Returns true if the {@code date} and {@code startTime} of {@code regularLesson} match the parameters.
+     */
+    public boolean matchesLesson(Date date, Time startTime) {
+        return this.getRegularLessonOptional()
+                .map(lesson -> lesson.isOnDayAndTime(date.convertToDay(), startTime))
+                .orElse(false);
+    }
+
+    /**
+     * Returns an {@code Optional<MakeupLesson>} if the student has a makeup lesson matching the parameters.
+     */
+    public Optional<MakeupLesson> findMakeupLesson(Date date, Time startTime) {
+        return this.getMakeupLessons()
+                .stream()
+                .filter(ml -> ml.getLessonDate().equals(date) && ml.getStartTime().equals(startTime))
+                .findFirst();
+    }
+
+    /**
+     *  Inner private class for updating the student object.
+     *  {@code with...} methods in {@code Student} serve as an abstraction over the inner methods.
+     */
+    private class Updater {
+        private Name name = Student.this.name;
+        private Phone phone = Student.this.phone;
+        private Address address = Student.this.address;
+        private GradeLevel gradeLevel = Student.this.gradeLevel;
+        private Group group = Student.this.group;
+        private Set<PianoPiece> pianoPieces = new HashSet<>(Student.this.pianoPieces);
+        private RegularLesson regularLesson = Student.this.regularLesson;
+        private Set<CancelledLesson> cancelledLessons = new HashSet<>(Student.this.cancelledLessons);
+        private Set<MakeupLesson> makeupLessons = new HashSet<>(Student.this.makeupLessons);
+
+        private Updater withName(Name name) {
+            this.name = name;
+            return this;
+        }
+
+        private Updater withPhone(Phone phone) {
+            this.phone = phone;
+            return this;
+        }
+
+        private Updater withAddress(Address address) {
+            this.address = address;
+            return this;
+        }
+
+        private Updater withGradeLevel(GradeLevel gradeLevel) {
+            this.gradeLevel = gradeLevel;
+            return this;
+        }
+
+        private Updater withGroup(Group group) {
+            this.group = group;
+            return this;
+        }
+
+        private Updater withPianoPieces(Set<PianoPiece> pianoPieces) {
+            this.pianoPieces = pianoPieces;
+            return this;
+        }
+
+        private Updater withRegularLesson(RegularLesson regularLesson) {
+            this.regularLesson = regularLesson;
+            return this;
+        }
+
+        private Updater withCancelledLessons(Set<CancelledLesson> cancelledLessons) {
+            this.cancelledLessons = cancelledLessons;
+            return this;
+        }
+
+        private Updater withMakeupLessons(Set<MakeupLesson> makeupLessons) {
+            this.makeupLessons = makeupLessons;
+            return this;
+        }
+
+        private Student update() {
+            return new Student(name, phone, address, gradeLevel, group, pianoPieces, regularLesson, cancelledLessons,
+                    makeupLessons);
+        }
+    }
 }

@@ -2,9 +2,12 @@ package keycontacts.logic.parser;
 
 import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_DATE_DESC;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 import static keycontacts.testutil.Assert.assertThrows;
 import static keycontacts.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static keycontacts.testutil.TypicalStudents.ALICE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,13 +26,24 @@ import keycontacts.logic.commands.EditCommand;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.logic.commands.ExitCommand;
 import keycontacts.logic.commands.FindCommand;
+import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
+import keycontacts.logic.commands.RedoCommand;
+import keycontacts.logic.commands.ScheduleCommand;
+import keycontacts.logic.commands.UnassignPiecesCommand;
+import keycontacts.logic.commands.UncancelLessonCommand;
+import keycontacts.logic.commands.UndoCommand;
+import keycontacts.logic.commands.ViewCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
-import keycontacts.model.student.NameContainsKeywordsPredicate;
+import keycontacts.model.lesson.CancelledLesson;
+import keycontacts.model.lesson.Date;
+import keycontacts.model.lesson.RegularLesson;
+import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
-import keycontacts.model.util.SampleDataUtil;
+import keycontacts.model.student.StudentDescriptorMatchesPredicate;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
+import keycontacts.testutil.FindStudentDescriptorBuilder;
 import keycontacts.testutil.StudentBuilder;
 import keycontacts.testutil.StudentUtil;
 
@@ -74,10 +88,12 @@ public class KeyContactsParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("n/foo", "a/bar", "gl/baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("foo")
+                .withAddress("bar").withGradeLevel("baz").build();
+        assertEquals(new FindCommand(new StudentDescriptorMatchesPredicate(descriptor)), command);
     }
 
     @Test
@@ -104,8 +120,57 @@ public class KeyContactsParserTest {
 
         AssignPiecesCommand expectedCommand = new AssignPiecesCommand(
                 index,
-                SampleDataUtil.getPianoPieceSet(pianoPieces));
+                PianoPiece.getPianoPieceSet(pianoPieces));
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_unassign() throws Exception {
+        String[] pianoPieces = new String[] {"Moonlight Sonata", "Clair de Lune", "Nocturne Op. 9 No. 2"};
+        String pianoPieceArguments = Arrays.stream(pianoPieces)
+                .map(piece -> PREFIX_PIECE_NAME + piece)
+                .collect(Collectors.joining(" "));
+        Index index = Index.fromOneBased(4);
+        UnassignPiecesCommand command = (UnassignPiecesCommand) parser.parseCommand(
+                UnassignPiecesCommand.COMMAND_WORD + " " + index.getOneBased() + " " + pianoPieceArguments);
+
+        UnassignPiecesCommand expectedCommand = new UnassignPiecesCommand(
+                index,
+                PianoPiece.getPianoPieceSet(pianoPieces));
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        RegularLesson regularLesson = ALICE.getRegularLesson();
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(
+                ScheduleCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + StudentUtil.getRegularLessonDetails(regularLesson));
+        assertEquals(new ScheduleCommand(INDEX_FIRST_STUDENT, regularLesson), command);
+    }
+
+    @Test
+    public void parseCommand_uncancel() throws Exception {
+        CancelledLesson cancelledLesson = new CancelledLesson(new Date(VALID_DATE));
+        UncancelLessonCommand command = (UncancelLessonCommand) parser.parseCommand(
+                UncancelLessonCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + VALID_DATE_DESC);
+        assertEquals(new UncancelLessonCommand(INDEX_FIRST_STUDENT, cancelledLesson), command);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + VALID_DATE_DESC);
+        assertEquals(new ViewCommand(new Date(VALID_DATE)), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
     }
 
     @Test

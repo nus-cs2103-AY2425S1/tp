@@ -44,15 +44,17 @@ public class Messages {
                 .append(student.getAddress())
                 .append("; Grade Level: ")
                 .append(student.getGradeLevel());
+        if (!student.getGroup().isNoGroup()) {
+            builder.append("; Group: ").append(student.getGroup());
+        }
         return builder.toString();
     }
 
     /**
      * Formats a {@code Collection<T>} for display to the user.
      */
-    public static <T> String format(Collection<T> t) {
-        final StringBuilder builder = new StringBuilder();
-        t.forEach(builder::append);
-        return builder.toString();
+    public static <T> String format(Collection<T> collection) {
+        return collection.stream().map(T::toString).collect(Collectors.joining(", "));
     }
+
 }

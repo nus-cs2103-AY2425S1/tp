@@ -4,13 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
+import keycontacts.model.lesson.Lesson;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 
 /**
@@ -19,9 +25,12 @@ import keycontacts.model.student.Student;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final StudentDirectory studentDirectory;
+    private final VersionedStudentDirectory studentDirectory;
     private final UserPrefs userPrefs;
+    private final ObservableList<Student> studentList;
+    private final ObservableList<Student> unfilteredStudentList;
     private final FilteredList<Student> filteredStudents;
+    private final SortedList<Student> sortedFilteredStudents;
 
     /**
      * Initializes a ModelManager with the given studentDirectory and userPrefs.
@@ -31,9 +40,13 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with student directory: " + studentDirectory + " and user prefs " + userPrefs);
 
-        this.studentDirectory = new StudentDirectory(studentDirectory);
+        this.studentDirectory = new VersionedStudentDirectory(studentDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentDirectory.getStudentList());
+        sortedFilteredStudents = new SortedList<>(filteredStudents);
+
+        studentList = sortedFilteredStudents;
+        unfilteredStudentList = this.studentDirectory.getStudentList();
     }
 
     public ModelManager() {
@@ -78,8 +91,8 @@ public class ModelManager implements Model {
     //=========== StudentDirectory ================================================================================
 
     @Override
-    public void setStudentDirectory(ReadOnlyStudentDirectory studentDirectory) {
-        this.studentDirectory.resetData(studentDirectory);
+    public void setStudentDirectory(ReadOnlyStudentDirectory newStudentDirectory) {
+        this.studentDirectory.resetData(newStudentDirectory);
     }
 
     @Override
@@ -101,31 +114,77 @@ public class ModelManager implements Model {
     @Override
     public void addStudent(Student student) {
         studentDirectory.addStudent(student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        filterStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         studentDirectory.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public void undoStudentDirectory() {
+        studentDirectory.undo();
+    }
+
+    @Override
+    public void redoStudentDirectory() {
+        studentDirectory.redo();
+    }
+
+    @Override
+    public boolean canUndoStudentDirectory() {
+        return studentDirectory.canUndo();
+    }
+    @Override
+    public boolean canRedoStudentDirectory() {
+        return studentDirectory.canRedo();
+    }
+
+    @Override
+    public void commitStudentDirectory() {
+        studentDirectory.commit();
+    }
+
+    @Override
+    public Set<Lesson> getClashingLessons() {
+        return studentDirectory.getClashingLessons();
+    }
+
+    @Override
+    public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+        requireNonNull(targetGroup);
+
+        return studentDirectory.getStudentsInGroup(targetGroup);
     }
 
     //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the
+     * internal list of
      * {@code versionedStudentDirectory}
      */
     @Override
-    public ObservableList<Student> getFilteredStudentList() {
-        return filteredStudents;
+    public ObservableList<Student> getStudentList() {
+        return studentList;
     }
 
     @Override
-    public void updateFilteredStudentList(Predicate<Student> predicate) {
+    public ObservableList<Student> getUnfilteredStudentList() {
+        return unfilteredStudentList;
+    }
+
+    @Override
+    public void filterStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void sortStudentList(Comparator<Student> comparator) {
+        sortedFilteredStudents.setComparator(comparator);
     }
 
     @Override

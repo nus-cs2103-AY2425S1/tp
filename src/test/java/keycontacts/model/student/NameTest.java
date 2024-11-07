@@ -1,6 +1,7 @@
 package keycontacts.model.student;
 
 import static keycontacts.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -56,5 +57,13 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        String testName = "Test name";
+        Name name = new Name(testName);
+
+        assertEquals(testName.hashCode(), name.hashCode());
     }
 }

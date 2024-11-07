@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +24,8 @@ import keycontacts.model.Model;
 import keycontacts.model.ReadOnlyStudentDirectory;
 import keycontacts.model.ReadOnlyUserPrefs;
 import keycontacts.model.StudentDirectory;
+import keycontacts.model.lesson.Lesson;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 import keycontacts.testutil.StudentBuilder;
 
@@ -89,6 +93,31 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void undoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitStudentDirectory() {
+            // Do nothing
+        }
+
+        @Override
+        public boolean canUndoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -149,12 +178,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Student> getFilteredStudentList() {
+        public Set<Lesson> getClashingLessons() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredStudentList(Predicate<Student> predicate) {
+        public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Student> getStudentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Student> getUnfilteredStudentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void filterStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortStudentList(Comparator<Student> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -193,6 +242,11 @@ public class AddCommandTest {
         public void addStudent(Student student) {
             requireNonNull(student);
             studentsAdded.add(student);
+        }
+
+        @Override
+        public ArrayList<Student> getStudentsInGroup(Group targetGroup) {
+            return new ArrayList<>();
         }
 
         @Override

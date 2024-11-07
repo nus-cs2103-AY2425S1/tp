@@ -3,6 +3,8 @@ package keycontacts.logic.commands;
 import static keycontacts.logic.commands.CommandTestUtil.DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.DESC_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADE_LEVEL_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,6 +47,15 @@ public class EditStudentDescriptorTest {
         // different address -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different grade level -> returns false
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withGradeLevel(VALID_GRADE_LEVEL_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different group -> returns false
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withGroup(VALID_GROUP_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
     }
 
     @Test
@@ -54,7 +65,8 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getName().orElse(null) + ", phone="
                 + editStudentDescriptor.getPhone().orElse(null) + ", address="
                 + editStudentDescriptor.getAddress().orElse(null) + ", gradeLevel="
-                + editStudentDescriptor.getGradeLevel().orElse(null) + "}";
+                + editStudentDescriptor.getGradeLevel().orElse(null) + ", group="
+                + editStudentDescriptor.getGroup().orElse(null) + "}";
         assertEquals(expected, editStudentDescriptor.toString());
     }
 }

@@ -2,17 +2,19 @@ package keycontacts.model.lesson;
 
 import static keycontacts.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Objects;
 
 import keycontacts.commons.util.ToStringBuilder;
 
 /**
- * Abstract class representing a Student's lesson in the student directory.
+ * Class representing a Student's lesson in the student directory.
  * Guarantees: immutable, start time and end time are valid as declared in
  * {@link keycontacts.model.lesson.Time#isValidTime(String)}, lesson day is valid as declared in
  * {@link keycontacts.model.lesson.Day#isValidDay(String)}.
  */
 public class RegularLesson extends Lesson {
+    public static final String MESSAGE_NO_REGULAR_LESSON = "No Regular Lesson scheduled";
 
     private final Day lessonDay;
 
@@ -62,5 +64,37 @@ public class RegularLesson extends Lesson {
     public String toDisplay() {
         return lessonDay.toString().substring(0, 1).toUpperCase()
                 + lessonDay.toString().substring(1).toLowerCase() + ", " + super.toDisplay();
+    }
+
+    /**
+     * Returns true if the lesson falls on the given day and time.
+     */
+    public boolean isOnDayAndTime(Day day, Time time) {
+        return this.getStartTime().equals(time) && this.getLessonDay().equals(day);
+    }
+
+    /**
+     * Returns the date for a regular lesson in a week, given the Monday date for that week.
+     */
+    public Date getDateForWeek(Date mondayDate) {
+        assert(mondayDate.value.getDayOfWeek() == DayOfWeek.MONDAY);
+
+        int daysToAdd = lessonDay.value.getValue() - DayOfWeek.MONDAY.getValue();
+        return new Date(mondayDate.value.plusDays(daysToAdd));
+    }
+
+    @Override
+    public boolean isClashing(RegularLesson other) {
+        return this != other
+                && this.getLessonDay().equals(other.getLessonDay())
+                && this.getStartTime().isBefore(other.getEndTime())
+                && this.getEndTime().isAfter(other.getStartTime());
+    }
+
+    @Override
+    public boolean isClashing(MakeupLesson other) {
+        return this.getLessonDay().equals(other.getLessonDate().convertToDay())
+                && this.getStartTime().isBefore(other.getEndTime())
+                && this.getEndTime().isAfter(other.getStartTime());
     }
 }

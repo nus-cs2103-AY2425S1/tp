@@ -3,6 +3,8 @@ package keycontacts.logic.parser;
 import static keycontacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static keycontacts.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.GRADE_LEVEL_DESC_AMY;
+import static keycontacts.logic.commands.CommandTestUtil.GROUP_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static keycontacts.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static keycontacts.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -11,6 +13,8 @@ import static keycontacts.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADE_LEVEL_AMY;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GROUP_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -85,10 +89,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_STUDENT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ADDRESS_DESC_AMY + NAME_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ADDRESS_DESC_AMY + NAME_DESC_AMY
+                + GROUP_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_AMY).build();
+                .withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_AMY).withGroup(VALID_GROUP_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -124,6 +129,18 @@ public class EditCommandParserTest {
         // address
         userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // grade level
+        userInput = targetIndex.getOneBased() + GRADE_LEVEL_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withGradeLevel(VALID_GRADE_LEVEL_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // group
+        userInput = targetIndex.getOneBased() + GROUP_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withGroup(VALID_GROUP_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

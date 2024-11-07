@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * Represents a Student's lesson time in the student directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Lesson time should be in 24 hour format (e.g. 16:00)";
@@ -20,7 +20,7 @@ public class Time {
      */
     public static final String VALIDATION_REGEX = "^(?:[01]\\d|2[0-3]):[0-5]\\d$";
 
-    private final LocalTime time;
+    public final LocalTime value;
 
     /**
      * Constructs a {@code Time}.
@@ -30,7 +30,7 @@ public class Time {
     public Time(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
+        this.value = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     /**
@@ -40,13 +40,9 @@ public class Time {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-
     @Override
     public String toString() {
-        return time.toString();
+        return value.toString();
     }
 
     @Override
@@ -61,12 +57,30 @@ public class Time {
         }
 
         Time otherTime = (Time) other;
-        return time.equals(otherTime.time);
+        return value.equals(otherTime.value);
     }
 
     @Override
     public int hashCode() {
-        return time.hashCode();
+        return value.hashCode();
     }
 
+    @Override
+    public int compareTo(Time other) {
+        return value.compareTo(other.value);
+    }
+
+    /**
+     * Returns if the other {@code Time} object is after this time.
+     */
+    public boolean isAfter(Time other) {
+        return value.isAfter(other.value);
+    }
+
+    /**
+     * Returns if the other {@code Time} object is before this time.
+     */
+    public boolean isBefore(Time other) {
+        return value.isBefore(other.value);
+    }
 }

@@ -3,7 +3,7 @@
   title: ""
 ---
 
-# Key Contacts
+![Logo](images/KeyContacts_Logo_WithText.png)
 [![CI Status](https://github.com/AY2425S1-CS2103T-T08-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T08-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T08-2/tp/graph/badge.svg?token=BDD7P3MXJN)](https://codecov.io/gh/AY2425S1-CS2103T-T08-2/tp)
 

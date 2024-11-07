@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <Label prefHeight="20.0" fx:id="calendarHeader" styleClass="label-calendar-header" text="20 October 2024 - 26 October 2024" />
+    <HBox prefHeight="10.0">
+
+        <VBox minWidth="30.0" prefWidth="30.0" HBox.hgrow="NEVER" />
+      <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="20.0">
+               <children>
+                  <Label styleClass="label-day" text="MON" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="30.0" GridPane.columnIndex="1">
+               <children>
+                  <Label styleClass="label-day" text="TUE" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="30.0" GridPane.columnIndex="2">
+               <children>
+                  <Label styleClass="label-day" text="WED" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="30.0" GridPane.columnIndex="3">
+               <children>
+                  <Label styleClass="label-day" text="THU" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="30.0" GridPane.columnIndex="4">
+               <children>
+                  <Label styleClass="label-day" text="FRI" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="30.0" GridPane.columnIndex="5">
+               <children>
+                  <Label styleClass="label-day" text="SAT" />
+               </children>
+            </VBox>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="30.0" GridPane.columnIndex="6">
+               <children>
+                  <Label styleClass="label-day" text="SUN" />
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+      <VBox.margin>
+         <Insets top="10.0" />
+      </VBox.margin>
+
+    </HBox>
+   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <children>
+            <VBox minWidth="30.0" prefWidth="30.0" HBox.hgrow="NEVER">
+            <children>
+                  <VBox prefWidth="30.0" styleClass="day-container" VBox.vgrow="ALWAYS">
+                  <children>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="00:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="02:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="04:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="06:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="08:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="10:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="12:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="14:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="16:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="18:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="20:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                       <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                           <Label styleClass="label-hour" text="22:00" VBox.vgrow="ALWAYS" />
+
+                       </VBox>
+                  </children>
+
+                  </VBox>
+            </children></VBox>
+          <StackPane styleClass="calendar" HBox.hgrow="ALWAYS">
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                    <VBox HBox.hgrow="ALWAYS">
+
+                        <Pane styleClass="horizontal-space-first" VBox.vgrow="ALWAYS" />
+                        <Pane layoutX="10.0" layoutY="10.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                        <Pane layoutX="10.0" layoutY="210.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                        <Pane layoutX="10.0" layoutY="277.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                        <Pane layoutX="10.0" layoutY="310.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                        <Pane layoutX="10.0" layoutY="330.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                        <Pane layoutX="10.0" layoutY="343.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                     <Pane layoutX="10.0" layoutY="182.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                     <Pane layoutX="10.0" layoutY="209.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                     <Pane layoutX="10.0" layoutY="209.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                     <Pane layoutX="10.0" layoutY="209.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                     <Pane layoutX="10.0" layoutY="209.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
+                    </VBox>
+               </children>
+            </HBox>
+              <HBox layoutX="10.0" layoutY="10.0">
+               <GridPane fx:id="grid" HBox.hgrow="ALWAYS">
+                 <columnConstraints>
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                 </columnConstraints>
+                 <rowConstraints>
+                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                 </rowConstraints>
+                  <children>
+                     <VBox fx:id="mon" prefHeight="200.0" prefWidth="100.0" />
+                     <VBox fx:id="tue" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                     <VBox fx:id="wed" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" />
+                     <VBox fx:id="thu" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" />
+                     <VBox fx:id="fri" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" />
+                     <VBox fx:id="sat" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" />
+                     <VBox fx:id="sun" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="6" />
+                  </children>
+               </GridPane>
+              </HBox>
+              <HBox>
+                  <Pane styleClass="vertical-space" HBox.hgrow="ALWAYS" />
+                  <Pane layoutX="10.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS" />
+                  <Pane layoutX="210.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS" />
+                  <Pane layoutX="410.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS" />
+                  <Pane layoutX="460.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS" />
+                  <Pane layoutX="490.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS" />
+                  <Pane layoutX="510.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS" />
+
+                             </HBox>
+
+          </StackPane>
+      </children>
+   </HBox>
+</VBox>

@@ -19,7 +19,14 @@ import keycontacts.logic.commands.ExitCommand;
 import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
+import keycontacts.logic.commands.MakeupLessonCommand;
+import keycontacts.logic.commands.RedoCommand;
 import keycontacts.logic.commands.ScheduleCommand;
+import keycontacts.logic.commands.SortCommand;
+import keycontacts.logic.commands.UnassignPiecesCommand;
+import keycontacts.logic.commands.UncancelLessonCommand;
+import keycontacts.logic.commands.UndoCommand;
+import keycontacts.logic.commands.ViewCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 
 /**
@@ -61,11 +68,18 @@ public class KeyContactsParser {
         case ClearCommand.COMMAND_WORD -> new ClearCommand();
         case FindCommand.COMMAND_WORD -> new FindCommandParser().parse(arguments);
         case ListCommand.COMMAND_WORD -> new ListCommand();
+        case SortCommand.COMMAND_WORD -> new SortCommandParser().parse(arguments);
         case ExitCommand.COMMAND_WORD -> new ExitCommand();
         case HelpCommand.COMMAND_WORD -> new HelpCommand();
+        case MakeupLessonCommand.COMMAND_WORD -> new MakeupCommandParser().parse(arguments);
         case ScheduleCommand.COMMAND_WORD -> new ScheduleCommandParser().parse(arguments);
         case AssignPiecesCommand.COMMAND_WORD -> new AssignPiecesCommandParser().parse(arguments);
+        case UnassignPiecesCommand.COMMAND_WORD -> new UnassignPiecesCommandParser().parse(arguments);
         case CancelLessonCommand.COMMAND_WORD -> new CancelLessonCommandParser().parse(arguments);
+        case UncancelLessonCommand.COMMAND_WORD -> new UncancelLessonCommandParser().parse(arguments);
+        case ViewCommand.COMMAND_WORD -> new ViewCommandParser().parse(arguments);
+        case UndoCommand.COMMAND_WORD -> new UndoCommand();
+        case RedoCommand.COMMAND_WORD -> new RedoCommand();
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

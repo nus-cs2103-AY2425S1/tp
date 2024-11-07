@@ -6,6 +6,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.ToStringBuilder;
@@ -16,7 +17,7 @@ import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
 
 /**
- * Adds a student to the student directory.
+ * Assigns one or more piano pieces to a student
  */
 public class AssignPiecesCommand extends Command {
 
@@ -33,13 +34,13 @@ public class AssignPiecesCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Piano piece(s): %1$s\nAdded to student: %2$s";
     public static final String MESSAGE_DUPLICATE_PIANO_PIECE = "The student already"
-            + " has one or more of the piano pieces";
+            + " has the following piano piece(s): %1$s";
     private final Index index;
     private final Set<PianoPiece> pianoPieces;
 
     /**
      * @param index of the student in the filtered student list to edit
-     * @param pianoPieces the name of the piece to be added
+     * @param pianoPieces the names of the pieces to be added
      */
     public AssignPiecesCommand(Index index, Set<PianoPiece> pianoPieces) {
         requireAllNonNull(index, pianoPieces);
@@ -52,7 +53,7 @@ public class AssignPiecesCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Student> lastShownList = model.getStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -60,19 +61,21 @@ public class AssignPiecesCommand extends Command {
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
 
-        boolean hasDuplicate = pianoPieces.stream()
-                .anyMatch(studentToUpdate.getPianoPieces()::contains);
-        if (hasDuplicate) {
-            throw new CommandException(MESSAGE_DUPLICATE_PIANO_PIECE);
+        Set<PianoPiece> duplicatePieces = pianoPieces.stream()
+                .filter(studentToUpdate.getPianoPieces()::contains).collect(Collectors.toSet());
+        if (!duplicatePieces.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PIANO_PIECE, Messages.format(duplicatePieces)));
         }
 
         Student updatedStudent = studentToUpdate.withAddedPianoPieces(pianoPieces);
 
         model.setStudent(studentToUpdate, updatedStudent);
 
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 Messages.format(pianoPieces), Messages.format(updatedStudent)));
     }
+
 
     @Override
     public boolean equals(Object other) {

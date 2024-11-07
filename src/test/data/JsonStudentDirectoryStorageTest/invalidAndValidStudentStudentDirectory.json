@@ -3,11 +3,21 @@
     "name": "Valid Student",
     "phone": "9482424",
     "address": "4th street",
-    "gradeLevel": "ABRSM 1"
+    "gradeLevel": "ABRSM 1",
+    "group": "",
+    "pianoPieces": [],
+    "regularLesson": null,
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
     "address": "4th street",
-    "gradeLevel": "ABRSM 3"
+    "gradeLevel": "ABRSM 3",
+    "group": "",
+    "pianoPieces": [],
+    "regularLesson": null,
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   } ]
 }

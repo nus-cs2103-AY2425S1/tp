@@ -3,6 +3,11 @@
     "name": "Student with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "address": "4th street",
-    "gradeLevel": "ABRSM 1"
+    "gradeLevel": "ABRSM 1",
+    "group": "",
+    "pianoPieces": [],
+    "regularLesson": null,
+    "cancelledLessons": [ ],
+    "makeupLessons": [ ]
   } ]
 }
