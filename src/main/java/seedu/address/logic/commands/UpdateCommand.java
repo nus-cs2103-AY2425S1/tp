@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.EqualUtil.nullSafeEquals;
 import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_EVENT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATES;
-import static seedu.address.commons.util.EqualUtil.nullSafeEquals;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
@@ -56,7 +56,6 @@ public class UpdateCommand extends Command {
 
     public static final String MESSAGE_INDEX_OUT_OF_BOUNDS = "The event index provided is invalid";
 
-
     private final String newName;
     private final LocalDate newStartDate;
     private final LocalDate newEndDate;
@@ -104,6 +103,8 @@ public class UpdateCommand extends Command {
             checkValidDates(oldEvent.getStartDate(), newEndDate);
         } else if (newStartDate != null && newEndDate == null) {
             checkValidDates(newStartDate, oldEvent.getEndDate());
+        } else if (newStartDate != null && newEndDate != null) {
+            checkValidDates(newStartDate, newEndDate);
         }
 
         // Add and remove attendees
