@@ -326,9 +326,6 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
   - Steps 1a1-1a2 are repeated until the data entered are correct.
   - Use case resumes from step 2.
 
-**Command Example**:  
-`add n/John Doe j/Software Engineer p/98765432 e/johnd@example.com a/123 Main St`
-
 
 ---
 
@@ -352,10 +349,6 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 
     Use case ends.
 
-**Command Example**:  
-`delete 1`
-
-
 
 ---
 
@@ -374,9 +367,6 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
   - 2a1. HiredFiredPro displays a message indicating no candidates are currently listed.
 Use case ends.
 
-
-**Command Example**:  
-`list`
 
 ---
 
@@ -400,8 +390,6 @@ Use case ends.
     
     Use case ends.
 
-**Command Example**:  
-`view n/John Doe j/Software Engineer`
 
 ---
 
@@ -426,11 +414,6 @@ Use case ends.
     
     Use case ends.
 
-    
-
-**Command Example**:  
-`hire n/John Doe j/Software Engineer`  
-`reject n/Jane Smith j/Data Analyst`
 
 ---
 
@@ -442,11 +425,6 @@ Use case ends.
 2. HiredFiredPro sorts the list of candidates in the specified order.
 
    Use case ends.
-
-**Command Example**:  
-`sort a`  
-`sort d`
-
 
 
 ### Non-Functional Requirements
@@ -590,5 +568,5 @@ testers are expected to do more *exploratory* testing.
 
        1. Test case: `view n/Adib j/Developer`<br>
           Expected: No candidate displayed on display panel. Error details shown in the result panel.
-
+    
 1. _{ more test cases …​ }_
