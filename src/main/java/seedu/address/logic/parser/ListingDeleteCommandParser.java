@@ -9,7 +9,7 @@ import seedu.address.logic.commands.ListingDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new RemarkCommand object.
+ * Parses input arguments and creates a new ListingDeleteCommand object.
  */
 public class ListingDeleteCommandParser implements Parser<ListingDeleteCommand> {
 
