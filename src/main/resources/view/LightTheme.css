@@ -153,6 +153,14 @@
     -fx-pref-height: 30px;
 }
 
+
+.search-bar {
+    -fx-background-color: derive(#ffffff, 80%);
+    -fx-border-color: derive(#000000, 30%);
+    -fx-border-top-width: 2px;
+    -fx-text-fill: black;
+}
+
 .status-bar {
     -fx-background-color: #f0f0f0;
 }
