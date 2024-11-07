@@ -696,7 +696,7 @@ testers are expected to do more *exploratory* testing.
     1. Type `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew` <br>
        Expected: A new vendor, "Hong Lim Trading Pte. Ltd.," appears in the vendor list with the provided details.
 
-1.  Create an Event:
+2.  Create an Event:
     1. Type `create e/ n/Jubilee Concert on/2025-01-24 t/annual` <br>
        Expected: A new event, "Jubilee Concert," appears in the event list with the provided date and tag.
 
@@ -707,7 +707,7 @@ testers are expected to do more *exploratory* testing.
     1. Type `edit v/1 p/58623042` <br>
        Expected: The phone number of the first vendor in the list updates to `58623042`.
 
-1.  Edit Event Name and Tags:
+2.  Edit Event Name and Tags:
 
     1.  Type `edit e/2 n/Baby Shower t/` <br>
         Expected: The event name changes to "Baby Shower," and any existing tags are removed.
@@ -719,7 +719,7 @@ testers are expected to do more *exploratory* testing.
     1.  Type `delete v/1` <br>
         Expected: The first vendor in the list is removed from EventTory.
 
-1.  Delete an Event:
+2.  Delete an Event:
 
     1. Type `delete e/2` <br>
        Expected: The second event in the list is removed from EventTory.
@@ -731,12 +731,12 @@ testers are expected to do more *exploratory* testing.
     1. Type `list v/` <br>
        Expected: Only the list of vendors is displayed.
 
-1.  List Events Only:
+2.  List Events Only:
 
     1. Type `list e/` <br>
        Expected: Only the list of events is displayed.
 
-1.  List All Vendors and Events:
+3.  List All Vendors and Events:
 
     1. Type `list` <br>
        Expected: Both vendors and events lists are displayed together.
@@ -748,7 +748,7 @@ testers are expected to do more *exploratory* testing.
     1. Type `view v/1` <br>
        Expected: Details of the first vendor, including assigned events, are displayed.
 
-1.  View Event Details:
+2.  View Event Details:
 
     1. Type `view e/1` <br>
        Expected: Details of the first event, including assigned vendors, are displayed.
@@ -775,7 +775,7 @@ testers are expected to do more *exploratory* testing.
     1. Type `find v/ catering` <br>
        Expected: Vendors with names, descriptions, or tags matching "catering" are displayed.
 
-1.  Search for an Event by Keyword:
+2.  Search for an Event by Keyword:
 
     1. Type `find e/ wedding` <br>
        Expected: Events with names or tags matching "wedding" are displayed.
