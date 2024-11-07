@@ -219,7 +219,7 @@ Examples:
   ![result for 'delete 1 after finding alex'](images/deleteAlexYeohResult.png)
 
 #### Delete by name
-Format `delete NAME` or `delete [n/NAME]`
+Format `delete NAME` or `delete n/NAME`
 
 * Delete the contact whose name matches the specified `NAME`.
 * The `NAME` has to be an exact match.
