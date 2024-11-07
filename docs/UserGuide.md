@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ClinicConnectSystem Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClinicConnectSystem is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -25,13 +25,13 @@ ClinicConnectSystem Level 3 (AB3) is a **desktop app for managing contacts, opti
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `home` : Lists all patients.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the ClinicConnect system.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete T0123456A` : Deletes the patient with the NRIC "T0123456A" shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all patients.
 
    * `exit` : Exits the app.
 
@@ -39,7 +39,26 @@ ClinicConnectSystem Level 3 (AB3) is a **desktop app for managing contacts, opti
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## ClinicConnect System Features
+
+These features are designed to help you manage patient info seamlessly. Appointment info, patient details are centralized this platform.
+
+### Legend
+These boxes might offer some additional information of different types:
+
+<box type="info" seamless>
+
+**Important:**
+Highlights important information that you should know.
+
+</box>
+
+<box type="tip" seamless>
+
+**Tip:**
+Provides you with tips to use our system more effectively.
+
+</box>
 
 <div markdown="block" class="alert alert-info">
 
@@ -57,8 +76,8 @@ ClinicConnectSystem Level 3 (AB3) is a **desktop app for managing contacts, opti
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `home`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -69,14 +88,20 @@ Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+Format: `help [COMMAND_NAME]`
+* Displays a small window showing more information
+* Command name is optional as typing help alone will display the commands and their usages
+* Typing command name will display the usages, parameter information and examples 
 
+Examples: 
+* `help`
+* `help addf`
 
 ### Adding a patient: `add`
 
 Adds a new patient record into the system.
 
-Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NO`
+Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NUMBER`
 
 
 <div markdown="block" class="alert alert-info">
@@ -89,10 +114,9 @@ ClinicConnect does not allow two patients with the same NRIC to exist in the sys
 Use this command to quickly add a patient with only the required information.
 </div>
 
-
 Example: `add n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666`
 <br>
-Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone.
+Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone No.
 
 For more information on each individual parameter click here
 
@@ -102,7 +126,6 @@ Adds a new patient record into the system with additional information.
 
 Format: `add n/NAME i/NRIC s/SEX d/DATE_OF_BIRTH p/PHONE_NO [e/EMAIL] [a/ADDRESS] [b/BLOOD_TYPE] 
 [nokn/NEXT_OF_KIN_NAME] [nokp/NEXT_OF_KIN_PHONE] [al/ALLERGY]…​ [rl/RISK_LEVEL] [ec/EXISTING_CONDITIONS] [no/NOTES]`
-
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -196,6 +219,12 @@ Edits the phone and address of the patient with NRIC S9758366N.
 </ol>
 For more information on each individual parameter click here
 
+### Listing all patients : `home`
+
+Shows a list of all patients in the ClinicConnect System.
+
+Format: `home`
+
 ### Booking an appointment: `bookappt`
 
 Book an appointment for an existing patient in the system for a health service provided by the clinic.
@@ -227,6 +256,70 @@ Shows a list of all patients in the address book.
 
 Format: `list`
 
+
+### Delete Appointment : `deleteappt`
+
+Identifies the specific patient using NRIC and deletes the appointment specified.
+
+Format: `deleteappt NRIC dt/APPOINTMENT DATE-TIME`
+
+<box type="info" seamless>
+
+**Important:** </br>
+
+* NRIC provided must be a valid NRIC currently in the system.
+* All parameters are compulsory.
+
+</box>
+
+Examples:
+* `deleteappt T01234567A dt/2024-11-05 16:00`
+
+### Filter appointments : `filter`
+
+Filters existing patient records based on the specified parameters.
+
+Format: `filter [sd/START DATE] ed/END DATE [h/HEALTH SERVICE]`
+
+Start date and health service parameters are optional. 
+End date parameter is compulsory.
+
+When all parameters are specified, it returns all appointments from start-date to end-date which matches the specified health service.
+When start date and end date are specified, it returns all appointments from start date to end date.
+When end date and health service is specified, it returns all appointments from today's date to end date which matches the specified health service.
+When end date is specified, it returns all appointments from today's date to end-date.
+
+<box type="tip" seamless>
+
+**Tip:** <br>
+
+To retrieve appointments on a single date e.g. 2024/10/20, the user can input the same start and end date
+`filter sd/2024-10-20 ed/2024-10-10`
+
+</box>
+
+Examples:
+*  `filter sd/2012-10-01 ed/2012-11-01 h/blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012. 
+*  `filter ed/2024-12-12 h/vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
+*  `filter sd/2012-10-01 ed/2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
+
+### View patients full profile: `view`
+
+Identifies the specific patient using NRIC and shows the full profile of the patient.
+
+Format: `view NRIC`
+
+<box type="info" seamless>
+
+**Important:** </br>
+
+* NRIC provided must be a valid NRIC currently in the system.
+
+</box>
+
+Examples:
+* `view T0123456A`
+
 ### Locating patients by name: `find`
 
 Finds patients whose names contain any of the given keywords.
@@ -247,27 +340,23 @@ Examples:
 
 ### Deleting a patient : `delete`
 
-Deletes the specified patient from the address book.
+Deletes the patient with the specified NRIC from the address book.
 
-Format: `delete INDEX`
+Format: `delete NRIC`
 
-* Deletes the patient at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+* Deletes the patient at the specified `NRIC`.
+* The NRIC refers to the nric of the patient shown in the displayed patient list.
+* The NRIC **must be a valid NRIC number present in the system** 
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all patient entries and data in the current system.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the system and closes the window.
 
 Format: `exit`
 
@@ -310,8 +399,8 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete S0123456Z`<br> e.g., `delete S0123456Z`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**Home** | `home`
 **Help** | `help`

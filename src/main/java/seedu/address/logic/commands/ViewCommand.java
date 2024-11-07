@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Nric;
@@ -16,7 +18,6 @@ import seedu.address.model.patient.Patient;
  */
 public class ViewCommand extends Command {
 
-    public static final String MESSAGE_ARGUMENTS = "View: %2$s, Nric: %1$s";
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_VIEW_SUCCESS = "Here are the patient details\n"
             + "Input \"home\" to return to home page";
@@ -52,8 +53,7 @@ public class ViewCommand extends Command {
         Patient patient = optionalPatient.get();
         assert patient != null : "Patient should not be null after being found";
 
-        return new CommandResult(generateSuccessMessage(patient), null, false, patient,
-                true, false);
+        return new ShowPatientInfoCommandResult(generateSuccessMessage(patient), patient, true);
     }
 
     @Override

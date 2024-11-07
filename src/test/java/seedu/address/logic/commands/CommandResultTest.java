@@ -4,30 +4,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.HashSet;
-import java.util.Set;
+import static seedu.address.testutil.TypicalPatients.ALICE;
+import static seedu.address.testutil.TypicalPatients.KEANU;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.healthservice.HealthService;
-import seedu.address.model.patient.Birthdate;
-import seedu.address.model.patient.Name;
-import seedu.address.model.patient.Nric;
-import seedu.address.model.patient.Patient;
-import seedu.address.model.patient.Phone;
-import seedu.address.model.patient.Sex;
-import seedu.address.testutil.PatientBuilder;
+import seedu.address.logic.commands.commandresult.CommandResult;
+import seedu.address.logic.commands.commandresult.DefaultCommandResult;
+import seedu.address.logic.commands.commandresult.ExitCommandResult;
+import seedu.address.logic.commands.commandresult.KeywordCommandResult;
+import seedu.address.logic.commands.commandresult.ShowPatientInfoCommandResult;
 
 public class CommandResultTest {
     @Test
-    public void equals() {
-        CommandResult commandResult = new CommandResult("feedback");
+    public void equals_defaultCommandResultTest() {
+        CommandResult commandResult = new DefaultCommandResult("feedback");
 
         // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", null,
-                false, null, false, false)));
+        assertTrue(commandResult.equals(new DefaultCommandResult("feedback")));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -39,88 +33,171 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(0.5f));
 
         // different feedbackToUser value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("different")));
+        assertFalse(commandResult.equals(new DefaultCommandResult("different")));
+    }
 
-        // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", null,
-                true, null, false, false)));
+    @Test
+    public void equals_keywordCommandResultTest() {
+        CommandResult commandResult = new KeywordCommandResult("feedback", "add");
 
-        // different showPatientInfo value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", null,
-                false, null, true, false)));
+        // same values -> returns true
+        assertTrue(commandResult.equals(new KeywordCommandResult("feedback", "add")));
 
-        // different patient value -> returns false
-        Set<HealthService> healthServices = new HashSet<>();
-        healthServices.add(new HealthService("Blood Test"));
-        Patient newPatient = new Patient(new Name("Alice"), new Nric("S1111111A"),
-                new Birthdate("2022-11-11"), new Sex("F"),
-                new Phone("1111111"));
-        assertFalse(commandResult.equals(new CommandResult("feedback", null,
-                false, newPatient, false, false)));
+        // same object -> returns true
+        assertTrue(commandResult.equals(commandResult));
 
-        // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", null,
-                false, null, false, true)));
+        // null -> returns false
+        assertFalse(commandResult.equals(null));
+
+        // different types -> returns false
+        assertFalse(commandResult.equals(0.5f));
+
+        // different feedbackToUser value -> returns false
+        assertFalse(commandResult.equals(new KeywordCommandResult("different", "add")));
 
         // different keyword value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", "keyword",
-                false, null, false, false)));
+        assertFalse(commandResult.equals(new KeywordCommandResult("feedback", "delete")));
+    }
+
+    @Test
+    public void equals_showPatientInfoCommandResultTest() {
+        CommandResult commandResult = new ShowPatientInfoCommandResult("feedback", KEANU,
+                true);
+
+        // same values -> returns true
+        assertTrue(commandResult.equals(new ShowPatientInfoCommandResult("feedback",
+                KEANU, true)));
+
+        // same object -> returns true
+        assertTrue(commandResult.equals(commandResult));
+
+        // null -> returns false
+        assertFalse(commandResult.equals(null));
+
+        // different types -> returns false
+        assertFalse(commandResult.equals(0.5f));
+
+        // different feedbackToUser value -> returns false
+        assertFalse(commandResult.equals(new ShowPatientInfoCommandResult("different",
+                KEANU, true)));
+
+        // different patient value -> returns false
+        assertFalse(commandResult.equals(new ShowPatientInfoCommandResult("feedback",
+                ALICE, true)));
+
+        // different showPatientInfo value -> returns false
+        assertFalse(commandResult.equals(new ShowPatientInfoCommandResult("feedback",
+                KEANU, false)));
+    }
+
+    @Test
+    public void equals_exitCommandResultTest() {
+        CommandResult commandResult = new ExitCommandResult("feedback", true);
+
+        // same values -> returns true
+        assertTrue(commandResult.equals(new ExitCommandResult("feedback", true)));
+
+        // same object -> returns true
+        assertTrue(commandResult.equals(commandResult));
+
+        // null -> returns false
+        assertFalse(commandResult.equals(null));
+
+        // different types -> returns false
+        assertFalse(commandResult.equals(0.5f));
+
+        // different feedbackToUser value -> returns false
+        assertFalse(commandResult.equals(new ExitCommandResult("different", true)));
+
+        // different exit value -> returns false
+        assertFalse(commandResult.equals(new ExitCommandResult("feedback", false)));
     }
 
     @Test
     public void hashcode() {
-        CommandResult commandResult = new CommandResult("feedback");
+        CommandResult defaultCommandResult = new DefaultCommandResult("feedback");
+        CommandResult exitCommandResult = new ExitCommandResult("feedback", true);
+        CommandResult keywordCommandResult = new KeywordCommandResult("feedback", "add");
+        CommandResult showPatientInfoCommandResult = new ShowPatientInfoCommandResult("feedback",
+                KEANU, true);
 
         // same values -> returns same hashcode
-        assertEquals(commandResult.hashCode(), new CommandResult("feedback").hashCode());
+        assertEquals(defaultCommandResult.hashCode(), new DefaultCommandResult("feedback").hashCode());
+        assertEquals(exitCommandResult.hashCode(),
+                new ExitCommandResult("feedback", true).hashCode());
+        assertEquals(keywordCommandResult.hashCode(),
+                new KeywordCommandResult("feedback", "add").hashCode());
+        assertEquals(showPatientInfoCommandResult.hashCode(),
+                new ShowPatientInfoCommandResult("feedback", KEANU, true).hashCode());
 
         // different feedbackToUser value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
-
-        // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", null,
-                true, null, false, false).hashCode());
+        assertNotEquals(defaultCommandResult.hashCode(),
+                new DefaultCommandResult("different").hashCode());
+        assertNotEquals(exitCommandResult.hashCode(),
+                new ExitCommandResult("different", true).hashCode());
+        assertNotEquals(keywordCommandResult.hashCode(),
+                new KeywordCommandResult("different", "add").hashCode());
+        assertNotEquals(showPatientInfoCommandResult.hashCode(),
+                new ShowPatientInfoCommandResult("different", KEANU, true).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", null,
-                false, null, false, true).hashCode());
+        assertNotEquals(exitCommandResult.hashCode(),
+                new ExitCommandResult("feedback", false).hashCode());
 
-        // different keyword value -> returns differnt hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", "keyword",
-                false, null, false, false).hashCode());
+        // different keyword value -> returns different hashcode
+        assertNotEquals(keywordCommandResult.hashCode(),
+                new KeywordCommandResult("feedback", "delete").hashCode());
+
+        // different patient value -> returns different hashcode
+        assertNotEquals(showPatientInfoCommandResult.hashCode(),
+                new ShowPatientInfoCommandResult("feedback", ALICE, true).hashCode());
+
+        // different showPatientInfo value -> returns different hashcode
+        assertNotEquals(showPatientInfoCommandResult.hashCode(),
+                new ShowPatientInfoCommandResult("feedback", KEANU, false).hashCode());
     }
 
     @Test
     public void toStringMethod() {
-        CommandResult standardCommandResult = new CommandResult("feedback");
-        String standardToString = CommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + standardCommandResult.getFeedbackToUser()
-                + ", showHelp=" + standardCommandResult.isShowHelp()
-                + ", showPatientInfo=" + standardCommandResult.isShowPatientInfo()
-                + ", keyword=" + standardCommandResult.getKeyword()
-                + ", patient=" + standardCommandResult.getPatient()
-                + ", exit=" + standardCommandResult.isExit() + "}";
-        assertEquals(standardToString, standardCommandResult.toString());
+        CommandResult defaultCommandResult = new DefaultCommandResult("feedback");
+        String defaultCommandResultToString = DefaultCommandResult.class.getCanonicalName()
+                + "{feedbackToUser=" + defaultCommandResult.getFeedbackToUser()
+                + ", showHelp=" + defaultCommandResult.isShowHelp()
+                + ", showPatientInfo=" + defaultCommandResult.isShowPatientInfo()
+                + ", keyword=" + defaultCommandResult.getKeyword()
+                + ", patient=" + defaultCommandResult.getPatient()
+                + ", exit=" + defaultCommandResult.isExit() + "}";
+        assertEquals(defaultCommandResultToString, defaultCommandResult.toString());
 
-        CommandResult helpCommandResult = new CommandResult("feedback", "addf");
-        String helpCommandResultToString = CommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + helpCommandResult.getFeedbackToUser()
-                + ", showHelp=" + helpCommandResult.isShowHelp()
-                + ", showPatientInfo=" + helpCommandResult.isShowPatientInfo()
-                + ", keyword=" + helpCommandResult.getKeyword()
-                + ", patient=" + helpCommandResult.getPatient()
-                + ", exit=" + helpCommandResult.isExit() + "}";
-        assertEquals(helpCommandResultToString, helpCommandResult.toString());
+        CommandResult exitCommandResult = new ExitCommandResult("feedback", true);
+        String exitCommandResultToString = ExitCommandResult.class.getCanonicalName()
+                + "{feedbackToUser=" + exitCommandResult.getFeedbackToUser()
+                + ", showHelp=" + exitCommandResult.isShowHelp()
+                + ", showPatientInfo=" + exitCommandResult.isShowPatientInfo()
+                + ", keyword=" + exitCommandResult.getKeyword()
+                + ", patient=" + exitCommandResult.getPatient()
+                + ", exit=" + exitCommandResult.isExit() + "}";
+        assertEquals(exitCommandResultToString, exitCommandResult.toString());
 
-        Patient standardPatient = new PatientBuilder().build();
-        CommandResult addCommandResult = new CommandResult("feedback", standardPatient);
-        String addCommandResultToString = CommandResult.class.getCanonicalName()
-                + "{feedbackToUser=" + addCommandResult.getFeedbackToUser()
-                + ", showHelp=" + addCommandResult.isShowHelp()
-                + ", showPatientInfo=" + addCommandResult.isShowPatientInfo()
-                + ", keyword=" + addCommandResult.getKeyword()
-                + ", patient=" + addCommandResult.getPatient()
-                + ", exit=" + addCommandResult.isExit() + "}";
-        assertEquals(addCommandResultToString, addCommandResult.toString());
+        CommandResult keywordCommandResult = new KeywordCommandResult("feedback", "add");
+        String keywordCommandResultToString = KeywordCommandResult.class.getCanonicalName()
+                + "{feedbackToUser=" + keywordCommandResult.getFeedbackToUser()
+                + ", showHelp=" + keywordCommandResult.isShowHelp()
+                + ", showPatientInfo=" + keywordCommandResult.isShowPatientInfo()
+                + ", keyword=" + keywordCommandResult.getKeyword()
+                + ", patient=" + keywordCommandResult.getPatient()
+                + ", exit=" + keywordCommandResult.isExit() + "}";
+        assertEquals(keywordCommandResultToString, keywordCommandResult.toString());
+
+        CommandResult showPatientInfoCommandResult =
+                new ShowPatientInfoCommandResult("feedback", KEANU, true);
+        String addCommandResultToString = ShowPatientInfoCommandResult.class.getCanonicalName()
+                + "{feedbackToUser=" + showPatientInfoCommandResult.getFeedbackToUser()
+                + ", showHelp=" + showPatientInfoCommandResult.isShowHelp()
+                + ", showPatientInfo=" + showPatientInfoCommandResult.isShowPatientInfo()
+                + ", keyword=" + showPatientInfoCommandResult.getKeyword()
+                + ", patient=" + showPatientInfoCommandResult.getPatient()
+                + ", exit=" + showPatientInfoCommandResult.isExit() + "}";
+        assertEquals(addCommandResultToString, showPatientInfoCommandResult.toString());
     }
 }

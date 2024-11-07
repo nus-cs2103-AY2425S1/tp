@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
+import static seedu.address.testutil.TypicalPatients.KEANU;
 import static seedu.address.testutil.TypicalPatients.getTypicalClinicConnectSystem;
 
 import org.junit.jupiter.api.Test;
@@ -26,8 +26,8 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
 
     @Test
-    public void execute_validNameUnfilteredList_success() {
-        Patient patientToDelete = model.getFilteredPatientList().get(INDEX_FIRST_PATIENT.getZeroBased());
+    public void execute_validName_success() {
+        Patient patientToDelete = KEANU;
         DeleteCommand deleteCommand = new DeleteCommand(patientToDelete.getNric());
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PATIENT_SUCCESS,
