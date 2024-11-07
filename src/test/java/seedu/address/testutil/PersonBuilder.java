@@ -22,6 +22,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123 Jurong West Ave 6 #08-111";
     public static final String DEFAULT_COMMENT = "She likes fast delivery.";
+    public static final boolean DEFAULT_IS_VIP = false;
 
     private Name name;
     private Phone phone;
@@ -41,7 +42,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         comment = new Comment(DEFAULT_COMMENT);
         tags = new HashSet<>();
-        isVip = false;
+        isVip = DEFAULT_IS_VIP;
     }
 
     /**
@@ -66,7 +67,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and sets it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -98,14 +99,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code isVip} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withVipState(boolean isVip) {
-        this.isVip = isVip;
-        return this;
-    }
-
-    /**
      * Sets the {@code Comment} of the {@code Person} that we are building.
      */
     public PersonBuilder withComment(String comment) {
@@ -113,6 +106,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isVip} state of the {@code Person} that we are building.
+     */
+    public PersonBuilder withVipState(boolean isVip) {
+        this.isVip = isVip;
+        return this;
+    }
+
+    /**
+     * Builds and returns a {@code Person} object with the specified attributes.
+     */
     public Person build() {
         return new Person(name, phone, email, address, comment, tags, isVip);
     }
