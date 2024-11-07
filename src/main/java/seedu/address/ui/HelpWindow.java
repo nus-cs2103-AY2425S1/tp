@@ -22,21 +22,22 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f08-1a.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide for more details: " + USERGUIDE_URL;
     public static final ObservableList<String[]> COMMAND_SUMMARY = FXCollections.observableArrayList(
-            new String[]{"AddLesson", "addLesson TUTOR_INDEX TUTEE_INDEX \\s SUBJECT\ne.g., addLesson 1 2 \\s science"},
-            new String[]{"AddTutee", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
-                    + "[\\s SUBJECT]…\n e.g., addTutee \\n Evan Lee \\p 88889999 \\e evanlee@example.com \\a "
+            new String[]{"Add Lesson", "addLesson TUTOR_INDEX TUTEE_INDEX "
+                    + "\\s SUBJECT\ne.g., addLesson 1 2 \\s science"},
+            new String[]{"Add Tutor", "addTutor \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
+                    + "[\\s SUBJECT]…\n e.g., addTutor \\n Evan Lee \\p 88889999 \\e evanlee@example.com \\a "
                     + "345, Ubi St, 123466 \\h 2 \\s english"},
-            new String[]{"AddTutor", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
-                    + "[\\s SUBJECT]…\n e.g., addTutor \\n James Ho \\p 22224444 \\e jamesho@example.com \\a "
+            new String[]{"Add Tutee", "addTutee \\n NAME \\p PHONE_NUMBER \\e EMAIL \\a ADDRESS [\\h HOURS] "
+                    + "[\\s SUBJECT]…\n e.g., addTutee \\n James Ho \\p 92224444 \\e jamesho@example.com \\a "
                     + "123, Clementi Rd, 123465 \\h 7 \\s math"},
             new String[]{"Clear", "clear"},
             new String[]{"Delete", "delete INDEX\n e.g., delete 3"},
-            new String[]{"DeleteLesson", "deleteLesson TUTOR_INDEX TUTEE_INDEX \\s SUBJECT\n e.g., deleteLesson 1 2 "
+            new String[]{"Delete Lesson", "deleteLesson TUTOR_INDEX TUTEE_INDEX \\s SUBJECT\n e.g., deleteLesson 1 2 "
                     + "\\s science"},
             new String[]{"Edit", "edit INDEX [\\n NAME] [\\p PHONE_NUMBER] [\\e EMAIL] [\\a ADDRESS] [\\h HOURS] "
                     + "[\\s SUBJECT]…\n e.g., edit 2 \\n James Lee \\e jameslee@example.com"},
             new String[]{"Find", "find KEYWORD [MORE_KEYWORDS]…\n e.g., find James Jake"},
-            new String[]{"FindSubject", "findSubject SUBJECT [MORE_SUBJECTS]…\n e.g., findSubject math science"},
+            new String[]{"Find Subject", "findSubject SUBJECT [MORE_SUBJECTS]…\n e.g., findSubject math science"},
             new String[]{"History", "history"},
             new String[]{"Import", "import \\f FILEPATH"},
             new String[]{"List", "list"},
