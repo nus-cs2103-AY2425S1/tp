@@ -30,8 +30,8 @@ public class DeleteTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the tag from a specfic person.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "BusniessMan";
+            + PREFIX_TAG + "TAG\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "BusinessMan";
 
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Tag was removed from Person: %1$s";
     public static final String TAG_DOES_NOT_EXIST = "Unable to delete %1$s "
