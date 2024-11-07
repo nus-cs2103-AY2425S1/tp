@@ -140,4 +140,29 @@ public class AddPropertyToBuyParserTest {
         assertParseFailure(parser, "a ht/HDB bp/1650000 pc/567510 un/03-11 t/near MRT",
                 String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, AddPropertyToBuyCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_tagLengthExceedsLimit_throwsParseException() {
+        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
+                        + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + " t/thisisaverylongtag",
+                Property.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT);
+    }
+
+    @Test
+    public void parse_tagCountExceedsLimit_throwsParseException() {
+        assertParseFailure(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
+                        + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11
+                        + " t/tag1 t/tag2 t/tag3 t/tag4 t/tag5 t/tag6",
+                Property.MESSAGE_PROPERTY_TAG_LIMIT);
+    }
+
+    @Test
+    public void parse_validTags_success() throws ParseException {
+        Property expectedProperty = new Hdb(new PostalCode("567510"), new UnitNumber("03-11"),
+                new Price("1650000"), SampleDataUtil.getTagSet("tag1", "tag2"));
+
+        assertParseSuccess(parser, PREAMBLE_INDEX + HOUSING_TYPE_DESC_HDB + BUYING_PRICE_DESC_1650000
+                        + POSTAL_CODE_DESC_567510 + UNIT_NUMBER_DESC_03_11 + " t/tag1 t/tag2",
+                new AddPropertyToBuyCommand(Index.fromOneBased(1), expectedProperty));
+    }
 }
