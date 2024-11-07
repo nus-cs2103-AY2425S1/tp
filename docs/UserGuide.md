@@ -30,6 +30,7 @@ HiredFiredPro is a **desktop app for managing interviews, optimized for use via 
 * [FAQ](#faq)
 * [Known Issues](#known-issues)
 * [Command Summary](#command-summary)
+<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +60,7 @@ The image below shows the different components of HiredFiredPro.
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -81,13 +82,13 @@ The image below shows the different components of HiredFiredPro.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 </box>
 
 Parameter     | Notes
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**`NAME`**   | should contain only English alphabets
+**`NAME`**   | should contain only English alphabets and should not be blank
 **`JOB`**    | should be alphanumeric
 **`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
 **`EMAIL`** | should be a valid email of the format `local-part@domain`
@@ -126,6 +127,7 @@ Parameter     | Notes
    * `exit` : Exits the HiredFiredPro app.
 
 6. Refer to the [Features](#features) below for details of each command.
+<br><br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -296,8 +298,10 @@ Format: `sort ORDER`
 * `ORDER` can be either `a`(ascending) or `d`(descending).
 
 Examples:
-* `list` followed by `sort a` sorts the entire list of candidates in ascending order based on their interview scores.
-* `find Alice Betsy Charlie` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
+* `find alex bernice david` followed by `sort d` sorts the resulting candidate list of the `find` command in descending order based on their interview scores.
+* `list` followed by `sort a` sorts the entire list of candidates in ascending order based on their interview scores, as shown below:
+
+![sortResult](images/sortResult.png)
 <br><br>
 
 ### Clearing all candidates: `clear`
