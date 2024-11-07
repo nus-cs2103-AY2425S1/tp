@@ -610,6 +610,31 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
+**Use case: UC15 - Command History**
+
+**MSS**
+
+1.  Actor inputs a command into the System.
+2. System processes the command and confirms its success.
+3. Actor presses the "Up" arrow key to retrieve and re-populate the previous command in the input field.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. Command fails.
+
+    - 2a1. System displays an error message indicating the failure reason.
+
+      Use case resumes from step 1.
+  
+- 3a. Multiple previous commands available.
+
+    - 3a1. Actor presses the "Up" arrow key multiple times to cycle through the command history.
+    - 3a2 System displays each previous command in sequence.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -619,7 +644,6 @@ _Similar to UC10 except without extension 2b._
 5.  The system should continue functioning in the event of a missing or corrupted save file.
 6.  The system should encrypt sensitive data to follow data protection laws.
 7.  The interface should be intuitive and easy to use.
-8.  The system should allow the user to easily populate their previous command.
 
 _{More to be added}_
 
