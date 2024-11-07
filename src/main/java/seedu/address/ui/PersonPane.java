@@ -29,6 +29,8 @@ public class PersonPane extends UiPart<VBox> {
     @FXML
     private Label email;
     @FXML
+    private Label tagLabel;
+    @FXML
     private FlowPane tags;
     @FXML
     private Label remark;
@@ -85,6 +87,8 @@ public class PersonPane extends UiPart<VBox> {
     private void renderTags() {
         tags.getChildren().clear();
         if (!person.getTags().isEmpty()) {
+            tagLabel.setVisible(true);
+            tagLabel.setManaged(true);
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> {
@@ -95,6 +99,9 @@ public class PersonPane extends UiPart<VBox> {
 
                         tags.getChildren().add(tagLabel);
                     });
+        } else {
+            tagLabel.setVisible(false);
+            tagLabel.setManaged(false);
         }
     }
 

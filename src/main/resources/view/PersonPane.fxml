@@ -19,7 +19,7 @@
     <Label text="Name:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
     <Label fx:id="name" styleClass="person-pane-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-    <Label text="Tags:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label fx:id="tagLabel" text="Tags:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
     <FlowPane fx:id="tags" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
     <Label text="Phone:" styleClass="person-pane-label" GridPane.columnIndex="0" GridPane.rowIndex="2" />
