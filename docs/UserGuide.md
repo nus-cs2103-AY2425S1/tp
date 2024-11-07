@@ -369,8 +369,8 @@ _Details coming soon ..._
 | **Match**          | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                           |
 | **Unmatch**        | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                       |
 | **View Company**   | `view company INDEX` <br> e.g., `view company 1`                                                                                                                                 |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                       |
+| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                      |
+| **Find Contact**   | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`                                                                                                       |
 | **Help**           | `help`                                                                                                                                                                           |
 | **Exit**           | `exit`                                                                                                                                                                           |
 | **Stats**          | `stats`                                                                                                                                                                          |
