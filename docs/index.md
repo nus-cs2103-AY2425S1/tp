@@ -3,6 +3,14 @@
   title: ""
 ---
 
+<style>
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+</style>
+
 <div style="text-align:center; margin-top: 50px;">
   <h1>Welcome to EventTory!</h1>
   <p><em>All your vendor and event management tool, all in one place 🎉</em></p>
@@ -21,6 +29,18 @@
 <div style="margin-top: 50px;">
   <h2>About EventTory 📋</h2>
   <p><strong>EventTory is a desktop application for managing your vendors and events!</strong> While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).</p>
+</div>
+
+<div style="text-align:center; margin-top: 30px; padding: 20px; background: linear-gradient(270deg, #00c6ff, #0072ff); background-size: 400% 400%; color: white; font-size: 1.5em; animation: gradient 15s ease infinite; border-radius: 16px; font-family: verdana">
+  From CLI users for CLI users 😎
+</div>
+
+<div style="margin-top: 30px;">
+  <h2>Features ✨</h2>
+  <ul>
+    <li>Manage vendors and events efficiently</li>
+    <li>Intuitive CLI for quick operations</li>
+  </ul>
 </div>
 
 <div style="margin-top: 30px;">
