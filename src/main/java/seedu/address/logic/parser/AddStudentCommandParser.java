@@ -54,8 +54,8 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
                         PREFIX_EMERGENCY_CONTACT);
 
         // Ensure all required prefixes are present
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_ATTENDANCE, PREFIX_NEXT_OF_KIN, PREFIX_EMERGENCY_CONTACT)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_GENDER, PREFIX_EMAIL, PREFIX_SUBJECT,
+                PREFIX_CLASSES, PREFIX_NEXT_OF_KIN, PREFIX_EMERGENCY_CONTACT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }

@@ -384,17 +384,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-* 1a. Teacher specifies some filter criteria using valid tags
-  * 1a1. EduConnect displays a list of all contacts that fit that criteria in the address book
-    
-    Use case ends.
-  
-* 1b. Teacher uses invalid tags to filter
-  * 1b1. EduConnect displays an error message, e.g. “Invalid detail to find with! Please use one of the following options: name, gender, contact, classes, subject, email”
-    
-    Use case ends.
-
 **Use case: UC-05 Edit a contact**
 
 **Preconditions**
@@ -411,29 +400,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 2a. Invalid index provided
-  * 2a1. EduConnect displays an error message, e.g. “Invalid index provided, enter an integer between [0, 10)”
+  * 2a1. EduConnect displays an error message.
 
     Use case ends.
 
 * 2b. Invalid/Unsupported parameter tag used
-  * 2b1. EduConnect displays an error message, e.g. “Invalid detail to edit! Please use the following options: name, gender, contact, classes, subject, email”
+  * 2b1. EduConnect displays an error message.
   
     Use case ends.
   
 * 2c. Invalid new argument for a parameter given
-  * 2c1. EduConnect displays an error message, e.g. “New name given is invalid! Please give a name that fits: First name and last name (with optional middle names)”
+  * 2c1. EduConnect displays an error message, e.g. "Names should only contain alphanumeric characters and spaces, and it should not be blank"
     
     Use case ends.
 
 * 2d. Duplicate contact or email provided
-  * 2d1. EduConnect displays an error message, e.g. “The email boydanderson@gmail.com is already in use”
+  * 2d1. EduConnect displays an error message, e.g. “This student already exists in the address book”
   
     Use case ends.
 
 **Use case: UC-06 Clear**
 
 **Preconditions**
-* User may optionally specify the occupation (teacher or student) and tags to filter which contacts are cleared
+* User may optionally specify tags to filter which contacts are cleared
 
 **MSS**
 1. Teacher enters the clear command
@@ -443,28 +432,94 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-* 1a. Teacher specifies an occupation to clear
-  * 1a1. EduConnect clears all contacts of that occupation in the address book
+* 1a. Teacher specifies a tag to clear 
+  * 1a1. EduConnect clears all contacts with that tag value in the address book
+
+    Use case ends.
+
+* 1b. Teacher specifies an invalid tag
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+
+* 1c. Teacher specifies a tag with no matching contacts
+  * 1c1. EduConnect displays an error, e.g. “No possible entries in EduConnect to clear!”
+
+    Use case ends.
+
+**Use case: UC-07 Find**
+
+**MSS**
+1. Teacher enters the find command with some specific criteria
+2. EduConnect displays a list of all persons that fit that criteria in the address book
+
+   Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any criteria
+    * 1b1. EduConnect displays an error message.
+
+      Use case ends.
+
+* 1b. Teacher uses invalid tags to filter
+    * 1b1. EduConnect displays an error message.
+
+      Use case ends.
+
+**Use case: UC-08 Sort**
+
+**MSS**
+1. Teacher enters the sort command with some criteria
+2. EduConnect sorts the list of all persons by that criteria
+3. EduConnect displays the list of all persons in the address book
+
+   Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any criteria
+  * 1a1. EduConnect displays an error message.
+
+    Use case ends.
+* 1b. Teacher specifies invalid criteria
+  * 1b1. EduConnect displays an error message.
   
     Use case ends.
 
-* 1b. Teacher specifies an invalid occupation
-  * 1b1. EduConnect displays an error message, e.g. “Invalid occupation to clear, please specify either teacher or student”
-  
-    Use case ends.
+**Use case: UC-09 Mark Attendance**
 
-* 1c. Teacher specifies a tag to clear 
-  * 1c1. EduConnect clears all contacts with that tag value in the address book
+**MSS**
+1. Teacher enters the mark command
+2. EdUConnect marks all the students attendance, incrementing it by 1
 
     Use case ends.
 
-* 1d. Teacher specifies an invalid tag
-  * 1d1. EduConnect displays an error message, e.g. “Invalid detail to clear with! Please use one of the following options: name, gender, contact, classes, subject, email”
+**Use case: UC-10 Unmark Attendance**
+
+**MSS**
+1. Teacher enters the unmark command with the index(es) of the student(s) to unmark
+2. EduConnect unmarks the specified student(s) attendance, decrementing it by 1
+    
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any indexes
+  * 1a1. EduConnect displays an error message.
+
+    Use case ends.
+* 1b. Teacher specifies an invalid index
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+* 1c. Teacher specifies an index of a Student with 0 days attendance
+  * 1c1. EduConnect displays an error message, e.g. "Only students who have attended at least one day can be unmarked".
 
     Use case ends.
 
-* 1e. Teacher specifies an occupation or tag with no matching contacts
-  * 1e1. EduConnect displays a warning, e.g. “No contacts matching the specified filter, no changes made to address book”
+**Use case: UC-11 Reset attendance**
+
+**MSS**
+1. Teacher enters the resetAttendance command
+2. EduConnect resets the attendance of all students in the address book
 
     Use case ends.
 
