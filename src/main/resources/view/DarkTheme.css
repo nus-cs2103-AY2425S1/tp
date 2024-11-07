@@ -24,6 +24,13 @@
     -fx-opacity: 1;
 }
 
+.panel-title {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #7e7e7e;
+    -fx-opacity: 0.9;
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
