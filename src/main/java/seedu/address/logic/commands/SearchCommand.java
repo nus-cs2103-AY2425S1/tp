@@ -12,8 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.person.EventIdsContainsIdsPredicate;
-import seedu.address.model.person.TempPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TempPredicate;
 
 /**
  * Finds and lists all persons in address book whose specified field contains any of the argument keywords.
