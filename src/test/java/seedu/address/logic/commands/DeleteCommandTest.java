@@ -7,25 +7,34 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY_WEDDING;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.ELLE_WEDDING;
+import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getAdditionalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.WeddingBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -47,7 +56,7 @@ public class DeleteCommandTest {
             }
         }
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -61,7 +70,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null, null);
 
         assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 model.getFilteredPersonList().size()));
@@ -75,7 +84,7 @@ public class DeleteCommandTest {
         model.addWedding(wedding);
         personToDelete.setOwnWedding(wedding);
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_IS_CLIENT);
     }
 
@@ -91,7 +100,7 @@ public class DeleteCommandTest {
             }
         }
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -112,7 +121,7 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex, null, null);
 
         assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 model.getFilteredPersonList().size()));
@@ -130,7 +139,7 @@ public class DeleteCommandTest {
         // unique name
         NameMatchesKeywordPredicate predicate = preparePredicate("Alice");
         Person personToDelete = ALICE;
-        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.format(personToDelete));
@@ -147,7 +156,7 @@ public class DeleteCommandTest {
     public void execute_validKeywordMultipleMatches_success() {
         // keyword matches with multiple persons
         NameMatchesKeywordPredicate predicate = preparePredicate("Carl");
-        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate, null);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DUPLICATE_HANDLING);
 
@@ -160,24 +169,106 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidKeyword_throwsCommandException() {
         NameMatchesKeywordPredicate predicate = preparePredicate("Alex");
-        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate, null);
 
         Model actualModel = model;
         showNoPerson(actualModel);
 
-        assertCommandFailure(deleteCommand, actualModel, String.format(DeleteCommand.MESSAGE_DELETE_EMPTY_LIST_ERROR));
+        assertCommandFailure(deleteCommand, actualModel,
+                String.format(DeleteCommand.MESSAGE_DELETE_EMPTY_PERSON_LIST_ERROR));
+    }
+
+    @Test
+    public void execute_personAssignedToWeddings_removeWeddingJobsSuccess() throws CommandException {
+        // Setup a person with assigned wedding jobs
+        Person personToDelete = model.getFilteredPersonList().get(0);
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
+        amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
+        model.addWedding(amyWeddingCopy);
+        Wedding elleWeddingCopy = new WeddingBuilder(ELLE_WEDDING).build();
+        elleWeddingCopy.setClient(new PersonBuilder(FIONA).build());
+        model.addWedding(elleWeddingCopy);
+
+        personToDelete.addWeddingJob(amyWeddingCopy);
+        personToDelete.addWeddingJob(elleWeddingCopy);
+
+        Set<Index> weddingIndices = Set.of(Index.fromOneBased(1), Index.fromOneBased(2));
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, weddingIndices);
+
+        Person expectedPerson = new PersonBuilder(personToDelete).build();
+        expectedPerson.removeWeddingJob(amyWeddingCopy);
+        expectedPerson.removeWeddingJob(elleWeddingCopy);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(personToDelete, expectedPerson);
+        CommandResult result = deleteCommand.execute(model);
+        assertEquals(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
+                        Messages.format(expectedPerson),
+                        Messages.format(expectedPerson.getWeddingJobs())
+                ),
+                result.getFeedbackToUser());
+        assertEquals(expectedModel, model);
+    }
+
+    @Test
+    public void execute_personNotAssignedToSpecifiedWeddings_throwsCommandException() {
+        // Setup a person some unassigned wedding jobs
+        Person person = model.getFilteredPersonList().get(0);
+        Person personToDelete = new PersonBuilder(person).build();
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
+        amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
+        model.addWedding(amyWeddingCopy);
+        Wedding elleWeddingCopy = new WeddingBuilder(ELLE_WEDDING).build();
+        elleWeddingCopy.setClient(new PersonBuilder(FIONA).build());
+        model.addWedding(elleWeddingCopy);
+
+        personToDelete.addWeddingJob(amyWeddingCopy);
+
+        Set<Index> invalidWeddingIndices = Set.of(Index.fromOneBased(2)); // Non-assigned wedding index
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, invalidWeddingIndices);
+
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
+    }
+
+    @Test
+    public void execute_emptyWeddingList_throwsCommandException() {
+        Set<Index> weddingIndices = Set.of(Index.fromOneBased(1)); // Trying to delete weddings when none exist
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, weddingIndices);
+
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_DELETE_EMPTY_WEDDING_LIST_ERROR);
+    }
+
+    @Test
+    public void execute_invalidWeddingIndex_throwsCommandException() {
+        // Setup a wedding and assign it to a person
+        Person person = model.getFilteredPersonList().get(0);
+        Person personToDelete = new PersonBuilder(person).build();
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
+        amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
+        model.addWedding(amyWeddingCopy);
+
+        personToDelete.addWeddingJob(amyWeddingCopy);
+
+        Set<Index> invalidWeddingIndices = Set.of(Index.fromOneBased(5)); // Out-of-bound wedding index
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, invalidWeddingIndices);
+
+        assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX,
+                model.getFilteredWeddingList().size()));
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON, null);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON, null, null);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON, null);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -193,13 +284,13 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, null);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex, null, null);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
 
         String targetKeyword = VALID_NAME_AMY;
         NameMatchesKeywordPredicate predicate = preparePredicate(targetKeyword);
-        deleteCommand = new DeleteCommand(null, predicate);
+        deleteCommand = new DeleteCommand(null, predicate, null);
         expected = DeleteCommand.class.getCanonicalName() + "{targetKeywords=" + predicate.toString() + "}";
         assertEquals(expected, deleteCommand.toString());
     }
