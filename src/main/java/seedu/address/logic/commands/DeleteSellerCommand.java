@@ -19,12 +19,13 @@ import seedu.address.model.client.Phone;
 public class DeleteSellerCommand extends DeleteClientCommand {
     /** The command word for this specific action. */
     public static final String COMMAND_WORD = "deleteseller";
-    public static final String PARAMETER_PHONE = String.format("%sPHONE", PREFIX_PHONE);
-    public static final String MESSAGE_ARGUMENTS = "phoneNumber: %1$s";
+    /** Command parameter format for phone. */
+    public static final String SELLER_PARAMETERS = String.format("%SELLER_PHONE_NUMBER", PREFIX_PHONE);
+
     public static final String MESSAGE_USAGE = String.format(
-            "%s: Deletes a seller from the address book.\nParameters: %s\n%s",
+            "%s: Deletes a seller from the client book.\nParameters: %s\n%s",
             COMMAND_WORD,
-            DeleteClientCommand.CLIENT_PARAMETERS,
+            DeleteSellerCommand.SELLER_PARAMETERS,
             DeleteClientCommand.CLIENT_RESTRICTIONS
     );
 
