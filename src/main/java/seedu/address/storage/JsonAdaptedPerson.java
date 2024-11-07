@@ -136,4 +136,15 @@ class JsonAdaptedPerson {
                 modelModuleName, modelTags);
     }
 
+    public boolean isValidPerson(Person person) {
+
+        boolean hasValidContactInfo = phone != null && Phone.isValidPhone(phone)
+                || telegramHandle != null && TelegramHandle.isValidTelegramHandle(telegramHandle)
+                || contactType != null && ContactType.isValidContactType(email);
+
+        return name != null && Name.isValidName(name)
+                && hasValidContactInfo
+                && moduleName != null && ModuleName.isValidModName(phone);
+    }
+
 }

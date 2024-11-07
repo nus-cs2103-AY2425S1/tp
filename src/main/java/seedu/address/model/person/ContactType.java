@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Represents a Person's remark in the address book.
  * Guarantees: immutable; is always valid
@@ -61,7 +63,6 @@ public class ContactType {
      */
     public static boolean isValidContactType(String test) {
         return test.matches(VALIDATION_REGEX)
-                && test.equalsIgnoreCase("WORK")
-                || test.equalsIgnoreCase("PERSONAL");
+                && StringUtil.isStringInEnumIgnoreCase(test, ContactTypeEnum.class);
     }
 }

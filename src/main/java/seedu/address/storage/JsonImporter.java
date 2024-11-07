@@ -46,7 +46,7 @@ public class JsonImporter {
         }
 
         try {
-            model.addAllPersons(jsonAddressBook.get().toModelType());
+            model.addAllPersons(jsonAddressBook.get().toModelType(true));
             return model;
         } catch (IllegalValueException ive) {
             throw new ImporterException(ive);
