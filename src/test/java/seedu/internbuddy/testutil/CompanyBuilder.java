@@ -25,6 +25,8 @@ public class CompanyBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STATUS = "INTERESTED";
+    public static final Boolean DEFAULT_IS_FAVOURITE = false;
+    public static final Boolean DEFAULT_IS_SHOWING_DETAILS = false;
 
     private Name name;
     private Phone phone;
@@ -33,6 +35,8 @@ public class CompanyBuilder {
     private Status status;
     private Set<Tag> tags;
     private List<Application> applications;
+    private Boolean isFavourite;
+    private Boolean isShowingDetails;
 
     /**
      * Creates a {@code companyBuilder} with the default details.
@@ -46,6 +50,8 @@ public class CompanyBuilder {
         tags = new HashSet<>();
         status = new Status(DEFAULT_STATUS);
         applications = new ArrayList<>();
+        isFavourite = DEFAULT_IS_FAVOURITE;
+        isShowingDetails = DEFAULT_IS_SHOWING_DETAILS;
     }
 
     /**
@@ -59,6 +65,8 @@ public class CompanyBuilder {
         tags = new HashSet<>(companyToCopy.getTags());
         status = companyToCopy.getStatus();
         applications = companyToCopy.getApplications();
+        isFavourite = companyToCopy.getIsFavourite();
+        isShowingDetails = companyToCopy.getIsShowingDetails();
     }
 
     /**
@@ -134,7 +142,19 @@ public class CompanyBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code IsFavourite} of the {@code company} that we are building.
+     */
     public CompanyBuilder withIsFavourite(Boolean isFavourite) {
+        this.isFavourite = isFavourite;
+        return this;
+    }
+
+    /**
+     * Sets the {@code isShowingDetails} of the {@code company} that we are building.
+     */
+    public CompanyBuilder withIsShowingDetails(Boolean isShowingDetails) {
+        this.isShowingDetails = isShowingDetails;
         return this;
     }
 

@@ -57,6 +57,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         setCompanies(newData.getCompanyList());
     }
 
+    /**
+     * Hides application details for all companies in the address book.
+     */
+    public void hideAppDetailsForAll() {
+        for (Company companyToHide : companies) {
+            Company hiddenCompany = new Company(companyToHide.getName(), companyToHide.getPhone(),
+                    companyToHide.getEmail(), companyToHide.getAddress(), companyToHide.getTags(),
+                    companyToHide.getStatus(), companyToHide.getApplications(), companyToHide.getIsFavourite(),
+                    false);
+            setCompany(companyToHide, hiddenCompany);
+        };
+    }
+
     //// company-level operations
 
     /**
@@ -93,6 +106,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeCompany(Company key) {
         companies.remove(key);
+    }
+
+    /**
+     * Views application details of this {@code companyToView} in the UI.
+     * {@code companyToView} is the company whose application is to be viewed.
+     */
+
+    public void viewAppDetails(Company companyToView) {
+        Company viewedCompany = new Company(companyToView.getName(), companyToView.getPhone(), companyToView.getEmail(),
+                companyToView.getAddress(), companyToView.getTags(), companyToView.getStatus(),
+                companyToView.getApplications(), companyToView.getIsFavourite(), true);
+        setCompany(companyToView, viewedCompany);
     }
 
     //// util methods
