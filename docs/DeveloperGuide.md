@@ -552,10 +552,47 @@ Use case ends.
 
 1. Teacher requests to see a suggested gift.  
 2. System displays a suggested gift.
-3. 
 Use case ends.
 
-## UC 12: Mark all student
+## UC11: Mark Student
+
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher has the list of students. <br>
+
+**MSS:**
+
+1. Teacher selects a student.
+2. Teacher requests to mark the student.
+3. System marks the student.
+   Use case ends.
+
+### **Extension:**
+
+**2a.** **Student no longer exists in the list of the teacher’s students:**
+
+**2a1.** System notifies the teacher that the student is not present in his/her set of students.
+
+## UC12: Unmark Student
+
+**System:** EduLog <br>
+**Actor:** Teacher <br>
+**Precondition:** The teacher has the list of students. <br>
+
+**MSS:**
+
+1. Teacher selects a student.
+2. Teacher requests to unmark the student.
+3. System unmarks the student.
+   Use case ends.
+
+### **Extension:**
+
+**2a.** **Student no longer exists in the list of the teacher’s students:**
+
+**2a1.** System notifies the teacher that the student is not present in his/her set of students.
+
+## UC 13: Mark all student
 **System:** EduLog <br>
 **Actor:** Teacher <br>
 
@@ -564,7 +601,7 @@ Use case ends.
 1. Teacher types `markall` into the command box
 2. The student list is updated. All the students have a green tick beside their name. Use case ends.
 
-## UC 13: Unmark all students
+## UC 14: Unmark all students
 **System:** EduLog <br>
 **Actor:** Teacher <br>
 
