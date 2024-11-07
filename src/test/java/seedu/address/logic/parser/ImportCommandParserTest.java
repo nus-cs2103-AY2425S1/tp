@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ImportCommand;
@@ -22,11 +26,15 @@ public class ImportCommandParserTest {
      * results in a successful parse and creates the expected ImportCommand.
      */
     @Test
-    public void parse_allFieldsSpecified_success() throws ParseException {
-        String userInput = " path/C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
-        ImportCommand expectedCommand = new ImportCommand(
-            "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv");
-        assertEquals(parser.parse(userInput), expectedCommand);
+    public void parse_allFieldsSpecified_success() throws ParseException, IOException {
+        Path tempFile = Files.createTempFile("validImportParse", ".csv");
+        String userInput = " path/" + tempFile.toString();
+        try {
+            ImportCommand expectedCommand = new ImportCommand(tempFile.toString());
+            assertEquals(parser.parse(userInput), expectedCommand);
+        } finally {
+            Files.deleteIfExists(tempFile);
+        }
     }
 
     /**
@@ -34,10 +42,16 @@ public class ImportCommandParserTest {
      * with the appropriate error message.
      */
     @Test
-    public void parse_notAllFieldSpecified_error() throws ParseException {
-        String userInput = " C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testImport.csv";
+    public void parse_notAllFieldSpecified_error() throws ParseException, IOException {
+        Path tempFile = Files.createTempFile("validImportParse", ".csv");
+        String userInput = tempFile.toString();
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, userInput, expectedMessage);
+        try {
+            ImportCommand expectedCommand = new ImportCommand(tempFile.toString());
+            assertParseFailure(parser, userInput, expectedMessage);
+        } finally {
+            Files.deleteIfExists(tempFile);
+        }
     }
 
     /**

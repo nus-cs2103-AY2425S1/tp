@@ -9,11 +9,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.assignment.PredefinedAssignmentsData;
 
+/**
+ * Represents a serializable list of predefined assignments for JSON storage.
+ */
 class JsonSerializablePredefinedAssignmentData {
     private static final String DUPLICATE_PREDEFINED_ASSIGNMENT =
             "Predefined assignments list contains duplicate assignment(s).";
     private final List<JsonAdaptedPredefinedAssignment> assignments = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonSerializablePredefinedAssignmentData} with the specified list of adapted assignments.
+     *
+     * @param assignments List of {@code JsonAdaptedPredefinedAssignment} to initialize with.
+     */
     @JsonCreator
     public JsonSerializablePredefinedAssignmentData(
             @JsonProperty("assignments") List<JsonAdaptedPredefinedAssignment> assignments) {
@@ -28,7 +36,8 @@ class JsonSerializablePredefinedAssignmentData {
     public PredefinedAssignmentsData toModelType() throws IllegalValueException {
         PredefinedAssignmentsData predefinedAssignmentsData = new PredefinedAssignmentsData();
         for (JsonAdaptedPredefinedAssignment jsonAdaptedPredefinedAssignment : assignments) {
-            if (predefinedAssignmentsData.hasAssignment(jsonAdaptedPredefinedAssignment.getName())) {
+            String assignmentName = jsonAdaptedPredefinedAssignment.getName();
+            if (predefinedAssignmentsData.hasAssignment(assignmentName)) {
                 throw new IllegalValueException(DUPLICATE_PREDEFINED_ASSIGNMENT);
             }
             predefinedAssignmentsData.addPredefinedAssignment(jsonAdaptedPredefinedAssignment.toModelType());
