@@ -30,7 +30,6 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ROLE_1 = "#friend";
-    private static final String INVALID_ROLE_2 = "";
     private static final String INVALID_DATE = "31 December 2024";
     private static final String INVALID_VENUE = "";
     private static final String INVALID_CLIENT_INDEX = "-1";
@@ -172,7 +171,6 @@ public class ParserUtilTest {
     @Test
     public void parseRole_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE_1));
-        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE_2));
     }
 
     @Test

@@ -35,8 +35,10 @@ public class AssignCommandParserTest {
     @Test
     public void parse_validInputAssignWeddingOnly_success() throws ParseException {
         String input = "1 " + PREFIX_WEDDING + "2";
+        AssignCommand.PersonWithRoleDescriptor descriptor = new PersonWithRoleDescriptorBuilder().build();
+        descriptor.setRole(null);
         AssignCommand expectedCommand = new AssignCommand(Index.fromOneBased(1), null,
-                new PersonWithRoleDescriptorBuilder().build(),
+                descriptor,
                 Set.of(Index.fromOneBased(2)));
         assertEquals(expectedCommand, parser.parse(input));
     }
@@ -76,14 +78,6 @@ public class AssignCommandParserTest {
         String input = "1 ";
         ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(input));
         assertEquals(MESSAGE_MISSING_FIELDS, thrown.getMessage());
-    }
-
-
-    @Test
-    public void parse_invalidRole_throwsParseException() {
-        String input = "1 " + PREFIX_ROLE + " "; // Invalid role (empty string)
-        ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(input));
-        assertEquals(Role.MESSAGE_CONSTRAINTS, thrown.getMessage());
     }
 
     @Test
