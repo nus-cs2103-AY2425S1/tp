@@ -108,7 +108,7 @@ Cmd + Space
 ```
 
 ##### On Windows:
-Search for command prompt or powershell in the start menu.
+Search for command prompt or Powershell in the start menu.
 
 ##### On Linux:
 ```shell
