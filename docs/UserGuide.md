@@ -215,6 +215,12 @@ Examples:
 - `↑` : Retrieve previous command in the command box.
 - `↓` : Retrieve next command in the command box.
 
+### Change theme : `F3`
+
+Allows users to toggle between light and dark theme with `F3` key
+
+Format: `F3`
+
 ### Exiting the program : `exit`
 
 Exits the program.

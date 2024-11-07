@@ -456,6 +456,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: Command History**
+
+**MSS**
+
+1. User requests to get the previous command in history.
+2. AddressBook retrieves the previous command from the command history and enters it in command bar.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command history is empty.
+
+  * 1a1. AddressBook shows an empty string or a message indicating no previous commands.
+
+  Use case ends.
+
+* 2a. User reaches the earliest command in the history.
+
+  * 2a1. AddressBook stops navigating further back and continues displaying the first command. 
+  
+  Use case ends.
+
+* 2b. User requests to view the next command but is at the latest command.
+
+    * 2b1. AddressBook shows an empty string or a message indicating no further commands. 
+  
+    Use case ends.
+
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
