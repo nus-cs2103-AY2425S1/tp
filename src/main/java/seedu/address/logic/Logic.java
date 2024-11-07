@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -34,10 +35,13 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the list of all persons */
+    public ObservableList<Person> getPersonList();
+
     /** Returns an unmodifiable view of the list of daily meetings across a week */
-    ObservableList<Meeting> getWeeklyMeetingList();
-    /** Returns an unmodifiable view of the list of daily meetings across a week */
-    ObservableList<Meeting> getCurrentMeetingList();
+    ObservableList<ObservableList<Meeting>> getCurrentMeetingList();
+
+    public ObservableValue<String> getDateOfWeek();
     /**
      * Returns the user prefs' address book file path.
      */

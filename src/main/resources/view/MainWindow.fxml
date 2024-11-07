@@ -17,6 +17,7 @@
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
+        <URL value="@CalendarStyle.css" />
       </stylesheets>
 
       <VBox>
@@ -68,9 +69,13 @@
                           AnchorPane.rightAnchor="0"
                           AnchorPane.topAnchor="0"
                         >
-                           <children>
-                              <StackPane fx:id="meetingListPanelPlaceholder" HBox.hgrow="ALWAYS" />
-                           </children>
+                         <padding>
+                             <Insets bottom="10" left="10" right="10" />
+                         </padding>
+                         <StackPane fx:id="meetingListPanelPlaceholder" HBox.hgrow="ALWAYS" />
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
                         </HBox>
                      </children></AnchorPane>
               </items>

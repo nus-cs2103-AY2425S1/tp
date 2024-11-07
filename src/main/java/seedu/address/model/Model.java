@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
@@ -98,9 +99,11 @@ public interface Model {
 
     public ObservableList<Meeting> getWeeklySchedule();
 
-    void changeWeeklySchedule(Predicate<Meeting> predicate);
+    public ObservableList<ObservableList<Meeting>> getDailyScheduleOfWeek();
 
-    ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate);
+    public ObservableValue<String> getWeekOfSchedule();
+
+    void changeWeeklySchedule(Predicate<Meeting> predicate);
 
     /**
      * @param i Index of the meeting to be retrieved
@@ -113,6 +116,11 @@ public interface Model {
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the whole person list
+     */
+    public ObservableList<Person> getPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
