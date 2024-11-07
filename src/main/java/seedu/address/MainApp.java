@@ -16,6 +16,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.CommandTextHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,7 +24,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CommandTextHistoryStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonCommandTextHistoryStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -58,7 +61,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CommandTextHistoryStorage commandTextHistoryStorage = new JsonCommandTextHistoryStorage(
+                userPrefs.getCommandTextHistoryFilePath());
+        storage = new StorageManager(addressBookStorage, commandTextHistoryStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -90,7 +95,22 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<CommandTextHistory> commandTextHistoryOptional;
+        CommandTextHistory initialCommandTextHistory;
+        try {
+            commandTextHistoryOptional = storage.readCommandTextHistory();
+            if (!commandTextHistoryOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getCommandTextHistoryFilePath()
+                        + " populated with a sample AddressBook.");
+            }
+            initialCommandTextHistory = commandTextHistoryOptional.orElseGet(CommandTextHistory::new);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getCommandTextHistoryFilePath() + " could not be loaded."
+                    + " Will be starting with an empty AddressBook.");
+            initialCommandTextHistory = new CommandTextHistory();
+        }
+
+        return new ModelManager(initialData, initialCommandTextHistory, userPrefs);
     }
 
     private void initLogging(Config config) {

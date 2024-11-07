@@ -82,6 +82,18 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setCommandTextHistoryFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCommandTextHistory(null));
+    }
+
+    @Test
+    public void setCommandTextHistoryFilePath_validPath_setsCommandTextHistoryFilePath() {
+        Path path = Paths.get("command/text/history/file/path");
+        modelManager.setCommandTextHistoryFilePath(path);
+        assertEquals(path, modelManager.getCommandTextHistoryFilePath());
+    }
+
+    @Test
     public void hasEmployee_nullEmployee_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasEmployee(null));
     }
@@ -279,11 +291,11 @@ public class ModelManagerTest {
     public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredEmployeeList().remove(0));
     }
+
     @Test
     public void getFilteredProjectList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredProjectList().remove(0));
     }
-
 
     @Test
     public void equals() {
@@ -292,11 +304,12 @@ public class ModelManagerTest {
                 .withProject(ALPHA).withProject(BETA)
                 .build();
         AddressBook differentAddressBook = new AddressBook();
+        CommandTextHistory commandTextHistory = new CommandTextHistory();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, commandTextHistory, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, commandTextHistory, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -309,18 +322,18 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, commandTextHistory, userPrefs)));
 
         // different filteredEmployeeList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredEmployeeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, userPrefs)));
 
         // different filteredProjectList -> returns false
         keywords = ALPHA.getName().fullName.split("\\s+");
         modelManager.updateFilteredProjectList(
                 new ProjectNameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
@@ -329,6 +342,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, commandTextHistory, differentUserPrefs)));
     }
 }
