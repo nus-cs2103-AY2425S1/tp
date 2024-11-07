@@ -276,36 +276,36 @@ There must not be duplicate fields. For example, if there is a contact with the 
 *_By default, all fields must be non-empty when prefix is specified._
 
 ### Name
-- Should contain alphabets and spaces only (with only the following exceptions).
+- Must contain alphabets and spaces only, with the following exceptions:
     - `@`, `S/O`, `D/O` in the middle of the name is allowed. e.g.`Ravi S/O Ramasamy`
     - `(INSERT_NAME)` at the end of the name is allowed. e.g. `Gianna (Gian)`
-- Should not be blank
+- Must not be blank
 
 ### Telegram Handle
-- Should contain alphabets, numbers and underscores only.
-- Should have a length between 5 and 32 characters inclusive.
-- Should not include `@`.
+- Must contain alphabets, numbers and underscores only.
+- Must have a length between 5 and 32 characters inclusive.
+- Must not include `@`.
 
 ### Email
-- Emails should be of the format `LOCAL_PART@DOMAIN`.
+- Emails must be of the format `LOCAL_PART@DOMAIN`.
 - LOCAL_PART 
-  - Should only contain alphabets, numbers, and special characters `+_.-`.
-  - Should not start or end with any special characters.
+  - Must only contain alphabets, numbers, and special characters `+_.-`.
+  - Must not start or end with any special characters.
 - DOMAIN 
-  - Domains should be made up of domain labels separated by periods.
-  - Domains should end with a domain label at least 2 characters long.
-  - Each domain label should only contain alphabets, numbers, and `-`, if any.
-  - Each domain label should not start or end with `-`.
+  - Domains must be made up of domain labels separated by periods.
+  - Domains must end with a domain label at least 2 characters long.
+  - Each domain label must only contain alphabets, numbers, and `-`, if any.
+  - Each domain label must not start or end with `-`.
 
 ### Student Status
-- Should take one of the following values:
+- Must take one of the following values:
   1. `Undergraduate x` (where x is an integer between 1 and 6 inclusive).
   2. `Masters`
   3. `PhD`
 
 ### Role
 - Each contact may take on multiple roles.
-- Each role should take one of the following values:
+- Each role must take one of the following values:
   1. `President`
   2. `Vice President`
   3. `Admin`
@@ -315,7 +315,7 @@ There must not be duplicate fields. For example, if there is a contact with the 
   7. `External Relations`
 
 ### Nickname
-- Optional field.
+- Is an optional field.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
