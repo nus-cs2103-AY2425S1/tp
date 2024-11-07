@@ -198,6 +198,18 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
         requireNonNull(predicate);
+        setAllWeddingNotOwnWedding();
+        filteredWeddings.setPredicate(predicate);
+    }
+
+    @Override
+    public void setAllWeddingNotOwnWedding() {
+        addressBook.setAllWeddingIsOwnFalse();
+    }
+
+    @Override
+    public void updateFilteredWeddingListWithOwnWedding(Predicate<Wedding> predicate) {
+        requireNonNull(predicate);
         filteredWeddings.setPredicate(predicate);
     }
 

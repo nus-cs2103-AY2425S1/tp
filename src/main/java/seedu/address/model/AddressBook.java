@@ -163,6 +163,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         weddings.setWedding(target, editedWedding);
     }
 
+    public void setAllWeddingIsOwnFalse() {
+        weddings.setAllWeddingIsOwnFalse();
+    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
