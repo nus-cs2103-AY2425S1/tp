@@ -267,6 +267,7 @@ _Details coming soon ..._
 3. **If you accidentally press the alt key (Windows, Linux) or option key (MacOS)** on your keyboard while typing a command, the arrow keys will no longer navigate the command box. To rectify this, press the alt/option key again.
 3. **If you add very long names, tags, or other information** (> 80 characters) to contacts, and the application window is not wide enough to display the entire line of text, the text will be truncated with `...` at the end.
 4. **If you want to add tags to an existing contact**, you need to type in all existing tags to retain them.
+5. **Advfilter does not accept mathematical expressions as values**. Mathematical expressions encompass any non-alphanumeric strings that include operators such as `+`, `-`, `/`, and `*`. Hence, commands such as `advfilter t\neighbours >= 10/3` will be considered invalid.
 
 --------------------------------------------------------------------------------------------------------------------
 
