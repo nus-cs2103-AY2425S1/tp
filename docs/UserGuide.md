@@ -212,8 +212,16 @@ Deletes the specified person from the address book.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the **last displayed person list**.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**Tip:** Be careful when using the `delete` command.
+* Even if you are currently viewing a Group List, the delete command will still apply to the last displayed person list. 
+* Ensure you are viewing the correct list before deleting.
+
+</box>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
