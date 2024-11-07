@@ -16,7 +16,7 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * The feature Undo, Redo and History (including the code) was reused with minimal changes from [AddressBook-Level4](https://github.com/se-edu/addressbook-level4.git) ([UG](https://se-education.org/addressbook-level4/UserGuide.html), [DG](https://se-education.org/addressbook-level4/DeveloperGuide.html)).
 * The feature Import was implemented using the third-party library OpenCSV.
-* 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -478,10 +478,10 @@ testers are expected to do more *exploratory* testing.
 2. 
 ### Adding a person
 
-Adding a tutor with no email
+1. Adding a tutor with no email
 
-Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
-Expected: No tutor is added. Error is thrown, saying invalid command format.
+   1. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
+      Expected: No tutor is added. Error is thrown, saying invalid command format.
 
 ### Deleting a person
 
