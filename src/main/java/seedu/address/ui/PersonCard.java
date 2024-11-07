@@ -92,8 +92,15 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(game -> games.getChildren().add(gameTextFlow(game)));
         person.getPreferredTimes().stream()
                 .sorted(Comparator.comparing(preferredTime -> preferredTime.preferredTime))
-                .forEach(preferredTime -> preferredTimes.getChildren().add(new Label("Preferred time: "
-                        + preferredTime.preferredTime)));
+                .forEach(preferredTime -> {
+                    Image clockImage = new Image(String.valueOf(PersonCard.class.getResource("/images/clock.png")));
+                    ImageView imageView = new ImageView(clockImage);
+                    imageView.setFitHeight(20); // Adjust size as needed
+                    imageView.setPreserveRatio(true);
+                    Label preferredTimeLabel = new Label(preferredTime.preferredTime);
+                    preferredTimeLabel.setGraphic(imageView);
+                    preferredTimes.getChildren().add(preferredTimeLabel);
+                });
     }
 
     private static Label gameTextFlow(Game game) {
