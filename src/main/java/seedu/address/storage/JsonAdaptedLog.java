@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -58,7 +59,7 @@ public class JsonAdaptedLog {
         LocalDate parsedDate;
         try {
             parsedDate = LocalDate.parse(appointmentDate, DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
             throw new IllegalValueException("Invalid date format for appointment date!");
         }
 

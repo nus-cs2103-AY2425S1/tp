@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IDENTITY_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOG;
 
+import java.time.format.DateTimeParseException;
+
 import seedu.address.logic.commands.AddLogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.log.AppointmentDate;
@@ -36,9 +38,8 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLogCommand.MESSAGE_USAGE));
         }
 
-        IdentityNumber identityNumber;
-
         // Check if identity number exists
+        IdentityNumber identityNumber;
         try {
             // Parse identity number
             identityNumber = ParserUtil.parseIdentityNumber(
@@ -48,12 +49,21 @@ public class AddLogCommandParser implements Parser<AddLogCommand> {
         }
 
         // Parse date
-        String date = argMultimap.getValue(PREFIX_DATE).get();
-        AppointmentDate appointmentDate = new AppointmentDate(date);
+        AppointmentDate appointmentDate;
+        try {
+            appointmentDate = new AppointmentDate(argMultimap.getValue(PREFIX_DATE).get());
+        } catch (IllegalArgumentException | DateTimeParseException e) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        }
 
         // Parse log
-        String entry = argMultimap.getValue(PREFIX_LOG).get();
-        LogEntry logEntry = new LogEntry(entry);
+        LogEntry logEntry;
+        try {
+            String entry = argMultimap.getValue(PREFIX_LOG).get();
+            logEntry = new LogEntry(entry);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(LogEntry.MESSAGE_CONSTRAINTS);
+        }
 
         // Create log object
         Log log = new Log(appointmentDate, logEntry);
