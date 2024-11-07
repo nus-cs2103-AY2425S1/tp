@@ -47,8 +47,8 @@ public class ContactUtil {
     public static String getEditContactDescriptorDetails(EditCommand.EditContactDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getTelegramHandle().ifPresent(phone -> sb.append(PREFIX_TELEGRAM_HANDLE)
-                .append(phone.value).append(" "));
+        descriptor.getTelegramHandle().ifPresent(handle -> sb.append(PREFIX_TELEGRAM_HANDLE)
+                .append(handle.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getStudentStatus()
                 .ifPresent(studentStatus -> sb.append(PREFIX_STUDENT_STATUS).append(studentStatus.value).append(" "));
