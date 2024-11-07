@@ -47,9 +47,6 @@
           </VBox>
           <!-- Contact details panel -->
           <VBox fx:id="contactDetails" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
             <StackPane fx:id="contactDetailsPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
         </HBox>
