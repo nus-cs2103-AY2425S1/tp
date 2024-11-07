@@ -260,6 +260,7 @@ Command | Description
 [**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact
 [**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa) | Deletes the public address of a contact
 [**Public Address Search**](#searching-for-a-public-address-publicaddresssearch) | Searches for a public address
+[**Filter**](#filtering-persons-by-public-addresses-network-filter) | Filters out a list of people with the public addresses of the specified network
 
 <box type="info" seamless>
 
@@ -561,6 +562,30 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Filtering persons by public addresses network : `filter`
+
+Filters out a list of people with the public addresses of the specified network.
+
+Format: `filter c/NETWORK`
+
+<box type="tip" seamless>
+
+The fields are not cap sensitive.
+</box>
+
+* Filters out a list of people with the public addresses of the `NETWORK` provided.
+
+* The `NETWORK` parameter specifies the public addresses network to be filtered.
+
+Examples:
+
+* `filter c/BTC` filters a list of people with the public addresses of `BTC` and 
+  displays it with their respective list number.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -646,3 +671,4 @@ the data of your previous AddressBook home folder.
 | **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                                 |
 | **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                               |
 | **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                              |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                                          |
