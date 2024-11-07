@@ -155,6 +155,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Event and Person Synchronisation
+
+#### Implementation
+The current `Event` class has a `Person` field that stores the `Person` object associated with the event. This is because the `Event` object should be aware of the `Person` object it is associated with. This ensures that when details of the `Person` object are updated, the `Event` object is aware of the changes and can update itself accordingly. This applies to the contact list in `Event` as well.
+
+Step 1: The user adds a new `Event` through the `add event` command. During execution of the command, the `Person` object associated with the `Event` is retrieved from the `Model` using the `findPerson` command.
+
+The following sequence diagram shows how the `Event` object is created and associated with a `Person` object:
+![AddEvent](images/AddEventSequenceDiagram.png)
+
+The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+![FindPerson](images/FindPersonSequenceDiagram.png)
+
+Step 2: The user updates the details of a `Person` object through the `edit person` command. During execution of the command, is done by updating the `Person` object in the `Model`, the updated `Person` replaces all `Event` associate with the original `Person` using the `replacePerosnInEvents` method.
+
+The following sequence diagram shows how the `Person` object is edited:
+![EditPerson](images/EditPersonSequenceDiagram.png)
+
+The following sequence diagram shows how `findPerson` command is executed and the `Person` object is retrieved:
+![ReplacePerson](images/ReplacePersonInEvents.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -236,13 +257,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
