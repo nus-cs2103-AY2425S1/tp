@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
@@ -144,6 +145,26 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Handles horizontal scrolling of the display text area.
+     */
+    @FXML
+    public void handleArrowKeys(KeyEvent e) {
+        if (e.getCode().equals(KeyCode.LEFT)) {
+            resultDisplay.scrollLeft();
+            e.consume(); // ensures focus doesn't get transferred out
+        } else if (e.getCode().equals(KeyCode.RIGHT)) {
+            resultDisplay.scrollRight();
+            e.consume();
+        } else if (e.getCode().equals(KeyCode.UP)) {
+            resultDisplay.scrollUp();
+            e.consume();
+        } else if (e.getCode().equals(KeyCode.DOWN)) {
+            resultDisplay.scrollDown();
+            e.consume();
         }
     }
 
