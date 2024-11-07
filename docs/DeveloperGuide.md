@@ -291,7 +291,7 @@ Known bugs:
 
 #### Implementation
 
-The Vendor Feature allows users to track which contacts are Vendors and assign tasks to them. Only Vendors can be assigned tasks.
+The `Vendor` Feature allows users to track which `Person` are `Vendors` and assign `Tasks` to them. Only `Vendors` can be assigned `Tasks`.
 Vendor would support the following functions:
 
 * `Assign Vendor` — Assigns an existing `Person` in WedLinker to become a `Vendor`. 
@@ -307,6 +307,21 @@ Step 3. The user executes `unassign-vendor 1` to unassign the `Vendor` to become
 
 ### Task
 
+The `Task` Feature allows users to track `Tasks` when planning for a Wedding. `Tasks` can only be assigned to `Vendors`.
+There are different types of `Task` to support different requirements for the users.
+
+`Task` type: `Todo`
+`Todo` is the simplest kind of `Task` which has a description to provide information about the `Task`.
+
+`Task` type: `Deadline`
+`Deadline` is a type of `Task` which has a description to provide information and supports a due `Date`.
+
+`Task` type: `Event`
+`Event` is a type of `Task` which has a description to provide information and supports a start and end `Date`.
+
+`Task` supports the following functions:
+
+*
 ### Switch Views
 
 #### Design considerations:
