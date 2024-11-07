@@ -84,7 +84,7 @@ The `UI` component,
 
 In addition, the `UI` component includes the `AttendanceWindow` and `AttendanceRow` classes to display the attendance of students within selected tutorial groups.
 
-**AttendanceWindow Class**
+**`AttendanceWindow` Class**
 
 The `AttendanceWindow` Class represents a window displaying the attendance records of students in a specific tutorial group. It contains:
 
@@ -94,7 +94,7 @@ The `AttendanceWindow` Class represents a window displaying the attendance recor
 
 The `AttendanceWindow` class is primarily used to visualize and manage attendance data in an organized table format. The `initializeTable` method sets up the table structure, while the `initializeStudentListListener` monitors the list of students in the tutorial group.
 
-**AttendanceRow Class**
+**`AttendanceRow` Class**
 
 The `AttendanceRow` class represents a single row in the attendance table, displaying a student's name and attendance status for each date. It contains:
 
