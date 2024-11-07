@@ -22,6 +22,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         if (!argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
+        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_CHILD, PREFIX_PARENT);
 
         Name child = argMultiMap.getValue(PREFIX_CHILD).map(Name::new)
                 .orElseThrow(() -> new ParseException(String.format(

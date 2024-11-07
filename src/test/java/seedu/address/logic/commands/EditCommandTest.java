@@ -40,7 +40,8 @@ public class EditCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Student personToEdit = (Student) model.getFilteredPersonList().get(0);
-        Student editedPerson = new StudentBuilder().withGrade(personToEdit.getGrade().toString())
+        Student editedPerson = new StudentBuilder().withLessonTime("tue:12:00")
+                .withGrade(personToEdit.getGrade().toString())
                 .withParentName(personToEdit.getParentName().toString())
                 .build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();

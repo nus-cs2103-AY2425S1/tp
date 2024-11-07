@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,8 +30,11 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListParentsCommand;
 import seedu.address.logic.commands.ListStudentsCommand;
 import seedu.address.logic.commands.PinCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.commands.UnpinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -150,6 +154,20 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListParentsCommand.COMMAND_WORD) instanceof ListParentsCommand);
         assertTrue(parser.parseCommand(
                 ListParentsCommand.COMMAND_WORD + " 3") instanceof ListParentsCommand);
+    }
+
+    @Test
+    public void parseCommand_unlink() throws Exception {
+        Name name = new Name("John Doe");
+        UnlinkCommand command = (UnlinkCommand) parser.parseCommand(
+                UnlinkCommand.COMMAND_WORD + " " + PREFIX_CHILD + "John Doe");
+        assertEquals(new UnlinkCommand(name), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD) instanceof SortCommand);
+        assertTrue(parser.parseCommand(SortCommand.COMMAND_WORD + " 3") instanceof SortCommand);
     }
 
     @Test

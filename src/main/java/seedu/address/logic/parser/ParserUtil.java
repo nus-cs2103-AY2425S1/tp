@@ -13,6 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Education;
@@ -142,6 +143,21 @@ public class ParserUtil {
             throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
         }
         return new Grade(trimmedGrade);
+    }
+
+    /**
+     * Parses an {@code String lessonTime} into a {@code LessonTIme}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonTime} is invalid.
+     */
+    public static LessonTime parseLessonTime(String lessonTime) throws ParseException {
+        requireNonNull(lessonTime);
+        String trimmedLessonTime = lessonTime.trim();
+        if (!LessonTime.isValidLessonTime(trimmedLessonTime)) {
+            throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonTime(trimmedLessonTime);
     }
 
     /**
