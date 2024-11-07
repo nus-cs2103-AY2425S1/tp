@@ -58,26 +58,26 @@ To get started,
 
 ## Summary of commands
 
-| Action                                                          | Format, Examples                                                                                                                                                        |
-|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Add**](#adding-a-person-add)                                 | `add n/NAME e/EMAIL telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho e/jamesho@example.com telegram/@James t/friend t/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                 |
-| [**Delete**](#deleting-a-person-delete)                         | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                              |
-| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [n/NAME] [e/EMAIL] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
-| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                              |
-| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                   |
-| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                  |
-| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                  |
-| [**View**](#viewing-a-contact-s-full-details-view)              | `view [n/NAME]` <br> e.g., `view n/John Doe`                                                                                                                            |
-| [**Github**](#launching-github-repository-github)               | `github n/NAME`  <br> e.g., `github n/Harry`                                                                                                                            |
-| [**Mark**](#marking-a-student-as-present-mark)                  | `mark n/NAME w/WEEK NUMBER` <br> e.g. `mark n/John Doe w/1`                                                                                                             |
-| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark n/NAME w/WEEK NUMBER` <br> e.g. `unmark n/John Doe w/1`                                                                                                         |
-| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                |
-| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                    |
-| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                         |
-| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                           |## Features
-| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE` <br> e.g. `addGrade n/JohnDoe asgn/Ex01 s/5`                                                                             |
-| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade n/NAME asgn/ASSIGNMENT_NAME` <br> e.g. `removeGrade n/John Doe asgn/Ex01`                                                                                  |
+| Action                                                          | Format, Examples                                                                                                                                                                          |
+|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-person-add)                                 | `add name/NAME email/EMAIL telegram/TELEGRAM [tag/TAG]…​ github/GITHUB` <br> e.g., `add name/James Ho email/jamesho@example.com telegram/@James tag/friend tag/colleague github/james-cool` |
+| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                   |
+| [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                          |
+| [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                        |
+| [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
+| [**Filter**](#filtering-persons-by-tag-filter)                  | `filter tag/[TAG] tag/[MORE_TAG]…​`<br> e.g., `filter tag/friends tag/family`                                                                                                             |
+| [**List**](#listing-all-persons-list)                           | `list`                                                                                                                                                                                    |
+| [**Help**](#viewing-help-help)                                  | `help`                                                                                                                                                                                    |
+| [**View**](#viewing-a-contact-s-full-details-view)              | `view [name/NAME]` <br> e.g., `view name/John Doe`                                                                                                                                        |
+| [**Github**](#launching-github-repository-github)               | `github name/NAME`  <br> e.g., `github name/Harry`                                                                                                                                        |
+| [**Mark**](#marking-a-student-as-present-mark)                  | `mark name/NAME week/WEEK NUMBER` <br> e.g. `mark name/John Doe week/1`                                                                                                                   |
+| [**Unmark**](#unmarking-a-student-as-present-unmark)            | `unmark name/NAME week/WEEK NUMBER` <br> e.g. `unmark name/John Doe week/1`                                                                                                               |
+| [**Sort**](#sorting-the-displayed-list-sort)                    | `sort FIELD order/ORDER` <br> e.g. `sort name order/asc`                                                                                                                                  |
+| [**Import**](#importing-data-from-csv-file-import)              | `import path/CSV FILE PATH` <br> e.g `import path/user/data/xxx.csv`                                                                                                                      |
+| [**Export**](#exporting-data-into-csv-file-export)              | `export path/DESIRED FILE DESTINATION` <br> e.g `export path/user/data/xxx.csv`                                                                                                           |
+| [**Command History**](#accessing-command-history-and)           | <kbd>↑</kbd> and <kbd>↓</kbd>                                                                                                                                                             |## Features
+| [**Add grade**](#adding-grades-to-a-contact-addgrade)           | `addGrade name/NAME assignment/ASSIGNMENT_NAME score/SCORE` <br> e.g. `addGrade n/JohnDoe assignment/Ex01 score/5`                                                                        |
+| [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade name/NAME assignment/ASSIGNMENT_NAME` <br> e.g. `removeGrade name/John Doe assignment/Ex01`                                                                                        |
 
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Parameter shortcuts
@@ -128,16 +128,16 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters supplied by you.<br>
-  e.g. `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. `add name/NAME`, `NAME` is a parameter which can be used as `add name/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `name/NAME [tag/TAG]` can be used as `name/John Doe tag/friend` or as `name/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/friend`, `tag/friend tag/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME telegram/TELEGRAM`, `telegram/TELEGRAM n/NAME` is also acceptable.
+  e.g. if the command specifies `name/NAME telegram/TELEGRAM`, `telegram/TELEGRAM name/NAME` is also acceptable.
 
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -170,7 +170,12 @@ Adds a person's contact detail to KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `add n/NAME e/EMAIL telegram/TELEGRAM [t/TAG]…​ github/GITHUB`**</md>
+<md>**Format: `add name/NAME email/EMAIL telegram/TELEGRAM [tag/TAG]…​ github/GITHUB`**</md><br>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `add n/NAME e/EMAIL tele/TELEGRAM [t/TAG]…​ g/GITHUB`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -257,7 +262,12 @@ Edits an existing person detail in KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `edit INDEX [n/NAME] [e/EMAIL] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`**</md>
+<md>**Format: `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `e INDEX [n/NAME] [e/EMAIL] [tele/TELEGRAM] [t/TAG]…​ [g/GITHUB]`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -291,6 +301,13 @@ Find all persons whose names contains any of the given keywords.
 
 <md>**Format: `find KEYWORD [MORE_KEYWORDS]`**</md>
 </box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `f KEYWORD [MORE_KEYWORDS]`**</md>
+</box>
+
+
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -317,7 +334,12 @@ Finds persons whose names contain any of the given tag keywords.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `filter t/TAG [t/MORE_TAG]...`**</md>
+<md>**Format: `filter tag/TAG [tag/MORE_TAG]...`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `f t/TAG [t/MORE_TAG]...`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -346,7 +368,12 @@ Deletes the specified person from the address book.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `delete n/NAME`**</md>
+<md>**Format: `delete name/NAME`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `rm n/NAME`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -372,7 +399,12 @@ Launches GitHub repository of the specified person on the browser from the addre
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `github n/NAME`**</md>
+<md>**Format: `github name/NAME`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `git n/NAME`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -398,7 +430,12 @@ Opens a window at the side with the full details of the specified person from th
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `view [n/NAME]`**</md>
+<md>**Format: `view [name/NAME]`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `v [n/NAME]`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -425,7 +462,12 @@ Marks a student as present for a particular week.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `mark n/NAME w/[WEEK_NUMBER]`**</md>
+<md>**Format: `mark name/NAME week/[WEEK_NUMBER]`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `m n/NAME w/[WEEK_NUMBER]`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -453,6 +495,11 @@ Unmarks a student as present for a particular week.
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Format: `unmark n/NAME w/[WEEK_NUMBER]`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `um n/NAME w/[WEEK_NUMBER]`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -532,6 +579,11 @@ Imports contacts based on CSV file. Importing a file will replace ALL existing c
 <md>**Format: `import path/CSV_FILE_PATH`**</md>
 </box>
 
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `im p/CSV_FILE_PATH`**</md>
+</box>
+
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * File path can be relative or absolute, but must end with .csv
@@ -595,6 +647,11 @@ Exports contacts based on contacts and their details stored in KonTActs.
 <md>**Format: `export path/DESIRED_FILE_DESTINATION`**</md>
 </box>
 
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `ex p/DESIRED_FILE_DESTINATION`**</md>
+</box>
+
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * File path can be relative or absolute but must end with .csv
@@ -644,7 +701,12 @@ Adds an assignment and its grades to a contact.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `addGrade n/NAME asgn/ASSIGNMENT_NAME s/SCORE`**</md>
+<md>**Format: `addGrade name/NAME assignment/ASSIGNMENT_NAME score/SCORE`**</md>
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `ag n/NAME a/ASSIGNMENT_NAME s/SCORE`**</md>
 </box>
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
@@ -697,7 +759,13 @@ Removes an assignment and its grades from a contact.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `removeGrade n/NAME asgn/ASSIGNMENT_NAME`**</md>
+<md>**Format: `removeGrade n/NAME assignment/ASSIGNMENT_NAME`**</md>
+
+</box>
+
+<box type="definition" icon=":fa-solid-spell-check:" light>
+
+<md>**Shortcut: `rg n/NAME a/ASSIGNMENT_NAME`**</md>
 
 </box>
 
@@ -737,7 +805,7 @@ However, it is always good practice to have a local backup :D You can do this wi
 
 ### <i class="fa-solid fa-pen"></i> Editing the data file
 
-KonTActs data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
+KonTActs data are saved automatically as a JSON file `[JAR file location]/data/konTActs.json`.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
