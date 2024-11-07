@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,23 +34,14 @@ public class AssignWeddingCommand extends Command {
             + "by the index number used in the last person listing.\n"
             + "Wedding names are case sensitive.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_WEDDING + "WEDDING... (can specify multiple weddings)\n"
+            + PREFIX_WEDDING + "WEDDING [p1/] [p2/] + ... "
+            + PREFIX_WEDDING + "WEDDING [p1/] [p2/] (can specify multiple weddings)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025.";
+            + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025 p1/.";
 
     private final Index index;
-    private final HashSet<Wedding> weddingsToAdd;
-    private boolean force = false;
-
-    /**
-     * Constructs a {@code AssignWedding} Command to add weddings to a person.
-     * @param index The index of the person in the person list.
-     * @param weddingsToAdd The list of weddings to be added.
-     */
-    public AssignWeddingCommand(Index index, HashSet<Wedding> weddingsToAdd) {
-        this.index = index;
-        this.weddingsToAdd = weddingsToAdd;
-    }
+    private final Map<Wedding, String> weddingsToAdd;
+    private final boolean force;
 
     /**
      * Constructs a {@code AssignWedding} Command to add weddings to a person with the force flag.
@@ -57,7 +49,7 @@ public class AssignWeddingCommand extends Command {
      * @param weddingsToAdd The list of weddings to be added.
      * @param force Whether the command should force the assignment by creating the Wedding object.
      */
-    public AssignWeddingCommand(Index index, HashSet<Wedding> weddingsToAdd, boolean force) {
+    public AssignWeddingCommand(Index index, Map<Wedding, String> weddingsToAdd, boolean force) {
         this.index = index;
         this.weddingsToAdd = weddingsToAdd;
         this.force = force;
@@ -70,7 +62,7 @@ public class AssignWeddingCommand extends Command {
      * @return A success message indicating the weddings that were added and the name of the person.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String addedWeddings = weddingsToAdd.stream()
+        String addedWeddings = weddingsToAdd.keySet().stream()
                 .map(wedding -> wedding.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
         return String.format(MESSAGE_ADD_WEDDING_SUCCESS, addedWeddings, personToEdit.getName().toString());
@@ -86,7 +78,8 @@ public class AssignWeddingCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        for (Wedding wedding : weddingsToAdd) {
+        for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
+            Wedding wedding = entry.getKey();
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
                     CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);
@@ -97,10 +90,19 @@ public class AssignWeddingCommand extends Command {
                 }
             }
             wedding.increasePeopleCount();
+            Wedding editedWedding = wedding.clone();
+            String type = entry.getValue();
+            switch (type) {
+            case "p1" -> editedWedding.setPartner1(personToEdit);
+            case "p2" -> editedWedding.setPartner2(personToEdit);
+            case "g" -> editedWedding.addToGuestList(personToEdit);
+            default -> { }
+            }
+            model.setWedding(wedding, editedWedding);
         }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
-        updatedWeddings.addAll(weddingsToAdd);
+        updatedWeddings.addAll(weddingsToAdd.keySet());
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -113,7 +115,6 @@ public class AssignWeddingCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
@@ -123,12 +124,12 @@ public class AssignWeddingCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AssignWeddingCommand)) {
+        if (!(other instanceof AssignWeddingCommand otherCommand)) {
             return false;
         }
 
-        AssignWeddingCommand otherCommand = (AssignWeddingCommand) other;
-        return index.equals(otherCommand.index) && weddingsToAdd.equals(((AssignWeddingCommand) other).weddingsToAdd)
+        return index.equals(otherCommand.index) && weddingsToAdd.keySet()
+                .equals(otherCommand.weddingsToAdd.keySet())
                 && this.force == otherCommand.force;
     }
 }

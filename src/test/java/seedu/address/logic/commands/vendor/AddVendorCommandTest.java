@@ -146,6 +146,11 @@ public class AddVendorCommandTest {
         }
 
         @Override
+        public Tag getTag(Tag targetTag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -197,6 +202,11 @@ public class AddVendorCommandTest {
 
         @Override
         public void setWedding(Wedding target, Wedding editedWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Wedding getWedding(Wedding targetWedding) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -262,6 +272,11 @@ public class AddVendorCommandTest {
 
         @Override
         public void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonListByTask(Predicate<Task> task) {
             throw new AssertionError("This method should not be called.");
         }
 

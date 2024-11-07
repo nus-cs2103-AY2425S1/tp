@@ -71,12 +71,7 @@ public class EditWeddingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
-        editWeddingDescriptor.getPartner1Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner1(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
-        editWeddingDescriptor.getPartner2Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner2(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
+
         editWeddingDescriptor.setPeopleCount(weddingToEdit.getPeopleCount());
         editWeddingDescriptor.setGuestList(weddingToEdit.getGuestList());
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
@@ -199,16 +194,8 @@ public class EditWeddingCommand extends Command {
             this.partner2 = partner2;
         }
 
-        public Optional<Index> getPartner1Index() {
-            return Optional.ofNullable(partner1Index);
-        }
-
         public void setPartner1Index(Index partner1Index) {
             this.partner1Index = partner1Index;
-        }
-
-        public Optional<Index> getPartner2Index() {
-            return Optional.ofNullable(partner2Index);
         }
 
         public void setPartner2Index(Index partner2Index) {
