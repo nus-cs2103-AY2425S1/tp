@@ -141,7 +141,10 @@ public class CalendarView extends UiPart<Region> {
             }
 
             TimeBlock currentTimeBlock = currentDayBlocks.get(i);
-            assert !currentTimeBlock.isIntersecting(timeBlock);
+            if (currentTimeBlock.isIntersecting(timeBlock)) {
+                return;
+            }
+
             if (currentTimeBlock.isAfter(timeBlock)) {
                 // attach
                 dayVBoxes.get(dayValue).getChildren().add(i * 2,
