@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -25,9 +27,17 @@ public class VolunteerRemoveDateCommand extends Command {
             + ": Removes dates from the list of available dates of volunteer identified by the index number "
             + "used in the displayed volunteer list.\n"
             + "Parameters: dates (must be in yyyy-MM-dd and cannot repeat)\n"
+<<<<<<< HEAD
             + "Example: " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
+=======
+            + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " i/1 d/2202-01-12, 2022-02-11";
+>>>>>>> 99dc134432004d0b91fdf59634879d34d1735606
     private static final String MESSAGE_REMOVE_DATE_VOLUNTEER_SUCCESS =
             "Removed dates from %s's list of available dates.";
+
+    private static final String MESSAGE_REMOVE_DATE_FAIL_NO_REMAINING_DATES = "Volunteers must be free on"
+            + " at least 1 day!\n This remove command will leave them with no available days."
+            + " \nPlease add at least 1 more day to proceed.";
 
     private final Index targetIndex;
     private final String dateList;
@@ -58,6 +68,8 @@ public class VolunteerRemoveDateCommand extends Command {
                     volunteerToRemoveDate.getName().toString()));
         } catch (VolunteerDeleteMissingDateException e) {
             throw new CommandException(e.getMessage());
+        } catch (VolunteerNotAvailableOnAnyDayException e) {
+            throw new CommandException(MESSAGE_REMOVE_DATE_FAIL_NO_REMAINING_DATES);
         }
     }
 

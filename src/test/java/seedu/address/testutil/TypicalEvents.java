@@ -31,6 +31,9 @@ public class TypicalEvents {
     public static final Event EVENT_C;
     public static final Event EVENT_D;
     public static final Event EVENT_E;
+    public static final Event EVENT_F;
+    public static final Event EVENT_G;
+    public static final Event EVENT_H;
 
     static {
         try {
@@ -68,6 +71,30 @@ public class TypicalEvents {
                     .withStartTime("14:00")
                     .withEndTime("16:00")
                     .withDescription("Planning for upcoming charity event").build();
+
+            // Duplicate of EVENT_A
+            EVENT_F = new EventBuilder().withEventName("Meeting with Client")
+                    .withLocation("123 Orchard Road")
+                    .withDate("2024-10-30")
+                    .withStartTime("09:00")
+                    .withEndTime("11:00")
+                    .withDescription("").build();
+
+            // To be manually added
+            EVENT_G = new EventBuilder().withEventName("Tuition class")
+                    .withLocation("12 Novena Road")
+                    .withDate("2024-11-30")
+                    .withStartTime("19:00")
+                    .withEndTime("21:00")
+                    .withDescription("").build();
+
+            EVENT_H = new EventBuilder().withEventName("Banquet Dinner")
+                    .withLocation("5 Havelock Road")
+                    .withDate("2024-10-21")
+                    .withStartTime("14:00")
+                    .withEndTime("17:00")
+                    .withDescription("").build();
+
         } catch (ChronologicalOrderException e) {
             throw new AssertionError("Error creating typical events for testing.", e);
         }
