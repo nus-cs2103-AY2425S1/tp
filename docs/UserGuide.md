@@ -360,7 +360,7 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `findBuy condo` returns `Alex Yeoh`
-* `findp condo 02-05` returns `Alex Yeoh`<br>
+* `findBuy condo 02-05` returns `Alex Yeoh`<br>
   ![result for findBuy condo 02-05'](images/findProperty.png)
 
 
@@ -461,8 +461,6 @@ Examples:
 ### Unpin Contact `unpin`
 
 Unpins a contact at a particular index from the top of the list to its original sorted position.
-
-![unpin command](images/unpinCommand.png)
 
 Format `unpin INDEX`
 
@@ -579,7 +577,7 @@ Action     | Format, Examples
 **Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delSell 3 2`
 **Delete Property** | `delBuy INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delBuy 3 2`
 **Find using Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jak`
-**Find using Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
+**Find using Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findp 98272758 85495438`
 **Find using Tag**   | `findtc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtc friend owes`
 **Find using Property**   | `findBuy KEYWORD [MORE_KEYWORDS]`<br> e.g., `findBuy condo 02-21`
 **Find using Property**   | `findSell KEYWORD [MORE_KEYWORDS]`<br> e.g., `findSell hdb 21345`
