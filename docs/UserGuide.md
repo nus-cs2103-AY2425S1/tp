@@ -71,6 +71,7 @@ Action     | Format, Examples
 **[List](#listing-all-suppliers-list--s)**   | `list -s`
 **[Mark](#mark-a-supplier-with-a-status--mark--s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
 **[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+**[Sort](#sort-suppliers-sort--s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
 ### Delivery Commands
@@ -212,6 +213,29 @@ To find the supplier whose name contains "link" and company contains "NU":
 #### Here's how it would look like in the app:
 ![find command](images/findSupplierCommand.png)
 
+### Sort suppliers: `sort -s`
+
+The `sort -s` command is used to sort suppliers in VendorVault.
+This helps you to view the suppliers in a different order (ascending or descending), based on the supplier name.
+
+Format: `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`
+- `SORT_ORDER`: Must be either 'a' for ascending or 'd' for descending.
+- `SORT_BY_FIELD`: Must be 'n' for name. (current version of VendorVault only supports sorting by name)
+
+**Warnings**:
+- A spacing between `add` and `-s` is compulsory
+- All prefixes and parameters must be given
+- No duplicate prefix can be used
+- Parameters used are **case-sensitive**
+
+#### Example
+To sort suppliers by name in descending order:
+
+    sort -s so/d sb/n
+
+A success message will be displayed if the suppliers are successfully sorted.
+#### Here's how it would look like in the app:
+![sort command](images/sortSupplierCommand.png)
 ---
 
 ## <ins> Delivery Commands </ins>
