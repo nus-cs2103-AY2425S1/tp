@@ -12,7 +12,6 @@ import seedu.address.model.person.Person;
  */
 public class Wedding {
     private final WeddingName weddingName;
-    private int peopleCount;
     private Person partner1;
     private Person partner2;
     private ArrayList<Person> guestList = new ArrayList<>();
@@ -26,18 +25,16 @@ public class Wedding {
     public Wedding(WeddingName weddingName) {
         requireNonNull(weddingName);
         this.weddingName = weddingName;
-        this.peopleCount = 0;
     }
 
     /**
      * Constructs a {@code Wedding} with the specified {@code weddingName}
      * @param weddingName A valid {@code WeddingName}
      */
-    public Wedding(WeddingName weddingName, int peopleCount, Person partner1, Person partner2,
+    public Wedding(WeddingName weddingName, Person partner1, Person partner2,
                    ArrayList<Person> guestList, Address address, String date) {
         requireNonNull(weddingName);
         this.weddingName = weddingName;
-        this.peopleCount = peopleCount;
         this.partner1 = partner1;
         this.partner2 = partner2;
         this.guestList = guestList;
@@ -58,14 +55,6 @@ public class Wedding {
      */
     public WeddingName getWeddingName() {
         return this.weddingName;
-    }
-
-    /**
-     * Returns people count associated with wedding
-     * @return peopleCount ({@code int}) of the wedding
-     */
-    public int getPeopleCount() {
-        return this.peopleCount;
     }
 
     /**
@@ -139,16 +128,9 @@ public class Wedding {
      * @return An {@code int} with the number of people assigned to the wedding
      */
     public int getNumPersonsForWedding() {
-        return this.peopleCount;
-    }
-
-
-    public void increasePeopleCount() {
-        peopleCount++;
-    }
-
-    public void decreasePeopleCount() {
-        peopleCount--;
+        return (partner1 == null ? 0 : 1)
+                + (partner2 == null ? 0 : 1)
+                + guestList.size();
     }
 
     /**
@@ -156,7 +138,7 @@ public class Wedding {
      * wedding can be deleted if {@code peopleCount} is 0.
      */
     public boolean canBeDeleted() {
-        return (peopleCount == 0);
+        return (getNumPersonsForWedding() == 0);
     }
 
     @Override
@@ -200,7 +182,7 @@ public class Wedding {
         try {
             return (Wedding) super.clone();
         } catch (CloneNotSupportedException e) {
-            return new Wedding(weddingName, peopleCount, partner1, partner2, guestList, address, date);
+            return new Wedding(weddingName, partner1, partner2, guestList, address, date);
         }
     }
 }

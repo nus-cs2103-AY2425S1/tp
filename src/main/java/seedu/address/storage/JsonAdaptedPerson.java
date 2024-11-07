@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final boolean isVendor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
+    private final List<WeddingName> weddings = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("weddings") List<JsonAdaptedWedding> weddings,
+            @JsonProperty("weddings") List<WeddingName> weddings,
             @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
             @JsonProperty("isVendor") boolean isVendor) {
         this.name = name;
@@ -79,7 +79,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         weddings.addAll(source.getWeddings().stream()
-                .map(JsonAdaptedWedding::new)
+                .map(Wedding::getWeddingName)
                 .collect(Collectors.toList()));
         tasks.addAll(source.getTasks().stream()
                 .map(this::mapToJsonAdaptedTask)
@@ -107,7 +107,7 @@ class JsonAdaptedPerson {
         return tags;
     }
 
-    protected List<JsonAdaptedWedding> getWeddings() {
+    protected List<WeddingName> getWeddings() {
         return weddings;
     }
 
@@ -140,6 +140,7 @@ class JsonAdaptedPerson {
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Stores blank weddings with only the wedding name.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
@@ -157,11 +158,11 @@ class JsonAdaptedPerson {
             personTasks.add(task.toModelType());
         }
 
-        for (JsonAdaptedWedding wedding : weddings) {
-            if (!Wedding.isValidWeddingName(wedding.getWeddingName())) {
+        for (WeddingName weddingName : weddings) {
+            if (!Wedding.isValidWeddingName(weddingName.toString())) {
                 throw new IllegalValueException(WeddingName.MESSAGE_CONSTRAINTS);
             }
-            personWeddings.add(wedding.toModelType());
+            personWeddings.add(new Wedding(weddingName));
         }
 
         if (name == null) {

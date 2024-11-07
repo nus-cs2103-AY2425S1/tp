@@ -156,6 +156,14 @@ public class Person {
     }
 
     /**
+     * Replaces the original set of weddings with a new specified one.
+     */
+    public void setWeddings(Set<Wedding> newWedding) {
+        weddings.clear();
+        weddings.addAll(newWedding);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -72,6 +73,7 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            // Each person will store blank weddings with only the wedding name at this point
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
@@ -128,12 +130,16 @@ class JsonSerializableAddressBook {
 
     private void loadWeddings(AddressBook addressBook, Person person) {
         Set<Wedding> weddingList = person.getWeddings();
+        Set<Wedding> newWeddingList = new HashSet<>();
         for (Wedding wedding : weddingList) {
             if (addressBook.hasWedding(wedding) || !Wedding.isValidWeddingName(wedding.getWeddingName().toString())) {
+                newWeddingList.add(addressBook.getWedding(wedding));
                 continue;
             }
             addressBook.addWedding(wedding);
+            newWeddingList.add(addressBook.getWedding(wedding));
         }
+        person.setWeddings(newWeddingList);
     }
 
     private void loadTasks(AddressBook addressBook, Person person) {

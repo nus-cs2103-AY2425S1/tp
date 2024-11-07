@@ -1,5 +1,8 @@
 package seedu.address.model.wedding;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -23,7 +26,7 @@ public class WeddingName {
      * Constructs a {@code WeddingName}
      * @param name A valid name for a wedding.
      */
-    public WeddingName(String name) {
+    public WeddingName(@JsonProperty("weddingName") String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         weddingName = name;

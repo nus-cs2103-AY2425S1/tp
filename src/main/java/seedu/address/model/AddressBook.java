@@ -375,7 +375,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                 if (!this.hasWedding(wedding)) {
                     this.addWedding(wedding);
                 }
-                wedding.increasePeopleCount();
             }
         }
     }
