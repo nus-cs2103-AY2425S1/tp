@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_TUTOR;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,8 +52,8 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTag(VALID_TAG_TUTOR).build();
+        // different roles -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRole(VALID_ROLE_TUTOR).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -66,8 +66,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", course="
-                + editPersonDescriptor.getCourse().orElse(null) + ", tags="
-                + editPersonDescriptor.getTag().orElse(null) + ", modules="
+                + editPersonDescriptor.getCourse().orElse(null) + ", roles="
+                + editPersonDescriptor.getRole().orElse(null) + ", modules="
                 + editPersonDescriptor.getModules().orElse(null) + ", oldModule="
                 + editPersonDescriptor.getOldModule().orElse(null) + ", newModule="
                 + editPersonDescriptor.getNewModule().orElse(null) + "}";

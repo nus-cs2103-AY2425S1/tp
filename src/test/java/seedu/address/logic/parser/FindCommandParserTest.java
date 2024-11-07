@@ -22,13 +22,17 @@ public class FindCommandParserTest {
     private FindCommandParser parser = new FindCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsFindCommand() {
         StudentId validStudentId = new StudentId(CommandTestUtil.VALID_STUDENTID_BOB);
         assertParseSuccess(parser, validStudentId.toString(), new FindCommand(validStudentId));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
+        // empty input
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
         // multiple arguments
         assertParseFailure(parser, "11111111 abc",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));

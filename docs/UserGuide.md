@@ -14,16 +14,16 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 
 <br>
 <!-- * Table of Contents -->
-<page-nav-print />
 
-## Table of Contents
 1. [Quick start](#quick-start)
 2. [Features](#features)
     - [Viewing help : `help`](#viewing-help-help)
     - [Adding a person: `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons-list)
     - [Editing a person : `edit`](#editing-a-person-edit)
+    - [Grading a person : `grade`](#grading-a-person-grade)
     - [Listing students by certain attributes : `filter`](#listing-students-by-certain-attributes-filter)
+    - [Adding a module to a student: `module`](#adding-a-module-to-a-student-module)
     - [Deleting a person : `delete`](#deleting-a-person-delete)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
@@ -31,9 +31,9 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 4. [Known issues](#known-issues)
 5. [Command summary](#command-summary)
 
----
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -99,6 +99,7 @@ EduContacts is a **desktop app for Educators in Tertiary Institution to manage c
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -131,6 +132,10 @@ help
 ```
 ![help message](images/helpMessage.png)
 
+Alternatively, you can click the button on the top right hand corner as indicated here:
+![alternative_help](images/alternativeHelp.png)
+
+<br>
 
 ### Adding a person: `add`
 
@@ -138,13 +143,16 @@ Adds a person contact to the EduContacts.
 
 Format:
 ```bash
-add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE t/TAG
+add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
 
 Examples:
-* `add 87654321 n/Betsy Crowe t/ Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics`
+* `add 87654321 n/Betsy Crowe t/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics`
 * `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
+* `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics t/Student`
   ![result for 'add command result'](images/addCommandResult.png)
+
+<br>
 
 ### Listing all persons : `list`
 
@@ -154,6 +162,9 @@ Format:
 ```bash
 list
 ```
+![result for 'list command result'](images/listCommandResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -164,13 +175,35 @@ Format:
 edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 ```
 
+
 * Edits a student's details according to the fields specified.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-
 Examples:
 *  To edit the module CS2103T to CS2101 of a student with ID 12345678, type  `edit 12345678 m/CS2103T CS2101` utilizing the `m/` prefix for modules
+*  To edit the course of a student with ID 12121212 to Computer Science type `edit 12121212 c/Computer Science`
+   ![result for 'edit command result'](images/editCommandResult.png)
+
+<br>
+
+### Adding a grade : `grade`
+
+Adds a grade to a person's module
+
+```bash
+grade ID m/MODULE g/GRADE
+```
+
+* Adds a grade to a person according to the specified ID and Module
+* Module specified must exist prior to execution grade command
+* Acceptable grades: `A+, A, A-, B+, B, B-, C+, C, D+, D, F`
+* Existing grade will be updated to the input grade
+
+Examples:
+* `grade 23876767 m/CS2103T g/A` will assign an A grade to the CS2103T module of a Person whose ID is 23876767
+
+<br>
 
 ### Listing students by certain attributes : `filter`
 
@@ -216,6 +249,23 @@ Examples:
 
   ![result for 'find alex david'](images/filterAlexDavidResult.png)
 
+<div style="page-break-after: always;"></div>
+
+### Adding a module to a student: `module`
+
+Adds a module to a specific student using their ID.
+
+Format:
+```bash
+module ID m/MODULE
+```
+
+Examples:
+* `module 12345678 m/CS2103T`
+  ![result for 'add module result'](images/addModule.png)
+
+<br>
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from EduContacts.
@@ -228,7 +278,23 @@ delete ID
 * Deletes student with the specified `ID`.
 
 Examples:
-* `delete 12345678` will delete student contact with `ID: 12345678`.
+* `delete 71271222` will delete student contact with `ID: 71271222`.
+  ![result for 'delete_71271222'](images/filterAlexDavidResult.png)
+
+<br>
+
+### Finding a person : `find`
+
+Finds the specified person from EduContacts and displays their details.
+
+Format: `find ID`
+
+* Finds student with the specified `ID`.
+
+Examples:
+* `find 12345678` will find student contact with `ID: 12345678` and display their details.
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -246,6 +312,8 @@ The `clear` command will erase all contacts from the system. Please ensure that 
 
 </box>
 
+<br>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -261,9 +329,13 @@ exit
 Use the UP and DOWN arrow keys to scroll through previous commands in the Command Box. This feature helps you reuse recent commands without retyping, making it faster to correct or repeat commands.
 </box>
 
+<br>
+
 ### Saving the data
 
 EduContacts data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+<br>
 
 ### Editing the data file
 
@@ -276,11 +348,14 @@ If your changes to the data file makes its format invalid, EduContacts will disc
 Furthermore, certain edits can cause the EduContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+<br>
+
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -304,15 +379,19 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE t/TAG` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
+**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
 **Clear**  | `clear`
 **Delete** | `delete ID`<br> e.g., `delete 12345678`
-**Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
-**Filter**   | `find [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `find n/James Jake`
+**Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
+**Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
+**Add Module** | `module ID [m/MODULE]` <br> e.g., `add 12345678 m/CS2103T`
+**Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
+**Find**   | `find ID`<br> e.g., `find 12345678`
 **List**   | `list`
 **Help**   | `help`

@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.COURSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_STUDENT;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_STUDENT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
@@ -185,7 +185,7 @@ public class LogicManagerTest {
 
         // Triggers the saveEduContacts method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + STUDENTID_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + COURSE_DESC_AMY + TAG_DESC_STUDENT;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + COURSE_DESC_AMY + ROLE_DESC_STUDENT;
         Person expectedPerson = new PersonBuilder(AMY).emptyModuleList().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);

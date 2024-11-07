@@ -10,8 +10,8 @@ import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Tag;
 
 
 /**
@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_STUDENT_ID = "12345678";
     public static final String DEFAULT_COURSE = "Computer Science";
-    public static final String DEFAULT_TAG = "Student";
+    public static final String DEFAULT_ROLE = "Student";
 
     private StudentId studentId;
     private Name name;
@@ -33,7 +33,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Course course;
-    private Tag tag;
+    private Role role;
     private ArrayList<Module> modules;
 
 
@@ -47,7 +47,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         course = new Course(DEFAULT_COURSE);
-        tag = new Tag(DEFAULT_TAG);
+        role = new Role(DEFAULT_ROLE);
     }
 
     /**
@@ -60,7 +60,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         course = personToCopy.getCourse();
-        tag = personToCopy.getTag();
+        role = personToCopy.getRole();
         modules = personToCopy.getModules();
     }
 
@@ -81,10 +81,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTag(String tag) {
-        this.tag = new Tag(tag);
+    public PersonBuilder withRole(String role) {
+        this.role = new Role(role);
         return this;
     }
 
@@ -159,7 +159,7 @@ public class PersonBuilder {
      * Builds the {@code Person}.
      */
     public Person build() {
-        Person p = new Person(studentId, name, phone, email, address, course, tag);
+        Person p = new Person(studentId, name, phone, email, address, course, role);
         if (modules != null && !modules.isEmpty()) {
             p.setModules(modules);
         }

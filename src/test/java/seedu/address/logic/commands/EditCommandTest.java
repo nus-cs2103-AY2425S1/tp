@@ -8,12 +8,11 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUTOR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_TUTOR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalEduContacts;
 
 import org.junit.jupiter.api.Test;
@@ -69,7 +68,7 @@ public class EditCommandTest {
                 .withEmail("johnd@example.com")
                 .withPhone("98765432")
                 .withCourse("Medicine")
-                .withTag("Student")
+                .withRole("Student")
                 .addUngradedModule("CS1231S")
                 .build();
 
@@ -104,7 +103,7 @@ public class EditCommandTest {
                 .withEmail("alice@example.com")
                 .withPhone("94351253")
                 .withCourse("Math")
-                .withTag("Student")
+                .withRole("Student")
                 .addGradedModule("CS1010", "A")
                 .addUngradedModule("MA2202")
                 .build();
@@ -121,6 +120,22 @@ public class EditCommandTest {
                 Messages.format(expectedPerson));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editToDuplicateModule_failure() {
+        Person editedPerson = model.getFilteredPersonList().get(0);
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setOldModule(editedPerson.getModules().get(0));
+        descriptor.setNewModule(editedPerson.getModules().get(1));
+        StudentId studentId = editedPerson.getStudentId();
+
+        EditCommand editCommand = new EditCommand(studentId, descriptor);
+
+        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MODULE);
     }
 
 
@@ -146,29 +161,16 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTag(VALID_TAG_TUTOR).build();
+                .withRole(VALID_ROLE_TUTOR).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTag(VALID_TAG_TUTOR).build();
+                .withPhone(VALID_PHONE_BOB).withRole(VALID_ROLE_TUTOR).build();
         EditCommand editCommand = new EditCommand(lastPersonId, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        StudentId studentId = model.getFilteredPersonList().get(0).getStudentId();
-        EditCommand editCommand = new EditCommand(studentId, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs(), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -191,29 +193,6 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        Person secondPerson = model.getFilteredPersonList().get(1);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
-        StudentId secondPersonId = secondPerson.getStudentId();
-        EditCommand editCommand = new EditCommand(secondPersonId, descriptor);
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
-
-    @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        StudentId studentId = model.getFilteredPersonList().get(0).getStudentId();
-
-        // edit person in filtered list into a duplicate in EduContacts
-        Person personInList = model.getEduContacts().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(studentId,
-                new EditPersonDescriptorBuilder(personInList).build());
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
-    }
 
     @Test
     public void execute_invalidPersonIdUnfilteredList_failure() {
@@ -237,6 +216,35 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_STUDENTID);
+    }
+
+    @Test
+    public void execute_personDisplayedEdited_success() throws CommandException {
+
+        Person personToDisplay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setPersonToDisplay(personToDisplay);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName("Edited Name")
+                .withPhone("98765432")
+                .withEmail("edited@example.com")
+                .build();
+
+        EditCommand editCommand = new EditCommand(personToDisplay.getStudentId(), descriptor);
+
+        Person editedPerson = new PersonBuilder(personToDisplay)
+                .withName("Edited Name")
+                .withPhone("98765432")
+                .withEmail("edited@example.com")
+                .build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs());
+        expectedModel.setPerson(personToDisplay, editedPerson);
+        expectedModel.setPersonToDisplay(editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

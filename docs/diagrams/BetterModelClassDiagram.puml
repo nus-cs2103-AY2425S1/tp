@@ -14,7 +14,7 @@ Person *--> Email
 Person *--> StudentId
 Person *--> Address
 Person *--> Course
-Person *--> Tag
+Person *--> Role
 Person *--> "*"Module
 
 Module *--> "0..1" Grade
