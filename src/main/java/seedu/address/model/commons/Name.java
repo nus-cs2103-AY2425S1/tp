@@ -14,9 +14,10 @@ public class Name {
                     + "1. Only alphanumeric characters, spaces, and the terms "
                     + "' s/o ' (son of) or ' d/o ' (daughter of) are allowed.\n"
                     + "2. Use ' s/o ' and ' d/o ' to specify parentage, with alphanumeric characters "
-                    + "both before and after each term.\n"
-                    + "3. The terms are case insensitive and can only be used once.\n"
-                    + "4. The name cannot be blank.\n"
+                    + "both before and after the terms.\n"
+                    + "3. The terms are case insensitive.\n"
+                    + "4. The terms can only be used once.\n"
+                    + "5. The name cannot be blank.\n"
                     + "Example: n/John Doe s/o Jane Doe";
 
     /*
