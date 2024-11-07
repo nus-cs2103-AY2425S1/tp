@@ -1,13 +1,17 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PREFIX;
 import static seedu.address.logic.Messages.MESSAGE_MAXLEADINGZEROS;
 import static seedu.address.logic.Messages.MESSAGE_OVERFLOW_INDEX;
 
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.list.GroupList;
@@ -72,7 +76,14 @@ public class ParserUtil {
         requireNonNull(studentId);
         String trimmedStudentId = studentId.trim();
         if (!StudentId.isValidStudentId(trimmedStudentId)) {
-            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+            String errorMsg = StudentId.MESSAGE_CONSTRAINTS;
+
+            if (trimmedStudentId.contains("/")) {
+                errorMsg = errorMsg + "\n"
+                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
+            }
+
+            throw new ParseException(errorMsg);
         }
         return new StudentId(trimmedStudentId);
     }
@@ -119,7 +130,14 @@ public class ParserUtil {
         String trimmedNetId = netId.trim();
 
         if (!Email.isValidNetId(trimmedNetId)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+            String errorMsg = Email.MESSAGE_CONSTRAINTS;
+
+            if (trimmedNetId.contains("/")) {
+                errorMsg = errorMsg + "\n"
+                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
+            }
+
+            throw new ParseException(errorMsg);
         }
 
         return Email.makeEmail(trimmedNetId + Email.DOMAIN);
@@ -150,8 +168,23 @@ public class ParserUtil {
     public static Year parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
+
+
+        Pattern yearFormat = Pattern.compile("(?<leadingZeroes>0+)(?<year>[1-9]\\d*)");
+        Matcher matcher = yearFormat.matcher(trimmedYear);
+        if (matcher.matches()) {
+            trimmedYear = matcher.group("year");
+        }
+
         if (!Year.isValidYear(trimmedYear)) {
-            throw new ParseException(Year.MESSAGE_CONSTRAINTS);
+            String errorMsg = Year.MESSAGE_CONSTRAINTS;
+
+            if (trimmedYear.contains("/")) {
+                errorMsg = errorMsg + "\n"
+                        + String.format(MESSAGE_INVALID_PREFIX, AddCommand.SUPPORTED_PREFIXES);
+            }
+
+            throw new ParseException(errorMsg);
         }
         return Year.makeYear(trimmedYear);
     }

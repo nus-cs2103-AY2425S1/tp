@@ -9,10 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Email {
     public static final String MESSAGE_CONSTRAINTS =
-            "NUSNet ID should only contain alphanumeric characters, and it should be 8 characters long";
+            "NUS Net ID should be 8 characters long, in the format 'eXXXXXXX', where 'X' can be any number. Example: "
+                    + "e1234567";
     public static final String DOMAIN = "@u.nus.edu";
-    public static final String EMAIL_VALIDATION_REGEX = "[a-zA-Z]\\d{7}" + DOMAIN;
-    public static final String NETID_VALIDATION_REGEX = "[a-zA-Z]\\d{7}";
+    public static final String EMAIL_VALIDATION_REGEX = "e\\d{7}" + DOMAIN;
+    public static final String NETID_VALIDATION_REGEX = "[eE]\\d{7}";
     private static final Email EMPTY_EMAIL = new Email();
 
     public final String value;

@@ -23,6 +23,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "\n"
+            + "Ensure there is a space before prefixes (eg. 'n/')."
+            + "\n"
             + "Required Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_STUDENTID + "STUDENTID "
@@ -31,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_NETID + "NUSNETID "
             + PREFIX_MAJOR + "MAJOR "
             + PREFIX_YEAR + "YEAR "
-            + PREFIX_GROUP + "group NUMBER"
+            + PREFIX_GROUP + "GROUP_NAME"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -39,10 +41,18 @@ public class AddCommand extends Command {
             + PREFIX_NETID + "e1234567 "
             + PREFIX_MAJOR + "Computer Science "
             + PREFIX_YEAR + "1 "
-            + PREFIX_GROUP + "group 2";
+            + PREFIX_GROUP + "Group 2";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "There already exists a student with this Student ID."
+            + "\n" + "Use `list` to view all students.";
+    public static final String SUPPORTED_PREFIXES = PREFIX_NAME + ", "
+            + PREFIX_STUDENTID + ", "
+            + PREFIX_NETID + ", "
+            + PREFIX_MAJOR + ", "
+            + PREFIX_YEAR + ", "
+            + PREFIX_GROUP;
+
 
     private final Person toAdd;
 
