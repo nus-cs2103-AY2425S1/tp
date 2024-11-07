@@ -53,7 +53,6 @@ public class AddCommand extends Command {
             + "Note: Parameters marked optional can be omitted.";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
     public static final String MESSAGE_CLASHING_LESSON = "This time slot clashes with the following lessons:";
     public static final String MESSAGE_NEW_LESSONS_CLASH = "Added lessons clash with one another";
 
@@ -73,7 +72,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON);
         }
 
         List<Lesson> lessonList = toAdd.getLessons();

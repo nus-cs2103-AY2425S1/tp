@@ -20,8 +20,8 @@ public class DisplayCommand extends Command {
     public static final String COMMAND_WORD = "display";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the details of the person identified "
-            + "by the index number used in the displayed person list or by name.\n"
+            + ": Displays the details of the student identified "
+            + "by the index number used in the displayed student list or by name.\n"
             + "Parameters: INDEX (must be a positive integer) or NAME (must be a valid name in tuteez)\n"
             + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " John Doe";
 
