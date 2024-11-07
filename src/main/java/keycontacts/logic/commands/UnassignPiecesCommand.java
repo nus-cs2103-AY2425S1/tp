@@ -83,6 +83,7 @@ public class UnassignPiecesCommand extends Command {
 
         model.setStudent(studentToUpdate, updatedStudent);
 
+        model.commitStudentDirectory();
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 Messages.format(piecesToRemove), Messages.format(updatedStudent)));
     }

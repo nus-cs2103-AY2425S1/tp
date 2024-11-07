@@ -17,7 +17,7 @@ KeyContacts allows you to
 
 &nbsp;
 
-KeyContacts is optimized forBV use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+KeyContacts is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, KeyContacts can get your contact management tasks done much faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
@@ -118,11 +118,16 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 ## Student Commands
 
+
+<br>
+
+Listed below are the currently supported student commands.
+
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-student--add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL g/GROUP` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
-**[Delete](#deleting-a-student--delete)** | `delete INDEX`<br> e.g. `delete 3`
-**[Edit](#editing-a-student--edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`<br> e.g.`edit 2 n/James Lee p/81234567`
+**[Add](#adding-a-student-add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL g/GROUP` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
+**[Delete](#deleting-a-student-delete)** | `delete INDEX`<br> e.g. `delete 3`
+**[Edit](#editing-a-student-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`<br> e.g.`edit 2 n/James Lee p/81234567`
 **[Assign](#assigning-piano-pieces-to-a-student-assign)** | `assign INDEX pn/PIECE_NAME...`<br> e.g.`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **[Unassign](#unassigning-piano-pieces-from-a-student-unassign)** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g. `unassign 1 pn/Moonlight Sonata pn/Canon in D`
 
@@ -154,6 +159,13 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the student directory.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+<box type="info" light theme="primary">
+
+**Tip:**
+
+If you accidentally deleted the wrong student, you can use the [undo](#undoing-the-last-command-undo) command to
+revert your action.
+</box>
 <br>
 
 ### Editing a student : `edit`
@@ -204,11 +216,16 @@ Examples:
 
 ## Lesson Commands
 
+
+<br>
+
+Listed below are the currently supported lesson commands.
+
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Schedule](#scheduling-a-regular-lesson--schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
-**[Cancel](#cancelling-a-regular-lesson--cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
-**[Makeup](#scheduling-a-makeup-lesson--makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+**[Schedule](#scheduling-a-regular-lesson-schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
+**[Cancel](#cancelling-a-regular-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
+**[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
 
 <br>
 
@@ -251,7 +268,7 @@ Schedules a makeup lesson for the specified student in the student directory.
 
 Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 
-* Schedules the makeup lesson for the student at the specified `INDEX`.
+* Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * Makeup lessons are shared across students in the same group.
 * `DATE` must be in the format `DD-MM-YYYY`.
 * `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`.
@@ -263,15 +280,22 @@ Examples:
 
 ## General Commands
 
+
+<br>
+
+Listed below are the currently supported general commands.
+
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Help](#viewing-help--help)**   | `help`
-**[List](#listing-all-students--list)**   | `list`
-**[View](#viewing-the-schedule--view)**   | `view [dt/DATE]`<br> e.g. `view dt/01-10-2024`
+**[Help](#viewing-help-help)**   | `help`
+**[List](#listing-all-students-list)**   | `list`
+**[View](#viewing-the-schedule-view)**   | `view [dt/DATE]`<br> e.g. `view dt/01-10-2024`
 **[Find](#finding-students-find)**   | `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD] [g/GROUP_KEYWORD]`<br> e.g. `find n/James gl/ABRSM`
-**[Sort](#sorting-students--sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
-**[Clear](#clearing-all-entries--clear)**  | `clear`
-**[Exit](#exiting-the-program--exit)**   | `exit`
+**[Sort](#sorting-students-sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
+**[Clear](#clearing-all-entries-clear)**  | `clear`
+**[Undo](#undoing-the-last-command-undo)**   | `undo`
+**[Redo](#undoing-the-last-undo-command-redo)**   | `redo`
+**[Exit](#exiting-the-program-exit)**   | `exit`
 
 <br>
 
@@ -351,6 +375,39 @@ Clears all entries from the student directory.
 
 Format: `clear`
 
+<box type="warning" light seamless >
+
+**Caution:**
+
+If you accidentally used the `clear` command, do not worry since you can use the `undo` command to revert your action! <br>
+Do <b>NOT</b> exit out of the application before you undo, as this will lose your data forever.
+</box>
+<br>
+
+### Undoing the last command : `undo`
+
+Undoes the last command that modified the student directory.
+
+Format: `undo`
+
+<box type="info" light theme="primary">
+
+**Tip:**
+
+1. Undo only affects commands that **modified the student directory**. <br>
+   **Example:** If you ran the command `delete 1` to delete student `Alex Yeo`, followed by the command `find Bernice`, running `undo` will restore student `Alex Yeo`.
+
+2. You can undo <b>multiple</b> commands in a row that modified the student directory.
+</box>
+<br>
+<br>
+
+### Undoing the last undo command: `redo`
+
+Reverts the effects of the undo command if it was the last command run that modified the student directory.
+
+Format: `redo`
+
 <br>
 
 ### Exiting the program : `exit`
@@ -358,7 +415,6 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
-
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -398,18 +454,20 @@ Furthermore, certain edits can cause KeyContacts to behave in unexpected ways (e
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-student--add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL g/GROUP` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
-**[Delete](#deleting-a-student--delete)** | `delete INDEX`<br> e.g. `delete 3`
-**[Edit](#editing-a-student--edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`<br> e.g.`edit 2 n/James Lee p/81234567`
+**[Add](#adding-a-student-add)**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL g/GROUP` <br> e.g. `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 gl/LCM 1`
+**[Delete](#deleting-a-student-delete)** | `delete INDEX`<br> e.g. `delete 3`
+**[Edit](#editing-a-student-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`<br> e.g.`edit 2 n/James Lee p/81234567`
 **[Assign](#assigning-piano-pieces-to-a-student-assign)** | `assign INDEX pn/PIECE_NAME...`<br> e.g.`assign 1 pn/Moonlight Sonata pn/Canon in D`
 **[Unassign](#unassigning-piano-pieces-from-a-student-unassign)** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g. `unassign 1 pn/Moonlight Sonata pn/Canon in D`
-**[Schedule](#scheduling-a-regular-lesson--schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
-**[Cancel](#cancelling-a-regular-lesson--cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
-**[Makeup](#scheduling-a-makeup-lesson--makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
-**[Help](#viewing-help--help)**   | `help`
-**[List](#listing-all-students--list)**   | `list`
-**[View](#viewing-the-schedule--view)**   | `view [dt/DATE]`<br> e.g. `view dt/01-10-2024`
+**[Schedule](#scheduling-a-regular-lesson-schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
+**[Cancel](#cancelling-a-regular-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
+**[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+**[Help](#viewing-help-help)**   | `help`
+**[List](#listing-all-students-list)**   | `list`
+**[View](#viewing-the-schedule-view)**   | `view [dt/DATE]`<br> e.g. `view dt/01-10-2024`
 **[Find](#finding-students-find)**   | `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_LEVEL_KEYWORD] [g/GROUP_KEYWORD]`<br> e.g. `find n/James gl/ABRSM`
-**[Sort](#sorting-students--sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
-**[Clear](#clearing-all-entries--clear)**  | `clear`
-**[Exit](#exiting-the-program--exit)**   | `exit`
+**[Sort](#sorting-students-sort)**   | `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [g/ASC or DESC]`<br> e.g. `sort g/ASC n/DESC`
+**[Clear](#clearing-all-entries-clear)**  | `clear`
+**[Undo](#undoing-the-last-command-undo)**   | `undo`
+**[Redo](#undoing-the-last-undo-command-redo)**   | `redo`
+**[Exit](#exiting-the-program-exit)**   | `exit`

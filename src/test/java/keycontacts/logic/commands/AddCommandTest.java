@@ -93,6 +93,31 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void undoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitStudentDirectory() {
+            // Do nothing
+        }
+
+        @Override
+        public boolean canUndoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoStudentDirectory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }

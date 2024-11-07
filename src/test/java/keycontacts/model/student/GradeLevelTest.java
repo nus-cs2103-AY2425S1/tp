@@ -23,16 +23,16 @@ public class GradeLevelTest {
     public void isValidGradeLevel() {
         // valid grade levels
         assertTrue(GradeLevel.isValidGradeLevel("ABRSM 1"));
-        assertTrue(GradeLevel.isValidGradeLevel("Trinity 1"));
-        assertTrue(GradeLevel.isValidGradeLevel("RSL 2"));
-        assertTrue(GradeLevel.isValidGradeLevel("LCM 3"));
-        assertTrue(GradeLevel.isValidGradeLevel("AMEB 4"));
+        assertTrue(GradeLevel.isValidGradeLevel("Trinity"));
+        assertTrue(GradeLevel.isValidGradeLevel("2 RSL"));
+        assertTrue(GradeLevel.isValidGradeLevel("No grade"));
+        assertTrue(GradeLevel.isValidGradeLevel("1234"));
 
         // invalid grade levels
-        // special character
+        // non-alphanumeric character
         assertFalse(GradeLevel.isValidGradeLevel("ABRSM 1!"));
-        // no space
-        assertFalse(GradeLevel.isValidGradeLevel("Trinity1"));
+        // empty string
+        assertFalse(GradeLevel.isValidGradeLevel(""));
     }
 
     @Test
