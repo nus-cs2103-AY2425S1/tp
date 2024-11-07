@@ -26,7 +26,7 @@ done faster than traditional GUI apps.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   <img src="images/Ui.png" alt="Ui" />
+   <img src="images/Ui.png" alt="Ui" style="zoom: 70%"/>
 
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
@@ -81,7 +81,7 @@ done faster than traditional GUI apps.
 
 Shows a message explaning how to access the help page.
 
-<img src="images/helpMessage.png" alt="Help" />
+<img src="images/helpMessage.png" alt="Help"/>
 
 Format: `help`
 
@@ -98,7 +98,9 @@ The closeat command is currently not undoable (planned for future versions).
 
 Format: `undo`
 
-# Student Commands
+<div style="page-break-after: always;"></div>
+
+## Student Commands
 
 ### Adding a student: `adds`
 
@@ -169,7 +171,7 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-# Attendance Commands
+## Attendance Commands
 
 <box type="tip" seamless>
 
@@ -225,7 +227,7 @@ Closes all attendance windows if any is currently open.
 
 <div style="page-break-after: always;"></div>
 
-# Assignment Commands
+## Assignment Commands
 
 ### Adding Assignments : `adda`
 
