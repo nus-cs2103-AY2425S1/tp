@@ -513,6 +513,7 @@ Besides ensuring that any bugs with OpenCSV are handled correctly, we also had t
 # Empathising with our Persona: Non-Tech Savvy Business Owner
 In efforts to cater to our persona, we have added features that would be useful for a business owner who is not tech-savvy. We have added and modified features such as:
 * Deleting based on name instead of index.
+* Automatically updates the status of goods when Arrival Date is in the past.
 
 --------------------------------------------------------------------------------------------------------------------
 
