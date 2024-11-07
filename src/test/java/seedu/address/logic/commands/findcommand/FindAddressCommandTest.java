@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.findcommand.FindAddressCommand.MESSAGE_FIND_ADDRESS_PERSON_SUCCESS;
-import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -17,6 +15,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -56,7 +55,9 @@ public class FindAddressCommandTest {
     @Test
     public void execute_fullMatch_singlePersonFound() {
         AddressContainsKeywordsPredicate predicate = preparePredicate("311, Clementi Ave 2, #02-25");
-        String expectedMessage = String.format(MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -66,7 +67,9 @@ public class FindAddressCommandTest {
     @Test
     public void execute_partialMatch_singlePersonFound() {
         AddressContainsKeywordsPredicate predicate = preparePredicate("Jurong");
-        String expectedMessage = String.format(MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,7 +79,9 @@ public class FindAddressCommandTest {
     @Test
     public void execute_partialMatch2_singlePersonFound() {
         AddressContainsKeywordsPredicate predicate = preparePredicate("wall str");
-        String expectedMessage = String.format(MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -86,7 +91,9 @@ public class FindAddressCommandTest {
     @Test
     public void execute_partialMatch_multiplePersonsFound() {
         AddressContainsKeywordsPredicate predicate = preparePredicate("ave");
-        String expectedMessage = String.format(MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_ADDRESS_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -96,7 +103,7 @@ public class FindAddressCommandTest {
     @Test
     public void execute_absentPartialMatchKeyword_noPersonFound() {
         AddressContainsKeywordsPredicate predicate = preparePredicate("x");
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -106,7 +113,7 @@ public class FindAddressCommandTest {
     @Test
     public void execute_absentPartialMatchKeyword2_noPersonFound() {
         AddressContainsKeywordsPredicate predicate = preparePredicate("834 Bukit Batok");
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         FindAddressCommand command = new FindAddressCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

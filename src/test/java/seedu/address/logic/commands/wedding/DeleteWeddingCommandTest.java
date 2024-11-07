@@ -28,7 +28,7 @@ public class DeleteWeddingCommandTest {
         Wedding weddingToDelete = model.getFilteredWeddingList().get(2);
         DeleteWeddingCommand deleteWeddingCommand = new DeleteWeddingCommand(weddingToDelete, true);
 
-        String expectedMessage = String.format(DeleteWeddingCommand.MESSAGE_DELETE_WEDDING_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_WEDDING_SUCCESS,
                 Messages.format(weddingToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -59,7 +59,7 @@ public class DeleteWeddingCommandTest {
     public void execute_invalidNotFoundDeleteWeddingCommand() {
         Wedding weddingToDelete = model.getFilteredWeddingList().get(0);
 
-        String expectedMessage = String.format(DeleteWeddingCommand.MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND,
+        String expectedMessage = String.format(Messages.MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND,
                 Messages.format(weddingToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

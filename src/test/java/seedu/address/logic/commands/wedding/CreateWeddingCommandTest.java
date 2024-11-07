@@ -41,7 +41,7 @@ public class CreateWeddingCommandTest {
         Wedding validWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
 
         CommandResult commandResult = new CreateWeddingCommand(validWedding).execute(modelStub);
-        assertEquals(String.format(CreateWeddingCommand.MESSAGE_SUCCESS, Messages.format(validWedding)),
+        assertEquals(String.format(Messages.MESSAGE_CREATE_WEDDING_SUCCESS, Messages.format(validWedding)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validWedding), modelStub.weddingsAdded);
     }
@@ -53,7 +53,7 @@ public class CreateWeddingCommandTest {
         ModelStub modelStub = new ModelStubWithWedding(validWedding);
 
         assertThrows(CommandException.class,
-                CreateWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> createWeddingCommand.execute(modelStub));
+                Messages.MESSAGE_DUPLICATE_WEDDING, () -> createWeddingCommand.execute(modelStub));
     }
 
     @Test

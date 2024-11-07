@@ -29,11 +29,6 @@ public class UnassignVendorCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
-
-    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "The Vendor: %1$s still has tasks"
-            + " assigned to them";
-    public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
     private final Index targetIndex;
     private boolean force = false;
 
@@ -72,7 +67,7 @@ public class UnassignVendorCommand extends Command {
 
         // need to change to check if model has the vendor already existing
         if (!model.hasVendor(personToUnassign)) {
-            throw new CommandException(String.format(MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR,
+            throw new CommandException(String.format(Messages.MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR,
                     personToUnassign.getName()));
         }
 
@@ -80,7 +75,7 @@ public class UnassignVendorCommand extends Command {
             if (this.force) {
                 personToUnassign.clearTasks();
             } else {
-                throw new CommandException(String.format(MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS,
+                throw new CommandException(String.format(Messages.MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS,
                         personToUnassign.getName())
                 + ".\n"
                 + Messages.MESSAGE_FORCE_UNASSIGN_VENDOR);
@@ -90,7 +85,9 @@ public class UnassignVendorCommand extends Command {
         model.unassignVendor(personToUnassign);
         assert !model.hasVendor(personToUnassign) : "Vendor was not unassigned correctly";
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToUnassign)));
+        return new CommandResult(String.format(
+                Messages.MESSAGE_UNASSIGN_VENDOR_SUCCESS, Messages.format(personToUnassign)
+        ));
     }
 
     @Override

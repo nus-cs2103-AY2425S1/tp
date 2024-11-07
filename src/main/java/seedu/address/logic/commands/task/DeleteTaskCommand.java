@@ -31,8 +31,6 @@ public class DeleteTaskCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
-
     private final Index targetIndex;
 
     public DeleteTaskCommand(Index targetIndex) {
@@ -66,7 +64,9 @@ public class DeleteTaskCommand extends Command {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.toString()));
+        return new CommandResult(String.format(
+                Messages.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete.toString()
+        ));
     }
 
     @Override

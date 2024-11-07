@@ -53,7 +53,7 @@ public class MarkTaskCommandTest {
 
         CommandResult result = command.execute(model);
 
-        assertEquals(String.format(MarkTaskCommand.MESSAGE_MARK_TASK_SUCCESS, Set.of(taskToMark)),
+        assertEquals(String.format(Messages.MESSAGE_MARK_TASK_SUCCESS, Set.of(taskToMark)),
                 result.getFeedbackToUser());
         assertTrue(taskToMark.getIsDone(), "The task should be marked as done.");
     }

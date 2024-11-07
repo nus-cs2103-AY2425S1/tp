@@ -3,10 +3,6 @@ package seedu.address.logic.commands.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_ADD_TASK_SUCCESS;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -20,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -53,7 +50,9 @@ public class AssignTaskCommandTest {
         CommandResult result = command.execute(model);
 
         String addedTasks = taskToAssign.toString().replaceAll("[\\[\\]]", "");
-        String expectedMessage = String.format(MESSAGE_ADD_TASK_SUCCESS, addedTasks, validPerson.getName());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_ASSIGN_TASK_SUCCESS, addedTasks, validPerson.getName()
+        );
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
@@ -64,7 +63,9 @@ public class AssignTaskCommandTest {
         AssignTaskCommand command = new AssignTaskCommand(Index.fromOneBased(10), Set.of(INDEX_FIRST));
 
         // Assert: Command should throw a CommandException for invalid person index
-        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> command.execute(model));
+        assertThrows(
+                CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> command.execute(model)
+        );
     }
 
     @Test
@@ -79,7 +80,9 @@ public class AssignTaskCommandTest {
                 Set.of(Index.fromOneBased(10)));
 
         // Assert: Command should throw a CommandException for invalid task index
-        assertThrows(CommandException.class, MESSAGE_INVALID_TASK_DISPLAYED_INDEX, () -> command.execute(model));
+        assertThrows(
+                CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, () -> command.execute(model)
+        );
     }
 
     @Test
@@ -91,7 +94,7 @@ public class AssignTaskCommandTest {
         // Try to assign the same task again
         AssignTaskCommand command = new AssignTaskCommand(Index.fromZeroBased(0), Set.of(INDEX_FIRST));
         // Assert: Command should throw a CommandException for duplicate task assignment
-        assertThrows(CommandException.class, String.format(AssignTaskCommand.MESSAGE_DUPLICATE_TASK,
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_DUPLICATE_TASK_IN_PERSON,
                 taskAlreadyAssigned.toString(), CARL.getName()), () -> command.execute(model));
     }
 
@@ -105,7 +108,7 @@ public class AssignTaskCommandTest {
         AssignTaskCommand command = new AssignTaskCommand(Index.fromZeroBased(0), Set.of(INDEX_FIRST));
 
         // Command should throw a CommandException for non-vendor person
-        assertThrows(CommandException.class, String.format(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK,
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK,
                 nonVendorPerson.getName()), () -> command.execute(model));
     }
 

@@ -8,6 +8,7 @@ import java.util.HashSet;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,9 +37,6 @@ public class CreateTaskCommand extends Command {
             + PREFIX_TASK + "Secure venue d/2024-10-31 "
             + PREFIX_TASK + "Inform groom of itinerary";
 
-    public static final String MESSAGE_SUCCESS = "New task(s) added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
-
     private final HashSet<Task> tasksToAdd;
 
     /**
@@ -62,12 +60,14 @@ public class CreateTaskCommand extends Command {
         requireNonNull(model);
         for (Task task : tasksToAdd) {
             if (model.hasTask(task)) {
-                throw new CommandException(MESSAGE_DUPLICATE_TASK);
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_TASK_IN_WEDLINKER);
             }
             model.addTask(task);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, StringUtil.tasksString(tasksToAdd)));
+        return new CommandResult(String.format(
+                Messages.MESSAGE_TASK_ADDED_SUCCESS, StringUtil.tasksString(tasksToAdd)
+        ));
     }
 
     @Override

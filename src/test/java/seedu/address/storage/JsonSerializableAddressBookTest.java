@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Vendor;
 import seedu.address.testutil.TypicalPersons;
@@ -75,7 +76,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
+        assertThrows(IllegalValueException.class, Messages.MESSAGE_DUPLICATE_PERSON,
                 dataFromFile::toModelType);
     }
 
@@ -83,7 +84,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_duplicateTags_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_TAG_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_TAG,
+        assertThrows(IllegalValueException.class, Messages.MESSAGE_DUPLICATE_TAG,
                 dataFromFile::toModelType);
     }
 
@@ -91,7 +92,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_duplicateTasks_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_TASK_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_TASK,
+        assertThrows(IllegalValueException.class, Messages.MESSAGE_DUPLICATE_TASK_IN_WEDLINKER,
                 dataFromFile::toModelType);
     }
 
@@ -99,7 +100,7 @@ public class JsonSerializableAddressBookTest {
     public void toModelType_duplicateWeddings_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_WEDDING_FILE,
                 JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_WEDDING,
+        assertThrows(IllegalValueException.class, Messages.MESSAGE_DUPLICATE_WEDDING,
                 dataFromFile::toModelType);
     }
 

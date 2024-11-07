@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -41,7 +42,8 @@ public class DeleteTaskCommandTest {
 
         CommandResult result = deleteTaskCommand.execute(model);
 
-        String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
+        String expectedMessage = String.format(
+                Messages.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
         assertEquals(expectedMessage, result.getFeedbackToUser());
 
         // Ensure the task is removed from the model
