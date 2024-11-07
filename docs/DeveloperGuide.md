@@ -390,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AgentConnect validates the input.
 3. AgentConnect restores the previously undone state of the address book.
 4. AgentConnect shows a success message confirming the redo operation.
-    
+
     Use case ends.
 
 **Extensions**
@@ -569,7 +569,7 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
     1. Download the jar file and copy into an empty folder
-    2. Open up a terminal, and run the following command: java -jar AgentConnect.jar   
+    2. Open up a terminal, and run the following command: java -jar AgentConnect.jar
        - Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
@@ -581,9 +581,9 @@ testers are expected to do more *exploratory* testing.
 ### Adding a Client
 
 1. Adding a client
-   1. Prerequisites: None 
+   1. Prerequisites: None
    2. Test case: `add n/John Doe p/98765432 e/johnd@example.com addr/311, Clementi Ave 2, #02-25 b/1990-10-10 appt/2024-12-12 12:00`
-   3. Expected: A new contact has been added into the list. 
+   3. Expected: A new contact has been added into the list.
       - Status Message: "New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Birthday: 1990-10-10; Appointment: 2024-12-12 12:00; Tags:"
    4. The list view should now have the new contact inside.
 
@@ -620,10 +620,10 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-    
+
    3. Test case: `delete Bernice Yu`<br>
         Expected: Contact with name `Bernice Yu` is deleted from the list. Details of the deleted contact shown in the status message.
-   
+
    4. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
@@ -644,7 +644,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Editing a person with all details
    1. Prerequisites: There is at least one contact in the list.
-   2. Test case: `edit 1 p/9999000` 
+   2. Test case: `edit 1 p/9999000`
    3. Expected: The phone number of the first person is updated to 9999000.
    - The status bar shows the following:
      Edited Person: Alex Yeoh; Phone: 99990000; Email...
@@ -727,7 +727,7 @@ The project was moderately difficult due to the complexity of managing multiple 
 - User Interface: Ensuring the UI updates correctly in response to changes in the model, especially with the addition of new features like policy management and appointment scheduling, was a significant challenge.
 - Testing: Writing comprehensive tests for the new features and ensuring they integrate well with existing functionality required substantial effort.
 
-#### Effort Required 
+#### Effort Required
 The project required a considerable ammount of effort in the following areas:
 - **Design and Architecture**: Significant time was spent on designing the architecture to support multiple entities and their interactions.
 - **Implementation**: Implementing the new features, especially the undo/redo functionality and policy management, required detailed coding and debugging.
