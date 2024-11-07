@@ -130,9 +130,21 @@ Examples:
 
 ### Sorting persons by name: `sort`
 
-Sorts list of persons alphabetically by name.
+Sorts list of persons alphabetically by specified predicate.
 
-Format: `sort`
+Format: `sort PREDICATE`
+
+* Sorts the list alphabetically by given predicate.
+* The predicate refers to attributes used to sort the list by.
+* The predicate **must be a valid attribute** name, role, phone, email and address only
+
+Examples:
+* `sort name` sorts the list alphabetically by name.
+  ![result for 'sort name'](images/sortMessage.png)
+* `sort role` sorts the list alphabetically by role.
+* `sort phone` sorts the list alphabetically by phone.
+* `sort email` sorts the list alphabetically by email.
+* `sort address` sorts the list alphabetically by address.
 
 ### Deleting a person : `delete`
 
