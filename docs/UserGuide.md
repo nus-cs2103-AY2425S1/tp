@@ -13,6 +13,8 @@ benefits of a Graphical User Interface (GUI).
 - **Search and Filter:** Quickly locate patient records by name, NRIC, or appointment date, making it easy to manage large numbers of patients.
 - **Custom Operating Hours:** Set and adjust clinic operating hours, with automatic verification of scheduled appointments within these hours.
 
+<div style="page-break-after: always;"></div>
+
 1. [Quick Start](#quick-start)
 2. [Features](#features)
     - [Viewing Help](#viewing-help--help)
@@ -42,6 +44,8 @@ benefits of a Graphical User Interface (GUI).
 5. [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -92,6 +96,8 @@ benefits of a Graphical User Interface (GUI).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -117,6 +123,8 @@ benefits of a Graphical User Interface (GUI).
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help : `help`
 
 Format: `help`
@@ -125,6 +133,7 @@ The help command provides guidance on using ClinicBuddy’s features, making it 
 
 ![help message](images/helpMessage.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a patient: `add`
 
@@ -158,6 +167,8 @@ Examples:
 
 ![add patient](images/adding%20patient.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Updating a patient : `update`
 
 Updates an existing patient in ClinicBuddy by searching for their index or NRIC.
@@ -183,6 +194,8 @@ Examples:
   and `johndoe@example.com` respectively.
 
 ![update](images/update%20patient.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting a patient : `delete`
 
@@ -216,6 +229,8 @@ Examples:
 
 ![delete](images/delete%20patient.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from ClinicBuddy.
@@ -231,6 +246,9 @@ Shows a list of all patients in ClinicBuddy.
 Format: `list`
 
 ![list](images/list%20all%20patients.png)
+
+<div style="page-break-after: always;"></div>
+
 
 ### Locating patients: `find`
 
@@ -252,6 +270,9 @@ Example:
 
   ![result for 'find S1234567Z'](./images/findS1234567Zresult.png)
 
+<div style="page-break-after: always;"></div>
+
+
 #### Finding multiple records by their names
 
 Finds patient records whose names contain any of the given keywords.
@@ -271,6 +292,8 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Finding all patients with appointments on a specific date : `bookings`
 
 Finds all patients with appointments on the specified date.
@@ -285,6 +308,8 @@ Examples:
 * `bookings 12-08-2024`
 
   ![result for 'bookings 01/02/2024'](./images/bookings01-02-2024.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting an appointment : `deleteappt`
 
@@ -310,6 +335,8 @@ Example:
 
 ![deleteapt](images/delete%20appointment.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Updating Operating Hours : `hours`
 
 Updates Operating Hours 
@@ -328,6 +355,8 @@ Examples:
 
 ![hours](images/update%20operating%20hours.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Saving the data
 
 ClinicBuddy data are saved in the hard disk automatically after any command that changes the data. There is no need to
@@ -342,6 +371,7 @@ save manually.
 - Furthermore, certain edits can cause ClinicBuddy to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
 - Therefore, edit the data file only if you are confident that you can update it correctly.
 
+<div style="page-break-after: always;"></div>
 
 ### Backup the records : `backup`
 
@@ -349,6 +379,8 @@ The `backup` feature allows you to manually create a backup of your current pati
 This is useful if you want to save the state of your current data at a specific point in time.
 
 Format: `backup [DESCRIPTION]`
+
+<div style="page-break-after: always;"></div>
 
 #### **How Manual Backup Works:**
 
@@ -373,6 +405,8 @@ Format: `backup [DESCRIPTION]`
 
 ![backup](images/backup.png)
 
+<div style="page-break-after: always;"></div>
+
 #### **Automated Backup:** 🚨
 - Whenever a patient record is deleted or cleared, ClinicBuddy automatically creates a backup of all patient records before the deletion. 
 - This helps to ensure that no data is permanently lost in case of an accidental deletion.
@@ -383,6 +417,8 @@ Format: `backup [DESCRIPTION]`
   ```
   1_clear_2024-10-30_18-05-29-745.json
   ```
+  
+<div style="page-break-after: always;"></div>
 
 ### Listing all backups : `listbackups`
 Displays a list of all available backups along with their details.
@@ -403,6 +439,8 @@ Format: `listbackups`
 - Only the 10 most recent backups are available for storage efficiency.
 
 ![listbackups](images/listbackups.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Restoring data from backups : `restore`
 
@@ -432,6 +470,8 @@ Format: `restore <INDEX>`
 
 ![restore](images/restore.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -439,6 +479,7 @@ Exits the program.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -471,6 +512,7 @@ the data of your previous AddressBook home folder.
 **A**: You can use the `help` command in ClinicBuddy for a quick reference or refer back to this user guide. This guide includes command formats and examples to assist you.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Known issues
 
@@ -491,6 +533,7 @@ the data of your previous AddressBook home folder.
    **Solution:** Use unique and specific descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
