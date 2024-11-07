@@ -286,7 +286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|--------------------|----------------------------------------------|--------------------------------------------------------------------|
 | `* * *`  | software developer | add clients                                  | update my client list                                              |
 | `* * *`  | software developer | remove clients                               | ensure my client list is not cluttered                             |
-| `* * *`  | software developer | view my clients and their details            | keep track of my clients and what tasks to do                      |
+| `* * *`  | software developer | view my clients and their details            | access important client information                                |
 | `* * *`  | software developer | update my clients' details                   | ensure my client list details are updated                          |
 | `* * *`  | software developer | view a client's payment status               | track who has paid and who still needs to make a payment           |
 | `* * *`  | software developer | view a client's project status               | monitor the progress of each client's project                      |
@@ -337,6 +337,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 1.
 
+* *a. At any time, User decides to stop adding the client, or exits the application.
+
+    * *a1. Nothing is added to the client list.
+
+  Use case ends.
+
 **Use case: Delete a client**
 
 **MSS**
@@ -369,7 +375,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
+* *a. At any time, User decides to stop deleting the client, or exits the application.
 
+    * *a1. Nothing is deleted from client list.
+
+  Use case ends.
 
 **Use case: Modify a client's details**
 
