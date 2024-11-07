@@ -148,7 +148,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add guest feature
+### Add Guest feature
 The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes and their corresponding values 
 
 The sequence diagram below provides an overview for the execution flow of an `add_guest` command:
