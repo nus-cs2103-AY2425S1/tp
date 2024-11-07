@@ -28,7 +28,7 @@ public class SortCommand extends Command {
 
     //To change later
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort based on listed criteria(s)\n"
-            + "Allowed sorting criteria: Job Code, Tag, Name, Phone, Email\n"
+            + "Parameters: [j/] [t/] [n/] [p/] [e/]\n"
             + "The sorting hierarchy is based on the order of criteria(s) provided. "
             + "List will be sorted by Name if no criteria given\n"
             + "Example 1: " + COMMAND_WORD + "\n"
