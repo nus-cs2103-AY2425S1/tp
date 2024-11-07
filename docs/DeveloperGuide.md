@@ -547,7 +547,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -563,7 +563,7 @@ testers are expected to do more *exploratory* testing.
    Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
 
    1. Test case: undo immediately after starting the application (with no operations performed)
-   Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo. The status bar remains unchanged.
+   Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
 
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Future features**
