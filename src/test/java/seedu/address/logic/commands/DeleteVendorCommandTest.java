@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 
 
 /**
@@ -30,7 +30,7 @@ public class DeleteVendorCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredVendorList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Vendor personToDelete = (Vendor) model.getFilteredVendorList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteVendorCommand deleteVendorCommand = new DeleteVendorCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteVendorCommand.MESSAGE_DELETE_PERSON_SUCCESS,
@@ -54,7 +54,7 @@ public class DeleteVendorCommandTest {
     public void execute_validIndexFilteredList_success() {
         showVendorAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredVendorList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Vendor personToDelete = (Vendor) model.getFilteredVendorList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteVendorCommand deleteVendorCommand = new DeleteVendorCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteVendorCommand.MESSAGE_DELETE_PERSON_SUCCESS,

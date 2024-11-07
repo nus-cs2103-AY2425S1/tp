@@ -1,6 +1,37 @@
+#contentContainer, #contentContainer * {
+    -fx-background-color: #f8d3ca;
+    -fx-background-radius: 10;
+
+}
+
+#cardPaneContents {
+    -fx-padding: 7;
+}
+
+#contentContainer .scroll-bar {
+    -fx-opacity: 0;
+    -fx-pref-width: 1;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+    -fx-cursor: null;
+}
+
+#contentContainer {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+#contentContainer > .viewport {
+    -fx-background-color: transparent;
+}
+
+
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-padding: 1.5 0 7 0;
+    -fx-background-insets: 1.5 0 7 0;
 }
 
 #tags .label {
@@ -14,10 +45,10 @@
 
 .cell_big_label {
     -fx-font-family: "Arial";
-    -fx-font-size: 16px;
+    -fx-font-size: 16.5px;
 }
 
 .cell_small_label {
     -fx-font-family: "Arial";
-    -fx-font-size: 13px;
+    -fx-font-size: 13.5px;
 }

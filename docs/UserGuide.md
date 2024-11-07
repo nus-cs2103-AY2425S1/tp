@@ -22,6 +22,11 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
 1. [**Helpful Guidelines for the User Guide**](#helpful-guidelines-for-the-user-guide)
 2. [**Quick Start**](#quick-start)
 3. [**Tutorial for Beginners**](#tutorial-for-beginners)
+   * [**Starting a fresh template**](#starting-a-fresh-template)
+   * [**Adding guests**](#adding-guests)
+   * [**Adding vendors**](#adding-vendors)
+   * [**Deleting persons**](#deleting-persons)
+   * [**Exiting the program**](#exiting-the-program)
 4. [**Features**](#features)
     * [**General Commands**](#general-commands)
         * [`help` Viewing help](#viewing-help-help)
@@ -31,13 +36,13 @@ To discover more about what BridalBuddy has to offer, continue reading the rest 
         * [`stats` Viewing the wedding statistics](#viewing-statistics-stats)
         * [`exit` Exiting the program](#exiting-the-program-exit)
     * [**Guest Related Commands**](#guest-related-commands)
-        * [`add_guest` Adding a new guest to the guest list](#adding-a-guest-add_guest)
-        * [`edit_guest` Editing the details of a guest](#editing-a-guest-edit_guest)
-        * [`delete_guest` Deleting a guest from the guest list](#deleting-a-guest-delete_guest)
+        * [`add_guest` Adding a new guest to the guest list](#adding-a-guest-add-guest)
+        * [`edit_guest` Editing the details of a guest](#editing-a-guest-edit-guest)
+        * [`delete_guest` Deleting a guest from the guest list](#deleting-a-guest-delete-guest)
     * [**Vendor Related Commands**](#vendor-related-commands)
-        * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor-add_vendor)
-        * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor-edit_vendor)
-        * [`delete_vendor` Deleting a vendor from the vendor list](#deleting-a-vendor-delete_vendor)
+        * [`add_vendor` Adding a vendor to the vendor list](#adding-a-vendor-add-vendor)
+        * [`edit_vendor` Editing the details of a vendor](#editing-a-vendor-edit-vendor)
+        * [`delete_vendor` Deleting a vendor from the vendor list](#deleting-a-vendor-delete-vendor)
     * [**Other Useful Features**](#other-useful-features)
         * [Saving the data](#saving-the-data)
         * [Editing the data file](#editing-the-data-file)
@@ -165,7 +170,7 @@ Once successful, you should see the following on your screen:
 
 ![add guest_command](images/addGuestCommandSample.png)
 
-For more details on the `add_guest` command, such as the additional optional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest--add_guest)
+For more details on the `add_guest` command, such as the additional optional fields you can classify a guest with, we encourage you to refer to [**Adding a new guest to the guest list**](#adding-a-guest-add-guest)
 
 [_Back to Top_](#table-of-contents)
 
@@ -182,7 +187,7 @@ Once successful, you should see the following on your screen:
 
 ![add vendor_command](images/addVendorCommandSample.png)
 
-For more details on the `add_vendor` command, such as the additional optional fields you can classify a vendor with, we encourage you to refer to [**Adding a new vendor to the vendor list**](#adding-a-vendor--add_vendor)
+For more details on the `add_vendor` command, such as the additional optional fields you can classify a vendor with, we encourage you to refer to [**Adding a new vendor to the vendor list**](#adding-a-vendor-add-vendor)
 
 [_Back to Top_](#table-of-contents)
 
@@ -200,7 +205,7 @@ Once successful, you should see the following on your screen:
 ![delete vendor_command](images/deleteVendorCommandSample.png)
 
 Deleting a guest works in a similar way but using the `delete_guest` command instead.
-For more details on the `delete_guest` and `delete_vendor` commands, we encourage you to refer to [**Deleting a guest from the guest list**](#deleting-a-guest--delete_guest) and [**Deleting a vendor from the vendor list**](#deleting-a-vendor--delete_vendor) respectively.
+For more details on the `delete_guest` and `delete_vendor` commands, we encourage you to refer to [**Deleting a guest from the guest list**](#deleting-a-guest-delete-guest) and [**Deleting a vendor from the vendor list**](#deleting-a-vendor-delete-vendor) respectively.
 
 [_Back to Top_](#table-of-contents)
 
@@ -296,7 +301,7 @@ Finds guests and vendors that match any of the given keyword(s).
 
 **Format:** `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/relation] [c/COMPANY] [b/BUDGET] [t/TAG]...`
 
-> :warning: Only one type of prefix should be used for each find command.
+> :warning: Only one type of [prefix](#glossary) should be used for each find command.
 
 - Specifying multiple different prefixes (e.g. `find n/John p/12345`) will result in an invalid command
 - The prefix specified in the command indicates the attribute to be searched (e.g. `find n/NAME` searches for guests and vendors whose name matches the given keyword)
@@ -374,6 +379,8 @@ Adds a guest to the bottom of the existing overall guest list.
 
 > :warning: You can only enter 'H' for related to husband, 'W' for related to wife or 'U' for unknown for the optional `RELATION` field.
 
+> :warning: If you attempt to add a new guest with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
+
 **Example Usage:** `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney`
 
 Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rsvp/A r/U t/friends t/owesMoney` command returns the following result on your screen:
@@ -388,6 +395,8 @@ Entering the `add_guest n/John Doe p/98765432 e/johnd@example.com a/311, Clement
 Edits the details of the guest identified by the index number used in the displayed guest list. Existing values will be overwritten by the input values.
 
 **Format:** `edit_guest INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [rsvp/RSVP] [r/RELATION] [t/TAG]...`
+
+> :warning: If you attempt to edit the details of an existing guest such that they end up with both the same `NAME` and `PHONE` as another existing guest in the guest list, an error will be shown.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the guest you want to edit on the **exact guest list currently displayed on your screen**.
 
@@ -433,7 +442,9 @@ Adds a vendor to the bottom of the existing overall vendor list.
 
 **Format:** `add_vendor n/NAME p/PHONE e/EMAIL a/ADDRESS c/COMPANY [b/BUDGET] [t/TAG]...`
 
-* :warning: You can only enter a non-negative number with up to 2 decimal places for the optional `BUDGET` field.
+> :warning: You can only enter a non-negative number with up to 2 decimal places for the optional `BUDGET` field.
+
+> :warning: If you attempt to add a new vendor with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
 **Example Usage:** `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Mall, #02-25 c/John's Florist b/1000 t/florist t/responsible`
 
@@ -449,6 +460,8 @@ Entering the `add_vendor n/John Doe p/98765432 e/johnd@example.com a/311, Clemen
 Edits the details of the vendor identified by the index number used in the displayed vendor list. Existing values will be overwritten by the input values.
 
 **Format:** `edit_vendor INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COMPANY] [b/BUDGET] [t/TAG]...`
+
+> :warning: If you attempt to edit the details of an existing vendor such that they end up with both the same `NAME` and `PHONE` as another existing vendor in the vendor list, an error will be shown.
 
 * :information_source: The `INDEX` you enter should be the `INDEX` of the vendor you want to edit on the **exact vendor list currently displayed on your screen**.
 
@@ -521,7 +534,6 @@ Furthermore, certain edits can cause BridalBuddy to behave in unexpected ways (e
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 [_Back to Top_](#table-of-contents)
 

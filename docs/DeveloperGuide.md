@@ -79,7 +79,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Guest`, `Vendor` objects residing in the `Model`.
 
 ### Logic component
 
@@ -119,23 +119,13 @@ How the parsing works:
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
+Note: `Vendor` and `Guest` both extend from the abstract `Person` class, which defines common attributes and behaviors shared by both types of entities.
 
 The `Model` component,
-
-* `Vendor` and `Guest` both extend from the abstract `Person` class, which defines common attributes and behaviors shared by both types of entities.
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Guest` and `Vendor` objects (which are contained in a `UniquePersonList` object).
+* stores the currently 'selected' `Guest` / `Vendor` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
 
 ### Storage component
 
@@ -158,83 +148,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add guest feature
+The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes and their corresponding values 
 
-#### Proposed Implementation
+The sequence diagram below provides an overview for the execution flow of an `add_guest` command:
+<puml src="diagrams/AddGuestSequenceDiagram.puml" />
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Explanation:
+1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
+2. `AddressBookParser` parses the command word provided by the user input (if valid) to create and return a `AddGuestCommandParser`
+3. `AddGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create a `Guest` object with the specified attributes (`Name`, `Phone`, `Email`, `Address`). An `AddGuestCommand` is then created with the new `Guest` object and returned.
+4. `LogicManager` executes the `AddGuestCommand`, which calls the `addPerson` method of the `Model` to add the guest into the address book.
+5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI`
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
@@ -251,9 +177,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -313,14 +236,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User creates a new guest with the required details (e.g. name, email, etc.).
+1. User creates a new Guest with the required details (e.g. name, email, etc.).
 2. System adds the entry.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The provided details are incomplete or invalid (e.g. compulsory fields are not furnished).
+* 1a. The provided details are incomplete or invalid.
     * 1a1. System shows an error message and requests the user to re-enter the details.
 
       Use case resumes at step 1.
@@ -330,24 +253,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1c. A Guest with the same name and phone number already exists
+    * 1c1. System tells the user the Guest already exists
+
+      Use case ends.
+
 **Use case: Add a Vendor**
 
 **MSS**
 
-1. User creates a new vendor with the required details (e.g. name, email, etc.).
+1. User creates a new Vendor with the required details (e.g. name, email, etc.).
 2. System adds the entry.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The provided details are incomplete or invalid (e.g. compulsory fields are not furnished).
+* 1a. The provided details are incomplete or invalid.
     * 1a1. System shows an error message and requests the user to re-enter the details.
 
       Use case resumes at step 1.
 
 * 1b. The input command was invalid (i.e. spelling error, etc.).
     * 1b1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+* 1c. A Vendor with the same name and phone number already exists
+    * 1c1. System tells the user the Vendor already exists
 
       Use case ends.
 
@@ -370,16 +303,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use Case: Delete a Person**
+* 1c. The new details result in a duplicate Person (i.e. same name, phone number and type)
+    * 1c1. System tells the user the Person already exists
+    
+      Use case ends.
+
+**Use Case: Delete a Guest**
 
 **MSS**
-1. User requests to delete an entry.
-2. System deletes the entry.
+1. User requests to delete a Guest entry.
+2. System deletes the Guest entry.
 
    Use case ends.
 
 **Extensions**
-* 1a. The provided entry does not exist.
+* 1a. The provided Guest entry does not exist.
     * 1a1. System shows an error message.
 
       Use case resumes at step 1.
@@ -389,13 +327,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: Search and Filter Persons**
+**Use Case: Delete a Vendor**
 
 **MSS**
-1. User requests to search for or filter entries (e.g., by category, name, RSVP status).
-2. System prompts for search or filter criteria.
-3. User provides the criteria.
-4. System displays the matching entries.
+1. User requests to delete a Vendor entry.
+2. System deletes the Vendor entry.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The provided Vendor entry does not exist.
+    * 1a1. System shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The input command was invalid (i.e. spelling error, etc.).
+    * 1b1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+**Use Case: Find Guests and Vendor with a particular field**
+
+**MSS**
+1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
+2. System displays the matching Guest and Vendor entries.
 
    Use case ends.
 
@@ -405,8 +360,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 4a. No matching entries are found.
-    * 4a1. System shows a message indicating no results.
+* 2a. No matching entries are found.
+    * 2a1. System shows a message indicating no results.
 
       Use case ends.
 
@@ -427,36 +382,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 **Data Requirements**
-1. Size: The system should support storage for up to 500 guests and 50 vendors per wedding. Data size should not exceed 10 MB for each wedding event.
+1. Size: The system should support storage for up to 300 guests and 300 vendors per wedding. 
 1. Volatility: Guest lists and vendor details may change frequently, especially closer to the event date. Therefore, the system must accommodate dynamic data updates and edits.
-1. Persistency: All guest, vendor, and event information must be saved persistently in a text file and remain accessible even after system shutdown or failure.
-1. Backup Frequency: Automatic backups of data should be created whenever the application is closed.
+1. Persistency: All guest and vendor information must be saved persistently in a JSON file and remain accessible even after system shutdown or failure.
+1. Backup Frequency: Automatic backup of data should be created whenever the application is closed.
 
 **Environment Requirements**
 1. Operating System: The system must be compatible with Windows, macOS, and Linux operating systems.
 1. Dependencies: Java 17 should be the core language.
 
 **Accessibility**
-1. Provide command-line help documentation that can be accessed at any time with a simple command (help).
-
-**Capacity**
-1. The system should be able to handle data storage for up to 100 simultaneous weddings, each containing up to 500 guests and 50 vendors.
+1. Provide help documentation that can be accessed at any time with a simple command (help).
 
 **Fault Tolerance**
-
 1. The system should handle errors such as missing commands or invalid input gracefully, providing clear error messages without causing system crashes.
-1. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
+1. Ensure that invalid input (e.g., incorrect email format) does not result in data corruption.
 
 **Performance Requirements**
-
-1. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
-1. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
-1. System startup time should not exceed five seconds on standard hardware.
-
+1. The system should respond to user input within ten seconds, even for lists of up to 300 guests and 300 vendors.
+1. System startup time should not exceed ten seconds on standard hardware.
 
 ### Glossary
 **Technical**
-*  **Mainstream OS**: Windows, Linux, Unix, MacOS
 *  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
 *  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
 *  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
@@ -511,5 +458,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_

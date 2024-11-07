@@ -116,9 +116,9 @@ public class MainWindow extends UiPart<Stage> {
         double defaultHeight = guiSettings.getWindowHeight();
 
         primaryStage.setWidth(defaultWidth);
-        primaryStage.setMinWidth(889.0);
+        primaryStage.setMinWidth(1196.0);
         primaryStage.setHeight(defaultHeight);
-        primaryStage.setMinHeight(783.0);
+        primaryStage.setMinHeight(970.0);
 
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
@@ -137,6 +137,7 @@ public class MainWindow extends UiPart<Stage> {
             try {
                 URI uri = new URI(USER_GUIDE_URl);
                 Desktop.getDesktop().browse(uri);
+                resultDisplay.setFeedbackToUser("Opened BridalBuddy user guide!");
             } catch (Exception e) {
                 logger.severe("Error occurred while opening the help URL:\n" + e);
             }

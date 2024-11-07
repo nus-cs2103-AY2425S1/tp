@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Guest;
 
 
 /**
@@ -30,7 +30,7 @@ public class DeleteGuestCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Guest personToDelete = (Guest) model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteGuestCommand deleteGuestCommand = new DeleteGuestCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteGuestCommand.MESSAGE_DELETE_PERSON_SUCCESS,
@@ -54,7 +54,7 @@ public class DeleteGuestCommandTest {
     public void execute_validIndexFilteredList_success() {
         showGuestAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Guest personToDelete = (Guest) model.getFilteredGuestList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteGuestCommand deleteGuestCommand = new DeleteGuestCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteGuestCommand.MESSAGE_DELETE_PERSON_SUCCESS,
