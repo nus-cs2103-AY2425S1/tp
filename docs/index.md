@@ -8,7 +8,7 @@ title: CCAConnect
 
 ![Ui](images/mockup.png)
 
-**CCAConnect assists CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details.** 
+**CCAConnect assists CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details.**
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
 <br>
