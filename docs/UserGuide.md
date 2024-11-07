@@ -1,11 +1,8 @@
 ---
 
 layout: default.md
-
 title: "User Guide"
-
 pageNav: 3
-
 ---
 
 # DLTbook User Guide
@@ -55,7 +52,7 @@ Not sure if you have Java? Check out [Setup Guide](#setup-guide)
 
 ## Beginner's Guide
 
-<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded> 
+<panel header="👋 **Welcome to DLTbook Beginner's Guide**" type="primary" expanded>
 
 _If you're new to DLTbook or the concept of Distributed Ledger Technology (DLT), this guide will walk you through the
 basics. Here, we'll cover key concepts, important terminology, and guide you through the first steps in using DLTbook._
@@ -76,7 +73,7 @@ Unlike traditional databases, DLTs do not have a central administrator, which me
 decentralized.
 </box>
 
-<box type="tip" seamless> 
+<box type="tip" seamless>
 
 **Why is DLTBook useful in managing contacts?**
 
@@ -252,6 +249,7 @@ Command | Description
 [**Retrieve Public Address**](#retrieving-public-addresses-of-a-contact-retrievepa) | Retrieves the public addresses of a contact
 [**Delete Public Address**](#deleting-a-public-address-of-a-contact-deletepa) | Deletes the public address of a contact
 [**Public Address Search**](#searching-for-a-public-address-publicaddresssearch) | Searches for a public address
+[**Filter**](#filtering-persons-by-public-addresses-network-filter) | Filters out a list of people with the public addresses of the specified network
 
 <box type="info" seamless>
 
@@ -486,7 +484,7 @@ Retrieves the public addresses of a contact.
 Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
 * `WALLET_NAME` parameter is compulsory and specifies the label (or part of the label) of the public address(es) to be retrieved.
-  It is **case-insensitive**.
+It is **case-insensitive**.
  
 * `NETWORK` parameter is optional and specifies the ticker name for each network and should be in all CAPS.<br />
   Allowed values: `BTC|ETH|SOL`.
@@ -552,6 +550,30 @@ Examples:
 * `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` searches for a public
   address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` and displays the contact and wallet to
   which it belongs.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Filtering persons by public addresses network : `filter`
+
+Filters out a list of people with the public addresses of the specified network.
+
+Format: `filter c/NETWORK`
+
+<box type="tip" seamless>
+
+The fields are not cap sensitive.
+</box>
+
+* Filters out a list of people with the public addresses of the `NETWORK` provided.
+
+* The `NETWORK` parameter specifies the public addresses network to be filtered.
+
+Examples:
+
+* `filter c/BTC` filters a list of people with the public addresses of `BTC` and 
+  displays it with their respective list number.
 
 <br>
 
@@ -642,3 +664,4 @@ the data of your previous AddressBook home folder.
 | **Retrieve Public Address** | `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`<br> e.g., `retrievepa l/wallet1 c/BTC n/John`                                                                                 |
 | **Delete Public Address**   | `deletepa c/NETWORK [w/WALLET_NAME]`<br> e.g., `deletePublicAddress 1 c/BTC w/wallet1`                                                                                               |
 | **Public Address Search**   | `searchpa pa/PUBLIC_ADDRESS`<br> e.g., `searchpa pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`                                                              |
+| **Filter**                  | `filter c/NETWORK`<br> e.g., `filter c/BTC`                                                                                                                                          |
