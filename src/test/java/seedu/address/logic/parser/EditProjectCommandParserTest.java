@@ -4,7 +4,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PROJECT_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_ALPHA;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_NAME_DESC_ALPHA;
+import static seedu.address.logic.commands.CommandTestUtil.PROJECT_SKILLS_DESC_BETA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_NAME_ALPHA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_SKILL_GAMBLING_BETA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_SKILL_THIEVERY_BETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -62,10 +65,11 @@ public class EditProjectCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PROJECT;
-        String userInput = targetIndex.getOneBased() + PROJECT_NAME_DESC_ALPHA;
+        String userInput = targetIndex.getOneBased() + PROJECT_NAME_DESC_ALPHA + PROJECT_SKILLS_DESC_BETA;
 
         EditProjectCommand.EditProjectDescriptor descriptor = new EditProjectDescriptorBuilder()
-                .withName(VALID_PROJECT_NAME_ALPHA).build();
+                .withName(VALID_PROJECT_NAME_ALPHA)
+                .withSkills(VALID_PROJECT_SKILL_GAMBLING_BETA, VALID_PROJECT_SKILL_THIEVERY_BETA).build();
         EditProjectCommand expectedCommand = new EditProjectCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

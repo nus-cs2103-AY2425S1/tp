@@ -34,7 +34,7 @@ public class EditProjectCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Project editedProject = new ProjectBuilder().withId("A0276123J").build();
+        Project editedProject = new ProjectBuilder().withId("1").build();
         EditProjectCommand.EditProjectDescriptor descriptor = new EditProjectDescriptorBuilder(editedProject).build();
         EditProjectCommand editCommand = new EditProjectCommand(INDEX_FIRST_PROJECT, descriptor);
 
@@ -184,6 +184,12 @@ public class EditProjectCommandTest {
 
         // null -> returns false
         assertFalse(standardCommand.equals(null));
+
+        // same EditProjectDescriptor -> returns true
+        assertTrue(copyDescriptor.equals(copyDescriptor));
+
+        // null EditProjectDescriptor -> returns false
+        assertFalse(copyDescriptor.equals(null));
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
