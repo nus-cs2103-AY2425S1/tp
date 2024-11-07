@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-HRConnect is a desktop app for **managing human resources in relation to projects** within a company.
+HRConnect is a desktop app designed to streamline the allocation of human resources to projects within a company.
 
-It is optimized for use via typing while still having the benefits of a [Graphical User Interface](#graphical-user-interface) (GUI). If you can type fast, HRConnect can get your HR management tasks done faster than traditional GUI apps.
+It is optimized for rapid use by HR professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect can get your HR management tasks done faster than traditional GUI apps.
 
 ---
 
@@ -48,6 +48,10 @@ The user guide contains formatting to highlight important info. The standards us
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
+  - [Employee Commands](#employee-commands)
+  - [Project Commands](#project-commands)
+  - [Assignment Commands](#assignment-commands)
+  - [Other Commands](#other-commands)
 - [Glossary](#glossary)
 
 ---
@@ -144,16 +148,16 @@ Format: `help`
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
 
-- Employee Id must be: [Numeric](#numeric), no spaces, unique amongst employees
+- Employee Id must be: [*Numeric*](#numeric), no spaces, unique amongst employees
 
   > [!NOTE]
   > Employee IDs are compared numerically. `0001` is treated the same as `1`.
 
-- Name must be: [Alphanumeric](#alphanumeric), spaces allowed
-- Phone Number must be: [Numeric](#numeric), no spaces, at least 3 digits long
+- Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
+- Phone Number must be: [*Numeric*](#numeric), no spaces, at least 3 digits long
 - Email must be: A valid email address
 - Address must be: Any characters are valid
-- Skills and tags must be: [Alphanumeric](#alphanumeric), no spaces
+- Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An employee can have any number of tags (including 0) and any number of skills (including 0)
@@ -190,18 +194,18 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL
 - Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- When editing skills, the existing skills of the person will be removed i.e adding of skills is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
+- When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
+- When editing skills, the existing skills of the employee will be removed i.e adding of skills is not cumulative.
+- You can remove all the employee’s tags by typing `t/` without
   specifying any tags after it.
-- You can remove all the person’s skills by typing `s/` without
+- You can remove all the employee’s skills by typing `s/` without
   specifying any skills after it.
-- You cannot edit a person's employee id. More specifically, you are not allowed to specify `id/EMPLOYEEID` in the `edit` command.
+- You cannot edit an employee's employee id. More specifically, you are not allowed to specify `id/EMPLOYEEID` in the `edit` command.
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the projectName of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
+- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
 Expected output:
 - System message noting success and details of employee edited
@@ -298,12 +302,12 @@ Expected output:
 
 Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
 
-- Project Id must be: [Numeric](#numeric), no spaces, unique amongst projects
+- Project Id must be: [*Numeric*](#numeric), no spaces, unique amongst projects
 
   > [!NOTE]
   > Project IDs are compared numerically. `0001` is treated the same as `1`.
 
-- Project Name must be: [Alphanumeric](#alphanumeric), spaces allowed
+- Project Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
 
 Examples:
 
@@ -498,7 +502,7 @@ HRConnect data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-HRConnect data is saved automatically as a JSON file `[JAR file location]/data/hrconnect.json`.  
+HRConnect data is saved automatically as a [*JSON*](#json) file `[JAR file location]/data/hrconnect.json`.  
 Advanced users are welcome to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -541,9 +545,9 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ## Command Summary
 
+### Employee Commands
 | Action                          | Format, Examples                                                                                                                                                                                                         |
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **- Employee Commands -**       |                                                                                                                                                                                                                          |
 | **Add Employee**                | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
 | **Clear Employees**             | `clear`                                                                                                                                                                                                                  |
 | **Delete Employee**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
@@ -551,20 +555,35 @@ When editing employee and project IDs directly in the data file, take extra caut
 | **Filter Employees (by skill)** | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
 | **Find Employees (by name)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
 | **List Employees**              | `listemployees`                                                                                                                                                                                                          |
-| **- Project Commands -**        |                                                                                                                                                                                                                          |
+
+[Return to Top](#table-of-contents)
+
+### Project Commands
+| Action                          | Format, Examples                                                                                                                                                                                                         |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Project**                 | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                                |
 | **Clear Projects**              | `clearproject`                                                                                                                                                                                                           |
 | **Delete Project**              | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
 | **Edit Project**                | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity`                                                                                                                       |
 | **Find Projects**               | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
 | **List Projects**               | `listproject`                                                                                                                                                                                                            |
-| **- Assignment Commands -**     |                                                                                                                                                                                                                          |
+
+[Return to Top](#table-of-contents)
+
+### Assignment Commands
+| Action                          | Format, Examples                                                                                                                                                                                                         |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Assignment**              | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/1 id/1`                                                                                                                             |
 | **Delete Assignment**           | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                  |
 | **List Assignments**            | `listassignments`                                                                                                                                                                                                        |
-| **Other Commands**              |                                                                                                                                                                                                                          |
+
+[Return to Top](#table-of-contents)
+
+### Other Commands
+| Action                          | Format, Examples                                                                                                                                                                                                         |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                                                                                                   |
-| **Exit Program**                | `exit`                                                                                                                                                                                                                    |
+| **Exit Program**                | `exit`                                                                                                                                                                                                                   |
 
 [Return to Top](#table-of-contents)
 
@@ -583,6 +602,10 @@ List of certain technical terms / uncommon words used in this user guide.
 ### Java
 - The programming language HRConnect is based on.
 - It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) and installed before attempting to run HRConnect.
+
+### JSON
+- JavaScript Object Notation, a format for storing and transferring data.
+- It can be opened in Notepad, or other text or code editors.
 
 ### Numeric
 - Consisting of the digits 0 to 9.
