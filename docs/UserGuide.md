@@ -449,7 +449,7 @@ Command Details & Constraints:
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
 
 Example:
-1. `deleteTut c/T1001` deletes the tutorial with Tutorial ID `1001`, provided the tutorial exists.
+1. `deleteTut c/T1001` deletes the tutorial with Tutorial ID `T1001`, provided the tutorial exists.
 
 
 #### 4.2.3 List tutorials: `listTut`
