@@ -35,7 +35,7 @@ If you can type fast, EventTory can get your **event management tasks** done fas
 
    * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew` : Creates a vendor named `Hong Lim Trading Pte. Ltd.` and saves in the application.
 
-   * `assign v/1 e/2` : Assigns the 1st vendor in the vendor list to the 2nd event in the event list.
+   * `view v/1` then `assign 2` : Assigns the 1st vendor in the vendor list to the 2nd event in the event list.
 
    * `view e/4` : View more information about the 4th event in the event list.
 
