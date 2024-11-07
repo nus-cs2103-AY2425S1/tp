@@ -221,18 +221,18 @@ Examples:
 
 ### Getting call history : `history`
 
-Shows a list of call dates and corresponding notes for the specified elderly, sorted from the latest to the oldest date.
+Shows a list of call dates and corresponding notes for the specified elderly, sorted from the latest to the oldest date and the profile view of the elderly which includes their details.
 
 Format: `history INDEX/NRIC`
 
-* Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
+* Shows the call history and profile view of the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
 * The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the current person list.
 
 Examples:
-* `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
-* `find Betsy` followed by `history 1` shows the call history of the 1st elderly in the results of the `find` command.
-* `history S7495552E` shows the call history of the elderly with NRIC `S7495552E`.
+* `list` followed by `history 2` shows the call history and profile view of the 2nd elderly in ContactMate.
+* `find Betsy` followed by `history 1` shows the call history and profile view of the 1st elderly in the results of the `find` command.
+* `history S7495552E` shows the call history and profile view of the elderly with NRIC `S7495552E`.
   ![result for 'history S7495552E'](images/historyRoy.png)
 
 ### Clearing all entries : `clear`
