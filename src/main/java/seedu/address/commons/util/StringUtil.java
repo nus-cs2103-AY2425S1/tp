@@ -116,6 +116,7 @@ public class StringUtil {
             String[] lines = s.split("\n");
             for (String line : lines) {
                 if (lineCount > TRUNCATED_LINE_NUMBER) {
+                    ans.append("...");
                     break;
                 }
                 if (line.length() > TRUNCATED_STRING_LENGTH) {
