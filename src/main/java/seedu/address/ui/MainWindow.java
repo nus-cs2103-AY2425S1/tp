@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.logic.Messages.MESSAGE_CANCEL_COMMAND;
-
 import java.io.File;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -29,7 +27,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final Set<String> CONFIRM_WORDS = Set.of("y", "yes");
     private static final String IMPORT_DATA_TITLE = "Import Data";
     private static final String EXPORT_DATA_TITLE = "Export Data";
     // TODO: handle *.csv files
@@ -41,7 +38,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private CommandResult lastCommandResult = null; // Tracks the most recent CommandResult
 
     // Independent Ui parts residing in this Ui container
     private CommandBox commandBox;
@@ -145,7 +141,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand, this::checkPromptConfirmation);
+        commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -210,92 +206,37 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            lastCommandResult = logic.execute(commandText);
-            executeTillTerminalResult();
-            return lastCommandResult;
+            CommandResult commandResult = logic.execute(commandText);
+
+            switch (commandResult.getType()) {
+            case PROMPT:
+                logger.info("Prompt: " + commandResult.getFeedbackToUser());
+                break;
+            case IMPORT_DATA:
+                commandResult = logic.processFile(selectImportFile());
+                break;
+            case EXPORT_DATA:
+                commandResult = logic.processFile(selectExportFile());
+                break;
+            case SHOW_HELP:
+                handleHelp();
+                // Fallthrough
+            default:
+                logger.info("Result: " + commandResult.getFeedbackToUser());
+            }
+
+            resultDisplay.setSuccessFeedbackToUser(commandResult.getFeedbackToUser());
+            commandBox.setFeedbackToUser(commandResult.getHistory());
+
+            if (commandResult.getType() == CommandResult.Type.EXIT) {
+                handleExit();
+            }
+
+            return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setErrorFeedbackToUser(e.getMessage());
             throw e;
         }
-    }
-
-    /**
-     * Checks if the user accepted a confirmation prompt. If the prompt was confirmed, executes the continuation
-     * function of the most recent {@link CommandResult} and returns the result.
-     */
-    private CommandResult checkPromptConfirmation(String userInput) throws CommandException {
-        if (!isConfirmation(userInput)) {
-            lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
-        } else {
-            lastCommandResult = lastCommandResult.confirmPrompt();
-        }
-        executeTillTerminalResult();
-        return lastCommandResult;
-    }
-
-    /**
-     * Executes the continuation function of the most recent {@link CommandResult} until a terminal result is reached.
-     */
-    private void executeTillTerminalResult() throws CommandException {
-        while (true) {
-            switch (lastCommandResult.getType()) {
-            case ORDINARY: // terminal
-                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
-                break;
-
-            case SHOW_HELP: // terminal
-                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
-                handleHelp();
-                break;
-
-            case EXIT: // terminal
-                logger.info("Result: " + lastCommandResult.getFeedbackToUser());
-                handleExit();
-                break;
-
-            case PROMPT: // terminal
-                logger.info("Prompt: " + lastCommandResult.getFeedbackToUser());
-                commandBox.waitForPrompt();
-                break;
-
-            case IMPORT_DATA: // intermediate
-                File importFile = selectImportFile();
-                if (importFile == null) {
-                    lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
-                    break;
-                }
-
-                logger.info(String.format("Importing data from &1%s", importFile.getPath()));
-                lastCommandResult = lastCommandResult.processFile(logic.importFile(importFile));
-                continue;
-
-            case EXPORT_DATA: // intermediate
-                File exportFile = selectExportFile();
-                if (exportFile == null) {
-                    lastCommandResult = new CommandResult(MESSAGE_CANCEL_COMMAND);
-                    break;
-                }
-
-                logger.info(String.format("Exporting data to &1%s", exportFile.getPath()));
-                lastCommandResult = lastCommandResult.processFile(logic.exportFile(exportFile));
-                continue;
-
-            default:
-                throw new CommandException("An error occurred during the execution of this command");
-                // This line should not be reached
-            }
-
-            break;
-        }
-        resultDisplay.setSuccessFeedbackToUser(lastCommandResult.getFeedbackToUser());
-        commandBox.setFeedbackToUser(lastCommandResult.getHistory());
-    }
-
-    /**
-     * Checks if the given user input corresponds to user confirming a prompt.
-     */
-    private boolean isConfirmation(String userInput) {
-        return CONFIRM_WORDS.contains(userInput.trim().toLowerCase());
     }
 }
