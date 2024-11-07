@@ -87,7 +87,7 @@ If Java is not installed or if the version is below `17`, download the latest Ja
   e.g `n/NAME [r/ROLE]` can be used as `n/John Doe r/attendee` or as `n/John Doe`.
 
 * Items in angled brackets require at least one item to be present.<br>
-  e.g `ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>` can be used as `n/John Doe r/attendee` or as `n/John Doe`.
+  e.g `ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX` can be used as `ei/2 a/1` or as `ei/2 a/1 ve/3 vo/2 s/5`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[r/ROLE]…​` can be used as ` ` (i.e. 0 times), `r/attendee`, `r/attendee r/sponsor` etc.
@@ -117,7 +117,7 @@ Adds a contact to the address book.
 
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">**Note:**
 A contact can have any number of roles (including 0), and the Telegram username is optional.
 </div>
 
@@ -153,14 +153,13 @@ Examples:
 
 #### Locating Contacts by Name or Role: `find-name` and `find-role`
 
-##### Find Contacts by Keywords in Name: `find-name`
+##### Find Contacts by Keywords in Name: `find-name` or `fn`
 Finds contacts whose names contain any of the provided keywords.
 
 Format: `find-name KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive (e.g., `hans` matches `Hans`).
 * The order of keywords does not matter (e.g., `Hans Bo` matches `Bo Hans`).
-* Only full words will be matched (e.g., `Han` will not match `Hans`).
 * Contacts matching at least one keyword will be returned (i.e., an `OR` search).<br>
   For example, `Hans Bo` will return `Hans Gruber` and `Bo Yang`.
 
