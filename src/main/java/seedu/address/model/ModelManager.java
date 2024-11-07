@@ -33,6 +33,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final Map<Student, Map<LocalDate, StudentAttendance>> attendanceMap = new HashMap<>();
+    private Predicate<Student> filter = PREDICATE_SHOW_ALL_STUDENTS;
 
 
     /**
@@ -112,6 +113,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Predicate<Student> getPredicate() {
+        return filter;
+    }
+
+    @Override
     public void addStudent(Student student) {
         addressBook.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -153,6 +159,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+        filter = predicate;
         filteredStudents.setPredicate(predicate);
     }
 

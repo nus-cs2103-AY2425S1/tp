@@ -77,6 +77,12 @@ public interface Model {
     ObservableList<Student> deleteAllStudents();
 
     /**
+     * Get the current filter for the student list
+     * @return {@code Predicate<Student>} for the student list
+     */
+    Predicate<Student> getPredicate();
+
+    /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */
