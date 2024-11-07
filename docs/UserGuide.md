@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "User Guide"
-  pageNav: 3
+    title: "User Guide"
+    pageNav: 3
 ---
 
 # TAHub User Guide
@@ -14,13 +14,12 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 <page-nav-print />
 
 ---
+
 ## Glossary
 
 - **CLI**: Command Line Interface, where you type commands to interact with the application.
 - **GUI**: Graphical User Interface, where you interact with the application through visual elements like buttons and windows.
 - **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list.
-
-
 
 ## Quick start
 
@@ -37,15 +36,15 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   - `list` : Lists all contacts.
+    - `list` : Lists all contacts.
 
-   - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T` : Adds a contact named `John Doe` to the Address Book.
+    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T` : Adds a contact named `John Doe` to the Address Book.
 
-   - `delete 3` : Deletes the 3rd contact shown in the current list.
+    - `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   - `clear` : Deletes all contacts.
+    - `clear` : Deletes all contacts.
 
-   - `exit` : Exits the app.
+    - `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -55,96 +54,96 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-   - **Check if Java is installed:**
+    - **Check if Java is installed:**
 
-     1. Open your command terminal:
-        - <span style="color: #1f77b4;"><strong>Windows:</strong></span>: Press `Windows + R`, type `cmd`, and hit Enter.
-        - <span style="color: #ff7f0e;"><strong>Mac:</strong></span> Press `Command + Space`, type `Terminal`, and hit Enter.
-        - <span style="color: #2ca02c;"><strong>Linux</strong></span>: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
-     2. Once the terminal is open, type the following command and press Enter:
-        ```bash
-        java -version
-        ```
-     3. If your system has Java `17` or above, you should see something like:
-        ```bash
-        java version "17.0.x" 2024-xx-xx LTS
-        ```
-     4. If your Java version is lower than `17`, proceed to the next step to install Java.
+        1. Open your command terminal:
+            - <span style="color: #1f77b4;"><strong>Windows:</strong></span>: Press `Windows + R`, type `cmd`, and hit Enter.
+            - <span style="color: #ff7f0e;"><strong>Mac:</strong></span> Press `Command + Space`, type `Terminal`, and hit Enter.
+            - <span style="color: #2ca02c;"><strong>Linux</strong></span>: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
+        2. Once the terminal is open, type the following command and press Enter:
+           ```bash
+           java -version
+           ```
+        3. If your system has Java `17` or above, you should see something like:
+           ```bash
+           java version "17.0.x" 2024-xx-xx LTS
+           ```
+        4. If your Java version is lower than `17`, proceed to the next step to install Java.
 
-   - **Install Java `17` if not installed:**
-     1. Go to [Oracle's Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
-     2. Download and install the appropriate Java Development Kit (JDK) for your operating system by following the instructions provided.
-     3. After installation, repeat the `java -version` command to ensure Java is properly installed.
+    - **Install Java `17` if not installed:**
+        1. Go to [Oracle's Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
+        2. Download and install the appropriate Java Development Kit (JDK) for your operating system by following the instructions provided.
+        3. After installation, repeat the `java -version` command to ensure Java is properly installed.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
 
-   1. Visit the [GitHub releases page](https://github.com/se-edu/TAHub-level3/releases).
-   2. Download the `.jar` file (for example, `TAHub.jar`) from the latest release.
-   3. Save the `.jar` file to the folder where you want to store your TAHub project.
+    1. Visit the [GitHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases/).
+    2. Download the `.jar` file (`TAHub.jar`) from the latest release.
+    3. Save the `.jar` file to the folder where you want to store your TAHub project.
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
-   1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
+    1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
 
-      - Locate the downloaded `.jar` file in your `Downloads` folder.
-      - Right-click on the `.jar` file, select Copy.
-      - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
+        - Locate the downloaded `.jar` file in your `Downloads` folder.
+        - Right-click on the `.jar` file, select Copy.
+        - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
 
-   2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
+    2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
 
-      - Open the **Finder** and go to your `Downloads` folder.
-      - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
-      - Go to the folder where you want to keep the file, then right-click and select Paste.
+        - Open the **Finder** and go to your `Downloads` folder.
+        - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
+        - Go to the folder where you want to keep the file, then right-click and select Paste.
 
-   3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
-      - Open your file manager and go to your `Downloads` directory.
-      - Right-click on the `.jar` file, choose Copy.
-      - Go to the destination folder, right-click and select Paste.
+    3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
+        - Open your file manager and go to your `Downloads` directory.
+        - Right-click on the `.jar` file, choose Copy.
+        - Go to the destination folder, right-click and select Paste.
 
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
-   1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
+    1. <span style="color: #1f77b4;"><strong>Windows</strong></span>:
 
-      - Open the folder where you saved the `.jar` file.
-      - To get the full path of the folder:
-        1. Right-click on the folder and select **Properties**.
-        2. In the **General** tab, you will see the **Location** field. Copy the location path. (Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`))
-      - Open the **Command Prompt**:
-        - Press `Windows + R`, type `cmd`, and press Enter.
-      - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
-        ```bash
-        cd C:\Users\YourName\Documents\TAHub
-        ```
-      - Run the app with:
-        ```bash
-        java -jar TAHub.jar
-        ```
+        - Open the folder where you saved the `.jar` file.
+        - To get the full path of the folder:
+            1. Right-click on the folder and select **Properties**.
+            2. In the **General** tab, you will see the **Location** field. Copy the location path. (Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`))
+        - Open the **Command Prompt**:
+            - Press `Windows + R`, type `cmd`, and press Enter.
+        - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
+          ```bash
+          cd C:\Users\YourName\Documents\TAHub
+          ```
+        - Run the app with:
+          ```bash
+          java -jar TAHub.jar
+          ```
 
-   2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>/<span style="color: #2ca02c;"><strong>Linux</strong></span>:
-      - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
-      - To get the full path of the folder where the `.jar` file is located:
-        - Open **Finder** or **File Explorer**.
-        - Navigate to the folder where you saved the `.jar` file.
-        - Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy the path.
-      - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
-        ```bash
-        cd /Users/YourName/Documents/TAHub
-        ```
-      - Run the app with:
-        ```bash
-        java -jar TAHub.jar
-        ```
+    2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>/<span style="color: #2ca02c;"><strong>Linux</strong></span>:
+        - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
+        - To get the full path of the folder where the `.jar` file is located:
+            - Open **Finder** or **File Explorer**.
+            - Navigate to the folder where you saved the `.jar` file.
+            - Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy the path.
+        - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
+          ```bash
+          cd /Users/YourName/Documents/TAHub
+          ```
+        - Run the app with:
+          ```bash
+          java -jar TAHub.jar
+          ```
 
    After a few seconds, the GUI similar to the one below should appear:
    ![StartUpPage](images/StartUpPage.png)
 
 5. Type commands in the command box and press Enter to execute them. Some example commands you can try:
 
-   - `list`: Lists all contacts.
-   - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`: Adds a contact named `John Doe`.
-   - `delete 3`: Deletes the 3rd contact shown in the current list.
-   - `clear`: Deletes all contacts.
-   - `exit`: Exits the app.
+    - `list`: Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T`: Adds a contact named `John Doe`.
+    - `delete 3`: Deletes the 3rd contact shown in the current list.
+    - `clear`: Deletes all contacts.
+    - `exit`: Exits the app.
 
 6. Refer to the [Features](#features) section below for details of each command.
 
@@ -168,8 +167,9 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- **Extraneous parameters are not allowed and will cause an error.** Even in commands that do not need any parameters
+  (such as `help`, `list`, `exit` and `clear`), the program will still notify the user when unrecognized parameters are present.
+  This is to prevent the user from making mistakes and misinterpreting what a command does.
 
 - Dates supplied by the user are assumed to be in Anno Domini or the Common Era. In other words, the user will not be able to enter a date before the year 0001 AD. 
 
@@ -223,8 +223,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COURSE] [t/TAG]…​`
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+- You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
@@ -244,8 +243,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 
@@ -311,6 +309,36 @@ Examples:
 Expected output:
 ![result for 'find John' followed by 'deleteGrade 1 n/Midterm'](images/deleteGrade.png)
 
+### Performing grade aggregation operations: `aggGrade`
+
+Performs aggregation operation on the current filtered list of people.
+
+Format: `aggGrade OPERATION [n/TEST_NAME]`
+`OPERATION` can be:
+
+- `var`: Taking **variance**
+- `stddev`: Taking **standard deviation**
+- `mean`: Taking **mean**
+- `max`: Taking **maximum**
+- `min`: Taking **minimum**
+- `median`: Taking **median**
+
+Without the `[n/TEST_NAME]` parameter, the command performs the selected aggregation `OPERATION` on the **overall grade** of the current filtered list.
+
+When adding in the `[n/TEST_NAME]` parameter, the behaviour of the command changes to perform the selected aggregation `OPERATION` **only on
+`TEST_NAME` tests** of the current filtered list.
+
+Example:
+
+- `aggGrade median` Shows the median of the overall grade of the current filtered list.
+- `aggGrade median n/Midterm` Shows the median for midterm tests of the current filtered list.
+
+Expected output for `aggGrade median`:
+![result for 'aggGrade median'](images/aggGrade_normal.png)
+
+Expected output for `aggGrade median n/midterm`
+![result for 'aggGrade median n/midterm'](images/aggGrade_filtered.png)
+
 ### Marking attendance: `mark`
 
 Marks the attendance record for the specified date for a person in the address book. If the attendance record for that date already exists, it will be overwritten.
@@ -346,6 +374,22 @@ Examples:
 
 Expected output:
 ![result for 'find John' followed by 'unmark 1 d/31/01/2024 12:00'](images/unmarkAttendance.png)
+
+### Filtering people who were absent: `absentees`
+
+Finds all people who were absent on the specified date and time.
+
+Format: `absentees d/DATE_TIME`
+
+- `DATE_TIME` refers to the date and time for which you want to find people who were absent. It must be written in the format `dd/MM/yyyy HH:mm`.
+- Note that people who were present at the specified date and time will not be shown.
+
+Examples:
+
+- `absentees d/31/01/2024 10:00` Finds all people who were absent on the 10 AM of January 31st, 2024.
+
+Expected output:
+![result for 'absentees d/31/01/2024 10:00'](images/absentees.png)
 
 ### Clearing all entries : `clear`
 
@@ -394,7 +438,7 @@ _Details coming soon ..._
     - Copy the `TAHub.json` file to a USB drive, cloud storage, or any other method you prefer for transferring files between computers.
 
 2. **Install TAHub on the New Computer**:
-    - Download the latest `.jar` file from the [TAHub releases page](https://github.com/se-edu/TAHub-level3/releases).
+    - Download the latest `.jar` file from the [TAHub releases page](https://github.com/AY2425S1-CS2103T-T08-4/tp/releases).
     - Place the `.jar` file in a folder on the new computer where you want to use TAHub.
 
 3. **Run TAHub Once on the New Computer**:
@@ -431,33 +475,36 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 
 ### Person Commands
 
-| Action      | Format, Examples                                                                                                                                    |
-| ----------- |-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/CS2103/T t/friend t/colleague` |
-| **Clear**   | `clear`                                                                                                                                             |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                 |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                          |
+| Action     | Format, Examples                                                                                                                                    |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com c/CS2103/T t/friend t/colleague` |
+| **Clear**  | `clear`                                                                                                                                             |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                 |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                          |
 
 ### Grade Commands
 
-| Action              | Format, Examples                                                                                                      |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| **Add/Edit Grade**  | `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE` <br> e.g., `addGrade 1 n/Midterm s/85 w/30`                          |
-| **Delete Grade**    | `deleteGrade INDEX n/TEST_NAME` <br> e.g., `deleteGrade 1 n/Midterm`                                                 |
+| Action                | Format, Examples                                                                             |
+|-----------------------|----------------------------------------------------------------------------------------------|
+| **Add/Edit Grade**    | `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE` <br> e.g., `addGrade 1 n/Midterm s/85 w/30` |
+| **Delete Grade**      | `deleteGrade INDEX n/TEST_NAME` <br> e.g., `deleteGrade 1 n/Midterm`                         |
+| **Grade Aggregation** | `aggGrade OPERATION [n/TEST_NAME]` <br> e.g., `aggGrade median n/Midterm`                    |
 
 ### Attendance Commands
 
-| Action                | Format, Examples                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended`                            |
-| **Unmark Attendance** | `unmark INDEX d/DATE_TIME` <br> e.g., `unmark 1 d/31/01/2024 10:00`                                                |
+| Action                | Format, Examples                                                                        |
+|-----------------------|-----------------------------------------------------------------------------------------|
+| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended` |
+| **Unmark Attendance** | `unmark INDEX d/DATE_TIME` <br> e.g., `unmark 1 d/31/01/2024 10:00`                     |
+| **Filter Absentees**  | `absentees d/DATE_TIME` <br> e.g., `absentees d/31/01/2024 10:00`                        |
 
 ### General Commands
 
-| Action          | Format                                                                                                                    |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **List**        | `list`                                                                                                                    |
-| **Help**        | `help`                                                                                                                    |
-| **Exit**        | `exit`                                                                                                                    |
+| Action   | Format |
+|----------|--------|
+| **List** | `list` |
+| **Help** | `help` |
+| **Exit** | `exit` |
+
 
