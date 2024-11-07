@@ -663,38 +663,144 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file <br>
+      **Expected**: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+       **Expected**: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a student
+1. Adding a student with basic details
 
-### Deleting a student
+    1. Test case (standard): add n/John Doe p/83143234 a/74 Acorn Street 11 653203 #02-02 gl/abrsm 1 g/ <br>
+       **Expected**: Student "John Doe" is added to the student directory with correct details.
 
-1. Deleting a student while all students are being shown
+    2. Test case (with group): add n/Mary Sue p/9732123 a/51 Mangrove Drive 11 642371 #01-03 gl/abrsm 2 g/Group one <br>
+       **Expected**: Student "Mary Sue" is added to the student directory, assigned to "Group one".
 
-   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+2. Adding a duplicate student
+    1. Test case (name and phone clashing): add n/john doe p/83143234 a/Acorn Street #02-02 gl/abrsm 1 g/ <br>
+       **Expected**: Error is thrown as student already exists (note the lower case)
+    2. Test case (only name is clashing): add n/John Doe p/8923921 a/Acorn Street #03-01 gl/abrsm 1 g/ <br>
+       **Expected**: Student "John Doe" is added to the student directory, as the duplicate criteria is name and phone number
 
-   1. Test case: `delete 1`<br>
-      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
+### Editing a student
+1. Editing a student’s details
 
-   1. Test case: `delete 0`<br>
-      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Prerequisites: List all students using the list command. Ensure there is at least one student in the list.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   2. Test case: edit 1 n/Jane Doe p/91234567 <br>
+      **Expected**: The first student's name and phone number are updated to "Jane Doe" and "91234567", respectively.
 
-1. _{ more test cases …​ }_
+   3. Test case: edit 1 g/Group one<br>
+      **Expected**: The first student's group is updated to "Group one".
+
+### Assigning Piano Pieces to a Student
+1. Assign piano pieces
+
+    1. Test case: assign 1 pn/Moonlight Sonata pn/Fur Elise <br>
+       **Expected**: "Moonlight Sonata" and "Fur Elise" are assigned to the first student.
+    2. Test case: assign 1 pn/Moonlight Sonata pn/Claire de Lune<br>
+       **Expected**: Throws an error not allowing you to assign the same piece twice
+    3. Test case: assign 2 pn/Waltz pn/Etude
+       **Expected**: "Waltz" and "Etude" are assigned to the second student.
+   
+### Unassigning Piano Pieces from a Student
+1. Unassign piano pieces
+
+    1. Test case: unassign 1 pn/Moonlight Sonata pn/Fur Elise <br>
+       **Expected**: "Moonlight Sonata" and "Fur Elise" are unassigned from the first student.
+    2. Test case: unassign 2
+       **Expected**: All pieces are unassigned from the second student
+
+### Scheduling a Regular Lesson
+1. Schedule a lesson
+
+    1. Test case: schedule 1 d/Monday st/12:00 et/14:00 <br>
+       **Expected**: A regular lesson is scheduled for the first student on Monday from 12:00 to 14:00.
+
+    1. Test case: schedule 2 d/Friday st/09:00 et/10:30<br>
+       **Expected**: A regular lesson is scheduled for the second student on Friday from 09:00 to 10:30.
+
+### Cancelling a Regular Lesson
+1. Cancel a scheduled lesson
+
+    1. Test case: cancel 1 dt/15-10-2024 st/12:00 <br>
+       **Expected**: The first student's lesson on October 15, 2024, at 12:00 is canceled.
+
+    1. Test case: cancel 2 dt/20-10-2024 st/09:00<br>
+       **Expected**: The second student's lesson on October 20, 2024, at 09:00 is canceled.
+
+### Scheduling a Makeup Lesson
+1. Schedule a makeup lesson
+
+    1. Test case: makeup 1 dt/25-12-2024 st/12:00 et/14:00 <br>
+       **Expected**: A makeup lesson is scheduled for the first student on December 25, 2024, from 12:00 to 14:00.
+
+    1. Test case: makeup 2 dt/26-12-2024 st/10:00 et/11:30<br>
+       **Expected**: A makeup lesson is scheduled for the second student on December 26, 2024, from 10:00 to 11:30.
+    1. Test case: makeup 1 dt/31-02-2024 st/10:00 et/12:00 <br>
+       **Expected**: An error is thrown as 31st Feb is not a valid date.
+
+### Viewing the Schedule
+1. View current week’s schedule
+
+    1. Test case: view <br>
+       **Expected**: The schedule for the current week is displayed, showing all lessons and makeup lessons.
+
+2. View a specific week’s schedule
+
+   1. Test case: view dt/01-12-2024 <br>
+      **Expected**: The schedule for the week starting December 1, 2024, is displayed, showing all lessons for that period.
+### Finding Students
+1. Find by name
+
+    1. Test case: find n/John <br>
+       **Expected**: Students with "John" in their name are displayed.
+
+2. Find by multiple details
+
+    1. Test case: find n/John gl/ABRSM<br>
+    **Expected**: Students with "John" in their name and "ABRSM" in their grade level are displayed.
+
+### Sorting Students
+1. Sort by name in ascending order
+
+    1. Test case: sort n/ASC <br>
+       **Expected**: The list of students is sorted alphabetically by name in ascending order.
+
+2. Sort by grade level in descending order and name in ascending order
+
+    1. Test case: sort gl/DESC n/ASC <br>
+       **Expected**: Students are first sorted by grade level in descending order, and those with the same grade level are sorted by name in ascending order.
+
+### Undoing the Last Command
+1. Undo previous modification
+
+    1. Test case: undo after performing any modification (e.g., adding a student). <br>
+       **Expected**: The last modification is reverted, and the student directory reflects this change.
+
+### Redoing the Last Undo Command
+1. Redo last undone action
+
+    1. Test case: redo after an undo command. <br>
+       **Expected**: The previously undone action is reapplied, and the student directory reflects the re-application of the change.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Files are corrupted in the following cases:
+      1. Invalid values
+      2. Clashing lessons
+      3. Duplicate students
+      4. Incorrect group syncing
+      5. Invalid file format
+      6. Invalid JSON object structure
+   <br><br>
+   1. **Expected**: KeyContacts will load an empty list. Upon performing any command, a new data file will be written to override the corrupted data file. 
 
-1. _{ more test cases …​ }_
