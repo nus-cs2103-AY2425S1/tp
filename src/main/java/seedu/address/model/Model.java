@@ -165,4 +165,8 @@ public interface Model {
 
     void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
             VolunteerDeleteMissingDateException;
+
+    ObservableList<Event> filterEventsByName(String searchString);
+
+    ObservableList<Volunteer> filterVolunteersByName(String searchString);
 }

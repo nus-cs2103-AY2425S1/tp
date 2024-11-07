@@ -239,23 +239,22 @@ public class ModelManager implements Model {
         filteredVolunteers.setPredicate(predicate);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    /**
+     * Filters the list of volunteers to only include those whose names contain the specified search string,
+     * ignoring case. Updates the filtered volunteer list in the model to reflect this criteria.
+     *
+     * @param searchString The string to search for within volunteer names. This search is case-insensitive.
+     * @return An observable list of volunteers that contain the search string in their names.
+     */
+    public ObservableList<Volunteer> filterVolunteersByName(String searchString) {
+        Predicate<Volunteer> volunteerContainsSearchString = volunteer ->
+                volunteer.getName().toString().toLowerCase().contains(searchString.toLowerCase());
+        updateFilteredVolunteerList(volunteerContainsSearchString);
 
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredVolunteers.equals(otherModelManager.filteredVolunteers)
-                && filteredEvents.equals(otherModelManager.filteredEvents);
+        return getFilteredVolunteerList();
     }
+
+
 
     //=========== Filtered Event List Accessors =============================================================
 
@@ -276,6 +275,38 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+    /**
+     * Filters the list of events to only include those whose names contain the specified search string,
+     * ignoring case. Updates the filtered event list in the model to reflect this criteria.
+     *
+     * @param searchString The string to search for within event names. This search is case-insensitive.
+     * @return An observable list of events that contain the search string in their names.
+     */
+    public ObservableList<Event> filterEventsByName(String searchString) {
+        Predicate<Event> eventContainsSearchString = event ->
+                event.getName().toString().toLowerCase().contains(searchString.toLowerCase());
+        updateFilteredEventList(eventContainsSearchString);
+
+        return getFilteredEventList();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredVolunteers.equals(otherModelManager.filteredVolunteers)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
 }

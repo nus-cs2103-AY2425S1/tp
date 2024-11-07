@@ -3,8 +3,6 @@ package seedu.address.logic.commands.volunteercommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VOLUNTEERS;
 
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -47,18 +45,14 @@ public class FindVolunteerCommand extends Command {
             throw new CommandException(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, searchString));
         }
 
-        Predicate<Volunteer> volunteerContainsSearchString = volunteer ->
-                volunteer.getName().toString().toLowerCase().contains(searchString.toLowerCase());
-        model.updateFilteredVolunteerList(volunteerContainsSearchString);
+        ObservableList<Volunteer> filteredEvents = model.filterVolunteersByName(searchString);
 
-        ObservableList<Volunteer> filteredVolunteers = model.getFilteredVolunteerList();
-        if (filteredVolunteers.isEmpty()) {
+        if (filteredEvents.isEmpty()) {
             model.updateFilteredVolunteerList(PREDICATE_SHOW_ALL_VOLUNTEERS);
             return new CommandResult(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, searchString));
         }
 
-        String resultMessage = String.format(MESSAGE_VOLUNTEER_FOUND, filteredVolunteers.size(), searchString);
-
+        String resultMessage = String.format(MESSAGE_VOLUNTEER_FOUND, filteredEvents.size(), searchString);
         return new CommandResult(resultMessage);
     }
 

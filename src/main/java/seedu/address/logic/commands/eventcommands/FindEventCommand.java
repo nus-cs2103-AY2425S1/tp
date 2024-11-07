@@ -3,8 +3,6 @@ package seedu.address.logic.commands.eventcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -47,20 +45,17 @@ public class FindEventCommand extends Command {
             throw new CommandException(String.format(MESSAGE_EVENT_NOT_FOUND, searchString));
         }
 
-        Predicate<Event> eventContainsSearchString = event ->
-                event.getName().toString().toLowerCase().contains(searchString.toLowerCase());
-        model.updateFilteredEventList(eventContainsSearchString);
+        ObservableList<Event> filteredEvents = model.filterEventsByName(searchString);
 
-        ObservableList<Event> filteredEvents = model.getFilteredEventList();
         if (filteredEvents.isEmpty()) {
             model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
             return new CommandResult(String.format(MESSAGE_EVENT_NOT_FOUND, searchString));
         }
 
         String resultMessage = String.format(MESSAGE_EVENT_FOUND, filteredEvents.size(), searchString);
-
         return new CommandResult(resultMessage);
     }
+
 
     @Override
     public boolean equals(Object other) {

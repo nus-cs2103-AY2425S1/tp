@@ -171,7 +171,9 @@ public class VolunteerNewCommandTest {
         public void viewEvent(Event eventToView) {
             throw new AssertionError("This method should not be called.");
         }
-
+        public ObservableList<Event> filterEventsByName(String searchString) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void viewVolunteer(Volunteer volunteerToView) {
             throw new AssertionError("This method should not be called.");
@@ -229,6 +231,10 @@ public class VolunteerNewCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Volunteer> filterVolunteersByName(String searchString) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
