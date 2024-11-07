@@ -159,6 +159,10 @@ This section describes some noteworthy details on how certain features are imple
 The following sequence diagram shows how a sort command goes through the `Model` component:
 ![ArchiveSortSequenceDiagram](images/ArchiveSortSequenceDiagram.png)
 
+### Find feature
+The following sequence diagram shows how a find command goes through the `Model` component:
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -235,8 +239,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted). 
     * Cons: We must ensure that the implementation of each individual command are correct.
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
