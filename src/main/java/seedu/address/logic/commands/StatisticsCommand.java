@@ -87,8 +87,8 @@ public class StatisticsCommand extends Command {
             // update the total count of applicants in the system
             totalApplicantsInSystem += jobStats.getTotalApplicants();
         }
-        statisticsMessage.insert(0, "Total number of applicant(s) by job code and interview Stages:\n");
-        // insert the total number of tags across all job codes
+        statisticsMessage.insert(0, "Total number of applicant(s) by job code and interview stages:\n");
+        // insert the total number of tags across all job codes.
         insertTagPercentages(statisticsMessage, tagCounts, totalApplicantsInSystem);
         insertHeading(statisticsMessage, "Total number of applicant(s) in system: " + totalApplicantsInSystem);
         insertHeading(statisticsMessage, "STATISTICS");

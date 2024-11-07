@@ -126,48 +126,45 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
-### Locating persons by name: `find`
+### Locating persons by criteria given: `find`
 
-Finds persons
+Finds persons by criteria given
 
 Format:
-`find n/FULL_NAME`
-`find j/JOB_CODE_APPLIED_FOR`
-`find t/TAG`
-`find n/FULL_NAME p/PHONE`
-`find n/FULL_NAME e/EMAIL`
+`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB CODE] [t/TAG] [r/REMARK]`
 
-* The search for name is case-insensitive. e.g `hans` will match `Hans`
-* The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and not `Bo Hans`
-* Job code is case-sensitive.
-* Tag is case-insensitive.
-* Email is case-insensitive.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and `Hans Bobo`, but not `Bo Hans`
+* All fields are case-insensitive
+* Search will be done using partial match
 
 Examples:
-* `find n/alex yeoh` returns `Alex Yeoh`
-* `find t/TP` returns the list of contacts with TP tag <br>
+* `find n/alex yeoh` returns `Alex Yeoh` and `Alex Yeoh Bin Sheng`
+* `find t/TP` returns the list of contacts with `TP` tag <br>
   ![result for 'findTp'](images/findTp.png)
+* `find n/alex yeoh t/TP` return the list of contacts with name containing `alex yeoh` whose tag is `TP`
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the address book by finding exact match of a field
 
 Format:
 `delete INDEX`
 `delete n/NAME`
+`delete e/EMAIL`
+`delete p/PHONE`
 `delete n/NAME p/PHONE`
 `delete n/NAME e/EMAIL`
 
-* Deletes the person at the specified `INDEX`, with a specified full name `NAME`, `NAME` and `PHONE`, or `NAME` and `EMAIL`
+* Deletes the person at the specified `INDEX`/`NAME`/`PHONE`/`EMAIL`/`NAME` and `PHONE`/`NAME` and `EMAIL`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* If there are contacts with duplicate names, user must specifically find `NAME` and `PHONE` or `NAME` and `EMAIL`.
+* If there are contacts with duplicate names, user must specify `NAME` and `PHONE`/`NAME` and `EMAIL`.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete n/Betsy` will delete contact with the full name Betsy.
+* `delete e/betsy@gmail.com` will delete the contact with the email betsy@gmail.com
 * If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command`delete n/John Doe p/8834156` to delete the former.
 
 ### Adding/Removing remark for a person : `remark`
@@ -185,6 +182,52 @@ Format:
 **Examples**:
 - `remark 2 r/Available for part-time work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
 
+
+### Showing applicant statistics: `stats`
+
+Format: 
+`stats`
+
+Shows the following statistics of the contact book at the time the command is called:
+- Total number of applicants.
+- Percentage of applicants in each interview stage regardless of job code.
+- Number of applicants for each job code and each interview stage for that job code.
+
+Examples:
+`stats`
+                           
+### Bulk reject persons by criteria: `massreject`
+
+Marks persons as "rejected" by updating their tags based on specified job code, tag, or a combination of both.
+
+Format:
+`massreject [j/JOB CODE] [t/TAG]`
+
+* Updates contacts' tags to `r` (rejected) based on the specified criteria.
+* You can filter by job code only, tag only, or a combination of both.
+* If only a job code is provided, persons with the `a` (accepted) tag will be excluded from the update.
+
+Examples:
+* `massreject j/SWE2024 t/TP` marks all persons with the job code `SWE2024` and the tag `TP` as rejected.
+* `massreject t/BP` marks all persons with the tag `BP` as rejected.
+* `massreject j/SWE2024` marks all persons with the job code `SWE2024` as rejected, except those already tagged as `a` (accepted).
+
+### Sorting persons by fields: `sort`
+
+Sorts the list of persons based on specified fields in a case-insensitive manner. Sorting can be done by a single field or layered across multiple fields.
+
+Format:
+`sort [n/] [p/] [e/] [j/] [t/]`
+
+* You can sort by any combination of name, phone, email, job code, and/or tag.
+* Sorting is case-insensitive.
+* Layered sorting is supported. If multiple fields are specified, the list will be sorted by the first field, then by the second within each group of the first, and so on.
+
+Examples:
+* `sort n/` and `sort` sorts all persons by name.
+* `sort t/ j/` sorts all persons by tag first, and within each tag, sorts by job code.
+* `sort j/ n/` sorts all persons by job code, and within each job code, sorts by name.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -199,7 +242,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Talentcy data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -279,7 +322,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
 **Clear**  | `clear`
-**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE_NUMBET` e.g. `delete n/Alex Yeoh p/88306733`
+**Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find n/FULL_NAME` `find j/JOB_CODE_APPLIED_FOR` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
 **List**   | `list`

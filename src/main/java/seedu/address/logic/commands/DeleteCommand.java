@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             + "n/PHONE\n"
             + "n/NAME e/EMAIL\n"
             + "n/NAME p/PHONE\n"
-            + "Example:\n" + COMMAND_WORD + " 1\n"
+            + "Examples:\n" + COMMAND_WORD + " 1\n"
             + COMMAND_WORD + " n/John Doe\n"
             + COMMAND_WORD + " e/johndoe@gmail.com\n"
             + COMMAND_WORD + " p/88308830\n"
