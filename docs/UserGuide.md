@@ -346,6 +346,31 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
+### Editing a project : `editproject`
+
+Edits an existing project in the address book.
+
+Format: `editproject INDEX [n/NAME] [s/SKILL]…​`
+
+- Edits the project at the specified `INDEX`. The index refers to the index number shown in the displayed project list. The index **must be a positive integer** 1, 2, 3, …​
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- When editing skills, the existing skills of the project will be removed i.e adding of skills is not cumulative.
+- You can remove all the project’s skills by typing `s/` without
+  specifying any skills after it.
+- You cannot edit an project's id. More specifically, you are not allowed to specify `id/PROJECTID` in the `edit` command.
+
+Examples:
+
+- `editproject 1 pn/Aplha ` Edits the project name to be `Aphla`.
+- `editproject 2 s/Cybersecurity` Edits the skill of the 2nd project to be `Cybersecurity`.
+
+Expected output:
+
+- System message success and details of project edited
+
+[Return to Top](#table-of-contents)
+
 ### Finding projects by name : `findproject`
 
 Finds projects whose **names contain any of the given keywords**.
@@ -522,7 +547,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 ## Command Summary
 
 | Action                      | Format, Examples                                                                                                                                                                                                         |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **- Employee Commands -**   |                                                                                                                                                                                                                          |
 | **Add Employee**            | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
 | **Clear Employees**         | `clear`                                                                                                                                                                                                                  |
@@ -535,6 +560,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 | **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                                |
 | **Clear Projects**          | `clearproject`                                                                                                                                                                                                           |
 | **Delete Project**          | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
+| **Edit Project**            | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity`                                                                                                                       |
 | **Find Projects**           | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
 | **List Projects**           | `listprojects`                                                                                                                                                                                                           |
 | **- Assignment Commands -** |                                                                                                                                                                                                                          |
