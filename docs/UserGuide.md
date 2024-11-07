@@ -258,11 +258,14 @@
 
 <br>
 
-<strong>3. </strong>Copy the file to the folder you want to use as the _home folder_ for your StaffSync.
+<strong>3. </strong>Copy `staffSync.jar` to the folder you want to use as the _home folder_ for your StaffSync. This folder
+would also include the file that StaffSync uses to store all the data.
 
 <br>
 
-<strong>4. </strong>Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar staffSync.jar` command to run the application.<br>
+<strong>4. </strong>Open a command terminal, Change the directory to the folder you have placed `staffSync.jar` using 
+the `cd` command. For example, if the file is in the `Downloads` folder, enter `cd Downloads`. 
+Next, enter `java -jar staffSync.jar` to run the application.<br>
 
    Alternatively, you can double-click the jar file to run the application (though we do not officially support it).
 
@@ -280,13 +283,14 @@
 
    * `delete ph 1` : Deletes the 1st person shown if they are a potential hire.
 
-   * `clear` : Deletes all contacts.
-
    * `exit` : Exits the app.
 
 <br>
 
 <strong>6. </strong>Refer to the [Commands](#commands) below for details of each command.
+
+<strong>7. </strong>Now, you are all set to use StaffSync! Use `clear` to remove all sample data and good luck for your
+journey with StaffSync!
 
 </div>
 
@@ -439,9 +443,9 @@
   <div class="box box-warn" type="warning" seamless>
 
   **Common Mistakes:**
-  * `list ph` followed by `demote 2` - cannot demote a potential hire
-  * `demote 0` - invalid index number
-  * `demote 3` but only have 2 entries - invalid index number, index out of list size
+  * `list ph` followed by `demote 2` - You cannot demote a potential hire, you can use `list e` instead to get the list of employees
+  * `demote 0` - invalid index number, you should use a number greater than 0
+  * `demote 3` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again
   </div>
   </div>
 
@@ -613,9 +617,9 @@ Example: "find ph n/John".
   <div class="box box-warn" type="warning" seamless>
 
   **Common Mistakes:**
-  * `find a n/John`: Invalid parameter
-  * `find all a/John`: Invalid keyword prefix
-  * `find all n/John n/John`: Duplicate keyword prefix
+  * `find a n/John` - invalid parameter, you might want to use `e`, `ph` or `all`
+  * `find all a/John` - invalid keyword prefix, you might want to use `n/`, `p/`, `e/` , `d/` or `r/`
+  * `find all n/John n/John` - duplicate keyword prefix, you can remove either one of the `n/John`
   </div>
 
   </div>
@@ -768,11 +772,11 @@ Example: "find ph n/John".
   <div class="box box-warn" type="warning" seamless>
 
   **Common Mistakes:**
-  * `promote 2 12-20-2025` - the contract end date is in the wrong date format
-  * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped
-  * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee
-  * `promote 0 2025-12-20` - invalid index number
-  * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size
+  * `promote 2 12-20-2025` - the contract end date is in the wrong date format, you can enter `2025-12-20` to represent 20 Dec 2025
+  * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped, you can enter `2025-12-20` to represent 20 Dec 2025
+  * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee, you can use `list ph` instead to get the list of potential hires
+  * `promote 0 2025-12-20` - invalid index number, you should use a number greater than 0
+  * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again
   </div>
   </div>
 </details>
