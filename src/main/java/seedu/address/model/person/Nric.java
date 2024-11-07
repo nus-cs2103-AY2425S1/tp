@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Nric {
     public static final String MESSAGE_CONSTRAINTS = "NRIC should start with a letter (S, T, G, F or M) "
-            + "followed by 7 digits, and end with a letter. It should not be blank.";
+            + "followed by 7 digits, and end with a letter.\nIt is case-insensitive and should not be blank.";
     //Regex accounts for both uppercase and lowercase NRIC and FIN formats
     public static final String VALIDATION_REGEX = "(?i)^[STFGM]\\d{7}[A-Z]$";
 
