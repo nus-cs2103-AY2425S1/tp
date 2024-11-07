@@ -28,6 +28,20 @@ public class Student {
     private final Fee fee;
 
     /**
+     * Every field must be present and not null.
+     */
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean hasPaid, Fee fee) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.hasPaid = hasPaid;
+        this.fee = fee;
+    }
+
+    /**
      * Every field must be present and not null except hasPaid.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Fee fee) {
@@ -37,8 +51,8 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.fee = fee;
         this.hasPaid = false;
+        this.fee = fee;
     }
 
     public Name getName() {

@@ -16,6 +16,7 @@ import seedu.edulog.model.student.Fee;
 import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Phone;
 import seedu.edulog.model.student.Student;
+import seedu.edulog.model.student.StudentHasPaidPredicate;
 import seedu.edulog.model.tag.Tag;
 
 /**
@@ -30,6 +31,8 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String hasPaid;
+
     private final String fee;
 
     /**
@@ -38,7 +41,8 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("fee") String fee) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("hasPaid") String hasPaid,
+            @JsonProperty("fee") String fee) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +50,7 @@ class JsonAdaptedStudent {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.hasPaid = hasPaid;
         this.fee = fee;
     }
 
@@ -60,6 +65,7 @@ class JsonAdaptedStudent {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        hasPaid = String.valueOf(source.getHasPaid());
         fee = source.getFee().getFormattedString();
     }
 
@@ -108,6 +114,11 @@ class JsonAdaptedStudent {
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
+        if (hasPaid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "hasPaid"));
+        }
+        boolean modelHasPaid = new StudentHasPaidPredicate(hasPaid).getValue();
+
         if (fee == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
         }
@@ -115,7 +126,7 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(Fee.MESSAGE_CONSTRAINTS);
         }
         Fee modelFee = new Fee(fee);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelFee);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelHasPaid, modelFee);
     }
 
 }

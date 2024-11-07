@@ -49,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Fee fee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_FEE).get());
 
-        Student student = new Student(name, phone, email, address, tagList, fee);
+        Student student = new Student(name, phone, email, address, tagList, false, fee);
 
         return new AddCommand(student);
     }

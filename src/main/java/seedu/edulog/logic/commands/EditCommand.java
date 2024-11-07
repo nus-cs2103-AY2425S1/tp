@@ -103,10 +103,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        boolean hasPaid = editStudentDescriptor.getHasPaid();
         Fee fee = editStudentDescriptor.getFee().orElse(studentToEdit.getFee());
 
         Student result = new Student(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedTags, fee);
+                updatedTags, hasPaid, fee);
         if (studentToEdit.getHasPaid()) {
             result.mark();
         } else {
@@ -150,6 +151,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private boolean hasPaid;
         private Fee fee;
 
         public EditStudentDescriptor() {}
@@ -164,6 +166,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+
             setFee(toCopy.fee);
         }
 
@@ -221,6 +224,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setHasPaid(boolean hasPaid) {
+            this.hasPaid = hasPaid;
+        }
+
+        public boolean getHasPaid() {
+            return hasPaid;
         }
 
         public void setFee(Fee fee) {
