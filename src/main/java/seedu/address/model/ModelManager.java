@@ -125,6 +125,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        addressBook.refreshStatistics(addressBook.getPersonList());
     }
 
     @Override
@@ -173,6 +174,11 @@ public class ModelManager implements Model {
         requireNonNull(target);
         target.unpin();
         addressBook.sortPersonList();
+    }
+
+    @Override
+    public void refreshStatistics() {
+        this.addressBook.refreshStatistics();
     }
 
     @Override

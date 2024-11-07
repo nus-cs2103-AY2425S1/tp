@@ -70,6 +70,10 @@ public class CommandResult {
         return exit;
     }
 
+    public boolean isStatisticsPresent() {
+        return isStatisticsPresent;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

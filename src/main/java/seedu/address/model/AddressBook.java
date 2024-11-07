@@ -64,10 +64,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the {@code addressBookStatistics}.
+     * Resets the existing statistics of this {@code AddressBook}.
      */
     public void resetStatistics() {
         this.statistics.reset();
+    }
+
+    /**
+     * Refreshes the {@code addressBookStatistics}.
+     */
+    public void refreshStatistics(ObservableList<Person> personList) {
+        this.statistics.processPersonListData(personList);
+    }
+
+    /**
+     * Refreshes the {@code addressBookStatistics}.
+     */
+    public void refreshStatistics() {
+        this.statistics.processPersonListData(this.persons.asUnmodifiableObservableList());
     }
 
     /**
@@ -77,7 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         List<Person> latestPersonList = newData.getPersonList();
         setPersons(latestPersonList);
-        this.statistics.processPersonListData(latestPersonList);
+        refreshStatistics();
     }
 
     //// person-level operations

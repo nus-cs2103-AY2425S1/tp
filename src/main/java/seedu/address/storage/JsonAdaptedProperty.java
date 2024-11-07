@@ -33,6 +33,7 @@ class JsonAdaptedProperty {
     private final String postalCode;
     private final String unitNumber;
     private final String price;
+    private final String actualPrice;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -43,11 +44,13 @@ class JsonAdaptedProperty {
                                @JsonProperty("postalCode") String postalCode,
                                @JsonProperty("unitNumber") String unitNumber,
                                @JsonProperty("price") String price,
+                               @JsonProperty("actualPrice") String actualPrice,
                                @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.housingType = housingType;
         this.postalCode = postalCode;
         this.unitNumber = unitNumber;
         this.price = price;
+        this.actualPrice = actualPrice;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -61,6 +64,7 @@ class JsonAdaptedProperty {
         postalCode = source.getPostalCode().toString();
         unitNumber = source.getUnitNumber().toString();
         price = source.getPrice().toString();
+        actualPrice = source.getActualPrice().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -109,19 +113,28 @@ class JsonAdaptedProperty {
         }
         final Price modelPrice = new Price(price);
 
+        if (actualPrice == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Price.class.getSimpleName()));
+        }
+        if (!Price.isValidPrice(actualPrice)) {
+            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
+        }
+        final Price modelActualPrice = new Price(actualPrice);
+
         final Set<Tag> modelTags = new HashSet<>(propertyTags);
 
         switch (housingType.toUpperCase()) {
         case "HDB":
-            return new Hdb(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
+            return new Hdb(modelPostalCode, modelUnitNUmber, modelPrice, modelActualPrice, modelTags);
         case "BTO":
-            return new Bto(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
+            return new Bto(modelPostalCode, modelUnitNUmber, modelPrice, modelActualPrice, modelTags);
         case "CONDO":
-            return new Condo(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
+            return new Condo(modelPostalCode, modelUnitNUmber, modelPrice, modelActualPrice, modelTags);
         case "APARTMENT":
-            return new Apartment(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
+            return new Apartment(modelPostalCode, modelUnitNUmber, modelPrice, modelActualPrice, modelTags);
         case "OTHERPROPERTY":
-            return new OtherProperty(modelPostalCode, modelUnitNUmber, modelPrice, modelTags);
+            return new OtherProperty(modelPostalCode, modelUnitNUmber, modelPrice, modelActualPrice, modelTags);
         default:
             throw new IllegalValueException("Invalid housing type");
         }

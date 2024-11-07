@@ -117,4 +117,7 @@ public interface Model {
 
     /** Unpins the given person from the top of the list */
     void unpinPerson(Person target);
+
+    /** Refreshes the AddressBookStatistics with the existing AddressBook. **/
+    void refreshStatistics();
 }
