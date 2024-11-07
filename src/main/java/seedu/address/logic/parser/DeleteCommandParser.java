@@ -39,6 +39,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteCommand(index);
             } catch (ParseException pe) { // cannot parse as index
+                System.out.println("trying other attributes");
                 // If it is not an index, handle using parseOtherAttributes
                 if (!argMultiMap.getPreamble().isEmpty()) {
                     throw new ParseException(

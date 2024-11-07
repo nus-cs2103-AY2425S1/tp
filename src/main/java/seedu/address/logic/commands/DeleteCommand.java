@@ -167,7 +167,9 @@ public class DeleteCommand extends Command {
                                       ObservableList<Person> lastShownList) throws CommandException {
         assert targetIndex.isPresent() : "Target index should be present";
         assert lastShownList != null : "Last shown list should not be null";
-        if (targetIndex.get().getZeroBased() >= lastShownList.size()) { // Checks if the index is greater than list size
+        if (targetIndex.get().getZeroBased() >= lastShownList.size() || targetIndex.get().getZeroBased() == 0) {
+            System.out.println("invalid or 0 index found");
+            // Checks if the index is greater than list size
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToDelete = lastShownList.get(targetIndex.get().getZeroBased());

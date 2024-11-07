@@ -85,15 +85,15 @@ Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG`
 Please refer to this table
 for list of valid tags:
 
-| Tag | Interview Stage                 |
-|-----|---------------------------------|
-| N   | New                             |
-| TP  | Technical Interview in Progress |
-| TC | Technical Interview Confirmed |
-| BP | Behavioral Interview in Progress |
-| BC | Behavioral Interview Confirmed |
-| A| Accepted|
-| R | Rejected |
+| Tag | Interview Stage                 | Definition                                               |
+|-----|---------------------------------|----------------------------------------------------------|
+| N   | New                             | New applicant                                            |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled |
+| TC | Technical Interview Confirmed | Technical interview has been schedule|                                           
+| BP | Behavioral Interview in Progress |Behavioral interview is in the progress of being scheduled|
+| BC | Behavioral Interview Confirmed |Behavioral interview has been scheduled|
+| A| Accepted|Applicant has been accepted|
+| R | Rejected |Applicant has been rejected|
 
 
 Examples:
@@ -279,6 +279,18 @@ _Details coming soon ..._
 ### JOBCODE
 
 ### TAG
+Please refer to this table
+for list of valid tags:
+
+| Tag | Interview Stage                 | Definition                                               |
+|-----|---------------------------------|----------------------------------------------------------|
+| N   | New                             | New applicant                                            |
+| TP  | Technical Interview in Progress | Technical interview is in the process of being scheduled |
+| TC | Technical Interview Confirmed | Technical interview has been schedule|                                           
+| BP | Behavioral Interview in Progress |Behavioral interview is in the progress of being scheduled|
+| BC | Behavioral Interview Confirmed |Behavioral interview has been scheduled|
+| A| Accepted|Applicant has been accepted|
+| R | Rejected |Applicant has been rejected|
 
 ### REMARK
 - Must be at most 50 characters, excluding leading and trailing whitespaces.
