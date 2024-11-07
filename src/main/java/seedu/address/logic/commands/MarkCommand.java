@@ -23,10 +23,16 @@ public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the name as present for that particular "
+    public static final String COMMAND_WORD_SHORT_FORM = "m";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
+            + ": Marks the name as present for that particular "
             + "week. The max week number is 13.\n"
-            + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_WEEK + "WEEK_NUMBER "
+            + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_WEEK + "WEEK_NUMBER\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_WEEK + "1\n"
+            + "Example: " + COMMAND_WORD_SHORT_FORM + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_WEEK + "1";
 

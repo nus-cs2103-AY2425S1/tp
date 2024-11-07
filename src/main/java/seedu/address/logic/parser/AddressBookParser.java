@@ -65,20 +65,38 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
         case ExportCommand.COMMAND_WORD:
             return new ExportCommandParser().parse(arguments);
+
+        case ExportCommand.COMMAND_WORD_SHORT_FORM:
+            return new ExportCommandParser().parse(arguments);
+
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD_SHORT_FORM:
+            return new ImportCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case EditCommand.COMMAND_WORD_SHORT_FORM:
+            return new EditCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_WORD_SHORT_FORM:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+
+        case FindCommand.COMMAND_WORD_SHORT_FORM:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
@@ -93,24 +111,46 @@ public class AddressBookParser {
         case AddGradeCommand.COMMAND_WORD_LOWER_CASE:
             return new AddGradeCommandParser().parse(arguments);
 
+        case AddGradeCommand.COMMAND_WORD_SHORT_FORM:
+            return new AddGradeCommandParser().parse(arguments);
+
         case RemoveGradeCommand.COMMAND_WORD_LOWER_CASE:
+            return new RemoveGradeCommandParser().parse(arguments);
+
+        case RemoveGradeCommand.COMMAND_WORD_SHORT_FORM:
             return new RemoveGradeCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
 
+        case FilterCommand.COMMAND_WORD_SHORT_FORM:
+            return new FilterCommandParser().parse(arguments);
+
         case MarkCommand.COMMAND_WORD:
+            return new MarkCommandParser().parse(arguments);
+
+        case MarkCommand.COMMAND_WORD_SHORT_FORM:
             return new MarkCommandParser().parse(arguments);
 
         case UnmarkCommand.COMMAND_WORD:
             return new UnmarkCommandParser().parse(arguments);
+
+        case UnmarkCommand.COMMAND_WORD_SHORT_FORM:
+            return new UnmarkCommandParser().parse(arguments);
+
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
         case GitHubCommand.COMMAND_WORD:
             return new GitHubCommandParser().parse(arguments);
 
+        case GitHubCommand.COMMAND_WORD_SHORT_FORM:
+            return new GitHubCommandParser().parse(arguments);
+
         case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD_SHORT_FORM:
             return new ViewCommandParser().parse(arguments);
 
         default:
