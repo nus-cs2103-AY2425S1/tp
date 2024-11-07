@@ -158,7 +158,7 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both hall pointer data and user preference data in JSON format, and read them back into scorresponding objects.
+- can save both hall pointer data and user preference data in JSON format, and read them back into corresponding objects.
 - inherits from both `Storage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS)**:
 1. CCA Leader inputs the `update_member` command with the member index and new details.
-    - Example: `update_member 1 n/John Doe r/9/10/203 t/johnDoe123 tag/friend`
+    - Example: `update_member 1 n/John Doe r/9/10/203 t/johnDoe123 tag/friend`  
 2. Hall Pointer validates the member and new details.
 3. Hall Pointer updates the member information and displays a success message.
     - `Member John Doe; Telegram: johnDoe123; Room: 9/10/203; Tags: [friend]'s details updated successfully.`
