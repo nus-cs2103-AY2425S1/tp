@@ -35,3 +35,34 @@ This project has three types of tests:
    e.g. `seedu.address.logic.LogicManagerTest`
    
 [Back to Table of Contents](#table-of-contents)
+## Known Quirks
+
+When running unit test for command parsers, testing for blank preamble requires the _DESC_ to start with a " ", else the first command gets swallowed into the preamble
+
+Example:
+
+In `DeleteApptCommandParser`, the **unit test** for testing blank preamble fails with:
+
+```
+"@d/2024-12-12 @t/1234-1400 i/S1234567i" 
+```
+This will set the preamble to "@d/2024-12-12" and then an invalid command is thrown because there is no @d/ value.
+
+Instead, this works:
+```
+" @d/2024-12-12 @t/1234-1400 i/S1234567i" 
+ ^ note extra preceding space
+```
+
+——
+In normal application flow, this does not raise any issues since the `ArgumentTokenizer` immediately chops at the end of the command word, which includes the space right after the command word. Therefore, this is not considered a bug, and is intended.
+
+```
+ command  arg-string sent to ArgumentTokenizer
+ |-----||--------------------------------------|
+"delAppt @d/2024-12-12 @t/1234-1400 i/S1234567i"
+        ^
+        note: space is included in raw argument string
+```
+
+[Back to Table of Contents](#table-of-contents)

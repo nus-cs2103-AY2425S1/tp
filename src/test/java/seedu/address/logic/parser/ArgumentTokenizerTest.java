@@ -64,6 +64,45 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
+    public void tokenize_caseInsensitive() {
+        // Preamble present
+        String argsString = "  Some preamble string P/ Argument value ";
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        assertPreamblePresent(argMultimap, "Some preamble string");
+        assertArgumentPresent(argMultimap, pSlash, "Argument value");
+
+        // No preamble
+        argsString = " P/   Argument value ";
+        argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        assertPreambleEmpty(argMultimap);
+        assertArgumentPresent(argMultimap, pSlash, "Argument value");
+
+        // Only two arguments are present
+        argsString = "SomePreambleString -T dashT-Value P/pSlash value";
+        argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
+        assertPreamblePresent(argMultimap, "SomePreambleString");
+        assertArgumentPresent(argMultimap, pSlash, "pSlash value");
+        assertArgumentPresent(argMultimap, dashT, "dashT-Value");
+        assertArgumentAbsent(argMultimap, hatQ);
+
+        // All three arguments are present
+        argsString = "Different Preamble String ^q111 -T dashT-Value P/pSlash value";
+        argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
+        assertPreamblePresent(argMultimap, "Different Preamble String");
+        assertArgumentPresent(argMultimap, pSlash, "pSlash value");
+        assertArgumentPresent(argMultimap, dashT, "dashT-Value");
+        assertArgumentPresent(argMultimap, hatQ, "111");
+
+        // Two arguments repeated, some have empty values
+        argsString = "SomePreambleString -T dashT-Value ^q ^Q -t another dashT value P/ pSlash value -t";
+        argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
+        assertPreamblePresent(argMultimap, "SomePreambleString");
+        assertArgumentPresent(argMultimap, pSlash, "pSlash value");
+        assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value", "");
+        assertArgumentPresent(argMultimap, hatQ, "", "");
+    }
+
+    @Test
     public void tokenize_oneArgument() {
         // Preamble present
         String argsString = "  Some preamble string p/ Argument value ";

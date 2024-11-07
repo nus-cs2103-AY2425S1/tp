@@ -22,6 +22,7 @@ import seedu.address.model.person.Person;
 public class AddMedConCommand extends Command {
 
     public static final String COMMAND_WORD = "addMedCon";
+    public static final String COMMAND_WORD_INSENSITIVE = "addmedcon";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns "
             + "one or more medical conditions to a patient in MediBase3. \n"

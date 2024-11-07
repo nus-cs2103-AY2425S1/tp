@@ -43,8 +43,13 @@ public class DeleteApptCommandParser implements Parser<DeleteApptCommand> {
         newApptDate = argMultimap.getValue(PREFIX_DATE).orElseThrow(parseException);
         patientNricValue = argMultimap.getValue(PREFIX_NRIC).orElseThrow(parseException);
 
-        if (!DateUtil.isValidDate(newApptDate)) {
+        if (!DateUtil.isCorrectDateFormat(newApptDate)) {
             throw new ParseException(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);
+        }
+
+        if (!DateUtil.isValidDate(newApptDate)) {
+            throw new ParseException(String.format(Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_INVALID_DATE_1S,
+                                                   newApptDate));
         }
 
         try {

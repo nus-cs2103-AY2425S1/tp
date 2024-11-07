@@ -18,6 +18,7 @@ import seedu.address.model.person.Priority;
 public class SetPriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "setPriority";
+    public static final String COMMAND_WORD_INSENSITIVE = "setpriority";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets "
             + "priority to an existing patient in MediBase3.\n"

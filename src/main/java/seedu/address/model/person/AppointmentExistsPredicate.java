@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 
@@ -28,12 +29,26 @@ public class AppointmentExistsPredicate implements Predicate<Person> {
         this.apptMatch = Optional.empty();
     }
 
+
+    /**
+     * Wraps throwable boolean method {@link Appointment#isSameDateTime} to be used in stream.
+     *
+     * @param x Appointment to be tested.
+     * @return result of <code>isSameDateTime</code> or false if exception thrown since invalid input never matches.
+     */
+    private boolean safeDateTimeTest(Appointment x) {
+        try {
+            return x.isSameDateTime(date, timePeriod);
+        } catch (IllegalValueException e) {
+            return false;
+        }
+    }
+
     @Override
     public boolean test(Person person) {
         apptMatch = person.getAppointments()
                           .stream()
-                          .filter(x -> x.getAppointmentDate().equals(date))
-                          .filter(x -> x.getAppointmentTimePeriod().equals(timePeriod))
+                          .filter(this::safeDateTimeTest)
                           .findFirst();
         return apptMatch.isPresent();
     }

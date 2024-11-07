@@ -43,6 +43,7 @@ import seedu.address.model.person.Priority;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_INSENSITIVE = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the patient identified. "
             + "Existing values will be overwritten by the input values.\n"

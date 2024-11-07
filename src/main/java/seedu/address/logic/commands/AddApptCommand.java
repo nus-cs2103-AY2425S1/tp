@@ -38,6 +38,7 @@ import seedu.address.model.person.Priority;
 public class AddApptCommand extends Command {
 
     public static final String COMMAND_WORD = "addAppt";
+    public static final String COMMAND_WORD_INSENSITIVE = "addappt";
 
     public static final String MESSAGE_USAGE =
             COMMAND_WORD + ": Adds an appointment to a patient\n"
@@ -53,6 +54,7 @@ public class AddApptCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_4S = "Appointment for %s scheduled: %s [ %s @ %s ]";
     public static final String MESSAGE_DUPLICATE_APPT_1S = "Appointment already exists for this date and time: %s.";
+    public static final String MESSAGE_CLASHING_APPT_1S = "Appointment clashes with existing appointment: %s.";
 
     private static final Logger logger = LogsCenter.getLogger(AddApptCommand.class);
     private final NricMatchesPredicate predicate;
@@ -130,8 +132,10 @@ public class AddApptCommand extends Command {
         try {
             oldAppointmentList = new ArrayList<>(personToEdit.getAppointments());
             for (Appointment a : oldAppointmentList) {
-                if (a.isClashing(newApptDate, newApptTime)) {
+                if (a.isSameDateTime(newApptDate, newApptTime)) {
                     throw new CommandException(String.format(MESSAGE_DUPLICATE_APPT_1S, a));
+                } else if (a.isClashing(newApptDate, newApptTime)) {
+                    throw new CommandException(String.format(MESSAGE_CLASHING_APPT_1S, a));
                 }
             }
 

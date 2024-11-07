@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_1;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_3;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_4;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_NAME_BOB;
@@ -116,6 +120,43 @@ public class AddApptCommandTest {
                                                                  VALID_APPOINTMENT_DATE_AMY,
                                                                  VALID_APPOINTMENT_TIMEPERIOD_AMY);
         assertCommandFailure(addApptPersonCommand2, model, expectedErrorMessage);
+    }
+
+
+    @Test
+    public void execute_patientClashingAppointments_failure() {
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
+        Nric nric = new Nric(VALID_NRIC_AMY);
+        NricMatchesPredicate nricAmy = new NricMatchesPredicate(nric);
+        Person person = new PersonBuilder().withNric(VALID_NRIC_AMY)
+                                           .withAppointments(VALID_APPOINTMENT_NAME_AMY
+                                                             + ":" + VALID_APPOINTMENT_DATE_AMY
+                                                             + ":" + VALID_APPOINTMENT_TIMEPERIOD_AMY)
+                                           .build();
+        model.addPerson(person);
+        String expectedErrorMessage = String.format(AddApptCommand.MESSAGE_CLASHING_APPT_1S,
+                                                    VALID_APPOINTMENT_NAME_AMY + " [ " + VALID_APPOINTMENT_DATE_AMY
+                                                    + " @ " + VALID_APPOINTMENT_TIMEPERIOD_AMY + " ]");
+
+        AddApptCommand addApptPersonCommand = new AddApptCommand(nricAmy, VALID_APPOINTMENT_NAME_AMY,
+                                                                 VALID_APPOINTMENT_DATE_AMY,
+                                                                 INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_1);
+        assertCommandFailure(addApptPersonCommand, model, expectedErrorMessage);
+
+        AddApptCommand addApptPersonCommand2 = new AddApptCommand(nricAmy, VALID_APPOINTMENT_NAME_AMY,
+                                                                  VALID_APPOINTMENT_DATE_AMY,
+                                                                  INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_2);
+        assertCommandFailure(addApptPersonCommand2, model, expectedErrorMessage);
+
+        AddApptCommand addApptPersonCommand3 = new AddApptCommand(nricAmy, VALID_APPOINTMENT_NAME_AMY,
+                                                                  VALID_APPOINTMENT_DATE_AMY,
+                                                                  INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_3);
+        assertCommandFailure(addApptPersonCommand3, model, expectedErrorMessage);
+
+        AddApptCommand addApptPersonCommand4 = new AddApptCommand(nricAmy, VALID_APPOINTMENT_NAME_AMY,
+                                                                  VALID_APPOINTMENT_DATE_AMY,
+                                                                  INVALID_APPOINTMENT_TIMEPERIOD_CLASH_DENTAL_4);
+        assertCommandFailure(addApptPersonCommand4, model, expectedErrorMessage);
     }
 
     @Test
