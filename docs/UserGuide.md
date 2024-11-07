@@ -24,7 +24,7 @@ If you can type fast, StoreClass will become a perfect tools to manage student d
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for StoreClass.
 
 1. Use the terminal to run the jar file
    - How to run a jar file using Terminal? See [here](https://www.youtube.com/watch?v=j7A7DOZePXs)
@@ -37,7 +37,7 @@ If you can type fast, StoreClass will become a perfect tools to manage student d
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 g/male m/CS2103T` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 g/male m/Physics` : Adds a student named `John Doe` to StoreClass.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -62,12 +62,12 @@ If you can type fast, StoreClass will become a perfect tools to manage student d
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `...`​ after them can be used multiple times.<br>
-    e.g. `m/MODULE...​` can be used as `m/CS2101`, `m/CS2101 m/CS2103T` etc.
+    e.g. `m/MODULE...​` can be used as `m/Mathematics`, `m/Chemistry m/English` etc.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order unless specified.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -78,7 +78,7 @@ If you can type fast, StoreClass will become a perfect tools to manage student d
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -87,17 +87,27 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a new student to StoreClass.
 
 Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0) and modules.
+* `n/NAME` : The full name of the student to be added.
+* `p/PHONE_NUMBER` : The phone number of the student to be added.
+* `g/GENDER` : The gender of the student to be added.
+* `m/MODULE` : The module that the student is taking.
+* `t/TAG` : The tag of the student.
+
+<div markdown="span" class="alert alert-info"> :notebook: **Note:** Field Constraints
+- Names should only contain alphabets, hyphens, dots, commas, forward slash and spaces, and be between 1 and 100 characters long.
+- Phone numbers should only contain numbers, and be exactly 8 digits long.
+- Gender should be either `male` or `female`.
+- Module should consist of alphanumeric characters and spaces only, and it should be between 1 and 30 characters long.
+- Tag should consist of alphanumeric characters only, and it should be between 1 and 30 characters long.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 g/male m/CS2103T`
-* `add n/Betsy Crowe t/friend g/female p/1234567 m/MA1522 m/CS2103T t/criminal`
+* `add n/John Doe p/98765432 g/male m/Mathematics` : Adds a student named `John Doe` to StoreClass.
+* `add n/Betsy Crowe g/female p/1234567 m/Physics m/Chemistry t/OLevels t/new` : Adds a student named `Betsy Crowe` to StoreClass.
 
 ### Listing all persons : `list`
 
@@ -107,9 +117,9 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE]... [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -119,8 +129,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567` Edits the phone number of the 1st person to be `91234567`.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567` : Edits the phone number of the 1st person to be `91234567`.
+*  `edit 2 n/Betsy Crower t/` : Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -136,9 +146,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe` _(search by name)_
-* `find colleague` returns `Bernice Yu` and `Roy Balakrishnan` _(search by tag)_
-* `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
+* `find John` : returns `john` and `John Doe` _(search by name)_
+* `find colleague` : returns `Bernice Yu` and `Roy Balakrishnan` _(search by tag)_
+* `find alex david` : returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Filter persons : `filter`
@@ -157,10 +168,10 @@ Each parameter can only contain one keyword.
 </div>
 
 Examples:
-* `filter n/John` returns `john` and `John Doe` (filter by name)
-* `filter g/male t/project` returns `Bernice Yu`, `Roy Balakrishnan` and `Gabreil Lim`. (filter by gender and tag)
-* `filter g/female t/family t/friend` returns `Alex Yeoh` and `David Li` (filter by gender and multiple tags)
-* `filter g/male t/project m/cs1101` return `Bernice Yu` (filter by multiple conditions)
+* `filter n/John` : returns `john` and `John Doe` (filter by name)
+* `filter g/male t/new` : returns `James Li`, `Roy Balakrishnan` and `Linus Koo`. _(filter by gender and tag)_
+* `filter g/female t/new t/OLevels` : returns `Alex Yeoh` and `David Li` _(filter by gender and multiple tags)_
+* `filter g/female t/IB m/Physics` : return `Bernice Yu` _(filter by multiple conditions)_
 
 ### Deleting a person : `delete`
 
@@ -218,15 +229,15 @@ Assigns a grade to a module that a student is taking.
 - You can provide multiple `m/MODULE s/GRADE` pairs to assign grades to multiple modules in a single `grade` command.
 - The grade can be any whole number between 0 and 100, inclusive.
 
-**Important Notes:**
+<div markdown="span" class="alert alert-info"> :notebook: **Important Note:**
 - Each module specified in the `grade` command must be a module that the student is taking.
 - The number of `m/MODULE` prefixes must match the number of `s/GRADE` prefixes.
-- Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.
+- Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.</div>
 
 **Examples:**
-- `grade 1 m/CS2103T s/85` assigns a grade of 85 to CS2103T for the first student.
-- `grade 2 m/MA1522 s/90` assigns a grade of 90 to MA1522 for the second student.
-- `grade 3 m/CS2103T s/80 m/MA1522 s/85` assigns a grade of 80 to CS2103T and 85 to MA1522 for the third student.
+- `grade 1 m/Physics s/85` : assigns a grade of 85 to Physics for the first student.
+- `grade 2 m/Chemistry s/90` : assigns a grade of 90 to Chemistry for the second student.
+- `grade 3 m/English s/80 m/Chinese s/85` assigns a grade of 80 to English and 85 to Chinese for the third student.
 
 
 ### Archiving data files `archive`
@@ -235,7 +246,7 @@ Archive the current address book to the specific file name.
 
 The archived file and be found at `archived/FILENAME`.
 
-Format: `archive pa/PATH`
+Format: `archive pa/FILENAME`
 
 Example: `archive pa/mybook.json`
 
@@ -257,7 +268,7 @@ This command will only load from a folder named `archived` which is in the same 
 
 The archived file and be found at `load/FILENAME`.
 
-Format: `load pa/PATH`
+Format: `load pa/FILENAME`
 
 Example: `load pa/mybook.json`
 
@@ -334,15 +345,15 @@ By utilizing Autocomplete, you can input commands more quickly, reduce typos, an
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+StoreClass data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+StoreClass data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, StoreClass will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the StoreClass to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 
@@ -352,7 +363,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StoreClass home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -367,12 +378,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME g/GENDER p/PHONE_NUMBER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/22224444 m/CS2103T m/CS2101 t/friend t/colleague`
+**Add** | `add n/NAME g/GENDER p/PHONE_NUMBER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/83216574 m/English m/Chemistry t/new t/IB`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/CS2103T s/85`
+**Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/History s/85`
 **Undo** | `undo`
 **Redo** | `redo`
 **List** | `list`
