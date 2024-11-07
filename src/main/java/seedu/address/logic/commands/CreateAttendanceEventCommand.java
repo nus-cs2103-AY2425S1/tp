@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -48,5 +49,23 @@ public class CreateAttendanceEventCommand extends Command {
         return new CommandResult(String.format("Created attendance events: %s",
                 String.join(", ", eventNames)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof CreateAttendanceEventCommand)) {
+            return false;
+        }
+        CreateAttendanceEventCommand otherCommand = (CreateAttendanceEventCommand) other;
+        return Objects.equals(eventNames, otherCommand.eventNames);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventNames);
+    }
+
 
 }

@@ -148,7 +148,7 @@ public class ModelManager implements Model {
     public Optional<AttendanceEvent> getAttendanceEvent(String eventName) {
         requireNonNull(eventName);
         return addressBook.getAttendanceEventList().stream()
-                .filter(event -> event.getEventName().equals(eventName))
+                .filter(event -> event.getEventName().equalsIgnoreCase(eventName))
                 .findFirst();
     }
 
