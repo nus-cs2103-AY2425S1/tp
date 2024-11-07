@@ -89,6 +89,12 @@ public class ImportCommand extends Command {
      * @throws CommandException If there is an issue reading the file.
      */
     private boolean checkCsvFileFormat(Path filePath) throws CommandException {
+        // Check if the file has a .csv extension
+        String fileName = filePath.getFileName().toString();
+        if (!fileName.toLowerCase().endsWith(".csv")) {
+            throw new CommandException(MESSAGE_INCORRECT_FILE_FORMAT);
+        }
+        // Proceed to check the header format
         try (BufferedReader br = Files.newBufferedReader(filePath)) {
             String headerLine = br.readLine();
             return headerLine != null && headerLine.equals(COLUMN_HEADERS);
@@ -96,6 +102,7 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_ERROR_READING_FILE);
         }
     }
+
 
     /**
      * Reads the list of persons from the CSV file.
