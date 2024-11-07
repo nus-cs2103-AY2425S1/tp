@@ -225,7 +225,7 @@ public class RightPanel extends UiPart<Region> {
      */
     public void resetFilter() {
         statusForFilter = DONE_STATUS;
-        amountSignForFilter = NEGATIVE_SIGN;
+        amountSignForFilter = POSITIVE_SIGN;
         CommonModelManager.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
     }
 
