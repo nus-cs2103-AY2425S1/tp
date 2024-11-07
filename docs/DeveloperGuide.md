@@ -158,6 +158,52 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+#### Implementation
+
+The image below shows the class diagram of a Person object and its related class attributes.
+
+![Person Class Diagram](images/PersonClassDiagram.png)
+
+The Person object is made up of several attributes:
+* `Name`: The name of the patient.
+* `Phone`: The phone number of the patient.
+* `Email`: The email of the patient.
+* `Address`: The address of the patient.
+* `Doctor`: The doctor assigned to the patient.
+* `Emergency Contact`: A list of emergency contacts of the patient.
+* `Tags`: Additional information about the patient.
+
+The Doctor object is also made up of attributes:
+* `Doctor Name`: The name and title of the doctor.
+* `Phone`: The phone number of the doctor.
+* `Email`: The email of the doctor.
+
+The Emergency Contact object is also made up of attributes:
+* `Name`: The name of the emergency contact.
+* `Phone`: The phone number of the emergency contact.
+* `Relationship`: The relationship of the emergency contact to the patient.
+
+#### Feature details
+
+1. MedConnect will verify that the parameters supplied by the user follow a set of relevant restrictions for the respective parameters.
+2. If any invalid parameter is provided, an error will be thrown, informing the user which parameter violates the restrictions. The format for the valid input for that parameter will be displayed to the user.
+3. If all parameters are valid, a new `Person` entry will be created and stored in the `VersionedAddressBook`.
+
+#### Design Considerations:
+
+**Aspect: The required input of parameters:**
+
+* **Alternative 1 (current choice):** Make all parameters compulsory, except Tags.
+  * Pros: Will not have missing data when it is needed in an emergency.
+  * Cons: Add Command is lengthy to type out, might be hard to remember the syntax.
+* **Alternative 2:** Make only a few specific parameters compulsory.
+  * Pros: Patient registration will be faster.
+  * Cons: If user forgets to update missing details, there will be no one to contact in an emergency.
+
+We opted for Alternative 1 to make almost all parameters compulsory as the autocomplete feature we implemented will aid users in typing out the Add Command.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
