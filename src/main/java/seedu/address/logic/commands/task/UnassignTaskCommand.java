@@ -1,10 +1,5 @@
 package seedu.address.logic.commands.task;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_TASK_NOT_FOUND_IN_CONTACT;
-import static seedu.address.logic.Messages.MESSAGE_UNASSIGN_TASK_SUCCESS;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -13,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -59,7 +55,8 @@ public class UnassignTaskCommand extends Command {
         String removedTasks = tasksToRemove.stream()
                 .map(task -> task.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
-        return String.format(MESSAGE_UNASSIGN_TASK_SUCCESS, removedTasks, personToEdit.getName().toString());
+        return String.format(
+                Messages.MESSAGE_UNASSIGN_TASK_SUCCESS, removedTasks, personToEdit.getName().toString());
     }
 
     @Override
@@ -67,7 +64,7 @@ public class UnassignTaskCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -75,13 +72,13 @@ public class UnassignTaskCommand extends Command {
         Set<Task> updatedTasks = currentPersonTasks;
 
         if (currentPersonTasks.isEmpty() || taskIndexes.isEmpty()) {
-            throw new CommandException(MESSAGE_TASK_NOT_FOUND_IN_CONTACT);
+            throw new CommandException(Messages.MESSAGE_TASK_NOT_FOUND_IN_CONTACT);
         }
 
         Set<Task> tasksToRemove = getTasksToRemove(currentPersonTasks);
 
         if (!updatedTasks.containsAll(tasksToRemove)) {
-            throw new CommandException(MESSAGE_TASK_NOT_FOUND_IN_CONTACT);
+            throw new CommandException(Messages.MESSAGE_TASK_NOT_FOUND_IN_CONTACT);
         }
 
         updatedTasks.removeAll(tasksToRemove);
@@ -98,7 +95,10 @@ public class UnassignTaskCommand extends Command {
         List<Task> currentPersonTaskList = new ArrayList<>(currentPersonTasks);
         for (Index specifiedTaskIndex : taskIndexes) {
             if (specifiedTaskIndex.getZeroBased() >= currentPersonTasks.size()) {
-                throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                throw new CommandException(String.format(
+                        Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, specifiedTaskIndex.getOneBased(),
+                        1, currentPersonTasks.size()
+                ));
             }
             Integer indexOfTask = specifiedTaskIndex.getZeroBased();
             Task taskToRemove = currentPersonTaskList.get(indexOfTask);

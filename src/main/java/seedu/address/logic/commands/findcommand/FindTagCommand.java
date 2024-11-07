@@ -2,6 +2,7 @@ package seedu.address.logic.commands.findcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
@@ -11,9 +12,6 @@ import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate
  * Keyword matching is case-insensitive.
  */
 public class FindTagCommand extends FindCommand {
-
-    public static final String MESSAGE_FIND_TAG_PERSON_SUCCESS = "Search for tag containing \"%s\" was successful. "
-            + " Showing results:";
 
     public FindTagCommand(TagContainsKeywordsPredicate predicate) {
         super(predicate);
@@ -25,9 +23,11 @@ public class FindTagCommand extends FindCommand {
         model.updateFilteredPersonListByTag((TagContainsKeywordsPredicate) predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_FIND_TAG_PERSON_SUCCESS, predicate.getDisplayString()));
+            return new CommandResult(String.format(
+                    Messages.MESSAGE_FIND_TAG_PERSON_SUCCESS, predicate.getDisplayString()
+            ));
         } else {
-            return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+            return new CommandResult(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         }
     }
 

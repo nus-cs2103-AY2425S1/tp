@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-import static seedu.address.logic.commands.findcommand.FindPhoneCommand.MESSAGE_FIND_PHONE_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -19,6 +17,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -57,7 +56,7 @@ public class FindPhoneCommandTest {
 
     @Test
     public void execute_emptyString_noPersonFound() {
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         PhoneContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -68,7 +67,9 @@ public class FindPhoneCommandTest {
     @Test
     public void execute_fullMatch_singlePersonFound() {
         PhoneContainsKeywordsPredicate predicate = preparePredicate("9482442");
-        String expectedMessage = String.format(MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -78,7 +79,9 @@ public class FindPhoneCommandTest {
     @Test
     public void execute_multipleFullMatchNumbers_multiplePersonsFound() {
         PhoneContainsKeywordsPredicate predicate = preparePredicate("95352563 9482427");
-        String expectedMessage = String.format(MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -88,7 +91,9 @@ public class FindPhoneCommandTest {
     @Test
     public void execute_singlePartialMatchNumber_singlePersonFound() {
         PhoneContainsKeywordsPredicate predicate = preparePredicate("2224");
-        String expectedMessage = String.format(MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -98,7 +103,9 @@ public class FindPhoneCommandTest {
     @Test
     public void execute_singlePartialMatchNumber_multiplePersonsFound() {
         PhoneContainsKeywordsPredicate predicate = preparePredicate("9");
-        String expectedMessage = String.format(MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_PHONE_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -108,7 +115,7 @@ public class FindPhoneCommandTest {
     @Test
     public void execute_absentPartialMatchKeyword_noPersonFound() {
         PhoneContainsKeywordsPredicate predicate = preparePredicate("0");
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -118,7 +125,7 @@ public class FindPhoneCommandTest {
     @Test
     public void execute_absentPartialMatchKeyword2_noPersonFound() {
         PhoneContainsKeywordsPredicate predicate = preparePredicate("54321");
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

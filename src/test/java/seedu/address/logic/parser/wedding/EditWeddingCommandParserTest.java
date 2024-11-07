@@ -33,7 +33,7 @@ public class EditWeddingCommandParserTest {
         assertParseFailure(parser, VALID_WEDDING_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditWeddingCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1", Messages.MESSAGE_WEDDING_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);

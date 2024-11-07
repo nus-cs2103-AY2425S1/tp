@@ -46,10 +46,6 @@ public class AddVendorCommand extends Command {
             + PREFIX_WEDDING + "Wedding March 20th 2027 "
             + PREFIX_WEDDING + "Amy's Wedding";
 
-
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the Wedlinker System";
-
     private final Person toAdd;
     /**
      * Creates an AddVendorCommand to add the specified {@code Person} as a vendor
@@ -64,12 +60,12 @@ public class AddVendorCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
         model.assignVendor(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(Messages.MESSAGE_ADD_PERSON_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

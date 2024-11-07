@@ -29,10 +29,6 @@ public class DeleteWeddingCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_WEDDING + " Timothy's Wedding";
 
-    public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding: %1$s";
-    public static final String MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED = "The Wedding: %1$s is still used";
-    public static final String MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND = "The Wedding: %1$s does not exist";
-
     private final Wedding targetWedding;
     private boolean force = false;
 
@@ -63,7 +59,7 @@ public class DeleteWeddingCommand extends Command {
             if (wedding.getWeddingName().equals(targetWedding.getWeddingName())) {
                 if (wedding.canBeDeleted()) {
                     model.deleteWedding(wedding);
-                    return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
+                    return new CommandResult(String.format(Messages.MESSAGE_DELETE_WEDDING_SUCCESS,
                             Messages.format(targetWedding)));
                 } else {
                     if (this.force) {
@@ -85,11 +81,11 @@ public class DeleteWeddingCommand extends Command {
                             }
                         }
                         model.deleteWedding(wedding);
-                        return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
+                        return new CommandResult(String.format(Messages.MESSAGE_DELETE_WEDDING_SUCCESS,
                                 Messages.format(targetWedding)));
                     } else {
                         throw new CommandException(
-                                String.format(MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED,
+                                String.format(Messages.MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED,
                                         Messages.format(targetWedding))
                                 + ".\n"
                                 + Messages.MESSAGE_FORCE_DELETE_WEDDING
@@ -99,7 +95,7 @@ public class DeleteWeddingCommand extends Command {
             }
         }
         model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
-        throw new CommandException(String.format(MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND,
+        throw new CommandException(String.format(Messages.MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND,
                 Messages.format(targetWedding)));
     }
 

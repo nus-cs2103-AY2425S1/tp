@@ -27,10 +27,6 @@ public class CreateWeddingCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_WEDDING + "Cheryl's Wedding";
 
-    public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
-
-    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the Wedlinker system.";
-
     private final Wedding weddingToAdd;
 
     /**
@@ -47,11 +43,11 @@ public class CreateWeddingCommand extends Command {
         requireNonNull(model);
 
         if (model.hasWedding(weddingToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_WEDDING);
         }
 
         model.addWedding(weddingToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(weddingToAdd)));
+        return new CommandResult(String.format(Messages.MESSAGE_CREATE_WEDDING_SUCCESS, Messages.format(weddingToAdd)));
     }
 
     @Override

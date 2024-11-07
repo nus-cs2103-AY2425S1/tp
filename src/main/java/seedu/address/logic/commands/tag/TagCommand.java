@@ -1,9 +1,6 @@
 package seedu.address.logic.commands.tag;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_ADD_TAG_SUCCESS;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
@@ -77,7 +74,9 @@ public class TagCommand extends Command {
         String addedTags = tagsToAdd.stream()
                 .map(tag -> tag.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
-        return String.format(MESSAGE_ADD_TAG_SUCCESS, addedTags, personToEdit.getName().toString());
+        return String.format(
+                Messages.MESSAGE_ASSIGN_TAG_SUCCESS, addedTags, personToEdit.getName().toString()
+        );
     }
 
     @Override
@@ -87,7 +86,9 @@ public class TagCommand extends Command {
         if (lastShownList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", COMMAND_WORD));
         } else if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
-            throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()));
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()
+            ));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -101,7 +102,9 @@ public class TagCommand extends Command {
                     tag.increaseTaggedCount();
                     updatedTags.add(tag);
                 } else {
-                    throw new CommandException(MESSAGE_TAG_NOT_FOUND + "\n" + Messages.MESSAGE_FORCE_TAG_TO_CONTACT);
+                    throw new CommandException(
+                            Messages.MESSAGE_TAG_NOT_FOUND + "\n" + Messages.MESSAGE_FORCE_TAG_TO_CONTACT
+                    );
                 }
             } else {
                 Tag tagToEdit = model.getTag(tag);

@@ -1,10 +1,6 @@
 package seedu.address.logic.commands.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_ADD_TASK_SUCCESS;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -37,7 +34,6 @@ public class AssignTaskCommand extends Command {
             + "TASK_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 " + "1";
 
-    public static final String MESSAGE_DUPLICATE_TASK = "Task '%s' is already assigned to %s";
     private final Index personIndex;
     private final Set<Index> taskIndexes;
 
@@ -64,7 +60,9 @@ public class AssignTaskCommand extends Command {
         String addedTasks = taskToAdd.stream()
                 .map(task -> task.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
-        return String.format(MESSAGE_ADD_TASK_SUCCESS, addedTasks, personToEdit.getName().toString());
+        return String.format(
+                Messages.MESSAGE_ASSIGN_TASK_SUCCESS, addedTasks, personToEdit.getName().toString()
+        );
     }
 
     @Override
@@ -74,24 +72,26 @@ public class AssignTaskCommand extends Command {
 
 
         if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
 
         if (!personToEdit.isVendor()) {
-            throw new CommandException(String.format(MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK, personToEdit.getName()));
+            throw new CommandException(String.format(
+                    Messages.MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK, personToEdit.getName()
+            ));
         }
 
         Set<Task> tasksToAdd = new HashSet<>();
         Set<Task> updatedTasks = new HashSet<>(personToEdit.getTasks());
         for (Index taskIndex : taskIndexes) {
             if (taskIndex.getZeroBased() >= lastShownTaskList.size()) {
-                throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
             Task newTask = lastShownTaskList.get(taskIndex.getZeroBased());
             if (updatedTasks.contains(newTask)) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK,
+                throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_TASK_IN_PERSON,
                         newTask.toString(), personToEdit.getName().toString()));
             }
             tasksToAdd.add(newTask);
