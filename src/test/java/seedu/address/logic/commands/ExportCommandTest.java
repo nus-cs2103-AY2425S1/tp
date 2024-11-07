@@ -242,13 +242,10 @@ public class ExportCommandTest {
         Set<String> headers = new LinkedHashSet<>(Arrays.asList("name", "phone"));
 
         String filePathAndName = "test";
-
-        // Assuming there is an unsupported format defined
-        // (or if Format is an enum, you could use null or another value)
         Format unsupportedFormat = ExportCommand.matchFormat("invalid");
-        // Ensure the format is unsupported
+        // Check format is unsupported
         assertEquals(unsupportedFormat, Format.UNSUPPORTED);
-        // Expect IllegalArgumentException when calling writeFile with an unsupported format
+        // Check that IllegalArgumentException is thrown when calling writeFile with an unsupported format
         assertThrows(IllegalArgumentException.class, () -> {
             ExportCommand.writeFile(jsonData, headers, filePathAndName, unsupportedFormat);
         });
