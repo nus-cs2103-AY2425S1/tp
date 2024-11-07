@@ -12,7 +12,8 @@ import java.util.Comparator;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Invalid name: Only alphanumeric characters are allowed, and it should not be blank.";
+            "Invalid name: Only alphanumeric characters (with at least one alphabet) are allowed, "
+                    + "and it should not be blank.";
 
     public static final String MESSAGE_LENGTH_CONSTRAINTS =
             "Name cannot be more than 50 characters.";
