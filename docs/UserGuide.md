@@ -205,6 +205,7 @@ Format: `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/U
 Examples:
 * `addBuy 1 ht/c bp/1650000 pc/189651 un/5-10`
 * `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Spacious t/Near MRT`
+* `addBuy 2 ht/o bp/1200000 pc/223260 un/1-24 t/Near MRT`
 
 
 ### Adding a property to sell: `addSell`
@@ -223,6 +224,7 @@ Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un
 Examples:
 * `addSell 1 ht/c sp/1650000 pc/189651 un/5-10`
 * `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Spacious t/Near MRT`
+* `addSell 2 ht/o sp/1200000 pc/223260 un/1-24 t/Near MRT`
 
 
 ## Editing Entries Command
@@ -275,6 +277,7 @@ Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
 
 Examples:
 * `list` followed by `delBuy 2 1` deletes the 1st buying property under 2nd person in the address book.
+* `list` followed by `delBuy 4 2` deletes the 2nd buying property under 4th person in the address book.
 
 ### Deleting a property to be sold : `delSell`
 
@@ -291,6 +294,7 @@ Format: `delSell INDEX_PERSON INDEX_PROPERTY`
 
 Examples:
 * `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
+* `list` followed by `delSell 4 2` deletes the 2nd selling property under 4th person in the address book.
 
 ## Finding Entries Command
 
@@ -425,6 +429,7 @@ Format: `sorti INDEX f/FIELD o/ORDER`
 
 Examples:
 * `sorti 1 f/Price o/L` returns the property list for contact at index 1 sorted in ascending order with respect to the price associated to it.
+* `sorti 2 f/Price o/H` returns the property list for contact at index 2 sorted in descending order with respect to the price associated to it.
 
 ## Status Commands
 
