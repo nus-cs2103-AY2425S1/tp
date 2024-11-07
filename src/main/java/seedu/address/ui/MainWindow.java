@@ -31,6 +31,8 @@ import seedu.address.model.person.Person;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    private static final double PERSON_LIST_PANEL_SPLIT_POSITION = 0.55;
+    private static final double RESULT_DISPLAY_SPLIT_POSITION = 0.25;
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -121,66 +123,86 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        logger.info("Filling up the inner parts of the window...");
+        setupPersonListPanel();
+        setupCommandBox();
+        setupContactDisplay();
+        setupSplitPane();
+        setupResultDisplay();
+        setupStatusBarFooter();
+        addPersonSelectionListener();
+        addPersonListChangeListener();
+    }
+
+    /**
+     * Sets up the person list panel UI.
+     */
+    private void setupPersonListPanel() {
+        logger.info("Setting up PersonListPanel...");
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        logger.info("PersonListPanel setup complete.");
+    }
 
+    /**
+     * Sets up the command box UI.
+     */
+    private void setupCommandBox() {
+        logger.info("Setting up CommandBox...");
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        logger.info("CommandBox setup complete.");
+    }
 
+    /**
+     * Sets up the contact display UI.
+     */
+    private void setupContactDisplay() {
+        logger.info("Setting up ContactDisplay...");
         contactDisplay = new ContactDisplay();
         contactDisplay.showHelpDisplay();
         scrollableContactDisplay = contactDisplay.getScrollPane();
+        logger.info("ContactDisplay setup complete.");
+    }
 
+    /**
+     * Sets up the split pane for person list and contact display.
+     */
+    private void setupSplitPane() {
+        logger.info("Setting up SplitPane...");
         splitPane = new SplitPane();
         splitPane.getItems().addAll(personListPanel.getRoot(), contactDisplay.getRoot());
-        splitPane.setDividerPositions(0.55);
-
+        splitPane.setDividerPositions(PERSON_LIST_PANEL_SPLIT_POSITION);
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(splitPane);
+        logger.info("SplitPane setup complete.");
+    }
 
+    /**
+     * Sets up the result display pane.
+     */
+    private void setupResultDisplay() {
+        logger.info("Setting up ResultDisplay...");
         SplitPane resultDisplaySplitPane = new SplitPane();
         resultDisplaySplitPane.setOrientation(Orientation.VERTICAL);
         resultDisplay = new ResultDisplay();
         resultDisplaySplitPane.getItems().addAll(resultDisplay.getRoot(), splitPane);
-        resultDisplaySplitPane.setDividerPositions(0.25);
+        resultDisplaySplitPane.setDividerPositions(RESULT_DISPLAY_SPLIT_POSITION);
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         VBox.setVgrow(resultDisplaySplitPane, Priority.ALWAYS);
         VBox.setVgrow(splitPane, Priority.ALWAYS);
         AnchorPane.setBottomAnchor(splitPane, 0.0);
+        logger.info("ResultDisplay setup complete.");
+    }
 
+    /**
+     * Sets up the status bar footer.
+     */
+    private void setupStatusBarFooter() {
+        logger.info("Setting up StatusBarFooter...");
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        personListPanel.getPersonListView().getSelectionModel().selectedItemProperty()
-                .addListener((obs, oldSelection, newSelection) -> {
-                    if (newSelection != null) {
-                        contactDisplay.updateContactDetails(newSelection);
-                    } else {
-                        contactDisplay.clear();
-                    }
-                });
-
-        personListPanel.getPersonList().addListener((ListChangeListener<Person>) change -> {
-            while (change.next()) {
-                Person selectedPerson = personListPanel.getPersonListView()
-                        .getSelectionModel().getSelectedItem();
-                if (change.wasRemoved()) {
-                    if (!personListPanel.getPersonList().contains(selectedPerson)) {
-                        contactDisplay.clear();
-                    }
-                }
-                if (change.wasUpdated() || change.wasReplaced()) {
-                    for (int i = change.getFrom(); i < change.getTo(); i++) {
-                        if (i < personListPanel.getPersonList().size()) {
-                            Person updatedPerson = personListPanel.getPersonList().get(i);
-                            System.out.println("Checking updated person: " + updatedPerson);
-                            contactDisplay.updateContactDetails(updatedPerson);
-                            System.out.println("Updated contact display with: " + updatedPerson);
-                        }
-                    }
-                }
-            }
-        });
+        logger.info("StatusBarFooter setup complete.");
     }
 
     /**
@@ -193,6 +215,51 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Checks if a person is being selected.
+     */
+    private void addPersonSelectionListener() {
+        logger.info("Adding Person selection listener...");
+        personListPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+                        logger.info("Person selected: " + newSelection);
+                        contactDisplay.updateContactDetails(newSelection);
+                    } else {
+                        logger.info("No person selected.");
+                        contactDisplay.clear();
+                    }
+                });
+    }
+
+    /**
+     * Checks for change in the person list.
+     */
+    private void addPersonListChangeListener() {
+        logger.info("Adding PersonList change listener...");
+        personListPanel.getPersonList().addListener((ListChangeListener<Person>) change -> {
+            while (change.next()) {
+                Person selectedPerson = personListPanel.getPersonListView()
+                        .getSelectionModel().getSelectedItem();
+                if (change.wasRemoved()) {
+                    logger.info("Person removed from list.");
+                    if (!personListPanel.getPersonList().contains(selectedPerson)) {
+                        contactDisplay.clear();
+                    }
+                }
+                if (change.wasUpdated() || change.wasReplaced()) {
+                    for (int i = change.getFrom(); i < change.getTo(); i++) {
+                        if (i < personListPanel.getPersonList().size()) {
+                            Person updatedPerson = personListPanel.getPersonList().get(i);
+                            logger.info("Updated person: " + updatedPerson);
+                            contactDisplay.updateContactDetails(updatedPerson);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     /**
