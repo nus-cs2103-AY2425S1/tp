@@ -67,6 +67,8 @@ public class EditwCommand extends Command {
 
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
+        model.updatePersonEditedWedding(weddingToEdit, editedWedding);
+
 
         model.setWedding(weddingToEdit, editedWedding);
         return new CommandResult(String.format(MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));

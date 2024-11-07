@@ -34,5 +34,13 @@ public class ModelStubAcceptingWeddingAdded extends ModelStub {
             weddingsAdded.set(index, editedWedding);
         }
     }
+
+    @Override
+    public void updatePersonEditedWedding(Wedding target, Wedding editedWedding) {
+        int index = weddingsAdded.indexOf(target);
+        if (index != -1) {
+            weddingsAdded.set(index, editedWedding);
+        }
+    }
 }
 
