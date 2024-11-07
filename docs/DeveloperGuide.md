@@ -205,29 +205,29 @@ The sequence diagram below models the interactions between the different compone
 2. The system displays the details of "alice tan," including name, contact information, address, condition, and any scheduled appointments.
 3. This information is shown in a pop-up or a designated UI section for easy access by the user.
 
-### Reminder Feature
+### Reminder Note Feature
 
 #### Overview
-The `reminder` command helps to set a reminder for a client's most upcoming appointment.
+The `reminder` command helps to set a reminder note for a client's most upcoming appointment.
 
 The reminder diagram below models the interaction between the different components of PhysioPal for the execution of the `reminder` command.
 
 ![ReminderSequenceDiagram](images/ReminderSequenceDiagram.png)
 
 #### Details
-1. The user executes the command `reminder John Doe r/1 day` to set a reminder for a client named john doe's appointment.
+1. The user executes the command `reminder John Doe r/1 day` to set a reminder note for a client named john doe's appointment.
 2. The `ReminderCommandParser` object calls its parse method to interpret the user input.
 3. A `ReminderCommand` object is created.
 4. The `ReminderCommandParser` object returns the `ReminderCommand` object.
 5. The `LogicManager` object calls the `execute` method of `ReminderCommand`.
-6. The `execute` method then invokes the `setPerson` method of its `Model` argument to create a reminder with the specified reminder time.
+6. The `execute` method then invokes the `setPerson` method of its `Model` argument to create a reminder note with the specified reminder time.
 7. The `execute` method then invokes the `updateFilteredPersonList` method of its `Model` argument to update the view of PhysioPal to show all contacts with their reminders.
 8. The `execute` method returns a `CommandResult` which contains data including the completion of the `ReminderCommand`.
 
 #### Example Usage
 1. User inputs the command `reminder Alice Tan r/3 hours`.
 2. This creates a reminder for a person named "alice tan", with reminder time "3 hours".
-3. The reminder is then displayed in the UI, reflecting that a reminder has been set for "alice tan"'s appointment.
+3. The reminder is then displayed in the UI, reflecting that a reminder note has been set for "alice tan"'s appointment.
 
 ### Delete Appointment Feature
 
@@ -417,8 +417,79 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 1e1-1e2 are repeated until a valid note is input by the Physiotherapist.
       <br>Use case resumes from step 2.<br>
 
+**Use case: UC03- Setting a reminder note for an appointment**
 
-**Use case: UC03 - Deleting an appointment**
+**Preconditions: Client must have at least one appointment.**
+
+**MSS**
+
+1. Physiotherapists sets a reminder note for an appointment made for a client.
+2. PhysioPal creates a reminder note for the client with the reminder time provided.
+3. PhysioPal confirms creation of reminder note and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1c. PhysioPal detects an empty input for reminder time.
+
+    * 1c1. PhysioPal displays error message.
+    * 1c2. Physiotherapist enters new data
+    * Steps 1c1-1c2 are repeated until a valid reminder time is input by the Physiotherapist. Use case resumes from step 2.
+
+
+* 1d. PhysioPal detects an invalid reminder time or the appointment already has the same reminder time.
+
+    * 1d1. PhysioPal displays error message.
+    * 1d2. Physiotherapist enters new data.
+    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist. Use case resumes from step 2.
+
+**Use case: UC04 - Deleting a reminder note**
+
+**MSS**
+
+1. Physiotherapist requests to delete the reminder note for a client.
+2. PhysioPal deletes the reminder note for client.
+3. PhysioPal confirms deletion of reminder note and displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. PhysioPal detects an empty input for name.
+
+    * 1a1. PhysioPal displays error message.
+    * 1a2. Physiotherapist enters new data.
+    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
+      <br>Use case resumes from step 2.<br>
+
+* 1b. PhysioPal detects an invalid name.
+
+    * 1b1. PhysioPal displays error message.
+    * 1b2. Physiotherapist enters new data.
+    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
+      <br>Use case resumes from step 2.<br>
+
+* 1c. PhysioPal detects that the client does not have a reminder note set.
+
+    * 1c1. PhysioPal displays error message.
+      <br>Use case ends.<br>
+
+**Use case: UC05 - Deleting an appointment**
 
 **Preconditions: Client has more than one appointment.**
 
@@ -460,86 +531,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist.
       <br>Use case resumes from step 2.<br>
 
-**Use case: UC04- Setting a reminder for an appointment**
-
-**Preconditions: Client must have at least one appointment.**
-
-**MSS**
-
-1. Physiotherapists sets a reminder for an appointment made for a client.
-2. PhysioPal creates a reminder for the client with the reminder time provided.
-3. PhysioPal confirms creation of reminder and displays a success message.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. PhysioPal detects an empty input for name.
-
-    * 1a1. PhysioPal displays error message.
-    * 1a2. Physiotherapist enters new data.
-    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
-
-
-* 1b. PhysioPal detects an invalid name.
-
-    * 1b1. PhysioPal displays error message.
-    * 1b2. Physiotherapist enters new data.
-    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist. Use case resumes from step 2.
-
-
-* 1c. PhysioPal detects an empty input for reminder time.
-
-    * 1c1. PhysioPal displays error message.
-    * 1c2. Physiotherapist enters new data
-    * Steps 1c1-1c2 are repeated until a valid reminder time is input by the Physiotherapist. Use case resumes from step 2.
-
-
-* 1d. PhysioPal detects an invalid reminder time or the appointment already has the same reminder time.
-
-    * 1d1. PhysioPal displays error message.
-    * 1d2. Physiotherapist enters new data.
-    * Steps 1d1-1d2 are repeated until a valid date and time is input by the Physiotherapist. Use case resumes from step 2.
-
-**Use case: UC05 - Deleting a reminder**
-
-**MSS**
-
-1. Physiotherapist requests to delete the reminder for a client.
-2. PhysioPal deletes the reminder for client.
-3. PhysioPal confirms deletion of reminder and displays a success message.
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. PhysioPal detects an empty input for name.
-
-    * 1a1. PhysioPal displays error message.
-    * 1a2. Physiotherapist enters new data.
-    * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
-
-* 1b. PhysioPal detects an invalid name.
-
-    * 1b1. PhysioPal displays error message.
-    * 1b2. Physiotherapist enters new data.
-    * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
-      <br>Use case resumes from step 2.<br>
-
-* 1c. PhysioPal detects that the client does not have a reminder set.
-
-    * 1c1. PhysioPal displays error message.
-      <br>Use case ends.<br>
-
 **Use case: UC06 - Deleting an appointment**
 
 **Preconditions: Client has one appointment.**
 
 **MSS**
 
-1. Physiotherapist <u>deletes a scheduled appointment for a client (UC03)</u>.
-2. PhysioPal <u>deletes the reminder for client (UC04)</u>.
+1. Physiotherapist <u>deletes a scheduled appointment for a client (UC05)</u>.
+2. PhysioPal <u>deletes the reminder note for client (UC04)</u>.
 3. PhysioPal confirms deletion of appointment and displays a success message.
 
    Use case ends.
@@ -631,6 +630,7 @@ and Personal Data Protection Act (PDPA), so that I manage client data in a compl
 
 ### Glossary
 
+* **Client**: A person receiving services from the physiotherapist. He/she should have a unique name (not case-sensitive).
 * **Client contact detail**: A contact detail that includes name, phone number, email address,
   address, appointment details, tags etc.
 * **Appointment**: A 1-hour scheduled meeting between a physiotherapist and a client for treatment. It includes date and time.
@@ -641,8 +641,6 @@ and Personal Data Protection Act (PDPA), so that I manage client data in a compl
 * **API**: Application Programming Interface.
 * **GUI**: Graphical User Interface.
 * **MSS**: Main Success Scenario.
-* **Client**: A person receiving services from the physiotherapist. He/she should have a unique name (not case-sensitive).
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -669,20 +667,36 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a person
+
+1. Adding a person.
+
+   1. **Test case**: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+      **Expected**: The person named john doe is added and displayed in the address book.
+
+   1. **Test case**: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
+      **Expected**: No person is added, duplicate contact. Error details shown in the status message.
+
+   1. **Test case**: `add Jane p/98765432`<br>
+      **Expected**: No person is added, invalid command format. Error details shown in the status message.
+
+   1. Other incorrect add commands to try: `add`, `add n/John Doe n/John Doe`, `...`<br>
+      **Expected**: Similar to previous.
+
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete John Doe`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    1. **Test case**: `delete John Doe`<br>
+       **Expected**: The contact named John Doe is deleted from the list. Details of the deleted contact shown in the status message.
 
-    1. Test case: `delete John Doe`<br>
-       Expected: No person is deleted. Error details shown in the status message.
+    1. **Test case**: `delete John Doe`<br>
+       **Expected**: No person is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete XXX`, `...` (where XXX is not a name in the address book)<br>
-       Expected: Similar to previous.
+       **Expected**: Similar to previous.
 
 
 ### Locating Persons
@@ -701,19 +715,6 @@ testers are expected to do more *exploratory* testing.
 
     1. **Test case**: `find p/88`<br>**Expected**: All contacts with phone numbers containing "88" should be shown. For instance, if "john doo" has the phone number "88765432," he should appear in the results, allowing partial phone number matches.
 
-    
-### Scheduling an appointment
-
-1. Scheduling an appointment for a client while all clients are being shown.
-
-    1. Prerequisites: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-
-    1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: Contact named john doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
-
-    1. Test case: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
-
-    1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.
-
 ### Viewing a Person
 
 1. Viewing a person’s details in the address book.
@@ -727,7 +728,7 @@ testers are expected to do more *exploratory* testing.
         - Address
         - Condition
         - Schedule
-        - Reminder
+        - Reminder Note
 
     3. **Test case**: `view Betsy Crowe`<br>**Expected**: A pop-up window displays betsy crowe’s details with all specified fields shown.
 
@@ -735,79 +736,98 @@ testers are expected to do more *exploratory* testing.
 
     5. **Test case**: `view Nonexistent Name`<br>**Expected**: An error message appears indicating that no matching contact is found.
    
-    1. Test case: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>Expected: No contact is updated with the corresponding appointment. Error details shown in the status message.
+    1. **Test case**: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>**Expected**: No contact is updated with the corresponding appointment. Error details shown in the status message.
 
-    1. Test case: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>Expected: Similar to previous.
+    1. **Test case**: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>**Expected**: Similar to previous.
+
+### Scheduling an appointment
+
+1. Scheduling an appointment for a client while all clients are being shown.
+
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+
+    1. **Test case**: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>**Expected**: Contact named john doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
+
+    1. **Test case**: `schedule John Doee d/2024-10-29 1200 note/First Appointment`<br>**Expected**: No contact is updated with the corresponding appointment. Error details shown in the status message.
+
+    1. **Test case**: `schedule John Doe d/2024-10-29 1800 note/First Appointment`<br>**Expected**: Similar to previous.
 
 ### Deleting an appointment
 
 1. Deleting an appointment for a client while all clients are being shown.
 
-    1. Prerequisites: Name john doe should exist in the contact list. At least **one** appointment should exist for the client john doe. If not, run the appropriate command to schedule an appointment for john doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
+    1. **Prerequisites**: Name john doe should exist in the contact list. At least **one** appointment should exist for the client john doe. If not, run the appropriate command to schedule an appointment for john doe.<br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>
 
-    1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: Contact named john doe will be updated without the appointment on Oct 29 2024, 12:00 pm. Success message of the appointment deletion shown in the status message.
+    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1200`<br>**Expected**: Contact named john doe will be updated without the appointment on Oct 29 2024, 12:00 pm. Success message of the appointment deletion shown in the status message.
 
-    1. Test case: `appointment-delete John Doe d/2024-10-29 1200`<br>Expected: No contact is updated. Error details shown in the status message.
+    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1200`<br>**Expected**: No contact is updated. Error details shown in the status message.
 
-    1. Test case: `appointment-delete John Doe d/2024-10-29 1800`<br>Expected: Similar to previous.
+    1. **Test case**: `appointment-delete John Doe d/2024-10-29 1800`<br>**Expected**: Similar to previous.
 
-### Setting a reminder for an appointment
+### Setting a reminder note for an appointment
 
-1. Setting a reminder for a scheduled appointment for a client while all clients are being shown.
+1. Setting a reminder note for a scheduled appointment for a client while all clients are being shown.
 
-    1. Prerequisites: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
         
         At **least one** appointment must be scheduled for john doe. If not, run the appropriate command to add an appointment for john doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
 
-    1. Test case: `reminder John Doe r/1 hour`<br>Expected: Contact name john doe will be updated with a reminder set for 1 hour before Oct 29 2024, 12:00pm
+    1. **Test case**: `reminder John Doe r/1 hour`<br>**Expected**: Contact name john doe will be updated with a reminder note of 1 hour before Oct 29 2024, 12:00pm
 
-    1. Test case: `reminder John Doee r/1 hour`<br>Expected: No contact is updated with the corresponding reminder time. Error details shown in the status message.
+    1. **Test case**: `reminder John Doee r/1 hour`<br>**Expected**: No contact is updated with the corresponding reminder time. Error details shown in the status message.
 
-    1. Test case: `reminder John Doe r/1 cycle`<br>Expected: No contact is updated with the corresponding reminder time due to invalid reminder format. Error details shown in the status message.
+    1. **Test case**: `reminder John Doe r/1 cycle`<br>**Expected**: No contact is updated with the corresponding reminder time due to invalid reminder format. Error details shown in the status message.
 
 ### Deleting a reminder
 
 1. Deleting a reminder for a client while all clients are being shown.
 
-    1. Prerequisites: Name john doe should exist in the contact list. A reminder should be set for the client john doe. If not, run the appropriate command to set a reminder for john doe.<br>`reminder John Doe r/1 day`<br>
+    1. **Prerequisites**: Name john doe should exist in the contact list. A reminder note should be set for the client john doe. If not, run the appropriate command to set a reminder note for john doe.<br>`reminder John Doe r/1 day`<br>
 
-    1. Test case: `reminder-delete John Doe`<br>Expected: Contact named john doe will be updated without the reminder. Success message of the reminder deletion shown in the status message.
+    1. **Test case**: `reminder-delete John Doe`<br>**Expected**: Contact named john doe will be updated without the reminder note. Success message of the reminder note deletion shown in the status message.
 
-    1. Test case: `reminder-delete John Doe`<br>Expected: No contact is updated. Error details shown in the status message.
+    1. **Test case**: `reminder-delete John Doe`<br>**Expected**: No contact is updated. Error details shown in the status message.
 
 ### Listing upcoming appointments
 
 1. Listing all upcoming appointments
 
-   1. Test case: `appointment-list`<br>
-    Expected: Lists all upcoming appointments in chronological order. Total number of appointments and 
+   1. **Test case**: `appointment-list`<br>
+      **Expected**: Lists all upcoming appointments in chronological order. Total number of appointments and 
     details of the appointments shown in the status message.
    
-   2. Test case: `appointment-list d/2024-11-25`<br>
-    Expected: Lists upcoming appointments on 25 Nov 2024. Total number of appointments and
+   2. **Test case**: `appointment-list d/2024-11-25`<br>
+      **Expected**: Lists upcoming appointments on 25 Nov 2024. Total number of appointments and
     details of the appointments shown in the status message.
    
-   3. Test case: `appointment-list d/2024-11-10 1000`<br>
-      Expected: Lists upcoming appointments on 10 Nov 2024 at 10am. Total number of appointments and
+   3. **Test case**: `appointment-list d/2024-11-10 1000`<br>
+      **Expected**: Lists upcoming appointments on 10 Nov 2024 at 10am. Total number of appointments and
       details of the appointments shown in the status message.
    
    4. Other incorrect appointment-list commands to try: `appointment-list d/`, `appointment-list d/2025-13-32`, `...`<br>
-    Expected: No appointments listed. Error details shown in the status message.
+      **Expected**: No appointments listed. Error details shown in the status message.
 
 ### Making payment for an appointment
 
 1. Marking payment as paid
-    1. Test case: `payment John Doe d/2024-10-14 1200 pay/paid`<br>
-       Expected: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as paid. 
+    1. **Test case**: `payment John Doe d/2024-10-14 1200 pay/paid`<br>
+       **Expected**: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as paid. 
        Details of the status change shown in the status message.
     2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
-      Expected: No payment made. Error details shown in the status message.
+       **Expected**: No payment made. Error details shown in the status message.
 2. Marking payment as unpaid
-    1. Test case: `payment John Doe d/2024-10-14 1200 pay/unpaid`<br>
-       Expected: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as unpaid.
+    1. **Test case**: `payment John Doe d/2024-10-14 1200 pay/unpaid`<br>
+       **Expected**: Payment status for john doe's appointment on 14 Oct 2024 at 12pm is marked as unpaid.
        Details of the status change shown in the status message.
     2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
-       Expected: No payment made. Error details shown in the status message.
+       **Expected**: No payment made. Error details shown in the status message.
+
+### Clearing all contacts
+
+1. Clearing the entire list of contacts in the JSON file that is being used as the data source.
+
+    1. **Test case**: `clear`<br>
+       **Expected**: All contacts in the data file are cleared.
 
 ### Saving data
 
@@ -823,7 +843,7 @@ testers are expected to do more *exploratory* testing.
 
 Our project aims to provide an efficient contact management system for a physiotherapist 
 with a large client base, building on AB3 (Address Book 3). Additional features include scheduling appointments,
-setting reminders, tracking treatment history, type, and payment history. These improvements are
+setting reminder notes, tracking treatment history, type, and payment history. These improvements are
 aimed to provide a cost-effective solution to help physiotherapists save time, money and manpower on
 repetitive tasks.
 
@@ -832,7 +852,7 @@ repetitive tasks.
 Developing PhysioPal presented unique challenges. Unlike AddressBook Level 3 (AB3), 
 which handles only one entity type, PhysioPal extends heavily on the appointment feature: `Schedule`.
 The need for seamless interaction between different entities and satisfying functionality requirements
-demanded significant work to incorporate features such as reminders and appointment handling.
+demanded significant work to incorporate features such as reminder notes and appointment handling.
 Furthermore, the pop-up window to display client details in an organized fashion added complexity
 to the UI design.
 
@@ -881,7 +901,7 @@ this feature minimizes errors and reduces administrative workload. It provides a
 record linked to each client’s treatment.
 
 5. Focused Client Information Display (view Command with Pop-Up): The view command opens a pop-up 
-with comprehensive client details, including contact info, appointments, reminders, and 
+with comprehensive client details, including contact info, appointments, reminder notes, and 
 payment status. This consolidated view improves accessibility, allowing physiotherapists to 
 quickly review all necessary client information. It streamlines workflow and supports a more 
 personalized client experience.
