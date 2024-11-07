@@ -8,7 +8,7 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.member.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all members in the CCA system whose name contains any of the argument keywords.
+ * Finds and lists all members in HallPointer whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindMemberCommand extends Command {
@@ -16,7 +16,8 @@ public class FindMemberCommand extends Command {
     public static final String COMMAND_WORD = "find_members";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all members whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive)\n"
+            + "and displays them on the screen.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " John Jane";
 

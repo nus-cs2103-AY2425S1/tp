@@ -9,7 +9,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Room {
 
-    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format <block>-<floor>-<room_number>";
+    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format block-floor-room_number.\n"
+            + "Example: 10-3-100";
 
     public static final String VALIDATION_REGEX = "^[0-9]+-[0-9]+-[0-9]+$";
 

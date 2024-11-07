@@ -18,7 +18,7 @@ public class DeleteMemberCommand extends Command {
     public static final String COMMAND_WORD = "delete_member";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the member in the displayed member list that matches the given index number.\n"
+            + ": Deletes the displayed member with the given index.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

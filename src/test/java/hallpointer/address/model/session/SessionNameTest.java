@@ -29,11 +29,14 @@ public class SessionNameTest {
         assertFalse(SessionName.isValidSessionName(" ")); // spaces only
         assertFalse(SessionName.isValidSessionName("^")); // only non-alphanumeric characters
         assertFalse(SessionName.isValidSessionName("session*")); // contains non-alphanumeric characters
+        assertFalse(SessionName.isValidSessionName("session/2")); // slashes not allowed either
+
 
         // valid names
         assertTrue(SessionName.isValidSessionName("Math Workshop")); // alphabets and spaces only
         assertTrue(SessionName.isValidSessionName("Session 101")); // alphanumeric characters
         assertTrue(SessionName.isValidSessionName("Physics Seminar 2024")); // long valid names
+        assertTrue(SessionName.isValidSessionName("2024")); // just numbmers is fine here
     }
 
     @Test

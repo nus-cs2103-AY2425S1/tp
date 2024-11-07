@@ -24,11 +24,12 @@ public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "add_session";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a session to the member(s) in the displayed member list that matches the given index number(s).\n"
+            + ": Adds a session to the displayed member(s) with the given index(es).\n"
             + "Parameters: "
             + PREFIX_SESSION_NAME + "NAME "
             + PREFIX_DATE + "DATE "
             + PREFIX_POINTS + "POINTS "
+            + PREFIX_MEMBER + "INDEX "
             + "[" + PREFIX_MEMBER + "INDEX]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SESSION_NAME + "Rehearsal "
@@ -36,8 +37,8 @@ public class AddSessionCommand extends Command {
             + PREFIX_POINTS + "2 "
             + PREFIX_MEMBER + "1";
 
-    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$s points "
-            + "added successfully with %4$d member attending.";
+    public static final String MESSAGE_SUCCESS = "Session %1$s on %2$s for %3$s points added successfully,\n"
+            + "with %4$d members attending.";
     public static final String MESSAGE_DUPLICATE_SESSION = "Error: Session already exists.";
     public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
 
