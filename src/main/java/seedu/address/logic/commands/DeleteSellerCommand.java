@@ -20,7 +20,7 @@ public class DeleteSellerCommand extends DeleteClientCommand {
     /** The command word for this specific action. */
     public static final String COMMAND_WORD = "deleteseller";
     /** Command parameter format for phone. */
-    public static final String SELLER_PARAMETERS = String.format("%SELLER_PHONE_NUMBER", PREFIX_PHONE);
+    public static final String SELLER_PARAMETERS = String.format("%sSELLER_PHONE_NUMBER", PREFIX_PHONE);
 
     public static final String MESSAGE_USAGE = String.format(
             "%s: Deletes a seller from the client book.\nParameters: %s\n%s",

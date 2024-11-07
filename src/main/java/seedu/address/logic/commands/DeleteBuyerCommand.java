@@ -20,7 +20,7 @@ public class DeleteBuyerCommand extends DeleteClientCommand {
     public static final String COMMAND_WORD = "deletebuyer";
 
     /** Command parameter format for phone. */
-    public static final String BUYER_PARAMETERS = String.format("%BUYER_PHONE_NUMBER", PREFIX_PHONE);
+    public static final String BUYER_PARAMETERS = String.format("%sBUYER_PHONE_NUMBER", PREFIX_PHONE);
 
     public static final String MESSAGE_USAGE = String.format(
             "%s: Deletes a buyer from the client book.\nParameters: %s\n%s",
