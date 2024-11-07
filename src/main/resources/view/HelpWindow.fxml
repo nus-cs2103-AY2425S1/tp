@@ -25,7 +25,7 @@
       
             <HBox alignment="CENTER">
               <children>
-                     <Button fx:id="closeButton" mnemonicParsing="false" text="Close" />
+                     <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeWindow" text="Close" />
                 <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
                   <HBox.margin>
                     <Insets left="5.0" />

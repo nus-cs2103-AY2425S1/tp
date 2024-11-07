@@ -116,4 +116,13 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
+
+    /**
+     * Closes the window.
+     */
+    @FXML
+    private void closeWindow() {
+        Stage stage = this.getRoot();
+        stage.close();
+    }
 }
