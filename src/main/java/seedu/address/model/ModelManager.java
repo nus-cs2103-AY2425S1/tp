@@ -149,6 +149,12 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
     //=========== Event Manager ==============================================================================
+
+    @Override
+    public void setEventManager(ReadOnlyEventManager eventManager) {
+        this.eventManager.resetData(eventManager);
+    }
+
     @Override
     public EventManager getEventManager() {
         return eventManager;

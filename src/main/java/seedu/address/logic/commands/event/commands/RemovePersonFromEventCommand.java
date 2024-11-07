@@ -24,12 +24,12 @@ import seedu.address.model.person.PersonInEventPredicate;
 public class RemovePersonFromEventCommand extends Command {
 
     public static final String COMMAND_WORD = "remove";
-    public static final String MESSAGE_SUCCESS = "Person %1$s removed from event %2$s";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found in event";
+    public static final String MESSAGE_SUCCESS = "Contact %1$s removed from event %2$s";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Contact not found in event";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Event not found";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " ei/ EVENT_INDEX ci/ CONTACT_INDEX : Removes a person from "
+            + " ei/EVENT_INDEX ci/CONTACT_INDEX : Removes a contact from "
             + "an event";
 
     private static final Logger logger = LogsCenter.getLogger(RemovePersonFromEventCommand.class);

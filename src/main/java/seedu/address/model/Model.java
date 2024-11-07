@@ -8,6 +8,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.EventManager;
+import seedu.address.model.event.ReadOnlyEventManager;
 import seedu.address.model.person.Person;
 
 /**
@@ -93,6 +94,12 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+
+    /**
+     * Reset the EventManager Data
+     */
+    void setEventManager(ReadOnlyEventManager eventManager);
 
     /**
      * Return the EventManager
