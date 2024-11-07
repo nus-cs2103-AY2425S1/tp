@@ -167,6 +167,20 @@ Format: `delete NRIC`
 Examples:
 * `delete S1234567A` deletes the patient profile of the patient with `NRIC S1234567A`.
 
+### Sort list of patients: `sort`
+
+Sorts the list of patients based on the specified criteria.
+
+Format: `sort [name | appointment]`
+
+Examples:
+* `sort name` sorts the list of patients in alphabetical order by their names.
+* `sort appointment` sorts the list of patients by their upcoming appointment dates in chronological order.
+
+#### Notes
+- If the list is already sorted by the specified criteria, the command will maintain the current order.
+- Sorting by `appointment` will only consider patients with scheduled appointments. Patients without appointments will appear at the end of the list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the database.
