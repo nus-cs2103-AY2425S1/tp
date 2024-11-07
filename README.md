@@ -1,4 +1,4 @@
-By CS2103T-T11-2
+# <img src="docs/images/kontactsLogo.png" alt="KonTActs logo" width="50"/> KonTActs 
 
 [![Java CI](https://github.com/AY2425S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2425S1-CS2103T-T11-2/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-T11-2/tp/graph/badge.svg)](https://codecov.io/github/AY2425S1-CS2103T-T11-2/tp)
