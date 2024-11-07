@@ -86,7 +86,7 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT] [t/TAG]…​`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT] [t/TAG]…​`
 
 - `PHONE_NUMBER` must only contain characters 0-9 and must be exactly 8 digits long.
 - `EMAIL` should be in the format **local-part@domain** whereby the local-part contains only alphanumeric characters and some special characters like +_.- but may not start with the special characters. The domain name must end with a domain label at least 2 characters long and start and end with alphanumeric characters. The domain label should consist of alphanumeric characters separated only be hyphens, if any.
@@ -106,23 +106,24 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT
 
   </box>
 
-Examples:
+**Examples**:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
 * `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
 
+<img src="images/addEvie.png" width="1000">
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-Format: `clear`
+**Format**: `clear`
 
 > **WARNING**
 > 
 > After confirmation, any cleared data or contact cannot be retrieved. This action is IRREVERSIBLE.
 
-* Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting the data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
+* Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting-the-data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
 * You can directly delete the addressbook.json file which can be found in data folder or in the data directory if you want to recover the sample data.
 
 **Confirmation Requirement:**
@@ -134,14 +135,14 @@ the action will be aborted, and the address book will remain unchanged.
 * Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
 
-<img src="images/clearConfirmation.png" width="450">
+<img src="images/clearConfirmation.png" width="400">
 
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX` / `delete NAME`
+**Format**: `delete INDEX` / `delete NAME`
 
 > **WARNING**
 >
@@ -153,21 +154,22 @@ Format: `delete INDEX` / `delete NAME`
 * The index **must be a positive integer** 1, 2, 3, …​
 * The name provided must be the person's full name.
 
-Examples:
-
-* `list` followed by `delete Alex Yeoh` deletes the person with name `Alex Yeoh` in the address book.
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-
 **Confirmation Requirement:**
 
-* A confirmation window will appear before deleting a person, asking you to confirm the deletion. 
-You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted, 
-and the person will not be deleted.
+* A confirmation window will appear before deleting a person, asking you to confirm the deletion.
+  You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted,
+  and the person will not be deleted.
 * Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
-<img src="images/deleteConfirmation.png" width="450">
+<img src="images/deleteConfirmation.png" width="400">
+
+**Examples**:
+
+* `list` followed by `delete Alex Yeoh` followed by clicking `OK `deletes the person with name `Alex Yeoh` in the address book.
+* `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st person in the results of the `find` command.
+
+<img src="images/deleteExpected.png" width="500">
 
 
 
@@ -175,7 +177,7 @@ and the person will not be deleted.
 
 Edits an existing person in the address book.
 
-Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…​`
+**Format**: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…​`
 
 * Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
@@ -187,24 +189,24 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/
   specifying any appointments after it.
 * Currently, editing of specific tags and appointments are not possible. To work around this, you can clear their respective fields and add the new tags/appointments.
 
-Examples:
+**Examples**:
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
 
+<img src="images/editJohn.png" width="1000">
 
 
 ### Exiting the program : `exit`
 
 Exits the program.
-Format: `exit`
-
+**Format**: `exit`
 
 
 ### Filtering persons by age group or appointment dates: `filter`
 
 Filter persons whose age and/or appointment dates are within the specified range.
 
-Format: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`
+**Format**: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND] [b/AGE_LOWER_BOUND - AGE_UPPER_BOUND] [t/TAG]...`
 
 * The order of the keywords does not matter.
 * Only appointment dates and/or age group and/or tags can be used to filter.
@@ -217,12 +219,13 @@ Format: `filter [ap/APPOINTMENT_DATE_LOWER_BOUND - APPOINTMENT_DATE_UPPER_BOUND]
 * Persons must within all specified ranges to be returned if both age and appointment dates are specified (i.e. `AND` search).
   e.g. `filter b/70-99 ap/01/01/2025 - 01/01/2026` will return `Roy b/87 ap/11/11/2025`.
 
-Examples:
+**Examples**:
 * `filter b/70-79`
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`
 
+<img src="images/filterResult.png" width="550">
 
 
 ### Locating persons by name or phone number: `find`
@@ -244,7 +247,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 * `find olive 87438` returns 
 * `87438807`, `Charlotte Oliveiro`<br>
-  ![result for 'find olive 87438'](images/findOlive.png)
+<img src="images/findResult.png" width="500">
 
 
 
@@ -257,7 +260,7 @@ Shows you a help window with useful resources which includes:
 - You can copy the command format or example from the table and paste it into the command box.
 - You can click on the table headers to sort commands in ascending or descending order.
 
-Format: `help`
+**Format**: `help`
 
 <img src="images/helpWindow.png" width="800">
 
@@ -267,7 +270,7 @@ Format: `help`
 
 Imports contact info from the given json file into MediContact.
 
-Format: `import FILENAME.json`
+**Format**: `import FILENAME.json`
 
 - **IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may refer to [Exporting the data](#exporting the data). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see [Expected format](#expected format) for more details).
 - File **must** be a `json` file. Ensure that the extension `.json` follows the `FILENAME` 
@@ -282,7 +285,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly. It is recommended **not** to manually edit the data file if you are not an expert user.
 </box>
 
-Example:
+**Example**:
 
 - `import patientRecords.json`
 
@@ -374,29 +377,30 @@ The following is an example of a valid JSON file content.
 
 Shows an alphabetically sorted list of all persons in the address book.
 
-Format: `list`
+**Format**: `list`
 
 * No other parameters should be supplied.
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
+<img src="images/listResult.png" width="550">
 
 
 ### Listing starred persons : `list *`
 
 Shows a list of all starred persons in the address book.
 
-Format: `list *`
+**Format**: `list *`
 
 * No other parameters should be supplied aside from `*`.
 * You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
 
-
+<img src="images/listStarResult.png" width="550">
 
 ### Editing a person's notes : `note`
 
 Edits an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
 
-Format: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
+**Format**: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
 
 * Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the fields must be provided.
@@ -408,65 +412,67 @@ Format: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
 * You can remove all the person’s remarks by typing `r/` without
     specifying any remarks after it.
 
-Examples:
-*  `note John Doe ap/01/01/2025 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
+**Examples**:
+*  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
-
+<img src="images/noteResult.png" width="550">
 
 ### Sorting list based on Appointment Dates : `sort`
 
 Sorts the persons in the address book on the basis of their appointment dates. Any contacts without appointments will 
 remain sorted alphabetically at the end of the list.
 
-Format: `sort`
+**Format**: `sort`
 
 * No other parameters should be supplied.
 
-
+<img src="images/sortResult.png" width="550">
 
 ### Adding a person to favourites list : `star`
 
 Stars the specified person from the address book into favourites.
 
-Format: `star INDEX` / `star NAME`
+**Format**: `star INDEX` / `star NAME`
 
 * Stars the person at the specified `INDEX` or with the specified `NAME`.
 * The name refers to the full name as shown in the displayed person list.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+**Examples**:
 
 * `star Alex Yeoh` stars the person with name `Alex Yeoh` in the address book.
 * `list` followed by `star 2` stars the 2nd person in the address book.
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
+
+<img src="images/starResult.png" width="550">
 
 
 ### Removing a person from favourites list : `unstar`
 
 Unstars the specified person from the address book removing them from favourites.
 
-Format: `unstar INDEX` / `unstar NAME`
+**Format**: `unstar INDEX` / `unstar NAME`
 
 * Unstars the person at the specified `INDEX` or with the specified `NAME`.
 * The name refers to the full name as shown in the displayed person list.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+**Examples**:
 
 * `unstar Alex Yeoh` unstars the person with name `Alex Yeoh` in the address book.
 * `list` followed by `unstar 2` unstars the 2nd person in the address book.
 * `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
-
+<img src="images/unstarResult.png" width="550">
 
 ### Viewing a person's notes : `view`
 
 Views an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
 
-Format: `view INDEX` / `view NAME`
+**Format**: `view INDEX` / `view NAME`
 
 Views the person's note at the specified `INDEX` or with the specified `NAME`.
 
@@ -475,12 +481,12 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The name provided must be the person's full name.
 
-Examples:
+**Examples**:
 
 *  `view John Doe`
 *  `view 1` shows all details of the 1st person's details including notes.
 
-## 
+<img src="images/viewResult.png" width="550">
 
 ### Saving the data
 
