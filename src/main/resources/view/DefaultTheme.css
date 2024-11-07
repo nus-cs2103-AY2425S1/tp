@@ -404,7 +404,7 @@
     -fx-background-radius: 5px;
     -fx-font-size: 11;
     -fx-wrap-text: true;
-    -fx-max-width: 300px;
+    -fx-max-width: 200px;
 }
 
 #products {
@@ -420,6 +420,6 @@
     -fx-background-radius: 5px;
     -fx-font-size: 11;
     -fx-wrap-text: true;
-    -fx-max-width: 300px;
+    -fx-max-width: 200px;
 }
 
