@@ -177,6 +177,11 @@ Shows a list of all events in the event book.
 
 Format: `list -e`
 
+<box type="tip" seamless>
+
+**Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
+</box>
+
 ### Adding an event: `event`
 
 Adds an event to the event book.
