@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
+import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -47,6 +49,7 @@ public class PersonBuilder {
     private Income income;
     private FamilySize familySize;
     private Set<Tag> tags;
+    private ArrayList<Scheme> schemes;
     private UpdatedAt updatedAt;
     private boolean isArchived;
 
@@ -64,6 +67,7 @@ public class PersonBuilder {
         income = new Income(DEFAULT_INCOME);
         familySize = new FamilySize(DEFAULT_FAMILY_SIZE);
         tags = new HashSet<>();
+        schemes = new ArrayList<>();
         updatedAt = new UpdatedAt(DEFAULT_UPDATED_AT);
         isArchived = DEFAULT_IS_ARCHIVED;
     }
@@ -82,6 +86,7 @@ public class PersonBuilder {
         income = personToCopy.getIncome();
         familySize = personToCopy.getFamilySize();
         tags = new HashSet<>(personToCopy.getTags());
+        schemes = new ArrayList<>(personToCopy.getSchemes());
         updatedAt = personToCopy.getUpdatedAt();
         isArchived = personToCopy.isArchived();
     }
@@ -187,6 +192,6 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, phone, email, address, priority, remark,
-                dateOfBirth, income, familySize, tags, updatedAt, isArchived);
+                dateOfBirth, income, familySize, tags, schemes, updatedAt, isArchived);
     }
 }

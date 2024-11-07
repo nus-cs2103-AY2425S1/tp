@@ -25,37 +25,40 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-
-    public static final Remark EMPTY_REMARK = new Remark("");
-
-    public static final LocalDateTime UPDATED_AT = LocalDateTime.of(2024, 1, 1, 0, 0);
+    public static final LocalDateTime UPDATED_AT = LocalDateTime.now();
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), Priority.HIGH, new Remark("Likes baseball"),
-                new DateOfBirth(LocalDate.of(1999, 1, 1)), new Income(3000), new FamilySize(1), getTagSet("friends"),
-                new UpdatedAt(UPDATED_AT)),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), Priority.MEDIUM, EMPTY_REMARK,
-                new DateOfBirth(LocalDate.of(2002, 7, 1)), new Income(1000), new FamilySize(1),
-                getTagSet("colleagues", "friends"), new UpdatedAt(UPDATED_AT)),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), Priority.LOW, EMPTY_REMARK,
-                new DateOfBirth(LocalDate.of(1989, 6, 20)), new Income(300), new FamilySize(1),
-                getTagSet("neighbours"), new UpdatedAt(UPDATED_AT)),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), Priority.HIGH, EMPTY_REMARK,
-                new DateOfBirth(LocalDate.of(1992, 9, 27)), new Income(1400.00), new FamilySize(1), getTagSet("family"),
-                new UpdatedAt(UPDATED_AT)),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), Priority.MEDIUM, EMPTY_REMARK,
-                new DateOfBirth(LocalDate.of(2010, 1, 30)), new Income(2000.50), new FamilySize(1),
-                getTagSet("classmates"), new UpdatedAt(UPDATED_AT)),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), Priority.LOW, EMPTY_REMARK,
-                new DateOfBirth(LocalDate.of(1993, 3, 12)), new Income(1534.69), new FamilySize(1),
-                getTagSet("colleagues"), new UpdatedAt(UPDATED_AT))
+            new Person(new Name("Alice Tan"), new Phone("81234567"), new Email("alice.tan@example.com"),
+                    new Address("Blk 123 Bedok North Street 1, #02-45"), Priority.HIGH,
+                    new Remark("Single mother with three children, needs financial aid and childcare support"),
+                    new DateOfBirth(LocalDate.of(1985, 5, 15)), new Income(1500), new FamilySize(4),
+                    getTagSet("financial", "childcare"), new UpdatedAt(UPDATED_AT)),
+            new Person(new Name("Benny Lim"), new Phone("81234568"), new Email("benny.lim@example.com"),
+                    new Address("Blk 234 Clementi Avenue 3, #05-67"), Priority.MEDIUM,
+                    new Remark("Elderly couple, needs medical assistance and home care"),
+                    new DateOfBirth(LocalDate.of(1950, 8, 20)), new Income(800), new FamilySize(2),
+                    getTagSet("medical", "homeCare"), new UpdatedAt(UPDATED_AT)),
+            new Person(new Name("Catherine Lee"), new Phone("81234569"), new Email("catherine.lee@example.com"),
+                    new Address("Blk 345 Toa Payoh Lorong 6, #12-34"), Priority.LOW,
+                    new Remark("Unemployed and living alone, requires job placement support"),
+                    new DateOfBirth(LocalDate.of(1990, 2, 14)), new Income(0), new FamilySize(1),
+                    getTagSet("job", "financial"), new UpdatedAt(UPDATED_AT)),
+            new Person(new Name("David Wong"), new Phone("81234570"), new Email("david.wong@example.com"),
+                    new Address("Blk 456 Jurong West Street 52, #08-56"), Priority.HIGH,
+                    new Remark("Family with a special needs child, needs educational support and therapy services"),
+                    new DateOfBirth(LocalDate.of(1980, 10, 10)), new Income(3000), new FamilySize(4),
+                    getTagSet("educational", "therapy"), new UpdatedAt(UPDATED_AT)),
+            new Person(new Name("Evelyn Chua"), new Phone("81234571"), new Email("evelyn.chua@example.com"),
+                    new Address("Blk 567 Ang Mo Kio Avenue 10, #10-78"), Priority.MEDIUM,
+                    new Remark("Victim of domestic violence, requires legal aid and housing support"),
+                    new DateOfBirth(LocalDate.of(1992, 3, 30)), new Income(1200), new FamilySize(2),
+                    getTagSet("legal", "housing"), new UpdatedAt(UPDATED_AT)),
+            new Person(new Name("Felix Ng"), new Phone("81234572"), new Email("felix.ng@example.com"),
+                    new Address("Blk 678 Punggol Drive, #04-23"), Priority.LOW,
+                    new Remark("Recent immigrant, needs language classes and job placement support"),
+                    new DateOfBirth(LocalDate.of(1988, 7, 5)), new Income(1800), new FamilySize(3),
+                    getTagSet("language", "job"), new UpdatedAt(UPDATED_AT))
         };
     }
 
