@@ -91,7 +91,8 @@ public class PersonDetailWindow extends UiPart<Stage> {
         phone.setText("Phone: " + person.getPhone().value);
         email.setText("Email: " + person.getEmail().value);
         address.setText("Address: " + person.getAddress().value);
-        subject.setText("Subject(s) taken: " + person.getSubjects().toString());
+        String subjects = person.getSubjects().toString();
+        subject.setText("Subject(s) taken: " + String.format("%s", subjects.substring(1, subjects.length() - 1)));
         closeWindowMessage.setText("\nPress 'B' to close this window");
 
         getRoot().show();
