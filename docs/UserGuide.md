@@ -100,7 +100,7 @@ administrators.
 
 Shows a message explaining how to access the help page.
 
-![help message](images/help.png)
+![help message](images/helpMessage.png)
 
 **Tips:**
 - Press "esc" to close the help window.
