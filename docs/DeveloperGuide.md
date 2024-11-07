@@ -348,16 +348,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. User enters invalid characters.<br>
-    * 2a1. System displays an error message to ask for a valid name command format, with no special characters.<br>
+* 2a. User enters invalid characters.
+    * 2a1. System displays an error message to ask for a valid name command format, with no special characters.
       Use case ends.
 
-* 3a. User leaves the name field empty.<br>
-    * 3a1. System displays an error message to ask for a valid name.<br>
+* 3a. User leaves the name field empty.
+    * 3a1. System displays an error message to ask for a valid name.
       Use case ends.
 
-* 3b. User enters a duplicate name.<br>
-    * 3b1. System displays an error message notifying that the name already exists in the system.<br>
+* 3b. User enters a duplicate name.
+    * 3b1. System displays an error message notifying that the name already exists in the system.
       Use case ends.
 
 
