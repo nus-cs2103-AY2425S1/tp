@@ -12,15 +12,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
-import seedu.address.model.job.JobCompany;
-import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.skill.Skill;
-import seedu.address.model.tag.Tag;
 
 /**
  * Matches the {@code Person} with the {@code Job} at the respective indexes.
@@ -62,17 +58,6 @@ public class MatchCommand extends Command {
         return new Person(name, phone, email, role, skills, jobIdentifier);
     }
 
-    private static Job matchJobToContact(Job job, String contactIdentifier) {
-        Name name = job.getName();
-        JobCompany company = job.getCompany();
-        JobSalary salary = job.getSalary();
-        JobDescription description = job.getDescription();
-        Set<Tag> requirements = job.getRequirements();
-        Set<String> matches = job.getMatches();
-        matches.add(contactIdentifier);
-        return new Job(name, company, salary, description, requirements, matches);
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -93,13 +78,11 @@ public class MatchCommand extends Command {
         assert contactToMatch != null;
         assert jobToMatch != null;
 
-        final String contactIdentifier = contactToMatch.getIdentifier();
         final String jobIdentifier = jobToMatch.getIdentifier();
 
         boolean hasContactMatchedJob = contactToMatch.hasMatched(jobIdentifier);
-        boolean hasJobMatchedContact = jobToMatch.hasMatched(contactIdentifier);
 
-        if (hasContactMatchedJob && hasJobMatchedContact) {
+        if (hasContactMatchedJob) {
             throw new CommandException(MESSAGE_ALREADY_MATCHED);
         }
 
@@ -107,17 +90,12 @@ public class MatchCommand extends Command {
             throw new CommandException(MESSAGE_HAS_OTHER_MATCHES);
         }
 
-        // The bi-direction association should always be maintained
-        // Assert when there is a unidirectional association
-        assert hasContactMatchedJob == hasJobMatchedContact;
-
         Person matchedContact = matchContactToJob(contactToMatch, jobIdentifier);
-        Job matchedJob = matchJobToContact(jobToMatch, contactIdentifier);
 
         model.setPerson(contactToMatch, matchedContact);
-        model.setJob(jobToMatch, matchedJob);
+
         return new CommandResult(
-                String.format(MESSAGE_MATCH_SUCCESS, Messages.format(matchedContact), Messages.format(matchedJob)));
+                String.format(MESSAGE_MATCH_SUCCESS, Messages.format(matchedContact), Messages.format(jobToMatch)));
     }
 
     @Override

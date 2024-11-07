@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.UnmatchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,25 +18,13 @@ public class UnmatchCommandParser implements Parser<UnmatchCommand> {
      */
     public UnmatchCommand parse(String args) throws ParseException {
 
-
-        String[] splitArgs = args.trim().split("\\s+");
-
-        if (splitArgs.length != 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmatchCommand.MESSAGE_USAGE));
-        }
+        String[] splitArgs = ParserUtil.parseRequiredNumberOfArguments(args, 2, UnmatchCommand.MESSAGE_USAGE);
 
         String inputContactIndex = splitArgs[UnmatchCommand.CONTACT_INDEX_POS];
         String inputJobIndex = splitArgs[UnmatchCommand.JOB_INDEX_POS];
 
-        Index contactIndex;
-        Index jobIndex;
-        try {
-            contactIndex = ParserUtil.parseIndex(inputContactIndex);
-            jobIndex = ParserUtil.parseIndex(inputJobIndex);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmatchCommand.MESSAGE_USAGE), pe);
-        }
+        Index contactIndex = ParserUtil.parseIndex(inputContactIndex);
+        Index jobIndex = ParserUtil.parseIndex(inputJobIndex);
 
         return new UnmatchCommand(contactIndex, jobIndex);
     }

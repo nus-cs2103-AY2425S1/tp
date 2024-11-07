@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_GOOGLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_NAME_NUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOB_COMPANY_BARISTA;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +19,7 @@ public class TypicalCompanies {
 
     // Manually defined sample companies
     public static final Company GOOGLE = new CompanyBuilder()
-            .withName("Google LLC")
+            .withName(VALID_COMPANY_NAME_GOOGLE)
             .withAddress("1600 Amphitheatre Parkway, Mountain View, CA 94043")
             .withBillingDate("10")
             .withPhone("6502530000")
@@ -36,7 +40,7 @@ public class TypicalCompanies {
             .build();
 
     public static final Company NUS = new CompanyBuilder()
-            .withName("NUS")
+            .withName(VALID_COMPANY_NAME_NUS)
             .withAddress("21 Lower Kent Ridge Rd, Singapore 119077")
             .withBillingDate("5")
             .withPhone("65166666")
@@ -63,6 +67,13 @@ public class TypicalCompanies {
             .withPhone("6505434800")
             .build();
 
+    public static final Company STARBUCKS = new CompanyBuilder()
+            .withName(VALID_JOB_COMPANY_BARISTA)
+            .withAddress("9 N Buona Vista Dr, #01-13/14 The Metropolis, Singapore 138588")
+            .withBillingDate("1")
+            .withPhone("6569101200")
+            .build();
+
     private TypicalCompanies() {} // prevents instantiation
 
     /**
@@ -80,6 +91,6 @@ public class TypicalCompanies {
      * Returns an {@code AddressBook} with all the typical companies.
      */
     public static List<Company> getTypicalCompanies() {
-        return new ArrayList<>(Arrays.asList(GOOGLE, MICROSOFT, AMAZON, NUS, APPLE, TESLA, FACEBOOK));
+        return new ArrayList<>(Arrays.asList(GOOGLE, MICROSOFT, AMAZON, NUS, APPLE, TESLA, FACEBOOK, STARBUCKS));
     }
 }

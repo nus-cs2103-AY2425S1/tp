@@ -29,22 +29,24 @@ import seedu.address.model.person.Role;
 import seedu.address.model.skill.Skill;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing contact in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String ENTITY_WORD = "contact";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + ENTITY_WORD
+            + ": Edits the details of the entity identified by the argument 'contact' and "
+            + "by the index number used in the displayed entity list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: [contact] INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_SKILL + "SKILL]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " " + ENTITY_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -56,8 +58,8 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index Index of the person in the filtered person list to edit.
+     * @param editPersonDescriptor Details to edit the person with.
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -71,6 +73,7 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> fullPersonList = model.getFullPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
@@ -79,7 +82,16 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        // Handles case where edit command changes one of the two fields which uniquely identifies a person, contact
+        // or email. The editedPerson is considered the same person as personToEdit and is counted as a duplicate.
+        // If there are 2 duplicates, it means that there is another existing contact with the same identifier.
+        // While there should not be a case where there are 3 or more duplicates, good to be defensive.
+        if (personToEdit.isSamePerson(editedPerson) && countDuplicatePerson(fullPersonList, editedPerson) >= 2) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+        // Handles case where edit command changes both fields that uniquely identify a person. In this case, there
+        // should not be any duplicates at all.
+        if (!personToEdit.isSamePerson(editedPerson) && countDuplicatePerson(fullPersonList, editedPerson) >= 1) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -102,6 +114,21 @@ public class EditCommand extends Command {
         Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRole, updatedSkills);
+    }
+
+    /**
+     * Counts and returns the number of duplicate persons in the provided list based on the {@code isSamePerson} check
+     * against the specified person.
+     *
+     * @param personList The list of persons to check for duplicates.
+     * @param personToCompare The specified person to be compared against each person in {@code personList}.
+     */
+    private static long countDuplicatePerson(List<Person> personList, Person personToCompare) {
+        long count = personList.stream()
+                .filter(p -> p.isSamePerson(personToCompare))
+                .count();
+
+        return count;
     }
 
     @Override

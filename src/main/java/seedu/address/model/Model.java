@@ -75,7 +75,7 @@ public interface Model {
     boolean hasCompany(Company company);
 
     /**
-     * Deletes the given person as well as any existing association with a job.
+     * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
@@ -161,4 +161,10 @@ public interface Model {
      * that are linked to the specified company.
      */
     void showLinkedJobsAndPersonsByCompany(Company company);
+
+    /** Returns an unmodifiable view of the full person list */
+    ObservableList<Person> getFullPersonList();
+
+    /** Returns an unmodifiable view of the full job list */
+    ObservableList<Job> getFullJobList();
 }

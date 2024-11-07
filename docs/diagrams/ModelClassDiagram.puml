@@ -14,11 +14,23 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
+Class Role
 Class Email
 Class Name
 Class Phone
+Class Skill
+
+Class UniqueJobList
+Class Job
+Class JobCompany
+Class JobSalary
+Class JobDescription
 Class Tag
+
+Class UniqueCompanyList
+Class Company
+Class BillingDate
+Class Address
 
 Class I #FFFFFF
 }
@@ -40,15 +52,41 @@ UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> Role
+Person *--> "*" Skill
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Role
+Role -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
+
+AddressBook *--> "1" UniqueJobList
+UniqueJobList --> "~* all" Job
+Job *--> Name
+Job *--> JobCompany
+Job *--> JobSalary
+Job *--> JobDescription
+Job *--> "*" Tag
+
+Job -[hidden]up-> I
+UniqueJobList -[hidden]right-> I
+JobSalary -[hidden]right> JobCompany
+Tag -[hidden]right-> JobSalary
+JobDescription -[hidden]right-> Tag
+JobCompany -right-|> Name
+
+ModelManager ---> "~* filtered" Job
+
+AddressBook *--> "1" UniqueCompanyList
+UniqueCompanyList --> "~* all" Company
+Company *--> Name
+Company *--> Address
+Company *--> BillingDate
+Company *--> Phone
+
+ModelManager ---> "~* filtered" Company
 @enduml

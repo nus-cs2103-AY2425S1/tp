@@ -1,16 +1,17 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.exceptions.SampleDataLoadingException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.common.Address;
 import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
@@ -74,25 +75,22 @@ public class SampleDataUtil {
                 new JobDescription(
                         "As a software engineer, you will work on a specific project critical to Google’s needs with "
                         + "opportunities to switch teams and projects as you and our fast-paced business grow and "
-                        + "evolve. "),
-                getRequirements("Go", "Kubernetes", "Docker", "5YOE"),
-                new HashSet<>()
+                        + "evolve."),
+                getRequirements("Go", "Kubernetes", "Docker", "5YOE")
         ), new Job(
                 new Name("Software Engineering Manager II, YouTube"),
                 new JobCompany("YouTube"),
                 new JobSalary("200"),
                 new JobDescription(
                         "As a Software Engineering Manager you manage your project goals, contribute to product "
-                        + "strategy and help develop your team. "),
-                getRequirements("Leadership", "AGILE", "SDLC", "CICD"),
-                new HashSet<>()
+                        + "strategy and help develop your team."),
+                getRequirements("Leadership", "AGILE", "SDLC", "CICD")
         ), new Job(
                 new Name("Test Job"),
                 new JobCompany("Test Company"),
                 new JobSalary("300"),
-                new JobDescription(null),
-                getRequirements("TestRequirements"),
-                new HashSet<>()
+                new JobDescription("Test Description"),
+                getRequirements("TestRequirements")
         )};
     }
 
@@ -108,6 +106,11 @@ public class SampleDataUtil {
                 new BillingDate("2"),
                 new Phone("12345678")
         ), new Company(
+                new Name("Starbucks"),
+                new Address("230 Victoria Street 01-106 Bugis Junction, 188021"),
+                new BillingDate("25"),
+                new Phone("69101099")
+        ), new Company(
                 new Name("Test Company"),
                 new Address("23 Church St, #10-01, Singapore 049481"),
                 new BillingDate("3"),
@@ -116,18 +119,22 @@ public class SampleDataUtil {
     }
 
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Company sampleCompany : getSampleCompanies()) {
-            sampleAb.addCompany(sampleCompany);
+    public static ReadOnlyAddressBook getSampleAddressBook() throws SampleDataLoadingException {
+        try {
+            AddressBook sampleAb = new AddressBook();
+            for (Company sampleCompany : getSampleCompanies()) {
+                sampleAb.addCompany(sampleCompany);
+            }
+            for (Job sampleJob : getSampleJobs()) {
+                sampleAb.addJob(sampleJob); // this can throw CompanyNotFoundException
+            }
+            for (Person samplePerson : getSamplePersons()) {
+                sampleAb.addPerson(samplePerson);
+            }
+            return sampleAb;
+        } catch (CompanyNotFoundException e) {
+            throw new SampleDataLoadingException(e);
         }
-        for (Job sampleJob : getSampleJobs()) {
-            sampleAb.addJob(sampleJob);
-        }
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
-        }
-        return sampleAb;
     }
 
     /**

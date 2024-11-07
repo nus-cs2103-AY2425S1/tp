@@ -16,9 +16,13 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DISPLAYED_INDEX = "The index provided is out of range of the displayed"
+            + " list";
+    public static final String MESSAGE_INVALID_ENTITY = "Invalid entity '%1$s'. Valid entities are 'company', "
+            + "'contact', 'job', or 'all'";
+    public static final String MESSAGE_OPERATION_NOT_ALLOWED = "Command '%1$s' is not allowed on entity '%2$s'.";
     public static final String MESSAGE_MISSING_INDEX = "The index is missing";
-    public static final String DELETE_COMMAND_USAGE = "Invalid delete command. Specify 'company', 'contact' or 'job'.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -68,10 +72,10 @@ public class Messages {
                 .append(job.getCompany())
                 .append("; Salary: ")
                 .append(job.getSalary())
-                .append("; Requirements: ")
-                .append(job.getRequirements())
                 .append("; Description: ")
-                .append(job.getDescription());
+                .append(job.getDescription())
+                .append("; Requirements: ");
+        job.getRequirements().forEach(builder::append);
         return builder.toString();
     }
 

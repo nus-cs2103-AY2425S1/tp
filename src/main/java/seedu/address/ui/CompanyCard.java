@@ -44,7 +44,7 @@ public class CompanyCard extends UiPart<Region> {
         this.company = company;
         id.setText(displayedIndex + ". ");
         name.setText(company.getName().fullName);
-        billingDate.setText(company.getBillingDate().date);
+        billingDate.setText(company.getBillingDate().toString());
         address.setText(company.getAddress().value);
         phone.setText(company.getPhone().value);
     }

@@ -57,18 +57,6 @@ public class PersonCard extends UiPart<Region> {
         person.getSkills().stream()
                 .sorted(Comparator.comparing(skill -> skill.skillName))
                 .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
-
-        String jobIdentifier = person.getMatch();
-        if (jobIdentifier != null) {
-            String[] jobIdentifierComponents = jobIdentifier.split("::");
-            assert(jobIdentifierComponents.length == 2);
-            String companyName = jobIdentifierComponents[0];
-            String jobName = jobIdentifierComponents[1];
-            // The company and job should not be empty strings
-            assert(!(companyName.isEmpty() || jobName.isEmpty()));
-            match.setText("Employed @ " + companyName + " - " + jobName);
-        } else {
-            match.setText("Unemployed");
-        }
+        match.setText(person.getMatchToUiText());
     }
 }

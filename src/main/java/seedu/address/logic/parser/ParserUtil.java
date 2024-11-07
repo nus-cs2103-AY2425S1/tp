@@ -5,16 +5,17 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.common.Address;
 import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Phone;
@@ -27,18 +28,72 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Parses a String input {@code entity} into a normalized String entity.
+     * Throws ParseException if {@code entity} provided is not a valid entity in the address book.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseEntity(String entity) throws ParseException {
+        requireNonNull(entity);
+        String trimmedEntity = entity.trim();
+        String normalizedEntity = trimmedEntity.toLowerCase();
+
+        // TODO: Not sure if this is magic string?
+        switch (normalizedEntity) {
+        case "contact", "company", "job", "all":
+            return normalizedEntity;
+        default:
+            String exceptionMessage = String.format(Messages.MESSAGE_INVALID_ENTITY, normalizedEntity);
+            throw new ParseException(exceptionMessage);
+        }
+    }
+
+
+
+    /**
+     * Parses a String input {@code args} into a String array of arguments and returns it. Leading and trailing
+     * whitespaces will be trimmed. Arguments are split by any number of whitespace.
+     *
+     * @param args A string containing arguments separated by whitespace.
+     * @param requiredNumberOfArguments The required number of arguments in input.
+     * @param usageMessage The usage message of a command to format error message.
+     * @return A String array of arguments.
+     * @throws ParseException If the input provided does not have the required number of arguments.
+     */
+    public static String[] parseRequiredNumberOfArguments(String args, int requiredNumberOfArguments,
+            String usageMessage) throws ParseException {
+        requireNonNull(args);
+        requireNonNull(usageMessage);
+
+        String trimmedArgs = args.trim();
+
+        String[] splitArguments = trimmedArgs.trim().split("\\s+");
+
+        if (trimmedArgs.isEmpty() || splitArguments.length != requiredNumberOfArguments) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, usageMessage));
+        }
+
+        return splitArguments;
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException If the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -149,22 +204,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String requirements} into a {@code JobRequirements}.
-     * Leading and trailing whitespaces will be trimmed.
-     */
-    public static JobRequirements parseRequirements(String requirements) {
-        requireNonNull(requirements);
-        String trimmedRequirements = requirements.trim();
-        return new JobRequirements(trimmedRequirements);
-    }
-
-    /**
      * Parses a {@code String description} into a {@code JobDescription}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static JobDescription parseDescription(String description) {
+    public static JobDescription parseDescription(String description) throws ParseException {
         requireNonNull(description);
         String trimmedDescription = description.trim();
+        if (!JobDescription.isValidDescription(trimmedDescription)) {
+            throw new ParseException(JobDescription.MESSAGE_CONSTRAINTS);
+        }
         return new JobDescription(trimmedDescription);
     }
 

@@ -262,7 +262,7 @@ public class ModelManager implements Model {
      */
     public Predicate<Person> getPersonLinkedToCompanyPredicate(Company targetCompany) {
         return person -> person.isMatchPresent()
-                && person.getMatch().startsWith(targetCompany.getName().toString() + "::");
+                && person.getMatch().get().startsWith(targetCompany.getName().toString() + "::");
     }
 
     /**
@@ -275,7 +275,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Filters the lists of jobs, persons, and companies to show only those
+     * Filters the lists of jobs and persons to show only those
      * linked to the specified company.
      * @param targetCompany The company whose linked jobs and persons will be shown.
      */
@@ -283,7 +283,30 @@ public class ModelManager implements Model {
     public void showLinkedJobsAndPersonsByCompany(Company targetCompany) {
         updateFilteredJobList(getJobLinkedToCompanyPredicate(targetCompany));
         updateFilteredPersonList(getPersonLinkedToCompanyPredicate(targetCompany));
-        updateFilteredCompanyList(company -> company.equals(targetCompany));
+    }
+
+    /**
+     * Returns an unmodifiable view of the full person list stored in the address book.
+     * This list includes all persons, regardless of any current filters applied
+     * to the filtered person list.
+     *
+     * @return An unmodifiable {@code ObservableList} of all persons in the address book.
+     */
+    @Override
+    public ObservableList<Person> getFullPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    /**
+     * Returns an unmodifiable view of the full job list stored in the address book.
+     * This list includes all jobs, regardless of any current filters applied
+     * to the filtered job list.
+     *
+     * @return An unmodifiable {@code ObservableList} of all jobs in the address book.
+     */
+    @Override
+    public ObservableList<Job> getFullJobList() {
+        return addressBook.getJobList();
     }
 
 }

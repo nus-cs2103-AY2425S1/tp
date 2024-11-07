@@ -22,7 +22,7 @@ import seedu.address.model.skill.Skill;
  */
 class JsonAdaptedPerson {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Contact's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -36,9 +36,9 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("role") String role,
-            @JsonProperty("skills") List<JsonAdaptedSkill> skills,
-            @JsonProperty("match") String match) {
+                             @JsonProperty("email") String email, @JsonProperty("role") String role,
+                             @JsonProperty("skills") List<JsonAdaptedSkill> skills,
+                             @JsonProperty("match") String match) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,7 +60,7 @@ class JsonAdaptedPerson {
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
-        match = source.getMatch();
+        match = source.getMatch().orElse(null);
     }
 
     /**
@@ -107,6 +107,15 @@ class JsonAdaptedPerson {
         final Role modelRole = new Role(role);
 
         final Set<Skill> modelSkills = new HashSet<>(personSkills);
+
+        if (match == null) {
+            return new Person(modelName, modelPhone, modelEmail, modelRole, modelSkills);
+        }
+
+        int jobIdentifierComponentsLength = match.split("::").length;
+        if (jobIdentifierComponentsLength != 2) {
+            throw new IllegalValueException("Match field is not of the form 'CompanyName::JobName'");
+        }
 
         final String modelMatch = match;
 

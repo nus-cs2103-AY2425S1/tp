@@ -7,13 +7,15 @@
       "role": "Banker",
       "tags": [
         "friends"
-      ]
+      ],
+      "match": null
     },
     {
       "name": "Alice Pauline",
       "phone": "94351253",
       "email": "pauline@example.com",
-      "role": "Teacher"
+      "role": "Teacher",
+      "match": null
     }
   ],
   "jobs": [],
