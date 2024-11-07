@@ -123,7 +123,7 @@ public class JsonAdaptedStudentTest {
     @Test
     public void toModelType_invalidAssignment_throwsIllegalValueException() {
         List<JsonAdaptedAssignment> invalidAssignments = List.of(new JsonAdaptedAssignment(
-                null, "2024-10-22", "submitted", "graded", "A"));
+                null, "2024-10-22", "submitted", "A"));
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_TUTORIAL_GROUP,
                         VALID_STUDENT_NUMBER, invalidAssignments, VALID_ATTENDANCE_RECORD);

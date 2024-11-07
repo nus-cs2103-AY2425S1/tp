@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.DEADLINE_C;
+import static seedu.address.testutil.TypicalAssignments.GRADE_90;
 import static seedu.address.testutil.TypicalAssignments.GRADE_NULL;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
 import static seedu.address.testutil.TypicalAssignments.STATUS_N;
@@ -38,7 +39,7 @@ class EditAssignmentCommandTest {
         validStudent = new StudentBuilder(HUGH).build();
         originalAssignment = MATH_ASSIGNMENT_SUBMITTED;
         validStudent.addAssignment(originalAssignment);
-        assignmentQuery = new AssignmentQuery(null, null, null, null, null);
+        assignmentQuery = new AssignmentQuery(null, null, null, null);
         model.addStudent(validStudent);
     }
 
@@ -46,7 +47,7 @@ class EditAssignmentCommandTest {
     void execute_editAssignment_success() throws CommandException {
         // Create and execute the EditAssignmentCommand
         AssignmentQuery assignmentQuery = new AssignmentQuery(
-                null, DEADLINE_C, STATUS_Y, STATUS_N, GRADE_NULL);
+                null, DEADLINE_C, STATUS_Y, GRADE_NULL);
         EditAssignmentCommand command = new EditAssignmentCommand(HUGH.getName(),
                 MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), assignmentQuery);
         CommandResult result = command.execute(model);
@@ -60,7 +61,6 @@ class EditAssignmentCommandTest {
         Assignment updatedAssignment = validStudent.getAssignments().get(0);
         assertEquals(DEADLINE_C, updatedAssignment.getDeadline());
         assertEquals(STATUS_Y, updatedAssignment.getSubmissionStatus());
-        assertEquals(STATUS_N, updatedAssignment.getGradingStatus());
         assertEquals(GRADE_NULL, updatedAssignment.getGrade());
     }
 
@@ -109,7 +109,7 @@ class EditAssignmentCommandTest {
     void execute_specifyStudentNumber_success() throws CommandException {
         // Create and execute the EditAssignmentCommand
         AssignmentQuery assignmentQuery = new AssignmentQuery(
-                null, DEADLINE_C, STATUS_Y, STATUS_N, GRADE_NULL);
+                null, DEADLINE_C, STATUS_Y, GRADE_NULL);
         EditAssignmentCommand command = new EditAssignmentCommand(HUGH.getName(),
                 MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), assignmentQuery, HUGH.getStudentNumber());
         CommandResult result = command.execute(model);
@@ -123,7 +123,59 @@ class EditAssignmentCommandTest {
         Assignment updatedAssignment = validStudent.getAssignments().get(0);
         assertEquals(DEADLINE_C, updatedAssignment.getDeadline());
         assertEquals(STATUS_Y, updatedAssignment.getSubmissionStatus());
-        assertEquals(STATUS_N, updatedAssignment.getGradingStatus());
         assertEquals(GRADE_NULL, updatedAssignment.getGrade());
+    }
+
+    @Test
+    void execute_invalidAssignmentAfterEdit_throwsCommandException() {
+        AssignmentQuery assignmentQuery1 = new AssignmentQuery(
+                null, DEADLINE_C, STATUS_N, GRADE_90);
+        EditAssignmentCommand command = new EditAssignmentCommand(HUGH.getName(),
+                MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), assignmentQuery1);
+
+        assertThrows(CommandException.class, () -> command.execute(model),
+                String.format(EditAssignmentCommand.MESSAGE_INVALID_ASSIGNMENT,
+                        "not submitted", "ungraded"));
+    }
+
+    @Test
+    void execute_invalidAssignmentAfterEdit_throwsCommandException2() {
+        AssignmentQuery assignmentQuery1 = new AssignmentQuery(
+                null, DEADLINE_C, STATUS_N, GRADE_90);
+        EditAssignmentCommand command = new EditAssignmentCommand(HUGH.getName(),
+                MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), assignmentQuery1, HUGH.getStudentNumber());
+
+        assertThrows(CommandException.class, () -> command.execute(model),
+                String.format(EditAssignmentCommand.MESSAGE_INVALID_ASSIGNMENT,
+                        "not submitted", "ungraded"));
+    }
+
+    @Test
+    void execute_undoEdit_success() throws CommandException {
+        AssignmentQuery assignmentQuery1 = new AssignmentQuery(
+                null, null, STATUS_Y, null);
+        EditAssignmentCommand command = new EditAssignmentCommand(HUGH.getName(),
+                MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), assignmentQuery1, HUGH.getStudentNumber());
+        command.execute(model);
+        assertEquals(originalAssignment,
+                new Assignment(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(),
+                        MATH_ASSIGNMENT_SUBMITTED.getDeadline(),
+                        STATUS_Y,
+                        MATH_ASSIGNMENT_SUBMITTED.getGrade()));
+
+        command.undo(model);
+
+        assertEquals(MATH_ASSIGNMENT_SUBMITTED, originalAssignment);
+    }
+
+    @Test
+    void execute_noStudentFoundStudentNumberSpecified_throwsCommandException() {
+        EditAssignmentCommand command = new EditAssignmentCommand(HUGH.getName(),
+                MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(),
+                assignmentQuery, DIDDY.getStudentNumber());
+
+        // Expect a CommandException due to no student found
+        assertThrows(CommandException.class, () -> command.execute(model),
+                EditAssignmentCommand.MESSAGE_NO_STUDENT_FOUND);
     }
 }

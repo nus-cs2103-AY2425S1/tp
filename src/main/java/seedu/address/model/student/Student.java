@@ -195,6 +195,21 @@ public class Student {
     }
 
     /**
+     * Returns the assignment matching the name, null if no match found
+     *
+     * @param assignmentName A valid assignment name
+     * @return the matching assignment
+     */
+    public Assignment getAssignment(AssignmentName assignmentName) {
+        for (Assignment assignment : assignments) {
+            if (assignment.getAssignmentName().equals(assignmentName)) {
+                return assignment;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Edits the assignment matching the given name to the parameters specified
      *
      * @param assignmentQuery A valid assignment query.

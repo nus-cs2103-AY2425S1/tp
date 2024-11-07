@@ -29,15 +29,15 @@ public class TypicalAssignments {
 
     // Typical Assignments for testing
     public static final Assignment MATH_ASSIGNMENT_SUBMITTED = new Assignment(
-            ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, STATUS_N, GRADE_NULL
+            ASSIGNMENT_NAME_A, DEADLINE_A, STATUS_Y, GRADE_NULL
     );
 
     public static final Assignment SCIENCE_ASSIGNMENT_GRADED = new Assignment(
-            ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_Y, STATUS_Y, GRADE_90
+            ASSIGNMENT_NAME_B, DEADLINE_B, STATUS_Y, GRADE_90
     );
 
     public static final Assignment ENGLISH_ASSIGNMENT_NOT_SUBMITTED = new Assignment(
-            ASSIGNMENT_NAME_C, DEADLINE_C, STATUS_N, STATUS_N, GRADE_NULL
+            ASSIGNMENT_NAME_C, DEADLINE_C, STATUS_N, GRADE_NULL
     );
 
 }

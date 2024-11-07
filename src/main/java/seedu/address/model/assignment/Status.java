@@ -62,9 +62,9 @@ public class Status {
     }
 
     /**
-     * Returns true if the assignment is graded
+     * Returns true if the assignment is submitted
      */
-    public boolean isGraded() {
+    public boolean isSubmitted() {
         return status == State.Y;
     }
 

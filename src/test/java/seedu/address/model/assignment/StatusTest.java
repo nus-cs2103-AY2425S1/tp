@@ -60,8 +60,8 @@ public class StatusTest {
         Status graded = new Status("Y");
         Status notGraded = new Status("N");
 
-        assertTrue(graded.isGraded()); // should be true for Y
-        assertFalse(notGraded.isGraded()); // should be false for N
+        assertTrue(graded.isSubmitted()); // should be true for Y
+        assertFalse(notGraded.isSubmitted()); // should be false for N
     }
 
     @Test

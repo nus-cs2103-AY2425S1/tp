@@ -35,14 +35,12 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
             + PREFIX_DEADLINE + "DEADLINE "
             + PREFIX_STATUS + "SUBMISSION STATUS (OPTIONAL) "
-            + PREFIX_STATUS + "GRADING STATUS (OPTIONAL) "
             + PREFIX_GRADE + "GRADE (OPTIONAL) "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jane Doe "
             + PREFIX_ASSIGNMENT + "Math Quiz "
             + PREFIX_DEADLINE + "2024-10-09 "
-            + PREFIX_STATUS + "N "
             + PREFIX_STATUS + "N "
             + PREFIX_GRADE + "NULL ";
 
