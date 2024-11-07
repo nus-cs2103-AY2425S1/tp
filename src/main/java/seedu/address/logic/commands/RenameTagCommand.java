@@ -16,8 +16,9 @@ public class RenameTagCommand extends UndoableCommand {
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
     public static final String MESSAGE_SUCCESS = "Tag has been renamed.";
-    public static final String MESSAGE_NONEXISTENT_OR_DUPLICATE = "The tag you wish to rename does not exist, "
-            + "or the tag you wish to rename it to already exists.\n";
+    public static final String MESSAGE_DUPLICATE = "This tag already exists:\n";
+
+    public static final String MESSAGE_NONEXISTENT = "This tag does not exist:\n";
 
     private final Tag existingTag;
     private final String newTagName;
@@ -32,16 +33,40 @@ public class RenameTagCommand extends UndoableCommand {
         this.newTagName = newTagName;
     }
 
+    /**
+     * Checks if the criteria for renaming of tag have been met.
+     *
+     * @param model the model handling the renaming.
+     * @throws CommandException if the renaming should not be allowed to occur.
+     */
+    private void validateInputs(Model model) throws CommandException {
+        String messageNonExistent = MESSAGE_NONEXISTENT + existingTag;
+        String messageDuplicate = MESSAGE_DUPLICATE + new Tag(newTagName);
+
+        // Failure due to non-existent original tag and duplicate
+        if (!model.hasTag(existingTag) && model.hasTag(new Tag(newTagName))) {
+            throw new CommandException(messageNonExistent + "\n" + messageDuplicate);
+        }
+
+        // Failure due to non-existent original tag
+        if (!model.hasTag(existingTag)) {
+            throw new CommandException(messageNonExistent);
+        }
+        // Failure due to duplicate
+        if (model.hasTag(new Tag(newTagName))) {
+            throw new CommandException(messageDuplicate);
+        }
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
+        validateInputs(model);
 
-        if (!model.renameTag(existingTag, newTagName)) {
-            throw new CommandException(MESSAGE_NONEXISTENT_OR_DUPLICATE);
-        }
-
+        model.renameTag(existingTag, newTagName);
         model.editTagInPersons(existingTag, newTagName);
         model.updateTagList();
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

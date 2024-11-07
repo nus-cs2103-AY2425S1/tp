@@ -8,14 +8,14 @@ import static seedu.address.model.tag.Tag.isValidTagName;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.logic.commands.NewtagCommand;
+import seedu.address.logic.commands.NewTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new {@code NewtagCommand} object.
  */
-public class NewtagCommandParser implements Parser<NewtagCommand> {
+public class NewTagCommandParser implements Parser<NewTagCommand> {
 
     /**
      * Parses a list of string arguments and converts them into a list of {@code Tag} objects.
@@ -43,7 +43,7 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
      */
     private void validateTagName(String tagName) throws ParseException {
         if (!isValidTagName(tagName)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewTagCommand.MESSAGE_USAGE));
         }
     }
 
@@ -55,7 +55,7 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
      */
     private void validateArgumentLength(List<String> arguments) throws ParseException {
         if (arguments.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewtagCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NewTagCommand.MESSAGE_USAGE));
         }
     }
 
@@ -81,13 +81,13 @@ public class NewtagCommandParser implements Parser<NewtagCommand> {
      * @throws ParseException If the user input does not conform to the expected format,
      *                       including invalid tag names or lack of arguments.
      */
-    public NewtagCommand parse(String args) throws ParseException {
+    public NewTagCommand parse(String args) throws ParseException {
         List<String> arguments = parseArgumentsToList(args);
 
         requireAllNonNull(arguments);
         validateArgumentLength(arguments);
 
         List<Tag> tagsToAdd = parseTagsFromArgs(arguments);
-        return new NewtagCommand(tagsToAdd);
+        return new NewTagCommand(tagsToAdd);
     }
 }

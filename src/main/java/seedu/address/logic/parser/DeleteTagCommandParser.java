@@ -59,6 +59,8 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
         }
     }
 
+
+
     /**
      * Parses a string of arguments into a list of strings based on the specified prefix.
      *
@@ -79,12 +81,13 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
      */
     public DeleteTagCommand parse(String args) throws ParseException {
         List<String> arguments = parseArgumentsToList(args);
+        String trimmedInput = args.trim();
+        boolean isForceDelete = trimmedInput.startsWith("-force");
 
         requireAllNonNull(arguments);
         validateArgumentLength(arguments);
 
         List<Tag> tagsToDelete = parseTagsFromArgs(arguments);
-
-        return new DeleteTagCommand(tagsToDelete);
+        return new DeleteTagCommand(tagsToDelete, isForceDelete);
     }
 }

@@ -107,27 +107,27 @@ public interface Model {
     boolean addTag(Tag tag);
 
     /**
-     * Adds a tag to the tag list.
+     * Adds a variable number of tags to the tag list.
      *
      * @param tags The tags to be added.
-     * @return true if all tags were successfully added, false if any tag already exists.
+     * @return the set of tags which were added successfully (could be none).
      */
-    boolean addTags(List<Tag> tags);
+    Set<Tag> addTags(List<Tag> tags);
 
     /**
-     * Deletes a tag from the tag list.
+     * Deletes a variable number of tags from the tag list.
      * @param tag The tag to be deleted
      * @return true if the tag was successfully deleted, false if the tag does not exist.
      */
     boolean deleteTag(Tag tag);
 
     /**
-     * Deletes a tag from the tag list.
+     * Deletes a variable number of tags from the tag list.
      *
      * @param tags The tags to be deleted.
-     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     * @return the set of tags which were deleted successfully (could be none).
      */
-    boolean deleteTags(List<Tag> tags);
+    Set<Tag> deleteTags(List<Tag> tags);
 
     /**
      * Renames a tag from the tag list.

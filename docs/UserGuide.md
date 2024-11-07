@@ -90,6 +90,8 @@ Adds a guest to the guest list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Names cannot be more than 100 characters long.
+* Names are **case-sensitive**. eg. 'John Doe' is different from 'john doe'
+* Guests with the exact same name cannot be added to the guest list. Users are advised to add their guests' last names or other identifiers if needed.
 * Phone numbers must be **exactly** 8 digits.
 * Tags must be created before they can be assigned to a guest. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -112,7 +114,7 @@ Format: `delete INDEX`
 * Deletes the guest at the specified `INDEX`.
 * Only one guest can be deleted in each delete command.
 * The index refers to the index number shown in the displayed guest list.
-* The index **must be a positive integer**
+* The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd guest in the address book.
@@ -127,9 +129,12 @@ Edits an existing guest in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
-* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer**.
+* Edits the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. 
+* The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+* Fields which are not provided will not be edited.
+* All optional fields must adhere to the restrictions specified in the `add` command.
+* If the input values are valid, existing values will be updated to the input values.
 * When editing tags, the existing tags of the guest will be removed i.e. adding of tags is not cumulative.
 * You can remove all the guest’s tags by typing `t/` without
   specifying any tags after it.
@@ -152,7 +157,9 @@ Format: `newtag t/TAG1…​`
 * Leading and trailing spaces are ignored. e.g `newtag t/ bride's side  t/ groom's side  ` is the same as `newtag t/bride's side t/groom's side`.
 * Duplicate tags (with the same name) are **not** allowed.
 * Tag names are **case-insensitive**. e.g `newtag t/BRIDE'S SIDE` is the same as `newtag t/Bride's Side`
-* Only 30 (or fewer) tags can exist at any point.
+* Only 30 (or fewer) predefined tags can exist at any point.
+* Attempting to add tags with mix of invalid and valid names at once will result in an error.
+* Attempting to add a mix of duplicate and non-duplicate tags at once will only allow the non-duplicate tags to be added.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may add any number of tags at once (as long as the total number does not exceed 30). e.g. `newtag t/bride's side t/groom's side t/friends`
@@ -175,8 +182,9 @@ Format: `deletetag [-force] t/TAG1…​`
 * Tag name cannot be empty, or consist of only whitespaces.
 * Leading and trailing spaces are ignored. e.g `deletetag t/ bride's side  t/ groom's side` is the same as `deletetag t/bride's side t/groom's side`.
 * User cannot delete a tag that has not been added via `newtag` before.
-* If a guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
-* Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`
+* If any guest currently has the tag `friends`, `deletetag t/friends` will not work. To force delete the tag and remove it from all guests, use `deletetag -force t/friends`.
+* Tag names are **case-insensitive**. e.g `deletetag t/BRIDE'S SIDE` is the same as `deletetag t/Bride's Side`.
+* Attempting to delete a mix of existing and non-existent tags at once will only allow the existing tags to be deleted.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You may delete any number of tags at once. e.g. `deletetag t/bride's side t/groom's side t/friends`
@@ -196,10 +204,10 @@ Renames a tag currently in the tag list.
 
 Format: `renametag t/TAG1 t/TAG2`
 
-* Renames the tag `TAG1` with `TAG2`.
+* Renames the tag `TAG1` to become `TAG2`.
 * Only one tag can be renamed in each rename command.
 * The new tag name cannot be a tag already in the current tag list<br>e.g. `friends` and `colleagues` already exist in the tag list. `renametag t/friends t/colleagues` is an invalid command.
-* The target tag cannot be a tag not in the tag list e.g. `friends` is a tag in the tag list but `colleagues` is not. `renametag t/colleagues t/friends` is an invalid command.
+* The target tag must be a tag that has been defined via `newtag` before. e.g. `friends` is a predefined tag but `colleagues` is not. `renametag t/colleagues t/friends` is an invalid command.
 
 Examples:
 * `renametag t/friends t/colleagues`
@@ -211,7 +219,7 @@ Tags a guest with the specified tag.
 
 Format: `tag INDEX…​ t/TAG…​`
 * Tag must have already been defined using `newtag` before tagging it to a guest.
-* Index(es) of the guest(s) must be within valid range (i.e. greater than 0 and less than or equals to the current shown list length)
+* The index(es) **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 * Attempting to tag guests with an invalid tag will not halt tagging of valid tags.<br> e.g. `friends` is a tag not created while `bride's side` is. The command `tag 1 t/friends t/bride's side` will still successfully tag `bride's side` on the guest indexed at 1. 
 * Attempting to tag guests with a tag already on some will not halt tagging of the tag on other guests.<br> e.g. `friends` is a tag on guest indexed at 1 but not on guest indexed at 2. The command `tag 1 2 t/friends` will still successfully tag `friends` on the guest indexed at 2.
 
@@ -248,14 +256,15 @@ Examples:
 Toggles the RSVP status for a guest between `Coming`, `Not Coming` and `Pending`.
 
 Format: `setrsvp INDEX STATUS_INDEX`
-* Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list. The index **must be a positive integer**
+* Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list.
+* The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 * `STATUS_INDEX` accepts 3 possible values:
   * `1` represents `Coming`
   * `2` represents `Not Coming`
   * `3` represents `Pending`
 * By default, the RSVP status for all guests is `Pending`.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You may only set one guest's RSVP status in each command. i.e. Setting multiple guests' statuses at once is not supported yet.
+You may only set one guest's RSVP status in each command. i.e. Setting multiple guests' statuses at once is not supported.
 </div>
 
 Example:
@@ -402,7 +411,7 @@ Command | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **NewTag** | `newtag t/TAG…​` <br> e.g. `newtag bride's side`
-**DeleteTag** | `deletetag t/TAG…​` <br> e.g. `deletetag t/bride's side`
+**DeleteTag** | `deletetag t/TAG…​` <br> `deletetag -force t/TAG…​` <br>e.g. `deletetag t/bride's side` <br>e.g. `deletetag -force t/bride's side`
 **RenameTag** | `renametag t/TAG1 t/TAG2` <br> e.g. `renametag t/friends t/colleagues`
 **Tag** | `tag INDEX…​ t/TAG…​` <br> e.g. `tag 1 2 t/groom's side t/family`
 **Untag** | `untag INDEX…​ t/TAG…​` <br> e.g. `untag 1 2 t/bride's side t/family`
