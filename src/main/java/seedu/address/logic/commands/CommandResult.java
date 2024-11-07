@@ -22,14 +22,40 @@ public class CommandResult {
     /** List of concert contacts should be shown to the user. */
     private final boolean showConcertContacts;
 
+    /** The full details of a {@code Person} should be shown to the user. */
+    private final boolean showFullPerson;
+
+    /** The full details of a {@code Concert} should be shown to the user. */
+    private final boolean showFullConcert;
+
+    /** The full details of a {@code ConcertContact} should be shown to the user. */
+    private final boolean showFullConcertContact;
+
+    /** The full details of a {@code Person} should be hidden from the user. */
+    private final boolean hideFullPerson;
+
+    /** The full details of a {@code Concert} should be hidden from the user. */
+    private final boolean hideFullConcert;
+
+    /** The full details of a {@code ConcertContact} should be hidden from the user. */
+    private final boolean hideFullConcertContact;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showConcertContacts) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showConcertContacts,
+             boolean showFullPerson, boolean showFullConcert, boolean showFullConcertContact,
+             boolean hideFullPerson, boolean hideFullConcert, boolean hideFullConcertContact) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showConcertContacts = showConcertContacts;
+        this.showFullPerson = showFullPerson;
+        this.showFullConcert = showFullConcert;
+        this.showFullConcertContact = showFullConcertContact;
+        this.hideFullPerson = hideFullPerson;
+        this.hideFullConcert = hideFullConcert;
+        this.hideFullConcertContact = hideFullConcertContact;
     }
 
     /**
@@ -37,7 +63,31 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false,
+                false, false, false,
+                false, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showConcertContacts) {
+        this(feedbackToUser, showHelp, exit, showConcertContacts,
+                false, false, false,
+                false, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser,
+             boolean showFullPerson, boolean showFullConcert, boolean showFullConcertContact,
+             boolean hideFullPerson, boolean hideFullConcert, boolean hideFullConcertContact) {
+        this(feedbackToUser, false, false, false,
+                showFullPerson, showFullConcert, showFullConcertContact,
+                hideFullPerson, hideFullConcert, hideFullConcertContact);
     }
 
     public String getFeedbackToUser() {
@@ -54,6 +104,30 @@ public class CommandResult {
 
     public boolean isShowConcertContacts() {
         return showConcertContacts;
+    }
+
+    public boolean isShowFullPerson() {
+        return showFullPerson;
+    }
+
+    public boolean isShowFullConcert() {
+        return showFullConcert;
+    }
+
+    public boolean isShowFullConcertContact() {
+        return showFullConcertContact;
+    }
+
+    public boolean isHideFullPerson() {
+        return hideFullPerson;
+    }
+
+    public boolean isHideFullConcert() {
+        return hideFullConcert;
+    }
+
+    public boolean isHideFullConcertContact() {
+        return hideFullConcertContact;
     }
 
     @Override
