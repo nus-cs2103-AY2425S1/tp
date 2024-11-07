@@ -24,6 +24,9 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
+
 ## **Design**
 
 ### Architecture
@@ -49,6 +52,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -66,6 +71,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -82,6 +89,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -108,6 +117,7 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
@@ -115,6 +125,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -128,6 +140,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -145,6 +158,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -173,6 +188,7 @@ Below is an activity diagram when [Adding a new student](#add-a-new-student)
 
 <puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram"/>
 
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how an add operation goes through the `Logic` component:
 <puml src="diagrams/ParseArgsToGetStudentFieldReferenceFrame.puml" alt="ParseArgsToGetStudentFieldReferenceFrame"/>
@@ -183,6 +199,8 @@ The following sequence diagram shows how an add operation goes through the `Logi
 **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 Similarly, how an AddCommand operation goes through the `Model` component is shown below:
 
@@ -203,6 +221,7 @@ Similarly, how an AddCommand operation goes through the `Model` component is sho
   * Cons: It is hard to implement, especially with a mix of optional and compulsory fields. 
   Additionally, it is not user-friendly for fast typists, as multiline commands are required to add a student.
 
+<div style="page-break-after: always;"></div>
 
 ### Owe tuition fees
 
@@ -225,6 +244,8 @@ Finally, `OweCommand` updates the total amount of tuition fee owed by the studen
 
 The following activity diagram summarizes what happens when a user wants to track payment after a lesson:
 <puml src="diagrams/PaymentTrackingActivityDiagram.puml" width="750"/>
+
+<div style="page-break-after: always;"></div>
 
 How an OweCommand operation goes through the `Model` component is shown below:
 
@@ -261,7 +282,7 @@ How an OweCommand operation goes through the `Model` component is shown below:
 ### Product scope
 
 **Target user profile**:
-* is a full time university student with fixed schedule
+* is a full-time university student in Singapore with a fixed schedule.
 * is giving private tuition to a significant number of students
 * has a need to manage a significant number of tutees' information
 * prefer desktop apps over other types
@@ -271,6 +292,7 @@ How an OweCommand operation goes through the `Model` component is shown below:
 
 **Value proposition**: Empower undergraduate private tutors to efficiently manage payments, and organize schedules using CLI.
 
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -298,6 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy undergraduate tutor                   | have information of both the children and his/her guardian | contact either of them                         |
 | `*`      | tutor with many students                   | to know which guardian is associated with which children   | know which student is under that guardian/ vice-versa |
 
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -339,6 +362,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. System shows an empty list.<br> 
   Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC03 - Read total earnings**
 
 **MSS**
@@ -376,6 +401,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Steps 2a1-2a2 are repeated until index entered is correct.<br>
   Use case resumes from step 3.
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC05 - Find student entries**
 
@@ -420,6 +446,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User enters new command.<br>
   Steps 2a1-2a2 are repeated until all details entered are correct.<br> 
   Use case resumes from step 3.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC07 - Updating amount of tuition fee owed by student**
 
@@ -466,6 +494,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User enters new command.<br>
   Steps 2a1-2a2 are repeated until all details entered are correct.<br>
   Use case resumes from step 3.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 **Environment Requirements**
@@ -515,6 +545,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Version Control System**: Version control is the practice of tracking and managing changes to software code, and there are many version control systems such as Git, Apache Subversion etc
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -578,7 +610,9 @@ testers are expected to do more *exploratory* testing.
     (where days supplied does not match any day or contains only whitespace)<br>
        Expected: Similar to previous.
 
-1. Finding students by name or day
+<div style="page-break-after: always;"></div>
+
+3. Finding students by name or day
    1. Test case: `find n/Alex d/Thursday`<br>
       Expected: Only students whose name contains keyword `Alex`<br>
       **AND** their tuition day falls on `Thursday` listed.
@@ -640,6 +674,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Expected: A new contact with the corresponding information will be added to the end of the current list.
 
+<div style="page-break-after: always;"></div>
+
 ### Editing an existing student
 
 1. Editing a student while all students are being shown
@@ -695,7 +731,9 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)<br>
         Expected: Similar to previous.
-   
+
+<div style="page-break-after: always;"></div>
+
 ### Getting a reminder
 
 1. Getting a reminder when there are lessons scheduled for today.
@@ -754,6 +792,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `owe 0 hr/1`<br>
        Expected: No changes. UGTeach displays error message of invalid command format.
+
+<div style="page-break-after: always;"></div>
 
 1. Using owe command from a filtered list.
 
