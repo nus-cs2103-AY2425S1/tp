@@ -37,7 +37,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 Upon running ResearchRoster, a GUI similar to below should be displayed.
 
-[screenshot of GUI]
+<img src="images/Ui_annotated.png" width="600px">
 
 1. **Tabs**: Provides access to file options and help.
 2. **Participant List**: Shows a contact list of participants.
@@ -101,7 +101,7 @@ Shows a popup window with a clickable link to the User Guide.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to the address book.
 
@@ -182,7 +182,7 @@ Examples:
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete 1 3 5-7` deletes the 1st, 3rd, 5th, 6th and 7th person in the displayed list.
 
-### Clearing listed persons : clear
+### Clearing listed persons : `clear`
 
 Clears current listed persons from the address book.
 
@@ -196,7 +196,7 @@ Examples:
 * `list` followed by `clear` then `confirm` clears the entire address book.
 * `find g/f` followed by `clear` then `confirm` clears only female persons.
 
-### Exporting persons' emails : export
+### Exporting persons' emails : `export`
 
 Exports the current listed persons' emails to a .txt file.
 

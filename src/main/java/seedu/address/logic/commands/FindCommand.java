@@ -25,13 +25,14 @@ public class FindCommand extends Command {
             + "all criteria provided displays them as a list with index numbers.\nEach criterion consists of "
             + "specified keywords (case-insensitive) that a field (as denoted by the prefix) must satisfy.\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME ...] "
-            + "[" + PREFIX_EMAIL + "EMAIL ...] "
-            + "[" + PREFIX_GENDER + "GENDER ...] "
-            + "[" + PREFIX_AGE + "AGE ...] "
-            + "[" + PREFIX_DETAIL + "DETAIL ...]"
-            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG ...]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
+            + "[" + PREFIX_NAME + "NAME ...]\n"
+            + " [" + PREFIX_EMAIL + "EMAIL ...]\n"
+            + " [" + PREFIX_GENDER + "GENDER ...]\n"
+            + " [" + PREFIX_AGE + "AGE ...]\n"
+            + " [" + PREFIX_DETAIL + "DETAIL ...]\n"
+            + " [" + PREFIX_STUDY_GROUP_TAG + "STUDY-GROUP-TAG ...]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GENDER + "M "
+            + PREFIX_STUDY_GROUP_TAG + "Control 1A";
 
     public static final String MESSAGE_NO_CRITERIA = "Provide at least one criteria to find!";
     public static final String MESSAGE_EMPTY_CRITERIA = "Criteria cannot be empty: %s";

@@ -48,7 +48,10 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        logger.info("----------------[PARSED COMMAND]");
+
         commandResult = command.execute(model);
+        logger.info("----------------[EXECUTED COMMAND]");
 
         try {
             if (!commandResult.isExit()) {
