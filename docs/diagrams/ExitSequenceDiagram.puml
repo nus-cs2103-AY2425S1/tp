@@ -2,10 +2,6 @@
 !include style.puml
 skinparam ArrowFontStyle plain
 
-box UI MODEL_COLOR_T1
-participant ":MainWindow" as MainWindow MODEL_COLOR
-end box
-
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
@@ -13,10 +9,11 @@ participant "e:ExitCommand" as ExitCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-[-> MainWindow : executeCommand("/exit")
-activate MainWindow
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
 
-MainWindow-> LogicManager : execute("/exit")
+[-> LogicManager : execute("/exit")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand("/exit")
@@ -45,20 +42,9 @@ deactivate CommandResult
 ExitCommand --> LogicManager : r
 deactivate ExitCommand
 
-LogicManager --> MainWindow : r
+[<--LogicManager : r
 deactivate LogicManager
-
-MainWindow -> CommandResult : isExit()
-activate CommandResult
-
-CommandResult --> MainWindow : true
-deactivate CommandResult
-
-MainWindow -> MainWindow : handleExit()
-activate MainWindow
-
-deactivate MainWindow
-
-[<--MainWindow : r
-deactivate MainWindow
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ExitCommand -[hidden]-> LogicManager
+destroy ExitCommand
 @enduml
