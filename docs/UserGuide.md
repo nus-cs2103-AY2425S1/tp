@@ -94,7 +94,7 @@ To get started,
 | [**Remove grade**](#removing-grades-from-a-contact-removegrade) | `removeGrade name/NAME assignment/ASSIGNMENT_NAME` <br> e.g. `removeGrade name/John Doe assignment/Ex01`                                                                                    |
 
 {{ newPage }}
-                                                                           |
+
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Parameter shortcuts
 
