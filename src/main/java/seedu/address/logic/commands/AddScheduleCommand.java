@@ -73,9 +73,11 @@ public class AddScheduleCommand extends Command {
         // Create the new meeting
         Meeting newMeeting = new Meeting(contactsList, name, date, time);
 
-        // Check for duplicate schedule or conflict
-        if (model.hasMeeting(newMeeting)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
+        // Check for existing conflicts based on date and time
+        for (Meeting existingMeeting : model.getScheduleList().getMeetingList()) {
+            if (existingMeeting.hasConflictMeeting(newMeeting)) {
+                throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
+            }
         }
 
         // Add the meeting to the model if no conflict

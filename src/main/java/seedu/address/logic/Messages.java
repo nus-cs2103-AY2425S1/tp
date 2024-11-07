@@ -28,6 +28,8 @@ public class Messages {
     public static final String MESSAGE_GENERIC_INDEX_OUT_OF_BOUNDS =
             "Index provided is out of bounds\n%1$s";
 
+    public static final String MESSAGE_EMPTY_NAME = "The event name cannot be empty.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
