@@ -24,8 +24,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.EventIdsContainsIdsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.TempPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
@@ -203,6 +205,17 @@ public class SearchCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         TagContainsKeywordsPredicate predicate = prepareTagPredicate(" ");
         SearchCommand command = new SearchCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_zeroKeywordsForEventField_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        TempPredicate tempPredicate = new TempPredicate(Arrays.asList());
+        SearchCommand command = new SearchCommand(tempPredicate);
+        EventIdsContainsIdsPredicate predicate = prepareEventIdsContainsIdsPredicate();
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -481,6 +494,13 @@ public class SearchCommandTest {
      */
     private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) {
         return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
+     */
+    private EventIdsContainsIdsPredicate prepareEventIdsContainsIdsPredicate(Integer... userInput) {
+        return new EventIdsContainsIdsPredicate(Arrays.stream(userInput).toList());
     }
 }
 

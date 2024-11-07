@@ -16,8 +16,14 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AssignEventByPersonIndexEventIndexCommand;
+import seedu.address.logic.commands.AssignEventByPersonIndexEventNameCommand;
+import seedu.address.logic.commands.AssignEventByPersonNameEventIndexCommand;
+import seedu.address.logic.commands.AssignEventByPersonNameEventNameCommand;
+import seedu.address.logic.commands.AssignEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteByIndexCommand;
 import seedu.address.logic.commands.DeleteByNameCommand;
@@ -54,6 +60,7 @@ import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
 
 public class AddressBookParserTest {
 
@@ -134,7 +141,7 @@ public class AddressBookParserTest {
         //Search command with phone prefix
         keywords = Arrays.asList("12345678", "98765432", "13572468");
         command = (SearchCommand) parser.parseCommand(SearchCommand.COMMAND_WORD + " p/"
-                        + keywords.stream().collect(Collectors.joining(" ")));
+                + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new SearchCommand(new PhoneContainsKeywordsPredicate(keywords)), command);
         //Search command with tags prefix
         keywords = Arrays.asList("12345678", "98765432", "13572468");
@@ -189,6 +196,26 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_assign_events() throws Exception {
+        AssignEventCommand assignEventByPersonIndexEventIndexCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails("1", "1"));
+        assertEquals(new AssignEventByPersonIndexEventIndexCommand(INDEX_FIRST_PERSON, INDEX_FIRST_EVENT),
+                assignEventByPersonIndexEventIndexCommand);
+        AssignEventCommand assignEventByPersonIndexEventNameCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails("1", MEETING.getEventName().toString()));
+        assertEquals(new AssignEventByPersonIndexEventNameCommand(INDEX_FIRST_PERSON, MEETING.getEventName()),
+                assignEventByPersonIndexEventNameCommand);
+        AssignEventCommand assignEventByPersonNameEventIndexCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails(ALICE.getName().toString(), "1"));
+        assertEquals(new AssignEventByPersonNameEventIndexCommand(ALICE.getName(), INDEX_FIRST_EVENT),
+                assignEventByPersonNameEventIndexCommand);
+        AssignEventCommand assignEventByPersonNameEventNameCommand = (AssignEventCommand) parser.parseCommand(
+                EventUtil.getAssignEventDetails(ALICE.getName().toString(), MEETING.getEventName().toString()));
+        assertEquals(new AssignEventByPersonNameEventNameCommand(ALICE.getName(), MEETING.getEventName()),
+                assignEventByPersonNameEventNameCommand);
+    }
+
+    @Test
     public void parseCommand_deleteEventByIndex() throws Exception {
         DeleteEventCommand command = (DeleteEventCommand) parser.parseCommand(
                 DeleteEventCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased());
@@ -205,7 +232,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+                -> parser.parseCommand(""));
     }
 
     @Test
@@ -213,7 +240,6 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("unknownCommand"));
     }
-
 
     @Test
     public void parseCommand_export() throws Exception {
@@ -229,25 +255,19 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_editEvent() throws Exception {
-        // Assuming you have a method to get a valid event ID, replace `1` with the actual ID if necessary
-        int eventId = 1; // This should be the ID of the event you want to edit
+        Index targetIndex = Index.fromOneBased(1);
         Event event = new EventBuilder().build();
 
-        // Create the EditEventDescriptor with the details you want to edit
         EditEventCommand.EditEventDescriptor descriptor = new EditEventCommand.EditEventDescriptor();
         descriptor.setName(event.getEventName());
         descriptor.setDescription(event.getEventDescription());
         descriptor.setDuration(event.getEventDuration());
 
-        // Create the command string using the event ID and the descriptor details
-        String commandString = EditEventCommand.COMMAND_WORD + " " + eventId + " "
+        String commandString = EditEventCommand.COMMAND_WORD + " " + targetIndex.getOneBased() + " "
                 + EventUtil.getEditEventDetails(descriptor);
 
-        // Parse the command string
         EditEventCommand command = (EditEventCommand) parser.parseCommand(commandString);
 
-        // Check if the parsed command matches the expected command
-        assertEquals(new EditEventCommand(eventId, descriptor), command);
+        assertEquals(new EditEventCommand(targetIndex, descriptor), command);
     }
-
 }
