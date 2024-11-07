@@ -28,11 +28,11 @@ import seedu.address.model.Model;
  */
 public class CsvImport {
     public static final String INCORRECT_HEADERS = "Your file is missing or has extra headers. "
-            + "Please use the following headers: name,phone,email,address,hours,tags,role,subjects ";
+            + "Please use the following headers: name,phone,email,address,hours,role,subjects ";
     public static final String INCORRECT_ROWS = "Some rows have an incorrect number of entries "
             + "or have an incorrect formatting. "
             + "The expected number of entries is %d. The rows that failed are: %s";
-    public static final int HEADER_COUNT = 8;
+    public static final int HEADER_COUNT = 7;
     private final String importFilePath;
     private final ArrayList<Integer> duplicates;
     private final Map<Integer, String> failedRows;
@@ -121,7 +121,6 @@ public class CsvImport {
         expectedHeaders.add("email");
         expectedHeaders.add("address");
         expectedHeaders.add("hours");
-        expectedHeaders.add("tags");
         expectedHeaders.add("role");
         expectedHeaders.add("subjects");
 
