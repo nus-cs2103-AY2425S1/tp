@@ -682,42 +682,30 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-1. **Deleting a client without a car**
+1. **Attempting to delete a car from client without a car**
 
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` without a car.
    
    1. **Test case:** `del-car 1`<br>
          **Expected:** No car is deleted. Error details shown in the status message.
    
-   1. **Test case:** `del-car 0`<br>
-         **Expected:** No car is deleted. Error details shown in the status message.
-   
-   1. **Other incorrect delete commands to try:** `del-car`, `del-car x`, `...` (where x is larger than the list size)<br>
-         **Expected:** Similar to previous.
-   
-2. **Deleting a client with a car**
+2. **Deleting a car from a client with a car**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is not checked in.
    
    1. **Test case:** `del-car 1`<br>
       **Expected:** `John Doe`'s car is deleted. Status message reflects which client the car was deleted from.
-   
-   1. **Test case:** `del-car 0`<br>
-      **Expected:** No car is deleted. Error details shown in the status message.
-   
-   1. **Other incorrect delete commands to try:** `del-car`, `del-car x`, `...` (where x is larger than the list size)<br>
-      **Expected:** Similar to previous.
 
 3. **Attempting to delete a client with a checked-in car**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is checked in.
    
     1. **Test case:** `del-car 1`<br>
        **Expected:** No car is deleted. Status message states that car is currently checked in.
-   
+ 
+4. **Attempting to delete a car from a non-existent client**
+    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that the client to delete a car from does not exist.
+
     1. **Test case:** `del-car 0`<br>
        **Expected:** No car is deleted. Error details shown in the status message.
-   
-    1. **Other incorrect delete commands to try:** `del-car`, `del-car x`, `...` (where x is larger than the list size)<br>
-       **Expected:** Similar to previous.
 
 ### Checking in/ out a Client
 
