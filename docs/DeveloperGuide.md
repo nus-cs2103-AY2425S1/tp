@@ -785,9 +785,7 @@ testers are expected to do more *exploratory* testing.
 
 **Difficulty Level:**
 
-As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. 
-However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles.
-Most of our effort was dedicated to adding commands, and debugging cases that we have not previously considered.
+As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles. Most of our effort was dedicated to adding commands, and debugging cases that we have not previously considered.
 
 **Challenges Faced:**
 
@@ -798,10 +796,8 @@ Most of our effort was dedicated to adding commands, and debugging cases that we
 
 **Reuse and Adaptation:**
 
-Our group tried to reuse as much of AB3's code structure as much as possible to save time in adding the new commands. 
-However, some commands required extensive changes due to the duplicate persons logic.
+Our group tried to reuse as much of AB3's code structure as much as possible to save time in adding the new commands. However, some commands required extensive changes due to the duplicate persons logic.
 
 **Achievements:**
 
-Our group is happy with the outcome of Health Connect, as the process of adding and obtaining information of patients is simplified. 
-With the use of tags, it makes it easier to filter people to find the relevant details. 
+Our group is happy with the outcome of Health Connect, as the process of adding and obtaining information of patients is simplified. With the use of tags, it makes it easier to filter people to find the relevant details. 
