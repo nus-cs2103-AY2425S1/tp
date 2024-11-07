@@ -14,10 +14,13 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_EMPTY_MONTH_PAID = "The month paid cannot be empty";
-    public static final String MESSAGE_EMPTY_INDEX = "The index cannot be empty";
-    public static final String MESSAGE_INVALID_INDEX = "The index must be a valid, positive integer";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index must be a valid, "
+            + "positive integer.\nAlso possible: unknown prefixes added after person index";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX_FORMAT =
+            MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + ".\n%1$s";
+    public static final String MESSAGE_EMPTY_MONTH_PAID = "At least 1 month paid must be specified, with the prefix m/";
+    public static final String MESSAGE_EMPTY_INDEX = "A person index must be provided";
+    public static final String MESSAGE_EMPTY_INDEX_FORMAT = MESSAGE_EMPTY_INDEX + ".\n%1$s";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -51,8 +54,10 @@ public class Messages {
                 .append(person.getFees())
                 .append("; Class ID: ")
                 .append(person.getClassId())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
+                .append("; Months Paid: ")
+                .append(person.getMonthsPaidToString())
+                .append("; Tags: ")
+                .append(person.getTagsToString());
         return builder.toString();
     }
     /**

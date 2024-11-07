@@ -4,7 +4,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_MONTH_PAID;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 
 import java.util.Collection;
@@ -46,7 +46,7 @@ public class UnmarkPaidCommandParser implements Parser<UnmarkPaidCommand> {
             break;
         default:
             if (!ParserUtil.isValidIndex(preamble)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_INDEX,
+                throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                                             UnmarkPaidCommand.MESSAGE_USAGE));
             }
             try {
