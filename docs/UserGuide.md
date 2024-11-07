@@ -361,7 +361,15 @@ to find your schedule for a specific day of the week.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all data from the data file of UGTeach.
+
+<box type="warning" header ="##### Caution">
+This action is not undoable and your deleted data cannot be recovered. You should save a copy of the data file before trying this command.
+
+* Locate to the folder to save `ugteach.jar` and go to the folder `data`.
+* Inside the folder, duplicate the data file called `ugteach.json` and change the file name.
+
+</box>
 
 **Format:** `clear`
 
