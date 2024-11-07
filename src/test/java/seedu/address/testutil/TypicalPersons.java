@@ -43,6 +43,8 @@ public class TypicalPersons {
             new BtcAddress(VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK_BTC_NOT, "Sub wallet");
     public static final PublicAddress ETH_MAIN_ADDRESS =
             new EthAddress(VALID_PUBLIC_ADDRESS_ETH_MAIN, "Main wallet");
+    public static final PublicAddress ETH_SUB_ADDRESS =
+            new EthAddress(VALID_PUBLIC_ADDRESS_ETH_MAIN, "Sub wallet");
     public static final PublicAddress SOL_MAIN_ADDRESS =
             new SolAddress(VALID_PUBLIC_ADDRESS_SOL_MAIN, "Main wallet");
 
