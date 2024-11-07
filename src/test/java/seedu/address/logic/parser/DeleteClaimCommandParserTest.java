@@ -10,22 +10,22 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteClaimsCommand;
+import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.PolicyType;
 
-public class DeleteClaimsCommandParserTest {
+public class DeleteClaimCommandParserTest {
 
-    private final DeleteClaimsCommandParser parser = new DeleteClaimsCommandParser();
+    private final DeleteClaimCommandParser parser = new DeleteClaimCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteClaimsCommand() throws Exception {
         String userInput = "1 " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "1";
 
-        DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
+        DeleteClaimCommand expectedCommand = new DeleteClaimCommand(
                 INDEX_FIRST_CLIENT, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
 
-        DeleteClaimsCommand actualCommand = parser.parse(userInput);
+        DeleteClaimCommand actualCommand = parser.parse(userInput);
         assertEquals(expectedCommand, actualCommand);
     }
 
@@ -34,7 +34,7 @@ public class DeleteClaimsCommandParserTest {
         String userInput = "a " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "1";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class DeleteClaimsCommandParserTest {
         String userInput = "1 " + PREFIX_CLAIM_INDEX + "1";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class DeleteClaimsCommandParserTest {
         String userInput = "1 " + PREFIX_POLICY_TYPE + "health";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class DeleteClaimsCommandParserTest {
         String userInput = "1 health 1";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class DeleteClaimsCommandParserTest {
         String userInput = "1 " + PREFIX_POLICY_TYPE + "unknown " + PREFIX_CLAIM_INDEX + "1";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class DeleteClaimsCommandParserTest {
                 + PREFIX_CLAIM_INDEX + "2";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -83,17 +83,17 @@ public class DeleteClaimsCommandParserTest {
         String userInput = "1 " + PREFIX_POLICY_TYPE + "health " + PREFIX_CLAIM_INDEX + "1 extraArgument";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput),
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteClaimCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgsWithWhitespace_returnsDeleteClaimsCommand() throws Exception {
         String userInput = " 1 " + PREFIX_POLICY_TYPE + " health " + PREFIX_CLAIM_INDEX + " 1 ";
 
-        DeleteClaimsCommand expectedCommand = new DeleteClaimsCommand(
+        DeleteClaimCommand expectedCommand = new DeleteClaimCommand(
                 INDEX_FIRST_CLIENT, PolicyType.HEALTH, INDEX_FIRST_CLAIM);
 
-        DeleteClaimsCommand actualCommand = parser.parse(userInput);
+        DeleteClaimCommand actualCommand = parser.parse(userInput);
         assertEquals(expectedCommand, actualCommand);
     }
 }

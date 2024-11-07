@@ -8,12 +8,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.claim.Claim;
-import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.client.Client;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
@@ -24,7 +25,7 @@ import seedu.address.model.policy.PolicyType;
  * This command allows the user to remove a specified claim from a policy type of a client identified by their index.
  * If no matching client, policy type, or claim is found, an appropriate error message is returned.
  */
-public class DeleteClaimsCommand extends Command {
+public class DeleteClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-claim";
 
@@ -39,9 +40,9 @@ public class DeleteClaimsCommand extends Command {
             + PREFIX_POLICY_TYPE + "health "
             + PREFIX_CLAIM_INDEX + "1\n";
 
-    public static final String MESSAGE_DELETE_CLAIM_SUCCESS = "Claim deleted for policy type"
-            + "'%1$s' of client: %2$s.\n\n"
-            + "Deleted Claim Details:\nStatus: %3$s | Description: %4$s.\n"
+    public static final String MESSAGE_DELETE_CLAIM_SUCCESS = "Claim deleted for policy type "
+            + "'%1$s' of client: %2$s\n\n"
+            + "Deleted Claim Details:\nStatus: %3$s | Description: %4$s\n"
             + "Note: The indexing of remaining claims may have changed due to this deletion.";
     public static final String MESSAGE_NO_CLAIM_FOUND = "No claim found at the specified index.\n"
             + "Please use the 'list-claims' command to verify the index of the claim you want to delete!";
@@ -49,19 +50,21 @@ public class DeleteClaimsCommand extends Command {
             + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
 
+    private static final Logger LOGGER = Logger.getLogger(DeleteClaimCommand.class.getName());
+
     private final Index clientIndex;
     private final PolicyType policyType;
     private final Index claimIndex;
 
 
     /**
-     * Creates a DeleteClaimsCommand to delete the specified claim.
+     * Creates a DeleteClaimCommand to delete the specified claim.
      *
      * @param clientIndex The index of the client in the filtered client list.
      * @param policyType  The type of the policy whose claim is to be deleted.
      * @param claimIndex  The index of the claim to delete.
      */
-    public DeleteClaimsCommand(Index clientIndex, PolicyType policyType, Index claimIndex) {
+    public DeleteClaimCommand(Index clientIndex, PolicyType policyType, Index claimIndex) {
         requireAllNonNull(clientIndex, policyType, claimIndex);
         this.clientIndex = clientIndex;
         this.policyType = policyType;
@@ -79,17 +82,19 @@ public class DeleteClaimsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        LOGGER.log(Level.INFO, "Executing DeleteClaimCommand with clientIndex={0}, policyType={1}, claimIndex={2}",
+                new Object[]{clientIndex, policyType, claimIndex});
 
         Client client = getClientFromModel(model);
         Policy policy = findPolicyByType(client, policyType);
 
-        Claim claimToDelete = deleteClaimFromPolicy(policy);
+        Policy updatedPolicy = deleteClaimFromPolicy(policy);
 
-        Client updatedClient = createUpdatedClient(client);
+        Client updatedClient = createUpdatedClient(client, updatedPolicy);
         updateModel(model, client, updatedClient);
 
-        String successMessage = formatSuccessMessage(client, claimToDelete.getStatus(),
-                claimToDelete.getClaimDescription());
+        assert policy.getClaimList().size() > updatedPolicy.getClaimList().size() : "Claim has not been deleted yet.";
+        String successMessage = formatSuccessMessage(client, policy);
         return new CommandResult(successMessage);
     }
 
@@ -102,6 +107,8 @@ public class DeleteClaimsCommand extends Command {
      */
     private Client getClientFromModel(Model model) throws CommandException {
         List<Client> lastShownList = model.getFilteredClientList();
+        assert lastShownList != null : "Client list should not be null";
+
         if (clientIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_CLIENT_INDEX);
         }
@@ -109,32 +116,39 @@ public class DeleteClaimsCommand extends Command {
     }
 
     /**
-     * Deletes the specified claim from the given policy.
+     * Deletes the specified claim from the given policy, returning the updated policy.
      *
      * @param policy The policy from which the claim is to be removed.
+     * @return The updated policy with the claim removed.
      * @throws CommandException If no matching claim is found.
      */
-    private Claim deleteClaimFromPolicy(Policy policy) throws CommandException {
+    private Policy deleteClaimFromPolicy(Policy policy) throws CommandException {
+        assert policy != null : "Policy should not be null";
         try {
-            Claim claimToDelete = policy.getClaimList().getList().get(claimIndex.getZeroBased());
-            boolean claimRemoved = policy.removeClaim(claimToDelete);
-            if (!claimRemoved) {
-                throw new CommandException(MESSAGE_NO_CLAIM_FOUND);
-            }
-            return claimToDelete;
+            return policy.removeClaim(claimIndex.getZeroBased());
         } catch (IndexOutOfBoundsException e) {
             throw new CommandException(MESSAGE_NO_CLAIM_FOUND);
         }
     }
 
-    private Client createUpdatedClient(Client client) {
-        PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(client.getPolicies());
+    /**
+     * Create a new client with the updated policy.
+     *
+     * @param client The client to create a copy of.
+     * @param updatedPolicy The policy with the specified claim removed.
+     * @return The updated client.
+     */
+    private Client createUpdatedClient(Client client, Policy updatedPolicy) {
+        assert client != null : "Client should not be null";
+        assert updatedPolicy != null : "Updated policy should not be null";
+        PolicySet updatedPolicySet = new PolicySet(client.getPolicies());
+        updatedPolicySet.replace(updatedPolicy);
         return new Client(client.getName(), client.getPhone(), client.getEmail(),
                 client.getAddress(), client.getTags(), updatedPolicySet);
     }
 
     private void updateModel(Model model, Client originalClient, Client updatedClient) {
+        assert model != null : "Model should not be null";
         model.setClient(originalClient, updatedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
@@ -145,8 +159,10 @@ public class DeleteClaimsCommand extends Command {
      * @param client The client whose claim was deleted.
      * @return The formatted success message.
      */
-    private String formatSuccessMessage(Client client, ClaimStatus claimStatus, String claimDescription) {
-        return String.format(MESSAGE_DELETE_CLAIM_SUCCESS, policyType, client.getName(), claimStatus, claimDescription);
+    private String formatSuccessMessage(Client client, Policy oldPolicy) {
+        Claim claimRemoved = oldPolicy.getClaimList().get(claimIndex.getZeroBased());
+        return String.format(MESSAGE_DELETE_CLAIM_SUCCESS, policyType, client.getName(),
+                claimRemoved.getStatus(), claimRemoved.getClaimDescription());
     }
 
 
@@ -159,11 +175,15 @@ public class DeleteClaimsCommand extends Command {
      * @throws CommandException If no policy of the specified type is found.
      */
     private Policy findPolicyByType(Client client, PolicyType policyType) throws CommandException {
+        assert client != null : "Client should not be null";
+        assert policyType != null : "PolicyType should not be null";
         Optional<Policy> policyOptional = client.getPolicies().stream()
                 .filter(policy -> policy.getType().equals(policyType))
                 .findFirst();
 
         if (policyOptional.isEmpty()) {
+            LOGGER.log(Level.INFO, "No policy of type {0} found for client {1}",
+                    new Object[]{policyType, client.getName()});
             throw new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, client.getName()));
         }
         return policyOptional.get();
@@ -174,10 +194,10 @@ public class DeleteClaimsCommand extends Command {
         if (this == other) {
             return true;
         }
-        if (!(other instanceof DeleteClaimsCommand)) {
+        if (!(other instanceof DeleteClaimCommand)) {
             return false;
         }
-        DeleteClaimsCommand otherCommand = (DeleteClaimsCommand) other;
+        DeleteClaimCommand otherCommand = (DeleteClaimCommand) other;
         return clientIndex.equals(otherCommand.clientIndex)
                 && policyType.equals(otherCommand.policyType)
                 && claimIndex.equals(otherCommand.claimIndex);

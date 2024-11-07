@@ -76,13 +76,11 @@ public class SampleDataUtil {
      * Returns a PolicySet made up of the list of policies.
      */
     public static PolicySet getPolicySet(Policy... policies) {
-        PolicySet policySet = new PolicySet();
-
         if (policies == null) {
-            return policySet;
+            return new PolicySet();
         }
 
-        policySet.addAll(Arrays.asList(policies));
+        PolicySet policySet = new PolicySet(Arrays.asList(policies));
         return policySet;
     }
 

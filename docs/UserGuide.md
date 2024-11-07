@@ -587,6 +587,11 @@ Lists **all claims** under the specified policy type for the client identified b
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Prudy home folder.
 
+**Q**: Why am I getting an error when executing commands?<br>
+**A**: Ensure that the command syntax (e.g. `list-claims INDEX pt/POLICTY_TYPE`) is correct, and that the flags (e.g. `pt/`) are entered correctly. You can refer to [Command Structure](#4-command-structure) to better understand the command structure. 
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Known issues
