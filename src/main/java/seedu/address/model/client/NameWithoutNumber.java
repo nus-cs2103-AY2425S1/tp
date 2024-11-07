@@ -12,10 +12,11 @@ import java.util.Objects;
 public class NameWithoutNumber {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should not be blank, "
-                    + "should only have one space between words, and each part may contain an apostrophe within it. "
-                    + "The maximum character limit is 747.";
-
+            "Names should ignore case sensitivity and not be empty. "
+                    + "Each word is separated by a single space or apostrophe and has a "
+                    + "character limit of 747 (longest name in the world is 747 characters). "
+                    + "Extra/leading/trailing spaces will be trimmed and the name will be "
+                    + "converted into an array of words. ";
 
     /*
      * The first character of the name must be alphabetic, and the rest
