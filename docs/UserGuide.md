@@ -163,7 +163,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the FART book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-**Note:** 
+**Note:**
 1. As a `delete` command cannot be undone, the FART Book will first prompt you to confirm that the
  contact that you want to delete is correct. If you select `No`, the deletion will be aborted.
 ### Clearing all entries : `clear`
@@ -211,7 +211,7 @@ Examples:
 ### Viewing a Contact's Details
 * When the app starts, a placeholder on the right panel will prompt you to select a contact on the list.
 * **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday
-* **Note:** 
+* **Note:**
   * The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
 
 
