@@ -73,7 +73,7 @@
 
 .list-cell {
     -fx-background-color: #e3f2fd;
-    -fx-background-radius: 8 0 0 8;
+    -fx-background-radius: 8;
     -fx-text-fill: #2f2f2f;
 }
 
