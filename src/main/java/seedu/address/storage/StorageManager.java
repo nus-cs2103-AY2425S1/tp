@@ -10,10 +10,10 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.order.CustomerOrderList;
 import seedu.address.model.order.SupplyOrderList;
+import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.PastryCatalogue;
 
 /**
  * Manages storage of AddressBook, IngredientCatalogue, and PastryCatalogue data in local storage.
@@ -32,9 +32,12 @@ public class StorageManager implements Storage {
     /**
      * Creates a {@code StorageManager} with the given storages.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+    public StorageManager(AddressBookStorage addressBookStorage,
+                          UserPrefsStorage userPrefsStorage,
                           IngredientCatalogueStorage ingredientCatalogueStorage,
-                          PastryCatalogueStorage pastryCatalogueStorage, CustomerOrderListStorage customerOrderListStorage, SupplyOrderListStorage supplyOrderListStorage) {
+                          PastryCatalogueStorage pastryCatalogueStorage,
+                          CustomerOrderListStorage customerOrderListStorage,
+                          SupplyOrderListStorage supplyOrderListStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.ingredientCatalogueStorage = ingredientCatalogueStorage;
@@ -43,7 +46,9 @@ public class StorageManager implements Storage {
         this.supplyOrderListStorage = supplyOrderListStorage;
     }
 
-    // Default constructor with properly initialized parameters
+    /**
+     * Creates a {@code StorageManager} with the given storages.
+     */
     public StorageManager() {
         this(new JsonAddressBookStorage(Path.of("data", "addressbook.json")),
                 new JsonUserPrefsStorage(Path.of("data", "userprefs.json")),
@@ -156,7 +161,6 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to write pastry catalogue data to file: " + filePath);
         pastryCatalogueStorage.savePastryCatalogue(pastryCatalogue, filePath);
     }
-  
     // ================ CustomerOrderList methods ==============================
 
     @Override

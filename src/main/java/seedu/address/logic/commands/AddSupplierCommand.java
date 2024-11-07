@@ -46,7 +46,8 @@ public class AddSupplierCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
     public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in the address book";
-    public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Ingredient '%s' not found in the catalogue. Please add it using the addIngredient command.";
+    public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Ingredient '%s' not found in the catalogue. "
+            + "Please add it using the addIngredient command.";
 
     private final Supplier toAdd;
 
@@ -77,13 +78,11 @@ public class AddSupplierCommand extends Command {
             }
         }
 
-// Create an updated Ingredients object with validated ingredients
+        // Create an updated Ingredients object with validated ingredients
         Ingredients updatedIngredients = new Ingredients(validatedIngredients);
 
-// Update the supplier's ingredients list with the validated ingredients
+        // Update the supplier's ingredients list with the validated ingredients
         toAdd.setIngredientsSupplied(updatedIngredients);
-
-
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SUPPLIER);
