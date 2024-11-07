@@ -488,7 +488,7 @@ Retrieves the public addresses of a contact.
 Format: `retrievepa l/WALLET_NAME [c/NETWORK] [n/PERSON_NAME]`
 
 * `WALLET_NAME` parameter is compulsory and specifies the label (or part of the label) of the public address(es) to be retrieved.
-  It is **case-insensitive**.
+It is **case-insensitive**.
  
 * `NETWORK` parameter is optional and specifies the ticker name for each network and should be in all CAPS.<br />
   Allowed values: `BTC|ETH|SOL`.
