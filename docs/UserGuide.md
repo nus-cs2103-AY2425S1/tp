@@ -350,13 +350,13 @@ After entering the `list` command, all persons stored in the address book will b
 <div style="display: flex; align-items: center; justify-content: space-around;">
 
   <!-- Input Section -->
-  <div style="width: 45%;">
+  <div style="width: 40%;">
     <p><b>Input:</b> User enters the `list` command.</p>
     <img src="images/list_input.png" alt="Command Input Example" style="width: 100%;" />
   </div>
 
   <!-- Output Section -->
-  <div style="width: 45%;">
+  <div style="width: 40%;">
     <p><b>Output:</b> The UI updates to show all persons.</p>
     <img src="images/list_output.png" alt="Command Output Example" style="width: 100%;" />
   </div>
@@ -792,12 +792,12 @@ Method 2:
 | **Help**                    | `help`                                                                                                                                                                |
 | **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                          |
 | **List**                    | `list`                                                                                                                                                                |
-| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br> e.g., `markpaid 1 2024-10` (Marks the payment for October 2024 as completed for the student at index 1)                               |
+| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br> e.g., `markpaid 1 m/2024-10` (Marks the payment for October 2024 as completed for the student at index 1)                             |
 | **Pie Chart**               | `pie`                                                                                                                                                                 |
 | **Undo**                    | `undo`<br> Reverts the last action taken                                                                                                                              |
 | **Redo**                    | `redo`<br> Reapplies the last action that was undone                                                                                                                  |
 | **Viewing Command History** | *No command needed*<br> Use the arrow keys to navigate through previous commands                                                                                      |
-| **Viewing Student Details**  | `info INDEX` <br> isplays detailed information of a specific student at the given `INDEX` in a new window                                                             |
+| **Viewing Student Details**  | `info INDEX` <br> Displays detailed information of a specific student at the given `INDEX` in a new window                                                            |
 | **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                                                                            |
 | **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                                                                                    |
 
