@@ -26,9 +26,9 @@ public class UnmarkAttendanceCommand extends Command {
             + ": Remove an attendance record from the person identified by the index number "
             + "and a datetime.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + "DATETIME \n"
+            + PREFIX_DATE + "DATE_TIME \n"
             + "Example: \n"
-            + COMMAND_WORD + " 1" + PREFIX_DATE + "31/01/2024 12:00 \n";
+            + COMMAND_WORD + " 1 " + PREFIX_DATE + "31/01/2024 12:00 \n";
 
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Removed attendance for %1$s on %2$s";
     public static final String MESSAGE_ATTENDANCE_NOT_FOUND = "No attendance record on '%1$s'.";

@@ -28,11 +28,11 @@ public class MarkAttendanceCommand extends Command {
             + ": Mark the attendance of the person identified by the index number used in "
             + "the displayed person list and a datetime.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + "DATETIME "
+            + PREFIX_DATE + "DATE_TIME "
             + PREFIX_ATTENDANCE + "ATTENDANCE \n"
             + "Example: \n"
-            + COMMAND_WORD + " 1" + PREFIX_DATE + "31/01/2024 12:00 " + PREFIX_ATTENDANCE + "Attended \n"
-            + COMMAND_WORD + " 1" + PREFIX_DATE + "31/01/2024 12:00 " + PREFIX_ATTENDANCE + "Absent \n";
+            + COMMAND_WORD + " 1 " + PREFIX_DATE + "31/01/2024 12:00 " + PREFIX_ATTENDANCE + "Attended \n"
+            + COMMAND_WORD + " 1 " + PREFIX_DATE + "31/01/2024 12:00 " + PREFIX_ATTENDANCE + "Absent \n";
 
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Person: %1$s marked as %2$s on %3$s";
 
