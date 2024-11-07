@@ -412,10 +412,15 @@ This command is best used with reference to its usages in the [Prefix Table](#11
 <div markdown="1" class="smaller-text">
 Fields:
 
-* `INDEX`: Index number shown in the displayed person list
+* `INDEX`: Index number shown in the displayed student list
     * Must be a positive integer 1, 2, 3, …​
-* `TAG:` Existing tag will be replaced by the new tag
-    * Remove a student’s tag by typing  `t/` without specifying any tags
+* `NAME`: Edited name of the student at specified index
+* `PHONE`: Edited phone number of the student at specified index
+* `EMAIL`: Edited email of the student at specified index
+* `ADDRESS`: Edited address of the student at specified index
+* `TAG:` Tags to replace for the student at specified index
+  * Existing tag will be replaced by the new tag
+  * Remove a student’s tag by typing  `t/` without specifying any tags
 * `ATTENDANCE`: Field not editable within edit
 * `TUTORIAL`: Field not editable within edit
 * `PAYMENT`: Field not editable within edit
