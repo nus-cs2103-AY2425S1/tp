@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.commands.AddCustomerOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -38,17 +37,18 @@ public class AddCustomerOrderCommandParser implements Parser<AddCustomerOrderCom
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ORDER, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddCustomerOrderCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_ORDER, PREFIX_REMARK);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse("Guest Customer"));
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Remark remark = new Remark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
         String[] splitArgs = argMultimap.getValue(PREFIX_ORDER).orElse("").split("\\s+");
 
-        if (splitArgs.length == 0) {
+        if (splitArgs[0].isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerOrderCommand.MESSAGE_USAGE));
         }
