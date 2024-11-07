@@ -26,7 +26,8 @@ public class DeleteCommand extends Command {
             + ": Deletes an existing patient record from the system\n"
             + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
 
-    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted patient.\n"
+            + "%1$s";
 
     private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
 

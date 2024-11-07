@@ -37,12 +37,8 @@ public class Appt {
      * @return int
      * @see Comparator
      */
-    public static final Comparator<Appt> DATETIME_COMPARATOR = new Comparator<Appt>() {
-        @Override
-        public int compare(Appt appt1, Appt appt2) {
-            return appt1.getDateTime().compareTo(appt2.getDateTime());
-        }
-    };
+    public static final Comparator<Appt> DATETIME_COMPARATOR =
+            (appt1, appt2) -> appt1.getDateTime().compareTo(appt2.getDateTime());
 
     private final LocalDateTime dateTime;
     private final HealthService healthService;
@@ -73,14 +69,6 @@ public class Appt {
      */
     public HealthService getHealthService() {
         return healthService;
-    }
-
-    /**
-     * Returns the name of the health service of the appointment.
-     * @return String
-     */
-    public String getHealthServiceName() {
-        return healthService.toString();
     }
 
     /**
