@@ -170,24 +170,24 @@ The commands in this section are used to add new records to the system, such as 
 #### **3.1 Adding a student**
 Command: `add`
 
-Usage: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pay/PAYMENT [t/TAG]…`
+Usage: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
 Fields
 
 * `NAME`: Should only contain alphanumeric characters and spaces and it should not be blank
-* `PHONE_NUMBER`: Should only contain numbers and must be at least 3 digits long
+* `PHONE`: Should only contain numbers and must be at least 3 digits long
 * `EMAIL`: Should be of the format local-part@domain
 * `ADDRESS`: Can take in any values and should not be blank
-* `PAYMENT`: Refers to a number, either negative, zero or positive. This can be 0 when first creating the student to add to EduVault.
+* `TAG`: Should only contain alphanumeric characters and no spaces
 
 </div>
 {% endraw %}
 
 Example usages
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pay/0`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
@@ -346,7 +346,7 @@ Prefixes can be chained to display more specific results. For instance, using `f
 
 Example usages
 
-* `find t/ADHD t/scored_A a/Jurong West Ave 5`
+* `find t/ADHD t/sessionA a/Jurong West Ave 5`
 
 * `find p/9123 attend/07/01/2024:07/02/2024 pay/false`
 
@@ -396,7 +396,7 @@ Edit the personal information of students within EduVault
 
 Command: `edit`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pay/PAYMENT] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 
@@ -412,11 +412,15 @@ This command is best used with reference to its usages in the [Prefix Table](#11
 <div markdown="1" class="smaller-text">
 Fields:
 
-* `INDEX`: Index number shown in the displayed person list
+* `INDEX`: Index number shown in the displayed student list
     * Must be a positive integer 1, 2, 3, …​
-* `PAYMENT`: Updates the absolute value of a student’s overdue amount
-* `TAG:` Existing tag will be replaced by the new tag
-    * Remove a student’s tag by typing  `t/` without specifying any tags
+* `NAME`: Edited name of the student at specified index
+* `PHONE`: Edited phone number of the student at specified index
+* `EMAIL`: Edited email of the student at specified index
+* `ADDRESS`: Edited address of the student at specified index
+* `TAG:` Tags to replace for the student at specified index
+  * Existing tag will be replaced by the new tag
+  * Remove a student’s tag by typing  `t/` without specifying any tags
 * `ATTENDANCE`: Field not editable within edit
 * `TUTORIAL`: Field not editable within edit
 * `PAYMENT`: Field not editable within edit

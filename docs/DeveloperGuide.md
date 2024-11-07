@@ -517,10 +517,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -682,6 +678,8 @@ Use case ends.
 2. Admin inputs student to be deleted.
 3. System deletes the student information.
 
+Use case ends.
+
 **Extensions**
 
 * 2a. Admin inputs the information in the wrong format.
@@ -694,7 +692,6 @@ Use case ends.
     
     Use case ends.
 
-Use case ends.
 
 <br><br>
 
@@ -708,6 +705,8 @@ Use case ends.
 2. Admin adds the tutorial.
 3. System records the tutorial and displays success status.
 
+Use case ends.
+
 **Extensions:**
 
 * 2a. Admin inputs the information in the wrong format.
@@ -720,8 +719,6 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
 **UC06 - Enroll student in tutorial**
@@ -733,6 +730,8 @@ Use case ends.
 1. Admin decides student to be added to a tutorial.
 2. Admin enrolls the student in the tutorial.
 3. System records student as enrolled in tutorial and displays success status.
+
+Use case ends.
 
 **Extensions:**
 
@@ -757,8 +756,6 @@ Use case ends.
   
   Use case ends.
 
-Use case ends. 
-
 <br><br>
 
 **UC07 - Unenroll student from tutorial**
@@ -770,6 +767,8 @@ Use case ends.
 1. Admin decides student to be removed from a tutorial.
 2. Admin unenrolls the student from the tutorial.
 3. Systems records student as no longer part of the tutorial and displays success status.
+
+Use case ends.
 
 **Extensions:**
 
@@ -794,8 +793,6 @@ Use case ends.
   
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
 **UC08 - Edit student information**
@@ -807,6 +804,8 @@ Use case ends.
 1. Admin decides student and information to be edited.
 2. Admin inputs information to be edited for student.
 3. System records edited information for student and shows success status.
+
+Use case ends.
 
 **Extensions:**
 
@@ -831,8 +830,6 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
 **UC09 - Search for a student in system**
@@ -844,6 +841,8 @@ Use case ends.
 1. Admin decides student or criteria to search for.
 2. Admin inputs criteria to be searched for.
 3. System displays search results that match inputted criteria.
+
+Use case ends.
 
 **Extensions:**
 
@@ -857,7 +856,6 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
 
 <br><br>
 
@@ -871,6 +869,8 @@ Use case ends.
 2. Admin inputs the tutorial.
 3. System deletes the tutorial and displays success status.
 
+Use case ends.
+
 **Extensions:**
 
 * 2a. Admin inputs the information in the wrong format.
@@ -883,8 +883,6 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
 **UC11 - Add fees to student**
@@ -896,6 +894,8 @@ Use case ends.
 1. Admin decides student to add fees for.
 2. Admin inputs information of student and fees.
 3. System adds fees to student's information.
+
+Use case ends.
 
 **Extensions:**
 
@@ -919,8 +919,6 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
 **UC12 - Marking attendance of student**
@@ -932,6 +930,8 @@ Use case ends.
 1. Admin decides student for whom attendance is to be marked.
 2. Admin inputs information about student and date.
 3. System marks attendance for student for specified date.
+
+Use case ends.
 
 **Extensions:**
 
@@ -955,8 +955,6 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
 **UC13 - Marking attendance of tutorial**
@@ -968,6 +966,8 @@ Use case ends.
 1. Admin decides tutorial for whom attendance is to be marked.
 2. Admin inputs information about tutorial and date.
 3. System marks attendance for all students in tutorial for specified date.
+
+Use case ends.
 
 **Extensions:**
 
@@ -991,8 +991,6 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
 **UC14 - Unmarking attendance of student**
@@ -1004,6 +1002,8 @@ Use case ends.
 1. Admin decides student for whom attendance is to be unmarked.
 2. Admin inputs information about student and date.
 3. System unmarks attendance for student for specified date.
+
+Use case ends.
 
 **Extensions:**
 
@@ -1027,17 +1027,15 @@ Use case ends.
 
   Use case ends.
 
-Use case ends.
-
 <br><br>
 
-**UC015 - Clearing all students**
+**UC015 - Clearing all students and tutorials**
 
 **Actor: Admin**
 
 **MSS:**
-1. Admin prompts the system to clear all students' from system.
-2. System deletes all students.
+1. Admin prompts the system to clear all students and tutorials from system.
+2. System deletes all students and tutorials.
 
 Use case ends.
 
