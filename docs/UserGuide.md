@@ -127,6 +127,8 @@ Format:
 Examples:
 * `add n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/altName`
 * `add n/Betsy Crowe th/betsycrowe e/betsycrowe@example.com ss/masters r/President r/Admin`
+* `add n/Alex Yeoh th/alexyeoh123 e/alexyeoh@example.com ss/masters r/President r/Admin`
+![result for 'add'](images/addAlexYeohResult.png)
 
 ### Listing all contacts: `list`
 
@@ -166,12 +168,11 @@ Format `edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATU
 
 Examples:
 *  `edit alex yeoh th/johndoe123 e/johndoe@example.com` Edits the telegram handle and email address of the contact `Alex Yeoh` to be `johndoe123` and `johndoe@example.com` respectively.
+![result for 'edit FULL_NAME'](images/editAlexYeohResult.png)
 
 Note:
 * `FULL_NAME` refers to the full name of contact in the address book (to edit) while `n/NAME` is an input to change the name to (to change to).
-
-
-Do note that the `edit` command will fail if you enter a duplicate field as seen below under [invalid contacts](#what-is-considered-as-invalid-contacts)
+* `edit` command will fail if you enter a duplicate field as seen below under [invalid contacts](#what-is-considered-as-invalid-contacts)
 
 ### Locating contacts by contact details: `find`
 
