@@ -132,12 +132,14 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
 :bulb: **Tip:** A person can have any number of categories (including 0)<br>
 :bulb: **Tip:** Positive Amount Transaction indicates someone owes <ins>_the user_</ins> an amount.<br>
 :bulb: **Tip:** Negative Amount Transaction indicates <ins>_the user_</ins> owes someone an amount.<br>
+:bulb: **Tip:** Categories can be keyed in both lower and upper case without worrying about duplication as it will be capitalised automatically.<br>
 :bulb: **Tip:** By default, a newly created transaction is set as undone - _e.g._ if the transaction is added as `addTxn 1 amt/12.3 desc/John owes me for dinner`, this transaction is not done, John still owes <ins>_the user_</ins>.
 
 Examples:
 
 * `addTxn 1 amt/12.3 desc/John owes me for dinner `
 * `addTxn 1 amt/-24.3 desc/I owe John for dinner date/10102024`
+* `addTxn 1 amt/-24.3 desc/I owe John for dinner date/10102024 cat/FOOD`
 
 ### Listing all persons : `list`
 
