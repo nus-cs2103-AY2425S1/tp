@@ -170,14 +170,14 @@ The commands in this section are used to add new records to the system, such as 
 #### **3.1 Adding a student**
 Command: `add`
 
-Usage: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pay/PAYMENT [t/TAG]…`
+Usage: `add n/NAME p/PHONE e/EMAIL a/ADDRESS pay/PAYMENT [t/TAG]…`
 
 {% raw %}
 <div markdown="1" class="smaller-text">
 Fields
 
 * `NAME`: Should only contain alphanumeric characters and spaces and it should not be blank
-* `PHONE_NUMBER`: Should only contain numbers and must be at least 3 digits long
+* `PHONE`: Should only contain numbers and must be at least 3 digits long
 * `EMAIL`: Should be of the format local-part@domain
 * `ADDRESS`: Can take in any values and should not be blank
 * `PAYMENT`: Refers to a number, either negative, zero or positive. This can be 0 when first creating the student to add to EduVault.
