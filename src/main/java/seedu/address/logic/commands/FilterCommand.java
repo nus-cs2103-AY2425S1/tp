@@ -67,10 +67,10 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
 
-        List<Person> filteredPersons = model.getFilteredPersonList();
-        assert filteredPersons != null;
+        List<Person> filteredPersonsList = model.getFilteredPersonList();
+        assert filteredPersonsList != null;
 
-        int filterCount = filteredPersons.size();
+        int filterCount = filteredPersonsList.size();
         logger.log(Level.INFO, "FilterCommand execution completed. Number of persons listed: {0}", filterCount);
 
         return new CommandResult(
