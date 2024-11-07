@@ -339,6 +339,7 @@ Displays detailed information about a specified person.
     - Current role (if any).
     - Own wedding (if the person is a client).
     - Weddings where the person is assigned as a vendor (if any).
+    - Wedding person owns (if any) will have a ```Own Wedding``` label.
 - **Examples**:
     - `view Mike` displays details for `Mike`.
     - `view Alex Yeo` displays details for `Alex Yeo`.
@@ -463,6 +464,7 @@ Views the details of a wedding.
 - **Information Displayed**:
     - Wedding name, client details, date, venue.
     - Assigned vendors.
+    - Client of wedding will have a ```Client``` label.
 - **Examples**:
     - `vieww 1` displays details of the wedding at index 1.
     - `vieww John` displays John's wedding if there's only one match.
