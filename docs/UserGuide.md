@@ -72,9 +72,9 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* Command aliases are alternative words you can use to execute the same command for convenience.<br>
-  e.g. `listcustomer` has the same function as `listc`
-</box>
+* Command aliases are short forms of commands you can use to execute the commands more quickly and conveniently.<br>
+  e.g. `listc` can be instead of `listcustomer` to list all customers more easily
+  </box>
 
 ### Viewing help : `help`
 
