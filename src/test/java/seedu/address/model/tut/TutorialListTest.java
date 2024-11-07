@@ -75,6 +75,13 @@ public class TutorialListTest {
     }
 
     @Test
+    public void deleteTutorialTest() {
+        TutorialList tutorialList = getTypicalTutorialList();
+        Tutorial tut = Tutorial.of(new TutName("ANY"), TutorialId.of("T1000"));
+        assertEquals(tutorialList.deleteTutorial(tut), TUTORIAL1.toString());
+    }
+
+    @Test
     public void deleteTutorialTest_notExist_success() {
         TutorialList tutorialList = new TutorialList();
         assertThrows(TutNoFoundException.class, () -> tutorialList.deleteTutorial(TUTORIAL1));

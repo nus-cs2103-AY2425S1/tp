@@ -15,7 +15,7 @@
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="TrackMate" minWidth="1100" minHeight="700" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png"/>
+    <Image url="@/images/track_mate_empty_background.png"/>
   </icons>
   <scene>
     <Scene>
@@ -48,7 +48,7 @@
             </padding>
             <StackPane styleClass="logo-container">
               <ImageView fitHeight="125" fitWidth="125">
-                <Image url="@/images/TrackMate.png"/>
+                <Image url="@/images/track_mate_empty_background.png"/>
               </ImageView>
             </StackPane>
           </StackPane>

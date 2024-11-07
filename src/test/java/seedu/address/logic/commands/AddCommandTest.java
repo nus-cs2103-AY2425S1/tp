@@ -235,7 +235,8 @@ public class AddCommandTest {
             return null;
         }
 
-        public void deleteAssignment(Assignment assignment) {
+        @Override
+        public String deleteAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -261,7 +262,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteTutorial(Tutorial tutorial) {
+        public String deleteTutorial(Tutorial tutorial) {
             throw new AssertionError("This method should not be called.");
         }
 

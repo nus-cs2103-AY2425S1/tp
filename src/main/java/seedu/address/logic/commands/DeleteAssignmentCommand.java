@@ -17,7 +17,7 @@ public class DeleteAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the assignment identified by the title used in the displayed assignment list."
             + " Parameters: TITLE\n"
-            + "Example: " + COMMAND_WORD + " n/CS2100 Assignment";
+            + "Example: " + COMMAND_WORD + " n/Assignment 1";
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted Assignment: %1$s";
     public static final String MESSAGE_ASSIGNMENT_NOT_FOUND = "This assignment doesn't exist!";
@@ -36,9 +36,8 @@ public class DeleteAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
         }
 
-        model.deleteAssignment(assignment);
-        return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
-                assignment.toStringWithoutStats()));
+        String res = model.deleteAssignment(assignment);
+        return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, res));
     }
 
     @Override

@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
+import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 import static seedu.address.testutil.TypicalStudents.BOB;
@@ -16,6 +18,7 @@ import static seedu.address.testutil.TypicalTutorials.TUTORIAL3;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +26,7 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
@@ -361,5 +365,16 @@ public class ModelManagerTest {
 
         // Verify that no exceptions are thrown and the student's tutorial ID remains unchanged
         assertEquals(nonExistentTutorialId, student.getTutorialId());
+    }
+
+    @Test
+    public void deleteAssignmentTest() {
+        ModelManager modelManager = new ModelManager(new AddressBook(),
+                new UserPrefs(), getTypicalAssignmentList(), new TutorialList());
+
+        String res = modelManager.deleteAssignment(new Assignment("Assignment 1",
+                LocalDateTime.of(2025, 11, 10, 23, 59)));
+
+        assertEquals(res, ASSIGNMENT1.toStringWithoutStats());
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT1;
 import static seedu.address.testutil.TypicalAssignments.getTypicalAssignmentList;
 
 import java.time.LocalDateTime;
@@ -151,6 +152,15 @@ public class AssignmentListTest {
         for (Assignment assignment : assignments.getAssignments()) {
             assertTrue(assignment.getStatus(newStudent.getStudentId().value));
         }
+    }
+
+    @Test
+    public void deleteAssignmentTest() {
+        AssignmentList assignments = getTypicalAssignmentList();
+        LocalDateTime date = LocalDateTime.of(2024, 10, 14, 23, 59);
+        Assignment assignment = new Assignment("Assignment 1", date);
+
+        assertEquals(assignments.deleteAssignment(assignment), ASSIGNMENT1.toStringWithoutStats());
     }
 
 }

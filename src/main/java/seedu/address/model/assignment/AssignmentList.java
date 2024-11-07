@@ -70,17 +70,19 @@ public class AssignmentList {
     }
 
     /**
-     * Deletes the specified assignment from the list.
-     * The assignment must exist in the list.
+     * Deletes the specified assignment from the list of assignments and returns the string of the assignment.
      *
      * @param assignment The assignment to be deleted.
-     * @throws AssignmentNotFoundException if the assignment does not exist in the list.
+     * @return A string representation of the assignment, including its title and due date.
+     * @throws AssignmentNotFoundException if the specified assignment does not exist in the list.
      */
-    public void deleteAssignment(Assignment assignment) {
+    public String deleteAssignment(Assignment assignment) {
         if (!hasAssignment(assignment)) {
             throw new AssignmentNotFoundException();
         }
+        Assignment asg = getAssignment(assignment);
         assignments.remove(assignment);
+        return asg.toStringWithoutStats();
     }
 
     /**

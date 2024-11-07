@@ -124,10 +124,12 @@ public interface Model {
 
 
     /**
-     * Deletes the specified assignment.
-     * The assignment must exist in the assignment list.
+     * Deletes the specified assignment and returns a confirmation message.
+     *
+     * @param assignment The assignment to be deleted.
+     * @return A string containing the assignment name and its due date.
      */
-    void deleteAssignment(Assignment assignment);
+    String deleteAssignment(Assignment assignment);
 
     /**
      * check the completion statuses of the specified assignment.
@@ -169,12 +171,12 @@ public interface Model {
     void reassignAssignmentStatuses(Student oldStudent, Student newStudent);
 
     /**
-     * Delete the specified tutorial class.
-     * The tutorial class must exist in the tutorial list.
+     * Deletes the specified tutorial and returns its details.
      *
-     * @param tutorial The tutorial class to be deleted.
+     * @param tutorial The tutorial to be deleted.
+     * @return A string containing the tutorial name and tutorial ID.
      */
-    void deleteTutorial(Tutorial tutorial);
+    String deleteTutorial(Tutorial tutorial);
 
     /**
      * Returns true if a student with the specified studentId exists.

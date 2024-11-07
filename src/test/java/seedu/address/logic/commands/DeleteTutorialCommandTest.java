@@ -33,7 +33,7 @@ public class DeleteTutorialCommandTest {
         Tutorial tutorial = model.getTutorialList().getTutorials().get(0);
         DeleteTutorialCommand deleteTutorialCommand = new DeleteTutorialCommand(tutorial);
         String expectedMessage = String.format(DeleteTutorialCommand.MESSAGE_DELETE_TUTORIAL_SUCCESS,
-                tutorial.getTutorialId());
+                tutorial.toString());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
                 getTypicalAssignmentList(), getTypicalTutorialList());
         expectedModel.deleteTutorial(tutorial);

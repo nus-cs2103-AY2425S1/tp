@@ -16,9 +16,6 @@ Class ArgumentMultimap
 Class ParserUtil
 
 Class Student {
-  -name : Name
-  -studentId : StudentId
-  -tutorialId : TutorialId
 }
 Class Name
 Class StudentId
