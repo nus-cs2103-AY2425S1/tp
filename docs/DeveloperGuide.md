@@ -108,7 +108,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <br>
 
-#### General Interaction
+#### **General Interaction**
 
 The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
 
