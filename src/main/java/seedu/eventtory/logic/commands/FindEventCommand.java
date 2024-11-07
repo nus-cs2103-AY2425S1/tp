@@ -11,6 +11,7 @@ import seedu.eventtory.logic.commands.exceptions.CommandException;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.event.Event;
 import seedu.eventtory.model.event.EventContainsKeywordsPredicate;
+import seedu.eventtory.ui.UiState;
 
 /**
  * Finds and lists all events in EventTory whose fields contain any of the argument keywords.
@@ -24,6 +25,8 @@ public class FindEventCommand extends FindCommand {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: " + PREFIX_EVENT + " KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + " alice bob charlie\n";
+    public static final String MESSAGE_FIND_EVENT_FAILURE_INVALID_VIEW =
+            "You have to be viewing an event list to use the find event command";
 
     private final EventContainsKeywordsPredicate predicate;
 
@@ -34,6 +37,11 @@ public class FindEventCommand extends FindCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        UiState uiState = model.getUiState().getValue();
+        if (uiState.isEventDetails() || uiState.isVendorList()) {
+            throw new CommandException(MESSAGE_FIND_EVENT_FAILURE_INVALID_VIEW);
+        }
 
         FilteredList<Event> events = getPreviewOfFilteredEvents(model, predicate);
         if (events.isEmpty()) {

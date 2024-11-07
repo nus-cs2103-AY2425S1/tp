@@ -65,7 +65,7 @@ public class AssignCommand extends Command {
         case EVENT_DETAILS:
             return assignVendorToEvent(model);
         default:
-            return new CommandResult(MESSAGE_ASSIGN_FAILURE_INVALID_VIEW);
+            throw new CommandException(MESSAGE_ASSIGN_FAILURE_INVALID_VIEW);
         }
     }
 
