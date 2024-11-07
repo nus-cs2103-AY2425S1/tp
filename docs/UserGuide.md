@@ -12,9 +12,17 @@ Welcome! Tuteez is a **desktop address book app that makes managing student cont
 
 - [Tuteez User Guide](#tuteez-user-guide)
    * [Quick start](#quick-start)
-   * [UI ](#ui)
+   * [UI](#ui)
       + [Left panel](#left-panel)
       + [Right panel](#right-panel)
+   * [Beginner's Tutorial](#beginners-tutorial-for-tuteez)
+      + [Before You Begin](#before-you-begin)
+      + [Starting with a Clean Slate](#starting-with-a-clean-slate)
+      + [Adding Your First Student](#adding-your-first-student)
+      + [Adding a Lesson to your Student's details](#adding-a-lesson-to-your-students-details)
+      + [Editing Student Details](#editing-student-details)
+      + [Deleting a Student](#deleting-a-student)
+      + [Wrapping Up](#wrapping-up)
    * [Features](#features)
       + [Viewing help : `help`](#viewing-help-help)
       + [Adding a student: `add`](#adding-a-student-add)
@@ -160,7 +168,6 @@ Congratulations! 😁 You've successfully completed the beginner's tutorial for 
 You're now ready to move on to more advanced features and commands that Tuteez has to offer.
 Simply visit the [Features](#features) section to learn more about the various commands available to you.
 
-[_Go Back to the Top_](#table-of-contents)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
