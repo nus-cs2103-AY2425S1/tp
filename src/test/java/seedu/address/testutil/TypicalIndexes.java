@@ -9,4 +9,8 @@ public class TypicalIndexes {
     public static final Index INDEX_FIRST_SUPPLIER = Index.fromOneBased(1);
     public static final Index INDEX_SECOND_SUPPLIER = Index.fromOneBased(2);
     public static final Index INDEX_THIRD_SUPPLIER = Index.fromOneBased(3);
+
+    public static final Index INDEX_FIRST_PRODUCT = Index.fromOneBased(1);
+    public static final Index INDEX_SECOND_PRODUCT = Index.fromOneBased(2);
+    public static final Index INDEX_THIRD_PRODUCT = Index.fromOneBased(3);
 }
