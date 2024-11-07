@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class ProductName {
-    public static final String MESSAGE_EMPTY_NAME = "Supplier name cannot be blank.";
+    public static final String MESSAGE_EMPTY_NAME = "Product name cannot be blank.";
 
     public static final String MESSAGE_NON_ALPHANUMERIC_NAME =
-            "Supplier names should only contain alphanumeric characters and spaces.";
+            "Product names should only contain alphanumeric characters and spaces.";
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 

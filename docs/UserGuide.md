@@ -104,7 +104,7 @@ Refer to the [Features](#features) below for details of each command.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
+<br>
 ### Viewing help : `help`
 
 Stuck on how to use the app?
@@ -129,24 +129,6 @@ Format: `add_supplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add_supplier n/Fresh Farms Ltd p/98765432 e/contact@freshfarms.com a/23 Orchard Street, Suite 5`
 * `add_supplier n/Global Produce Inc e/globalproduce@example.com p/1234567 a/789 Harvest Ave, Level 2 t/International t/Organic`
-
-### Editing a supplier : `edit`
-
-Edits an existing supplier in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
-* You can remove all the supplier’s tags by typing `t/` without
-    specifying any tags after it.
-
-
-Examples:
-*  `edit_supplier 1 p/91234567 e/contact@freshfarms.com` Edits the phone number and email address of the 1st supplier to be `91234567` and `contact@freshfarms.com` respectively.
-*  `contact@freshfarms.com` Edits the name of the 2nd supplier to be `Global Produce` and clears all existing tags.
 
 ### Deleting a supplier : `delete`
 Deletes the specified supplier from the address book.

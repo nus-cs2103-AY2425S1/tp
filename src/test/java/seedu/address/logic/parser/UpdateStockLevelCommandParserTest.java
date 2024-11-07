@@ -59,19 +59,23 @@ public class UpdateStockLevelCommandParserTest {
 
         // missing values with prefix present
         assertParseFailure(parser, " pr/ stk/1000", ProductName.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, " pr/Product stk/", MESSAGE_INVALID_STOCK_LEVEL);
+        assertParseFailure(parser, " pr/Product stk/", "Stock Level not provided!");
     }
 
     @Test
     public void parse_invalidValue_failure() {
+
+        //stock level missing
+        assertParseFailure(parser, " pr/Product stk/", "Stock Level not provided!");
+
         // invalid product name
-        assertParseFailure(parser, " pr/Product#1 stk/1000", ProductName.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " pr/Product#1 stk/1000",
+                "Names should only contain alphanumeric characters and spaces, and it should not be blank");
 
         // invalid stock level (non-numeric)
-        assertParseFailure(parser, " pr/Product1 stk/abc", MESSAGE_INVALID_STOCK_LEVEL);
+        assertParseFailure(parser, " pr/Product stk/abc", "Value for stock level is Invalid"
+                + "\nKindly enter a valid number");
 
-        // both invalid - should throw product name constraint first
-        assertParseFailure(parser, " pr/Product#1 stk/abc", ProductName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -104,6 +108,15 @@ public class UpdateStockLevelCommandParserTest {
     public void parse_negativeValues_failure() {
         // negative stock level
         assertParseFailure(parser, " pr/Product1 stk/-1000", MESSAGE_INVALID_STOCK_LEVEL);
+    }
+
+    @Test
+    public void parse_missingThresholds_failure() {
+        // missing both min/ and max/
+        assertParseFailure(parser, " pr/Product", "Missing required prefixes. "
+                + "\nupdate_stock: Edits the details of the products identified by the product name used in the "
+                + "displayed product list. Existing values will be overwritten by the input values."
+                + "\nParameters:  pr/PRODUCT_NAME stk/STOCK_LEVEL Example: update_stock pr/Sweaters stk/25000 ");
     }
 
     @Test

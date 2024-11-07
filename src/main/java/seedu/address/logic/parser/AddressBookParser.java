@@ -17,12 +17,10 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteProductCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SetThresholdCommand;
 import seedu.address.logic.commands.UnassignProductCommand;
-import seedu.address.logic.commands.UpdateMaxStockLevelCommand;
 import seedu.address.logic.commands.UpdateStockLevelCommand;
 import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.commands.ViewSupplierCommand;
@@ -78,9 +76,6 @@ public class AddressBookParser {
         case AddProductCommand.COMMAND_WORD:
             return new AddProductCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case DeleteSupplierCommand.COMMAND_WORD:
             return new DeleteSupplierCommandParser().parse(arguments);
 
@@ -113,9 +108,6 @@ public class AddressBookParser {
 
         case UpdateStockLevelCommand.COMMAND_WORD:
             return new UpdateStockLevelCommandParser().parse(arguments);
-
-        case UpdateMaxStockLevelCommand.COMMAND_WORD:
-            return new UpdateMaxStockLevelCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
