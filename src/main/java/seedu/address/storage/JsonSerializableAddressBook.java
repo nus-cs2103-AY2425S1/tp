@@ -2,12 +2,14 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -20,8 +22,7 @@ import seedu.address.model.task.Task;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
+    private static final Logger logger = LogsCenter.getLogger(JsonSerializableAddressBook.class);
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
@@ -34,11 +35,6 @@ class JsonSerializableAddressBook {
                                        @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
 
         this.persons.addAll(persons);
-
-        // if (tasks != null) {
-        //    this.tasks.addAll(tasks);
-        // }
-
         this.tasks.addAll(tasks);
     }
 
@@ -61,19 +57,32 @@ class JsonSerializableAddressBook {
         AddressBook addressBook = new AddressBook();
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            try {
+                Person person = jsonAdaptedPerson.toModelType();
+                if (addressBook.hasPerson(person)) {
+                    logger.warning("Duplicate person found and ignored: " + person);
+                    continue;
+                }
+                addressBook.addPerson(person);
+            } catch (IllegalValueException ive) {
+                logger.warning("Illegal value found in JSON data for person and ignored: " + jsonAdaptedPerson
+                        + ", error: " + ive.getMessage());
             }
-            addressBook.addPerson(person);
         }
 
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
-            Task task = jsonAdaptedTask.toModelType();
-            if (addressBook.hasTask(task)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            try {
+                Task task = jsonAdaptedTask.toModelType();
+                if (addressBook.hasTask(task)) {
+                    logger.warning("Duplicate task found and ignored: " + task);
+                } else {
+                    addressBook.addTask(task);
+                }
+            } catch (IllegalValueException ive) {
+                // Log and ignore the invalid entry
+                logger.warning("Illegal value found in JSON data for task and ignored: " + jsonAdaptedTask
+                        + ", error: " + ive.getMessage());
             }
-            addressBook.addTask(task);
         }
 
         return addressBook;

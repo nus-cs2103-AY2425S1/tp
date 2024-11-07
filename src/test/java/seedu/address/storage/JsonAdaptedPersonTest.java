@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.model.person.EmergencyContact.NO_NAME;
+import static seedu.address.model.person.EmergencyContact.NO_NUMBER;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -34,7 +36,7 @@ public class JsonAdaptedPersonTest {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
     private static final int INVALID_PRIORITY_LEVEL = 4; // valid levels are 1, 2, 3
-    private static final int VALID_PRIORITY_LEVEL = 2;
+    private static final int VALID_PRIORITY_LEVEL = BENSON.getPriorityLevel().getValue();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -120,6 +122,67 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
+
+    @Test
+    public void toModelType_validEmergencyContact_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_EMERGENCY_CONTACT_NAME, VALID_EMERGENCY_CONTACT_NUMBER, VALID_TAGS, VALID_PRIORITY_LEVEL);
+        assertEquals(BENSON, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidEmergencyContactName_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        "John@Doe", VALID_EMERGENCY_CONTACT_NUMBER, VALID_TAGS,
+                        VALID_PRIORITY_LEVEL);
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEmergencyContactName_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        null, VALID_EMERGENCY_CONTACT_NUMBER, VALID_TAGS, VALID_PRIORITY_LEVEL);
+        JsonAdaptedPerson expectedPerson =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        NO_NAME, NO_NUMBER, VALID_TAGS, VALID_PRIORITY_LEVEL);
+        assertEquals(expectedPerson.toModelType(), person.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidEmergencyContactNumber_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_EMERGENCY_CONTACT_NAME, "dd", VALID_TAGS, VALID_PRIORITY_LEVEL);
+        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEmergencyContactNumber_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_EMERGENCY_CONTACT_NAME, null, VALID_TAGS, VALID_PRIORITY_LEVEL);
+        JsonAdaptedPerson expectedPerson =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        NO_NAME, NO_NUMBER, VALID_TAGS, VALID_PRIORITY_LEVEL);
+        assertEquals(expectedPerson.toModelType(), person.toModelType());
+    }
+
+    @Test
+    public void toModelType_nullEmergencyContactNameAndNumber_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        null, null, VALID_TAGS, VALID_PRIORITY_LEVEL);
+        JsonAdaptedPerson expectedPerson =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        NO_NAME, NO_NUMBER, VALID_TAGS, VALID_PRIORITY_LEVEL);
+        assertEquals(expectedPerson.toModelType(), person.toModelType());
+    }
+
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);

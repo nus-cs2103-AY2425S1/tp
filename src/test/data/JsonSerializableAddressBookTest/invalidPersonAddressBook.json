@@ -6,6 +6,15 @@
       "email": "invalid@email!3e",
       "address": "4th street",
       "priorityLevel": 4
+    }, {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "emergency contact name" : "Billy",
+      "emergency contact number" : "77777777",
+      "tags" : [ "friends" ],
+      "priorityLevel": 3
     }
   ],
   "tasks": []
