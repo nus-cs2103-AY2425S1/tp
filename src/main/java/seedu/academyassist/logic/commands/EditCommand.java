@@ -35,7 +35,7 @@ public class EditCommand extends Command {
             + "Format: " + COMMAND_WORD + " STUDENT_ID FIELD/VALUE [FIELD/VALUE]...\n"
             + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
             + "Parameters Example:\n"
-            + "- STUDENT_ID: S1234567A\n"
+            + "- STUDENT_ID: S00001\n"
             + "- FIELD/VALUE: n/John\n"
             + "- [FIELD/VALUE: p/98765432]...\n";
 
