@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -16,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
@@ -200,8 +202,6 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs(), personToDisplay);
         expectedModel.deleteModule(updatedPerson, moduleToDelete);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -224,4 +224,22 @@ public class DeleteCommandTest {
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void execute_deleteGradedModule_success() {
+        Person personWithModule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        StudentId studentIdToDelete = personWithModule.getStudentId();
+        Module moduleToDelete = personWithModule.getModules().get(0);
+        moduleToDelete.setGrade(new Grade(VALID_GRADE_AMY));
+
+        DeleteCommand deleteCommand = new DeleteCommand(studentIdToDelete, moduleToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs());
+        expectedModel.deleteModule(personWithModule, moduleToDelete);
+
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
 }

@@ -84,9 +84,18 @@ public class DeleteCommand extends Command {
         }
 
         if (module != null) {
-            if (!toDelete.hasModule(module)) {
+            Module moduleToDelete = null;
+            for (Module currModule : toDelete.getModules()) {
+                if (currModule.equals(module)) {
+                    moduleToDelete = currModule;
+                    break;
+                }
+            }
+
+            if (moduleToDelete == null) {
                 throw new CommandException(String.format(MESSAGE_MODULE_NOT_FOUND, toDelete.getStudentId()));
             }
+
             model.deleteModule(toDelete, module);
             if (toDelete.isSamePerson(model.getPersonToDisplay())) {
                 for (Person person : lastShownList) {
@@ -98,7 +107,7 @@ public class DeleteCommand extends Command {
                 model.setPersonToDisplay(toDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, module.toString()), true);
             }
-            return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, module.toString()));
+            return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
         }
 
         if (toDelete.isSamePerson(model.getPersonToDisplay())) {
