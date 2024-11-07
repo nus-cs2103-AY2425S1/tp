@@ -52,6 +52,20 @@ public class VolunteerManager {
         return volunteers.contains(volunteer);
     }
 
+    /**
+     * Returns true if a volunteer with the name {@code volunteerName} exists in the volunteer book.
+     *
+     * @param volunteerName Name of volunteer to search for.
+     */
+    public boolean hasVolunteer(String volunteerName) {
+        for (Volunteer volunteer : volunteers) {
+            if (volunteer.getName().toString().equals(volunteerName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Assigns an event to a volunteer.

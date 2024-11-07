@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.event.Event;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -35,9 +34,6 @@ public class FindEventCommandTest {
 
         String expectedMessage = String.format(FindEventCommand.MESSAGE_EVENT_FOUND,
                 expectedModel.getFilteredEventList().size(), searchString);
-        for (Event event : expectedModel.getFilteredEventList()) {
-            expectedMessage += "\n" + event.getName().toString();
-        }
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

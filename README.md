@@ -12,7 +12,7 @@
   * enabling bulk messaging for campaigns and updates (via email/SMS)
 * It comes with a **reasonable level of user and developer documentation**.
 * The project is named `VolunSync` to reflect its mission of syncing volunteer management with event and donor tracking.
-* For detailed documentation of this project, see the **[VolunSync Documentation](https://ay2425s1-cs2103t-w12-2.github.io/tp/DeveloperGuide.html)**.
+* For detailed documentation of this project, see the **[VolunSync User Guide](https://ay2425s1-cs2103t-w12-2.github.io/tp/UserGuide.html)** or the **[VolunSync Developer Guide](https://ay2425s1-cs2103t-w12-2.github.io/tp/DeveloperGuide.html)**.
 * This project is a part of a **nonprofit initiative** to help organisations manage resources effectively. If you would like to contribute code to this project, see the **Contributing** section of our website for more info.
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org)

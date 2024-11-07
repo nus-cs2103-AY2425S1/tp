@@ -1,48 +1,42 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ]
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ]
-  } ],
+  "volunteers": [
+    {
+      "name": "Alice Wong",
+      "phone": "91234567",
+      "email": "alicewong@example.com",
+      "availableDate": "2023-05-10"
+    },
+    {
+      "name": "Bob Tan",
+      "phone": "98765432",
+      "email": "bobtan@example.com",
+      "availableDate": "2023-06-15"
+    },
+    {
+      "name": "Charlie Lee",
+      "phone": "92345678",
+      "email": "charlielee@example.com",
+      "availableDate": "2023-07-22"
+    },
+    {
+      "name": "Dave Lim",
+      "phone": "93456789",
+      "email": "davelim@example.com",
+      "availableDate": "2023-08-12"
+    },
+    {
+      "name": "Eve Tan",
+      "phone": "91234512",
+      "email": "evetan@example.com",
+      "availableDate": "2023-09-14"
+    },
+    {
+      "name": "Faye Koh",
+      "phone": "93451245",
+      "email": "fayekoh@example.com",
+      "availableDate": "2023-10-22"
+    }
+  ],
   "events": [
 
   ]
