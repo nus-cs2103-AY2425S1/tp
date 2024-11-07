@@ -22,7 +22,7 @@ public class Allergy {
      */
     public Allergy(String allergyName) {
         requireNonNull(allergyName);
-        allergyName = allergyName.strip();
+        allergyName = allergyName.strip().toLowerCase();
         checkArgument(isValidAllergy(allergyName), MESSAGE_CONSTRAINTS);
         this.allergyName = allergyName;
     }

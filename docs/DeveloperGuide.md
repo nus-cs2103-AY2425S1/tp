@@ -457,20 +457,23 @@ Priorities:
 - Medium (nice to have) - `**`
 - Low (unlikely to have) - `*`
 
-| Priority | As a …​                        | I want to …​                                                       | So that I can…​                                                                              |
-|----------|--------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| `***`    | home-based healthcare provider | add the data of new clients                                        | register new clients in the system for tracking                                              |
-| `**`     | home-based healthcare provider | tag patients based on their urgency                                | prioritise higher-risk patients                                                              |
-| `**`     | home-based healthcare provider | tag a client's entry or information                                | keep track of special instructions, preferences, medical allergies or urgency                |
-| `***`    | home-based healthcare provider | be notified of overlapping names phone numbers and email addresses | avoid duplicate client entries                                                               |
-| `***`    | home-based healthcare provider | see my patients' records                                           | understand how my patient is doing                                                           |
-| `***`    | home-based healthcare provider | see my patients' allergies                                         | provide the correct prescription for my patients                                             |
-| `***`    | home-based healthcare provider | delete the records of patients whom I am not seeing anymore        | keep my address book concise and clutter-free                                                |
-| `***`    | home-based healthcare provider | edit the details of my clients' address                            | locate a person easily                                                                       |
-| `***`    | home-based healthcare provider | have the contact details of my patients for easy access            | update the details accordingly if there are any changes                                      |
-| `***`    | home-based healthcare provider | add new appointment details                                        | add appointments in my schedule for tracking later on                                        |
-| `***`    | home-based healthcare provider | see my schedule for the day                                        | organise my time and ensure that there are no clashes in appointments                        |
-| `*`      | home-based healthcare provider | filter patients according to address and priority                  | save travel time or focus on more urgent cases                                               |
+| Priority | As a …​                        | I want to …​                                                       | So that I can…​                                          |
+|----------|--------------------------------|--------------------------------------------------------------------|----------------------------------------------------------|
+| `***`    | home-based healthcare provider | add the data of new clients                                        | register new clients in the system for tracking          |
+| `***`    | home-based healthcare provider | add the contact details of my patients for easy access             | contact and notify them accordingly if there are any emergencies |
+| `***`    | home-based healthcare provider | add the address of my patients                                     | know where to get access to my patients                  | 
+| `**`     | home-based healthcare provider | tag patients based on their urgency                                | prioritise higher-risk patients                          |
+| `**`     | home-based healthcare provider | tag a client's important details                                   | keep track of medical allergies or urgency               |
+| `***`    | home-based healthcare provider | be notified of overlapping names phone numbers and email addresses | avoid duplicate client entries                           |
+| `***`    | home-based healthcare provider | find my patients' records                                          | understand how my patient is doing                       |
+| `***`    | home-based healthcare provider | find my patients' allergies                                        | provide the correct prescription for my patients         |
+| `*`      | home-based healthcare provider | filter patients according to address and priority                  | save travel time or focus on more urgent cases           |
+| `**`     | home-based healthcare provider | delete the records of patients whom I am not seeing anymore        | keep my address book concise and clutter-free            |
+| `***`    | home-based healthcare provider | edit my patients' contact details accordingly                      | contact them easily without having to worry about not being able to reach the due to wrong information |
+| `***`    | home-based healthcare provider | edit my patients' address if they move locations                   | get to my patients without worrying about going to the wrong location |   
+| `***`    | home-based healthcare provider | add new appointment details                                        | add appointments in my schedule for tracking later on    |
+| `***`    | home-based healthcare provider | be notified of overlapping appointments                            | reschedule my appointments as required                   |
+| `***`    | home-based healthcare provider | see my schedule for the day                                        | organise my time and ensure that there is sufficient time to travel to different locations |
 
 ### Use cases
 
@@ -507,7 +510,7 @@ Priorities:
 
 1.  User requests to list clients
 2.  AddressBook shows a list of clients
-3.  User requests to delete a client’s data and inputs of the client's attributes (name, phone number, or email).
+3.  User requests to delete a client’s data and inputs the client's attributes (name, phone number, and/or email).
 4.  AddressBook validates the input
 5.  AddressBook deletes the person
 
@@ -530,11 +533,123 @@ Priorities:
 
   Use case ends.
 
-* 4c. Information mismatch
+* 4c. Client Does Not Exist
 
-    * 4c1. AddressBook shows an error message
+    * 4c1. AddressBook shows an error message.
 
   Use case ends.
+
+**Use case: Edit client data** <br>
+Preconditions: AddressBook has correct view, including client to edit
+
+**MSS**
+
+1.  User requests to edit details and inputs index and updated client's information
+2.  AddressBook validates the input
+3.  AddressBook confirms the successful edit of client's details
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Invalid Input Format
+  * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+* 2b. Duplicate Client
+    * 2b1. AddressBook detects multiple entries matching the provided attribute (name, phone number, or email).
+    * 2b2. AddressBook shows an error message indicating that multiple clients match the input
+    * 2b3. User requests to edit the client's data without matching details 
+    * 2b4. AddressBook validates the input
+    * 2b5. Addressbook edits the person
+
+  Use case ends.
+
+**Use case: Add appointment date for client**
+
+**MSS**
+
+1. User requests to add date and inputs the client's attributes (name, phone number, and/or email) and appointment date.
+2. AddressBook validates the input.
+3. AddressBook confirms the successful addition of appointment date to client. 
+4. AddressBook shows a list of all clients.
+
+    Use case ends.
+
+**Extensions**
+
+* 4a.  Invalid Input Format
+    * 4a1. AddressBook shows an error message.
+
+  Use case ends.
+
+* 4b. Appointment Date Overlaps
+
+    * 4b1. AddressBook detects existing person with date inputted.
+    * 4b2. AddressBook displays information on existing person with overlapped date.
+    * 4b3. AddressBook shows an error message indicating that there is a clash in appointment time.
+
+  Use case ends.
+
+* 4c. Client Does Not Exist
+
+    * 4c1. AddressBook shows an error message.
+
+  Use case ends.
+
+**Use case: Show schedule for the day**
+
+**MSS**
+
+1.  User requests to see the schedule for the day and inputs the date.
+2.  AddressBook validates the input.
+3.  AddressBook shows the schedule for the day.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.  Invalid Input Format
+    * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+**Use case: Find client's name by keywords**
+
+**MSS**
+
+1. User requests to find client and inputs keywords to find name.
+2. AddressBook shows the list of persons whose name matches the keywords.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. No Matches
+  * 1a1. AddressBook shows message.
+  * 1a2. AddressBook displays nothing in the list.
+
+  Use case ends.
+
+**Use case: Filter clients by parameters**
+
+**MSS**
+
+1. User requests to filter client and inputs parameters to filter by.
+2. AddressBook validates the input.
+3. AddressBook shows list of persons that matches parameters provided.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a.  Invalid Input Format
+    * 2a1. AddressBook shows an error message.
+
+  Use case ends.
+
+**To be added as potential future enhancements:**
 
 **Use case: Record Client Payment**
 
@@ -557,47 +672,6 @@ Priorities:
 
 * 4b.  Name and Phone Number mismatch
     * 4b1. AddressBook shows an error message.
-
-  Use case ends.
-
-**Use case: Tag a client’s priority**
-
-**MSS**
-
-1.  User requests to list clients
-2.  AddressBook shows a list of clients
-3.  User requests to tag a specific person and specifies their name, number and the tag.
-4.  AddressBook validates the input.
-5.  AddressBook tags the client's priority.
-
-    Use case ends.
-
-**Extensions**
-
-* 4a.  Invalid Input Format
-    * 4a1. AddressBook shows an error message.
-
-  Use case ends.
-
-* 4b.  Name and Phone Number mismatch
-    * 4b1. AddressBook shows an error message.
-
-  Use case ends.
-
-**Use case: Show schedule for the day**
-
-**MSS**
-
-1.  User requests to see the schedule for the day and inputs the date.
-2.  AddressBook validates the input.
-3.  AddressBook shows the schedule for the day.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a.  Invalid Input Format
-    * 2a1. AddressBook shows an error message.
 
   Use case ends.
 
@@ -661,47 +735,114 @@ testers are expected to do more *exploratory* testing.
 
    1. Use the `exit` command or close the window directly.<br> Expected: The application should close without any errors or delays.
 
+## Managing Patient Records
 
-### Adding a person
+### Adding a patient
 
-1. Adding a valid person
+1. Adding a valid patient
 
     1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
-       Expected: "John Doe" is added to the list of contacts. Details of the added contact shown in the status message.
+       Expected: New person added: Joanne; Phone: 98788432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tag: Low Risk; Allergies: None
 
-2. Adding a person with missing fields
+2. Adding a patient with missing fields
 
     1. Test case: `add n/John`<br>
-       Expected: No person is added. Invalid command format shown in the status message.
+       Expected: Following parameters are missing : p/, e/, a/, t/, m/
+       add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS t/TAG [m/ALLERGY]...
+       Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Low Risk m/Peanuts
+   
+3. Adding a duplicate patient
 
-3. Adding a duplicate person
-
-    1. Prerequisites: Ensure "John Doe" with the contact details in "Adding a valid person" is already in the contact list.
-
+    1. Prerequisites: Ensure "John Doe" with the contact details in "Adding a valid patient" is already in the contact list.
+   
     2. Test Case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Main St t/Low Risk m/None`<br>
-       Expected: Error message displayed indicating that the person already exists.
+       Expected Error Message: This person already exists in the address book
 
     3. Other duplicate person add command to try: `add n/John Doe p/98765432 e/differentemail@example.com a/123 Main St t/Low Risk m/None`,
 
+
 ### Deleting a person
 
-1. Deleting a person
+1. Deleting a patient 
 
-   1. Test case: `delete n/Alex Yeoh`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete n/Alex Yeoh`<br>
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+   
+    2. Test case: `delete p/81239873`<br>
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+   
+    3. Test case: `delete e/alex@yahoo.com`<br>
+       Expected: Deleted Person: Alex Yeoh; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+   
+    4. Other incorrect delete commands to try: `delete`, `delete 1`, `delete x`, `...` <br>
+       Expected: Invalid command format!
+       Please provide at least one of the following: name, phone, or email
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Editing a patient
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Editing a patient
 
-1. _{ more test cases …​ }_
+     1. Test case: `edit 1 n/Axel`<br>
+        Expected: Edited Person: Axel; Phone: 81239873; Email: alex@yahoo.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+
+     2. Test case: `edit 1 p/88452209 e/alex@gmail.com`<br>
+        Expected: Edited Person: Axel; Phone: 88452209; Email: alex@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+
+     3. Test case: `edit 1 n/Alice p/90967209 e/alice@gmail.com`<br>
+        Expected: Edited Person: Alice; Phone: 90967209; Email: alice@gmail.com; Address: 311, Clementi Ave West, #02-25; Tag: Low Risk; Allergies: None
+
+     4. Test case: `edit 1`<br>
+        Expected: At least one field to edit must be provided
+
+2. Attempting to edit to create a duplicate patient
+    
+     1. Prerequisites: Ensure "Alaya" with the contact details is already in the contact list.
+    
+     2. Test case: `edit 1 n/Alice p/90967209
+        Expected Error Message: This person already exists in the address book
+
+### Filtering patients
+
+1. Filtering patients by tag
+
+     1. Test case: `filter t/Low Risk`<br>
+        Expected: Lists all patients with tag "Low Risk"
+
+2. Filtering patients by phone number
+
+     1. Test case: `filter p/98765432`<br>
+        Expected: Lists all patients with phone number "98765432"
+
+3. Filtering patients by allergy
+
+     1. Test case: `filter m/Penicillin`<br>
+        Expected: Lists all patients with allergy "Penicillin"
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+  
+    1. Delete the data file.
+    2. Restart the app.
+    3. Expected: The app should create a new data file with default data.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+## **Appendix: Effort**
 
-1. _{ more test cases …​ }_
+**Difficulty Level:**
+
+As the group had prior experience with Orbital, it was easier to understand how to work together with one another to add to the AddressBook. However, the concepts of Software Engineering were new to all members in the team, and the difficulty lies in having to implement the code according to the Software Engineering principles. Most of our effort was dedicated to adding commands, and debugging cases that we have not previously considered.
+
+**Challenges Faced:**
+
+- Mapping requirements to real-life scenarios: As we are unfamiliar with the potential for patients with same details, we found it difficult to finalise the final logic for duplicate patients.
+- Consistent logic throughout codebase: As we had different ideas on implementation, it required many iterations to change the code to make the logic consistent.
+- Overriding or changing functionality of the code unintentionally: As there are some portions where we implement the feature concurrently, it results in many merge conflicts and unintentional behaviour.
+
+
+**Reuse and Adaptation:**
+
+Our group tried to reuse as much of AB3's code structure as much as possible to save time in adding the new commands. However, some commands required extensive changes due to the duplicate persons logic.
+
+**Achievements:**
+
+Our group is happy with the outcome of Health Connect, as the process of adding and obtaining information of patients is simplified. With the use of tags, it makes it easier to filter people to find the relevant details. 
