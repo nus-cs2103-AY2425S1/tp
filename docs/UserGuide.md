@@ -74,7 +74,7 @@ Action     | Format, Examples
 **[Delete](#deleting-a-supplier-delete-s)** | `delete -s INDEX`<br> e.g., `delete -s 3`
 **[List](#listing-all-suppliers-list-s)**   | `list -s`
 **[Mark](#mark-a-supplier-with-a-status-mark-s)**   | `mark -s INDEX STATUS`<br> e.g.,`mark -s 2 active`
-**[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
+**[Find](#find-a-supplier-find-s)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>` <br> e.g., `find -s n/link com/NU`
 **[Sort](#sort-suppliers-sort-s)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
 
 
@@ -82,12 +82,12 @@ Action     | Format, Examples
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**[Delete](#deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**[List](#listing-all-deliveries-list-d)**   | `list -d`
-**[Mark](#marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-**[Find](#find-a-delivery-find-d)**   | `find -s n/<KEYWORD FOR SUPPLIER NAME> com/<KEYWORD FOR SUPPLIER COMPANY> pro/<KEYWORD FOR SUPPLIER PRODUCT>`
-**[Sort](#sort-deliveries-sort-d)**   | `sort -s so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -s so/a sb/n`
+**[Add](#adding-a-delivery-add--d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**[Delete](#deleting-a-delivery--delete--d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**[List](#listing-all-deliveries-list--d)**   | `list -d`
+**[Mark](#marking-a-delivery--mark--d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**[Find](#find-a-delivery-find--d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
+**[Sort](#sort-deliveries-sort--d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
 **[Upcoming](#upcoming-deliveries-upcoming)** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
 
 
@@ -192,6 +192,13 @@ The `delete -s` command is used to delete a supplier from the list of suppliers 
 
 Format: `delete -s INDEX`
 - `INDEX`: The index of the supplier in the list.
+
+<box type="warning" seamless>
+
+**Warnings**:
+- A spacing between `delete` and `-s` is compulsory
+- No duplicate prefix can be used
+</box>
 
 #### Example
 To delete the supplier at index 3:
@@ -324,6 +331,7 @@ Format: `list -d`
 
 
 <box type="warning" seamless>
+
 **Warnings**:
 - No other parameters should be given for this command.
 - At least one space between list and -a
