@@ -25,7 +25,7 @@ import seedu.address.model.policy.PolicyType;
  * This command allows the user to remove a specified claim from a policy type of a client identified by their index.
  * If no matching client, policy type, or claim is found, an appropriate error message is returned.
  */
-public class DeleteClaimsCommand extends Command {
+public class DeleteClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-claim";
 
@@ -50,7 +50,7 @@ public class DeleteClaimsCommand extends Command {
             + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
 
-    private static final Logger LOGGER = Logger.getLogger(DeleteClaimsCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DeleteClaimCommand.class.getName());
 
     private final Index clientIndex;
     private final PolicyType policyType;
@@ -58,13 +58,13 @@ public class DeleteClaimsCommand extends Command {
 
 
     /**
-     * Creates a DeleteClaimsCommand to delete the specified claim.
+     * Creates a DeleteClaimCommand to delete the specified claim.
      *
      * @param clientIndex The index of the client in the filtered client list.
      * @param policyType  The type of the policy whose claim is to be deleted.
      * @param claimIndex  The index of the claim to delete.
      */
-    public DeleteClaimsCommand(Index clientIndex, PolicyType policyType, Index claimIndex) {
+    public DeleteClaimCommand(Index clientIndex, PolicyType policyType, Index claimIndex) {
         requireAllNonNull(clientIndex, policyType, claimIndex);
         this.clientIndex = clientIndex;
         this.policyType = policyType;
@@ -82,7 +82,7 @@ public class DeleteClaimsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        LOGGER.log(Level.INFO, "Executing DeleteClaimsCommand with clientIndex={0}, policyType={1}, claimIndex={2}",
+        LOGGER.log(Level.INFO, "Executing DeleteClaimCommand with clientIndex={0}, policyType={1}, claimIndex={2}",
                 new Object[]{clientIndex, policyType, claimIndex});
 
         Client client = getClientFromModel(model);
@@ -194,10 +194,10 @@ public class DeleteClaimsCommand extends Command {
         if (this == other) {
             return true;
         }
-        if (!(other instanceof DeleteClaimsCommand)) {
+        if (!(other instanceof DeleteClaimCommand)) {
             return false;
         }
-        DeleteClaimsCommand otherCommand = (DeleteClaimsCommand) other;
+        DeleteClaimCommand otherCommand = (DeleteClaimCommand) other;
         return clientIndex.equals(otherCommand.clientIndex)
                 && policyType.equals(otherCommand.policyType)
                 && claimIndex.equals(otherCommand.claimIndex);
