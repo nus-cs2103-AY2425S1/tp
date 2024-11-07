@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.listingcommands;
 
-import static java.util.Objects.isNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -15,6 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -29,6 +29,7 @@ import seedu.address.model.listing.Region;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Seller;
 
 /**
@@ -45,74 +46,84 @@ public class AddListingCommand extends Command {
             + PREFIX_AREA + "AREA "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_REGION + "REGION "
-            + PREFIX_SELLER + "SELLER "
-            + "[" + PREFIX_BUYER + "BUYER]...\n"
+            + PREFIX_SELLER + "SELLER INDEX "
+            + "[" + PREFIX_BUYER + "BUYER INDEX]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Warton House "
             + PREFIX_PRICE + "400000 "
             + PREFIX_AREA + "1000 "
             + PREFIX_ADDRESS + "123 PASIR RIS (S)123456 "
             + PREFIX_REGION + "east "
-            + PREFIX_SELLER + "Sean Dias "
-            + PREFIX_BUYER + "Rong yi "
-            + PREFIX_BUYER + "Wen Xuan ";
+            + PREFIX_SELLER + "2 "
+            + PREFIX_BUYER + "1 "
+            + PREFIX_BUYER + "3 ";
 
     public static final String MESSAGE_SUCCESS = "New listing added: %1$s";
-    public static final String MESSAGE_NOT_SELLER = "The seller specified is not a seller";
-    public static final String MESSAGE_NOT_BUYER = "The buyer(s) specified is not a buyer";
-    public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in EZSTATE";
+    public static final String MESSAGE_NOT_SELLER = "The seller index specified is not a seller:\n"
+            + "%d. %s";
+    public static final String MESSAGE_NOT_BUYER = "The buyer index specified is not a buyer:\n"
+            + "%d. %s";
+    public static final String MESSAGE_INVALID_SELLER_INDEX = "The seller index provided is invalid!";
+    public static final String MESSAGE_INVALID_BUYER_INDEX = "The buyer index (%d) provided is invalid!";
+    public static final String MESSAGE_DUPLICATE_LISTING = "This listing already exists in EZSTATE!";
     private final Name listingName;
     private final Price price;
     private final Area area;
     private final Address address;
     private final Region region;
-    private final Name seller;
+    private final Index sellerIndex;
 
-    private final Set<Name> buyers;
+    private final Set<Index> buyerIndexes;
 
 
     /**
      * Creates an AddListingCommand to add the specified {@code Listing}
      */
     public AddListingCommand(Name listingName, Price price, Area area, Address address, Region region,
-                                Name seller, Set<Name> buyers) {
-        requireAllNonNull(listingName, price, area, address, region, seller);
+                                Index sellerIndex, Set<Index> buyerIndexes) {
+        requireAllNonNull(listingName, price, area, address, region, sellerIndex);
         this.listingName = listingName;
         this.price = price;
         this.area = area;
         this.address = address;
         this.region = region;
-        this.seller = seller;
-        this.buyers = buyers;
+        this.sellerIndex = sellerIndex;
+        this.buyerIndexes = buyerIndexes;
     }
 
-    // needs SLAP
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         List<Person> lastShownList = model.getFilteredPersonList();
-
-        Person seller = model.getPersonByName(this.seller);
-
-        if (!lastShownList.contains(seller)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+        int zeroBasedSeller = sellerIndex.getZeroBased();
+        int oneBasedSeller = sellerIndex.getOneBased();
+        if (zeroBasedSeller >= lastShownList.size() || zeroBasedSeller < 0) {
+            throw new CommandException(MESSAGE_INVALID_SELLER_INDEX);
         }
 
-        if (!(seller instanceof Seller)) {
-            throw new CommandException(MESSAGE_NOT_SELLER);
+        Person seller = lastShownList.get(zeroBasedSeller);
+
+        if (!seller.getRole().equals(Role.SELLER)) {
+            throw new CommandException(String.format(MESSAGE_NOT_SELLER,
+                    oneBasedSeller, seller.getName()));
         }
 
         Set<Person> personBuyers = new HashSet<>();
 
-        if (!isNull(buyers)) {
-            for (Name b : buyers) {
-                Person buyer = model.getPersonByName(b);
-                if (!lastShownList.contains(buyer)) {
-                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+        if (!buyerIndexes.isEmpty()) {
+            for (Index buyerIndex : buyerIndexes) {
+                int zeroBasedBuyer = buyerIndex.getZeroBased();
+                int oneBasedBuyer = buyerIndex.getOneBased();
+                if (zeroBasedBuyer >= lastShownList.size() || zeroBasedBuyer < 0) {
+                    throw new CommandException(String.format(MESSAGE_INVALID_BUYER_INDEX,oneBasedBuyer));
                 }
-                if (!(buyer instanceof Buyer)) {
-                    throw new CommandException(MESSAGE_NOT_BUYER);
+
+                Person buyer = lastShownList.get(zeroBasedBuyer);
+
+                if (!buyer.getRole().equals(Role.BUYER)) {
+                    throw new CommandException(String.format(MESSAGE_NOT_BUYER,
+                            oneBasedBuyer, buyer.getName()));
                 }
 
                 personBuyers.add(buyer);
@@ -146,8 +157,8 @@ public class AddListingCommand extends Command {
                 && area.equals(otherCommand.area)
                 && address.equals(otherCommand.address)
                 && region.equals(otherCommand.region)
-                && seller.equals(otherCommand.seller)
-                && buyers.equals(otherCommand.buyers);
+                && sellerIndex.equals(otherCommand.sellerIndex)
+                && buyerIndexes.equals(otherCommand.buyerIndexes);
     }
 
     @Override
@@ -155,7 +166,7 @@ public class AddListingCommand extends Command {
         return new ToStringBuilder(this)
                 .add("toAdd", this.listingName)
                 .add("address", this.address)
-                .add("seller", this.seller)
+                .add("seller", this.sellerIndex)
                 .toString();
     }
 }

@@ -5,6 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.LISTING_INDEX_OUT_OF_BOUNDS;
+import static seedu.address.testutil.TypicalIndexes.PERSON_INDEX_OUT_OF_BOUNDS;
 import static seedu.address.testutil.TypicalListings.PASIR_RIS;
 import static seedu.address.testutil.TypicalListings.SIMEI;
 import static seedu.address.testutil.TypicalListings.TAMPINES;
@@ -20,6 +27,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,56 +39,60 @@ import seedu.address.testutil.PersonBuilder;
 
 public class AddBuyersToListingCommandTest {
 
+    private static final Index VALID_LISTING_INDEX = INDEX_FIRST_LISTING;
     private static final Listing VALID_LISTING = PASIR_RIS;
-    private static final Name VALID_LISTING_NAME = VALID_LISTING.getName();
+    private static final Name VALID_LISTING_NAME = PASIR_RIS.getName();
     private static final Name OTHER_LISTING_NAME = TAMPINES.getName();
     private static final Name INVALID_LISTING_NAME = SIMEI.getName();
     private static final Name SELLER_NAME = ALICE.getName();
     private static final Set<Name> SELLER = Set.of(SELLER_NAME);
-    private static final Name VALID_BUYER_NAME = ELLE.getName();
     private static final Set<Name> EXISTING_BUYERS = Set.of(GEORGE.getName());
-    private static final Set<Name> VALID_BUYER_NAMES = Set.of(VALID_BUYER_NAME);
-    private static final Name INVALID_BUYER_NAME = HOON.getName();
-    private static final Set<Name> INVALID_BUYERS = Set.of(INVALID_BUYER_NAME);
+    private static final Set<Index> VALID_BUYER_INDEXES = Set.of(INDEX_FOURTH_PERSON, INDEX_FIFTH_PERSON);
+    private static final Set<Index> INVALID_BUYER_INDEXES = Set.of(INDEX_FIRST_PERSON);
+    private static final Set<Index> BUYER_INDEXES_OUT_OF_BOUNDS = Set.of(PERSON_INDEX_OUT_OF_BOUNDS);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddBuyersToListingCommand(VALID_LISTING_NAME,
+        assertThrows(NullPointerException.class, () -> new AddBuyersToListingCommand(INDEX_FIRST_LISTING,
                 null));
     }
 
     @Test
     public void constructor_nullListing_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddBuyersToListingCommand(null,
-                VALID_BUYER_NAMES));
+                VALID_BUYER_INDEXES));
     }
 
     @Test
-    public void execute_buyerAddedToListing_success() {
+    public void execute_buyerAddedToListingUnfilteredList_success() {
         AddBuyersToListingCommand addBuyersToListingCommand =
-                new AddBuyersToListingCommand(VALID_LISTING_NAME, VALID_BUYER_NAMES);
+                new AddBuyersToListingCommand(INDEX_FIRST_LISTING, VALID_BUYER_INDEXES);
+
         String expectedMessage = String.format(AddBuyersToListingCommand.MESSAGE_ADD_BUYERS_SUCCESS,
                 VALID_LISTING_NAME);
+
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalListings());
-        Listing editedListing = new ListingBuilder(VALID_LISTING).withBuyers(ELLE, GEORGE, DANIEL).build();
+        Listing editedListing = new ListingBuilder(VALID_LISTING).withBuyers().build();
+
         expectedModel.setListing(VALID_LISTING, editedListing);
+
         assertCommandSuccess(addBuyersToListingCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_buyerNotInClientList_throwsCommandException() {
         AddBuyersToListingCommand addBuyersToListingCommand =
-                new AddBuyersToListingCommand(VALID_LISTING_NAME, INVALID_BUYERS);
+                new AddBuyersToListingCommand(VALID_LISTING_INDEX, BUYER_INDEXES_OUT_OF_BOUNDS);
         assertCommandFailure(addBuyersToListingCommand, model,
                 String.format(AddBuyersToListingCommand.MESSAGE_BUYER_NOT_FOUND, INVALID_BUYER_NAME));
     }
 
     @Test
-    public void execute_listingNotInListingList_throwsCommandException() {
+    public void execute_listingIndexOutOfBoundsUnfilteredList_throwsCommandException() {
         AddBuyersToListingCommand addBuyersToListingCommand =
-                new AddBuyersToListingCommand(INVALID_LISTING_NAME, VALID_BUYER_NAMES);
+                new AddBuyersToListingCommand(LISTING_INDEX_OUT_OF_BOUNDS, VALID_BUYER_INDEXES);
         assertCommandFailure(addBuyersToListingCommand, model, AddBuyersToListingCommand.MESSAGE_LISTING_NOT_FOUND);
     }
 

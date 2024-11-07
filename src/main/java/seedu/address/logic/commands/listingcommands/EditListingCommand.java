@@ -82,6 +82,7 @@ public class EditListingCommand extends Command {
 
         Optional<Index> sellerIndex = editListingDescriptor.getSellerIndex();
 
+        Listing editedListing;
         if (sellerIndex.isPresent()) {
             List<Person> lastShownPersonList = model.getFilteredPersonList();
             int zeroBasedPerson = sellerIndex.get().getZeroBased();
@@ -89,16 +90,10 @@ public class EditListingCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person seller = lastShownPersonList.get(zeroBasedPerson);
+            editedListing = createEditedListing(listingToEdit, editListingDescriptor, seller);
+        } else {
+            editedListing = createEditedListing(listingToEdit, editListingDescriptor, listingToEdit.getSeller());
         }
-
-
-
-
-        Listing editedListing = createEditedListing(
-                listingToEdit,
-                editListingDescriptor,
-                seller.orElse(listingToEdit.getSeller())
-        );
 
         if (isIdentifierChanged(listingToEdit, editedListing) && model.canEditListing(listingToEdit, editedListing)) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
