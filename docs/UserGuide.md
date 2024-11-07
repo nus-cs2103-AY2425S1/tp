@@ -37,7 +37,7 @@
 4. Run the application
    * Open a command terminal.
    * Navigate (`cd`) to the folder where you placed the `.jar` file.
-     * For windows user, type:
+     * For Windows users, type:
        ```
        cd \path\to\your\folder
        ```
@@ -45,7 +45,7 @@
        Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\AddressBook`
        </box>
        
-     * For mac user, type:
+     * For Mac users, type:
        ```
        cd /path/to/your/folder
        ```
@@ -56,7 +56,7 @@
      ```
      java -jar contactcs.jar
      ```
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>![Ui](images/Ui.png)
+   A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.<br>![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
