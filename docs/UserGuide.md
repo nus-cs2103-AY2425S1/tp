@@ -3,7 +3,7 @@ layout: page
 title: MediBase3 User Guide
 ---
 
-MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage their patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! 
+MediBase3 (MB3) is a **desktop app for doctors, offering an all in one solution to manage his/her patient records with ease.** Be it medical conditions, allergies, priorities or even appointments you can to leave it for us to handle and focus more on your patients! 
 
 Optimized via combining both Command Line Interface (CLI) and an intuitive Graphical User Interface (GUI), if you can type fast, MediBase3 can get your patient management tasks done faster than traditional GUI apps.
 
@@ -27,7 +27,7 @@ Each aspect of MediBase3 is split into different sections, which are accessible 
 
 **For experienced MediBase3 users:**
 1. If you need a quick refresher on how to use a specific feature in MediBase3, you can navigate to the [Features](#features) section.
-1. You may also skip to the [Command Summary](#command-summary) section for a quick overview of all the commands available in MediBase3 and their formats.
+1. You may also skip to the [Command Summary](#command-summary) section for a quick overview of all the commands available in MediBase3 and his/her formats.
 
 For any additional information or queries, you can refer to the [FAQ](#faq) section or the [Known Issues](#known-issues) section.
 
@@ -308,7 +308,7 @@ the constraints of each parameter when used in a command.
 
 #### Adding a patient: `add`
 
-Adds a patient and their relevant details to MediBase3.
+Adds a patient and his/her relevant details to MediBase3.
 
 **Format**: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
@@ -335,7 +335,7 @@ Adds a patient and their relevant details to MediBase3.
 
 #### Deleting a patient : `delete`
 
-Removes a patient and their details from MediBase3.
+Removes a patient and his/her details from MediBase3.
 
 **Format**: `delete NRIC`
 
@@ -349,7 +349,7 @@ Removes a patient and their details from MediBase3.
 > * Refer to [Parameter Details](#parameter-details) for NRIC constraints.
 
 **Example**:
-* `delete S1234567A` removes the patient with the NRIC `S1234567A`.
+* `delete S1234567A` deletes the patient with the NRIC `S1234567A`.
 
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
@@ -384,7 +384,7 @@ to `91234567` and `johndoe@example.com` respectively.
 {: .alert .alert-success}
 > :bulb: **Tip:**
 > 
-> Editing the patient's `NAME` or `NRIC` will also update their associated appointments in the Appointment List Panel to reflect the change.
+> Editing the patient's `NAME` or `NRIC` will also update his/her associated appointments in the Appointment List Panel to reflect the change.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -516,7 +516,7 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
-* `delMedCon i/S1234567A c/High Blood Pressure` removes `High Blood Pressure` from the patient with `NRIC` `S1234567A`.
+* `delMedCon i/S1234567A c/High Blood Pressure` deletes `High Blood Pressure` from the patient with `NRIC` `S1234567A`.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -640,7 +640,7 @@ Shows a list of all patients in MediBase3.
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Listing all patients by their priority: `listPrio`
+#### Listing all patients by his/her priority: `listPrio`
 
 Shows a list of all patients with a specific `PRIORITY` in MediBase3.
 
@@ -707,7 +707,7 @@ Example:
 
 #### Locating patient by NRIC: `findNric`
 
-Finds patients based on their NRIC.
+Finds patients based on his/her NRIC.
 
 **Format**: `findNric NRIC`
 
