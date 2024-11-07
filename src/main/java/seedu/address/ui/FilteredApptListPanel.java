@@ -31,6 +31,8 @@ public class FilteredApptListPanel extends UiPart<Region> {
 
         apptListView.setItems(FXCollections.observableArrayList(filteredAppointments));
         apptListView.setCellFactory(listView -> new FilteredApptListViewCell());
+
+        logger.info("FilteredApptListPanel initialized successfully");
     }
 
     /**
