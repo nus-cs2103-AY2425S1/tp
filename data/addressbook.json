@@ -4,24 +4,24 @@
     "phone" : "93456789",
     "email" : "davidng@example.com",
     "availableDate" : "2023-10-27",
-    "involvedIn" : [ "Charity Run", "Tree Planting" ]
+    "involvedIn" : [ "Tree Planting" ]
   }, {
     "name" : "John Doe",
     "phone" : "98765432",
     "email" : "johndoe@example.com",
-    "availableDate" : "2020-11-01",
+    "availableDate" : "2023-10-20",
     "involvedIn" : [ ]
   }, {
     "name" : "Alice Wong",
     "phone" : "99117846",
     "email" : "Alice@gmail.com",
-    "availableDate" : "2022-10-27",
+    "availableDate" : "2023-10-28",
     "involvedIn" : [ "Charity Run" ]
   }, {
     "name" : "Jason Wang",
     "phone" : "12341234",
     "email" : "lol@lol.com",
-    "availableDate" : "2022-10-22",
+    "availableDate" : "2022-10-28",
     "involvedIn" : [ ]
   } ],
   "events" : [ {
@@ -31,7 +31,7 @@
     "endTime" : "12:00",
     "location" : "East Coast Park",
     "description" : "Annual beach cleaning event",
-    "volunteers" : [ "David Ng" ]
+    "volunteers" : [ ]
   }, {
     "eventName" : "Charity Run",
     "date" : "2023-10-28",
@@ -39,7 +39,7 @@
     "endTime" : "11:00",
     "location" : "Marina Bay",
     "description" : "5km run to raise funds for charity",
-    "volunteers" : [ "David Ng", "Alice Wong" ]
+    "volunteers" : [ "Alice Wong" ]
   }, {
     "eventName" : "Food Donation Drive",
     "date" : "2023-10-27",
