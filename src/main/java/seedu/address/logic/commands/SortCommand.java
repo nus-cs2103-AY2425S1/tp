@@ -26,6 +26,8 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "List sorted based on %1$s in %2$s order";
     public static final String RESET_MESSAGE_SUCCESS = "List sorting set to default order.";
+    public static final String MESSAGE_INVALID_ORDER = "Order should only be asc or desc.";
+    public static final String MESSAGE_INVALID_FIELD = "Field should only be github, name, telegram or reset.";
     private final PersonComparator comparator;
 
     public SortCommand(PersonComparator comparator) {
