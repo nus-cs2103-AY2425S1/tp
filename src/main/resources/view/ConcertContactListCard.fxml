@@ -2,55 +2,145 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-
-<?import javafx.scene.layout.FlowPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
-                <Insets top="5" right="5" bottom="5" left="15" />
+                <Insets top="5" right="5" bottom="5" left="15"/>
             </padding>
             <HBox spacing="0.5" alignment="CENTER_LEFT">
                 <Label fx:id="id" styleClass="cell_big_label" text="\$id">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
+                        <Region fx:constant="USE_PREF_SIZE"/>
                     </minWidth>
                 </Label>
             </HBox>
 
             <HBox fx:id="personConcertContainer" minWidth="680" prefWidth="680" VBox.vgrow="ALWAYS">
-                <VBox fx:id="personDetails" minHeight="105" GridPane.columnIndex="0"
-                      minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" >
-                    <HBox spacing="0.5" alignment="CENTER_LEFT">
-                        <Label fx:id="personName" styleClass="cell_big_label" text="\$person's name" />
-                    </HBox>
-                    <FlowPane fx:id="tags" />
-                    <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-                    <Label fx:id="personAddress" styleClass="cell_small_label" text="\$person's address" />
-                    <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-                    <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
-                </VBox>
+                <GridPane hgap="5" vgap="5" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50"/>
+                        <ColumnConstraints percentWidth="50"/>
+                    </columnConstraints>
 
-                <VBox fx:id="concertDetails" minHeight="105" GridPane.columnIndex="0"
-                      minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" >
-                    <padding>
-                        <Insets top="5" right="5" bottom="5" left="15" />
-                    </padding>
-                    <HBox spacing="0.5" alignment="CENTER_LEFT">
-                        <Label fx:id="concertName" styleClass="cell_big_label" text="\$concert's name" />
+                    <HBox spacing="0.5" alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label styleClass="cell_big_label" text="Person: " minWidth="70"/>
+                        <Label fx:id="personName" styleClass="cell_big_label" text="\$person's name"/>
                     </HBox>
-                    <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-                    <Label fx:id="concertAddress" styleClass="cell_small_label" text="\$concert's address" />
-                </VBox>
+                    <FlowPane fx:id="tags" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <GridPane hgap="10" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                        <!-- Label Titles !-->
+                        <Label styleClass="cell_small_label" text="Phone:" GridPane.columnIndex="0"
+                               GridPane.rowIndex="0"
+                               minWidth="50"/>
+                        <Label styleClass="cell_small_label" text="Address:" GridPane.columnIndex="0"
+                               GridPane.rowIndex="1"
+                               minWidth="50"/>
+                        <Label styleClass="cell_small_label" text="Email:" GridPane.columnIndex="0"
+                               GridPane.rowIndex="2"
+                               minWidth="50"/>
+                        <Label styleClass="cell_small_label" text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                               minWidth="50"/>
+
+                        <!-- Label Details !-->
+                        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"
+                               GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label fx:id="personAddress" styleClass="cell_small_label" text="\$address"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label fx:id="email" styleClass="cell_small_label" text="\$email"
+                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label fx:id="role" styleClass="cell_small_label" text="\$role"
+                               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                    </GridPane>
+
+                    <HBox spacing="0.5" alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Label styleClass="cell_big_label" text="Concert: " minWidth="70"/>
+                        <Label fx:id="concertName" styleClass="cell_big_label" text="\$concert's name"/>
+                    </HBox>
+                    <GridPane hgap="10" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <!-- Label Titles !-->
+                        <Label styleClass="cell_small_label" text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                               minWidth="50"/>
+                        <Label styleClass="cell_small_label" text="Address:" GridPane.columnIndex="0"
+                               GridPane.rowIndex="1"
+                               minWidth="50"/>
+
+                        <!-- Label Details !-->
+                        <Label fx:id="date" styleClass="cell_small_label" text="\$date"
+                               GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label fx:id="concertAddress" styleClass="cell_small_label" text="\$address"
+                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    </GridPane>
+                    <Separator GridPane.rowIndex="2" GridPane.columnSpan="2"/>
+                </GridPane>
+                <!--                <VBox fx:id="personDetails" minHeight="105" GridPane.columnIndex="0"-->
+                <!--                      minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
+                <!--                    <HBox spacing="0.5" alignment="CENTER_LEFT">-->
+                <!--                        <Label styleClass="cell_big_label" text="Person: " minWidth="70"/>-->
+                <!--                        <Label fx:id="personName" styleClass="cell_big_label" text="\$person's name"/>-->
+                <!--                    </HBox>-->
+                <!--                    <FlowPane fx:id="tags"/>-->
+                <!--                    <GridPane hgap="10">-->
+                <!--                        &lt;!&ndash; Label Titles !&ndash;&gt;-->
+                <!--                        <Label styleClass="cell_small_label" text="Phone:" GridPane.columnIndex="0"-->
+                <!--                               GridPane.rowIndex="0"-->
+                <!--                               minWidth="50"/>-->
+                <!--                        <Label styleClass="cell_small_label" text="Address:" GridPane.columnIndex="0"-->
+                <!--                               GridPane.rowIndex="1"-->
+                <!--                               minWidth="50"/>-->
+                <!--                        <Label styleClass="cell_small_label" text="Email:" GridPane.columnIndex="0"-->
+                <!--                               GridPane.rowIndex="2"-->
+                <!--                               minWidth="50"/>-->
+                <!--                        <Label styleClass="cell_small_label" text="Role:" GridPane.columnIndex="0" GridPane.rowIndex="3"-->
+                <!--                               minWidth="50"/>-->
+
+                <!--                        &lt;!&ndash; Label Details !&ndash;&gt;-->
+                <!--                        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone"-->
+                <!--                               GridPane.columnIndex="1" GridPane.rowIndex="0"/>-->
+                <!--                        <Label fx:id="personAddress" styleClass="cell_small_label" text="\$address"-->
+                <!--                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>-->
+                <!--                        <Label fx:id="email" styleClass="cell_small_label" text="\$email"-->
+                <!--                               GridPane.columnIndex="1" GridPane.rowIndex="2"/>-->
+                <!--                        <Label fx:id="role" styleClass="cell_small_label" text="\$role"-->
+                <!--                               GridPane.columnIndex="1" GridPane.rowIndex="3"/>-->
+                <!--                    </GridPane>-->
+                <!--                </VBox>-->
+
+                <!--                <VBox fx:id="concertDetails" minHeight="105" GridPane.columnIndex="0"-->
+                <!--                      minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
+                <!--                    <padding>-->
+                <!--                        <Insets top="5" right="5" bottom="5" left="15"/>-->
+                <!--                    </padding>-->
+                <!--                    <HBox spacing="0.5" alignment="CENTER_LEFT">-->
+                <!--                        <Label styleClass="cell_big_label" text="Concert: " minWidth="70"/>-->
+                <!--                        <Label fx:id="concertName" styleClass="cell_big_label" text="\$concert's name"/>-->
+                <!--                    </HBox>-->
+                <!--                    <GridPane hgap="10">-->
+                <!--                        &lt;!&ndash; Label Titles !&ndash;&gt;-->
+                <!--                        <Label styleClass="cell_small_label" text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="0"-->
+                <!--                               minWidth="50"/>-->
+                <!--                        <Label styleClass="cell_small_label" text="Address:" GridPane.columnIndex="0"-->
+                <!--                               GridPane.rowIndex="1"-->
+                <!--                               minWidth="50"/>-->
+
+                <!--                        &lt;!&ndash; Label Details !&ndash;&gt;-->
+                <!--                        <Label fx:id="date" styleClass="cell_small_label" text="\$date"-->
+                <!--                               GridPane.columnIndex="1" GridPane.rowIndex="0"/>-->
+                <!--                        <Label fx:id="concertAddress" styleClass="cell_small_label" text="\$address"-->
+                <!--                               GridPane.columnIndex="1" GridPane.rowIndex="1"/>-->
+                <!--                    </GridPane>-->
+                <!--                </VBox>-->
             </HBox>
         </VBox>
     </GridPane>
