@@ -45,8 +45,11 @@ activate VolunteerDeleteCommand
 VolunteerDeleteCommand --> VolunteerDeleteCommandParser
 deactivate VolunteerDeleteCommand
 
-VolunteerDeleteCommandParser --> AddressBookParser : d
+VolunteerDeleteCommandParser --> VolunteerCommandParser : d
 deactivate VolunteerDeleteCommandParser
+
+VolunteerCommandParser --> AddressBookParser : d
+deactivate VolunteerCommandParser
 
 [<-- AddressBookParser : d
 deactivate AddressBookParser

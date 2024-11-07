@@ -3,6 +3,8 @@ layout: page
 title: User Guide
 ---
 
+## What is VolunSync?
+VolunSync is a desktop app for **Non-Governmental Organisations** that require keeping track of volunteers and volunteering events, optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunSync can get your event and personnel management tasks done faster than traditional GUI apps.
 
 ## Learn About Commands Supported By VolunSync
 VolunSync supports the following types of commands to help you manage your volunteers and events.
@@ -24,9 +26,9 @@ Click the links to find out more about each command type:
    1. [Deleting an event](#deleting-an-event--e-del-)
    1. [Listing all volunteers participating in an event](#listing-all-volunteers-participating-in-an-event-e-view)
 
-#### Command Format Guidelines can be found [here](#command-format-guidelines).
+#### [Command Format Guidelines](#command-format-guidelines).
 
-#### A summary of all available commands' format can be found [here](#command-summary).
+#### [Command Summary](#command-summary).
 
 <div style="page-break-after: always;"></div>
 
