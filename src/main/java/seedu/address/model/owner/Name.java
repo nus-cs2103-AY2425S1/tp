@@ -16,7 +16,7 @@ public class Name {
      * \\p{L}: match any kind of letter from any language
      * [ '-/oO]+: allows spaces, hyphens, apostrophes, forward slashes, and the letter 'o' and 'O'
      */
-    public static final String VALIDATION_REGEX = "[\\p{L}\\p{N}]+([ '-/oO]+[\\p{L}\\p{N}]+)*";
+    public static final String VALIDATION_REGEX = "[\\p{L}\\p{N}]+([ '-/@]+[\\p{L}\\p{N}]+)*";
 
     public final String fullName;
 
