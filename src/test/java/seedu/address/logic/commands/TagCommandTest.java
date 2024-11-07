@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.TagCommand.MESSAGE_INVALID_INDEX_OR_STRING;
+import static seedu.address.logic.commands.TagCommand.MESSAGE_NO_CONTACTS_TO_TAG;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -91,6 +94,42 @@ public class TagCommandTest {
     }
 
     @Test
+    public void execute_addTagToAllContacts_success() {
+        Tag newTag = new Tag("commonTag");
+        Set<Tag> tagsToAdd = Collections.singleton(newTag);
+
+        TagCommand addTagCommand = new TagCommand(tagsToAdd);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        for (Person person : model.getFilteredPersonList()) {
+            Set<Tag> updatedTags = new HashSet<>(person.getTags());
+            updatedTags.addAll(tagsToAdd);
+            String[] tagNames = updatedTags.stream().map(tag -> tag.tagName).toArray(String[]::new);
+            Person updatedPerson = person instanceof Student
+                    ? new StudentBuilder((Student) person).withTags(tagNames).build()
+                    : new CompanyBuilder((Company) person).withTags(tagNames).build();
+            expectedModel.setPerson(person, updatedPerson);
+        }
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_ADD_TAG_TO_ALL_SUCCESS, tagsToAdd);
+
+        assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
+
+        // Additional check to ensure both models have the same data
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_addTagToAllNoContacts_failure() {
+        Model emptyModel = new ModelManager();
+        Tag newTag = new Tag("commonTag");
+        Set<Tag> tagsToAdd = Collections.singleton(newTag);
+
+        TagCommand addTagCommand = new TagCommand(tagsToAdd);
+        assertCommandFailure(addTagCommand, emptyModel, MESSAGE_NO_CONTACTS_TO_TAG);
+    }
+
+    @Test
     public void execute_addDuplicateTag_failure() {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Set<Tag> existingTags = personToEdit.getTags();
@@ -121,7 +160,7 @@ public class TagCommandTest {
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         TagCommand addTagCommand = new TagCommand(invalidIndex, tagsToAdd);
 
-        assertCommandFailure(addTagCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addTagCommand, model, MESSAGE_INVALID_INDEX_OR_STRING);
     }
 
     @Test
