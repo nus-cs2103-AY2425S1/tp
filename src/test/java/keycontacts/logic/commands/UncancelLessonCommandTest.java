@@ -53,7 +53,7 @@ public class UncancelLessonCommandTest {
         model.setStudent(studentToUncancel, studentToUncancelWithCancelledLesson);
 
         String expectedMessage = String.format(UncancelLessonCommand.MESSAGE_SUCCESS,
-                cancelledLesson.getLessonDate(), Messages.format(studentToUncancel));
+                cancelledLesson.getLessonDate().toDisplay(), Messages.format(studentToUncancel));
 
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
         expectedModel.setStudent(studentToUncancelWithCancelledLesson, studentToUncancel);
