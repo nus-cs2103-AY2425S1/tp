@@ -16,6 +16,8 @@
 [//]: # (_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_)
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
+Material Community Icons by [MaterialCommunityIcons](https://materialdesignicons.com/).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -326,9 +328,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `NUStates application` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a contact**
+
+**Use case: UC01 - Add a contact to address book**
 
 **MSS**
 
@@ -359,6 +362,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2c3. AddressBook re-validates the details.
 
       Use case resumes at step 3.
+
+The following activity diagram summarizes the steps involved in adding a contact:
+
+<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram" />
 
 **Use case: UC02 - Delete a contact**
 
@@ -400,13 +407,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Search for a contact**
+**Use case: UC04 - Search for a contact using name**
 
 **MSS**
 
-1.  User requests to search for a contact by providing a keyword.
+1.  User requests to search for a contact by providing a keyword related to contact's name.
 2.  AddressBook validates the provided keyword.
-3.  AddressBook searches for contacts matching the keyword.
+3.  AddressBook performs a case-insensitive search for contacts where the name begins with the keyword.
 4.  AddressBook shows a list of matching contacts with their details.
 
     Use case ends.
@@ -418,12 +425,123 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. No contacts match the provided keyword.
+* 3a. No contacts have names that match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+      
+**Use case: UC05 - Search for a contact using phone number**
+
+**MSS**
+
+1.  User requests to search for a contact by providing a keyword related to contact's phone number.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook performs the search for contacts where the phone number begins with the keyword.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No contacts have phone number that match the provided keyword.
     * 3a1. AddressBook shows a message indicating no contacts were found.
 
       Use case ends.
 
-**Use case: Edit a contact**
+**Use case: UC06 - Search for a contact using tag assigned to it**
+
+**MSS**
+
+1.  User requests to search for a contact by providing a keyword related to contact's tag.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook performs a case-insensitive search for contacts where the tag begins with the keyword.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No contacts have tags that match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+
+**Use case: UC07 - Search for a property using a keyword**
+
+**MSS**
+
+1.  User requests to search for a property by providing a keyword.
+2.  AddressBook validates the provided keyword.
+3.  AddressBook performs a case-insensitive search for properties.
+4.  AddressBook shows a list of matching contacts with their details.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided keyword is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid keyword.
+
+      Use case ends.
+
+* 3a. No properties match the provided keyword.
+    * 3a1. AddressBook shows a message indicating no contacts were found.
+
+      Use case ends.
+
+**Use case: UC08 - Pin contact**
+
+**MSS**
+
+1.  User requests to pin a specific contact by providing the index number
+2.  AddressBook validates the provided index number.
+3.  AddressBook pins the contact at the provided index, moving it to the top of the list view.
+4.  AddressBook shows a confirmation message that the item has been successfully pinned.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index number is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid index number.
+
+* 3a. The item is already pinned.
+    * 3a1. AddressBook shows a message indicating that the item is already pinned.
+
+      Use case ends.
+
+**Use case: UC09 - Unpin contact**
+
+**MSS**
+
+1.  User requests to unpin a specific contact by providing the index number
+2.  AddressBook validates the provided index number.
+3.  AddressBook unpins the contact at the provided index, moving it back to the bottom of the pinned list.
+4.  AddressBook shows a confirmation message that the item has been successfully unpinned.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The provided index number is missing or invalid.
+    * 2a1. AddressBook shows an error message indicating the invalid index number.
+
+* 3a. The item is already unpinned.
+    * 3a1. AddressBook shows a message indicating that the item is already unpinned.
+
+      Use case ends.
+
+**Use case: UC10 - Edit a contact**
 
 **MSS**
 
@@ -443,7 +561,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: Add a Property-To-Sell**
+**Use case: UC11 - Add a Property-To-Sell**
 
 **MSS**
 
@@ -484,7 +602,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: Add a Property-To-Buy**
+**Use case: UC12 - Add a Property-To-Buy**
 
 **MSS**
 
@@ -518,7 +636,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: Delete a Property-To-Sell**
+**Use case: UC13 - Delete a Property-To-Sell**
 
 **MSS**
 
@@ -552,7 +670,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: Delete a Property-To-Buy**
+**Use case: UC14 - Delete a Property-To-Buy**
 
 **MSS**
 
@@ -586,54 +704,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 3.
 
-**Use case: Pin a Contact**
-
-**MSS**
-
-1.  User requests to pin a contact providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook pins the contact to the back of the pinned contacts section of the list.
-4.  AddressBook shows a success message with the contact details.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
-    * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
-
-      Use case resumes at step 3.
-
-* 2b. The provided details are trying to pin an already pinned contact.
-    * 2b1. AddressBook shows an error message indicating the invalid fields.
-    * 2b2. User corrects the invalid details.
-    * 2b3. AddressBook re-validates the details.
-
-      Use case resumes at step 3.
-
-**Use case: Unpin a Contact**
-
-**MSS**
-
-1.  User requests to unpin a contact providing the required details.
-2.  AddressBook validates the provided details.
-3.  AddressBook unpins the contact from the pinned contacts section of the list.
-4.  AddressBook shows a success message with the contact details.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The provided details are invalid.
-    * 2a1. AddressBook shows an error message indicating the invalid fields.
-    * 2a2. User corrects the invalid details.
-    * 2a3. AddressBook re-validates the details.
-
-      Use case resumes at step 3.
-
-
 
 ### Non-Functional Requirements
 
@@ -654,8 +724,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Property**: A real estate asset associated to a contact. Each property has details such as name, address, price, number of rooms and optional tags(property type/condition/ownership type, etc.)
 * **Index**: A numerical identifier used to refer to a specific contact or property in the system. These are used for operations like deletion, updating, or viewing details.
 * **Tag**: A label used to categorize contacts or properties. Examples can include "Investor", "Luxury", "Renter", etc. They are used to provide additional context and for easy filtering and searching.
-* **Seller Preferred Range (SPR)**: A price range that indicates the seller's preferred selling range for properties. Used for matching potential sellers with buyers.
-* **Buyer Preferred Range (BPR)**: A price range that indicates the buyer's preferred range for purchasing properties. Helps in identifying properties that match a buyer's preference.
+* **Selling Price**: The price in which the seller is willing to sell the property.
+* **Buying Price**: The price in which the buyer is willing to buy the property.
+* **Actual Price**: The price for which the property is actually bought or sold.
 * **Keyword**: A term or phrase used to search for specific contacts or properties. They can match any stored attribute such as name, address, tag, etc.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -703,6 +774,36 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Sorting properties for a person
+
+1. Sorting properties for a person
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `sorti 1 f/Price o/H`<br>
+      Expected: Properties - both properties to buy and sell - for the first person are sorted based on property price. Details of the how the properties are sorted shown in the status message.
+
+   1. Test case: `sorti 0 f/Price o/L`<br>
+      Expected: No properties are sorted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect sort commands to try: `sorti`, `sorti x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Adding a new property to buy or sell for a person
+
+1. Adding a new property to buy or sell for a person
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `addSell 1 ht/a sp/1200000 pc/431244 un/12-24 t/Near MRT`<br>
+      Expected: A new property to buy is added for the first person. Details of the new property shown in the status message.
+
+   1. Test case: `addBuy 0 ht/a sp/1205000 pc/455677 un/1-45`<br>
+      Expected: No property is added. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect add property commands to try: `addBuy`, `addSell x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 ### Saving data
 
