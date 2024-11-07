@@ -61,7 +61,7 @@ public class AddRemarkCommandParser implements Parser<AddRemarkCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_INVALID_PERSON_INDEX_FORMAT));
+                    String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, argMultimap.getPreamble())));
         }
         return index;
     }
