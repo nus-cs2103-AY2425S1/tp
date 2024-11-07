@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays the `Person`, `Goods` and `GoodsReceipt` objects residing in the `Model`.
 
 ### Logic component
 
@@ -482,6 +482,18 @@ testers are expected to do more *exploratory* testing.
    1. Incorrect add goods commands to try: `addgoods`, `addgoods gn/Gardenia Bread q/-1 p/5 c/CONSUMABLES pd/2024-08-08 11:00 ad/2024-11-11 11:00 n/Alex Yeoh`
       Expected: System will provide an error message indicating correct usage.
 
+### Deleting Goods from the system
+
+1. Deleting goods from SupplyCentral.
+
+   1. Prerequisites: At least one supplier (e.g. Alex Yeoh) must be registered.
+
+   1. Test case: `deletegoods n/Alex Yeoh gn/Gardenia Milk Bread`
+      Expected: Goods `Gardenia Milk Bread` is deleted from the supplier `Alex Yeoh`.
+
+   1. Incorrect delete goods commands to try: `deletegoods`, `deletegoods gn/Gardenia Bread`, `deletegoods n/Alex Yeoh`
+      Expected: System will provide an error message indicating the correct usage.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -514,3 +526,4 @@ Besides ensuring that any bugs with OpenCSV are handled correctly, we also had t
 Team Size: 5
 
 1. Make the error message for adding of goods more detailed. The current error message is too general and can be improved upon by mentioning which field is failing the sanity check and reflecting that to the user.
+2. Add a feature to allow the user to sort the goods by price, quantity, and arrival date. This will allow the user to better manage their goods.
