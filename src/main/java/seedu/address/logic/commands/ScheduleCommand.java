@@ -33,7 +33,7 @@ public class ScheduleCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LOCATION + "The Terrace "
             + PREFIX_START_TIME + "09-10-2024 09:00 "
-            + PREFIX_END_TIME + "09-10-2024 10:00 ";
+            + PREFIX_END_TIME + "09-10-2024 10:00";
 
     public static final String MESSAGE_SUCCESS = "New meeting with %1$s added: %2$s";
 
