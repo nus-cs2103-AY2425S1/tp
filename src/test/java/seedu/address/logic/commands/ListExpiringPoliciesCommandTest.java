@@ -31,57 +31,50 @@ public class ListExpiringPoliciesCommandTest {
 
     @BeforeEach
     public void setUp() {
-        // reset model before each test to ensure isolation between tests
         model = new ModelManager(getTypicalPrudy(), new UserPrefs());
     }
 
     @Test
     public void execute_noExpiringPolicies_showsNoExpiringPoliciesMessage() {
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(30);
-        String expectedMessage = String.format("No policies expiring within the next %d day(s)!", 30);
+        String expectedMessage = getNoExpiringPoliciesMessage(30);
         assertCommandSuccess(command, model, expectedMessage, model);
     }
+
     @Test
     public void execute_expiringPoliciesFound_showsExpiringPolicies() {
-        Model modelWithExpiringPolicies = new ModelManager(getTypicalPrudyWithExpiringPolicies(),
-                new UserPrefs());
+        Model modelWithExpiringPolicies = new ModelManager(getTypicalPrudyWithExpiringPolicies(), new UserPrefs());
 
-        // dynamically calculate the expected expiry date (25 days from now)
+        // Expiry date calculation for Alice Pauline
         LocalDate expiringDate = LocalDate.now().plusDays(25);
         String formattedExpiryDate = expiringDate.format(MM_DD_YYYY_FORMATTER);
 
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(30);
-        String expectedMessage = String.format(
-                "The following policies are expiring within %d day(s):\n\n", 30)
-                + "Insuree name: Alice Pauline   |   "
-                + "Insuree phone: 94351253\nPolicy Type: Health   |   "
-                + "Premium Amount: 250.00\nCoverage Amount: 15000.00   |   Expiry Date: "
-                + formattedExpiryDate + "\n\n";
+        String expectedMessage = getExpectedExpiringPoliciesMessage(30,
+                "Alice Pauline", "94351253", "Health", "250.00", "15000.00", formattedExpiryDate);
 
         assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
     }
 
     @Test
     public void execute_customDaysSpecified_showsExpiringPolicies() {
-        Model modelWithExpiringPolicies = new ModelManager(getTypicalPrudyWithExpiringPolicies(),
-                new UserPrefs());
+        Model modelWithExpiringPolicies = new ModelManager(getTypicalPrudyWithExpiringPolicies(), new UserPrefs());
 
+        // Expiry dates for Alice Pauline and Benson Meier
         LocalDate expiringDateAlice = LocalDate.now().plusDays(25);
         String formattedExpiryDateAlice = expiringDateAlice.format(MM_DD_YYYY_FORMATTER);
 
         LocalDate expiringDateBenson = LocalDate.of(2024, 12, 23);
         String formattedExpiryDateBenson = expiringDateBenson.format(MM_DD_YYYY_FORMATTER);
 
-        // Command with 60 days time frame
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(60);
-        String expectedMessage = String.format(
-                "The following policies are expiring within %d day(s):\n\n", 60)
-                + "Insuree name: Alice Pauline   |   Insuree phone: 94351253\n"
+        String expectedMessage = String.format("The following policies are expiring within %d day(s):\n\n", 60)
+                + String.format("Insuree name: Alice Pauline   |   Insuree phone: 94351253\n"
                 + "Policy Type: Health   |   Premium Amount: 250.00\n"
-                + "Coverage Amount: 15000.00   |   Expiry Date: " + formattedExpiryDateAlice + "\n\n"
-                + "Insuree name: Benson Meier   |   Insuree phone: 98765432\n"
+                + "Coverage Amount: 15000.00   |   Expiry Date: %s\n\n", formattedExpiryDateAlice)
+                + String.format("Insuree name: Benson Meier   |   Insuree phone: 98765432\n"
                 + "Policy Type: Health   |   Premium Amount: 300.00\n"
-                + "Coverage Amount: 3000.00   |   Expiry Date: " + formattedExpiryDateBenson + "\n\n";
+                + "Coverage Amount: 3000.00   |   Expiry Date: %s\n\n", formattedExpiryDateBenson);
 
         assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
     }
@@ -108,20 +101,53 @@ public class ListExpiringPoliciesCommandTest {
         assertFalse(command1.equals(new ClearCommand()));
     }
 
+    /**
+     * Generates a message indicating that there are no expiring policies.
+     *
+     * @param days The number of days within which policies are checked for expiration.
+     * @return The expected message for no expiring policies.
+     */
+    private String getNoExpiringPoliciesMessage(int days) {
+        return String.format("No policies expiring within the next %d day(s)!", days);
+    }
+
+    /**
+     * Generates the expected success message for an expiring policy.
+     *
+     * @param days            The number of days within which policies are checked for expiration.
+     * @param insureeName     The name of the client who holds the policy.
+     * @param insureePhone    The phone number of the client.
+     * @param policyType      The type of the policy.
+     * @param premiumAmount   The premium amount of the policy.
+     * @param coverageAmount  The coverage amount of the policy.
+     * @param formattedExpiryDate The formatted expiry date of the policy.
+     * @return The expected message for an expiring policy.
+     */
+    private String getExpectedExpiringPoliciesMessage(int days, String insureeName, String insureePhone,
+                                                      String policyType, String premiumAmount,
+                                                      String coverageAmount, String formattedExpiryDate) {
+        return String.format("The following policies are expiring within %d day(s):\n\n", days)
+                + String.format("Insuree name: %s   |   Insuree phone: %s\n"
+                        + "Policy Type: %s   |   Premium Amount: %s\n"
+                        + "Coverage Amount: %s   |   Expiry Date: %s\n\n",
+                insureeName, insureePhone, policyType, premiumAmount, coverageAmount, formattedExpiryDate);
+    }
+
+    /**
+     * Retrieves a typical Prudy object with clients who have expiring policies.
+     *
+     * @return ReadOnlyPrudy with clients that have expiring policies set.
+     */
     private ReadOnlyPrudy getTypicalPrudyWithExpiringPolicies() {
-        // reset model to prevent any side effects across tests
         Model model = new ModelManager(getTypicalPrudy(), new UserPrefs());
-
         Client client = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        PolicySet policies = new PolicySet(); // Avoid mutating original policies
 
-        // add new policy that expires within 30 days
+        PolicySet policies = new PolicySet();
         Policy expiringPolicy = new HealthPolicy(new PremiumAmount(250.00),
                 new CoverageAmount(15000.00), new ExpiryDate(LocalDate.now().plusDays(25)),
                 new ClaimList());
         policies.add(expiringPolicy);
 
-        // create a new client with the updated policy set to avoid modifying the original state
         Client updatedClient = new Client(client.getName(), client.getPhone(), client.getEmail(),
                 client.getAddress(), client.getTags(), policies);
 
