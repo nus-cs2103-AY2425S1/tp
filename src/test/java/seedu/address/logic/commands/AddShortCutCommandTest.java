@@ -43,7 +43,7 @@ class AddShortCutCommandTest {
         ShortCut duplicateAliasShortCut = new ShortCut(new Alias("v"), new FullTagName("Vegetarian"));
         AddShortCutCommand command = new AddShortCutCommand(duplicateAliasShortCut);
         CommandException exception = assertThrows(CommandException.class, () -> command.execute(model));
-        assertEquals(AddShortCutCommand.MESSAGE_ALIAS_DUPLICATE_ORDER, exception.getMessage());
+        assertEquals(AddShortCutCommand.MESSAGE_DUPLICATE_ALIAS, exception.getMessage());
     }
 
     @Test
@@ -54,7 +54,7 @@ class AddShortCutCommandTest {
         ShortCut duplicateTagNameShortCut = new ShortCut(new Alias("vg"), new FullTagName("Vegan"));
         AddShortCutCommand command = new AddShortCutCommand(duplicateTagNameShortCut);
         CommandException exception = assertThrows(CommandException.class, () -> command.execute(model));
-        assertEquals(AddShortCutCommand.MESSAGE_FULLTAGNAME_DUPLICATE_ORDER, exception.getMessage());
+        assertEquals(AddShortCutCommand.MESSAGE_DUPLICATE_FULLTAGNAME, exception.getMessage());
     }
 
     @Test

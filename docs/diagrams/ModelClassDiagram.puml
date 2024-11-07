@@ -4,38 +4,40 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+package Model as ModelPackage <<Rectangle>> {
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class AddressBook
+    Class ModelManager
+    Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
-Class OrderTracker
-Class PostalCode
+    Class UniquePersonList
+    Class Person
+    Class Address
+    Class Email
+    Class Name
+    Class Phone
+    Class Tag
+    Class OrderTracker
+    Class PostalCode
 
-Class I #FFFFFF
+    Class UniqueOrderList
+    Class Order
+    Class OrderHistory
 
-Class OrderTracker
-Class Order
-Class OrderHistory
-Class UniqueOrderList
-
+    ' Shortcut Model Classes
+    Class UniqueShortCutList
+    Class ShortCut
+    Class Alias
+    Class FullTagName
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
+' Model interfaces and associations
 AddressBook .up.|> ReadOnlyAddressBook
-
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
@@ -43,6 +45,7 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
+' Person-related associations
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
@@ -53,15 +56,15 @@ Person *--> PostalCode
 Person *--> "*" Tag
 Person *--> OrderTracker
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+' Order and OrderTracker associations
 OrderHistory -up-> "0...1" Order
 OrderTracker -up-> "*" OrderHistory
 UniqueOrderList -up-> "*" Order
-
 ModelManager --> "~* filtered" Person
+
+' Shortcut-related associations
+AddressBook *--> "1" UniqueShortCutList
+UniqueShortCutList --> "*" ShortCut
+ShortCut *--> Alias
+ShortCut *--> FullTagName
 @enduml

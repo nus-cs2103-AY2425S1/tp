@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+skinparam arrowThickness 1.1
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListShortCutCommandParser" as ListShortCutCommandParser LOGIC_COLOR
+participant "l:ListShortCutCommand" as ListShortCutCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("listShortCut")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("listShortCut")
+activate AddressBookParser
+
+create ListShortCutCommandParser
+AddressBookParser -> ListShortCutCommandParser : parse("listShortCut")
+activate ListShortCutCommandParser
+
+create ListShortCutCommand
+ListShortCutCommandParser -> ListShortCutCommand : new ListShortCutCommand()
+activate ListShortCutCommand
+
+ListShortCutCommand --> ListShortCutCommandParser
+deactivate ListShortCutCommand
+
+ListShortCutCommandParser --> AddressBookParser : l
+deactivate ListShortCutCommandParser
+
+AddressBookParser --> LogicManager : l
+deactivate AddressBookParser
+
+LogicManager -> ListShortCutCommand : execute(m)
+activate ListShortCutCommand
+
+ListShortCutCommand -> Model : getShortCutList()
+activate Model
+Model --> ListShortCutCommand : shortcutList
+deactivate Model
+
+ListShortCutCommand -> ListShortCutCommand : formatShortCuts(shortcutList.toString())
+create CommandResult
+ListShortCutCommand -> CommandResult : new CommandResult(MESSAGE_SUCCESS + formattedShortcuts)
+activate CommandResult
+
+CommandResult --> ListShortCutCommand
+deactivate CommandResult
+
+ListShortCutCommand --> LogicManager : r
+deactivate ListShortCutCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

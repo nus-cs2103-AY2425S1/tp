@@ -132,28 +132,83 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores address book data, including:
+  * all `Person` objects (which are contained in a `UniquePersonList` object).
+  * A list of shortcuts, represented by `UniqueShortCutList`, which contains `ShortCut` objects. Each `ShortCut` maps an alias (represented by `Alias`) to a full tag name (represented by `FullTagName`).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+#### Person Model Components
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+* **Person**: Represents a single individual in the address book, encapsulating multiple details about the person.
+    - `Name`: Represents the name of the person. Enforces validation rules to ensure data integrity.
+    - `Phone`: Represents the phone number of the person. It includes validation to ensure that the data matches a specific format.
+    - `Email`: Represents the email address of the person, with validation for standard email formats.
+    - `Address`: Represents the residential or business address of the person.
+    - `PostalCode`: Part of the `Address` class, further specifying the person’s address.
+    - `Tag`: A list of tags associated with the person, allowing categorization of people (e.g., "friend", "colleague").
+    - `OrderTracker`: Keeps track of the orders associated with the person.
+
+#### Shortcut Model Components
+
+The shortcut functionality has been added to enhance the tagging process within the `AddressBook`. It includes the following components:
+- `UniqueShortCutList`: Manages the collection of all `ShortCut` objects within the `AddressBook`. Each shortcut in the list is unique by alias.
+- `ShortCut`: Represents a mapping between an alias (shortcut) and a full tag name.
+- `Alias`: A class representing the alias of a tag, enforcing specific validation rules.
+- `FullTagName`: A class representing the full name of the tag associated with an alias, also enforcing validation rules.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 </div>
 
 
-### Storage component
+
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component is responsible for managing data persistence, including saving and loading both the address book data and user preference settings. It stores data in JSON format and reads them back into corresponding objects.
+
+#### Structure
+
+The `Storage` component consists of the following main packages:
+1. **User Preferences Storage**
+2. **Address Book Storage**
+
+Each of these storage packages provides interfaces and implementations for reading and writing data in a structured way. The `StorageManager` serves as the central manager for handling both user preferences and address book data storage.
+
+#### Key Classes and Interfaces
+
+* **`Storage` (interface)**:
+    - The primary interface for storage functionality, extending both `AddressBookStorage` and `UserPrefsStorage`.
+    - This design allows `Storage` to be used as either an address book storage handler or a user preferences storage handler, depending on the context.
+
+* **`StorageManager` (class)**:
+    - Implements the `Storage` interface, consolidating both `AddressBookStorage` and `UserPrefsStorage` functionality.
+    - Manages both types of storage using their respective implementations (`JsonAddressBookStorage` for address book data and `JsonUserPrefsStorage` for user preferences).
+
+* **`UserPrefsStorage` (interface)**:
+    - Provides methods for reading and writing user preferences data.
+    - Implemented by `JsonUserPrefsStorage`, which reads/writes user preferences in JSON format.
+
+* **`AddressBookStorage` (interface)**:
+    - Defines methods for reading and writing the address book data.
+    - Implemented by `JsonAddressBookStorage`, which handles JSON storage for `AddressBook`.
+
+#### JSON-Based Storage for Address Book Data
+
+The Address Book data storage relies on JSON serialization with the following classes:
+- **`JsonAddressBookStorage` (class)**:
+    - Implements `AddressBookStorage` and manages the reading/writing of JSON data for the address book.
+- **`JsonSerializableAddressBook` (class)**:
+    - Provides the schema for serializing the `AddressBook` data, including `Person` and `Shortcut` objects.
+- **`JsonAdaptedShortCut`, `JsonAdaptedPerson`, and `JsonAdaptedTag` (classes)**:
+    - Adapter classes for each entity within the `AddressBook`.
+    - These classes are responsible for converting each respective model component into a format suitable for JSON serialization and deserialization.
 
 ### Common classes
 
@@ -165,6 +220,163 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Shortcut feature
+#### Implementation
+The `addShortCut` feature enables users to create shortcuts for tags in the address book. This process includes parsing the command input, checking for existing aliases or tag names in `Model` to avoid duplication, and adding the shortcut in `UniqueShortCutList` in `Model`.
+
+Given below is an example usage scenario and how the add shortcut mechanism works at each step.
+
+**Step 1: Command Execution by `LogicManager`:**
+* The `LogicManager` receives the `execute("addShortCut al/v tn/Vegan")` command. This initiates the process of adding a shortcut where `al/v` represents the alias (`v`), and `tn/Vegan` represents the full tag name (`Vegan`).
+
+**Step 2: Parsing the Command:**
+* `LogicManager` calls `parseCommand` on `AddressBookParser` with the command string to interpret the input.
+* `AddressBookParser` creates an `AddShortCutCommandParser` to handle the specifics of parsing the `addShortCut` command.
+
+**Step 3: Tokenizing and Parsing Arguments:**
+* The `AddShortCutCommandParser` tokenizes the command arguments (`al/v tn/Vegan`) to identify the alias and full tag name.
+* It uses `ArgumentTokenizer` to break down the input and `ParserUtil` to validate and extract the alias (`v`) and tag name (`Vegan`).
+
+**Step 4: Creating `AddShortCutCommand`:**
+* With the parsed alias and tag name, `AddShortCutCommandParser` creates a new `AddShortCutCommand` instance with these values and returns it to `AddressBookParser`, which then passes it back to `LogicManager`.
+
+**Step 5: Executing `AddShortCutCommand`:**
+* `LogicManager` calls the `execute` method of `AddShortCutCommand`, passing in the `Model` instance (`m`) to access and update the data.
+
+**Step 6: Checking for Existing Aliases and Tag Names:**
+* The `AddShortCutCommand` performs checks in the `Model`:
+    * **Alias Check**: It calls `Model.hasAlias("v")` to see if the alias already exists. If it does, the command throws a `CommandException` with the message `"Alias already exists"`, and the process stops.
+    * **Tag Name Check**: If the alias is unique, `AddShortCutCommand` proceeds to check if the tag name (`Vegan`) already exists in `Model` using `Model.hasTagName("Vegan")`. If the tag name exists, a `CommandException` is thrown with the message `"Tag name already exists"`.
+
+**Step 7: Adding the New Shortcut:**
+* If both checks pass (i.e., the alias and tag name are unique), `AddShortCutCommand` calls `Model.addShortCut(toAdd)` to add the new shortcut to the `Model`.
+* Following this, it calls `Tag.updateShortCutMappings(m)` to update the shortcut mappings in the `Tag` component, ensuring the new shortcut is recognized.
+
+**Step 8: Returning the Result:**
+* After successfully adding the shortcut, `AddShortCutCommand` creates a `CommandResult` with a success message, such as `"New Shortcut added: v -> Vegan"`.
+* The result is returned back to `LogicManager`, completing the `addShortCut` command execution.
+
+![AddShortCutSequenceDiagram](images/AddShortCutSequenceDiagram.png)
+---
+
+### Delete Shortcut feature
+#### Implementation
+The `delShortCut` feature allows users to delete existing shortcuts for tags in the address book. This process involves parsing the command input, checking if the specified shortcut exists in `Model`, and removing it if it does. If the shortcut does not exist, an error message is returned.
+
+Below is a step-by-step usage scenario of the `delShortCut` feature, illustrating how each component interacts in the deletion process.
+
+**Step 1: Command Execution by `LogicManager`:**
+* The `LogicManager` receives the `execute("delShortCut al/v tn/Vegan")` command. This starts the deletion process for the shortcut where `al/v` represents the alias (`v`), and `tn/Vegan` represents the full tag name (`Vegan`).
+
+**Step 2: Parsing the Command:**
+* `LogicManager` calls `parseCommand` on `AddressBookParser` with the command string to interpret the input.
+* `AddressBookParser` creates a `DelShortCutCommandParser` to handle the specifics of parsing the `delShortCut` command.
+
+**Step 3: Tokenizing and Parsing Arguments:**
+* `DelShortCutCommandParser` tokenizes the command arguments (`al/v tn/Vegan`) to extract the alias and full tag name.
+* It uses `ArgumentTokenizer` to break down the input and `ParserUtil` to parse and validate the alias (`v`) and tag name (`Vegan`).
+
+**Step 4: Creating `DelShortCutCommand`:**
+* With the parsed alias and tag name, `DelShortCutCommandParser` creates a new `DelShortCutCommand` instance with these values and returns it to `AddressBookParser`, which then passes it back to `LogicManager`.
+
+**Step 5: Executing `DelShortCutCommand`:**
+* `LogicManager` calls the `execute` method of `DelShortCutCommand`, passing in the `Model` instance (`m`) to access and update data.
+
+**Step 6: Checking for the Shortcut's Existence:**
+* Inside `execute`, `DelShortCutCommand` first checks if the shortcut exists by calling `Model.hasShortCut(toRemove)`:
+    - **Shortcut Exists**: If `hasShortCut` returns `true`, the command proceeds to delete the shortcut.
+    - **Shortcut Does Not Exist**: If `hasShortCut` returns `false`, a `CommandException` is thrown with the message `"Shortcut not found"`, and the process stops.
+
+**Step 7: Deleting the Shortcut and Updating Mappings:**
+* If the shortcut exists, `DelShortCutCommand` calls `Model.removeShortCut(toRemove)` to remove the shortcut from `Model`.
+* It then calls `Tag.updateShortCutMappings(m)` to ensure the `Tag` component reflects the updated shortcuts.
+
+**Step 8: Returning the Result:**
+* After successfully deleting the shortcut, `DelShortCutCommand` creates a `CommandResult` with the success message `"Shortcut Deleted: v"`.
+* The result is returned to `LogicManager`, completing the `delShortCut` command execution.
+
+![DelShortCutSequenceDiagram](images/DelShortCutSequenceDiagram.png)
+
+
+Additional Info
+* This implementation ensures users can delete shortcuts with feedback on success or failure. If the shortcut does not exist, the system provides a clear error message, and `Tag.updateShortCutMappings` ensures shortcut mappings remain up-to-date across components.
+* This implementation allows users to create new shortcuts while enforcing uniqueness. It provides meaningful error feedback if a conflict exists, and updates the model with new shortcuts. The `Tag.updateShortCutMappings` method ensures all components are aware of the new mapping, maintaining consistency across the application.
+
+---
+### List Shortcut feature
+#### Implementation
+The `listShortCut` feature allows users to view all existing shortcuts for tags in the address book. This process involves parsing the command input, retrieving the list of shortcuts from the `Model`, formatting the shortcuts into a readable format, and displaying them to the user.
+
+Below is a step-by-step usage scenario of the `listShortCut` feature, showing how each component interacts to achieve this functionality.
+
+**Step 1: Command Execution by `LogicManager`:**
+* The `LogicManager` receives the `execute("listShortCut")` command, initiating the process of listing all tag shortcuts in the address book.
+
+**Step 2: Parsing the Command:**
+* `LogicManager` calls `parseCommand` on `AddressBookParser` with the command string to interpret the input.
+* `AddressBookParser` creates a `ListShortCutCommandParser` to handle the specifics of parsing the `listShortCut` command.
+
+**Step 3: Creating `ListShortCutCommand`:**
+* `ListShortCutCommandParser` parses the command, confirming it matches the expected format.
+* After validating the command, it creates a new `ListShortCutCommand` instance and passes it back to `AddressBookParser`, which in turn returns it to `LogicManager`.
+
+**Step 4: Executing `ListShortCutCommand`:**
+* `LogicManager` calls the `execute` method of `ListShortCutCommand`, passing in the `Model` instance (`m`) to access stored shortcuts.
+
+**Step 5: Retrieving and Formatting Shortcuts:**
+* `ListShortCutCommand` calls `Model.getShortCutList()` to retrieve the current list of shortcuts stored in `UniqueShortCutList`.
+* It then formats the shortcuts by calling `formatShortCuts(shortcutList.toString())`, which organizes the list into a readable format for the user.
+
+**Step 6: Creating and Returning the Result:**
+* After formatting, `ListShortCutCommand` creates a `CommandResult` with the message containing the formatted list of shortcuts (e.g., `"Shortcut Mappings\n<formatted shortcuts>"`).
+* The result is returned to `LogicManager`, completing the `listShortCut` command execution.
+
+<img src="images/ListShortCutSequenceDiagram.png" width="600" />
+
+### Filter feature
+#### Implementation
+The `filter` feature enables users to filter the list of persons in the address book based on specific tag keywords. This process involves parsing the command input, generating a predicate for filtering, updating the filtered list in `Model`, and displaying the results.
+
+Below is a step-by-step usage scenario of the `filter` feature, showing how each component interacts to achieve this functionality.
+
+**Step 1: Command Execution by `LogicManager`:**
+* The `LogicManager` receives the `execute("filter v vg")` command, initiating the filtering process where `v` and `vg` represent the tag keywords for filtering persons in the address book.
+
+**Step 2: Parsing the Command:**
+* `LogicManager` calls `parseCommand` on `AddressBookParser` with the command string to interpret the input.
+* `AddressBookParser` creates a `FilterCommandParser` to handle the specifics of parsing the `filter` command.
+
+**Step 3: Creating `TagsContainsKeywordsPredicate`:**
+* `FilterCommandParser` extracts the keywords (`v` and `vg`) from the command.
+* It then creates a new `TagsContainsKeywordsPredicate` instance, passing the keywords to this predicate, which is used to filter persons based on tags matching these keywords.
+
+**Step 4: Creating `FilterCommand`:**
+* `FilterCommandParser` then creates a `FilterCommand` with the `TagsContainsKeywordsPredicate` and passes it back to `AddressBookParser`, which returns it to `LogicManager`.
+
+**Step 5: Executing `FilterCommand`:**
+* `LogicManager` calls the `execute` method of `FilterCommand`, passing in the `Model` instance (`m`) to update the list of persons based on the filter criteria.
+
+**Step 6: Updating the Filtered List:**
+* `FilterCommand` calls `Model.updateFilteredPersonList(predicate)`, which applies the `TagsContainsKeywordsPredicate` to filter persons by tags.
+* The `Model` updates the filtered list of persons and returns confirmation.
+
+**Step 7: Retrieving and Displaying the Filtered List:**
+* `FilterCommand` then calls `Model.getFilteredPersonList()` to retrieve the updated filtered list of persons matching the keywords.
+* A `CommandResult` is created with a message summarizing the number of persons listed after filtering (e.g., `"X persons listed"`).
+
+**Step 8: Returning the Result:**
+* The `CommandResult` is returned to `LogicManager`, completing the `filter` command execution.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+---
+
+This implementation allows users to filter persons by tag keywords, enabling them to quickly locate individuals associated with specific tags. The feature provides feedback on the number of matching persons, enhancing the usability of the address book.
+
+
+---
+
+This implementation enables users to quickly view all tag shortcuts, providing a well-organized list of alias-to-tag mappings. The formatting method ensures that the displayed shortcuts are easy to read, enhancing the user experience.
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -283,31 +495,32 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                               | So that I can…​                                                                                  |
-| -------- | ------------------------------------------ | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `* * *`  | manager                                    | add a customer’s detail via a one-line CLI command          | quickly add new customers without >1 step                                                         |
-| `* *`    | manager                                    | retrieve a customer’s detail via a one-line CLI command     | view their details without having to scroll through pages                                          |
-| `* * *`  | manager                                    | delete customer data in one-line CLI                        | delete customers that I want to not deliver to anymore                                             |
-| `* * *`  | manager                                    | search for customers by name                                | quickly access customer profiles during phone orders                                               |
-| `* * *`  | manager                                    | search for customers by phone number                        | quickly access customer profiles during phone orders                                               |
-| `* *`    | manager                                    | edit customer data in one-line CLI                          | update any part of user data in 1 step                                                             |
-| `* *`    | manager                                    | bulk-create multiple customers through a file               | quickly populate the system                                                                        |
-| `* *`    | manager                                    | bulk update multiple customers                              | effectively manage large sets of customers                                                         |
-| `*`      | manager                                    | archive customer data instead of a hard delete              | avoid losing this information permanently                                                          |
-| `*`      | manager                                    | unarchive a customer                                        | continue serving this customer                                                                     |
-| `*`      | manager                                    | list customers by recent order dates                        | quickly identify who is a repeat customer                                                          |
-| `*`      | manager                                    | list customers by order frequency                           | identify regular customers for reward programmes                                                   |
-| `*`      | manager                                    | export customer data as a CSV                               | provide the data to other people to use                                                            |
-| `*`      | manager                                    | convert a CSV file into a readable state file               | have a backup                                                                                      |
-| `*`      | manager                                    | export CSV data using specific criteria                     | reduce the effort needed by others to parse the data                                               |
-| `*`      | manager                                    | validate attributes when adding a customer                  | avoid entering invalid data                                                                        |
-| `*`      | manager                                    | validate attributes when updating a customer                | avoid entering invalid data                                                                        |
-| `*`      | manager                                    | categorise customers as VIP, regular, or new                | know who to target for promotions                                                                  |
-| `*`      | manager                                    | tag customers with dietary restrictions                     | personalise orders and maintain customer service                                                   |
-| `*`      | manager                                    | create a tag                                                | tag customers with a different issue                                                               |
-| `*`      | manager                                    | tag customers with multiple different tags                  | store a pattern of customers                                                                       |
-| `*`      | manager                                    | bulk tag customers with dietary restrictions                | save time                                                                                          |
-| `*`      | manager                                    | search for customers by tag                                 | easily find and manage customers for promotions                                                    |
+| Priority | As a …​                                    | I want to …​                                                         | So that I can…​                                               |
+| -------- | ------------------------------------------ |----------------------------------------------------------------------|---------------------------------------------------------------|
+| `* * *`  | manager                                    | add a customer’s detail via a one-line CLI command                   | quickly add new customers without >1 step                     |
+| `* *`    | manager                                    | retrieve a customer’s detail via a one-line CLI command              | view their details without having to scroll through pages     |
+| `* * *`  | manager                                    | delete customer data in one-line CLI                                 | delete customers that I want to not deliver to anymore        |
+| `* * *`  | manager                                    | search for customers by name                                         | quickly access customer profiles during phone orders          |
+| `* * *`  | manager                                    | search for customers by phone number                                 | quickly access customer profiles during phone orders          |
+| `* *`    | manager                                    | edit customer data in one-line CLI                                   | update any part of user data in 1 step                        |
+| `* *`    | manager                                    | bulk-create multiple customers through a file                        | quickly populate the system                                   |
+| `* *`    | manager                                    | bulk update multiple customers                                       | effectively manage large sets of customers                    |
+| `* *`    | manager                                    | assign tags to customers easily by setting abbreviations to tagnames | waste time typing out tag names that are already predetermined |
+| `*`      | manager                                    | archive customer data instead of a hard delete                       | avoid losing this information permanently                     |
+| `*`      | manager                                    | unarchive a customer                                                 | continue serving this customer                                |
+| `*`      | manager                                    | list customers by recent order dates                                 | quickly identify who is a repeat customer                     |
+| `*`      | manager                                    | list customers by order frequency                                    | identify regular customers for reward programmes              |
+| `*`      | manager                                    | export customer data as a CSV                                        | provide the data to other people to use                       |
+| `*`      | manager                                    | convert a CSV file into a readable state file                        | have a backup                                                 |
+| `*`      | manager                                    | export CSV data using specific criteria                              | reduce the effort needed by others to parse the data          |
+| `*`      | manager                                    | validate attributes when adding a customer                           | avoid entering invalid data                                   |
+| `*`      | manager                                    | validate attributes when updating a customer                         | avoid entering invalid data                                   |
+| `*`      | manager                                    | categorise customers as VIP, regular, or new                         | know who to target for promotions                             |
+| `*`      | manager                                    | tag customers with dietary restrictions                              | personalise orders and maintain customer service              |
+| `*`      | manager                                    | create a tag                                                         | tag customers with a different issue                          |
+| `*`      | manager                                    | tag customers with multiple different tags                           | store a pattern of customers                                  |
+| `*`      | manager                                    | bulk tag customers with dietary restrictions                         | save time                                                     |
+| `*`      | manager                                    | group customers by tag                                               | easily find and manage customers for promotions               |
 
 
 ### Use cases
@@ -319,13 +532,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. Manager requests to add customer
 2. AddressBook adds the person
-
     Use Case Ends
 
 **Extension**
 * 1a. Manager request/invalid/incomplete
   * 1a1. AddressBook shows an error message
   * Use Case Ends
+
+* 1a. Manager tags customer using pre-assigned shortcut
+  * 1a1. Abbreviation is mapped to pre-assigned tag name
+  * Use Case resumes at step 2
 
 **Use case: Search for a customer**
 
@@ -334,7 +550,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AddressBook shows a list of customers
 3. Manager requests to search for customer by name/phone number
 4. AddressBook shows the customer
-
    Use Case Ends 
 
 **Extension**
@@ -367,15 +582,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use Case: Creating a shortcut**
+
+**MSS**
+
+1. Manager requests to add shortcut
+2. AddressBook adds the shortcut with alias and tag name to UniqueShortcut list
+    Use Case ends
+
+**Extension**
+* 1a. Shortcut format is invalid
+    * 1a1. AddressBook shows error message
+    * Use Case ends
+* 1b. Alias or tag name in shortcut already exists in AddressBook
+  * 1b1. AddressBook shows error message
+  * Use Case ends
+
+**Use Case: Deleting a shortcut**
+
+**MSS**
+
+1. Manager requests to delete shortcut
+2. AddressBook deletes the shortcut with specified alias and tag name in UniqueShortCut list
+
+    Use Case ends
+
+**Extension**
+* 1a. Shortcut format is invalid
+    * 1a1. AddressBook shows error message
+    * Use Case ends
+* 1b. ShortCut does not exist in AddressBook
+    * 1b1. AddressBook shows error message
+    * Use Case ends
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. 	Command Response Time: All operations (add, delete, search) should respond within 1 second 
-3. Bulk Operations: Bulk actions (e.g., adding multiple customers) should handle up to 100 records and complete within 2 seconds
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Error Handling: Meaningful error messages should be provided for invalid inputs (e.g., invalid email or phone number).
-   •	Command Documentation: Provide help text for each command and clear usage instructions.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed. 
+2. Command Response Time: All operations (add, delete, search) should respond within 1 second 
+3. Bulk Operations: Bulk actions (e.g., adding multiple customers) should handle up to 100 records and complete within 2 seconds 
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Error Handling: Meaningful error messages should be provided for invalid inputs (e.g., invalid email or phone number). 
+5. Command Documentation: Provide help text for each command and clear usage instructions.
 
 ### Glossary
 
