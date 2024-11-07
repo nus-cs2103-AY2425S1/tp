@@ -6,7 +6,7 @@
 
 # Talentcy User Guide
 
-Talentcy is a **desktop app for managing job applicant contacts and monitoring their interview stages, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Talentcy can get your contact management tasks done faster than traditional GUI apps.
+Talentcy is a **desktop app for managing job applicant contacts and monitoring their interview stages, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Talentcy can get your contact management tasks done faster than traditional GUI apps.
 
 The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by CS2103 team.
 
@@ -23,7 +23,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Talentcy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -53,9 +53,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
-    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-    e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+    e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/have pHD` or as `n/John Doe`.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
@@ -218,11 +216,11 @@ Furthermore, certain edits can cause the Talentcy to behave in unexpected ways (
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------- 
 
 ## Fields
 
-<box type="info" seamless>
+<box type="info" seamless>  
 
 **Notes about each valid input field:**<br>
 
