@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <ListView fx:id="callHistoryView" VBox.vgrow="ALWAYS" />
-</VBox>
+<?import javafx.scene.layout.RowConstraints?>
+<GridPane fx:id="historyPanel" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" hgap="10">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="150" percentWidth="60.0"/>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="150" percentWidth="40.0"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS"/>
+    </rowConstraints>
+
+    <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <ListView fx:id="callHistoryView" VBox.vgrow="ALWAYS"/>
+            <!-- CallHistoryView will be added here dynamically by HistoryListPanel.java -->
+    </VBox>
+    <VBox fx:id="profileView" GridPane.columnIndex="1" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
+        <!-- ProfileView will be added here dynamically by HistoryListPanel.java -->
+    </VBox>
+</GridPane>

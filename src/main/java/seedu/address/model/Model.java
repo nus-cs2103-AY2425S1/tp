@@ -166,4 +166,9 @@ public interface Model {
      * Returns the next command text from the command history.
      */
     String getNextCommandTextFromHistory();
+
+    /**
+     * Returns the person to display.
+     */
+    Person getPersonToDisplay();
 }

@@ -69,6 +69,11 @@ public interface Logic {
     String getNextCommandTextFromHistory();
 
     /**
+     * Returns the person to display.
+     */
+    Person getPersonToDisplay();
+
+    /**
      * Returns the previous command text from the history.
      */
     String getPreviousCommandTextFromHistory();
