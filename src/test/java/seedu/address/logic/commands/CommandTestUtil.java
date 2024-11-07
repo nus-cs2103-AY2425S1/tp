@@ -28,6 +28,7 @@ import seedu.address.model.employee.NameContainsKeywordsPredicate;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
+import seedu.address.testutil.EditProjectDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -72,8 +73,8 @@ public class CommandTestUtil {
 
     public static final String VALID_PROJECT_NAME_ALPHA = "Project Alpha";
     public static final String VALID_PROJECT_NAME_BETA = "Project Beta";
-    public static final String VALID_PROJECT_ID_ALPHA = "A0276123J";
-    public static final String VALID_PROJECT_ID_BETA = "A0276123K";
+    public static final String VALID_PROJECT_ID_ALPHA = "1";
+    public static final String VALID_PROJECT_ID_BETA = "2";
     public static final String VALID_PROJECT_SKILL_THIEVERY_BETA = "thievery";
     public static final String VALID_PROJECT_SKILL_GAMBLING_BETA = "gambling";
 
@@ -83,6 +84,19 @@ public class CommandTestUtil {
     public static final String PROJECT_ID_DESC_BETA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_BETA;
     public static final String PROJECT_SKILLS_DESC_BETA = " " + PREFIX_SKILL + VALID_PROJECT_SKILL_GAMBLING_BETA
             + " " + PREFIX_SKILL + VALID_PROJECT_SKILL_THIEVERY_BETA;
+
+    public static final EditProjectCommand.EditProjectDescriptor DESC_ALPHA;
+    public static final EditProjectCommand.EditProjectDescriptor DESC_BETA;
+
+    static {
+        DESC_ALPHA = new EditProjectDescriptorBuilder()
+                .withName(VALID_PROJECT_NAME_ALPHA)
+                .build();
+        DESC_BETA = new EditProjectDescriptorBuilder()
+                .withName(VALID_PROJECT_NAME_BETA)
+                .withSkills(VALID_PROJECT_SKILL_THIEVERY_BETA, VALID_PROJECT_SKILL_GAMBLING_BETA)
+                .build();
+    }
 
     public static final String INVALID_PROJECT_NAME_DESC = " " + PREFIX_PROJECT_NAME + "James&";
     // '&' not allowed in names

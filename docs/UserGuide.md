@@ -84,17 +84,17 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `listproject`: Lists all projects.
 
-   - `addproject pid/A03 pn/Project Charlie`: Adds a project named `Project Charlie`.
+   - `addproject pid/3 pn/Project Charlie`: Adds a project named `Project Charlie`.
 
    - `deleteproject 3`: Deletes the 3rd project in the displayed project list.
 
    - `clearproject` : Deletes all projects.
 
-   - `assign aid/1 pid/A03 id/1` : Assigns `John Doe` to `Project Charlie`.
+   - `assign aid/1 pid/3 id/1` : Assigns `John Doe` to `Project Charlie`.
 
    - `listassignments` : Lists all assignments.
 
-   - `unassign aid/1 ` : Undoes the assignment with Assignment ID 1.
+   - `unassign aid/1` : Undoes the assignment with Assignment ID 1.
 
    - `exit` : Exits the app.
 
@@ -143,7 +143,12 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
-- Employee Id must be: Numeric, no spaces, unique
+
+- Employee Id must be: [Numeric](#numeric), no spaces, unique amongst employees
+
+  > [!NOTE]
+  > Employee IDs are compared numerically. `0001` is treated the same as `1`.
+
 - Name must be: [Alphanumeric](#alphanumeric), spaces allowed
 - Phone Number must be: [Numeric](#numeric), no spaces, at least 3 digits long
 - Email must be: A valid email address
@@ -291,13 +296,18 @@ Expected output:
 **Adds a new project** to HRConnect.
 
 Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
-- Project Id must be: [Alphanumeric](#alphanumeric), spaces allowed
+
+- Project Id must be: [Numeric](#numeric), no spaces, unique amongst projects
+
+  > [!NOTE]
+  > Project IDs are compared numerically. `0001` is treated the same as `1`.
+
 - Project Name must be: [Alphanumeric](#alphanumeric), spaces allowed
 
 Examples:
 
-- `addproject pid/E0276 pn/Project Alpha`
-- `addproject pid/WW2036 pn/Website UI Overhaul`
+- `addproject pid/1 pn/Project Alpha`
+- `addproject pid/2 pn/Website UI Overhaul`
 
 Expected output:
 - System message noting success and id \+ name of project added
@@ -316,6 +326,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
+
 ### Listing all members of a project : `listprojectmembers`
 
 Shows a list of **all project members**.
@@ -327,6 +338,32 @@ Format: `listprojectmembers pn/PROJECT_NAME`
 Expected output:
 - System message noting success, including number of members listed
 - All members shown in the displayed member list
+
+[Return to Top](#table-of-contents)
+
+
+### Editing a project : `editproject`
+
+Edits an existing project in the address book.
+
+Format: `editproject INDEX [n/NAME] [s/SKILL]…​`
+
+- Edits the project at the specified `INDEX`. The index refers to the index number shown in the displayed project list. The index **must be a positive integer** 1, 2, 3, …​
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- When editing skills, the existing skills of the project will be removed i.e adding of skills is not cumulative.
+- You can remove all the project’s skills by typing `s/` without
+  specifying any skills after it.
+- You cannot edit an project's id. More specifically, you are not allowed to specify `id/PROJECTID` in the `edit` command.
+
+Examples:
+
+- `editproject 1 pn/Aplha ` Edits the project name to be `Aphla`.
+- `editproject 2 s/Cybersecurity` Edits the skill of the 2nd project to be `Cybersecurity`.
+
+Expected output:
+
+- System message success and details of project edited
 
 [Return to Top](#table-of-contents)
 
@@ -365,7 +402,7 @@ Format: `deleteproject INDEX`
 
 Examples:
 
-- `listproject` followed by `deleteproject 2` deletes the **2nd project shown**.
+- `listprojects` followed by `deleteproject 2` deletes the **2nd project shown**.
 - `findproject Alpha` followed by `deleteproject 1` deletes the **1st project in the results** of the `findproject` command.
 
 Expected output:
@@ -394,12 +431,17 @@ Expected output:
 
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
+- Assignment Id must be: [Numeric](#numeric), no spaces, unique amongst assignments
+
+  > [!NOTE]
+  > Assignment IDs are compared numerically. `0001` is treated the same as `1`.
+
 - The `PROJECT_ID` must belong to an existing project.
 - The `EMPLOYEE_ID` must belong to an existing person.
 
 Examples:
 
-- `assign aid/1 pid/A02 id/1`
+- `assign aid/1 pid/1 id/1`
 
 Expected output:
 
@@ -455,11 +497,13 @@ HRConnect data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-HRConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HRConnect data is saved automatically as a JSON file `[JAR file location]/data/hrconnect.json`.  
+Advanced users are welcome to update data directly by editing this data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
 [Return to Top](#table-of-contents)
@@ -472,14 +516,14 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 **A**: Download the installer (.exe or .msi) from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows). Click on the downloaded file and follow the instructions to install.
 
 **Q**: Where is my data stored?<br>
-**A**: It is stored in `addressbook.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
+**A**: It is stored in `hrconnect.json`. This is located in the `data` subfolder, in the folder you put `HRConnect.jar` in.
 ![rootFileStructure.png](images/rootFileStructure.png)
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HRConnect home folder.
 
-**Q**: I don't see this data file anywhere.<br>
-**A**: You may need to run the app for the first time to generate these files.
+**Q**: I don't see the data files anywhere.<br>
+**A**: You may need to run the app for the first time and run any command (such as `exit`) to generate these files.
 
 [Return to Top](#table-of-contents)
 
@@ -498,23 +542,24 @@ Furthermore, certain edits can cause the HRConnect to behave in unexpected ways 
 
 | Action                      | Format, Examples                                                                                                                                                                                                         |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **- Person Commands -**     |                                                                                                                                                                                                                          |
-| **Add Person**              | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
-| **Clear Persons**           | `clear`                                                                                                                                                                                                                  |
-| **Delete Person**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
-| **Edit Person**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
-| **Filter Persons**          | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
-| **Find Persons**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
-| **List Persons**            | `list`                                                                                                                                                                                                                   |
+| **- Employee Commands -**   |                                                                                                                                                                                                                          |
+| **Add Employee**            | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
+| **Clear Employees**         | `clear`                                                                                                                                                                                                                  |
+| **Delete Employee**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
+| **Edit Employee**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
+| **Filter Employees**        | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
+| **Find Employees**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
+| **List Employees**          | `listemployees`                                                                                                                                                                                                          |
 | **- Project Commands -**    |                                                                                                                                                                                                                          |
-| **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/E0276 pn/Project Alpha`                                                                                                                            |
+| **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                                |
 | **Clear Projects**          | `clearproject`                                                                                                                                                                                                           |
 | **Delete Project**          | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
+| **Edit Project**            | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity`                                                                                                                       |
 | **Find Projects**           | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
 | **List Projects**           | `listproject`                                                                                                                                                                                                            |
 | **- Assignment Commands -** |                                                                                                                                                                                                                          |
-| **Add Assignment**          | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/A02 id/1`                                                                                                                           |
-| **Delete Assignment**       | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                                  |
+| **Add Assignment**          | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/1 id/1`                                                                                                                             |
+| **Delete Assignment**       | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                  |
 | **List Assignments**        | `listassignments`                                                                                                                                                                                                        |
 | **Other Commands**          |                                                                                                                                                                                                                          |
 | **Help**                    | `help`                                                                                                                                                                                                                   |

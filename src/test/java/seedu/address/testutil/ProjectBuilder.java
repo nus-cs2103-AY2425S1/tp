@@ -15,7 +15,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class ProjectBuilder {
 
     public static final String DEFAULT_NAME = "Project Alpha";
-    public static final String DEFAULT_ID = "A0276123J";
+    public static final String DEFAULT_ID = "1";
 
     private ProjectName projectName;
     private ProjectId projectId;

@@ -260,6 +260,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given assignment {@code target} in the list with
+     * {@code editedAssignment}. {@code assignment} must exist in the address book.
+     * The assignment identity of {@code editedAssignment} must not be the same as
+     * another existing assignment in the address book.
+     */
+    public void setAssignment(Assignment target, Assignment editedAssignment) {
+        requireNonNull(editedAssignment);
+        assignments.setAssignment(target, editedAssignment);
+    }
+
+    /**
      * Removes {@code assignment} from this {@code AddressBook}.
      * {@code assignment} must exist in the address book.
      */
