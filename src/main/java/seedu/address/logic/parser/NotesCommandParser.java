@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIEW;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.NotesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -47,24 +48,24 @@ public class NotesCommandParser implements Parser<NotesCommand> {
                         NotesCommand.MESSAGE_USAGE));
             }
 
-            Name name;
+            String identifier;
             if (isPrefixPresent(argMultimap, PREFIX_VIEW)) {
-                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_VIEW).get());
-                return new NotesCommand(name, NotesCommand.Mode.VIEW);
+                identifier = argMultimap.getValue(PREFIX_VIEW).get();
+                return createCommand(identifier, NotesCommand.Mode.VIEW, null);
             }
 
             if (isPrefixPresent(argMultimap, PREFIX_DELETE)) {
-                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DELETE).get());
-                return new NotesCommand(name, NotesCommand.Mode.DELETE);
+                identifier = argMultimap.getValue(PREFIX_DELETE).get();
+                return createCommand(identifier, NotesCommand.Mode.DELETE, null);
             }
 
             if (isPrefixPresent(argMultimap, PREFIX_EDIT)) {
-                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_EDIT).get());
-                return new NotesCommand(name, NotesCommand.Mode.EDIT);
+                identifier = argMultimap.getValue(PREFIX_EDIT).get();
+                return createCommand(identifier, NotesCommand.Mode.EDIT, null);
             }
 
             // Must be add command at this point
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_ADD).get());
+            identifier = argMultimap.getValue(PREFIX_ADD).get();
 
             if (!isPrefixPresent(argMultimap, PREFIX_NOTES)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -72,11 +73,25 @@ public class NotesCommandParser implements Parser<NotesCommand> {
             }
 
             Notes notes = ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).get());
-            return new NotesCommand(name, NotesCommand.Mode.ADD, notes);
+            return createCommand(identifier, NotesCommand.Mode.ADD, notes);
 
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, NotesCommand.MESSAGE_USAGE), pe);
+        }
+    }
+
+    /**
+     * Creates a NotesCommand based on the identifier type (index or name).
+     */
+    private NotesCommand createCommand(String identifier, NotesCommand.Mode mode, Notes notes) throws ParseException {
+        try {
+            Index index = ParserUtil.parseIndex(identifier);
+            return notes == null ? new NotesCommand(index, mode) : new NotesCommand(index, mode, notes);
+        } catch (ParseException pe) {
+            // If not an index, treat as name
+            Name name = ParserUtil.parseName(identifier);
+            return notes == null ? new NotesCommand(name, mode) : new NotesCommand(name, mode, notes);
         }
     }
 
