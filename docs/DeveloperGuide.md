@@ -2,6 +2,9 @@
 layout: page
 title: Developer Guide
 ---
+# NomNomNotifier - Developer Guide
+
+---
 * Table of Contents:
   * Acknowledgements
   * Setting Up, getting started
@@ -24,6 +27,7 @@ title: Developer Guide
 * Below are the Java libraries used in this project:
   * JavaFX for UI
   * JUnit5 and TestFX for Testing
+  * Jackson for 
   
 --------------------------------------------------------------------------------------------------------------------
 
