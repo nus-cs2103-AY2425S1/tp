@@ -26,10 +26,9 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
             + ": Exports person data to a CSV file.\n"
-            + "Parameters: FILE_PATH"
-            + "[" + PREFIX_PATH + "FILE_PATH]\n"
+            + "Parameters: " + PREFIX_PATH + "FILE_PATH\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv\n"
-            + "Example: " + COMMAND_WORD_SHORT_FORM + " " + PREFIX_PATH + "data/persons.csv";
+            + "Example: " + COMMAND_WORD_SHORT_FORM + " " + PREFIX_PATH.getShortPrefix() + "data/persons.csv";
 
     private final String filePath;
 

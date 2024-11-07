@@ -17,6 +17,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Telegram;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleAssignmentsUtil;
 
 /**
@@ -234,6 +237,112 @@ public class ImportCommandTest {
         try {
             ImportCommand command = new ImportCommand(tempFile.toString());
             String expectedMsg = MESSAGE_READING_ERROR + MESSAGE_CONSTRAINTS;
+            assertCommandFailure(command, model, expectedMsg);
+        } finally {
+            Files.deleteIfExists(tempFile);
+        }
+    }
+
+    /**
+     * Tests that the ImportCommand fails when given a CSV file with an invalid email entry.
+     *
+     * @throws IOException if an error occurs while handling the temporary file.
+     */
+    @Test
+    public void invalidEmailExecution_fail() throws IOException {
+        // Create a temporary CSV file with invalid name data
+        Path tempFile = Files.createTempFile("invalidPersonEmail", ".csv");
+        String data = "\"Name\",\"Email\",\"Telegram\",\"Tags\",\"Github\",\"Assignments\",\"WeeksPresent\"\n"
+            + "\"valid\",\"hellokitty\",\"@hj2909\",\"\",\"lfgcode\",\"Ex02 | 8.0,Ex01 | 1.0\",\"1,2\"";
+        Files.writeString(tempFile, data); // Write content into file
+        try {
+            ImportCommand command = new ImportCommand(tempFile.toString());
+            String expectedMsg = MESSAGE_READING_ERROR + Email.MESSAGE_CONSTRAINTS;
+            assertCommandFailure(command, model, expectedMsg);
+        } finally {
+            Files.deleteIfExists(tempFile);
+        }
+    }
+
+    /**
+     * Tests that the ImportCommand fails when given a CSV file with an invalid telegram entry.
+     *
+     * @throws IOException if an error occurs while handling the temporary file.
+     */
+    @Test
+    public void invalidTelegramExecution_fail() throws IOException {
+        // Create a temporary CSV file with invalid name data
+        Path tempFile = Files.createTempFile("invalidPersonEmail", ".csv");
+        String data = "\"Name\",\"Email\",\"Telegram\",\"Tags\",\"Github\",\"Assignments\",\"WeeksPresent\"\n"
+            + "\"valid\",\"hellokitty@gmail.com\",\"hj2909\",\"\",\"lfgcode\",\"Ex02 | 8.0,Ex01 | 1.0\",\"1,2\"";
+        Files.writeString(tempFile, data); // Write content into file
+        try {
+            ImportCommand command = new ImportCommand(tempFile.toString());
+            String expectedMsg = MESSAGE_READING_ERROR + Telegram.MESSAGE_CONSTRAINTS;
+            assertCommandFailure(command, model, expectedMsg);
+        } finally {
+            Files.deleteIfExists(tempFile);
+        }
+    }
+
+    /**
+     * Tests that the ImportCommand fails when given a CSV file with an invalid tag entry.
+     *
+     * @throws IOException if an error occurs while handling the temporary file.
+     */
+    @Test
+    public void invalidTagExecution_fail() throws IOException {
+        // Create a temporary CSV file with invalid name data
+        Path tempFile = Files.createTempFile("invalidPersonEmail", ".csv");
+        String data = "\"Name\",\"Email\",\"Telegram\",\"Tags\",\"Github\",\"Assignments\",\"WeeksPresent\"\n"
+            + "\"valid\",\"kitty@gmail.com\",\"@hj2909\",\"[friend\",\"lfgcode\",\"Ex02 | 8.0,Ex01 | 1.0\",\"1,2\"";
+        Files.writeString(tempFile, data); // Write content into file
+        try {
+            ImportCommand command = new ImportCommand(tempFile.toString());
+            String expectedMsg = MESSAGE_READING_ERROR + Tag.MESSAGE_CONSTRAINTS;
+            assertCommandFailure(command, model, expectedMsg);
+        } finally {
+            Files.deleteIfExists(tempFile);
+        }
+    }
+
+    /**
+     * Tests that the ImportCommand fails when given a CSV file with an invalid assignment name entry.
+     *
+     * @throws IOException if an error occurs while handling the temporary file.
+     */
+    @Test
+    public void invalidAssignmentNameExecution_fail() throws IOException {
+        // Create a temporary CSV file with invalid name data
+        Path tempFile = Files.createTempFile("invalidPersonEmail", ".csv");
+        String data = "\"Name\",\"Email\",\"Telegram\",\"Tags\",\"Github\",\"Assignments\",\"WeeksPresent\"\n"
+            + "\"valid\",\"hellokitty@gmail.com\",\"@hj2\",\"[friend]\",\"lfgcode\",\"Ex1000|8.0,Ex01|1.0\",\"1,2\"";
+        Files.writeString(tempFile, data); // Write content into file
+        try {
+            ImportCommand command = new ImportCommand(tempFile.toString());
+            String expectedMsg = MESSAGE_READING_ERROR + "Invalid assignment name: Ex1000";
+            assertCommandFailure(command, model, expectedMsg);
+        } finally {
+            Files.deleteIfExists(tempFile);
+        }
+    }
+
+
+    /**
+     * Tests that the ImportCommand fails when given a CSV file with an invalid assignment score entry.
+     *
+     * @throws IOException if an error occurs while handling the temporary file.
+     */
+    @Test
+    public void invalidAssignmentScoreExecution_fail() throws IOException {
+        // Create a temporary CSV file with invalid name data
+        Path tempFile = Files.createTempFile("invalidPersonEmail", ".csv");
+        String data = "\"Name\",\"Email\",\"Telegram\",\"Tags\",\"Github\",\"Assignments\",\"WeeksPresent\"\n"
+            + "\"valid\",\"kitty@gmail.com\",\"@hj2909\",\"[friend]\",\"lfgcode\",\"Ex01 | -8.0,Ex01 | 1.0\",\"1,2\"";
+        Files.writeString(tempFile, data); // Write content into file
+        try {
+            ImportCommand command = new ImportCommand(tempFile.toString());
+            String expectedMsg = MESSAGE_READING_ERROR + "Score must be between 0.0 and 10.0";
             assertCommandFailure(command, model, expectedMsg);
         } finally {
             Files.deleteIfExists(tempFile);

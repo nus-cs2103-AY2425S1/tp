@@ -328,11 +328,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case: UC05 - Update contacts**
+**Use case: UC05 - Edit contacts**
 
 **MSS**
 
-1. TA chooses to update a contact’s details.
+1. TA chooses to edit a contact’s details.
 2. KonTActs requests the contact’s identifier.
 3. TA enters the identifier of the contact to update.
 4. KonTActs displays the current details and requests the changes.
@@ -447,7 +447,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Precondition**
 
-1. User have permission to write to the provided path
+1. User must have permission to write to the provided path.
+2. User must have enough storage to store the output file.
 
 **MSS**
 
@@ -507,11 +508,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. KonTActs detects an error in the entered data.
 
-  - 3a1. KonTActs requests for the correct data.
+  - 3a1. KonTActs displays error message.
   - 3a2. User enters new data.
   - Steps 3a1-3a2 are repeated until the data entered are correct.
 
-    Use case resumes from step 3.
+    Use case resumes from step 4.
 
     <br>
 
@@ -544,6 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. The file contains valid data of at least 1 person
 3. The header of the file is in a specific sequence 
 ("Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent")
+4. Current user have permissions to access and read the file
 
 **MSS**
 
@@ -571,6 +573,7 @@ Duplicate names)
     - Steps 2b1 - 2b2 are repeated until KonTActs is able to import contacts from the file.
 
       Use case resumes from step 3.
+  
 - \*a. At any time, User chooses to cancel the import.
 
   - \*a1. KonTActs stops the import.
