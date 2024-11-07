@@ -26,7 +26,7 @@ This section explains the different types of annotated boxes used in the user gu
 {: .alert .alert-info}
 > :information_source: **Note:**
 >
-> This box contains additional information or tips that can help you use EduConnect more effectively.
+> This box contains additional information that can help you use EduConnect more effectively.
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
@@ -223,14 +223,15 @@ Examples:
 
 ### Sorting the results : `sort`
 
-Sorts the results by name / subject / classes.
+Sorts the results by name / subject / classes / attendance.
 
 Format: `sort [ATTRIBUTE]`
 
 * Sorts the results based on the specified `ATTRIBUTE`. The available attributes are `name`, `subject`, `class`.
-* `sort name` sorts the results by name in alphabetical order
-* `sort subject` sorts the results by the subjects they take in alphabetical order
-* `sort class` sorts the results by class in alphanumerical order.
+* `sort name` sorts the results by name in alphabetical order.
+* `sort subject` sorts the results by the subjects they take in alphabetical order. It will only consider the first subject in the list for sorting.
+* `sort class` sorts the results by class in alphanumerical order. It will only consider the first class in the list for sorting.
+* `sort attendance` sorts the results by the number of days attended by Students in ascending order. It will put Teachers at the end of the list.
 * The command applies to the current list of displayed results. 
 * Sorting is case-insensitive.
 
@@ -296,22 +297,25 @@ Examples:
 
 ### Marking attendance of students : `mark`
 
-Increments the attendance of all students in EduConnect by 1.
+Increases the attendance of all students in EduConnect by 1.
 
 Format: `mark`
 
 ### Unmarking attendance of a particular student : `unmark`
 
-Decrements the attendance of a particular student in EduConnect by 1.
+Reduces the attendance of one or more students in EduConnect by 1.
 
 Format: `unmark INDEX`
 
+* You can unmark attendance for one or more students by specifying their INDEX(es) in the list.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The person corresponding to the index must be a student.
+* The student must have attended at least one day to be unmarked.
 
 Example:
-* `unmark 1` decrements the attendance of the student at index 1 in EduConnect by 1.
+* `unmark 2` educes the attendance of the student at index 2 in EduConnect by 1.
+* `unmark 1 2 3` reduces the attendance of the 1st, 2nd, and 3rd students in the list by 1.
 
 ### Reset attendance of all students : `resetAttendance`
 
