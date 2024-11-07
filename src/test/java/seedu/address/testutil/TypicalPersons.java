@@ -30,6 +30,7 @@ import static seedu.address.testutil.TypicalTasks.TODO_TASK;
 import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.BOB_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.CARLA_WEDDING;
+import static seedu.address.testutil.TypicalWeddings.CLIVE_WEDDING;
 import static seedu.address.testutil.TypicalWeddings.WEDDING_TWO;
 
 import java.util.ArrayList;
@@ -99,6 +100,7 @@ public class TypicalPersons {
         ab.addWedding(BOB_WEDDING);
         ab.addWedding(WEDDING_TWO);
         ab.addWedding(CARLA_WEDDING);
+        ab.addWedding(CLIVE_WEDDING);
         ab.addTask(TODO_TASK);
         ab.addTask(DEADLINE_TASK);
 
@@ -106,6 +108,14 @@ public class TypicalPersons {
             ab.addPerson(person);
             for (Wedding wedding : person.getWeddings()) {
                 Wedding weddingInAb = ab.getWedding(wedding);
+                weddingInAb.addToGuestList(person);
+                person.addWedding(weddingInAb);
+            }
+        }
+
+        for (Wedding wedding : ab.getWeddingList()) {
+            for (Person person : wedding.getGuestList()) {
+                person.addWedding(wedding);
             }
         }
         return ab;

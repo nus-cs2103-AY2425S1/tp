@@ -63,7 +63,8 @@ public class DeleteWeddingCommandTest {
                 Messages.format(weddingToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteWedding(weddingToDelete);
+        Wedding modelWedding = expectedModel.getWedding(weddingToDelete);
+        expectedModel.deleteWedding(modelWedding);
 
         DeleteWeddingCommand expectedDeleteWeddingCommand = new DeleteWeddingCommand(weddingToDelete);
 

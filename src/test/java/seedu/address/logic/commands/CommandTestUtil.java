@@ -71,6 +71,7 @@ public class CommandTestUtil {
     public static final String VALID_WEDDING_AMY = VALID_NAME_AMY.split(" ")[0] + "'s Wedding";
     public static final String VALID_WEDDING_BOB = VALID_NAME_BOB.split(" ")[0] + "'s Wedding";
     public static final String VALID_WEDDING_CLIVE = VALID_NAME_CLIVE.split(" ")[0] + "'s Wedding";
+    public static final String VALID_WEDDING_DOMINIC = VALID_NAME_DOMINIC.split(" ")[0] + "'s Wedding";
     public static final String VALID_TASK_TODO = "todo: Different Task";
 
 

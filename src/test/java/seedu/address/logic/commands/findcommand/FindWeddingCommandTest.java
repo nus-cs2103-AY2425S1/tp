@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
 import static seedu.address.logic.commands.findcommand.FindWeddingCommand.MESSAGE_FIND_WEDDING_PERSON_SUCCESS;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -68,7 +69,7 @@ public class FindWeddingCommandTest {
         FindWeddingCommand command = new FindWeddingCommand(predicate);
         expectedModel.updateFilteredPersonListByWedding(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, ELLE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, ELLE), model.getFilteredPersonList());
     }
 
     @Test
