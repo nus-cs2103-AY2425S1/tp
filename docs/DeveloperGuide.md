@@ -108,7 +108,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <br>
 
-#### **General Interaction**
+#### General Interaction
 
 The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
 
@@ -311,7 +311,7 @@ predicates to create a `FindCommand` object.
 
 ---
 
-### **Enroll and Unenroll feature**
+### Enroll and Unenroll feature
 
 The implementation of the Enroll and Unenroll feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Enroll feature when the user inputs `enroll 1 tut/math` will be shown below.
 
@@ -346,7 +346,7 @@ The implementation of the Unenroll feature is similar to that of the example giv
 
 <br>
 
-#### **Participation Class**
+#### Participation Class
 `Participation` is an **association** class used to represent the relationship between a student and a tutorial, as well as his/her attendance, which is stored in a List. Below is a class diagram denoting such a relationship.
 
 <img src="images/ParticipationAsAssociationDiagram.png" width="400" />
@@ -355,7 +355,7 @@ When storing data, each `Participation` object is stored separately from `Studen
 
 ---
 
-### **List and Clear feature**  
+### List and Clear feature
 
 The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
 
@@ -380,7 +380,7 @@ The implementation of the Clear feature is similar to that of the example given 
 
 ---
 
-### **Help and Exit feature**
+### Help and Exit feature
 
 The implementation of the Help and Exit feature **deviates** from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. In addition, they will not be accessing the `Model` Component, since these two features are not updating or retrieving data. As these two commands are similar to each other, so only the sequence diagram for **Help** feature when the user inputs `help` will be shown below.
 
