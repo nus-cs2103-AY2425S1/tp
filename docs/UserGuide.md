@@ -145,9 +145,9 @@ Symbol     | Parameter     | Constraints
 
 ### Notes Parameters
 
-Symbol     | Parameter        | Constraints
------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**`pn`**| `NOTES`          |- Allows any characters and has a character limit or 80.<br/>
+Symbol     | Parameter    | Constraints
+-----------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**`pn`**| `NOTES`      |- Must contain at least 1 alphanumeric character and has a character limit of 80.
 
 ### Appointment Parameters
 
