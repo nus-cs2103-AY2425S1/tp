@@ -359,9 +359,10 @@ Adds additional specified tag(s) to the specified contact without overwriting ex
 
 Format: `tag INDEX t/TAG [t/MORE_TAG]`
 
-- Add specified `TAG` or more `TAG` to the contact at specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+
+ * Add specified `TAG` (and `MORE_TAG` if present) to the contact at specified `INDEX`
+ * The index refers to the index number shown in the displayed person list.
+ * The index **must be a positive integer** 1, 2, 3, …​
 
 <div markdown="block" class="alert alert-info">
 
@@ -402,15 +403,20 @@ Tag labelled with "paid" will have green background to indicate student has paid
 
 Deletes the specified tag(s) from the specified contact.
 
-Format: `deletetag INDEX t/TAG [t/MORE_TAG]`
+Format 1: `deletetag INDEX t/TAG [t/MORE_TAG]`
 
-- Deletes specified `TAG` or more `TAG` from the contact at the specified `INDEX` provided the tag already exists.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
+* Deletes specified `TAG` (and `MORE_TAG` if present) from the contact at the specified `INDEX` provided the tag already exists.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+Format 2: `deletetag ALL t/TAG [t/MORE_TAG]`
 
-- `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
+* Deletes specified `TAG` (and `MORE_TAG` if present) from all contacts in the list provided the tag already exists.
+
+
+* `deletetag 1 t/senior t/Y2` deletes the `senior` and `Y2` tags from the first contact in the list
+* `deletetag all t/senior t/Y2` deletes the `senior` and `Y2` tags from all contacts in the list
+
 
 ---
 
@@ -525,7 +531,7 @@ _Details coming soon ..._
 | **Track**         | `track CATEGORY`                                                                                   | `track student`                                                                                                    |
 | **View**          | `view INDEX`                                                                                       | `view 1`                                                                                                           |
 | **Add tag**       | `tag INDEX t/TAG [t/MORE_TAG]`                                                                     | `tag 1 t/year2 t/computerScience`                                                                                  |
-| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                               | `deletetag 1 t/senior t/Y2`                                                                                        |
+| **Delete tag**    | `deletetag INDEX t/TAG [t/MORE_TAG]`                                                               | `deletetag 1 t/senior t/Y2` or `deletetag all t/senior t/Y2`                                                       |
 | **Import CSV**    | `import /path/to/data/File.csv`                                                                    | `import /home/user/data/hackers_2022.csv`                                                                          |
 | **Export CSV**    | `export /path/to/data/File.csv`                                                                    | `export /home/user/data/output_data.csv`                                                                           |
 | **Exit**          | `exit`                                                                                             | `exit`                                                                                                             |

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NON_POSITIVE_INDEX;
+import static seedu.address.logic.commands.DeleteTagCommand.INVALID_INDEX_OR_STRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -17,6 +17,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new DeleteTagCommand object
  */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTagCommand
      * and returns a DeleteTagCommand object for execution.
@@ -35,16 +36,22 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
-        } catch (CommandException | ParseException e) {
-            throw new ParseException(String.format(MESSAGE_NON_POSITIVE_INDEX, DeleteTagCommand.MESSAGE_USAGE), e);
+        if (argumentMultimap.getPreamble().equalsIgnoreCase("all")) {
+            Set<Tag> tagsToDelete = parseTagsToDelete(argumentMultimap.getAllValues(PREFIX_TAG));
+            return new DeleteTagCommand("all", tagsToDelete);
+        } else {
+
+            Index index;
+            try {
+                index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
+            } catch (CommandException | ParseException e) {
+                throw new ParseException(String.format(INVALID_INDEX_OR_STRING));
+            }
+            Set<Tag> tagsToDelete = parseTagsToDelete(argumentMultimap.getAllValues(PREFIX_TAG));
+
+
+            return new DeleteTagCommand(index, tagsToDelete);
         }
-        Set<Tag> tagsToDelete = parseTagsToDelete(argumentMultimap.getAllValues(PREFIX_TAG));
-
-
-        return new DeleteTagCommand(index, tagsToDelete);
     }
 
     /**
