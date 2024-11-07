@@ -12,6 +12,7 @@ title: Developer Guide
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
+* The use cases within the Developer Guide and the commands in User Guide were formatted into GFMD style using GPT-4o. The content itself was self-written by the team.
 
 --------------------------------------------------------------------------------------------------------------------
 
