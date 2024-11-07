@@ -39,7 +39,9 @@
 //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
 //        EditCommand editCommand = new EditCommand(ID_FIRST_PERSON, descriptor);
 //
-//        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+//        String expectedMessage = String.format(
+//                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
+//        );
 //
 //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 //        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
@@ -52,7 +54,9 @@
 //        EditCommand editCommand = new EditCommand(ID_FIRST_PERSON, new EditPersonDescriptor());
 //        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
 //
-//        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+//        String expectedMessage = String.format(
+//          EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
+//        );
 //
 //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 //
@@ -68,7 +72,9 @@
 //        EditCommand editCommand = new EditCommand(ID_FIRST_PERSON,
 //                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 //
-//        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+//        String expectedMessage = String.format(
+//          EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
+//        );
 //
 //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 //        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
