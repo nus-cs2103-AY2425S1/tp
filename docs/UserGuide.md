@@ -193,11 +193,11 @@ Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) suppor
             - User must re-enter the command using the index.
         - **No Matches**:
             - Displays "No matches found" message.
-- **Examples**:
-  ![Multiple matches example](images/multiple_match.png)
+- **Examples**:<br>
+  ![Multiple matches example](images/multiple_match.png)<br>
   *When multiple matches are found, the system displays a list with indices*
 
-  ![Multiple matches resolution](images/multiple_match_solution.png)
+  ![Multiple matches resolution](images/multiple_match_solution.png) <br>
   *User selects a specific index to complete the command*
 
 ---
@@ -342,7 +342,7 @@ Displays detailed information about a specified person.
 - **Examples**:
     - `view Mike` displays details for `Mike`.
     - `view Alex Yeo` displays details for `Alex Yeo`.
-![View multiple weddings](images/view_mulitple_weddings_unfiltered.png)
+![View multiple weddings](images/view_mulitple_weddings_unfiltered.png)<br>
 *Viewing a contact with mulitple matches shows their details and weddings remain unfiltered*
 
 ---
@@ -403,7 +403,7 @@ Filters and lists persons whose fields match the specified keywords.
     - `filter p/91234567` returns the person with phone number `91234567`.
     - `filter n/John r/vendor` returns persons who have name `John` or role `vendor`.
     - `filter e/gmail a/Jurong` returns persons whose email contains "gmail" or address contains "Jurong".
-      ![Multi-field filter results](images/multi_filter_weddings_unfiltered.png)
+      ![Multi-field filter results](images/multi_filter_weddings_unfiltered.png)<br>
       *`filter n/David r/florist e/mike` Example of filtering results showing matched persons, weddings remain unfiltered*
 
 ---
@@ -426,8 +426,8 @@ Adds a new wedding to the address book.
     - `addw n/Beach Wedding c/1 d/2024-12-31 v/Sentosa Beach`
         - Adds a wedding named "Beach Wedding" for the client at index 1.
     - `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
-        - Adds a wedding for "John Doe" if there's only one match.
-![Adding a wedding example](images/addw_example.png)
+        - Adds a wedding for "John Doe" if there's only one match.<br>
+![Adding a wedding example](images/addw_example.png)<br>
 *Example of successfully adding a new wedding with all fields specified*
 
 ---
@@ -509,13 +509,13 @@ Assigns a role and/or weddings to a person.
     - `assign 1 w/1 w/2`
         - Assigns the person at index 1 to weddings at indices 1 and 2.
     -  `assign John Doe r/photographer w/2`
-        - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.
-          **Error Examples**:
-![Assignment error example](images/error_example_assign.png)
+        - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.<br>
+          **Error Examples**:<br>
+![Assignment error example](images/error_example_assign.png)<br>
 *Example of error when trying to assign a client to their own wedding*
 
-**Success Examples**:
-![Successful multiple assignment](images/success_multi_match.png)
+**Success Example**:<br>
+![Successful multiple assignment](images/success_multi_match.png)<br>
 *Example of successfully assigning a person to multiple weddings*
 
 ---
