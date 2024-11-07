@@ -230,9 +230,9 @@ The elements will resize according to the position of the divider, allocating mo
 
 ### Delivery status
 
-The delivery status of the goods can be easily seen through the color of the goods name. The color of the goods name will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
+The delivery status of the goods can be easily seen through the color of the delivery status text. The color of the delivery status will be yellow if the delivery status is `PENDING` and will change to green if the delivery status is `Delivered`, as shown in the image below.
 
-![Goods Name Color UI](images/GoodsNameColorUi.png)
+![Goods Name Color UI](images/DeliveryStatusColorUi.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
