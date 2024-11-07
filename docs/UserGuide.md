@@ -81,6 +81,74 @@ Tuteez is a **desktop address book app designed specifically for tech-savvy priv
 * Provides full view of students information when you call display
 * This is where you can see all your student's lesson details and the remarks you have left them
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Beginner's Tutorial for Tuteez
+
+If you're a new user, fret not! Simply follow this beginner-friendly tutorial that will walk you through your first
+steps with the application, which will allow you to get comfortable with managing your student contacts effectively.
+
+### Before You Begin
+Make sure you have:
+- Successfully installed Tuteez and launched the application (Refer to the [Quick Start](#quick-start) section if you have not)
+
+### Starting with a Clean Slate
+Let us start by clearing the sample data that comes with the application. Type `clear` in the Command Box and press <kbd>Enter</kbd>.
+
+You should see a message indicating that all entries have been cleared, and the list of students should now be empty.
+
+If everything went well, you'll be greeted by this view:
+![clear_command](images/clear_command_tutorial.png)
+
+### Adding Your First Student
+Let's say you already have a student named John Doe, and you wish to add his details into Tuteez.
+
+Let's try entering the following command: `add n/John Doe p/98765432 e/johnd@example.com a/Jurong West`
+
+This means that you've added a student named `John Doe`, with the phone number `98765432`, email `johnd@example.com`,
+and address `Jurong West`.
+
+If everything went well, you'll be greeted by this view:
+![add_command](images/add_command_tutorial.png)
+
+### Adding a Lesson to your Student's details
+Now, you have finalized a lesson schedule with John Doe, and you wish to add it to his details.
+
+Let's try entering the following command: `addlesson 1 l/Monday 0900-1100`
+
+This means that you've added a lesson for `John Doe` on `Monday` from `9 am to 11 am`.
+
+If everything went well, you'll be greeted by this view:
+![addlesson_command](images/addlesson_command_tutorial.png)
+
+### Editing Student Details
+You've realized that you've made a mistake in John Doe's email address, and wish to edit it.
+
+Let's try entering the following command: `edit 1 e/johndoe@gmail.com`
+
+John's email address should now be updated to `johndoe@gmail.com` and the updated email address should be reflected in Tuteez.
+
+If everything went well, you'll be greeted by this view:
+![edit_command](images/edit_command_tutorial.png)
+
+### Deleting a Student
+John Doe has decided to stop engaging your tuition services, and you wish to remove him from your list of students.
+
+Let's try entering the following command: `delete John Doe`
+
+John Doe should now be removed from your list of students.
+
+If everything went well, you'll be greeted by this view:
+![delete_command](images/delete_command_tutorial.png)
+
+### Wrapping Up
+Congratulations! :grin: You've successfully completed the beginner's tutorial for Tuteez.
+You're now ready to move on to more advanced features and commands that Tuteez has to offer.
+Simply visit the [Features](#features) section to learn more about the various commands available to you.
+
+[_Go Back to the Top_](#table-of-contents)
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <box type="info" seamless>
