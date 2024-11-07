@@ -5,6 +5,7 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -54,8 +55,11 @@ public class PersonDetails {
                 history.getChildren().add(historyDateLabel);
 
                 activities.forEach(entry -> {
-                    Label activityLabel = new Label("\t - " + entry);
-                    activityLabel.setStyle("-fx-font-size: 1em; -fx-text-fill: #D9B08C; -fx-padding: 2");
+                    Label activityLabel = new Label("- " + entry);
+                    activityLabel.setStyle("-fx-font-size: 1em; -fx-text-fill: #D9B08C; -fx-padding: 1 8 1 4");
+                    activityLabel.setWrapText(true);
+                    activityLabel.setMaxWidth(Double.MAX_VALUE);
+                    VBox.setVgrow(activityLabel, Priority.ALWAYS);
                     history.getChildren().add(activityLabel);
                 });
             });
