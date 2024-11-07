@@ -41,7 +41,7 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
 
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
-1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar addressbook.jar` to run LogiLink.<br>
+1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -105,11 +105,11 @@ Format: `help`
 
 Adds a contact to the contacts list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01, S123456`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Worker a/Newgate Prison, S123456 p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/worker a/Newgate Prison, S123456 p/1234567 t/criminal`
 
 **<ins>When in the inspect window**
 
@@ -127,12 +127,15 @@ Examples:
 </box>
 
 ### Listing all contacts : `list`
+**<ins>When in the main window**
 
-**<ins>When in the main or inspect window**
-
-Takes you back to the main window, and shows a list of all contacts added to the contacts list. 
+Shows a list of all contacts added to the contacts list.
 
 Format: `list`
+
+**<ins>When in the inspect window**
+
+Shows a list of all deliveries added to a contact's delivery list. Format is the same as in the main window.
 
 ### Editing a contact or delivery: `edit`
 **<ins>When in the main window**
@@ -141,8 +144,8 @@ Edits an existing contact in the contacts list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the contact at the specified `INDEX`. 
-  - The index is the number displayed next to the contact's name in the list. 
+* Edits the contact at the specified `INDEX`.
+  - The index is the number displayed next to the contact's name in the list.
   - The index **must be a positive number** (starting from 1).
 * You must provide at least one optional field (in [ ]). This means you need to update at least one of the following fields: name, phone, email, role, address, or tag.
 * Editing tags will replace **all** existing ones. If you simply want to remove all tags, type 't/' without specifying any tags after.
@@ -164,7 +167,7 @@ Examples:
 *  `edit 1 i/Speaker c/$50` changes the items and cost of the 1st delivery to be `Speaker` and `$50` respectively.
 *  `edit 2 s/delivered t/` changes the status of the 2nd delivery to be `delivered` and clears all of its tags.
 
-### Locating contacts or deliveries by name: `find`
+### Locating contacts by name: `find`
 **<ins>When in the main window**
 
 Finds contacts whose names contain any of the given keywords.
@@ -174,7 +177,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * **Keyword order does not matter**: You can enter keywords in any order. e.g. `Hans Bo` will match `Bo Hans`
 * **Only names are searched**: The search only looks at the contact's name, not other details like phone number or address.
 * **Matches full words only**: e.g. `Han` will not match `Hans`
-* **"OR" search**: If a contact's name matches any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* **"OR" search**: If a contact's name contains any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -186,53 +189,75 @@ Examples:
 
 Find command does not work in the inspect window.
 
+### Locating deliveries by item: `finddel`
+**<ins>When in the main window**
+
+`finddel` does not work in the main window.
+
+**<ins>When in the inspect window**
+
+Finds deliveries that contain any of the given items.
+
+Format: `finddel ITEM [MORE_ITEMS]`
+* **Case-insensitive search**: The search does not distinguish between upper or lower case. e.g `mouse` will match `Mouse`
+* **Keyword order does not matter**: You can enter keywords in any order. e.g. `Mouse Monitor` will match `Monitor Mouse`
+* **"OR" search**: If a delivery contains any of the items, it will be shown. e.g. `Mouse Monitor` will return `Mouse Chair`, `Monitor Desk`
+
+Examples:
+* `finddel Chair` returns any delivery that contains the item chair.
+* `find Chair Desk` returns any delivery that contains the item chair, desk, or both.
+
 ### Archiving a contact or delivery : `archive`
 **<ins>When in the main window**
 
-Archives the specified contact from the contacts list. Archived items will have its visibility reduced and be moved to the end of the list.
+Archives the specified contact(s) from the contacts list.<br>
+Archived contact(s) will be less visible and moved to the bottom of the list.
 
 Format: `archive [INDEXES]...`
 
 * Archive the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* The indexes **must not have duplicates**. For example, `archive 1 2 2 4` is not allowed.
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
+* The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
 
 Examples:
-* `list` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
+* `back` followed by `archive 2 3` archives the 2nd and 3rd contact in the contact list.
 
 Note:
-* `inspect INDEX` and `edit INDEX` would not work for archived contact.
+* You will not be able to use `inspect` and `edit` for archived contacts.
 
 **<ins>When in the inspect window**
 
-Archives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Archives the specified delivery or deliveries from the delivery list of a contact.
+* The same rules apply as in the main window section.
 
 Examples:
 * `archive 2` archives the 2nd delivery in the delivery list of the inspected contact.
 * `archive 2 3` archives the 2nd and 3rd deliveries in the delivery list of the inspected contact.
 
 Note:
-* `edit INDEX` would not work for archived delivery.
+* You will not be able to use `edit` for archived deliveries.
 
 ### Unarchive a contact or delivery : `unarchive`
 **<ins>When in the main window**
 
-Unarchive the specified contact from the contacts list if they are archived, the visibility of the contact would be restored.
+Unarchives the specified contact(s) to restore their visibility in the contacts list, if they were previously archived.
 
 Format: `unarchive [INDEXES]...`
 
-* Undo the archive command the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* The indexes **must not have duplicates**. For example, `unarchive 1 2 2 4 ` is not allowed.
+* Undoes the archive action for the contact(s) at the specified `INDEXES`.
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
+* The indexes **must be unique**. For example, `archive 1 2 2 4` is not allowed because `2` appears more than once.
+
 
 Examples:
-* `list` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
+* `back` followed by `unarchive 2 3` unarchives the 2nd and 3rd contact in the contacts list.
 
 **<ins>When in the inspect window**
 
-Unarchives the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Unarchives the specified delivery or deliveries to restore their visibility in the delivery list of a contact, if they were previously archived.
+* The same rules apply as in the main window section.
 
 Examples:
 * `unarchive 2` unarchives the 2nd delivery in the delivery list of the inspected contact.
@@ -241,44 +266,44 @@ Examples:
 ### Sorting the contacts or delivery list in ascending order: `asort`
 **<ins>When in the main window**
 
-Sorts all contacts in the contacts list by the specified attribute, in ascending order.
+Sorts all contacts in the contacts list by the specified attribute, from lowest to highest.
 
 Format `asort by/ [ATTRIBUTE]`
 
-* Current attributes supported are: date, email, name, phone, role.
+* Attributes you can sort by: date, email, name, phone, role.
 
 Examples:
 * `asort by/ name` sorts the contacts list by name, in ascending alphabetical order (e.g. A, B, C, ...).
-* `asort by/ date` sorts the contacts list by the date the contact was added, in ascending date order (e.g. 2024-10-31 before 2024-11-1).
+* `asort by/ date` sorts the contacts list by the date the contacts were added, from oldest to newest (e.g. 2024-10-31 before 2024-11-1).
 
 **<ins>When in the inspect window**
 
-Sorts all deliveries in the delivery list of a contact by the specified attribute, in ascending order.
+Sorts all deliveries in the delivery list of a contact by the specified attribute, from lowest to highest.
 
 Format `asort by/ [ATTRIBUTE]`
 
-* Current attributes supported are: address, cost, date, eta, id, status.
+* Attributes you can sort by: address, cost, date, eta, id, status.
 
 Examples:
-* `asort by/ cost` sorts the delivery list by ascending cost (e.g. $1, $100, $1000, ...).
+* `asort by/ cost` sorts the delivery list by cost, from lowest to highest (e.g. $1, $100, $1000, ...).
 * `asort by/ status` sorts the delivery list by delivery status, where `not delivered` deliveries come before `delivered` deliveries.
 
 ### Sorting the contacts or delivery list in descending order: `dsort`
 
-Does the same thing as `asort`, except the sorting is now done in descending order.
+`dsort` works the same way as `asort`, except the sorting is now done from highest to lowest.
 
-Refer to the `asort` feature explanation, and replace `asort` with `dsort` where appropriate.
+Simply use the same format as `asort`, but replace `asort` with `dsort`.
 
 ### Deleting a contact or delivery : `delete`
 **<ins>When in the main window**
 
-Deletes the specified contact from the contacts list.
+Deletes the specified contact(s) from the contacts list.
 
 Format: `delete [INDEXES]...`
 
 * Deletes the contact(s) at the specified `INDEXES`.
-* The indexes refer to the indexes shown in the displayed contacts list.
-* The indexes **must be positive integers** 1, 2, 3, …​
+* The index is the number displayed next to the contact's name in the list.
+* The indexes **must be positive numbers** (starting from 1).
 
 Examples:
 * `list` followed by `delete 2 3` deletes the 2nd and 3rd contact in the contacts list.
@@ -286,7 +311,8 @@ Examples:
 
 **<ins>When in the inspect window**
 
-Deletes the specified delivery from the delivery list of a contact. Everything else is the same as mentioned in the main window section of this command.
+Deletes the specified delivery or deliveries from the delivery list of a contact.
+* The same rules apply as in the main window section.
 
 Examples:
 * `delete 2` deletes the 2nd delivery in the delivery list of the inspected contact.
@@ -300,31 +326,79 @@ Inspects a specified contact from the contacts list to see their delivery list.
 Format: `inspect [INDEX]`
 
 * Inspects the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contacts list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index is the number displayed next to the contact's name in the list.
+* The index **must be a positive number** (starting from 1).
 
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
 
 **<ins>When in the inspect window**
 
-`inspect` command does not work in the inspect window.
+`inspect` does not work in the inspect window.
+
+### Assigning a delivery to an employee : `assign`
+**<ins>When in the main window**
+
+`assign` does not work in the main window.
+
+**<ins>When in the inspect window**
+
+Assigns the specified delivery from the delivery list of a client to the specified employee. It does not work when inspecting an employee.
+
+Format: `assign INDEX n/EMPLOYEE_NAME`
+
+* Assigns the delivery at the specified `INDEX` to the employee specified by `EMPLOYEE_NAME`.
+* The index is the number displayed at the top of a delivery in the delivery list of a contact.
+* The index **must be a positive number** (starting from 1).
+* The worker name should match an existing worker in the contact list.
+
+Examples:
+* `assign 1 n/Betsy Crowe` assigns first delivery of the current contact to employee Betsy Crowe.
+
+### Remove delivery from employee : `remove`
+**<ins>When in the main window**
+
+`remove` does not work in the main window.
+
+**<ins>When in the inspect window**
+
+Removes the specified delivery from the delivery list of an employee. It does not work when inspecting a client.
+
+Format: `remove INDEX`
+
+* Removes the delivery at the specified `INDEX` from the current employee's delivery list.
+* The index is the number displayed at the top of a delivery in the delivery list of a contact.
+* The index **must be a positive number** (starting from 1).
+
+Examples:
+* `remove 1` removes the first delivery of the current employee's delivery list.
+
+### Returning to the main window : `back`
+**<ins>When in the main window**
+
+`back` does not do anything in the main window.
+
+**<ins>When in the inspect window**
+
+Takes you back to the main window.
+
+Format: `back`
 
 ### Clearing all entries : `clear`
 **<ins>When in the main or inspect window**
 
-Clears all entries from the contacts list.
+Clears all contacts from the contacts list.
 
 Format: `clear`
 
 **<ins>When in the main or inspect window**
 
-clear command does not work in the inspect window.
+Clears all deliveries from the delivery list of a contact.
 
 ### Exiting the program : `exit`
 **<ins>When in the main or inspect window**
 
-Exits the program.
+Exits LogiLink.
 
 Format: `exit`
 
@@ -334,7 +408,7 @@ LogiLink data is saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-LogiLink data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+LogiLink data is saved automatically as a JSON file `[JAR file location]/data/LogiLink.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -363,16 +437,22 @@ Furthermore, certain edits can cause the LogiLink to behave in unexpected ways (
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/Client a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Archive**| `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
-**Clear**  | `clear`
-**Delete** | `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Inspect**| `inspect INDEX`<br> e.g., `inspect 2`
-**List**   | `list`
-**Help**   | `help`
-**Unarchive**| `unarchive INDEXES`<br> e.g., `unarchive 3`, `unarchive 3 4`
+**Add**    | <ins>Main Window:</ins><br> `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/Client a/123, Clementi Rd, S123456 t/friend t/colleague` <br><ins>Inspect Window:</ins><br> `add i/ITEM…​ e/ETA a/ADDRESS c/COST s/STATUS [t/TAG]…​` <br> e.g., `add i/Monitor i/Mouse e/2020-02-02 a/311, Clementi Ave 2, #02-25, S120300 c/$100 s/not delivered t/Difficult address to deliver`
+**Archive**| <ins>Both Windows:</ins><br> `archive INDEXES`<br> e.g., `archive 3`, `archive 3 4`
+**Assign** | <ins>Main Windows:</ins><br> Does not work <br><ins>Inpsect Windows:</ins><br> `assign INDEX n/EMPLOYEE_NAME` <br> e.g., `assign 1 n/Betsy Crowe`
+**Back**   | <ins>Both Windows:</ins><br> `back`
+**Clear**  | <ins>Both Windows:</ins><br> `clear`
+**Delete** | <ins>Both Windows:</ins><br> `delete INDEXES`<br> e.g., `delete 3`, `delete 3 4`
+**Edit**   | <ins>Main Window:</ins><br> `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` <br><ins>Inspect Window:</ins><br> `edit INDEX [i/ITEM]…​ [e/ETA] [a/ADDRESS] [c/COST] [s/STATUS] [t/TAG]…​` <br> e.g., `edit 1 i/Speaker c/$50`
+**Find**   | <ins>Main Window:</ins><br> `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake` <br><ins>Inspect Window:</ins><br> Does not work
+**Find Delivery**| <ins>Main Window:</ins><br> Does not work <br><ins>Inspect Window:</ins><br> `finddel ITEM [MORE_ITEMS]` e.g., `finddel Monitor Mouse`
+**Help**   | <ins>Both Windows:</ins><br> `help`
+**Inspect**| <ins>Main Window:</ins><br> `inspect INDEX`<br> e.g., `inspect 2` <br><ins>Inspect Window:</ins><br> Does not work
+**List**   | <ins>Both Windows:</ins><br> `list`
+**Remove** | <ins>Main Window:</ins><br> Does not work <br><ins>Inspect Window:</ins><br> `remove INDEX` e.g., `remove 1`
+**Sort Ascending**| <ins>Both Windows:</ins><br> `asort by/ATTRIBUTE`
+**Sort Descending**| <ins>Both Windows:</ins><br> `dsort by/ATTRIBUTE`
+**Unarchive**| <ins>Both Windows:</ins><br> `unarchive INDEXES`<br> e.g., `unarchive 3`, `unarchive 3 4`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -382,3 +462,5 @@ Terms            | Meaning
 -----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Archive**      |The action of moving an item, from an active or accessible state to a preserved state by reducing its immediate availability and visibility.
 **Unarchive**    |The action of restoring a previously archived item, to an active or accessible state.
+**Client**    |A contact that has the role `client`
+**Employee**    |A contact that has the role `employee`
