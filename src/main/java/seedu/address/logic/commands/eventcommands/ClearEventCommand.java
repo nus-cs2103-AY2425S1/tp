@@ -47,6 +47,11 @@ public class ClearEventCommand extends ClearCommand {
         }
 
         // instanceof handles nulls
-        return other instanceof ClearEventCommand;
+        if (!(other instanceof ClearEventCommand)) {
+            return false;
+        }
+
+        // all instances of clear event command are equal
+        return true;
     }
 }

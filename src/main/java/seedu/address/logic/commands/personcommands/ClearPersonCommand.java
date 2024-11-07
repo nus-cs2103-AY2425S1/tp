@@ -47,6 +47,11 @@ public class ClearPersonCommand extends ClearCommand {
         }
 
         // instanceof handles nulls
-        return other instanceof ClearPersonCommand;
+        if (!(other instanceof ClearPersonCommand)) {
+            return false;
+        }
+
+        // all instances of clear person command are equal
+        return true;
     }
 }

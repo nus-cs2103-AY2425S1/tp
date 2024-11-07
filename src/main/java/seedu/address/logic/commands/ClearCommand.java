@@ -80,9 +80,8 @@ public class ClearCommand extends Command {
             return false;
         }
 
-        ClearCommand otherClearCommand = (ClearCommand) other;
-        return isPrompted == otherClearCommand.isPrompted
-                && isConfirmed == otherClearCommand.isConfirmed;
+        // all instances of clear command are equal
+        return true;
     }
 
     @Override

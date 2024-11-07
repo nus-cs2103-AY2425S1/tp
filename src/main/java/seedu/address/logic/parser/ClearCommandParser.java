@@ -37,15 +37,15 @@ public class ClearCommandParser implements Parser<ClearCommand> {
     public ClearCommand parseClear() {
         if (modelType == ModelType.PERSON) {
             ClearPersonCommand clearPersonCommand = new ClearPersonCommand();
-            clearPersonCommand.setConfirmed(true);
+            ClearPersonCommand.setConfirmed(true);
             return clearPersonCommand;
         } else if (modelType == ModelType.EVENT) {
             ClearEventCommand clearEventCommand = new ClearEventCommand();
-            clearEventCommand.setConfirmed(true);
+            ClearEventCommand.setConfirmed(true);
             return clearEventCommand;
         } else {
             ClearCommand clearCommand = new ClearCommand();
-            clearCommand.setConfirmed(true);
+            ClearCommand.setConfirmed(true);
             return clearCommand;
         }
     }
@@ -59,15 +59,15 @@ public class ClearCommandParser implements Parser<ClearCommand> {
     public ClearCommand parseAbort() {
         if (modelType == ModelType.PERSON) {
             ClearPersonCommand clearPersonCommand = new ClearPersonCommand();
-            clearPersonCommand.setConfirmed(false);
+            ClearPersonCommand.setConfirmed(false);
             return clearPersonCommand;
         } else if (modelType == ModelType.EVENT) {
             ClearEventCommand clearEventCommand = new ClearEventCommand();
-            clearEventCommand.setConfirmed(false);
+            ClearEventCommand.setConfirmed(false);
             return clearEventCommand;
         } else {
             ClearCommand clearCommand = new ClearCommand();
-            clearCommand.setConfirmed(false);
+            ClearCommand.setConfirmed(false);
             return clearCommand;
         }
     }
