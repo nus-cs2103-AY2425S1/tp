@@ -97,10 +97,8 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 
    * `addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to buy of type `Condo` to the Address Book for the contact at index 1.
 
-
    * `addSell 1 ht/c bp/1750000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to sell of type `Condo` to the Address Book for the contact at index 1.
 
-   * `addBuy 1 ht/c bp/1750000 pc/567510 un/10-65 t/spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
