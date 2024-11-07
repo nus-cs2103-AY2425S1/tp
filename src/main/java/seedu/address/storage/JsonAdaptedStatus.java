@@ -28,7 +28,7 @@ class JsonAdaptedStatus {
      */
     public JsonAdaptedStatus(Status source) {
         requireNonNull(source);
-        status = source.toParsableString();
+        status = source.getValue();
     }
 
     @JsonValue

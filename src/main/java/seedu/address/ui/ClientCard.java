@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.client.Client;
 import seedu.address.model.status.Status;
+import seedu.address.model.tier.Tier;
 
 /**
  * An UI component that displays information of a {@code Client}.
@@ -73,23 +74,20 @@ public class ClientCard extends UiPart<Region> {
     }
 
     private void createTier() {
-        String tierText = client.getTier().toParsableString();
-        if (!tierText.isEmpty()) {
-            Label tierLabel = new Label(tierText.toUpperCase());
-
-            // Apply the existing style classes
-            tierLabel.getStyleClass().add("label");
-
-            // Add the tier-specific style class
-            String tier = client.getTier().toParsableString().toLowerCase();
-            tierLabel.getStyleClass().add(tier + "-tier");
-
-            // Add the label to the FlowPane
-            assignedTier.getChildren().add(tierLabel);
-        } else {
-            assignedTier.setVisible(false); // Hide the FlowPane if it's empty
-            assignedTier.setManaged(false); // Exclude it from layout calculations
+        // Only create a label if the status is relevant
+        if (client.getTier().tierName == Tier.TierEnum.NA) {
+            assignedTier.setVisible(false);
+            assignedTier.setManaged(false);
+            return;
         }
+
+        Label tierLabel = new Label(client.getTier().getValue());
+        tierLabel.getStyleClass().add("label");
+
+        String tier = client.getTier().getValue().toLowerCase();
+        tierLabel.getStyleClass().add(tier + "-tier");
+
+        assignedTier.getChildren().add(tierLabel);
     }
 
     private void createStatus() {
@@ -103,7 +101,7 @@ public class ClientCard extends UiPart<Region> {
         }
 
         // Create and configure the label for relevant statuses
-        Label statusLabel = new Label(client.getStatus().toParsableString());
+        Label statusLabel = new Label(client.getStatus().getValue());
         statusLabel.getStyleClass().add(getStatusStyleClass(status));
 
         // Add the label to assignedStatus and ensure it’s visible and managed

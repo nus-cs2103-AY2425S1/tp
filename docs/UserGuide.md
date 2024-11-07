@@ -23,20 +23,20 @@ Let’s begin and get you up to speed with AgentAssist!
 1. [Introduction](#1-introduction)
 2. [Important Prerequisites](#2-important-prerequisites)
 3. [Getting Started](#3-getting-started)
-   - 3.1 [Installation](#31-installation)  
+   - 3.1 [Installation](#31-installation)
    - 3.2 [Graphical User Interface (GUI) Layout](#32-graphical-user-interface-gui-layout)
 4. [Understanding Commands in AgentAssist](#4-understanding-commands-in-agentassist)
-   - 4.1 [Command Structure Overview](#41-command-structure-overview)  
-   - 4.2 [Commands](#42-commands)  
+   - 4.1 [Command Structure Overview](#41-command-structure-overview)
+   - 4.2 [Commands](#42-commands)
    - 4.3 [Flags](#43-flags)  
-   - 4.4 [Arguments](#44-arguments)  
+   - 4.4 [Arguments](#44-arguments)
    - 4.5 [Using Commands](#45-using-commands)
 5. [Commands](#5-commands)
    - 5.1 [How to Read Commands](#51-how-to-read-commands)  
    - 5.2 [Data Modification Commands](#52-data-modification-commands)  
-   - 5.3 [Data Filtering Commands](#53-data-filtering-commands)  
-   - 5.4 [General Commands](#54-general-commands)  
-   - 5.5 [Saving Data](#55-saving-data)  
+   - 5.3 [Data Filtering Commands](#53-data-filtering-commands)
+   - 5.4 [General Commands](#54-general-commands)
+   - 5.5 [Saving Data](#55-saving-data)
    - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
@@ -115,8 +115,7 @@ Download the latest version of the `.jar` file from the AgentAssist [repository]
 
 ### Step 3: Choose a Folder
 
-Find or create a folder on your computer where you want to store the AgentAssist application and its data.  
-Move the .jar file you downloaded into this folder.
+Find or create a folder on your computer where you want to store the AgentAssist application and its data. Move the .jar file you downloaded into this folder.
 
 ### Step 4: Run the Application
 
@@ -139,8 +138,7 @@ Move the .jar file you downloaded into this folder.
       <img src="images/Ui.png" alt="UI" style="margin-top: 20px; margin-bottom: 20px;">
 
 
-4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
-   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity.
+4. 🎉 **Congratulations! AgentAssist is now up and running!** You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity.
 
 <div style="page-break-after: always;"></div>
 
@@ -235,19 +233,20 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
-| **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            | **Case Sensitivity**   |
-|----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------------------|
-| `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             | ❌                      |
-| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                                               | ❌                      |
-| `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                                                  | ❌                      |
-| `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
-| `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
-| `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Must be numeric<br/> • Cannot include commas and decimal points<br/> • Cannot be fractional | ❌                      |
-| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                                                    | ❌️                     |
-| `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
-| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
-| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
-| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                                                           | ❌                      |
+| **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            |
+|----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             |
+| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                                               |
+| `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                                                  |
+| `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   |
+| `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   |
+| `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Must be numeric<br/> • Cannot include commas and decimal points<br/> • Cannot be fractional |
+| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                                                    |
+| `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                                                   |
+| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                                                   |
+| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                                                   |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                                                           |
+**Note:** All of the above arguments are case-insensitive.
 
 > 💡 **Pro Tip:**
 >
@@ -289,7 +288,7 @@ The GUI will dynamically update to show the results of your commands, making it 
 Refer to the [Commands Section](#5-commands) for more comprehensive details of each command.
 
 > 💡 **Pro Tip:**  
-> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.  
+> Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
 
 [↑ Return to Table of Contents](#table-of-contents)
@@ -325,7 +324,7 @@ add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <T
 
 ## 5.2 Data Modification Commands
 
-### 5.2.1 Adding a new client {#add-command}
+### 5.2.1 Adding a new client
 
 **Purpose:** Save detailed records of a new client.
 
@@ -350,11 +349,11 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   add n/ JOHN DOE p/ 99007766 e/ mrdoe@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold r/ got anger issue s/ urgent
   ```
 
-#### What to Expect
+**What to Expect:**
 - **On Success:**
     - Message:
       ```
-      New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>.
+      New client added: Name: <NAME>, Phone: <PHONE>, Email: <EMAIL>, Address: <ADDRESS>, Job: <JOB>, Income: <INCOME>, Tier: <TIER>, Remark: <REMARK>, Status: <STATUS>
       ```
     - If `Tier`, `Status` or `Remark` is not provided, they will be set to "NA" and displayed as such in the success message.
 
@@ -379,7 +378,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
         ```
 
 > **Note on Duplicates:**
->
+
 > AgentAssist will prevent duplicate entries if a client with t``he **same name, email and phone number** is already saved.  
 > When this happens, you will see the following message:
 >
@@ -412,7 +411,7 @@ edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)`
 
-`**Examples:**
+**Examples:**
 - Edit only 1 specific field:
   ```
   edit 12 a/ Ridge View Residential College
@@ -421,8 +420,8 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   edit 12 t/ gold
   ```
   ```
-  edit 12 s/ urgent ``
-- ```
+  edit 12 s/ urgent
+  ```
 - Edit multiple fields at the same time:
   ```
   edit 12 p/ 99887766 e/ mrtan_newemail@ntu.sg j/ unemployed i/ 0 t/ reject
@@ -440,7 +439,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success:**
     - Message:
       ```
-      Client <INDEX> has been updated successfully.
+      Edited Client: <CLIENT DETAILS> 
       ```
 - **On Error:**
     - Message:
@@ -473,7 +472,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
   ```
   delete 12
   ```
-  Confirmation prompt:
+  **Confirmation prompt:**
   ```
   This will permanently delete this contact.  Are you sure you want to execute this command? (y/n)
   ```
@@ -482,7 +481,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 - **On Success (after confirming with y/yes):**
     - Message:
       ```
-      Deleted Client: <CLIENT DETAILS>
+      Deleted Client: <CLIENT DETAILS> 
       ```
 - **On Cancellation (if confirmation is declined):**
     - Message:
@@ -509,7 +508,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 ```
 clear
 ```
-Confirmation prompt:
+**Confirmation prompt:**
 ```
 This will permanently clear all contacts. Are you sure you want to execute this command? (y/n)
 ```
@@ -529,14 +528,6 @@ This will permanently clear all contacts. Are you sure you want to execute this 
 - **On Error:**
     - This command does not typically produce errors but will have no effect if there are no clients in the database to clear.
 
-> ⛔ **Danger:**  
-> The `clear` command is **irreversible**. Once executed, all client data is **permanently deleted**.
->
-> It is highly recommended to **avoid using this command** unless absolutely necessary.
-
-
-
-
 ## 5.3 Data Filtering Commands
 
 ### 5.3.1 List All Clients
@@ -552,7 +543,7 @@ list
 
 
 
-### 5.2.3 Filter Clients by Details / Find a Client
+### 5.3.2 Filter Clients by Details / Find a Client
 
 **Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, remarks or status.
 
@@ -564,7 +555,7 @@ filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIE
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
-    - See [Filtering By Income](#523-filter-clients-by-details--find-a-client) for more information.
+    - See [Filtering By Income](#filter-by-income) for more information.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -597,7 +588,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
     - **Example:**  
       If a client has a tier labeled `Gold`, a search for `t/ G` or `t/ Gold` will match, but `t/ ld` or `t/ Gold Premium` will not.
 
-- **Filtering by Income (Using Comparison Operators):**
+- **Filtering by Income (Using Comparison Operators):** <a id="filter-by-income"></a>
   Filtering by income allows numeric comparisons using operators `=`, `>`, or `<` to find clients whose income meets certain criteria.
 
     - **Equal to (`=`):**  
@@ -637,13 +628,13 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 ## 5.4 General Commands
 
-### 5.4.1 Viewing a Client's Details {#view-command}
+### 5.4.1 Viewing a Client's Details
 
 **Purpose:** View the full details of a selected client in a split view that displays comprehensive information including remark(s) and additional details.
 
 **Command Format:**
 ```
-view index
+view <INDEX>
 ```
 * Mandatory Field: `<INDEX>`
 * Note: The provided `<INDEX>` must be **greater than 0 and less than the total number of clients in the list**.
@@ -669,7 +660,7 @@ view index
 > You can use the split view to compare client details side by side with the main list, making it easier to reference multiple clients at once.
 
 
-### 5.4.2 Closing a Client's Details {#close-command}
+### 5.4.2 Closing a Client's Details 
 
 **Purpose:** Close the split view of client details and return to the full list view.
 
@@ -687,7 +678,19 @@ close
 - **On Error:**
     - No error messages are shown; the command is simply ignored if no split view is open
 
-### 5.4.3 Help Menu {#help-command}
+### 5.4.3 Undo Previous Command
+
+**Purpose:** Undo previous command.
+
+**Command Format:**
+```
+undo
+```
+- Reverts all changes of the previous command:
+- **Note:** This command can only be used after a permanent change has been made (e.g. after using the edit command).
+- **Note:** You can only use `undo` once. Using `undo` 2 times in a row has the same effect as not using the `undo` command at all.
+
+### 5.4.4 Help Menu 
 
 **Purpose:** Provides quick access to a command summary and the user guide for AgentAssist.
 
@@ -702,7 +705,7 @@ help
 
 
 
-### 5.4.4 Exiting AgentAssist {#exit}
+### 5.4.4 Exiting AgentAssist 
 
 **Purpose:** Exit the application directly from the command line, providing a quick and easy way to close the program without using external controls.
 

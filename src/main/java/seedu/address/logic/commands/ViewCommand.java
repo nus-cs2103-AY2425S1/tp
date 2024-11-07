@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDE
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
@@ -57,7 +58,7 @@ public class ViewCommand extends Command {
         }
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView),
+        return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, Messages.format(clientToView)),
                 false, false, true, clientToView,
                 false, null, false);
     }

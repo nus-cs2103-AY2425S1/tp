@@ -18,7 +18,7 @@ public class StatusStartsWithSubstringPredicate implements Predicate<Client> {
 
     @Override
     public boolean test(Client client) {
-        return StringUtil.startsWithSubstringIgnoreCase(client.getStatus().toParsableString(), substring);
+        return StringUtil.startsWithSubstringIgnoreCase(client.getStatus().getValue(), substring);
     }
 
     @Override
