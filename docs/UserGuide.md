@@ -263,10 +263,26 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Application Opening Off-Screen on Single-Monitor Setup**  
+   When using multiple screens, if the application is moved to a secondary screen and the setup later reverts to a single screen, the application may open off-screen.  
+   > **Workaround**: Delete the `preferences.json` file created by the application, then restart the application.
+
+2. **Help Window Remains Minimized**  
+   If the Help Window is minimized and the `help` command is executed again (or the `Help` menu or `F1` keyboard shortcut is used), the existing Help Window will remain minimized without reopening or restoring. <br>
+   > **Workaround**: Manually restore the Help Window from the minimized state.
+
+3. **Unable to Navigate List Items with Tab Key**  
+   When using the Tab key to navigate, individual items in lists (like the person list) cannot be accessed.  
+   > **Workaround**: Currently, there is no workaround for this.
+
+
+
+
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
