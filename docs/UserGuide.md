@@ -6,7 +6,14 @@
 
 # VolunTier User Guide
 
-VolunTier is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunTier can get your contact management tasks done faster than traditional GUI apps.
+VolunTier is the **top _Tier_** solution for volunteer organisations that specialise in teaching students and are 
+looking to manage your growing clientele in an efficient manner.
+
+VolunTier is designed for those of you who are **familiar with the Command Line Interface (CLI)** living in Singapore, 
+simplifying the process of adding, editing and deleting your volunteers, students and the lessons that they share.
+
+>[!NOTE]
+>Tutor and Tutees can both be referred to as Person.
 
 <!-- * Table of Contents -->
 <page-nav-print />
