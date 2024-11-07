@@ -49,13 +49,14 @@ public class EditCommandParser implements Parser<EditCommand> {
         Nric nric;
 
         if (argMultimap.getPreamble().isEmpty()) {
+            logger.warning("No NRIC provided in input.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_NRIC_EMPTY));
         }
-
         try {
+            assert !argMultimap.getPreamble().isEmpty();
             nric = ParserUtil.parseNric(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            logger.warning("No NRIC provided in input.");
+            logger.warning("Invalid NRIC provided in input.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()));
         }
 
