@@ -105,11 +105,11 @@ Format: `help`
 
 Adds a contact to the contacts list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/Client a/John street, block 123, #01-01, S123456`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/Worker a/Newgate Prison, S123456 p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/worker a/Newgate Prison, S123456 p/1234567 t/criminal`
 
 **<ins>When in the inspect window**
 
