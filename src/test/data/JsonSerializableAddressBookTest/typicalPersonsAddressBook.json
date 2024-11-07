@@ -15,10 +15,10 @@
     } ],
     "buyProperties" : [ {
       "housingType" : "Hdb",
-      "postalCode" : "522522",
+      "postalCode" : "123456",
       "unitNumber" : "10-01",
       "price" : "1500000",
-      "actualPrice" : "1010101",
+      "actualPrice" : "0",
       "tags" : [ ]
     } ],
     "soldProperties" : [ {
@@ -45,7 +45,7 @@
       "tags" : [ "spacious" ]
     }, {
       "housingType" : "Hdb",
-      "postalCode" : "123456",
+      "postalCode" : "522522",
       "unitNumber" : "10-01",
       "price" : "1500000",
       "actualPrice" : "1010101",

@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -23,15 +22,7 @@ public class BuyPropertyContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getListOfBuyingProperties().stream().anyMatch(property ->
-            keywords.stream().anyMatch(keyword ->
-                StringUtil.containsNumericWithOptionalHyphen(property.toString(), keyword)
-                // returns true if keyword is housing type
-                || property.getClass().getSimpleName().toUpperCase().contains(keyword.toUpperCase())
-                // returns true if keyword is in any of the property tags
-                || property.getTags().stream().anyMatch(tag -> tag.toString().contains(keyword))
-            )
-        );
+        return person.getListOfBuyingProperties().stream().anyMatch(property -> property.matchesKeywords(keywords));
     }
 
     @Override

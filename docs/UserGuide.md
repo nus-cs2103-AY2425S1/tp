@@ -97,7 +97,10 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 
    * `addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to buy of type `Condo` to the Address Book for the contact at index 1.
 
+
    * `addSell 1 ht/c bp/1750000 pc/567510 un/10-65 t/Spacious t/Near MRT` : Adds a property to sell of type `Condo` to the Address Book for the contact at index 1.
+
+   * `addBuy 1 ht/c bp/1750000 pc/567510 un/10-65 t/spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -205,6 +208,7 @@ Examples:
 * `addBuy 1 ht/c bp/1650000 pc/189651 un/5-10`
 * `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Spacious t/Near MRT`
 
+
 ### Adding a property to sell: `addSell`
 
 Adds a property which has to be sold to the address book. The property is associated to a contact in the Address Book.
@@ -221,6 +225,7 @@ Format: `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un
 Examples:
 * `addSell 1 ht/c sp/1650000 pc/189651 un/5-10`
 * `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Spacious t/Near MRT`
+
 
 ## Editing Entries Command
 
@@ -562,6 +567,7 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
+**Command List** | `commands`
 **Statistics**   | `stats`
 **Clear**  | `clear`
 **Exit**  | `exit`
