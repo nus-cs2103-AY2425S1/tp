@@ -257,7 +257,8 @@ Format: `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
-    Successfully created a new doctor of id: #1 : Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: Specialist in physiotherapy
+    Successfully created a new doctor of id: #1 : <br>
+    Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: Specialist in physiotherapy
 
 * `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
@@ -282,8 +283,8 @@ Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 Examples:
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br> 
-    Successfully created a new patient of id: #0 : John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
-
+    Successfully created a new patient of id: #0 : <br>
+    John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
 * `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
   **Output**: <br>
 This patient already exists
@@ -380,33 +381,59 @@ Examples:
 * `get johnny` <br>
   **Output**: <br>
   Invalid name entered! Check the name that you want to search id for! Key in 'list' to view all patients
+* `get johnny` <br>
+  **Output**: <br>
+  Two persons listed that suits your keyword! <br>
+  enters more specific name keywords to retrieve the id of the person
 
+### Finding Doctor or Patient by Name: `get`
+
+Finds a doctor or patient whose names contain any of the given keywords.
+
+Format: `find KEYWORD`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* A _notification message_ will be output if there is failure in retrieving id from MedDict database in address book.
+
+Examples:
+* `find john` <br>
+  **Output**: <br>
+  One person listed! Key in [list] to view all patients
+* `find johnny` <br>
+  **Output**: <br>
+  Two persons listed that suits your keyword! <br>
+  enters more specific name keywords to retrieve the id of the person
 
 ### Adding an Appointment : `addA`
 
 Adds an appointment to an existing patient with the specified `PatientId` and doctor with the specified `DoctorId` in the MedDict database in address book.
 
-Format: `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID …​`
+Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
-* **Remark**: Optional, user can add remark details by adding `[r/Remark]` when calling the command.
+* **Remark**: Optional, user can add remark details by adding `[r/REMARK]` when calling the command.
   Empty remark will be added to the appointment if remark is not specified.
 * When adding appointment, the appointment detail will be added to the appointments list in both patient and doctor class.
 * Each appointment must be scheduled at a unique time to prevent overlap for both the patient and the doctor.
 * A _notification message_ will be output if there is failure in adding the appointments.
 
 Examples:
-*  `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session` <br>
+*  `addA z/0 z/1 x/2024-12-31 15:23 r/Third physiotherapy session` <br>
    **Output**: <br>
    Successfully added appointment to a patient.
-*  `addA x/2024-12-31 15:23 z/0 z/1` <br>
+*  `addA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully added appointment to a patient.
-*  `addA x/2024-12-31 15:23 z/0 z/1` <br>
+*  `addA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    The patient already has another appointment!
-*  `addA x/2024-12-31 15:23 z/0 z/1` <br>
+*  `addA z/0 z/1  x/2024-12-31 15:23` <br>
    **Output**: <br>
    The doctor already has another appointment!
 
@@ -414,7 +441,7 @@ Examples:
 
 Displays the history of an existing person with the specified `Id` in the MedDict database in address book.
 
-Format: `view z/ID [x/DATE_TIME] …​`
+Format: `view z/ID [x/DATE_TIME]`
 
 * **Id**: Must be valid, present in the MedDict database.
 * **DateTime**: Optional, user can view history of the patient on a specific date by adding `[x/DATE_TIME]` when calling the command.
@@ -444,8 +471,8 @@ Format: `checkA z/ID y/DATE`
 Examples:
 *  `checkA z/1 y/2024-12-31` <br>
    **Output**: <br>
-   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session`. <br>
-   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`.
+   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Third physiotherapy session` <br>
+   Appointment: `2024-12-31` for `0` (patient id) with `1` (doctor id). Remarks: `Fourth physiotherapy session`
 *  `checkA z/1 y/2024-12-30` <br>
    **Output**: <br>
    No appointment found for Doctor: `Amy Bee`
@@ -455,36 +482,36 @@ Examples:
 Marks appointment of an existing patients with the specified `PatientId`  
 with a doctor with the specified `DoctorId` in the MedDict database in address book.
 
-Format: `mark x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
+Format: `marK z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in marking appointments.
 
 Examples:
-*  `mark x/2024-12-31 15:23 z/0 z/1` <br>
+*  `mark z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully marked appointment as complete
-*  `mark x/2024-12-31 16:23 z/2 z/3` <br>
+*  `mark z/2 z/3 x/2024-12-31 16:23` <br>
    **Output**: <br>
-   The appointment doesn't exist!
+   No appointments found on this date!
 
 ### Delete Appointment : `deleteA`
 
 Deletes appointment of an existing patient with the specified `PatientId` 
 with a doctor with the specified `DoctorId` in the MedDict database in address book.
 
-Format: `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID`
+Format: `deleteA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
 * **Patient Id**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor Id**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be output if there is failure in deleting appointment.
 
 Examples:
-*  `deleteA x/2024-12-31 15:23 z/0 z/1` <br>
+*  `deleteA z/0 z/1 x/2024-12-31 15:23` <br>
    **Output**: <br>
    Successfully deleted appointment to a patient
-*  `deleteA x/2024-12-31 15:23 z/1 z/3` <br>
+*  `deleteA z/1 z/3 x/2024-12-31 15:23` <br>
    **Output**: <br>
    The appointment doesn't exist!
 
