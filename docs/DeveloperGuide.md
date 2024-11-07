@@ -65,6 +65,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -81,6 +83,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -113,6 +117,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -125,6 +131,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -204,6 +212,8 @@ Criteria are segregated by data field, and each criteria is independently evalua
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -661,7 +671,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-#### Use case: UC16 - Clear listed persons
+#### **Use case: UC16 - Clear listed persons**
 * *Preconditions:* user has added person(s) previously
 * *Guarantees:* listed persons are removed from the system
 
@@ -688,7 +698,7 @@ Extensions
 
   Use case ends.
 
-#### Use case: UC17 - Exit
+#### **Use case: UC17 - Exit**
 * *Preconditions:* ResearchRoster is running
 * *Guarantees:* ResearchRoster will be exited and closed
 
@@ -882,7 +892,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `export data/MyEmailsList`<br>
        Expected: Exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
-   
+
     1. Test case: `find g/f` followed by `export female_emails`<br>
          Expected: Exports only the emails of female persons.
 
@@ -892,7 +902,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `list` followed by `clear` then `confirm`<br>
        Expected: Clears the entire address book.
-   
+
     1. Test case: `find g/f` followed by `clear` then `confirm`<br>
        Expected: Clears all female persons from the address book.
 
