@@ -319,25 +319,39 @@ journey with StaffSync!
 
 * Words in `UPPER_CASE` are the compulsory parameters to be supplied by the user.
   e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
-  <br>
+
+<br>
+
 * Items in round brackets are compulsory.
   e.g. `list (e/ph/all)` must be used as `list e` or `list ph` or `list all`.
-  <br>
+
+<br>
+
 * Items in square brackets are optional.
   e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
-  <br>
+
+<br>
+
 * Items in curly brackets are requirements for the format.
   e.g. `demote INDEX {must be a positive integer}` means that index must be a positive integer.
-  <br>
+
+<br>
+
 * Parameters can be in any order.
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-  <br>
+
+<br>
+
 * Parameters and commands are case-sensitive
   e.g. the command `Help` and `edit 1 N/John Doe` will return an error
-  <br>
+
+<br>
+
 * Extra parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  <br>
+
+<br>
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters >surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
@@ -363,6 +377,7 @@ journey with StaffSync!
 
   **Format**: `clear`
   </div>
+
   <br>
 
   <div class="box box-warn" type="warning" seamless>
@@ -397,6 +412,7 @@ journey with StaffSync!
   <br>
 
   Deletes the potential hire/employee at the specified `INDEX`.
+
 <br>
 
 **Parameters:**
@@ -447,6 +463,7 @@ journey with StaffSync!
 
   **Format**: `demote INDEX`
   </div>
+
 <br>
 
 **Parameters:**
@@ -455,6 +472,7 @@ journey with StaffSync!
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
   * The person at the `INDEX` must be an employee.
+
 <br>
 
 **Examples:**
@@ -495,9 +513,11 @@ journey with StaffSync!
 
   **Format**: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEPARTMENT] [r/ROLE] [ced/CONTRACT_END_DATE]`
   </div>
+
   <br>
 
   Edits the person at the specified `INDEX`.
+
 <br>
 
 **Parameters:**
@@ -515,6 +535,7 @@ journey with StaffSync!
 
   **Tip:** It is not possible to edit the contract end date of a potential hire
   </div>
+
 <br>
 
 **Examples:**
@@ -547,7 +568,8 @@ journey with StaffSync!
 
   **Format**: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
   </div>
-  <br>
+
+<br>
 
   **Parameters:**
 
@@ -569,6 +591,7 @@ journey with StaffSync!
 
   **Tip:** All fields are mandatory
   </div>
+
 <br>
 
 **Examples:**
@@ -599,7 +622,9 @@ journey with StaffSync!
 
   **Format**: `exit`
   </div>
+
   <br>
+
   </div>
 </details>
 
@@ -624,6 +649,7 @@ journey with StaffSync!
 
   **Format**: `find PARAMETER [n/NAMES] [p/PHONE_NUMBERS] [e/EMAILS] [d/DEPARTMENTS] [r/ROLES]`
   </div>
+
 <br>
 
 **Parameters:** 
@@ -655,6 +681,7 @@ journey with StaffSync!
 
   **Tip:** At least one keyword is required.
   </div>
+
 <br>
 
 **Examples:**
@@ -665,6 +692,7 @@ journey with StaffSync!
   * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
 
   <br>
+
   Example: `find ph n/John`
   </div>
 
@@ -748,6 +776,7 @@ journey with StaffSync!
   * `all` for all persons.
   * `ph` for potential hires.
   * `e` for employees.
+
 <br>
 
 **Examples:**
@@ -780,6 +809,7 @@ journey with StaffSync!
 
   **Format**: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
   </div>
+
   <br>
 
   **Parameters:**
@@ -800,6 +830,7 @@ journey with StaffSync!
 
   **Tip:** All fields are mandatory
   </div>
+
 <br>
 
 **Examples:**
@@ -842,6 +873,7 @@ journey with StaffSync!
   * The person at the `INDEX` must be a potential hire
 
   `CONTRACT_END_DATE`: The contract end date of the employee in the format of yyyy-MM-dd.
+
 <br>
 
 **Examples:**
@@ -883,6 +915,7 @@ journey with StaffSync!
 
   **Format**: `sort FIELD [ORDER]`
   </div>
+
   <br>
 
   Sorts the list by the given parameter in the given order.
@@ -912,6 +945,7 @@ journey with StaffSync!
   * When sort date is used, potential hires show up at the bottom as they do not have a contract end date.
   * If the order is left out StaffSync will sort in ascending order by default.
   </div>
+
 <br>
 
 **Examples:**
@@ -966,6 +1000,7 @@ Action     | Format                                                             
 StaffSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 </div>
+
 <br>
 
 ### **Editing the data file**
@@ -1011,7 +1046,9 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 <div class="content">
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
 <br>
+
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 </div>
