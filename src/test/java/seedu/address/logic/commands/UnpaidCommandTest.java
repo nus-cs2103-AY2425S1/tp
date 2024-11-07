@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Frequency;
+import seedu.address.model.person.LastPaidDate;
 import seedu.address.model.person.Person;
 
 public class UnpaidCommandTest {
@@ -40,7 +41,8 @@ public class UnpaidCommandTest {
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
                 personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
-                false, personToMarkUnpaid.getFrequency(), personToMarkUnpaid.getProfilePicFilePath());
+                false, personToMarkUnpaid.getLastPaidDate(),
+                personToMarkUnpaid.getFrequency(), personToMarkUnpaid.getProfilePicFilePath());
 
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
@@ -74,7 +76,8 @@ public class UnpaidCommandTest {
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
                 personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
-                false, personToMarkUnpaid.getFrequency(), personToMarkUnpaid.getProfilePicFilePath());
+                false, personToMarkUnpaid.getLastPaidDate(),
+                personToMarkUnpaid.getFrequency(), personToMarkUnpaid.getProfilePicFilePath());
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
         assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
@@ -149,9 +152,11 @@ public class UnpaidCommandTest {
     public void unpaidPersonDescriptor_toString() {
         UnpaidCommand.UnpaidPersonDescriptor descriptor = new UnpaidCommand.UnpaidPersonDescriptor();
         descriptor.setHasNotPaid();
+        LastPaidDate lastPaidDate = new LastPaidDate("01 01 0000");
         String expected = new ToStringBuilder(descriptor)
                 .add("hasNotPaid", false)
                 .add("frequency", new Frequency("0"))
+                .add("lastPaidDate", lastPaidDate)
                 .toString();
         assertEquals(expected, descriptor.toString());
     }

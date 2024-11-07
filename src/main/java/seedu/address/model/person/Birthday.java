@@ -7,6 +7,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Represents a Person's birthday in the address book.
@@ -55,6 +56,24 @@ public class Birthday {
         }
 
         return !testDate.isAfter(LocalDate.now());
+    }
+
+    /**
+     * Checks if the person's birthday is within 7 days before or after the current date.
+     */
+    public boolean hasBirthdayWithin7Days() {
+        LocalDate today = LocalDate.now();
+        LocalDate birthdayThisYear = this.date.withYear(today.getYear());
+
+        long daysToBirthday = ChronoUnit.DAYS.between(today, birthdayThisYear);
+
+        // Adjust if birthday already passed and lookahead is next year's date
+        if (daysToBirthday < -7) {
+            birthdayThisYear = birthdayThisYear.plusYears(1);
+            daysToBirthday = ChronoUnit.DAYS.between(today, birthdayThisYear);
+        }
+
+        return Math.abs(daysToBirthday) <= 7;
     }
 
     @Override

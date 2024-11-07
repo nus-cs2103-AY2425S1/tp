@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.ConfirmationHandler;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -44,14 +45,29 @@ public class AddCommandTest {
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
-    // edit this to allow and disallow duplicate
+    // edit this to allow duplicate
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void executeDuplicatePerson_userConfirm_addSuccessful() throws Exception {
+        ConfirmationHandler mockHandler = person -> true;
+
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        CommandResult commandResult = new AddCommand(validPerson, mockHandler).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+                commandResult.getFeedbackToUser());
+    }
+
+    // edit this to disallow duplicate
+    @Test
+    public void executeDuplicatePerson_userCancel_throwsCommandException() {
+        ConfirmationHandler mockHandler = person -> false;
+
+        Person validPerson = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(validPerson, mockHandler);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, Messages.MESSAGE_USER_CANCEL, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -121,7 +137,8 @@ public class AddCommandTest {
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            // commented out because we are allowing duplicate operations
+            // throw new AssertionError("This method should not be called.");
         }
 
         @Override
