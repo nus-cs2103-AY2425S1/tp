@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
-import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.model.Model;
 import seedu.eventtory.model.ReadOnlyEventTory;
 import seedu.eventtory.model.ReadOnlyUserPrefs;
@@ -191,12 +190,17 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Index getRelativeIndexOfEvent(Event event) {
+    public int getRelativeIndexOfEvent(Event event) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public Index getRelativeIndexOfVendor(Vendor vendor) {
+    public int getRelativeIndexOfVendor(Vendor vendor) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableIntegerValue getIndexOfSelectedObject() {
         throw new AssertionError("This method should not be called.");
     }
 }

@@ -3,19 +3,57 @@
   title: ""
 ---
 
-# AddressBook Level-3
+<style>
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+</style>
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+<div style="text-align:center; margin-top: 50px;">
+  <h1>Welcome to EventTory!</h1>
+  <p><em>All your vendor and event management tool, all in one place 🎉</em></p>
+  <img src="images/Ui.png" alt="Ui" style="width: 80%; margin-top: 20px;">
+</div>
 
-![Ui](images/Ui.png)
+<div style="text-align:center; margin-top: 30px;">
+  <a href="https://github.com/AY2425S1-CS2103-F13-2/tp/actions">
+    <img src="https://github.com/AY2425S1-CS2103-F13-2/tp/workflows/Java%20CI/badge.svg" alt="CI Status">
+  </a>
+  <a href="https://app.codecov.io/gh/AY2425S1-CS2103-F13-2/tp">
+    <img src="https://codecov.io/gh/AY2425S1-CS2103-F13-2/tp/branch/master/graph/badge.svg" alt="codecov">
+  </a>
+</div>
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+<div style="margin-top: 50px;">
+  <h2>About EventTory 📋</h2>
+  <p><strong>EventTory is a desktop application for managing your vendors and events!</strong> While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).</p>
+</div>
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+<div style="text-align:center; margin-top: 30px; padding: 20px; background: linear-gradient(270deg, #1F398A, #14532D); background-size: 400% 400%; color: white; font-size: 1.5em; animation: gradient 5s ease infinite; border-radius: 16px; font-family: verdana">
+  From CLI users for CLI users 😎
+</div>
 
+<div style="margin-top: 30px;">
+  <h2>Features ✨</h2>
+  <ul>
+    <li>Manage vendors and events efficiently</li>
+    <li>Intuitive CLI for quick operations</li>
+  </ul>
+</div>
 
-**Acknowledgements**
+<div style="margin-top: 30px;">
+  <h2>Get Started 🚀</h2>
+  <ul>
+    <li>If you are interested in using EventTory, head over to the <a href="UserGuide.html#quick-start"><strong>Quick Start</strong> section of the <em>User Guide</em></a>.</li>
+    <li>If you are interested about developing EventTory, the <a href="DeveloperGuide.html"><strong>Developer Guide</strong></a> is a good place to start.</li>
+  </ul>
+</div>
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+<div style="margin-top: 50px;">
+  <h2>Acknowledgements 🙏</h2>
+  <ul>
+    <li>Libraries used: <a href="https://openjfx.io/">JavaFX</a>, <a href="https://github.com/FasterXML/jackson">Jackson</a>, <a href="https://github.com/junit-team/junit5">JUnit5</a></li>
+  </ul>
+</div>

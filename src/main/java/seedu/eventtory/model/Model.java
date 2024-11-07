@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
-import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.commons.exceptions.AssociationDeleteException;
 import seedu.eventtory.model.event.Event;
@@ -136,12 +135,17 @@ public interface Model {
     /**
      * Returns the relative index of the vendor in the filtered list.
      */
-    Index getRelativeIndexOfVendor(Vendor vendor);
+    int getRelativeIndexOfVendor(Vendor vendor);
 
     /**
      * Returns the relative index of the event in the filtered list.
      */
-    Index getRelativeIndexOfEvent(Event event);
+    int getRelativeIndexOfEvent(Event event);
+
+    /**
+     * Returns the relative index of the selected object in the filtered list.
+     */
+    ObservableIntegerValue getIndexOfSelectedObject();
 
     /**
      * Sets the selected vendor.

@@ -84,15 +84,15 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/everntTory/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete e/1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete e/1` Command" />
 
 <box type="info" seamless>
 
@@ -101,19 +101,24 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `EventToryParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteEventCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete an event).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `EventToryParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `CreateCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `CreateVendorCommand`) which the `EventToryParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `CreateCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+How commands work:
+* `XYZEventCommand` and `XYZVendorCommand` classes (e.g., `CreateEventCommand`, `CreateVendorCommand`, ...) inherit from their respective abstract classes (e.g., `CreateCommand`).
+* `ClearCommand`, `HelpCommand`, `ExitCommand`, `AssignCommand`, and `UnassignCommand` do not have corresponding `XYZEventCommand` and `XYZVendorCommand` classes.
+* `ListCommand` is not an abstract class.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/eventtory/model/Model.java)
@@ -143,14 +148,14 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103-F13-2/tp/blob/master/src/main/java/seedu/eventtory/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* can save both EventTory data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `EventToryStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`, for examples, see the JsonAdapted classes eg. `JsonAdaptedVendor`, `JsonAdapterEvent`)
 
 ### Common classes
 
@@ -161,6 +166,86 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Assign and Unassign Commands
+
+The assign command adds the ability for the user to assign a vendor to an event and vice versa when inside the detailed view for either an `Event` or `Vendor`.
+
+Given below is a usage scenario for the `assign` and `unassign` commands:
+
+Step 1. Enter the details view for either an `Event` or a `Vendor`. For example `view v/1` to view the first vendor.
+
+Step 2. Assign the first `Event` from the list of assignable events to the currently viewed `Vendor`, using the command `assign 1`. The `Event` should now be shifted from the list of assignable events to the list of assigned events.
+
+Step 3. To unassign the `Event` from the vendor, use the command `unassign 1`. The `Event` should now be shifted from the list of assigned events to the list of assignable events.
+
+The `AssignCommand` and `UnassignCommand` classes were introduced to represent these commands. To support parsing the arguments to both commands, the `AssignCommandParser` and `UnassignCommandParser` classes were added.
+
+For better understanding, refer to the sequence diagram below which illustrates the execution of the `assign` command:
+
+<puml src="diagrams/AssignSequenceDiagram.puml" width="800" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AssignCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Changes to Model
+
+Implementing these commands required significant changes to the `Model` of the application, details of which are covered in this section:
+
+* A unique identifier for both the `Event` and `Vendor` classes was added. This is represented by the new `UniqueId` class, which makes use of Java's built-in UUID class.
+* The `Association` class represents pairs of assigned events and vendors, which is done using a pair of `UniqueId` classes, taken from the respective `Event` and `Vendor` instances.
+* The list of associations in the current application's state are stored in the `UniqueAssociationList` class, which enforces a unique constraint on the `Association` instances stored within it.
+
+The following methods to support the `assign` and `unassign` commands were implemented in `EventTory`:
+
+* `EventTory#getAssociatedVendors(Event)` — Get the list of vendors associated to the provided event.
+* `EventTory#getAssociatedEvents(Vendor)` — Get the list of events associated to the provided vendor.
+* `EventTory#assignVendorToEvent(Vendor, Event)` — Create an association between the given `Vendor` and `Event`, and updates the list of associations.
+* `EventTory#unassignVendorFromEvent(Vendor, Event)` — Remove the association between the given `Vendor` and `Event`, and updates the list of associations.
+* `EventTory#getAssociationList()` — Get the full list of associations.
+* `EventTory#isVendorAssignedToEvent(Vendor, Event)` — Returns a boolean indicating whether an association exists between a given `Vendor` and `Event`.
+* `EventTory#setAssociations(List<Association>)` — Sets the state of the association list to the provided list.
+
+We also expose the following methods in the `Model` interface, exposing the same operations as the `EventTory` class:
+
+* `Model#getAssociatedVendors(Event)`
+* `Model#getAssociatedEvents(Vendor)`
+* `Model#assignVendorToEvent(Vendor, Event)`
+* `Model#unassignVendorFromEvent(Vendor, Event)`
+* `Model#getAssociationList()`
+* `Model#isVendorAssignedToEvent(Vendor, Event)`
+
+#### Changes to Storage
+
+To support data persistence, `JsonAdaptedAssociation` was implemented to allow storing the list of associations alongside `Vendor` and `Event` information. In storage data, the list of associations are represented in the following form:
+
+```
+"associations": [
+  {
+    "vendorId": "a1e2c3d4-5f67-4890-8a1b-123456789abc",
+    "eventId": "a1e2c3d4-5f67-4890-8a1b-123456789abd"
+  },
+  {
+    "vendorId": "b2f3d4e5-6a78-491a-9b2c-23456789abcd",
+    "eventId": "b2e3c4d5-6f78-49a1-9b2c-23456789abcd"
+  }
+]
+```
+
+In the case where the UUID strings are not valid UUID strings, or do not correspond to real vendors or events, the whole JSON document representing the data will be treated as invalid.
+
+#### Exception Handling
+
+Adding this command into EventTory introduced new edge cases that had to be handled as well. Their details are covered in this section:
+
+When deleting a `Vendor` or `Event` using the `delete` command, we have to make sure that it is not currently being assigned to any other item, otherwise this would lead to the application storing associations between items that no longer exist. To handle this, the `AssociationDeleteException` was added, to inform the user if they are trying to delete an item that is currently assigned to another item.
+
+Since associations are meant to be unique, the `DuplicateAssociationException` was also added to inform the user, if they attempt to assign a pair of events and vendors that have already been assigned to each other.
+
+To handle the event where the user attempts to unassign a vendor from an event, when there is no existing association between the 2 items, the `AssociationNotFoundException` was added.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -302,29 +387,33 @@ With the ability to track event details and contact information for various vend
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                           | So that I can…​                                                                                |
-|----------|-----------------------------|--------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `* * *`  | event planner               | create a new event with date, time and location        | easily track upcoming events                                                                   |
-| `* * *`  | event planner               | create a new vendor with phone number                  | keep track of vendors' data easily                                                             |
-| `* * *`  | event planner               | delete an event                                        | remove entries I no longer need and keep the address book less cluttered                       |
-| `* * *`  | event planner               | delete a vendor                                        | remove entries I no longer need and keep the address book less cluttered                       |
-| `* * *`  | event planner               | assign a vendor to an event                            | keep track of which vendors have been hired for an event                                       |
-| `* *`    | event planner               | find a vendor by name and tags                         | choose a suitable vendor quickly for a new event                                               |
-| `* *`    | event planner               | categorise vendors                                     | easily see what services a vendor provides                                                     |
-| `* *`    | event planner               | modify event and vendor details                        | correct any mistakes or changes made to an event or vendor                                     |
-| `* *`    | forgetful event planner     | write additional notes for an event or vendor          | keep track of miscellaneous information regarding each events or remarks regarding a vendor    |
-| `* *`    | event planner               | rate vendors in the system                             | keep track of how good past experiences of working with the vendor were                        |
-| `* *`    | event planner               | send Whatsapp or Telegram messages from within the app | easily contact vendors without 'leaving' the address book                                      |
-| `* *`    | fast typer                  | chain multiple commands together before entering       | accomplish multiple actions without worrying about hitting the 'Enter' key after every command |
-| `* *`    | computer user with no mouse | navigate the address book using only keyboard          | use the app without a mouse                                                                    |
-| `* *`    | event planner               | set progress statuses for vendors                      | keep track of completed vendor deliverables                                                    |
-| `* *`    | event planner               | archive events                                         | clear events that are completed                                                                |
-| `* *`    | event planner               | filter vendors by rating                               | avoid working with less reputable vendors                                                      |
-| `* *`    | event planner               | indicate the types of vendors required for an event    | know what manpower or vendor I am missing for an event                                         |
-| `* *`    | fast typer                  | map commands to (shorter) aliases                      | customise commands that I use often into more convenient phrases                               |
-| `* *`    | fast typer                  | autocomplete half-typed commands                       | reduce the number of keystrokes required per command                                           |
-| `* *`    | event planner               | view all my events on a calendar                       | easily monitor the events that I have across the week/month/year                               |
-| `* *`    | event planner               | tag a cost range for each vendor                       | easily find appropriate vendors according to the budget of specific events                     |
+| Priority | As a …​                     | I want to …​                                                      | So that I can…​                                                                                |
+|----------|-----------------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `* * *`  | event planner               | create a new event with name and date                             | easily track upcoming events                                                                   |
+| `* * *`  | event planner               | create a new vendor with name, phone number, and description      | keep track of vendors' data easily                                                             |
+| `* * *`  | event planner               | delete an event                                                   | remove entries I no longer need and keep the address book less cluttered                       |
+| `* * *`  | event planner               | delete a vendor                                                   | remove entries I no longer need and keep the address book less cluttered                       |
+| `* * *`  | event planner               | assign a vendor to an event                                       | keep track of which vendors have been hired for an event                                       |
+| `* * *`  | event planner               | unassign a vendor from an event                                   | remove vendors assigned from events when they are no longer need for an event                  |
+| `* *`    | event planner               | find a vendor by name and tags                                    | choose a suitable vendor quickly for a new event                                               |
+| `* *`    | event planner               | find an event by name and tags                                    | search for an event of interest                                                                |
+| `* *`    | event planner               | view information related to a vendor                              | lookup vendor information                                                                      |
+| `* *`    | event planner               | view information related to an event                              | lookup event information                                                                       |
+| `* *`    | computer user with no mouse | navigate the address book using only a keyboard                   | use the app without a mouse                                                                    |
+| `* *`    | event planner               | modify event and vendor details                                   | correct any mistakes or changes made to an event or vendor                                     |
+| `* *`    | forgetful event planner     | write additional notes for an event or vendor                     | keep track of miscellaneous information regarding each events or remarks regarding a vendor    |
+| `*`      | event planner               | categorise vendors                                                | easily see what services a vendor provides                                                     |
+| `*`      | event planner               | rate vendors in the system                                        | keep track of how good past experiences of working with the vendor were                        |
+| `*`      | event planner               | send Whatsapp or Telegram messages from within the app            | easily contact vendors without 'leaving' the address book                                      |
+| `*`      | fast typer                  | chain multiple commands together before entering                  | accomplish multiple actions without worrying about hitting the 'Enter' key after every command |
+| `*`      | event planner               | set progress statuses for vendors                                 | keep track of completed vendor deliverables                                                    |
+| `*`      | event planner               | archive events                                                    | clear events that are completed                                                                |
+| `*`      | event planner               | filter vendors by rating                                          | avoid working with less reputable vendors                                                      |
+| `*`      | event planner               | indicate the types of vendors required for an event               | know what manpower or vendor I am missing for an event                                         |
+| `*`      | fast typer                  | map commands to (shorter) aliases                                 | customise commands that I use often into more convenient phrases                               |
+| `*`      | fast typer                  | autocomplete half-typed commands                                  | reduce the number of keystrokes required per command                                           |
+| `*`      | event planner               | view all my events on a calendar                                  | easily monitor the events that I have across the week/month/year                               |
+| `*`      | event planner               | tag a cost range for each vendor                                  | easily find appropriate vendors according to the budget of specific events                     |
 
 ### Use cases
 
@@ -342,7 +431,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The event name is invalid or empty.
+* 1a. The event name is invalid.
 
     * 1a1. System shows an error message.
 
@@ -357,6 +446,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ---
 
 **Use case: UC02 - Assign a vendor to an event**
+
+Preconditions: User is viewing an item.
 
 **MSS**
 
@@ -374,21 +465,161 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. The event does not exist.
+* 2a. The selected item does not exist.
 
   * 2a1. System shows an error message.
 
       Use case ends.
 
-* 2b. The vendor does not exist.
+* 2b. The vendor has already been assigned to the event.
 
   * 2b1. System shows an error message.
 
       Use case ends.
 
-* 2c. The vendor has already been assigned to the event.
+---
 
-  * 2c1. System shows an error message.
+**Use case: UC03 - Unassign a vendor from an event**
+
+Preconditions: User is viewing an item.
+**MSS**
+
+1. User enters command to unassign a vendor from an event.
+2. System unassigns the vendor from the event.
+3. System displays a success message.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+
+    * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+
+* 2a. The selected item is invalid.
+
+    * 2a1. System shows an error message.
+
+      Use case ends.
+
+* 2b. The vendor is not assigned to the event.
+
+    * 2b1. System shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: UC04 - View an item**
+
+**MSS**
+1. User enters command to view an item.
+2. System displays success message and switches page to the details of the item.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+
+* 1b. The item does not exist.
+
+  * 1b1. System shows an error message.
+
+      Use case ends.
+
+---
+
+**Use case: UC05 - Delete an item**
+
+**MSS**
+1. User enters command to delete an item.
+2. System deletes the item.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+    Use case ends.
+
+* 1b. The item does not exist.
+
+  * 1b1. System shows an error message.
+
+    Use case ends.
+
+* 1c. The event has associated entities assigned to it.
+
+  * 1c1. System shows an error message.
+
+    Use case ends.
+
+* 2a. The item is currently being viewed.
+
+  * 2a1. System returns to the main page.
+
+     Use case ends.
+
+---
+
+** Use case: UC05 - Edit an item**
+
+**MSS**
+1. User enters command to edit an item.
+2. System updates the item with the new details provided.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+* 1b. The item does not exist.
+
+  * 1b1. System shows an error message.
+
+      Use case ends.
+
+* 1c. The updated details conflict with an existing item.
+
+  * 1c1. System shows an error message.
+
+      Use case ends.
+
+* 1d. The item is currently being viewed.
+
+  * 1d1. System updates the displayed item with the new details.
+
+      Use case ends.
+
+---
+
+**Use case: UC06 - List items**
+
+**MSS**
+1. User inputs the lists to display.
+2. System displays chosen lists.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
 
       Use case ends.
 
@@ -425,6 +656,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. **Vendor:** A service provider, such as a caterer, photographer, decorator, who is employed for events.
 
 11. **Vendor Rating:** A qualitative score assigned to a vendor to track their past performance in events.
+
+12. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
+
+13. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
 
 --------------------------------------------------------------------------------------------------------------------
 
