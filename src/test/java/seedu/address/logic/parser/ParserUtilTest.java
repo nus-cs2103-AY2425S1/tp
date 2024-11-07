@@ -40,28 +40,26 @@ public class ParserUtilTest {
     private static final String BLANK_ADDRESS = "";
     private static final String VALID_TAG_1_NAME = "florist";
     private static final String VALID_TAG_2_NAME = "photographer";
+    private static final String INVALID_TODO_DESCRIPTION = ""; // No description
+    private static final String INVALID_DEADLINE_FORMAT = "Submit assignment d/";
+    private static final String INVALID_EVENT_FORMAT = "Conference d/2024-10-01 d/";
 
-    private static final String INVALID_TASK_TYPE = "unknownTask";
-    private static final String INVALID_TODO_DESCRIPTION = "todo"; // No description
-    private static final String INVALID_DEADLINE_FORMAT = "deadline Submit assignment /by";
-    private static final String INVALID_EVENT_FORMAT = "event Conference /from 2024-10-01";
-
-    private static final String VALID_TODO_DESCRIPTION = "todo Buy groceries";
-    private static final String VALID_DEADLINE_DESCRIPTION = "deadline Submit assignment /by 2024-12-31";
-    private static final String VALID_EVENT_DESCRIPTION = "event Conference /from 2024-10-01 /to 2024-10-05";
+    private static final String VALID_TODO_DESCRIPTION = "Buy groceries";
+    private static final String VALID_DEADLINE_DESCRIPTION = "Submit assignment d/2024-12-31";
+    private static final String VALID_EVENT_DESCRIPTION = "Conference d/2024-10-01 d/2024-10-05";
 
     private static final String VALID_EVENT_START_DATE = "2024-10-01";
     private static final String VALID_EVENT_END_DATE = "2024-10-05";
     private static final String VALID_DEADLINE_DATE = "2024-12-31";
 
-    private static final String INVALID_DEADLINE_DATE_MONTH = "deadline Submit assignment /by 2024-13-31";
-    private static final String INVALID_DEADLINE_DATE_DAY = "deadline Submit assignment /by 2024-12-32";
-    private static final String INVALID_DEADLINE_DATE_STRING = "deadline Submit assignment /by not-a-date";
+    private static final String INVALID_DEADLINE_DATE_MONTH = "Submit assignment d/2024-13-31";
+    private static final String INVALID_DEADLINE_DATE_DAY = "Submit assignment d/2024-12-32";
+    private static final String INVALID_DEADLINE_DATE_STRING = "Submit assignment d/not-a-date";
 
-    private static final String INVALID_EVENT_DATE_MONTH = "event Conference /from 2024-13-01 /to 2024-12-31";
-    private static final String INVALID_EVENT_DATE_DAY = "event Conference /from 2024-12-01 /to 2024-12-32";
-    private static final String INVALID_EVENT_DATE_STRING = "event Conference /from 2024-12-01 /to not-a-date";
-    private static final String INVALID_EVENT_DATE_ORDER = "event Conference /from 2024-12-31 /to 2024-12-01";
+    private static final String INVALID_EVENT_DATE_MONTH = "Conference d/2024-13-01 d/2024-12-31";
+    private static final String INVALID_EVENT_DATE_DAY = "Conference d/2024-12-01 d/2024-12-32";
+    private static final String INVALID_EVENT_DATE_STRING = "Conference d/2024-12-01 d/not-a-date";
+    private static final String INVALID_EVENT_DATE_ORDER = "Conference d/2024-12-31 d/2024-12-01";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -227,10 +225,6 @@ public class ParserUtilTest {
     /*
     *=======================================================================================
     */
-    @Test
-    public void parseTask_invalidTaskType_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_TASK_TYPE));
-    }
 
     @Test
     public void parseTask_invalidTodoDescription_throwsParseException() {

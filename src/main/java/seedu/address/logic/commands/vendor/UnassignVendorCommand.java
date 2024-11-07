@@ -21,13 +21,15 @@ public class UnassignVendorCommand extends Command {
 
     public static final String COMMAND_WORD = "unassign-vendor";
 
+    public static final String COMMAND_KEYWORD = "uv";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unassigns the vendor identified by the index number used in the displayed person list.\n"
             + " The person becomes a normal contact in the addressbook and cannot have tasks assigned to it.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Contact unassigned and is no longer a vendor: %1$s";
+    public static final String MESSAGE_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "This vendor cannot be unassigned "
         + "as it still has a task.";

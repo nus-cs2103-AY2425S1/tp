@@ -17,16 +17,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateTagCommand;
-import seedu.address.logic.commands.CreateTaskCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTagCommand;
-import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListTasksCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindAddressCommand;
@@ -35,13 +32,18 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindTaskCommand;
 import seedu.address.logic.commands.findcommand.FindWeddingCommand;
+import seedu.address.logic.commands.task.CreateTaskCommand;
+import seedu.address.logic.commands.task.DeleteTaskCommand;
+import seedu.address.logic.commands.task.ListTasksCommand;
 import seedu.address.logic.commands.vendor.AddVendorCommand;
 import seedu.address.logic.commands.vendor.AssignVendorCommand;
 import seedu.address.logic.commands.vendor.UnassignVendorCommand;
 import seedu.address.logic.commands.wedding.AssignWeddingCommand;
 import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
+import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.ListWeddingsCommand;
 import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -52,6 +54,7 @@ import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredica
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TaskContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
@@ -153,6 +156,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void findTask() throws Exception {
+        List<String> keywords = Arrays.asList("Order wedding cake");
+        FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " tk/" + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTaskCommand(new TaskContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -204,6 +215,11 @@ public class AddressBookParserTest {
 
         DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
+
+        // Test using delete tag keyword
+        String userKeywordInput = DeleteTagCommand.COMMAND_KEYWORD + " t/vendor";
+        DeleteTagCommand keywordCommand = (DeleteTagCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
     }
 
     @Test
@@ -214,6 +230,11 @@ public class AddressBookParserTest {
 
         CreateWeddingCommand command = (CreateWeddingCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
+
+        // Test using create wedding keyword
+        String userKeywordInput = CreateWeddingCommand.COMMAND_KEYWORD + " w/Wedding 19";
+        CreateWeddingCommand keywordCommand = (CreateWeddingCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
     }
 
     @Test
@@ -224,6 +245,11 @@ public class AddressBookParserTest {
 
         DeleteWeddingCommand command = (DeleteWeddingCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
+
+        // Test using delete wedding keyword
+        String userKeywordInput = DeleteWeddingCommand.COMMAND_KEYWORD + " w/Joe's Wedding";
+        DeleteWeddingCommand keywordCommand = (DeleteWeddingCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
     }
 
     @Test
@@ -236,6 +262,12 @@ public class AddressBookParserTest {
 
         AssignWeddingCommand command = (AssignWeddingCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
+
+        // Test using assign wedding keyword
+        String userKeywordInput = AssignWeddingCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased()
+                + " w/Wedding 19 w/Joe's Wedding";
+        AssignWeddingCommand keywordCommand = (AssignWeddingCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
     }
 
     @Test
@@ -248,18 +280,58 @@ public class AddressBookParserTest {
 
         UnassignWeddingCommand command = (UnassignWeddingCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
+
+        // Test using unassign wedding keyword
+        String userKeywordInput = UnassignWeddingCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased()
+                + " w/Wedding 19 w/Joe's Wedding";
+        UnassignWeddingCommand keywordCommand = (UnassignWeddingCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
+    }
+
+    @Test
+    public void parseCommand_editWedding() throws Exception {
+        String newWeddingParameter = " w/New Wedding Name";
+        String userInput = EditWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + newWeddingParameter;
+        EditWeddingCommand.EditWeddingDescriptor editWeddingDescriptor = new EditWeddingCommand.EditWeddingDescriptor();
+        editWeddingDescriptor.setWeddingName(new WeddingName("New Wedding Name"));
+        EditWeddingCommand expectedCommand = new EditWeddingCommand(INDEX_FIRST, editWeddingDescriptor);
+
+        EditWeddingCommand command = (EditWeddingCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+
+        // Test using edit wedding keyword
+        String userKeywordInput = EditWeddingCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased()
+                + newWeddingParameter;
+        EditWeddingCommand keywordCommand = (EditWeddingCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
     }
 
     @Test
     public void parseCommand_listWeddings() throws Exception {
         assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD) instanceof ListWeddingsCommand);
         assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD + " 3") instanceof ListWeddingsCommand);
+        // Test using list weddings keyword
+        assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_KEYWORD + " 3") instanceof ListWeddingsCommand);
     }
 
     @Test
     public void parseCommand_listTask() throws Exception {
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD) instanceof ListTasksCommand);
         assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_WORD + " 3") instanceof ListTasksCommand);
+        // Test using list tasks keyword
+        assertTrue(parser.parseCommand(ListTasksCommand.COMMAND_KEYWORD + " 3") instanceof ListTasksCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteTask() throws Exception {
+        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
+                DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteTaskCommand(INDEX_FIRST), command);
+
+        // Test using delete task keyword
+        DeleteTaskCommand keywordCommand = (DeleteTaskCommand) parser.parseCommand(
+                DeleteTaskCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteTaskCommand(INDEX_FIRST), keywordCommand);
     }
 
     @Test
@@ -267,6 +339,11 @@ public class AddressBookParserTest {
         AssignVendorCommand command = (AssignVendorCommand) parser.parseCommand(
                 AssignVendorCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new AssignVendorCommand(INDEX_FIRST), command);
+
+        // Test using assign vendor keyword
+        AssignVendorCommand keywordCommand = (AssignVendorCommand) parser.parseCommand(
+                AssignVendorCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new AssignVendorCommand(INDEX_FIRST), keywordCommand);
     }
 
     @Test
@@ -274,6 +351,11 @@ public class AddressBookParserTest {
         UnassignVendorCommand command = (UnassignVendorCommand) parser.parseCommand(
                 UnassignVendorCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new UnassignVendorCommand(INDEX_FIRST), command);
+
+        // Test using unassign vendor keyword
+        UnassignVendorCommand keywordCommand = (UnassignVendorCommand) parser.parseCommand(
+                UnassignVendorCommand.COMMAND_KEYWORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new UnassignVendorCommand(INDEX_FIRST), keywordCommand);
     }
 
     @Test
@@ -282,26 +364,31 @@ public class AddressBookParserTest {
         String userInput = AddVendorCommand.COMMAND_WORD + " n/Alison Longwood";
         AddVendorCommand command = (AddVendorCommand) parser.parseCommand(userInput);
         assertEquals(new AddVendorCommand(vendor), command);
+
+        // Test using add vendor keyword
+        String userKeywordInput = AddVendorCommand.COMMAND_KEYWORD + " n/Alison Longwood";
+        AddVendorCommand keywordCommand = (AddVendorCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(new AddVendorCommand(vendor), keywordCommand);
     }
 
     @Test
     public void parseCommand_createTask() throws Exception {
         String userInput = CreateTaskCommand.COMMAND_WORD
-                + " tk/todo Buy groceries tk/deadline Submit report /by 2024-12-31"
-                + " tk/event Project meeting /from 2024-10-10 /to 2024-10-11";
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
         HashSet<Task> tasksToAdd = new HashSet<>(TypicalTasks.getTypicalTasks());
 
         CreateTaskCommand expectedCommand = new CreateTaskCommand(tasksToAdd);
         CreateTaskCommand command = (CreateTaskCommand) parser.parseCommand(userInput);
 
         assertEquals(expectedCommand, command);
-    }
 
-    @Test
-    public void parseCommand_deleteTask() throws Exception {
-        DeleteTaskCommand command = (DeleteTaskCommand) parser.parseCommand(
-                DeleteTaskCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteTaskCommand(INDEX_FIRST), command);
+        // Test using create task keyword
+        String userKeywordInput = CreateTaskCommand.COMMAND_KEYWORD
+                + " tk/Buy groceries tk/Submit report d/2024-12-31"
+                + " tk/Project meeting d/2024-10-10 d/2024-10-11";
+        CreateTaskCommand keywordCommand = (CreateTaskCommand) parser.parseCommand(userKeywordInput);
+        assertEquals(expectedCommand, keywordCommand);
     }
 
 

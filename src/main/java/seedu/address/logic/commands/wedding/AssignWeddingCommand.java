@@ -26,6 +26,8 @@ public class AssignWeddingCommand extends Command {
 
     public static final String COMMAND_WORD = "assign-wedding";
 
+    public static final String COMMAND_KEYWORD = "asw";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds one or multiple weddings to the person identified "
             + "by the index number used in the last person listing.\n"
@@ -83,22 +85,26 @@ public class AssignWeddingCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Set<Wedding> updatedWeddings = new HashSet<>();
 
         for (Wedding wedding : weddingsToAdd) {
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
                     CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);
                     newWeddingCommand.execute(model);
+                    wedding.increasePeopleCount();
+                    updatedWeddings.add(wedding);
                 } else {
                     throw new CommandException(
                             MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
+            } else {
+                Wedding weddingToEdit = model.getWedding(wedding);
+                weddingToEdit.increasePeopleCount();
+                updatedWeddings.remove(weddingToEdit);
+                updatedWeddings.add(weddingToEdit);
             }
-            wedding.increasePeopleCount();
         }
-
-        Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
-        updatedWeddings.addAll(weddingsToAdd);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -111,7 +117,7 @@ public class AssignWeddingCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
+        model.updateFilteredWeddingList(Model.PREDICATE_SHOW_ALL_WEDDINGS);
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 

@@ -23,6 +23,8 @@ public class AddVendorCommand extends Command {
 
     public static final String COMMAND_WORD = "add-vendor";
 
+    public static final String COMMAND_KEYWORD = "addv";
+
     // to add task field prefix and example at the end
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds the person identified by the index number used in the last person listing "

@@ -3,7 +3,6 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.CLIVE;
 import static seedu.address.testutil.TypicalVendors.BORIS;
 
@@ -40,7 +39,7 @@ public class JsonAdaptedVendorTest {
             .map(JsonAdaptedWedding::new)
             .collect(Collectors.toList());
 
-    private static final List<JsonAdaptedTask> VALID_TASKS = CARL.getTasks().stream()
+    private static final List<JsonAdaptedTask> VALID_TASKS = BORIS.getTasks().stream()
             .map(task -> {
                 if (task instanceof Todo) {
                     return new JsonAdaptedTodo((Todo) task);

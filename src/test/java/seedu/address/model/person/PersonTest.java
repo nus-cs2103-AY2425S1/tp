@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -24,6 +25,20 @@ public class PersonTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
+    public void taskNotAssigned_returnsFalse() {
+        Person person = ALICE;
+        Task task = new Task(VALID_TASK_TODO);
+        assertFalse(person.hasTask(task));
+    }
+    @Test
+    public void removeTask_taskAssigned_taskRemovedSuccessfully() {
+        Person person = new PersonBuilder().withName("assigned").withTasks(VALID_TASK_TODO).build();
+        Task task = new Task(VALID_TASK_TODO);
+        person.removeTask(task);
+        assertFalse(person.hasTask(task));
     }
 
     @Test
@@ -43,9 +58,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name is same but differs in case -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";

@@ -55,7 +55,7 @@ public class TagName {
         }
 
         TagName otherName = (TagName) other;
-        return tagName.equals(otherName.tagName);
+        return tagName.equalsIgnoreCase(otherName.tagName);
     }
 
     @Override

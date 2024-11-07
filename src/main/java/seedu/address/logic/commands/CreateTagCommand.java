@@ -16,6 +16,8 @@ public class CreateTagCommand extends Command {
 
     public static final String COMMAND_WORD = "create-tag";
 
+    public static final String COMMAND_KEYWORD = "ctag";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a tag in the address book. \n"
             + "Parameters: "
             + PREFIX_TAG + "TAG\n"

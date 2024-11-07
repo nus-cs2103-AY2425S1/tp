@@ -21,6 +21,8 @@ import seedu.address.model.wedding.Wedding;
 public class DeleteWeddingCommand extends Command {
     public static final String COMMAND_WORD = "delete-wedding";
 
+    public static final String COMMAND_KEYWORD = "dw";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the wedding identified by the wedding name. Wedding names are case sensitive.\n"
             + "Parameters: " + PREFIX_WEDDING + "WEDDING (must exist in the Wedlinker)\n"

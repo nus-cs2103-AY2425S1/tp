@@ -20,6 +20,8 @@ public class AssignVendorCommand extends Command {
 
     public static final String COMMAND_WORD = "assign-vendor";
 
+    public static final String COMMAND_KEYWORD = "asv";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Assigns the person identified by the index number used in the last person listing "
             + "as a vendor.\n"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:id="panelsHolder" styleClass="pane-holder-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+        <StackPane fx:id="personPanelPlaceholder" VBox.vgrow="ALWAYS" />
+    </VBox>
+
+    <VBox fx:id="entityList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+        <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS" />
+    </VBox>
+</HBox>

@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 public class ListWeddingsCommand extends Command {
 
     public static final String COMMAND_WORD = "list-weddings";
+    public static final String COMMAND_KEYWORD = "lw";
 
     public static final String MESSAGE_SUCCESS = "Listed all weddings";
 

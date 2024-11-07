@@ -55,7 +55,8 @@ public class SampleDataUtil {
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("hairstylist"),
                 getWeddingSet("Tom's Wedding"),
-                getTaskSet("event: Schedule Hair and Makeup Trials"))
+                getTaskSet(""))
+
         };
     }
 
@@ -63,6 +64,9 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+            if (samplePerson.getName().fullName != "Roy Balakrishnan") {
+                sampleAb.addVendor(samplePerson);
+            }
         }
         //TODO tags & weddings
         return sampleAb;
