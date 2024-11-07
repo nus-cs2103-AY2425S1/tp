@@ -54,9 +54,10 @@ public class TaskStatusModifier {
         Set<Task> modifiedTasks = new HashSet<>();
 
         for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX + ": "
-                        + targetIndex.getOneBased());
+            if (targetIndex.getZeroBased() >= lastShownList.size() || targetIndex.getZeroBased() < 0) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                        targetIndex.getOneBased(),
+                        1, lastShownList.size()));
             }
             Task taskToModify = lastShownList.get(targetIndex.getZeroBased());
 
@@ -126,10 +127,9 @@ public class TaskStatusModifier {
         if (this == other) {
             return true;
         }
-        if (!(other instanceof TaskStatusModifier)) {
+        if (!(other instanceof TaskStatusModifier otherModifier)) {
             return false;
         }
-        TaskStatusModifier otherModifier = (TaskStatusModifier) other;
         return markAsDone == otherModifier.markAsDone && targetIndexes.equals(otherModifier.targetIndexes);
     }
 

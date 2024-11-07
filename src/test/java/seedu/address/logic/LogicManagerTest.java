@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_NOTHING_TO_PERFORM_ON;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -59,7 +60,7 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand);
+        assertCommandException(deleteCommand, String.format(MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", "delete"));
     }
 
     @Test
@@ -116,8 +117,8 @@ public class LogicManagerTest {
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandException(String inputCommand) {
-        assertCommandFailure(inputCommand, CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    private void assertCommandException(String inputCommand, String expectedMessage) {
+        assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
     }
 
     /**

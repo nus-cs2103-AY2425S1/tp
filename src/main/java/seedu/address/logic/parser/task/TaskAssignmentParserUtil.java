@@ -48,11 +48,14 @@ public class TaskAssignmentParserUtil {
     public static Set<Index> parseMultipleIndexes(String[] args, int startPosition) throws ParseException {
         Set<Index> indexes = new HashSet<>();
 
-        for (int i = startPosition; i < args.length; i++) {
-            Index index = ParserUtil.parseIndex(args[i]);
-            indexes.add(index);
+        try {
+            for (int i = startPosition; i < args.length; i++) {
+                Index index = Index.oneBasedNoConstraints(Integer.parseInt(args[i]));
+                indexes.add(index);
+            }
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, (Object) args), nfe);
         }
-
         return indexes;
     }
 

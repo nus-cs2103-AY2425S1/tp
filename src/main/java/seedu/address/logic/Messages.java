@@ -18,9 +18,12 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid."
-            + "\n Please enter a valid index from %d to %d.";
+    public static final String MESSAGE_ENTER_VALID_INDEX = "Please enter a valid index from %d to %d.";
+    public static final String MESSAGE_NOTHING_TO_PERFORM_ON = "There are no %s to %s.";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid. \n"
+            + MESSAGE_ENTER_VALID_INDEX;
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided (%d) is invalid. \n"
+            + MESSAGE_ENTER_VALID_INDEX;
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
     public static final String MESSAGE_TASK_NOT_FOUND_IN_AB = "Task does not exist in the address book.";
     public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
@@ -34,8 +37,8 @@ public class Messages {
     public static final String MESSAGE_UNASSIGN_TASK_SUCCESS = "Removed task(s) %1$s from %2$s.";
     public static final String MESSAGE_TASK_NOT_FOUND_IN_CONTACT = "Some task(s) "
             + "were not found in the person's task list.";
-    public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "The index specified does not refer "
-            + "to a Vendor, tasks can only be assigned to vendors.";
+    public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "%1$s is not a Vendor, "
+            + "tasks can only be assigned to vendors.";
     public static final String MESSAGE_ADD_WEDDING_SUCCESS = "Added wedding(s) %1$s to %2$s.";
     public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
     public static final String MESSAGE_WEDDING_NOT_FOUND = "One or more specified weddings do not exist in "
@@ -52,6 +55,8 @@ public class Messages {
             + " This will unassign all people currently with the Tag.";
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "Some tasks specified are already completed.";
     public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "Some tasks specified are already uncompleted.";
+    public static final String MESSAGE_FORCE_UNASSIGN_VENDOR = "Use f/ to force the unassignment of vendors."
+            + " This will unassign all tasks currently with the Vendor.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

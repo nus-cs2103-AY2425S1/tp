@@ -22,7 +22,7 @@ public class DeleteTagCommandTest {
     @Test
     public void execute_validDeleteTagCommand_success() {
         Tag tagToDelete = model.getFilteredTagList().get(0);
-        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete, true);
 
         String expectedMessage = String.format(DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS,
                 Messages.format(tagToDelete));
@@ -34,7 +34,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_validDeleteTagCommandStillInUse_failure() {
-        Tag tagToDelete = model.getFilteredTagList().get(3);
+        Tag tagToDelete = model.getFilteredTagList().get(1);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete);
         String expectedMessage = String.format(
                 DeleteTagCommand.MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED, Messages.format(tagToDelete))
@@ -45,7 +45,7 @@ public class DeleteTagCommandTest {
 
     @Test
     public void execute_validDeleteTagCommandStillInUseForce_success() {
-        Tag tagToDelete = model.getFilteredTagList().get(3);
+        Tag tagToDelete = model.getFilteredTagList().get(1);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(tagToDelete, true);
         String expectedMessage = String.format(
                 DeleteTagCommand.MESSAGE_DELETE_TAG_SUCCESS, Messages.format(tagToDelete));
