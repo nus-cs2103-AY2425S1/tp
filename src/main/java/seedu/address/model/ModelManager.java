@@ -52,7 +52,7 @@ public class ModelManager implements Model {
         sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority
                 .thenComparing(person -> person.getName().toString())); // sort by name alphabetically after
 
-        this.appointments = FXCollections.observableList(appointments);
+        this.appointments = FXCollections.observableArrayList(appointments);
         filteredAppointments = new FilteredList<>(this.appointments);
         sortedAppointments = new SortedList<>(filteredAppointments);
         sortedAppointments.setComparator(Comparator.comparing(Appointment::date)
@@ -144,6 +144,12 @@ public class ModelManager implements Model {
     }
 
     //=========== Appointments ================================================================================
+
+    @Override
+    public void setAppointmentList(List<Appointment> appointments) {
+        requireNonNull(appointments);
+        this.appointments.setAll(appointments);
+    }
 
     @Override
     public List<Appointment> getAppointmentList() {
@@ -249,6 +255,8 @@ public class ModelManager implements Model {
     public void updateSortingOrder(Comparator<Person> comparator) {
         sortedPersons.setComparator(comparator);
     }
+
+    //=========== Filtered Appointment List Accessors =============================================================
 
     @Override
     public ObservableList<Appointment> getFilteredAppointmentList() {

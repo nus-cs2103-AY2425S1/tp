@@ -111,6 +111,11 @@ public interface Model {
      */
     void updateSortingOrder(Comparator<Person> comparator);
 
+    /**
+     * Replaces appointment list data with the data in {@code appointments}.
+     */
+    void setAppointmentList(List<Appointment> appointments);
+
     /** Returns an unmodifiable view of the appointment list */
     List<Appointment> getAppointmentList();
 
