@@ -25,6 +25,8 @@ public class FavCommand extends Command {
 
     public static final String MESSAGE_FAV_COMPANY_SUCCESS = "Favourited company: %1$s";
 
+    public static final String MESSAGE_COMPANY_ALREADY_FAV = "%1$s is already favourited!";
+
     private final Index index;
 
     /**
@@ -44,6 +46,11 @@ public class FavCommand extends Command {
         }
 
         Company companyToFav = lastShownList.get(index.getZeroBased());
+
+        if (companyToFav.getIsFavourite()) {
+            return new CommandResult(String.format(MESSAGE_COMPANY_ALREADY_FAV, companyToFav.getName()));
+        }
+
         Company editedCompany = new Company(companyToFav.getName(), companyToFav.getPhone(), companyToFav.getEmail(),
                 companyToFav.getAddress(), companyToFav.getTags(),
                 companyToFav.getStatus(), companyToFav.getApplications(),

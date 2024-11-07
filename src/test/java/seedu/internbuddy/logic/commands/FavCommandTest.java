@@ -37,6 +37,26 @@ public class FavCommandTest {
     }
 
     @Test
+    public void execute_validIndex_CompanyAlreadyFavourited() {
+        Company companyToFav = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        FavCommand favCommand = new FavCommand(INDEX_FIRST_COMPANY);
+
+        String expectedMessage = String.format(FavCommand.MESSAGE_COMPANY_ALREADY_FAV,
+                companyToFav.getName());
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setCompany(companyToFav, new Company(companyToFav.getName(),
+                companyToFav.getPhone(), companyToFav.getEmail(),
+                companyToFav.getAddress(), companyToFav.getTags(),
+                companyToFav.getStatus(), companyToFav.getApplications(),
+                true));
+
+        expectedModel alrFavCompany =
+
+        assertCommandSuccess(favCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
         FavCommand favCommand = new FavCommand(outOfBoundIndex);
