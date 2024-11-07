@@ -108,18 +108,20 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <br>
 
+#### General Interaction
+
 The general interactions within the `Logic` component is shown in the sequence diagram below, taking `execute("delete 1")` API call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a person and his/her [participation](#participation-class)).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -184,7 +186,6 @@ This section describes some noteworthy details on how certain features are imple
 `Students` are named as `Persons` due to Legacy code.
 </div>
 
----
 
 ### Storage feature
 
@@ -288,9 +289,8 @@ The order which storage loads `Person`, `Tutorial` and `Participation` is shown 
 The `Participation` objects are created using corresponding `Person` and `Tutorial` objects in the `AddressBook`
 based on [uniqueness](#uniqueness-of-objects).
 
----
 
-### Find Command Implementation
+### Find feature
 
 The following sequence diagram shows how a find operation goes through the `Logic` component
 ![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
@@ -305,9 +305,8 @@ predicates to create a `FindCommand` object.
 
 `Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
 
----
 
-### **Enroll and Unenroll feature**
+### Enroll and Unenroll feature
 
 The implementation of the Enroll and Unenroll feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Enroll feature when the user inputs `enroll 1 tut/math` will be shown below.
 
@@ -342,18 +341,53 @@ The implementation of the Unenroll feature is similar to that of the example giv
 
 <br>
 
-#### **Participation Class**
+#### Participation Class
 `Participation` is an **association** class used to represent the relationship between a student and a tutorial, as well as his/her attendance, which is stored in a List. Below is a class diagram denoting such a relationship.
 
 <img src="images/ParticipationAsAssociationDiagram.png" width="400" />
 
 When storing data, each `Participation` object is stored separately from `Student` and `Tutorial`. Please refer to the [Storage Feature](#storage-feature) for more information of how the `Participation` objects are being stored.
 
----
+### **Add Student and Create Tutorial feature**
 
-### **List and Clear feature**  
+The implementation of the Add Student and Create Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for **Add Student** feature when the user inputs `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  will be shown below.   
 
-The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](?tab=t.0#heading=h.e3816ie7ouik). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+For simplicity's sake, we use `add n/…` to represent the user input in the sequence diagram below.
+</div>
+
+![AddCommandSequenceDiagram-Logic](images/AddCommandSequenceDiagram.png)
+
+The main steps for execution are similar to the Enroll and Unenroll feature documented [above](#enroll-and-unenroll-feature). The main difference is that **AddCommandParser** does not process the index and the `tut` prefix, but instead, it processes other prefixes like `n/` and  `e/`.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+Between Add Student and Create Tutorial feature, the main difference is with regard to how they access the Model Component. Create Tutorial calls `hasTutorial(...)` and `createTutorial(...)`  method from the Model Component instead.
+</div>
+
+### **Delete Student and Close Tutorial feature**
+
+The implementation of the Delete Student and Close Tutorial feature follows closely with the general format provided in the Logic Component [above](#logic-component). The implementation of these two commands are also similar to each other. So as an example, only the sequence diagram for Delete Student feature when the user inputs `delete 1` will be shown below. 
+
+Note that this sequence diagram is the same as the one used in [Logic Component](#logic-component), but it is added here for easier referencing.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+
+The main steps for execution are similar to the Enroll and Unenroll feature documented [above](#enroll-and-unenroll-feature), ignoring the difference in parsers and commands being executed.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+
+Between Delete Student and Close Tutorial feature, the main difference is with regard to how they access the Model Component. Instead of calling student-related methods such as `getFilteredPersonList()` and `deletePerson(...),` Close Tutorial calls tutorial-related methods like `getTutorialList()` and `deleteTutorial(...)` instead.
+</div>
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
+`Student` are named as `Person` due to Legacy code.
+</div>
+
+### List and Clear feature
+
+The implementation of the List and Clear feature **deviates** slightly from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. As these two commands are similar to each other, so only the sequence diagram for List feature when the user inputs `list` will be shown below.
 
 ![ListCommandSequenceDiagram-Logic](images/ListCommandSequenceDiagram.png)
 
@@ -371,6 +405,22 @@ The main steps for this execution are:
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
 
 The implementation of the Clear feature is similar to that of the example given above, but instead of `updateFilteredPersonList(...)` method of the Model Component being called, `setAddressBook(...)` is called.
+
+</div>
+
+
+
+### Help and Exit feature
+
+The implementation of the Help and Exit feature **deviates** from the general format provided in the Logic Component [above](#logic-component). Since there are no arguments used when executing these commands, they will not require a `Parser` to check the inputs. In addition, they will not be accessing the `Model` Component, since these two features are not updating or retrieving data. As these two commands are similar to each other, so only the sequence diagram for **Help** feature when the user inputs `help` will be shown below.
+
+![HelpCommandSequenceDiagram-Logic](images/HelpCommandSequenceDiagram.png)
+
+Tha main steps of execution are similar to the [List and Clear feature](#list-and-clear-feature), excluding Step 5.
+
+<div markdown="span" class="alert alert-primary">:pushpin: **Note:** 
+
+The implementation of the Exit feature is similar to that of the example given above.
 
 </div>
 
