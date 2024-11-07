@@ -37,7 +37,8 @@ public class DeleteCommand extends Command {
      *
      * @param targetIndices A list of indices to be validated.
      * @param lastShownListSize The size of the last displayed person list.
-     * @throws CommandException if any index in targetIndices is out of bounds (i.e., equal to or greater than lastShownListSize).
+     * @throws CommandException if any index in targetIndices is out of bounds
+     *      (i.e., equal to or greater than lastShownListSize).
      */
     private void validateIndices(List<Index> targetIndices, Integer lastShownListSize) throws CommandException {
         for (Index targetIndex : targetIndices) {
