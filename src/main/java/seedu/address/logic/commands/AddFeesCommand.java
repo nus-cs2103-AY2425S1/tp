@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
 import java.util.List;
@@ -90,6 +91,11 @@ public class AddFeesCommand extends Command {
             Model model, Person originalStudent, Person updatedStudent) throws CommandException {
         List<Participation> participationsToUpdate = model.getParticipationList()
                 .filtered(participation -> participation.getStudent().isSamePerson(originalStudent));
+
+        if (participationsToUpdate.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_PERSON_NOT_ENROLLED_FOR_PAYMENT,
+                    updatedStudent.getName()));
+        }
 
         for (Participation participation : participationsToUpdate) {
             Participation updatedParticipation = new Participation(updatedStudent,
