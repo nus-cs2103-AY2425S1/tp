@@ -7,7 +7,6 @@ import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
 import javafx.collections.ObservableList;
 import seedu.eventtory.commons.core.GuiSettings;
-import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.commons.exceptions.AssociationDeleteException;
 import seedu.eventtory.model.event.Event;
