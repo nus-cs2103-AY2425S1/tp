@@ -103,6 +103,7 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL | p/PHONE_NUMBER e/EMAIL) [r/MODUL
 The command accepts either one phone number, one email, or both.
 </box>
 
+* `NAME` can take any values and can not be blank. Refer to the [input format section](#input-format) to find out more.
 * `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
 * `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
@@ -334,6 +335,10 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 ## Input format
+
+### `NAME` field
+
+In our application, we understand that everyone's names can have various characters and symbols, thus we decided that as long as it is not a blank string, it is considered acceptable.
 
 ### Concept of a phone number
 
