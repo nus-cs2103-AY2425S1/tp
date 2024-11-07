@@ -139,9 +139,11 @@ public class CommandTablePanel extends UiPart<Region> {
                 setGraphic(null);
             } else {
                 text.setText(item);
-                text.setStyle("-fx-fill: white;");
+
                 text.wrappingWidthProperty()
                         .bind(getTableColumn().widthProperty().subtract(10));
+                text.getStyleClass().add("help-textbox");
+                text.setId("help-textbox");
                 setGraphic(text);
             }
         }

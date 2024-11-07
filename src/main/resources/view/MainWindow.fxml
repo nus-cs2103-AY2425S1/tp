@@ -20,13 +20,16 @@
     <Scene>
       <stylesheets>
         <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
       </stylesheets>
 
       <VBox>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="View">
+            <MenuItem fx:id="toggleThemeMenuItem" mnemonicParsing="false"
+                      onAction="#handleThemeChange" text="Switch to Light Theme" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />

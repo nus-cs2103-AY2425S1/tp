@@ -289,7 +289,7 @@ particular, this representative works with B2B sales.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …           | I want to …                                                                 | So that I can …                                                        |
-| -------- | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| -------- |------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | user             | add a new contact                                                           | save the contact information of people                                 |
 | `* * *`  | user             | delete a contact                                                            | free up space in my app                                                |
 | `* * *`  | user             | view all contact                                                            | see the full list of contacts                                          |
@@ -325,6 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user             | sort contacts by name                                                       | locate a person easily                                                 |
 | `*`      | experienced user | use keyboard shortcuts                                                      | navigate the app faster                                                |
 | `*`      | sales rep        | contact my client quickly from the app                                      | avoid typing numbers repeatedly on my _device_                         |
+| `*`      | user             | toggle my application between light and dark mode                           | see the application in my preferred theme                              |
 
 ### Use cases
 
@@ -606,6 +607,15 @@ _Similar to UC10 except without extension 2b._
 - 1b. System detects that the file is used by another process.
 
   - 1b1. System shows an error message.
+
+    Use case ends.
+
+**Use case: UC14 - Toggle application's theme** 
+
+**MSS**
+
+1.  Actor toggle the system's theme.
+2.  System changes theme.
 
     Use case ends.
 
