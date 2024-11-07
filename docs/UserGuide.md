@@ -100,10 +100,9 @@ Format: `add_student n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br>
 Constraints:
 * Tags must be at most 40 characters long, and must be alphanumeric
 * Maximum length for a name is 256 characters long
-* Maximum phone number is 16 numbers.
+* Maximum phone number is 16 numbers
 * Maximum email length is 256 characters
 <box type="tip" seamless>
-
 **Tip:** A student can have any number of tags (including 0)
 </box>
 
@@ -124,7 +123,6 @@ Format: `view_student INDEX`
 
 Constraints:
 * Index must exist in the current displayed student list.
-  <box type="tip" seamless>
 
 Examples:
 * `list` followed by `view_student 2` displays the 2nd student in the list.
@@ -141,6 +139,14 @@ Format: `list`
 Edits an existing student in the app.
 
 Format: `edit_student si/INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Constraints:
+* Tags must be at most 40 characters long, and must be alphanumeric
+* Maximum length for a name is 256 characters long
+* Maximum phone number is 16 numbers
+* Maximum email length is 256 characters
+  <box type="tip" seamless>
+  **Tip:** A student can have any number of tags (including 0)
+  </box>
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -199,7 +205,6 @@ Format: `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`
 
 Constraints:
 * Assignment name must be at most 256 characters long, and must be alphanumeric
-  <box type="tip" seamless>
 
 Examples:
 * `list` followed by `add_assignment si/3 an/Assignment 1 ms/100` adds an assignment to the
@@ -226,7 +231,7 @@ Examples:
 
 Edits an assignment belonging to a student based on the student's index number and the assignment's index.
 
-Format: `edit_assignment si/INDEX ai/INDEX`
+Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`
 
 * Edits the assignment at the specified `INDEX`. The indices refer to the index number shown in the displayed student 
   list and the assignment list on the student detail panel respectively.
@@ -370,7 +375,7 @@ Action            | Format, Examples
 **Help**          | `help`
 **Add Assignment**| `add_assignment si/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `add_assignment si/1 an/Assignment 1 ms/100`
 **Delete Assignment** | `delete_assignment si/INDEX ai/INDEX`<br> e.g., `delete_assignment si/1 ai/1`
-**Edit Assignment** | `edit_assignment si/INDEX ai/INDEX an/ASSIGNMENT_NAME ms/MAX_SCORE`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
+**Edit Assignment** | `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`<br> e.g., `edit_assignment si/1 ai/1 an/Assignment 2 ms/80`
 **Mark Assignment** | `mark si/INDEX ai/INDEX`<br> e.g., `mark si/1 ai/1`
 **Unmark Assignment** | `unmark si/INDEX ai/INDEX`<br> e.g., `unmark si/1 ai/1`
 **Grade Assignment** | `grade si/INDEX ai/INDEX s/ASSIGNMENT_SCORE`<br> e.g., `grade si/1 ai/1 s/100`
