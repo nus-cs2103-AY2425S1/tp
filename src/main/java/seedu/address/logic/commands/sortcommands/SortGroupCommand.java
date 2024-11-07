@@ -23,7 +23,7 @@ public class SortGroupCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "sg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Sorts all groups.\n"
+        + ": Sorts all groups by group name in alphabetical order.\n"
         + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all groups by group name in alphabetical order";

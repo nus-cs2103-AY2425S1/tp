@@ -48,7 +48,9 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(task.getTaskName().toString());
+        name.setWrapText(true);
         deadline.setText("Deadline: " + task.getDeadline().toString());
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);

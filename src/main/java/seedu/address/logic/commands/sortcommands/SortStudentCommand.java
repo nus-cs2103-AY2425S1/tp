@@ -23,7 +23,7 @@ public class SortStudentCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "ss";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Sorts all students.\n"
+        + ": Sorts all students by student name in alphabetical order.\n"
         + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Sorted all students by student name in alphabetical order";

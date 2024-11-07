@@ -37,8 +37,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [
-`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [
-`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in
+`Main`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [
+`MainApp`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in
 charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -56,7 +56,7 @@ The bulk of the app's work is done by the following four components:
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete 1`.
+the command `del_s sno/A0123456A`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -78,7 +78,7 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified in [
-`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+`Ui.java`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -88,34 +88,34 @@ the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of the [
-`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+`MainWindow`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified in [
-`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+`MainWindow.fxml`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
 **API** : [
-`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+`Logic.java`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("dg gn/CS2103-F12-2")` API
 call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/DeleteGroupSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `dg gn/CS2103-F12-2` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of
+**Note:** The lifeline for `DeleteGroupCommandParser`, `DeleteGroupCommand` and `CommandResult` should end at the destroy marker (X) but due to a limitation of
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
@@ -137,25 +137,25 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a
+  placeholder for the specific command name e.g., `AddStudentCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (e.g., `AddStudentCommand`) which the `AddressBookParser` returns back as a
   `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
 **API** : [
-`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+`Model.java`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
-  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
@@ -165,7 +165,7 @@ The `Model` component,
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which
-`Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person`
+`Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student`
 needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
@@ -175,9 +175,9 @@ needing their own `Tag` objects.<br>
 ### Storage component
 
 **API** : [
-`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+`Storage.java`](https://github.com/AY2425S1-CS2103-F12-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="800" />
 
 The `Storage` component,
 
@@ -200,41 +200,99 @@ This section describes some noteworthy details on how certain features are imple
 
 <box type="info">
 
-**Note:** For simplicity, certain details such as conditional checks, parsing 
+**Note:** For simplicity, certain details such as conditional checks, parsing
 and more detailed implementation on model changes have been omitted.
 
 </box>
+--------------------------------------------------------------------------------------------------------------------
 
+### Delete Student Feature
+
+The `Delete Student` feature allows users to delete an existing student in the address book given a student's student number `sno`.
+
+The following shows the activity diagram when the user executes the `del_s` command:
+<puml src="diagrams/DeleteStudentActivityDiagram.puml" alt="DeleteGroupCommandAD" />
+
+#### Usage
+
+**Syntax:** `del_s/ds sno/STUDENT_NUMBER.`
+
+**Example:** `ds sno/A0123456K`
+
+#### Implementation details
+
+1. User has the application launched with at least 1 student added.
+2. User executes `ls` to view all students. For this example, the user wishes to delete a student with student number `A0234567H`.
+3. The user executes `ds sno/A0234567H` to delete the student with a student number `A0234567H`. The command is parsed in
+   the
+   `AddressBookParser`.
+4. `DeleteStudentCommandParser` is created and gets the student number of the student to be deleted. The student number is used to
+   construct a `DeleteStudentCommand` object.
+5. The `DeleteStudentCommand` object then calls `deletePerson(student)` in the `ModelManager` with the specified student to be
+   deleted. This method deletes the specified `Student` in the model.
+7. Finally, the `DeleteStudentCommand` returns the `CommandResult`.
+
+##### Note
+
+This feature will also check if the deleted `Student` belongs to any `Group` and remove the `Student` from that `Group`, 
+resetting the affected `Group` affiliation.
+
+**Sequence Diagram:** The following sequence diagram shows how the above steps for delete group works:
+<puml src="diagrams/DeleteStudentSequenceDiagram.puml" alt="DeleteGroupCommand"/>
+
+<box type="info" seamless>
+
+**Note:** The lifelines for `DeleteStudentCommandParser`, `DeleteStudentCommand`, and
+`CommandResult` should end at the destroy marker (X) but due to a limitation of
+PlantUML, the lifeline continues till the end of diagram.
+
+
+
+#### Design considerations
+
+**Aspect 1:** Usage of StudentNumber as identifier
+
+1. **Design #1: Use StudentNumber**
+
+* Pro: More deliberate and since StudentNumber are more complex, the user will be more aware of their decision
+* Con: More typing is required
+
+2. **Design #2:** Use Index
+
+* Pro: Easy and quick
+* Con: Possible for user to mistype the wrong number
 --------------------------------------------------------------------------------------------------------------------
 
 ### Delete Group feature
 
 The `Delete Group` feature allows users to delete an existing group in the address book given a group's name.
 
-Below, we provide an example usage scenario and description of how the delete group code works at each step.
+The following shows the activity diagram when the user executes the `del_g` command:
+<puml src="diagrams/DeleteGroupActivityDiagram.puml" alt="DeleteGroupCommandAD" />
 
-#### Usage 
+#### Usage
 
-**Syntax:** `del_g/dg gn/GROUP_NAME`
+**Syntax:** `del_g/dg gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 **Example:** `dg gn/CS2103-F12-2`
 
 #### Implementation details
 
 1. User has the application launched with at least 1 group added.
-2. User executes `lg` to view all groups. For this example, the user wishes to delete `Group 1`.
-3. The user executes `dg gn/Group 1` to delete the group with a group name `Group 1`. The command is parsed in the
+2. User executes `lg` to view all groups. For this example, the user wishes to delete `CS2103-F12-2`.
+3. The user executes `dg gn/CS2103-F12-2` to delete the group with a group name `CS2103-F12-2`. The command is parsed in
+   the
    `AddressBookParser`.
 4. `DeleteGroupCommandParser` is created and gets the group name of the group to be deleted. The group name is used to
    construct a `DeleteGroupCommand` object.
 5. The `DeleteGroupCommand` object then calls `deleteGroup(group)` in the `ModelManager` with the specified group to be
    deleted. This method deletes the specified `Group` in the model.
-6. Finally, the `DeleteGroupCommand` returns the `CommandResult`.
+7. Finally, the `DeleteGroupCommand` returns the `CommandResult`.
 
 ##### Note
 
 This feature will also remove `Students` in the `Group` and reset their `Group`, and delete all `Tasks` related to the
-`Group`.
+`Group`, but the details are omitted.
 
 #### Sequence diagram
 
@@ -247,16 +305,17 @@ The following sequence diagram shows how the above steps for delete group works:
 PlantUML, the lifeline continues till the end of diagram.
 </box>
 
+#### Design considerations
 
-#### Design considerations 
-
-**Aspect 1:** Usage of GroupName as identifer
+**Aspect 1:** Usage of GroupName as identifier
 
 1. **Design #1: Use GroupName**
-* Pro: More deliberate and since GroupNames are more complex, the user will be more aware
+
+* Pro: More deliberate and since GroupNames are more complex, the user will be more aware of their decision
 * Con: Must type a lot
 
 2. **Design #2:** Use Index
+
 * Pro: Easy and quick
 * Con: Possible for user to mistype the wrong number
 
@@ -266,12 +325,12 @@ PlantUML, the lifeline continues till the end of diagram.
 
 The undo/redo mechanism is facilitated by `VersionHistory`. It stores an ArrayList `versions` of ReadOnlyAddressBook.
 
-
 Whenever there are changes made to the AddressBook, a defensive copy of the AddressBook is created and stored in the
-ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook. 
+ArrayList. `VersionHistory` also stores a pointer to the current version of the addressbook.
 
 If newly initialized, this pointer is set to -1. We have set a maximum number of versions to be able to stored at 100.
-Once this limit is reached, the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new version can be stored.
+Once this limit is reached, the earliest entry in the ArrayList will be deleted by `VersionHistory` so that a new
+version can be stored.
 Additionally, it implements the following operations:
 
 * `VersionHistory#addVersion(Model model)`— Saves the current state to its history.
@@ -681,11 +740,12 @@ Use case ends.
 
 ### Glossary
 
-| Key Terms      | Definition                                             |
-|----------------|--------------------------------------------------------|
-| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS          |
-| Prefix         | Keyword used in commands to specify the parameter type |
-| Student Number | Unique identifier for a student                        |
+| Key Terms      | Definition                                                   |
+|----------------|--------------------------------------------------------------|
+| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
+| JAR            | Executable file containing Java classes and other resources. |
+| Prefix         | Keyword used in commands to specify the parameter type       |
+| Student Number | Unique identifier for a student                              |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -743,3 +803,23 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+[To be updated.]
+
+### Challenges Faced
+
+### Achievements
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+**Group size:** 4
+
+**Total Enhancements:** x/8 (`2x4`)
+
+[To be updated.]

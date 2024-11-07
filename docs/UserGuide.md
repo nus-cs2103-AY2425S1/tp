@@ -75,7 +75,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
   e.g `sn/STUDENT_NAME [t/TAG]` can be used as `sn/John Doe t/TD9` or as `sn/John Doe`.
 
 * Items with `…`​ after them can **be used multiple times including zero times**.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TD9`, `t/Good at UI t/Team Lead` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/TD9`, `t/GoodatUI t/TeamLead` etc.
 
 * Parameters can be in **any order**.<br>
   e.g. if the command specifies `sno/STUDENT_NUMBER sn/STUDENT_NAME`, `sn/STUDENT_NAME sno/STUDENT_NUMBER` is also
@@ -122,7 +122,8 @@ Adds a student to T_Assistant.
 ##### Notes
 
 1. `Student Number` is the unique identifier for each student, so no 2 students can have the same student number.
-2. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first instance of the repeated tag.
+2. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first
+   instance of the repeated tag.
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -141,93 +142,103 @@ This screenshot shows the result of executing `add_s sno/A0123456A sn/James Ho e
 
 #### Deleting a Student: `del_s`, `ds`
 
-Explanation of what command does.
+Deletes a student from T_Assistant.
 
 **Format**: `del_s sno/STUDENT_NUMBER`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. A student with the `Student Number` must exist in T_Assistant.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Deleting `James Ho` from T_Assistant
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `del_s sno/A0123456A`
 
 This screenshot shows the result of executing `del_s sno/A0123456A`.
+
+![delete_student](images/screenshots/del_s.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Student: `edit_s`, `es`
 
-Explanation of what command does.
+Edits the details of a student.
 
-**Format**: `edit_s sno/STUDENT_NUMBER [sn/STUDENT_NAME] [e/EMAIL] [t/TAG]`
+**Format**: `edit_s i/INDEX [sn/NAME] [e/EMAIL] [t/TAG]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. `edit_s` edits the student identified by the index. It only accepts a valid index
+   based on the list when `list_s` is called.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Editing `Bernice Yu`'s Name
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `edit_s i/2 sn/Bernice Yu Ting Kang`
 
-This screenshot shows the result of executing `edit_s sno/A0123456A sn/James Ho Ting Kang`.
+This screenshot shows the result of executing `edit_s i/2 sn/Bernice Yu Ting Kang`.
+
+![edit_student](images/screenshots/edit_s.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Student to a Group: `add_s_g`, `asg`
 
-Explanation of what command does.
+Adds a student to a group.
 
 **Format**: `add_s_g sno/STUDENT_NUMBER gn/GROUP_NAME`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. The group with the `Group Name` and student with the `Student Number` must both exist in T_Assistant.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Adding `James Ho` to `CS2103-F11-1`
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `add_s_g sno/A0123456A gn/CS2103-F11-1`
 
-This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F12-2`.
+This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F11-1`.
+
+![add_s_g](images/screenshots/add_s_g.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Deleting a Student from a Group: `del_s_g`, `dsg`
 
-Explanation of what command does.
+Deletes a student from its assigned group.
 
 **Format**: `del_s_g sno/STUDENT_NUMBER`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. This feature only removes a student from a group, not from T_Assistant.
+2. The student must exist in T_Assistant and be in a group.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Deleting `James Ho` from `CS2103-F11-1`
 
-###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `del_s_g sno/A0123456A`
 
 This screenshot shows the result of executing `del_s_g sno/A0123456A`.
+
+![del_s_g](images/screenshots/del_s_g.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -282,24 +293,13 @@ This screenshot shows the result of executing `find_s q/!nogroup`.
 
 #### Sorting Students: `sort_s`, `ss`
 
-Explanation of what command does.
+Sorts the list of students in alphabetical order.
 
 **Format**: `sort_s`
 
-##### Notes
-
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
-
 This screenshot shows the result of executing `sort_s`.
+
+![sort_s](images/screenshots/sort_s.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -309,47 +309,48 @@ This screenshot shows the result of executing `sort_s`.
 
 #### Listing Groups: `list_g`, `lg`
 
-Explanation of what command does.
+Shows a list of all groups in the T_Assistant.
 
 **Format**: `list_g`
 
-##### Notes
-
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
-
 This screenshot shows the result of executing `list_g`.
 
+![list_groups](images/screenshots/lg.png)
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Group: `add_g`, `ag`
 
-Explanation of what command does.
+Adds a group to the T_Assistant。
 
-**Format**: `add_g gn/GROUP_NAME`
+**Format**: `add_g/ag gn/GROUP_NAME [gn/GROUP_NAME]...`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. `Group Name` is the unique identifier for each group, so no 2 groups can have the same group name.
+2. Group names must follow a three-part format: course type: either `CS2103` or `CS2103T`;
+tutorial group: a letter followed by a number;
+group number: any number
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+<box type="warning" seamless>
 
-Add more scenarios if necessary
+**Caution:**
+The command will stop running the moment it hits an error.
+
+For example `add_g gn/CS2103-F11-3`
+
+</box>
+
+##### Usage Scenario
 
 ###### Scenario #1
+1. You can begin this command on any panel.
+2. Type and execute: `add_g gn/CS2103-F11-3`
 
-This screenshot shows the result of executing `add_g gn/CS2103-F12-2`.
+This screenshot shows the result of executing `add_g gn/CS2103-F11-3`.
+
+![add_group](images/screenshots/ag.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -433,27 +434,15 @@ This screenshot shows the result of executing `find_g q/F12`.
 
 #### Sorting Groups: `sort_g`, `sg`
 
-Explanation of what command does.
+Sorts the list of groups in alphabetical order.
 
 **Format**: `sort_g`
 
-##### Notes
+This screenshot shows the result of executing `sort_s`.
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
-
-This screenshot shows the result of executing `sort_g`.
+![sort_g](images/screenshots/sg.png)
 
 --------------------------------------------------------------------------------------------------------------------
-
 
 ### Task Commands
 
@@ -461,24 +450,12 @@ This screenshot shows the result of executing `sort_g`.
 
 #### Listing Tasks: `list_t`, `lt`
 
-Explanation of what command does.
+Shows a list of all tasks in the T_Assistant.
 
 **Format**: `list_t [gn/GROUP_NAME]`
 
-##### Notes
-
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
-
 This screenshot shows the result of executing `list_t`.
+![list_t](images/screenshots/lt.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -494,6 +471,18 @@ Explanation of what command does.
    remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
+
+<box type="warning" seamless>
+
+**Caution:**
+The command will stop running the moment it hits an error.
+
+For example `insert your own example`
+
+If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
+`CS2103-F13-1`.
+
+</box>
 
 ##### Usage Scenario (for commands that can be overloaded)
 
@@ -517,6 +506,18 @@ Explanation of what command does.
    remove all students from this deleted group)
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
+
+<box type="warning" seamless>
+
+**Caution:**
+The command will stop running the moment it hits an error.
+
+For example `insert your own example`
+
+If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
+`CS2103-F13-1`.
+
+</box>
 
 ##### Usage Scenario (for commands that can be overloaded)
 
@@ -549,7 +550,8 @@ The command will stop running the moment it hits an error.
 
 For example `add_et_g i/1 gn/CS2103-F11-2 gn/CS2103-F12-2 gn/CS2103-F13-1`
 
-If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not `CS2103-F13-1`.
+If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
+`CS2103-F13-1`.
 
 </box>
 
@@ -580,95 +582,105 @@ This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Deleting a Task from ALL Groups: `del_t`, `dt`
-
-Explanation of what command does.
-
-**Format**: `del_t i/INDEX`
-
-##### Notes
-
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario (for commands that can be overloaded)
-
-Add more scenarios if necessary
-
-###### Scenario #1
-
-This screenshot shows the result of executing `del_t i/1`.
-
---------------------------------------------------------------------------------------------------------------------
-
 #### Deleting a Task from a Group: `del_t_g`, `dtg`
 
-Explanation of what command does.
+Deletes a task from a group.
 
 **Format**: `del_t_g i/INDEX gn/GROUP_NAME`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. The index must be valid and should be the index of target task in the group's task list.
+2. This command is case-insensitive.
+   > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
+3. For information on the constraints for each parameter used in this command, go
+   to [Command Parameters](#command-parameters).
+
+##### Usage Scenario
+1. Type and execute: `list_t gn/CS2103-F11-1` to see the list of tasks in `CS2103-F11-1`.
+2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this example).
+3. Type and execute: `del_t_g i/1 gn/CS2103-S1-21`
+###### Scenario #1 Delete task with index 1 from `CS2103-F11-1`
+
+This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F11-1`.
+![delete_t_g.png](images/screenshots/dtg.png)
+--------------------------------------------------------------------------------------------------------------------
+
+#### Deleting a Task from ALL Groups: `del_t`, `dt`
+
+Delete a task from all groups that contain it.
+
+**Format**: `del_t i/INDEX`
+
+##### Notes
+
+1. The index must be valid and should be the index of task list.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
-
-###### Scenario #1
-
-This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F12-2`.
+###### Scenario #1 Delete task with index 2
+1. Type and execute: `list_t` to see the list of tasks.
+2. After finding the task you wish to add, remember its index number (task with index 2 in this example).
+3. Type and execute: `edit_t i/2 gn/CS2103-F`
+This screenshot shows the result of executing `del_t i/2`.
+![delete_t.png](images/screenshots/dt.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Task for a Group: `edit_t_g`, `etg`
 
-Explanation of what command does.
+Edits a task from a group.
 
 **Format**: `edit_t_g i/INDEX gn/GROUP_NAME [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. `Index` must be valid
+2. `Group Name` must exist in the T_Assistant.
+3. This command is case-insensitive.
+   > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
 
-###### Scenario #1
+###### Scenario #1 Edit a task with index 1 in `CS2103-F12-1`
+1. Type and execute: `list_t gn/CS2103-F12-1` to see the list of tasks in `CS2103-F12-1`.
+2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this example).
+3. Type and execute: `edit_t_g i/1 gn/CS2103-F12-1 tn/v1.4 Release`
 
 This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`.
-
+![edit_t_g.png](images/screenshots/etg.png)
 --------------------------------------------------------------------------------------------------------------------
 
 #### Editing a Task for ALL Groups: `edit_t`, `et`
 
-Explanation of what command does.
+Edits a task from all groups that contain it.
 
-**Format**: `edit_t i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)`
+**Format**: `edit_t i/INDEX [tn/TASK_NAME] [td/TASK_DEADLINE (YYYY-MM-DD HHmm)]`
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
-2. For information on the constraints for each parameter used in this command, go
+1. `Index` must be valid.
+2. This command is case-insensitive.
+   > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
 
-###### Scenario #1
+###### Scenario #1 Edit a task with index 2
+1. Type and execute: `list_t` to see the task list.
+2. After finding the task you wish to delete from this group, remember its index number (task with index 2 in this example).
+3. Type and execute: `edit_t i/2 tn/PE`
 
-This screenshot shows the result of executing `edit_t i/1 td/2024-11-20 1200`.
+This screenshot shows the result of executing `edit_t i/2 tn/PE`.
+![edit_t.png](images/screenshots/et.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -831,11 +843,12 @@ the data of your previous T_Assistant home folder and also copy over `versionHis
 
 ## Glossary
 
-| Key Terms      | Definition                                             |
-|----------------|--------------------------------------------------------|
-| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS          |
-| Prefix         | Keyword used in commands to specify the parameter type |
-| Student Number | Unique identifier for a student                        |
+| Key Terms      | Definition                                                   |
+|----------------|--------------------------------------------------------------|
+| Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
+| JAR            | Executable file containing Java classes and other resources. |
+| Prefix         | Keyword used in commands to specify the parameter type       |
+| Student Number | Unique identifier for a student                              |
 
 ### Command Parameters
 
@@ -876,14 +889,14 @@ All parameters are case-insensitive when used for comparison unless stated other
 
 ### Group
 
-| Action           | Format, Examples                                                    |
-|------------------|---------------------------------------------------------------------|
-| **List Groups**  | `list_g/lg`                                                         |
-| **Add Group**    | `add_g/ag gn/GROUP_NAME`<br>e.g., `ag gn/CS2103-F12-2`              |
-| **Delete Group** | `del_g/dg gn/GROUP_NAME`<br>e.g., `dg gn/CS2103-F12-2`              |
-| **Edit Group**   | `edit_g/eg i/INDEX gn/GROUP_NAME`<br>e.g., `eg i/1 gn/CS2103-F12-3` |
-| **Find Group**   | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`       |
-| **Sort Groups**  | `sort_g/sg`                                                         |
+| Action           | Format, Examples                                                                          |
+|------------------|-------------------------------------------------------------------------------------------|
+| **List Groups**  | `list_g/lg`                                                                               |
+| **Add Group**    | `add_g/ag gn/GROUP_NAME [gn/GROUP_NAME]...`<br>e.g., `ag gn/CS2103-F12-2 gn/CS2103-F12-1` |
+| **Delete Group** | `del_g/dg gn/GROUP_NAME`<br>e.g., `dg gn/CS2103-F12-2`                                    |
+| **Edit Group**   | `edit_g/eg i/INDEX gn/GROUP_NAME`<br>e.g., `eg i/1 gn/CS2103-F12-3`                       |
+| **Find Group**   | `find_g/fg q/QUERY [q/QUERY]...`<br>e.g., `fg q/CS2103-F12-2`                             |
+| **Sort Groups**  | `sort_g/sg`                                                                               |
 
 ### Task
 

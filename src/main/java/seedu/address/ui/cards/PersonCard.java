@@ -35,10 +35,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
     private FlowPane tags;
@@ -54,16 +50,25 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
+        id.setWrapText(true);
         name.setText(student.getName().getFullName());
+        name.setWrapText(true);
         email.setText(student.getEmail().getEmail());
+        email.setWrapText(true);
         studentNumber.setText(student.getStudentNumber().getStudentNumber());
+        studentNumber.setWrapText(true);
         if (student.getGroupName().isEmpty()) {
             group.setText("Not in group yet.");
         } else {
             group.setText(student.getGroupName().get().toString());
+            group.setWrapText(true);
         }
         student.getTags().stream()
             .sorted(Comparator.comparing(Tag::getTagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
+            .forEach(tag -> {
+                Label tagLabel = new Label(tag.getTagName());
+                tagLabel.setWrapText(true);
+                tags.getChildren().add(tagLabel);
+            });
     }
 }

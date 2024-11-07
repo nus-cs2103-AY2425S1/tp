@@ -25,11 +25,11 @@ public class ListTaskCommand extends Command {
     public static final String COMMAND_WORD_ALIAS = "lt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Lists all tasks of a specified group.\n"
+        + ": Lists all tasks of a specified group or all tasks in T_Assistant.\n"
         + "PARAMETERS: " + COMMAND_WORD
-        + PREFIX_GROUP_NAME + "GROUP_NAME "
+        + "[" + PREFIX_GROUP_NAME + "GROUP_NAME] "
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "Group 1 ";
+        + PREFIX_GROUP_NAME + "CS2103-F15-3 ";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks for this group";
     public static final String MESSAGE_SUCCESS_ALL_TASKS = "Listed all tasks available";

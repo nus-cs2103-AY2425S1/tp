@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.deletecommands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.parser.deletecommands.DeleteStudentFromGroupCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.student.StudentNumber;
 
 
@@ -20,19 +19,12 @@ public class DeleteStudentFromGroupCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteStudentFromGroupCommand() throws Exception {
-        String input = " " + PREFIX_GROUP_NAME + "CS2103-F12-4 " + PREFIX_STUDENT_NUMBER + "A0123456Z";
+        String input = " " + PREFIX_STUDENT_NUMBER + "A0123456Z";
         DeleteStudentFromGroupCommand expectedCommand = new DeleteStudentFromGroupCommand(
-                new GroupName("CS2103-F12-4"), new StudentNumber("A0123456Z"));
+                new StudentNumber("A0123456Z"));
 
         DeleteStudentFromGroupCommand command = parser.parse(input);
         assertEquals(expectedCommand.toString(), command.toString());
-    }
-
-
-    @Test
-    public void parse_missingGroupName_throwsParseException() {
-        String input = " " + PREFIX_STUDENT_NUMBER + "A0123456Z";
-        assertThrows(ParseException.class, () -> parser.parse(input));
     }
 
     @Test
