@@ -161,7 +161,7 @@ public class AutocompleteParser {
         for (Person person : ab.getPersonList()) {
             for (Module module : person.getModules()) {
                 String moduleString = module.module;
-                if (moduleString.startsWith(argMultimap.getValue(PREFIX_MODULE).get())
+                if (isStringMatching(moduleString, argMultimap.getValue(PREFIX_MODULE).get())
                         && !suggestionList.containsKey(moduleString)) {
                     suggestionList.put(moduleString, getCompleteStringWithReplacement(userInput, wordUnderCaret,
                             moduleString, startIndex, endIndex));
@@ -187,7 +187,7 @@ public class AutocompleteParser {
         HashMap<String, String> suggestionList = new HashMap<>();
         for (Person person : ab.getPersonList()) {
             for (Tag tag : person.getTags()) {
-                if (tag.tagName.startsWith(argMultimap.getValue(PREFIX_TAG).get())
+                if (isStringMatching(tag.tagName, argMultimap.getValue(PREFIX_TAG).get())
                         && !suggestionList.containsKey(tag.tagName)) {
                     suggestionList.put(tag.tagName, getCompleteStringWithReplacement(userInput, wordUnderCaret,
                             tag.tagName, startIndex, endIndex));
@@ -211,7 +211,7 @@ public class AutocompleteParser {
                                                          int startIndex, int endIndex, ArgumentMultimap argMultimap) {
         HashMap<String, String> suggestionList = new HashMap<>();
         for (String gender : validGenders) {
-            if (gender.startsWith(argMultimap.getValue(PREFIX_GENDER).get())) {
+            if (isStringMatching(gender, argMultimap.getValue(PREFIX_GENDER).get())) {
                 suggestionList.put(gender, getCompleteStringWithReplacement(userInput, wordUnderCaret, gender,
                         startIndex, endIndex));
             }
@@ -233,7 +233,7 @@ public class AutocompleteParser {
                                                          int startIndex, int endIndex, ArgumentMultimap argMultimap) {
         HashMap<String, String> suggestionList = new HashMap<>();
         for (String file : getAllFilesInArchiveDirectory()) {
-            if (file.startsWith(argMultimap.getValue(PREFIX_PATH).get())) {
+            if (isStringMatching(file, argMultimap.getValue(PREFIX_PATH).get())) {
                 suggestionList.put(file, getCompleteStringWithReplacement(userInput, wordUnderCaret, file,
                         startIndex, endIndex));
             }
@@ -258,7 +258,7 @@ public class AutocompleteParser {
             if (command.equals(wordUnderCaret)) {
                 return new HashMap<>();
             }
-            if (command.startsWith(wordUnderCaret)) {
+            if (isStringMatching(command, wordUnderCaret)) {
                 suggestionList.put(command, getCompleteStringWithReplacement(userInput, wordUnderCaret, command,
                         startIndex, endIndex));
             }
@@ -371,6 +371,10 @@ public class AutocompleteParser {
             }
         }
         return command;
+    }
+
+    private boolean isStringMatching(String targetString, String input) {
+        return targetString.toLowerCase().startsWith(input.toLowerCase());
     }
 }
 
