@@ -303,11 +303,16 @@ Furthermore, certain edits can cause the DDD to behave in unexpected ways (e.g.,
 
 <style>
   table, th, td {
-    border: 1px solid;
+    border: 1px solid #dddddd;
   }
 
   table {
     width: 100%;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    border-bottom: 2px solid red;
   }
 
   tr:nth-child(even) {
