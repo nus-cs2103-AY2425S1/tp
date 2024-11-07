@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.EventNameContainsKeywordPredicate;
+
 
 class FindEventCommandParserTest {
 
@@ -16,15 +18,17 @@ class FindEventCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindEventCommand() throws Exception {
         String keyword = "meeting";
-        FindEventCommand expectedCommand = new FindEventCommand(keyword);
+        EventNameContainsKeywordPredicate predicate = new EventNameContainsKeywordPredicate(keyword);
+        FindEventCommand expectedCommand = new FindEventCommand(predicate);
         FindEventCommand actualCommand = parser.parse("meeting");
         assertEquals(expectedCommand, actualCommand);
     }
 
     @Test
     public void parse_multipleKeywords_returnsFindEventCommand() throws Exception {
-        String keywords = "project meeting";
-        FindEventCommand expectedCommand = new FindEventCommand(keywords);
+        String keyword = "project meeting";
+        EventNameContainsKeywordPredicate predicate = new EventNameContainsKeywordPredicate(keyword);
+        FindEventCommand expectedCommand = new FindEventCommand(predicate);
         FindEventCommand actualCommand = parser.parse("project meeting");
         assertEquals(expectedCommand, actualCommand);
     }

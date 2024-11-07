@@ -68,7 +68,7 @@ public class EventNewCommandParserTest {
                 + EVENT_END_TIME_DESC_BEACH_CLEANUP;
 
         // duplicate name prefix - rejected
-        assertParseFailure(parser, EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_NAME_DESC_BEACH_git CLEANUP
+        assertParseFailure(parser, EVENT_NAME_DESC_BEACH_CLEANUP + EVENT_NAME_DESC_BEACH_CLEANUP
                         + EVENT_LOCATION_DESC_BEACH_CLEANUP + EVENT_DATE_DESC_BEACH_CLEANUP
                         + EVENT_START_TIME_DESC_BEACH_CLEANUP + EVENT_END_TIME_DESC_BEACH_CLEANUP,
                 Messages.getErrorMessageForDuplicatePrefixes(EVENT_PREFIX_NAME));
