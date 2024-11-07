@@ -28,7 +28,6 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-
     private final FilteredList<Person> filteredPersons;
     private final SortedList<Person> sortedPersons;
 
@@ -48,6 +47,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
 
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
         sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority
                 .thenComparing(person -> person.getName().toString())); // sort by name alphabetically after
@@ -139,19 +139,35 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== Appointments ================================================================================
+
     @Override
-    public List<Appointment> getAppointments() {
+    public List<Appointment> getAppointmentList() {
         return FXCollections.unmodifiableObservableList(appointments);
     }
 
     @Override
     public void addAppointment(Appointment appointment) {
+        requireNonNull(appointment);
         appointments.add(appointment);
         updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
     }
 
     @Override
+    public void addAppointment(int index, Appointment appointment) {
+        requireNonNull(appointment);
+        appointments.add(index, appointment);
+    }
+
+    @Override
+    public void setAppointment(int index, Appointment appointment) {
+        requireNonNull(appointment);
+        appointments.set(index, appointment);
+    }
+
+    @Override
     public void updateAppointments(Name oldName, Name newName) {
+        requireAllNonNull(oldName, newName);
         for (int i = 0; i < appointments.size(); i++) {
             Appointment appointment = appointments.get(i);
             if (appointment.name().equals(oldName)) {
@@ -161,23 +177,39 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        appointments.remove(appointment);
+    }
+
+    @Override
     public Appointment deleteAppointment(int index) {
         return appointments.remove(index);
     }
 
     @Override
-    public void deleteAppointments(Name name) {
-        appointments.removeIf(appointment -> appointment.name().equals(name));
-    }
-
-    @Override
-    public ObservableList<Appointment> getPersonsAppointments(Person person) {
-        return appointments.filtered(appointment -> appointment.name().equals(person.getName()));
+    public List<Appointment> deleteAppointments(Name name) {
+        requireNonNull(name);
+        List<Appointment> appointmentsToDelete = appointments.stream()
+                .filter(appointment -> appointment.name().equals(name))
+                .toList();
+        appointments.removeAll(appointmentsToDelete);
+        return appointmentsToDelete;
     }
 
     @Override
     public List<Appointment> getConflictingAppointments(Appointment appointment) {
+        requireNonNull(appointment);
         return appointments.stream().filter(appointment::hasConflictWith).toList();
+    }
+
+    @Override
+    public List<Appointment> getConflictingAppointments(Appointment oldAppointment, Appointment newAppointment) {
+        requireAllNonNull(oldAppointment, newAppointment);
+        return appointments.stream()
+                .filter(appointment -> !appointment.equals(oldAppointment))
+                .filter(newAppointment::hasConflictWith)
+                .toList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
