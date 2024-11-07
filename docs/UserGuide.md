@@ -13,21 +13,22 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-4/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, use `cd` to nvaigate into the folder you put the jar file in, and use the `java -jar GamerBook.jar` command to run the application.<br>
+4. Open a command terminal, use `cd` to nvaigate into the folder you put the jar file in, and use the `java -jar GamerBook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts, this is useful after you filter the address book using commands such as `find`.
@@ -40,7 +41,8 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for more details.
+Refer to the [Features](#features) below for more details.
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -85,6 +87,8 @@ Underneath each suggested command is the syntax for that command and what parame
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 
 | Action         | Format, Examples                                                                                                                                                                                                         |
@@ -108,7 +112,12 @@ Underneath each suggested command is the syntax for that command and what parame
 | **Exit**       | `exit`                                                                                                                                                                                                                   |
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## Commands
+
+<br>
 
 ### Viewing help : `help`
 
@@ -120,11 +129,15 @@ Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close t
 
 Format: `help`
 
+<br>
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<br>
 
 ### Adding a person: `add`
 
@@ -142,7 +155,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal pt/2100-2300`
 
-
+<br>
 
 ### Editing a person : `edit`
 
@@ -162,6 +175,8 @@ Examples:
 *  `edit 2 n/Matthew g/Overwatch g/Valorant` Edits the name of the 2nd person to be `Matthew` with games `Overwatch` and `Valorant`.
 *  `edit 2 n/Betsy Crower t/ pt/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags and preferred times.
 
+<br>
+
 ### Adding a game : `addgame`
 
 Adds a game to an existing person in the address book.
@@ -174,6 +189,8 @@ Format: `addgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`
 Examples:
 * `addgame 1 g/Overwatch` Adds the game `Overwatch` to the 1st person.
 * `addgame 2 g/League of Legends u/Potato s/Pro r/Support` Adds the game `League of Legends` to the 2nd person with the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
+
+<br>
 
 ### Editing a game : `editgame`
 
@@ -189,6 +206,8 @@ Examples:
 *  `editgame 1 g/Overwatch u/Potato` Edits the username of game `Overwatch` of the 1st person to be `Potato`.
 *  `editgame 2 g/League of Legends u/Potato s/Pro r/Support` Edits the game `League of Legends` of the 2nd person to have the following information: Username: `Potato` Skill level: `Pro` Role: `Support`
 
+<br>
+
 ### Deleting a game : `deletegame`
 
 Deletes the specified game from an existing person in the address book.
@@ -199,6 +218,7 @@ Format: `deletegame INDEX g/GAME`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<br>
 
 ### Favouriting a game : `favgame`
 
@@ -213,6 +233,8 @@ Format: `favgame INDEX g/GAME`
 Examples:
 * `favgame 2 g/Overwatch` Sets the game "Overwatch" of the 2nd person to "favourite".
 
+<br>
+
 ### Un-favouriting a game : `unfavgame`
 
 Removes the "favourite" status from a **singular** game under an existing person in the address book.
@@ -225,6 +247,8 @@ Format: `unfavgame INDEX g/GAME`
 
 Examples:
 * `unfavgame 3 g/LoL` Remove the "favourite" status from the game "LoL" of the 3rd person.
+
+<br>
 
 ### Locating persons by name: `find`
 
@@ -243,6 +267,8 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+<br>
 
 ### Locating persons by time range: `findtime`
 
@@ -268,7 +294,9 @@ You can enter the same time twice e.g. `2300-2300` to only search that time.
 Examples:
 * `findtime 2030-2100` returns persons who have at least one preferred time range overlaps with the specified range.
 * `findtime 2030-2100 2230-2330` returns persons with any preferred time range overlapping with any 
-one of the specified ranges<br>
+one of the specified ranges
+
+<br>
 
 ### Deleting a person : `delete`
 
@@ -284,11 +312,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+<br>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+<br>
 
 ### Undoing previous command : `undo`
 
@@ -300,11 +332,15 @@ Supported commands: `list`, `add`, `edit`, `addgame`, `editgame`, `deletegame`, 
 
 Format: `undo`
 
+<br>
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+<br>
 
 ### Data storage
 
@@ -314,13 +350,19 @@ GamerBook data are saved in the hard automatically after any command that change
 
 GamerBook data are loaded from `[JAR file location]/data/addressbook.json` automatically when you open the app.
 
+<br>
+
 ### Saving the data file : `save`
 
 Manually saves the data in another JSON file `[JAR file location]/data/save.json`.
 
+<br>
+
 ### Loading the data file : `load`
 
 Manually loads the data from JSON file `[JAR file location]/data/save.json`.
+
+<br>
 
 ### Editing the data file
 
@@ -332,6 +374,8 @@ GamerBook data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, GamerBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the GamerBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+<br>
 
 ### Archiving data files `[coming in v2.0]`
 
