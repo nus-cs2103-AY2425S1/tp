@@ -154,6 +154,8 @@ Examples:
 * `view Alex Yeoh` Displays the details of all students with the exact name `Alex Yeoh`.
 * `view Lynette` Displays the details of all students with the exact name `Lynette`.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a specific student : `deletes`
 
 Deletes the specified student from the contact list.
