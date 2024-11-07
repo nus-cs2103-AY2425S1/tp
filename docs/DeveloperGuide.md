@@ -24,7 +24,7 @@ Libraries used: [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
-
+<br>
 ## **Design**
 
 ### Architecture
