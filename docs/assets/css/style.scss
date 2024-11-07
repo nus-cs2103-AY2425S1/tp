@@ -10,3 +10,30 @@
     height: 21px;
     width: 21px
 }
+
+.note,
+.alert {
+  border: solid #c2c2c2 1px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border-left-width: 10px;
+}
+
+.note {
+  border-left-color: #5c95f7;
+}
+
+.note::before {
+  content: '💡';
+  margin-right: 10px;
+}
+
+.alert {
+  border-left-color: #ed2c0e;
+}
+
+.alert::before {
+  content: '❗';
+  margin-right: 10px;
+
+}

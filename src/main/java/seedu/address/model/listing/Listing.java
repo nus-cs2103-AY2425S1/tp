@@ -1,6 +1,7 @@
 package seedu.address.model.listing;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -47,7 +48,25 @@ public class Listing {
         this.region = region;
         this.address = address;
         this.seller = seller;
-        this.buyers = buyers;
+        this.buyers = new HashSet<>(buyers);
+    }
+
+    /**
+     * Copy constructor for creating a new {@code Listing} that is a copy of another {@code Listing}.
+     *
+     * @param other The {@code Listing} to copy.
+     */
+    public Listing(Listing other) {
+        Objects.requireNonNull(other);
+
+        this.name = other.name;
+        this.address = other.address;
+        this.price = other.price;
+        this.area = other.area;
+        this.region = other.region;
+        this.seller = other.seller;
+        this.buyers = new HashSet<>();
+        this.buyers.addAll(other.buyers);
     }
 
     public Name getName() {
@@ -79,8 +98,47 @@ public class Listing {
     }
 
     /**
-     * Checks if the given listing is the same as the current listing.
-     * Two listings are considered the same if they have the same address and seller.
+     * Removes a buyer from this listing's buyers.
+     * @param buyer The buyer to be removed.
+     */
+    public void removeBuyer(Person buyer) {
+        buyers.remove(buyer);
+    }
+
+    /**
+     * Replaces a buyer from this listing's buyers.
+     * @param buyerToRemove The buyer to be removed.
+     * @param buyerToAdd The new buyer to add to the listing.
+     */
+    public void replaceBuyer(Person buyerToRemove, Person buyerToAdd) {
+        if (buyers.contains(buyerToRemove)) {
+            buyers.remove(buyerToRemove);
+            buyers.add(buyerToAdd);
+        }
+    }
+
+    /**
+     * Checks if this listing has the specified buyer.
+     *
+     * @param buyer The buyer to check.
+     * @return True if the listing has the buyer, false otherwise.
+     */
+    public boolean hasBuyer(Person buyer) {
+        return buyers.contains(buyer);
+    }
+
+    /**
+     * Returns a new Listing with a different seller
+     * @param sellerToAdd The new buyer to add to the listing.
+     * @return Listing with a modified seller.
+     */
+    public Listing modifyListingWithSeller(Person sellerToAdd) {
+        return new Listing(name, address, price, area, region, sellerToAdd, buyers);
+    }
+
+    /**
+     * Checks if the given listing is the same listing as the current listing.
+     * Two listings are considered the same if they have the same address or name.
      *
      * @param otherListing The other listing to compare.
      * @return True if the listings are the same, false otherwise.
@@ -90,11 +148,11 @@ public class Listing {
             return true;
         }
         return otherListing != null
-                && otherListing.name.equals(this.name)
-                && otherListing.address.equals(this.address)
-                && otherListing.seller.equals(this.seller);
+                && (otherListing.address.equals(this.address)
+                || otherListing.name.equals(this.name));
     }
 
+    // CHECK LOGIC FOR THIS
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -106,8 +164,7 @@ public class Listing {
         }
 
         Listing otherListing = (Listing) other;
-        return name.equals(otherListing.name) && address.equals(otherListing.address)
-                && seller.equals(otherListing.seller);
+        return name.equals(otherListing.name) || address.equals(otherListing.address);
     }
 
     @Override
@@ -123,7 +180,6 @@ public class Listing {
                 .add("area", area)
                 .add("region", region)
                 .add("seller", seller)
-                //.add("buyers", )
                 .toString();
     }
 }

@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.math.BigDecimal;
 
-import seedu.address.logic.commands.EditListingCommand.EditListingDescriptor;
+import seedu.address.logic.commands.listingcommands.EditListingCommand.EditListingDescriptor;
 import seedu.address.model.listing.Address;
 import seedu.address.model.listing.Area;
 import seedu.address.model.listing.Listing;
@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 
 /**
  * A utility class to help with building EditListingDescriptor objects.
+ * Used ChatGPT to assist in writing JavaDocs
  */
 public class EditListingDescriptorBuilder {
     private EditListingDescriptor descriptor;
@@ -93,10 +94,10 @@ public class EditListingDescriptorBuilder {
     /**
      * Sets the {@code Area} of the {@code EditListingDescriptor} that we are building.
      *
-     * @param area The area as an integer.
+     * @param area The area as a String.
      * @return This EditListingDescriptorBuilder object for method chaining.
      */
-    public EditListingDescriptorBuilder withArea(int area) {
+    public EditListingDescriptorBuilder withArea(String area) {
         descriptor.setArea(new Area(area));
         return this;
     }

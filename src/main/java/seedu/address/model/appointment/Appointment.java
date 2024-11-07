@@ -13,7 +13,6 @@ public class Appointment {
 
     public static final Appointment EMPTY_APPOINTMENT = new Appointment(Date.EMPTY_DATE, From.EMPTY_FROM,
             To.EMPTY_TO);
-
     private final Date date;
     private final From from;
     private final To to;
@@ -33,6 +32,10 @@ public class Appointment {
         this.to = to;
     }
 
+    public static boolean isValidPeriod(From from, To to) {
+        return !from.value.isAfter(to.value);
+    }
+
     public Date getDate() {
         return date;
     }
@@ -43,6 +46,16 @@ public class Appointment {
 
     public To getTo() {
         return to;
+    }
+
+
+    /**
+     * Checks if the appointment is scheduled for today.
+     *
+     * @return true if the appointment date is today; false otherwise.
+     */
+    public boolean isToday() {
+        return date.isToday();
     }
 
     @Override

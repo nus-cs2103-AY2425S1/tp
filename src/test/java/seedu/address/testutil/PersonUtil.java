@@ -5,9 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.logic.commands.AddBuyerProfile;
-import seedu.address.logic.commands.AddSellerProfile;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.clientcommands.AddBuyerProfile;
+import seedu.address.logic.commands.clientcommands.AddSellerProfile;
+import seedu.address.logic.commands.clientcommands.EditClientCommand.EditPersonDescriptor;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 

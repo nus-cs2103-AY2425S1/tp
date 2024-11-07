@@ -20,9 +20,10 @@
     </VBox>
 
     <VBox alignment="CENTER_LEFT" spacing="8" styleClass="remarks-box">
-        <Label text="Remarks:" styleClass="label-section-title" />
+        <Label text="Remarks: (up to 400 characters)" styleClass="label-section-title" />
         <Label fx:id="clientRemarksLabel" wrapText="true" styleClass="label-remarks" />
-        <TextArea fx:id="remarkInput" promptText="Type a remark for this client..." wrapText="true"
+        <TextArea fx:id="remarkInput"
+                  promptText="Type a remark for this client..." wrapText="true"
                   styleClass="text-area-remark" prefHeight="80" />
     </VBox>
 

@@ -33,10 +33,6 @@
         <Label styleClass="cell_small_label" text="Appointment:" textFill="#FFD700" style="-fx-font-weight: bold;" />
         <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" textFill="#C2C4C6" />
       </HBox>
-      <HBox spacing="5">
-        <Label styleClass="cell_small_label" text="Property:" textFill="#FFD700" style="-fx-font-weight: bold;" />
-        <Label fx:id="property" styleClass="cell_small_label" text="\$property" textFill="#C2C4C6" />
-      </HBox>
     </VBox>
     <VBox fx:id="tagsContainer" alignment="TOP_RIGHT" GridPane.columnIndex="1" spacing="5">
       <FlowPane fx:id="tags" alignment="TOP_RIGHT" vgap="5" hgap="5" />

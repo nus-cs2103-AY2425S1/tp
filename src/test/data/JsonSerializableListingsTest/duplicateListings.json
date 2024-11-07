@@ -1,7 +1,7 @@
 {
   "listings": [
     {
-      "price" : "20000",
+      "price" : "200000",
       "area" : "100",
       "region" : "EAST",
       "address" : "213 Tampines St",
@@ -20,7 +20,6 @@
             "value" : "EMPTY_TO"
           }
         },
-        "property" : "",
         "remark": "",
         "tags" : [ "friends" ],
         "role" : "seller"
@@ -29,7 +28,7 @@
       "listingName" : "Valid listingName"
     },
     {
-      "price" : "20000",
+      "price" : "200000",
       "area" : "100",
       "region" : "EAST",
       "address" : "213 Tampines St",
@@ -48,7 +47,6 @@
             "value" : "EMPTY_TO"
           }
         },
-        "property" : "",
         "remark": "",
         "tags" : [ "friends" ],
         "role" : "seller"

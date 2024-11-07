@@ -9,7 +9,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 
@@ -37,8 +36,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private Label property;
-    @FXML
     private Label appointment;
     @FXML
     private Line underline;
@@ -61,7 +58,6 @@ public class PersonCard extends UiPart<Region> {
         initializePhone();
         initializeEmail();
         initializeAppointment();
-        initializeProperty();
         initializeTags();
         initializeRole();
     }
@@ -71,7 +67,15 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void initializeName() {
-        name.setText(person.getName().fullName);
+        String actualName = person.getName().fullName;
+
+        // Check if the name length is greater than 55
+        if (actualName.length() > 55) {
+            // Truncate the name to 55 characters and add "..."
+            name.setText(actualName.substring(0, 55) + "...");
+        } else {
+            name.setText(actualName);
+        }
     }
 
     private void initializeUnderline() {
@@ -80,19 +84,31 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void initializePhone() {
-        phone.setText(person.getPhone().value);
+        String actualPhone = person.getPhone().value;
+
+        // Check if the name length is greater than 25
+        if (actualPhone.length() > 25) {
+            // Truncate the name to 25 characters and add "..."
+            phone.setText(actualPhone.substring(0, 25) + "...");
+        } else {
+            phone.setText(actualPhone);
+        }
     }
 
     private void initializeEmail() {
-        email.setText(person.getEmail().value);
+        String actualEmail = person.getEmail().value;
+
+        // Check if the email length is greater than 55
+        if (actualEmail.length() > 55) {
+            // Truncate the email to 55 characters and add "..."
+            email.setText(actualEmail.substring(0, 55) + "...");
+        } else {
+            email.setText(actualEmail);
+        }
     }
 
     private void initializeAppointment() {
         appointment.setText(person.getAppointment().toString());
-    }
-
-    private void initializeProperty() {
-        property.setText(person.getProperty().toString());
     }
 
     private void initializeTags() {
@@ -108,32 +124,36 @@ public class PersonCard extends UiPart<Region> {
             tags.setVgap(5);
             tags.setAlignment(Pos.CENTER_RIGHT);
 
+            final double tagWidth = 185;
+            final int charLimit = 15;
+
             // Sort and add tags to the UI
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> {
-                        Label tagLabel = createTagLabel(tag.tagName);
+                        String name1 = tag.tagName;
+                        // Check if the tag name length is greater than 25
+                        if (name1.length() > charLimit) {
+                            // Truncate the tag name to 25 characters and add "..."
+                            name1 = name1.substring(0, charLimit) + "...";
+                        }
+                        Label tagLabel = createTagLabel(name1, tagWidth);
                         tags.getChildren().add(tagLabel);
                     });
         }
     }
 
-    private Label createTagLabel(String tagName) {
+    private Label createTagLabel(String tagName, double tagWidth) {
         Label tagLabel = new Label(tagName);
         tagLabel.getStyleClass().add("bookmark");
 
-        // Measure the width of the text using a Text node
-        Text tempText = new Text(tagName);
-        tempText.setFont(tagLabel.getFont());
-        double textWidth = tempText.getLayoutBounds().getWidth();
+        // Set fixed width for tag label
+        tagLabel.setMinWidth(tagWidth);
+        tagLabel.setMaxWidth(tagWidth);
+        tagLabel.setAlignment(Pos.CENTER); // Center-align text within label
 
-        // Calculate dynamic left padding based on text length
-        double minPadding = 5;
-        double dynamicLeftPadding = Math.max(minPadding, textWidth / 2);
-
-        // Apply padding to the tag label
-        tagLabel.setStyle(String.format("-fx-padding: %.0fpx %.0fpx %.0fpx %.0fpx;",
-                minPadding, minPadding, minPadding, dynamicLeftPadding));
+        // Apply padding for visual consistency
+        tagLabel.setStyle("-fx-padding: 5px 5px 5px 40px; -fx-alignment: center;");
 
         return tagLabel;
     }
@@ -171,10 +191,6 @@ public class PersonCard extends UiPart<Region> {
 
     public Label getAppointment() {
         return appointment;
-    }
-
-    public Label getProperty() {
-        return property;
     }
 }
 

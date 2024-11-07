@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.ui.CommandBox.ERROR_STYLE_CLASS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,8 +30,8 @@ public class CommandBoxUiTest extends ApplicationTest {
     private MainApp app;
     private final List<String> testCommandHistory = new ArrayList<>(Arrays.asList(
             "showclients",
-            "buyer n/Jack p/99999999 e/jack@gmail.com",
-            "delete n/Jack",
+            "buyer n/SOMEONE THAT WILL NEVER EXIST p/99999999 e/seanisthebest@gmail.com",
+            "deleteclient SOMEONE THAT WILL NEVER EXIST",
             "showlistings"
     ));
 
@@ -57,6 +59,8 @@ public class CommandBoxUiTest extends ApplicationTest {
             robot.clickOn("#commandTextField");
             robot.write(command);
             robot.type(KeyCode.ENTER);
+            TextField commandTextField = robot.lookup("#commandTextField").query();
+            commandTextField.setText("");
         }
         Collections.reverse(testCommandHistory);
         for (String command : testCommandHistory) {
@@ -70,5 +74,17 @@ public class CommandBoxUiTest extends ApplicationTest {
             assertEquals(command, actualCommand.getText());
             robot.type(KeyCode.DOWN);
         }
+    }
+    @Test
+    public void setStyleToIndicateCommandFailure_addsErrorStyleClass() {
+        FxRobot robot = new FxRobot();
+
+        assertNotNull(robot.lookup("#commandTextField"), "Command box should be present.");
+        robot.clickOn("#commandTextField");
+        robot.write("UNKNOWN COMMMAND");
+        robot.type(KeyCode.ENTER);
+        assertTrue(robot.lookup("#commandTextField").query().getStyleClass().contains(ERROR_STYLE_CLASS));
+        robot.type(KeyCode.ENTER);
+        assertTrue(robot.lookup("#commandTextField").query().getStyleClass().contains(ERROR_STYLE_CLASS));
     }
 }

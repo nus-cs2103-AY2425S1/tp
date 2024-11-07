@@ -12,12 +12,27 @@ import javafx.scene.layout.Region;
 public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
+    private static final String INITIAL_TEXT =
+            "Welome to EZSTATE! Here are some commands to help you get started: \n"
+            + "\t Add a buyer: buyer n/[NAME] p/[PHONE] e/[EMAIL]\n"
+            + "\t Add a seller: seller n/[NAME] p/[PHONE] e/[EMAIL]\n"
+            + "\t For more info: help";
+
 
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Constructs a {@code ResultDisplay} UI component.
+     * Sets up the FXML layout and initializes the result display with default text.
+     */
     public ResultDisplay() {
         super(FXML);
+        setInitialText();
+    }
+
+    private void setInitialText() {
+        resultDisplay.setText(INITIAL_TEXT);
     }
 
     public void setFeedbackToUser(String feedbackToUser) {

@@ -142,7 +142,8 @@ public class ChatWindow {
     /**
      * Returns a simple response based on the user input message.
      *
-     * @param message The user's input message.
+     * @param message The user's
+     *                input message.
      * @return The assistant's response as a String.
      */
     public String getResponse(String message) {
@@ -150,6 +151,20 @@ public class ChatWindow {
 
         if (isHelloMessage(message)) {
             return "Hi there! How can I assist you today?";
+        } else if (Pattern.compile("(?=.*\\b(a+d+d+|adding)\\b)(?=.*\\bl+i+s+t+i+n+g+s*\\b)"
+                        + "(?" + "=.*\\bb+u+y+e+r+s*\\b)")
+                .matcher(message).find()) {
+            return "This is how to add buyers to a listing!\n"
+                    + "addlistingbuyers {listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
+                    + "Example: addlistingbuyers Warton House buyer/Alice buyer/Bob\n"
+                    + "Adds the specified buyers to the listing identified by its name.";
+        } else if (Pattern.compile("(?=.*\\b(r+e+m+o+v+e+|removing)\\b)(?=.*\\bl+i+s+t+i+n+g+s*\\b)"
+                        + "(?=.*\\bb+u+y+e+r+s*\\b)")
+                .matcher(message).find()) {
+            return "This is how to remove buyers from a listing!\n"
+                    + "removelistingbuyers {listing name} buyer/{buyer name} [buyer/{additional buyer names}...]\n"
+                    + "Example: removelistingbuyers Warton House buyer/Alice buyer/Bob\n"
+                    + "Removes the specified buyers from the listing identified by their name.";
         } else if (isGoodbyeMessage(message)) {
             return "Goodbye! Have a great day!";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*c+l+i+e+n+t+\\b")
@@ -166,14 +181,15 @@ public class ChatWindow {
                 .matcher(message).find()) {
             return "This is how to add a seller!\n"
                     + "seller n/{name} p/{phone number} e/{email}";
+        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*l+i+s+t+i+n+g+\\b")
+                .matcher(message).find()) {
+            return "This is how to add a listing!\n"
+                    + "listing n/{name} p/{price} a/{area} addr/{address} r/{region} seller/{seller} "
+                    + "(Optional: buyer/{buyer1} buyer/{buyer2} ...)";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
                 .matcher(message).find()) {
             return "This is how to add an appointment!\n"
-                    + "apt {index} d/{date} fr/{start time} to/{end time}";
-        } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b.*p+r+o+p+e+r+t+y+\\b")
-                .matcher(message).find()) {
-            return "This is how to add a property!\n"
-                    + "prop {index} prop/{date} fr/{address}";
+                    + "apt {name} d/{date} fr/{start time} to/{end time}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*c+l+i+e+n+t+\\b")
                 .matcher(message).find()) {
             return "We categorise clients into buyers and sellers for clarity of our users!\n"
@@ -183,19 +199,36 @@ public class ChatWindow {
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*b+u+y+e+r+\\b")
                 .matcher(message).find()) {
             return "This is how to delete a buyer!\n"
-                    + "delete n/{name}";
+                    + "deleteclient {name}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*s+e+l+e+r+\\b")
                 .matcher(message).find()) {
             return "This is how to delete a seller!\n"
-                    + "delete n/{name}";
+                    + "deleteclient {name}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
                 .matcher(message).find()) {
             return "This is how to delete an appointment!\n"
-                    + "delapt n/{name}";
-        } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*p+r+o+p+e+r+t+y+\\b")
+                    + "delapt {name}";
+        } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*l+i+s+t+i+n+g+\\b")
                 .matcher(message).find()) {
-            return "This is how to delete a property!\n"
-                    + "delprop n/{name}";
+            return "This is how to delete a listing!\n"
+                    + "deletelisting {name}";
+        } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*c+l+i+e+n+t+\\b").matcher(message).find()) {
+            return "This is how to edit a client!\n"
+                    + "editclient {name} [n/{name}] [p/{phone number}] [e/{email}] [t/{tag}...]\n"
+                    + "Note: At least one field must be specified to edit a client.";
+        } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b.*l+i+s+t+i+n+g+\\b").matcher(message).find()) {
+            return "This is how to edit a listing!\n"
+                    + "editlisting {listing name} [n/{listing name} p/{price}] [a/{area}]"
+                    + " [addr/{address}] [r/{region}]\n"
+                    + "Note: At least one field must be specified to edit a listing.";
+        } else if (Pattern.compile("\\b(s+h+o+w+|display|view)\\b.*c+l+i+e+n+t+s*\\b").matcher(message).find()) {
+            return "This is how to show your clients!\n"
+                    + "showclients\n"
+                    + "Displays all clients in your list. If there are no clients, it will inform you accordingly.";
+        } else if (Pattern.compile("\\b(s+h+o+w+|display|view)\\b.*l+i+s+t+i+n+g+s*\\b").matcher(message).find()) {
+            return "This is how to show your listings!\n"
+                    + "showlistings\n"
+                    + "Displays all listings in your system. If there are no listings, it will notify you accordingly.";
         } else if (Pattern.compile("\\bt+h+a+n+k+|t+h+a+n+k+\\s+y+o+u+|t+h+a+n+k+\\s+u+\\b")
                 .matcher(message).find()) {
             return "You're welcome! Always happy to help.";
@@ -206,17 +239,42 @@ public class ChatWindow {
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b").matcher(message).find()) {
             return "I assume you are having trouble with the delete command.\n"
                     + "Can you help specify which you are referring to?\n"
-                    + "• Deleting a buyer/seller client profile\n"
-                    + "• Deleting an appointment\n"
-                    + "• Deleting a property\n"
-                    + "• Deleting a listing";
+                    + "• Deleting a buyer/seller client profile - deleteclient\n"
+                    + "• Deleting an appointment - delapt\n"
+                    + "• Deleting a listing - deletelisting\n"
+                    + "• Deleting a buyer from a listing - removelistingbuyers";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b").matcher(message).find()) {
             return "I assume you are having trouble with the add command.\n"
                     + "Can you help specify which you are referring to?\n"
-                    + "• Adding a buyer/seller client profile\n"
-                    + "• Adding an appointment\n"
-                    + "• Adding a property\n"
-                    + "• Adding a listing";
+                    + "• Adding a buyer/seller client profile - seller/buyer\n"
+                    + "• Adding an appointment - apt\n"
+                    + "• Adding a listing - listing\n"
+                    + "• Adding a buyer to a listing - addlistingbuyers";
+        } else if (Pattern.compile("\\b(e+d+i+t+|editing|edits)\\b").matcher(message).find()) {
+            return "It seems you want to edit something.\n"
+                    + "Can you specify which you are referring to?\n"
+                    + "• Editing a client profile (buyer/seller) - editclient\n"
+                    + "• Editing a listing - editlisting";
+        } else if (Pattern.compile("\\b(list|show|view|see|check|today's)\\b.*appointments?\\b").matcher(message)
+                .find()) {
+            return "This is how to check today's appointments!\n"
+                    + "Command: today\n"
+                    + "Usage: Shows all clients with appointments scheduled for today.\n"
+                    + "For general listings, you may consider:\n"
+                    + "• showlistings - Displays all listings\n"
+                    + "• showclients - Displays all clients.";
+        } else if (Pattern.compile("\\b(s+h+o+w+|display|view)\\b").matcher(message).find()) {
+            return "It seems you want to show something.\n"
+                    + "Can you specify which you are referring to?\n"
+                    + "• Show clients - showclients\n"
+                    + "• Show listings - showlistings\n"
+                    + "• Show today's appointments - today\n";
+        } else if (Pattern.compile("\\b(m+o+r+e+\\s*i+n+f+o+|i+n+f+o+|v+i+e+w+\\s*d+e+t+a+i+l+s*)\\b")
+                .matcher(message).find()) {
+            return "This is how to view more information about a client!\n"
+                    + "Command: moreinfo {name}\n"
+                    + "Example: moreinfo Amy\n"
+                    + "Opens a window displaying detailed information about the specified client.";
         } else if (Pattern.compile("\\bh+e+l+p+\\b").matcher(message).find()) {
             return "Sure! What do you need help with?";
         } else {

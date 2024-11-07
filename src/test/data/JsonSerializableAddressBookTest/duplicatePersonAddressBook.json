@@ -4,7 +4,6 @@
       "name": "Alice Pauline",
       "phone": "94351253",
       "email": "alice@example.com",
-      "property": "123, Jurong West Ave 6, #08-111",
       "remark": "",
       "appointment": {
         "date": { "value": "01-01-24" },
@@ -18,7 +17,6 @@
       "name": "Alice Pauline",
       "phone": "94351253",
       "email": "pauline@example.com",
-      "property": "4th street",
       "remark": "",
       "appointment": {
         "date": { "value": "01-01-24" },

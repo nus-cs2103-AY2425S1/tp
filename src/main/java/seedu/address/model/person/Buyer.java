@@ -11,6 +11,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Buyer extends Person {
 
+    private Role role;
     /**
      * Creates a Buyer with the specified details.
      *
@@ -19,11 +20,11 @@ public class Buyer extends Person {
      * @param email The email address of the buyer.
      * @param tags The tags associated with the buyer.
      * @param appointment The appointment associated with the buyer.
-     * @param property The property associated with the buyer.
      */
     public Buyer(Name name, Phone phone, Email email, Set<Tag> tags,
-                 Appointment appointment, Property property) {
-        super(name, phone, email, tags, appointment, property);
+                 Appointment appointment) {
+        super(name, phone, email, tags, appointment);
+        this.role = Role.BUYER;
     }
 
     /**
@@ -34,17 +35,17 @@ public class Buyer extends Person {
      * @param email The email address of the buyer.
      * @param tags The tags associated with the buyer.
      * @param appointment The appointment associated with the buyer.
-     * @param property The property associated with the buyer.
      * @param remark The remark associated with the buyer.
      */
     public Buyer(Name name, Phone phone, Email email, Set<Tag> tags,
-                 Appointment appointment, Property property, String remark) {
-        super(name, phone, email, tags, appointment, property, remark);
+                 Appointment appointment, String remark) {
+        super(name, phone, email, tags, appointment, remark);
+        this.role = Role.BUYER;
     }
 
     @Override
-    public String getRole() {
-        return "buyer";
+    public Role getRole() {
+        return role;
     }
 
     @Override

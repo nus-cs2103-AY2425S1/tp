@@ -24,7 +24,6 @@ public abstract class Person {
 
     // Data fields
     private String remark = "No remarks yet.";
-    private final Property property;
     private final Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -32,13 +31,12 @@ public abstract class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Set<Tag> tags,
-                  Appointment appointment, Property property) {
-        requireAllNonNull(name, phone, appointment, property);
+                  Appointment appointment) {
+        requireAllNonNull(name, phone, appointment);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.appointment = appointment;
-        this.property = property;
         this.tags.addAll(tags);
     }
 
@@ -46,13 +44,12 @@ public abstract class Person {
      * Every field must be present and not null, excluding remark.
      */
     public Person(Name name, Phone phone, Email email, Set<Tag> tags,
-                  Appointment appointment, Property property, String remark) {
-        requireAllNonNull(name, phone, appointment, property);
+                  Appointment appointment, String remark) {
+        requireAllNonNull(name, phone, appointment);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.appointment = appointment;
-        this.property = property;
         this.tags.addAll(tags);
         this.remark = remark;
     }
@@ -84,10 +81,6 @@ public abstract class Person {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Property getProperty() {
-        return property;
     }
 
     public Appointment getAppointment() {
@@ -152,7 +145,7 @@ public abstract class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, appointment, property, tags, remark);
+        return Objects.hash(name, phone, email, appointment, tags, remark);
     }
 
     @Override
@@ -163,10 +156,9 @@ public abstract class Person {
                 .add("email", email)
                 .add("tags", tags)
                 .add("appointment", appointment)
-                .add("property", property)
                 .add("remark", remark)
                 .toString();
     }
 
-    public abstract String getRole();
+    public abstract Role getRole();
 }

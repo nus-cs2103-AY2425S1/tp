@@ -42,7 +42,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_PRICE = "12345";
+    private static final String VALID_PRICE = "123456";
     private static final String VALID_AREA = "100";
     private static final String VALID_REGION = "northeast";
     private static final String CASE_INSENSITIVE_REGION = "nOrTHEAst";
@@ -274,14 +274,14 @@ public class ParserUtilTest {
     @Test
     void parseArea_validValueWithoutWhitespace_returnsArea() throws Exception {
         Area result = ParserUtil.parseArea(VALID_AREA);
-        Area expected = new Area(Integer.parseInt(VALID_AREA));
+        Area expected = new Area(VALID_AREA);
         assertEquals(expected, result);
     }
 
     @Test
     void parseArea_validValueWithWhitespace_returnsTrimmedArea() throws Exception {
         Area result = ParserUtil.parseArea(" " + VALID_AREA + " ");
-        Area expected = new Area(Integer.parseInt(VALID_AREA));
+        Area expected = new Area(VALID_AREA);
         assertEquals(result, expected);
     }
 

@@ -1,10 +1,15 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
@@ -17,24 +22,72 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f11-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String COMMANDS_INFO = """
+            Common Commands:
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+            1. Adding a contact:
+               add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...
+               Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends
+
+            2. Listing all contacts:
+               list
+
+            3. Editing a contact:
+               edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...
+               Example: edit 1 p/91234567 e/johndoe@example.com
+
+            4. Finding contacts:
+               find KEYWORD [MORE_KEYWORDS]
+               Example: find alice bob charlie
+
+            5. Deleting a contact:
+               delete INDEX
+               Example: delete 1
+
+            6. Clearing all entries:
+               clear
+
+            7. Help:
+               help
+
+            8. Exit:
+               exit
+            """;
     private static final String FXML = "HelpWindow.fxml";
+    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
 
     @FXML
     private Button copyButton;
 
     @FXML
+    private Button openBrowserButton;
+
+    @FXML
     private Label helpMessage;
+
+    @FXML
+    private TextArea commandsArea;
+    private final Desktop desktop;
+
+
+    // Default constructor - uses the OS Desktop by default
+    public HelpWindow(Stage root) {
+        this(root, Desktop.getDesktop());
+    }
 
     /**
      * Creates a new HelpWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the HelpWindow
+     * @param desktop Desktop instance used to open URLs, allowing for dependency injection in tests
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, Desktop desktop) {
         super(FXML, root);
+        this.desktop = desktop;
         helpMessage.setText(HELP_MESSAGE);
+        commandsArea.setText(COMMANDS_INFO);
+        commandsArea.setEditable(false);
+        commandsArea.setWrapText(true);
     }
 
     /**
@@ -90,10 +143,34 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the user guide URL in the default browser.
+     */
+    @FXML
+    void openInBrowser() {
+        try {
+            desktop.browse(new URI(USERGUIDE_URL));
+        } catch (IOException | URISyntaxException e) {
+            logger.warning("Error opening URL in browser: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Opens the user guide in the system's default web browser.
+     */
+    @FXML
+    void openUserGuide() {
+        try {
+            desktop.browse(new URI(USERGUIDE_URL));
+        } catch (Exception e) {
+            logger.warning("Failed to open the user guide in the browser: " + e.getMessage());
+        }
+    }
+
+    /**
      * Copies the URL to the user guide to the clipboard.
      */
     @FXML
-    private void copyUrl() {
+    void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);

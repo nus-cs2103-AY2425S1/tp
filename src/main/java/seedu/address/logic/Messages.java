@@ -15,9 +15,11 @@ public class Messages {
 
     public static final String MESSAGE_NOT_NUMBER = "Please enter a number for the Price and Area";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX =
-                "The person index provided is invalid";
+                "The person index provided is invalid!";
+    public static final String MESSAGE_INVALID_LISTING_DISPLAYED_INDEX =
+            "The listing index provided is invalid!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
 
     public static final String MESSAGE_LISTINGS_LISTED_OVERVIEW = "%1$d listings listed!";
@@ -27,6 +29,7 @@ public class Messages {
     public static final String MISSING_CLIENT_NAME = "Please enter a client name!";
     public static final String MISSING_LISTING_NAME = "Please enter a client name!";
     public static final String MESSAGE_SUGGESTION = "Did you mean \"%s\"?";
+    public static final String MESSAGE_TODAY_APPOINTMENTS = "You have %1$d appointment(s) today!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -54,7 +57,9 @@ public class Messages {
                 .append(person.getAppointment())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        return builder.toString();
+        return String.format("%1s.\nPhone number: %2s and Email: %3s",
+                        person.getName(), person.getPhone(), person.getEmail());
+        //return builder.toString();
     }
 
     /**
