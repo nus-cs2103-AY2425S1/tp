@@ -3,6 +3,17 @@ package hallpointer.address.ui;
 import java.util.logging.Logger;
 
 import hallpointer.address.commons.core.LogsCenter;
+import hallpointer.address.logic.commands.AddMemberCommand;
+import hallpointer.address.logic.commands.AddSessionCommand;
+import hallpointer.address.logic.commands.ClearCommand;
+import hallpointer.address.logic.commands.DeleteMemberCommand;
+import hallpointer.address.logic.commands.DeleteSessionCommand;
+import hallpointer.address.logic.commands.ExitCommand;
+import hallpointer.address.logic.commands.FindMemberCommand;
+import hallpointer.address.logic.commands.FindSessionCommand;
+import hallpointer.address.logic.commands.HelpCommand;
+import hallpointer.address.logic.commands.ListCommand;
+import hallpointer.address.logic.commands.UpdateMemberCommand;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,10 +27,24 @@ import javafx.stage.Stage;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w14-3.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+
+    public static final String COMMAND_WORDS = "These are the commands currently implemented in alphabetical order:\n"
+            + AddMemberCommand.COMMAND_WORD + ", " + AddSessionCommand.COMMAND_WORD + "\n"
+            + ClearCommand.COMMAND_WORD + "\n"
+            + DeleteMemberCommand.COMMAND_WORD + ", " + DeleteSessionCommand.COMMAND_WORD + "\n"
+            + ExitCommand.COMMAND_WORD + "\n"
+            + FindMemberCommand.COMMAND_WORD + ", " + FindSessionCommand.COMMAND_WORD + "\n"
+            + HelpCommand.COMMAND_WORD + "\n"
+            + ListCommand.COMMAND_WORD + "\n"
+            + UpdateMemberCommand.COMMAND_WORD + "\n";
+    public static final String ADDITIONAL_HELP = "If you need more details, please refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = COMMAND_WORDS + ADDITIONAL_HELP;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    @FXML
+    private Button closeButton;
 
     @FXML
     private Button copyButton;
@@ -87,6 +112,14 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Hides the help window without mouse input being required.
+     */
+    @FXML
+    private void closeWindow() {
+        hide();
     }
 
     /**
