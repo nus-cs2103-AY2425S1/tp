@@ -539,6 +539,58 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br> 
        Expected: The most recent theme is retained.
 
+### Adding a person
+
+1. Adding a person with minimum fields (name, contact type, telegram handle)
+
+    1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee`<br>
+       Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
+
+    1. Test case: `add n/Nicole 333 ct/work h/@nicole_lee`<br>
+       Expected: No person added. Error details displayed in the status message.
+
+    1. Other incorrect add commands to try: `add`, `add n/Nicole Lee`, `add Nicole Lee`, `...`<br>
+       Expected: Similar to previous.
+
+1. Adding a person with all fields (name, contact type, telegram handle, phone number, email, module, remark, tags)
+
+    1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee p/98765432 e/nicolelee@example.com m/CS2103T r/likes coding t/friend`<br>
+       Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
+
+    1. Test case: `add n/Nicole Lee ct/work h/@nicole_lee p/98765432 e/nicolelee@example.com m/CS2103T r/likes coding t/friend t/colleague t/student`<br>
+       Expected: New contact added to the list with the details provided. Details of the added contact are shown in the status message.
+
+    1. Test case: `add Nicole Lee work @nicole_lee 98765432 nicole@example.com CS2103T likes coding friend`
+       Expected: No person added. Error details displayed in the status message.
+
+### Editing a person's contact details
+
+1. Editing a person's telegram handle from an existing contact
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 h/@ashley_`<br>
+       Expected: Telegram handle of first contact updated to `@ashley_`. Details of the edited contact are shown in the status message.
+   
+    1. Test case: `edit 0 h/@ashley_`<br>
+       Expected: No person is edited. Error details shown in the status message.
+
+    1. Other incorrect edit commands to try: `edit h/@ashley_`, `edit 1 @ashley_`, `edit x @ashley_`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+1. Editing multiple fields for an existing contact (e.g. email, telegram handle)
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `edit 1 e/ashley@example.com h/@ashley_`<br>
+       Expected: Email and telegram handle of first contact is updated to `ashley@example.com` and `@ashley_` respectively. Details of the edited contact are shown in the status message.
+   
+    1. Test case `edit 0 e/ashley@example.com h/@ashley_`<br>
+       Expected: No person is edited. Error details shown in the status message.
+
+    1. Other incorrect edit commands to try: `edit e/ashley@example.com h/@ashley_`, `edit 1 e/ashley@example.com @ashley_`, `edit e/ashley@example.com h/@ashley_`, `...`<br>
+       Expected: Similar to previous.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -546,10 +598,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -562,7 +614,7 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x` , `...` (where x can be any number)<br>
-       Expected: Similar to previous
+       Expected: Similar to previous.
     
 
 ### Saving data
