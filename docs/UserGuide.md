@@ -23,7 +23,7 @@ Whether you have a small, close-knit family or a large extended family, LegacyLi
 
 1. Copy the file to the folder you want to use as the _home folder_ for your LegacyLink.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar legacylink.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -56,7 +56,7 @@ Whether you have a small, close-knit family or a large extended family, LegacyLi
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -74,7 +74,12 @@ Format: `help`
 
 Shows a list of all persons in the address book.
 
-Format: `list -p` (must be an exact match)
+Format: `list -p`
+
+<box type="tip" seamless>
+
+**Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
+</box>
 
 ### Adding a person: `add`
 
@@ -84,12 +89,29 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 
 <box type="tip" seamless>
 
-**Tip:** All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present
+**Tip:** 
+* All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present.
+* **Names** should only contain alphanumeric characters and spaces, and it should not be blank.
+* **Phone numbers** should only contain numbers, and it should be at least 3 digits long.
+* **Emails** should be of the format local-part@domain.
+* **Relationships** should only contain alphabetic characters, and it should not be blank.
 </box>
 
-Examples:
-* `add -n John Doe -p 98765432 -e johnd@example.com -rs Father`
+Valid Examples:
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123`
+
+This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
+
+
+![addPersonCommandSuccess.png](images/addPersonCommandSuccess.png)
+
+Invalid Examples:
+* `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12`
+
+This command will not result in the following error message since the phone number must be at least 3 digits long.
+
+
+![addPersonCommandFailure.png](images/addPersonCommandFailure.png)
 
 ### Editing a person : `edit`
 
@@ -161,7 +183,12 @@ Format: `clear -e`
 
 Shows a list of all events in the event book.
 
-Format: `list -e` (must be an exact match)
+Format: `list -e`
+
+<box type="tip" seamless>
+
+**Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
+</box>
 
 ### Adding an event: `event`
 
