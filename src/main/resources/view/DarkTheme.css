@@ -409,3 +409,24 @@
     -fx-background-color: #007b4b;
 }
 
+.maroon-box {
+    -fx-background-color: maroon;      /* Background color */
+    -fx-text-fill: black;              /* Text color */
+    -fx-font-weight: bold;             /* Bold font */
+    -fx-alignment: center;             /* Center the text */
+    -fx-min-width: 4px;               /* Width of the box */
+    -fx-min-height: 4px;              /* Height of the box */
+    -fx-border-radius: 4px;            /* Optional: rounded corners */
+    -fx-background-radius: 4px;        /* Optional: rounded corners */
+}
+
+.green-box {
+    -fx-background-color: #808000;      /* Background color */
+    -fx-text-fill: black;              /* Text color */
+    -fx-font-weight: bold;             /* Bold font */
+    -fx-alignment: center;             /* Center the text */
+    -fx-min-width: 4px;               /* Width of the box */
+    -fx-min-height: 4px;              /* Height of the box */
+    -fx-border-radius: 4px;            /* Optional: rounded corners */
+    -fx-background-radius: 4px;        /* Optional: rounded corners */
+}
