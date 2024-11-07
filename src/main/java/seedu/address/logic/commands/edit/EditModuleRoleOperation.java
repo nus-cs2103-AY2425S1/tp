@@ -12,8 +12,8 @@ import seedu.address.model.person.ModuleRoleMap;
  */
 public abstract class EditModuleRoleOperation {
     public static final String VALIDATION_REGEX_ROLE = "(?:-student|-tutor|-ta|-professor|-prof)?";
-    public static final String VALIDATION_REGEX = "[\\+-] *" + ModuleCode.VALIDATION_REGEX + VALIDATION_REGEX_ROLE
-            + "(?: +" + ModuleCode.VALIDATION_REGEX + VALIDATION_REGEX_ROLE + ")*";
+    public static final String VALIDATION_REGEX = " *[\\+-] *" + ModuleCode.VALIDATION_REGEX + VALIDATION_REGEX_ROLE
+            + "(?: +" + ModuleCode.VALIDATION_REGEX + VALIDATION_REGEX_ROLE + ")* *";
     public static final String MESSAGE_VALID_OPERATION_CONSTRAINT = """
             Module role operation follows this format:
             +(MODULECODE[-ROLETYPE])+ for adding new module role(s)

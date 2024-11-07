@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
@@ -31,6 +32,7 @@ import seedu.address.model.person.InFilteredListPredicate;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -155,6 +157,34 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_nameAndModuleRoleAndTags_onePersonFound() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1,
+            "(Benson) AND (CS1101S-Tutor) AND (friends)");
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Benson");
+        ModuleRoleContainsKeywordsPredicate moduleRolePredicate = prepareModuleRolePredicate("CS1101S-TA");
+        TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("friends");
+        List<Predicate<Person>> predicates = Arrays.asList(namePredicate, moduleRolePredicate, tagPredicate);
+
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(namePredicate.and(moduleRolePredicate).and(tagPredicate));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nonExistentTag_noPersonFound() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0,
+            "(nothing)");
+        TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("nothing");
+        List<Predicate<Person>> predicates = Arrays.asList(tagPredicate);
+
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(tagPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(), model.getFilteredPersonList());
+    }
+
+    @Test
     public void executeTwice_nameAndModuleRoleKeywordsChained_multiplePersonsFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2,
                 Messages.MESSAGE_CHAINED_FIND_PREFIX + "(Kurz OR Elle) AND (CS1101S-Student)");
@@ -204,5 +234,13 @@ public class FindCommandTest {
     private ModuleRoleContainsKeywordsPredicate prepareModuleRolePredicate(String userInput) throws ParseException {
         return new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(
                 Arrays.asList(userInput.split("\\s+"))));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     */
+    private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) throws ParseException {
+        return new TagContainsKeywordsPredicate((
+            Arrays.asList(userInput.split("\\s+"))));
     }
 }

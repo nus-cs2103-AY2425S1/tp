@@ -38,7 +38,7 @@ public class Messages {
      * Returns an error message indicating the duplicate prefixes.
      */
     public static String getErrorMessageForDuplicatePrefixes(Prefix... duplicatePrefixes) {
-        assert duplicatePrefixes.length > 0;
+        assert duplicatePrefixes.length > 0 : "No duplicate prefix found when prompting error message to user";
 
         Set<String> duplicateFields =
                 Stream.of(duplicatePrefixes).map(Prefix :: toString).collect(Collectors.toSet());
@@ -47,7 +47,7 @@ public class Messages {
     }
 
     public static String getErrorMessageForUnexpectedPrefixes(Prefix... unexpectedPrefixes) {
-        assert unexpectedPrefixes.length > 0;
+        assert unexpectedPrefixes.length > 0 : "No unexpected prefix found when prompting error message to user";
 
         Set<String> unexpectedFields =
                 Stream.of(unexpectedPrefixes).map(Prefix :: toString).collect(Collectors.toSet());

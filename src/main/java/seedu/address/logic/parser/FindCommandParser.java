@@ -23,6 +23,7 @@ import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -47,7 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         Prefix[] unexpectedPrefixes =
-                Stream.of(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DESCRIPTION)
+                Stream.of(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DESCRIPTION)
                         .filter(prefix -> argMultimap.getValue(prefix).isPresent())
                         .toArray(Prefix[]::new);
 
@@ -57,18 +58,22 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.MESSAGE_USAGE));
         }
 
-        // for this command, NAME_PREFIX or MODULE_PREFIX is mandatory; preamble is not allowed (except for "chained")
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MODULE)) {
+        // for this command, NAME_PREFIX TAG_PREFIX or MODULE_PREFIX is mandatory;
+        // preamble is not allowed (except for "chained")
+        if (!areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TAG, PREFIX_MODULE)) {
             throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_MISSING_SEARCH_KEYWORD,
                     FindCommand.MESSAGE_USAGE));
         }
 
         List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
+        List<String> tagKeywords = argMultimap.getAllValues(PREFIX_TAG);
         List<String> moduleRoleKeywords = argMultimap.getAllValues(PREFIX_MODULE);
         boolean isChained = argMultimap.getPreamble().equals(FindCommand.CHAINED);
 
         // all keywords must be non-empty and contain no whitespace
-        if (nameKeywords.stream().anyMatch(String::isBlank) || moduleRoleKeywords.stream().anyMatch(String::isBlank)) {
+        if (nameKeywords.stream().anyMatch(String::isBlank)
+            || tagKeywords.stream().anyMatch(String::isBlank)
+            || moduleRoleKeywords.stream().anyMatch(String::isBlank)) {
             throw new ParseException(Messages.getErrorMessageWithUsage(MESSAGE_EMPTY_FIND_KEYWORD,
                     FindCommand.MESSAGE_USAGE));
         }
@@ -79,9 +84,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (!nameKeywords.isEmpty()) {
             predicates.add(new NameContainsKeywordsPredicate(nameKeywords));
         }
+        if (!tagKeywords.isEmpty()) {
+            predicates.add(new TagContainsKeywordsPredicate(tagKeywords));
+        }
         if (!moduleRoleKeywords.isEmpty()) {
             predicates.add(new ModuleRoleContainsKeywordsPredicate(moduleRoleMapKeywords));
-
         }
 
         return new FindCommand(predicates, isChained);

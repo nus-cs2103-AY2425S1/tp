@@ -17,6 +17,7 @@ import seedu.address.model.person.InFilteredListPredicate;
 import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 
 /**
@@ -64,8 +65,9 @@ public class FindCommand extends Command {
      *                  If false, this command will search on the full list of persons.
      */
     public FindCommand(List<Predicate<Person>> predicates, boolean isChained) {
-        // For now we only support 1 or 2 predicates
-        assert predicates.size() == 1 || predicates.size() == 2;
+        // For now we only support 1, 2 or 3 predicates
+        assert predicates.size() >= 1 && predicates.size() <= 3
+            : "More than 3 predicates found for find command";
         this.predicates = predicates;
         this.isChained = isChained;
     }
@@ -159,9 +161,11 @@ public class FindCommand extends Command {
      */
     private List<String> extractKeywords(Predicate<Person> predicate) {
         if (predicate instanceof NameContainsKeywordsPredicate) {
-            return ((NameContainsKeywordsPredicate) predicate).getKeywords();
+            return ((NameContainsKeywordsPredicate) predicate).getNameKeywords();
         } else if (predicate instanceof ModuleRoleContainsKeywordsPredicate) {
             return ((ModuleRoleContainsKeywordsPredicate) predicate).getModuleRolePairs();
+        } else if (predicate instanceof TagContainsKeywordsPredicate) {
+            return ((TagContainsKeywordsPredicate) predicate).getTagKeywords();
         }
         return Collections.emptyList();
     }

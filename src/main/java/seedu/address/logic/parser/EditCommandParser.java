@@ -94,7 +94,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<Tag>} containing zero tags.
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+        assert tags != null : "Tag collection should not be null";
 
         if (tags.isEmpty()) {
             return Optional.empty();
@@ -112,7 +112,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<EditModuleRoleOperation> parseModuleRolesForEdit(String moduleRoleOperations)
             throws ParseException {
-        assert moduleRoleOperations != null;
+        assert moduleRoleOperations != null : "ModuleRoleOperation should not be null";
 
         if (moduleRoleOperations.isEmpty()) {
             return Optional.empty();

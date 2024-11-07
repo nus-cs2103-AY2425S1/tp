@@ -37,7 +37,7 @@ public class Phone {
      */
     static boolean isValidPhone(String test) {
         // Assert that there should not be whitespaces in the string
-        assert test.chars().noneMatch(ch -> ch == ' ');
+        assert test.chars().noneMatch(ch -> ch == ' ') : "Phone number itself should not contain space";
 
         long digitCount = test.chars()
             .filter(Character::isDigit)
