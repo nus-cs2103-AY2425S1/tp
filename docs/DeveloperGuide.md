@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* The feature to filter file format for the Upload Command was adapted from this [StackOverflow post.](https://stackoverflow.com/questions/19302029/filter-file-types-with-jfilechooser) 
 
 --------------------------------------------------------------------------------------------------------------------
 
