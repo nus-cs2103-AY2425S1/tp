@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.student.Student;
 
 /**
  * A UI component that displays information of a {@code Consultation}.
@@ -59,6 +60,14 @@ public class ConsultationCard extends UiPart<Region> {
 
         consultation.getStudents().stream()
                 .sorted(Comparator.comparing(student -> student.getName().fullName))
-                .forEach(student -> students.getChildren().add(new Label(student.getName().fullName)));
+                .forEach(this::createLabel);
+    }
+
+    private void createLabel(Student student) {
+        Label label = new Label(student.getName().fullName);
+        label.maxWidthProperty().bind(students.widthProperty().add(-15));
+        label.setWrapText(true);
+        label.setMinWidth(students.getMinWidth());
+        students.getChildren().add(label);
     }
 }
