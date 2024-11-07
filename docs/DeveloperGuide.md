@@ -409,9 +409,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. System shows an error message and displays the correct command format.
 
       Use case ends.
-* 2a. The item does not exist.
+* 1b. The item does not exist.
 
-  * 2a1. System shows an error message.
+  * 1b1. System shows an error message.
 
       Use case ends.
 
@@ -432,19 +432,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. System shows an error message and displays the correct command format.
 
       Use case ends.
-* 2a. The item does not exist.
+* 1b. The item does not exist.
 
-  * 2a1. System shows an error message.
-
-    Use case ends.
-* 2b. The event has associated entities assigned to it.
-
-  * 2b1. System shows an error message.
+  * 1b1. System shows an error message.
 
     Use case ends.
-* 3a. The item is currently being viewed.
+* 1c. The event has associated entities assigned to it.
 
-  * 3a1. Return to the main page with both list of events and vendors.
+  * 1c1. System shows an error message.
+
+    Use case ends.
+* 2a. The item is currently being viewed.
+
+  * 2a1. Return to the main page with both list of events and vendors.
 
      Use case ends.
 
