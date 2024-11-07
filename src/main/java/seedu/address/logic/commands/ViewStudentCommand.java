@@ -18,7 +18,7 @@ public class ViewStudentCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View all students whose names are exactly "
-            + "the specified name (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified name and displays them as a list with index numbers.\n"
             + "Parameters: NAME\n"
             + "Example: " + COMMAND_WORD + " Alice Yeoh";
 

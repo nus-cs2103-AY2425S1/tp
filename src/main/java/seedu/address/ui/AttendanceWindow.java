@@ -86,6 +86,11 @@ public class AttendanceWindow {
                 new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
 
+        TableColumn<AttendanceRow, String> studentNumberColumn = new TableColumn<>("Student Number");
+        studentNumberColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getStudentNumber()));
+        table.getColumns().add(studentNumberColumn);
+
         Set<LocalDate> attendanceDates = getAllAttendanceDates(model);
         for (LocalDate date : attendanceDates) {
             addDateColumn(date);
@@ -204,6 +209,11 @@ public class AttendanceWindow {
         studentNameColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
+
+        TableColumn<AttendanceRow, String> studentNumberColumn = new TableColumn<>("Student Number");
+        studentNumberColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getStudentNumber()));
+        table.getColumns().add(studentNumberColumn);
 
         for (LocalDate date : sortedDates) {
             addDateColumn(date);
