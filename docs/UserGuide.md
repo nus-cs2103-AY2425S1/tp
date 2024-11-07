@@ -5,37 +5,35 @@ title: User Guide
 
 # CareLink User Guide
 
-CareLink is a desktop address book application targeted towards independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
-
-### Table of Contents
+# CareLink User Guide
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-  - [General Commands](#general-commands)
-    - [Viewing Help: `help`](#viewing-help-help)
-    - [Listing All Persons: `list`](#listing-all-persons-list)
-    - [Exiting the Program: `exit`](#exiting-the-program-exit)
+    - [Viewing Help: `help`](#viewing-help--help)
+    - [Adding a Person: `add`](#adding-a-person-add)
+    - [Linking a Patient and a Caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
+    - [Deleting a Link Between Patient and Caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
+    - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
+    - [Listing All Persons: `list`](#listing-all-persons--list)
+    - [Editing a Person: `edit`](#editing-a-person--edit)
+    - [Locating Persons by Name, NRIC, Role, or Tags: `find`](#locating-persons-by-name-nric-role-or-tags-find)
+    - [Managing Appointments](#managing-appointments)
+        - [Adding an Appointment: `addapp`](#adding-an-appointment-addapp)
+        - [Editing an Appointment: `editapp`](#editing-an-appointment-editapp)
+        - [Deleting an Appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
+        - [Locating Appointments by Date-Time Range: `findapp`](#locating-appointments-by-date-time-range-findapp)
+    - [Deleting a Person: `delete`](#deleting-a-person--delete)
+    - [Clearing All Entries: `clear confirm`](#clearing-all-entries-clear-confirm)
+    - [Exiting the Program: `exit`](#exiting-the-program--exit)
     - [Saving the Data](#saving-the-data)
     - [Editing the Data File](#editing-the-data-file)
-  - [Managing Persons](#managing-persons)
-    - [Adding a Person: `add`](#adding-a-person-add)
-    - [Editing a Person: `edit`](#editing-a-person-edit)
-    - [Deleting a Person: `delete`](#deleting-a-person-delete)
-    - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
-    - [Linking a Patient and Caregiver: `link`](#linking-a-patient-and-caregiver-link)
-    - [Deleting a Link: `deletelink`](#deleting-a-link-deletelink)
-    - [Locating Persons by Criteria: `find`](#locating-persons-by-criteria-find)
-  - [Managing Appointments](#managing-appointments)
-    - [Adding an Appointment: `addapp`](#adding-an-appointment-addapp)
-    - [Editing an Appointment: `editapp`](#editing-an-appointment-editapp)
-    - [Deleting an Appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
-    - [Locating Appointments by Date-Time Range: `findapp`](#locating-appointments-by-date-time-range-findapp)
-  - [Clearing All Data](#clearing-all-data)
+    - [Archiving Data Files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
 
----
+
+CareLink is a desktop address book application targeted towards independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
 
 ## Quick start
 
@@ -198,11 +196,11 @@ Examples:
 - `edit S1234567D p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with `S1234567D` to be `91234567` and `johndoe@example.com` respectively.
 - `edit S6483749D n/Betsy Crower t/` Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name, NRIC, role, or tags: `find`
+### Locating persons by name, NRIC, phone, email, role, or tags: `find`
 
 Finds persons based on the specified criteria using the provided prefixes.
 
-**Format**: `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]…​`
+**Format**: `find [n/NAME] [nric/NRIC] [p/PHONE] [e/EMAIL] [role/ROLE] [t/TAG]…​`
 
 - The search is case-insensitive. e.g `n/alex` will match `Alex`.
 - The order of the prefixes and keywords does not matter. e.g `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
@@ -232,7 +230,8 @@ An example of using the find command in CareLink is given below.
 Once the command succeeds, the persons found will be displayed providing comprehensive information about the persons.
 ![Find command success](images/findcommandsucceed.png)
 
-### Adding an appointment: `addapp`
+### Managing Appointments
+#### Adding an appointment: `addapp`
 
 Adds an appointment for a person in CareLink.
 
@@ -260,7 +259,7 @@ Common errors and their meanings:
 - `Start time must be in the future` - Can't schedule appointments in the past
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
 
-### Editing an appointment: `editapp`
+#### Editing an appointment: `editapp`
 
 Edits an existing appointment for a person in CareLink
 
@@ -289,7 +288,7 @@ Common errors and their meanings:
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
 
 
-### Deleting an appointment: `deleteapp`
+#### Deleting an appointment: `deleteapp`
 
 Deletes an existing appointment for a person in CareLink.
 
@@ -316,7 +315,7 @@ Common errors and their meanings:
 - `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g. 14:30)
 - `This appointment does not exist in CareLink` - There is no appointment at the specified date and time for this person
 
-### Locating appointments by date-time range: `findapp`
+#### Locating appointments by date-time range: `findapp`
 
 Finds and lists appointment that falls within the specified date-time range. The command displays detailed information about the appointments such as the patient's name, phone, email, NRIC, caregivers, tags, and the appointment's start and end dates and times.
 
@@ -329,7 +328,7 @@ Finds and lists appointment that falls within the specified date-time range. The
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` does not list an appointment that starts before 12:00 PM and ends after 12:00 PM on 30/10/2024.
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` does not list an appointment that starts before 10:00 AM and ends after 10:00 PM on 01/01/2024.
 
-### Examples:
+#### Examples:
 
 - `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00` finds and lists appointments that starts and ends within the specified date-time range.
 
