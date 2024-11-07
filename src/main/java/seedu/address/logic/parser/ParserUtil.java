@@ -93,7 +93,7 @@ public class ParserUtil {
         String trimmedIndices = args.trim();
 
         try {
-            return Arrays.stream(trimmedIndices.split(","))
+            return Arrays.stream(trimmedIndices.split(" "))
                     .flatMap(arg -> parseArgAsStream(arg))
                     .collect(Collectors.toList());
         } catch (RuntimeException e) {
