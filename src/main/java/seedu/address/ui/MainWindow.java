@@ -126,10 +126,11 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         detailPanel = new DetailPanel();
+        logic.getModel().addObserver(detailPanel);
+        detailPanelPlaceholder.getChildren().add(detailPanel.getRoot());
         personListPanel.setSelectionListener((person, index) -> {
             detailPanel.setPerson(person, index);
         });
-        detailPanelPlaceholder.getChildren().add(detailPanel.getRoot());
 
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
