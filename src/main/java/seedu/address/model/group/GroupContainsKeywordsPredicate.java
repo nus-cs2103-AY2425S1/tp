@@ -44,7 +44,7 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
 
             boolean prefixMatch = keywords.stream()
                     .anyMatch(keyword -> groupList.getUnmodifiableGroups().stream()
-                            .anyMatch(group -> group.getGroupName().startsWith(keyword)));
+                            .anyMatch(group -> group.getGroupName().toLowerCase().startsWith(keyword.toLowerCase())));
 
             if (prefixMatch) {
                 return true;
