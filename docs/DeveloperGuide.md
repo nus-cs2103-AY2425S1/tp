@@ -343,33 +343,31 @@ MedConnect offers a **streamlined contact management system** tailored for healt
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 ### Beginner User Stories
 
-| Priority | As a …​                  | I want to …​                                 | So that I can…​                                                            |
-|----------|--------------------------|----------------------------------------------|----------------------------------------------------------------------------|
-| `* * *`  | new user                 | familiarise myself with the app              | play around with dummy data without compromising real patient data         |
-| `* * *`  | healthcare administrator | add new hospital staff and patients          | easily reach out to them when needed                                       |
-| `* * *`  | healthcare administrator | update contact details                       | ensure all contact information is accurate and current                     |
-| `* *`    | healthcare administrator | search contacts by name, role, or department | quickly find and connect with the right person in high-pressure situations |
-| `* * *`  | healthcare administrator | view patient emergency contact details       | notify next-of-kin during urgent medical events                            |
-| `* *`    | healthcare administrator | add multiple contact methods for each person | reach them through different channels when needed                          |
-| `* *`    | healthcare administrator | assign doctors to patients                   | easily track which doctor is responsible for each patient                  |
+| Priority | As a …​                  | I want to …​                                      | So that I can…​                                                             |
+|----------|--------------------------|-------------------------------------------------|----------------------------------------------------------------------------|
+| `* * *`  | new user                 | familiarise myself with the app                 | play around with dummy data without compromising real patient data         |
+| `* * *`  | healthcare administrator | add new doctors and patients                    | easily reach out to them when needed                                       |
+| `* * *`  | healthcare administrator | update contact details                          | ensure all contact information is accurate and current                     |
+| `* *`    | healthcare administrator | search contacts by name or assigned doctor      | quickly find and connect with the right person in high-pressure situations |
+| `* * *`  | healthcare administrator | view patient emergency contact details          | notify next-of-kin during urgent medical events                            |
+| `* *`    | healthcare administrator | add multiple emergency contacts for each person | reach different emergency contacts when one is uncontactable               |
+| `* * *`    | healthcare administrator | assign doctors to patients                      | easily track which doctor is responsible for each patient                  |
 
 ### Intermediate User Stories
 
 | Priority | As a …​                  | I want to …​                             | So that I can…​                                                              |
 |----------|--------------------------|------------------------------------------|------------------------------------------------------------------------------|
-| `* *`    | healthcare administrator | filter contacts by department            | streamline communication during different situations                         |
-| `*`      | healthcare administrator | create custom groups                     | efficiently contact the right team during emergencies                        |
-| `* *`    | healthcare administrator | mark on-call staff                       | know whom to contact during off-hours                                        |
-| `* *`    | healthcare administrator | access frequently contacted individuals  | save time during routine interactions                                        |
-| `* *`    | healthcare administrator | filter contacts by shift or availability | quickly reach staff who are currently on duty                                |
+| `* *`    | healthcare administrator | filter contacts by their doctor          | view a consolidated list of all the patients a doctor is responsible for     |
+| `* *`      | healthcare administrator | sort patients by their admission time    | provide appropriate care to longer-term patients                             |
+| `* *`    | healthcare administrator | tag important notes to patients          | remember special considerations about certain patients                       |
 | `* *`    | healthcare administrator | archive outdated contacts                | maintain a clean and relevant contact list without losing historical records |
+| `* *`    | healthcare administrator | load backup archived data                | maintain a failsafe backup copy in case of data corruption or user error     |
 
 ### Advanced User Stories
 
 | Priority | As a …​                  | I want to …​                                  | So that I can…​                                                      |
 |----------|--------------------------|-----------------------------------------------|----------------------------------------------------------------------|
 | `*`      | healthcare administrator | view a history of previous interactions       | have a complete record of communications for reference               |
-| `*`      | healthcare administrator | set reminders for follow-up actions           | ensure I don’t miss important tasks                                  |
 | `* *`    | healthcare administrator | import contact data in bulk                   | keep the database up-to-date without manual entry                    |
 | `* *`    | healthcare administrator | export contact information                    | provide it to others or have a backup in case of system failures     |
 | `* *`    | healthcare administrator | create templates for emergency communications | send critical messages quickly during emergencies                    |
@@ -394,8 +392,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Name
     - Phone Number
     - Address
+    - Email
+    - Doctor Name
+    - Doctor Phone Number
+    - Doctor Email
     - Emergency Contact Name
     - Emergency Contact Phone Number
+    - Emergency Contact Relationship to Patient
 3. User enters the required details.
 4. MedConnect validates the provided information.
 5. MedConnect successfully adds the new contact to the address book.
@@ -417,10 +420,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   **Use case resumes from step 4.**
 
+**3c.** There are duplicate fields provided (e.g., 2 name fields).
+- **3c1.** MedConnect informs the user of the duplicate field(s).
+- **3c2.** User removes the duplicate parameters and resubmits.
+
+  **Use case resumes from step 4.**
+
 **6a.** The contact already exists in the system (e.g., duplicate phone number).
 - **6a1.** MedConnect notifies the user of the duplicate entry.
 
   **Use case ends.**
+
+---
+
+
+### Use Case: Edit a Contact
+
+**System:** MedConnect
+**Actor:** Healthcare Administrator
+
+
+#### **Main Success Scenario (MSS):**
+1. User requests to list all contacts.
+2. MedConnect retrieves and shows a list of all contacts.
+3. User requests to edit a patient's details.
+4. MedConnect prompts the user to enter the following details:
+    - Index of the patient to be edited
+    - New data of the field(s) to be edited
+5. MedConnect validates the provided information.
+6. MedConnect successfully edits the contact with the new data.
+7. MedConnect confirms that the contact was edited successfully.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+**2a.** The patient list is empty.
+
+  - **Use case ends.**
+
+**4a.** The given index is invalid (e.g., out of range).
+- **4a1.** MedConnect informs the user of the invalid index.
+
+  **Use case resumes from step 3.**
+
+**4b.** The entered details are invalid (e.g., phone number contains letters).
+- **4b1.** MedConnect informs the user of the invalid details.
+- **4b2.** User corrects the invalid details and resubmits.
+
+  **Use case resumes from step 5.**
 
 ---
 
@@ -434,8 +482,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list all contacts.
 2. MedConnect retrieves and shows a list of all contacts.
 3. User requests to delete a specific contact by index.
-4. MedConnect confirms that the contact has been deleted.
-5. MedConnect removes the contact from the database.
+4. MedConnect removes the contact from the database.
 
    **Use case ends.**
 
@@ -443,6 +490,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 #### **Extensions:**
 
 **2a.** The contact list is empty.
+
 - **Use case ends.**
 
 **3a.** The given index is invalid (e.g., out of range).
@@ -450,125 +498,155 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   **Use case resumes from step 2.**
 
-**3b.** User cancels the deletion before confirmation.
-- **3b1.** MedConnect acknowledges the cancellation.
+---
+### Use Case: Add Emergency Contacts
+
+**System:** MedConnect
+**Actor:** Healthcare Administrator
+
+#### **Main Success Scenario (MSS):**
+1. User requests to list all contacts.
+2. MedConnect retrives and shows a list of all contacts.
+3. User requests to add a new emergency contact to a patient.
+4. MedConnect prompts the user to enter the following details:
+    - Index of the patient
+    - Emergency Contact Name
+    - Emergency Contact Phone Number
+    - Emergency Contact Relationship to Patient
+5. User enters the required details.
+6. MedConnect adds the emergency contact to the patient's details.
+
+   **Use case ends.**
+
+#### **Extensions:**
+
+**2a.** The contact list is empty.
+
+- **Use case ends.**
+
+**4a.** The index given is out of range.
+- **4a1.** MedConnect informs the user of the invalid index.
+
+  **Use case resumes from step 3.**
+
+**4b.** The emergency contact already exists under the patient. (e.g., duplicate phone number).
+- **4b1.** MedConnect notifies the user that the emergency contact already exists.
 
   **Use case ends.**
+
+**4c.** The emergency contact relationship provided is invalid.
+- **4c1.** MedConnect informs the user of possible relationship types.
+- **4c2.** User corrects the invalid relationship type and resubmits.
+
+  **Use case resumes from step 6.**
 ---
-### Use Case: View Emergency Contacts
+
+### Use Case: Find Contacts
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
 #### **Main Success Scenario (MSS):**
-1. User requests to view the emergency contact information for a specific patient.
-2. MedConnect requests the patient’s ID or name.
-3. User provides the patient ID or name.
-4. MedConnect retrieves the emergency contact details for the specified patient.
-5. MedConnect provides the emergency contact details, including the name, relationship, and phone number.
-
-   **Use case ends.**
-
-
-#### **Extensions:**
-
-**3a.** The patient does not exist in the system.
-- **3a1.** MedConnect informs the user that no contact was found.
-
-  **Use case resumes from step 2.**
-
-**3b.** Multiple patients share the same name.
-- **3b1.** MedConnect requests additional information (e.g., birthdate, address) to identify the correct patient.
-- **3b2.** User provides the required additional information.
-
-  **Use case resumes from step 4.**
----
-
-### Use Case: Archive Outdated Contacts
-
-**System:** MedConnect
-**Actor:** Healthcare Administrator
-
-#### **Main Success Scenario (MSS):**
-1. User requests to archive a specific contact.
-2. MedConnect retrieves and presents a list of available contacts.
-3. User selects a contact to archive by index.
-4. MedConnect confirms that the contact has been archived.
-5. The selected contact is removed from the main contact list and stored in the archive.
+1. User requests to find a patient by their name.
+2. MedConnect prompts the user to provide a name to search for.
+3. User provides a name.
+4. MedConnect returns a list of patients who matches the provided name.
 
    **Use case ends.**
 
 #### **Extensions:**
 
-**3a.** The given index is invalid.
-- **3a1.** MedConnect informs the user of the invalid index.
+**3a.** User provides a blank name.
+- **3a1.** MedConnect notifies the user to provide a name.
 
-  **Use case resumes from step 2.**
+  **Use case resumes from step 3.**
 
-**3b.** User cancels the archive action before confirmation.
-- **3b1.** MedConnect acknowledges the cancellation.
+**4a.** There are no patients who match the provided name.
+- **4a1.** MedConnect returns a list of 0 patients.
 
   **Use case ends.**
+
 ---
 
-### Use Case: Multiple Contact Methods
-
-**System:** MedConnect
-**Actor:** Healthcare Administrator
-
-
-#### **Main Success Scenario (MSS):**
-1. User requests to view contact methods for a specific patient using their patient ID and a modifier (e.g., to view all contact methods or only the primary contact method).
-2. MedConnect requests the patient’s ID and modifier.
-3. User provides the patient’s ID and the desired modifier (e.g., "primary," "all," "email," or "phone").
-4. MedConnect retrieves the specified contact methods based on the modifier provided.
-5. MedConnect provides the contact information as per the user’s request.
-
-   **Use case ends.**
-
-#### **Extensions:**
-
-**3a.** The patient ID provided does not exist.
-- **3a1.** MedConnect informs the user that no contact was found for the provided ID.
-
-  **Use case resumes from step 2.**
-
-**3b.** No valid modifier is provided.
-- **3b1.** MedConnect informs the user of the missing or invalid modifier and assumes the default modifier ("primary").
-
-  **Use case resumes from step 4.**
-
-**3c.** Additional invalid modifiers are provided after the valid modifier.
-- **3c1.** MedConnect ignores the invalid modifiers and proceeds with the valid one.
-
-  **Use case resumes from step 4.**
----
-
-### Use Case: Delete Outdated Contacts (Hard Delete)
+### Use Case: Archive Contacts
 
 **System:** MedConnect
 **Actor:** Healthcare Administrator
 
 #### **Main Success Scenario (MSS):**
-1. User requests to permanently delete a patient’s data by their patient ID.
-2. MedConnect requests confirmation of the deletion for the given patient ID.
-3. User confirms the deletion request.
-4. MedConnect removes the patient’s contact data from the address book.
-5. MedConnect confirms that the patient’s data has been deleted permanently.
+1. User requests to archive the address book with a description.
+2. MedConnect confirms that the contact data has been successfully archived.
 
    **Use case ends.**
 
 #### **Extensions:**
 
-**3a.** The patient ID provided does not exist in the system.
-- **3a1.** MedConnect informs the user that no contact was found with the provided ID.
+**1a.** The given description is invalid.
+- **1a1.** MedConnect informs the user of the invalid description.
+- **1a2.** User corrects the invalid description and resubmits.
 
   **Use case resumes from step 2.**
 
-**3b.** User cancels the deletion before confirmation.
-- **3b1.** MedConnect acknowledges the cancellation of the deletion.
+---
 
-  **Use case ends.**
+### Use Case: Load Archived Contacts
+
+**System:** MedConnect
+**Actor:** Healthcare Administrator
+
+#### **Main Success Scenario (MSS):**
+1. User requests to load an archive file.
+2. MedConnect prompts the user to provide the file name of an archive file in the archives folder.
+3. User enters a file name.
+4. MedConnect validates the file name and checks for a matching file.
+5. MedConnect loads the archived contacts from the file into the address book.
+
+    **Use case ends.**
+
+#### **Extensions:**
+
+**3a.** The given file name is invalid.
+- **3a1.** MedConnect notifies the user that the file name contains invalid characters.
+- **3a2.** User corrects the file name and resubmits.
+
+  **Use case resumes from step 4.**
+
+**3b.** The given file name does not match any existing file.
+- **3b1.** MedConnect notifies the user that a file with the given file name is not found.
+- **3b2.** User enters the file name of an existing file in the archives folder and resubmits.
+
+  **Use case resumes from step 4.**
+
+---
+
+### Use Case: Delete Archive File
+
+**System:** MedConnect
+**Actor:** Healthcare Administrator
+
+#### **Main Success Scenario (MSS):**
+1. User requests to delete an archive file.
+2. MedConnect prompts the user to provide the file name of an archive file in the archives folder.
+3. User enters a file name.
+4. MedConnect validates the file name and checks for a matching file.
+5. MedConnect deletes the archive file.
+
+    **Use case ends.**
+
+#### **Extensions:**
+
+**3a.** The given file name is invalid.
+- **3a1.** MedConnect notifies the user that the file name contains invalid characters.
+- **3a2.** User corrects the file name and resubmits.
+
+  **Use case resumes from step 4.**
+
+**4a.** The given file name does not match any existing file.
+- **4a1.** MedConnect notifies the user that a file with the given file name is not found.
+- **4a2.** User enters the file name of an existing file in the archives folder and resubmits.
+
+  **Use case resumes from step 4.**
+  
 ---
 
 ### Non-Functional Requirements (NFRs)
