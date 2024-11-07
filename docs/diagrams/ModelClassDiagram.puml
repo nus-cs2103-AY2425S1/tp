@@ -57,7 +57,6 @@ UniqueContactList --> "~* all" Contact
 UniqueEventList --> "~* all" Event
 
 Client .up.--|> Contact
-Client *--> "1" Date
 
 Vendor .up.--|> Contact
 Vendor *--> "1" Service
