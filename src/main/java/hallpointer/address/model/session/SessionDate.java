@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a date in the system.
+ * Represents a SessionDate.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class SessionDate {

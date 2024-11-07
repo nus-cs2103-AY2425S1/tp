@@ -24,7 +24,7 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the HallPointer.
+     * Returns HallPointer.
      *
      * @see hallpointer.address.model.Model#getHallPointer()
      */
@@ -34,7 +34,7 @@ public interface Logic {
     ObservableList<Member> getFilteredMemberList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' hall pointer file path.
      */
     Path getHallPointerFilePath();
 

@@ -11,10 +11,10 @@ package Storage as StoragePackage {
     }
     Class "<<interface>>\nStorage" as Storage
     Class StorageManager
-    package "AddressBook Storage" #F4F6F6 {
-        Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-        Class JsonAddressBookStorage
-        Class JsonSerializableAddressBook
+    package "HallPointer Storage" #F4F6F6 {
+        Class "<<interface>>\nHallPointerStorage" as HallPointerStorage
+        Class JsonHallPointerStorage
+        Class JsonSerializableHallPointer
         Class JsonAdaptedMember
         Class JsonAdaptedTag
         Class JsonAdaptedPoint
@@ -24,7 +24,7 @@ package Storage as StoragePackage {
 
 package Model as ModelPackage {
     Class Session
-    Class AddressBook
+    Class HallPointer
     Class ModelManager
     Class Member
     Class Point
@@ -35,20 +35,20 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" HallPointerStorage
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> HallPointerStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedMember
+JsonHallPointerStorage .up.|> HallPointerStorage
+JsonHallPointerStorage ..> JsonSerializableHallPointer
+JsonSerializableHallPointer --> "*" JsonAdaptedMember
 JsonAdaptedMember --> "*" JsonAdaptedTag
 JsonAdaptedMember --> "*" JsonAdaptedSession
 JsonAdaptedSession --> "*" JsonAdaptedPoint
-AddressBook --> "*" Member
-StorageManager --> AddressBook
+HallPointer --> "*" Member
+StorageManager --> HallPointer
 ModelManager --> StorageManager
-ModelManager --> AddressBook
+ModelManager --> HallPointer
 ModelManager --> Member
 Session --> "1" Point
 Member --> "1" Point
