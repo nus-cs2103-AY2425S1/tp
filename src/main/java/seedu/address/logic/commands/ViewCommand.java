@@ -24,8 +24,8 @@ public class ViewCommand extends Command {
             + "Input \"home\" to return to home page";
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient with the specified NRIC not found";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views full profile of identified patient in the system\n"
-            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+            + " usage: view [NRIC]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
     private static final Logger logger = Logger.getLogger(ViewCommand.class.getName());
 
     private final Nric targetNric;

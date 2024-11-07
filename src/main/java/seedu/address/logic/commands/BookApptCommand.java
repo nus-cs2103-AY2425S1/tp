@@ -28,9 +28,9 @@ public class BookApptCommand extends Command {
     public static final String MESSAGE_PATIENT_NOT_FOUND = "Patient not found";
     public static final String MESSAGE_PAST_DATETIME = "Appointment date and time cannot be in the past";
     public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists on this date and time";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records appointments under a specified health service "
-            + " for registered patients\n"
-            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " usage: bookappt [NRIC] dt|[APPOINTMENT DATE-TIME] h|[HEALTH SERVICE]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
     private static final Logger logger = Logger.getLogger(BookApptCommand.class.getName());
 
     private final Appt appt;

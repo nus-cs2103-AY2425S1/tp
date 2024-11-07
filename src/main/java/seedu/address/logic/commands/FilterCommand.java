@@ -15,9 +15,9 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters existing patient records based on their "
-            + "appointment dates and health services\n"
-            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " usage: filter sd|[START DATE] ed|[END DATE] h|[HEALTH SERVICE]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
 
     public static final String RETURN_TO_HOME = "\nInput \"home\" to return to home page";
 
