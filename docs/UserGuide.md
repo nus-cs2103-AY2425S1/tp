@@ -37,7 +37,7 @@ The user guide contains formatting to highlight important info. The standards us
   - [Clearing all entries](#clearing-all-entries--clear)
   - [Adding a project](#adding-a-project--addproject)
   - [Listing all projects](#listing-all-projects--listproject)
-  - [Listing all members of a project](#listing-all-project-members--listprojectmembers)
+  - [Listing all members of a project](#listing-all-members-of-a-project--listprojectmembers)
   - [Finding projects by name](#finding-projects-by-name--findproject)
   - [Deleting a project](#deleting-a-project--deleteproject)
   - [Clear all project entries](#clear-all-project-entries--clearproject)
@@ -316,7 +316,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all member of a project : `listprojectmembers`
+### Listing all members of a project : `listprojectmembers`
 
 Shows a list of **all project members**.
 
