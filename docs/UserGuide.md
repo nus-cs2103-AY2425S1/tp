@@ -83,6 +83,26 @@ Format: `help`
 
 Adds an owner to PawPatrol.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Important notes about owner fields:**<br>
+<ul>
+<li>IC number: Must contain only uppercase alphanumeric characters and follow the format of a 9-character Singapore IC number.</li>
+<li>Owner name: Must contain only alphanumeric characters and spaces, and cannot be empty.</li>
+<li>Phone number: Must contain exactly 8 digits.</li>
+<li>Email: Should follow a standard email format of local-part@domain and adhere to the following constraints:
+<ul>
+<li>The local-part should only contain alphanumeric characters and these special characters +_.-.</li>
+<li>The local-part may not start or end with any special characters.</li>
+<li>The domain name is made up of domain labels separated by periods.</li>
+<li>The domain name must end with a domain label at least 2 characters long, 
+have each domain label start and end with alphanumeric characters, have each domain label consist of alphanumeric characters, separated only by hyphens, if any.</li>
+</ul>
+</li>
+<li>Address: Can contain any characters, but must be at least 3 characters long.</li>
+</ul>
+</div>
+
 Format: `owner i/IC_NUMBER n/NAME p/PHONE e/EMAIL a/ADDRESS`
 
 Examples:
@@ -91,6 +111,19 @@ Examples:
 #### <u>Adding a pet</u>
 
 Adds a pet to PawPatrol.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Important notes about pet fields:**<br>
+<ul>
+<li>Pet name: Must only contain alphanumeric characters, spaces, or hyphens, and it should not be blank.</li>
+<li>Pet species: Must only contain alphabetic characters, should be a single word, and it should not be blank.</li>
+<li>Pet breed: Must only contain alphabetic characters, spaces, or hyphens, and it should not be blank.</li>
+<li>Pet age: Must only contain numbers, and it should be 1 or 2 digits long</li>
+<li>Pet sex: Must be either 'M' or 'F' (case-insensitive, each letter representing Male and Female).</li>
+<li>Pet tags: Must be alphanumeric and should only contain a single word each.</li>
+</ul>
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A pet can have any number of tags (including 0)
@@ -158,7 +191,7 @@ Format:
 
 ### Editing entities: `edit`
 
-Edits an existing owner or pet in PawPatrol.
+Edits an existing owner or pet in PawPatrol. Refer to information on owner and pet fields in the [Add section](#adding-an-entity-owner--pet).
 
 <div markdown="span" class="alert alert-info">
 
@@ -304,7 +337,7 @@ It is saved automatically as a JSON file located in `[JAR file location]/data/pa
 
 ### Saving a backup data file
 
-PawPatrol does not automatically backup your data. To do so, copy the JSON file (as mentioned above) into another location on your computer or to another device.
+PawPatrol does not automatically back up your data. To do so, copy the JSON file (as mentioned above) into another location on your computer or to another device.
 
 ### Editing the data file
 
