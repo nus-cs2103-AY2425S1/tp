@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import spleetwaise.commons.util.ToStringBuilder;
 import spleetwaise.transaction.model.transaction.Category;
-import spleetwaise.transaction.model.transaction.Description;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
