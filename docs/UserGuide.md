@@ -274,7 +274,7 @@ Furthermore, certain edits can cause F.A.R.T to behave in unexpected ways (e.g.,
   * If you are a Windows user, press the Windows key and in the search bar, type in Powershell. Click on it and that will be your Command Terminal
   * For Mac/Linux users, look for Terminal under applications and that will be your Command Terminal
 * Parameter: Something that must be typed into the Command Line for the command to be properly recognised
-* Index: The number found beside the client's name in the FART book
+* Index: The number found beside the client's name in the F.A.R.T book
 
 --------------------------------------------------------------------------------------------------------------------
 
