@@ -84,9 +84,9 @@ public class CommandTextFlow extends TextFlow {
         case "deletegame" -> "deletegame INDEX g/GAME";
         case "favgame" -> "favgame INDEX g/GAME";
         case "unfavgame" -> "unfavgame INDEX g/GAME";
-        case "find" -> "find KEYWORD [MORE_KEYWORDS] - Finds persons whose names contain any of the keywords";
-        case "findtime" -> "find TIME-TIME [TIME-TIME] - Finds persons whose preferred time contains any TIMES";
-        case "findgame" -> "findgame KEYWORD [MORE_KEYWORDS] - Finds persons whose games contain any of the keywords";
+        case "find" -> "find KEYWORD [MORE_KEYWORDS]... - Finds persons whose names contain any of the keywords";
+        case "findtime" -> "find TIME-TIME [TIME-TIME]... - Finds persons whose preferred time contains any TIMES";
+        case "findgame" -> "findgame KEYWORD [MORE_KEYWORDS]... - Finds persons whose games contain any of the keywords";
         case "delete" -> "delete INDEX - Deletes the specified person (e.g., delete 3)";
         case "clear" -> "clear - Clears all entries from the gamer address book";
         case "undo" -> "undo - Undoes the previous command (aside from save and load)";

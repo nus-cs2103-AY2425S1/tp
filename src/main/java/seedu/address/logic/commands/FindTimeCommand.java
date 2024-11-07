@@ -21,9 +21,8 @@ public class FindTimeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose preferred time ranges "
             + "overlap with the specified time ranges "
             + "and displays them as a list with index numbers.\n"
-            + "Tips: RANGE has format HHmm, same ending time as starting time is allowed.\n"
             + "Parameters: TIME-TIME [TIME-TIME]...\n"
-            + "Example: " + COMMAND_WORD + " 1100-1230 2130-2245";
+            + "Example: " + COMMAND_WORD + " 1100-1230 2130-2130";
     private static final boolean IS_UNDOABLE = true;
 
     private final PreferredTimeOverlapsRangesPredicate predicate;
