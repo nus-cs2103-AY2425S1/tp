@@ -68,6 +68,8 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
 
+        UniqueId eventId = target.getId();
+        eventMap.put(eventId, editedEvent);
         internalList.set(index, editedEvent);
     }
 
