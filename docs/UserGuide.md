@@ -340,6 +340,9 @@ section for detailed information
 
 **Format:** `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]`
 
+>**Tip:** You can add a student without specifying a tutorial ID!
+>**Warning** You will need to add a tutorial before assign student to new tutorial
+
 Command detail & constraints:
 
 - This command registers a new student in the system with essential details like name and student ID, and optionally assigns them to a tutorial.
@@ -350,7 +353,9 @@ Command detail & constraints:
 **Examples:**
 
 - `addStu n/Samson s/A1234567X c/T1001` : Adds a student named "Samson" with the student ID "A1234567X" and assigns them to tutorial ID "T1001".
+  >**Expected output:** New student added: Samson; Student ID: A1234567X; Tutorial Class: T1001
 - `addStu n/Alice s/A1234567C` : Adds a student named "Alice" with the student ID "A1234567C" without assigning a tutorial ID.
+  >**Expected output:** New student added: Alice; Student ID: A1234567C; Tutorial Class: No tutorial assigned
 
 #### 4.1.2 Edit existing student detail: `edit`
 <a id="editing-a-student-edit"></a>
@@ -626,7 +631,7 @@ Command Details & Constraints:
 ### 4.6 Saving the data
 <a id="saving-the-data"></a>
 
-TO BE DONE
+The data in the TrackMate application are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### 4.7 Editing the data file
 <a id="editing-the-data-file"></a>
