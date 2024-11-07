@@ -63,6 +63,8 @@ AgentAssist is the **definitive desktop tool for credit card sales agents**. Mer
 
 Maximize your productivity, minimize your response time, and amplify your sales performance. With AgentAssist, you're not just keeping up with the competitive world of credit card sales — _you're setting the pace_.
 
+[↑ Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -82,6 +84,8 @@ AgentAssist allows you to manage client data like names, phone numbers, emails, 
 
 🎉 **By meeting these prerequisites, you'll be ready to make the most of AgentAssist’s fast, keyboard-driven interface and powerful data management features.** 🎉
 
+[↑ Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -97,7 +101,7 @@ To install Java 17:
 * Visit the Java download page from [Oracle](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 * Download the appropriate installer for your operating system (Windows, macOS, or Linux).
 * Follow the installation instructions on the website to complete the setup.
-* Once installed, verify the installation by [opening your terminal (or command prompt)](#how-to-open-terminal) and typing:
+* Once installed, verify the installation by [opening your terminal (or command prompt)](#step-4-run-the-application) and typing:
     ```
     java -version
     ```
@@ -146,11 +150,13 @@ Move the .jar file you downloaded into this folder.
 
 To learn more about how to use commands in AgentAssist, proceed to the next section.
 
+[↑ Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
-# 4. Understanding Commands in AgentAssist {#using-agentassist}
+# 4. Understanding Commands in AgentAssist
 
 The true power of **AgentAssist** lies in efficiently using commands. Before diving into specific commands, let’s break down the basic structure of a command.
 
@@ -229,19 +235,19 @@ Arguments are the values that follow each flag in a command. **Arguments cannot 
 
 Refer to the table below for more details.
 
-| **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                | **Case Sensitivity** |
-|----------|-----------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|----------------------|
-| `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                 | ❌                    |
-| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                    |
-| `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                      | ❌                    |
-| `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                    |
-| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                        | ✔️                   |
-| `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                    |
-| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                               | ❌                    |
+| **Flag** | **Expected Argument** | **Description**                                                                              | **Requirements**                                                                                                            | **Case Sensitivity**   |
+|----------|-----------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------------------|
+| `n/`     | `<NAME>`              | The client's full name                                                                       | Any combination of letters, numbers, spaces, hyphens, apostrophes (no symbols).                                             | ❌                      |
+| `p/`     | `<PHONE>`             | The client's phone number                                                                    | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                                               | ❌                      |
+| `e/`     | `<EMAIL>`             | The client's email address                                                                   | Valid email format (`username@domain.com`)                                                                                  | ❌                      |
+| `a/`     | `<ADDRESS>`           | The client's physical address                                                                | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
+| `j/`     | `<JOBNAME>`           | The client's job title or profession                                                         | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
+| `i/`     | `<INCOME>`            | The client's annual income                                                                   | Positive number or zero <br/> • Must be numeric<br/> • Cannot include commas and decimal points<br/> • Cannot be fractional | ❌                      |
+| `t/`     | `<TIER>`              | The client's assigned tier level                                                             | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                                                    | ❌️                     |
+| `r/`     | `<REMARK>`            | General remark(s) about the client                                                           | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
+| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark(s)                                                 | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
+| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark                                               | Any combination of letters, numbers, spaces, and symbols.                                                                   | ❌                      |
+| `s/`     | `<STATUS>`            | The client's assigned status, indicating whether any followup action by the agent is needed. | Must be one of the predefined statuses:<br/> • Urgent, Non_urgent                                                           | ❌                      |
 
 > 💡 **Pro Tip:**
 >
@@ -286,6 +292,8 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 > Combine commands like `filter` followed by `edit` or `delete` to manage your contacts more effectively.  
 > For example, use `filter j/doctor` to display all doctors, then `edit 2 a/321 New Address` to update the address for the second listed doctor.
 
+[↑ Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
@@ -296,7 +304,7 @@ Refer to the [Commands Section](#5-commands) for more comprehensive details of e
 
 When working with commands in **AgentAssist**, it's important to understand **how the command format is structured**. Commands consist of specific components like **flags** and **arguments**, and some parts of the command can be **optional**.
 
-If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 4.1](#command-structure-overview) for more details on how flags, arguments, and placeholders work together.
+If you're unfamiliar with how commands are structured, refer back to the [Command Structure Overview in Section 4.1](#41-command-structure-overview) for more details on how flags, arguments, and placeholders work together.
 
 ### Command Syntax
 
@@ -328,7 +336,7 @@ Each client's record includes their name, contact number, email, occupation, and
 add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOBNAME> i/ <INCOME> [t/ <TIER>] [r/ <REMARK>] [s/ <STATUS>]
 ```
 * Mandatory Fields: `n/`, `p/`, `e/`, `a/`, `j/`, `i/`
-* Optional Fields: `t/`, `r/`, 's/'
+* Optional Fields: `t/`, `r/`, `s/`
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -382,12 +390,12 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 > **The duplicate contact will not be saved** to prevent redundancy.
 >
 > If you need to update details for an existing contact, use the `edit` command instead.  
-> For more information, see Section [5.2.2 Editing a client](#edit-command).
+> For more information, see Section [5.2.2 Editing a client](#522-edit-an-existing-clients-information).
 
 
 
 
-### 5.2.2 Edit an Existing Client's Information {#edit-command}
+### 5.2.2 Edit an Existing Client's Information
 
 **Purpose:** Update the details of an existing client in the database.
 
@@ -446,7 +454,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 
 
-### 5.2.3 Delete an Existing Client {#delete-command}
+### 5.2.3 Delete an Existing Client
 
 **Purpose:** Remove records of clients who are no longer using your credit card services.
 
@@ -493,7 +501,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 
 
-### 5.2.4 Delete All Existing Clients {#clear-command}
+### 5.2.4 Delete All Existing Clients
 
 **Purpose:** Delete all clients from the database, effectively resetting the application’s contact list
 
@@ -531,7 +539,7 @@ This will permanently clear all contacts. Are you sure you want to execute this 
 
 ## 5.3 Data Filtering Commands
 
-### 5.3.1 List All Clients {#list-command}
+### 5.3.1 List All Clients
 
 **Purpose:** View a list of all clients saved in AgentAssist.
 
@@ -544,7 +552,7 @@ list
 
 
 
-### 5.2.3 Filter Clients by Details / Find a Client {#filter-command}
+### 5.2.3 Filter Clients by Details / Find a Client
 
 **Purpose:** Search for clients by specific details such as name, address, email, phone number, job title, income, remarks or status.
 
@@ -556,7 +564,7 @@ filter n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> r/ <REMARK> t/ <TIE
 - **Special Syntax for Income (i/)**:
     - When filtering by income, use comparison operators `=`, `>`, or `<` to specify criteria.
     - Example: `i/ >5000` will filter clients with an income greater than 5000.
-    - See [Filtering By Income](#filtering-by-income) for more information.
+    - See [Filtering By Income](#523-filter-clients-by-details--find-a-client) for more information.
 
 For detailed explanations of each flag and acceptable arguments, refer to Sections [4.3 Flags](#43-flags) and [4.4 Arguments](#44-arguments)
 
@@ -724,6 +732,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 >
 > Incorrect data modifications may also cause unexpected behavior. **Only modify the data file if you're confident in doing so correctly.**
 
+[↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -735,7 +744,7 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AgentAssist home folder.
 
 ### How do I change the remarks or credit card tier of an existing client?
-Use the [`edit` command](#feature-4-edit-the-existing-client), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
+Use the [`edit` command](#522-edit-an-existing-clients-information), and specify the `t/` flag for the credit card tier, and `rn/` or `ra/` for remark(s). If you wish to remove the assigned tier of a contact, simply use the `t/` flag without indicating a tier.
 
 ### Why am I getting an error when trying to edit the remark of an existing client?
 Ensure that the command syntax is correct, and note that the `rn/` and `ra/` flags cannot be used together. The `rn/` flag replaces the existing remark(s), while `ra/` appends to the current remark(s).
@@ -746,6 +755,8 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 ### What do the different status colors represent in the UI?
 Each status type is visually distinguished in the UI: Urgent is denoted by a red banner, Non_urgent with a yellow banner. This makes it easy to see at a glance the status of each client.
 
+[↑ Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 7. Known issues
@@ -754,6 +765,8 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran' 
 4.  **Using non-english text input can cause visual bugs**. This release fully supports English text input only**. Using non-English characters or text may cause display issues, including incorrect text direction and character rendering. We are actively working to expand international language support in future releases.
+
+[↑ Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -773,3 +786,5 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 | **Undo Command**           | `undo`                                                                                                                                    | `undo`                                                                                                              |
 | **Exit Application**       | `exit`                                                                                                                                    | `exit`                                                                                                              |
 | **Clear All Data**         | `clear`                                                                                                                                   | `clear`                                                                                                             |
+
+[↑ Return to Table of Contents](#table-of-contents)
