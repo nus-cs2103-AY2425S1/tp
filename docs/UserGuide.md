@@ -1,6 +1,5 @@
 ---
 layout: page
-title: User Guide
 pageNav: 3
 ---
 
@@ -390,7 +389,7 @@ This allows you to conveniently access all the specific details about an applica
 
 Filters candidates based on their status.
 
-**Format**: `filter st/STATUS`
+**Format**: `filter STATUS`
 
 #### Notes
 
@@ -407,8 +406,8 @@ Filters candidates based on their status.
 
 #### Examples
 
-- `filter st/Applied`: Displays all candidates marked as "Applied".
-- `filter st/Interviewed`: Shows candidates marked as "Interviewed".
+- `filter Applied`: Displays all candidates marked as "Applied".
+- `filter Interviewed`: Shows candidates marked as "Interviewed".
 
 #### Image Example
 
