@@ -120,15 +120,7 @@ The details of what information can be stored for a vendor/event are as shown be
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing Help : `help`
-
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
-
-#### Format: `help`
-
-### Creating a Vendor or Event: `create`
+### Creating Vendors & Events: `create`
 
 Creates a vendor or event in EventTory.
 
@@ -146,7 +138,51 @@ If parameters are provided for the `v/` and `e/` flags, they will be ignored.
 * `create v/ n/Hong Lim Trading Pte. Ltd. p/67412943 d/Specialises in lighting effects. t/stage-crew`
 * `create e/ n/Jubilee Concert on/24 Jan 2025 t/annual`
 
-### Listing Items : `list`
+### Editing Vendors & Events : `edit`
+
+Edits an existing vendor or event in EventTory.
+
+#### Format:
+* To edit a vendor: `edit v/INDEX [n/NAME] [p/PHONE] [d/DESCRIPTION] [t/TAG]…​`
+* To edit an event: `edit e/INDEX [n/NAME] [on/DATE] [t/TAG]…​`
+
+#### Notes:
+* Edits the vendor/event at the specified `INDEX`.
+    * The index refers to the index number shown in the vendor or event list.
+    * The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+    * Editing an item but providing no new values is invalid.
+* The existing values will be updated to the input values.
+* The operation will succeed even if the specified vendor/event is not visible onscreen.
+    * e.g. `edit v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be edited.
+* When editing tags, the existing tags of the vendor/event will be **overridden**.
+    * Tags cannot be added cumulatively.
+    * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
+
+#### Examples:
+*  `edit v/1 p/58623042 ` : Edits the phone number of the 1st vendor to be `58623042`.
+*  `edit e/2 n/Baby Shower t/` : Edits the name of the 2nd event to be `Baby Shower`, and clears all existing tags.
+
+### Deleting Vendors & Events : `delete`
+
+Deletes a vendor or an event from EventTory.
+
+#### Format: `delete [v/INDEX]` or `delete [e/INDEX]`
+
+* Deletes the event or vendor at the specified `INDEX`.
+    * The index refers to the index number shown in the displayed event/vendor list respectively.
+    * The index **must be a positive integer** 1, 2, 3, ...
+    * The index for each vendor/event is relative and can change depending on previous operations.
+* The operation will succeed even if the specified vendor/event is not visible onscreen.
+    * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion.
+* If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
+* If the current viewed vendor/event is deleted, the application will return you to the main list screen.
+
+#### Examples:
+* `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
+* `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
+
+### Listing Vendors & Events : `list`
 
 Displays the list of vendors and/or events in EventTory.
 
@@ -162,29 +198,6 @@ Displays the list of vendors and/or events in EventTory.
 * `list v/` will display the list of vendors.
 * `list e/` will display the list of events.
 * `list v/ e/` and `list` will display both vendor and event lists.
-
-### Editing a Vendor or Event : `edit`
-
-Edits an existing vendor or event in EventTory.
-
-#### Format: 
-* To edit a vendor: `edit v/INDEX [n/NAME] [p/PHONE] [d/DESCRIPTION] [t/TAG]…​`
-* To edit an event: `edit e/INDEX [n/NAME] [on/DATE] [t/TAG]…​`
-
-#### Notes:
-* Edits the vendor/event at the specified `INDEX`.
-  * The index refers to the index number shown in the vendor or event list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-  * Editing an item but providing no new values is invalid.
-* The existing values will be updated to the input values.
-* When editing tags, the existing tags of the vendor/event will be **overridden**.
-  * Tags cannot be added cumulatively.
-  * You can remove all tags from a vendor/event by typing `t/` without specifying any tags after it.
-
-#### Examples:
-*  `edit v/1 p/58623042 ` : Edits the phone number of the 1st vendor to be `58623042`.
-*  `edit e/2 n/Baby Shower t/` : Edits the name of the 2nd event to be `Baby Shower`, and clears all existing tags.
 
 ### Viewing Vendors & Events: `view`
 
@@ -254,30 +267,19 @@ Finds vendors or events whose attributes contain any of the space-separated keyw
 * `find v/ catering` returns `catering` and `Catering Solutions`
 * `find e/ party wedding` returns `Birthday Party` and `John's Wedding`<br>
 
-### Deleting Items : `delete`
-
-Deletes a vendor or an event from EventTory.
-
-#### Format: `delete [v/INDEX]` or `delete [e/INDEX]`
-
-* Deletes the event or vendor at the specified `INDEX`.
-    * The index refers to the index number shown in the displayed event/vendor list respectively.
-    * The index **must be a positive integer** 1, 2, 3, ...
-    * The index for each vendor/event is relative and can change depending on previous operations.
-* The operation will succeed even if the specified vendor/event is not visible onscreen.
-  * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion.
-* If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
-* If the current viewed vendor/event is deleted, the application will return you to the main list screen.
-
-#### Examples:
-* `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
-* `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
-
 ### Clearing All Entries : `clear`
 
 Clears all vendor and event entries from EventTory.
 
 #### Format: `clear`
+
+### Accessing Help : `help`
+
+Opens a window with instructions on how to access the help page.
+
+![help message](images/helpMessage.png)
+
+#### Format: `help`
 
 ### Exiting the program : `exit`
 
@@ -329,12 +331,12 @@ Therefore, edit the data file only if you are confident that you can update it c
 | Action       | Format, Examples                                                                                                                                                                                                                                  |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Create**   | -`create v/ n/VENDOR_NAME p/PHONE_NUMBER d/DESCRIPTION [t/TAG]…​` or,<br> -`create e/ n/EVENT_NAME on/DATE [t/TAG]…​`<br><br>e.g., `create e/ n/Graduation Party on/2025-12-10 t/smu`                                                             |
-| **Assign**   | `assign INDEX` <br> e.g. `assign 1`                                                                                                                                                                                                               |
-| **Unassign** | `unassign INDEX` <br> e.g. `unassign 1`                                                                                                                                                                                                           |
+| **Edit**     | -`edit v/INDEX [n/VENDOR_NAME] [p/PHONE_NUMBER] [d/DESCRIPTION] [t/TAG]…​` or,<br> -`edit e/INDEX [n/EVENT_NAME] [on/DATE] [t/TAG]…​` <br><br> e.g., `edit v/2 n/PC Parts Trading d/Sells PC Parts` or, <br> `edit e/3 n/Hackathon on/2024-10-12` |
+| **Delete**   | `delete v/INDEX` or `delete e/INDEX` <br> e.g., `delete v/3`, `delete e/2`                                                                                                                                                                        |
 | **List**     | `list [v/] [e/]` <br> e.g. `list v/`, `list v/ e/`                                                                                                                                                                                                |
 | **View**     | `view v/INDEX` or `view e/INDEX`<br> e.g. `view v/1`                                                                                                                                                                                              |
-| **Delete**   | `delete v/INDEX` or `delete e/INDEX` <br> e.g., `delete v/3`, `delete e/2`                                                                                                                                                                        |
-| **Edit**     | -`edit v/INDEX [n/VENDOR_NAME] [p/PHONE_NUMBER] [d/DESCRIPTION] [t/TAG]…​` or,<br> -`edit e/INDEX [n/EVENT_NAME] [on/DATE] [t/TAG]…​` <br><br> e.g., `edit v/2 n/PC Parts Trading d/Sells PC Parts` or, <br> `edit e/3 n/Hackathon on/2024-10-12` |
+| **Assign**   | `assign INDEX` <br> e.g. `assign 1`                                                                                                                                                                                                               |
+| **Unassign** | `unassign INDEX` <br> e.g. `unassign 1`                                                                                                                                                                                                           |
 | **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                   |
 | **Clear**    | `clear`                                                                                                                                                                                                                                           |
 | **Help**     | `help`                                                                                                                                                                                                                                            |
