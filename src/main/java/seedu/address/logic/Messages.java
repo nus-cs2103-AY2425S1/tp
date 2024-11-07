@@ -39,7 +39,8 @@ public class Messages {
             + "Use listt command to switch to transaction list view of selected client.";
     public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in person list view!\n"
             + "Use list command to switch to person list view.";
-
+    public static final String MESSAGE_EMPTY_TRANSACTION_LIST =
+            "Invalid command: The current transaction list is empty.";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

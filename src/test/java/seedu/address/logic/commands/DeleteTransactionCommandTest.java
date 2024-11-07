@@ -54,7 +54,7 @@ public class DeleteTransactionCommandTest {
         List<Transaction> transactions = new ArrayList<>();
         model.updateTransactionList(transactions);
 
-        String expectedMessage = Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
+        String expectedMessage = Messages.MESSAGE_EMPTY_TRANSACTION_LIST;
 
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
         assertCommandFailure(deleteTransactionCommand, model, expectedMessage);
@@ -68,7 +68,7 @@ public class DeleteTransactionCommandTest {
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         model.setIsViewTransactions(true);
 
-        String expectedMessage = Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX;
+        String expectedMessage = Messages.MESSAGE_EMPTY_TRANSACTION_LIST;
 
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
         assertCommandFailure(deleteTransactionCommand, model, expectedMessage);

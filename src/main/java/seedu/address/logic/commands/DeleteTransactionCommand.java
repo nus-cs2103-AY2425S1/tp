@@ -48,6 +48,9 @@ public class DeleteTransactionCommand extends Command {
         Person selected = lastShownList.get(CURRENT_PERSON.getZeroBased());
         List<Transaction> transactions = new ArrayList<>(model.getFilteredTransactionList());
 
+        if (transactions.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_TRANSACTION_LIST);
+        }
         if (index.getZeroBased() >= transactions.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX);
         }
