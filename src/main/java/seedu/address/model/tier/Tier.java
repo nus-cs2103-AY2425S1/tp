@@ -34,7 +34,7 @@ public class Tier {
      */
     public static boolean isValidTierName(String test) {
         if (test.isEmpty()) {
-            return true;
+            return false;
         }
         for (TierEnum c : TierEnum.values()) {
             if (c.name().equals(test.toUpperCase())) {
