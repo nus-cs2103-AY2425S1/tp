@@ -186,6 +186,57 @@ Refer to the [Features](#features) below for details of each command.
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
+### Q1: Why can't I see the new order under the customer's/supplier's contact details immediately after adding it?
+**A:** When you add a new order, you need to follow these steps to see it reflected in the contact details:
+1. First, add the order using the appropriate command (`addCustomerOrder` or `addSupplyOrder`)
+2. Click the refresh button in the user interface
+3. The order will now appear under the respective contact's information
+
+This refresh step is necessary to ensure all order information is properly synchronized with the contact details.
+
+### Q2: How can I easily find the correct Product IDs when adding orders?
+**A:** When adding orders, you can use these tips to find the correct Product IDs:
+
+For Customer Orders:
+1. First run `viewPastryCatalogue` to see all available pastries and their IDs
+2. Keep the catalogue visible while typing your `addCustomerOrder` command
+3. Reference the IDs from the catalogue for the `o/PRODUCTID` parameter
+4. Example workflow:
+   ```
+   > viewPastryCatalogue
+   [catalogue appears showing pastries and their IDs]
+   > addCustomerOrder n/John p/98765432 o/1 2 3
+   ```
+
+For Supply Orders:
+1. First run `viewIngredientCatalogue` to see all ingredients and their IDs
+2. Keep the catalogue visible while typing your `addSupplyOrder` command
+3. Reference the IDs from the catalogue for the `o/PRODUCTID` parameter
+4. Example workflow:
+   ```
+   > viewIngredientCatalogue
+   [catalogue appears showing ingredients and their IDs]
+   > addSupplyOrder n/Tim p/81234567 o/1 2
+   ```
+
+### Q3: Do I need to refresh after deleting orders too?
+**A:** Yes, the same refresh process applies when deleting orders:
+1. Delete the order using `deleteCustomerOrder` or `deleteSupplyOrder`
+2. Click the refresh button in the UI
+3. The order will be removed from the contact's information
+
+### Q4: What happens if I use a wrong Product ID in my order?
+**A:** If you use a Product ID that doesn't exist in the catalogue:
+- The system will show an error message
+- The order won't be created
+- You should check the catalogue again using `viewPastryCatalogue` or `viewIngredientCatalogue` to verify the correct IDs
+
+### Q5: Can I add multiple products with the same ID in one order?
+**A:** Yes, you can repeat Product IDs in your order if the customer wants multiple of the same item. For example:
+```
+addCustomerOrder n/John p/98765432 o/1 1 1
+```
+This would add three units of product ID 1 to the order.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -251,22 +302,6 @@ addCustomer n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 
 ```
 ![screenshot](images/Screenshot-3.png)
 
-### **Add Ingredient Command**
-Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
-
-```bash
-addIngredient NAME COST
-```
-- **Parameters:**
-  - `NAME`: The name of the ingredient.
-  - `COST`: The cost of the ingredient.
-
-**Example:**
-```bash
-addIngredient Syrup 3.50 
-```
-![screenshot](images/Screenshot-1.png)
-
 ### **Add Customer Order Command**
 Adds a customer order by providing the customer's name, phone number and the pastry IDs from the pastry catalogue.
 
@@ -292,6 +327,22 @@ addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...] [r/REM
 addCustomerOrder n/John Doe p/98765432 o/1 2 3 r/Delivery at 6pm 
 ```
 ![screenshot](images/Screenshot-4.png)
+
+### **Add Ingredient Command**
+Adds a new ingredient to the bakery's ingredient catalogue, along with its cost.
+
+```bash
+addIngredient NAME COST
+```
+- **Parameters:**
+  - `NAME`: The name of the ingredient.
+  - `COST`: The cost of the ingredient.
+
+**Example:**
+```bash
+addIngredient Syrup 3.50 
+```
+![screenshot](images/Screenshot-1.png)
 
 ### **Add Pastry Command**
 Adds a new pastry to the bakery's pastry catalogue.
@@ -661,6 +712,35 @@ The Remove Pastry Command allows the bakery to maintain an up-to-date catalogue 
 For example, entering removePastry Croissant will remove "Croissant" from the catalogue. If the pastry does not exist, an error message will be shown.
 ![removePastryFail.png](images%2FremovePastryFail.png)
 
+### **Unmark Customer Order Command**
+Unmark the customer order status as pending.
+
+```bash
+unmarkCustomerOrder INDEX
+```
+- **Parameters:**
+  - `INDEX`: The index number for the CustomerOrder displayed in the list.
+
+**Example:**
+```bash
+unmarkCustomerOrder 1
+```
+![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
+
+### **Unmark Supply Order Command**
+Unmark the supply order status as pending.
+
+```bash
+unmarkSupplyOrder INDEX
+```
+- **Parameters:**
+  - `INDEX`: The index for theSupplyOrder displayed in the list.
+
+**Example:**
+```bash
+umarkSupplyOrder 1
+```
+![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
 ### **View IngredientCatalogue Command**
 Displays the current list of ingredients available in the bakery’s ingredient catalogue.
@@ -710,34 +790,5 @@ The View Pastry Catalogue Command provides a comprehensive view of all pastries 
 
 For example, entering viewPastryCatalogue shows the complete list of pastries, ensuring that bakery owners are aware of the available pastries.
 
-### **Unmark Customer Order Command**
-Unmark the customer order status as pending.
-
-```bash
-unmarkCustomerOrder INDEX
-```
-- **Parameters:**
-  - `INDEX`: The index number for the CustomerOrder displayed in the list.
-
-**Example:**
-```bash
-unmarkCustomerOrder 1
-```
-![unmarkcustomerorderui.png](images/unmarkcustomerorderui.png)
-
-### **Unmark Supply Order Command**
-Unmark the supply order status as pending.
-
-```bash
-unmarkSupplyOrder INDEX
-```
-- **Parameters:**
-  - `INDEX`: The index for theSupplyOrder displayed in the list.
-
-**Example:**
-```bash
-umarkSupplyOrder 1
-```
-![unmarksupplyorderui.png](images/unmarksupplyorderui.png)
 
 ----------------------------------------------------------------------------------------------------------------------
