@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.logic.Messages;
@@ -40,7 +41,7 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/John r/vendor";
 
     private final Name name;
-    private final Role role;
+    private final Optional<Role> role;
     private final Email email;
     private final Phone phone;
     private final Address address;
@@ -49,7 +50,7 @@ public class FilterCommand extends Command {
      * Creates a FilterCommand to filter persons by the specified {@code name}, {@code role}, {@code email},
      * {@code phone} and {@code address}.
      */
-    public FilterCommand(Name name, Role role, Email email, Phone phone, Address address) {
+    public FilterCommand(Name name, Optional<Role> role, Email email, Phone phone, Address address) {
         this.name = name;
         this.role = role;
         this.email = email;
@@ -68,7 +69,7 @@ public class FilterCommand extends Command {
         }
 
         if (role != null) {
-            predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(role.toString().toLowerCase())));
+            predicates.add(new RoleContainsKeywordsPredicate(Arrays.asList(role.get().toString().toLowerCase())));
         }
 
         if (email != null) {
@@ -107,11 +108,23 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
-        return name.equals(otherFilterCommand.name)
-                && role.equals(otherFilterCommand.role)
-                && email.equals(otherFilterCommand.email)
-                && phone.equals(otherFilterCommand.phone)
-                && address.equals(otherFilterCommand.address);
+
+        boolean equalName = (name == null && otherFilterCommand.name == null)
+                || name != null && name.equals(otherFilterCommand.name);
+
+        boolean equalRole = (role == null && otherFilterCommand.role == null)
+                || role != null && role.equals(otherFilterCommand.role);
+
+        boolean equalEmail = (email == null && otherFilterCommand.email == null)
+                || email != null && email.equals(otherFilterCommand.email);
+
+        boolean equalPhone = (phone == null && otherFilterCommand.phone == null)
+                || phone != null && phone.equals(otherFilterCommand.phone);
+
+        boolean equalAddress = (address == null && otherFilterCommand.address == null)
+                || address != null && address.equals(otherFilterCommand.address);
+
+        return equalName && equalRole && equalEmail && equalPhone && equalAddress;
     }
 
     @Override

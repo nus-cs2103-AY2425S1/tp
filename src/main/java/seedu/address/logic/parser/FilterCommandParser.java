@@ -50,7 +50,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         Phone phone = null;
         Email email = null;
         Address address = null;
-        Role role = null;
+        Optional<Role> role = null;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -72,7 +72,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             if (argMultimap.getValue(PREFIX_ROLE).get().isEmpty()) {
                 throw new ParseException(MESSAGE_ROLE_CANNOT_BE_EMPTY);
             }
-            role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()).get();
+            role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         }
 
         return new FilterCommand(name, role, email, phone, address);
