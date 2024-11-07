@@ -1,5 +1,8 @@
 package seedu.address.logic.commands.eventcommands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -62,5 +65,46 @@ public class ClearEventCommandTest {
         expectedModel.setEventList(getTypicalAddressBook());
 
         assertCommandSuccess(clearEventCommand, model, ClearEventCommand.MESSAGE_ABORTED, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ClearEventCommand clearFirstCommand = new ClearEventCommand();
+        ClearEventCommand clearSecondCommand = new ClearEventCommand();
+
+        // same object -> returns true
+        assertTrue(clearFirstCommand.equals(clearFirstCommand));
+
+        // same command -> returns true
+        assertTrue(clearFirstCommand.equals(clearSecondCommand));
+
+        // different types -> returns false
+        assertFalse(clearFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(clearFirstCommand.equals(null));
+    }
+
+    @Test
+    public void toStringMethod() {
+        ClearEventCommand clearCommand = new ClearEventCommand();
+        String expected = ClearEventCommand.class.getCanonicalName() + "{isPrompted=false, isConfirmed=false}";
+        assertEquals(expected, clearCommand.toString());
+
+        ClearEventCommand.setPrompted(true);
+        String secondExpected = ClearEventCommand.class.getCanonicalName() + "{isPrompted=true, isConfirmed=false}";
+        assertEquals(secondExpected, clearCommand.toString());
+
+        ClearEventCommand.setConfirmed(true);
+        String thirdExpected = ClearEventCommand.class.getCanonicalName() + "{isPrompted=true, isConfirmed=true}";
+        assertEquals(thirdExpected, clearCommand.toString());
+
+        ClearEventCommand.setConfirmed(false);
+        String fourthExpected = ClearEventCommand.class.getCanonicalName() + "{isPrompted=true, isConfirmed=false}";
+        assertEquals(fourthExpected, clearCommand.toString());
+
+        ClearEventCommand.setPrompted(false);
+        String fifthExpected = ClearEventCommand.class.getCanonicalName() + "{isPrompted=false, isConfirmed=false}";
+        assertEquals(fifthExpected, clearCommand.toString());
     }
 }

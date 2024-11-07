@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -45,6 +46,7 @@ import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.EventInSchedulePredicate;
 import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
 import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
+import seedu.address.model.types.common.Name;
 import seedu.address.model.types.common.NameContainsKeywordsPredicate;
 import seedu.address.model.types.common.PersonTagContainsKeywordsPredicate;
 import seedu.address.model.types.person.Person;
@@ -206,12 +208,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_link() throws Exception {
-        // TODO
+        LinkPersonCommand command = (LinkPersonCommand) parser.parseCommand(
+                LinkPersonCommand.COMMAND_WORD + " 1 " + " ev/Event Name");
+        assertEquals(new LinkPersonCommand(INDEX_FIRST_EVENT, new Name("Event Name")), command);
     }
 
     @Test
     public void parseCommand_unlink() throws Exception {
-        // TODO
+        UnlinkPersonCommand command = (UnlinkPersonCommand) parser.parseCommand(
+                UnlinkPersonCommand.COMMAND_WORD + " 1 " + " ev/Event Name");
+        assertEquals(new UnlinkPersonCommand(INDEX_FIRST_EVENT, new Name("Event Name")), command);
     }
 
     @Test
