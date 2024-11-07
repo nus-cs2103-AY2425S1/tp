@@ -11,6 +11,7 @@ import java.time.YearMonth;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SummaryCommand;
+import seedu.address.model.person.TransactionDatePredicate;
 
 public class SummaryCommandParserTest {
     private SummaryCommandParser parser = new SummaryCommandParser();
@@ -48,8 +49,8 @@ public class SummaryCommandParserTest {
     @Test
     public void parse_validArgs_returnsSummaryCommand() {
         String validArgs = "        s/2022-05       e/2022-06       ";
-        SummaryCommand expectedSummaryCommand =
-                new SummaryCommand(YearMonth.parse("2022-05"), YearMonth.parse("2022-06"));
+        SummaryCommand expectedSummaryCommand = new SummaryCommand(
+                new TransactionDatePredicate(YearMonth.parse("2022-05"), YearMonth.parse("2022-06")));
         assertParseSuccess(parser, validArgs, expectedSummaryCommand);
     }
 }
