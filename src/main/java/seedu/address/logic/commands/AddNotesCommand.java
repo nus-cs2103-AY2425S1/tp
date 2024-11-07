@@ -72,7 +72,7 @@ public class AddNotesCommand extends Command {
      * the remark is added to or removed from
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
+    public String generateSuccessMessage(Person personToEdit) {
         String message = !notes.value.isEmpty() ? MESSAGE_ADD_NOTES_SUCCESS : MESSAGE_DELETE_NOTES_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }
