@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class DeleteExamCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getUnfilteredPersonList();
+        List<Person> lastShownList = model.getUnsortedAndUnfilteredPersonList();
 
         boolean hasUpdates = false;
 
@@ -54,7 +53,6 @@ public class DeleteExamCommand extends Command {
                     personToEdit.getStudentClass(), personToEdit.getEcName(), personToEdit.getEcNumber(),
                     updatedExams, personToEdit.getTags(), personToEdit.getAttendances(), personToEdit.getSubmissions());
             model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         }
         if (!hasUpdates) {
             // No updates, exam not found in any students

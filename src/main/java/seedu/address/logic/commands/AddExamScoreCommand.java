@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -77,7 +76,6 @@ public class AddExamScoreCommand extends Command {
                 personToEdit.getStudentClass(), personToEdit.getEcName(), personToEdit.getEcNumber(),
                 updatedExams, personToEdit.getTags(), personToEdit.getAttendances(), personToEdit.getSubmissions());
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADDEXAMSCORE_SUCCESS, editedPerson.getDisplayedName(),
                 exam, examScore));
     }

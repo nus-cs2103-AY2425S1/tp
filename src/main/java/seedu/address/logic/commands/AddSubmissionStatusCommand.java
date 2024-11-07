@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
@@ -87,7 +86,7 @@ public class AddSubmissionStatusCommand extends Command {
                 personToEdit.getStudentClass(), personToEdit.getEcName(), personToEdit.getEcNumber(),
                 personToEdit.getExams(), personToEdit.getTags(), personToEdit.getAttendances(), updatedSubmissions);
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         logger.log(Level.INFO, "Submission status added.");
         return new CommandResult(String.format(MESSAGE_ADDSUBMISSIONSTATUS_SUCCESS, editedPerson.getDisplayedName(),
                 submission, submissionStatus));

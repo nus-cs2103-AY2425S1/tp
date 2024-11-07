@@ -115,14 +115,17 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Unfiltered Person List Accessors =============================================================
+    //=========== Unsorted and Unfiltered Person List Accessors ==============================================
     /**
-     * Returns an unmodifiable view of the unfiltered list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the unsorted and unfiltered list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
      */
-    @Override
-    public ObservableList<Person> getUnfilteredPersonList() {
-        return addressBook.getPersonList();
+    public ObservableList<Person> getUnsortedAndUnfilteredPersonList() {
+        // remove filters
+        filteredPersons.setPredicate(null);
+        // remove sort
+        sortedAndFilteredPersons.setComparator(null);
+        return sortedAndFilteredPersons;
     }
 
     //=========== Filtered Person List Accessors =============================================================

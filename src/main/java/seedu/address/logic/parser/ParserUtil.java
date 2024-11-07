@@ -331,7 +331,7 @@ public class ParserUtil {
         EMERGENCYCONTACTNUMBER("emergency contact number"),
         NONE("none");
 
-        public static final String MESSAGE_CONSTRAINTS = "Sorting Attribute is invalid";
+        public static final String MESSAGE_CONSTRAINTS = "Sorting attribute is invalid";
 
         private final String attribute;
         SortAttribute(String attribute) {
