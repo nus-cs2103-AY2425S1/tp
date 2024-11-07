@@ -56,9 +56,6 @@ public class LogicManager implements Logic {
         } catch (DataLoadingException e) {
             tempVersionHistory = new VersionHistory();
         }
-        if (tempVersionHistory.getCurrentVersionIndex() == -1) {
-            tempVersionHistory.addVersion(model);
-        }
         this.versionHistory = tempVersionHistory;
         try {
             if (storage.readAddressBook().isEmpty()) {
@@ -75,10 +72,12 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        if (versionHistory.getCurrentVersionIndex() == -1) {
+            versionHistory.addVersion(model);
+        }
         this.versionHistory = command.updateVersionHistory(versionHistory, model);
         try {
             ReadOnlyAddressBook tempAddressBook =
@@ -183,5 +182,10 @@ public class LogicManager implements Logic {
     @Override
     public void setMostRecentTaskDisplay() {
         this.model.setMostRecentTaskDisplay();
+    }
+
+    @Override
+    public void setStatus() {
+        this.model.setStatus();
     }
 }

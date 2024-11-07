@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.cards.TaskCard;
@@ -19,16 +21,22 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
+    private ObservableList<Group> groupList;
+
     @FXML
     private ListView<Task> taskListView;
+
+    @FXML
+    private VBox taskHeader;
 
     /**
      *   Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public TaskListPanel(ObservableList<Task> taskList) {
+    public TaskListPanel(ObservableList<Task> taskList, ObservableList<Group> groupList) {
         super(FXML);
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
+        this.groupList = groupList;
     }
 
     /**
@@ -43,7 +51,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(groupList, task, getIndex() + 1).getRoot());
             }
         }
     }

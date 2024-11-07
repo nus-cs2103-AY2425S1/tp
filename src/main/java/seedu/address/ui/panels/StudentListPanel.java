@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
 import seedu.address.ui.UiPart;
@@ -21,6 +22,9 @@ public class StudentListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Student> personListView;
+
+    @FXML
+    private VBox studentHeader;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.

@@ -67,7 +67,7 @@ public class AddGroupCommandTest {
         AddGroupCommand addGroupCommand = new AddGroupCommand(testGroups);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
+        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_GROUPS_EXIST_IN_MODEL, () ->
             addGroupCommand.execute(modelStub));
     }
 
