@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.log.AppointmentDate;
+import seedu.address.model.person.IdentityNumber;
 
 /**
  * Represents the result of a command execution.
@@ -31,27 +33,38 @@ public class CommandResult {
     /** The previous command prompts the user for confirmation */
     private final boolean hasPrompt;
 
+    /** The application should show a popup */
+    private final boolean isPopup;
+
+    private final IdentityNumber identityNumber;
+    private final AppointmentDate appointmentDate;
+    private final String logEntry;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean isPrompt,
-                         boolean list, int personIndex) {
+                         boolean list, int personIndex, boolean isPopup, IdentityNumber identityNumber,
+                         AppointmentDate appointmentDate, String logEntry) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.list = list;
         this.personIndex = personIndex;
         this.hasPrompt = isPrompt;
+        // To encapsulate this as a class
+        this.isPopup = isPopup;
+        this.identityNumber = identityNumber;
+        this.appointmentDate = appointmentDate;
+        this.logEntry = logEntry;
     }
 
-
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
+     * Factory method that constructs a {@code CommandResult} with feedback to user.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, -1);
+        this(feedbackToUser, false, false, false,
+                false, -1, false, null, null, null);
     }
 
     public String getFeedbackToUser() {
@@ -79,6 +92,22 @@ public class CommandResult {
 
     public boolean hasPrompt() {
         return hasPrompt;
+    }
+
+    public boolean isPopup() {
+        return isPopup;
+    }
+
+    public IdentityNumber getIdentityNumber() {
+        return identityNumber;
+    }
+
+    public AppointmentDate getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public String getLogEntry() {
+        return logEntry;
     }
 
     @Override
