@@ -4,9 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tuteez.logic.commands.CommandTestUtil.VALID_LESSON_MONDAY;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK;
 import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK_INDEX;
 import static tuteez.testutil.Assert.assertThrows;
+import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static tuteez.testutil.TypicalIndexes.INDEX_FIRST_REMARK;
 
@@ -16,18 +20,22 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import tuteez.logic.commands.AddCommand;
+import tuteez.logic.commands.AddLessonCommand;
 import tuteez.logic.commands.AddRemarkCommand;
 import tuteez.logic.commands.ClearCommand;
 import tuteez.logic.commands.DeleteCommand;
+import tuteez.logic.commands.DeleteLessonCommand;
 import tuteez.logic.commands.DeleteRemarkCommand;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
 import tuteez.logic.commands.ExitCommand;
 import tuteez.logic.commands.FindCommand;
 import tuteez.logic.commands.HelpCommand;
+import tuteez.logic.commands.LessonCommand;
 import tuteez.logic.commands.ListCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.Person;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.person.predicates.CombinedPredicate;
 import tuteez.model.person.predicates.NameContainsKeywordsPredicate;
 import tuteez.model.remark.Remark;
@@ -150,5 +158,39 @@ public class AddressBookParserTest {
             assertTrue(parser.parseCommand(variation + " 3") instanceof ClearCommand);
 
         }
+    }
+
+    @Test
+    public void parseCommand_addLesson() throws Exception {
+        AddLessonCommand command = (AddLessonCommand) parser.parseCommand(
+                LessonCommand.COMMAND_WORD_ADD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_LESSON + VALID_LESSON_MONDAY);
+        assertEquals(new AddLessonCommand(INDEX_FIRST_PERSON,
+                Arrays.asList(new Lesson(VALID_LESSON_MONDAY))), command);
+    }
+
+    @Test
+    public void parseCommand_addLessonAltCommand() throws Exception {
+        AddLessonCommand command = (AddLessonCommand) parser.parseCommand(
+                LessonCommand.COMMAND_WORD_ADD_ALT + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_LESSON + VALID_LESSON_MONDAY);
+        assertEquals(new AddLessonCommand(INDEX_FIRST_PERSON,
+                Arrays.asList(new Lesson(VALID_LESSON_MONDAY))), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLesson() throws Exception {
+        DeleteLessonCommand command = (DeleteLessonCommand) parser.parseCommand(
+                LessonCommand.COMMAND_WORD_DELETE + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_LESSON_INDEX + " 1");
+        assertEquals(new DeleteLessonCommand(INDEX_FIRST_PERSON, Arrays.asList(INDEX_FIRST_LESSON)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLessonAltCommand() throws Exception {
+        DeleteLessonCommand command = (DeleteLessonCommand) parser.parseCommand(
+                LessonCommand.COMMAND_WORD_DELETE_ALT + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_LESSON_INDEX + " 1");
+        assertEquals(new DeleteLessonCommand(INDEX_FIRST_PERSON, Arrays.asList(INDEX_FIRST_LESSON)), command);
     }
 }
