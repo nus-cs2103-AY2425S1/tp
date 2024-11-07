@@ -63,7 +63,6 @@ public class AddGradeCommand extends Command {
         try {
             Person updatedPerson = personToEdit.addGrade(this.toAdd);
             model.setPerson(personToEdit, updatedPerson);
-            model.updateFilteredPersonList(model.getCurrentPersonFilter());
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(updatedPerson)));
         } catch (IllegalStateException e) {
             throw new CommandException("The total weightage of grades cannot exceed 100%");

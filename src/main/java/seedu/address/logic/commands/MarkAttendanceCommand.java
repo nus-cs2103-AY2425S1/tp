@@ -66,7 +66,6 @@ public class MarkAttendanceCommand extends Command {
         Person studentMarked = studentToMark.setAttendance(classDate, attendance);
 
         model.setPerson(studentToMark, studentMarked);
-        model.updateFilteredPersonList(model.getCurrentPersonFilter());
         String dateString = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate);
         return new CommandResult(
                 String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, studentMarked.getName(), attendance, dateString));
