@@ -157,7 +157,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateSortedPersonList(Comparator<Client> comparator) {
-        //Setting the comparator to null will revert the list back to an unordered state
+        requireNonNull(comparator);
         clients.setComparator(comparator);
     }
 

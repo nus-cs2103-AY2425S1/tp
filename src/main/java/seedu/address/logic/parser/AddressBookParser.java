@@ -126,7 +126,7 @@ public class AddressBookParser {
             return new NextCommandHistoryCommand();
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
+            return new SortCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
