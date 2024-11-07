@@ -83,7 +83,7 @@ public class BookApptCommand extends Command {
         }
 
         // Check for past date and time
-        if (!this.appt.isAfterOrOn(LocalDateTime.now())) {
+        if (!this.appt.isAfterOrOn(LocalDateTime.now().withSecond(0).withNano(0))) {
             logger.warning("Past date and time found");
             throw new CommandException(MESSAGE_PAST_DATETIME);
         }
