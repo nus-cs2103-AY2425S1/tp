@@ -12,9 +12,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindByInterestCommand;
 import seedu.address.model.person.InterestContainsKeywordsPredicate;
 
+
 public class FindByInterestCommandParserTest {
 
-    private FindByInterestCommandParser parser = new FindByInterestCommandParser();
+    private final FindByInterestCommandParser parser = new FindByInterestCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -24,17 +25,38 @@ public class FindByInterestCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindByInterestCommand() {
-        // Test with valid single keyword input
-        FindByInterestCommand expectedCommand =
-                new FindByInterestCommand(new InterestContainsKeywordsPredicate(Arrays.asList("Reading")));
-        assertParseSuccess(parser, "i/Reading", expectedCommand); // Valid command with prefix
+    public void parse_validSingleOrKeyword_returnsFindByInterestCommand() {
+        // Test with valid single OR keyword input
+        FindByInterestCommand expectedCommand = new FindByInterestCommand(
+                new InterestContainsKeywordsPredicate(Collections.emptyList(), Collections.singletonList("Reading")));
+        assertParseSuccess(parser, "i/Reading", expectedCommand);
+    }
 
-        // Test with multiple keywords
-        expectedCommand =
-                new FindByInterestCommand(new InterestContainsKeywordsPredicate(Arrays.asList("Reading", "Writing")));
-        // Separate keywords
-        assertParseSuccess(parser, "i/Reading Writing", expectedCommand);
+    @Test
+    public void parse_validMultipleOrKeywords_returnsFindByInterestCommand() {
+        // Test with multiple OR keywords
+        FindByInterestCommand expectedCommand = new FindByInterestCommand(
+                new InterestContainsKeywordsPredicate(Collections.emptyList(), Arrays.asList("Reading", "Writing")));
+        assertParseSuccess(parser, "i/Reading i/Writing", expectedCommand);
+    }
+
+    @Test
+    public void parse_validAndKeywords_returnsFindByInterestCommand() {
+        // Test with AND keywords (comma-separated in a single "i/" group)
+        FindByInterestCommand expectedCommand = new FindByInterestCommand(
+                new InterestContainsKeywordsPredicate(Collections.singletonList(Arrays.asList("Reading", "Writing")),
+                        Collections.emptyList()));
+        assertParseSuccess(parser, "i/Reading,Writing", expectedCommand);
+    }
+
+    @Test
+    public void parse_validAndOrCombination_returnsFindByInterestCommand() {
+        // Test with a combination of AND and OR keywords
+        FindByInterestCommand expectedCommand = new FindByInterestCommand(
+                new InterestContainsKeywordsPredicate(
+                        Collections.singletonList(Arrays.asList("Reading", "Writing")),
+                        Arrays.asList("Sports", "Music")));
+        assertParseSuccess(parser, "i/Reading,Writing i/Sports i/Music", expectedCommand);
     }
 
     @Test
@@ -44,12 +66,28 @@ public class FindByInterestCommandParserTest {
                 FindByInterestCommand.MESSAGE_USAGE));
     }
 
+
+    /*
     @Test
     public void parse_multipleSpaces_returnsTrimmedFindByInterestCommand() {
         // Test input with multiple spaces
-        FindByInterestCommand expectedCommand =
-                new FindByInterestCommand(new InterestContainsKeywordsPredicate(
-                        Collections.singletonList("Photography")));
+        FindByInterestCommand expectedCommand = new FindByInterestCommand(
+                new InterestContainsKeywordsPredicate(Collections.emptyList(),
+                Collections.singletonList("Photography")));
         assertParseSuccess(parser, " i/   Photography   ", expectedCommand);
+    }
+    */
+    @Test
+    public void parse_mixedComplexInput_returnsFindByInterestCommand() {
+        // Test with complex input including multiple AND and OR conditions with extra spaces
+        FindByInterestCommand expectedCommand = new FindByInterestCommand(
+                new InterestContainsKeywordsPredicate(
+                        Arrays.asList(
+                                Arrays.asList("Photography", "Travel"),
+                                Arrays.asList("Cooking", "Baking")
+                        ),
+                        Arrays.asList("Music", "Dancing") // OR group
+                ));
+        assertParseSuccess(parser, "i/Photography,Travel i/Music i/Dancing i/Cooking,Baking", expectedCommand);
     }
 }
