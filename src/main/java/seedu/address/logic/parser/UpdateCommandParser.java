@@ -23,7 +23,7 @@ import seedu.address.model.person.Address;
 /**
  * Parses input arguments and creates a new UpdateCommand object
  */
-public class EditEventCommandParser implements Parser<UpdateCommand> {
+public class UpdateCommandParser implements Parser<UpdateCommand> {
 
     /**
      * List of valid arguments for the {@code update} command.

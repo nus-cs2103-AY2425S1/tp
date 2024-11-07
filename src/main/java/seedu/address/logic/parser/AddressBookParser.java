@@ -93,7 +93,7 @@ public class AddressBookParser {
             return new EventCommandParser().parse(arguments);
 
         case UpdateCommand.COMMAND_WORD:
-            return new EditEventCommandParser().parse(arguments);
+            return new UpdateCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
