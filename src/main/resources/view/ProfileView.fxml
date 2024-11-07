@@ -18,7 +18,7 @@
     </HBox>
 
     <HBox alignment="CENTER" spacing="5">
-        <Label fx:id="nric" text="\$nric" styleClass="profile-small-label" >
+        <Label fx:id="nric" text="\$nric" styleClass="profile-small-label-content" >
             <minWidth>
                 <!-- Ensures that the label text is never truncated -->
                 <Region fx:constant="USE_PREF_SIZE" />
@@ -35,7 +35,7 @@
                 <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
         </Label>
-        <Label fx:id="phone" text="\$phone" styleClass="profile-small-label" />
+        <Label fx:id="phone" text="\$phone" styleClass="profile-small-label-content" />
     </HBox>
 
     <HBox alignment="TOP_LEFT">
@@ -45,7 +45,7 @@
                 <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
         </Label>
-        <Label fx:id="address" text="\$address" wrapText="true" styleClass="profile-small-label" />
+        <Label fx:id="address" text="\$address" wrapText="true" styleClass="profile-small-label-content" />
     </HBox>
 
     <HBox alignment="CENTER_LEFT">
@@ -55,7 +55,7 @@
                 <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
         </Label>
-        <Label fx:id="email" text="\$email" styleClass="profile-small-label" />
+        <Label fx:id="email" text="\$email" styleClass="profile-small-label-content" />
     </HBox>
 
     <HBox alignment="CENTER_LEFT">
@@ -65,7 +65,7 @@
                 <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
         </Label>
-        <Label fx:id="callFrequency" text="\$callFrequency" styleClass="profile-small-label"/>
+        <Label fx:id="callFrequency" text="\$callFrequency" styleClass="profile-small-label-content"/>
     </HBox>
 
     <HBox alignment="CENTER_LEFT">
@@ -75,6 +75,6 @@
                 <Region fx:constant="USE_PREF_SIZE" />
             </minWidth>
         </Label>
-        <Label fx:id="nextContactDate" text="\$nextContactDate" styleClass="profile-small-label" />
+        <Label fx:id="nextContactDate" text="\$nextContactDate" styleClass="profile-small-label-content" />
     </HBox>
 </VBox>

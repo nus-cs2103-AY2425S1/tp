@@ -326,9 +326,14 @@
     -fx-alignment: center-left;
 }
 
+.profile-small-label-content {
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+    -fx-alignment: center-left;
+}
+
 .profile-flow-pane {
     -fx-font-size: 15px;
-    -fx-font-weight: bold;
     -fx-text-fill: black;
     -fx-alignment: center;
 }
