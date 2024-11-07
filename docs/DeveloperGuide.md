@@ -519,18 +519,17 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the .jar file and store it in an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the .jar file  
+      - Expected: Shows the GUI with a set of sample contacts, projects, and assignments. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+   1. Re-launch the app by double-clicking the .jar file.<br>
+      - Expected: The most recent window size and location is retained.
 
 ### Deleting an employee
 
@@ -539,20 +538,36 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all employees using the `listemployees` command. Multiple employees in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      - Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
+      - Expected: No employee is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      - Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Other commands
+
+1. Using / Testing other commands in HRConnect
+
+   1. Refer to the [User Guide "Features" section](https://ay2425s1-cs2103t-t15-4.github.io/tp/UserGuide.html#features) for formats, examples, and expected outputs for each command.
+   2. Enter the commands with the provided format and parameter limitations.
+      - Expected: The output performs the same as the listed expected output.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. With the app open or closed, find the data file in the folder you placed the .jar file, as `data/hrconnect.json`.
+   2. Delete the file.
+   3. If the app is not open, launch the app by double-clicking the jar file.
+   4. Create or delete any Employee, Project, or Assignment. 
+      - Expected: A new data file is created at `data/hrconnect.json` containing the information in the app at the time.
 
-1. _{ more test cases …​ }_
+2. Transferring data
+
+   1. Prerequisites: Make some changes to the sample data (so it is different from the default entries, e.g. `addproject`).
+   3. Copy the data folder at `data` (including `hrconnect.json` inside) into an empty folder.
+   3. Copy the .jar file into this same folder (not into `data`!).
+   4. Run the .jar file.
+      - Expected: The changes you made are still displayed in the app.
