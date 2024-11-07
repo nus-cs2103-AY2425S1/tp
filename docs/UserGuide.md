@@ -78,24 +78,25 @@ If you can type fast and you need to manage celebrities and their schedules, **T
 
 ### Adding a person: `add person`
 
-Adds a person to the address book.
+Adds a person to TalentHub.
 
-Format: `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags or none at all!
+The address and email address fields are also optional!
 </div>
 
 Examples:
 
-- `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add person n/Betsy Crowe e/betsycrowe@example.com a/Crowe Apartment p/1234567 t/Celebrity`
+- `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity`
+- `add person n/Betsy Crowe e/betsycrowe@example.com a/Crowe Apartment p/1234567 t/CameraMan`
 
 ![result for 'add person'](images/add_person.png)
 
 ### Listing all persons : `list person`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in TalentHub.
 
 Format: `list person`
 
@@ -105,7 +106,7 @@ Example: Calling `list person` would yield the following output
 
 ### Editing a person : `edit person`
 
-Edits an existing person in the address book.
+Edits an existing person in TalentHub.
 
 Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -113,13 +114,15 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-- You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can delete a person's tags, email or address by leaving their fields empty, like t/, e/ or a/ respectively!
+</div>
 
 Examples:
 
 - `edit person 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit person 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit person 2 n/Betsy Crower a/ t/` Edits the name of the 2nd person to be `Betsy Crower` and clears the address and all existing tags.
 
 ![result for 'edit person'](images/edit_person.png)
 
@@ -131,7 +134,6 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
 - Only full words will be matched. e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -189,6 +191,10 @@ Format: `delete person INDEX`
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+When you delete a person, TalentHub will ask for your confirmation because you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists.
+</div>
 
 Examples:
 
