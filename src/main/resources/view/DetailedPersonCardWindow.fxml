@@ -4,9 +4,13 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
     <scene>
-        <Scene stylesheets="@DetailedPersonCard.css">
+        <Scene stylesheets="@DetailedPersonCardWindow.css">
             <VBox spacing = "10" VBox.vgrow = "ALWAYS" styleClass="vbox" prefHeight="600" prefWidth="600">
                 <children>
                     <TextArea fx:id="detailedPerson" editable="false" styleClass="text-area" prefWidth="500" prefHeight="500" wrapText="true"/>

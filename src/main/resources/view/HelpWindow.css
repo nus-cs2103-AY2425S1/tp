@@ -23,7 +23,7 @@
 }
 
 #copyButton {
-    -fx-background-color: -ab3-background;
+    -fx-background-color: derive(-ab3-background, 30%);
 }
 
 #copyButton:hover {
@@ -31,7 +31,7 @@
 }
 
 #copyButton:armed {
-    -fx-background-color: -ab3-button;
+    -fx-background-color: -ab-3-background-2;
 }
 
 #helpMessageContainer {
