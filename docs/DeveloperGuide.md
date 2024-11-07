@@ -102,9 +102,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `EventToryParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteEventCommand`) which is executed by the `LogicManager`. 
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteEventCommand`) which is executed by the `LogicManager`.
 3. The command can communicate with the `Model` when it is executed (e.g. to delete an event).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve. 
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -357,9 +357,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: UC02 - Assign a vendor to an event** 
+**Use case: UC02 - Assign a vendor to an event**
 
-**MSS** 
+**MSS**
 
 1. User enters command to assign a vendor to an event.
 2. System assigns the vendor to the event.
@@ -393,13 +393,70 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+---
+
+**Use case: UC03 - View an item**
+
+**MSS**
+1. User enters command to view an item.
+2. System displays success message and switches page to the details of the item.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+* 2a. The item does not exist.
+
+  * 2a1. System shows an error message.
+
+      Use case ends.
+
+---
+
+** Use case: UC04 - Delete an item**
+
+**MSS**
+1. User enters command to delete an item.
+2. System deletes the item.
+3. System displays a success message.
+
+    Use case ends.
+
+**Extensions**
+* 1a. The command format entered by the user is invalid.
+
+  * 1a1. System shows an error message and displays the correct command format.
+
+      Use case ends.
+* 2a. The item does not exist.
+
+  * 2a1. System shows an error message.
+
+    Use case ends.
+* 2b. The event has associated entities assigned to it.
+
+  * 2b1. System shows an error message.
+
+    Use case ends.
+* 3a. The item is currently being viewed.
+
+  * 3a1. Return to the main page with both list of events and vendors.
+
+     Use case ends.
+
+---
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 100 events and 1000 vendors without a noticeable sluggishness in performance for typical usage.
-3.  Should be able to assign up to 100 vendors to an event without any issue.  
+3.  Should be able to assign up to 100 vendors to an event without any issue.
 4.  A user with an above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Persistent data stored by the system should be in a human-readable format.
 
@@ -426,6 +483,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. **Vendor:** A service provider, such as a caterer, photographer, decorator, who is employed for events.
 
 11. **Vendor Rating:** A qualitative score assigned to a vendor to track their past performance in events.
+
+12. **Item**: Refers to any entity or object that can be viewed or deleted within the system, such as an event, vendor.
+
+13. **Associated Entities**: Refers to any related items or dependencies connected to the main item. For example, for an event, associated entities include assigned vendors; for a vendor, associated entities include assigned events.
 
 --------------------------------------------------------------------------------------------------------------------
 
