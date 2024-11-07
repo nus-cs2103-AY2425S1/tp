@@ -224,7 +224,7 @@ public class ParserUtilTest {
     @Test
     public void parseSubjects_duplicateSubjects_returnsSubjects() throws Exception {
         Collection<Subject> expectedSet = Set.of(new Subject("Math"));
-        Collection<String> subjectsWithWhitespace = Set.of("Math", "Math");
+        Collection<String> subjectsWithWhitespace = Set.of("Math", "Math ");
         assertEquals(expectedSet, ParserUtil.parseSubjects(subjectsWithWhitespace));
     }
 
