@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -144,13 +145,18 @@ public class Person {
 
     @Override
     public String toString() {
+        String allergiesString = allergies.stream()
+                .map(Allergy::toString)
+                .collect(Collectors.joining(", "));
+        allergiesString = "[" + allergiesString + "]";
+
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
                 .add("tag", tag)
-                .add("allergies", allergies)
+                .add("allergies", allergiesString)
                 .add("date", date)
                 .toString();
     }
