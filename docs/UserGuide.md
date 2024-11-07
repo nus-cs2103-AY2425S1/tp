@@ -37,7 +37,7 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 * `list` : Lists all contacts.
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male` : Adds a contact named `John Doe` to the Address Book.
 
 * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -101,6 +101,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT
 - Duplicate names are not permitted. Addressbook cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
 
 - A person can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
+
+- A person can have any number of appointments (including 0).
 
   </box>
 
