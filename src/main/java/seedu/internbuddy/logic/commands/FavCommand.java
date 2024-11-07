@@ -48,7 +48,7 @@ public class FavCommand extends Command {
         Company companyToFav = lastShownList.get(index.getZeroBased());
 
         if (companyToFav.getIsFavourite()) {
-            throw new CommandException(MESSAGE_COMPANY_ALREADY_FAV);
+            throw new CommandException(String.format(MESSAGE_COMPANY_ALREADY_FAV, companyToFav.getName()));
         }
 
         Company editedCompany = new Company(companyToFav.getName(), companyToFav.getPhone(), companyToFav.getEmail(),

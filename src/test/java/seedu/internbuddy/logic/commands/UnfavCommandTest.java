@@ -4,7 +4,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFail
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
-import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SIXTH_COMPANY;
+import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +21,8 @@ public class UnfavCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Company companyToUnfav = model.getFilteredCompanyList().get(INDEX_SIXTH_COMPANY.getZeroBased());
-        UnfavCommand unfavCommand = new UnfavCommand(INDEX_SIXTH_COMPANY);
+        Company companyToUnfav = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        UnfavCommand unfavCommand = new UnfavCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(UnfavCommand.MESSAGE_UNFAV_COMPANY_SUCCESS,
                 companyToUnfav.getName());
@@ -39,9 +39,12 @@ public class UnfavCommandTest {
 
     @Test
     public void execute_validIndexAlreadyUnfavourited_throwsCommandException() {
-        UnfavCommand unfavCommand = new UnfavCommand(INDEX_FIRST_COMPANY);
+        Company companyToUnfav = model.getFilteredCompanyList().get(INDEX_SECOND_COMPANY.getZeroBased());
+        UnfavCommand unfavCommand = new UnfavCommand(INDEX_SECOND_COMPANY);
+        String expectedMessage = String.format(UnfavCommand.MESSAGE_COMPANY_ALREADY_UNFAV,
+                companyToUnfav.getName());
 
-        assertCommandFailure(unfavCommand, model, UnfavCommand.MESSAGE_COMPANY_ALREADY_UNFAV);
+        assertCommandFailure(unfavCommand, model, expectedMessage);
     }
 
     @Test

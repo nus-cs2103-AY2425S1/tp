@@ -3,7 +3,7 @@ package seedu.internbuddy.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.internbuddy.testutil.Assert.assertThrows;
-import static seedu.internbuddy.testutil.TypicalCompanies.APPLE;
+import static seedu.internbuddy.testutil.TypicalCompanies.APPLE_FAVOURITED;
 import static seedu.internbuddy.testutil.TypicalCompanies.SPOTIFY;
 import static seedu.internbuddy.testutil.TypicalCompanies.TWITTER;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
@@ -73,7 +73,7 @@ public class JsonAddressBookStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addCompany(SPOTIFY);
-        original.removeCompany(APPLE);
+        original.removeCompany(APPLE_FAVOURITED);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));

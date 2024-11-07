@@ -13,14 +13,14 @@ public class CompanyToViewPredicateTest {
     @Test
     public void equals() {
 
-        CompanyToViewPredicate firstPredicate = new CompanyToViewPredicate(TypicalCompanies.APPLE);
+        CompanyToViewPredicate firstPredicate = new CompanyToViewPredicate(TypicalCompanies.APPLE_FAVOURITED);
         CompanyToViewPredicate secondPredicate = new CompanyToViewPredicate(TypicalCompanies.GOOGLE);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        CompanyToViewPredicate firstPredicateCopy = new CompanyToViewPredicate(TypicalCompanies.APPLE);
+        CompanyToViewPredicate firstPredicateCopy = new CompanyToViewPredicate(TypicalCompanies.APPLE_FAVOURITED);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -35,23 +35,23 @@ public class CompanyToViewPredicateTest {
 
     @Test
     public void test_matchesCompanyToView_returnsTrue() {
-        CompanyToViewPredicate predicate = new CompanyToViewPredicate(TypicalCompanies.APPLE);
-        assertTrue(predicate.test(TypicalCompanies.APPLE));
+        CompanyToViewPredicate predicate = new CompanyToViewPredicate(TypicalCompanies.APPLE_FAVOURITED);
+        assertTrue(predicate.test(TypicalCompanies.APPLE_FAVOURITED));
     }
 
 
     @Test
     public void test_doesNotMatchCompanyToView_returnsFalse() {
-        CompanyToViewPredicate predicate = new CompanyToViewPredicate(TypicalCompanies.APPLE);
+        CompanyToViewPredicate predicate = new CompanyToViewPredicate(TypicalCompanies.APPLE_FAVOURITED);
         assertFalse(predicate.test(TypicalCompanies.GOOGLE));
     }
 
     @Test
     public void toStringMethod() {
-        CompanyToViewPredicate predicate = new CompanyToViewPredicate(TypicalCompanies.APPLE);
+        CompanyToViewPredicate predicate = new CompanyToViewPredicate(TypicalCompanies.APPLE_FAVOURITED);
 
         String expected = CompanyToViewPredicate.class.getCanonicalName()
-                + "{companyToView=" + TypicalCompanies.APPLE + "}";
+                + "{companyToView=" + TypicalCompanies.APPLE_FAVOURITED + "}";
         assertEquals(expected, predicate.toString());
     }
 }

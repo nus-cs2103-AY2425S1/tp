@@ -48,7 +48,7 @@ public class UnfavCommand extends Command {
         Company companyToUnfav = lastShownList.get(index.getZeroBased());
 
         if (!companyToUnfav.getIsFavourite()) {
-            throw new CommandException(MESSAGE_COMPANY_ALREADY_UNFAV);
+            throw new CommandException(String.format(MESSAGE_COMPANY_ALREADY_UNFAV, companyToUnfav.getName()));
         }
 
         Company editedCompany = new Company(companyToUnfav.getName(),

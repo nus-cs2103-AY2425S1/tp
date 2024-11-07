@@ -159,6 +159,6 @@ public class CompanyBuilder {
     }
 
     public Company build() {
-        return new Company(name, phone, email, address, tags, status, applications);
+        return new Company(name, phone, email, address, tags, status, applications, isFavourite, isShowingDetails);
     }
 }

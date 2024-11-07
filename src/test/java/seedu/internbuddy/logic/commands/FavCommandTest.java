@@ -4,7 +4,7 @@ import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandFail
 import static seedu.internbuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
-import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SIXTH_COMPANY;
+import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +21,8 @@ public class FavCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Company companyToFav = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-        FavCommand favCommand = new FavCommand(INDEX_FIRST_COMPANY);
+        Company companyToFav = model.getFilteredCompanyList().get(INDEX_SECOND_COMPANY.getZeroBased());
+        FavCommand favCommand = new FavCommand(INDEX_SECOND_COMPANY);
 
         String expectedMessage = String.format(FavCommand.MESSAGE_FAV_COMPANY_SUCCESS,
                 companyToFav.getName());
@@ -39,9 +39,12 @@ public class FavCommandTest {
 
     @Test
     public void execute_validIndexAlreadyFavourited_throwsCommandException() {
-        FavCommand favCommand = new FavCommand(INDEX_SIXTH_COMPANY);
+        Company companyToFav = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        FavCommand favCommand = new FavCommand(INDEX_FIRST_COMPANY);
+        String expectedMessage = String.format(FavCommand.MESSAGE_COMPANY_ALREADY_FAV,
+                companyToFav.getName());
 
-        assertCommandFailure(favCommand, model, FavCommand.MESSAGE_COMPANY_ALREADY_FAV);
+        assertCommandFailure(favCommand, model, expectedMessage);
     }
 
     @Test

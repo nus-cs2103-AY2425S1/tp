@@ -8,7 +8,8 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": false
+    "isFavourite": true,
+    "isShowingDetails": false
   }, {
     "name": "Amazon",
     "phone": "2062661000",
@@ -25,7 +26,9 @@
       "description": "Requires: Python",
       "status": "REJECTED"
     } ],
-    "isFavourite": false
+    "isFavourite": false,
+    "isShowingDetails": false
+
   }, {
     "name": "Facebook",
     "phone": "6505434800",
@@ -34,7 +37,8 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": false
+    "isFavourite": false,
+    "isShowingDetails": false
   }, {
     "name": "Tesla",
     "phone": "6506815000",
@@ -43,7 +47,8 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": false
+    "isFavourite": false,
+    "isShowingDetails": false
   }, {
     "name": "Netflix",
     "phone": "4085403700",
@@ -52,15 +57,7 @@
     "status": "INTERESTED",
     "tags": [],
     "applications": [],
-    "isFavourite": false
-  }, {
-    "name": "Nvidia",
-    "phone": "4084862000",
-    "email": "info@nvidia.com",
-    "address": "2788 San Tomas Express Way, Santa Clara, CA",
-    "status": "INTERESTED",
-    "tags": [],
-    "applications": [],
-    "isFavourite": true
+    "isFavourite": false,
+    "isShowingDetails": false
   } ]
 }
