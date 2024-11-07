@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_RANGE;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
@@ -7,8 +9,6 @@ import seedu.address.logic.commands.DeleteCompanyCommand;
 import seedu.address.logic.commands.DeleteContactCommand;
 import seedu.address.logic.commands.DeleteJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_RANGE;
 
 /**
  * Parses input arguments and creates a new subclass of DeleteCommand object
