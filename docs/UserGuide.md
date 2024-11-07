@@ -240,7 +240,7 @@ Examples:
 ### Adding a lesson: `addc`
 
 Adds a lesson to the edulog.
- 
+
 Format: addc `d/DESCRIPTION day/DAY OF THE WEEK from/START TIME (24H FORMAT) to/END TIME (24H FORMAT)​`
 
 Example:
