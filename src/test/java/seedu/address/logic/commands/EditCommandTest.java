@@ -55,7 +55,7 @@
 //        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
 //
 //        String expectedMessage = String.format(
-//          EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
+//            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
 //        );
 //
 //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -73,7 +73,7 @@
 //                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 //
 //        String expectedMessage = String.format(
-//          EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
+//            EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
 //        );
 //
 //        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
