@@ -50,7 +50,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_CONTACT = "%1$s already " + "exists in the address book. "
             + "Check if there are any errors in %2$s or in the " + "details of the existing contacts";
     public static final String MESSAGE_DUPLICATE_FIELDS_CONTACT = "This will result in more than 1 contact "
-            + "having same President roles," + " or having same Telegram handles/mobile number/nicknames, or "
+            + "having same President roles," + " or having same Telegram handles / Email / nicknames, or "
             + "having the same full names" + " without distinct nicknames, which are not allowed." + LINE_BREAK
             + "%1$s";
 
