@@ -73,8 +73,6 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
-        FilterCommand command = new FilterCommand(dateFilter);
-
         appointments.add(new FilteredAppointment(ALICE.getImmutableApptList().get(0), ALICE));
         appointments.add(new FilteredAppointment(CARL.getImmutableApptList().get(0), CARL));
 

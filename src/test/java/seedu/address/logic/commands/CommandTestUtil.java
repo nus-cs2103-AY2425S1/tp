@@ -104,71 +104,50 @@ public class CommandTestUtil {
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_JAKE = " " + PREFIX_NAME + VALID_NAME_JAKE;
-    public static final String NAME_DESC_KEANU = " " + PREFIX_NAME + VALID_NAME_KEANU;
     public static final String NRIC_DESC_AMY = " " + PREFIX_NRIC + VALID_NRIC_AMY;
     public static final String NRIC_DESC_BOB = " " + PREFIX_NRIC + VALID_NRIC_BOB;
     public static final String NRIC_DESC_JAKE = " " + PREFIX_NRIC + VALID_NRIC_JAKE;
-    public static final String NRIC_DESC_KEANU = " " + PREFIX_NRIC + VALID_NRIC_KEANU;
     public static final String SEX_DESC_AMY = " " + PREFIX_SEX + VALID_SEX_AMY;
     public static final String SEX_DESC_BOB = " " + PREFIX_SEX + VALID_SEX_BOB;
     public static final String SEX_DESC_JAKE = " " + PREFIX_SEX + VALID_SEX_JAKE;
-    public static final String SEX_DESC_KEANU = " " + PREFIX_SEX + VALID_SEX_KEANU;
     public static final String BIRTHDATE_DESC_AMY = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_AMY;
     public static final String BIRTHDATE_DESC_BOB = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_BOB;
     public static final String BIRTHDATE_DESC_JAKE = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_JAKE;
-    public static final String BIRTHDATE_DESC_KEANU = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_KEANU;
-    public static final String HEALTHSERVICE_DESC_VACCINATION = " " + PREFIX_HEALTHSERVICE
-            + VALID_HEALTHSERVICE_VACCINATION;
-    public static final String HEALTHSERVICE_DESC_BLOOD_TEST = " " + PREFIX_HEALTHSERVICE
-            + VALID_HEALTHSERVICE_BLOOD_TEST;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String PHONE_DESC_JAKE = " " + PREFIX_PHONE + VALID_PHONE_JAKE;
-    public static final String PHONE_DESC_KEANU = " " + PREFIX_PHONE + VALID_PHONE_KEANU;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String EMAIL_DESC_JAKE = " " + PREFIX_EMAIL + VALID_EMAIL_JAKE;
-    public static final String EMAIL_DESC_KEANU = " " + PREFIX_EMAIL + VALID_EMAIL_KEANU;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String ADDRESS_DESC_JAKE = " " + PREFIX_ADDRESS + VALID_ADDRESS_JAKE;
-    public static final String ADDRESS_DESC_KEANU = " " + PREFIX_ADDRESS + VALID_ADDRESS_KEANU;
     public static final String BLOODTYPE_DESC_AMY = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_AMY;
     public static final String BLOODTYPE_DESC_BOB = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_BOB;
     public static final String BLOODTYPE_DESC_JAKE = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_JAKE;
-    public static final String BLOODTYPE_DESC_KEANU = " " + PREFIX_BLOODTYPE + VALID_BLOODTYPE_KEANU;
     public static final String NOKNAME_DESC_AMY = " " + PREFIX_NOKNAME + VALID_NOKNAME_AMY;
     public static final String NOKNAME_DESC_BOB = " " + PREFIX_NOKNAME + VALID_NOKNAME_BOB;
     public static final String NOKNAME_DESC_JAKE = " " + PREFIX_NOKNAME + VALID_NOKNAME_JAKE;
-    public static final String NOKNAME_DESC_KEANU = " " + PREFIX_NOKNAME + VALID_NOKNAME_KEANU;
     public static final String NOKPHONE_DESC_AMY = " " + PREFIX_NOKPHONE + VALID_NOKPHONE_AMY;
     public static final String NOKPHONE_DESC_BOB = " " + PREFIX_NOKPHONE + VALID_NOKPHONE_BOB;
     public static final String NOKPHONE_DESC_JAKE = " " + PREFIX_NOKPHONE + VALID_NOKPHONE_JAKE;
-    public static final String NOKPHONE_DESC_KEANU = " " + PREFIX_NOKPHONE + VALID_NOKPHONE_KEANU;
     public static final String ALLERGIES_DESC_AMY = " " + PREFIX_ALLERGY + "peanuts " + PREFIX_ALLERGY + "cakes";
     public static final String ALLERGIES_DESC_BOB = " " + PREFIX_ALLERGY + VALID_ALLERGIES_BOB;
     public static final String ALLERGIES_DESC_JAKE = " " + PREFIX_ALLERGY + "eggs " + PREFIX_ALLERGY + "fish";
-    public static final String ALLERGIES_DESC_KEANU = " " + PREFIX_ALLERGY + "wheat " + PREFIX_ALLERGY + "seafood";
     public static final String ALLERGIES_TO_REMOVE_DESC_AMY = " " + PREFIX_REMOVEALLERGY
             + VALID_ALLERGIES_TO_REMOVE_AMY;
     public static final String HEALTHRISK_DESC_AMY = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_AMY;
     public static final String HEALTHRISK_DESC_BOB = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_BOB;
     public static final String HEALTHRISK_DESC_JAKE = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_JAKE;
-    public static final String HEALTHRISK_DESC_KEANU = " " + PREFIX_HEALTHRISK + VALID_HEALTHRISK_KEANU;
     public static final String EXISTINGCONDITION_DESC_AMY = " " + PREFIX_EXISTINGCONDITION
             + VALID_EXISTINGCONDITION_AMY;
     public static final String EXISTINGCONDITION_DESC_BOB = " " + PREFIX_EXISTINGCONDITION
             + VALID_EXISTINGCONDITION_BOB;
     public static final String EXISTINGCONDITION_DESC_JAKE = " " + PREFIX_EXISTINGCONDITION
             + VALID_EXISTINGCONDITION_JAKE;
-    public static final String EXISTINGCONDITION_DESC_KEANU = " " + PREFIX_EXISTINGCONDITION
-            + VALID_EXISTINGCONDITION_KEANU;
-    public static final String APPOINTMENT_DESC_AMY = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_AMY;
-    public static final String APPOINTMENT_DESC_BOB = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_BOB;
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
     public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + VALID_NOTE_BOB;
     public static final String NOTE_DESC_JAKE = " " + PREFIX_NOTE + VALID_NOTE_JAKE;
-    public static final String NOTE_DESC_KEANU = " " + PREFIX_NOTE + VALID_NOTE_KEANU;
 
     // Invalid fields
     public static final String INVALID_NRIC = "T0123456z";
@@ -179,8 +158,6 @@ public class CommandTestUtil {
     public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "male"; // only 'M' or 'F' allowed
     public static final String INVALID_BIRTHDATE_DESC = " " + PREFIX_BIRTHDATE
             + "2001/12/02"; // slashes not allowed for birthdates
-    public static final String INVALID_HEALTHSERVICE_DESC = " "
-            + PREFIX_HEALTHSERVICE + "*"; // * not allowed for Health Services
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "22";
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "jaker@@gmail.com";
     public static final String INVALID_BLOODTYPE_DESC = " " + PREFIX_BLOODTYPE + "a-";

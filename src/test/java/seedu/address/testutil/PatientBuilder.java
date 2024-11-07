@@ -55,8 +55,6 @@ public class PatientBuilder {
     private Phone nokPhone;
     private ApptList appts;
 
-    //TODO to add default values for the rest of the fields, and add with___ methods for all fields
-
     /**
      * Creates a {@code PatientBuilder} with the default details.
      */
@@ -69,6 +67,7 @@ public class PatientBuilder {
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         sex = new Sex(DEFAULT_SEX);
         allergies = new AllergyList();
+        allergies.addAllergy(new Allergy(DEFAULT_ALLERGY));
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);
         existingCondition = new ExistingCondition(DEFAULT_EXISTINGCONDITION);
