@@ -77,7 +77,7 @@ HireMe is a **free desktop application that helps you manage your extensive list
 * Extraneous parameters for commands that do not take in parameters (such as `/help`, `/list`, `/exit`, `/clear` and `/chart`) are not permitted.<br>
   e.g. if the command specifies `/help 123` instead of `/help`, an "Invalid command format!" error message will be shown.
 
-* Command names must be in lower case only.<br>
+* Command names must be in **lower case only**.<br>
   e.g. `/list` is acceptable but `/List` and `/LIST` are not.
 
 </box>
@@ -98,8 +98,8 @@ Adds your internship application to HireMe with required details such as company
 
 Format: `/add n/COMPANY_NAME r/ROLE e/EMAIL d/DATE`
 
-* `NAME` must be alphanumeric with the exceptions of `_`,`&`,`/`,`.`,`:`,`(`, and `)`.
-* `ROLE` must be alphanumeric except `/`.
+* `NAME` must be alphanumeric but these special characters `_`,`&`,`/`,`.`,`:`,`(`, and `)` can also be used.
+* `ROLE` must be alphanumeric but these special characters `/` can also be used.
 * `EMAIL` must be a valid email address.
 * The `DATE` must be within the year 2000 and 2099. It also cannot be a future date which means that the date used must be before today or today's date.
 * It must be in the format `dd/mm/yy`, and each field must be double digits (e.g. 01 is valid while 1 is not)
@@ -244,6 +244,8 @@ Format: `/exit`
 ### Saving the data
 
 HireMe data are saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 

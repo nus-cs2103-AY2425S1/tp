@@ -382,10 +382,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 **System**: HireMe application
+
 **Use Case: UC01 - Add a new internship entry**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user requests to add a new internship entry.
 2. HireMe creates a new entry.
@@ -399,47 +401,56 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+
 * 1b. The user does not include the internship role.
     * 1b1. HireMe shows an error message.
 
       Use case ends.
+
 
 * 1c. The user does not include the company email.
     * 1c1. HireMe shows an error message.
 
       Use case ends.
 
+
 * 1d. The user does not include the date of application.
     * 1d1. HireMe shows an error message.
 
       Use case ends.
+
 
 * 1e. The user provided an invalid company name.
     * 1e1. HireMe shows an error message.
 
       Use case ends.
 
+
 * 1f. The user provided an invalid internship role.
     * 1f1. HireMe shows an error message.
 
       Use case ends.
+
 
 * 1g. The user provided an invalid company email.
     * 1g1. HireMe shows an error message.
 
       Use case ends.
 
+
 * 1h. The user provided an invalid date of application.
     * 1h1. HireMe shows an error message.
 
       Use case ends.
 
-
+<br></br>
 **System**: HireMe application
+
 **Use Case: UC02 - List all internship entries**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user requests to list all internship entries.
 2. HireMe shows all internship entries.
@@ -453,11 +464,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<br></br>
 **System**: HireMe application
+
 **Use Case: UC03 - Delete an internship entry**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user requests to delete a particular internship entry.
 2. HireMe deletes the entry.
@@ -471,11 +485,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
+<br></br>
 **System**: HireMe application
+
 **Use Case: UC04 - Sort all internship applications list**
+
 **Actor**: User
-**MSS**
+
+**MSS (Main Success Scenario)**
 
 1. The user requests to sort the internship applications list.
 2. HireMe shows all the sorted list of internship applications.
@@ -490,19 +507,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Steps 1a1-1a2 are repeated until the command entered is valid.
     Use case resumes from step 2.
 
+
 * 1b. User enters an invalid order.
     * 1b1. HireMe shows an error message that explains how to use the sort command and what parameters are valid.
     * 1b2. User enters new command.
       Steps 1b1-1b2 are repeated until the command entered is valid.
       Use case resumes from step 2.
 
+
 * 1c. User sorts an empty list.
     * 1c1. HireMe shows an empty list.
 
-    Use case ends.
-
+      Use case ends.
+  
+<br></br>
 **System**: HireMe application
+
 **Use Case: UC05 - Find internship applications by company name**
+
+**Actor**: User
 
 **MSS (Main Success Scenario)**
 
@@ -519,13 +542,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+
 * 1b. The provided search pattern matches no company names.
     * 1b1. HireMe shows a message indicating that no matching internship applications were found.
 
       Use case ends.
 
+<br></br>
 **System**: HireMe application
+
 **Use Case: UC06 - Update the status of an internship application**
+
+**Actor**: User
 
 **MSS (Main Success Scenario)**
 
@@ -543,13 +571,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
----
-
+<br></br>
 **System**: HireMe application
-**Use Case: UC05 - Load saved internship applications**
+
+**Use Case: UC07 - Load saved internship applications**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user starts the application.
 2. HireMe loads the previously saved internship applications.
@@ -563,17 +592,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+
 * 1b. A file with an invalid format is found.
     * 1b1. HireMe shows an error message.
 
       Use case ends.
 
-
+<br></br>
 **System**: HireMe application
-**Use Case: UC06 - Auto-save the current state of the internship list**
+
+**Use Case: UC08 - Auto-save the current state of the internship list**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user performs an action that changes the internship list (e.g., adding, editing, or deleting an entry).
 2. The system automatically saves the updated internship list to `hireme.json`.
@@ -590,12 +622,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-
+<br></br>
 **System**: HireMe application
-**Use Case: UC07 - List all internship entries**
+
+**Use Case: UC09 - List all internship entries**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user requests to list all internship entries.
 2. HireMe shows all internship entries.
@@ -610,11 +644,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
+<br></br>
 **System**: HireMe application
-**Use Case: UC08 - Summarise all internship entries**
+
+**Use Case: UC10 - Summarise all internship entries**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user requests to view a summary of all internship entries.
 2. HireMe shows a summary chart of all internship entries.
@@ -622,11 +659,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 
+<br></br>
 **System**: HireMe application
-**Use Case: UC09 - Filter internship entries by status**
+
+**Use Case: UC11 - Filter internship entries by status**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user provides a status to filter internship entries.
 2. HireMe shows all internship entries with the given status.
@@ -640,11 +680,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
+<br></br>
 **System**: HireMe application
-**Use Case: UC010 - Clear all internship entries**
+
+**Use Case: UC12 - Clear all internship entries**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user requests to clear all internship entries.
 2. HireMe clears all internship entries.
@@ -652,17 +695,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    Use case ends.
 
 
+<br></br>
 **System**: HireMe application
-**Use Case: UC011 - Exit HireMe application**
+
+**Use Case: UC13 - Exit HireMe application**
+
 **Actor**: User
 
-**MSS**
+**MSS (Main Success Scenario)**
 
 1. The user requests to exit the application.
 2. HireMe application closes and auto-saves the file.
 
    Use case ends.
-
+<br></br>
 
 ### Non-Functional Requirements
 
