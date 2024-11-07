@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_TASK_INDEX;
 import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -84,6 +85,26 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseTaskIndex_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskIndex("10 a"));
+    }
+
+    @Test
+    public void parseTaskIndex_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_TASK_INDEX, ()
+                -> ParserUtil.parseTaskIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseTaskIndex_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseTaskIndex("1"));
+
+        // Leading and trailing whitespaces
+        assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseTaskIndex("  1  "));
     }
 
     @Test
