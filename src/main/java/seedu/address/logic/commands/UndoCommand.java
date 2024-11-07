@@ -30,6 +30,10 @@ public class UndoCommand extends Command {
             "%s and their appointments have been added back to SocialBook";
     public static final String MESSAGE_UNDO_CLEAR = "Here is the list before clearing";
 
+    public static final String MESSAGE_UNDO_ADD_SCHEME = "The following scheme for %s has been removed\n";
+
+    public static final String MESSAGE_UNDO_DELETE_SCHEME = "The following schemes for %s has been added back\n";
+
     public static final String MESSAGE_UNDO_ADD_APPOINTMENT = "Appointment with %s removed:\n%s";
     public static final String MESSAGE_UNDO_EDIT_APPOINTMENT = "Restored previous appointment with %s:\n%s";
     public static final String MESSAGE_UNDO_DELETE_APPOINTMENT = "Restored appointment with %s:\n%s";

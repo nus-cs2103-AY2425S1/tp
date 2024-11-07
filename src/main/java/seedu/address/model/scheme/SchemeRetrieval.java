@@ -51,4 +51,8 @@ public class SchemeRetrieval {
         }
         return schemes;
     }
+
+    public ArrayList<Scheme> getSubscribedSchemes() {
+        return targetFamily.getSchemes();
+    }
 }

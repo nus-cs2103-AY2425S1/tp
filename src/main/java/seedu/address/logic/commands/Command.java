@@ -22,7 +22,9 @@ public abstract class Command {
                 DeleteCommand.COMMAND_WORD,
                 ClearCommand.COMMAND_WORD,
                 ArchiveCommand.COMMAND_WORD_ARCHIVE,
-                ArchiveCommand.COMMAND_WORD_UNARCHIVE);
+                ArchiveCommand.COMMAND_WORD_UNARCHIVE,
+                AddSchemeCommand.COMMAND_WORD,
+                DeleteSchemeCommand.COMMAND_WORD);
         }
         return personActionCommands;
     }
