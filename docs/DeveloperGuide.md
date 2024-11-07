@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# BA€ Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -605,9 +605,9 @@ testers are expected to do more *exploratory* testing.
 ### Clearing all entries
 
 1. **Clear all contacts**
-   1. Prerequisites: Add at least one person to the address book. 
+   1. Prerequisites: Add at least one person to the address book.
    2. Test case: `clear`
-   3. Expeccted: All contacts are removed from the list
+   3. Expected: All contacts are removed from the list
 
 ### Adding a person (including a duplicate phone case)
 
@@ -638,13 +638,13 @@ testers are expected to do more *exploratory* testing.
 ### Advanced Filtering of contacts (advfilter)
 
 1. **Filter with a comparison operator on tags with values**
-    - **Prerequisites:** At least one contact with a tag that has a numeric value (e.g., `t\friends:4`).
-    - **Test case:** `advfilter t\friends > 4`
-    - **Expected:** The list displays only contacts with a `friends` tag greater than 4.
+   1. **Prerequisites:** At least one contact with a tag that has a numeric value (e.g., `t\friends:4`).
+   2. **Test case:** `advfilter t\friends > 4`
+   3. **Expected:** The list displays only contacts with a `friends` tag greater than 4.
 
 2. **Filter with equality on tags with specific values**
-    - **Test case:** `advfilter t\priority = 3`
-    - **Expected:** Only contacts with a `priority` tag set to `3` are displayed.
+   1. **Test case:** `advfilter t\priority = 3`
+   2. **Expected:** Only contacts with a `priority` tag set to `3` are displayed.
 
 ### Sorting contacts
 
@@ -657,7 +657,6 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `sort t\priority desc`
    2. **Expected:** Contacts are sorted in descending order by the value of the `priority` tag.
 
-
 ### Exporting contacts
 
 1. **Export contact list to a file**
@@ -667,11 +666,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
-
-   2. **Prerequisites:** BA€ is not running
-   3. **Test case:**
-       4. To simulate a corrupted file, navigate to the data folder, and find addressbook.json
-       3. Delete addressbook.json
-       4. Launch BA€.
-   4. **Expected:** A new addressbook.json file will be created and it will be empty.
+1. **Dealing with missing/corrupted data files**
+   1. **Prerequisites:** BA€ is not running
+   2. **Test case:**
+      1. To simulate a corrupted file, navigate to the data folder, and find addressbook.json
+      2. Delete addressbook.json
+      3. Launch BA€.
+   3. **Expected:** A new addressbook.json file will be created and it will be empty.
