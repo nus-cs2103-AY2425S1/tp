@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -29,7 +31,7 @@ public class CategorizeTagCommand extends Command {
     public static final String MESSAGE_TAG_NOT_EXIST = "Tag not found: %1$s";
     public static final String MESSAGE_INVALID_CATEGORY = "Invalid category: %1$s";
     public static final String MESSAGE_DUPLICATE_CATEGORY = "Current category of %s is already %s";
-    private final List<Tag> targetTags;
+    private final Set<Tag> targetTags;
     private final TagCategory updatedCategory;
 
     /**
@@ -38,7 +40,7 @@ public class CategorizeTagCommand extends Command {
     public CategorizeTagCommand(List<Tag> targetTags, TagCategory updatedCategory) {
         requireNonNull(targetTags);
         requireNonNull(updatedCategory);
-        this.targetTags = targetTags;
+        this.targetTags = new HashSet<>(targetTags);
         this.updatedCategory = updatedCategory;
     }
 
@@ -66,7 +68,7 @@ public class CategorizeTagCommand extends Command {
         return updatedCategory.equals(cat);
     }
 
-    private String formatTags(List<Tag> tags) {
+    private String formatTags(Set<Tag> tags) {
         String result = tags.toString();
         return result.substring(1, result.length() - 1);
     }
