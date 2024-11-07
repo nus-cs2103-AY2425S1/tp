@@ -26,16 +26,16 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F12-2/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F12-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your T_Assistant.
+3. Copy the file to the folder you want to use as the _home folder_ for your T_Assistant.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar t_assistant.jar`
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar t_assistant.jar`
    command to run the application.<br>
    *A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.*<br>
    <img src="images/Ui.png" width="600">
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -50,7 +50,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
