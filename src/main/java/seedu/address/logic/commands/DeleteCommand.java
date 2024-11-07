@@ -105,7 +105,7 @@ public class DeleteCommand extends Command {
                     }
                 }
                 model.setPersonToDisplay(toDelete);
-                return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, Messages.format(toDelete)), true);
+                return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete), true);
             }
             return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
         }
