@@ -241,8 +241,9 @@ pre {
  * Tables
  */
 table {
+  margin-left: -9vw;
   margin-bottom: $spacing-unit;
-  width: 100%;
+  min-width: 750px;
   text-align: $table-text-align;
   color: $table-text-color;
   border-collapse: collapse;
@@ -254,7 +255,6 @@ table {
   }
   th, td {
     padding: ($spacing-unit / 3) ($spacing-unit / 2);
-    width: 25%
   }
   th {
     background-color: $table-header-bg-color;
