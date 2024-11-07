@@ -1,5 +1,14 @@
 package tahub.contacts.logic.commands.enrollment;
 
+import static java.util.Objects.requireNonNull;
+import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL_ID;
+
+import java.util.HashSet;
+import java.util.Objects;
+
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.Command;
@@ -9,16 +18,14 @@ import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.course.CourseName;
-import tahub.contacts.model.person.*;
+import tahub.contacts.model.person.Address;
+import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
+import tahub.contacts.model.person.Name;
+import tahub.contacts.model.person.Person;
+import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
-
-import java.util.HashSet;
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
-import static tahub.contacts.logic.parser.CliSyntax.*;
 
 /**
  * Enrolls a person into TAHub Contacts.
