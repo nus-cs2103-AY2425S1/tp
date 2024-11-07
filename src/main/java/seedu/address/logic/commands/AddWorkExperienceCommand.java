@@ -85,8 +85,7 @@ public class AddWorkExperienceCommand extends Command {
 
         if (personToEdit.getWorkExp() != null) {
             return new CommandResult(String.format(MESSAGE_REPLACED, personToEdit.getName(), workExp));
-        }
-        else {
+        } else {
             return new CommandResult(String.format(MESSAGE_ADDED, personToEdit.getName(), workExp));
         }
     }
