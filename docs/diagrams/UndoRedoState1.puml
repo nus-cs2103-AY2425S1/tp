@@ -15,7 +15,7 @@ package UndoStateList <<rectangle>> {
 State1 -[hidden]right-> State2
 State2 -[hidden]right-> State3
 
-hide State3
+hide UndoStateList.State3
 
 class Pointer as "Current State" #FFFFFF
 
