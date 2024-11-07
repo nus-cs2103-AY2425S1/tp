@@ -56,8 +56,7 @@ public class EducationPolicyTest {
         assertTrue(education.equals(policyWithSameValues));
 
         // different type -> returns false
-        ClaimList sameClaimList = new ClaimList();
-        sameClaimList.addAll(education.getClaimList());
+        ClaimList sameClaimList = new ClaimList(education.getClaimList());
         Policy life = new LifePolicy(education.getPremiumAmount(), education.getCoverageAmount(),
                 education.getExpiryDate(), sameClaimList);
         assertFalse(education.equals(life));
