@@ -17,7 +17,7 @@ import tahub.contacts.model.course.CourseName;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.testutil.EditCourseDescriptorBuilder;
 
-public class CourseEditCommandTest {
+public class CoursePersonEditCommandTest {
 
     private Model model = new ModelManager(new AddressBook(), new UserPrefs(), new UniqueCourseList(), null);
 

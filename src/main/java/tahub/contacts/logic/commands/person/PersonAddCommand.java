@@ -1,4 +1,4 @@
-package tahub.contacts.logic.commands;
+package tahub.contacts.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -10,6 +10,8 @@ import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
 
 import tahub.contacts.commons.util.ToStringBuilder;
 import tahub.contacts.logic.Messages;
+import tahub.contacts.logic.commands.Command;
+import tahub.contacts.logic.commands.CommandResult;
 import tahub.contacts.logic.commands.exceptions.CommandException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.person.Person;
@@ -17,19 +19,20 @@ import tahub.contacts.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class PersonAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "person-add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + PREFIX_MATRICULATION_NUMBER + "MATRICULATION NUMBER"
+            + PREFIX_MATRICULATION_NUMBER + "MATRICULATION_NUMBER "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_MATRICULATION_NUMBER + "A1234567M "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -45,7 +48,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public PersonAddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -69,12 +72,12 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof PersonAddCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        PersonAddCommand otherPersonAddCommand = (PersonAddCommand) other;
+        return toAdd.equals(otherPersonAddCommand.toAdd);
     }
 
     @Override

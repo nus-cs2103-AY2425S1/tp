@@ -13,10 +13,10 @@ participant ":Model" as Model MODEL_COLOR
 participant "UniqueCourseList" as CourseList MODEL_COLOR
 end box
 
-[-> LogicManager : execute(edit-course)
+[-> LogicManager : execute(course-edit)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(edit-course)
+LogicManager -> AddressBookParser : parseCommand(course-edit)
 activate AddressBookParser
 
 create EditCourseCommand

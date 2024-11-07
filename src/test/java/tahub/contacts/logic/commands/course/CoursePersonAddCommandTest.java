@@ -32,7 +32,7 @@ import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociationList;
 import tahub.contacts.model.tutorial.Tutorial;
 
-public class CourseAddCommandTest {
+public class CoursePersonAddCommandTest {
 
     @Test
     public void constructor_nullCourse_throwsNullPointerException() {
