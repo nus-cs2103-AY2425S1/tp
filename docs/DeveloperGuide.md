@@ -423,25 +423,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a new event.
-2. System creates the event.
-3. System displays a success message.
+1. User requests to create a new event, specifying the event name, date, and optionally tags.
+2. System verifies the input format.
+3. System creates the event.
+4. System displays a success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The event name is invalid.
+* 1a. The command format entered by the user is invalid.
+    * 1a1. System shows an error message and displays the correct command format.
+    * Use case ends.
 
-    * 1a1. System shows an error message.
+* 2a. The event name is invalid.
+    * 2a1. System shows an error message indicating the name format is incorrect.
+    * Use case ends.
 
-      Use case ends.
+* 2b. The date format is invalid.
+    * 2b1. System shows an error message indicating the date format is incorrect.
+    * Use case ends.
 
-* 1b. The date format is invalid.
-
-    * 1b1. System shows an error message.
-
-      Use case ends.
+* 2c. The event already exists in the system.
+    * 2c1. System shows an error message indicating a duplicate event.
+    * Use case ends.
 
 ---
 
