@@ -290,6 +290,21 @@ Format: `redo`
 - The redo feature only tracks changed made by the undo command
 - The redo feature will clear the focus person panel upon execution.
 
+### Importing a contact list : `import`
+
+Imports a file containing contacts from a specified file type and overwrites all
+existing contacts with the imported data.
+
+Format: `import f/FILETYPE p/PATH`
+
+- Imports the contact list from the specified `FILETYPE`.
+- The only supported file type currently is **vcf**.
+
+Examples:
+
+- `import f/vcf p/bizbook.vcf` imports the contacts from the file `bizbook.vcf` that is located in the same folder as this application.
+- `import f/vcf p//Users/Name/myAddress.bcf` imports the contacts from the file located at `/Users/Name/myAddress.bcf`
+
 ### Exporting the contact list : `export`
 
 Exports the contacts in the contact list into the specified file type. The file will be named bizbook.&lt;file extension&gt; and will be located in a folder named exports.
@@ -383,5 +398,6 @@ _Details coming soon ..._
 | **Redo**       | `redo`                                                                                                                                                                |
 | **Toggle**     | `toggle`                                                                                                                                                              |
 | **Export**     | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
+| **Import**     | `import f/FILETYPE p/PATH` <br> e.g. `import f/vcf p/myVcf.vcf`                                                                                                       |
 | **Clear**      | `clear`                                                                                                                                                               |
 | **Help**       | `help`                                                                                                                                                                |

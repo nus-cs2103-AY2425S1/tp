@@ -591,7 +591,30 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
-**Use case: UC15 - Toggle application's theme** 
+**Use case: UC15 - Import a contact list**
+
+**MSS**
+
+1.  Actor requests to import a contact list from a specific file.
+2.  System imports the contact information into the file.
+
+    Use case ends.
+
+**Extensions**
+
+- 1a. System detects that the file does not exist.
+
+    - 1a1. System shows an error message
+
+      Use case ends.
+
+- 1b. System detects that the file is not supported by the program
+
+    - 1b1. System shows an error message
+
+      Use case ends.
+
+**Use case: UC16 - Toggle application's theme** 
 
 **MSS**
 
@@ -600,7 +623,7 @@ _Similar to UC10 except without extension 2b._
 
     Use case ends.
 
-**Use case: UC16 - Command History**
+**Use case: UC17 - Command History**
 
 **MSS**
 
