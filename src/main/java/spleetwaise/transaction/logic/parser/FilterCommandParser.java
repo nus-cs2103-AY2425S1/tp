@@ -10,11 +10,9 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
-import spleetwaise.address.logic.parser.Prefix;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
@@ -37,12 +35,71 @@ import spleetwaise.transaction.model.transaction.Transaction;
  * Parses input arguments and creates a new transaction FilterCommand object.
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
+    private static void parsePersonFilter(
+            ArgumentMultimap argMultimap,
+            ArrayList<Predicate<Transaction>> filterSubPredicates
+    )
+            throws ParseException {
+        if (!argMultimap.getPreamble().isEmpty()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Person person = ParserUtil.getPersonByFilteredPersonListIndex(index);
+            filterSubPredicates.add(new PersonFilterPredicate(person));
+        }
+    }
 
-    /**
-     * Returns true if any of the prefixes are present in the given {@code ArgumentMultimap}.
-     */
-    private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static void parseAmountFilter(
+            ArgumentMultimap argMultimap,
+            ArrayList<Predicate<Transaction>> filterSubPredicates
+    )
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
+            Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
+            filterSubPredicates.add(new AmountFilterPredicate(amount));
+        }
+    }
+
+    private static void parseDescriptionFilter(
+            ArgumentMultimap argMultimap,
+            ArrayList<Predicate<Transaction>> filterSubPredicates
+    )
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            filterSubPredicates.add(new DescriptionFilterPredicate(description));
+        }
+    }
+
+    private static void parseDateFilter(
+            ArgumentMultimap argMultimap,
+            ArrayList<Predicate<Transaction>> filterSubPredicates
+    ) throws ParseException {
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            filterSubPredicates.add(new DateFilterPredicate(date));
+        }
+    }
+
+    private static void parseStatusFilter(
+            ArgumentMultimap argMultimap,
+            ArrayList<Predicate<Transaction>> filterSubPredicates
+    )
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            filterSubPredicates.add(new StatusFilterPredicate(status));
+        }
+    }
+
+    private static void parseAmountSignFilter(
+            ArgumentMultimap argMultimap,
+            ArrayList<Predicate<Transaction>> filterSubPredicates
+    )
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_AMOUNT_SIGN).isPresent()) {
+            AmountSignFilterPredicate amtSignPred = ParserUtil.parseAmountSign(
+                    argMultimap.getValue(PREFIX_AMOUNT_SIGN).get());
+            filterSubPredicates.add(amtSignPred);
+        }
     }
 
     /**
@@ -56,14 +113,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
-                        PREFIX_AMOUNT_SIGN);
-        if (!areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
-                PREFIX_AMOUNT_SIGN)
+                        PREFIX_AMOUNT_SIGN
+                );
+        if (!ParserUtil.areAnyPrefixesPresent(argMultimap, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE,
+                PREFIX_STATUS,
+                PREFIX_AMOUNT_SIGN
+        )
                 && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_STATUS,
-                PREFIX_AMOUNT_SIGN);
+                PREFIX_AMOUNT_SIGN
+        );
 
         ArrayList<Predicate<Transaction>> filterSubPredicates = new ArrayList<>();
 
@@ -84,60 +145,5 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         FilterCommandPredicate filterPredicate = new FilterCommandPredicate(filterSubPredicates);
 
         return new FilterCommand(filterPredicate);
-    }
-
-    private static void parsePersonFilter(ArgumentMultimap argMultimap,
-                                          ArrayList<Predicate<Transaction>> filterSubPredicates)
-            throws ParseException {
-        if (!argMultimap.getPreamble().isEmpty()) {
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            Person person = ParserUtil.getPersonByFilteredPersonListIndex(index);
-            filterSubPredicates.add(new PersonFilterPredicate(person));
-        }
-    }
-
-    private static void parseAmountFilter(ArgumentMultimap argMultimap,
-                                          ArrayList<Predicate<Transaction>> filterSubPredicates)
-            throws ParseException {
-        if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
-            Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-            filterSubPredicates.add(new AmountFilterPredicate(amount));
-        }
-    }
-
-    private static void parseDescriptionFilter(ArgumentMultimap argMultimap,
-                                               ArrayList<Predicate<Transaction>> filterSubPredicates)
-            throws ParseException {
-        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-            filterSubPredicates.add(new DescriptionFilterPredicate(description));
-        }
-    }
-
-    private static void parseDateFilter(ArgumentMultimap argMultimap,
-                                        ArrayList<Predicate<Transaction>> filterSubPredicates) throws ParseException {
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-            filterSubPredicates.add(new DateFilterPredicate(date));
-        }
-    }
-
-    private static void parseStatusFilter(ArgumentMultimap argMultimap,
-                                          ArrayList<Predicate<Transaction>> filterSubPredicates)
-            throws ParseException {
-        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
-            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
-            filterSubPredicates.add(new StatusFilterPredicate(status));
-        }
-    }
-
-    private static void parseAmountSignFilter(ArgumentMultimap argMultimap,
-                                              ArrayList<Predicate<Transaction>> filterSubPredicates)
-            throws ParseException {
-        if (argMultimap.getValue(PREFIX_AMOUNT_SIGN).isPresent()) {
-            AmountSignFilterPredicate amtSignPred = ParserUtil.parseAmountSign(
-                    argMultimap.getValue(PREFIX_AMOUNT_SIGN).get());
-            filterSubPredicates.add(amtSignPred);
-        }
     }
 }
