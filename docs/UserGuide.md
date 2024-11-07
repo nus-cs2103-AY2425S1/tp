@@ -151,6 +151,22 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Delete a Tag of an existing contact: `deletetag`
+
+Deletes a tag from a person in the address book.
+
+Format: `deletetag INDEX t/[TAG]`
+
+- Deletes the `TAG` for the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
+- The tag **must be a existing tag** on the person.
+
+Examples:
+
+- `deletetag 1 t/friends`
+- `deletetag 2 t/Client`
+
 ### Adding Notes to an existing contact: `addnote`
 
 Adds a note to a person in the address book.
@@ -342,6 +358,7 @@ _Details coming soon ..._
 | **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
 | **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Deletetag**  | `deletetag INDEX t/[TAG]` <br> e.g. `deletetag 1 t/Client`                                                                                                            |
 | **Addnote**    | `addnote INDEX n/[NOTE]` <br> e.g. `addnote 1 n/Customer 1`                                                                                                           |
 | **Editnote**   | `editnote INDEX i/NOTE_INDEX n/[NOTE]` <br> e.g. `editnote 1 i/1 n/Customer 1`                                                                                        |
 | **Deletenote** | `deletenote INDEX i/[NOTE_INDEX]` <br> e.g. `deletenote 1 i/1`                                                                                                        |

@@ -300,6 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user             | search through my contacts                                                  | find a specific person                                                 |
 | `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
 | `* *`    | user             | edit contact                                                                | update contact with new information                                    |
+| `* *`    | user             | delete a tag from a person                                                  | remove tags that are invalid or are not applicable to the person       |
 | `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
 | `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                           |
 | `* *`    | user             | unpin a specific contact                                                    | clear the pin that is no longer needed                                 |
@@ -385,7 +386,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC4 - View person contact**
+**Use case: UC4 - Delete a person**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to delete a specific tag from a person.
+3.  System remove the tag from the person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+  - 2a1. System shows an error message.
+
+    Use case ends.
+
+- 2b. The specified tag does not exist.
+
+  - 2b1. System shows an error message.
+
+    Use case ends.  
+
+**Use case: UC5 - View person contact**
 
 **MSS**
 
@@ -402,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC5 - Find people**
+**Use case: UC6 - Find people**
 
 **MSS**
 
@@ -417,7 +442,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC6 - Add note to a person contact**
+**Use case: UC7 - Add note to a person contact**
 
 **MSS**
 
