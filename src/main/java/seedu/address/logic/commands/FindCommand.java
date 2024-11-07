@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,19 +31,22 @@ public class FindCommand extends Command {
 
     public static final String CHAINED = "chained";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons by their names, module-role pairs"
-            + "(or both), matching any (combination) of the specified keywords (case-insensitive) "
-            + "and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds persons by their names, module-role pairs or tags"
+            + "matching any (combination) of the specified keywords (case-insensitive)"
+            + "and displays them as a numbered list.\n"
             + "To search from the previously displayed results, use 'find " + CHAINED + "'. \n"
             + "Parameters: "
             + "[" + CHAINED + "] "
-            + "(" + PREFIX_NAME + "KEYWORD | " + PREFIX_MODULE + "KEYWORD)+\n"
+            + "(" + PREFIX_NAME + "KEYWORD | " + PREFIX_MODULE + "KEYWORD | " + PREFIX_TAG + "KEYWORD | " + ")+\n"
             + "Example: " + COMMAND_WORD + " "
             + CHAINED + " "
             + PREFIX_NAME + "alice "
             + PREFIX_NAME + "bob "
             + PREFIX_MODULE + "CS1101S "
-            + PREFIX_MODULE + "CS2030S";
+            + PREFIX_MODULE + "CS2030S "
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "classmates";
 
     private final List<Predicate<Person>> predicates;
 
