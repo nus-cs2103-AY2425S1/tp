@@ -480,9 +480,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. EduConnect displays an error message.
 
     Use case ends.
-* 1b. Teacher specifies invalid criteria.
+* 1b. Teacher specifies invalid criteria
   * 1b1. EduConnect displays an error message.
   
+    Use case ends.
+
+**Use case: UC-09 Mark Attendance**
+
+**MSS**
+1. Teacher enters the mark command
+2. EdUConnect marks all the students attendance, incrementing it by 1
+
+    Use case ends.
+
+**Use case: UC-10 Unmark Attendance**
+
+**MSS**
+1. Teacher enters the unmark command with the index(es) of the student(s) to unmark
+2. EduConnect unmarks the specified student(s) attendance, decrementing it by 1
+    
+    Use case ends.
+
+**Extensions**
+* 1a. Teacher doesn't specify any indexes
+  * 1a1. EduConnect displays an error message.
+
+    Use case ends.
+* 1b. Teacher specifies an invalid index
+  * 1b1. EduConnect displays an error message.
+
+    Use case ends.
+* 1c. Teacher specifies an index of a Student with 0 days attendance
+  * 1c1. EduConnect displays an error message, e.g. "Only students who have attended at least one day can be unmarked".
+
+    Use case ends.
+
+**Use case: UC-11 Reset attendance**
+
+**MSS**
+1. Teacher enters the resetAttendance command
+2. EduConnect resets the attendance of all students in the address book
+
     Use case ends.
 
 ### Non-Functional Requirements
