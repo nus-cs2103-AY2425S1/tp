@@ -37,13 +37,13 @@ activate DeleteEventCommand
 DeleteEventCommand --> DeleteCommandParser :
 deactivate DeleteEventCommand
 
-DeleteCommandParser --> EventToryParser : c
+DeleteCommandParser --> EventToryParser : d
 deactivate DeleteCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteCommandParser -[hidden]-> EventToryParser
 destroy DeleteCommandParser
 
-EventToryParser --> LogicManager : c
+EventToryParser --> LogicManager : d
 deactivate EventToryParser
 
 LogicManager -> DeleteEventCommand : execute(m)
