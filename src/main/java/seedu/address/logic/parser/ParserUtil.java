@@ -143,7 +143,7 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
+        String trimmedTag = tag.trim().replaceAll(" +", " ");
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
@@ -159,6 +159,9 @@ public class ParserUtil {
         for (String tagName : tags) {
             tagSet.add(parseTag(tagName));
         }
+        if (tagSet.size() > 10) {
+            throw new ParseException(Tag.MAX_TAGS_CONSTRAINTS);
+        }
         return tagSet;
     }
 
@@ -172,6 +175,10 @@ public class ParserUtil {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
         Path filePathObject;
+
+        if (filePath.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_FILE_PATH);
+        }
 
         // Get the Path object, if the input is invalid throw an exception
         try {

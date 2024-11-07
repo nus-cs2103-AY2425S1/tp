@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# DorManagerPro Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -102,10 +102,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person). Certain types of commands (FileAccessCommand) can also communicate with the `Storage` when it is executed.<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object `Model` and `Storage`) to achieve.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -232,9 +232,53 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Clean feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
+
+The `clean` command extends `ConcreteCommand`. The `clean` command deletes the contacts whose `GradYear` field is earlier
+than the current year, deleting contacts who have graduated from the address book.
+The `clean` command is undoable.
+
+Given below is an example usage scenario and how the `clean` command behaves at each step.
+
+Step 1. The user executes `clean` in 2024.
+
+<box type="info" seamless>
+
+**Note:** The `clean` command checks if there are contacts with `GradYear` 2023 or earlier. If there are none, it will return an error message to the user.
+
+</box>
+
+
+Step 2. The `clean` command deletes all contacts with `GradYear` 2023 or earlier.
+
+
+The following sequence diagram shows how a `clean` command goes through the `Logic` component:
+
+<puml src="diagrams/CleanSequenceDiagram.puml" alt="CleanSequenceDiagram-Logic" />
+
+<box type="info" seamless>
+
+**Note:** There are no destroy markers (X) for `CleanCommand` and `GradYearPredicate` as they are preserved in the `undo` command stack.
+
+</box>
+
+The following activity diagram summarizes what happens when a user executes a `clean` command:
+
+<puml src="diagrams/CleanActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: UI display when `clean` executes after a `find` command:**
+
+* **Alternative 1:** Display all contacts.
+    * Pros: Shows users the full result of `clean`.
+    * Cons: Forgets the results of the `find` command.
+
+* **Alternative 2 (current implementation):** Retain the search results of `find` and only display those contacts. 
+    * Pros: Allow users to retain their serach results from `find`.
+    * Cons: Users cannot see the full extent of `clean` until they return to the default view with `list`.
 
 ### Update Find Command
 

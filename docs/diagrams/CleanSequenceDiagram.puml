@@ -1,0 +1,53 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "c:CleanCommand" as CleanCommand LOGIC_COLOR
+participant "p:GradYearPredicate" as GradYearPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("clean")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("clean")
+activate AddressBookParser
+
+create CleanCommand
+AddressBookParser -> CleanCommand
+activate CleanCommand
+
+CleanCommand --> AddressBookParser
+deactivate CleanCommand
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> CleanCommand : execute(m)
+activate CleanCommand
+
+create GradYearPredicate
+CleanCommand -> GradYearPredicate
+activate GradYearPredicate
+
+GradYearPredicate --> CleanCommand : p
+deactivate GradYearPredicate
+
+CleanCommand -> Model : deletePersonByPredicate(p)
+activate Model
+Model --> CleanCommand
+deactivate Model
+
+CleanCommand --> LogicManager : result
+deactivate CleanCommand
+CleanCommand -[hidden]-> LogicManager : result
+
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

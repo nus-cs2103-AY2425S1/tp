@@ -66,6 +66,11 @@ public interface Model {
     boolean hasPhone(Person person);
 
     /**
+     * Returns true if a person with the same email as {@code person} exists in the address book.
+     */
+    boolean hasEmail(Person person);
+
+    /**
      * Returns true if a person with GradYear earlier than {@code year} exists in the address book.
      */
     boolean hasGraduatedBefore(String year);
