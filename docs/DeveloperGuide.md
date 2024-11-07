@@ -665,6 +665,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. PhysioPal detects an empty input for name.
+
     * 1a1. PhysioPal displays an error message.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until a valid name is input by the Physiotherapist.
@@ -672,6 +673,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 * 1b. PhysioPal detects that the name does not match any recorded clients.
+
     * 1b1. PhysioPal displays an error message indicating no matches found.
     * 1b2. Physiotherapist enters new data.
     * Steps 1b1-1b2 are repeated until a valid name is input by the Physiotherapist.
@@ -691,6 +693,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. PhysioPal detects an empty input for keywords.
+
     * 1a1. PhysioPal displays an error message indicating that keywords are required.
     * 1a2. Physiotherapist enters new data.
     * Steps 1a1-1a2 are repeated until valid keywords are input by the Physiotherapist.
