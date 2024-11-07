@@ -28,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all current (i.e. not archived) contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -66,7 +66,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page or display how to use a specified command.
 
@@ -94,17 +94,28 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
-Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
+Shows a list of persons in the address book, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
 
-Format: `list`
+Format: `list [archive/] [all/]`
 
-### Editing a person : `edit`
+- `list`: Shows a list of people who are current contacts (i.e. not archived)
+- `list archive/`: Shows a list of people who are archived
+- `list all/`: Shows a list of all people
+
+<box type="warning" seamless>
+
+**Caution:**
+- Should not be used with both `archive/` and `all/` concurrently, e.g. `list archive/ all/` ❌, `list archive/` ✅
+- `archive/` and `all/` should not have parameter values, e.g. `list archive/bob` ❌, `list archive/` ✅
+</box>
+
+### Editing a person: `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -136,7 +147,7 @@ Examples:
 * `find n/alex n/david pri/high` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/newFindAlexDavidResult.png)
 
-### Deleting people : `delete`
+### Deleting people: `delete`
 
 Deletes the specified people from the address book.
 
@@ -154,6 +165,7 @@ Examples:
 * list followed by delete 1,1,2 deletes the 1st and 2nd person from current SocialBook.
 
 ### Getting the parameters of these people: `get` 
+
 Gets the specified parameters of each individual person in current person list.
 
 Format: `get PARAMETERS`
@@ -169,13 +181,95 @@ Examples:
 * `list` followed by `get pHone phone` gets only one set of the phone numbers of the people in SocialBook.
 * `find pri/HIGH` followed by `get nAmE ADDress` gets the names followed by the addresses of the high priority people.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
+### Adding an appointment: `addappt`
+
+Adds an appointment with a person to the address book.
+
+Format: `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`
+
+* Adds an appointment with a person at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed person list.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
+* `date` specifies the date of the appointment in the `yyyy-MM-dd` format, where:
+  * `yyyy` is the four-digit year (e.g., `2024`)
+  * `MM` is the two-digit month (e.g., `01`)
+  * `dd` is the two-digit day of the month (e.g., `08`)
+* `from` and `to` specify the start and end times of the appointment in the `HH:mm` format (24-hour clock).
+* The start time should be before the end time, and the appointment should not conflict with any existing appointments.
+
+For more details on the command format, refer to the [notes about the command format](#features).
+
+<box type="info" seamless>
+Adding appointments in the past is allowed for record-keeping purposes and to store historical data,
+as future appointments will eventually become past appointments.
+</box>
+
+<box type="tip" seamless>
+To add an appointment that spans multiple days, add separate consecutive appointments for each day
+to cover the entire period.
+</box>
+
+Examples:
+
+* `addappt 1 date/2024-11-08 from/16:00 to/17:00`
+* `addappt 2 date/2024-11-26 from/17:00 to/18:30`
+
+### Listing all appointments: `listappt`
+
+Displays a list of all appointments in the address book.
+
+Format: `listappt`
+
+<box type="info">
+Appointments are displayed in order of date and time, with the earliest shown first.
+</box>
+
+### Editing an appointment: `editappt`
+
+Edits an existing appointment in the address book.
+
+Format: `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`
+
+* Edits the appointment at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed appointment list.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
+* `date` specifies the new date of the appointment in the `yyyy-MM-dd` format, where:
+    * `yyyy` is the four-digit year (e.g., `2024`)
+    * `MM` is the two-digit month (e.g., `01`)
+    * `dd` is the two-digit day of the month (e.g., `08`)
+* `from` and `to` specify the new start and end times of the appointment in the `HH:mm` format (24-hour clock).
+* The start time should be before the end time, and the updated appointment should not conflict with any existing appointments.
+* At least one of the optional fields must be provided.
+
+For more details on the command format, refer to the [notes about the command format](#features).
+
+Examples:
+
+* `editappt 1 date/2024-11-15 from/16:00 to/18:00`: Updates the first appointment to November 15, 2024, from 4:00 to 6:00 PM.
+* `editappt 2 from/10:00 to/11:30`: Updates the start and end times of the second appointment to 10:00 AM and 11:30 AM, respectively, on the same date.
+
+### Deleting an appointment: `deleteappt`
+
+Deletes the specified appointment from the address book.
+
+Format: `deleteappt INDEX`
+
+* Deletes the appointment at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed appointment list.
+  * The index should be a **positive integer** not exceeding the last index number in the list.
+
+Examples:
+
+* `listappt` followed by `deleteappt 2` deletes the second appointment from the address book.
+
 ### Undo the previous command: `undo`
+
 Undoes the previous command from SocialBook.
 
 Format: `undo`
@@ -188,7 +282,7 @@ Examples:
 * `clear` followed by `undo` will retrieve back the uncleared SocialBook.
 * `edit 1 n/John` followed by `undo` will change name back to what it was before.
 
-### Displaying overall statistics : `statistics`
+### Displaying overall statistics: `statistics`
 
 Displays the statistics of current person list.
 
@@ -197,12 +291,13 @@ Statistics include:
 * Number of HIGH Priority People
 * Number of MEDIUM Priority People
 * Number of LOW Priority People
-* Number of People With Monthly Household Income < 2500
-* Number of Appointments Within a Week From Current Date
+* Number of People With Monthly Household Income <= 4000
+* Number of Appointments Scheduled Within Next 7 Days From Current Date
+* Number Of People Eligible For At Least One Scheme
 
 Format: `statistics`
 
-### Displaying eligible schemes : `scheme`
+### Displaying eligible schemes: `scheme`
 
 Displays the schemes that specified people from the address book are eligible for.
 
@@ -216,7 +311,7 @@ Format: `scheme INDEXES`
 Examples:
 * `scheme 1` shows scheme that the 1st person in the address book is eligible for.
 
-### Adding a scheme to a person : `addscheme`
+### Adding a scheme to a person: `addscheme`
 
 Adds a scheme to the specified person in the address book.
 
@@ -231,7 +326,7 @@ Format: `addscheme PERSON_INDEX i/SCHEME_INDEX`
 Examples:
 * `addscheme 1 i/1` adds the 1st scheme to the 1st person in the address book.
 
-### Viewing schemes attached to a person : `viewscheme`
+### Viewing schemes attached to a person: `viewscheme`
 
 Displays the schemes that the specified person in the address book is attached to.
 
@@ -245,7 +340,7 @@ Format: `viewscheme INDEX`
 Examples:
 * `viewscheme 1` shows the schemes that the 1st person in the address book is attached to.
 
-### Delete a scheme from a person : `deletescheme`
+### Delete a scheme from a person: `deletescheme`
 
 Deletes the specified scheme from the specified person in the address book.
 
@@ -263,7 +358,40 @@ Examples:
 * `deletescheme 1 i/1` deletes the 1st scheme from the 1st person in the address book.
 * `deletescheme 1 i/1, 2` deletes the 1st and 2nd scheme from the 1st person in the address book.
 
-### Exiting the program : `exit`
+### Archiving a person: `archive`
+
+Archives the specified person from the address book.
+
+Format: `archive INDEX`
+
+* Archives the person at the specified `INDEX`.
+* The index refer to the index number shown in the displayed person list.
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …
+* The specified person must currently not be archived.
+
+Examples:
+* `list` followed by `archive 2` archives the 2nd person in the address book.
+
+<box type="info" seamless>
+
+**Info:** It is still possible to make changes to archived people
+</box>
+
+### Unarchiving a person: `unarchive`
+
+Unarchives the specified person from the address book.
+
+Format: `unarchive INDEX`
+
+* Unarchives the person at the specified `INDEX`.
+* The index refer to the index number shown in the displayed person list.
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …
+* The specified person must be currently archived.
+
+Examples:
+* `list archive/` followed by `unarchive 1` unarchives the 1st person in the address book.
+
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -284,15 +412,37 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
+--------------------------------------------------------------------------------------------------------------------
 
-_Details coming soon ..._
+## Calendar
+
+![Calendar](images/calendarView.png)
+
+The calendar UI allows you to visualize your appointments throughout the day.
+
+The **right side of the calendar** shows a timeline view of today's appointments. Each appointment is represented
+by a blue box with the person's name. For appointments lasting 30 minutes or more, the start time is also displayed.
+The height of the box represents the duration of the appointment.
+
+The **left side of the calendar** shows a monthly calendar view along with an agenda view that lists appointments 
+for the next 30 days, including today (e.g., November 7 to December 7). The agenda view provides detailed information
+for each appointment, including the person's name and the start and end times.
+
+You can also navigate the calendar using these keyboard shortcuts:
+
+* `Ctrl + P`: Go to the previous day
+* `Ctrl + N`: Go to the next day
+* `Ctrl + T`: Go to today
+
+<box type="info">
+The current time marker (denoted by the red line on the right side of the calendar) is updated every 10 seconds.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -306,19 +456,25 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action           | Format, Examples
------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**        | `clear`
-**Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`
-**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
-**Undo**         | `undo`
-**List**         | `list`
-**Statistics**   | `statistics` <br> Shows general statistics
-**Scheme**       | `scheme INDEX` <br> e.g., `scheme 1`
-**AddScheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`
-**ViewScheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`
-**DeleteScheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`
-**Help**         | `help`
+| Command          | Format, Examples                                                                                                                                                                                                |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **help**         | `help [COMMAND]`                                                                                                                                                                                                |
+| **add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                           |
+| **list**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`                                                                                                                                        |
+| **edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` | 
+| **find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                      |
+| **delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`                                                                                                              |
+| **get**          | `get PARAMETERS`<br> e.g.,`get email phone`                                                                                                                                                                     |
+| **clear**        | `clear`                                                                                                                                                                                                         |
+| **addappt**      | `addappt INDEX date/yyyy-MM-dd from/HH:mm to/HH:mm`<br> e.g., `addappt 1 date/2024-11-08 from/16:00 to/17:00`                                                                                                   |
+| **listappt**     | `listappt`                                                                                                                                                                                                      |
+| **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                                           |
+| **deleteappt**   | `deleteappt INDEX`                                                                                                                                                                                              |
+| **undo**         | `undo`                                                                                                                                                                                                          |
+| **statistics**   | `statistics` <br> Shows general statistics                                                                                                                                                                      |
+| **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                            |
+| **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                            |
+| **viewscheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`                                                                                                                                                                    |
+| **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                                      |
+| **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                          |
+| **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                      |
