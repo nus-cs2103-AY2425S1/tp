@@ -55,7 +55,7 @@ public class CsvImport {
      * @param model The model to which the imported JsonAdaptedPerson objects will be added.
      * @return The number of successful imports.
      */
-    public int readCsv(Model model) throws ImproperFormatException {
+    public int readCsv(Model model) throws ImproperFormatException, FileNotFoundException {
         FileReader reader = null;
         FileReader headerReader = null;
         FileReader rowReader = null;
@@ -64,7 +64,7 @@ public class CsvImport {
             headerReader = new FileReader(importFilePath);
             rowReader = new FileReader(importFilePath);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw e;
         }
 
         assert reader != null;

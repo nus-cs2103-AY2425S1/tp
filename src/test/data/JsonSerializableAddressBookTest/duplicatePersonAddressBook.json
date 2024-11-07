@@ -4,12 +4,16 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "jurong, 123456",
-    "hours" : "1"
+    "hours" : "1",
+    "role": "Tutor",
+    "subjects": [ "math" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "jurong, 123456",
-    "hours" : "1"
+    "hours" : "1",
+    "role": "Tutor",
+    "subjects": [ "math" ]
   } ]
 }
