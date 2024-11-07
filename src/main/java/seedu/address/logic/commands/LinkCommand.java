@@ -7,11 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -28,13 +28,10 @@ public class LinkCommand extends Command {
 
     public static final String COMMAND_WORD = "link";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Links a Parent and a Student in a parent-child relationship"
-            + "Parameters: " + PREFIX_CHILD + "CHILD_NAME "
-            + PREFIX_PARENT + "PARENT_NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CHILD + "John Doe "
-            + PREFIX_PARENT + "Jane Doe ";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Links a Parent and a Student in a parent-child relationship" + "Parameters: "
+                    + PREFIX_CHILD + "CHILD_NAME " + PREFIX_PARENT + "PARENT_NAME\n" + "Example: " + COMMAND_WORD + " "
+                    + PREFIX_CHILD + "John Doe " + PREFIX_PARENT + "Jane Doe ";
 
     public static final String MESSAGE_SUCCESS = "Successfully linked Student: %1$s to Parent: %2$s";
     public static final String MESSAGE_PARENT_LINKED = "Parent: %1$s has an existing link to Student: %2$s";
@@ -60,21 +57,13 @@ public class LinkCommand extends Command {
         Person parent;
         Person child;
 
-        try {
-            parent = model.personFromName(parentName);
-            if (!(parent instanceof Parent)) {
-                throw new CommandException(generateParentNotFoundMessage());
-            }
-        } catch (IllegalValueException e) {
+        parent = model.personFromName(parentName);
+        if (!(parent instanceof Parent)) {
             throw new CommandException(generateParentNotFoundMessage());
         }
 
-        try {
-            child = model.personFromName(childName);
-            if (!(child instanceof Student)) {
-                throw new CommandException(generateChildNotFoundMessage());
-            }
-        } catch (IllegalValueException e) {
+        child = model.personFromName(childName);
+        if (!(child instanceof Student)) {
             throw new CommandException(generateChildNotFoundMessage());
         }
 
@@ -96,6 +85,7 @@ public class LinkCommand extends Command {
         Phone phone = child.getPhone();
         Email email = child.getEmail();
         Address address = child.getAddress();
+        LessonTime lessonTime = child.getLessonTime();
         Education education = child.getEducation();
         Grade grade = child.getGrade();
         Name parentName = parent.getName();
@@ -103,7 +93,8 @@ public class LinkCommand extends Command {
         boolean isPinned = child.isPinned();
         boolean isArchived = child.isArchived();
 
-        return new Student(name, phone, email, address, education, grade, parentName, tags, isPinned, isArchived);
+        return new Student(name, phone, email, address, lessonTime, education, grade, parentName, tags,
+                isPinned, isArchived);
 
     }
 

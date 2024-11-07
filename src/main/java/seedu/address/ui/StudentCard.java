@@ -27,6 +27,8 @@ public class StudentCard extends PersonCard {
     @FXML
     private Label parentEmail;
     @FXML
+    private Label lessonTime;
+    @FXML
     private Label education;
     @FXML
     private Label grade;
@@ -36,6 +38,8 @@ public class StudentCard extends PersonCard {
      */
     public StudentCard(Student person, int displayedIndex, ReadOnlyAddressBook addressBook) {
         super(STUDENT, person, displayedIndex, addressBook);
+        lessonTime.setText(person.getLessonTime().toString());
+        lessonTime.getStyleClass().add("lesson-time-label");
         education.setText(person.getEducation().educationLevel);
         education.getStyleClass().add("education-label");
         grade.setText(person.getGrade().gradeIndexToName());

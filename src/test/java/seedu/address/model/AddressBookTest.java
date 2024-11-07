@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -106,7 +105,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public Person personFromName(Name name) throws IllegalValueException {
+        public Person personFromName(Name name) {
             return persons.stream().filter(person -> person.getName().equals(name)).findFirst()
                     .orElseThrow(IllegalArgumentException::new);
         }
