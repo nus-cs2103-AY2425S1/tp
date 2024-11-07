@@ -88,17 +88,20 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
         - Locate the downloaded `.jar` file in your `Downloads` folder.
         - Right-click on the `.jar` file, select Copy.
         - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
+        <br></br>
 
     2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
 
         - Open the **Finder** and go to your `Downloads` folder.
         - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
         - Go to the folder where you want to keep the file, then right-click and select Paste.
+        <br></br>
 
     3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open your file manager and go to your `Downloads` directory.
         - Right-click on the `.jar` file, choose Copy.
         - Go to the destination folder, right-click and select Paste.
+        <br></br>
 
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
