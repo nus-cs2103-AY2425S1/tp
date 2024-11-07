@@ -9,6 +9,6 @@ public class KeywordCommandResult extends CommandResult {
      * and other fields set to their default value.
      */
     public KeywordCommandResult(String feedbackToUser, String keyword) {
-        super(feedbackToUser, keyword, true, null, false, false);
+        super(feedbackToUser, keyword, true, null, false, false, false);
     }
 }
