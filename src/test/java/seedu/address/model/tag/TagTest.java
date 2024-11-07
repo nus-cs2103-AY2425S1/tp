@@ -25,6 +25,8 @@ public class TagTest {
         new Tag("High Risk");
         new Tag("Medium Risk");
         new Tag("Low Risk");
+        new Tag("low risk");
+        new Tag("mEDIUM RiSK");
     }
 
     @Test
@@ -41,18 +43,24 @@ public class TagTest {
         assertTrue(Tag.isValidTagName("Medium Risk"));
         assertTrue(Tag.isValidTagName("Low Risk"));
         assertTrue(Tag.isValidTagName("high risk")); // lowercase
+        assertTrue(Tag.isValidTagName("hiGH riSK")); // mixed case
+
     }
     @Test
     public void equals() {
         Tag tag1 = new Tag("High Risk");
         Tag tag2 = new Tag("High Risk");
         Tag tag3 = new Tag("Low Risk");
+        Tag tag4 = new Tag("low risk");
 
         // same object -> returns true
         assertTrue(tag1.equals(tag1));
 
         // same values -> returns true
         assertTrue(tag1.equals(tag2));
+
+        //only capitalization is different -> returns true
+        assertTrue(tag3.equals(tag4));
 
         // different values -> returns false
         assertFalse(tag1.equals(tag3));
@@ -70,12 +78,26 @@ public class TagTest {
         Tag tag2 = new Tag("High Risk");
 
         assertEquals(tag1.hashCode(), tag2.hashCode());
+
+        Tag tag3 = new Tag("HiGH RiSk"); //mixed case tags are still considered the same
+        assertEquals(tag1.hashCode(), tag3.hashCode());
+
     }
     @Test
     public void toString_validTagName_correctString() {
         Tag tag = new Tag("Medium Risk");
         assertEquals("Medium Risk", tag.toString());
     }
+    @Test
+    public void testStandardizeTagName() {
+        // Test case 1: "low risk" should return "Low Risk"
+        assertEquals("Low Risk", Tag.standardizeTagName("low risk"));
 
+        // Test case 2: "medium risk" should return "Medium Risk"
+        assertEquals("Medium Risk", Tag.standardizeTagName("medium risk"));
 
+        // Test case 3: "high risk" should return "High Risk"
+        assertEquals("High Risk", Tag.standardizeTagName("high risk"));
+
+    }
 }
