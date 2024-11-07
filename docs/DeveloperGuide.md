@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,9 +116,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 
 The `Model` component,
@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T09-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -241,13 +241,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -288,43 +288,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                                     | I want to …​                                                                                 | So that I can…​                                                                                                                     |
-|----------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | detail-oriented private tutor                                               | add my students' contact details, educational levels and subjects taught to the address book | I can keep track of all these details effectively                                                                                   |
-| `* * *`  | tutor                                                                       | view all my students                                                                         | I know who are my students                                                                                                          |
-| `* * *`  | long-time private tutor                                                     | delete contacts                                                                              | I can keep my address book concise and remove all unneeded contacts                                                                 |
-| `* *`    | concerned private tutor                                                     | add my students' parents' contact details to the address book                                | I am able to contact them regarding their child’s academic progress                                                                 |
-| `* *`    | organised private tutor                                                     | link each student to their parents in the address book                                       | I can contact related users at once                                                                                                 |
-| `* *`    | private tutor with multiple students                                        | tag students based on characteristics                                                        | I can keep track of additional information on students if required                                                                  |
-| `* *`    | non-tech savvy private tutor                                                | have a help sheet with the provided commands                                                 | I do not have to spend too much time memorising commands in order to use the app                                                    |
-| `* *`    | private tutor                                                               | filter the contact details in the address book by name and tag                               | I can find the relevant contact details more quickly                                                                                |
-| `* *`    | organised private tutor                                                     | view all related users (e.g. students and parents) in one page                               | I do not have to manually search or filter for them                                                                                 |
-| `* *`    | user                                                                        | find my students by name                                                                     | I will be able to quickly find their contact information                                                                            |
-| `*`      | busy private tutor with too many students                                   | have a prompt for non-clients to be deleted automatically                                    | I do not have to manually keep track and delete them                                                                                |
-| `*`      | user concerned with aesthetics                                              | edit the look of the GUI and select from several themes                                      | I can customise the look of the address book to suit my aesthetic preferences                                                       |
-| `*`      | user who prefers CLI                                                        | customise the format of inputting contact data in the command line                           | I can use the app in a way that suits my workflow                                                                                   |
-| `*`      | potential user exploring the address book                                   | try out the app's features with sample data                                                  | I can easily see how the app will look when it is in use                                                                            |
-| `*`      | user ready to start using the app                                           | delete all existing data                                                                     | I can get rid of sample/experimental data I used for exploring the app                                                              |
-| `*`      | private tutor who is juggling multiple subjects                             | filter students and parents by subject                                                       | I can contact all parties easily and at once when I need to make an announcement that concerns all students of a particular subject |
-| `*`      | private tutor who has to schedule lessons manually by myself                | filter students by availability                                                              | I can keep track of when students are available when planning make-up or additional lessons                                         |
-| `*`      | impatient user                                                              | execute tasks at low latency                                                                 | I do not spend unnecessary time waiting for the address book to load and handle my commands and can thus work more efficiently      |
-| `*`      | user who prefers pictures over words                                        | attach a picture with the contact                                                            | I can have a more enjoyable GUI experience                                                                                          |
-| `*`      | tutor who teaches students across different time zones                      | have a tag that tracks the difference in timezones                                           | I do not have to manually keep track of time zones and potentially make mistakes                                                    |
-| `*`      | private tutor who may expand my business                                    | download all my data into a .csv file                                                        | I can transfer data across different digital platforms                                                                              |
-| `*`      | private tutor who is starting to use the app                                | upload data of a collection of clients into the app                                          | It seamlessly stores all the previous clients data with minimal setup steps                                                         |
-| `*`      | private tutor that specializes in special needs education                   | search, filter and categorize students by their needs                                        | I can better tailor my teaching to each individual needs                                                                            |
-| `*`      | private tutor who contacts certain students or parents more frequently      | pin certain students to the top of the contact list                                          | I can access frequently contacted students or parents immediately                                                                   |
-| `*`      | private tutor performing a task on my contact list (e.g. deleting contacts) | select multiple users and perform a single task on them                                      | I do not have to perform each task individually                                                                                     |
-| `*`      | private tutor who wishes to organise my students more effectively           | add multiple users to a list and save it                                                     | I can keep track of them better and I do not need to perform tasks on them individually                                             |
-| `*`      | tutor with compromised eyesight                                             | zoom in to the address book GUI                                                              | I do not have to strain my eyes to read what is on the screen                                                                       |
-| `*`      | colorblind tutor                                                            | use a colorblind mode                                                                        | I would not confuse colors of the tags                                                                                              |
-| `*`      | private tutor offering both online and in-person sessions                   | mark the preferred mode of learning for each student                                         | I can plan my schedule and resources accordingly                                                                                    |
-| `*`      | tutor who receives payments from parents                                    | add payment statuses to each student                                                         | I can manage my finance-related tasks efficiently                                                                                   |
-| `*`      | private tutor involved in long-term academic planning                       | keep a history of each student's progress and achievements                                   | I can monitor their growth over time and adjust my teaching strategies accordingly                                                  |
-| `*`      | expert user of the addressbook                                              | set macros for filters/sort                                                                  | I would be able to quickly organise without typing long commands                                                                    |
-
-
-*{More to be added}*
+| Priority | As a …​                                                                     | I want to …​                                                                               | So that I can…​                                                                                                                     |
+|----------|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `* * *`  | detail-oriented private tutor                                               | add my taught students' contact details, educational levels and grades to the address book | I can keep track of all these details effectively                                                                                   |
+| `* * *`  | tutor                                                                       | view all my students                                                                       | I know who are my students                                                                                                          |
+| `* * *`  | long-time private tutor                                                     | delete contacts                                                                            | I can keep my address book concise and remove all unneeded contacts                                                                 |
+| `* *`    | concerned private tutor                                                     | add my students' parents' contact details to the address book                              | I am able to contact them regarding their child’s academic progress                                                                 |
+| `* *`    | organised private tutor                                                     | link each student to their parents in the address book                                     | I can contact related users at once                                                                                                 |
+| `* *`    | private tutor with multiple students                                        | tag students based on characteristics                                                      | I can keep track of additional information on students if required                                                                  |
+| `* *`    | non-tech savvy private tutor                                                | have a help sheet with the provided commands                                               | I do not have to spend too much time memorising commands in order to use the app                                                    |
+| `* *`    | private tutor                                                               | filter the contact details in the address book by tag                                      | I can find the relevant contact details more quickly                                                                                |
+| `* *`    | organised private tutor                                                     | view all related users (e.g. students and parents) in one page                             | I do not have to manually search or filter for them                                                                                 |
+| `* *`    | tutor with many students                                                    | find my students by name                                                                   | I will be able to quickly find their contact information                                                                            |
+| `* *`    | tutor with many contacts                                                    | sort my address book by name                                                               | I will be able quickly search my address book alphabetically                                                                        |
+| `*`      | potential user exploring the address book                                   | try out the app's features with sample data                                                | I can easily see how the app will look when it is in use                                                                            |
+| `*`      | user ready to start using the app                                           | delete all existing data                                                                   | I can get rid of sample/experimental data I used for exploring the app                                                              |
+| `*`      | private tutor who is juggling multiple subjects                             | filter students and parents by subject                                                     | I can contact all parties easily and at once when I need to make an announcement that concerns all students of a particular subject |
+| `*`      | private tutor who has to schedule lessons manually by myself                | filter students by availability                                                            | I can keep track of when students are available when planning make-up or additional lessons                                         |
+| `*`      | impatient user                                                              | execute tasks at low latency                                                               | I do not spend unnecessary time waiting for the address book to load and handle my commands and can thus work more efficiently      |
+| `*`      | tutor who teaches students across different time zones                      | have a tag that tracks the difference in timezones                                         | I do not have to manually keep track of time zones and potentially make mistakes                                                    |
+| `*`      | private tutor who contacts certain students or parents more frequently      | pin certain students to the top of the contact list                                        | I can access frequently contacted students or parents immediately                                                                   |
+| `*`      | private tutor performing a task on my contact list (e.g. deleting contacts) | select multiple users and perform a single task on them                                    | I do not have to perform each task individually                                                                                     |
 
 ### Use cases
 
@@ -397,7 +381,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC4 - Exit application**
+**Use case: UC4 - Sort contacts**
+
+**MSS**
+
+1.  User requests to sort contact list.
+2.  GOATS sorts the list and outputs the sorted list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given command is invalid.
+
+    * 1a1. GOATS shows an error message.
+
+      Use case ends.
+
+**Use case: UC5 - Exit application**
 
 **MSS**
 
@@ -415,7 +416,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC5 - Edit a contact**
+**Use case: UC6 - Edit a contact**
 
 **MSS**
 
@@ -439,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC6 - Find contacts by name**
+**Use case: UC7 - Find contacts by name**
 
 **MSS**
 
@@ -468,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC7 - Showing all commands**
+**Use case: UC8 - Showing all commands**
 
 **MSS**
 
@@ -485,7 +486,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC8 - Clearing all contacts**
+**Use case: UC9 - Clearing all contacts**
 
 **MSS**
 
@@ -508,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC9 - Find contacts by tag**
+**Use case: UC10 - Find contacts by tag**
 
 **MSS**
 
@@ -537,7 +538,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 * 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -548,8 +548,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  Saved data should be kept in a single file to allow for easy transfer to a different device.
 6.  The system should respond within two seconds.
 7.  Should work without having to use an installer or compiler.
-
-*{More to be added}*
 
 ### Glossary
 
@@ -584,7 +582,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file 
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -592,8 +591,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -610,12 +607,18 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Loading data
 
-### Saving data
+1. Dealing with corrupted data files
 
-1. Dealing with missing/corrupted data files
+   1. Corrupted data files can be simulated by editing data/addressbook.json file
+   
+   2. Test case: Start GOATS app
+      Expected: GOATS should clear all data from the corrupted file and user is presented with an empty addressbook
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. _Dealing with missing data files
 
-1. _{ more test cases …​ }_
+   1. Missing data files can be simulated by deleting data/addressbook.json file
+   
+   2. Test case: Start GOATS app
+      Expected: GOATS should initialise a new data/addressbok.json file with sample data and user is presented an addressbook with that data
