@@ -1,12 +1,9 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryList;
@@ -34,6 +31,9 @@ public class Worker {
         assignedDeliveryList.add(delivery);
     }
 
+    public void removeDelivery(Delivery delivery) {
+        assignedDeliveryList.remove(delivery);
+    }
     /**
      * Returns the list of deliveries assigned to the worker
      */

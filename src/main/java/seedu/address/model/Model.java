@@ -19,6 +19,7 @@ public interface Model {
     /** {@code Predicate} that always evaluates to true */
     Predicate<Delivery> PREDICATE_SHOW_ALL_DELIVERIES = unused -> true;
     Predicate<Person> PREDICATE_SHOW_ONLY_CLIENTS = person -> person.getRole().getValue().equals("client");
+    Predicate<Person> PREDICATE_SHOW_ONLY_EMPLOYEES = person -> person.getRole().getValue().equals("employee");
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

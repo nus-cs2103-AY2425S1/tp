@@ -9,5 +9,6 @@ public enum DeliveryAction {
     DELETE,
     ARCHIVE,
     UNARCHIVE,
-    FINDDEL
+    FINDDEL,
+    REMOVE
 }
