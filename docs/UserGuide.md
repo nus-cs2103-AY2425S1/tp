@@ -124,9 +124,9 @@ Format: `list`
 
 Edits the details of the patient identified by the index number used in the displayed patient profile list. **Existing information will be overwritten by the input values**
 
-Format: `edit INDEX(must be positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TAG]…​`
+Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the patient profile at the specified `INDEX`. The index refers to the index number shown in the displayed patient profile list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the patient profile with specified `NRIC`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
@@ -134,7 +134,7 @@ Format: `edit INDEX(must be positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [i/NR
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `edit S1231231D p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient profile displayed to be `Betsy Crower` and clears all existing tags.
 
 ### Locating patients by name: `find`
@@ -190,6 +190,7 @@ Murphy's List data are saved automatically as a JSON file `[JAR file location]/d
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+It is generally recommended to use the application to edit the data file.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -202,7 +203,11 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Murphy's List home folder.
-
+**Q**: What should I do if the application does not start?<br>
+**A**: Ensure you have Java `17` or above installed in your Computer. If the problem persists, contact the developers. 
+You can check your Java version by running `java -version` in the command terminal.
+**Q**: How do I recover data if I accidentally delete a patient profile?
+**A**: Unfortunately, there is no built-in undo feature for deleted data. It is recommended to back up your data by making a copy of the data file periodically.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
