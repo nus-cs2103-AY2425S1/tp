@@ -5,7 +5,10 @@ title: User Guide
 
 **EduVault** is a desktop application **designed for tuition centers to manage students and classes effectively**. Optimised for quick use through a Command Line Interface (CLI) and complemented by an intuitive graphical user interface (GUI), EduVault enables efficient tracking of student and class information, making it ideal for fast typists and busy administrators.
 
+![Ui](images/Ui.png)
 ---
+
+{:toc}
 
 <div markdown="span" class="alert alert-primary">:pushpin: **Note:**
 A person can have any number of tags (including 0)
@@ -40,7 +43,7 @@ A person can have any number of tags (including 0)
 
 When EduVault is first started, you will see an interface like the one below, made up of multiple components. Here’s a breakdown of each section and its functionality:
 
-![Ui](images/Ui.png)
+![Ui](images/Ui-intro.png)
 
 * **Options Box:**  Provides basic options like exiting the application or accessing the user guide
 * **Command Box:** An input box where users can type in commands to execute specific actions within EduVault
@@ -460,14 +463,14 @@ Fields
     * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy
+    * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
 
 <div markdown="span" class="alert alert-success">:bulb: **Tip:**
 If you want to mark the attendance of all students in a tutorial, 
-use the command mat [here](#55-marking-attendance-of-a-tutorial) instead.
+use the command `mat` [here](#55-marking-attendance-of-a-tutorial).
 </div>
 
 Example usages
@@ -481,12 +484,16 @@ Example usages
 Invalid usages
 * Marking attendance of student who does not take specified tutorial
     * *Error message: Student STUDENT_NAME does not take TUTORIAL tutorial*
-* Marking attendance of student who already has attendance marked for the corresponding week
-    * *Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE*
+* Marking attendance of student who already has attendance marked for the corresponding week for the specified tutorial
+    * *Error message: Student STUDENT_NAME has attendance marked for the corresponding week of date ATTENDANCE for TUTORIAL tutorial*
 * Format errors, check [here](#12-format-errors)
 
 </div>
 {% endraw %}
+
+<div markdown="span" class="alert alert-success">:bulb: **Tip:**
+You can click anywhere in the attendance box to show other weeks' attendance for that tutorial.
+</div>
 
 #### **5.5 Marking attendance of a tutorial**
 *Marks the attendance of all students enrolled in the tutorial for the specified date*
@@ -502,7 +509,7 @@ Fields
 
 * `TUTORIAL`: Name of the tutorial to mark the attendance for all students
 * `ATTENDANCE`: Date to mark the attendance for
-    * Must be in format dd/MM/yyyy
+    * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -521,9 +528,11 @@ Example usages
 <div markdown="1" class="smaller-text">
 
 Invalid usages
+* Marking attendance of a tutorial that does not exist
+    * *Error message: No tutorial class with the name TUTORIAL is found*
 * Marking attendance of a tutorial with no students enrolled
     * *Error message: No students are enrolled in TUTORIAL tutorial*
-* Marking attendance of a tutorial where all students already has attendance marked for the corresponding week
+* Marking attendance of a tutorial where **all students** already has attendance marked for the corresponding week
     * *Error message: All students in TUTORIAL tutorial has attendance marked 
     for the corresponding week of date ATTENDANCE*
 * Format errors, check [here](#12-format-errors)
@@ -531,7 +540,7 @@ Invalid usages
 </div>
 {% endraw %}
 
-#### **5.6 Unmarking attendance of student**
+#### **5.6 Unmarking attendance of a student**
 
 Command: `umas`
 
@@ -546,7 +555,7 @@ Fields
   * Must be a positive integer 1, 2, 3…
 * `TUTORIAL`: Name of the tutorial the student is taking.
 * `ATTENDANCE`: Date to unmark the attendance for.
-  * Must be in format dd/MM/yyyy
+  * Must be in format dd/MM/yyyy and cannot be a future date
 
 </div>
 {% endraw %}
@@ -562,7 +571,7 @@ Example usages
 Invalid usages
 
 * Unmarking attendance of student who does not take specified tutorial
-    * Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial
+    * *Error message: Student STUDENT_NAME is not enrolled in TUTORIAL tutorial*
 * Format errors, check [here](#12-format-errors)
 
 </div>
@@ -939,7 +948,11 @@ dd/MM/yyyy</code>
 ---
 
 ### **14. Known issues**
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the preferences.json file created by the application before running the application again.
 
+2. **If you minimize the Help Window** and then run the help command (or use the Help menu, or the keyboard shortcut F1) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+3. **If the UI does not update automatically** on modifying student's details such as attendance and enrolling in tutorial, manually click on the area containing the student's details. If the UI still does not update, try restarting the application.
 ---
 
 ### **15. Archiving data files \[coming in v2.0\]**
