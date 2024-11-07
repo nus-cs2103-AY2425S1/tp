@@ -76,7 +76,7 @@ public class RemarkCommand extends Command {
      */
     private String generateSuccessMessage(Company companyToEdit) {
         // change the default empty message of remark to "None"
-        String message = !remark.value.equals("None") ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
+        String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
         return String.format(message, Messages.format(companyToEdit));
     }
 

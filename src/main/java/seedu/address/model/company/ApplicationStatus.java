@@ -18,7 +18,7 @@ public class ApplicationStatus {
      */
     public ApplicationStatus(String status) {
         requireNonNull(status);
-        value = status.isEmpty() ? DEFAULT_STATUS : status;
+        value = status;
     }
 
     @Override
@@ -46,4 +46,7 @@ public class ApplicationStatus {
         return value.hashCode();
     }
 
+    public String getStatusValue() {
+        return this.value.isEmpty() ? DEFAULT_STATUS : this.value;
+    }
 }

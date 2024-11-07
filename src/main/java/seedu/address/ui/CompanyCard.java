@@ -65,8 +65,8 @@ public class CompanyCard extends UiPart<Region> {
         address.setText(company.getAddress().value);
         careerPageUrl.setText(company.getCareerPageUrl().value);
         bookmarkIcon.setVisible(company.getIsBookmark().getIsBookmarkValue());
-        applicationStatus.setText(company.getApplicationStatus().value);
-        remark.setText(company.getRemark().value);
+        applicationStatus.setText(company.getApplicationStatus().getStatusValue());
+        remark.setText(company.getRemark().getRemarkValue());
         email.setText(company.getEmail().value);
         company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.toString()))

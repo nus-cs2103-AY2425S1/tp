@@ -25,7 +25,7 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
-        value = remark.isEmpty() ? DEFAULT_REMARK : remark;
+        value = remark;
     }
 
     /**
@@ -50,5 +50,9 @@ public class Remark {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public String getRemarkValue() {
+        return this.value.isEmpty() ? DEFAULT_REMARK : this.value;
     }
 }
