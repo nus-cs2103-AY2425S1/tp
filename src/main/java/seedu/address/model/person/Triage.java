@@ -11,12 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class Triage {
 
-    /** The triage value indicating the stage of illness. */
-    public String value;
-
     /** The message constraint for valid triage values. */
     public static final String MESSAGE_CONSTRAINTS =
             "Valid triaging stages are from numbers 1 to 5, with 1 indicating Stable and 5 indicating Bereaved.";
+
+    /** The triage value indicating the stage of illness. */
+    public final String value;
 
     /**
      * Constructs a Triage object with the given triage value.
@@ -52,9 +52,8 @@ public class Triage {
         if (num != null && num.matches("-?\\d+")) {
             test = Integer.parseInt(num);
             return test > 0 && test < 6; // Valid triage range is from 1 to 5
-        } else {
-           return false;
         }
+        return false;
     }
 
     /**

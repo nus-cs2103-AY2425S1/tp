@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_NRIC + "NRIC "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_TRIAGE  + "TRIAGE "
+            + PREFIX_TRIAGE + "TRIAGE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
