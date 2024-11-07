@@ -76,9 +76,7 @@ public class AssignCommand extends Command {
             model.assignVolunteerToEvent(v, e);
         } catch (DuplicateAssignException exception) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
-        } catch (OverlappingAssignException exception) {
-            throw new CommandException(MESSAGE_OVERLAP_ASSIGN);
-        } catch (VolunteerNotAvailableException exception) {
+        } catch (OverlappingAssignException | VolunteerNotAvailableException exception) {
             throw new CommandException(exception.getMessage());
         }
 

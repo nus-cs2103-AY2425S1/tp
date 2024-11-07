@@ -55,9 +55,7 @@ public class EventManager {
         if (event.getVolunteers().contains(volunteer.getName().fullName)) {
             throw new DuplicateAssignException();
         }
-        if (eventHasOverlapWithList(event, getEventsFromListOfNames(volunteer.getEvents()))) {
-            throw new OverlappingAssignException();
-        }
+        eventHasOverlapWithList(event, getEventsFromListOfNames(volunteer.getEvents()));
 
         event.assignVolunteer(volunteer.getName().fullName);
     }
@@ -68,10 +66,11 @@ public class EventManager {
      * @param listToCheckAgainst
      * @return
      */
-    public boolean eventHasOverlapWithList(Event targetEvent, List<Event> listToCheckAgainst) {
+    public boolean eventHasOverlapWithList(Event targetEvent, List<Event> listToCheckAgainst) throws
+            OverlappingAssignException {
         for (Event e : listToCheckAgainst) {
             if (e.isOverlappingWith(targetEvent)) {
-                return true;
+                throw new OverlappingAssignException(e.getName().toString());
             }
         }
         return false;
