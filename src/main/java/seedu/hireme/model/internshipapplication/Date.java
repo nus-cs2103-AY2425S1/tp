@@ -20,7 +20,7 @@ public class Date implements Comparable<Date> {
      * and must not be a future date.
      */
     public static final String MESSAGE_CONSTRAINTS = "Dates must not be in the future, should be in the format "
-            + c"'DD/MM/YY', and must represent a valid calendar date.";
+            + "'DD/MM/YY', and must represent a valid calendar date.";
 
 
     /**
