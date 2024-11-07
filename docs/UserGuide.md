@@ -270,7 +270,7 @@ Examples:
 * `find olive 87438` returns `87438807`, `Charlotte Oliveiro`
 
 <img src="images/findResult.png" width="800">
-  
+
 <br>
 <br>
 
@@ -330,7 +330,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
    <img src="images/importStep3.png" width="800"/>
 
-**Expected format:**
+##### Expected format:
 
 The following is an example of a valid JSON file content. 
 
