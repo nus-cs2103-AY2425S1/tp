@@ -163,6 +163,86 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Assign and Unassign Commands
+
+The assign command adds the ability for the user to assign a vendor to an event and vice versa when inside the detailed view for either an `Event` or `Vendor`.
+
+Given below is a usage scenario for the `assign` and `unassign` commands:
+
+Step 1. Enter the details view for either an `Event` or a `Vendor`. For example `view v/1` to view the first vendor.
+
+Step 2. Assign the first `Event` from the list of assignable events to the currently viewed `Vendor`, using the command `assign 1`. The `Event` should now be shifted from the list of assignable events to the list of assigned events.
+
+Step 3. To unassign the `Event` from the vendor, use the command `unassign 1`. The `Event` should now be shifted from the list of assigned events to the list of assignable events.
+
+The `AssignCommand` and `UnassignCommand` classes were introduced to represent these commands. To support parsing the arguments to both commands, the `AssignCommandParser` and `UnassignCommandParser` classes were added.
+
+For better understanding, refer to the sequence diagram below which illustrates the execution of the `assign` command:
+
+<puml src="diagrams/AssignSequenceDiagram.puml" width="800" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AssignCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Changes to Model
+
+Implementing these commands required significant changes to the `Model` of the application, details of which are covered in this section:
+
+* A unique identifier for both the `Event` and `Vendor` classes was added. This is represented by the new `UniqueId` class, which makes use of Java's built-in UUID class.
+* The `Association` class represents pairs of assigned events and vendors, which is done using a pair of `UniqueId` classes, taken from the respective `Event` and `Vendor` instances.
+* The list of associations in the current application's state are stored in the `UniqueAssociationList` class, which enforces a unique constraint on the `Association` instances stored within it.
+
+The following methods to support the `assign` and `unassign` commands were implemented in `EventTory`:
+
+* `EventTory#getAssociatedVendors(Event)` — Get the list of vendors associated to the provided event.
+* `EventTory#getAssociatedEvents(Vendor)` — Get the list of events associated to the provided vendor.
+* `EventTory#assignVendorToEvent(Vendor, Event)` — Create an association between the given `Vendor` and `Event`, and updates the list of associations.
+* `EventTory#unassignVendorFromEvent(Vendor, Event)` — Remove the association between the given `Vendor` and `Event`, and updates the list of associations.
+* `EventTory#getAssociationList()` — Get the full list of associations.
+* `EventTory#isVendorAssignedToEvent(Vendor, Event)` — Returns a boolean indicating whether an association exists between a given `Vendor` and `Event`.
+* `EventTory#setAssociations(List<Association>)` — Sets the state of the association list to the provided list.
+
+We also expose the following methods in the `Model` interface, exposing the same operations as the `EventTory` class:
+
+* `Model#getAssociatedVendors(Event)`
+* `Model#getAssociatedEvents(Vendor)`
+* `Model#assignVendorToEvent(Vendor, Event)`
+* `Model#unassignVendorFromEvent(Vendor, Event)`
+* `Model#getAssociationList()`
+* `Model#isVendorAssignedToEvent(Vendor, Event)`
+
+#### Changes to Storage
+
+To support data persistence, `JsonAdaptedAssociation` was implemented to allow storing the list of associations alongside `Vendor` and `Event` information. In storage data, the list of associations are represented in the following form:
+
+```
+"associations": [
+  {
+    "vendorId": "a1e2c3d4-5f67-4890-8a1b-123456789abc",
+    "eventId": "a1e2c3d4-5f67-4890-8a1b-123456789abd"
+  },
+  {
+    "vendorId": "b2f3d4e5-6a78-491a-9b2c-23456789abcd",
+    "eventId": "b2e3c4d5-6f78-49a1-9b2c-23456789abcd"
+  }
+]
+```
+
+In the case where the UUID strings are not valid UUID strings, or do not correspond to real vendors or events, the whole JSON document representing the data will be treated as invalid.
+
+#### Exception Handling
+
+Adding this command into EventTory introduced new edge cases that had to be handled as well. Their details are covered in this section:
+
+When deleting a `Vendor` or `Event` using the `delete` command, we have to make sure that it is not currently being assigned to any other item, otherwise this would lead to the application storing associations between items that no longer exist. To handle this, the `AssociationDeleteException` was added, to inform the user if they are trying to delete an item that is currently assigned to another item.
+
+Since associations are meant to be unique, the `DuplicateAssociationException` was also added to inform the user, if they attempt to assign a pair of events and vendors that have already been assigned to each other.
+
+To handle the event where the user attempts to unassign a vendor from an event, when there is no existing association between the 2 items, the `AssociationNotFoundException` was added.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
