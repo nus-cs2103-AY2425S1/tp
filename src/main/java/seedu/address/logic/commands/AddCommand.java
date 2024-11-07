@@ -46,6 +46,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    private static final boolean IS_UNDOABLE = true;
 
     private final Person toAdd;
     private Predicate<Person> previousPredicate;
@@ -68,7 +69,6 @@ public class AddCommand extends Command {
 
         previousPredicate = model.getCurrentPredicate();
         model.addPerson(toAdd);
-        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -80,6 +80,11 @@ public class AddCommand extends Command {
         Person personToDelete = lastShownList.get(lastShownList.size() - 1);
         model.deletePerson(personToDelete);
         model.updateFilteredPersonList(previousPredicate);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     @Override

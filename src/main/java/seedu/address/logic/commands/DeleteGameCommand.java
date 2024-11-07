@@ -31,6 +31,7 @@ public class DeleteGameCommand extends Command {
 
     public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game from Person: %1$s";
     public static final String MESSAGE_NOT_DELETED = "The game provided does not exist for that person.";
+    private static final boolean IS_UNDOABLE = true;
 
     private final Index index;
     private final String gameName;
@@ -69,7 +70,6 @@ public class DeleteGameCommand extends Command {
 
         deletedGame = gameMap.remove(gameName);
         model.setPerson(personToEdit, personToEdit);
-        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, Messages.format(deletedGame)));
     }
 
@@ -83,6 +83,10 @@ public class DeleteGameCommand extends Command {
         model.setPerson(personToEdit, personToEdit);
     }
 
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
+    }
 
     @Override
     public boolean equals(Object other) {

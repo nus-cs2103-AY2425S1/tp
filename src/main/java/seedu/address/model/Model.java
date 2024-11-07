@@ -107,7 +107,18 @@ public interface Model {
     void addCommandToLog(Command command);
 
     /**
-     * Returns most recent {@code Command} in {@code CommandLog}.
+     * Returns and removes most recent {@code Command} in {@code CommandLog}.
      */
     Command getPreviousCommand();
+
+    /**
+     * Adds the user input string to {@code CommandLog}.
+     */
+    void addInputToLog(String input);
+
+    /**
+     * Returns and removes most recent user input string in {@code CommandLog}.
+     * @return
+     */
+    String getPreviousInput();
 }

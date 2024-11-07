@@ -44,6 +44,7 @@ public class EditGameCommand extends Command {
 
     public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited Game: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    private static final boolean IS_UNDOABLE = true;
 
     private final Index index;
     private final String gameName;
@@ -86,7 +87,6 @@ public class EditGameCommand extends Command {
         Game editedGame = createEditedGame(gameToEdit, editGameDescriptor);
         gameMap.put(gameName, editedGame);
         model.setPerson(personToEdit, personToEdit);
-        model.addCommandToLog(this);
         return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, Messages.format(editedGame)));
     }
 
@@ -96,6 +96,11 @@ public class EditGameCommand extends Command {
         Map<String, Game> gameMap = personToEdit.getGames();
         gameMap.put(gameName, gameToEdit);
         model.setPerson(personToEdit, personToEdit);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     /**

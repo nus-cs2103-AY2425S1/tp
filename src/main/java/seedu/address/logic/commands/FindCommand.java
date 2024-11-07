@@ -22,6 +22,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
+    private static final boolean IS_UNDOABLE = true;
 
     private final NameContainsKeywordsPredicate predicate;
     private Predicate<Person> previousPredicate;
@@ -35,7 +36,6 @@ public class FindCommand extends Command {
         requireNonNull(model);
         previousPredicate = model.getCurrentPredicate();
         model.updateFilteredPersonList(predicate);
-        model.addCommandToLog(this);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -44,6 +44,11 @@ public class FindCommand extends Command {
     public void undo(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(previousPredicate);
+    }
+
+    @Override
+    public boolean canBeUndone() {
+        return IS_UNDOABLE;
     }
 
     @Override
