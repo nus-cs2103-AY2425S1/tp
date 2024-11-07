@@ -17,7 +17,7 @@ end box
 [-> LogicManager : execute("view Diddy")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete 1")
+LogicManager -> AddressBookParser : parseCommand("view Diddy")
 activate AddressBookParser
 
 create ViewStudentCommandParser
@@ -27,7 +27,7 @@ activate ViewStudentCommandParser
 ViewStudentCommandParser --> AddressBookParser
 deactivate ViewStudentCommandParser
 
-AddressBookParser -> ViewStudentCommandParser : parse("1")
+AddressBookParser -> ViewStudentCommandParser : parse("Diddy")
 activate ViewStudentCommandParser
 
 create ViewStudentCommand
@@ -49,7 +49,7 @@ deactivate AddressBookParser
 LogicManager -> ViewStudentCommand : execute(m)
 activate ViewStudentCommand
 
-ViewStudentCommand -> Model : deletePerson(1)
+ViewStudentCommand -> Model : deletePerson(d)
 activate Model
 
 Model --> ViewStudentCommand
