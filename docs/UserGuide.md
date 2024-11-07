@@ -1,8 +1,8 @@
 ---
 layout: page
-title: ![help message](images/agentconnectlogo.png)
+title: AgentConnect
 ---
-
+![help message](images/agentconnectlogo.png)
 Welcome to the **AgentConnect User Guide**!
 
 *AgentConnect* is a simple and powerful desktop application designed specifically for insurance agents like you. Managing your clients' contacts, appointments, and policies has never been easier!
@@ -97,7 +97,8 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 
 
 5. **Application Interface:** A user interface similar to the below should appear in a few seconds.
-![help message](images/GUI.png)
+
+6. ![help message](images/GUI.png)
 
 6. **Try It Out:**
     - **Enter a Command:**
@@ -233,6 +234,11 @@ Format: `delete <INDEX>` or `delete <NAME>`
     * The index **must be a positive integer** 1, 2, 3, …​
     * The name of the client is case-sensitive and must be an exact match.
 
+<div markdown="span" class="alert alert-info"> **Tip:**
+Always verify the client’s index number or exact name before executing the delete command to prevent accidental removals.
+Best Practice: Use the list or find command to confirm the exact client you intend to delete.
+</div>
+
 Examples:
 * `find Denon` followed by `delete 3` deletes the 3rd client in the results of the `find` command.
   ![result for 'delete david li'](images/deleteUI.png)
@@ -272,6 +278,11 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/A
   * When editing birthday and policy, the date format should be `yyyy-mm-dd`
   * When editing appointment, the date and time format should be `yyyy-mm-dd hh:mm` in 24-hour notation
   * When editing policy, all fields of policy must be included
+
+<div markdown="span" class="alert alert-info"> **Tip:**
+Although tags are optional, using them can be useful if you want to store additional information about the client.
+For example, if a client is a VIP, you can include it in the client's information using the edit command.
+</div>
 
 Examples:
 - **Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.**:
@@ -316,6 +327,11 @@ sort <CRITERIA> <ORDER>
     - **Birthday Sorting**: Orders the client list by birthday dates.
     - **Appointment Sorting**: Orders the client list by the dates of upcoming appointments.
     - **Policy Sorting**: Orders the client list based on policy details.
+    - **Payment Sorting**: Orders the client list based on policy payment date. This sort can only be used in ascending order.
+
+<div markdown="span" class="alert alert-info"> **Tip:**
+Regularly sorting your client list based on different criteria can help you manage your clients more efficiently and keep track of important information.
+</div>
 
 Examples:
 - **Sort by Name in Ascending Order**: Sorts the client list alphabetically by each client's name.
@@ -376,13 +392,17 @@ find <KEYWORD> [MORE_KEYWORDS]
   * Clients matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+<div markdown="span" class="alert alert-info"> **Tip:**
+When using the find command, incorporating multiple keywords can help narrow down search results more effectively.
+</div>
+
 Examples:
 - **Search by Specific Keyword**: Finds all client's name that contains the keyword.
     ```
     find steven kurt
     ```
-    
-  ![result for 'find alex david'](images/findstevenkurtResult.png)
+
+    ![result for 'find alex david'](images/findstevenkurtResult.png)
 
 ---
 
@@ -398,10 +418,12 @@ search a/ <DATETIME>
 ``` 
 Range datetime search:
 ```
-search a/ <DATETIME> to <DATETIME>
+search a/ <START DATETIME> to <END DATETIME>
 ```
 - **Parameters**:
   - `DATETIME`: A specific date and time in `YYYY-MM-DD HH:mm` format.
+  - `START DATETIME`: A specific start date and time in `YYYY-MM-DD HH:mm` format.
+  - `END DATETIME`: A specific end date and time in `YYYY-MM-DD HH:mm` format.
 
 - **Usage**:
   - **Single Datetime Search**: Lists all clients with appointments on the specified date and time.
@@ -436,11 +458,12 @@ search b/ <DATE>
 
 Range date search:
 ```
-search a/ <DATE> to <DATE>
+search a/ <START DATE> to <END DATE>
 ```
 
 - **Parameters**:
-  - `DATE`: A specific date in `YYYY-MM-DD` format.
+  - `START DATE`: A specific start date in `YYYY-MM-DD` format.
+  - `END DATE`: A specific end date in `YYYY-MM-DD` format.
   - If it is a range date search, the `to` keyword is compulsory.
 
 - **Usage**:
@@ -517,6 +540,12 @@ assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> 
     * `INSURANCE DUE DATE` cannot be later than the `POLICY START DATE`.
     * `AMOUNT DUE` must be a positive number with up to 2 decimal places.
 
+<div markdown="span" class="alert alert-info"> **Note:**
+Sometimes, after assigning a policy to a client, the user interface may not reflect the changes
+immediately. If this occurs, try double-clicking on the user interface or enter the "list" command.
+The user interface will show the assigned policy.
+</div>
+
 Example:
 * Assign a policy to the client listed at index 1 with the following information:
     * Policy Name: PolicyOne
@@ -527,8 +556,7 @@ Example:
     ```
     assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00
     ```
-
-    ![result for 'assign policy to first client'](images/assignpolicyUI.png)
+  ![result for 'assign policy to first client'](images/assignpolicyUI.png)
 
 ---
 
@@ -549,6 +577,10 @@ Deletes the policy at the specified `POLICY_INDEX` of the client at the specifie
     - The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
     - The policy index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-info"> **Tip:**
+Always verify the policy’s index number before executing the delete command to prevent accidental removals.
+Best Practice: Use the list command to confirm the exact policy you intend to delete.
+</div>
 
 Examples:
 
@@ -619,7 +651,7 @@ The `undo` command does not work for assign and deletion of policies.
 Examples:
 * `delete 1` followed by `undo` will restore back the deleted client at index 1.
 * `clear` followed by `undo` will restore back all the deleted clients.
-![result for 'undo'](images/UndoUI.png)
+![result for 'undo'](images/undoUI.png)
 
 
 ---
@@ -636,7 +668,7 @@ The `redo` command does not work for assign and deletion of policies.
 Examples:
 * `delete 1` followed by `undo` followed by `redo` will delete the client at index 1 again.
 * `clear` followed by `undo` followed by `redo` will clear all the entries again.
-![redo a deletion](images/RedoUI.png)
+![redo a deletion](images/redoUI.png)
 
 ---
 
@@ -706,11 +738,11 @@ _Details coming soon ..._
 
 ## Known Issues
 
-1. **Multiple Screens**: If you use multiple monitors and move AgentConnect to a secondary screen, it may open off-screen if that monitor is disconnected.
+1. **Multiple Screens**: If you use multiple monitors and move AgentConnect to a secondary screen, it may open off-screen if that monitor is disconnected.  
    **Solution**: Delete the `preferences.json` file in the application folder before restarting AgentConnect.
 
-2. **Help Window Minimization**: If you minimize the Help window and try to open it again, it may stay minimized.  
-   **Solution**: Restore the Help window manually.
+2. **Help Window Minimization**: If you minimize the Help window and try to open another help window (using `help` command, F1 or clicking the help option in the user interface), the original help window will still be minimized. There will be no new help window pop up.  
+   **Solution**: Restore the minimized Help window manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
