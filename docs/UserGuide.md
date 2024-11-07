@@ -111,12 +111,22 @@ Format: `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A client can have any number of tags (including 0)
+**Tips:** <br>
+
+* A client can have any number of tags (including 0).<br>
+
+* Names are automatically formatted for you (i.e natural name casing, name ordinals, excess spacing).<br>
+
+* Phone numbers can also take in additional info (i.e `(+XXX)` in front for country codes, `[Note]` behind for any notes).<br>
+
+* Phone numbers also allow up to 1 space between numbers to cater to your formatting style (e.g `123 45 678` and `1234 5678` allowed and recorded verbatim).<br>
 </box>
 
 Examples:
 * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/XYZ Co.`
+* `add n/jOhN   dOE xvii c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (This name is recorded as `John Doe XVII`)
+* `add n/John Doe c/ABC Inc. p/(+65) 987 654 32 [HP] e/johnd@example.com a/John street, block 123, #01-01` (This phone number is recorded exactly as  `(+65) 987 654 32 [HP]`)
 
 #### Listing all clients : `list`
 
