@@ -95,10 +95,7 @@ public class SortCommand extends Command {
             return 0;
         }
         if (isEitherTagNull(p1Tag, p2Tag)) {
-            Integer x = compareNullTagValues(p1Tag, p2Tag);
-            if (x != null) {
-                return x;
-            }
+            return compareNullTagValues(p1Tag, p2Tag);
         }
 
         int compareResult = 0;
@@ -134,19 +131,19 @@ public class SortCommand extends Command {
     private boolean isEitherTagNull(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
         return (p1Tag.get().tagValue == null || p2Tag.get().tagValue == null);
     }
+
     private boolean areBothTagsNull(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
         return (p1Tag.get().tagValue == null && p2Tag.get().tagValue == null);
     }
 
-    private Integer compareNullTagValues(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
+    private int compareNullTagValues(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
         if (areBothTagsNull(p1Tag, p2Tag)) {
             return 0;
         } else if (p1Tag.get().tagValue == null) {
             return 1;
-        } else if (p2Tag.get().tagValue == null) {
+        } else {
             return -1;
         }
-        return null;
     }
 
     private Optional<Tag> getTagByName(Person person) {
