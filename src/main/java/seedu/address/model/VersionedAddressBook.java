@@ -78,8 +78,8 @@ public class VersionedAddressBook extends AddressBook {
     /**
      * Clears all states from the Versioned Address Book.
      */
-    public void clear() {
-        addressBookStateList.clear();
+    public VersionedAddressBook clear() {
+        return new VersionedAddressBook(new AddressBook());
     }
 
     /**
