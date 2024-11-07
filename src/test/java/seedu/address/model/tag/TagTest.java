@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.delivery.Quantity;
 
 public class TagTest {
 
@@ -24,11 +23,9 @@ public class TagTest {
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
-        
         // blank tag
         assertFalse(Tag.isValidTagName("")); // empty string
         assertFalse(Tag.isValidTagName(" ")); // spaces only
-
         // invalid tag name
         assertFalse(Tag.isValidTagName("linke$")); // not alphanumeric
         assertFalse(Tag.isValidTagName("a".repeat(51))); // 51 characters
