@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-<img src="images/meddict_logo.png" alt="MedDict Logo" style="max-width: 200px; width: 100%; margin: 0" />
+<img src="images/meddict_user_guide_banner.png" alt="MedDict Logo" style="max-width: 200px; width: 100%; margin: 0" />
 ### About us
 
 Welcome to the **MedDict User Guide!** 🎉
@@ -21,6 +21,7 @@ With all that said, let's get you started on your journey towards a new peak lev
 
 If you would like to skip to any specific part of the User Guide, you can refer to the table below! 😊
 
+<img src="images/table_of_contents_banner.png" alt="MedDict Logo" style="max-width: 200px; width: 100%; margin: 0" />
 * Table of Contents
 {:toc}
 
@@ -37,8 +38,8 @@ This section is for users who are experienced in installing and using Java execu
 3. Copy the file to the folder you want to use as the _home folder_ for your MedDict.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![StartUpPage](images/StartUpPage.png)
+   A GUI similar to the below should appear in a few seconds. Note that the interface may vary slightly depending on the OS and the presence of data.<br>
+   ![StartUpPage](images/StartUpPage.png)<br>![img_1.png](img_1.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
