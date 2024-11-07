@@ -76,7 +76,8 @@ public class PersonCard extends UiPart<Region> {
      */
     @FXML
     private void handleOnClick() {
-        PersonDetailedView personDetailedView = new PersonDetailedView(person, isVisualsEnabled, mainWindow.resultDisplay);
+        PersonDetailedView personDetailedView = new PersonDetailedView(person, isVisualsEnabled,
+                                                    mainWindow.getResultDisplay());
         mainWindow.updatePersonDetailedView(personDetailedView);
     }
 }
