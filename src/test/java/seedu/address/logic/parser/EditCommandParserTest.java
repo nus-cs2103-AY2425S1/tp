@@ -273,17 +273,6 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTier_success() {
-        Index targetIndex = INDEX_THIRD_CLIENT;
-        String userInput = targetIndex.getOneBased() + TIER_EMPTY;
-
-        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withTier("").build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
     public void parse_remarkNewRemarkAppend_failure() {
         Index targetIndex = INDEX_FIRST_CLIENT;
         String userInput = targetIndex.getOneBased() + APPEND_REMARK_DESC_BOB + NEW_REMARK_DESC_BOB;

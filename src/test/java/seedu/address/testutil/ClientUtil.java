@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 
 import seedu.address.logic.commands.AddCommand;
@@ -37,8 +38,9 @@ public class ClientUtil {
         sb.append(PREFIX_ADDRESS + client.getAddress().value + " ");
         sb.append(PREFIX_JOB + client.getJob().value + " ");
         sb.append(PREFIX_INCOME + (String.valueOf(client.getIncome().value)) + " ");
-        sb.append(PREFIX_TIER + client.getTier().toParsableString() + " ");
+        sb.append(PREFIX_TIER + client.getTier().getValue() + " ");
         sb.append(PREFIX_REMARK + client.getRemark().value + " ");
+        sb.append(PREFIX_STATUS + client.getStatus().getValue() + " ");
         return sb.toString();
     }
 
@@ -53,9 +55,10 @@ public class ClientUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getJob().ifPresent(job -> sb.append(PREFIX_JOB).append(job.value).append(" "));
         descriptor.getIncome().ifPresent(income -> sb.append(PREFIX_INCOME).append(income.value).append(" "));
-        descriptor.getTier().ifPresent(tier -> sb.append(PREFIX_TIER).append(tier.toParsableString()).append(" "));
+        descriptor.getTier().ifPresent(tier -> sb.append(PREFIX_TIER).append(tier.getValue()).append(" "));
         descriptor.getNewRemark().ifPresent(newRemark -> sb.append(PREFIX_NEW_REMARK).append(newRemark.value)
                 .append(" "));
+        descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.getValue()).append(" "));
         return sb.toString();
     }
 

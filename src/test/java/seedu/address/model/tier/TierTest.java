@@ -20,12 +20,6 @@ public class TierTest {
     }
 
     @Test
-    public void constructor_emptyTierName_naTierReturned() {
-        Tier tier = new Tier("");
-        assertTrue(tier.equals(new Tier("NA")));
-    }
-
-    @Test
     public void isValidTierName() {
         // null tier name
         assertThrows(NullPointerException.class, () -> Tier.isValidTierName(null));

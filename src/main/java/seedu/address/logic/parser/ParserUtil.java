@@ -168,9 +168,6 @@ public class ParserUtil {
     public static Tier parseTier(String tier) throws ParseException {
         requireNonNull(tier);
         String trimmedTier = tier.trim();
-        if (tier.equals(Tier.TierEnum.NA.toString())) {
-            throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
-        }
         if (!Tier.isValidTierName(trimmedTier)) {
             throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
         }
