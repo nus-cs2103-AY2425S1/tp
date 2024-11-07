@@ -75,6 +75,37 @@ The details of what information can be stored for a vendor/event are as shown be
   * **Tags** (if applicable) : Metadata used to classify the event
 * Multiple events can be stored in EventTory.
 
+## Vendor & Event Fields
+
+The input fields of vendors and events have varying constraints and are as listed below. Note that leading and trailing whitespaces in inputs will be removed.
+
+### Name
+
+Names must start with an alphanumeric character and must not contain `/`.
+
+### Phone Number
+
+Phone numbers should only contain numbers, and it should be at least 3 digits long.
+
+### Description
+
+Descriptions can take in any characters but cannot be blank.
+
+### Date
+
+Date inputs can be in any of the following formats:
+1. `dd-MM-uuuu`
+2. `uuuu-MM-dd`
+3. `dd MMM uuuu`
+4. `dd MMMM uuuu`
+
+`uuuu` is equivalent to `yyyy` denoting the year in a date.
+
+### Tags
+
+Tags can contain alphanumeric characters, hyphens `-`, and underscores `_` only, but cannot be made up of only hyphens `-` and underscores `_`.<br>
+Tags also only accepts a **maximum** of 30 characters.
+
 ## Features
 
 <box type="info" seamless>
@@ -117,6 +148,10 @@ The details of what information can be stored for a vendor/event are as shown be
 
 <p>
 
+* The `view`, `edit` and `delete` commands support off-screen operations. Even when vendors/events are not currently displayed, they can still be selected by `view`, `edit` and `delete` commands.
+  * This is a feature, not a bug.
+<p>
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
@@ -153,7 +188,7 @@ Edits an existing vendor or event in EventTory.
 * At least one of the optional fields must be provided.
     * Editing an item but providing no new values is invalid.
 * The existing values will be updated to the input values.
-* The operation will succeed even if the specified vendor/event is not visible onscreen.
+* The operation will succeed even if the specified vendor/event is not visible on screen.
     * e.g. `edit v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be edited.
 * When editing tags, the existing tags of the vendor/event will be **overridden**.
     * Tags cannot be added cumulatively.
@@ -173,7 +208,7 @@ Deletes a vendor or an event from EventTory.
     * The index refers to the index number shown in the displayed event/vendor list respectively.
     * The index **must be a positive integer** 1, 2, 3, ...
     * The index for each vendor/event is relative and can change depending on previous operations.
-* The operation will succeed even if the specified vendor/event is not visible onscreen.
+* The operation will succeed even if the specified vendor/event is not visible on screen.
     * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion.
 * If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
 * If the current viewed vendor/event is deleted, the application will return you to the main list screen.
@@ -209,6 +244,8 @@ Views the details of a vendor or event.
   * The index refers to the index number shown in the displayed vendor/event list.
   * The index **must be a positive integer** 1, 2, 3, ...
 * The details page includes assigned events/vendors as well as a list of assignable events/vendors.
+* The operation will succeed even if the specified vendor/event is not visible on screen.
+  * e.g. `view v/2` can be run after `view v/1`. Even though the 1st vendor will not be visible when viewing the 2nd vendor, it can still be accessed and viewed.
 
 #### Examples:
 * `view v/2` will show the details of the 2nd vendor.
