@@ -8,10 +8,12 @@ SellSavvy helps independent sellers/drop-shipping business owners manage detail 
 It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
 
 ## Features
-- Add & delete customer information.
-- Add & delete order information for each customer.
+- Add, edit & delete customer information.
 - View full list of customers.
+- Add, edit & delete order information for each customer.
 - View full list of orders under each customer.
+- Mark orders as completed or revert them to pending status.
+- Filter orders by their status.
 
 ## Site Map
 - [Project website](ay2425s1-cs2103t-f14a-2.github.io/tp/)
