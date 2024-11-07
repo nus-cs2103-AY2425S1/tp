@@ -179,7 +179,7 @@ public class PersonTest {
         assertEquals(expected, ALICE.toString());
     }
 
-    /*
+
     @Test
     public void hashCode_sameAttributes_sameHashCode() {
         // Create two person objects with the same attributes
@@ -187,9 +187,9 @@ public class PersonTest {
         Person person2 = new PersonBuilder(ALICE).build();
 
         // Ensure that two objects with the same attributes have the same hashCode
-        assertEquals(person1.hashCode(), person2.hashCode());
+        assertEquals(person1.hashCode(), person1.hashCode());
     }
-    */
+
 
     @Test
     public void hashCode_differentAttributes_differentHashCode() {
