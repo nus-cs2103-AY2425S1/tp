@@ -11,12 +11,12 @@ public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS = "Remarks can take any values, "
             + "and must be at most 200 characters long.";
-
     // Validation regex to allow empty strings and up to 200 characters
     public static final String VALIDATION_REGEX = "^.{0,200}$"; // Accepts empty strings up to 200 chars
 
-    public final String value;
+    private static final String DEFAULT_REMARK = "None";
 
+    public final String value;
     /**
      * Constructs a {@code Remark}.
      *
@@ -37,7 +37,7 @@ public class Remark {
 
     @Override
     public String toString() {
-        return value.isEmpty() ? "No remark" : value;
+        return value;
     }
 
     @Override
@@ -50,5 +50,9 @@ public class Remark {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public String getRemarkValue() {
+        return this.value.isEmpty() ? DEFAULT_REMARK : this.value;
     }
 }
