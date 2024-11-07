@@ -28,6 +28,7 @@ public class Person {
     private final Optional<DateOfLastVisit> dateOfLastVisit;
     private final Optional<EmergencyContact> emergencyContact;
     private final Remark remark;
+    private final boolean hasFullViewToggled;
 
     /**
      * Every field must be present and not null.
@@ -44,6 +45,40 @@ public class Person {
         this.dateOfLastVisit = dateOfLastVisit;
         this.emergencyContact = emergencyContact;
         this.remark = remark;
+        this.hasFullViewToggled = false;
+    }
+
+    /**
+     * Constructor for creating an edited person.
+     */
+    public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address, Set<Tag> tags,
+                  Optional<DateOfLastVisit> dateOfLastVisit, Optional<EmergencyContact> emergencyContact,
+                  Remark remark, boolean hasFullViewToggled) {
+        requireAllNonNull(name, phone, email, address, tags, dateOfLastVisit, remark);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.dateOfLastVisit = dateOfLastVisit;
+        this.emergencyContact = emergencyContact;
+        this.remark = remark;
+        this.hasFullViewToggled = hasFullViewToggled;
+    }
+
+    /**
+     * Constructs an identical Person with view toggled.
+     */
+    private Person(Person personToView) {
+        this.name = personToView.name;
+        this.phone = personToView.phone;
+        this.email = personToView.email;
+        this.address = personToView.address;
+        this.tags.addAll(personToView.tags);
+        this.dateOfLastVisit = personToView.dateOfLastVisit;
+        this.emergencyContact = personToView.emergencyContact;
+        this.remark = personToView.remark;
+        this.hasFullViewToggled = !personToView.hasFullViewToggled();
     }
 
     public Name getName() {
@@ -129,6 +164,20 @@ public class Person {
 
     public Optional<EmergencyContact> getEmergencyContact() {
         return emergencyContact;
+    }
+
+    /**
+     * Returns whether the detailed view of Person is toggled.
+     */
+    public boolean hasFullViewToggled() {
+        return hasFullViewToggled;
+    }
+
+    /**
+     * Toggles the view of the person.
+     */
+    public Person getToggledViewPerson() {
+        return new Person(this);
     }
 
     /**
