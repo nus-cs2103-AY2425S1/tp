@@ -143,7 +143,7 @@ Parameters:
 - `e/EMAIL`: Must be a valid email address, and must not be blank.
 - `com/COMPANY`: Must be alphanumeric, and must not be blank.
 - `[t/TAG]`: Must be alphanumeric, and must be between 1 and 50 (inclusive) characters long.
-- `[pro/PRODUCT]`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
+- `[pro/PRODUCT]`: Must be alphanumeric, can include spaces, and must be between 1 and 50 (inclusive) characters long.
 
 **Tip:** A supplier can have any number of tags and products (including 0)
 
@@ -232,7 +232,7 @@ Format: `find -s n/NAME com/COMPANY pro/PRODUCT`
 Parameters:
 
 - `n/NAME`: Must be alphanumeric, and must not be blank.
-- `on/COMPANY`: Must be alphanumeric, and must not be blank.
+- `com/COMPANY`: Must be alphanumeric, and must not be blank.
 - `pro/PRODUCT`: Must be alphanumeric, can include spaces but must not start with a space, and must be between 1 and 50 (inclusive) characters long.
 
 <box type="warning" seamless>
