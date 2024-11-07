@@ -20,7 +20,7 @@ BlitzBiz is capable of tracking multiple modes of contact and schedule related m
 1. Ensure you have Java `17` or above installed in your Computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)).
 For Mac users, please ensure you have this specific distribution, which can be installed by following this guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your BlitzBiz application.
 
