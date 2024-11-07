@@ -259,36 +259,34 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ## **Appendix: Requirements**
 
-## Product scope
+### Product scope
 
-Product name: Teacher’s Pet
-
-Target user profile: Teaching assistants (NUS)
+**Target user profile**: Teaching assistants (NUS)
 
 Teaching assistants in the National University of Singapore (NUS) who manage multiple students' information and need an
 efficient way to track academic progress, contact details, and other relevant data for each student.
 
-Value proposition:
+**Value proposition**:
 
 Teacher’s Pet streamlines the management of student information by consolidating contact details, grades,
 and additional pertinent data into one accessible platform. This efficient tool simplifies tracking student
 performance and communication, enhancing organisational efficiency for teaching assistants.
 
-## User stories
+### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                  | So that I can…​                                                             |
-| -------- |--------------------------------------------|-------------------------------|-----------------------------------------------------------------------------|
-| `* * *`  | TA                                         | add students to the list      | handle new students and have a virtual representation of them               |
-| `* * *`  | TA                                         | delete students from the list | remove students who dropped out of the class                                |
-| `* * *`  | TA                                         | modify a student's details    | rectify any mistakes found in the student's details                         |
-| `* * *`  | TA                                         | find a student by name or ID  | locate details of the student without having to go through the entire list  |
-| `* * *`  | TA                                         | view a student's details      | view the student's details to understand him/her better and contact him/her |
-| `* *`    | TA                                         | track student's attendance    | award credit appropriately                                                  |
-| `*`      | user with many persons in the address book | sort persons by name          | locate a person easily                                                      |
+| Priority | As a …​                                  | I want to …​                  | So that I can…​                                                             |
+| -------- |------------------------------------------|-------------------------------|-----------------------------------------------------------------------------|
+| `* * *`  | TA                                       | add students to the list      | handle new students and have a virtual representation of them               |
+| `* * *`  | TA                                       | delete students from the list | remove students who dropped out of the class                                |
+| `* * *`  | TA                                       | modify a student's details    | rectify any mistakes found in the student's details                         |
+| `* * *`  | TA                                       | find a student by name or ID  | locate details of the student without having to go through the entire list  |
+| `* * *`  | TA                                       | view a student's details      | view the student's details to understand him/her better and contact him/her |
+| `* *`    | TA                                       | track student's attendance    | award credit appropriately                                                  |
+| `*`      | TA with many persons in the address book | sort persons by name          | locate a person easily                                                      |
 
-## Use cases
+### Use cases
 
 (For all use cases below, the System is Teacher's Pet (TP) and the Actor is the Teaching Assistant (TA), unless specified otherwise)
 
@@ -299,21 +297,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. TA enters student details
 2. TP shows the new student record
-Use case ends.
+
+    Use case ends.
 
 **Extensions:**
 
 - 1a. TA does not enter enough data for TP to add a student
   - 1a1. TP informs TA of the missing data required
+
     Use case resumes from step 1.
 
 
 - 1b. TP detects that data is entered in an incorrect format
   - 1b1. TP informs TA of the correct format
-  Use case resumes from step 1.
+
+    Use case resumes from step 1.
 
 
-**Use Case: UC2 - Delete student**
+**Use Case: UC2 - Delete student**  
 Preconditions: There is some student data available
 
 **MSS:**
@@ -322,34 +323,39 @@ Preconditions: There is some student data available
 2. TP shows all students based on specified view
 3. TA deletes students
 4. TP shows new list with the student deleted
-Use case ends.
+
+    Use case ends.
 
 **Extensions:**
 
 - 3a. TA does not enter enough information for TP to delete a student
   - 3a1. TP informs TA of the missing data required
-Use case resumes from step 1.
+  
+    Use case resumes from step 1.
 
 
 - 3b. TP detects that data is entered in an incorrect format
   - 3b1. TP informs TA of the correct format
-  Use case resumes from step 1.
+
+    Use case resumes from step 1.
 
 
-**Use Case: UC3 - List student**
+**Use Case: UC3 - List Student**  
 Preconditions: Installed the application
 
 **MSS:**
 
 1. TA requests a list of students
 2. TP shows a list of all student data
-Use case ends.
+
+    Use case ends.
 
 **Extensions:**
 
 - 2a. There is no student data found in the list
   - 2a1. TP shows an empty list of students
-  Use case ends.
+
+    Use case ends.
 
 
 **Use Case: UC4 - Find Student**
@@ -357,35 +363,39 @@ Use case ends.
 **MSS:**
 
 1. TA enters the find command with at least one valid search parameter (e.g., /n <Name>, /id <Student ID>).
-2. Teacher’s Pet (TP) validates the input parameters.
+2. TP validates the input parameters.
 3. TP searches the student database for records matching all the specified criteria.
 4. TP displays a list of students matching the search criteria.
-Use case ends.
+
+    Use case ends.
 
 **Extensions:**
 
 - 1a. TA does not provide any search parameters.
-  - 1a1. TP displays an error message: "At least one search parameter must be provided."
-  Use case resumes at step 1.
+  - 1a1. TP displays an error message.
+  
+    Use case resumes at step 1.
 
 
 - 2a. TA provides search parameters in a wrong format
   - 2a1. TP displays an error message and informs TA of the correct format
-  Use case resumes at step 1.
+  
+    Use case resumes at step 1.
 
 
 - 4a. No students match the criteria.
-  - 4a1. TP displays a message:"No students found matching the criteria."
-  Use case ends.
+  - 4a1. TP displays a message.
+  
+    Use case ends.
 
-## Non-functional requirements
+### Non-functional requirements
 
 1. The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
 2. The system works on Linux, Mac and Windows.
 3. The system shall support at least 100 concurrent users without degradation in performance.
 4. The system shall respond to user queries within 2 seconds under normal load conditions.
 
-## Glossary
+### Glossary
 
 - **Teaching Assistant (TA)**: An individual, sometimes also a student, in NUS who is in charge of instructing students for
 a particular module, course or program, usually in small classes of less than 30 students.
@@ -394,9 +404,7 @@ a particular module, course or program, usually in small classes of less than 30
 - **Student**: An individual enrolled in a module, course or program in NUS who is receiving instruction and evaluation
 from educators or teaching assistants.
 
-
-- **Student Profile**: A collection of information about an individual student, including name, contact information, year,
-major and academic records.
+---
 
 ## **Appendix: Instructions for manual testing**
 
@@ -413,7 +421,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file 
+   
+        Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -422,16 +432,44 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a student
 
-### Deleting a person
+1. Adding a student with minimal information
+   1. Test case: `add n/ Bob id/ A1234567L`
+    
+        Expected: Details of student added shown in the status message. List updates to show the new student.
+   2. Test case: `add n/ Bob`
+        
+        Expected: Not allowed. Error message on correct format shown in status message.
+
+2. Adding a student with all information
+   1. Test case: `add n/ Bob id/ A1234567P nid/ e1234567 m/ Computer Science y/ 2 g/ Group 1`
+   
+        Expected: Details of student added shown in the status message. List updates to show the new student.
+
+### Editing a student
+
+1. Adding information to a student
+   1. Prerequisites: List all persons using the `list` command. List contains a student.
+   1. Test case: `edit 1 y/ 5`
+   
+        Expected: First student on the list now has a field showing 'Year 5'
+
+2. Removing information from a student
+   1. Prerequisites: First student in the list has a year field (Use above case to achieve this). List all persons using the `list` command. List contains a student.
+   
+   2. Test case: `edit 1 y/`
+   
+        Expected: First student on the list has the year field removed
+   
+### Deleting a student
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
@@ -439,12 +477,36 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Randomly selecting a student
+
+1. Randomly displaying a student
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
+   2. Test case: `random`
+   
+        Expected: Success message shown in the status message. List updates to display only the random student.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: data file is not empty.
+   2. Delete the name in the `name` of the first student (Should be left with `"name" : ""`)
+   3. Re-launch the app by double-clicking the jar file or running from the terminal
 
-1. _{ more test cases …​ }_
+        Expected: The list is empty.
+
+---
+
+## **Appendix: Effort**
+
+- Commands are made more flexible in general, requiring less strict command syntaxes as compared to AB3. This enhanced the ease of using the app.
+- There were significant challenges in adjusting validation for the various commands. What inputs to allow and reject was constantly being discussed with an end result of prioritising user freedom while ensuring inputs remain relatively reasonable.
+- There were difficulties agreeing on the UI which went through multiple iterations of tweaking before resulting in the current NUS-themed color palette and which is in line with the app's intended usage.
+
+---
+
+## **Appendix: Planned Enhancements**
+
+**Team size: 4**
+
