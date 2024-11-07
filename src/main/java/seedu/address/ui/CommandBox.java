@@ -204,7 +204,7 @@ public class CommandBox extends UiPart<Region> {
 
         // To handle tags with multiple words when there is a tag error
         if (isTagError) {
-            commandTextField.selectRange(errorIndexStart, errorIndexStart + tagLength + 1);
+            commandTextField.selectRange(errorIndexStart, errorIndexStart + tagLength + 2);
         } else {
             errorLength = commandText.substring(errorIndexStart).indexOf(" ");
             commandTextField.selectRange(errorIndexStart, errorIndexStart + errorLength);
