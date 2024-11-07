@@ -33,6 +33,8 @@ public class UploadCommand extends Command {
     public static final String MESSAGE_UPLOAD_CANCELLED = "Cancelled profile picture upload for Person: %1$s";
     public static final String MESSAGE_UPLOAD_ERROR = "Error getting profile picture. "
             + "Did you ensure it is a .png file?";
+    public static final String MESSAGE_UPLOAD_NOT_SUPPORTED = "Sorry! This feature is only currently "
+            + "supported on Windows! Support for other OSes will come soon!";
     private final Index targetIndex;
 
     /**
@@ -50,6 +52,10 @@ public class UploadCommand extends Command {
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (!System.getProperty("os.name").startsWith("Windows")) {
+            throw new CommandException(MESSAGE_UPLOAD_NOT_SUPPORTED);
         }
 
         Person personToUpload = lastShownList.get(targetIndex.getZeroBased());
