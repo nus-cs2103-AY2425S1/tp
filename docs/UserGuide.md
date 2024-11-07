@@ -351,7 +351,6 @@ Deletes a patient and his/her details from MediBase3.
 > * Deletes the patient with the specified `NRIC` from MediBase3.
 > * The `NRIC` provided must be the full NRIC of the patient to be deleted.
     >   - e.g. `S1234567A` (not partial, like `S123`).
-> * You can delete a patient even if they’re not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for NRIC constraints.
 
 **Example**:
@@ -380,7 +379,6 @@ Edits an existing patient details in MediBase3.
 > * **At least one** of the optional fields must be provided. 
 >   - e.g. `edit S1234567A` is invalid.
 > * Existing values will be updated to the given input values.
-> * You can edit a patient's details even if they’re not currently displayed in the Patient List Panel. The panel will refresh to show all patients after the patient's details have been edited.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
@@ -408,7 +406,6 @@ Schedules an appointment for a patient in MediBase3.
 > :information_source: **Notes:**
 >
 > * Adds an appointment with the specified `APPOINTMENT_NAME`, `APPOINTMENT_DATE`, and `APPOINTMENT_TIME` for the patient identified by `NRIC`.
-> * You can add an appointment even if the patient is not currently displayed in the Patient List Panel. The panel will refresh to display all patients after adding the appointment.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 
@@ -460,7 +457,6 @@ Deletes a scheduled appointment from MediBase3.
 > :information_source: **Notes:**
 >
 > * Only `NRIC`, `APPOINTMENT_DATE`, and `APPOINTMENT_TIME` are required; `APPOINTMENT_NAME` is not needed.
-> * If the patient is not currently displayed in the Patient List Panel, the panel will refresh to show all patients after the appointment is deleted.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 Example:
@@ -485,7 +481,6 @@ Adds one or more medical conditions to an existing patient in MediBase3.
 > * **At least one** `CONDITION` must be provided. 
 >   - e.g. `addMedCon i/S1234567A` is invalid.
 > * Each medical condition can only be added once per patient.
-> * You can add a medical condition even if the patient is not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
@@ -517,7 +512,6 @@ Deletes one or more medical conditions from an existing patient in MediBase3.
 > * **At least one** `CONDITION` must be provided. 
 >   - e.g. `delMedCon i/S1234567A` is invalid.
 > * The patient must have the specified condition for it to be removed; otherwise, an error message will display.
-> * You can delete a medical condition even if the patient is not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
@@ -549,7 +543,6 @@ Adds one or more allergies to an existing patient in MediBase3.
 > * **At least one** `ALLERGY` must be provided. 
 >   - e.g. `addAllergy i/S1234567A` is invalid.
 > * Each allergy can only be added once per patient.
-> * You can add an allergy even if the patient is not currently displayed in the Patient List Panel.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
@@ -580,7 +573,7 @@ Deletes one or more allergies from an existing patient in MediBase3.
 > * Deletes the specified `ALLERGY` for the patient identified by `NRIC` in MediBase3.
 > * **At least one** `ALLERGY` must be provided. 
 >   - e.g. `delAllergy i/S1234567A` is invalid.
-> * The patient must have the specified `ALLERGY` for it to be removed; otherwise, an error message will display.
+> * The patient must have the specified `ALLERGY` for it to be removed; otherwise, an error message will be displayed.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
 **Example**:
@@ -610,7 +603,6 @@ Sets Priority to an existing patient in MediBase3.
 > :information_source: **Notes:**
 >
 > * Sets Priority to the patient with the specified `NRIC` in MediBase3.
-> * You can set priority for a patient even if they’re not currently displayed in the Patient List Panel. The panel will refresh to show all patients after the priority has been set.
 > * On default Patient has been set to `NONE` Priority level.
 > * Refer to [Parameter Details](#parameter-details) for constraints on each parameter.
 
