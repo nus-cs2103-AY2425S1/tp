@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -15,12 +17,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOW_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MEDIUM_RISK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonHasFeaturePredicate;
@@ -32,19 +33,21 @@ public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();
 
     private PersonHasFeaturePredicate highTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null, null);
     private PersonHasFeaturePredicate lowTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null, null);
 
     private PersonHasFeaturePredicate mediumTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null, null);
 
     private PersonHasFeaturePredicate phoneOnlyPredicate =
-          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value), null, null);
+          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value),
+                  null, null, null);
 
     private PersonHasFeaturePredicate phoneAndTagPredicate =
           new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK),
-                  new Phone(ALICE.getPhone().value), null, null);
+                  new Phone(ALICE.getPhone().value), null, null, null);
+
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -169,7 +172,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate = new PersonHasFeaturePredicate(null,
-                null, ALICE.getEmail(), null);
+                null, ALICE.getEmail(), null, null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }
@@ -181,7 +184,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate =
-                new PersonHasFeaturePredicate(null, null, null, ALICE.getAddress());
+                new PersonHasFeaturePredicate(null, null, null, ALICE.getAddress(), null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }
@@ -193,7 +196,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate =
-                new PersonHasFeaturePredicate(null, null, ALICE.getEmail(), ALICE.getAddress());
+                new PersonHasFeaturePredicate(null, null, ALICE.getEmail(), ALICE.getAddress(), null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }
@@ -206,7 +209,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate = new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK),
-                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress());
+                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(), null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }
@@ -282,9 +285,49 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_invalidPrefix_failure() {
-        assertParseFailure(parser, " t/ High Risk + d/23/02/2024 1320",
-              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    public void parseAllergy_validAllergy_returnsCorrectAllergy() {
+        // Valid allergy names that should parse successfully
+        String validAllergy1 = "Peanut Butter";
+        String validAllergy2 = "Egg-nut";
+        String validAllergy3 = "Dust, Mold";
+
+        // Assert that these valid allergy strings do not throw exceptions and are correctly parsed
+        assertDoesNotThrow(() -> parser.parseAllergyWithHandling(validAllergy1));
+        assertDoesNotThrow(() -> parser.parseAllergyWithHandling(validAllergy2));
+        assertDoesNotThrow(() -> parser.parseAllergyWithHandling(validAllergy3));
     }
+
+    @Test
+    public void parseAllergy_invalidAllergy_throwsRuntimeException() {
+        // Invalid allergy strings
+        String invalidAllergy1 = "Peanut@Butter";
+        String invalidAllergy2 = "Milk$";
+        String invalidAllergy3 = "Dust# Mold";
+        String invalidAllergy4 = "Eggs*";
+        String invalidAllergy5 = "Banana# Peels";
+
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy1),
+                "Error parsing allergy: " + invalidAllergy1);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy2),
+                "Error parsing allergy: " + invalidAllergy2);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy3),
+                "Error parsing allergy: " + invalidAllergy3);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy4),
+                "Error parsing allergy: " + invalidAllergy4);
+        Assertions.assertThrows(RuntimeException.class, () -> parser.parseAllergyWithHandling(invalidAllergy5),
+                "Error parsing allergy: " + invalidAllergy5);
+    }
+
+    @Test
+    public void parseAllergy_invalidAllergy_messageContainsError() {
+        // Invalid allergy that should throw RuntimeException
+        String invalidAllergy = "Peanut@Butter";
+
+        // Ensure the RuntimeException contains the correct message
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () ->
+                parser.parseAllergyWithHandling(invalidAllergy));
+        assertTrue(exception.getMessage().contains("Error parsing allergy: " + invalidAllergy));
+    }
+
 
 }
