@@ -4,8 +4,12 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.geometry.Insets?>
 
-<GridPane fx:id="view" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:id="view" xmlns:fx="http://javafx.com/fxml/1" vgap="10.0">
+    <padding>
+        <Insets top="15" right="10" bottom="10" left="5" />
+    </padding>
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" maxWidth="120.0" />
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="300.0" />
