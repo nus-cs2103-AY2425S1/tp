@@ -43,7 +43,7 @@ benefits of a Graphical User Interface (GUI).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F11-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your ClinicBuddy.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clinicbuddy.jar` command to run
    the application.<br>
@@ -113,15 +113,16 @@ benefits of a Graphical User Interface (GUI).
 
 ### Viewing help : `help`
 
+Format: `help`
+
 The help command provides guidance on using ClinicBuddy’s features, making it easier for users to navigate and utilize the app.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
 
-### Adding a person: `add`
+### Adding a patient: `add`
 
-Adds a person to the address book.
+Adds a patient to the address book.
 
 Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
 
@@ -138,7 +139,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 * Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
 
 **Tips to Note:** 🚨
-- A person can have any number of tags (including 0).
+- A patient can have any number of tags (including 0).
 - There is a unique tag for Blood Type, Try putting a tag named 'A+'
 
 Examples:
@@ -146,73 +147,73 @@ Examples:
 * `add n/John Doe a/36 g/M i/S1234567Z p/98765432 e/johnd@example.com h/311, Clementi Ave 2, #02-25 apt/02/10/2024 18:30 t/Patient`
 * `add n/Betsy Crowe a/42 g/F i/T1235678E apt/02-10-2024 18:30 t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BloodDonor`
 
-### Updating a person : `update`
+### Updating a patient : `update`
 
-Updates an existing person in the address book by searching for their index or NRIC.
+Updates an existing patient in ClinicBuddy by searching for their index or NRIC.
 
 Format:
 `update INDEX [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​ `  
 OR `update NRIC [n/NAME] [a/AGE] [g/GENDER] [i/NRIC] [p/PHONE] [e/EMAIL] [h/ADDRESS] [apt/APPOINTMENT] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX` or `NRIC`. The index and NRIC refers to the index number and NRIC shown in the displayed person list respectively.
+* Edits the patient at the specified `INDEX` or `NRIC`.
+* The index and NRIC refers to the index number and NRIC shown in the displayed patient list respectively.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the patient will be removed (i.e adding of tags is not cumulative).
 * If NRIC is being updated, the updated NRIC must be unique.
-* You can remove all the person’s tags by typing `t/` without
-  specifying any tags after it.
+* You can remove all the patient’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
-* `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st person to be `91234567`
+* `update 1 p/91234567 e/johndoe@example.com` Updates the phone number and email address of the 1st patient to be `91234567`
   and `johndoe@example.com` respectively.
-* `update 2 n/Betsy Crower t/` Updates the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `update 2 n/Betsy Crower t/` Updates the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-* `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the person whose NRIC is 'S1234567Z' to be `91234567`
+* `update S1234567Z p/91234567 e/johndoe@example.com` Updates the phone number and email address of the patient whose NRIC is 'S1234567Z' to be `91234567`
   and `johndoe@example.com` respectively.
 
-### Deleting a person : `delete`
+### Deleting a patient : `delete`
 
-Deletes the specified person from the address book either by NRIC or index on the patient record.
+Deletes the specified patient from ClinicBuddy either by **NRIC** or **index** on the patient record.
 
 #### Deleting a patient by NRIC:
 
 Format: `delete NRIC`
 
-* Deletes the person that has the specified `NRIC`.
-* The NRIC refers to the NRIC shown in the displayed person list.
+* Deletes the patient that has the specified `NRIC`.
+* The NRIC refers to the NRIC shown in the displayed patient list.
 * The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
 
 Examples:
 
 * `list` followed by `delete S1234567Z` deletes the patient that has NRIC of 'S1234567Z' in the list.
-* `find Betsy` followed by `delete S2345678E` deletes the person with 'S2345678E' in the results of the `find` command.
+* `find Betsy` followed by `delete S2345678E` deletes the patient with 'S2345678E' in the results of the `find` command.
 
 #### Deleting a patient by index:
 
 Format: `delete Index`
 
-* Deletes the person at the specified `Index`.
-* The Index refers to the person's position in the displayed person list.
+* Deletes the patient at the specified `Index`.
+* The Index refers to the patient's position in the displayed patient list.
 * The Index **must be a positive whole number greater than one and no larger than the size of the list.**
 
 Examples:
 
 * `list` followed by `delete 1` deletes the first patient in the list.
-* `find Betsy` followed by `delete 1` deletes the first person in the results of the `find` command.
+* `find Betsy` followed by `delete 1` deletes the first patient in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from ClinicBuddy.
 
 Format: `clear`
 
-### Listing all persons : `list`
+### Listing all patients : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all patients in ClinicBuddy.
 
 Format: `list`
 
-### Locating persons: `find`
+### Locating patients: `find`
 
 `find` allows you to find patient records by NRIC or name.
 
@@ -223,8 +224,7 @@ Format: `find NRIC`
 * The search is case-insensitive. e.g `s1234567z` will match `S1234567Z`
 * The NRIC must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.
 * In a single command, only one record with the given NRIC can be found. e.g. `find S1234567Z T7654321Z` does not work
-  as it
-  attempts to find 2 records containing the given NRICs.
+  as it attempts to find 2 records containing the given NRICs.
 * Only full NRICs will be matched e.g. `S12345` will not match `S1234567Z`
 
 Example:
@@ -243,7 +243,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -252,13 +252,13 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Finding all persons with appointments on a specific date : `bookings`
+### Finding all patients with appointments on a specific date : `bookings`
 
-Finds all persons with appointments on the specified date.
+Finds all patients with appointments on the specified date.
 
 Format: `bookings DATE`
 
-* Finds all persons with appointments on `DATE`
+* Finds all patients with appointments on `DATE`
 * `DATE` has to be of the format `dd/MM/yyyy` OR `dd-MM-yyyy` OR `dd MM yyyy`
 
 Examples:
@@ -269,25 +269,25 @@ Examples:
 
 ### Deleting an appointment : `deleteappt`
 
-Deletes the specified person from the address book.
+Deletes the specified patient from ClinicBuddy.
 
 Format: `deleteappt NRIC /d dd-mm-yyyy HH:mm`
 
-* Removes the appointment scheduled at the specified date and time for the person identified by the given `NRIC`.
-* The NRIC refers to the unique identifier displayed in the current person list.
+* Removes the appointment scheduled at the specified date and time for the patient identified by the given `NRIC`.
+* The NRIC refers to the unique identifier displayed in the current patient list.
 * The NRIC **must start with 'S', 'T', 'F','G' or 'M', have 7 digits, and end with a letter.**
 
 Example:
-* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the person identified by the NRIC s1234567z.
+* `deleteappt s1234567z 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient identified by the NRIC s1234567z.
 
 Format: `deleteappt Index /d dd-mm-yyyy HH:mm` 
 
-* Removes the appointment scheduled at the specified date and time for the person at the given Index.
-* The Index refers to the person’s position in the displayed list.
+* Removes the appointment scheduled at the specified date and time for the patient at the given Index.
+* The Index refers to the patient’s position in the displayed list.
 * The Index **must be a positive whole number greater than one and no larger than the size of the list.**
 
 Example:
-* `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the person at index 1 of the displayed list.
+* `deleteappt 1 01-01-2024 12:12` deletes the appointment on January 1, 2024, at 12:12 PM for the patient at index 1 of the displayed list.
 
 ### Updating Operating Hours : `hours`
 
@@ -307,16 +307,16 @@ Examples:
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to
+ClinicBuddy data are saved in the hard disk automatically after any command that changes the data. There is no need to
 save manually.
 
 ### Editing the data file
 
-- AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. 
+- ClinicBuddy data are saved automatically as a JSON file `[JAR file location]/data/clinicbuddy.json`. 
 - Advanced users are welcome to update data directly by editing that data file. 
-- If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. 
+- If your changes to the data file makes its format invalid, ClinicBuddy will discard all data and start with an empty data file at the next run. 
 - Hence, it is recommended to take a backup of the file before editing it.
-- Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
+- Furthermore, certain edits can cause ClinicBuddy to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). 
 - Therefore, edit the data file only if you are confident that you can update it correctly.
 
 
@@ -350,7 +350,7 @@ Format: `backup [DESCRIPTION]`
 #### **Automated Backup:** 🚨
 - Whenever a patient record is deleted or cleared, ClinicBuddy automatically creates a backup of all patient records before the deletion. 
 - This helps to ensure that no data is permanently lost in case of an accidental deletion.
-- Backups are stored in the same location as the manual backup whicch is the /backups/ folder within the application directory.
+- Backups are stored in the same location as the manual backup which is the /backups/ folder within the application directory.
   ```
   0_delete_John Doe_2024-10-30_18-05-29-745.json
   ```
