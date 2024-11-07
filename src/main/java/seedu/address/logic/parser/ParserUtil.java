@@ -12,7 +12,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Diagnosis;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Medication;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
+import seedu.address.model.person.Ward;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
