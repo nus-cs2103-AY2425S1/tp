@@ -17,6 +17,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.core.index.Index;
+import seedu.internbuddy.logic.Messages;
 import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.ModelManager;
@@ -53,7 +54,7 @@ public class WithdrawCommandTest {
         CommandResult result = withdrawCommand.execute(model);
 
         assertEquals(String.format(WithdrawCommand.MESSAGE_WITHDRAW_APPLICATION_SUCCESS,
-            applicationToWithdraw, company.getName()), result.getFeedbackToUser());
+            Messages.format(applicationToWithdraw), company.getName()), result.getFeedbackToUser());
     }
 
     @Test

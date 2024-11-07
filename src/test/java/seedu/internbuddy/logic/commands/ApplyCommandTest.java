@@ -32,7 +32,7 @@ public class ApplyCommandTest {
         CommandResult result = applyCommand.execute(model);
 
         Name firstCompanyName = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased()).getName();
-        assertEquals(String.format(ApplyCommand.MESSAGE_SUCCESS, firstCompanyName, validApplication),
+        assertEquals(String.format(ApplyCommand.MESSAGE_SUCCESS, firstCompanyName, Messages.format(validApplication)),
                 result.getFeedbackToUser());
     }
     @Test
