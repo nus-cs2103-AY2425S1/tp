@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 public class DateTime {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should be in the format dd-MM-yyyy HH:mm and must not be blank.";
+            "DELIVERY_DATE_TIME should be in the format dd-MM-yyyy HH:mm and must not be blank.";
 
     public static final DateTimeFormatter FORMATTER_TIME =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
