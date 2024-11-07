@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# UniLink Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -175,7 +175,7 @@ The optional fields allow users to include more detailed information, making the
 #### Key Components and Operations
 
 * **Parser**
-  * The `Parser` component processs the `add` command string to extract required and optional fields.
+  * The `Parser` component processes the `add` command string to extract required and optional fields.
   * It uses prefixes (`n/`, `ct/`, `h/`, etc.) to correctly identify each piece of data and verify that required fields 
   (`NAME`, `CONTACT_TYPE` and one of `TELEGRAM_HANDLE`, `PHONE_NUMBER`, `EMAIL`) are present. If any required field is missing, 
   an error is raised, prompting the user to provide the necessary information.
