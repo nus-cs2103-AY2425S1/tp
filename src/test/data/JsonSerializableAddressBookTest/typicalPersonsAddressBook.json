@@ -38,7 +38,7 @@
   }, {
     "id": 4,
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822240",
     "email" : "werner@example.com",
     "address" : "michegan ave, 878777",
     "hours" : "5",
@@ -47,7 +47,7 @@
   }, {
     "id": 5,
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824270",
     "email" : "lydia@example.com",
     "address" : "little tokyo, 123456",
     "hours" : "6",
@@ -55,7 +55,7 @@
   }, {
     "id": 6,
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824420",
     "email" : "anna@example.com",
     "address" : "4th street, 897978",
     "hours" : "7",
