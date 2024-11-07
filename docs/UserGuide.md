@@ -46,11 +46,11 @@ Action | Format (with examples)
     - [For macOS](https://www.youtube.com/watch?v=GspNQbJLfag) (Watch from 2:23 onwards)
     - [For Linux](https://www.youtube.com/watch?v=DVD9DIxs9Lo) (Watch full video)
 
-    A GUI similar to the below should appear in a few seconds. Note how the app will initially contain some sample data.<br>
+    A GUI similar to that below should appear in a few seconds. Note how the app will initially contain some sample data.<br>
    
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press _Enter_ to execute it. e.g. typing `help` and pressing _Enter_ will open the help window.<br>
    Here are some example commands you can try out:
 
    * `list`: Lists all contacts.
