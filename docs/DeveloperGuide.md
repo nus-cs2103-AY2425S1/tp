@@ -400,19 +400,19 @@ Checks if the identifier matches the valid format (e.g., positive integer, name,
 
 ---
 
-#### **UC004: Filter contacts**
+#### **UC004: Find contacts**
 
 **MSS**
 
-1. User requests to filter contacts by job code or tag.
-2. System validates the filter criteria.
-3. System retrieves and displays the filtered contacts matching the job code or tag.
+1. User requests to find contacts by name, phone number, email, job code, tag, remark or a combination of some of them.
+2. System validates the find criteria.
+3. System retrieves and displays the contacts matching the criteria.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The filter criteria are invalid (e.g., tag not recognized or job code too long).
+* 2a. The find criteria are invalid (e.g., tag not recognized or job code too long).
 
     * 2a1. System shows an error message.
 
