@@ -21,9 +21,6 @@ public class PriorityCommand extends Command {
     public static final String MESSAGE_SUCCESS_SET = "Priority level %d successfully set for %s";
     public static final String MESSAGE_INVALID_PATIENT_ID =
             "Invalid patient ID. Please enter a valid patient identifier.";
-    public static final String MESSAGE_INVALID_PRIORITY_LEVEL =
-            "Invalid priority level. Please enter 1, 2, or 3 as the priority level.";
-
     private static final int DEFAULT_PRIORITY_LEVEL = 3;
 
     private final int index;
