@@ -44,15 +44,15 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 ## Summary of Features
 ### Command summary
 
-| Action                                                 | Format, Examples                                                                                                                                                          |
-|--------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-contact-add)**                       | `add n/NAME th/TELEGRAM_HANDLE ss/STUDENT_STATUS e/EMAIL r/ROLE…​` <br> e.g., `add n/James Ho th/jamesho123 ss/undergraduate 3 e/jamesho@example.com r/Admin r/President` |
-| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                                   |
-| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                       |
-| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                    |
-| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                      |
-| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                                    |
-| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                                    |
+| Action                                                 | Format, Examples                                                                                                                                                                        |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-contact-add)**                       | `add n/NAME th/TELEGRAM_HANDLE ss/STUDENT_STATUS e/EMAIL r/ROLE…​ [nn/NICKNAME]` <br> e.g., `add n/James Ho th/jamesho123 ss/undergraduate 3 e/jamesho@example.com r/Admin r/President` |
+| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                                                 |
+| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                     |
+| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                  |
+| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                                    |
+| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                                                  |
+| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                                                  |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,7 +94,7 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-This also prompts the user to do `help [COMMAND_WORD]` where [COMMAND_WORD] refers to:
+This also prompts the user to do `help [COMMAND_WORD]` where COMMAND_WORD refers to:
 * `add`
 * `list`
 * `edit`
@@ -110,8 +110,7 @@ From this, the user can get quick reminder on how to use the various commands wi
 Adds a contact to the address book. (labels do not need to be in order, NICKNAME is optional)
 
 Format:
-* `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE nn/NICKNAME`
-* `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE`
+* `add n/NAME th/TELEGRAM_HANDLE e/EMAIL s/STUDENT_STATUS r/ROLE…​ [nn/NICKNAME]`
 
 <box type="tip" seamless>
 
@@ -126,8 +125,8 @@ Format:
 </box>
 
 Examples:
-* `add n/John Doe th/johndoe e/johnd@example.com s/undergraduate 3 r/Admin r/President nn/altName`
-* `add n/Betsy Crowe th/betsycrowe e/betsycrowe@example.com s/masters r/President r/Admin`
+* `add n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/altName`
+* `add n/Betsy Crowe th/betsycrowe e/betsycrowe@example.com ss/masters r/President r/Admin`
 
 ### Listing all contacts: `list`
 
@@ -145,7 +144,7 @@ Possible example of slight variations:
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE] [nn/NICKNAME]…​`
+Format: `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
