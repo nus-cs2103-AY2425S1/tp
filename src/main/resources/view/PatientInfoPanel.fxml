@@ -88,7 +88,7 @@
                            </VBox>
 
                            <VBox spacing="2.0">
-                              <Label fx:id="appointments" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true" />
+                              <Label fx:id="appointments" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true" minHeight="-Infinity"/>
                               <VBox.margin>
                                  <Insets bottom="2.0" top="2.0" />
                               </VBox.margin>
@@ -112,7 +112,7 @@
                            </VBox>
 
                            <VBox spacing="2.0">
-                              <Label fx:id="allergies" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true" />
+                              <Label fx:id="allergies" styleClass="label-text" stylesheets="@DarkTheme.css" wrapText="true" minHeight="-Infinity"/>
                               <VBox.margin>
                                  <Insets bottom="2.0" top="2.0" />
                               </VBox.margin>
