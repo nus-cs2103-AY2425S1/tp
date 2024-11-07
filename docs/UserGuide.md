@@ -23,7 +23,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/UI.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -50,7 +50,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 
 - **Command Structure**:
     - Commands are case-insensitive.
-    - Parameters are case-sensitive unless specified.
+    - Parameters are case-insensitive unless specified.
 
 - **Parameters in `UPPER_CASE`** are to be supplied by the user.
     - e.g., in `add n/NAME`, `NAME` is a parameter to be replaced: `add n/John Doe`.
@@ -144,11 +144,16 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 #### Wedding Fields
 
 - **Wedding Name**:
-    - Cannot be blank.
+    - Cannot be blank 
+    - Must follow same restrictions as Person names:
+           - Maximum 70 characters
+           - Can only contain alphabets, spaces, apostrophes (') and hyphens (-)
 - **Date**:
-    - Must be in `YYYY-MM-DD` format.
+    - Must be in `YYYY-MM-DD` format
+    - Must be a valid calendar date
 - **Venue**:
-    - Cannot be blank or consist only of whitespace when provided.
+    - Optional field - only validated when v/ prefix is provided
+    - When provided, cannot be blank or consist only of whitespace
 - **Client**:
     - A client can have only one wedding at a time.
 
@@ -163,7 +168,7 @@ Bridal Boss is a **desktop app for managing contacts, optimized for use via a  L
 
 ### Index vs. Name-Based Commands
 
-Certain commands (`edit`, `delete`, `view`, `assign`) support both index-based and name-based formats.
+Certain commands (`edit`, `delete`, `deletew`, `view`, `vieww`, `assign`) support both index-based and name-based formats.
 
 #### Index Format
 
@@ -188,18 +193,12 @@ Certain commands (`edit`, `delete`, `view`, `assign`) support both index-based a
             - User must re-enter the command using the index.
         - **No Matches**:
             - Displays "No matches found" message.
-- **Example**:
-  ```
-  > delete John
-  Here are the matching contacts:
-  1. John Doe
-  2. Johnny Lee
-  3. John Smith
-  Please specify the index of the contact you want to delete.
+- **Examples**:
+  ![Multiple matches example](images/multiple_match.png)
+  *When multiple matches are found, the system displays a list with indices*
 
-  > delete 1
-  Deleted Person: John Doe
-  ```
+  ![Multiple matches resolution](images/multiple_match_solution.png)
+  *User selects a specific index to complete the command*
 
 ---
 
@@ -279,7 +278,7 @@ Adds a new person to the address book.
 
 #### Listing All Persons: `list`
 
-Displays a list of all persons in the address book.
+Displays a list of all persons and weddings in the address book.
 
 - **Format**: `list`
 - **Example**:
@@ -341,20 +340,24 @@ Finds persons whose names contain any of the given keywords.
 
 Displays detailed information about a specified person.
 
-- **Format**: `view NAME`
+- **Formats**: 
+  - By Index: `view INDEX`
+  - By Name: `view NAME`
 - **Notes**:
     - Case-insensitive matching.
     - Matches names containing the entire keyword.
-    - If multiple matches are found, the system will prompt for index.
+    - Wedding list is only updated when one unique person is found. 
+    - When multiple matches are found, only the person list is updated
 - **Information Displayed**:
     - Personal details (name, phone, email, address).
     - Current role (if any).
     - Own wedding (if the person is a client).
-    - Weddings where the person is assigned as a vendor.
-    - Related contacts through shared weddings.
+    - Weddings where the person is assigned as a vendor (if any).
 - **Examples**:
-    - `view John` displays details for `John`.
+    - `view Mike` displays details for `Mike`.
     - `view Alex Yeo` displays details for `Alex Yeo`.
+![View multiple weddings](images/view_mulitple_weddings_unfiltered.png)
+*Viewing a contact with mulitple matches shows their details and weddings remain unfiltered*
 - **Error Messages**:
     - No contacts to view:
         - Error: "There is no contact to view."
@@ -424,6 +427,8 @@ Filters and lists persons whose fields match the specified keywords.
     - `filter p/91234567` returns the person with phone number `91234567`.
     - `filter n/John r/vendor` returns persons who have name `John` or role `vendor`.
     - `filter e/gmail a/Jurong` returns persons whose email contains "gmail" or address contains "Jurong".
+      ![Multi-field filter results](images/multi_filter_weddings_unfiltered.png)
+      *`filter n/David r/florist e/mike` Example of filtering results showing matched persons, weddings remain unfiltered*
 
 ---
 
@@ -446,6 +451,8 @@ Adds a new wedding to the address book.
         - Adds a wedding named "Beach Wedding" for the client at index 1.
     - `addw n/Garden Wedding c/John Doe v/Botanical Gardens`
         - Adds a wedding for "John Doe" if there's only one match.
+![Adding a wedding example](images/addw_example.png)
+*Example of successfully adding a new wedding with all fields specified*
 - **Error Messages**:
     - Client already has a wedding:
         - Error: "This person is already a client for another wedding."
@@ -453,6 +460,8 @@ Adds a new wedding to the address book.
         - Error: "Date must be in YYYY-MM-DD format."
     - Blank venue:
         - Error: "Venue cannot be blank or whitespace."
+    - Name not in address book:
+        - Error: "This person does not exist in the address book."
 
 ---
 
@@ -540,7 +549,7 @@ Assigns a role and/or weddings to a person.
 - **Notes**:
     - At least one of `[r/ROLE]` or `[w/WEDDING_INDEX]` must be provided.
     - **Role Assignment**:
-        - Each person can have only one role at a time.
+        - Each person can have either 0 or 1 role at a time.
         - Assigning a new role replaces the existing role.
         - Role cannot be blank when using `r/`.
     - **Wedding Assignment**:
@@ -553,9 +562,17 @@ Assigns a role and/or weddings to a person.
         - Assigns the role "florist" to the person at index 1.
     - `assign 1 w/1 w/2`
         - Assigns the person at index 1 to weddings at indices 1 and 2.
-    - `assign John Doe r/photographer w/2`
-        - Assigns "John Doe" the role "photographer" and assigns to wedding at index 2.
-- **Error Messages**:
+    -  `assign John Doe r/photographer w/2`
+        - If there's only one match for "John Doe", assigns them the role "photographer" and to wedding at index 2.
+          **Error Examples**:
+![Assignment error example](images/error_example_assign.png)
+*Example of error when trying to assign a client to their own wedding*
+
+**Success Examples**:
+![Successful multiple assignment](images/success_multi_match.png)
+
+*Example of successfully assigning a person to multiple weddings*
+- **Error Messages**: FIX HERE
     - Cannot assign client to own wedding:
         - Error: "Cannot assign client to their own wedding."
     - Person already assigned to wedding(s):
@@ -661,7 +678,21 @@ Advanced users can edit the data file directly to modify the address book data.
 **A**: Yes, use the `find` command which matches partial names. However, note that it matches whole words only (e.g., "John" will match "John Doe" but not "Johnny").
 
 **Q**: What's the difference between `find` and `filter` commands?<br>
-**A**: `find` searches only names and supports partial word matches. `filter` can search across multiple fields (name, role, email, phone, address) but requires exact word matches for names and roles.
+**A**: `find` and `filter` have different search capabilities:
+- `find`:
+    - Searches only names
+    - Supports partial word matches
+    - Allows multiple name searches (e.g., `find alex david` returns both `Alex Yeoh` and `David Li`)
+    - Uses OR logic (matches any keyword)
+
+- `filter`:
+    - Can search across multiple fields (name, role, email, phone, address)
+    - Requires exact word matches for names and roles
+    - Each field can only have one value - if you specify multiple values for the same field, only the last one is used
+        - e.g., `filter n/John n/Peter` will only search for "Peter"
+    - Uses OR logic between different fields
+        - e.g., `filter n/John r/vendor` returns contacts with either name "John" OR role "vendor"
+    - Cannot search for multiple names like `find` does - must use exact single name
 
 **Q**: How do I remove a role from a contact?<br>
 **A**: Currently, roles cannot be removed once assigned. You can only change them to a different role using the `assign` command.
@@ -685,7 +716,7 @@ Advanced users can edit the data file directly to modify the address book data.
 
 | Action      | Format, Examples                                                                                                                                                                                                                               |
 |-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/florist w/1 w/2`                                                          |
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [w/WEDDING_INDEX]... …​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 r/florist w/1 w/2`                                                      |
 | **Clear**   | `clear`                                                                                                                                                                                                                                        |
 | **Delete**  | #1: `delete INDEX` or <br> #2: `delete NAME`<br> e.g., `delete 1`, `delete Alex`, `delete Alex Tan`                                                                                                                                            |
 | **Edit**    | #1: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or <br> #2: `edit NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`, `edit James n/James Lee e/jameslee@example.com` |
@@ -698,6 +729,6 @@ Advanced users can edit the data file directly to modify the address book data.
 | **Editw**   | `editw w/INDEX [n/NAME] [d/DATE] [v/VENUE]`<br> e.g., `editw w/1 d/2024-12-31 v/Garden Venue`                                                                                                                                                  |
 | **Vieww**   | `vieww INDEX` or `vieww KEYWORD`<br> e.g., `vieww 1`, `vieww John`                                                                                                                                                                             |
 | **Deletew** | #1: `deletew INDEX` or <br> #2: `deletew KEYWORD`<br> e.g., `deletew 1`, `deletew Beach Wedding`                                                                                                                                               |
-| **Assign**  | `assign INDEX r/ROLE w/WEDDING...` or `assign NAME r/ROLE w/WEDDING...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/2`                                                                                                    |
+| **Assign**  | `assign INDEX [r/ROLE] [w/WEDDING_INDEX]...` or `assign NAME [r/ROLE] [w/WEDDING_INDEX]...`<br> e.g., `assign 1 r/vendor`, `assign John Doe r/photographer w/2`                                                                                |
 | **Help**    | `help`                                                                                                                                                                                                                                         |
 | **Exit**    | `exit`                                                                                                                                                                                                                                         |

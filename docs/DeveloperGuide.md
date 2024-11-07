@@ -389,8 +389,6 @@ Priorities:
         - Steps 3b1-3b2 are repeated until valid tag(s) are entered.
         - Use case resumes from step 4.
 
-Certainly! Based on your feedback, I've updated the **Non-Functional Requirements** (NFRs) section to remove or adjust the requirements that were too extreme or irrelevant. Additionally, I've expanded the **Instructions for manual testing** section to include more test cases, as per your request.
-
 ---
 
 ## **Appendix: Requirements**
