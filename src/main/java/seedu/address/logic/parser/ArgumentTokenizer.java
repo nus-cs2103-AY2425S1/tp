@@ -42,7 +42,7 @@ public class ArgumentTokenizer {
             throws ParseException {
         String[] splitArgs = argsString.split("\\|");
 
-        checkPrefixesPresent(splitArgs, prefixes);
+        checkPrefixesPresent(splitArgs, messageUsage);
         checkValidPrefix(splitArgs, prefixes);
 
     }
@@ -51,11 +51,11 @@ public class ArgumentTokenizer {
      * Checks an arguments string whether there is at least a prefix present.
      *
      * @param splitArgs Array of String split by "|"
-     * @param prefixes   Prefixes to tokenize the arguments string with
+     * @param messageUsage String to be returned if no valid prefixes are found
      */
-    public static void checkPrefixesPresent(String[] splitArgs, Prefix... prefixes) throws ParseException {
+    public static void checkPrefixesPresent(String[] splitArgs, String messageUsage) throws ParseException {
         if (splitArgs.length == 1) {
-            throw new ParseException("No valid prefixes found e.g. " + Arrays.toString(prefixes));
+            throw new ParseException("No valid prefixes found \n" + messageUsage);
         }
     }
 
