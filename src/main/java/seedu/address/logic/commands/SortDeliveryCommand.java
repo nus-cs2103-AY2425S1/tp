@@ -28,6 +28,9 @@ public class SortDeliveryCommand extends SortCommand {
 
     private final DeliverySortComparator comparator;
 
+    /**
+     * Creates a SortDeliveryCommand to sort the deliveries by the specified {@code comparator}.
+     */
     public SortDeliveryCommand(DeliverySortComparator comparator) {
         this.comparator = comparator;
     }

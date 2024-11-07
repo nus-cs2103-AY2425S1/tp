@@ -14,10 +14,7 @@ import seedu.address.model.delivery.Status;
 /**
  * Changes the status of a delivery identified using its displayed index from the address book.
  */
-public class MarkDeliveryCommand extends Command {
-
-    public static final String COMMAND_WORD = "mark";
-
+public class MarkDeliveryCommand extends MarkCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + ": Marks the status of the delivery identified by the index number used in the displayed delivery list.\n"
             + "Parameters: INDEX (must be a positive integer) STATUS (PENDING, DELIVERED, CANCELLED)\n"

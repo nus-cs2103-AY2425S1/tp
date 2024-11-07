@@ -36,8 +36,6 @@ public class Cost {
         boolean isValid = isNumber && !(Double.parseDouble(test) == 0);
         return isValid;
     }
-
-    // Give user more options to custom set thier units??
     @Override
     public String toString() {
         return value;

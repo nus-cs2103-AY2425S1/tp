@@ -39,6 +39,7 @@ import seedu.address.logic.commands.ListDeliveryCommand;
 import seedu.address.logic.commands.ListSupplierCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
+import seedu.address.logic.commands.SortDeliveryCommand;
 import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -46,6 +47,7 @@ import seedu.address.model.delivery.DateTime;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryIsUpcomingAfterPredicate;
 import seedu.address.model.delivery.DeliveryIsUpcomingBeforePredicate;
+import seedu.address.model.delivery.DeliverySortCostComparator;
 import seedu.address.model.delivery.DeliveryWrapper;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.supplier.Supplier;
@@ -64,7 +66,7 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_add_supplier() throws Exception {
         Supplier supplier = new SupplierBuilder().build();
         AddSupplierCommand command = (AddSupplierCommand) parser.parseCommand(SupplierUtil.getAddCommand(supplier));
         assertEquals(new AddSupplierCommand(supplier), command);
@@ -103,13 +105,6 @@ public class AddressBookParserTest {
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
-    }
-
-    @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteSupplierCommand command = (DeleteSupplierCommand) parser.parseCommand(
-                DeleteSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + INDEX_FIRST_SUPPLIER.getOneBased());
-        assertEquals(new DeleteSupplierCommand(INDEX_FIRST_SUPPLIER), command);
     }
 
     @Test
@@ -197,5 +192,13 @@ public class AddressBookParserTest {
                 SortSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " "
                         + PREFIX_SORT_ORDER + "a " + PREFIX_SORT_BY + "n");
         assertEquals(new SortSupplierCommand(comparator), command);
+    }
+    @Test
+    public void parseCommand_sortDelivery() throws Exception {
+        DeliverySortCostComparator comparator = new DeliverySortCostComparator(new SortOrder("a"));
+        SortDeliveryCommand command = (SortDeliveryCommand) parser.parseCommand(
+                SortDeliveryCommand.COMMAND_WORD + " " + PREFIX_DELIVERY + " "
+                        + PREFIX_SORT_ORDER + "a " + PREFIX_SORT_BY + "c");
+        assertEquals(new SortDeliveryCommand(comparator), command);
     }
 }

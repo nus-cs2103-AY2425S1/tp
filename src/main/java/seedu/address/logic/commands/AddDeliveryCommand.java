@@ -23,10 +23,8 @@ import seedu.address.model.supplier.SupplierStatus;
 /**
  * Adds a delivery to the address book.
  */
-public class AddDeliveryCommand extends Command {
-    public static final String COMMAND_WORD = "add";
+public class AddDeliveryCommand extends AddCommand {
 
-    //to change later
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
             + " : Adds a delivery to the address book. "
             + "Parameters: "

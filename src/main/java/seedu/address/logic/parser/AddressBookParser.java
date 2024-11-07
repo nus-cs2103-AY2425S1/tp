@@ -3,14 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_LIST_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -32,6 +31,7 @@ import seedu.address.logic.commands.MarkDeliveryCommand;
 import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortDeliveryCommand;
+import seedu.address.logic.commands.SortSupplierCommand;
 import seedu.address.logic.commands.UpcomingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -70,7 +70,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddSupplierCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
             if (arguments.trim().startsWith("-s")) {
                 return new AddSupplierCommandParser().parse(arguments.trim().substring(2));
             } else if (arguments.trim().startsWith("-d")) {
@@ -125,13 +125,13 @@ public class AddressBookParser {
             }
 
         case SortCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith(PREFIX_DELIVERY.getPrefix())) {
-                return new SortDeliveryCommandParser().parse(arguments.trim());
-            } else if (arguments.trim().startsWith(PREFIX_SUPPLIER.getPrefix())) {
+            if (arguments.trim().startsWith("-s")) {
                 return new SortSupplierCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith("-d")) {
+                return new SortDeliveryCommandParser().parse(arguments.trim());
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortDeliveryCommand.MESSAGE_USAGE));
+                        SortSupplierCommand.MESSAGE_USAGE + "\nOR\n" + SortDeliveryCommand.MESSAGE_USAGE));
             }
 
         case UpcomingCommand.COMMAND_WORD:
