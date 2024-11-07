@@ -480,6 +480,44 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Adding a person
+
+1. Adding a person while all persons are being shown
+   1. Test case: `add n/John Cena p/98765432 e/johncena@gmail.com b/10 01 1990`<br>
+      Expected: A new person is added to the list. The new person is shown in the list.
+   2. Test case: `add`<br
+      Expected: No person is added. Error details shown in status message.
+   3. Test case: `add n/John Cena p/12345678 e/johncena@gmail.com b/10 01 1990`<br> 
+      Expected: No person is added. Error details shown in status message. 
+   4. Test case: `add n/John Cena p/98765432 e/johncena@gmail.com `<br>
+      Expected: No person is added. Error details shown in status message.
+   5. Test case: `add n/John Cena p/98765432 b/10 01 1990`<br>
+      Expected: No person is added. Error details shown in status message.
+   6. Test case: `add n/John Cena e/johncena@gmail.com b/10 01 1990`<br>
+      Expected: No person is added. Error details shown in status message.
+   7. Test case: `add p/98765432 e/johncena@gmail.com b/10 01 1990`<br>
+      Expected: No person is added. Error details shown in status message.
+
+### Clearing all persons
+
+1. Clearing all persons while all persons are being shown
+
+   1. Test case: `clear`<br> 
+      Expected: UI box is shown to confirm that user wants to clear all contacts from addressbook. If user clicks yes, all contacts are removed from the list, otherwise it will cancel the operation.
+
+### Opening help window
+
+1. Opening help window while all persons are being shown
+
+   1. Test case: `help`<br>
+      Expected: A new window UI is opened showing the help page.
+
+### Listing all persons
+
+1. Listing all persons while all persons are being shown
+   1. Test case: `list`<br>
+      Expected: All persons are shown in the list.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -487,20 +525,94 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Finding a person
+
+1. Finding a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `find John`<br>
+      Expected: Persons with name containing `John` are shown in the list.
+
+   1. Test case: `find Cena`<br>
+      Expected: Persons with name containing `Cena` are shown in the list.
+
+   1. Test case: `find`<br>
+      Expected: No person is found. Error details shown in the status message.
+
+### Editing a person
+
+1. Editing a person while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `edit 1 n/John Doe`<br>
+      Expected: First contact’s name is changed to `John Doe`. Details of the edited contact shown in the status message. UI updates to the corrected name.
+   1. Test case: `edit 0 n/John Doe`<br>
+      Expected: No person is edited. Error details shown in the status message.
+   2. Test case: `edit 1 n/Donald Trump p/96253647`<br>
+      Expected: First contact’s name is changed to `Donald Trump` and phone number is changed to `96253647`. Details of the edited contact shown in the status message. UI updates to the corrected name and phone number.
+   1. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Marking a person as paid
+
+1. Marking a person as paid while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `paid 1 f/1`<br>
+      Expected: First contact is marked as paid. Details of the marked contact shown in the status message.
+   1. Test case: `paid 0`<br>
+      Expected: No person is marked as paid. Error details shown in the status message.
+   2. Test case: `paid 1 f/0`<br>
+      Expected: No person is marked as paid. Error details shown in the status message.
+   2. Test case: `paid 1 f/100`<br>
+         Expected: No person is marked as paid. Error details shown in the status message.
+   3. Test case: `paid`<br>
+      Expected: No person is marked as paid. Error details shown in the status message.
+
+### Marking a person as unpaid
+
+1. Marking a person as unpaid while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Test case: `unpaid 1`<br>
+      Expected: First contact is marked as unpaid. Details of the marked contact shown in the status message.
+   1. Test case: `unpaid`<br>
+      Expected: No person is marked as unpaid. Error details shown in the status message.
+
+### Exiting the app
+
+1. Exiting the app while all persons are being shown
+
+   1. Test case: `exit`<br>
+      Expected: App window closes.
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. To simulate missing file delete addressbook.json file located at data/addressbook.json before launching the app. 
+   2. Launch the app
+   3. The app should launch without any issues and show a list of sample contacts.
+   4. Perform any command to create a new addressbook.json
 
-1. _{ more test cases …​ }_
+2. Dealing with corrupted data files
+
+   1. To simulate corrupted file, edit addressbook.json file located at data/addressbook.json and add some random text.
+   2. Launch the app
+   3. The app should launch without any contacts displayed.
+   4. Close the app and delete addressbook.json file located at data/addressbook.json.
+   5. Launch the app
+   6. The app should launch without any issues and show a list of sample contacts.
+   7Perform any command to create a new addressbook.json
