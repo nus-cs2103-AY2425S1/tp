@@ -2,17 +2,24 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.PersonHasFeaturePredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Parses the given {@code String} of arguments in the context of the FilterByTagCommand
@@ -23,7 +30,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     @Override
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-              ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+              ArgumentTokenizer.tokenize(args, PREFIX_TAG, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ALLERGY);
 
 
         //you can only filter for one value per feature
@@ -38,7 +45,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (!argMultimap.getValue(PREFIX_TAG).isPresent()
                 && !argMultimap.getValue(PREFIX_PHONE).isPresent()
                 && !argMultimap.getValue(PREFIX_EMAIL).isPresent()
-                && !argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+                && !argMultimap.getValue(PREFIX_ADDRESS).isPresent()
+                && argMultimap.getAllValues(PREFIX_ALLERGY).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
@@ -61,7 +69,22 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         }
 
-        return new FilterCommand(new PersonHasFeaturePredicate(tag, phone, email, address));
+        List<Allergy> allergies = argMultimap.getAllValues(PREFIX_ALLERGY).stream()
+                .map(this::parseAllergyWithHandling)
+                .collect(Collectors.toList());
+
+        return new FilterCommand(new PersonHasFeaturePredicate(tag, phone, email, address, allergies));
+    }
+
+    /**
+     * Parses a single allergy and handles any ParseException by rethrowing as RuntimeException.
+     */
+    private Allergy parseAllergyWithHandling(String allergy) {
+        try {
+            return ParserUtil.parseAllergy(allergy);
+        } catch (ParseException e) {
+            throw new RuntimeException("Error parsing allergy: " + allergy, e);
+        }
     }
 
 }

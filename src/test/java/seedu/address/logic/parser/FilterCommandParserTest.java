@@ -31,19 +31,21 @@ public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();
 
     private PersonHasFeaturePredicate highTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null, null);
     private PersonHasFeaturePredicate lowTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null, null);
 
     private PersonHasFeaturePredicate mediumTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null, null);
 
     private PersonHasFeaturePredicate phoneOnlyPredicate =
-          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value), null, null);
+          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value),
+                  null, null, null);
 
     private PersonHasFeaturePredicate phoneAndTagPredicate =
           new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK),
-                  new Phone(ALICE.getPhone().value), null, null);
+                  new Phone(ALICE.getPhone().value), null, null, null);
+
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -168,7 +170,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate = new PersonHasFeaturePredicate(null,
-                null, ALICE.getEmail(), null);
+                null, ALICE.getEmail(), null, null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }
@@ -180,7 +182,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate =
-                new PersonHasFeaturePredicate(null, null, null, ALICE.getAddress());
+                new PersonHasFeaturePredicate(null, null, null, ALICE.getAddress(), null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }
@@ -192,7 +194,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate =
-                new PersonHasFeaturePredicate(null, null, ALICE.getEmail(), ALICE.getAddress());
+                new PersonHasFeaturePredicate(null, null, ALICE.getEmail(), ALICE.getAddress(), null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }
@@ -205,7 +207,7 @@ public class FilterCommandParserTest {
 
         // Assertions
         PersonHasFeaturePredicate expectedPredicate = new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK),
-                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress());
+                ALICE.getPhone(), ALICE.getEmail(), ALICE.getAddress(), null);
         FilterCommand expectedCommand = new FilterCommand(expectedPredicate);
         assertEquals(command, expectedCommand);
     }

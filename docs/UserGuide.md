@@ -156,7 +156,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG m/ALLERGY`
 
 Constraints:
 * **NAME**
-    - Alphanumeric string of any length. Special characters allowed are ' ', '/' and '-'.
+    - Alphanumeric string of any length. Special characters allowed are ' ', '/' and '-'. Cannot be purely numeric.
 * **PHONE NUMBER**
     - Must be exactly 8 digits long and start with 3, 6, 8 or 9 (adhering to Singapore phone numbers).
     - Only numeric characters are allowed
