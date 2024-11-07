@@ -43,6 +43,8 @@ public class ImportCommand extends Command {
             personsAdded = importer.readCsv(model);
         } catch (ImproperFormatException | FileNotFoundException e) {
             throw new CommandException(e.getMessage());
+        } catch (NullPointerException e) {
+            throw new CommandException("The file is empty.");
         }
 
         if (personsAdded != 0) {
