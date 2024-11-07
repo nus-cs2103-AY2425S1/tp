@@ -463,7 +463,9 @@ There is no need to save manually.
 
 ### Editing the Data File
 
-* KnottyPlanners data are saved automatically as a JSON file `[JAR file location]/data/knottyplanners.json`.
+* KnottyPlanners data are saved automatically as a JSON file 
+  * `[JAR file location]/data/addresbook.json`.
+  * `[JAR file location]/data/weddingbook.json`.
 * Advanced users are welcome to update data directly by editing that data file.
 <box type="warning" seamless>
 
