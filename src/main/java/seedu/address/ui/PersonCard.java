@@ -69,6 +69,7 @@ public class PersonCard extends UiPart<Region> {
             break;
         case "NEW":
             status.getStyleClass().add("status-new");
+            break;
         default:
             // Do nothing, field will remain grey
         }
