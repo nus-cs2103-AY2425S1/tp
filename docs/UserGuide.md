@@ -28,7 +28,7 @@ simpler to use while being even more functional than alternatives on the market.
     * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
     * [Exporting your contacts : `export`](#exporting-your-contacts--export)
     * [Exiting the program : `exit`](#exiting-the-program--exit)
-    * [Quick reference help: `help`](#quick-reference-help-help)
+    * [Open help menu: `help`](#open-help-menu-help)
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
@@ -351,7 +351,7 @@ Format: `exit`
 
 * There is no visual example as the programme will close after inputting the `exit` command.
 
-### Quick reference help: `help`
+### Open help menu: `help`
 
 Shows commands in a help menu for quick reference during use of PROperty.
 
