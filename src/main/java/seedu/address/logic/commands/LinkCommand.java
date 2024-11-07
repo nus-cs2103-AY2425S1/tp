@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -80,13 +81,6 @@ public class LinkCommand extends Command {
         Parent castedParent = (Parent) parent;
         Student castedChild = (Student) child;
 
-        if (castedParent.getChildName() != null) {
-            throw new CommandException(generateParentLinkedMessage(castedParent.getChildName()));
-        }
-        if (castedChild.getParentName() != null) {
-            throw new CommandException(generateChildLinkedMessage(castedChild.getParentName()));
-        }
-
         Student linkedChild = createLinkedChild(castedChild, castedParent);
         Parent linkedParent = createLinkedParent(castedParent, castedChild);
 
@@ -119,11 +113,14 @@ public class LinkCommand extends Command {
         Email email = parent.getEmail();
         Address address = parent.getAddress();
         Name childName = child.getName();
+        Set<Name> linkedNames = new HashSet<>(parent.getChildrensNames());
+        linkedNames.add(childName);
+        Set<Name> childrensNames = linkedNames;
         Set<Tag> tags = parent.getTags();
         boolean isPinned = parent.isPinned();
         boolean isArchived = parent.isArchived();
 
-        return new Parent(name, phone, email, address, childName, tags, isPinned, isArchived);
+        return new Parent(name, phone, email, address, childrensNames, tags, isPinned, isArchived);
     }
 
     private String generateParentNotFoundMessage() {

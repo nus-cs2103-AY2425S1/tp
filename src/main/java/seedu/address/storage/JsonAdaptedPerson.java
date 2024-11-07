@@ -82,8 +82,9 @@ public abstract class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("education") String education,
             @JsonProperty("grade") String grade, @JsonProperty("parentName") String parentName,
-            @JsonProperty("childName") String childName, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("isPinned") boolean isPinned, @JsonProperty("isArcived") boolean isArchived)
+            @JsonProperty("childrensNames") List<String> childrensNames,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
+            @JsonProperty("isArcived") boolean isArchived)
             throws IllegalValueException {
 
         switch (type) {
@@ -92,7 +93,7 @@ public abstract class JsonAdaptedPerson {
                     isArchived);
 
         case ("Parent"):
-            return new JsonAdaptedParent(name, phone, email, address, childName, tags, isPinned, isArchived);
+            return new JsonAdaptedParent(name, phone, email, address, childrensNames, tags, isPinned, isArchived);
 
         default:
             throw new IllegalValueException("Illegal contact type in save file");

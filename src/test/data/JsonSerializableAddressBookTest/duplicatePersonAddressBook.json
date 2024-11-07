@@ -7,8 +7,6 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
     "tags": [ "friends" ],
     "type": "Student"
   }, {
@@ -18,9 +16,7 @@
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
     "address": "4th street",
-    "type": "Parent"
+    "type": "Student"
   } ]
 }
