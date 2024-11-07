@@ -303,29 +303,33 @@ With the ability to track event details and contact information for various vend
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                     | I want to …​                                           | So that I can…​                                                                                |
-|----------|-----------------------------|--------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `* * *`  | event planner               | create a new event with date, time and location        | easily track upcoming events                                                                   |
-| `* * *`  | event planner               | create a new vendor with phone number                  | keep track of vendors' data easily                                                             |
-| `* * *`  | event planner               | delete an event                                        | remove entries I no longer need and keep the address book less cluttered                       |
-| `* * *`  | event planner               | delete a vendor                                        | remove entries I no longer need and keep the address book less cluttered                       |
-| `* * *`  | event planner               | assign a vendor to an event                            | keep track of which vendors have been hired for an event                                       |
-| `* *`    | event planner               | find a vendor by name and tags                         | choose a suitable vendor quickly for a new event                                               |
-| `* *`    | event planner               | categorise vendors                                     | easily see what services a vendor provides                                                     |
-| `* *`    | event planner               | modify event and vendor details                        | correct any mistakes or changes made to an event or vendor                                     |
-| `* *`    | forgetful event planner     | write additional notes for an event or vendor          | keep track of miscellaneous information regarding each events or remarks regarding a vendor    |
-| `* *`    | event planner               | rate vendors in the system                             | keep track of how good past experiences of working with the vendor were                        |
-| `* *`    | event planner               | send Whatsapp or Telegram messages from within the app | easily contact vendors without 'leaving' the address book                                      |
-| `* *`    | fast typer                  | chain multiple commands together before entering       | accomplish multiple actions without worrying about hitting the 'Enter' key after every command |
-| `* *`    | computer user with no mouse | navigate the address book using only keyboard          | use the app without a mouse                                                                    |
-| `* *`    | event planner               | set progress statuses for vendors                      | keep track of completed vendor deliverables                                                    |
-| `* *`    | event planner               | archive events                                         | clear events that are completed                                                                |
-| `* *`    | event planner               | filter vendors by rating                               | avoid working with less reputable vendors                                                      |
-| `* *`    | event planner               | indicate the types of vendors required for an event    | know what manpower or vendor I am missing for an event                                         |
-| `* *`    | fast typer                  | map commands to (shorter) aliases                      | customise commands that I use often into more convenient phrases                               |
-| `* *`    | fast typer                  | autocomplete half-typed commands                       | reduce the number of keystrokes required per command                                           |
-| `* *`    | event planner               | view all my events on a calendar                       | easily monitor the events that I have across the week/month/year                               |
-| `* *`    | event planner               | tag a cost range for each vendor                       | easily find appropriate vendors according to the budget of specific events                     |
+| Priority | As a …​                     | I want to …​                                                      | So that I can…​                                                                                |
+|----------|-----------------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `* * *`  | event planner               | create a new event with name and date                             | easily track upcoming events                                                                   |
+| `* * *`  | event planner               | create a new vendor with name, phone number, and description      | keep track of vendors' data easily                                                             |
+| `* * *`  | event planner               | delete an event                                                   | remove entries I no longer need and keep the address book less cluttered                       |
+| `* * *`  | event planner               | delete a vendor                                                   | remove entries I no longer need and keep the address book less cluttered                       |
+| `* * *`  | event planner               | assign a vendor to an event                                       | keep track of which vendors have been hired for an event                                       |
+| `* * *`  | event planner               | unassign a vendor from an event                                   | remove vendors assigned from events when they are no longer need for an event                  |
+| `* *`    | event planner               | find a vendor by name and tags                                    | choose a suitable vendor quickly for a new event                                               |
+| `* *`    | event planner               | find an event by name and tags                                    | search for an event of interest                                                                |
+| `* *`    | event planner               | view information related to a vendor                              | lookup vendor information                                                                      |
+| `* *`    | event planner               | view information related to an event                              | lookup event information                                                                       |
+| `* *`    | computer user with no mouse | navigate the address book using only a keyboard                   | use the app without a mouse                                                                    |
+| `* *`    | event planner               | modify event and vendor details                                   | correct any mistakes or changes made to an event or vendor                                     |
+| `* *`    | forgetful event planner     | write additional notes for an event or vendor                     | keep track of miscellaneous information regarding each events or remarks regarding a vendor    |
+| `*`      | event planner               | categorise vendors                                                | easily see what services a vendor provides                                                     |
+| `*`      | event planner               | rate vendors in the system                                        | keep track of how good past experiences of working with the vendor were                        |
+| `*`      | event planner               | send Whatsapp or Telegram messages from within the app            | easily contact vendors without 'leaving' the address book                                      |
+| `*`      | fast typer                  | chain multiple commands together before entering                  | accomplish multiple actions without worrying about hitting the 'Enter' key after every command |
+| `*`      | event planner               | set progress statuses for vendors                                 | keep track of completed vendor deliverables                                                    |
+| `*`      | event planner               | archive events                                                    | clear events that are completed                                                                |
+| `*`      | event planner               | filter vendors by rating                                          | avoid working with less reputable vendors                                                      |
+| `*`      | event planner               | indicate the types of vendors required for an event               | know what manpower or vendor I am missing for an event                                         |
+| `*`      | fast typer                  | map commands to (shorter) aliases                                 | customise commands that I use often into more convenient phrases                               |
+| `*`      | fast typer                  | autocomplete half-typed commands                                  | reduce the number of keystrokes required per command                                           |
+| `*`      | event planner               | view all my events on a calendar                                  | easily monitor the events that I have across the week/month/year                               |
+| `*`      | event planner               | tag a cost range for each vendor                                  | easily find appropriate vendors according to the budget of specific events                     |
 
 ### Use cases
 
