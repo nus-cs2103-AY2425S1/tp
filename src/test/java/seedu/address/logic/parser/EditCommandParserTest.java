@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_FIELD_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -138,7 +139,7 @@ public class EditCommandParserTest {
     public void parse_invalidNameToEdit_failure() {
         String userInput = DEFAULT_NAME + "&" + NAME_DESC_AMY;
         assertParseFailure(parser, userInput,
-                ParserUtil.MESSAGE_INVALID_NAME_FIELD);
+                MESSAGE_INVALID_NAME_FIELD_INPUT);
     }
 
     @Test

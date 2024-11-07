@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NAME_FIELD_INPUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
@@ -62,7 +63,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             Name name = ParserUtil.parseName(args);
             return new DeleteCommand(name);
         } catch (Exception exp) { // to try
-            throw new ParseException("Invalid name field.\nRefer to user guide for valid name fields");
+            throw new ParseException(MESSAGE_INVALID_NAME_FIELD_INPUT);
             // considered invalid name if it isn't an Integer
         }
     }

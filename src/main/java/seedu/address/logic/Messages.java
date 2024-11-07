@@ -68,6 +68,8 @@ public class Messages {
             + "full name. Please %2$s by index.\nTip: find the contact's name to obtain their "
             + "corresponding displayed index, and %2$s by the displayed index directly on the page. "
             + MESSAGE_FIND_NAME_SUGGESTION;
+    public static final String MESSAGE_INVALID_NAME_FIELD_INPUT = "Invalid name field."
+            + "\nRefer to user guide for valid name fields";
 
     public static String styleCommand(String command) {
         return "`" + command + "`";
