@@ -28,7 +28,7 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
