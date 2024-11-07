@@ -1,11 +1,15 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
+import seedu.address.model.assignment.AssignmentProjectPredicate;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
@@ -66,6 +70,19 @@ public class SampleDataUtil {
         for (Project sampleProject : getSampleProjects()) {
             sampleAb.addProject(sampleProject);
         }
+
+        // Adding Assignments is done here as it requires references to the projects and employees.
+        List<Employee> employeeList = sampleAb.getEmployeeList();
+        List<Project> projectList = sampleAb.getProjectList();
+
+        Employee employee0 = employeeList.get(0);
+        Project project0 = projectList.get(0);
+        Employee employee1 = employeeList.get(1);
+        Project project1 = projectList.get(1);
+
+        sampleAb.addAssignment(new Assignment(new AssignmentId("0"), project0, employee0));
+        sampleAb.addAssignment(new Assignment(new AssignmentId("1"), project1, employee1));
+
         return sampleAb;
     }
 
