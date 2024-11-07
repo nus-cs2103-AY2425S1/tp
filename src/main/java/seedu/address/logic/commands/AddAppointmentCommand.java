@@ -31,7 +31,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_START_TIME + "START_TIME (HH:MM) \n"
             + PREFIX_END_TIME + "END_TIME (HH:MM) \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NRIC + "S1234567A "
+            + PREFIX_NRIC + "S1234567D "
             + PREFIX_DATE + "01/01/2025 "
             + PREFIX_START_TIME + "10:00 "
             + PREFIX_END_TIME + "11:00";
