@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -67,7 +66,6 @@ public class MarkAttendanceCommand extends Command {
         Person studentMarked = studentToMark.setAttendance(classDate, attendance);
 
         model.setPerson(studentToMark, studentMarked);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         String dateString = DateTimeFormatter.ofPattern(AttendanceList.DATE_TIME_FORMAT).format(classDate);
         return new CommandResult(
                 String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, studentMarked.getName(), attendance, dateString));

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -64,7 +63,6 @@ public class AddGradeCommand extends Command {
         try {
             Person updatedPerson = personToEdit.addGrade(this.toAdd);
             model.setPerson(personToEdit, updatedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(
                     String.format(MESSAGE_ADD_GRADE_SUCCESS, toAdd.getTestName(), personToEdit.getName()));
         } catch (IllegalStateException e) {

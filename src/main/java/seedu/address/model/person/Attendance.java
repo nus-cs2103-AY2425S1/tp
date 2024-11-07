@@ -7,7 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Attendance {
 
-    public static final String MESSAGE_CONSTRAINTS = "Attendance should be either 'Attended' or 'Absent'";
+    public static final String MESSAGE_CONSTRAINTS = "Attendance should be either 'Attended' or 'Absent' "
+            + "(case-insensitive)";
 
     private final boolean hasAttended;
 
@@ -29,14 +30,14 @@ public class Attendance {
      */
     public static Attendance fromString(String attendance) {
         checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
-        return new Attendance(attendance.equals("Attended"));
+        return new Attendance(attendance.equalsIgnoreCase("Attended"));
     }
 
     /**
      * Returns true if a given string is a valid attendance.
      */
     public static boolean isValidAttendance(String test) {
-        return test.equals("Attended") || test.equals("Absent");
+        return test.equalsIgnoreCase("Attended") || test.equalsIgnoreCase("Absent");
     }
 
     public boolean hasAttended() {
