@@ -19,17 +19,17 @@ public class NameContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameOrIdentityNumberContainsKeywordsPredicate firstPredicate
-                = new NameOrIdentityNumberContainsKeywordsPredicate(firstPredicateKeywordList);
-        NameOrIdentityNumberContainsKeywordsPredicate secondPredicate
-                = new NameOrIdentityNumberContainsKeywordsPredicate(secondPredicateKeywordList);
+        NameOrIdentityNumberContainsKeywordsPredicate firstPredicate =
+                new NameOrIdentityNumberContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameOrIdentityNumberContainsKeywordsPredicate secondPredicate =
+                new NameOrIdentityNumberContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameOrIdentityNumberContainsKeywordsPredicate firstPredicateCopy
-                = new NameOrIdentityNumberContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameOrIdentityNumberContainsKeywordsPredicate firstPredicateCopy =
+                new NameOrIdentityNumberContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -45,8 +45,8 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameOrIdentityNumberContainsKeywordsPredicate predicate
-                = new NameOrIdentityNumberContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        NameOrIdentityNumberContainsKeywordsPredicate predicate =
+                new NameOrIdentityNumberContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -65,8 +65,8 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameOrIdentityNumberContainsKeywordsPredicate predicate
-                = new NameOrIdentityNumberContainsKeywordsPredicate(Collections.emptyList());
+        NameOrIdentityNumberContainsKeywordsPredicate predicate =
+                new NameOrIdentityNumberContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
@@ -74,7 +74,8 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
-        predicate = new NameOrIdentityNumberContainsKeywordsPredicate(Arrays.asList("90012345", "alice@email.com", "Main", "Street"));
+        predicate = new NameOrIdentityNumberContainsKeywordsPredicate(
+                Arrays.asList("90012345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("90012345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
@@ -82,8 +83,8 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        NameOrIdentityNumberContainsKeywordsPredicate predicate
-                = new NameOrIdentityNumberContainsKeywordsPredicate(keywords);
+        NameOrIdentityNumberContainsKeywordsPredicate predicate =
+                new NameOrIdentityNumberContainsKeywordsPredicate(keywords);
 
         String expected = NameOrIdentityNumberContainsKeywordsPredicate.class.getCanonicalName()
                 + "{keywords=" + keywords + "}";
