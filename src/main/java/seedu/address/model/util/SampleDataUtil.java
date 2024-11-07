@@ -65,11 +65,18 @@ public class SampleDataUtil {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
-            if (samplePerson.getName().fullName != "Roy Balakrishnan") {
-                sampleAb.addVendor(samplePerson);
+
+            // Add person to guest list for all assigned weddings
+            for (Wedding wedding : samplePerson.getWeddings()) {
+                wedding.addToGuestList(samplePerson);
+            }
+
+            // Increment tagged count for all tags
+            for (Tag tag : samplePerson.getTags()) {
+                tag.increaseTaggedCount();
             }
         }
-        //TODO tags & weddings
+        //TODO sample data for tags, tasks, & weddings
         return sampleAb;
     }
 

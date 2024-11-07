@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.ArrayList;
@@ -96,6 +97,9 @@ public class EditWeddingCommand extends Command {
         for (Person person : editedWedding.getGuestList()) {
             person.setWedding(weddingToEdit, editedWedding);
         }
+
+        // Update person list to show the latest wedding objects
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
     }
