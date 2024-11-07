@@ -4,7 +4,7 @@ hide Footbox
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LM LOGIC_COLOR
-participant ":HRPlatformParser" as ABP LOGIC_COLOR
+participant ":AddressBookParser" as ABP LOGIC_COLOR
 participant ":FilterStatusCommandParser" as FSCP LOGIC_COLOR
 participant "f:FilterStatusCommand" as FSC LOGIC_COLOR
 participant "r:CommandResult" as CR LOGIC_COLOR

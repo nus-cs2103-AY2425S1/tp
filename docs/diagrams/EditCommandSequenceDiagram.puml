@@ -7,7 +7,7 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":HRPlatformParser" as HRPlatformParser LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant "r:EditCommand" as EditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
@@ -20,17 +20,17 @@ end box
 [-> LogicManager : execute("args")
 activate LogicManager
 
-LogicManager -> HRPlatformParser : parseCommand("args")
-activate HRPlatformParser
+LogicManager -> AddressBookParser : parseCommand("args")
+activate AddressBookParser
 
 create EditCommandParser
-HRPlatformParser -> EditCommandParser
+AddressBookParser -> EditCommandParser
 activate EditCommandParser
 
-EditCommandParser --> HRPlatformParser
+EditCommandParser --> AddressBookParser
 deactivate EditCommandParser
 
-HRPlatformParser -> EditCommandParser : parse("args")
+AddressBookParser -> EditCommandParser : parse("args")
 activate EditCommandParser
 
 create EditCommand
@@ -40,14 +40,14 @@ activate EditCommand
 EditCommand --> EditCommandParser : r
 deactivate EditCommand
 
-EditCommandParser --> HRPlatformParser : r
+EditCommandParser --> AddressBookParser : r
 deactivate EditCommandParser
 
-EditCommandParser -[hidden]-> HRPlatformParser
+EditCommandParser -[hidden]-> AddressBookParser
 destroy EditCommandParser
 
-HRPlatformParser --> LogicManager : r
-deactivate HRPlatformParser
+AddressBookParser --> LogicManager : r
+deactivate AddressBookParser
 
 LogicManager -> EditCommand : execute()
 activate EditCommand

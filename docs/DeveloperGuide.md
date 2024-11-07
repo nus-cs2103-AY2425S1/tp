@@ -45,6 +45,7 @@ title: Developer Guide
     10. [Saving Data](#saving-data)
 11. [Appendix: Planned Enhancements](#appendix-planned-enhancements)
 12. [Appendix: Effort](#appendix-effort)
+
 ---
 
 ## **TalentSG**
@@ -189,7 +190,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `HRPlatformParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -207,7 +208,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `HRPlatformParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `HRPlatformParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -226,7 +227,7 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `HRPlatform`, which `Person` references. This allows `HRPlatform` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="550" />
 
@@ -243,7 +244,7 @@ This component is responsible for saving and retrieving TalentSG's data
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `HRPlatformStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -265,7 +266,7 @@ where note and tag are optional fields
 
 #### **Command Feature Purpose**
 
-The `add` command allows users to add a `Person` to the `HRPlatform`.
+The `add` command allows users to add a `Person` to the `AddressBook`.
 
 #### Key Components
 - `AddCommand`: Executes the addition operation based on the user's input.
@@ -273,7 +274,7 @@ The `add` command allows users to add a `Person` to the `HRPlatform`.
 - `LogicManager`: Invokes the `AddCommand` to execute the addition operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `HRPlatformParser`: Creates an `AddCommand` object based on the user input.
+- `AddressBookParser`: Creates an `AddCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -289,9 +290,10 @@ We will be using the user input `add n/John Doe p/98765432 e/johnd@example.com a
 6. The execute method of `AddCommand` returns a `CommandResult` object which stores the data regarding the completion of the `AddCommand`.
 7. The UI reflects this new list with added `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - For step 2, if the user does not have any arguments, the `AddCommand` object will NOT be created!
+</div>
 
 #### `AddCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of adding a person into TalentSG.
@@ -308,7 +310,7 @@ The sequence diagram below illustrates the above process of adding a person into
 
 #### **Command Feature Purpose**
 
-The `delete` command allows users to delete a `Person` from the `HRPlatform`.
+The `delete` command allows users to delete a `Person` from the `AddressBook`.
 
 #### Key Components
 - `DeleteCommand`: Executes the deletion operation based on the user's input.
@@ -316,7 +318,7 @@ The `delete` command allows users to delete a `Person` from the `HRPlatform`.
 - `LogicManager`: Invokes the `DeleteCommand` to execute the deletion operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `HRPlatformParser`: Creates an `DeleteCommand` object based on the user input.
+- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -332,9 +334,10 @@ We will be using the user input `delete 1` as an example.
 6. The execute method of `DeleteCommand` returns a `CommandResult` object which stores the data regarding the completion of the `DeleteCommand`.
 7. The UI reflects this new list with deleted `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+</div>
 
 #### `Delete Command` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
@@ -352,7 +355,7 @@ where all the fields are optional.
 
 #### **Command Feature Purpose**
 
-The `edit` command allows users to edit a `Person` in the `HRPlatform`.
+The `edit` command allows users to edit a `Person` in the `AddressBook`.
 
 #### Key Components
 - `EditCommand`: Executes the edit operation based on the user's input.
@@ -360,7 +363,7 @@ The `edit` command allows users to edit a `Person` in the `HRPlatform`.
 - `LogicManager`: Invokes the `EditCommand` to execute the edit operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `HRPlatformParser`: Creates an `EditCommand` object based on the user input.
+- `AddressBookParser`: Creates an `EditCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -376,10 +379,11 @@ We will be using the user input `edit 1 n/John Doe p/98765432 e/johnd@example.co
 6. The execute method of `EditCommand` returns a `CommandResult` object which stores the data regarding the completion of the `EditCommand`.
 7. The UI reflects this updated list with the edited `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if the input is detected as invalid (either index is invalid or no arguments provided other than index), a matching error will be shown on the screen and the sequence of action is terminated.
 - At step 3, if the user provides a category to edit to, and it is found that there is no such category in FastTrack, an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `EditCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of editing a person's details in TalentSG.
@@ -396,11 +400,11 @@ The sequence diagram below illustrates the above process of editing a person's d
 
 #### **Command Feature Purpose**
 
-The `list` command allows users to view all people in the `HRPlatform`.
+The `list` command allows users to view all people in the `AddressBook`.
 
 #### Key Components
 - **`ListCommand`**: Executes the listing operation to show all persons in the address book.
-- **`HRPlatformParser`**: Parses user input to create a `ListCommand` object.
+- **`AddressBookParser`**: Parses user input to create a `ListCommand` object.
 - **`LogicManager`**: Invokes the `ListCommand` to execute the list operation.
 - **`ModelManager`**: Implements the `Model` interface and contains the internal list of persons.
 - **`CommandResult`**: Encapsulates the result of the command execution, including any feedback to the user.
@@ -412,15 +416,16 @@ To help you understand how the `list` command works, here is a list of steps ill
 We will be using the user input `list` as an example.
 
 1. The user executes the command `list`, intending to list all persons in the address book.
-2. The `HRPlatformParser` interprets the input and creates a `ListCommand` object.
+2. The `AddressBookParser` interprets the input and creates a `ListCommand` object.
 3. The `LogicManager` invokes the execute method of `ListCommand`.
 4. The execute method of `ListCommand` calls `updateFilteredPersonList` in the `Model` to apply a filter to show all persons.
 5. The execute method of `ListCommand` returns a `CommandResult` object, indicating the command was successful with the message "Listed all persons".
 6. The UI reflects the updated list of persons.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `list` (e.g. `list xxxxxx`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `ListCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of executing the `list` command in TalentSG, which lists all persons in the address book.
@@ -437,7 +442,7 @@ The sequence diagram below illustrates the above process of executing the `list`
 
 #### **Command Feature Purpose**
 
-The `find` command allows users to find specific people in the `HRPlatform` based on a keyword.
+The `find` command allows users to find specific people in the `AddressBook` based on a keyword.
 
 #### Key Components
 - `FindCommand`: Executes the find operation based on the user's input.
@@ -445,7 +450,7 @@ The `find` command allows users to find specific people in the `HRPlatform` base
 - `LogicManager`: Invokes the `FindCommand` to execute the find operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Predicate`: Represents the keyword for finding persons whose name contains any of the argument keyword in TalentSG.
-- `HRPlatformParser`: Creates an `FindCommand` object based on the user input.
+- `AddressBookParser`: Creates an `FindCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -461,9 +466,10 @@ We will be using the user input `find John` as an example.
 6. The execute method of `FindCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FindCommand`.
 7. The UI reflects this updated filtered `Person` list.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `list` (e.g. `list xxxxxx`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `FindCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
@@ -478,9 +484,23 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 `filter STATUS`
 
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- **Case-Insensitive**: The search is case-insensitive.
+- **Available Statuses**:
+    - Applied
+    - Screening
+    - Interview Scheduled
+    - Interviewed
+    - Offer
+    - Onboarding
+    - Hired
+    - Rejected
+</div>
+
 #### **Command Feature Purpose**
 
-The `filter` command allows users to filter people in the `HRPlatform` based on their application status.
+The `filter` command allows users to filter people in the `AddressBook` based on their application status.
 
 #### Key Components
 - `FilterStatusCommand`: Executes the filter operation based on the user's input.
@@ -488,7 +508,7 @@ The `filter` command allows users to filter people in the `HRPlatform` based on 
 - `LogicManager`: Invokes the `FilterStatusCommand` to execute the filter operation.
 - `ModelManager`: Implements the `Model` interface and contains the internal list of persons.
 - `Predicate`: Represents the status for finding persons whose status matches in TalentSG.
-- `HRPlatformParser`: Creates an `FilterStatusCommand` object based on the user input.
+- `AddressBookParser`: Creates an `FilterStatusCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -504,9 +524,10 @@ We will be using the user input `filter Interviewed` as an example.
 6. The execute method of `FilterStatusCommand` returns a `CommandResult` object which stores the data regarding the completion of the `FilterStatusCommand`.
 7. The UI reflects this updated filtered `Person` list.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid status is detected after `filter` (e.g. `filter Helloo`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `FilterStatusCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the process of finding all persons based on keyword in TalentSG.
@@ -523,14 +544,14 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 #### **Command Feature Purpose**
 
-The `view` command allows users to view a `Person` in the `HRPlatform`.
+The `view` command allows users to view a `Person` in the `AddressBook`.
 
 #### Key Components
 - `ViewCommand`: Executes the viewing operation based on the user's input.
 - `ViewCommandParser`: Parses user input to create a `ViewCommand` object.
 - `PersonDataReceiver`: Updates the overview panel with the correct `Person` data
 - `Person`: Represents a person in TalentSG, encapsulating their personal information.
-- `HRPlatformParser`: Creates an `DeleteCommand` object based on the user input.
+- `AddressBookParser`: Creates an `DeleteCommand` object based on the user input.
 
 ### **Sequence of action**
 
@@ -545,9 +566,10 @@ We will be using the user input `delete 2` as an example.
 5. The execute method of `ViewCommand` returns a `CommandResult` object which stores the data regarding the completion of the `ViewCommand`.
 6. The UI reflects the `OverviewPanel` with the selected `Person`.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if input is detected as invalid, an error will be shown on the screen and the sequence of action is terminated.
+</div>
 
 #### `ViewCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of deleting a person from TalentSG.
@@ -564,11 +586,11 @@ The sequence diagram below illustrates the above process of deleting a person fr
 
 #### **Command Feature Purpose**
 
-The `summary` command provides a breakdown of the application statuses of all the people in the `HRPlatform`.
+The `summary` command provides a breakdown of the application statuses of all the people in the `AddressBook`.
 
 #### Key Components
-- **`SummaryCommand`**: Executes the summarization operation to display the counts for each application status in the `HRPlatform`.
-- **`HRPlatformParser`**: Parses user input to create a `SummaryCommand` object.
+- **`SummaryCommand`**: Executes the summarization operation to display the counts for each application status in the `AddressBook`.
+- **`AddressBookParser`**: Parses user input to create a `SummaryCommand` object.
 - **`LogicManager`**: Invokes the `SummaryCommand` to execute the summary operation.
 - **`ModelManager`**: Implements the `Model` interface and contains the internal list of persons.
 - **`CommandResult`**: Encapsulates the result of the command execution, including any feedback to the user.
@@ -579,8 +601,8 @@ To help you understand how the `summary` command works, here is a list of steps 
 
 We will be using the user input `summary` as an example:
 
-1. The user executes the command `summary`, intending to view a breakdown of all application statuses for candidates in the `HRPlatform`
-2. The `HRPlatformParser` interprets the input and creates a `SummaryCommand` object.
+1. The user executes the command `summary`, intending to view a breakdown of all application statuses for candidates in the `AddressBook`
+2. The `AddressBookParser` interprets the input and creates a `SummaryCommand` object.
 3. The `LogicManager` invokes the execute method of `SummaryCommand`.
 4. The execute method of `SummaryCommand` initializes a map of all possible statuses with counts set to 0.
 5. `SummaryCommand` collects the list of all candidates in the address book via `Model` and computes the count for each application status using a grouping and counting operation.
@@ -588,9 +610,10 @@ We will be using the user input `summary` as an example:
 7. The execute method of `SummaryCommand` returns a `CommandResult` object, encapsulating the summary message for display to the user.
 8. The UI then reflects this summarized breakdown of application statuses.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `summary` (e.g. `summary abc`), an error will be shown and the sequence of action is terminated.
+</div>
 
 #### `SummaryCommand` Implementation Sequence Diagram
 The sequence diagram below illustrates the above process of executing the `summary` command in TalentSG, which lists all persons in the address book.
@@ -607,11 +630,11 @@ The sequence diagram below illustrates the above process of executing the `summa
 
 #### **Command Feature Purpose**
 
-The `help` command provides a breakdown of the application statuses of all the people in the `HRPlatform`.
+The `help` command provides a breakdown of the application statuses of all the people in the `AddressBook`.
 
 #### Key Components
 - **`HelpCommand`**: Executes the operation to display the help instructions.
-- **`HRPlatformParser`**: Parses user input to create a `HelpCommand` object.
+- **`AddressBookParser`**: Parses user input to create a `HelpCommand` object.
 - **`CommandResult`**: Opens the help window and encapsulates the result of the command execution
 
 ### **Sequence of action**
@@ -620,16 +643,17 @@ To help you understand how the `help` command works, here is a list of steps ill
 
 We will be using the user input `help` as an example:
 
-1. The user executes the command `help`, intending to view usage instructions for the `HRPlatform`
-2. The `HRPlatformParser` interprets the input and creates a `HelpCommand` object.
+1. The user executes the command `help`, intending to view usage instructions for the `AddressBook`
+2. The `AddressBookParser` interprets the input and creates a `HelpCommand` object.
 3. The execute method of `HelpCommand` returns a `CommandResult` object, triggering the opening of the help window in the UI
 4. The UI then reflects this summarized breakdown of application statuses.
 
 The CommandResult object is then passed to the UI, which opens a panel displaying the help content.
 
-:information_source: **Note**:
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
 
 - At step 2, if an invalid input is detected after `help` (e.g. `help a123`), an error will be shown and the sequence of action is terminated.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
