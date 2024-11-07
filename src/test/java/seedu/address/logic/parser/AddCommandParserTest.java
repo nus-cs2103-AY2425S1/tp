@@ -189,31 +189,31 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing role prefix
         assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + VALID_PHONE_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
-                        + VALID_EMAIL_BOB + ADDRESS_DESC_BOB, expectedMessage);
+                + VALID_EMAIL_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + SEX_DESC_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + VALID_ADDRESS_BOB, expectedMessage);
-      
+                + EMAIL_DESC_BOB + VALID_ADDRESS_BOB, expectedMessage);
+
         // missing sex prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_SEX_BOB + ROLE_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + SEX_DESC_BOB + VALID_ROLE_BOB + VALID_PHONE_BOB
-                        + VALID_EMAIL_BOB + VALID_ADDRESS_BOB, expectedMessage);
+                + VALID_EMAIL_BOB + VALID_ADDRESS_BOB, expectedMessage);
     }
 
     @Test
