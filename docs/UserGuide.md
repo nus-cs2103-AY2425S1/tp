@@ -41,7 +41,7 @@ LogiLink allows you to manage your contacts on your desktop with keyboard comman
 
 1. Copy the `.jar` file to the folder you want to use as the _home folder_ for LogiLink.
 
-1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar addressbook.jar` to run LogiLink.<br>
+1. Within this _home folder_, open a command terminal (Right-click > Open in Terminal) and enter `java -jar LogiLink.jar` to run LogiLink.<br>
    - A window similar to the diagram should appear, and the program should contain some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -324,7 +324,7 @@ Format: `clear`
 
 **<ins>When in the main or inspect window**
 
-`clear` does not work in the inspect window.
+Clears all deliveries from the delivery list of a contact.
 
 ### Exiting the program : `exit`
 **<ins>When in the main or inspect window**
@@ -339,7 +339,7 @@ LogiLink data is saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-LogiLink data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+LogiLink data is saved automatically as a JSON file `[JAR file location]/data/LogiLink.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 

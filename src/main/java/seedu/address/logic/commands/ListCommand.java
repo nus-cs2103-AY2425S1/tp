@@ -16,7 +16,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS_PERSON = "Listed all persons";
+    public static final String MESSAGE_SUCCESS_PERSON = "Listed all contacts";
 
     public static final String MESSAGE_SUCCESS_DELIVERY = "Listed all deliveries";
 
