@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROPERTY;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PROPERTY;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,24 @@ public class BoughtPropertyCommandParserTest {
 
         BoughtPropertyCommand expectedCommand = new BoughtPropertyCommand(
                 INDEX_FIRST_PERSON,
+                INDEX_FIRST_PROPERTY,
+                actualPrice);
+
+        assertParseSuccess(parser, input, expectedCommand);
+    }
+
+    @Test
+    public void parseValidArgsReturnBoughtCommandWithUpdatedPriceForThirdPerson_success() {
+        String priceString = "1500000";
+        Price actualPrice = new Price(priceString);
+
+        String input = INDEX_THIRD_PERSON.getOneBased()
+                + " "
+                + INDEX_FIRST_PROPERTY.getOneBased()
+                + " ap/" + priceString;
+
+        BoughtPropertyCommand expectedCommand = new BoughtPropertyCommand(
+                INDEX_THIRD_PERSON,
                 INDEX_FIRST_PROPERTY,
                 actualPrice);
 

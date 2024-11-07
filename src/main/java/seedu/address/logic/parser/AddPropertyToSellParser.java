@@ -62,7 +62,7 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTAL_CODE).get());
         UnitNumber unitNumber = ParserUtil.parseUnitNumber(argMultimap.getValue(PREFIX_UNIT_NUMBER).get());
         if (!ParserUtil.isValidNumberOfPropertyTags(argMultimap.getAllValues(PREFIX_TAG))) {
-            throw new ParseException(AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LIMIT);
+            throw new ParseException(Property.MESSAGE_PROPERTY_TAG_LIMIT);
         }
         if (!ParserUtil.isValidLengthPropertyTags(argMultimap.getAllValues(PREFIX_TAG))) {
             throw new ParseException(AddPropertyToSellCommand.MESSAGE_PROPERTY_TAG_LENGTH_LIMIT);

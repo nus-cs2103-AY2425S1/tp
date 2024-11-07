@@ -66,20 +66,6 @@ public class HdbTest {
         assertTrue(hdb1.equals(hdb1)); // Same object should return true
         assertFalse(hdb1.equals(apartment1)); // Different subclass should return false
         assertTrue(hdb1.equals(hdb2)); // Different object, same content should return true
-
-        /*// Test for equality with a different but identical object
-        assertTrue(hdb1.equals(hdb2)); // Different object, same content should return true
-
-        // Test for inequality with a different Hdb object
-        assertFalse(hdb1.equals(hdb3)); // Different content should return false
-
-        // Test for inequality with an object that is not an Hdb
-        assertFalse(hdb1.equals(null)); // Null should return false
-        assertFalse(hdb1.equals(new Object())); // Different type should return false
-
-        // Test for inequality with a different Property subclass (e.g., Bto)
-        Bto bto = new Bto(new PostalCode("123456"), new UnitNumber("01-01"), new Price("300000"), tags);
-        assertFalse(hdb1.equals(bto)); // Different subclass should return false*/
     }
 
     @Test
@@ -102,11 +88,6 @@ public class HdbTest {
         assertEquals(Collections.unmodifiableSet(tags1), hdb1.getTags());
     }
 
-    /*@Test
-    public void equals_sameObject_success() {
-        assertTrue(hdb1.equals(hdb1));
-    }*/
-
     @Test
     public void equals_nullObject_failure() {
         assertFalse(hdb1.equals(null));
@@ -122,12 +103,6 @@ public class HdbTest {
         assertFalse(hdb1.equals(hdb2));
     }
 
-    /*@Test
-    public void equals_sameHdb_success() {
-        Hdb sameHdb = new Hdb(postalCode1, unitNumber1, price1, tags1);
-        assertTrue(hdb1.equals(sameHdb));
-    }*/
-
     @Test
     public void hashCode_sameHdb_success() {
         Hdb sameHdb = new Hdb(postalCode1, unitNumber1, price1, tags1);
@@ -136,7 +111,7 @@ public class HdbTest {
 
     @Test
     public void toString_success() {
-        String expectedString = "Hdb Postal Code: 123456;  Unit Number: 01-01;  Price: 1000000;  "
+        String expectedString = "Hdb Postal Code: S(123456);  Unit Number: #01-01;  Price: $1000000;  "
                 + "Actual Price: 0; Tags: [Tag1]";
         assertEquals(expectedString, hdb1.toString());
     }

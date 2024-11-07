@@ -6,8 +6,9 @@ package seedu.address.model.person;
  */
 public class UnitNumber {
 
-    public static final String MESSAGE_CONSTRAINTS = "Unit numbers should be numeric with one hyphen in between";
-    public static final String VALIDATION_REGEX = "\\d+-\\d+";
+    public static final String MESSAGE_CONSTRAINTS = "Unit numbers should be alphanumeric. \n"
+            + "The unit number should be in the format of 'XXX-XXX', where X is a digit.\n"
+            + "The first and second part of the unit number should not be more than 3 digits long.";
 
     public final String value;
 
@@ -24,7 +25,16 @@ public class UnitNumber {
      * Returns true if a given string is a valid unit number.
      */
     public static boolean isValidUnitNumber(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.contains("-")) {
+            return false;
+        }
+        String[] split = test.split("-");
+        // The string in each array must be at max length 3
+        if (split.length == 2) {
+            return split[0].length() <= 3 && split[1].length() <= 3;
+        } else {
+            return false;
+        }
     }
 
     @Override

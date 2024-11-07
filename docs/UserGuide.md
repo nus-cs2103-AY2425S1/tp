@@ -22,7 +22,7 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 <!-- * Table of Contents -->
 # Table of Contents
 - [Quick Start](#quick-start)
-- [Features](#features) 
+- [Features](#features)
   - [General Commands](#general-commands)
     - [Viewing help: `help`](#viewing-help--help)
     - [Viewing overall statistics: `stats`](#viewing-overall-statistics--stats)
@@ -83,7 +83,7 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
     - **macOS**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
 
 6. Run the application by typing `java -jar nustates.jar` in the terminal and pressing `Enter`.
-   
+
     A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -367,7 +367,7 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findBuy condo` returns `Alex Yeoh`
 * `findp condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
-  
+
 
 ## Finding persons based on properties to sell: `findSell`
 
@@ -389,7 +389,7 @@ Format: `findSell KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findSell condo` returns `Alex Yeoh`
 * `findSell condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
-  
+
 ## Listing Entries Commands
 
 ### Listing all persons : `list`
@@ -424,7 +424,7 @@ Format: `sorti INDEX f/FIELD o/ORDER`
 
 * The INDEX **must be a positive integer** 1, 2, 3, …​
 * The parameters FIELD and ORDER are case-sensitive.
-* The FIELD parameter can be `Price` 
+* The FIELD parameter can be `Price`
 * The ORDER parameter can be `L` for ascending and `H` for descending.
 
 Examples:

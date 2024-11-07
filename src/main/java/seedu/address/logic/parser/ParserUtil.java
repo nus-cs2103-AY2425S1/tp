@@ -11,6 +11,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.HousingType;
@@ -144,7 +145,7 @@ public class ParserUtil {
      */
     public static boolean isValidNumberOfPropertyTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
-        return tags.size() <= 3;
+        return tags.size() <= 2;
     }
 
     /**
@@ -153,13 +154,12 @@ public class ParserUtil {
     public static boolean isValidLengthPropertyTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         for (String tagName : tags) {
-            if (tagName.length() > 10) {
+            if (tagName.length() > 9) {
                 return false;
             }
         }
-        return true;
+        return tags.size() <= 2;
     }
-
 
     /**
      * Parses a {@code String housingType} into a {@code HousingType}.
@@ -185,6 +185,10 @@ public class ParserUtil {
     public static Price parseSellingPrice(String sellingPrice) throws ParseException {
         requireNonNull(sellingPrice);
         String trimmedSellingPrice = sellingPrice.trim();
+        int sellingPriceInt = Integer.parseInt(trimmedSellingPrice);
+        if (sellingPriceInt > 2000000000) {
+            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedSellingPrice)) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
@@ -200,6 +204,10 @@ public class ParserUtil {
     public static Price parseBuyingPrice(String buyingPrice) throws ParseException {
         requireNonNull(buyingPrice);
         String trimmedBuyingPrice = buyingPrice.trim();
+        int buyingPriceInt = Integer.parseInt(trimmedBuyingPrice);
+        if (buyingPriceInt > 2000000000) {
+            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedBuyingPrice)) {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
@@ -252,6 +260,17 @@ public class ParserUtil {
                 + statistics.getUniqueSellingPropertyList().getUniqueSellingPropertiesCount()
                 + "\nUnique Number of Properties-to-Buy: "
                 + statistics.getUniqueBuyingPropertyList().getUniqueBuyingPropertiesCount();
+        return message;
+    }
+
+    /**
+     * Parses the Commands and returns a String representation of the {@code Commands}.
+     *
+     * @param addressBook The list of commands AddressBook implements.
+     * @return A String representation of the {@code Commands}
+     */
+    public static String parseCommandList(AddressBook addressBook) {
+        String message = addressBook.getCommandList().toString();
         return message;
     }
 }

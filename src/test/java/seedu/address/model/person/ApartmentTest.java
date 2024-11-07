@@ -69,17 +69,6 @@ public class ApartmentTest {
         // Example: Asserting that two different objects are not equal (should return false)
         assertFalse(apartment1.equals(bto1));
         assertTrue(apartment1.equals(apartment2));
-
-
-        /*// Test for equality with a different but identical object
-        assertTrue(apartment1.equals(apartment2)); // Different object, same content should return true
-
-        // Test for inequality with a different Apartment object
-        assertFalse(apartment1.equals(apartment3)); // Different content should return false
-
-        // Test for inequality with an object that is not an Apartment
-        assertFalse(apartment1.equals(null)); // Null should return false
-        assertFalse(apartment1.equals(new Object())); // Different type should return false*/
     }
 
     @Test
@@ -102,11 +91,6 @@ public class ApartmentTest {
         assertEquals(Collections.unmodifiableSet(tags1), apartment1.getTags());
     }
 
-    /*@Test
-    public void equals_sameObject_success() {
-        assertTrue(apartment1.equals(apartment1));
-    }*/
-
     @Test
     public void equals_nullObject_failure() {
         assertFalse(apartment1.equals(null));
@@ -122,12 +106,6 @@ public class ApartmentTest {
         assertFalse(apartment1.equals(apartment2));
     }
 
-    /*@Test
-    public void equals_sameApartment_success() {
-        Apartment sameApartment = new Apartment(postalCode1, unitNumber1, price1, tags1);
-        assertTrue(apartment1.equals(sameApartment));
-    }*/
-
     @Test
     public void hashCode_sameApartment_success() {
         Apartment sameApartment = new Apartment(postalCode1, unitNumber1, price1, tags1);
@@ -136,7 +114,7 @@ public class ApartmentTest {
 
     @Test
     public void toString_success() {
-        String expectedString = "Apartment Postal Code: 123456;  Unit Number: 01-01;  Price: 1000000;  "
+        String expectedString = "Apartment Postal Code: S(123456);  Unit Number: #01-01;  Price: $1000000;  "
                 + "Actual Price: 0; Tags: [Tag1]";
         assertEquals(expectedString, apartment1.toString());
     }

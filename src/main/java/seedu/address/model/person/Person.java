@@ -120,16 +120,22 @@ public class Person {
      * Returns the total sales revenue for this person who has sold properties.
      */
     public int getSalesRevenue() {
-        return this.getListOfPropertiesSold().stream().mapToInt(property -> (property.getActualPrice() != null)
-                ? property.getActualPrice().getPrice() : new Price("0").getPrice()).sum();
+        int actualPrice = 0;
+        for (Property property : propertiesSold) {
+            actualPrice += property.getActualPrice().getPrice();
+        }
+        return actualPrice;
     }
 
     /**
      * Returns the total purchase expense for this person who has bought properties.
      */
     public int getPurchaseExpense() {
-        return this.getListOfPropertiesBought().stream().mapToInt(property -> (property.getActualPrice() != null)
-                ? property.getActualPrice().getPrice() : new Price("0").getPrice()).sum();
+        int actualPrice = 0;
+        for (Property property : propertiesBought) {
+            actualPrice += property.getActualPrice().getPrice();
+        }
+        return actualPrice;
     }
 
     /**
@@ -236,7 +242,7 @@ public class Person {
 
 
     /**
-     * Returns the {@code Property} purchased with its updated price.
+     * Returns the {@code Property} purchased after setting it's updated actual price.
      *
      * @param index One based Index of property bought in the list of properties to buy.
      * @param actualPrice {@code Price} of the actual price of the property provided by the user.

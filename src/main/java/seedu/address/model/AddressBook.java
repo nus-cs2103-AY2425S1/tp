@@ -8,6 +8,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.command.Commands;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 import seedu.address.model.person.UniquePersonList;
@@ -19,6 +20,7 @@ import seedu.address.model.statistics.AddressBookStatistics;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    private final Commands commandList;
     private final UniquePersonList persons;
     private final AddressBookStatistics statistics;
     private Comparator<Person> sortComparator = null;
@@ -31,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
+        commandList = new Commands();
         persons = new UniquePersonList();
         statistics = new AddressBookStatistics();
     }
@@ -64,10 +67,24 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the {@code addressBookStatistics}.
+     * Resets the existing statistics of this {@code AddressBook}.
      */
     public void resetStatistics() {
         this.statistics.reset();
+    }
+
+    /**
+     * Refreshes the {@code addressBookStatistics}.
+     */
+    public void refreshStatistics(ObservableList<Person> personList) {
+        this.statistics.processPersonListData(personList);
+    }
+
+    /**
+     * Refreshes the {@code addressBookStatistics}.
+     */
+    public void refreshStatistics() {
+        this.statistics.processPersonListData(this.persons.asUnmodifiableObservableList());
     }
 
     /**
@@ -77,7 +94,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         List<Person> latestPersonList = newData.getPersonList();
         setPersons(latestPersonList);
-        this.statistics.processPersonListData(latestPersonList);
+        refreshStatistics();
     }
 
     //// person-level operations
@@ -169,6 +186,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    public Commands getCommandList() {
+        return this.commandList;
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

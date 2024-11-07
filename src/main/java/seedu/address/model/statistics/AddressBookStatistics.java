@@ -84,17 +84,17 @@ public class AddressBookStatistics {
     /**
      * Processes the data of each {@code person} added to the addressBook and appends it to the corresponding statistic.
      *
-     * @param personList List of {@code person} who is being added to the addressBook
+     * @param personList {@code ObservableList} of {@code Person} being added to the addressBook
      */
-    public void processPersonListData(List<Person> personList) {
+    public void processPersonListData(ObservableList<Person> personList) {
         requireNonNull(personList);
         this.totalPersons = this.getTotalPersonsFromPersonList(personList);
         this.uniqueSellingPropertyList = this.getUniqueSellingPropertyListFromPersonList(personList);
         this.uniqueBuyingPropertyList = this.getUniqueBuyingPropertyListFromPersonList(personList);
-        this.totalPropertiesSold = this.getTotalPropertiesSoldFromPersonList(personList); //TODO Testing
-        this.totalPropertiesBought = this.getTotalPropertiesBoughtFromPersonList(personList); //TODO Testing
-        this.totalSalesRevenue = this.getTotalSalesRevenueFromPersonList(personList); //TODO Testing
-        this.totalPurchaseExpense = this.getTotalPurchaseExpenseFromPersonList(personList); //TODO Testing
+        this.totalPropertiesSold = this.getTotalPropertiesSoldFromPersonList(personList);
+        this.totalPropertiesBought = this.getTotalPropertiesBoughtFromPersonList(personList);
+        this.totalSalesRevenue = this.getTotalSalesRevenueFromPersonList(personList);
+        this.totalPurchaseExpense = this.getTotalPurchaseExpenseFromPersonList(personList);
     }
 
     /**
@@ -122,10 +122,16 @@ public class AddressBookStatistics {
         return totalPropertiesSold;
     }
 
+    /**
+     * Returns the {@code totalSalesRevenue} of the current {@code AddressBookStatistics}.
+     */
     public int getTotalSalesRevenue() {
         return totalSalesRevenue;
     }
 
+    /**
+     * Returns the {@code totalPurchaseExpense} of the current {@code AddressBookStatistics}.
+     */
     public int getTotalPurchaseExpense() {
         return totalPurchaseExpense;
     }
@@ -139,16 +145,23 @@ public class AddressBookStatistics {
     }
 
     /**
-     * Returns the number of {@code persons} in the list of persons.
+     * Returns the number of {@code persons} in the given {@code personList}.
      */
     public int getTotalPersonsFromPersonList(List<Person> personList) {
         return personList.size();
     }
 
     /**
-     * Returns the total number of {@code propertiesBought} from the list of persons.
+     * Returns the number of {@code persons} in the given {@code ObservableList} of {@code Person}.
      */
-    public int getTotalPropertiesBoughtFromPersonList(List<Person> personList) {
+    public int getTotalPersonsFromPersonList(ObservableList<Person> personList) {
+        return personList.size();
+    }
+
+    /**
+     * Returns the total number of {@code propertiesBought} from the given {@code ObservableList} of {@code Person}.
+     */
+    public int getTotalPropertiesBoughtFromPersonList(ObservableList<Person> personList) {
         int count = 0;
         for (Person person : personList) {
             count += person.getNumberOfPropertiesBought();
@@ -157,9 +170,9 @@ public class AddressBookStatistics {
     }
 
     /**
-     * Returns the total number of {@code propertiesSold} from the list of persons.
+     * Returns the total number of {@code propertiesSold} from the given {@code ObservableList} of {@code Person}.
      */
-    public int getTotalPropertiesSoldFromPersonList(List<Person> personList) {
+    public int getTotalPropertiesSoldFromPersonList(ObservableList<Person> personList) {
         int count = 0;
         for (Person person : personList) {
             count += person.getNumberOfPropertiesSold();
@@ -168,9 +181,9 @@ public class AddressBookStatistics {
     }
 
     /**
-     * Returns the total sales made by all the persons in the current address book.
+     * Returns the total sales made by all the persons in the given {@code ObservableList} of {@code Person}.
      */
-    public int getTotalSalesRevenueFromPersonList(List<Person> personList) {
+    public int getTotalSalesRevenueFromPersonList(ObservableList<Person> personList) {
         int totalRevenue = 0;
         for (Person person : personList) {
             totalRevenue += person.getSalesRevenue();
@@ -179,20 +192,21 @@ public class AddressBookStatistics {
     }
 
     /**
-     * Returns the total expenses incurred by all the persons in the current address book.
+     * Returns the total expenses incurred by all the persons in the given {@code ObservableList} of {@code Person}.
      */
-    public int getTotalPurchaseExpenseFromPersonList(List<Person> personList) {
+    public int getTotalPurchaseExpenseFromPersonList(ObservableList<Person> personList) {
         int totalExpense = 0;
         for (Person person : personList) {
-            totalExpense += person.getSalesRevenue();
+            totalExpense += person.getPurchaseExpense();
         }
         return totalExpense;
     }
 
     /**
-     * Returns a {@code uniqueSellingPropertyList} of {@code uniqueSellingProperties} from the list of persons.
+     * Returns a {@code uniqueSellingPropertyList} of {@code uniqueSellingProperties} from the give
+     * {@code ObservableList} of {@code Person}.
      */
-    public UniqueSellingPropertyList getUniqueSellingPropertyListFromPersonList(List<Person> personList) {
+    public UniqueSellingPropertyList getUniqueSellingPropertyListFromPersonList(ObservableList<Person> personList) {
         UniqueSellingPropertyList uniqueSellingPropertyList = new UniqueSellingPropertyList();
         for (Person person : personList) {
             uniqueSellingPropertyList.addUniqueSellingProperties(person.getListOfSellingProperties());
@@ -201,13 +215,33 @@ public class AddressBookStatistics {
     }
 
     /**
-     * Returns a {@code uniqueSellingPropertyList} of {@code uniqueSellingProperties} from the list of persons.
+     * Returns a {@code uniqueSellingPropertyList} of {@code uniqueSellingProperties} from the given
+     * {@code ObservableList} of {@code Person}.
      */
-    public UniqueBuyingPropertyList getUniqueBuyingPropertyListFromPersonList(List<Person> personList) {
+    public UniqueBuyingPropertyList getUniqueBuyingPropertyListFromPersonList(ObservableList<Person> personList) {
         UniqueBuyingPropertyList uniqueBuyingPropertyList = new UniqueBuyingPropertyList();
         for (Person person : personList) {
             uniqueBuyingPropertyList.addUniqueBuyingProperties(person.getListOfBuyingProperties());
         }
         return uniqueBuyingPropertyList;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddressBookStatistics)) {
+            return false;
+        }
+
+        AddressBookStatistics otherAddressBookStatistics = (AddressBookStatistics) other;
+        return this.equals(otherAddressBookStatistics.getTotalPersons())
+                && this.equals(otherAddressBookStatistics.getTotalPropertiesBought())
+                && this.equals(otherAddressBookStatistics.getTotalPropertiesSold())
+                && this.equals(otherAddressBookStatistics.getTotalSalesRevenue())
+                && this.equals(otherAddressBookStatistics.getTotalPurchaseExpense());
     }
 }

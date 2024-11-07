@@ -17,6 +17,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -109,6 +110,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /** Returns an unmodifiable view of filtered person based on their phone number */
     ObservableList<Person> getFilteredPhoneNumberList();
 
@@ -117,4 +119,7 @@ public interface Model {
 
     /** Unpins the given person from the top of the list */
     void unpinPerson(Person target);
+
+    /** Refreshes the AddressBookStatistics with the existing AddressBook. **/
+    void refreshStatistics();
 }

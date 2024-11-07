@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.statistics.AddressBookStatistics;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatisticsPanel statisticsPanel;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +52,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -186,6 +191,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isStatisticsPresent()) {
+                showStatistics(commandResult.getAddressBookStatistics());
+            } else {
+                showPersonList();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -193,4 +204,36 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Displays the statistics panel in the user interface. Clears any existing content in the
+     * {@code personListPanelPlaceholder} and initializes a new {@code StatisticsPanel} using the provided
+     * {@code AddressBookStatistics} and adds it to the placeholder.
+     *
+     * @param addressBookStatistics The {@code AddressBookStatistics} instance containing the data to be displayed in
+     *                              the statistics panel.
+     */
+    private void showStatistics(AddressBookStatistics addressBookStatistics) {
+        // Clear the placeholder
+        personListPanelPlaceholder.getChildren().clear();
+
+        // Initialize the StatisticsPanel and add it to the placeholder
+        statisticsPanel = new StatisticsPanel(addressBookStatistics);
+        personListPanelPlaceholder.getChildren().add(statisticsPanel.getRoot());
+    }
+
+    /**
+     * Displays the person list panel in the user interface. Clears any existing content in the
+     * {@code personListPanelPlaceholder} and initializes a new {@code PersonListPanel} with the list of filtered
+     * persons obtained from {@code logic} and adds it to the placeholder.
+     */
+    private void showPersonList() {
+        // Clear the placeholder
+        personListPanelPlaceholder.getChildren().clear();
+
+        // Reinitialize the PersonListPanel
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
 }

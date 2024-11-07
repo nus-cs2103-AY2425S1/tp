@@ -16,6 +16,8 @@ import seedu.address.model.tag.Tag;
 public abstract class Property {
 
     public static final String MESSAGE_CONSTRAINTS = "Property names should be alphanumeric";
+    public static final String MESSAGE_PROPERTY_TAG_LIMIT = "The number of tags for a property cannot exceed 2 and "
+            + "the number of characters for each tag cannot exceed 9";
 
     private final PostalCode postalCode;
     private final UnitNumber unitNumber;
@@ -169,11 +171,8 @@ public abstract class Property {
         String formattedTags = tags.stream()
                 .map(Tag::toString) // Convert each Tag object to its String representation
                 .collect(Collectors.joining(", ")); // Join with a comma and space
-        return "Postal Code: " + postalCode + "; " + " Unit Number: " + unitNumber + "; " + " Price: " + price + "; "
+        return "Postal Code: S(" + postalCode + "); " + " Unit Number: #" + unitNumber + "; "
+                + " Price: $" + price + "; "
                 + " Actual Price: " + actualPrice + "; Tags: " + formattedTags;
     }
-    /*public String toString() {
-        return "[" + postalCode + "]" + " Unit Number: " + unitNumber;
-    }*/
-
 }

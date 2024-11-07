@@ -41,6 +41,7 @@ public class PropertyToBuyBuilder {
         unitNumber = new UnitNumber(DEFAULT_UNIT_NUMBER);
         price = new Price(DEFAULT_PRICE);
         housingType = HousingType.HDB;
+        actualPrice = new Price("0");
         tags = new HashSet<>();
     }
 

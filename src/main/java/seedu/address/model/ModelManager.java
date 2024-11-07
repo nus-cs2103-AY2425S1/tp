@@ -26,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -125,6 +126,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        addressBook.refreshStatistics(addressBook.getPersonList());
     }
 
     @Override
@@ -173,6 +175,11 @@ public class ModelManager implements Model {
         requireNonNull(target);
         target.unpin();
         addressBook.sortPersonList();
+    }
+
+    @Override
+    public void refreshStatistics() {
+        this.addressBook.refreshStatistics();
     }
 
     @Override

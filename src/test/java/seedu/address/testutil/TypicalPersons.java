@@ -51,7 +51,6 @@ public class TypicalPersons {
             .withAddress("312, Clementi Ave 2, #02-26")
             .withEmail("billm@example.com").withPhone("98765444")
             .withTags("owesMoney", "friends")
-            .withBuyProperty(PROPERTY_HDB)
             .withBuyProperty(PROPERTY_BTO)
             .withSellProperty(PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS)
             .withSellProperty(PROPERTY_CONDO_WITH_TAG)
