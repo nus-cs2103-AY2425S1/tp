@@ -6,7 +6,7 @@ title: CCAConnect
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F11-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2425S1-CS2103T-F11-2/tp/graph/badge.svg?token=59BYKYL6CJ)](https://codecov.io/gh/AY2425S1-CS2103T-F11-2/tp)
 
-![Ui](images/mockup.png)
+![Ui](images/Ui.png)
 
 **CCAConnect assists CCA leaders in NUS in managing and collating relevant CCA personnel’s contact details.**
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
