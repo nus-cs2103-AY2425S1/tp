@@ -28,7 +28,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all current (i.e. not archived) contacts.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -96,15 +96,25 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
+Shows a list of persons in the address book, sorted according to the latest sorting order specified by the `sort` command. If no sorting order has been specified, the list will be sorted by priority from HIGH to LOW.
+- `list`: Shows a list of people who are current contacts (i.e. not archived)
+- `list archive/`: Shows a list of people who are archived
+- `list all/`: Shows a list of all people
 
-Format: `list`
+Format: `list [archive/] [all/]`
+
+<box type="warning" seamless>
+
+**Caution:**
+- Should not be used with both `archive/` and `all/` concurrently, e.g. `list archive/ all/` ❌, `list archive/` ✅
+- `archive/` and `all/` should not have parameter values, e.g. `list archive/bob` ❌, `list archive/` ✅
+</box>
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -263,6 +273,39 @@ Examples:
 * `deletescheme 1 i/1` deletes the 1st scheme from the 1st person in the address book.
 * `deletescheme 1 i/1, 2` deletes the 1st and 2nd scheme from the 1st person in the address book.
 
+### Archiving person : `archive`
+
+Archives the specified person from the address book.
+
+Format: `archive INDEX`
+
+* Archives the person at the specified `INDEX`.
+* The index refer to the index number shown in the displayed person list.
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …
+* The specified person must currently not be archived.
+
+Examples:
+* `list` followed by `archive 2` archives the 2nd person in the address book.
+
+<box type="info" seamless>
+
+**Info:** It is still possible to make changes to archived people
+</box>
+
+### Unarchiving person : `unarchive`
+
+Unarchives the specified person from the address book.
+
+Format: `unarchive INDEX`
+
+* Unarchives the person at the specified `INDEX`.
+* The index refer to the index number shown in the displayed person list.
+* The index **must be a positive integer** not exceeding the last index number e.g. 1, 2, 3, …
+* The specified person must be currently archived.
+
+Examples:
+* `list archive/` followed by `unarchive 1` unarchives the 1st person in the address book.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -311,14 +354,16 @@ Action           | Format, Examples
 **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/98765432 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**        | `clear`
 **Delete**       | `delete INDEXES`<br> Indexes are the index of the person in the person list <br>e.g., `delete 2,3`
-**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH] [pri/PRIORITY] [income/INCOME] [famsize/FAMILY_SIZE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Get**          | `get PARAMETERS`<br> e.g.,`get email phone`
 **Undo**         | `undo`
-**List**         | `list`
+**List**         | `list [archive/] [all/]` <br> e.g., `list`, `list archive/`, `list all/`
 **Statistics**   | `statistics` <br> Shows general statistics
 **Scheme**       | `scheme INDEX` <br> e.g., `scheme 1`
 **AddScheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`
 **ViewScheme**   | `viewscheme INDEX` <br> e.g., `viewscheme 1`
 **DeleteScheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`
+**Archive**      | `archive INDEX` <br> e.g., `archive 1`
+**Unarchive**      | `unarchive INDEX` <br> e.g., `unarchive 1`
 **Help**         | `help`
