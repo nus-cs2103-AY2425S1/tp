@@ -17,13 +17,11 @@ Class StorageManager
 package "AddressBook Storage" #F4F6F6{
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+Class JsonSerializableStudentAddressBook
 Class JsonAdaptedStudent
 Class JsonAdaptedAttendance
 Class JsonAdaptedAttendanceRecord
 Class JsonAdaptedAssignment
-}
-
 }
 
 Class HiddenOutside #FFFFFF
@@ -38,8 +36,8 @@ Storage -right-|> AddressBookStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedStudent
+JsonAddressBookStorage ..> JsonSerializableStudentAddressBook
+JsonSerializableStudentAddressBook --> "*" JsonAdaptedStudent
 
 
 JsonAdaptedStudent *--> "*" JsonAdaptedAssignment
