@@ -73,8 +73,10 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
-        appointments.add(new FilteredAppointment(ALICE.getAppts().get(0), ALICE));
-        appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
+        FilterCommand command = new FilterCommand(dateFilter);
+
+        appointments.add(new FilteredAppointment(ALICE.getImmutableApptList().get(0), ALICE));
+        appointments.add(new FilteredAppointment(CARL.getImmutableApptList().get(0), CARL));
 
         executeAssertions(dateFilter, expectedMessage);
     }
@@ -88,8 +90,8 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "2 appts found " + dateFilter + RETURN_TO_HOME;
 
-        appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
-        appointments.add(new FilteredAppointment(CARL.getAppts().get(0), CARL));
+        appointments.add(new FilteredAppointment(BENSON.getImmutableApptList().get(0), BENSON));
+        appointments.add(new FilteredAppointment(CARL.getImmutableApptList().get(0), CARL));
 
         executeAssertions(dateFilter, expectedMessage);
     }
@@ -102,7 +104,7 @@ public class FilterCommandTest {
         AppointmentDateFilter dateFilter = new AppointmentDateFilter(startDate, endDate, service);
         String expectedMessage = "1 appt found " + dateFilter + RETURN_TO_HOME;
 
-        appointments.add(new FilteredAppointment(BENSON.getAppts().get(0), BENSON));
+        appointments.add(new FilteredAppointment(BENSON.getImmutableApptList().get(0), BENSON));
 
         executeAssertions(dateFilter, expectedMessage);
     }

@@ -134,6 +134,10 @@ public class Patient {
         return address;
     }
 
+    public ApptList getAppts() {
+        return appts;
+    }
+
     // ApptList access functions
     /**
      * Returns the most recent past appointment.
@@ -167,8 +171,8 @@ public class Patient {
      *
      * @return List of appointments.
      */
-    public List<Appt> getAppts() {
-        return appts.getAppts();
+    public List<Appt> getImmutableApptList() {
+        return appts.getImmutableApptList();
     }
 
     /**

@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import java.util.Arrays;
+
 /**
  * Represents the keywords that are used in the command line.
  */
@@ -23,11 +25,8 @@ public enum CommandKeywords {
      * @return True if the keyword is a valid command keyword, false otherwise.
      */
     public static boolean isValidCommandKeyword(String keyword) {
-        for (CommandKeywords command : CommandKeywords.values()) {
-            if (command.name().equalsIgnoreCase(keyword)) {
-                return true;
-            }
-        }
-        return false;
+        assert keyword != null;
+        return Arrays.stream(CommandKeywords.values())
+                .anyMatch(commandKeyword -> commandKeyword.name().equalsIgnoreCase(keyword));
     }
 }

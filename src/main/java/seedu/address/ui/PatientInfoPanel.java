@@ -102,7 +102,7 @@ public class PatientInfoPanel extends UiPart<Region> {
         email.setText("Email: " + (patient.getEmail() == null ? "" : patient.getEmail().toString()));
         address.setText("Address: " + (patient.getAddress() == null ? "" : patient.getAddress().toString()));
         appointments.setText(
-                patient.getAppts() == null ? "" : patient.getApptsString());
+                patient.getImmutableApptList() == null ? "" : patient.getApptsString());
         allergies.setText(patient.getAllergies() == null ? "" : patient.getAllergiesString());
         bloodType.setText("Blood Type: "
                 + (patient.getBloodType() == null ? "" : patient.getBloodType().toString()));

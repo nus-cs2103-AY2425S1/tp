@@ -1,29 +1,24 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a help page
+ * Controller for a help keyword page.
  */
 public class HelpKeywordWindow extends UiPart<Stage> {
 
+    private static Map<String, HelpKeywordWindow> openHelpKeywordWindows = new HashMap<>();
     private static final Logger logger = LogsCenter.getLogger(HelpKeywordWindow.class);
     private static final String FXML = "HelpKeywordWindow.fxml";
-
-    @FXML
-    private ScrollPane scrollPane;
-
-    @FXML
-    private VBox helpKeywordContainer;
 
     @FXML
     private Label header;
@@ -59,8 +54,11 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         setHelpKeywordContent(keyword);
         getRoot().setWidth(500);
         getRoot().setHeight(400);
-
-        closeWindowKeyboardShortcut();
+        openHelpKeywordWindows.put(keyword, this);
+        closeWindowKeyboardShortcut(keyword);
+        getRoot().setOnCloseRequest(event -> {
+            openHelpKeywordWindows.remove(keyword);
+        });
     }
 
     /**
@@ -340,13 +338,6 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
-     */
-    public boolean isShowing() {
-        return getRoot().isShowing();
-    }
-
-    /**
      * Hides the help window.
      */
     public void hide() {
@@ -361,14 +352,26 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     }
 
     /**
+     * Checks if HelpKeywordWindow with {@code keyword} is currently open.
+     */
+    public static boolean isOpen(String keyword) {
+        return openHelpKeywordWindows.containsKey(keyword);
+    }
+
+    public static HelpKeywordWindow getHelpKeywordWindow(String keyword) {
+        return openHelpKeywordWindows.get(keyword);
+    }
+
+    /**
      * Closes the help keyword window.
      */
-    public void closeWindowKeyboardShortcut() {
+    public void closeWindowKeyboardShortcut(String keyword) {
         Stage stage = (Stage) getRoot().getScene().getWindow();
         if (stage != null) {
             stage.addEventHandler(KeyEvent.KEY_PRESSED, t -> {
                 if (t.getCode() == KeyCode.ESCAPE) {
                     stage.close();
+                    openHelpKeywordWindows.remove(keyword);
                     t.consume();
                 }
             });

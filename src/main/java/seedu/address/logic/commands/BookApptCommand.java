@@ -72,7 +72,7 @@ public class BookApptCommand extends Command {
         Patient patient = optionalPatient.get();
 
         // Check for duplicate appointments
-        boolean hasDuplicate = patient.getAppts().stream()
+        boolean hasDuplicate = patient.getImmutableApptList().stream()
             .anyMatch(appt -> appt.equals(this.appt));
 
         if (hasDuplicate) {
