@@ -226,7 +226,7 @@ The reminder diagram below models the interaction between the different componen
 
 #### Example Usage
 1. User inputs the command `reminder Alice Tan r/3 hours`.
-2. This creates a reminder for a person named "alice tan", with reminder time "3 hours".
+2. This creates a reminder note for a person named "alice tan", with reminder time "3 hours".
 3. The reminder is then displayed in the UI, reflecting that a reminder note has been set for "alice tan"'s appointment.
 
 ### Delete Appointment Feature
@@ -638,6 +638,7 @@ and Personal Data Protection Act (PDPA), so that I manage client data in a compl
 * **Condition**: The client's specific physical or functional impairment, injury, or disorder that affects movement, strength, flexibility, or overall physical function.
 * **Tag**: A label to indicate the treatment type of the client.
 * **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
+* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the phyisotherapist keep track of when they need to follow up with the client.
 * **API**: Application Programming Interface.
 * **GUI**: Graphical User Interface.
 * **MSS**: Main Success Scenario.
@@ -778,9 +779,9 @@ testers are expected to do more *exploratory* testing.
 
     1. **Test case**: `reminder John Doe r/1 cycle`<br>**Expected**: No contact is updated with the corresponding reminder time due to invalid reminder format. Error details shown in the status message.
 
-### Deleting a reminder
+### Deleting a reminder note
 
-1. Deleting a reminder for a client while all clients are being shown.
+1. Deleting a reminder note for a client while all clients are being shown.
 
     1. **Prerequisites**: Name john doe should exist in the contact list. A reminder note should be set for the client john doe. If not, run the appropriate command to set a reminder note for john doe.<br>`reminder John Doe r/1 day`<br>
 
@@ -821,6 +822,22 @@ testers are expected to do more *exploratory* testing.
        Details of the status change shown in the status message.
     2. Other incorrect payment commands to try: `payment John Doe d/2024-10-14 1200 pay/payment`, `payment John Doe`, `...`<br>
        **Expected**: No payment made. Error details shown in the status message.
+
+### Showing Top Three Upcoming Appointments
+
+1. Handling Data Retrieval
+    1. If there are no upcoming appointments: A message indicating no upcoming appointments will be displayed to the user.
+    2. If there are upcoming appointments: The top three upcoming appointments will be displayed in order.
+
+### Listing all persons
+
+1. Viewing all clients in PhysioPal
+
+    1. **Prerequisites**: There are client contacts stored in PhysioPal. If not run the appropriate command to add clients to PhysioPal. PhsyioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the same name exists in the contact list.
+        <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        <br>`add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Newgate Prison`
+   2. **Test Case**: `list`
+        <br>Expected: All previously saved client contacts will be shown in the list. Success message is displayed.
 
 ### Clearing all contacts
 
