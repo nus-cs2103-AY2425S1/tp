@@ -206,7 +206,7 @@ public class Date {
 
     @Override
     public String toString() {
-        return value != Date.NO_DATE.value ? value.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")) : "";
+        return value.equals(Date.NO_DATE.value) ? "" : value.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
     @Override

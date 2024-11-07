@@ -134,7 +134,9 @@ public class DateCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToAdd) {
-        String message = !(date.value == Date.NO_DATE.value) ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
+        String message = !(date.value.equals(Date.NO_DATE.value))
+                ? MESSAGE_ADD_DATE_SUCCESS
+                : MESSAGE_DELETE_DATE_SUCCESS;
         return String.format(message, Messages.format(personToAdd));
     }
 
