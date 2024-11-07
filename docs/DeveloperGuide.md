@@ -287,15 +287,15 @@ Priorities: Essential (must have), Novel (nice to have), Typical (unlikely to ha
 | Priority | As a    | I want to                                                    | So that I can                                                              |
 | :---- |:--------|:-------------------------------------------------------------|:---------------------------------------------------------------------------|
 | Essential | Teacher | track class schedules                                        | schedule students                                                          |
-| Essential | Teacher | manage student address                                       | I will be able to mail the student things                                  |
-| Essential | Teacher | manage student phone number                                  | I know who to contact and how to contact                                   |
-| Essential | Teacher | manage student email                                         | I am able to send email attachments                                        |
+| Essential | Teacher | manage student address                                       | be able to mail the student things                                  |
+| Essential | Teacher | manage student phone number                                  | know who to contact and how to contact                                   |
+| Essential | Teacher | manage student email                                         | send email attachments                                        |
 | Essential | Teacher | tag students based on how much help they need                | give each student the appropriate amount of help                           |
-| Essential | Teacher | mark all students who has paid                               | so that I can quickly mark all my students who has paid                    |
-| Essential | Teacher | unmark all students, so that they are listed as has not paid | so that I can quickly mark students as unpaid, when the new month comes in |
-| Essential | Teacher | manage how much each student pays in tuition fees            | so that I can remember how much to bill my student every month             |
-| Essential | Teacher | easily total how much money is paid or not paid yet          | so that I can easily see how much revenue I have earned or not earned      |
-                                                                       |
+| Essential | Teacher | mark all students who has paid                               | quickly mark all my students who has paid                    |
+| Essential | Teacher | unmark all students, so that they are listed as has not paid | quickly mark students as unpaid, when the new month comes in |
+| Essential | Teacher | manage how much each student pays in tuition fees            | remember how much to bill my student every month             |
+| Essential | Teacher | easily total how much money is paid or not paid yet          | easily see how much revenue I have earned or not earned      |
+| Novel | Teacher | have ideas for gifts | buy gifts for my students. |
 *{More to be added}*
 
 # Use cases
