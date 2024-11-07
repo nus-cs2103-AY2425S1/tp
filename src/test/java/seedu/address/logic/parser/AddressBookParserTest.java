@@ -24,11 +24,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-<<<<<<< HEAD
 import seedu.address.logic.commands.ListTagsCommand;
-import seedu.address.logic.commands.ListTasksCommand;
-=======
->>>>>>> master
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindAddressCommand;
