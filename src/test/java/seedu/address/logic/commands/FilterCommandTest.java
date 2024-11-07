@@ -29,18 +29,19 @@ public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private PersonHasFeaturePredicate highTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null, null);
     private PersonHasFeaturePredicate lowTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null, null);
 
     private PersonHasFeaturePredicate mediumTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null, null);
 
     private PersonHasFeaturePredicate phoneOnlyPredicate =
-          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value), null, null);
+          new PersonHasFeaturePredicate(null, new Phone(ALICE.getPhone().value), null, null, null);
 
     private PersonHasFeaturePredicate phoneAndTagPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value), null, null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value),
+                  null, null, null);
 
     @Test
     public void equals() {
