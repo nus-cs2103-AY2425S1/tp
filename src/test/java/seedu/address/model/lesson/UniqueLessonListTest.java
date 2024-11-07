@@ -3,7 +3,6 @@ package seedu.address.model.lesson;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -81,18 +80,6 @@ public class UniqueLessonListTest {
     }
 
     @Test
-    public void getSubject_null_throwsNullPointerException() {
-        UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        assertThrows(NullPointerException.class, () -> uniqueLessonList.getSubject(null, null));
-    }
-
-    @Test
-    public void getSubject_lessonNotInList_returnsNull() {
-        UniqueLessonList uniqueLessonList = new UniqueLessonList();
-        assertNull(uniqueLessonList.getSubject(ALICE, DANIEL));
-    }
-
-    @Test
     public void getAssociatedPeople_null_throwsNullPointerException() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
         assertThrows(NullPointerException.class, () -> uniqueLessonList.getAssociatedPeople(null));
@@ -133,7 +120,6 @@ public class UniqueLessonListTest {
         assertEquals(uniqueLessonList.getUniqueSubjectsInLessons(ALICE), expected);
         assertEquals(uniqueLessonList.getUniqueSubjectsInLessons(DANIEL), expected);
     }
-
 
     @Test
     public void remove_nullLesson_throwsNullPointerException() {
@@ -197,7 +183,7 @@ public class UniqueLessonListTest {
     public void toStringTest() {
         UniqueLessonList uniqueLessonList = new UniqueLessonList();
         uniqueLessonList.add(new Lesson(ALICE, DANIEL, new Subject("Math")));
-        assertEquals("[Lesson: tutor Alice Pauline is teaching tutee Daniel Meier Math ]", uniqueLessonList.toString());
+        assertEquals("[Lesson: tutor Alice Pauline is teaching tutee Daniel Meier Math]", uniqueLessonList.toString());
     }
 }
 

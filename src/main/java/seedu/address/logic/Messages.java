@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Tutor;
 
 /**
  * Container for user visible messages.
@@ -51,26 +50,27 @@ public class Messages {
                 .append(person.getHours());
 
         builder.append("\n Subjects: ");
-        person.getSubjects().forEach(builder::append);
-
+        person.getSubjects().forEach(p -> builder.append(p).append("; "));
         return builder.toString();
     }
 
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String format(Person person, List<Person> associatedPeople) {
+    public static String format(Person person, List<Lesson> associatedLessons) {
         final StringBuilder builder = new StringBuilder();
-
         builder.append(format(person));
 
-        if (person instanceof Tutor) {
-            builder.append("\n Tutees: ");
+        if (person.isTutor()) {
+            builder.append("\n Tutees:\n");
+            associatedLessons.forEach(l -> builder.append("\t").append(l.getTutee().getName()).append(" - ")
+                    .append(l.getSubject()).append("\n"));
         } else {
-            builder.append("\n Tutors: ");
+            builder.append("\n Tutors:\n");
+            associatedLessons.forEach(l -> builder.append("\t").append(l.getTutor().getName()).append(" - ")
+                    .append(l.getSubject()).append("\n"));
         }
 
-        associatedPeople.forEach(p -> builder.append(p.getName()).append("; "));
         return builder.toString();
     }
 
@@ -82,7 +82,9 @@ public class Messages {
         builder.append("\n Tutor: ")
                 .append(lesson.getTutorName())
                 .append("\n Tutee: ")
-                .append(lesson.getTuteeName());
+                .append(lesson.getTuteeName())
+                .append("\n Subject: ")
+                .append(lesson.getSubject());
         return builder.toString();
     }
 }

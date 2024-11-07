@@ -15,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -34,9 +35,9 @@ public class ViewCommandTest {
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person viewedPerson = new PersonBuilder(personInFilteredList).build();
         Index index = Index.fromOneBased(1);
-        List<Person> associatedPeople = model.getAssociatedPeople(viewedPerson);
+        List<Lesson> associatedLessons = model.getAssociatedLessons(viewedPerson);
         String expectedCommandResult = String.format(ViewCommand.MESSAGE_SUCCESS,
-                Messages.format(viewedPerson, associatedPeople));
+                Messages.format(viewedPerson, associatedLessons));
         assertCommandSuccess(new ViewCommand(index), model, commandHistory, expectedCommandResult, expectedModel);
     }
 

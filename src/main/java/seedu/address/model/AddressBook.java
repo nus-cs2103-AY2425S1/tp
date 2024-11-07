@@ -153,13 +153,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code person} must exist in the address book.
      */
     public void removeAssociatedLessons(Person person) {
-        List<Person> associations = getAssociatedPeople(person);
-        for (Person associate : associations) {
-            Subject subject = lessons.getSubject(person, associate);
+        List<Lesson> associations = getAssociatedLessons(person);
+
+        for (Lesson associate : associations) {
             if (person.isTutor()) {
-                removeLesson(new Lesson((Tutor) person, (Tutee) associate, subject));
+                removeLesson(new Lesson((Tutor) person, associate.getTutee(), associate.getSubject()));
             } else {
-                removeLesson(new Lesson((Tutor) associate, (Tutee) person, subject));
+                removeLesson(new Lesson(associate.getTutor(), (Tutee) person, associate.getSubject()));
             }
         }
     }

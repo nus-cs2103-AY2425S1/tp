@@ -9,6 +9,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,8 +39,8 @@ public class ViewCommand extends Command {
         }
 
         Person personToView = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        List<Person> associatedPeople = model.getAssociatedPeople(personToView);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView, associatedPeople)));
+        List<Lesson> associatedLessons = model.getAssociatedLessons(personToView);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView, associatedLessons)));
     }
 
     @Override

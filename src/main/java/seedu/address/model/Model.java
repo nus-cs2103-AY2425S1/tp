@@ -98,7 +98,7 @@ public interface Model {
     void addLesson(Lesson lesson);
 
     /**
-     * Returns a list of associated people (Tutors or Tutees) for the given person.
+     * Returns a list of associated people (Tutors or Tutees) and their associated Subject for the given person.
      */
     List<Person> getAssociatedPeople(Person person);
 

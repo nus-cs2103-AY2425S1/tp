@@ -47,17 +47,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
         internalList.add(toAdd);
     }
 
-    public Subject getSubject(Person tutor, Person tutee) {
-        requireAllNonNull(tutor, tutee);
-        if (tutor instanceof Tutor) {
-            return internalList.stream().filter(item -> item.getTutor().equals(tutor) && item.getTutee().equals(tutee))
-                    .map(Lesson::getSubject).findFirst().orElse(null);
-        } else {
-            return internalList.stream().filter(item -> item.getTutor().equals(tutee) && item.getTutee().equals(tutor))
-                    .map(Lesson::getSubject).findFirst().orElse(null);
-        }
-    }
-
     /**
      * Removes the equivalent lesson from the list.
      * The lesson must exist in the list.

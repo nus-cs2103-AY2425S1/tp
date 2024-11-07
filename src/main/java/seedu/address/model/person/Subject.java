@@ -7,16 +7,13 @@ import static seedu.address.commons.util.StringUtil.capitalizeFirstLetter;
  * Represents a Person's subject teaching or learning in the address book.
  */
 public class Subject {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Subjects should be string format and of those valid ones(english, math, science).";
-
+    public static final String MESSAGE_CONSTRAINTS = "Subjects should be of either English, Math or Science.";
     public static final String[] AVAILABLE_SUBJECTS = {"English", "Math", "Science"};
     public final String subject;
 
-
     /**
-     * subject must be one of available subjects
-     * @param subject
+     * Subject must be one of available subjects
+     * @param subject subject being learned or taught
      */
     public Subject(String subject) {
         requireNonNull(subject);
@@ -52,7 +49,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return subject + " ";
+        return subject;
     }
 
     /**

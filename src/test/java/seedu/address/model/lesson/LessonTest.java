@@ -66,7 +66,7 @@ public class LessonTest {
     @Test
     public void toStringTest() {
         Lesson testDefault = new Lesson(ALICE, DANIEL, new Subject("Math"));
-        String expectedMessage = "Lesson: tutor Alice Pauline is teaching tutee Daniel Meier Math ";
+        String expectedMessage = "Lesson: tutor Alice Pauline is teaching tutee Daniel Meier Math";
         assertEquals(expectedMessage, testDefault.toString());
     }
 }
