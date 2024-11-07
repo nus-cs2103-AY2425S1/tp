@@ -769,16 +769,16 @@ testers are expected to do more *exploratory* testing.
    Expected: Help window closes.
 
 ### Clearing all internship applications
-1. **Clear all internship applications**
+1. Clear all internship applications
     1. Prerequisites: Ensure that the list is not empty. 
+
     2. Test case: `/clear`<br>
        Expected: A success message stating that HireMe has been cleared.
+   
     3. Test case: `/list`<br>
        Expected: The list of internship application remains empty.
 
-2. **Clear all internship applications with invalid command format**
-    1. Prerequisites: Ensure that the list is not empty. 
-    2. Test case: `/clear x`<br>
+   4. Test case: `/clear x`<br>
        Expected: An error message stating the valid use of the `/clear` command.
 
 ### Adding an internship application
@@ -828,17 +828,15 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com`<br>
    Expected: An error message stating the valid use of the `/add` command.
 
-
-### Listing all internship applications
-1. **List all internship applications**
+### List
+1. List all internship applications
     1. Prerequisites: Ensure that the list is not empty. 
+   
     2. Test case: `/list`<br>
        Expected: The list should display all internship applications.
 
-2. **List all internship applications with invalid command format**
-   1. Prerequisites: Ensure that the list is not empty. 
-   2. Test case: `/list x`<br>
-      Expected: An error message stating the valid use of the `/list` command.
+    3. Test case: `/list x`<br>
+       Expected: An error message stating the valid use of the `/list` command.
 
 
 ### Deleting an internship application
@@ -874,120 +872,138 @@ testers are expected to do more *exploratory* testing.
        Expected: An error message should be shown which explains how to use the sort command and what parameters are valid.
 
 ### Finding internship applications
-
-1. **Find using an exact match**
+1. Find using an exact match
 
     1. Prerequisites: The list should have internship applications added with company names such as "Google" and "Yahoo".
+   
     2. Test case: `/find Google`<br>
        Expected: The application with the company name "Google" is displayed.
 
-2. **Find using a case-insensitive pattern**
+2. Find using a case-insensitive pattern
 
     1. Prerequisites: The list should have applications with company names like "Google" and "Yahoo".
+   
     2. Test case: `/find goo`<br>
        Expected: The application with the company name "Google" is displayed, showing that the search is case-insensitive.
+   
     3. Test case: `/find YAHOO`<br>
        Expected: The application with the company name "Yahoo" is displayed.
 
-3. **Find with partial matches**
+3. Find with partial matches
 
     1. Prerequisites: The list should include applications with company names like "Google" and "Yahoo".
+   
     2. Test case: `/find Goo`<br>
        Expected: The application with the company name "Google" is displayed.
+   
     3. Test case: `/find Y`<br>
        Expected: The application with the company name "Yahoo" is displayed.
 
-4. **Find when no matches exist**
+4. Find when no matches exist
 
     1. Prerequisites: The list should not have any applications that match the given pattern.
+   
     2. Test case: `/find Microsoft`<br>
        Expected: A message stating that no matching internship applications were found is shown.
 
-5. **Find with an empty pattern**
+5. Find with an empty pattern
 
     1. Prerequisites: The application should be running.
     2. Test case: `/find`<br>
        Expected: An error message stating that the search pattern cannot be empty is displayed.
 
 ### Updating the status of an internship application
-
-1. **Update status to `ACCEPTED`**
+1. Update status to `ACCEPTED`
 
     1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+   
     2. Test case: `/accept 1`<br>
        Expected: The status of the 1st application (e.g., "Google") is updated to `ACCEPTED`.
+   
     3. Test case: `/accept 0`<br>
        Expected: An error message indicating that the index is invalid.
 
-2. **Update status to `PENDING`**
+2. Update status to `PENDING`
 
     1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+   
     2. Test case: `/pending 2`<br>
        Expected: The status of the 2nd application (e.g., "Yahoo") is updated to `PENDING`.
 
-3. **Update status to `REJECTED`**
+3. Update status to `REJECTED`
 
     1. Prerequisites: List all internship applications using the `/list` command. Ensure that at least the "Google" and "Yahoo" applications exist.
+   
     2. Test case: `/reject 1`<br>
        Expected: The status of the 1st application (e.g., "Google") is updated to `REJECTED`.
-   3. Test case: `/reject 0`<br>
-      Expected: An error message indicating that the index is invalid.
 
-### View chart 
-1. **Open chart window**
+### Chart Window
+1. Open chart window
     1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
+   
     2. Test case `/chart`<br>
        Expected: Chart window opens.
 
-2. **Open chart window with invalid command format**
+2. Open chart window with invalid command format
     1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are at least two internship applications with different statuses and the chart window is not opened.
+   
     2. Test case: `/chart x`<br>
        Expected: An error message stating the valid use of the `/chart` command.
 
-3. **Update chart window by updating status**
+3. Update chart window by updating status
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is are the internship application at index 1 is of `PENDING` status and the chart window is already opened.
+   
    2. Test case: `/accept 1`<br>
-   Expected: Pie chart on chart window to update accordingly.
+      Expected: Pie chart on chart window to update accordingly.
 
-4. **Update chart window by adding an internship application**
+4. Update chart window by adding an internship application
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application, `Google` is not in list, and the chart window is already opened.
+   
    2. Test case: `/add n/Google r/Software Engineer Intern e/google@gmail.com d/31/10/24`<br>
       Expected: Pie chart on chart window to update accordingly.
 
-5. **Update chart window by deleting an internship application**
+5. Update chart window by deleting an internship application
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at are at least two internship applications and the chart window is already opened.
+   
    2. Test case: `/delete 1`<br>
       Expected: Pie chart on chart window to update accordingly.
 
-6. **Close chart window**
+6. Close chart window
    1. Prerequisites: Chart window is already opened.
+   
    2. Test case: Click on the close button on the Help window. <br>
-   Expected: Help window closes.
+      Expected: Help window closes.
 
-### Filter internship applications by status
-1. **Filter with a valid status in uppercase**
+### Filtering internship applications
+1. Filter with a valid status in uppercase
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application with `PENDING` status.
+   
    2. Test case `/filter PENDING`<br>
-   Expected: The list of internship applications should only display entries with `PENDING` status.
+      Expected: The list of internship applications should only display entries with `PENDING` status.
 
-2. **Filter with a valid status in mixed case**
+2. Filter with a valid status in mixed case
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that there is at least one internship application with `PENDING` status.
-   2. Test case `/filter Pending`
-   Expected: The list of internship applications should only display entries with `PENDING` status.
-
-3. **Filter an empty list**
-    1. Prerequisites: Clear all internship applications using the `/clear` command.
-    2. Test case `/filter PENDING`
        Expected: The list of internship applications remains empty.
+    
+   2. Test case `/filter Pending`<br>
+      Expected: The list of internship applications should only display entries with `PENDING` status.
 
-4. **Filter with an invalid status**
+3. Filter an empty list
+    1. Prerequisites: Clear all internship applications using the `/clear` command.
+
+    2. Test case `/filter PENDING`<br>
+       Expected: The list of internship applications remains empty.
+       
+4. Filter with an invalid status
    1. Prerequisites: List all internship applications using the `/list` command. Ensure that the list is not empty.
-   2. Test case `/filter approved`
+   
+   2. Test case `/filter approved`<br>
       Expected: An error message indicating that the status is invalid.
 
-5. **Filter with an empty status**
+5. Filter with an empty status
    1. Prerequisites: Clear all internship applications using the `/list` command. Ensure that the list is not empty.
-   2. Test case `/filter `
+   
+   2. Test case `/filter`<br>
       Expected: An error message indicating that the status is invalid.
 
 ### Saving data
