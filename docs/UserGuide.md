@@ -221,6 +221,34 @@ Example:
 * `logs i/S3054081F` <br>
   ![result for 'logs i/S3054081F'](images/logsAlexResult.png)
 
+### Adding a log: `addlog`
+
+Creates a new log entry for a specific patient. This command is typically used to keep track of sessions or important notes related to each session.
+
+**Format**: `addlog i/IDENTITY_NUMBER d/DATE l/LOG_ENTRY`
+
+* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
+* **DATE** should be in the format `DD-MMM-YYYY`.
+* **LOG_ENTRY** is a description of the session with the patient. 
+
+Examples:
+* `addlog i/S1234567D d/20 May 2024 s/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
+
+---
+
+### Adding a log entry: `addentry`
+
+Allows users to use a separate window to add new log entry for a person. When prompted with a new window, users can input the details of the log entry.
+
+**Format**: `addentry i/IDENTITY_NUMBER d/DATE`
+
+* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
+* **DATE** should be in the format `DD-MMM-YYYY`.
+
+Examples:
+* `addentry i/S1234567D d/20 May 2024` opens a new window to add a log entry for the contact with NRIC `S1234567D` on the date `20 May 2024`.
+* ![img_1.png](img_1.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
