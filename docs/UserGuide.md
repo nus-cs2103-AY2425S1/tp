@@ -134,7 +134,6 @@ You must select “OK” to clear the address book. If you select “Cancel,”
 the action will be aborted, and the address book will remain unchanged.
 * Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
-
 <img src="images/clearConfirmation.png" width="400">
 
 
@@ -244,12 +243,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `Johnny Doe`
+
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
 * `find olive 87438` returns 
-* `87438807`, `Charlotte Oliveiro`<br>
-<img src="images/findResult.png" width="500">
 
+* `87438807`, `Charlotte Oliveiro`
 
+  <img src="images/findResult.png" width="500">
 
 ### Viewing help : `help`
 
@@ -272,11 +273,16 @@ Imports contact info from the given json file into MediContact.
 
 **Format**: `import FILENAME.json`
 
-- **IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may refer to [Exporting the data](#exporting the data). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see [Expected format](#expected format) for more details).
+<box type="warning" seamless>
+
+**IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may refer to [Exporting the data](#exporting-the-data). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see [Expected format](#expected-format) for more details).
+
+</box>
+
 - File **must** be a `json` file. Ensure that the extension `.json` follows the `FILENAME` 
 - File **must** be in the same folder as the application JAR file. 
-- File **must** be in the expected format of MediContact data (see [Expected format](#expected format) for more details). 
-- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary of parameter constraints) for more details). No duplicate names are allowed in the addressbook (e.g. `John Doe` and `JOhN DoE` cannot be in the same addressbook).
+- File **must** be in the expected format of MediContact data (see [Expected format](#expected-format) for more details). 
+- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details). No duplicate names are allowed in the addressbook (e.g. `John Doe` and `JOhN DoE` cannot be in the same addressbook).
 
 <box type="warning" seamless>
 
@@ -295,7 +301,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
    <img src="images/importStep1.png"/>
 
-2. Run the application `jar` file as per usual (see <u>Quick start</u> for more details).
+2. Run the application `jar` file as per usual (see [Quick start](#quick-start) for more details).
 
 3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
 
@@ -345,7 +351,7 @@ The following is an example of a valid JSON file content.
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see <u>Summary of input constraints</u> for more details).
+- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details).
 
   ````
   {
@@ -497,7 +503,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 ### Exporting the data
 
 - Locate file `addressbook.json` under the folder `data` in the same directory as `MediContact.jar`. `addressbook.json` will reflect the latest data. Simply download it.
-- **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
+
+  <box type="warning" seamless>
+
+  **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
+
+  </box>
 
 
 
