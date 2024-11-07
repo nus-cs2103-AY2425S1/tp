@@ -17,7 +17,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameMatchesKeywordPredicate;
-import seedu.address.model.role.Role;
 import seedu.address.testutil.PersonWithRoleDescriptorBuilder;
 
 public class AssignCommandParserTest {
