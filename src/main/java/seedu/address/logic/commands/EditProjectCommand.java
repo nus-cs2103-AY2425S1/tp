@@ -21,6 +21,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.ProjectName;
@@ -84,6 +85,11 @@ public class EditProjectCommand extends Command {
         assert projectToEdit.isSameProject(editedProject);
 
         model.setProject(projectToEdit, editedProject);
+
+        model.getFilteredAssignmentList().stream()
+                .filter(assignment -> assignment.getProject().isSameProject(projectToEdit))
+                .forEach(assignment -> model.setAssignment(assignment, new Assignment(assignment.getAssignmentId(),
+                         editedProject, assignment.getEmployee())));
 
         // Edited project successfully
         logger.fine(COMMAND_WORD + " project\n" + editedProject);
