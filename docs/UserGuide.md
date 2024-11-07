@@ -41,7 +41,8 @@ In this comprehensive user guide, we will take you to experience a full journey 
   - [4.1.1 Adding a student: `add`](#adding-a-student-add)
   - [4.1.2 Editing a student: `edit`](#editing-a-student-edit)
   - [4.1.3 Deleting a student: `deleteStu`](#deleting-a-student-deleteStu)
-  - [4.1.4 Listing students: `listStu`](#listing-students-listStu)
+  - [4.1.4 Finding students: `find`](#finding-students)
+  - [4.1.5 Listing students: `list`](#listing-students-list)
 - [4.2 Tutorial Data Related Commands](#tutorial-data-commands)
   - [4.2.1 Adding a tutorial: `addTut`](#adding-a-tutorial-addTut)
   - [4.2.2 Deleting a tutorial: `deleteTut`](#deleting-a-tutorial-deleteTut)
@@ -392,7 +393,24 @@ Command Details & Constraints:
 Example:
 1. `deleteStu 1` deletes the first person in the list displayed.
 
-#### 4.1.4 Listing students: `list`
+#### 4.1.4 Find students: `find`
+<a id="finding-students"></a>
+> Finds persons whose names contain any of the given keywords.
+
+Format: `find KEYWORD [KEYWORDS]...`
+
+Command Details & Constraints:
+* The search is case-insensitive. e.g hans will match Hans
+* The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+* Only the name is searched.
+* Only full words will be matched e.g. Han will not match Hans
+* Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
+
+Example:
+1. `find John` returns john and John Doe
+2. `find alex david` returns Alex Yeoh, David Li
+
+#### 4.1.5 Listing students: `list`
 <a id="listing-students-list"></a>
 
 > Shows a list of all students in the TrackMate application
@@ -431,7 +449,7 @@ Command Details & Constraints:
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
 
 Example:
-1. `deleteTut c/1001` deletes the tutorial with Tutorial ID `1001`, provided the tutorial exists.
+1. `deleteTut c/T1001` deletes the tutorial with Tutorial ID `T1001`, provided the tutorial exists.
 
 
 #### 4.2.3 List tutorials: `listTut`
@@ -564,8 +582,8 @@ Command Details & Constraints:
 * Date is optional (default date is today)
 
 Example:
-1. `markAtt s/1001 c/1001 d/2024-02-21` marks the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
-2. `markAtt s/1001 c/1001` marks the attendance of student 1001 in tutorial class 1001 on today's date.
+1. `markAtt s/A01234567X c/T1001 d/2024-02-21` marks the attendance of student with student ID A01234567X in tutorial class T1001 on 2024/02/21.
+2. `markAtt s/A01234567X c/T1001` marks the attendance of student with student ID A01234567X in tutorial class T1001 on today's date.
 
 #### 4.4.2 Unmarking an attendance: `deleteAtt`
 <a id="unmarking-an-attendance-add"></a>
@@ -579,8 +597,8 @@ Command Details & Constraints:
 * Date is optional (default date is today)
 
 Example:
-1. `deleteAtt s/1001 c/1001 d/2024-02-21` deletes the attendance of student 1001 in tutorial class 1001 on 2024/02/21.
-2. `deleteAtt s/1001 c/1001` deletes the attendance of student 1001 in tutorial class 1001 on today's date.
+1. `deleteAtt s/A01234567X c/T1001 d/2024-02-21` deletes the attendance of student with student ID A01234567X in tutorial class T1001 on 2024/02/21.
+2. `deleteAtt s/A01234567X c/T1001` deletes the attendance of student with student ID A01234567X in tutorial class T1001 on today's date.
 
 
 
@@ -678,26 +696,27 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 ## 8. Command summary
 <a id="command-summary"></a>
 
-| Action                | Format, Examples                                                                                     |
-|-----------------------|------------------------------------------------------------------------------------------------------|
-| **Add Student**       | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`         |
-| **Edit Student**      | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`   |
-| **Delete Student**    | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                            |
-| **List Students**     | `list`                                                                                               |
-| **Add Tutorial**      | `addTut tn/TUTORIAL NAME c/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 c/T1011`                          |
-| **Delete Tutorial**   | `deleteTut c/TUTORIAL ID`<br> e.g., `deleteTut c/T1011`                                               |
-| **List Tutorials**    | `listTut`                                                                                            |
-| **Add Assignment**    | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`           |
-| **Delete Assignment** | `deleteAsg n/ASSIGNMENT TITLE`<br> e.g., `deleteAsg n/Assignment 1`                                  |
-| **List Assignments**  | `listAsg`                                                                                            |
-| **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                              |
-| **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                          |
-| **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                    |
-| **Mark Attendance**   | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/1001 c/T1001 d/2024-02-21`  |
-| **Unmark Attendance** | `deleteAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtt s/1001 c/T1001 d/2024-02-21`|
-| **Clear**             | `clear`                                                                                              |
-| **Help**              | `help`                                                                                               |
-| **Exit**              | `exit`                                                                                               |
+| Action                | Format, Examples                                                                                               |
+|-----------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add Student**       | `addStu n/NAME s/STUDENT_ID [c/TUTORIAL_ID]​`<br> e.g. `addStu n/Samson s/A1234567X c/T1001`                   |
+| **Edit Student**      | `edit INDEX [n/NAME] [s/STUDENT_ID] [c/TUTORIAL_ID]​`<br> e.g., `edit 1 n/Samson Chew s/A1234567M`             |
+| **Delete Student**    | `deleteStu INDEX`<br> e.g., `deleteStu 3`                                                                      |
+| **Find Student**      | `find KEYWORD [KEYWORD]...`<br> e.g., `find Samson San Chian`                                                             |
+| **List Students**     | `list`                                                                                                         |
+| **Add Tutorial**      | `addTut tn/TUTORIAL NAME c/TUTORIAL ID`<br> e.g., `addTut tn/CS1010 c/T1011`                                   |
+| **Delete Tutorial**   | `deleteTut c/TUTORIAL ID`<br> e.g., `deleteTut c/T1011`                                                        |
+| **List Tutorials**    | `listTut`                                                                                                      |
+| **Add Assignment**    | `addAsg n/ASSIGNMENT TITLE d/DUE DATE`<br> e.g., `addAsg n/Assignment 1 d/2024-10-23 1230`                     |
+| **Delete Assignment** | `deleteAsg n/ASSIGNMENT TITLE`<br> e.g., `deleteAsg n/Assignment 1`                                            |
+| **List Assignments**  | `listAsg`                                                                                                      |
+| **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                                        |
+| **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                                    |
+| **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                              |
+| **Mark Attendance**   | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/A01234567X c/T1001 d/2024-02-21`      |
+| **Unmark Attendance** | `deleteAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtt s/A01234567X c/T1001 d/2024-02-21` |
+| **Clear**             | `clear`                                                                                                        |
+| **Help**              | `help`                                                                                                         |
+| **Exit**              | `exit`                                                                                                         |
 
 --------------------------------------------------------------------------------------------------------------------
 
