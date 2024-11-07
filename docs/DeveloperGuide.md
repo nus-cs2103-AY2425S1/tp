@@ -654,6 +654,11 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** PhysioPal is designed to handle names in a **case-insensitive** manner 
+and does not accept duplicate names, so there will never be a case where more than one contact with the same name exists in the contact list.
+
+</div>
+
 ### Launch and shutdown
 
 1. Initial launch
@@ -746,7 +751,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Scheduling an appointment for a client while all clients are being shown.
 
-    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 
     1. **Test case**: `schedule John Doe d/2024-10-29 1200 note/First Appointment`<br>**Expected**: Contact named john doe will be updated with an appointment on Oct 29 2024, 12:00 pm with the note "First Appointment" attached to it. Details of the appointment shown in the status message.
 
@@ -770,7 +775,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Setting a reminder note for a scheduled appointment for a client while all clients are being shown.
 
-    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. PhysioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the name john doe exists in the contact list.<br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+    1. **Prerequisites**: Only **one** contact with the name john doe should exist in PhysioPal. If not, run the appropriate command to add john doe to PhysioPal. <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
         
         At **least one** appointment must be scheduled for john doe. If not, run the appropriate command to add an appointment for john doe. <br>`schedule John Doe d/2024-10-29 1200 note/First Appointment`
 
@@ -834,7 +839,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Viewing all clients in PhysioPal
 
-    1. **Prerequisites**: There are client contacts stored in PhysioPal. If not run the appropriate command to add clients to PhysioPal. PhsyioPal is designed to handle names in a **case-insensitive** manner and does not accept duplicate names, so there will never be a case where more than one contact with the same name exists in the contact list.
+    1. **Prerequisites**: There are client contacts stored in PhysioPal. If not run the appropriate command to add clients to PhysioPal.
         <br>`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
         <br>`add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Newgate Prison`
    2. **Test Case**: `list`
