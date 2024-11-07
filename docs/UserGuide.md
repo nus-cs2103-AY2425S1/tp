@@ -21,16 +21,17 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.
 
-   <img src="images/quickStart.png"/>
+   <img src="images/quickStart.png" width="800"/>
 
 1. Open a command terminal (called `Terminal` on MacOS and `Command Prompt` on Windows). Change directory into the folder you put the jar file in using the command `cd`. For example, if you created your home folder `MediContact` in your Desktop type `cd Desktop/MediContact`. If you created your home folder `MediContact` in Documents, type `cd Documents/MediContact`. If you named your home folder some other FILENAME, replace `MediContact` with filename. 
 
-1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory. 
+1. Once you're in the same directory as `MediContact.jar`, use the command `java -jar MediContact.jar` to run the application. You're terminal should look something like this right before you enter the last command. The redacted portion should show your current directory.
 
-   <img src="images/quickStart1.png" />
+   <img src="images/quickStart1.png" width="800"/>
 
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+   <img src="images/Ui.png" width="800"/>
 
 1. Type commands in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -79,7 +80,7 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-
+<br>
 
 
 ### Adding a person: `add`
@@ -111,7 +112,9 @@ Adds a person to the address book.
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
 * `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
 
-<img src="images/addEvie.png" width="1000">
+<img src="images/addEvie.png" width="800">
+
+<br>
 
 ### Clearing all entries : `clear`
 
@@ -119,9 +122,11 @@ Clears all entries from the address book.
 
 **Format**: `clear`
 
-> **WARNING**
-> 
-> After confirmation, any cleared data or contact cannot be retrieved. This action is IRREVERSIBLE.
+<box type="warning" seamless>
+
+**Warning**: After confirmation, any cleared data or contact cannot be retrieved. This action is IRREVERSIBLE.
+
+</box>
 
 * Recommended practice: Always have a copy of current data. You may refer to [Exporting the data](#exporting-the-data). You can use [import feature](#importing-contacts-import) if you have lost your data after clearing it unintentionally.
 * You can directly delete the addressbook.json file which can be found in data folder or in the data directory if you want to recover the sample data.
@@ -134,8 +139,9 @@ You must select “OK” to clear the address book. If you select “Cancel,”
 the action will be aborted, and the address book will remain unchanged.
 * Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
+<img src="images/clearConfirmation.png" width="800">
 
-<img src="images/clearConfirmation.png" width="400">
+<br>
 
 
 ### Deleting a person : `delete`
@@ -144,9 +150,11 @@ Deletes the specified person from the address book.
 
 **Format**: `delete INDEX` / `delete NAME`
 
-> **WARNING**
->
-> After confirmation, any deleted data or contact cannot be retrieved. This action is IRREVERSIBLE.
+<box type="warning" seamless>
+
+**Warning**: After confirmation, any deleted data or contact cannot be retrieved. This action is IRREVERSIBLE.
+
+</box>
 
 * Deletes the person at the specified `INDEX` or with the specified `NAME`.
 * The name refers to the full name as shown in the displayed person list.
@@ -161,17 +169,17 @@ Deletes the specified person from the address book.
   and the person will not be deleted.
 * Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
-<img src="images/deleteConfirmation.png" width="400">
+<img src="images/deleteConfirmation.png" width="800">
 
 **Examples**:
 
 * `list` followed by `delete Alex Yeoh` followed by clicking `OK `deletes the person with name `Alex Yeoh` in the address book.
 * `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st person in the results of the `find` command.<br>
 
-<img src="images/deleteExpected.png" width="500">
+<img src="images/deleteExpected.png" width="800">
 
-
+<br>
 
 ### Editing a person : `edit`
 
@@ -193,13 +201,18 @@ Edits an existing person in the address book.
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
 
-<img src="images/editJohn.png" width="1000">
+<img src="images/editJohn.png" width="800">
+
+<br>
 
 
 ### Exiting the program : `exit`
 
 Exits the program.
+
 **Format**: `exit`
+
+<br>
 
 
 ### Filtering persons by age group or appointment dates: `filter`
@@ -223,9 +236,11 @@ Filter persons whose age and/or appointment dates are within the specified range
 * `filter b/70-79`
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
-* `filter b/70-79 t/medication t/Dr Tan`
+* `filter b/70-79 t/medication t/Dr Tan`<br>
 
-<img src="images/filterResult.png" width="550">
+<img src="images/filterResult.png" width="800">
+
+<br>
 
 
 ### Locating persons by name or phone number: `find`
@@ -244,12 +259,16 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `Johnny Doe`
+
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
 * `find olive 87438` returns 
-* `87438807`, `Charlotte Oliveiro`<br>
-<img src="images/findResult.png" width="500">
 
+* `87438807`, `Charlotte Oliveiro`
 
+  <img src="images/findResult.png" width="800">
+  
+  <br>
 
 ### Viewing help : `help`
 
@@ -264,7 +283,7 @@ Shows you a help window with useful resources which includes:
 
 <img src="images/helpWindow.png" width="800">
 
-
+<br>
 
 ### Importing contacts: `import`
 
@@ -272,11 +291,16 @@ Imports contact info from the given json file into MediContact.
 
 **Format**: `import FILENAME.json`
 
-- **IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may refer to [Exporting the data](#exporting the data). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see [Expected format](#expected format) for more details).
+<box type="tip" seamless>
+
+**IMPORTANT**: Upon importing data, the original data will be entirely overridden with the new json file. If you wish to save the current data you may refer to [Exporting the data](#exporting-the-data). If you wish to append current and new data, you may do so manually as long as you ensure that it adheres to the expected format (see [Expected format](#expected-format) for more details).
+
+</box>
+
 - File **must** be a `json` file. Ensure that the extension `.json` follows the `FILENAME` 
 - File **must** be in the same folder as the application JAR file. 
-- File **must** be in the expected format of MediContact data (see [Expected format](#expected format) for more details). 
-- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary of parameter constraints) for more details). No duplicate names are allowed in the addressbook (e.g. `John Doe` and `JOhN DoE` cannot be in the same addressbook).
+- File **must** be in the expected format of MediContact data (see [Expected format](#expected-format) for more details). 
+- Patient information in the file **must** follow constraints of MediContact. E.g. name must contain only alphanumeric characters, phone number must be exactly 8 digits long (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details). No duplicate names are allowed in the addressbook (e.g. `John Doe` and `JOhN DoE` cannot be in the same addressbook).
 
 <box type="warning" seamless>
 
@@ -293,13 +317,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 1. Place the `json` file to be imported in the same folder as the application JAR file. In the image below `data1.json` is the desired `json` file to be imported. Note that it has the file extension `.json` and assume that it adheres to the expected format and input constraints. 
 
-   <img src="images/importStep1.png"/>
+   <img src="images/importStep1.png" width="800"/>
 
-2. Run the application `jar` file as per usual (see <u>Quick start</u> for more details).
+2. Run the application `jar` file as per usual (see [Quick start](#quick-start) for more details).
 
 3. Type `import FILENAME.json` (e.g. `import data1.json`) in the command box in the application. The following message will be displayed in the results box if the import is successful and the contacts will automatically be updated. 
 
-   <img src="images/importStep3.png"/>
+   <img src="images/importStep3.png" width="800"/>
 
 **Expected format:**
 
@@ -345,7 +369,7 @@ The following is an example of a valid JSON file content.
 
 - Each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see <u>Summary of input constraints</u> for more details).
+- The following is a blank template for 1 patient data. You may fill in the `" "` and `[ ]` with the relevant data if you wish to manually edit patient records before importing. Remember to ensure that data adheres to the constraints of MediContact (see [Summary of parameter constraints](#summary-of-parameter-constraints) for more details).
 
   ````
   {
@@ -370,7 +394,7 @@ The following is an example of a valid JSON file content.
   
 - To add more patient data to the `"persons"` array include the following after `"starredStatus" : " " }`. You may add as many patient data as needed. Remember each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-
+<br>
 
 
 ### Listing all persons : `list`
@@ -382,7 +406,9 @@ Shows an alphabetically sorted list of all persons in the address book.
 * No other parameters should be supplied.
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
-<img src="images/listResult.png" width="550">
+<img src="images/listResult.png" width="800">
+
+<br>
 
 
 ### Listing starred persons : `list *`
@@ -394,7 +420,9 @@ Shows a list of all starred persons in the address book.
 * No other parameters should be supplied aside from `*`.
 * You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
 
-<img src="images/listStarResult.png" width="550">
+<img src="images/listStarResult.png" width="800">
+
+<br>
 
 ### Editing a person's notes : `note`
 
@@ -416,7 +444,9 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 *  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
-<img src="images/noteResult.png" width="550">
+<img src="images/noteResult.png" width="800">
+
+<br>
 
 ### Sorting list based on Appointment Dates : `sort`
 
@@ -427,7 +457,9 @@ remain sorted alphabetically at the end of the list.
 
 * No other parameters should be supplied.
 
-<img src="images/sortResult.png" width="550">
+<img src="images/sortResult.png" width="800">
+
+<br>
 
 ### Adding a person to favourites list : `star`
 
@@ -446,7 +478,9 @@ Stars the specified person from the address book into favourites.
 * `list` followed by `star 2` stars the 2nd person in the address book.
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
 
-<img src="images/starResult.png" width="550">
+<img src="images/starResult.png" width="800">
+
+<br>
 
 
 ### Removing a person from favourites list : `unstar`
@@ -466,7 +500,9 @@ Unstars the specified person from the address book removing them from favourites
 * `list` followed by `unstar 2` unstars the 2nd person in the address book.
 * `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
-<img src="images/unstarResult.png" width="550">
+<img src="images/unstarResult.png" width="800">
+
+<br>
 
 ### Viewing a person's notes : `view`
 
@@ -486,20 +522,27 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 *  `view John Doe`
 *  `view 1` shows all details of the 1st person's details including notes.
 
-<img src="images/viewResult.png" width="550">
+<img src="images/viewResult.png" width="800">
+
+<br>
 
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-
+<br>
 
 ### Exporting the data
 
 - Locate file `addressbook.json` under the folder `data` in the same directory as `MediContact.jar`. `addressbook.json` will reflect the latest data. Simply download it.
-- **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
 
+  <box type="warning" seamless>
 
+  **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
+
+  </box>
+
+<br>
 
 ### Editing the data file
 
@@ -512,11 +555,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
