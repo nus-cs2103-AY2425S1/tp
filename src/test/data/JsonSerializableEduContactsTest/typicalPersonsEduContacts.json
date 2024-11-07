@@ -7,7 +7,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "course": "Math",
-    "tag" : "Student",
+    "role" : "Student",
     "modules" : [ {
       "module" : "MA1100",
       "grade" : "A"
@@ -22,7 +22,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "course": "Medicine",
-    "tag" : "Student",
+    "role" : "Student",
     "modules" : [ {
       "module" : "GEC1044",
       "grade" : null
@@ -34,7 +34,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "course": "nursing",
-    "tag" : "Tutor"
+    "role" : "Tutor"
   }, {
     "studentId": "53289012",
     "name" : "Daniel Meier",
@@ -42,7 +42,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "course": "Dentistry",
-    "tag" : "Student",
+    "role" : "Student",
     "modules" : [ {
       "module" : "DI5100",
       "grade" : null
@@ -53,11 +53,11 @@
   }, {
     "studentId": "25252525",
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94822244",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "course": "biomedical engineering",
-    "tag" : "Student",
+    "role" : "Student",
     "modules" : [ {
       "module" : "BN1111",
       "grade" : "D"
@@ -68,19 +68,19 @@
   }, {
     "studentId": "98989898",
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94824272",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "course": "Data Science",
-    "tag" : "Tutor"
+    "role" : "Tutor"
   }, {
     "studentId": "28184003",
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94824422",
     "email" : "anna@example.com",
     "address" : "4th street",
     "course": "Dentistry",
-    "tag" : "Student",
+    "role" : "Student",
     "modules" : [ {
       "module" : "DI5100",
       "grade" : null

@@ -25,37 +25,37 @@ public class Person {
     // Data fields
     private final Address address;
     private final Course course;
-    private final Tag tag;
+    private final Role role;
     private ArrayList<Module> modules = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course,
-                  Tag tag) {
-        requireAllNonNull(studentId, name, phone, email, address, course, tag);
+                  Role role) {
+        requireAllNonNull(studentId, name, phone, email, address, course, role);
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.course = course;
-        this.tag = tag;
+        this.role = role;
     }
 
     /**
      * Facilitates creating new Person object with module list.
      */
     public Person(StudentId studentId, Name name, Phone phone, Email email, Address address, Course course,
-                  Tag tag, ArrayList<Module> modules) {
-        requireAllNonNull(studentId, name, phone, email, address, course, tag);
+                  Role role, ArrayList<Module> modules) {
+        requireAllNonNull(studentId, name, phone, email, address, course, role);
         this.studentId = studentId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.course = course;
-        this.tag = tag;
+        this.role = role;
         this.modules = modules;
     }
 
@@ -103,7 +103,7 @@ public class Person {
 
         ArrayList<Module> updatedModules = new ArrayList<>(modules);
         updatedModules.add(module);
-        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
+        return new Person(studentId, name, phone, email, address, course, role, updatedModules);
     }
 
     /**
@@ -120,7 +120,7 @@ public class Person {
         module.setGrade(grade);
         int index = modules.indexOf(module);
         updatedModules.set(index, module);
-        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
+        return new Person(studentId, name, phone, email, address, course, role, updatedModules);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Person {
         ArrayList<Module> updatedModules = new ArrayList<>(modules);
 
         updatedModules.remove(module);
-        return new Person(studentId, name, phone, email, address, course, tag, updatedModules);
+        return new Person(studentId, name, phone, email, address, course, role, updatedModules);
     }
 
     /**
@@ -155,11 +155,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Tag getTag() {
-        return tag;
+    public Role getRole() {
+        return role;
     }
 
     /**
@@ -197,14 +197,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && course.equals(otherPerson.course)
-                && tag.equals(otherPerson.tag)
+                && role.equals(otherPerson.role)
                 && modules.equals(otherPerson.modules);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentId, name, phone, email, address, course, tag, modules);
+        return Objects.hash(studentId, name, phone, email, address, course, role, modules);
     }
 
     @Override
@@ -216,7 +216,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("course", course)
-                .add("tag", tag)
+                .add("role", role)
                 .add("modules", modules)
                 .toString();
     }

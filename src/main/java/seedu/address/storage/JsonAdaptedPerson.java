@@ -14,8 +14,8 @@ import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -30,7 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String course;
-    private final String tag;
+    private final String role;
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
     /**
@@ -43,7 +43,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("course") String course,
-                             @JsonProperty("tag") String tag,
+                             @JsonProperty("role") String role,
                              @JsonProperty("modules") List<JsonAdaptedModule> modules) {
         this.studentId = studentId;
         this.name = name;
@@ -51,7 +51,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.course = course;
-        this.tag = tag;
+        this.role = role;
         if (modules != null) {
             this.modules.addAll(modules);
         }
@@ -67,7 +67,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         course = source.getCourse().course;
-        tag = source.getTag().toString();
+        role = source.getRole().toString();
         modules.addAll(source.getModules().stream()
                 .map(JsonAdaptedModule::new).toList());
     }
@@ -132,16 +132,16 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Course.MESSAGE_CONSTRAINTS);
         }
         final Course modelCourse = new Course(course);
-        if (tag == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
-        if (!Tag.isValidTag(tag)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        final Tag modelTag = new Tag(tag);
+        final Role modelRole = new Role(role);
 
         Person person = new Person(modelStudentId, modelName, modelPhone, modelEmail,
-                modelAddress, modelCourse, modelTag);
+                modelAddress, modelCourse, modelRole);
         person.setModules(modelModules);
 
         return person;

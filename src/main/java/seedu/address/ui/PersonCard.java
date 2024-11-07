@@ -39,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label tag;
+    private Label role;
     @FXML
     private Label course;
 
@@ -47,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     private Label module;
 
     @FXML
-    private StackPane tagPane;
+    private StackPane rolePane;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -59,14 +59,14 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         studentId.setText("StudentID: " + person.getStudentId().value);
         phone.setText(person.getPhone().value);
-        tag.setText(person.getTag().role.getRole());
+        role.setText(person.getRole().role.getRole());
         course.setText(person.getCourse().course);
         course.getStyleClass().add("bold-text");
 
-        if (person.getTag().role.getRole().equalsIgnoreCase("Student")) {
-            tagPane.getStyleClass().add("student-pane");
-        } else if (person.getTag().role.getRole().equalsIgnoreCase("Tutor")) {
-            tagPane.getStyleClass().add("tutor-pane");
+        if (person.getRole().role.getRole().equalsIgnoreCase("Student")) {
+            rolePane.getStyleClass().add("student-pane");
+        } else if (person.getRole().role.getRole().equalsIgnoreCase("Tutor")) {
+            rolePane.getStyleClass().add("tutor-pane");
         }
 
         String modulesAsString = person.getModules().stream()
@@ -74,8 +74,8 @@ public class PersonCard extends UiPart<Region> {
                 .reduce("", (x, y) -> x + y);
 
         module.setText(modulesAsString.isEmpty() ? "No enrolled modules" : modulesAsString);
-        /*person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));*/
+        /*person.getRoles().stream()
+                .sorted(Comparator.comparing(role -> role.roleName))
+                .forEach(role -> roles.getChildren().add(new Label(role.roleName)));*/
     }
 }

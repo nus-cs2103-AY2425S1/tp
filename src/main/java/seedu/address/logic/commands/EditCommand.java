@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -27,8 +27,8 @@ import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Tag;
 
 /**
  * Edits the details of an existing person in EduContacts.
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_COURSE + " COURSE] "
-            + "[" + PREFIX_TAG + "TAG] ...\n"
+            + "[" + PREFIX_ROLE + "ROLE] ...\n"
             + "Example: " + COMMAND_WORD + " 12345678 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
@@ -93,8 +93,14 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        if (personToEdit.isSamePerson(model.getPersonToDisplay())) {
+            model.setPersonToDisplay(editedPerson);
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)), true);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -110,7 +116,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Course updatedCourse = editPersonDescriptor.getCourse().orElse(personToEdit.getCourse());
-        Tag updatedTag = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
+        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
 
         ArrayList<Module> updatedModules = editPersonDescriptor.getModules().orElse(personToEdit.getModules());
         if (editPersonDescriptor.hasModuleChanges()) {
@@ -118,12 +124,12 @@ public class EditCommand extends Command {
             Module newModule = editPersonDescriptor.newModule;
 
             boolean isModuleRenamed = false;
-            if (updatedModules.stream().anyMatch(m -> m.value.equals(newModule.value))) {
+            if (updatedModules.stream().anyMatch(m -> m.value.toUpperCase().equals(newModule.value.toUpperCase()))) {
                 throw new CommandException(EditCommand.MESSAGE_DUPLICATE_MODULE);
             }
 
             for (int i = 0; i < updatedModules.size(); i++) {
-                if (updatedModules.get(i).value.equals(oldModule.value)) {
+                if (updatedModules.get(i).value.toUpperCase().equals(oldModule.value.toUpperCase())) {
                     Module updatedModule = new Module(newModule.value);
                     if (updatedModules.get(i).hasGrade()) {
                         updatedModule.setGrade(updatedModules.get(i).getGrade());
@@ -140,7 +146,7 @@ public class EditCommand extends Command {
         }
 
         Person editedPerson = new Person(personToEdit.getStudentId(), updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedCourse, updatedTag, updatedModules);
+                updatedAddress, updatedCourse, updatedRole, updatedModules);
 
         return editedPerson;
     }
@@ -180,7 +186,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Course course;
-        private Tag tag;
+        private Role role;
         private ArrayList<Module> modules;
         private Module oldModule;
         private Module newModule;
@@ -189,7 +195,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code roles} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setStudentId(null);
@@ -198,7 +204,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setCourse(toCopy.course);
-            setTag(toCopy.tag);
+            setRole(toCopy.role);
             setModules(toCopy.modules);
             setOldModule(toCopy.oldModule);
             setNewModule(toCopy.newModule);
@@ -208,7 +214,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, address, course, tag, modules)
+            return CollectionUtil.isAnyNonNull(studentId, name, phone, email, address, course, role, modules)
                     || hasModuleChanges();
         }
 
@@ -277,20 +283,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code roles} to this object's {@code roles}.
+         * A defensive copy of {@code roles} is used internally.
          */
-        public void setTag(Tag tag) {
-            this.tag = tag;
+        public void setRole(Role role) {
+            this.role = role;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable role set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code roles} is null.
          */
-        public Optional<Tag> getTag() {
-            return Optional.ofNullable(tag);
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
         }
 
         public void setModules(ArrayList<Module> modules) {
@@ -321,7 +327,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(course, otherEditPersonDescriptor.course)
-                    && Objects.equals(tag, otherEditPersonDescriptor.tag)
+                    && Objects.equals(role, otherEditPersonDescriptor.role)
                     && Objects.equals(modules, otherEditPersonDescriptor.modules)
                     && Objects.equals(oldModule, otherEditPersonDescriptor.oldModule)
                     && Objects.equals(newModule, otherEditPersonDescriptor.newModule);
@@ -345,7 +351,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("course", course)
-                    .add("tags", tag)
+                    .add("roles", role)
                     .add("modules", modules)
                     .add("oldModule", oldModule)
                     .add("newModule", newModule)

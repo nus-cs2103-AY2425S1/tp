@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import java.util.stream.Stream;
 
@@ -18,8 +18,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.StudentId;
-import seedu.address.model.person.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_COURSE, PREFIX_ROLE);
         String preamble = argMultimap.getPreamble();
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
@@ -52,14 +52,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Course course = ParserUtil.parseCourse(argMultimap.getValue(PREFIX_COURSE).get());
-        Tag tag;
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
+        Role role;
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            role = ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get());
         } else {
-            tag = new Tag("Student");
+            role = new Role("Student");
         }
 
-        Person person = new Person(studentId, name, phone, email, address, course, tag);
+        Person person = new Person(studentId, name, phone, email, address, course, role);
 
         return new AddCommand(person);
     }
