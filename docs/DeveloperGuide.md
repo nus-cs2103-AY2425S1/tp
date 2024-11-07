@@ -547,10 +547,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
     1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
     1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
@@ -562,18 +562,18 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: There are contacts in the contact list. Add some if this is not the case.
     1. Assumption: Pick any 2 tags (or substring of the tags) present in any contact in the contact list. Call these x and y.
     1. Test case: `find t/x` where `x` is the substring/tag chosen<br> 
-       Expected: All contacts with tags containing x will be displayed.
+       Expected: All contacts with tags containing x will be displayed with a success message.
     1. Test case: `find t/x t/y` where `x` and `y` are the substrings/tags chosen<br>
-       Expected: The contact(s) with tags containing x or y will be displayed
+       Expected: The contact(s) with tags containing x or y will be displayed with a success message.
 
 1. Finding a person with multiple fields
     1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
     1. Assumption: Pick any name and tag within the same contact. Call these name x and tag y.
     1. Test case: `find n/x t/y` where `x` and `y` are the name and tag chosen<br>
-       Expected: The contact(s) with name containing x and tags containing y will be displayed
+       Expected: The contact(s) with name containing x and tags containing y will be displayed with a success message.
 
 1. Other incorrect find commands to try: `find`, `find x` (with no prefix)<br>
-   Expected: Similar to previous.
+   Expected: No filtering of contacts will occur and an error message will be displayed.
 
 ### Deleting a tag from a person
 
@@ -581,10 +581,10 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
     1. Assumption: Pick any contact with at least one tag. Let `i` be the index (one-based) of this contact and `x` be the name of the tag.
     1. Test case: `deltag i t/x` where `i` is the index and `x` is the tag chosen<br>
-       Expected: The tag x will be deleted from person i and the tag will also disappear from the Tag List.
+       Expected: The tag x will be deleted from person i and the tag will also disappear from the Tag List. A success message will be displayed.
 
 1. Other incorrect delete tag commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
-   Expected: Similar to previous.
+   Expected: No deleting of tags will occur and an error message will be displayed.
    
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Future features**
