@@ -1,6 +1,6 @@
 ---
 layout: page
-title: MediBase3 User Guide
+title: User Guide
 ---
 
 MediBase3 (MB3) is a **desktop app for doctors, offering an all-in-one solution to manage patient records with ease.** From tracking medical conditions, allergies, and priorities to even scheduling appointments, MediBase3 takes care of it so you can focus more on your patients.
