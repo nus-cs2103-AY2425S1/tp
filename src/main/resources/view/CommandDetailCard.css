@@ -1,0 +1,18 @@
+#commandDetailCard {
+    -fx-background-color: derive(#1d1d1d, 25%);
+}
+
+#command {
+-fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10 0 5 0
+}
+
+#commandDetails {
+    -fx-text-fill: white;
+}
+
+#separator {
+    -fx-border-color: derive(#1d1d1d, 25%);
+}

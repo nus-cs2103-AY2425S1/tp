@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -27,14 +30,12 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
-
+    private final Stage primaryStage;
+    private final Logic logic;
+    private final HelpWindow helpWindow;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
-
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -49,6 +50,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane viewWindowPlaceholder;
+    private ChangeListener<Person> listener;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -78,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -121,6 +127,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
     }
 
     /**
@@ -163,6 +170,51 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Shows the detail of the person.
+     */
+    @FXML
+    private void handleView(CommandResult commandResult) {
+        ObjectProperty<Person> person = commandResult.getPerson();
+        if (person != null && person.get() != null && listener != null) {
+            person.removeListener(listener);
+        }
+        if (commandResult.isCloseView()) {
+            closeView();
+        } else {
+            assert person != null;
+            person.addListener(setUpListener());
+            openView(commandResult.getPerson().get());
+        }
+    }
+
+    private ChangeListener<Person> setUpListener() {
+        if (listener == null) {
+            listener = (observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    openView(newValue);
+                } else {
+                    closeView();
+                }
+            };
+        }
+        return listener;
+    }
+
+    @FXML
+    private void openView(Person person) {
+        ViewWindow viewWindow = new ViewWindow(person);
+        viewWindowPlaceholder.getChildren().clear();
+        viewWindowPlaceholder.getChildren().add(viewWindow.getRoot());
+        viewWindowPlaceholder.setManaged(true);
+    }
+
+    @FXML
+    private void closeView() {
+        viewWindowPlaceholder.getChildren().clear();
+        viewWindowPlaceholder.setManaged(false);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +236,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isView()) {
+                handleView(commandResult);
             }
 
             return commandResult;

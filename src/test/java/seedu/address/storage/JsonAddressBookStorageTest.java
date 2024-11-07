@@ -65,7 +65,7 @@ public class JsonAddressBookStorageTest {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         AddressBook original = getTypicalAddressBook();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
-
+        System.out.println(original);
         // Save in new file and read back
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();

@@ -26,6 +26,7 @@ test {
 }
 
 task coverage(type: JacocoReport) {
+
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
     executionData.from files(jacocoTestReport.executionData)
@@ -59,6 +60,7 @@ dependencies {
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
+    implementation 'com.opencsv:opencsv:5.7.1'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
@@ -67,6 +69,10 @@ dependencies {
 
 shadowJar {
     archiveFileName = 'addressbook.jar'
+}
+
+run {
+    enableAssertions = true;
 }
 
 defaultTasks 'clean', 'test'

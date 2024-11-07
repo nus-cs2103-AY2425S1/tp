@@ -4,6 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
+
 package Storage as StoragePackage {
 
 package "UserPrefs Storage" #F4F6F6{
@@ -22,22 +23,40 @@ Class JsonAdaptedPerson
 Class JsonAdaptedTag
 }
 
+package "PredefinedAssignmentData Storage\n" #F4F6F6 {
+Class "<<interface>>\nPredefinedAssignmentDataStorage" as PredefinedAssignmentDataStorage
+Class JsonPredefinedAssignmentDataStorage
+Class JsonSerializablePredefinedAssignmentData
+Class JsonAdaptedPredefinedAssignment
 }
+
+}
+
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
-StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -left-> "1" UserPrefsStorage
+StorageManager -right> "1" AddressBookStorage
+StorageManager -down-> "1" PredefinedAssignmentDataStorage
+
 
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
+Storage -down-|> PredefinedAssignmentDataStorage
+
+
+
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonPredefinedAssignmentDataStorage .up.|> PredefinedAssignmentDataStorage
+JsonPredefinedAssignmentDataStorage ..> JsonSerializablePredefinedAssignmentData
+JsonSerializablePredefinedAssignmentData --> "*" JsonAdaptedPredefinedAssignment
 
 @enduml

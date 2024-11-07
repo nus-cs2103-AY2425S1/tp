@@ -1,18 +1,30 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * A prefix that marks the beginning of an argument in an arguments string.
  * E.g. 't/' in 'add James t/ friend'.
  */
 public class Prefix {
     private final String prefix;
+    private final String shortPrefix;
 
-    public Prefix(String prefix) {
+    /**
+     * Creates a {@code Prefix} object with prefix and shortPrefix specified by the arguments.
+     */
+    public Prefix(String prefix, String shortPrefix) {
+        requireNonNull(prefix, shortPrefix);
         this.prefix = prefix;
+        this.shortPrefix = shortPrefix;
     }
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getShortPrefix() {
+        return shortPrefix;
     }
 
     @Override
@@ -37,6 +49,6 @@ public class Prefix {
         }
 
         Prefix otherPrefix = (Prefix) other;
-        return prefix.equals(otherPrefix.prefix);
+        return prefix.equals(otherPrefix.prefix) && shortPrefix.equals(otherPrefix.shortPrefix);
     }
 }

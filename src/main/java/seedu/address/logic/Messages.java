@@ -18,6 +18,15 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME = "Person not found. "
+            + "Please check the name and try again.";
+    public static final String MESSAGE_MARK_SUCCESS = "%1$s is marked present for week %2$d";
+    public static final String MESSAGE_INVALID_WEEK = "Invalid week number.";
+    public static final String MESSAGE_MARK_ALREADY_SUCCESS = "Attendance is already marked for this student!";
+    public static final String MESSAGE_UNMARK_ALREADY_SUCCESS = "Attendance is already unmarked for this student";
+    public static final String MESSAGE_UNMARK_SUCCESS = "%1$s is marked as absent for week %2$d";
+    public static final String MESSAGE_INVALID_ASSIGNMENT_NAME = "Invalid assignment name: %1$s";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -37,14 +46,14 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
                 .append("; Email: ")
                 .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
+                .append("; Telegram: ")
+                .append(person.getTelegram())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        builder.append("; Github: ")
+                .append(person.getGithub());
         return builder.toString();
     }
 

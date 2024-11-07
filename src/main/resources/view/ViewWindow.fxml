@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+
+<?import javafx.scene.layout.VBox?>
+
+
+<?import javafx.scene.layout.HBox?>
+<VBox id="cardPane" fx:id="cardPane"
+      xmlns:fx="http://javafx.com/fxml/1"
+      styleClass = "viewWindow"
+      >
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+    <Label fx:id="name" text="\$first" />
+    <FlowPane fx:id="tags" />
+
+    <HBox>
+        <Label id="fieldLabel" text="Telegram: "/>
+        <Label fx:id="telegram" text="\$telegram"/>
+    </HBox>
+
+    <HBox>
+        <Label id="fieldLabel" text="Github: "/>
+        <Label fx:id="github" text="\$Github" />
+    </HBox>
+
+    <HBox>
+        <Label id="fieldLabel" text="Email: "/>
+        <Label fx:id="email" text="\$email" />
+    </HBox>
+    <FlowPane fx:id="weekLabel"/>
+    <Label fx:id="assignment" text="\$assignment" />
+</VBox>
+

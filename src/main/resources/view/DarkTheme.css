@@ -350,3 +350,54 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#weekLabel {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#weekLabel .label {
+    -fx-text-fill: D6BD98;
+    -fx-font-size: 20;
+}
+
+#weekLabel .information-label {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: D6BD98;
+    -fx-font-size: 12;
+}
+
+#weekLabel .week-number-marked {
+    -fx-text-fill: white;
+    -fx-background-color: green;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 12;
+}
+
+#weekLabel .week-number-unmarked {
+    -fx-text-fill: white;
+    -fx-background-color: red;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 12;
+}
+
+#fieldLabel {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: D6BD98;
+}
+
+.viewWindow Label {
+-fx-font-family: "Segoe UI";
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+}
+
+.viewWindow #name  {
+-fx-font-family: "Segoe UI";
+    -fx-font-size: 35px;
+    -fx-text-fill: white;
+}

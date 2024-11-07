@@ -56,9 +56,30 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.toLowerCase().equals(otherName.fullName.toLowerCase());
     }
 
+    /**
+     * Ignore case while comparing name.
+     *
+     * @param name the name
+     * @return the boolean
+     */
+    public boolean equalIgnoreCase(Name name) {
+        if (name.fullName.equalsIgnoreCase(this.fullName)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Compares the {@code fullName} of this Name object against another Name object.
+     * Comparison is done using String::CompareTo method.
+     */
+    public int compareTo(Name otherName) {
+        requireNonNull(otherName);
+        return this.fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
+    }
     @Override
     public int hashCode() {
         return fullName.hashCode();

@@ -1,6 +1,6 @@
 ---
-layout: page
-title: Xiang Yu's Project Portfolio Page
+  layout: default.md
+  title: "Xiang Yu's Project Portfolio Page"
 ---
 
 ### Project: AddressBook Level 3
