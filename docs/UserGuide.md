@@ -106,6 +106,7 @@ Adds a company to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL r/REMARK [t/TAG] …​`
 
 **Tip:** A company can have any number of tags (including 0)
+**Note:** The company name is not case-sensitive, both `Google` and `google` are the same
 
 **Example**:
 
