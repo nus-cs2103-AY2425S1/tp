@@ -67,7 +67,6 @@ public class PatientBuilder {
         birthdate = new Birthdate(DEFAULT_BIRTHDATE);
         sex = new Sex(DEFAULT_SEX);
         allergies = new AllergyList();
-        allergies.addAllergy(new Allergy(DEFAULT_ALLERGY));
         bloodType = new BloodType(DEFAULT_BLOODTYPE);
         healthRisk = new HealthRisk(DEFAULT_HEALTHRISK);
         existingCondition = new ExistingCondition(DEFAULT_EXISTINGCONDITION);

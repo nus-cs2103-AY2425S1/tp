@@ -46,7 +46,7 @@ public class AddFCommandIntegrationTest {
     public void execute_duplicatePatient_throwsCommandException() {
         Patient patientInList = model.getClinicConnectSystem().getPatientList().get(0);
         assertCommandFailure(new AddFCommand(patientInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PATIENT);
+                AddFCommand.MESSAGE_DUPLICATE_PATIENT);
     }
 
 }

@@ -30,7 +30,7 @@ public class AddFCommand extends Command {
             + "%1$s\n"
             + "Input \"home\" to return to home page";
 
-    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the Clinic Connect system";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the ClinicConnect system";
     private static Logger logger = Logger.getLogger("Foo");
 
     private final Patient toAdd;
