@@ -74,7 +74,14 @@ public class JsonAdaptedParticipation {
     public Participation toModelType(AddressBook addressBook) throws IllegalValueException {
         final List<Attendance> attendanceList = new ArrayList<>();
         for (JsonAdaptedAttendance attendance : attendances) {
-            attendanceList.add(attendance.toModelType());
+            Attendance attendanceToBeAdded = attendance.toModelType();
+
+            //check for duplicate attendance
+            if (attendanceList.stream().anyMatch(a -> a.isSameWeek(attendanceToBeAdded))) {
+                continue;
+            }
+
+            attendanceList.add(attendanceToBeAdded);
         }
 
         if (student == null) {
