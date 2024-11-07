@@ -16,6 +16,8 @@
 [//]: # (_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_)
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
+Material Community Icons by [MaterialCommunityIcons](https://materialdesignicons.com/).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -119,7 +121,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
@@ -359,6 +361,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2c3. AddressBook re-validates the details.
 
       Use case resumes at step 3.
+
+The following activity diagram summarizes the steps involved in adding a contact:
+
+<puml src="diagrams/AddCommandActivityDiagram.puml" alt="AddCommandActivityDiagram" />
+
 
 **Use case: UC02 - Delete a contact**
 

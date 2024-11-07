@@ -5,7 +5,7 @@ package seedu.address.model.person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Price {
-    public static final String MESSAGE_CONSTRAINTS = "Prices should be positive integer";
+    public static final String MESSAGE_CONSTRAINTS = "Prices should be positive integer less than 2 billion.";
     public static final String MESSAGE_PRICE_TOO_HIGH = "Price is too high. Enter a price less than 2 billion.";
     public static final String VALIDATION_REGEX = "\\d+"; // Checks if the price is positive integer
     public final String value;

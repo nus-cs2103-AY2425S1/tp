@@ -189,10 +189,7 @@ public class ParserUtil {
         try {
             sellingPriceInt = Integer.parseInt(trimmedSellingPrice);
         } catch (NumberFormatException e) {
-            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
-        }
-        if (!StringUtil.isNonZeroUnsignedInteger(sellingPrice)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         if (sellingPriceInt > 2000000000) {
             throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
@@ -216,7 +213,7 @@ public class ParserUtil {
         try {
             buyingPriceInt = Integer.parseInt(trimmedBuyingPrice);
         } catch (NumberFormatException e) {
-            throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         if (buyingPriceInt > 2000000000) {
             throw new ParseException(Price.MESSAGE_PRICE_TOO_HIGH);
