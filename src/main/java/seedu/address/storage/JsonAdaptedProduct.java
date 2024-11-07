@@ -53,7 +53,7 @@ class JsonAdaptedProduct {
      * Converts a given {@code Product} into this class for Jackson use.
      */
     public JsonAdaptedProduct(Product source) {
-        name = source.getName().fullName;
+        name = source.getName().getOriginalName();
         supplierName = source.getSupplierName() != null ? source.getSupplierName().fullName : "";
         StockLevel stock = source.getStockLevel();
         curStock = stock.getStockLevel();

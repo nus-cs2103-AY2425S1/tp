@@ -123,7 +123,7 @@ public class ProductBuilder {
             }
             return new Product(name, stockLevel, tags);
         } catch (InvalidStockLevelException | InvalidMinStockLevelException
-                | InvalidMaxStockLevelException | StockLevelOutOfBoundsException e) {
+                 | InvalidMaxStockLevelException | StockLevelOutOfBoundsException e) {
             // For testing purposes, wrap checked exceptions into unchecked exceptions
             throw new RuntimeException("Invalid stock levels set in ProductBuilder: " + e.getMessage(), e);
         }
