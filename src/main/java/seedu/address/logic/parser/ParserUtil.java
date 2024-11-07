@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.group.AddToGroupCommandParser.MEMBER_MESSAGE_CONSTRAINTS;
+import static seedu.address.logic.Messages.MEMBER_MESSAGE_CONSTRAINTS;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -246,7 +246,7 @@ Example:
 * `createGroup g/blood drive 2024 m/3 4` creates a new group named `blood drive 2024`
   with the 3rd and 4th persons in the current list in view as members.
 
-### Adding new members to a existing group : `addToGroup`
+### Adding new members to an existing group : `addToGroup`
 
 Adds new members to a group that currently exists.
 
@@ -261,6 +261,23 @@ must be valid indices.
 Example:
 * `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 of
   the current list in view as members to the existing group named `blood drive`.
+
+### Removing members from an existing group : `removeFromGroup`
+
+Remove members from a group that currently exists.
+
+Format: `removeFromGroup g/GROUP_NAME m/[INDICES]`
+
+* Removes specified members from the group with the name `GROUP_NAME`.
+* The indices are based on the indices displayed in the last list command.
+* There must already exist a group with the name `GROUP_NAME`. The indices
+  must be valid indices.
+* If either of the above conditions are not met, the command will fail.
+
+Example:
+* `reemoveFromGroup g/blood drive 2024 m/1 2 5 6` removes the persons at index 1, 2, 5 and 6 of
+  the current list in view from the existing group named `blood drive`.
+
 
 ### Editing a group's name : `editGroupName`
 
@@ -361,6 +378,7 @@ Action     | Format, Examples
 **Help**   | `help`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
 **Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
+**Remove Existing Members from Group** | `removeFromGroup g/GROUP_NAME m/[INDICES]`
 **Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
 **List Groups**  | `listGroups`
