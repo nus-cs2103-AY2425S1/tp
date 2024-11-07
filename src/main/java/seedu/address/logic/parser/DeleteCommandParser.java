@@ -25,6 +25,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
         return new DeleteCommand(name);
