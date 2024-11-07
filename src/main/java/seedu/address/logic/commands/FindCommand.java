@@ -17,8 +17,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies by company name, tag,"
-            + " or contact number."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds companies by a keyword,"
+            + " which may be the company name or a tag."
             + "\nParameters: find KEYWORD"
             + "\nExample: " + COMMAND_WORD + " WLB:HIGH"
             + "\nExample: " + COMMAND_WORD + " Google"
