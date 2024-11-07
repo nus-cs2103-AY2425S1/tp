@@ -15,7 +15,9 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
   - [Viewing help](#viewing-help--help)
   - [Adding a person](#adding-a-person--add)
   - [Editing a person](#editing-a-person--edit)
-  - [Locating persons by name](#locating-persons-by-name--find)
+  - [Finding persons by name](#finding-persons-by-name--find)
+  - [Finding persons by telegram handle](#finding-persons-by-telegram-handle--findtele)
+  - [Finding persons by tags](#finding-persons-by-tags--findtag)
   - [Filtering persons by contact type](#filtering-persons-by-contact-type--filter)
   - [Deleting a person](#deleting-a-person--delete)
   - [Switching display theme](#switching-display-theme--switch)
@@ -142,13 +144,13 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower h/@betsyyy t/` Edits the name and telegram handle of the 2nd person to be `Betsy Crower` and `@betsyyy` respectively and clears all existing tags.
 
-### Locating persons by name : `find`
+### Finding persons by name : `find`
 
-Finds persons whose **names** or **telegram handle** contain any of the specified keywords.
+Finds persons whose **names** contain any of the specified keywords.
 
 Format: <br>
 `find NAME [MORE_NAME_KEYWORDS]`<br>
-`find h/ TELEGRAM_HANDLE`
+
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -159,9 +161,46 @@ Format: <br>
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find h/@alexyeoh` will return `Alex Yeoh`
 * `find alex david` returns `Alex Yeoh`, `David Li`
   ![result for 'find alex david'](images/findAlexDavid.png)
+
+### Finding persons by telegram handle : `findtele`
+
+Finds persons whose **telegram handles** contain any of the specified keywords.
+
+Format: <br>
+`find TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br>
+
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Partial matches are allowed, meaning searching part of a telegram handle will still return contacts with the full telegram handle e.g. `Hans` will match `@Hansgruber`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `findtele @john` returns `john` and `John Doe`
+* `findtele alex david` returns `Alex Yeoh`, `David Li`
+  ![result for 'findtele alex david'](images/findteleAlexDavid.png)
+
+### Finding persons by tags : `findtag`
+
+Finds persons whose **tags** contain any of the specified keywords.
+
+Format: <br>
+`find TAG [MORE_TAG_KEYWORDS]`<br>
+
+
+* The search is case-insensitive. e.g `friend` will match `Friend`
+* The order of the keywords does not matter. e.g. `Friend Family` will match `Family Friend`
+* Partial matches are allowed, meaning searching part of a tag will still return contacts with the full tag e.g. `fam` will match `family`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `friend family` will return all contacts with `friend` OR `family` as a tag
+
+Examples:
+* `findtag friend` returns `John Doe` and `Betsy Crowe`
+* `findtag neighbour family` returns `Charlotte Oliveiro`, `David Li`
+![result for 'findtag neighbour family'](images/findtagNeighbourFamily.png)
 
 ### Filtering persons by contact type : `filter`
 
@@ -213,6 +252,7 @@ Examples:
 
 * `switch LIGHT` switches to the 'light' display theme
 * `switch DARK` switches to the 'dark' display theme
+  ![result for 'switch dark'](images/switchDark.png)
 
 ### Exiting the program : `exit`
 
@@ -261,7 +301,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
-**Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br> `find h/TELEGRAM_HANDLE` e.g., `find h/@james_lake`
+**Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br><br> `findtele TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br> e.g., `findtele @james_lake`<br><br> `findtag TAG [MORE_TAG_KEYWORDS]`<br> e.g., `findtag friend`
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
 **List**   | `list`
 **Switch** | `switch [THEME]`<br> e.g., `switch LIGHT`, `switch DARK`
