@@ -415,3 +415,4 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Help**             | `help`                                                                                                                                                                                  |
 | **Appointment Date** | `date [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] d/DATE`                                                                                                                                       |
 | **Schedule**         | `schedule d/DATE`                                                                                                                                                                       |
+

@@ -801,3 +801,4 @@ Our group tried to reuse as much of AB3's code structure as much as possible to 
 **Achievements:**
 
 Our group is happy with the outcome of Health Connect, as the process of adding and obtaining information of patients is simplified. With the use of tags, it makes it easier to filter people to find the relevant details. 
+
