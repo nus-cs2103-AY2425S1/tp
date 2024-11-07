@@ -21,9 +21,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.sellsavvy.logic.commands.CommandResult;
+import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
 import seedu.sellsavvy.logic.commands.customercommands.ListCustomerCommand;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
-import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;

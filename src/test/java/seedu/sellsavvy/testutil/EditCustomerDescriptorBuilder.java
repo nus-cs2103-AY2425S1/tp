@@ -5,8 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditCustomerDescriptor;
-import seedu.sellsavvy.model.customer.*;
+import seedu.sellsavvy.model.customer.Address;
 import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.Email;
+import seedu.sellsavvy.model.customer.Name;
+import seedu.sellsavvy.model.customer.Phone;
 import seedu.sellsavvy.model.tag.Tag;
 
 /**

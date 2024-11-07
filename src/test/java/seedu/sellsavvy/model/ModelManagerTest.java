@@ -11,14 +11,14 @@ import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTes
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
-import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
 import static seedu.sellsavvy.testutil.TypicalCustomers.ALICE;
 import static seedu.sellsavvy.testutil.TypicalCustomers.BENSON;
 import static seedu.sellsavvy.testutil.TypicalCustomers.BOB;
 import static seedu.sellsavvy.testutil.TypicalCustomers.GEORGE;
 import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
+import static seedu.sellsavvy.testutil.TypicalOrders.BOTTLE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,10 +28,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.model.customer.Customer;
-import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
 import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.customer.exceptions.CustomerNotFoundException;
+import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
 import seedu.sellsavvy.testutil.AddressBookBuilder;
 import seedu.sellsavvy.testutil.CustomerBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;

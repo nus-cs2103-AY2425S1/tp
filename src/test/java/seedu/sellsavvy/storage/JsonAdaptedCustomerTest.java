@@ -3,8 +3,8 @@ package seedu.sellsavvy.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.sellsavvy.storage.JsonAdaptedCustomer.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import static seedu.sellsavvy.testutil.TypicalCustomers.BENSON;
+import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,8 +2,8 @@ package seedu.sellsavvy.logic.commands.customercommands;
 
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.showCustomerAtIndex;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

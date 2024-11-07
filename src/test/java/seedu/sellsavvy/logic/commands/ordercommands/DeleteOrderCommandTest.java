@@ -7,10 +7,10 @@ import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderByIndex;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.getOrderListByIndex;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +20,11 @@ import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
+import seedu.sellsavvy.model.customer.Customer;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.customer.Customer;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

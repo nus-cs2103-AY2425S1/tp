@@ -37,8 +37,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
-import seedu.sellsavvy.model.customer.*;
+import seedu.sellsavvy.model.customer.Address;
 import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.Email;
+import seedu.sellsavvy.model.customer.Name;
+import seedu.sellsavvy.model.customer.Phone;
 import seedu.sellsavvy.model.tag.Tag;
 import seedu.sellsavvy.testutil.CustomerBuilder;
 

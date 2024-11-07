@@ -8,9 +8,9 @@ import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTes
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalCustomers.ALICE;
 import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.model.customer.Customer;
-import seedu.sellsavvy.model.customer.exceptions.DuplicateCustomerException;
 import seedu.sellsavvy.model.customer.exceptions.CustomerNotFoundException;
+import seedu.sellsavvy.model.customer.exceptions.DuplicateCustomerException;
 import seedu.sellsavvy.testutil.CustomerBuilder;
 
 public class AddressBookTest {

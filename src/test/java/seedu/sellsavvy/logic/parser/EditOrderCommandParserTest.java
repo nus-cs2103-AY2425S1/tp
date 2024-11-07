@@ -34,9 +34,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.Messages;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
-import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Quantity;

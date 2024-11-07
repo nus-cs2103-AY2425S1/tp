@@ -19,8 +19,8 @@ import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.testutil.EditCustomerDescriptorBuilder;
 
 /**

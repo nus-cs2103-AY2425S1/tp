@@ -13,7 +13,12 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sellsavvy.logic.commands.customercommands.*;
+import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.DeleteCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditCustomerDescriptor;
+import seedu.sellsavvy.logic.commands.customercommands.FindCustomerCommand;
+import seedu.sellsavvy.logic.commands.customercommands.ListCustomerCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
@@ -25,20 +30,18 @@ import seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.UnmarkOrderCommand;
-import seedu.sellsavvy.logic.commands.customercommands.AddCustomerCommand;
-import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditCustomerDescriptor;
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.customer.Customer;
+import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.order.StatusEqualsKeywordPredicate;
-import seedu.sellsavvy.model.customer.NameContainsKeywordsPredicate;
-import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
-import seedu.sellsavvy.testutil.EditCustomerDescriptorBuilder;
-import seedu.sellsavvy.testutil.OrderBuilder;
-import seedu.sellsavvy.testutil.OrderUtil;
 import seedu.sellsavvy.testutil.CustomerBuilder;
 import seedu.sellsavvy.testutil.CustomerUtil;
+import seedu.sellsavvy.testutil.EditCustomerDescriptorBuilder;
+import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
+import seedu.sellsavvy.testutil.OrderBuilder;
+import seedu.sellsavvy.testutil.OrderUtil;
 import seedu.sellsavvy.testutil.TypicalIndexes;
 
 public class AddressBookParserTest {
@@ -50,7 +53,8 @@ public class AddressBookParserTest {
         Customer customer = new CustomerBuilder().build();
 
         // using command word
-        AddCustomerCommand command = (AddCustomerCommand) parser.parseCommand(CustomerUtil.getAddCustomerCommand(customer));
+        AddCustomerCommand command = (AddCustomerCommand) parser.parseCommand(
+                CustomerUtil.getAddCustomerCommand(customer));
         assertEquals(new AddCustomerCommand(customer), command);
 
         // using command alias

@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.showCustomerAtIndex;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 

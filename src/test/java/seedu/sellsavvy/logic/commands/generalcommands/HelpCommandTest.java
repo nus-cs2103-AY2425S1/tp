@@ -1,7 +1,7 @@
 package seedu.sellsavvy.logic.commands.generalcommands;
 
-import static seedu.sellsavvy.logic.commands.generalcommands.HelpCommand.SHOWING_HELP_MESSAGE;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.logic.commands.generalcommands.HelpCommand.SHOWING_HELP_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 

@@ -17,13 +17,13 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.logic.parser.exceptions.ParseException;
-import seedu.sellsavvy.model.order.Date;
-import seedu.sellsavvy.model.order.Item;
-import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.customer.Address;
 import seedu.sellsavvy.model.customer.Email;
 import seedu.sellsavvy.model.customer.Name;
 import seedu.sellsavvy.model.customer.Phone;
+import seedu.sellsavvy.model.order.Date;
+import seedu.sellsavvy.model.order.Item;
+import seedu.sellsavvy.model.order.Quantity;
 import seedu.sellsavvy.model.tag.Tag;
 
 public class ParserUtilTest {

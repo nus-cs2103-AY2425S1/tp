@@ -7,12 +7,12 @@ import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 import static seedu.sellsavvy.logic.commands.ordercommands.FilterOrderCommand.MESSAGE_FILTER_ORDERS_SUCCESS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH;
 import static seedu.sellsavvy.testutil.TypicalOrders.ABACUS;
 import static seedu.sellsavvy.testutil.TypicalOrders.BLOCKS;
 import static seedu.sellsavvy.testutil.TypicalOrders.CAMERA;
 import static seedu.sellsavvy.testutil.TypicalOrders.DAGGER;
-import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import java.util.Arrays;
 

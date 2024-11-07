@@ -13,17 +13,17 @@ import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTes
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.logic.commands.customercommands.CustomerCommandTestUtil.showCustomerAtIndex;
+import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND;
-import static seedu.sellsavvy.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.Messages;
-import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.logic.commands.customercommands.EditCustomerCommand.EditCustomerDescriptor;
+import seedu.sellsavvy.logic.commands.generalcommands.ClearCommand;
 import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
