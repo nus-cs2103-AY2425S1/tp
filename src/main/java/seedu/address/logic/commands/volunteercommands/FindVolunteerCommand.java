@@ -1,16 +1,13 @@
 package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_VOLUNTEERS;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 
-import java.util.function.Predicate;
-
-import javafx.collections.ObservableList;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerNameContainsKeywordPredicate;
 
 /**
  * Finds volunteers whose names start with the specified prefix (case-insensitive).
@@ -20,47 +17,41 @@ public class FindVolunteerCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds volunteers whose names start with the specified prefix (case-insensitive).\n"
-            + "Parameters: PREFIX (must be a non-empty alphanumeric between 1 and 100 characters)\n"
-            + "Example: " + COMMAND_WORD + " volunteerSearchString";
+            + ": Finds volunteers with names containing the specified keyword (case-insensitive).\n"
+            + "Parameters: KEYWORD (must be a non-empty string)\n"
+            + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " volunteerSearchString";
 
     public static final String MESSAGE_VOLUNTEER_FOUND = "Found %d volunteer(s) containing '%s':";
     public static final String MESSAGE_VOLUNTEER_NOT_FOUND = "No volunteers found containing '%s'.";
 
-    private final String searchString;
+    private final VolunteerNameContainsKeywordPredicate predicate;
 
     /**
      * Constructs a FindVolunteerCommand that searches for volunteers starting with the given prefix.
      *
-     * @param prefix The prefix to search for.
+     * @param predicate The condition that searches the volunteers.
      */
-    public FindVolunteerCommand(String prefix) {
-        requireNonNull(prefix);
-        this.searchString = prefix.trim();
+    public FindVolunteerCommand(VolunteerNameContainsKeywordPredicate predicate) {
+        this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (searchString.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, searchString));
+        if (predicate.getKeyword().trim().isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, predicate.getKeyword()));
         }
+        boolean matchesFound = model.filterVolunteersByName(predicate);
 
-        Predicate<Volunteer> volunteerContainsSearchString = volunteer ->
-                volunteer.getName().toString().toLowerCase().contains(searchString.toLowerCase());
-        model.updateFilteredVolunteerList(volunteerContainsSearchString);
+        // Set the appropriate message based on whether matches were found
+        String volunteerFoundOrNotFoundMessage = matchesFound
+                ? String.format(MESSAGE_VOLUNTEER_FOUND, model.getFilteredVolunteerList().size(),
+                predicate.getKeyword())
+                : String.format(MESSAGE_VOLUNTEER_NOT_FOUND, predicate.getKeyword());
 
-        ObservableList<Volunteer> filteredVolunteers = model.getFilteredVolunteerList();
-        if (filteredVolunteers.isEmpty()) {
-            model.updateFilteredVolunteerList(PREDICATE_SHOW_ALL_VOLUNTEERS);
-            return new CommandResult(String.format(MESSAGE_VOLUNTEER_NOT_FOUND, searchString));
-        }
-
-        String resultMessage = String.format(MESSAGE_VOLUNTEER_FOUND, filteredVolunteers.size(), searchString);
-
-        return new CommandResult(resultMessage);
+        return new CommandResult(volunteerFoundOrNotFoundMessage);
     }
+
 
     @Override
     public boolean equals(Object other) {
@@ -73,11 +64,11 @@ public class FindVolunteerCommand extends Command {
         }
 
         FindVolunteerCommand otherFindCommand = (FindVolunteerCommand) other;
-        return searchString.equals(otherFindCommand.searchString);
+        return predicate.equals(otherFindCommand.predicate);
     }
 
     @Override
     public String toString() {
-        return "FindVolunteerCommand[searchString=" + searchString + "]";
+        return "FindVolunteerCommand[predicate=" + predicate + "]";
     }
 }

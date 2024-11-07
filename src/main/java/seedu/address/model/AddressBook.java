@@ -12,6 +12,7 @@ import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -203,6 +204,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public List<Event> getEventFromListOfNames(ObservableList<String> stringOfEvents) {
+        return this.eventManager.getEventsFromListOfNames(stringOfEvents);
+    }
+
+    @Override
+    public boolean eventHasOverlapWithList(Event event, List<Event> eventList) {
+        return this.eventManager.eventHasOverlapWithList(event, eventList);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -231,7 +242,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
-            VolunteerDeleteMissingDateException {
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
         volunteerManager.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
     }
 }

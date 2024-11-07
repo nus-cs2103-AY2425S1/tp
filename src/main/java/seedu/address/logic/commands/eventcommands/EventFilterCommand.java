@@ -17,21 +17,21 @@ import seedu.address.model.event.Event;
 /**
  * Displays volunteers involved in the selected event
  */
-public class EventViewCommand extends Command {
+public class EventFilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "view";
+    public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views the volunteer details of the event identified by the index number used in the displayed event "
-            + "list.\n"
+            + ": Filters the volunteer display list to only show volunteers who are available to attend the "
+            + "event identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + EVENT_COMMAND_INDICATOR + " " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_EVENT_SUCCESS = "Viewing details of volunteers involved in %s";
+    private static final String MESSAGE_FILTER_EVENT_SUCCESS = "Showing details of volunteers who are free for %s";
 
     private final Index targetIndex;
 
-    public EventViewCommand(Index targetIndex) {
+    public EventFilterCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -44,9 +44,9 @@ public class EventViewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToView = lastShownList.get(targetIndex.getZeroBased());
-        model.viewEvent(eventToView);
-        return new CommandResult(String.format(MESSAGE_VIEW_EVENT_SUCCESS, eventToView.getName().toString()));
+        Event eventToFilter = lastShownList.get(targetIndex.getZeroBased());
+        model.filterEvent(eventToFilter);
+        return new CommandResult(String.format(MESSAGE_FILTER_EVENT_SUCCESS, eventToFilter.getName().toString()));
     }
 
     @Override
@@ -56,12 +56,12 @@ public class EventViewCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EventViewCommand)) {
+        if (!(other instanceof EventFilterCommand)) {
             return false;
         }
 
-        EventViewCommand otherViewEventCommand = (EventViewCommand) other;
-        return targetIndex.equals(otherViewEventCommand.targetIndex);
+        EventFilterCommand otherFilterEventCommand = (EventFilterCommand) other;
+        return targetIndex.equals(otherFilterEventCommand.targetIndex);
     }
 
     @Override
@@ -71,4 +71,3 @@ public class EventViewCommand extends Command {
                 .toString();
     }
 }
-

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class VolunteerViewCommand extends Command {
             + ": Views the event details of the volunteer identified by the index number used in the displayed "
             + "volunteer list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_VOLUNTEER_SUCCESS = "Viewing details of events that %s is involved in.";
 

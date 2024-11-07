@@ -2,11 +2,15 @@ package seedu.address.model.volunteer;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 
 /**
  * Represents a Volunteer in the system.
@@ -147,7 +151,8 @@ public class Volunteer {
      * Removes a given string list of dates from the volunteer's available dates
      * @param dateList
      */
-    public void removeAvailableDates(String dateList) {
+    public void removeAvailableDates(String dateList) throws DateTimeParseException,
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
         String[] dates = dateList.split(",");
         this.availableDates.removeStringOfDatesFromAvailList(dates);
     }
@@ -174,4 +179,7 @@ public class Volunteer {
                 + ", availableDate=" + availableDates + "}";
     }
 
+    public boolean isFreeOn(LocalDate date) {
+        return this.availableDates.hasAvailableDate(date);
+    }
 }
