@@ -51,11 +51,12 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         EditCommand editCommand = new EditCommand(ID_FIRST_PERSON, new EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(
-          EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
+                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -65,6 +66,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
@@ -73,7 +75,7 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(
-          EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
+                EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -85,6 +87,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(ID_SECOND_PERSON, descriptor);
@@ -94,6 +97,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit person in filtered list into a duplicate in address book
