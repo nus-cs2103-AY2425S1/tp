@@ -51,9 +51,9 @@ experience to their clients without being weighed down by administrative burdens
 
    * `payment John Doe d/2024-10-14 1200 pay/paid`: Marks the appointment for john doe on October 14, 2024, at 12pm as paid.
 
-   * `reminder John Doe r/1 hour` : Sets a reminder for john doe 1 hour before his scheduled appointment.
+   * `reminder John Doe r/1 hour` : Sets a reminder note for john doe 1 hour before his scheduled appointment.
 
-   * `reminder-delete John Doe` : Deletes the reminder set for john doe.
+   * `reminder-delete John Doe` : Deletes the reminder note set for john doe.
 
    * `clear` : Deletes all contacts.
 
@@ -128,8 +128,8 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
   specifying any tags after it.
 
 Examples:
-*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `John Doe` to be `91234567` and `johndoe@example.com` respectively.
-*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `Betsy Crowe` to be `Betsy Crower` and clears all existing tags.
+*  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person named `john doe` to be `91234567` and `johndoe@example.com` respectively.
+*  `edit Betsy Crowe n/Betsy Crower t/` Edits the person with the name `betsy crowe` to be `betsy crower` and clears all existing tags.
 
 ### Deleting a person : `delete`
 
@@ -166,6 +166,7 @@ The name must match the full name exactly
 - Address
 - Condition
 - Schedule
+- Reminder Note
 
 **Examples:**
 * `view John Doe`
@@ -259,16 +260,18 @@ Examples:
 * `appointment-list`<br>
   ![appointment list](images/appointmentList.png)<br>
 * `appointment-list d/2024-10-17`
-* `appointment-list d/2024-10-18 1000`
+   <br>Displays all appointments scheduled for October 17, 2024, if this date has not yet passed the current local date.
+* `appointment-list d/2024-10-18 1000` 
+   <br>Displays the appointment scheduled for October 17, 2024, 10:00am, if this date and time has not yet passed the current local date and time
 
-### Setting a reminder: `reminder`
+### Setting a reminder note: `reminder`
 
-Sets a reminder for a client before their appointment in the address book.
+Sets a reminder note for a client before their appointment in the address book.
 
 Format: `reminder NAME r/REMINDER_TIME`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can only set a reminder for a person who already has a scheduled appointment
+You can only set a reminder note for a person who already has a scheduled appointment
 </div>
 
 * The NAME refers to the full name of the client you want to set a reminder for.
@@ -283,15 +286,15 @@ Examples:
 * `reminder Betsy Crowe r/3 hours`<br>
   ![reminder for Betsy Crowe](images/reminderBetsyCrowe.png)
 
-### Deleting a reminder: `reminder-delete`
+### Deleting a reminder note: `reminder-delete`
 
-Deletes a reminder for a client in the address book.
+Deletes a reminder note for a client in the address book.
 
 Format: `reminder-delete NAME`
 
-* You can only delete a reminder for a person who has at least one scheduled appointment.
+* You can only delete a reminder note for a person who has at least one scheduled appointment.
 * The given name must be the name of an existing client.
-* You can only delete a reminder if the reminder has been set.
+* You can only delete a reminder note if the reminder note has been set.
 
 Examples:
 * `reminder-delete Betsy Crowe`<br>
@@ -346,6 +349,7 @@ a unique name (not case-sensitive).
 strength, flexibility, or overall physical function.
 * **Tag**: A label to indicate the treatment type of the client.
 * **Notes**: Additional information on the appointment (e.g. urgency, treatment record).
+* **Reminder Note**: An entry saved for a specific time before a client's scheduled appointment in the address book, it serves as a record to help the phyisotherapist keep track of when they need to follow up with the client. 
 
 --------------------------------------------------------------------------------------------------------------------
 
