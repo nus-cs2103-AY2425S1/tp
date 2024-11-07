@@ -26,7 +26,7 @@ public class AddPropertyToBuyCommand extends Command {
             + " for this specific person. \n"
             + "Parameters: INDEX (Must be a positive integer) "
             + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE] "
-            + PREFIX_BUYING_PRICE + "[SELLING_PRICE] "
+            + PREFIX_BUYING_PRICE + "[BUYING_PRICE] "
             + PREFIX_POSTAL_CODE + "[POSTAL_CODE] "
             + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER] "
             + PREFIX_TAG + "[TAG]...\n"

@@ -172,6 +172,6 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, phone, email, address, tags, sellingProperties, buyingProperties, propertiesSold,
-                propertiesBought);
+                propertiesBought, false);
     }
 }

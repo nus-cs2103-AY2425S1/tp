@@ -6,11 +6,18 @@
 
 # NUStates User Guide
 
-NUStates is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) for Real Estate Agents to organize and categorize client and seller contacts, manage property listings, and easily search through client information. With NUStates, agents can add and categorize clients, list properties for sale or purchase,and find contacts by name, phone number or tags.
+NUStates is a **desktop application designed to streamline contact and property management** specifically for real estate agents.
+Built for **fast, efficient use** through a Command Line Interface (CLI), NUStates enables real estate agents to **organise, categorise, and access their contacts and listings** with speed and precision.
 
-Additionally, NUStates allows agents to **segregate properties by bought or sold status**, and even **sort contacts and properties based on various criteria**. This powerful functionality helps streamline workflow, ensuring that agents have a clear, organized view of their contacts and listings, all within a highly optimized CLI environment.
+With NUStates, agents can:
+- **Manage and Tag Clients**: Easily add, tag, and retrieve client and seller details.
+- **Search and Filter**: Quickly find contacts by name, phone number, or tags, and sort by various criteria.
+- **Pin and Unpin Clients**: Keep high-priority clients at the top for quick access.
+- **Scroll through Command History**: Effortlessly scroll through previous commands, making repetitive tasks quicker.
+- **View Statistics Dashboard**: View insightful statistics at a glance, such as the number of active clients, properties sold, and performance metrics.
 
-It has the benefits of a Graphical User Interface (GUI). If you can type fast, NUStates can get your contact management tasks done faster than traditional GUI apps.
+NUStates combines the power of **CLI efficiency** with the clarity of **GUI visuals**, enabling agents to streamline their workflow, stay organised, and focus on what matters—_serving their clients_.
+
 
 <!-- * Table of Contents -->
 # Table of Contents
@@ -49,6 +56,9 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
   - [Additional Features](#additional-features)
     - [Command history: Up and Down arrow keys](#command-history-up-and-down-arrow-keys)
     - [Highlighting of command errors](#highlighting-of-command-errors)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
@@ -57,17 +67,27 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or a newer version installed in your computer.
+   If you're not sure, you can download and install it from [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
+2. Download the latest `NUStates.jar` file from [this link](https://github.com/AY2425S1-CS2103T-F10-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Move the downloaded file to the folder where you want to keep NUStates.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar nustates.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal:
+    - **Windows**: Press `Win + R`, type `cmd`, and press `Enter`.
+    - **macOS**: Press `Cmd + Space`, type `Terminal`, and press `Enter`.
+
+5. Navigate to the folder where you put the `NUStates.jar` file by using the `cd` command:
+    - **Windows**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd C:\Users\JohnDoe\Desktop\NUStates`
+    - **macOS**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
+
+6. Run the application by typing `java -jar nustates.jar` in the terminal and pressing `Enter`.
+   
+    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+7. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -84,7 +104,7 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+8. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -337,15 +357,16 @@ Format: `findBuy KEYWORD [MORE_KEYWORDS]`
 
 * The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
 * The search is case-insensitive. e.g `condo` will match `Condo`
-* The order of the keywords does not matter. e.g. `condo #02-205` will match `#02-205 condo`
+* The order of the keywords does not matter. e.g. `condo 02-205` will match `02-205 condo`
 * All the criterias for a property are searched.
-* No need for full keywords to be matched e.g. `cond` will match `condo`
+* No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
+* Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo #02-05` will return `Alex Yeah`, `Bernice Yu`
+  e.g. ` condo 02-05` will return `Alex Yeah`, `Bernice Yu`
 
 Examples:
-* `findBuy condo` returns `Alex Yeah`
-* `findp condo #02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+* `findBuy condo` returns `Alex Yeoh`
+* `findp condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
   
 
 ## Finding persons based on properties to sell: `findSell`
@@ -358,15 +379,16 @@ Format: `findSell KEYWORD [MORE_KEYWORDS]`
 
 * The KEYWORD can contain any types of value: Strings, Numbers, Special Characters
 * The search is case-insensitive. e.g `condo` will match `Condo`
-* The order of the keywords does not matter. e.g. `condo #02-205` will match `#02-205 condo`
+* The order of the keywords does not matter. e.g. `condo 02-205` will match `02-205 condo`
 * All the criterias for a property are searched.
-* No need for full keywords to be matched e.g. `cond` will match `condo`
+* No need for full keywords to be matched (for housing type and tags) e.g. `cond` will match `condo`
+* Full keywords must be matched for unit number, postal code and price. e.g. `02` will not match `02-205`
 * Person having properties matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. ` condo #02-05` will return `Alex Yeah`, `Bernice Yu`
+  e.g. ` condo 02-05` will return `Alex Yeah`, `Bernice Yu`
 
 Examples:
-* `findSell condo` returns `Alex Yeah`
-* `findSell condo #02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
+* `findSell condo` returns `Alex Yeoh`
+* `findSell condo 02-05` returns `Alex Yeoh`, `Bernice Yu`<br>
   
 ## Listing Entries Commands
 
@@ -484,30 +506,27 @@ NUStates will highlight any specific errors in the command entered by the user. 
 - **Unknown Command**: If the command entered is not recognized by NUStates, it will highlight the invalid command keyword and provide a message indicating that the command is unknown.
 - **Missing Preamble Value**: If required preamble value is invalid (e.g., non-positive values where positive numbers are expected), NUStates will highlight the invalid preamble value and provide a message indicating the expected format.
 - **Invalid Parameter Values**: If any parameter values are invalid (e.g., non-numeric values where numbers are expected), NUStates will highlight the invalid values and provide a message indicating the expected format.
-- **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format.
+- **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format. This includes missing parameters, incorrect command structure, and other general errors.
 
 Examples:
 1. **Unknown Command**:
   - Command entered: `ad n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-  - Error message: `Unknown command.`
+  - Cause: The command `ad` is not recognised.
   - Highlight: The `ad` part is highlighted.
 
 2. **Invalid Preamble Value**:
   - Command entered: `addBuy -22 ht/c pc/999111 un/10-01 bp/1000000`
-  - Error message: `Valid person index must be provided.`
+  - Cause: The person index `-22` is invalid.
   - Highlight: The invalid `-22` part is highlighted.
 
 3. **Invalid Parameter Values**:
   - Command entered: `add n/John Doe p/abc e/johnd@example.com a/John street, block 123, #01-01`
-  - Error message: `Phone numbers should only contain numbers, and it should be at least 3 digits long`
+  - Cause: The phone number `abc` is invalid.
   - Highlight: The `p/abc` part is highlighted.
 
 4. **Invalid Command Format and Other Errors**:
-  - Command entered: `addBuy 1 pc/999111 un/10-01 bp/1000000` (missing `ht/c` parameter)
-  - Error message: `Invalid command format!
-    addBuy: Adds a property to the list of properties to buy for this specific person.
-    Parameters: INDEX (Must be a positive integer) ht/[HOUSING_TYPE] bp/[SELLING_PRICE] pc/[POSTAL_CODE] un/[UNIT_NUMBER] t/[TAG]...
-    Example: addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Extremely spacioust/Near MRT`
+  - Command entered: `addBuy 1 pc/999111 un/10-01 bp/1000000`
+  - Cause: The housing type parameter `ht/` is missing.
   - Highlight: No specific part is highlighted.
 
 ### Saving the data
@@ -558,16 +577,29 @@ _Details coming soon ..._
 ## Command summary
 
 Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
+**Statistics**   | `stats`
+**Clear**  | `clear`
+**Exit**  | `exit`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add Property** | `addBuy INDEX_NUMBER ht/HOUSING TYPE bp/BUYING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
 **Add Property** | `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
-**Clear**  | `clear`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delSell 3 2`
 **Delete Property** | `delBuy INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delBuy 3 2`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jake`
-**Find Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
+**Find using Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jak`
+**Find using Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
+**Find using Tag**   | `findtc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findtc friend owes`
+**Find using Property**   | `findBuy KEYWORD [MORE_KEYWORDS]`<br> e.g., `findBuy condo 02-21`
+**Find using Property**   | `findSell KEYWORD [MORE_KEYWORDS]`<br> e.g., `findSell hdb 21345`
 **List**   | `list`
-**Help**   | `help`
+**Sort Person**   | `sort f/FIELD o/ORDER`<br> e.g., `sort f/Name o/L`
+**Sort Property**   | `sorti INDEX f/FIELD o/ORDER`<br> e.g., `sorti 1 f/Price o/L`
+**Mark Property**   | `bought PERSON_INDEX PROPERTY_TO_BUY_INDEX ap/ACTUAL PRICE`<br> e.g., `bought 1 2 ap/1250000`
+**Mark Property**   | `sold PERSON_INDEX PROPERTY_TO_SELL_INDEX ap/ACTUAL PRICE`<br> e.g., `sold 2 2 ap/1050000`
+**Pin** | `pin INDEX`<br> e.g., `pin 3`
+**Unpin** | `unpin INDEX`<br> e.g., `unpin 1`
+
+
