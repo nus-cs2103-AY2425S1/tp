@@ -42,7 +42,7 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <box type="info" seamless>
 
@@ -67,10 +67,23 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 
 Shows a message explaning how to access the help page.
 
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Undoing the previous command : `undo`
+
+Undoes the previous data-changing command.
+
+Format: `undo`
+
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+## Student Commands
 
 ### Adding a student: `adds`
 
@@ -107,12 +120,6 @@ Examples:
 *  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person in the displayed list to be `91234567` and `Z19` respectively.
 *  `edits 2 n/Betsy Crower` Edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
 
-### Undoing the previous command : `undo`
-
-Undoes the previous data-changing command.
-
-Format: `undo`
-
 ### Locating student by name: `view`
 
 View student(s) whose name matches the specified name exactly.
@@ -145,11 +152,6 @@ Examples:
 * `deletes n/John Tan` deletes the student with the exact name `John Tan` from the contact list.
 * `deletes n/Betsy sn/A0123456X` deletes the student with the exact name `Betsy` and student number `A0123456X` from the contact list.
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ## Attendance Commands
 
@@ -161,50 +163,81 @@ Format: `exit`
 
 ### Marking Attendance : `markat`
 
-* Marks attendance of student for a particular date with the specified details.
+Marks attendance of student for a particular date with the specified details.
 
-* Format: `markat n/STUDENT_NAME d/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
+Format: `markat n/STUDENT_NAME d/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
 
 ### Marking Tutorial Group Attendance : `markpresentall`
 
-* Marks all students in a tutorial group as present for a particular date
+Marks all students in a tutorial group as present for a particular date
 
-* Format: `markpresentall tg/TUTORIAL_GROUP d/DATE`
+Format: `markpresentall tg/TUTORIAL_GROUP d/DATE`
 
 ### Unmarking Tutorial Group Attendance : `Unmarkpresentall`
 
-* Marks all students in a tutorial group as absent for a particular date
+Marks all students in a tutorial group as absent for a particular date
 
-* Format: `unmarkpresentall tg/TUTORIAL_GROUP d/DATE`
+Format: `unmarkpresentall tg/TUTORIAL_GROUP d/DATE`
 
 ### Deleting Attendance : `deleteat`
 
-* Deletes attendance of student for a particular date with the specified details.
+Deletes attendance of student for a particular date with the specified details.
 
-* Format : `deleteat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+Format : `deleteat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
 
 ### Deleting Tutorial Group Attendance : `deleteatall`
 
-* Deletes attendance of all students in a tutorial group for a particular date
+Deletes attendance of all students in a tutorial group for a particular date
 
-* Format : `deleteatall tg/TUTORIAL_GROUP d/DATE`
+Format : `deleteatall tg/TUTORIAL_GROUP d/DATE`
 
 ### Getting Attendance : `getat`
 
-* Gets attendance of student for a particular date
+Gets attendance of student for a particular date
 
-* Format: `getat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+Format: `getat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
 
 ### Getting Tutorial Group Attendance : `getattg`
 
-* Opens an attendance window for all students in a tutorial group for a particular date
-  * Executing `undo` will close the last window opened by this command 
+Opens an attendance window for all students in a tutorial group for a particular date
+* Executing `undo` will close the last window opened by this command 
 
-* Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+Format: `getattg tg/TUTORIAL_GROUP d/DATE`
 
 ### Closing Attendance Window : `closeat`
-* Closes all attendance windows if any is currently open.
+Closes all attendance windows if any is currently open.
 
+## Assignment Commands
+
+Fields labelled `[0]` are optional.
+
+### Adding Assignments : `adda`
+
+Adds an assignment to the specified student
+Format: `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE s/SUBMISSION_STATUS[O] g/GRADE[O] sn/STUDENT_NUMBER[O]`
+  * Adds an assignment to the student with `NAME`. If student number is provided, this adds an assignment to the student
+with `STUDENT_NUMBER` and `NAME`.
+  * If there is more than one student with `NAME`, a student number must be provided.
+  * Assignment names must be unique.
+  * If not specified, `SUBMISSION_STATUS` defaults to `N` (i.e. not submitted).
+  * If not specified, `GRADE` defaults to `NULL` (i.e. not graded).
+
+### Deleting Assignments : `deletea`
+
+Deletes an assignment for the specified student
+Format: `adda n/NAME a/ASSIGNMENT_NAME sn/STUDENT_NUMBER[O]`
+* Deletes an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided, 
+this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
+* If there is more than one student with `NAME`, a student number must be provided.
+
+### Editing Assignments : `edita`
+
+Edits an assignment for the specified student
+Format: `edita n/NAME a/ASSIGNMENT_NAME d/DEADLINE[0] s/SUBMISSION_STATUS[0] g/GRADE[0]`
+* Edits an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided,
+  this edits the assignment for the student with `STUDENT_NUMBER` and `NAME`.
+* If there is more than one student with `NAME`, a student number must be provided.
+* Fields which are not specified will remain unchanged after the operation.
 
 ### Saving the data
 
