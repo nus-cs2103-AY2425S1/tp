@@ -165,6 +165,9 @@ Format: `setappointment INDEX d/[YYYY-MM-DD]`
 * Sets appointment date for the client at the specific `INDEX`
 * If the date is left empty, the current appointment date will be removed
 
+Example:
+- `setappointment 1 d/2024-11-23`
+
 ### Locating beneficiaries by name: `find`
 
 Finds beneficiaries whose names and address contain any of the given keywords.
@@ -286,6 +289,9 @@ Action | Format, Examples
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
+**Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
+**Set Appointment** | `setappointment INDEX d/[YYYY-MM-DD]` <br> e.g., `setappointment 1 d/2024-11-23`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Log** | `addlog INDEX r/REMARK [d/DATE]`<br> e.g., `addlog 2 r/Client is doing well d/2022-12-12 14:00`

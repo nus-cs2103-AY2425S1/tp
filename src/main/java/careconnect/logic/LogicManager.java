@@ -148,16 +148,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public boolean validateSyntax(String syntax) {
+    public ValidateSyntaxResultEnum validateSyntax(String syntax) {
         syntax = syntax.trim();
         if (commandsList.contains(syntax)) {
-            return true;
+            return ValidateSyntaxResultEnum.VALID_COMMAND_WORD;
         }
         try {
             addressBookParser.parseCommand(syntax);
-            return true;
+            return ValidateSyntaxResultEnum.VALID_FULL_COMMAND;
         } catch (ParseException e) {
-            return false;
+            return ValidateSyntaxResultEnum.INVALID_COMMAND;
         }
     }
 

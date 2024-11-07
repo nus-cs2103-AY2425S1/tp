@@ -11,6 +11,7 @@ import careconnect.commons.core.LogsCenter;
 import careconnect.logic.Logic;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
+import careconnect.logic.Logic.ValidateSyntaxResultEnum;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
 import careconnect.model.person.Person;
@@ -244,8 +245,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see Logic#validateSyntax(String)
      */
-    private boolean validateSyntax(String syntax) {
-        boolean isValidSyntax = logic.validateSyntax(syntax);
+    private ValidateSyntaxResultEnum validateSyntax(String syntax) {
+        ValidateSyntaxResultEnum isValidSyntax = logic.validateSyntax(syntax);
         logger.info("isValidSyntax: " + isValidSyntax);
         return isValidSyntax;
     }

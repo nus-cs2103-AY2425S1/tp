@@ -4,6 +4,10 @@
     -fx-text-fill: -fx-error !important; /* The error class should always override the default text-fill style */
 }
 
+.valid-command {
+    -fx-text-fill: -fx-valid-command !important;
+}
+
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
     -fx-background: -fx-bg;

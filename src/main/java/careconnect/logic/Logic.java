@@ -17,6 +17,12 @@ import javafx.collections.ObservableList;
  * API of the Logic component
  */
 public interface Logic {
+    enum ValidateSyntaxResultEnum {
+        VALID_COMMAND_WORD,
+        VALID_FULL_COMMAND,
+        INVALID_COMMAND,
+    }
+
     /**
      * Executes the command and returns the result.
      * @param commandText The command as entered by the user.
@@ -40,7 +46,7 @@ public interface Logic {
      * @param syntax The syntax to check
      * @return true if given string is valid syntax; else false
      */
-    boolean validateSyntax(String syntax);
+     ValidateSyntaxResultEnum validateSyntax(String syntax);
 
     /**
      * Returns the AddressBook.
