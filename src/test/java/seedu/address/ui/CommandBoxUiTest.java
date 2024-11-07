@@ -43,7 +43,6 @@ public class CommandBoxUiTest extends ApplicationTest {
         FxToolkit.showStage();
         WaitForAsyncUtils.waitForFxEvents(20);
     }
-
     @AfterEach
     public void tearDown() throws TimeoutException {
         FxToolkit.cleanupStages();
