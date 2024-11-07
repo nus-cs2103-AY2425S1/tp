@@ -538,14 +538,14 @@ Given below are instructions to test the app manually.
 ### Adding a pastry
 
 1. Prerequisites: Ensure that the ingredients required for the pastry are already available in the ingredient catalogue.
-2. **Test case**: `addPastry Chocolate Croissant 4.50 Chocolate, Flour, Sugar` (Assuming Chocolate, Flour and Sugar exist in the Ingredient catalogue)
+2. **Test case**: `addPastry Chocolate Croissant 4.50 Chocolate Flour Sugar` (Assuming Chocolate, Flour and Sugar exist in the Ingredient catalogue)
     - **Expected**: The pastry "Chocolate Croissant" is added successfully, and a success message is displayed.
 
 #### Adding with invalid data
 
-1. **Test case**: `addPastry Strawberry Tart 5.00 Strawberry, Cream, Butter` (assuming Butter is not in the ingredient catalogue)
+1. **Test case**: `addPastry Strawberry Tart 5.00 Strawberry Cream Butter` (assuming Butter is not in the ingredient catalogue)
     - **Expected**: Error message indicating that Butter must be added using the `addIngredient` command before it can be used in a pastry.
-2. **Test case**: `addPastry Apple Pie -3.00 Apple, Flour, Sugar`
+2. **Test case**: `addPastry Apple Pie -3.00 Apple Flour Sugar`
     - **Expected**: Error message indicating that the cost cannot be negative.
 3. **Test case**: `addPastry Blueberry Muffin 3.00`
     - **Expected**: Error message indicating that at least one ingredient must be provided.
