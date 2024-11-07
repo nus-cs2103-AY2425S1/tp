@@ -42,6 +42,10 @@ public class TagCommand extends UndoableCommand {
     private final List<Index> targetIndexes;
     private final Set<Tag> tags;
     private final Map<Index, Set<Tag>> addedTagsMap = new HashMap<>();
+    private Set<Tag> missingTags = new HashSet<>();
+    private Set<Tag> duplicateTags = new HashSet<>();
+    private StringBuilder successMessage = new StringBuilder();
+    private StringBuilder finalMessage = new StringBuilder();
 
     /**
      * @param targetIndexes of the guest in the filtered person list to tag
@@ -60,43 +64,12 @@ public class TagCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Set<Tag> missingTags = new HashSet<>();
-        Set<Tag> duplicateTags = new HashSet<>();
-        StringBuilder successMessage = new StringBuilder();
-        StringBuilder finalMessage = new StringBuilder();
-
-        for (Index targetIndex : targetIndexes) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            Person personToTag = lastShownList.get(targetIndex.getZeroBased());
-            Set<Tag> newTags = new HashSet<>(personToTag.getTags());
-            Set<Tag> addedTags = new HashSet<>();
-            boolean isUpdated = false;
-
-            for (Tag tag : tags) {
-                if (!model.hasTag(tag)) {
-                    missingTags.add(tag);
-                } else if (newTags.contains(tag)) {
-                    duplicateTags.add(tag);
-                } else {
-                    newTags.add(tag);
-                    addedTags.add(tag);
-                    isUpdated = true;
-                }
-            }
-
-            if (isUpdated) {
-                Person updatedPerson = setPerson(model, personToTag, newTags);
-                addedTagsMap.put(targetIndex, addedTags);
-                updateSuccessMessage(successMessage, updatedPerson);
-            }
-        }
+        tagPersons(model, targetIndexes, lastShownList);
         if (!successMessage.isEmpty()) {
             finalMessage.append(MESSAGE_TAG_PERSON_SUCCESS).append(successMessage);
         }
         if (!missingTags.isEmpty() || !duplicateTags.isEmpty()) {
-            updateFinalMessage(finalMessage, duplicateTags, missingTags);
+            updateFinalMessage();
         }
         return new CommandResult(finalMessage.toString());
     }
@@ -154,24 +127,60 @@ public class TagCommand extends UndoableCommand {
         successMessage.append(Messages.format(updatedPerson));
     }
 
-    private void updateFinalMessage(StringBuilder finalMessage, Set<Tag> duplicateTags, Set<Tag> missingTags) {
+    private void updateFinalMessage() {
         if (!finalMessage.isEmpty()) {
             finalMessage.append("\n");
         }
         if (!missingTags.isEmpty()) {
             finalMessage.append(MESSAGE_TAG_NOT_CREATED)
-                    .append(missingTags.stream()
-                            .map(Tag::toString)
-                            .collect(Collectors.joining(", ")));
+                    .append(missingTags.stream().map(Tag::toString).collect(Collectors.joining(", ")));
         }
         if (!duplicateTags.isEmpty()) {
             if (!missingTags.isEmpty()) {
                 finalMessage.append("\n");
             }
             finalMessage.append(MESSAGE_DUPLICATE_TAG)
-                    .append(duplicateTags.stream()
-                            .map(Tag::toString)
-                            .collect(Collectors.joining(", ")));
+                    .append(duplicateTags.stream().map(Tag::toString).collect(Collectors.joining(", ")));
         }
+    }
+
+    private void tagPersons(Model model, List<Index> targetIndexes, List<Person> lastShownList)
+            throws CommandException {
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            Person personToTag = lastShownList.get(targetIndex.getZeroBased());
+            Set<Tag> newTags = new HashSet<>(personToTag.getTags());
+            Set<Tag> addedTags = new HashSet<>();
+
+            boolean isUpdated = updateTags(model, newTags, addedTags);
+            if (isUpdated) {
+                updatePerson(model, personToTag, newTags, targetIndex, addedTags);
+            }
+        }
+    }
+
+    private boolean updateTags(Model model, Set<Tag> newTags, Set<Tag> addedTags) {
+        boolean isUpdated = false;
+        for (Tag tag : tags) {
+            if (!model.hasTag(tag)) {
+                missingTags.add(tag);
+            } else if (newTags.contains(tag)) {
+                duplicateTags.add(tag);
+            } else {
+                newTags.add(tag);
+                addedTags.add(tag);
+                isUpdated = true;
+            }
+        }
+        return isUpdated;
+    }
+
+    private void updatePerson(Model model, Person personToTag, Set<Tag> newTags, Index targetIndex,
+                              Set<Tag> addedTags) {
+        Person updatedPerson = setPerson(model, personToTag, newTags);
+        addedTagsMap.put(targetIndex, addedTags);
+        updateSuccessMessage(successMessage, updatedPerson);
     }
 }
