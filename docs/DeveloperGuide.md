@@ -24,6 +24,7 @@ title: Developer Guide
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -61,6 +62,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
@@ -82,6 +85,8 @@ implementation of a component), as illustrated in the (partial) class diagram be
 <img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -108,6 +113,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API
@@ -119,6 +126,8 @@ Here's a (partial) class diagram of the `Logic` component:
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API
 call as an example.
+
+<div style="page-break-after: always;"></div>
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -138,6 +147,8 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
+<div style="page-break-after: always;"></div>
+
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
@@ -149,10 +160,11 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F11-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -168,11 +180,15 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -190,11 +206,14 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects
   that belong to the `Model`)
 
+<div style="page-break-after: always;"></div>
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -222,6 +241,8 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
 calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
 to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
@@ -238,6 +259,8 @@ the `addressBookStateList`.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
 the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
@@ -257,6 +280,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
+<div style="page-break-after: always;"></div>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
@@ -275,6 +299,8 @@ Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
+<div style="page-break-after: always;"></div>
+
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
 pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
 purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
@@ -285,6 +311,8 @@ desktop applications follow.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -307,6 +335,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -339,6 +369,8 @@ and meant for bigger hospitals.
 ClinicBuddy enhances the patient management process for small clinics, creating a platform to track patient information
 such as contact information, address and other basic personal data.
 
+<div style="page-break-after: always;"></div>
+
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
@@ -353,12 +385,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * ` | first-time user      | get help within the application    | I can understand how to use the commands                                                                          |
 | `* `   | user who is careless | undo commands                      | I can reverse recently executed commands if the command should not have been executed                             |
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 (For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, unless specified
 otherwise)
 
 (For all use cases below, the **System** is the `ClinicBuddy` and the **Actor** is the `user`, who is a receptionist, unless specified otherwise)
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Add a new patient**
 
@@ -374,6 +410,8 @@ Extensions:
 - 1a. Patient information contains fields with incorrect format.
     - 1a1. ClinicBuddy provides an error message informing the user of the error.
     - Use case ends.
+  
+<div style="page-break-after: always;"></div>
 
 **Use case: Delete a person**
 
@@ -393,6 +431,8 @@ Use case ends.
 * 2a. The NRIC is not in the records.
     - 2a1. ClinicBuddy provides an error message informing the user of the error.
     - Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Edit a patient record**
 
@@ -415,6 +455,8 @@ Use case ends.
     - 1c1. ClinicBuddy provides an error message informing the user of the error.
     - Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: Search a record**
 
 **MSS**
@@ -432,6 +474,8 @@ Use case ends.
 * 1b. No matching patient records are found.
     - 1b1. ClinicBuddy displays a message indicating no matches were found.
     - Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: Backup data**
 
@@ -456,6 +500,8 @@ Use case ends.
       If No: The user is prompted to provide a new destination path or filename.
     - Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: Help command**
 
 **MSS**
@@ -465,6 +511,7 @@ Use case ends.
 
 Use case ends.
 
+<div style="page-break-after: always;"></div>
 
 **Use case: Undo a command**
 
@@ -482,6 +529,8 @@ Use case ends.
     - Use case ends.
 
 
+<div style="page-break-after: always;"></div>
+
 **Use case: Search for bookings**
 
 **MSS**
@@ -498,6 +547,7 @@ Use case ends.
     - Use case ends.
 
 
+<div style="page-break-after: always;"></div>
 
 ### **Non-Functional Requirements**
 
@@ -532,6 +582,8 @@ Use case ends.
 8. **Error Handling**:
     - The system must display specific error messages for invalid inputs and revert to the last saved state on critical errors.
 
+<div style="page-break-after: always;"></div>
+
 9. **Data Recovery**:
     - In the event of a system crash, patient data should not be lost.
     - Automatic backups should occur every **30 minutes**, and the system should recover data from the latest backup, with data loss **not exceeding 5%** in a system crash.
@@ -541,6 +593,8 @@ Use case ends.
       **easily** and **without extensive rewrites** to existing code.
     - The codebase should follow **industry-standard practices** such as **modular design**, **consistent naming
       conventions**, and **proper documentation** to facilitate maintenance and future feature additions.
+
+<div style="page-break-after: always;"></div>
 
 ### Glossary
 
@@ -556,6 +610,7 @@ Use case ends.
   output messages
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -584,6 +639,8 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -601,6 +658,8 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
