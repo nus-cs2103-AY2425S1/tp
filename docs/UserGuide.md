@@ -272,15 +272,15 @@ would also include the file that StaffSync uses to store all the data.
 
 <br>
 
-<strong>4. </strong>Open a command terminal, Change the directory to the folder you have placed `staffSync.jar` using 
-the `cd` command. For example, if the file is in the `Downloads` folder, enter `cd Downloads`. 
+<strong>4. </strong>Open a command terminal, Change the directory to the folder you have placed `staffSync.jar` using
+the `cd` command. For example, if the file is in the `Downloads` folder, enter `cd Downloads`.
 Next, enter `java -jar staffSync.jar` to run the application.<br>
 
    Alternatively, you can double-click the jar file to run the application (though we do not officially support it).
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    <div class="ug-images">
-   
+
    ![Ui](images/Ui.png)
    </div>
 
@@ -652,7 +652,7 @@ journey with StaffSync!
 
 <br>
 
-**Parameters:** 
+**Parameters:**
 
   `PARAMETER`:
   * `all` for all persons.
@@ -661,7 +661,7 @@ journey with StaffSync!
 
 
 **Optional Parameters:**
-    
+
   * Refer to the `employee` or `potential` command for each parameter's format.
   * Only name, phone number, email, department and role can be searched.
   * Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
@@ -673,7 +673,7 @@ journey with StaffSync!
     and with phone number either `12345678` or `87654321`.
   * The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
   `find all e/bob@example.com alice@example.com`.
-  * The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match 
+  * The order of the keywords prefixes does not matter. e.g. `find all n/john e/john@example.com` will match
   `find all e/john@example.com n/john`.
 
 
@@ -698,7 +698,7 @@ journey with StaffSync!
 
   <div class="command-content">
   <div class="ug-images">
-   
+
   ![result for 'find ph n/John'](images/findJohnResult.png)
   </div>
 
@@ -736,10 +736,10 @@ journey with StaffSync!
   </div>
 
   <div class="ug-images">
-  
+
   ![Ui](images/helpWindow.png)
   </div>
- 
+
   </div>
 </details>
 
