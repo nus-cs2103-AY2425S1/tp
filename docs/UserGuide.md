@@ -70,23 +70,35 @@ First time using **InternBuddy**? Don't worry! We've got you covered! This tutor
 Before continuing, here are some important information you need to know about the User Guide:
 1. There are 3 different kinds of boxes that provide extra information.
     * *Tip boxes* provide tips or helpful advise on how to use a certain feature found in **InternBuddy**.
+   
       <box type="tip" seamless>
+   
       **Tip:** This is a tip box.
       </box>
+      
     * *Notice boxes* provide important information that you should take note of.
+   
       <box type="info" seamless>
+      
       **Notice:** This is a notice box.
       </box>
+   
     * *Warning boxes* provide a warning about certain errors that might occur as a precaution for incorrect usage.
+   
       <box type="warning" seamless>
+      
       **Warning:** This is a warning box.
       </box>
+
 2. Words that are in <span style="color:#0d6efd">in blue</span> are hyperlinks. They will redirect you to a different
    part of the User Guide or an external link when you click on them. For instance, [this hyperlink](#internbuddy-user-guide)
    brings you back to the top of the User Guide.
+
    <box type="tip" seamless>
+   
    **Tip:** If you are viewing this guide on our website, you can hover over links to see where the hyperlink takes you!
    </box>
+
 3. Refer to [Features](#features) for detailed explanations of each feature of **InternBuddy**!
 
 [back to top](#internbuddy-user-guide)
@@ -182,14 +194,14 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 **Tip 2:** A company requires a name and email at the minimum
 </box>
 
+<box type="info" seamless>
+
+**Note:** You cannot add two companies with the same name. (even if the letter casing is different)
+</box>
+
 <box type="warning" seamless>
 
 **Caution:** Due to the nature of prefix commands, company names are restricted to alphanumeric characters only
-</box>
-
-<box type="tip" seamless>
-
-**Tip:** You cannot add two companies with the same name. (even if the letter casing is different)
 </box>
 
 Examples:
