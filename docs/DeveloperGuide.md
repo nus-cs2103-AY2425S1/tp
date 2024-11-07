@@ -1163,15 +1163,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding exam for all students currently in the list
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1. Test case: `addExam ex/Midterm`<br>
+       Expected: Exam with exam name Midterm is added to all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
 
-    2. Test case: `addExam ex/Midterm`<br>
-       Expected: Exam with exam name Midterm is added to all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
-
-    3. Test case: `addExam ex/Midterm#`<br>
+    2. Test case: `addExam ex/Midterm#`<br>
        Expected: No exam is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addExam commands to try:<br>
+    3. Other incorrect addExam commands to try:<br>
        `addExam`<br>
        `addExam ex/`<br>
        `addExam ex/#@*`<br>
@@ -1203,10 +1201,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting exam for all students currently in the list
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding exam should be done first as the students must have an existing exam to be deleted.
+    1. Prerequisites: The test for adding exam should be done first as the students must have an existing exam to be deleted.
 
     2. Test case: `deleteExam ex/Midterm`<br>
-       Expected: Exam with exam name Midterm is deleted from all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
+       Expected: Exam with exam name Midterm is deleted from all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
 
     3. Test case: `deleteExam ex/Midterm#`<br>
        Expected: No exam is deleted. Error details shown in the status message. Status bar remains the same.
@@ -1223,15 +1221,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding submission for all students currently in the list
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1. Test case: `addSubmission sm/Assignment 1`<br>
+       Expected: Submission with submission name Assignment 1 is added to all students in the addressbook. Confirmation message shown in the status message. Timestamp in the status bar is updated.
 
-    2. Test case: `addSubmission sm/Assignment 1`<br>
-       Expected: Submission with submission name Assignment 1 is added to all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
-
-    3. Test case: `addSubmission sm/Assignment #1`<br>
+    2. Test case: `addSubmission sm/Assignment #1`<br>
        Expected: No submission is added. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect addSubmission commands to try:<br>
+    3. Other incorrect addSubmission commands to try:<br>
        `addSubmission`<br>
        `addSubmission sm/`<br>
        `addSubmission sm/#@*`<br>
@@ -1263,7 +1259,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting submission for all students currently in the list
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list. The test for adding submission should be done first as the students must have an existing submission to be deleted.
+    1. Prerequisites: The test for adding submission should be done first as the students must have an existing submission to be deleted.
 
     2. Test case: `deleteSubmission sm/Assignment 1`<br>
        Expected: Submission with submission name Assignment 1 is deleted from all students currently in the list. Confirmation message shown in the status message. Timestamp in the status bar is updated.
