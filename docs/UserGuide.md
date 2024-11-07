@@ -30,7 +30,7 @@ If you would like to skip to any specific part of the User Guide, you can refer 
 
 ## 🛠️ Quick Start 🛠️
 
-This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-beginner-friendly-detailed) or scroll past this section.
+This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#-quick-start-beginner-friendly-detailed-) or scroll past this section.
 
 1. Ensure you have Java `17` or above installed in your device.
 
@@ -200,7 +200,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 
 <div class="alert alert-block alert-success">
 
-**For your convenience and easy reference, you can click on the header for the command to go to the [command summary table!](#command-summary)**
+For your convenience and easy reference, you can click on the header for the command to go to the [command summary table!](#command-summary)<br><br>
 
 For example, try clicking on "Viewing Help" in the "Viewing Help: `help`" section below!
 </div>
@@ -301,7 +301,7 @@ Examples:
    **Output**: <br>
    Unable to add remarks! Check the ID entered!
 
-### Listing All Persons : `list`
+### (Listing All Persons(#command-summary): `list`
 
 Displays a list of all persons in the address book.
 
@@ -535,7 +535,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
-**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start)!
+**A**: To open and run MedDict, please refer to the [Quick Start Guide](#-quick-start-)!
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -543,10 +543,10 @@ _Details coming soon ..._
 **Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
 **A**: No worries, you can easily transfer your data! Refer to the steps below.
 
-1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
+1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#-quick-start-beginner-friendly-detailed-))
 2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
 3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (e.g. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
-4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start) if needed)
+4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#-quick-start-) if needed)
 5. Open / run the application once.
 6. Close the application.
 7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
@@ -565,19 +565,19 @@ _Details coming soon ..._
 
 | Action                                                          | Format, Examples                                                                                                                                          |
 |-----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help--help)**                                 | `help` <br> Shows help page                                                                                                                               |
-| **[Create Doctor](#creating-and-adding-a-doctor--created)**     | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
-| **[Create Patient](#creating-and-adding-a-patient--createp)**   | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                     |
-| **[Delete Person](#deleting-a-person--deletep)**                | `deleteP z/PERSON_ID` <br> e.g., `deleteP z/2`                                                                                                            |
-| **[Add Notes](#add-a-remark-to-a-patient--addr)**               | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
-| **[List](#listing-all-persons--list)**                          | `list` <br> Shows all persons in address book                                                                                                             |
-| **[Edit](#editing-a-person--edit)**                             | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
+| **[Help](#viewing-help-help)**                                  | `help` <br> Shows help page                                                                                                                               |
+| **[Create Doctor](#creating-and-adding-a-doctor-created)**      | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
+| **[Create Patient](#creating-and-adding-a-patient-createp)**    | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                     |
+| **[Delete Person](#deleting-a-person-deletep)**                 | `deleteP z/PERSON_ID` <br> e.g., `deleteP z/2`                                                                                                            |
+| **[Add Notes](#add-a-remark-to-a-patient-addr)**                | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
+| **[List](#listing-all-personscommand-summary-list)**            | `list` <br> Shows all persons in address book                                                                                                             |
+| **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
 | **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                                       |
-| **[Add Appointment](#adding-an-appointment--adda)**             | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                           |
-| **[View History](#view-history-of-a-person--view)**             | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                                 |
-| **[Check Appointment](#check-appointment-of-a-person--checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                          |
-| **[Mark Appointment](#mark-appointment-of-a-doctor--mark)**     | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                           |
-| **[Delete Appointment](#delete-appointment--deletea)**          | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                          |
-| **[Clear](#clearing-all-entries--clear)**                       | `clear` <br> Clears all entries                                                                                                                           |
-| **[Exit](#exiting-the-program--exit)**                          | `exit` <br> Exits the program                                                                                                                             |
+| **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                           |
+| **[View History](#view-history-of-a-person-view)**              | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                                 |
+| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                          |
+| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                           |
+| **[Delete Appointment](#delete-appointment-deletea)**           | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                          |
+| **[Clear](#clearing-all-entries-clear)**                        | `clear` <br> Clears all entries                                                                                                                           |
+| **[Exit](#exiting-the-program-exit)**                           | `exit` <br> Exits the program                                                                                                                             |
 
