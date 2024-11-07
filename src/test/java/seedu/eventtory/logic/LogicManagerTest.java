@@ -280,8 +280,8 @@ public class LogicManagerTest {
         model.addEvent(indexOneEvent);
         model.addEvent(indexTwoEvent);
 
-        assertEquals(0, this.logic.getRelativeIndexOfEvent(indexOneEvent).getZeroBased());
-        assertEquals(1, this.logic.getRelativeIndexOfEvent(indexTwoEvent).getZeroBased());
+        assertEquals(0, this.logic.getRelativeIndexOfEvent(indexOneEvent));
+        assertEquals(1, this.logic.getRelativeIndexOfEvent(indexTwoEvent));
     }
 
     @Test
@@ -291,8 +291,21 @@ public class LogicManagerTest {
         model.addVendor(indexOneVendor);
         model.addVendor(indexTwoVendor);
 
-        assertEquals(0, this.logic.getRelativeIndexOfVendor(indexOneVendor).getZeroBased());
-        assertEquals(1, this.logic.getRelativeIndexOfVendor(indexTwoVendor).getZeroBased());
+        assertEquals(0, this.logic.getRelativeIndexOfVendor(indexOneVendor));
+        assertEquals(1, this.logic.getRelativeIndexOfVendor(indexTwoVendor));
+    }
+
+    @Test
+    public void getIndexOfSelectedObject() {
+        Event indexOneEvent = new EventBuilder().withName("Event 1").build();
+        Event indexTwoEvent = new EventBuilder().withName("Event 2").build();
+        model.addEvent(indexOneEvent);
+        model.addEvent(indexTwoEvent);
+
+        model.viewEvent(indexOneEvent);
+        this.logic.getIndexOfSelectedObject().addListener((observable, oldValue, newValue) -> {
+            assertEquals(1, newValue.intValue());
+        });
     }
 
     /**

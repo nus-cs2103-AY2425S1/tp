@@ -16,7 +16,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import seedu.eventtory.commons.core.LogsCenter;
-import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Logic;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.event.Event;
@@ -31,6 +30,8 @@ public class VendorDetailsPanel extends UiPart<Region> {
     private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(VendorDetailsPanel.class);
 
+    @FXML
+    private Label index;
     @FXML
     private Label name;
     @FXML
@@ -60,9 +61,14 @@ public class VendorDetailsPanel extends UiPart<Region> {
         startIndexOfAssignedEvents = logic.getStartingIndexOfAssignedEvents();
 
         ObservableObjectValue<Vendor> observableVendor = logic.getViewedVendor();
+        ObservableIntegerValue relativeIndexOfVendor = logic.getIndexOfSelectedObject();
+
+        relativeIndexOfVendor.addListener((observable, oldValue, newValue) -> {
+            setIndex(newValue.intValue());
+        });
 
         observableVendor.addListener((observable, oldValue, newValue) -> {
-            setVendor(newValue, logic.getRelativeIndexOfVendor(newValue));
+            setVendor(newValue);
             showVendorDetails();
             updateAssignedEvents();
         });
@@ -81,10 +87,10 @@ public class VendorDetailsPanel extends UiPart<Region> {
         detailsChildrenPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
-    private void setVendor(Vendor vendor, Index index) {
+    private void setVendor(Vendor vendor) {
         this.vendor = vendor;
         if (vendor != null) {
-            String nameWithIndex = String.format("%d. %s", index.getZeroBased() + 1, vendor.getName().fullName);
+            String nameWithIndex = vendor.getName().fullName;
             name.setText(nameWithIndex);
             phone.setText(vendor.getPhone().value);
             description.setText(vendor.getDescription().value);
@@ -98,6 +104,10 @@ public class VendorDetailsPanel extends UiPart<Region> {
             phone.setText("");
             description.setText("");
         }
+    }
+
+    private void setIndex(int index) {
+        this.index.setText(String.format("%d. ", index + 1));
     }
 
     private void showVendorDetails() {

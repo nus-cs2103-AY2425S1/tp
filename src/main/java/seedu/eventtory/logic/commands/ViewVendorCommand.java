@@ -2,7 +2,6 @@ package seedu.eventtory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.eventtory.logic.parser.CliSyntax.PREFIX_VENDOR;
-import static seedu.eventtory.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Messages;
@@ -33,7 +32,6 @@ public class ViewVendorCommand extends ViewCommand {
         Vendor vendorToView = IndexResolverUtil.resolveVendor(model, targetIndex);
 
         model.viewVendor(vendorToView);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(vendorToView)));
     }

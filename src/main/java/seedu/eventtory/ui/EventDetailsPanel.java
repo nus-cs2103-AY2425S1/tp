@@ -15,7 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.eventtory.commons.core.LogsCenter;
-import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.logic.Logic;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.event.Event;
@@ -30,6 +29,8 @@ public class EventDetailsPanel extends UiPart<Region> {
     private final Logic logic;
     private final Logger logger = LogsCenter.getLogger(VendorDetailsPanel.class);
 
+    @FXML
+    private Label index;
     @FXML
     private Label name;
     @FXML
@@ -57,9 +58,14 @@ public class EventDetailsPanel extends UiPart<Region> {
         startIndexOfAssignedVendors = logic.getStartingIndexOfAssignedVendors();
 
         ObservableObjectValue<Event> observableEvent = logic.getViewedEvent();
+        ObservableIntegerValue relativeIndexOfEvent = logic.getIndexOfSelectedObject();
+
+        relativeIndexOfEvent.addListener((observable, oldValue, newValue) -> {
+            setIndex(newValue.intValue());
+        });
 
         observableEvent.addListener((observable, oldValue, newValue) -> {
-            setEvent(newValue, this.logic.getRelativeIndexOfEvent(newValue));
+            setEvent(newValue);
             showEventDetails();
             updateAssignedVendors();
         });
@@ -78,10 +84,10 @@ public class EventDetailsPanel extends UiPart<Region> {
         detailsChildrenPlaceholder.getChildren().add(vendorListPanel.getRoot());
     }
 
-    private void setEvent(Event event, Index index) {
+    private void setEvent(Event event) {
         this.event = event;
         if (event != null) {
-            String nameWithIndex = String.format("%d. %s", index.getZeroBased() + 1, event.getName().fullName);
+            String nameWithIndex = event.getName().fullName;
             name.setText(nameWithIndex);
             date.setText(event.getDate().toString());
             // Empty tags will leave behind the last set of tags,
@@ -93,6 +99,10 @@ public class EventDetailsPanel extends UiPart<Region> {
             name.setText("");
             date.setText("");
         }
+    }
+
+    private void setIndex(int index) {
+        this.index.setText(String.format("%d. ", index + 1));
     }
 
     private void showEventDetails() {

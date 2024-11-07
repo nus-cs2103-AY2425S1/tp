@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableObjectValue;
@@ -18,7 +19,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.eventtory.commons.core.GuiSettings;
 import seedu.eventtory.commons.core.LogsCenter;
-import seedu.eventtory.commons.core.index.Index;
 import seedu.eventtory.model.association.Association;
 import seedu.eventtory.model.commons.exceptions.AssociationDeleteException;
 import seedu.eventtory.model.event.Event;
@@ -37,6 +37,7 @@ public class ModelManager implements Model {
     private final ObjectProperty<Vendor> selectedVendor;
     private final FilteredList<Event> filteredEvents;
     private final ObjectProperty<Event> selectedEvent;
+    private final SimpleIntegerProperty indexOfSelectedObject;
     private final ObjectProperty<UiState> currentUiState;
     private final ObjectProperty<Predicate<Vendor>> suppliedVendorFilterPredicate;
     private final ObjectProperty<Predicate<Event>> suppliedEventFilterPredicate;
@@ -57,6 +58,7 @@ public class ModelManager implements Model {
         filteredEvents = new FilteredList<>(this.eventTory.getEventList());
         selectedVendor = new SimpleObjectProperty<>(null);
         selectedEvent = new SimpleObjectProperty<>(null);
+        indexOfSelectedObject = new SimpleIntegerProperty(-1);
         currentUiState = new SimpleObjectProperty<>(UiState.DEFAULT);
         suppliedVendorFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_VENDORS);
         suppliedEventFilterPredicate = new SimpleObjectProperty<>(PREDICATE_SHOW_ALL_EVENTS);
@@ -72,13 +74,17 @@ public class ModelManager implements Model {
         filteredVendors.addListener((ListChangeListener<? super Vendor>) change -> {
             if (selectedVendor.get() != null) {
                 change.getList().stream().filter(vendor -> vendor.isSameId(selectedVendor.get())).findFirst()
-                        .ifPresent(vendor -> selectedVendor.set(vendor));
+                        .ifPresent(vendor -> {
+                            selectedVendor.set(vendor);
+                        });
             }
         });
         filteredEvents.addListener((ListChangeListener<? super Event>) change -> {
             if (selectedEvent.get() != null) {
                 change.getList().stream().filter(event -> event.isSameId(selectedEvent.get())).findFirst()
-                        .ifPresent(event -> selectedEvent.set(event));
+                        .ifPresent(event -> {
+                            selectedEvent.set(event);
+                        });
             }
         });
     }
@@ -341,12 +347,13 @@ public class ModelManager implements Model {
         selectedVendor.setValue(vendor);
         currentUiState.setValue(UiState.VENDOR_DETAILS);
         applyFiltersBasedOnUiState();
+        indexOfSelectedObject.setValue(getRelativeIndexOfVendor(vendor));
     }
 
     @Override
-    public Index getRelativeIndexOfVendor(Vendor vendor) {
+    public int getRelativeIndexOfVendor(Vendor vendor) {
         requireNonNull(vendor);
-        return Index.fromZeroBased(filteredVendors.indexOf(vendor));
+        return filteredVendors.indexOf(vendor);
     }
 
     // =========== Viewed Events Accessors =============================================================
@@ -362,12 +369,18 @@ public class ModelManager implements Model {
         selectedEvent.setValue(event);
         currentUiState.setValue(UiState.EVENT_DETAILS);
         applyFiltersBasedOnUiState();
+        indexOfSelectedObject.setValue(getRelativeIndexOfEvent(event));
     }
 
     @Override
-    public Index getRelativeIndexOfEvent(Event event) {
+    public int getRelativeIndexOfEvent(Event event) {
         requireNonNull(event);
-        return Index.fromZeroBased(filteredEvents.indexOf(event));
+        return filteredEvents.indexOf(event);
+    }
+
+    @Override
+    public ObservableIntegerValue getIndexOfSelectedObject() {
+        return indexOfSelectedObject;
     }
 
     // =========== UI State Accessors =============================================================

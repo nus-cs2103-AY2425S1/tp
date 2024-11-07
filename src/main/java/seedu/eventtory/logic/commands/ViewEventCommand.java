@@ -32,7 +32,6 @@ public class ViewEventCommand extends ViewCommand {
         Event eventToView = IndexResolverUtil.resolveEvent(model, targetIndex);
 
         model.viewEvent(eventToView);
-        model.updateFilteredVendorList(Model.PREDICATE_SHOW_ALL_VENDORS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(eventToView)));
     }
