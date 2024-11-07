@@ -1,7 +1,7 @@
 ---
   layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+    title: "Developer Guide"
+    pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -36,6 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -112,10 +113,12 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
+
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
@@ -136,7 +139,6 @@ The `Model` component,
 
 </box>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -144,6 +146,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
+
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -164,9 +167,9 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#commit()`— Saves the current address book state in its history.
+* `VersionedAddressBook#undo()`— Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()`— Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
@@ -216,7 +219,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
 
@@ -241,13 +244,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -283,46 +286,45 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
-
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that …​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *` | Teaching Assistant | add a new student's contact | I can keep track of all my students in my course |
-| `* * *` | Teaching Assistant | view a student's contact information | I can contact a student directly if required |
-| `* * *` | Teaching Assistant | view a students' grades | I can have a comprehensive overview of each students' performance |
-| `* * *` | Teaching Assistant | record student grades | I can keep accurate records of their performance |
-| `* * *` | Teaching Assistant | list out all students | I can see who's contacts I have saved |
-| `* * *` | Teaching Assistant | view students' attendance | I can keep track of when a student has not shown up to class |
-| `* * *` | Teaching Assistant | mark students' attendance | I can keep track of who goes to class |
-| `* *` | Teaching Assistant | import student contact information from a csv | I can quickly add multiple students at once |
-| `*` | Teaching Assistant | collect students contact information | I can keep track and make use of it if required |
-| `*` | Teaching assistant with bad student management ability | automate student management | I can manage my students better |
-| `* *` | Experienced teaching assistant | Migrate/get used to the app easily | it doesn't take so much time to get used to the new app to increase my productivity |
-| `* *` | Teaching Assistant | tag my students with different labels | it is easy for me to find/search them based on their tags |
-| `* *` | Teaching Assistant | link with my Canvas account | I can save time exporting grades |
-| `* *` | busy Teaching Assistant | view a help message | I can quickly learn how to use the app |
-| `* *` | Teaching Assistant | separate my work (TA) contacts with my personal contact | I can have privacy and a line between work and life |
-| `* *` | Teaching Assistant that values privacy | sort students by performance metrics like attendance or participation | I can identify students who may need additional support. |
-| `* *` | Helpful Teaching Assistant | set up notifications for missing assignment or attendance | I can address potential issues with students |
-| `* *` | Teaching Assistant | track communication history with each student | I can refer to past discussions when addressing their needs |
-| `* *` | Teaching Assistant | sort student details by name | I can view student details in alphabetical order |
-| `* *` | Teaching Assistant | sort student details by grades | I can view students who are struggling with the course |
-| `* *` | Teaching Assistant | set up alerts for low attendance or poor participation | I can help struggling students early in the course |
-| `* *` | Responsible Teaching Assistant | attach remarks for each student | I can keep track of additional things to remember for each student |
-| `* *` | Teaching Assistant | add a custom column/property on the student database | I can personalize my contacts based on my own needs |
-| `*` | Student | upload my MC to my TA through the app | I can easily send an MC without sending it through other mediums |
-| `*` | Teaching Assistant | draft an email to the student with a summary of their grades and participation | notify students about their progress |
-| `*` | Teaching Assistant | access and archive past year exam papers | I can distribute the practice papers to students |
-| `* *` | Student | Submit questions to my TA | I can easily contact him and get an answer |
-| `* *` | Teaching Assistant | view assignment submission status for each student | I can find which students have not submitted assignments |
-| `* *` | Teaching Assistant | create notes for each student | I can track any special considerations |
-| `* *` | SoC Teaching Assistant | Link my account with github | I can review my students' code |
-| `* *` | Student | I can submit feedback to my TA | he can improve his teaching |
-| `* *` | Teaching Assistant | view feedback from my students | I can improve my teaching |
-| `* *` | Teaching Assistant | view only feedback scores lower than 2/5 | I can focus on improving on areas that are more important |
+| Priority | As a …​                                                | I want to …​                                                                   | So that …​                                                                          |
+|----------|--------------------------------------------------------|--------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | Teaching Assistant                                     | add a new student's contact                                                    | I can keep track of all my students in my course                                    |
+| `* * *`  | Teaching Assistant                                     | view a student's contact information                                           | I can contact a student directly if required                                        |
+| `* * *`  | Teaching Assistant                                     | view a students' grades                                                        | I can have a comprehensive overview of each students' performance                   |
+| `* * *`  | Teaching Assistant                                     | record student grades                                                          | I can keep accurate records of their performance                                    |
+| `* * *`  | Teaching Assistant                                     | list out all students                                                          | I can see who's contacts I have saved                                               |
+| `* * *`  | Teaching Assistant                                     | view students' attendance                                                      | I can keep track of when a student has not shown up to class                        |
+| `* * *`  | Teaching Assistant                                     | mark students' attendance                                                      | I can keep track of who goes to class                                               |
+| `* *`    | Teaching Assistant                                     | import student contact information from a csv                                  | I can quickly add multiple students at once                                         |
+| `*`      | Teaching Assistant                                     | collect students contact information                                           | I can keep track and make use of it if required                                     |
+| `*`      | Teaching assistant with bad student management ability | automate student management                                                    | I can manage my students better                                                     |
+| `* *`    | Experienced teaching assistant                         | Migrate/get used to the app easily                                             | it doesn't take so much time to get used to the new app to increase my productivity |
+| `* *`    | Teaching Assistant                                     | tag my students with different labels                                          | it is easy for me to find/search them based on their tags                           |
+| `* *`    | Teaching Assistant                                     | link with my Canvas account                                                    | I can save time exporting grades                                                    |
+| `* *`    | busy Teaching Assistant                                | view a help message                                                            | I can quickly learn how to use the app                                              |
+| `* *`    | Teaching Assistant                                     | separate my work (TA) contacts with my personal contact                        | I can have privacy and a line between work and life                                 |
+| `* *`    | Teaching Assistant that values privacy                 | sort students by performance metrics like attendance or participation          | I can identify students who may need additional support.                            |
+| `* *`    | Helpful Teaching Assistant                             | set up notifications for missing assignment or attendance                      | I can address potential issues with students                                        |
+| `* *`    | Teaching Assistant                                     | track communication history with each student                                  | I can refer to past discussions when addressing their needs                         |
+| `* *`    | Teaching Assistant                                     | sort student details by name                                                   | I can view student details in alphabetical order                                    |
+| `* *`    | Teaching Assistant                                     | sort student details by grades                                                 | I can view students who are struggling with the course                              |
+| `* *`    | Teaching Assistant                                     | set up alerts for low attendance or poor participation                         | I can help struggling students early in the course                                  |
+| `* *`    | Responsible Teaching Assistant                         | attach remarks for each student                                                | I can keep track of additional things to remember for each student                  |
+| `* *`    | Teaching Assistant                                     | add a custom column/property on the student database                           | I can personalize my contacts based on my own needs                                 |
+| `*`      | Student                                                | upload my MC to my TA through the app                                          | I can easily send an MC without sending it through other mediums                    |
+| `*`      | Teaching Assistant                                     | draft an email to the student with a summary of their grades and participation | notify students about their progress                                                |
+| `*`      | Teaching Assistant                                     | access and archive past year exam papers                                       | I can distribute the practice papers to students                                    |
+| `* *`    | Student                                                | Submit questions to my TA                                                      | I can easily contact him and get an answer                                          |
+| `* *`    | Teaching Assistant                                     | view assignment submission status for each student                             | I can find which students have not submitted assignments                            |
+| `* *`    | Teaching Assistant                                     | create notes for each student                                                  | I can track any special considerations                                              |
+| `* *`    | SoC Teaching Assistant                                 | Link my account with github                                                    | I can review my students' code                                                      |
+| `* *`    | Student                                                | I can submit feedback to my TA                                                 | he can improve his teaching                                                         |
+| `* *`    | Teaching Assistant                                     | view feedback from my students                                                 | I can improve my teaching                                                           |
+| `* *`    | Teaching Assistant                                     | view only feedback scores lower than 2/5                                       | I can focus on improving on areas that are more important                           |
 
 ### Use cases
 
@@ -333,7 +335,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case ID:** UC01 \- Add Contact  
 **Main Success Scenario (MSS):**
 
-1. TA adds a new student contact.  
+1. TA adds a new student contact.
 2. TAHub displays that the contact has been successfully added.
 
 Use case ends.
@@ -342,7 +344,7 @@ Use case ends.
 
 * **1a.** TAHub detects invalid input (e.g., invalid email or phone number).  
   1a1. TAHub requests correction of the invalid input.  
-  Use case ends.  
+  Use case ends.
 * **1b.** TAHub detects that the contact already exists  
   1b1. TAHub ignores the entry and notifies the TA.  
   Use case ends.
@@ -358,7 +360,7 @@ Use case ends.
 **Use Case ID:** UC02 \- View Contact  
 **Main Success Scenario (MSS):**
 
-1. TA requests to view a specific student’s contact information.  
+1. TA requests to view a specific student’s contact information.
 2. TAHub displays the student's name, phone number, email, Telegram ID, matriculation number, and other relevant details.
 
 Use case ends.
@@ -380,7 +382,7 @@ Use case ends.
 **Use Case ID:** UC03 \- Record Grade  
 **Main Success Scenario (MSS):**
 
-1. TA records a grade for a student.  
+1. TA records a grade for a student.
 2. TAHub confirms the successful recording of the grade.
 
 Use case ends.
@@ -389,7 +391,7 @@ Use case ends.
 
 * **1a.** TAHub detects invalid input for the grade  
   1a1. TAHub requests correction of the invalid input.  
-  Use case ends.  
+  Use case ends.
 * **1b.** TA attempts to record a grade for a test that has already been recorded.  
   1b1. TAHub overwrites the previous grade and notifies the TA.  
   Use case ends.
@@ -405,7 +407,7 @@ Use case ends.
 **Use Case ID:** UC04 \- View Grades  
 **Main Success Scenario (MSS):**
 
-1. TA views a student’s grades.  
+1. TA views a student’s grades.
 2. TAHub displays the student's grades for all tests.
 
 Use case ends.
@@ -427,7 +429,7 @@ Use case ends.
 **Use Case ID:** UC05 \- Mark Attendance  
 **Main Success Scenario (MSS):**
 
-1. TA records attendance for a student.  
+1. TA records attendance for a student.
 2. TAHub outputs the successful recording of attendance.
 
 Use case ends.
@@ -437,7 +439,7 @@ Use case ends.
 * **1a.** TAHub detects invalid input for the date.  
   1a1. TAHub requests correction of the invalid input.  
   1a2. TA provides corrected input.  
-  Use case ends.  
+  Use case ends.
 * **1b.** TA attempts to record attendance for a date where attendance has already been marked.  
   1b1. TAHub overwrites the previous attendance and notifies the TA.  
   Use case ends.
@@ -448,12 +450,11 @@ Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 500 students without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+2. Should be able to hold up to 500 students without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be a standalone application and must not depend on any external or remote servers
 5. Should respond to user input (e.g., adding a student contact, viewing information) within two seconds under normal operating conditions.
-
 
 ### Glossary
 
@@ -479,15 +480,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -496,16 +497,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -513,6 +514,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
