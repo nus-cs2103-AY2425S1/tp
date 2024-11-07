@@ -239,6 +239,11 @@ Format: `erase [EVENT INDEX]`
 Example:
 * `erase 1`
 
+#### Clear all events: `clear-event`
+Clear all events from the event list.
+
+Format: `clear-event`
+
 ### Search and Add multiple people to an Event at once in a specialised searching mode: `searchmode`/`sm`
 Searchmode allows you to search for persons based on multiple criteria. 
 You can search for persons based on any criteria including:
@@ -413,6 +418,7 @@ Action | Format, Examples
 **Find-Event** | `find-event [EVENT INDEX]` <br> e.g. `find-event 1`
 **Remove** | `remove ei/[EVENT INDEX] pi/[PERSON INDEX]` <br> e.g. `remove ei/1 pi/1`
 **Erase** | `erase [EVENT INDEX]`
+**Clear-Event** | `clear-event`
 **List** | `list`
 **Help** | `help`
 
