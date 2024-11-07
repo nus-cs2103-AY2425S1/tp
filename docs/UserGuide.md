@@ -82,9 +82,9 @@ Parameter     | Notes
 **`NAME`**   | should contain only English alphabets
 **`JOB`**    | should be alphanumeric
 **`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
-**`EMAIL`** | should be of the format `local-part@domain`
+**`EMAIL`** | should be a valid email of the format `local-part@domain`
 **`SKILL`**   | should be alphanumeric
-**`INTERVIEW_SCORE`**   | should be a number ranging from `0.0` to `10.0` with a maximum of a single decimal place, e.g. `5.5`, `8`, `10.0` are valid but `5.`, `6.55`, `11` are invalid
+**`INTERVIEW_SCORE`**   | should be a number ranging from `0.0` to `10.0` with a maximum of a single decimal place, e.g. `5.5`, `8`, `10.0` are valid but `5.`, `6.55`, `11`, `.5` are invalid
 **`TAG`**   | should be alphanumeric and should not contain any spaces
 **`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
 **`ORDER`**   | should be either `a` (ascending) or `d` (descending)
