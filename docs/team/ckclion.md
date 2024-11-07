@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "Chua Kee Chin's Project Portfolio Page"
+  title: "Kee Chin's Project Portfolio Page"
 ---
 
 ### Project: GOATS (Greatest Offline Address-book for Tutorial Students)
