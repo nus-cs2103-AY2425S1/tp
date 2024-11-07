@@ -26,7 +26,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  *
  * <p>
  * The CommandBox listens for user input, and upon submission, it delegates the execution
- * of the command to the provided {@code CommandExecutor}.
+ * of the command to the provided.
  * </p>
  */
 public class CommandBox extends UiPart<Region> {
@@ -34,7 +34,6 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
     private static final Map<String, String> commandSyntaxMap = new HashMap<>();
     private String currentSuggestion = "";
-
     @FXML
     private TextField commandTextField;
     @FXML
@@ -47,16 +46,23 @@ public class CommandBox extends UiPart<Region> {
         commandSyntaxMap.put("add", "add n/NAME p/PHONE e/EMAIL a/ADDRESS ecname/EMERGENCY_CONTACT_NAME "
                 + "ecphone/EMERGENCY_CONTACT_PHONE ecrs/EMERGENCY_CONTACT_RELATIONSHIP "
                 + "dname/DOCTOR_NAME dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
+        commandSyntaxMap.put("addec", "addec ecname/EMERGENCY_CONTACT_NAME ecphone/EMERGENCY_CONTACT_PHONE "
+                        + "ecrs/EMERGENCY_CONTACT_RELATIONSHIP");
+        commandSyntaxMap.put("archive", "archive [DESCRIPTION]");
         commandSyntaxMap.put("clear", "clear");
         commandSyntaxMap.put("delete", "delete INDEX");
         commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/ECINDEX "
-                + "ecname/EMERGENCY_CONTACT_NAME ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME"
-                + " dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
+                + "ecname/EMERGENCY_CONTACT_NAME ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME "
+                + "dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("find", "find KEYWORD [MORE_KEYWORDS]");
-        commandSyntaxMap.put("undo", "undo");
-        commandSyntaxMap.put("redo", "redo");
-        commandSyntaxMap.put("list", "list");
+        commandSyntaxMap.put("finddoc", "finddoc KEYWORD [MORE_KEYWORDS]");
         commandSyntaxMap.put("help", "help");
+        commandSyntaxMap.put("list", "list");
+        commandSyntaxMap.put("listArchives", "listArchives");
+        commandSyntaxMap.put("loadArchive", "loadArchive FILE_NAME");
+        commandSyntaxMap.put("redo", "redo");
+        commandSyntaxMap.put("undo", "undo");
+
     }
 
     /**
@@ -299,8 +305,6 @@ public class CommandBox extends UiPart<Region> {
         }
         return false;
     }
-
-
 
     @FXML
     private void handleCommandEntered() {
