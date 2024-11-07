@@ -80,8 +80,7 @@ public class WithdrawCommandTest {
             withdrawCommand.execute(model);
         } catch (CommandException e) {
             Company firstCompany = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
-            String expectedMessage = "Application " + String.format(MESSAGE_INDEX_EXCEEDS_SIZE,
-                    firstCompany.getApplications().size());
+            String expectedMessage = String.format(WithdrawCommand.MESSAGE_NO_APPLICATION, firstCompany.getName());
             assertEquals(expectedMessage, e.getMessage());
         }
     }
