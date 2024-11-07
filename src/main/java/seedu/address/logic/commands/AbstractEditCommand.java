@@ -4,15 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -20,8 +17,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.addresses.Network;
-import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -103,7 +98,7 @@ public class AbstractEditCommand extends Command {
      *
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult with the success message.
-     * @throws CommandException
+     * @throws CommandException If the index is invalid or the person to edit does not exist.
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -236,15 +231,7 @@ public class AbstractEditCommand extends Command {
          */
         public void setPublicAddresses(PublicAddressesComposition publicAddressesComposition) {
             if (publicAddressesComposition != null) {
-                Map<Network, Set<PublicAddress>> publicAddresses =
-                    publicAddressesComposition.getPublicAddresses().entrySet().stream()
-                        .collect(Collectors.toMap(
-                            entry -> entry.getKey(), // Assuming Network is immutable
-                            entry -> new HashSet<>(entry.getValue()), (
-                                v1, v2) -> v1,
-                            HashMap::new
-                        ));
-                this.publicAddresses = new PublicAddressesComposition(publicAddresses);
+                this.publicAddresses = publicAddressesComposition.copy();
             } else {
                 this.publicAddresses = null;
             }
