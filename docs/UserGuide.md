@@ -179,19 +179,24 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting Items : `delete`
 
-Deletes the specified person from the address book.
+Deletes a vendor or an event from EventTory.
 
-Format: `delete INDEX`
+#### Format: `delete [v/INDEX]` or `delete [e/INDEX]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the event or vendor at the specified `INDEX`.
+    * The index refers to the index number shown in the displayed event/vendor list respectively.
+    * The index **must be a positive integer** 1, 2, 3, ...
+    * The index for each vendor/event is relative and can change depending on previous operations.
+* The operation will succeed even if the specified vendor/event is not visible onscreen.
+  * e.g. `delete v/1` is run after `view v/2`. Even though the 1st vendor will not be visible, it can still be specified for deletion.
+* If the specified vendor/event is currently assigned to another event/vendor respectively, the operation will fail.
+* If the current viewed vendor/event is deleted, the application will return you to the main list screen.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+#### Examples:
+* `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
+* `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
