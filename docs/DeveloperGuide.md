@@ -660,6 +660,20 @@ This command finds contacts by major. It requires a major. Major is case insensi
 
 ---
 
+### 6. Finding Contacts by Major: `findu`
+
+This command finds contacts by university. It requires a university. University is case insensitive.
+
+**Test case 1:** `findu u/NUS`
+
+***Expected:*** Lists all contacts who have university as NUS.
+
+**Test case 2:** `findm u/`
+
+***Expected:*** Error message due to missing university name.
+
+---
+
 ### Appendix: Effort
 
 Our goal was to enhance AB3 by introducing new commands and improving functionality for better contact management, specifically tailored for university students.
