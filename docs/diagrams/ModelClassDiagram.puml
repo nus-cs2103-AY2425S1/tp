@@ -23,7 +23,7 @@ Class RsvpStatus
 
 Class I #FFFFFF
 }
-Class Command
+Class "{abstract}\nCommand" as Command
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
