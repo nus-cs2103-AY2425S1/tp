@@ -85,15 +85,9 @@ The UI consists of a `MainWindow` that is made up of the following parts:
 * `PersonListPanel`
     * The panel which holds the list of persons in EduContacts, each person represented by a `PersonCard`
 * `StatusBarFooter`
-<<<<<<< HEAD
-  * Designed to show the save location of EduContacts' data
-* `PersonDetails`
-  * A section of the UI that renders when a `FindCommand` is run, showing the resulting person's full details
-=======
     * Designed to show the save location of EduContacts' data
 * `PersonDetails`
     * A section of the UI that renders when a `FindCommand` is run, showing the resulting person's full details
->>>>>>> 550f0146c8868387d6e04d7b2929482db9d748df
 * `PersonCard`
     * Shows simple and brief details about a person
 * `HelpWindow`
@@ -103,13 +97,9 @@ All these, including the `MainWindow`, inherit from the abstract `UiPart` class 
 classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
-<<<<<<< HEAD
-are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
-=======
 are in the `src/main/resources/view` folder. For example, the layout of the
 [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
->>>>>>> 550f0146c8868387d6e04d7b2929482db9d748df
 
 **The `UI` component,**
 
@@ -168,8 +158,8 @@ How the parsing works:
 The `Model` component,
 
 * stores the contact data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-  * a `Person` object stores `StudentId`, `Name`, `Address`, `Phone`, `Email`, `Role`, `Course` objects.
-  * contains an ArrayList of `Module` objects which is optional.
+    * a `Person` object stores `StudentId`, `Name`, `Address`, `Phone`, `Email`, `Role`, `Course` objects.
+    * contains an ArrayList of `Module` objects which is optional.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * is intentionally designed to be independent of other components (e.g., UI, Logic, Storage) to maintain a clean separation of concerns. This ensures that the Model layer is solely responsible for managing data and that data structures make sense on their own. This independence enables easier maintenance, testing, and adaptability of the data structures, as changes in one component (e.g., UI) do not affect the Model.
@@ -186,6 +176,7 @@ The `Model` component,
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component has a key role in persisting data across user sessions. Specifically, it,
@@ -753,10 +744,10 @@ _{to work on in the future}_
 
 * Description: Allow users to move inactive or irrelevant entries to an archive.
 * Benefits:
-  * Reduces clutter in the main data set, making it easier to manage and navigate active records without losing historical data.
-  * Lower the load on real-time data processing by isolating inactive records.
-  * Retain archived data for historical records or compliance requirements.
-  * Provide a safe way to store inactive data without risking deletion or loss.
+    * Reduces clutter in the main data set, making it easier to manage and navigate active records without losing historical data.
+    * Lower the load on real-time data processing by isolating inactive records.
+    * Retain archived data for historical records or compliance requirements.
+    * Provide a safe way to store inactive data without risking deletion or loss.
 
 ### Importing contact data
 
@@ -776,4 +767,3 @@ _{to work on in the future}_
     * Enable users to share their contact lists with others.
     * Allow users to organize and manipulate their contact data externally.
     * Help users comply with data export regulations or organizational policies.
-
