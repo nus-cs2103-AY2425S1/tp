@@ -142,6 +142,20 @@ Schedules a meeting with an Udder from the specified start time to end time, at 
 **Examples:**
 *  `schedule 10 st/2002-12-25 00:00 et/2002-12-25 23:59 l/Gardens of Eden` schedules a meeting with the 10th Udder starting from `25th December 2002, 00:00 a.m.` and ending at `25th December 2002, 11:59 p.m.`, at `Gardens of Eden`.
 
+### Edit meeting with an Udder: `editm` ✏️
+
+Edits the specified meeting with an Udder from the meetings list.
+
+**Format:** `editm INDEX [n/] [st/] [et/] [l/]`
+
+* Edits a meeting with anUdder at the specified meeting `INDEX`.
+* The index refers to the index number shown in the displayed meetings list.
+* At least one field of the meeting must be changed.
+
+**Examples:**
+*  `editm 1 st/09-10-2024 10:00` Edits the start time of the 1st meeting to be `09-10-2024 10:00`.
+*  `editm 2 n/Betsy Crower et/10-10-2024 11:00` Edits the name and end time of the 2nd meeting to be `Betsy Crower` and `10-10-2024 11:00` respectively.
+
 ### Locating Udders by keywords: `find` 🔍
 
 Finds Udders by specified keywords for each field.
@@ -154,7 +168,17 @@ Finds Udders by specified keywords for each field.
 **Examples:**
 * `find John` returns `johnny` and `John Doe`<br>
 
-![result for 'find alex david'](images/findCommand.png)
+### Delete meeting with an Udder: `deletem` 🗑️
+
+Deletes the specified meeting with an Udder from the meetings list.
+
+**Format:** `deletem INDEX`
+
+* Deletes a meeting with anUdder at the specified meeting `INDEX`.
+* The index refers to the index number shown in the displayed meetings list.
+
+**Examples:**
+* `deletem 1` deletes the first meeting from the meetings list.
 
 ### Deleting an Udder : `delete` ❌
 
