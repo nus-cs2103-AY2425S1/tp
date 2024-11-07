@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG`
+Format: `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG`
 
 <box type="tip" seamless>
 
@@ -102,22 +102,19 @@ Examples:
 
 ### Listing persons based on attribute : `list`
 
-Shows a list of all persons or selected persons with certain attributes.
+Shows a list of all persons in the address book.
 
 Format:
 
 `list`
 
-* `list` shows the list of all persons in the address book.
 
-Examples:
-* `list`
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE_APPLIED_FOR] [t/TAG]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be updated.
@@ -131,7 +128,7 @@ Examples:
 Finds persons by criteria given
 
 Format:
-`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB CODE] [t/TAG] [r/REMARK]`
+`find [n/NAME] [p/PHONE] [e/EMAIL] [j/JOB_CODE] [t/TAG] [r/REMARK]`
 
 * The order of the words matter. e.g. `Hans Bo` will only match `Hans Bo` and `Hans Bobo`, but not `Bo Hans`
 * All fields are case-insensitive
@@ -166,21 +163,7 @@ Examples:
 * `delete n/Betsy` will delete contact with the full name Betsy.
 * `delete e/betsy@gmail.com` will delete the contact with the email betsy@gmail.com
 * If there are two John Doe, one with `p/8834156` and another with `p/3810349`, type command`delete n/John Doe p/8834156` to delete the former.
-
-### Adding/Removing remark for a person : `remark`
-
-#### Add a remark for the specified person from the address book.
-
-Format:
-`remark INDEX r/REMARK`
-
-- The `INDEX` refers to the index number shown in the displayed person list.
-- Ensure that the specified `INDEX` is a positive integer (1, 2, 3, ...).
-- The remark must be between **0 and 50 characters** in length.
-- If the remark exceeds 50 characters, it will not be accepted.
-
-**Examples**:
-- `remark 2 r/Available for part-time work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
+work only` adds the remark "Available for part-time work only" to the 2nd person in the address book.
 
 
 ### Showing applicant statistics: `stats`
@@ -320,10 +303,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE_APPLIED_FOR t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
+**Add**    | `add n/NAME p/PHONE e/EMAIL j/JOB_CODE t/TAG r/REMARK` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com j/CS2103 t/R r/have-pHD`
 **Clear**  | `clear`
 **Delete** | `delete INDEX` e.g. `delete 3`<br>`delete n/NAME` e.g. `delete n/Alex Yeoh`<br> `delete n/NAME e/EMAIL` e.g. `delete n/Alex Yeoh e/alexyeoh@gmail.com` <br> `delete n/NAME p/PHONE` e.g. `delete n/Alex Yeoh p/88306733`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find n/FULL_NAME` `find j/JOB_CODE_APPLIED_FOR` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
+**Find**   | `find n/FULL_NAME` `find j/JOB_CODE` `find t/TAG` `find n/FULL_NAME p/PHONE` `find n/FULL_NAME e/EMAIL`
 **List**   | `list`
 **Help**   | `help`
