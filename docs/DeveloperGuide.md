@@ -134,12 +134,9 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
-
 
 ### Storage component
 
@@ -539,7 +536,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. WardWatch shows an error message.
 
       Use case resumes at step 1.
-* 
+
+**Use case: UC11 - See Schedule for all appointments**
+
+**MSS**
+
+1. Doctor request to see schedule for all days
+2. WardWatch displays all appointments for all days
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The schedule all command format is invalid
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC12 - Add notes tied to a specific patient**
+
+**MSS**
+
+1. Doctor submits new notes for a certain patient
+2. WardWatch displays patient information with notes 
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Patient Notes format is invalid 
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC13 - delete notes to a specific patient**
+
+**MSS**
+
+1. Doctor request to delete notes for a certain patient
+2. WardWatch deletes the patient notes
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Patient Notes field is empty
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
 
 
 
