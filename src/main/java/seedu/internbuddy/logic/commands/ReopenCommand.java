@@ -49,7 +49,8 @@ public class ReopenCommand extends Command {
         List<Company> lastShownList = model.getFilteredCompanyList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE,
+                model.getFilteredCompanyList().size()));
         }
 
         Company companyToReopen = lastShownList.get(targetIndex.getZeroBased());
