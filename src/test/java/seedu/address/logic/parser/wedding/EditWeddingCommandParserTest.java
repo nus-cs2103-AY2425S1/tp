@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.model.wedding.WeddingName;
@@ -59,12 +60,19 @@ public class EditWeddingCommandParserTest {
     }
 
     @Test
+    public void parse_invalidDate_failure() {
+        assertParseFailure(parser, "1 d/text date", Messages.MESSAGE_INVALID_DATE_FORMAT); // string for date
+        assertParseFailure(parser, "1 d/2022-02-99", Messages.MESSAGE_INVALID_DATE_FORMAT); // invalid date
+        assertParseFailure(parser, "1 d/19-03-2024", Messages.MESSAGE_INVALID_DATE_FORMAT); // invalid date format
+    }
+
+    @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND;
-        String userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY + WEDDING_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY + WEDDING_DESC_AMY + " d/2024-11-07";
 
         EditWeddingDescriptor descriptor = new EditWeddingDescriptorBuilder().withName(VALID_WEDDING_AMY)
-                .withAddress(VALID_ADDRESS_AMY).build();
+                .withAddress(VALID_ADDRESS_AMY).withDate("2024-11-07").build();
         EditWeddingCommand expectedCommand = new EditWeddingCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

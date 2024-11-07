@@ -6,21 +6,11 @@ import java.util.ArrayList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
-
 /**
  * Represents a Wedding in the system.
  * Guarantees: immutable; name is valid as declared in {@link #isValidWeddingName(String)}
  */
 public class Wedding {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
-                    + "and they should not be blank. Wedding names are case sensitive.";
-
-    /**
-     * Validation regex checks that first character of the wedding name must not be a whitespace,
-     * so that " " (a blank string) is not a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*(p[12]/)?";
     private final WeddingName weddingName;
     private int peopleCount;
     private Person partner1;
@@ -59,7 +49,7 @@ public class Wedding {
      * Returns true if a given string is a valid wedding name.
      */
     public static boolean isValidWeddingName(String checkName) {
-        return checkName.matches(VALIDATION_REGEX);
+        return checkName.matches(WeddingName.VALIDATION_REGEX);
     }
 
     /**
