@@ -56,6 +56,7 @@ BA€ is a desktop app for managing contacts, optimized for use via a **Command 
 2. For more details on each command, refer to the [Features](#features) section below.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
