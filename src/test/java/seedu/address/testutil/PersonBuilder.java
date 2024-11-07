@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
-import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -21,7 +20,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAUL_TYPE = STUDENT_TYPE;
+    public static final String DEFAULT_TYPE = STUDENT_TYPE;
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_GENDER = "female";
     public static final String DEFAULT_PHONE = "85355255";
@@ -29,7 +28,6 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUBJECT = "Mathematics";
     public static final String DEFAULT_CLASSES = "Class 1, Class 2";
-    public static final int DEFAULT_DAYS_ATTENDED = 0;
 
     private String type;
     private Name name;
@@ -40,13 +38,11 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Set<Subject> subjects;
     private Set<String> classes;
-    private DaysAttended daysAttended;
-
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-        type = DEFAUL_TYPE;
+        type = DEFAULT_TYPE;
         name = new Name(DEFAULT_NAME);
         gender = new Gender(DEFAULT_GENDER);
         phone = new Phone(DEFAULT_PHONE);
@@ -55,7 +51,6 @@ public class PersonBuilder {
         tags = new HashSet<>();
         subjects = new HashSet<>(SampleDataUtil.getSubjectSet(DEFAULT_SUBJECT));
         classes = new HashSet<>(SampleDataUtil.getClassSet(DEFAULT_CLASSES));
-        daysAttended = new DaysAttended(DEFAULT_DAYS_ATTENDED);
     }
 
     /**
@@ -71,7 +66,6 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         subjects = new HashSet<>(personToCopy.getSubjects());
         classes = new HashSet<>(personToCopy.getClasses());
-        daysAttended = personToCopy.getDaysAttended();
     }
 
     /**
@@ -147,15 +141,13 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code DaysAttended} of the {@code Person} that we are building.
+     * Builds and returns a {@code Person} object with the current attributes of the {@code PersonBuilder}.
+     *
+     * @return a {@code Person} object with the specified attributes.
      */
-    public PersonBuilder withDaysAttended(int daysAttended) {
-        this.daysAttended = new DaysAttended(daysAttended);
-        return this;
-    }
-
     public Person build() {
-        return Person.createPerson(type, name, gender, phone, email, address, tags, subjects, classes, daysAttended);
+        return Person.createPerson(type, name, gender, phone, email, address, tags, subjects, classes,
+                null, null, null
+        );
     }
-
 }

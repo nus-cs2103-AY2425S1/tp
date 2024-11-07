@@ -7,8 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.NOK_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MICHAEL;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -171,7 +173,7 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addStudentCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL
                 + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
-                + CLASSES_DESC_MICHAEL + ATTENDANCE_DESC_MICHAEL;
+                + CLASSES_DESC_MICHAEL + ATTENDANCE_DESC_MICHAEL + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL;
         Student expectedStudent = new StudentBuilder(STUDENT_MICHAEL).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedStudent);

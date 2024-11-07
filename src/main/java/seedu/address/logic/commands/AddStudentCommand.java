@@ -5,8 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
@@ -33,6 +35,8 @@ public class AddStudentCommand extends Command {
             + PREFIX_SUBJECT + " SUBJECT "
             + PREFIX_CLASSES + " CLASSES "
             + PREFIX_ATTENDANCE + " ATTENDANCE"
+            + PREFIX_NEXT_OF_KIN + " NEXT_OF_KIN"
+            + PREFIX_EMERGENCY_CONTACT + " EMERGENCY_CONTACT"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
@@ -42,7 +46,10 @@ public class AddStudentCommand extends Command {
             + PREFIX_ADDRESS + " 311, Clementi Ave 2, #02-25 "
             + PREFIX_SUBJECT + " Physics "
             + PREFIX_CLASSES + " 7A,7B "
-            + PREFIX_ATTENDANCE + " 0 ";
+            + PREFIX_ATTENDANCE + " 0 "
+            + PREFIX_NEXT_OF_KIN + " Bob Doe "
+            + PREFIX_EMERGENCY_CONTACT + " 87654321";
+
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON =

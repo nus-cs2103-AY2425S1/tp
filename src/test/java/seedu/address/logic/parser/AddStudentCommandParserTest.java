@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -17,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.NOK_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -62,7 +64,7 @@ public class AddStudentCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL
                         + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                        + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL,
+                        + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL,
                 new AddStudentCommand(expectedStudent));
 
         // multiple tags - all accepted
@@ -71,7 +73,8 @@ public class AddStudentCommandParserTest {
         assertParseSuccess(parser,
                 NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
-                        + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL,
+                        + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL,
                 new AddStudentCommand(expectedStudentMultipleTags));
     }
 
@@ -81,7 +84,8 @@ public class AddStudentCommandParserTest {
         Student expectedStudent = new StudentBuilder(STUDENT_MICHAEL).withTags().withDaysAttended(10).build();
         assertParseSuccess(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL
             + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-            + ATTENDANCE_DESC_MICHAEL, new AddStudentCommand(expectedStudent));
+            + ATTENDANCE_DESC_MICHAEL + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL,
+                new AddStudentCommand(expectedStudent));
     }
 
     @Test
@@ -133,69 +137,76 @@ public class AddStudentCommandParserTest {
                         + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
                         + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
-                        + ATTENDANCE_DESC_MICHAEL, Name.MESSAGE_CONSTRAINTS);
+                        + ATTENDANCE_DESC_MICHAEL + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL,
+                Name.MESSAGE_CONSTRAINTS);
 
         // invalid gender
         assertParseFailure(parser, NAME_DESC_MICHAEL + INVALID_GENDER_DESC + PHONE_DESC_MICHAEL
                         + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL,
-                        Gender.MESSAGE_CONSTRAINTS);
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + INVALID_PHONE_DESC
                         + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL, Phone.MESSAGE_CONSTRAINTS);
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL
                         + INVALID_EMAIL_DESC
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL, Email.MESSAGE_CONSTRAINTS);
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL
                         + EMAIL_DESC_MICHAEL
                         + INVALID_ADDRESS_DESC + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL, Address.MESSAGE_CONSTRAINTS);
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, Address.MESSAGE_CONSTRAINTS);
 
         // invalid subject
         assertParseFailure(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL
                         + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + INVALID_SUBJECT_DESC + CLASSES_DESC_MICHAEL
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL, Subject.MESSAGE_CONSTRAINTS);
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, Subject.MESSAGE_CONSTRAINTS);
 
         // invalid classes
         assertParseFailure(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL
                         + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + INVALID_CLASSES_DESC
-                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL, "Classes should be valid!");
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, "Classes should be valid!");
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL
                         + EMAIL_DESC_MICHAEL
                         + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                        + INVALID_TAG_DESC + INVALID_TAG_DESC + ATTENDANCE_DESC_MICHAEL, Tag.MESSAGE_CONSTRAINTS);
+                        + INVALID_TAG_DESC + INVALID_TAG_DESC + ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, Tag.MESSAGE_CONSTRAINTS);
 
         // invalid attendance
         assertParseFailure(parser, NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL
                 + EMAIL_DESC_MICHAEL
                 + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_ATTENDANCE_DESC_MICHAEL,
-                DaysAttended.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + INVALID_ATTENDANCE_DESC_MICHAEL
+                        + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, DaysAttended.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + GENDER_DESC_MICHAEL + PHONE_DESC_MICHAEL
                 + EMAIL_DESC_MICHAEL
                 + INVALID_ADDRESS_DESC + SUBJECT_DESC_MICHAEL + CLASSES_DESC_MICHAEL
-                + ATTENDANCE_DESC_MICHAEL, Name.MESSAGE_CONSTRAINTS);
+                + ATTENDANCE_DESC_MICHAEL + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_MICHAEL + GENDER_DESC_BOB + PHONE_DESC_MICHAEL
                 + EMAIL_DESC_MICHAEL + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
                 + CLASSES_DESC_MICHAEL + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
-                + ATTENDANCE_DESC_MICHAEL, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AddStudentCommand.MESSAGE_USAGE));
+                + ATTENDANCE_DESC_MICHAEL + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
     }
 }
