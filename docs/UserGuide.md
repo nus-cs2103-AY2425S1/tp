@@ -274,7 +274,7 @@ Format: `import`
 </box>
 
 * If the program comes across a contact that has an empty or invalid contact info, it will attempt to fill in the info
-* It will fill in the info with placeholder values (0000 0000, default@email.net, @DefaultHandle)
+* It will fill in the info with placeholder values (0000 0000, default@email.net, @DefaultHandle, AA0000)
 * Feel free to edit these handles!
 
 ### Exiting the program : `exit`
