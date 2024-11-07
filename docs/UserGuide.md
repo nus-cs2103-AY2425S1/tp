@@ -447,10 +447,10 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake` to find all students named `James Jake` <br> e.g.,`find n/James;Jake` to find all students whose names contain either `James` or `Jake` <br> e.g.,`find c/CS2103T c/CS2100` to find all students who are enrolled both `CS2103T` and `CS2100` <br> e.g.,`find n/James c/CS2103T` to find all students whose names contain `James` and are enrolled in `CS2103T` 
 **List Students** | `liststudents`
 **Help** | `help`
-**Export Students** | `export [-f] FILENAME`<br> e.g., `export students`
-**Export Consultations** | `exportconsult [-f] FILENAME`<br> e.g., `exportconsult sessions`
-**Import Students** | `import FILENAME`<br> e.g., `import students.csv`
-**Import Consultations** | `importconsult FILENAME`<br> e.g., `importconsult sessions.csv`
+**Export Students** | `export [-f] FILENAME`<br> e.g., `export students` (relative)<br> e.g., `export ~/Documents/students` (home)
+**Export Consultations** | `exportconsult [-f] FILENAME`<br> e.g., `exportconsult sessions` (relative) <br> e.g., `exportconsult ~/Documents/sessions` (home)
+**Import Students** | `import FILENAME`<br> e.g., `import students.csv` (relative) <br> e.g., `import ~/Documents/students.csv` (home)
+**Import Consultations** | `importconsult FILENAME`<br> e.g., `importconsult sessions.csv` (relative) <br>e.g., `importconsult ~/Documents/sessions.csv` (home)
 **Add Consultation** | `addconsult d/DATE t/TIME`<br> e.g., `addconsult d/2024-10-20 t/14:00`
 **Add to Consultation** | `addtoconsult INDEX [n/NAME]…​ [i/STUDENT_INDEX]…​`<br> e.g., `addtoconsult n/James Jake n/John Jill i/2 i/3`
 **Delete Consultations** | `deleteconsult INDEX [;INDEX]…​`<br> e.g., `deleteconsult 3` <br> e.g., `deleteconsult 2;3;4`
