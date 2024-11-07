@@ -331,10 +331,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a new contact by providing a name, phone number, email, job code, and tag.
 2. System validates the provided input.
-3. System checks if the contact already exists (name + phone number or email).
+3.  System checks if the contact already exists by verifying the uniqueness of the phone number and email. 
 4. System adds the contact to the system and displays a confirmation message.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -344,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. A duplicate contact is found (same name and phone number/email).
+* 3a. A duplicate contact is found (same phone number or email).
 
     * 3a1. System displays a duplicate contact error message.
 
@@ -356,32 +356,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to delete a specific contact by name. Phone number or email is optional.
-2. System validates the provided input.
-3. System checks if the contact exists (name + phone number or email).
+1. User requests to delete a specific contact by providing a valid identifier, which can be one of the following:  
+    Index (positive integer), Name (n/NAME), Email (e/EMAIL), Phone (p/PHONE), or a combination of Name & Email (n/NAME e/EMAIL) or Name & Phone (n/NAME p/PHONE).
+2. System validates the provided input:
+Checks if the identifier matches the valid format (e.g., positive integer, name, email, or phone).
+
+3. System checks if the contact exists (using the provided identifier, which could be a name, email, phone number, or a combination).
+
 4. System deletes the contact and displays a confirmation message.
 
-   Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. The provided input is invalid (e.g., invalid phone number format, name too long).
+- 2a. The provided input is invalid (e.g., invalid phone number format, name too long, invalid command format).
 
-    * 2a1. System shows an error message and prompts the user to correct the input.
+    - 2a1. System shows an error message indicating invalid command format or invalid parameter and prompts the user to correct the input.
 
-      Use case ends.
+        Use case ends.
 
-* 3a. No contact matches the provided identifier.
+- 3a. No contact matches the provided identifier.
 
-    * 3a1. System shows an error message and prompts the user to correct the input an existing contact.
+    - 3a1. System shows an error message stating that no contact matches the provided identifier and prompts the user to correct the input.
 
-      Use case ends.
+        Use case ends.
 
-* 3b. Multiple contacts with the same name are found. This only happens if phone number and email are not provided by user.
+- 3b. Multiple contacts with the same name are found, and the user has not provided a phone number or email.
 
-    * 3c1. System asks the user to provide additional details (phone number or email) to specify the contact to delete.
-
-      Use case ends.
+    - 3b1. System asks the user to provide additional details (phone number or email) to specify the contact to delete.  
+        Use case ends.
 
 ---
 
