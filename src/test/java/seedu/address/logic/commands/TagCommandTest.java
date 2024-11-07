@@ -129,11 +129,11 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+    public void execute_indexZero_failure() {
+        Index zeroIndex = Index.oneBasedNoConstraints(0);
         HashSet<Tag> tagsToAdd = new HashSet<>(List.of(new Tag(new TagName("colleague"))));
 
-        TagCommand tagCommand = new TagCommand(outOfBoundIndex, tagsToAdd);
+        TagCommand tagCommand = new TagCommand(zeroIndex, tagsToAdd);
 
         String expectedMessage = String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 1, model.getFilteredPersonList().size());

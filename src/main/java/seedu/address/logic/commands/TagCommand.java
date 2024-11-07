@@ -127,10 +127,7 @@ public class TagCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof TagCommand otherCommand)) {
-            return false;
-        }
-
+        TagCommand otherCommand = (TagCommand) other;
         return index.equals(otherCommand.index)
                 && tagsToAdd.equals(otherCommand.tagsToAdd);
     }
