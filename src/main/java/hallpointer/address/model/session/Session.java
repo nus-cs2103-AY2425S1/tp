@@ -8,7 +8,7 @@ import hallpointer.address.commons.util.ToStringBuilder;
 import hallpointer.address.model.point.Point;
 
 /**
- * Represents a Session in the system.
+ * Represents a Sessionsystem.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Session {
