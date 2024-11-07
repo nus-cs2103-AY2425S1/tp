@@ -66,6 +66,25 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        // Check for duplicate phone numbers
+        if (toAdd.getPhone().isPresent() && model.getAddressBook().hasPhoneNumber(toAdd.getPhone().get())) {
+            throw new CommandException("This phone number already exists in the address book. "
+                    + "Please use a different phone number.");
+        }
+
+        // Check for duplicate Telegram handle
+        if (toAdd.getTelegramHandle().isPresent()
+                && model.getAddressBook().hasTelegramHandle(toAdd.getTelegramHandle().get())) {
+            throw new CommandException("This Telegram handle already exists in the address book. "
+                    + "Please use a different telegram handle.");
+        }
+
+        // Check for duplicate email
+        if (toAdd.getEmail().isPresent() && model.getAddressBook().hasEmail(toAdd.getEmail().get())) {
+            throw new CommandException("This email address already exists in the address book. "
+                    + "Please use a different email address.");
+        }
+
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
