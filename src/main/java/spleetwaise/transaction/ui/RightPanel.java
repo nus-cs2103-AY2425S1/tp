@@ -177,11 +177,11 @@ public class RightPanel extends UiPart<Region> {
         MenuItem resetFilter = new MenuItem("Reset filter");
         resetFilter.setOnAction(e -> resetFilter());
 
-        MenuItem filterByDone = new MenuItem("Filter by Done or Not Done Status");
-        filterByDone.setOnAction(e -> filterTransactionsByDoneStatus());
+        MenuItem allTxnByDoneStatus = new MenuItem("Show All Done or Not Done Transactions");
+        allTxnByDoneStatus.setOnAction(e -> showAllDoneOrNotDoneTransactions());
 
-        MenuItem filterByPositiveOrNegativeAmount = new MenuItem("Filter by Positive or Negative Amount");
-        filterByPositiveOrNegativeAmount.setOnAction(e -> filterTransactionsByAmount());
+        MenuItem allTxnByAmountSign = new MenuItem("Show All Positive or Negative Transactions");
+        allTxnByAmountSign.setOnAction(e -> showAllPositiveOrNegativeTransactions());
 
         SeparatorMenuItem divider = new SeparatorMenuItem();
 
@@ -201,33 +201,43 @@ public class RightPanel extends UiPart<Region> {
         filterByDate.setOnAction(
                 e -> commandBox.handleFilterCommandEntered(FilterCommand.COMMAND_WORD + " " + PREFIX_DATE));
 
-        filterMenu.getItems().addAll(resetFilter, filterByDone, filterByPositiveOrNegativeAmount, divider,
+        filterMenu.getItems().addAll(resetFilter, allTxnByDoneStatus, allTxnByAmountSign, divider,
                 filterByContact, filterByAmount, filterByDescription, filterByDate
         );
 
         return filterMenu;
     }
 
-    private void filterTransactionsByAmount() {
+    private void showAllPositiveOrNegativeTransactions() {
         // toggle between positive or negative amounts only
-        resetFilter();
-        CommonModelManager.getInstance()
-                .updateFilteredTransactionList(new AmountSignFilterPredicate(amountSignForFilter));
+        applyFilterOnAllTxn(new AmountSignFilterPredicate(amountSignForFilter));
         amountSignForFilter = amountSignForFilter.equals(POSITIVE_SIGN) ? NEGATIVE_SIGN : POSITIVE_SIGN;
     }
 
-    private void filterTransactionsByDoneStatus() {
-        // toggle between undone or done transactions only
-        resetFilter();
-        CommonModelManager.getInstance()
-                .updateFilteredTransactionList(new StatusFilterPredicate(new Status(statusForFilter)));
+    private void showAllDoneOrNotDoneTransactions() {
+        // toggle between done or undone transactions only
+        applyFilterOnAllTxn(new StatusFilterPredicate(new Status(statusForFilter)));
         statusForFilter = statusForFilter.equals(DONE_STATUS) ? NOT_DONE_STATUS : DONE_STATUS;
     }
 
     /**
-     * Resets the filter to show all transactions. public for testability.
+     * Resets the filter to show all transactions, and reset the toggle info. public for testability.
      */
     public void resetFilter() {
+        statusForFilter = DONE_STATUS;
+        amountSignForFilter = POSITIVE_SIGN;
         CommonModelManager.getInstance().updateFilteredTransactionList(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
+    }
+
+    /**
+     * Apply a filter on all transactions.
+     *
+     * @param filter the filter to apply
+     */
+    private void applyFilterOnAllTxn(Predicate<Transaction> filter) {
+        ArrayList<Predicate<Transaction>> predicates = new ArrayList<>();
+        predicates.add(TransactionBookModel.PREDICATE_SHOW_ALL_TXNS);
+        predicates.add(filter);
+        CommonModelManager.getInstance().updateFilteredTransactionList(new FilterCommandPredicate(predicates));
     }
 }
