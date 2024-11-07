@@ -308,86 +308,139 @@ Priorities:
 
 ### Use Cases
 
-(For all use cases below, the **System** is *Bridal Boss* and the **Actor** is the *Wedding Organizer*.)
+For all use cases below, refer to the [User Guide](UserGuide.md) for more details.
 
-#### **Use Case: Add a New Vendor to a Wedding**
+#### **Use Case: Add a Contact**
 
 **MSS:**
 
-1. Wedding Organizer selects the wedding they are managing.
-2. Bridal Boss displays the details of the selected wedding.
-3. Wedding Organizer requests to add a new vendor.
-4. Bridal Boss prompts for vendor details.
-5. Wedding Organizer enters the vendor's details (e.g., name, contact information, services provided).
-6. Bridal Boss saves the vendor information and associates it with the selected wedding.
-7. Bridal Boss confirms that the vendor has been added.
-
+1. Wedding Organizer adds a contact using the add command.
    Use case ends.
 
 **Extensions:**
 
-- **4a.** Wedding Organizer cancels the operation.
-    - **4a1.** Bridal Boss returns to the wedding details view.
+- **1a.** Name, phone, email, address prefixes not inputed
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Name is blank, contains invalid symbol or beyond 70 characters
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Phone is not 8 digits, and does not begin with '8' or '9'
+    - **1c1.** Error message displayed in result display.
+        - Use case ends.
+- **1d.** Email is blank, or does not contain '@'
+    - **1d1.** Error message displayed in result display.
+        - Use case ends.
+- **1e.** Address is blank
+    - **1e1.** Error message displayed in result display.
+        - Use case ends.
+- **1f.** Role is blank when prefix is inputted, or is not one word
+    - **1f1.** Error message is displayed in result display.  
+- **1g.** Wedding is blank when prefix is inputted, or is not one word
+    - **1g1.** Error message is displayed in result display.
+- **1h.** Wedding field is not an index.
+    - **1h1.** Error message is displayed in result display.
+- **1i.** Wedding index inputted is not in the list.
+    - **1i1.** Error message is displayed in result display.
+
+#### **Use Case: View a Contact**
+1. Wedding Organizer views a contact using the view command.
+
+**Extensions:**
+
+- **1a.** No prefixes inputted.
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Person name does not exist in the address book
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Person index is not in the displayed list
+    - **1c1.** Error message displayed in result display.
+        - Use case ends.
+- **1d.** Duplicate contacts with name containing inputted name
+    - **1d1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1d2.** Person list filtered to contain contacts with names containing inputted name.
+    - **1d3.** Error message is displayed in result display.
+        - Use case ends.
+- **1e.** Person is a client of a wedding
+    - **1e1.** Error message is displayed in result display.
         - Use case ends.
 
-- **5a.** Wedding Organizer enters incomplete or invalid vendor details.
-    - **5a1.** Bridal Boss displays an error message indicating the problem.
-    - **5a2.** Wedding Organizer re-enters the vendor's details.
-        - Steps 5a1-5a2 are repeated until the data entered are valid.
-        - Use case resumes from step 6.
+#### **Use Case: Filter Contacts**
+1. Wedding Organizer filters contacts using the filter command.
 
-#### **Use Case: Update Client Preferences**
+**Extensions:**
+
+- **1a.** No prefixes inputted.
+    - **1a1.** Error message displayed in result display.
+        - Use case ends
+
+#### **Use Case: Delete a Contact**
+1. Wedding Organizer deletes a contact using the delete command.
+
+**Extensions:**
+
+- **1a.** Person name does not exist in the address book
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Person index is not in the displayed list
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Duplicate contacts with name containing inputted name
+    - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1c2.** Use case resumes from step 1.
+- **1d.** Person is a client of a wedding
+    - **1d1.** Error message is displayed in result display.
+        - Use case ends.
+
+#### **Use Case: Add a Wedding**
 
 **MSS:**
 
-1. Wedding Organizer selects the client's wedding profile.
-2. Bridal Boss displays the client's current preferences.
-3. Wedding Organizer requests to update client preferences.
-4. Bridal Boss prompts for the updated preferences.
-5. Wedding Organizer enters the updated preferences.
-6. Bridal Boss saves the updated preferences.
-7. Bridal Boss confirms that the preferences have been updated.
-
+1. Wedding Organizer adds a wedding using the addw command.
    Use case ends.
 
 **Extensions:**
 
-- **4a.** Wedding Organizer cancels the operation.
-    - **4a1.** Bridal Boss returns to the client's wedding profile without making changes.
+- **1a.** Contact name does not exist in the address book
+    - **1a1.** Error message displayed in result display.
+        - Use case ends.
+- **1b.** Contact/Wedding index is not in the displayed list
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Duplicate contacts with name containing inputted name
+    - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1c2.** Use case resumes from step 1.
+  - **1d.** Contact is already a client of another wedding
+    - **1d1.** Error message displayed in result display.
         - Use case ends.
 
-- **5a.** Wedding Organizer enters invalid preference data.
-    - **5a1.** Bridal Boss displays an error message indicating the issue.
-    - **5a2.** Wedding Organizer re-enters the updated preferences.
-        - Steps 5a1-5a2 are repeated until the data entered are valid.
-        - Use case resumes from step 6.
-
-#### **Use Case: Filter Contacts by Tags**
+#### **Use Case: Assign a contact to a Wedding**
 
 **MSS:**
 
-1. Wedding Organizer requests to filter contacts by specific tag(s).
-2. Bridal Boss prompts for the tag(s) to filter by.
-3. Wedding Organizer enters the desired tag(s), prefixed with t/ (e.g., "t/Florist", "t/Wedding A").
-4. Bridal Boss displays a list of contacts that match the specified tag(s).
-
+1. Wedding Organizer assigns the person (by name or index) to the wedding (by index) using the assign command.
    Use case ends.
 
 **Extensions:**
-
-- **1a.** Wedding Organizer provides multiple tags to filter by.
-    - Bridal Boss will display contacts that match all specified tags.
-        - Use case resumes from step 4.
-
-- **3a.** No contacts match the specified tag(s).
-    - **3a1.** Bridal Boss displays a message indicating that no contacts were found.
+- **1a.** Contact name does not exist in the address book
+    - **1a1.** Error message displayed in result display.
         - Use case ends.
-
-- **3b.** Wedding Organizer enters an invalid or nonexistent tag.
-    - **3b1.** Bridal Boss displays an error message indicating the tag is invalid.
-    - **3b2.** Wedding Organizer re-enters the tag(s).
-        - Steps 3b1-3b2 are repeated until valid tag(s) are entered.
-        - Use case resumes from step 4.
+- **1b.** Contact/Wedding index is not in the displayed list
+    - **1b1.** Error message displayed in result display.
+        - Use case ends.
+- **1c.** Duplicate contacts with name containing inputted name
+    - **1c1.** Bridal Boss filters the person list to show contacts containing inputted name.
+    - **1c2.** Use case resumes from step 1.
+- **1d.** Contact is already assigned to the wedding
+    - **1d1.** Error message displayed in result display.
+        - Use case ends.
+- **1e.** Contact is the client of the wedding
+    - **1e1.** Error message displayed in result display.
+        - Use case ends.
+- **1f.** Contact does not have a role
+    - **1f1.** Error message displayed in result display.
+        - Use case ends.
 
 ### Non-Functional Requirements
 
@@ -490,17 +543,60 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 ### Editing a person
+Success action: Details of edited contact shown in the status message, person in person list is edited.
 
-1. Editing a person while all persons are being shown
+#### Editing by INDEX
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Editing a person while all persons are being shown.
 
-    1. Test case: `edit 1 n/NAME`<br>
-       Expected: First contact has name field edited to NAME. Details of edited contact shown in the status message. Timestamp in the status bar is updated.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
 
-    1. Test case: `edit Alice n/Alice Teo`<br>
-       Expected (No duplicated Alice): Contact with name field containing Alice has name field edited to Alice Teo. Details of edited contact shown in the status message. Timestamp in the status bar is updated. <br>
-       Expected (Duplicated Alice): No contact edited. Person list is filtered to show only contacts with name field containing Alice. Status message shows message to input person by indexing.
+   1. Test case: `edit`<br>
+      Test case: `edit 1`<br>
+      Expected: No person is edited. Status message shows Edit Command Format.<br><br>
+    
+   1. Test case: `edit 0 [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]`<br>
+      Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is a negative number) <br>
+      Expected: No wedding added. Error message on x is not a non-zero unsigned integer.<br><br>
+
+   1. Test case: `edit x [n/NEW NAME] [p/NEW PHONE] [e/NEW EMAIL] [a/NEW ADDRESS]` (where x is larger than the size of the wedding list)<br>
+      Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br><br>
+
+    1. Test case: `edit 1 n/NEW NAME`<br>
+       Expected (Valid Name): First person has name field edited to NEW NAME. Success action will be carried out.<br>
+       Expected (Invalid Name): No person is edited. Error message shows name restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 p/NEW PHONE`<br>
+      Expected (Valid Phone): First contact has phone field edited to NEW PHONE. Success action will be carried out.<br>
+      Expected (Invalid Phone): No person is edited. Error message shows phone restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 e/NEW EMAIL`<br>
+      Expected (Valid Email): First contact has email field edited to NEW EMAIL. Success action will be carried out.<br>
+      Expected (Invalid Email): No person is edited. Error message shows email restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 a/NEW ADDRESS`<br>
+      Expected (Valid Address): First contact has address field edited to NEW ADDRESS. Success action will be carried out.<br>
+      Expected (Invalid Address): No person is edited. Error message shows address restrictions in status message.<br><br>
+
+   1. Test case: `edit 1 n/EXISTING NAME p/EXITING PHONE e/EXISTING EMAIL a/EXISTING ADDRESS`<br>
+      Expected: No person is edited. Error message shows person already exist in status message.<br><br>
+
+   1. Test case: `edit 1 p/EXITING PHONE`<br>
+      Expected: No person is edited. Error message shows phone already exist in status message.<br><br>
+
+   1. Test case: `edit 1 e/EXISTING EMAIL`<br>
+      Expected: No person is edited. Error message shows email already exist in status message.<br><br>
+
+
+#### Editing by NAME
+
+1. Editing a person
+
+   1. Test case: `edit Alice n/Alice Teo`<br>
+       Expected (No duplicated Alice): Person with name field containing Alice has name field edited to Alice Teo. Success action will be carried out.<br>
+       Expected (Duplicated Alice): No person edited. Person list is filtered to show only contacts with name field containing Alice. Status message shows message to input person by indexing.<br>
+       Expected (No Alice): No person edited. Error message shows this person do not exist in the address book.<br><br>
+       
 
 ### Viewing a person
 
@@ -702,6 +798,74 @@ Persons who are involved in the wedding will also be unassigned. Timestamp in th
        Expected (Duplicated Alice): Weddings with name field containing `Alice` exactly will be shown.
        Message will be shown to prompt the user to specify which wedding of `Alice` they want to delete. <br>
        Expected (No Alice): No wedding is deleted. Error details is shown in the status message.
+
+### Adding a Wedding
+Success action: When wedding is successfully added, the details of the added wedding is shown in the status message and reflected in the wedding list.
+
+#### Inputting CLIENT using INDEX
+1. Adding a wedding while all persons and weddings are shown.
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.<br><br>
+
+    1. Test case: `addw n/Church Wedding c/1 d/2024-12-12 v/Church of the Holy Spirit`<br>
+       Expected: Wedding added with first person in the persons list set as client, with given date and venue. Success action will be carried out.<br><br>
+
+   1. Test case: `addw n/Church Wedding c/1`<br>
+      Expected: Wedding added with first person in the persons list set as client, with no date and venue. Success action will be carried out.<br><br>
+
+   1. Test case: `addw`<br>
+      Test case: `addw n/Church Wedding`<br>
+      Test case: `addw c/1`<br>
+      Expected: No wedding added. Addw Command format is shown in the status message.<br><br>
+
+    1. Test case: `addw n/Wedding 1 c/1`<br>
+       Expected: No wedding is added. Restrictions on WEDDING NAME is shown in the status message.<br><br>
+
+   1. Test case: `addw n/Wedding c/1.5`<br>
+      Expected: No wedding is added. CLIENT input options are shown in the status message.<br><br>
+
+   1. Test case: `addw n/Wedding c/1 d/2024-13-50`<br>
+      Expected: No wedding is added. Restrictions on DATE is shown in the status message.<br><br>
+
+   1. Test case: `addw n/Wedding c/1 v/`<br>
+      Expected: No wedding is added. Restrictions on VENUE is shown in the status message.<br><br>
+
+    1. Test case: `addw n/Church Wedding c/0`<br>
+       Test case: `addw n/Church Wedding c/x` (where x is a negative number) <br>
+        Expected: No wedding added. Error message on x is not a non-zero unsigned integer.<br><br>
+
+    1. Test case: `addw n/Church Wedding c/x` (where x is larger than the size of the wedding list)<br>
+        Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br><br>
+
+#### Inputting CLIENT using NAME
+1. Adding a wedding while weddings are shown.
+
+    1. Test case: `addw n/Church Wedding c/Alice`
+       Expected (No duplicated Alice): Wedding added with contact having name field containing Alice set to be client. Details of the added wedding is displayed on the status message.<br>
+       Expected (Duplicated Alice): No wedding added. Person list is filtered to show contacts with names containing Alice. Status message prompts user to re-input CLIENT using index shown in the newly filtered list.<br>
+       Expected (No Alice): No wedding added. Error message states that the person inputted does not exist in the address book.<br><br>
+
+### Editing a Wedding
+Success action: When wedding is successfully edited, the details of the updated wedding is shown in the status message and reflected in the wedding list.
+
+1. Editing a Wedding with all persons and weddings shown.<br>
+
+    1. Prerequisites: List all contacts and weddings using the `list` command. Multiple persons in the list.<br><br>
+
+    1. Test case: `editw w/1 [n/NAME] [d/DATE] [v/VENUE]`<br>
+       Expected: First wedding in list is edited with the given inputs. Success action will be carried out.<br><br>
+
+    1. Test case: `editw`<br>
+       Test case: `editw w/1`<br>
+       Test case: `editw w/1 c/1` <br>
+       Expected: No wedding added. Editw Command format is shown in the status messgae.<br><br>
+
+    1. Test case: `editw w/0 [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]`<br>
+       Test case: `editw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is a negative number) <br>
+       Expected: No wedding added. Error message on x is not a non-zero unsigned integer.<br><br>
+
+    1. Test case: `addw w/x [n/NEW WEDDING NAME] [d/NEW DATE] [v/NEW VENUE]` (where x is larger than the size of the wedding list)<br>
+       Expected: No wedding added. Error message states that the index is invalid, and prompts user to key indexes from within a specified range.<br><br>
 
 ### Saving data
 

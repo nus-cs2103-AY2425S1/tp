@@ -34,7 +34,8 @@ public class EditwCommand extends Command {
             + "Example: " + COMMAND_WORD + " w/1 " + PREFIX_NAME + "Wedding2 " + PREFIX_DATE + "2024-11-01";
 
     public static final String MESSAGE_EDIT_WEDDING_SUCCESS = "Edited Wedding: %1$s";
-    public static final String MESSAGE_INVALID_WEDDING_INDEX = "The wedding index provided is invalid.";
+    public static final String MESSAGE_INVALID_WEDDING_INDEX = "The wedding index provided is invalid, please "
+            + "enter an index that is between 1 and %1$d";
 
     private final Index index;
     private final EditWeddingDescriptor editWeddingDescriptor;
@@ -62,7 +63,8 @@ public class EditwCommand extends Command {
         List<Wedding> lastShownList = model.getFilteredWeddingList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_WEDDING_INDEX);
+            throw new CommandException(String.format(MESSAGE_INVALID_WEDDING_INDEX,
+                    lastShownList.size()));
         }
 
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
