@@ -456,7 +456,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. GOATS shows an error message.
 
       Use case ends.
-  
+
   1b. User does not enter a name.
 
     * 1b1. GOATS shows an error message.
@@ -537,7 +537,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. GOATS shows an empty list.
 
       Use case ends.
-* 
+*
 
 ### Non-Functional Requirements
 
@@ -553,9 +553,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations. 
-* **API**: The Application Programming Interface specifies the interface through which software and other programs interact. 
-* **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong. 
+* **Graphical User Interface (GUI)**: A GUI is a form of user interface through which users interact with electronic devices via visual indicator representations.
+* **API**: The Application Programming Interface specifies the interface through which software and other programs interact.
+* **Main Success Scenario (MSS)**: The most straightforward interaction for a given use case, which assumes that nothing goes wrong.
 * **JSON**: JavaScript Object Notation, is a common file format which stores data in key-value pairs and arrays.
 * **Command**: A command is a specific instruction that you give to `GOATS` to perform a certain action, like adding a new participant to the list. Commands will be the primary way that you will interact with `GOATS`.
 * **Parameter**: Parameters are pieces of data that must be passed to certain commands to tell `GOATS` which actions to perform. For example, the done command requires a single integer as a parameter so that it knows which event to mark as done.
@@ -582,7 +582,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file 
+   1. Double-click the jar file
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
@@ -612,13 +612,13 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with corrupted data files
 
    1. Corrupted data files can be simulated by editing data/addressbook.json file
-   
+
    2. Test case: Start GOATS app
       Expected: GOATS should clear all data from the corrupted file and user is presented with an empty addressbook
 
 1. _Dealing with missing data files
 
    1. Missing data files can be simulated by deleting data/addressbook.json file
-   
+
    2. Test case: Start GOATS app
       Expected: GOATS should initialise a new data/addressbok.json file with sample data and user is presented an addressbook with that data
