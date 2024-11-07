@@ -311,13 +311,13 @@
     -fx-border-width: 0;
 }
 
-.profile_big_label {
+.profile-big-label {
     -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-text-fill: white;
 }
 
-.profile_small_label {
+.profile-small-label {
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-text-fill: white;

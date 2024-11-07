@@ -307,6 +307,42 @@
     -fx-padding: 8 1 8 1;
 }
 
+.profile-pane {
+    -fx-background-color: #E5E5E4;
+    -fx-border-width: 0;
+}
+
+.profile-big-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-alignment: center-left;
+}
+
+.profile-small-label {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-alignment: center-left;
+}
+
+.profile-flow-pane {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-alignment: center;
+}
+
+#profileView {
+    -fx-background-color: #FBEFF2;
+    -fx-padding: 10;
+    -fx-background-radius: 30 0 0 0;
+}
+
+#historyPanel {
+    -fx-background-color: derive(#E5E5E4, 20%);
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
