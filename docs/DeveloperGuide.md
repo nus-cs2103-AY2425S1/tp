@@ -439,7 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
-* **Contact**: An entity representing a client. It contains personal details such as name, phone number, email and address. Contact can also include preferences like seller or buyer ranges and associated properties.
+* **Person**: An entity representing a client who can buy properties, sell properties or do both. It contains personal details such as name, phone number, email and address. Contact can also include preferences like seller or buyer ranges and associated properties.
 * **Property**: A real estate asset associated to a contact. Each property has details such as name, address, price, number of rooms and optional tags(property type/condition/ownership type, etc.)
 * **Index**: A numerical identifier used to refer to a specific contact or property in the system. These are used for operations like deletion, updating, or viewing details.
 * **Tag**: A label used to categorize contacts or properties. Examples can include "Investor", "Luxury", "Renter", etc. They are used to provide additional context and for easy filtering and searching.
