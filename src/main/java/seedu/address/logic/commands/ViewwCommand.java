@@ -24,13 +24,14 @@ public class ViewwCommand extends Command {
     public static final String COMMAND_WORD = "vieww";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views the wedding details of the person identified by the index number used in "
-            + "the displayed person list.\n"
+            + ": View the wedding details of the person identified by the index number used in "
+            + "the displayed person list or the wedding name.\n"
             + "Parameters: INDEX (must be a positive integer) or WEDDINGNAME (the name of wedding, case insensitive)\n"
             + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " alex wedding";
 
     public static final String MESSAGE_VIEW_EMPTY_LIST_ERROR = "There are no wedding records to view.";
     public static final String MESSAGE_VIEW_WEDDING_SUCCESS = "Viewing Wedding Details of: %1$s";
+
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the wedding which wedding details you want to view.\n"
                     + "Find the index from the list below and type vieww INDEX\n"
@@ -136,7 +137,7 @@ public class ViewwCommand extends Command {
                     clientOfWedding.getEmail(), clientOfWedding.getAddress(), clientOfWedding.getRole(),
                     weddingToView);
             updatedClient.setWeddingJobs(weddingJobs);
-            updatedClient.setClient(true);
+            updatedClient.setIsClient(true);
             model.setPerson(clientOfWedding, updatedClient);
         } else {
             throw new CommandException(String.format(MESSAGE_MULTIPLE_CLIENT, weddingToView.getName()));

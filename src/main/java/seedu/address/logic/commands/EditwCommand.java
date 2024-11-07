@@ -37,6 +37,8 @@ public class EditwCommand extends Command {
     public static final String MESSAGE_INVALID_WEDDING_INDEX = "The wedding index provided is invalid, please "
             + "enter an index that is between 1 and %1$d";
 
+    public static final String MESSAGE_EDIT_EMPTY_LIST_ERROR = "There is nothing to edit.";
+
     private final Index index;
     private final EditWeddingDescriptor editWeddingDescriptor;
 
@@ -61,6 +63,10 @@ public class EditwCommand extends Command {
         }
 
         List<Wedding> lastShownList = model.getFilteredWeddingList();
+
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(MESSAGE_EDIT_EMPTY_LIST_ERROR);
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(String.format(MESSAGE_INVALID_WEDDING_INDEX,

@@ -1,11 +1,12 @@
 package seedu.address.model.wedding;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -43,8 +44,16 @@ public class NameMatchesWeddingPredicate implements Predicate<Wedding> {
      */
     @Override
     public boolean test(Wedding wedding) {
-        return !keywords.isEmpty() && keywords.stream()
-                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(wedding.getName().fullName, keyword));
+        requireNonNull(wedding);
+        // Return false if keywords list is empty
+        if (keywords.isEmpty()) {
+            return false;
+        }
+        return keywords.stream()
+                .allMatch(keyword -> wedding.getName().fullName.toLowerCase().contains(keyword.toLowerCase()));
+
+//        return !keywords.isEmpty() && keywords.stream()
+//                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(wedding.getName().fullName, keyword));
     }
 
     /**

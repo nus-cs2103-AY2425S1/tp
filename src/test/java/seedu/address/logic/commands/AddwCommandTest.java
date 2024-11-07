@@ -280,6 +280,7 @@ public class AddwCommandTest {
         public void addWedding(Wedding wedding) {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasWedding(Wedding wedding) {
             throw new AssertionError("This method should not be called.");
@@ -304,6 +305,17 @@ public class AddwCommandTest {
         public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setAllWeddingNotOwnWedding() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredWeddingListWithOwnWedding(Predicate<Wedding> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

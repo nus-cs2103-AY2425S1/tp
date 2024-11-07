@@ -66,7 +66,7 @@ public class Person {
         }
     }
 
-    public void setClient(boolean isClient) {
+    public void setIsClient(boolean isClient) {
         this.isClient = isClient;
     }
 
