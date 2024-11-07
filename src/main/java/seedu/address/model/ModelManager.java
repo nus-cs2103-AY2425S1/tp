@@ -18,8 +18,11 @@ import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
+import seedu.address.model.volunteer.VolunteerIsAvailableForEventPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -171,6 +174,13 @@ public class ModelManager implements Model {
         filteredVolunteers.setPredicate(volsInEventPredicate);
     }
 
+    @Override
+    public void filterEvent(Event event) {
+        VolunteerIsAvailableForEventPredicate volIsAvail = new VolunteerIsAvailableForEventPredicate(event,
+                addressBook);
+        filteredVolunteers.setPredicate(volIsAvail);
+    }
+
     /**
      * Displays the full list of events the volunteer is participating in.
      * @param volunteerToView The volunteer to view.
@@ -190,7 +200,12 @@ public class ModelManager implements Model {
      */
     @Override
     public void assignVolunteerToEvent(Volunteer volunteer, Event event) throws DuplicateAssignException,
-            OverlappingAssignException {
+            OverlappingAssignException, VolunteerNotAvailableException {
+        VolunteerIsAvailableForEventPredicate volIsAvail = new VolunteerIsAvailableForEventPredicate(event,
+                addressBook);
+        if (!volIsAvail.test(volunteer)) {
+            throw new VolunteerNotAvailableException(event.getName().toString());
+        }
         addressBook.assignVolunteerToEvent(volunteer, event);
     }
 
@@ -213,7 +228,7 @@ public class ModelManager implements Model {
 
     @Override
     public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
-            VolunteerDeleteMissingDateException {
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
         addressBook.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
     }
 
@@ -239,23 +254,28 @@ public class ModelManager implements Model {
         filteredVolunteers.setPredicate(predicate);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+    /**
+     * Filters the list of volunteers to only include those matching the given predicate.
+     * If no volunteers match the predicate, this method resets the filtered list to show all volunteers.
+     *
+     * @param predicate The condition used to filter volunteers.
+     * @return {@code true} if any volunteers match the predicate, else {@code false}.
+     */
+    public boolean filterVolunteersByName(Predicate<Volunteer> predicate) {
+        filteredVolunteers.setPredicate(predicate);
+        // Check if any volunteers match the predicate
+        boolean hasMatches = !filteredVolunteers.isEmpty();
+
+        // If no volunteers match, reset to show all volunteers
+        if (!hasMatches) {
+            filteredVolunteers.setPredicate(PREDICATE_SHOW_ALL_VOLUNTEERS);
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredVolunteers.equals(otherModelManager.filteredVolunteers)
-                && filteredEvents.equals(otherModelManager.filteredEvents);
+        return hasMatches;
     }
+
+
+
 
     //=========== Filtered Event List Accessors =============================================================
 
@@ -276,6 +296,43 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+    /**
+     * Filters the list of events to only include those matching the given predicate.
+     * If no events match the predicate, this method resets the filtered list to show all events.
+     *
+     * @param predicate The condition used to filter events.
+     * @return {@code true} if any events match the predicate else {@code false}
+     */
+    public boolean filterEventsByName(Predicate<Event> predicate) {
+        filteredEvents.setPredicate(predicate);
+        // Check if any events match the predicate
+        boolean hasMatches = !filteredEvents.isEmpty();
+
+        // If no events match, reset to show all events
+        if (!hasMatches) {
+            filteredEvents.setPredicate(PREDICATE_SHOW_ALL_EVENTS);
+        }
+
+        return hasMatches;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredVolunteers.equals(otherModelManager.filteredVolunteers)
+                && filteredEvents.equals(otherModelManager.filteredEvents);
     }
 
 }

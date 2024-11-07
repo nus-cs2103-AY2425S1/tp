@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.OverlappingAssignException;
+import seedu.address.model.exceptions.VolunteerNotAvailableException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -75,8 +76,8 @@ public class AssignCommand extends Command {
             model.assignVolunteerToEvent(v, e);
         } catch (DuplicateAssignException exception) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
-        } catch (OverlappingAssignException exception) {
-            throw new CommandException(MESSAGE_OVERLAP_ASSIGN);
+        } catch (OverlappingAssignException | VolunteerNotAvailableException exception) {
+            throw new CommandException(exception.getMessage());
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
