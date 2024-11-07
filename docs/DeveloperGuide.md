@@ -483,7 +483,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 2a1. AgentAssist shows an error message to user.
   * 2a2. No change is made.
 
-**Use case: U7 - Exit**
+**Use case: U10 - Exit**
 
 **MSS**
 
