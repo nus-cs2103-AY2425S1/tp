@@ -71,16 +71,6 @@ title: User Guide
 
 ---
 
-<div markdown="span" class="alert alert-primary">:pushpin: **Note:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-success">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-<div markdown="span" class="alert alert-danger">:exclamation: **Warning:**
-A person can have any number of tags (including 0)
-</div>
-
 ### **1. Quick Start**
 
 
