@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.DeletePublicAddressCommand.MESSAGE_DE
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -29,6 +30,11 @@ public class DeletePublicAddressCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
 
+    @BeforeEach
+    public void setUp() {
+        model.setAddressBook(getTypicalAddressBook());
+    }
+
     //---------------- Tests for execute method ----------------
 
     // EP: valid index, valid network
@@ -36,7 +42,6 @@ public class DeletePublicAddressCommandTest {
     public void execute_validIndexValidNetwork_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
         // Create and add the public address
         Network network = Network.BTC;
         String publicAddress = VALID_PUBLIC_ADDRESS_BTC_MAIN;
@@ -46,14 +51,16 @@ public class DeletePublicAddressCommandTest {
         // Update actual models with the new address
         Person personWithAddress = personToDelete.withAddedPublicAddress(publicAddressToAdd);
         model.setPerson(personToDelete, personWithAddress);
+        Person personWithoutAddress = personWithAddress.withoutPublicAddressesByNetwork(network);
+        expectedModel.setPerson(personToDelete, personWithoutAddress);
 
         // Create and execute delete command
         DeletePublicAddressCommand deletePublicAddressCommand =
-            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC, PublicAddress.DEFAULT_LABEL);
+            new DeletePublicAddressCommand(INDEX_FIRST_PERSON, Network.BTC);
 
         String expectedMessage = String.format(
-            MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
-            personWithAddress.getPublicAddressesComposition()
+            MESSAGE_DELETE_PERSON_SUCCESS, personWithAddress.getName(),
+                personWithAddress.getPublicAddressesByNetwork(network)
         );
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 
@@ -81,7 +88,7 @@ public class DeletePublicAddressCommandTest {
 
         String expectedMessage = String.format(
             MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName(),
-            personWithAddress.getPublicAddressesComposition()
+            personWithAddress.getPublicAddressesByNetworkAndLabel(network, label)
         );
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
 

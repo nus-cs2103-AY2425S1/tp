@@ -2,7 +2,6 @@ package seedu.address.model.addresses;
 
 import static seedu.address.commons.util.StringUtil.INDENT;
 
-import java.awt.*;
 import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
