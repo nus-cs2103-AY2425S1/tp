@@ -657,4 +657,3 @@ testers are expected to do more *exploratory* testing.
    1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
    e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
-
