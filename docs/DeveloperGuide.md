@@ -507,7 +507,7 @@ _{More to be added}_
 - **Command**: A user input string that triggers a specific action within the Vinegar application.
 - **User Interface (UI)**: The part of the application that users interact with, which includes graphical components like command boxes and task lists.
 - **CLI (Command Line Interface)**: A text-based user interface through which users interact with the application by typing commands.
-- **Profile Card**: A GUI feature that displays detailed information about a contact.
+- **Contact Display**: A GUI feature that displays detailed information about a contact.
 - **Scalability**: The capacity of the system to handle increasing amounts of data or user load without performance degradation.
 - **JavaFX**: A software platform used for creating and delivering desktop applications with graphical user interfaces in Java.
 - **Data Persistence**: The characteristic of data that outlives the execution of the process that created it, usually achieved through saving data to a file or database.
