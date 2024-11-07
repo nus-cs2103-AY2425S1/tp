@@ -736,6 +736,10 @@ Use case ends.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
    able to accomplish most of the tasks faster using commands than using the mouse.
+4. Should be for a single user only.
+5. Data should be stored in a human editable text file.
+6. Should not depend on any remote server.
+7. Should be packaged into a single JAR file
 
 *{More to be added}*
 
