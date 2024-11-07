@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-    title: "User Guide"
-    pageNav: 3
+layout: default.md
+title: "User Guide"
+pageNav: 3
 ---
 
 # TAHub User Guide
@@ -19,7 +19,7 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 
 - **CLI**: Command Line Interface, where you type commands to interact with the application.
 - **GUI**: Graphical User Interface, where you interact with the application through visual elements like buttons and windows.
-- **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list. The value provided should be a positive integer smaller than 2147483648. 
+- **Index**: The position of a person in the currently displayed list. For example, in a list of 5 contacts, the command `delete 3` would remove the third contact shown in that list. The value provided should be a positive integer smaller than 2147483648.
 
 ## Quick start
 
@@ -171,7 +171,7 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
   (such as `help`, `list`, `exit` and `clear`), the program will still notify the user when unrecognized parameters are present.
   This is to prevent the user from making mistakes and misinterpreting what a command does.
 
-- Dates supplied by the user are assumed to be in Anno Domini or the Common Era. In other words, the user will not be able to enter a date before the year 0001 AD. 
+- Dates supplied by the user are assumed to be in Anno Domini or the Common Era. In other words, the user will not be able to enter a date before the year 0001 AD.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -497,7 +497,7 @@ By following these steps, you can easily transfer all your TAHub data to a new c
 |-----------------------|-----------------------------------------------------------------------------------------|
 | **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended` |
 | **Unmark Attendance** | `unmark INDEX d/DATE_TIME` <br> e.g., `unmark 1 d/31/01/2024 10:00`                     |
-| **Filter Absentees**  | `absentees d/DATE_TIME` <br> e.g., `absentees d/31/01/2024 10:00`                        |
+| **Filter Absentees**  | `absentees d/DATE_TIME` <br> e.g., `absentees d/31/01/2024 10:00`                       |
 
 ### General Commands
 
