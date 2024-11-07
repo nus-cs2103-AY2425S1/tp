@@ -2,6 +2,10 @@
 layout: page
 title: User Guide
 ---
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
 
 # Welcome to BakeBuddy
 
@@ -26,9 +30,6 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 ## Getting Started
 
 This guide will walk you through everything you need to know about BakeBuddy, from basic commands to advanced features.
-
-* Table of Contents
-  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -22,13 +22,13 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.PastryCatalogue;
-import seedu.address.model.util.Remark;
 import seedu.address.model.person.Supplier;
 import seedu.address.model.product.Ingredient;
+import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Ingredients;
+import seedu.address.model.product.PastryCatalogue;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Remark;
 import seedu.address.storage.StorageManager;
 
 /**
@@ -60,7 +60,7 @@ public class AddSupplierCommandTest {
                 new Remark("Reliable supplier"),
                 new HashSet<>(List.of(new Tag("wholesale")))
         );
-        model.addPerson(existingSupplier);  // Add the supplier to the model
+        model.addPerson(existingSupplier);
     }
 
     @Test

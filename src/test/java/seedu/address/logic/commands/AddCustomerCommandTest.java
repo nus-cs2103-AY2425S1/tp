@@ -26,8 +26,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.PastryCatalogue;
-import seedu.address.model.util.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Remark;
 import seedu.address.storage.StorageManager;
 
 /**
@@ -52,7 +52,7 @@ public class AddCustomerCommandTest {
                 new Remark(""),
                 new HashSet<>(List.of(new Tag("frequent")))
         );
-        model.addPerson(existingCustomer);  // Add the customer to the model
+        model.addPerson(existingCustomer);
     }
 
     @Test

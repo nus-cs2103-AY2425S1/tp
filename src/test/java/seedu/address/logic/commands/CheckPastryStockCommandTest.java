@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.Pastry;
 import seedu.address.model.product.IngredientCatalogue;
+import seedu.address.model.product.Pastry;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code CheckPastryStockCommand}.

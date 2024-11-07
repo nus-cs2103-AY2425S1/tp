@@ -49,7 +49,7 @@ public class AddPastryCommandTest {
 
         // Use the model's PastryCatalogue to get the next available ID
         PastryCatalogue catalogue = model.getPastryCatalogue();
-        int nextProductId = catalogue.getNextProductId();  // Ensure consistent product ID
+        int nextProductId = catalogue.getNextProductId();
 
         // Create the expected pastry object
         Pastry expectedPastry = new Pastry(nextProductId, PASTRY_NAME, PASTRY_COST, ingredients); // ID assumed to be 1

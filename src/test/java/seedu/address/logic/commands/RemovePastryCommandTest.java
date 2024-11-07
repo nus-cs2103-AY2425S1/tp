@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +16,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.product.Ingredient;
 import seedu.address.model.product.IngredientCatalogue;
 import seedu.address.model.product.Pastry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code RemovePastryCommand}.

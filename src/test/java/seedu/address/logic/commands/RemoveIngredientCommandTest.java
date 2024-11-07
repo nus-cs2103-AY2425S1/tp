@@ -39,11 +39,12 @@ public class RemoveIngredientCommandTest {
 
         // Create the expected model after removing the ingredient
         Model expectedModel = new ModelManager();
-        expectedModel.getIngredientCatalogue().addIngredient(ingredientToRemove);  // Add ingredient to match state
-        expectedModel.getIngredientCatalogue().deleteProduct(ingredientToRemove.getProductId());  // Remove it
+        expectedModel.getIngredientCatalogue().addIngredient(ingredientToRemove);
+        expectedModel.getIngredientCatalogue().deleteProduct(ingredientToRemove.getProductId());
 
         // Execute the command and verify success
-        String expectedMessage = String.format(RemoveIngredientCommand.MESSAGE_REMOVE_INGREDIENT_SUCCESS, INGREDIENT_NAME);
+        String expectedMessage = String.format(RemoveIngredientCommand.MESSAGE_REMOVE_INGREDIENT_SUCCESS,
+                INGREDIENT_NAME);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -66,10 +67,10 @@ public class RemoveIngredientCommandTest {
         RemoveIngredientCommand differentCommand = new RemoveIngredientCommand("Sugar");
 
         // Verify the equals() behavior
-        assertTrue(command1.equals(command2));  // Same values -> true
-        assertTrue(command1.equals(command1));  // Same object -> true
-        assertFalse(command1.equals(null));     // Null -> false
-        assertFalse(command1.equals(new ClearCommand()));  // Different type -> false
-        assertFalse(command1.equals(differentCommand));  // Different ingredient -> false
+        assertTrue(command1.equals(command2)); // Same values -> true
+        assertTrue(command1.equals(command1)); // Same object -> true
+        assertFalse(command1.equals(null)); // Null -> false
+        assertFalse(command1.equals(new ClearCommand())); // Different type -> false
+        assertFalse(command1.equals(differentCommand)); // Different ingredient -> false
     }
 }
