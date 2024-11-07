@@ -12,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.person.UniquePersonList;
