@@ -123,7 +123,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the versioned student directory data i.e., all `StudentDirectory` objects (which each represent a single version of the student directory)  
+* stores the versioned student directory data i.e., all `StudentDirectory` objects (which each represent a single version of the student directory)
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -666,7 +666,7 @@ testers are expected to do more *exploratory* testing.
    1. Double-click the jar file <br>
       **Expected**: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
@@ -808,3 +808,30 @@ testers are expected to do more *exploratory* testing.
    <br><br>
    1. **Expected**: KeyContacts will load an empty list. Upon performing any command, a new data file will be written to override the corrupted data file. 
 
+---
+
+## **Appendix: Planned Enhancements**
+To be added in v1.6
+
+---
+
+## **Appendix: Effort**
+
+### Difficulty Level
+Our project was significantly more complex when compared to AB3. We have introduced various new commands to support new functionalities. Our student objects involve more fields, with certain fields (lessons) requiring syncing across multiple students. Our UI is also more complicated, with the introduction of a new calendar view that updates based on students' lesson data.
+
+### Challenges Faced
+Command Planning: Planning for multiple commands, which enhance the product, while fitting together cohesively, required careful thought and deliberation.
+Lesson-related Logic: Logic for syncing lessons across students in the same group, as well as checking for lesson clashes, needed to be developed.
+UI Refactoring: Designing a UI which could show all existing information, while also displaying a calendar view required multiple drafts and discussions.
+
+### Effort Required
+Our project involved substantial effort in several key areas:
+
+Refactoring: Modifying existing AB3 features to suit our product (e.g. removing extra fields)
+Command Implementation: Implementing multiple new commands
+Model Implementation: Updating the model with new fields, and implementing lesson-related logic.
+Testing and Debugging: Testing and debugging the new features, as well as performing regression testing
+
+### Achievements
+We have extended AB3 with multiple new features and a better UI, to make the app more specialised and suitable for piano tutors.
