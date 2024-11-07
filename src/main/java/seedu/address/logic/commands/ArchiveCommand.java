@@ -30,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ArchiveCommand extends Command {
 
     public static final String COMMAND_WORD = "archive";
+    public static final String UNARCHIVE_COMMAND_WORD = "unarchive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archive the person identified "
             + "by the index number used in the displayed person list. "
@@ -37,6 +38,7 @@ public class ArchiveCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_ARCHIVE_PERSON_SUCCESS = "Archived Person: %1$s";
+    public static final String MESSAGE_UNARCHIVE_PERSON_SUCCESS = "Unarchived Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_NOT_ARCHIVED = "At least one field to archive must be provided.";
 
