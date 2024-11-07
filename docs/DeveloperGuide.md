@@ -378,11 +378,11 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    1. Prerequisites: List all persons and transactions using the `list` and `listTxn` command respectively. Multiple
       persons in the list on the left pane. Multiple transactions in the list on the right pane.
 
-   2. Test case: `flterTxn 1`<br>
+   2. Test case: `filterTxn 1`<br>
       Expected: Transaction list will be filtered by the person corresponding to the displayed index 1 in the person
       list.
 
-   3. Test case: `flterTxn 1 amt/1.23`<br>
+   3. Test case: `filterTxn 1 amt/1.23`<br>
       Expected: Transaction list will show transactions related to the person corresponding to the displayed index 1
       in the person list with amount $1.23.
 
