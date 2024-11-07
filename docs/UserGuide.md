@@ -96,6 +96,12 @@ If you are on the PDF, use the table of contents below to navigate the site.
   as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+<box type="warning" seamless>
+
+**Note:** Screenshots have not been updated to their latest iterations.
+
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Student Commands
