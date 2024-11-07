@@ -43,8 +43,8 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
 
-          <!-- Contact details panel with fixed height -->
-          <VBox fx:id="contactDetails" styleClass="pane-with-border" HBox.hgrow="ALWAYS" maxHeight="Infinity">
+          <!-- Contact details panel -->
+          <VBox fx:id="contactDetails" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
@@ -52,22 +52,20 @@
           </VBox>
         </HBox>
 
-        <!-- Bottom section with fixed heights -->
-        <VBox VBox.vgrow="NEVER">
-          <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane" minHeight="100" maxHeight="100">
-            <padding>
-              <Insets top="5" right="10" bottom="5" left="10" />
-            </padding>
-          </StackPane>
+        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane" minHeight="100"
+                   prefHeight="100" maxHeight="100">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+        </StackPane>
 
-          <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" minHeight="40" maxHeight="40">
-            <padding>
-              <Insets top="5" right="10" bottom="5" left="10" />
-            </padding>
-          </StackPane>
+        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+        </StackPane>
 
-          <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" minHeight="20" maxHeight="20" />
-        </VBox>
+        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>
   </scene>
