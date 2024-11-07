@@ -113,9 +113,9 @@ ConcertPhonebook is a **desktop app** for **Concert Organisers** to manage your 
 
 - INDEX parameters have a max positive value of `2147483647` any value larger would result in an invalid command format.
 
-- `NAME` of persons can only comprise alphanumeric characters and "/".<br> 
-  e.g. `addp n/John Doe s/o Alexis`
-  
+- `NAME` can only comprise of alphanumeric characters and `s/o` or `d/o` case insensitive.<br>
+  e.g. `n/John Doe s/o Alexis` or `n/John Doe d/O Jane Doe`
+
 </div>
 
 ---
