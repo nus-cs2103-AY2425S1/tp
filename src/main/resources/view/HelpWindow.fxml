@@ -11,7 +11,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <fx:root resizable="false" title="CampusConnect Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/nus_mascot.png" requestedWidth="100"/>
+    <Image url="@/images/CampusConnectLogo.png" requestedWidth="100"/>
   </icons>
   <scene>
     <Scene>
