@@ -19,7 +19,11 @@ public class FullTagNameTest {
     public void constructor_invalidFullTagName_throwsIllegalArgumentException() {
         // Check that an IllegalArgumentException is thrown for an invalid fullTagName (non-alphanumeric)
         String invalidFullTagName = "!@#";
+        String invalidFullTagName2 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "
+                + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
         assertThrows(IllegalArgumentException.class, () -> new FullTagName(invalidFullTagName));
+        assertThrows(IllegalArgumentException.class, () -> new FullTagName(invalidFullTagName2));
     }
 
     @Test
