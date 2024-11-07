@@ -29,7 +29,8 @@ public class ClearCommand extends Command {
         if (confirmationReceived.equals(requiresConfirmation)) {
             return this.execute(model);
         }
-        return new CommandResult(MESSAGE_CLEAR_CONFIRMATION, false, false, false, null, true);
+        return new CommandResult(MESSAGE_CLEAR_CONFIRMATION, false, false, false,
+                null, false, null, true);
     }
 
 }

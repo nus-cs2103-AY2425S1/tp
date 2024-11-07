@@ -86,11 +86,11 @@
 
 /* Colors for statuses */
 #assignedStatus .urgent-status {
-    -fx-background-color: #C46210;
+    -fx-background-color: #B22222;
     -fx-text-fill: white;
 }
 
 #assignedStatus .nonUrgent-status {
-    -fx-background-color: #B22222;
+    -fx-background-color: #C46210;
     -fx-text-fill: white;
 }
