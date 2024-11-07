@@ -1,11 +1,11 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.tag;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FLORIST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHOTOGRAPHER;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -25,67 +26,60 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagName;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
-import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class CreateTagCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullTag_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CreateTagCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_tagAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingTagAdded modelStub = new ModelStubAcceptingTagAdded();
+        Tag validTag = new Tag(new TagName(VALID_TAG_FLORIST));
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        CommandResult commandResult = new CreateTagCommand(validTag).execute(modelStub);
+        assertEquals(String.format(CreateTagCommand.MESSAGE_SUCCESS, Messages.format(validTag)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validTag), modelStub.tagsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateTag_throwsCommandException() {
+        Tag validTag = new Tag(new TagName(VALID_TAG_FLORIST));
+        CreateTagCommand createTagCommand = new CreateTagCommand(validTag);
+        ModelStub modelStub = new ModelStubWithTag(validTag);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                CreateTagCommand.MESSAGE_DUPLICATE_TAG, () -> createTagCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Tag florist = new Tag(new TagName(VALID_TAG_FLORIST));
+        Tag photographer = new Tag(new TagName(VALID_TAG_PHOTOGRAPHER));
+        CreateTagCommand createFloristCommand = new CreateTagCommand(florist);
+        CreateTagCommand createPhotographerCommand = new CreateTagCommand(photographer);
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        // same object -> returns ture
+        assertEquals(createFloristCommand, createFloristCommand);
 
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        // same values -> returns false
+        CreateTagCommand createFloristCommandCopy = new CreateTagCommand(florist);
+        assertEquals(createFloristCommand, createFloristCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(createFloristCommand.equals(1));
 
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        // null -> return false
+        assertFalse(createFloristCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        // different tag -> return false
+        assertFalse(createFloristCommand.equals(createPhotographerCommand));
     }
 
     /**
@@ -173,6 +167,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonListByTag(Predicate<Tag> tagPredicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasTag(Tag toAdd) {
             throw new AssertionError("This method should not be called.");
         }
@@ -183,27 +182,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredTagList(Predicate<Tag> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Tag> getFilteredTagList() {
+        public Tag getTag(Tag targetTag) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasTask(Task toAdd) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void markTask(Task toAdd) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void unmarkTask(Task toAdd) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -248,19 +232,20 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteWedding(Wedding toDelete) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setWedding(Wedding target, Wedding editedWedding) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Wedding getWedding(Wedding toGet) {
+        public void deleteWedding(Wedding targetWedding) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Wedding getWedding(Wedding targetWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
             throw new AssertionError("This method should not be called.");
@@ -272,17 +257,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteTag(Tag toDelete) {
+        public void updateFilteredPersonListByWedding(Predicate<Wedding> tag) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Tag getTag(Tag toGet) {
+        public void updateFilteredTagList(Predicate<Tag> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonListByTag(Predicate<Tag> tag) {
+        public ObservableList<Tag> getFilteredTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -300,48 +300,42 @@ public class AddCommandTest {
         public void unassignVendor(Person person) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public void updateFilteredPersonListByWedding(Predicate<Wedding> tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single tag.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithTag extends CreateTagCommandTest.ModelStub {
+        private final Tag tag;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithTag(Tag tag) {
+            requireNonNull(tag);
+            this.tag = tag;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasTag(Tag tag) {
+            requireNonNull(tag);
+            return this.tag.isSameTag(tag);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the tag being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingTagAdded extends CreateTagCommandTest.ModelStub {
+        final ArrayList<Tag> tagsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasTag(Tag tag) {
+            requireNonNull(tag);
+            return tagsAdded.stream().anyMatch(tag::isSameTag);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addTag(Tag tag) {
+            requireNonNull(tag);
+            tagsAdded.add(tag);
         }
 
         @Override
@@ -349,5 +343,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
