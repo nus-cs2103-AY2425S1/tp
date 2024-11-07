@@ -16,7 +16,13 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* The project simulates an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
+  * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
+  * It comes with a **reasonable level of user and developer documentation**.
+* It is named `AddressBook Level 3` (`AB3` for short) because it was initially created as a part of a series of `AddressBook` projects (`Level 1`, `Level 2`, `Level 3` ...).
+* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
+* This project is a **part of the se-education.org** initiative. If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -177,13 +183,13 @@ The following methods and operations are involved:
 
 ##### Example usage scenario:
 
-Step 1. The user selects a company and executes the `apply` command with relevant application details (e.g., position and status). The command fetches the selected company and creates a new `Application`.
+Step 1. The user selects a company and executes the `apply` command with relevant application details (e.g., position name and description). The command fetches the selected company and creates a new `Application`.
 
 Step 2. A copy of the company's current list of applications is made, and the new `Application` is added to the list.
 
-Step 3. The `ApplyCommand` creates an updated `Company` object containing the newly added application and calls `Model#setCompany()` to replace the old company in the model with the updated one.
+Step 3. The `ApplyCommand` creates an updated `Company` object containing the newly added application and calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company in the model with the updated one.
 
-Step 4. The changes are committed to the address book by calling `AddressBook#setCompany()`.
+Step 4. The changes are committed to the address book by calling `AddressBook#setCompany(companyToEdit, editedCompany)`.
 
 <puml src="diagrams/ApplyCommandSequence.puml" alt="ApplyCommandSequence" />
 
@@ -202,7 +208,7 @@ Below displays an activity diagram that explains roughly what happens when a use
   * Pros: Improves separation of concerns and scalability for large datasets.
   * Cons: Increases complexity of application updates.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Update feature
 
@@ -222,11 +228,14 @@ Step 1. The user selects a company and executes the `update` command to change t
 
 Step 2. A copy of the company's current list of applications is made, and the relevant application is modified by updating its `AppStatus`.
 
-Step 3. The `UpdateCommand` creates an updated `Company` object containing the modified application list and calls `Model#setCompany()` to replace the old company with the updated one.
+Step 3. The `UpdateCommand` creates an updated `Company` object containing the modified application list and calls `Model#setCompany(companyToEdit, editedCompany)` to replace the old company with the updated one.
 
-Step 4. The changes are committed to the address book using `AddressBook#setCompany()`.
+Step 4. The changes are committed to the address book using `AddressBook#setCompany(companyToEdit, editedCompany)`.
 
 <puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
+
+Below displays an activity diagram that explains roughly what happens when a user tries to add an applcation:
+<puml src="diagrams/UpdateCommandActivity.puml" alt="UpdateCommandActivity" />
 
 #### Design considerations:
 
@@ -240,7 +249,7 @@ Step 4. The changes are committed to the address book using `AddressBook#setComp
   * Pros: Cleaner separation of concerns, potentially more scalable.
   * Cons: Increased complexity in ensuring consistency between companies and applications.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ### Find feature
 
