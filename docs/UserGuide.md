@@ -55,6 +55,8 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
 
+* For all parameters, starting and ending spaces are trimmed.
+
 * For all commands except `find` and `sort`, the displayed list of suppliers/deliveries will be the unfiltered and unsorted list of all suppliers/deliveries.<br>
   For `find` and `sort` commands, the displayed list will be the corresponding filtered/sorted list of supplier/deliveries.
 
