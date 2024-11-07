@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="true" title="Subject Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="true" title="Subject Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1" minWidth="450" minHeight="450" maxHeight="600">
     <icons>
         <Image url="@/images/info_icon.png" />
     </icons>

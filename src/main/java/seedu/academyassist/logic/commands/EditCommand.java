@@ -2,13 +2,6 @@ package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -38,19 +31,13 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the student id. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: Student ID (S followed by a 5-digit number between 00001 and 99999) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_IC + "IC] "
-            + "[" + PREFIX_YEARGROUP + "YEARGROUP] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]... \n"
-            + "Example: " + COMMAND_WORD + " S12345 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "by the student id. Existing values will be overwritten by the input values.\n"
+            + "Format: " + COMMAND_WORD + " STUDENT_ID FIELD/VALUE [FIELD/VALUE]...\n"
+            + "(" + StudentId.MESSAGE_CONSTRAINTS + ")\n"
+            + "Parameters Example:\n"
+            + "- STUDENT_ID: S1234567A\n"
+            + "- FIELD/VALUE: n/John\n"
+            + "- [FIELD/VALUE: p/98765432]...\n";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Student %1$s (%2$s)’s details successfully updated.\n"
             + "Here is the updated information %3$s";
