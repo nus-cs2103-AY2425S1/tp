@@ -506,10 +506,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Simply type `add` into the command box and click `Enter`.
 
-   1. Copy the example shown together with the error message in the result display area.
+   1. You will see an error message in the result display area that shows you how to use this command.
 
-   1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Sunday-1000-1200 
+   1. In the error message, an example is provided. Copy the example.
+
+   1. Test case (same as the example you copied): `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/Sunday-1000-1200 
    s/Biology r/120 paid/6000 owed/3000`.
+   
+   1. Expected: A new student with the corresponding information will be added to the end of the current list.
 
 1. Adding a new student with only compulsory parameters specified, order changed and case-insensitive command words
 
@@ -531,11 +535,11 @@ student]() to search for student details.
 
    1. Expected: The new student is successfully added with a warning message.
 
-1. Adding a new student with wrong prefixes
+1. Adding a new student with mixed-case prefixes
 
    1. Test case: `add N/Teaching Assistant p/90908767 e/getaboveAtobeaTA123@hotmail.com a/21 Lower Kent Ridge Drive r/40.00 t/Thursday-1130-1330 s/Economics Paid/12.00`
 
-   2. Prefixes are not case-insensitive; therefore, an error message will be shown in result display.
+   2. Expected: Prefixes are case-insensitive; therefore, a new contact with the correspon
 
 ### Editing an existing student
 
