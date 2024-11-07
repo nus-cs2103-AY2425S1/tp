@@ -182,7 +182,7 @@ Shows a list of all clients in the PROperty.
 Format: `list`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `list` after using commands which edit the data to see the updates. 
+Use `list` for a quick overview of all your contacts. 
 </div>
 
 Visual example of correct output:
@@ -232,7 +232,7 @@ Shows commands in a help menu for quick reference during use of PROperty.
 Format: `help`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `help` if you forget the command format. 
+Use `help` if you need help with any command usage or if you forget what commands there are. 
 </div>
 
 Visual example of correct output:
@@ -290,7 +290,7 @@ Format: `findtag TAG [MORE_TAGS]`
 * List of possible tags you can search for are found in the [Tag Table](#tag-table)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Tags make it easy for you to find your target audience. 
+Tags make it easy for you to categorise your contacts into different groups.
 </div>
 
 Examples:
@@ -328,7 +328,7 @@ Format: `remark INDEX r/[REMARKS]`
 * **Note:** `[REMARKS]` will **delete the remark if left blank**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Remarks are helpful to add details about a contact in a non-fixated format.
+Remarks are useful for adding free-form details to a contact.
 </div>
 
 Examples:
