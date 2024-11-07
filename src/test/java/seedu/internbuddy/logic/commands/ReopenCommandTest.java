@@ -24,7 +24,8 @@ public class ReopenCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
         ReopenCommand reopenCommand = new ReopenCommand(outOfBoundIndex);
 
-        String expectedMessage = Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE,
+            model.getFilteredCompanyList().size());
 
         assertCommandFailure(reopenCommand, model, expectedMessage);
     }
@@ -34,7 +35,8 @@ public class ReopenCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCompanyList().size() + 1);
         ReopenCommand reopenCommand = new ReopenCommand(outOfBoundIndex);
 
-        String expectedMessage = Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX;
+        String expectedMessage = String.format(Messages.MESSAGE_INDEX_EXCEEDS_SIZE,
+            model.getFilteredCompanyList().size());
 
         assertCommandFailure(reopenCommand, model, expectedMessage);
     }
