@@ -335,38 +335,58 @@ _{More to be added}_
 
 (For all use cases below, the **System** is the `AdmiNUS` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case 1: Add a contact**
+**Use case: UC01 - Add a student**
 
 **MSS**
 
-1. User requests to add a new contact
-2. User enters the required information (name, id, phone number, email, and address) and optional information (tag)
-3. AdmiNUS adds the contact and displays a success message
+1. User requests to add a new student by entering the required information (name, student id, phone number, email, and address) and optional information (tag)
+2. AdmiNUS adds the student and displays a success message
 
    Use case ends.
 
 **Extensions**
 
-- 2a. The given arguments are invalid.
+- 1a. The given arguments are invalid.
 
-  - 2a1. AdmiNUS shows an error message for the specific invalid field.
+  - 1a1. AdmiNUS shows an error message for the specific invalid field.
 
-    Use case resumes at step 2.
+    Use case resumes at step 1.
 
-- 3a. Contact with the same phone number already exists.
+- 2a. Student with the same student id already exists.
 
-  - 3a1. AdmiNUS shows an error message about duplicate contact.
+  - 2a1. AdmiNUS shows an error message about duplicate student.
 
-    Use case resumes at step 2.
+    Use case resumes at step 1.
 
-**Use case 2: Delete a contact**
+**Use case: UC02 - Add a company**
+
+**MSS**
+
+1. User requests to add a new company by entering the required information (name, industry, phone number, email, and address) and optional information (tag)
+2. AdmiNUS adds the company and displays a success message
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The given arguments are invalid.
+
+  - 1a1. AdmiNUS shows an error message for the specific invalid field.
+
+    Use case resumes at step 1.
+
+- 2a. Company with the same name and industry already exists.
+
+  - 2a1. AdmiNUS shows an error message about duplicate company.
+
+    Use case resumes at step 1.
+
+**Use case: UC03 - List the contacts**
 
 **MSS**
 
 1.  User requests to list contacts
 2.  AdmiNUS shows a list of contacts
-3.  User requests to delete a specific contact in the list
-4.  AdmiNUS deletes the contact
 
     Use case ends.
 
@@ -376,25 +396,58 @@ _{More to be added}_
 
   Use case ends.
 
-- 3a. The given index is invalid.
-
-  - 3a1. AdmiNUS shows an error message.
-
-    Use case resumes at step 2.
-
-**Use case 3: Edit a contact**
+**Use case: UC04 - Delete a contact**
 
 **MSS**
 
-1. User requests to list contacts.
-2. AdmiNUS shows a list of contacts.
-3. User selects a contact to edit.
-4. User enters updated contact information.
-5. AdmiNUS updates the contact and displays a success message.
+1.  User <u>requests to list contacts(UC03)</u>.
+2.  User requests to delete a specific contact in the list
+3.  AdmiNUS deletes the contact
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The given index is invalid.
+
+  - 2a1. AdmiNUS shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC05 - Edit a contact**
+
+**MSS**
+
+1. User <u>requests to list contacts(UC03)</u>.
+2. User requests to edit a specific contact and the updated information.
+3. AdmiNUS updates the contact and displays a success message.
 
    Use case ends.
 
-**Use case 4: Filter contacts by category or tag**
+**Extensions**
+
+- 2a. The given index is invalid.
+  - 2a1. AdmiNUS shows an error message.
+    Use case resumes at step 1.
+- 2a. The given arguments are invalid.
+  - 2a1. AdmiNUS shows an error message for the specific invalid field.
+    Use case resumes at step 1.
+
+**Use case: UC06 - View a contact**
+
+**MSS**
+
+1. User requests to view a specific contact.
+2. AdmiNUS displays the details of the contact.
+   Use case ends.
+
+**Extensions**
+
+- 2a. The given index is invalid.
+  - 2a1. AdmiNUS shows an error message.
+    Use case ends.
+
+**Use case: UC07 - Filter contacts by category or tag**
 
 **MSS**
 
