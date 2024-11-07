@@ -26,7 +26,7 @@ done faster than traditional GUI apps.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teletutors.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   <img src="images/Ui.png" alt="Ui" style="zoom: 70%"/>
+   <img src="images/Ui.png" alt="Ui" style="zoom: 50%"/>
 
 5. Pressing the **up arrow key (↑)** will recall the last valid command entered, allowing for modification of previous commands, similar to a command terminal
 
