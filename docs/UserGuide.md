@@ -69,7 +69,7 @@ If you can type fast, KeyContacts can get your contact management tasks done muc
     
 &nbsp;
 
-6. Refer to the [Features](#features) below for details of each command.
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -117,6 +117,10 @@ If you are using a PDF version of this document, be careful when copying and pas
 
 </box>
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Student Commands
 
 A student has a **name**, **phone number**, **address**, **grade level** and optionally, a **group**. <br> Students with
@@ -139,6 +143,7 @@ Action     | Format, Examples
 **[Unassign](#unassigning-piano-pieces-from-a-student-unassign)** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g. `unassign 1 pn/Moonlight Sonata pn/Canon in D`
 
 <br>
+<br>
 
 ### Adding a student: `add`
 
@@ -152,6 +157,7 @@ Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`
 
+<br>
 <br>
 
 ### Deleting a student : `delete`
@@ -174,6 +180,7 @@ If you accidentally deleted the wrong student, you can use the [undo](#undoing-t
 revert your action.
 </box>
 <br>
+<br>
 
 ### Editing a student : `edit`
 
@@ -191,6 +198,7 @@ Examples:
 *  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
 
 <br>
+<br>
 
 ### Assigning piano pieces to a student: `assign`
 
@@ -204,6 +212,7 @@ Format: `assign INDEX pn/PIECE_NAME...`
 Examples:
 *  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
 
+<br>
 <br>
 
 ### Unassigning piano pieces from a student: `unassign`
@@ -220,6 +229,9 @@ Examples:
 *  `unassign 1 pn/Etude pn/Moonlight Sonata` Removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
 
 <br>
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Lesson Commands
 
@@ -233,8 +245,6 @@ lessons for each student.
 We will let you know if any two lessons clash with each other!<br>
 If you try to run a command which results in 2 lessons clashing, an error will be shown.
 </box>
-<br>
-
 Listed below are the currently supported lesson commands.
 
 Action     | Format, Examples
@@ -244,6 +254,7 @@ Action     | Format, Examples
 **[Cancel](#cancelling-a-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
 **[Uncancel](#uncancelling-a-cancelled-regular-lesson-uncancel)** |  `uncancel INDEX dt/DATE` <br> e.g. `uncancel 1 dt/14-10-2024`
 
+<br>
 <br>
 
 ### Scheduling a regular lesson : `schedule`
@@ -262,6 +273,7 @@ Example:
 * `schedule 1 d/Tuesday st/16:00 et/18:00` Schedules a regular lesson on Tuesday, 4-6pm for the 1st student.
 
 <br>
+<br>
 
 ### Scheduling a makeup lesson : `makeup`
 
@@ -271,12 +283,13 @@ Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 
 * Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * Makeup lessons are shared across students in the same group.
-* `DATE` must be in the format `DD-MM-YYYY`.
-* `START_TIME` and `END_TIME` must be in 24-hour format, and `START_TIME` must be before `END_TIME`.
+* `DATE` must be a valid date in the format `DD-MM-YYYY`.
+* `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`), and `START_TIME` must be before `END_TIME`.
 
 Examples:
 * `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
 
+<br>
 <br>
 
 ### Cancelling a lesson : `cancel`
@@ -288,13 +301,16 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 * Cancels a lesson for the student at the specified `INDEX`.
 * Cancelling a makeup lesson will remove it from the student's list of makeup lessons.
 * Cancelling a regular lesson adds it to a list of cancelled lessons. This is shared across students in the same group.
-* `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
+* `DATE` must be a valid date in the format `DD-MM-YYYY`.
 * `DATE` must match the student's lesson `DATE`, and `START_TIME` must match the student's lesson `START_TIME`.
+* `START_TIME` must be in 24-hour format (`HH:MM`).
+
 
 Example:
 * `cancel 1 dt/15-10-2024 st/16:00` Cancels a lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
 
 <br> 
+<br>
 
 ### Uncancelling a cancelled regular lesson : `uncancel`
 
@@ -304,11 +320,15 @@ Format: `uncancel INDEX dt/DATE`
 
 * Uncancels a regular lesson for the student at the specified `INDEX`.
 * Uncancelling a lesson removes it from the student's cancelled lesson list.
-* `DATE` must be written in the format `DD-MM-YYYY` for the command to parse the input properly.
+* `DATE` must be a valid date in the format `DD-MM-YYYY`.
 * `DATE` must match the student's cancelled lesson `DATE`.
 
 Example:
 * `uncancel 1 dt/20-10-2024` Uncancels a regular lesson on 20-10-2024 for the 1st student.
+
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## General Commands
 
@@ -327,6 +347,7 @@ Action     | Format, Examples
 **[Exit](#exiting-the-program-exit)**   | `exit`
 
 <br>
+<br>
 
 ### Viewing help : `help`
 
@@ -337,6 +358,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 <br>
+<br>
 
 ### Listing all students : `list`
 
@@ -344,6 +366,7 @@ Shows a list of all student in the student directory.
 
 Format: `list`
 
+<br>
 <br>
 
 ### Viewing the schedule : `view`
@@ -359,6 +382,7 @@ Examples:
 * `view` Displays the schedule for the current week.
 * `view dt/01-11-2024` Displays the schedule for 28 Oct 2024 (Monday) to 3 Nov 2024 (Sunday).
 
+<br>
 <br>
 
 ### Finding students: `find`
@@ -376,8 +400,8 @@ Format: `find [n/NAME_KEYWORD] [p/PHONE_KEYWORD] [a/ADDRESS_KEYWORD] [gl/GRADE_L
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-*  TODO: ADD BETTER EXAMPLES
 
+<br>
 <br>
 
 ### Sorting students : `sort`
@@ -397,6 +421,7 @@ Examples:
 * `sort gl/DESC n/ASC` sorts the students by grade level in descending order, and tie-breaks using name in ascending order.
 
 <br>
+<br>
 
 ### Clearing all entries : `clear`
 
@@ -411,6 +436,7 @@ Format: `clear`
 If you accidentally used the `clear` command, do not worry since you can use the `undo` command to revert your action! <br>
 Do <b>NOT</b> exit out of the application before you undo, as this will lose your data forever.
 </box>
+<br>
 <br>
 
 ### Undoing the last command : `undo`
@@ -433,10 +459,16 @@ Format: `undo`
 
 ### Undoing the last undo command: `redo`
 
-Reverts the effects of the undo command if it was the last command run that modified the student directory.
+Reverts the effects of the `undo` command if it was the last command run that modified the student directory.
 
 Format: `redo`
+<box type="info" light theme="primary">
 
+**Tip:**
+
+You can redo **multiple** undo commands in a row.
+</box>
+<br>
 <br>
 
 ### Exiting the program : `exit`
@@ -445,6 +477,7 @@ Exits the program.
 
 Format: `exit`
 <br>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -452,23 +485,38 @@ Format: `exit`
 **Q**: How do I save my data?<br>
 **A**: Student directory data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+<br>
+
+**Q**: Help, why does it keep telling me that my date needs to be a valid date?<br>
+**A**: Firstly, make sure that your date is a real date that exists (take note of the 29th of February on non leap years). 
+Next, make sure that your date is following the `DD-MM-YYYY` format (pay attention to the hyphens in between). <br>
+**Example:** `30-10-2024` is allowed, while `30/10/2024` is not allowed.
+
+<br>
+
 **Q**: Can I edit the saved data file manually?<br>
 **A**: Student directory data is saved automatically as a JSON file at <br>`[JAR file location]/data/studentdirectory.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<box type="warning" seamless>
+<box type="warning" light>
 <b>Caution:</b><br>
-If your changes to the data file makes its format invalid, KeyContacts will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause KeyContacts to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+   * If your changes to the data file makes its format invalid, KeyContacts will discard all data and start with an empty data file at the next run.
+Hence, it is recommended to take a backup of the file before editing it.
+   * Certain edits can cause KeyContacts to behave in unexpected ways 
+(e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+<br>
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: 
-<br>
+**A**: You can do so by copying the data file over to the other computer as follows:
 1. Make a copy of the `studentdirectory.json` file in the data folder.
 2. Install KeyContacts in the other computer.
 3. Run KeyContacts in the other computer. This will generate a `data` folder containing a sample `studentdirectory.json` file.
 4. Replace this sample data file with the data file you copied from your previous computer.
+
+<br>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -476,6 +524,9 @@ Furthermore, certain edits can cause KeyContacts to behave in unexpected ways (e
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+<br>
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 

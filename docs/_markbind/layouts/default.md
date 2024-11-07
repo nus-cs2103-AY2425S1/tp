@@ -29,7 +29,10 @@
 * [Home]({{ baseUrl }}/index.html)
 * [User Guide]({{ baseUrl }}/UserGuide.html) :expanded:
   * [Quick Start]({{ baseUrl }}/UserGuide.html#quick-start)
-  * [Features]({{ baseUrl }}/UserGuide.html#features)
+  * [Command Overview]({{ baseUrl }}/UserGuide.html#command-overview)
+  * [Student Commands]({{ baseUrl }}/UserGuide.html#student-commands)
+  * [Lesson Commands]({{ baseUrl }}/UserGuide.html#lesson-commands)
+  * [General Commands]({{ baseUrl }}/UserGuide.html#general-commands)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#faq)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
