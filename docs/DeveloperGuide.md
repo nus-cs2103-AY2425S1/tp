@@ -728,6 +728,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `mark -s 0 active`<br>
       Expected: Error message is shown. Status of suppliers is not changed.
 
+2. Marking an inactive supplier as inactive
+
+   1. Prerequisites: Ensure that the first supplier is inactive by listing all suppliers using the `list -s` command.
+   
+    1. Test case: `mark -s 1 inactive`<br>
+        Expected: The first supplier remains inactive. Error message showing that supplier already has INACTIVE as status.
+
 ### Testing Delivery Commands
 
 ### Adding a delivery
