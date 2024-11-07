@@ -15,6 +15,7 @@ import bizbook.logic.commands.ExitCommand;
 import bizbook.logic.commands.ExportCommand;
 import bizbook.logic.commands.FindCommand;
 import bizbook.logic.commands.HelpCommand;
+import bizbook.logic.commands.ImportCommand;
 import bizbook.logic.commands.ListCommand;
 import bizbook.logic.commands.PinCommand;
 import bizbook.logic.commands.RedoCommand;
@@ -105,6 +106,7 @@ public class CommandTablePanel extends UiPart<Region> {
                 new CommandEntry(ExportCommand.COMMAND_WORD, ExportCommand.MESSAGE_USAGE),
                 new CommandEntry(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
                 new CommandEntry(HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE),
+                new CommandEntry(ImportCommand.COMMAND_WORD, ImportCommand.MESSAGE_USAGE),
                 new CommandEntry(ListCommand.COMMAND_WORD, ListCommand.MESSAGE_USAGE),
                 new CommandEntry(PinCommand.COMMAND_WORD, PinCommand.MESSAGE_USAGE),
                 new CommandEntry(RedoCommand.COMMAND_WORD, RedoCommand.MESSAGE_USAGE),
