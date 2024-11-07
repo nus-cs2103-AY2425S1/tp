@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,7 +29,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIdUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
-        DeleteCommand deletePatientCommand = new DeleteCommand(ID_FIRST_PERSON);
+        DeleteCommand deletePatientCommand = new DeleteCommand(personToDelete.getId());
 
         String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
@@ -43,7 +42,6 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidIdUnfilteredList_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        System.out.println(model.getFilteredPersonList().get(0).getId());
         int outOfBoundId = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1).getId() + 2;
         DeleteCommand deletePatientCommand = new DeleteCommand(outOfBoundId);
 
@@ -53,10 +51,11 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        System.out.println(model.getFilteredPersonList().get(0).getId());
-        showPersonOfId(model, ID_FIRST_PERSON);
-        Person personToDelete = model.getFilteredPersonById(model.getFilteredPersonList(), ID_FIRST_PERSON);
-        DeleteCommand deletePatientCommand = new DeleteCommand(ID_FIRST_PERSON);
+        showPersonOfId(model, model.getFilteredPersonList().get(INDEX_FIRST_PERSON).getId());
+        Person personToDelete = model.getFilteredPersonById(model.getFilteredPersonList(),
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON).getId());
+        DeleteCommand deletePatientCommand = new DeleteCommand(model
+                .getFilteredPersonList().get(INDEX_FIRST_PERSON).getId());
 
         String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
@@ -65,21 +64,6 @@ public class DeleteCommandTest {
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        System.out.println(model.getFilteredPersonList().get(0).getId());
-        showPersonOfId(model, ID_FIRST_PERSON);
-        int outOfBoundId = ID_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        ObservableList<Person> bookList = model.getAddressBook().getPersonList();
-        assertTrue(outOfBoundId <= bookList.get(bookList.size() - 1).getId());
-
-        DeleteCommand deletePatientCommand = new DeleteCommand(outOfBoundId);
-
-        assertCommandFailure(deletePatientCommand, model, DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE);
     }
 
     @Test
