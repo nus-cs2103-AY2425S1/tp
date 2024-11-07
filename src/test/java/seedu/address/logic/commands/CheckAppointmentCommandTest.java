@@ -50,9 +50,9 @@ public class CheckAppointmentCommandTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         String expectedMessage = String.format("Appointments on %s:\n"
-                                        + "Appointment: %s for %s (patient id)" + " "
+                                        + "[Incomplete] Appointment: %s for %s (patient id)" + " "
                                         + "with %s (doctor id). Remarks: %s\n"
-                                        + "Appointment: %s for %s (patient id)" + " "
+                                        + "[Incomplete] Appointment: %s for %s (patient id)" + " "
                                         + "with %s (doctor id). Remarks: %s\n",
                 appointmentDate, appointmentTime1.format(formatter), validPatient.getId(),
                 validDoctor.getId(), appointmentRemark, appointmentTime2.format(formatter),

@@ -44,7 +44,7 @@ public class ViewHistoryCommandTest {
         CommandResult result = command.execute(modelStub);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        String expected = String.format("Appointment: %s for %s (patient id) "
+        String expected = String.format("[Incomplete] Appointment: %s for %s (patient id) "
                         + "with %s (doctor id). Remarks: %s",
                 appointmentTime1.format(formatter), validPatient.getId(),
                 validDoctor.getId(), appointmentRemark);
@@ -81,9 +81,9 @@ public class ViewHistoryCommandTest {
         CommandResult result = command.execute(modelStub);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        String expected = String.format("Appointment: %s for %s (patient id)" + " "
+        String expected = String.format("[Incomplete] Appointment: %s for %s (patient id)" + " "
                         + "with %s (doctor id). Remarks: %s\n"
-                        + "Appointment: %s for %s (patient id)" + " "
+                        + "[Incomplete] Appointment: %s for %s (patient id)" + " "
                         + "with %s (doctor id). Remarks: %s\n",
                 appointmentTime1.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark,
                 appointmentTime2.format(formatter), validPatient.getId(), validDoctor.getId(), appointmentRemark);
