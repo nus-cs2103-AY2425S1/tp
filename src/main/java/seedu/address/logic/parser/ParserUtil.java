@@ -191,7 +191,7 @@ public class ParserUtil {
      * Parses a {@code String description} into a {@code String trimmedDescription}
      * Leading and trailing whitespaces are trimmed
      *
-     * @throws ParseException if the give {@code String description} is invalid
+     * @throws ParseException if the given {@code String description} is invalid
      */
     public static String parseReminderDescription(String description) throws ParseException {
         requireNonNull(description);
@@ -202,6 +202,12 @@ public class ParserUtil {
         return trimmedDescription;
     }
 
+    /**
+     * Parses a {@code String preference} into a {@code SortPreference}
+     * Leading and trailing whitespaces are trimmed
+     *
+     * @throws ParseException if the given {@code preference is invalid}
+     */
     public static SortPreference parseSortPreference(String preference) throws ParseException {
         requireNonNull(preference);
         String trimmedPreference = preference.trim();
