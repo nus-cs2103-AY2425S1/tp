@@ -40,14 +40,12 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 1. Open your computer's terminal:
   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
-  - **For Mac**: Press Command + Space, type `terminal`, and press Enter
-
+  - **For Mac**: Press Command + Space, type `terminal`, and press Enter 
 2. In the black window that appears, type exactly:
    ```
    java --version
    ```
    and press Enter
-
 3. What you should see:
   - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
   - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
@@ -57,11 +55,9 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
   - Click [this link](https://github.com/AY2425S1-CS2103T-T11-1/tp/releases) to download the latest BakeBuddy
   - Look for the file named `bakebuddy.jar`
   - Click on it to download
-
 2. Create a home for BakeBuddy:
   - Create a new folder on your computer named `BakeBuddy`
   - Move the downloaded `bakebuddy.jar` file into this folder
-
 3. Start BakeBuddy:
   - Open your terminal (like in Step 1)
   - Type `cd ` (with a space after cd)
@@ -133,6 +129,8 @@ Refer to the [List of Commands](#list-of-commands) on the next page and [Feature
 | [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX` | `deleteSupplyOrder 1` |
 | [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX` | `markSupplyOrder 1` |
 | [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX` | `unmarkSupplyOrder 1` |
+
+<div style="page-break-after: always;"></div>
 
 ### Catalogue Management
 #### Ingredient Catalogue
