@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VIP;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -26,6 +27,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
     private static final String EMPTY_COMMENT = "";
+    private static final String DEFAULT_VIP = "false";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -35,13 +37,19 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_COMMENT, PREFIX_TAG);
+                        args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_COMMENT, PREFIX_TAG,
+                        PREFIX_VIP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        // Assert that the required prefixes have been successfully extracted
+        assert argMultimap.getValue(PREFIX_NAME).isPresent() : "Name prefix should be present";
+        assert argMultimap.getValue(PREFIX_PHONE).isPresent() : "Phone prefix should be present";
+        assert argMultimap.getValue(PREFIX_EMAIL).isPresent() : "Email prefix should be present";
+        assert argMultimap.getValue(PREFIX_ADDRESS).isPresent() : "Address prefix should be present";
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
@@ -50,7 +58,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Comment comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).orElse(EMPTY_COMMENT));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, comment, tagList);
+        // Parse VIP status; default to false if not provided
+        boolean isVip = Boolean.parseBoolean(argMultimap.getValue(PREFIX_VIP).orElse(DEFAULT_VIP));
+
+        // Assert that VIP status is set to default if not provided
+        assert isVip == Boolean.parseBoolean(DEFAULT_VIP) || argMultimap.getValue(PREFIX_VIP).isPresent()
+                : "VIP status should be default false when not provided";
+        Person person = new Person(name, phone, email, address, comment, tagList, isVip);
 
         return new AddCommand(person);
     }
@@ -62,5 +76,4 @@ public class AddCommandParser implements Parser<AddCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }
