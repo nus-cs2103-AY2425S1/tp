@@ -8,6 +8,8 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 /**
  * Parses input arguments and creates a new SortCommand object
  */
@@ -27,7 +29,8 @@ public class SortCommandParser implements Parser<SortCommand> {
                 Person::getDaysAttended,
                 ComparatorUtil.getDaysAttendedComparator()
         );
-        default -> throw new ParseException(SortCommand.MESSAGE_USAGE);
+        default -> throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         return new SortCommand(comparator);
