@@ -173,7 +173,7 @@ public class AddressBookParser {
         default:
             throw new ParseException(
                     MESSAGE_UNKNOWN_COMMAND + "\nYou are in searchmode.\nUse only search, exitsearch (es), "
-                            + "add-all or exit");
+                            + "add-all, exclude, checkexcluded, clearexcluded or exit");
         }
     }
 

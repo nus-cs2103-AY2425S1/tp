@@ -26,7 +26,7 @@ public class ExcludePersonCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes a person from the search results.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " i/ 1, 5";
+            + "Example: " + COMMAND_WORD + " pi/ 1, 5";
 
     public static final String MESSAGE_SUCCESS = "Person removed from search results";
 
