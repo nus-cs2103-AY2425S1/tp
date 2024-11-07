@@ -18,9 +18,8 @@ public class AddCommandParser implements Parser<AddCommand<?>> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand<?> parse(String args) throws ParseException {
-
         String entityString = args.trim().split(" ")[0];
-        String addArgs = args.replace(" " + entityString, "");
+        String addArgs = args.replace(entityString, "");
 
         String entity = ParserUtil.parseEntity(entityString);
 
