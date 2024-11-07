@@ -29,7 +29,10 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_SUCCESS = "The contacts from %s have been successfully imported";
-    public static final String MESSAGE_USAGE = "Usage: import [filename]";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Imports the contacts from the specified file located in the data folder \n"
+            + "Parameters: FILENAME (Must be a valid file name)\n"
+            + "Example: " + COMMAND_WORD + " contacts.csv";
     public static final String MESSAGE_FILE_DOES_NOT_EXIST = "The specified file does not exist";
     public static final String MESSAGE_INCORRECT_FILE_FORMAT = "The format of the specified file is incorrect";
     public static final String MESSAGE_ERROR_READING_FILE = "There was an error when reading the file";
@@ -179,3 +182,4 @@ public class ImportCommand extends Command {
         return filePath.equals(otherImportCommand.filePath);
     }
 }
+
