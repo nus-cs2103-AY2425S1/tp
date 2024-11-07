@@ -23,8 +23,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes an existing patient record from the system\n"
-            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+            + " usage: delete [NRIC]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
 
     public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
 

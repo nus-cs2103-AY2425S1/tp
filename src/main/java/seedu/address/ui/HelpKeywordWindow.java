@@ -118,9 +118,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO.\n\n"
                         + "SEX - M / F\nDATE OF BIRTH - YYYY-MM-DD");
         usageHeader.setText("Command Usage:");
-        usage.setText("add n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.]");
+        usage.setText("add n|[NAME] i|[NRIC] s|[SEX] d|[DATE OF BIRTH] p|[PHONE NO.]");
         exampleHeader.setText("Example:");
-        example.setText("add n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666");
+        example.setText("add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666");
     }
 
     /**
@@ -132,20 +132,20 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         description.setText("""
                 Compulsory parameters are: NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO.
                 Parameters can be typed in any order.
-                Multiple allergies can be added using multiple "al/" prefixes""");
+                Multiple allergies can be added using multiple "al|" prefixes""");
         parametersHeader.setText("Parameters:");
         parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO. | EMAIL | ADDRESS | BLOOD TYPE | "
                 + "NEXT-OF-KIN NAME | NEXT-OF-KIN PHONE NO. | ALLERGIES | HEALTH RISK LEVEL | EXISTING CONDITIONS | "
                 + "ADDITIONAL NOTE\n\n"
                 + "SEX - M / F\nDATE OF BIRTH - YYYY-MM-DD\nHEALTH RISK LEVEL - HIGH / MEDIUM / LOW");
         usageHeader.setText("Command Usage:");
-        usage.setText("addf n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.] e/[EMAIL] "
-                + "a/[ADDRESS] b/[BLOOD TYPE] nokn/[NEXT-OF-KIN NAME] nokp/[NEXT-OF-KIN PHONE NO.] "
-                + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] ec/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
+        usage.setText("addf n|[NAME] i|[NRIC] s|[SEX] d|[DATE OF BIRTH] p|[PHONE NO.] e|[EMAIL] "
+                + "a|[ADDRESS] b|[BLOOD TYPE] nokn|[NEXT-OF-KIN NAME] nokp|[NEXT-OF-KIN PHONE NO.] "
+                + "al|[ALLERGIES] rl|[HEALTH RISK LEVEL] ec|[EXISTING CONDITIONS] no|[ADDITIONAL NOTES]");
         exampleHeader.setText("Example:");
-        example.setText("addf n/Abraham Tan i/S9758366N s/M d/1997-10-27 p/87596666 e/abrahamtan@gmail.com "
-                + "a/Blk 123, NUS Road, S123123 b/A+ nokn/Lincoln Tan nokp/91234567 "
-                + "al/nuts al/shellfish rl/HIGH ec/Diabetes no/Patient needs extra care");
+        example.setText("addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666 e|abrahamtan@gmail.com "
+                + "a|Blk 123, NUS Road, S123123 b|A+ nokn|Lincoln Tan nokp|91234567 "
+                + "al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care");
     }
 
     /**
@@ -163,9 +163,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
                 + "APPOINTMENT DATE-TIME - YYYY-MM-DD HH:mm\n"
                 + "HEALTH SERVICE - Blood Test, Cancer Screening, Vaccination, Consult");
         usageHeader.setText("Command Usage:");
-        usage.setText("bookappt [NRIC] dt/[APPOINTMENT DATE-TIME] h/[HEALTH SERVICE]");
+        usage.setText("bookappt [NRIC] dt|[APPOINTMENT DATE-TIME] h|[HEALTH SERVICE]");
         exampleHeader.setText("Example:");
-        example.setText("bookappt S9758366N dt/2024-12-29 13:30 h/Vaccination");
+        example.setText("bookappt S9758366N dt|2024-12-29 13:30 h|Vaccination");
     }
 
     /**
@@ -195,9 +195,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         parameters.setText("NRIC | APPOINTMENT DATE-TIME\n\n"
                 + "APPOINTMENT DATE-TIME - YYYY-MM-DD HH:mm");
         usageHeader.setText("Command Usage:");
-        usage.setText("deleteappt [NRIC] dt/[APPOINTMENT DATE-TIME]");
+        usage.setText("deleteappt [NRIC] dt|[APPOINTMENT DATE-TIME]");
         exampleHeader.setText("Example:");
-        example.setText("deleteappt S9758366N dt/2024-12-29 13:30");
+        example.setText("deleteappt S9758366N dt|2024-12-29 13:30");
     }
 
     /**
@@ -226,9 +226,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
                 + "NRIC provided must be a valid NRIC currently in the system.\n"
                 + "Input must contain at least one parameter to be edited.\n"
                 + "Not all parameters are compulsory.\n"
-                + "Multiple allergies can be added using multiple \"al/\" prefixes. "
+                + "Multiple allergies can be added using multiple \"al|\" prefixes. "
                 + "Ensure allergies to be added are not current allergies of the patient.\n"
-                + "Multiple allergies can be removed using multiple \"rmal/\" prefixes. "
+                + "Multiple allergies can be removed using multiple \"rmal|\" prefixes. "
                 + "Ensure allergies to be removed are current allergies of the patient.");
         parametersHeader.setText("Parameters:");
         parameters.setText("NAME | NRIC | SEX | DATE OF BIRTH | PHONE NO. | EMAIL | ADDRESS | BLOOD TYPE | "
@@ -236,15 +236,15 @@ public class HelpKeywordWindow extends UiPart<Stage> {
                 + "HEALTH RISK LEVEL | EXISTING CONDITIONS | ADDITIONAL NOTE\n\n"
                 + "SEX - M / F\nDATE OF BIRTH - YYYY-MM-DD\nHEALTH RISK LEVEL - HIGH / MEDIUM / LOW");
         usageHeader.setText("Command Usage (all details are edited):");
-        usage.setText("edit [NRIC] n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] p/[PHONE NO.] e/[EMAIL] "
-                + "a/[ADDRESS] b/[BLOOD TYPE] nokn/[NEXT-OF-KIN NAME] nokp/[NEXT-OF-KIN PHONE NO.] "
-                + "al/[ALLERGIES TO BE ADDED ] rmal/[ALLERGIES TO BE REMOVED] rl/[HEALTH RISK LEVEL] "
-                + "ec/[EXISTING CONDITIONS] no/[ADDITIONAL NOTES]");
+        usage.setText("edit [NRIC] n|[NAME] i|[NRIC] s|[SEX] d|[DATE OF BIRTH] p|[PHONE NO.] e|[EMAIL] "
+                + "a|[ADDRESS] b|[BLOOD TYPE] nokn|[NEXT-OF-KIN NAME] nokp|[NEXT-OF-KIN PHONE NO.] "
+                + "al|[ALLERGIES TO BE ADDED ] rmal|[ALLERGIES TO BE REMOVED] rl|[HEALTH RISK LEVEL] "
+                + "ec|[EXISTING CONDITIONS] no|[ADDITIONAL NOTES]");
         exampleHeader.setText("Example (all details are edited):");
-        example.setText("edit S9758366N n/Keanu Reeves i/S9975483H s/M d/1997-11-30 p/86526969 "
-                + "e/keanureeves@gmail.com a/Blk 512 Ang Mo Kio Ave 2 b/O+ nokn/Mila Kunis nokp/84126990 "
-                + "al/nuts al/shellfish rmal/cake rmal/wheat rl/LOW ec/diabetes "
-                + "no/Patient has previous gunshot wound to chest");
+        example.setText("edit S9758366N n|Keanu Reeves i|S9975483H s|M d|1997-11-30 p|86526969 "
+                + "e|keanureeves@gmail.com a|Blk 512 Ang Mo Kio Ave 2 b|O+ nokn|Mila Kunis nokp|84126990 "
+                + "al|nuts al|shellfish rmal|cake rmal|wheat rl|LOW ec|diabetes "
+                + "no|Patient has previous gunshot wound to chest");
     }
 
     /**
@@ -277,9 +277,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
                 + "START DATE | END DATE - YYYY-MM-DD\n"
                 + "HEALTH SERVICE - Blood Test, Cancer Screening, Vaccination, Consult");
         usageHeader.setText("Command Usage (all parameters specified):");
-        usage.setText("filter sd/[START DATE] ed/[END DATE] h/[HEALTH SERVICE]");
+        usage.setText("filter sd|[START DATE] ed|[END DATE] h|[HEALTH SERVICE]");
         exampleHeader.setText("Example (all parameters specified):");
-        example.setText("filter sd/2024-12-29 ed/2024-12-30 h/Blood Test");
+        example.setText("filter sd|2024-12-29 ed|2024-12-30 h|Blood Test");
     }
 
     /**
@@ -367,7 +367,7 @@ public class HelpKeywordWindow extends UiPart<Stage> {
      */
     public static void closeAllWindows() {
         for (HelpKeywordWindow window : openHelpKeywordWindows.values()) {
-            window.getRoot().hide();
+            window.hide();
         }
         openHelpKeywordWindows.clear();
     }

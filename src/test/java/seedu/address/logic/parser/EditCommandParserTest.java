@@ -18,6 +18,7 @@ import static seedu.address.logic.commands.CommandTestUtil.HEALTHRISK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.HEALTHRISK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SEX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -51,7 +52,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
 import static seedu.address.logic.commands.EditCommand.MESSAGE_NRIC_EMPTY;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BLOODTYPE;
@@ -82,11 +82,10 @@ import seedu.address.testutil.EditPatientDescriptorBuilder;
 
 
 public class EditCommandParserTest {
-  
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-
     private static final String MESSAGE_EMPTY_NRIC = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NRIC_EMPTY);
+
+    private static final String MESSAGE_WRONG_NRIC_FORMAT =
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_CONSTRAINTS);
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -105,17 +104,17 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // Invalid NRIC with lowercase
-        assertParseFailure(parser, INVALID_NRIC_DESC + NAME_DESC_AMY, MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NRIC + NAME_DESC_AMY, MESSAGE_WRONG_NRIC_FORMAT);
 
         // Invalid NRIC with wrong number of characters
-        assertParseFailure(parser, "T012345R" + NAME_DESC_AMY, MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "T012345R" + NAME_DESC_AMY, MESSAGE_WRONG_NRIC_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, VALID_NRIC_AMY + " some random string" + NAME_DESC_AMY,
-                MESSAGE_CONSTRAINTS);
+                MESSAGE_WRONG_NRIC_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, VALID_NRIC_AMY + " pn/ string" + NAME_DESC_AMY, MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NRIC_AMY + " pn/ string" + NAME_DESC_AMY, MESSAGE_WRONG_NRIC_FORMAT);
     }
 
     @Test

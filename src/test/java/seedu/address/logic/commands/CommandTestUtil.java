@@ -170,6 +170,8 @@ public class CommandTestUtil {
     public static final String NOTE_DESC_JAKE = " " + PREFIX_NOTE + VALID_NOTE_JAKE;
     public static final String NOTE_DESC_KEANU = " " + PREFIX_NOTE + VALID_NOTE_KEANU;
 
+    // Invalid fields
+    public static final String INVALID_NRIC = "T0123456z";
 
     // Invalid fields with respective prefixes
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

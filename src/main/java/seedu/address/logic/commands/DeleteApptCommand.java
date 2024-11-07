@@ -25,8 +25,8 @@ public class DeleteApptCommand extends Command {
     public static final String COMMAND_WORD = "deleteappt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the specified appointment for the identified patient\n"
-            + "Input \"help " + COMMAND_WORD + "\" for description and usage of this command";
+            + " usage: deleteappt [NRIC] dt|[APPOINTMENT DATE-TIME]\n"
+            + "Input \"help " + COMMAND_WORD + "\" for detailed description and usage of this command";
 
     public static final String MESSAGE_DELETE_APPT_SUCCESS = "Deleted Appointment: %1$s\n"
             + "Input \"home\" to return to home page";
