@@ -307,9 +307,9 @@ Examples:
 * `listTxn` followed by `delete 2` deletes the 2nd person in the address book.
 * `filterTxn 1` followed by `delete 1` deletes the 1st transaction in the results of the `filterTxn` command.
 
-### Clearing all entries of AddressBook: `clear`
+### Clearing all entries of AddressBook and TransactionBook: `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book and transaction book.
 
 Format: `clear`
 
