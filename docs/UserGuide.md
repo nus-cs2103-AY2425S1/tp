@@ -50,7 +50,7 @@
 The callout boxes below are used in documentation to enhance readability and provide important contextual information.
 
 <box type="info" seamless>
-**Info Box:** Provides additional information or context that is relevant to the content.
+**Info Box:** Provides additional information or context.
 </box>
 
 <box type="tip" seamless>
