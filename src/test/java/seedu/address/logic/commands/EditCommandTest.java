@@ -176,19 +176,6 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        StudentId studentId = model.getFilteredPersonList().get(0).getStudentId();
-        EditCommand editCommand = new EditCommand(studentId, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
-
-        Model expectedModel = new ModelManager(new EduContacts(model.getEduContacts()), new UserPrefs(), editedPerson);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -229,6 +216,35 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_STUDENTID);
+    }
+
+    @Test
+    public void execute_personDisplayedEdited_success() throws CommandException {
+
+        Person personToDisplay = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setPersonToDisplay(personToDisplay);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withName("Edited Name")
+                .withPhone("98765432")
+                .withEmail("edited@example.com")
+                .build();
+
+        EditCommand editCommand = new EditCommand(personToDisplay.getStudentId(), descriptor);
+
+        Person editedPerson = new PersonBuilder(personToDisplay)
+                .withName("Edited Name")
+                .withPhone("98765432")
+                .withEmail("edited@example.com")
+                .build();
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
+
+        Model expectedModel = new ModelManager(model.getEduContacts(), new UserPrefs());
+        expectedModel.setPerson(personToDisplay, editedPerson);
+        expectedModel.setPersonToDisplay(editedPerson);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
