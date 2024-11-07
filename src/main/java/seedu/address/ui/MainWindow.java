@@ -218,6 +218,48 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows the full details of each {@code ConcertCard}.
+     */
+    public void handleShowFullPerson() {
+        personListPanel.showFullPerson();
+    }
+
+    /**
+     * Hides the full details of each {@code ConcertCard}.
+     */
+    public void handleHideFullPerson() {
+        personListPanel.hideFullPerson();
+    }
+
+    /**
+     * Shows the full details of each {@code ConcertCard}.
+     */
+    public void handleShowFullConcert() {
+        concertListPanel.showFullConcert();
+    }
+
+    /**
+     * Hides the full details of each {@code ConcertCard}.
+     */
+    public void handleHideFullConcert() {
+        concertListPanel.hideFullConcert();
+    }
+
+    /**
+     * Shows the full details of each {@code ConcertCard}.
+     */
+    public void handleShowFullConcertContact() {
+        concertContactListPanel.showFullConcertContact();
+    }
+
+    /**
+     * Hides the full details of each {@code ConcertCard}.
+     */
+    public void handleHideFullConcertContact() {
+        concertContactListPanel.hideFullConcertContact();
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -240,6 +282,30 @@ public class MainWindow extends UiPart<Stage> {
                 handleShowConcertContactView();
             } else {
                 handleHideConcertContactView();
+            }
+
+            if (commandResult.isShowFullPerson()) {
+                handleShowFullPerson();
+            }
+
+            if (commandResult.isHideFullPerson()) {
+                handleHideFullPerson();
+            }
+
+            if (commandResult.isShowFullConcert()) {
+                handleShowFullConcert();
+            }
+
+            if (commandResult.isHideFullConcert()) {
+                handleHideFullConcert();
+            }
+
+            if (commandResult.isShowFullConcertContact()) {
+                handleShowFullConcertContact();
+            }
+
+            if (commandResult.isHideFullConcertContact()) {
+                handleHideFullConcertContact();
             }
 
             return commandResult;

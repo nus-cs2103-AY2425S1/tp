@@ -22,7 +22,7 @@ public class AddConcertCommand extends Command {
             + ": Adds a concert to the address book. " + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_DATE + "DATE" + "\n"
+            + PREFIX_DATE + "DATE (format: YYYY-MM-DD hhmm)" + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Coachella "
             + PREFIX_ADDRESS + "81800 51st Ave, Indio, Southern California, United States "

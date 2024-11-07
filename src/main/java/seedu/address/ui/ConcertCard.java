@@ -22,6 +22,7 @@ public class ConcertCard extends UiPart<Region> {
      */
 
     public final Concert concert;
+    private boolean showFullDetails;
 
     @FXML
     private HBox cardPane;
@@ -37,12 +38,22 @@ public class ConcertCard extends UiPart<Region> {
     /**
      * Creates a {@code ConcertCard} with the given {@code Concert} and index to display.
      */
-    public ConcertCard(Concert concert, int displayedIndex) {
+    public ConcertCard(Concert concert, int displayedIndex, boolean showFullDetails) {
         super(FXML);
         this.concert = concert;
         id.setText(displayedIndex + ". ");
         name.setText(concert.getName().fullName);
         address.setText(concert.getAddress().value);
         date.setText(concert.getDate().concertDate);
+        this.showFullDetails = showFullDetails;
+
+        setLabelsToWrapText();
+    }
+
+    private void setLabelsToWrapText() {
+        id.setWrapText(showFullDetails);
+        name.setWrapText(showFullDetails);
+        address.setWrapText(showFullDetails);
+        date.setWrapText(showFullDetails);
     }
 }
