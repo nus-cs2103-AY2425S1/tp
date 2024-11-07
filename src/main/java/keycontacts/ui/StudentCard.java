@@ -1,7 +1,10 @@
 package keycontacts.ui;
 
+import static keycontacts.ui.CalendarView.CALENDAR_COLORS;
+
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -78,8 +81,11 @@ public class StudentCard extends UiPart<Region> {
         makeupLessons.setText(formatMakeupLessons(student));
 
         if (!student.getGroup().isNoGroup()) {
-            Label groupChip = new Label(student.getGroup().toString());
+            String name = student.getGroup().groupName;
+            String color = CALENDAR_COLORS.get(Math.abs(Objects.hash(name)) % CALENDAR_COLORS.size());
+            Label groupChip = new Label(name);
             groupChip.getStyleClass().add("group-chip");
+            groupChip.setStyle("-fx-background-color: " + color);
             groupChipHolder.getChildren().add(groupChip);
         }
     }
