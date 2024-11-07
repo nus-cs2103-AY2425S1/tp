@@ -1,16 +1,15 @@
-package tahub.contacts.logic.parser;
+package tahub.contacts.logic.parser.enrollment;
 
-import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
-import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TUTORIAL_ID;
-
-import java.util.stream.Stream;
-
-import tahub.contacts.logic.commands.UnenrollCommand;
+import tahub.contacts.logic.commands.enrollment.UnenrollCommand;
+import tahub.contacts.logic.parser.*;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.course.CourseCode;
 import tahub.contacts.model.person.MatriculationNumber;
+
+import java.util.stream.Stream;
+
+import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tahub.contacts.logic.parser.CliSyntax.*;
 
 
 /**
