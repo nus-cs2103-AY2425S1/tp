@@ -117,7 +117,11 @@ Format: `add n/NAME i/NRIC yg/YEARGROUP p/PHONE e/EMAIL a/ADDRESS s/SUBJECT [s/M
 
 #### Parameters Constraints:
 * `NAME` cannot be empty and should contain only alphabets and spaces. The maximum length is 255 characters including spaces.
-* Any leading or trailing whitespace in the name will be trimmed, so the spaces in the very front or back are not considered in the length.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Any leading or trailing whitespace in the name will be trimmed, so the spaces in the very front or back are not considered in the length.
+</div>
+
 * `PHONE_NUMBER` should be an 8-digit number.
 * `EMAIL` is compulsory and should follow the format username@domain.
 * `ADDRESS` is compulsory.
