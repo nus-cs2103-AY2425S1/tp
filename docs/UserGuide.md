@@ -113,10 +113,9 @@ the process of accessing and updating resident student details. What's more, Dor
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
+![help message](images/helpMessage.png)
 
 ### Adding a person: `add`
 
