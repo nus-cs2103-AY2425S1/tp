@@ -29,6 +29,7 @@ public class IcTest {
         assertFalse(Ic.isValidIc(" ")); // spaces only
         assertFalse(Ic.isValidIc("S91D")); // less than 7 numbers in between
         assertFalse(Ic.isValidIc("P1234567D")); // starts with an alphabet other than S,T,F,G,M
+        assertFalse(Ic.isValidIc("o1234567D")); // starts with a lower case alphabet other than S,T,F,G,M
         assertFalse(Ic.isValidIc("S12345671234493423B")); // more than 7 numbers in between
         assertFalse(Ic.isValidIc("S123456 7F")); // spaces within IC
         assertFalse(Ic.isValidIc("S 1234567F")); // spaces within IC
@@ -42,6 +43,9 @@ public class IcTest {
         assertTrue(Ic.isValidIc("G0123790P")); // start with G
         assertTrue(Ic.isValidIc("M0127890K")); // start with M
         assertTrue(Ic.isValidIc("G0000000K")); // same numbers in between
+        assertTrue(Ic.isValidIc("f7300609K")); // starts with lower case
+        assertTrue(Ic.isValidIc("M1625098k")); // ends with lower case
+        assertTrue(Ic.isValidIc("s5672367b")); // starts and ends with lower case
     }
 
     @Test
@@ -53,6 +57,11 @@ public class IcTest {
 
         // same object -> returns true
         assertTrue(ic.equals(ic));
+
+        // upper case and lower case of the same ic -> returns true
+        assertTrue(ic.equals(new Ic("m1234567x")));
+        assertTrue(ic.equals(new Ic("M1234567x")));
+        assertTrue(ic.equals(new Ic("m1234567X")));
 
         // null -> returns false
         assertFalse(ic.equals(null));
