@@ -97,7 +97,6 @@ public class Person {
         }
 
         return otherPerson != null
-                // && otherPerson.getName().equals(getName());
                 && otherPerson.getName().equals(getName())
                 && ((otherPerson.getPhone().isPresent()
                             && getPhone().isPresent() && otherPerson.getPhone().get().equals(getPhone().get()))
