@@ -87,7 +87,7 @@ public class DeleteMeetingCommandTest {
         MeetingTitle meetingTitle1 = new MeetingTitle(VALID_MEETING_TITLE_ADMIRALTY);
         MeetingTitle meetingTitle2 = new MeetingTitle("Other Meeting");
         MeetingDate meetingDate1 = new MeetingDate(VALID_MEETING_DATE_ADMIRALTY);
-        MeetingDate meetingDate2 = new MeetingDate("02-02-2024");
+        MeetingDate meetingDate2 = new MeetingDate("02-02-2025");
 
         DeleteMeetingCommand deleteFirstCommand = new DeleteMeetingCommand(meetingTitle1, meetingDate1);
         DeleteMeetingCommand deleteSecondCommand = new DeleteMeetingCommand(meetingTitle2, meetingDate2);

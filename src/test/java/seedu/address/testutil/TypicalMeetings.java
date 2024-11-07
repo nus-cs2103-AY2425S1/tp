@@ -18,7 +18,7 @@ public class TypicalMeetings {
 
     public static final Meeting MEETING_ADMIRALTY = new MeetingBuilder()
             .withMeetingTitle("Admiralty HDB Client Viewing")
-            .withMeetingDate("31-10-2030")
+            .withMeetingDate("01-01-2025")
             .withBuyer(VALID_PHONE_AMY)
             .withSeller(VALID_PHONE_BOB)
             .withType("CONDO")

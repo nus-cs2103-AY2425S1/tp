@@ -42,10 +42,10 @@ public class MeetingDateTest {
 
     @Test
     public void equals() {
-        MeetingDate meetingDate = new MeetingDate("01-01-2023");
+        MeetingDate meetingDate = new MeetingDate("01-01-2025");
 
         // same values -> returns true
-        assertTrue(meetingDate.equals(new MeetingDate("01-01-2023")));
+        assertTrue(meetingDate.equals(new MeetingDate("01-01-2025")));
 
         // same object -> returns true
         assertTrue(meetingDate.equals(meetingDate));
@@ -57,7 +57,7 @@ public class MeetingDateTest {
         assertFalse(meetingDate.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(meetingDate.equals(new MeetingDate("02-01-2023")));
+        assertFalse(meetingDate.equals(new MeetingDate("02-01-2025")));
     }
 }
 
