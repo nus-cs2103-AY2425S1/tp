@@ -19,10 +19,10 @@ public class ViewWeddingCommand extends Command {
     public static final String COMMAND_WORD = "view-wed";
     public static final String COMMAND_FUNCTION = COMMAND_WORD
             + ": Shows all persons involved in the weddings of the specified "
-            + "keywords (case-insensitive).\n";
+            + "keywords (case-insensitive).";
 
     public static final String MESSAGE_USAGE = COMMAND_FUNCTION
-            + "Parameters: NAME & NAME\n"
+            + "\nParameters: NAME & NAME\n"
             + "Example: " + COMMAND_WORD + " Jonus & Izzat";
     public static final String MESSAGE_WEDDING_DOESNT_EXIST = "This wedding cannot be found.\n"
             + "Please make sure that the wedding is created and is in the format 'NAME & NAME'.\n"
