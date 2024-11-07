@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.List;
@@ -49,12 +50,14 @@ public class DeletewCommand extends Command {
             Wedding weddingToDelete = getWeddingByIndex(model);
             model.deleteWedding(weddingToDelete);
             model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS); // Reset filter
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS, Messages.format(weddingToDelete)));
         } else {
             Wedding weddingToDelete = getWeddingByKeyword(model);
             if (weddingToDelete != null) {
                 model.deleteWedding(weddingToDelete);
                 model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS); // Reset filter
+                model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
                 return new CommandResult(String.format(MESSAGE_DELETE_WEDDING_SUCCESS,
                         Messages.format(weddingToDelete)));
             } else {
