@@ -21,6 +21,8 @@ class JsonSerializableStudentDirectory {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_CLASHING_LESSONS = "Students list contains clashing lesson(s).";
+    public static final String MESSAGE_INVALID_CANCELLED_LESSONS =
+            "Students list contains invalid cancelled lesson(s).";
     public static final String MESSAGE_GROUP_SYNC_ERROR =
             "Students list contains students in the same group with different lessons";
 
@@ -59,12 +61,16 @@ class JsonSerializableStudentDirectory {
             studentDirectory.addStudent(student);
         }
 
-        if (studentDirectory.hasClashingLessons()) {
-            throw new IllegalValueException(MESSAGE_CLASHING_LESSONS);
+        if (studentDirectory.hasInvalidCancelledLessons()) {
+            throw new IllegalValueException(MESSAGE_INVALID_CANCELLED_LESSONS);
         }
 
         if (studentDirectory.hasGroupSyncErrors()) {
             throw new IllegalValueException(MESSAGE_GROUP_SYNC_ERROR);
+        }
+
+        if (studentDirectory.hasClashingLessons()) {
+            throw new IllegalValueException(MESSAGE_CLASHING_LESSONS);
         }
 
         return studentDirectory;

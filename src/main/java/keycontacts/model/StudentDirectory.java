@@ -192,6 +192,19 @@ public class StudentDirectory implements ReadOnlyStudentDirectory {
     }
 
     /**
+     * Returns true if there are no invalid cancelled lessons.
+     */
+    public boolean hasInvalidCancelledLessons() {
+        ObservableList<Student> students = this.getStudentList();
+        return students.stream()
+                .flatMap(student -> student.getCancelledLessons().stream() // converts each student into boolean stream
+                        .map(lesson -> lesson.getLessonDate().convertToDay()) // converts cl to cl lesson day
+                        .map(day -> day.equals(student.getRegularLessonOptional() // returns true if cl day matches rl
+                                .map(RegularLesson::getLessonDay).orElse(null))))
+                .reduce(true, (a, b) -> a && b);
+    }
+
+    /**
      * Helper function to check if the student has a {@code CancelledLesson} on the day of the {@code MakeupLesson}
      * to see if it should ignore the student's {@code RegularLesson}.
      */
