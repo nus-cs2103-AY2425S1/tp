@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.client.Client;
 import seedu.address.model.status.Status;
 
@@ -128,7 +129,7 @@ public class ClientDetailPanel extends UiPart<Region> {
             setLabelText(incomeLabel, String.valueOf(client.getIncome()));
             setTier(client.getTier().getValue());
             setStatus(client.getStatus());
-            setLabelText(remarkLabel, client.getRemark().value);
+            setRemarkText(client.getRemark().value);
             tagsGroup.getChildren().clear();
             setTier(client.getTier().getValue());
             setStatus(client.getStatus());
@@ -148,6 +149,15 @@ public class ClientDetailPanel extends UiPart<Region> {
     private void setLabelText(Label label, String text) {
         if (label != null) {
             label.setText(text);
+        }
+    }
+
+    private void setRemarkText(String remarkText){
+        Label remarkLabel = new Label(remarkText);
+        if (remarkText.equalsIgnoreCase(CommandCommons.DEFAULT_REMARK)) {
+            setLabelText(remarkLabel, "");
+        } else {
+            setLabelText(remarkLabel, remarkText);
         }
     }
 
