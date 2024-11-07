@@ -37,12 +37,6 @@ public class CreateTaskCommand extends Command {
             + PREFIX_TASK + "Secure venue d/2024-10-31 "
             + PREFIX_TASK + "Inform groom of itinerary";
 
-<<<<<<< HEAD
-    public static final String MESSAGE_SUCCESS = "New task(s) added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the Wedlinker system.";
-
-=======
->>>>>>> master
     private final HashSet<Task> tasksToAdd;
 
     /**
