@@ -25,8 +25,10 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
 1. Type the command in the command box.
 
-   - Note that the command entered will be coloured red until it a valid command is entered.<br>
+   - Note that invalid commands will be coloured in red.
        ![incomplete command](images/incompleteCommand.png)
+   - Valid command words would briefly show in colour grey to indicate the command word is correct.
+       ![valid_command](images/validCommand.png)
    - Once the completed, valid command is entered, the command will return to colour black.<br>
        ![complete command](images/completedCommand.png)
    - Press Enter to execute command. e.g. typing **`help`** and pressing Enter
@@ -255,8 +257,8 @@ CareConnect provides command autocompletion when pressing the Tab key. For examp
 ### Syntax Highlighting
 CareConnect provides visual feedback to help users recognize and correct commands by highlighting text in different colors.
 
-* Gray: Indicates a valid command word.
 * Black: Indicates a fully valid command.
+* Gray: Indicates a valid command word pending arguments.
 * Red: Indicates an invalid command.
 
 This color-coded feedback helps users ensure their commands are correct and minimizes errors in usage.
