@@ -638,7 +638,6 @@ Priorities:
 =======
 
 <panel header="#### Use Case: Explore App with Sample Student Data" expanded>
->>>>>>> 891c7d84d1563eaa7eb78100dd524da03f496d15
 
 **Main Success Scenario (MSS):**
 
