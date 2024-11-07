@@ -248,7 +248,7 @@ Format: `findSubject SUBJECT [MORE_SUBJECTS]`
 * The order of the keywords does not matter. e.g., `math science` will match `science math`
 * Only the subject field is searched.
 * Only full words will be matched e.g., `mat` will not match `math`
-* Persons matching at least one keyword will be returned (i.e., `OR` search).  
+* Persons matching at least one keyword will be returned (i.e., `OR` search).
   e.g., `math science` will return persons with subjects `Math`, `Science`, `Math and Science`
 
 Examples:
@@ -350,7 +350,7 @@ Format: `clear`
 
 ### Importing people from CSV files : `import`
 
-Allows users to import data from a CSV file and add multiple persons at once to the address book. 
+Allows users to import data from a CSV file and add multiple persons at once to the address book.
 If any rows fail the validation check or contain duplicates, they are skipped, and detailed feedback is provided to the user.
 
 Format: `import \f FILEPATH`
@@ -365,12 +365,13 @@ Format: `import \f FILEPATH`
 * There should be no empty rows in your CSV file.
 
 * For optional fields like hours and subject, leave a blank.<br>
- For example, the following row leaves hours and subject blank: John, 91234567, john@gmail.com, “1 Jurong, 123456”, , Tutor,
+  For example, the following row leaves hours and subject blank: John, 91234567, john@gmail.com, “1 Jurong, 123456”, , Tutor,
 
 * For any field that requires a comma, surround it in quotes like this: "1 Jurong, 123456".
 
 * For more than one subject, separate it with a semicolon like this: English; Science.
 </box>
+
 
 Example:
 *  `import \f ~/data/new_persons.csv` imports a list of people in new_persons.csv located in ~/data/ into VolunTier.

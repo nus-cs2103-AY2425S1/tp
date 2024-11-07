@@ -37,6 +37,7 @@ public class CsvImport {
     private final String importFilePath;
     private final ArrayList<Integer> duplicates;
     private final Map<Integer, String> failedRows;
+    private final ArrayList<Integer> emptyRows;
 
     /**
      * Constructs a CsvImport instance with the specified file path.
@@ -47,6 +48,7 @@ public class CsvImport {
         this.importFilePath = importFilePath;
         this.duplicates = new ArrayList<>();
         this.failedRows = new HashMap<>();
+        this.emptyRows = new ArrayList<>();
     }
 
     /**
@@ -71,7 +73,11 @@ public class CsvImport {
         if (!validateHeaders(headerReader)) {
             throw new ImproperFormatException(INCORRECT_HEADERS);
         } else if (!validateCsv(rowReader)) {
-            throw new ImproperFormatException(String.format(INCORRECT_ROWS, HEADER_COUNT, duplicates));
+            if (!emptyRows.isEmpty()) {
+                throw new ImproperFormatException("Some rows are empty. The rows that failed are: " + emptyRows);
+            } else {
+                throw new ImproperFormatException(String.format(INCORRECT_ROWS, HEADER_COUNT, duplicates));
+            }
         }
 
         MappingStrategy<JsonAdaptedPerson> map = createMappingStrategy();
@@ -84,13 +90,7 @@ public class CsvImport {
         int success = 0;
         for (JsonAdaptedPerson p : personList) {
             try {
-                if (model.hasPerson(p.toModelType())) {
-                    duplicates.add(personList.indexOf(p) + 1);
-                } else {
-                    p.setId(Person.getNextIndex());
-                    model.addPerson(p.toModelType());
-                    success++;
-                }
+                success += addPerson(p, personList.indexOf(p), model);
             } catch (IllegalValueException e) {
                 failedRows.put(personList.indexOf(p) + 1, e.getMessage());
             }
@@ -112,6 +112,25 @@ public class CsvImport {
 
     public boolean hasFailed() {
         return !failedRows.isEmpty();
+    }
+
+    /**
+     * Adds a person to the model if it is not a duplicate.
+     *
+     * @param person The person to be added.
+     * @param index The index of the person in the CSV file.
+     * @param model The model to which the person will be added.
+     * @return 1 if the person was successfully added, 0 if the person is a duplicate.
+     */
+    public int addPerson(JsonAdaptedPerson person, int index, Model model) throws IllegalValueException {
+        if (model.hasPerson(person.toModelType())) {
+            duplicates.add(index + 1);
+            return 0;
+        } else {
+            person.setId(Person.getNextIndex());
+            model.addPerson(person.toModelType());
+            return 1;
+        }
     }
 
     private boolean validateHeaders(FileReader reader) {
@@ -160,7 +179,9 @@ public class CsvImport {
             int lineCount = 1;
             String[] row = csvReader.readNext();
             while (row != null) {
-                if (row.length != HEADER_COUNT) {
+                if (Arrays.stream(row).allMatch(String::isBlank)) {
+                    emptyRows.add(lineCount);
+                } else if (row.length != HEADER_COUNT) {
                     duplicates.add(lineCount);
                 }
                 lineCount++;
@@ -169,7 +190,7 @@ public class CsvImport {
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
-        return duplicates.isEmpty();
+        return duplicates.isEmpty() && emptyRows.isEmpty();
     }
 
     private MappingStrategy<JsonAdaptedPerson> createMappingStrategy() {
