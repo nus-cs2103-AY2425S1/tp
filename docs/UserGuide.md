@@ -197,7 +197,7 @@ Finds Udders by specified keywords for each field.
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
 
 <box type="warning">
-**IMPORTANT:** This command will follow the indexing shown on the Udders list.
+**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
 </box>
 
 **Examples:**
