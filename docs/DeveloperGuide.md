@@ -535,7 +535,7 @@ _Similar to UC10 except without extension 2b._
 
 **MSS**
 
-1.  Actor performs a command that updates the addressbook.
+1.  Actor performs a command that updates the System.
 2.  System executes the command.
 3.  Actor requests to undo the recently executed command.
 4.  System reverts changes made by the actor.
@@ -554,7 +554,7 @@ _Similar to UC10 except without extension 2b._
 
 **MSS**
 
-1.  Actor performs a command that updates the addressbook.
+1.  Actor performs a command that updates the System.
 2.  System executes the command.
 3.  Actor requests to undo the recently executed command.
 4.  System reverts changes made by the actor.
