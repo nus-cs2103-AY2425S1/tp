@@ -26,6 +26,7 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GitHubCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
@@ -63,6 +64,7 @@ public class HelpWindow extends UiPart<Stage> {
         new CommandDetailCard(SortCommand.COMMAND_WORD, SortCommand.MESSAGE_USAGE),
         new CommandDetailCard(ViewCommand.COMMAND_WORD, ViewCommand.MESSAGE_USAGE),
         new CommandDetailCard(ExitCommand.COMMAND_WORD, ExitCommand.MESSAGE_USAGE),
+        new CommandDetailCard(HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE),
     };
 
     private final ObservableList<CommandDetailCard> commandList = FXCollections.observableArrayList();

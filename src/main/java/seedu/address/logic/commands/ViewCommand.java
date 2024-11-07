@@ -19,8 +19,8 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD_SHORT_FORM = "v";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM
-            + ": Views details of a contact.\n"
+    public static final String MESSAGE_USAGE = "Views details of a contact.\n"
+            + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
             + "Parameters: "
             + PREFIX_NAME
             + "NAME\n"
@@ -31,7 +31,7 @@ public class ViewCommand extends Command {
             + "Example: "
             + COMMAND_WORD_SHORT_FORM
             + " "
-            + PREFIX_NAME + "John Doe";
+            + PREFIX_NAME.getShortPrefix() + "John Doe";
 
     public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact";
     public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact";
