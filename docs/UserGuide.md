@@ -172,7 +172,7 @@ addPastry NAME COST INGREDIENT [MORE_INGREDIENTS...]
 ```bash
 addPastry Croissant 3.50 Flour Cream Sugar
 ```
-<img width="1184" alt="Screenshot 2024-10-24 at 5 48 02 PM" src="https://github.com/user-attachments/assets/f9272303-8ce3-442b-83d9-fbe6536a607e">
+![Add Pastry.png](images%2FAdd%20Pastry.png)
 
 The Add Pastry Command allows bakery owners to add a new pastry item to their pastry catalogue, specifying the name,
 cost and ingredients for each pastry. This command accepts the pastry's name, a numeric value for how much the
@@ -201,7 +201,7 @@ addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TA
 ```bash
 addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate
 ```
-<img width="1503" alt="Screenshot 2024-10-24 at 6 53 16 PM" src="https://github.com/user-attachments/assets/76d7e905-4556-419f-8390-5b3e809db145">
+![Add Supplier.png](images%2FAdd%20Supplier.png)
 
 The Add Supplier Command allows bakery owners to add a new supplier to the address book records. The supplier is specified
 with all relevant contact details and ingredients supplied to the bakery. This command accepts the supplier's name,
@@ -226,9 +226,9 @@ addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs...]
 
 **Example:**
 ```bash
-addSupplyOrder p/98765432 r/Delivery at 6pm o/1 2 3 n/John Doe
+addSupplyOrder n/John Doe p/98765432 o/1 2 3
 ```
-<img width="1194" alt="Screenshot 2024-10-24 at 5 51 43 PM" src="https://github.com/user-attachments/assets/59de6ead-e460-419a-807f-30fa5f17b39a">
+![Add Supply Order.png](images%2FAdd%20Supply%20Order.png)
 
 The Add Supply Order Command enables bakery owners to add a new order from a supplier by specifying the supplier's name,
 phone number, and a list of product IDs from the ingredient catalogue, identifying which items are included in the order.
@@ -251,7 +251,7 @@ checkIngredientStock INGREDIENT
 ```bash
 checkIngredientStock Flour
 ```
-<img width="1195" alt="Screenshot 2024-10-24 at 6 13 59 PM" src="https://github.com/user-attachments/assets/a0f1c909-fb2e-44ed-82dc-24b87f1eb432">
+![Check Ingredient Stock.png](images%2FCheck%20Ingredient%20Stock.png)
 
 The Check Ingredient Stock Command allows bakery owners to verify the current stock level of a specified ingredient in
 their inventory. This command requires the ingredient's name and will display the available quantity for that ingredient
@@ -274,7 +274,7 @@ checkPastryStock PASTRY
 ```bash
 checkPastryStock Croissant
 ```
-![Pastry Stock.png](images%2FPastry%20Stock.png)
+![Check Pastry Stock.png](images%2FCheck%20Pastry%20Stock.png)
 
 The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
 This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
