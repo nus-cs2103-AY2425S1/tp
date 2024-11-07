@@ -29,38 +29,40 @@ student contact details!
 
 ## Table of Contents
 
-- [Quick Start :rocket:](#quick-start-rocket)
-- [Features :computer:](#features-computer)
+- [Quick Start :rocket:](#QUICK-START)
+- [Features :computer:](#FEATURES)
   - [MAIN Commands](#main-commands)
-    - Viewing help : [`help`](#help)
-    - Listing all students : [`list`](#list)
-    - Clearing all entries : [`clear`](#clear)
-    - Exiting the program : [`exit`](#exit)
+    - [Viewing help : `help`](#help)
+    - [Listing all students : `list`](#list)
+    - [Clearing all entries : `clear`](#clear)
+    - [Exiting the program : `exit`](#exit)
   - [STUDENT](#student-commands)
-    - Adding a student : [`person-add`](#person-add)
-    - Editing a student : [`person-edit`](#person-edit)
-    - Finding a student: [`person-find`](#person-find)
-    - Deleting a student : [`person-delete`](#person-delete)
+    - [Adding a student : `person-add`](#person-add)
+    - [Editing a student : `person-edit`](#person-edit)
+    - [Finding a student: `person-find`](#person-find)
+    - [Deleting a student : `person-delete`](#person-delete)
   - [COURSE](#course-commands)
-    - Adding a course: [`course-add`](#course-add)
-    - Editing a course: [`course-edit`](#course-edit)
-    - Deleting a course : [`course-delete`](#course-edit)
-    - Enrolling a student : [`enroll`](#enroll)
-    - Unenrolling a student : [`unenroll`](#unenroll)
+    - [Adding a course: `course-add`](#course-add)
+    - [Editing a course: `course-edit`](#course-edit)
+    - [Deleting a course : `course-delete`](#course-edit)
+    - [Enrolling a student : `enroll`](#enroll)
+    - [Unenrolling a student : `unenroll`](#unenroll)
   - [ATTENDANCE](#attendance-commands)
-    - Marking attendance : [`attend-present`](#attend-present)
-    - Marking absence : [`attend-absent`](#attend-absent)
-    - Clear attendance : [`attend-clear`](#attend-clear)
+    - [Marking attendance : `attend-present`](#attend-present)
+    - [Marking absence : `attend-absent`](#attend-absent)
+    - [Clear attendance : `attend-clear`](#attend-clear)
   - [DATA](#data)
-    - [Saving the data](#saving-the-data-floppy_disk)
-    - [Editing data file](#editing-the-data-file-hammer_and_wrench)
-- [FAQ :grey_question:](#faq-grey_question)
-- [Known Issues :bug:](#known-issues-bug)
-- [Command Summary :ledger:](#command-summary-ledger)
+    - [Saving the data](#saving-the-data)
+    - [Editing data file](#editing-the-data-file)
+- [FAQ :grey_question:](#FAQ)
+- [Known Issues :bug:](#KNOWN-ISSUES)
+- [Command Summary :ledger:](#CMD-SUMMARY)
 
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
+
+<a name="QUICK-START">
 
 ## Quick start :rocket:
 
@@ -95,9 +97,13 @@ student contact details!
    Alternatively check the [Command Summary](#command-summary-ledger) for a quick
    list of the available commands. Have fun!
 
+</a>
+
 --------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
+
+<a name="FEATURES">
 
 ## Features :computer:
 
@@ -128,7 +134,7 @@ student contact details!
   line-breaks may be omitted when copied over to the application.
 </box>
 
-### Data Formats :fa-solid-warning:
+### Data Formats
 
 <!-- markdownlint-disable MD013 -->
 
@@ -197,6 +203,8 @@ The main commands for TAHub Contacts.
   </panel>
 </a>
 
+<div style="page-break-after: always;"></div>
+
 <a name="exit">
   <panel header="#### Exiting the program : `exit`" expanded no-close no-switch>
 
@@ -219,7 +227,7 @@ The main commands for TAHub Contacts.
 
 ### Student Commands
 
-Reminder: follow the [data formats](#data-formats-fa-solid-warning)!
+Reminder: follow the [data formats](#data-formats)!
 </box>
 
 <a name="person-add">
@@ -328,7 +336,7 @@ Format: **`person-delete m/MATRICULATION_NUMBER​​`**
 
 <box type="warning">
 
-Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [data format](#data-formats-fa-solid-warning)!
+Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [data format](#data-formats)!
 </box>
 
 <a name="course-add">
@@ -358,7 +366,7 @@ Format: **`course-edit c/COURSE_CODE n/COURSE_NAME`**
 </md></box>
 
 - `COURSE_CODE` must be an existing course code.
-- `COURSE_NAME` is the new course name and must only contain alphanumeric characters or spaces **and** follow the `COURSE_NAME` [format](#data-formats-fa-solid-warning).
+- `COURSE_NAME` is the new course name and must only contain alphanumeric characters or spaces **and** follow the `COURSE_NAME` [format](#data-formats).
 - Note that it is **not possible** to **edit** the course code. If you want to do so, create a **new course** with the different code.
 
 | **Examples** |
@@ -447,7 +455,7 @@ attendance for for each consecutive session.
 <box typ="warning">
 
 Reminder: where used, course **code** and **name**, and tutorial **code** must exist
-and follow the [data format](#data-formats-fa-solid-warning)!
+and follow the [data format](#data-formats)!
 
 The particular student **must** also be enrolled in that course and corresponding tutorial.
 </box>
@@ -500,6 +508,8 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
 </panel>
 </a>
 
+<div style="page-break-after: always;"></div>
+
 <a name="attend-clear">
 <panel header="#### Marking attendance : `attend-clear`" expanded no-close no-switch>
 
@@ -526,7 +536,7 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE t/TUTORIAL_ID`**
 
 ### Data
 
-#### Saving the data :floppy_disk:
+#### Saving the data
 
 Ever experience the sinking feeling of being petrified when you *forgot* to `Ctrl/Cmd-S` something important?
 
@@ -540,7 +550,7 @@ the data**. You don’t need to save manually!
 *This already makes us umambiguously superior to Microsoft Office (when saving locally).*
 </box>
 
-#### Editing the data file :hammer_and_wrench:
+#### Editing the data file
 
 Data are saved automatically in the [JSON](https://www.json.org/json-en.html)
 files `[JAR file location]/data/addressbook.json`, storing the list of persons
@@ -572,7 +582,11 @@ You have been duly warned.
 
 :fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
 
+</a>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<a name="FAQ">
 
 ## FAQ :grey_question:
 
@@ -586,7 +600,11 @@ revert the change?<br>
 **A**: Unfortunately, we have not implemented an undo command for TAHub contacts.
 :pensive:
 
+</a>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<a name="KNOWN-ISSUES">
 
 ## Known issues :bug:
 
@@ -599,7 +617,11 @@ revert the change?<br>
    Window will remain minimized, and no new Help Window will appear. The
    remedy is to manually restore the minimized Help Window.
 
+</a>
+
 --------------------------------------------------------------------------------------------------------------------
+
+<a name="CMD-SUMMARY">
 
 ## Command summary :ledger:
 
@@ -630,3 +652,5 @@ revert the change?<br>
 <br>
 
 :fa-solid-arrow-up: Back to [Table of Contents](#table-of-contents)
+
+</a>
