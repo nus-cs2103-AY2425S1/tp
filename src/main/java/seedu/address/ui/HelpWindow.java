@@ -17,8 +17,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteAppointmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteSchemeCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditAppointmentCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GetCommand;
@@ -90,7 +90,7 @@ public class HelpWindow extends UiPart<Stage> {
         FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEME_COMMAND, SCHEME_VIEW_COMMAND,
         SCHEME_ADD_COMMAND, SCHEME_DELETE_COMMAND, LIST_APPOINTMENT_COMMAND, ADD_APPOINTMENT_COMMAND,
         DELETE_APPOINTMENT_COMMAND, EDIT_APPOINTMENT_COMMAND, ARCHIVE_COMMAND, UNARCHIVE_COMMAND,
-        UNDO_COMMAND,SORT_COMMAND, EXIT_COMMAND, HELP_COMMAND};
+        UNDO_COMMAND, SORT_COMMAND, EXIT_COMMAND, HELP_COMMAND};
 
     @FXML
     private Button copyButton;
