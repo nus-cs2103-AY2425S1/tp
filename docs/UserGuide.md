@@ -35,7 +35,7 @@ VolunSync is a volunteer-focused Human Resource Management System (HRMS) tailore
 ## Quick start
 
 
-1. **Check for Java Installation** 
+1. **Check for Java Installation**
    Ensure you have Java **17** or above installed on your computer:
    - Open a terminal or command prompt and run the following command:
      - On Windows: Press `Windows + R`, type `cmd`, and hit Enter.
