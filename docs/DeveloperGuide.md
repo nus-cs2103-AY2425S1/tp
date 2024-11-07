@@ -9,6 +9,8 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
+{{ newPage }}
+
 ---
 
 ## **Acknowledgements**
@@ -16,6 +18,7 @@
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 * We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
 * ChatGPT was used to check for errors and generate some test cases.
+* We referred to our TA's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide
 
 ---
 
@@ -24,6 +27,8 @@
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ---
+
+{{ newPageBetween }}
 
 ## **Design**
 
@@ -52,6 +57,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+{{ newPage }}
+
 **How the architecture components interact with each other**
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete n/John`.
@@ -63,11 +70,15 @@ Each of the four main components (also shown in the diagram above),
 - defines its _API_ in an `interface` with the same name as the Component.
 - implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+{{ newPage }}
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+{{ newPage }}
 
 ### UI component
 
@@ -86,6 +97,8 @@ The `UI` component,
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+{{ newPage }}
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -94,14 +107,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
+{{ newPage }}
+
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/John")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
 
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+{{ newPage }}
 
 How the `Logic` component works:
 
@@ -111,14 +129,18 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
+
 
 How the parsing works:
 
 - When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+{{ newPage }}
 
 ### Model component
 
@@ -141,6 +163,8 @@ The `Model` component,
 
 </box>
 
+{{ newPage }}
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -153,17 +177,21 @@ The `Storage` component,
 - inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
 
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
 ---
+
+{{ newPage }}
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -188,6 +216,8 @@ This section describes some noteworthy details on how certain features are imple
 - is reasonably comfortable using CLI apps
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+{{ newPage }}
 
 ### User stories
 
@@ -225,6 +255,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | new user         | use a help function to check what this app offers                      | I can easily have the details of the commands to use in my fingertips.                                               |
 | `*`      | CS2030S TA       | create automatic flags to indicate if a student's work is marked       | I can monitor grading deadlines so that I can stay on top of my responsibilities without missing any critical dates. |
 
+{{ newPage }}
+
 ### Use cases
 
 (For all use cases below, the **System** is the `KonTActs` and the **Actor** is the `user`, unless specified otherwise)
@@ -252,6 +284,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
+{{ newPage }}
+
 **Use case: UC02 - Delete contacts**
 
 **Precondition**
@@ -276,6 +310,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 2.
 
 <br>
+
+{{ newPage }}
 
 **Use case: UC03 - Add grades of students**
 
@@ -304,6 +340,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 4.
 
     <br>
+
+{{ newPage }}
 
 **Use case: UC04 - View Contact**
 
@@ -355,6 +393,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
+{{ newPage }}
+
 **Use case: UC06 - Filter Contact List**
 
 **MSS**
@@ -380,6 +420,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - \*a1. KonTActs stops the filter operation and returns to the unfiltered contact list by using list
 
 <br>
+
+{{ newPage }}
 
 **Use case: UC07 - Create shortcut for commands**
 
@@ -420,6 +462,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     <br>
 
+{{ newPage }}
+
 **Use case: UC08 - Sort students based on proficiency**
 
 **Precondition**
@@ -456,6 +500,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 3.
 
     <br>
+
+{{ newPage }}
 
 **Use case: UC10 - Request for help**
 
@@ -503,6 +549,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     <br>
 
+{{ newPage }}
+
 **Use case: UC12 - View last modification date of contact details**
 
 **MSS**
@@ -523,6 +571,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 2.
 
     <br>
+
+{{ newPage }}
 
 **Use case: UC13 - Import contacts**
 
@@ -564,6 +614,8 @@ Actor: TA
 
    Use case ends.
 
+{{ newPage }}
+
 ### Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 17 or above installed.
@@ -580,6 +632,8 @@ Actor: TA
 12. Error messages should be descriptive, providing users with clear guidance on how to resolve the issue.
 13. Searching for or filtering contacts should take less than 5 seconds.
 14. Stored contacts are persisted between sessions.
+
+{{ newPage }}
 
 ### Glossary
 
@@ -598,6 +652,8 @@ Actor: TA
 * **Proper documentation**: A detailed user and developer guide which helps future users and developers to understand and use the code.
 
 * **Typical usage**: Normal or expected usage patterns of the application, such as the frequency of adding, deleting, or viewing contacts during everyday use.
+
+{{ newPage }}
 
 ---
 
