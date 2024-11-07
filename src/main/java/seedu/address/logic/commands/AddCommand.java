@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_DATE;
@@ -23,16 +26,23 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_NAME + "NAME\n "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS]\n "
             + "[" + PREFIX_SCHEDULE_NAME + "SCHEDULE_NAME] "
             + "[" + PREFIX_SCHEDULE_DATE + "SCHEDULE_DATE] "
-            + "[" + PREFIX_SCHEDULE_TIME + "SCHEDULE_TIME] "
+            + "[" + PREFIX_SCHEDULE_TIME + "SCHEDULE_TIME]\n "
+            + "[" + PREFIX_CS + "SOCIAL_MEDIA_HANDLE] "
+            + "[" + PREFIX_FB + "SOCIAL_MEDIA_HANDLE] "
+            + "[" + PREFIX_IG + "SOCIAL_MEDIA_HANDLE]\n "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "NOTE: At least ONE of " + PREFIX_PHONE + ", " + PREFIX_EMAIL + ", " + PREFIX_ADDRESS + ", "
+            + PREFIX_CS + ", " + PREFIX_FB + ", " + PREFIX_IG + "must be provided.\n"
+            + "If multiple social media accounts are provided, "
+            + "the first valid account will be taken in the order of CS, FB, IG.\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "

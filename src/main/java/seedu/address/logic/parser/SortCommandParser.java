@@ -24,7 +24,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SCHEDULE);
-        if (!onePrefixPresent(argMultimap)) {
+        if (!onePrefixPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

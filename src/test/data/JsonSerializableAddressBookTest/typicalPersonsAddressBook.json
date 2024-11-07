@@ -5,7 +5,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ],
+    "tags" : [ "friend" ],
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
     "time" : "16:00",
@@ -15,7 +15,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ],
+    "tags" : [ "owesMoney", "friend" ],
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
     "time" : "",
@@ -35,16 +35,15 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tags" : [ "friends" ],
+    "tags" : [ "family" ],
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
     "time" : "10:00",
-    "tags" : [ "friends" ],
     "socialmedia" : "[cs-danielm]"
 
   }, {
     "name" : "Elle Meyer",
-    "phone" : "9482224",
+    "phone" : "94828224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tags" : [ ],
@@ -54,7 +53,7 @@
     "socialmedia" : " "
   }, {
     "name" : "Fiona Kunz",
-    "phone" : "9482427",
+    "phone" : "94820427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tags" : [ ],
@@ -64,7 +63,7 @@
     "socialmedia" : " "
   }, {
     "name" : "George Best",
-    "phone" : "9482442",
+    "phone" : "94829442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "tags" : [ ],

@@ -95,14 +95,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("schedule 1 sd/2024-10-24")` API call as an example.
-
-![Interactions Inside the Logic Component for the `schedule 1 sd/2024-10-24` Command](images/ScheduleSequenceDiagram.png)
-
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -119,11 +111,35 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Here are more examples of how our commands work:
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("socialMedia 1 ig/username")` API call as an example.
+
+![Interactions Inside the Logic Component for the `socialMedia 1 ig/username` Command](images/SocialMediaSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SocialMediaCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("schedule 1 sd/2024-10-24")` API call as an example.
+
+![Interactions Inside the Logic Component for the `schedule 1 sd/2024-10-24` Command](images/ScheduleSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sort n/asc"")` API call as an example.
+![Interactions Inside the Logic Component for the `sort n/asc` Command](images/SortSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `SortCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</div>
+
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
+<img src="images/BackupSequenceDiagram.png" width="450" />
 
 The `Model` component,
 
@@ -308,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `   | familiar user | quickly retrieve my previous command                                        | not need to retype similar complex commands                                 |
 | `* * `   | familiar user | link my contacts' social media accounts                                     | access their social media easily, especially if relevant to our deal        |
 | `* *`    | familiar user | have a shortcut to user addresses                                           | easily determine where to send products to                                  |
-| `* * `   | familiar user | undo deletions                                                              | restore contacts incase of accidental deletion                              |
+| `* * `   | familiar user | undo deletions                                                              | restore contacts in case of accidental deletion                             |
 | `* *`    | familiar user | rename tags                                                                 | change the group of names when my business needs change                     |
 | `* * `   | familiar user | create temporary groups                                                     | group contacts based on projects, rather than just their affiliations       |
 | `*`      | familiar user | colour code my contacts by their categories                                 | easily spot them                                                            |
@@ -316,9 +332,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | expert user   | add nicknames / aliases to contacts                                         | find them not just by their name, but what i remember them by               |
 | `* `     | expert user   | add reminders                                                               | be reminded to follow up with specific contacts                             |
 | `* `     | expert user   | create shortcut commands to add specific types of contacts                  | add people of similar profiles faster                                       |
+
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `BlitzBiz` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Delete a contact**
 
@@ -339,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. BlitzBiz shows an error message.
 
       Use case resumes at step 2.
 
@@ -413,13 +430,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **API**: An application programming interface (API) is a way for computer programs to interact with one another by providing services
 * **CLI**: The command line interface (CLI) is a text-based interface that interacts with the computer's operating system
-* **Customer**: A contact that obtains the services of the user's business
 * **GUI**: The graphical user interface (GUI) is an interface users interact with that provides visuals, potentially with some point-and-click functionalities
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Partner**: A contact that provides mainly services for the user's business
 * **Point-of-Contact**: The person to contact for obtaining goods and/or services, usually from a larger organisation
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Supplier**: A contact that provides mainly goods for the user's business to run smmothly
+* **Contact**: A contact information of a person, a company or a point-of-contact of a company.
 * **Tag**: A label attached to a contact for grouping purposes. Common tags are `Supplier`, `Customer` and `Partner`, but can be flexible to suit the user's needs
 * **UI**: The user interface (UI) is a form of interface that the user interacts with
 
@@ -440,16 +454,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -457,16 +471,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Saving data
 
@@ -474,4 +488,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_

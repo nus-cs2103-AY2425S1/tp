@@ -14,13 +14,20 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts list in ascending or descending by schedule time or by name in alphabetical order\n"
+            + ": Sorts list in ascending or descending by schedule time or by name in alphabetical order.\n"
+            + "Valid order includes: asc/desc/ascending/descending (case insensitive).\n"
             + "If order is not provided, it will sort in ascending order by default.\n"
             + "Only accepts one prefix.\n"
+            + "If the list is filtered/searched before executing the sort command, "
+            + "it will display the sorted filter/search list.\n"
+            + "Executing the 'list' function after will show the sorted full list.\n"
+            + "When sorting by schedules:\n"
+            + "1. Contacts with no schedules will appear at the end of the list.\n"
+            + "2. Contacts that have a date but no time scheduled will be sorted as if their time is set to 00:00.\n"
             + "Parameters: "
             + PREFIX_NAME + "[ORDER] "
-            + PREFIX_SCHEDULE + "[ORDER] "
-            + "Example: " + COMMAND_WORD + PREFIX_NAME + " asc/desc/ascending/descending (case insensitive)";
+            + PREFIX_SCHEDULE + "[ORDER]\n "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "asc";
 
     public static final String MESSAGE_SUCCESS = "Successfully sorted";
     public static final String ASCENDING = "asc";

@@ -25,6 +25,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,7 +41,7 @@ public class ScheduleCommand extends Command {
             + "If no date is provided, the existing schedule will be removed.\n"
             + "If a date is provided, it must be of the format yyyy-MM-dd.\n"
             + "If a time is provided, it must be of the format HH:mm.\n"
-            + "Parameters: INDEX, SCHEDULE_NAME, DATE, TIME"
+            + "Parameters: INDEX, SCHEDULE_NAME, DATE, TIME.\n"
             + "Example: " + COMMAND_WORD + " 1 sn/appointment sd/2024-10-21 st/16:00";
 
     public static final String MESSAGE_MAKE_SCHEDULE_SUCCESS = "Scheduled an event for %s: %s";
@@ -136,9 +137,10 @@ public class ScheduleCommand extends Command {
         Phone phone = personToEdit.getPhone();
         Email email = personToEdit.getEmail();
         Address address = personToEdit.getAddress();
+        SocialMedia socialMedia = personToEdit.getSocialMedia();
         Set<Tag> tags = personToEdit.getTags();
 
-        return new Person(name, phone, email, address, editedSchedule, tags);
+        return new Person(name, phone, email, address, editedSchedule, socialMedia, tags);
     }
 
     @Override

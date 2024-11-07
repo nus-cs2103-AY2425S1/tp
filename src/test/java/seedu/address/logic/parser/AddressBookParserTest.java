@@ -6,6 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SortCommand.ASCENDING;
 import static seedu.address.logic.commands.SortCommand.DESCENDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BEGIN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEWTAG;
@@ -15,6 +17,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -38,6 +41,7 @@ import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.ScheduleCommand.ScheduleDescriptor;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.SocialMediaCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -132,6 +136,23 @@ public class AddressBookParserTest {
         SortCommand descCommandSchedule = (SortCommand) parser.parseCommand(
                 SortCommand.COMMAND_WORD + " " + PREFIX_SCHEDULE + DESCENDING);
         assertEquals(new SortCommand(DESCENDING, true), descCommandSchedule);
+    }
+
+    @Test
+    public void parseCommand_search() throws Exception {
+        SearchCommand searchCommandBeginEnd = (SearchCommand) parser.parseCommand(
+                SearchCommand.COMMAND_WORD + " " + PREFIX_BEGIN
+                        + "2024-10-10 00:00 " + PREFIX_END + "2024-10-12 00:00");
+        SearchCommand searchCommandBegin = (SearchCommand) parser.parseCommand(
+                SearchCommand.COMMAND_WORD + " " + PREFIX_BEGIN + "2024-10-10 00:00 ");
+        SearchCommand searchCommandEnd = (SearchCommand) parser.parseCommand(
+                SearchCommand.COMMAND_WORD + " " + PREFIX_END + "2024-10-12 00:00");
+        LocalDateTime expectedBegin = LocalDateTime.of(2024, 10, 10, 0, 0);
+        LocalDateTime expectedEnd = LocalDateTime.of(2024, 10, 12, 0, 0);
+        assertEquals(new SearchCommand(expectedBegin, expectedEnd), searchCommandBeginEnd);
+        assertEquals(new SearchCommand(expectedBegin, null), searchCommandBegin);
+        assertEquals(new SearchCommand(null, expectedEnd), searchCommandEnd);
+
     }
 
     @Test

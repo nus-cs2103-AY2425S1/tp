@@ -3,18 +3,21 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +34,14 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
+        try {
+            BigInteger value = new BigInteger(trimmedIndex);
+            if (value.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -123,6 +134,34 @@ public class ParserUtil {
             throw new ParseException(Schedule.TIME_CONSTRAINTS);
         }
         return new Schedule(trimmedScheduleName, trimmedScheduleDate, trimmedScheduleTime);
+    }
+
+    /**
+     * Parses a {@code String scheduleName},{@code String scheduleDate}, and {@code String scheduleTime}
+     * into an {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code scheduleName}, {@code scheduleDate}, or {@code scheduleTime}
+     *      is invalid.
+     */
+    public static SocialMedia parseSocialMedia(String... socialMediaHandles)
+            throws ParseException {
+        SocialMedia.Platform[] platforms = {
+            SocialMedia.Platform.CAROUSELL,
+            SocialMedia.Platform.FACEBOOK,
+            SocialMedia.Platform.INSTAGRAM
+        };
+        for (int i = 0; i < 3; i++) {
+            if (socialMediaHandles[i].isEmpty()) {
+                continue;
+            }
+            String trimmedHandle = socialMediaHandles[i].trim();
+            if (!SocialMedia.isValidHandleName(trimmedHandle)) {
+                throw new ParseException(SocialMedia.MESSAGE_CONSTRAINTS);
+            }
+            return new SocialMedia(trimmedHandle, platforms[i]);
+        }
+        return new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
     }
 
     /**

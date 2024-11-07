@@ -37,7 +37,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/Zon.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Testing of application. Addition of commands: restore, backup
 
 ### Liu Yujia
 

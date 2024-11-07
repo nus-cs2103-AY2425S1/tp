@@ -27,39 +27,39 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withScheduleName("schedule").withScheduleDate("2024-10-21").withScheduleTime("16:00")
-            .withTags("friends").build();
+            .withTags("friend").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withScheduleName("schedule").withScheduleDate("2024-10-21").withScheduleTime("")
-            .withTags("owesMoney", "friends").withSocialMedia("[ig-username]").build();
+            .withTags("owesMoney", "friend").withSocialMedia("[ig-username]").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withScheduleName("appointment").withScheduleDate("2024-10-22").withScheduleTime("16:00")
             .withSocialMedia("[fb-carl]")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("family")
             .withScheduleName("schedule").withScheduleDate("2024-10-21").withScheduleTime("10:00")
             .withSocialMedia("[cs-danielm]")
             .build();
-    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("94828224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withScheduleName("appointment").withScheduleDate("2024-10-21").withScheduleTime("12:00")
             .build();
-    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("94820427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withScheduleName("").withScheduleDate("").withScheduleTime("")
             .build();
-    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
+    public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("94829442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withScheduleName("").withScheduleDate("").withScheduleTime("16:00")
             .build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("84820424")
             .withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("84829131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

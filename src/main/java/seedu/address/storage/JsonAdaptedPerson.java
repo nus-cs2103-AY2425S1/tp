@@ -175,7 +175,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, schedule, modelTags);
+        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress,
+                schedule, modelSocialMedia, modelTags);
         person.setSocialMedia(modelSocialMedia);
         return person;
     }
