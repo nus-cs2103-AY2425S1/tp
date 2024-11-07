@@ -456,7 +456,7 @@ Opens a window at the side with the full details of the specified person from th
 
 * `view n/John Doe` opens a window at the side showing the full details of the person named `John Doe`.
 * Calling `view n/John Doe` followed by `view` closes the window showing the full contact details of `John Doe`.
-  ![viewing John Doe's contact detail in the view window](images/viewWindowScreenshot.png)
+  ![viewing John Doe's contact detail in the view window](images/quickStartLaunchScreenshot.png)
   </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -521,7 +521,7 @@ Unmarks a student as present for a particular week.
 
 <md>**Examples:**</md>
 
-* `unmarks n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
+* `unmark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
   ![result for unmark](images/markAlexAbsent.png)
   </box>
 
