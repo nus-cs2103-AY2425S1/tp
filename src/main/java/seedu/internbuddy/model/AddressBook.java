@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.internbuddy.commons.util.ToStringBuilder;
 import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.model.company.Status;
 import seedu.internbuddy.model.company.UniqueCompanyList;
 
 /**
@@ -58,9 +59,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void hideAllDetails() {
-        for (Company company : companies) {
-            company.
-        }
+        for (Company companyToEdit : companies) {
+            Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
+                    companyToEdit.getAddress(), companyToEdit.getTags(),companyToEdit.getStatus(),
+                    companyToEdit.getApplications(), companyToEdit.getIsFavourite(), false);
+            setCompany(companyToEdit, editedCompany);
+        };
     }
 
     //// company-level operations
@@ -99,6 +103,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeCompany(Company key) {
         companies.remove(key);
+    }
+
+    public void viewAppDetails(Company companyToEdit) {
+        Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
+                companyToEdit.getAddress(), companyToEdit.getTags(),companyToEdit.getStatus(),
+                companyToEdit.getApplications(), companyToEdit.getIsFavourite(), true);
+        setCompany(companyToEdit, editedCompany);
     }
 
     //// util methods

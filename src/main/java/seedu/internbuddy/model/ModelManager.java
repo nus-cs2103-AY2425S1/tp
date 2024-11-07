@@ -114,7 +114,12 @@ public class ModelManager implements Model {
 
     @Override
     public void hideAllDetails() {
+        addressBook.hideAllDetails();
+    }
 
+    @Override
+    public void viewAppDetails(Company company) {
+        addressBook.viewAppDetails(company);
     }
 
     //=========== Filtered Company List Accessors =============================================================

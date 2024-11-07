@@ -48,10 +48,7 @@ public class ViewCommand extends Command {
         Company companyToView = lastShownList.get(index.getZeroBased());
         CompanyToViewPredicate predicate = new CompanyToViewPredicate(companyToView);
 
-        Company editedCompany = new Company(companyToView.getName(), companyToView.getPhone(), companyToView.getEmail(),
-                companyToView.getAddress(), companyToView.getTags(), companyToView.getStatus(),
-                companyToView.getApplications(), companyToView.getIsFavourite(), true);
-        model.setCompany(companyToView, editedCompany);
+        model.viewAppDetails(companyToView);
         model.updateFilteredCompanyList(predicate);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, companyToView.getName()));
