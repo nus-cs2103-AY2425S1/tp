@@ -111,6 +111,8 @@ and address `Jurong West`.
 If everything went well, you'll be greeted by this view:
 ![add_command](images/add_command_tutorial.png)
 
+> :information_source: For more details on the `add` command, please refer to the [Add Command](#adding-a-person-add) section.
+
 ### Adding a Lesson to your Student's details
 Now, you have finalized a lesson schedule with John Doe, and you wish to add it to his details.
 
@@ -130,6 +132,8 @@ John's email address should now be updated to `johndoe@gmail.com` and the update
 
 If everything went well, you'll be greeted by this view:
 ![edit_command](images/edit_command_tutorial.png)
+
+> :information_source: For more details on the `edit` command, please refer to the [Edit Command](#editing-a-person--edit) section.
 
 ### Deleting a Student
 John Doe has decided to stop engaging your tuition services, and you wish to remove him from your list of students.
