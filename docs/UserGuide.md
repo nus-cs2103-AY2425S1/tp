@@ -4,7 +4,7 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# AB-3 User Guide
+# data_coNdUctorS User Guide
 
 data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It is optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
 
