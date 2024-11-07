@@ -27,7 +27,11 @@ Paired also with a revolutionary AutoComplete feature, StoreClass helps you mana
    Our program is coded in Java. So in order for you to use it, Java will need to be installed on your machine. Think of it as the engine for our program.
    </div>
 
+
+1. Copy the file to the folder you want to use as the _home folder_ for StoreClass.
+
 2. Download the latest version of the `.jar` file of our program from [here](https://github.com/AY2425S1-CS2103T-W10-4/tp/releases).
+
 
 3. Copy the file to the folder you want to use as the _home folder_ for StoreClass.
 
@@ -39,9 +43,9 @@ Paired also with a revolutionary AutoComplete feature, StoreClass helps you mana
 5. Type a command of your choice in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Here are some examples of commands you can try:
 
-   * `list` : Lists all students and their details.
+   * `add n/John Doe p/98765432 g/male m/Physics` : Adds a student named `John Doe` to StoreClass.
 
-   * `add n/John Doe p/98765432 g/male m/CS2103T` : Adds a student named `John Doe` to StoreClass.
+   * `list` : Lists all students and their details.
 
    * `delete 3` : Deletes the 3rd student shown in the current list of students.
 
@@ -65,12 +69,12 @@ Paired also with a revolutionary AutoComplete feature, StoreClass helps you mana
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `...`​ after them can be used multiple times.<br>
-    e.g. `m/MODULE...​` can be used as `m/Mathematics`, `m/Biology m/Physics` etc.
+  e.g. `m/MODULE...​` can be used as `m/Mathematics`, `m/Biology m/Physics` etc.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/paid_tuition`, `t/paid_tuition t/smart` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order unless specified.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -94,13 +98,24 @@ You can add a student to StoreClass using this command.
 
 Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-A student can have any number of tags (including 0) and modules.
+* `n/NAME` : The full name of the student to be added.
+* `p/PHONE_NUMBER` : The phone number of the student to be added.
+* `g/GENDER` : The gender of the student to be added.
+* `m/MODULE` : The module that the student is taking.
+* `t/TAG` : The tag of the student.
+
+<div markdown="span" class="alert alert-info"> :notebook: **Note:** Field Constraints
+- Names should only contain alphabets, hyphens, dots, commas, forward slash and spaces, and be between 1 and 100 characters long.
+- Phone numbers should only contain numbers, and be exactly 8 digits long.
+- Gender should be either `male` or `female`.
+- Module should consist of alphanumeric characters and spaces only, and it should be between 1 and 30 characters long.
+- Tag should consist of alphanumeric characters only, and it should be between 1 and 30 characters long.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 g/male m/Math`
-* `add n/Betsy Crowe t/special g/female p/1234567 m/Math m/Biology t/smart`
+* `add n/John Doe p/98765432 g/male m/Mathematics` : Adds a student named `John Doe` to StoreClass.
+* `add n/Betsy Crowe g/female p/1234567 m/Physics m/Chemistry t/OLevels t/new` : Adds a student named `Betsy Crowe` to StoreClass.
+
 
 ### Listing all students : `list`
 
@@ -112,7 +127,7 @@ Format: `list`
 
 You can edit an existing student in StoreClass.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE]... [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -122,8 +137,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567` Edits the phone number of the 1st person to be `91234567`.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567` : Edits the phone number of the 1st person to be `91234567`.
+*  `edit 2 n/Betsy Crower t/` : Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating students by name: `find`
 
@@ -139,6 +154,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
+
 * `find John` returns `john` and `John Doe` _(search by name)_
 * `find colleague` returns `Bernice Yu` and `Roy Balakrishnan` _(search by tag)_
 * `find alex david` returns `Alex Yeoh`, `David Li` _(search by multiple parameters)_ <br> 
@@ -161,10 +177,10 @@ Each parameter can only contain one keyword.
 </div>
 
 Examples:
-* `filter n/John` returns `john` and `John Doe` (filter by name)
-* `filter g/male t/project` returns `Bernice Yu`, `Roy Balakrishnan` and `Gabreil Lim`. (filter by gender and tag)
-* `filter g/female t/family t/friend` returns `Alex Yeoh` and `David Li` (filter by gender and multiple tags)
-* `filter g/male t/project m/cs1101` return `Bernice Yu` (filter by multiple conditions)
+* `filter n/John` : returns `john` and `John Doe` (filter by name)
+* `filter g/male t/new` : returns `James Li`, `Roy Balakrishnan` and `Linus Koo`. _(filter by gender and tag)_
+* `filter g/female t/new t/OLevels` : returns `Alex Yeoh` and `David Li` _(filter by gender and multiple tags)_
+* `filter g/female t/IB m/Physics` : return `Bernice Yu` _(filter by multiple conditions)_
 
 ### Deleting a student : `delete`
 
@@ -274,15 +290,15 @@ You can assign a grade to a module that a student is taking.
 - You can provide multiple `m/MODULE s/GRADE` pairs to assign grades to multiple modules in a single `grade` command.
 - The grade can be any whole number between 0 and 100, inclusive.
 
-**Important Notes:**
+<div markdown="span" class="alert alert-info"> :notebook: **Important Note:**
 - Each module specified in the `grade` command must be a module that the student is taking.
 - The number of `m/MODULE` prefixes must match the number of `s/GRADE` prefixes.
-- Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.
+- Grades are assigned to modules based on the order of the `m/MODULE s/GRADE` pairs provided in the command.</div>
 
 **Examples:**
-- `grade 1 m/CS2103T s/85` assigns a grade of 85 to CS2103T for the first student.
-- `grade 2 m/MA1522 s/90` assigns a grade of 90 to MA1522 for the second student.
-- `grade 3 m/CS2103T s/80 m/MA1522 s/85` assigns a grade of 80 to CS2103T and 85 to MA1522 for the third student.
+- `grade 1 m/Physics s/85` : assigns a grade of 85 to Physics for the first student.
+- `grade 2 m/Chemistry s/90` : assigns a grade of 90 to Chemistry for the second student.
+- `grade 3 m/English s/80 m/Chinese s/85` assigns a grade of 80 to English and 85 to Chinese for the third student.
 
 
 ### Archiving data files `archive`
@@ -433,12 +449,12 @@ Furthermore, certain edits can cause the StoreClass to behave in unexpected ways
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME g/GENDER p/PHONE_NUMBER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/22224444 m/CS2103T m/CS2101 t/friend t/colleague`
+**Add** | `add n/NAME g/GENDER p/PHONE_NUMBER m/MODULE... [t/TAG]…​` <br> e.g., `add n/James Ho g/male p/83216574 m/English m/Chemistry t/new t/IB`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/CS2103T s/85`
+**Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/History s/85`
 **Undo** | `undo`
 **Redo** | `redo`
 **List** | `list`
