@@ -6,26 +6,72 @@
 
 # EduManage Developer Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+## Table of Contents
+
+[1. Acknowledgements](#1-acknowledgements)
+
+[2. Setting Up, Getting Started](#2-setting-up-getting-started)
+
+[3. Design](#3-design)
+* [3.1 Architecture](#3-1-architecture)
+* [3.2 UI Component](#3-2-ui-component)
+* [3.3 Logic Component](#3-3-logic-component)
+* [3.4 Model Component](#3-4-model-component)
+* [3.5 Storage Component](#3-5-storage-component)
+* [3.6 Common Classes](#3-6-common-classes)
+
+[4. Implementation](#4-implementation)
+* [4.1 Lesson Time Parameter](#4-1-lesson-time-parameter)
+  * [4.1.1 Design Considerations](#4-1-1-design-considerations)
+* [4.2 Add Feature](#4-2-add-feature)
+  * [4.2.1 Implementation - Activity Diagram](#4-2-1-implementation-activity-diagram)
+  * [4.2.2 Design Considerations](#4-2-2-design-considerations)
+* [4.3 Delete Feature](#4-3-delete-feature)
+  * [4.3.1 Implementation - Sequence Diagram](#4-3-1-implementation-sequence-diagram)
+  * [4.3.2 Design Considerations](#4-3-2-design-considerations)
+* [4.4 Tag Feature](#4-4-tag-feature)
+  * [4.4.1 Implementation - Sequence Diagrams](#4-4-1-implementation-sequence-diagrams)
+  * [4.4.2 Design Considerations](#4-4-2-design-considerations)
+* [4.5 View Specific Student Feature](#4-5-view-specific-student-feature)
+  * [4.5.1 Implementation - Sequence Diagram](#4-5-1-implementation-sequence-diagram)
+  * [4.5.2 Design Considerations](#4-5-2-design-considerations)
+* [4.6 Add Task Feature](#4-6-add-task-feature)
+  * [4.6.1 Implementation - Sequence Diagram](#4-6-1-implementation-sequence-diagram)
+  * [4.6.2 Design Considerations](#4-6-2-design-considerations)
+
+[5. Documentation, Logging, Testing, Configuration, Dev-Ops](#5-documentation-logging-testing-configuration-dev-ops)
+
+[6. Appendix: Requirements](#6-appendix-requirements)
+* [6.1 Product Scope](#6-1-product-scope)
+* [6.2 User Stories](#6-2-user-stories)
+* [6.3 Use Cases](#6-3-use-cases)
+* [6.4 Non-Functional Requirements](#6-4-non-functional-requirements)
+* [6.5 Glossary](#6-5-glossary)
+
+[7. Appendix: Instructions for Manual Testing](#7-appendix-instructions-for-manual-testing)
+* [7.1 Launch and Shutdown](#7-1-launch-and-shutdown)
+* [7.2 Adding a Student](#7-2-adding-a-student)
+* [7.3 Deleting a Student](#7-3-deleting-a-student)
+* [7.4 Finding Specific Student(s)](#7-4-finding-specific-students)
+* [7.5 Adding a Task to a Student](#7-5-adding-a-task-to-a-student)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## 1. Acknowledgements
 
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## 2. Setting Up, Getting Started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## 3. Design
 
-### Architecture
+### 3.1 Architecture
 
 <puml src="diagrams/ArchitectureDiagram.puml" width="280" />
 
@@ -41,12 +87,12 @@ Given below is a quick overview of main components and how they interact with ea
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`UI`**](#3-2-ui-component): The UI of the App.
+* [**`Logic`**](#3-3-logic-component): The command executor.
+* [**`Model`**](#3-4-model-component): Holds the data of the App in memory.
+* [**`Storage`**](#3-5-storage-component): Reads data from, and writes data to, the hard disk.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#3-6-common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
@@ -65,7 +111,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+***
+
+### 3.2 UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -86,7 +134,7 @@ The activity diagram below represents the flow of actions within the UI based on
 
 <puml src="diagrams/UiActivityDiagram.puml" alt="Workflow of Updating the UI State"/>
 
-### Logic component
+### 3.3 Logic Component
 
 **API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -119,11 +167,13 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+***
+
+### 3.4 Model Component
+
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="750" />
-
 
 The `Model` component,
 
@@ -140,8 +190,9 @@ The `Model` component,
 
 </box>
 
+***
 
-### Storage component
+### 3.5 Storage Component
 
 **API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -152,22 +203,24 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+***
+
+### 3.6 Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## 4. Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain features and parameters are implemented. For all examples
+below, the user is the tuition teacher, unless specified otherwise.
 
-### Lesson Time Parameter
+### 4.1 Lesson Time Parameter
 This parameter allows users to keep track of a student's lesson timings. Multiple lesson times can be added for a single student.
 
-#### Design Considerations
+#### 4.1.1 Design Considerations
 **Treatment of clashing timings**
-
 - **Current Implementation (Alternative 1):**
     - **Description**: Clashing lesson timings are permitted across all students and within each student's schedule.
     - **Pros**: Provides greater user flexibility, allowing all specified timings to be stored in EduManage, even if they overlap.
@@ -180,7 +233,6 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
     - **Cons**: Reduces flexibility for users who need to store complex schedules with occasional overlapping times.
 
 **Association between lesson timings and subjects**
-
 - **Current Implementation (Alternative 1):**
     - **Description**: Each lesson timing is not associated with any subject.
     - **Pros**: Promotes greater user flexibility, allowing users to adjust subject focus within each lesson as needed.
@@ -192,40 +244,105 @@ This parameter allows users to keep track of a student's lesson timings. Multipl
     - **Pros**: Clarifies what subject is to be taught during each lesson, helping users stay organised.
     - **Cons**: Reduces user flexibility in arranging lesson times for different subjects.
 
-### Tag Feature - Level and Subject Tagging
+***
+
+### 4.2 Add Feature
+The Add feature allows users to register a new student in EduManage with a range of details, such as name, phone number, emergency contact, address, level, subject(s), and lesson time(s). Users can specify a single level, multiple subjects, and multiple lesson timings per student to tailor profile details for academic tracking and scheduling.
+
+- **Duplicate Prevention**: If a student with identical details already exists, EduManage will prevent the addition and
+  notify the user with an error message.
+- **Level and Subject Compatibility**: When specified, the level and subjects are validated to ensure compatibility,
+  helping to avoid entry errors.
+- **Flexible Optional Fields**: Fields like level, subject, and lesson time are optional, providing flexibility in the
+  amount of detail added for each student.
+
+#### 4.2.1 Implementation - Activity Diagram
+The activity diagram below highlights the various decision points during the process of adding a student, including
+checks for valid command formats, parameter validity, matching subjects and levels, and whether the student already
+exists in EduManage. If all checks pass, the student is successfully added to the EduManage, and the user receives a
+success message. If any check fails, the user is notified with an appropriate error message.
+
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
+
+#### 4.2.2 Design Considerations
+**Centralized Validation in Subject Class**
+- **Current Implementation (Alternative 1)**:
+    - **Description**: Validation logic within the Subject class ensures that the list of valid subjects by level remains consistent. This makes it straightforward to update validation rules or allowed subjects.
+    - **Pros**: Modularizes validation, reducing the complexity of AddCommand and providing reusable validation logic within Subject. 
+    - **Cons**: Slightly increases the dependency on Subject for the AddCommand, but this trade-off is mitigated by improved maintainability.
+
+- **Alternative 2**
+    - **Description**: If validation were split between the AddCommand and Subject, each class would handle part of the validation. 
+    - **Pros**: Reduces coupling between classes. 
+    - **Cons**: Results in code duplication and reduced cohesion, complicating future changes in validation rules.
+
+***
+
+### 4.3 Delete Feature
+This feature allows users to delete a student from EduManage based on their index in the displayed student list. The
+process involves identifying the student by their index and removing their details from the database.
+
+- **Index Validation**: EduManage checks if the provided index is valid and within the bounds of the current student
+  list. If the index is out of bounds or invalid, an error message is shown.
+- **Student Deletion**: Upon valid index input, the student is deleted from the model and the filtered student list is
+  updated to reflect this change and a success message is shown.
+
+#### 4.3.1 Implementation - Sequence Diagram
+The sequence diagram below illustrates the interaction between various components during the execution of the
+`DeleteCommand`. This includes validation of the index, the deletion of the student from the model, and updating the
+filtered student list.
+
+<puml src="diagrams/DeleteSequenceDiagram.puml" alt="DeleteSequenceDiagram" />
+
+#### 4.3.2 Design Considerations
+**Name vs Index for Deletion**
+- **Current Implementation (Alternative 1):**
+    - **Description**: The user identifies the student by their index in the displayed student list.
+    - **Pros**: Simple, fast, and unambiguous with unique indexes.
+    - **Cons**: Users must visually track and remember the index number of the student, which can be cumbersome if the list is long or filtered.
+
+- **Alternative 2**:
+    - **Description**: The user specifies the student’s name for deletion.
+    - **Pros**: Names are easier for users to remember and identify, making the deletion process more intuitive.
+    - **Cons**: Searching by name can be slower with a large contact list, and misspelling the name could lead to
+      the accidental deletion of the wrong student.
+
+***
+
+### 4.4 Tag Feature
 This feature allows users to tag a student's profile with specific details related to school level (e.g., `S1 NA`) and
-subject (e.g., `MATH`). By entering the student's name and specifying tags for level or subject (or both), users can
+subject(s) (e.g., `MATH`). By entering the student's name and specifying tags for level or subject(s) (or both), users can
 manage student profiles more efficiently.
 
-- **Adding Multiple Tags**: Users can add several subject tags and one level tag to a student. If any of the specified
-  tags already exist on the profile, an error message will notify the user, avoiding duplicate tags.
-- **Invalid Input**: If an invalid student name, level, or subject is inputted, the system displays the constraints and
-  guidelines for tag parameters.
+- **Adding Multiple Tags**: Users can specify multiple subject tags and one level tag for a student. Each time tags are
+  added, they will override any previously existing tags on the profile, ensuring that only the latest tags are retained.
+- **Invalid Input**: If an invalid student name, level, or subject is inputted, EduManage displays the constraints and
+  guidelines for tag parameters. Additionally, if there is a mismatch between the tagged subjects and the specified level,
+  an error message will highlight the incompatibility.
 - **Case Insensitivity**: Tags are designed to be case-insensitive. If users add multiple tags that are equivalent in
-  value (e.g., "Math" and "MATH"), only one instance of each unique tag will be added, preventing unnecessary
+  value (e.g., `Math` and `MATH`), only one instance of each unique tag will be added, preventing unnecessary
   duplication.
 
-#### Implementation - Sequence Diagrams
-The sequence diagram below depicts the interaction among various classes during the execution of a tag command. Note
-that while the TagCommandParser lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
+#### 4.4.1 Implementation - Sequence Diagrams
+The sequence diagrams below depicts the interaction among various classes during the execution of a tag command. Note
+that while the `TagCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the 
 lifeline till the diagram's end.
 
 <puml src="diagrams/TagSequenceDiagram-Logic.puml" alt="TagSequenceDiagram-Logic" />
 
 <puml src="diagrams/TagSequenceDiagram-Model.puml" alt="TagSequenceDiagram-Model" />
 
-#### Design Considerations
+#### 4.4.2 Design Considerations
 **Parsing Tag Input**
-
 - **Current Implementation (Alternative 1):**
-    - **Description**: Tag validation is managed by the ParserUtil class, centralizing validation logic for improved
+    - **Description**: Tag validation is managed by the `ParserUtil` class, centralizing validation logic for improved
       maintainability and modularity.
-    - **Pros**: By isolating validation in ParserUtil, updates and modifications are easier to manage, promoting a
+    - **Pros**: By isolating validation in `ParserUtil`, updates and modifications are easier to manage, promoting a
       consistent approach across commands.
-    - **Cons**: Adds a layer of abstraction, which may slightly increase the system’s complexity.
+    - **Cons**: Adds a layer of abstraction, which may slightly increase EduManage’s complexity.
 
 - **Alternative 2**:
-    - **Description**: Validation occurs directly within TagCommandParser.
+    - **Description**: Validation occurs directly within `TagCommandParser`.
     - **Pros**: Keeps validation localized within the tag command, reducing dependencies on external classes.
     - **Cons**: Creates inconsistency across the codebase, making validation logic less reusable and harder to maintain.
 
@@ -243,100 +360,89 @@ lifeline till the diagram's end.
 
 ***
 
-### \[Proposed\] Undo/Redo Feature
+### 4.5 View Specific Student Feature
 
-#### Proposed Implementation
+This feature allows users to view the details of an existing student by specifying their name. It enables quick access
+to a student's profile for viewing key information.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+- **Viewing a Student's Profile**: Users can enter a student's name to view the corresponding details. EduManage will
+  search for the student by name and display their profile if found.
+- **Invalid Input**: If an invalid or non-existent student name is entered, EduManage will show an error message
+  indicating that the student was not found.
+- **Case Insensitivity**: EduManage treats student names case-insensitively, ensuring that variations in capitalization
+  do not affect the search result.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+#### 4.5.1 Implementation - Sequence Diagram
+The sequence diagram below depicts the interaction among various classes during the execution of a view command. Note
+that while the `ViewCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML extend the
+lifeline till the diagram's end.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" />
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### 4.5.2 Design Considerations
+**Case Insensitivity and Name Matching**
+- **Current Implementation (Alternative 1)**:
+    - **Description**: Ignore cases when matching student names, ensuring that capitalization does not affect
+      the search.
+    - **Pros**: More flexible and user-friendly, as users do not have to match the exact case of the student's name.
+    - **Cons**: Slight overhead in handling case conversion for name matching.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+- **Alternative 2**:
+    - **Description**: Require exact capitalization of the student's name for a match.
+    - **Pros**: Ensures that no unnecessary case conversion is needed, which may slightly improve performance.
+    - **Cons**: Increases the likelihood of user errors if the name is not entered exactly as stored.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+***
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+### 4.6 Add Task Feature
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+This feature allows users to add specific tasks to a student's profile, enhancing the ability to track individual
+assignments, exams, or goals for each student. By entering the student's name, task description and due date, users
+can manage and monitor students' progress more efficiently.
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+- **Adding Multiple Tasks**: Users can add multiple tasks to a student. If a task with identical parameters already
+  exists in the student's task list, an error message will alert the user, avoiding duplicate entries.
+- **Invalid Input**: If an invalid student name, task description or due date is provided, EduManage displays the
+   constraints and guidelines for the incorrect parameter(s).
+- **Fixed Date Format**: Due dates must be entered in a strict `YYYY-MM-DD` format. This format avoids ambiguity and
+  enforces consistency, helping users easily interpret task deadlines.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+#### 4.6.1 Implementation - Sequence Diagram
+The sequence diagram below illustrate the interactions among various classes when an add task command is executed.
+Note that while the `AddTaskCommandParser` lifeline ideally ends at a destroy marker, current limitations in PlantUML
+extend the lifeline till the diagram’s end.
 
-<box type="info" seamless>
+<puml src="diagrams/AddTaskSequenceDiagram-Logic.puml" alt="AddTaskSequenceDiagram-Logic" />
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+#### 4.6.2 Design Considerations
+**Parsing Task Input**
+- **Current Implementation (Alternative 1)**:
+    - **Description**: The `ParserUtil` class manages validation for task attributes, including date format checking,
+      centralizing the logic for better maintainability.
+    - **Pros**: Centralized validation supports consistency and simplifies updates to validation logic across multiple
+      commands. 
+    - **Cons**: Adds a layer of abstraction, which can make the code slightly more complex to trace.
 
-</box>
+- **Alternative 2**:
+    - **Description**: Validation occurs directly within `AddTaskCommandParser`. 
+    - **Pros**: Reduces dependency on external utility classes, keeping the validation logic localized within the
+      command parser. 
+    - **Cons**: Leads to code duplication across commands, making maintenance and updates more challenging.
+  
+**Design of Task Constraints**
+- **Current Implementation (Alternative 1)**:
+    - **Description**: Tasks require a strict `YYYY-MM-DD` date format for due dates.
+    - **Pros**: Enforces a standardized format, making dates easy to read, parse, and sort chronologically.
+    - **Cons**: Limits flexibility, as users cannot input custom date formats.
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+- **Alternative 2**:
+    - **Description**: Users may enter due dates in a flexible format. 
+    - **Pros**: Increases flexibility, accommodating different date formats. 
+    - **Cons**: Adds complexity in validation and interpretation, potentially leading to errors or inconsistencies in task display.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## 5. Documentation, Logging, Testing, Configuration, Dev-Ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -346,14 +452,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## 6. Appendix: Requirements
 
-### Product scope
+### 6.1 Product Scope
 
 **Target user profile**: Tuition teachers
 
 * teaches secondary school students
-* teaches in one-on-one sessions
+* teaches one-on-one sessions
 * has a need to manage a significant number of students and student details
 * prefers desktop apps over other types
 * can type fast
@@ -362,8 +468,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Value proposition**: Manage students faster than a typical mouse/GUI driven app
 
+***
 
-### User stories
+### 6.2 User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -388,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### Use cases
+### 6.3 Use Cases
 
 (For all use cases below, the **System** is `EduManage` and the **Actor** is the `tuition teacher`, unless specified otherwise)
 
@@ -756,7 +863,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### Non-Functional Requirements
+### 6.4 Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
@@ -773,9 +880,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ***
 
-### Glossary
+### 6.5 Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Emergency contact**: The contact to use if an emergency happens during the tutoring period.
 * **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`).
@@ -783,7 +890,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## 7. Appendix: Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
 
@@ -794,7 +901,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### 7.1 Launch and Shutdown
 
 1. Initial launch
 
@@ -811,7 +918,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Adding a student
+### 7.2 Adding a Student
 
 1. Prerequisites: Delete any student named `Alice Lee` before and between test cases. Ensure there is a student named `Alex Yeoh` in the list of students.
 
@@ -844,7 +951,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Deleting a student
+### 7.3 Deleting a Student
 
 1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
@@ -859,7 +966,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Finding specific students
+### 7.4 Finding Specific Students
 
 1. Prerequisites: List all students using the `list` command. Multiple students in the list with varying names, levels and subjects.
 
@@ -887,7 +994,7 @@ testers are expected to do more *exploratory* testing.
 
 ***
 
-### Adding a task for a student
+### 7.5 Adding a Task to a Student
 
 1. Prerequisites: Ensure that student `Alex Yeoh` exists.
 
