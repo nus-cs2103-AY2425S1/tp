@@ -40,8 +40,10 @@ public class CompanyListPanel extends UiPart<Region> {
             if (empty || company == null) {
                 setGraphic(null);
                 setText(null);
+                setStyle("-fx-background-color: transparent;");
             } else {
                 setGraphic(new CompanyCard(company, getIndex() + 1).getRoot());
+                setStyle("-fx-background-color: #102a43;");
             }
         }
     }
