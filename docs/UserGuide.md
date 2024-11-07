@@ -242,9 +242,9 @@ Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 * Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
 
 Examples:
-* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and colour of `t/CS2100` become `Gold`.
+* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and display colour of the tag`CS2100` becomes `Gold`.
 * `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with colour `Blue`. 
-* Not-yet categorized tags have category `General` and colour `Grey` by default.
+* Newly created tags (by [`add`](#adding-a-person-add) or [`addtag`](#adds-tags-to-a-specific-person--addtag)) will have category `General` and colour `Grey` by default.
 
 ![cattag response image](images/cattagResponse.png)
 ### Undo a command : `undo`
