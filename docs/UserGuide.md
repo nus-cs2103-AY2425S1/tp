@@ -355,10 +355,6 @@ Format: `listing add INDEX t/[PROPERTY_TAG] a/[LISTING_ADDRESS]`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `show` command to see the listings you have added.
-</div>
-
 Examples:
 
 - `listing add 1 t/condo a/NUS street 123` adds a property listing to the client at index `1` with a listing type of `condo` and address of `NUS street 123`
@@ -377,10 +373,6 @@ Format: `listing delete INDEX LISTING_INDEX`
 * The `INDEX` refers to the index number shown in the displayed client list.
 * The `LISTING_INDEX` refers to the index number shown in the property listing displayed by the `show` command
 * The `INDEX`/`LISTING_INDEX` **must be a positive integer** 1, 2, 3, …​
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Use `show` command to see the updated listings.
-</div>
 
 Examples:
 
