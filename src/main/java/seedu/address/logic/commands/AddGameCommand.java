@@ -82,7 +82,12 @@ public class AddGameCommand extends Command {
             throw new CommandException(MESSAGE_GAME_EXISTS);
         }
 
-        Game editedGame = createNewGame(gameName, addGameDescriptor);
+        Game editedGame;
+        try {
+            editedGame = createNewGame(gameName, addGameDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
+        }
         gameMap.put(gameName, editedGame);
         model.setPerson(personToEdit, personToEdit);
         model.addCommandToLog(this);
