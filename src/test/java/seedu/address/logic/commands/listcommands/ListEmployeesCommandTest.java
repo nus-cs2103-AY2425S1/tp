@@ -30,16 +30,18 @@ public class ListEmployeesCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandResult expectedCommandResult = new CommandResult(ListEmployeesCommand.MESSAGE_SUCCESS,
-                DisplayType.EMPLOYEE_LIST, false, false);
+        int numShown = expectedModel.getFilteredEmployeeList().size();
+        CommandResult expectedCommandResult = new CommandResult(String.format(ListEmployeesCommand.MESSAGE_SUCCESS,
+                numShown), DisplayType.EMPLOYEE_LIST, false, false);
         assertCommandSuccess(new ListEmployeesCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showEmployeeAtIndex(model, INDEX_FIRST_EMPLOYEE);
-        CommandResult expectedCommandResult = new CommandResult(ListEmployeesCommand.MESSAGE_SUCCESS,
-                DisplayType.EMPLOYEE_LIST, false, false);
+        int numShown = expectedModel.getFilteredEmployeeList().size();
+        CommandResult expectedCommandResult = new CommandResult(String.format(ListEmployeesCommand.MESSAGE_SUCCESS,
+                numShown), DisplayType.EMPLOYEE_LIST, false, false);
         assertCommandSuccess(new ListEmployeesCommand(), model, expectedCommandResult, expectedModel);
     }
 }

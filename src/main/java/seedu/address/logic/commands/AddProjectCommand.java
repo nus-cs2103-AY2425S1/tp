@@ -25,7 +25,7 @@ public class AddProjectCommand extends Command {
             + PREFIX_PROJECT_NAME + "PROJECT NAME "
             + PREFIX_SKILL + "PROJECT SKILL\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PROJECT_ID + "A0276123K "
+            + PREFIX_PROJECT_ID + "123 "
             + PREFIX_PROJECT_NAME + "Project Alpha "
             + PREFIX_SKILL + "Cybersecurity "
             + PREFIX_SKILL + "Java";

@@ -47,7 +47,7 @@ public class ParserUtilTest {
     private static final String INVALID_PROJECT_ID = "4252@$g";
     private static final String INVALID_PROJECT_NAME = "Prj R@chel";
 
-    private static final String VALID_PROJECT_ID = "A0276123K";
+    private static final String VALID_PROJECT_ID = "1";
     private static final String VALID_PROJECT_NAME = "Project Alpha";
 
     private static final String VALID_ASSIGNMENT_ID = "1";

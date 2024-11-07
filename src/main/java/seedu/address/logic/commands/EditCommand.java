@@ -25,6 +25,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.employee.Address;
 import seedu.address.model.employee.Email;
 import seedu.address.model.employee.Employee;
@@ -96,6 +97,10 @@ public class EditCommand extends Command {
         assert employeeToEdit.isSameEmployee(editedEmployee);
 
         model.setEmployee(employeeToEdit, editedEmployee);
+        model.getFilteredAssignmentList().stream()
+                .filter(assignment -> assignment.getEmployee().isSameEmployee(employeeToEdit))
+                .forEach(assignment -> model.setAssignment(assignment, new Assignment(assignment.getAssignmentId(),
+                        assignment.getProject(), editedEmployee)));
 
         // Edited employee successfully
         logger.fine(COMMAND_WORD + " employee\n" + editedEmployee);

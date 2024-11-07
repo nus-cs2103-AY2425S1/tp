@@ -40,7 +40,7 @@ public class UniqueProjectListTest {
     @Test
     public void contains_projectWithSameIdentityFieldsInList_returnsTrue() {
         uniqueProjectList.add(ALPHA);
-        Project editedAlice = new ProjectBuilder(ALPHA).withId("A0276123J")
+        Project editedAlice = new ProjectBuilder(ALPHA).withId("1")
                 .build();
         assertTrue(uniqueProjectList.contains(editedAlice));
     }
@@ -83,7 +83,7 @@ public class UniqueProjectListTest {
     @Test
     public void setProject_editedProjectHasSameIdentity_success() {
         uniqueProjectList.add(ALPHA);
-        Project editedAlpha = new ProjectBuilder(ALPHA).withId("A0276123K")
+        Project editedAlpha = new ProjectBuilder(ALPHA).withId("2")
                 .build();
         uniqueProjectList.setProject(ALPHA, editedAlpha);
         UniqueProjectList expectedUniqueProjectList = new UniqueProjectList();
