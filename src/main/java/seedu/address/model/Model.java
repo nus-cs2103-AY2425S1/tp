@@ -99,7 +99,7 @@ public interface Model {
     /**
      * Reset the EventManager Data
      */
-    void setEventManager(ReadOnlyEventManager EventManager);
+    void setEventManager(ReadOnlyEventManager eventManager);
 
     /**
      * Return the EventManager

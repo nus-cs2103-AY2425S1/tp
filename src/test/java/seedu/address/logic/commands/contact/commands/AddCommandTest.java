@@ -170,7 +170,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setEventManager(ReadOnlyEventManager EventManager) {
+        public void setEventManager(ReadOnlyEventManager eventManager) {
             throw new AssertionError("This method should not be called.");
         }
 
