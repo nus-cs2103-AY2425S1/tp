@@ -326,6 +326,11 @@ Format: `delete event INDEX`
 - The index refers to the index number shown in the displayed event list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
+<div markdown="span" class="alert alert-primary">
+  :bulb: **Tip:**
+  If you would like to delete all events at once, you can use the <a href="#clearing-all-events--clear-event">clear event</a> command.
+</div>
+
 Examples:
 
 - `list event` followed by `delete event 2` deletes the 2nd event in the address book.
