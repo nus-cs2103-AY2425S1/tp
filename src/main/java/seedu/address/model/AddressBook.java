@@ -97,8 +97,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPerson(Person target, Person editedPerson) throws CommandException {
         requireNonNull(editedPerson);
 
-        editPersonNameInMeetings(target, editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -134,25 +132,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public Meeting getMeeting(int index) {
         return meetings.getMeeting(index);
-    }
-
-    /**
-     * Edits all Person Names in meetings that contains (@code p).
-     */
-    public void editPersonNameInMeetings(Person p, Person editedPerson) throws CommandException {
-        Meetings personMeetings = p.getMeetings();
-        for (int i = 0; i < personMeetings.getMeetingsCount(); i++) {
-            Meeting m = personMeetings.getMeeting(i);
-            System.out.println(m);
-            for (int j = 0; j < meetings.getMeetingsCount(); j++) {
-                if (m.equals(meetings.getMeeting(j))) {
-                    Meeting toChange = meetings.getMeeting(j);
-                    Meeting newMeeting = new Meeting(editedPerson.getName(), toChange.getStartTime(),
-                            toChange.getEndTime(), toChange.getLocation());
-                    setMeeting(toChange, newMeeting);
-                }
-            }
-        }
     }
 
     /**

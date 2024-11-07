@@ -93,19 +93,19 @@ public class EditCommand extends Command {
         }
 
         Meetings meetings = personToEdit.getMeetings();
+        int meetingCount = meetings.getMeetingsCount();
 
-        for (int i = 0; i < meetings.getMeetingsCount(); i++) {
-            Meeting meeting = meetings.getMeeting(i);
+        for (int i = 0; i < meetingCount; i++) {
+            System.out.println(i);
+            Meeting meeting = meetings.getMeeting(0);
             model.deleteMeeting(personToEdit, meeting);
+            System.out.println("Deleted Meeting" + meeting + personToEdit.getName());
+            model.addMeeting(editedPerson, new Meeting(editedPerson.getName(), meeting.getStartTime(),
+                    meeting.getEndTime(), meeting.getLocation()));
+            System.out.println("Added Meeting" + meeting + editedPerson.getName());
         }
 
         model.setPerson(personToEdit, editedPerson);
-
-        for (int i = 0; i < meetings.getMeetingsCount(); i++) {
-            Meeting meeting = meetings.getMeeting(i);
-            model.addMeeting(editedPerson, new Meeting(editedPerson.getName(), meeting.getStartTime(),
-                    meeting.getEndTime(), meeting.getLocation()));
-        }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
