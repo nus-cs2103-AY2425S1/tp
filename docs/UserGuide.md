@@ -295,11 +295,12 @@ A **valid** `CLIENT_TYPE` should:
 * Not be empty.
     * For eg. Just typing `find c/` without providing any `CLIENT_TYPE` will throw an error.
 * Not have duplicates.
-    * For eg. Typing `c/Plan A c/Plan A` will combine the client types into `Plan A`.
+    * For eg. Typing `c/Plan A Plan A` will combine the client types into `Plan A`.
 
 Examples:
 * `find c/Investment` returns every contact that has a `client_type` beginning with `Investment`
 * `find c/Invest` returns every contact that has `client_type` beginning with `Invest`
+* `find c/Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` and `Healthcare`
 * `fc Investment` returns `Investment Plan`
 * `fc Investment Healthcare` returns `Investment Plan` and `Healthcare Plan`
 
