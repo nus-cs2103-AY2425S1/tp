@@ -79,8 +79,12 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands and update the UI state accordingly.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+
+The activity diagram below represents the flow of actions within the UI based on user commands, illustrating how the display is adjusted depending on the command's impact on the UI state.
+
+<puml src="diagrams/UiActivityDiagram.puml" alt="Workflow of Updating the UI State"/>
 
 ### Logic component
 
