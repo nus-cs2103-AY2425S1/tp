@@ -200,7 +200,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 
 <div class="alert alert-block alert-success">
 
-For your convenience and easy reference, you can click on the header for the command to go to the [command summary table!](#command-summary)<br><br>
+For your convenience and easy reference, you can click on the header for the command to go to the command summary table!<br>
 
 For example, try clicking on "Viewing Help" in the "Viewing Help: `help`" section below!
 </div>
