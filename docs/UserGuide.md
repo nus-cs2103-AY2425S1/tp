@@ -269,12 +269,15 @@ Finds patients whose specified field contain any of the given keywords.
 
 Format: `find FIELD/ KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive.
+  - `hans` will match `Hans`
+* The order of the keywords does not matter.
+  - `Hans Bo` will match `Bo Hans`
 * Able to search any field, but only one field at a time.
-* Any valid [substring](#glossary) will be matched e.g. `Ha` will match `Hans` and `shannon`
+* Any valid [substring](#glossary) will be matched.
+  - `Ha` will match `Hans` and `shannon`
 * Persons matching at least one keyword will be returned.
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  - `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Patients who currently have the specified field empty will not be returned during the search.
 
 Valid fields for `find` Command:
@@ -284,7 +287,7 @@ Valid fields for `find` Command:
 * Ward: Use `w/` to search by ward.
 * Diagnosis: Use `d/` to search by diagnosis.
 * Medication: Use `m/` to search by medication.
-* Patient Note: Use `pn/` to search by patient note.
+* Patient Notes: Use `pn/` to search by patient notes.
 * Appointment description: Use `a/` to search by appointment description.
 * View parameter constraints [here](#input-parameters)!
 
