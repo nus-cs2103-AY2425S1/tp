@@ -103,13 +103,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns {@code VersionedAddressBook} for testing purpose.
-     */
-    protected VersionedAddressBook getVersionedAddressBook() {
-        return this.versionedAddressBook;
-    }
-
-    /**
      * Saves the getCurrentAddressBook() AddressBook state in the history.
      */
     @Override
@@ -126,6 +119,14 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Reverses the AddressBook to the next state.
+     */
+    @Override
+    public void redoAddressBook() throws CommandException {
+        versionedAddressBook.redoAddressBook();
+    }
+
+    /**
      * Discards the unsaved changes in the current state.
      */
     public void discardUnsavedChanges() {
@@ -136,6 +137,18 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return versionedAddressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasPhone(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasPhone(person);
+    }
+
+    @Override
+    public boolean hasEmail(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasEmail(person);
     }
 
     @Override

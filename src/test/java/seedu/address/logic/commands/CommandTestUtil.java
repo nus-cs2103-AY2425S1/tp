@@ -43,7 +43,6 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_ANDY = "andy@example.com";
     public static final String VALID_EMAIL_BETTY = "johnd@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_EMAIL_JEREMY = "jeremy@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_ANDY = "Block 567, Andy Street 2";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
@@ -81,7 +80,7 @@ public class CommandTestUtil {
     public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BOB;
 
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // blank string not allowed as name
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
@@ -183,5 +182,24 @@ public class CommandTestUtil {
         assertEquals(targetIndices.length, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Simulates the actions of executing the data-modifying {@code command} and
+     * committing the address book by {@code logicManager}. Mainly for testing of
+     * {@code undo} and {@code redo} commands.
+     */
+    public static void executeDataModifyingCommand(Command command, Model model)
+            throws CommandException {
+        command.execute(model);
+        model.commitAddressBook();
+    }
 
+    /**
+     * Simulates the actions of executing non data-modifying {@code command},
+     * without any commit to the address book. Mainly for testing of
+     * {@code undo} and {@code redo} commands.
+     */
+    public static void executeNonDataModifyingCommand(Command command, Model model)
+            throws CommandException {
+        command.execute(model);
+    }
 }

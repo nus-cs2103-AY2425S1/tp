@@ -6,8 +6,12 @@
 
 # ContactCS User Guide
 
-**ContactCS** is a **desktop app designed for NUS Computer Science freshmen** to efficiently manage and locate important contact details, including those of professors, teaching assistants, classmates, school offices, and more.
-
+**ContactCS** is a **desktop application designed for NUS Computer Science freshmen** to help them efficiently manage and locate essential contact details. The app is designed to store and organize contacts for key individuals relevant to their academic journey, including:
+* Professors and teaching assistants for enrolled modules
+* Classmates for collaborative projects and study groups
+* School offices for administrative matters
+* Emergency contacts for urgent situations
+* and more!
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -74,12 +78,27 @@
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Callouts Convention
+
+The callout boxes below are used in documentation to enhance readability and provide important contextual information.
+
+<box type="info" seamless>
+**Info Box:** Provides additional information or context.
+</box>
+
+<box type="tip" seamless>
+**Tip Box:** Offers helpful tips or suggestions.
+</box>
+
+<box type="warning" seamless>
+**Caution Box:** Alerts you to potential issues or problems that may arise.
+</box>
 
 ## Features
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Info: Notes about the command format**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -112,7 +131,7 @@ you want to seek help:
 
 **Shows a message explain the usage of the specified command keyword**
 
-Format: `help COMMAND_KEYWORD`
+Format: `help [COMMAND_KEYWORD]`
 
 Example: 
 - `help add` shows the help message for `add` command in the following format
@@ -130,8 +149,13 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]`
+Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL | p/PHONE_NUMBER e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]`
 
+<box type="information" seamless>
+The command accepts either one phone number, one email, or both.
+</box>
+
+* `NAME` can take any values and can not be blank. Refer to the [input format section](#input-format) to find out more.
 * `PHONE_NUMBER` is almost a free-form text field with minimal validation. Refer to the [input format section](#input-format) to find out more.
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
 * `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
@@ -142,10 +166,12 @@ Format: `add n/NAME (p/PHONE_NUMBER | e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADD
 * `TAG` can take any alphanumeric values and can not be blank.
 * `DESCRIPTION` can take any values but cannot exceed 500 characters.
 
-<box type="tip" seamless>
+<box type="info" seamless>
 
-**Duplicate Handling:**
-A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
+**Info: Duplicate Handling:**
+- A person is considered a duplicate if another person in the address book has the same email address or phone number. The app will prevent adding contacts with duplicate emails or phone numbers. 
+- For the same reason, the app will prevent the user from changing the email address or phone number of a contact to one that is already in use by another contact.
+
 </box>
 
 Examples:
@@ -161,14 +187,13 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book. The module role pairs are edited with a slightly different syntax which
-is explained below.
+Edits an existing person in the address book.
 
 #### Module-role
 
-The module-role pairs can be edited by adding, deleting, or replacing.
+The module-role pairs can be edited by adding and deleting.
 
-##### Add new module-role pairs
+##### Adding new module-role pairs
 
 Format: `edit INDEX r/+(MODULECODE[-ROLETYPE])+`
 
@@ -185,13 +210,13 @@ Examples:
 
 <box type="warning" seamless>
 
-**Common Mistakes:**
+**Caution: Common Mistakes**
 - If you are adding multiple module-role pairs, only the first pair should have a `+` sign before the module-role pair. 
 The subsequent pairs should not have a `+` sign before them. i.e. `r/+CS1101S +MA1521-TA` is unnecessary and will cause an error.
 - You only need to specify one `r/`. i.e. `r/+CS1101S r/+MA1521-TA` is unnecessary and will cause an error.
 </box>
 
-##### Delete existing module-role pairs
+##### Deleting existing module-role pairs
 
 Format: `edit INDEX r/-(MODULECODE[-ROLETYPE])+`
 * Deletes existing roles from the person at the specified `INDEX`. The index refers to the index number shown in the
@@ -208,7 +233,7 @@ Examples:
 
 <box type="warning" seamless>
 
-**Be careful:**
+**Caution:**
 - Omitting the role type intentionally leads to two different behaviors for adding and deleting roles:
   - For adding roles, the role type is assumed to be `Student`.
   - For deleting roles, **any role associated with the module code** will be deleted, regardless of the role type.
@@ -216,7 +241,7 @@ Examples:
 If you wish to delete a `Student` role specifically, you must specify `r/-MODULE_CODE-Student` explicitly.
 </box>
 
-#### All other fields
+#### Editing All other fields
 
 Except for the module-role pairs, all other fields can only be edited by complete replacement.
 
@@ -270,26 +295,39 @@ Format: `find (r/KEYWORD)+`
 
 Examples:
 * `find r/CS2103T` returns all students taking the module `CS2103T`
-* `find r/CS2103T-Prof r/CS1101S` returns all persons with the role Prof in CS2103T or Student in CS1101S 
+* `find r/CS2103T-Prof r/CS1101S` returns all persons with the role Prof in CS2103T or Student in CS1101S
+
   ![result for 'find r/cs2103t-prof r/cs1101s'](images/findModuleRoleExample.png)
 
 #### By name and module-role
 
 Finds persons whose names and module-role pairs contain any combination of the given keywords.
 
-Format: `find (n/KEYWORD)+ (r/KEYWORD)+`
+Format: `find (n/KEYWORD | r/KEYWORD)+`
 
-* Person matching at least one name keyword AND one module-role keyword will be returned (i.e. AND search).
+* Person matching at least one name keyword (if provided) AND at least one module-role keyword (if provided) will be returned (i.e. AND search).
 
-Examples:
+Example:
 * `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
   ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
 
 <box type="info" seamless>
 
-**Chained Find:**
-To further filter the previous search results, use `find chained`.<br>
-Example: `find n/John` followed by `find chained n/Doe` will return all persons whose name contains `John` and `Doe`.
+**Info: Chained Find**
+The Chained Find feature allows you to narrow down previous search results by applying additional filters,
+making it easier to locate specific entries that meet multiple criteria.<br>
+
+**How to Use Chained Find**
+
+* Start with an Initial Search:
+  * Begin by using the find command with your first search criterion.
+
+* Apply Additional Filters with find chained:
+  * Use the find chained command immediately after the initial search to further filter the displayed results based on new criteria.
+  
+**Example**
+* Step 1: type `find n/John` and hit enter. You will see all entries with "John" in their names;
+* Step 2: type `find chained n/Doe` and hit enter. This time you will see only the entries that contain both "John" and "Doe" in their names.
 
 </box>
 
@@ -312,11 +350,11 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all contacts from the address book.
 
 Format: `clear`
 
-### Undo latest change to contact data: `undo`
+### Undoing latest change to contact data: `undo`
 Undoes the effect done by the latest data-modifying command, if any.
 
 Format: `undo`
@@ -325,6 +363,8 @@ Format: `undo`
 such as add, edit, delete or clear.
 * Commands that does not modify contact data in the address book(list, help, find etc.)
 are not considered by the undo command.
+* If you input `undo` when there's nothing to undo, GUI will remind you about this
+and no effect would be applied to the address book.
 
 Examples:
 * If you accidentally delete a contact using the `delete` command,
@@ -332,6 +372,20 @@ you can revert this change by input `undo` command.
 * Similarly, if you accidentally clear the whole address book using the `clear` command,
 you can restore the whole address book using `undo` command as well.
 * Wrong adding/editing of contact info can be reverted by inputting `undo` as well.
+
+### Redoing latest undone change to contact data: `redo`
+Redoes the latest undone modification on contact data, if any.
+
+Format: `redo`
+
+* Redo only helps to restore command results that can be handled by undo command,
+such as add, edit, delete and clear.
+* If you input `redo` when there's nothing to undo, GUI will remind you about this
+and no effect would be applied to the address book.
+
+Examples:
+* If you undo a change to the contact data, but end up thinking that it may be
+better to keep it, you can input `redo` after undo the change to restore it back.
 
 ### Exiting the program : `exit`
 
@@ -345,7 +399,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/contactcs.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -362,18 +416,22 @@ _Details coming soon ..._
 
 ## Input format
 
+### `NAME` field
+
+In our application, we understand that everyone's names can have various characters and symbols, thus we decided that as long as it is not a blank string, it is considered acceptable.
+
 ### Concept of a phone number
 
 In our application, the concept of a phone number is defined as:
 
 1. a string without any whitespace,
-2. with at least 3 digits,
+2. with at least 2 digits,
 3. without any alphabet characters,
 4. and may contain additional characters such as but not limited to "+", "-", "(", and ")".
 
 Some valid phone numbers include `+6581234567`, `81234567`, or `+44-1234567`.
 
-Some invalid phone numbers include `+65 81 23 45 67`, or `8123p4567`.
+Some invalid phone numbers include `+6 5 8 1 2 3 4 5 6 7`, or `8123p4567`.
 
 ### `PHONE_NUMBER` field
 
@@ -401,13 +459,13 @@ This allows you to add extra annotations if you wish to.
 
 ## Command summary
 
-Action     | Format, Examples                                                                                                                                                                                            
------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague d/A good guy` 
-**Clear**  | `clear`                                                                                                                                                                                                     
-**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                    
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/+(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                      
-**Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521` 
-**Undo**   | `undo`
-**List**   | `list`                                                                                                                                                                                                      
-**Help**   | `help`                                                                                                                                                                                                      
+ Action     | Format, Examples                                                                                                                                                                                                                                                        
+------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n/NAME (p/PHONE_NUMBER \| e/EMAIL \| p/PHONE_NUMBER e/EMAIL) [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+ [d/DESCRIPTION]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague d/A good guy` 
+ **Clear**  | `clear`                                                                                                                                                                                                                                                                 
+ **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                                                                                
+ **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+ [r/(+\|-)(MODULECODE[-ROLETYPE])+] [d/DESCRIPTION]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com r/+CS2030S CS1101S-TA`                                                                     
+ **Find**   | `find [chained] (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find chained n/James n/Jake r/CS1101S r/MA1521`                                                                                                                                                                   
+ **Undo**   | `undo`                                                                                                                                                                                                                                                                  
+ **List**   | `list`                                                                                                                                                                                                                                                                  
+ **Help**   | `help [COMMAND_KEYWORD]`<br> e.g., `help add` or `help`                                                                                                                                                                                                                 

@@ -95,6 +95,28 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have the same phone number.
+     */
+    public boolean isPhonePresentAndSame(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+
+        return hasPhone() && otherPerson.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Returns true if both persons have the same email.
+     */
+    public boolean isEmailPresentAndSame(Person otherPerson) {
+        if (otherPerson == null) {
+            return false;
+        }
+
+        return hasEmail() && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -174,5 +196,15 @@ public class Person {
      */
     public boolean hasNonEmptyDescription() {
         return description.filter(value -> !value.isBlank()).isPresent();
+    }
+
+    /**
+     * Returns the description of the person as a string. If the description is blank, returns a default string.
+     */
+    public String getDescriptionString() {
+        return description
+                .filter(value -> !value.isBlank())
+                .map(Objects::toString)
+                .orElse("<no description>");
     }
 }
