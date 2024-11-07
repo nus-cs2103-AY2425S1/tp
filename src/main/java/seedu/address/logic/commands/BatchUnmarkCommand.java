@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -28,11 +29,11 @@ public class BatchUnmarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the attendance of all students in the current list";
 
-    public static final String MESSAGE_BATCH_UNMARK_SUCCESS = "Unmarked attendance for all students in this list";
+    public static final String MESSAGE_BATCH_UNMARK_SUCCESS = "Unmarked attendance for: %1$s";
     public static final String MESSAGE_BATCH_UNMARK_NO_STUDENT_LIST = "There is no student in this list";
 
     private boolean hasStudent;
-
+    private List<Student> students = new ArrayList<>();
     public BatchUnmarkCommand() {
         this.hasStudent = false;
     }
@@ -44,9 +45,9 @@ public class BatchUnmarkCommand extends Command {
 
         for (Person p : lastShownList) {
             if (p instanceof Student) {
+                this.hasStudent = true;
                 Student studentToUnmark = (Student) p;
-                Student unmarkedStudent = createNewStudentWithUnmarkedAttendance(studentToUnmark);
-                model.setPerson(p, unmarkedStudent);
+                students.add(studentToUnmark);
             }
         }
 
@@ -54,8 +55,14 @@ public class BatchUnmarkCommand extends Command {
             throw new CommandException(String.format(MESSAGE_BATCH_UNMARK_NO_STUDENT_LIST));
         }
 
+        for (Student p : students) {
+            Student markedStudent = createNewStudentWithUnmarkedAttendance(p);
+            model.setPerson(p, markedStudent);
+        }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_BATCH_UNMARK_SUCCESS));
+        String selectedPersons = formatUnmarkedStudents(students);
+
+        return new CommandResult(String.format(MESSAGE_BATCH_UNMARK_SUCCESS, selectedPersons));
     }
 
     /**
@@ -80,6 +87,19 @@ public class BatchUnmarkCommand extends Command {
         String newAttendanceCountStr = newAttendanceCountInt.toString();
         AttendanceCount newAttendanceCount = new AttendanceCount(newAttendanceCountStr);
         return new Student(name, role, phone, email, address, tags, newAttendanceCount);
+    }
+
+    /**
+     * Formats a list of student names into a comma-separated string for display.
+     *
+     * @param students The list of students unmarked.
+     * @return A comma-separated string of student names, or "none" if the list is empty.
+     */
+    public static String formatUnmarkedStudents(List<Student> students) {
+        return students.stream()
+                .map(person -> person.getName().toString())
+                .reduce((s1, s2) -> s1 + ", " + s2)
+                .orElse("none");
     }
 
     @Override

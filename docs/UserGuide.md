@@ -64,9 +64,9 @@ Cher is a **desktop app for managing contacts, optimized for use via a Command L
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows the comprehensive User Guide page and displays a floating window allowing the user to copy the URL of the user guide page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpWindow.png)
 
 Format: `help`
 
@@ -80,6 +80,7 @@ Format: `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Role can either be ```student``` or ```parent```, case-insensitive.
 
 Sex can either be ```f``` or ```m```, case-insensitive.
+
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -187,9 +188,65 @@ Delete all contacts from Cher that contain **all** the specified tags.
 Format: `batch-delete t/TAG [t/TAG]...`
 
 Examples:
+
 ![Batch delete example data](images/ForBatchDeleteExampleData.png)
 * `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
 * `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
+
+### Mark attendance for a single student: `mark`
+
+Marks the attendance of a specified student. 
+
+Format: `mark INDEX`
+
+* Marks the attendance for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list` followed by `mark 2` marks the attendance of the the 2nd person in the Cher.
+
+### Unmark attendance for a single student: `unmark`
+
+Unmarks the attendance of a specified student. 
+
+Format: `unmark INDEX`
+
+* Unmarks the attendance for the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `list` followed by `unmark 3` unmarks the attendance of the 3rd person in Cher.
+
+### Reset attendance: `reset-att`
+
+Resets the attendance count of all students in displayed list to 0. 
+
+Format: `reset-att`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To reset the attendance count of all students to 0, enter `list` to get a list of all contacts, then enter `reset-att`!
+</div>
+
+### Mark attendance for a group of students: `batch-mark`
+
+Marks attendance for all students in the displayed list. 
+
+Format: `batch-mark`
+
+Example:
+* Enter `select 1 2 3` and then `batch-mark` marks the attendance of entries 1, 2 and 3
+
+
+### Unmark attendance for a group of students: `batch-unmark`
+
+Unmarks attendance for all students in the displayed list. 
+
+Format: `batch-unmark`
+
+Example:
+* Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
 
 ### Selecting persons by index: `select`
 Select contacts from the address book by specifying their index numbers in the currently displayed list. Only the specified contacts will remain in view.
@@ -209,7 +266,6 @@ Format: `batch-edit t/OLDTAG t/NEWTAG`
 Examples:
 ![Batch delete example data](images/ForBatchDeleteExampleData.png)
 * `batch-edit t/friends t/fren` will change the `friends` tag of both `Alex Yeoh` and `Bernice Yu` to `fren`.
-
 
 
 ### Clearing all entries : `clear`
@@ -237,10 +293,6 @@ If your changes to the data file makes its format invalid, Cher will discard all
 Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -267,6 +319,12 @@ Action | Format, Examples
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
+**Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
+**Mark** | `mark INDEX` <br> e.g., `mark 2`
+**Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
+**Batch Mark** | `batch-mark`
+**Batch Unmark** | `batch-unmark`
+**Reset Attendance** | `reset-att` 
 **List** | `list`
 **Help** | `help`
