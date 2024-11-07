@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tier {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "The Tiers are gold, silver, bronze and reject. Please use one of them.";
+    public static final String MESSAGE_CONSTRAINTS = "Tier can be set to 'gold', 'silver', 'bronze', 'reject' or 'na'. "
+            + "Please use one of these options if specifying a tier.";
 
     public final TierEnum tierName;
 
@@ -22,20 +22,13 @@ public class Tier {
     public Tier(String tierName) {
         requireNonNull(tierName);
         checkArgument(isValidTierName(tierName), MESSAGE_CONSTRAINTS);
-        if (tierName.isEmpty()) {
-            this.tierName = TierEnum.NA;
-        } else {
-            this.tierName = TierEnum.valueOf(tierName.toUpperCase());
-        }
+        this.tierName = TierEnum.valueOf(tierName.toUpperCase());
     }
 
     /**
      * Returns true if a given string is a valid tier name.
      */
     public static boolean isValidTierName(String test) {
-        if (test.isEmpty()) {
-            return true;
-        }
         for (TierEnum c : TierEnum.values()) {
             if (c.name().equals(test.toUpperCase())) {
                 return true;
@@ -72,13 +65,10 @@ public class Tier {
     }
 
     /**
-     * Format Tier for parsing/decoding. As TierEnum.NA is only for internal use,
-     * if tierName equals TierEnum.NA, an empty string is returned
+     * Formats the tier into a string form, without square brackets.
+     * @return The string value of the tier without brackets
      */
-    public String toParsableString() {
-        if (tierName.equals(TierEnum.NA)) {
-            return "";
-        }
+    public String getValue() {
         return tierName.toString();
     }
 

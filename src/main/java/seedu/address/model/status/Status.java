@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Status {
 
-    public static final String MESSAGE_CONSTRAINTS = "Status can be left blank, or set to 'non_urgent' or 'urgent'. "
+    public static final String MESSAGE_CONSTRAINTS = "Status can be set to 'non_urgent' or 'urgent' or 'na'. "
             + "Please use one of these options if specifying a status.";
 
 
@@ -23,11 +23,7 @@ public class Status {
     public Status(String statusString) {
         requireNonNull(statusString);
         checkArgument(isValidStatus(statusString), MESSAGE_CONSTRAINTS);
-        if (statusString.isEmpty()) {
-            this.status = StatusEnum.NA;
-        } else {
-            this.status = StatusEnum.valueOf(statusString.toUpperCase());
-        }
+        this.status = StatusEnum.valueOf(statusString.toUpperCase());
     }
 
     /**
@@ -37,9 +33,6 @@ public class Status {
      * @return A boolean value that checks if a given string, belongs to one of the valid status enum values
      */
     public static boolean isValidStatus(String test) {
-        if (test.isEmpty()) {
-            return true; // assign NA
-        }
         for (StatusEnum currentEnum: StatusEnum.values()) {
             if (currentEnum.name().equals(test.toUpperCase())) {
                 return true;
@@ -76,7 +69,7 @@ public class Status {
      * Formats the status into a string form, without square brackets.
      * @return The string value of the status without brackets
      */
-    public String toParsableString() {
+    public String getValue() {
         return status.toString();
     }
 

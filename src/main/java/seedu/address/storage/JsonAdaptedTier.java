@@ -25,7 +25,7 @@ class JsonAdaptedTier {
      * Converts a given {@code Tier} into this class for Jackson use.
      */
     public JsonAdaptedTier(Tier source) {
-        tierName = source.toParsableString();
+        tierName = source.getValue();
     }
 
     @JsonValue

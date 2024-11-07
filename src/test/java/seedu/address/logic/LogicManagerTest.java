@@ -75,6 +75,7 @@ public class LogicManagerTest {
         String[] deleteCommand = {"delete 1", "no"};
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + INCOME_DESC_AMY;
+        System.out.println(addCommand);
         logic.execute(addCommand);
         assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, model);
     }
