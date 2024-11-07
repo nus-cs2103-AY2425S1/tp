@@ -1,0 +1,74 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddTaskCommandParser" as AddTaskCommandParser LOGIC_COLOR
+participant "command:AddTaskCommand" as AddTaskCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("addtask n/John t/Mark homework d/2024-11-11")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("addtask n/John t/Mark homework d/2024-11-11")
+activate AddressBookParser
+
+create AddTaskCommandParser
+AddressBookParser -> AddTaskCommandParser
+activate AddTaskCommandParser
+
+AddTaskCommandParser --> AddressBookParser
+deactivate
+
+AddressBookParser -> AddTaskCommandParser : parse("n/John t/Mark homework d/2024-11-11")
+activate AddTaskCommandParser
+
+create AddTaskCommand
+AddTaskCommandParser -> AddTaskCommand
+activate AddTaskCommand
+
+AddTaskCommand --> AddTaskCommandParser :
+deactivate AddTaskCommand
+
+AddTaskCommandParser --> AddressBookParser : command
+deactivate AddTaskCommandParser
+
+AddTaskCommandParser -[hidden]-> AddressBookParser
+destroy AddTaskCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> AddTaskCommand : execute()
+activate AddTaskCommand
+
+AddTaskCommand -> Model : setStudent(targetStudent, updatedStudent)
+activate Model
+Model --> AddTaskCommand
+deactivate Model
+
+AddTaskCommand -> Model : updateFilteredStudentList(new TaskListNotEmptyPredicate())
+activate Model
+Model --> AddTaskCommand
+deactivate Model
+
+create CommandResult
+AddTaskCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddTaskCommand
+deactivate CommandResult
+
+AddTaskCommand --> LogicManager : r
+deactivate AddTaskCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -65,6 +65,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+***
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -81,6 +83,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+
+***
 
 ### Logic component
 
@@ -115,11 +119,13 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+***
+
 ### Model component
+
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W08-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="750" />
-
 
 The `Model` component,
 
@@ -136,6 +142,7 @@ The `Model` component,
 
 </box>
 
+***
 
 ### Storage component
 
@@ -148,15 +155,18 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+***
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## Implementation
 
-This section describes some noteworthy details on how certain features and parameters are implemented.
+This section describes some noteworthy details on how certain features and parameters are implemented. For all examples
+below, the user is the tuition teacher, unless specified otherwise.
 
 ### Lesson Time Parameter
 This parameter allows users to keep track of a student's lesson timings. Multiple lesson times can be added for a single student.
@@ -203,7 +213,7 @@ The Add feature allows users to register a new student in the system with a rang
 In the activity diagram for the "Add Student" feature below, the sequence of actions involved in adding a student to the
 system is illustrated, covering validation, error handling, and the addition of the student.
 
-<puml src="diagrams/add/AddActivityDiagram.puml" alt="AddActivityDiagram" />
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
 
 #### Design Considerations
 **Centralized Validation in Subject Class**
@@ -288,7 +298,6 @@ Note that while the `AddTaskCommandParser` lifeline ideally ends at a destroy ma
 extend the lifeline till the diagram’s end.
 
 <puml src="diagrams/AddTaskSequenceDiagram-Logic.puml" alt="AddTaskSequenceDiagram-Logic" />
-<puml src="diagrams/AddTaskSequenceDiagram-Model.puml" alt="AddTaskSequenceDiagram-Model" />
 
 #### Design Considerations
 **Parsing Task Input**
@@ -344,6 +353,7 @@ extend the lifeline till the diagram’s end.
 
 **Value proposition**: Manage students faster than a typical mouse/GUI driven app
 
+***
 
 ### User stories
 
