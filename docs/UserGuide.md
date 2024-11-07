@@ -340,7 +340,7 @@ In our application, the concept of a phone number is defined as:
 
 Some valid phone numbers include `+6581234567`, `81234567`, or `+44-1234567`.
 
-Some invalid phone numbers include `+65 8 1 2 3 4 5 6 7`, or `8123p4567`.
+Some invalid phone numbers include `+6 5 8 1 2 3 4 5 6 7`, or `8123p4567`.
 
 ### `PHONE_NUMBER` field
 

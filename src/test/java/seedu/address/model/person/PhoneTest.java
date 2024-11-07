@@ -67,7 +67,7 @@ public class PhoneTest {
         // ---- Unique test cases for isValidPhoneField()
 
         // invalid
-        assertFalse(Phone.isValidPhoneField("9- +2 1")); // each token has less than 2 numbers
+        assertFalse(Phone.isValidPhoneField("+6 5 8 1 2 3 4 5 6 7")); // each token has less than 2 numbers
         assertFalse(Phone.isValidPhoneField("9-     +2   1")); // extra spaces
 
         // valid
