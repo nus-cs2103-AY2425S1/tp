@@ -99,7 +99,7 @@ dependencies {
 
 shadowJar {
     archiveBaseName = "spleetwaise"
-    archiveVersion = "1.5"
+    archiveVersion = "1.5.1"
     archiveClassifier = null
 }
 
