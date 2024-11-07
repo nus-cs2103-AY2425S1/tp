@@ -642,18 +642,107 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `remind`<br>
         Expected: UGTeach displays congratulatory message for having no lessons scheduled today.
 
+### Using pay command
+
+1. Using pay command while all students are being shown.
+
+    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
+
+    1. Test case: `pay 1 hr/1`<br>
+       Expected: Paid amount for 1st student increases by (1 hr * rate). UGTeach displays a message that 1st student paid (1 hr * rate).
+
+    1. Test case: `pay 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message notifying that number of hours provided is invalid.
+
+    1. Test case: `pay 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+1. Using pay command from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `pay 1 hr/1`<br>
+       Expected: Paid amount for 1st student in **filtered list** increases by (1 hr * rate). UGTeach displays a message that 1st student paid (1 hr * rate).
+
+    1. Test case: `pay 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message notifying that number of hours provided is invalid.
+
+    1. Test case: `pay 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+### Using owe command
+
+1. Using owe command while all students are being shown.
+
+    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
+
+    1. Test case: `owe 1 hr/1`<br>
+       Expected: Owed amount for 1st student increases by (1 hr * rate). UGTeach displays a message that 1st student owed another (1 hr * rate).
+
+    1. Test case: `owe 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message notifying that number of hours provided is invalid.
+
+    1. Test case: `owe 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+1. Using owe command from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `owe 1 hr/1`<br>
+       Expected: Owed amount for 1st student in **filtered list** increases by (1 hr * rate). UGTeach displays a message that 1st student owed another (1 hr * rate).
+
+    1. Test case: `owe 1 hr/-1`<br>
+       Expected: No changes. UGTeach displays error message notifying that number of hours provided is invalid.
+
+    1. Test case: `owe 0 hr/1`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+### Using settle command
+
+1. Using settle command while all students are being shown.
+
+    1. Prerequisite: List all students using the `list` command. There should be **at least 1 student** listed.
+
+    1. Test case: `settle 1 amount/10`<br>
+       Expected: For 1st student, assuming owed amount is more than 10, owed amount decreases by 10, while paid amount increases by 10. UGTeach displays a message that payment of 10.00 has been settled.
+
+    1. Test case: `settle 1 amount/-10`<br>
+       Expected: No changes. UGTeach displays error message notifying that amount is invalid.
+
+    1. Test case: `settle 0 amount/10`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
+    1. Test case: `settle 1 amount/10000`<br>
+       Expected: No changes, assuming that the amount entered is more than the amount owed.
+       UGTeach displays error message that entered amount is more than amount owed.
+
+1. Using settle command from a filtered list.
+
+    1. Prerequisite: Find a student using the `find` command. There should be **at least 1 student** found.
+
+    1. Test case: `settle 1 amount/10`<br>
+       Expected: For 1st student in **filtered list**, assuming owed amount is more than 10, owed amount decreases by 10, while paid amount increases by 10. UGTeach displays a message that payment of 10.00 has been settled.
+
+    1. Test case: `settle 1 amount/-10`<br>
+       Expected: No changes. UGTeach displays error message notifying that amount is invalid.
+
+    1. Test case: `settle 0 amount/10`<br>
+       Expected: No changes. UGTeach displays error message of invalid command format.
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. Prerequisite: There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
+    1. Prerequisite: There is a folder named `data` in the same directory as the jar file, and there is a `ugteach.json` file in the `data` folder.
 
-   1. Test case: Delete the `ugteach.json` file.<br>
+    1. Test case: Delete the `ugteach.json` file.<br>
        Expected: UGTeach should create a new `ugteach.json` file with default data.
-        
-   1. Test case: Delete the `data` folder together with the `ugteach.json` file.<br>
+
+    1. Test case: Delete the `data` folder together with the `ugteach.json` file.<br>
        Expected: Similar to previous.
 
-   1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
-   e.g. add a non-alphanumeric character to one of the student's name.<br>
+    1. Test case: Corrupt the `ugteach.json` file by changing its contents to invalid format.<br>
+       e.g. add a non-alphanumeric character to one of the student's name.<br>
        Expected: UGTeach should discard all data in the file and start with an empty `ugteach.json` file.
+
