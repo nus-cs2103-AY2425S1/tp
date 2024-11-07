@@ -19,7 +19,6 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
@@ -154,8 +153,9 @@
 
 .cell_rsvp_status_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 11px;
+    -fx-font-size: 13px;
     -fx-text-fill: -color-text-dark;
+    -fx-padding: 2, 1, 2, 1;
 }
 
 .stack-pane {
@@ -387,6 +387,12 @@
 
 .tag-label {
     -fx-text-fill: white;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.rsvp-filter-label {
     -fx-padding: 5;
     -fx-background-radius: 5;
     -fx-border-radius: 5;

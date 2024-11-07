@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +30,8 @@ public class ModelManager implements Model {
     private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
     private Command previousCommand;
+    private ObservableList<Tag> tagFilters = FXCollections.observableArrayList();
+    private ObservableList<RsvpStatus> statusFilters = FXCollections.observableArrayList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -284,6 +287,64 @@ public class ModelManager implements Model {
         @SuppressWarnings("unchecked")
         Predicate<Person> result = (Predicate<Person>) filteredPersons.getPredicate();
         return result;
+    }
+
+    @Override
+    public ObservableList<Tag> getTagFiltersList() {
+        return tagFilters;
+    }
+
+    @Override
+    public ObservableList<RsvpStatus> getStatusFiltersList() {
+        return statusFilters;
+    }
+
+    @Override
+    public void addTagFilters(Set<Tag> tagFilters) {
+        for (Tag tag : tagFilters) {
+            if (!this.tagFilters.contains(tag)) {
+                this.tagFilters.add(tag);
+            }
+        }
+    }
+
+    @Override
+    public void addStatusFilters(Set<RsvpStatus> statusFilters) {
+        for (RsvpStatus status : statusFilters) {
+            if (!this.statusFilters.contains(status)) {
+                this.statusFilters.add(status);
+            }
+        }
+    }
+
+    @Override
+    public boolean checkTagFilterAlreadyExists(Tag tagToCheck) {
+        if (this.tagFilters.contains(tagToCheck)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+        if (this.statusFilters.contains(statusToCheck)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
+        this.tagFilters.removeAll(tagFilters);
+        this.statusFilters.removeAll(statusFilters);
+
+    }
+
+    @Override
+    public void clearFilterSet() {
+        this.tagFilters.clear();
+        this.statusFilters.clear();
     }
 
     @Override
