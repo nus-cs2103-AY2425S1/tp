@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,7 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private final CommandExecutor commandExecutor;
 
     @FXML
-    private TextArea commandTextArea;
+    private TextField commandTextField;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -27,60 +27,40 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        commandTextArea.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
-
-
-        commandTextArea.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
-            case ENTER:
-                handleCommandEntered();
-                event.consume();
-                break;
-            default:
-                break;
-            }
-        });
+        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
-
 
     /**
      * Handles the Enter button pressed event.
      */
     @FXML
     private void handleCommandEntered() {
-        String commandText = commandTextArea.getText();
+        String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
         }
 
         try {
             commandExecutor.execute(commandText);
-            resetCommandBox();
+            commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
     }
 
     /**
-     * Resets the command box by clearing the text area and setting style to default.
-     */
-    private void resetCommandBox() {
-        commandTextArea.setText("");
-        setStyleToDefault();
-    }
-
-    /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
-        commandTextArea.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextArea.getStyleClass();
+        ObservableList<String> styleClass = commandTextField.getStyleClass();
 
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
