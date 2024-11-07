@@ -22,6 +22,7 @@ import seedu.address.model.person.Person;
  */
 public class AddPersonToEventCommand extends Command {
     public static final String COMMAND_WORD = "event-add";
+    public static final String COMMAND_WORD_SHORT_FORM = "ea";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " ei/EVENT INDEX [a/ or s/ or ve/ or vo/] CONTACT "
             + "INDEX \nAdds contacts to an event in the address book. \nNote: At least one of the following prefixes "

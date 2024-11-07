@@ -29,15 +29,15 @@ public class RemovePersonFromEventParser implements Parser<RemovePersonFromEvent
     public RemovePersonFromEventCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                CliSyntax.PREFIX_EVENT_INDEX, CliSyntax.PREFIX_PERSON_INDEX);
+                CliSyntax.PREFIX_EVENT_INDEX, CliSyntax.PREFIX_CONTACT_INDEX);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_EVENT_INDEX, CliSyntax.PREFIX_PERSON_INDEX);
+        argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_EVENT_INDEX, CliSyntax.PREFIX_CONTACT_INDEX);
 
         Index personIndex;
         Index eventIndex;
 
         try {
-            personIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_PERSON_INDEX).get());
+            personIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_CONTACT_INDEX).get());
             eventIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_EVENT_INDEX).get());
 
         } catch (ParseException pe) {

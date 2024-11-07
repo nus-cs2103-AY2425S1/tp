@@ -13,7 +13,8 @@ import seedu.address.model.person.Person;
  * Checks how many Contacts are currently excluded.
  */
 public class CheckExcludedCommand extends Command {
-    public static final String COMMAND_WORD = "checkexcluded";
+    public static final String COMMAND_WORD = "check-excluded";
+    public static final String COMMAND_WORD_SHORT_FORM = "chx";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Checks which Contacts are currently excluded.\n"
             + "Example: " + COMMAND_WORD;

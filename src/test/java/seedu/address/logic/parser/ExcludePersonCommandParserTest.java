@@ -23,14 +23,14 @@ public class ExcludePersonCommandParserTest {
         ExcludePersonCommandParser excludePersonCommandParser = new ExcludePersonCommandParser();
         Set<Index> expectedIndex = new HashSet<>();
         expectedIndex.add(Index.fromOneBased(1));
-        assertParseSuccess(excludePersonCommandParser, "exclude pi/1",
+        assertParseSuccess(excludePersonCommandParser, "exclude ci/1",
                 new ExcludePersonCommand(expectedIndex));
     }
 
     @Test
     public void parse_invalidIndex_failure() {
         ExcludePersonCommandParser excludePersonCommandParser = new ExcludePersonCommandParser();
-        assertThrows(ParseException.class, () -> excludePersonCommandParser.parse("exclude pi/0"));
+        assertThrows(ParseException.class, () -> excludePersonCommandParser.parse("exclude ci/0"));
     }
 
 }

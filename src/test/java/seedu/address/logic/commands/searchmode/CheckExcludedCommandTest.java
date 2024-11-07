@@ -31,7 +31,7 @@ public class CheckExcludedCommandTest {
     @Test
     public void execute_empty() {
         CheckExcludedCommand checkExcludedCommand = new CheckExcludedCommand();
-        assertEquals("No Contacts are currently excluded.",
+        assertEquals(CheckExcludedCommand.MESSAGE_EMPTY,
                 checkExcludedCommand.execute(model, model.getEventManager()).getFeedbackToUser());
     }
 

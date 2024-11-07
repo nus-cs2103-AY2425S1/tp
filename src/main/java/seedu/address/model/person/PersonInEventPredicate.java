@@ -40,4 +40,9 @@ public class PersonInEventPredicate implements Predicate<Person> {
     public String toString() {
         return new ToStringBuilder(this).add("Event", event).toString();
     }
+
+
+    public Event getEvent() {
+        return event;
+    }
 }

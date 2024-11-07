@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -11,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -73,28 +76,54 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         logic.getSearchMode().addListener((observable, oldValue, newValue) -> updateUiBasedOnSearchMode(newValue));
-
     }
 
     private void updateUiBasedOnSearchMode(boolean isSearchMode) {
         HBox hbox = new HBox();
         HBox.setHgrow(hbox, Priority.ALWAYS);
+        VBox.setVgrow(hbox, Priority.ALWAYS);
         hbox.setPrefWidth(personListPanelPlaceholder.getWidth());
         hbox.setPrefHeight(personListPanelPlaceholder.getHeight());
+        hbox.setSpacing(5);
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        HBox.setHgrow(personListPanel.getRoot(), Priority.ALWAYS);
-        hbox.getChildren().add(personListPanel.getRoot());
-
-        if (isSearchMode) {
-            allPersonListPanel = new PersonListPanel(logic.getAllPersons());
-            allPersonListPanel.getRoot().setStyle("-fx-border-color: #87CEEB; -fx-border-width: 2;");
-            HBox.setHgrow(allPersonListPanel.getRoot(), Priority.ALWAYS);
-            hbox.getChildren().add(allPersonListPanel.getRoot());
-        }
+        addExtraPanelIfOnSearchMode(isSearchMode, hbox);
 
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(hbox);
+    }
+
+    private void addExtraPanelIfOnSearchMode(boolean isSearchMode, HBox hbox) {
+        if (isSearchMode) {
+            VBox searchContainer = new VBox();
+            HBox.setHgrow(searchContainer, Priority.ALWAYS);
+            VBox searchHeader = new VBox();
+            searchHeader.setAlignment(Pos.CENTER);
+            Label eventLabel = new Label("Search Results");
+            eventLabel.getStyleClass().add("label-eventHeader");
+            searchHeader.getChildren().add(eventLabel);
+            searchHeader.setStyle("-fx-padding: -10 0 0 0;");
+            searchContainer.getChildren().add(searchHeader);
+
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+            personListPanel.getRoot().setStyle("-fx-border-color: #87CEEB; -fx-border-width: 2; "
+                    + "-fx-background-radius: 12; -fx-border-radius: 12;");
+            VBox.setVgrow(personListPanel.getRoot(), Priority.ALWAYS);
+
+            searchContainer.getChildren().add(personListPanel.getRoot());
+
+            hbox.getChildren().add(searchContainer);
+
+            allPersonListPanel = new PersonListPanel(logic.getAllPersons());
+            HBox.setHgrow(allPersonListPanel.getRoot(), Priority.ALWAYS);
+            hbox.getChildren().add(allPersonListPanel.getRoot());
+
+            commandBoxPlaceholder.setStyle("-fx-border-color: #87CEEB; -fx-border-width: 2; ");
+        } else {
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+            HBox.setHgrow(personListPanel.getRoot(), Priority.ALWAYS);
+            hbox.getChildren().add(personListPanel.getRoot());
+            commandBoxPlaceholder.setStyle("");
+        }
     }
 
     public Stage getPrimaryStage() {

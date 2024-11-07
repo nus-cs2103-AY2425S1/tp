@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT_INDEX;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,14 +23,14 @@ public class ExcludePersonCommandParser implements Parser<ExcludePersonCommand> 
      */
     public ExcludePersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_PERSON_INDEX);
+                ArgumentTokenizer.tokenize(args, PREFIX_CONTACT_INDEX);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_INDEX)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_CONTACT_INDEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExcludePersonCommand.MESSAGE_USAGE));
         }
 
         Set<Index> excludedIndices = new HashSet<>();
-        ParserUtil.parseStringOfIndices(excludedIndices, argMultimap.getValue(PREFIX_PERSON_INDEX).orElse(null));
+        ParserUtil.parseStringOfIndices(excludedIndices, argMultimap.getValue(PREFIX_CONTACT_INDEX).orElse(null));
         return new ExcludePersonCommand(excludedIndices);
     }
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
