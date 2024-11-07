@@ -8,28 +8,27 @@ optimized for use via a Command Line Interface** (CLI) while still having the be
 If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
 PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
-and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It taps on the
-fact that it is a lot less complicated to operate than its competitors such as Microsoft Excel while being faster to
-operate than graphical user interfaces commonly found in smartphones.
+and easily filtering them according to tailor-made categories relevant to property agents in Singapore. It is much
+simpler to use while being even more functional than alternatives on the market.
 
 ## Table of Contents
 * [Quick start](#quick-start)
 * [Features](#features)
     * [Adding a client: `add`](#adding-a-client-add)
+    * [Editing a client : `edit`](#editing-a-client--edit)    
+    * [Deleting a client : `delete`](#deleting-a-client--delete)
     * [Listing all clients : `list`](#listing-all-clients--list)
-    * [Editing a client : `edit`](#editing-a-client--edit)
+    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
+    * [Showing property listings of a client : `show`](#showing-property-listings-of-a-client--show)
     * [Locating clients by name: `find`](#locating-clients-by-name-find)
     * [Locating clients by tag: `findtag`](#locating-clients-by-tag-findtag)
-    * [Deleting a client : `delete`](#deleting-a-client--delete)
     * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    * [Exiting the program : `exit`](#exiting-the-program--exit)
-    * [Quick reference help: `help`](#quick-reference-help-help)
     * [Managing Remarks : `remark`](#managing-remarks--remark)
-    * [Showing property listings of a client : `show`](#showing-property-listings-of-a-client--show)
     * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
     * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
     * [Exporting your contacts : `export`](#exporting-your-contacts--export)
-    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
+    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Quick reference help: `help`](#quick-reference-help-help)
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
@@ -53,7 +52,7 @@ operate than graphical user interfaces commonly found in smartphones.
 4. Double-click on the `.jar` file to run it
    - **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
 
-- A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+- A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Ui](images/user-guide-images/Ui.png)
 
@@ -204,18 +203,6 @@ Examples:
 Visual example of correct output:
 
 ![Show Command](images/user-guide-images/ShowCommandShowcase.png)
-
-### Quick reference help: `help`
-
-Shows commands in a help menu for quick reference during use of PROperty.
-
-Format: `help`
-
-Visual example of correct output:
-
-![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase2.png)
 
 ### Locating clients by name: `find`
 
@@ -376,6 +363,18 @@ PROperty data are saved automatically as a JSON file `[JAR file location]/data/p
 If your changes to the data file makes its format invalid, PROperty will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
+### Quick reference help: `help`
+
+Shows commands in a help menu for quick reference during use of PROperty.
+
+Format: `help`
+
+Visual example of correct output:
+
+![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
+![help message](images/user-guide-images/HelpMessageShowcase.png)
+![help message](images/user-guide-images/HelpMessageShowcase2.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
