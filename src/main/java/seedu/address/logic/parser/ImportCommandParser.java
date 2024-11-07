@@ -20,7 +20,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * Checks if all specified prefixes have values in the given ArgumentMultimap.
      *
      * @param argumentMultimap ArgumentMultimap containing parsed prefixes and their values.
-     * @param prefixes Prefixes to check for presence.
+     * @param prefixes         Prefixes to check for presence.
      * @return true if all specified prefixes have non-empty values, otherwise false.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
@@ -31,7 +31,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
      * Checks if any of the specified prefixes appears more than once in the ArgumentMultimap.
      *
      * @param argumentMultimap ArgumentMultimap containing parsed prefixes and their values.
-     * @param prefixes Prefixes to check for duplicates.
+     * @param prefixes         Prefixes to check for duplicates.
      * @return true if any prefix appears more than once, otherwise false.
      */
     private static boolean hasDuplicatePrefixes(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

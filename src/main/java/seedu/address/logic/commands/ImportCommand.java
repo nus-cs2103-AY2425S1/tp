@@ -96,7 +96,7 @@ public class ImportCommand extends Command {
 
         // Replace all existing person with those present in the CSV file.
 
-        return new CommandResult(String.format("Successfully imported %d persons.", newPersons.size()));
+        return new CommandResult(String.format("Successfully imported %d person.", newPersons.size()));
     }
 
 
