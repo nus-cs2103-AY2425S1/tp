@@ -83,11 +83,4 @@ Address -[hidden]right-> Email
 Email -[hidden]right-> BuyingProperties
 BuyingProperties -[hidden]right-> SellingProperties
 AddressBookStatistics -[hidden]right-> UniquePersonList
-
-
-ModelManager --> "~* add" Person
-ModelManager --> "~* delete" Person
-ModelManager --> "~* filtered (by name, phone, tags)" Person
-ModelManager --> "~* pinned" Person
-ModelManager -----> "~* filtered" Person
 @enduml
