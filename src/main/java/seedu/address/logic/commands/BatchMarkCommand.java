@@ -33,7 +33,7 @@ public class BatchMarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of all students in the current list";
 
-    public static final String MESSAGE_BATCH_MARK_SUCCESS = "Marked attendance for:  %1$s";
+    public static final String MESSAGE_BATCH_MARK_SUCCESS = "Marked attendance for: %1$s";
     public static final String MESSAGE_BATCH_MARK_NO_STUDENT_LIST = "There is no student in this list";
 
     private boolean hasStudent;

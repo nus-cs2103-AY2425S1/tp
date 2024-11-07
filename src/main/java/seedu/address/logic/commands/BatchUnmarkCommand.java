@@ -29,7 +29,7 @@ public class BatchUnmarkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Unmarks the attendance of all students in the current list";
 
-    public static final String MESSAGE_BATCH_UNMARK_SUCCESS = "Unmarked attendance for:  %1$s";
+    public static final String MESSAGE_BATCH_UNMARK_SUCCESS = "Unmarked attendance for: %1$s";
     public static final String MESSAGE_BATCH_UNMARK_NO_STUDENT_LIST = "There is no student in this list";
 
     private boolean hasStudent;
