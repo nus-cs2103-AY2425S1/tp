@@ -103,7 +103,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             Name name = ParserUtil.parseName(strPreamble);
             return new EditCommand(name, editContactDescriptor);
         } catch (Exception exp) { // to try
-            throw new ParseException(exp.getMessage());
+            throw new ParseException("Invalid name field.\nRefer to user guide for valid name fields");
             // considered invalid name if it isn't an Integer
         }
     }
