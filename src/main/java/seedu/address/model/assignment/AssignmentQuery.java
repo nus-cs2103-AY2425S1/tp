@@ -10,18 +10,16 @@ public class AssignmentQuery {
     public final Optional<AssignmentName> queryName;
     public final Optional<Deadline> queryDeadline;
     public final Optional<Status> querySubmissionStatus;
-    public final Optional<Status> queryGradingStatus;
     public final Optional<Grade> queryGrade;
 
     /**
      * Constructs an {@code AssignmentQuery}
      */
     public AssignmentQuery(AssignmentName assignmentName, Deadline deadline, Status submissionStatus,
-                           Status gradingStatus, Grade grade) {
+                        Grade grade) {
         this.queryName = Optional.ofNullable(assignmentName);
         this.queryDeadline = Optional.ofNullable(deadline);
         this.querySubmissionStatus = Optional.ofNullable(submissionStatus);
-        this.queryGradingStatus = Optional.ofNullable(gradingStatus);
         this.queryGrade = Optional.ofNullable(grade);
     }
 
@@ -32,7 +30,6 @@ public class AssignmentQuery {
         this.queryName = Optional.ofNullable(assignment.getAssignmentName());
         this.queryDeadline = Optional.ofNullable(assignment.getDeadline());
         this.querySubmissionStatus = Optional.ofNullable(assignment.getSubmissionStatus());
-        this.queryGradingStatus = Optional.ofNullable(assignment.getGradingStatus());
         this.queryGrade = Optional.ofNullable(assignment.getGrade());
     }
 
@@ -58,7 +55,6 @@ public class AssignmentQuery {
         return matchQuery(queryName, assignment.getAssignmentName())
                 && matchQuery(queryDeadline, assignment.getDeadline())
                 && matchQuery(querySubmissionStatus, assignment.getSubmissionStatus())
-                && matchQuery(queryGradingStatus, assignment.getGradingStatus())
                 && matchQuery(queryGrade, assignment.getGrade());
     }
 
@@ -76,7 +72,6 @@ public class AssignmentQuery {
         return otherQuery.queryName.equals(this.queryName)
                 && otherQuery.queryDeadline.equals(this.queryDeadline)
                 && otherQuery.querySubmissionStatus.equals(this.querySubmissionStatus)
-                && otherQuery.queryGradingStatus.equals(this.queryGradingStatus)
                 && otherQuery.queryGrade.equals(this.queryGrade);
     }
 

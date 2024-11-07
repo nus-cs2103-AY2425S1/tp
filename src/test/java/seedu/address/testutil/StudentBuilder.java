@@ -13,8 +13,8 @@ import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
@@ -39,7 +39,6 @@ public class StudentBuilder {
             new AssignmentName(DEFAULT_ASSIGNMENT_NAME),
             new Deadline(DEFAULT_DEADLINE),
             new Status(DEFAULT_SUBMISSION_STATUS),
-            new Status(DEFAULT_GRADING_STATUS),
             new Grade(DEFAULT_GRADE)
     );
 
@@ -122,12 +121,11 @@ public class StudentBuilder {
      * Sets the {@code Assignment} of the {@code StudentTest} that we are building.
      */
     public StudentBuilder withAssignment(String assignmentName, String deadline, String submissionStatus,
-                                         String gradingStatus, String grade) {
+                                         String grade) {
         Assignment assignment = new Assignment(
                 new AssignmentName(assignmentName),
                 new Deadline(deadline),
                 new Status(submissionStatus),
-                new Status(gradingStatus),
                 new Grade(grade)
         );
         assignments.add(assignment);

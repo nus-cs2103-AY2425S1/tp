@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.EditAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.AssignmentName;
@@ -17,18 +18,23 @@ import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 
 /**
  * Parses input arguments and creates a new EditAssignmentCommand object
  */
 public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand> {
+
+    public static final String MESSAGE_UNEXPECTED_GRADE = "Should not be graded if assignment has not been submitted.\n"
+            + AddAssignmentCommand.MESSAGE_USAGE;
+
     @Override
     public EditAssignmentCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
                 PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE, PREFIX_STUDENT_NUMBER
         );
+        argMultimap.verifyNoInvalidPrefixesFor(userInput);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -42,7 +48,6 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
         // Initializing non-compulsory fields
         Deadline queryDeadline;
         Status querySubmissionStatus;
-        Status queryGradingStatus;
         Grade queryGrade;
 
         if (argMultimap.getValue(PREFIX_DEADLINE).isPresent()) {
@@ -51,16 +56,10 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
             queryDeadline = null;
         }
 
-        if (argMultimap.getAllValues(PREFIX_STATUS).size() > 0) {
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             querySubmissionStatus = ParserUtil.parseStatus(argMultimap.getAllValues(PREFIX_STATUS).get(0));
         } else {
             querySubmissionStatus = null;
-        }
-
-        if (argMultimap.getAllValues(PREFIX_STATUS).size() > 1) {
-            queryGradingStatus = ParserUtil.parseStatus(argMultimap.getAllValues(PREFIX_STATUS).get(1));
-        } else {
-            queryGradingStatus = null;
         }
 
         if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
@@ -73,13 +72,13 @@ public class EditAssignmentCommandParser implements Parser<EditAssignmentCommand
             StudentNumber studentNumber =
                     ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
             return new EditAssignmentCommand(name, assignmentName,
-                    new AssignmentQuery(null, queryDeadline, querySubmissionStatus, queryGradingStatus, queryGrade),
+                    new AssignmentQuery(null, queryDeadline, querySubmissionStatus, queryGrade),
                     studentNumber);
         }
 
         return new EditAssignmentCommand(name, assignmentName,
                 new AssignmentQuery(null, queryDeadline,
-                        querySubmissionStatus, queryGradingStatus, queryGrade));
+                        querySubmissionStatus, queryGrade));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

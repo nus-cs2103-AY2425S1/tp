@@ -26,7 +26,7 @@ import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 
 public class EditAssignmentCommandParserTest {
@@ -55,7 +55,6 @@ public class EditAssignmentCommandParserTest {
                 new AssignmentQuery(null,
                         new Deadline(VALID_DEADLINE_2024_10_20),
                         new Status(VALID_STATUS_Y),
-                        new Status(VALID_STATUS_Y),
                         new Grade(VALID_GRADE_80)));
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -67,7 +66,7 @@ public class EditAssignmentCommandParserTest {
 
         EditAssignmentCommand expectedCommand = new EditAssignmentCommand(
                 new Name(VALID_NAME_AMY), new AssignmentName(VALID_ASSIGNMENT_MATH),
-                new AssignmentQuery(null, null, null, null, null));
+                new AssignmentQuery(null, null, null, null));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -81,7 +80,6 @@ public class EditAssignmentCommandParserTest {
                 new Name(VALID_NAME_AMY), new AssignmentName(VALID_ASSIGNMENT_MATH),
                 new AssignmentQuery(null,
                         new Deadline(VALID_DEADLINE_2024_10_20),
-                        new Status(VALID_STATUS_Y),
                         new Status(VALID_STATUS_Y),
                         new Grade(VALID_GRADE_80)),
                 new StudentNumber(VALID_STUDENT_NUMBER_HUGH));

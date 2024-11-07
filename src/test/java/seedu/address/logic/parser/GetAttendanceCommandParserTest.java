@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 
 public class GetAttendanceCommandParserTest {
 
@@ -17,7 +17,7 @@ public class GetAttendanceCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsGetAttendanceCommand() throws Exception {
-        String userInput = " n/John Doe d/2023-10-09";
+        String userInput = " n/John Doe dt/2023-10-09";
         GetAttendanceCommand expectedCommand = new GetAttendanceCommand(new Name("John Doe"),
                 LocalDate.parse("2023-10-09"), null);
         GetAttendanceCommand command = parser.parse(userInput);
@@ -26,7 +26,7 @@ public class GetAttendanceCommandParserTest {
 
     @Test
     public void parse_missingName_throwsParseException() {
-        String userInput = " d/2023-10-09";
+        String userInput = " dt/2023-10-09";
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.util.List;
+import java.util.Stack;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,9 +28,11 @@ public class GetAttendanceByTgCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Attendance for students in tutorial group %1$s:\n%2$s";
     public static final String MESSAGE_NO_STUDENTS = "No students found in tutorial group %1$s.";
+    private static AttendanceWindow currentWindow;
+
+    private static Stack<AttendanceWindow> openWindows = new Stack<>();
 
     private final TutorialGroup tutorialGroup;
-    private AttendanceWindow window;
 
 
     /**
@@ -39,7 +42,9 @@ public class GetAttendanceByTgCommand extends Command {
      */
     public GetAttendanceByTgCommand(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
-        window = new AttendanceWindow(tutorialGroup);
+        AttendanceWindow newWindow = new AttendanceWindow(tutorialGroup);
+        openWindows.push(newWindow);
+        currentWindow = newWindow;
     }
 
     @Override
@@ -50,7 +55,7 @@ public class GetAttendanceByTgCommand extends Command {
         if (students.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
         }
-        window.show(model);
+        currentWindow.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
 
@@ -73,6 +78,32 @@ public class GetAttendanceByTgCommand extends Command {
     }
 
     public void setAttendanceWindow(AttendanceWindow window) {
-        this.window = window;
+        this.currentWindow = window;
     }
+
+    @Override
+    public boolean undo(Model model) {
+        currentWindow = openWindows.pop();
+        if (currentWindow != null) {
+            currentWindow.close();
+            currentWindow = null;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Closes all currently opened attendance windows.
+     * @return true if windows were closed, false otherwise
+     */
+    public static boolean closeAllWindows() {
+        if (!openWindows.isEmpty()) {
+            openWindows.forEach(AttendanceWindow::close);
+            openWindows.clear();
+            return true;
+        }
+        return false;
+    }
+
+
 }

@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 
 /**
@@ -23,6 +23,7 @@ public class GetAttendanceCommandParser implements Parser<GetAttendanceCommand> 
     public GetAttendanceCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
                 PREFIX_STUDENT_NUMBER, PREFIX_DATE);
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

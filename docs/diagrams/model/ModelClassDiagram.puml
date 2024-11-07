@@ -1,5 +1,5 @@
 @startuml
-!include style.puml
+!include ../style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
@@ -13,12 +13,10 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Name
-Class Phone
 Class UniqueStudentList
 Class Student
+Class Name
+Class Phone
 Class TutorialGroup
 Class StudentNumber
 Class "ObservableList<Assignment>" as Assignment
@@ -39,26 +37,17 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
 AddressBook *--> "1" UniqueStudentList
-UniquePersonList --> "~* all" Person
 UniqueStudentList --> "~* all" Student
-Person *--> Name
-Person *--> Phone
-Student --|> Person
+Student *--> Name
+Student *--> Phone
 Student *--> TutorialGroup
 Student *--> StudentNumber
 Student *--> Assignment
 Student *--> AttendanceRecords
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
-Person -[hidden]down--> Student
-Student -[hidden]up--> Person
+UniqueStudentList -[hidden]right-> I
 Student -[hidden]up--> I
 
-Name -[hidden]right-> Phone
-
-ModelManager --> "~* filtered" Person
 ModelManager --> "~* filtered" Student
 @enduml

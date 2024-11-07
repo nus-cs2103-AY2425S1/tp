@@ -7,33 +7,34 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.UnmarkPresentAllCommand;
+import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.TutorialGroup;
 
 /**
  * Parses input arguments and creates a new UnmarkPresentAllCommand object.
  */
-public class UnmarkPresentAllCommandParser implements Parser<UnmarkPresentAllCommand> {
+public class MarkAbsentAllCommandParser implements Parser<MarkAbsentAllCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the UnmarkPresentAllCommand
      * and returns a UnmarkPresentAllCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public UnmarkPresentAllCommand parse(String args) throws ParseException {
+    public MarkAbsentAllCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_GROUP, PREFIX_DATE);
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL_GROUP, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UnmarkPresentAllCommand.MESSAGE_USAGE));
+                    MarkAbsentAllCommand.MESSAGE_USAGE));
         }
 
         TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
 
-        return new UnmarkPresentAllCommand(tutorialGroup, date);
+        return new MarkAbsentAllCommand(tutorialGroup, date);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

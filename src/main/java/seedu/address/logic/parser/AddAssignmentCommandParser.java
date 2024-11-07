@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
-import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddAssignmentCommand;
@@ -18,7 +17,7 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 
 /**
@@ -26,7 +25,7 @@ import seedu.address.model.student.StudentNumber;
  */
 public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> {
 
-    public static final String MESSAGE_EXPECTED_GRADE = "Expected a grade if grading has already been done\n"
+    public static final String MESSAGE_UNEXPECTED_GRADE = "Should not be graded if assignment has not been submitted.\n"
             + AddAssignmentCommand.MESSAGE_USAGE;
 
 
@@ -36,6 +35,7 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE, PREFIX_STATUS, PREFIX_GRADE, PREFIX_STUDENT_NUMBER
         );
+        argMultimap.verifyNoInvalidPrefixesFor(args);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ASSIGNMENT, PREFIX_DEADLINE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -48,30 +48,31 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
         AssignmentName assignmentName = ParserUtil.parseAssignmentName(
                 argMultimap.getValue(PREFIX_ASSIGNMENT).get());
 
-        // Initializing non-compulsory fields
-        List<Status> statusList = ParserUtil.parseStatuses(argMultimap.getAllValues(PREFIX_STATUS), 2);
-        Status submissionStatus = statusList.get(0);
-        Status gradingStatus = statusList.get(1);
+        Status status = Status.getDefault();
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+        }
 
-        Grade grade;
-        if (gradingStatus.isGraded()) {
-            grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE)
-                    .orElseThrow(() -> new ParseException(MESSAGE_EXPECTED_GRADE)
-            ));
-        } else {
-            grade = Grade.getDefault();
+        Grade grade = Grade.getDefault();
+        if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
+            grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
+        }
+
+        // Cannot be graded while not submitted
+        if (!status.isSubmitted() && grade.isGraded()) {
+            throw new ParseException((MESSAGE_UNEXPECTED_GRADE));
         }
 
         if (argMultimap.getValue(PREFIX_STUDENT_NUMBER).isPresent()) {
             StudentNumber studentNumber =
                     ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
             return new AddAssignmentCommand(name,
-                    new Assignment(assignmentName, deadline, submissionStatus, gradingStatus, grade),
+                    new Assignment(assignmentName, deadline, status, grade),
                     studentNumber);
         }
 
         return new AddAssignmentCommand(name,
-                new Assignment(assignmentName, deadline, submissionStatus, gradingStatus, grade));
+                new Assignment(assignmentName, deadline, status, grade));
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

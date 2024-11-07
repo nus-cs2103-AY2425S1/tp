@@ -56,6 +56,15 @@ public class Grade {
         return new Grade();
     }
 
+    /**
+     * Returns if grade is non-null
+     *
+     * @return
+     */
+    public boolean isGraded() {
+        return grade.isPresent();
+    }
+
     @Override
     public String toString() {
         return grade.map(g -> new DecimalFormat("#.00").format(grade.get())).orElse("NULL");

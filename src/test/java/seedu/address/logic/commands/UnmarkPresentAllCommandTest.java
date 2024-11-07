@@ -44,13 +44,13 @@ public class UnmarkPresentAllCommandTest {
         LocalDate date1 = LocalDate.of(2024, 10, 23);
         LocalDate date2 = LocalDate.of(2024, 10, 24);
 
-        UnmarkPresentAllCommand standardUnmarkPresentAllCommand = new UnmarkPresentAllCommand(tutorialGroup1, date1);
+        MarkAbsentAllCommand standardUnmarkPresentAllCommand = new MarkAbsentAllCommand(tutorialGroup1, date1);
 
         // same object -> returns true
         assertTrue(standardUnmarkPresentAllCommand.equals(standardUnmarkPresentAllCommand));
 
         // same values -> returns true
-        UnmarkPresentAllCommand standardUnmarkPresentAllCommandCopy = new UnmarkPresentAllCommand(
+        MarkAbsentAllCommand standardUnmarkPresentAllCommandCopy = new MarkAbsentAllCommand(
                 tutorialGroup1, date1);
         assertTrue(standardUnmarkPresentAllCommand.equals(standardUnmarkPresentAllCommandCopy));
 
@@ -61,10 +61,10 @@ public class UnmarkPresentAllCommandTest {
         assertFalse(standardUnmarkPresentAllCommand.equals(null));
 
         // different tutorial group -> returns false
-        assertFalse(standardUnmarkPresentAllCommand.equals(new UnmarkPresentAllCommand(tutorialGroup2, date1)));
+        assertFalse(standardUnmarkPresentAllCommand.equals(new MarkAbsentAllCommand(tutorialGroup2, date1)));
 
         // different date -> returns false
-        assertFalse(standardUnmarkPresentAllCommand.equals(new UnmarkPresentAllCommand(tutorialGroup1, date2)));
+        assertFalse(standardUnmarkPresentAllCommand.equals(new MarkAbsentAllCommand(tutorialGroup1, date2)));
     }
 
     @Test
@@ -72,9 +72,9 @@ public class UnmarkPresentAllCommandTest {
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
-        UnmarkPresentAllCommand command = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
+        MarkAbsentAllCommand command = new MarkAbsentAllCommand(validTutorialGroup, validDate);
 
-        String expectedMessage = String.format(UnmarkPresentAllCommand.MESSAGE_SUCCESS, validTutorialGroup,
+        String expectedMessage = String.format(MarkAbsentAllCommand.MESSAGE_SUCCESS, validTutorialGroup,
                 DateTimeFormatter.ofPattern("MMM d yyyy").format(validDate));
         Student unmarkedStudent1 = new StudentBuilder().withName("John Doe")
                 .withStudentNumber("A1234567M")
@@ -96,9 +96,9 @@ public class UnmarkPresentAllCommandTest {
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
-        UnmarkPresentAllCommand command = new UnmarkPresentAllCommand(emptyTutorialGroup, validDate);
+        MarkAbsentAllCommand command = new MarkAbsentAllCommand(emptyTutorialGroup, validDate);
 
-        String expectedMessage = UnmarkPresentAllCommand.MESSAGE_EMPTY_TG;
+        String expectedMessage = MarkAbsentAllCommand.MESSAGE_EMPTY_TG;
 
         assertCommandFailure(command, model, expectedMessage);
     }
@@ -107,8 +107,8 @@ public class UnmarkPresentAllCommandTest {
     public void toStringMethod() {
         TutorialGroup tutorialGroup = new TutorialGroup("A01");
         LocalDate date = LocalDate.of(2024, 10, 23);
-        UnmarkPresentAllCommand unmarkPresentAllCommand = new UnmarkPresentAllCommand(tutorialGroup, date);
-        String expectedString = UnmarkPresentAllCommand.class.getCanonicalName() + "{tutorialGroup=" + tutorialGroup
+        MarkAbsentAllCommand unmarkPresentAllCommand = new MarkAbsentAllCommand(tutorialGroup, date);
+        String expectedString = MarkAbsentAllCommand.class.getCanonicalName() + "{tutorialGroup=" + tutorialGroup
                 + ", date=" + date + "}";
         assertEquals(expectedString, unmarkPresentAllCommand.toString());
     }
@@ -118,7 +118,7 @@ public class UnmarkPresentAllCommandTest {
         Model model = new ModelManager();
         model.addStudent(student1);
         model.addStudent(student2);
-        UnmarkPresentAllCommand markCommand = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
+        MarkAbsentAllCommand markCommand = new MarkAbsentAllCommand(validTutorialGroup, validDate);
         markCommand.execute(model);
 
         CommandStack commandStack = CommandStack.getInstance();
@@ -138,7 +138,7 @@ public class UnmarkPresentAllCommandTest {
         model.addStudent(student1);
         model.addStudent(student2);
         MarkPresentAllCommand markCommand = new MarkPresentAllCommand(validTutorialGroup, validDate);
-        UnmarkPresentAllCommand unmarkCommand = new UnmarkPresentAllCommand(validTutorialGroup, validDate);
+        MarkAbsentAllCommand unmarkCommand = new MarkAbsentAllCommand(validTutorialGroup, validDate);
         Attendance attendance = new Attendance("p");
         markCommand.execute(model);
         unmarkCommand.execute(model);

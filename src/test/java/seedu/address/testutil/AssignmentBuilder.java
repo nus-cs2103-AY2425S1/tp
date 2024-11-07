@@ -16,7 +16,6 @@ public class AssignmentBuilder {
     private AssignmentName name;
     private Deadline deadline;
     private Status submissionStatus;
-    private Status gradingStatus;
     private Grade grade;
 
     /**
@@ -26,7 +25,6 @@ public class AssignmentBuilder {
         this.name = new AssignmentName(DEFAULT_NAME);
         this.deadline = new Deadline(DEFAULT_DEADLINE);
         this.submissionStatus = Status.getDefault();
-        this.gradingStatus = Status.getDefault();
         this.grade = Grade.getDefault();
     }
 
@@ -37,7 +35,6 @@ public class AssignmentBuilder {
         this.name = assignment.getAssignmentName();
         this.deadline = assignment.getDeadline();
         this.submissionStatus = assignment.getSubmissionStatus();
-        this.gradingStatus = assignment.getGradingStatus();
         this.grade = assignment.getGrade();
     }
 
@@ -75,17 +72,6 @@ public class AssignmentBuilder {
     }
 
     /**
-     * Sets the {@code Grading Status} of the {@code Assignment} that we are building.
-     *
-     * @param gradingStatus The grading status to set.
-     * @return The updated {@code AssignmentBuilder} object.
-     */
-    public AssignmentBuilder withGradingStatus(String gradingStatus) {
-        this.gradingStatus = new Status(gradingStatus);
-        return this;
-    }
-
-    /**
      * Sets the {@code Grade} of the {@code Assignment} that we are building.
      *
      * @param grade The grade to set.
@@ -97,7 +83,7 @@ public class AssignmentBuilder {
     }
 
     public Assignment build() {
-        return new Assignment(name, deadline, submissionStatus, gradingStatus, grade);
+        return new Assignment(name, deadline, submissionStatus, grade);
     }
 
 

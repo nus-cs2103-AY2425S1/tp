@@ -16,7 +16,7 @@ public class Deadline {
     public static final String MESSAGE_CONSTRAINTS =
             "Invalid date format. Please use YYYY-MM-DD.";
 
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE;
     public final LocalDate deadline;
 
     /**
@@ -35,7 +35,7 @@ public class Deadline {
      */
     public static boolean isValidDeadline(String deadline) {
         try {
-            DATE_TIME_FORMATTER.parse(deadline);
+            LocalDate.parse(deadline, DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             return false;
         }

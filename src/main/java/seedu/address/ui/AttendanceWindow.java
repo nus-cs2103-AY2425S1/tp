@@ -26,6 +26,7 @@ import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 
+//Code adapted from ChatGPT prompts, with modifications to fit the project
 
 /**
  * Represents a window that displays the attendance of students in a tutorial group.
@@ -65,6 +66,16 @@ public class AttendanceWindow {
             Scene scene = new Scene(vbox);
             stage.setScene(scene);
             stage.show();
+        });
+    }
+
+    /**
+     * Closes the attendance window.
+     */
+    public void close() {
+        Platform.runLater(() -> {
+            Stage stage = (Stage) table.getScene().getWindow();
+            stage.close();
         });
     }
 

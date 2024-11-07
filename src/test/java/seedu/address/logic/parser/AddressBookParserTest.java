@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.CloseWindowCommand;
 import seedu.address.logic.commands.DeleteAllStudentsCommand;
 import seedu.address.logic.commands.DeleteAssignmentCommand;
 import seedu.address.logic.commands.EditStudentCommand;
@@ -25,12 +26,12 @@ import seedu.address.logic.commands.GetAttendanceByTgCommand;
 import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.MarkPresentAllCommand;
-import seedu.address.logic.commands.UnmarkPresentAllCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.TutorialGroup;
 
 public class AddressBookParserTest {
@@ -106,7 +107,7 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(MarkAttendanceCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
-                MarkAttendanceCommand.COMMAND_WORD + " n/John Doe d/2024-10-01 pr/p")
+                MarkAttendanceCommand.COMMAND_WORD + " n/John Doe dt/2024-10-01 pr/p")
                 instanceof MarkAttendanceCommand);
     }
 
@@ -116,7 +117,7 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetAttendanceCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(GetAttendanceCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
-                GetAttendanceCommand.COMMAND_WORD + " n/John Doe d/2019-01-01")
+                GetAttendanceCommand.COMMAND_WORD + " n/John Doe dt/2019-01-01")
                 instanceof GetAttendanceCommand);
     }
 
@@ -161,10 +162,14 @@ public class AddressBookParserTest {
     public void parseCommand_unmarkPresentAll() throws Exception {
         TutorialGroup tutorialGroup = DIDDY.getTutorialGroup();
         LocalDate date = LocalDate.of(2024, 10, 23);
-        UnmarkPresentAllCommand command = (UnmarkPresentAllCommand) parser.parseCommand(
-                UnmarkPresentAllCommand.COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " "
+        MarkAbsentAllCommand command = (MarkAbsentAllCommand) parser.parseCommand(
+                MarkAbsentAllCommand.COMMAND_WORD + " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " "
                         + PREFIX_DATE + date);
-        assertEquals(new UnmarkPresentAllCommand(tutorialGroup, date), command);
+        assertEquals(new MarkAbsentAllCommand(tutorialGroup, date), command);
+    }
+    @Test
+    public void parseCommand_closeWindow() throws Exception {
+        assertTrue(parser.parseCommand(CloseWindowCommand.COMMAND_WORD) instanceof CloseWindowCommand);
     }
 
 

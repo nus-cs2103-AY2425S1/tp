@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.CloseWindowCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAllStudentsCommand;
 import seedu.address.logic.commands.DeleteAssignmentCommand;
@@ -23,10 +24,10 @@ import seedu.address.logic.commands.GetAttendanceByTgCommand;
 import seedu.address.logic.commands.GetAttendanceCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.MarkPresentAllCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.UnmarkPresentAllCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -113,14 +114,17 @@ public class AddressBookParser {
         case MarkPresentAllCommand.COMMAND_WORD:
             return new MarkPresentAllCommandParser().parse(arguments);
 
-        case UnmarkPresentAllCommand.COMMAND_WORD:
-            return new UnmarkPresentAllCommandParser().parse(arguments);
+        case MarkAbsentAllCommand.COMMAND_WORD:
+            return new MarkAbsentAllCommandParser().parse(arguments);
 
         case DeleteAttendanceAllCommand.COMMAND_WORD:
             return new DeleteAttendanceAllCommandParser().parse(arguments);
 
         case EditAssignmentCommand.COMMAND_WORD:
             return new EditAssignmentCommandParser().parse(arguments);
+
+        case CloseWindowCommand.COMMAND_WORD:
+            return new CloseWindowCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

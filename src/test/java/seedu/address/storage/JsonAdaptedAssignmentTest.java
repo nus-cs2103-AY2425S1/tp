@@ -23,7 +23,6 @@ public class JsonAdaptedAssignmentTest {
     private static final String VALID_DEADLINE = MATH_ASSIGNMENT_SUBMITTED.getDeadline().deadline.toString();
     private static final String VALID_SUBMISSION_STATUS = MATH_ASSIGNMENT_SUBMITTED
             .getSubmissionStatus().status.toString();
-    private static final String VALID_GRADING_STATUS = MATH_ASSIGNMENT_SUBMITTED.getGradingStatus().status.toString();
     private static final String VALID_GRADE = MATH_ASSIGNMENT_SUBMITTED.getGrade().grade
             .map(x -> x.toString()).orElse("NULL");
 
@@ -37,7 +36,7 @@ public class JsonAdaptedAssignmentTest {
     public void toModelType_invalidAssignmentName_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
                 new JsonAdaptedAssignment(INVALID_ASSIGNMENT_NAME, VALID_DEADLINE, VALID_SUBMISSION_STATUS,
-                        VALID_GRADING_STATUS, VALID_GRADE);
+                        VALID_GRADE);
         String expectedMessage = AssignmentName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
@@ -45,8 +44,7 @@ public class JsonAdaptedAssignmentTest {
     @Test
     public void toModelType_nullAssignmentName_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
-                new JsonAdaptedAssignment(null, VALID_DEADLINE, VALID_SUBMISSION_STATUS,
-                        VALID_GRADING_STATUS, VALID_GRADE);
+                new JsonAdaptedAssignment(null, VALID_DEADLINE, VALID_SUBMISSION_STATUS, VALID_GRADE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, AssignmentName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
@@ -55,7 +53,7 @@ public class JsonAdaptedAssignmentTest {
     public void toModelType_invalidDeadline_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
                 new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, INVALID_DEADLINE, VALID_SUBMISSION_STATUS,
-                        VALID_GRADING_STATUS, VALID_GRADE);
+                        VALID_GRADE);
         String expectedMessage = Deadline.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
@@ -63,8 +61,7 @@ public class JsonAdaptedAssignmentTest {
     @Test
     public void toModelType_nullDeadline_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
-                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, null, VALID_SUBMISSION_STATUS,
-                        VALID_GRADING_STATUS, VALID_GRADE);
+                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, null, VALID_SUBMISSION_STATUS, VALID_GRADE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
@@ -72,8 +69,7 @@ public class JsonAdaptedAssignmentTest {
     @Test
     public void toModelType_invalidSubmissionStatus_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
-                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, VALID_DEADLINE, INVALID_STATUS,
-                        VALID_GRADING_STATUS, VALID_GRADE);
+                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, VALID_DEADLINE, INVALID_STATUS, VALID_GRADE);
         String expectedMessage = Status.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
@@ -81,8 +77,7 @@ public class JsonAdaptedAssignmentTest {
     @Test
     public void toModelType_nullSubmissionStatus_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
-                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, VALID_DEADLINE, null,
-                        VALID_GRADING_STATUS, VALID_GRADE);
+                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, VALID_DEADLINE, null, VALID_GRADE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
@@ -91,7 +86,7 @@ public class JsonAdaptedAssignmentTest {
     public void toModelType_invalidGrade_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
                 new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, VALID_DEADLINE, VALID_SUBMISSION_STATUS,
-                        VALID_GRADING_STATUS, INVALID_GRADE);
+                        INVALID_GRADE);
         String expectedMessage = Grade.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }
@@ -99,8 +94,7 @@ public class JsonAdaptedAssignmentTest {
     @Test
     public void toModelType_nullGrade_throwsIllegalValueException() {
         JsonAdaptedAssignment assignment =
-                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, VALID_DEADLINE, VALID_SUBMISSION_STATUS,
-                        VALID_GRADING_STATUS, null);
+                new JsonAdaptedAssignment(VALID_ASSIGNMENT_NAME, VALID_DEADLINE, VALID_SUBMISSION_STATUS, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, assignment::toModelType);
     }

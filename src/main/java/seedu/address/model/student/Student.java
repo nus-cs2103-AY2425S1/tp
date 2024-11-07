@@ -16,8 +16,6 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 
 /**
  * Represents a Student in teletutor.
@@ -190,6 +188,21 @@ public class Student {
         for (Assignment assignment : assignments) {
             if (assignment.getAssignmentName().equals(assignmentName)) {
                 assignments.remove(assignment);
+                return assignment;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the assignment matching the name, null if no match found
+     *
+     * @param assignmentName A valid assignment name
+     * @return the matching assignment
+     */
+    public Assignment getAssignment(AssignmentName assignmentName) {
+        for (Assignment assignment : assignments) {
+            if (assignment.getAssignmentName().equals(assignmentName)) {
                 return assignment;
             }
         }

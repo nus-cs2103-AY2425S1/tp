@@ -34,8 +34,6 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.StudentBuilder;
 
@@ -259,7 +257,7 @@ public class StudentTest {
     void editAssignment_nonExistentAssignment_returnsNull() {
         // Attempt to edit an assignment that doesn't exist
         AssignmentName nonExistentName = new AssignmentName("Nonexistent Homework");
-        AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, STATUS_Y, GRADE_90);
+        AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, GRADE_90);
 
         AssignmentQuery result = student.editAssignment(nonExistentName, query);
 
@@ -271,7 +269,7 @@ public class StudentTest {
     void editAssignment_existingAssignment_editsAssignment() {
         // Create AssignmentQuery with new values to edit
         Assignment oldAssignment = new AssignmentBuilder(MATH_ASSIGNMENT_SUBMITTED).build();
-        AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, STATUS_Y, GRADE_90);
+        AssignmentQuery query = new AssignmentQuery(null, DEADLINE_C, STATUS_Y, GRADE_90);
 
         // Perform the edit operation
         AssignmentQuery oldAssignmentQuery = student.editAssignment(ASSIGNMENT_NAME_A, query);
@@ -283,7 +281,6 @@ public class StudentTest {
         Assignment updatedAssignment = student.getAssignments().get(0);
         assertEquals(DEADLINE_C, updatedAssignment.getDeadline());
         assertEquals(STATUS_Y, updatedAssignment.getSubmissionStatus());
-        assertEquals(STATUS_Y, updatedAssignment.getGradingStatus());
         assertEquals(GRADE_90, updatedAssignment.getGrade());
     }
 }

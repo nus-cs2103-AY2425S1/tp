@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's attendance status in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}.
  */
-public class PersonAttendance {
+public class StudentAttendance {
     public static final String MESSAGE_CONSTRAINTS = "Attendance status must be either 'p' or 'a'";
 
     // Valid attendance statuses
@@ -20,7 +20,7 @@ public class PersonAttendance {
      *
      * @param status A valid attendance status.
      */
-    public PersonAttendance(String status) {
+    public StudentAttendance(String status) {
         requireNonNull(status);
         checkArgument(isValidAttendance(status), MESSAGE_CONSTRAINTS);
         value = status;
@@ -43,7 +43,7 @@ public class PersonAttendance {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonAttendance otherAttendance)) {
+        if (!(other instanceof StudentAttendance otherAttendance)) {
             return false;
         }
 

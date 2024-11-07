@@ -12,18 +12,18 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.UnmarkPresentAllCommand;
+import seedu.address.logic.commands.MarkAbsentAllCommand;
 import seedu.address.model.student.TutorialGroup;
 
 public class UnmarkPresentAllCommandParserTest {
 
-    private UnmarkPresentAllCommandParser parser = new UnmarkPresentAllCommandParser();
+    private MarkAbsentAllCommandParser parser = new MarkAbsentAllCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
         // no leading and trailing whitespaces
         LocalDate date = LocalDate.of(2024, 10, 23);
-        UnmarkPresentAllCommand expectedUnmarkPresentAllCommand = new UnmarkPresentAllCommand(
+        MarkAbsentAllCommand expectedUnmarkPresentAllCommand = new MarkAbsentAllCommand(
                 DIDDY.getTutorialGroup(), date);
         assertParseSuccess(parser, " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY + " " + PREFIX_DATE + date,
                 expectedUnmarkPresentAllCommand);
@@ -47,10 +47,10 @@ public class UnmarkPresentAllCommandParserTest {
         // missing tutorial group
         LocalDate date = LocalDate.of(2024, 10, 23);
         assertParseFailure(parser, " " + PREFIX_DATE + date,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkPresentAllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentAllCommand.MESSAGE_USAGE));
 
         // missing date
         assertParseFailure(parser, " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkPresentAllCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAbsentAllCommand.MESSAGE_USAGE));
     }
 }

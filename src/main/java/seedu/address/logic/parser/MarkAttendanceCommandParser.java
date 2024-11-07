@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.attendance.Attendance;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 
 /**
@@ -30,6 +30,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
                 CliSyntax.PREFIX_DATE,
                 CliSyntax.PREFIX_PRESENT
         );
+        argMultimap.verifyNoInvalidPrefixesFor(args);
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_PRESENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

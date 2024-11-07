@@ -42,7 +42,7 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# Features
 
 <box type="info" seamless>
 
@@ -61,16 +61,37 @@ Teletutors is a **desktop app for managing contacts, optimized for use via a  Li
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* Name arguments with extra whitespaces between words will be reduced to a single whitespace. 
+  e.g. `n/John    Doe` will be treated as `n/John Doe`.
+
+* Tutorial group and student number arguments are not case-sensitive. 
+  e.g. `tg/G17` is the same as `tg/g17` and `sn/A1234567Z` is the same as `sn/a1234567z`.
+
 </box>
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Undoing the previous command : `undo`
+
+Undoes the previous command. <br>
+The closeat command is currently not undoable (planned for future versions).
+
+Format: `undo`
+
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+## Student Commands
 
 ### Adding a student: `adds`
 
@@ -85,91 +106,59 @@ Format: `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/STUDENT_NUMBER`
 
 Examples:
 * `adds n/John Doe p/98765432 tg/G69 sn/E1234567I`
-* `adds n/Betsy Crowe tg/G16 p/23456789 sn/A1234567Z`
+* `adds n/Betsy Crowe tg/G16 p/23456789 sn/a1234567z`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
 Shows a list of all students in the contact list.
 
 Format: `list`
 
-### Editing a person : `edits`
+### Editing a student : `edits`
 
-Edits an existing student in the address book.
+Edits an existing student in the contact list.
 
 Format: `edits INDEX [n/NAME] [p/PHONE] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person to be `91234567` and `Z19` respectively.
-*  `edits 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `edits 1 p/91234567 tg/Z19` Edits the phone number and tutorial group of the 1st person in the displayed list to be `91234567` and `Z19` respectively.
+*  `edits 2 n/Betsy Crower` Edits the name of the 2nd person in the displayed list to be `Betsy Crower`.
 
-### Undoing the previous command : `undo`
+### Locating student by name: `view`
 
-Undoes the previous command that changed the data.
-
-Format: `undo`
-
-### Locating person by name: `view`
-
-Views student whose name matches the specified name exactly.
+View student(s) whose name matches the specified name exactly.
 
 Format: `view NAME`
 
 * The given name must match the student's name exactly. e.g `view John` will not return `John Doe`'s details.
+* Name is case-sensitive. e.g. `view mary` will not return `Mary`'s details.
+* Name is space-sensitive. e.g. `view John Doe` will not return `JohnDoe`'s details, and `view JohnNg` will not return `John Ng`'s details.
 * If more than one student share the exact same name, all the students with that name will be displayed.
 
 Examples: 
-* `view Alex Yeoh` Displays the details of all students with the name `Alex Yeoh`.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `view Alex Yeoh` Displays the details of all students with the exact name `Alex Yeoh`.
+* `view Lynette` Displays the details of all students with the exact name `Lynette`.
 
 ### Deleting a specific student : `deletes`
 
-Deletes the specified student from the address book.
+Deletes the specified student from the contact list.
 
-Format: `deletes n/STUDENT_NAME`
-Format: `deletes n/STUDENT_NAME sn/STUDENT_NUMBER`
+Format: `deletes n/NAME [sn/STUDENT_NUMBER]`
 
 * Deletes the student with the specified details.
 * The student name refers to the student name shown in the displayed list of students.
 * The student number refers to the student number shown in the displayed list of students.
-* The student number **must be in the following format** A1234567B …​
+* If a student number is provided, it **must be in the following format** A1234567B, a1234567B, A1234567b, a1234567b, ...​
+* If there is more than one student with the exact same name, the student number must be provided to differentiate between them when deleting.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `deletes n/John Tan` deletes the student with the exact name `John Tan` from the contact list.
+* `deletes n/Betsy sn/A0123456X` deletes the student with the exact name `Betsy` and student number `A0123456X` from the contact list.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ## Attendance Commands
 
@@ -181,46 +170,79 @@ Format: `exit`
 
 ### Marking Attendance : `markat`
 
-* Marks attendance of student for a particular date with the specified details.
+Marks attendance of student for a particular date with the specified details.
 
-* Format: `markat n/STUDENT_NAME d/DATE pr/ATTENDANCE sn/STUDENT_NUMBER (Optional)`
+Format: `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`
 
-### Marking Tutorial Group Attendance : `markpresentall`
+### Marking Tutorial Group Attendance to Present : `markpresentall`
 
-* Marks all students in a tutorial group as present for a particular date
+Marks all students in a tutorial group as present for a particular date
 
-* Format: `markpresentall tg/TUTORIAL_GROUP d/DATE`
+Format: `markpresentall tg/TUTORIAL_GROUP dt/DATE`
 
-### Unmarking Tutorial Group Attendance : `Unmarkpresentall`
+### Marking Tutorial Group Attendance to Absent: `markabsentall`
 
-* Marks all students in a tutorial group as absent for a particular date
+Marks all students in a tutorial group as absent for a particular date
 
-* Format: `unmarkpresentall tg/TUTORIAL_GROUP d/DATE`
+Format: `markabsentall tg/TUTORIAL_GROUP dt/DATE`
 
 ### Deleting Attendance : `deleteat`
 
-* Deletes attendance of student for a particular date with the specified details.
+Deletes attendance of student for a particular date with the specified details.
 
-* Format : `deleteat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+Format : `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`
 
 ### Deleting Tutorial Group Attendance : `deleteatall`
 
-* Deletes attendance of all students in a tutorial group for a particular date
+Deletes attendance of all students in a tutorial group for a particular date
 
-* Format : `deleteatall tg/TUTORIAL_GROUP d/DATE`
+Format : `deleteatall tg/TUTORIAL_GROUP dt/DATE`
 
 ### Getting Attendance : `getat`
 
-* Gets attendance of student for a particular date
+Gets attendance of student for a particular date
 
-* Format: `getat n/STUDENT_NAME d/DATE sn/STUDENT_NUMBER (Optional)`
+Format: `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`
 
 ### Getting Tutorial Group Attendance : `getattg`
 
-* Opens an attendance window for all students in a tutorial group for a particular date
+Opens an attendance window for all students in a tutorial group for all dates that are currently known.
+* Executing `undo` will close the last window opened by this command 
 
-* Format: `getattg tg/TUTORIAL_GROUP d/DATE`
+Format: `getattg tg/TUTORIAL_GROUP`
 
+### Closing Attendance Window : `closeat`
+Closes all attendance windows if any is currently open.
+
+## Assignment Commands
+
+### Adding Assignments : `adda`
+
+Adds an assignment to the specified student
+Format: `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`
+  * Adds an assignment to the student with `NAME`. If student number is provided, this adds an assignment to the student
+with `STUDENT_NUMBER` and `NAME`.
+  * If there is more than one student with `NAME`, a student number must be provided.
+  * Assignment names must be unique.
+  * If not specified, `SUBMISSION_STATUS` defaults to `N` (i.e. not submitted).
+  * If not specified, `GRADE` defaults to `NULL` (i.e. not graded).
+
+### Deleting Assignments : `deletea`
+
+Deletes an assignment for the specified student
+Format: `adda n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`
+* Deletes an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided, 
+this deletes the assignment for the student with `STUDENT_NUMBER` and `NAME`.
+* If there is more than one student with `NAME`, a student number must be provided.
+
+### Editing Assignments : `edita`
+
+Edits an assignment for the specified student
+Format: `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`
+* Edits an assignment matching `ASSIGNMENT_NAME` to the student with `NAME`. If student number is provided,
+  this edits the assignment for the student with `STUDENT_NUMBER` and `NAME`.
+* If there is more than one student with `NAME`, a student number must be provided.
+* Fields which are not specified will remain unchanged after the operation.
 
 ### Saving the data
 
@@ -259,13 +281,24 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`
-**Clear**   | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
-**Undo**   | `undo`
+| Action                                          | Format, Examples                                                                                                                                                            |
+|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                                         | `adds n/NAME p/PHONE_NUMBER tg/TUTORIAL_GROUP sn/A1234567J` <br> e.g., `adds n/P Diddy p/22224444 tg/G17 sn/A1234567J`                                                      |
+| **Clear**                                       | `deleteall`                                                                                                                                                                 |
+| **Delete**                                      | `deletes n/NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletes n/John Doe sn/A1234567Z`                                                                                            |
+| **Edit**                                        | `edits INDEX [n/NAME] [p/PHONE_NUMBER] [tg/TUTORIAL_GROUP] [sn/STUDENT_NUMBER]`<br> e.g.,`edits 2 n/James Lee p/12345678`                                                   |
+| **View**                                        | `view KEYWORD [MORE_KEYWORDS]`<br> e.g., `view James Jake`                                                                                                                  |
+| **List**                                        | `list`                                                                                                                                                                      |
+| **Help**                                        | `help`                                                                                                                                                                      |
+| **Undo**                                        | `undo`                                                                                                                                                                      
+| **Mark Attendance**                             | `markat n/NAME dt/DATE pr/ATTENDANCE [sn/STUDENT_NUMBER]`<br> e.g., `markat n/John Doe d/2021-10-10 pr/P sn/A1234567Z`                                                      |
+| **Mark Present for Tutorial Group**             | `markpresentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markpresentall tg/G17 d/2021-10-10`                                                                                   |
+| **Mark Absent for Tutorial Group**              | `markabsentall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `markabsentall tg/G17 d/2021-10-10`                                                                                     |
+| **Delete Student's Attendance**                 | `deleteat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `deleteat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                     |
+| **Delete Tutorial Group Attendance**            | `deleteatall tg/TUTORIAL_GROUP dt/DATE`<br> e.g., `deleteatall tg/G17 d/2021-10-10`                                                                                         |
+| **Get Attendance**                              | `getat n/NAME dt/DATE [sn/STUDENT_NUMBER]`<br> e.g., `getat n/John Doe d/2021-10-10 sn/A1234567Z`                                                                           |
+| **Get Tutorial Group Attendance**               | `getattg tg/TUTORIAL_GROUP`<br> e.g., `getattg tg/G17`                                                                                                          |
+| **Close All Tutorial Group Attendance Windows** | `closeat`                                                                                                                                                                   |
+| **Add Assignment**                              | `adda n/NAME a/ASSIGNMENT_NAME d/DEADLINE [s/SUBMISSION_STATUS] [g/GRADE] [sn/STUDENT_NUMBER]`<br> e.g., `adda n/John Doe a/Assignment 1 d/2021-10-10 s/N g/100 sn/A1234567Z` |
+| **Delete Assignment**                           | `deletea n/NAME a/ASSIGNMENT_NAME [sn/STUDENT_NUMBER]`<br> e.g., `deletea n/John Doe a/Assignment 1 sn/A1234567Z`                                                           |
+| **Edit Assignment**                             | `edita n/NAME a/ASSIGNMENT_NAME [d/DEADLINE] [s/SUBMISSION_STATUS] [g/GRADE]`<br> e.g., `edita n/John Doe a/Assignment 1 d/2021-10-10 s/Y g/90`                             |

@@ -5,6 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBE
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENT_NUMBER_TOO_FEW_NUMBERS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_HUGH;
+import static seedu.address.logic.parser.AddAssignmentCommandParser.MESSAGE_UNEXPECTED_GRADE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -17,12 +19,12 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 
 public class AddAssignmentCommandParserTest {
 
-    private static final String VALID_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y s/Y g/85.5";
+    private static final String VALID_INPUT = " n/John Doe a/CS2103 Project d/2024-12-01 s/Y g/85.5";
     private static final String MISSING_NAME_INPUT = " a/CS2103 Project d/2024-12-01";
     private static final String MISSING_ASSIGNMENT_NAME_INPUT = " n/John Doe d/2024-12-01";
     private static final String MISSING_DEADLINE_INPUT = " n/John Doe a/CS2103 Project";
@@ -40,7 +42,6 @@ public class AddAssignmentCommandParserTest {
                 new Assignment(
                         new AssignmentName("CS2103 Project"),
                         new Deadline("2024-12-01"),
-                        new Status("Y"),
                         new Status("Y"),
                         new Grade("85.5")
                 )
@@ -81,7 +82,6 @@ public class AddAssignmentCommandParserTest {
                         new AssignmentName("CS2103 Project"),
                         new Deadline("2024-12-01"),
                         new Status("Y"),
-                        Status.getDefault(), // Assuming the default grading status is "N"
                         Grade.getDefault() // Assuming the default grade is NULL or empty
                 )
         );
@@ -97,7 +97,6 @@ public class AddAssignmentCommandParserTest {
                         new AssignmentName("CS2103 Project"),
                         new Deadline("2024-12-01"),
                         Status.getDefault(), // Default submission status
-                        new Status("N"),
                         Grade.getDefault() // Assuming the default grade is NULL or empty
                 )
         );
@@ -113,7 +112,6 @@ public class AddAssignmentCommandParserTest {
                         new AssignmentName("CS2103 Project"),
                         new Deadline("2024-12-01"),
                         new Status("Y"),
-                        Status.getDefault(), // Default grading status
                         Grade.getDefault() // Assuming the default grade is NULL or empty
                 )
         );
@@ -135,6 +133,14 @@ public class AddAssignmentCommandParserTest {
     }
 
     @Test
+    public void parse_invalidAssignment_failure() {
+        assertParseFailure(parser,
+                GRADING_STATUS_NOT_GRADED_INPUT + " "
+                        + PREFIX_GRADE + "100",
+                MESSAGE_UNEXPECTED_GRADE);
+    }
+
+    @Test
     public void parse_validStudentNumber_success() {
         Name name = new Name(VALID_NAME_BOB);
         AddAssignmentCommand expectedCommand = new AddAssignmentCommand(
@@ -142,7 +148,6 @@ public class AddAssignmentCommandParserTest {
                 new Assignment(
                         new AssignmentName("CS2103 Project"),
                         new Deadline("2024-12-01"),
-                        new Status("Y"),
                         new Status("Y"),
                         new Grade("85.5")
                 ),

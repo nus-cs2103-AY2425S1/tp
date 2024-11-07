@@ -24,6 +24,7 @@ public class DeleteAttendanceAllCommandParser implements Parser<DeleteAttendance
     @Override
     public DeleteAttendanceAllCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_GROUP, PREFIX_DATE);
+        argMultimap.verifyNoInvalidPrefixesFor(args);
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL_GROUP, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

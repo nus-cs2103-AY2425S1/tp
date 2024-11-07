@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.Attendance;
-import seedu.address.model.person.Name;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
@@ -43,9 +43,9 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n"
             + "Their student numbers are as follows: %s" + "\n"
             + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
-            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER "
             + PREFIX_DATE + "DATE "
-            + PREFIX_PRESENT + "STATUS : 'p' or 'a' to mark the attendance.";
+            + PREFIX_PRESENT + "STATUS : 'p' or 'a' "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER " + "to mark the attendance.";
 
     private final Name name;
     private final LocalDate date;

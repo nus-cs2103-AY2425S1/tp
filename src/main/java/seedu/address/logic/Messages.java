@@ -1,11 +1,11 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 
 /**
@@ -19,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_PREFIXES = "Invalid prefixes detected: ";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -33,20 +34,16 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Returns an error message indicating the invalid prefixes.
+     * @param invalidPrefixes The list of invalid prefixes.
+     * @return The error message.
      */
-    public static String format(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
+    public static String getErrorMessageForInvalidPrefixes(List<Prefix> invalidPrefixes) {
+        assert !invalidPrefixes.isEmpty();
+
+        return invalidPrefixes.stream()
+                .map(Prefix::toString)
+                .collect(Collectors.joining(" ", MESSAGE_INVALID_PREFIXES, ""));
     }
 
     /**

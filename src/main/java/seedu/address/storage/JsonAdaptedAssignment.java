@@ -19,7 +19,6 @@ public class JsonAdaptedAssignment {
     private final String assignmentName;
     private final String deadline;
     private final String submissionStatus;
-    private final String gradingStatus;
     private final String grade;
 
     /**
@@ -29,12 +28,10 @@ public class JsonAdaptedAssignment {
     public JsonAdaptedAssignment(@JsonProperty("assignmentName") String assignmentName,
                                  @JsonProperty("deadline") String deadline,
                                  @JsonProperty("submissionStatus") String submissionStatus,
-                                 @JsonProperty("gradingStatus") String gradingStatus,
                                  @JsonProperty("grade") String grade) {
         this.assignmentName = assignmentName;
         this.deadline = deadline;
         this.submissionStatus = submissionStatus;
-        this.gradingStatus = gradingStatus;
         this.grade = grade;
     }
 
@@ -46,7 +43,6 @@ public class JsonAdaptedAssignment {
         assignmentName = source.getAssignmentName().fullName;
         deadline = source.getDeadline().deadline.toString();
         submissionStatus = source.getSubmissionStatus().status.toString();
-        gradingStatus = source.getGradingStatus().status.toString();
         grade = source.getGrade().grade
                 .map(x -> x.toString())
                 .orElse("NULL");
@@ -87,15 +83,6 @@ public class JsonAdaptedAssignment {
         }
         final Status modelSubmissionStatus = new Status(submissionStatus);
 
-        if (gradingStatus == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
-        }
-
-        if (!Status.isValidStatus(gradingStatus)) {
-            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
-        }
-        final Status modelGradingStatus = new Status(gradingStatus);
-
         if (grade == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
         }
@@ -106,8 +93,7 @@ public class JsonAdaptedAssignment {
 
         final Grade modelGrade = new Grade(grade);
 
-        return new Assignment(modelAssignmentName, modelDeadline, modelSubmissionStatus, modelGradingStatus,
-                modelGrade);
+        return new Assignment(modelAssignmentName, modelDeadline, modelSubmissionStatus, modelGrade);
 
     }
 }
