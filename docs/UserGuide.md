@@ -17,32 +17,59 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Pre-requisites
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+Ensure that you have Java `17` or above installed on your computer. If you are unsure whether Java is installed, follow the steps below based on your operating system to check.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+**Windows**
+1. Open Command Prompt by typing `cmd` in the Start menu and pressing Enter.
+2. Type `java -version` and press Enter.
+3. If Java is installed, the version will be displayed. Ensure it is version `17` or above.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar planpal.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+**Mac**
+1. Open Terminal (you can find it by searching in Spotlight by pressing the `Cmd + Space` keys, then type "Terminal").
+2. Type `java -version` and press Enter.
+3. If Java is installed, the version will be displayed. Ensure it is version `17` or above.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+**Linux**
+1. Open your terminal.
+2. Type `java -version` and press Enter.
+3. If Java is installed, the version will be displayed. Ensure it is version `17` or above.
 
-   * `list` : Lists all contacts.
+If Java is not installed or if the version is below `17`, download the latest Java Development Kit (JDK) from the [official Oracle website](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or use a package manager like `Homebrew` on Mac or `apt-get` on Linux to install Java.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+---
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+### Steps to Start PlanPal
 
-   * `clear` : Deletes all contacts.
+1. **Download the Application**: Download the latest `.jar` file for PlanPal from [this link](https://github.com/AY2425S1-CS2103T-F09-2/tp/releases).
 
-   * `exit` : Exits the app.
+2. **Set Up the Application Folder**: Copy the downloaded `.jar` file to the folder where you want to store PlanPal’s data. This folder will be your _home folder_ for PlanPal.
 
-1. Refer to the [Features](#features) below for details of each command.
+3. **Run the Application**:
+    - Open a command terminal.
+    - Navigate to the folder containing the `.jar` file by typing `cd path/to/your/folder` and pressing Enter.
+    - Run the application by typing:
+      ```bash
+      java -jar planpal.jar
+      ```
+    - Press Enter. After a few seconds, a GUI similar to the one shown below should appear. Note that the application will start with some sample data preloaded for testing purposes.
+
+   ![UI](images/AppImages/GettingStartedUIImage.png)
+
+4. **Try Out Basic Commands**:
+    - In the command box within PlanPal, type a command and press Enter to execute it. For example:
+        - **`help`**: Opens the help window with guidance on commands.
+        - **`list`**: Displays a list of all contacts.
+        - **`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`**: Adds a contact named `John Doe` to the address book.
+        - **`delete 3`**: Removes the 3rd contact in the current list.
+        - **`clear`**: Deletes all contacts from the address book.
+        - **`exit`**: Closes the application.
+
+5. **Explore Additional Features**: For detailed explanations of each command and additional features, refer to the [Features](#features) section below.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -414,7 +441,7 @@ Action | Format, Examples
 **Remove** | `remove ei/[EVENT INDEX] pi/[PERSON INDEX]` <br> e.g. `remove ei/1 pi/1`
 **Erase** | `erase [EVENT INDEX]`
 **List** | `list`
-**Help** | `help`
+**Help** | `help`lkj
 
 
 ### Searchmode Summary
