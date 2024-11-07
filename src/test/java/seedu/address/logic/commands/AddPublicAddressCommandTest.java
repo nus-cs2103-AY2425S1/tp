@@ -7,9 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
-
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,18 +41,18 @@ public class AddPublicAddressCommandTest {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         AddPublicAddressCommand addPublicAddressCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
 
         // Edit the person
-        Person editedPerson = personToAddAddress.withAddedPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+        Person editedPerson = personToAddAddress.withAddedPublicAddress(VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK);
 
         // Expected message
         String expectedMessage =
-                String.format(AddPublicAddressCommand.MESSAGE_ADDPA_SUCCESS, Messages.format(editedPerson));
+            String.format(AddPublicAddressCommand.MESSAGE_ADDPA_SUCCESS, Messages.format(editedPerson));
 
         // Expected model
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -71,13 +72,13 @@ public class AddPublicAddressCommandTest {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         // Create the second descriptor with the same address
         EditPersonDescriptor duplicateDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition duplicatePublicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         duplicateDescriptor.setPublicAddresses(duplicatePublicAddresses);
 
         // Create the first command
@@ -100,11 +101,11 @@ public class AddPublicAddressCommandTest {
         String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
 
 
-                String.format(
-                        PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
-                        VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
-                        Network.BTC
-                )
+            String.format(
+                PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
+                VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
+                Network.BTC
+            )
         );
 
         assertCommandFailure(duplicateCommand, model, expectedMessage);
@@ -116,10 +117,9 @@ public class AddPublicAddressCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
 
-
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-                .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         AddPublicAddressCommand addPublicAddressCommand =
