@@ -121,12 +121,13 @@ Examples:
 
 Finds persons that match the specified filters.
 
-Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]`
+Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY] [income/INCOME]`
 
-* The search is case-insensitive. e.g `n/alex` will match `Alex`.
+* The search is case-insensitive. e.g `n/alice` will match `Alice`.
 * For names, only those that start with the given filter will be matched e.g. find n/A returns all persons whose first name starts with A only. 
-* For addresses, those that contain the given filter are returned e.g. find a/clementi returns all persons who stay at clementi only.
+* For addresses, those that contain the part of the address given are returned e.g. find a/clementi returns all persons who stay at clementi only.
 * For priorities, exact priorities must be specified to filter accurately e.g. find pri/high returns all persons with high priority only.
+* For income, those with income less than or equal to the specified value are listed.
 * At least one filter must be specified.
 * To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. find n/alex n/david n/bobby
 * Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. find n/A n/B pri/HIGH returns all persons whose name starts with either A or B but have high priority. 
