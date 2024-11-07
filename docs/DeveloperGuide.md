@@ -567,12 +567,10 @@ ___
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
-
 <box type="info" seamless>
 
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
-
 </box>
 
 ### Launch and shutdown
@@ -684,9 +682,7 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
    1. Prerequisites: Delete the data file.
-   
    2. Test case: Launch the app<br>
       Expected: The app should create a new data file with default data.
 
