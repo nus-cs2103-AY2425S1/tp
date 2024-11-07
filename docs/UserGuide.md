@@ -25,8 +25,10 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
 1. Type the command in the command box.
 
-   - Note that the command entered will be coloured red until it a valid command is entered.<br>
+   - Note that invalid commands will be coloured in red.
        ![incomplete command](images/incompleteCommand.png)
+   - Valid command words would briefly show in colour grey to indicate the command word is correct.
+       ![valid_command](images/validCommand.png)
    - Once the completed, valid command is entered, the command will return to colour black.<br>
        ![complete command](images/completedCommand.png)
    - Press Enter to execute command. e.g. typing **`help`** and pressing Enter
@@ -142,10 +144,10 @@ Format: `tag INDEX t/TAG_NAME`
 
 Example:
 - `tag 1 t/urgent`
-- 
-### Tagging a client: `untag`
 
-Tags a client in the case management system.
+### Untagging a client: `untag`
+
+Untags a client in the case management system.
 
 Format: `untag INDEX t/TAG`
 
@@ -156,6 +158,17 @@ Format: `untag INDEX t/TAG`
 Example:
 - `untag 1 t/urgent`
 
+### Setting an appointment: `setappointment`
+
+Sets an appointment date for a client
+
+Format: `setappointment INDEX d/[YYYY-MM-DD]`
+
+* Sets appointment date for the client at the specific `INDEX`
+* If the date is left empty, the current appointment date will be removed
+
+Example:
+- `setappointment 1 d/2024-11-23`
 
 ### Locating beneficiaries by name: `find`
 
@@ -241,6 +254,20 @@ manually.
 
 CareConnect provides command autocompletion when pressing the Tab key. For example, typing `f` and pressing Tab will auto complete the command to `find`.
 
+### Syntax Highlighting
+CareConnect provides visual feedback to help users recognize and correct commands by highlighting text in different colors.
+
+* Black: Indicates a fully valid command.
+* Gray: Indicates a valid command word pending arguments.
+* Red: Indicates an invalid command.
+
+This color-coded feedback helps users ensure their commands are correct and minimizes errors in usage.
+
+### Easy keyboard navigation
+CareConnect offers convenient keyboard navigation. Press `Shift + Tab` to switch focus between the command box, log list, and person list. Use the `Up` and `Down` arrow keys to scroll through lists.
+
+
+
 ### Editing the data file
 
 CareConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
@@ -275,6 +302,9 @@ Action | Format, Examples
 **List** | `list`
 **View** | `view INDEX` <br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Tag** | `tag INDEX t/TAG_NAME` <br> e.g., `tag 1 t/highPriority`
+**Untag** | `untag INDEX t/TAG_NAME` <br> e.g., `untag 1 t/highPriority`
+**Set Appointment** | `setappointment INDEX d/[YYYY-MM-DD]` <br> e.g., `setappointment 1 d/2024-11-23`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Add Log** | `addlog INDEX r/REMARK [d/DATE]`<br> e.g., `addlog 2 r/Client is doing well d/2022-12-12 14:00`

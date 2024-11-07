@@ -34,7 +34,7 @@ public class SetAppointmentCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "If date is left blank, current appointment will be deleted.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + CliSyntax.PREFIX_DATE + "YYYY-MM-DD\n"
+            + CliSyntax.PREFIX_DATE + "[YYYY-MM-DD]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_DATE + "2024-10-24";
 

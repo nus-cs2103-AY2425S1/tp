@@ -1,6 +1,7 @@
 package careconnect.ui;
 
 import careconnect.logic.Logic;
+import careconnect.logic.Logic.ValidateSyntaxResultEnum;
 import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
@@ -20,6 +21,7 @@ import javafx.scene.layout.Region;
 public class CommandBox extends UiPart<Region> implements ShiftTabFocusable {
 
     public static final String ERROR_STYLE_CLASS = "error";
+    public static final String VALID_COMMAND_STYLE_CLASS = "valid-command";
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
@@ -111,13 +113,18 @@ public class CommandBox extends UiPart<Region> implements ShiftTabFocusable {
             return;
         }
 
-        if (syntaxValidator.validateSyntax(commandText)) {
-            // Sets style back to default if command is valid
+        ValidateSyntaxResultEnum result = syntaxValidator.validateSyntax(commandText);
+        switch (result) {
+        case VALID_COMMAND_WORD:
+            this.setStyleToIndicateValidCommandWord();
+            break;
+        case VALID_FULL_COMMAND:
             this.setStyleToDefault();
-            assert(!(this.commandTextField.getStyleClass()
-                            .contains(ERROR_STYLE_CLASS)));
-        } else {
-            setStyleToIndicateCommandFailure();
+            break;
+        case INVALID_COMMAND:
+            this.setStyleToIndicateCommandFailure();
+            break;
+        default:
         }
     }
 
@@ -125,7 +132,31 @@ public class CommandBox extends UiPart<Region> implements ShiftTabFocusable {
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
+        // logic should assert there exists at max 1 occurence of
+        // error_style_class or valid_command_class at any time
         commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextField.getStyleClass().remove(VALID_COMMAND_STYLE_CLASS);
+        assert(!commandTextField.getStyleClass().contains(VALID_COMMAND_STYLE_CLASS));
+        assert(!commandTextField.getStyleClass().contains(ERROR_STYLE_CLASS));
+    }
+
+    /**
+     * Sets the command box style to indicate a valid command word
+     */
+    private void setStyleToIndicateValidCommandWord() {
+        // logic should assert there exists at max 1 occurence of
+        // error_style_class or valid_command_style_class at any time
+        ObservableList<String> styleClass = commandTextField.getStyleClass();
+
+        // remove error style if exist
+        styleClass.remove(ERROR_STYLE_CLASS);
+
+        // add valid command style if dont exist
+        if (styleClass.contains(VALID_COMMAND_STYLE_CLASS)) {
+            return;
+        }
+
+        styleClass.add(VALID_COMMAND_STYLE_CLASS);
     }
 
     /**
@@ -134,6 +165,10 @@ public class CommandBox extends UiPart<Region> implements ShiftTabFocusable {
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
 
+        // remove valid style class if exist
+        styleClass.remove(VALID_COMMAND_STYLE_CLASS);
+
+        // add error style if dont exist
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
         }
@@ -178,7 +213,7 @@ public class CommandBox extends UiPart<Region> implements ShiftTabFocusable {
          *
          * @see Logic#validateSyntax(String)
          */
-        boolean validateSyntax(String syntax);
+        ValidateSyntaxResultEnum validateSyntax(String syntax);
     }
 
 }
