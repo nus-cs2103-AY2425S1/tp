@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-class OrderStatusTest {
+public class OrderStatusTest {
     @Test
     void toString_returnsCorrectDescription() {
         assertEquals("Pending", OrderStatus.PENDING.toString());

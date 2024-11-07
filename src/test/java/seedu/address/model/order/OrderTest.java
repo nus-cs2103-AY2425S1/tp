@@ -17,7 +17,7 @@ import seedu.address.model.product.Product;
 import seedu.address.model.util.Remark;
 import seedu.address.testutil.PersonBuilder;
 
-class OrderTest {
+public class OrderTest {
     private static class TestOrder extends Order {
         public TestOrder(Person person, List<Product> items, OrderStatus status, Remark remark) {
             super(person, items, status, remark);
