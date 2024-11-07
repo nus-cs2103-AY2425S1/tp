@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `HistoryCommandListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F12-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -336,14 +336,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to add a new contact by inputting the relevant contact details (name, email, phone number, module code, etc.)
+1.  User requests to add a new contact by providing the relevant contact details (name, email, phone number, module code, etc.)
 2. ContactCS adds the contact under the specified module
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Necessary input such as module code, name, or email is missing.
+* 1a. Necessary input such as name is missing.
 
   * 1a1. ContactCS requests the user to provide the required information
   * 1a2. User enters new data
@@ -371,10 +371,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to search for contact(s) by inputting one or more of the following:
+1.  User requests to search for contact(s) by providing one or more of the following:
      * The name of the contact,
      * The module code (optionally including the role), or
      * A combination of both
+    
 2. ContactCS shows a list of matching contacts
 
     Use case ends.
@@ -383,7 +384,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Necessary input of at least one keyword is missing.
 
-    * 1a1. ContactCS requests the user to input keyword
+    * 1a1. ContactCS requests the user to provide keyword
     * 1a2. User enters new input
     * Steps 1a1 - 1a2 are repeated until all required fields in the input are complete
 
