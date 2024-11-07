@@ -18,11 +18,12 @@ Class Email
 Class Name
 Class Phone
 Class Tag
-Class UniqueTagList
+Class TagList
 Class RsvpStatus
 
 Class I #FFFFFF
 }
+Class "{abstract}\nCommand" as Command
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
@@ -37,9 +38,9 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-AddressBook *--> "1" UniqueTagList
-UniqueTagList -[hidden]right-> UniquePersonList
-UniqueTagList -right-> "0..30" Tag
+AddressBook *--> "1" TagList
+TagList -[hidden]right-> UniquePersonList
+TagList -right-> "0..30" Tag
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
@@ -47,7 +48,7 @@ Person *--> Email
 Person *--> RsvpStatus
 Person *-left-> Tag
 
-
+ModelManager -down-> Command
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
