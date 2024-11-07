@@ -15,7 +15,7 @@ public class SaveSortPreferenceCommandParser implements Parser<SaveSortPreferenc
     public SaveSortPreferenceCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
         try {
-            SortPreference sortPreference = ParserUtil.parseSortPreference(userInput);
+            SortPreference sortPreference = ParserUtil.parseSortPreference(userInput.toLowerCase());
             return new SaveSortPreferenceCommand(sortPreference);
         } catch (ParseException e) {
             throw new ParseException(
