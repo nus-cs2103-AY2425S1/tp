@@ -17,11 +17,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ArchiveCommand;
+import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FinddelCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.InspectCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -60,11 +62,23 @@ public class HelpWindow extends UiPart<Stage> {
             AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE_DELIVERY, AddCommand.ADD_DELIVERY_EXAMPLE
         ),
         new CommandHelpCard(ArchiveCommand.COMMAND_WORD, ArchiveCommand.MESSAGE_USAGE, "archive 1"),
+        // Update when AssignCommand is added
+        new CommandHelpCard(
+            "assign",
+            "Assigns the specified delivery from the delivery list of a client to the specified employee.",
+            "assign 1 n/Betsy Crowe"
+        ),
+        new CommandHelpCard(BackCommand.COMMAND_WORD, "Go back to default window", "back"),
         new CommandHelpCard(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE_DELIVERY, "delete 1 2"),
         new CommandHelpCard(EditCommand.COMMAND_WORD, EditCommand.INSPECT_MESSAGE_USAGE, EditCommand.DELIVERY_EXAMPLE),
         new CommandHelpCard(ExitCommand.COMMAND_WORD, "Closes the app", "exit"),
+        new CommandHelpCard(
+            FinddelCommand.COMMAND_WORD,
+            "Finds deliveries that contain any of the given items.",
+            "finddel Chair"
+        ),
         new CommandHelpCard(HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE, "help"),
-        new CommandHelpCard(ListCommand.COMMAND_WORD, "Lists all persons", "list"),
+        new CommandHelpCard(ListCommand.COMMAND_WORD, "Lists all deliveries", "list"),
         new CommandHelpCard(
             SortCommand.COMMAND_WORD_ASCENDING, SortCommand.MESSAGE_USAGE_ASCENDING_INSPECT, "asort by/ cost"
         ),
