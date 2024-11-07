@@ -52,7 +52,7 @@ Click the links to find out more about each command type:
     - On Mac/Linux: Open the Terminal from your Applications.
 1. In the terminal, type `cd` followed by the path to the folder with the .jar file (e.g. `C:/Users/Your_Name/Your_Folder`), then run the following command:
 
-   `java -jar NAME_OF_JAR_FILE`.</br>For example, `java -jar volunsync-v1.3.jar`.
+   `java -jar NAME_OF_JAR_FILE`. For example, `java -jar volunsync-v1.3.jar`.
 
 1. After entering the command, the window should appear as shown below, with some sample data pre-loaded.
    ![Ui](images/VolunSyncUi.png)
