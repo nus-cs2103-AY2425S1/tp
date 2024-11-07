@@ -19,6 +19,7 @@ Class Address
 Class Email
 Class Name
 Class Role
+Class Sex
 Class Phone
 Class Tag
 Class AttendanceCount
@@ -41,6 +42,7 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
+Person *--> Sex
 Person *--> Role
 Person *--> Phone
 Person *--> Email

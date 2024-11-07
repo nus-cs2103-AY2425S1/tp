@@ -75,17 +75,19 @@ Format: `help`
 
 Adds a person to Cher.
 
-Format: `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 Role can either be ```student``` or ```parent```, case-insensitive.
+
+Sex can either be ```f``` or ```m```, case-insensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe r/parent e/betsycrowe@example.com a/Newgate Prison p/1234567`
+* `add n/John Doe s/m r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe s/f r/parent e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
 ### Listing all persons : `list`
 
@@ -97,7 +99,7 @@ Format: `list`
 
 Edits an existing person in the Cher.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [s/SEX] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
