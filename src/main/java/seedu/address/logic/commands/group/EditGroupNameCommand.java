@@ -31,7 +31,8 @@ public class EditGroupNameCommand extends Command {
             + "the new name you have chosen.";
     public static final String MESSAGE_EDIT_GROUP_NOT_FOUND = "The existing group with the given name "
             + "could not be found.";
-
+    public static final String MESSAGE_EDIT_GROUP_SAME_NAME = "The current group already has name %s. "
+            + "No changes were made.";
     private final String oldGroupName;
     private final String newGroupName;
 
@@ -48,6 +49,10 @@ public class EditGroupNameCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert !newGroupName.isBlank();
+        if (oldGroupName.equals(newGroupName)) {
+            throw new CommandException(String.format(MESSAGE_EDIT_GROUP_SAME_NAME, oldGroupName));
+        }
 
         Group existingGroup;
         try {
@@ -64,7 +69,7 @@ public class EditGroupNameCommand extends Command {
         } catch (DuplicateGroupException dge) {
             throw new CommandException(MESSAGE_EDIT_GROUP_NAME_EXISTS);
         }
-        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, oldGroupName, newGroupName));
+        return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, oldGroupName, newGroupName), true);
     }
 
     /**

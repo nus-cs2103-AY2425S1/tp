@@ -31,15 +31,15 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
      * @param hours Hours contributed by the volunteer.
      */
     public Volunteer(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Hours hours) {
-        super(name, phone, email, address, tags);
+        super(name, Role.VOLUNTEER, phone, email, address, tags);
         requireAllNonNull(hours);
         this.hours = hours;
     }
 
     /**
-     * Gets the number of hours that the volunteer has contributed
+     * Returns the hours associated with this instance.
      *
-     * @return
+     * @return The hours of this instance.
      */
     public Hours getHours() {
         return this.hours;
@@ -73,7 +73,7 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address, tags, hours);
+        return Objects.hash(name, role, phone, email, address, tags, hours);
     }
 
 
@@ -100,10 +100,5 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
         parentToString = parentToString.substring(0, parentToString.length() - 1);
 
         return parentToString + ", hours=" + hours + "}";
-    }
-
-    @Override
-    public Role getRole() {
-        return Role.VOLUNTEER;
     }
 }

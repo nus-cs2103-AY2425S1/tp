@@ -56,7 +56,7 @@ public class Name implements Comparable<Name> {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
@@ -66,10 +66,6 @@ public class Name implements Comparable<Name> {
 
     @Override
     public int compareTo(Name other) {
-        return this.fullName.compareTo(other.fullName);
-    }
-
-    public int compareToIgnoreCase(Name otherName) {
-        return this.fullName.compareToIgnoreCase(otherName.fullName);
+        return this.fullName.compareToIgnoreCase(other.fullName);
     }
 }

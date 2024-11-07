@@ -1,12 +1,14 @@
 package seedu.address.logic;
 
+
+import static seedu.address.model.person.PersonUtil.getRoleSpecificInfoString;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Volunteer;
 
 /**
  * Container for user visible messages.
@@ -21,6 +23,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_COMMAND_FOR_PERSON_TYPE =
             "This command cannot be used on this category of contacts!";
+    public static final String MEMBER_MESSAGE_CONSTRAINTS = "The members should be positive integer indices from "
+            + "the latest shown list, separated by spaces.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,17 +52,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
-        return builder.toString();
-    }
-
-    /**
-     * Formats the updated {@code volunteer}'s new hours for display to the user.
-     */
-    public static String formatSetVolunteerHours(Volunteer volunteer) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(volunteer.getName())
-                .append("; Hours Contributed: ")
-                .append(volunteer.getHours());
+        String roleSpecificInfo = getRoleSpecificInfoString(person);
+        builder.append(roleSpecificInfo);
         return builder.toString();
     }
 }

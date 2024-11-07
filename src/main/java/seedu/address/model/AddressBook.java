@@ -99,9 +99,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        groups.removePersonInAllGroups(key);
     }
 
     // group methods
+
+    public void updateGroupListWithEditedPerson(Person target, Person editedPerson) {
+        this.groups.updatePersonInAllGroups(target, editedPerson);
+    }
 
     /**
      * Adds {@code group} to the groups in this {@code AddressBook}.

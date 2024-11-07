@@ -115,8 +115,14 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        updateGroupsWithNewPerson(target, editedPerson);
+    }
+
+    @Override
+    public void updateGroupsWithNewPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+        addressBook.updateGroupListWithEditedPerson(target, editedPerson);
     }
 
     @Override
@@ -230,5 +236,4 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && sortedPersons.equals(otherModelManager.sortedPersons);
     }
-
 }

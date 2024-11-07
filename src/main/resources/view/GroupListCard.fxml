@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.FlowPane?>
 <HBox fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -27,8 +26,15 @@
                 </Label>
                 <Label fx:id="groupName" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="groupSize"/>
-            <Label fx:id="membersPane"/>
+            <HBox spacing="5" alignment="BASELINE_LEFT">
+                <Label text="Group Size:" styleClass="members-label" />
+                <Label fx:id="groupSize" styleClass="groupList"/>
+            </HBox>
+            <Label minHeight="0" maxHeight="3" />
+            <HBox spacing="5" alignment="BASELINE_LEFT">
+                <Label text="Members:" styleClass="members-label" />
+                <Label fx:id="membersList" styleClass="membersList"/>
+            </HBox>
         </VBox>
     </GridPane>
 </HBox>

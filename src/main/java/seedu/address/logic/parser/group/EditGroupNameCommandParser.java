@@ -3,6 +3,7 @@ package seedu.address.logic.parser.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.group.CreateGroupCommandParser.GROUP_NAME_EMPTY_ERROR;
 
 import java.util.List;
 
@@ -27,6 +28,9 @@ public class EditGroupNameCommandParser implements Parser<EditGroupNameCommand> 
         List<String> names = argMultimap.getAllValues(PREFIX_GROUP_NAME);
         if (names.size() != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupNameCommand.MESSAGE_USAGE));
+        }
+        if (names.get(0).isEmpty() || names.get(1).isEmpty()) {
+            throw new ParseException(GROUP_NAME_EMPTY_ERROR);
         }
         return new EditGroupNameCommand(names.get(0), names.get(1));
     }

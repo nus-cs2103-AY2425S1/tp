@@ -85,7 +85,7 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
         [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`
 
 - `ROLE` (Optional): Specifies the type of contact. If not provided, the contact will be added as a general `Person`.
-- `NAME`: The contact's full name.
+- `NAME`: The contact's full name (case-insensitive).
 - `PHONE_NUMBER`: The contact's phone number.
 - `EMAIL`: The contact's email address.
 - `ADDRESS`: The contact's physical address.
@@ -155,56 +155,51 @@ Format: `edit INDEX [r/ROLE] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Role-specific fields must correspond to the resulting role after editing.
-  For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
-  Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
-  and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
-  If the resulting role does not have the specified field, the edit will be invalid.
+  * For example, if you change the role to `Volunteer`, you must also provide `h/HOURS`.  
+  * Similarly, if the role is changed to `Donor`, `d/DONATED_AMOUNT` is required,  
+  * For `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+* If the resulting role does not have the specified field, the edit will be invalid.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Set a volunteer's hours
-
-Sets a volunteers hours to a certain amount.
-
-Format: `setHours INDEX h/HOURS`
-
-* The index is based on the indices in the latest list command.
-
-Example: `setHours 2 h/20`
-
 ### Searching persons by field: `search`
 
 Search persons whose fields match the keywords given.
 
-Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD ...]`
+Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
 * Search is restricted to the fields indicated by the provided prefixes.
+* The order of the prefixes provided does not affect search results. e.g. `search n/alex t/friends` will return the same result as `search t/friends n/alex`.
+* Only full words will be matched e.g. `friend` will not match `friends`.
 * For name searches, the order of keywords does not matter (e.g., Hans Bo will match Bo Hans).
-* The order of the prefixes provided does not affect search results. e.g. `search n/ alex t/ friends` will return the same result as `search t/ friends n/ alex`
-* Tag inputs must be alphanumeric
-* Only full words will be matched e.g. `friend` will not match `friends`
-* For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
+* For name searches, persons matching any of the keyswords given will be returned (eg., `search n/Alex David` returns both `Alex` and `David`).
+* For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned.
 
-Tip: Support search prefixes include:
+<box type="tip" seamless>
+
+**Tip:** Supported search prefixes include:
 * `NAME`: n/
 * `TAG`: t/
 * `PHONE_NUMBER`: p/
 * `GROUP`: g/
+* `ROLE`: r/
+
+</box>
 
 Examples: <br>
-1. **Person A:** `name`: John Doe `tag`: colleague `group`: blood drive <br>
-2. **Person B:** `name`: Alex Yeoh `tag`: friends <br>
-3. **Person C:** `name`: David Li `tag`: friends `group`: blood drive
-* `search n/ john` returns persons with the name `john` like `John Doe`
-* `search t/ friends` returns all persons tagged as friends like `Alex Yeoh` and `David Li`
-* `search n/ david t/ friends g/ blood drive` returns all persons with name matching `david`, tag matching `friends` and in group `blood drive` like `David Li`. <br>
-    ![result for 'find alex david'](images/findAlexDavidResult.png)
+1. **Person A:** `name`: John Doe `tag`: colleague `phone number`: 81234567 `role`: donor `group`: blood drive<br>
+2. **Person B:** `name`: Alex Yeoh `tag`: friends `phone number`: 91234567 `role`: volunteer <br>
+3. **Person C:** `name`: David Li `tag`: friends `phone number`: 81234123 `role`: person `group`: blood drive
+* `search n/john` returns persons with the name `john` like `John Doe`
+* `search g/blood drive` returns all persons in group `blood drive` like `John Doe` and `David Li`
+* `search n/david t/friends g/blood drive p/81234123` returns all persons with name matching `david`, tag matching `friends`, `phone number` 81234123 and in group `blood drive` like `David Li`. <br>
+    ![result for 'search alex david'](images/search_alex_david.png)
+
 
 ### Deleting a person : `delete`
 
@@ -213,8 +208,16 @@ Deletes the specified person from the address book.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the **last displayed person list**.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**Tip:** Be careful when using the `delete` command.
+* Even if you are currently viewing a list of groups, the delete command will still apply to the last displayed person list. 
+* Ensure you are viewing the correct list before deleting.
+
+</box>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -236,21 +239,14 @@ Format: `createGroup g/GROUP_NAME m/[INDICES]`
 * Adds the persons at the specified `INDICES` to the group. 
   Indices refer to the index numbers shown in the displayed person list.
   There must be at least one index provided, and indices should be separated by a space.
-* There cannot be two groups with the same name. If a group
+* There cannot be two groups with the same name (case-insensitive). If a group
   with the given `GROUP_NAME` currently exists, the command will fail.
 
-### Editing a group's name : `editGroupName`
+Example:
+* `createGroup g/blood drive 2024 m/3 4` creates a new group named `blood drive 2024`
+  with the 3rd and 4th persons in the current list in view as members.
 
-Edits the name of a group that currently exists.
-
-Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
-
-* Changes the group with the name `OLD_GROUP_NAME`'s name to
-`NEW_GROUP_NAME`.
-* The old group name must exist, and the new group name must not already be in use.
-* If either of the above conditions are not met, the command will fail.
-
-### Adding new members to a existing group : `addToGroup`
+### Adding new members to an existing group : `addToGroup`
 
 Adds new members to a group that currently exists.
 
@@ -263,7 +259,40 @@ must be valid indices.
 * If either of the above conditions are not met, the command will fail.
 
 Example:
-* `addToGroup g/blood drive 2024 m/1 2 5 6`
+* `addToGroup g/blood drive 2024 m/1 2 5 6` adds the persons at index 1, 2, 5 and 6 of
+  the current list in view as members to the existing group named `blood drive`.
+
+### Removing members from an existing group : `removeFromGroup`
+
+Remove members from a group that currently exists.
+
+Format: `removeFromGroup g/GROUP_NAME m/[INDICES]`
+
+* Removes specified members from the group with the name `GROUP_NAME`.
+* The indices are based on the indices displayed in the last list command.
+* There must already exist a group with the name `GROUP_NAME`. The indices
+  must be valid indices.
+* If either of the above conditions are not met, the command will fail.
+
+Example:
+* `reemoveFromGroup g/blood drive 2024 m/1 2 5 6` removes the persons at index 1, 2, 5 and 6 of
+  the current list in view from the existing group named `blood drive`.
+
+
+### Editing a group's name : `editGroupName`
+
+Edits the name of a group that currently exists.
+
+Format: `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
+
+* Changes the group with the name `OLD_GROUP_NAME`'s name to
+  `NEW_GROUP_NAME`.
+* The old group name must exist, and the new group name must not already be in use.
+* If either of the above conditions are not met, the command will fail.
+
+Example:
+* `editGroupName g/blood drive 2024 g/charity run` renames an existing group called
+  `blood drive 2024` into `charity run`.
 
 ### Deleting a group: `deleteGroup`
 
@@ -274,11 +303,18 @@ Format: `deleteGroup g/GROUP_NAME`
 * Deletes group named `GROUP_NAME`
 * Group named `GROUP_NAME` must exist.
 
-### Listing groups: `listGroups`
+Example:
+* `deleteGroup g/blood drive 2024`
 
-Lists out all existing Group names.
+### Listing groups: `listGroups`
+Shows a list of all existing groups.
 
 Format: `listGroups`
+
+* The group size and up to three members are displayed for each group.
+* If a group has more than three members, only the first three are shown, followed by "…" to indicate additional members.
+
+![result for 'list groups'](images/list-groups.png)
 
 ### Getting emails: `email`
 
@@ -336,14 +372,14 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [h/HOURS] [d/DONATED_AMOUNT] [ped/PARTNERSHIP_END_DATE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Search**   | `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`<br> e.g., `search n/ john`
+**Search**   | `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`<br> e.g., `search n/john`
 **List**   | `list`
 **Sort**   | `sort [s/SORT_OPTION]`
 **Help**   | `help`
-**Set a Volunteer's Hours** | `setHours INDEX [h/HOURS]`
 **Create Group** | `createGroup g/GROUP_NAME m/[INDICES]`
+**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`
+**Remove Existing Members from Group** | `removeFromGroup g/GROUP_NAME m/[INDICES]`
+**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
 **Delete Group** | `deleteGroup g/GROUP_NAME`
 **List Groups**  | `listGroups`
 **Get Emails**   | `email`
-**Edit Group Name** | `editGroupName g/OLD_GROUP_NAME g/NEW_GROUP_NAME`
-**Add New Members to Group** | `addToGroup g/GROUP_NAME m/[INDICES]`

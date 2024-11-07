@@ -41,7 +41,8 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson.getRoleAsLowerCaseString(),
+                        Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -160,6 +161,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateGroupsWithNewPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void addGroup(Group group) {
             throw new AssertionError("This method should not be called.");

@@ -15,27 +15,29 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicateGroupException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.GroupNotFoundException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Command to add new members to a group.
+ * Command to remove existing members from a group.
  */
-public class AddToGroupCommand extends Command {
-    public static final String COMMAND_WORD = "addToGroup";
+public class RemoveFromGroupCommand extends Command {
+    public static final String COMMAND_WORD = "removeFromGroup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds contacts to a existing group of specified name, adding "
+            + ": Removes contacts from a existing group of specified name, the group must have "
             + "the specified persons (referenced by index of current list) inside.\n"
             + "Parameters: "
             + PREFIX_GROUP_NAME + "GROUP_NAME "
             + PREFIX_MEMBERS + " INDEX [MORE_INDICES...]\n"
             + "Example: " + COMMAND_WORD + " g/blood drive m/ 1 4 6";
 
-    public static final String MESSAGE_ADD_TO_GROUP_SUCCESS = "The following users were added to the group %s:\n";
-    public static final String MESSAGE_NO_PERSON_ADDED = "No users were added to the group %s.\n";
-    public static final String MESSAGE_ADD_TO_GROUP_DUPLICATES = "The following users were already in the group %s "
-            + "and will remain in the group, the rest of the users have been added accordingly: \n";
+    public static final String MESSAGE_REMOVE_FROM_GROUP_SUCCESS =
+            "The following users were removed from the group %s:\n";
+    public static final String MESSAGE_NO_PERSON_REMOVED = "No users were removed from the group %s.\n";
+    public static final String MESSAGE_PERSON_NOT_IN_GROUP = "The following users were not in the group %s "
+            + "and therefore could not be removed from the group, the rest of the users"
+            + " have been removed accordingly: \n";
     public static final String MESSAGE_GROUP_NOT_EXISTS = "There is no group with name %s.";
     public static final String MESSAGE_PERSON_INDEX_NOT_EXISTS = "Index %s does not exist in the last shown list!";
 
@@ -43,15 +45,15 @@ public class AddToGroupCommand extends Command {
 
     private final List<Index> members;
 
-    private List<Person> duplicates = new ArrayList<>();
-    private List<Person> newMembers = new ArrayList<>();
+    private List<Person> missingFromGroup = new ArrayList<>();
+    private List<Person> removedMembers = new ArrayList<>();
 
     /**
-     * Creates a new AddToGroupCommand.
+     * Creates a new RemoveFromGroupCommand.
      * @param groupName The group name
-     * @param members The persons to be included (referenced by index)
+     * @param members The persons to be removed (referenced by index)
      */
-    public AddToGroupCommand(String groupName, List<Index> members) {
+    public RemoveFromGroupCommand(String groupName, List<Index> members) {
         this.groupName = groupName;
         this.members = members;
     }
@@ -65,7 +67,7 @@ public class AddToGroupCommand extends Command {
         Group newGroup;
         try {
             existingGroup = model.getGroup(groupName);
-            newGroup = this.createGroupWithNewMembers(existingGroup, members, lastShownList);
+            newGroup = this.createGroupWithRemovedMembers(existingGroup, members, lastShownList);
             model.setGroup(existingGroup, newGroup);
         } catch (GroupNotFoundException gnfe) {
             throw new CommandException(String.format(MESSAGE_GROUP_NOT_EXISTS, groupName));
@@ -77,36 +79,36 @@ public class AddToGroupCommand extends Command {
 
     /**
      * Formats the message to output to the user after the execution of the command.
-     * This is non-trivial as new entries and duplicates are taken into account to
+     * This is non-trivial as new entries and people not in the group are taken into account to
      * output the correct string format.
      *
      * @return a string which should go into the CommandResult.
      */
     private String formatSuccessCommandResultMessage() {
         final StringBuilder builder = new StringBuilder();
-        if (this.newMembers.isEmpty()) {
-            builder.append(String.format(MESSAGE_NO_PERSON_ADDED, groupName));
+        if (this.removedMembers.isEmpty()) {
+            builder.append(String.format(MESSAGE_NO_PERSON_REMOVED, groupName));
         } else {
-            builder.append(String.format(MESSAGE_ADD_TO_GROUP_SUCCESS, groupName));
+            builder.append(String.format(MESSAGE_REMOVE_FROM_GROUP_SUCCESS, groupName));
         }
-        this.newMembers.forEach(person -> builder.append(person.getName()).append('\n'));
-        if (!this.duplicates.isEmpty()) {
-            builder.append(String.format(MESSAGE_ADD_TO_GROUP_DUPLICATES, groupName));
-            this.duplicates.forEach(person -> builder.append(person.getName()).append('\n'));
+        this.removedMembers.forEach(person -> builder.append(person.getName()).append('\n'));
+        if (!this.missingFromGroup.isEmpty()) {
+            builder.append(String.format(MESSAGE_PERSON_NOT_IN_GROUP, groupName));
+            this.missingFromGroup.forEach(person -> builder.append(person.getName()).append('\n'));
         }
         return builder.toString();
     }
 
     /**
-     * To enforce immutability, this function creates a new group with the added members.
+     * To enforce immutability, this function creates a new group with the removed members.
      *
-     * @param existingGroup The group object of the group before addition of members.
-     * @param members The indices of the members to be added, based on the lastShownList.
+     * @param existingGroup The group object of the group before removal of members.
+     * @param members The indices of the members to be removed, based on the lastShownList.
      * @param lastShownList The list of Person's objects last displayed to the user.
      * @return a new Group object with the added person objects.
      */
-    private Group createGroupWithNewMembers(Group existingGroup,
-                                                     List<Index> members, List<Person> lastShownList) {
+    private Group createGroupWithRemovedMembers(Group existingGroup,
+                                            List<Index> members, List<Person> lastShownList) {
         Group newGroup = new Group(existingGroup);
         members.stream()
                 .map(member -> {
@@ -121,10 +123,10 @@ public class AddToGroupCommand extends Command {
                 })
                 .forEach(person -> {
                     try {
-                        newGroup.add(person);
-                        newMembers.add(person);
-                    } catch (DuplicatePersonException dpe) {
-                        this.duplicates.add(person);
+                        newGroup.remove(person);
+                        removedMembers.add(person);
+                    } catch (PersonNotFoundException pnfe) {
+                        this.missingFromGroup.add(person);
                     }
                 });
         return newGroup;
@@ -136,7 +138,7 @@ public class AddToGroupCommand extends Command {
             return true;
         }
         // instanceof handles nulls
-        if (!(other instanceof AddToGroupCommand e)) {
+        if (!(other instanceof RemoveFromGroupCommand e)) {
             return false;
         }
         return groupName.equals(e.groupName) && members.equals(e.members);

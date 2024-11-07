@@ -28,7 +28,7 @@ public class Donor extends Person implements Comparable<Donor> {
      * @param donatedAmount   Hours contributed by the donor.
      */
     public Donor(Name name, Phone phone, Email email, Address address, Set<Tag> tags, DonatedAmount donatedAmount) {
-        super(name, phone, email, address, tags);
+        super(name, Role.DONOR, phone, email, address, tags);
         requireAllNonNull(donatedAmount);
         this.donatedAmount = donatedAmount;
     }
@@ -65,7 +65,7 @@ public class Donor extends Person implements Comparable<Donor> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, address, tags, donatedAmount);
+        return Objects.hash(name, role, phone, email, address, tags, donatedAmount);
     }
 
     /**
@@ -81,11 +81,6 @@ public class Donor extends Person implements Comparable<Donor> {
         parentToString = parentToString.substring(0, parentToString.length() - 1);
 
         return parentToString + ", donatedAmount=" + donatedAmount + "}";
-    }
-
-    @Override
-    public Role getRole() {
-        return Role.DONOR;
     }
 
     /**

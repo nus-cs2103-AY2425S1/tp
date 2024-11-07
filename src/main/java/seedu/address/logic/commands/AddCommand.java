@@ -26,7 +26,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + PREFIX_ROLE + "ROLE "
+            + "[" + PREFIX_ROLE + "ROLE] "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -46,7 +46,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney "
             + PREFIX_HOURS + "30";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New %1$s added: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -68,7 +68,8 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getRoleAsLowerCaseString(),
+                Messages.format(toAdd)));
     }
 
     @Override
