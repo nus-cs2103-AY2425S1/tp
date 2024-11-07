@@ -53,9 +53,7 @@ The codebase of Talentcy originates from AddressBook Level 3 (AB3) developed by 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 * Items in square brackets are optional.<br>
-    e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-    e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+    e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/have pHD` or as `n/John Doe`.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
@@ -218,11 +216,11 @@ Furthermore, certain edits can cause the Talentcy to behave in unexpected ways (
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------- 
 
 ## Fields
 
-<box type="info" seamless>
+<box type="info" seamless>  
 
 **Notes about each valid input field:**<br>
 
