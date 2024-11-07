@@ -162,7 +162,7 @@ Examples:
 
 ### Adds an event to the database.
 
-Format: `add n/NAME sp/SPORT v/Venue [pa/PARTICIPANTS]…​`
+Format: `addevent sp/SPORT t/Faculty 1 t/Faculty 2 d/LocalDateTime v/Venue [pa/PARTICIPANTS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have zero or more participants.
@@ -170,12 +170,11 @@ Note that the participants must be valid persons in the database.
 </div>
 
 Examples:
-* `add n/Basketball Final s/Basketball Men v/USC pa/John Doe pa/Betsy Crowe`
-* `add n/100m Sprint s/Athletics v/USC pa/John Doe pa/Betsy Crowe pa/Alex Yeoh`
+* `addevent sp/Chess t/COM t/BIZ d/2024 12 12 1800 v/USC pa/John`
 
 ### Edits an event in the database.
 
-Format: `edit INDEX [n/NAME] [sp/SPORT] [v/VENUE] [pa/PARTICIPANTS]…​`
+Format: `editevent INDEX sp/SPORT t/Faculty 1 t/Faculty 2 d/LocalDateTime v/Venue [pa/PARTICIPANTS]…​`
 
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -186,8 +185,8 @@ Format: `edit INDEX [n/NAME] [sp/SPORT] [v/VENUE] [pa/PARTICIPANTS]…​`
   specifying any participants after it.
 
 Examples:
-*  `edit 1 n/200m sprint` Edits the name of the event to be `200m sprint`.
-*  `edit 2 sp/Basketball Women r/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
+*  `edit 1 sp/Chess` Edits the sport of the event to be `Chess`.
+*  `edit 2 sp/Basketball Women pa/` Edits the sport of the event to be `Basketball Women` and clears all existing participants.
 
 ### Deletes an event from the database.
 

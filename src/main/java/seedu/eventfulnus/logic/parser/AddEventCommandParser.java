@@ -49,7 +49,6 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
 
         LocalDateTime dateTime = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATE).get());
 
-
         Set<Person> participants = new HashSet<>(ParserUtil.parseDefaultParticipants(sport, teams));
         participants.addAll(ParserUtil.parseParticipants(argMultimap.getAllValues(PREFIX_PARTICIPANT)));
 
