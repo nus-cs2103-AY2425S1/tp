@@ -88,6 +88,8 @@ Refer to the [Features](#features) below for details of each command.
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 > * **Copying Commands from PDFs:** If you’re copying commands from a PDF, be careful that spaces at line breaks may be omitted when pasted, so double-check the spacing.
+> * Prefixes Glossary: <br>
+> `n/` is for the name of supplier/product <br> `pr/` is for product <br> `su/` is for supplier <br> `p/` is for phone number of supplier <br> `e/` is for email of supplier <br> `a/` is for address of supplier <br> `t/` is for tags added to suppliers/products <br> `stk/` is for stock level of product <br> `min/` is for minimum stock level of product <br> `max/` is for maximum stock level of product <br> 
 </box>
 <box type="info" seamless><box>
 

@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAX_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_STOCK_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_SUPPLIER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -42,7 +42,7 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
                 PREFIX_STOCK_LEVEL,
                 PREFIX_MIN_STOCK_LEVEL,
                 PREFIX_MAX_STOCK_LEVEL,
-                PREFIX_PRODUCT_SUPPLIER_NAME,
+                PREFIX_SUPPLIER_NAME,
                 PREFIX_TAG);
 
         ParserUtil.verifyInput(argMultimap, new Prefix[]{PREFIX_NAME}, AddProductCommand.MESSAGE_USAGE);
@@ -53,7 +53,7 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
                 PREFIX_STOCK_LEVEL,
                 PREFIX_MIN_STOCK_LEVEL,
                 PREFIX_MAX_STOCK_LEVEL,
-                PREFIX_PRODUCT_SUPPLIER_NAME);
+                PREFIX_SUPPLIER_NAME);
 
         ProductName name = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_NAME).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -91,9 +91,9 @@ public class AddProductCommandParser implements Parser<AddProductCommand> {
         Product product = new Product(name, stockLevelObj, tagList);
 
         // Set supplier name if present
-        if (argMultimap.getValue(PREFIX_PRODUCT_SUPPLIER_NAME).isPresent()) {
+        if (argMultimap.getValue(PREFIX_SUPPLIER_NAME).isPresent()) {
             Name supplierName = ParserUtil.parseName(
-                    argMultimap.getValue(PREFIX_PRODUCT_SUPPLIER_NAME).get());
+                    argMultimap.getValue(PREFIX_SUPPLIER_NAME).get());
             product.setSupplierName(supplierName);
         }
 
