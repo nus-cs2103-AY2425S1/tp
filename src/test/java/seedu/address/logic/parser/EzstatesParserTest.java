@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ChatWindowCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -87,18 +89,18 @@ public class EzstatesParserTest {
                 new To("1000")
         );
         AddAppointmentCommand command = (AddAppointmentCommand) parser.parseCommand(
-                AddAppointmentCommand.COMMAND_WORD + " " + sean.getName()
+                AddAppointmentCommand.COMMAND_WORD + " " + "1"
                         + " " + PREFIX_DATE + appointment.getDate()
                         + " " + PREFIX_FROM + appointment.getFrom()
                         + " " + PREFIX_TO + appointment.getTo()
                 );
-        assertEquals(new AddAppointmentCommand(sean.getName(), appointment), command);
+        assertEquals(new AddAppointmentCommand(INDEX_FIRST_PERSON, appointment), command);
     }
     @Test
     public void parseCommand_deleteAppointment() throws Exception {
         DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
-                DeleteAppointmentCommand.COMMAND_WORD + " " + ALICE.getName());
-        assertEquals(new DeleteAppointmentCommand(ALICE.getName()), command);
+                DeleteAppointmentCommand.COMMAND_WORD + " " + "1");
+        assertEquals(new DeleteAppointmentCommand(INDEX_FIRST_PERSON), command);
     }
     @Test
     public void parseCommand_deleteClientProfile() throws Exception {

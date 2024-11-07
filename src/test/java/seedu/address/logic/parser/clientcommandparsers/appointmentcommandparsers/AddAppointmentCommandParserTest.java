@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.clientcommands.appointmentcommands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
@@ -30,14 +31,14 @@ public class AddAppointmentCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        String userInput = ALICE.getName() + " "
+        String userInput = "1" + " "
                 + PREFIX_DATE + VALID_DATE + " "
                 + PREFIX_FROM + VALID_FROM + " "
                 + PREFIX_TO + VALID_TO;
 
         Appointment expectedAppointment = new Appointment(
                 new Date(VALID_DATE), new From(VALID_FROM), new To(VALID_TO));
-        AddAppointmentCommand expectedCommand = new AddAppointmentCommand(ALICE.getName(), expectedAppointment);
+        AddAppointmentCommand expectedCommand = new AddAppointmentCommand(Index.fromOneBased(1), expectedAppointment);
 
         AddAppointmentCommand result = parser.parse(userInput);
         assertEquals(expectedCommand, result);
