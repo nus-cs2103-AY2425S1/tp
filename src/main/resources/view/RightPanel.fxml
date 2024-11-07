@@ -14,8 +14,8 @@
 
         <HBox spacing="10" styleClass="total-balance">
             <VBox alignment="CENTER_LEFT" spacing="5">
-                <Label fx:id="youOwnLabel"  text="You owe $97.32" styleClass="label, owed-text"/>
-                <Label fx:id="ownYouLabel" text="You are owed $1550.50" styleClass="label, owes-you-text"/>
+                <Label fx:id="youOweLabel" styleClass="label, you-owe-text"/>
+                <Label fx:id="youAreOwedLabel" styleClass="label, you-are-owed-text"/>
             </VBox>
             <Region HBox.hgrow="ALWAYS"/>
             <VBox alignment="CENTER_RIGHT" spacing="5">

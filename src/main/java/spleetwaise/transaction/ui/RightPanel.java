@@ -54,9 +54,9 @@ public class RightPanel extends UiPart<Region> {
     @FXML
     private StackPane transactionListPanelPlaceholder;
     @FXML
-    private Label youOwnLabel;
+    private Label youOweLabel;
     @FXML
-    private Label ownYouLabel;
+    private Label youAreOwedLabel;
     @FXML
     private Button filterBtn;
     @FXML
@@ -110,13 +110,13 @@ public class RightPanel extends UiPart<Region> {
         ObservableList<Transaction> txns = CommonModelManager.getInstance().getFilteredTransactionList();
 
         // Create predicates for each balance type (owe and owed)
-        FilterCommandPredicate youOwnFilter = createBalanceFilter(isTrackingUndoneBalanceOnly, NEGATIVE_SIGN);
-        FilterCommandPredicate ownYouFilter = createBalanceFilter(isTrackingUndoneBalanceOnly, POSITIVE_SIGN);
+        FilterCommandPredicate youOweFilter = createBalanceFilter(isTrackingUndoneBalanceOnly, NEGATIVE_SIGN);
+        FilterCommandPredicate youAreOwedFilter = createBalanceFilter(isTrackingUndoneBalanceOnly, POSITIVE_SIGN);
 
-        youOwnLabel.setText(
-                "You Owe $" + calculateBalance(txns, youOwnFilter).toString());
-        ownYouLabel.setText(
-                "You are Owed $" + calculateBalance(txns, ownYouFilter).toString());
+        youOweLabel.setText(
+                "You Owe $" + calculateBalance(txns, youOweFilter).toString());
+        youAreOwedLabel.setText(
+                "You are Owed $" + calculateBalance(txns, youAreOwedFilter).toString());
     }
 
     /**
