@@ -28,9 +28,9 @@ import seedu.address.model.healthservice.HealthService;
 
 
 public class FilterCommandTest {
-    private Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
-    private TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
+    private final Model model = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalClinicConnectSystem(), new UserPrefs());
+    private final TreeSet<FilteredAppointment> appointments = new TreeSet<>(APPOINTMENT_COMPARATOR);
 
     @Test
     public void equals() {
