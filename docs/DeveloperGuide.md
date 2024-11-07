@@ -7,6 +7,25 @@
 # WardWatch Developer Guide
 
 <!-- * Table of Contents -->
+# Table of Contents
+1. [Acknowledgements](#acknowledgements)
+2. [Setting Up, Getting Started](#setting-up-getting-started)
+3. [Design](#design)
+   1. [Architecture](#architecture)
+   2. [UI Component](#ui-component)
+   3. [Logic Component](#logic-component)
+   4. [Model Component](#model-component)
+   5. [Storage Component](#storage-component)
+   6. [Common Classes](#common-classes)
+4. [Implementation](#implementation)
+   1. [(Proposed) Undo/redo feature](#proposed-undoredo-feature)
+   2. [(Proposed) Data archiving](#proposed-data-archiving)
+5. [Planned Enhancements](#planned-enhancements)
+6. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
+7. [Appendix](#appendix)
+   1. [Appendix: Requirements](#appendix-requirements)
+   2. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
+   3. [Appendix: Efforts](#appendix-efforts)
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -140,15 +159,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -269,7 +279,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
+## **Planned Enhancements**
 
+### `Last edited` functionality
+Currently, there is no way to tell when a patient was last edited. This information might be crucial in a healthcare setting where the healthcare professional may need to know how recent the information is.<br>
+**Planned implementation**<br>
+We can make it such that a `Person` object contains a `LocalDateTime` field called `lastEdited` that keeps track of when the `Person` was last updated. This field will be updated whenever a new `Person` is created, be it from the `add` command or any of the other commands that edits a `Person`.
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -279,6 +299,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix**
 
 ## **Appendix: Requirements**
 
@@ -335,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. WardWatch shows an invalid patient information error message.
 
       Use case resumes at step 1.
 
@@ -354,21 +375,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty
 
-    * 2a1. WardWatch shows that list is empty
+    * 2a1. WardWatch shows an empty list
 
       Use case ends.
 
 * 3a. The given field is invalid
 
-    * 2a1. WardWatch shows an error message.
+    * 2a1. WardWatch shows an invalid field message.
 
       Use case resumes at step 2.
-
-* 3b. The parameter field is invalid.
-
-    * 2b1. WardWatch shows an error message.
-
-      Use case resumes at step 2. 
 
 **Use case: UC03 - Update a patient**
 
@@ -383,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The information format entered is invalid
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. AddressBook shows an invalid format error message.
 
       Use case resumes at step 1.
 
@@ -399,19 +414,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The search field is invalid.
-    * 2a1. AddressBook shows an error message.
+    * 2a1. AddressBook shows an invalid field error message.
         
         Use case resumes at step 1.
 
-* 2b. The parameter field is invalid.
+* 2b. There is no patient that matches the search
 
-    * 2b1. AddressBook shows an error message.
-  
-        Use case resumes at step 1.
-
-* 2c. There is no patient that matches the search
-
-    * 2c1. AddressBook shows that there is no matching patient.
+    * 2b1. AddressBook shows that there is no matching patient.
 
         Use case ends.
 
@@ -436,7 +445,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The patient entered does not exist
 
-    * 3a1. WardWatch shows an error message.
+    * 3a1. WardWatch shows an invalid index error message.
 
       Use case resumes at step 2.
 
@@ -464,7 +473,144 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-*{More to be added}*
+**Use case: UC07 - Add Appointment**
+
+**MSS**
+
+1. Doctor submits new Appointment information tied to a patient
+2. WardWatch displays Appointment information tied to that patient
+    
+    Use case ends.
+
+**Extensions**
+
+* 1a. The information format entered is invalid
+
+    * 1a1. WardWatch shows an invalid description error message.
+
+      Use case resumes at step 1.
+
+* 2a. The Appointment date format is invalid.
+
+    * 2a1. WardWatch shows an invalid date format error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC08 - Delete Appointment**
+
+**MSS**
+
+1. Doctor request appointments for a specific date
+2. WardWatch displays Appointments for the day
+3. Doctor request to delete a specific appointment tied to a patient
+4. WardWatch deletes specified appointment
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The delete appointment command format entered is invalid
+
+    * 1a1. WardWatch shows an incorrect format error message.
+
+      Use case resumes at step 3.
+  
+* 3b. The Appointment does not exist
+*
+    * 2a1. WardWatch shows an appointment does not exist error message.
+
+      Use case resumes at step 3.
+
+**Use case: UC09 - Change Appointment**
+
+**MSS**
+
+1. Doctor request to delete a specific appointment tied to a patient
+2. WardWatch deletes Appointment
+3. Doctor submits new Appointment information tied to a patient
+4. WardWatch displays Appointment information tied to that patient
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The information format entered is invalid
+
+    * 3a1. WardWatch shows an incorrect appointment format error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC10 - See Schedule for a certain day**
+
+**MSS**
+
+1. Doctor request to see schedule for a certain day
+2. WardWatch displays all appointments for that day
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The date format is invalid
+
+    * 1a1. WardWatch shows an invalid date error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC11 - See Schedule for all appointments**
+
+**MSS**
+
+1. Doctor request to see schedule for all days
+2. WardWatch displays all appointments for all days
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The schedule all command format is invalid
+
+    * 1a1. WardWatch shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC12 - Add notes tied to a specific patient**
+
+**MSS**
+
+1. Doctor submits new notes for a certain patient
+2. WardWatch displays patient information with notes 
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Patient Notes format is invalid 
+
+    * 1a1. WardWatch shows a invalid note description error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC13 - delete notes to a specific patient**
+
+**MSS**
+
+1. Doctor request to delete notes for a certain patient
+2. WardWatch deletes the patient notes
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Patient Notes field is empty
+
+    * 1a1. WardWatch shows a notes is already empty error message.
+
+      Use case resumes at step 1.
+
+
+
+
 
 ### Non-Functional Requirements
 
@@ -832,3 +978,39 @@ testers are expected to do more *exploratory* testing.
     * **Test Case:** `scheduleall`
     * **Expected:** WardWatch shows the message `Displayed all appointments` and the appointment list will show all appointments.
       <br><br>
+
+## **Appendix: Efforts**
+
+This appendix provides an overview of the effort and complexity involved in modifying the original AB3 (Address Book Level 3) to create WardWatch. WardWatch extends AB3’s basic structure to support a healthcare-focused system, which manages multiple entity types and introduces new functionalities like handling patient information, medications, and appointments.
+
+### Logic (Parser)
+1. The Parser component required significant modifications to accommodate the new entity types and fields introduced in WardWatch. Challenges included:
+
+    * **Tokenization**: Setting specific conditions for the tokenizer to handle new fields, such as medication and appointment, was complex. This required carefully configuring the tokenizer to recognize and differentiate between new input formats and ensure accurate data processing.
+    * **Input Validation**: To handle healthcare-related data, validation had to be strict to avoid incorrect entries. This involved refining the Parser logic to enforce stricter data checks than AB3, requiring additional time to test and ensure robust error handling.
+
+2. The FindCommandParser was challenging to implement as we wanted the command to be able to search different fields of patients, which meant that there were many different scenarios we had to account for. This increase in complexity made it harder for us to ensure that error inputs would fail graciously, as there were now more cases to consider.
+
+### Logic (Command)
+1. Creating new commands, especially the AddAppointment and AddMedication commands, presented unique challenges:
+    * **Command Structure Adaptation**: Extending the existing command structure for WardWatch was necessary to support new types of commands without impacting AB3’s base functionality. This required carefully designing new command classes to integrate seamlessly with existing entities.
+    * **Difficulty in Implementing AddAppointment**: The AddAppointment command was particularly challenging because it required understanding how to schedule and validate appointments within the existing architecture. This command also had to be compatible with patient data, ensuring appointments were correctly linked.
+
+### Model
+1. The Model component needed restructuring to support multiple entity types, such as patients, medications, and appointments, which added complexity:
+   * **Data Relationships**: Establishing relationships between entities, such as linking patients with medications and appointments, was challenging. Designing these relationships in a way that allowed for seamless data manipulation without creating dependencies was an important aspect of the model redesign.
+
+2. We had difficulty trying to implement a `SortedList` that was meant to keep track of the schedules that are meant to be shown, and returning them in a sorted manner. Challenges included:
+   * **List type**: Although it might have been more intuitive to create a `FilteredList` of `Appointment` rather than `Person`, we require certain details about the patient. Hence, we had to make the list keep track of `Person` to ensure this functionality.
+   * **Sorting a filtered list**: As we wanted to have the appointments be returned in order, we had to sort the list. However, we could not find a way to do this seamlessly, other than to create a `filteredList` and sort it from there. This could potentially be because of our lack of familiarity with `javaFX`.
+   
+### Storage
+1. With the addition of the `Appointment` class, we had to learn how the JSON format worked, and how we could utilise its functionalities to allow for the successful storing and reading of data, now that every `Person` has an `Appointment` field.
+2. It was necessary to get a basic understanding of how Json files work. Upon creating our new Json class that adapts to appointment, a weak understanding of @JsonCreator property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
+
+### UI
+1. UI Design required good understanding and identification of the relevant dependencies on the corresponding .fxml and .css files.
+2. To restructure and customise the UI, a firm understanding of UI elements such as the HBox, VBox and Stackpanes is necessary to layout the UI elements according. There was particularly a struggle understanding the effects of the growing Hbox and Vbox, as the space occupied is unexpected.
+3. Choice or colour to make the app aesthetic is also non-trivial
+4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements
+
