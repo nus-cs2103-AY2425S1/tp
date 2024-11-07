@@ -26,6 +26,7 @@ import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.role.Role;
+import seedu.address.model.wedding.Client;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -88,7 +89,10 @@ public class EditCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
         Wedding ownWedding = editedPerson.getOwnWedding();
         if (ownWedding != null) {
-            ownWedding.setClient(editedPerson);
+            Wedding editedWedding = new Wedding(ownWedding.getName(), new Client(editedPerson), ownWedding.getDate(),
+                    ownWedding.getVenue());
+            model.updatePersonEditedWedding(ownWedding, editedWedding);
+            model.setWedding(ownWedding, editedWedding);
         }
 
         if (personToEdit.isSamePerson(editedPerson) || model.hasPerson(editedPerson)) {
