@@ -56,29 +56,29 @@ public class PersonTest {
     }
 
     @Test
-    public void withUpdatedPublicAddress_existingNetworkCapitaliseLabel_returnsEqualPerson() {
+    public void withUpdatedPublicAddress_existingNetworkCapitaliseLabel_returnsDifferentPerson() {
         PublicAddress newBtcAddress =
             PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "BTCLABEL1");
         Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
 
-        assertEquals(person, updatedPerson);
+        assertNotEquals(person, updatedPerson);
     }
 
     @Test
-    public void withUpdatedPublicAddress_existingNetworkNewLabel_returnsEqualPerson() {
+    public void withUpdatedPublicAddress_existingNetworkNewLabel_returnsDifferentPerson() {
         PublicAddress newBtcAddress =
             PublicAddressFactory.createPublicAddress(Network.BTC, VALID_BTC_ADDRESS_1, "newBtcLabel");
-        Person updatedPerson = person.withUpdatedPublicAddress(newBtcAddress);
+        Person updatedPerson = person.withAddedPublicAddress(newBtcAddress);
 
-        assertEquals(person, updatedPerson);
+        assertNotEquals(person, updatedPerson);
     }
 
     @Test
-    public void withUpdatedPublicAddress_newNetwork_returnsEqualPerson() {
+    public void withUpdatedPublicAddress_newNetwork_returnsDifferentPerson() {
         PublicAddress newAddress = PublicAddressFactory.createPublicAddress(Network.SOL, "solAddress", "solLabel");
-        Person updatedPerson = person.withUpdatedPublicAddress(newAddress);
+        Person updatedPerson = person.withAddedPublicAddress(newAddress);
 
-        assertEquals(person, updatedPerson);
+        assertNotEquals(person, updatedPerson);
     }
 
     @Test

@@ -9,11 +9,25 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents a composition of public addresses categorized by network.
  */
 public class PublicAddressesComposition {
+
+    public static final String MESSAGE_LABELS_CONSTRAINTS =
+            "Public addresses must have unique labels within a network.";
+
+    public static final String MESSAGE_ADD_CONSTRAINTS =
+            "Public address label already exists within the same network.";
+
+    public static final String MESSAGE_EDIT_CONSTRAINTS =
+            "Public address label does not exists within the same network.";
+
+    public static final String MESSAGE_DUPLICATE_LABEL =
+            "Label %1$s under the network %2$s already exists.";
+
     private final Map<Network, Set<PublicAddress>> publicAddresses;
 
     /**
@@ -29,19 +43,39 @@ public class PublicAddressesComposition {
      * @param publicAddresses A map of networks to sets of public addresses.
      */
     public PublicAddressesComposition(Map<Network, Set<PublicAddress>> publicAddresses) {
-        assert publicAddresses != null : "Public addresses map cannot be null.";
-        assert !publicAddresses.values().stream().anyMatch(Set::isEmpty)
-            : "Public addresses map cannot contain empty sets.";
+        assert publicAddresses != null;
+        assert publicAddresses.values().stream().noneMatch(Set::isEmpty);
+
+        if (!areValidPublicAddressLabels(publicAddresses)) {
+            throw new IllegalArgumentException(MESSAGE_LABELS_CONSTRAINTS);
+        }
+
         this.publicAddresses = publicAddresses.entrySet().stream()
             .collect(HashMap::new, (m, e) -> m.put(e.getKey(),
                 new HashSet<>(e.getValue())), HashMap::putAll);
     }
 
     /**
-     * Adds a public address to the specified network. If the network does not exist, it is created.
+     * Checks whether labels within in a network are unique.
+     * Case is ignored.
      *
-     * @param publicAddress The public address to be added.
+          * @param publicAddresses A map of networks to sets of public addresses.
+     * @return True if labels within a network are unique, false otherwise.
      */
+    private boolean areValidPublicAddressLabels(Map<Network, Set<PublicAddress>> publicAddresses) {
+        assert publicAddresses != null;
+        assert publicAddresses.values().stream().noneMatch(Set::isEmpty);
+
+        return publicAddresses.values().stream()
+                .allMatch(addresses -> {
+                    Set<String> labels = new HashSet<>();
+                    return addresses.stream()
+                            .map(PublicAddress::getLabel)
+                            .map(String::toLowerCase)
+                            .allMatch(labels::add);
+                });
+    }
+
     public void addPublicAddress(PublicAddress publicAddress) {
         assert publicAddress != null : "Public address cannot be null.";
         assert publicAddress.getNetwork() != null : "Network cannot be null.";
@@ -61,13 +95,18 @@ public class PublicAddressesComposition {
         this.publicAddresses.put(network, new HashSet<>(publicAddresses));
     }
 
+
     /**
-     * Returns the map of public addresses.
+     * Returns a copy of the map of public addresses.
      *
      * @return A map of networks to sets of public addresses.
      */
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
-        return publicAddresses;
+        return publicAddresses.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> new HashSet<>(entry.getValue())
+                ));
     }
 
     /**
@@ -94,13 +133,15 @@ public class PublicAddressesComposition {
     }
 
     /**
+
      * Checks if a public address exists in any network.
      *
      * @param publicAddressString The public address string to check.
      * @return True if the public address exists, false otherwise.
      */
-    public Boolean hasPublicAddress(String publicAddressString) {
-        assert publicAddressString != null : "Public address string cannot be null.";
+
+    public boolean hasPublicAddress(String publicAddressString) {
+        assert publicAddressString != null;
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
             .anyMatch(publicAddress -> publicAddress.isPublicAddressStringEquals(publicAddressString));
@@ -120,6 +161,29 @@ public class PublicAddressesComposition {
             .filter(entry -> entry.getKey().equals(network))
             .flatMap(entry -> entry.getValue().stream())
             .anyMatch(publicAddress -> publicAddress.getLabel().equals(label));
+}
+
+    public boolean containsPublicAddressLabel(Network network, String label) {
+        assert network != null;
+        assert label != null;
+        return publicAddresses
+                .getOrDefault(network, Collections.emptySet())
+                .stream()
+                .anyMatch(publicAddress -> publicAddress.getLabel().equalsIgnoreCase(label));
+    }
+
+    /**
+     * Checks if a public address string exists among all networks.
+     *
+     * @param publicAddress The public address to check.
+     * @return True if the public address string exists, false otherwise.
+     */
+    public boolean containsPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
+        return publicAddresses.values().stream()
+                .flatMap(Set::stream)
+                .anyMatch(pa -> pa.isPublicAddressStringEquals(publicAddress.getPublicAddressString()));
+
+
     }
 
     /**
@@ -148,19 +212,24 @@ public class PublicAddressesComposition {
      *
      * @param newPublicAddress The new public address to be added.
      * @return A new PublicAddressesComposition with the updated public addresses.
+     * @throws IllegalArgumentException if label already exists within the same network.
      */
-    public PublicAddressesComposition copyAndAdd(PublicAddress newPublicAddress) {
-        assert newPublicAddress != null : "New public address cannot be null.";
-        Map<Network, Set<PublicAddress>> updatedPublicAddresses = publicAddresses.entrySet().stream()
-            .map(entry -> {
-                Set<PublicAddress> updatedAddresses = entry.getValue().stream()
-                    .map(addr -> addr.label.equals(newPublicAddress.label)
-                        ? newPublicAddress
-                        : addr)
-                    .collect(Collectors.toSet());
-                return new AbstractMap.SimpleEntry<>(entry.getKey(), updatedAddresses);
-            })
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+    public PublicAddressesComposition add(PublicAddress newPublicAddress) throws IllegalArgumentException {
+        assert newPublicAddress != null;
+
+        if (containsPublicAddressLabel(newPublicAddress.getNetwork(), newPublicAddress.getLabel())) {
+            throw new IllegalArgumentException(MESSAGE_ADD_CONSTRAINTS);
+        }
+
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = getPublicAddresses();
+        Set<PublicAddress> networkAddresses = updatedPublicAddresses.getOrDefault(
+                newPublicAddress.getNetwork(),
+                new HashSet<>()
+        );
+        networkAddresses.add(newPublicAddress);
+        updatedPublicAddresses.put(newPublicAddress.getNetwork(), networkAddresses);
+
         return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
@@ -205,25 +274,122 @@ public class PublicAddressesComposition {
     }
 
     /**
-     * Checks if the composition is empty.
+
+
+     * Creates a new PublicAddressesComposition with updated public address.
      *
-     * @return True if the composition is empty, false otherwise.
+     * @param newPublicAddress The new public address.
+     * @return A new PublicAddressesComposition with the updated public address.
+     * @throws IllegalArgumentException if label does not exist within network.
      */
-    public Boolean isEmpty() {
-        return publicAddresses.isEmpty();
+    public PublicAddressesComposition update(PublicAddress newPublicAddress) throws IllegalArgumentException {
+        assert newPublicAddress != null;
+
+        if (!containsPublicAddressLabel(newPublicAddress.getNetwork(), newPublicAddress.getLabel())) {
+            throw new IllegalArgumentException(MESSAGE_EDIT_CONSTRAINTS);
+        }
+
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = getPublicAddresses();
+        Set<PublicAddress> networkAddresses = updatedPublicAddresses.getOrDefault(
+                newPublicAddress.getNetwork(),
+                new HashSet<>()
+        );
+        networkAddresses.removeIf(addr -> addr.getLabel().equalsIgnoreCase(newPublicAddress.getLabel()));
+        networkAddresses.add(newPublicAddress);
+        updatedPublicAddresses.put(newPublicAddress.getNetwork(), networkAddresses);
+
+        return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
-    /**
-     * Returns a string representation of the public addresses with indentation.
-     *
-     * @return A string representation of the public addresses.
-     */
+  
+  
     public String toStringIndented() {
         return publicAddresses.entrySet().stream().map(entry -> entry.getKey() + "\n" + INDENT
                 + INDENT + entry.getValue().stream().map(publicAddress -> publicAddress.getLabel() + ": "
                     + publicAddress.getPublicAddressString())
                 .reduce((a, b) -> a + "\n" + b).orElse(""))
             .reduce((a, b) -> a + "\n" + b).orElse("");
+    }
+    /**
+     * Combines this PublicAddressesComposition with another.
+     * Adds all public addresses from the other composition that don't already exist in this one.
+     *
+     * @param other The other PublicAddressesComposition to combine with.
+     * @return A new PublicAddressesComposition containing all unique addresses from both compositions.
+     * @throws IllegalArgumentException if there's a conflicting address (same label in the same network).
+     */
+
+
+    public PublicAddressesComposition combineWith(PublicAddressesComposition other) {
+        Map<Network, Set<PublicAddress>> combinedAddresses = Stream
+                .concat(
+                        publicAddresses.entrySet().stream(),
+                        other.getPublicAddresses().entrySet().stream()
+                )
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (set1, set2) -> {
+                        Set<PublicAddress> combinedSet = new HashSet<>(set1);
+                        set2.stream()
+                                .filter(addr -> {
+                                    if (combinedSet.stream().anyMatch(existing ->
+                                            existing.getLabel().equalsIgnoreCase(addr.getLabel()))) {
+                                        throw new IllegalArgumentException(String.format(MESSAGE_DUPLICATE_LABEL,
+                                                addr.getLabel(), addr.getNetwork()));
+                                    }
+                                    return true;
+                                })
+                                .forEach(combinedSet::add);
+                        return combinedSet;
+                    }
+                ));
+
+        return new PublicAddressesComposition(combinedAddresses);
+
+    }
+
+    /**
+     * Removes all public address from the network.
+     *
+     * @param network The network to be removed.
+     * @return A new PublicAddressesComposition with the updated public addresses.
+     */
+    public PublicAddressesComposition remove(Network network) {
+        assert network != null;
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = getPublicAddresses();
+        updatedPublicAddresses.remove(network);
+        return new PublicAddressesComposition(updatedPublicAddresses);
+    }
+
+    /**
+     * Removes the public address with the specified label from the network.
+     *
+     * @param label The label of the public address to be removed.
+     * @param network The network to remove the public address from.
+     * @return A new PublicAddressesComposition with the updated public addresses
+     */
+    public PublicAddressesComposition remove(String label, Network network) {
+        assert network != null;
+        assert label != null;
+
+        Map<Network, Set<PublicAddress>> updatedPublicAddresses = getPublicAddresses();
+
+        // Get the set of addresses for this network
+        Set<PublicAddress> networkAddresses = updatedPublicAddresses.get(network);
+
+        // If network exists and has addresses
+        if (networkAddresses != null) {
+            // Remove the address with matching label
+            Set<PublicAddress> updatedAddresses = networkAddresses.stream()
+                    .filter(addr -> !addr.label.equals(label))
+                    .collect(Collectors.toSet());
+
+            // If set is empty after removal, remove the network entirely
+            if (updatedAddresses.isEmpty()) {
+                updatedPublicAddresses.remove(network);
+            } else {
+                updatedPublicAddresses.put(network, updatedAddresses);
+            }
+        }
+        return new PublicAddressesComposition(updatedPublicAddresses);
     }
 
     /**
@@ -236,48 +402,42 @@ public class PublicAddressesComposition {
     }
 
     /**
-     * Returns the number of networks in the composition.
+     * Checks if the composition is empty.
      *
-     * @return The number of networks.
+     * @return True if the composition is empty, false otherwise.
      */
-    public Integer size() {
-        return publicAddresses.size();
-    }
 
-    /**
-     * Returns the total number of public addresses in all networks.
-     *
-     * @return The total number of public addresses.
-     */
-    public Integer sizeOfAllPublicAddresses() {
-        return publicAddresses.values().stream().map(Set::size).reduce(0, Integer::sum);
-    }
-
-    /**
-     * Checks if a public address string exists among all networks.
-     *
-     * @param publicAddress The public address to check.
-     * @return True if the public address string exists, false otherwise.
-     */
     public Boolean containsPublicAddressStringAmongAllNetworks(PublicAddress publicAddress) {
         assert publicAddress != null : "Public address cannot be null.";
         return publicAddresses.values().stream()
             .flatMap(Set::stream)
             .anyMatch(pa -> pa.isPublicAddressStringEquals(
                 publicAddress.getPublicAddressString()));
+}
+    public boolean isEmpty() {
+        return publicAddresses.isEmpty();
     }
 
     /**
-     * Returns any public address in the composition, this public address is randomly selected.
+     * Returns a string representation of the public addresses with indentation.
      *
-     * @return a any public address, or null if the composition is empty.
+     * @return A string representation of the public addresses.
      */
-    public PublicAddress getAnyPublicAddress() {
-        assert publicAddresses != null : "Public addresses map cannot be null.";
-        assert !publicAddresses.isEmpty() : "Public addresses map cannot be empty.";
-        assert !publicAddresses.values().stream().anyMatch(Set::isEmpty)
-            : "Public addresses map cannot contain empty sets.";
-        return publicAddresses.values().stream().flatMap(Set::stream).findFirst().orElse(null);
+
+    public String toStringIndented() {
+        return publicAddresses.entrySet().stream().map(entry -> entry.getKey() + "\n" + INDENT
+            + INDENT + entry.getValue().stream().map(publicAddress -> publicAddress.getLabel() + ": "
+                + publicAddress.getPublicAddressString())
+            .reduce((a, b) -> a + "\n" + b).orElse("")).reduce((a, b) -> a + "\n" + b).orElse("");
+    }
+
+    /**
+     * Returns the number of networks in the composition.
+     *
+     * @return The number of networks.
+     */
+    public int size() {
+        return publicAddresses.size();
     }
 
     @Override

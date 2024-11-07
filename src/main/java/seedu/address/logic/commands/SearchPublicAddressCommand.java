@@ -4,10 +4,10 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.INDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+import static seedu.address.model.addresses.PublicAddress.validatePublicAddress;
 
 import java.util.List;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.addresses.PublicAddressesComposition;
 import seedu.address.model.person.Person;
@@ -56,12 +56,17 @@ public class SearchPublicAddressCommand extends Command {
      */
     public SearchPublicAddressCommand(String publicAddressString) {
         requireAllNonNull(publicAddressString);
+
+        validatePublicAddress(publicAddressString);
+
+
         this.publicAddressString = publicAddressString;
+
 
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -69,24 +74,16 @@ public class SearchPublicAddressCommand extends Command {
             .filter(person -> person.hasPublicAddressStringAmongAllNetworks(publicAddressString))
             .toList();
 
-
-        if (publicAddressString.length() > 100) { //length of public address too long
-            throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_TOO_LONG);
-        } else if (!publicAddressString.matches("^[a-zA-Z0-9]*$")) { //public address contains invalid characters
-            throw new CommandException(MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR);
-        }
-
-
-        return new CommandResult(generateSuccessMessage(personsWithPublicAddressMatch));
+        return generateResult(personsWithPublicAddressMatch);
     }
 
 
     /**
-     * Generates a command execution success message based on whether
-     * the remark is added to or removed from
+     * Generates a Result object success message based on whether
+     * success of searching for a public address.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(List<Person> personsWithPublicAddressMatch) {
+    private CommandResult generateResult(List<Person> personsWithPublicAddressMatch) {
         String output;
         if (!personsWithPublicAddressMatch.isEmpty()) {
             String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
@@ -100,7 +97,7 @@ public class SearchPublicAddressCommand extends Command {
             String message = MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
             output = String.format(message, publicAddressString);
         }
-        return output;
+        return new CommandResult(output);
 
 
     }
