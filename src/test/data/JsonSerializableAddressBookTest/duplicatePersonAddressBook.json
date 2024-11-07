@@ -4,23 +4,21 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "lessonTime" : "tue:12:00",
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
     "tags": [ "friends" ],
     "type": "Student"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
+    "lessonTime" : "tue:12:00",
     "education": "Primary",
     "grade": "0",
     "parentName": "Test parent",
-    "parentPhone": "91234567",
-    "parentEmail": "testparent@example.com",
     "address": "4th street",
-    "type": "Parent"
+    "type": "Student"
   } ]
 }
