@@ -98,31 +98,29 @@ public class SortCommand extends Command {
             return compareNullTagValues(p1Tag, p2Tag);
         }
 
-        int compareResult = 0;
-
         Double p1TagDouble = tryParseDouble(p1Tag.get().tagValue);
         Double p2TagDouble = tryParseDouble(p2Tag.get().tagValue);
 
-        if (p1TagDouble != null && p2TagDouble != null) {
-            if (p1TagDouble > p2TagDouble) {
-                compareResult = 1;
-            } else if (p1TagDouble < p2TagDouble) {
-                compareResult = -1;
-            }
-        } else if (p1TagDouble == null && p2TagDouble == null) {
-            if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) > 0) {
-                compareResult = 1;
-            } else if (p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue) < 0) {
-                compareResult = -1;
-            }
-        } else if (p1TagDouble != null) {
-            compareResult = -1;
-        } else {
-            compareResult = 1;
-        }
+        int compareResult = getCompareResult(p1TagDouble, p2TagDouble, p1Tag, p2Tag);
 
         return determineComparisonOrder(compareResult, sortOrder.equalsIgnoreCase(ASCENDING_KEYWORD));
     }
+
+    private static int getCompareResult(Double p1TagDouble,
+                                        Double p2TagDouble,
+                                        Optional<Tag> p1Tag,
+                                        Optional<Tag> p2Tag) {
+        if (p1TagDouble != null && p2TagDouble != null) {
+            return Double.compare(p1TagDouble, p2TagDouble);
+        }
+        if (p1TagDouble == null && p2TagDouble == null) {
+            return p1Tag.get().tagValue.compareTo(p2Tag.get().tagValue);
+        }
+        return (p1TagDouble != null)
+                ? -1
+                : 1;
+    }
+
 
     private boolean areTagsEmpty(Optional<Tag> p1Tag, Optional<Tag> p2Tag) {
         return (p1Tag.isEmpty() || p2Tag.isEmpty());
