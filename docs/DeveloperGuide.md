@@ -530,7 +530,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **addlsn**: An abbreviation for the addlesson command
 * **dellsn**: An abbreviation for the deletelesson command
 * **addrmk**: An abbreviation for the addremark command
-* **delrmk**: An abbreviation for the addremark command
+* **delrmk**: An abbreviation for the deleteremark command
 * **Scheduling conflicts**: Overlapping lesson times when a tutor has more than one lesson at a specific time
 * **Tags**: Labels that can be assigned to students to group them based on common characteristics
 * **Remarks**: Longer texts that can be added to students
