@@ -152,6 +152,7 @@ Adds an employee to the address book.
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
 
 - Employee Id must be: [Numeric](#numeric), no spaces, unique amongst employees
+
   > [!NOTE]
   > Employee IDs are compared numerically. `0001` is treated the same as `1`.
 
@@ -315,6 +316,7 @@ Expected output:
 Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
 
 - Project Id must be: [Numeric](#numeric), no spaces, unique amongst projects
+
   > [!NOTE]
   > Project IDs are compared numerically. `0001` is treated the same as `1`.
 
@@ -411,6 +413,7 @@ Expected output:
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
 - Assignment Id must be: [Numeric](#numeric), no spaces, unique amongst assignments
+
   > [!NOTE]
   > Assignment IDs are compared numerically. `0001` is treated the same as `1`.
 
@@ -480,7 +483,7 @@ HRConnect data are saved automatically as a JSON file `[JAR file location]/data/
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, HRConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the HRConnect to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-When editing employee and project IDs directly in the data file, take extra caution and make sure that relevent assignments are edited to reflect the updated IDs.
+When editing employee and project IDs directly in the data file, take extra caution and make sure that relevant assignments are edited to reflect the updated IDs.
 </div>
 
 [Return to Top](#table-of-contents)
@@ -518,7 +521,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 ## Command Summary
 
 | Action                      | Format, Examples                                                                                                                                                                                                         |
-| --------------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **- Employee Commands -**   |                                                                                                                                                                                                                          |
 | **Add Employee**            | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
 | **Clear Employees**         | `clear`                                                                                                                                                                                                                  |
@@ -528,13 +531,13 @@ When editing employee and project IDs directly in the data file, take extra caut
 | **Find Employees**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
 | **List Employees**          | `listemployees`                                                                                                                                                                                                          |
 | **- Project Commands -**    |                                                                                                                                                                                                                          |
-| **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                            |
+| **Add Project**             | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`                                                                                                                                |
 | **Clear Projects**          | `clearproject`                                                                                                                                                                                                           |
 | **Delete Project**          | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                                                                                                                        |
 | **Find Projects**           | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                                                                                                                                 |
 | **List Projects**           | `listprojects`                                                                                                                                                                                                           |
 | **- Assignment Commands -** |                                                                                                                                                                                                                          |
-| **Add Assignment**          | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/1 id/1`                                                                                                                           |
+| **Add Assignment**          | `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`<br> e.g., `assign aid/1 pid/1 id/1`                                                                                                                             |
 | **Delete Assignment**       | `unassign aid/ASSIGNMENT_ID`<br> e.g., `unassign aid/1`                                                                                                                                                                  |
 | **List Assignments**        | `listassignments`                                                                                                                                                                                                        |
 | **Other Commands**          |                                                                                                                                                                                                                          |
