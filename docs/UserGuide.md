@@ -100,6 +100,14 @@ Format: `add n\NAME p\PHONE_NUMBER e\EMAIL a\ADDRESS fi\FINANCIALINFO s\SOCIALME
 A tag can be added with or without a value. For example, `t\client` and `t\insurance:No` are both valid tags.
 </box>
 
+<box type="warning" seamless>
+**Tag constraints:**<br>
+* Only alphanumeric characters (alphabets and numbers) are supported in tags<br>
+* Multiple of the same tags are not supported for a single contact<br>
+* Negative numbers are not supported in tag values<br>
+* Operations such as `+, -, *, /` are also not supported in tag values<br>
+</box>
+
 Command examples:
 * `add n\John Doe p\98765432 e\johnd@example.com a\123 John street fi\millionaire s\@jon3 t\client t\priority:high`
 * `add n\Betsy Crowe t\friend e\betsycrowe@example.com a\Newgate Prison p\1234567 t\criminal fi\noIncome s\@bestyC`
@@ -181,7 +189,7 @@ Examples:
 <box type="tip" seamless>
 
 **Tip:** Use the command buttons provided to get command template
-<div style="text-align: center;">
+<div style="text-align: left;">
     <img src="images/v1.4/FilterGUIButton.png" alt="Using filter button" width=545 />
 </div>
 
@@ -247,6 +255,8 @@ _Details coming soon ..._
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I use the data in another application, such as Microsoft Excel?<br>
+**A**: Type in the command `export format\csv` or click on the Export button followed by CSV. Then, from the folder in which you installed BA€, navigate to the data folder, copy the file named `addressbook.csv` over to your desired file location. Finally, open the file using Microsoft Excel.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -254,6 +264,9 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **If you accidentally press the alt key (Windows, Linux) or option key (MacOS)** on your keyboard while typing a command, the arrow keys will no longer navigate the command box. To rectify this, press the alt/option key again.
+3. **If you add very long names, tags, or other information** (> 80 characters) to contacts, and the application window is not wide enough to display the entire line of text, the text will be truncated with `...` at the end.
+4. **If you want to add tags to an existing contact**, you need to type in all existing tags to retain them.
 
 --------------------------------------------------------------------------------------------------------------------
 

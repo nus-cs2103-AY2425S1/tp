@@ -30,7 +30,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             if (tagName.isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
             } else if (!Tag.isValidTagName(tagName)) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
             }
             tags.add(new Tag(tagName)); // Create Tag objects for each tag provided
         }

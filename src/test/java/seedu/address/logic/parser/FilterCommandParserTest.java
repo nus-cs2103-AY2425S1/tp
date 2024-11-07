@@ -37,7 +37,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_invalidTagFormat_throwsParseException() {
         assertParseFailure(parser, " n\\Alice t\\fr!end",
-                Tag.MESSAGE_CONSTRAINTS);
+                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC);
     }
 
     @Test
