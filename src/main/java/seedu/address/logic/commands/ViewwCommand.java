@@ -23,8 +23,8 @@ public class ViewwCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the wedding details of the person identified by the index number used in "
             + "the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer) or WEDDINGNAME (the name of wedding)\n"
-            + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " alex";
+            + "Parameters: INDEX (must be a positive integer) or WEDDINGNAME (the name of wedding, case insensitive)\n"
+            + "Example: " + COMMAND_WORD + " 1" + " or " + COMMAND_WORD + " alex wedding";
 
     public static final String MESSAGE_VIEW_EMPTY_LIST_ERROR = "There are no wedding records to view.";
     public static final String MESSAGE_VIEW_WEDDING_SUCCESS = "Viewing Wedding Details of: %1$s";

@@ -30,7 +30,13 @@ public class AddwCommand extends Command {
             + PREFIX_NAME + "WEDDING'S NAME "
             + PREFIX_CLIENT + "CLIENT "
             + "[" + PREFIX_DATE + "DATE" + "] "
-            + "[" + PREFIX_VENUE + "VENUE" + "] ";
+            + "[" + PREFIX_VENUE + "VENUE" + "], "
+            + "where client can be INDEX (must be positive integer) or KEYWORD (the name of contact, "
+            + "case-insensitive)\n"
+            + "Example: \n"
+            + COMMAND_WORD + " " + PREFIX_NAME + "Alice Wedding " + PREFIX_CLIENT + "1 " + PREFIX_VENUE + "Hotel\n"
+            + COMMAND_WORD + " " + PREFIX_NAME + "Alice Wedding " + PREFIX_CLIENT + "Alice " + PREFIX_DATE
+            + "2024-12-12";
 
     public static final String MESSAGE_SUCCESS = "New wedding added: %1$s";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";

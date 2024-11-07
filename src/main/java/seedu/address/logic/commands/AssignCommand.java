@@ -39,7 +39,7 @@ public class AssignCommand extends Command {
             + "INDEX (must be a positive integer) or KEYWORD (the name of contact) "
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_WEDDING + "WEDDING...]\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: \n" + COMMAND_WORD
             + " Alex Yeoh " + PREFIX_ROLE + "food vendor\n"
             + COMMAND_WORD + " Alex Yeoh " + PREFIX_WEDDING + "1\n"
             + COMMAND_WORD + " 1 " + PREFIX_ROLE + "florist " + PREFIX_WEDDING + "1";
