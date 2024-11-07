@@ -7,7 +7,9 @@ import java.util.List;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.exceptions.NotAssignedException;
+import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
 
@@ -50,6 +52,20 @@ public class VolunteerManager {
     public boolean hasVolunteer(Volunteer volunteer) {
         requireNonNull(volunteer);
         return volunteers.contains(volunteer);
+    }
+
+    /**
+     * Returns true if a volunteer with the name {@code volunteerName} exists in the volunteer book.
+     *
+     * @param volunteerName Name of volunteer to search for.
+     */
+    public boolean hasVolunteer(String volunteerName) {
+        for (Volunteer volunteer : volunteers) {
+            if (volunteer.getName().toString().equals(volunteerName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -111,7 +127,8 @@ public class VolunteerManager {
         volunteerToAddDate.addAvailableDates(dateList);
     }
 
-    public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) {
+    public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
         volunteerToRemoveDate.removeAvailableDates(dateList);
     }
 }

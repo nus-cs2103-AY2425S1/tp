@@ -21,12 +21,12 @@ public class VolunteerNewCommand extends Command {
     public static final String COMMAND_WORD = "new";
     public static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
     public static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a volunteer to the system. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a volunteer to the system.\n"
             + "Parameters: "
             + VOLUNTEER_PREFIX_NAME + "NAME "
             + VOLUNTEER_PREFIX_PHONE + "PHONE "
             + VOLUNTEER_PREFIX_EMAIL + "EMAIL "
-            + VOLUNTEER_PREFIX_AVAILABLE_DATE + "AVAILABLE_DATE "
+            + VOLUNTEER_PREFIX_AVAILABLE_DATE + "AVAILABLE_DATE\n"
             + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " "
             + VOLUNTEER_PREFIX_NAME + "John Doe "
             + VOLUNTEER_PREFIX_PHONE + "98765432 "

@@ -54,8 +54,18 @@ public class EventNewCommandParser implements Parser<EventNewCommand> {
         EventName eventName = EventParserUtil.parseEventName(argMultimap.getValue(EVENT_PREFIX_NAME).get());
         Location location = EventParserUtil.parseLocation(argMultimap.getValue(EVENT_PREFIX_LOCATION).get());
         Date date = EventParserUtil.parseDate(argMultimap.getValue(EVENT_PREFIX_DATE).get());
-        Time startTime = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_START_TIME).get());
-        Time endTime = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_END_TIME).get());
+        Time startTime;
+        try {
+            startTime = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_START_TIME).get());
+        } catch (ParseException e) {
+            throw new ParseException("Start " + e.getMessage());
+        }
+        Time endTime;
+        try {
+            endTime = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_END_TIME).get());
+        } catch (ParseException e) {
+            throw new ParseException("End " + e.getMessage());
+        }
 
         Event event;
 

@@ -7,11 +7,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 
 /**
  * Represents a Event's date in the address book.
@@ -49,11 +52,19 @@ public class VolunteerDates {
      */
     public void addStringOfDatesToAvailList(String... dates) throws DateTimeParseException,
             VolunteerDuplicateDateException {
+        Set<LocalDate> uniqueDates = new HashSet<>();
         for (String date : dates) {
             date.replaceAll("\\s+", "");
             requireNonNull(date);
+            date = date.replaceAll("\\s+", "");
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-            this.addDateToAvailList(LocalDate.parse(date));
+            LocalDate dateToBeAdded = LocalDate.parse(date);
+            if (hasAvailableDate(dateToBeAdded) || !uniqueDates.add(dateToBeAdded)) {
+                throw new VolunteerDuplicateDateException(date);
+            }
+        }
+        for (LocalDate d: uniqueDates) {
+            this.addDateToAvailList(d);
         }
         this.datesListAsObservableString.set(this.toString());
     }
@@ -65,12 +76,26 @@ public class VolunteerDates {
      * @throws VolunteerDuplicateDateException
      */
 
-    public void removeStringOfDatesFromAvailList(String... dates) throws VolunteerDeleteMissingDateException {
+    public void removeStringOfDatesFromAvailList(String... dates) throws DateTimeParseException,
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
+        Set<LocalDate> uniqueDates = new HashSet<>();
         for (String date : dates) {
             date.replaceAll("\\s+", "");
             requireNonNull(date);
+            date = date.replaceAll("\\s+", "");
             checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-            this.removeDateFromAvailList(LocalDate.parse(date));
+            LocalDate dateToBeAdded = LocalDate.parse(date);
+            if (!hasAvailableDate(dateToBeAdded) || !uniqueDates.add(dateToBeAdded)) {
+                throw new VolunteerDeleteMissingDateException(date);
+            }
+        }
+
+        if (uniqueDates.size() >= this.dates.size()) {
+            throw new VolunteerNotAvailableOnAnyDayException();
+        }
+
+        for (LocalDate d: uniqueDates) {
+            this.removeDateFromAvailList(d);
         }
         this.datesListAsObservableString.set(this.toString());
     }
@@ -158,4 +183,7 @@ public class VolunteerDates {
         return dates.hashCode();
     }
 
+    public boolean hasAvailableDate(LocalDate date) {
+        return this.dates.contains(date);
+    }
 }

@@ -1,11 +1,10 @@
 {
   "volunteers": [ {
-    "name": "Hans Muster",
-    "phone": "9482424",
-    "email": "invalid@email!3e",
-    "availableDate": "2002-02-02",
-    "startTimeAvailability": "00:00",
-    "endTimeAvailability": "00:01"
+    "name" : "John## Doe",
+    "phone" : "98765432",
+    "email" : "johndoe@example.com",
+    "availableDate" : "2020-10-10",
+    "involvedIn" : [ ]
   } ],
   "events": [
 

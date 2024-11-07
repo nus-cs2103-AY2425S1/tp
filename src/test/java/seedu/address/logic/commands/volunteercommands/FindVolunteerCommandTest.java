@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.volunteer.Volunteer;
 
 public class FindVolunteerCommandTest {
 
@@ -24,17 +23,12 @@ public class FindVolunteerCommandTest {
         // Search for a volunteer name that exists in the volunteer list
         String searchString = "Alice"; // Replace with an actual volunteer name in getTypicalVolunteerList()
         FindVolunteerCommand command = new FindVolunteerCommand(searchString);
-        System.out.println(command);
         // Update expected model to show volunteers containing the search string
         expectedModel.updateFilteredVolunteerList(volunteer -> volunteer.getName().toString().toLowerCase()
                 .contains(searchString.toLowerCase()));
 
         String expectedMessage = String.format(FindVolunteerCommand.MESSAGE_VOLUNTEER_FOUND, expectedModel
                 .getFilteredVolunteerList().size(), searchString);
-        for (Volunteer volunteer : expectedModel.getFilteredVolunteerList()) {
-            expectedMessage += "\n" + volunteer.getName().toString();
-        }
-
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 

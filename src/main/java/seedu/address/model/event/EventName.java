@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EventName {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Event names should only contain alphanumeric characters and spaces"
-            + " ,and should be between 1 and 50 characters long.";
+            "Event names should only contain alphanumeric characters and spaces, "
+            + "and should be between 1 and 50 characters long.";
 
     /*
      * The first character of the address must not be a whitespace,

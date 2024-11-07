@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.exceptions.DuplicateAssignException;
@@ -9,6 +12,7 @@ import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.exceptions.OverlappingAssignException;
 import seedu.address.model.exceptions.VolunteerDeleteMissingDateException;
 import seedu.address.model.exceptions.VolunteerDuplicateDateException;
+import seedu.address.model.exceptions.VolunteerNotAvailableOnAnyDayException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -45,6 +49,79 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
         volunteerManager.setVolunteers(newData.getVolunteerList());
         eventManager.setEvents(newData.getEventList());
+    }
+
+    /**
+     * Validates all data in the address book.
+     */
+    public void validateAllData() {
+        validateAllVolunteers();
+        validateAllEvents();
+        removeOverlappingEvents();
+    }
+
+    /**
+     * Validates all volunteers in all events. If a volunteer has no records in the json file, they are unassigned.
+     * This is to prevent non-existent volunteers from being assigned to events when the data is loaded from the json
+     * file, in the event that the json file is corrupted or tampered with.
+     */
+    public void validateAllVolunteers() {
+        for (Event event : eventManager.getEvents()) {
+            for (String volunteerName : event.getVolunteers()) {
+                if (!volunteerManager.hasVolunteer(volunteerName)) {
+                    event.unassignVolunteer(volunteerName);
+                }
+            }
+        }
+    }
+
+    /**
+     * Validates all events volunteers are involved in. If an event has no records in the json file,
+     * they are unassigned.
+     * This is to prevent volunteers from being assigned to non-existent events when the data is loaded from the json
+     * file, in the event that the json file is corrupted or tampered with.
+     */
+    public void validateAllEvents() {
+        for (Volunteer volunteer : volunteerManager.getVolunteers()) {
+            for (String eventName : volunteer.getEvents()) {
+                if (!eventManager.hasEvent(eventName)) {
+                    volunteer.removeEvent(eventName);
+                }
+            }
+        }
+    }
+
+    /**
+     * Runs through all events that volunteers are assigned to and checks for overlapping events.
+     * Removes the first event that overlaps with another event.
+     */
+    public void removeOverlappingEvents() {
+        // check to ensure that no volunteer is assigned to overlapping events
+        // this is only used when the data is being reset
+        for (Volunteer v : volunteerManager.getVolunteers()) {
+            ObservableList<String> involvedIn = v.getEvents();
+
+            // get the list of events that the volunteer is involved in
+            List<Event> eventsInvolvedIn = new LinkedList<>();
+            for (String eventName : involvedIn) {
+                eventsInvolvedIn.add(eventManager.getEventFromName(eventName));
+            }
+
+            // check if any events are overlapping
+            for (Event event : eventsInvolvedIn) {
+                boolean hasOverlappingEvents = false;
+                for (Event otherEvent : eventsInvolvedIn) {
+                    if (event != otherEvent && event.isOverlappingWith(otherEvent)) {
+                        unassignVolunteerFromEvent(v, event);
+                        eventsInvolvedIn.remove(event);
+                        hasOverlappingEvents = true;
+                    }
+                }
+                if (hasOverlappingEvents) {
+                    break;
+                }
+            }
+        }
     }
 
     /**
@@ -127,6 +204,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public List<Event> getEventFromListOfNames(ObservableList<String> stringOfEvents) {
+        return this.eventManager.getEventsFromListOfNames(stringOfEvents);
+    }
+
+    @Override
+    public boolean eventHasOverlapWithList(Event event, List<Event> eventList) {
+        return this.eventManager.eventHasOverlapWithList(event, eventList);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -155,7 +242,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void removeDatesFromVolunteer(Volunteer volunteerToRemoveDate, String dateList) throws
-            VolunteerDeleteMissingDateException {
+            VolunteerDeleteMissingDateException, VolunteerNotAvailableOnAnyDayException {
         volunteerManager.removeDatesFromVolunteer(volunteerToRemoveDate, dateList);
     }
 }

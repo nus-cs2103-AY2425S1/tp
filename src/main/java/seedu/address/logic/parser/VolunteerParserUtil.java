@@ -14,14 +14,13 @@ import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.VolunteerDates;
 
-
 /**
  * Contains utility methods used for parsing strings in volunteer-related classes.
  */
 public class VolunteerParserUtil {
 
     public static final String MESSAGE_CONSTRAINTS = "Volunteer parsing error";
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX = "Index has to be a positive integer.";
 
     /**
      * Parses a given string as a {@code Name} and returns it after validation.
