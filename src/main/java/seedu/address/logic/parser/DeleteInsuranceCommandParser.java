@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 
+import java.util.Optional;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.DeleteInsuranceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -26,15 +27,17 @@ public class DeleteInsuranceCommandParser implements Parser<DeleteInsuranceComma
         Index index;
         int insuranceId;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            if (argMultimap.getValue(PREFIX_INSURANCE_ID).isEmpty()) {
+            Optional<String> insuranceIdOptional = argMultimap.getValue(PREFIX_INSURANCE_ID);
+            if (argMultimap.getPreamble().isEmpty()
+                    || insuranceIdOptional.isEmpty()
+                    || insuranceIdOptional.get().trim().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         DeleteInsuranceCommand.MESSAGE_USAGE));
             }
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
             insuranceId = ParserUtil.parseInsurancePlan(argMultimap.getValue(PREFIX_INSURANCE_ID).get());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE), ive);
+        } catch (ParseException e) {
+            throw new ParseException(e.getMessage(), e);
         }
         return new DeleteInsuranceCommand(index, insuranceId);
     }
