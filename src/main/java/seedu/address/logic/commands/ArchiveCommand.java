@@ -105,6 +105,7 @@ public class ArchiveCommand extends Command {
                 personToModify.getIncome(),
                 personToModify.getFamilySize(),
                 personToModify.getTags(),
+                personToModify.getSchemes(),
                 personToModify.getUpdatedAt(),
                 shouldArchive
         );
