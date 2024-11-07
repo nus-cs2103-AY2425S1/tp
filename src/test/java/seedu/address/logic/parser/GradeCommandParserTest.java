@@ -42,7 +42,7 @@ public class GradeCommandParserTest {
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonRoleValue_failure() {
         String validExpectedGradeString = STUDENTID_DESC_AMY + MODULE_DESC_AMY + GRADE_DESC_AMY;
 
         // multiple studentIds

@@ -143,7 +143,7 @@ Adds a person contact to the EduContacts.
 
 Format: 
 ```bash
-add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE t/TAG
+add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 ```
 
 Examples:
@@ -385,10 +385,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE t/TAG` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
+**Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science t/Student`
 **Clear**  | `clear`
 **Delete** | `delete ID`<br> e.g., `delete 12345678`
-**Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [t/TAG]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
+**Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
 **Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
 **Add Module** | `module ID [m/MODULE]` <br> e.g., `add 12345678 m/CS2103T`
 **Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`

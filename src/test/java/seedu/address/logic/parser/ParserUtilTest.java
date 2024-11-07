@@ -12,20 +12,20 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Tag;
+import seedu.address.model.person.Role;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_ROLE = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "12345678";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TAG_1 = "Student";
-    private static final String VALID_TAG_2 = "Teacher";
+    private static final String VALID_ROLE_1 = "Student";
+    private static final String VALID_ROLE_2 = "Teacher";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -142,26 +142,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseRole_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRole(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseRole_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRole(INVALID_ROLE));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseRole_validValueWithoutWhitespace_returnsRole() throws Exception {
+        Role expectedRole = new Role(VALID_ROLE_1);
+        assertEquals(expectedRole, ParserUtil.parseRole(VALID_ROLE_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+    public void parseRole_validValueWithWhitespace_returnsTrimmedRole() throws Exception {
+        String roleWithWhitespace = WHITESPACE + VALID_ROLE_1 + WHITESPACE;
+        Role expectedRole = new Role(VALID_ROLE_1);
+        assertEquals(expectedRole, ParserUtil.parseRole(roleWithWhitespace));
     }
 
 
