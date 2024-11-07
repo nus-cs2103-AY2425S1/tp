@@ -8,8 +8,10 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.client.Client;
 import seedu.address.model.status.Status;
+import seedu.address.model.tier.Tier;
 
 /**
  * A UI component that displays detailed information about a {@code Client}.
@@ -126,12 +128,10 @@ public class ClientDetailPanel extends UiPart<Region> {
             setLabelText(emailLabel, client.getEmail().value);
             setLabelText(jobLabel, client.getJob().value);
             setLabelText(incomeLabel, String.valueOf(client.getIncome()));
-            setTier(client.getTier().getValue());
-            setStatus(client.getStatus());
-            setLabelText(remarkLabel, client.getRemark().value);
             tagsGroup.getChildren().clear();
-            setTier(client.getTier().getValue());
+            setTier(client.getTier());
             setStatus(client.getStatus());
+            setRemarkText(remarkLabel, client.getRemark().value);
             boolean hasTags = !tagsGroup.getChildren().isEmpty();
             setManagedAndVisible(tagsContainer, hasTags);
         } else {
@@ -151,16 +151,24 @@ public class ClientDetailPanel extends UiPart<Region> {
         }
     }
 
+    private void setRemarkText(Label remarkLabel, String remarkText) {
+        if (remarkText.equalsIgnoreCase(CommandCommons.DEFAULT_REMARK)) {
+            setLabelText(remarkLabel, "");
+        } else {
+            setLabelText(remarkLabel, remarkText);
+        }
+    }
+
     /**
      * Sets the tier display in the detail panel.
      * Creates a new styled label for the tier and adds it to the tier pane.
      *
      * @param tier The tier value to display
      */
-    private void setTier(String tier) {
-        if (!tier.isEmpty()) {
-            Label tierLabel = new Label(tier.toUpperCase());
-            tierLabel.getStyleClass().addAll("label", tier.toLowerCase() + "-tier");
+    private void setTier(Tier tier) {
+        if (tier.tierName != Tier.TierEnum.NA) {
+            Label tierLabel = new Label(tier.getValue().toUpperCase());
+            tierLabel.getStyleClass().addAll("label", tier.getValue().toLowerCase() + "-tier");
             tagsGroup.getChildren().add(tierLabel);
         }
     }
@@ -173,7 +181,7 @@ public class ClientDetailPanel extends UiPart<Region> {
      */
     private void setStatus(Status status) {
         if (status.status != Status.StatusEnum.NA) {
-            Label statusLabel = new Label(status.toString());
+            Label statusLabel = new Label(status.getValue());
             String styleClass = switch (status.status) {
             case URGENT -> "urgent-status";
             case NON_URGENT -> "nonUrgent-status";

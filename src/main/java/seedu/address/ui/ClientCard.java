@@ -6,6 +6,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.logic.commands.CommandCommons;
 import seedu.address.model.client.Client;
 import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
@@ -45,6 +46,7 @@ public class ClientCard extends UiPart<Region> {
     private FlowPane assignedStatus;
     @FXML
     private VBox cardFields;
+
     /**
      * Creates a {@code ClientCode} with the given {@code Client} and index to display.
      */
@@ -56,6 +58,7 @@ public class ClientCard extends UiPart<Region> {
         createStatus();
         createTier();
     }
+
     private void createFields() {
         name.setText(client.getName().fullName);
         phone.setFields(ClientCardField.ICON_LITERAL_PHONE, client.getPhone().value);
@@ -63,8 +66,17 @@ public class ClientCard extends UiPart<Region> {
         email.setFields(ClientCardField.ICON_LITERAL_EMAIL, client.getEmail().value);
         job.setFields(ClientCardField.ICON_LITERAL_JOB, client.getJob().value);
         income.setFields(ClientCardField.ICON_LITERAL_INCOME, client.getIncome().toString());
-        remark.setFields(ClientCardField.ICON_LITERAL_REMARK, client.getRemark().value);
+        String clientRemark = client.getRemark().value.trim();
+        setRemarkField(clientRemark);
         cardFields.getChildren().addAll(phone, address, email, job, income, remark);
+    }
+
+    private void setRemarkField(String remarkText) {
+        if (remarkText.equalsIgnoreCase(CommandCommons.DEFAULT_REMARK)) {
+            remark.setFields(ClientCardField.ICON_LITERAL_REMARK, "");
+        } else {
+            remark.setFields(ClientCardField.ICON_LITERAL_REMARK, remarkText);
+        }
     }
 
     private void createTier() {

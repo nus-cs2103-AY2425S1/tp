@@ -136,4 +136,30 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void truncateText() {
+        // 80 character testString
+        String longTestString = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        String truncatedLongTest = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...";
+        // 5 character testString
+        String shortTestString = "aaaaa";
+        // newline character testStrings
+        String threeNewLineTestString = "aa\naa\naa\n";
+        String fourNewLineTestString = "aa\naa\naa\naa\n";
+
+        // Text is not long enough to be truncated
+        assertTrue(StringUtil.truncateText(shortTestString).equals("aaaaa"));
+        assertTrue(StringUtil.truncateText(shortTestString).equals(shortTestString));
+
+        // Text is long enough to be truncated
+        assertTrue(StringUtil.truncateText(longTestString).equals(truncatedLongTest));
+
+        // Truncated text is not the same as the original text
+        assertFalse(StringUtil.truncateText(longTestString).equals(longTestString));
+
+        // Truncated text will truncate if there are more than 3 newline characters
+        assertTrue(StringUtil.truncateText(fourNewLineTestString).equals(threeNewLineTestString));
+    }
+
 }
