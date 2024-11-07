@@ -37,7 +37,7 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 * `list` : Lists all contacts.
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/40 s/Male` : Adds a contact named `John Doe` to the Address Book.
 
 * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -101,6 +101,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENT
 - Duplicate names are not permitted. Addressbook cannot contain two `John Doe` or a `Betsy Crowe` and a `betsy crowe`
 
 - A person can have any number of tags (including 0). Duplicate tags will be ignored (e.g. if added contact includes paramters `t/patient t/patient` the contact will only include 1 `patient` tag). 
+
+- A person can have any number of appointments (including 0).
 
   </box>
 
@@ -198,29 +200,6 @@ Format: `exit`
 
 
 
-### Locating persons by name or phone number: `find`
-
-Finds persons whose names or phone numbers contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and phone number is searched.
-* Partial words will be matched e.g. `Han` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
-        `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
-
-Examples:
-* `find John` returns `john` and `Johnny Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-* `find olive 87438` returns 
-* `87438807`, `Charlotte Oliveiro`<br>
-  ![result for 'find olive 87438'](images/findOlive.png)
-
-
-
 ### Filtering persons by age group or appointment dates: `filter`
 
 Filter persons whose age and/or appointment dates are within the specified range.
@@ -243,6 +222,29 @@ Examples:
 * `filter ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`
+
+
+
+### Locating persons by name or phone number: `find`
+
+Finds persons whose names or phone numbers contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name and phone number is searched.
+* Partial words will be matched e.g. `Han` will match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hay Bo` will return `Hayley Gruber`, `Bo Yang`,
+        `Hay 874` will return contacts `Hayley p/99999999`, `Bons p/87444444`
+
+Examples:
+* `find John` returns `john` and `Johnny Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find olive 87438` returns 
+* `87438807`, `Charlotte Oliveiro`<br>
+  ![result for 'find olive 87438'](images/findOlive.png)
 
 
 
