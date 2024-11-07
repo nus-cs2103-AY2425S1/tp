@@ -484,6 +484,20 @@ The sequence diagram below illustrates the process of finding all persons based 
 
 `filter STATUS`
 
+<div markdown="span" class="alert alert-info">:information_source: **Note**:
+
+- **Case-Insensitive**: The search is case-insensitive.
+- **Available Statuses**:
+    - Applied
+    - Screening
+    - Interview Scheduled
+    - Interviewed
+    - Offer
+    - Onboarding
+    - Hired
+    - Rejected
+</div>
+
 #### **Command Feature Purpose**
 
 The `filter` command allows users to filter people in the `HRPlatform` based on their application status.
