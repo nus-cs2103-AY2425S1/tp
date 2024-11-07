@@ -42,14 +42,6 @@ public class JsonAdaptedAppt {
         this.healthService = source.getHealthService().toString();
     }
 
-    public String getDateTime() {
-        return dateTime;
-    }
-
-    public String getHealthServiceName() {
-        return healthService;
-    }
-
     /**
      * Converts this Jackson-friendly adapted appointment object into the model's {@code Appt} object.
      * @return Appt
@@ -60,7 +52,7 @@ public class JsonAdaptedAppt {
             throw new IllegalValueException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
         }
 
-        if (!HealthService.isValidHealthserviceName(healthService)) {
+        if (!HealthService.isValidHealthServiceName(healthService)) {
             logger.severe("Invalid health service.");
             throw new IllegalValueException(HealthService.MESSAGE_CONSTRAINTS);
         }
