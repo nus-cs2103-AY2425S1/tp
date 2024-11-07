@@ -56,7 +56,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data to help you get started.<br>
 
-![Ui](images/Ui3.png) 
+![Ui](images/Ui4.png) 
 
 1. Type the command in the command box at the bottom and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -67,7 +67,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all Udders.
+   * `clear` : Deletes all Udders and meetings.
 
    * `exit` : Exits the app.
 
@@ -105,7 +105,7 @@ FindingbrUdders is a **desktop app for managing contacts and scheduling meetings
 Shows a message via a popup window explaining how to access the help page.
 Access the url shown on the popup window to be redirected to the help screen.
 
-![help message](images/helpMessage2.png)
+![help message](images/helpMessage3.png)
 
 **Format:** `help`
 
@@ -187,34 +187,16 @@ Finds Udders by specified keywords for each field.
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Udders matching all keywords will be returned. e.g. `bob` will match `bobby`
-* **IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+
+<box type="warning">
+**IMPORTANT:** Any command that require indexes (such as edit or delete) executed when the list of Udders is filtered will follow the indexing shown on the Udders list.
+</box>
 
 **Examples:**
-* `find n/ John` returns Udders: `johnny` and `John Doe`<br>
-* `find friend` returns `Charlie Brown` and `Betsy Crowe`<br>
-  **CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE
-  CHANGE**
+* `find n/John` returns Udders: `John Mayer` and `John Nissins`<br>
+* `find t/friend` returns `Alex Yeoh` and `Bernice Yu`<br>
 
-![result for 'find John'](images/findCommand3.png)
+![result for 'find n/John'](images/findCommand4.png)
 
 ### Delete meeting with an Udder: `deletem` 🗑️
 
@@ -239,7 +221,7 @@ Deletes the specified Udder from the address book. Deleting an Udder also delete
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd Udder in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st Udder in the results of the `find` command.
+* `find Bernice` followed by `delete 1` deletes the 1st Udder in the results of the `find` command.
 
 ### Clearing all Udders : `clear` 🧹
 
