@@ -21,8 +21,10 @@ information such as their treatment, contact information, visit records and futu
 5. <b>Backup</b> patient records automatically
 6. <b>Book</b> appointments for patients
 7. <b>Find</b> bookings on a specific date
-7. <b>Update</b> appointments
-8. <b>Restore</b> backup file
+8. <b>Update</b> appointments
+9. <b>Restore</b> backup file
+
+For detailed usage instructions, please refer to the [User Guide](https://ay2425s1-cs2103t-f11-3.github.io/tp/UserGuide.html)
 
 ---
 
