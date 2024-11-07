@@ -307,9 +307,9 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 | Typical   | Hiring Manager | search for candidates based on keywords (skills, position etc.)  | quickly find the right profiles                                                       |
                                                    
 
-### Use cases
+## Use cases
 
-## Use Case 1: Add Candidate to Shortlist
+### Use Case 1: Add Candidate to Shortlist
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -329,7 +329,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 
 ---
 
-## Use Case 2: Delete Candidate from Shortlist
+### Use Case 2: Delete Candidate from Shortlist
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -352,7 +352,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 
 ---
 
-## Use Case 3: View Candidate List
+### Use Case 3: View Candidate List
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -370,7 +370,7 @@ Use case ends.
 
 ---
 
-## Use Case 4: View Candidate Status
+### Use Case 4: View Candidate Status
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -393,7 +393,7 @@ Use case ends.
 
 ---
 
-## Use Case 5: Mark Candidate Status as Hired or Rejected
+### Use Case 5: Mark Candidate Status as Hired or Rejected
 **Actor**: Hiring Manager  
 
 **Main Success Scenario**:
@@ -417,7 +417,7 @@ Use case ends.
 
 ---
 
-## Use Case 6: Sort list of candidates in ascending/descending order
+### Use Case 6: Sort list of candidates in ascending/descending order
 **Actor**: Hiring Manager
 
 **Main Success Scenario**:
