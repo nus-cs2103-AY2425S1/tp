@@ -174,7 +174,7 @@ Format: `find n/NAME p/PHONE_NUMBER  r/ROOM_NUMBER t/Tag`
 * In tag search the contacts have to contain all the specified tags in order to match
 
 Examples:
-* `find p/94509592 n/Alex Jones r/08-1234 t/friends colleagues`  
+* `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`  
   finds people who are both your friend and colleagues.
   They have Alex Jones as their name, 94509592 as their phone number, and lives in room 08-1234.
 
