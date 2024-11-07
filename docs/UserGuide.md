@@ -401,8 +401,8 @@ journey with StaffSync!
   <div class="box box-warn" type="warning" seamless>
 
   **Common Mistakes:**
-  * `delete E 1` - You should type `e` instead of `E` as it is case-sensitive
-  * `delete 1` - You forgot to specify the person type
+  * `delete E 1` - invalid parameter, you should type `e` instead of `E` as it is case-sensitive
+  * `delete 1` - invalid format, you forgot to specify the person type `e` or `ph`
   </div>
   </div>
   </details>
@@ -443,8 +443,8 @@ journey with StaffSync!
   <div class="box box-warn" type="warning" seamless>
 
   **Common Mistakes:**
-  * `list ph` followed by `demote 2` - You cannot demote a potential hire, you can use `list e` instead to get the list of employees
-  * `demote 0` - invalid index number, you should use a number greater than 0
+  * `list ph` followed by `demote 2` - You cannot demote a potential hire, you can use `list e` instead of `list ph` to get the list of employees
+  * `demote 0` - invalid index number, you should change 0 to a greater number corresponding to the index
   * `demote 3` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again
   </div>
   </div>
@@ -617,8 +617,8 @@ Example: "find ph n/John".
   <div class="box box-warn" type="warning" seamless>
 
   **Common Mistakes:**
-  * `find a n/John` - invalid parameter, you might want to use `e`, `ph` or `all`
-  * `find all a/John` - invalid keyword prefix, you might want to use `n/`, `p/`, `e/` , `d/` or `r/`
+  * `find a n/John` - invalid parameter, you might want to use `e`, `ph` or `all` instead of `a`
+  * `find all a/John` - invalid keyword prefix, you might want to use `n/`, `p/`, `e/` , `d/` or `r/` instead of `a/`
   * `find all n/John n/John` - duplicate keyword prefix, you can remove either one of the `n/John`
   </div>
 
@@ -772,10 +772,10 @@ Example: "find ph n/John".
   <div class="box box-warn" type="warning" seamless>
 
   **Common Mistakes:**
-  * `promote 2 12-20-2025` - the contract end date is in the wrong date format, you can enter `2025-12-20` to represent 20 Dec 2025
-  * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped, you can enter `2025-12-20` to represent 20 Dec 2025
-  * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee, you can use `list ph` instead to get the list of potential hires
-  * `promote 0 2025-12-20` - invalid index number, you should use a number greater than 0
+  * `promote 2 12-20-2025` - the contract end date is in the wrong date format, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `12-20-2025`
+  * `promote 2 2025-20-12` - the day and the month of the contract end date is swapped, you can enter `2025-12-20` to represent 20 Dec 2025 instead of `2025-20-12`
+  * `list e` followed by `promote 2 2025-12-20` - cannot promote an employee, you can use `list ph` instead of `list e` to get the list of potential hires
+  * `promote 0 2025-12-20` - invalid index number, you should change 0 to a greater number corresponding to the index
   * `promote 3 2025-12-20` but only have 2 entries - invalid index number, index out of list size, you might want to check the index number again
   </div>
   </div>
