@@ -68,7 +68,7 @@ public class CsvToJsonConverter {
         File[] csvFiles = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".csv"));
 
         if (csvFiles == null || csvFiles.length == 0) {
-            throw new IOException("The provided path contains no .csv files to import");
+            throw new IOException("The import directory contains no .csv files to import");
         }
         return csvFiles;
     }

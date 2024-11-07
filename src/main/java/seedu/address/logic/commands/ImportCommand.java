@@ -22,7 +22,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports contacts from a .csv file to the address book."
             + "Parameters: ";
 
-    public static final String MESSAGE_SUCCESS = "Imported all contacts from: %1$s";
+    public static final String MESSAGE_SUCCESS = "Imported all contacts successfully";
 
     private final File toImport;
 
@@ -53,7 +53,7 @@ public class ImportCommand extends Command {
             throw new CommandException(e);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toImport.getName()));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

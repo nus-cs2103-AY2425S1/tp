@@ -21,6 +21,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
   - [Filtering persons by contact type](#filtering-persons-by-contact-type--filter)
   - [Deleting a person](#deleting-a-person--delete)
   - [Switching display theme](#switching-display-theme--switch)
+  - [Importing data](#importing-data--import)
   - [Exiting the program](#exiting-the-program--exit)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
@@ -112,9 +113,9 @@ Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAI
 
 * At least one of `TELEGRAM_HANDLE`, `PHONE_NUMBER` or `EMAIL` must be provided to add a contact.
 
-<box type="tip" seamless>
+<box type="info" seamless>
 
-**Tip:** You can add multiple tags (or none at all).
+**Info:** You can add multiple tags (or none at all).
 </box>
 
 Examples:
@@ -254,6 +255,28 @@ Examples:
 * `switch DARK` switches to the 'dark' display theme
   ![result for 'switch dark'](images/switchDark.png)
 
+### Importing data : `import`
+
+Imports contacts from a spreadsheet to the program.
+
+Format: `import`
+
+* Upon first loading UniLink you will find an Import folder
+* Download a spreadsheet (`.csv`) file containing important contact info
+* Move the spreadsheet(s) to the Import folder
+* Running the import command will import all valid contacts to the program's addressbook
+  ![.csv file in Import folder](images/csvInImport.png)
+  ![Successful import command](images/ImportCommand.png)
+
+<box type="tip" seamless>
+
+**Tip:** You can import multiple contact spreadsheets at a time if you put them all in the Import folder!
+</box>
+
+* If the program comes across a contact that has an empty or invalid contact info, it will attempt to fill in the info
+* It will fill in the info with placeholder values (0000 0000, default@email.net, @DefaultHandle)
+* Feel free to edit these handles!
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -303,6 +326,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
 **Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br><br> `findtele TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br> e.g., `findtele @james_lake`<br><br> `findtag TAG [MORE_TAG_KEYWORDS]`<br> e.g., `findtag friend`
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
+**Import** | `import`
 **List**   | `list`
 **Switch** | `switch [THEME]`<br> e.g., `switch LIGHT`, `switch DARK`
 **Help**   | `help`
