@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -57,7 +58,9 @@ public class CategorizeTagCommand extends Command {
             model.refreshCampusConnect();
         }
 
-        String targetTagsResult = targetTags.stream().map(x -> x.toString()).reduce((x, y) -> x + y).orElse("");
+        String targetTagsResult = targetTags.stream()
+                .map(x -> x.toString())
+                .collect(Collectors.joining(", "));
 
         return new CommandResult(String.format(MESSAGE_CAT_TAG_SUCCESS, targetTagsResult));
     }

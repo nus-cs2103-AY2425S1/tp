@@ -225,15 +225,17 @@ Categorizes a tag under a defined category.
 Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 
 * Sets the tag(s) in CampusConnect with the specified name `TAG` to fall under the specified `CATEGORY`.
-* Currently available categories and their respective keywords are:
+  * Currently available categories with their respective keywords and colors are:
 
-    Category      | Keyword (case sensitive)
-    --------------|-------------------------
-    **General**   | `general`
-    **Academics** | `acads`
-    **Activities**| `activity`
-    **Networking**| `network`
-    **Mentorship**| `mentor`
+| Category      | Keyword (case sensitive) | Color |
+|---------------|--------------------------|-------|
+| **General**   | `general`                | Gray  |
+| **Academics** | `acads`                  | Gold  |
+| **Activities**| `activity`               | Blue  |
+| **Networking**| `network`                | Green |
+| **Mentorship**| `mentor`                 | Pink  |
+
+* All tags are categorized 'General' by default.
 * Multiple tags can be categorized to the same category at a time.
 * All tags specified must be valid existing tags.
 * Attempts to set a tag to its current category will cause the whole command to be rejected.
