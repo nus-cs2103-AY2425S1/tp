@@ -74,8 +74,11 @@ HireMe is a **free desktop application that helps you manage your extensive list
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME r/ROLE`, `r/ROLE n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `/help`, `/list`, `/exit`, `/clear` and `/chart`) will be ignored.<br>
-  (e.g. if the command specifies `/help 123`, it will be interpreted as `/help`.)
+* Extraneous parameters for commands that do not take in parameters (such as `/help`, `/list`, `/exit`, `/clear` and `/chart`) are not permitted.<br>
+  e.g. if the command specifies `/help 123` instead of `/help`, an "Invalid command format!" error message will be shown.
+
+* Command names must be in lower case only.<br>
+  e.g. `/list` is acceptable but `/List` and `/LIST` are not.
 
 </box>
 
