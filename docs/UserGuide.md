@@ -284,7 +284,7 @@ Format: `unlink INDEX EVENT_NAME`
 
 Examples:
 
-* `list` followed by unlink 3 Winter Time Convention removes the link between the 3rd person in the address book and the event.
+* `list` followed by `unlink 3 Winter Time Convention` removes the link between the 3rd person in the address book and the event.
 * `find p "Jane"` followed by `unlink 1 Party` removes the link between the 1st person in the results of the `find` command and the event.
 
 ### Clearing all persons : `clear p`
