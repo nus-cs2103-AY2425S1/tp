@@ -2,6 +2,9 @@ package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.CommandCommons;
+
+
 /**
  * Represents a Client's remarks in the address book, as added by a user.
  * Guarantees: immutable;
@@ -60,7 +63,9 @@ public class Remark {
     public static Remark combineRemarks(Remark... remarks) {
         StringBuilder combinedValues = new StringBuilder();
         for (Remark currentRemark: remarks) {
-            combinedValues.append(currentRemark.value + "\n");
+            if (!currentRemark.value.equalsIgnoreCase(CommandCommons.DEFAULT_REMARK)) {
+                combinedValues.append(currentRemark.value).append("\n");
+            }
         }
         return new Remark(combinedValues.toString().trim());
     }

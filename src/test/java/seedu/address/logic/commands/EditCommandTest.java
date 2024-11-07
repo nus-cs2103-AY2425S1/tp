@@ -89,7 +89,7 @@ public class EditCommandTest {
 
         ClientBuilder clientInList = new ClientBuilder(lastClient);
         Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTier(VALID_TIER_REJECT).withRemark(CommandCommons.DEFAULT_REMARK + "\nTest").build();
+                .withTier(VALID_TIER_REJECT).withRemark("Test").build();
 
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTier(VALID_TIER_REJECT)
