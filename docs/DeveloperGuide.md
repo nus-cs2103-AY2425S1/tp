@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Clientele+ is developed based on the AddressBook Level-3 application. Learn more about that project [here](https://se-education.org/addressbook-level3/).  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document are in the `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -51,7 +51,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete id/1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -68,13 +68,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -85,18 +85,16 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete id/1")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete id/1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
-</div>
 
 How the `Logic` component works:
 
@@ -115,7 +113,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -138,7 +136,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14A-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -179,7 +177,7 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete id/5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete id/5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -204,9 +202,6 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
 
 Similarly, how an undo operation goes through the `Model` component is shown below:
 
@@ -238,10 +233,19 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+
+* **Alternative 2:** Individual command knows how to undo/redo by itself. 
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+
+### \[Proposed\] Data archiving
+The following sequence diagram shows how an archive operation goes through the `Logic` component:
+![ArchiveSequenceDiagram](images/ArchiveSequenceDiagramLogic.png)
+
+
+`Storage` Class Diagram with support for archive:
+![StorageClassDiagramWithArchive](images/StorageClassDiagramWithArchive.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -276,18 +280,27 @@ payment tracking and more in one efficient package, tailored specifically for fr
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                                     | So that I can…​                                          |
-|----------|--------------------|------------------------------------------------------------------|----------------------------------------------------------|
-| `* * *`  | software developer | add clients                                                      | update my address book.                                  |
-| `* * *`  | software developer | remove clients                                                   | ensure my address book is not cluttered                  |
-| `* * *`  | software developer | view my clients and their details                                | keep track of my clients and what tasks to do            |
-| `* * *`  | software developer | update my clients' details                                       | ensure my address book details are updated               |
-| `* * *`  | software developer | view a client's payment status, project status and client status | keep track of the work I have to do and who has not paid |
-| `* *`    | software developer | filter my clients' based on sections                             | more easily find my clients                              |
-| `* *`    | software developer | sort clients by category                                         | more easily find my clients                              |
-| `* *`    | software developer | set deadlines                                                    | ensure projects are completed before deadlines           |
-| `*`      | software developer | keep notes for each client                                       | take note of important details from meetings             |
-| `*`      | software developer | undo previous commands                                           | easily undo errors                                       |
+| Priority | As a …​            | I want to …​                                 | So that I can…​                                                    |
+|----------|--------------------|----------------------------------------------|--------------------------------------------------------------------|
+| `* * *`  | software developer | add clients                                  | update my client list                                              |
+| `* * *`  | software developer | remove clients                               | ensure my client list is not cluttered                             |
+| `* * *`  | software developer | view my clients and their details            | access important client information                                |
+| `* * *`  | software developer | update my clients' details                   | ensure my client list details are updated                          |
+| `* * *`  | software developer | view a client's payment status               | track who has paid and who still needs to make a payment           |
+| `* * *`  | software developer | view a client's project status               | monitor the progress of each client's project                      |
+| `* * *`  | software developer | view a client's status                       | easily identify active clients                                     |
+| `* *`    | software developer | filter my clients based on sections          | easily find specific groups of clients                             |
+| `* *`    | software developer | sort clients by category                     | keep my client list organised                                      |
+| `* *`    | software developer | set deadlines                                | ensure projects are completed before deadlines                     |
+| `* *`    | software developer | blacklist a client                           | avoid working with certain clients in future                       |
+| `* *`    | software developer | view clients on the blacklist                | view all the clients I intend to avoid                             |
+| `* *`    | software developer | whitelist a blacklisted client               | consider working with said client again                            |
+| `* *`    | software developer | view clients on the whitelist                | view all clients that are not on the blacklist                     |
+| `* *`    | software developer | archive a client                             | store information of old clients without cluttering my client list |
+| `* *`    | software developer | unarchive a client                           | bring the information of archived clients back to the client list  |
+| `* *`    | software developer | see reminders for the next earliest deadline | focus on the most urgent task first                                |
+| `*`      | software developer | keep notes for each client                   | take note of important details from meetings                       |
+| `*`      | software developer | undo previous commands                       | easily undo errors                                                 |
 
 ### Use cases
 
@@ -297,37 +310,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User provides client details to add
-2.  Clientele+ adds the client
+1.  User provides client details to add.
+2.  Clientele+ adds the client.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The client's name is not provided
+* 1a. The client's name, phone, email, address, or deadline is not provided.
 
-   * 1a1. Clientele+ shows an error message
-   * 1a2. User reenters new command
-   Steps 1a1-1a2 are repeated until the command entered is correct
+   * 1a1. Clientele+ shows an error message.
+   * 1a2. User reenters new command.
+   
+        Steps 1a1-1a2 are repeated until the command entered is correct.
+
+    Use case resumes at step 1.
+
+* 1b. Input fields are incorrectly formatted.
+
+    * 1b1. Clientele+ shows an error message.
+    * 1b2. User reenters command. 
+
+      Steps 1b1-1b2 are repeated until the command entered is correct.
 
   Use case resumes at step 1.
 
-* 1b. Input fields are incorrectly formatted
+* *a. At any time, User decides to stop adding the client, or exits the application.
 
-    * 1b1. Clientele+ shows an error message.
-    * 1b2. User reenters command
-    Steps 1b1-1b2 are repeated until the command entered is correct
+    * *a1. Nothing is added to the client list.
 
-   Use case resumes at step 1.
+  Use case ends.
 
 **Use case: Delete a client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  Clientele+ shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  Clientele+ deletes the person
+1.  User requests to list persons.
+2.  Clientele+ shows a list of persons.
+3.  User requests to delete a specific client in the list.
+4.  Clientele+ deletes the client.
 
     Use case ends.
 
@@ -335,30 +356,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
+  * 2a1. Clientele+ shows an error message.
+  
   Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. The given index or name is invalid.
 
     * 3a1. Clientele+ shows an error message.
 
       Use case resumes at step 2.
 
+* 3b. Multiple names matching the given name exist.
 
+    * 3b1. Clientele+ shows list of clients with matching names.
+    * 3b2. Clientele+ prompts user to delete by index.
+
+      Use case resumes at step 3.
+
+* *a. At any time, User decides to stop deleting the client, or exits the application.
+
+    * *a1. Nothing is deleted from client list.
+
+  Use case ends.
 
 **Use case: Modify a client's details**
 
 **MSS**
 
-1.  User requests to list persons
-2.  Clientele+ shows a list of persons
-3.  User selects the client they wish to modify and provides the updated details
-4.  Clientele+ updates that client's details
+1.  User requests to list persons.
+2.  Clientele+ shows a list of persons.
+3.  User selects the client they wish to modify and provides the updated details.
+4.  Clientele+ updates that client's details.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty. 
+
+  * 2a1. Clientele+ shows an error message.
 
   Use case ends.
 
@@ -368,12 +404,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given details are invalid
+* 3b. The given details are invalid.
 
     * 3b1. Clientele+ shows an error message.
 
-    Use case resumes at step 2
+    Use case resumes at step 2.
 
+**Use case: Find a client**
+
+**MSS**
+
+1.  User provides search parameters.
+2.  Clientele+ shows a list of persons matching the parameters.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. Search parameters are incorrectly formatted.
+
+    * 1a1. Clientele+ shows an error message.
+    * 1a2. User reenters command.
+
+      Steps 1a1-1a2 are repeated until the command entered is correct.
+
+  Use case resumes at step 1.
+  
 
 
 ### Non-Functional Requirements
@@ -416,38 +472,60 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a client while the client list is shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients with the same name exist.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete id/1`<br>
+      Expected: First client is deleted from the list. Details of the deleted client shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete id/0`<br>
+      Expected: No client is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Test case `delete n/John Doe` <br>
+      Expected: Client with name `John Doe` is deleted. Details of the deleted client shown in the status message. <br>
+      If multiple `John Doe`s exist, list of all `John Doe`s is displayed. <br>
+      User prompted to delete by index in status message.
+   
+   5. Other incorrect delete commands to try: `delete`, `delete p/x` (incorrect prefixes), `delete id/y`, `...` (where y is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing or corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. `preferences.json`
+      1. Move `preferences.json` to another folder.
+      2. Relaunch the app.
+      
+      Expected: Application launches with the default window size.
 
-1. _{ more test cases …​ }_
+   2.  `config.json`
+       1. Move `config.json` to another folder.
+       2. Relaunch the app.
+       
+       Expected: Application launches, config file is re-created with default configuration.
+
+   3.  `addressbook.json`
+       1. Corrupted:
+          1. Manually modify `addressbook.json`
+          2. Relaunch the app 
+          
+          Expected: Application fails to read from the file and loads without any data.
+       
+       2. Missing:
+          1. Move `data` folder to another directory.
+          2. Relaunch the app. 
+          
+          Expected: Application loads with the sample data.
