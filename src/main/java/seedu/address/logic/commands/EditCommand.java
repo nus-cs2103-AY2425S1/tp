@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -39,6 +40,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.UpdatedAt;
+import seedu.address.model.scheme.Scheme;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,7 +68,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -130,18 +132,11 @@ public class EditCommand extends Command {
         Income updatedIncome = editPersonDescriptor.getIncome().orElse(personToEdit.getIncome());
         FamilySize updatedFamilySize = editPersonDescriptor.getFamilySize().orElse(personToEdit.getFamilySize());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        ArrayList<Scheme> schemes = personToEdit.getSchemes();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPriority, updatedRemark,
-                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, UpdatedAt.now(),
+                updatedDateOfBirth, updatedIncome, updatedFamilySize, updatedTags, schemes, UpdatedAt.now(),
                 personToEdit.isArchived());
-    }
-
-    public Person getUneditedPerson() {
-        return personToEdit;
-    }
-
-    public Person getEditedPerson() {
-        return editedPerson;
     }
 
     @Override
@@ -151,11 +146,12 @@ public class EditCommand extends Command {
 
     @Override
     public String undo(Model model, CommandHistory pastCommands) {
-        Person beforeEdit = this.getUneditedPerson();
-        Person afterEdit = this.getEditedPerson();
-        model.setPerson(afterEdit, beforeEdit);
+        if (!editedPerson.isSamePerson(personToEdit)) {
+            model.updateAppointments(editedPerson.getName(), personToEdit.getName());
+        }
+        model.setPerson(editedPerson, personToEdit);
         pastCommands.remove();
-        return String.format(MESSAGE_UNDO_EDIT, beforeEdit.getName());
+        return String.format(MESSAGE_UNDO_EDIT, personToEdit.getName());
     }
 
     @Override
