@@ -39,6 +39,21 @@ public class Eta {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        //instance of handles nulls
+        if (!(other instanceof Eta)) {
+            return false;
+        }
+
+        Eta otherEta = (Eta) other;
+        return value.equals(otherEta.value);
+    }
+
+    @Override
     public String toString() {
         return "ETA: " + value;
     }

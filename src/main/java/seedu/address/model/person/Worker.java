@@ -1,38 +1,59 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import java.util.List;
 
-import java.util.Set;
-
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.delivery.DeliveryId;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryList;
 
 /**
  * Represents a delivery worker's details.
  * Contains list of DeliveryIds the worker is responsible for
  */
 public class Worker {
-    private final Set<DeliveryId> deliveryIds;
-    /**
-     * Every field must be present and not null.
-     */
-    public Worker(Set<DeliveryId> deliveryIds) {
-        requireAllNonNull(deliveryIds);
-        this.deliveryIds = deliveryIds;
-    }
+    private final DeliveryList assignedDeliveryList = new DeliveryList();
 
     /**
-     * Return all delivery ids of the worker
+     * Sets the delivery list of this worker.
+     * <p>
+     * Mainly used when loading a person's information from storage.
      */
-    public Set<DeliveryId> getDeliveryIds() {
-        return deliveryIds;
+    public void setDeliveryList(List<Delivery> deliveryList) {
+        this.assignedDeliveryList.setDeliveries(deliveryList);
     }
 
     /**
      * Add a deliveryId to the worker
      */
-    public void addDelivery(DeliveryId deliveryId) {
-        deliveryIds.add(deliveryId);
+    public void addDelivery(Delivery delivery) {
+        assignedDeliveryList.add(delivery);
+    }
+
+    public void removeDelivery(Delivery delivery) {
+        assignedDeliveryList.remove(delivery);
+    }
+    /**
+     * Returns the list of deliveries assigned to the worker
+     */
+    public DeliveryList getAssignedDeliveryList() {
+        return assignedDeliveryList;
+    }
+
+    /**
+     * Returns the  {@code DeliveryList} of a {@code Worker} as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Delivery> getUnmodifiableAssignedDeliveryList() {
+        return assignedDeliveryList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Checks if the assignedDeliveryList of the worker contains the specified delivery
+     */
+    public boolean hasDelivery(Delivery delivery) {
+        System.out.println(assignedDeliveryList);
+        System.out.println(delivery);
+        return assignedDeliveryList.contains(delivery);
     }
 
     @Override
@@ -47,11 +68,11 @@ public class Worker {
         }
 
         Worker otherWorker = (Worker) other;
-        return deliveryIds.equals(otherWorker.deliveryIds);
+        return assignedDeliveryList.equals(otherWorker.assignedDeliveryList);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("deliveryIds", deliveryIds).toString();
+        return new ToStringBuilder(this).add("deliveries", assignedDeliveryList).toString();
     }
 }

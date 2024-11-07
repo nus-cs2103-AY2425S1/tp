@@ -89,7 +89,7 @@ public class DeleteCommand extends Command {
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
         validateIndexes(deliveryList.size(), indexList, true);
 
-        List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList);
+        List<Delivery> deliveryToDeleteList = deleteDeliveries(inspectedPerson, deliveryList, model);
 
         return new CommandResult(String.format(
                 MESSAGE_DELETE_DELIVERY_SUCCESS,
@@ -157,7 +157,7 @@ public class DeleteCommand extends Command {
      * @param deliveryList The list of deliveries to delete from.
      * @return A list of deliveries that were deleted.
      */
-    private List<Delivery> deleteDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
+    private List<Delivery> deleteDeliveries(Person inspectedPerson, List<Delivery> deliveryList, Model model) {
         List<Delivery> deliveryToDeleteList = new ArrayList<>();
         for (Index targetIndex : indexList) {
             Delivery deliveryToDelete = deliveryList.get(targetIndex.getZeroBased());

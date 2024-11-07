@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Worker;
 
 /**
  * Inspects a contact identified using it's displayed index from the address book.
@@ -53,7 +54,14 @@ public class InspectCommand extends Command {
         }
 
         Person personToInspect = lastShownList.get(index.getZeroBased());
-        model.setFilteredDeliveryList(personToInspect.getDeliveryList());
+
+        if (personToInspect.isClient()) {
+            model.setFilteredDeliveryList(personToInspect.getDeliveryList());
+        } else {
+            Worker worker = personToInspect.getWorker();
+            model.setFilteredDeliveryList(worker.getAssignedDeliveryList());
+        }
+
         return new CommandResult(generateSuccessMessage(personToInspect), personToInspect, false,
                 false, true);
     }

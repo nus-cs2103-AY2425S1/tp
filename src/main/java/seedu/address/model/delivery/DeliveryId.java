@@ -22,6 +22,21 @@ public class DeliveryId {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        //instance of handles nulls
+        if (!(other instanceof DeliveryId)) {
+            return false;
+        }
+
+        DeliveryId otherDeliveryID = (DeliveryId) other;
+        return value.equals(otherDeliveryID.value);
+    }
+
+    @Override
     public String toString() {
         return "ID: " + value;
     }

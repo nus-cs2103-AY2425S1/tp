@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +15,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
-import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.delivery.Time;
 import seedu.address.model.tag.Tag;
@@ -34,7 +32,7 @@ public class Person {
     private final Role role;
 
     //Temporary initialisation for worker
-    private Worker worker = new Worker(new HashSet<>(Arrays.asList(new DeliveryId(), new DeliveryId())));
+    private Worker worker = new Worker();
 
     // Data fields
     private final Address address;
@@ -218,6 +216,13 @@ public class Person {
      */
     public boolean isSameEmail(Person otherPerson) {
         return otherPerson != null && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
+     * Returns true if this person is client, false if is an employee.
+     */
+    public boolean isClient() {
+        return Objects.equals(role.getValue(), "client");
     }
 
     /**

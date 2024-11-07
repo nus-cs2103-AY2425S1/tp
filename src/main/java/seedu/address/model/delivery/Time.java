@@ -39,6 +39,21 @@ public class Time {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        //instance of handles nulls
+        if (!(other instanceof Time)) {
+            return false;
+        }
+
+        Time otherTime = (Time) other;
+        return value.equals(otherTime.value);
+    }
+
+    @Override
     public String toString() {
         return "Time Ordered: " + value;
     }
