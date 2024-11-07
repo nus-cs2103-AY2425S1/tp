@@ -9,8 +9,16 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project builds upon [AddressBook-Level3](https://github.com/se-edu/addressbook-level3) created by the [SE-EDU initiative](https://se-education.org).
 
+* We would like to express our sincere gratitude to:
+   * Professor [Damith C. Hewage](https://www.comp.nus.edu.sg/~damithch) and the CS2103T teaching team for their guidance and for providing the foundation for this project
+   * The original developers of AddressBook-Level3 for creating a robust codebase that made our enhancements possible
+   * The SE-EDU initiative for maintaining the original codebase and documentation
+
+* Libraries used:
+   * [JavaFX](https://openjfx.io/) - The main GUI framework
+   * [JUnit](https://junit.org/junit5/) - Testing framework
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
