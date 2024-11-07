@@ -19,17 +19,50 @@
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure that Java 17 is installed on your computer. 
+   * Open a command terminal. 
+   * * For Windows users, follow instructions [here](https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/#open-command-prompt-from-the-file-explorer-address-bar).
+     * For Mac users, follow instructions [here](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac).
+   * Type the following command to check the Java version:<br>
+     ```
+     java -version
+     ```
+   * If Java 17 is installed, you should see an output similar to: `java version "17.0.1" `
+   * If you do not have Java 17, you can download it from [Oracle's official website](https://www.oracle.com/java/technologies/downloads/#java17).
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-1/tp/releases).
+2. Download the application
+   * Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F12-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Set up the home folder
+   * Choose a folder where you want to store your AddressBook data.
+   * Copy the downloaded `.jar` file to this folder.
+   * This folder will serve as the "home folder" for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Run the application
+   * Open a command terminal.
+   * Navigate (`cd`) to the folder where you placed the `.jar` file.
+     * For Windows users, type:
+       ```
+       cd \path\to\your\folder
+       ```
+       <box type="warning" seamless>
+       Replace path\to\your\folder with the actual path. e.g. `cd C:\Documents\AddressBook`
+       </box>
+       
+     * For Mac users, type:
+       ```
+       cd /path/to/your/folder
+       ```
+       <box type="warning" seamless>
+       Replace path\to\your\folder with the actual path. e.g. `cd ~/Documents/AddressBook`
+       </box>
+   * Run the application with the following command:
+     ```
+     java -jar contactcs.jar
+     ```
+   A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.<br>![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
