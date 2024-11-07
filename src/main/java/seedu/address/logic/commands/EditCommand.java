@@ -8,9 +8,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -46,7 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_ALLERGY + "ALLERGY]\n"
+            + "[" + PREFIX_ALLERGY + "ALLERGY]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -126,10 +129,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Tag updatedTags = editPersonDescriptor.getTag().orElse(personToEdit.getTag());
-        Allergy updatedAllergy = editPersonDescriptor.getAllergy().orElse(personToEdit.getAllergy());
+        Set<Allergy> updatedAllergies = editPersonDescriptor.getAllergies().orElse(personToEdit.getAllergies());
         Date updatedDate = personToEdit.getDate();
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedAllergy, updatedDate);
+                updatedAddress, updatedTags, updatedAllergies, updatedDate);
     }
 
     @Override
@@ -166,7 +169,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Tag tag;
-        private Allergy allergy;
+        private Set<Allergy> allergies;
 
         public EditPersonDescriptor() {}
 
@@ -180,14 +183,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTag(toCopy.tag);
-            setAllergy(toCopy.allergy);
+            setAllergies(toCopy.allergies);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tag, allergy);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tag, allergies);
         }
 
         public void setName(Name name) {
@@ -239,12 +242,12 @@ public class EditCommand extends Command {
             return (tag != null) ? Optional.of(tag) : Optional.empty();
         }
 
-        public void setAllergy(Allergy allergy) {
-            this.allergy = allergy;
+        public void setAllergies(Set<Allergy> allergies) {
+            this.allergies = (allergies != null) ? new HashSet<>(allergies) : null;
         }
 
-        public Optional<Allergy> getAllergy() {
-            return (allergy != null) ? Optional.of(allergy) : Optional.empty();
+        public Optional<Set<Allergy>> getAllergies() {
+            return (allergies != null) ? Optional.of(Collections.unmodifiableSet(allergies)) : Optional.empty();
         }
 
         @Override
@@ -264,7 +267,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(tag, otherEditPersonDescriptor.tag)
-                    && Objects.equals(allergy, otherEditPersonDescriptor.allergy);
+                    && Objects.equals(allergies, otherEditPersonDescriptor.allergies);
         }
 
         @Override
@@ -275,7 +278,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tag", tag)
-                    .add("allergy", allergy)
+                    .add("allergies", allergies)
                     .toString();
         }
     }

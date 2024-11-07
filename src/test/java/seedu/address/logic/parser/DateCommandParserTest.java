@@ -65,4 +65,10 @@ public class DateCommandParserTest {
         assertParseSuccess(parser, " \n n/ Nayana p/88502457 \n d/ 18/2/2024 1800 \t", dateCommand);
     }
 
+    @Test
+    public void parse_invalidPrefix_failure() {
+        assertParseFailure(parser, " n/ Nayana p/88502457 d/ 18/2/2024 1800 t/High Risk",
+              String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DateCommand.MESSAGE_USAGE));
+    }
+
 }

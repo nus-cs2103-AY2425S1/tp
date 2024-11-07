@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY1_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HIGH_RISK;
@@ -60,10 +60,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTag(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
+                .withTag(VALID_TAG_HIGH_RISK).withAllergies(VALID_ALLERGY1_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HIGH_RISK).withAllergy(VALID_ALLERGY_BOB).build();
+                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HIGH_RISK).withAllergies(VALID_ALLERGY1_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -192,7 +192,7 @@ public class EditCommandTest {
                 .withEmail("john@example.com")
                 .withAddress("123, Jurong West Ave 6, #08-111")
                 .withTag("Low Risk")
-                .withAllergy("Peanuts")
+                .withAllergies("Peanuts")
                 .build();
         model.addPerson(personA);
 
@@ -237,7 +237,7 @@ public class EditCommandTest {
                 .withEmail("john@example.com")
                 .withAddress("123, Jurong West Ave 6, #08-111")
                 .withTag("Low Risk")
-                .withAllergy("Peanuts")
+                .withAllergies("Peanuts")
                 .build();
         model.addPerson(personA);
 

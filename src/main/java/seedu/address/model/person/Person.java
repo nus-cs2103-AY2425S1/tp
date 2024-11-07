@@ -2,7 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -21,20 +24,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final Tag tag;
-    private final Allergy allergy;
+    private final Set<Allergy> allergies = new HashSet<>();
     private final Date date;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Allergy allergy, Date date) {
-        requireAllNonNull(name, phone, email, address, tag, date);
+
+    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Set<Allergy> allergies, Date date) {
+        requireAllNonNull(name, phone, email, address, allergies, tag);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tag = tag;
-        this.allergy = allergy;
+        this.allergies.addAll(allergies);
         this.date = date;
     }
 
@@ -66,8 +70,8 @@ public class Person {
         return tag;
     }
 
-    public Allergy getAllergy() {
-        return allergy;
+    public Set<Allergy> getAllergies() {
+        return Collections.unmodifiableSet(allergies);
     }
 
     /**
@@ -129,13 +133,13 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tag.equals(otherPerson.tag)
-                && allergy.equals(otherPerson.allergy);
+                && allergies.equals(otherPerson.allergies);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tag, allergy);
+        return Objects.hash(name, phone, email, address, tag, allergies);
     }
 
     @Override
@@ -146,7 +150,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tag", tag)
-                .add("allergy", allergy)
+                .add("allergies", allergies)
                 .add("date", date)
                 .toString();
     }

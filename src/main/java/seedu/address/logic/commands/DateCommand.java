@@ -98,7 +98,7 @@ public class DateCommand extends Command {
 
         Person personToEdit = matchingPersons.get(0);
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergy(), date);
+                personToEdit.getAddress(), personToEdit.getTag(), personToEdit.getAllergies(), date);
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
