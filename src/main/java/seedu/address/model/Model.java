@@ -124,4 +124,9 @@ public interface Model {
      * Undoes the most recent concrete command.
      */
     CommandResult undoAddressBook();
+
+    /**
+     * Clears the undo stack.
+     */
+    void clearUndoStack();
 }

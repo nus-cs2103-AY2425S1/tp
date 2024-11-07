@@ -240,6 +240,11 @@ public class AddCommandTest {
         public CommandResult undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void clearUndoStack() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
