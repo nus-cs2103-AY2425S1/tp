@@ -5,8 +5,6 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
 
 ### Tan Jia En
@@ -27,7 +25,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/yiiilonggg.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: UI Changes; Addition of new `schedule` command. Assisted with `filter`, `add` command changes
 
 ### Zon
 
