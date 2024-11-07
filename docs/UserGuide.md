@@ -192,7 +192,7 @@ Examples:
 
 ### Exporting all contacts: `export`
 
-Exports all persons in ClubConnect into a csv file located in the data folder.
+Exports all persons in ClubConnect into a csv file named `ExportedContacts.csv` located in the data folder.
 
 Format: `export`
 
@@ -204,8 +204,9 @@ Format: `import FILENAME`
 
 Examples:
 * `import contacts.csv` adds persons stored in `contacts.csv` to the ClubConnect.
-* The file has to be located in the data folder
-* The specified file name has to exactly match the name of the file to import from
+* The file has to be located in the data folder.
+* The specified file name has to exactly match the name of the file to import from.
+* Name of file to import contacts from must end with `.csv`.
 
 ### Adding an event: `add_event`
 
