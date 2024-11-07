@@ -6,13 +6,13 @@ import hallpointer.address.model.HallPointer;
 import hallpointer.address.model.Model;
 
 /**
- * Clears the CCA system.
+ * Clears the HallPointer.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
 
-    public static final String MESSAGE_SUCCESS = "CCA system has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Hall Pointer system has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {

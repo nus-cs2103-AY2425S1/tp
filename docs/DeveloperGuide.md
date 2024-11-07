@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use Case: UC02 - Add Session to CCA
+#### Use Case: UC02 - Add Session to Hall Pointer
 
 **System**: Hall Pointer App
 
@@ -437,7 +437,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 None.
 
 **Main Success Scenario (MSS)**:
-1. CCA Leader inputs the `list_members` command.
+1. CCA Leader inputs the `list` command.
 2. Hall Pointer retrieves and displays all members in the GUI.
     - Use case ends.
 

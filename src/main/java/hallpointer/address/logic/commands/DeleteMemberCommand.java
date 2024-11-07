@@ -11,7 +11,7 @@ import hallpointer.address.model.Model;
 import hallpointer.address.model.member.Member;
 
 /**
- * Deletes the member identified using its displayed index number from the CCA system.
+ * Deletes the member identified using its displayed index number from the HallPointer.
  */
 public class DeleteMemberCommand extends Command {
 
