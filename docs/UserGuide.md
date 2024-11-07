@@ -14,7 +14,7 @@ Welcome to the **AgentConnect User Guide**!
 
 AgentConnect is designed with you in mind, ensuring that even if you're not tech-savvy, you can start managing your clients effectively right away. Let AgentConnect help you save time and stay organized, so you can focus on what matters most—your clients.
 
----
+--------------------------------------------------------------------------------------------------------------------
 ## Introduction
 
 [Table of Content](#table-of-contents): View all contents in this guide.  
@@ -26,7 +26,8 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 [Advanced Features](#advanced-features): Enhance your workflow with advanced commands.  
 [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq): Common questions and answers about using AgentConnect.  
 [Known Issues](#known-issues): List of current issues and their solutions.  
----
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
 
@@ -71,7 +72,7 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 
 
 2. Download the latest release version of AgentConnect. The application is a `.jar` file:
-    * Get the latest version of AgentConnect from [this link](https://github.com/se-edu/addressbook-level3/releases). Look for a file named `AgentConnect.jar`.
+    * Get the latest version of AgentConnect from [this link](https://github.com/AY2425S1-CS2103T-W10-3/tp/releases). Look for a file named `AgentConnect.jar`.
   
 
 3. Place the File:
@@ -85,7 +86,6 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
     - **Option 2: Use Command Prompt:**
       Open the Command Prompt (Windows) or Terminal (Mac/Linux), navigate to the folder containing the `AgentConnect.jar` file, and type:
       ```
-      cd HOME_FOLDER
       java -jar AgentConnect.jar
       ```
       For example, if you stored the `AgentConnect.jar` file in the directory `C:/Users/Desktop/Applications`, then run the following command:
@@ -186,9 +186,9 @@ Policies are not mentioned in this section as there is a dedicated section for m
 Adds a client to the address book.
 
 Format: 
-```
+`
 add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT TIME>
-```
+`
 
 - **Parameters**:
     * Birthday should be in `yyyy-mm-dd`
@@ -200,9 +200,10 @@ add n/<NAME> p/<PHONE NUMBER> e/<EMAIL ADDRESS> addr/<HOME ADDRESS> b/<BIRTHDAY>
       "311 Clementi ave 5 unit 022" (without commas) will be treated as the same client address.
 
 Examples:
-* This command adds a new client to the client list with the following information:
+* The command below adds a new client to the client list with the following information:
     * Client name: John Doe
-    * Client email: 98765432
+    * Client number: 98765432
+    * Client email: johnd@example.com
     * Home address: John street, block 123, #01-01
     * Client birthday: 2000-12-12
     * Client next appointment: 2024-12-12 12:00
@@ -210,9 +211,10 @@ Examples:
     add n/John Doe p/98765432 e/johnd@example.com addr/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00
     ```
 
-* This command adds a new client to the client list with the following information:
+* The command below adds a new client to the client list with the following information:
     * Client name: Betsy Crowe
-    * Client email: 1234567
+    * Client number: 1234567
+    * Client email: betsycrowe@example.com
     * Home address: Newgate Prison
     * Client birthday: 2001-10-10
     * Client next appointment: 2024-12-01 09:00
@@ -263,9 +265,9 @@ Format: `list`
 Edits an existing client in the address book.
 
 Format: 
-```
+`
 edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAY_DATE amt/AMOUNT]…​
-```
+`
 
 - **Parameters**:
 
@@ -285,19 +287,19 @@ For example, if a client is a VIP, you can include it in the client's informatio
 </div>
 
 Examples:
-- **Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.**:
+- *Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.*:
   ```
   edit 1 p/91234567 e/johndoe@example.com
   ```
   ![result for 'edit first index client'](images/editUI.png)
 
-- **Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.**:
+- *Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.*:
   ```
   edit 2 n/Betsy Crower t/
   ```
 
-- **Edits the 1st policy of the 3rd client to be `Health Insurance` which covers from `2024-10-19` to `2025-10-19`. The pay date changes to `2024-11-19`
-  and premium amount changes to `200`**:
+- *Edits the 1st policy of the 3rd client to be `Health Insurance` which covers from `2024-10-19` to `2025-10-19`. The pay date changes to `2024-11-19`
+  and premium amount changes to `200`*:
   ```
   edit 3 po/1 pon/Health Insurance pos/2024-10-19 poe/2025-10-19 paydate/2024-11-19 amt/200
   ```
@@ -308,9 +310,9 @@ Examples:
 Organizes your client list based on different criteria for easier management and viewing.
 
 Format: 
-```
+`
 sort <CRITERIA> <ORDER>
-```
+`
 
 - **Parameters**:
     - `CRITERIA`: The attribute by which you want to sort the clients. Available criteria include:
@@ -380,9 +382,9 @@ The search function section contain commands that allows you to search client-sp
 Finds clients whose names contain any of the given keywords.
 
 Format: 
-```
+`
 find <KEYWORD> [MORE_KEYWORDS]
-```
+`
 
 - **Parameters**:
   * The search is case-insensitive. e.g `hans` will match `Hans`
@@ -413,17 +415,17 @@ Finds clients with appointments on a specific date or within a date range.
 Format: 
 
 Single datetime search:
-```
+`
 search a/ <DATETIME>
-``` 
+`  
 Range datetime search:
-```
+`
 search a/ <START DATETIME> to <END DATETIME>
-```
+`
 - **Parameters**:
-  - `DATETIME`: A specific date and time in `YYYY-MM-DD HH:mm` format.
-  - `START DATETIME`: A specific start date and time in `YYYY-MM-DD HH:mm` format.
-  - `END DATETIME`: A specific end date and time in `YYYY-MM-DD HH:mm` format.
+  - `DATETIME`: A specific date and time in `yyyy-mm-dd HH:mm` format.
+  - `START DATETIME`: A specific start date and time in `yyyy-mm-dd HH:mm` format.
+  - `END DATETIME`: A specific end date and time in `yyyy-mm-dd HH:mm` format.
 
 - **Usage**:
   - **Single Datetime Search**: Lists all clients with appointments on the specified date and time.
@@ -452,18 +454,19 @@ Finds clients who have birthdays on a specific date or within a date range.
 Format: 
 
 Single date search:
-```
+`
 search b/ <DATE>
-``` 
+`  
 
 Range date search:
-```
-search a/ <START DATE> to <END DATE>
-```
+`
+search b/ <START DATE> to <END DATE>
+`
 
 - **Parameters**:
-  - `START DATE`: A specific start date in `YYYY-MM-DD` format.
-  - `END DATE`: A specific end date in `YYYY-MM-DD` format.
+  - `DATE`: A specific date in `yyyy-mm-dd` format.
+  - `START DATE`: A specific start date in `yyyy-mm-dd` format.
+  - `END DATE`: A specific end date in `yyyy-mm-dd` format.
   - If it is a range date search, the `to` keyword is compulsory.
 
 - **Usage**:
@@ -491,9 +494,9 @@ Examples:
 Find clients who currently owns a certain policy.
 
 Format: 
-```
+`
 search p/ <POLICY_NAME>
-```
+`
 
 - **Parameters**:
   - `POLICY_NAME`: A specific policy name.
@@ -528,9 +531,9 @@ The policy management section contain commands that allows you to manage policy-
 Assign policy to a client.
 
 Format: 
-```
+`
 assign <INDEX> pon/<POLICY NAME> /pos<POLICY START DATE> /poe <POLICY END DATE> /paydate <INSURANCE DUE DATE> /amt <AMOUNT DUE>
-```
+`
 - **Parameters**:
     * `POLICY START DATE` and `POLICY END DATE` refer to the duration of the policy's coverage.
     * `POLICY START DATE` and `POLICY END DATE` must be in the format `yyyy-mm-dd`.
@@ -565,9 +568,9 @@ Example:
 Deletes the specified policy from the specified client using the index of the client and policy.
 
 Format: 
-```
+`
 delete <INDEX> po/<POLICY_INDEX>
-```
+`
 Deletes the policy at the specified `POLICY_INDEX` of the client at the specified `INDEX`.
 
 
@@ -602,9 +605,9 @@ Examples:
 Marks a policy payment installment as paid for a client.
 
 Format: 
-```
+`
 paid <INDEX> po/<POLICY_INDEX>
-```
+`
 - **Parameters**:
     - `INDEX`: The index of the client in the client list.
     - `POLICY_INDEX`: The index of the policy to be marked as paid.
@@ -694,19 +697,13 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
----
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Frequently Asked Questions (FAQ)
 
 **Q:** How do I check if I have Java installed?
 
-**A:** Open the Command Prompt or Terminal and type `java -version`. If Java is installed, it will show the version number.
+**A:** Open the Command Prompt or Terminal and type `java -version`. If Java is installed, it will show the version number. For more information, you can refer [here](#quick-start).
 
 ---
 
@@ -748,22 +745,22 @@ _Details coming soon ..._
 
 ## Command Summary
 
-| Action                         | Command Format                                                                                                                                                                                                                 |
-|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add a Client**               | `add n/<NAME> p/<PHONE_NUMBER> e/<EMAIL> addr/<ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT>`<br>Example: `add n/John Doe p/91234567 e/john@example.com addr/123 Street b/1990-01-01 appt/2024-12-12 14:00`                         |
-| **List Clients**               | `list`                                                                                                                                                                                                                         |
-| **Delete a Client**            | `delete <INDEX>` or `delete <NAME>`<br>Example: `delete 3` or `delete John Doe`                                                                                                                                                |
-| **Edit a Client**              | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAYMENT_DUE_DATE amt/AMOUNT_DUE]`<br>Example: `edit 2 p/98765432` |
-| **Sort Client Data**           | `sort <CRITERIA> <ORDER>`<br>Example: `sort birthday asc`                                                                                                                                                                      |
-| **Find Clients**               | `find <KEYWORD> [MORE_KEYWORDS]`<br>Example: `find Alice`                                                                                                                                                                      |
-| **Search Appointment**         | `search a/ <DATETIME>`<br>Example: `search a/ 2024-10-10 23:00`                                                                                                                                                                |
-| **Search Birthday**            | `search b/ <DATE>`<br>Example: `search b/ 2000-03-15`                                                                                                                                                                          |
-| **Search Policy**              | `search p/ <POLICY_NAME>`<br>Example: `search p/ sample Policy`                                                                                                                                                                |
-| **Assign a Policy**            | `assign INDEX pon/<POLICY_NAME> pos/<START_DATE> poe/<END_DATE> paydate/<PAYMENT_DUE_DATE> amt/<AMOUNT_DUE>`<br>Example: `assign 1 pon/Health Insurance pos/2022-01-01 poe/2023-01-01 paydate/2022-12-01 amt/300.00`           |
-| **Delete a Policy**            | `delete <INDEX> po/<POLICY_INDEX>` <br>Example: `delete 3 po/2`                                                                                                                                                                |
-| **Mark Policy as Paid**        | `paid <INDEX> pon/<POLICY_INDEX>` <br>Example: `paid 2 pon/3`                                                                                                                                                                  |
-| **Undo the last deleted work** | `undo`                                                                                                                                                                                                                         |
-| **Redo the last undo work**    | `redo`                                                                                                                                                                                                                         |
-| **Clear All Entries**          | `clear`                                                                                                                                                                                                                        |
-| **Exit Application**           | `exit`                                                                                                                                                                                                                         |
-| **View Help**                  | `help`                                                                                                                                                                                                                         |
+| Action                                                                     | Command Format                                                                                                                                                                                                                 |
+|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Adding a Client](#adding-a-client--add)                                   | `add n/<NAME> p/<PHONE_NUMBER> e/<EMAIL> addr/<ADDRESS> b/<BIRTHDAY> appt/<APPOINTMENT>`<br>Example: `add n/John Doe p/91234567 e/john@example.com addr/123 Street b/1990-01-01 appt/2024-12-12 14:00`                         |
+| [Listing All Clients](#listing-all-clients--list)                          | `list`                                                                                                                                                                                                                         |
+| [Deleting a Client](#deleting-a-client--delete)                            | `delete <INDEX>` or `delete <NAME>`<br>Example: `delete 3` or `delete John Doe`                                                                                                                                                |
+| [Editing Client Details](#editing-a-client-details--edit)                  | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [addr/ADDRESS] [b/BIRTHDAY] [appt/APPOINTMENT] [po/POLICY_INDEX pon/POLICY_NAME pos/START_DATE poe/END_DATE paydate/PAYMENT_DUE_DATE amt/AMOUNT_DUE]`<br>Example: `edit 2 p/98765432` |
+| [Sorting Clients](#sorting-clients--sort)                                  | `sort <CRITERIA> <ORDER>`<br>Example: `sort birthday asc`                                                                                                                                                                      |
+| [Locating Clients by Name](#locating-clients-by-name--find)                | `find <KEYWORD> [MORE_KEYWORDS]`<br>Example: `find Alice`                                                                                                                                                                      |
+| [Searching Appointments](#searching-appointments--search-a)                | `search a/ <DATETIME>`<br>Example: `search a/ 2024-10-10 23:00`                                                                                                                                                                |
+| [Searching Birthdays](#searching-birthdays--search-b)                      | `search b/ <DATE>`<br>Example: `search b/ 2000-03-15`                                                                                                                                                                          |
+| [Searching Policies](#searching-policy--search-p)                          | `search p/ <POLICY_NAME>`<br>Example: `search p/ sample Policy`                                                                                                                                                                |
+| [Assigning a Policy](#assigning-a-policy--assign)                          | `assign INDEX pon/<POLICY_NAME> pos/<START_DATE> poe/<END_DATE> paydate/<PAYMENT_DUE_DATE> amt/<AMOUNT_DUE>`<br>Example: `assign 1 pon/Health Insurance pos/2022-01-01 poe/2023-01-01 paydate/2022-12-01 amt/300.00`           |
+| [Deleting a Policy](#deleting-a-policy--delete)                            | `delete <INDEX> po/<POLICY_INDEX>` <br>Example: `delete 3 po/2`                                                                                                                                                                |
+| [Mark Policy Payment](#marking-a-policy-payment-installment-as-paid--paid) | `paid <INDEX> pon/<POLICY_INDEX>` <br>Example: `paid 2 pon/3`                                                                                                                                                                  |
+| [Undo a Command](#undo-a-command--undo)                                    | `undo`                                                                                                                                                                                                                         |
+| [Redo a Command](#redo-a-command--redo)                                    | `redo`                                                                                                                                                                                                                         |
+| [Clearing All Entries](#clearing-all-entries--clear)                       | `clear`                                                                                                                                                                                                                        |
+| [Exiting the Program](#exiting-the-program--exit)                          | `exit`                                                                                                                                                                                                                         |
+| [Viewing Help](#viewing-help--help)                                        | `help`                                                                                                                                                                                                                         |
