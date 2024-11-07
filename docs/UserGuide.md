@@ -115,6 +115,7 @@ Adds a person to the address book.
 <img src="images/addEvie.png" width="800">
 
 <br>
+<br>
 
 ### Clearing all entries : `clear`
 
@@ -141,6 +142,7 @@ the action will be aborted, and the address book will remain unchanged.
 
 <img src="images/clearConfirmation.png" width="800">
 
+<br>
 <br>
 
 
@@ -180,6 +182,7 @@ Deletes the specified person from the address book.
 <img src="images/deleteExpected.png" width="800">
 
 <br>
+<br>
 
 ### Editing a person : `edit`
 
@@ -203,6 +206,7 @@ Edits an existing person in the address book.
 
 <img src="images/editJohn.png" width="800">
 
+<br>
 <br>
 
 
@@ -241,6 +245,7 @@ Filter persons whose age and/or appointment dates are within the specified range
 <img src="images/filterResult.png" width="800">
 
 <br>
+<br>
 
 
 ### Locating persons by name or phone number: `find`
@@ -262,13 +267,12 @@ Examples:
 
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-* `find olive 87438` returns 
+* `find olive 87438` returns `87438807`, `Charlotte Oliveiro`
 
-* `87438807`, `Charlotte Oliveiro`
-
-  <img src="images/findResult.png" width="800">
+<img src="images/findResult.png" width="800">
   
-  <br>
+<br>
+<br>
 
 ### Viewing help : `help`
 
@@ -283,6 +287,7 @@ Shows you a help window with useful resources which includes:
 
 <img src="images/helpWindow.png" width="800">
 
+<br>
 <br>
 
 ### Importing contacts: `import`
@@ -409,6 +414,7 @@ Shows an alphabetically sorted list of all persons in the address book.
 <img src="images/listResult.png" width="800">
 
 <br>
+<br>
 
 
 ### Listing starred persons : `list *`
@@ -422,6 +428,7 @@ Shows a list of all starred persons in the address book.
 
 <img src="images/listStarResult.png" width="800">
 
+<br>
 <br>
 
 ### Editing a person's notes : `note`
@@ -447,6 +454,7 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 <img src="images/noteResult.png" width="800">
 
 <br>
+<br>
 
 ### Sorting list based on Appointment Dates : `sort`
 
@@ -459,6 +467,7 @@ remain sorted alphabetically at the end of the list.
 
 <img src="images/sortResult.png" width="800">
 
+<br>
 <br>
 
 ### Adding a person to favourites list : `star`
@@ -480,6 +489,7 @@ Stars the specified person from the address book into favourites.
 
 <img src="images/starResult.png" width="800">
 
+<br>
 <br>
 
 
@@ -503,6 +513,7 @@ Unstars the specified person from the address book removing them from favourites
 <img src="images/unstarResult.png" width="800">
 
 <br>
+<br>
 
 ### Viewing a person's notes : `view`
 
@@ -524,6 +535,7 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 
 <img src="images/viewResult.png" width="800">
 
+<br>
 <br>
 
 ### Saving the data
