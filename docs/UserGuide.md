@@ -502,4 +502,3 @@ The current time marker (denoted by the red line on the right side of the calend
 | **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                                      |
 | **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                          |
 | **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                      |
->>>>>>> master
