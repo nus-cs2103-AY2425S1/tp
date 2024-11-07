@@ -379,7 +379,7 @@ Examples:
 - `listing delete 1 1` deletes the `1st` property listing from the client with index `1`.
 
 
-- `listing delete 2 3` deletes the `3rd` property listing from the client in the `2` index.
+- `listing delete 2 3` deletes the `3rd` property listing from the client with index `2`.
 
 Visual example of correct output:
 
