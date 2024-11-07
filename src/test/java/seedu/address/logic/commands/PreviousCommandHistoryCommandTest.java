@@ -38,7 +38,7 @@ public class PreviousCommandHistoryCommandTest {
 
         PreviousCommandHistoryCommand previousCommandHistoryCommand = new PreviousCommandHistoryCommand();
         CommandResult commandResult = previousCommandHistoryCommand.execute(modelStub);
-        assertEquals("The previous command is : MOCK TEST 1", commandResult.getFeedbackToUser());
+        assertEquals("The previous command is :MOCK TEST 1", commandResult.getFeedbackToUser());
     }
 
     @Test

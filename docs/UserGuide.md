@@ -88,7 +88,7 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 * Parameters can be in any order.<br>
   E.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, 'sort' and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `sort` and `clear`) will be ignored.<br>
   E.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -104,24 +104,25 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 
 <d-table searchable>
 
-| Commands                                                   | Description                             | Format                                                                                                                                                         | Examples                                                                     | 
-|------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| [**help**](#viewing-help-help)                             | Show manual                             | `help`                                                                                                                                                         | -                                                                            |
-| [**cadd**](#adding-a-client-cadd)                          | Add a client                            | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL]`                                                                                                                       | `cadd n/Steven Tan e/steventan@abc.com p/98765432`                           |
-| [**radd**](#adding-a-rental-information-for-a-client-radd) | Add rental information to a client      | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {cl/CUSTOMER_LIST}`                   | `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750` |
-| [**list**](#listing-all-clients-list)                      | List all clients                        | `list`                                                                                                                                                         | -                                                                            |
-| [**rview**](#listing-rental-information-of-a-client-rview) | View rental information of a client     | `rview CLIENT_INDEX`                                                                                                                                           | `rview 1`                                                                    |
-| [**cedit**](#editing-a-client-cedit)                       | Edit a client                           | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL]`                                                                                                       | `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                        |
-| [**redit**](#editing-a-client-s-rental-information-redit)  | Edit rental information for a client    | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]` | `redit c/1 r/1 a/65 Anderson Road m/3000 d/0`                                |
-| [**find**](#locating-clients-find)                         | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG]...`                                                                                 | `find k/Tan n/Steven Tan p/98765432`                                         |
-| [**cdelete**](#deleting-a-client-cdelete)                  | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                         | `cdelete 3`                                                                  |
-| [**rdelete**](#deleting-a-rental-information-rdelete)      | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                        | `rdelete c/1 r/2`                                                            |
-| [**sort**](#sorting-all-entries-sort)                      | Sort clients by name                    | `sort`                                                                                                                                                         | -                                                                            |
-| [**↑up ↓down arrow key**](#sorting-all-entries-sort)       | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
-| [**import**](#importing-data-import)                       | Import data from an external file       | `import`                                                                                                                                                       | -                                                                            |
-| [**export**](#exporting-data-export)                       | Export address book data                | `export`                                                                                                                                                       | -                                                                            |
-| [**clear**](#clearing-all-entries-clear)                   | Clear all client's details'             | `clear`                                                                                                                                                        | -                                                                            |
-| [**exit**](#exiting-the-application-exit)                  | Exit the application                    | `exit`                                                                                                                                                         | -                                                                            |
+| Commands                                                                    | Description                             | Format                                                                                                                                                         | Examples                                                                     | 
+|-----------------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [**help**](#viewing-help-help)                                              | Show manual                             | `help`                                                                                                                                                         | -                                                                            |
+| [**cadd**](#adding-a-client-cadd)                                           | Add a client                            | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}...`                                                                                                            | `cadd n/Steven Tan e/steventan@abc.com p/98765432`                           |
+| [**radd**](#adding-a-rental-information-for-a-client-radd)                  | Add rental information to a client      | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {cl/CUSTOMER_LIST}`                   | `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750` |
+| [**list**](#listing-all-clients-list)                                       | List all clients                        | `list`                                                                                                                                                         | -                                                                            |
+| [**rview**](#listing-rental-information-of-a-client-rview)                  | View rental information of a client     | `rview CLIENT_INDEX`                                                                                                                                           | `rview 1`                                                                    |
+| [**cedit**](#editing-a-client-cedit)                                        | Edit a client                           | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`                                                                                            | `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                        |
+| [**redit**](#editing-a-client-s-rental-information-redit)                   | Edit rental information for a client    | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]` | `redit c/1 r/1 a/65 Anderson Road m/3000 d/0`                                |
+| [**find**](#locating-clients-find)                                          | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG]...`                                                                                 | `find k/Tan n/Steven Tan p/98765432`                                         |
+| [**cdelete**](#deleting-a-client-cdelete)                                   | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                         | `cdelete 3`                                                                  |
+| [**rdelete**](#deleting-a-rental-information-rdelete)                       | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                        | `rdelete c/1 r/2`                                                            |
+| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                         | `sort name`                                                                  |
+| [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
+| [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                    | -                                                                            |
+| [**import**](#importing-data-import)                                        | Import all client's details             | `import`                                                                                                                                                       | -                                                                            |
+| [**export**](#exporting-data-export)                                        | Export all client's details             | `export`                                                                                                                                                       | -                                                                            |
+| [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                        | -                                                                            |
+| [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                         | -                                                                            |
 
 </d-table>
 
@@ -150,7 +151,7 @@ Format: `help`
 
 Adds a client to TrueRental.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
+Format: `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}…​`
 
 <box type="important" seamless>
 
@@ -223,6 +224,8 @@ Format: `radd CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [
 
 </box>
 
+![raddUi](images/raddUi.png)
+
 <div style="text-align: right;">
   <a href="#command-summary">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
@@ -289,7 +292,7 @@ Format: `rview CLIENT_INDEX`
 Edits an existing client with TrueRental. The provided input will replace the existing input, subjected to the parameter constraints.
 <!-- TODO: Hyperlink paramter constraints to the table at the top -->
 
-Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
+Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 
 <box type="important" seamless>
 
@@ -374,6 +377,8 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 
 </box>
 
+![reditUi](images/reditUi.png)
+
 <div style="text-align: right;">
   <a href="#command-summary">
     <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
@@ -384,7 +389,7 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 
 Finds clients whose names contain any of the given keywords, name, email, phone or tag.
 
-Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE]... [e/EMAIL]... [t/TAG]...`
+Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE_NUMBER]... [e/EMAIL]... [t/TAG]...`
 
 <box type="important" seamless>
 
@@ -486,24 +491,11 @@ Examples:
 * `list` followed by `rdelete c/2 r/1` deletes the 1st rental information from the 2nd client in the address book.
 * `find Betsy` followed by `rdelete c/1 r/2` deletes the 2nd rental information from the 1st client in the results of the `find` command.
 
-<div style="text-align: right;">
-  <a href="#command-summary">
-    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
-  </a>
-</div>
+### Sorting all entries : `sort`
 
+Sorts all entries in the application according to name in alphabetical order.
 
-### Clearing all entries : `clear`
-
-Clears all entries from TrueRental.
-
-Format: `clear`
-
-<box type="info" seamless>
-
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
-
-</box>
+Format: `sort`
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -530,6 +522,22 @@ Navigates through all previously entered commands.
 
 **Note:** 
 * All commands within the command history will be cleared upon exiting the TrueRental application.
+* Only TrueRental specific commands will be stored within the command history.
+
+</box>
+
+<box type="info" theme="warning" light>
+
+**Example Set-up:** (Steps 1 to 6 are performed sequentially)
+
+Please set up the following commands before proceeding with the example inputs and outputs.
+
+1. `cadd n/John Doe p/99887766 e/johndoe@example.com`
+2. `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David`
+3. `cadd n/Amy Tan p/99887766`
+4. `rview 1`
+5. `list`
+6. `cdelete 2`
 
 </box>
 
@@ -549,7 +557,6 @@ Navigates through all previously entered commands.
 11. Press `↓ down-arrow key` on the keyboard.
 12. Press `↓ down-arrow key` on the keyboard.
 13. Press `↓ down-arrow key` on the keyboard.
-
 </box>
 
 <box type="success" light>
@@ -559,10 +566,12 @@ Navigates through all previously entered commands.
 2. Expected: `list` is shown in the command box.
 3. Expected: `rview 1` is shown in the command box.
 4. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
-5. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
+5. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
+   the command box.
 6. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
-7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there are no more previous commands.
-8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
+7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
+   are no more previous commands.
+8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
 9. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
 10. Expected: `rview 1` is shown in the command box.
 11. Expected: `list` is shown in the command box.
@@ -577,28 +586,75 @@ Navigates through all previously entered commands.
   </a>
 </div>
 
-### Importing data: `import`
+### Autofill: `Tab key`
 
-Imports and overwrite all existing data from a `.json` file.
+Autofills command name, prefix and value of prefix.
 
-Format: `import`
+Entering the `↹ Tab key` will help to fill or append to the command input with appropriate value.
 
 <box type="important" seamless>
 
-**Constraints**:
-* Only `.json` files can be imported.
-* The chosen file must have the correct format.
+**Constraints:**
+* The value being autofilled depends on the available helping words specified by TrueRental.
+* Autofill is not customized for every single prefix, all prefixes will have same set of value for autofill.
 
 </box>
 
 <box type="info" seamless>
 
-**Note**:
-* Importing data will delete all current data in the address book. It is recommended to back up the current data via the `export` command.
-* Confirmation required. Type `y` for **yes** and `n` for **no**.
-* A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
+**Note:**
+* You should not rely on autofill too much as this feature is meant to provide some simple helps only.
+* Autofill for prefix may not be working for some commands which does not require extra parameters.
 
 </box>
+
+<box type="info" light>
+
+**Example Inputs:** (Steps 1 to 12 are performed sequentially)
+1. Enter `r` as the input command.
+2. Press `↹ Tab key` on the keyboard.
+3. Press `↹ Tab key` on the keyboard.
+4. Press `↹ Tab key` on the keyboard.
+5. Clear input command and enter `radd ` as the input command (take note of the white space at the end of the command input).
+6. Press `↹ Tab key` on the keyboard.
+7. Press `↹ Tab key` on the keyboard.
+8. Press `↹ Tab key` on the keyboard.
+9. Clear input command and enter `radd cl/J` as the input command.
+10. Press `↹ Tab key` on the keyboard.
+11. Press `↹ Tab key` on the keyboard.
+12. Press `↹ Tab key` on the keyboard.
+
+</box>
+
+<box type="success" light>
+
+**Example Outputs:** (Steps 1 to 12 are performed sequentially)
+1. Value of the input command is now "r".
+2. Value of the input command is now "radd".
+3. Value of the input command is now "redit".
+4. Value of the input command is now "rdelete".
+5. Value of the input command is now "radd ".
+6. Value of the input command is now "radd a/".
+7. Value of the input command is now "radd cl/".
+8. Value of the input command is now "radd d/".
+9. Value of the input command is now "radd cl/J".
+10. Value of the input command is now "radd cl/Josh".
+11. Value of the input command is now "radd cl/Joshua".
+12. Value of the input command is now "radd cl/Jayden".
+
+</box>
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+### Importing data: `import`
+
+Imports and overwrite all existing data from a `.json` file.
+
+<!--TODO: Nathan-->
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -610,7 +666,25 @@ Format: `import`
 
 Exports all data within TrueRental into a `.json` file.
 
-Format: `export`
+<box type="info" seamless>
+
+**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
+
+</box>
+
+<!--TODO: Nathan-->
+
+<div style="text-align: right;">
+  <a href="#command-summary">
+    <img src="images/img.png" alt="Back to top" width="70" height="60" style="vertical-align: middle;" />
+  </a>
+</div>
+
+### Clearing all entries : `clear`
+
+Clears all entries from TrueRental.
+
+Format: `clear`
 
 <box type="info" seamless>
 

@@ -13,7 +13,7 @@ public class NextCommandHistoryCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the next command entered. ";
 
-    public static final String MESSAGE_SUCCESS = "The next command is : ";
+    public static final String MESSAGE_SUCCESS = "The next command is :";
     public static final String MESSAGE_FAILURE = "There are no more next commands.";
     @Override
     public CommandResult execute(Model model) throws CommandException {

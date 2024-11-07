@@ -27,6 +27,13 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
+     * Processes the file chosen by the user based on the previous command and returns the result.
+     * If the previous command was {@code import}, then import data from the file;
+     * If it was {@code export}, then export data to the file.
+     */
+    CommandResult processFile(File file) throws CommandException;
+
+    /**
      * Returns the AddressBook.
      *
      * @see seedu.address.model.Model#getAddressBook()
@@ -55,16 +62,4 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     ObjectProperty<Client> getVisibleClient();
-
-    /**
-     * Imports address book data from the given file.
-     * @return true if data was successfully imported, false otherwise.
-     */
-    boolean importFile(File file);
-
-    /**
-     * Exports current address book data to the given file.
-     * @return true if data was successfully exported, false otherwise.
-     */
-    boolean exportFile(File file);
 }
