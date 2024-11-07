@@ -139,18 +139,14 @@ Examples:
 
 Links an owner to one or more pets.
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
-**:exclamation: Extra information:**<br>
-
+**:information_source: Extra information:**<br>
 <ul>
 <li>Links owner at specified <code>OWNER_INDEX</code> to pet(s) at specified <code>PET_INDEX</code>s.</li>
-
 <li>An owner can be linked to 0 or more pets.</li>
-
 <li>A pet can be linked to 0 or more owners.</li>
 </ul>
-  
 </div>
 
 Format: `link oOWNER_INDEX t/pPET_INDEX…​`
@@ -193,24 +189,17 @@ Format:
 
 Edits an existing owner or pet in PawPatrol. Refer to information on owner and pet fields in the [Add section](#adding-an-entity-owner--pet).
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
-**:exclamation: Extra information:**<br>
-
+**:information_source: Extra information:**<br>
 <ul>
 <li>Edits the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively. The index refers to the index number shown in the displayed owner or pet list. The index **must be a positive integer** 1, 2, 3, …​</li>
-
 <li>At least one of the optional fields must be provided.</li>
-
 <li>IC number cannot be changed.</li>
-
 <li>Existing values will be updated to the input values.</li>
-
 <li>When editing tags, the existing tags of the pet will be removed i.e. adding of tags is not cumulative.</li>
-
 <li>You can remove all the pet’s tags by typing <code>t/</code> without specifying any tags after it.</li>
 </ul>
-
 </div>
 
 #### <u>Editing an owner</u>
@@ -233,23 +222,16 @@ Example:
 
 Finds owners or pets whose names contain any of the given keywords.
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
-**:exclamation: Extra information:**<br>
-
+**:information_source: Extra information:**<br>
 <ul>
-
 <li>The search is case-insensitive. e.g. <code>hans</code> will match <code>Hans</code></li>
-
 <li>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></li>
-
 <li>Only the name is searched.</li>
-
 <li>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></li>
-
 <li>Owners or pets matching at least one keyword will be returned (i.e. <code>OR</code> search).<br>
   e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></li>
-
 </ul>
 </div>
 
@@ -266,20 +248,14 @@ Examples:
 
 Deletes the specified owner or pet from PawPatrol.
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
-**:exclamation: Extra information:**<br>
-
+**:information_source: Extra information:**<br>
 <ul>
-
 <li>Deletes the owner or pet at the specified <code>OWNER_INDEX</code> or <code>PET_INDEX</code> respectively.</li>
-
 <li>The index refers to the index number shown in the displayed owner or pet list.</li>
-
 <li>The index **must be a positive integer** 1, 2, 3, …​</li>
-
 </ul>
-
 </div>
 
 Format:
