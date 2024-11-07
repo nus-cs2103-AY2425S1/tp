@@ -32,6 +32,7 @@ public class PersonBuilder {
     private PostalCode postalCode;
     private Set<Tag> tags;
     private OrderTracker tracker;
+    private Boolean isArchived;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +45,7 @@ public class PersonBuilder {
         postalCode = new PostalCode(DEFAULT_POSTAL_CODE);
         tags = new HashSet<>();
         tracker = new OrderTracker();
+        isArchived = false;
     }
 
     /**
@@ -58,6 +60,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         tracker = new OrderTracker();
         tracker.add(personToCopy.getOrderTracker().get());
+        isArchived = personToCopy.isArchived();
     }
 
     /**
@@ -125,7 +128,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Add {@param isArchived} to the {@code isArchived} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withIsArchived(Boolean isArchived) {
+        this.isArchived = isArchived;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, postalCode, tags, tracker);
+        return new Person(name, phone, email, address, postalCode, tags, tracker, isArchived);
     }
 }
