@@ -12,16 +12,16 @@ import seedu.address.model.tag.enums.Level;
  * This tag is used to categorize items by Salary,
  * with possible levels being "low", "medium", or "high".
  */
-public class SalaryTag extends Tag {
+class SalaryTag extends Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Salary level needs to be either Low, Medium or High";
 
     private String salaryLevel;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code SalaryTag}.
      *
-     * @param tagName     A valid tag name.
+     * @param tagName     A valid tag name, should preferably be "Salary" in this case
      * @param salaryLevel A salaryLevel of either "low", "medium" or "high".
      */
     SalaryTag(String tagName, String salaryLevel) throws IllegalArgumentException {
@@ -44,7 +44,7 @@ public class SalaryTag extends Tag {
             Level.valueOf(salaryLevel.toUpperCase(Locale.ROOT));
             return true;
         } catch (IllegalArgumentException e) {
-            return false; // If the conversion fails, the value is invalid.
+            return false;
         }
     }
 

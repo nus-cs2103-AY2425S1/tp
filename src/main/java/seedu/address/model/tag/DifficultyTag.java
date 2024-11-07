@@ -12,15 +12,15 @@ import seedu.address.model.tag.enums.Level;
  * This tag is used to categorize items by difficulty,
  * with possible levels being "low", "medium", or "high".
  */
-public class DifficultyTag extends Tag {
+class DifficultyTag extends Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Difficulty level needs to be either 'low', 'medium' or 'high'";
     private String difficultyLevel;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code DifficultyTag}.
      *
-     * @param tagName A valid tag name.
+     * @param tagName A valid tag name. Should preferably be "Difficulty" in this case
      * @param difficultyLevel A difficultyLevel of either "low", "medium" or "high".
      */
     DifficultyTag(String tagName, String difficultyLevel) {
@@ -44,7 +44,7 @@ public class DifficultyTag extends Tag {
             Level.valueOf(difficultyLevel.toUpperCase(Locale.ROOT));
             return true;
         } catch (IllegalArgumentException e) {
-            return false; // If the conversion fails, the value is invalid.
+            return false;
         }
     }
 

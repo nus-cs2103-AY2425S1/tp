@@ -29,7 +29,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CAREER_PAGE_URL
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICROSOFT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_MICROSOFT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_COMPANY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BIGTECH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -43,7 +43,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalCompanies.MICROSOFT;
 import static seedu.address.testutil.TypicalCompanies.TESLA;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -62,12 +61,11 @@ public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
-    @Disabled
     public void parse_allFieldsPresent_success() {
         Company expectedCompany = new CompanyBuilder(MICROSOFT)
                 .withCareerPageUrl(VALID_CAREER_PAGE_URL_MICROSOFT)
                 .withTags(VALID_TAG_COMPANY)
-                .withRemark(VALID_REMARK)
+                .withRemark(VALID_REMARK_COMPANY)
                 .build();
 
         // whitespace only preamble
@@ -79,15 +77,15 @@ public class AddCommandParserTest {
         Company expectedCompanyMultipleTags = new CompanyBuilder(MICROSOFT)
                 .withCareerPageUrl(VALID_CAREER_PAGE_URL_MICROSOFT)
                 .withTags(VALID_TAG_COMPANY, VALID_TAG_BIGTECH)
+                .withRemark(VALID_REMARK_COMPANY)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT
-                        + CAREER_PAGE_URL_DESC_MICROSOFT + TAG_DESC_BIGTECH + TAG_DESC_COMPANY,
+                        + CAREER_PAGE_URL_DESC_MICROSOFT + TAG_DESC_BIGTECH + TAG_DESC_COMPANY + REMARK_DESC_COMPANY,
                 new AddCommand(expectedCompanyMultipleTags));
     }
 
     @Test
-    @Disabled
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedCompanyString = NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
                 + EMAIL_DESC_MICROSOFT
@@ -121,7 +119,8 @@ public class AddCommandParserTest {
                 validExpectedCompanyString + PHONE_DESC_TESLA + EMAIL_DESC_TESLA + NAME_DESC_TESLA
                         + ADDRESS_DESC_TESLA + CAREER_PAGE_URL_DESC_TESLA + validExpectedCompanyString,
                 Messages.getErrorMessageForDuplicatePrefixes(
-                        PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_CAREER_PAGE_URL));
+                        PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_CAREER_PAGE_URL,
+                        PREFIX_REMARK));
 
         // invalid value followed by valid value
 
@@ -216,7 +215,6 @@ public class AddCommandParserTest {
     }
 
     @Test
-    @Disabled
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICROSOFT + EMAIL_DESC_MICROSOFT
@@ -245,17 +243,18 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
-                + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + VALID_CAREER_PAGE_URL_MICROSOFT
-                + REMARK_DESC_VALID + INVALID_TAG_DESC + VALID_TAG_COMPANY, Tag.MESSAGE_CONSTRAINTS);
+                + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + CAREER_PAGE_URL_DESC_MICROSOFT
+                + REMARK_DESC_VALID + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
 
         // invalid remark
         assertParseFailure(parser, NAME_DESC_MICROSOFT + PHONE_DESC_MICROSOFT
-                + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + VALID_CAREER_PAGE_URL_MICROSOFT
+                + EMAIL_DESC_MICROSOFT + ADDRESS_DESC_MICROSOFT + CAREER_PAGE_URL_DESC_MICROSOFT
                 + INVALID_REMARK_DESC + TAG_DESC_BIGTECH + TAG_DESC_COMPANY, Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_MICROSOFT
-                        + EMAIL_DESC_MICROSOFT + INVALID_ADDRESS_DESC + CAREER_PAGE_URL_DESC_MICROSOFT,
+                        + EMAIL_DESC_MICROSOFT + INVALID_ADDRESS_DESC + CAREER_PAGE_URL_DESC_MICROSOFT
+                        + REMARK_DESC_VALID,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_STATUS;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class ApplicationStatusCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "as/ [STATUS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "status/ Ongoing";
+            + PREFIX_APPLICATION_STATUS
+            + " Ongoing";
 
     public static final String MESSAGE_ADD_STATUS_SUCCESS = "Changed application to Company: %1$s";
 

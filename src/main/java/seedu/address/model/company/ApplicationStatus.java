@@ -8,8 +8,9 @@ import static java.util.Objects.requireNonNull;
  */
 public class ApplicationStatus {
 
-    public final String value;
+    private static final String DEFAULT_STATUS = "None";
 
+    public final String value;
     /**
      * Constructs an {@code ApplicationStatus}.
      *
@@ -45,4 +46,7 @@ public class ApplicationStatus {
         return value.hashCode();
     }
 
+    public String getStatusValue() {
+        return this.value.isEmpty() ? DEFAULT_STATUS : this.value;
+    }
 }

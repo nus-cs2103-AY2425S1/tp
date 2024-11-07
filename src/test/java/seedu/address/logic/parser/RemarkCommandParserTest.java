@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_VALID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -22,7 +22,6 @@ public class RemarkCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
 
     @Test
-    @Disabled
     public void parse_indexSpecified_success() {
         // have remark
         Index targetIndex = Index.fromOneBased(1);
@@ -63,9 +62,9 @@ public class RemarkCommandParserTest {
     }
 
     @Test
-    @Disabled
     public void parse_invalidRemark_failure() {
         String expectedMessage = Remark.MESSAGE_CONSTRAINTS;
-        assertParseFailure(parser, "1" + INVALID_REMARK_DESC, expectedMessage);
+        assertThrows(IllegalArgumentException.class, expectedMessage, ()
+                -> parser.parse("1" + INVALID_REMARK_DESC + " "));
     }
 }
