@@ -225,8 +225,9 @@ Lists all logs of a specific patient.
 
 - **Format**: `logs i/[IDENTITY_NUMBER]`
 
-- **Examples**:
-  logs i/S8613282F
+Example:
+* `logs i/S3054081F` <br>
+  ![result for 'logs i/S3054081F'](images/logsAlexResult.png)
 
 ### Exiting the program : `exit`
 
