@@ -340,13 +340,18 @@ Examples:
 </div>
 
 #### Adding tag(s) to contact: `tag`
-Adds additional specified tag(s) to the specified contact without overwriting existing tags.
+Adds additional specified tag(s) to the specified contact or all contacts without overwriting existing tags.
 
-Format: `tag INDEX t/TAG [t/MORE_TAG]`
+Format 1: `tag INDEX t/TAG [t/MORE_TAG]`
 
- * Add specified `TAG` (and `MORE_TAG` if present) to the contact at specified `INDEX`
+ * Adds specified `TAG` (and `MORE_TAG` if present) to the contact at specified `INDEX`
  * The index refers to the index number shown in the displayed person list.
  * The index **must be a positive integer** 1, 2, 3, …​
+
+Format 2: `tag all t/TAG [t/MORE_TAG]`
+
+* Adds specified `TAG` (and `MORE_TAG` if present) to all contacts in the list provided <br>
+  no duplicate tag(s) are found in all contacts.
 
 <div markdown="block" class="alert alert-info">
 
