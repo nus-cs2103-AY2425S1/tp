@@ -35,7 +35,8 @@ public class ParentTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new ParentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withChild(CARL.getName()).build();
+                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).withChildren(CARL.getName().fullName)
+                .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -91,7 +92,7 @@ public class ParentTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different child -> returns false
-        editedAlice = new ParentBuilder(ALICE).withChild(CARL.getName()).build();
+        editedAlice = new ParentBuilder(ALICE).withChildren(CARL.getName().fullName).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
@@ -100,7 +101,7 @@ public class ParentTest {
         StringBuilder tags = new StringBuilder();
         ALICE.getTags().forEach(tags::append);
         String expected = ALICE.getName() + "; Phone: " + ALICE.getPhone() + "; Email: " + ALICE.getEmail()
-                + "; Address: " + ALICE.getAddress() + "; Child: " + ALICE.getChildName() + "; Tags: " + tags;
+                + "; Address: " + ALICE.getAddress() + "; Children: " + ALICE.getChildrensNames() + "; Tags: " + tags;
         assertEquals(expected, ALICE.toMessageString());
     }
 
@@ -108,7 +109,7 @@ public class ParentTest {
     public void toStringMethod() {
         String expected = Parent.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
-                + ", child=" + ALICE.getChildName() + ", tags=" + ALICE.getTags() + "}";
+                + ", children=" + ALICE.getChildrensNames() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

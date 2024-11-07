@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
@@ -27,6 +27,8 @@ public class StudentCard extends PersonCard {
     @FXML
     private Label parentEmail;
     @FXML
+    private Label lessonTime;
+    @FXML
     private Label education;
     @FXML
     private Label grade;
@@ -34,8 +36,10 @@ public class StudentCard extends PersonCard {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public StudentCard(Student person, int displayedIndex, Model model) {
-        super(STUDENT, person, displayedIndex, model);
+    public StudentCard(Student person, int displayedIndex, ReadOnlyAddressBook addressBook) {
+        super(STUDENT, person, displayedIndex, addressBook);
+        lessonTime.setText(person.getLessonTime().toString());
+        lessonTime.getStyleClass().add("lesson-time-label");
         education.setText(person.getEducation().educationLevel);
         education.getStyleClass().add("education-label");
         grade.setText(person.getGrade().gradeIndexToName());
@@ -45,7 +49,7 @@ public class StudentCard extends PersonCard {
         parentEmail.setText("");
         if (person.getParentName() != null) {
             try {
-                Person parent = model.personFromName(person.getParentName());
+                Person parent = addressBook.personFromName(person.getParentName());
                 if (!(parent instanceof Parent)) {
                     throw new IllegalValueException("Parent of" + person.getName().fullName + "is not a Parent");
                 }

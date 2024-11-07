@@ -1,21 +1,25 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Parent objects.
  */
 public class ParentBuilder extends PersonBuilder {
 
-    private Name childName;
+    private Set<Name> childrensNames;
 
     /**
      * Creates a {@code ParentBuilder} with the default details.
      */
     public ParentBuilder() {
         super();
-        childName = null;
+        childrensNames = new HashSet<>();
     }
 
     /**
@@ -23,14 +27,14 @@ public class ParentBuilder extends PersonBuilder {
      */
     public ParentBuilder(Parent parentToCopy) {
         super(parentToCopy);
-        childName = parentToCopy.getChildName();
+        childrensNames = parentToCopy.getChildrensNames();
     }
 
     /**
      * Sets the {@code child} of the {@code Parent} that we are building.
      */
-    public ParentBuilder withChild(Name childName) {
-        this.childName = childName;
+    public ParentBuilder withChildren(String... childName) {
+        childrensNames = SampleDataUtil.getNameSet(childName);
         return this;
     }
 
@@ -68,7 +72,7 @@ public class ParentBuilder extends PersonBuilder {
      * Builds the parent.
      */
     public Parent build() {
-        return new Parent(getName(), getPhone(), getEmail(), getAddress(), childName, getTags(),
+        return new Parent(getName(), getPhone(), getEmail(), getAddress(), childrensNames, getTags(),
                 isPinned(), isArchived());
     }
 

@@ -5,18 +5,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
 
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
-import seedu.address.model.person.exceptions.IllegalPersonTypeException;
 import seedu.address.model.tag.Education;
 import seedu.address.model.tag.Grade;
 import seedu.address.model.tag.Tag;
@@ -63,7 +64,7 @@ public class UnlinkCommand extends Command {
         Student castedChild = (Student) child;
         Name parentName = castedChild.getParentName();
         if (parentName == null) {
-            throw new CommandException(String.format(MESSAGE_CONTACT_HAS_NO_LINKS, Messages.format(castedChild)));
+            throw new CommandException(String.format(MESSAGE_CONTACT_HAS_NO_LINKS, castedChild.getName()));
         }
 
         Person parent;
@@ -75,38 +76,45 @@ public class UnlinkCommand extends Command {
         } catch (IllegalValueException e) {
             throw new CommandException(generateParentNotFoundMessage(parentName));
         }
+        Parent castedParent = (Parent) parent;
 
-        Person unlinkedStudent = unlink(child);
-        Person unlinkedParent = unlink(parent);
-
-        model.setPerson(child, unlinkedStudent);
-        model.setPerson(parent, unlinkedParent);
+        Pair<Student, Parent> unlinkedPair = unlink(castedChild, castedParent);
+        model.setPerson(child, unlinkedPair.getKey());
+        model.setPerson(parent, unlinkedPair.getValue());
 
         return new CommandResult(String.format(MESSAGE_UNLINK_CONTACT_SUCCESS,
                 Messages.format(child), Messages.format(parent)));
     }
 
-    private Person unlink(Person person) {
-        Name name = person.getName();
-        Phone phone = person.getPhone();
-        Email email = person.getEmail();
-        Address address = person.getAddress();
-        Set<Tag> tags = person.getTags();
-        boolean isPinned = person.isPinned();
-        boolean isArchived = person.isArchived();
+    private Pair<Student, Parent> unlink(Student student, Parent parent) {
+        // Student Information
+        Name studentName = student.getName();
+        Phone studentPhone = student.getPhone();
+        Email studentEmail = student.getEmail();
+        Address studentAddress = student.getAddress();
+        Set<Tag> studentTags = student.getTags();
+        boolean studentPinned = student.isPinned();
+        boolean studentArchived = student.isArchived();
+        LessonTime studentLessonTime = student.getLessonTime();
+        Education studentEducation = student.getEducation();
+        Grade studentGrade = student.getGrade();
+        Student newStudent = new Student(studentName, studentPhone, studentEmail, studentAddress, studentLessonTime,
+                studentEducation, studentGrade, null, studentTags, studentPinned, studentArchived);
 
-        if (person instanceof Student student) {
-            Education education = student.getEducation();
-            Grade grade = student.getGrade();
+        // Parent Information
+        Name parentName = parent.getName();
+        Phone parentPhone = parent.getPhone();
+        Email parentEmail = parent.getEmail();
+        Address parentAddress = parent.getAddress();
+        Set<Tag> parentTags = parent.getTags();
+        boolean parentPinned = parent.isPinned();
+        boolean parentArchived = parent.isArchived();
+        Set<Name> parentChildrensNames = parent.getChildrensNames();
+        parentChildrensNames.remove(studentName);
+        Parent newParent = new Parent(parentName, parentPhone, parentEmail, parentAddress, parentChildrensNames,
+                parentTags, parentPinned, parentArchived);
 
-            return new Student(name, phone, email, address, education, grade, null, tags, isPinned, isArchived);
-        }
-
-        if (person instanceof Parent parent) {
-            return new Parent(name, phone, email, address, null, tags, isPinned, isArchived);
-        }
-
-        throw new IllegalPersonTypeException(person);
+        return new Pair<>(newStudent, newParent);
     }
 
     private String generateChildNotFoundMessage() {

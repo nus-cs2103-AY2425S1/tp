@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -45,7 +46,7 @@ public class AddParentCommandParser implements Parser<AddParentCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Parent parent = new Parent(name, phone, email, address, null, tagList);
+        Parent parent = new Parent(name, phone, email, address, new HashSet<>(), tagList);
 
         return new AddParentCommand(parent);
     }
