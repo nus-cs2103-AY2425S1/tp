@@ -3,7 +3,9 @@ package seedu.address.logic.commands.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -49,10 +51,12 @@ public class DeleteTaskCommand extends Command {
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
 
         boolean anyChanges = false;
-        List<Person> personList = model.getFilteredPersonList();
-        for (Person person: personList) {
+        for (Person person : model.getFilteredPersonList()) {
             if (person.hasTask(taskToDelete)) {
-                person.removeTask(taskToDelete);
+                Set<Task> updatedTasks = new HashSet<>(person.getTasks());
+                updatedTasks.remove(taskToDelete);
+                Person editedPerson = PersonTaskEditorUtil.createEditedPersonWithUpdatedTasks(person, updatedTasks);
+                model.setPerson(person, editedPerson);
                 anyChanges = true;
             }
         }

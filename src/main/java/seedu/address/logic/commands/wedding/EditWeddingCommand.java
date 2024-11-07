@@ -2,6 +2,7 @@ package seedu.address.logic.commands.wedding;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
@@ -38,7 +39,8 @@ public class EditWeddingCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters (optional parameters in square brackets): INDEX (must be a positive integer) "
             + "[" + PREFIX_WEDDING + "WEDDING]"
-            + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS]"
+            + "[" + PREFIX_DATE + "DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_WEDDING + "Mr and Mrs John Tan "
             + PREFIX_ADDRESS + "12 College Ave West";
@@ -73,12 +75,7 @@ public class EditWeddingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
-        editWeddingDescriptor.getPartner1Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner1(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
-        editWeddingDescriptor.getPartner2Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner2(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
+
         editWeddingDescriptor.setPeopleCount(weddingToEdit.getPeopleCount());
         editWeddingDescriptor.setGuestList(weddingToEdit.getGuestList());
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
@@ -201,16 +198,8 @@ public class EditWeddingCommand extends Command {
             this.partner2 = partner2;
         }
 
-        public Optional<Index> getPartner1Index() {
-            return Optional.ofNullable(partner1Index);
-        }
-
         public void setPartner1Index(Index partner1Index) {
             this.partner1Index = partner1Index;
-        }
-
-        public Optional<Index> getPartner2Index() {
-            return Optional.ofNullable(partner2Index);
         }
 
         public void setPartner2Index(Index partner2Index) {

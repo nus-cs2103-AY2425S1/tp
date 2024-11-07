@@ -84,8 +84,8 @@ public class TagCommand extends Command {
 
         if (lastShownList.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", COMMAND_WORD));
-        } else if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } else if (index.getZeroBased() >= lastShownList.size() || index.getZeroBased() < 0) {
+            throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size()));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -129,10 +129,7 @@ public class TagCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof TagCommand otherCommand)) {
-            return false;
-        }
-
+        TagCommand otherCommand = (TagCommand) other;
         return index.equals(otherCommand.index)
                 && tagsToAdd.equals(otherCommand.tagsToAdd);
     }

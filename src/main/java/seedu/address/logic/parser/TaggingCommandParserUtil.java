@@ -32,7 +32,11 @@ public class TaggingCommandParserUtil {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
         }
 
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        try {
+            index = Index.oneBasedNoConstraints(Integer.parseInt(argMultimap.getPreamble().trim()));
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage));
+        }
 
         Set<Tag> tagValues = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
