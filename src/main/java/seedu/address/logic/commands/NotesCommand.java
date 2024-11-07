@@ -13,6 +13,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Notes;
@@ -46,6 +48,9 @@ public class NotesCommand extends Command {
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Added notes for %1$s: \n%2$s";
     public static final String MESSAGE_EDIT_NOTES_SUCCESS = "Edited notes for %1$s: \n%2$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "No person found with name: %1$s";
+    public static final String MESSAGE_MULTIPLE_PERSONS_FOUND = "Multiple contact match the name \"%1$s\".\n"
+            + "The displayed list has been filtered based on the name \"%1$s\".\n"
+            + "Please specify an index for the correct person.";
 
     private final Mode mode;
     private final Notes newNotes;
@@ -120,7 +125,7 @@ public class NotesCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) throws CommandException, ParseException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -132,14 +137,18 @@ public class NotesCommand extends Command {
             }
             personToEdit = lastShownList.get(targetIndex.getZeroBased());
         } else {
-            personToEdit = null;
-            for (Person person : lastShownList) {
-                if (person.getName().equals(targetName)) {
-                    personToEdit = person;
-                    break;
+            List<Person> fullPersonList = model.getAddressBook().getPersonList();
+            List<Person> exactMatch = fullPersonList.stream()
+                    .filter(person -> person.getName().fullName.equalsIgnoreCase(targetName.toString()))
+                    .toList();
+            if (exactMatch.size() == 1) {
+                personToEdit = exactMatch.get(0);
+            } else {
+                if (exactMatch.size() > 1) {
+                    FindCommandParser findCommandParser = new FindCommandParser();
+                    findCommandParser.parse(targetName.toString()).execute(model);
+                    throw new CommandException(String.format(MESSAGE_MULTIPLE_PERSONS_FOUND, targetName.toString()));
                 }
-            }
-            if (personToEdit == null) {
                 throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND, targetName.toString()));
             }
         }
