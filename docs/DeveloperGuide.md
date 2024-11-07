@@ -59,9 +59,10 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
-For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
+For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: We are making use of the "facade" design pattern to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
+
 
 The sections below give more details of each component.
 
@@ -172,15 +173,15 @@ These operations are exposed in the `Model` interface as `Model#commitPrudy()`, 
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedPrudy` will be initialized with the initial Prudy state, and the `currentStatePointer` pointing to that single Prudy state.
+**Step 1.** The user launches the application for the first time. The `VersionedPrudy` will be initialized with the initial Prudy state, and the `currentStatePointer` pointing to that single Prudy state.
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete-client 5` command to delete the 5th client in Prudy. The `delete-client` command calls `Model#commitPrudy()`, causing the modified state of Prudy after the `delete-client 5` command executes to be saved in the `prudyStateList`, and the `currentStatePointer` is shifted to the newly inserted Prudy state.
+**Step 2.** The user executes `delete-client 5` command to delete the 5th client in Prudy. The `delete-client` command calls `Model#commitPrudy()`, causing the modified state of Prudy after the `delete-client 5` command executes to be saved in the `prudyStateList`, and the `currentStatePointer` is shifted to the newly inserted Prudy state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add-client n/David …​` to add a new client. The `add-client` command also calls `Model#commitPrudy()`, causing another modified Prudy state to be saved into the `prudyStateList`.
+**Step 3.** The user executes `add-client n/David …​` to add a new client. The `add-client` command also calls `Model#commitPrudy()`, causing another modified Prudy state to be saved into the `prudyStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +191,7 @@ Step 3. The user executes `add-client n/David …​` to add a new client. The `
 
 </box>
 
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPrudy()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Prudy state, and restores Prudy to that state.
+**Step 4.** The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoPrudy()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous Prudy state, and restores Prudy to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -224,11 +225,11 @@ The `redo` command does the opposite — it calls `Model#redoPrudy()`, which
 
 </box>
 
-Step 5. The user then decides to execute the command `list-client`. Commands that do not modify Prudy, such as `list-client`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
+**Step 5.** The user then decides to execute the command `list-client`. Commands that do not modify Prudy, such as `list-client`, will usually not call `Model#commitPrudy()`, `Model#undoPrudy()` or `Model#redoPrudy()`. Thus, the `prudyStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
-Step 6. The user executes `clear`, which calls `Model#commitPrudy()`. Since the `currentStatePointer` is not pointing at the end of the `prudyStateList`, all Prudy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add-client n/David …​` command. This is the behavior that most modern desktop applications follow.
+**Step 6.** The user executes `clear`, which calls `Model#commitPrudy()`. Since the `currentStatePointer` is not pointing at the end of the `prudyStateList`, all Prudy states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add-client n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
 
@@ -241,15 +242,25 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves entire Prudy.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * Pros: Easy to implement. Each state is a complete snapshot of `Prudy`, making it simple to revert to previous states by just moving the `currentStatePointer`.
+  * Cons: Man lead to memory issues, especially if the `Prudy` state is large and changes frequently, as each modification requires storing a full snapshot.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete-client`, just save the client being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
+* **Alternative 2:** Command-specific undo/redo (Individual command knows how to undo/redo by itself.)
+  * Pros: Uses less memory, since each command only saves the minimum required data to revert the operation. For example, `delete-client` might only store the specific client that was deleted rather than a full snapshot of the state.
+  * Cons: Adds complexity, as each command must have its own undo/redo implementation, making it necessary to ensure each command’s undo/redo logic is correctly implemented and tested.
+
+**Aspect: User Experience and Usability:**
+
+* **Consideration 1:** Implement a history panel showing recent changes or a list of actions that can be undone or redone.
+
+* Pros: Provides users with greater transparency and control, allowing them to see the list of actions and potentially select a specific state to revert to.
+* Cons: Requires additional UI and data management, adding complexity to the design and potential memory overhead to maintain descriptions for each action.
+
+* **Consideration 2:** Display a feedback message in the main UI area after performing undo/redo, indicating the action that was reverted or reapplied (e.g., "Undo: deleted client 5").
+
+* Pros: Provides immediate feedback without requiring extra navigation, allowing users to stay focused on the main UI area.
+* Cons: Only shows the most recent undo/redo action, so it may be limited in providing historical context.
 
 ### \[Proposed\] Data archiving
 
