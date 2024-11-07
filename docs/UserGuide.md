@@ -1,17 +1,7 @@
 ---
 layout: page
+title: User Guide
 pageNav: 3
----
-
-<h1 id="talentSG-user-guide">
-    <img src="images/LOGO.jpg" alt="Logo" width="40" height="40" style="vertical-align:middle;">
-    TalentSG User Guide
-</h1>
-
-
-<!-- * Table of Contents -->
-<page-nav-print />
-
 ---
 
 ### Introduction
