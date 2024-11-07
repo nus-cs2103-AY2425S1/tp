@@ -555,7 +555,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. GOATS shows an empty list.
 
       Use case ends.
-<<<<<<< HEAD
 
 **Use case: UC10 - Archive a contact**
 
@@ -663,9 +662,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 *{More to be added}*
-=======
-*
->>>>>>> 3f7909e24aaa94c9761482b77d1793e8403734a3
+
 
 ### Non-Functional Requirements
 
