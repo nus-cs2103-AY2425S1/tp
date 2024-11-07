@@ -82,8 +82,10 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_START_AMY = "01-01-1999-01-00";
     public static final String VALID_APPOINTMENT_END_AMY = "21-12-2000-23-59";
     public static final String APPOINTMENT_DESCRIPTION_AMY = "Surgery";
-    public static final String INVALID_APPOINTMENT_START_AMY = "01-01-2001-01-00";
-    public static final String INVALID_APPOINTMENT_END_AMY = "01-01-2000-01-00";
+    public static final String INVALID_APPOINTMENT_START_AMY = "23-10-2024-17-00";
+    public static final String INVALID_APPOINTMENT_END_AMY = "24-10-2024-15-00";
+    public static final String INVALID_APPOINTMENT_START_BOB = "22-10-2024-17-00";
+    public static final String INVALID_APPOINTMENT_END_BOB = "25-10-2024-17-00";
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
