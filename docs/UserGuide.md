@@ -346,7 +346,7 @@ Prefixes can be chained to display more specific results. For instance, using `f
 
 Example usages
 
-* `find t/ADHD t/scored_A a/Jurong West Ave 5`
+* `find t/ADHD t/sessionA a/Jurong West Ave 5`
 
 * `find p/9123 attend/07/01/2024:07/02/2024 pay/false`
 
