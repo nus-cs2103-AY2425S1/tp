@@ -7,7 +7,6 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
 
 * Table of Contents
 {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -41,6 +40,7 @@ AB3 My Guest is a **desktop app for managing wedding guests, optimized for use v
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+7. Do note that users should open only one instance of AB3 My Guest at a time.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ Examples:
 
 Toggles the RSVP status for a guest between `Coming`, `Not Coming` and `Pending`.
 
-Format: `setrsvp INDEX STATUS_INDEX`
+Format: `setrsvp INDEX s/STATUS_INDEX`
 * Toggles the RSVP status of the guest at the specified `INDEX`. The index refers to the index number shown in the displayed guest list.
 * The index **must be within the index boundaries of the guest list**. ie. If there are 10 guests, INDEX accepts values from 1 to 10.
 * `STATUS_INDEX` accepts 3 possible values:
@@ -268,9 +268,9 @@ You may only set one guest's RSVP status in each command. i.e. Setting multiple 
 </div>
 
 Example:
-* `setrsvp 1 1`
-* `setrsvp 2 3`
-* `setrsvp 1 2`
+* `setrsvp 1 s/1`
+* `setrsvp 2 s/3`
+* `setrsvp 1 s/2`
 
 ![setRsvpCommand](images/setRsvpCommand.png)
 

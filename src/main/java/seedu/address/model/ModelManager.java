@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RsvpStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +30,8 @@ public class ModelManager implements Model {
     private FilteredList<Person> filteredPersons;
     private ObservableList<Tag> tagList;
     private Command previousCommand;
+    private ObservableList<Tag> tagFilters = FXCollections.observableArrayList();
+    private ObservableList<RsvpStatus> statusFilters = FXCollections.observableArrayList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -170,9 +173,10 @@ public class ModelManager implements Model {
         Set<Tag> tagsSuccessfullyAdded = new HashSet<>();
         for (Tag tag : tags) {
             boolean isSuccessful = addTag(tag);
-            if (isSuccessful) {
-                tagsSuccessfullyAdded.add(tag);
+            if (!isSuccessful) {
+                continue;
             }
+            tagsSuccessfullyAdded.add(tag);
         }
         return tagsSuccessfullyAdded;
     }
@@ -186,9 +190,10 @@ public class ModelManager implements Model {
         Set<Tag> tagsSuccessfullyDeleted = new HashSet<>();
         for (Tag tag : tags) {
             boolean isSuccessful = deleteTag(tag);
-            if (isSuccessful) {
-                tagsSuccessfullyDeleted.add(tag);
+            if (!isSuccessful) {
+                continue;
             }
+            tagsSuccessfullyDeleted.add(tag);
         }
         return tagsSuccessfullyDeleted;
     }
@@ -205,11 +210,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String getTagList() {
-        return addressBook.tagsToString();
-    }
-
-    @Override
     public Set<Tag> getTagsInUse() {
         Set<Tag> tagsInUse = new HashSet<>();
         List<Person> persons = getFullPersonList();
@@ -223,19 +223,20 @@ public class ModelManager implements Model {
     @Override
     public Set<Person> removeTagFromPersons(Tag tag) {
         List<Person> persons = getFullPersonList();
-        Set<Person> removedPersons = new HashSet<>();
+        Set<Person> updatedPersons = new HashSet<>();
         for (Person person : persons) {
-            if (person.hasTag(tag)) {
-                Set<Tag> newTags = new HashSet<>(person.getTags());
-                newTags.remove(tag);
-
-                Person updatedPerson = new Person(person.getName(), person.getPhone(),
-                        person.getEmail(), person.getRsvpStatus(), newTags);
-                setPerson(person, updatedPerson);
-                removedPersons.add(updatedPerson);
+            if (!person.hasTag(tag)) {
+                continue;
             }
+            Set<Tag> newTags = new HashSet<>(person.getTags());
+            newTags.remove(tag);
+
+            Person updatedPerson = new Person(person.getName(), person.getPhone(),
+                    person.getEmail(), person.getRsvpStatus(), newTags);
+            setPerson(person, updatedPerson);
+            updatedPersons.add(updatedPerson);
         }
-        return removedPersons;
+        return updatedPersons;
     }
 
     @Override
@@ -244,9 +245,10 @@ public class ModelManager implements Model {
         for (Person person : persons) {
             Set<Tag> tags = new HashSet<>(person.getTags());
             for (Tag tag : tags) {
-                if (tag.equals(existingTag)) {
-                    tag.setTagName(newTagName);
+                if (!tag.equals(existingTag)) {
+                    continue;
                 }
+                tag.setTagName(newTagName);
             }
             Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                     person.getRsvpStatus(), tags);
@@ -266,8 +268,8 @@ public class ModelManager implements Model {
 
     @Override
     public void updateTagList() {
-        ObservableList<Tag> tl = this.addressBook.getTagList();
-        tagList.setAll(FXCollections.observableArrayList(tl));
+        ObservableList<Tag> tagList = this.addressBook.getTagList();
+        tagList.setAll(FXCollections.observableArrayList(tagList));
     }
 
     @Override
@@ -285,6 +287,64 @@ public class ModelManager implements Model {
         @SuppressWarnings("unchecked")
         Predicate<Person> result = (Predicate<Person>) filteredPersons.getPredicate();
         return result;
+    }
+
+    @Override
+    public ObservableList<Tag> getTagFiltersList() {
+        return tagFilters;
+    }
+
+    @Override
+    public ObservableList<RsvpStatus> getStatusFiltersList() {
+        return statusFilters;
+    }
+
+    @Override
+    public void addTagFilters(Set<Tag> tagFilters) {
+        for (Tag tag : tagFilters) {
+            if (!this.tagFilters.contains(tag)) {
+                this.tagFilters.add(tag);
+            }
+        }
+    }
+
+    @Override
+    public void addStatusFilters(Set<RsvpStatus> statusFilters) {
+        for (RsvpStatus status : statusFilters) {
+            if (!this.statusFilters.contains(status)) {
+                this.statusFilters.add(status);
+            }
+        }
+    }
+
+    @Override
+    public boolean checkTagFilterAlreadyExists(Tag tagToCheck) {
+        if (this.tagFilters.contains(tagToCheck)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkStatusFilterAlreadyExists(RsvpStatus statusToCheck) {
+        if (this.statusFilters.contains(statusToCheck)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void removeFilters(Set<Tag> tagFilters, Set<RsvpStatus> statusFilters) {
+        this.tagFilters.removeAll(tagFilters);
+        this.statusFilters.removeAll(statusFilters);
+
+    }
+
+    @Override
+    public void clearFilterSet() {
+        this.tagFilters.clear();
+        this.statusFilters.clear();
     }
 
     @Override

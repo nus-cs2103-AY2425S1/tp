@@ -94,6 +94,7 @@ public class FilterCommandTest {
                 return person.getTags().contains(oweMoney);
             }
         });
+        tagSet.remove(FRIENDS);
         tagSet.add(oweMoney);
         FilterCommand secondFilterCommand = new FilterCommand(tagSet, new HashSet<>());
         assertCommandSuccess(secondFilterCommand, model, expectedMessage, expectedModel);
@@ -106,6 +107,8 @@ public class FilterCommandTest {
                 return person.getTags().contains(COLLEAGUES);
             }
         });
+
+        tagSet.remove(oweMoney);
         tagSet.add(COLLEAGUES);
         FilterCommand newFilterCommand = new FilterCommand(tagSet, new HashSet<>());
         assertCommandSuccess(newFilterCommand, model, expectedMessage, expectedModel);
@@ -136,7 +139,7 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleArgsAndChaining_success() {
 
-        // Setting up RSVP Status and owesMoney tag
+        // Setting up RSVP Status, owesMoney and vegan tag
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
@@ -147,7 +150,7 @@ public class FilterCommandTest {
         model.setPerson(personToUpdate, updatedPerson);
         Tag owesMoney = new Tag("owesMoney");
 
-        // Filtering by FRIENDS and owesMoney
+        // Filtering by FRIENDS, owesMoney
         expectedModel.updateFilteredPersonList(new Predicate<Person>() {
             @Override
             public boolean test(Person person) {
@@ -172,7 +175,7 @@ public class FilterCommandTest {
         });
         Set<RsvpStatus> statuses = new HashSet<>();
         statuses.add(RsvpStatus.PENDING);
-        FilterCommand nextFilterCommand = new FilterCommand(tagSet, statuses);
+        FilterCommand nextFilterCommand = new FilterCommand(new HashSet<>(), statuses);
         assertCommandSuccess(nextFilterCommand, model, expectedMessage, expectedModel);
     }
 

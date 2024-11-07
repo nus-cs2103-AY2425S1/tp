@@ -80,21 +80,7 @@ public class PersonCard extends UiPart<Region> {
 
         // set colour of rsvp status
         RsvpStatus rsvpStatus = person.getRsvpStatus();
-        switch (rsvpStatus) {
-
-        case COMING:
-            isRsvp.setStyle(COMING_STYLE);
-            break;
-
-        case NOT_COMING:
-            isRsvp.setStyle(NOT_COMING_STYLE);
-            break;
-
-        default:
-            isRsvp.setStyle(PENDING_STYLE);
-            break;
-
-        }
+        isRsvp.setStyle(StatusColourManager.getStatusStyle(rsvpStatus));
 
     }
 }
