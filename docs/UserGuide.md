@@ -2,44 +2,42 @@
 layout: page
 title: User Guide
 ---
-<img src="images/meddict_user_guide_banner.png" alt="MedDict Logo" style="width: 75%; margin: 0; display: block; margin: 0 auto;" />
-### About us
 
+<img src="images/meddict_user_guide_banner.png" alt="MedDict Logo" style="width: 75%; margin: 0; display: block; margin: 0 auto;" /><br>
 Welcome to the **MedDict User Guide!** 🎉
 
-We're excited to have you on board with us 🥳🥳
+We're excited to have you on board with us 🥳🥳🥳
 
-MedDict is a _desktop application designed for medical staff_ who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application is designed with large databases in mind, supporting a streamlined process for tracking medical history, patient appointments, and treatment progress.
+**MedDict** is a desktop application designed for medical staff who manage a large number of patients. It simplifies data entry and retrieval, allowing quick access to contact details, patient conditions, and the progress of recurring or long-term patients. The application is designed with large databases in mind, supporting a streamlined process for tracking medical history, patient appointments, and treatment progress.
 
 Unlike most other applications who predominantly function on a **Graphical User Interface (GUI)** where most of the user's inputs and outputs are achieved via the use of a mouse or touchscreen, MedDict is built upon the philosophy that a **Command Line Interface (CLI)** -- where all features and utility can be achieved via typed-in commands -- could be far more efficient.
 
 <img src="images/gui_vs_cli.png" alt="GUI vs CLI" style="width: 100%; display: block; margin: 0 auto;" />
 
-With MedDict, we believe we can revolutionise your work and management experience! 💪
+With **MedDict**, we believe we can revolutionise your work and management experience! 💪 With all that said, let's get you started on your journey towards a new peak level of efficiency! 💯
 
-With all that said, let's get you started on your journey towards a new peak level of efficiency! 💯
+If you would like to skip to any specific part of the User Guide, you can refer to the table below! 😊 <br><br><br>
 
-If you would like to skip to any specific part of the User Guide, you can refer to the table below! 😊 <br>
-
-<img src="images/table_of_contents_banner.png" alt="MedDict Logo" style="width: 75%; margin: 0; display: block; margin: 0 auto;" />
+<img src="images/table_of_contents_banner.png" alt="MedDict Logo" style="width: 75%; margin: 0; display: block; margin: 0 auto;" /><br>
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## 🛠️ Quick Start 🛠️
 
 This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-beginner-friendly-detailed) or scroll past this section.
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your device.
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T08-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your MedDict.
+3. Copy or move the `.jar` file to the folder you want to use as the home folder for your MedDict application. We recommend creating a separate folder for the application as MedDict will create files in the directory it is saved in for storage purposes.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br><br>
-   A GUI similar to the below should appear in a few seconds. Note that the interface may vary slightly depending on the OS and the presence of data.<br>
-   ![StartUpPage](images/StartUpPage.png)<br>![img_1.png](img_1.png)
+4. Open a command terminal, `cd` into the folder you put the `.jar` file in, and use the `java -jar addressbook.jar` command to run the application.<br><br>
+   After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the (Operating System) OS and the presence of data.<br>
+   <img src="images/StartUpPage.png" alt="MacOS Start-Up" style="width: 36%;" />
+   <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -54,11 +52,17 @@ This section is for users who are experienced in installing and using Java execu
 
    * `exit` : Exits the app.
 
-6. That's all for the setup@ Refer to the [Features](#features) below for details of each command.
+6. That's all for the setup! Refer to the [Features below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start (beginner-friendly, detailed)
+
+If you are less experienced in installing and using Java executables, no worries! The set-up is relatively simple, and we will be guiding you with each step.
+
+If anytime throughout the set-up, you feel lost or feel like you may require more assistance, try searching through our [FAQ Section](#faq). If you still require more assistance, feel free to reach out on our [GitHub Discussions Page!](https://github.com/AY2425S1-CS2103T-T08-3/tp/discussions) 
+
+⬇️ With all that said, let's get started! ⬇️
 
 1. **Make sure Java 17 or higher is installed on your computer.**
 
@@ -80,54 +84,52 @@ This section is for users who are experienced in installing and using Java execu
            ```bash
            java version "17.0.x" 2024-xx-xx LTS
            ```
+           After seeing this, you can skip the step below.<br>
 
-        4. If the version is below 17, continue with the next steps to install Java.
-
-    * To Install Java 17 (if Needed):
-        1. Visit [Oracle’s Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
-        2. Download and install the correct Java Development Kit (JDK) for your operating system by following the on-screen instructions.
-        3. Once installed, run the `java -version` command again to confirm that Java is installed correctly.
+        4. (Only if you do not have Java 17) If the version is below 17, continue with the following steps to install Java 17.
+           1. Visit [Oracle’s Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
+           2. Download and install the correct Java Development Kit (JDK) for your operating system by following the on-screen instructions.
+           3. Once installed, run the `java -version` command again to confirm that Java is installed correctly.
 <br><br>
-2. **Download the latest `.jar` file as follows:**
-
-    1. Go to the [GitHub releases page](https://github.com/) for the latest version.
-    2. Download the `.jar` file (for example, `MedDict.jar`) from the latest release.
-    3. Save the `.jar` file in the folder where you want to keep your MedDict project.
+2. After verifying that you have the correct version of Java installed, **download the latest `.jar` file as follows:**
+    1. Go to [our GitHub releases page](https://github.com/).
+    2. Find the latest version of MedDict on our release page. Typically, it should be the release at the top of the page, and should have the largest number (e.g. v1.0.2 is a more updated version than v0.2.2).
+    3. Download (by clicking) the `.jar` file from the website by scrolling to the "Assets" portion of the latest release notes (bottom section of the release notes). An example of a `.jar` file is `meddict-v0.1.1-alpha.jar` under the v0.1.1-alpha release notes. 
 <br><br>
-3. **Copy the `.jar` file to the folder you want to use as the home folder for MedDict.**
+3. **Copy the `.jar` file to the folder you want to use as the home folder for MedDict.**<br>
+   We recommend creating a separate folder for the application as MedDict will create files in the directory it is saved in for storage purposes.<br><br>
+   Depending on your Operating System (OS):
 
     * **Windows:**
-        1. Open the Downloads folder and locate the `.jar` file.
+        1. Open File Explorer and navigate to where the `.jar` file is saved in, typically, this is the Downloads folder.
         2. Right-click on the `.jar` file and select Copy.
-        3. Go to the folder where you want to store MedDict, right-click, and select Paste.
+        3. Go to the destination folder where you want to store the application, right-click, and select Paste.
 
     * **Mac:**
-        1. Open Finder and navigate to your Downloads folder.
+        1. Open Finder and navigate to where the `.jar` file is saved in, typically, this is the Downloads folder.
         2. Right-click (or use `Control + Click`) on the `.jar` file and choose Copy.
-        3. Go to the folder where you want to keep the file, right-click, and select Paste.
+        3. Go to the destination folder where you want to store the application, right-click, and select Paste.
 
     * **Linux:**
-        1. Open your file manager and go to the Downloads directory.
+        1. Open File Manager and navigate to where the `.jar` file is saved in, typically, this is the Downloads directory.
         2. Right-click on the `.jar` file and choose Copy.
-        3. Go to the destination folder, right-click, and select Paste.
+        3. Go to the destination folder where you want to store the application, right-click, and select Paste.
 <br><br>
-4. **Open a command terminal, navigate to the folder where the `.jar` file is saved using the `cd` command, and then run the application with the following command.**
+4. **Open a command terminal, navigate to the folder where the `.jar` file is saved using the `cd` command, and then run the application with the following command.**<br>
+   Depending on your Operating System (OS):
     * **Windows:**
-        1. Open the folder where the `.jar` file is saved.
+        1. Open the folder where the `.jar` file is saved. (If you have just finished step 3, the folder should still be open)
         2. To get the full path of this folder:
             - Right-click on the folder and select Properties.
             - In the General tab, locate the Location field and copy the path. (Alternatively, open the folder, click on the address bar, and copy the full path, e.g., `C:\Users\YourName\Documents\MedDict`).
         3. Open the Command Prompt:
             - Press `Windows + R`, type `cmd`, and press Enter.
-            - Use the `cd` command and paste the copied path to navigate to the folder where the `.jar` file is saved. For example:
+            - Use the `cd` command and paste (`Ctrl + V`) the copied path to navigate to the folder where the `.jar` file is saved. For example:<br>
                ```bash
                cd C:\Users\YourName\Documents\MedDict
                ```
-        4. Run the application according to the name of the jar file downloaded:
-           ```bash
-           java -jar MedDict.jar
-           ```
-           Note: For example, if the name of the jar file is `meddict-v1.6.jar`, type the following instead:
+        4. Run the application according to the name of the jar file downloaded:<br>
+           For example, if the name of the jar file is `meddict-v1.6.jar`, type the following:
            ```bash
            java -jar meddict-v1.6.jar
            ```
@@ -141,18 +143,18 @@ This section is for users who are experienced in installing and using Java execu
            ```bash
            cd /Users/YourName/Documents/MedDict
            ```
-        4. Run the application according to the name of the jar file downloaded:
-           ```bash
-           java -jar MedDict.jar
-           ```
-           Note: For example, if the name of the jar file is `meddict-v1.6.jar`, type the following instead:
+        4. Run the application according to the name of the jar file downloaded:<br>
+           For example, if the name of the jar file is `meddict-v1.6.jar`, type the following:
            ```bash
            java -jar meddict-v1.6.jar
            ```
-    After a few seconds, a GUI similar to the one below should appear:
-    ![StartUpPage](images/StartUpPage.png)
+    <br><br>
+   After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the (Operating System) OS and the presence of data.<br>
+   <img src="images/StartUpPage.png" alt="MacOS Start-Up" style="width: 36%;" />
+   <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br><br>
 <br><br>
-5. **Type the command in the command box and press Enter to execute it. e.g. typing `help` and pressing Enter will open the help window.** <br>
+5. If you've reached this step, **🎉 CONGRATULATIONS!!! 🎉 MedDict has been installed successfully on your device!**<br>
+   What's next is to try out some of MedDict's commands. Type the command in the command box by clicking on the empty bar at the top, typing a command and pressing Enter on your keyboard to execute it. (e.g. typing `help` and pressing Enter will open the help window.) <br>
    Some example commands you can try:
 
     * `list` : Lists all persons.
@@ -165,7 +167,7 @@ This section is for users who are experienced in installing and using Java execu
 
     * `exit` : Exits the app.
 <br><br>
-6. Refer to the [Features](#features) below for details of each command.
+6. That's all for the setup! Refer to the [Features below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
