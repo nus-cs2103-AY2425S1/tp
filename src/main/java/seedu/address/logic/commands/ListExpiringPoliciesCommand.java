@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -35,6 +37,8 @@ public class ListExpiringPoliciesCommand extends Command {
     private static final String MESSAGE_POLICY_LISTED_DETAILS = "Insuree name: %1$s   |   Insuree phone: %2$s\n"
             + "Policy Type: %3$s   |   Premium Amount: %4$s\nCoverage Amount: %5$s   |   Expiry Date: %6$s\n\n";
 
+    private static final Logger LOGGER = Logger.getLogger(ListExpiringPoliciesCommand.class.getName());
+
     private final int daysFromExpiry;
 
     /**
@@ -43,56 +47,120 @@ public class ListExpiringPoliciesCommand extends Command {
      * The Default behaviour is handles within {@code ListExpiringPoliciesCommandParser}.
      */
     public ListExpiringPoliciesCommand(int daysFromExpiry) {
+        assert daysFromExpiry > 0 : "daysFromExpiry must be a positive integer";
         this.daysFromExpiry = daysFromExpiry;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        requireNonNull(model, "Model must not be null");
+        LOGGER.log(Level.INFO, "Executing ListExpiringPoliciesCommand with daysFromExpiry={0}", daysFromExpiry);
 
         try {
-            LocalDate currentDate = LocalDate.now();
-
-            PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, daysFromExpiry);
-
-            List<Client> clients = model.getFilteredClientList();
-
-            StringBuilder resultMessage = new StringBuilder(String.format(MESSAGE_SUCCESS, daysFromExpiry));
-
-            boolean hasExpiringPolicies = false;
-
-            for (Client client : clients) {
-                Set<Policy> policies = client.getPolicies();
-
-                // Filter the policies based on expiry date predicate
-                for (Policy policy : policies) {
-                    if (predicate.test(policy)) {
-                        hasExpiringPolicies = true;
-
-                        resultMessage.append(String.format(
-                                MESSAGE_POLICY_LISTED_DETAILS,
-                                client.getName().toString(),
-                                client.getPhone().toString(),
-                                policy.getType().toString(),
-                                policy.getPremiumAmount().toString(),
-                                policy.getCoverageAmount().toString(),
-                                policy.getExpiryDate()
-                        ));
-                    }
-                }
-            }
-
-            // no expiring policies were found
-            if (!hasExpiringPolicies) {
-                return new CommandResult(String.format(MESSAGE_NO_EXPIRING_POLICY, daysFromExpiry));
-            }
-
-            // expiring policies found
-            return new CommandResult(resultMessage.toString());
-
+            String resultMessage = getExpiringPoliciesMessage(model);
+            return new CommandResult(resultMessage);
         } catch (Exception e) {
             return new CommandResult(MESSAGE_FAILURE);
         }
+    }
+
+    /**
+     * Retrieves a message listing all policies nearing expiry within the specified days or a no-policy-found message.
+     *
+     * @param model The model to retrieve the client and policy data from.
+     * @return A message listing expiring policies or indicating no expiring policies were found.
+     */
+    private String getExpiringPoliciesMessage(Model model) {
+        LocalDate currentDate = LocalDate.now();
+        PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate, daysFromExpiry);
+        List<Client> clients = requireNonNull(model.getFilteredClientList(), "Client list must not be null");
+
+        StringBuilder resultMessage = new StringBuilder(String.format(MESSAGE_SUCCESS, daysFromExpiry));
+        boolean hasExpiringPolicies = appendExpiringPolicies(resultMessage, clients, predicate);
+
+        if (!hasExpiringPolicies) {
+            LOGGER.log(Level.INFO, "No expiring policies found within {0} days", daysFromExpiry);
+            return String.format(MESSAGE_NO_EXPIRING_POLICY, daysFromExpiry);
+        }
+
+        LOGGER.log(Level.INFO, "Expiring policies found within {0} days", daysFromExpiry);
+        return resultMessage.toString();
+    }
+
+    /**
+     * Appends details of expiring policies to the result message if they match the expiry predicate.
+     *
+     * @param resultMessage The StringBuilder to append the policy details.
+     * @param clients       The list of clients to check for expiring policies.
+     * @param predicate     The predicate to filter policies based on expiry date.
+     * @return True if at least one expiring policy is found, otherwise false.
+     */
+    private boolean appendExpiringPolicies(StringBuilder resultMessage, List<Client> clients,
+                                           PolicyExpiryDatePredicate predicate) {
+        boolean hasExpiringPolicies = false;
+
+        for (Client client : clients) {
+            if (appendClientExpiringPolicies(resultMessage, client, predicate)) {
+                hasExpiringPolicies = true;
+            }
+        }
+        return hasExpiringPolicies;
+    }
+
+    /**
+     * Appends expiring policies of a specific client to the result message.
+     *
+     * @param resultMessage The StringBuilder to append the policy details.
+     * @param client        The client whose policies are to be checked.
+     * @param predicate     The predicate to filter policies based on expiry date.
+     * @return True if at least one expiring policy is found for the client, otherwise false.
+     */
+    private boolean appendClientExpiringPolicies(StringBuilder resultMessage, Client client,
+                                                 PolicyExpiryDatePredicate predicate) {
+        requireNonNull(client, "Client must not be null");
+        Set<Policy> policies = requireNonNull(client.getPolicies(),
+                "Policies set must not be null for client: " + client.getName());
+
+        boolean hasExpiringPolicy = false;
+
+        for (Policy policy : policies) {
+            if (isExpiringPolicy(policy, predicate)) {
+                appendPolicyDetails(resultMessage, client, policy);
+                hasExpiringPolicy = true;
+            }
+        }
+        return hasExpiringPolicy;
+    }
+
+    /**
+     * Checks if a policy matches the expiry predicate.
+     *
+     * @param policy    The policy to be checked.
+     * @param predicate The predicate to filter policies based on expiry date.
+     * @return True if the policy is expiring, otherwise false.
+     */
+    private boolean isExpiringPolicy(Policy policy, PolicyExpiryDatePredicate predicate) {
+        requireNonNull(policy, "Policy must not be null");
+        return predicate.test(policy);
+    }
+
+    /**
+     * Appends the details of a single policy to the result message.
+     *
+     * @param resultMessage The StringBuilder to append the details to.
+     * @param client        The client who holds the policy.
+     * @param policy        The policy whose details are to be appended.
+     */
+    private void appendPolicyDetails(StringBuilder resultMessage, Client client, Policy policy) {
+        resultMessage.append(String.format(
+                MESSAGE_POLICY_LISTED_DETAILS,
+                client.getName().toString(),
+                client.getPhone().toString(),
+                policy.getType().toString(),
+                policy.getPremiumAmount().toString(),
+                policy.getCoverageAmount().toString(),
+                policy.getExpiryDate()
+        ));
     }
 
     public int getDaysFromExpiry() {
@@ -104,12 +172,9 @@ public class ListExpiringPoliciesCommand extends Command {
         if (other == this) {
             return true;
         }
-
-        // instanceof handles nulls
         if (!(other instanceof ListExpiringPoliciesCommand)) {
             return false;
         }
-
         ListExpiringPoliciesCommand otherCommand = (ListExpiringPoliciesCommand) other;
         return daysFromExpiry == otherCommand.daysFromExpiry;
     }
@@ -118,6 +183,4 @@ public class ListExpiringPoliciesCommand extends Command {
     public String toString() {
         return COMMAND_WORD + " " + daysFromExpiry;
     }
-
 }
-

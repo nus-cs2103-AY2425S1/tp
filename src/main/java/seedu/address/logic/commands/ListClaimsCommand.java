@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -38,6 +40,8 @@ public class ListClaimsCommand extends Command {
             + "clients you have.\nPlease check the index of the client you are looking for using the 'list' command!";
     public static final String MESSAGE_NO_POLICY_OF_TYPE = "No policy of type '%1$s' found for client: %2$s";
 
+    private static final Logger LOGGER = Logger.getLogger(ListClaimsCommand.class.getName());
+
     private final Index clientIndex;
     private final PolicyType policyType;
 
@@ -49,6 +53,8 @@ public class ListClaimsCommand extends Command {
      * @param policyType The type of the policy whose claims are to be listed.
      */
     public ListClaimsCommand(Index clientIndex, PolicyType policyType) {
+        requireNonNull(clientIndex);
+        requireNonNull(policyType);
         this.clientIndex = clientIndex;
         this.policyType = policyType;
     }
@@ -56,6 +62,8 @@ public class ListClaimsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        LOGGER.log(Level.INFO, "Executing ListClaimsCommand with clientIndex={0} and policyType={1}",
+                new Object[]{clientIndex, policyType});
 
         List<Client> lastShownList = model.getFilteredClientList();
 
@@ -65,6 +73,8 @@ public class ListClaimsCommand extends Command {
         List<Claim> claims = policy.getClaimList();
 
         if (claims.isEmpty()) {
+            LOGGER.log(Level.INFO, "No claims found for policy type {0} of client {1}",
+                    new Object[]{policyType, client.getName()});
             return new CommandResult(String.format(MESSAGE_NO_CLAIMS, policyType, client.getName()));
         }
 
@@ -83,6 +93,8 @@ public class ListClaimsCommand extends Command {
      * @throws CommandException If the index is out of bounds.
      */
     private Client getClientByIndex(List<Client> lastShownList, Index index) throws CommandException {
+        assert lastShownList != null : "Client list should not be null";
+        assert index != null : "Client index should not be null";
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_CLIENT_INDEX);
         }
@@ -101,8 +113,11 @@ public class ListClaimsCommand extends Command {
         return client.getPolicies().stream()
                 .filter(policy -> policy.getType().equals(policyType))
                 .findFirst()
-                .orElseThrow(() -> new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType,
-                        client.getName())));
+                .orElseThrow(() -> {
+                    LOGGER.log(Level.INFO, "No policy of type {0} found for client {1}",
+                            new Object[]{policyType, client.getName()});
+                    return new CommandException(String.format(MESSAGE_NO_POLICY_OF_TYPE, policyType, client.getName()));
+                });
     }
 
     /**
@@ -115,6 +130,7 @@ public class ListClaimsCommand extends Command {
      *         separated by a newline.
      */
     private String formatClaims(List<Claim> claims) {
+        assert claims != null : "Claims list should not be null";
         return IntStream.range(0, claims.size())
                 .mapToObj(index -> String.format("%d. Claim Status: %s | Claim Description: %s",
                         index + 1,

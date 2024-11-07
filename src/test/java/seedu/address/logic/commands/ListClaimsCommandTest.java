@@ -24,44 +24,34 @@ import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
-/**
- * Contains test cases for the ListClaimsCommand class.
- */
 public class ListClaimsCommandTest {
 
     private Model model;
 
     @BeforeEach
     public void setUp() {
-        // reset model before each test to ensure isolation between tests
         model = new ModelManager(getTypicalPrudy(), new UserPrefs());
     }
 
-    private ReadOnlyPrudy getTypicalPrudyWithClaims() {
-        // create a new model to prevent side effects across tests
-        Model tempModel = new ModelManager(getTypicalPrudy(), new UserPrefs());
-        Client client = tempModel.getFilteredClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
-        PolicySet policies = new PolicySet();
-
-        Policy healthPolicy = new HealthPolicy();
-        policies.add(healthPolicy.addClaim(new Claim(ClaimStatus.PENDING, "Hospitalization")));
-
-        Client updatedClient = new Client(client.getName(), client.getPhone(), client.getEmail(),
-                client.getAddress(), client.getTags(), policies);
-        tempModel.setClient(client, updatedClient);
-
-        return tempModel.getPrudy();
+    private ReadOnlyPrudy getModelWithClaims() {
+        return setUpPrudyWithClaims(INDEX_SECOND_CLIENT, PolicyType.HEALTH, new Claim(ClaimStatus.PENDING,
+                "Hospitalization"));
     }
 
-    private ReadOnlyPrudy getTypicalPrudyWithNoClaims() {
-        // create a new model to prevent side effects across tests
+    private ReadOnlyPrudy getModelWithNoClaims() {
+        return setUpPrudyWithClaims(INDEX_FIRST_CLIENT, PolicyType.HEALTH, null);
+    }
+
+    private ReadOnlyPrudy setUpPrudyWithClaims(Index clientIndex, PolicyType policyType, Claim claim) {
         Model tempModel = new ModelManager(getTypicalPrudy(), new UserPrefs());
-        Client client = tempModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client client = tempModel.getFilteredClientList().get(clientIndex.getZeroBased());
         PolicySet policies = new PolicySet();
 
-        // add health policy but no claims
-        Policy healthPolicy = new HealthPolicy();
-        policies.add(healthPolicy);
+        Policy policy = new HealthPolicy();
+        if (claim != null) {
+            policy = policy.addClaim(claim);
+        }
+        policies.add(policy);
 
         Client updatedClient = new Client(client.getName(), client.getPhone(), client.getEmail(),
                 client.getAddress(), client.getTags(), policies);
@@ -72,29 +62,22 @@ public class ListClaimsCommandTest {
 
     @Test
     public void execute_validIndexAndPolicyTypeWithClaims_success() {
-
-        Model modelWithClaims = new ModelManager(getTypicalPrudyWithClaims(), new UserPrefs());
-
+        Model modelWithClaims = new ModelManager(getModelWithClaims(), new UserPrefs());
         ListClaimsCommand command = new ListClaimsCommand(INDEX_SECOND_CLIENT, PolicyType.HEALTH);
         Client client = modelWithClaims.getFilteredClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
 
-        String expectedMessage = String.format(ListClaimsCommand.MESSAGE_LIST_CLAIMS_SUCCESS,
-                PolicyType.HEALTH, client.getName(), "1. Claim Status: Pending | Claim Description: Hospitalization");
-
+        String expectedMessage = getExpectedMessageWithClaims(client, PolicyType.HEALTH,
+                "1. Claim Status: Pending | Claim Description: Hospitalization");
         assertCommandSuccess(command, modelWithClaims, expectedMessage, modelWithClaims);
     }
 
     @Test
     public void execute_validIndexAndPolicyTypeNoClaims_success() {
-        // model with a client who has no claims for the specified policy type
-        Model modelWithNoClaims = new ModelManager(getTypicalPrudyWithNoClaims(), new UserPrefs());
-
+        Model modelWithNoClaims = new ModelManager(getModelWithNoClaims(), new UserPrefs());
         ListClaimsCommand command = new ListClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.HEALTH);
         Client client = modelWithNoClaims.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
-        String expectedMessage = String.format(ListClaimsCommand.MESSAGE_NO_CLAIMS, PolicyType.HEALTH,
-                client.getName());
-
+        String expectedMessage = getExpectedMessageNoClaims(client, PolicyType.HEALTH);
         assertCommandSuccess(command, modelWithNoClaims, expectedMessage, modelWithNoClaims);
     }
 
@@ -102,17 +85,15 @@ public class ListClaimsCommandTest {
     public void execute_invalidIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         ListClaimsCommand command = new ListClaimsCommand(outOfBoundIndex, PolicyType.HEALTH);
-
         assertCommandFailure(command, model, ListClaimsCommand.MESSAGE_INVALID_CLIENT_INDEX);
     }
 
     @Test
     public void execute_policyTypeNotFound_throwsCommandException() {
-        // no policy of the specified type
         ListClaimsCommand command = new ListClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.HEALTH);
-
-        assertCommandFailure(command, model, String.format(ListClaimsCommand.MESSAGE_NO_POLICY_OF_TYPE,
-                PolicyType.HEALTH, model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased()).getName()));
+        String expectedMessage = String.format(ListClaimsCommand.MESSAGE_NO_POLICY_OF_TYPE, PolicyType.HEALTH,
+                model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased()).getName());
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     @Test
@@ -122,23 +103,26 @@ public class ListClaimsCommandTest {
         ListClaimsCommand command3 = new ListClaimsCommand(INDEX_SECOND_CLIENT, PolicyType.HEALTH);
         ListClaimsCommand command4 = new ListClaimsCommand(INDEX_FIRST_CLIENT, PolicyType.LIFE);
 
-        // same object -> returns true
-        assertTrue(command1.equals(command1));
-
-        // same values -> returns true
-        assertTrue(command1.equals(command2));
-
-        // different index -> returns false
-        assertFalse(command1.equals(command3));
-
-        // different policy type -> returns false
-        assertFalse(command1.equals(command4));
-
-        // null -> returns false
-        assertFalse(command1.equals(null));
-
-        // different type -> returns false
-        assertFalse(command1.equals(new ClearCommand()));
+        assertTrue(command1.equals(command1)); // same object -> returns true
+        assertTrue(command1.equals(command2)); // same values -> returns true
+        assertFalse(command1.equals(command3)); // different index -> returns false
+        assertFalse(command1.equals(command4)); // different policy type -> returns false
+        assertFalse(command1.equals(null)); // null -> returns false
+        assertFalse(command1.equals(new ClearCommand())); // different type -> returns false
     }
 
+    /**
+     * Generates the expected success message for a client with claims.
+     */
+    private String getExpectedMessageWithClaims(Client client, PolicyType policyType, String claimsDetails) {
+        return String.format(ListClaimsCommand.MESSAGE_LIST_CLAIMS_SUCCESS, policyType, client.getName(),
+                claimsDetails);
+    }
+
+    /**
+     * Generates the expected success message for a client with no claims.
+     */
+    private String getExpectedMessageNoClaims(Client client, PolicyType policyType) {
+        return String.format(ListClaimsCommand.MESSAGE_NO_CLAIMS, policyType, client.getName());
+    }
 }
