@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CHILD;
 import java.util.Set;
 
 import javafx.util.Pair;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
@@ -51,12 +50,8 @@ public class UnlinkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person child;
-        try {
-            child = model.personFromName(name);
-            if (!(child instanceof Student)) {
-                throw new CommandException(generateChildNotFoundMessage());
-            }
-        } catch (IllegalValueException e) {
+        child = model.personFromName(name);
+        if (!(child instanceof Student)) {
             throw new CommandException(generateChildNotFoundMessage());
         }
 
@@ -67,12 +62,8 @@ public class UnlinkCommand extends Command {
         }
 
         Person parent;
-        try {
-            parent = model.personFromName(parentName);
-            if (!(parent instanceof Parent)) {
-                throw new CommandException(generateParentNotFoundMessage(parentName));
-            }
-        } catch (IllegalValueException e) {
+        parent = model.personFromName(parentName);
+        if (!(parent instanceof Parent)) {
             throw new CommandException(generateParentNotFoundMessage(parentName));
         }
         Parent castedParent = (Parent) parent;
