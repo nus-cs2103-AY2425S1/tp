@@ -25,6 +25,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Remark remark;
+    private final Triage triage;
     private final Set<Tag> tags = new HashSet<>();
     private Appointment appointment; // New appointment field
     private final LogList logEntries;
@@ -38,15 +39,17 @@ public class Person {
             Email email,
             Nric nric,
             Address address,
+            Triage triage,
             Remark remark,
             Set<Tag> tags,
             Appointment appointment,
             LogList logEntries) {
-        requireAllNonNull(name, phone, email, nric, address, tags);
+        requireAllNonNull(name, phone, email, nric, triage, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nric = nric;
+        this.triage = triage;
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
@@ -84,6 +87,9 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
+    }
+    public Triage getTriage() {
+        return triage;
     }
 
     /**
@@ -133,13 +139,14 @@ public class Person {
                 && nric.equals(otherPerson.nric)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
+                && triage.equals(otherPerson.triage)
                 && Objects.equals(appointment, otherPerson.appointment); // Include appointment in equality check
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nric, address, tags, appointment, logEntries);
+        return Objects.hash(name, phone, email, nric, address, tags, appointment, logEntries, triage);
     }
 
     @Override
@@ -154,6 +161,7 @@ public class Person {
                 .add("tags", tags)
                 .add("appointment", appointment) // Include appointment in toString
                 .add("logEntries", logEntries)
+                .add("triage", triage)
                 .toString();
     }
 }

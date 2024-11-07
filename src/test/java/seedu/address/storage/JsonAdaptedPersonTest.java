@@ -26,6 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_NRIC = "1234A6789";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TRIAGE = "hi";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -33,6 +34,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NRIC = BENSON.getNric().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_REMARK = BENSON.getRemark().toString();
+    private static final String VALID_TRIAGE = BENSON.getTriage().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -48,6 +50,7 @@ public class JsonAdaptedPersonTest {
             BENSON.getEmail().toString(),
             BENSON.getNric().toString(),
             BENSON.getAddress().toString(),
+            BENSON.getTriage().toString(),
             BENSON.getRemark().toString(),
             VALID_TAGS,
             null,
@@ -64,6 +67,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             VALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -81,6 +85,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             VALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -98,6 +103,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             VALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -115,6 +121,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             VALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -132,6 +139,7 @@ public class JsonAdaptedPersonTest {
             INVALID_EMAIL,
             VALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -149,6 +157,7 @@ public class JsonAdaptedPersonTest {
             null,
             VALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -166,6 +175,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             INVALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -183,6 +193,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             null,
             VALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -200,6 +211,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             VALID_NRIC,
             INVALID_ADDRESS,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -217,6 +229,7 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             VALID_NRIC,
             null,
+            VALID_TRIAGE,
             VALID_REMARK,
             VALID_TAGS,
             null,
@@ -236,12 +249,49 @@ public class JsonAdaptedPersonTest {
             VALID_EMAIL,
             VALID_NRIC,
             VALID_ADDRESS,
+            VALID_TRIAGE
             VALID_REMARK,
             invalidTags,
             null,
             VALID_LOG_ENTRIES
         );
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTriage_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_NRIC,
+                VALID_ADDRESS,
+                INVALID_TRIAGE,
+                VALID_REMARK,
+                VALID_TAGS,
+                null,
+                VALID_LOG_ENTRIES
+        );
+        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTriage_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME,
+                VALID_PHONE,
+                VALID_EMAIL,
+                VALID_NRIC,
+                VALID_ADDRESS,
+                null,
+                VALID_REMARK,
+                VALID_TAGS,
+                null,
+                VALID_LOG_ENTRIES
+        );
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }

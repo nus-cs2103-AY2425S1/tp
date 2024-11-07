@@ -60,8 +60,8 @@ public class LogCommand extends Command {
             Person personToEdit = personWithMatchingNric.get();
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getNric(),
-                    personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(),
-                    personToEdit.getAppointment(), personToEdit.getLogEntries().addLog(log));
+                    personToEdit.getAddress(), personToEdit.getTriage(), personToEdit.getRemark(),
+                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getLogEntries().addLog(log));
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return new CommandResult("Log added to " + personToEdit.getName());

@@ -1,24 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -31,6 +20,7 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withNric("S1234567A")
+            .withTriage("1")
             .withRemark("she likes puppies")
             .withTags("friends")
             .withAppointment("02-11-2024 09:19")
@@ -41,6 +31,7 @@ public class TypicalPersons {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withNric("S1234567B")
+            .withTriage("1")
             .withRemark("He can't handle his alcohol")
             .withTags("owesMoney", "friends")
             .withAppointment("29-10-2024 20:24")
@@ -49,6 +40,7 @@ public class TypicalPersons {
             .withName("Carl Kurz")
             .withPhone("95352563")
             .withNric("S1234567C")
+            .withTriage("1")
             .withEmail("heinz@example.com")
             .withAddress("wall street")
             .withAppointment("01-11-2024 20:45")
@@ -59,6 +51,7 @@ public class TypicalPersons {
             .withNric("S1234567D")
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
+            .withTriage("1")
             .withTags("friends")
             .withAppointment("08-11-2024 10:10")
             .build();
@@ -68,6 +61,7 @@ public class TypicalPersons {
             .withNric("S1234567E")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
+            .withTriage("1")
             .withTags("Diabetic", "G6PD")
             .withAppointment("10-11-2024 05:31")
             .build();
@@ -77,6 +71,7 @@ public class TypicalPersons {
             .withNric("S1234567F")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
+            .withTriage("1")
             .withTags("Diabetic", "G6PD")
             .withAppointment("08-11-2024 13:22")
             .build();
@@ -86,6 +81,7 @@ public class TypicalPersons {
             .withNric("S1234567G")
             .withEmail("anna@example.com")
             .withAddress("4th street")
+            .withTriage("1")
             .withAppointment("07-11-2024 22:33")
             .build();
 
@@ -96,6 +92,7 @@ public class TypicalPersons {
             .withNric("S1234567H")
             .withEmail("stefan@example.com")
             .withAddress("little india")
+            .withTriage("1")
             .withAppointment("12-11-2024 06:22")
             .build();
     public static final Person IDA = new PersonBuilder()
@@ -104,6 +101,7 @@ public class TypicalPersons {
             .withNric("S1234567I")
             .withEmail("hans@example.com")
             .withAddress("chicago ave")
+            .withTriage("1")
             .withAppointment("22-10-2024 01:14")
             .build();
 
@@ -114,6 +112,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_AMY)
             .withNric(VALID_NRIC_AMY)
             .withAddress(VALID_ADDRESS_AMY)
+            .withTriage(VALID_TRIAGE_AMY)
             .withTags(VALID_TAG_FRIEND)
             .withAppointment("23-10-2024 22:50")
             .build();
@@ -123,6 +122,7 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB)
             .withNric(VALID_NRIC_BOB)
             .withAddress(VALID_ADDRESS_BOB)
+            .withTriage(VALID_TRIAGE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withAppointment("16-11-2024 20:44")
             .build();
