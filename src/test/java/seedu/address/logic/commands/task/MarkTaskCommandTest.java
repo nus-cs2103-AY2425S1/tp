@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -60,8 +60,9 @@ public class MarkTaskCommandTest {
 
         MarkTaskCommand command = new MarkTaskCommand(Set.of(outOfBoundIndex));
 
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX
-                        + ": " + (model.getFilteredTaskList().size() + 1), ()
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                model.getFilteredTaskList().size() + 1,
+                1, model.getFilteredTaskList().size()), ()
                 -> command.execute(model));
     }
 
@@ -95,20 +96,17 @@ public class MarkTaskCommandTest {
         MarkTaskCommand command2 = new MarkTaskCommand(Set.of(INDEX_SECOND));
 
         // same object -> returns true
-        assertTrue(command1.equals(command1));
+        assertEquals(command1, command1);
 
         // same values -> returns true
         MarkTaskCommand command1Copy = new MarkTaskCommand(Set.of(INDEX_FIRST));
-        assertTrue(command1.equals(command1Copy));
-
-        // different types -> returns false
-        assertFalse(command1.equals(1));
+        assertEquals(command1, command1Copy);
 
         // null -> returns false
-        assertFalse(command1.equals(null));
+        assertNotEquals(null, command1);
 
         // different task indexes -> returns false
-        assertFalse(command1.equals(command2));
+        assertNotEquals(command1, command2);
     }
 
     @AfterEach

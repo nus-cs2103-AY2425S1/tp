@@ -22,7 +22,7 @@ public class Messages {
     public static final String MESSAGE_NOTHING_TO_PERFORM_ON = "There are no %s to %s.";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid. \n"
             + MESSAGE_ENTER_VALID_INDEX;
-    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid. \n"
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided (%d) is invalid. \n"
             + MESSAGE_ENTER_VALID_INDEX;
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
     public static final String MESSAGE_TASK_NOT_FOUND_IN_AB = "Task does not exist in the address book.";
