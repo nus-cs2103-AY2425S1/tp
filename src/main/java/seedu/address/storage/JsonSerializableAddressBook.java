@@ -69,6 +69,7 @@ class JsonSerializableAddressBook {
                 Person person = jsonAdaptedPerson.toModelType();
                 if (addressBook.hasPerson(person)) {
                     logger.warning("Duplicate person found and ignored: " + person);
+                    continue;
                 }
                 addressBook.addPerson(person);
             } catch (IllegalValueException ive) {
