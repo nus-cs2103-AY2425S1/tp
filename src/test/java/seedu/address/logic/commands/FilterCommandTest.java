@@ -55,7 +55,7 @@ public class FilterCommandTest {
         // null -> returns false
         assertFalse(firstFilterCommand.equals(null));
 
-        // different patient -> returns false
+        // no start date and health service -> returns false
         assertFalse(firstFilterCommand.equals(secondFilterCommand));
     }
 
@@ -81,6 +81,7 @@ public class FilterCommandTest {
 
         CommandResult expectedCommandResult = new ShowFilteredApptsCommandResult(expectedMessage, true);
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(appointments, model.getFilteredAppts());
     }
 
     @Test
