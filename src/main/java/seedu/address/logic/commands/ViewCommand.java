@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -40,6 +41,8 @@ public class ViewCommand extends Command {
 
     private final Name personName;
     private final boolean isClose;
+
+    private static ListChangeListener<Person> listener;
 
 
 
@@ -80,12 +83,12 @@ public class ViewCommand extends Command {
 
     private CommandResult createCommandResult(Model model) {
         ObjectProperty<Person> person = new SimpleObjectProperty<>(model.getPerson(personName).orElseThrow());
-        ListChangeListener<Person> listener = change -> {
+        listener = change -> {
             while (change.next()) {
-                if (change.wasAdded() || change.wasRemoved()) {
+                if (change.wasRemoved()) {
                     person.set(null);
                     model.getPerson(personName).ifPresentOrElse(
-                            person::set, () -> {});
+                            person::set, () -> model.getAddressBook().getPersonList().removeListener(listener));
 
                 }
             }
