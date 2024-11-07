@@ -76,6 +76,10 @@ public class LogicManager implements Logic {
         return model.getOnlyClientList();
     }
 
+    public ObservableList<Person> getOnlyEmployeeList() {
+        return model.getOnlyEmployeeList();
+    }
+
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();

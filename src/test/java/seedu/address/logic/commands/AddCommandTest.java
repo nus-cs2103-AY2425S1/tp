@@ -219,6 +219,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getOnlyEmployeeList() {
+            return null;
+        }
+
+        @Override
         public Index getFirstArchivedIndex() {
             throw new AssertionError("This method should not be called.");
         }
