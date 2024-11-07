@@ -14,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.UpdateStockLevelCommand;
 import seedu.address.model.product.ProductName;
 
