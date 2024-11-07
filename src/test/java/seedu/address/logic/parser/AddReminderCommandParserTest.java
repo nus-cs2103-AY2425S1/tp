@@ -55,7 +55,7 @@ public class AddReminderCommandParserTest {
     public void parse_invalidDate_failure() {
         // date is in the past
         assertParseFailure(parser, "1 d/01-01-2024" + DESCRIPTION_DESC,
-                "Reminder date must be in the future");
+                "Reminder date cannot be in the past");
     }
 
     @Test
