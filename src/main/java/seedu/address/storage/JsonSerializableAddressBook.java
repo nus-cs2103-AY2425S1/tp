@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
@@ -67,6 +69,7 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
+            // Each person will store blank weddings with only the wedding name at this point
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_PERSON);
@@ -99,6 +102,25 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_WEDDING);
             }
             addressBook.addWedding(wedding);
+            if (wedding.hasPartner1()) {
+                addressBook.getPerson(wedding.getPartner1()).addWedding(wedding);
+                // Replaces the Wedding object's Person with the Person object from the Wedlinker
+                wedding.setPartner1(addressBook.getPerson(wedding.getPartner1()));
+            }
+            if (wedding.hasPartner2()) {
+                addressBook.getPerson(wedding.getPartner2()).addWedding(wedding);
+                // Replaces the Wedding object's Person with the Person object from the Wedlinker
+                wedding.setPartner2(addressBook.getPerson(wedding.getPartner2()));
+            }
+            for (Person person : wedding.getGuestList()) {
+                addressBook.getPerson(person).addWedding(wedding);
+                // Replaces the Wedding object's Person with the Person object from the Wedlinker
+                try {
+                    wedding.setGuest(person, addressBook.getPerson(person));
+                } catch (PersonNotFoundException p) {
+                    wedding.addToGuestList(addressBook.getPerson(person));
+                }
+            }
         }
         // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
         // method will throw an error
@@ -123,12 +145,22 @@ class JsonSerializableAddressBook {
 
     private void loadWeddings(AddressBook addressBook, Person person) {
         Set<Wedding> weddingList = person.getWeddings();
+        Set<Wedding> newWeddingList = new HashSet<>();
         for (Wedding wedding : weddingList) {
+            // If the wedding does not contain the person, add them to the guest list of the wedding by default
+            if (!addressBook.getWedding(wedding).hasPerson(person)) {
+                addressBook.getWedding(wedding).addToGuestList(addressBook.getPerson(person));
+            }
+
             if (addressBook.hasWedding(wedding) || !Wedding.isValidWeddingName(wedding.getWeddingName().toString())) {
+                newWeddingList.add(addressBook.getWedding(wedding));
                 continue;
             }
+
             addressBook.addWedding(wedding);
+            newWeddingList.add(addressBook.getWedding(wedding));
         }
+        person.setWeddings(newWeddingList);
     }
 
     private void loadTasks(AddressBook addressBook, Person person) {

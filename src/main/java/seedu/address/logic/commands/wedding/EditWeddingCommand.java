@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.ArrayList;
@@ -73,7 +74,6 @@ public class EditWeddingCommand extends Command {
         }
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
 
-        editWeddingDescriptor.setPeopleCount(weddingToEdit.getPeopleCount());
         editWeddingDescriptor.setGuestList(weddingToEdit.getGuestList());
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
 
@@ -83,6 +83,21 @@ public class EditWeddingCommand extends Command {
 
         model.setWedding(weddingToEdit, editedWedding);
         model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
+
+        // Update wedding for all people in wedding
+        if (editedWedding.hasPartner1()) {
+            editedWedding.getPartner1().setWedding(weddingToEdit, editedWedding);
+        }
+        if (editedWedding.hasPartner2()) {
+            editedWedding.getPartner2().setWedding(weddingToEdit, editedWedding);
+        }
+        for (Person person : editedWedding.getGuestList()) {
+            person.setWedding(weddingToEdit, editedWedding);
+        }
+
+        // Update person list to show the latest wedding objects
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(Messages.MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
     }
 
@@ -94,14 +109,13 @@ public class EditWeddingCommand extends Command {
         assert weddingToEdit != null;
 
         WeddingName updatedWeddingName = editWeddingDescriptor.getWeddingName().orElse(weddingToEdit.getWeddingName());
-        int peopleCount = editWeddingDescriptor.getPeopleCount().orElse(0);
         Person partner1 = editWeddingDescriptor.getPartner1().orElse(weddingToEdit.getPartner1());
         Person partner2 = editWeddingDescriptor.getPartner2().orElse(weddingToEdit.getPartner2());
         ArrayList<Person> guestlist = editWeddingDescriptor.getGuestList().orElse(weddingToEdit.getGuestList());
         Address updatedAddress = editWeddingDescriptor.getAddress().orElse(weddingToEdit.getAddress());
         String date = editWeddingDescriptor.getDate().orElse(weddingToEdit.getDate());
 
-        return new Wedding(updatedWeddingName, peopleCount, partner1, partner2, guestlist, updatedAddress, date);
+        return new Wedding(updatedWeddingName, partner1, partner2, guestlist, updatedAddress, date);
     }
 
     @Override
@@ -133,7 +147,6 @@ public class EditWeddingCommand extends Command {
      */
     public static class EditWeddingDescriptor {
         private WeddingName weddingName;
-        private int peopleCount = -1; //if -1, means no change
         private Index partner1Index;
         private Index partner2Index;
         private Person partner1;
@@ -159,8 +172,7 @@ public class EditWeddingCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(weddingName, partner1Index, partner2Index, address, date)
-                    || this.peopleCount != -1;
+            return CollectionUtil.isAnyNonNull(weddingName, partner1Index, partner2Index, address, date);
         }
 
         public void setWeddingName(WeddingName weddingName) {
@@ -169,14 +181,6 @@ public class EditWeddingCommand extends Command {
 
         public Optional<WeddingName> getWeddingName() {
             return Optional.ofNullable(weddingName);
-        }
-
-        public Optional<Integer> getPeopleCount() {
-            return Optional.of(peopleCount); //doesn't need ofNullable because init count = 0
-        }
-
-        public void setPeopleCount(int peopleCount) {
-            this.peopleCount = peopleCount;
         }
 
         public Optional<Person> getPartner1() {
@@ -239,7 +243,6 @@ public class EditWeddingCommand extends Command {
             }
 
             return Objects.equals(weddingName, otherEditWeddingDescriptor.weddingName)
-                    && Objects.equals(peopleCount, otherEditWeddingDescriptor.peopleCount)
                     && Objects.equals(partner1, otherEditWeddingDescriptor.partner1)
                     && Objects.equals(partner2, otherEditWeddingDescriptor.partner2)
                     && Objects.equals(address, otherEditWeddingDescriptor.address)
@@ -250,7 +253,6 @@ public class EditWeddingCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("weddingName", weddingName)
-                    .add("peopleCount", peopleCount)
                     .add("partner1", partner1)
                     .add("partner2", partner2)
                     .add("address", address)

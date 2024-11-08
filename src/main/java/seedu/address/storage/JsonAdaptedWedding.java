@@ -17,7 +17,6 @@ import seedu.address.model.wedding.WeddingName;
  */
 public class JsonAdaptedWedding {
     private final String weddingName;
-    private final int peopleCount;
     private final JsonAdaptedPerson partner1;
     private final JsonAdaptedPerson partner2;
     private List<JsonAdaptedPerson> guestList = new ArrayList<>();
@@ -30,14 +29,12 @@ public class JsonAdaptedWedding {
     @JsonCreator
     public JsonAdaptedWedding(
             @JsonProperty("weddingName") String weddingName,
-            @JsonProperty("peopleCount") int peopleCount,
             @JsonProperty("partner1") JsonAdaptedPerson partner1,
             @JsonProperty("partner2") JsonAdaptedPerson partner2,
             @JsonProperty("guestList") List<JsonAdaptedPerson> guestList,
             @JsonProperty("address") String address,
             @JsonProperty("date") String date) {
         this.weddingName = weddingName;
-        this.peopleCount = peopleCount;
         this.partner1 = partner1;
         this.partner2 = partner2;
         if (guestList != null) {
@@ -52,7 +49,6 @@ public class JsonAdaptedWedding {
      */
     public JsonAdaptedWedding(Wedding source) {
         weddingName = source.getWeddingName().toString();
-        peopleCount = source.getPeopleCount();
         partner1 = (source.getPartner1() != null) ? new JsonAdaptedPerson(source.getPartner1()) : null;
         partner2 = (source.getPartner2() != null) ? new JsonAdaptedPerson(source.getPartner2()) : null;
         if (source.getGuestList() != null) {
@@ -93,7 +89,6 @@ public class JsonAdaptedWedding {
         // Return new Wedding object, handling null values gracefully
         return new Wedding(
                 new WeddingName(weddingName),
-                peopleCount,
                 modelPartner1,
                 modelPartner2,
                 modelGuestList,

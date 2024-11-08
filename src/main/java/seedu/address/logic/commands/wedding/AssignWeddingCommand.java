@@ -3,6 +3,7 @@ package seedu.address.logic.commands.wedding;
 import static seedu.address.logic.Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_WEDDING_ALREADY_ASSIGNED;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -82,16 +84,25 @@ public class AssignWeddingCommand extends Command {
 
         for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
             Wedding wedding = entry.getKey();
+
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
                     CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);
                     newWeddingCommand.execute(model);
                 } else {
                     throw new CommandException(
-                            MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
+                            MESSAGE_WEDDING_NOT_FOUND
+                                    + "\n"
+                                    + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
             }
-            wedding.increasePeopleCount();
+
+            // Check if person is already assigned to the wedding
+            if (model.getWedding(wedding).hasPerson(personToEdit)) {
+                throw new CommandException(String.format(
+                        MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()
+                ));
+            }
             Wedding editedWedding = wedding.clone();
             String type = entry.getValue();
             switch (type) {
@@ -106,14 +117,26 @@ public class AssignWeddingCommand extends Command {
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
         updatedWeddings.addAll(weddingsToAdd.keySet());
 
-        Person editedPerson = new Person(
-                personToEdit.getName(),
-                personToEdit.getPhone(),
-                personToEdit.getEmail(),
-                personToEdit.getAddress(),
-                personToEdit.getTags(),
-                updatedWeddings,
-                personToEdit.getTasks());
+        Person editedPerson;
+        if (personToEdit instanceof Vendor) {
+            editedPerson = new Vendor(
+                    personToEdit.getName(),
+                    personToEdit.getPhone(),
+                    personToEdit.getEmail(),
+                    personToEdit.getAddress(),
+                    personToEdit.getTags(),
+                    updatedWeddings,
+                    personToEdit.getTasks());
+        } else {
+            editedPerson = new Person(
+                    personToEdit.getName(),
+                    personToEdit.getPhone(),
+                    personToEdit.getEmail(),
+                    personToEdit.getAddress(),
+                    personToEdit.getTags(),
+                    updatedWeddings,
+                    personToEdit.getTasks());
+        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

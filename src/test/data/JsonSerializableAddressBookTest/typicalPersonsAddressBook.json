@@ -6,6 +6,9 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tags" : [ "photographer" ],
+    "weddings" : [ {
+      "weddingName" : "Amy's Wedding"
+    } ],
     "isVendor" : false
   }, {
     "name" : "Benson Meier",
@@ -13,23 +16,11 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "florist", "photographer" ],
-    "weddings": [{
-      "weddingName": "Wedding 2",
-      "peopleCount": 0,
-      "partner1": null,
-      "partner2": null,
-      "guestList": [],
-      "address": null,
-      "date": null
-    },{
-      "weddingName": "Carla's Wedding",
-      "peopleCount": 0,
-      "partner1": null,
-      "partner2": null,
-      "guestList": [],
-      "address": null,
-      "date": null
-    }],
+    "weddings" : [ {
+      "weddingName" : "Wedding 2"
+    }, {
+      "weddingName" : "Carla's Wedding"
+    } ],
     "isVendor" : false
   }, {
     "name" : "Carl Kurz",
@@ -57,13 +48,7 @@
     "address" : "michegan ave",
     "tags" : [ ],
     "weddings" : [ {
-      "weddingName": "Wedding 2",
-      "peopleCount": 0,
-      "partner1": null,
-      "partner2": null,
-      "guestList": [],
-      "address": null,
-      "date": null
+      "weddingName" : "Wedding 2"
     }],
     "isVendor" : false
   }, {
@@ -116,7 +101,16 @@
       "guestList": [],
       "address": null,
       "date": null
-    }],
+  },
+    {
+      "weddingName": "Clive's Wedding",
+      "peopleCount": 0,
+      "partner1": null,
+      "partner2": null,
+      "guestList": [],
+      "address": null,
+      "date": null
+  }],
   "tasks": [{
     "type" : "todo",
     "description" : "Buy groceries",

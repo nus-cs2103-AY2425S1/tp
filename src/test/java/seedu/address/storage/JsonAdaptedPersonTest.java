@@ -21,6 +21,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Todo;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -35,8 +37,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedWedding> VALID_WEDDINGS = BENSON.getWeddings().stream()
-            .map(JsonAdaptedWedding::new)
+    private static final List<WeddingName> VALID_WEDDINGS = BENSON.getWeddings().stream()
+            .map(Wedding::getWeddingName)
             .collect(Collectors.toList());
 
     private static final List<JsonAdaptedTask> VALID_TASKS = CARL.getTasks().stream()
@@ -60,8 +62,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> CLIVE_TAGS = CLIVE.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedWedding> CLIVE_WEDDINGS = CLIVE.getWeddings().stream()
-            .map(JsonAdaptedWedding::new)
+    private static final List<WeddingName> CLIVE_WEDDINGS = CLIVE.getWeddings().stream()
+            .map(Wedding::getWeddingName)
             .collect(Collectors.toList());
 
     private static final List<JsonAdaptedTask> CLIVE_TASKS = CLIVE.getTasks().stream()

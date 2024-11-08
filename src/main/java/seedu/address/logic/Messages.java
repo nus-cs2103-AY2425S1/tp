@@ -54,10 +54,6 @@ public class Messages {
     public static final String MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED = "The Tag: %1$s is still used.";
     public static final String MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND = "The Tag: %1$s does not exist.";
     public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the Wedlinker.";
-    public static final String MESSAGE_FORCE_TAG_TO_CONTACT = "Use f/ to force the tagging of contacts."
-            + " This will create the require Tags.";
-    public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
-            + " This will unassign all people currently with the Tag.";
     public static final String MESSAGE_LIST_TAG_SUCCESS = "Listed all tags.";
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) %1$s from %2$s.";
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
@@ -69,15 +65,11 @@ public class Messages {
     public static final String MESSAGE_ASSIGN_WEDDING_SUCCESS = "Assigned wedding(s) %1$s to %2$s.";
     public static final String MESSAGE_CREATE_WEDDING_SUCCESS = "New wedding created: %1$s.";
     public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding: %1$s.";
-    public static final String MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED = "The Wedding: %1$s is still used.";
+    public static final String MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED = "The Wedding: %1$s is still used";
     public static final String MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND = "The Wedding: %1$s does not exist.";
     public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the Wedlinker.";
     public static final String MESSAGE_EDIT_WEDDING_SUCCESS = "Edited Wedding: %1$s.";
     public static final String MESSAGE_WEDDING_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT = "Use f/ to force the assignment of wedding(s)."
-            + " This will automatically help you create the wedding required.";
-    public static final String MESSAGE_FORCE_DELETE_WEDDING = "Use f/ to force the deletion of wedding."
-            + " This will unassign all people currently assigned to this Wedding.";
     public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid.";
     public static final String MESSAGE_LIST_WEDDING_SUCCESS = "Listed all weddings.";
     public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
@@ -86,6 +78,15 @@ public class Messages {
     public static final String MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT = "Some weddings were not found in "
             + "the person's wedding list.";
 
+    public static final String MESSAGE_WEDDING_ALREADY_ASSIGNED = "Some weddings already have %1$s assigned.";
+    public static final String MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT = "Use f/ to force the assignment of wedding(s)."
+            + " This will automatically help you create the wedding required.";
+    public static final String MESSAGE_FORCE_DELETE_WEDDING = "Use f/ to force the deletion of wedding."
+            + " This will unassign all people currently assigned to this Wedding.";
+    public static final String MESSAGE_FORCE_TAG_TO_CONTACT = "Use f/ to force the tagging of contacts."
+            + " This will create the required Tags.";
+    public static final String MESSAGE_FORCE_DELETE_TAG = "Use f/ to force the deletion of tags."
+            + " This will unassign all people currently with the Tag.";
     /**
      * Messages specific to Task
      */

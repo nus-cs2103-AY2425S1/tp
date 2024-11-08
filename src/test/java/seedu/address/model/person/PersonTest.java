@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TODO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEDDING_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEDDING_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -157,7 +157,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different weddings -> returns false
-        editedAlice = new PersonBuilder(ALICE).withWeddings(VALID_WEDDING_AMY).build();
+        editedAlice = new PersonBuilder(ALICE).withWeddings(VALID_WEDDING_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tasks -> returns false
@@ -178,7 +178,7 @@ public class PersonTest {
         assertFalse(person1.hashCode() == personWithDifferentName.hashCode());
 
         // different weddings -> returns different hashCode
-        Person personWithDifferentWeddings = new PersonBuilder(ALICE).withWeddings(VALID_WEDDING_AMY).build();
+        Person personWithDifferentWeddings = new PersonBuilder(ALICE).withWeddings(VALID_WEDDING_BOB).build();
         assertFalse(person1.hashCode() == personWithDifferentWeddings.hashCode());
 
         // different tasks -> returns different hashCode

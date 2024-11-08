@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -153,6 +154,32 @@ public class Person {
      */
     public Set<Wedding> getWeddings() {
         return Collections.unmodifiableSet(weddings);
+    }
+
+    /**
+     * Replaces the original set of weddings with a new specified one.
+     */
+    public void setWeddings(Set<Wedding> newWedding) {
+        weddings.clear();
+        weddings.addAll(newWedding);
+    }
+
+    /**
+     * Replaces the old wedding with a specified new wedding. As weddings are internally stored in a set,
+     * this can only be done by removing the old wedding and adding a new one.
+     */
+    public void setWedding(Wedding oldWedding, Wedding newWedding) {
+        assert weddings.contains(oldWedding);
+        weddings.remove(oldWedding);
+        weddings.add(newWedding);
+    }
+
+    /**
+     * Adds a wedding to a person's wedding list
+     */
+    public void addWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        weddings.add(wedding);
     }
 
     /**

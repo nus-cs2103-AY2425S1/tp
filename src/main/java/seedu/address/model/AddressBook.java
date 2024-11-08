@@ -125,6 +125,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns a person in the model that has the same name
+     */
+    public Person getPerson(Person person) {
+        requireNonNull(person);
+        return persons.asUnmodifiableObservableList().stream().filter(person::isSamePerson).findFirst().orElse(null);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -375,7 +383,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                 if (!this.hasWedding(wedding)) {
                     this.addWedding(wedding);
                 }
-                wedding.increasePeopleCount();
             }
         }
     }

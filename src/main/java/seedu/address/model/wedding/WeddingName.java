@@ -3,6 +3,8 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a {@code Wedding}'s name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -23,7 +25,7 @@ public class WeddingName {
      * Constructs a {@code WeddingName}
      * @param name A valid name for a wedding.
      */
-    public WeddingName(String name) {
+    public WeddingName(@JsonProperty("weddingName") String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         weddingName = name;
