@@ -124,7 +124,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="700" height="650" />
+<puml src="diagrams/ModelClassDiagram.puml" width="750" height="720" />
 
 Note: `Vendor` and `Guest` both extend from the abstract `Person` class, which defines common attributes and behaviors shared by both types of entities.
 
@@ -163,6 +163,7 @@ This section describes some noteworthy details on how certain features are imple
 The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values
 
 The sequence diagrams below provides an overview for the execution flow of a `add_guest` command:
+Let *C* represent the command: `add_guest n/Joe p/98765432 e/joe@gmail.com a/Nexus` in the diagrams below.
 <puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
 <puml src="diagrams/AddGuestSequenceDiagramP2.puml" />
 <puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
