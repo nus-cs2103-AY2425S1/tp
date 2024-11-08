@@ -159,7 +159,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAdcademyAssist`. It extends `AcademyAssist` with an undo/redo history, stored internally as an `academyAssistStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedAcademyAssist`. It extends `AcademyAssist` with an undo/redo history, stored internally as an `academyAssistStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedAcademyAssist#commit()` — Saves the current academy assist state in its history.
 * `VersionedAcademyAssist#undo()` — Restores the previous academy assist state from its history.
@@ -267,8 +267,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 * people who work in management/administration of tuition centres
-* has a need to manage a significant number of staff/students
-* tuition centre managed is of small to medium size (roughly a few hundred students)
+* manages a tuition centre of small to medium size
 
 **Value proposition**: Centralizes contact details, tracks student data, maintains a teacher directory, and offers functions that improve administrative efficiency and organization for a tuition centre.
 

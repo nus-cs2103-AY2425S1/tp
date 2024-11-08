@@ -15,6 +15,7 @@ $black:    #000 !default;
 $blue:    #0d6efd !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
+$light-purple: #A594F9 !default;
 $pink:    #d63384 !default;
 $red:     #dc3545 !default;
 $orange:  #fd7e14 !default;
@@ -29,6 +30,7 @@ $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
+$note:          $light-purple !default;
 $light:         $gray-100 !default;
 $dark:          $gray-800 !default;
 
@@ -39,6 +41,7 @@ $theme-colors: (
   "info":       $info,
   "warning":    $warning,
   "danger":     $danger,
+  "note":       $note,
   "light":      $light,
   "dark":       $dark
 ) !default;
