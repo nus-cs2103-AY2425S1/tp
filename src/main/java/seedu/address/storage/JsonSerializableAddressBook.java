@@ -169,6 +169,10 @@ class JsonSerializableAddressBook {
         }
     }
 
+    /**
+     * Adds tags to model that were in person but not in model, and makes model and
+     * person store the same tags
+     */
     private void loadTags(AddressBook addressBook, Person person) {
         Set<Tag> tagList = person.getTags();
         Set<Tag> newTagList = new HashSet<>();
@@ -184,6 +188,10 @@ class JsonSerializableAddressBook {
         person.setTags(newTagList);
     }
 
+    /**
+     * Adds weddings to model that were in person but not in model, and makes model and
+     * person store the same weddings
+     */
     private void loadWeddings(AddressBook addressBook, Person person) {
         Set<Wedding> weddingList = person.getWeddings();
         Set<Wedding> newWeddingList = new HashSet<>();
@@ -203,6 +211,10 @@ class JsonSerializableAddressBook {
         person.setWeddings(newWeddingList);
     }
 
+    /**
+     * Adds tasks to model that were in person but not in model, and makes model and
+     * person store the same tasks
+     */
     private void loadTasks(AddressBook addressBook, Person person) {
         Set<Task> taskList = person.getTasks();
         for (Task task : taskList) {
