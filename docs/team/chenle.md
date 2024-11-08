@@ -33,11 +33,21 @@ Given below are my contributions to the project.
   * DocumentationBug: Extra commas displayed in the search result message (Issue [\#133](https://github.com/AY2425S1-CS2103T-T17-1/tp/issues/133)).
   * FeatureFlaw: Restriction on the “&” symbol in `workExperience` field limits the app’s real-world applicability (Issue [\#134](https://github.com/AY2425S1-CS2103T-T17-1/tp/issues/134)).
 
+* **Bug Fixing**: `findi` (Pull request [\#193](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/193))
+  * Simplified Search Functionality: Refactored the "find by interests" feature to allow only single interest searches, enhancing usability and reducing confusion for users. 
+  * Error Handling for Invalid Inputs: Implemented error messages for unsupported input formats, including:
+    - Multiple interest keywords separated by spaces. 
+    - Invalid command structures without proper prefixes. 
+  * Updated Command and Parser Classes: Modified `FindByInterestCommand` and `FindByInterestCommandParser` to accommodate the new single interest search logic and ensure compliance with the updated input requirements.
+  * Predicate Logic Adjustment: Streamlined the `InterestContainsKeywordsPredicate` to support the new searching mechanism by accepting a single keyword instead of handling multiple AND/OR conditions.
+  * Test Case Revisions: Enhanced the test cases in `FindByInterestCommandParserTest` and `FindByInterestCommandTest` to validate the new behavior of the feature, ensuring correct parsing and execution based on the updated requirements.
+  
 * **Documentation**:
   * User Guide:
     * Added documentation for the `findi` feature (Pull request [\#132](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/132)).
   * Developer Guide:
-    * Added documentation for the user profile, value proposition, and user stories (Pull request [\#31](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/31)).
+    * Added documentation for the user profile, value proposition, and user stories (Pull request [\#31](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/31)). 
+    * Added documentation for the user stories and use cases for the `findw` and `findi` features (Pull request [\#172](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/172)).
   
 * **Project management**:
   * Scheduling and Tracking: Initiated weekly meetings, took detailed meeting notes, assigned tasks, and tracked progress throughout the project.
