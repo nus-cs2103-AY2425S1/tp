@@ -272,8 +272,10 @@ Creates a link between a person and event which will appear in the person's deta
 Format: `link INDEX EVENT_NAME`
 
 Examples:
-* `list` followed by `link 2 Winter Time Convention` links the 2nd person in the address book to the event.
-* `find p "John"` followed by `link 1 Party` links the 1st person in the results of the `find` command to the event.
+* `list` followed by `link 2 ev/Winter Time Convention` links the 2nd person in the address book to the event.
+  ![result for 'link 2 ev/Winter Time Convention'](images/link2Winter.png)
+* `find p John` followed by `link 1 ev/Summer Time Convention` links the 1st person in the results of the `find` command to the event.
+  ![result for 'link 1 ev/Summer Time Convention'](images/link2Summer.png)
 
 ### Unlinking a person from an event : `unlink`
 
@@ -283,8 +285,10 @@ Format: `unlink INDEX EVENT_NAME`
 
 Examples:
 
-* `list` followed by `unlink 3 Winter Time Convention` removes the link between the 3rd person in the address book and the event.
-* `find p "Jane"` followed by `unlink 1 Party` removes the link between the 1st person in the results of the `find` command and the event.
+* `list` followed by `unlink 2 ev/Winter Time Convention` removes the link between the 3rd person in the address book and the event.
+  ![result for 'unlink 2 ev/Winter Time Convention'](images/unlink2Winter.png)
+* `find p John` followed by `unlink 1 ev/Summer Time Convention` removes the link between the 1st person in the results of the `find` command and the event.
+  ![result for 'unlink 2 ev/Summer Time Convention'](images/unlink2Summer.png)
 
 ### Schedule an event : `schedule`
 
@@ -317,6 +321,7 @@ Displays a confirmation, enter "yes" or "y" to clear all entries from the addres
 
 Format: `clear` then `y` or `yes`
 
+![result for 'clear' then `yes](images/clearAll.png)
 
 ### Exiting the program : `exit`
 
