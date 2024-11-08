@@ -340,27 +340,27 @@ add-client n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
 <box type="info" seamless>
-💡
-**Tip:**
+
+💡**Tip:**
 A client can have any number of tags (including 0).
 </box>
 
-<strong>Notes:</strong>
-<ul>
-  <li>The index refers to the index number shown in the displayed person list. The index must be a positive integer (1, 2, 3, …).</li>
-  <li>At least one of the optional fields must be provided.</li>
-  <li>For student contact, editing industry field is prohibited.</li>
-  <li>For company contact, editing student ID field is prohibited.</li>
-  <li>Existing values will be updated to the input values.</li>
-  <li>When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.</li>
-</ul>
-</div>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+
+**Notes:**
+* The index refers to the index number shown in the displayed person list. The index must be a positive integer (1, 2, 3, …).
+* At least one of the optional fields must be provided.
+* For student contact, editing industry field is prohibited.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.
+</div> 
 
 **Examples:**
 * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+  
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
 
-   <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
 **Tip:**
 We are aware that `NAME` currently does not accept special characters such as `/`, `@`, and `,`, and will be adding this functionality in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
 </div>
@@ -574,6 +574,14 @@ Policies Left: 1. Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Co
 * `edit-policy 1 pt/life pa/200` Edit the Life policy of the 1st client to have a premium of $200. The policy's coverage and expiry date remain unchanged.
 * `edit-policy 2 pt/health pa/300 ca/5000 ed/01/01/2030` Edit the Health policy of the 2nd client to have a premium of $300, coverage of $5000, and an expiry date of 01/01/2030.
 
+**On success:**
+```shell
+Life policy for NAME has been changed to:
+
+Policy type: POLICY_TYPE  | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | Claims:
+        Status: CLAIM_STATUS, Description: CLAIM_DESCRIPTION
+```
+
 #### 5.3.4 Listing All Policies: `list-policies`
 Lists **all policies** associated with a client at the specified `INDEX`.
 
@@ -593,6 +601,12 @@ list-policies INDEX
 
 **Examples:**
 * `list-policies 2` displays all policies for the client at index 2, including life, health, and education policies.
+
+**On success:**
+```shell
+Policies listed for client: NAME
+Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | No claims
+```
 
 #### 5.3.5 Listing Expiring Policies: `list-expiring-policies`
 List all policies that are **expiring** within a specified number of days. If no arguments are provided, default to list all policies expiring after 30 days.
@@ -621,6 +635,19 @@ list-expiring-policies [DAYS]
 * `list-expiring-policies` lists all policies expiring within 30 days.
 * `list-expiring-policies 10` lists all policies expiring within 10 days.
 
+**On success:**
+No policies expiring:
+```shell
+No policies expiring within the next DAYS day(s)!
+```
+Policies expiring:
+```shell
+The following policies are expiring within DAYS day(s):
+
+Insuree name: NAME   |   Insuree phone: PHONE
+Policy Type: POLICY_TYPE   |   Premium Amount: PREMIUM_AMOUNT
+Coverage Amount: COVERAGE_AMOUNT   |   Expiry Date: EXPIRY_DATE
+```
 ---
 
 ### 5.4 Claims Management Commands
@@ -652,7 +679,9 @@ add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION
 </div>
 
 <box type=info seamless>
-Info: This command will not allow adding a claim if the client has no policy of the specified type or if a similar claim already exists.
+
+**Info:**
+This command will not allow adding a claim if the client has no policy of the specified type or if a similar claim already exists.
 </box>
 
 **Examples:**
@@ -728,7 +757,9 @@ edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/CLAIM_STATUS] [d/CLAIM_DESCRIPT
 </div>
 
 <box type=info seamless>
-Info: At least one of `CLAIM_STATUS` or `CLAIM_DESCRIPTION` must be specified. If the claim details are unchanged or changing it will result in a duplicate claim, an error message will be shown.
+
+**Info:** 
+At least one of `CLAIM_STATUS` or `CLAIM_DESCRIPTION` must be specified. If the claim details are unchanged or changing it will result in a duplicate claim, an error message will be shown.
 </box>
 
 **Examples:**
