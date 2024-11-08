@@ -438,8 +438,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -455,7 +453,19 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Editing attendance status
+Prerequisites: Ensure one more than one contact is present. These tests can and should be done sequentially.
+1. Marking attendance as present for a person
+   1. Test case: `mark 1 tut/1`<br>
+   Expected: First contact's tutorial box 1 turns green.
+   2. Test case: `mark 1 tut/1-2`<br>
+   Expected: First contact's tutorial box 1 remains green and box 2 turns green.
+   3. Test case: `unmark 2 tut/[1,3]`<br>
+   Expected: Second contact's tutorial box 1 and 3 turns red.
+   4. Test case: `reset * tut/1`<br>
+   Expected: All contact's tutorial box 1 turns grey. First contact's tutorial box 2 remains green and second contact's tutorial box 3 remains red.
+   5. Test case: `mark 1 tut/2`<br>
+   Expected: No change will occur. Details shown in the status message.
 
 ### Saving data
 
