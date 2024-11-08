@@ -85,7 +85,11 @@ public class PersonCard extends UiPart<Region> {
         address.setText("📍 " + student.getAddress().value);
         person.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .forEach(tag -> {
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.setStyle("-fx-background-color: #FF6F61");
+                tags.getChildren().add(tagLabel);
+            });
         if (student.getAddress().value.equals(EMPTY_ADDRESS)) {
             address.setStyle("-fx-text-fill: #BEBEBE;");
         }
@@ -132,7 +136,11 @@ public class PersonCard extends UiPart<Region> {
         address.setText("📍 " + teacher.getAddress().value);
         person.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            .forEach(tag -> {
+                Label tagLabel = new Label(tag.tagName);
+                tagLabel.setStyle("-fx-background-color: #FF6F61");
+                tags.getChildren().add(tagLabel);
+            });
         if (teacher.getAddress().value.equals(EMPTY_ADDRESS)) {
             address.setStyle("-fx-text-fill: #BEBEBE");
         }
