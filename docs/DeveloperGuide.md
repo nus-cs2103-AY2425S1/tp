@@ -339,30 +339,27 @@ transactions, property details, or large-scale CRM functions.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                 | So that I can…​                                                                                |
-|----------|--------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions                                       | refer to instructions when I forget how to use the App                                         |
-| `* * *`  | user                                       | add a new person                                             |                                                                                                |
-| `* * *`  | user                                       | delete a person                                              | remove entries that I no longer need                                                           |
-| `* * *`  | user with many persons in the address book | find a person by name                                        | locate details of persons without having to go through the entire list                         |
-| `* * *`  | user with many persons in the address book | find people by category                                      | view a collection of persons in the same category without having to go through the entire list |
-| `* * *`  | salesperson                                | add a new contact with details (name, phone, email)          | store client information in the address book                                                   |
-| `* * *`  | salesperson                                | search for a contact by name                                 | quickly find the client without manually scrolling through the list                            |
-| `* * *`  | user                                       | add history log to a person                                  | keep a record of past activities for future references                                         |
-| `* *`    | real estate agent                          | add notes and remarks for a contact                          | remember snippets of information about my clients                                              |
-| `* *`    | real estate agent                          | attach properties to a contact                               | easily identify what properties a client is looking at                                         |
-| `* *`    | user                                       | be reminded of important events                              | minimize chance of missing these important events                                              |
-| `* *`    | salesperson                                | system to check the validity of a phone number               | avoid entering incorrect or incomplete data                                                    |
-| `* *`    | salesperson                                | view the history of interactions with a contact              | keep track of past communication (e.g., notes, calls, meetings)                                |
-| `* *`    | salesperson                                | mark certain contacts as favourites                          | easily access the most important clients at the top of the list                                |
-| `* *`    | salesperson                                | store incomplete information                                 | later update it with more details or correct outdated information                              |
-| `* *`    | user with many persons in the address book | sort persons by name                                         | locate a person easily                                                                         |
-| `* *`    | user with many persons in the address book | keep track of important contacts                             | locate an important person easily                                                              |
-| `* *`    | salesperson                                | sort contacts alphabetically by their name                   | easily browse through the address book                                                         |
-| `* *`    | salesperson                                | view all information about a contact on one page             | see all relevant details without clicking multiple times                                       |
-| `*`      | salesperson                                | receive a confirmation prompt before clearing all contacts   | avoid accidental deletion of the entire address book                                           |
-| `*`      | salesperson                                | receive a success notification after adding/editing/deleting | know the operation was completed correctly                                                     |
-| `*`      | user                                       | hide private contact details                                 | minimize chance of someone else seeing them by accident                                        |
+| Priority | As a …​                                          | I want to …​                                                 | So that I can…​                                                                                |
+|--------|--------------------------------------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| `* * *` | new user                                         | see usage instructions                                       | refer to instructions when I forget how to use the App                                         |
+| `* * *` | salesperson                                      | add a new contact with details (name, phone, email)          | store client information in the address book                                                   |
+| `* * *` | salesperson                                      | delete a contact                                             | remove people that I no longer interact with                                                   |
+| `* * *` | salesperson                                      | search for a contact by name                                 | quickly find the client without manually scrolling through the list                            |
+| `* * *` | salesperson with many clients in the address book | find a person by name                                        | locate details of persons without having to go through the entire list                         |
+| `* *`  | salesperson with many clients in the address book | find people by category                                      | view a collection of persons in the same category without having to go through the entire list |
+| `* *`  | salesperson                                      | add notes and remarks for a contact                          | remember snippets of information about my clients                                              |
+| `* *`  | real estate agent                                | attach properties to a contact                               | easily identify what properties a client is looking at                                         |
+| `* *`  | salesperson                                      | be reminded of important events                              | minimize chance of missing these important events                                              |
+| `* *`  | salesperson                                      | system to check the validity of all inputs                   | avoid entering incorrect or incomplete data                                                    |
+| `* *`  | salesperson                                      | view the history of interactions with a contact              | keep track of past communication (e.g., notes, calls, meetings)                                |
+| `* *`  | salesperson                                      | mark certain contacts as favourites                          | easily access the most important clients at the top of the list                                |
+| `* *`  | salesperson                                      | store incomplete information                                 | later update it with more details or correct outdated information                              |
+| `* *`  | salesperson with many clients in the address book        | keep track of important contacts                             | locate an important person easily                                                              |
+| `* *`  | salesperson with many clients in the address book                                      | sort contacts alphabetically by their name                   | easily browse through the address book                                                         |
+| `* *`  | salesperson                                      | view all information about a contact on one page             | see all relevant details of a client without clicking multiple times                           |
+| `*`    | salesperson                                      | receive a confirmation prompt before clearing all contacts   | avoid accidental deletion of the entire address book                                           |
+| `*`    | salesperson                                      | receive a success notification after adding/editing/deleting | know the operation was completed correctly                                                     |
+| `*`    | user                                             | hide private contact details                                 | minimize chance of someone else seeing them by accident                                        |
 
 
 
