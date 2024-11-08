@@ -40,7 +40,7 @@ public class EditEventCommand extends EditCommand {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_START_TIME + "PHONE] "
+            + "[" + PREFIX_START_TIME + "STARTTIME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " e 1 "
             + PREFIX_ADDRESS + "80 Blockhome Lane "
