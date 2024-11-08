@@ -119,7 +119,7 @@ public class Messages {
     public static final String MESSAGE_FORCE_UNASSIGN_VENDOR = "Use f/ to force the unassignment of vendors."
             + " This will unassign all tasks currently with the Vendor.";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "The Vendor: %1$s still has tasks"
-            + " assigned to them.";
+            + " assigned to them";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
     public static final String MESSAGE_UNASSIGN_VENDOR_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
