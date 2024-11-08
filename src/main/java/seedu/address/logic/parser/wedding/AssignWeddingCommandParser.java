@@ -67,7 +67,7 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
 
         if (weddingValues.stream().map(wedding -> wedding.split(" p[12]/")[0]).distinct().count()
                 != weddingValues.size()) {
-            throw new ParseException(Messages.MESSAGE_DUPLICATED_IN_ASSIGN);
+            throw new ParseException(Messages.MESSAGE_DUPLICATED_WEDDING_IN_ASSIGN);
         }
 
         Map<Wedding, String> weddings = weddingValues.stream()

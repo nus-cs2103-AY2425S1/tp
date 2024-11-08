@@ -125,6 +125,5 @@ public class AssignWeddingCommandTest {
                 addedWeddings,
                 personToEdit.getName().toString());
         CommandTestUtil.assertCommandSuccess(assignWeddingCommand, model, expectedMessage, model);
-
     }
 }
