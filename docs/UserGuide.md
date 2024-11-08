@@ -281,7 +281,7 @@ Next, enter `java -jar staffSync.jar` to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    <div class="ug-images">
 
-   ![Ui](images/Ui.png)
+   ![GUI](images/v1.6images/GUI.png)
    </div>
 
 <br>
@@ -431,6 +431,16 @@ journey with StaffSync!
 
   * `list ph` followed by `delete ph 2` deletes the 2nd person in the potential hire list.
   * `find e n/Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
+    
+<br>
+
+Example: `delete e 1`
+  </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for 'delete e 1'](images/v1.6images/Delete.png)
+  </div>
 
   <div class="box box-mistake" type="warning" seamless>
 
@@ -438,6 +448,7 @@ journey with StaffSync!
   * `delete E 1` - invalid format, you should type `e` instead of `E` as it is case-sensitive
   * `delete 1` - invalid format, you forgot to specify the person type `e` or `ph`
   </div>
+
   </div>
   </details>
 </div>
@@ -479,6 +490,16 @@ journey with StaffSync!
 
   * `list e` followed by `demote 2` demotes the 2nd person in the employee list.
   * `find e n/Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
+
+<br>
+
+Example: `demote 1`
+  </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for 'demote 1'](images/v1.6images/Demote.png)
+  </div>
 
   <div class="box box-mistake" type="warning" seamless>
 
@@ -542,7 +563,16 @@ journey with StaffSync!
 
   *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
   *  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+<br>
+
+  Example: `edit 1 p/96734857`
   </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for 'edit 1 p/96734857'](images/v1.6images/Edit.png)
+  </div>
+</div>
 </details>
 
 </div>
@@ -596,8 +626,16 @@ journey with StaffSync!
 
 **Examples:**
 
-  * `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and informatics ced/2021-01-01`
+  * `employee n/Jun Kang p/96732493 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and informatics ced/2025-04-04`
+    <br>
+
   </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for employee command](images/v1.6images/Employee.png)
+  </div>
+</div>
 </details>
 
 </div>
@@ -691,15 +729,14 @@ journey with StaffSync!
   email either `john@example.com` or `alice@example.com`.
   * `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`.
 
-  <br>
+<br>
 
-  Example: `find ph n/John`
+Example: `find ph n/David`
   </div>
-
   <div class="command-content">
   <div class="ug-images">
 
-  ![result for 'find ph n/John'](images/findJohnResult.png)
+![result for 'find ph n/David'](images/v1.6images/Find.png)
   </div>
 
   <div class="box box-mistake" type="warning" seamless>
@@ -737,7 +774,7 @@ journey with StaffSync!
 
   <div class="ug-images">
 
-  ![Ui](images/helpWindow.png)
+  ![HelpWindow](images/v1.6images/Help.png)
   </div>
 
   </div>
@@ -784,7 +821,16 @@ journey with StaffSync!
   * `list all`
   * `list e`
   * `list ph`
+<br>
+
+Example: `list all`
   </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for `list all`](images/v1.6images/List.png)
+  </div>
+</div>
 </details>
 
 </div>
@@ -835,8 +881,16 @@ journey with StaffSync!
 
 **Examples:**
 
-  * `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and informatics`
+  * `potential n/Heng Kai p/94628364 a/29 Prince George's Pk e/neohengkai@gmail.com d/Department of communications and informatics r/Head of communications and informatics`
+    <br>
+
   </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for potential command](images/v1.6images/Potential.png)
+  </div>
+</div>
 </details>
 
 </div>
@@ -880,6 +934,16 @@ journey with StaffSync!
 
   * `list ph` followed by `promote 2 2025-12-20` promotes the 2nd person in the potential hire list with a contract end date of 20 Dec 2025.
   * `find ph n/Betsy` followed by `promote 1 2025-12-20` promotes the 1st potential hire in the results of the `find` command with a contract end date of 20 Dec 2025.
+
+<br>
+
+Example: `promote 1 2025-12-20`
+  </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for `promote 1 2025-12-20`](images/v1.6images/Promote.png)
+  </div>
 
   <div class="box box-mistake" type="warning" seamless>
 
@@ -953,6 +1017,16 @@ journey with StaffSync!
   * `sort name` sorts all contacts by name in alphabetical order.
   * `sort date desc` sorts by contract end date with potential hires at the bottom.
   * `sort role asc` sorts contacts by role in alphabetical order.
+
+<br>
+
+Example: `sort name`
+  </div>
+  <div class="command-content">
+  <div class="ug-images">
+
+![result for `sort name`](images/v1.6images/Sort.png)
+  </div>
 </div>
 
 </details>
