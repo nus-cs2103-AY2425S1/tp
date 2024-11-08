@@ -260,8 +260,8 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 **Examples:**
 
-- `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
+- `add-client n/Turritopsis Dohrnii p/98889888 e/turritopsis@gmail.com a/Block 450 Clementi Ave 3 #14-20 Singapore 120450`
+- `add-client n/Mai Dang Lao p/96965888 e/maidanglao@mcd.com a/9 Sentul Cres #03-05 Singapore 828654 vrn/SJH9514P vin/MIT45678901234567 make/Mitsubishi model/Lancer i/Engine i/Gearbox`
 
 ---
 
@@ -320,7 +320,7 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 
 **Examples:**
 
-- `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
+- `add-car 1 vrn/SJH9514P vin/KMH45678901234567 make/Toyota model/Corolla`
 
 ---
 
@@ -386,10 +386,10 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] 
 
 **Examples:**
 
-- `edit 1 p/91234567 e/johndoe@example.com`
-  Edits the phone number and email address of the 1st client to `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crowe i/`
-  Edits the name of the 2nd client to `Betsy Crowe` and clears all existing issues.
+- `edit 1 p/91234567 e/e1234567@u.nus.edu`
+  Edits the phone number and email address of the 1st client to `91234567` and `e1234567@u.nus.edu` respectively.
+- `edit 2 n/Xiao Ming i/`
+  Edits the name of the 2nd client to `Xiao Ming` and clears all existing issues.
 - `edit 3 make/Hyundai model/Ioniq 6`
   Edits the make of the 1st client's car to `Hyundai` and model to `Ioniq 6`.
 
