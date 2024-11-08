@@ -154,6 +154,25 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 
 ## Features
 
+Below is a summary of the available commands in TAHub, with links to detailed explanations:
+
+- [Viewing help](#viewing-help--help)
+- [Adding a person](#adding-a-person-add)
+- [Listing all persons](#listing-all-persons--list)
+- [Editing a person](#editing-a-person--edit)
+- [Locating persons by name](#locating-persons-by-name-find)
+- [Deleting a person](#deleting-a-person--delete)
+- [Adding or editing a grade](#adding-or-editing-a-grade-addgrade)
+- [Deleting a grade from a person](#deleting-a-grade-from-a-person-deletegrade)
+- [Performing grade aggregation operations](#performing-grade-aggregation-operations-agggrade)
+- [Marking attendance](#marking-attendance-mark)
+- [Unmarking attendance](#unmarking-attendance-unmark)
+- [Filtering people who were absent](#filtering-people-who-were-absent-absentees)
+- [Clearing all entries](#clearing-all-entries--clear)
+- [Exiting the program](#exiting-the-program--exit)
+
+Refer to the specific sections for a detailed guide on how to use each command.
+
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
@@ -179,6 +198,7 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
+<br></br>
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
