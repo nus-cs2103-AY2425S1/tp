@@ -103,6 +103,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteGuestCommandParser`) and uses it to parse the command.
    1. Note that `EditVendorCommandParser` and `EditGuestCommandParser` parser classes require the `Model`, to check if the guest or vendor index provided by the user is valid or not. 
 
+
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteGuestCommand`) which is executed by the `LogicManager`.
 
 1. When the `Command` object is executed, it communicates with the `Model` (e.g., to delete a guest). <br>
@@ -117,8 +118,9 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddGuestCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddGuestCommand`) which the `AddressBookParser` returns back as a `Command` object.
   * As explained above, some `XYZCommandParser` classes require the `Model` for parsing 
-  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse)
+  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse) 
   
+
 * All `XYZCommandParser` classes (e.g., `AddGuestCommandParser`, `DeleteGuestCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -144,6 +146,7 @@ The `Storage` component,
 * Can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
   * `Storage` saves `Guest` into JSON format and reads back into `Guest` object, using the `JsonAdapatedGuest` class
   * `Storage` saves `Vendor` into JSON format and reads back into `Vendor` object, using the `JsonAdaptedVendor` class
+  
 
 * Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed)
 
@@ -159,11 +162,38 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Guest feature
+The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values
+
+The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
+<puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP2.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `AddGuestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+</box>
+
+Explanation:
+1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
+2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `add_guest` command, it creates and return an `AddGuestCommandParser` for further parsing. 
+3. `AddGuestCommandParser` parses the remaining user input (excluding the `add_guest` keyword) to extract the prefixes and their values, which are used to create a `Guest` object with the corresponding attributes
+   1. Suppose the n/, p/, e/ and a/ prefixes and their values are provided (these are compulsory)
+   2. Then, a `Guest` object with name, phone number, email and address attributes are created 
+
+
+4. An `AddGuestCommand` is then created with the new `Guest` object and returned.
+5. `LogicManager` executes the `AddGuestCommand`, which calls the `hasPerson` method of `Model` to check if the guest already exists in the address book. If the guest is not a duplicate (i.e. not same name and phone number as another guest), the `AddGuestCommand` then calls the `addPerson` method of the `Model` to add the guest into the address book.
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
+
 ### Edit Guest feature
-The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number of that guest in the displayed guest list
+The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number (positive, starting from 1) of that guest in the displayed guest list. New guest details are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values 
 
 The sequence diagram below provides an overview for the execution flow of a `edit_guest` command:
-<puml src="diagrams/EditGuestSequenceDiagram.puml" />
+<puml src="diagrams/EditGuestSequenceDiagramP1.puml" />
+<puml src="diagrams/EditGuestSequenceDiagramP2.puml" />
+<puml src="diagrams/EditGuestSequenceDiagramP3.puml" />
 
 <box type="info" seamless>
 
@@ -172,16 +202,19 @@ The sequence diagram below provides an overview for the execution flow of a `edi
 
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
-2. `AddressBookParser` parses the user input (if valid) to create and return an `EditGuestCommandParser`
-3. `EditGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create an `EditGuestDescriptor`. An `EditGuestCommand` is then created with the index provided in the user input and the `EditGuestDescriptor` created.
-4. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model` before accessing the target guest to edit. An edited guest with the updated name is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list.
-5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `edit_guest` command, it creates and return an `EditGuestCommandParser` for further parsing.
+3. `EditGuestCommandParser` parses the remaining user input (excluding the `edit_guest` keyword) to extract the prefixes and their values, which are used to create an `EditGuestDescriptor` object that captures the updated information
+4. An `EditGuestCommand` is then created with the guest index provided, as well as the new `EditGuestDescriptor` object
+5. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model`. The guest index is used to access the target guest to edit. An edited guest with the updated name (from the above example) is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list.
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 ### Find feature
-The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.
+The `find` command searches for all guests and vendors that match any of the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.
 
 The sequence diagram below provides an overview for the execution flow of a `find` command:
-<puml src="diagrams/FindSequenceDiagram.puml" />
+<puml src="diagrams/FindSequenceDiagramP1.puml" />
+<puml src="diagrams/FindSequenceDiagramP2.puml" />
+<puml src="diagrams/FindSequenceDiagramP3.puml" />
 
 <box type="info" seamless>
 
@@ -190,10 +223,11 @@ The sequence diagram below provides an overview for the execution flow of a `fin
 
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
-2. `AddressBookParser` parses the user input (if valid) to create and return a `FindCommandParser`
-3. `FindCommandParser` parses the user input (if valid) to extract the prefix and its corresponding value, before calling the corresponding parse predicate method to create the corresponding predicate to be used. In this example, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. A `FindCommand` is then created with the predicate and returned.
-4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the predicate as the argument. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of guest(s) and vendor(s) that match the given keyword(s)
-6. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `find` command, it creates and return an `FindCommandParser` for further parsing.
+3. `FindCommandParser` parses the remaining user input (excluding the `find` keyword) to extract the prefix and its corresponding value. Then, it calls the corresponding parse predicate method to create the corresponding predicate to be used. In the above example, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. 
+4. A `FindCommand` is then created with the new `NameContainsKeywordsPredicate` object and returned.
+4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the `NameContainsKeywordsPredicate` object as the argument. This method filters the common list of guests and vendors based on the predicate. Guests and vendors whose name (from the above example) matches the given keyword `John` will be kept. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of remaining guest(s) and vendor(s). 
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 
 --------------------------------------------------------------------------------------------------------------------
