@@ -604,27 +604,6 @@ Commands for managing property listings and associating clients with listings.
       > **Output**: Buyers added to listing: David HDB
       >
       > ---
-
-    <br>
-    <div class="note" markdown="span">
-    Listing and buyer names are case-insensitive: 
-    `addlistingbuyers Warton House` 
-    = `addlistingbuyers warton house` 
-    = `addlistingbuyers wArToN HouSe` _(Not exhaustive)_
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, listing/buyer name is space-sensitive:
-    `addlistingbuyers Warton House` != `addlistingbuyers WartonHouse`
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div> 
-    <br>
     
     - **Failed Execution:**
       > ---
