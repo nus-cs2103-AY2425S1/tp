@@ -360,7 +360,7 @@ A client can have any number of tags (including 0).
 * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+   <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
 **Tip:**
 We are aware that `NAME` currently does not accept special characters such as `/`, `@`, and `,`, and will be adding this functionality in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
 </div>
@@ -385,7 +385,9 @@ Shows a **list of all clients** in Prudy.
 
 **Format:** `find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…`
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+
+**Notes:**
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
@@ -394,6 +396,7 @@ Shows a **list of all clients** in Prudy.
   e.g., `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Only clients that match all parameters specified will be returned.
   e.g., `n/han pt/life` will return only clients that has `han` in his name and has a Life policy.
+</div>
 
   <box type="info" seamless>
   Info: Each parameter must have a valid input (e.g., <code>PHONE</code> must be a 3-15 digits long, <code>POLICY_TYPE</code> must be a valid policy type - <code>Life</code>, <code>Education</code> or <code>Health</code>).
@@ -415,13 +418,16 @@ Shows a **list of all clients** in Prudy.
 
 **Format:** `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+
+**Notes:** 
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, **the existing tags of the client will be removed** i.e. adding of tags is not cumulative.
 * You can remove all the client's tags by typing `t/` without
   specifying any tags after it.
+</div>
 
 **Examples:**
 *  `edit-client 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
@@ -539,13 +545,22 @@ Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the 
 Note that a single policy cannot have similar claims. This is to prevent accidental adding of duplicate claims. Two claims are consider similar if they have the same <code>CLAIM_STATUS</code> and <code>CLAIM_DESCRIPTION</code>.
 </box>
 
-**Format:** `add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION`
+**Format:**
 
-**Details:**
+```shell
+add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION
+```
+
+
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
 * `CLAIM_STATUS` specifies the current status of the claim (e.g., pending, approved).
 * `CLAIM_DESCRIPTION` provides a brief description of the claim details.
+</div>
 
 <box type=info seamless>
 Info: This command will not allow adding a claim if the client has no policy of the specified type or if a similar claim already exists.
@@ -556,16 +571,33 @@ Info: This command will not allow adding a claim if the client has no policy of 
 * `add-claim 1 pt/health s/pending d/stomach surgery` Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
 * `add-claim 2 pt/life s/approved d/accidental coverage` Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
 
+**On success:**
+```shell
+Claim added for policy type 'Life' of client: Alex Yeoh
+
+Added Claim Details:
+Status: Approved | Description: accidental coverage
+
+```
+
 #### 5.4.2 Deleting a Claim: `delete-claim`
 Deletes a specific claim from a policy type for the client identified by the specified INDEX.
 
-**Format:** `delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX`
+**Format:**
 
-**Details:**
+```shell
+delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX
+```
+
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
 * `CLAIM_INDEX` is the position of the claim in the policy's claim list and must be a positive integer.
 * Use the `list-claims` command to find the appropriate claim index for the specified policy type.
+</div>
 
 <box type=info seamless>
 Info: If the specified client, policy type, or claim does not exist, an error message will be shown.
@@ -575,18 +607,34 @@ Info: If the specified client, policy type, or claim does not exist, an error me
 * `delete-claim 1 pt/health c/1` Deletes the claim at index 1 in the health policy of the 1st client.
 * `delete-claim 2 pt/life c/2` Deletes the claim at index 2 in the life policy of the 2nd client.
 
+**On success:**
+```shell
+Claim deleted for policy type 'Health' of client: Bernice Yu
+
+Deleted Claim Details:
+Status: Approved | Description: Updated surgery details
+Note: The indexing of remaining claims may have changed due to this deletion.
+```
+
 #### 5.4.3 Editing a Claim: `edit-claim`
 Edits a specific claim in a policy for the client identified by the specified INDEX.
 
-**Format:** `edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/CLAIM_STATUS] [d/CLAIM_DESCRIPTION]`
+**Format:**
+```shell
+edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/CLAIM_STATUS] [d/CLAIM_DESCRIPTION]
+```
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
 * `CLAIM_INDEX` is the position of the claim in the policy's claim list and must be a positive integer.
 * `CLAIM_STATUS` updates the claim status (e.g., `approved`, `pending`, or `rejected`).
 * `CLAIM_DESCRIPTION` updates the description of the claim.
 * Use the `list-claims` command to find the appropriate claim index for the specified policy type.
+</div>
 
 <box type=info seamless>
 Info: At least one of `CLAIM_STATUS` or `CLAIM_DESCRIPTION` must be specified. If the claim details are unchanged or changing it will result in a duplicate claim, an error message will be shown.
@@ -596,6 +644,14 @@ Info: At least one of `CLAIM_STATUS` or `CLAIM_DESCRIPTION` must be specified. I
 
 * `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details` Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
 * `edit-claim 2 pt/life c/2 s/pending` Updates the status of the second claim in the life policy of the 2nd client to "pending."
+
+**On success:**
+```shell
+Claim edited for policy type 'Health' of client: Bernice Yu
+
+Updated Claim Details:
+Status: Approved | Description: Updated surgery details
+```
 
 #### 5.4.4 Listing All Claims: `list-claims`
 Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
