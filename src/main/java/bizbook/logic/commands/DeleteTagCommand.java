@@ -28,7 +28,7 @@ public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the tag from a specfic person.\n"
+            + ": Deletes a tag from a specific person.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TAG + "TAG\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "BusinessMan";
