@@ -14,9 +14,8 @@ import seedu.address.model.person.CallFrequency;
  * Guarantees: immutable; is valid as declared in {@link #isValidContactRecord(String)}
  */
 public class ContactRecord implements Comparable<ContactRecord> {
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be valid, and in the format of " + DATE_FORMAT;
+            "Dates should be valid, and in the format of YYYY-MM-DD";
     public static final String MESSAGE_CONSTRAINTS_FUTURE_DATE = "Dates should not be in the future";
     public final LocalDate value;
     private final String notes;
@@ -38,8 +37,7 @@ public class ContactRecord implements Comparable<ContactRecord> {
      */
     public static boolean isValidContactRecord(String testDate) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-            LocalDate.parse(testDate, formatter);
+            LocalDate.parse(testDate);
             return true;
         } catch (DateTimeParseException e) {
             return false;

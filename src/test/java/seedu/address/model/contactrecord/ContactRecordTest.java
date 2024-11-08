@@ -24,14 +24,26 @@ public class ContactRecordTest {
         // null tag contact date
         assertThrows(NullPointerException.class, () -> ContactRecord.isValidContactRecord(null));
 
-        // invalid date in contact record
-        assertFalse(ContactRecord.isValidContactRecord("2020-13-01"));
-        assertFalse(ContactRecord.isValidContactRecord("2020-01-32"));
-        assertFalse(ContactRecord.isValidContactRecord(""));
-        assertFalse(ContactRecord.isValidContactRecord("2020-01-01 12:00"));
-
         // valid date in contact record
         assertTrue(ContactRecord.isValidContactRecord("2020-01-01"));
+
+        // Invalid Month
+        assertFalse(ContactRecord.isValidContactRecord("2020-13-01"));
+
+        // Invalid Day
+        assertFalse(ContactRecord.isValidContactRecord("2020-01-32"));
+
+        // Invalid Day and Month
+        assertFalse(ContactRecord.isValidContactRecord("2020-13-32"));
+
+        // Empty String
+        assertFalse(ContactRecord.isValidContactRecord(""));
+
+        // Time in contact record
+        assertFalse(ContactRecord.isValidContactRecord("2020-01-01 12:00"));
+
+        // Non Leap year
+        assertFalse(ContactRecord.isValidContactRecord("2023-02-29"));
     }
 
     @Test
