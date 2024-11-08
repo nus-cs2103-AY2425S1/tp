@@ -5,7 +5,6 @@ skinparam sequenceReferenceBackgroundColor lightgrey
 
 box Logic LOGIC_COLOR_T1
 
-
 participant ":AddGuestCommandParser" as AddGuestCommandParser LOGIC_COLOR
 participant "a:AddGuestCommand" as AddGuestCommand LOGIC_COLOR
 end box
@@ -14,10 +13,8 @@ box Model MODEL_COLOR_T1
 participant "guest:Guest" as Guest MODEL_COLOR
 end box
 
-
-
 group sd create Guest object and AddGuestCommand object
-
+    activate AddGuestCommandParser
     create Guest
     AddGuestCommandParser -> Guest
     activate Guest

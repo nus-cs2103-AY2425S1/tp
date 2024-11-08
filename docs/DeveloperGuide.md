@@ -188,10 +188,12 @@ Explanation:
 6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 ### Edit Guest feature
-The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number of that guest in the displayed guest list
+The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number (positive, starting from 1) of that guest in the displayed guest list. New details are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values 
 
 The sequence diagram below provides an overview for the execution flow of a `edit_guest` command:
-<puml src="diagrams/EditGuestSequenceDiagram.puml" />
+<puml src="diagrams/EditGuestSequenceDiagramP1.puml" />
+<puml src="diagrams/EditGuestSequenceDiagramP2.puml" />
+<puml src="diagrams/EditGuestSequenceDiagramP3.puml" />
 
 <box type="info" seamless>
 
@@ -200,10 +202,11 @@ The sequence diagram below provides an overview for the execution flow of a `edi
 
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
-2. `AddressBookParser` parses the user input (if valid) to create and return an `EditGuestCommandParser`
-3. `EditGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create an `EditGuestDescriptor`. An `EditGuestCommand` is then created with the index provided in the user input and the `EditGuestDescriptor` created.
-4. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model` before accessing the target guest to edit. An edited guest with the updated name is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list.
-5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `edit_guest` command, it creates and return an `EditGuestCommandParser` for further parsing.
+3. `EditGuestCommandParser` parses the remaining user input (excluding the `edit_guest` keyword) to extract the prefixes and their values, which are used to create an `EditGuestDescriptor` object that captures the updated information
+4. An `EditGuestCommand` is then created with the guest index provided, as well as the new `EditGuestDescriptor` object
+5. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model`. The guest index is used to access the target guest to edit. An edited guest with the updated name (from the above example) is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list.
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 ### Find feature
 The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.

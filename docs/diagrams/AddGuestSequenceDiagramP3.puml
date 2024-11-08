@@ -13,6 +13,7 @@ participant "m:Model" as Model MODEL_COLOR
 end box
 
 group sd execute add guest command
+   activate AddGuestCommand
    AddGuestCommand -> Model : hasPerson(guest)
    activate Model
 

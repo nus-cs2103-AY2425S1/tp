@@ -30,13 +30,13 @@ ref over AddGuestCommandParser
    create Guest object and AddGuestCommand object
 end ref
 
-AddGuestCommandParser --> AddressBookParser : a
+AddGuestCommandParser --> AddressBookParser : AddGuestCommand obj
 deactivate AddGuestCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 AddGuestCommandParser -[hidden]-> AddressBookParser
 destroy AddGuestCommandParser
 
-AddressBookParser --> LogicManager : a
+AddressBookParser --> LogicManager : AddGuestCommand obj
 deactivate AddressBookParser
 
 LogicManager -> AddGuestCommand : execute(m)
@@ -46,11 +46,9 @@ ref over AddGuestCommand
     execute add guest command
 end ref
 
-
-
-AddGuestCommand --> LogicManager : r
+AddGuestCommand --> LogicManager : CommandResult obj
 deactivate AddGuestCommand
 
-[<--LogicManager : r
+[<--LogicManager : CommandResult obj
 deactivate LogicManager
 @enduml
