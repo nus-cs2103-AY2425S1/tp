@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -26,7 +27,6 @@ import seedu.address.model.listing.Price;
 import seedu.address.model.listing.Region;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
 
 /**
  * Edits the details of an existing listing in the system.
@@ -36,15 +36,15 @@ public class EditListingCommand extends Command {
     public static final String COMMAND_WORD = "editlisting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the listing identified "
-            + "by the listing name. Buyers cannot be edited using this command. "
+            + "by the listing index. Buyers cannot be edited using this command. "
             + "Use addlistingbuyers or removelistingbuyers to manage buyers.\n"
-            + "Parameters: LISTING_NAME "
+            + "Parameters: LISTING_INDEX "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PRICE + "PRICE] "
             + "[" + PREFIX_AREA + "AREA] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REGION + "REGION]...\n"
-            + "Example: " + COMMAND_WORD + " ListingName "
+            + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_PRICE + "450000 "
             + PREFIX_AREA + "1200";
 
@@ -53,50 +53,46 @@ public class EditListingCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_INVALID_LISTING_NAME = "The specified listing name is invalid.";
 
-    private final Name listingName;
+    private final Index listingIndex;
     private final EditListingDescriptor editListingDescriptor;
 
     /**
-     * @param listingName of the listing in the filtered listing list to edit
+     * @param listingIndex of the listing in the filtered listing list to edit
      * @param editListingDescriptor details to edit the listing with
      */
-    public EditListingCommand(Name listingName, EditListingDescriptor editListingDescriptor) {
-        requireNonNull(listingName);
+    public EditListingCommand(Index listingIndex, EditListingDescriptor editListingDescriptor) {
+        requireNonNull(listingIndex);
         requireNonNull(editListingDescriptor);
 
-        this.listingName = listingName;
+        this.listingIndex = listingIndex;
         this.editListingDescriptor = new EditListingDescriptor(editListingDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Listing> lastShownList = model.getFilteredListingList();
+        List<Listing> lastShownListingList = model.getFilteredListingList();
 
-        Listing listingToEdit = lastShownList.stream()
-                .filter(listing -> listing.getName().equals(listingName))
-                .findFirst()
-                .orElse(null);
-
-        if (listingToEdit == null) {
-            throw new CommandException(MESSAGE_INVALID_LISTING_NAME);
+        int zeroBasedListing = listingIndex.getZeroBased();
+        if (zeroBasedListing >= lastShownListingList.size() || zeroBasedListing < 0) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
         }
+        Listing listingToEdit = lastShownListingList.get(zeroBasedListing);
 
-        Optional<Person> seller = editListingDescriptor.getSellerName()
-                .flatMap(name -> Optional.ofNullable(model.getPersonByName(name)));
-        if (seller.isPresent()) {
-            if (!(seller.get() instanceof Seller)) {
-                throw new CommandException("The specified person is not a seller.");
+        Optional<Index> sellerIndex = editListingDescriptor.getSellerIndex();
+
+        Listing editedListing;
+        if (sellerIndex.isPresent()) {
+            List<Person> lastShownPersonList = model.getFilteredPersonList();
+            int zeroBasedPerson = sellerIndex.get().getZeroBased();
+            if (zeroBasedPerson >= lastShownPersonList.size() || zeroBasedPerson < 0) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-        } else if (editListingDescriptor.getSellerName().isPresent()) {
-            throw new CommandException("Seller not found in the system.");
+            Person seller = lastShownPersonList.get(zeroBasedPerson);
+            editedListing = createEditedListing(listingToEdit, editListingDescriptor, seller);
+        } else {
+            editedListing = createEditedListing(listingToEdit, editListingDescriptor, listingToEdit.getSeller());
         }
-
-        Listing editedListing = createEditedListing(
-                listingToEdit,
-                editListingDescriptor,
-                seller.orElse(listingToEdit.getSeller())
-        );
 
         if (isIdentifierChanged(listingToEdit, editedListing) && model.canEditListing(listingToEdit, editedListing)) {
             throw new CommandException(MESSAGE_DUPLICATE_LISTING);
@@ -151,14 +147,14 @@ public class EditListingCommand extends Command {
             return false;
         }
 
-        return listingName.equals(otherEditCommand.listingName)
+        return listingIndex.equals(otherEditCommand.listingIndex)
                 && editListingDescriptor.equals(otherEditCommand.editListingDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("listingName", listingName)
+                .add("listingIndex", listingIndex)
                 .add("editListingDescriptor", editListingDescriptor)
                 .toString();
     }
@@ -173,7 +169,7 @@ public class EditListingCommand extends Command {
         private Area area;
         private Address address;
         private Region region;
-        private Name sellerName;
+        private Index sellerIndex;
 
         public EditListingDescriptor() {}
 
@@ -190,11 +186,11 @@ public class EditListingCommand extends Command {
             setArea(toCopy.area);
             setAddress(toCopy.address);
             setRegion(toCopy.region);
-            setSellerName(toCopy.sellerName);
+            setSellerIndex(toCopy.sellerIndex);
         }
 
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, price, area, address, region, sellerName);
+            return CollectionUtil.isAnyNonNull(name, price, area, address, region, sellerIndex);
         }
 
         public void setName(Name name) {
@@ -236,12 +232,12 @@ public class EditListingCommand extends Command {
         public Optional<Region> getRegion() {
             return Optional.ofNullable(region);
         }
-        public void setSellerName(Name sellerName) {
-            this.sellerName = sellerName;
+        public void setSellerIndex(Index sellerIndex) {
+            this.sellerIndex = sellerIndex;
         }
 
-        public Optional<Name> getSellerName() {
-            return Optional.ofNullable(sellerName);
+        public Optional<Index> getSellerIndex() {
+            return Optional.ofNullable(sellerIndex);
         }
 
 
@@ -261,7 +257,7 @@ public class EditListingCommand extends Command {
                     && Objects.equals(area, otherDescriptor.area)
                     && Objects.equals(address, otherDescriptor.address)
                     && Objects.equals(region, otherDescriptor.region)
-                    && Objects.equals(sellerName, otherDescriptor.sellerName);
+                    && Objects.equals(sellerIndex, otherDescriptor.sellerIndex);
         }
 
         @Override
@@ -272,7 +268,7 @@ public class EditListingCommand extends Command {
                     .add("area", area)
                     .add("address", address)
                     .add("region", region)
-                    .add("seller", sellerName)
+                    .add("seller", sellerIndex)
                     .toString();
         }
     }

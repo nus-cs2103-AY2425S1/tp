@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.listingcommands.EditListingCommand;
 import seedu.address.logic.commands.listingcommands.EditListingCommand.EditListingDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -16,7 +17,6 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new EditListingCommand object.
@@ -36,10 +36,10 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PRICE, PREFIX_AREA, PREFIX_ADDRESS,
                 PREFIX_REGION, PREFIX_SELLER);
 
-        Name currentListingName;
+        Index currentListingIndex;
 
         try {
-            currentListingName = ParserUtil.parseName(argMultimap.getPreamble());
+            currentListingIndex = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     EditListingCommand.MESSAGE_USAGE), pe);
@@ -62,14 +62,14 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
             editListingDescriptor.setRegion(ParserUtil.parseRegion(argMultimap.getValue(PREFIX_REGION).get()));
         }
         if (argMultimap.getValue(PREFIX_SELLER).isPresent()) {
-            Name sellerName = ParserUtil.parseName(argMultimap.getValue(PREFIX_SELLER).get());
-            editListingDescriptor.setSellerName(sellerName);
+            Index sellerIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_SELLER).get());
+            editListingDescriptor.setSellerIndex(sellerIndex);
         }
 
         if (!editListingDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditListingCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditListingCommand(currentListingName, editListingDescriptor);
+        return new EditListingCommand(currentListingIndex, editListingDescriptor);
     }
 }

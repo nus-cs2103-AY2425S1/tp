@@ -3,7 +3,7 @@ package seedu.address.logic.parser.listingcommandparsers;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalListings.KENT_RIDGE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LISTING;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +14,7 @@ public class DeletingListingCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "Kent Ridge Condo",
-                new DeleteListingCommand(KENT_RIDGE.getName()));
+        assertParseSuccess(parser, "1", new DeleteListingCommand(INDEX_FIRST_LISTING));
     }
 
     @Test

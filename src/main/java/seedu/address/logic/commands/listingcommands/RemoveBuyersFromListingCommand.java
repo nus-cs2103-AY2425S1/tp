@@ -3,16 +3,19 @@ package seedu.address.logic.commands.listingcommands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.listing.Listing;
-import seedu.address.model.person.Buyer;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * Removes buyers from an existing listing in the system.
@@ -22,32 +25,34 @@ public class RemoveBuyersFromListingCommand extends Command {
     public static final String COMMAND_WORD = "removelistingbuyers";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes buyers from the listing identified by its "
-            + "name. "
-            + "Parameters: LISTING_NAME buyer/BUYER_NAME [buy/MORE_BUYER_NAMES]...\n"
-            + "Example: " + COMMAND_WORD + " Warton House buy/Alice buy/Bob";
+            + "index. "
+            + "Parameters: LISTING_INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...\n"
+            + "Example: " + COMMAND_WORD + " 1 buy/1 buy/3";
 
-    public static final String MESSAGE_REMOVE_BUYERS_SUCCESS = "Buyers removed from listing: %1$s";
+    public static final String MESSAGE_REMOVE_BUYERS_SUCCESS = "Buyers removed from listing: %1$s.\n"
+            + "Removed buyers: %2$s";
     public static final String MESSAGE_LISTING_NOT_FOUND = "The specified listing name does not exist.";
     public static final String MESSAGE_EMPTY_SET = "Please provide valid buyers";
-    public static final String MESSAGE_PERSON_NOT_BUYER = "The client %1$s is not registered as a buyer.";
+    public static final String MESSAGE_PERSON_NOT_BUYER = "The specified person is not a buyer:\n"
+            + "%d. %s";
     public static final String MESSAGE_NOT_BUYER_FOR_LISTING =
             "The specified buyer %1$s is not a buyer of the listing %2$s.";
     public static final String MESSAGE_BUYER_NOT_FOUND = "The specified buyer %1$s does not exist in the client list.";
 
-    private final Name listingName;
-    private final Set<Name> buyersToRemove;
+    private final Index index;
+    private final Set<Index> buyersToRemove;
 
     /**
      * Constructs a {@code RemoveBuyersFromListingCommand}.
      *
-     * @param listingName The name of the listing from which buyers will be removed.
-     * @param buyersToRemove The names of the buyers to remove from the listing.
+     * @param index The index of the listing from which buyers will be removed.
+     * @param buyersToRemove The indexes of the buyers to remove from the listing.
      */
-    public RemoveBuyersFromListingCommand(Name listingName, Set<Name> buyersToRemove) {
-        requireNonNull(listingName);
+    public RemoveBuyersFromListingCommand(Index index, Set<Index> buyersToRemove) {
+        requireNonNull(index);
         requireNonNull(buyersToRemove);
 
-        this.listingName = listingName;
+        this.index = index;
         this.buyersToRemove = new HashSet<>(buyersToRemove);
     }
 
@@ -55,34 +60,39 @@ public class RemoveBuyersFromListingCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-
-        if (!model.hasListingOfName(listingName)) {
-            throw new CommandException(MESSAGE_LISTING_NOT_FOUND);
+        int zeroBased = index.getZeroBased();
+        List<Listing> lastShownListingList = model.getFilteredListingList();
+        if (zeroBased >= lastShownListingList.size() || zeroBased < 0) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LISTING_DISPLAYED_INDEX);
         }
-        Listing listingToEdit = model.getListingByName(listingName);
+
+        Listing listingToEdit = model.getFilteredListingList().get(zeroBased);
 
         Set<Person> existingBuyers = new HashSet<>(listingToEdit.getBuyers());
         Set<Person> buyersToRemoveSet = new HashSet<>();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
 
-        for (Name buyerName : buyersToRemove) {
-
-
-            if (!model.hasPersonOfName(buyerName)) {
-                throw new CommandException(String.format(MESSAGE_BUYER_NOT_FOUND, buyerName));
+        for (Index buyerIndex : buyersToRemove) {
+            int zeroBasedBuyer = buyerIndex.getZeroBased();
+            int oneBasedBuyer = buyerIndex.getOneBased();
+            if (zeroBasedBuyer >= lastShownPersonList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
-            Person buyer = model.getPersonByName(buyerName);
+            Person buyerToRemove = lastShownPersonList.get(zeroBasedBuyer);
 
             // Check if the person is actually an instance of Buyer
-            if (!(buyer instanceof Buyer)) {
-                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER, buyer.getName()));
+            if (!buyerToRemove.getRole().equals(Role.BUYER)) {
+                throw new CommandException(String.format(MESSAGE_PERSON_NOT_BUYER,
+                        oneBasedBuyer, buyerToRemove.getName()));
             }
 
-            if (!existingBuyers.contains(buyer)) {
-                throw new CommandException(String.format(MESSAGE_NOT_BUYER_FOR_LISTING, buyer.getName(), listingName));
+            if (!existingBuyers.contains(buyerToRemove)) {
+                throw new CommandException(String.format(MESSAGE_NOT_BUYER_FOR_LISTING,
+                        buyerToRemove.getName(), Messages.format(listingToEdit)));
             }
 
-            buyersToRemoveSet.add(buyer);
+            buyersToRemoveSet.add(buyerToRemove);
         }
 
         if (buyersToRemoveSet.isEmpty()) {
@@ -103,7 +113,9 @@ public class RemoveBuyersFromListingCommand extends Command {
         );
 
         model.setListing(listingToEdit, updatedListing);
-        return new CommandResult(String.format(MESSAGE_REMOVE_BUYERS_SUCCESS, listingName));
+        String removedNames = buyersToRemoveSet.stream()
+                .map(buyer -> buyer.getName().toString()).collect(Collectors.joining(", "));
+        return new CommandResult(String.format(MESSAGE_REMOVE_BUYERS_SUCCESS, listingToEdit.getName(), removedNames));
     }
 
     @Override
@@ -117,7 +129,7 @@ public class RemoveBuyersFromListingCommand extends Command {
         }
 
         RemoveBuyersFromListingCommand otherCommand = (RemoveBuyersFromListingCommand) other;
-        return listingName.equals(otherCommand.listingName)
+        return index.equals(otherCommand.index)
                 && buyersToRemove.equals(otherCommand.buyersToRemove);
     }
 }
