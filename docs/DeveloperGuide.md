@@ -454,32 +454,18 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ### Editing attendance status
-Prerequisites: Ensure one at least one contact is present. These tests can and should be done sequentially.
+Prerequisites: Ensure one more than one contact is present. These tests can and should be done sequentially.
 1. Marking attendance as present for a person
    1. Test case: `mark 1 tut/1`<br>
    Expected: First contact's tutorial box 1 turns green.
-   2. Test case: `unmark 1 tut/1`<br>
-   Expected: First contact's tutorial box 1 turns red.
-   3. Test case: `reset 1 tut/1`<br>
-   Expected: First contact's tutorial box 1 turns grey.
-   5. Test case: `mark 1 tut/2-3`<br>
-   Expected: First contact's tutorial box 2 and 3 turns green.
-   5. Test case: `unmark 1 tut/2-3`<br>
-   Expected: First contact's tutorial box 2 and 3 turns red.
-   6. Test case: `reset 1 tut/2-3`<br>
-   Expected: First contact's tutorial box 2 and 3 turns grey.
-   7. Test case: `mark 1 tut/[4,6,8]`<br>
-   Expected: First contact's tutorial box 4, 6 and 8 turns green.
-   8. Test case: `unmark 1 tut/[4,6,8]`<br>
-   Expected: First contact's tutorial box 4, 6 and 8 turns red.
-   9. Test case: `reset 1 tut/[4,6,8]`<br>
-   Expected: First contact's tutorial box 4, 6 and 8 turns grey.
-   10. Test case: `mark * tut/5`<br>
-   Expected: All contacts' tutorial box 5 turns green.
-   11. Test case: `unmark * tut/5`<br>
-   Expected: All contacts' tutorial box 5 turns red.
-   12. Test case: `reset * tut/5`<br>
-   Expected: All contacts' tutorial box 5 turns grey.
+   2. Test case: `mark 1 tut/1-2`<br>
+   Expected: First contact's tutorial box 1 remains green and box 2 turns green.
+   3. Test case: `unmark 2 tut/[1,3]`<br>
+   Expected: Second contact's tutorial box 1 and 3 turns red.
+   4. Test case: `reset * tut/1`<br>
+   Expected: All contact's tutorial box 1 turns grey. First contact's tutorial box 2 remains green and second contact's tutorial box 3 remains red.
+   5. Test case: `mark 1 tut/2`<br>
+   Expected: No change will occur. Details shown in the status message.
 
 ### Saving data
 
