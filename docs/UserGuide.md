@@ -92,11 +92,16 @@ Back to [Quick Start](#quick-start)
 
 ### Viewing help : `help`
 
-Shows you a message containing a link to the user guide.
+Shows you a message containing a link to a more in depth user guide to help you!
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you would prefer to see an offline brief overview help guide of all the commands, simply type in an
+unknown command word and press enter.
+</div>
 
 ---
 
@@ -142,7 +147,7 @@ Continuing from the previous example in `add`, you could try this
 
 ### Commenting on a student: `comment`
 
-Comments on a student in Teacher's Pet.
+Comments on one of your students in Teacher's Pet.
 
 Format: `comment INDEX c/COMMENT`
 
@@ -234,10 +239,9 @@ Format: `random`
 
 ### Deleting a student : `delete`
 
-Deletes the specified student from the address book.
+Deletes one of your specified students from your list.
 
 Format: `delete INDEX`
-![result for delete example command](images/delete_example.png)
 
 * The delete command deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
@@ -249,12 +253,10 @@ Examples:
 
 Expected Results:
 * If successful, you will be notified on which student you have deleted.
-![result for delete success](images/delete_success.png)
 
 Common Errors:
 * It is likely you are facing an error due to incorrect `INDEX` being used.
-* Within the application you will be notified on the exact error and how to rectify it. 
-![result for delete fail](images/delete_fail.png)
+* Within the application you will be notified on the exact error and how to rectify it.
 
 ---
 
@@ -529,10 +531,10 @@ List students based on their attendance status:
 ---
 ### Clearing all entries : `clear`
 
-Clears all your students entries from Teacher's Pet.
+Lets you clears all your students entries from Teacher's Pet.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All students stored in Teacher's Pet will be deleted permanently and this command cannot be undone.
+All your students stored in Teacher's Pet will be deleted permanently and this command cannot be undone.
 If you wish to save a copy of the data, refer to [FAQ](#faq) for more info
 </div>
 
@@ -543,7 +545,7 @@ Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits from Teacher's Pet.
+Lets you close the Teacher's Pet application.
 
 Format: `exit`
 
