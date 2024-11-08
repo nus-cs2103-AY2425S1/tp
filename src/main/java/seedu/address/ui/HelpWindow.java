@@ -161,7 +161,6 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("Load", "`load`"),
                         new HelpCommand("Exit", "`exit`")
                 );
-
         // Add data to the table
         table.setItems(data);
         table.getColumns().add(commandColumn);

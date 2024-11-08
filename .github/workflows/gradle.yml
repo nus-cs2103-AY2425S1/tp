@@ -36,6 +36,10 @@ jobs:
           java-version: '17'
           java-package: jdk+fx
 
+      - name: Tests without GUI for linux
+        if: runner.os == 'Linux'
+        run: ./gradlew testNoGui
+
       - name: Build and check with Gradle
         if: runner.os != 'Linux'
         run: ./gradlew check coverage

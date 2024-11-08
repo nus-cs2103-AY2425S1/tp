@@ -8,11 +8,20 @@ plugins {
 
 mainClassName = 'seedu.address.Main'
 sourceCompatibility = JavaVersion.VERSION_17
+
+
+
 targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+task testNoGui(type: Test) {
+    useJUnitPlatform()
+    exclude '**/seedu/address/ui/**'
+    finalizedBy jacocoTestReport
 }
 
 run {

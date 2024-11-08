@@ -22,3 +22,5 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 docs/_markbind/logs/
+src/main/resources/view/reference colours.css
+src/main/resources/view/DarkTheme1.css
