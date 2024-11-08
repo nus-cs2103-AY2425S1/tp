@@ -292,18 +292,22 @@ based on [uniqueness](#uniqueness-of-objects).
 
 ### Find feature
 
-The following sequence diagram shows how a find operation goes through the `Logic` component
+
+The implementation of the Find feature follows closely with the general format provided in the Logic Component [above](#logic-component).
 ![FindSequenceDiagram-Logic](images/FindSequenceDiagram-Logic.png)
 
-`FindCommandParser` parses the find string into `argMultimap` to pass to `Predicate Factory`, which produces the
-predicates to create a `FindCommand` object.
+Due to the complexity of the command, there is an extra helper class `PredicateFactory` when `AddressBookParser` calls `parse(n/Alex ...)`
 ![FindCommandParseSequence](images/FindCommandParseSequence.png)
 
-`personPredicates` is of type `Predicate<Person>`
+The main steps for this execution are:
 
-`participationPredicates` is of type `Predicate<Participation>`
-
-`Predicate` objects in `participationPredicates` are converted to `Predicate<Person>` using a `PredicateAdapter` object before being reduced to a single `Predicate<Person>`
+1. The user inputs the command `find n/Alex tut/Science ...` to find students with these properties
+2. **LogicManager** receives the command and calls `parseCommand("find n/Alex tut/Science ...")` on AddressBookParser to interpret the input.
+3. **AddressBookParser** receives the command and identifies that it’s a find command. It calls `parse("n/Alex tut/Science ...")` on FindCommandParser to parse the specific details.
+4. **FindCommandParser** processes the arguments `("n/Alex tut/Science ...")` into an argument map, and passes it to `PredicateFactory`.
+5. **PredicateFactory** processes the given argument map into `personPredicates` of type `Predicate<Person>` and `participationPredicates` of type `Predicate<Participation>`, and creates an instance of FindCommand
+5. **LogicManager** then calls `execute(model)` on the created FindCommand to carry out the find operation.
+6. **FindCommand** proceeds to filter the relevant data from the Model instance.
 
 
 ### Enroll and Unenroll feature
@@ -1086,6 +1090,24 @@ testers are expected to do more *exploratory* testing.
    3. Expected result: The most recent window size and location is retained.
 
 
+### Saving data
+
+1. Dealing with missing data files
+
+  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/addressbook.json`)
+
+  * Test case: Rename, move, or delete the save file
+
+    - Expected: Launching EduVault creates a new save file with default entries.
+
+2. Dealing with corrupt data files
+
+  * Prerequisites: Save file exists (the default location and name is `[JAR file location]/data/addressbook.json`)
+
+  * Test case: Edit the save file to be an invalid JSON format (eg. removing the closing brace `}` at the end of the file), 
+or adding an invalid object as outlined in [Storage feature](#storage-feature).
+
+    - Expected: Launching EduVault creates a new empty address book.
 
 ### Adding a student
 
