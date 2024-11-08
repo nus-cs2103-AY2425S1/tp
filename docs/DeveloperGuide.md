@@ -449,14 +449,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. System startup time should not exceed ten seconds on standard hardware.
 
 ### Glossary
-**Technical**
+**Technical terms**
 * **Java**: Java is a programming language that BridalBuddy is written in. It is required to run the application.
 *  **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
 *  **GUI**: Graphical User Interface, a user interface that allows users to interact with the app through graphical elements such as buttons, text fields, and menus.
 *  **JAR**: Java Archive, A file format used to package Java applications and libraries into a single, compressed file
 *  **JSON**: JavaScript Object Notation, a lightweight data-interchange format for structuring and exchanging data
 
-**Non-technical**
+**Non-technical terms**
 *  **Guest**: A person invited to the wedding.
 *  **Vendor**: A supplier providing services or goods for a wedding, such as photographers, florists, caterers, etc.
 *  **RSVP Status**: The attendance response status of a guest. It can be either accepted, pending, or declined.
