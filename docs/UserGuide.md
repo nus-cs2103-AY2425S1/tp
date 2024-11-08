@@ -185,8 +185,6 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 <h2 id="features" style="color: #000000;"> <i class="fas fa-cogs icon"></i> Features</h2>
 
 <box type="info" seamless>
@@ -207,6 +205,8 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
   - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 <h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">help</span></h3>
 
@@ -236,8 +236,6 @@ Adds a client to MATER.
 add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...
 ```
 
-<div style="page-break-after: always;"></div>
-
 **Parameters:**
 
 | Parameter         | Requirements                                                                                                                                                                           | Explanation                                       |
@@ -251,6 +249,8 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 | `make/CAR_MAKE`   | Optional; Required if adding a car; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                         | Car's make.                                       |
 | `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                      | Car's model.                                      |
 | `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.                 |
+
+<div style="page-break-after: always;"></div>
 
 **Notes:**
 
@@ -289,8 +289,6 @@ del-client INDEX
 | Parameter   | Requirements                         | Explanation                                                         |
 |-------------|--------------------------------------|---------------------------------------------------------------------|
 | `INDEX`     | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.  |
-
-<div style="page-break-after: always;"></div>
 
 **Examples:**
 
@@ -338,8 +336,6 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 <h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-car</span></h3>
 
 Deletes a car from a client.
@@ -349,8 +345,6 @@ Deletes a car from a client.
 ```shell
 del-car INDEX
 ```
-
-<div style="page-break-after: always;"></div>
 
 **Parameters:**
 
