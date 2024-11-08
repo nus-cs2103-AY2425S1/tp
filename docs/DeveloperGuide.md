@@ -759,7 +759,11 @@ This section lists planned enhancements to address known feature flaws. These en
    **Current Issue:** Currently, each student in EduTuTu can only store up to one phone number.  
    **Planned Enhancement:** Modify EduTuTu to allow storage of multiple phone numbers (eg., Office Hp and Personal Phone Numbers)
 
-   
+
+9. **Enable handling of larger fees**  
+   **Current Issue:** Currently, the fees field only accepts up to 9 integers to prevent integer overflow.  
+   **Planned Enhancement:** Modify EduTuTu to allow the storage of larger fees.
+ 
 These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
 
 
