@@ -29,7 +29,7 @@ public class AddAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "apt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an appointment to a client "
-            + "identified by their distinct client name. "
+            + "identified by the index number used in the displayed client list. "
             + "Existing appointment will be overwritten with the new appointment. \n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + " [DATE in ddMMyy] "

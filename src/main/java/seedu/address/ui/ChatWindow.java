@@ -207,7 +207,7 @@ public class ChatWindow {
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*a+p+o+i+n+t+m+e+n+t+\\b")
                 .matcher(message).find()) {
             return "This is how to delete an appointment!\n"
-                    + "delapt {index}";
+                    + "deleteapt {index}";
         } else if (Pattern.compile("\\b(d+e+l+e+t+e+|deleted|deleting|deletes)\\b.*l+i+s+t+i+n+g+\\b")
                 .matcher(message).find()) {
             return "This is how to delete a listing!\n"
@@ -240,7 +240,7 @@ public class ChatWindow {
             return "I assume you are having trouble with the delete command.\n"
                     + "Can you help specify which you are referring to?\n"
                     + "• Deleting a buyer/seller client profile - deleteclient\n"
-                    + "• Deleting an appointment - delapt\n"
+                    + "• Deleting an appointment - deleteapt\n"
                     + "• Deleting a listing - deletelisting\n"
                     + "• Deleting a buyer from a listing - removelistingbuyers";
         } else if (Pattern.compile("\\b(a+d+d+|adding|adds)\\b").matcher(message).find()) {

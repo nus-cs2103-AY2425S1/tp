@@ -122,7 +122,7 @@ public class ChatWindowUiTest extends ApplicationTest {
             assertEquals("I assume you are having trouble with the delete command.\n"
                             + "Can you help specify which you are referring to?\n"
                             + "• Deleting a buyer/seller client profile - deleteclient\n"
-                            + "• Deleting an appointment - delapt\n"
+                            + "• Deleting an appointment - deleteapt\n"
                             + "• Deleting a listing - deletelisting\n"
                             + "• Deleting a buyer from a listing - removelistingbuyers",
                     chatWindow.getResponse("delete"));
@@ -179,7 +179,7 @@ public class ChatWindowUiTest extends ApplicationTest {
     @Order(13)
     public void getResponse_deleteAppointment_success() {
         assertEquals("This is how to delete an appointment!\n"
-                        + "delapt {index}",
+                        + "deleteapt {index}",
                 chatWindow.getResponse("delete appointment"));
     }
 
