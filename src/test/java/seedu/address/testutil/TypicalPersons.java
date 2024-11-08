@@ -39,6 +39,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.Wedding;
 
 /**
@@ -109,7 +110,10 @@ public class TypicalPersons {
             for (Wedding wedding : person.getWeddings()) {
                 Wedding weddingInAb = ab.getWedding(wedding);
                 weddingInAb.addToGuestList(person);
-                person.addWedding(weddingInAb);
+            }
+            for (Tag tag : person.getTags()) {
+                Tag tagInAb = ab.getTag(tag);
+                tagInAb.increaseTaggedCount();
             }
         }
 
