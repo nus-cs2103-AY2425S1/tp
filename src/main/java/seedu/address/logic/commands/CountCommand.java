@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -32,11 +33,13 @@ public class CountCommand extends Command {
     public static final String MESSAGE_NO_MATCHES = "No persons match the given criteria.";
     public static final String ERROR_INVALID_FILTER = "Invalid filter format. Use 'name/<prefix>' or 'tag/<tag>'.";
 
+    private static final Logger logger = Logger.getLogger(CountCommand.class.getName()); //create logger
+
     private final Optional<String> namePrefix;
     private final Optional<String> tag;
 
     /**
-     * Creates a CountCommand with optional filters for name prefix and tag.
+     * Creates a CountCommand with optional filters for name prefix and tag to improve search.
      *
      * @param namePrefix Optional prefix to filter persons by name.
      * @param tag Optional tag to filter persons.
@@ -44,11 +47,14 @@ public class CountCommand extends Command {
     public CountCommand(Optional<String> namePrefix, Optional<String> tag) {
         this.namePrefix = namePrefix;
         this.tag = tag;
+        logger.info("CountCommand created with namePrefix: " + namePrefix + ", tag: " + tag);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model must  not be null";
+        logger.info("Executing CountCommand with filters - NamePrefix: " + namePrefix + ", Tag: " + tag);
+
         Predicate<Person> predicate = getFilterPredicate();
 
         List<Person> filteredList = model.getFilteredPersonList().stream()
@@ -56,10 +62,12 @@ public class CountCommand extends Command {
                 .toList();
 
         if (filteredList.isEmpty()) {
+            logger.info("No matches found for the provided criteria.");
             return new CommandResult(MESSAGE_NO_MATCHES);
         }
 
         int personCount = filteredList.size();
+        logger.info("Number of persons counted: " + personCount);
         return new CommandResult(String.format(MESSAGE_COUNT_PERSONS, personCount));
     }
 
@@ -72,21 +80,25 @@ public class CountCommand extends Command {
      */
     private Predicate<Person> getFilterPredicate() throws CommandException {
         if (namePrefix.isPresent() && tag.isPresent()) {
+            logger.warning("Both namePrefix and tag filters are provided, throwing CommandException.");
             throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
         if (namePrefix.isPresent()) {
             String prefix = namePrefix.get().toLowerCase();
+            logger.info("Creating predicate for namePrefix filter: " + prefix);
             return person -> person.getName().fullName.toLowerCase().startsWith(prefix);
         }
 
         if (tag.isPresent()) {
             String tagName = tag.get().toLowerCase();
+            logger.info("Creating predicate for tag filter: " + tagName);
             return person -> person.getTags().stream()
                     .anyMatch(tag -> tag.tagName.toLowerCase().equals(tagName));
         }
 
         // If no filters provided, match all persons.
+        logger.info("No filters provided; returning predicate that matches all persons.");
         return person -> true;
     }
 

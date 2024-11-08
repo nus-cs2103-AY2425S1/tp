@@ -6,7 +6,7 @@
 
 # HR Helper User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+HR Helper is a **desktop app for managing employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HR Helper can get your employee management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -66,6 +66,18 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### Authentication:
+
+Login to HR Helper with your username and password.
+
+For this version, the username is `admin` and password is `12345678`.
+For faster testing purposes, the username is `test` and password is `test`.
+
+![help message](images/authentication.png)
+
+We plan to implement adding more users in the future.
+
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -79,7 +91,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [f/Boolean]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
 
 <box type="tip" seamless>
 
@@ -87,8 +99,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [f/Boolean]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal f/true`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/true d/Operations l/12`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Road p/1234567 t/lazy f/true d/Marketing l/10`
 
 ### Listing all persons : `list`
 
@@ -96,11 +108,24 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Counting persons : `count`
+
+Counts number of persons.
+
+Format: `count`(for counting entire list), `count tag/TAG`(for counting persons with given TAG)
+
+* If counting the entire list, use `count`.
+* If counting persons with specified TAG, add TAG to end of the command.
+
+Examples:
+* `count`
+* `count tag/Colleagues`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [f/Boolean]…​`
+Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -185,6 +210,55 @@ Exits the program.
 
 Format: `exit`
 
+### Person Details Window
+
+The **Person Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
+
+- **Keyboard Shortcut:**
+    - Select a person from the **Person List**.
+    - Press the `Enter` key to open the **Person Details Window**.
+
+![Person Details Window](images/persondetailswindow.png)
+
+- **Name:** Editable text field displaying the employee's full name.
+- **Phone:** Editable text field for the employee's contact number.
+- **Email:** Editable text field for the employee's email address.
+- **Address:** Editable text field for the employee's residential or mailing address.
+- **Department:** Editable text field indicating the employee's department within the organization.
+- **Leave:** Editable text field showing the remaining leave days available to the employee.
+- **Favorite:** Checkbox to mark the employee as a favorite for quick access.
+
+**Editing Information**
+
+- **Modify Fields:**
+    - Press `Enter` on keyboard on any text field (e.g., **Name**, **Phone**) to edit the information.
+    - For the **Favorite** checkbox, press `space` bar to toggle the favorite status.
+  
+- **Navigate Between Fields:**
+    - **Tab Key / Down Arrow (`↓`):** Move to the next field.
+    - **Shift + Tab Key / Up Arrow (`↑`):** Move to the previous field.
+
+- **Save Changes:**
+    - Press the `Enter` key to save all modifications.
+    - The window will close, and changes will reflect in the **Person List**.
+
+- **Cancel Changes:**
+    - Press the `Esc` key to discard all changes and close the window without saving.
+
+**Validation and Error Handling**
+
+- **Mandatory Fields:**
+    - All fields are required. Ensure no field is left empty before saving.
+
+- **Format Requirements:**
+    - **Phone:** Must be a valid phone number format.
+    - **Email:** Must follow standard email formatting (e.g., `example@domain.com`).
+
+- **Error Messages:**
+    - If invalid data is entered, an error dialog will appear prompting correction.
+    - Follow the on-screen instructions to rectify any issues.
+
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -226,6 +300,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
+**Count**  | `count`: counts entire personel list<br> `count tag/TAG`: counts people in given tag<br>e.g. `count tag/Colleagues`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`

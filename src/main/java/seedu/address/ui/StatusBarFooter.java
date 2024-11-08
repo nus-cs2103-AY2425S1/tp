@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,24 +16,12 @@ public class StatusBarFooter extends UiPart<Region> {
 
     @FXML
     private Label saveLocationStatus;
-    @FXML
-    private Label contactCountLabel;
 
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}
      */
-    public StatusBarFooter(Path saveLocation, int contactCount) {
+    public StatusBarFooter(Path saveLocation) {
         super(FXML);
-        //saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
-        setContactCount(contactCount);
+        saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
-
-    /**
-     * Writes the number of contacts in the contact list
-     * @param count
-     */
-    private void setContactCount(int count) {
-        contactCountLabel.setText("Total contacts: " + count);
-    }
-
 }

@@ -31,7 +31,7 @@ public class CountCommandParser implements Parser<CountCommand> {
         } else if (trimmedArgs.startsWith(PREFIX_TAG)) {
             tag = Optional.of(parsePrefixArgument(trimmedArgs, PREFIX_TAG));
         } else {
-            throw new ParseException("Invalid filter format! Use 'name/<prefix>' or 'tag/<tag>'.");
+            throw new ParseException("Invalid command format! Use 'name/<prefix>' or 'tag/<tag>'.");
         }
 
         return new CountCommand(namePrefix, tag);
