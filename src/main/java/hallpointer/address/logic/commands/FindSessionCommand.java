@@ -11,15 +11,16 @@ import hallpointer.address.model.member.SessionContainsKeywordsPredicate;
 import hallpointer.address.model.session.Session;
 
 /**
- * Finds and lists all sessions in the address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all sessions in HallPointer whose name contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindSessionCommand extends Command {
 
     public static final String COMMAND_WORD = "find_sessions";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all sessions whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive)\n"
+            + "and displays them on the screen.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " rehearsal match";
 

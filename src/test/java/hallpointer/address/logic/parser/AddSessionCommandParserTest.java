@@ -1,6 +1,7 @@
 package hallpointer.address.logic.parser;
 
 import static hallpointer.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static hallpointer.address.logic.Messages.MESSAGE_MAX_SESSION_POINTS;
 import static hallpointer.address.logic.commands.CommandTestUtil.DATE_DESC_MEETING;
 import static hallpointer.address.logic.commands.CommandTestUtil.DATE_DESC_REHEARSAL;
 import static hallpointer.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
@@ -207,4 +208,12 @@ public class AddSessionCommandParserTest {
                         + POINTS_DESC_REHEARSAL + MEMBER_INDEX_DESC_ONE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSessionCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_pointsExceedMax_failure() {
+        // Case where points exceed 100, expecting a failure due to max points constraint
+        String pointsExceedMax = SESSION_NAME_DESC_MEETING + DATE_DESC_MEETING + " p/101" + MEMBER_INDEX_DESC_ONE;
+        assertParseFailure(parser, pointsExceedMax, MESSAGE_MAX_SESSION_POINTS);
+    }
+
 }

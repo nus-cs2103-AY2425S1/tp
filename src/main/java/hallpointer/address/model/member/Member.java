@@ -16,7 +16,7 @@ import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
 
 /**
- * Represents a Member in the hall pointer.
+ * Represents a Member in HallPointer.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Member {
@@ -163,17 +163,18 @@ public class Member {
     }
 
     /**
-     * Returns true if both members have the same name (not case-sensitive).
-     * This is used to check for duplicates in the hall pointer.
+     * Returns true if both members have the same name or same telegram (not case-sensitive).
+     * This is used to check for duplicates in HallPointer.
      */
     public boolean isSameMember(Member otherMember) {
         if (otherMember == this) {
             return true;
         }
 
-        // Check for duplicate based only on name
+        // Check for duplicate based only on name and telegram
         return otherMember != null
-                && otherMember.getName().equals(getName());
+                && (otherMember.getName().equals(getName())
+                || otherMember.getTelegram().equals(getTelegram()));
     }
 
     /**

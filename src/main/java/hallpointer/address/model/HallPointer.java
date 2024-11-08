@@ -60,7 +60,7 @@ public class HallPointer implements ReadOnlyHallPointer {
     //// member-level operations
 
     /**
-     * Returns true if a member with the same identity as {@code member} exists in the hall pointer.
+     * Returns true if a member with the same identity as {@code member} exists in HallPointer.
      */
     public boolean hasMembers(Member member) {
         requireNonNull(member);
@@ -68,8 +68,8 @@ public class HallPointer implements ReadOnlyHallPointer {
     }
 
     /**
-     * Adds a member to the hall pointer.
-     * The member must not already exist in the hall pointer.
+     * Adds a member to HallPointer.
+     * The member must not already exist in HallPointer.
      */
     public void addMember(Member p) {
         members.add(p);
@@ -77,8 +77,8 @@ public class HallPointer implements ReadOnlyHallPointer {
 
     /**
      * Replaces the given member {@code target} in the list with {@code updatedMember}.
-     * {@code target} must exist in the hall pointer.
-     * The identity of {@code updatedMember} must not be the same as another existing member in the hall pointer.
+     * {@code target} must exist in HallPointer.
+     * The identity of {@code updatedMember} must not be the same as another existing member in HallPointer.
      */
     public void setMember(Member target, Member updatedMember) {
         requireNonNull(updatedMember);
@@ -88,7 +88,7 @@ public class HallPointer implements ReadOnlyHallPointer {
 
     /**
      * Removes {@code member} from this {@code HallPointer}.
-     * {@code member} must exist in the hall pointer.
+     * {@code member} must exist in HallPointer.
      */
     public void removeMember(Member member) {
         members.remove(member);

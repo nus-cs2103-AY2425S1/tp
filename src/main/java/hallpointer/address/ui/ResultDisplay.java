@@ -25,4 +25,19 @@ public class ResultDisplay extends UiPart<Region> {
         resultDisplay.setText(feedbackToUser);
     }
 
+    public void scrollLeft() {
+        resultDisplay.setScrollLeft(resultDisplay.getScrollLeft() - 10);
+    }
+
+    public void scrollRight() {
+        resultDisplay.setScrollLeft(resultDisplay.getScrollLeft() + 10);
+    }
+
+    public void scrollUp() {
+        resultDisplay.setScrollTop(resultDisplay.getScrollTop() - 3);
+    }
+
+    public void scrollDown() {
+        resultDisplay.setScrollTop(resultDisplay.getScrollTop() + 4);
+    }
 }
