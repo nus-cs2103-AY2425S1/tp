@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.GroupCommand;
 import seedu.address.model.person.Person;
 
 public class GroupTest {
@@ -49,26 +50,29 @@ public class GroupTest {
 
     @Test
     public void equals() {
-        // same values -> returns true
-        Group groupCopy = new Group(groupName.toString(), members);
-        assertTrue(group.equals(groupCopy));
+        List<String> studentNames = Arrays.asList("Alice", "Bob");
+        GroupCommand groupCommand1 = new GroupCommand("Group1", studentNames);
+        GroupCommand groupCommand2 = new GroupCommand("Group1", studentNames);
 
         // same object -> returns true
-        assertTrue(group.equals(group));
+        assertTrue(groupCommand1.equals(groupCommand1));
+
+        // same values -> returns true
+        assertTrue(groupCommand1.equals(groupCommand2));
+
+        // different types -> returns false
+        assertFalse(groupCommand1.equals(1));
 
         // null -> returns false
-        assertThrows(NullPointerException.class, () -> group.equals(null));
-
-        // different type -> returns false
-        assertThrows(ClassCastException.class, () -> group.equals(5));
+        assertFalse(groupCommand1.equals(null));
 
         // different group name -> returns false
-        Group differentGroup = new Group("Group B", members);
-        assertFalse(() -> group.equals(differentGroup));
+        GroupCommand groupCommandDifferentName = new GroupCommand("Group2", studentNames);
+        assertFalse(groupCommand1.equals(groupCommandDifferentName));
 
-        // different members -> returns false
-        List<Person> differentMembers = Arrays.asList(ALICE);
-        Group groupWithDifferentMembers = new Group(groupName.toString(), differentMembers);
-        assertFalse(() -> group.equals(groupWithDifferentMembers));
+        // different student list -> returns false
+        List<String> differentStudentNames = Arrays.asList("Alice");
+        GroupCommand groupCommandDifferentStudents = new GroupCommand("Group1", differentStudentNames);
+        assertFalse(groupCommand1.equals(groupCommandDifferentStudents));
     }
 }

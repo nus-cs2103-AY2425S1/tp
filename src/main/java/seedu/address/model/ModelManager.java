@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -102,7 +104,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
+        requireNonNull(target);
+
+        // Remove the person from the address book
         addressBook.removePerson(target);
+
+        // Remove the person from all groups
+        removePersonFromAllGroups(target);
     }
 
     @Override
@@ -213,6 +221,45 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Group> getFilteredGroupList() {
         return groups;
+    }
+
+    /**
+     * Removes a person from all groups and deletes groups that become empty.
+     *
+     * @param person The person to remove from groups.
+     */
+    private void removePersonFromAllGroups(Person person) {
+        // Create a list to collect groups that become empty
+        List<Group> emptyGroups = new ArrayList<>();
+
+        // Iterate over a copy of the group list to avoid
+        // ConcurrentModificationException
+        for (Group group : new ArrayList<>(addressBook.getGroupList())) {
+            List<Person> members = new ArrayList<>(group.getMembers());
+
+            // Check if the group contains the person
+            if (members.contains(person)) {
+                // Remove the person from the group's member list
+                members.remove(person);
+
+                if (members.isEmpty()) {
+                    // If the group is empty after removal, mark it for deletion
+                    emptyGroups.add(group);
+                } else {
+                    // Otherwise, update the group with the new member list
+                    Group updatedGroup = new Group(group.getGroupName().toString(), members);
+                    addressBook.setGroup(group, updatedGroup);
+                }
+            }
+        }
+
+        // Remove all empty groups from the address book
+        for (Group emptyGroup : emptyGroups) {
+            addressBook.removeGroup(emptyGroup);
+        }
+
+        // Update the filtered group list if necessary
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override

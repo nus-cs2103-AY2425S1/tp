@@ -12,10 +12,14 @@ import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 
 /**
- * A list of groups that enforces uniqueness between its elements and does not allow nulls.
- * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}. As such, adding and updating of
- * groups uses {@code Group#isSameGroup(Group)} for equality to ensure that the group being added or updated is
- * unique in terms of identity within the `GroupList`. However, the removal of a group uses `Group#equals(Object)` to
+ * A list of groups that enforces uniqueness between its elements and does not
+ * allow nulls.
+ * A group is considered unique by comparing using
+ * {@code Group#isSameGroup(Group)}. As such, adding and updating of
+ * groups uses {@code Group#isSameGroup(Group)} for equality to ensure that the
+ * group being added or updated is
+ * unique in terms of identity within the `GroupList`. However, the removal of a
+ * group uses `Group#equals(Object)` to
  * ensure that the group with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -25,8 +29,8 @@ import seedu.address.model.group.exceptions.GroupNotFoundException;
 public class GroupList implements Iterable<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Group> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Group> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent Group as the given argument.
@@ -49,22 +53,23 @@ public class GroupList implements Iterable<Group> {
     }
 
     /**
-     * Replaces the Group {@code target} in the list with {@code editedGroup}.
+     * Replaces the group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the list.
-     * The Group identity of {@code editedGroup} must not be the same as another existing Group in the list.
+     * The group identity of {@code editedGroup} must not be the same as another
+     * existing group in the list.
+     *
+     * @param target      The group to replace.
+     * @param editedGroup The group to replace with.
      */
     public void setGroup(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);
-
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new GroupNotFoundException();
         }
-
         if (!target.isSameGroup(editedGroup) && contains(editedGroup)) {
             throw new DuplicateGroupException();
         }
-
         internalList.set(index, editedGroup);
     }
 
