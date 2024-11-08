@@ -179,6 +179,60 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Patient Feature
+
+#### Overview
+The `add` command allows users to add new patients. The command requires:
+- **Name** – Patient's name.
+- **ID** – Patient's unique ID.
+- **Ward** – Patient's Ward
+- **Diagnosis** – Patient's Diagnosis
+- **Medication** - Patient's Medication
+
+[//]: # (<puml src="diagrams/AddAppointmentSequenceDiagram.puml" alt="AddAppointmentSequenceDiagram" />)
+
+#### 1. Parsing User Input
+The **`AddCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
+- **Name** – Patient's name.
+- **ID** – Patient's unique ID.
+- **Ward** – Patient's Ward
+- **Diagnosis** – Patient's Diagnosis
+- **Medication** - Patient's Medication
+
+The parser will check that the compulsory `Name`, `ID`, and `Ward` fields are present, and that there are no duplicate parameters included in the input string. The optional `Diagnosis` and `Medication` fields will be parsed as empty strings if they are not included in the input string.
+
+During this parsing process:
+- A `Person` instance is created to hold the relevant fields.
+
+#### 2. Executing the Command
+The **`AddCommand`** class performs the following steps to add a patient:
+
+1. **Update Existing Patient Record**:
+    - The new `Person` instance will be added to the existing patient record in the **Model**.
+
+2. **Display appropriate warnings**
+    - The command will also check for the presence of special characters in the `Ward` and `ID` fields. An appropriate warning will be displayed if they are present.
+
+[//]: # (#### 3. Handling Invalid Date Inputs)
+
+[//]: # (The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:)
+
+[//]: # ()
+[//]: # (- **Format Verification**:)
+
+[//]: # (    - **Parser** checks if the date format follows `DD-MM-YYYY-HH-mm`.)
+
+[//]: # (    - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.)
+
+[//]: # ()
+[//]: # (- **Conflict Checking**:)
+
+[//]: # (    - **Command** checks if the new appointment overlaps with any existing appointments for the patient.)
+
+[//]: # (    - If there is an overlap, an error message is thrown, preventing the appointment from being created.)
+
+[//]: # (    - If no overlap exists, the new appointment overrides any previous appointment.)
+
 ### Add Appointment Feature
 
 #### Overview
