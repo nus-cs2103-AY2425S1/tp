@@ -298,6 +298,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+
+### View Window
+The view window function in the application allows for the user
+to  view the full contents of a contact through a pop-up GUI.
+
+Given it is a pop-up there is a different mechanism that calls and closes
+the view window.
+
+Given below is a sequence diagram to highlight the differences in implementation
+
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
