@@ -75,7 +75,7 @@ tasks done faster than traditional GUI apps.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows pop-up window with a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -83,15 +83,19 @@ Format: `help`
 
 ### Adding a person: `contact add`
 
-Adds a person to Address Book.
+Adds a person to the TutorEase address book.
 
 Format: `contact add /nNAME /pPHONE_NUMBER /eEMAIL /aADDRESS /rROLE [/tTAG]…​`
 
 <box type="tip" seamless>
 
-**Tip 1:** A person can have any number of tags (including 0)
+**Tip 1:** A person can have any number of tags (including 0).
 
-**Tip 2:** Role can only be Student or Guardian
+**Tip 2:** Role can only be Student or Guardian.
+
+**Tip 3:** People with the same name, phone or email cannot be added at the same time.
+
+**Tip 4:** Mandatory fields to include are name, phone number, email, address and role.
 </box>
 
 Examples:
