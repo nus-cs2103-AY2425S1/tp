@@ -22,18 +22,25 @@
             <Label fx:id="birthdayLabel" />
          </children>
       </HBox>
-      <HBox prefHeight="20.0" prefWidth="419.0"  spacing="4.0">
-         <children>
-                <Label fx:id="phoneTitleLabel" text="Phone:" />
-          <Label fx:id="phoneLabel" />
-         </children>
-      </HBox>
+    <Label fx:id="phoneTitleLabel" text="Phone:" minWidth="55.0"/>
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="phoneLabel" wrapText="true"/>
+        </content>
+    </ScrollPane>
     <Label fx:id="emailTitleLabel" text="Email:" />
-    <Label fx:id="emailLabel" wrapText="true" />
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="emailLabel" wrapText="true" />
+        </content>
+    </ScrollPane>
 
     <Label fx:id="addressTitleLabel" text="Address:" />
-    <Label fx:id="addressLabel" wrapText="true" />
-
+    <ScrollPane fitToWidth="true">
+        <content>
+            <Label fx:id="addressLabel" wrapText="true" />
+        </content>
+    </ScrollPane>
     <Label fx:id="remarkTitleLabel" text="Remarks:" />
     <ScrollPane fitToWidth="true">
         <content>
