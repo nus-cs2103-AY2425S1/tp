@@ -584,9 +584,10 @@ Commands for managing property listings and associating clients with listings.
 
     - **Failed Execution:** NIL
 
+    <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `ADD BUYERS TO LISTING` might have an outdated command format.<br>
-    This is as of v1.5<br>
+    WARNING: The subsequent section `Add Buyers To Listing` might have an outdated command format.<br>
+    This is as of `v1.5`<br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
@@ -666,9 +667,10 @@ Commands for managing property listings and associating clients with listings.
       >
       > ---
     
+    <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `REMOVE BUYERS FROM LISTING` might have an outdated command format.<br>
-    This is as of v1.5<br>
+    WARNING: The subsequent section `Remove Buyers from Listing` might have an outdated command format.<br>
+    This is as of `v1.5`<br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
@@ -755,10 +757,11 @@ Commands for managing property listings and associating clients with listings.
       > **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
       > 
       > ---
-
+    
+    <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `DELETE LISTING` might have an outdated command format.<br>
-    This is as of v1.5<br>
+    WARNING: The subsequent section `Delete Listing` might have an outdated command format.<br>
+    This is as of `v1.5`<br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
@@ -859,10 +862,11 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       > ![help](images/help.png)
       > 
       > ---
-
+    
+    <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `MORE INFO` might have an outdated command format.<br>
-    This is as of v1.5<br>
+    WARNING: The subsequent section `More Info` might have an outdated command format.<br>
+    This is as of `v1.5`<br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
