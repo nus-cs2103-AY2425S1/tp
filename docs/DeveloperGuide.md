@@ -755,6 +755,10 @@ This section lists planned enhancements to address known feature flaws. These en
    **Planned Enhancement:** Modify the find command to recognize multi-word search terms as complete phrases, enabling accurate matching for entries that include spaces. This enhancement will help avoid potential edge cases due to whitespace handling.
 
 
+8. **Enable distinction between office and hp numbers**  
+   **Current Issue:** Currently, each student in EduTuTu can only store up to one phone number.  
+   **Planned Enhancement:** Modify EduTuTu to allow storage of multiple phone numbers (eg., Office Hp and Personal Phone Numbers)
+
    
 These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
 
