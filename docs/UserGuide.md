@@ -102,8 +102,9 @@ Underneath each suggested command is the syntax for that command and what parame
 | **DeleteGame** | `deletegame INDEX g/GAME`<br> e.g.,`deletegame 1 g/Overwatch`                                                                                                                                                            |
 | **FavGame**    | `favgame INDEX g/GAME`<br> e.g.,`favgame 2 g/Overwatch`                                                                                                                                                                  |
 | **UnFavGame**  | `unfavgame INDEX g/GAME`<br> e.g.,`unfavgame 2 g/Overwatch`                                                                                                                                                              |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
-| **FindTime**   | `find TIME-TIME [TIME-TIME]`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                                   |
+| **Find**       | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                              |
+| **Findgame**   | `findgame KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`                                                                                                                                                          |
+| **FindTime**   | `findtime TIME-TIME [TIME-TIME]…`<br> e.g., `findtime 1800-1900 2000-2200 `                                                                                                                                              |
 | **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
 | **Clear**      | `clear`                                                                                                                                                                                                                  |
 | **Undo**       | `undo`                                                                                                                                                                                                                   |
@@ -254,7 +255,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]...`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -267,8 +268,28 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+  <br>
 
-<br>
+### Locating persons by game name: `findgame`
+
+Finds persons whose games' names contain any of the given keywords.
+
+Format: `findgame KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `lol` will match `LoL`
+* The order of the keywords does not matter. e.g. `Impact Genshin` will match `Genshin Impact`
+* Only the name of games is searched.
+* Only full words will be matched e.g. `Legends` will not match `Legend`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Honkai Impact` will return `Genshin Impact`, `Honkai Star Rail`
+
+Examples:
+* `findgame lol` returns contacts with game name `LoL`
+* `find honkai impact` returns contacts with game names `Genshin Impact`, `Honkai Star Rail`<br>
+  ![result for 'find honkai impact'](images/findHonkaiImpactResult.png)
+  
+  <br>
 
 ### Locating persons by time range: `findtime`
 
