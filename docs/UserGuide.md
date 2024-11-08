@@ -5,15 +5,15 @@ pageNav: 3
 ---
 <h2 style="color: #FF6347;">NovaCare</h2>
 
-A **desktop app for private nurses to manage patients, optimized for use via a Command Line Interface** [(CLI)](#glossary) while still having the benefits of a Graphical User Interface [(GUI)](#glossary).
+A **desktop app for private nurses to manage patients, optimized for use via a Command Line Interface** [(CLI)](#10-glossary) while still having the benefits of a Graphical User Interface [(GUI)](#10-glossary).
 Tailored to handle the demanding workload of private nurses managing numerous patients, NovaCare is built for speed—ideal for users who type quickly, enabling faster patient management than traditional GUI-based applications.
 
 In this guide, users will be able to learn the following details:
 
 1) **Set up NovaCare** using **Mac/Linux** or **Windows**.
 2) **Explore and use features** that are available in NovaCare to add and delete your first private patient details and task details.
-3) Quickly learn and master various [commands](#command-summary) and actions available in NovaCare.
-4) General [FAQs](#faq) (Frequently asked questions) of NovaCare.
+3) Quickly learn and master various [commands](#9-command-summary) and actions available in NovaCare.
+4) General [FAQs](#7-faq) (Frequently asked questions) of NovaCare.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -67,9 +67,9 @@ In this guide, users will be able to learn the following details:
 This user guide is tailored for new and existing users of NovaCare.
 
 
-If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section.
+If you are new to NovaCare, we recommend you to start with the [Quick Start](#3-quick-start) section.
 
-If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#command-summary) section.
+If you are an existing user looking for a specific feature, you can jump to the [Features](#6-features) section or [Command Summary](#9-command-summary) section.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -156,7 +156,7 @@ Here will be a basic guide on how to use the application.
       > `add n/Johnson p/98765432 e/johnson123@gmail.com a/123, Clementi Rd, 1234665 t/Diabetic`
 
 4. **Edit patient information**:
-   * Type the following command in the command box and press Enter to **edit a patients's information**:
+   * Type the following command in the command box and press Enter to **edit a patient's information**:
       > `edit 1 p/91234567`
 
 5. **Delete a patient**:
@@ -171,7 +171,7 @@ Here will be a basic guide on how to use the application.
     * Type the following command in the command box and press Enter to **exit the program**:
         > `exit`
 
-Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#6-features) below for details of each command.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -187,14 +187,13 @@ This section provides a detailed explanation of the features available in NovaCa
 
 * All command in NovaCare follows a specific structure. The command structure is as follows:
   `COMMAND prefix/PARAMETERS…​`
-  * `e.g. add n/John Tan p/98765432 e/john@gmail.com a/123, Clementi Rd, 1234665`
-
+  e.g. `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `add` is the `COMMAND`, `n/`, `p/` and `e/` are `prefixes` and `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are `PARAMETERS`.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets `[]` are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Diabetic` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Diabetic` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Diabetic`, `t/Diabetic t/Allergic to shellfish` etc.
@@ -251,10 +250,10 @@ Adds a patient's details to the system.
 
 **Note:**
 * Upon adding a patient the default priority is set to *3*. 
-  * Users can change the priority level using the [`priority` command](#adding-priority-level-priority).
-* To update emergency contact details, use the [`emergency` command](#adding-emergency-contact-emergency).
+  * Users can change the priority level using the [`priority` command](#628-adding-priority-level-priority).
+* To update emergency contact details, use the [`emergency` command](#626-adding-emergency-contact-emergency).
 * A patient will not be added if the name and phone number is already in the system.
-* Refer to [Parameter Information](#parameter-information) for the limitations of each parameter.
+* Refer to [Parameter Information](#61-parameter-information) for the limitations of each parameter.
 </box>
 
 <box type="tip" seamless>
@@ -267,7 +266,7 @@ Adds a patient's details to the system.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tagges as `Diabetic` to the system.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tags as `Diabetic` to the system.
 <br></br>
 
 #### 6.2.2 Listing all patients: `list`
@@ -292,7 +291,7 @@ Edits an existing patient's details in the system.
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the patient will be removed i.e. adding of tags is not cumulative.
 * You can remove all the patient’s tags by typing `t/` without
   specifying any tags after it.
 </box>
@@ -311,7 +310,7 @@ Finds patients whose name contains any of the given keywords.
 <box type="info" seamless>
 
 **Note:**
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -383,7 +382,7 @@ Example:
 
 #### 6.2.8 Adding priority level: `priority`
 
-Adds an priority level to a patient in the system.
+Adds a priority level to a patient in the system.
 
 :pencil: Format: `priority INDEX l/PRIORITY_LEVEL`
 
@@ -537,7 +536,7 @@ In NovaCare, these are the default commands for getting help, clearing and savin
 
 #### 6.4.1 Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 <box type="info" seamless>
