@@ -17,6 +17,7 @@
   used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## **Setting up, getting started**
 
@@ -200,6 +201,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -276,6 +278,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Delete Group feature
 
@@ -334,6 +337,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - Con: Possible for user to mistype the wrong number
 
 ---
+<div style="page-break-after: always;"></div>
 
 ### Undo/redo feature
 
@@ -396,6 +400,7 @@ PlantUML, the lifeline continues till the end of diagram.
 - [DevOps guide](DevOps.md)
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -448,6 +453,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | clumsy TA       | edit student particulars                      | correct my mistakes                                 |
 | `*`      | clumsy TA       | undo my actions                               | correct my mistake                                  |
 | `*`      | clumsy TA       | redo my actions                               |                                                     |
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -767,6 +774,7 @@ _{More to be added}_
 | Student Number | Unique identifier for a student                              |
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -1291,6 +1299,7 @@ testers are expected to do more _exploratory_ testing.
        application, which is the panel displaying the student list.
 
 ---
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Effort**
 

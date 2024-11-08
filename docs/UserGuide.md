@@ -21,6 +21,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -53,6 +54,7 @@ If you are on the PDF, use the table of contents below to navigate the site.
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -847,6 +849,8 @@ Exits the program.
 
 Format: `exit`
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Data Handling
@@ -877,6 +881,7 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -929,6 +934,7 @@ All parameters are case-insensitive when used for comparison unless stated other
 | `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                                                         | `1`<br>`10`                                   | `-1`<br>`test`                                   |
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
