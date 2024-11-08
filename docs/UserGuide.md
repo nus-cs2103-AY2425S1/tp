@@ -373,7 +373,7 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
       > **User Error #1**: No index found / Invalid type / Negative integer
       >
-      > **Input**: `editclient n/Bobby`
+      > **Input**: `editclient n/Bobby` OR `editclient #a` OR `editclient -1`
       >
       > **Output**:
       <br> Invalid command format!
