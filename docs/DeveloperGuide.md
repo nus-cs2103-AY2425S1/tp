@@ -224,7 +224,6 @@ Explanation:
 A wedding planner who:
 * Has a need to manage a significant number of contacts
 * Has a need to manage different types of contacts (e.g. vendors, guests)
-* Has a need to manage a few separate weddings concurrently
 * Favours desktop applications over other alternatives
 * Prefers keyboard commands over mouse interactions
 * Adequately proficient with command-line applications
@@ -435,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Non-technical**
 *  **Guest**: A person invited to the wedding.
 *  **Vendor**: A supplier providing services or goods for a wedding, such as photographers, florists, caterers, etc.
-*  **RSVP Status**: The attendance response status of a guest. It can be either confirmed, pending, or declined.
+*  **RSVP Status**: The attendance response status of a guest. It can be either accepted, pending, or declined.
 *  **Tag**: A keyword or label assigned to an entry to categorize and easily filter it within the list.
 *  **Index**: A numerical value representing the position of an entry in a list, used to reference and perform operations on the contact.
 *  **Prefix**: Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.
