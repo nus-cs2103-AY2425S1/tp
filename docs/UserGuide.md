@@ -25,13 +25,13 @@ than traditional GUI apps.
 1. Ensure you have **Java 17 or above** installed in your Computer.
    *  How To Install Java ([Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html) | [MacOS](https://se-education.org/guides/tutorials/javaInstallationMac.html) | [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html))
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14b-1/tp/releases).
    * Under the **Assets** of the latest version of SocialBook, you should find the latest downloadable `socialbook.jar` file
 
-1. Copy this file into the _folder_ you want to use for SocialBook.
+3. Copy this file into the _folder_ you want to use for SocialBook.
    * Ensure that this _folder_ is **empty**.
 
-1. Open a command terminal, `cd` into the folder you put the `.jar` file in. After which enter `java -jar socialbook.jar` in the command terminal to run the application.
+4. Open a command terminal, `cd` into the folder you put the `.jar` file in. After which enter `java -jar socialbook.jar` in the command terminal to run the application.
    * How To Open Command Terminal ([Windows](https://www.lifewire.com/how-to-open-command-prompt-2618089) | [MacOS](https://support.apple.com/en-sg/guide/terminal/apd5265185d-f365-44cb-8b09-71a064a42125/mac) | [Linux](https://ubuntu.com/tutorials/command-line-for-beginners#3-opening-a-terminal))
    * How To Change Directory (`cd`) To Folder ([Windows](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cd) | [MacOS](https://www.macworld.com/article/221277/command-line-navigating-files-folders-mac-terminal.html) | [Linux](https://phoenixnap.com/kb/linux-cd-command))
    
@@ -84,7 +84,7 @@ If done correctly, a GUI similar to the image below should appear in a few secon
 Shows a message explaining how to access the help page as well as all the available commands. If the `[COMMAND]` is specified, the help message for that command
 will be displayed.
 
-![help message](images/updatedHelpMessage.png)
+![help message](images/helpMessage.png)
 
 Format: `help [COMMAND]`
 
@@ -97,19 +97,21 @@ Examples:
 
 Adds a person to SocialBook.
 
-Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [r/REMARK] [t/TAG]...​`
-* Parameters can be inputted in any order.
-* Duplicated names are not allowed to be added.
-* Blank parameters are not allowed.
-* `NAME` are case-insensitive e.g. `n/JOHN DOE` is different from `n/john doe`.
-* `PHONE` should contain at least 3 digits.
+Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [pri/PRIORITY = LOW] [income/INCOME = 0] [famsize/FAMILY_SIZE = 1] [r/REMARK] [t/TAG]...`
+
+* Names are case-insensitive. E.g., `JOHN DOE` is the same as `john doe`.
+* Extra whitespaces between names are trimmed. E.g., <code>John&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Doe</code> is the same as `John Doe`.
+* Adding duplicate persons with the same name is not allowed.
+* Phone numbers should contain at least 3 digits.
 * For optional parameters like `PRIORITY, INCOME, FAMILY SIZE`, if not specified, their values will be defaulted to `LOW, 0, 1` respectively.
+
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
+
 * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 dob/1999-03-09 famsize/3 income/5000`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 dob/2002-12-25 pri/MEDIUM t/criminal`
 
@@ -522,7 +524,6 @@ The current time marker (denoted by the red line on the right side of the calend
 | **listappt**     | `listappt`                                                                                                                                                                                                      |
 | **editappt**     | `editappt INDEX [date/yyyy-MM-dd] [from/HH:mm] [to/HH:mm]`<br> e.g., `editappt 2 from/10:00 to/11:30`                                                                                                           |
 | **deleteappt**   | `deleteappt INDEX`                                                                                                                                                                                              |
-| **undo**         | `undo`                                                                                                                                                                                                          |
 | **statistics**   | `statistics` <br> Shows general statistics                                                                                                                                                                      |
 | **scheme**       | `scheme INDEX` <br> e.g., `scheme 1`                                                                                                                                                                            |
 | **addscheme**    | `addscheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `addscheme 1 i/1`                                                                                                                                            |
@@ -530,4 +531,5 @@ The current time marker (denoted by the red line on the right side of the calend
 | **deletescheme** | `deletescheme PERSON_INDEX i/SCHEME_INDEX` <br> e.g., `deletescheme 1 i/1`                                                                                                                                      |
 | **archive**      | `archive INDEX` <br> e.g., `archive 1`                                                                                                                                                                          |
 | **unarchive**    | `unarchive INDEX` <br> e.g., `unarchive 1`                                                                                                                                                                      |
+| **undo**         | `undo`                                                                                                                                                                                                          |
 | **exit**         | `exit`                                                                                                                                                                                                          |
