@@ -61,40 +61,96 @@
 
 <h1 style="color: #964B00;"> <i class="fas fa-book icon"></i> MATER User Guide </h1>
 
-MATER is a **desktop app for managing clients and their cars, optimized for use via a Graphical User Interface (GUI).** It is designed for workshops that need to keep track of their clients and their cars. If you can type fast, MATER can get your client management tasks done faster than traditional GUI apps.
+Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in car workshops**. MATER is specially optimized for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
+
+---
+
+### **Why MATER?**
+
+Modern car workshops often face a variety of operational challenges:
+- **Overwhelming client data**: Handling customer and vehicle information can be cumbersome and prone to errors without a dedicated system.
+- **Poor record-keeping**: Relying on spreadsheets or paper records leads to inefficiencies, especially when managing vehicle histories, service issues, or specific vehicle details.
+- **Slow task execution**: Traditional systems require multiple clicks and navigation steps, slowing down workshop efficiency.
+
+
+
+### **Our Solution**
+
+MATER was designed to address these challenges directly:
+- **Centralized client management**: Keep all client and vehicle records in one place, reducing the chance of data duplication and simplifying access.
+- **Streamlined command-based controls**: Users can type commands to perform tasks faster than by navigating through a typical GUI.
+- **Reliable data tracking**: Track issues and maintenance details with consistency, ensuring no information is lost and that clients receive high-quality service.
+
+
+
+### **Product Overview**
+
+MATER offers a feature-rich platform with the following capabilities:
+- **Client and Vehicle Management**: Store and organize clients' personal details, vehicle registration, and service history.
+- **Quick Search and Filter Options**: Find clients and cars instantly by name or vehicle registration number.
+- **Command Shortcuts**: Use simple, structured commands to add, edit, delete, or view client details with minimal steps.
+- **Status Tracking**: Mark clients as checked in or out for better tracking of in-progress services.
+- **Automatic Data Storage**: MATER saves all data automatically, minimizing the risk of accidental data loss.
+
+
+
+### **User Base**
+
+MATER is designed for **small to medium-sized car workshop managers** and their team members who:
+- **Need faster, streamlined data access** for client and vehicle information.
+- **Prefer a hands-on approach** to managing their client lists with minimal steps.
+
+Whether you're a workshop owner, a mechanic, or an administrative staff member responsible for managing records, MATER empowers you to achieve efficient, accurate, and consistent data handling with ease.
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
-<h2 style="color: #28B463;"> <i class="fas fa-rocket icon"></i> Quick start</h2>
 
-1. Ensure you have Java 17 or above installed on your Computer.
 
-2. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T14-3/tp/releases).
+<h2 style="color: #28B463;"> <i class="fas fa-rocket icon"></i> Quick Start</h2>
 
-3. Copy the file to the folder you want to use as the _home folder_ for your MATER.
+1. **Check Your System**  
+   MATER requires **Java 17 or above** to run. If you’re unsure whether it’s installed, you can download it [here](https://www.java.com).
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar mater.jar` command to run the application.<br>
-   A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br><br>
-  <img src="images/Ui.png" alt="Ui" width="400" height="330">
+2. **Download MATER**  
+   Visit [this link](https://github.com/AY2425S1-CS2103T-T14-3/tp/releases) and download the latest version of MATER as a `.jar` file. This file is the program you’ll be opening each time you use MATER.
 
-5. In the application window, locate the command box at the bottom.<br>
-   Type the command in the command box and press Enter to execute it. For example, typing **help** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+3. **Place the Downloaded File**  
+   Move the downloaded file to any folder on your computer where you want to keep MATER and its data. This will be your **MATER home folder**.
 
-   - `list` : Lists all contacts.
+4. **Open MATER**
 
-   - `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named John Doe to MATER.
+   - **Option 1: Open MATER by Double-Clicking**
+     - Go to the folder where you saved the `.jar` file.
+     - **On Windows or Linux**: Double-click the `.jar` file to open it.
+     - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
 
-   - `del-client 3` : Deletes the 3rd client shown in the current list.
+   - **Option 2: Open MATER from the Terminal**  
+     - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
+     - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
+       ```shell
+       cd path/to/your/folder
+       ```
+     - Then, type the following command and press Enter:
+       ```shell
+       java -jar mater.jar
+       ```
+     After a few seconds, the MATER window should appear on your screen, preloaded with sample data for you to explore.
 
-   - `clear` : Deletes all contacts.
+5. **Using MATER**  
+   MATER has a command box at the bottom where you can type in simple commands to manage your clients and their cars. Here are a few basic commands to get you started:
+   - **View all clients**: Type `list` and press Enter to see a list of all clients.
+   - **Add a client**: Type `add-client n/John Doe p/98765432 e/johnd@example.com a/123 Example Street` to add a new client named John Doe.
+   - **Delete a client**: Type `del-client 3` to delete the 3rd client in the list.
+   - **Clear all data**: Type `clear` to remove all clients from MATER.
+   - **Exit the app**: Type `exit` to close MATER.
 
-   - `exit` : Exits the app.
+6. **Where to Go Next**  
+   For more details on what MATER can do, scroll down to the [Features](#features) section of this guide to explore additional commands and features.
 
-6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -549,13 +605,13 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 | **Add Client**    | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>`add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels` |
 | **Add Car**       | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL`   | `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`           |
 | **Delete Car**    | `del-car INDEX`            | `del-car 1`    |
-| **List Clients**  | `list` |   |
+| **List Clients**  | `list` | `list`  |
 | **Edit Client**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `edit 1 p/91234567 e/johndoe@example.com`<br>`edit 2 n/Betsy Crower i/`    |
 | **Find Clients**  | `find KEYWORD [MORE_KEYWORDS]`      | `find John`<br>`find SJH9514P`             |
 | **View Client**   | `view INDEX`                    | `view 1`     |
 | **Delete Client** | `del-client INDEX`   | `del-client 3`          |
-| **Clear**         | `clear`       |              |
-| **Exit**          | `exit`                |                 |
-| **Help**          | `help`               |                 |
+| **Clear**         | `clear`       |     `clear`         |
+| **Exit**          | `exit`                |   `exit`              |
+| **Help**          | `help`               |     `help`            |
 
 Back to Features [section](#features).
