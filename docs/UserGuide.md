@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ContactMate is a **desktop app for managing clients at Active Ageing Centres (AACs), optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactMate can get your contact management tasks done faster than traditional GUI apps.
+ContactMate is a **desktop app for managing clients (Singaporeans and Permanent Residents) at Active Ageing Centres (AACs), optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactMate can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -21,12 +21,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
          1. Hold down the `Command` key and press `Space` (<kbd>&#x2318; Cmd</kbd> + <kbd>Space</kbd>).
          2. Type `Terminal` and press `Enter`.
    1. In the terminal, type `java --version` and press `Enter`.
-   2. If you have Java `17` or above installed, you should see a message like this. Referencing the first line (`openjdk XX.0.12 2024-07-16 LTS`), `XX` should be `17` or above.
-    ```
-       openjdk 17.0.12 2024-07-16 LTS
-       OpenJDK Runtime Environment Corretto-17.0.12.7.1 (build 17.0.12+7-LTS)
-       OpenJDK 64-Bit Server VM Corretto-17.0.12.7.1 (build 17.0.12+7-LTS, mixed mode, sharing)
-      ```
+   2. If you have Java `17` or above installed, you should see a message containing something like this, (`openjdk XX.0.12 2024-07-16 LTS`), where `XX` should be `17` or above.
     3. If you do not have Java `17` or above installed, proceed to Step 2, otherwise, skip to Step 3.
 2. Install Java `17` using the following steps.
    1. Go to [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
@@ -75,7 +70,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 
 Field | Description                                                                                                                                        | Constraints, Examples
 --------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------
-**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Valid, government issued NRIC. e.g., `S1803269D`
+**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Must be valid (i.e. issued by the Singapore Government). e.g., `S1803269D`
 **Name** | Name of the elderly.                                                                                                                               | Any word consisting only of alphabets, numbers or spaces. e.g., `John Doe`, `Alice`, `Bob`
 **Phone Number** | Phone number of the elderly.                                                                                                                       | Any number, 3 digits or longer. e.g., `98765432`, `91234567`
 **Email** | Email address of the elderly.                                                                                                                      | Any valid email address. e.g., `bob@gmail.com`
