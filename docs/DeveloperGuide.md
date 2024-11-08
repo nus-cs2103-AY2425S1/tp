@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS)**:
 1. CCA Leader inputs the `update_member` command with the member index and new details.
-    - Example: `update_member 1 n/John Doe r/9/10/203 t/johnDoe123 tag/friend`  
+    - Example: `update_member 1 n/John Doe r/9/10/203 t/johnDoe123 tag/friend`
 2. Hall Pointer validates the member and new details.
 3. Hall Pointer updates the member information and displays a success message.
     - `Member John Doe; Telegram: johnDoe123; Room: 9/10/203; Tags: [friend]'s details updated successfully.`
@@ -544,6 +544,7 @@ testers are expected to do more _exploratory_ testing.
 2. Deleting a member
 
     1. Prerequisites: List all members using the `list_members` command. Multiple members in the list.
+
     2. Test case: `delete_member 1`<br>
        **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message.
 
