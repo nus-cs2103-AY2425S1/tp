@@ -21,7 +21,7 @@ public interface TutorEaseStorage {
      * Returns TutorEase data as a {@link ReadOnlyTutorEase}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
-     * @throws DataLoadingException if loading the data from storage failed.
+     * @throws DataLoadingException If loading the data from storage failed.
      */
     Optional<ReadOnlyTutorEase> readTutorEase() throws DataLoadingException;
 
@@ -32,8 +32,9 @@ public interface TutorEaseStorage {
 
     /**
      * Saves the given {@link ReadOnlyTutorEase} to the storage.
-     * @param addressBook cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     *
+     * @param addressBook It cannot be null.
+     * @throws IOException If there was any problem writing to the file.
      */
     void saveTutorEase(ReadOnlyTutorEase addressBook) throws IOException;
 

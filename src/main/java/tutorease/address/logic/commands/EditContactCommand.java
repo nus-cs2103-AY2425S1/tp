@@ -1,6 +1,8 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_EMAIL;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_PHONE;
 import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -65,8 +67,11 @@ public class EditContactCommand extends ContactCommand {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * Creates an EditContactCommand to edit the details of a person in the filtered person list.
+     *
+     * @param index The index of the person in the filtered person list.
+     * @param editPersonDescriptor A descriptor containing the details to update the person with.
+     * @throws NullPointerException If {@code index} or {@code editPersonDescriptor} is null.
      */
     public EditContactCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -88,9 +93,7 @@ public class EditContactCommand extends ContactCommand {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        hasDuplicates(personToEdit, editedPerson, model);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -149,8 +152,37 @@ public class EditContactCommand extends ContactCommand {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+    * Checks if the edited person would create a duplicate entry in the model based on unique attributes.
+    * This method verifies that the edited person's details do not conflict with existing persons in the model.
+    *
+    * @param personToEdit The original person to be edited.
+    * @param editedPerson The person with updated details.
+    * @param model The model containing the list of existing persons.
+    * @throws CommandException if the edited person would duplicate another person in the model.
+    *      - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_PERSON} if a person with the same details as
+    *      {@code editedPerson} already exists in the model (excluding {@code personToEdit}).
+    *      - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_EMAIL} if another person in the model has the
+    *      same email as {@code editedPerson}.
+    *      - Throws {@code CommandException} with {@code MESSAGE_DUPLICATE_PHONE} if another person in the model has the
+    *      same phone number as {@code editedPerson}.
+    */
+    public void hasDuplicates(Person personToEdit, Person editedPerson, Model model) throws CommandException {
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (editPersonDescriptor.email != null && model.hasSameEmail(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        }
+
+        if (editPersonDescriptor.phone != null && model.hasSamePhone(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        }
+    }
+
+    /**
+     * Stores the details to edit the person with.
+     * Each non-empty field value will replace the corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;

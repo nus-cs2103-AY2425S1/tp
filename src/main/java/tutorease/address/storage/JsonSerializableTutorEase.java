@@ -14,7 +14,7 @@ import tutorease.address.model.TutorEase;
 import tutorease.address.model.person.Person;
 
 /**
- * An Immutable TutorEase that is serializable to JSON format.
+ * Serves as an Immutable TutorEase that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableTutorEase {

@@ -29,6 +29,11 @@ public class FindLessonCommand extends LessonCommand {
 
     private final LessonContainsNamesPredicate predicate;
 
+    /**
+     * Creates a FindLessonCommand to find lessons for which student names match the specified keywords.
+     *
+     * @param predicate The predicate used to filter the list of lessons by matching student names with keywords.
+     */
     public FindLessonCommand(LessonContainsNamesPredicate predicate) {
         this.predicate = predicate;
     }
