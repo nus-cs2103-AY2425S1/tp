@@ -371,7 +371,7 @@ Commands for creating, updating, and deleting buyers and sellers.
 
     - **Failed Execution:**
       > ---
-      > **User Error #1**: No index found
+      > **User Error #1**: No index found / Invalid type / Negative integer
       >
       > **Input**: `editclient n/Bobby`
       >
@@ -382,20 +382,8 @@ Commands for creating, updating, and deleting buyers and sellers.
       <br>Example: editclient 1 e/johndoe@example.com p/91234567
       >
       > ---
-      >
-      > **User Error #2**: Entering invalid index (negative / incorrect type)
-      >
-      > **Input**: `editclient a#2 n/Bobby` OR `editclient -1 n/Bobby`
-      >
-      > **Output**:
-      <br> Invalid command format!
-      <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
-      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: editclient 1 e/johndoe@example.com p/91234567
-      >
-      > ---
       > 
-      > **User Error #3**: Entering an out-of-bounds index (larger than client size)
+      > **User Error #2**: Entering out-of-bounds index (larger than number of clients)
       > 
       > **Input**: `editclient 100 n/Bobby`
       > 
@@ -404,69 +392,38 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
 - #### Delete Client Command
-    - **Format:** `deleteclient NAME`
+    - **Format:** `deleteclient INDEX`
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Delete `Bob` from the address book
+      > **Use Case #1**: Delete `Bob` from the address book (Assuming displayed index is 1)
       >
-      > **Input**: `deleteclient Bob`
+      > **Input**: `deleteclient 1`
       >
-      > **Output**: `Successfully deleted Bob with the number: 97774444 and email: bobby123@gmail.com`
+      > **Output**: `Successfully deleted Bob.
+      Phone number: 977774444 and Email: bobby123@gmail.com`
       >
       > ---
-    
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `delete Bob` = `delete BOB` = `delete bOb` _(Not exhaustive)_
-  
-    Thus, these delete commands will delete the same `Bob` profile
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `delete Wen Xuan` != `delete WenXuan`
-    
-    These commands will delete different client profiles 
-    </div> 
-    <br>
   
     - **Failed Execution:**
       > ---
-      > **Use Case #1**: No name found
+      > **Use Case #1**: No index found / Invalid type / Negative integer
       >
-      > **Input**: `deleteclient`
+      > **Input**: `deleteclient` OR `deleteclient #a` OR `deleteclient -1`
       >
       > **Output**: 
       <br> Invalid command format! 
       <br>delete: Deletes the client profile corresponding to the client's name.
-      <br>Parameters: CLIENT_NAME (case-insensitive)
-      <br>Example: delete Tan Wen Xuan
+      <br>Parameters: INDEX (must be a positive integer)
+      <br>Example: delete 1
       >
       > ---
-      > **Use Case #2**: Entering invalid name 
+      > **Use Case #2**: Entering out-of-bounds index (larger than number of clients)
       > 
-      > **Input**: `deleteclient $$`
+      > **Input**: `deleteclient 100`
       > 
-      > **Output**:
-      <br> Invalid command format!
-      <br>delete: Deletes the client profile corresponding to the client's name.
-      <br>Parameters: CLIENT_NAME (case-insensitive)
-      <br>Example: delete Tan Wen Xuan
+      > **Output**: The person index provided is invalid
       > 
-      > ---
-      > **Use Case #3**: Deleting a name that does not exist in the address book
-      > 
-      > **Input**: `deleteclient notInAddressBook`
-      > 
-      > **Output**:
-      <br> Invalid command format!
-      <br>delete: Deletes the client profile corresponding to the client's name.
-      <br>Parameters: CLIENT_NAME (case-insensitive)
-      <br>Example: delete Tan Wen Xuan
-      >
       > ---
 
 ---
@@ -478,7 +435,7 @@ Commands for managing appointments between user and clients.
 ![appointments](images/appointments.png)
 
 - #### Schedule Appointment
-    - **Format:** `apt NAME d/DD-MM-YY fr/HHmm to/HHmm` OR `apt NAME d/ddMMyy fr/HH:mm to/HH:mm`
+    - **Format:** `apt INDEX d/DD-MM-YY fr/HHmm to/HHmm` OR `apt INDEX d/ddMMyy fr/HH:mm to/HH:mm`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
@@ -501,31 +458,14 @@ Commands for managing appointments between user and clients.
       > ![bob_apt_2](images/bob_apt_2.png)
       > 
       > ---
-
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `apt Bob` = `apt BOB` = `apt bOb` _(Not exhaustive)_
-    <br>
-    Thus, these commands will set an appointment for the same `Bob` profile
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `apt Wen Xuan` != `apt WenXuan`
-    
-    These commands will set appointments for different client profiles 
-    </div> 
-    <br>
   
     - **Failed Execution:**
       > ---
       > **Use Case #1**: Incorrect `DATE` format 
       >
-      > **Input #a**: `apt Bob d/09-10-2024 fr/1000 to/1200`
+      > **Input #a**: `apt 1 d/09-10-2024 fr/1000 to/1200`
       >
-      > **Input #b**: `apt Bob d/aaa fr/1000 to/1200`
+      > **Input #b**: `apt 1 d/aaa fr/1000 to/1200`
       > 
       > **Output**: Dates should be in the format dd-MM-yy or ddMMyy, e.g., 25-12-24 or 251224.
       >
@@ -533,22 +473,22 @@ Commands for managing appointments between user and clients.
       > 
       > **Use Case #2**: Incorrect `TIME` format
       > 
-      > **Input #a**: `apt Bob d/20-10-24 fr/100000 to/1200`
+      > **Input #a**: `apt 1 d/20-10-24 fr/100000 to/1200`
       > 
-      > **Input #b**: `apt Bob d/20-10-24 fr/aa to/1200`
+      > **Input #b**: `apt 1 d/20-10-24 fr/aa to/1200`
       > 
       > **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
       > 
       > ---
 
 - #### Delete Appointment
-    - **Format:** `delapt NAME`
+    - **Format:** `delapt INDEX`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
       > **Use Case**: Deleting appointment for `Bob`
       >
-      > **Input**: `delapt Bob`
+      > **Input**: `delapt 1`
       >
       > **Output**: Successfully deleted appointment from Bob
       >
@@ -556,30 +496,13 @@ Commands for managing appointments between user and clients.
       > 
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `delapt Bob` = `delapt BOB` = `delapt bOb` _(Not exhaustive)_
-
-    Thus, these commands will delete the appointment for the same `Bob` profile
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `delapt Wen Xuan` != `delapt WenXuan`
-    
-    These commands will delete appointments for different client profiles 
-    </div> 
-    <br>
-
     - **Failed Execution:**
       > ---
-      > **Use Case**: Attempting to delete an appointment from a non-existent client
+      > **Use Case**: Entering out-of-bounds index (larger than number of clients)
       >
-      > **Input**: `delapt nonExistentClient`
+      > **Input**: `delapt 100`
       >
-      > **Output**: Please enter an existing client name!
+      > **Output**: The person index provided is invalid
       >
       > ---
       
