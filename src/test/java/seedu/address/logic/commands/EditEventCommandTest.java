@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.function.Executable;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,7 +35,7 @@ public class EditEventCommandTest {
 
     @Test
     public void constructor_nullDescriptor_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new EditEventCommand(1, null));
+        assertThrows(NullPointerException.class, () -> new EditEventCommand(null, null));
     }
 
     @Test
@@ -52,16 +54,16 @@ public class EditEventCommandTest {
                 .withEventDuration(startDate, endDate)
                 .build();
 
-        EditEventCommand.EditEventDescriptor descriptor = new EditEventCommand.EditEventDescriptor();
+        EditEventDescriptor descriptor = new EditEventDescriptor();
         descriptor.setName(new EventName("Updated Event"));
         descriptor.setDescription(new EventDescription("Updated Description"));
         descriptor.setDuration(LocalDate.of(2024, 10, 2), LocalDate.of(2024, 10, 11));
 
-        EditEventCommand editEventCommand = new EditEventCommand(originalEvent.getEventId(), descriptor);
+        Index targetIndex = Index.fromZeroBased(0);
+        EditEventCommand editEventCommand = new EditEventCommand(targetIndex, descriptor);
 
         CommandResult commandResult = editEventCommand.execute(modelStub);
 
-        // Assuming Messages.format(editedEvent) formats the event as follows:
         String expectedFormattedEvent = String.format(
                 "%s; Description: %s; From: %s; To: %s",
                 editedEvent.getEventName(),
@@ -73,7 +75,7 @@ public class EditEventCommandTest {
         String expectedMessage = String.format("Event edited: %s", expectedFormattedEvent);
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
-        assertEquals(editedEvent, modelStub.getEventById(originalEvent.getEventId()));
+        assertEquals(editedEvent, modelStub.getFilteredEventList().get(targetIndex.getZeroBased()));
     }
 
     @Test
@@ -81,8 +83,9 @@ public class EditEventCommandTest {
         Event originalEvent = new EventBuilder().build();
         ModelStubWithEvent modelStub = new ModelStubWithEvent(originalEvent);
 
-        EditEventCommand.EditEventDescriptor descriptor = new EditEventCommand.EditEventDescriptor();
-        EditEventCommand editEventCommand = new EditEventCommand(originalEvent.getEventId(), descriptor);
+        EditEventDescriptor descriptor = new EditEventDescriptor();
+        Index targetIndex = Index.fromZeroBased(0);
+        EditEventCommand editEventCommand = new EditEventCommand(targetIndex, descriptor);
 
         Executable executable = () -> editEventCommand.execute(modelStub);
 
@@ -94,15 +97,15 @@ public class EditEventCommandTest {
         // Create a ModelStub that does not contain the event
         ModelStub modelStub = new ModelStubWithoutEvent();
 
-        EditEventCommand.EditEventDescriptor descriptor = new EditEventCommand.EditEventDescriptor();
+        EditEventDescriptor descriptor = new EditEventDescriptor();
         descriptor.setName(new EventName("Updated Event"));
         descriptor.setDescription(new EventDescription("Updated Description"));
         descriptor.setDuration(LocalDate.of(2024, 10, 2), LocalDate.of(2024, 10, 11));
 
-        EditEventCommand editEventCommand = new EditEventCommand(1, descriptor); // Assuming event ID 1 does not exist
+        Index targetIndex = Index.fromZeroBased(0);
 
         // Expect a CommandException to be thrown
-        assertThrows(CommandException.class, () -> editEventCommand.execute(modelStub));
+        assertThrows(CommandException.class, () -> new EditEventCommand(targetIndex, descriptor).execute(modelStub));
     }
 
     @Test
@@ -115,38 +118,33 @@ public class EditEventCommandTest {
 
         assertFalse(descriptor1.equals(descriptor2));
     }
-
-    // Model stub that always indicates the event does not exist
     private class ModelStubWithoutEvent extends ModelStub {
         @Override
-        public boolean hasEventById(int eventId) {
-            return false; // Simulate event not existing
-        }
-
-        @Override
-        public Event getEventById(int eventId) {
-            throw new AssertionError("This method should not be called.");
+        public ObservableList<Event> getFilteredEventList() {
+            return javafx.collections.FXCollections.observableArrayList();
         }
     }
-
 
     @Test
     public void equals() {
         Event event1 = new EventBuilder().withEventName("Event 1").build();
         Event event2 = new EventBuilder().withEventName("Event 2").build();
-        EditEventCommand.EditEventDescriptor descriptor1 = new EditEventCommand.EditEventDescriptor();
+        EditEventDescriptor descriptor1 = new EditEventDescriptor();
         descriptor1.setName(new EventName("Event 1"));
-        EditEventCommand.EditEventDescriptor descriptor2 = new EditEventCommand.EditEventDescriptor();
+        EditEventDescriptor descriptor2 = new EditEventDescriptor();
         descriptor2.setName(new EventName("Event 2"));
 
-        EditEventCommand editEvent1Command = new EditEventCommand(event1.getEventId(), descriptor1);
-        EditEventCommand editEvent2Command = new EditEventCommand(event2.getEventId(), descriptor2);
+        Index index1 = Index.fromZeroBased(0);
+        Index index2 = Index.fromZeroBased(1);
+
+        EditEventCommand editEvent1Command = new EditEventCommand(index1, descriptor1);
+        EditEventCommand editEvent2Command = new EditEventCommand(index2, descriptor2);
 
         // same object -> returns true
         assertTrue(editEvent1Command.equals(editEvent1Command));
 
         // same values -> returns true
-        EditEventCommand editEvent1CommandCopy = new EditEventCommand(event1.getEventId(), descriptor1);
+        EditEventCommand editEvent1CommandCopy = new EditEventCommand(index1, descriptor1);
         assertTrue(editEvent1Command.equals(editEvent1CommandCopy));
 
         // different types -> returns false
@@ -163,21 +161,16 @@ public class EditEventCommandTest {
      * A Model stub that contains a single event.
      */
     private class ModelStubWithEvent extends ModelStub {
-        private Event event;
+        private List<Event> events = new ArrayList<>();
 
         ModelStubWithEvent(Event event) {
             Objects.requireNonNull(event);
-            this.event = event;
+            this.events.add(event);
         }
 
         @Override
-        public boolean hasEventById(int id) {
-            return event.getEventId() == id;
-        }
-
-        @Override
-        public Event getEventById(int id) {
-            return hasEventById(id) ? event : null;
+        public ObservableList<Event> getFilteredEventList() {
+            return javafx.collections.FXCollections.observableArrayList(events);
         }
 
         @Override
@@ -185,16 +178,11 @@ public class EditEventCommandTest {
             Objects.requireNonNull(target);
             Objects.requireNonNull(editedEvent);
 
-            if (event.equals(target)) {
-                this.event = new Event(
-                        editedEvent.getEventName(),
-                        editedEvent.getEventDescription(),
-                        editedEvent.getEventDuration(),
-                        editedEvent.getEventId()
-                );
+            int index = events.indexOf(target);
+            if (index != -1) {
+                events.set(index, editedEvent);
             }
         }
-
     }
 
     /**

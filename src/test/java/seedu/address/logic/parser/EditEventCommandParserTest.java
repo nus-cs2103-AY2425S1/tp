@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -36,7 +37,8 @@ public class EditEventCommandParserTest {
         descriptor.setDuration(new EventDuration(
                 LocalDate.of(2024, 10, 2), LocalDate.of(2024, 10, 11)));
 
-        EditEventCommand expectedCommand = new EditEventCommand(1, descriptor);
+        Index targetIndex = Index.fromOneBased(1); // Adjusted to use Index
+        EditEventCommand expectedCommand = new EditEventCommand(targetIndex, descriptor);
 
         EditEventCommand resultCommand = parser.parse(userInput);
 
@@ -50,7 +52,8 @@ public class EditEventCommandParserTest {
         EditEventDescriptor descriptor = new EditEventDescriptor();
         descriptor.setName(new EventName("Updated Meeting"));
 
-        EditEventCommand expectedCommand = new EditEventCommand(1, descriptor);
+        Index targetIndex = Index.fromOneBased(1);
+        EditEventCommand expectedCommand = new EditEventCommand(targetIndex, descriptor);
 
         EditEventCommand resultCommand = parser.parse(userInput);
 
@@ -65,7 +68,7 @@ public class EditEventCommandParserTest {
     }
 
     @Test
-    public void parse_invalidEventId_failure() {
+    public void parse_invalidIndex_failure() {
         String userInput = "a " + PREFIX_EVENT_NAME + "Updated Meeting";
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));

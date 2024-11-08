@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -16,6 +17,7 @@ import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.TempPredicate;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
@@ -30,9 +32,11 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     public SearchCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EVENT);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EVENT);
 
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             List<String> keywordArguments = argMultimap.getAllValues(PREFIX_ADDRESS);
@@ -43,6 +47,10 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             List<String> keywordArguments = argMultimap.getAllValues(PREFIX_EMAIL);
             List<String> keywords = ParserUtil.parseSearchKeywords(keywordArguments);
             return new SearchCommand(new EmailContainsKeywordsPredicate(keywords));
+        }
+        if (argMultimap.getValue(PREFIX_EVENT).isPresent()) {
+            List<String> keywordArguments = argMultimap.getAllValues(PREFIX_EVENT);
+            return new SearchCommand(new TempPredicate(keywordArguments));
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             List<String> keywordArguments = argMultimap.getAllValues(PREFIX_NAME);

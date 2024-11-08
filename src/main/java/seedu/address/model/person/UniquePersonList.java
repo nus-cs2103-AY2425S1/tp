@@ -155,6 +155,19 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Removes an event from all {@code Person} objects in the address book.
+     * Used when deleting an event from the address book.
+     */
+    public void unassignEventFromAllPersons(Event event) {
+        requireNonNull(event);
+        for (Person person : internalList) {
+            if (person.checkAssignedToEvent(event)) {
+                unassignEventFromPerson(person, event);
+            }
+        }
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

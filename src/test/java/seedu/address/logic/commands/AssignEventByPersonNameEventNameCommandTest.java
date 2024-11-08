@@ -19,9 +19,9 @@ import seedu.address.model.person.Name;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code UnassignEventByPersonNameEventNameCommand}.
+ * {@code AssignEventByPersonNameEventNameCommand}.
  */
-public class UnassignEventByPersonNameEventNameCommandTest {
+public class AssignEventByPersonNameEventNameCommandTest {
 
     private Model model;
 
@@ -30,20 +30,20 @@ public class UnassignEventByPersonNameEventNameCommandTest {
         model = new ModelManager();
         model.addPerson(ALICE);
         model.addEvent(MEETING);
-        model.assignEventToPerson(ALICE, MEETING);
     }
 
     @Test
     public void execute_validPersonAndEvent_success() {
-        UnassignEventByPersonNameEventNameCommand command = new UnassignEventByPersonNameEventNameCommand(
+        AssignEventByPersonNameEventNameCommand command = new AssignEventByPersonNameEventNameCommand(
                 ALICE.getName(), MEETING.getEventName());
 
-        String expectedMessage = String.format(UnassignEventByPersonNameEventNameCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(AssignEventByPersonNameEventNameCommand.MESSAGE_SUCCESS,
                 MEETING.getEventName(), ALICE.getName());
 
         Model expectedModel = new ModelManager();
         expectedModel.addPerson(ALICE);
         expectedModel.addEvent(MEETING);
+        expectedModel.assignEventToPerson(ALICE, MEETING);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -51,7 +51,7 @@ public class UnassignEventByPersonNameEventNameCommandTest {
     @Test
     public void execute_personNotFound_throwsCommandException() {
         Name invalidName = new Name("Invalid Name");
-        UnassignEventByPersonNameEventNameCommand command = new UnassignEventByPersonNameEventNameCommand(
+        AssignEventByPersonNameEventNameCommand command = new AssignEventByPersonNameEventNameCommand(
                 invalidName, MEETING.getEventName());
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
@@ -60,32 +60,32 @@ public class UnassignEventByPersonNameEventNameCommandTest {
     @Test
     public void execute_eventNotFound_throwsCommandException() {
         EventName invalidEventName = new EventName("Invalid Event");
-        UnassignEventByPersonNameEventNameCommand command = new UnassignEventByPersonNameEventNameCommand(
+        AssignEventByPersonNameEventNameCommand command = new AssignEventByPersonNameEventNameCommand(
                 ALICE.getName(), invalidEventName);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_NAME);
     }
 
     @Test
-    public void execute_personNotAssignedToEvent_throwsCommandException() {
-        model.addPerson(BOB);
+    public void execute_personAlreadyAssignedToEvent_throwsCommandException() {
+        model.assignEventToPerson(ALICE, MEETING);
+        AssignEventByPersonNameEventNameCommand command = new AssignEventByPersonNameEventNameCommand(
+                ALICE.getName(), MEETING.getEventName());
 
-        UnassignEventByPersonNameEventNameCommand command = new UnassignEventByPersonNameEventNameCommand(
-                BOB.getName(), MEETING.getEventName());
-
-        assertCommandFailure(command, model, String.format(Messages.MESSAGE_PERSON_NOT_ASSIGNED_TO_EVENT,
-                BOB.getName(), MEETING.getEventName()));
+        assertCommandFailure(command, model, String.format(Messages.MESSAGE_PERSON_ALREADY_ASSIGNED_TO_EVENT,
+                ALICE.getName(), MEETING.getEventName()));
     }
 
     @Test
     public void equals() {
-        UnassignEventByPersonNameEventNameCommand command1 = new UnassignEventByPersonNameEventNameCommand(
+        model.addPerson(BOB);
+        AssignEventByPersonNameEventNameCommand command1 = new AssignEventByPersonNameEventNameCommand(
                 ALICE.getName(), MEETING.getEventName());
-        UnassignEventByPersonNameEventNameCommand command2 = new UnassignEventByPersonNameEventNameCommand(
+        AssignEventByPersonNameEventNameCommand command2 = new AssignEventByPersonNameEventNameCommand(
                 ALICE.getName(), MEETING.getEventName());
-        UnassignEventByPersonNameEventNameCommand command3 = new UnassignEventByPersonNameEventNameCommand(
+        AssignEventByPersonNameEventNameCommand command3 = new AssignEventByPersonNameEventNameCommand(
                 BOB.getName(), MEETING.getEventName());
-        UnassignEventByPersonNameEventNameCommand command4 = new UnassignEventByPersonNameEventNameCommand(
+        AssignEventByPersonNameEventNameCommand command4 = new AssignEventByPersonNameEventNameCommand(
                 ALICE.getName(), WORKSHOP.getEventName());
 
         // same object -> returns true
@@ -111,11 +111,10 @@ public class UnassignEventByPersonNameEventNameCommandTest {
     public void toStringMethod() {
         Name personName = new Name("Alice");
         EventName eventName = new EventName("Meeting");
-        UnassignEventByPersonNameEventNameCommand unassignEventCommand =
-                new UnassignEventByPersonNameEventNameCommand(personName, eventName);
-        String expected = UnassignEventByPersonNameEventNameCommand.class.getCanonicalName() + "{targetPersonName="
+        AssignEventByPersonNameEventNameCommand assignEventCommand =
+                new AssignEventByPersonNameEventNameCommand(personName, eventName);
+        String expected = AssignEventByPersonNameEventNameCommand.class.getCanonicalName() + "{targetPersonName="
                 + personName + ", targetEventName=" + eventName + "}";
-        assertEquals(expected, unassignEventCommand.toString());
+        assertEquals(expected, assignEventCommand.toString());
     }
-
 }

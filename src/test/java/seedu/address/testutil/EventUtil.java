@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AssignEventCommand;
 import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.commands.UnassignEventCommand;
 import seedu.address.model.event.Event;
@@ -59,4 +60,11 @@ public class EventUtil {
                 + PREFIX_EVENT + eventArgsString;
     }
 
+    /**
+     * Returns the part of command string for the given {@code AssignEventByPersonIndexEventIndexCommand}'s details.
+     */
+    public static String getAssignEventDetails(String personArgsString, String eventArgsString) {
+        return AssignEventCommand.COMMAND_WORD + " " + PREFIX_PERSON + personArgsString + " "
+                + PREFIX_EVENT + eventArgsString;
+    }
 }

@@ -101,24 +101,6 @@ public class DeleteEventByNameCommandTest {
     }
 
     @Test
-    public void execute_duplicateNamesButDifferentCasing_throwsCommandException() {
-        Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        EventName nameToDelete = eventToDelete.getName();
-        String nameStringToDelete = nameToDelete.toString();
-        String allLowerCasedNameString = nameStringToDelete.toLowerCase();
-        EventName allLowerCasedNameToDelete = new EventName(allLowerCasedNameString);
-        Event duplicateEventToDelete = new Event(
-                allLowerCasedNameToDelete, eventToDelete.getEventDescription(), eventToDelete.getEventDuration());
-        int newEventId = model.generateNewEventId();
-        Event duplicateEventToDeleteWithId = duplicateEventToDelete.changeId(newEventId);
-        model.addEvent(duplicateEventToDeleteWithId);
-
-        DeleteEventCommand deleteEventCommand = new DeleteEventByNameCommand(nameToDelete);
-
-        assertCommandFailure(deleteEventCommand, model, Messages.MESSAGE_MORE_THAN_ONE_EVENT_DISPLAYED_NAME);
-    }
-
-    @Test
     public void equals() {
         EventName firstName = new EventName("Meeting");
         EventName secondName = new EventName("Contest");

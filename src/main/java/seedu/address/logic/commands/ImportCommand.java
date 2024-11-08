@@ -29,7 +29,10 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_SUCCESS = "The contacts from %s have been successfully imported";
-    public static final String MESSAGE_USAGE = "Usage: import [filename]";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Imports the contacts from the specified file located in the data folder \n"
+            + "Parameters: FILENAME (Must be a valid file name)\n"
+            + "Example: " + COMMAND_WORD + " contacts.csv";
     public static final String MESSAGE_FILE_DOES_NOT_EXIST = "The specified file does not exist";
     public static final String MESSAGE_INCORRECT_FILE_FORMAT = "The format of the specified file is incorrect";
     public static final String MESSAGE_ERROR_READING_FILE = "There was an error when reading the file";
@@ -89,6 +92,12 @@ public class ImportCommand extends Command {
      * @throws CommandException If there is an issue reading the file.
      */
     private boolean checkCsvFileFormat(Path filePath) throws CommandException {
+        // Check if the file has a .csv extension
+        String fileName = filePath.getFileName().toString();
+        if (!fileName.toLowerCase().endsWith(".csv")) {
+            return false;
+        }
+        // Proceed to check the header format
         try (BufferedReader br = Files.newBufferedReader(filePath)) {
             String headerLine = br.readLine();
             return headerLine != null && headerLine.equals(COLUMN_HEADERS);
@@ -96,6 +105,7 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_ERROR_READING_FILE);
         }
     }
+
 
     /**
      * Reads the list of persons from the CSV file.
@@ -179,3 +189,4 @@ public class ImportCommand extends Command {
         return filePath.equals(otherImportCommand.filePath);
     }
 }
+

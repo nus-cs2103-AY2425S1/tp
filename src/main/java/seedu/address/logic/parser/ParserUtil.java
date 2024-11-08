@@ -175,10 +175,10 @@ public class ParserUtil {
             start = LocalDate.parse(trimmedEventStartDate);
             end = LocalDate.parse(trimmedEventEndDate);
         } catch (DateTimeParseException exception) {
-            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS);
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS_DATE_STRING);
         }
         if (!EventDuration.isValidDuration(start, end)) {
-            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS);
+            throw new ParseException(EventDuration.MESSAGE_CONSTRAINTS_DATE_ORDER);
         }
         return new EventDuration(start, end);
     }
@@ -201,16 +201,6 @@ public class ParserUtil {
             throw new ParseException(null);
         }
         return trimmedFileName;
-    }
-
-    /**
-     * Parses a String containing the field to search and keywords,
-     * into a String representing the field to search.
-     */
-    public static String parseField(String fieldAndKeywords) {
-        requireNonNull(fieldAndKeywords);
-        String field = fieldAndKeywords.split(" ")[0].trim();
-        return field;
     }
 
     /**
