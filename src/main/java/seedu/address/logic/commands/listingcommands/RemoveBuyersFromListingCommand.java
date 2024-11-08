@@ -25,7 +25,7 @@ public class RemoveBuyersFromListingCommand extends Command {
     public static final String COMMAND_WORD = "removelistingbuyers";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes buyers from the listing identified by its "
-            + "index. "
+            + "index number used in the displayed listing list "
             + "Parameters: LISTING_INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES]...\n"
             + "Example: " + COMMAND_WORD + " 1 buy/1 buy/3";
 

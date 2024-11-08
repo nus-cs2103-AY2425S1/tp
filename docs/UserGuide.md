@@ -64,9 +64,9 @@ Commands in EZStates follow the same structure:
 
 #### Reference Types
 
-| Reference | Meaning                                  | Constraints                                                      | Remarks                                                                                                                                               |
-|-----------|------------------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name      | Name of a client or a listing in a list  | Names should only contain `alphanumerical` characters and spaces | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists <br> Names are also `case-insensitive` |
+| Reference | Meaning                                  | Constraints                                                     | Remarks                                                                                                        |
+|-----------|------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| INDEX     | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists |
 
 #### Prefix Notation
 
@@ -341,21 +341,21 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
 - #### Edit Client Command
-    - **Format:** `editclient NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]... [r/REMARK]`
+    - **Format:** `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Changing name of `Bob` to `Bobby`
+      > **Use Case #1**: Changing name of `Bob` to `Bobby` (Assuming displayed index is 1)
       >
-      > **Input**: `editclient Bob n/Bobby`
+      > **Input**: `editclient 1 n/Bobby`
       >
       > **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
       >
       > ---
       >
-      > **Use Case #2**: Changing phone of `Bobby` to `97774444`
+      > **Use Case #2**: Changing phone of `Bobby` to `97774444` 
       >
-      > **Input**: `editclient Bobby p/97774444`
+      > **Input**: `editclient 1 p/97774444`
       >
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
       >
@@ -363,123 +363,67 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Use Case #3**: Removing tags of `Bobby`
       >
-      > **Input**: `editclient Bobby t/`
+      > **Input**: `editclient 1 t/`
       >
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
       >
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `editclient Bob` = `editclient BOB` = `editclient bOb` _(Not exhaustive)_
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `editclient Wen Xuan` != `editclient WenXuan`
-    </div> 
-    <br> 
-
     - **Failed Execution:**
       > ---
-      > **User Error #1**: No name found
+      > **User Error #1**: No index found / Invalid type / Negative integer
       >
-      > **Input**: `editclient n/Bobby`
-      >
-      > **Output**:
-      <br> Invalid command format!
-      <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
-      <br>Parameters: NAME (must be an existing client) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: editclient John Doe e/johndoe@example.com p/91234567
-      >
-      > ---
-      >
-      > **User Error #2**: Entering invalid name
-      >
-      > **Input**: `editclient a#2 n/Bobby`
+      > **Input**: `editclient n/Bobby` OR `editclient #a` OR `editclient -1`
       >
       > **Output**:
       <br> Invalid command format!
       <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
-      <br>Parameters: NAME (must be an existing client) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: editclient John Doe e/johndoe@example.com p/91234567
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: editclient 1 e/johndoe@example.com p/91234567
       >
       > ---
       > 
-      > **User Error #3**: Entering a name that does not exist in the address book
+      > **User Error #2**: Entering out-of-bounds index (larger than number of clients)
       > 
-      > **Input**: `editclient notInAddressBook n/Bobby`
+      > **Input**: `editclient 100 n/Bobby`
       > 
-      > **Output**: This person does not exist in the address book.
+      > **Output**: The person index provided is invalid
       > 
       > ---
 
 - #### Delete Client Command
-    - **Format:** `deleteclient NAME`
+    - **Format:** `deleteclient INDEX`
     - **Description:** Deletes the specified client profile.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Delete `Bob` from the address book
+      > **Use Case #1**: Delete `Bob` from the address book (Assuming displayed index is 1)
       >
-      > **Input**: `deleteclient Bob`
+      > **Input**: `deleteclient 1`
       >
-      > **Output**: `Successfully deleted Bob with the number: 97774444 and email: bobby123@gmail.com`
+      > **Output**: `Successfully deleted Bob.
+      Phone number: 977774444 and Email: bobby123@gmail.com`
       >
       > ---
-    
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `delete Bob` = `delete BOB` = `delete bOb` _(Not exhaustive)_
-  
-    Thus, these delete commands will delete the same `Bob` profile
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `delete Wen Xuan` != `delete WenXuan`
-    
-    These commands will delete different client profiles 
-    </div> 
-    <br>
   
     - **Failed Execution:**
       > ---
-      > **Use Case #1**: No name found
+      > **Use Case #1**: No index found / Invalid type / Negative integer
       >
-      > **Input**: `deleteclient`
+      > **Input**: `deleteclient` OR `deleteclient #a` OR `deleteclient -1`
       >
       > **Output**: 
       <br> Invalid command format! 
       <br>delete: Deletes the client profile corresponding to the client's name.
-      <br>Parameters: CLIENT_NAME (case-insensitive)
-      <br>Example: delete Tan Wen Xuan
+      <br>Parameters: INDEX (must be a positive integer)
+      <br>Example: delete 1
       >
       > ---
-      > **Use Case #2**: Entering invalid name 
+      > **Use Case #2**: Entering out-of-bounds index (larger than number of clients)
       > 
-      > **Input**: `deleteclient $$`
+      > **Input**: `deleteclient 100`
       > 
-      > **Output**:
-      <br> Invalid command format!
-      <br>delete: Deletes the client profile corresponding to the client's name.
-      <br>Parameters: CLIENT_NAME (case-insensitive)
-      <br>Example: delete Tan Wen Xuan
+      > **Output**: The person index provided is invalid
       > 
-      > ---
-      > **Use Case #3**: Deleting a name that does not exist in the address book
-      > 
-      > **Input**: `deleteclient notInAddressBook`
-      > 
-      > **Output**:
-      <br> Invalid command format!
-      <br>delete: Deletes the client profile corresponding to the client's name.
-      <br>Parameters: CLIENT_NAME (case-insensitive)
-      <br>Example: delete Tan Wen Xuan
-      >
       > ---
 
 ---
@@ -491,11 +435,11 @@ Commands for managing appointments between user and clients.
 ![appointments](images/appointments.png)
 
 - #### Schedule Appointment
-    - **Format:** `apt NAME d/DD-MM-YY fr/HHmm to/HHmm` OR `apt NAME d/ddMMyy fr/HH:mm to/HH:mm`
+    - **Format:** `apt INDEX d/DD-MM-YY fr/HHmm to/HHmm` OR `apt INDEX d/ddMMyy fr/HH:mm to/HH:mm`
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob`
+      > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob` (Assuming displayed index is 1)
       >
       > **Input**: `apt 1 d/08-10-24 fr/1900 to/2100`
       >
@@ -514,31 +458,14 @@ Commands for managing appointments between user and clients.
       > ![bob_apt_2](images/bob_apt_2.png)
       > 
       > ---
-
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `apt Bob` = `apt BOB` = `apt bOb` _(Not exhaustive)_
-    <br>
-    Thus, these commands will set an appointment for the same `Bob` profile
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `apt Wen Xuan` != `apt WenXuan`
-    
-    These commands will set appointments for different client profiles 
-    </div> 
-    <br>
   
     - **Failed Execution:**
       > ---
       > **Use Case #1**: Incorrect `DATE` format 
       >
-      > **Input #a**: `apt Bob d/09-10-2024 fr/1000 to/1200`
+      > **Input #a**: `apt 1 d/09-10-2024 fr/1000 to/1200`
       >
-      > **Input #b**: `apt Bob d/aaa fr/1000 to/1200`
+      > **Input #b**: `apt 1 d/aaa fr/1000 to/1200`
       > 
       > **Output**: Dates should be in the format dd-MM-yy or ddMMyy, e.g., 25-12-24 or 251224.
       >
@@ -546,22 +473,22 @@ Commands for managing appointments between user and clients.
       > 
       > **Use Case #2**: Incorrect `TIME` format
       > 
-      > **Input #a**: `apt Bob d/20-10-24 fr/100000 to/1200`
+      > **Input #a**: `apt 1 d/20-10-24 fr/100000 to/1200`
       > 
-      > **Input #b**: `apt Bob d/20-10-24 fr/aa to/1200`
+      > **Input #b**: `apt 1 d/20-10-24 fr/aa to/1200`
       > 
       > **Output**: Times should be in the format HH:mm or HHmm, e.g., 0900 or 09:00.
       > 
       > ---
 
 - #### Delete Appointment
-    - **Format:** `delapt NAME`
+    - **Format:** `delapt INDEX`
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case**: Deleting appointment for `Bob`
+      > **Use Case**: Deleting appointment for `Bob` (Assuming displayed index is 1)
       >
-      > **Input**: `delapt Bob`
+      > **Input**: `delapt 1`
       >
       > **Output**: Successfully deleted appointment from Bob
       >
@@ -569,30 +496,13 @@ Commands for managing appointments between user and clients.
       > 
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `delapt Bob` = `delapt BOB` = `delapt bOb` _(Not exhaustive)_
-
-    Thus, these commands will delete the appointment for the same `Bob` profile
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `delapt Wen Xuan` != `delapt WenXuan`
-    
-    These commands will delete appointments for different client profiles 
-    </div> 
-    <br>
-
     - **Failed Execution:**
       > ---
-      > **Use Case**: Attempting to delete an appointment from a non-existent client
+      > **Use Case**: Entering out-of-bounds index (larger than number of clients)
       >
-      > **Input**: `delapt nonExistentClient`
+      > **Input**: `delapt 100`
       >
-      > **Output**: Please enter an existing client name!
+      > **Output**: The person index provided is invalid
       >
       > ---
       
@@ -605,13 +515,13 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### Add Listing
-    - **Format:** `listing n/NAME price/PRICE area/AREA address/ADDRESS region/REGION seller/SELLER [buyer/BUYER]...`
+    - **Format:** `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`
     - **Description:** Adds a new listing associated to the seller with the specified details.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
       >
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/Alex Yeoh`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`
       >
       > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
       >
@@ -621,7 +531,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Adding a listing with no buyers
       >
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 address/123 PASIR RIS (S)123456 reg/east sel/2`
       >
       > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
       >
@@ -633,17 +543,17 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **Use Case #1**: Attempting to add a listing for a non-existent seller
       >
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/bob7`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
       >
-      > **Output**: Please enter an existing client name!
+      > **Output**: The seller index provided is invalid!
       >
       > ---
       > 
       > **Use Case #2**: Attempting to add non-existent buyers to a listing
       > 
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/bob7`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
       > 
-      > **Output**: Please enter an existing client name!
+      > **Output**: The buyer index (100) provided is invalid!
       > 
       > ---
 
@@ -675,13 +585,13 @@ Commands for managing property listings and associating clients with listings.
     - **Failed Execution:** NIL
 
 - #### Add Buyers to Listing
-    - **Format:** `addlistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
+    - **Format:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4`
+      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming displayed index is 1)
       >
-      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh buyer/Charlotte Oliveiro`
+      > **Input**: `addlistingbuyers 1 buy/1 buy/3`
       >
       > **Output**: Buyers added to listing: RC4
       >
@@ -689,46 +599,25 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
       >
-      > **Input**: `addlistingbuyers david hdb buyer/Alex Yeoh buyer/Charlotte Oliveiro`
+      > **Input**: `addlistingbuyers 2 buy/1 buy/3`
       >
       > **Output**: Buyers added to listing: David HDB
       >
       > ---
-
-    <br>
-    <div class="note" markdown="span">
-    Listing and buyer names are case-insensitive: 
-    `addlistingbuyers Warton House` 
-    = `addlistingbuyers warton house` 
-    = `addlistingbuyers wArToN HouSe` _(Not exhaustive)_
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, listing/buyer name is space-sensitive:
-    `addlistingbuyers Warton House` != `addlistingbuyers WartonHouse`
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div> 
-    <br>
     
     - **Failed Execution:**
       > ---
       > **Use Case #1**: Listing not found
       >
-      > **Input**: `addlistingbuyers NonExistentListing buyer/Bob`
+      > **Input**: `addlistingbuyers 100 buy/1`
       >
-      > **Output**: The specified listing name does not exist.
+      > **Output**: The listing index provided is invalid!
       >
       > ---
       > 
       > **User Error #2**: Duplicate buyers
       > 
-      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh` <br>_(Assuming RC4 contains Alex Yeoh already)_
+      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming RC4 contains Alex Yeoh already)_
       > 
       > **Output**: Some buyers are already associated with this listing.
       > 
@@ -736,28 +625,29 @@ Commands for managing property listings and associating clients with listings.
       > 
       > **User Error #3**: Buyer not found
       > 
-      > **Input**: `addlistingbuyers RC4 buyer/NonExistentBuyer`
+      > **Input**: `addlistingbuyers 1 buy/100`
       > 
-      > **Output**: The specified buyer NonExistentBuyer does not exist in the client list.
+      > **Output**: The person index provided is invalid!
       > 
       > ---
       > 
       > **User Error #4**: Person is not a buyer
       > 
-      > **Input**: `addlistingbuyers RC4 buyer/Bernice Yu` <br>_(Assuming Bernice Yu is a seller)_
+      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client 1 is a seller)_
       > 
-      > **Output**: The specified person Bernice Yu is not a buyer.
+      > **Output**: The specified person is not a buyer:<br>1.bob
+      > 
       >
       > ---
 
 - #### Remove Buyers from Listing
-    - **Format:** `removelistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
+    - **Format:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Removing one buyer `Alex Yeoh` from listing `RC4`
       >
-      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh` 
+      > **Input**: `removelistingbuyers 1 buy/1` 
       >
       > **Output**: Buyers removed from listing: RC4
       >
@@ -765,62 +655,41 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Removing two buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4`
       >
-      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh buyer/charlotte oliveiro`
+      > **Input**: `removelistingbuyers 1 buy/1 buy/3`
       >
       > **Output**: Buyers removed from listing: RC4
       >
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    Listing and buyer names are case-insensitive: 
-    `removelistingbuyers Warton House` 
-    = `removelistingbuyers warton house` 
-    = `removelistingbuyers wArToN HouSe` _(Not exhaustive)_
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, listing/buyer name is space-sensitive:
-    `removelistingbuyers Warton House` != `removelistingbuyers WartonHouse`
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div> 
-    <br>
-
     - **Failed Execution:**
       > ---
       > **User Error #1**: Listing not found
       >
-      > **Input**: `removelistingbuyers rc44444 buyer/alex yeoh`
+      > **Input**: `removelistingbuyers 100 buy/1`
       >
-      > **Output**: The specified listing name does not exist.
+      > **Output**: The listing index provided is invalid!
       > 
       > ---
       > 
       > **User Error #2**: Empty set of buyers
       >
-      > **Input**: `removelistingbuyers rc4 buyer/`
+      > **Input**: `removelistingbuyers 1 buy/`
       >
-      > **Output**: Please provide valid buyers
+      > **Output**: The person index provided is invalid!
       > 
       > ---
       > 
       > **User Error #3**: Person specified is not buyer
       >
-      > **Input**: `removelistingbuyers rc4 buyer/ImASeller`
+      > **Input**: `removelistingbuyers 1 buy/2`
       >
-      > **Output**: The client ImASeller is not registered as a buyer.
+      > **Output**: The person index provided is invalid!
       > 
       > ---
       > 
       > **User Error #4**: Person specified is not a buyer for the listing
       >
-      > **Input**: `removelistingbuyers rc4 buyer/notInterestedBuyer`
+      > **Input**: `removelistingbuyers 1 buy/3`
       >
       > **Output**: The specified buyer notInterestedBuyer is not a buyer of the listing RC4.
       > 
@@ -828,47 +697,30 @@ Commands for managing property listings and associating clients with listings.
       > 
       > **User Error #5**: Buyer not found
       >
-      > **Input**: `removelistingbuyers rc4 buyer/nonExistentBuyer`
+      > **Input**: `removelistingbuyers 1 buy/100`
       >
       > **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
       > 
       > ---
 
 - #### Delete Listing
-    - **Format:** `deletelisting LISTING_NAME`
+    - **Format:** `deletelisting INDEX`
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Deleting listing `Warton House`
+      > **Use Case #1**: Deleting listing `Warton House` (Assuming displayed index is 1)
       >
-      > **Input**: `deletelisting warton house`
+      > **Input**: `deletelisting 1`
       >
       > **Output**: Successfully deleted listing: Warton House
       >
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `deletelisting Bob House` = `deletelisting BOB HOUSE` = `deletelisting bOb hOUsE` _(Not exhaustive)_
-
-    Thus, these commands will delete the same `Bob House` listing
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `deletelisting bob house` != `deletelisting bobhouse`
-    
-    These commands will delete different listings 
-    </div> 
-    <br>
-
     - **Failed Execution:**
       > ---
       > **Use Error**: Listing not found
       >
-      > **Input**: deletelisting nonExistentListing
+      > **Input**: deletelisting 100
       >
       > **Output**: This listing does not exist in EZSTATE
       >
@@ -931,6 +783,13 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       > ![help](images/help.png)
       > 
       > ---
+    
+    <br>
+    <div class="alert" markdown="span">
+    WARNING: The subsequent section `More Info` might have an outdated command format. This is as of `v1.5`.<br>
+    <br>
+    Please refer to the command format given in the application as per the app version used.
+    </div>
 
 - #### More Info
     - **Format:** `moreinfo NAME`

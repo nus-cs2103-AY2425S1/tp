@@ -20,7 +20,7 @@ public class DeleteListingCommand extends Command {
     public static final String COMMAND_WORD = "deletelisting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the listing specified by its index.\n"
+            + ": Deletes the listing identified by its index number used in the displayed listing list.\n"
             + "Parameters: LISTING_INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
