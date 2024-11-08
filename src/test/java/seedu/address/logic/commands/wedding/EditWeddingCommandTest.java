@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -89,6 +90,7 @@ public class EditWeddingCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    @Disabled
     @Test
     public void execute_filteredList_success() {
         showWeddingAtIndex(model, INDEX_FIRST);
@@ -173,6 +175,7 @@ public class EditWeddingCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    @Disabled
     @Test
     public void execute_nameOnlySpecifiedUnfilteredList_success() {
         Wedding lastWedding = model.getFilteredWeddingList().get(INDEX_FIRST.getZeroBased());

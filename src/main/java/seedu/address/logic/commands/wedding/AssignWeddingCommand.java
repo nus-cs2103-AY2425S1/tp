@@ -83,20 +83,24 @@ public class AssignWeddingCommand extends Command {
         for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
             Wedding wedding = entry.getKey();
 
-            // Check if person is already assigned to the wedding
-            if (model.getWedding(wedding).hasPerson(personToEdit)) {
-                throw new CommandException(String.format(MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()));
-            }
-
             if (!model.hasWedding(wedding)) {
                 if (this.force) {
                     CreateWeddingCommand newWeddingCommand = new CreateWeddingCommand(wedding);
                     newWeddingCommand.execute(model);
                 } else {
                     throw new CommandException(
-                            MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
+                            MESSAGE_WEDDING_NOT_FOUND
+                                    + "\n"
+                                    + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
             }
+
+            // Check if person is already assigned to the wedding
+            if (model.getWedding(wedding).hasPerson(personToEdit)) {
+                throw new CommandException(String.format(
+                        MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()
+                ));
+            };
             Wedding editedWedding = wedding.clone();
             String type = entry.getValue();
             switch (type) {
