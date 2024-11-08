@@ -101,9 +101,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteGuestCommandParser`) and uses it to parse the command.
-   1. Note that `EditVendorCommandParser` and `EditGuestCommandParser` parser classes require the `Model`, to check if the guest or vendor index provided by the user is valid or not. 
-
-
+   * Note that `EditVendorCommandParser` and `EditGuestCommandParser` parser classes require the `Model`, to check if the guest or vendor index provided by the user is valid or not.<br> 
+<br>
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteGuestCommand`) which is executed by the `LogicManager`.
 
 1. When the `Command` object is executed, it communicates with the `Model` (e.g., to delete a guest). <br>
@@ -118,9 +117,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddGuestCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddGuestCommand`) which the `AddressBookParser` returns back as a `Command` object.
   * As explained above, some `XYZCommandParser` classes require the `Model` for parsing 
-  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse) 
-  
-
+  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse) <br>
+<br> 
 * All `XYZCommandParser` classes (e.g., `AddGuestCommandParser`, `DeleteGuestCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -145,9 +143,8 @@ The `Model` component,
 The `Storage` component,
 * Can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
   * `Storage` saves `Guest` into JSON format and reads back into `Guest` object, using the `JsonAdapatedGuest` class
-  * `Storage` saves `Vendor` into JSON format and reads back into `Vendor` object, using the `JsonAdaptedVendor` class
-  
-
+  * `Storage` saves `Vendor` into JSON format and reads back into `Vendor` object, using the `JsonAdaptedVendor` class<br>
+<br>
 * Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed)
 
 * Depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -165,17 +162,10 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Guest feature
 The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values
 
-<div align="center">
-    <img src="diagrams/AddGuestSequenceDiagramP1.puml" alt="AddGuestSequenceDiagram Part 1" />
-</div>
-
-<div align="center">
-    <img src="diagrams/AddGuestSequenceDiagramP2.puml" alt="AddGuestSequenceDiagram Part 2" />
-</div>
-
-<div align="center">
-    <img src="diagrams/AddGuestSequenceDiagramP3.puml" alt="AddGuestSequenceDiagram Part 3" />
-</div>
+The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
+<puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP2.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
 
 <box type="info" seamless>
 
@@ -186,10 +176,9 @@ Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
 2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `add_guest` command, it creates and return an `AddGuestCommandParser` for further parsing. 
 3. `AddGuestCommandParser` parses the remaining user input (excluding the `add_guest` keyword) to extract the prefixes and their values, which are used to create a `Guest` object with the corresponding attributes
-   1. Suppose the n/, p/, e/ and a/ prefixes and their values are provided (these are compulsory)
-   2. Then, a `Guest` object with name, phone number, email and address attributes are created 
-
-
+   * Suppose the n/, p/, e/ and a/ prefixes and their values are provided (these are compulsory)
+   * Then, a `Guest` object with name, phone number, email and address attributes are created <br> 
+<br>
 4. An `AddGuestCommand` is then created with the new `Guest` object and returned.
 5. `LogicManager` executes the `AddGuestCommand`, which calls the `hasPerson` method of `Model` to check if the guest already exists in the address book. If the guest is not a duplicate (i.e. not same name and phone number as another guest), the `AddGuestCommand` then calls the `addPerson` method of the `Model` to add the guest into the address book.
 6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
