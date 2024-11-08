@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -299,6 +299,24 @@ The following sequence diagram shows how the user can get previous command:
 The following activity diagram summarizes what happens when a user interacts with this feature:
 ![CommandTextHistoryActivityDiagram](images/CommandTextHistoryActivityDiagram.png)
 
+### NRIC Validation
+NRICs are stored in the `Nric` class. The method `Nric#isValidNric(String nric)` is used to validate the NRIC.
+
+#### Implementation
+The NRIC validation is done by checking if the NRIC is in the correct format, with this Regex pattern `"[STFG]\\d{7}[A-Z]"`.
+
+Thereafter, the NRIC is checked for its validity using the checksum algorithm that the Singapore Government uses. This algorithm is widely public and is as follows:
+
+1. Multiply each number in the NRIC by a weight. The mapping is as follows, in order, `2, 7, 6, 5, 4, 3, 2` (e.g. the weight of the first digit is `2`, that of the second digit is `7`)
+2. Sum up the products of the multiplication.
+3. If the first letter of the NRIC is `T` or `G`, add `4` to the sum.
+4. Get the remainder of the sum divided by `11`.
+5. Find the checksum alphabet based on this remainder to checksum mapping:
+   * If the first letter is `S` or `T`: The checksum mapping is `0=J, 1=Z, 2=I, 3=H, 4=G, 5=F, 6=E, 7=D, 8=C, 9=B, 10=A`.
+   * If the first letter is `F` or `G`: The checksum mapping is `0=X, 1=W, 2=U, 3=T, 4=R, 5=Q, 6=P, 7=N, 8=M, 9=L, 10=K`.
+   * For example, if the remainder is `3` and the first letter is `S`, the checksum alphabet is `H`.
+6. Check if the last letter of the NRIC is the same as the checksum alphabet. If it is, the NRIC is valid, otherwise, it is invalid.
+
 #### Future Improvements:
 
 * Implement a feature to clear the command history.
@@ -575,13 +593,13 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 ### Non-Functional Requirements
 
-1. A user with above-average typing speed (> 40 WPM) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. A user with above-average typing speed (> 40 Words Per Minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 2. The product should be a single-user system.
 3. The product should not rely on a remote server.
 4. It should accommodate up to 250 elderly without performance slowdowns of more than 3 seconds during typical usage.
 5. The product should generally respond within two seconds.
 6. The product should work on Windows, Linux and Mac as long as they have `Java 17` installed.
-7. The product should not use a DBMS.
+7. The product should not use a Database Management System.
 8. The data should be stored locally and should be in a human editable text file.
 8. The product needs to be developed in a breadth-first incremental manner over the project duration.
 9. The software should follow the Object-oriented paradigm primarily.
@@ -598,6 +616,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 * **AAC**: Active Ageing Centre. A recreational centre that supports elderly in the area.
 * **Befriending Program**: Program which elderly signs up for to receive support from an AAC.
+* **AIC**: Agency for Integrated Care. A statutory board under the Ministry of Health in Singapore.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -609,6 +628,14 @@ Given below are instructions to test the app manually. It is preferred to follow
 testers are expected to do more *exploratory* testing.
 
 </div>
+
+### Valid NRICs
+Here is a list of valid NRICs issued by the Singapore Government that can be used for testing:
+* S1486256J
+* S0919929B
+* S6516486H
+* T0500222I
+* T0251112B
 
 ### Launch and shutdown
 
