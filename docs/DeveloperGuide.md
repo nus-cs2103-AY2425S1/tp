@@ -568,7 +568,7 @@ ___
 2. The application should take no longer than 5 seconds to launch and load all necessary data (e.g., contacts, deliveries) on any supported platform.
 
 #### Scalability Requirements
-3. The system should be able to handle at least 1,000 contacts and 1000 deliveries without noticeable degradation in performance
+3. The system should be able to handle at least 100 contacts and 200 deliveries without noticeable degradation in performance
 
 #### Usability Requirements
 4. A user with typing speed of more than 50 words per minute for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse
