@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidRating(Integer)}
  */
 public class Rating {
-    public static final String MESSAGE_CONSTRAINTS = "Price should be a non-negative integer, between 0 to 10";
+    public static final String MESSAGE_CONSTRAINTS = "Rating should be a non-negative integer, between 0 to 10";
     public final Integer value;
 
     /**
@@ -56,7 +56,7 @@ public class Rating {
             return new Rating(value);
         } catch (NumberFormatException e) {
             // Handle cases where the string cannot be converted to a valid number
-            throw new IllegalArgumentException("Invalid price format: " + ratingString, e);
+            throw new IllegalArgumentException("Invalid rating format: " + ratingString, e);
         }
     }
 
