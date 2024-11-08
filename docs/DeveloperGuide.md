@@ -165,10 +165,17 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Guest feature
 The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values
 
-The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
-<puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
-<puml src="diagrams/AddGuestSequenceDiagramP2.puml" />
-<puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
+<div align="center">
+    <img src="diagrams/AddGuestSequenceDiagramP1.puml" alt="AddGuestSequenceDiagram Part 1" />
+</div>
+
+<div align="center">
+    <img src="diagrams/AddGuestSequenceDiagramP2.puml" alt="AddGuestSequenceDiagram Part 2" />
+</div>
+
+<div align="center">
+    <img src="diagrams/AddGuestSequenceDiagramP3.puml" alt="AddGuestSequenceDiagram Part 3" />
+</div>
 
 <box type="info" seamless>
 
