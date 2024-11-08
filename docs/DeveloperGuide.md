@@ -505,6 +505,27 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
+**Use Case: UC08 - Find lessons with a specific name keyword**
+
+**MSS**:
+
+1. Tutor keys in a keyword in the required field to find lessons whose names contain this keyword.
+1. TutorEase lists the lessons with the given keyword.  
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Use case resumes from Step 2.
+
+* **1b**. No lessons found matching the entered keyword.
+    * **1b1**. TutorEase displays a message: "No lessons found with the given keyword(s)."
+    * **1b2**. Tutor enters a new keyword or cancels the search.  
+      Use case resumes from Step 2 or ends if cancelled.
+
 <div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
