@@ -515,13 +515,13 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### Add Listing
-    - **Format:** `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER [buy/BUYER]...`
+    - **Format:** `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER_INDEX [buy/BUYER_INDEX]...`
     - **Description:** Adds a new listing associated to the seller with the specified details.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
       >
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/Bernice Yu buy/Alex Yeoh`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1`
       >
       > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
       >
@@ -531,7 +531,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Adding a listing with no buyers
       >
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 address/123 PASIR RIS (S)123456 reg/east sel/Bernice Yu`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 address/123 PASIR RIS (S)123456 reg/east sel/2`
       >
       > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
       >
@@ -543,17 +543,17 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **Use Case #1**: Attempting to add a listing for a non-existent seller
       >
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/bob7`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/100`
       >
-      > **Output**: Please enter an existing client name!
+      > **Output**: The seller index provided is invalid!
       >
       > ---
       > 
       > **Use Case #2**: Attempting to add non-existent buyers to a listing
       > 
-      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/Bernice Yu buy/bob7`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/100`
       > 
-      > **Output**: Please enter an existing client name!
+      > **Output**: The buyer index (100) provided is invalid!
       > 
       > ---
 
@@ -584,21 +584,14 @@ Commands for managing property listings and associating clients with listings.
 
     - **Failed Execution:** NIL
 
-    <br>
-    <div class="alert" markdown="span">
-    WARNING: The subsequent section `Add Buyers To Listing` might have an outdated command format. This is as of `v1.5`<br>
-    <br>
-    Please refer to the command format given in the application as per the app version used.
-    </div>
-
 - #### Add Buyers to Listing
-    - **Format:** `addlistingbuyers LISTING_NAME buy/BUYER_NAME [buy/MORE_BUYER_NAMES...]`
+    - **Format:** `addlistingbuyers INDEX buy/BUYER_INDEX [buy/MORE_BUYER_INDEXES...]`
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming displayed index is 1)
       >
-      > **Input**: `addlistingbuyers rc4 buyer/Alex Yeoh buyer/Charlotte Oliveiro`
+      > **Input**: `addlistingbuyers 1 buy/1 buy/3`
       >
       > **Output**: Buyers added to listing: RC4
       >
@@ -606,7 +599,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
       >
-      > **Input**: `addlistingbuyers david hdb buy/Alex Yeoh buy/Charlotte Oliveiro`
+      > **Input**: `addlistingbuyers 2 buy/1 buy/3`
       >
       > **Output**: Buyers added to listing: David HDB
       >
@@ -637,15 +630,15 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **Use Case #1**: Listing not found
       >
-      > **Input**: `addlistingbuyers NonExistentListing buyer/Bob`
+      > **Input**: `addlistingbuyers 100 buy/1`
       >
-      > **Output**: The specified listing name does not exist.
+      > **Output**: The listing index provided is invalid!
       >
       > ---
       > 
       > **User Error #2**: Duplicate buyers
       > 
-      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh` <br>_(Assuming RC4 contains Alex Yeoh already)_
+      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming RC4 contains Alex Yeoh already)_
       > 
       > **Output**: Some buyers are already associated with this listing.
       > 
@@ -653,35 +646,29 @@ Commands for managing property listings and associating clients with listings.
       > 
       > **User Error #3**: Buyer not found
       > 
-      > **Input**: `addlistingbuyers RC4 buyer/NonExistentBuyer`
+      > **Input**: `addlistingbuyers 1 buy/100`
       > 
-      > **Output**: The specified buyer NonExistentBuyer does not exist in the client list.
+      > **Output**: The person index provided is invalid!
       > 
       > ---
       > 
       > **User Error #4**: Person is not a buyer
       > 
-      > **Input**: `addlistingbuyers RC4 buyer/Bernice Yu` <br>_(Assuming Bernice Yu is a seller)_
+      > **Input**: `addlistingbuyers 1 buy/1` <br>_(Assuming client 1 is a seller)_
       > 
-      > **Output**: The specified person Bernice Yu is not a buyer.
+      > **Output**: The specified person is not a buyer:<br>1.bob
+      > 
       >
       > ---
-    
-    <br>
-    <div class="alert" markdown="span">
-    WARNING: The subsequent section `Remove Buyers from Listing` might have an outdated command format. This is as of `v1.5`<br>
-    <br>
-    Please refer to the command format given in the application as per the app version used.
-    </div>
 
 - #### Remove Buyers from Listing
-    - **Format:** `removelistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
+    - **Format:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
     - **Description:** Removes buyers associated with a specified listing.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Removing one buyer `Alex Yeoh` from listing `RC4`
       >
-      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh` 
+      > **Input**: `removelistingbuyers 1 buy/1` 
       >
       > **Output**: Buyers removed from listing: RC4
       >
@@ -689,62 +676,41 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Removing two buyers `Alex Yeoh` and `Charlotte Oliveiro` from listing `RC4`
       >
-      > **Input**: `removelistingbuyers rc4 buyer/alex yeoh buyer/charlotte oliveiro`
+      > **Input**: `removelistingbuyers 1 buy/1 buy/3`
       >
       > **Output**: Buyers removed from listing: RC4
       >
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    Listing and buyer names are case-insensitive: 
-    `removelistingbuyers Warton House` 
-    = `removelistingbuyers warton house` 
-    = `removelistingbuyers wArToN HouSe` _(Not exhaustive)_
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, listing/buyer name is space-sensitive:
-    `removelistingbuyers Warton House` != `removelistingbuyers WartonHouse`
-    <br>
-    <br>
-    (Similar behaviour as above for buyer names)
-    </div> 
-    <br>
-
     - **Failed Execution:**
       > ---
       > **User Error #1**: Listing not found
       >
-      > **Input**: `removelistingbuyers rc44444 buyer/alex yeoh`
+      > **Input**: `removelistingbuyers 100 buy/1`
       >
-      > **Output**: The specified listing name does not exist.
+      > **Output**: The listing index provided is invalid!
       > 
       > ---
       > 
       > **User Error #2**: Empty set of buyers
       >
-      > **Input**: `removelistingbuyers rc4 buyer/`
+      > **Input**: `removelistingbuyers 1 buy/`
       >
-      > **Output**: Please provide valid buyers
+      > **Output**: The person index provided is invalid!
       > 
       > ---
       > 
       > **User Error #3**: Person specified is not buyer
       >
-      > **Input**: `removelistingbuyers rc4 buyer/ImASeller`
+      > **Input**: `removelistingbuyers 1 buy/2`
       >
-      > **Output**: The client ImASeller is not registered as a buyer.
+      > **Output**: The person index provided is invalid!
       > 
       > ---
       > 
       > **User Error #4**: Person specified is not a buyer for the listing
       >
-      > **Input**: `removelistingbuyers rc4 buyer/notInterestedBuyer`
+      > **Input**: `removelistingbuyers 1 buy/3`
       >
       > **Output**: The specified buyer notInterestedBuyer is not a buyer of the listing RC4.
       > 
@@ -752,54 +718,30 @@ Commands for managing property listings and associating clients with listings.
       > 
       > **User Error #5**: Buyer not found
       >
-      > **Input**: `removelistingbuyers rc4 buyer/nonExistentBuyer`
+      > **Input**: `removelistingbuyers 1 buy/100`
       >
       > **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
       > 
       > ---
-    
-    <br>
-    <div class="alert" markdown="span">
-    WARNING: The subsequent section `Delete Listing` might have an outdated command format. This is as of `v1.5`<br>
-    <br>
-    Please refer to the command format given in the application as per the app version used.
-    </div>
 
 - #### Delete Listing
-    - **Format:** `deletelisting LISTING_NAME`
+    - **Format:** `deletelisting INDEX`
     - **Description:** Deletes a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Deleting listing `Warton House`
+      > **Use Case #1**: Deleting listing `Warton House` (Assuming displayed index is 1)
       >
-      > **Input**: `deletelisting warton house`
+      > **Input**: `deletelisting 1`
       >
       > **Output**: Successfully deleted listing: Warton House
       >
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `deletelisting Bob House` = `deletelisting BOB HOUSE` = `deletelisting bOb hOUsE` _(Not exhaustive)_
-
-    Thus, these commands will delete the same `Bob House` listing
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `deletelisting bob house` != `deletelisting bobhouse`
-    
-    These commands will delete different listings 
-    </div> 
-    <br>
-
     - **Failed Execution:**
       > ---
       > **Use Error**: Listing not found
       >
-      > **Input**: deletelisting nonExistentListing
+      > **Input**: deletelisting 100
       >
       > **Output**: This listing does not exist in EZSTATE
       >
