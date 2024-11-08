@@ -573,10 +573,10 @@ Info: This command will not allow adding a claim if the client has no policy of 
 
 **On success:**
 ```shell
-Claim added for policy type 'Life' of client: Alex Yeoh
+Claim added for policy type POLICY_TYPE of client: NAME
 
 Added Claim Details:
-Status: Approved | Description: accidental coverage
+Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 
 ```
 
@@ -609,10 +609,10 @@ Info: If the specified client, policy type, or claim does not exist, an error me
 
 **On success:**
 ```shell
-Claim deleted for policy type 'Health' of client: Bernice Yu
+Claim deleted for policy type POLICY_TYPE of client: NAME
 
 Deleted Claim Details:
-Status: Approved | Description: Updated surgery details
+Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 Note: The indexing of remaining claims may have changed due to this deletion.
 ```
 
@@ -647,10 +647,10 @@ Info: At least one of `CLAIM_STATUS` or `CLAIM_DESCRIPTION` must be specified. I
 
 **On success:**
 ```shell
-Claim edited for policy type 'Health' of client: Bernice Yu
+Claim edited for policy type POLICY_TYPE of client: NAME
 
 Updated Claim Details:
-Status: Approved | Description: Updated surgery details
+Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 ```
 
 #### 5.4.4 Listing All Claims: `list-claims`
