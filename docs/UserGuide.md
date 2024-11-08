@@ -323,6 +323,21 @@ Action     | Format, Examples
 
 ### Name
 
+Format: `name` where `name` is a sequence of characters corresponding to a student's name
+
+Constraints:
+* `name` can contain any alphanumeric character or whitespace.
+* `name` can contain hyphens, commas and apostrophes.
+* `name` can be 1 to 300 characters long.
+  
+Duplicate handling:
+* Two resident student contacts with the same name are not allowed
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> * Duplicate handling rationale: It is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
+> * Case-insensitive: `John Doe` is treated the same as `john doe`
+
 ### Phone number
 
 Format: `+c a d`, where `c` is an optional country code, `a` is an optional area code, and `d` is a compulsory number.
@@ -342,6 +357,23 @@ Duplicate handling:
 > * Duplicate handling rationale: Phone numbers are unique to each individual
 
 ### Email
+
+Format: `l@d`, where `l` is the local part of the email and `d` is the domain of the email.
+
+Constraints:
+* The local-part `l` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+* The domain name `d` is made up of domain labels separated by periods. 
+* The domain name `d` must end with a domain label at least 2 characters long.
+* Each domain label must start and end with alphanumeric characters 
+* Each domain label must  consist of alphanumeric characters, separated only by hyphens, if any.
+* `l`, `@` and `d` are not supposed to be separated by whitespace.
+
+Duplicate handling:
+* Two resident student contacts with the same emails are not allowed.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Email constraints are based on the Email Format of the International Organisation for Standardisation.
+> * Duplicate handling rationale: Emails are unique to each individual
 
 ### Address
 
