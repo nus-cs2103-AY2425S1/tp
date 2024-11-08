@@ -516,9 +516,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find n/Mario c/CS2105`<br>
      Expected: The person with the name Mario and class ID CS2105 is shown in the list. 
    2. Test case: `find n/Alice c/`<br>
-     Expected: The person with the name Alice is shown in the list.
+     Expected: Error message shown in status bar.
    3. Test case: `find n/ c/CS2105`<br>
-     Expected: The people with the class ID CS2105 is shown in the list.
+     Expected: Error message showin in status bad.
    4. Test case: `find n/ c/`<br>
      Expected: Error message shown in the status bar. 
 
