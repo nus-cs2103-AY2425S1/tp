@@ -2,7 +2,7 @@
 
 [![Codecov](https://codecov.io/gh/AY2425S1-CS2103T-W10-2/tp/graph/badge.svg?token=134QRO3UI3)](https://codecov.io/gh/AY2425S1-CS2103T-W10-2/tp)
 
-![Ui](docs/images/GUI.png)
+![Ui](docs/images/Ui.png)
 
 # AgentConnect
 
