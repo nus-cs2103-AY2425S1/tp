@@ -177,7 +177,7 @@ Edits the details of a student.
 
 1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list when `list_s` is called.
 2. Since `Student Number` is the unique identifier for each student, `Student Number` can't be edited.
-3. Tags are replaced if included in the argument, not appended.
+3. Editing of tags is not cumulative, i.e. tags will be replaced by the new set of tags.
 4. Tags are removed by entering `t/` without specifying any tags after it.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
