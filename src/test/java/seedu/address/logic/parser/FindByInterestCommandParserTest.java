@@ -21,6 +21,13 @@ public class FindByInterestCommandParserTest {
     }
 
     @Test
+    public void parse_onlySpaces_throwsParseException() {
+        assertParseFailure(parser, "   ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindByInterestCommand.MESSAGE_USAGE));
+    }
+
+
+    @Test
     public void parse_validSingleKeyword_returnsFindByInterestCommand() {
         FindByInterestCommand expectedCommand = new FindByInterestCommand(
                 new InterestContainsKeywordsPredicate("Reading"));
@@ -34,6 +41,12 @@ public class FindByInterestCommandParserTest {
     }
 
     @Test
+    public void parse_invalidPrefix_throwsParseException() {
+        assertParseFailure(parser, "x/reading", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindByInterestCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_multipleSpaces_returnsTrimmedFindByInterestCommand() {
         FindByInterestCommand expectedCommand = new FindByInterestCommand(
                 new InterestContainsKeywordsPredicate("Photography"));
@@ -43,6 +56,18 @@ public class FindByInterestCommandParserTest {
     @Test
     public void parse_multipleKeywordsWithoutComma_throwsParseException() {
         assertParseFailure(parser, "i/Reading i/Swimming", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindByInterestCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleIPrefixes_throwsParseException() {
+        assertParseFailure(parser, "i/reading i/swimming", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindByInterestCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidCommaInput_throwsParseException() {
+        assertParseFailure(parser, "i/reading, i/swimming", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindByInterestCommand.MESSAGE_USAGE));
     }
 }
