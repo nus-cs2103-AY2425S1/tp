@@ -1024,6 +1024,67 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 
 <br>
 
+<h1 class="headers" id="glossary">Glossary</h1>
+
+<div class="content">
+
+<h3>Command Line Interface</h3>
+
+A text-based interface that lets you type instructions directly to your computer to perform certain tasks. Instead of
+clicking on menus or icons, you would type specific commands into the text-based interface and the computer or software
+will run those commands for you. 
+
+Example: To show a list of potential hire, simply type `list ph` and press enter. The list of potential hire will appear. 
+
+<br>
+
+<h3>Graphical User Interface</h3>
+
+The "face" of a program, designed to use visual elements like buttons, icons, windows and menus to make it easier for
+people to interact with the program. 
+
+Example: You can see each entry of potential hire or employees in a box with their details nicely formatted and easy to
+read. 
+
+<br>
+
+<h3>Parameter</h3>
+
+A piece of information you would give to a program to allow it to know exactly how you want it to work.
+
+Example: In order to display a list of employee and not a list of potential hire, you would type in `list e` instead of
+`list ph` as `e` is the parameter to allow the program to know that you want the list of employees.
+
+<br>
+
+<h3>Alphanumeric</h3>
+
+A mix of letters and numbers only. Includes both alphabets (a to z) and digits (0 to 9) with no spaces or special characters.
+
+Example: StaffSync123 
+
+<br>
+
+<h3>Integer</h3>
+
+A whole number with no fractions and decimals that can be positive, 0 or negative. The range of a valid integer in 
+programming is from -2147483648 to 2147483647, inclusive of both.
+
+Example: -2147483648, -15, 0, 35, 2147483647
+
+<br>
+
+<h3>Index</h3>
+
+The order or position of an item in a list. The value starts from 1 and it must be a positive
+integer. 
+
+Example: If you have a list of names (1. Alice, 2. Betty, 3. Charlie) then, Alice is at index 1, Betty is at index 2 
+and Charlie is at index 3.
+</div>
+
+<br>
+
 <h1 class="headers" id="faq">FAQ</h1>
 
 <div class="content content-qna">
