@@ -769,6 +769,46 @@ testers are expected to do more *exploratory* testing.
     2. Re-launch the app by enter `java -jar WedLinker.jar` into the terminal again.<br>
        Expected: The most recent window size and location is retained.
 
+### Quick Guide
+
+1. WedLinker uses prefixes to parse the required fields for the commands.
+   - name: `n/`
+   - phone: `p/`
+   - email: `e/`
+   - address: `a/`
+   - tag: `t/`
+   - date: `d/`
+   - task: `tk/`
+   - wedding: `w/`
+   - force: `f/`
+
+2. WedLinker has the following functions
+   - find for a person: `find`
+   - add a person: `add`
+   - delete a person: `delete`
+   - list all persons: `list`
+   - create a tag: `create-tag`
+   - delete a tag: `delete-tag`
+   - tag a person: `tag`
+   - untag a person: `untag`
+   - list all tags: `list-tags`
+   - create a task: `create-task`
+   - delete a task: `delete-task`
+   - assign a task to a vendor: `assign-task`
+   - unassign a task to a vendor: `unassign-task`
+   - mark a task as done: `mark-task`
+   - unmark a task as done: `unmark-task`
+   - list all task: `list-tasks`
+   - add a vendor: `add-vendor`
+   - assign a person as a vendor: `assign-vendor`
+   - unassign a person as a vendor: `unassign-vendor`
+   - create a wedding: `create-wedding`
+   - delete a wedding: `delete-wedding`
+   - assign a person to a wedding: `assign-wedding`
+   - unassign a person from a wedding: `unassign-wedding`
+   - edit a wedding: `edit-wedding`
+   - list all wedding: `list-weddings`
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
