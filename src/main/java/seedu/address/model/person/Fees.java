@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Fees {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Fees should be a positive integer, only contain numbers, and should be at least 1 digit long" +
-                    "and a maximum of 9 digits long.";
+            "Fees should be a positive integer, only contain numbers, and should be at least 1 digit long"
+                    + "and a maximum of 9 digits long.";
 
     /*
      * The first character of the address must not be a whitespace,
