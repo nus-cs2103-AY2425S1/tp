@@ -175,7 +175,7 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/TAG’
+Format: `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/TAG`
 
 * any possible orders and combinations of the 3 parameters name, phone number and room number are applicable
 
