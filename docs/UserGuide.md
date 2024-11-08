@@ -250,8 +250,6 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 | `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                      | Car's model.                                      |
 | `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.                 |
 
-<div style="page-break-after: always;"></div>
-
 **Notes:**
 
 - If adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided. `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
@@ -345,6 +343,8 @@ Deletes a car from a client.
 ```shell
 del-car INDEX
 ```
+
+<div style="page-break-after: always;"></div>
 
 **Parameters:**
 
