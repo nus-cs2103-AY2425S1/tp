@@ -454,37 +454,32 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 ### Editing attendance status
+Prerequisites: Ensure one at least one contact is present. These tests can and should be done sequentially.
 1. Marking attendance as present for a person
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-    2. Test case: `mark 1 tut/1`<br>
-       Expected: First contact's tutorial box 1 turns green.
-   3. Test case: `mark 1 tut/1-3`<br>
-      Expected: First contact's tutorial box 1, 2, 3 turns green.
-   4. Test case: `mark 1 tut/[2,4,12]`<br>
-   Expected: First contact's tutorial box 2, 4, 12 turns green.
-   5. Test case: `mark * tut/1`<br>
-    Expected: All contacts' tutorial box 1 turns green.
-2. Marking attendance as absent for a person
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-    2. Test case: `unmark 1 tut/1`<br>
-       Expected: First contact's tutorial box 1 turns red.
-   3. Test case: `unmark 1 tut/1-3`<br>
-      Expected: First contact's tutorial box 1, 2, 3 turns red.
-   4. Test case: `unmark 1 tut/[2,4,12]`<br>
-   Expected: First contact's tutorial box 2, 4, 12 turns red.
-   5. Test case: `unmark * tut/1`<br>
-    Expected: All contacts' tutorial box 1 turns red.
-3. Resetting attendance status for a person
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-    2. Test case: `reset 1 tut/1`<br>
-       Expected: First contact's tutorial box 1 turns grey.
-   3. Test case: `reset 1 tut/1-3`<br>
-      Expected: First contact's tutorial box 1, 2, 3 turns grey.
-   4. Test case: `reset 1 tut/[2,4,12]`<br>
-   Expected: First contact's tutorial box 2, 4, 12 turns grey.
-   5. Test case: `reset * tut/1`<br>
-    Expected: All contacts' tutorial box 1 turns grey.
-
+   1. Test case: `mark 1 tut/1`<br>
+   Expected: First contact's tutorial box 1 turns green.
+   2. Test case: `unmark 1 tut/1`<br>
+   Expected: First contact's tutorial box 1 turns red.
+   3. Test case: `reset 1 tut/1`<br>
+   Expected: First contact's tutorial box 1 turns grey.
+   5. Test case: `mark 1 tut/2-3`<br>
+   Expected: First contact's tutorial box 2 and 3 turns green.
+   5. Test case: `unmark 1 tut/2-3`<br>
+   Expected: First contact's tutorial box 2 and 3 turns red.
+   6. Test case: `reset 1 tut/2-3`<br>
+   Expected: First contact's tutorial box 2 and 3 turns grey.
+   7. Test case: `mark 1 tut/[4,6,8]`<br>
+   Expected: First contact's tutorial box 4, 6 and 8 turns green.
+   8. Test case: `unmark 1 tut/[4,6,8]`<br>
+   Expected: First contact's tutorial box 4, 6 and 8 turns red.
+   9. Test case: `reset 1 tut/[4,6,8]`<br>
+   Expected: First contact's tutorial box 4, 6 and 8 turns grey.
+   10. Test case: `mark * tut/5`<br>
+   Expected: All contacts' tutorial box 5 turns green.
+   11. Test case: `unmark * tut/5`<br>
+   Expected: All contacts' tutorial box 5 turns red.
+   12. Test case: `reset * tut/5`<br>
+   Expected: All contacts' tutorial box 5 turns grey.
 
 ### Saving data
 
