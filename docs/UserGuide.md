@@ -39,6 +39,8 @@ HR Helper is a **desktop app for managing employees, optimized for use via a Com
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+2. Refer to the [Person Detail Window](#person-details-window) below for the format of each command.
+3. Refer to the [Command summary](#command-summary) below for the format of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +73,8 @@ HR Helper is a **desktop app for managing employees, optimized for use via a Com
 Login to HR Helper with your username and password.
 
 Format:
-![help message](images/authentication.png)
+
+<img src = "images/authentication.png" width=300>
 
 **Tip:** Press `Enter` to go to the next field!
 
@@ -79,7 +82,7 @@ Examples:
 * For this version, the username is `admin` and password is `12345678`.
 * For faster testing purposes, the username is `test` and password is `test`.
 
-`Expected output: Add screenshot of filled in login window here`
+<img src = "images/HRHelperLoginOutput.png" width=300>
 
 **Warning:** Keep your credentials secure.
 
@@ -98,9 +101,10 @@ Format: `help`
 
 Examples:
 
-![help message](images/helpMessage.png) `need to update picture`
+`need to update picture`
+<img src = "images/helpMessage.png" width=300> 
 
-**Warning:** Keep your credentials secure.
+**Warning:** Clicking on the link will leave HR Helper.
 
 ### Adding a person: `add`
 
@@ -291,16 +295,16 @@ The **Person Details Window** allows HR personnel to view and edit detailed info
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HR Helper data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HR Helper data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, HR Helper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
