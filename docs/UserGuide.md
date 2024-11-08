@@ -6,12 +6,17 @@
 
 # Eventory User Guide
 
-Eventory is a **desktop app for managing contacts and events, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Eventory is a **desktop app for managing contacts and events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 Main Features:
-- Manage big and complex contact webs with numerous information fields, with ability to save critical details
-- Schedule and manage daily tasks across large teams, track their completion
-- Have advanced automated messaging tools, send and schedule reminders/updates in bulk
+* Enhanced Contact Management
+    * Store All Your Contacts: Add phone numbers, emails, addresses, and tags
+    * Contact Linking: Add contacts to events
+    * Advanced Filters: Filter by name and tag
+* Comprehensive Event Management
+    * Track All Your Events: Add locations, start dates, and tags
+    * Timeline View: Countdown for upcoming events
+    * Advanced Filters: Filter by name, tag, or date
 
 
 <!-- * Table of Contents -->
@@ -28,7 +33,7 @@ Main Features:
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eventory.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -82,7 +87,7 @@ Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 <!-- Viewing help -->
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message with a list of command words and explanation on how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -286,16 +291,20 @@ Examples:
 * `list` followed by `unlink 3 Winter Time Convention` removes the link between the 3rd person in the address book and the event.
 * `find p "Jane"` followed by `unlink 1 Party` removes the link between the 1st person in the results of the `find` command and the event.
 
-### Schedule an event : `schedule`
+### Display events in schedule : `schedule`
 
-Lists all events with the given date, or find all events happening within the given number of days.
+If non-negative integer given, find all events happening in the next given number of days.
+If negative integer given, find all events that happened in the past given number of days.
+Lists all events with the given date, or f
 
 Format: `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD`
 
 Examples:
 
-* `schedule 2024-01-01` displays all events occurring on 1 Jan 2024.
 * `schedule 7` displays all events happening within 7 days from the current date.
+* `schedule 0` displays all events happening on this day.
+* `schedule -7` displays all events that happened in the past 7 days from the current date.
+* `schedule 2024-01-01` displays all events occurring on 1 Jan 2024.
 
 ### Clearing all persons : `clear p`
 
@@ -432,9 +441,9 @@ cd "~/My Folder"
 
 <box type="tip" seamless>
 
-Check the file name: Ensure you’re using the exact name of the .jar file. If the file you downloaded has a different name, use that exact name in the command instead:
+Check the file name: Ensure you’re using the exact name of the .jar file. If the file has a different name, or was renamed, use that exact name in the command instead:
 ```
-java -jar differentname.jar
+java -jar "DifferentName.jar"
 ```
 <box type="info" light>
 If you receive a "Permission denied" error, ensure you have permissions to access the folder and file. Try running the terminal as an administrator (on Windows) or using sudo before the command on macOS/Linux.
@@ -464,12 +473,13 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 | **Delete Person**        | `delete p INDEX`<br> e.g., `delete p 3`                                                                                                                                   |
 | **Delete Event**         | `delete e INDEX`<br> e.g., `delete e 3`                                                                                                                                   |
 | **Edit Person**          | `edit p INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit p 2 n/James Lee e/jameslee@example.com`                                           |
-| **Edit Event**           | `edit e INDEX [n/NAME] [a/ADDRESS] [s/START_TIME] [t/TAG]`<br> e.g.,`edit e 2 n/Summer t/fashion`                                                           
+| **Edit Event**           | `edit e INDEX [n/NAME] [a/ADDRESS] [s/START_TIME] [t/TAG]`<br> e.g.,`edit e 2 n/Summer t/fashion`                                                                         |
 | **Find Person**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p James Jake`                                                                                                              |
 | **Find Event**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e Sentosa`                                                                                                                 |
+| **Schedule**             | `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD` <br> e.g.,`schedule 7`,`schedule -5`,`schedule 2024-10-15`                                                             |
 | **Search Person by Tag** | `search p KEYWORD [MORE_KEYWORDS]`<br> e.g., `search p Friends`                                                                                                           |
-| **Search Event by Tag**  | `search e KEYWORD [MORE_KEYWORDS]`<br> e.g., `search e Summer`                                                                                                            
-| **Link**                 | `link INDEX ev/` <br> e.g., `link 1 ev/Winter Convention`                                                                                                                 
-| **List**                 | `list`                                                                                                                                                                    
-| **Unlink**               | `unlink INDEX ev/EVENT_NAME` <br> e.g., `unlink 1 ev/Winter Convention`                                                                                                   
+| **Search Event by Tag**  | `search e KEYWORD [MORE_KEYWORDS]`<br> e.g., `search e Summer`                                                                                                            |
+| **Link**                 | `link INDEX ev/` <br> e.g., `link 1 ev/Winter Convention`                                                                                                                 |
+| **Unlink**               | `unlink INDEX ev/EVENT_NAME` <br> e.g., `unlink 1 ev/Winter Convention`                                                                                                   |
+| **List**                 | `list`                                                                                                                                                                    |
 | **Help**                 | `help`                                                                                                                                                                    |
