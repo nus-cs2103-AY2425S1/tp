@@ -98,7 +98,7 @@ AgentConnect is designed with you in mind, ensuring that even if you're not tech
 
 5. **Application Interface:** A user interface similar to the below should appear in a few seconds.
 
-6. ![help message](images/GUI.png)
+6. ![help message](images/Ui.png)
 
 6. **Try It Out:**
     - **Enter a Command:**
