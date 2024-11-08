@@ -31,16 +31,15 @@ public class FindStudentCommandParser implements Parser<FindStudentCommand> {
      */
     public FindStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_QUERY);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_QUERY) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
-        }
-
         List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_QUERY));
         List<Prefix> invalidPrefixes = ALL_PREFIX;
         invalidPrefixes.removeAll(allowedPrefix);
         if (containsInvalidPrefix(args, invalidPrefixes)) {
             throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + FindStudentCommand.MESSAGE_USAGE);
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_QUERY) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
         }
 
         String[] queryList = argMultimap.getAllValues(PREFIX_QUERY).toArray(new String[0]);

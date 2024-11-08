@@ -21,21 +21,22 @@ If you are on the PDF, use the table of contents below to navigate the site.
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F12-2/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F12-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your T_Assistant.
+3. Copy the file to the folder you want to use as the _home folder_ for your T_Assistant.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar t_assistant.jar`
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar t_assistant.jar`
    command to run the application.<br>
    *A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.*<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" width="600">
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
    Some example commands you can try:
 
@@ -50,9 +51,10 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -65,10 +67,11 @@ If you are on the PDF, use the table of contents below to navigate the site.
 
 * Command words come with **shorthands** <br>
   e.g. `add_s...` and `as...` will both be recognised as commands to add a new student.
-* Prefixes are **case-sensitive**!<br>
-  e.g. `i/INDEX` will be recognised but `I/INDEX` will not be recognised.
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Prefixes are **case-insensitive**!<br>
+  e.g. `i/INDEX` and `I/INDEX` will be recognised.
+
+* Words in `UPPER_CASE` are the parameters to be **supplied by the user**.<br>
   e.g. in `as sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as `as sn/John Doe`.
 
 * Items in square brackets are **optional**.<br>
@@ -85,9 +88,8 @@ If you are on the PDF, use the table of contents below to navigate the site.
   will be **ignored**.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Extraneous parameters for commands that **do take in parameters** (such as `add_s`, `del_s`) will be recognised as
-  *invalid* input parameters.<br>
-  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as a invalid command structure.
+* Extraneous parameters for commands that **take in parameters**  will be recognised as *invalid* input parameters.<br>
+  e.g. if the command specifies `del_t i/1 gn/CS2103-1-1`, it will be interpreted as an invalid command structure due to extra `gn/`.
 
 **Important**
 
@@ -109,7 +111,7 @@ Shows a list of all students in the T_Assistant.
 
 This screenshot shows the result of executing `list_s`.
 
-![list_students](images/screenshots/list_students.png)
+<img src="images/screenshots/list_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -136,7 +138,7 @@ Adds a student to T_Assistant.
 
 This screenshot shows the result of executing `add_s sno/A0123456A sn/James Ho e/e0123456A@u.nus.edu t/TD9`.
 
-![add_student](images/screenshots/add_student.png)
+<img src="images/screenshots/add_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -161,7 +163,7 @@ Deletes a student from T_Assistant.
 
 This screenshot shows the result of executing `del_s sno/A0123456A`.
 
-![delete_student](images/screenshots/del_s.png)
+<img src="images/screenshots/del_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -173,11 +175,11 @@ Edits the details of a student.
 
 ##### Notes
 
-1. `edit_s` edits the student identified by the index. It only accepts a valid index
-   based on the list when `list_s` is called.
-2. Tags are replaced if included in the argument, not appended.
-3. Tags are removed by entering `t/` without specifying any tags after it.
-4. For information on the constraints for each parameter used in this command, go
+1. `edit_s` edits the student identified by the index. It only accepts a valid index based on the list when `list_s` is called.
+2. Since `Student Number` is the unique identifier for each student, `Student Number` can't be edited.
+3. Tags are replaced if included in the argument, not appended.
+4. Tags are removed by entering `t/` without specifying any tags after it.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
@@ -189,7 +191,7 @@ Edits the details of a student.
 
 This screenshot shows the result of executing `edit_s i/2 sn/Bernice Yu Ting Kang`.
 
-![edit_student](images/screenshots/edit_s.png)
+<img src="images/screenshots/edit_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -207,14 +209,14 @@ Adds student(s) to a group.
 
 ##### Usage Scenario
 
-###### Scenario #1: Adding `James Ho` to `CS2103-F11-1`
+###### Scenario #1: Adding `Roy Balakrishnan` to `CS2103-F11-1`
 
 1. You can begin this command on any panel.
-2. Type and execute: `add_s_g sno/A0123456A gn/CS2103-F11-1`
+2. Type and execute: `add_s_g sno/A0122764H gn/CS2103-F11-1`
 
-This screenshot shows the result of executing `add_s_g sno/A0123456A gn/CS2103-F11-1`.
+This screenshot shows the result of executing `add_s_g sno/A0122764H gn/CS2103-F11-1`.
 
-![add_s_g](images/screenshots/add_s_g.png)
+<img src="images/screenshots/add_s_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -226,21 +228,22 @@ Deletes a student from its assigned group.
 
 ##### Notes
 
-1. This feature only removes a student from a group, not from T_Assistant.
+1. This command only removes a student from a group, not from T_Assistant.
 2. The student must exist in T_Assistant and be in a group.
-3. For information on the constraints for each parameter used in this command, go
+3. Since a student can only be in one group, it will automatically remove the student from the group it is in.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
-###### Scenario #1: Deleting `James Ho` from `CS2103-F11-1`
+###### Scenario #1: Deleting `Alex Yeoh` from `CS2103-F12-1`
 
 1. You can begin this command on any panel.
-2. Type and execute: `del_s_g sno/A0123456A`
+2. Type and execute: `del_s_g sno/A0737935G`
 
-This screenshot shows the result of executing `del_s_g sno/A0123456A`.
+This screenshot shows the result of executing `del_s_g sno/A0737935G`.
 
-![del_s_g](images/screenshots/del_s_g.png)
+<img src="images/screenshots/del_s_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -252,10 +255,10 @@ Searches T_Assistant for students with fields that match the search query.
 
 ##### Notes
 
-1. The command will only match full words. You may search for part of a person's name such as `Doe` to find `John Doe`.
-   > i.e. `Do` will not match `Doe` and `berniceyu` will not match `berniceyu@u.nus.edu`
-
-2. Searches the following fields that a student has that matches the query:
+1. This command is case-insensitive.
+2. The command will match substrings. You may search for part of a group's name such as `Alex Y` to find `Alex Yeoh`.
+3. A blank query i.e. `fs q/` will return all students.
+4. Searches the following fields that a student has that matches the query:
 
     * Student name
     * Student number
@@ -280,7 +283,9 @@ Take note that if any other student with a group happens to have a field that ma
 
 This screenshot shows the result of executing `find_s q/TD7 q/Olveiro`.
 
-![find_student](images/screenshots/find_s.png)
+<img src="images/screenshots/find_s.png" width="600">
+<br>
+<br>
 
 ###### Scenario #2: Find students with no groups
 
@@ -289,7 +294,7 @@ This screenshot shows the result of executing `find_s q/TD7 q/Olveiro`.
 
 This screenshot shows the result of executing `find_s q/!nogroup`.
 
-![find_student_nogrp.png](images/screenshots/find_s_nogroup.png)
+<img src="images/screenshots/find_s_nogroup.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -301,7 +306,7 @@ Sorts the list of students in alphabetical order.
 
 This screenshot shows the result of executing `sort_s`.
 
-![sort_s](images/screenshots/sort_s.png)
+<img src="images/screenshots/sort_s.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -317,7 +322,8 @@ Shows a list of all groups in the T_Assistant.
 
 This screenshot shows the result of executing `list_g`.
 
-![list_groups](images/screenshots/lg.png)
+<img src="images/screenshots/list_g.png" width="600">
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a Group: `add_g`, `ag`
@@ -332,28 +338,19 @@ Adds a group to the T_Assistant。
 2. Group names must follow a three-part format: course type: either `CS2103` or `CS2103T`;
    tutorial group: a letter followed by a number;
    group number: any number
-2. For information on the constraints for each parameter used in this command, go
+3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
-
-<box type="warning" seamless>
-
-**Caution:**
-The command will stop running the moment it hits an error.
-
-For example `add_g gn/CS2103-F11-3`
-
-</box>
 
 ##### Usage Scenario
 
-###### Scenario #1
+###### Scenario #1: Adding group `CS2103T-T10-1`
 
 1. You can begin this command on any panel.
-2. Type and execute: `add_g gn/CS2103-F11-3`
+2. Type and execute: `add_g gn/CS2103T-T10-1`
 
-This screenshot shows the result of executing `add_g gn/CS2103-F11-3`.
+This screenshot shows the result of executing `add_g gn/CS2103T-T10-1`.
 
-![add_group](images/screenshots/ag.png)
+<img src="images/screenshots/add_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -373,14 +370,14 @@ Deletes the specified group from T_Assistant.
 
 ##### Usage Scenario
 
-###### Scenario #1: Deleting a group `CS2103-F12-2`
+###### Scenario #1: Deleting group `CS2103-F12-2`
 
-1. Type and execute: `list_g` to see the list of groups.
-2. After finding `CS2103-F12-2`, type and execute: `del_g gn/CS2103-F12-2`
+1. You can begin this command on any panel.
+2. Type and execute: `del_g gn/CS2103-F12-2`
 
 This screenshot shows the result of executing `del_g gn/CS2103-F12-2`.
 
-![del_g.png](images/screenshots/del_g.png)
+<img src="images/screenshots/del_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -392,18 +389,21 @@ Explanation of what command does.
 
 ##### Notes
 
-1. Are there anything that the command cannot do (e.g. cannot change Student Number) or what does it impact (e.g. will
-   remove all students from this deleted group)
+1. `edit_g` edits the group identified by the index. It only accepts a valid index
+   based on the list when `list_g` is called.
 2. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-##### Usage Scenario (for commands that can be overloaded)
+##### Usage Scenario
 
-Add more scenarios if necessary
+###### Scenario #1: Editing `CS2103-F11-3` to `CS2103T-F11-3`
 
-###### Scenario #1
+1. Execute `list_g` to see the list of groups.
+2. Type and execute: `edit_g i/3 gn/CS2103T-F11-3`
 
-This screenshot shows the result of executing `edit_g i/1 gn/CS2103-F12-3`.
+This screenshot shows the result of executing `edit_g i/3 gn/CS2103T-F11-3`.
+
+<img src="images/screenshots/edit_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -419,19 +419,20 @@ Searches T_Assistant for groups with fields that match the search query.
 2. The command will match substrings. You may search for part of a group's name such as `F12` to find `CS2103T-F12-10`.
 3. Searches the following field that a group has that matches the query:
     * Group name
+3. A blank query i.e. `fg q/` will return all groups.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
-###### Scenario #1: Find groups with the following query - `F12`
+###### Scenario #1: Finding groups with the following query - `F11`
 
 1. You can begin this command on any panel.
-2. Type and execute: `find_g q/F12`
+2. Type and execute: `find_g q/F11`
 
-This screenshot shows the result of executing `find_g q/F12`.
+This screenshot shows the result of executing `find_g q/F11`.
 
-![find_g.png](images/screenshots/find_g.png)
+<img src="images/screenshots/find_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -441,9 +442,9 @@ Sorts the list of groups in alphabetical order.
 
 **Format**: `sort_g`
 
-This screenshot shows the result of executing `sort_s`.
+This screenshot shows the result of executing `sort_g`.
 
-![sort_g](images/screenshots/sg.png)
+<img src="images/screenshots/sort_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -457,8 +458,33 @@ Shows a list of all tasks in the T_Assistant.
 
 **Format**: `list_t [gn/GROUP_NAME]`
 
+##### Notes
+
+1. If there's a `Group Name`, all of the tasks in that group will be listed.
+2. For information on the constraints for each parameter used in this command, go
+   to [Command Parameters](#command-parameters).
+
+##### Usage Scenario
+
+###### Scenario #1: Listing all tasks in all groups
+
+1. You can begin this command on any panel.
+2. Type and execute: `list_t`
+
 This screenshot shows the result of executing `list_t`.
-![list_t](images/screenshots/lt.png)
+
+<img src="images/screenshots/list_t.png" width="600">
+<br>
+<br>
+
+###### Scenario #2: Listing all tasks in `CS2103-F11-1`
+
+1. You can begin this command on any panel.
+2. Type and execute: `list_t gn/CS2103-F11-1`
+
+This screenshot shows the result of executing `list_t gn/CS2103-F11-1`.
+
+<img src="images/screenshots/list_t_group.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -481,74 +507,28 @@ Adds a task to a group or multiple groups.
 
 ##### Usage Scenario
 
-###### Scenario #1: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-
-`CS2103-F12-2` and `CS2103-F11-1`. This is the default scenario where the task does not already exist and both
-groups exist.
+###### Scenario #1: Adding a task with the name of `Complete task 4` and deadline of `2024-11-15 1700` to groups `CS2103-F12-1` and `CS2103-F11-1`
+This is the default scenario where the task does not already exist and both groups exist.
 
 1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
+2. Type `add_t_g tn/Complete task 4 td/2024-11-15 1700 gn/CS2103-F12-1 gn/CS2103-F11-1`.
 
-This screenshot shows the result of executing
-`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing `add_t_g tn/Complete task 4 td/2024-11-15 1700 gn/CS2103-F12-1 gn/CS2103-F11-1`.
 
-###### Scenario #2: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
+<img src="images/screenshots/add_t_g_1.png" width="600">
+<br>
+<br>
 
-`CS2103-F12-2` and `CS2103-F11-1` when `Do Homework` already exists.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
-3. This will yield an error message.
-
-This screenshot shows the result of executing
-`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-2 gn/CS2103-F11-1`.
-
-###### Scenario #3: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-
-`CS2103-F13-2` and `CS2103-F11-1` when `CS2103-F13-1` does not exist.
+###### Scenario #2: Adding a task with the name of `Complete task 5` and deadline of `2024-12-30 1900` to groups `CS2103-F11-1` and `CS2103-F13-2` when `CS2103-F13-2` does not exist.
 
 1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
-3. Since `CS2103-F11-1` exists, the command will still allow you to add the task into the group. However, it will
-   display
-   an additional warning message regarding the input `CS2103-F13-1` which does not exist.
+2. Type `add_t_g tn/Complete task 5 td/2024-12-30 1900 gn/CS2103-F11-1 gn/CS2103-F13-2`.
+3. Since `CS2103-F11-1` exists, the command will still allow you to add the task into the group. However, it will display
+   an additional warning message regarding the input `CS2103-F13-2` which does not exist.
 
-This screenshot shows the result of executing
-`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F11-1`.
+This screenshot shows the result of executing `add_t_g tn/Complete task 5 td/2024-12-30 1900 gn/CS2103-F11-1 gn/CS2103-F13-2`.
 
-###### Scenario #4: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-
-`CS2103-F13-2` and `CS2103-F14-1` when both groups do not exist.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
-3. Now, the command should throw an error message because both groups are non-existent.
-
-This screenshot shows the result of executing
-`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F13-2 gn/CS2103-F14-1`.
-
-##### Scenario #5: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-
-`CS2103-F12-1` and `CS2103-F12-1` when the group exists.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
-3. The command functionally ignores the duplicates and add the task into the group specified. It will also display a
-   warning message to you.
-
-This screenshot shows the result of executing
-`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
-
-##### Scenario #6: Adding a task with the name of `Do Homework` and deadline of `2024-12-10 1900` to groups
-
-`CS2103-F14-1` and `CS2103-F14-1` when the group does not exist.
-
-1. You can begin this command on any panel.
-2. Type `add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F12-1 gn/CS2103-F12-1`.
-3. The command should yield an error message.
-
-This screenshot shows the result of executing
-`add_t_g tn/Do Homework td/2024-12-10 1900 gn/CS2103-F14-1 gn/CS2103-F14-1`.
+<img src="images/screenshots/add_t_g_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -566,15 +546,14 @@ Adds a task to all groups.
 
 ##### Usage Scenario
 
-###### Scenario #1: Executing `add_t tn/Submit Postmortem td/2024-10-20 1800`
+###### Scenario #1: Executing `add_t tn/Complete task 6 td/2024-10-20 1800`
 
-1. The task will be added to all groups.
+1. You can begin this command on any panel.
+2. Type and execute `add_t tn/Complete task 6 td/2024-10-20 1800`.
 
-###### Scenario #2: Executing `add_t tn/Submit Postmortem td/2024-10-20`
+This screenshot shows the result of executing `add_t tn/Complete task 6 td/2024-10-20 1800`.
 
-1. An error message will be shown because the task deadline has an incorrect format.
-
-This screenshot shows the result of executing `add_t tn/Submit Postmortem td/2024-10-20 1800`.
+<img src="images/screenshots/add_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -588,46 +567,39 @@ Adds an existing task to the groups specified.
 
 1. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-2. You can add an existing task to multiple groups.
-3. For information on the constraints for each parameter used in this command, go
+2. `add_et_g` adds an existing task identified by the index. It only accepts a valid index
+   based on the list when `list_t` is called.
+3. You can add an existing task to multiple groups.
+5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
-<box type="warning" seamless>
-
-**Caution:**
-The command will stop running the moment it hits an error.
-
-For example `add_et_g i/1 gn/CS2103-F11-2 gn/CS2103-F12-2 gn/CS2103-F13-1`
-
-If the group `CS2103-F12-2` already has the task. The command will only add the task to `CS2103-F11-2` and not
-`CS2103-F13-1`.
-
-</box>
 
 ##### Usage Scenario
 
-###### Scenario #1: Add task with index `1` to `CS2103-S1-21`
+###### Scenario #1: Adding task in index `1` to `CS2103T-T10-1`
 
 1. Type and execute: `list_t` to see the list of tasks.
 2. After finding the task you wish to add, remember its index number (task with index 1 in this example).
 3. You may wish to execute `list_g` to check on the names of groups you wish to add the task to.
-4. Type and execute: `add_et_g i/1 gn/CS2103-S1-21`
+4. Type and execute: `add_et_g i/1 gn/CS2103T-T10-1`
 
-This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
+This screenshot shows the result of executing `add_et_g i/1 gn/CS2103T-T10-1`.
 
-![add_existing_task_to_group.png](images/screenshots/add_et_g.png)
+<img src="images/screenshots/add_et_g_1.png" width="600">
+<br>
+<br>
 
-###### Scenario #2: Add task that is already in a group
+###### Scenario #2: Adding task with index `1` that is already in `CS2103-F11-1`
 
 1. Type and execute: `list_t` to see the list of tasks.
 2. After finding the task you wish to add, remember its index number (task with index 1 in this example).
 3. You may wish to execute `list_g` to check on the names of groups you wish to add the task to.
-4. Type and execute: `add_et_g i/1 gn/CS2103-S1-21`
+4. Type and execute: `add_et_g i/1 gn/CS2103-F11-1 gn/CS2103-F11-2`
 5. You will get an error message.
 
-This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-S1-21`.
+This screenshot shows the result of executing `add_et_g i/1 gn/CS2103-F11-1 gn/CS2103-F11-2`.
 
-![add_existing_task_to_group_err.png](images/screenshots/add_et_g_err.png)
+<img src="images/screenshots/add_et_g_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -640,23 +612,24 @@ Deletes a task from a group.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. This command is case-insensitive.
+2. `del_t_g` deletes a task identified by the index. It only accepts a valid index
+      based on the list when `list_t` is called.
+3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
-3. For information on the constraints for each parameter used in this command, go
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
-1. Type and execute: `list_t gn/CS2103-F11-1` to see the list of tasks in `CS2103-F11-1`.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this
-   example).
-3. Type and execute: `del_t_g i/1 gn/CS2103-S1-21`
+###### Scenario #1: Deleting task with index `1` from `CS2103-F11-1`
 
-###### Scenario #1 Delete task with index 1 from `CS2103-F11-1`
+1. Type and execute: `list_t gn/CS2103-F11-1` to see the list of tasks in `CS2103-F11-1`.
+2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this example).
+3. Type and execute: `del_t_g i/1 gn/CS2103-F11-1`
 
 This screenshot shows the result of executing `del_t_g i/1 gn/CS2103-F11-1`.
 
-![delete_t_g.png](images/screenshots/dtg.png)
+<img src="images/screenshots/del_t_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -674,13 +647,14 @@ Delete a task from all groups that contain it.
 
 ##### Usage Scenario
 
-###### Scenario #1 Delete task with index 2
+###### Scenario #1: Deleting task in index `2`
 
 1. Type and execute: `list_t` to see the list of tasks.
-2. After finding the task you wish to add, remember its index number (task with index 2 in this example).
-3. Type and execute: `edit_t i/2 gn/CS2103-F`
-   This screenshot shows the result of executing `del_t i/2`.
-   ![delete_t.png](images/screenshots/dt.png)
+2. Type and execute: `del_t i/2`
+
+This screenshot shows the result of executing `del_t i/2`.
+
+<img src="images/screenshots/del_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -692,7 +666,7 @@ Edits a task from a group.
 
 ##### Notes
 
-1. `Index` must be valid
+1. The index must be valid and should be the index of target task in the group's task list.
 2. `Group Name` must exist in the T_Assistant.
 3. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
@@ -701,16 +675,14 @@ Edits a task from a group.
 
 ##### Usage Scenario
 
-###### Scenario #1 Edit a task with index 1 in `CS2103-F12-1`
+###### Scenario #1: Editing a task with index `1` in `CS2103-F12-1`
 
 1. Type and execute: `list_t gn/CS2103-F12-1` to see the list of tasks in `CS2103-F12-1`.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 1 in this
-   example).
-3. Type and execute: `edit_t_g i/1 gn/CS2103-F12-1 tn/v1.4 Release`
+2. After finding the task you wish to edit, type and execute: `edit_t_g i/1 gn/CS2103-F12-1 tn/Complete task 7`
 
-This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-3 tn/v1.4 Release`.
+This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-1 tn/Complete task 7`.
 
-![edit_t_g.png](images/screenshots/etg.png)
+<img src="images/screenshots/del_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -722,7 +694,7 @@ Edits a task from all groups that contain it.
 
 ##### Notes
 
-1. `Index` must be valid.
+1. The index must be valid and should be the index of task list.
 2. This command is case-insensitive.
    > `gn/CS2103-F12-2` and `gn/cs2103-f12-2` will be recognised as the same group.
 3. For information on the constraints for each parameter used in this command, go
@@ -730,16 +702,14 @@ Edits a task from all groups that contain it.
 
 ##### Usage Scenario
 
-###### Scenario #1 Edit a task with index 2
+###### Scenario #1: Editing task in index `2`
 
 1. Type and execute: `list_t` to see the task list.
-2. After finding the task you wish to delete from this group, remember its index number (task with index 2 in this
-   example).
-3. Type and execute: `edit_t i/2 tn/PE`
+2. After finding the task you wish to edit, type and execute: `edit_t i/2 tn/Complete task 8`
 
-This screenshot shows the result of executing `edit_t i/2 tn/PE`.
+This screenshot shows the result of executing `edit_t i/2 tn/Complete task 8`.
 
-![edit_t.png](images/screenshots/et.png)
+<img src="images/screenshots/del_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -751,30 +721,33 @@ Marks a task as done or undone.
 
 ##### Notes
 
-1. You are unable to specify whether to mark a task as done or undone.
-2. If a task is done it will be marked as undone, and vice versa.
-2. For information on the constraints for each parameter used in this command, go
+1. The index must be valid and should be the index of target task in the group's task list.
+2. You are unable to specify whether to mark a task as done or undone.
+3. If a task is done it will be marked as undone, and vice versa.
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
 ###### Scenario #1: Marking an undone task
 
-1. Executing `mark_t` will mark the task as done.
+1. Type and execute: `mark_t gn/CS2103-F12-1 i/2`
+2. Executing `mark_t` will mark the task as done.
+
+3. This screenshot shows the result of executing `mark_t gn/CS2103-F12-1 i/2`.
+
+<img src="images/screenshots/mark_t_1.png" width="600">
+<br>
+<br>
 
 ###### Scenario #2: Marking a done task
 
-1. Executing `mark_t` will mark the task as undone.
+1. Type and execute: `mark_t gn/CS2103-F12-1 i/2`
+2. Executing `mark_t` will mark the task as undone.
 
-###### Scenario #3: Executing the command `mark_t gn/CS2103-F15-2 i/2` when the group does not exist.
+3. This screenshot shows the result of executing `mark_t gn/CS2103-F12-1 i/2`.
 
-1. The system will display an error message.
-
-###### Scenario #4: Executing the command `mark_t gn/CS2103-F15-2 i/10` when there are only 5 tasks.
-
-1. The system will display an error message because the task index does not exist.
-
-This screenshot shows the result of executing `mark_t gn/CS2103-F12-2 i/2`.
+<img src="images/screenshots/mark_t_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -790,33 +763,29 @@ Searches T_Assistant for tasks with fields that match the search query.
 2. The command will match substrings. You may search for part of a group's name such as `tp` to find `tP v1.6 Release`.
 3. Searches the following field that a group has that matches the query:
     * Task name
+3. A blank query i.e. `ft q/` will return all tasks.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 ##### Usage Scenario
 
-###### Scenario #1: Find task with the following query: `consultation`
+###### Scenario #1: Finding tasks with the following query: `4`
 
-This screenshot shows the result of executing `find_t q/consulation`.
+This screenshot shows the result of executing `find_t q/4`.
+
+<img src="images/screenshots/mark_t_2.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
 #### Sorting Tasks: `sort_t`, `st`
 
-Sorts the task list by deadline in ascending order.
+Sorts the task list by deadline from the earliest to the latest date.
 
 **Format**: `sort_t`
 
-##### Notes
+This screenshot shows the result of executing `sort_t`.
 
-1. For information on the constraints for each parameter used in this command, go
-   to [Command Parameters](#command-parameters).
-
-##### Usage Scenario
-
-###### Scenario #1: Executing command `sort_t`
-
-1. The task list will be sorted by deadline.
+<img src="images/screenshots/sort_t.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -835,12 +804,12 @@ Undoes the previous command ran.
 1. If you first open the application, you will be unable to undo because there is no data to undo. You can only undo
    after you have made changes to the application.
 2. You can only undo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
-   and
-   not the commands which do not make any changes (find, list, help, exit commands).
+   and not the commands which do not make any changes (find, list, help, exit commands).
 3. For every change you make to the application, it will be added to the version history of the application.
 4. The application stores up to 100 version histories. Hence you will only be able to undo up to 100 of your most recent
    versions.
-5. For information on the constraints for each parameter used in this command, go
+5. After running the command you will be brought to the default panel of the application (the student list panel).
+6. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 #### Redoing change: `redo`
@@ -856,7 +825,8 @@ Format: `redo`
 2. You can only redo the commands which make changes to the application (add, delete, sort, mark, clear, edit commands),
    and
    not the commands which do not make any changes (find, list, help, exit commands).
-5. For information on the constraints for each parameter used in this command, go
+3. After running the command you will be brought to the default panel of the application (the student list panel).
+4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
 #### Viewing help : `help`
@@ -878,6 +848,8 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -909,6 +881,7 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -948,19 +921,20 @@ This section will inform you about what parameters are used in T_Assistant and t
 All parameters are case-insensitive when used for comparison unless stated otherwise.
 </box>
 
-| Parameter                | Constraints                                                                                                                                                                                                                                                                                        | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
-| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                                                                       | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
-| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                                                                         | `John Doe`                                    | `J0hn Doe$$`                                     |
+| Parameter                | Constraints                                                                                                                                                                                                                                                                                      | <span style="color:green">Correct</span>      | <span style="color:red">Incorrect</span>         |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|
+| `sno/`<br>Student Number | Start with `A0`  <br>Followed by 6 numerical digits  <br>End with any letter                                                                                                                                                                                                                     | `A0123456B`                                   | `A1234567` <br>`A1234567A`                       |
+| `sn/`<br>Student Name    | Only contain alphanumeric characters, a variety of latin characters and spaces, and it should not be blank                                                                                                                                                                                       | `John Doe`                                    | `J0hn Doe$$`                                     |
 | `e/`<br>Email            | Format: `local-part@domain-part` <br>`local-part` follows NUS email constraints<br>`local-part` should contain only alphanumeric characters and the following special characters `_`, `.` <br>`local-part` cannot start and end with special characters<br>`domain-part` must end with `u.nus.edu` | `johndoe@u.nus.edu` ,<br>`john_doe@u.nus.edu` | `$johndoe@u.nus.edu` <br>`johndoe@gmail.com`     |
-| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                                                               | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
-| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a number<br>`Group Number` should be a number                                                                                              | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
-| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                                                    | `Release tP v1.6`                             |                                                  |
-| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                                                             | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
-| `q/`<br>Query            | Must contain only 1 word                                                                                                                                                                                                                                                                           | `iP`<br>`tP`                                  | `Complete iP`                                    |
-| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                                                           | `1`<br>`10`                                   | `-1`<br>`test`                                   |
+| `t/`<br>Tag              | Only contain alphanumeric characters                                                                                                                                                                                                                                                             | `TD8`                                         | `TD 8` <br>`Great at UI`                         |
+| `gn/`<br>Group Name      | Format: `[Module]-[Tutorial Group]-[Group Number]`<br>`Module` can be either `CS2103` or `CS2103T`<br>`Tutorial Group` should be one letter followed by a number<br>`Group Number` should be a number                                                                                            | `CS2103-F12-2`<br>`CS2103T-W1-5`              | `CS2103A-1-A1`<br>`CS2040S-A1-1`                 |
+| `tn/`<br>Task Name       | Cannot be blank                                                                                                                                                                                                                                                                                  | `Release tP v1.6`                             |                                                  |
+| `td/`<br>Task Deadline   | Must be in the following format: `YYYY-MM-DD HHmm`<br>Relative to Singapore's timezone                                                                                                                                                                                                           | `2024-11-09 1800`                             | `today` <br>`2024-1-9 1900` <br>`2024-01-09 800` |
+| `q/`<br>Query            | No limitations                                                                                                                                                                                                                                                                                   | `iP`<br>`tP`                                  | `Complete iP`                                    |
+| `i/`<br>Index            | Must be positive integer                                                                                                                                                                                                                                                                         | `1`<br>`10`                                   | `-1`<br>`test`                                   |
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 

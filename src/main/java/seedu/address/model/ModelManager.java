@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.State;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
@@ -133,6 +132,7 @@ public class ModelManager implements Model {
         return userPrefs.getMostRecentTaskDisplay();
     }
 
+
     @Override
     public void setMostRecentTaskDisplay() {
         Task taskToUpdate = userPrefs.getMostRecentTaskDisplay();
@@ -147,6 +147,28 @@ public class ModelManager implements Model {
     public void setMostRecentTaskDisplay(Task task) {
         userPrefs.setMostRecentTaskDisplay(task);
         updateFilteredTaskList(x -> x.equals(task));
+    }
+
+    @Override
+    public String getMostRecentGroupDisplay() {
+        return userPrefs.getMostRecentGroupDisplay();
+    }
+
+
+    @Override
+    public void setMostRecentGroupDisplay(String string) {
+        userPrefs.setMostRecentGroupDisplay(string);
+        updateFilteredGroupList(x -> x.getGroupName().getGroupName().equals(string));
+    }
+
+    @Override
+    public void setMostRecentGroupDisplay() {
+        String groupToUpdate = userPrefs.getMostRecentGroupDisplay();
+        if (groupToUpdate != "") {
+            updateFilteredGroupList(x -> groupToUpdate.equals(x.getGroupName().getGroupName()));
+        } else {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        }
     }
 
     @Override
@@ -198,9 +220,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTask(Index index, Task editedTask, Group group) {
-        requireAllNonNull(index, editedTask, group);
-        addressBook.setTask(index, editedTask, group);
+    public void setTask(Task originalTask, Task editedTask, Group group) {
+        requireAllNonNull(originalTask, editedTask, group);
+        addressBook.setTask(originalTask, editedTask, group);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -213,7 +235,7 @@ public class ModelManager implements Model {
     @Override
     public void addGroup(Group group) {
         addressBook.addGroup(group);
-        if (userPrefs.getState().toString().equals(new State("Groups"))) {
+        if (userPrefs.getState().equals(new State("Groups"))) {
             updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         }
     }

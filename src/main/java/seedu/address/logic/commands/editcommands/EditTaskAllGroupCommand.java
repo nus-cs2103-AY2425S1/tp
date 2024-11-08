@@ -68,8 +68,8 @@ public class EditTaskAllGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
-        List<Group> groups = model.getFilteredGroupList();
+        List<Task> lastShownList = model.getAddressBook().getTaskList();
+        List<Group> groups = model.getAddressBook().getGroupList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
@@ -90,7 +90,7 @@ public class EditTaskAllGroupCommand extends Command {
     }
 
     private void updateTaskInGroup(Model model, Group group, Index index, Task editedTask, Task taskToEdit) {
-        model.setTask(index, editedTask, group);
+        model.setTask(taskToEdit, editedTask, group);
         model.decreaseGroupWithTask(taskToEdit);
         addOrUpdateEditedTask(model, editedTask);
     }

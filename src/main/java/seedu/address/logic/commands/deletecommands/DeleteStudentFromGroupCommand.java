@@ -47,7 +47,7 @@ public class DeleteStudentFromGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getAddressBook().getStudentList();
 
         boolean hasFoundTarget = false;
         Student studentToBeDeleted = null;
@@ -72,6 +72,7 @@ public class DeleteStudentFromGroupCommand extends Command {
         model.deleteStudentFromGroup(group, studentToBeDeleted);
 
         model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
+        model.setMostRecentGroupDisplay(group.getGroupName().getGroupName());
         model.setStateGroups();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
             Messages.format(targetStudentNo), Messages.format(group.getGroupName())), LIST_GROUP_MARKER);

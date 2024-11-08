@@ -29,6 +29,7 @@ public class ListGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        model.setMostRecentGroupDisplay("");
         model.setStateGroups();
         return new CommandResult(MESSAGE_SUCCESS, LIST_GROUP_MARKER);
     }

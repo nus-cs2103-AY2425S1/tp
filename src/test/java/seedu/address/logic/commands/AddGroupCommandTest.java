@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -165,6 +164,21 @@ public class AddGroupCommandTest {
         }
 
         @Override
+        public String getMostRecentGroupDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMostRecentGroupDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMostRecentGroupDisplay(String string) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
@@ -205,7 +219,7 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void setTask(Index index, Task editedTask, Group group) {
+        public void setTask(Task originalTask, Task editedTask, Group group) {
             throw new AssertionError("This method should not be called.");
         }
 

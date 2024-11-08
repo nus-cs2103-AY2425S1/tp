@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
@@ -77,10 +76,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void setStatus() {
-        for (Group g: groups) {
+        for (Group g : groups) {
             g.setTaskStatus();
         }
-        for (Task t: tasks) {
+        for (Task t : tasks) {
             t.setStatus();
         }
     }
@@ -98,21 +97,22 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Creates a defensive copy of the T_Assistant
-     * @param newData  The data to be copied over.
-     * @return         Returns the new addressbook
+     *
+     * @param newData The data to be copied over.
+     * @return Returns the new addressbook
      */
     public AddressBook duplicateCopy(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         AddressBook newAddressBook = new AddressBook();
-        for (Student student: newData.getStudentList()) {
+        for (Student student : newData.getStudentList()) {
             Student newStudent = new Student(student);
             newAddressBook.students.add(newStudent);
         }
-        for (Group group: newData.getGroupList()) {
+        for (Group group : newData.getGroupList()) {
             Group newGroup = new Group(group);
             newAddressBook.groups.add(newGroup);
         }
-        for (Task task: newData.getTaskList()) {
+        for (Task task : newData.getTaskList()) {
             Task newTask = new Task(task);
             newAddressBook.tasks.add(newTask);
         }
@@ -287,7 +287,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         });
 
         Task toDelete = null;
-        for (Task t: tasks) {
+        for (Task t : tasks) {
             if (t.getGroupsWithTask() == 0) {
                 toDelete = t;
             }
@@ -322,11 +322,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the task {@code target} in {@code group} with {@code editedTask}.
      */
-    public void setTask(Index index, Task editedTask, Group group) {
-        requireNonNull(index);
+    public void setTask(Task originalTask, Task editedTask, Group group) {
+        requireNonNull(originalTask);
         requireNonNull(editedTask);
         requireNonNull(group);
-        group.setTask(index, editedTask);
+        group.setTask(originalTask, editedTask);
     }
 
     //// util methods
@@ -366,8 +366,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         AddressBook otherAddressBook = (AddressBook) other;
         return students.equals(otherAddressBook.students)
-                && groups.equals(otherAddressBook.groups)
-                && tasks.equals(otherAddressBook.tasks);
+            && groups.equals(otherAddressBook.groups)
+            && tasks.equals(otherAddressBook.tasks);
     }
 
     @Override

@@ -134,6 +134,7 @@ public class MainWindow extends UiPart<Stage> {
             logic.setMostRecentGroupTaskDisplay();
         } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
             informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+            logic.setMostRecentGroupDisplay();
         } else {
             informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
             logic.setMostRecentTaskDisplay();
@@ -237,6 +238,7 @@ public class MainWindow extends UiPart<Stage> {
                 logic.setMostRecentGroupTaskDisplay();
             } else if (this.logic.getState().equals(DEFAULT_GROUP)) {
                 informationListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+                logic.setMostRecentGroupDisplay();
             } else {
                 informationListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
             }

@@ -106,8 +106,7 @@ public class AddGroupCommand extends Command {
         }
 
         // update group list to only display the added groups
-        model.updateFilteredGroupList(x ->
-                toAdd.stream().anyMatch(y -> y.getGroupName().equals(x.getGroupName())));
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         model.setStateGroups();
 
         // displays warning message if duplicates are found or groups exist in model
