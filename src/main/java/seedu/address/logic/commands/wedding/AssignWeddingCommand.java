@@ -102,7 +102,7 @@ public class AssignWeddingCommand extends Command {
                 throw new CommandException(String.format(
                         MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()
                 ));
-            };
+            }
             Wedding editedWedding = wedding.clone();
             String type = entry.getValue();
             switch (type) {
