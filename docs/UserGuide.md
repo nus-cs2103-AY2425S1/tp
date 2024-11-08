@@ -112,7 +112,7 @@ Format: `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HA
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When updating tags, the existing tags of the member will be removed i.e adding of tags is not cumulative.
-- You can remove all the member’s tags by typing `t/` without
+- You can remove all the member’s tags by typing `tag/` without
   specifying any tags after it.
 
 Examples:
