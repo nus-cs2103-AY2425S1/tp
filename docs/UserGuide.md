@@ -14,6 +14,9 @@ operate than graphical user interfaces commonly found in smartphones.
 
 ## Table of Contents
 * [Quick start](#quick-start)
+  * [Step 1: Check if Your Computer is Ready](#step-1-check-if-your-computer-is-ready)
+  * [Step 2: Install PROperty](#step-2-install-property)
+  * [Step 3: Try Your First Commands](#step-3-try-your-first-commands)
 * [Features](#features)
     * [Adding a client: `add`](#adding-a-client-add)
     * [Listing all clients : `list`](#listing-all-clients--list)
@@ -38,7 +41,7 @@ operate than graphical user interfaces commonly found in smartphones.
 * [Tag Table](#tag-table)
 * [Glossary](#glossary)
     * [Property Tags](#property-tags)
-    * [client Tags](#client-tags)
+    * [Client Tags](#client-tags)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,13 +53,13 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 1. Open your computer's terminal:
    - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
    - **For Mac**: Press Command + Space, type `terminal`, and press Enter
-2. In the black window that appears, type exactly:
+2. In the black terminal window that appears, type exactly:
    ```
    java --version
    ```
    and press Enter
 3. What you should see:
-   - ✅ If you see "Java version 17" (or any number above 17), you're ready to go!
+   - ✅ If you see "java 17" or "openjdk 17" (or any number above 17), you're ready to go!
    - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
 ### Step 2: Install PROperty
@@ -78,15 +81,15 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 Now that PROperty is running, let's try using the different commands available. All you have to do is to type the command in the command box and press Enter to execute it. 
 Some example commands you can try are:
-* `list` : Lists all clients in your address book.
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
 
-* `delete 3` : Deletes the 3rd client shown in your current list.
 
-* `clear` : Deletes all clients.
+* `edit 1 n/Mary Jane p/12345678 e/maryj@example.com a/Mary street, block 321, #02-02` : Edits the client with index 1 in PROperty.
 
-* `exit` : Exits the app.
+
+* `listing add 2 t/HDB a/Adam street, block 456, #03-03` : Adds a listing for the client with index 2 in PROperty.
+
 
 Refer to the [Features](#features) below for details of each command.
 
