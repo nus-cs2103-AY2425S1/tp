@@ -515,13 +515,13 @@ Commands for managing property listings and associating clients with listings.
 ![showListings](images/showListings.png)
 
 - #### Add Listing
-    - **Format:** `listing n/NAME price/PRICE area/AREA address/ADDRESS region/REGION seller/SELLER [buyer/BUYER]...`
+    - **Format:** `listing n/NAME pr/PRICE ar/AREA add/ADDRESS reg/REGION sel/SELLER [buy/BUYER]...`
     - **Description:** Adds a new listing associated to the seller with the specified details.
     - **Successful Execution:**
       > ---
       > **Use Case #1**: Adding a listing with name `Warton House`, price `4000`, area `1000`, address `123 PASIR RIS (S)123456`, region `east`, seller `Bernice Yu`, buyer `Alex Yeoh`  
       >
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/Alex Yeoh`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/Bernice Yu buy/Alex Yeoh`
       >
       > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}seedu.address.model.person.Buyer{name=Alex Yeoh, phone=87438807, email=alexyeoh@example.com, tags=[[friends]], appointment=Date: 20-12-24 (From: 08:00 To: 10:00), remark=Test}
       >
@@ -531,7 +531,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Adding a listing with no buyers
       >
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 address/123 PASIR RIS (S)123456 reg/east sel/Bernice Yu`
       >
       > **Output**: New listing added: Warton House; Price: 4000; Area: 1000; Region: EAST; Address: 123 PASIR RIS (S)123456; Seller: seedu.address.model.person.Seller{name=Bernice Yu, phone=99272758, email=berniceyu@example.com, tags=[[colleagues], [friends]], appointment=-, remark=No remarks yet.}
       >
@@ -543,7 +543,7 @@ Commands for managing property listings and associating clients with listings.
       > ---
       > **Use Case #1**: Attempting to add a listing for a non-existent seller
       >
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/bob7`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/bob7`
       >
       > **Output**: Please enter an existing client name!
       >
@@ -551,7 +551,7 @@ Commands for managing property listings and associating clients with listings.
       > 
       > **Use Case #2**: Attempting to add non-existent buyers to a listing
       > 
-      > **Input**: `listing n/Warton House price/4000 area/1000 address/123 PASIR RIS (S)123456 region/east seller/Bernice Yu buyer/bob7`
+      > **Input**: `listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/Bernice Yu buy/bob7`
       > 
       > **Output**: Please enter an existing client name!
       > 
@@ -584,14 +584,20 @@ Commands for managing property listings and associating clients with listings.
 
     - **Failed Execution:** NIL
 
+    <div class="alert" markdown="span">
+    WARNING: The subsequent section `ADD BUYERS TO LISTING` might have an outdated command format.<br>
+    This is as of v1.5<br>
+    Please refer to the command format given in the application as per the app version used.
+    </div>
+
 - #### Add Buyers to Listing
-    - **Format:** `addlistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
+    - **Format:** `addlistingbuyers LISTING_NAME buy/BUYER_NAME [buy/MORE_BUYER_NAMES...]`
     - **Description:** Associates buyers with a specified listing.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4`
+      > **Use Case #1**: Adding one buyer `Alex Yeoh` to listing `RC4` (Assuming displayed index is 1)
       >
-      > **Input**: `addlistingbuyers RC4 buyer/Alex Yeoh buyer/Charlotte Oliveiro`
+      > **Input**: `addlistingbuyers rc4 buyer/Alex Yeoh buyer/Charlotte Oliveiro`
       >
       > **Output**: Buyers added to listing: RC4
       >
@@ -599,7 +605,7 @@ Commands for managing property listings and associating clients with listings.
       >
       > **Use Case #2**: Adding two buyers `Alex Yeoh` and `Charlotte Oliveiro` to listing `David HDB`
       >
-      > **Input**: `addlistingbuyers david hdb buyer/Alex Yeoh buyer/Charlotte Oliveiro`
+      > **Input**: `addlistingbuyers david hdb buy/Alex Yeoh buy/Charlotte Oliveiro`
       >
       > **Output**: Buyers added to listing: David HDB
       >
@@ -659,6 +665,12 @@ Commands for managing property listings and associating clients with listings.
       > **Output**: The specified person Bernice Yu is not a buyer.
       >
       > ---
+    
+    <div class="alert" markdown="span">
+    WARNING: The subsequent section `REMOVE BUYERS FROM LISTING` might have an outdated command format.<br>
+    This is as of v1.5<br>
+    Please refer to the command format given in the application as per the app version used.
+    </div>
 
 - #### Remove Buyers from Listing
     - **Format:** `removelistingbuyers LISTING_NAME buyer/BUYER_NAME [buyer/MORE_BUYER_NAMES...]`
@@ -743,6 +755,12 @@ Commands for managing property listings and associating clients with listings.
       > **Output**: The specified buyer nonExistentBuyer does not exist in the client list.
       > 
       > ---
+
+    <div class="alert" markdown="span">
+    WARNING: The subsequent section `DELETE LISTING` might have an outdated command format.<br>
+    This is as of v1.5<br>
+    Please refer to the command format given in the application as per the app version used.
+    </div>
 
 - #### Delete Listing
     - **Format:** `deletelisting LISTING_NAME`
@@ -841,6 +859,12 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
       > ![help](images/help.png)
       > 
       > ---
+
+    <div class="alert" markdown="span">
+    WARNING: The subsequent section `MORE INFO` might have an outdated command format.<br>
+    This is as of v1.5<br>
+    Please refer to the command format given in the application as per the app version used.
+    </div>
 
 - #### More Info
     - **Format:** `moreinfo NAME`
