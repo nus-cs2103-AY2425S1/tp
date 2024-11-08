@@ -54,7 +54,7 @@ public class JsonAdaptedMakeupLesson {
                     Date.class.getSimpleName()));
         }
         if (!Date.isValidDate(lessonDate)) {
-            throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelLessonDate = new Date(lessonDate);
 
@@ -62,7 +62,7 @@ public class JsonAdaptedMakeupLesson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
         if (!Time.isValidTime(startTime) || !Time.isValidTime(endTime)) {
-            throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
         }
         final Time modelStartTime = new Time(startTime);
         final Time modelEndTime = new Time(endTime);
