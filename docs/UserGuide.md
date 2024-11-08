@@ -454,7 +454,7 @@ add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXP
 | **Parameter Name** | **Description**                                       | **Required** |
 |--------------------|-------------------------------------------------------|--------------|
 | INDEX              | The index of the client in the displayed client list. | yes          |
-| pt/POLICY_TYPE     | Type of policy to be added.                           | yes          |
+| pt/POLICY_TYPE     | The policy type.                                      | yes          |
 | pa/PREMIUM_AMOUNT  | The policy's premium.                                 | no           |
 | ca/COVERAGE_AMOUNT | The maximum amount that be claimed under this policy. | no           |
 | ed/EXPIRY_DATE     | The policy's date of expiry.                          | no           |
@@ -509,7 +509,7 @@ delete-policy INDEX pt/POLICY_TYPE…
 | **Parameter Name** | **Description**                                       | **Required** |
 |--------------------|-------------------------------------------------------|--------------|
 | INDEX              | The index of the client in the displayed client list. | yes          |
-| pt/POLICY_TYPE     | Type of policy to be deleted.                         | yes          |
+| pt/POLICY_TYPE     | The policy type.                                      | yes          |
 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
@@ -531,7 +531,7 @@ delete-policy INDEX pt/POLICY_TYPE…
 
 💡
 **Tip:**
-* More than one policy can be deleted using a single command.
+More than one policy can be deleted using a single command.
 
 </div>
 
@@ -540,6 +540,7 @@ delete-policy INDEX pt/POLICY_TYPE…
 * `delete-policy 2 pt/health pt/education` deletes the Health and Education policy from the 2nd client.
 
 **On success:**
+<br>
 It will display the clients remaining policies.
 ```shell
 Policies Left: 1. Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | Claims:
