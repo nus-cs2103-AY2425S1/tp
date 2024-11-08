@@ -9,13 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Fees {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Fees should be a positive integer, only contain numbers, and should be at least 1 digit long.";
+            "Fees should be a positive integer, only contain numbers, and should be at least 1 digit long" +
+                    "and a maximum of 9 digits long.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^\\d{1,}$";
+    public static final String VALIDATION_REGEX = "^\\d{1,9}$";
     public final String value;
 
     /**
