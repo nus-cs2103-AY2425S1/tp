@@ -2,13 +2,13 @@ package seedu.address.logic.parser.clientcommandparsers;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.clientcommands.MoreInfoCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new MoreInfoCommand object
@@ -24,8 +24,8 @@ public class MoreInfoCommandParser implements Parser<MoreInfoCommand> {
 
         try {
             // Parse the name and return the MoreInfoCommand
-            Name name = ParserUtil.parseName(argumentMultimap.getPreamble());
-            return new MoreInfoCommand(name);
+            Index index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
+            return new MoreInfoCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MoreInfoCommand.MESSAGE_USAGE), pe);

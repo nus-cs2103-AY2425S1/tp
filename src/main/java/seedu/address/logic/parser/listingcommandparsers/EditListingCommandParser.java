@@ -66,10 +66,6 @@ public class EditListingCommandParser implements Parser<EditListingCommand> {
             editListingDescriptor.setSellerIndex(sellerIndex);
         }
 
-        if (!editListingDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditListingCommand.MESSAGE_NOT_EDITED);
-        }
-
         return new EditListingCommand(currentListingIndex, editListingDescriptor);
     }
 }

@@ -16,11 +16,10 @@ import org.testfx.util.WaitForAsyncUtils;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import seedu.address.MainApp;
-import seedu.address.model.person.Name;
 
 public class MoreInfoControllerUiTest extends ApplicationTest {
     private MainApp app;
-    private Name name;
+    private String index;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -31,13 +30,11 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents(20);
         FxRobot robot = new FxRobot();
         if (robot.lookup("#name").tryQuery().isEmpty()) {
-            name = new Name("Jackson");
             robot.clickOn("#commandBoxPlaceholder");
             robot.write("buyer n/Jackson p/98294924 e/jackson@gmail.com");
             robot.type(KeyCode.ENTER);
         } else {
             Label nameArea = robot.lookup("#name").query();
-            name = new Name(nameArea.getText());
         }
 
     }
@@ -49,7 +46,7 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
     public void openMoreInfoWindowUponCommandAndCloses_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn("#commandBoxPlaceholder");
-        robot.write("moreinfo " + name);
+        robot.write("moreinfo 1");
         robot.type(KeyCode.ENTER);
         assertTrue(robot.lookup("#remarkInput").tryQuery().isPresent(),
                 "Command opens more info window successfully");
@@ -62,7 +59,7 @@ public class MoreInfoControllerUiTest extends ApplicationTest {
     public void handleRemarkInputCorrectly_success() {
         FxRobot robot = new FxRobot();
         robot.clickOn("#commandBoxPlaceholder");
-        robot.write("moreinfo " + name);
+        robot.write("moreinfo 1");
         robot.type(KeyCode.ENTER);
         robot.clickOn("#remarkInput");
         robot.write("Test");
