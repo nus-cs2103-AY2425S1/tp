@@ -253,7 +253,7 @@ Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 * **EMAIL**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
   but cannot start or end with these special characters (+_.-). The domain consists of labels separated by periods,
   ending with a label at least two characters long, with each label starting and ending with an alphanumeric character and allowing hyphens in between.
-* * **ADDRESS**: Address of the doctor.
+* **ADDRESS**: Address of the patient.
 * **Note**: Duplicate patients (same name, phone, or email) are not allowed.
 * A _notification message_ will be displayed if MedDict could not create the patient with the given information.
 
@@ -301,7 +301,7 @@ Examples:
    **Output**: <br>
    Unable to add remarks! Check the ID entered!
 
-### (Listing All Persons(#command-summary): `list`
+### [Listing All Persons](#command-summary): `list`
 
 Displays a list of all persons in the address book.
 
@@ -396,6 +396,9 @@ Adds an appointment to an existing patient with the specified `PATIENT_ID` and d
 
 Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 
+<div class="alert alert-block alert-warning">
+    <strong>Warning!</strong> Usually, the order of parameters in the command do not matter. However, in this case, do take extra effort to ensure you key in z/PATIENT_ID before z/DOCTOR_ID.
+</div>
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
@@ -403,8 +406,7 @@ Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
   Empty remark will be added to the appointment if remark is not specified.
 * When adding appointment, the appointment detail will be added to the appointments list in both patient and doctor class.
 * Each appointment must be scheduled at a unique time to prevent overlap for both the patient and the doctor.
-* A _notification message_ will be output if there is failure in adding the appointments.
-
+* A _notification message_ will be displayed if MedDict could not add the appointment successfully.
 Examples:
 *  `addA z/0 z/1 x/2024-12-31 15:23 r/Third physiotherapy session` <br>
    **Output**: <br>
@@ -465,6 +467,10 @@ Marks appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE
 
 Format: `marK z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
+<div class="alert alert-block alert-warning">
+    <strong>Warning!</strong> Usually, the order of parameters in the command do not matter. However, in this case, do take extra effort to ensure you key in z/PATIENT_ID before z/DOCTOR_ID.
+</div>
+
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be displayed if MedDict could not find the appointment to mark.
@@ -482,6 +488,10 @@ Examples:
 Deletes appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE_TIME` from the MedDict database.
 
 Format: `deleteA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
+
+<div class="alert alert-block alert-warning">
+    <strong>Warning!</strong> Usually, the order of parameters in the command do not matter. However, in this case, do take extra effort to ensure you key in z/PATIENT_ID before z/DOCTOR_ID.
+</div>
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
