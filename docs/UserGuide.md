@@ -88,11 +88,9 @@ administrators.
 * `n/` is for name, `p/` is for phone number, `e/` is for email, `a/` is for address, `f/` is for fees, `c/` is for class ID, and `t/` is for tags.
 * The commands help, list, exit, and clear do not accept parameters; any provided parameters will be disregarded.  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 * EduTuTu allows the handling of only alphanumeric characters and spaces. Special characters and emojis are not supported.
-
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 [Back to Table of Contents](#table-of-contents)
-
 ***
 
 ### 2.1 Viewing Help: `help`
