@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -183,6 +184,7 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasGroupName(groupB));
         assertTrue(modelManager.hasGroupName(groupC));
     }
+
     @Test
     public void updateFilteredGroupList_validPredicate_returnsMatchingGroups() {
         Group groupA = new Group("groupA", List.of(new PersonBuilder().build()));
@@ -200,8 +202,6 @@ public class ModelManagerTest {
         assertFalse(modelManager.getFilteredGroupList().contains(groupC));
     }
 
-
-
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
@@ -211,7 +211,6 @@ public class ModelManagerTest {
     public void getFilteredGroupList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredGroupList().remove(0));
     }
-
 
     @Test
     public void equals() {
@@ -248,5 +247,126 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void deletePerson_personInGroups_personRemovedFromGroupsAndEmptyGroupsDeleted() {
+        // Set up the model manager with test data
+        ModelManager modelManager = new ModelManager();
+        Person personToDelete = new PersonBuilder().withName("John Doe").build();
+        Person otherPerson = new PersonBuilder().withName("Jane Smith").build();
+        modelManager.addPerson(personToDelete);
+        modelManager.addPerson(otherPerson);
+
+        // Create groups and add the person to them
+        Group groupOnlyPerson = new Group("GroupOnlyPerson", Arrays.asList(personToDelete));
+        Group groupWithOthers = new Group("GroupWithOthers", Arrays.asList(personToDelete, otherPerson));
+        Group groupWithoutPerson = new Group("GroupWithoutPerson", Arrays.asList(otherPerson));
+
+        modelManager.addGroup(groupOnlyPerson);
+        modelManager.addGroup(groupWithOthers);
+        modelManager.addGroup(groupWithoutPerson);
+
+        // Delete the person
+        modelManager.deletePerson(personToDelete);
+
+        // Assertions
+        // The person should no longer exist in the address book
+        assertFalse(modelManager.hasPerson(personToDelete));
+
+        // The group that only had the person should be deleted
+        assertFalse(modelManager.hasGroupName(groupOnlyPerson));
+
+        // The group that had the person and others should still exist
+        assertTrue(modelManager.hasGroupName(groupWithOthers));
+
+        // But the person should be removed from the group
+        Group updatedGroupWithOthers = modelManager.getAddressBook().getGroupList().stream()
+                .filter(group -> group.isSameGroup(groupWithOthers))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(updatedGroupWithOthers);
+        assertFalse(updatedGroupWithOthers.getMembers().contains(personToDelete));
+        assertTrue(updatedGroupWithOthers.getMembers().contains(otherPerson));
+
+        // The group that didn't have the person should remain unchanged
+        assertTrue(modelManager.hasGroupName(groupWithoutPerson));
+        Group unchangedGroup = modelManager.getAddressBook().getGroupList().stream()
+                .filter(group -> group.isSameGroup(groupWithoutPerson))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(unchangedGroup);
+        assertEquals(groupWithoutPerson.getMembers(), unchangedGroup.getMembers());
+    }
+
+    @Test
+    public void deletePerson_personNotInAnyGroup_personDeletedAndGroupsUnchanged() {
+        // Set up the model manager with test data
+        ModelManager modelManager = new ModelManager();
+        Person personToDelete = new PersonBuilder().withName("John Doe").build();
+        Person otherPerson = new PersonBuilder().withName("Jane Smith").build();
+        modelManager.addPerson(personToDelete);
+        modelManager.addPerson(otherPerson);
+
+        // Create a group without the person
+        Group groupWithoutPerson = new Group("GroupWithoutPerson", Arrays.asList(otherPerson));
+        modelManager.addGroup(groupWithoutPerson);
+
+        // Delete the person
+        modelManager.deletePerson(personToDelete);
+
+        // Assertions
+        // The person should no longer exist in the address book
+        assertFalse(modelManager.hasPerson(personToDelete));
+
+        // The existing group should remain unchanged
+        assertTrue(modelManager.hasGroupName(groupWithoutPerson));
+        Group unchangedGroup = modelManager.getAddressBook().getGroupList().stream()
+                .filter(group -> group.isSameGroup(groupWithoutPerson))
+                .findFirst()
+                .orElse(null);
+
+        assertNotNull(unchangedGroup);
+        assertEquals(groupWithoutPerson.getMembers(), unchangedGroup.getMembers());
+    }
+
+    @Test
+    public void deletePerson_personInMultipleGroups_someGroupsDeleted() {
+        // Set up the model manager with test data
+        ModelManager modelManager = new ModelManager();
+        Person personToDelete = new PersonBuilder().withName("John Doe").build();
+        Person otherPerson1 = new PersonBuilder().withName("Jane Smith").build();
+        Person otherPerson2 = new PersonBuilder().withName("Bob Lee").build();
+        modelManager.addPerson(personToDelete);
+        modelManager.addPerson(otherPerson1);
+        modelManager.addPerson(otherPerson2);
+
+        // Create groups
+        Group groupEmptyAfterDeletion = new Group("EmptyGroup", Arrays.asList(personToDelete));
+        Group groupStillHasMembers = new Group("NonEmptyGroup", Arrays.asList(personToDelete, otherPerson1));
+        Group groupUnaffected = new Group("UnaffectedGroup", Arrays.asList(otherPerson2));
+
+        modelManager.addGroup(groupEmptyAfterDeletion);
+        modelManager.addGroup(groupStillHasMembers);
+        modelManager.addGroup(groupUnaffected);
+
+        // Delete the person
+        modelManager.deletePerson(personToDelete);
+
+        // Assertions
+        // Person should be deleted from address book
+        assertFalse(modelManager.hasPerson(personToDelete));
+
+        // EmptyGroup should be deleted
+        assertFalse(modelManager.hasGroupName(groupEmptyAfterDeletion));
+
+        // NonEmptyGroup should still exist and not contain personToDelete
+        assertTrue(modelManager.hasGroupName(groupStillHasMembers));
+        Group updatedNonEmptyGroup = modelManager.getAddressBook().getGroupList().stream()
+                .filter(group -> group.isSameGroup(groupStillHasMembers))
+                .findFirst()
+                .orElse(null);
     }
 }
