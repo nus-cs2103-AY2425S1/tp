@@ -68,6 +68,26 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        loadAllPersons(addressBook);
+        loadAllTags(addressBook);
+        loadAllTasks(addressBook);
+        loadAllWeddings(addressBook);
+        // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
+        // method will throw an error
+        for (Person person : addressBook.getPersonList()) {
+            // Functions guarantee that person will share entities with the addressbook
+            loadTags(addressBook, person);
+            loadWeddings(addressBook, person);
+            loadTasks(addressBook, person);
+        }
+        return addressBook;
+    }
+
+    /**
+     * Loads all {@code Person} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllPersons(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             // Each person will store blank weddings with only the wedding name at this point
             Person person = jsonAdaptedPerson.toModelType();
@@ -82,13 +102,13 @@ class JsonSerializableAddressBook {
                 addressBook.addVendor(person);
             }
         }
-        for (JsonAdaptedTag jsonAdaptedTag : tags) {
-            Tag tag = jsonAdaptedTag.toModelType();
-            if (addressBook.hasTag(tag)) {
-                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_TAG);
-            }
-            addressBook.addTag(tag);
-        }
+    }
+
+    /**
+     * Loads all {@code Task} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllTasks(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
             Task task = jsonAdaptedTask.toModelType();
             if (addressBook.hasTask(task)) {
@@ -96,6 +116,27 @@ class JsonSerializableAddressBook {
             }
             addressBook.addTask(task);
         }
+    }
+
+    /**
+     * Loads all {@code Tag} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllTags(AddressBook addressBook) throws IllegalValueException {
+        for (JsonAdaptedTag jsonAdaptedTag : tags) {
+            Tag tag = jsonAdaptedTag.toModelType();
+            if (addressBook.hasTag(tag)) {
+                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_TAG);
+            }
+            addressBook.addTag(tag);
+        }
+    }
+
+    /**
+     * Loads all {@code Wedding} objects in the AddressBook
+     * @param addressBook The {@code AddressBook} object to load objects into
+     */
+    private void loadAllWeddings(AddressBook addressBook) throws IllegalValueException {
         for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
             Wedding wedding = jsonAdaptedWedding.toModelType();
             if (addressBook.hasWedding(wedding)) {
@@ -126,15 +167,6 @@ class JsonSerializableAddressBook {
                 }
             }
         }
-        // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
-        // method will throw an error
-        for (Person person : addressBook.getPersonList()) {
-            // Functions guarantee that person will share entities with the addressbook
-            loadTags(addressBook, person);
-            loadWeddings(addressBook, person);
-            loadTasks(addressBook, person);
-        }
-        return addressBook;
     }
 
     private void loadTags(AddressBook addressBook, Person person) {
