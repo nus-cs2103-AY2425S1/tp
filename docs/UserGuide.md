@@ -44,7 +44,11 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
    - `clear all` : Deletes all events and persons after receiving confirmation from you.
 
-   - `exit` : Exits the app.
+<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
+</div>
+
+  - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -92,8 +96,16 @@ The address and email address fields are also optional!
 
 Examples:
 
-- `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity`
-- `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser`
+- `add person n/John Doe p/98765432 e/johnd@example.com t/Celebrity` adds a person named `John Doe` with the phone number `98765432`, email address `johnd@example.com` and tag `Celebrity`.
+<div markdown="block" class="alert alert-info">
+Note that John Doe does not have an address in this example.
+</div>
+
+- `add person n/Bernice Yu e/berniceyu@example.com a/Yu Apartment p/99272758 t/Hairdresser` adds a person named `Bernice Yu` and the email address `berniceyu@example.com`, address `Yu Apartment`, phone number `99272758` and tag `Hairdresser`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+You can add the prefixes in any order you want!
+</div>
 
 ![result for 'add person'](images/add_person.png)
 
@@ -234,8 +246,12 @@ The venue field is also optional!
 
 Examples:
 
-- `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li`
-- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon for John c/Bernice Yu`
+- `add event n/Oscars t/2022-03-27 10:00 to 2022-03-27 18:00 v/Dolby Theatre c/Alex Yeoh p/Charlotte Oliveiro p/David Li` adds an event named `Oscars` with the time `2022-03-27 10:00 to 2022-03-27 18:00`, venue `Dolby Theatre`, celebrity `Alex Yeoh` and points of contact `Charlotte Oliveiro` and `David Li`.
+- `add event n/Hair Cut t/2022-03-27 16:00 to 2022-03-27 18:00 v/Salon for John c/Bernice Yu` adds an event named `Hair Cut` with the time `2022-03-27 16:00 to 2022-03-27 18:00`, venue `Salon for John`, celebrity `Bernice Yu` and no points of contact.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br>
+You can add the prefixes in any order you want!
+</div>
 
 ![result for 'add event'](images/add_event.png)
 
@@ -460,28 +476,28 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 
 ### Managing Contacts
 
-| Action     | Format | Examples                                                                                             |
-| ---------- |--------|------------------------------------------------------------------------------------------------------|
-| **Add**    | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> | e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
-| **Delete** | `delete person INDEX`<br> | e.g., `delete person 3`                                                                              |
+| Action     | Format                                                                            | Examples                                                                                             |
+| ---------- |-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| **Add**    | `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>            | e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
+| **Delete** | `delete person INDEX`<br>                                                         | e.g., `delete person 3`                                                                              |
 | **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | e.g.,`edit person 1 n/James Lee e/jameslee@example.com`                                              |
-| **Filter** | `filter person TAG`<br> | e.g., `filter person Celebrity`                                                                      |
-| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br> | e.g., `find person James Jake`                                                                       |
-| **List**   | `list person`                                                                                                                                                          |
-| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br> | e.g., `view person Jake Doe`                                                                         |
+| **Filter** | `filter person TAG`<br>                                                           | e.g., `filter person Celebrity`                                                                      |
+| **Find**   | `find person KEYWORD [MORE_KEYWORDS]`<br>                                         | e.g., `find person James Jake`                                                                       |
+| **List**   | `list person`                                                                     |
+| **View**   | `view person KEYWORD [MORE_KEYWORDS]`<br>                                         | e.g., `view person Jake Doe`                                                                         |
 
 ### Managing Events
 
-| Action     | Format | Examples                                                                               |
-| ---------- |-------------------|----------------------------------------------------------------------------------------|
-| **Add**    | `add event n/NAME t/TIME v/VENUE c/CELEBRITY [p/POINTS OF CONTACT]…​`<br> | e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
-| **Clear** | `clear event`                                                                                                                                                  |
-| **Delete** | `delete event INDEX`<br> | e.g., `delete event 3`                                                                 |
+| Action     | Format                                                                                  | Examples                                                                               |
+| ---------- |-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| **Add**    | `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINT OF CONTACT]…​`<br>              | e.g., `add event n/Oscars t/2022-03-27 v/Dolby Theatre c/Jim Bob p/John Doe, Jane Doe` |
+| **Clear** | `clear event`                                                                           |
+| **Delete** | `delete event INDEX`<br>                                                                | e.g., `delete event 3`                                                                 |
 | **Edit**   | `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF CONTACT]…​`<br> | e.g.,`edit event 1 t/2024-03-21 v/Jane's Salon`                                        |
-| **Filter** | `filter event CELEBRITY_NAME`<br> | e.g., `filter event Jim Bob`                                                           |
-| **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br> | e.g., `find event Hair Oscars`                                                         |
-| **List**   | `list event`                                                                                                                                                   |
-| **View**   | `view event KEYWORD [MORE_KEYWORDS]`<br> | e.g., `view event Oscars`                                                              |
+| **Filter** | `filter event CELEBRITY_NAME`<br>                                                       | e.g., `filter event Jim Bob`                                                           |
+| **Find**   | `find event KEYWORD [MORE_KEYWORDS]`<br>                                                | e.g., `find event Hair Oscars`                                                         |
+| **List**   | `list event`                                                                            |
+| **View**   | `view event KEYWORD [MORE_KEYWORDS]`<br>                                                | e.g., `view event Oscars`                                                              |
 
 ### Utility Commands
 
