@@ -14,9 +14,10 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 <page-nav-print />
 
 <div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Install and Get Started!
 
 1. Ensure you have [Java `17`](https://www.oracle.com/sg/java/technologies/downloads/) or above installed in your Computer. You can check your Java version by opening a command terminal (e.g. Command Prompt) and typing `java -version`.
 
@@ -31,18 +32,47 @@ If you can type fast, GamerBook can get your contact management tasks done faste
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts, this is useful after you filter the address book using commands such as `find`.
+    * `list` : Lists all contacts, this is useful after you filter the address book using commands such as `find`.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 Refer to the [Features](#features) below for more details.
 <div style="page-break-after: always;"></div>
+
+-------------------------------------------------
+
+## Play Around With GUI
+
+Our GUI consists of several parts, refer to the image below.
+
+1. **Menu Option**: By clicking the buttons here, you can exit the app or open the help window.
+2. **Command Input Box**: You may input your command here.
+3. **Result Display Panel**: Error messages and result of command execution are displayed here.
+4. **Person Cards Panel**: Person cards are listed here.
+   ![UiTut](images/UiTut.png)
+
+### Command Popup!
+
+![CommandPopUp](images/commandpopup.png)
+
+We have implemented a Command Suggestion PopUp for your convenience!
+
+As long as the command box is currently the UI element **in focus** and **at least one** character is detected inside the command box, it will suggest the possible commands that you can autocomplete it to.
+
+Underneath each suggested command is the syntax for that command and what parameters are needed to complete it
+* To access the autocomplete functionality press `shift + up` or `shift + down` while the popup is open and it will highlight the **current selection** in **blue**.  
+  _In the image the **current selection** would be `editgame`._
+
+* If your **current selection** is correct press `tab` to autocomplete it within the command box.
+
+* The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -67,22 +97,6 @@ Refer to the [Features](#features) below for more details.
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-**Commamnd PopUp:**<br>
-
-![CommandPopUp](images/commandpopup.png)
-
-We have implemented a Command Suggestion PopUp for your convenience!
-
-As long as the command box is currently the UI element **in focus** and **at least one** character is detected inside the command box, it will suggest the possible commands that you can autocomplete it to.
-
-Underneath each suggested command is the syntax for that command and what parameters are needed to complete it
-* To access the autocomplete functionality press `shift + up` or `shift + down` while the popup is open and it will highlight the **current selection** in **blue**.  
-   _In the image the **current selection** would be `editgame`._
-
-* If your **current selection** is correct press `tab` to autocomplete it within the command box.
-
-* The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
 
 </box>
 --------------------------------------------------------------------------------------------------------------------
@@ -122,7 +136,7 @@ Underneath each suggested command is the syntax for that command and what parame
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
  
 Can also be accessed by pressing `F1`. Pressing `F1` again or `esc` will close the window if it is in **focus**.
 
@@ -286,7 +300,7 @@ Format: `findgame KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `findgame lol` returns contacts with game name `LoL`
-* `find honkai impact` returns contacts with game names `Genshin Impact`, `Honkai Star Rail`<br>
+* `findgame honkai impact` returns contacts with game names `Genshin Impact`, `Honkai Star Rail`<br>
   ![result for 'find honkai impact'](images/findHonkaiImpactResult.png)
   
   <br>
