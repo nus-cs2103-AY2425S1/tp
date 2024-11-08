@@ -9,5 +9,4 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
   <Label fx:id="saveLocationStatus" />
-  <Label fx:id="contactCountLabel" />
 </GridPane>
