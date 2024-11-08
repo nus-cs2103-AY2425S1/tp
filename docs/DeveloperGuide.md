@@ -185,14 +185,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Subject` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Subject` object per unique subject, instead of each `Student` needing their own `Subject` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="750" />
-
-</box>
-
 ***
 
 ### 3.5 Storage Component
@@ -910,9 +902,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder.
 
-    2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    2. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.
+       Expected: A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+       ![Ui](images/Ui.png)
+       
+       <br>
 
 2. Saving window preferences
 
@@ -939,8 +935,10 @@ testers are expected to do more *exploratory* testing.
        address `123 Clementi`, subject tags `S1 NA MATH` and `S1 NA PHYSICS`, and lesson times `WED-17:00-19:00` and `SUN-12:00-14:00` is added.
 
     3. Other valid test cases: Change the capitalisation and spacing between words for the name, level, subject for
-       any of the above test cases.<br>
-       Expected: The expected result is the same as the unaltered test case.
+       any of the above test cases. Some examples:
+       1. Multiple spaces in name: `add n/alice   lee p/91234567 e/91234567 a/123 Clementi l/s1 na s/math s/physics lt/SUN-12:00-14:00 lt/WED-17:00-19:00`
+       2. Different casing for level and subject: `add n/alice lee p/91234567 e/91234567 a/123 Clementi l/S1 nA s/mATh s/PhySIcs lt/SUN-12:00-14:00 lt/WED-17:00-19:00`
+       Expected: Similar to previous.
 
 3. **Invalid Test Cases**
 

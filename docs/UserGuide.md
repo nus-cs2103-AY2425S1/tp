@@ -51,7 +51,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 
 ## 1. Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-3/tp/releases).
 
@@ -61,7 +61,9 @@ This detailed guide will walk you through how to make the most of **EduManage** 
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
-
+    
+   <br>
+   
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
@@ -124,7 +126,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 |   9   |      Subject      |                  `s/SUBJECT`                   | Should be valid for the given level: <ul><li>**Lower Secondary** (Level year is `S1` or `S2`): `MATH`, `SCIENCE`, `PHYSICS`, `CHEMISTRY`, `BIOLOGY`, `LITERATURE`, `HISTORY`, `GEOGRAPHY`, `SOCIAL_STUDIES`, `ENGLISH`, `CHINESE`, `HIGHER_CHINESE`, `MALAY`, `HIGHER_MALAY`, `TAMIL`, `HIGHER_TAMIL`, `HINDI`</li><li>**Upper Secondary** (Level year is `S3`, `S4` or `S5`): `MATH`, `A_MATH`, `E_MATH`, `PHYSICS`, `CHEMISTRY`, `BIOLOGY`, `COMBINED_SCIENCE`, `ACCOUNTING`, `LITERATURE`, `HISTORY`, `GEOGRAPHY`, `SOCIAL_STUDIES`, `MUSIC`, `ART`, `ENGLISH`, `CHINESE`, `HIGHER_CHINESE`, `MALAY`, `HIGHER_MALAY`, `TAMIL`, `HIGHER_TAMIL`, `HINDI` |
 |  10   |   Task Deadline   |               `d/TASK_DEADLINE`                | Should be in the format `YYYY-MM-DD`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 |  11   | Task Description  |              `t/TASK_DESCRIPTION`              | Can take any values, but should not be blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|  12   |    Task Index     |                 `t/TASK_INDEX`                 | Should be a positive integer equal to or less than the size of the specified student's task list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+|  12   |    Task Index     |                `ti/TASK_INDEX`                 | Should be a positive integer equal to or less than the size of the specified student's task list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ***
 <div style="page-break-after: always;"></div>
@@ -137,13 +139,13 @@ This detailed guide will walk you through how to make the most of **EduManage** 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Names with multiple spaces are treated as if they contain a single space, and names are not case-sensitive.<br>
-  e.g. `alex yeoh` and `Alex  yeoh` are the same as `Alex Yeoh`.
+  e.g. `alex yeoh` and `Alex  yeoh ` are the same as `Alex Yeoh`.
 
 * Overlapping lesson times will not be merged to provide flexibility for multiple schedules.<br>
   e.g. `lt/MON-15:00-17:00` and `lt/MON-16:00-18:00` will remain as separate entries.
 
 * During comparison, addresses, task descriptions and notes with multiple spaces are treated as if they contain a single space, and comparison is not case-sensitive.<br>
-  e.g. `nt/Test  1` and `nt/  TeST 1` are treated as the same.
+  e.g. `nt/Test  1` and `nt/  TeST 1` are treated as the same.
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/MATH` or as `n/John Doe`.
@@ -446,7 +448,10 @@ Exits EduManage.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Names** with `/` are not allowed as `/` is reserved for internal use. As such, valid names such as `Aditi D/O Ramesh` will be considered invalid. To work around this issue, we recommend simply omitting the `/` (e.g. `Aditi DO Ramesh`).
+3. **Names** with special characters such as `/` and `,` are not allowed. As such, valid names such as `Aditi D/O Ramesh`
+    and `Tan Jun Wei, Justin` will be considered invalid. To work around this issue, we recommend simply omitting the
+    special character(s) (e.g. `Aditi DO Ramesh`, `Tan Jun Wei Justin`). This restriction does not apply for less restrictive
+    parameters, such as task description and note.
 
 [(Back to Top)](#edumanage-user-guide)
 
