@@ -26,13 +26,12 @@
    1. [Appendix: Requirements](#appendix-requirements)
    2. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
    3. [Appendix: Efforts](#appendix-efforts)
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 --------------------------------------------------------------------------------------------------------------------
 
