@@ -267,6 +267,11 @@ Adds a patient's details to the system.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tags as `Diabetic` to the system.
+
+Expected output:
+```
+New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+```
 <br></br>
 
 #### 6.2.2 Listing all patients: `list`
@@ -277,6 +282,11 @@ Shows a list of all patients in the system.
 
 Example:
 * `list` lists and displays all the patients in the system.
+
+Expected output:
+```
+Listed all persons
+```
 <br></br>
 
 #### 6.2.3 Editing a patient: `edit`
@@ -299,6 +309,12 @@ Edits an existing patient's details in the system.
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+
+Expected output:
+```
+Edited Person: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+Edited Person: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
+```
 <br></br>
 
 #### 6.2.4 Locating patients by name: `find`
@@ -342,6 +358,11 @@ Deletes the specified patient and tasks associated to that patient from the syst
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the system.
 * `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
+
+Expected output:
+```
+Deleted Person: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+```
 <br></br>
 
 #### 6.2.6 Adding emergency contact: `emergency`
@@ -360,6 +381,11 @@ Adds an emergency contact and details to a patient in the system.
 
 Example:
 * `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
+
+Expected output:
+```
+Added emergency contact to John Doe: Tom Tan, 91237171
+```
 <br></br>
 
 #### 6.2.7 Deleting emergency contact: `deleteemergency`
@@ -378,6 +404,11 @@ Deletes an emergency contact and its details from a patient in the system.
 
 Example:
 * `deleteemergency 1` deletes the emergency contact of the 1st-indexed patient in the patient list.
+
+Expected output:
+```
+Removed emergency contact (Tom Tan, 91237171) from John Doe
+```
 <br></br>
 
 #### 6.2.8 Adding priority level: `priority`
@@ -397,6 +428,11 @@ Adds a priority level to a patient in the system.
 
 Example:
 * `priority 1 l/2` adds priority level `2` to 1st-indexed patient in the patient list.
+
+Expected output:
+```
+Priority level 2 successfully set for John Doe
+```
 <br></br>
 
 #### 6.2.9 Deleting priority level: `deletelevel`
@@ -410,12 +446,17 @@ Delete a priority level to a patient in the system, resetting it to the default 
 **Note:**
 * Delete the current priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​.
 </box>
 
 Examples:
 * `deletelevel 1` deletes priority level of the 1st-indexed patient in the patient list.
-* `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3S.
+* `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3.
+
+Expected output:
+```
+Priority level reset to default for John Doe
+```
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -440,9 +481,17 @@ Adds a task to a patient in the system.
 Examples:
 * `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in the system.
 * `find John doe` followed by `addtask 1 d/Clear diapers` adds a task `Clear diapers` to the 1st-indexed patient in the resultant list produced from the `find` command.
-<br></br>
-  ![Patient List](images/PersonListExample.png)
-  ![Task List](images/TaskListExample.png)
+
+Expected output:
+```
+Listed all persons
+New task added: Eat paracetamol 1000mg
+```
+Expected output:
+```
+New task added: Clear diapers
+```
+
 <br></br>
 
 #### 6.3.2 Deleting a task: `deletetask`
@@ -461,6 +510,11 @@ Deletes a task for a patient in the system.
 
 Example:
 * `deletetask 1` deletes the 1st-indexed task in the task list.
+
+Expected output:
+```
+Deleted Task: Eat paracetamol 1000mg for Betsy Crower
+```
 <br></br>
 
 #### 6.3.3 Marking a Task: `marktask`
@@ -479,6 +533,11 @@ Marks a task at a specific index.
 
 Example:
 * `marktask 1` marks the 1st-indexed task in the task list as `Complete`.
+
+Expected output:
+```
+Marked task as complete: Clear diapers for John Doe
+```
 <br></br>
 
 #### 6.3.4 Unmarking a Task: `unmarktask`
@@ -497,7 +556,12 @@ Unmarks a task at a specific index.
 
 Example:
 * `unmarktask 1` marks the 1st-indexed task in the task list as `Incomplete`.
-  <br></br>
+
+Expected output:
+```
+Marked task as incomplete: Clear diapers for John Doe
+```
+<br></br>
 
 #### 6.3.5 Finding a Task: `findtask`
 
@@ -506,7 +570,12 @@ Finds all task for a particular patient specific index.
 :pencil: Format: `findtask INDEX`
 
 Example:
-* `findtask1 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
+* `findtask 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
+
+Expected output:
+```
+1 tasks listed!
+```
 <br></br>
 
 #### 6.3.6 Listing Tasks: `listtask`
@@ -517,6 +586,11 @@ List all tasks for all patients in the system.
 
 Example:
 * `listtask` lists and displays all tasks in the system.
+
+Expected output:
+```
+Listed all tasks
+```
 <br></br>
 
 #### 6.3.7 Listing Incomplete Tasks: `listincomplete`
@@ -527,6 +601,11 @@ List all incomplete tasks for all patients in the system.
 
 Example:
 * `listincomplete` lists and displays all incomplete tasks in the system.
+
+Expected output:
+```
+Listed all incomplete tasks
+```
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -568,6 +647,11 @@ Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
 
 Example:
 * `clear` clears all available data in NovaCare, both patients and tasks.
+
+Expected output:
+```
+Address book has been cleared!
+```
 <br></br>
 
 #### 6.4.3 Exiting the program: `exit`
@@ -578,6 +662,8 @@ Exits the program.
 
 Example:
 * `exit` automatically saves and exit NovaCare.
+
+Expected output: NovaCare will automatically close the window.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
