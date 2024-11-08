@@ -66,6 +66,8 @@ Welcome to MATER, a **desktop app designed for efficient management of client an
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
+
 ---
 
 ### **Why MATER?**
@@ -76,7 +78,6 @@ Modern car workshops often face a variety of operational challenges:
 - **Slow task execution**: Traditional systems require multiple clicks and navigation steps, slowing down workshop efficiency.
 
 
-
 ### **Our Solution**
 
 MATER was designed to address these challenges directly:
@@ -85,6 +86,7 @@ MATER was designed to address these challenges directly:
 - **Reliable data tracking**: Track issues and maintenance details with consistency, ensuring no information is lost and that clients receive high-quality service.
 
 
+<div style="page-break-after: always;"></div>
 
 ### **Product Overview**
 
@@ -96,7 +98,6 @@ MATER offers a feature-rich platform with the following capabilities:
 - **Automatic Data Storage**: MATER saves all data automatically, minimising the risk of accidental data loss.
 
 
-
 ### **User Base**
 
 MATER is designed for **small to medium-sized car workshop managers** and their team members who:
@@ -106,9 +107,8 @@ MATER is designed for **small to medium-sized car workshop managers** and their 
 Whether you're a workshop owner, a mechanic, or an administrative staff member responsible for managing records, MATER empowers you to achieve efficient, accurate, and consistent data handling with ease.
 
 
+
 --------------------------------------------------------------------------------------------------------------------
-
-
 
 <h2 style="color: #28B463;"> <i class="fas fa-rocket icon"></i> Quick Start</h2>
 
@@ -152,6 +152,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
    For more details on what MATER can do, scroll down to the [Features](#features) section of this guide to explore additional commands and features.
 
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 <h2 style="color: #AF7AC5;" id="glossary"> <i class="fas fa-list-alt icon"></i> Glossary</h2>
@@ -180,7 +181,11 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 - **Field:** An individual piece of data associated with a client or car (e.g., name, phone number, VIN).
 - **Optional Field:** A parameter in a command that is not required but can be provided to include additional information. Denoted by square brackets `[]` in command formats.
 
+
+
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 <h2 id="features" style="color: #000000;"> <i class="fas fa-cogs icon"></i> Features</h2>
 
@@ -218,7 +223,10 @@ Shows a message explaining how to access the help page.
 
 <img src="images/helpMessage.png" alt="help message" width="500" height="300">
 
+
 ---
+
+<div style="page-break-after: always;"></div>
 
 <h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
@@ -232,21 +240,21 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 **Parameters:**
 
-| Parameter         | Requirements                                                                                                                                                                            | Explanation                                       |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| `n/NAME`          | Required; Must alphanumeric and be at most 40 characters; Must be unique                                                                                                                | Client's name.                                    |
-| `p/PHONE_NUMBER`  | Required; Must be between 3 and 15 digits                                                                                                                                               | Client's phone number.                            |
-| `e/EMAIL`         | Required                                                                                                                                                                                | Client's email address.                           |
-| `a/ADDRESS`       | Required; Must be at most 80 characters                                                                                                                                                 | Client's address.                                 |
-| `vrn/CAR_VRN`     | Optional; Required if adding a car; Must follow the [VRN format](#glossary) and be unique                                                                                               | Car's [Vehicle Registration Number](#glossary).   |
-| `vin/CAR_VIN`     | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string                                                                                                   | Car's [Vehicle Identification Number](#glossary). |
-| `make/CAR_MAKE`   | Optional; Required if adding a car; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                          | Car's make.                                       |
-| `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                       | Car's model.                                      |
-| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters)  | Issue(s) associated with the car.                 |
+| Parameter         | Requirements                                                                                                                                                                           | Explanation                                       |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| `n/NAME`          | Required; Must alphanumeric and be at most 40 characters; Must be unique                                                                                                               | Client's name.                                    |
+| `p/PHONE_NUMBER`  | Required; Must be between 3 and 15 digits                                                                                                                                              | Client's phone number.                            |
+| `e/EMAIL`         | Required                                                                                                                                                                               | Client's email address.                           |
+| `a/ADDRESS`       | Required; Must be at most 80 characters                                                                                                                                                | Client's address.                                 |
+| `vrn/CAR_VRN`     | Optional; Required if adding a car; Must follow the [VRN format](#glossary), be valid and unique                                                                                       | Car's [Vehicle Registration Number](#glossary).   |
+| `vin/CAR_VIN`     | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string                                                                                                  | Car's [Vehicle Identification Number](#glossary). |
+| `make/CAR_MAKE`   | Optional; Required if adding a car; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                         | Car's make.                                       |
+| `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                      | Car's model.                                      |
+| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.                 |
 
 **Notes:**
 
-- If adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided.
+- If adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided. `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
 - If the client does not have a car, these fields should be omitted completely.
 
 <box type="tip" seamless>
@@ -263,7 +271,10 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 - `add-client n/Turritopsis Dohrnii p/98889888 e/turritopsis@gmail.com a/Block 450 Clementi Ave 3 #14-20 Singapore 120450`
 - `add-client n/Mai Dang Lao p/96965888 e/maidanglao@mcd.com a/9 Sentul Cres #03-05 Singapore 828654 vrn/SJH9514P vin/MIT45678901234567 make/Mitsubishi model/Lancer i/Engine i/Gearbox`
 
+
 ---
+
+<div style="page-break-after: always;"></div>
 
 <h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-client</span></h3>
 
@@ -292,6 +303,7 @@ del-client INDEX
 - `del-client 3`<br>
   Deletes the 3rd client in MATER.
 
+
 ---
 
 <h3 style="color: #1877F2;">Adding a Car to a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-car</span></h3>
@@ -309,20 +321,24 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 | Parameter         | Requirements                                                                                            | Explanation                                                        |
 |-------------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
 | `INDEX`           | Required; Must be a positive integer                                                                    | The [Index](#glossary) of the client in the displayed client list. |
-| `vrn/CAR_VRN`     | Required; Must follow the [VRN format](#glossary) and be unique                                         | Car's [Vehicle Registration Number](#glossary).                    |
+| `vrn/CAR_VRN`     | Required; Must follow the [VRN format](#glossary), be valid and unique                                  | Car's [Vehicle Registration Number](#glossary).                    |
 | `vin/CAR_VIN`     | Required; Must be a unique 17-character alphanumeric string                                             | Car's [Vehicle Identification Number](#glossary).                  |
 | `make/CAR_MAKE`   | Required; First letter must be capitalised; Must be at most 40 characters; No spaces                    | Car's make.                                                        |
 | `model/CAR_MODEL` | Required; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces | Car's model.                                                       |
 
 **Notes:**
 
+- `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
 - The client must not already have a car.
 
 **Examples:**
 
 - `add-car 1 vrn/SJH9514P vin/KMH45678901234567 make/Toyota model/Corolla`
 
+
 ---
+
+<div style="page-break-after: always;"></div>
 
 <h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-car</span></h3>
 
@@ -350,6 +366,7 @@ del-car INDEX
 
 - `del-car 1`
 
+
 ---
 
 <h3 style="color: #1877F2;">Editing a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">edit</span></h3>
@@ -371,7 +388,7 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] 
 | `p/PHONE`         | Optional; Must be between 3 and 15 digits                                                                                                                                              | New phone number of the client.                                     |   
 | `e/EMAIL`         | Optional                                                                                                                                                                               | New email address of the client.                                    |
 | `a/ADDRESS`       | Optional; Must be at most 80 characters                                                                                                                                                | New address of the client.                                          |
-| `vrn/CAR_VRN`     | Optional; Must follow [VRN format](#glossary) and be unique                                                                                                                            | New [Vehicle Registration Number](#glossary) of the client's car.   |
+| `vrn/CAR_VRN`     | Optional; Must follow [VRN format](#glossary), be valid and be unique                                                                                                                  | New [Vehicle Registration Number](#glossary) of the client's car.   |
 | `vin/CAR_VIN`     | Optional; Must be a unique 17-character alphanumeric string                                                                                                                            | New [Vehicle Identification Number](#glossary) of the client's car. |
 | `make/CAR_MAKE`   | Optional; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                                                   | New make of the client's car.                                       |
 | `model/CAR_MODEL` | Optional; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                                                | New model of the client's car.                                      |
@@ -425,6 +442,7 @@ check INDEX
 The following image is the result of executing `check 1`.
 
 <img src="images/checkResult.png" alt="Result for 'check 1'" width="500" height="330">
+
 
 ---
 
@@ -484,6 +502,7 @@ The following image is the result of executing `find Jason SJH9514P`.
 
 <img src="images/findResult.png" alt="Result for 'find Jason SJH9514P'" width="500" height="330">
 
+
 ---
 
 <h3 style="color: #1877F2;">Getting Client's Details: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">view</span></h3>
@@ -520,6 +539,7 @@ The `correct as of` timestamp at the top right corner of the `view` window shows
 
 </box>
 
+
 ---
 
 <h3 style="color: #1877F2;">Clearing All Entries: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">clear</span></h3>
@@ -543,6 +563,7 @@ clear
 | Parameter | Requirements | Explanation                              |
 |-----------|--------------|------------------------------------------|
 | *(None)*  | *(None)*     | The `clear` command takes no parameters. |
+
 
 ---
 
@@ -568,6 +589,8 @@ exit
 
 MATER's data is saved automatically in the hard disk after any command that changes its data. There is no need to save data manually.
 
+
+
 ---
 
 <h3 style="color: #1877F2;">Editing the Data File</h3>
@@ -583,6 +606,8 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 
 </box>
 
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 <h2 style="color: #8E44AD;"> <i class="fas fa-question-circle icon"></i>  FAQ</h2>
@@ -595,6 +620,8 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 
 **Q**: Can I undo a command?<br>
 **A**: No, MATER does not support undoing commands. Please double-check your commands before executing them.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
