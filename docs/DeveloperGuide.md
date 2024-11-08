@@ -340,6 +340,25 @@ Step 5. The user executes `unassign-task 1 1` to assign the `Task` at index 1 of
 Step 6. The user executes `delete-task 1 ` to delete the `Task` at index 1 of the `Task List` from the WedLinker.
 
 ### Switch Views
+WedLinker features a split-view interface designed to display different lists side by side. The left side of the screen consistently shows the `Person List`, while the right side dynamically displays one of the following lists based on user input: `Wedding List`, `Task List`, or `Tag List`.
+This functionality is managed through an enumeration that defines the available views: `WEDDING`, `TASK`, and `TAG`. The system switches between these views based on the user's actions, ensuring a flexible and intuitive user experience.
+
+
+`View` supports the following functions: 
+`List Weddings` —  displays a list of all weddings.
+`List Tasks` —  displays a list of all tasks.
+`List Tags` —  displays a list of all tags.
+
+Given below is an example usage scenario and how Tasks are used in WedLinker.
+
+Step 1. The user launches the application, `Weddings`, `Tasks` and `Tags` are loaded into the `Model`.
+
+Step 2. The user executes `list-weddings`. WedLinker display a list of all `Weddings` on the right half of the screen.
+
+Step 3. The user executes `list-tasks`. WedLinker display a list of all `Tasks` on the right half of the screen.
+
+Step 4. The user executes `list-tags`. WedLinker display a list of all `Tags` on the right half of the screen.
+
 
 #### Design considerations:
 
