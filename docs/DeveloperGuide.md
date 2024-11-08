@@ -112,7 +112,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="700", height="650"/>
+<puml src="diagrams/ParserClasses.puml" width="700" height="650" />
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddGuestCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddGuestCommand`) which the `AddressBookParser` returns back as a `Command` object.
