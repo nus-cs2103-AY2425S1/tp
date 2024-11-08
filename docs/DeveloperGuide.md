@@ -669,11 +669,11 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `sort name`<br>
         **Expected**: All the persons in EduConnect are sorted by their name in alphabetical order.
    3. Test case: `sort subject`<br>
-      **Expected**: All the persons in EduConnect are sorted by their subjects in alphabetical order.
+      **Expected**: All the persons in EduConnect are sorted by their first subject in their list in alphabetical order.
    4. Test case: `sort class`<br>
-      **Expected**: All the persons in EduConnect are sorted by their classes in alphabetical order.
+      **Expected**: All the persons in EduConnect are sorted by their first class in their list in alphabetical order.
    5. Test case: `sort attendance`<br>
-      **Expected**: All the persons in EduConnect are sorted by their attendance in alphabetical order. Teachers (who don't have attendance) are pushed to the end.
+      **Expected**: All the persons in EduConnect are sorted by their attendance in descending order. Teachers (who don't have attendance) are pushed to the end.
    6. Test case: `sort x` (where x is some random input that isn't any of the earlier test cases)<br>
         **Expected**: EduConnect is not sorted. Error details shown in the status message.
 2. Sorting EduConnect while only some persons are shown
