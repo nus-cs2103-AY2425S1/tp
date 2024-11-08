@@ -41,9 +41,12 @@ public class Messages {
                 .append("; Telegram: ")
                 .append(member.getTelegram())
                 .append("; Room: ")
-                .append(member.getRoom())
-                .append("; Tags: ");
-        member.getTags().forEach(builder::append);
+                .append(member.getRoom());
+        // Avoid display errors since Tag optional
+        if (member.getTags().size() > 0) {
+            builder.append("; Tags: ");
+            member.getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
 

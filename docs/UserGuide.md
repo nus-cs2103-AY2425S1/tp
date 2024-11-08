@@ -112,7 +112,7 @@ Format: `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HA
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When updating tags, the existing tags of the member will be removed i.e adding of tags is not cumulative.
-- You can remove all the member’s tags by typing `t/` without
+- You can remove all the member’s tags by typing `tag/` without
   specifying any tags after it.
 
 Examples:
@@ -181,6 +181,7 @@ Format: `find_sessions KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Members matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- The search does not care if the member is currently displayed.
 
 Examples:
 
