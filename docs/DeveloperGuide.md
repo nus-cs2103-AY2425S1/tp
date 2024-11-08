@@ -1,7 +1,7 @@
 ---
-    layout: default.md
-      title: "Developer Guide"
-      pageNav: 3
+  layout: default.md
+  title: "Developer guide"
+  pageNav: 3
 ---
 
 # WedLinker Developer Guide
@@ -225,10 +225,10 @@ This section describes some noteworthy details on how certain features are imple
 
 The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
 The force feature is applicable for the following commands:
-* `tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
-* `delete-tag`: This unassigns the target `Tag` from all contacts before deleting it.
-* `assign-wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
-* `delete-wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
+* `Tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
+* `Delete Tag`: This unassigns the target `Tag` from all contacts before deleting it.
+* `Assign Wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
+* `Delete Wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
 
 The force functionality can be used with the above functions by including f/ at the end of the command.
 
@@ -278,8 +278,8 @@ Step 8. The user executes `delete-wedding w/Test Wedding 2`. WedLinker would del
 Wedding supports the force functionality for easier usage.
 
 Force is supported for the following functions:
-- `assign-wedding` (Creates the Wedding if it does not already exist in WedLinker.)
-- `delete-wedding` (Unassigns all Person from the Wedding before it is deleted.)
+- `Assign Wedding` (Creates the Wedding if it does not already exist in WedLinker.)
+- `Delete Wedding` (Unassigns all Person from the Wedding before it is deleted.)
 </box>
 
 <box type="info" seamless>
@@ -291,7 +291,7 @@ Known bugs:
 
 #### Implementation
 
-The Vendor Feature allows users to track which contacts are Vendors and assign tasks to them. Only Vendors can be assigned tasks.
+The `Vendor` Feature allows users to track which `Person` are `Vendors` and assign `Tasks` to them. Only `Vendors` can be assigned `Tasks`.
 Vendor would support the following functions:
 
 * `Assign Vendor` — Assigns an existing `Person` in WedLinker to become a `Vendor`. 
@@ -307,6 +307,21 @@ Step 3. The user executes `unassign-vendor 1` to unassign the `Vendor` to become
 
 ### Task
 
+The `Task` Feature allows users to track `Tasks` when planning for a Wedding. `Tasks` can only be assigned to `Vendors`.
+There are different types of `Task` to support different requirements for the users.
+
+`Task` type: `Todo`
+`Todo` is the simplest kind of `Task` which has a description to provide information about the `Task`.
+
+`Task` type: `Deadline`
+`Deadline` is a type of `Task` which has a description to provide information and supports a due `Date`.
+
+`Task` type: `Event`
+`Event` is a type of `Task` which has a description to provide information and supports a start and end `Date`.
+
+`Task` supports the following functions:
+* `
+*
 ### Switch Views
 
 #### Design considerations:
