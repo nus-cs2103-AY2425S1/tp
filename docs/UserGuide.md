@@ -123,7 +123,7 @@ Adds a student to T_Assistant.
 
 ##### Notes
 
-1. `Student Number` is the unique identifier for each student, so no 2 students can have the same student number.
+1. `Student Number` is the unique identifier for each student, so no two students can have the same student number.
 2. `Tags` are case-insensitive, so `T1` and `t1` will be recognised as the same tags. T_Assistant will add the first
    instance of the repeated tag.
 3. For information on the constraints for each parameter used in this command, go
