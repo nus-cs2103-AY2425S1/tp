@@ -439,7 +439,7 @@ Commands for managing appointments between user and clients.
     - **Description:** Schedules a new appointment to be held with the specified client that includes the specified details (date, time).<br>
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob`
+      > **Use Case #1**: Adding appointment `8th October 2024 7pm to 9pm` for client `Bob` (Assuming displayed index is 1)
       >
       > **Input**: `apt 1 d/08-10-24 fr/1900 to/2100`
       >
@@ -486,7 +486,7 @@ Commands for managing appointments between user and clients.
     - **Description:** Deletes an appointment with the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case**: Deleting appointment for `Bob`
+      > **Use Case**: Deleting appointment for `Bob` (Assuming displayed index is 1)
       >
       > **Input**: `delapt 1`
       >
