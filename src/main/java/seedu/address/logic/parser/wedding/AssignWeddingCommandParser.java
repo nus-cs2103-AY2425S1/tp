@@ -42,20 +42,22 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
         Index index;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignWeddingCommand.MESSAGE_USAGE));
         }
 
         try {
             // Parse the index from the preamble
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE),
-                    ive);
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignWeddingCommand.MESSAGE_USAGE), ive);
         }
 
         List<String> weddingValues = argMultimap.getAllValues(PREFIX_WEDDING);
         if (weddingValues.isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AssignWeddingCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignWeddingCommand.MESSAGE_USAGE));
         }
 
         // Checks that all weddings have valid names
