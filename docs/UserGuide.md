@@ -37,7 +37,7 @@ simpler to use while being even more functional than alternatives on the market.
 * [Tag Table](#tag-table)
 * [Glossary](#glossary)
     * [Property Tags](#property-tags)
-    * [client Tags](#client-tags)
+    * [Client Tags](#client-tags)
 
 --------------------------------------------------------------------------------------------------------------------
 
