@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Room {
 
-    public static final String MESSAGE_CONSTRAINTS = "Room should be in the format block-floor-room number.\n"
+    public static final String MESSAGE_CONSTRAINTS = "Room must be in the format block-floor-room number.\n"
             + "Example: 10-3-100\n"
             + "Unfortunately, non-numeric block or room numbers are currently unsupported.";
 
