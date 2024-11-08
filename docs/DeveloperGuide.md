@@ -307,9 +307,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User inputs the command to add a patient's contact details.
 2. System validates the input fields.
 3. System check to confirm patient does not exist.
-4. System adds the patient's contact details to the contact list.
-5. System displays a success message.
-6. System updates the contact list to reflect the new entry.
+4. System confirms the addition with the user.
+5. System adds the patient's contact details to the contact list.
+6. System displays a success message.
+7. System updates the contact list to reflect the new entry.
 
 Use case ends.
 
@@ -323,11 +324,17 @@ Use case ends.
         Steps 2a1-2a3 are repeated until the data entered are correct.
         Use case resumes from step 3.
 
-* 3a. Patient exists in contact details
+* 3a. Patient does not exist in contact details
 
     * 3a1. System display an error message.
 
         Use case ends.
+
+* 4a. User does not confirm addition
+
+    * 4a1. System display a message indicating that the addition was canceled.
+
+      Use case ends.
 
 **Use case: U02 Delete Patient Detail**
 
@@ -365,36 +372,7 @@ Use case ends.
 
       Use case ends.
 
-**Use case: U03 Add Patient risk**
-
-**MSS**
-
-1. User inputs the command to add a risk level to patient.
-2. System validates the input fields.
-3. System check to confirm patient exist.
-4. System adds the risk level to patient in the patient's contact.
-5. System displays a success message.
-6. System updates the contact list to reflect the new input.
-
-Use case ends.
-
-**Extensions**
-
-* 2a. The input fields are invalid
-    * 2a1. System display an error message.
-    * 2a2. System request for correct data.
-    * 2a3. User enters new data.
-
-      Steps 2a1-2a3 are repeated until the data entered are correct.
-      Use case resumes from step 3.
-
-* 3a. Patient does not exist in contact details
-
-    * 3a1. System display an error message.
-
-      Use case ends.
-
-**Use case: U04 Add Session Log**
+**Use case: U03 Add Session Log**
 
 **MSS**
 
@@ -423,6 +401,42 @@ Use case ends.
 
       Use case ends.
 
+**Use case: U04 Edit Patient Detail**
+
+**MSS**
+
+1. User inputs the command to edit a patient's contact details.
+2. System validates the input fields.
+3. System check to confirm patient exist.
+4. System confirms the edit with the user.
+5. System edits the patient's contact details in the contact list.
+6. System displays a success message.
+7. System updates the contact list to reflect the edited patient.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The input fields are invalid
+    * 2a1. System display an error message.
+    * 2a2. System request for correct data.
+    * 2a3. User enters new data.
+
+      Steps 2a1-2a3 are repeated until the data entered are correct.
+      Use case resumes from step 3.
+
+* 3a. Patient does not exist in contact details
+
+    * 3a1. System display an error message.
+
+      Use case ends.
+
+* 4a. User does not confirm edit
+
+    * 4a1. System display a message indicating that the edit was canceled.
+
+      Use case ends.
+  
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.

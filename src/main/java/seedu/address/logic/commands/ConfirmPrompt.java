@@ -24,7 +24,9 @@ public class ConfirmPrompt extends Command {
         savedCommand.validateInput(model);
         model.setSavedCommand(savedCommand);
 
-        return new CommandResult(MESSAGE_CONFIRM_PROMPT, false, false, true, false,
+        String resultString = MESSAGE_CONFIRM_PROMPT + "\nOperation: " + savedCommand;
+
+        return new CommandResult(resultString, false, false, true, false,
                 -1, false, null, null, null);
     }
 
@@ -37,5 +39,10 @@ public class ConfirmPrompt extends Command {
             return false;
         }
         return savedCommand.equals(otherConfirmPrompt.savedCommand);
+    }
+
+    @Override
+    public String toString() {
+        return "Confirmation prompt of: " + savedCommand.toString();
     }
 }

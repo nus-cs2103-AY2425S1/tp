@@ -164,8 +164,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * For Names:
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * For NRIC:
-* Only the Full NRIC will be matched .e.g `S123` will not match `S1234567J`.
-* Patients matching at least one keyword will be returned (i.e. `OR` search).
+* Only the Full NRIC will be matched .e.g `S123` will not match `S1234567D`.
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -185,8 +185,8 @@ Format: `delete INDEX` or `delete i/IDENTITY_NUMBER`
 * **After using `delete`, type `confirm` to complete the deletion**. You can also use `cancel` if you change your mind.
 
 Examples:
-* `delete i/SS2202473F` deletes the patient with NRIC S2202473F in the app.
-* `list` followed by `delete 2` deletes the 2nd patient in the app.
+* `delete i/S1234567D` deletes the patient with NRIC S1234567D in the address book.
+* `list` followed by `delete 2` deletes the 2nd patient in MindMap.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -329,7 +329,7 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
 | **List**      | Lists all patients in the MindMap    | `list`                                                                    |                                                                                      |
 | **List Logs** | Lists logs for a specific patient    | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                   |
 | **Add Log**   | Adds a log for a patient             | `addlog i/NRIC d/DATE l/LOG_ENTRY`                                        | `addlog i/S8613282F d/01 Nov 2024 l/Checked in at clinic`                            |
-| **Add Entry** | Adds a log entry via a second window | `addentry i/NRIC d/DATE`                                                  | `addentry i/S0000001i d/01 Nov 2024`                                                 |
+| **Add Entry** | Adds a log entry via a second window | `addentry i/NRIC d/DATE`                                                  | `addentry i/S8613282F d/01 Nov 2024`                                                 |
 | **Help**      | Displays help message                | `help`                                                                    |                                                                                      |
 
 

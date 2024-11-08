@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 /**
  * Represents a Status in the address book.
  * Guarantees: immutable; value is valid as declared in {@link StatusType}
@@ -59,7 +61,7 @@ public class Status {
         }
 
         Status otherStatus = (Status) other;
-        return statusType == otherStatus.statusType;
+        return Objects.equals(statusType, otherStatus.statusType);
     }
 
     @Override
