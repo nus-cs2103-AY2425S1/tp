@@ -9,29 +9,29 @@ title: User Guide
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    - [Viewing Help: `help`](#viewing-help--help)
-    - [Adding a Person: `add`](#adding-a-person-add)
-    - [Linking a Patient and a Caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
-    - [Deleting a Link Between Patient and Caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
-    - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
-    - [Listing All Persons: `list`](#listing-all-persons--list)
-    - [Editing a Person: `edit`](#editing-a-person--edit)
-    - [Locating Persons by Name, NRIC, Role, or Tags: `find`](#locating-persons-by-name-nric-role-or-tags-find)
-    - [Managing Appointments](#managing-appointments)
-        - [Adding an Appointment: `addapp`](#adding-an-appointment-addapp)
-        - [Editing an Appointment: `editapp`](#editing-an-appointment-editapp)
-        - [Deleting an Appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
-        - [Locating Appointments by Date-Time Range: `findapp`](#locating-appointments-by-date-time-range-findapp)
-    - [Deleting a Person: `delete`](#deleting-a-person--delete)
-    - [Clearing All Entries: `clear confirm`](#clearing-all-entries-clear-confirm)
-    - [Exiting the Program: `exit`](#exiting-the-program--exit)
-    - [Saving the Data](#saving-the-data)
-    - [Editing the Data File](#editing-the-data-file)
-    - [Archiving Data Files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+  - [Viewing Help: `help`](#viewing-help--help)
+  - [Adding a Person: `add`](#adding-a-person-add)
+  - [Linking a Patient and a Caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
+  - [Deleting a Link Between Patient and Caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
+  - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
+  - [Listing All Persons: `list`](#listing-all-persons--list)
+  - [Editing a Person: `edit`](#editing-a-person--edit)
+  - [Locating Persons by Name, NRIC, Role, or Tags: `find`](#locating-persons-by-name-nric-role-or-tags-find)
+  - [Managing Appointments](#managing-appointments)
+    - [Adding an Appointment: `addapp`](#adding-an-appointment-addapp)
+    - [Editing an Appointment: `editapp`](#editing-an-appointment-editapp)
+    - [Updating the Status of an Appointment: `updatestatus`](#updating-status-of-an-appointment-updatestatus)
+    - [Deleting an Appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
+    - [Locating Appointments by Date-Time Range: `findapp`](#locating-appointments-by-date-time-range-findapp)
+  - [Deleting a Person: `delete`](#deleting-a-person--delete)
+  - [Clearing All Entries: `clear confirm`](#clearing-all-entries-clear-confirm)
+  - [Exiting the Program: `exit`](#exiting-the-program--exit)
+  - [Saving the Data](#saving-the-data)
+  - [Editing the Data File](#editing-the-data-file)
+  - [Archiving Data Files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
-
 
 CareLink is a desktop address book application targeted towards independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
 
@@ -231,6 +231,7 @@ Once the command succeeds, the persons found will be displayed providing compreh
 ![Find command success](images/findcommandsucceed.png)
 
 ### Managing Appointments
+
 #### Adding an appointment: `addapp`
 
 Adds an appointment for a person in CareLink.
@@ -268,7 +269,7 @@ Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_T
 - The `NRIC` must belong to a person already in CareLink
 - `DATE` must be in the format DD/MM/YYYY (e.g 01/01/2025)
 - `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g 14:30)
-The edited appointment follows the same rules as add appointment:
+  The edited appointment follows the same rules as add appointment:
   - Start time must be before end time
   - Appointment must be in the future
   - Must not overlap with existing appointments
@@ -287,6 +288,32 @@ Common errors and their meanings:
 - `Start time must be in the future` - Can't schedule appointments in the past
 - `An appointment already exists at this date and time` - The person or another person already has an appointment that overlaps with this time slot
 
+#### Updating Status of an appointment: `updatestatus`
+
+Updates the status of an existing appointment. The status can be `PENDING` or `COMPLETED`.
+
+Format: `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS`
+
+- The `NRIC` must belong to a person with an existing appointment
+- `DATE` must be in the format DD/MM/YYYY (e.g 01/01/2025)
+- `START_TIME` must be in 24-hour format HH:MM (e.g 14:30)
+- The `STATUS` must be either `PENDING` or `COMPLETED`. It is case insensistive.
+- The appointment must exist at the specified date and time for the person
+
+Examples:
+
+- `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 1st, 2025 at 10:00
+- `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/pending` updates the status to pending for the appointment on January 1st, 2025 at 10:00
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+To change the status of an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
+</div>
+
+- `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
+- `Invalid date` - Make sure to use DD/MM/YYYY format (e.g. 01/01/2025)
+- `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g. 14:30)
+- `This appointment does not exist in CareLink` - There is no appointment at the specified date and time for this person
+- `Status should only be 'COMPLETED' or 'PENDING'` - The status can only take in 2 options, completed or pending.
 
 #### Deleting an appointment: `deleteapp`
 
@@ -364,14 +391,14 @@ Clears all entries from the address book after receiving confirmation.
 
 **Format**: `clear confirm`
 
-* You must type `confirm` explicitly to execute this command. Any other input will not clear the address book.
+- You must type `confirm` explicitly to execute this command. Any other input will not clear the address book.
 
 **Example**:
-- `clear confirm` clears all entries from the address book.
-![result for 'clear confirm'](images/clearconfirm.png)
-- `clear` without `confirm` will prompt the user to include the confirmation keyword.
-![result for 'clear'](images/clear.png)
 
+- `clear confirm` clears all entries from the address book.
+  ![result for 'clear confirm'](images/clearconfirm.png)
+- `clear` without `confirm` will prompt the user to include the confirmation keyword.
+  ![result for 'clear'](images/clear.png)
 
 ### Exiting the program : `exit`
 
@@ -414,19 +441,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action               | Format, Examples                                                                                                                                                     |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Link**             | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                          |
-| **Deletelink**       | `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `deletelink patient/S6283947C caregiver/S6382947A`                                              |
-| **Addnote**          | `addnote nric/NRIC note/NOTES` <br> e.g. `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`                                                      |
-| **Clear**            | `clear`                                                                                                                                                              |
-| **Delete**           | `delete NRIC`<br> e.g `delete S6483749D`                                                                                                                           |
-| **Edit**             | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g`edit S1234567D n/James Lee e/jameslee@example.com`                                   |
-| **Find**             | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g `find n/Alex nric/S1234567D`                                                                            |
-| **Find Appointment** | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`          |
-| **Add Appointment** | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`|
-| **Edit Appointment** | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00`|
-| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g `deleteapp nric/S9876543B d/15/03/2025 start/14:30`|
-| **List**             | `list`                                                                                                                                                               |
-| **Help**             | `help`                                                                                                                                                               |
+| Action                 | Format, Examples                                                                                                                                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                              |
+| **Link**               | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                                                                     |
+| **Deletelink**         | `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `deletelink patient/S6283947C caregiver/S6382947A`                                                                                         |
+| **Addnote**            | `addnote nric/NRIC note/NOTES` <br> e.g. `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`                                                                                                 |
+| **Clear**              | `clear`                                                                                                                                                                                                         |
+| **Delete**             | `delete NRIC`<br> e.g `delete S6483749D`                                                                                                                                                                        |
+| **Edit**               | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g`edit S1234567D n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**               | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g `find n/Alex nric/S1234567D`                                                                                                                         |
+| **Find Appointment**   | `findapp [sdate/START_DATE] [start/START_TIME] [edate/END_DATE] [end/END_TIME]`<br> e.g `findapp sdate/01/01/2024 start/10:00 edate/30/10/2024 end/12:00`                                                       |
+| **Add Appointment**    | `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`<br> e.g `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00`                                                                                      |
+| **Edit Appointment**   | `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`<br> e.g `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025 newstart/08:00 newend/09:00` |
+| **Update Appointment** | `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS` <br> e.g `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed`                                                                 |
+| **Delete Appointment** | `deleteapp nric/NRIC d/DATE start/START_TIME`<br> e.g `deleteapp nric/S9876543B d/15/03/2025 start/14:30`                                                                                                       |
+| **List**               | `list`                                                                                                                                                                                                          |
+| **Help**               | `help`                                                                                                                                                                                                          |
