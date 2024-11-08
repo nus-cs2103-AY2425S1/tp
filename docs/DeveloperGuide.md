@@ -430,7 +430,7 @@ PlantUML, the lifeline continues till the end of diagram.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a ...        | I want to...                                  | So that I can...                                    |
-| -------- | --------------- | --------------------------------------------- | --------------------------------------------------- |
+|----------|-----------------|-----------------------------------------------|-----------------------------------------------------|
 | `* * *`  | disorganised TA | mark tasks                                    | keep track of what a group has completed            |
 | `* * *`  | disorganised TA | remove tasks after I wrongly added them       | correct my mistake                                  |
 | `* * *`  | new TA          | add tasks to groups                           | keep track of what task each group has              |
@@ -767,7 +767,7 @@ _{More to be added}_
 ### Glossary
 
 | Key Terms      | Definition                                                   |
-| -------------- | ------------------------------------------------------------ |
+|----------------|--------------------------------------------------------------|
 | Mainstream OS  | Operating Systems (i.e. Windows, Linux, MacOS                |
 | JAR            | Executable file containing Java classes and other resources. |
 | Prefix         | Keyword used in commands to specify the parameter type       |
@@ -809,7 +809,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant
-   
+
     2. Test case: `fs q/Alex Ye`<br>
        Expected: T_Assistant displays `Alex Yeoh` only.
 
@@ -894,10 +894,10 @@ testers are expected to do more _exploratory_ testing.
 
 2. Editing an existing student's name to the same name
 
-   1. Prerequisites: Ran the above test case. 
+    1. Prerequisites: Ran the above test case.
 
-   2. Test case: `es sno/A0597991H sn/Clark Kent`<br>
-      Expected: Error given due to no change detected.
+    2. Test case: `es sno/A0597991H sn/Clark Kent`<br>
+       Expected: Error given due to no change detected.
 
 ### Adding a student(s) to a group
 
@@ -977,7 +977,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant
-   
+
     2. Test case: `fs q/F12`<br>
        Expected: T_Assistant displays `CS2103-F12-1` only.
 
@@ -1083,10 +1083,10 @@ testers are expected to do more _exploratory_ testing.
 ### Editing a group
 
 1. Editing a group's name
-   
+
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant. Run `lg` to see list of groups.
-   
+
     2. Test case: `eg i/1 gn/CS2103-F12-2`<br>
        Expected: `CS2103-F12-1` edited to `CS2130-F12-2`
 
@@ -1096,7 +1096,7 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant
-   
+
     2. Test case: `ft q/post`<br>
        Expected: T_Assistant displays `Add postmortem to team docs` only.
 
@@ -1255,16 +1255,17 @@ testers are expected to do more _exploratory_ testing.
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant. Run `lt gn/CS2103-F12-1` to see list of tasks for `CS2103-F12-1`.
-    
+
     2. Test case: `etg i/1 gn/CS2103-F12-1 tn/Add postmortem to team docs and report`<br>
        Expected: `Add postmortem to team docs` edited to `Add postmortem to team docs and report`
 
 ## Marking a task
+
 1. Marking a group's task
 
     1. Prerequisites: For this test, we shall use one of the groups provided by the sample data. Hence, you should do
        this test on a freshly opened T_Assistant. Run `lt gn/CS2103-F12-1` to see list of tasks for `CS2103-F12-1`.
-   
+
     2. Test case: `mt i/1 gn/CS2103-F12-1`<br>
        Expected: Task at index 1 for `CS2103-F12-1` is updated to `COMPLETED`
 
@@ -1278,7 +1279,7 @@ testers are expected to do more _exploratory_ testing.
        Expected: This command will yield an error message because there is nothing to undo.
 
     1. Test case: `ag cs2103-f13-1`, then `undo`<br>
-       Expected: The add command will add a group which is reflected in the group list. The undo command then restores 
+       Expected: The add command will add a group which is reflected in the group list. The undo command then restores
        the previous data, removing this group. The removal is also reflected in the group list shown to you. After
        executing the command you will be brought back to the default panel of the application, which is the panel
        displaying the student list.
@@ -1294,8 +1295,8 @@ testers are expected to do more _exploratory_ testing.
 
     1. Test case: `ag cs2103-f13-1`, `undo`, then `redo`<br>
        Expected: The add command will add a group which is reflected in the group list. The undo command then restores
-       the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into 
-       the group list shown to you. After executing the command you will be brought back to the default panel of the 
+       the previous data, removing this group. Redoing this will reverse the undo command, bringing the group back into
+       the group list shown to you. After executing the command you will be brought back to the default panel of the
        application, which is the panel displaying the student list.
 
 ---
