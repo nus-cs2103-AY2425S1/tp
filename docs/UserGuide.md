@@ -28,9 +28,9 @@ If you would like to skip to any specific part of the User Guide, you can refer 
 
 <div style="page-break-after: always;"></div>
 
-## 🛠️ Quick Start 🛠️
+## Quick Start 
 
-This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#-quick-start-beginner-friendly-detailed-) or scroll past this section.
+This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-beginner-friendly-detailed) or scroll past this section.
 
 1. Ensure you have Java `17` or above installed in your device.
 
@@ -40,7 +40,7 @@ This section is for users who are experienced in installing and using Java execu
 
 4. Open a command terminal, `cd` into the folder you put the `.jar` file in, and use the `java -jar addressbook.jar` command to run the application.<br><br>
    After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the Operating System (OS) and the presence of data.<br>
-   <img src="images/StartUpPage.png" alt="MacOS Start-Up" style="width: 36%;" />
+   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 36%;" />
    <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -56,11 +56,11 @@ This section is for users who are experienced in installing and using Java execu
 
    * `exit` : Exits the app.
 
-6. That's all for the setup! If you require a more detailed set-up guide, you can scroll down to our [detailed quick start guide](#-quick-start-beginner-friendly-detailed-). Otherwise, you can refer to the [Features Section below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
+6. That's all for the setup! If you require a more detailed set-up guide, you can scroll down to our [detailed quick start guide](#quick-start-beginner-friendly-detailed). Otherwise, you can refer to the [Features Section below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
 
 <div style="page-break-after: always;"></div>
 
-## 🛠️⚙️ Quick Start (beginner-friendly, detailed) ⚙️🛠️
+## Quick Start (beginner-friendly, detailed)
 
 If you are less experienced in installing and using Java executables, no worries! The set-up is relatively simple 😉, and we will be guiding you with each step.
 
@@ -154,7 +154,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
            ```
            ---
    After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the Operating System (OS) and the presence of data.<br>
-   <img src="images/StartUpPage.png" alt="MacOS Start-Up" style="width: 36%;" />
+   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 36%;" />
    <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br><br>
 5. If you've reached this step, **🎉 CONGRATULATIONS!!! 🎉 MedDict has been installed successfully on your device!**<br>
    What's next is to try out some of MedDict's commands. Type the command in the command box by clicking on the empty bar at the top, typing a command and pressing Enter on your keyboard to execute it. (e.g. typing `help` and pressing Enter will open the help window.) <br>
@@ -369,7 +369,7 @@ Finds a doctor or patient whose names contain any of the given keywords.
 
 Format: `find KEYWORD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -546,7 +546,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
-**A**: To open and run MedDict, please refer to the [Quick Start Guide](#-quick-start-)!
+**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start-)!
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -554,10 +554,10 @@ _Details coming soon ..._
 **Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
 **A**: No worries, you can easily transfer your data! Refer to the steps below.
 
-1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#-quick-start-beginner-friendly-detailed-))
+1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
 2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
 3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (e.g. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
-4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#-quick-start-) if needed)
+4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start-) if needed)
 5. Open / run the application once.
 6. Close the application.
 7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
