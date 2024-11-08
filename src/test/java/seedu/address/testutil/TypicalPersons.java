@@ -50,7 +50,7 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("photographer").build();
+            .withTags("photographer").withWeddings("Amy's Wedding").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
@@ -108,10 +108,16 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
             for (Wedding wedding : person.getWeddings()) {
+                if (!ab.hasWedding(wedding)) {
+                    ab.addWedding(wedding);
+                }
                 Wedding weddingInAb = ab.getWedding(wedding);
                 weddingInAb.addToGuestList(person);
             }
             for (Tag tag : person.getTags()) {
+                if (!ab.hasTag(tag)) {
+                    ab.addTag(tag);
+                }
                 Tag tagInAb = ab.getTag(tag);
                 tagInAb.increaseTaggedCount();
             }
@@ -125,7 +131,46 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an address book with the persons reset to their original values
+     */
+    public static AddressBook resetTypicalAddressBook() {
+        AddressBook resetAddressBook = getTypicalAddressBook();
+        resetAddressBook.setPersons(resetTypicalPersons());
+        resetAddressBook.setTags(List.of(FLORIST, PHOTOGRAPHER));
+        resetAddressBook.setWeddings(List.of(AMY_WEDDING, BOB_WEDDING, WEDDING_TWO, CARLA_WEDDING, CLIVE_WEDDING));
+        resetAddressBook.setTasks(List.of(TODO_TASK, DEADLINE_TASK));
+        return resetAddressBook;
+    }
+
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    /**
+     * Returns a list of the typical people in the address book, reset with their original values
+     */
+    public static List<Person> resetTypicalPersons() {
+        return List.of(
+                new PersonBuilder().withName("Alice Pauline")
+                        .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                        .withPhone("94351253")
+                        .withTags("photographer").withWeddings("Amy's Wedding").build(),
+                new PersonBuilder().withName("Benson Meier")
+                        .withAddress("311, Clementi Ave 2, #02-25")
+                        .withEmail("johnd@example.com").withPhone("98765432")
+                        .withTags("florist", "photographer").withWeddings("Wedding 2", "Carla's Wedding").build(),
+                new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
+                        .withEmail("heinz@example.com").withAddress("wall street").withTasks("todo: Buy groceries")
+                        .withVendorStatus("true").build(),
+                new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+                        .withEmail("cornelia@example.com").withAddress("10th street").withTags("florist").build(),
+                new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
+                        .withEmail("werner@example.com").withAddress("michegan ave").withWeddings("Wedding 2").build(),
+                new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
+                        .withEmail("lydia@example.com").withAddress("little tokyo").build(),
+                new PersonBuilder().withName("George Best").withPhone("9482442")
+                        .withEmail("anna@example.com").withAddress("4th street").build()
+        );
     }
 }
