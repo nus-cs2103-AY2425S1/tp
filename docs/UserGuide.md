@@ -334,17 +334,46 @@ More on how to edit the data file in future updates!
 
 Adds a **new client** to Prudy.
 
-**Format:** `add-client n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​`
+**Format:**
+```shell
+add-client n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​
+```
 
+<box type="info" seamless>
+💡
+**Tip:**
+A client can have any number of tags (including 0).
+</box>
 
-💡 **Tip**: A client can have any number of tags (including 0).
-
+<strong>Notes:</strong>
+<ul>
+  <li>The index refers to the index number shown in the displayed person list. The index must be a positive integer (1, 2, 3, …).</li>
+  <li>At least one of the optional fields must be provided.</li>
+  <li>For student contact, editing industry field is prohibited.</li>
+  <li>For company contact, editing student ID field is prohibited.</li>
+  <li>Existing values will be updated to the input values.</li>
+  <li>When editing tags, the existing tags of the person will be removed, i.e., adding of tags is not cumulative.</li>
+</ul>
+</div>
 
 **Examples:**
 * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+**Tip:**
 We are aware that `NAME` currently does not accept special characters such as `/`, `@`, and `,`, and will be adding this functionality in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
+</div>
+
+**On success:**
+```shell
+success!
+```
+
+**Errors:**
+```shell
+invalid output
+```
 
 #### 5.2.2 Listing All Clients: `list-clients`
 Shows a **list of all clients** in Prudy.
