@@ -37,13 +37,13 @@ simpler to use while being even more functional than alternatives on the market.
 * [Tag Table](#tag-table)
 * [Glossary](#glossary)
     * [Property Tags](#property-tags)
-    * [client Tags](#client-tags)
+    * [Client Tags](#client-tags)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer. If not, you can download Java `17` [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+1. Ensure you have Java `17` or above installed in your computer. If not, you can download Java `17` [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases).
 
