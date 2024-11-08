@@ -1,7 +1,7 @@
 
 # Vendor Vault User Guide
 
-Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps.
+Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. Vendor Vault is targeted at small convenience/grocery stores. 
 
 <!-- * Table of Contents -->
 <page-nav-print />
