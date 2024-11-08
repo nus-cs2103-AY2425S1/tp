@@ -30,12 +30,13 @@ class JsonAdaptedPerson {
     private static final String DEFAULT_PHONE = "00000000";
     private static final String DEFAULT_EMAIL = "default@email.net";
     private static final String DEFAULT_TELEGRAMHANDLE = "@defaulthandle";
+    private static final String DEFAULT_MODNAME = "AA0000";
 
     private final String name;
     private String phone;
     private String email;
     private String telegramHandle;
-    private final String moduleName;
+    private String moduleName;
     private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String contactType;
@@ -151,10 +152,10 @@ class JsonAdaptedPerson {
     public boolean isValidPerson() {
         boolean hasValidContactInfo = phone != null && Phone.isValidPhone(phone)
                 || telegramHandle != null && TelegramHandle.isValidTelegramHandle(telegramHandle)
-                || email != null && Email.isValidEmail(email);
+                || email != null && Email.isValidEmail(email)
+                || moduleName != null && ModuleName.isValidModName(moduleName);
         return name != null && Name.isValidName(name)
                 && hasValidContactInfo
-                && moduleName != null && ModuleName.isValidModName(moduleName)
                 && contactType != null && ContactType.isValidContactType(contactType);
     }
 
@@ -164,8 +165,8 @@ class JsonAdaptedPerson {
     public boolean hasEmptyContactInfo() {
         return phone == null
                 || telegramHandle == null
-                || email == null;
-
+                || email == null
+                || moduleName == null;
     }
 
     /**
@@ -181,6 +182,9 @@ class JsonAdaptedPerson {
         if (!TelegramHandle.isValidTelegramHandle(telegramHandle)) {
             telegramHandle = DEFAULT_TELEGRAMHANDLE;
         }
+        if (!ModuleName.isValidModName(moduleName)) {
+            moduleName = DEFAULT_MODNAME;
+        }
     }
 
     /**
@@ -195,6 +199,9 @@ class JsonAdaptedPerson {
         }
         if (telegramHandle == null) {
             this.telegramHandle = DEFAULT_TELEGRAMHANDLE;
+        }
+        if (moduleName == null) {
+            this.moduleName = DEFAULT_MODNAME;
         }
     }
 }
