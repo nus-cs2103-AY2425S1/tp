@@ -83,6 +83,7 @@ Back to [Quick Start](#quick-start)
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME id/NUS_STUDENTID`, `id/NUS_STUDENTID n/NAME` is also acceptable.
+* The prefixes must be preceded by a space character. e.g. `add n/John Doe` is correct, but `addn/John Doe` is not.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -259,6 +260,275 @@ Common Errors:
 
 ---
 
+
+
+## Managing Attendance
+
+Teacher's Pet allows you to create and manage attendance events, such as lectures, tutorials, or lab sessions. You can mark or unmark students' attendance for these events.
+
+---
+
+#### Creating Attendance Events: `createattn`
+
+Creates one or more new attendance events.
+
+**Format:** `createattn e/EVENT_NAME [e/EVENT_NAME]...`
+
+- **Event Names:**
+    - Event names cannot be empty.
+    - Event names cannot contain the `/` character.
+    - Duplicate event names (case-insensitive) are not allowed within the same command.
+    - Event names are case-insensitive when checking for duplicates and existing events.
+
+- **Existing Events:**
+    - If an event with the same name (case-insensitive) already exists, the command will fail and indicate which event already exists.
+
+**Examples:**
+
+- `createattn e/Tutorial 1`
+    - Creates an attendance event named "Tutorial 1".
+
+- `createattn e/Lecture 1 e/Lab Session`
+    - Creates two attendance events: "Lecture 1" and "Lab Session".
+![result for createattn](images/createattn.png)
+
+---
+
+#### Deleting Attendance Events: `deleteevent`
+
+Deletes one or more attendance events.
+
+**Format:** `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`
+
+- **Event Names:**
+    - Event names cannot be empty.
+    - Event names cannot contain the `/` character.
+    - Duplicate event names (case-insensitive) are not allowed within the same command.
+
+- **Non-Existing Events:**
+    - If any specified event does not exist, the command will fail and indicate which event was not found.
+
+- **Case-Insensitive:**
+    - Event names are case-insensitive when matching existing events.
+
+**Examples:**
+
+- `deleteevent e/Tutorial 1`
+    - Deletes the attendance event named "Tutorial 1".
+
+- `deleteevent e/Lecture 1 e/Lab Session`
+    - Deletes "Lecture 1" and "Lab Session".
+![result for deleteevent](images/deleteevent.png)
+
+---
+
+#### Listing All Attendance Events: `listevents`
+
+Displays a list of all attendance events.
+
+**Format:** `listevents`
+
+- **No Additional Parameters:**
+    - The command must be exactly `listevents`.
+    - Any additional input will result in an invalid command format error.
+
+**Examples:**
+
+- `listevents`
+    - Displays all attendance events.
+![result for listevents](images/listevents.png)
+  
+---
+
+#### Marking Student Attendance: `mark`
+
+Marks one or more students as present for a specific attendance event.
+
+**Format:** `mark e/EVENT_NAME i/INDEX [i/INDEX]...`
+
+- **Event Name:**
+    - Must specify exactly one event name and not contain '/' character.
+    - Event name cannot be empty.
+    - Event must exist in Teacher's Pet.
+    - Event name is case-insensitive.
+
+- **Student Indices:**
+    - You can specify multiple student indices.
+    - Each index must be a positive integer corresponding to a student in the current displayed list.
+    - Each index must be prefixed with `i/`.
+    - Duplicate indices are not allowed within the same command.
+
+- **Existing Attendance:**
+    - If a student is already marked as present for the event, they will be skipped.
+
+**Examples:**
+
+- `mark e/Tutorial 1 i/1`
+    - Marks the student at index 1 as present for "Tutorial 1".
+
+- `mark e/lecture 2 i/1 i/3 i/5`
+    - Marks students at indices 1, 3, and 5 as present for "lecture 2".
+![result for mark](images/mark.png)
+
+---
+
+#### Unmarking Student Attendance: `unmark`
+
+Marks one or more students as absent for a specific attendance event.
+
+**Format:** `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`
+
+- **Event Name:**
+    - Must specify exactly one event name and not contain '/' character.
+    - Event name cannot be empty.
+    - Event must exist in Teacher's Pet.
+    - Event name is case-insensitive.
+
+- **Student Indices:**
+    - You can specify multiple student indices.
+    - Each index must be a positive integer corresponding to a student in the current displayed list.
+    - Each index must be prefixed with `i/`.
+    - Duplicate indices are not allowed within the same command.
+
+- **Existing Attendance:**
+    - If a student is already marked as absent for the event, they will be skipped.
+
+**Examples:**
+
+- `unmark e/Tutorial 1 i/2`
+    - Marks the student at index 2 as absent for "Tutorial 1".
+
+- `unmark e/lecture 2 i/2 i/4 i/6`
+    - Marks students at indices 2, 4, and 6 as absent for "lecture 2".
+![result for unmark](images/unmark.png)
+
+---
+
+#### Listing Attendance for an Event: `listattn`
+
+Displays the list of students who are either present or absent for a specific attendance event.
+
+**Format:** `listattn e/EVENT_NAME s/STATUS`
+
+- **Event Name:**
+    - Must specify exactly one event name and not contain '/' character.
+    - Event name cannot be empty.
+    - Event must exist in Teacher's Pet.
+    - Event name is case-insensitive.
+
+- **Status:**
+    - Must specify exactly one status: `present` or `absent`.
+    - Status is case-insensitive.
+
+**Examples:**
+
+- `listattn e/Tutorial 1 s/present`
+    - Lists all students marked as present for "Tutorial 1".
+
+- `listattn e/Lecture 2 s/absent`
+    - Lists all students marked as absent for "Lecture 2".
+![result for listattn](images/listattn.png)
+
+---
+
+### Additional Notes
+
+- **Case Sensitivity:**
+    - All event names are case-insensitive when matching existing events and checking for duplicates.
+
+- **Error Messages:**
+    - The application provides clear error messages indicating the nature of the problem and how to fix it.
+
+- **Event Name Restrictions:**
+    - Event names cannot be empty.
+    - Event names cannot contain the `/` character to avoid confusion with command prefixes.
+
+---
+
+## Tips
+
+### Creating Multiple Attendance Events
+
+You can create multiple attendance events in one command:
+
+- `createattendance e/Tutorial 1 e/Tutorial 2 e/Lecture 1`
+    - Creates three events: "Tutorial 1", "Tutorial 2", and "Lecture 1".
+
+**Important Notes:**
+
+- Ensure that no event names are duplicates (case-insensitive).
+- Event names cannot contain `/`.
+
+### Deleting Multiple Attendance Events
+
+Delete multiple events at once:
+
+- `deleteevent e/Tutorial 1 e/lecture 1`
+    - Deletes "Tutorial 1" and "Lecture 1" (case-insensitive).
+
+**Important Notes:**
+
+- If any specified event does not exist, the command will fail.
+- Duplicate event names within the command are not allowed.
+
+### Marking Attendance for Multiple Students
+
+Mark multiple students as present:
+
+- `mark e/Tutorial 1 i/1 i/2 i/3`
+    - Marks students at indices 1, 2, and 3 as present for "Tutorial 1".
+
+**Important Notes:**
+
+- Each index must be prefixed with `i/`.
+- Indices must be positive integers corresponding to the displayed student list.
+- Duplicate indices are not allowed within the same command.
+
+### Unmarking Attendance for Multiple Students
+
+Unmark multiple students as absent:
+
+- `unmark e/Tutorial 1 i/4 i/5 i/6`
+    - Marks students at indices 4, 5, and 6 as absent for "Tutorial 1".
+
+### Listing Present or Absent Students
+
+List students based on their attendance status:
+
+- `listattendance e/Tutorial 1 s/present`
+    - Shows students marked as present for "Tutorial 1".
+
+- `listattendance e/Tutorial 1 s/absent`
+    - Shows students marked as absent for "Tutorial 1".
+
+### Common Errors and Solutions
+
+- **Invalid Command Format:**
+    - If you include extra text or parameters not specified in the command format, you will receive an invalid command format error.
+    - **Solution:** Ensure your command matches the specified format exactly.
+
+- **Event Not Found:**
+    - If you attempt to mark, unmark, or list attendance for an event that does not exist.
+    - **Solution:** Use `listevents` to view existing events and ensure the event name is correct.
+
+- **Duplicate Entries:**
+    - If you specify duplicate event names or indices within the same command.
+    - **Solution:** Remove duplicates so each event name or index appears only once.
+
+- **Invalid Indices:**
+    - If you specify indices that are not positive integers or do not correspond to any student in the displayed list.
+    - **Solution:** Check the current student list and use valid indices.
+
+- **Combining Commands:**
+    - Use the `list`, `find`, or `show` commands to filter the student list before marking or unmarking attendance.
+
+- **Consistent Event Naming:**
+    - Decide on a consistent naming convention for events to avoid confusion.
+
+- **Regularly List Events:**
+    - Use `listevents` frequently to keep track of all your attendance events.
+
+---
 ### Clearing all entries : `clear`
 
 Lets you clears all your students entries from Teacher's Pet.
@@ -280,6 +550,7 @@ Lets you close the Teacher's Pet application.
 Format: `exit`
 
 ---
+
 ## Data Management
 
 ### Saving the data
@@ -338,3 +609,9 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
 **Exit** | `exit`
+**Create Attendance Event** | `createattendance e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `createattendance e/Tutorial 1 e/Lab Session`
+**Delete Attendance Event** | `deleteevent e/EVENT_NAME [e/EVENT_NAME]...`<br> e.g., `deleteevent e/Tutorial 1 e/Lab Session`
+**List Attendance Events** | `listevents`
+**Mark Attendance** | `mark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `mark e/Tutorial 1 i/1 i/2`
+**Unmark Attendance** | `unmark e/EVENT_NAME i/INDEX [i/INDEX]...`<br> e.g., `unmark e/Tutorial 1 i/1 i/2`
+**List Attendance** | `listattendance e/EVENT_NAME s/STATUS`<br> e.g., `listattendance e/Tutorial 1 s/present`

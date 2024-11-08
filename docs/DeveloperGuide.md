@@ -276,15 +276,21 @@ performance and communication, enhancing organisational efficiency for teaching 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                  | I want to …​                  | So that I can…​                                                             |
-| -------- |------------------------------------------|-------------------------------|-----------------------------------------------------------------------------|
-| `* * *`  | TA                                       | add students to the list      | handle new students and have a virtual representation of them               |
-| `* * *`  | TA                                       | delete students from the list | remove students who dropped out of the class                                |
-| `* * *`  | TA                                       | modify a student's details    | rectify any mistakes found in the student's details                         |
-| `* * *`  | TA                                       | find a student by name or ID  | locate details of the student without having to go through the entire list  |
-| `* * *`  | TA                                       | view a student's details      | view the student's details to understand him/her better and contact him/her |
-| `* *`    | TA                                       | track student's attendance    | award credit appropriately                                                  |
-| `*`      | TA with many persons in the address book | sort persons by name          | locate a person easily                                                      |
+| Priority | As a …​                                  | I want to …​                  | So that I can…​                                                                    |
+|----------|------------------------------------------|-------------------------------|------------------------------------------------------------------------------------|
+| `* * *`  | TA                                       | add students to the list      | handle new students and have a virtual representation of them                      |
+| `* * *`  | TA                                       | delete students from the list | remove students who dropped out of the class                                       |
+| `* * *`  | TA                                       | modify a student's details    | rectify any mistakes found in the student's details                                |
+| `* * *`  | TA                                       | find a student by name or ID  | locate details of the student without having to go through the entire list         |
+| `* * *`  | TA                                       | view a student's details      | view the student's details to understand him/her better and contact him/her        |
+| `* * *`  | TA                                       | create attendance events      | track attendance for different classes or sessions                                 |
+| `* * *`  | TA                                       | mark students' attendance     | record students who are present                                                    |
+| `* * *`  | TA                                       | unmark students' attendance   | correct attendance records if mistakes are made                                    |
+| `* * *`  | TA                                       | list attendance for an event  | see which students attended a particular event                                     |
+| `* * *`  | TA                                       | list all attendance events    | get an overview of all events                                                      |
+| `* *`    | TA                                       | delete attendance events      | get rid of events that are no longer needed or if some duplicate events is created |
+| `* *`    | TA                                       | track student's attendance    | award credit appropriately                                                         |
+| `*`      | TA with many persons in the address book | sort persons by name          | locate a person easily                                                             |
 
 ### Use cases
 
@@ -388,6 +394,185 @@ Preconditions: Installed the application
   
     Use case ends.
 
+**Use Case: UC5 - Create Attendance Event**
+
+**MSS:**
+
+1. TA enters the `createattn` command with one or more valid event names.
+2. TP validates the event names.
+3. TP creates the attendance event(s).
+4. TP confirms the creation of the attendance event(s).
+
+   Use case ends.
+
+**Extensions:**
+
+- 1a. TA does not provide any event names.
+    - 1a1. TP displays an error message indicating that event names are required.
+
+      Use case resumes from step 1.
+
+- 2a. TA provides event names in an incorrect format or containing invalid characters.
+    - 2a1. TP displays an error message indicating the correct format and restrictions.
+
+      Use case resumes from step 1.
+
+- 2b. TA provides duplicate event names within the same command (case-insensitive).
+    - 2b1. TP displays an error message indicating duplicate event names.
+
+      Use case resumes from step 1.
+
+- 3a. Any of the event names already exist in the system (case-insensitive).
+    - 3a1. TP displays an error message indicating which event(s) already exist.
+
+      Use case ends.
+
+**Use Case: UC6 - Delete Attendance Event**
+
+**MSS:**
+
+1. TA enters the `deleteevent` command with one or more valid event names.
+2. TP validates the event names.
+3. TP deletes the attendance event(s).
+4. TP confirms the deletion of the attendance event(s).
+
+   Use case ends.
+
+**Extensions:**
+
+- 1a. TA does not provide any event names.
+    - 1a1. TP displays an error message indicating that event names are required.
+
+      Use case resumes from step 1.
+
+- 2a. TA provides event names in an incorrect format or containing invalid characters.
+    - 2a1. TP displays an error message indicating the correct format and restrictions.
+
+      Use case resumes from step 1.
+
+- 2b. TA provides duplicate event names within the same command (case-insensitive).
+    - 2b1. TP displays an error message indicating duplicate event names.
+
+      Use case resumes from step 1.
+
+- 3a. Any of the event names do not exist in the system (case-insensitive).
+    - 3a1. TP displays an error message indicating which event(s) do not exist.
+
+      Use case ends.
+
+
+**Use Case: UC7 - List Attendance Events**
+
+**MSS:**
+
+1. TA enters the `listevents` command.
+2. TP displays a list of all attendance events.
+
+   Use case ends.
+
+**Extensions:**
+
+- 1a. TA includes additional input after the command word.
+    - 1a1. TP displays an error message indicating invalid command format.
+
+      Use case resumes at step 1.
+
+- 2a. There are no attendance events in the system.
+    - 2a1. TP displays a message indicating that there are no events to display.
+
+      Use case ends.
+
+**Use Case: UC8 - Mark Attendance**
+
+**MSS:**
+
+1. TA enters the `mark` command with a valid event name and one or more student indices.
+2. TP validates the event name and student indices.
+3. TP marks the specified students as present for the event.
+4. TP confirms that attendance has been marked.
+
+   Use case ends.
+
+**Extensions:**
+
+- 1a. TA does not provide an event name or student indices.
+    - 1a1. TP displays an error message indicating that both event name and student indices are required.
+
+      Use case resumes at step 1.
+
+- 2a. Event name does not exist in the system.
+    - 2a1. TP displays an error message indicating that the event does not exist.
+
+      Use case ends.
+
+- 2b. TA provides invalid student indices (e.g., non-integer, out of bounds, duplicates).
+    - 2b1. TP displays an error message indicating the invalid indices.
+
+      Use case resumes at step 1.
+
+- 2c. TA provides an event name with invalid format or containing invalid characters.
+    - 2c1. TP displays an error message indicating the correct format.
+
+      Use case resumes at step 1.
+
+- 3a. Some students are already marked as present for the event.
+    - 3a1. TP skips marking those students or informs TA.
+
+      Use case continues.
+
+
+**Use Case: UC9 - Unmark Attendance**
+
+**MSS:**
+
+1. TA enters the `unmark` command with a valid event name and one or more student indices.
+2. TP validates the event name and student indices.
+3. TP marks the specified students as absent for the event.
+4. TP confirms that attendance has been unmarked.
+
+   Use case ends.
+
+**Extensions:**
+
+- Similar to UC8, with appropriate changes for unmarking.
+
+**Use Case: UC10 - List Attendance**
+
+**MSS:**
+
+1. TA enters the `listattendance` command with a valid event name and status (`present` or `absent`).
+2. TP validates the event name and status.
+3. TP retrieves the list of students matching the specified attendance status for the event.
+4. TP displays the list of students.
+
+   Use case ends.
+
+**Extensions:**
+
+- 1a. TA does not provide an event name or status.
+    - 1a1. TP displays an error message indicating that both event name and status are required.
+
+      Use case resumes at step 1.
+
+- 2a. Event name does not exist in the system.
+    - 2a1. TP displays an error message indicating that the event does not exist.
+
+      Use case ends.
+
+- 2b. Status provided is invalid (not `present` or `absent`).
+    - 2b1. TP displays an error message indicating valid statuses.
+
+      Use case resumes at step 1.
+
+- 2c. TA provides an event name with invalid format or containing invalid characters.
+    - 2c1. TP displays an error message indicating the correct format.
+
+      Use case resumes at step 1.
+
+- 3a. No students match the specified attendance status.
+    - 3a1. TP displays a message indicating no students found.
+
+      Use case ends.
 ### Non-functional requirements
 
 1. The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
@@ -403,6 +588,8 @@ a particular module, course or program, usually in small classes of less than 30
 
 - **Student**: An individual enrolled in a module, course or program in NUS who is receiving instruction and evaluation
 from educators or teaching assistants.
+
+- **Partial Matching**: A search technique where the system matches records that contain parts of the search query, not necessarily the entire query exactly.
 
 ---
 
@@ -496,11 +683,94 @@ testers are expected to do more *exploratory* testing.
        Currently multiple comments per student is not supported. However, you are allowed to have /c as part of
        your string for your comment so long as it is not preceded with blank space.
 
-### Exit the application
+  
+### Managing Attendance Events
+
+1. **Creating attendance events**
+
+    - Test case: `createattendance e/Tutorial 1 e/Lab Session`
+
+      Expected: Attendance events "Tutorial 1" and "Lab Session" are created. Confirmation message shown.
+
+    - Test case: `createattendance e/`
+
+      Expected: Error message indicating event name cannot be empty.
+
+2. **Deleting attendance events**
+
+    - Test case: `deleteevent e/Tutorial 1`
+
+      Expected: Attendance event "Tutorial 1" is deleted. Confirmation message shown.
+
+    - Test case: `deleteevent e/Nonexistent Event`
+
+      Expected: Error message indicating event does not exist.
+
+3. **Listing attendance events**
+
+    - Test case: `listevents`
+
+      Expected: Displays a list of all attendance events.
+
+    - Test case: `listevents extra`
+
+      Expected: Error message indicating invalid command format.
+
+### Marking and Unmarking Attendance
+
+1. **Marking attendance for multiple students**
+
+    - Prerequisites: At least five students listed. Event "Lab Session" exists.
+
+    - Test case: `mark e/Lab Session i/1 i/2 i/3`
+
+      Expected: Students at indices 1, 2, and 3 are marked as present for "Lab Session". Confirmation message shown.
+
+    - Test case: `mark e/Lab Session i/1 i/1`
+
+      Expected: Error message indicating duplicate indices.
+
+2. **Unmarking attendance for multiple students**
+
+    - Prerequisites: Students at indices 1 and 2 are marked as present for "Lab Session".
+
+    - Test case: `unmark e/Lab Session i/1 i/2`
+
+      Expected: Students at indices 1 and 2 are marked as absent for "Lab Session". Confirmation message shown.
+
+    - Test case: `unmark e/Lab Session i/a`
+
+      Expected: Error message indicating invalid index.
+
+### Listing Attendance
+
+1. **Listing present students for an event**
+
+    - Test case: `listattendance e/Lab Session s/present`
+
+      Expected: Displays a list of students marked as present for "Lab Session".
+
+2. **Listing absent students for an event**
+
+    - Test case: `listattendance e/Lab Session s/absent`
+
+      Expected: Displays a list of students marked as absent for "Lab Session".
+
+3. **Invalid status**
+
+    - Test case: `listattendance e/Lab Session s/late`
+
+      Expected: Error message indicating valid statuses are 'present' or 'absent'.
+
+  ### Exit the application
 
 1. Exit the application
     1. Test case: `exit`
 
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+  
        Expected: Application closes
     2. Test case: `exit 2`
 
@@ -588,15 +858,39 @@ testers are expected to do more *exploratory* testing.
 - There were significant challenges in adjusting validation for the various commands. What inputs to allow and reject was constantly being discussed with an end result of prioritising user freedom while ensuring inputs remain relatively reasonable.
 - There were difficulties agreeing on the UI which went through multiple iterations of tweaking before resulting in the current NUS-themed color palette and which is in line with the app's intended usage.
 - Fields in the application were tweaked to suit NUS students' needs (eg. refactoring variables, different input validation)
+- New functions added such as attendance taking function, comment
+- Implementing the attendance feature required significant modifications to the existing architecture, including updates to the `Model`, `Storage`, and `Logic` components.
+- Ensuring data integrity and proper synchronization between student data and attendance records was a challenge.
+- Comprehensive testing was conducted to handle various edge cases, such as duplicate events, invalid inputs, and concurrent modifications.
+- Documentation was updated extensively to reflect the new features, including user and developer guides.
 - New function added such as attendance taking function.
 - New function added such as comment.
 - New function added such as multiple groups.
 - New function added such as find by groups.
 - New function which allows to add student by certain optional and required fields related to NUS and students.
 - New default function to show offline help list when a command is wrongly typed.
+
 ---
 
 ## **Appendix: Planned Enhancements**
 
 **Team size: 4**
+
+- **Allow Partial Matching in Find Feature**
+
+  Currently, the `find` command matches students based on exact names or IDs. To improve usability, we plan to enhance the `find` command to allow partial matching of names. This will enable TAs to search for students even if they only remember part of the student's name.
+
+  **Example Usage:**
+
+    - `find n/Alex` would match students with names like "Alex Yeoh", "Alexander Lee", or "Alexis Tan".
+
+  **Implementation Considerations:**
+
+    - Modify the `NameContainsKeywordsPredicate` to check for partial matches.
+    - Ensure that the search remains case-insensitive.
+    - Update unit tests and documentation accordingly.
+
+- **Track attendance of students individually**
+
+    Currently, the listattn feature shows status of all students for a given event. We plan to enhance this feature to allow TAs to track attendance of individual students across all events.
 
