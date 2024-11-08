@@ -20,7 +20,7 @@ public class Lesson implements Comparable<Lesson> {
     private final EndDateTime endDateTime;
 
     /**
-     * Every field must be present and not null.
+     * Creates a lesson object.
      *
      * @param student       The student of the lesson.
      * @param fee           The fee of the lesson.
@@ -31,6 +31,7 @@ public class Lesson implements Comparable<Lesson> {
         logger.log(Level.INFO, "Creating Lesson object with student: " + student
                 + " fee: " + fee + " start date time: " + startDateTime + " end date time: " + endDateTime);
         requireAllNonNull(student, fee, startDateTime, endDateTime);
+
         this.student = student;
         this.fee = fee;
         this.startDateTime = startDateTime;
@@ -112,6 +113,7 @@ public class Lesson implements Comparable<Lesson> {
     public String getAddress() {
         return student.getAddressString();
     }
+
     /**
      * Returns the fee of the lesson.
      *
@@ -120,6 +122,7 @@ public class Lesson implements Comparable<Lesson> {
     public Fee getFee() {
         return fee;
     }
+
     /**
      * Returns the fee per hour of the lesson.
      *
@@ -128,6 +131,7 @@ public class Lesson implements Comparable<Lesson> {
     public String getFeeString() {
         return fee.getValueString();
     }
+
     /**
      * Returns the amount per hour for the lesson.
      *
@@ -142,11 +146,11 @@ public class Lesson implements Comparable<Lesson> {
         final StringBuilder builder = new StringBuilder();
         builder.append("Student: ")
                 .append(getStudent().getName())
-                .append(" Fee: ")
+                .append("; Fee: ")
                 .append(fee.toString())
-                .append(" Start: ")
+                .append("; Start: ")
                 .append(getStartDateTime())
-                .append(" End: ")
+                .append("; End: ")
                 .append(getEndDateTime());
         return builder.toString();
     }
@@ -167,6 +171,7 @@ public class Lesson implements Comparable<Lesson> {
                 && startDateTime.equals(otherLesson.startDateTime)
                 && endDateTime.equals(otherLesson.endDateTime);
     }
+
     /**
      * Compares this lesson with another lesson.
      *

@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.core.index.Index;
@@ -165,10 +164,12 @@ public class ParserUtil {
     public static StudentId parseStudentId(String studentId) throws ParseException {
         logger.log(Level.INFO, "Parsing student ID: " + studentId);
         requireNonNull(studentId);
+
         if (!StudentId.isValidStudentId(studentId)) {
             logger.log(Level.WARNING, "Student ID is invalid: " + studentId);
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
+
         logger.log(Level.INFO, "Student ID is valid: " + studentId);
         return new StudentId(studentId);
     }
@@ -183,11 +184,13 @@ public class ParserUtil {
     public static Fee parseFee(String fee) throws ParseException {
         logger.log(Level.INFO, "Parsing fee: " + fee);
         requireNonNull(fee);
+
         String trimmedFee = fee.trim();
         if (!Fee.isValidFee(trimmedFee)) {
             logger.log(Level.WARNING, "Fee is invalid: " + fee);
             throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
         }
+
         logger.log(Level.INFO, "Fee is valid: " + fee);
         return new Fee(trimmedFee);
     }
@@ -202,6 +205,7 @@ public class ParserUtil {
     public static StartDateTime parseStartDateTime(String startDateTime) throws ParseException {
         logger.log(Level.INFO, "Parsing start date time: " + startDateTime);
         requireNonNull(startDateTime);
+
         String trimmedStartDateTime = startDateTime.trim();
         checkValidDateTime(startDateTime);
         logger.log(Level.INFO, "Start date time is valid: " + startDateTime);
@@ -220,10 +224,12 @@ public class ParserUtil {
         logger.log(Level.INFO, "Parsing end date time: " + startDateTime + " + " + hoursToAdd + " hours");
         requireNonNull(startDateTime);
         requireNonNull(hoursToAdd);
+
         if (!EndDateTime.isValidHoursToAdd(hoursToAdd)) {
             logger.log(Level.WARNING, "Hours to add is invalid: " + hoursToAdd);
             throw new ParseException(EndDateTime.HOURS_MESSAGE_CONSTRAINTS);
         }
+
         logger.log(Level.INFO, "Hours to add is valid: " + hoursToAdd);
         return EndDateTime.createEndDateTime(startDateTime, hoursToAdd);
     }
@@ -241,7 +247,11 @@ public class ParserUtil {
         logger.log(Level.INFO, "Validating prefixes present: " + Arrays.toString(prefixes));
         checkMissingAllPrefixes(argumentMultimap, usage);
         findMissingPrefix(argumentMultimap, usage, prefixes);
+
         logger.log(Level.INFO, "All prefixes are present: " + Arrays.toString(prefixes));
+        if (!argumentMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage));
+        }
     }
 
     /**
@@ -255,6 +265,7 @@ public class ParserUtil {
     private static void findMissingPrefix(ArgumentMultimap argumentMultimap, String usage, Prefix[] prefixes)
             throws ParseException {
         logger.log(Level.INFO, "Finding missing prefixes: " + Arrays.toString(prefixes));
+
         for (Prefix prefix : prefixes) {
             if (!argumentMultimap.getValue(prefix).isPresent()) {
                 logger.log(Level.WARNING, "Missing prefix: " + prefix);
@@ -275,16 +286,5 @@ public class ParserUtil {
             logger.log(Level.WARNING, "All prefixes are missing");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, usage));
         }
-    }
-
-    /**
-     * Checks if all the prefixes are present in the ArgumentMultimap.
-     *
-     * @param argumentMultimap The ArgumentMultimap to check.
-     * @param prefixes         The prefixes to check.
-     * @return True if all the prefixes are present, false otherwise.
-     */
-    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

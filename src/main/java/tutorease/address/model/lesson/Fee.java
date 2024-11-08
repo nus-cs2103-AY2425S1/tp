@@ -17,6 +17,7 @@ public class Fee {
     public static final String MESSAGE_CONSTRAINTS = "Fee must be a non-negative integer.";
     private static Logger logger = LogsCenter.getLogger(Fee.class);
     private final int value;
+
     /**
      * Constructs a {@code Fee}.
      *
@@ -27,9 +28,11 @@ public class Fee {
         value = value.trim();
         requireNonNull(value);
         checkArgument(isValidFee(value), MESSAGE_CONSTRAINTS);
+
         this.value = NumbersUtil.parseInt(value, MESSAGE_CONSTRAINTS);
         logger.log(Level.INFO, "Created Fee object with value: " + value);
     }
+
     /**
      * Returns true if a given string is a valid fee amount.
      *
@@ -46,6 +49,7 @@ public class Fee {
             return false;
         }
     }
+
     /**
      * Returns the value string of the fee.
      *
@@ -66,6 +70,7 @@ public class Fee {
         if (!(other instanceof Fee)) {
             return false;
         }
+
         Fee otherFee = (Fee) other;
         return value == otherFee.value;
     }

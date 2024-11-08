@@ -30,8 +30,13 @@ public class AddLessonCommand extends LessonCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD
-            + " " + COMMAND_WORD + ": Adds a lesson to the lesson list. "
+            + " " + COMMAND_WORD + ": Adds a lesson to the lesson list.\n"
             + "Parameters: "
+            + PREFIX_STUDENT_ID + "STUDENTID "
+            + PREFIX_FEE + "PRICEPERHOUR "
+            + PREFIX_START_DATE + "STARTDATETIME "
+            + PREFIX_DURATION + "DURATION\n"
+            + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " "
             + PREFIX_STUDENT_ID + "1 "
             + PREFIX_FEE + "10 "
             + PREFIX_START_DATE + dateTimeNowString() + " "
@@ -43,7 +48,6 @@ public class AddLessonCommand extends LessonCommand {
     public static final String TO_STRING_FORMAT = "AddLessonCommand[studentId=%s,"
             + " fee=%s, startDateTime=%s, endDateTime=%s]";
     private static Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
-
     private final StudentId studentId;
     private final Fee fee;
     private final StartDateTime startDateTime;
@@ -59,10 +63,12 @@ public class AddLessonCommand extends LessonCommand {
      */
     public AddLessonCommand(StudentId studentId, Fee fee, StartDateTime startDateTime, EndDateTime endDateTime) {
         requireAllNonNull(studentId, fee, startDateTime, endDateTime);
+
         assert studentId != null : "Student ID cannot be null";
         assert fee != null : "Fee cannot be null";
         assert startDateTime != null : "Start date time cannot be null";
         assert endDateTime != null : "End date time cannot be null";
+
         this.studentId = studentId;
         this.fee = fee;
         this.startDateTime = startDateTime;
@@ -74,14 +80,19 @@ public class AddLessonCommand extends LessonCommand {
     public CommandResult execute(Model model) throws CommandException {
         logger.log(Level.INFO, "Executing AddLessonCommand");
         requireNonNull(model);
+
+        // Validate and get student
         ObservableList<Person> personList = model.getFilteredPersonList();
         validateStudentId(personList);
         Person student = personList.get(studentId.getValue());
         assert student != null : "Student cannot be null";
         validateStudentRole(student);
+
+        // Validate and add lesson
         Lesson lesson = new Lesson(student, fee, this.startDateTime, this.endDateTime);
         validateModelHasLesson(model, lesson);
         model.addLesson(lesson);
+
         String formattedString = String.format(MESSAGE_SUCCESS, lesson);
         logger.log(Level.INFO, formattedString);
         return new CommandResult(formattedString);
@@ -91,6 +102,7 @@ public class AddLessonCommand extends LessonCommand {
         requireAllNonNull(model, lesson);
         assert model != null : "Model cannot be null";
         assert lesson != null : "Lesson cannot be null";
+
         if (model.hasLessons(lesson)) {
             logger.log(Level.WARNING, AddLessonCommand.MESSAGE_OVERLAP_LESSON);
             throw new CommandException(AddLessonCommand.MESSAGE_OVERLAP_LESSON);
@@ -100,6 +112,7 @@ public class AddLessonCommand extends LessonCommand {
     private static void validateStudentRole(Person student) throws CommandException {
         assert student != null : "Student cannot be null";
         requireNonNull(student);
+
         if (!student.isStudent()) {
             assert student.isGuardian() : "Person must be a guardian";
             logger.log(Level.WARNING, MESSAGE_INVALID_ROLE);
@@ -111,6 +124,7 @@ public class AddLessonCommand extends LessonCommand {
     private void validateStudentId(ObservableList<Person> personList) throws CommandException {
         assert personList != null : "Person list cannot be null";
         requireNonNull(personList);
+
         if (studentId.getValue() >= personList.size()) {
             logger.log(Level.WARNING, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -130,10 +144,12 @@ public class AddLessonCommand extends LessonCommand {
         }
 
         AddLessonCommand otherAddLessonCommand = (AddLessonCommand) other;
+
         boolean isStudentIdEqual = studentId.equals(otherAddLessonCommand.studentId);
         boolean isFeeEqual = fee.equals(otherAddLessonCommand.fee);
         boolean isStartDateTimeEqual = startDateTime.equals(otherAddLessonCommand.startDateTime);
         boolean isEndDateTimeEqual = endDateTime.equals(otherAddLessonCommand.endDateTime);
+
         logger.log(Level.INFO, "Comparing AddLessonCommand: " + this + " with " + otherAddLessonCommand);
         logger.log(Level.INFO, "Comparing student ID: " + isStudentIdEqual
                 + "Comparing fee: " + isFeeEqual

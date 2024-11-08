@@ -1,5 +1,7 @@
 package tutorease.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +13,8 @@ import tutorease.address.model.lesson.UniqueLessonList;
 import tutorease.address.model.person.Person;
 
 /**
- * Wraps all data at the lesson-schedule level
- * Duplicates are not allowed (by .isOverlapping comparison)
+ * Wraps all data at the lesson-schedule level.
+ * Duplicates are not allowed (by .isOverlapping comparison).
  */
 public class LessonSchedule implements ReadOnlyLessonSchedule {
     private static final Logger logger = LogsCenter.getLogger(LessonSchedule.class);
@@ -27,26 +29,37 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
     }
 
     /**
-     * Creates an LessonSchedule using the Lessons in the {@code toBeCopied}
+     * Creates a LessonSchedule using the lessons in the {@code toBeCopied}.
+     *
+     * @param toBeCopied The ReadOnlyLessonSchedule to copy from.
      */
     public LessonSchedule(ReadOnlyLessonSchedule toBeCopied) {
         this();
         resetData(toBeCopied);
     }
+
     /**
-     * Replaces the contents of the lesson list with {@code lessons}.
-     * {@code lessons} must not contain duplicate lessons.
+     * Sets the lessons in the lesson schedule.
+     *
+     * @param lessons The new list of lessons.
      */
     public void setLessons(List<Lesson> lessons) {
+        logger.log(Level.INFO, "Setting lessons in model");
         this.lessons.setLessons(lessons);
     }
 
+    /**
+     * Returns the lesson list.
+     */
     public ObservableList<Lesson> getLessonList() {
         return lessons.asUnmodifiableObservableList();
     }
 
     /**
-     * Returns true if a lesson with the same identity as {@code lesson} overlaps in the lesson schedule.
+     * Returns true if the lesson list contains an equivalent lesson as the given argument.
+     *
+     * @param lesson The lesson to check for.
+     * @return True if the lesson list contains the given lesson.
      */
     public boolean hasLesson(Lesson lesson) {
         return lessons.contains(lesson);
@@ -55,21 +68,28 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
     /**
      * Adds the specified lesson to the lesson list.
      *
-     * @param lesson The lesson to be added. Must not be null.
+     * @param lesson The lesson to be added.
      * @throws NullPointerException If the specified lesson is null.
      */
     public void addLesson(Lesson lesson) {
+        logger.log(Level.INFO, "Adding lesson to model: " + lesson);
+        requireNonNull(lesson);
+
         lessons.add(lesson);
         logger.log(Level.INFO, "Lesson added to model: " + lesson);
     }
 
     /**
-     * Deletes the lesson from the lesson list.
+     * Deletes the specified lesson from the lesson list.
      *
-     * @param lesson The lesson to be removed.
+     * @param lesson The lesson to be removed. Must exist in the lesson list.
      */
     public void deleteLesson(Lesson lesson) {
+        logger.log(Level.INFO, "Deleting lesson from model: " + lesson);
+        requireNonNull(lesson);
+
         lessons.remove(lesson);
+        logger.log(Level.INFO, "Lesson deleted from model: " + lesson);
     }
 
     /**
@@ -111,6 +131,7 @@ public class LessonSchedule implements ReadOnlyLessonSchedule {
         LessonSchedule otherLessonSchedule = (LessonSchedule) other;
         return lessons.equals(otherLessonSchedule.lessons);
     }
+
     /**
      * Updates the person in all lessons in the list.
      *

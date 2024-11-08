@@ -101,6 +101,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSamePhone(Person person) {
+        requireNonNull(person);
+        return tutorEase.hasSamePhone(person);
+    }
+
+    @Override
+    public boolean hasSameEmail(Person person) {
+        requireNonNull(person);
+        return tutorEase.hasSameEmail(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         tutorEase.removePerson(target);
     }
@@ -123,7 +135,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedTutorEase}
+     * {@code versionedTutorEase}.
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -166,10 +178,6 @@ public class ModelManager implements Model {
         this.lessonSchedule.resetData(lessonSchedule);
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
-     * {@code versionedTutorEase}
-     */
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         return filteredLesson;
@@ -193,18 +201,25 @@ public class ModelManager implements Model {
 
     @Override
     public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessonSchedule.addLesson(lesson);
         updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
     public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessonSchedule.deleteLesson(lesson);
     }
 
     @Override
     public Lesson getLesson(int index) {
         return lessonSchedule.getLesson(index);
+    }
+
+    @Override
+    public Lesson getFilteredLesson(int index) {
+        return filteredLesson.get(index);
     }
 
     @Override
@@ -216,6 +231,11 @@ public class ModelManager implements Model {
     @Override
     public int getLessonScheduleSize() {
         return lessonSchedule.getSize();
+    }
+
+    @Override
+    public int getFilteredLessonListSize() {
+        return filteredLesson.size();
     }
 
     @Override

@@ -18,6 +18,7 @@ import tutorease.address.logic.parser.exceptions.ParseException;
 public class DateTime implements Comparable<DateTime> {
     private static Logger logger = LogsCenter.getLogger(AddLessonCommand.class);
     private final LocalDateTime dateTime;
+
     /**
      * Constructs a {@code DateTime}.
      *
@@ -27,6 +28,7 @@ public class DateTime implements Comparable<DateTime> {
         logger.log(Level.INFO, "Creating DateTime object with date time: " + dateTime);
         requireNonNull(dateTime);
         checkValidDateTime(dateTimeToString(dateTime));
+
         this.dateTime = dateTime;
         logger.log(Level.INFO, "Created DateTime object with date time: " + dateTime);
     }

@@ -25,10 +25,12 @@ public class FindLessonCommandParser implements Parser<FindLessonCommand> {
      */
     public FindLessonCommand parse(String args) throws ParseException {
         logger.log(Level.INFO, "Parsing FindLessonCommand with args: " + args);
+
         validateNull(args);
         String trimmedArgs = args.trim();
         isEmptyArgs(trimmedArgs);
         String[] nameKeywords = trimmedArgs.split("\\s+");
+
         logger.log(Level.INFO, "Parsed FindLessonCommand with keywords: " + Arrays.toString(nameKeywords));
         return new FindLessonCommand(new LessonContainsNamesPredicate(Arrays.asList(nameKeywords)));
     }

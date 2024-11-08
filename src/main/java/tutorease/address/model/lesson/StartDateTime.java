@@ -35,6 +35,7 @@ public class StartDateTime extends DateTime {
         logger.log(Level.INFO, "Creating StartDateTime object with date time: " + dateTime);
         dateTime = dateTime.trim();
         requireNonNull(dateTime);
+
         checkValidDateTime(dateTime);
         logger.log(Level.INFO, "Created StartDateTime object with date time: " + dateTime);
         return new StartDateTime(parseDateTime(dateTime));

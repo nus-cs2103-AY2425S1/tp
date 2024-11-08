@@ -190,31 +190,45 @@ public class AddContactCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE);
+        // missing all fields
+        String expectedMissingFieldsMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AddContactCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "", expectedMissingFieldsMessage);
+
 
         // missing name prefix
+        String expectedNameMessage = String.format(Messages.MISSING_PREFIX, PREFIX_NAME,
+                AddContactCommand.MESSAGE_USAGE);
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + ROLE_DESC_BOB,
-                expectedMessage);
+                expectedNameMessage);
 
         // missing phone prefix
+        String expectedPhoneMessage = String.format(Messages.MISSING_PREFIX, PREFIX_PHONE,
+                AddContactCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+                expectedPhoneMessage);
 
         // missing email prefix
+        String expectedEmailMessage = String.format(Messages.MISSING_PREFIX, PREFIX_EMAIL,
+                AddContactCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                        + ROLE_DESC_BOB, expectedMessage);
+                        + ROLE_DESC_BOB, expectedEmailMessage);
 
         // missing address prefix
+        String expectedAddressMessage = String.format(Messages.MISSING_PREFIX, PREFIX_ADDRESS,
+                AddContactCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                        + ROLE_DESC_BOB, expectedMessage);
+                        + ROLE_DESC_BOB, expectedAddressMessage);
 
         // missing role prefix
+        String expectedRoleMessage = String.format(Messages.MISSING_PREFIX, PREFIX_ROLE,
+                AddContactCommand.MESSAGE_USAGE);
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + VALID_ROLE_BOB, expectedMessage);
+                + VALID_ROLE_BOB, expectedRoleMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+                expectedMissingFieldsMessage);
     }
 
     @Test
@@ -246,7 +260,7 @@ public class AddContactCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + ROLE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE));
     }
 }

@@ -20,7 +20,7 @@ public class FindLessonCommand extends LessonCommand {
 
     public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD + " " + COMMAND_WORD
             + ": Finds all lessons whose students' names "
-            + "match the specified names (case-insensitive) and displays them in the lesson panel. \n "
+            + "match the specified names (case-insensitive) and displays them in the lesson panel. \n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " alice bob charlie";
 
@@ -29,6 +29,11 @@ public class FindLessonCommand extends LessonCommand {
 
     private final LessonContainsNamesPredicate predicate;
 
+    /**
+     * Creates a FindLessonCommand to find lessons for which student names match the specified keywords.
+     *
+     * @param predicate The predicate used to filter the list of lessons by matching student names with keywords.
+     */
     public FindLessonCommand(LessonContainsNamesPredicate predicate) {
         this.predicate = predicate;
     }

@@ -25,12 +25,14 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
     @Override
     public AddLessonCommand parse(String args) throws ParseException {
         logger.log(Level.INFO, "Parsing AddLessonCommand with args: " + args);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_ID, PREFIX_FEE,
                 PREFIX_START_DATE, PREFIX_DURATION);
         validatePrefixesPresent(argMultimap, AddLessonCommand.MESSAGE_USAGE, PREFIX_STUDENT_ID, PREFIX_FEE,
                 PREFIX_START_DATE, PREFIX_DURATION);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_ID, PREFIX_FEE, PREFIX_START_DATE, PREFIX_DURATION);
+
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get());
         Fee fee = ParserUtil.parseFee(argMultimap.getValue(PREFIX_FEE).get());
         StartDateTime startDateTime = ParserUtil.parseStartDateTime(argMultimap.getValue(PREFIX_START_DATE).get());

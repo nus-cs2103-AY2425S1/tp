@@ -79,8 +79,8 @@ class DeleteContactCommandTest {
 
         CommandResult commandResult = new DeleteContactCommand(Index.fromZeroBased(0)).execute(modelStub);
 
-        String expectedMessage = String.format("Contact [%s; Phone: %s; Email: %s; Address: %s; Tags: ] "
-                        + "deleted successfully",
+        String expectedMessage = String.format("Contact [Name: %s; Phone: %s; Email: %s; Address: %s; Tags: ] "
+                        + "deleted successfully.",
                 validPerson.getName(), validPerson.getPhone(), validPerson.getEmail(), validPerson.getAddress());
 
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
@@ -165,6 +165,16 @@ class DeleteContactCommandTest {
         }
 
         @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -223,8 +233,18 @@ class DeleteContactCommandTest {
         }
 
         @Override
+        public Lesson getFilteredLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getLessonScheduleSize() {
             return lessonsAdded.size();
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

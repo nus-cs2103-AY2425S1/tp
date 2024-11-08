@@ -29,6 +29,7 @@ public class LessonCommandParser implements Parser<Command> {
     @Override
     public Command parse(String args) throws ParseException {
         logger.log(Level.INFO, "Parsing LessonCommand with args: " + args);
+
         final Matcher matcher = getMatcher(args);
         final String subCommand = matcher.group("subCommand").toLowerCase();
         final String subArguments = matcher.group("subArguments");
@@ -38,6 +39,7 @@ public class LessonCommandParser implements Parser<Command> {
 
     private static Command getCommand(String args, String subCommand, String subArguments) throws ParseException {
         logger.log(Level.INFO, "Getting command for LessonCommand with args: " + args);
+
         switch (subCommand) {
         case AddLessonCommand.COMMAND_WORD:
             return new AddLessonCommandParser().parse(subArguments);
@@ -56,11 +58,13 @@ public class LessonCommandParser implements Parser<Command> {
 
     private static Matcher getMatcher(String args) throws ParseException {
         logger.log(Level.INFO, "Getting matcher for LessonCommand with args: " + args);
+
         final Matcher matcher = CONTACT_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             logger.log(Level.WARNING, "Invalid arguments found for LessonCommand");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
+
         logger.log(Level.INFO, "Got matcher for LessonCommand with args: " + args);
         return matcher;
     }

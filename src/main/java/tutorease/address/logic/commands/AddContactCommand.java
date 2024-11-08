@@ -1,6 +1,8 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_EMAIL;
+import static tutorease.address.logic.Messages.MESSAGE_DUPLICATE_PHONE;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorease.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -17,12 +19,11 @@ import tutorease.address.model.person.Person;
 /**
  * Adds a contact to the TutorEase.
  */
-
 public class AddContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
-            + ": Adds a person to TutorEase. "
+            + ": Adds a person to TutorEase.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -46,7 +47,7 @@ public class AddContactCommand extends ContactCommand {
     private final Person toAdd;
 
     /**
-     * Creates an AddContactCommand to add the specified {@code Person}
+     * Creates an AddContactCommand to add the specified {@code Person}.
      */
     public AddContactCommand(Person person) {
         requireNonNull(person);
@@ -57,12 +58,24 @@ public class AddContactCommand extends ContactCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        checkDuplicateContacts(model, toAdd);
+
+        model.addPerson(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    private static void checkDuplicateContacts(Model model, Person toAdd) throws CommandException {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        if (model.hasSamePhone(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PHONE);
+        }
+
+        if (model.hasSameEmail(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
+        }
     }
 
     @Override

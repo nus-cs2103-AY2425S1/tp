@@ -50,13 +50,23 @@ public interface Model {
      */
     void setTutorEase(ReadOnlyTutorEase tutorEase);
 
-    /** Returns the TutorEase */
+    /** Returns the TutorEase. */
     ReadOnlyTutorEase getTutorEase();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     boolean hasPerson(Person person);
+
+    /**
+     * Returns true if a person with the same phone number as {@code person} exists in the address book.
+     */
+    boolean hasSamePhone(Person person);
+
+    /**
+     * Returns true if a person with the same email address as {@code person} exists in the address book.
+     */
+    boolean hasSameEmail(Person person);
 
     /**
      * Deletes the given person.
@@ -77,7 +87,7 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered person list. */
     ObservableList<Person> getFilteredPersonList();
 
     /**
@@ -93,14 +103,39 @@ public interface Model {
      */
     ReadOnlyLessonSchedule getLessonSchedule();
 
+    /**
+     * Sets the lesson schedule.
+     *
+     * @param lessonSchedule The new lesson schedule.
+     */
     void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule);
 
+    /**
+     * Gets the filtered lesson list.
+     *
+     * @return The filtered lesson list.
+     */
     ObservableList<Lesson> getFilteredLessonList();
 
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     *
+     * @param predicate The predicate to filter the lesson list by.
+     */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
 
+    /**
+     * Returns true if the filtered person list is empty.
+     *
+     * @return A boolean indicating if the filtered person list is empty.
+     */
     boolean filteredLessonListIsEmpty();
 
+    /**
+     * Gets the filtered person list size.
+     *
+     * @return The size of the filtered person list.
+     */
     int getFilteredPersonListSize();
 
     /**
@@ -117,8 +152,9 @@ public interface Model {
      * @return A boolean indicating if the lesson is in the lessons schedule.
      */
     boolean hasLessons(Lesson lesson);
+
     /**
-     * Deletes the lesson given the lesson as the inpyt.
+     * Deletes the given lesson.
      *
      * @param lesson The lesson to delete.
      */
@@ -133,16 +169,31 @@ public interface Model {
     Lesson getLesson(int index);
 
     /**
+     * Returns lesson at the specified index from the filtered list.
+     *
+     * @param index The index of the lesson to get from the filtered list.
+     * @return The lesson at the specified index.
+     */
+    Lesson getFilteredLesson(int index);
+
+    /**
      * Returns size of lesson schedule.
      *
-     * @return The size of the lesson schedule
+     * @return The size of the lesson schedule.
      */
     int getLessonScheduleSize();
 
     /**
-     * Deletes all the lessons of a particular student
+     * Returns size of filtered lesson list.
      *
-     * @param student The student whose lessons we are deleting
+     * @return The size of the filtered lesson list.
+     */
+    int getFilteredLessonListSize();
+
+    /**
+     * Deletes all the lessons of a particular student.
+     *
+     * @param student The student whose lessons we are deleting.
      */
     void deleteStudentLesson(Person student);
 }

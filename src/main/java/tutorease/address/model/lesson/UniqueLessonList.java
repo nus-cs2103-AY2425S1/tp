@@ -35,6 +35,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     private final ObservableList<Lesson> internalList = FXCollections.observableArrayList();
     private final ObservableList<Lesson> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
     /**
      * Returns true if the list contains an equivalent lesson as the given argument.
      *
@@ -44,6 +45,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public boolean contains(Lesson toCheck) {
         logger.log(Level.INFO, "Checking if lesson is in list: " + toCheck);
         requireNonNull(toCheck);
+
         boolean contains = internalList.stream().anyMatch(toCheck::isOverlapping);
         logger.log(Level.INFO, "Lesson is in list: " + contains);
         return contains;
@@ -60,10 +62,13 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void add(Lesson toAdd) {
         logger.log(Level.INFO, "Adding lesson to list: " + toAdd);
         requireNonNull(toAdd);
+
+        // check if lesson overlaps with any other lesson in the list
         if (contains(toAdd)) {
             logger.log(Level.WARNING, "Lesson is overlapping with another lesson in the list: " + toAdd);
             throw new OverlappingLessonException();
         }
+
         internalList.add(toAdd);
         internalList.sort(Lesson::compareTo);
         logger.log(Level.INFO, "Added lesson to list: " + toAdd);
@@ -73,16 +78,18 @@ public class UniqueLessonList implements Iterable<Lesson> {
      * Removes the specified lesson from the list.
      *
      * @param lesson The lesson to be removed.
-     * @throws LessonNotInList If the lesson is not found in the list.
+     * @throws LessonNotInList If the lesson is not in the list.
      */
     public void remove(Lesson lesson) {
         logger.log(Level.INFO, "Removing lesson from list: " + lesson);
-        if (!internalList.contains(lesson)) {
-            logger.log(Level.WARNING, "Lesson is not in list: " + lesson);
-            throw new LessonNotInList();
-        } else {
+        requireNonNull(lesson);
+
+        boolean isLessonInList = contains(lesson);
+        if (isLessonInList) {
             internalList.remove(lesson);
             logger.log(Level.INFO, "Removed lesson from list: " + lesson);
+        } else {
+            throw new LessonNotInList();
         }
     }
 
@@ -96,13 +103,13 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public Lesson get(int index) {
         logger.log(Level.INFO, "Getting lesson at index: " + index);
-        if (!isValidIndex(index)) {
-            logger.log(Level.WARNING, "Index is out of range or invalid: " + index);
-            throw new LessonIndexOutOfRange();
-        } else {
+        if (isValidIndex(index)) {
             Lesson lesson = internalList.get(index);
             logger.log(Level.INFO, "Got lesson at index: " + index + " " + lesson);
             return lesson;
+        } else {
+            logger.log(Level.WARNING, "Index is out of range or invalid: " + index);
+            throw new LessonIndexOutOfRange();
         }
     }
 
@@ -126,30 +133,34 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void setLessons(UniqueLessonList lessons) {
         logger.log(Level.INFO, "Setting lessons in list: " + lessons);
         requireNonNull(lessons);
+
         internalList.setAll(lessons.internalList);
         logger.log(Level.INFO, "Set lessons in list: " + lessons);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the lesson list with the specified {@code lessons}.
+     * @param lessons The list of lessons to replace the current list.
      */
     public void setLessons(List<Lesson> lessons) {
         logger.log(Level.INFO, "Setting lessons in list: " + lessons);
         requireAllNonNull(lessons);
+
         if (!lessonsAreUnique(lessons)) {
             logger.log(Level.WARNING, "Lessons are overlapping with each other: " + lessons);
             throw new OverlappingLessonException();
         }
+
         internalList.setAll(lessons);
         logger.log(Level.INFO, "Set lessons in list: " + lessons);
     }
+
     /**
      * Checks if the index is valid.
      *
      * @param index The index to check.
      * @return True if the index is within bounds (greater than or equal to 0 and less than the size of the
-     *         list), false otherwise.
+     *      list), false otherwise.
      */
     public boolean isValidIndex(int index) {
         // index is 0-based
@@ -173,6 +184,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
      */
     public boolean lessonsAreUnique(List<Lesson> lessons) {
         logger.log(Level.INFO, "Checking if lessons are unique: " + lessons);
+
         for (int i = 0; i < lessons.size() - 1; i++) {
             for (int j = i + 1; j < lessons.size(); j++) {
                 Lesson lessonOne = lessons.get(i);
@@ -183,6 +195,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
                 }
             }
         }
+
         logger.log(Level.INFO, "Lessons are unique: " + lessons);
         return true;
     }
@@ -228,6 +241,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         logger.log(Level.INFO, "Updating person in lesson: " + target + " " + editedPerson + " " + i);
         assert target.isStudent() && editedPerson.isStudent();
         Lesson lesson = internalList.get(i);
+
         if (lesson.getStudent().equals(target)) {
             Lesson updatedLesson = new Lesson(editedPerson, lesson.getFee(),
                     lesson.getStartDateTime(), lesson.getEndDateTime());

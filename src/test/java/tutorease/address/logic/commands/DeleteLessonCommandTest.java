@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutorease.address.commons.core.GuiSettings;
 import tutorease.address.commons.core.index.Index;
@@ -35,6 +36,7 @@ public class DeleteLessonCommandTest {
 
     private class ModelStubAcceptingLessonDeleted extends ModelStub {
         final ArrayList<Lesson> lessonsAdded = new ArrayList<>();
+        final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
         @Override
         public boolean hasLessons(Lesson lesson) {
@@ -46,11 +48,14 @@ public class DeleteLessonCommandTest {
         public void addLesson(Lesson lesson) {
             requireNonNull(lesson);
             lessonsAdded.add(lesson);
+            lessons.add(lesson);
         }
 
         @Override
         public void deleteLesson(Lesson lesson) {
+            requireNonNull(lesson);
             lessonsAdded.remove(lesson);
+            lessons.remove(lesson);
         }
 
         @Override
@@ -59,15 +64,31 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public Lesson getFilteredLesson(int index) {
+            return lessons.get(index);
+        }
+
+        @Override
         public int getLessonScheduleSize() {
             return lessonsAdded.size();
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
+            return lessons.size();
         }
 
         @Override
         public ReadOnlyTutorEase getTutorEase() {
             return new TutorEase();
         }
+
+        @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+            return lessons;
+        }
     }
+
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -188,6 +209,16 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -248,7 +279,17 @@ public class DeleteLessonCommandTest {
         }
 
         @Override
+        public Lesson getFilteredLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getLessonScheduleSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
             throw new AssertionError("This method should not be called.");
         }
 
