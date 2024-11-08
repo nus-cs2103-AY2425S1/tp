@@ -334,10 +334,7 @@ Adds a group to the T_Assistant。
 
 ##### Notes
 
-1. `Group Name` is the unique identifier for each group, so no 2 groups can have the same group name.
-2. Group names must follow a three-part format: course type: either `CS2103` or `CS2103T`;
-   tutorial group: a letter followed by a number;
-   group number: any number
+1. `Group Name` is the unique identifier for each group, so no two groups can have the same group name.
 3. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -500,7 +497,7 @@ Adds a task to a group or multiple groups.
 2. The group name inputs are case-insensitive. `cs2103-f11-1` will yield the same result as `CS2103-F11-1`.
 3. This command is relatively flexible in terms of the input parameters. You can input duplicate group names.
    The application simply ignores the duplicates and adds the task to the desired group.
-4. The command checks for the existence of the task, hence you cannot input a task which already exists. A task is
+4. This command checks for the existence of the task, hence you cannot input a task which already exists. A task is
    equal to another task when it has the same task name and deadline as it.
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
@@ -570,6 +567,8 @@ Adds an existing task to the groups specified.
 2. `add_et_g` adds an existing task identified by the index. It only accepts a valid index
    based on the list when `list_t` is called.
 3. You can add an existing task to multiple groups.
+4. This command is relatively flexible in terms of the input parameters. You can input duplicate group names or group names that don't exist. 
+   1. The application simply ignores the duplicates and adds the task to the desired group. 
 5. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
@@ -682,7 +681,7 @@ Edits a task from a group.
 
 This screenshot shows the result of executing `edit_t_g i/1 gn/CS2103-F12-1 tn/Complete task 7`.
 
-<img src="images/screenshots/del_t.png" width="600">
+<img src="images/screenshots/edit_t_g.png" width="600">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -722,8 +721,7 @@ Marks a task as done or undone.
 ##### Notes
 
 1. The index must be valid and should be the index of target task in the group's task list.
-2. You are unable to specify whether to mark a task as done or undone.
-3. If a task is done it will be marked as undone, and vice versa.
+3. If a task is complete it will be marked as pending/overdue, and vice versa.
 4. For information on the constraints for each parameter used in this command, go
    to [Command Parameters](#command-parameters).
 
