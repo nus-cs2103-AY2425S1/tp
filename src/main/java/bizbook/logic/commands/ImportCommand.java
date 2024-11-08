@@ -61,6 +61,7 @@ public class ImportCommand extends Command {
         }
 
         int numContacts = model.getAddressBook().getPersonList().size();
+        model.getFocusedPerson().set(null);
         return new CommandResult(String.format(MESSAGE_SUCCESS, numContacts));
     }
 
