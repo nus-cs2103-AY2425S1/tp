@@ -317,6 +317,26 @@ the acceptable range). Therefore, edit the data file only if you are confident t
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+--------------------------------------------------------------------------------------------------------------------
+
+## Future Enhancements
+
+#### 1. **Unique Attributes and Relationship Modeling for Students and Guardians**
+* Students will have extra attributes such as grade level, exam dates, subjects. 
+* Establish a tagging system that groups students under their respective guardians.
+
+#### 2. **Find Students by Subjects or Grade Levels**
+- Implement a categorization system for students based on their enrolled subjects and grade levels. 
+- This feature will make it easy to filter and organize students, assisting tutors in managing students’ academic needs more effectively.
+
+#### 3. **Exam Date Management**
+- Track upcoming exam dates for each student, helping guardians and tutors stay informed and support students in their preparation. 
+- This feature would allow automatic reminders or notifications, contributing to better exam readiness.
+
+#### 4. **Fee and Payment Tracking**
+- Implement a detailed payment tracking system for both students and guardians. 
+- This feature would record due dates, overall payment amounts, and any outstanding fees for each student, while also linking this information to the responsible guardian.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
