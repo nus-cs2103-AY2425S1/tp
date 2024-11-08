@@ -94,6 +94,11 @@ public class VersionTest {
         another = new Version(2, 15, 0, false);
         assertTrue(one.compareTo(another) < 0);
 
+        // Tests early access vs not early access on same version number
+        one = new Version(2, 15, 0, false);
+        another = new Version(2, 15, 0, true);
+        assertTrue(one.compareTo(another) == 1);
+
         // Tests early access lower version vs not early access higher version compare by version number first
         one = new Version(2, 15, 0, true);
         another = new Version(2, 15, 5, false);
@@ -131,5 +136,32 @@ public class VersionTest {
     private void verifyVersionParsedCorrectly(String versionString,
             int major, int minor, int patch, boolean isEarlyAccess) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
+    }
+
+    @SuppressWarnings("unlikely-arg-type")
+    @Test
+    public void equals() {
+        Version version = new Version(1, 2, 3, true);
+        // same values -> returns true
+        Version versionCopy = new Version(1, 2, 3, true);
+        assertTrue(version.equals(versionCopy));
+        // same object -> returns true
+        assertTrue(version.equals(version));
+        // null -> returns false
+        assertTrue(!version.equals(null));
+        // different type -> returns false
+        assertTrue(!version.equals(5));
+        // different major -> returns false
+        Version differentVersion = new Version(2, 2, 3, true);
+        assertTrue(!version.equals(differentVersion));
+        // different minor -> returns false
+        differentVersion = new Version(1, 3, 3, true);
+        assertTrue(!version.equals(differentVersion));
+        // different patch -> returns false
+        differentVersion = new Version(1, 2, 4, true);
+        assertTrue(!version.equals(differentVersion));
+        // different early access -> returns false
+        differentVersion = new Version(1, 2, 3, false);
+        assertTrue(!version.equals(differentVersion));
     }
 }

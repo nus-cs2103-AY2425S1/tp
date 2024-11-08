@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.AddScheduleCommand.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.commands.AddScheduleCommand.MESSAGE_INVALID_TIME;
@@ -12,6 +13,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AddScheduleCommandParserTest {
 
     private final AddScheduleCommandParser parser = new AddScheduleCommandParser();
+
+    @Test
+    public void parse_allFieldsPresent_success() throws Exception {
+        String userInput = " c/1 n/Team Meeting d/10-10-2024 t/1800";
+        assertDoesNotThrow(() -> parser.parse(userInput));
+    }
 
     @Test
     public void parse_missingContactIndex_throwsParseException() {
@@ -52,6 +59,24 @@ public class AddScheduleCommandParserTest {
     @Test
     public void parse_emptyInput_throwsParseException() {
         String userInput = ""; // Empty input
+        assertThrows(ParseException.class, () -> parser.parse(userInput), MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_emptyNameField_throwsParseException() {
+        String userInput = " c/1 n/ d/10-10-2024 t/1800"; // Empty name field
+        assertThrows(ParseException.class, () -> parser.parse(userInput), MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_invalidIndex_throwsParseException() {
+        String userInput = " c/0 n/Team Meeting d/10-10-2024 t/1800"; // Invalid index
+        assertThrows(ParseException.class, () -> parser.parse(userInput), MESSAGE_USAGE);
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        String userInput = " preamble c/1 n/Team Meeting d/10-10-2024 t/1800"; // Non-empty preamble
         assertThrows(ParseException.class, () -> parser.parse(userInput), MESSAGE_USAGE);
     }
 }
