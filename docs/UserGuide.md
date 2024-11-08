@@ -184,6 +184,9 @@ Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TA
 * Partial names and addresses will also be matched 
   * e.g. `Han` will match `Hans`
   * e.g. `Cle` will match `Clementi`
+* Note that tags is a complete string match
+  * e.g. `elderly` will match `elderly`
+  * e.g. `urg` will not match `urgent`
 * For name searching, beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
   - e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search)
