@@ -220,8 +220,8 @@ public class AutoSuggestionTextField extends TextField {
         suggestionPopup.show(this, location.getX(), location.getY());
         double height = calculateListViewHeight(textFlowItems);
         double width = calculateListViewWidth(textFlowItems);
-        suggestionList.setPrefHeight(height);
-        suggestionList.setMaxHeight(height);
+        suggestionList.setPrefHeight(height + 10);
+        suggestionList.setMaxHeight(height + 10);
         suggestionList.setPrefWidth(width);
     }
 
@@ -347,7 +347,7 @@ public class AutoSuggestionTextField extends TextField {
             //label with graphic (TextFlow) to highlight matching prefix
             Label entryLabel = new Label();
             entryLabel.setGraphic(buildTextFlow(result, searchRequest));
-            entryLabel.setPrefHeight(10);
+            entryLabel.setPrefHeight(20);
 
         }
     }
