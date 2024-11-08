@@ -207,7 +207,7 @@ module ID m/MODULE
 
 Examples:
 * `module 12345678 m/GEA1000` will add a module `GEA1000` to a person with student ID of `12345678`.
-* `module 13131313 m/CS2103T` will add a module `CS2103T` to a person with student ID of `13131313` (the result of this command is shown in the screenshot below).
+* `module 13131313 m/CS2103T` will add a module `CS2103T` to a person with student ID of `13131313` (the response message of this command is shown in the screenshot below).
 
   ![result for 'add module result'](images/addModule.png)
 
@@ -307,9 +307,7 @@ To return to display the full list of persons, use the `list` command.
 
 ### Deleting a person/module : `delete`
 
-Deletes the specified person/module from EduContacts.
-<br>
-This command has 2 formats.
+Deletes the specified person/module from EduContacts. This command has 2 formats.
 
 Format 1:
 ```bash
@@ -332,7 +330,9 @@ delete ID m/MODULE
 * Deletes a module from the person with the specified student ID.
 
 Examples: 
-* `delete `
+* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with student ID of `13131313` (the result of this command is shown in the screenshot below).
+
+  ![result for 'delete_13131313'](images/deleteModuleResult.png)
 <div style="page-break-after: always;"></div>
 
 ### Finding a person : `find`
@@ -433,7 +433,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student`
 **Clear**  | `clear`
-**Delete** | `delete ID`<br> e.g., `delete 12345678`
+**Delete** | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
 **Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
 **Add Module** | `module ID [m/MODULE]` <br> e.g., `add 12345678 m/CS2103T`
