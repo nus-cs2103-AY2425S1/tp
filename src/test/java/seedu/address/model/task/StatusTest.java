@@ -5,6 +5,8 @@ import static seedu.address.model.task.Status.isValidStatus;
 
 import org.junit.jupiter.api.Test;
 
+//@@author gho7sie
+
 public class StatusTest {
     private static final Status PENDING = Status.PENDING;
     private static final Status COMPLETED = Status.COMPLETED;
