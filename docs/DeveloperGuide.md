@@ -188,7 +188,7 @@ Explanation:
 6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 ### Edit Guest feature
-The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number (positive, starting from 1) of that guest in the displayed guest list. New details are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values 
+The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number (positive, starting from 1) of that guest in the displayed guest list. New guest details are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values 
 
 The sequence diagram below provides an overview for the execution flow of a `edit_guest` command:
 <puml src="diagrams/EditGuestSequenceDiagramP1.puml" />
@@ -209,10 +209,12 @@ Explanation:
 6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 ### Find feature
-The `find` command searches for all guests and vendors that match the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.
+The `find` command searches for all guests and vendors that match any of the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.
 
 The sequence diagram below provides an overview for the execution flow of a `find` command:
-<puml src="diagrams/FindSequenceDiagram.puml" />
+<puml src="diagrams/FindSequenceDiagramP1.puml" />
+<puml src="diagrams/FindSequenceDiagramP2.puml" />
+<puml src="diagrams/FindSequenceDiagramP3.puml" />
 
 <box type="info" seamless>
 
@@ -221,10 +223,11 @@ The sequence diagram below provides an overview for the execution flow of a `fin
 
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
-2. `AddressBookParser` parses the user input (if valid) to create and return a `FindCommandParser`
-3. `FindCommandParser` parses the user input (if valid) to extract the prefix and its corresponding value, before calling the corresponding parse predicate method to create the corresponding predicate to be used. In this example, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. A `FindCommand` is then created with the predicate and returned.
-4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the predicate as the argument. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of guest(s) and vendor(s) that match the given keyword(s)
-6. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `find` command, it creates and return an `FindCommandParser` for further parsing.
+3. `FindCommandParser` parses the remaining user input (excluding the `find` keyword) to extract the prefix and its corresponding value. Then, it calls the corresponding parse predicate method to create the corresponding predicate to be used. In the above example, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. 
+4. A `FindCommand` is then created with the new `NameContainsKeywordsPredicate` object and returned.
+4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the `NameContainsKeywordsPredicate` object as the argument. This method filters the common list of guests and vendors based on the predicate. Guests and vendors whose name (from the above example) matches the given keyword `John` will be kept. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of remaining guest(s) and vendor(s). 
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 
 --------------------------------------------------------------------------------------------------------------------
