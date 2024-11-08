@@ -82,9 +82,12 @@ again, type `help` and press Enter.
 
 * Every student added will be assigned a unique, non-modifiable `STUDENT_ID` that begins with S followed by a 5 digit 
 number (e.g. S00003).
-> **Note:** The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
-` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 (instead
-of replacing S00001).
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
+` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 
+(instead of replacing S00001).
+
+</div>
 
 * Parameters can be in any order.
   e.g. if the command specifies `n\NAME p\PHONE_NUMBER`, `p\PHONE_NUMBER n\NAME` is also acceptable.
@@ -93,13 +96,15 @@ of replacing S00001).
   e.g. `s\SUBJECT [s\MORE_SUBJECTS]` can be used as `s\SUBJECT` or `s\SUBJECT s\MORE_SUBJECTS`.
 
 * Items with `...` after them can be repeated.
-  e.g. `s\SUBJECT [s\MORE_SUBJECTS]...` can be used as `s\SUBJECT`, `s\SUBJECT s\SUBJECT`, `s\SUBJECT s\SUBJECT s\SUBJECT`.
+  e.g. `s\SUBJECT [s\MORE_SUBJECTS]...` can be used as `s\SUBJECT`, `s\SUBJECT s\SUBJECT`, `s\SUBJECT s\SUBJECT 
+s\SUBJECT`.
 
 * Commands are case-sensitive (e.g., `add` is not the same as `Add`). Hence, commands should be in lowercase.
 
 * Prefixes are case-sensitive (e.g., `n\` is not the same as `N\`). Hence, prefixes should be in lowercase.
 
-* Parameters are case-insensitive (e.g., `Science`, `SCIENCE`, `science` are treated as the same).
+* Parameters are case-insensitive (e.g., `Science`, `SCIENCE`, `science` are treated as the same) except for sort 
+function.
 
 * Leading and trailing spaces will be removed from the parameters. Hence, the length of the parameters is not affected 
 by the leading and trailing spaces.
@@ -125,9 +130,12 @@ Format: `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\M
 and the special characters (-/') excluding parentheses. Names should start and end with an alphabet,
 and there should not be more than one consecutive special character.
 * `NRIC` is compulsory and should follow the format of Singaporean IC and FIN numbers. It should start with one of
-  `S, T, F, G, M` followed by a 7-digit number and another alphabet (e.g., S1234567A).
-> **Note:** Contacts added should not have the same NRIC number. New contacts having the same NRIC number as an existing
-contact will be treated as a duplicate and will not be allowed. 
+  `S, T, F, G, M` followed by a 7-digit number and another alphabet (e.g., S1234567A). 
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Contacts added should not have the same NRIC number. New contacts having the same NRIC number as an existing
+contact will be treated as a duplicate and will not be allowed.
+
+</div>
 * `YEAR_GROUP` is compulsory and should be a number within 1-13 (which represents primary school years 1 - 6 and
   secondary school years 7 - 13).
 * `PHONE_NUMBER` should only contain number. It should be between 4 and 20 digits long with no spaces in between.
@@ -137,8 +145,11 @@ between.
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the `s\` field. Only subjects that are 
 available within the tuition centre will be allowed.
 * `[MORE_SUBJECTS]` is optional and can be repeated to add more subjects.
-> **Note:** repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject 
-will be added. 
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject 
+will be added.
+
+</div>
 * A student ID is automatically generated and assigned upon successful addition. It will be displayed in the success 
 message and can be used for `addsubject`, `edit`, `detail` and `delete`.
 
@@ -154,11 +165,15 @@ Removes a student from the tuition center management system.
 
 Format: `delete STUDENT_ID`
 
-* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a student is
-  automatically assigned when the student contact is first added and can be found by viewing the student's details.
-> **Note:** The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
-` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 (instead
-of replacing S00001).
+* `STUDENT_ID` is compulsory and is of the format: S followed by a 5-digit, starting from 00001 to 99999. The ID of a 
+student is automatically assigned when the student contact is first added and can be found by viewing the student's 
+details.
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+The `STUDENT_ID` of a student is non-replaceable once deleted. i.e. if you have one student with `STUDENT_ID
+` S00001 and you delete that student, the next student you add will be assigned the next `STUDENT_ID` e.g. S00002 
+(instead of replacing S00001).
+
+</div>
 
 Examples:
 * `delete S00001`
@@ -232,6 +247,7 @@ and there should not be more than one consecutive special character.
 * Students matching at least one keyword will be returned.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After finding, you can use `list` command to return to the full list of students.
+
 </div>
 Examples:
 * `find John` returns `John` and `John Doe`
@@ -246,23 +262,28 @@ Sort the list of students based on a specified field.
 
 Format: `sort by\FIELD`
 
-* `FIELD` can be either `name`, `subject`, `studentId` or `yearGroup`.
+* `FIELD` can be either `name`, `subject`, `studentID` or `yearGroup`.
 * Sorting by name will sort students in lexicographical ascending order of their names.
 * Sorting by subject will sort students based on the lexicographically smallest subject they are taking.
-* Sorting by studentId will sort students based in ascending order based on their studentId.
+* Sorting by studentID will sort students based on ascending order of studentID.
 * Sorting by yearGroup will sort students in ascending order based on their year group.
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+FIELD is case-sensitive (e.g., `NAME` is not the same as `name`). Hence, FIELDs should be in lowercase.
+
+</div> 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Sort command will sort the current list of students shown in the main window.
+For example, if you have filtered the list by year group 2 students and then use the `sort by\name` command, only year 
+group 2 students will be sorted.
 
-* Sort command will sort the current list of students shown in the main window.
-For example, if you have filtered the list by year group 2 students and then use the `sort by\name` command, only year group 2 students will be sorted.
 </div>
 
 Examples:
 * `sort by\name`
 * `sort by\subject`
 * `sort by\yearGroup`
-* `sort by\studentId`
+* `sort by\studentID`
 
 ![Sort Success Message](/images/sort.png)
 
@@ -277,6 +298,7 @@ Format: `filter FIELD\VALUE`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 After filtering, you can use `list` command to return to the full list of students.
+
 </div>
 
 Examples:
@@ -296,7 +318,10 @@ Format: `addsubject STUDENT_ID s\SUBJECT`
   automatically assigned when the student contact is first added and can be found by viewing the student's details.
 * `SUBJECT` is compulsory, and you can add multiple subjects by repeating the s/ field. Subjects are case-insensitive
   (i.e. science, SCIENCE, Science are treated the same way).
-> **Note:** repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject will be added.
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Repeated subjects will be ignored. For example, if you add `s\Science s\Science`, only one `Science` subject will be added.
+
+</div>
 * Subjects available: English, Chinese, Malay, Tamil, Math, Further Math, Science, History, Geography, Literature,
 Economics, Accounting, Business, Physics, Chemistry, Biology and Computing.
 
@@ -315,9 +340,12 @@ Format: `tracksubject`
 * The subject count will be displayed in a pop-up window.
 * User may use keyboard shortcut `B` to close the pop-up window.
 
-*Note*: Track subject displays the number of students based on the filtered list. For example,
+<div markdown="span" class="alert alert-note">:memo: **Note:**
+Track subject displays the number of students based on the filtered list. For example,
 filtering by year 2 students followed by a `tracksubject` command will only show how many year 2 students 
-are taking each of the subjects. 
+are taking each of the subjects.
+
+</div> 
 
 ![TrackSubject Success Message](/images/tracksubject.png)
 
@@ -328,6 +356,7 @@ Clears all student entries from the system.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This action is irreversible. All student entries will be deleted permanently.
+
 </div>
 
 Format: `clear`
