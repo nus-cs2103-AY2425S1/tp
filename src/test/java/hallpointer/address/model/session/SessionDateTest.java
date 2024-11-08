@@ -33,19 +33,33 @@ public class SessionDateTest {
         assertFalse(SessionDate.isValidDate("24 September 2024")); // wrong format
         assertFalse(SessionDate.isValidDate("Oct 24 2024")); // wrong format
         assertFalse(SessionDate.isValidDate("2024 24 Sep")); // wrong format
+        assertFalse(SessionDate.isValidDate("333 Mar 2024")); // invalid day
+        assertFalse(SessionDate.isValidDate("30 m 2024")); // invalid month
+        assertFalse(SessionDate.isValidDate("30 Mar 024")); // invalid year
+        assertFalse(SessionDate.isValidDate(" Mar 2024")); // missing day
+        assertFalse(SessionDate.isValidDate("29  2024")); // missing month
+        assertFalse(SessionDate.isValidDate("30 Mar ")); // missing year
 
         // valid dates
-        assertTrue(SessionDate.isValidDate("24 Sep 2024")); // valid date
-        assertTrue(SessionDate.isValidDate("01 Jan 2000")); // valid date
-        assertTrue(SessionDate.isValidDate("15 Aug 2023")); // valid date
+        assertTrue(SessionDate.isValidDate("24 Sep 2024"));
+        assertTrue(SessionDate.isValidDate("01 Jan 2000"));
+        assertTrue(SessionDate.isValidDate("15 Aug 2023"));
+        assertTrue(SessionDate.isValidDate("1 Jan 2000")); // no zero-padding
+        assertTrue(SessionDate.isValidDate("15 aUg 2023")); // wrong case
+        assertTrue(SessionDate.isValidDate("4 fEB 1989")); //both
     }
 
     @Test
     public void equals() {
-        SessionDate sessionDate = new SessionDate("24 Sep 2024");
+        SessionDate sessionDate = new SessionDate("4 Sep 2024");
 
         // same values -> returns true
-        assertTrue(sessionDate.equals(new SessionDate("24 Sep 2024")));
+        assertTrue(sessionDate.equals(new SessionDate("4 Sep 2024")));
+
+        // same after formatting -> returns true
+        assertTrue(sessionDate.equals(new SessionDate("04 Sep 2024")));
+        assertTrue(sessionDate.equals(new SessionDate("4 sep 2024")));
+        assertTrue(sessionDate.equals(new SessionDate("4 SeP 2024")));
 
         // same object -> returns true
         assertTrue(sessionDate.equals(sessionDate));
