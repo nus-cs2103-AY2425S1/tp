@@ -16,7 +16,7 @@ This project is evolved from [AddressBook-Level3](https://github.com/se-edu/addr
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -112,7 +112,7 @@ How the `Logic` component works:
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<puml src="diagrams/ParserClasses.puml" width="600"/>
+<puml src="diagrams/ParserClasses.puml" width="700", height="650"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddGuestCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddGuestCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -124,7 +124,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="700" height="550" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" height="650" />
 
 Note: `Vendor` and `Guest` both extend from the abstract `Person` class, which defines common attributes and behaviors shared by both types of entities.
 
@@ -138,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="700" height"650" />
 
 The `Storage` component,
 * Can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -165,14 +165,13 @@ The `add_guest` command creates and adds a new `Guest` object into the address b
 The sequence diagrams below provides an overview for the execution flow of a `add_guest` command:
 <puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
 
-<p align="center">
- <img src="diagrams/AddGuestSequenceDiagramP2.puml" alt="Add guest sequence diagram P2">
+<p align="center" width="100%">
+    <img width="69%" src="diagrams/AddGuestSequenceDiagramP2.puml" alt="Add guest sequence diagram P2">
 </p>
 
-<p align="center"> 
-    <img src="diagrams/AddGuestSequenceDiagramP3.puml" alt="Add guest sequence diagram P3">
+<p align="center" width="100%">
+    <img width="69%" src="diagrams/AddGuestSequenceDiagramP3.puml" alt="Add guest sequence diagram P3">
 </p>
-
 <box type="info" seamless>
 
 **Note:** The lifeline for `AddGuestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
@@ -195,12 +194,12 @@ The `edit_guest` command updates the details of an existing guest in the address
 The sequence diagrams below provides an overview for the execution flow of a `edit_guest` command:
 <puml src="diagrams/EditGuestSequenceDiagramP1.puml" />
 
-<p align="center">
-    <img src="diagrams/EditGuestSequenceDiagramP2.puml" alt="Edit guest sequence diagram P2">
+<p align="center" width="100%">
+    <img width="69%" src="diagrams/EditGuestSequenceDiagramP2.puml" alt="Edit guest sequence diagram P2">
 </p>
 
-<p align="center">
-    <img src="diagrams/EditGuestSequenceDiagramP3.puml" alt="Edit guest sequence diagram P3">
+<p align="center" width="100%">
+    <img width="69%" src="diagrams/EditGuestSequenceDiagramP3.puml" alt="Edit guest sequence diagram P3">
 </p>
 <box type="info" seamless>
 
@@ -223,10 +222,9 @@ The sequence diagrams below provides an overview for the execution flow of a `fi
 <puml src="diagrams/FindSequenceDiagramP1.puml" />
 <puml src="diagrams/FindSequenceDiagramP2.puml" />
 
-<p align="center">
-    <img src="diagrams/FindSequenceDiagramP3.puml" alt="Find sequence diagram P3>
+<p align="center" width="100%">
+    <img width="69%" src="diagrams/FindSequenceDiagramP3.puml" alt="Find sequence diagram P3">
 </p>
-
 <box type="info" seamless>
 
 **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
@@ -244,7 +242,7 @@ Explanation:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -535,7 +533,7 @@ With this enhancement, a search query would return all results containing the sp
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix C: Instructions for manual testing**
+## **Appendix C: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 

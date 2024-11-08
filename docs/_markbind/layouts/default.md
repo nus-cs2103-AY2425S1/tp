@@ -37,13 +37,16 @@
   * [Setting Up]({{ baseUrl }}/DeveloperGuide.html#setting-up-getting-started)
   * [Design]({{ baseUrl }}/DeveloperGuide.html#design)
   * [Implementation]({{ baseUrl }}/DeveloperGuide.html#implementation)
-  * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
-  * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
-  * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
+  * [Documentation, Logging, Testing, Configuration, Dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
+  * [Appendix A: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-a-requirements)
+  * [Appendix B: Planned Enhancements]({{ baseUrl }}/DeveloperGuide.html#appendix-b-planned-enhancements)
+  * [Appendix C: Instructions for Manual Testing]({{ baseUrl }}/DeveloperGuide.html#appendix-c-instructions-for-manual-testing)
+  * [Appendix D: Efforts]({{ baseUrl }}/DeveloperGuide.html#appendix-d-efforts)
+
 * Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
+  * [Tracing code](https://se-education.org/guides/tutorials/ab3TracingCode.html)
+  * [Adding a command](https://se-education.org/guides/tutorials/ab3AddRemark.html)
+  * [Removing Fields](https://se-education.org/guides/tutorials/ab3RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
