@@ -2,6 +2,7 @@ package seedu.address.logic.commands.findcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
@@ -11,9 +12,6 @@ import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredi
  * Keyword matching is case-insensitive.
  */
 public class FindWeddingCommand extends FindCommand {
-
-    public static final String MESSAGE_FIND_WEDDING_PERSON_SUCCESS = "Search for wedding(s) containing "
-            + "\"%s\" was successful. Showing results:";
 
     public FindWeddingCommand(WeddingContainsKeywordsPredicate predicate) {
         super(predicate);
@@ -25,9 +23,11 @@ public class FindWeddingCommand extends FindCommand {
         model.updateFilteredPersonListByWedding((WeddingContainsKeywordsPredicate) predicate);
 
         if (!model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_FIND_WEDDING_PERSON_SUCCESS, predicate.getDisplayString()));
+            return new CommandResult(String.format(
+                    Messages.MESSAGE_FIND_WEDDING_PERSON_SUCCESS, predicate.getDisplayString()
+            ));
         } else {
-            return new CommandResult(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+            return new CommandResult(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         }
     }
 

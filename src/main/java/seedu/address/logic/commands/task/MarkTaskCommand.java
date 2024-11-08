@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,20 +26,22 @@ public class MarkTaskCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1\n"
             + COMMAND_WORD + " 1 3 5\n";
 
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task: %1$s";
-
     private final TaskStatusModifier taskStatusModifier;
 
     public MarkTaskCommand(Set<Index> targetIndexes) {
         this.taskStatusModifier = new TaskStatusModifier(targetIndexes, true);
     }
+
     public Set<Index> getTargetIndexes() {
         return taskStatusModifier.getTargetIndexes();
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Set<Task> markedTasks = taskStatusModifier.modifyTasks(model);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_SUCCESS, markedTasks));
+        return new CommandResult(String.format(
+                Messages.MESSAGE_MARK_TASK_SUCCESS, markedTasks
+        ));
     }
 
     @Override

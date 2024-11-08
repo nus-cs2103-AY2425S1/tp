@@ -23,7 +23,6 @@ public class TaskStatusModifier {
     private final Set<Index> targetIndexes;
     private final boolean markAsDone;
 
-
     /**
      * Constructs a {@code TaskStatusModifier} with the specified target indexes and status flag.
      *

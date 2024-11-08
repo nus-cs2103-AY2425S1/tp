@@ -1,7 +1,7 @@
 ---
-    layout: default.md
-      title: "Developer Guide"
-      pageNav: 3
+  layout: default.md
+  title: "Developer guide"
+  pageNav: 3
 ---
 
 # WedLinker Developer Guide
@@ -225,10 +225,10 @@ This section describes some noteworthy details on how certain features are imple
 
 The Force feature is a quality of life addition for WedLinker. It enables users to bypass certain checks in the `Logic` in a controlled manner to make usage easier.
 The force feature is applicable for the following commands:
-* `tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
-* `delete-tag`: This unassigns the target `Tag` from all contacts before deleting it.
-* `assign-wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
-* `delete-wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
+* `Tag`: This creates a `Tag` if it does not exist in WedLinker before tagging the `Person`.
+* `Delete Tag`: This unassigns the target `Tag` from all contacts before deleting it.
+* `Assign Wedding`: This creates a `Wedding` if it does not exist in WedLinker before assigning the `Person` to the `Wedding`.
+* `Delete Wedding`: This unassigns all `Person` from the `Wedding` before deleting it.
 
 The force functionality can be used with the above functions by including f/ at the end of the command.
 
@@ -246,7 +246,7 @@ Step 4. During `DeleteTagCommand#execute()`, the force flag is checked. If prese
 
 #### Implementation
 
-The Wedding Feature is a significant addition for WedLinker. Wedding contains the Contacts involved to facilitate easy planning and consolidation for wedding planners.
+The Wedding Feature allows users to store details of a Wedding in WedLinker. Wedding contains the Contacts involved to facilitate easy planning and consolidation for wedding planners.
 Wedding would support the following functions:
 
 * `Create Wedding` — Creates a Wedding in WedLinker to allow compilation of information.
@@ -278,8 +278,8 @@ Step 8. The user executes `delete-wedding w/Test Wedding 2`. WedLinker would del
 Wedding supports the force functionality for easier usage.
 
 Force is supported for the following functions:
-- `assign-wedding` (Creates the Wedding if it does not already exist in WedLinker.)
-- `delete-wedding` (Unassigns all Person from the Wedding before it is deleted.)
+- `Assign Wedding` (Creates the Wedding if it does not already exist in WedLinker.)
+- `Delete Wedding` (Unassigns all Person from the Wedding before it is deleted.)
 </box>
 
 <box type="info" seamless>
@@ -291,7 +291,7 @@ Known bugs:
 
 #### Implementation
 
-The Vendor Feature allows users to track which contacts are Vendors and assign tasks to them. Only Vendors can be assigned tasks.
+The `Vendor` Feature allows users to track which `Person` are `Vendors` and assign `Tasks` to them. Only `Vendors` can be assigned `Tasks`.
 Vendor would support the following functions:
 
 * `Assign Vendor` — Assigns an existing `Person` in WedLinker to become a `Vendor`. 
@@ -307,7 +307,58 @@ Step 3. The user executes `unassign-vendor 1` to unassign the `Vendor` to become
 
 ### Task
 
+The `Task` Feature allows users to track `Tasks` when planning for a Wedding. `Tasks` can only be assigned to `Vendors`.
+There are different types of `Task` to support different requirements for the users.
+
+`Task` type: `Todo`
+`Todo` is the simplest kind of `Task` which has a description to provide information about the `Task`.
+
+`Task` type: `Deadline`
+`Deadline` is a type of `Task` which has a description to provide information and supports a due `Date`.
+
+`Task` type: `Event`
+`Event` is a type of `Task` which has a description to provide information and supports a start and end `Date`.
+
+`Task` supports the following functions:
+* `Create Task` —  Creates a new `Task` in WedLinker.
+* `Assign Task` —  Assigns an existing `Task` to a `Vendor`. Tasks can only be assigned to `Vendors`.
+* `Unassign Task` —  Unassigns a `Task` from a `Vendor`. 
+* `Delete Task` —  Deletes a `Task` from WedLinker. 
+
+Given below is an example usage scenario and how Tasks are used in WedLinker.
+
+Step 1. The user launches the application, `Tasks` are loaded into the `Model`.
+
+Step 2. The user executes `create-task Order Wedding Cake`. WedLinker will create a new `Task` in the `Task List`.
+
+Step 3. The user executes `assign-task 1 1` to assign the `Task` at index 1 of the `Task List` to the `Vendor` at index 1 on the `Person List`. 
+
+Step 4. The user executes `unassign-task 1 1` to assign the `Task` at index 1 of the `Task List` from the `Vendor` at index 1 on the `Person List`.
+
+Step 5. The user executes `unassign-task 1 1` to assign the `Task` at index 1 of the `Task List` from the `Vendor` at index 1 on the `Person List`.
+
+Step 6. The user executes `delete-task 1 ` to delete the `Task` at index 1 of the `Task List` from the WedLinker.
+
 ### Switch Views
+WedLinker features a split-view interface designed to display different lists side by side. The left side of the screen consistently shows the `Person List`, while the right side dynamically displays one of the following lists based on user input: `Wedding List`, `Task List`, or `Tag List`.
+This functionality is managed through an enumeration that defines the available views: `WEDDING`, `TASK`, and `TAG`. The system switches between these views based on the user's actions, ensuring a flexible and intuitive user experience.
+
+
+`View` supports the following functions: 
+`List Weddings` —  displays a list of all weddings.
+`List Tasks` —  displays a list of all tasks.
+`List Tags` —  displays a list of all tags.
+
+Given below is an example usage scenario and how Tasks are used in WedLinker.
+
+Step 1. The user launches the application, `Weddings`, `Tasks` and `Tags` are loaded into the `Model`.
+
+Step 2. The user executes `list-weddings`. WedLinker display a list of all `Weddings` on the right half of the screen.
+
+Step 3. The user executes `list-tasks`. WedLinker display a list of all `Tasks` on the right half of the screen.
+
+Step 4. The user executes `list-tags`. WedLinker display a list of all `Tags` on the right half of the screen.
+
 
 #### Design considerations:
 

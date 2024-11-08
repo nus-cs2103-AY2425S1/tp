@@ -46,9 +46,6 @@ public class EditWeddingCommand extends Command {
             + PREFIX_WEDDING + "Mr and Mrs John Tan "
             + PREFIX_ADDRESS + "12 College Ave West";
 
-    public static final String MESSAGE_EDIT_WEDDING_SUCCESS = "Edited Wedding: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book.";
 
     private final Index index;
     private final EditWeddingDescriptor editWeddingDescriptor;
@@ -81,7 +78,7 @@ public class EditWeddingCommand extends Command {
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
 
         if (!weddingToEdit.isSameWedding(editedWedding) && model.hasWedding(editedWedding)) {
-            throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_WEDDING);
         }
 
         model.setWedding(weddingToEdit, editedWedding);
@@ -101,7 +98,7 @@ public class EditWeddingCommand extends Command {
         // Update person list to show the latest wedding objects
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
+        return new CommandResult(String.format(Messages.MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
     }
 
     /**

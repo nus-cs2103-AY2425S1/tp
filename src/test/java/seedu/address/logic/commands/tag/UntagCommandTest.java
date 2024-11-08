@@ -39,7 +39,7 @@ public class UntagCommandTest {
 
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
 
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_REMOVE_TAG_SUCCESS,
                 "photographer", personToEdit.getName().toString());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -74,7 +74,7 @@ public class UntagCommandTest {
         HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("florist")),
                 new Tag(new TagName("photographer"))));
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST, tagsToRemove);
-        String expectedMessage = String.format(UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_REMOVE_TAG_SUCCESS,
                 "florist, photographer", personWithTags.getName().toString());
 
         // Create the expected model with the updated tags (i.e., an empty set of tags)

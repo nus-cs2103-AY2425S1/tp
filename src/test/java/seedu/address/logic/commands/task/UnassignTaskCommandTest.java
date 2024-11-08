@@ -73,7 +73,10 @@ public class UnassignTaskCommandTest {
         UnassignTaskCommand command = new UnassignTaskCommand(Index.fromZeroBased(0), Set.of(Index.fromOneBased(10)));
 
         // Command should throw a CommandException for invalid task index
-        assertThrows(CommandException.class, MESSAGE_INVALID_TASK_DISPLAYED_INDEX, () -> command.execute(model));
+        assertThrows(
+                CommandException.class,
+                String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, 10, 1, 1), () -> command.execute(model)
+        );
     }
 
     @Test

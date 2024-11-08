@@ -42,7 +42,7 @@ public class CreateTagCommandTest {
         Tag validTag = new Tag(new TagName(VALID_TAG_FLORIST));
 
         CommandResult commandResult = new CreateTagCommand(validTag).execute(modelStub);
-        assertEquals(String.format(CreateTagCommand.MESSAGE_SUCCESS, Messages.format(validTag)),
+        assertEquals(String.format(Messages.MESSAGE_CREATE_TAG_SUCCESS, Messages.format(validTag)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTag), modelStub.tagsAdded);
     }
@@ -54,7 +54,7 @@ public class CreateTagCommandTest {
         ModelStub modelStub = new ModelStubWithTag(validTag);
 
         assertThrows(CommandException.class,
-                CreateTagCommand.MESSAGE_DUPLICATE_TAG, () -> createTagCommand.execute(modelStub));
+                Messages.MESSAGE_DUPLICATE_TAG, () -> createTagCommand.execute(modelStub));
     }
 
     @Test

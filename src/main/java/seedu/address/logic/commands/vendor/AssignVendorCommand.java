@@ -28,10 +28,6 @@ public class AssignVendorCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s has been added as a vendor.";
-
-    public static final String MESSAGE_DUPLICATE_VENDOR = "%1$s is already a vendor.";
-
     private final Index targetIndex;
 
 
@@ -59,12 +55,12 @@ public class AssignVendorCommand extends Command {
 
         // need to change to check if model already has vendor
         if (model.hasVendor(personToAssign)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
+            throw new CommandException(String.format(Messages.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
         }
 
         model.assignVendor(personToAssign);
         assert model.hasVendor(personToAssign) : "Vendor was not assigned correctly";
-        return new CommandResult(String.format(MESSAGE_SUCCESS, personToAssign.getName()));
+        return new CommandResult(String.format(Messages.MESSAGE_ADD_VENDOR_SUCCESS, personToAssign.getName()));
     }
 
     @Override

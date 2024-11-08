@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-import static seedu.address.logic.commands.findcommand.FindWeddingCommand.MESSAGE_FIND_WEDDING_PERSON_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -16,6 +13,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -54,7 +52,7 @@ public class FindWeddingCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+        String expectedMessage = String.format(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         WeddingContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindWeddingCommand command = new FindWeddingCommand(predicate);
         expectedModel.updateFilteredPersonListByWedding(predicate);
@@ -65,7 +63,9 @@ public class FindWeddingCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         WeddingContainsKeywordsPredicate predicate = preparePredicate("Wedding 2");
-        String expectedMessage = String.format(MESSAGE_FIND_WEDDING_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_WEDDING_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindWeddingCommand command = new FindWeddingCommand(predicate);
         expectedModel.updateFilteredPersonListByWedding(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -75,7 +75,9 @@ public class FindWeddingCommandTest {
     @Test
     public void execute_partialMatchKeyword_multiplePersonsFound() {
         WeddingContainsKeywordsPredicate predicate = preparePredicate("Carl");
-        String expectedMessage = String.format(MESSAGE_FIND_WEDDING_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_WEDDING_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindWeddingCommand command = new FindWeddingCommand(predicate);
         expectedModel.updateFilteredPersonListByWedding(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -84,7 +86,7 @@ public class FindWeddingCommandTest {
 
     @Test
     public void execute_missingKeyword_noPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+        String expectedMessage = String.format(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         WeddingContainsKeywordsPredicate predicate = preparePredicate("XxX");
         FindWeddingCommand command = new FindWeddingCommand(predicate);
         expectedModel.updateFilteredPersonListByWedding(predicate);

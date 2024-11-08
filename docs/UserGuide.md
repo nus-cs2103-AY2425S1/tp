@@ -7,8 +7,7 @@
 # WedLinker User Guide
 
 WedLinker is your **essential desktop app for managing wedding-related contacts**, designed specifically for professional wedding planners.
-**With a powerful Command Line Interface (CLI)**, WedLinker is optimised for fast typers, simplifying your contact management tasks 
-through quick, text-based commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
+**With a powerful Command Line Interface (CLI)**, WedLinker streamlines contact management through quick, intuitive commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
 
 While WedLinker excels with its CLI for speed, it still offers the valuable visual elements of a Graphical User Interface (GUI). The GUI provides an organised and intuitive layout, making it easy to visualise your contacts, weddings, and tasks at a glance.
 This combination of efficiency and clarity ensures that you can manage your wedding planning responsibilities with ease and precision.
@@ -142,21 +141,20 @@ Format: `find PREFIX KEYWORD [KEYWORD]…​`
 * Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
-Examples:
-* `find n/John` returns `john` and `John Doe`
 * `find p/973` returns all Contacts whose phone number contains 973
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
 ![result for 'find n/alex n/david'](images/findCommandName.png)
 * `find t/friends` returns all Contacts tagged with 'guest' <br>
 ![result for `find t/guest](images/findCommandTag.png)
 * `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
-![result for 'find w/Casey's Wedding](images/findCommandWedding.png)
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+<box type="warning" seamless>
 
 **Caution:**
 This action is irreversible and cannot be undone. Please ensure you have backed up any important information before proceeding.
@@ -383,6 +381,23 @@ Format: `unmark-task TASKINDEX`
 * Marks a `Task` as not completed.
 * The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
 * The index **must be a positive integers** 1, 2, 3, …​.
+
+## Vendor Features
+
+### Assigning a Vendor : `assign-vendor`
+Format: `assign-venor PERSONINDEX`
+
+* Assigns an existing `Person` at the specified `Index` to become a `Vendor`.
+* The `Vendor` now can have `Tasks` assigned to it.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​.
+
+### Unassigning a Vendor : `unassign-vendor`
+Format: `unassign-venor PERSONINDEX`
+
+* Unassigns a `Vendor` at the specified `Index` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​.
 
 --------------------------------------------------------------------------------------------------------------------
 

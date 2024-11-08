@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-import static seedu.address.logic.commands.findcommand.FindEmailCommand.MESSAGE_FIND_EMAIL_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -18,6 +16,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -57,7 +56,7 @@ public class FindEmailCommandTest {
 
     @Test
     public void execute_emptyString_noPersonFound() {
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         EmailContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindEmailCommand command = new FindEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -68,7 +67,9 @@ public class FindEmailCommandTest {
     @Test
     public void execute_fullMatchEmail_singlePersonFound() {
         EmailContainsKeywordsPredicate predicate = preparePredicate("alice@example.com");
-        String expectedMessage = String.format(MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindEmailCommand command = new FindEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -78,7 +79,9 @@ public class FindEmailCommandTest {
     @Test
     public void execute_multipleFullMatchEmails_multiplePersonsFound() {
         EmailContainsKeywordsPredicate predicate = preparePredicate("lydia@example.com heinz@example.com");
-        String expectedMessage = String.format(MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindEmailCommand command = new FindEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -88,7 +91,9 @@ public class FindEmailCommandTest {
     @Test
     public void execute_singlePartialMatchNumber_singlePersonFound() {
         EmailContainsKeywordsPredicate predicate = preparePredicate("hnd");
-        String expectedMessage = String.format(MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindEmailCommand command = new FindEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -98,7 +103,9 @@ public class FindEmailCommandTest {
     @Test
     public void execute_singlePartialMatchNumber_multiplePersonsFound() {
         EmailContainsKeywordsPredicate predicate = preparePredicate("ia");
-        String expectedMessage = String.format(MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_EMAIL_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindEmailCommand command = new FindEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -108,7 +115,7 @@ public class FindEmailCommandTest {
     @Test
     public void execute_absentPartialMatchKeyword_noPersonFound() {
         EmailContainsKeywordsPredicate predicate = preparePredicate("xXx");
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         FindEmailCommand command = new FindEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -118,7 +125,7 @@ public class FindEmailCommandTest {
     @Test
     public void execute_absentPartialMatchKeyword2_noPersonFound() {
         EmailContainsKeywordsPredicate predicate = preparePredicate("allen");
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         FindEmailCommand command = new FindEmailCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

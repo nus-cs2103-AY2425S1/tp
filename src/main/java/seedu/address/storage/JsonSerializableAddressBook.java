@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -27,12 +28,6 @@ import seedu.address.model.wedding.Wedding;
  */
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
-
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_VENDOR = "Vendors list contains duplicate vendor(s).";
-    public static final String MESSAGE_DUPLICATE_TAG = "Tags list contains duplicate tag(s).";
-    public static final String MESSAGE_DUPLICATE_WEDDING = "Weddings list contains duplicate wedding(s).";
-    public static final String MESSAGE_DUPLICATE_TASK = "Tasks list contains duplicate task(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -77,7 +72,7 @@ class JsonSerializableAddressBook {
             // Each person will store blank weddings with only the wedding name at this point
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
             if (jsonAdaptedPerson.isVendor()) {
@@ -90,21 +85,21 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedTag jsonAdaptedTag : tags) {
             Tag tag = jsonAdaptedTag.toModelType();
             if (addressBook.hasTag(tag)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TAG);
+                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_TAG);
             }
             addressBook.addTag(tag);
         }
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
             Task task = jsonAdaptedTask.toModelType();
             if (addressBook.hasTask(task)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_TASK_IN_WEDLINKER);
             }
             addressBook.addTask(task);
         }
         for (JsonAdaptedWedding jsonAdaptedWedding : weddings) {
             Wedding wedding = jsonAdaptedWedding.toModelType();
             if (addressBook.hasWedding(wedding)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_WEDDING);
+                throw new IllegalValueException(Messages.MESSAGE_DUPLICATE_WEDDING);
             }
             addressBook.addWedding(wedding);
             if (wedding.hasPartner1()) {

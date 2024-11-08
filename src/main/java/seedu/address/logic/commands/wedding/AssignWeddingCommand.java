@@ -1,6 +1,6 @@
 package seedu.address.logic.commands.wedding;
 
-import static seedu.address.logic.Messages.MESSAGE_ADD_WEDDING_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_ASSIGN_WEDDING_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_ALREADY_ASSIGNED;
@@ -67,7 +67,7 @@ public class AssignWeddingCommand extends Command {
         String addedWeddings = weddingsToAdd.keySet().stream()
                 .map(wedding -> wedding.toString().replaceAll("[\\[\\]]", ""))
                 .collect(Collectors.joining(", "));
-        return String.format(MESSAGE_ADD_WEDDING_SUCCESS, addedWeddings, personToEdit.getName().toString());
+        return String.format(MESSAGE_ASSIGN_WEDDING_SUCCESS, addedWeddings, personToEdit.getName().toString());
     }
 
     @Override
@@ -75,7 +75,9 @@ public class AssignWeddingCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(
+                    MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, 1, lastShownList.size() + 1
+            ));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
