@@ -25,6 +25,7 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
    ![Ui](images/Ui.png)
 
    Examples:
+
    - cd /users/desktop/goonbook/goonbook.jar
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -75,8 +76,6 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 ![help message](images/Help.png)
-
-
 
 ### Adding a person: `add`
 
@@ -130,17 +129,19 @@ Groups students together.
 
 Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
 
-- Only exact name matches will be added
+- Each group must have a unique name.
+- Only exact name matches will be added.
 - Only the name is searched.
-- Only one student is added at a time.
 
 ![Group](images/Group.png)
 
 Examples:
 
-- If the group contains `Bob` and `Tom`
+- If the GoonBook contains `Bob` and `Tom` and a group called `Meow`
 - `group g/StudyGroup1 s/Bob s/Tom` groups `Bob` and `Tom`
-- `group g/StudyGroup1 s/Bo` returns `No students found!`<br>
+- `group g/Meow s/Bob s/Tom` returns `Group name already taken!!`
+- `group g/Meow s/Bob s/` returns `Please do not enter an empty string for student name!`
+- `group g/StudyGroup1 s/Bo` returns `The following students could not be found: Bo`<br>
 
 ### Locating persons by name: `find`
 
@@ -204,6 +205,7 @@ Format: `untag INDEX t/TAG`
 - The index **must be a positive integer** 1, 2, 3, …​
 
 ![UnTag](images/UnTag.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -264,7 +266,6 @@ Format: `export`
 
 ![Export](images/Export.png)
 
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -319,7 +320,7 @@ _Details coming soon ..._
 ## Command summary
 
 | Action           | Format, Examples                                                                                               |
-|------------------|----------------------------------------------------------------------------------------------------------------|
+| ---------------- | -------------------------------------------------------------------------------------------------------------- |
 | **Add**          | `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 c/4B t/friend t/colleague` |
 | **Clear**        | `clear`                                                                                                        |
 | **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                            |
