@@ -35,7 +35,7 @@ public class Messages {
      */
     public static final String MESSAGE_ADD_PERSON_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the Wedlinker.";
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_INVALID_EDIT_PERSON_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -49,12 +49,12 @@ public class Messages {
      * Messages specific to Tag
      */
     public static final String MESSAGE_ASSIGN_TAG_SUCCESS = "Added tag(s) %1$s to %2$s.";
-    public static final String MESSAGE_CREATE_TAG_SUCCESS = "New tag added: %1$s";
+    public static final String MESSAGE_CREATE_TAG_SUCCESS = "New tag added: %1$s.";
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted Tag: %1$s.";
     public static final String MESSAGE_DELETE_TAG_FAILURE_STILL_TAGGED = "The Tag: %1$s is still used.";
     public static final String MESSAGE_DELETE_TAG_FAILURE_NOT_FOUND = "The Tag: %1$s does not exist.";
-    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the address book";
-    public static final String MESSAGE_LIST_TAG_SUCCESS = "Listed all tags";
+    public static final String MESSAGE_DUPLICATE_TAG = "This tag already exists in the Wedlinker.";
+    public static final String MESSAGE_LIST_TAG_SUCCESS = "Listed all tags.";
     public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) %1$s from %2$s.";
     public static final String MESSAGE_TAG_NOT_FOUND = "One or more specified tags do not exist in the Wedlinker.";
     public static final String MESSAGE_TAG_NOT_FOUND_IN_CONTACT = "Some tags were not found in the person's tag list.";
@@ -63,15 +63,15 @@ public class Messages {
      * Messages specific to Wedding
      */
     public static final String MESSAGE_ASSIGN_WEDDING_SUCCESS = "Assigned wedding(s) %1$s to %2$s.";
-    public static final String MESSAGE_CREATE_WEDDING_SUCCESS = "New wedding created: %1$s";
-    public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding: %1$s";
+    public static final String MESSAGE_CREATE_WEDDING_SUCCESS = "New wedding created: %1$s.";
+    public static final String MESSAGE_DELETE_WEDDING_SUCCESS = "Deleted Wedding: %1$s.";
     public static final String MESSAGE_DELETE_WEDDING_FAILURE_STILL_USED = "The Wedding: %1$s is still used";
-    public static final String MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND = "The Wedding: %1$s does not exist";
-    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
-    public static final String MESSAGE_EDIT_WEDDING_SUCCESS = "Edited Wedding: %1$s";
+    public static final String MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND = "The Wedding: %1$s does not exist.";
+    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the Wedlinker.";
+    public static final String MESSAGE_EDIT_WEDDING_SUCCESS = "Edited Wedding: %1$s.";
     public static final String MESSAGE_WEDDING_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid";
-    public static final String MESSAGE_LIST_WEDDING_SUCCESS = "Listed all weddings";
+    public static final String MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX = "The wedding index provided is invalid.";
+    public static final String MESSAGE_LIST_WEDDING_SUCCESS = "Listed all weddings.";
     public static final String MESSAGE_REMOVE_WEDDING_SUCCESS = "Removed wedding(s) %1$s from %2$s.";
     public static final String MESSAGE_WEDDING_NOT_FOUND = "One or more specified weddings do not exist in "
             + "the Wedlinker.";
@@ -91,17 +91,17 @@ public class Messages {
      * Messages specific to Task
      */
     public static final String MESSAGE_ASSIGN_TASK_SUCCESS = "Added task(s) %1$s to %2$s.";
-    public static final String MESSAGE_DUPLICATE_TASK_IN_PERSON = "Task '%s' is already assigned to %s";
-    public static final String MESSAGE_DUPLICATE_TASK_IN_WEDLINKER = "This task already exists in the address book";
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK_IN_PERSON = "Task '%s' is already assigned to %s.";
+    public static final String MESSAGE_DUPLICATE_TASK_IN_WEDLINKER = "This task already exists in the Wedlinker.";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted task: %1$s.";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided (%d) is invalid. \n"
             + MESSAGE_ENTER_VALID_INDEX;
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format. Expected format: yyyy-MM-dd";
-    public static final String MESSAGE_LIST_TASK_SUCCESS = "Listed all tasks";
-    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task: %1$s";
+    public static final String MESSAGE_LIST_TASK_SUCCESS = "Listed all tasks.";
+    public static final String MESSAGE_MARK_TASK_SUCCESS = "Marked task: %1$s.";
     public static final String MESSAGE_ONLY_VENDOR_CAN_BE_ASSIGNED_TASK = "%1$s is not a Vendor, "
             + "tasks can only be assigned to vendors.";
-    public static final String MESSAGE_TASK_ADDED_SUCCESS = "New task(s) added: %1$s";
+    public static final String MESSAGE_TASK_ADDED_SUCCESS = "New task(s) added: %1$s.";
     public static final String MESSAGE_TASK_ALREADY_COMPLETED = "Some tasks specified are already completed.";
     public static final String MESSAGE_TASK_ALREADY_UNCOMPLETED = "Some tasks specified are already uncompleted.";
     public static final String MESSAGE_TASK_NOT_FOUND_IN_AB = "Task does not exist in the address book.";
@@ -109,7 +109,7 @@ public class Messages {
             + "were not found in the person's task list.";
     public static final String MESSAGE_TO_BEFORE_FROM_INVALID = "\"From\" date must be before \"To\" date.";
     public static final String MESSAGE_UNASSIGN_TASK_SUCCESS = "Removed task(s) %1$s from %2$s.";
-    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Unmarked task: %1$s";
+    public static final String MESSAGE_UNMARK_TASK_SUCCESS = "Unmarked task: %1$s.";
 
     /**
      * Messages specific to Vendor
@@ -119,7 +119,7 @@ public class Messages {
     public static final String MESSAGE_FORCE_UNASSIGN_VENDOR = "Use f/ to force the unassignment of vendors."
             + " This will unassign all tasks currently with the Vendor.";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_TASK_EXISTS = "The Vendor: %1$s still has tasks"
-            + " assigned to them";
+            + " assigned to them.";
     public static final String MESSAGE_UNASSIGN_VENDOR_FAILURE_NOT_VENDOR = "%1$s is not a vendor.";
     public static final String MESSAGE_UNASSIGN_VENDOR_SUCCESS = "%1$s has been unassigned and is no longer a vendor.";
 
