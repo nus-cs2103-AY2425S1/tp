@@ -6,7 +6,7 @@ import hallpointer.address.model.HallPointer;
 import hallpointer.address.model.Model;
 
 /**
- * Clears the HallPointer.
+ * Clears HallPointer.
  */
 public class ClearCommand extends Command {
 

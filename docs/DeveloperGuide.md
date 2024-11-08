@@ -171,10 +171,8 @@ Classes used by multiple components are in the `hallpointer.address.commons` pac
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
-
+### [Proposed] Undo Command
 The proposed undo/redo mechanism is facilitated by `Versioned`. It extends `HallPointer` with an undo/redo history, stored internally as an `hallPointerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 - `VersionedHallPointer#commit()` — Saves the current hall pointer state in its history.
@@ -189,10 +187,10 @@ Step 1. The user launches the application for the first time. The `VersionedHall
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th member in the hall pointer. The `delete` command calls `Model#commitHallPointer()`, causing the modified state of the hall pointer after the `delete 5` command executes to be saved in the `hallPointerStateList`, and the `currentStatePointer` is shifted to the newly inserted hall pointer state.
+Step 2. The user executes `delete 5` command to delete the 5th member in the hall pointer system. The `delete` command calls `Model#commitHallPointer()`, causing the modified state of the hall pointer system after the `delete 5` command executes to be saved in the `hallPointerStateList`, and the `currentStatePointer` is shifted to the newly inserted hall pointer state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
+S
 Step 3. The user executes `add n/David …​` to add a new member. The `add` command also calls `Model#commitHallPointer()`, causing another modified hall pointer state to be saved into the `hallPointerStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
@@ -203,7 +201,7 @@ Step 3. The user executes `add n/David …​` to add a new member. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHallPointer()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous hall pointer state, and restores the hall pointer to that state.
+Step 4. The user now decides that adding the member was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoHallPointer()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous hall pointer state, and restores the hall pointer system to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -228,7 +226,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoHallPointer()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the hall pointer to that state.
+The `redo` command does the opposite — it calls `Model#redoHallPointer()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the hall pointer system to that state.
 
 <box type="info" seamless>
 
@@ -236,7 +234,7 @@ The `redo` command does the opposite — it calls `Model#redoHallPointer()`,
 
 </box>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the hall pointer, such as `list`, will usually not call `Model#commitHallPointer()`, `Model#undoHallPointer()` or `Model#redoHallPointer()`. Thus, the `hallPointerStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the hall pointer system, such as `list`, will usually not call `Model#commitHallPointer()`, `Model#undoHallPointer()` or `Model#redoHallPointer()`. Thus, the `hallPointerStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
@@ -264,11 +262,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
----
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -459,82 +452,56 @@ None.
 8. Code should be organized and documented to facilitate future updates or modifications.
 9. The application should run seamlessly across different operating systems without requiring extensive configuration.
 
+
 ### Glossary
 
-1.  **Hall Pointer:**\
-    A desktop application used by CCA leaders in NUS Halls to track hall points, manage member participation, attendance, and allocate points. It is optimized for Command Line Interface (CLI) usage but also includes a Graphical User Interface (GUI).
+### **HallPointer Developer Glossary**
 
-2.  **CLI (Command Line Interface):**\
-    A text-based interface where users interact with the application by typing commands, making it efficient for users comfortable with fast typing.
+1.  **CLI (Command Line Interface):**\
+    A text-based interface where commands are typed to interact with HallPointer. The CLI is central to the application's functionality, enabling efficient management of CCA members and sessions.
 
-3.  **GUI (Graphical User Interface):**\
-    A visual interface that allows users to interact with the application using graphical components like buttons and menus, in addition to CLI commands.
+2.  **GUI (Graphical User Interface):**\
+    The visual interface, built using JavaFX, that complements the CLI by displaying information on members, sessions, and hall points.
+
+3.  **Hall Points:**\
+    Points allocated to members based on attendance and participation in CCA sessions, stored as part of each member's record.
 
 4.  **Member:**\
-    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in the Hall Pointer system (e.g., name, telegram, points, and attendance).
+    A participant or member of a CCA (Co-Curricular Activity) in NUS Halls, whose details are tracked in Hall Pointer (e.g., name, telegram, points, and attendance).
 
-5.  **Points Allocation:**\
-    The process of awarding hall points to members based on their participation in activities. CCA leaders can customize the criteria for point allocation.
+5.  **Session:**\
+    A data model representing an event or activity within a CCA, where attendance is tracked and points are awarded to associated members.
 
-6.  **CCA (Co-Curricular Activity):**\
-    A club or activity within an NUS Hall that tracks member participation and points. Hall Pointer helps CCA leaders manage their members more efficiently.
+6.  **Tag:**\
+    Labels or categories assigned to members in Hall Pointer (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
 
-7.  **Gradle:**\
-    A build automation tool used in Hall Pointer for compiling code, managing dependencies, and running tasks such as testing and creating JAR files.
+7.  **Command:**\
+    A user-entered instruction (e.g., `add_member`) in the CLI, enabling various operations within HallPointer. Commands are processed by the `Logic` component.
 
-8.  **JUnit:**\
-    A testing framework for Java, used in Hall Pointer to run automated tests on individual units of the system and ensure code correctness.
+8.  **Model Component:**\
+    Manages data and business logic within HallPointer, including members, sessions, and hall points. The Model component keeps data in memory for efficient access.
 
-9.  **ShadowJar:**\
-    A Gradle task that generates a fat JAR file, which bundles the application and its dependencies into a single JAR for distribution.
+9.  **Storage Component:**\
+    Responsible for data persistence, handling read/write operations to save members, sessions, and preferences in JSON format.
 
-10. **GitHub Actions:**\
-    A Continuous Integration (CI) tool integrated with GitHub to automatically test and build the Hall Pointer application whenever new changes are pushed.
+10. **Logic Component:**\
+    Manages command parsing and execution. It receives CLI commands, processes them through parsers, and interacts with the Model to update data.
 
-11. **Codecov:**\
-    A tool that tracks code coverage during testing. It helps assess how much of the Hall Pointer code is covered by tests, encouraging improvements to the test suite.
+11. **Parser:**\
+    A part of the Logic component that interprets CLI input, converting it into specific command actions that HallPointer can execute.
 
-12. **Fat JAR:**\
-    A JAR file that contains the entire application along with all its dependencies, allowing Hall Pointer to run as a standalone application.
+12. **Gradle:**\
+    A build automation tool used for dependency management, compiling code, running tests, and packaging the application. Gradle also supports creating a JAR file for distribution.
 
-13. **POSIX-compliant OS:**\
-    Operating systems like Linux and macOS that adhere to POSIX standards and are compatible with shell scripts used for CI tasks in Hall Pointer.
+13. **JUnit:**\
+    A Java testing framework for writing and running tests to validate the functionality of HallPointer's components.
 
-14. **Tag:**\
-    Labels or categories assigned to members in the Hall Pointer system (e.g., `leader`, `active`, `inactive`). Tags help classify and manage members more easily.
+14. **MainApp:**\
+    The main entry point for HallPointer, responsible for initializing and starting the application, setting up dependencies between components, and managing the overall flow.
 
-15. **Undo/Redo Feature:**\
-    A proposed feature that allows users to revert or redo changes in Hall Pointer, enabling easy correction of mistakes.
-
-16. **Versioned HallPointer:**\
-    Refers to a version of the Hall Pointer system where the state of member data is saved at specific intervals to allow undo/redo functionality.
-
-17. **Test Coverage:**\
-    A metric that measures how much of the Hall Pointer codebase is covered by tests, indicating the effectiveness and thoroughness of the test suite.
-
-18. **User Preferences:**\
+15. **User Preferences:**\
     Settings such as window size and logging levels that can be customized by users and saved in a configuration file (`config.json`) for Hall Pointer.
 
-19. **Configuration File (`config.json`):**\
-    A JSON file that stores user preferences and application settings for Hall Pointer, including file locations and logging levels.
-
-20. **Build Automation:**\
-    The process of automating the compilation, testing, and packaging of Hall Pointer using Gradle to ensure consistent builds across different environments.
-
-21. **Continuous Integration (CI):**\
-    A practice used in Hall Pointer, powered by GitHub Actions, where tests and checks are run automatically to verify the integrity of new code changes before merging.
-
-22. **Unit Test:**\
-    A test that targets individual components or methods in the Hall Pointer system to ensure they function correctly in isolation.
-
-23. **Integration Test:**\
-    A test that checks how different components in Hall Pointer interact with each other, ensuring they work together as expected.
-
-24. **Hybrid Test:**\
-    A combination of unit and integration testing that checks both the individual components and their interactions in the Hall Pointer system.
-
-25. **Command:**\
-    A typed instruction input by the user in the CLI to perform an action in Hall Pointer, such as adding members, updating details, or tracking points (e.g., `add`, `list`, `delete`).
 
 ## **Appendix: Instructions for manual testing**
 
@@ -576,8 +543,9 @@ testers are expected to do more _exploratory_ testing.
 2. Deleting a member
 
     1. Prerequisites: List all members using the `list_members` command. Multiple members in the list.
+
     2. Test case: `delete_member 1`<br>
-       **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message. 
+       **Expected:** First contact is deleted from the list. Details of the deleted contact are shown in the status message.
 
     3. Test case: `delete_member 0`<br>
        **Expected:** No member is deleted. Error details shown in the status message.
