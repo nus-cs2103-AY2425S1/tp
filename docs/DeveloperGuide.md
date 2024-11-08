@@ -21,7 +21,10 @@ This project is based on the AddressBook-Level3 project created by the [SE-EDU i
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## **Design**
 
@@ -48,6 +51,9 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 12345678`.
@@ -64,6 +70,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
+
 
 ### UI component
 
@@ -116,13 +125,15 @@ It enhances the `CommandBox` functionality by allowing users to navigate through
 promoting modularity and adhering to good OOP practices.
 
 The stylesheet used for the UI can be found in `src/main/java/resources/view/LightTheme.css`.
+
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="520"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 12345678")` API call as an example.
 
@@ -149,6 +160,8 @@ How the parsing works:
 * When called upon to parse a user command, the `EduContactsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `EduContactsParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -172,6 +185,7 @@ The `Model` component,
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -203,6 +217,8 @@ This section describes some noteworthy details on how certain features are imple
 **Note:** The execution of commands mentioned in this section follows a similar path to that depicted in the sequence diagram under the [Logic component](#logic-component) section and will not be discussed in this section.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Module feature
 
@@ -264,15 +280,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" width="450"/>
 
 Step 2. The user executes `delete 12345678` command to delete the person with Student ID of `12345678` in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 12345678` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" width="450"/>
 
 Step 3. The user executes `add id/12345678 …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" width="450"/>
 
 <box type="info" seamless>
 
@@ -282,7 +298,7 @@ Step 3. The user executes `add id/12345678 …​` to add a new person. The `add
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" width="450"/>
 
 
 <box type="info" seamless>
@@ -318,6 +334,8 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
 
+<div style="page-break-after: always;"></div>
+
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
@@ -350,6 +368,8 @@ _{more aspects and alternatives to be added}_
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -647,6 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Duplicate Entry**: A situation where a student or contact already exists in the address book based on a matching unique identifier (e.g., Student ID). In such cases, EduContacts will reject the duplicate entry and display an error message.
 * **Error Message**: A notification provided to the user when an invalid input or action is detected. For example, entering a student ID in the wrong format will prompt an error message such as "Please enter a valid student ID!"
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
