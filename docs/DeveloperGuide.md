@@ -14,6 +14,8 @@
 ## **Acknowledgements**
 
 * Our name, **CampusConnect**, was inspired by the NUS internship portal [**TalentConnect**](https://nus-csm.symplicity.com/).
+* Our **CampusConnect** logo reuses the [**NUS logo**](https://nus.edu.sg/identity/guidelines/logo-colour-and-background)
+* Our help window icon uses a cartoon representation of the [**NUS mascot on the NUS main reddit page**](https://www.reddit.com/r/nus/)
 
 --------------------------------------------------------------------------------------------------------------------
 
