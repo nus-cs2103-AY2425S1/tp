@@ -451,6 +451,14 @@ Adds a **new policy** for a client in Prudy.
 add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]
 ```
 
+| **Parameter Name** | **Description**                                       | **Required** |
+|--------------------|-------------------------------------------------------|--------------|
+| INDEX              | The index of the client in the displayed client list. | yes          |
+| pt/POLICY_TYPE     | Type of policy to be added.                           | yes          |
+| pa/PREMIUM_AMOUNT  | The policy's premium.                                 | no           |
+| ca/COVERAGE_AMOUNT | The maximum amount that be claimed under this policy. | no           |
+| ed/EXPIRY_DATE     | The policy's date of expiry.                          | no           |
+
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
@@ -497,6 +505,11 @@ Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COV
 ```shell
 delete-policy INDEX pt/POLICY_TYPE…
 ```
+
+| **Parameter Name** | **Description**                                       | **Required** |
+|--------------------|-------------------------------------------------------|--------------|
+| INDEX              | The index of the client in the displayed client list. | yes          |
+| pt/POLICY_TYPE     | Type of policy to be deleted.                         | yes          |
 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
