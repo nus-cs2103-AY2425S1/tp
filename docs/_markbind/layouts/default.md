@@ -32,6 +32,7 @@
   * [Commands]({{ baseUrl }}/UserGuide.html#commands)
   * [Command Summary]({{ baseUrl }}/UserGuide.html#command-summary)
   * [Storing Data]({{ baseUrl }}/UserGuide.html#storing-data)
+  * [Glossary]({{ baseUrl }}/UserGuide.html#glossary)
   * [FAQ]({{ baseUrl }}/UserGuide.html#faq)
   * [Known Issues]({{ baseUrl }}/UserGuide.html#known-issues)
 * [Developer Guide]({{ baseUrl }}/DeveloperGuide.html) :expanded:
