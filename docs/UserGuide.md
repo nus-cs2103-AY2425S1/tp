@@ -23,7 +23,7 @@ any traditional point-and-click management app.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/CampusConnect/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-4/tp/releases/).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CampusConnect.
 
