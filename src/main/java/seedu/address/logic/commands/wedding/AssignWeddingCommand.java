@@ -38,6 +38,7 @@ public class AssignWeddingCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_WEDDING + "WEDDING [p1/] [p2/] + ... "
             + PREFIX_WEDDING + "WEDDING [p1/] [p2/] (can specify multiple weddings)\n"
+            + "[p1/] and [p2/] can be used to set a person as the first or second partner in a Wedding.\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_WEDDING + "Craig's Wedding " + PREFIX_WEDDING + "Wedding April 2025 p1/.";
 
