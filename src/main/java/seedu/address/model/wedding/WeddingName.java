@@ -56,7 +56,7 @@ public class WeddingName {
         }
 
         WeddingName otherWeddingName = (WeddingName) obj;
-        return this.weddingName.equalsIgnoreCase(otherWeddingName.weddingName);
+        return this.weddingName.equals(otherWeddingName.weddingName);
     }
 
     @Override

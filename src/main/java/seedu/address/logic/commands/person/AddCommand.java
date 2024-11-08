@@ -15,6 +15,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Adds a person to the address book.
@@ -57,6 +59,26 @@ public class AddCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // Creates weddings for all new ones and assigns person to all wedding guest lists
+        for (Wedding wedding : toAdd.getWeddings()) {
+            if (!model.hasWedding(wedding)) {
+                model.addWedding(wedding);
+            }
+            wedding.addToGuestList(toAdd);
+            // Set person wedding to model's version of wedding
+            toAdd.setWedding(wedding, model.getWedding(wedding));
+        }
+
+        // Creates tags for all new ones and increases tag count for all
+        for (Tag tag : toAdd.getTags()) {
+            if (!model.hasTag(tag)) {
+                model.addTag(tag);
+            }
+            tag.increaseTaggedCount();
+            // Set person tag to model's version of tag
+            toAdd.setTag(tag, model.getTag(tag));
         }
 
         model.addPerson(toAdd);

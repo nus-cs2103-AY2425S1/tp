@@ -113,6 +113,10 @@ class JsonSerializableAddressBook {
                 wedding.setPartner2(addressBook.getPerson(wedding.getPartner2()));
             }
             for (Person person : wedding.getGuestList()) {
+                // Creates a person if they were in the wedding but not in the address book
+                if (!addressBook.hasPerson(person)) {
+                    addressBook.addPerson(person);
+                }
                 addressBook.getPerson(person).addWedding(wedding);
                 // Replaces the Wedding object's Person with the Person object from the Wedlinker
                 try {
@@ -124,8 +128,8 @@ class JsonSerializableAddressBook {
         }
         // load tags and weddings from people after loading weddings and tags, because if tag or wedding already exist,
         // method will throw an error
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
+        for (Person person : addressBook.getPersonList()) {
+            // Functions guarantee that person will share entities with the addressbook
             loadTags(addressBook, person);
             loadWeddings(addressBook, person);
             loadTasks(addressBook, person);
@@ -135,29 +139,33 @@ class JsonSerializableAddressBook {
 
     private void loadTags(AddressBook addressBook, Person person) {
         Set<Tag> tagList = person.getTags();
+        Set<Tag> newTagList = new HashSet<>();
         for (Tag tag : tagList) {
-            if (addressBook.hasTag(tag) || !Tag.isValidTagName(tag.getTagName().toString())) {
-                continue;
+            // Adds the tag to the model
+            if (!addressBook.hasTag(tag)) {
+                addressBook.addTag(tag);
             }
-            addressBook.addTag(tag);
+
+            newTagList.add(addressBook.getTag(tag));
+            addressBook.getTag(tag).increaseTaggedCount();
         }
+        person.setTags(newTagList);
     }
 
     private void loadWeddings(AddressBook addressBook, Person person) {
         Set<Wedding> weddingList = person.getWeddings();
         Set<Wedding> newWeddingList = new HashSet<>();
         for (Wedding wedding : weddingList) {
+            // Adds the wedding to the model
+            if (!addressBook.hasWedding(wedding)) {
+                addressBook.addWedding(wedding);
+            }
+
             // If the wedding does not contain the person, add them to the guest list of the wedding by default
             if (!addressBook.getWedding(wedding).hasPerson(person)) {
                 addressBook.getWedding(wedding).addToGuestList(addressBook.getPerson(person));
             }
 
-            if (addressBook.hasWedding(wedding) || !Wedding.isValidWeddingName(wedding.getWeddingName().toString())) {
-                newWeddingList.add(addressBook.getWedding(wedding));
-                continue;
-            }
-
-            addressBook.addWedding(wedding);
             newWeddingList.add(addressBook.getWedding(wedding));
         }
         person.setWeddings(newWeddingList);

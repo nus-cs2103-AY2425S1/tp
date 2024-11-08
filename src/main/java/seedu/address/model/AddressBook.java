@@ -53,9 +53,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
-        initialiseTags();
-        initialiseWeddings();
-        initialiseTasks();
     }
 
     //// list overwrite operations
@@ -337,54 +334,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Tag getTag(Tag target) {
         requireNonNull(target);
         return tags.getTag(target);
-    }
-
-    /**
-     * Creates any tags that is attached to a person but not initialised.
-     * This function is only to be used when loading from Storage.
-     */
-    public void initialiseTags() {
-        for (Person person : persons) {
-            Set<Tag> tagForPerson = person.getTags();
-            for (Tag tag : tagForPerson) {
-                tag.increaseTaggedCount();
-                if (!this.hasTag(tag)) {
-                    this.addTag(tag);
-                } else {
-                    this.setTag(tag, tag);
-                }
-            }
-        }
-    }
-
-    /**
-     * Creates any tasks that is attached to a person but not initialised.
-     * This function is only to be used when loading from Storage.
-     */
-    public void initialiseTasks() {
-        for (Person person : persons) {
-            Set<Task> taskForPerson = person.getTasks();
-            for (Task task : taskForPerson) {
-                if (!this.hasTask(task)) {
-                    this.addTask(task);
-                }
-            }
-        }
-    }
-
-    /**
-     * Creates any weddings attached to a person but not initialised.
-     * This function is only to be used when loading from Storage.
-     */
-    public void initialiseWeddings() {
-        for (Person person : persons) {
-            Set<Wedding> weddingForPerson = person.getWeddings();
-            for (Wedding wedding : weddingForPerson) {
-                if (!this.hasWedding(wedding)) {
-                    this.addWedding(wedding);
-                }
-            }
-        }
     }
 
     //// util methods
