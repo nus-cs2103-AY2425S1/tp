@@ -37,7 +37,8 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the `findi` feature (Pull request [\#132](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/132)).
   * Developer Guide:
-    * Added documentation for the user profile, value proposition, and user stories (Pull request [\#31](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/31)).
+    * Added documentation for the user profile, value proposition, and user stories (Pull request [\#31](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/31)). 
+    * Added documentation for the user stories and use cases for the `findw` and `findi` features (Pull request [\#172](https://github.com/AY2425S1-CS2103T-T17-1/tp/pull/172)).
   
 * **Project management**:
   * Scheduling and Tracking: Initiated weekly meetings, took detailed meeting notes, assigned tasks, and tracked progress throughout the project.

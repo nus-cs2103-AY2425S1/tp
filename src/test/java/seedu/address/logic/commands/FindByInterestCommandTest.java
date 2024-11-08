@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,15 +38,8 @@ public class FindByInterestCommandTest {
 
     @Test
     public void equals() {
-        List<List<String>> firstAndKeywords = Collections.singletonList(Arrays.asList("reading"));
-        List<String> firstOrKeywords = Arrays.asList("sports");
-        InterestContainsKeywordsPredicate firstPredicate = new InterestContainsKeywordsPredicate(firstAndKeywords,
-                firstOrKeywords);
-
-        List<List<String>> secondAndKeywords = Collections.singletonList(Arrays.asList("writing"));
-        List<String> secondOrKeywords = Arrays.asList("cooking");
-        InterestContainsKeywordsPredicate secondPredicate = new InterestContainsKeywordsPredicate(secondAndKeywords,
-                secondOrKeywords);
+        InterestContainsKeywordsPredicate firstPredicate = new InterestContainsKeywordsPredicate("reading");
+        InterestContainsKeywordsPredicate secondPredicate = new InterestContainsKeywordsPredicate("sports");
 
         FindByInterestCommand findFirstCommand = new FindByInterestCommand(firstPredicate);
         FindByInterestCommand findSecondCommand = new FindByInterestCommand(secondPredicate);
@@ -72,8 +64,7 @@ public class FindByInterestCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(),
-                Collections.emptyList());
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(" ");
         FindByInterestCommand command = new FindByInterestCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -82,24 +73,20 @@ public class FindByInterestCommandTest {
     }
 
     @Test
-    public void execute_singleOrKeyword_onePersonFound() {
-        // Assume ALICE has the interest "reading"
+    public void execute_singleKeyword_onePersonFound() {
         String expectedMessage = MESSAGE_PERSON_FOUND_INTEREST;
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(),
-                Arrays.asList("reading"));
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate("football");
         FindByInterestCommand command = new FindByInterestCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(ALICE), model.getFilteredPersonList());
+        assertEquals(Collections.singletonList(BENSON), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_multipleOrKeywords_multiplePersonsFound() {
-        // Assume ALICE has "reading" and BOB has "sports"
+    public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_INTEREST, 2);
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(Collections.emptyList(),
-                Arrays.asList("reading", "football"));
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate("reading");
         FindByInterestCommand command = new FindByInterestCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
@@ -108,26 +95,8 @@ public class FindByInterestCommandTest {
     }
 
     @Test
-    public void execute_andKeywords_singlePersonFound() {
-        // Expect "Found 1 person that have similar interest" for exactly one result with AND keywords
-        String expectedMessage = MESSAGE_PERSON_FOUND_INTEREST;
-        List<List<String>> andKeywords = Collections.singletonList(Arrays.asList("reading", "swimming"));
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(andKeywords,
-                Collections.emptyList());
-        FindByInterestCommand command = new FindByInterestCommand(predicate);
-
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-
-        // Assuming ALICE has both "reading" and "music" as interests
-        assertEquals(Collections.singletonList(ALICE), model.getFilteredPersonList());
-    }
-
-    @Test
     public void toStringMethod() {
-        List<List<String>> andKeywords = Collections.singletonList(Arrays.asList("reading"));
-        List<String> orKeywords = Arrays.asList("sports");
-        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate(andKeywords, orKeywords);
+        InterestContainsKeywordsPredicate predicate = new InterestContainsKeywordsPredicate("reading");
 
         FindByInterestCommand findCommand = new FindByInterestCommand(predicate);
         String expected = FindByInterestCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
