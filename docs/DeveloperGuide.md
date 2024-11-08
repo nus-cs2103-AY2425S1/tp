@@ -56,7 +56,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -242,15 +242,15 @@ A wedding planner who:
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                      | I want to …​                                                     | So that I can…​                                                                  |
-|----------|------------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
-| `* * *`  | forgetful wedding planner    | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
-| `* * *`  | organized wedding planner    | view a list of guests/vendors                                    | easily access and reference their details                                        |
-| `* * *`  | organized wedding planner    | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
-| `* * *`  | meticulous wedding planner   | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
-| `* *`    | organized wedding planner    | find guests/vendors based on a specific attribute                | efficiently retrieve guest/vendor details when required                          |
-| `* *`    | data-driven wedding planner  | view wedding statistics (number of guests/vendors/total people)  | quickly assess the current status of wedding planning                            |
-| `* *`    | overwhelmed wedding planner  | clear all guest/vendor data in the contact list                  | start fresh with a clean slate and easily reset the contact list if needed       |
+| Priority | As a …​                     | I want to …​                                                     | So that I can…​                                                                  |
+|----------|-----------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `* * *`  | forgetful wedding planner   | add a new guest/vendor into the contact list                     | easily track and manage guests/vendors for the wedding                           |
+| `* * *`  | organized wedding planner   | view a list of guests/vendors                                    | easily access and reference their details                                        |
+| `* * *`  | organized wedding planner   | delete a guest/vendor contact that I no longer need              | keep my contact list organised and clutter-free                                  |
+| `* * *`  | meticulous wedding planner  | edit the details of an existing guest/vendor in the contact list | correct mistakes and ensure that all information remains accurate and up-to-date |
+| `* *`    | organized wedding planner   | find guests/vendors based on a specific attribute                | efficiently retrieve guest/vendor details when required                          |
+| `* *`    | data-driven wedding planner | view wedding statistics (number of guests/vendors/total people)  | quickly assess the current status of wedding planning                            |
+| `* *`    | organized wedding planner   | clear all guest/vendor data in the contact list                  | start fresh with a clean slate and easily reset the contact list if needed       |
 
 ### Use cases
 
@@ -439,7 +439,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *  **RSVP Status**: The attendance response status of a guest. It can be either accepted, pending, or declined.
 *  **Tag**: A keyword or label assigned to an entry to categorize and easily filter it within the list.
 *  **Index**: A numerical value representing the position of an entry in a list, used to reference and perform operations on the contact.
-*  **Prefix**: Characters preceding details you input on the command line. Eg. n/ for name and e/ for email.
+*  **Prefix**: Characters preceding details you input on the command line. E.g. n/ for name and e/ for email.
 
 --------------------------------------------------------------------------------------------------------------------
 
