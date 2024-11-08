@@ -312,6 +312,8 @@ Adds a car to a client.
 add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 ```
 
+<div style="page-break-after: always;"></div>
+
 **Parameters:**
 
 | Parameter         | Requirements                                                                                            | Explanation                                                        |
@@ -343,8 +345,6 @@ Deletes a car from a client.
 ```shell
 del-car INDEX
 ```
-
-<div style="page-break-after: always;"></div>
 
 **Parameters:**
 
