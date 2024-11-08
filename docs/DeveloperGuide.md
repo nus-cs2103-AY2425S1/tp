@@ -506,7 +506,7 @@ before the command was executed.
 * **Field**: An attribute possessed by a contact, namely Phone number, Tags, Name and Email.
 * **Prefix**: An identifier used in commands to indicate which field is referred to. For the 4 fields Phone, Name, Tags and Email,
     the *prefixes* would be `p/`, `t/`, `n/` and `e/` respectively.
-* **Duplicate Contact**: A contact that has the same Phone, Email and Name as another contact.
+* **Duplicate Contact**: A contact that has the same Phone, Email or Name as another contact.
 * **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories.
 * **Person List**: The scrollable list of contacts in the GUI displaying all contacts and the respective values for their fields.
 * **Commands affected by `undo` and `redo`**: These refer to all commands that affect the *state* of the Tag List and Contact List
@@ -552,8 +552,8 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 ### Categorizing a tag
 
@@ -577,28 +577,35 @@ testers are expected to do more *exploratory* testing.
 ### Undoing the last operation
 
 1. Undoing an execution that modifies the CampusConnect data
+
    1. Prerequisites: Perform any operation that modifies the state (all executions except for list and find) to ensure there is an action to undo.
 
    1. Test case: undo 
-   Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
+      Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
 
    1. Test case: undo immediately after starting the application (with no operations performed)
-   Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
+      Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
 
 ### Finding a person
 
 1. Finding a person with tags
 
     1. Prerequisites: There are contacts in the contact list. Add some if this is not the case.
+
     1. Assumption: Pick any 2 tags (or substring of the tags) present in any contact in the contact list. Call these x and y.
+
     1. Test case: `find t/x` where `x` is the substring/tag chosen<br> 
        Expected: All contacts with tags containing x will be displayed with a success message.
+
     1. Test case: `find t/x t/y` where `x` and `y` are the substrings/tags chosen<br>
        Expected: The contact(s) with tags containing x or y will be displayed with a success message.
 
 1. Finding a person with multiple fields
+
     1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
+   
     1. Assumption: Pick any name and tag within the same contact. Call these name x and tag y.
+   
     1. Test case: `find n/x t/y` where `x` and `y` are the name and tag chosen<br>
        Expected: The contact(s) with name containing x and tags containing y will be displayed with a success message.
 
@@ -608,8 +615,11 @@ testers are expected to do more *exploratory* testing.
 ### Deleting a tag from a person
 
 1. Deleting a tag.
+
     1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
+
     1. Assumption: Pick any contact with at least one tag. Let `i` be the index (one-based) of this contact and `x` be the name of the tag.
+
     1. Test case: `deltag i t/x` where `i` is the index and `x` is the tag chosen<br>
        Expected: The tag x will be deleted from person i and the tag will also disappear from the Tag List. A success message will be displayed.
 

@@ -75,6 +75,9 @@ any traditional point-and-click management app.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+**Notes about duplicate contacts:**<br>
+* A contact is considered a duplicate of another if it has the same Name, Phone or Email as the other contact.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -119,8 +122,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 </box>
 
 * The phone number must follow the Singaporean convention: have 8 digits, start with 6, 8, or 9, and consist only of numbers.
-* Do not add duplicate contacts to the list.
-* Two contacts are considered duplicates if they share the same name, email, or phone number.
+* Duplicate contacts cannot be added to the list.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -144,8 +146,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
-* After editing the person, there should be no duplicate contact in CampusConnect.
-* Two contacts are considered duplicates if they share the same name, email, or phone number.
+* After editing the contact, it should not be a duplicate of another contact.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -216,6 +217,7 @@ Format: `deltag INDEX t/TAG`
 * The index **must be a positive integer** 1, 2, 3, …​
 * Only one tag can be deleted at a time.
 * The list of the tag will be updated accordingly.
+
 Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
