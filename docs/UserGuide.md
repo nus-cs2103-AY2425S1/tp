@@ -45,18 +45,18 @@ simpler to use while being even more functional than alternatives on the market.
 
 1. Ensure you have Java `17` or above installed in your computer. If not, you can download Java `17` [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases).
+2. Download the latest `PROperty.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your PROperty.
 
-4. Double-click on the `.jar` file to run it
+4. Double-click on the `PROperty.jar` file to run it
    - **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
 
 - A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
 
 ![Ui](images/user-guide-images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type "commands" in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
    
    * `list` : Lists all clients in your address book.
@@ -339,10 +339,9 @@ Format: `remark INDEX r/[REMARKS]`
 * Adds a remark `REMARKS` to the client at `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* **Note:** `[REMARKS]` will **delete the remark if left blank**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
-Remarks are useful for adding free-form details to a contact.
+If `[REMARKS]` of `r/` is left blank (e.g `remark 1 r/`), the remark will be deleted entirely
 </div>
 
 Examples:
