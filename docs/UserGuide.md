@@ -63,6 +63,9 @@
 
 Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in car workshops**. MATER is specially optimized for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
 
+<!-- * Table of Contents -->
+<page-nav-print />
+
 ---
 
 ### **Why MATER?**
@@ -102,9 +105,6 @@ MATER is designed for **small to medium-sized car workshop managers** and their 
 
 Whether you're a workshop owner, a mechanic, or an administrative staff member responsible for managing records, MATER empowers you to achieve efficient, accurate, and consistent data handling with ease.
 
-
-<!-- * Table of Contents -->
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
