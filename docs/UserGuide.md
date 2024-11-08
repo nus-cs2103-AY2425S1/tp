@@ -61,7 +61,7 @@
 
 <h1 style="color: #964B00;"> <i class="fas fa-book icon"></i> MATER User Guide </h1>
 
-Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in car workshops**. MATER is specially optimized for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
+Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in car workshops**. MATER is specially optimised for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -80,7 +80,7 @@ Modern car workshops often face a variety of operational challenges:
 ### **Our Solution**
 
 MATER was designed to address these challenges directly:
-- **Centralized client management**: Keep all client and vehicle records in one place, reducing the chance of data duplication and simplifying access.
+- **Centralised client management**: Keep all client and vehicle records in one place, reducing the chance of data duplication and simplifying access.
 - **Streamlined command-based controls**: Users can type commands to perform tasks faster than by navigating through a typical GUI.
 - **Reliable data tracking**: Track issues and maintenance details with consistency, ensuring no information is lost and that clients receive high-quality service.
 
@@ -89,11 +89,11 @@ MATER was designed to address these challenges directly:
 ### **Product Overview**
 
 MATER offers a feature-rich platform with the following capabilities:
-- **Client and Vehicle Management**: Store and organize clients' personal details, vehicle registration, and service history.
+- **Client and Vehicle Management**: Store and organise clients' personal details, vehicle registration, and service history.
 - **Quick Search and Filter Options**: Find clients and cars instantly by name or vehicle registration number.
 - **Command Shortcuts**: Use simple, structured commands to add, edit, delete, or view client details with minimal steps.
 - **Status Tracking**: Mark clients as checked in or out for better tracking of in-progress services.
-- **Automatic Data Storage**: MATER saves all data automatically, minimizing the risk of accidental data loss.
+- **Automatic Data Storage**: MATER saves all data automatically, minimising the risk of accidental data loss.
 
 
 
@@ -211,9 +211,9 @@ Shows a message explaining how to access the help page.
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-*(None)* | *(None)* | The `help` command takes no parameters.
+| Parameter | Requirements | Explanation                             |
+|-----------|--------------|-----------------------------------------|
+| *(None)*  | *(None)*     | The `help` command takes no parameters. |
 
 
 <img src="images/helpMessage.png" alt="help message" width="500" height="300">
@@ -227,22 +227,22 @@ Adds a client to MATER.
 **Format:**
 
 ```shell
-add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...​
+add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...
 ```
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`n/NAME` | Required; Must alphanumeric and be at most 40 characters; Must be unique | Client's name.
-`p/PHONE_NUMBER` | Required; Must be between 3 and 15 digits | Client's phone number.
-`e/EMAIL` | Required | Client's email address.
-`a/ADDRESS` | Required; Must be at most 80 characters | Client's address.
-`vrn/CAR_VRN` | Optional; Required if adding a car; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
-`vin/CAR_VIN` | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
-`make/CAR_MAKE` | Optional; Required if adding a car; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's make.
-`model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | Car's model.
-`i/ISSUE` | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.
+| Parameter         | Requirements                                                                                                                                                                            | Explanation                                       |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| `n/NAME`          | Required; Must alphanumeric and be at most 40 characters; Must be unique                                                                                                                | Client's name.                                    |
+| `p/PHONE_NUMBER`  | Required; Must be between 3 and 15 digits                                                                                                                                               | Client's phone number.                            |
+| `e/EMAIL`         | Required                                                                                                                                                                                | Client's email address.                           |
+| `a/ADDRESS`       | Required; Must be at most 80 characters                                                                                                                                                 | Client's address.                                 |
+| `vrn/CAR_VRN`     | Optional; Required if adding a car; Must follow the [VRN format](#glossary) and be unique                                                                                               | Car's [Vehicle Registration Number](#glossary).   |
+| `vin/CAR_VIN`     | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string                                                                                                   | Car's [Vehicle Identification Number](#glossary). |
+| `make/CAR_MAKE`   | Optional; Required if adding a car; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                          | Car's make.                                       |
+| `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                       | Car's model.                                      |
+| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters)  | Issue(s) associated with the car.                 |
 
 **Notes:**
 
@@ -277,9 +277,9 @@ del-client INDEX
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+| Parameter   | Requirements                         | Explanation                                                         |
+|-------------|--------------------------------------|---------------------------------------------------------------------|
+| `INDEX`     | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.  |
 
 **Examples:**
 
@@ -301,18 +301,18 @@ Adds a car to a client.
 **Format:**
 
 ```shell
-add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL​
+add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 ```
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
-`vrn/CAR_VRN` | Required; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
-`vin/CAR_VIN` | Required; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
-`make/CAR_MAKE` | Required; First letter must be capitalized; Must be at most 40 characters; No spaces | Car's make.
-`model/CAR_MODEL` | Required; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | Car's model.
+| Parameter         | Requirements                                                                                            | Explanation                                                        |
+|-------------------|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| `INDEX`           | Required; Must be a positive integer                                                                    | The [Index](#glossary) of the client in the displayed client list. |
+| `vrn/CAR_VRN`     | Required; Must follow the [VRN format](#glossary) and be unique                                         | Car's [Vehicle Registration Number](#glossary).                    |
+| `vin/CAR_VIN`     | Required; Must be a unique 17-character alphanumeric string                                             | Car's [Vehicle Identification Number](#glossary).                  |
+| `make/CAR_MAKE`   | Required; First letter must be capitalised; Must be at most 40 characters; No spaces                    | Car's make.                                                        |
+| `model/CAR_MODEL` | Required; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces | Car's model.                                                       |
 
 **Notes:**
 
@@ -331,14 +331,14 @@ Deletes a car from a client.
 **Format:**
 
 ```shell
-del-car INDEX​
+del-car INDEX
 ```
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+| Parameter | Requirements                         | Explanation                                                        |
+|-----------|--------------------------------------|--------------------------------------------------------------------|
+| `INDEX`   | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list. |
 
 **Notes:**
 
@@ -359,23 +359,23 @@ Edits an existing client in MATER.
 **Format:**
 
 ```shell
-edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...​
+edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...
 ```
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
-`n/NAME` | Optional; Must alphanumeric and be at most 40 characters; Must be unique | New name of the client.
-`p/PHONE` | Optional; Must be between 3 and 15 digits | New phone number of the client.
-`e/EMAIL` | Optional | New email address of the client.
-`a/ADDRESS` | Optional; Must be at most 80 characters | New address of the client.
-`vrn/CAR_VRN` | Optional; Must follow [VRN format](#glossary) and be unique | New [Vehicle Registration Number](#glossary) of the client's car.
-`vin/CAR_VIN` | Optional; Must be a unique 17-character alphanumeric string | New [Vehicle Identification Number](#glossary) of the client's car.
-`make/CAR_MAKE` | Optional; First letter must be capitalized; Must be at most 40 characters; No spaces | New make of the client's car.
-`model/CAR_MODEL` | Optional; First character is a capitalized letter or a number; Must be at most 40 characters; No spaces | New model of the client's car.
-`i/ISSUE` | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Updates list of the client's current issues.
+| Parameter         | Requirements                                                                                                                                                                           | Explanation                                                         |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| `INDEX`           | Required; Must be a positive integer                                                                                                                                                   | The [Index](#glossary) of the client in the displayed client list.  |
+| `n/NAME`          | Optional; Must alphanumeric and be at most 40 characters; Must be unique                                                                                                               | New name of the client.                                             |
+| `p/PHONE`         | Optional; Must be between 3 and 15 digits                                                                                                                                              | New phone number of the client.                                     |   
+| `e/EMAIL`         | Optional                                                                                                                                                                               | New email address of the client.                                    |
+| `a/ADDRESS`       | Optional; Must be at most 80 characters                                                                                                                                                | New address of the client.                                          |
+| `vrn/CAR_VRN`     | Optional; Must follow [VRN format](#glossary) and be unique                                                                                                                            | New [Vehicle Registration Number](#glossary) of the client's car.   |
+| `vin/CAR_VIN`     | Optional; Must be a unique 17-character alphanumeric string                                                                                                                            | New [Vehicle Identification Number](#glossary) of the client's car. |
+| `make/CAR_MAKE`   | Optional; First letter must be capitalised; Must be at most 40 characters; No spaces                                                                                                   | New make of the client's car.                                       |
+| `model/CAR_MODEL` | Optional; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                                                | New model of the client's car.                                      |
+| `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Updates list of the client's current issues.                        |
 
 **Notes:**
 
@@ -403,14 +403,14 @@ Checks in / out a client.
 **Format:**
 
 ```shell
-check INDEX​
+check INDEX
 ```
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+| Parameter | Requirements                         | Explanation                                                        |
+|-----------|--------------------------------------|--------------------------------------------------------------------|
+| `INDEX`   | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list. |
 
 **Notes:**
 
@@ -440,9 +440,9 @@ list
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-*(None)* | *(None)* | The `list` command takes no parameters.
+| Parameter | Requirements | Explanation                             |
+|-----------|--------------|-----------------------------------------|
+| *(None)*  | *(None)*     | The `list` command takes no parameters. |
 
 ---
 
@@ -458,10 +458,10 @@ find KEYWORD [MORE_KEYWORDS]
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`KEYWORD` | Required | A keyword to search for in client names or car [VRN](#glossary).
-`[MORE_KEYWORDS]` | Optional | Additional keywords.
+| Parameter         | Requirements | Explanation                                                      |
+|-------------------|--------------|------------------------------------------------------------------|
+| `KEYWORD`         | Required     | A keyword to search for in client names or car [VRN](#glossary). |
+| `[MORE_KEYWORDS]` | Optional     | Additional keywords.                                             |
 
 **Notes:**
 
@@ -498,9 +498,9 @@ view INDEX
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+| Parameter | Requirements                         | Explanation                                                        |
+|-----------|--------------------------------------|--------------------------------------------------------------------|
+| `INDEX`   | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list. |
 
 **Examples:**
 
@@ -540,9 +540,9 @@ clear
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-*(None)* | *(None)* | The `clear` command takes no parameters.
+| Parameter | Requirements | Explanation                              |
+|-----------|--------------|------------------------------------------|
+| *(None)*  | *(None)*     | The `clear` command takes no parameters. |
 
 ---
 
@@ -558,9 +558,9 @@ exit
 
 **Parameters:**
 
-Parameter | Requirements | Explanation
---- | --- | ---
-*(None)* | *(None)* | The `exit` command takes no parameters.
+| Parameter | Requirements | Explanation                             |
+|-----------|--------------|-----------------------------------------|
+| *(None)*  | *(None)*     | The `exit` command takes no parameters. |
 
 ---
 
