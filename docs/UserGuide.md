@@ -382,6 +382,23 @@ Format: `unmark-task TASKINDEX`
 * The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
 * The index **must be a positive integers** 1, 2, 3, …​.
 
+## Vendor Features
+
+### Assigning a Vendor : `assign-vendor`
+Format: `assign-venor PERSONINDEX`
+
+* Assigns an existing `Person` at the specified `Index` to become a `Vendor`.
+* The `Vendor` now can have `Tasks` assigned to it.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​.
+
+### Unassigning a Vendor : `unassign-vendor`
+Format: `unassign-venor PERSONINDEX`
+
+* Unassigns a `Vendor` at the specified `Index` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
