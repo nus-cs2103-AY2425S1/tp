@@ -24,7 +24,7 @@ import seedu.address.model.person.PropertyList;
  * Add a property that is listed for sale.
  */
 public class AddPropertyCommand extends Command {
-    public static final String COMMAND_WORD = "addProperty";
+    public static final String COMMAND_WORD = "addproperty";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a property for sale with the specified details of the person identified "
