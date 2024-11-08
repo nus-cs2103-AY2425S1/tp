@@ -464,18 +464,71 @@ testers are expected to do more *exploratory* testing.
    
 ### Deleting a student
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No student is deleted. Error details shown in the status message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: No student is deleted. Specific error details shown in the status message.
+
+### Leave a comment on a student
+
+1. Leave a comment on a student while all students are being shown
+
+    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+    2. Test case: `comment 1 c/Is always late to class`<br>
+       Expected: First contact from the list will show the new comment. 
+       Details of the comment and person is shown in the status message.
+
+    3. Test case: `comment 0 c/Is always late to class`<br>
+       Expected: No comment is added to any student in the list . Error details shown in the status message.
+
+    4. Other incorrect delete commands to try: `comment 0 c/Is always late to class c/Falls asleep`,
+       `comment x c/Is always late to class`, `...` (where x is larger than the list size)<br>
+       Expected: No comment is added to any student in the list . Error details shown in the status message.
+       Currently multiple comments per student is not supported. However, you are allowed to have /c as part of
+       your string for your comment so long as it is not preceded with blank space.
+
+### Exit the application
+
+1. Exit the application
+    1. Test case: `exit`
+
+       Expected: Application closes
+    2. Test case: `exit 2`
+
+       Expected: Error message on correct format shown in status message.
+       This loose formatting is not allowed as exit is considered a critical action and requires exact formatting.
+
+### Clear all data
+
+1. Delete all data
+    1. Test case: `clear`
+
+       Expected: All data is cleared from the application
+    2. Test case: `clear 1`
+
+       Expected: Error message on correct format shown in status message.
+       This loose formatting is not allowed as clear is considered a critical action and requires exact formatting.
+
+### Get help
+
+1. Get help
+    1. Test case: `help`
+
+       Expected: A success notification and a pop-up with a link to the user guide will appear.
+    2. Test case: `help 1`
+
+       Expected: A success notification stating additional parameters supplied have been ignored 
+       is shown in status message and a pop-up with a link to the user guide will appear.
+       This is allowed as help is not considered a critical action does not require exact formatting.
 
 ### Showing students in groups
 
@@ -535,8 +588,12 @@ testers are expected to do more *exploratory* testing.
 - There were significant challenges in adjusting validation for the various commands. What inputs to allow and reject was constantly being discussed with an end result of prioritising user freedom while ensuring inputs remain relatively reasonable.
 - There were difficulties agreeing on the UI which went through multiple iterations of tweaking before resulting in the current NUS-themed color palette and which is in line with the app's intended usage.
 - Fields in the application were tweaked to suit NUS students' needs (eg. refactoring variables, different input validation)
-- New functions added such as attendance taking function, comment
-
+- New function added such as attendance taking function.
+- New function added such as comment.
+- New function added such as multiple groups.
+- New function added such as find by groups.
+- New function which allows to add student by certain optional and required fields related to NUS and students.
+- New default function to show offline help list when a command is wrongly typed.
 ---
 
 ## **Appendix: Planned Enhancements**
