@@ -13,21 +13,15 @@
 
 Calling out to all [STEM](#stem) students!
 
-We know that finding internships can be very tough and stressful! We know how hard it is to manage to process of applying for a single internship, 
-let alone trying to manage applications for many different companies. This is not even considering the fact that many of you
-are juggling this along with schoolwork and other commitments.
+Navigating the internship application process can be overwhelming &ndash; from managing multiple applications to staying on top of deadlines and requirements, all while balancing your schoolwork and other commitments. That's where **InternBuddy** comes in!
 
-This is why we are excited to introduce **InternBuddy**! &ndash; the all-in-one application for all your internship
-applications management needs. **InternBuddy** offers a convenient, intuitive and easy to use way to keep track of your interested
-companies, internship applications, and critical information &mdash; all tailored for you to ace your internship journey effectively by
-making internship application management easier and more efficient!
+Introducing **InternBuddy** &ndash; your all-in-one solution for seamless internship application management. Whether you're just beginning your search or juggling multiple opportunities, **InternBuddy** offers an intuitive, user-friendly platform that makes it easy to keep track of the companies you're interested in, the stages of your applications, and essential information to help you stay organized and focused.
 
-This user guide will be the key to [start your journey](#how-to-use-our-user-guide) with **InternBuddy**! We provide you with step-by-step instructions on installing
-and using our application; giving you a head start on your internship journey!
-Or if you are already an existing user, this guide will act as a [refresher](#command-summary) of the various features **InternBuddy** has to offer!
-**InternBuddy** is designed to be intuitive, easy to use, and easy to master!
+This guide provides step-by-step instructions to help you [start your journey](#how-to-use-our-user-guide) **with InternBuddy**. New users will find everything they need to get up and running quickly, while returning users can refresh their knowledge of InternBuddy's comprehensive features in our [command summary](#command-summary). **InternBuddy** is crafted with usability in mind – easy to learn and master, designed to support you in reaching your career goals.
 
-_From the InternBuddy Team!_
+_Your internship journey just got easier!_
+
+* **The InternBuddy Team**
 
 [go to overview & tutorial](#overview) <br>
 [go to command summary & features](#command-summary)
@@ -48,7 +42,7 @@ the contacts of companies that they are potentially applying or have already app
 
 **InternBuddy** allows users to:
 * store and manage companies' contact information for various internship applications.
-* easy add and remove companies and their various internship applications
+* easily add and remove companies and their various internship applications.
 * keep track of information of the applications for the various companies such as name of position, stage of application, and notes about the position.
 * and much more!
 
@@ -198,7 +192,7 @@ Before diving into our features, do note that we set some specifications for nam
 
 * A Company Status is the first coloured tag under the company's name. It will be set to `INTERESTED` initially, then to `APPLIED` when an Application to the company is made, and finally `CLOSED` when the all Applications are withdrawn from that company.
 
-* To use the `reopen` command, the company at the `Index` provided mus have status `CLOSED`, which will subsequently become `Interested`.
+* To use the `reopen` command, the company at the `Index` provided must have status `CLOSED`, which will subsequently become `Interested`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
