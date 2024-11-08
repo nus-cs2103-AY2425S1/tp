@@ -555,14 +555,19 @@ Policies Left: 1. Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Co
 #### 5.3.3 Editing a Policy: `edit-policy`
 **Edit the policy** from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.
 
-**Format:** `edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]`
+**Format:** 
+```edit-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]```
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
 * At least one of the optional parameters must be indicated.
 * Only the specified parameters will be edited. The other parameters not specified will not be changed.
 * If the policy to be edited does not exist for the specified client, this command will not work.
+</div>
 
 **Examples:**
 * `edit-policy 1 pt/life pa/200` Edit the Life policy of the 1st client to have a premium of $200. The policy's coverage and expiry date remain unchanged.
@@ -571,33 +576,49 @@ Policies Left: 1. Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Co
 #### 5.3.4 Listing All Policies: `list-policies`
 Lists **all policies** associated with a client at the specified `INDEX`.
 
-**Format:** `list-policies INDEX`
+**Format:** 
+```
+list-policies INDEX
+```
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * This command displays a complete list of all policies associated with the client at the specified `INDEX`.
 * No filtering or sorting is applied by this command; it shows all policies regardless of type or expiry date.
+</div>
 
 **Examples:**
-* `list-policies 2` Displays all policies for the client at index 2, including life, health, and education policies.
+* `list-policies 2` displays all policies for the client at index 2, including life, health, and education policies.
 
 #### 5.3.5 Listing Expiring Policies: `list-expiring-policies`
 List all policies that are **expiring** within a specified number of days. If no arguments are provided, default to list all policies expiring after 30 days.
 
-**Format:** `list-expiring-policies [DAYS]`
+**Format:**
+```
+list-expiring-policies [DAYS]
+```
 
 <box type=info seamless>
-  Info: Preceding zeros in the `DAYS` argument will be ignored.
+
+  **Info:** 
+  Preceding zeros in the `DAYS` argument will be ignored.
   For example, <code>list-expiring-policies 0023</code> and <code>list-expiring-policies 023</code> will both be treated as <code>list-expiring-policies 23</code>.
 </box>
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note:**
 * The `DAYS` argument must be a positive integer (that is, greater than 0).
 * Invalid or negative numbers will result in an error.
+</div>
 
 **Examples:**
-* `list-expiring-policies` Lists all policies expiring within 30 days.
-* `list-expiring-policies 10` Lists all policies expiring within 10 days.
+* `list-expiring-policies` lists all policies expiring within 30 days.
+* `list-expiring-policies 10` lists all policies expiring within 10 days.
 
 ---
 
@@ -635,8 +656,8 @@ Info: This command will not allow adding a claim if the client has no policy of 
 
 **Examples:**
 
-* `add-claim 1 pt/health s/pending d/stomach surgery` Adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
-* `add-claim 2 pt/life s/approved d/accidental coverage` Adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
+* `add-claim 1 pt/health s/pending d/stomach surgery` adds a claim with status "pending" and description "stomach surgery" to the health policy of the 1st client.
+* `add-claim 2 pt/life s/approved d/accidental coverage` adds a claim with status "approved" and description "accidental coverage" to the life policy of the 2nd client.
 
 **On success:**
 ```shell
@@ -667,12 +688,14 @@ delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX
 </div>
 
 <box type=info seamless>
-Info: If the specified client, policy type, or claim does not exist, an error message will be shown.
+
+**Info:**
+If the specified client, policy type, or claim does not exist, an error message will be shown.
 </box>
 
 **Examples:**
-* `delete-claim 1 pt/health c/1` Deletes the claim at index 1 in the health policy of the 1st client.
-* `delete-claim 2 pt/life c/2` Deletes the claim at index 2 in the life policy of the 2nd client.
+* `delete-claim 1 pt/health c/1` deletes the claim at index 1 in the health policy of the 1st client.
+* `delete-claim 2 pt/life c/2` deletes the claim at index 2 in the life policy of the 2nd client.
 
 **On success:**
 ```shell
@@ -709,8 +732,8 @@ Info: At least one of `CLAIM_STATUS` or `CLAIM_DESCRIPTION` must be specified. I
 
 **Examples:**
 
-* `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details` Edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
-* `edit-claim 2 pt/life c/2 s/pending` Updates the status of the second claim in the life policy of the 2nd client to "pending."
+* `edit-claim 1 pt/health c/1 s/approved d/Updated surgery details` edits the first claim in the health policy of the 1st client, updating the status to "approved" and the description to "Updated surgery details."
+* `edit-claim 2 pt/life c/2 s/pending` updates the status of the second claim in the life policy of the 2nd client to "pending."
 
 **On success:**
 ```shell
@@ -731,7 +754,7 @@ Lists **all claims** under the specified policy type for the client identified b
 * No filtering or sorting is applied by this command; it shows all existing claims.
 
 **Examples:**
-* `list-claims 1 pt/health` Lists all claims of the health policy for the first client.
+* `list-claims 1 pt/health` lists all claims of the health policy for the first client.
 
 --------------------------------------------------------------------------------------------------------------------
 
