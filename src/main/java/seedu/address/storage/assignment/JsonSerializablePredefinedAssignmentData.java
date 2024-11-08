@@ -50,7 +50,7 @@ class JsonSerializablePredefinedAssignmentData {
     }
 
     private boolean isFieldNull(JsonAdaptedPredefinedAssignment assignment) {
-        return assignment.getName() == null && assignment.getMaxScore() == null;
+        return assignment.getName() == null || assignment.getMaxScore() == null;
     }
 
     @Override
