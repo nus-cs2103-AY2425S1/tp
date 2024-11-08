@@ -170,27 +170,45 @@ Format: `setappointment INDEX d/[YYYY-MM-DD]`
 Example:
 - `setappointment 1 d/2024-11-23`
 
-### Locating beneficiaries by name: `find`
+### Searching and filtering clients: `find`
 
-Finds beneficiaries whose names and address contain any of the given keywords.
+Finds and filters clients using a combination of name, address, and tags.
 
-Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS]`
+Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TAGS]`
 
+* At least one of name, address, or tag needs to be entered. 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Partial names will also be matched e.g. `Han` will match `Hans`
-* Beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
+* The order of the keywords does not matter. 
+  * e.g. `n/Hans Bo` will match name `Bo Hans`
+  * `a/Ave Clementi` will match the address`Clementi Ave`
+* Partial names and addresses will also be matched 
+  * e.g. `Han` will match `Hans`
+  * e.g. `Cle` will match `Clementi`
+* Note that tags is a complete string match
+  * e.g. `elderly` will match `elderly`
+  * e.g. `urg` will not match `urgent`
+* For name searching, beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
   - e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
-  - e.g. `find n/Hans a/serangoon` will return `Hans Gruber` who has the address `Serangoon street 2, blk 111`
+* For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search)
+  - This is to search as a filtering function 
+  - e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags
+  - e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`
+
+* If multiple parameters are used, only those matching all parameters will be returned
+    to help quickly filter and narrow down searches
+    - e.g. `find n/Hans Bo a/serangoon` will return 
+        1. `Hans Gruber` who has the address `Serangoon street 2, blk 111`
+        2. `Bo Yang` who has the address `Blk 777 Serangoon Ave 1`
+        3.  It will **not** return `John Hans` who has the address `9 Bishan Road, 302534`
 
 
 Examples:
 * `find n/ John` returns `johnny` and `John Doe`
 * `find n/ benson carl` returns `Benson Meier`, `Carl Kurz`<br>
 * `find a/ serangoon` will return `Bernice Yu` with address `Blk 30 Lorong Serangoon Gardens, #07-18` and `David Li` with address `Blk 436 Serangoon Gardens 26, #16-43`
-  ![result for 'find'](images/findResult.png)
-
+* `find a/ cl av` will return `Carl` with address `Blk 777 Clementi Ave 2`
+* `find n/john a/Bishan t/urgent` will return `John Hans` with address `9 Bishan road, 302534` and tags `urgent`, `ill`
+![img.png](images/findJohnHans.png)
 
 ### Deleting a client : `delete`
 
