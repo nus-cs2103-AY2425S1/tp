@@ -64,9 +64,9 @@ Commands in EZStates follow the same structure:
 
 #### Reference Types
 
-| Reference | Meaning                                  | Constraints                                                     | Remarks                                                                                                                                               |
-|-----------|------------------------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| INDEX     | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists <br> Names are also `case-insensitive` |
+| Reference | Meaning                                  | Constraints                                                     | Remarks                                                                                                        |
+|-----------|------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| INDEX     | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists |
 
 #### Prefix Notation
 
