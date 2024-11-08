@@ -120,7 +120,7 @@ public class PersonDetails {
         phoneLabel.setText(person.getPhone().value);
         emailLabel.setText(person.getEmail().value);
         addressLabel.setText(person.getAddress().value);
-        birthdayLabel.setText(person.getBirthday().value.toString());
+        birthdayLabel.setText(person.getBirthday().toString());
         remarkLabel.setText(person.getRemark().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing((Tag tag) -> !tag.tagName.equalsIgnoreCase("favourite")))
