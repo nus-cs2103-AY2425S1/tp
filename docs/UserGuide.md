@@ -28,7 +28,7 @@ If you would like to skip to any specific part of the User Guide, you can refer 
 
 <div style="page-break-after: always;"></div>
 
-## Quick Start 
+## Quick Start
 
 This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-beginner-friendly-detailed) or scroll past this section.
 
@@ -546,7 +546,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
-**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start-)!
+**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start)!
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -557,7 +557,7 @@ _Details coming soon ..._
 1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
 2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
 3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (e.g. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
-4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start-) if needed)
+4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start) if needed)
 5. Open / run the application once.
 6. Close the application.
 7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
