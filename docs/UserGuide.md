@@ -82,7 +82,10 @@ Adds a person to TalentHub.
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source:Optionals** <br>
+
 A person can have any number of tags or none at all!
 The address and email address fields are also optional!
 </div>
@@ -192,8 +195,8 @@ Format: `delete person INDEX`
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-When you delete a person, TalentHub will ask for your confirmation because you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists.
+<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+When you delete a person, you will also delete events which the person is the celebrity for, and you remove the person from all events' contact lists. This action is irreversible after confirmation.
 </div>
 
 Examples:
@@ -221,7 +224,10 @@ Adds an event to TalentHub.
 
 Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source:Optionals** <br>
+
 An event can have any number of points of contact or none at all!
 The venue field is also optional!
 </div>
@@ -353,6 +359,10 @@ Clears all event entries from the address book after receiving confirmation from
 
 Format: `clear event`
 
+<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+Running this command will clear all events in TalentHub. This action is irreversible after confirmation.
+</div>
+
 Users will be provided with the following prompt.
 
 ![result for 'clear event confirmation'](images/clear_event_confirmation.png)
@@ -370,6 +380,10 @@ Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and re
 ### Clearing all entries : `clear all`
 
 Clears all entries from TalentHub.
+
+<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+Running this command will clear all persons and events in TalentHub. This action is irreversible after confirmation.
+</div>
 
 Format: `clear all`
 
@@ -421,7 +435,7 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TalentHub home folder.
+**A**: Install the app in the other computer and overwrite the data file (talent.json) it creates with the file that contains the data of your previous TalentHub home folder.
 
 **Q**: How do I add multiple tags to a contact?<br>
 **A**: When adding a person, use t/TAG multiple times. For example, `add person n/John Doe p/98765432 t/CameraMan t/Producer` will add "CameraMan" and "Producer" as tags.
