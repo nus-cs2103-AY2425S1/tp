@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "DevOps guide"
+  title: "Developer guide"
   pageNav: 3
 ---
 
