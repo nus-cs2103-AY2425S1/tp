@@ -1,5 +1,4 @@
 <!--
----
 layout: default.md
 title: "Documentation guide"
 pageNav: 3
