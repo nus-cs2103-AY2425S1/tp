@@ -113,6 +113,7 @@ Remarks:
     * end with a `domain` label at least 2 characters long
     * have each `domain` label start and end with alphanumeric characters
     * have each `domain` label consist of alphanumeric characters, separated only by hyphens, if any.
+* Duplicated emails is strictly not allowed.
 * `NAME` and `EMAIL` are case-insensitive.
 * `ADDRESS` can be in any form with any amount of characters.
 * `ADDRESS` with non-alphanumeric characters are accepted like "😁" too.
@@ -152,10 +153,11 @@ Remarks:
 * `INDEX` must be within the range of the displayed list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `/t` without specifying any tags after it.
 * `ROLE` is not editable!
-* All constraints from `contact add` command still stands with `contact edit` command.
+* All constraints from `contact add` command still stands with `contact edit` command. 
+* In particular, we cannot edit contact to have same name, phone number or email as existing contacts.
 
 Examples:
 
@@ -171,7 +173,7 @@ Format: `contact find KEYWORD [MORE_KEYWORDS]`
 
 Remarks:
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
@@ -264,7 +266,7 @@ Format: `lesson find KEYWORD [MORE_KEYWORDS]`
 
 Remarks:
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
