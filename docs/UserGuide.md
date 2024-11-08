@@ -27,17 +27,17 @@ the process of accessing and updating resident student details. What's more, Dor
 - [Quick start](#quick-start)
 - [Features](#features)
     - [Viewing help : `help`](#viewing-help--help)
-    - [Adding a person : `add`](#adding-a-person--add)
+    - [Adding a person : `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
-    - [Finding a person : `find`](#finding-a-person--find)
+    - [Finding a person : `find`](#finding-a-person-find)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Cleaning graduated students : `clean`](#cleaning-graduated-students--clean)
     - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
-    - [Manual saving : `export`](#manual-saving--export)
-    - [Manual data restoration : `import`](#manual-data-restoration--import)
+    - [Manual saving : `export`](#manual-saving-export)
+    - [Manual data restoration : `import`](#manual-data-restoration-import)
 - [FAQ](#FAQ)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -114,6 +114,8 @@ the process of accessing and updating resident student details. What's more, Dor
 Shows a message explaning how to access the help page.
 
 Format: `help`
+
+A help window will pop up containing basic introduction to the three core features `add`, `edit` and `delete`.
 
 ![help message](images/helpMessage.png)
 
@@ -228,7 +230,7 @@ Format: `clean`
 >
 > If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
 
-Examples of usage:
+Example:
 
 `clean`, executed in 2024.
 
@@ -260,19 +262,41 @@ The `export` command will directly and immediately save the contents of the data
 
 Format: `export`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+> This exports the data of DorManagerPro to a file `NOW.json` into the data folder of the home folder. 
+> `NOW` is the time at the point of `export`, in the format MM-dd-yyyy-HHmmssPM.
+
+Example:
+
+`export`
+
+The following screenshots shows the results of executing `export`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
+![ExportToFolderExample.png](images/ExportToFolderExample.png)
+
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
 
 Format: `import f/FILE_PATH`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * `FILE_PATH` must correspond to an actual json file in the device.
+> * Use as `.` a folder to refer to the home folder.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+
 Examples:
 
 * `import fp/C:/SaveFile3.json` imports data from the file at `C:/SaveFile3.json` into the application.
+* `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
-<box type="tip" seamless>
+The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 
-**Tip:** Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
-</box>
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
+> Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
+> However, if you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+
 
 ### Editing the data file
 
