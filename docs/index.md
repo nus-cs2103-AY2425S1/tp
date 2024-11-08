@@ -5,8 +5,15 @@
 
 # LegacyLink
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T10-4/tp/actions)
-[![codecov](https://codecov.io/gh/AY2425S1-T10-4/tp/graph/badge.svg?token=GG3J9EF3VF)](https://app.codecov.io/gh/AY2425S1-CS2103T-T10-4/tp)
+<div>
+<a href="https://github.com/AY2425S1-CS2103T-T10-4/tp/actions" style="display: inline-block;">
+<img src="https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg" style="border: none;"/>
+</a>
+
+<a href="https://codecov.io/gh/AY2425S1-CS2103T-T10-4/tp" style="display: inline-block;">
+<img src="https://codecov.io/gh/AY2425S1-CS2103T-T10-4/tp/graph/badge.svg?token=GG3J9EF3VF" style="border: none;"/>
+</a>
+</div>
 
 ![Ui](images/Ui.png)
 

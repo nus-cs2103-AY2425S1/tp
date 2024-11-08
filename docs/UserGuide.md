@@ -15,6 +15,8 @@ Whether you have a small, close-knit family or a large extended family, LegacyLi
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -44,11 +46,47 @@ Whether you have a small, close-knit family or a large extended family, LegacyLi
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
-<box type="info" seamless>
+Our **primary** features include:
 
-**Notes about the command format:**<br>
+* Adding a person to the contact list
+
+* Creating (scheduling) events
+
+* Adding a person to the list of attendees for an event
+
+* Listing all contacts in the contact list
+
+* Listing all events (past and present)
+
+<br/>
+
+If you want to update information about a contact or event, you can: 
+
+* Edit a person's contact information
+
+* Update event details (including name, date, location, and attendees)
+
+<br/>
+
+If you wish to delete a contact or cancel an event, you can:
+
+* Delete a person from the contact list
+
+* Cancel an upcoming event
+
+* Clear (mass delete) all contacts
+
+* Clear (mass delete) all events
+
+<br/>
+
+Refer to the feature list below for detailed information of each command that is available in LegacyLink.
+
+<panel header="Notes about the command format:" type="info" expanded no-close>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add -n NAME`, `NAME` is a parameter which can be used as `add -n John Doe`.
@@ -60,7 +98,7 @@ Whether you have a small, close-knit family or a large extended family, LegacyLi
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</box>
+</panel>
 
 ### Viewing help : `help`
 

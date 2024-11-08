@@ -3,8 +3,8 @@
 </head-bottom>
 
 <header sticky>
-  <navbar type="dark">
-    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand">LegacyLink</a>
+  <navbar type="none" >
+    <a slot="brand" href="{{baseUrl}}/index.html" title="Home" class="navbar-brand fw-bold">LegacyLink</a>
     <li><a href="{{baseUrl}}/index.html" class="nav-link">Home</a></li>
     <li><a href="{{baseUrl}}/UserGuide.html" class="nav-link">User Guide</a></li>
     <li><a href="{{baseUrl}}/DeveloperGuide.html" class="nav-link">Developer Guide</a></li>
@@ -12,17 +12,19 @@
     <li><a href="https://github.com/AY2425S1-CS2103T-T10-4/tp" target="_blank" class="nav-link"><md>:fab-github:</md></a>
     </li>
     <li slot="right">
-      <form class="navbar-form">
-        <searchbar :data="searchData" placeholder="Search" :on-hit="searchCallback" menu-align-right></searchbar>
-      </form>
+        <span class="inline-block me-2">v1.5</span>
+        <button type="button" class="btn btn-outline-primary download-btn">
+            <a href="https://github.com/AY2425S1-CS2103T-T10-4/tp/releases/tag/v1.5">Download</a>
+        </button>
     </li>
+
   </navbar>
 </header>
 
 <div id="flex-body">
   <nav id="site-nav">
-    <div class="site-nav-top">
-      <div class="fw-bold mb-2" style="font-size: 1.25rem;">Site Map</div>
+    <div class="site-nav-top mb-0">
+      <div class="fw-bold" style="font-size:1.25rem; color: rgb(97, 97, 97);">Site Map</div>
     </div>
     <div class="nav-component slim-scroll">
       <site-nav>
@@ -40,10 +42,6 @@
   * [Documentation, logging, testing, configuration, dev-ops]({{ baseUrl }}/DeveloperGuide.html#documentation-logging-testing-configuration-dev-ops)
   * [Appendix: Requirements]({{ baseUrl }}/DeveloperGuide.html#appendix-requirements)
   * [Appendix: Instructions for manual testing]({{ baseUrl }}/DeveloperGuide.html#appendix-instructions-for-manual-testing)
-* Tutorials
-  * [Tracing code]({{ baseUrl }}/tutorials/TracingCode.html)
-  * [Adding a command]({{ baseUrl }}/tutorials/AddRemark.html)
-  * [Removing Fields]({{ baseUrl }}/tutorials/RemovingFields.html)
 * [About Us]({{ baseUrl }}/AboutUs.html)
       </site-nav>
     </div>
