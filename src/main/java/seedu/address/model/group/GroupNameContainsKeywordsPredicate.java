@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 
+//@@author gho7sie
+
 /**
  * Tests that a {@code Group}'s {@code GroupName} matches any of the keywords given.
  */

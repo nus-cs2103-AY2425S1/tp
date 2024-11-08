@@ -18,6 +18,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
+//@@author gho7sie
+
 /**
  * Contains integration tests (interaction with the Model) for {@code FindGroupCommand}.
  */
