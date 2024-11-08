@@ -59,7 +59,7 @@ In this comprehensive user guide, we will take you to experience a full journey 
   - [4.4.2 Unmarking an attendance: `deleteAtt`](#deleting-an-assignment-deleteAsg)
 - [4.5 General Commands](#general-commands)
   - [4.5.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
-  - [4.5.2 Clearing all entries: `clear`](#clearing-all-entries-clear)
+  - [4.5.2 Clearing all data: `clear`](#clearing-all-data)
   - [4.5.3 Exiting the program: `exit`](#exiting-the-program-exit)
   - [4.5.4 Viewing help: `help`](#viewing-help-help)
 - [4.6 Saving the Data](#saving-the-data)
@@ -139,22 +139,22 @@ information on how to interpret icons, formatting, and instructions provided thr
 ### 2.2 Sections:
 <a id="sections"></a>
 
-Below is a detailed overview of the main sections within this User Guide and what can be expected from each section.
+Written below is a detailed overview of the main sections in this User Guide and what you can expect from each section.
 
-- [Installation](#installation): If you're new to TrackMate or require guidance on installing the application, navigate to this section for step-by-step instructions.
-
-
-- [Commands](#commands): Section of the User Guide that delves into the intricacies of TrackMate commands, it is here where you'll find detailed explanations and practical examples for effective command usage.
+- [Installation](#installation): New to TrackMate? Visit this section for a straightforward, step-by-step guide on installing the application.
 
 
-- [Command Summary](#command-summary): For experienced users seeking a quick reference, this section offers a concise summary of all supported commands.
+- [Commands](#commands): Dive into the details of TrackMate's commands, with thorough explanations and practical examples to help you master command usage.
 
 
-- [FAQ](#faq): Should you encounter any queries or uncertainties while using the application, refer to this section for answers to frequently asked questions.
+- [Command Summary](#command-summary): Designed for experienced users, this section provides a quick-reference list of all supported commands.
+
+
+- [FAQ](#faq): If you have questions or encounter issues, this section covers frequently asked questions to help you resolve common concerns.
 
 
 <box type="info" seamless>
-For first-time users of the application, it is highly recommended for you to read through the Getting Started section before utilizing the application.
+First-time users are strongly encouraged to read the Getting Started section before beginning to use TrackMate.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -397,7 +397,7 @@ Example:
 <a id="finding-students"></a>
 > Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [KEYWORDS]...`
+Format: `find KEYWORD [KEYWORD]...`
 
 Command Details & Constraints:
 * The search is case-insensitive. e.g hans will match Hans
@@ -612,10 +612,10 @@ Example:
 
 **Method -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
 
-#### 4.5.2 Clearing all entries: `clear`
-<a id="clearing-all-entries-clear"></a>
+#### 4.5.2 Clearing all data: `clear`
+<a id="clearing-all-data"></a>
 
-> Clears all entries from the EduLink-NUS application.
+> Clears all data from TrackMate.
 
 Format: `clear`
 
