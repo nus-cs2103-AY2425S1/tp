@@ -28,4 +28,22 @@ class JsonPredefinedAssignmentDataStorageTest {
                         "AssignmentTest", "PredefinedAssignmentDuplicate.json"));
         assertThrows(DataLoadingException.class, test::readAssignment);
     }
+
+    @Test
+    void testScoreMissing() {
+        JsonPredefinedAssignmentDataStorage test = new JsonPredefinedAssignmentDataStorage(
+                Paths.get(
+                        "src", "test", "data",
+                        "AssignmentTest", "MissingScore.json"));
+        assertThrows(DataLoadingException.class, test::readAssignment);
+    }
+
+    @Test
+    void testNameMissing() {
+        JsonPredefinedAssignmentDataStorage test = new JsonPredefinedAssignmentDataStorage(
+                Paths.get(
+                        "src", "test", "data",
+                        "AssignmentTest", "MissingName.json"));
+        assertThrows(DataLoadingException.class, test::readAssignment);
+    }
 }

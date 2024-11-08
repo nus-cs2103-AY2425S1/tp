@@ -15,6 +15,7 @@ import seedu.address.model.assignment.PredefinedAssignmentsData;
 class JsonSerializablePredefinedAssignmentData {
     private static final String DUPLICATE_PREDEFINED_ASSIGNMENT =
             "Predefined assignments list contains duplicate assignment(s).";
+    private static final String MISSING_VALUES = "Assignment is missing assignmentName and/or maxScore.";
     private final List<JsonAdaptedPredefinedAssignment> assignments = new ArrayList<>();
 
     /**
@@ -40,9 +41,16 @@ class JsonSerializablePredefinedAssignmentData {
             if (predefinedAssignmentsData.hasAssignment(assignmentName)) {
                 throw new IllegalValueException(DUPLICATE_PREDEFINED_ASSIGNMENT);
             }
+            if (isFieldNull(jsonAdaptedPredefinedAssignment)) {
+                throw new IllegalValueException(MISSING_VALUES);
+            }
             predefinedAssignmentsData.addPredefinedAssignment(jsonAdaptedPredefinedAssignment.toModelType());
         }
         return predefinedAssignmentsData;
+    }
+
+    private boolean isFieldNull(JsonAdaptedPredefinedAssignment assignment) {
+        return assignment.getName() == null || assignment.getMaxScore() == null;
     }
 
     @Override
