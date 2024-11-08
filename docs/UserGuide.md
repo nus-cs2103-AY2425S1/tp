@@ -319,20 +319,20 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                               |
-| ---------------- | -------------------------------------------------------------------------------------------------------------- |
-| **Add**          | `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 c/4B t/friend t/colleague` |
-| **Clear**        | `clear`                                                                                                        |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                            |
-| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                            |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER][c/CLASS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee c/4L`                   |
-| **Export**       | `export`                                                                                                       |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                     |
-| **Find Group**   | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                |
-| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                            |
-| **Group**        | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie Martin Jianbing Shaun Wenjie` |
-| **Import**       | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                     |
-| **List**         | `list`                                                                                                         |
-| **Tag**          | `tag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                               |
-| **Untag**        | `untag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                             |
-| **Help**         | `help`                                                                                                         |
+| Action           | Format, Examples                                                                                                       |
+| ---------------- |------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME c/CLASS p/PHONE_NUMBER [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 c/4B t/friend t/colleague`         |
+| **Clear**        | `clear`                                                                                                                |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
+| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER][c/CLASS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee c/4L`                           |
+| **Export**       | `export`                                                                                                               |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                             |
+| **Find Group**   | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                        |
+| **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
+| **Group**        | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie s/Martin s/Jianbing s/Shaun s/Wenjie` |
+| **Import**       | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                             |
+| **List**         | `list`                                                                                                                 |
+| **Tag**          | `tag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                       |
+| **Untag**        | `untag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                     |
+| **Help**         | `help`                                                                                                                 |
