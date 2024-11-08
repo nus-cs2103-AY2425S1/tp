@@ -175,6 +175,17 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    //@@author tayxuenye-reused
+    //Written by ChatGPT
+    public void setShowPerson(Person person) {
+        logic.setCurrentlyShownPerson(person);
+        // Create a new PersonPane with the selected person
+        PersonPane personPane = new PersonPane(person);
+        personPanePlaceholder.getChildren().clear(); // Clear existing content
+        // Add the new PersonPane to the placeholder
+        personPanePlaceholder.getChildren().add(personPane.getRoot());
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -186,17 +197,14 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            //@@author tayxuenye-reused
-            //Written by ChatGPT
-            if (commandResult.getPersonToShow() != null) {
-                Person personToShow = commandResult.getPersonToShow();
-                // Create a new PersonPane with the selected person
-                PersonPane personPane = new PersonPane(personToShow);
-                personPanePlaceholder.getChildren().clear(); // Clear existing content
-                // Add the new PersonPane to the placeholder
-                personPanePlaceholder.getChildren().add(personPane.getRoot());
+            // We should update the show panel ONLY if the current Person being shown has changed
+            // or of course, it is a show command
+
+            if (commandResult.isShowCommand()
+                    || (logic.getCurrentlyShownPerson() != null
+                            && logic.getCurrentlyShownPerson().equals(commandResult.getOriginalPerson()))) {
+                setShowPerson(commandResult.getPersonToShow());
             }
-            //@@author
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -219,7 +227,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     private Optional<String> completeCommand(String commandText) {
         return logic.getCommandNames().stream()
-                .filter(cmdName -> cmdName.startsWith(commandText) && cmdName.length() > commandText.length())
+                .filter(cmdName -> cmdName.startsWith(commandText))
                 .findFirst();
     }
 }

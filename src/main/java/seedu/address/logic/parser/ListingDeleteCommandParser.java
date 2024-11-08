@@ -9,7 +9,7 @@ import seedu.address.logic.commands.ListingDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new RemarkCommand object.
+ * Parses input arguments and creates a new ListingDeleteCommand object.
  */
 public class ListingDeleteCommandParser implements Parser<ListingDeleteCommand> {
 
@@ -26,6 +26,9 @@ public class ListingDeleteCommandParser implements Parser<ListingDeleteCommand> 
         Index listingIndex;
         try {
             String[] bothIndexes = argMultimap.getPreamble().trim().split(" ");
+            if (bothIndexes.length != 2) {
+                throw new IllegalValueException("Missing indexes");
+            }
             personIndex = ParserUtil.parseIndex(bothIndexes[0]);
             listingIndex = ParserUtil.parseIndex(bothIndexes[1]);
 
