@@ -322,11 +322,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the task {@code target} in {@code group} with {@code editedTask}.
      */
-    public void setTask(Index index, Task editedTask, Group group) {
-        requireNonNull(index);
+    public void setTask(Task originalTask, Task editedTask, Group group) {
+        requireNonNull(originalTask);
         requireNonNull(editedTask);
         requireNonNull(group);
-        group.setTask(index, editedTask);
+        group.setTask(originalTask, editedTask);
     }
 
     //// util methods

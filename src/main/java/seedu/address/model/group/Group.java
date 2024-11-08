@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.exceptions.ExceedGroupSizeException;
 import seedu.address.model.student.Student;
@@ -51,16 +50,17 @@ public class Group {
 
     /**
      * Creates a defensive copy of the group
-     * @param otherGroup  The group whose values are to be copied
+     *
+     * @param otherGroup The group whose values are to be copied
      */
     public Group(Group otherGroup) {
         requireNonNull(otherGroup);
         this.groupName = otherGroup.groupName;
-        for (Task task: otherGroup.getTasks()) {
+        for (Task task : otherGroup.getTasks()) {
             Task newTask = new Task(task);
             tasks.add(newTask);
         }
-        for (Student student: otherGroup.getStudents()) {
+        for (Student student : otherGroup.getStudents()) {
             Student newStudent = new Student(student);
             this.students.add(newStudent);
         }
@@ -118,12 +118,18 @@ public class Group {
     /**
      * Replaces the task at {@code index} with {@code editedTask}.
      *
-     * @param index The index of the task to be replaced.
-     * @param editedTask The task to replace with.
+     * @param originalTask The index of the task to be replaced.
+     * @param editedTask  The task to replace with.
      */
-    public void setTask(Index index, Task editedTask) {
-        List<Task> taskList = new ArrayList<>(getTasks());
-        taskList.set(index.getZeroBased(), editedTask);
+    public void setTask(Task originalTask, Task editedTask) {
+        assert hasTask(originalTask) : "Checks should have been done to make sure group has original task.";
+        List<Task> taskList = new ArrayList<>(tasks);
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).equals(originalTask)) {
+                taskList.set(i, editedTask);
+            }
+        }
+
         LinkedHashSet<Task> updatedTaskSet = new LinkedHashSet<>(taskList);
 
         tasks.clear();
@@ -131,7 +137,7 @@ public class Group {
     }
 
     public void setTaskStatus() {
-        for (Task t: tasks) {
+        for (Task t : tasks) {
             t.setStatus();
         }
     }
@@ -157,6 +163,7 @@ public class Group {
         return otherGroup != null
             && otherGroup.getGroupName().equals(getGroupName());
     }
+
     /**
      * Returns true if the group has given task regardless of status.
      */
@@ -168,6 +175,7 @@ public class Group {
         }
         return false;
     }
+
     /**
      * Returns true if both group have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

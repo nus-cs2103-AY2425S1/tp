@@ -93,7 +93,7 @@ public class EditTaskCommand extends Command {
         if (group.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK_IN_GROUP);
         }
-        model.setTask(index, editedTask, group);
+        model.setTask(taskToEdit, editedTask, group);
         model.decreaseGroupWithTask(taskToEdit);
         if (!model.hasTask(editedTask)) {
             model.addTask(editedTask);

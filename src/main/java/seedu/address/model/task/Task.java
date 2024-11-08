@@ -49,7 +49,8 @@ public class Task {
 
     /**
      * Creates a defensive copy of the task
-     * @param otherTask  The task whose values are to be copied
+     *
+     * @param otherTask The task whose values are to be copied
      */
     public Task(Task otherTask) {
         this.name = otherTask.name;
@@ -78,7 +79,7 @@ public class Task {
         ZoneId zid = ZoneId.of("Asia/Singapore");
         LocalDateTime currentTime = LocalDateTime.now(zid);
         if (deadline.getTime().isBefore(currentTime)
-                && (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
+            && (this.status == Status.PENDING || this.status == Status.OVERDUE)) {
             this.status = Status.OVERDUE;
         }
     }
