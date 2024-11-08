@@ -265,6 +265,35 @@ Parameter | Requirements | Explanation
 
 ---
 
+<h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-client</span></h3>
+
+Deletes the specified client from MATER.
+
+**Format:**
+
+```shell
+del-client INDEX
+```
+
+**Parameters:**
+
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+
+**Examples:**
+
+- `list`<br>
+  `del-client 2`<br>
+  Deletes the 2nd client in MATER.
+- `find Betsy`<br>
+  `del-client 1`<br>
+  Deletes the 1st client in the results of the `find` command.
+- `del-client 3`<br>
+  Deletes the 3rd client in MATER.
+
+---
+
 <h3 style="color: #1877F2;">Adding a Car to a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-car</span></h3>
 
 Adds a car to a client.
@@ -295,38 +324,6 @@ Parameter | Requirements | Explanation
 
 ---
 
-<h3 style="color: #1877F2;">Checking in / out a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">check</span></h3>
-
-Checks in / out a client.
-
-**Format:**
-
-```shell
-check INDEX​
-```
-
-**Parameters:**
-
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
-
-**Notes:**
-
-- The client must have a car to check in / out.
-- If the client is not checked in, `check` will check in the client.
-- If the client is checked in, `check` will check out the client.
-
-**Examples:**
-
-- `check 1`
-
-The following image is the result of executing `check 1`.
-
-<img src="images/checkResult.png" alt="Result for 'check 1'" width="500" height="330">
-
----
-
 <h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-car</span></h3>
 
 Deletes a car from a client.
@@ -352,24 +349,6 @@ Parameter | Requirements | Explanation
 **Examples:**
 
 - `del-car 1`
-
----
-
-<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">list</span></h3>
-
-Shows a list of all clients in MATER.
-
-**Format:**
-
-```shell
-list
-```
-
-**Parameters:**
-
-Parameter | Requirements | Explanation
---- | --- | ---
-*(None)* | *(None)* | The `list` command takes no parameters.
 
 ---
 
@@ -414,6 +393,56 @@ Parameter | Requirements | Explanation
 - `edit 3 make/Hyundai model/Ioniq 6`
   Edits the make of the 1st client's car to `Hyundai` and model to `Ioniq 6`.
 
+
+---
+
+<h3 style="color: #1877F2;">Checking in / out a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">check</span></h3>
+
+Checks in / out a client.
+
+**Format:**
+
+```shell
+check INDEX​
+```
+
+**Parameters:**
+
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+
+**Notes:**
+
+- The client must have a car to check in / out.
+- If the client is not checked in, `check` will check in the client.
+- If the client is checked in, `check` will check out the client.
+
+**Examples:**
+
+- `check 1`
+
+The following image is the result of executing `check 1`.
+
+<img src="images/checkResult.png" alt="Result for 'check 1'" width="500" height="330">
+
+---
+
+<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">list</span></h3>
+
+Shows a list of all clients in MATER.
+
+**Format:**
+
+```shell
+list
+```
+
+**Parameters:**
+
+Parameter | Requirements | Explanation
+--- | --- | ---
+*(None)* | *(None)* | The `list` command takes no parameters.
 
 ---
 
@@ -490,35 +519,6 @@ The following image is the result of executing `view 1`.
 The `correct as of` timestamp at the top right corner of the `view` window shows the time when the window was opened, helping to avoid any confusion.
 
 </box>
-
----
-
-<h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-client</span></h3>
-
-Deletes the specified client from MATER.
-
-**Format:**
-
-```shell
-del-client INDEX
-```
-
-**Parameters:**
-
-Parameter | Requirements | Explanation
---- | --- | ---
-`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
-
-**Examples:**
-
-- `list`<br>
-  `del-client 2`<br>
-  Deletes the 2nd client in MATER.
-- `find Betsy`<br>
-  `del-client 1`<br>
-  Deletes the 1st client in the results of the `find` command.
-- `del-client 3`<br>
-  Deletes the 3rd client in MATER.
 
 ---
 
@@ -600,18 +600,19 @@ MATER's data is saved automatically as a JSON file at `[JAR file location]/data/
 
 <h2 style="color: #2980B9;"> <i class="fas fa-terminal icon"></i> Command Summary</h2>
 
-| Action            | Format         | Examples              |
-|-------------------|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Client**    | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>`add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels` |
-| **Add Car**       | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL`   | `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`           |
-| **Delete Car**    | `del-car INDEX`            | `del-car 1`    |
-| **List Clients**  | `list` | `list`  |
-| **Edit Client**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `edit 1 p/91234567 e/johndoe@example.com`<br>`edit 2 n/Betsy Crower i/`    |
-| **Find Clients**  | `find KEYWORD [MORE_KEYWORDS]`      | `find John`<br>`find SJH9514P`             |
-| **View Client**   | `view INDEX`                    | `view 1`     |
-| **Delete Client** | `del-client INDEX`   | `del-client 3`          |
-| **Clear**         | `clear`       |     `clear`         |
-| **Exit**          | `exit`                |   `exit`              |
-| **Help**          | `help`               |     `help`            |
+| Action            | Format                                                                                                                           | Examples                                                                                                                                                                                                                                                                                                                                         |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**          | `help`                                                                                                                           | `help`                                                                                                                                                                                                                                                                                                                                           |
+| **Add Client**    | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`  | **Without Car:** `add-client n/Turritopsis Dohrnii p/98889888 e/turritopsis@gmail.com a/Block 450 Clementi Ave 3 #14-20 Singapore 120450`<br>**With Car:**`add-client n/Mai Dang Lao p/96965888 e/maidanglao@mcd.com a/9 Sentul Cres #03-05 Singapore 828654 vrn/SJH9514P vin/MIT45678901234567 make/Mitsubishi model/Lancer i/Engine i/Gearbox` |
+| **Delete Client** | `del-client INDEX`                                                                                                               | `del-client 1`                                                                                                                                                                                                                                                                                                                                   |
+| **Add Car**       | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL`                                                            | `add-car 1 vrn/SJH9514P vin/KMH45678901234567 make/Toyota model/Corolla`                                                                                                                                                                                                                                                                         |
+| **Delete Car**    | `del-car INDEX`                                                                                                                  | `del-car 1`                                                                                                                                                                                                                                                                                                                                      |
+| **Check Clients** | `check INDEX`                                                                                                                    | `check 1`                                                                                                                                                                                                                                                                                                                                        |
+| **List Clients**  | `list`                                                                                                                           | `list`                                                                                                                                                                                                                                                                                                                                           |
+| **Edit Client**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...` | `edit 1 p/91234567 e/e1234567@u.nus.edu`<br>`edit 2 n/Xiao Ming i/`                                                                                                                                                                                                                                                                              |
+| **Find Clients**  | `find KEYWORD [KEYWORD]...`                                                                                                      | `find John`<br>`find SJH9514P`<br>`find John SJH9514P`                                                                                                                                                                                                                                                                                           |
+| **View Client**   | `view INDEX`                                                                                                                     | `view 1`                                                                                                                                                                                                                                                                                                                                         |
+| **Clear**         | `clear`                                                                                                                          | `clear`                                                                                                                                                                                                                                                                                                                                          |
+| **Exit**          | `exit`                                                                                                                           | `exit`                                                                                                                                                                                                                                                                                                                                           |
 
 Back to Features [section](#features).
