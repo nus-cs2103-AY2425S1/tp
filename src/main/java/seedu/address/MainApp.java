@@ -97,7 +97,6 @@ public class MainApp extends Application {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
-            e.printStackTrace();
         }
 
         try {
@@ -109,7 +108,7 @@ public class MainApp extends Application {
             predefinedAssignments = readAssignmentOptional
                     .orElseGet(SampleAssignmentsUtil::getSamplePredefinedAssignments);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
+            logger.warning("Data file at " + storage.getAssignmentFilePath() + " could not be loaded."
                     + " Will be starting with an empty predefined assignments data.");
             predefinedAssignments = new PredefinedAssignmentsData();
         }
