@@ -66,7 +66,7 @@ Welcome to MATER, a **desktop app designed for efficient management of client an
 <!-- * Table of Contents -->
 <page-nav-print />
 
-<div style="page-break-after: always;"></div>
+
 
 ---
 
@@ -185,8 +185,6 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 <h2 id="features" style="color: #000000;"> <i class="fas fa-cogs icon"></i> Features</h2>
 
 <box type="info" seamless>
@@ -208,6 +206,8 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 <h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">help</span></h3>
 
 Shows a message explaining how to access the help page.
@@ -225,8 +225,6 @@ Shows a message explaining how to access the help page.
 
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 <h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
@@ -252,6 +250,8 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 | `model/CAR_MODEL` | Optional; Required if adding a car; First character is a capitalised letter or a number; Must be at most 40 characters; No spaces                                                      | Car's model.                                      |
 | `i/ISSUE`         | Optional; Issues must be unique; Identical Issues will be ignored; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.                 |
 
+<div style="page-break-after: always;"></div>
+
 **Notes:**
 
 - If adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided. `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
@@ -273,8 +273,6 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 <h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-client</span></h3>
 
@@ -337,8 +335,6 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 
 
 ---
-
-<div style="page-break-after: always;"></div>
 
 <h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-car</span></h3>
 
