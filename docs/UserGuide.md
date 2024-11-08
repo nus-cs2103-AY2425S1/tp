@@ -66,7 +66,7 @@ Welcome to MATER, a **desktop app designed for efficient management of client an
 <!-- * Table of Contents -->
 <page-nav-print />
 
-<div style="page-break-after: always;"></div>
+
 
 ---
 
@@ -226,8 +226,6 @@ Shows a message explaining how to access the help page.
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 <h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
 Adds a client to MATER.
@@ -237,6 +235,8 @@ Adds a client to MATER.
 ```shell
 add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...
 ```
+
+<div style="page-break-after: always;"></div>
 
 **Parameters:**
 
@@ -274,8 +274,6 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 ---
 
-<div style="page-break-after: always;"></div>
-
 <h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">del-client</span></h3>
 
 Deletes the specified client from MATER.
@@ -291,6 +289,8 @@ del-client INDEX
 | Parameter   | Requirements                         | Explanation                                                         |
 |-------------|--------------------------------------|---------------------------------------------------------------------|
 | `INDEX`     | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.  |
+
+<div style="page-break-after: always;"></div>
 
 **Examples:**
 
@@ -349,6 +349,8 @@ Deletes a car from a client.
 ```shell
 del-car INDEX
 ```
+
+<div style="page-break-after: always;"></div>
 
 **Parameters:**
 
