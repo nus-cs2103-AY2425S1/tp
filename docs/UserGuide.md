@@ -75,22 +75,46 @@ administrators.
 ### Command Format Guidelines
 
 * ` `: Commands format is indicated in the shaded boxes.
+
 * `[ ]`: Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
 * `…`: Items with `…` after them can be used multiple times including zero times.
+
 * `UPPER_CASE`: Words in `UPPER_CASE` are the parameters to be supplied by the user.
+
 * `INDEX`: Refers to the index number shown in the displayed person list.
+
 * `MONTH_PAID`: Refers to the format `YYYY-MM` (e.g., `2024-10` for October 2024).
+
 * `KEYWORD`: Refers to the search term used to find persons.
+
 * `MORE_KEYWORDS`: Refers to additional search terms used to find persons.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
 * `n/` is for name, `p/` is for phone number, `e/` is for email, `a/` is for address, `f/` is for fees, `c/` is for class ID, and `t/` is for tags.
+
 * The commands help, list, exit, and clear do not accept parameters; any provided parameters will be disregarded.  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-* EduTuTu allows the handling of only alphanumeric characters and spaces. Special characters and emojis are not supported.
+
+* EduTuTu allows the handling of only alphanumeric characters and spaces. Emojis are not supported.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
+### Field Constraints
+* Names support alphanumeric characters and spaces. In addition, it supports the addition of special characters of common name formats.
+
+* Phone numbers accepts hyphen between the numbers and + (for country code) as special characters.
+
+* Fees accepts only a maximum of only 9 digits due to integer overflow constraints.
+
+* Class ID does not accept special characters.
+
+* Tags support alphanumeric characters without spaces.
+
 [Back to Table of Contents](#table-of-contents)
+
 ***
 
 ### 2.1 Viewing Help: `help`
