@@ -267,7 +267,7 @@ Use `find s/KEYWORD` if you have contacts with very similar names.
 
 Examples:
 
-1. `find David` is a general find which returns `David` and `David Li`.
+1. `find David` is a general find which returns `David Low` and `David Li`.
 
 
 2. `find s/David Low` is a specific find which only returns `David Low`.
