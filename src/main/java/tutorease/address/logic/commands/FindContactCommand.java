@@ -23,10 +23,14 @@ public class FindContactCommand extends ContactCommand {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindContactCommand to find contacts whose names match the specified keywords.
+     *
+     * @param predicate The predicate used to filter the list of contacts by matching names with keywords.
+     */
     public FindContactCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
-
 
     @Override
     public CommandResult execute(Model model) {

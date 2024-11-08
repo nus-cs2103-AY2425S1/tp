@@ -5,14 +5,15 @@ import static tutorease.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}.
  */
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters, spaces and brackets, and it should not be blank";
 
-    public static final String MESSAGE_CONSTRAINTS_NO_SLASHES = "Names should not contain slashes ('/').";
+    public static final String MESSAGE_CONSTRAINTS_NO_SLASHES = "Names with '/' might hinder certain operations.\n"
+            + "However, it is still possible to add names without the '/'.";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -73,7 +74,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
