@@ -71,6 +71,6 @@ deactivate CommandResult
 DeleteGuestCommand --> LogicManager : r
 deactivate DeleteGuestCommand
 
-[<--LogicManager
+[<--LogicManager: r
 deactivate LogicManager
 @enduml
