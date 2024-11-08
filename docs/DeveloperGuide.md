@@ -103,6 +103,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteGuestCommandParser`) and uses it to parse the command.
    1. Note that `EditVendorCommandParser` and `EditGuestCommandParser` parser classes require the `Model`, to check if the guest or vendor index provided by the user is valid or not. 
 
+
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteGuestCommand`) which is executed by the `LogicManager`.
 
 1. When the `Command` object is executed, it communicates with the `Model` (e.g., to delete a guest). <br>
@@ -117,8 +118,9 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddGuestCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddGuestCommand`) which the `AddressBookParser` returns back as a `Command` object.
   * As explained above, some `XYZCommandParser` classes require the `Model` for parsing 
-  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse)
+  * Note that for `clear`, `list`, `exit`, `help` and `stats` user commands, the `AddressBookParser` directly returns the `Command` object, and no corresponding `XYZCommandParser` class is created (as there is no extra info to parse) 
   
+
 * All `XYZCommandParser` classes (e.g., `AddGuestCommandParser`, `DeleteGuestCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -144,6 +146,7 @@ The `Storage` component,
 * Can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
   * `Storage` saves `Guest` into JSON format and reads back into `Guest` object, using the `JsonAdapatedGuest` class
   * `Storage` saves `Vendor` into JSON format and reads back into `Vendor` object, using the `JsonAdaptedVendor` class
+  
 
 * Inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed)
 
