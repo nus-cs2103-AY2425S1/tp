@@ -238,8 +238,8 @@ find KEYWORD [MORE_KEYWORDS]
 Examples:
 
 - `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  <img src="images/findAlexDavidResult.png" alt="result for 'find alex david'" style="width: 80%;">
+- `find bob lee` returns `Bob Chen`, `Catherine Lee`<br>
+  <img src="images/findBobLeeResult.png" alt="result for 'find bob lee'" style="width: 80%;">
 
 <br>
 
@@ -365,8 +365,6 @@ Clears all entries from the address book.
 ```plaintext
 clear
 ```
-
-<div style="page-break-after: always;"></div>
 <br>
 
 ### Exiting the program : `exit`
