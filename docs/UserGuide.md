@@ -181,6 +181,7 @@ Format: `find_sessions KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Members matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- The search does not care if the member is currently displayed.
 
 Examples:
 
