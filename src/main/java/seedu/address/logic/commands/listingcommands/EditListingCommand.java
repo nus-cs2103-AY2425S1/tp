@@ -36,7 +36,7 @@ public class EditListingCommand extends Command {
     public static final String COMMAND_WORD = "editlisting";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the listing identified "
-            + "by the listing index. Buyers cannot be edited using this command. "
+            + "by the listing index number. Buyers cannot be edited using this command. "
             + "Use addlistingbuyers or removelistingbuyers to manage buyers.\n"
             + "Parameters: LISTING_INDEX "
             + "[" + PREFIX_NAME + "NAME] "
