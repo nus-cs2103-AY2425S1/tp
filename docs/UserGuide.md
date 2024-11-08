@@ -70,28 +70,45 @@ HR Helper is a **desktop app for managing employees, optimized for use via a Com
 
 Login to HR Helper with your username and password.
 
-For this version, the username is `admin` and password is `12345678`.
-For faster testing purposes, the username is `test` and password is `test`.
-
+Format:
 ![help message](images/authentication.png)
+
+**Tip:** Press `Enter` to go to the next field!
+
+Examples:
+* For this version, the username is `admin` and password is `12345678`.
+* For faster testing purposes, the username is `test` and password is `test`.
+
+`Expected output: Add screenshot of filled in login window here`
+
+**Warning:** Keep your credentials secure.
 
 We plan to implement adding more users in the future.
 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<box type="tip" seamless>
+
+**Tip:** Use the help command anytime to quickly refresh on command usage.
+
+Examples:
+
+![help message](images/helpMessage.png) `need to update picture`
+
+**Warning:** Keep your credentials secure.
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds an employee to the HR Helper.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
+
+`Add picture of expected output here`
 
 <box type="tip" seamless>
 
@@ -102,11 +119,24 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/true d/Operations l/12`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Road p/1234567 t/lazy f/true d/Marketing l/10`
 
+**Warning:** Duplicate employees with the same name cannot be added.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<box type="tip" seamless>
+
+**Tip:** `list` can be used to show all employees after using the `find` command.
+
+Example:
+`Add picture of example here`
+
+`Add picture of expected output here`
+
+**Warning:** Use this command before other commands like delete or edit to ensure you’re modifying the correct entry.
 
 ### Counting persons : `count`
 
