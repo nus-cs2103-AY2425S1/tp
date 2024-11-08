@@ -91,6 +91,7 @@ public class EditListingCommandParserTest {
         assertThrows(ParseException.class, () -> parser.parse(""),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditListingCommand.MESSAGE_USAGE));
     }
+
     @Test
     public void parse_multipleNames_throwsParseException() {
         String userInput = EditListingCommand.COMMAND_WORD + " "

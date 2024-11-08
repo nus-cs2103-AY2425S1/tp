@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.ui.MoreInfoWindow;
 
@@ -22,7 +22,7 @@ import seedu.address.ui.MoreInfoWindow;
  * followed by the client's name. For example, {@code moreinfo n/Amy}.
  *
  * Command Format:
- * moreinfo n/client_name
+ * moreinfo n/client_index
  *
  * Attributes
  *     {@code COMMAND_WORD} - The command word to trigger this command.
@@ -36,33 +36,27 @@ import seedu.address.ui.MoreInfoWindow;
 public class MoreInfoCommand extends Command {
     public static final String COMMAND_WORD = "moreinfo";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Open a window to more information "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "CLIENT_INDEX" + ": Open a window to more information "
             + "about the client.\n"
-            + "Example: " + COMMAND_WORD + " Amy";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String SHOWING_MORE_INFO_MESSAGE = "Opened window for client's information.";
 
-    private final Name targetName;
+    private final Index targetIndex;
 
-    public MoreInfoCommand(Name targetName) {
-        this.targetName = targetName;
+    public MoreInfoCommand(Index targetIndex) {
+        this.targetIndex = targetIndex;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        Person personMoreInfo = model.getPersonByName(targetName);
-
-        if (!lastShownList.contains(personMoreInfo)) {
-            String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
-
-            if (closestMatch != null) {
-                throw new CommandException(String.format(Messages.MESSAGE_SUGGESTION, closestMatch));
-            } else {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
-            }
+        int zeroBasedPerson = targetIndex.getZeroBased();
+        if (zeroBasedPerson >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+        Person personMoreInfo = lastShownList.get(zeroBasedPerson);
 
         MoreInfoWindow moreInfoWindow = new MoreInfoWindow(personMoreInfo);
         moreInfoWindow.show();
@@ -80,13 +74,13 @@ public class MoreInfoCommand extends Command {
             return false;
         }
 
-        return targetName.equals(otherMoreInfoCommand.targetName);
+        return targetIndex.equals(otherMoreInfoCommand.targetIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetName", targetName)
+                .add("targetIndex", targetIndex)
                 .toString();
     }
 }
