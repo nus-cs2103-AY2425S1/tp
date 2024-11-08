@@ -1,10 +1,11 @@
-package seedu.address;
+package seedu.address.ui;
 
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -58,8 +59,6 @@ public class TestApp extends MainApp {
     public Path getStorageSaveLocation() {
         return storage.getAddressBookFilePath();
     }
-
-
 
     @Override
     public void start(Stage primaryStage) {

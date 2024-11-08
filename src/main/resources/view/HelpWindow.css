@@ -4,12 +4,15 @@
 }
 /* Make the label and button text stand out */
 #helpMessage, #copyButton {
-    -fx-text-fill: white;
+    -fx-text-fill: #2b6517;
+    -fx-background-color: transparent;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
 }
 
 /* Modern button style */
 #copyButton {
-    -fx-background-color: #007BFF; /* Modern blue accent color */
+    -fx-background-color: #57a83f; /* Modern blue accent color */
     -fx-background-radius: 10; /* Rounded corners */
     -fx-text-fill: white; /* White text */
     -fx-font-weight: bold; /* Bolder text for buttons */
@@ -18,25 +21,23 @@
 }
 
 #copyButton:hover {
-    -fx-background-color: #0056b3; /* Darker blue on hover */
+    -fx-background-color: #66bb6a; /* Darker blue on hover */
 }
 
 #copyButton:armed {
-    -fx-background-color: #003d80; /* Even darker when clicked */
+    -fx-background-color: #2e7d32; /* Even darker when clicked */
 }
 
 /* Background color for the message container */
 #helpMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
-    -fx-padding: 10; /* More padding for cleaner layout */
+    -fx-padding: 20 0 10 0; /* More padding for cleaner layout */
 }
 
 /* Modern table look */
 #helpTable {
     -fx-background-color: derive(#1d1d1d, 20%);
     -fx-table-cell-border-color: transparent; /* Remove grid lines */
-    -fx-border-radius: 10; /* Rounded corners for the table */
-    -fx-padding: 10;
 }
 
 /* Table column header style */
@@ -71,4 +72,29 @@
 
 .table-view .column2 .table-cell {
     -fx-alignment: CENTER;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #57a83f;
+}
+
+#helpMessageContainer {
+    -fx-background-color: derive(#e1ffdb, 5%);
+}
+
+#helpTable {
+    -fx-background-color: white;
+}
+.table-view .column-header-background {
+    -fx-background-color: #66bb6a; /* Green for header background */
+    -fx-text-fill: white; /* White text for better contrast */
+}
+
+.table-view .table-row-cell {
+    -fx-border-color: #66bb6a; /* Green borders */
+    -fx-border-width: 0 0 1 0; /* Only bottom border */
+}
+.text-field {
+    -fx-prompt-text-fill: #757575; /* Change this to your desired color */
 }
