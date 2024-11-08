@@ -64,9 +64,7 @@ The CLI is a text-based interface where users interact with the operating system
 #### 2. **Opening the Terminal**
 
 ##### On macOS:
-```shell
-Cmd + Space
-```
+Type `Terminal` in Spotlight Search (`F4` or `Cmd + Space`)
 
 ##### On Windows:
 Search for command prompt or Powershell in the start menu.

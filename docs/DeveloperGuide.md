@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -107,10 +107,11 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The command also commits the adressbook to the model
+1. The command also commits the address book to the model.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
+
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
@@ -119,29 +120,21 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), and all `Lesson` objects (which are contained in a `UniqueLessonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -160,11 +153,56 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### CSV import feature
+
+The ImportCommand class in [`ImportCommand.java`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ImportCommand.java) 
+allows users to import data from a CSV file and add multiple persons at once to the address book. 
+
+The import process reads the CSV file, validates the data, and converts each row into a JsonAdaptedPerson object, 
+which is then added to the model if it meets specified constraints. If any rows fail validation or contain duplicates, 
+they are skipped, and detailed feedback is provided to the user.
 
 
-### \[Proposed\] Undo/redo feature
 
-#### Proposed Implementation
+The `ImportCommand` makes use of the `CsvImport` helper class, which is responsible for parsing and validating CSV data. 
+Here's how the command works:
+
+Step 1. File Path Input: The command accepts a file path as an argument, specifying the location of the CSV file to import.
+Step 2. CSV Parsing: The CsvImport class reads and processes the CSV file, verifying headers, formatting, and constraints.
+Step 3. Duplicate and Constraint Validation: Rows with duplicate entries or invalid values (e.g., empty fields for required information) are tracked and not added to the address book.
+Step 4. Result Messaging: After import, the command returns a message indicating how many records were successfully added, along with details about any failed rows or duplicates.
+
+
+The Import mechanism is facilitated by `CsvImport` which is responsible for parsing and validating CSV data.
+
+
+* `CsvImport#read()` - Reads the CSV file and imports the data into the provided model.
+
+* `CsvImport#validateHeaders(FileReader reader)`: Ensures that the CSV file has the correct headers: name, phone, email, address, hours, tags, role, and subjects.
+
+* `CsvImport#validateCsv(FileReader reader)`: Validates the format of each row, checking that each row has the expected number of columns.
+
+* Tracking Duplicates and Failures: The class maintains duplicates and failedRows lists to track any rows that fail due to duplicate entries or constraint violations.
+
+
+### View Tutee Chart feature
+The View Tutee Chart (VTC) feature in [`ViewTutorChartCommand`](https://github.com/AY2425S1-CS2103T-F08-1a/tp/blob/master/src/main/java/seedu/address/logic/commands/ViewTutorChartCommand.java) 
+displays tutors in a bar chart, sorted by their tutoring hours in ascending order.
+
+The ViewTutorChartCommand class retrieves all tutors from the Model, sorts them in ascending order by tutoring hours, and generates a message alongside a bar chart displaying this data in the UI.
+
+<box type="info" seamless>
+
+**Note:** The VTC does not have a parser class, and ViewTutorChart is returned directly to AddressBookParser.
+
+</box>
+
+* Command Execution: Upon calling the vtc command, the execute method of ViewTutorChartCommand is invoked.
+* Data Retrieval: The command fetches the list of all Person instances in the model, filters out non-tutor entities, and sorts the list of Tutor objects based on their hours.
+* Output Display: A CommandResult object is returned, containing the sorted list of tutors as an array for the UI component to render.
+
+
+### Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -253,19 +291,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-### \[Proposed\] View Command
-
-#### Proposed Implementation
-
-Given below is the sequence diagram on how the `view 1` command is executed:
-<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" width="250"/>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -284,57 +309,56 @@ Given below is the sequence diagram on how the `view 1` command is executed:
 
 **Target user profile**:
 
-* has a need to manage a significant number of volunteer records and site locations
+**Target user profile**:
+
+* has a need to manage a significant number of volunteer tutoring records
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
-* has a need to generate and visualize reports (e.g., volunteer hours, visit frequency) in a simple and efficient way
 
-**Value proposition**: Manage volunteering _tutor_ and _tutee_ records, site visits, and scheduling faster than a
-typical mouse/GUI-driven app, while efficiently tracking and enhancing volunteer engagement.
+**Value proposition**: Manage volunteering _tutor_ and _tutee_ records and scheduling faster than a
+typical mouse/GUI-driven app, while efficiently tracking volunteer engagement.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​    | I want to …​                                                   | So that I can…​                                                          |
-|----------|------------|----------------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`  | new user   | see usage instructions                                         | refer to instructions when I forget how to use the App                   |
-| `* * *`  | supervisor | view the contact details of _tutors_                           | reach out to them for administrative matters                             |
-| `* * *`  | supervisor | view the contact details of _tutees_                           | reach out to them for administrative matters                             |
-| `* * *`  | supervisor | add a new tutor and their details                              | keep track of the tutors and their personal information                  |
-| `* * *`  | supervisor | add a new tutee and their details                              | keep track of the tutees and their personal information                  |
-| `* * *`  | supervisor | add a tutor's tutoring subject                                 | match them with tutees who need help in that subject                     |
-| `* * *`  | supervisor | add a tutee's required subject for tutoring                    | match them with a suitable volunteering tutor                            |
-| `* * *`  | supervisor | update a tutor's contact information                           | keep the details accurate                                                |
-| `* * *`  | supervisor | update a tutee's contact information                           | keep the details accurate                                                |
-| `* * *`  | supervisor | delete details of an inactive tutor                            | keep the database up-to-date                                             |
-| `* * *`  | supervisor | delete details of a former tutee                               | keep the database up-to-date                                             |
-| `* * *`  | supervisor | view the address of a tutor                                    | arrange tutoring sessions in locations that are convenient for them      |
-| `* * *`  | supervisor | view the address of a tutee                                    | arrange tutoring sessions by tutors located near them                    |
-| `* * *`  | supervisor | update a tutor's address                                       | keep the details accurate                                                |
-| `* * *`  | supervisor | update a tutee's address                                       | keep the details accurate                                                |
-| `* * *`  | supervisor | update a tutor's total volunteer hours                         | keep track of the number of hours they have put into volunteering        |
-| `* * *`  | supervisor | update a tutor's scheduled tutoring sessions                   | keep track of the sessions scheduled                                     |
-| `* * *`  | supervisor | view a tutor's total volunteer hours                           | track their productivity and contributions over time                     |
-| `* * *`  | supervisor | view a tutor or tutee's scheduled tutoring sessions            | avoid scheduling sessions that clash                                     |
-| `* * *`  | supervisor | interact with the application's GUI easily                     | enjoy the application and use it intuitively                             |
-| `* * *`  | supervisor | find a tutor or tutee by name                                  | locate details of tutors or tutees without going through the entire list |
-| `* * *`  | supervisor | undo the last command executed                                 | easily correct mistakes without re-entering the data manually            |
-| `* * *`  | supervisor | redo a previously undone command                               | reapply actions if undone by mistake                                     |
-| `* * *`  | supervisor | view the history of commands from most recent to least recent  | track the actions performed and verify changes                           |
-| `* *`    | supervisor | view the total number of tutors and tutees in graphs or charts | identify any inefficient allocation of resources and adjust accordingly  |
-| `* *`    | supervisor | filter persons by subject                                      | locate a tutor and tutee easily for matching purposes                    |
-| `*`      | supervisor | add the available timeslots of tutors                          | allow tutoring sessions to be arranged                                   |
-| `*`      | supervisor | update the available timeslots of tutors                       | ensure tutors can conduct tutoring sessions as scheduled                 |
-| `*`      | supervisor | view the availability of tutors                                | schedule tutoring sessions that matches their availability               |
-| `*`      | supervisor | view a tutor's total hours in graphs or charts                 | easily analyze tutor engagement and allocate resources efficiently       |
-| `*`      | supervisor | sort tutors in different orders                                | locate a tutor easily                                                    |
-| `*`      | supervisor | download a report of a tutor's hours                           | use it for book-keeping or share with the tutor upon request             |
-| `*`      | supervisor | read large amount of data at once by importing an excel file   | quickly populate the system without manually entering each data point    |
-| `*`      | supervisor | have an autocomplete feature when typing commands              | save time and reduce errors while entering commands or data              |
-| `*`      | supervisor | utilize keyboard shortcuts                                     | navigate to a different page quickly and conveniently                    |
+| Priority | As a …​    | I want to …​                                                   | So that I can…​                                                           |
+|----------|------------|----------------------------------------------------------------|---------------------------------------------------------------------------|
+| `* * *`  | new user   | see usage instructions                                         | refer to instructions when I forget how to use the App                    |
+| `* * *`  | supervisor | view the contact details of _tutors_                           | reach out to them for administrative matters                              |
+| `* * *`  | supervisor | view the contact details of _tutees_                           | reach out to them for administrative matters                              |
+| `* * *`  | supervisor | add a new tutor and their details                              | keep track of the tutors and their personal information                   |
+| `* * *`  | supervisor | add a new tutee and their details                              | keep track of the tutees and their personal information                   |
+| `* * *`  | supervisor | add a tutor's tutoring subject                                 | match them with tutees who need help in that subject                      |
+| `* * *`  | supervisor | add a tutee's required subject for tutoring                    | match them with a suitable volunteering tutor                             |
+| `* * *`  | supervisor | update a tutor's contact information                           | keep the details accurate                                                 |
+| `* * *`  | supervisor | update a tutee's contact information                           | keep the details accurate                                                 |
+| `* * *`  | supervisor | delete details of an inactive tutor                            | keep the database up-to-date                                              |
+| `* * *`  | supervisor | delete details of a former tutee                               | keep the database up-to-date                                              |
+| `* * *`  | supervisor | view the address of a tutor                                    | arrange tutoring sessions in locations that are convenient for them       |
+| `* * *`  | supervisor | view the address of a tutee                                    | arrange tutoring sessions by tutors located near them                     |
+| `* * *`  | supervisor | update a tutor's address                                       | keep the details accurate                                                 |
+| `* * *`  | supervisor | update a tutee's address                                       | keep the details accurate                                                 |
+| `* * *`  | supervisor | update a tutor's total volunteer hours                         | keep track of the number of hours they have put into volunteering         |
+| `* * *`  | supervisor | view a tutor's total volunteer hours                           | track their productivity and contributions over time                      |
+| `* * *`  | supervisor | view a tutor or tutee's scheduled tutoring sessions            | avoid scheduling sessions that clash                                      |
+| `* * *`  | supervisor | interact with the application's GUI easily                     | enjoy the application and use it intuitively                              |
+| `* * *`  | supervisor | find a tutor or tutee by name                                  | locate details of tutors or tutees without going through the entire list  |
+| `* * *`  | supervisor | undo the last command executed                                 | easily correct mistakes without re-entering the data manually             |
+| `* * *`  | supervisor | redo a previously undone command                               | reapply actions if undone by mistake                                      |
+| `* * *`  | supervisor | view the history of commands from most recent to least recent  | track the actions performed and verify changes                            |
+| `* *`    | supervisor | filter persons by subject                                      | locate a tutor and tutee easily for matching purposes                     |
+| `* *`    | supervisor | view a tutor's total hours in graphs or charts                 | easily analyze tutor engagement and allocate resources efficiently        |
+| `*`      | supervisor | add the available timeslots of tutors                          | allow tutoring sessions to be arranged                                    |
+| `*`      | supervisor | update the available timeslots of tutors                       | ensure tutors can conduct tutoring sessions as scheduled                  |
+| `*`      | supervisor | view the availability of tutors                                | schedule tutoring sessions that matches their availability                |
+| `*`      | supervisor | view the total number of tutors and tutees in graphs or charts | identify any inefficient allocation of resources and adjust accordingly   |
+| `*`      | supervisor | sort tutors in different orders                                | locate a tutor easily                                                     |
+| `*`      | supervisor | read large amount of data at once by importing an excel file   | quickly populate the system without manually entering each data point     |
+| `*`      | supervisor | have an autocomplete feature when typing commands              | save time and reduce errors while entering commands or data               |
+| `*`      | supervisor | utilize keyboard shortcuts                                     | navigate to a different page quickly and conveniently                     |
 
 ### Use cases
 
@@ -473,14 +497,12 @@ testers are expected to do more *exploratory* testing.
    2b. Re-launch the app by double-clicking the jar file.<br>
    Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
-
 ### Adding a person
 
 1. Adding a tutor with no email
+    1a. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
+    Expected: No tutor is added. Error is thrown, saying invalid command format.
 
-    1. Test case: “addTutor \n John Lim \p 81234578 \a ADDRESS, 123456”
-       Expected: No tutor is added. Error is thrown, saying invalid command format.
 
 ### Deleting a person
 
@@ -497,7 +519,6 @@ testers are expected to do more *exploratory* testing.
    1d. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
 
 ### Adding a tutor
 
@@ -511,7 +532,6 @@ testers are expected to do more *exploratory* testing.
 
    1c. Other incorrect add tutor commands to try: `addTutor \x y` (where x is a tag and y is an invalid value for that field)<br>
    Expected: Similar to previous.
-2. _{ more test cases …​ }_
 
 ### Editing a tutor
 
@@ -529,7 +549,6 @@ testers are expected to do more *exploratory* testing.
    1d. Other incorrect edit tutor commands to try: `edit 1 \x y` (where x is a tag and y is an invalid value for that field)<br>
    Expected: Similar to previous.
 
-2. _{ more test cases …​ }_
 
 ### Find subjects
 
@@ -544,18 +563,6 @@ testers are expected to do more *exploratory* testing.
    1c. Test case: `findSubject chinese`<br>
    Expected: No tutor is found. Error details shown in the status message.
 
-2. _{ more test cases …​ }_
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
-
-2._{ more test cases …​ }_
-
 ### Adding a lesson
 
 1. Adding a lesson with all fields filled
@@ -569,6 +576,4 @@ testers are expected to do more *exploratory* testing.
     
     1c. Test case: `addLesson 1 2 math`<br>
         Expected: No lesson is added. Error details shown in the status message for duplicate lesson.
-
-2. _{ more test cases …​ }_
 
