@@ -16,7 +16,7 @@ This project is evolved from [AddressBook-Level3](https://github.com/se-edu/addr
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -244,7 +244,7 @@ Explanation:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -535,7 +535,7 @@ With this enhancement, a search query would return all results containing the sp
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix C: Instructions for manual testing**
+## **Appendix C: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
