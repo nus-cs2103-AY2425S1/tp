@@ -224,7 +224,7 @@
 <h1 class="headers headers-first">StaffSync User Guide</h1>
 
 <p class="content content-special">
-  StaffSync is a <strong>desktop app for managing potential hires and employees, optimized for use via a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, StaffSync can get your contact management tasks done faster than traditional GUI apps.
+  Welcome to StaffSync! Are you a Human Resources (HR) Manager that has a lot of potential hires and employees to manage? StaffSync allows you to manage your potential hires and employees on your desktop, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you type fast, you can complete your contact management tasks faster with StaffSync than with GUI apps.
 </p>
 
 <br>
@@ -244,11 +244,14 @@
   <a href="#storing-data">
     <button class="toc-btns"><span>4. Storing Data</span></button>
   </a>
+  <a href="#storing-data">
+    <button class="toc-btns"><span>5. Glossary</span></button>
+  </a>
   <a href="#faq">
-    <button class="toc-btns"><span>5. FAQ</span></button>
+    <button class="toc-btns"><span>6. FAQ</span></button>
   </a>
   <a href="#known-issues">
-    <button class="toc-btns toc-btns-last"><span>6. Known Issues</span></button>
+    <button class="toc-btns toc-btns-last"><span>7. Known Issues</span></button>
   </a>
 </div>
 
@@ -299,7 +302,7 @@ Next, enter `java -jar staffSync.jar` to run the application.<br>
 
 <br>
 
-<strong>6. </strong>Refer to the [Commands](#commands) below for details of each command.
+<strong>6. </strong>You can refer to the [Commands](#commands) below for details of each command.
 
 <strong>7. </strong>Now, you are all set to use StaffSync! Use `clear` to remove all sample data and good luck for your
 journey with StaffSync!
@@ -368,7 +371,7 @@ journey with StaffSync!
   </summary>
 
   <div class="command-content">
-  Clears all entries from StaffSync.
+  You can clear all entries from StaffSync.
 
   <br>
   <br>
@@ -399,7 +402,7 @@ journey with StaffSync!
   </summary>
 
   <div class="command-content">
-  Deletes the specified person from StaffSync.
+  You can delete the specified person from StaffSync.
 
   <br>
   <br>
@@ -411,7 +414,7 @@ journey with StaffSync!
   </div>
   <br>
 
-  Deletes the potential hire/employee at the specified `INDEX`.
+  You can delete the potential hire/employee at the specified `INDEX`.
 
 <br>
 
@@ -421,7 +424,7 @@ journey with StaffSync!
   * `e` for employees
   * `ph` for potential hires.
 
-  `INDEX`: The index number shown in the displayed person list.
+  `INDEX`: The index number shown in your displayed person list.
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
 
@@ -429,7 +432,7 @@ journey with StaffSync!
 
 **Examples:**
 
-  * `list ph` followed by `delete ph 2` deletes the 2nd person in the potential hire list.
+  * `list ph` followed by `delete ph 2` deletes the 2nd person in your potential hire list.
   * `find e n/Betsy` followed by `delete e 1` deletes the 1st employee in the results of the `find` command.
     
 <br>
@@ -464,7 +467,7 @@ Example: `delete e 1`
   </summary>
 
   <div class="command-content">
-  Demotes the specified employee from StaffSync into a potential hire.
+  You can demote the specified employee from StaffSync into a potential hire.
 
   <br>
   <br>
@@ -479,7 +482,7 @@ Example: `delete e 1`
 
 **Parameters:**
 
-  `INDEX`: The index number shown in the displayed person list.
+  `INDEX`: The index number shown in your displayed person list.
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
   * The person at the `INDEX` must be an employee.
@@ -488,7 +491,7 @@ Example: `delete e 1`
 
 **Examples:**
 
-  * `list e` followed by `demote 2` demotes the 2nd person in the employee list.
+  * `list e` followed by `demote 2` demotes the 2nd person in your employee list.
   * `find e n/Betsy` followed by `demote 1` demotes the 1st employee in the results of the `find` command.
 
 <br>
@@ -524,7 +527,7 @@ Example: `demote 1`
   </summary>
 
   <div class="command-content">
-  Edits an existing person in the StaffSync.
+  You can edit an existing person in StaffSync.
 
   <br>
   <br>
@@ -537,24 +540,24 @@ Example: `demote 1`
 
   <br>
 
-  Edits the person at the specified `INDEX`.
+  You can edit the person at the specified `INDEX`.
 
 <br>
 
 **Parameters:**
 
-  `INDEX`: The index number shown in the displayed person list.
+  `INDEX`: The index number shown in your displayed person list.
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
 
 **Optional Parameters:**
-  * At least one of the optional fields must be provided.
+  * You should include at least one of the optional fields.
   * Existing values will be updated to the input values.
-  * Refer to the `employee` command for each parameter's format.
+  * You can refer to the `employee` command for each parameter's format.
 
   <div class="box" type="tip" seamless>
 
-  **Tip:** It is not possible to edit the contract end date of a potential hire.
+  **Tip:** You cannot edit the contract end date of a potential hire.
   </div>
 
 <br>
@@ -588,7 +591,7 @@ Example: `demote 1`
 
 
   <div class="command-content">
-  Adds an employee to StaffSync.
+  You can add an employee to StaffSync.
 
   <br>
   <br>
@@ -650,7 +653,7 @@ Example: `demote 1`
   </summary>
 
   <div class="command-content">
-  Exits the program.
+  You can exit the program.
 
   <br>
   <br>
@@ -678,7 +681,7 @@ Example: `demote 1`
   </summary>
 
   <div class="command-content">
-  Finds all employees and/or potential hires whose names contain any of the specified keywords.
+  You can find all employees and/or potential hires whose names contain any of the specified keywords.
 
   <br>
   <br>
@@ -700,11 +703,11 @@ Example: `demote 1`
 
 **Optional Parameters:**
 
-  * Refer to the `employee` or `potential` command for each parameter's format.
+  * You can refer to the `employee` or `potential` command for each parameter's format.
   * Only name, phone number, email, department and role can be searched.
   * Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
   * The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
-  * Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
+  * You can search for multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
   with name `alice`, with phone number `123445678` and with email `alice@example.com`.
   * Persons matching at least one keyword in every field specified will be returned.
     e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`,
@@ -762,7 +765,7 @@ Example: `find ph n/David`
   </summary>
 
   <div class="command-content">
-  Displays a help window containing the list of commands, its purpose and the format.
+  Displays a help window for you to see the list of commands, its purpose and the format.
 
   <br>
   <br>
@@ -792,7 +795,7 @@ Example: `find ph n/David`
   </summary>
 
   <div class="command-content">
-  Shows a list of all persons in StaffSync.
+  You can see a list of all persons in StaffSync.
 
   <br>
   <br>
@@ -803,7 +806,7 @@ Example: `find ph n/David`
   </div>
   <br>
 
-  Lists type of persons based on the parameter given.
+  You can list type of persons based on the parameter given.
 
 <br>
 
@@ -845,7 +848,7 @@ Example: `list all`
   </summary>
 
   <div class="command-content">
-  Adds a potential hire to StaffSync.
+  You can add a potential hire to StaffSync.
 
   <br>
   <br>
@@ -905,7 +908,7 @@ Example: `list all`
   </summary>
 
   <div class="command-content">
-  Promotes the specified potential hire from StaffSync into an employee with a specific contract end date.
+  You can promote the specified potential hire from StaffSync into an employee with a specific contract end date.
 
   <br>
   <br>
@@ -920,7 +923,7 @@ Example: `list all`
 
 **Parameters:**
 
-  `INDEX`: The index number shown in the displayed person list.
+  `INDEX`: The index number shown in your displayed person list.
 
   * `INDEX` **must be a positive integer** 1, 2, 3, …​
   * `INDEX` **must be within the size of the list** shown.
@@ -969,7 +972,7 @@ Example: `promote 1 2025-12-20`
   </summary>
 
   <div class="command-content">
-  Sorts the list in ascending or descending order by the given parameter.
+  You can sort the list in ascending or descending order by the given parameter.
 
   <br>
   <br>
@@ -982,30 +985,30 @@ Example: `promote 1 2025-12-20`
 
   <br>
 
-  Sorts the list by the given field in the given order.
+  You can sort the list by the given field in the given order.
 
 <br>
 
 **Parameters:**
 
   `FIELD`: The type of data you want to sort by.
-  * `name` will sort the list based on the names of the contacts in alphabetical order.
-  * `date` will sort the list based on the contract end dates of the employees.
-  * `dept` will sort the list based on the department of the contacts in alphabetical order.
-  * `role` will sort the list based on the roles of the contacts in alphabetical order.
+  * `name` will sort the list based on the names of your contacts in alphabetical order.
+  * `date` will sort the list based on the contract end dates of your employees.
+  * `dept` will sort the list based on the department of your contacts in alphabetical order.
+  * `role` will sort the list based on the roles of your contacts in alphabetical order.
 
 <br>
 
 **Optional Parameters:**
 
   `[ORDER]`: The order you wish to sort the list in. Defaults to ascending order if not specified.
-  * `asc` will sort the list in ascending order.
-  * `desc` will sort the list in descending order.
+  * `asc` will sort your list in ascending order.
+  * `desc` will sort your list in descending order.
 
   <div class="box" type="tip" seamless>
 
   **Tips:**
-  * Sort only sorts the contacts show at the current point in time.
+  * Sort only sorts the contacts shown at the current point in time.
   * When sort date is used, potential hires show up at the bottom as they do not have a contract end date.
   * If the order is left out StaffSync will sort in ascending order by default.
   </div>
@@ -1014,9 +1017,9 @@ Example: `promote 1 2025-12-20`
 
 **Examples:**
 
-  * `sort name` sorts all contacts by name in alphabetical order.
-  * `sort date desc` sorts by contract end date with potential hires at the bottom.
-  * `sort role asc` sorts contacts by role in alphabetical order.
+  * `sort name` sorts your contacts by name in alphabetical order.
+  * `sort date desc` sorts by contract end date with your potential hires at the bottom.
+  * `sort role asc` sorts your contacts by role in alphabetical order.
 
 <br>
 
@@ -1071,7 +1074,7 @@ Action     | Format                                                             
 
 <div class="sub-content">
 
-StaffSync data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+StaffSync data are saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
 </div>
 
@@ -1102,6 +1105,14 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 
 <div class="content">
 
+<h3>Alphanumeric</h3>
+
+A mix of letters and numbers only. Includes both alphabets (a to z) and digits (0 to 9) with no spaces or special characters.
+
+Example: StaffSync123
+
+<br>
+
 <h3>Command Line Interface</h3>
 
 A text-based interface that lets you type instructions directly to your computer to perform certain tasks. Instead of
@@ -1115,10 +1126,30 @@ Example: To show a list of potential hire, simply type `list ph` and press enter
 <h3>Graphical User Interface</h3>
 
 The "face" of a program, designed to use visual elements like buttons, icons, windows and menus to make it easier for
-people to interact with the program. 
+people to interact with the program.
 
 Example: You can see each entry of potential hire or employees in a box with their details nicely formatted and easy to
-read. 
+read.
+
+<br>
+
+<h3>Index</h3>
+
+The order or position of an item in a list. The value starts from 1 and it must be a positive
+integer.
+
+Example: If you have a list of names (1. Alice, 2. Betty, 3. Charlie) then, Alice is at index 1, Betty is at index 2
+and Charlie is at index 3.
+</div>
+
+<br>
+
+<h3>Integer</h3>
+
+A whole number with no fractions and decimals that can be positive, 0 or negative. The range of a valid integer in
+programming is from -2147483648 to 2147483647, inclusive of both.
+
+Example: -2147483648, -15, 0, 35, 2147483647
 
 <br>
 
@@ -1128,34 +1159,6 @@ A piece of information you would give to a program to allow it to know exactly h
 
 Example: In order to display a list of employee and not a list of potential hire, you would type in `list e` instead of
 `list ph` as `e` is the parameter to allow the program to know that you want the list of employees.
-
-<br>
-
-<h3>Alphanumeric</h3>
-
-A mix of letters and numbers only. Includes both alphabets (a to z) and digits (0 to 9) with no spaces or special characters.
-
-Example: StaffSync123 
-
-<br>
-
-<h3>Integer</h3>
-
-A whole number with no fractions and decimals that can be positive, 0 or negative. The range of a valid integer in 
-programming is from -2147483648 to 2147483647, inclusive of both.
-
-Example: -2147483648, -15, 0, 35, 2147483647
-
-<br>
-
-<h3>Index</h3>
-
-The order or position of an item in a list. The value starts from 1 and it must be a positive
-integer. 
-
-Example: If you have a list of names (1. Alice, 2. Betty, 3. Charlie) then, Alice is at index 1, Betty is at index 2 
-and Charlie is at index 3.
-</div>
 
 <br>
 
