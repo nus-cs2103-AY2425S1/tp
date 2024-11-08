@@ -118,17 +118,25 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-Here is another example of interactions within the `Logic` component, taking `execute("del_appt 1")` API call as an example.
+How the `Logic` component works:
+
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command. 
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`. 
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve. 
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+Here is another example of interactions within the `Logic` component, taking `execute("delappt 1")` API call as an example.
 
 <puml src="diagrams/DeleteAppointmentSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
-How the `Logic` component works:
+Using this 
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
-   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute the `delappt 1` command, it is passed to an `AddressBookParser` object which in turn creates a `DeleteCommandParser` and uses it to parse the command. 
+2. This results in a `DeleteAppointmentCommand` object which is executed by the `LogicManager`. 
+3. The command can communicate with the `Model` when it is executed (e.g. to delete aa appointment from a person).<br>
+   Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve. 
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -651,32 +659,308 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a patient
 
-1. Deleting a person while all persons are being shown
+**Command:** `add`<br>
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1. Adding a patient with all fields
+    * **Prerequisites:**
+        * No patients in the list
+         <br><br>
+   * **Test Case:** `add n/John Doe i/P00001 w/A1 d/Type 1 Diabetes m/Metformin`<br>
+   * **Expected** A patient with the following fields is added to the list:
+       * Name: `John Doe`
+       * ID: `P00001`
+       * Ward: `A1`
+       * Diagnosis: `Type 1 Diabetes`
+       * Medication: `Metformin`
+       * Notes: `-`
+       * Appointment: `-`
+         <br><br>
+2. Adding a patient without optional fields (DIAGNOSIS and MEDICATION)
+    * **Prerequisites:**
+        * No patients in the list
+        <br><br>
+    * **Test Case:** `add n/Kathy Prince i/P00002/D1 d/Gastrisitis`<br>
+    * **Expected** A patient with the following fields is added to the list:
+        * Name: `John Doe`
+        * ID: `P00001`
+        * Ward: `A1`
+        * Diagnosis: `Type 1 Diabetes`
+        * Medication: `-`
+        * Notes: `-`
+        * Appointment: `-`
+    <br><br>
+   * **Test Case:** `add n/Joshua Lim i/P00003 w/C3 m/Paracetemol`<br>
+   * **Expected** A patient with the following fields is added to the list:
+        * Name: `Joshua Lim`
+        * ID: `P00003`
+        * Ward: `C3`
+        * Diagnosis: `-`
+        * Medication: `Paracetemol`
+        * Notes: `-`
+        * Appointment: `-`
+          <br><br>
+3. Adding a patient without optional fields (DIAGNOSIS and MEDICATION)
+    * **Prerequisites:**
+        * No patients in the list
+      <br><br>
+   * **Test Case:** `add n/Emily Tan i/P00004 w/B2`
+   * **Expected:** A patient with the following fields is added to the list:
+       * Name: `Emily Tan`
+       * ID: `P00004`
+       * Ward: `B2`
+       * Diagnosis: `-`
+       * Medication: `-`
+       * Notes: `-`
+       * Appointment: `-`
+         <br><br>
+### Editing a patient
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+**Command:** `edit`<br>
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. Editing a patient with all fields
+    * **Prerequisites:**
+        * Non-empty patient list
+        * First patient in the list does have fields that match the edited fields
+          <br><br>
+    * **Test Case:** `edit 1 n/Jeff Bean i/P10000 w/G5 d/influenza m/paracetomol`
+    * **Expected:** The first patient in the list is updated with the following fields:
+      * Name: `Jeff Bean`
+      * ID: `P10000`
+      * Ward: `G5`
+      * Diagnosis: `influenza`
+      * Medication: `paracetomol`
+      * Notes: remains unchanged
+      * Appointment: remains unchanged
+        <br><br>
+2. Editing a patient with a few fields
+    * **Prerequisites:**
+        * Non-empty patient list
+        * First patient in the list does have fields that match the edited fields
+          <br><br>
+    * **Test Case 1:** `edit 1 n/Samuel Lee`
+    * **Expected:** The first patient in the list is updated with the following fields:
+        * Name: `Samuel Lee`
+        * ID: remains unchanged
+        * Ward: remains unchanged
+        * Diagnosis: remains unchanged
+        * Medication: remains unchanged
+        * Notes: remains unchanged
+        * Appointment: remains unchanged
+          <br><br>
+    * **Test Case 2:** `edit 1 i/P20001 w/C1`
+    * **Expected:** The first patient in the list is updated with the following fields:
+        * Name: remains unchanged
+        * ID: `P20001`
+        * Ward: `C1`
+        * Diagnosis: remains unchanged
+        * Medication: remains unchanged
+        * Notes: remains unchanged
+        * Appointment: remains unchanged
+          <br><br>
+    * **Test Case 3:** `edit 1 d/Bronchitis m/Amoxicillin w/D2`
+    * **Expected:** The first patient in the list is updated with the following fields:
+        * Name: remains unchanged
+        * ID: remains unchanged
+        * Ward: `D2`
+        * Diagnosis: `Bronchitis`
+        * Medication: `Amoxicillin`
+        * Notes: remains unchanged
+        * Appointment: remains unchanged
+          <br><br>
+### Deleting a patient
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+**Command:** `delete`<br>
 
-1. _{ more test cases …​ }_
+1. Deleting a patient while all patients are being shown
+    * **Prerequisites:**
+        * Non-empty patient list
+        * List all patients using the `list` command
+          <br><br>
+    * **Test Case 1:** `delete 1`
+    * **Expected:** First patient is deleted from the list. Details of the deleted contact shown in the status message.
+      <br><br>
+    * **Test Case 2:** `delete 0`
+    * **Expected:** No patient is deleted. Error details shown in the status message.
+      <br><br>
+    * **Test Case 3:** Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)
+    * **Expected:** No patient is deleted. Error details shown in the status message.
+      <br><br>
+### Searching for a patient
 
-### Saving data
+**Command:** `find`<br>
 
-1. Dealing with missing/corrupted data files
+1. Finding patients by their information.
+   * **Prerequisites:**
+        * Non-empty patient list
+         <br><br>
+   * **Test Case 1:** `find n/Emily Tan`
+   * **Expected:** Displays all patients with **Name** `Emily Tan`.
+     <br><br>
+   * **Test Case 2:** `find i/P00001`
+   * **Expected:** Displays all patients with **ID** `P00001`.
+     <br><br>
+   * **Test Case 3:** `find w/A1`
+   * **Expected:** Displays all patients with **Ward** `A1`.
+     <br><br>
+   * **Test Case 4:** `find d/Diabetes`
+   * **Expected:** Displays all patients with **Diagnosis** `Diabetes`.
+     <br><br>
+   * **Test Case 5:** `find m/Metformin`
+   * **Expected:** Displays all patients with **Medication** `Metformin`.
+     <br><br>
+### Viewing a patient
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+**Command:** `view`<br>
 
-1. _{ more test cases …​ }_
+1. Viewing a patient's information.
+    * **Prerequisites:**
+        * Non-empty patient list
+          <br><br>
+    * **Test Case 1:** `view 1`
+    * **Expected:** Displays the first patients information in the command result box.
+      <br><br>
+### Adding notes to a patient
+
+**Command:** `addnotes`<br>
+
+1. Adding notes to a patient
+    * **Prerequisites:**
+        * Non-empty patient list
+          <br><br>
+    * **Test Case:** `addnotes 1 pn/patient prone to falling `
+    * **Expected:** The first patient in the list is updated with the following fields:
+        * Name: remains unchanged
+        * ID: remains unchanged
+        * Ward: remains unchanged
+        * Diagnosis: remains unchanged
+        * Medication: remains unchanged
+        * Notes: `patient prone to falling`
+        * Appointment: remains unchanged
+          <br><br>
+2. Adding empty patient notes
+    * **Prerequisites:**
+        * Non-empty patient list
+          <br><br>
+    * **Test Case:** `addnotes 1 pn/`
+    * **Expected:** WardWatch throws an error informing the user that they are unable to add an empty note to a patient.
+      <br><br>
+### Deleting notes from a patient
+
+**Command:** `delnotes`<br>
+
+1. Deleting notes from a patient that has notes
+    * **Prerequisites:**
+        * Non-empty patient list
+        * First patient in the list must have notes
+          <br><br>
+    * **Test Case:** `delnotes 1`
+    * **Expected:** The first patient in the list is updated with the following fields:
+        * Name: remains unchanged
+        * ID: remains unchanged
+        * Ward: remains unchanged
+        * Diagnosis: remains unchanged
+        * Medication: remains unchanged
+        * Notes: `-`
+        * Appointment: remains unchanged
+          <br><br>
+2. Deleting notes from a patient who does not have notes
+    * **Prerequisites:**
+        * Non-empty patient list
+        * First patient in the list must not have any notes
+          <br><br>
+    * **Test Case:** `delnotes 1`
+    * **Expected:** WardWatch throws an error informing the user that the patient does not have any notes to delete.
+      <br><br>
+### Making an appointment
+
+**Command:** `makeappt`<br>
+
+1. Adding an appointment to a patient
+    * **Prerequisites:**
+        * Non-empty patient list
+        * The appointment the user adds must not overlap with any existing appointment
+          <br><br>
+    * **Test Case:** `makeappt 1 a/ Surgery s/ 01-01-2024-20-00 e/ 01-01-2024-23-00`
+    * **Expected:** The first patient in the list is updated with the following fields:
+        * Name: remains unchanged
+        * ID: remains unchanged
+        * Ward: remains unchanged
+        * Diagnosis: remains unchanged
+        * Medication: remains unchanged
+        * Notes: remains unchanged
+        * Appointment: `Surgery FROM 01 January 2024, 08:00 pm TO 01 January 2024, 11:00 pm`
+          <br><br>
+2. Adding an appointment that overlaps with other appointments
+    * **Prerequisites:**
+        * Non-empty patient list
+        * The appointment the user adds must overlap with an existing appointment
+          <br><br>
+    * **Test Case:** `makeappt 1 a/ Checkup s/ 02-01-2024-20-00 e/ 02-01-2024-23-00`
+    * **Expected:** Ward watch throws the error message `Appointment overlaps with another pre-existing appointment! Please check your schedule and try again`
+          <br><br>
+### Deleting an appointment
+
+**Command:** `delappt`<br>
+
+1. Deleting an appointment from a patient who has an appointment
+    * **Prerequisites:**
+        * Non-empty patient list
+        * First patient has an appointment
+          <br><br>
+    * **Test Case:** `delappt 1`
+    * **Expected:** The first patient in the list is updated with the following fields:
+        * Name: remains unchanged
+        * ID: remains unchanged
+        * Ward: remains unchanged
+        * Diagnosis: remains unchanged
+        * Medication: remains unchanged
+        * Notes: remains unchanged
+        * Appointment: `-`
+          <br><br>
+2. Deleting an appointment from a patient who has no appointment
+    * **Prerequisites:**
+        * Non-empty patient list
+        * First patient in the list has no appointment
+          <br><br>
+    * **Test Case:** `delappt 1`
+    * **Expected:** Ward watch throws the error message `The Patient indicated does not have an appointment`
+      <br><br>
+### Showing appointments on a particular date
+
+**Command:** `scheduledate`<br>
+
+1. Show schedule on a particular date which has appointments
+    * **Prerequisites:**
+        * Non-empty patient list
+        * At least one patient has an appointment
+        * The date that you pass into the command as input has at least one appointment
+          <br><br>
+    * **Test Case:** `scheduledate 01-01-2024`
+    * **Expected:** WardWatch will give a message stating the number of appointments listed on that date and the appointment list will show all of those appointments.
+      <br><br>
+2. Show schedule on a particular date which has no appointments
+    * **Prerequisites:**
+        * Non-empty patient list
+        * The date that you pass into the command as input has 0 appointments
+          <br><br>
+    * **Test Case:** `scheduledate 02-01-2024`
+    * **Expected:** WardWatch shows the message `0 appointments on 02 January 2024 listed` and the appointments list shows no appointments.
+      <br><br>
+### Showing all appointments
+
+**Command:** `scheduleall`<br>
+
+1. Show all appointments
+    * **Prerequisites:**
+        * Non-empty patient list
+        * At least one patient has an appointment
+          <br><br>
+    * **Test Case:** `scheduleall`
+    * **Expected:** WardWatch shows the message `Displayed all appointments` and the appointment list will show all appointments.
+      <br><br>
 
 ## **Appendix: Efforts**
 
@@ -712,3 +996,4 @@ This appendix provides an overview of the effort and complexity involved in modi
 2. To restructure and customise the UI, a firm understanding of UI elements such as the HBox, VBox and Stackpanes is necessary to layout the UI elements according. There was particularly a struggle understanding the effects of the growing Hbox and Vbox, as the space occupied is unexpected.
 3. Choice or colour to make the app aesthetic is also non-trivial
 4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements
+
