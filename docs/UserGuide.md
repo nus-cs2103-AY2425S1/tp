@@ -247,7 +247,7 @@ Exits the program.
 Format: `exit`
 
 ### Navigating the Command History
-You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys.
+You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys. Before using the arrow keys, ensure that the command box is in focus (i.e. you have just clicked on the command box).
 
 ### Duplicate detection
 Duplicate entries (elderly) are entries with the same NRIC (case-insensitive). ContactMate will not allow duplicate entries, and will stop you from adding (`add`) or editing (`edit`) an elderly if it would result in a duplicate entry.
@@ -293,6 +293,9 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 * **GUI (Graphical User Interface)**: A visual interface that enables users to interact with the system through graphical elements like buttons, menus, and icons.
 
 
+* **Command Box**: The text box in the GUI where you can type commands to interact with ContactMate.
+
+
 * **Index**: A number to used to identify a specific record (elderly) in the list. For instance, "1" refers to the first record in the list.
 
 
@@ -311,7 +314,7 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 * **Profile View**: A display that shows all the details of a specific elderly.
 
 
-* **Person List View**: Also referred to as "`personList` view", this is the display that shows the list of elderly in ContactMate. By default, it is displayed when you start the application and is also displayed after using the `list` command.
+* **Person List View**: Also referred to as "`personList` view", this is the display that shows the list of elderly in ContactMate. By default, it is displayed when you start the application and is also displayed after using the `list` or `find` commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
