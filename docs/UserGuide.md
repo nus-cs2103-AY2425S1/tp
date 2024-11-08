@@ -444,7 +444,7 @@ Shows a **list of all clients** in Prudy.
 **Policy management commands** allow you to add, edit, and delete policies associated with each client.
 
 #### 5.3.1 Adding a Policy: `add-policy`
-Adds a **new policy** to the client at the specified `INDEX`.
+Adds a **new policy** for a client in Prudy.
 
 **Format:**
 ```shell
@@ -456,7 +456,7 @@ add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXP
 🔔
 **Notes:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
-* `POLICY_TYPE` is can be either `life`, `health`, or `education`.
+* `POLICY_TYPE` must be either `life`, `health`, or `education`.
 * `PREMIUM_AMOUNT` and `COVERAGE_AMOUNT` must be non-negative numerals with at most two decimal places.
 * `EXPIRY_DATE` format is `MM/dd/yyyy`.
 
@@ -466,11 +466,11 @@ add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXP
 
 **Info:**
 * This command will create a policy with default values for unspecified parameters.
-* For example, if `PREMIUM_AMOUNT` is not specified, it will create a policy with default premiums (The default premium differs for different policies).
+* For example, if `PREMIUM_AMOUNT` is not specified, it will create a policy with default premiums (The default premium differs for different type of policies).
 
 </box>
 
-<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
 
 💡
 **Tip:**
@@ -479,8 +479,8 @@ A client cannot have two or more policies with the same type.
 </div>
 
 **Examples:**
-* `add-policy 1 pt/life` Adds a Life policy with default values to the 1st client.
-* `add-policy 2 pt/education pa/100 ed/08/24/2024` Adds an Education policy with default coverage, a premium of $100 and an expiry date of 08/24/2024.
+* `add-policy 1 pt/life` adds a Life policy with default values to the 1st client.
+* `add-policy 2 pt/education pa/100 ed/08/24/2024` adds an Education policy with default coverage, a premium of $100 and an expiry date of 08/24/2024.
 
 **On success:**
 ```shell
@@ -490,19 +490,48 @@ Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COV
 ```
 
 #### 5.3.2 Deleting a Policy: `delete-policy`
-**Delete policies** from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.
 
-**Format:** `delete-policy INDEX pt/POLICY_TYPE…`
+**Delete policies** from a client in Prudy.
 
-**Details:**
+**Format:**
+```shell
+delete-policy INDEX pt/POLICY_TYPE…
+```
+
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Notes:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
-* `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
-* More than one policy type can be deleted at once. However, calling this command with zero policy type indicated will not be successful.
-* If the policy to be deleted does not exist for the specified client, this command will not work.
+* `POLICY_TYPE` must be either `life`, `health`, or `education`.
+
+</div>
+
+<box type="info" seamless>
+
+**Info:**
+* This command will not work if the specified policy to be deleted does not exists in Prudy.
+
+</box>
+
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
+
+💡
+**Tip:**
+* More than one policy can be deleted using a single command.
+
+</div>
 
 **Examples:**
-* `delete-policy 1 pt/life` Deletes the Life policy from the 1st client.
-* `delete-policy 2 pt/health pt/education`Deletes the Health and Education policy from the 2nd client.
+* `delete-policy 1 pt/life` deletes the Life policy from the 1st client.
+* `delete-policy 2 pt/health pt/education` deletes the Health and Education policy from the 2nd client.
+
+**On success:**
+It will display the clients remaining policies.
+```shell
+Policies Left: 1. Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | Claims:
+        Status: CLAIM_STATUS, Description: CLAIM_DESCRIPTION
+```
 
 #### 5.3.3 Editing a Policy: `edit-policy`
 **Edit the policy** from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.
