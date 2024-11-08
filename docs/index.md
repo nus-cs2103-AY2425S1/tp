@@ -8,7 +8,7 @@
 [![CI Status](https://github.com/AY2425S1-CS2103T-F14b-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-F14b-1/tp/actions)
 [![codecov](https://codecov.io/github/AY2425S1-CS2103T-F14b-1/tp/graph/badge.svg?token=MQKVUQZV24)](https://codecov.io/github/AY2425S1-CS2103T-F14b-1/tp)
 
-![Ui](images/latestUI.png)
+![Ui](images/Ui.png)
 
 **SocialBook is a desktop application for managing the contact details of families you are working with.** While it has a GUI (Graphical User Interface) with buttons for you to click, most of the user interactions happen using a CLI (Command Line Interface) where you type commands to use the application.
 
@@ -18,4 +18,4 @@
 
 **Acknowledgements**
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [CalendarFX](https://github.com/dlsc-software-consulting-gmbh/CalendarFX)
