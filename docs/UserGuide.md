@@ -117,8 +117,10 @@ Before you begin using Prudy, here are a few essential prerequisites to ensure a
 5. **Java 17 or Above Installed**:
    Prudy requires Java 17 or later. If you don’t have Java installed, you’ll need to install it before proceeding. Refer to the [Getting Started](#3-getting-started) section for installation instructions.
 
-💡 **Tip for Beginners**: Taking the time to review these prerequisites will help you become comfortable with Prudy’s interface and enable you to manage client data efficiently.
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
 
+💡 **Tip for Beginners**: Taking the time to review these prerequisites will help you become comfortable with Prudy’s interface and enable you to manage client data efficiently.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -142,7 +144,12 @@ You should see java version 17.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar prudy.jar` command to run the application.
 
-💡**Tip**: If you’re unsure how to open a terminal, refer back to the [Prerequisites](#2-prerequisites) section for detailed instructions.
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
+
+💡
+**Tip:**
+If you’re unsure how to open a terminal, refer back to the [Prerequisites](#2-prerequisites) section for detailed instructions.
+</div>
 
 <br>A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
@@ -234,7 +241,12 @@ These are the overview of Prudy's commands, please refer to [Commands Overview](
 | `c/`  | Claim Index             |
 
 
-💡 **Tip**: Flags are generally derived from the first letter of the data type, making them easy to remember.
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
+
+💡
+**Tip:**
+Flags are generally derived from the first letter of the data type, making them easy to remember.
+</div>
 
 ### 4.4 Arguments
 
@@ -293,21 +305,26 @@ Shows a message explaining how to **access the help page**.
 
 ![help message](images/helpMessage.png)
 
-**Format:** `help`
+**Format:** 
+```help```
 
 #### 5.1.2 Clearing All Entries: `clear`
 **Clears all entries** from Prudy, resetting the data.
 
-**Format:** `clear`
+**Format:** 
+```clear```
 
-<box type="warning" seamless>
-Warning: This action is destructive and irreversible.
-</box>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FADBD8; margin-bottom: 16px;">
+
+**Warning:** 
+This action is destructive and irreversible.
+</div>
 
 #### 5.1.3 Exiting the Program: `exit`
 **Exits** the program.
 
-**Format:** `exit`
+**Format:** 
+```exit```
 
 #### 5.1.4 Saving the Data
 Prudy **automatically saves data** to the hard disk after every command that modifies the data. Manual saving is **not required**.
@@ -316,7 +333,8 @@ Prudy **automatically saves data** to the hard disk after every command that mod
 Prudy data is **automatically saved** as a JSON file at `[JAR file location]/data/prudy.json`. Advanced users may edit this file directly to update the data.
 
 <box type="warning" seamless>
-Caution:
+
+**Caution:**
 If your changes to the data file makes its format invalid, Prudy will start with an empty data file at the next run. Subsequently, if you were to enter a command that modifies the data (e.g., <code>add-client</code>), Prudy will discard the old data, and replace with the new one. Hence, it is recommended to take a backup of the file before editing it.<br>
 
 Furthermore, certain edits can cause Prudy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
@@ -339,13 +357,14 @@ Adds a **new client** to Prudy.
 add-client n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
-<box type="info" seamless>
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
 
-💡**Tip:**
+💡
+**Tip:**
 A client can have any number of tags (including 0).
-</box>
+</div>
 
-<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 **Notes:**
 * The index refers to the index number shown in the displayed person list. The index must be a positive integer (1, 2, 3, …).
@@ -359,7 +378,7 @@ A client can have any number of tags (including 0).
 * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
   
-<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
 
 **Tip:**
 We are aware that `NAME` currently does not accept special characters such as `/`, `@`, and `,`, and will be adding this functionality in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
@@ -383,10 +402,12 @@ Shows a **list of all clients** in Prudy.
 #### 5.2.3 Filtering Clients: `find-client`
 **Filters clients** based on the specified parameters.
 
-**Format:** `find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…`
+**Format:** 
+```find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…```
 
-<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Notes:**
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g., `hans` will match `Hans`
@@ -398,28 +419,33 @@ Shows a **list of all clients** in Prudy.
   e.g., `n/han pt/life` will return only clients that has `han` in his name and has a Life policy.
 </div>
 
-  <box type="info" seamless>
-  Info: Each parameter must have a valid input (e.g., <code>PHONE</code> must be a 3-15 digits long, <code>POLICY_TYPE</code> must be a valid policy type - <code>Life</code>, <code>Education</code> or <code>Health</code>).
-  </box>
+<box type="info" seamless>
+
+**Info:** Each parameter must have a valid input (e.g., <code>PHONE</code> must be a 3-15 digits long, <code>POLICY_TYPE</code> must be a valid policy type - <code>Life</code>, <code>Education</code> or <code>Health</code>).
+</box>
 
 **Examples:**
 * `find-client n/John` returns `john` and `John Doe`
 * `find-client n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
-  <box type=warning seamless>
-  Important: For the next few commands, an INDEX parameter is required. This INDEX is based on the current list of clients shown in Prudy.
-               This means that if Prudy has 2 clients: <code>Alex</code> and <code>Bernice</code> given in that order, and you did <code>find-client n/bernice</code> to filter out <code>Alex</code>. An INDEX of <code>1</code> will refer to <code>Bernice</code> instead of <code>Alex</code>.
-  </box>
+<box type=warning seamless>
+
+**Caution:**
+For the next few commands, an INDEX parameter is required. This INDEX is based on the current list of clients shown in Prudy.
+            This means that if Prudy has 2 clients: <code>Alex</code> and <code>Bernice</code> given in that order, and you did <code>find-client n/bernice</code> to filter out <code>Alex</code>. An INDEX of <code>1</code> will refer to <code>Bernice</code> instead of <code>Alex</code>.
+</box>
 
 #### 5.2.4 Editing a Client: `edit-client`
 
 **Edits an existing client** in Prudy. **Does not edit his/her policies**. See [editing a policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
 
-**Format:** `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format:** 
+```edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​```
 
-<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #f3faff; margin-bottom: 16px;">
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
+🔔
 **Notes:** 
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * At least one of the optional fields must be provided.
@@ -430,18 +456,29 @@ Shows a **list of all clients** in Prudy.
 </div>
 
 **Examples:**
-*  `edit-client 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit-client 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+*  `edit-client 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit-client 2 n/Betsy Crower t/` edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+
+**On success:**
+```shell
+Edited client: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS, Tags: TAG
+```
 
 #### 5.2.5 Deleting a Client: `delete-client`
 **Deletes a specified client** at the specified `INDEX`.
 
-**Format:** `delete-client INDEX`
+**Format:** 
+```delete-client INDEX```
 
 **Examples:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
 * `list-clients` followed by `delete-client 2` deletes the second client.
 * `find-client Betsy` followed by `delete-client 1` deletes the first client in the search results.
+
+**On success:**
+```shell
+Deleted client: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS, Tags: TAG
+```
 
 ---
 
@@ -658,7 +695,9 @@ Claims management commands allow you to add, edit, delete, and list claims for c
 Adds a claim to the policy of the specified `POLICY_TYPE` for the client at the specified `INDEX`.
 
 <box type=info seamless>
-Note that a single policy cannot have similar claims. This is to prevent accidental adding of duplicate claims. Two claims are consider similar if they have the same <code>CLAIM_STATUS</code> and <code>CLAIM_DESCRIPTION</code>.
+
+**Info:**
+A single policy cannot have similar claims. This is to prevent accidental adding of duplicate claims. Two claims are consider similar if they have the same <code>CLAIM_STATUS</code> and <code>CLAIM_DESCRIPTION</code>.
 </box>
 
 **Format:**
@@ -778,15 +817,29 @@ Status: CLAIM_STATUS | Description: CLAIM_DESCRIPTION
 #### 5.4.4 Listing All Claims: `list-claims`
 Lists **all claims** under the specified policy type for the client identified by the index number used in the displayed client list.
 
-**Format:** `list-claims INDEX pt/POLICY_TYPE`
+**Format:** 
+```
+list-claims INDEX pt/POLICY_TYPE
+```
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note:**
 * This command displays a complete list of all claims associated with the specified client's policy.
 * The claims are listed in the order they were added.
 * No filtering or sorting is applied by this command; it shows all existing claims.
+</div>
 
 **Examples:**
 * `list-claims 1 pt/health` lists all claims of the health policy for the first client.
+
+**On success:**
+```shell
+Claims listed for policy type POLICY_TYPE of client: NAME
+
+1. Claim Status: CLAIM_STATUS | Claim Description: CLAIM_DESCRIPTION
+```
 
 --------------------------------------------------------------------------------------------------------------------
 
