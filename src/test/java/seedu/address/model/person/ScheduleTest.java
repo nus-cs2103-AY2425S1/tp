@@ -53,6 +53,13 @@ public class ScheduleTest {
         editedAmySchedule = new ScheduleBuilder(AMY_SCHEDULE)
                 .withScheduleTime(VALID_SCHEDULE_TIME_BOB).build();
         assertFalse(AMY_SCHEDULE.equals(editedAmySchedule));
+
+        // different scheduleTime (one empty, one 00:00) -> returns false
+        Schedule editedAmyScheduleEmpty = new ScheduleBuilder(AMY_SCHEDULE)
+                .withScheduleTime("").build();
+        Schedule editedAmyScheduleMidnight = new ScheduleBuilder(AMY_SCHEDULE)
+                .withScheduleTime("00:00").build();
+        assertFalse(editedAmyScheduleEmpty.equals(editedAmyScheduleMidnight));
     }
 
     @Test

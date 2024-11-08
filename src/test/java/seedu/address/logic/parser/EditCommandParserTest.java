@@ -1,11 +1,17 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INDEX_EXCEED_MAXINT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LENGTH_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LENGTH_LONG_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LENGTH_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LENGTH_SHORT_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -82,8 +88,14 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_LENGTH_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name length
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "1"
+                + INVALID_LENGTH_LONG_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone length
+        assertParseFailure(parser, "1"
+                + INVALID_LENGTH_SHORT_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone length
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_LENGTH_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email length
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -98,6 +110,8 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
+        // index greater than MAX INT
+        assertParseFailure(parser, INVALID_INDEX_EXCEED_MAXINT, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

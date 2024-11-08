@@ -1,12 +1,13 @@
-[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W12-1/tp/branch/master/graph/badge.svg?token=0XZMMPD8VS)](https://codecov.io/gh/AY2425S1-CS2103T-W12-1/tp) [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![codecov](https://codecov.io/gh/AY2425S1-CS2103T-W12-1/tp/branch/master/graph/badge.svg?token=0XZMMPD8VS)](https://codecov.io/gh/AY2425S1-CS2103T-W12-1/tp) [![CI Status](https://github.com/AY2425S1-CS2103T-W12-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-W12-1/tp/actions)
 
 ![Ui](docs/images/Ui.png)
 
-* This is **an address book application created for small business owners and sole proprietors**.<br>
+* This is **an contact management application created for small business owners and sole proprietors**.<br>
   Example usages:
   * as a contact management application for various stakeholders like customers, business partners eg.
   * users could add, delete, list, search and filter all contacts from a specific group
-* The project build on an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
+  * users can add schedules, appointments or any time related matters for each contact
+* The project builds on an ongoing software project for a desktop application (called _AddressBook_) used for managing contact details.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base (around 6 KLoC).
   * It comes with a **reasonable level of user and developer documentation**.
 * It is named `BlitzBiz`

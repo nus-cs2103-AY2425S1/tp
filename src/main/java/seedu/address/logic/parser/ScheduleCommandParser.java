@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TIME;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Schedule;
@@ -31,7 +32,13 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
+            String message = pe.getMessage();
+            if (message.equals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX)) {
+                throw pe;
+            } else {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
+            }
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SCHEDULE_NAME, PREFIX_SCHEDULE_DATE, PREFIX_SCHEDULE_TIME);
