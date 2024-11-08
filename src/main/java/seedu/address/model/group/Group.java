@@ -116,7 +116,7 @@ public class Group {
     }
 
     /**
-     * Replaces the task at {@code index} with {@code editedTask}.
+     * Replaces the {@code originalTask} with {@code editedTask}.
      *
      * @param originalTask The index of the task to be replaced.
      * @param editedTask  The task to replace with.
