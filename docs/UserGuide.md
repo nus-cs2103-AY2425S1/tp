@@ -6,7 +6,30 @@ title: User Guide
 GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 - Table of Contents
-{:toc}
+1. [Quick start](#quick-start)
+2. [Features](#features)
+   1. [Viewing help](#viewing-help--help)
+   2. [Adding a person](#adding-a-person-add)
+   3. [Listing all persons](#listing-all-persons--list)
+   4. [Editing a person](#editing-a-person--edit)
+   5. [Grouping students together](#grouping-students-together-group)
+   6. [Locating persons by name](#locating-persons-by-name-find)
+   7. [Locating groups by name](#locating-groups-by-name-findgroup)
+   8. [Adding a tag](#adding-a-tag-tag)
+   9. [Deleting a tag](#deleting-a-tag-untag)
+   10. [Deleting a person](#deleting-a-person-delete)
+   11. [Deleting a group](#deleting-a-group-deletegroup)
+   12. [Import students](#import-students-import-csv_file_location)
+   13. [Export students](#export-students-export)
+   14. [Clearing all entries](#clearing-all-entries--clear)
+   15. [Exiting the program](#exiting-the-program--exit)
+   16. [Saving the data](#saving-the-data)
+   17. [Editing the data file](#editing-the-data-file)
+   18. [Exported csv data file location](#exported-csv-data-file-location)
+   19. [Archiving data files](#archiving-data-files-coming-in-v20)
+3. [FAQ](#faq)
+4. [Known issues](#known-issues)
+5. [Command summary](#command-summary)
 
 ---
 
