@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
 
-    public static final String MESSAGE_CONSTRAINTS = "Gender should be either 'M' or 'F' and it should not be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Gender should be either 'M' or 'F'.\nIt is case-insensitive "
+            + "and should not be blank.";
     public static final String VALIDATION_REGEX = "[mMfF]";
 
     public final String value;
