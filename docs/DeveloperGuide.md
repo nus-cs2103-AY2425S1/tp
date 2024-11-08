@@ -147,7 +147,7 @@ How the parsing works:
 **API** : [
 `Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
@@ -156,6 +156,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
   this list so that the UI automatically updates when the data in the list change.
+* store the schedule list data i.e. all `Meeting` objects (which are contained in `UniqueMeetingList` object).
+* stores the currently selected `Meeting` objects (e.g. result of search query using `see` command) as a seperate _filtered_ list.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a
   `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
@@ -176,7 +178,7 @@ needing their own `Tag` objects.<br>
 **API** : [
 `Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" width="800" />
 
 The `Storage` component,
 
@@ -199,7 +201,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### View meeting contacts feature
 
-Using `FindCommand`, we list contacts which are in the meeting based on UID.
+`meeting-contacts` using `FindCommand` to list contacts which are in the meeting based on UID.
 
 <puml src="diagrams/MeetingContactsSequenceDiagram.puml"/>
 
