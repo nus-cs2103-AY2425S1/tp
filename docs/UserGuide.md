@@ -141,7 +141,7 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
      After a few seconds, the MATER window should appear on your screen, preloaded with sample data for you to explore.
 
 5. **Using MATER**  
-   MATER has a command box at the bottom where you can type in simple commands to manage your clients and their cars. Here are a few basic commands to get you started:
+   MATER has a command box at the top where you can type in simple commands to manage your clients and their cars. Here are a few basic commands to get you started:
    - **View all clients**: Type `list` and press Enter to see a list of all clients.
    - **Add a client**: Type `add-client n/John Doe p/98765432 e/johnd@example.com a/123 Example Street` to add a new client named John Doe.
    - **Delete a client**: Type `del-client 3` to delete the 3rd client in the list.
