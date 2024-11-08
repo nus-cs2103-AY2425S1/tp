@@ -151,9 +151,18 @@ Format: `count`(for counting entire list), `count tag/TAG`(for counting persons 
 * If counting the entire list, use `count`.
 * If counting persons with specified TAG, add TAG to end of the command.
 
+<box type="tip" seamless>
+
+**Tip:** Use count with tags to quickly assess team sizes within specific departments or roles
+</box>
+
 Examples:
 * `count`
 * `count tag/Colleagues`
+
+`picture`
+
+**Warning:** When using count tag/TAG, ensure that the tag exists and is spelled accurately; otherwise, the command may return zero results.
 
 ### Editing a person : `edit`
 
@@ -168,9 +177,18 @@ Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boo
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
+<box type="tip" seamless>
+
+**Tip:** To remove all tags, use t/ without specifying tags (e.g., edit 1 t/).
+</box>
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+`picture`
+
+**Warning:** Changes overwrite current data. Double-check inputs before saving.
 
 ### Locating persons by name: `find`
 
@@ -185,10 +203,19 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+<box type="tip" seamless>
+
+**Tip:** Use partial keywords to broaden your search (e.g., find Jo matches John and Joan).
+</box>
+
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+`picture`
+
+**Warning:** The find command only searches names. Ensure that names are correctly spelled.
 
 ### Deleting a person : `delete`
 
@@ -200,9 +227,18 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="tip" seamless>
+
+**Tip:** Use delete carefully, especially after sorting or filtering, as index positions may change.
+</box>
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+`picture`
+
+**Warning:** This action is irreversible. Use list before delete to confirm the index.
 
 ### Sorting Contacts: `sort`
 
@@ -214,9 +250,19 @@ Format: `sort TAG`
 * You can specify multiple tags for sorting.
 * If no tags are specified, all contacts will be displayed in their original order.
 
+<box type="tip" seamless>
+
+**Tip:** For large lists, use sort with commonly used tags to improve data visibility.
+</box>
+
 Examples:
 * `sort friend` Sorts and displays all contacts tagged as friend.
 * `sort friend family` Sorts and displays contacts tagged as either friend or family.
+
+`picture`
+
+**Warning:** Sorting by multiple tags may combine various groups, which can affect other commands relying on order.
+
 
 ### Favoriting a person : `favorite`
 
@@ -228,9 +274,18 @@ Format: `favorite INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="tip" seamless>
+
+**Tip:** Use favorite for high-priority contacts, making them easier to locate with filtering or sorting.
+</box>
+
 Examples:
 * `list` followed by `favorite 2` favorites the 2nd person in the address book.
 * `find Betsy` followed by `favorite 1` deletes the 1st person in the results of the `find` command.
+
+`Add picture of expected output here`
+
+**Warning:** Avoid favoriting too many contacts, as an excessive number of favorites can make it challenging to identify key contacts quickly.
 
 ### Clearing all entries : `clear`
 
@@ -238,11 +293,27 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+<box type="tip" seamless>
+
+**Tip:** Use clear only when resetting the database is intentional.
+</box>
+
+`picture`
+
+**Warning:** This action is irreversible. Back up data if necessary before clearing.
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+<box type="tip" seamless>
+
+**Tip:** Use exit only after confirming that all changes have been saved, as the program automatically saves data with each command.
+</box>
+
+**Warning:** Exiting abruptly may interrupt ongoing processes. Use the exit command instead of closing the window directly to ensure a clean shutdown.
 
 ### Person Details Window
 
