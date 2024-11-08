@@ -586,8 +586,8 @@ Commands for managing property listings and associating clients with listings.
 
     <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `Add Buyers To Listing` might have an outdated command format.<br>
-    This is as of `v1.5`<br>
+    WARNING: The subsequent section `Add Buyers To Listing` might have an outdated command format. This is as of `v1.5`<br>
+    <br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
@@ -669,8 +669,8 @@ Commands for managing property listings and associating clients with listings.
     
     <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `Remove Buyers from Listing` might have an outdated command format.<br>
-    This is as of `v1.5`<br>
+    WARNING: The subsequent section `Remove Buyers from Listing` might have an outdated command format. This is as of `v1.5`<br>
+    <br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
@@ -760,8 +760,8 @@ Commands for managing property listings and associating clients with listings.
     
     <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `Delete Listing` might have an outdated command format.<br>
-    This is as of `v1.5`<br>
+    WARNING: The subsequent section `Delete Listing` might have an outdated command format. This is as of `v1.5`<br>
+    <br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
@@ -865,8 +865,8 @@ Miscellaneous commands for application utility, such as clearing, exiting, and d
     
     <br>
     <div class="alert" markdown="span">
-    WARNING: The subsequent section `More Info` might have an outdated command format.<br>
-    This is as of `v1.5`<br>
+    WARNING: The subsequent section `More Info` might have an outdated command format. This is as of `v1.5`.<br>
+    <br>
     Please refer to the command format given in the application as per the app version used.
     </div>
 
