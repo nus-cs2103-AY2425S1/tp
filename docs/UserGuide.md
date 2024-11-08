@@ -64,21 +64,23 @@ If you’re comfortable typing, MindMap can help you get contact management task
 8. **Get Started with the App**  
    In a few seconds, you'll see the MindMap interface open with some sample contacts to explore.
 > **NOTE**: The app contains some sample data.<br>
+![img_1.png](img_1.png)
 
-   
-   ![Ui](images/Ui.png)
+> Stay Tuned: New UI Arriving Soon!
+![Ui](images/Ui.png)
+
 
 9. **Try Out Some Commands**  
    Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `list` : Lists all patients.
 
-    * `add n/John Doe i/S1234567D p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe i/S1234567D p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW` : Adds a patient named `John Doe` to the App.
 
     * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-    * `clear` : Deletes all contacts.
+    * `clear` : Deletes all patients and their log.
 
     * `exit` : Exits the app. 
 
@@ -117,39 +119,42 @@ Shows a message explaning how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a patient: `add`
 
-Adds a person to the address book.
+Adds a patient to the app.
+* **After using `add`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind.
 
 Format: `add n/NAME i/IDENTITY_NUMBER p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS​`
 
 
 Examples:
 * `add n/John Doe i/S7783844I p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW`
-* `add n/Betsy Crowe i/S2202473F e/betsycrowe@example.com a/Newgate Prison p/84897790 s/HIGH`
+* `add n/Betsy Crowe i/S2202473F e/betsycrowe@example.com a/Newgate Prison p/98765432 s/HIGH`
 
-### Listing all persons : `list`
+### Listing all patients : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all patients in the app.
+
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a patient : `edit`
 
-Edits an existing person in the address book.
+Edits an existing patient in the app.
+* **After using `edit`, type `confirm` to complete the action**. You can also use `cancel` if you change your mind.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS]​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
 
-### Locating persons by name: `find`
+### Locating patients by name: `find`
 
-Finds persons whose names contain any of the given keywords. 
+Finds patients whose names contain any of the given keywords. 
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -168,51 +173,53 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a patient : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified patient from the app.
 
-Format: `delete INDEX` or `delete [i/IDENTITY_NUMBER]`
+Format: `delete INDEX` or `delete i/IDENTITY_NUMBER`
 
-* Deletes the person at the specified `INDEX` or with the specified `IDENTITY_NUMBER`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the patient at the specified `INDEX` or with the specified `IDENTITY_NUMBER`.
+* The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * **After using `delete`, type `confirm` to complete the deletion**. You can also use `cancel` if you change your mind.
 
 Examples:
-* `delete i/S1234567D` deletes the person with NRIC S1234567D in the address book.
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete i/S1234567D` deletes the patient with NRIC S1234567D in the address book.
+* `list` followed by `delete 2` deletes the 2nd patient in MindMap.
+* `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book **after confirming the action**.
+Clears all entries from MindMap **after confirming the action**.
 
 Format: `clear`
 
 * **After using `clear`, type `confirm` to proceed with the clearing of all entries**. You can also use `cancel` if you change your mind.
+> **⚠️ Warning:** This deletes **ALL** of the patient contacts and their respective session logs. This action is non-reversible.
+
 
 ### Confirming a command : `confirm`
 
-Confirms the command that is currently being executed. This command is used to confirm the deletion of a person and the
-clearing of the address book.
+Confirms the command that is currently being executed. This command is used to confirm the action for `add`, `edit`, `delete`, and `clear`.
 
 Examples:
-* `delete i/S1234567D` followed by `confirm` deletes the person with NRIC S1234567D in the address book.
-* `clear` followed by `confirm` clears all entries in the address book.
+* `delete i/S1234567D` followed by `confirm` deletes the patient with NRIC S1234567D in MindMap.
+* `clear` followed by `confirm` clears all entries in the MindMap.
 
 ### Canceling a command : `cancel`
 
-Cancels the command that is currently being executed. This command is used to cancel the deletion of a person and the
-clearing of the address book.
+Cancels the command that is currently being executed. This command is used to cancel the deletion of a patient and the
+clearing of MindMap.
 
 Examples:
-* `delete i/S1234567D` followed by `cancel` cancels the deletion of the person with NRIC S1234567D in the address book.
-* `clear` followed by `cancel` cancels the clearing of the address book.
+* `delete i/S1234567D` followed by `cancel` cancels the deletion of the patient with NRIC S1234567D in MindMap.
+* `clear` followed by `cancel` cancels the clearing of the MindMap.
 
 ### Listing Session logs: `logs`
 
-Lists all logs of a specific patient.
+Lists all logs of a specific patient. This command will change the window to show the list of logs for a specific patient.
+Clicking on individual logs will show the full description of the log.
 
 - **Format**: `logs i/[IDENTITY_NUMBER]`
 
@@ -230,16 +237,21 @@ Creates a new log entry for a specific patient. This command is typically used t
 * `addlog i/S1234567D d/20 May 2024 s/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 ---
 ### Adding a log entry: `addentry`
-Allows users to use a separate window to add new log entry for a person. When prompted with a new window, users can input the details of the log entry.
+Creates a separate pop up window to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previous inputted.
 
-After entering the details, users can click the `Save` button to add the log entry to the person's log list, 'Cancel' to discard the log entry.
-Alternatively users can use "Ctrl + Enter" to save the log entry on windows and "Cmd + Enter" on Mac.
+After entering the details, click the `Save` button to add the log entry to the patient's log list, 'Cancel' to discard the log entry. Closing the window directly will also discard the log entry.
+
+Note that `\n` characters will be interpreted as new lines in the log entry. In both the `LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
+
+> **💡 Tip:** Alternatively, use **"Ctrl + Enter"** to save the log entry on Windows and **"Cmd + Enter"** on Mac.
+
 **Format**: `addentry i/IDENTITY_NUMBER d/DATE`
 * **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
 * **DATE** should be in the format `DD-MMM-YYYY`.
   Examples:
 * `addentry i/S1234567D d/20 May 2024` opens a new window to add a log entry for the contact with NRIC `S1234567D` on the date `20 May 2024`.
-* Example: ![img.png](img.png)
+* Example:</br>
+    ![img.png](img.png)
 
 
 ### Exiting the program : `exit`
@@ -250,17 +262,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MindMap data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MindMap data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, MindMap will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -268,7 +280,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MindMap home folder.
 
 **Q**: Can the new **M** FIN series introduced in Singapore From 1 January 2022 onwards be used?<br>
 **A**:Unfortunately, no. Our application only supports the format of the **F** and **G** FIN series, and for the **S** and **T** series for the NRIC. Also note that while most valid NRIC/FIN are able to be recognised by our application, some would inevitably fail as the Singapore Government does not disclose the true method to verify NRIC/FIN.
@@ -288,8 +300,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
    > **Workaround**: Manually restore the Help Window from the minimized state.
 
 3. **Unable to Navigate List Items with Tab Key**  
-   When using the Tab key to navigate, individual items in lists (like the person list) cannot be accessed.  
+   When using the Tab key to navigate, individual items in lists (like the patient list) cannot be accessed.  
    > **Workaround**: Currently, there is no workaround for this.
+ 
+4. **New Line Handling in Log Entry**
+   Entering "\n" in `addlog` or `addentry` will be treated as a new line. This feature is intended to allow flexible log formatting.
+    > **Workaround**: This feature is intended
 
 
 
@@ -301,38 +317,42 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-| **Action**    | **Description**                       | **Format**                                                                | **Example**                                                                         |
-|---------------|---------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| **Add**       | Adds a person to the address book     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/99999999 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
-| **Clear**     | Clears all entries                    | `clear`                                                                   |                                                                                     |
-| **Delete**    | Deletes a person                      | `delete INDEX`                                                            | `delete 3`                                                                          |
-| **Edit**      | Edits an existing person              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                   |
-| **Find**      | Finds persons by keywords             | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                   |
-| **Confirm**   | Confirms a deletion or clear action   | `confirm`                                                                 |                                                                                     |
-| **Cancel**    | Cancels a delete or clear action      | `cancel`                                                                  |                                                                                     |
-| **List**      | Lists all persons in the address book | `list`                                                                    |                                                                                     |
-| **List Logs** | Lists logs for a specific person      | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                  |
-| **Add Log**   | Adds a log for a person               | `addlog i/NRIC d/DATE l/LOG_ENTRY`                                        | `addlog i/S8613282F d/01 Nov 2024 l/Checked in at clinic`                           |
-| **Add Entry** | Adds a log entry via a second window  | `addentry i/NRIC d/DATE`                                                  | `addentry i/S8613282F d/01 Nov 2024`                                                |
-| **Help**      | Displays help message                 | `help`                                                                    |                                                                                     |
+| **Action**    | **Description**                      | **Format**                                                                | **Example**                                                                          |
+|---------------|--------------------------------------|---------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **Add**       | Adds a patient to MindMap            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/STATUS…​`                  | `add n/James Ho p/999999999 e/jamesho@example.com a/123, Clementi Rd, 1234665 s/LOW` |
+| **Clear**     | Clears all entries                   | `clear`                                                                   |                                                                                      |
+| **Delete**    | Deletes a patient                    | `delete INDEX`                                                            | `delete 3`                                                                           |
+| **Edit**      | Edits an existing patient            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [s/STATUS]…​` | `edit 2 n/James Lee e/jameslee@example.com s/LOW`                                    |
+| **Find**      | Finds patients by keywords           | `find KEYWORD [MORE_KEYWORDS]`                                            | `find James Jake`                                                                    |
+| **Confirm**   | Confirms a deletion or clear action  | `confirm`                                                                 |                                                                                      |
+| **Cancel**    | Cancels a delete or clear action     | `cancel`                                                                  |                                                                                      |
+| **List**      | Lists all patients in the MindMap    | `list`                                                                    |                                                                                      |
+| **List Logs** | Lists logs for a specific patient    | `logs i/NRIC`                                                             | `logs i/S8613282F`                                                                   |
+| **Add Log**   | Adds a log for a patient             | `addlog i/NRIC d/DATE l/LOG_ENTRY`                                        | `addlog i/S8613282F d/01 Nov 2024 l/Checked in at clinic`                            |
+| **Add Entry** | Adds a log entry via a second window | `addentry i/NRIC d/DATE`                                                  | `addentry i/S8613282F d/01 Nov 2024`                                                 |
+| **Help**      | Displays help message                | `help`                                                                    |                                                                                      |
 
 
  #### Additional Notes
 
 * **Parameters**:
-    - `n/NAME` - Full name of the person.
-    - `p/PHONE_NUMBER` - Person's phone number.
+    - `n/NAME` - Full name of the patient.
+    - `p/PHONE_NUMBER` - Patient's phone number.
     - `e/EMAIL` - Email address.
     - `a/ADDRESS` - Address details.
     - `s/STATUS` - Statuses of the patients which can only be HIGH, LOW, MEDIUM, DISCHARGED AND NEW.
+    - `l/LOG_ENTRY` - Description of the session with the patient.
+    - `i/IDENTITY_NUMBER` - Unique identifier (e.g., NRIC or FIN) of the patient.
+    - `d/DATE` - Date of the log entry in the format `DD-MMM-YYYY`.
+    - `INDEX` - Index number of the patient in the list.
+    - `KEYWORD` - Search keyword(s) to find patients.
+    - `MORE_KEYWORDS` - Additional search keywords.
 
 * **Commands**:
-    - **Edit** and **Delete** require the `INDEX` number displayed in the list of persons.
-    - **Clear** and **Delete** actions require `confirm` to complete or `cancel` to abort.
+    - **Edit** and **Delete** require the `INDEX` number displayed in the list of patients.
+    - **Clear**, **Delete**, **Add** and **Edit** actions require `confirm` to complete or `cancel` to abort.
 
 * **Other Commands**:
-    - **List** shows all persons in the address book.
-    - **List Logs** shows all logs for a specific person based on their NRIC.
     - **Help** shows a guide for using all commands.
 
 ---
