@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.State;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
@@ -153,10 +152,10 @@ public interface Model {
     boolean hasTask(Task task);
 
     /**
-     * Replaces the given task {@code target} with {@code editedTask} in {@code group}.
-     * {@code target} must exist in the address book.
+     * Replaces the given task {@code originalTask} with {@code editedTask} in {@code group}.
+     * {@code originalTask}, {@code group} must exist in the address book.
      */
-    void setTask(Index index, Task editedTask, Group group);
+    void setTask(Task originalTask, Task editedTask, Group group);
 
     /**
      * Returns a {@code Student} with the student number {@code studentNumber}.
