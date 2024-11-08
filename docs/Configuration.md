@@ -1,5 +1,4 @@
 <!--
----
 layout: default.md
 title: "Configuration guide"
 ---
