@@ -47,7 +47,7 @@ This section explains the different types of annotated boxes used in the user gu
 ## Quick start
 
 1. Check that Java is installed:
-   - EduConnect requires **Java 17 or higher** to run. If you're not sure if you have the correct Java version installed, you can click [here for the relevant instructions]().
+   - EduConnect requires **Java 17 or higher** to run. If you're not sure if you have the correct Java version installed, you can click [here for the relevant instructions](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
 2. Download EduConnect onto your computer:
    - Download the latest version of EduConnect by clicking [here](https://github.com/AY2425S1-CS2103T-F12-2/tp/releases).
