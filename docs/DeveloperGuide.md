@@ -163,10 +163,12 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add Guest feature
-The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes and their corresponding values
+The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values
 
 The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
-<puml src="diagrams/AddGuestSequenceDiagram.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP2.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
 
 <box type="info" seamless>
 
@@ -175,10 +177,15 @@ The sequence diagram below provides an overview for the execution flow of a `add
 
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
-2. `AddressBookParser` parses the user input (if valid) to create and return an `AddGuestCommandParser`
-3. `AddGuestCommandParser` parses the user input (if valid) to extract the prefixes and their corresponding values, which is used to create a `Guest` object with the specified attributes (`Name`, `Phone`, `Email`, `Address`). An `AddGuestCommand` is then created with the new `Guest` object and returned.
-4. `LogicManager` executes the `AddGuestCommand`, which calls the `hasPerson` method of `Model` to check if the guest already exists in the address book. If the guest is not a duplicate, the `AddGuestCommand` then calls the `addPerson` method of the `Model` to add the guest into the address book.
-5. A `CommandResult` containing the success message is then returned to the `LogicManager` and then back to the `UI` component
+2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `add_guest` command, it creates and return an `AddGuestCommandParser` for further parsing. 
+3. `AddGuestCommandParser` parses the remaining user input (excluding the `add_guest` keyword) to extract the prefixes and their values, which are used to create a `Guest` object with the corresponding attributes
+   1. Suppose the n/, p/, e/ and a/ prefixes and their values are provided (these are compulsory)
+   2. Then, a `Guest` object with name, phone number, email and address attributes are created 
+
+
+4. An `AddGuestCommand` is then created with the new `Guest` object and returned.
+5. `LogicManager` executes the `AddGuestCommand`, which calls the `hasPerson` method of `Model` to check if the guest already exists in the address book. If the guest is not a duplicate (i.e. not same name and phone number as another guest), the `AddGuestCommand` then calls the `addPerson` method of the `Model` to add the guest into the address book.
+6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 ### Edit Guest feature
 The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number of that guest in the displayed guest list
