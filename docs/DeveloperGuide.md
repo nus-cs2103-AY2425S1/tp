@@ -164,14 +164,8 @@ The `add_guest` command creates and adds a new `Guest` object into the address b
 
 The sequence diagrams below provides an overview for the execution flow of a `add_guest` command:
 <puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
-
-<p align="center" width="100%">
-    <img width="69%" src="diagrams/AddGuestSequenceDiagramP2.puml" alt="Add guest sequence diagram P2">
-</p>
-
-<p align="center" width="100%">
-    <img width="69%" src="diagrams/AddGuestSequenceDiagramP3.puml" alt="Add guest sequence diagram P3">
-</p>
+<puml src="diagrams/AddGuestSequenceDiagramP2.puml" />
+<puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
 <box type="info" seamless>
 
 **Note:** The lifeline for `AddGuestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
@@ -193,14 +187,8 @@ The `edit_guest` command updates the details of an existing guest in the address
 
 The sequence diagrams below provides an overview for the execution flow of a `edit_guest` command:
 <puml src="diagrams/EditGuestSequenceDiagramP1.puml" />
-
-<p align="center" width="100%">
-    <img width="69%" src="diagrams/EditGuestSequenceDiagramP2.puml" alt="Edit guest sequence diagram P2">
-</p>
-
-<p align="center" width="100%">
-    <img width="69%" src="diagrams/EditGuestSequenceDiagramP3.puml" alt="Edit guest sequence diagram P3">
-</p>
+<puml src="diagrams/EditGuestSequenceDiagramP2.puml" />
+<puml src="diagrams/EditGuestSequenceDiagramP3.puml" />
 <box type="info" seamless>
 
 **Note:** The lifeline for `EditGuestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
@@ -221,10 +209,7 @@ The `find` command searches for all guests and vendors that match any of the giv
 The sequence diagrams below provides an overview for the execution flow of a `find` command:
 <puml src="diagrams/FindSequenceDiagramP1.puml" />
 <puml src="diagrams/FindSequenceDiagramP2.puml" />
-
-<p align="center" width="100%">
-    <img width="69%" src="diagrams/FindSequenceDiagramP3.puml" alt="Find sequence diagram P3">
-</p>
+<puml src="diagrams/FindSequenceDiagramP3.puml" />
 <box type="info" seamless>
 
 **Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
