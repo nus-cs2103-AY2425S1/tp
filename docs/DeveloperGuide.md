@@ -267,7 +267,7 @@ PlantUML, the lifeline continues till the end of diagram.
 
 **Aspect 1:** Usage of StudentNumber as identifier
 
-1. **Design #1: Use StudentNumber**
+1. **Design #1: Use StudentNumber (current choice)**
 
 - Pro: More deliberate and since StudentNumber are more complex, the user will be more aware of their decision
 - Con: More typing is required
@@ -326,7 +326,7 @@ PlantUML, the lifeline continues till the end of diagram.
 
 **Aspect 1:** Usage of GroupName as identifier
 
-1. **Design #1: Use GroupName**
+1. **Design #1: Use GroupName (current choice)**
 
 - Pro: More deliberate and since GroupNames are more complex, the user will be more aware of their decision
 - Con: Must type a lot
