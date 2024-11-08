@@ -37,10 +37,9 @@ public class ViewCommand extends Command {
     public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact";
     private static final ViewCommand closeView = new ViewCommand();
     private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null, true);
-
+    private static ListChangeListener<Person> listener;
     private final Name personName;
     private final boolean isClose;
-
 
 
     /**
@@ -66,6 +65,9 @@ public class ViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (listener != null) {
+            model.getAddressBook().getPersonList().removeListener(listener);
+        }
         if (isClose) {
             return closeViewResult;
         }
@@ -80,12 +82,12 @@ public class ViewCommand extends Command {
 
     private CommandResult createCommandResult(Model model) {
         ObjectProperty<Person> person = new SimpleObjectProperty<>(model.getPerson(personName).orElseThrow());
-        ListChangeListener<Person> listener = change -> {
+        listener = change -> {
             while (change.next()) {
-                if (change.wasAdded() || change.wasRemoved()) {
+                if (change.wasRemoved()) {
                     person.set(null);
                     model.getPerson(personName).ifPresentOrElse(
-                            person::set, () -> {});
+                            person::set, () -> model.getAddressBook().getPersonList().removeListener(listener));
 
                 }
             }
