@@ -1,7 +1,7 @@
 
 # Vendor Vault User Guide
 
-Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps.
+Vendor Vault is a **desktop app for managing supplier contact information and deliveries, optimized for use via a  Line Interface** (CLI). If you can type fast, VendorVault can get your contact management tasks done faster than traditional GUI apps. Vendor Vault is targeted at small convenience/grocery stores. 
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -32,7 +32,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-
+<br>
 --------------------------------------------------------------------------------------------------------------------
 
 # Features
@@ -52,7 +52,7 @@ Vendor Vault is a **desktop app for managing supplier contact information and de
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help` and `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help` `clear` and `exit`) will be ignored.<br>
   e.g. if the command specifies `exit 123 `, it will be interpreted as `exit`.
 
 * For all parameters, starting and ending spaces are trimmed.
@@ -82,12 +82,12 @@ Action     | Format, Examples
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**[Add](#adding-a-delivery-add--d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
-**[Delete](#deleting-a-delivery--delete--d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
-**[List](#listing-all-deliveries-list--d)**   | `list -d`
-**[Mark](#marking-a-delivery--mark--d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
-**[Find](#find-a-delivery-find--d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
-**[Sort](#sort-deliveries-sort--d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
+**[Add](#adding-a-delivery-add-d)**    | `add -d on/DELIVERY_DATE_TIME s/SUPPLIER_INDEX pro/PRODUCT q/QUANTITY kg/g/L/mL/units c/COST` <br> e.g., `add -d on/18-06-2024 17:00 s/1 pro/bread q/500 g c/5.50`
+**[Delete](#deleting-a-delivery-delete-d)** | `delete -d INDEX`<br> e.g., `delete -d 3`
+**[List](#listing-all-deliveries-list-d)**   | `list -d`
+**[Mark](#marking-a-delivery-mark-d)**   | `mark -d INDEX STATUS`<br> e.g.,`mark -d 2 PENDING`
+**[Find](#find-a-delivery-find-d)**   | `find -d on/DELIVERY_DATE_TIME stat/STATUS s/SUPPLIER_INDEX pro/PRODUCT`<br> e.g., `find -d on/ 28-06-2025 17:00 pro/ milk`
+**[Sort](#sort-deliveries-sort-d)**   | `sort -d so/SORT_ORDER sb/SORT_BY_FIELD`<br> e.g., `sort -d so/a sb/c`
 **[Upcoming](#upcoming-deliveries-upcoming)** | `upcoming aft/START_DATE bef/END_DATE`<br> e.g., `upcoming aft/19-12-2022 08:00 bef/18-06-2023 17:00`
 
 
@@ -96,6 +96,7 @@ Action     | Format, Examples
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **[List](#viewing-all-deliveries-and-suppliers-list)**   | `list -a`
+**[Clear](#clearing-all-suppliers-and-deliveries-clear)**   | `clear`
 **[Help](#viewing-help-help)**   | `help`
 **[Exit](#exiting-the-program-exit)**   | `exit`
 
@@ -124,6 +125,12 @@ Format: `list -a`
 - No other parameters should be given for this command.
 - At least one space between list and -a
 </box>
+
+### Clearing all suppliers and deliveries : `clear`
+
+Clear all data regarding suppliers and deliveries in vendor vault
+
+Format: `clear`
 
 ---
 
@@ -444,7 +451,7 @@ To sort deliveries by cost in ascending order:
     sort -d so/a sb/c
 
 #### Here's how it would look like in the app:
-![sort command](images/sortDeliveryCommand.png)
+![sort command](images/sortDeliveriesCommand.png)
 
 ### Upcoming deliveries: `upcoming`
 
