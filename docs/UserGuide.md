@@ -13,7 +13,8 @@ Created for busy university dorm managers looking to increase their efficiency, 
 the process of accessing and updating resident student details. What's more, DorManagerPro is extremely simple to use; we only require our users to know how to type.
 
 
-> [!Tip]
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
 > If this is your first time accessing DorManagerPro, jump to [Quick start](#quick-start) for details on how to set up DorManagerPro!
 
 
@@ -29,10 +30,10 @@ the process of accessing and updating resident student details. What's more, Dor
     - [Adding a person : `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
-    - [Finding a person : `find`](#locating-persons-by-name-phone_number-room_number-or-tag-find)
+    - [Finding a person : `find`](#finding-a-person-find)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
-    - [Cleaning graduated students : `exit`](#cleaning-graduated-students--clean)
+    - [Cleaning graduated students : `clean`](#cleaning-graduated-students--clean)
     - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
     - [Exiting the program : `exit`](#exiting-the-program--exit)
     - [Manual saving : `export`](#manual-saving-export)
@@ -59,7 +60,8 @@ the process of accessing and updating resident student details. What's more, Dor
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-4/tp/releases/).
 
 3. Locate the `.jar` file in your computer. Typically, this will be in the `Downloads` folder.
-> [!Tip]
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
 > You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
 
 4. Open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
@@ -111,25 +113,42 @@ the process of accessing and updating resident student details. What's more, Dor
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
 
+A help window will pop up containing basic introduction to the three core features `add`, `edit` and `delete`.
+
+![help message](images/helpMessage.png)
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
-<box type="tip" seamless>
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
+> * A person can have up to 10 tags (including 0).
+> * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
+> * `PHONE_NUMBER` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `EMAIL` should be of the format local-part@domain
+> * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
-**Tip:** A person can have up to 10 tags (including 0).
-</box>
+> <span style="color:Tomato"> WARNING! </span> <br>
+> 
+> * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
+> * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
+
+
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/Resident Assistant e/betsycrowe@example.com a/Newgate Street p/1234567 t/Floor 1`
+
+The following screenshot shows the results of executing `add n/John Doe p/+123 98765432 e/johnd@example.com r/01-0110 a/John street, block 123, #01-01`
+
+![AddCommandExampleUsage.png](images/AddCommandExampleUsage.png)
 
 ### Listing all persons : `list`
 
@@ -141,7 +160,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -207,7 +226,11 @@ Removes all graduated students from the address book based on the current year a
 
 Format: `clean`
 
-Examples of usage:
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
+> If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+
+Example:
 
 `clean`, executed in 2024.
 
@@ -219,7 +242,7 @@ This deletes all students who graduate in 2023 or earlier.
 
 Undoes the previous command that changes the data in the address book.
 
-Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`.
+Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
 
 Format: `undo`
 
@@ -239,19 +262,41 @@ The `export` command will directly and immediately save the contents of the data
 
 Format: `export`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+> This exports the data of DorManagerPro to a file `NOW.json` into the data folder of the home folder. 
+> `NOW` is the time at the point of `export`, in the format MM-dd-yyyy-HHmmssPM.
+
+Example:
+
+`export`
+
+The following screenshots shows the results of executing `export`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
+![ExportToFolderExample.png](images/ExportToFolderExample.png)
+
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
 
 Format: `import f/FILE_PATH`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * `FILE_PATH` must correspond to an actual json file in the device.
+> * Use as `.` a folder to refer to the home folder.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+
 Examples:
 
 * `import fp/C:/SaveFile3.json` imports data from the file at `C:/SaveFile3.json` into the application.
+* `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
-<box type="tip" seamless>
+The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 
-**Tip:** Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
-</box>
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
+> Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
+> However, if you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+
 
 ### Editing the data file
 
@@ -265,9 +310,6 @@ If your changes to the data file makes its format invalid, DorManagerPro will di
 Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -305,9 +347,57 @@ Action     | Format, Examples
 
 ### Name
 
+Format: `name` where `name` is a sequence of characters corresponding to a student's name
+
+Constraints:
+* `name` can contain any alphanumeric character or whitespace.
+* `name` can contain hyphens, commas and apostrophes.
+* `name` can be 1 to 300 characters long.
+  
+Duplicate handling:
+* Two resident student contacts with the same name are not allowed
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> * Duplicate handling rationale: It is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
+> * Case-insensitive: `John Doe` is treated the same as `john doe`
+
 ### Phone number
 
+Format: `+c a d`, where `c` is an optional country code, `a` is an optional area code, and `d` is a compulsory number.
+
+Constraints:
+* Start the phone number with `+` only if there is a country code.
+* `c` is an optional country code 1 to 3 digits long.
+* `a` is an optional area code 1 to 4 digits long. `a` can only be specified when `c` is specified.
+* `d` is a compulsory number 3 to 15 digits long.
+* Separate `c`, `a` and `d` with a single space.
+
+Duplicate handling:
+* Two resident student contacts with the same phone numbers are not allowed.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> * Duplicate handling rationale: Phone numbers are unique to each individual
+
 ### Email
+
+Format: `l@d`, where `l` is the local part of the email and `d` is the domain of the email.
+
+Constraints:
+* The local-part `l` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+* The domain name `d` is made up of domain labels separated by periods. 
+* The domain name `d` must end with a domain label at least 2 characters long.
+* Each domain label must start and end with alphanumeric characters 
+* Each domain label must  consist of alphanumeric characters, separated only by hyphens, if any.
+* `l`, `@` and `d` are not supposed to be separated by whitespace.
+
+Duplicate handling:
+* Two resident student contacts with the same emails are not allowed.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Email constraints are based on the Email Format of the International Organisation for Standardisation.
+> * Duplicate handling rationale: Emails are unique to each individual
 
 ### Address
 
