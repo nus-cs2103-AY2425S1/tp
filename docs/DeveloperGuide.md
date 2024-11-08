@@ -8,7 +8,6 @@
 
 <!-- TOC -->
 * [HireMe Developer Guide](#hireme-developer-guide)
-  * [**Acknowledgements**](#acknowledgements)
   * [**Setting up, getting started**](#setting-up-getting-started)
   * [**Design**](#design)
     * [Architecture](#architecture)
