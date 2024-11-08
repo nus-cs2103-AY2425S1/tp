@@ -70,7 +70,7 @@ public class FavouriteCommandTest {
 
         FavouriteCommand favouriteCommand = new FavouriteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(FavouriteCommand.MESSAGE_FAVOURITE_ADDED, editedPerson);
+        String expectedMessage = String.format(FavouriteCommand.MESSAGE_FAVOURITE_ADDED, editedPerson.getFullName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
@@ -102,7 +102,7 @@ public class FavouriteCommandTest {
 
         FavouriteCommand favouriteCommand = new FavouriteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(FavouriteCommand.MESSAGE_FAVOURITE_ADDED, editedPerson);
+        String expectedMessage = String.format(FavouriteCommand.MESSAGE_FAVOURITE_ADDED, editedPerson.getFullName());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(personToEdit, editedPerson);
@@ -120,4 +120,30 @@ public class FavouriteCommandTest {
 
         assertCommandSuccess(favouriteCommand, model, FavouriteCommand.MESSAGE_FAVOURITE_SORTED, expectedModel);
     }
+
+    @Test
+    public void execute_personAlreadyFavourite_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Set<Tag> favouriteTagSet = new HashSet<>(personToEdit.getTags());
+        favouriteTagSet.add(Tag.FAVOURITE_TAG); // Add favourite tag to simulate already-favourite state
+        Person favouritedPerson = new PersonBuilder(personToEdit)
+                .withTags(favouriteTagSet.stream().map(Tag::getTagName).toArray(String[]::new)).build();
+        model.setPerson(personToEdit, favouritedPerson);
+
+        FavouriteCommand favouriteCommand = new FavouriteCommand(INDEX_FIRST_PERSON);
+
+        // Expectation: Favourite tag should be removed, and removal message shown
+        String expectedMessage = String.format(FavouriteCommand.MESSAGE_FAVOURITE_REMOVED,
+                favouritedPerson.getFullName());
+        Set<Tag> noFavouriteTagSet = new HashSet<>(favouriteTagSet);
+        noFavouriteTagSet.remove(Tag.FAVOURITE_TAG); // Set without favourite tag
+        Person unfavouritedPerson = new PersonBuilder(personToEdit)
+                .withTags(noFavouriteTagSet.stream().map(Tag::getTagName).toArray(String[]::new)).build();
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(favouritedPerson, unfavouritedPerson);
+
+        assertCommandSuccess(favouriteCommand, model, expectedMessage, expectedModel);
+    }
+
 }

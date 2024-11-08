@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_EARLY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_LATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
@@ -8,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDAY_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.person.Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -52,15 +54,12 @@ public class BirthdayCommandParserTest {
         String userInput2 = targetIndex.getOneBased() + INVALID_BIRTHDAY_EARLY_DESC;
         String userInput3 = targetIndex.getOneBased() + INVALID_BIRTHDAY_LATE_DESC;
 
-        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+        String expectedMessage = MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT;
 
         // Invalid date
-        assertParseFailure(parser, userInput1, MESSAGE_INVALID_FORMAT);
-
-        // No human born on this day is alive today
-        assertParseFailure(parser, userInput2, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput1, MESSAGE_INVALID_DATE_FORMAT);
 
         // Date must not be in the future
-        assertParseFailure(parser, userInput3, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, userInput3, MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
     }
 }

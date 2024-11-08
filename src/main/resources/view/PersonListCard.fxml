@@ -31,22 +31,22 @@
       <FlowPane fx:id="tags" />
 
       <HBox>
-        <Label text="Phone:" styleClass="cell_small_label"/>
+        <Label text="Phone:" minWidth="50.0" styleClass="cell_small_label"/>
         <Label fx:id="phone" styleClass="cell_small_label" />
       </HBox>
 
       <HBox>
-        <Label text="Address:" styleClass="cell_small_label"/>
+        <Label text="Address:" minWidth="60.0" styleClass="cell_small_label"/>
         <Label fx:id="address" styleClass="cell_small_label" />
       </HBox>
 
       <HBox>
-        <Label text="Email:" styleClass="cell_small_label"/>
+        <Label text="Email:" minWidth="40.0" styleClass="cell_small_label"/>
         <Label fx:id="email" styleClass="cell_small_label" />
       </HBox>
 
       <HBox>
-        <Label text="Remark:" styleClass="cell_small_label"/>
+        <Label text="Remark:" minWidth="55.0" styleClass="cell_small_label"/>
         <Label fx:id="remark" styleClass="cell_small_label" />
       </HBox>
     </VBox>

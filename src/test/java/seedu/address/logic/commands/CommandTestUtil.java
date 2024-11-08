@@ -114,7 +114,7 @@ public class CommandTestUtil {
     public static final String INVALID_DATE_AGAIN_DESC = " " + PREFIX_BIRTHDAY + "2024-13-01";
     public static final String INVALID_BIRTHDAY_EARLY_DESC = " " + PREFIX_BIRTHDAY + "1908-04-22";
     public static final String INVALID_BIRTHDAY_LATE_DESC = " " + PREFIX_BIRTHDAY + LocalDate.now()
-            .plusDays(1).toString();
+            .plusDays(10).toString();
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     // PROPERTY STUFF

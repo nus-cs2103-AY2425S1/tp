@@ -14,7 +14,8 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is out of bound";
+    public static final String MESSAGE_DUPLICATE_PROPERTIES = "This property is already listed for the person.";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
@@ -26,6 +27,7 @@ public class Messages {
             "%1$s is in the future!";
     public static final String MESSAGE_NO_ENTRY_ON_DATE = "%1$s has no entry!";
     public static final String MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED = "Activity list not initialized!";
+    public static final String MESSAGE_LOG_MESSAGE_EMPTY = "Message cannot be empty";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -60,8 +62,8 @@ public class Messages {
         person.getTags().forEach(builder::append);
         builder.append("; DateOfCreation: ")
                 .append(person.getDateOfCreation().toString())
-                .append("; History: ").append(person.getHistory());
-        builder.append("; PropertyList: ")
+                .append(";\nHistory: ").append(person.getHistory());
+        builder.append("PropertyList: ")
                 .append(person.getPropertyList().toString());
         return builder.toString();
     }

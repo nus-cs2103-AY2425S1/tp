@@ -12,6 +12,7 @@ title: Developer Guide
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
+* The use cases within the Developer Guide and the commands in User Guide were formatted into GFMD style using GPT-4o. The content itself was self-written by the team.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -109,8 +110,7 @@ The `UI` component,
 
 ### Logic component
 
-**API
-** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -121,7 +121,7 @@ call as an example.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
@@ -150,10 +150,9 @@ How the parsing works:
 
 ### Model component
 
-**API
-** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
@@ -167,7 +166,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -175,8 +174,7 @@ The `Model` component,
 
 ### Storage component
 
-**API
-** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -234,7 +232,7 @@ the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
@@ -244,7 +242,7 @@ once to the left, pointing it to the previous address book state, and restores t
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -253,7 +251,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -264,7 +262,7 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
 to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
@@ -477,9 +475,9 @@ otherwise)
 **Guarantees**: The interaction details are saved under the specified contact’s history, optionally including the date of the interaction, for future reference.
 
 #### Main Success Scenario (MSS):
-1. The Salesperson issues the `log` command with a valid `ContactID`, an optional date (`d/`) in the `yyyy-mm-dd` format, and descriptive interaction details (`l/`).
+1. The Salesperson issues the `log` command with a valid `index`, an optional date (`d/`) in the `yyyy-mm-dd` format, and descriptive interaction details (`l/`).
 2. AddressBook validates each component:
-  - **ContactID**: Ensures the provided ID is a numeric identifier that corresponds to an existing contact in the AddressBook.
+  - **index**: Ensures the provided ID is a numeric identifier that corresponds to an existing contact in the AddressBook.
   - **Date** (if included): Confirms that the date follows the required `yyyy-mm-dd` format and checks that it falls within the acceptable date range (not before the contact’s creation date or beyond the current date).
   - **Interaction Details**: Verifies that the interaction details are provided and are non-empty, allowing the Salesperson to record free-form notes about the interaction, such as the nature, location, or purpose.
 3. Upon successful validation, AddressBook logs the interaction details in the contact’s profile. If a date is provided, it is also stored with the log entry.
@@ -500,19 +498,44 @@ otherwise)
 ---
 
 #### Extensions:
-- **2a.** The `ContactID` is invalid or does not match any contact in the AddressBook:
-  - **2a1.** AddressBook displays an error message: `Error: Contact not found. Please check the ContactID and try again.`
-  - **2a2.** The Salesperson verifies or corrects the `ContactID` and reissues the `log` command.
+- **2a.** The `index` is of invalid format (not a positive integer).
+  - **2a1.** The system displays an error message:
+    ```
+    Invalid command format!
+    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
+    Two usage formats are supported:
+    1. To mark a person as favourite: Specify the index of the person in the displayed list.
+       Parameters: INDEX (must be a positive integer)
+       Example: favourite 1
+    2. To sort all favourite persons to the top: Use the command without any parameters.
+       Example: favourite
+    ```
+  - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
-- **2b.** The optional date is provided but is either in an invalid format or outside the valid range:
-  - **2b1.** AddressBook displays an error message: `Invalid date format or out of range. Please use "yyyy-mm-dd" format and ensure the date is valid.`
-  - **2b2.** The Salesperson corrects or removes the date and reissues the command.
+- **2b.** The `index` is out of bound (larger than the last existing contact).
+  - **2b1.** The system displays an error message: `The person index provided is out of bound`
+  - **2b2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
-- **2c.** The interaction details are missing or empty:
-  - **2c1.** AddressBook displays an error message: `Interaction details are required. Please provide a description of the interaction.`
-  - **2c2.** The Salesperson adds the interaction details and reissues the `log` command.
+- **2c.** The optional date is provided but is either in an invalid format or outside the valid range:
+  - **2c1.** AddressBook displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
+  - **2c2.** The Salesperson corrects or removes the date and reissues the command.
+  - **Use case resumes from Step 2.**
+
+- **2d.** The optional date is provided but is before the date of creation of the contact:
+  - **2d1.** AddressBook displays an error message: `<Date entered> is before the date of creation of this log <Date of creation>!`
+  - **2d2.** The Salesperson corrects or removes the date and reissues the command.
+  - **Use case resumes from Step 2.**
+
+- **2e.** The optional date is provided but is in the future:
+  - **2e1.** AddressBook displays an error message: `<Date entered> is in the future!`
+  - **2e2.** The Salesperson corrects or removes the date and reissues the command.
+  - **Use case resumes from Step 2.**
+
+- **2f.** The interaction details are missing or empty:
+  - **2f1.** AddressBook displays an error message: `Message cannot be empty`
+  - **2f2.** The Salesperson adds the interaction details and reissues the `log` command.
   - **Use case resumes from Step 2.**
 
 ---
@@ -579,12 +602,12 @@ otherwise)
 **Guarantees**: The remark is added or updated for the specified contact and displayed in the contact's profile.
 
 #### Main Success Scenario (MSS):
-1. The Salesperson issues the `remark` command with a valid contact index and a remark message in the format: `remark <index> r/<remark message>`.
+1. The Salesperson issues the `remark` command with a valid contact index and an optional remark message in the format: `remark <index> r/<remark message>`.
 2. The system validates the contact index to ensure it:
    - References an existing contact in the current list.
    - Is a positive integer within the list's range.
-3. The system adds or updates the remark for the specified contact. If a remark already exists, it is replaced with the new message; otherwise, a new remark is added.
-4. The system displays a success message: `Remark updated for contact at index <index>: "<remark message>"`.
+3. The system adds or updates the remark for the specified contact. If a remark already exists, it is replaced with the new message; otherwise, a new remark is added. If `r/` is absent, or followed by an empty string, the existing remark is removed.
+4. The system displays a success message: `Added remark to Person: <Person details>`, when non empty remark is added or changed, and `Removed remark from Person: <Person details>` otherwise.
 5. The contact’s profile is updated, and the new remark appears in the contact list view.
 
    **Use case ends.**
@@ -592,18 +615,25 @@ otherwise)
 ---
 
 ### Extensions:
-- **2a.** The contact index is invalid or does not exist:
-  - **2a1.** If the index is out of range, the system displays: `The person index provided is invalid.`
-  - **2a2.** If the index format is incorrect (e.g., not an integer), the system displays: 
+- **2a.** The `index` is of invalid format (not a positive integer).
+  - **2a1.** The system displays an error message:
     ```
-    Invalid command format! 
-    remark: Edits the remark of the person identified by the index number used in the last person listing. Existing remark will be overwritten by the input.
-    Parameters: INDEX (must be a positive integer) r/[REMARK]
-    Example: remark 1 r/Likes to swim.
+    Invalid command format!
+    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
+    Two usage formats are supported:
+    1. To mark a person as favourite: Specify the index of the person in the displayed list.
+       Parameters: INDEX (must be a positive integer)
+       Example: favourite 1
+    2. To sort all favourite persons to the top: Use the command without any parameters.
+       Example: favourite
     ```
-  - **2a3.** The Salesperson corrects the index and reissues the command.
+  - **2a2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
+- **2b.** The `index` is out of bound (larger than the last existing contact).
+  - **2b1.** The system displays an error message: `The person index provided is out of bound`
+  - **2b2.** The Salesperson corrects the `index` and reissues the command.
+  - **Use case resumes from Step 2.**
 ---
 
 ### Including Related Use Cases:
@@ -617,7 +647,6 @@ otherwise)
 
 - **1b.** The Salesperson edits an existing remark by issuing the `remark` command with a new remark message.
   - **Use case proceeds normally from Step 2.**
-
 ---
 
 ### Postconditions:
@@ -644,16 +673,24 @@ otherwise)
 ---
 
 ### Extensions:
-- **2a.** The contact index is invalid or does not exist.
-  - **2a1.** If the index is out of range, the system displays an error message: `The person index provided is invalid.`
-  - **2a2.** If the index format is incorrect (e.g., non-numeric or contains decimal values), the system displays:
+- **2a.** The `index` is of invalid format (not a positive integer).
+  - **2a1.** The system displays an error message:
     ```
-    Invalid command format! 
-    view: Displays the full information of the person identified by the index number used in the last person listing. View window can be closed by the "close" command.
-    Parameters: INDEX (must be a positive integer)
-    Example: view 1
+    Invalid command format!
+    favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
+    Two usage formats are supported:
+    1. To mark a person as favourite: Specify the index of the person in the displayed list.
+       Parameters: INDEX (must be a positive integer)
+       Example: favourite 1
+    2. To sort all favourite persons to the top: Use the command without any parameters.
+       Example: favourite
     ```
-  - **2a3.** The Salesperson corrects the index and reissues the command.
+  - **2a2.** The Salesperson corrects the `index` and reissues the command.
+  - **Use case resumes from Step 2.**
+
+- **2b.** The `index` is out of bound (larger than the last existing contact).
+  - **2b1.** The system displays an error message: `The person index provided is out of bound`
+  - **2b2.** The Salesperson corrects the `index` and reissues the command.
   - **Use case resumes from Step 2.**
 
 - **3a.** The contact is missing some optional information (e.g., birthday, social media handle).
@@ -688,23 +725,39 @@ otherwise)
 **Guarantees**: The contact is marked as a favourite, and the Salesperson can easily access it from the favourite list.
 
 #### Main Success Scenario (MSS):
-1. The Salesperson issues the `favourite` command with a valid `ContactID`.
-2. The system validates the `ContactID`.
+1. The Salesperson issues the `favourite` command with a valid `index`.
+2. The system validates the `index`.
 3. The system marks the contact as a favourite.
-4. The system displays a success message: `Contact <Name> marked as a favourite.`
+4. The system displays a success message: `Add <Name at index> to favourite.`
 
    **Use case ends.**
 
 ---
 
 #### Extensions:
-- **2a.** The `ContactID` is invalid or does not exist.
-    - **2a1.** The system displays an error message: `The person index provided is invalid`
-    - **2a2.** The Salesperson corrects the `ContactID` and reissues the command.
+- **2a.** The `index` is of invalid format (not a positive integer).
+    - **2a1.** The system displays an error message: 
+      ```
+      Invalid command format!
+      favourite: Marks a person as a favourite or sorts all favourite persons to the top of the list.
+      Two usage formats are supported:
+      1. To mark a person as favourite: Specify the index of the person in the displayed list.
+         Parameters: INDEX (must be a positive integer)
+         Example: favourite 1
+      2. To sort all favourite persons to the top: Use the command without any parameters.
+         Example: favourite
+      ```
+    - **2a2.** The Salesperson corrects the `index` and reissues the command.
     - **Use case resumes from Step 2.**
 
+- **2a.** The `index` is out of bound (larger than the last existing contact).
+  - **2a1.** The system displays an error message: `The person index provided is out of bound`
+  - **2a2.** The Salesperson corrects the `index` and reissues the command.
+  - **Use case resumes from Step 2.**
+
 - **3a.** The contact is already marked as a favourite.
-    - **3a1.** The system displays a message: `Contact is already marked as a favourite.`
+    - **3a1.** The system removes the contact from favourite.
+    - **3a2.** The system displays a message: `Remove <Name at index> from favourite.`
     - **Use case ends.**
 
 ---
@@ -734,24 +787,43 @@ otherwise)
 **Guarantees**: The birthday is saved for the contact, and the Salesperson will receive a reminder notification before the birthday.
 
 #### Main Success Scenario (MSS):
-1. The Salesperson issues the `birthday` command with a valid `ContactID` and birthday date.
-2. The system validates the `ContactID` and birthday format.
+1. The Salesperson issues the `birthday` command with a valid `index` and birthday date.
+2. The system validates the `index` and birthday format.
 3. The system stores the birthday for the contact.
-4. The system displays a success message: `Birthday for <Name> logged as <BirthdayDate>.`
+4. The system displays a success message:
+      ```
+      Added birthday to Person: John Doe; Phone: 87431234; Email: john.doe@example.com; Address: Blk 123 Clementi Ave 3, #12-34; Remark: Looking for a 3-bedroom condo; Birthday: 1986-02-24; Remark: Looking for a 3-bedroom condo; Tags: [longTerm][buyer]; DateOfCreation: 2024-01-05; History: Date of Creation: 2024-01-05
+      [2024-02-15]:
+        [2024-02-15] Meeting about 3-bedroom condo
+      ; PropertyList: Property List:
+      Property at 123 Maple Street, Woodlands (Condo): 120.50 sqm, 3 bed, 2 bath - $850000.00
+      Property at 456 Elm Street, Bukit Timah (Landed): 250.00 sqm, 5 bed, 4 bath - $2200000.00
+      ```
 
    **Use case ends.**
 
 ---
 
 #### Extensions:
-- **2a.** The `ContactID` is invalid or does not exist.
-    - **2a1.** The system displays an error message: `Invalid ContactID. Please provide a valid numeric identifier.`
-    - **2a2.** The Salesperson corrects the `ContactID` and reissues the command.
-    - **Use case resumes from Step 2.**
+- **2a.** The `index` is of invalid format (not a positive integer).
+  - **2a1.** The system displays an error message:
+    ```
+    Invalid command format! 
+    birthday: Edits the birthday of the person identified by the index number used in the last person listing. Existing birthday will be overwritten by the input.
+    Parameters: INDEX (must be a positive integer) b/[BIRTHDAY]
+    Example: birthday 1 b/2001-12-12
+    ```
+  - **2a2.** The Salesperson corrects the `index` and reissues the command.
+  - **Use case resumes from Step 2.**
 
-- **2b.** The birthday format is incorrect.
-    - **2b1.** The system displays an error message: `Invalid birthday format. Please use YYYY-MM-DD or MM-DD.`
-    - **2b2.** The Salesperson corrects the birthday format and reissues the command.
+- **2b.** The `index` is out of bound (larger than the last existing contact).
+  - **2b1.** The system displays an error message: `The person index provided is out of bound`
+  - **2b2.** The Salesperson corrects the `index` and reissues the command.
+  - **Use case resumes from Step 2.**
+
+- **2c.** The birthday format is incorrect.
+    - **2c1.** The system displays an error message: `Invalid date format! Please use yyyy-mm-dd.`
+    - **2c2.** The Salesperson corrects the birthday format and reissues the command.
     - **Use case resumes from Step 2.**
 
 ---
@@ -759,15 +831,6 @@ otherwise)
 #### Including Related Use Cases:
 - **UC03 - Log Interaction with Contact**: This use case may be referenced when logging a reminder notification as an interaction.
 - **UC06 - View Full Contact Details**: The Salesperson can view the saved birthday in the full contact profile.
-
----
-
-#### Variations:
-- **1a.** The Salesperson logs a birthday in the format `YYYY-MM-DD` (e.g., `2024-10-15`).
-    - **Use case proceeds normally from Step 2.**
-
-- **1b.** The Salesperson logs a birthday in the format `MM-DD` (e.g., `10-15`).
-    - **Use case proceeds normally from Step 2.**
 
 ---
 
@@ -1140,8 +1203,8 @@ otherwise)
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+<div markdown="span" class="alert alert-info">:information_source: <Strong>Note:</Strong> These instructions only provide a starting point for testers to work on;
+testers are expected to do more exploratory testing.
 
 </div>
 

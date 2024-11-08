@@ -31,12 +31,36 @@ public class HistoryTest {
     }
 
     @Test
-    public void addActivity_beforeDateOfCreation_throwsIllegalArgumentException() {
-        LocalDate dateBeforeCreation = of(2023, 12, 31); // Date before creation date
-        String message = "Task performed before creation date";
+    public void addActivity_emptyMessage_throwsIllegalArgumentException() {
+        LocalDate validDate = of(2024, 1, 10); // Valid date after creation
+        assertThrows(IllegalArgumentException.class, () -> history.addActivity(validDate, ""));
+    }
 
-        // Expect IllegalArgumentException for dates before the creation date
+    @Test
+    public void addActivity_beforeDateOfCreation_throwsIllegalArgumentException() {
+        LocalDate dateBeforeCreation = of(2023, 12, 31); // Date before creation date.
+        String message = "Task performed before creation date";
+        // Expect IllegalArgumentException for  dates before the creation date.
         assertThrows(IllegalArgumentException.class, () -> history.addActivity(dateBeforeCreation, message));
+    }
+
+    @Test
+    public void addActivity_afterToday_throwsIllegalArgumentException() {
+        LocalDate futureDate = LocalDate.now().plusDays(1);
+        String message = "Task in the future";
+        // Expect IllegalArgumentException for dates in the future.
+        assertThrows(IllegalArgumentException.class, () -> history.addActivity(futureDate, message));
+    }
+
+    @Test
+    public void addActivity_onDateOfCreation_success() {
+        // Edge case
+        LocalDate creationDate = of(2024, 1, 1);
+        String message = "Task on creation date";
+        history.addActivity(creationDate, message);
+        List<Activity> activities = history.getActivitiesOnDay(creationDate);
+        assertEquals(1, activities.size());
+        assertEquals(message, activities.get(0).toString());
     }
 
     @Test
@@ -66,7 +90,7 @@ public class HistoryTest {
 
         // Verify the activity
         assertEquals(1, activities.size());
-        assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+        assertEquals(message, activities.get(0).toString());
     }
 
     @Test
@@ -80,7 +104,7 @@ public class HistoryTest {
 
         // Verify the activity
         assertEquals(1, activities.size());
-        assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+        assertEquals(message, activities.get(0).toString());
     }
 
     @Test
@@ -127,7 +151,7 @@ public class HistoryTest {
         // Ensure the new history contains the new activity
         List<Activity> activities = newHistory.getActivitiesOnDay(validDate);
         assertEquals(1, activities.size());
-        assertEquals("[2024-01-10] Completed task A", activities.get(0).toString());
+        assertEquals("Completed task A", activities.get(0).toString());
     }
 
     @Test
@@ -137,25 +161,29 @@ public class HistoryTest {
     }
 
     @Test
-    public void equals_differentObjectSameContent_returnsFalse() {
-        // Create another history object with the same content
-        TreeMap<LocalDate, ArrayList<String>> sameHistoryMap = new TreeMap<>();
-        History sameHistory = new History(sameHistoryMap, LocalDate.of(2024, 1, 1));
-
-        // Even though the content is the same, they are different instances, so should return false
-        assertEquals(history, sameHistory);
-    }
-
-
-    @Test
     public void equals_differentObjectDifferentContent_returnsFalse() {
         // Create another history object with different content
         TreeMap<LocalDate, ArrayList<String>> differentHistoryMap = new TreeMap<>();
         History differentHistory = new History(differentHistoryMap, of(2023, 12, 31));
-
         // Should return false for different content
         assertNotEquals(history, differentHistory);
     }
+
+    @Test
+    public void equals_differentObjectSameContent_returnsTrue() {
+        // Create two different History instances with identical content
+        History history1 = new History(LocalDate.of(2024, 1, 1));
+        History history2 = new History(LocalDate.of(2024, 1, 1));
+
+        LocalDate date = LocalDate.of(2024, 2, 15);
+        String activity = "Meeting about 3-bedroom condo";
+        history1.addActivity(date, activity);
+        history2.addActivity(date, activity);
+
+        // Expect true since the content is the same
+        assertEquals(history1, history2);
+    }
+
 
     @Test
     public void equals_null_returnsFalse() {
@@ -181,12 +209,10 @@ public class HistoryTest {
     public void toString_validHistory_success() {
         LocalDate validDate = of(2024, 1, 10);
         String message = "Completed task A";
-
         // Add an activity
         history.addActivity(validDate, message);
-
         // Verify the toString output
-        String expectedString = "Date of Creation: 2024-01-01\n[2024-01-10]:\n  [2024-01-10] Completed task A\n";
+        String expectedString = "Date of Creation: 2024-01-01\n[2024-01-10]:\n  Completed task A\n";
         assertEquals(expectedString, history.toString());
     }
 }

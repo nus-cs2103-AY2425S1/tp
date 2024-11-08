@@ -5,18 +5,18 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
- * Controller class for displaying a person's details in the UI. Encapsulates
- * all features for the person object, and displays the details line by line.
+ * Controller class for displaying a newPerson's details in the UI. Encapsulates
+ * all features for the newPerson object, and displays the details line by line.
  */
 public class PersonDetails {
     @FXML
     private Label birthdayLabel;
-    @FXML
-    private Label historyLabel;
     @FXML
     private VBox history;
     @FXML
@@ -33,32 +33,33 @@ public class PersonDetails {
     private Label addressLabel;
     @FXML
     private VBox propertyList;
-    @FXML
-    private Label propertyListLabel;
+
+    private Person newPerson;
 
     /**
      * Sets the details of the specified {@code Person} in the respective UI labels.
      *
-     * @param person The person whose details are to be displayed.
-     *               This includes the person's name, phone, email, and address.
+     * @param person The newPerson whose details are to be displayed.
+     *               This includes the newPerson's name, phone, email, and address.
      */
     public void setPersonDetails(Person person) {
         // Check if history and property list are empty
         boolean hasHistory = !person.getHistory().hasNoEntry();
         boolean hasProperty = !person.getPropertyList().isEmpty();
+        this.newPerson = person;
 
-        // Apply the placeholder for history if empty
-        history.getChildren().clear();
         if (hasHistory) {
-            history.getStyleClass().remove("hidden-list");
             person.getHistory().getHistoryEntries().forEach((date, activities) -> {
                 Label historyDateLabel = new Label(date.toString());
                 historyDateLabel.setStyle("-fx-background-color: #293f3f; -fx-text-fill: #D9B08C; -fx-padding: 5");
                 history.getChildren().add(historyDateLabel);
 
                 activities.forEach(entry -> {
-                    Label activityLabel = new Label("\t - " + entry);
-                    activityLabel.setStyle("-fx-font-size: 1em; -fx-text-fill: #D9B08C; -fx-padding: 2");
+                    Label activityLabel = new Label("- " + entry);
+                    activityLabel.setStyle("-fx-font-size: 1em; -fx-text-fill: #D9B08C; -fx-padding: 1 8 1 4");
+                    activityLabel.setWrapText(true);
+                    activityLabel.setMaxWidth(Double.MAX_VALUE);
+                    VBox.setVgrow(activityLabel, Priority.ALWAYS);
                     history.getChildren().add(activityLabel);
                 });
             });
@@ -73,7 +74,6 @@ public class PersonDetails {
         String commonStyle = "-fx-font-size: 13px; -fx-text-fill: #D9B08C;";
 
         // Apply the placeholder for property list if empty
-        propertyList.getChildren().clear();
         if (hasProperty) {
             propertyList.getStyleClass().remove("hidden-list");
             person.getPropertyList().getProperties().forEach(property -> {
@@ -123,13 +123,25 @@ public class PersonDetails {
         birthdayLabel.setText(person.getBirthday().value.toString());
         remarkLabel.setText(person.getRemark().value);
         person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName)).forEach(tag -> {
+                .sorted(Comparator.comparing((Tag tag) -> !tag.tagName.equalsIgnoreCase("favourite")))
+                .forEach(tag -> {
                     Label tagLabel = new Label(tag.tagName);
                     if (tag.tagName.equalsIgnoreCase("favourite")) {
                         tagLabel.getStyleClass().add("favourite-tag");
                     }
                     tags.getChildren().add(tagLabel);
                 });
+    }
+
+    /**
+     * updates the current view window with the contents of the new {@code Person}
+     * @param newPerson
+     */
+    public void refresh(Person newPerson) {
+        propertyList.getChildren().clear();
+        history.getChildren().clear();
+        tags.getChildren().clear();
+        setPersonDetails(newPerson);
     }
 
 }

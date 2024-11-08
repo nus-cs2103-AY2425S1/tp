@@ -25,6 +25,8 @@ public class FavouriteCommand extends Command {
     public static final String COMMAND_WORD = "favourite";
     public static final String MESSAGE_FAVOURITE_SORTED = "Favourite contacts are brought to the list top.";
     public static final String MESSAGE_FAVOURITE_ADDED = "Add %1s to favourite.";
+    public static final String MESSAGE_FAVOURITE_REMOVED = "Remove %1s from favourite.";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks a person as a favourite or sorts all favourite persons to the top of the list.\n"
             + "Two usage formats are supported:\n"
@@ -33,6 +35,7 @@ public class FavouriteCommand extends Command {
             + "   Example: " + COMMAND_WORD + " 1\n"
             + "2. To sort all favourite persons to the top: Use the command without any parameters.\n"
             + "   Example: " + COMMAND_WORD;
+    public static final String MESSAGE_WARNING_ALREADY_FAVOURITE = "This person is already marked as favourite!";
 
     private Index index = null;
 
@@ -76,7 +79,14 @@ public class FavouriteCommand extends Command {
 
             Person personToEdit = lastShownList.get(index.getZeroBased());
             Set<Tag> addedFavouriteTagSet = new HashSet<>(personToEdit.getTags());
-            addedFavouriteTagSet.add(FAVOURITE_TAG);
+            String resultString;
+            if (addedFavouriteTagSet.contains(FAVOURITE_TAG)) {
+                addedFavouriteTagSet.remove(FAVOURITE_TAG);
+                resultString = MESSAGE_FAVOURITE_REMOVED;
+            } else {
+                addedFavouriteTagSet.add(FAVOURITE_TAG);
+                resultString = MESSAGE_FAVOURITE_ADDED;
+            }
             Person editedPerson = new Person(
                     personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                     personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getBirthday(),
@@ -85,8 +95,9 @@ public class FavouriteCommand extends Command {
                     personToEdit.getHistory(),
                     personToEdit.getPropertyList());
             model.setPerson(personToEdit, editedPerson);
+            ViewCommand.updateDisplay(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_FAVOURITE_ADDED, editedPerson));
+            return new CommandResult(String.format(resultString, editedPerson.getFullName()));
         }
     }
     /**

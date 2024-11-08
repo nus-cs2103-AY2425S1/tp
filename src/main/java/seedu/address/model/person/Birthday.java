@@ -12,13 +12,11 @@ import java.time.format.DateTimeParseException;
  */
 public class Birthday {
 
-    public static final String MESSAGE_CONSTRAINTS = "Birthday should be a valid date of the format yyyy-mm-dd and be"
-            + " within reasonable limits.";
+    public static final String MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT = "Birthday cannot be in the future.";
     public static final String BIRTHDAY_REMINDER_HEADER = "Upcoming birthdays: \n";
     public static final String BIRTHDAY_REMINDER_EMPTY = "No upcoming birthdays.\n";
     public static final String CUSTOM_BIRTHDAY_FORMAT = "'s birthday is on "; //Used for displaying a person's birthday
     public static final Birthday EMPTY_BIRTHDAY = Birthday.of("");
-    public static final LocalDate LOWER_BOUND = LocalDate.parse("1908-05-23");
     public final LocalDate value;
 
     /**
@@ -28,7 +26,7 @@ public class Birthday {
      */
     public Birthday(String birthday) {
         requireNonNull(birthday);
-        checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidBirthday(birthday), MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT);
         if (birthday.isEmpty()) {
             value = LocalDate.MIN;
         } else {
@@ -37,18 +35,15 @@ public class Birthday {
     }
 
     /**
-     * Returns true if a given string is a valid birthday.
+     * Returns true if a given string is a valid birthday, which throws {@link DateTimeParseException}
+     * if the birthday format is non-empty and invalid
      */
     public static boolean isValidBirthday(String test) {
         if (test.isEmpty()) {
             return true;
         }
-        try {
-            LocalDate date = LocalDate.parse(test);
-            return !date.isBefore(LOWER_BOUND) && !date.isAfter(LocalDate.now());
-        } catch (DateTimeParseException e) {
-            return false;
-        }
+        LocalDate date = LocalDate.parse(test);
+        return !date.isAfter(LocalDate.now());
     }
 
     /**

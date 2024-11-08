@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 
+import seedu.address.logic.Messages;
 /**
  * The {@code Activity} class represents an activity that occurred on a specific date.
  * Each activity consists of a date and a descriptive message.
@@ -37,12 +38,13 @@ public class Activity {
      * @return A new {@code Activity} object.
      * @throws IllegalArgumentException if the date or message is null.
      */
-    public static Activity of(LocalDate date, String message) {
+    public static Activity of(LocalDate date, String message) throws IllegalArgumentException {
         requireNonNull(date, message);
         if (message.trim().isEmpty()) {
-            throw new IllegalArgumentException("Message cannot be empty.");
+            throw new IllegalArgumentException(Messages.MESSAGE_LOG_MESSAGE_EMPTY);
+        } else {
+            return new Activity(date, message);
         }
-        return new Activity(date, message);
     }
 
     /**
@@ -53,6 +55,6 @@ public class Activity {
      */
     @Override
     public String toString() {
-        return "[" + date + "] " + message;
+        return message;
     }
 }
