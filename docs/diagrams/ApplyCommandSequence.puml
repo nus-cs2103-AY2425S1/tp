@@ -73,6 +73,9 @@ deactivate CommandResult
 ApplyCommand --> LogicManager : r
 deactivate ApplyCommand
 
+ApplyCommand -[hidden]-> LogicManager
+destroy ApplyCommand
+
 [<-- LogicManager
 deactivate LogicManager
 @enduml

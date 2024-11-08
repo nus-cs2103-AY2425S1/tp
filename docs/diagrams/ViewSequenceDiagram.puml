@@ -85,6 +85,9 @@ deactivate CommandResult
 ViewCommand --> LogicManager : r
 deactivate ViewCommand
 
+ViewCommand -[hidden]-> LogicManager
+destroy ViewCommand
+
 [<-- LogicManager
 deactivate LogicManager
 @enduml

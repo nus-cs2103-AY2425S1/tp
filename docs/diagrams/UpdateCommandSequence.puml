@@ -73,6 +73,9 @@ deactivate CommandResult
 UpdateCommand --> LogicManager : r
 deactivate UpdateCommand
 
+UpdateCommand -[hidden]-> LogicManager
+destroy UpdateCommand
+
 [<-- LogicManager
 deactivate LogicManager
 @enduml

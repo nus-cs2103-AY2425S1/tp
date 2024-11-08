@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `InternBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a company**
+**<a id="uc01"></a>Use case: UC01 - Add a company**
 
 **MSS**
 
@@ -520,7 +520,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>
 2.  User requests to delete a specific company in the list.
 3.  InternBuddy deletes the company.
 
@@ -543,7 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **<a id="uc05"></a>Use case: UC05 - Edit company information**
 
-1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>
 2.  User requests to edit a specific company in the list.
 3.  InternBuddy edits the company.
 
@@ -570,9 +570,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 2.
 
-**Use case: UC06 - Edit company application status**
+**<a id="uc06"></a>Use case: UC06 - Edit company application status**
 
-1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)
 2.  User requests to edit a specific company in the list.
 3.  InternBuddy edits the company.
 
