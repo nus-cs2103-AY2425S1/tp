@@ -64,9 +64,9 @@ Commands in EZStates follow the same structure:
 
 #### Reference Types
 
-| Reference | Meaning                                  | Constraints                                                      | Remarks                                                                                                                                               |
-|-----------|------------------------------------------|------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Name      | Name of a client or a listing in a list  | Names should only contain `alphanumerical` characters and spaces | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists <br> Names are also `case-insensitive` |
+| Reference | Meaning                                  | Constraints                                                     | Remarks                                                                                                                                               |
+|-----------|------------------------------------------|-----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX     | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists <br> Names are also `case-insensitive` |
 
 #### Prefix Notation
 
@@ -341,21 +341,21 @@ Commands for creating, updating, and deleting buyers and sellers.
       > ---
 
 - #### Edit Client Command
-    - **Format:** `editclient NAME [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]... [r/REMARK]`
+    - **Format:** `editclient INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...`
     - **Description:** Edits the details of the specified client.
     - **Successful Execution:**
       > ---
-      > **Use Case #1**: Changing name of `Bob` to `Bobby`
+      > **Use Case #1**: Changing name of `Bob` to `Bobby` (Assuming displayed index is 1)
       >
-      > **Input**: `editclient Bob n/Bobby`
+      > **Input**: `editclient 1 n/Bobby`
       >
       > **Output**: Successfully edited Bobby; Phone: 91124444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
       >
       > ---
       >
-      > **Use Case #2**: Changing phone of `Bobby` to `97774444`
+      > **Use Case #2**: Changing phone of `Bobby` to `97774444` 
       >
-      > **Input**: `editclient Bobby p/97774444`
+      > **Input**: `editclient 1 p/97774444`
       >
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
       >
@@ -363,56 +363,43 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Use Case #3**: Removing tags of `Bobby`
       >
-      > **Input**: `editclient Bobby t/`
+      > **Input**: `editclient 1 t/`
       >
       > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
       >
       > ---
 
-    <br>
-    <div class="note" markdown="span">
-    NAME is case-insensitive: 
-    `editclient Bob` = `editclient BOB` = `editclient bOb` _(Not exhaustive)_
-    </div>
-    <br>
-
-    <div class="alert" markdown="span">
-    However, NAME is space-sensitive:
-    `editclient Wen Xuan` != `editclient WenXuan`
-    </div> 
-    <br> 
-
     - **Failed Execution:**
       > ---
-      > **User Error #1**: No name found
+      > **User Error #1**: No index found
       >
       > **Input**: `editclient n/Bobby`
       >
       > **Output**:
       <br> Invalid command format!
       <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
-      <br>Parameters: NAME (must be an existing client) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: editclient John Doe e/johndoe@example.com p/91234567
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: editclient 1 e/johndoe@example.com p/91234567
       >
       > ---
       >
-      > **User Error #2**: Entering invalid name
+      > **User Error #2**: Entering invalid index (negative / incorrect type)
       >
-      > **Input**: `editclient a#2 n/Bobby`
+      > **Input**: `editclient a#2 n/Bobby` OR `editclient -1 n/Bobby`
       >
       > **Output**:
       <br> Invalid command format!
       <br>edit: Edits the details of the person identified by their name. Existing values will be overwritten by the input values.
-      <br>Parameters: NAME (must be an existing client) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
-      <br>Example: editclient John Doe e/johndoe@example.com p/91234567
+      <br>Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]...
+      <br>Example: editclient 1 e/johndoe@example.com p/91234567
       >
       > ---
       > 
-      > **User Error #3**: Entering a name that does not exist in the address book
+      > **User Error #3**: Entering an out-of-bounds index (larger than client size)
       > 
-      > **Input**: `editclient notInAddressBook n/Bobby`
+      > **Input**: `editclient 100 n/Bobby`
       > 
-      > **Output**: This person does not exist in the address book.
+      > **Output**: The person index provided is invalid
       > 
       > ---
 
