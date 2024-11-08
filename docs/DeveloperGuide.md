@@ -665,8 +665,8 @@ testers are expected to do more *exploratory* testing.
 **Command:** `add`<br>
 
 1. Adding a patient with all fields
-   *  * **Prerequisites:**
-       * No persons in the list.
+    * **Prerequisites:**
+        * No patients in the list
          <br><br>
    * **Test Case:** `add n/John Doe i/P00001 w/A1 d/Type 1 Diabetes m/Metformin`<br>
    * **Expected** A patient with the following fields is added to the list:
@@ -679,9 +679,9 @@ testers are expected to do more *exploratory* testing.
        * Appointment: `-`
          <br><br>
 2. Adding a patient without optional fields (DIAGNOSIS and MEDICATION)
-    *  * **Prerequisites:**
-    * No persons in the list.
-      <br><br>
+    * **Prerequisites:**
+        * No patients in the list
+        <br><br>
     * **Test Case:** `add n/Kathy Prince i/P00002/D1 d/Gastrisitis`<br>
     * **Expected** A patient with the following fields is added to the list:
         * Name: `John Doe`
@@ -703,8 +703,8 @@ testers are expected to do more *exploratory* testing.
         * Appointment: `-`
           <br><br>
 3. Adding a patient without optional fields (DIAGNOSIS and MEDICATION)
-    *  * **Prerequisites:**
-    * No persons in the list.
+    * **Prerequisites:**
+        * No patients in the list
       <br><br>
    * **Test Case:** `add n/Emily Tan i/P00004 w/B2`
    * **Expected:** A patient with the following fields is added to the list:
@@ -774,19 +774,19 @@ testers are expected to do more *exploratory* testing.
 
 **Command:** `delete`<br>
 
-1. Deleting a person while all persons are being shown
+1. Deleting a patient while all patients are being shown
     * **Prerequisites:**
         * Non-empty patient list
-        * List all persons using the `list` command
+        * List all patients using the `list` command
           <br><br>
     * **Test Case 1:** `delete 1`
     * **Expected:** First patient is deleted from the list. Details of the deleted contact shown in the status message.
       <br><br>
     * **Test Case 2:** `delete 0`
-    * **Expected:** No person is deleted. Error details shown in the status message.
+    * **Expected:** No patient is deleted. Error details shown in the status message.
       <br><br>
     * **Test Case 3:** Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size)
-    * **Expected:** No person is deleted. Error details shown in the status message.
+    * **Expected:** No patient is deleted. Error details shown in the status message.
       <br><br>
 ### Searching for a patient
 
@@ -854,7 +854,7 @@ testers are expected to do more *exploratory* testing.
 1. Deleting notes from a patient that has notes
     * **Prerequisites:**
         * Non-empty patient list
-        * First person in the list must have notes
+        * First patient in the list must have notes
           <br><br>
     * **Test Case:** `delnotes 1`
     * **Expected:** The first patient in the list is updated with the following fields:
@@ -869,7 +869,7 @@ testers are expected to do more *exploratory* testing.
 2. Deleting notes from a patient who does not have notes
     * **Prerequisites:**
         * Non-empty patient list
-        * First person in the list must not have any notes
+        * First patient in the list must not have any notes
           <br><br>
     * **Test Case:** `delnotes 1`
     * **Expected:** WardWatch throws an error informing the user that the patient does not have any notes to delete.
