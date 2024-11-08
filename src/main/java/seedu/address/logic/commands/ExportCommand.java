@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -23,21 +24,19 @@ public class ExportCommand extends Command {
     public static final String COLUMN_HEADERS = "Name,Phone Number,Email Address,Address,Tags";
     public static final String DEFAULT_DIRECTORY = "./data";
     public static final String FILE_NAME = "ExportedContacts.csv";
+    public static final String MESSAGE_ERROR_EXPORTING_CONTACTS = "An error occurred while exporting contacts";
 
     // Use Paths to handle file paths across different environments
     public static final Path FILE_PATH = Paths.get(DEFAULT_DIRECTORY, FILE_NAME);
-    public static final String PATH = "./data/ExportedContacts.csv";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         List<Person> personList = model.getPersonList();
         try {
             createDirectoryIfNotExists();
             exportContacts(FILE_PATH, personList);
         } catch (IOException e) {
-            // Log a meaningful message or throw the exception to handle it later
-            System.err.println("Error exporting contacts: " + e.getMessage());
-            e.printStackTrace();
+            throw new CommandException(MESSAGE_ERROR_EXPORTING_CONTACTS);
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }
