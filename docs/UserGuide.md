@@ -177,6 +177,7 @@ This detailed guide will walk you through how to make the most of **EduManage** 
 Adds a student to EduManage.
 
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIME]…​`
+* A level must be assigned to a student either in the same command or in an earlier command before they can be assigned a subject.
 
 <box type="tip" seamless>
 
@@ -214,6 +215,7 @@ Updates the details of an existing student in EduManage.
 * Updates the student with the specified `NAME`. The name refers to the full name shown in the displayed student list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* A level must be assigned to a student either in the same command or in an earlier command before they can be assigned a subject.
 
 <box type="tip" seamless>
 
