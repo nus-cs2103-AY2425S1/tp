@@ -177,7 +177,7 @@ Examples:
 
 Format: `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/TAG`
 
-**Tip:** any possible orders and combinations of the 4 parameters NAME, PHONE_NUMBER , ROOM_NUMBER, and TAG are applicable
+**Tip:** any possible orders and combinations of the 4 parameters NAME, PHONE_NUMBER, ROOM_NUMBER, and TAG are applicable
 
 
 * The name search is case-insensitive. e.g `hans` will match `Hans`
