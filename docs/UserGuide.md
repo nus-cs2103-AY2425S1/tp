@@ -115,18 +115,34 @@ Format: `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 * A client can have any number of tags (including 0).<br>
 
-* Names are automatically formatted for you (i.e natural name casing, name ordinals, excess spacing).<br>
+* Names are automatically formatted for you (i.e natural name casing, name ordinals below 10, excess spacing).<br>
 
 * Phone numbers can also take in additional info (i.e `(+XXX)` in front for country codes, `[Note]` behind for any notes).<br>
 
 * Phone numbers also allow up to 1 space between numbers to cater to your formatting style (e.g `123 45 678` and `1234 5678` allowed and recorded verbatim).<br>
+
+* Phone numbers are also automatically formatted (i.e main number ignores non-numeric characters and excess spaces).<br>
 </box>
 
 Examples:
 * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/XYZ Co.`
-* `add n/jOhN   dOE xvii c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (This name is recorded as `John Doe XVII`)
+* `add n/jOhN   dOE vii c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (This name is recorded as `John Doe VII`)
 * `add n/John Doe c/ABC Inc. p/(+65) 987 654 32 [HP] e/johnd@example.com a/John street, block 123, #01-01` (This phone number is recorded exactly as  `(+65) 987 654 32 [HP]`)
+
+<box type="info" seamless>
+
+**Notes on name and phone parsing:** <br>
+
+* Name casing and spacing typos are tedious, hence our autocorrection and duplicate handling.<br>
+
+* It should be impossible for you to meet 10 generations with the same name, hence our limit on the name ordinal.<br>
+
+* Country codes range from +1 to +999, and [Notes] should be for very brief add-on info about the number.<br>
+
+* Phone numbers are very generously autocorrected, but we can't correct the (+XXX) country code and [Notes].
+
+</box>
 
 #### Listing all clients : `list`
 
