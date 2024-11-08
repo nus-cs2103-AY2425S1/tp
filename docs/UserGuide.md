@@ -29,7 +29,7 @@ the process of accessing and updating resident student details. What's more, Dor
     - [Adding a person : `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons--list)
     - [Editing a person : `edit`](#editing-a-person--edit)
-    - [Finding a person : `find`](#locating-persons-by-name-phone-room_number-or-tag-find)
+    - [Finding a person: `find`](#finding-a-person--find)
     - [Deleting a person : `delete`](#deleting-a-person--delete)
     - [Clearing all entries: `clear`](#clearing-all-entries--clear)
     - [Cleaning graduated students : `exit`](#cleaning-graduated-students--clean)
@@ -154,11 +154,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Finding a person: `find`
+### Finding a person : `find`
 
-Format: `find n/NAME p/PHONE_NUMBER  r/ROOM_NUMBER t/Tag`
+Format: `find n/NAME p/PHONE_NUMBER  r/ROOM_NUMBER t/TAG`
 
-* any possible orders and combinations of the 4 parameters NAME, PHONE_NUMBER , ROOM_NUMBER, and TAG are applicable
+**Tip:** any possible orders and combinations of the 4 parameters NAME, PHONE_NUMBER , ROOM_NUMBER, and TAG are applicable
 
 
 * The name search is case-insensitive. e.g `hans` will match `Hans`
@@ -291,11 +291,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add [n/NAME] [p/PHONE_NUMBER ] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER ] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAME] [p/PHONE_NUMBER ] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
 **List**   | `list`
 **Help**   | `help`
 **Clean**  | `clean`
