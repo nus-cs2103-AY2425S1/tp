@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 
 import static java.util.List.of;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.util.SampleDataUtil.getTagSet;
 import static seedu.address.model.util.SampleDataUtil.getTaskSet;
@@ -12,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
