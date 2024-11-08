@@ -444,25 +444,50 @@ Shows a **list of all clients** in Prudy.
 **Policy management commands** allow you to add, edit, and delete policies associated with each client.
 
 #### 5.3.1 Adding a Policy: `add-policy`
-**Adds a policy** to the client at the specified `INDEX`.
+Adds a **new policy** to the client at the specified `INDEX`.
 
-**Format:** `add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]`
+**Format:**
+```shell
+add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXPIRY_DATE]
+```
 
-**Details:**
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Notes:**
 * `INDEX` refers to the position of the client in the displayed client list and must be a positive integer.
-* `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
-* `PREMIUM_AMOUNT` and `COVERAGE_AMOUNT` must be non-negative numerals.
+* `POLICY_TYPE` is can be either `life`, `health`, or `education`.
+* `PREMIUM_AMOUNT` and `COVERAGE_AMOUNT` must be non-negative numerals with at most two decimal places.
 * `EXPIRY_DATE` format is `MM/dd/yyyy`.
-* This command will create a policy with default values for unspecified parameters.
-e.g., if `PREMIUM_AMOUNT` is not specified, it will create a `Policy` with default premiums.
 
-  <box type=info seamless>
-  Info: This command will not allow you to add a policy to the client if he/she already has a policy of similar type.
-  </box>
+</div>
+
+<box type="info" seamless>
+
+**Info:**
+* This command will create a policy with default values for unspecified parameters.
+* For example, if `PREMIUM_AMOUNT` is not specified, it will create a policy with default premiums (The default premium differs for different policies).
+
+</box>
+
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+💡
+**Tip:**
+A client cannot have two or more policies with the same type.
+
+</div>
 
 **Examples:**
 * `add-policy 1 pt/life` Adds a Life policy with default values to the 1st client.
-* `add-policy 2 pt/education pa/100.00 ed/08/24/2024` Adds an Education policy with default coverage, a premium of $100.00 and an expiry date of 08/24/2024.
+* `add-policy 2 pt/education pa/100 ed/08/24/2024` Adds an Education policy with default coverage, a premium of $100 and an expiry date of 08/24/2024.
+
+**On success:**
+```shell
+Added the following policy to NAME:
+
+Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | No claims
+```
 
 #### 5.3.2 Deleting a Policy: `delete-policy`
 **Delete policies** from the client at the specified `INDEX`, and of the specified `POLICY_TYPE`.
