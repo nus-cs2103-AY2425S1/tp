@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX_WILDCARD_COMMAND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_ALL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -32,7 +33,7 @@ public class ResetCommandParserTest {
 
     @Test
     public void parse_missingIndex_failure() {
-        assertParseFailure(parser, TUTORIAL_DESC_ONE, ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, TUTORIAL_DESC_ONE, MESSAGE_INVALID_INDEX_WILDCARD_COMMAND);
     }
 
     @Test
