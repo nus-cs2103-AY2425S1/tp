@@ -166,12 +166,12 @@ Format: `find n/NAME p/PHONE_NUMBER  r/ROOM_NUMBER t/TAG`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * In the name search persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Only full words will be matched for room_number and phone_number, the arguments
+* Only full words will be matched for ROOM_NUMBER and PHONE_NUMBER, the arguments
   should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER 
-* Order of the tags do not matter `t/friends t/colleagues` works the same
+* Order of the TAGs do not matter `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
-* Tags search is case-sensitive `Friends` will not match `friends`
-* In tag search the contacts have to contain all the specified tags in order to match
+* Tag search is case-sensitive `Friends` will not match `friends`
+* In tag search the contacts have to contain all the specified TAGs in order to match
 
 Examples:
 * `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`  
