@@ -152,6 +152,8 @@ Format: `search {FIELD_PREFIX}/KEYWORD [MORE_KEYWORDS]`
 * Substrings will be matched e.g. `Alexander` will be shown with the keyword `Alex`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. The keywords `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* However, the search for events is an exact search criteria, where all characters must match.
+* Any number of words used with the event prefix `ev/` is treated as a single keyword.
 
 Examples:
 * `search a/street avenue`
@@ -159,6 +161,7 @@ Examples:
 * `search n/alice bob charlie`
 * `search p/98765432 12345678`
 * `search t/friend colleague`
+* `search ev/Orbital Workshop`
 
 ### Deleting a person : `delete`
 
