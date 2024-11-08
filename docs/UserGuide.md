@@ -38,7 +38,7 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
 
     - `list` : Lists all contacts.
 
-    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T` : Adds a contact named `John Doe` to the Address Book.
+    - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T` : Adds a contact named `John Doe` to the TAHub.
 
     - `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -88,17 +88,20 @@ This app is designed for Teaching Assistants (TAs) who are experienced with usin
         - Locate the downloaded `.jar` file in your `Downloads` folder.
         - Right-click on the `.jar` file, select Copy.
         - Navigate to the folder where you want to store the TAHub, right-click and select Paste.
+        <br></br>
 
     2. <span style="color: #ff7f0e;"><strong>Mac</strong></span>:
 
         - Open the **Finder** and go to your `Downloads` folder.
         - Right-click (or `Control + Click`) on the `.jar` file and choose Copy.
         - Go to the folder where you want to keep the file, then right-click and select Paste.
+        <br></br>
 
     3. <span style="color: #2ca02c;"><strong>Linux</strong></span>:
         - Open your file manager and go to your `Downloads` directory.
         - Right-click on the `.jar` file, choose Copy.
         - Go to the destination folder, right-click and select Paste.
+        <br></br>
 
 4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
 
@@ -187,7 +190,7 @@ Expected output:
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the TAHub.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL c/COURSE [t/TAG]…​`
 
@@ -206,7 +209,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the TAHub.
 
 Format: `list`
 
@@ -215,7 +218,7 @@ Expected output:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the TAHub.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [c/COURSE] [t/TAG]…​`
 
@@ -255,7 +258,7 @@ Expected output:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the TAHub.
 
 Format: `delete INDEX`
 
@@ -265,7 +268,7 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
+- `list` followed by `delete 2` deletes the 2nd person in the TAHub.
 - `find John` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 Expected output:
@@ -273,7 +276,7 @@ Expected output:
 
 ### Adding or editing a grade: `addGrade`
 
-Adds or updates a grade for a person in the address book. If a grade with the same test name already exists, it will be overwritten.
+Adds or updates a grade for a person in the TAHub. If a grade with the same test name already exists, it will be overwritten.
 
 Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
@@ -293,7 +296,7 @@ Expected output:
 
 ### Deleting a grade from a person: `deleteGrade`
 
-Deletes a grade for a person in the address book.
+Deletes a grade for a person in the TAHub.
 
 Format: `deleteGrade INDEX n/TEST_NAME`
 
@@ -341,7 +344,7 @@ Expected output for `aggGrade median n/midterm`
 
 ### Marking attendance: `mark`
 
-Marks the attendance record for the specified date for a person in the address book. If the attendance record for that date already exists, it will be overwritten.
+Marks the attendance record for the specified date for a person in the TAHub. If the attendance record for that date already exists, it will be overwritten.
 
 Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
 
@@ -360,7 +363,7 @@ Expected output:
 
 ### Unmarking attendance: `unmark`
 
-Deletes the attendance record for the specified date for a person in the address book. All the remaining attendance records for that person will be retained.
+Deletes the attendance record for the specified date for a person in the TAHub. All the remaining attendance records for that person will be retained.
 
 Format: `unmark INDEX d/DATETIME`
 
@@ -393,7 +396,7 @@ Expected output:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the TAHub.
 
 Format: `clear`
 
