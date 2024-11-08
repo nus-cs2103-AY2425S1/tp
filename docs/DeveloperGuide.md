@@ -13,8 +13,18 @@
 
 ## **Acknowledgements**
 
-* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+- **Project Origin**: This project builds on the AddressBook-Level3 project, originally created by the [SE-EDU initiative](https://se-education.org).
+
+- **Libraries Utilized**:
+    - [JavaFX](https://openjfx.io/): Used for building a responsive graphical user interface.
+    - [Jackson](https://github.com/FasterXML/jackson): Used for JSON data processing.
+    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.
+
+- **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
+
+- **References to Other Team Projects (TPs)**:
+    - For our User Guide, we referred to the [AY2425S1-CS2103T-F14a-1 User Guide](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/docs/UserGuide.md) and adapted their Markbind layouts for constraint and tips boxes.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
