@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 The UI consists of a `MainWindow` that is made up of three smaller parts:`CommandBox`, `ResultDisplay` and `PersonListPanel`. All these parts, along with the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F09-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -124,7 +124,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" height="550" />
 
 Note: `Vendor` and `Guest` both extend from the abstract `Person` class, which defines common attributes and behaviors shared by both types of entities.
 
@@ -162,10 +162,16 @@ This section describes some noteworthy details on how certain features are imple
 ### Add Guest feature
 The `add_guest` command creates and adds a new `Guest` object into the address book. The attributes of the `Guest` are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values
 
-The sequence diagram below provides an overview for the execution flow of a `add_guest` command:
+The sequence diagrams below provides an overview for the execution flow of a `add_guest` command:
 <puml src="diagrams/AddGuestSequenceDiagramP1.puml" />
-<puml src="diagrams/AddGuestSequenceDiagramP2.puml" />
-<puml src="diagrams/AddGuestSequenceDiagramP3.puml" />
+
+<p align="center">
+ <img src="diagrams/AddGuestSequenceDiagramP2.puml" alt="Add guest sequence diagram P2">
+</p>
+
+<p align="center"> 
+    <img src="diagrams/AddGuestSequenceDiagramP3.puml" alt="Add guest sequence diagram P3">
+</p>
 
 <box type="info" seamless>
 
@@ -186,11 +192,16 @@ Explanation:
 ### Edit Guest feature
 The `edit_guest` command updates the details of an existing guest in the address book. Users can specify the guest to be edited by providing the index number (positive, starting from 1) of that guest in the displayed guest list. New guest details are specified through prefixes (n/, p/, e/, a/, rsvp/, r/ and t/) and their corresponding values 
 
-The sequence diagram below provides an overview for the execution flow of a `edit_guest` command:
+The sequence diagrams below provides an overview for the execution flow of a `edit_guest` command:
 <puml src="diagrams/EditGuestSequenceDiagramP1.puml" />
-<puml src="diagrams/EditGuestSequenceDiagramP2.puml" />
-<puml src="diagrams/EditGuestSequenceDiagramP3.puml" />
 
+<p align="center">
+    <img src="diagrams/EditGuestSequenceDiagramP2.puml" alt="Edit guest sequence diagram P2">
+</p>
+
+<p align="center">
+    <img src="diagrams/EditGuestSequenceDiagramP3.puml" alt="Edit guest sequence diagram P3">
+</p>
 <box type="info" seamless>
 
 **Note:** The lifeline for `EditGuestCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
@@ -199,7 +210,8 @@ The sequence diagram below provides an overview for the execution flow of a `edi
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
 2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `edit_guest` command, it creates and return an `EditGuestCommandParser` for further parsing.
-3. `EditGuestCommandParser` parses the remaining user input (excluding the `edit_guest` keyword) to extract the prefixes and their values, which are used to create an `EditGuestDescriptor` object that captures the updated information
+3. `EditGuestCommandParser` parses the remaining user input (excluding the `edit_guest` keyword) to extract the prefixes and their values, which are used to create an `EditGuestDescriptor` object that captures the updated information <br>
+<br>
 4. An `EditGuestCommand` is then created with the guest index provided, as well as the new `EditGuestDescriptor` object
 5. `LogicManager` executes the `EditGuestCommand`, which retrieves the guest list from `Model`. The guest index is used to access the target guest to edit. An edited guest with the updated name (from the above example) is then created using the existing target guest and the `EditGuestDescriptor`. The `setPerson` method is then called to replace the existing target guest with the edited guest. Subsequently, the `updateFilteredPersonList` method from `Model` is called to update the filtered list.
 6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
@@ -207,10 +219,13 @@ Explanation:
 ### Find feature
 The `find` command searches for all guests and vendors that match any of the given keyword(s) and displays them. The prefix specified in the command indicates the attribute to be searched. Do note that only one type of prefix should be used for each find command.
 
-The sequence diagram below provides an overview for the execution flow of a `find` command:
+The sequence diagrams below provides an overview for the execution flow of a `find` command:
 <puml src="diagrams/FindSequenceDiagramP1.puml" />
 <puml src="diagrams/FindSequenceDiagramP2.puml" />
-<puml src="diagrams/FindSequenceDiagramP3.puml" />
+
+<p align="center">
+    <img src="diagrams/FindSequenceDiagramP3.puml" alt="Find sequence diagram P3>
+</p>
 
 <box type="info" seamless>
 
@@ -220,9 +235,10 @@ The sequence diagram below provides an overview for the execution flow of a `fin
 Explanation:
 1. The `execute` method of `LogicManager` is called with the user input as the argument to begin the command execution
 2. `AddressBookParser` parses the user input initially. If the user input is identified to be an `find` command, it creates and return an `FindCommandParser` for further parsing.
-3. `FindCommandParser` parses the remaining user input (excluding the `find` keyword) to extract the prefix and its corresponding value. Then, it calls the corresponding parse predicate method to create the corresponding predicate to be used. In the above example, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. 
+3. `FindCommandParser` parses the remaining user input (excluding the `find` keyword) to extract the prefix and its corresponding value. Then, it calls the corresponding parse predicate method to create the corresponding predicate to be used. In the above example, since the name prefix is specified, the `parseNamePredicate` method is called to create `NameContainsKeywordsPredicate`. <br>
+<br>
 4. A `FindCommand` is then created with the new `NameContainsKeywordsPredicate` object and returned.
-4. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the `NameContainsKeywordsPredicate` object as the argument. This method filters the common list of guests and vendors based on the predicate. Guests and vendors whose name (from the above example) matches the given keyword `John` will be kept. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of remaining guest(s) and vendor(s). 
+5. `LogicManager` executes the `FindCommand`, which calls the `updateFilteredPersonList` method of the `Model` with the `NameContainsKeywordsPredicate` object as the argument. This method filters the common list of guests and vendors based on the predicate. Guests and vendors whose name (from the above example) matches the given keyword `John` will be kept. Subsequently, the `FindCommand` calls `getFilteredGuestListCount` and `getFilteredVendorListCount` methods from `Model` to respectively obtain the number of remaining guest(s) and vendor(s). 
 6. A `CommandResult` containing the success message is then returned to the `LogicManager` (and then back to the `UI` component)
 
 
