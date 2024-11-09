@@ -294,12 +294,12 @@ Finds guests whose names contain any of the given keywords.
 
 Format: `find KEYWORD…​`
 
-* The search is case-insensitive. e.g. `alex` will match `Alex`
-* The order of the keywords does not matter. e.g. `Alex Yu` will match `Yu Alex`
+* The search is case-insensitive. e.g. `alex` will match `Alex`.
+* The order of the keywords does not matter. e.g. `Alex Yu` will match `Yu Alex`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Ale` will not match `Alex`
+* Only full words will be matched e.g. `Ale` will not match `Alex`.
 * Guests matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Alex Yu` will return `Alex Yeoh`, `Bernice Yu` and `Terrence Yu`
+  e.g. `Alex Yu` will return `Alex Yeoh`, `Bernice Yu` and `Terrence Yu`.
 * Find will apply to the whole list, not the currently filtered list, 
  ignoring all previous filter and find commands.
  i.e. `find alex bernice` is not the same as `find alex` followed by `find bernice`.
