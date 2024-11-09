@@ -161,6 +161,9 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Extra parameters for commands that do not have said parameters in their command format will be treated as input for the previous parameter.<br>
+ e.g. if the command input is `delete name/John tag/student`, `John tag/student` will be considered as the NAME input.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
@@ -590,6 +593,7 @@ Order of contact details can be reset to default by calling `sort reset`.
 * The sort order persists between commands.
 * The sort order will reset when `sort reset` command is given.
 * The sorting is **case-insensitive**: upper and lower case are treated as the same values.
+* The sorting will be done based on the **lexicographical order** of the field, regardless of text or numbers.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -687,10 +691,10 @@ assignments are present for a person, separate them within the same entry using 
 
 ```
 "Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent"
-"Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","Ex01 | 3.0","5"
-"Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","",""
-"Charlotte Oliveiro","charlotte@example.com","@charlotte","[friend],[colleague]","Charlotte","",""
-"David Li","lidavid@example.com","@david","[family]","david","",""
+"Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","Ex02 | 5.0,Ex01 | 5.0","3"
+"Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","Ex02 | 5.0",""
+"Charlotte Oliveiro","charlotte@example.com","@charlotte","[neighbours]","Charlotte","",""
+"David Li","lidavid@example.com","@david","[family]","david","","5,6,10"
 "Irfan Ibrahim","irfan@example.com","@irfan","[classmates]","Irfan","",""
 "Roy Balakrishnan","royb@example.com","@roy","[colleagues]","Roy","",""
 ```
@@ -784,6 +788,7 @@ Adds an assignment and its grades to a contact.
 * If `assignment.json` is missing from `/data`, KonTActs will load a default assignment database.
 * `assignment.json` needs to be manually created in `/data`.
 * Each assignment must have a unique `ASSIGNMENT_NAME`.
+* If `SCORE` has more than 2 decimal places, its display will be truncated to 2 decimal places.
 
   </box>
 
@@ -808,13 +813,13 @@ Example with the following assignment.json file:
   ]
 }
 ```
-`addGrade n/JohnDoe asgn/Ex01 s/5` will add an assignment name
+`addGrade n/JohnDoe a/Ex01 s/5` will add an assignment name
 Assignment01 with score 5 to contact JohnDoe.
 
-`addGrade n/JohnDoe asgn/Ex01 s/12` will not add the assignment to contact JohnDoe
+`addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
 as the input score is greater than the max, as specified in the `assignment.json` file.
 
-`addGrade n/JohnDoe asgn/Ex05 s/5` will not add the assignment to contact JohnDoe
+`addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
 as the assignment is not specified `assignment.json`
    </box>
 
@@ -832,7 +837,7 @@ Removes an assignment and its grades from a contact.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `removeGrade n/NAME assignment/ASSIGNMENT_NAME`**</md>
+<md>**Format: `removeGrade name/NAME assignment/ASSIGNMENT_NAME`**</md>
 
 </box>
 
@@ -848,9 +853,9 @@ Removes an assignment and its grades from a contact.
 
 Assuming John Doe has `Ex01` assignment with a score of `5`.
 
-Calling `removeGrade n/John Doe asgn/Ex01` will remove the `Ex01` assignment from contact John Doe.
+Calling `removeGrade n/John Doe a/Ex01` will remove the `Ex01` assignment from contact John Doe.
 
-Calling `removeGrade n/John Doe asgn/Ex01` again will throw an error since the assignment has already been removed.
+Calling `removeGrade n/John Doe a/Ex01` again will throw an error since the assignment has already been removed.
 To add a new assignment, refer to [`addGrade`](#adding-grades-to-a-contact-addgrade) command above.
 
 </box>
