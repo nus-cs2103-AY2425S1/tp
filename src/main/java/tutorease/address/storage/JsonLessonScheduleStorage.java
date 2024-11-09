@@ -23,6 +23,11 @@ public class JsonLessonScheduleStorage implements LessonScheduleStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonLessonScheduleStorage.class);
     private Path filePath;
 
+    /**
+     * Constructs a {@code JsonLessonScheduleStorage} with the given file path.
+     *
+     * @param filePath Path to the file.
+     */
     public JsonLessonScheduleStorage(Path filePath) {
         this.filePath = filePath;
     }

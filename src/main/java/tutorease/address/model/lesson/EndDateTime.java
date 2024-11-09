@@ -7,7 +7,10 @@ import static tutorease.address.commons.util.DateTimeUtil.checkValidDateTime;
 import static tutorease.address.commons.util.DateTimeUtil.parseDateTime;
 
 import java.time.LocalDateTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.commons.util.NumbersUtil;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
@@ -21,9 +24,11 @@ public class EndDateTime extends DateTime {
             + "Hours to add must be in multiples of 0.5. \n"
             + "They also have to be more than 0 and be at most 24.";
     public static final String END_DATE_MESSAGE_CONSTRAINTS = String.format(INVALID_DATETIME_FORMAT_MESSAGE, "End");
+    private static Logger logger = LogsCenter.getLogger(EndDateTime.class);
 
     private EndDateTime(LocalDateTime dateTime) throws ParseException {
         super(dateTime);
+        assert dateTime != null : "DateTime cannot be null";
     }
 
     /**
@@ -35,11 +40,15 @@ public class EndDateTime extends DateTime {
      * @throws ParseException If the hours to add is invalid.
      */
     public static EndDateTime createEndDateTime(StartDateTime startDateTime, String hoursToAdd) throws ParseException {
+        logger.log(Level.INFO, "Creating EndDateTime object with start date time: " + startDateTime
+                + " and hours to add: " + hoursToAdd);
+
         requireNonNull(hoursToAdd);
         checkArgument(isValidHoursToAdd(hoursToAdd), HOURS_MESSAGE_CONSTRAINTS);
+
         double parsedHoursToAdd = NumbersUtil.parseDouble(hoursToAdd, HOURS_MESSAGE_CONSTRAINTS);
         LocalDateTime endDateTime = calculateEndDateTime(startDateTime, parsedHoursToAdd);
-
+        logger.log(Level.INFO, "Created EndDateTime: " + endDateTime);
         return new EndDateTime(endDateTime);
     }
 
@@ -51,8 +60,8 @@ public class EndDateTime extends DateTime {
      * @throws ParseException If the string is invalid.
      */
     public static EndDateTime createEndDateTime(String dateTime) throws ParseException {
-        dateTime = dateTime.trim();
         requireNonNull(dateTime);
+        dateTime = dateTime.trim();
         checkValidDateTime(dateTime);
         return new EndDateTime(parseDateTime(dateTime));
     }

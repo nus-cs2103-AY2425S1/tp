@@ -11,6 +11,7 @@ public interface ReadOnlyLessonSchedule {
      * Returns an unmodifiable view of the lesson schedule.
      */
     ObservableList<Lesson> getLessonList();
+
     /**
      * Returns the lesson at the specified index.
      *
