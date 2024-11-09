@@ -65,7 +65,7 @@ the process of accessing and updating resident student details. What's more, Dor
 > You may wish to copy the `.jar` file to the folder you want to use as the _home folder_ for DorManagerPro. All the files needed to run DorManagerPro will be created within the home folder.
 
 4. Open up a command terminal, navigate to the home folder of DorManagerPro with the [`cd` command](https://www.ibm.com/docs/en/aix/7.2?topic=directories-changing-another-directory-cd-command)
-   and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following UI.<br>
+   and type `java -jar DorManagerPro.jar` to run the application. After a few seconds, you should see the following window appear.<br>
    ![Ui](images/TemplateUi.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -317,14 +317,14 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. You can also use the import and export features and manipulate the produced data files from there.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the application window will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -440,3 +440,20 @@ Duplicate handling:
 > * Duplicate handling rationale: It is possible for two residents to have the same emergency contact.
 
 ### Graduation year
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Dorm**: A university or college hall of residence / hotel for students and teachers
+* **Dorm resident**: Student and / or teacher currently staying in a dorm
+* **Dorm manager**: User of Dormanager Pro that has to keep track of the residents in their dorm
+* **Profile**: Collection of information related to a resident that serves as a block of interrelated data in Dormanger Pro. Consists of name, contact number, room number, and emergency contact.
+* **Emergency contact**: Person to contact when the resident related to said contact gets into an emergency (injury, immigration related issues etc.). Consists of a name and contact number.
+* **Dorm room**: Rooms of the dorm where residents stay in. Corresponds to a floor and room number that specify its location.
+* **Graduation Year**: The year during which the student will graduate.
+* **File path**: The path to the file. Is considered to be the location of the file. Can often be found by right-clicking the file as an option in the menu.
+* **JSON**: A type of file like `pdf` and `docx` that is often used for data storage.
+* **Parameter**: A value / characteristic used by a feature that is often defined by the feature, or otherwise by the real world.
