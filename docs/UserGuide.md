@@ -203,7 +203,7 @@ Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TA
 * Persons matching at least one name keyword will be returned (i.e. `OR` search).
   e.g. `find n/Han Bo` will return `Hans Gruber`, `Bo Yang`.
 * Names only need to match the start of a word. e.g. `find n/Han` OR `find n/B` matches `Hans Bo`.
-* Phone number, email, address, project status, payment status, client status and deadline must match the exact string
+* Phone number, email, address, project status, tags, payment status, client status and deadline must match the exact string
   e.g. `ps/in progress` will not match `ps/in prog`.
 * All fields need to be matched for a person to be found
   e.g. `find n/Rah py/paid ps/in progress` matches those clients whose name starts with "Rah", payment status is `paid` and project status is `in progress`.
