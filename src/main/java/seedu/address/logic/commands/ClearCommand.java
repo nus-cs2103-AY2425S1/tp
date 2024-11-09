@@ -13,7 +13,8 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "ClinicBuddy has been cleared!";
+    public static final String MESSAGE_SUCCESS =
+            "ClinicBuddy has been cleared!\n\nBackup %d is created successfully.\nDescription: %s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the address book.";
     public static final String MESSAGE_BACKUP_FAILURE = "Failed to create a backup before clearing records.";
 
@@ -34,13 +35,17 @@ public class ClearCommand extends Command {
         requireNonNull(model);
 
         // Attempt to create a backup before clearing the address book
+        String description = "clear";
+        int backupIndex;
         try {
-            model.backupData("clear");
+            backupIndex = model.backupData(description);
         } catch (CommandException e) {
             throw new CommandException(MESSAGE_BACKUP_FAILURE + " " + e.getMessage());
         }
 
         model.clearAddressBook();
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, backupIndex, description)
+        );
     }
 }

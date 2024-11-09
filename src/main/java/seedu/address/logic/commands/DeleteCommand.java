@@ -27,7 +27,8 @@ public class DeleteCommand extends Command {
             + "Parameters: Index (must be a valid Index in the list)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Patient: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS =
+            "Deleted Patient: %1$s\n\nBackup %2$d is created successfully.\nDescription: %3$s";
 
     private final Nric targetNric;
     private final Index targetIndex;
@@ -77,8 +78,13 @@ public class DeleteCommand extends Command {
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
         }
 
+        String description = "delete_" + personToDelete.getName().fullName;
+        int backupIndex = model.backupData(description);
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete), backupIndex, description)
+        );
     }
 
     @Override

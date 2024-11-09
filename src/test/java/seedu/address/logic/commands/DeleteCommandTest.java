@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -51,44 +50,34 @@ public class DeleteCommandTest {
         StorageManager storage =
                 new StorageManager(addressBookStorage, userPrefsStorage);
 
+        // Initialize the model with the address book and storage
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), storage);
+
+        // Save the initial address book data to the storage file
+        storage.saveAddressBook(model.getAddressBook());
     }
 
     /**
      * Tests the successful deletion of a person given a valid index.
      */
     @Test
-    public void execute_validNricUnfilteredList_success() throws IOException {
-
-        String nricInput = "S1234567Z";
-        Nric nric = new Nric(nricInput);
-
-
-        // Find the person to delete based on their NRIC from the list
-        Person personToDelete = null;
-        for (Person person : model.getFilteredPersonList()) {
-            if (person.getNric().equals(nric)) {
-                personToDelete = person;
-                break;
-            }
-        }
-
-        // Ensure that the person was found, if not throw an exception
-        if (personToDelete == null) {
-            throw new AssertionError("Person with NRIC " + nricInput + " not found in the list");
-        }
+    public void execute_validNricUnfilteredList_success() throws Exception {
+        Person personToDelete = model.getFilteredPersonList().get(0);
+        Nric nric = personToDelete.getNric();
 
         DeleteCommand deleteCommand = new DeleteCommand(nric);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        CommandResult commandResult = deleteCommand.execute(model);
 
-        // Create the expected model after deletion
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getStorage());
-        expectedModel.deletePerson(personToDelete);
+        // Check that the person is deleted from the model
+        assertFalse(model.getAddressBook().getPersonList().contains(personToDelete));
 
-        // Assert that the command executes successfully
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        // Check that the feedback message contains the expected strings
+        assertTrue(commandResult.getFeedbackToUser().contains("Deleted Patient:"));
+        assertTrue(commandResult.getFeedbackToUser().contains(personToDelete.getName().fullName));
+        assertTrue(commandResult
+                .getFeedbackToUser()
+                .contains("Description: delete_" + personToDelete.getName().fullName));
     }
 
     @Test
@@ -100,32 +89,28 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validNricFilteredList_success() throws IOException {
-
-        // Show a filtered list of persons, with the first person being shown
+    public void execute_validNricFilteredList_success() throws Exception {
+        // Filter the list to show only the first person
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // Get the person to delete using the filtered list and their NRIC
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Nric nric = personToDelete.getNric(); // Retrieve the NRIC from the person
+        Person personToDelete = model.getFilteredPersonList().get(0);
+        Nric nric = personToDelete.getNric();
 
-        // Create DeleteCommand using the NRIC instead of the Index
         DeleteCommand deleteCommand = new DeleteCommand(nric);
 
-        // Format the expected success message
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        CommandResult commandResult = deleteCommand.execute(model);
 
-        // Create the expected model and delete the person
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getStorage());
-        expectedModel.deletePerson(personToDelete);
+        // Check that the person is deleted from the address book
+        assertFalse(model.getAddressBook().getPersonList().contains(personToDelete));
 
-        // Update the expected model to show no person after deletion
-        showNoPerson(expectedModel);
+        // Check that the filtered list is now empty
+        assertTrue(model.getFilteredPersonList().isEmpty());
 
-        // Assert that the command executes successfully
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        // Check that the feedback message contains expected strings
+        assertTrue(commandResult.getFeedbackToUser().contains("Deleted Patient:"));
+        assertTrue(commandResult.getFeedbackToUser().contains(personToDelete.getName().fullName));
     }
+
 
     @Test
     public void execute_invalidNricFilteredList_throwsCommandException() {
@@ -144,17 +129,21 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredList_success() throws IOException {
+    public void execute_validIndexUnfilteredList_success() throws Exception {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        CommandResult commandResult = deleteCommand.execute(model);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getStorage());
-        expectedModel.deletePerson(personToDelete);
+        // Check that the person is deleted from the model
+        assertFalse(model.getAddressBook().getPersonList().contains(personToDelete));
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        // Check that the feedback message contains the expected strings
+        assertTrue(commandResult.getFeedbackToUser().contains("Deleted Patient:"));
+        assertTrue(commandResult.getFeedbackToUser().contains(personToDelete.getName().fullName));
+        assertTrue(commandResult
+                .getFeedbackToUser()
+                .contains("Description: delete_" + personToDelete.getName().fullName));
     }
 
     @Test
@@ -166,20 +155,24 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() throws IOException {
+    public void execute_validIndexFilteredList_success() throws Exception {
+        // Filter the list to show only the first person
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = model.getFilteredPersonList().get(0);
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(personToDelete));
+        CommandResult commandResult = deleteCommand.execute(model);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getStorage());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+        // Check that the person is deleted from the address book
+        assertFalse(model.getAddressBook().getPersonList().contains(personToDelete));
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        // Check that the filtered list is now empty
+        assertTrue(model.getFilteredPersonList().isEmpty());
+
+        // Check that the feedback message contains expected strings
+        assertTrue(commandResult.getFeedbackToUser().contains("Deleted Patient:"));
+        assertTrue(commandResult.getFeedbackToUser().contains(personToDelete.getName().fullName));
     }
 
     @Test

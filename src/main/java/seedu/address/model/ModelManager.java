@@ -227,7 +227,6 @@ public class ModelManager implements Model {
      */
     @Override
     public void deletePerson(Person target) {
-        triggerBackup("delete_" + target.getName().fullName, target);
         addressBook.removePerson(target);
         calendar.deleteAppointment(target);
     }
