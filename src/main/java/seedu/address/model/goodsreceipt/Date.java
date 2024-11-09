@@ -11,7 +11,7 @@ import java.time.format.ResolverStyle;
  * Represents a date related to goods.
  */
 public class Date {
-    private static final String DATE_FORMAT_READ = "yyyy-MM-dd HH:mm";
+    private static final String DATE_FORMAT_READ = "uuuu-MM-dd HH:mm";
     private static final String DATE_FORMAT_WRITE = "EEEE : dd MMMM yyyy, hh.mm a";
     public static final String MESSAGE_INVALID_FORMAT =
             String.format("Dates should only be in the format of <%s>.", DATE_FORMAT_READ);

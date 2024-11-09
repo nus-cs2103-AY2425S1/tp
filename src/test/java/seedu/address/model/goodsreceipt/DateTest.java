@@ -18,12 +18,15 @@ public class DateTest {
     }
 
     @Test
-    public void constructor_invalidDateFormats_throwsIllegalArgumentException() {
-        String dateTime = "5";
-        assertThrows(IllegalArgumentException.class, () -> new Date(dateTime));
+    public void constructor_invalidDateFormats_throwsDateTimeParseException() {
+        String dateTime = "2024-12-12";
+        assertThrows(DateTimeParseException.class, () -> new Date(dateTime));
 
         String dateTimeIncorrectFormat = "2024-12-12 11, 00";
         assertThrows(DateTimeParseException.class, () -> new Date(dateTimeIncorrectFormat));
+
+        String dateTimeImpossibleDate = "2024-02-31 11:00";
+        assertThrows(DateTimeParseException.class, () -> new Date(dateTimeImpossibleDate));
     }
 
     @Test
