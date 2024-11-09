@@ -322,6 +322,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
+* 3a. The addition of contact causes duplicate contacts.
+
+    * 3a1. System shows an error message. 
+  
+    Use case resumes at step 2.
+
 
 **Use case 2: Delete contact**
 
@@ -377,10 +383,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
 * 3a. The changed details are invalid.
 
   * 3a1. System shows an error message.
+
+    Use case resumes at step 3.
+
+* 3b. User does not change contact details.
+
+  * 3b1. System shows an error message.
+  
+    Use case resumes at step 3.
+
+* 4a. The edited contact causes duplicate contacts.
+
+  * 4a1. System shows an error message.
 
     Use case resumes at step 3.
 
@@ -490,10 +507,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 3.
 
+* 4a. The edited event causes duplicate events.
+
+    * 4a1. System shows an error message.
+
+      Use case resumes at step 3.
 
 *a At any time, User chooses to cancel the edit.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
