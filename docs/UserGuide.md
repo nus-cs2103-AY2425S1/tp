@@ -133,22 +133,22 @@ Examples:
 
 ### Sorting persons: `sort`
 
-Sorts list of persons alphabetically by specified field.
+Sorts list of persons in ASCII order by each character in specified field.
 
 Format: `sort [name] [role] [phone] [email] [address]`
 
 * Exactly one of the optional fields is required
-* Sorts the list alphabetically by given predicate.
+* Sorts the list in ASCII order by each character.
 * The field refers to attributes used to sort the list by.
-* The field **must be a valid attribute** name, role, phone, email and address only
+* The field **must be a valid attribute** name, role, phone, email or address.
 
 Examples:
-* `sort name` sorts the list alphabetically by name.
+* `sort name` sorts the list in ASCII order by each character in the name.
   ![result for 'sort name'](images/sortMessage.png)
-* `sort role` sorts the list alphabetically by role.
-* `sort phone` sorts the list alphabetically by phone.
-* `sort email` sorts the list alphabetically by email.
-* `sort address` sorts the list alphabetically by address.
+* `sort role` sorts the list in ASCII order by each character in the role.
+* `sort phone` sorts the list in ASCII order by each character in the phone number.
+* `sort email` sorts the list in ASCII order by each character in the email address.
+* `sort address` sorts the list in ASCII order by each character in the address.
 
 ### Deleting a person : `delete`
 
