@@ -28,14 +28,14 @@ The user guide contains formatting to highlight important info. The standards us
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - [Adding an employee : `add`](#adding-an-employee-add)
-  - [Listing all employees : `listemployees`](#listing-all-employees--list)
+  - [Listing all employees : `listemployees`](#listing-all-employees--listemployees)
   - [Editing an employee : `edit`](#editing-an-employee--edit)
   - [Filtering employees by skills : `filter`](#filtering-employees-by-skills-filter)
   - [Locating employees by name : `find`](#locating-employees-by-name-find)
   - [Deleting an employee : `delete`](#deleting-an-employee--delete)
   - [Clearing all employee entries : `clear`](#clearing-all-employee-entries--clear)
   - [Adding a project : `addproject`](#adding-a-project--addproject)
-  - [Listing all projects : `listproject`](#listing-all-projects--listproject)
+  - [Listing all projects : `listprojects`](#listing-all-projects--listprojects)
   - [Listing all members of a project : `listprojectmembers`](#listing-all-members-of-a-project--listprojectmembers)
   - [Editing a project : `editproject`](#editing-a-project--editproject)
   - [Finding projects by name : `findproject`](#finding-projects-by-name--findproject)
@@ -79,7 +79,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
 ### Some commands to get started:
 
-   - `list` : Lists all contacts.
+   - `listemployees` : Lists all employees.
 
    - `add id/1 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
@@ -87,7 +87,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `clear` : Deletes all contacts.
 
-   - `listproject`: Lists all projects.
+   - `listprojects`: Lists all projects.
 
    - `addproject pid/3 pn/Project Charlie`: Adds a project named `Project Charlie`.
 
@@ -127,7 +127,7 @@ Refer to the [Features](#features) below for details of each command.
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `listemployees`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -174,11 +174,11 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all employees : `list`
+### Listing all employees : `listemployees`
 
 Shows a **list of all employees** in the address book.
 
-Format: `list`
+Format: `listemployees`
 
 Expected output:
 - System message noting success
@@ -192,7 +192,7 @@ Expected output:
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`
 
-- Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
@@ -270,12 +270,12 @@ Expected output:
 Format: `delete INDEX`
 
 - Deletes the employee at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
+- The index refers to the index number shown in the displayed employee list.
 - The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
+- `listemployees` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 Expected output:
@@ -320,7 +320,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Listing all projects : `listproject`
+### Listing all projects : `listprojects`
 
 Shows a list of **all stored projects**.
 
@@ -564,14 +564,14 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ### Project Commands
 
-| Action             | Format, Examples                                                                                  |
-|--------------------|---------------------------------------------------------------------------------------------------|
-| **Add Project**    | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`         |
-| **Clear Projects** | `clearproject`                                                                                    |
-| **Delete Project** | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                 |
+| Action             | Format, Examples                                                                                   |
+|--------------------|----------------------------------------------------------------------------------------------------|
+| **Add Project**    | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`          |
+| **Clear Projects** | `clearproject`                                                                                     |
+| **Delete Project** | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                  |
 | **Edit Project**   | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity` |
-| **Find Projects**  | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                          |
-| **List Projects**  | `listproject`                                                                                     |
+| **Find Projects**  | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                           |
+| **List Projects**  | `listprojects`                                                                                     |
 
 [Return to Top](#table-of-contents)
 
