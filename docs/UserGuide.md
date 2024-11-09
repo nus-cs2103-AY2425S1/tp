@@ -409,7 +409,7 @@ Duplicate handling:
 
 ### Emergency contact name
 
-Format: `emergencyName` where `emergencyName` is a sequence of characters corresponding to a student's name
+Format: `emergencyName` where `emergencyName` is a sequence of characters corresponding to a student's emergency contact name
 
 Constraints:
 Same as [Name](#name)
