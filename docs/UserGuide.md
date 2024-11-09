@@ -422,7 +422,7 @@ _Details coming soon ..._
 | **Favourite Contact**   | `favourite`<br> e.g., `favourite`                                                                                                                                        |
 | **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
 --------------------------------------------------------------------------------------------------------------------
-## Planned Enhancement:
+## Coming soon:
 ### Editing and deleting log entries
 Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
 ### Editing and deleting of properties
