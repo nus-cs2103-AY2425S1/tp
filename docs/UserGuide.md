@@ -164,6 +164,7 @@ Examples:
 ### Filter students : `filter`
 
 You can filter students who meet all specified conditions.
+> ⚠️ **Caution:** This actions will only filter students from the data set, not from the person panel list.
 
 Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
