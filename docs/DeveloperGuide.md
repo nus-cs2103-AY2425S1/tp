@@ -459,6 +459,13 @@ Extensions:
 * **Matching Price**: The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
 --------------------------------------------------------------------------------------------------------------------
 
+## **Planned Enhancements**
+
+### Team size: 5
+
+1. ClientGrid fully supports adding buyer (`addbuyer` command) and seller (`addseller` command) names with special characters, accommodating the diverse naming conventions agents encounter. Whether a name includes hyphens (like “Anna-Marie”), cultural identifiers (like "d/o" or "b/o"), or symbols like exclamation marks, ClientGrid captures these accurately. This feature allows agents to store client details without compromise, ensuring names are recorded precisely.
+2. ClientGrid's `filterclient` command will allow it to search for any part of a client’s name, rather than only names that start with the specified input. For example, entering "bob" would retrieve all clients with "bob" anywhere in their names.
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
