@@ -238,12 +238,17 @@ What you'll need:
 - Email: Must follow username@domain format.
 - Date: Format YYYY-MM-DD (e.g. 2024-01-01)
 
+<div class="alert alert-block alert-warning">
+:exclamation: <b>NOTE:</b><br>
+You cannot add a volunteer with the same name as an existing volunteer.
+</div>
+
 Examples:
 * `/v new n/John Doe p/91234567 em/john@gmail.com d/2024-02-02` <br/>creates a volunteer record for `John Doe` with the specified details
 
 Running the command successfully, you should see:
 
-![New Volunteer Demo](images/NewVolunteer.png)
+<img src="images/NewVolunteer.png" alt="New Volunteer Demo" width="500"/>
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -416,6 +421,11 @@ What you'll need:
 - End Time: 24-hour Format HH:mm (e.g., 15:00). Start time must be before end time.
 - Description: Alphanumeric characters and spaces only, maximum of 100 characters. Optional; if blank, omit the des/ prefix.
 
+<div class="alert alert-block alert-warning">
+:exclamation: <b>NOTE:</b><br>
+You cannot add an event with the same name as an existing volunteer.
+</div>
+
 Examples:
 * `/e new n/Blood Donation Drive l/Red Cross Center d/2024-02-14 s/08:30 e/16:00 des/Organizing a blood donation drive` <br/>creates an event record for Blood Donation Drive with the specified details
 * `/e new n/Buffet Lunch l/Blk 123 Woodlands Avenue 12 d/2024-08-09 s/12:00 e/15:00` <br/>creates an event record Buffet Lunch with the specified details
@@ -560,6 +570,8 @@ These known issues are actively being worked on, and we are continuously improvi
 | **[Export database to a CSV file](#export-database-to-a-csv-file--export)**    | `export` |
 | **[View help](#viewing-help--help)**                                           | `help`   |
 | **[Exit the program](#exiting-the-program--exit)**                             | `exit`   |
+
+[Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
 <div style="page-break-after: always;"></div>
 
