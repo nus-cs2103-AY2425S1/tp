@@ -26,16 +26,16 @@ the process of accessing and updating resident student details. What's more, Dor
 
 - [Quick start](#quick-start)
 - [Features](#features)
-    - [Viewing help : `help`](#viewing-help--help)
+    - [Viewing help : `help`](#viewing-help-help)
     - [Adding a person : `add`](#adding-a-person-add)
-    - [Listing all persons : `list`](#listing-all-persons--list)
-    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Listing all persons : `list`](#listing-all-persons-list)
+    - [Editing a person : `edit`](#editing-a-person-edit)
     - [Finding a person : `find`](#finding-a-person-find)
-    - [Deleting a person : `delete`](#deleting-a-person--delete)
-    - [Clearing all entries: `clear`](#clearing-all-entries--clear)
-    - [Cleaning graduated students : `clean`](#cleaning-graduated-students--clean)
-    - [Undoing the previous command : `undo`](#undoing-the-previous-command--undo)
-    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Deleting a person : `delete`](#deleting-a-person-delete)
+    - [Clearing all entries: `clear`](#clearing-all-entries-clear)
+    - [Cleaning graduated students : `clean`](#cleaning-graduated-students-clean)
+    - [Undoing the previous command : `undo`](#undoing-the-previous-command-undo)
+    - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Manual saving : `export`](#manual-saving-export)
     - [Manual data restoration : `import`](#manual-data-restoration-import)
 - [FAQ](#FAQ)
@@ -228,7 +228,7 @@ Format: `clean`
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
-> If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+> If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command-undo) for details!
 
 Example:
 
