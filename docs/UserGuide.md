@@ -178,7 +178,7 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]..
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags, games and preferred times (including 0)   
-**Tip:** Preferred time `pt/` TIME-TIME should be in the form of "HHmm-HHmm" and a valid time range that is not overnight
+**Tip:** `TIME` should be in the form of `HHmm` and `pt/` time ranges must be within the same day (e.g. "2300-0100" is not allowed)
 </box>
 
 Examples:
