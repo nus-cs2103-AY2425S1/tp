@@ -534,15 +534,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   
+   1. Open a terminal and navigate to the folder containing the jar file.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Run the command `java -jar NovaCare.jar`<br>
+       Expected: The app launches with a set of sample patients. The window size may not be optimal.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by running the command `java -jar NovaCare.jar`.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
