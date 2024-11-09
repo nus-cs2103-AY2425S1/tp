@@ -120,7 +120,7 @@ Format: `clear`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
 <br>
-**This command deletes all the clients from Clientele+, archived or otherwise. This cannot be undone.** If you are using this command, be very sure that you know what you are doing!
+**This command permanently deletes all clients from the main client list. This action cannot be undone.** Please ensure you fully understand the consequences before proceeding. This command does not affect clients in the archived list.
 
 </div>
 
@@ -194,7 +194,7 @@ If a client's project deadline has passed and the client status is still `active
 
 ### Locating Clients: `find`
 
-Finds persons in client list who match parameters specified. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
+Finds persons in main client list who match parameters specified. Accepted values are as specified in the [accepted values table above](#accepted-values-by-field).
 
 Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DEADLINE] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS]`
 
@@ -315,17 +315,17 @@ Clientele+ saves you the hassle of sorting the list every time you open the app.
 </div>
 
 ### Archive a Client: `archive`
-Archives a client present in the main address book.
+Archives a client present in the main client list.
 
 Format: `archive INDEX`
 
 * `INDEX` refers to the index number shown in the displayed person list and **must be a positive integer** 1, 2, 3, ...
 
 Examples:
-* `archive 1` archives the first person in the list, removing it and storing it in an archived list
+* `archive 1` archives the first person in the main client list, removing it and storing it in an archived list
 
 ### Unarchive a Client: `unarchive`
-Unarchives a client and adds the client back to the main address book.
+Unarchives a client and adds the client back to the main client list.
 
 Format: `unarchive INDEX`
 
@@ -368,7 +368,7 @@ More Than Three Clients Due Today:
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 
 <br>
-Reminders shown are only for clients in the main list, not for those in the archive list.
+Reminders shown are only for clients in the main client list, not for those in the archive list.
 
 </div>
 
@@ -412,7 +412,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When adding/editing a client after filtering**, the application resets to showing _all_ clients, removing the initial filter. This is because newly added/edited clients may not match the current filter. The remedy is to reapply the initial filter.
+3. **When adding/editing a client after using a `find`/`blacklist`/`whitelist` command**, the application resets to the main client list. This is because newly added/edited clients may not match your previous `find`/`blacklist`/`whitelist` command. The remedy is to reuse the `find`/`blacklist`/`whitelist` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
