@@ -37,7 +37,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             }
         } catch (ParseException pe) {
             if (pe.getMessage().contains("Index")) {
-                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, pe); 
+                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, pe);
             }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
