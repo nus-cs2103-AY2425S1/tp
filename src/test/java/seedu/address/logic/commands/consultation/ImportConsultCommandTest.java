@@ -49,21 +49,21 @@ public class ImportConsultCommandTest {
 
     @BeforeEach
     public void setUp() throws IOException {
-        // Create project directory inside temp folder
-        projectDir = temporaryFolder.resolve("project");
+        // Create project directory inside temp folder using normalized paths
+        projectDir = temporaryFolder.resolve("project").normalize();
         Files.createDirectories(projectDir);
 
         // Create test directory as sibling to project dir
-        testDir = temporaryFolder.resolve("test-files");
+        testDir = temporaryFolder.resolve("test-files").normalize();
         Files.createDirectories(testDir);
 
-        // Use resolve instead of direct path construction for cross-platform compatibility
-        testCsvPath = testDir.resolve("test.csv");
+        // Use normalized paths
+        testCsvPath = testDir.resolve("test.csv").normalize();
         modelStub = new ModelStubWithConsultations();
         filesToCleanup = new ArrayList<>();
 
-        // Create command with normalized path
-        importCommand = new ImportConsultCommand(testCsvPath.normalize().toString());
+        // Create command with normalized path string
+        importCommand = new ImportConsultCommand(testCsvPath.getFileName().toString());
     }
 
     @AfterEach
@@ -226,17 +226,20 @@ public class ImportConsultCommandTest {
 
     @Test
     public void resolveFilePath_homeDirectory() {
-        // Use system-independent path
-        String filename = "test.csv";
-        Path expected = Paths.get(System.getProperty("user.home")).resolve(filename);
-        Path actual = importCommand.resolveFilePath("~" + File.separator + filename);
+        // Use platform-independent path handling
+        String testFile = "test.csv";
+        Path expected = Paths.get(System.getProperty("user.home")).resolve(testFile).normalize();
+        Path actual = importCommand.resolveFilePath("~" + File.separator + testFile).normalize();
         assertEquals(expected.normalize(), actual.normalize());
     }
 
     private void createCsvFile(String content) throws IOException {
-        try (FileWriter writer = new FileWriter(testCsvPath.toFile())) {
-            writer.write(content);
-        }
+        // Ensure parent directories exist
+        Files.createDirectories(testCsvPath.getParent());
+
+        // Create and write file
+        Files.writeString(testCsvPath, content);
+        filesToCleanup.add(testCsvPath);
     }
 
     @Test

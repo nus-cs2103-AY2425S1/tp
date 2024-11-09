@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -150,31 +151,42 @@ public class ImportConsultCommand extends Command {
      * 4. Absolute paths
      */
     protected Path resolveFilePath(String filepath) {
-        // Remove .csv extension if present for consistency
-        String filename = filepath.endsWith(".csv")
-                ? filepath.substring(0, filepath.length() - 4)
-                : filepath;
+        try {
+            // Remove .csv extension if present for consistency
+            String filename = filepath.endsWith(".csv")
+                    ? filepath.substring(0, filepath.length() - 4)
+                    : filepath;
 
-        // Check data directory first
-        Path dataPath = Paths.get("data", filename + ".csv");
-        if (Files.exists(dataPath)) {
+            // Check data directory first
+            Path dataPath = Paths.get("data").resolve(filename + ".csv").normalize();
+            if (Files.exists(dataPath)) {
+                return dataPath;
+            }
+
+            // Then try the direct path in case it's in current directory
+            Path directPath = Paths.get(filename + ".csv").normalize();
+            if (Files.exists(directPath)) {
+                return directPath;
+            }
+
+            // If path starts with ~, expand to user home directory
+            if (filename.startsWith("~")) {
+                return Paths.get(System.getProperty("user.home"))
+                        .resolve(filename.substring(2) + ".csv")
+                        .normalize();
+            }
+
+            // For absolute paths, try to handle them directly
+            if (Paths.get(filepath).isAbsolute()) {
+                return Paths.get(filepath).normalize();
+            }
+
+            // If nothing found, default to data directory path for error message consistency
             return dataPath;
+        } catch (InvalidPathException e) {
+            // If we get an invalid path, fall back to treating it as a simple filename in data directory
+            return Paths.get("data", filepath).normalize();
         }
-
-        // Then try the direct path in case it's in current directory
-        Path directPath = Paths.get(filepath);
-        if (Files.exists(directPath)) {
-            return directPath;
-        }
-
-        // If path starts with ~, expand to user home directory
-        if (filepath.startsWith("~")) {
-            return Paths.get(System.getProperty("user.home"))
-                    .resolve(filepath.substring(2));
-        }
-
-        // If nothing found, default to data directory path for error message consistency
-        return dataPath;
     }
 
     private Path writeErrorFile(List<String[]> errorEntries) throws IOException {
