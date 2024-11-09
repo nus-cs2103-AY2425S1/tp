@@ -17,7 +17,7 @@ BlitzBiz is capable of tracking multiple modes of contact and schedule related m
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)).
+1. Ensure you have Java `17` or above installed in your computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)).
 For Mac users, please ensure you have this specific distribution, which can be installed by following this guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases).
@@ -66,7 +66,7 @@ For example, if the jar file was stored in the `Downloads` folder, the command w
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items in angular brackets means **at least one** of the items must be provided.<br>
-  e.g. `<p/PHONE_NUMER a/ADDRESS>` can be used as `p/91234567`, `a/My Street`, or `p/91234567 a/My Street`, but not ` `.
+  e.g. `<p/PHONE_NUMBER a/ADDRESS>` can be used as `p/91234567`, `a/My Street`, or `p/91234567 a/My Street`, but not ` `.
 
 * Items together in curly square brackets means **one and only one** of them must be given as input.<br>
   e.g. `{n/NAME t/TAG}` can be used as `n/John Doe` or as `t/friends`.
@@ -106,7 +106,7 @@ Format: `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS cs/CAROUSELL_HANDLE fb/FAC
   * Social media handles consists of only Carousell, Facebook and Instagram.
 * Each contact can have **at most one** social media handle
   * If multiple social media handles are provided in the `add` command, only the first in the order of (Carousell, Facebook, Instagram) will be added.
-  * E.g. if a handle for Carousell, `cs/CAROUSELL_HANDLE`, and Instagram, `ig/INSTAGRAM_HANDLE`, was provided in this command, the handle for Carousell will be taken instead of the handle for Facebook.
+  * E.g. if a handle for Carousell, `cs/CAROUSELL_HANDLE`, and Instagram, `ig/INSTAGRAM_HANDLE`, was provided in this command, the handle for Carousell will be taken instead of the handle for Instagram.
 * Adding a schedule is optional, but if a schedule is added, it **must** have a schedule date.
   * If a schedule date is not provided, the fields of schedule name, `sn`, and schedule time, `st` will be ignored.
 * For more details on the argument's constraints, head over to [Argument Constraints Summary](#argument-constraints-summary)
@@ -418,7 +418,7 @@ Format: `help`
 
 Used `delete` on the wrong person by accident? Well don't worry get their information back with the `restore` command!
 
-format: `restore`
+Format: `restore`
 
 <div markdown="block" class="alert alert-info">
 
@@ -447,9 +447,9 @@ Format: `backup`
 
 * Creates a backup save of the current BlitzBiz data
 * Backup BlitzBiz data will be saved as a JSON file at `[JAR file location]/backup/addressbook.json`.
-* If a `addressbook.json` file already exists in the backup folder it will be overwritten.
+* If an `addressbook.json` file already exists in the backup folder it will be overwritten.
 * The backup file can be used in order to restore the BlitzBiz data in case of data loss, or to transfer the data to another device.
-* Users can safely move or copy the backup file to another device, without worrying above negative consequences.
+* Users can safely move or copy the backup file to another device, without worrying about negative consequences.
 
 </div>
 
@@ -520,13 +520,13 @@ to `[JAR file location]/data` in your new computer.
 | Action                                                  | Format, Examples                                                                                                                                                                                                                                                                                  |
 |---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Add](#adding-a-person--add)**                        | `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS [cs/CAROUSELL_HANDLE] [fb/FACEBOOK_HANDLE] [ig/INSTAGRAM_HANDLE]> [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **[Edit](#editing-a-person--edit)**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                       |
+| **[Edit](#editing-a-person--edit)**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                      |
 | **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                             |
 | **[Schedule](#scheduling-contacts--schedule)**          | `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]` <br> e.g., `schedule 1 sn/appointment sd/2024-12-12 st/12:00`                                                                                                                                                           |
 | **[Rename Tag](#renaming-a-tag--renameTag)**            | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`                                                                                                                                                                                                                          |
 | **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                               |
 | **[List](#listing-all-persons--list)**                  | `list`                                                                                                                                                                                                                                                                                            |
-| **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort asc`                                                                                                                                                                                                                                               |
+| **[Sort](#sort-persons-by-name--sort)**                 | `sort {n/[ORDER] sch/[ORDER]}`<br> e.g., `sort n/asc`                                                                                                                                                                                                                                             |
 | **[Filter](#filter-persons-by-tag--filter)**            | `filter [t/TAG]…​`<br> e.g., `filter t/friends`                                                                                                                                                                                                                                                   |
 | **[Find](#locating-persons-by-name--find)**             | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                        |
 | **[Search](#search-persons-by-schedule-range--search)** | `search [b/START_DATETIME] [en/END_DATETIME]`<br> e.g., `search b/2024-11-11 12:00 en/2024-11-12 12:00`                                                                                                                                                                                           |

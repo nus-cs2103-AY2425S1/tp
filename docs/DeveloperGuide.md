@@ -483,7 +483,7 @@ Preconditions: User has deleted a contact
 
 * 3b. The handle does not follow requirements.
     *  3a1. BlitzBiz displays an error message.
-       3a2. User enters new command with new handle.
+    *   3a2. User enters new command with new handle.
        Steps 3a1-3a2 are repeated until the handle entered is valid.
        Use case resumes from step 4.
 
@@ -529,7 +529,7 @@ Preconditions: User has deleted a contact
 * 3b. User enter more than one field to sort by
     * 3b1. BlitzBiz displays error message to inform user
       that it can only sort by one field
-    * 3a2. User enters again with only one field to sort by
+    * 3b2. User enters again with only one field to sort by
       Steps 3b1 is repeated until the format entered is correct.
       Use case resumes from step 4.
 
@@ -608,7 +608,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file 
+       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
