@@ -24,12 +24,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 import seedu.address.ui.Ui.UiState;
@@ -139,6 +141,26 @@ public class TagCommandTest {
     }
 
     @Test
+    public void execute_levelNoneNoneAndUpdatingSubjectOnly_failure() throws CommandException {
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+        System.out.println(lastStudent);
+
+        UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder().withLevel("NONE NONE").build();
+        new TagCommand(lastStudent.getName(), descriptor).execute(model);
+
+        Student lastStudentNoLevel = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+
+        UpdateStudentDescriptor des =
+                new UpdateStudentDescriptorBuilder().withSubjects("Math").build();
+
+        TagCommand tagCommand = new TagCommand(lastStudentNoLevel.getName(), des);
+
+        assertCommandFailure(tagCommand, model, Subject.MESSAGE_LEVEL_NEEDED);
+    }
+
+    @Test
     public void execute_tagStudentWithNoSubjectsWithLevel_success() {
         //Remove subjects of student in address book
         Student studentInList = model.getAddressBook()
@@ -231,7 +253,6 @@ public class TagCommandTest {
         UpdateStudentDescriptor descriptor =
                 new UpdateStudentDescriptorBuilder()
                         .withLevel("NONE NONE")
-                        .withSubjects("MATH")
                         .build();
         TagCommand tagCommand = new TagCommand(studentInList.getName(), descriptor);
         Student finalStudent = new StudentBuilder(studentInList).withLevel("NONE NONE").withSubjects().build();

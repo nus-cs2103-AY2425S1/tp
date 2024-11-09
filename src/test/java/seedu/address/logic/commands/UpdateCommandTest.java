@@ -24,12 +24,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UpdateCommand.UpdateStudentDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.UpdateStudentDescriptorBuilder;
 import seedu.address.ui.Ui.UiState;
@@ -155,7 +157,7 @@ public class UpdateCommandTest {
         Student updatedStudent = studentInList.withLevel("NONE NONE").withSubjects().build();
 
         UpdateStudentDescriptor descriptor =
-                new UpdateStudentDescriptorBuilder().withLevel("NONE NONE").withSubjects("A_MATH", "PHYSICS").build();
+                new UpdateStudentDescriptorBuilder().withLevel("NONE NONE").build();
         UpdateCommand updateCommand = new UpdateCommand(lastStudent.getName(), descriptor);
 
         String expectedMessage =
@@ -165,6 +167,26 @@ public class UpdateCommandTest {
         expectedModel.setStudent(lastStudent, updatedStudent);
 
         assertCommandSuccess(updateCommand, model, expectedMessage, UiState.DETAILS, expectedModel);
+    }
+
+    @Test
+    public void execute_levelNoneNoneAndUpdatingSubjectOnly_failure() throws CommandException {
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+        System.out.println(lastStudent);
+
+        UpdateStudentDescriptor descriptor =
+                new UpdateStudentDescriptorBuilder().withLevel("NONE NONE").build();
+        new UpdateCommand(lastStudent.getName(), descriptor).execute(model);
+
+        Student lastStudentNoLevel = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+
+        UpdateStudentDescriptor des =
+                new UpdateStudentDescriptorBuilder().withSubjects("Math").build();
+
+        UpdateCommand updateCommand = new UpdateCommand(lastStudentNoLevel.getName(), des);
+
+        assertCommandFailure(updateCommand, model, Subject.MESSAGE_LEVEL_NEEDED);
     }
 
     @Test
