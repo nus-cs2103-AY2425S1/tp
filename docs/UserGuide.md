@@ -116,13 +116,16 @@ add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01
 cp/www.google-career-url.com r/Dream job
 ```
 **Outcome**:
-![AddCommandOutcome.png](images%2FAddCommandOutcome.png)
+
+<img src="images/AddCommandOutcome.png" alt="AddCommandOutcome" width="400" height="300"/>
+
 ```
 add n/Meta t/bigTech e/meta@example.com a/Newgate Prison 
 p/1234567 t/salary_high cp/www.meta-career-url.com r/Leading tech company
 ```
 **Outcome**:
-![AddCommandOutcome2.png](images%2FAddCommandOutcome2.png)
+
+<img src="images/AddCommandOutcome.png" alt="AddCommandOutcome2" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -159,7 +162,8 @@ add n/Google p/98765432 e/google@example.com a/John street, block 123,
 #01-01 cp/www.google-career-url.com r/ t/salary_high t/wlb_medium t/difficulty_medium
 ```
 **Outcome**:
-![TagCommandOutcome.png](images%2FTagCommandOutcome.png)
+
+<img src="images/TagCommandOutcome.png" alt="TagCommandOutcome" width="400" height="300"/>
 
 ---
 
@@ -186,7 +190,9 @@ add n/Shopee p/98765432 e/shopee@example.com a/John street, block 123, #01-01 r/
 cp/www.shopee-career-url.com t/period_summer_2025
 ```
 **Outcome**:
-![TagCommandOutcome2.png](images%2FTagCommandOutcome2.png)
+
+<img src="images/TagCommandOutcome2.png" alt="TagCommandOutcome2" width="400" height="300"/>
+
 ##### **Unsupported and Invalid Tag values**
 
 - Only alphanumeric characters are allowed in the tag
@@ -218,14 +224,16 @@ Format: `bookmark INDEX`
 
 - Bookmarks the company at the specified `INDEX`.
 - The index refers to the index number shown in the displayed company list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** 1, 2, 3, …​, 
+  - a negative integer will result in an invalid command message.
 
 **Example**:
 ```dtd
 bookmark 1
 ```
 **Outcome**:
-![BookmarkOutcome.png](images%2FBookmarkOutcome.png)
+
+<img src="images/BookmarkOutcome.png" alt="BookmarkOutcome" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -239,6 +247,7 @@ Format: `removebm INDEX`
 - Removes a bookmark from a bookmarked company at the specified `INDEX`.
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​
+  - a negative integer will result in an invalid command message.
 
 **Example**:
 ```dtd
@@ -246,7 +255,7 @@ removebm 1
 ```
 **Outcome**:
 
-![BookmarkOutcome.png](images%2FBookmarkOutcome.png)
+<img src="images/RemoveBookmarkOutcome.png" alt="RemoveBookmarkOutcome" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -264,7 +273,8 @@ bmlist
 ```
 
 **Outcome**:
-![BookmarkListOutcome.png](images%2FBookmarkListOutcome.png)
+
+<img src="images/BookmarkListOutcome.png" alt="BookmarkListOutcome" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -277,6 +287,8 @@ Edits an existing company in the address book.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG]`
 
 - Edits the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+- The index **must be a positive integer** 1, 2, 3, …​
+  - a negative integer will result in an invalid command message.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the company will be removed; i.e., adding of tags is not cumulative.
@@ -292,9 +304,12 @@ Edits the phone number and email address of the 1st company to be `91234567` and
 **Outcome**:
 
 **Before**
-![EditBefore.png](images%2FEditBefore.png)
+
+<img src="images/EditBefore.png" alt="EditBefore" width="400" height="300"/>
+
 **After**
-![EditAfter.png](images%2FEditAfter.png)
+
+<img src="images/EditAfter.png" alt="EditAfter" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -309,6 +324,7 @@ Format: `remark INDEX r/REMARK`
 - Edits the remark of the company at the specified `INDEX`.
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​
+  - a negative integer will result in an invalid command message.
 - Existing remark will be overwritten by the input.
 - You can remove the company's remark by typing `remark INDEX r/` without specifying any text after `r/`.
 
@@ -322,9 +338,13 @@ Edits the remark of the 2nd company to `Has good internship opportunities`.
 **Outcome**:
 
 **Before**
-![RemarkBefore.png](images%2FRemarkBefore.png)
+
+<img src="images/RemarkBefore.png" alt="RemarkBefore" width="400" height="300"/>
+
 **After**
-![RemarkAfter.png](images%2FRemarkAfter.png)
+
+<img src="images/RemarkAfter.png" alt="RemarkAfter" width="400" height="300"/>
+
 ```
 remark 3 r/
 ```
@@ -333,9 +353,12 @@ Removes the remark from the 3rd company.
 **Outcome**:
 
 **Before**
-![RemoveRemarkBefore.png](images%2FRemoveRemarkBefore.png)
+
+<img src="images/RemoveRemarkBefore.png" alt="RemarkBefore" width="400" height="300"/>
+
 **After**
-![RemoveRemarkAfter.png](images%2FRemoveRemarkAfter.png)
+
+<img src="images/RemoveRemarkAfter.png" alt="RemarkBefore" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -361,7 +384,9 @@ find bigTech
 returns companies with bigTech tag
 
 **Outcome**:
-![Rename.png](images%2FRename.png)
+
+<img src="images/Rename.png" alt="Rename" width="400" height="300"/>
+
 - `find Food` returns `Grab Food` and `Food Panda`
 - `find Shop Fast` returns `Shop Back`, `Fast Food`<br>
 
@@ -378,6 +403,7 @@ Format: `delete INDEX`
 - Deletes the company at the specified `INDEX`.
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​
+  - a negative integer will result in an invalid command message.
 
 Examples:
 
@@ -396,6 +422,7 @@ Format: `status INDEX as/STATUS`
 - Modifies the company at the specified `INDEX`.
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​
+  - a negative integer will result in an invalid command message.
 - The `STATUS` can be any text that describes the current application status.
 - You can remove the company's application status by typing `status INDEX as/` without specifying any text after `as/`.
 
@@ -408,9 +435,12 @@ modifies the application status of the company at index 1 to `Applied`.
 **Outcome**:
 
 **Before**
-![StatusBefore.png](images%2FStatusBefore.png)
+
+<img src="images/StatusBefore.png" alt="StatusBefore" width="400" height="300"/>
+
 **After**
-![StatusAfter.png](images%2FStatusAfter.png)
+
+<img src="images/StatusAfter.png" alt="StatusAfter" width="400" height="300"/>
 
 ```
 status 2 as/
@@ -420,9 +450,12 @@ Removes the remark from the 2nd company.
 **Outcome**
 
 **Before**
-![StatusRemoveBefore.png](images%2FStatusRemoveBefore.png)
+
+<img src="images/StatusRemoveBefore.png" alt="StatusRemoveBefore" width="400" height="300"/>
+
 **After**
-![StatusRemoveAfter.png](images%2FStatusRemoveAfter.png)
+
+<img src="images/StatusRemoveAfter.png" alt="StatusRemoveAfter" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
