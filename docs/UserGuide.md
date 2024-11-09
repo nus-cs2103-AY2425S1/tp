@@ -2,6 +2,7 @@
   layout: default.md
   title: "User Guide"
   pageNav: 3
+
 ---
 
 # LegacyLink User Guide
@@ -98,15 +99,18 @@ Refer to the feature list below for detailed information of each command that is
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* All commands are **case-sensitive**. <br>
+e.g. The command `Help` is different from `help` and therefore, results in an `Unknown command` error
 </panel>
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 ### Listing all persons : `list -p`
 
@@ -118,6 +122,8 @@ Format: `list -p`
 
 **Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
 </box>
+
+![ListPersonCommand.png](images/ListPersonCommand.png)
 
 ### Adding a person: `add`
 
@@ -139,21 +145,21 @@ other information such as their phone number, email, and relationship.
 * **Relationships** should only contain alphabetic characters, and it should not be blank.
 </box>
 
-Valid Examples:
+Valid Example:
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123`
+* This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
+![AddCommandExample1.png](images/AddCommandExample1.png)
 
-This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
-
-
-![addPersonCommandSuccess.png](images/addPersonCommandSuccess.png)
-
-Invalid Examples:
+Invalid Example (Invalid Phone Number):
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12`
+* This command will result in the following error message since the phone number must be at least 3 digits long.
+![AddCommandFailureInvalidPhone.png](images/AddCommandFailureInvalidPhone.png)
 
-This command will result in the following error message since the phone number must be at least 3 digits long.
-
-
-![addPersonCommandFailure.png](images/addPersonCommandFailure.png)
+Invalid Example (Duplicate Persons):
+* Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` already exists.
+* Typing the following command `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be added.
+* The following error message will be shown:
+![AddCommandDuplicate.png](images/AddCommandDuplicate.png)
 
 ### Editing a person : `edit`
 
@@ -161,24 +167,40 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 
+<box type="tip" seamless>
+
+**Tip:**
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Each of the optional fields can only be specified at most once. <br>
+e.g. `edit 1 -n Carmen -n Betsy` is an invalid command.
 * Existing values will be updated to the input values.
+</box>
 
-Examples:
-*  `edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively. Note: this assumes that the address book contains at least 1 person.
-*  `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`. Note: this assumes that the address book contains at least 2 people.
-* `Before:`
-* ![](images/beforeEditCommandExample.png)
-* `After:`
-* ![](images/afterEditCommandExample.png)
+Valid Example (One field edited):
+* `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+* Note: this assumes that the address book contains at least 1 person.
+![EditPersonExample1.png](images/EditPersonExample1.png)
 
-Invalid Examples:
+Valid Example (Multiple fields edited):
+*  `edit 1 -p 91234567 -e johndoe@example.com -rs Father` Edits the phone number, email and relationship of the 1st person to be `91234567`, `johndoe@example.com` and `Father` respectively.
+![EditPersonExample2.png](images/EditPersonExample2.png)
+
+Invalid Example:
 * `edit 1` 
+* This command will result in the following error message since at least one of the optional fields must be provided.
+![EditPersonInvalid1.png](images/EditPersonInvalid1.png)
 
-This command will result in the following error message since at least one of the optional fields must be provided. Note: this assumes that the address book contains at least 1 person.
+Invalid Example (Multiple parameters:
+* `edit 1 -n Carmen -n Betsy -p 12345678 -p 87654321 -e example@email.com -e example@gmail.com -rs Brother -rs Mother`
+* This command will result in the following error message since each value should be edited at most once.
+![EditPersonInvalid2.png](images/EditPersonInvalid2.png)
 
-* ![](images/invalidEditCommandExample.png)
+Invalid Example (Duplicate Persons):
+* Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` exists as the first contact.
+* Attempting to edit another contact: <br> e.g. `edit 2 -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be edited.
+* The following error message will be shown:
+  ![EditPersonDuplicateExample.png](images/EditPersonDuplicateExample.png)
 
 ### Locating persons by name: `find`
 
@@ -186,17 +208,31 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<box type="tip" seamless>
+
+**Tip:**
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no person is found, none of the contacts will be displayed and `0 Persons Listed` is shown to the user.
+* You are recommended to execute `list -p` after `find` command to restore the original list.
+</box>
 
-Examples:
-* `find John` returns anyone with "John" as part of their name
-* `find benny williamson` returns anyone with `Benny` OR `Williamson` as part of their name<br>
-  ![result for 'find benny williamson'](images/findBennyWilliamsonResult.png)
+Valid Example (Found 1 person):
+* `find John` returns anyone with `John` as part of their name
+![FindCommandExample1.png](images/FindCommandExample1.png)
+
+Valid Example (Found multiple person):
+* `find Alex David` returns anyone with `Alex` OR `David` as part of their name<br>
+![FindCommandExample2.png](images/FindCommandExample2.png)
+
+Valid Example (Found no person)
+* `find Magnus` 
+* Note: since there are no `Magnus` in the contact, 0 person is listed.
+![FindCommandExample3.png](images/FindCommandExample3.png)
 
 ### Deleting a person : `delete`
 
@@ -208,25 +244,35 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `Before:`
-* ![](images/beforeDeleteCommandExample.png)
-* `After:`
-* ![](images/afterDeleteCommandExample.png)
+<box type="warning" seamless>
+
+**Warning:**
+* No confirmation message is displayed.
+* This action is irreversible, you will have to use `add` command to add the contact again. 
+</box>
+
+Valid Example:
+* `list -p` followed by `delete 1` deletes the 1st person in the address book.
+![DeleteCommandExample1.png](images/DeleteCommandExample1.png)
+
+Valid Example:
+* `find Charlotte` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* Assumes that only 1 person named `Charlotte` is found by the `find` command.
+![DeleteCommandExample2.png](images/DeleteCommandExample2.png)
 
 ### Clearing all persons : `clear -p`
 
 Clears all persons from the address book.
 
+<box type="warning" seamless>
+
+**Warning:**
+* No confirmation message is displayed.
+* This action is irreversible, you will have to use `add` command to add all the contacts again.
+</box>
+
 Format: `clear -p`
-
-### Clearing all events : `clear -e`
-
-Clears all events from the event book.
-
-Format: `clear -e`
+![ClearPersonCommand.png](images/ClearPersonCommand.png)
 
 ### Listing all events : `list -e`
 
@@ -239,6 +285,8 @@ Format: `list -e`
 **Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
 </box>
 
+![ListEventCommand.png](images/ListEventCommand.png)
+
 ### Adding an event: `event`
 
 Adds an event to the event book.
@@ -249,22 +297,31 @@ Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION
 
 <box type="tip" seamless>
 
-**Tip:** All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
-
-**Tip:** Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
-Note that the indexes are seperated by **spaces**
+**Tip:** 
+* All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
+* The optional field `-a` can only be specified at most once.
+* Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
+Note that the indexes are separated by **spaces**.
 </box>
 
-Examples:
-* `event -n Get Together Party -sd 2023-10-25 -ed 2023-10-27 -l MBS` adds a get together party event to the event book.
-* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3` creates the birthday party event and adds the first 3 people in the contacts book to the event.
+Valid Example:
+* `event -n Get Together Party -sd 2023-10-25 -ed 2023-10-27 -l MBS`. <br> 
+Adds a "Get together party" event to the event book.
+![EventCommandExample1.png](images/EventCommandExample1.png)
 
-Invalid examples:
-* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1, 2, 3` 
+* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3`. <br> 
+Creates the birthday party event and adds the first 3 people in the contacts book to the event.
+![EventCommandExample2.png](images/EventCommandExample2.png)
 
-This command will result in the following error message since the list of indexes must be separated by whitespaces, not anything else like commas.
+Invalid Example:
+* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1, 2, 3`
+* This command will result in the following error message since the list of indexes must be separated by whitespaces, not anything else like commas.
+![EventCommandInvalid1.png](images/EventCommandInvalid1.png)
 
-* ![](images/invalidEventCommandExample.png)
+Invalid Example:
+* `event -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -l Times Square -a 1 2 -a 4 5`
+* This command will result in the following error message since the optional field `-a` is specified more than once.
+![EventCommandInvalid2.png](images/EventCommandInvalid2.png)
 
 ### Updating an event: `update`
 
@@ -274,24 +331,56 @@ Format: `update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [
 
 **Note:** Dates are in (yyyy-mm-dd) format.
 
-**Tip:** The initial `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
+<box type="tip" seamless>
+
+**Tip:** 
+* The initial `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
 remove attendees from an event, and can be used together with the `-a` flag. If you add and remove the same index, the result
 will be adding the person first, then removing them, i.e. they will not be present in the attendee list after the command executes.
-Indexes supplied to the `NEW_ATTENDEES_INDICIES`  and `REMOVED_ATTENDEES INDICES` parameters must be based on existing contacts indexing in the Address Book.
-Note that the indexes are seperated by **spaces**.
+* Indexes supplied to the `NEW_ATTENDEES_INDICIES`  and `REMOVED_ATTENDEES INDICES` parameters must be based on existing contacts indexing in the Address Book.
+* Note that the indexes are separated by **spaces**.
+* Each of the optional fields can only be specified at most once. <br>
+e.g. `update -i 1 -n Birthday Party -n Dinner Party -a 1 -a 2` is an invalid command.
+</box>
 
-Examples:
-* `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -a 1 2 4 5 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
-* `update -i 1 -l NUS` updates only the location of the first event.
+Valid Example (One field updated):
+* `update -i 1 -l NUS UTown` only updates the location of the first event to `NUS UTown`.
+![UpdateEventExample1](images/UpdateEventExample1.png)
 
+Valid Example (Multiple field updated):
+* `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
+![UpdateEventExample2.png](images/UpdateEventExample2.png)
+
+Invalid Example:
+* `update -i 3 -n New Year's Party -n Christmas Celebration -a 1 2 -a 4 5`
+* This command will result in the following error message since the optional fields `-n` and `-a` are specified more than once.
+![UpdateEventInvalid2.png](images/UpdateEventInvalid2.png)
+
+### Clearing all events : `clear -e`
+
+Clears all events from the event book.
+
+<box type="warning" seamless>
+
+**Warning:**
+* No confirmation message is displayed.
+* This action is irreversible, you will have to use `event` command to add all the events again.
+</box>
+
+Format: `clear -e`
+![ClearEventCommand.png](images/ClearEventCommand.png)
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+<box type="warning" seamless>
 
-**Note:** the command is case-sensitive, the exact word 'exit' must be used.
+**Warning:**
+* No confirmation message is displayed.
+</box>
+
+Format: `exit`
 
 ### Saving the data
 
@@ -306,6 +395,7 @@ LegacyLink data are saved automatically as a JSON file `[JAR file location]/data
 **Caution:**
 If your changes to the data file makes its format invalid, LegacyLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the LegacyLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
