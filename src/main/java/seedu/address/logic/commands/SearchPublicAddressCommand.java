@@ -33,17 +33,6 @@ public class SearchPublicAddressCommand extends Command {
     public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND = "Successfully found Persons with public "
         + "address inputted: %1$s";
 
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUBSTRING_SUCCESS = "Successfully found Persons with "
-        + "public "
-        + "address containing the substring inputted:\n%1$s";
-    public static final String MESSAGE_SEARCH_PUBLIC_ADDRESS_SUBSTRING_FAIL =
-        "Can't find any Person with public address of"
-            + " containing the "
-            + "public substring inputted:\n%1$s";
-
-
-    public static final String MESSAGE_ARGUMENTS = "Public Address: %1$s";
-
 
     private final String publicAddressString;
 

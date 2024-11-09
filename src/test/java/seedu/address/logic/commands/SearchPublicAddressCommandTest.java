@@ -7,7 +7,7 @@ import static seedu.address.commons.util.StringUtil.INDENT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND;
-import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
+import static seedu.address.model.addresses.PublicAddress.MESSAGE_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
 import static seedu.address.model.addresses.PublicAddress.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_NOT_FOUND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -57,7 +57,7 @@ public class SearchPublicAddressCommandTest {
             Set.of(new SolAddress(VALID_PUBLIC_ADDRESS_SOL_SUB_STRING, "sub"))));
         String expectedMessage =
             String.format(SearchPublicAddressCommand.MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
-                VALID_PUBLIC_ADDRESS_SOL_SUB_STRING.toLowerCase() + "\n"
+                VALID_PUBLIC_ADDRESS_SOL_SUB_STRING + "\n"
                     + secondPerson.getName() + "\n" + INDENT
                     + publicAddressesComposition.toStringIndented());
 
@@ -83,7 +83,7 @@ public class SearchPublicAddressCommandTest {
 
         String expectedMessage =
             String.format(MESSAGE_SEARCH_PUBLIC_ADDRESS_SUCCESS_FOUND,
-                VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING.toLowerCase() + "\n"
+                VALID_PUBLIC_ADDRESS_SOL_MAIN_STRING + "\n"
                     + secondPerson.getName() + "\n" + INDENT
                     + publicAddressesCompositionSol.toStringIndented() + "\n"
                     + thirdPerson.getName() + "\n" + INDENT
@@ -115,7 +115,7 @@ public class SearchPublicAddressCommandTest {
     @Test
     public void execute_searchPublicAddressOnlySpaces_failure() {
         SearchPublicAddressCommand searchPublicAddressCommand = new SearchPublicAddressCommand("   ");
-        String expectedMessage = MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
+        String expectedMessage = MESSAGE_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
         assertCommandFailure(searchPublicAddressCommand, model, expectedMessage);
     }
 
@@ -123,7 +123,7 @@ public class SearchPublicAddressCommandTest {
     @Test
     public void execute_searchPublicAddressWithSpaces_failure() {
         SearchPublicAddressCommand searchPublicAddressCommand = new SearchPublicAddressCommand(" abc123 ");
-        String expectedMessage = MESSAGE_SEARCH_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
+        String expectedMessage = MESSAGE_PUBLIC_ADDRESS_FAILURE_INVALID_CHAR;
         assertCommandFailure(searchPublicAddressCommand, model, expectedMessage);
     }
 

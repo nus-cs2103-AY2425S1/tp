@@ -41,9 +41,9 @@ public class AddPublicAddressCommandParser implements Parser<AddPublicAddressCom
         requireNonNull(args);
 
         if (ArgumentTokenizer.containsExtraPrefixes(args, PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS_LABEL,
-                PREFIX_PUBLIC_ADDRESS)) {
+            PREFIX_PUBLIC_ADDRESS)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPublicAddressCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPublicAddressCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap =
@@ -65,13 +65,16 @@ public class AddPublicAddressCommandParser implements Parser<AddPublicAddressCom
                 AddPublicAddressCommand.MESSAGE_USAGE));
         }
 
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PUBLIC_ADDRESS_NETWORK, PREFIX_PUBLIC_ADDRESS,
             PREFIX_PUBLIC_ADDRESS_LABEL);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         String networkString = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_NETWORK).get();
-        String publicAddressString = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).get();
+        String publicAddressString = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).get().toLowerCase();
+
+
         String publicAddressLabelString =
             argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get(); // okay as prefixes are confirmed to be present
 
