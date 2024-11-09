@@ -330,8 +330,7 @@ For **all** use cases, the system is **SellSavvy** and the actor is the **user**
 **MSS**
 
 1.  User chooses to view the list of customers.
-2.  SellSavvy retrieves all customers from the data file.
-3.  SellSavvy displays all customers along with their details.
+2. SellSavvy displays all customers along with their details.
 
 Use case ends.
 
@@ -474,8 +473,7 @@ Use case ends.
 
 1. User finds the index of the customer in the customer list whose orders they want to view.
 2. User inputs command to list all orders under the index of customer.
-3. SellSavvy retrieves a list of all orders made by specified customer.
-4. SellSavvy displays the orders in a list in GUI.
+3. SellSavvy displays the orders under the specified customer.
 
 Use case ends.
 
