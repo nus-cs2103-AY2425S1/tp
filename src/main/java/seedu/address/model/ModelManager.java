@@ -24,7 +24,11 @@ import seedu.address.storage.Storage;
 
 /**
  * Represents the in-memory model of the address book data.
- * Handles core functionalities including data management, user preferences, backup, and restore operations.
+ * Provides core functionalities for managing:
+ * - Address book data.
+ * - User preferences.
+ * - Backups and restore operations.
+ * - Filtering and managing the calendar of appointments.
  */
 public class ModelManager implements Model {
 
@@ -37,12 +41,12 @@ public class ModelManager implements Model {
     private final Calendar calendar;
 
     /**
-     * Initializes a ModelManager with the given address book, user preferences, and storage.
-     * Creates a backup manager if storage is provided, otherwise defaults to the "backups" directory.
+     * Constructs a {@code ModelManager} with the specified address book, user preferences, and storage.
+     * If storage is provided, initializes a backup manager for handling backup operations.
      *
-     * @param addressBook The address book data to initialize the model with.
-     * @param userPrefs   The user preferences to initialize the model with.
-     * @param storage     The storage to be used by the model for backup and restore operations.
+     * @param addressBook The address book data to initialize the model with. Cannot be null.
+     * @param userPrefs   The user preferences to initialize the model with. Cannot be null.
+     * @param storage     The storage used for backup and restore operations. Can be null.
      * @throws IOException If an error occurs while initializing the backup manager.
      */
     public ModelManager(ReadOnlyAddressBook addressBook,
@@ -68,7 +72,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Default constructor initializing ModelManager with empty AddressBook and UserPrefs.
+     * Default constructor for initializing an empty address book and user preferences.
      *
      * @throws IOException If an error occurs while initializing the backup manager.
      */
@@ -220,10 +224,9 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes a person from the address book and removes any associated appointment.
-     * Triggers a backup before deletion.
+     * Deletes the specified person from the address book and removes any associated appointments.
      *
-     * @param target The person to delete.
+     * @param target The person to delete. Cannot be null.
      */
     @Override
     public void deletePerson(Person target) {
@@ -322,11 +325,12 @@ public class ModelManager implements Model {
     // ============ Backup and Restore Methods ===========================================================
 
     /**
-     * Creates a backup with an optional action description.
+     * Creates a backup of the current address book data with the specified action description.
+     * The backup is stored with an indexed naming convention.
      *
-     * @param actionDescription The description for the backup action.
+     * @param actionDescription A description of the backup action. Cannot be null or blank.
      * @return The index of the created backup.
-     * @throws CommandException If an error occurs during backup creation.
+     * @throws CommandException If the backup creation fails.
      */
     @Override
     public int backupData(String actionDescription) throws CommandException {
@@ -395,6 +399,20 @@ public class ModelManager implements Model {
         return storage.listBackups();
     }
 
+    /**
+     * Checks whether a backup exists for the specified index.
+     *
+     * @param index The index of the backup to check.
+     * @return True if a backup exists for the index, otherwise false.
+     */
+    @Override
+    public boolean isBackupAvailable(int index) {
+        if (storage == null) {
+            return false;
+        }
+        return backupManager.isBackupAvailable(index);
+    }
+
     // ============ Equality and Storage Access Methods ==================================================
 
     /**
@@ -428,14 +446,6 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && calendar.equals(otherModelManager.calendar);
-    }
-
-    @Override
-    public boolean isBackupAvailable(int index) {
-        if (storage == null) {
-            return false;
-        }
-        return backupManager.isBackupAvailable(index);
     }
 
 }

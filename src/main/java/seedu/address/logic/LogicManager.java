@@ -21,7 +21,12 @@ import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
 /**
- * The main LogicManager of the app.
+ * The main LogicManager of the application.
+ * <p>
+ * The {@code LogicManager} orchestrates the parsing and execution of user commands,
+ * handles confirmation prompts, and manages data persistence by saving the address book
+ * after commands that modify data.
+ * </p>
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
@@ -46,6 +51,19 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /**
+     * Executes the user command and returns the result.
+     * <p>
+     * If a command requires confirmation, the method handles the confirmation flow by
+     * storing the pending command and awaiting the user's response. If the command modifies
+     * data and does not require confirmation, the address book is saved after execution.
+     * </p>
+     *
+     * @param commandText The user input string.
+     * @return The result of command execution.
+     * @throws CommandException If an error occurs during command execution.
+     * @throws ParseException   If an error occurs during parsing.
+     */
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");

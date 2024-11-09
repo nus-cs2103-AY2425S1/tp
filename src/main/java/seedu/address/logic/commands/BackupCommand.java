@@ -6,10 +6,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * BackupCommand is responsible for creating a manual backup of the current data in the application.
- * It allows the user to specify an optional action description to better categorize or identify the backup.
- * When executed, it interacts with the Model to save the backup and returns a success message indicating
- * the backup's index.
+ * Represents a command to create a manual backup of the current data in the application.
+ * <p>
+ * The {@code BackupCommand} allows the user to specify an optional action description to better categorize
+ * or identify the backup. When executed, it interacts with the {@code Model} to save the backup and returns
+ * a success message indicating the backup's index and description.
+ * </p>
  */
 public class BackupCommand extends Command {
     public static final String COMMAND_WORD = "backup";
@@ -21,20 +23,21 @@ public class BackupCommand extends Command {
     private final String actionDescription;
 
     /**
-     * Constructs a BackupCommand with the specified action description.
+     * Constructs a {@code BackupCommand} with the specified action description.
      *
      * @param actionDescription An optional description of the backup action for identification.
+     *                          If null or blank, a default description will be used.
      */
     public BackupCommand(String actionDescription) {
         this.actionDescription = actionDescription;
     }
 
     /**
-     * Executes the command to create a backup, interacting with the Model to save the data.
-     * A success message is returned with the backup's index.
+     * Executes the command to create a backup, interacting with the {@code Model} to save the data.
+     * A success message is returned with the backup's index and description.
      *
-     * @param model The model in which the backup operation is executed.
-     * @return CommandResult indicating the success of the backup operation.
+     * @param model The {@code Model} in which the backup operation is executed. Must not be null.
+     * @return A {@code CommandResult} indicating the success of the backup operation.
      * @throws CommandException If an error occurs during the backup process.
      */
     @Override
@@ -48,11 +51,11 @@ public class BackupCommand extends Command {
     }
 
     /**
-     * Checks if this BackupCommand is equal to another object.
-     * Returns true if both objects are of the same class and their action descriptions match.
+     * Checks whether this {@code BackupCommand} is equal to another object.
+     * Returns {@code true} if both objects are of the same class and their action descriptions match.
      *
      * @param other The object to compare to.
-     * @return true if the given object is equivalent to this command; false otherwise.
+     * @return {@code true} if the given object is equivalent to this command; {@code false} otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -67,7 +70,7 @@ public class BackupCommand extends Command {
     }
 
     /**
-     * Computes the hash code for this BackupCommand based on its action description.
+     * Computes the hash code for this {@code BackupCommand} based on its action description.
      *
      * @return The hash code for this command.
      */

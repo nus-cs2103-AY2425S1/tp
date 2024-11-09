@@ -52,6 +52,15 @@ public class DeleteCommand extends Command {
         this.targetIndex = targetIndex;
         this.targetNric = null; // Null when not using NRIC
     }
+
+    /**
+     * Executes the delete command, removing the specified person from the address book.
+     * A backup is created before the deletion to allow for recovery.
+     *
+     * @param model The {@code Model} in which the command operates. Must not be null.
+     * @return A {@code CommandResult} indicating the success of the deletion.
+     * @throws CommandException If the person cannot be found or if an error occurs during backup.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

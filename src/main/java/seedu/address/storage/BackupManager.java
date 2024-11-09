@@ -19,7 +19,9 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Handles the creation, cleanup, and restoration of backups for the AddressBook data files.
+ * Manages the creation, restoration, and deletion of backups for the AddressBook data files.
+ * Provides methods to ensure backup storage is capped at a maximum of {@link #MAX_BACKUPS},
+ * and supports restoring specific backups by index.
  */
 public class BackupManager {
 
@@ -39,10 +41,10 @@ public class BackupManager {
 
     /**
      * Constructs a {@code BackupManager} with the specified backup directory.
+     * Initializes the directory if it does not exist.
      *
      * @param backupDirectory The path to the backup directory. Must not be {@code null}.
-     * @throws IOException If the backup directory path is {@code null} or if an error occurs
-     *                     while creating the directory.
+     * @throws IOException If the backup directory cannot be created or accessed.
      */
     public BackupManager(Path backupDirectory) throws IOException {
         if (backupDirectory == null) {
@@ -80,14 +82,13 @@ public class BackupManager {
     }
 
     /**
-     * Creates a backup of the specified source file with a fixed index (from 0 to 9),
-     * replacing any existing backup at that index. Each backup file name includes
-     * the action description and a timestamp, allowing easy identification of backups.
+     * Creates a backup of the specified source file.
+     * If the number of backups exceeds {@link #MAX_BACKUPS}, the oldest backup will be deleted.
      *
-     * @param sourcePath        The path of the source file to back up.
-     * @param actionDescription A description of the backup action.
-     * @return The index used for the backup.
-     * @throws IOException If an error occurs during file copying or deletion.
+     * @param sourcePath        The path to the file to back up.
+     * @param actionDescription A description of the action being backed up.
+     * @return The index used for the newly created backup.
+     * @throws IOException If an error occurs during the backup process.
      */
     public int createIndexedBackup(Path sourcePath, String actionDescription) throws IOException {
         String timestamp = LocalDateTime.now().format(FILE_TIMESTAMP_FORMATTER);
@@ -140,10 +141,10 @@ public class BackupManager {
     }
 
     /**
-     * Extracts the index from a backup file name.
+     * Extracts the index from the filename of a backup file.
      *
      * @param backupPath The path of the backup file.
-     * @return The integer index, or -1 if the filename is invalid.
+     * @return The index as an integer, or -1 if the filename format is invalid.
      */
     protected int extractIndex(Path backupPath) {
         String filename = backupPath.getFileName().toString();
@@ -157,10 +158,10 @@ public class BackupManager {
     }
 
     /**
-     * Extracts the action description from a backup file name.
+     * Extracts the action description from the filename of a backup file.
      *
      * @param backupPath The path of the backup file.
-     * @return The action description, or "Unknown" if the filename is invalid.
+     * @return The action description, or "Unknown" if the filename format is invalid.
      */
     protected String extractActionDescription(Path backupPath) {
         String filename = backupPath.getFileName().toString();
@@ -177,7 +178,7 @@ public class BackupManager {
      * Restores a backup by its index.
      *
      * @param index The index of the backup to restore.
-     * @return The path to the backup file.
+     * @return The path to the restored backup file.
      * @throws IOException If the backup file is not found or cannot be accessed.
      */
     public Path restoreBackupByIndex(int index) throws IOException {
@@ -195,13 +196,11 @@ public class BackupManager {
     }
 
     /**
-     * Retrieves a formatted list of all backup files in the backups directory, sorted by timestamp
-     * in descending order so that the most recent backups appear first. Each backup entry includes
-     * the index, description, and timestamp.
+     * Lists all backup files in the directory, formatted for user readability.
+     * Files are sorted by creation time in descending order.
      *
-     * @return A formatted string with each backup file listed on a new line. If no backups are found,
-     *         an empty string is returned.
-     * @throws IOException If an error occurs while accessing or reading the backup directory.
+     * @return A formatted string listing all backups, or an empty string if no backups exist.
+     * @throws IOException If an error occurs while accessing the backup directory.
      */
     public String getFormattedBackupList() throws IOException {
         if (!Files.exists(backupDirectory)) {
@@ -244,10 +243,10 @@ public class BackupManager {
     }
 
     /**
-     * Cleans up old backups, keeping only the most recent `maxBackups`.
+     * Deletes all but the most recent {@code maxBackups}.
      *
      * @param maxBackups The number of backups to retain.
-     * @throws IOException If an error occurs during cleanup.
+     * @throws IOException If an error occurs during deletion.
      */
     public void cleanOldBackups(int maxBackups) throws IOException {
         if (maxBackups < 1) {
@@ -269,7 +268,7 @@ public class BackupManager {
     /**
      * Retrieves the file creation time of a given backup file.
      *
-     * @param path The path to the file.
+     * @param path The path to the backup file.
      * @return The file's creation time.
      */
     private FileTime getFileCreationTime(Path path) {
@@ -282,12 +281,10 @@ public class BackupManager {
     }
 
     /**
-     * Checks whether a backup file exists at the specified index.
-     * This method scans the backup directory to determine if a backup
-     * corresponding to the given index is available.
+     * Checks if a backup file exists at the specified index.
      *
      * @param index The index of the backup to check.
-     * @return {@code true} if a backup exists at the specified index, {@code false} otherwise.
+     * @return {@code true} if the backup exists, {@code false} otherwise.
      * @throws IOException If an error occurs while accessing the backup directory.
      */
     public boolean isBackupAvailable(int index) {

@@ -212,5 +212,11 @@ public interface Model {
      */
     String listAllBackups() throws IOException;
 
+    /**
+     * Checks if a backup exists for the specified index.
+     *
+     * @param index The index of the backup to check.
+     * @return True if the backup exists, otherwise false.
+     */
     boolean isBackupAvailable(int index);
 }
