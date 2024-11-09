@@ -16,6 +16,8 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewCommand parse(String args) throws ParseException {
+        // Ensure arguments are not null
+        assert args != null : "Arguments cannot be null for ViewCommand.";
 
         // Check if the trimmed argument is a valid number (single index)
         if (!args.matches("^\\s\\d+$")) {
@@ -23,8 +25,12 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
 
+        // Ensure that the argument matches the expected regex pattern
+        assert args.trim().matches("^\\d+$") : "Expected a valid single index after 'view'.";
+
         try {
             Index index = ParserUtil.parseIndex(args);
+            assert index != null : "Parsed index cannot be null.";
             return new ViewCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
