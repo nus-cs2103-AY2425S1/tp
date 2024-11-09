@@ -1618,6 +1618,23 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 ### Appendix: Future Enhancements
 
+#### Additional Parameter Constraints
+
+<d-table>
+
+| Parameter        | Description           | Additional Constraints                                                                          | Examples               | 
+|------------------|-----------------------|-------------------------------------------------------------------------------------------------|------------------------|
+| `[NAME]`         | Client's name         | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;` | `Ravi S/O Ramasamy`    |
+| `[PHONE_NUMBER]` | Client's phone number | Accommodate country code, which includes, but not limited to `+65`.                             | `12345678901234567890` |
+| `[TAG]...`       | Client's tag          | Limit up to `20 characters`                                                                     | `12345678901234567890` |
+
+</d-table>
+
+#### `cedit` Command.
+
+The current version of `cedit` only supports replacing all tags with the updated tag provided by the `cedit` command.
+In the future, there will be an update to the `cedit` command, where the client is able to choose which tag to retain as well as which tag to edit.
+
 #### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
