@@ -275,10 +275,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Pros: Provides immediate feedback without requiring extra navigation, allowing users to stay focused on the main UI area.
 * Cons: Only shows the most recent undo/redo action, so it may be limited in providing historical context.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
