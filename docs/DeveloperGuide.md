@@ -466,14 +466,14 @@ Precondition: Student exists in the system.
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-* **1b**. TutorEase detects that the student does not exist.
-    * **1b1**. TutorEase prompts Tutor to key in data for a student that exists.
+* **1b**. TutorEase detects that the student index is invalid.
+    * **1b1**. TutorEase prompts Tutor to key in an index for a student that exists.
     * **1b2**. Tutor enters new data.  
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
 * **1c**. TutorEase detects there is an overlapping lesson at the specified date time.
-    * **1c1**. TutorEase prompts Tutor to key in a new lesson date time.
+    * **1c1**. TutorEase prompts Tutor that there is an overlapping lesson.
     * **1c2**. Tutor enters new data.  
       Steps 1c1 to 1c2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
