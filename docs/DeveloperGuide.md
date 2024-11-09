@@ -785,7 +785,7 @@ testers are expected to do more *exploratory* testing.
 
 4. Editing a customer to a [similar name](#similar) as an existing customer.
 
-    1. 1. Prerequisites:
+    1. Prerequisites:
         - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
         - At least 1 customer is listed.
         - The customer to be edited is not `Betsy Crowe`.
@@ -820,7 +820,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all customers using the `listcustomer` command with at least 1 customer listed.
 
    2. Test case: `deletecustomer 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+      Expected: First customer is deleted from the list. Details of the deleted contact shown in the status message.
 
    3. Test case: `deletecustomer 0`<br>
       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
@@ -834,7 +834,7 @@ testers are expected to do more *exploratory* testing.
        Example: `findcustomer john`
 
     2. Test case: `deletec 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First customer is deleted from the list. Details of the deleted contact shown in the status message.
 
     3. Test case: `deletec 0`<br>
        Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
@@ -872,11 +872,18 @@ testers are expected to do more *exploratory* testing.
 
 4. Adding a [similar order](#similar).
 
-    1. Prerequisites: At least 1 customer is displayed in the customer list. No duplicate/similar order under the first customer.
+    1. Prerequisites: At least 1 customer is displayed in the customer list. No order similar to the order to be added under the first customer.
 
     2. Test case: `addo 1 i/books d/02-03-2026` <br>
        Expected: The order is successfully added.A warning and details of the added order shown in the status message. Customer's order listed in the order list.
 
+5. Adding an order with delivery date elapsed.
+
+    1. Prerequisites: At least 1 customer is displayed in the customer list. No order similar to order to be added under the first customer.
+
+    2. Test case: `addo 1 i/phone d/02-03-2020` <br>
+       Expected: The order is successfully added.A warning and details of the added order shown in the status message. Customer's order listed in the order list.
+   
 ### Listing all orders under a customer.
 
 1. Listing all orders with or without aliases.
@@ -894,86 +901,65 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing an existing order
 
-1. Editing an order while all customers are being shown.
+1. Editing an order while all orders under a customer are being shown.
 
-    1. Prerequisites: All customers are listed using the `listcustomer` command with at least 1 customer listed.
+    1. Prerequisites: All orders under a customer are listed using the `listorder` command with at least 1 order listed. <br>
+       Example: `listorder 1`
 
-    2. Test case: `editcustomer 1 p/91234567 e/johndoe@example.com` <br>
-       Expected: The customer is successfully edited. Details of the edited customer shown in the status message.
+    2. Test case: `editorder 1 i/Light bulb d/21-11-2025` <br>
+       Expected: The order is successfully edited. Details of the edited order shown in the status message.
 
-2. Editing a customer in a filtered list using command aliases.
+2. Editing an order in a filtered order list using command aliases.
 
-    1. Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
-       Example: `findcustomer john`
+    1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed.
+       Example: `filterorder pending`
 
-    2. Test case: `editc 1 n/Betsy Crower t/` <br>
-       Expected: The customer is successfully edited with all tags removed. Details of the edited customer shown in the status message. The displayed customer list got unfiltered.
+    2. Test case: `edito 2 q/22` <br>
+       Expected: The order is successfully edited. Details of the edited order shown in the status message.
 
-3. Editing a customer to an exact same name as an existing customer.
+3. Editing an order to a [similar order](#similar).
 
     1. Prerequisites:
-        - Customer with name `Betsy Crowe` already exist in the address book.
-        - At least 1 customer is listed.
-        - The customer to be edited is not `Betsy Crowe`.
+        - All orders under a customer are listed using the `listorder 1` command with at least 1 order listed.
+        - The first order must be `pending` status.
 
-    2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
-       Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
+    2. Adding the similar order: `addo 1 i/test d/21-11-2025 q/1`
 
-4. Editing a customer to a [similar name](#similar) as an existing customer.
+    3. Test case: `edito 1 i/test d/21-11-2025 q/1` <br>
+       Expected: The order is successfully edit. A warning and details of the edited order shown in the status message.
 
-    1. 1. Prerequisites:
-        - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
-        - At least 1 customer is listed.
-        - The customer to be edited is not `Betsy Crowe`.
-    2. Test case: `editcustomer 1 n/betsy crowe` <br>
-       Expected: The customer is successfully edit. A warning and details of the edited customer shown in the status message.
+4. Editing a customer with invalid inputs.
+    1. Prerequisites: At least one order is listed.
 
-5. Editing a customer to have duplicate tags.
+    2. Test case: `editorder 1 q/1 2` <br>
 
-    1. Prerequisites: At least one customer is listed.
+    3. Expected: No order is edited. Error details shown in the status message. Status bar remains the same.
 
-    2. Test case: `editcustomer 1 t/friends t/friends` <br>
-       Expected: The customer's tag is successfully edited with one of the duplicated tag ignored. Details of the edited customer shown in the status message.
+### Deleting an order
 
-6. Editing a customer to have [similar tags](#similar).
+1. Deleting a customer while all orders under a customer are being shown.
 
-    1. Prerequisites: At least one customer is listed.
+    1. Prerequisites: List all customers using the `listorder 1` command with at least 1 order listed.
 
-    2. Test case: `editcustomer 1 t/Friends t/friends` <br>
-       Expected: The customer is successfully edited with both similar tags.A warning and details of the added customer shown in the status message.
+    2. Test case: `deleteorder 1`<br>
+       Expected: First order is deleted from the list. Details of the deleted contact shown in the status message.
 
-7. Editing a customer with invalid inputs.
-    1. Prerequisites: At least one customer is listed.
-
-    2. Test case: `editcustomer 1 n/@#$%` <br>
-
-    3. Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
-
-### Deleting a customer
-
-1. Deleting a customer while all customers are being shown.
-
-    1. Prerequisites: List all customers using the `listcustomer` command with at least 1 customer listed.
-
-    2. Test case: `deletecustomer 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
-    3. Test case: `deletecustomer 0`<br>
+    3. Test case: `deleteorder 0`<br>
        Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
 
-    4. Other incorrect `deletecustomer` commands to try: `deletecustomer`, `deletecustomer x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect `deleteorder` commands to try: `deleteorder`, `deleteorder x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-2. Deleting a customer from a filtered list using command aliases.
+2. Deleting an order from a filtered list using command aliases.
 
-    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
-       Example: `findcustomer john`
+    1. Prerequisites: Prerequisites: Customers filtered using `filterorder` command with at least 1 order listed.
+       Example: `filterorder pending`
 
-    2. Test case: `deletec 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    2. Test case: `deleteo 1`<br>
+       Expected: First order is deleted from the list. Details of the deleted contact shown in the status message.
 
-    3. Test case: `deletec 0`<br>
-       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+    3. Test case: `deleteo 0`<br>
+       Expected: No order is deleted. Error details shown in the status message. Status bar remains the same.
 
 
 ### Saving data
