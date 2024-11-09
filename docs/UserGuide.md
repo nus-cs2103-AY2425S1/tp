@@ -110,6 +110,12 @@ If you’re comfortable typing, MindMap can help you get contact management task
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="warning" seamless>
+
+Our application uses Singapore’s NRIC system extensively. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nric). 
+
+</box>
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -131,11 +137,31 @@ Examples:
 * `add n/John Doe i/S7783844I p/98765432 e/johnd@example.com a/John street, block 123, #01-01 s/LOW`
 * `add n/Betsy Crowe i/S2202473F e/betsycrowe@example.com a/Newgate Prison p/98765432 s/HIGH`
 
-### Listing all patients : `list`
+### Adding a log: `addlog`
+Creates a new log entry for a specific patient. This command is typically used to keep track of sessions or important notes related to each session.
+**Format**: `addlog i/IDENTITY_NUMBER d/DATE l/LOG_ENTRY`
+* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
+* **DATE** should be in the format `DD-MMM-YYYY`.
+* **LOG_ENTRY** is a description of the session with the patient.
+  Examples:
+* `addlog i/S1234567D d/20 May 2024 s/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
 
-Shows a list of all patients in the app.
+### Adding a log entry: `addentry`
+Creates a separate pop up window to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previous inputted.
 
-Format: `list`
+After entering the details, click the `Save` button to add the log entry to the patient's log list, 'Cancel' to discard the log entry. Closing the window directly will also discard the log entry.
+
+Note that `\n` characters will be interpreted as new lines in the log entry. In both the `LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
+
+> **💡 Tip:** Alternatively, use **"Ctrl + Enter"** to save the log entry on Windows and **"Cmd + Enter"** on Mac.
+
+**Format**: `addentry i/IDENTITY_NUMBER d/DATE`
+* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
+* **DATE** should be in the format `DD-MMM-YYYY`.
+  Examples:
+* `addentry i/S1234567D d/20 May 2024` opens a new window to add a log entry for the contact with NRIC `S1234567D` on the date `20 May 2024`.
+* Example:</br>
+  ![img.png](img.png)
 
 ### Editing a patient : `edit`
 
@@ -154,7 +180,7 @@ Examples:
 
 ### Locating patients by name: `find`
 
-Finds patients whose names contain any of the given keywords. 
+Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -216,6 +242,12 @@ Examples:
 * `delete i/S1234567D` followed by `cancel` cancels the deletion of the patient with NRIC S1234567D in MindMap.
 * `clear` followed by `cancel` cancels the clearing of the MindMap.
 
+### Listing all patients : `list`
+
+Shows a list of all patients in the app.
+
+Format: `list`
+
 ### Listing Session logs: `logs`
 
 Lists all logs of a specific patient. This command will change the window to show the list of logs for a specific patient.
@@ -227,31 +259,12 @@ Example:
 * `logs i/S3054081F` <br>
   ![result for 'logs i/S3054081F'](images/logsAlexResult.png)
 
-### Adding a log: `addlog`
-Creates a new log entry for a specific patient. This command is typically used to keep track of sessions or important notes related to each session.
-**Format**: `addlog i/IDENTITY_NUMBER d/DATE l/LOG_ENTRY`
-* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
-* **DATE** should be in the format `DD-MMM-YYYY`.
-* **LOG_ENTRY** is a description of the session with the patient.
-  Examples:
-* `addlog i/S1234567D d/20 May 2024 s/This should be replaced with the details of the session` adds a log for the contact with NRIC `S1234567D` on the date `20 May 2024`.
----
-### Adding a log entry: `addentry`
-Creates a separate pop up window to add new log entry for a patient, with the corresponding `i/IDENTITY_NUMBER` `d/DATE` previous inputted.
+<box type="info" seamless>
 
-After entering the details, click the `Save` button to add the log entry to the patient's log list, 'Cancel' to discard the log entry. Closing the window directly will also discard the log entry.
+Only the `logs` command will bring up the list of logs for the specific patient. Any other command will bring you right back to the patient list.
 
-Note that `\n` characters will be interpreted as new lines in the log entry. In both the `LOG_ENTRY` fields of both `addlog` and `addentry`. This format will be preserved in the detailed view of the log entry.
+</box>
 
-> **💡 Tip:** Alternatively, use **"Ctrl + Enter"** to save the log entry on Windows and **"Cmd + Enter"** on Mac.
-
-**Format**: `addentry i/IDENTITY_NUMBER d/DATE`
-* **IDENTITY_NUMBER** refers to the unique identifier (e.g., NRIC or FIN) of the patient.
-* **DATE** should be in the format `DD-MMM-YYYY`.
-  Examples:
-* `addentry i/S1234567D d/20 May 2024` opens a new window to add a log entry for the contact with NRIC `S1234567D` on the date `20 May 2024`.
-* Example:</br>
-    ![img.png](img.png)
 
 
 ### Exiting the program : `exit`
@@ -333,7 +346,7 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
 | **Help**      | Displays help message                | `help`                                                                    |                                                                                      |
 
 
- #### Additional Notes
+ ### Additional Notes
 
 * **Parameters**:
     - `n/NAME` - Full name of the patient.
@@ -356,4 +369,27 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
     - **Help** shows a guide for using all commands.
 
 ---
+
+## **Sample NRICs**
+
+<box type="important">
+
+The NRICs listed below are provided solely for testing and validation purposes within this application. Although randomly selected, some NRICs may correspond to real individuals. 
+
+This data is not to be used for any purposes beyond application testing. Unauthorized use or misuse of these NRICs is strictly prohibited and may be subject to legal consequences. We are not responsible for any misuse of this information outside its intended scope.
+
+</box>
+
+| **Index** | **Sample NRIC** |
+|-----------|-----------------|
+| 1         | S0088873G       |
+| 2         | T6498231H       |
+| 3         | F3135002Q       |
+| 4         | G7512224T       |
+| 5         | S0556162J       |
+| 6         | T8346779C       |
+| 7         | F0333341T       |
+| 8         | G7191281M       |
+| 9         | S4998948B       |
+| 10        | T3692411F       |
 
