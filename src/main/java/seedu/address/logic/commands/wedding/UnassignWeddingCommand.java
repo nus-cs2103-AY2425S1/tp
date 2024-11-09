@@ -85,6 +85,7 @@ public class UnassignWeddingCommand extends Command {
         if (!updatedWeddings.containsAll(weddingsToRemove)) {
             throw new CommandException(MESSAGE_WEDDING_NOT_FOUND_IN_CONTACT);
         }
+
         updatedWeddings.removeAll(weddingsToRemove);
 
         Person editedPerson;
