@@ -20,7 +20,7 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.GroupCommand;
-import seedu.address.logic.commands.GroupsCommand;
+import seedu.address.logic.commands.ListGroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -111,8 +111,8 @@ public class AddressBookParser {
             command = new ListCommand();
             break;
 
-        case GroupsCommand.COMMAND_WORD:
-            command = new GroupsCommand();
+        case ListGroupsCommand.COMMAND_WORD:
+            command = new ListGroupsCommand();
             break;
 
         case GroupCommand.COMMAND_WORD:
