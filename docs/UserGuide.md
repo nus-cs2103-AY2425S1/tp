@@ -286,7 +286,7 @@ Deletes a patient and his/her details from MediBase3.
 > 
 > * Deletes the patient with the specified `NRIC` from MediBase3.
 > * The `NRIC` provided must be the full NRIC of the patient to be deleted.
-    >   - e.g. `S1234567A` (not partial, like `S123`).
+>   - e.g. `S1234567A` (not partial, like `S123`).
 > * Refer to [Parameter Details](#parameter-details) for NRIC constraints.
 
 **Example**:
@@ -727,7 +727,9 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
 > 
-> If your changes to the data file makes its format invalid, MediBase3 will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+> When editing the data file, ensure that the application is not running as it might prevent the changes from being reflected correctly.
+> 
+> If your changes to the data file make its format invalid, MediBase3 will discard all data and start with an empty data file on the next run. Hence, it is recommended to take a backup of the file before editing it.
 >
 > Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
