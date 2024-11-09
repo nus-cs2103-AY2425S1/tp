@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/), **a desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still offering the benefits of a Graphical User Interface (GUI). Designed to streamline expense tracking for students, SpleetWaise makes it easy to record and monitor both personal and shared expenses with contacts saved in the address book. With features to keep track of balances with friends, it eliminates the confusion often associated with managing shared costs, providing a clear, organised view of who has owes what. If you can type fast, SpleetWaise lets you handle your contact and expense management tasks more efficiently than traditional GUI apps, offering students a stress-free way to manage their expenses and shared balances with contacts.
+SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/) – **a desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still offering the benefits of a Graphical User Interface (GUI). SpleetWaise makes it easy for students to record transactions with contacts saved in the address book. If you can type fast, SpleetWaise lets you handle your contact and transaction management tasks more efficiently than traditional GUI apps.
 
 :exclamation: **Disclaimer:** Our app currently focuses on supporting NUS students based in Singapore and the English language only. The app may not be suitable for other students outside of Singapore or users who prefer other languages. If users choose to use the app outside of these parameters, it may behave unexpectedly or not as intended.
 
@@ -117,29 +117,27 @@ Format: `addTxn INDEX amt/AMOUNT desc/DESCRIPTION [date/DATE] [status/STATUS] [c
 
 * The `INDEX` refers to the index of the person currently displayed in the address book panel (as we are adding the transaction related to the person).
 * The `AMOUNT` accepts a decimal number with up to 2 decimal places. A `-` symbol should be added before the number to indicate negative amount, indicating the transaction is one that the user owes the chosen person at the index.
+  * Positive Amount Transaction indicates someone owes the user an amount.<br>
+    e.g. `addTxn 1 amt/12.30 desc/John owes me for dinner` indicates that John owes the user S$12.30.
+  * Negative Amount Transaction indicates the user owes someone an amount.<br>
+    e.g. `addTxn 1 amt/-24.30 desc/I owe John for dinner` indicates that the user owes John S$24.30.
 * The `DESCRIPTION` accepts a string of words with a limit of 120 characters.
 * The `DATE` accepts date formatted in the form `DDMMYYYY` i.e.`10102024`.
-* The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'. 
+  * The date is optional. If the date is not provided, the current date will be used.
+* The `STATUS` accepts case-sensitive string that is either 'Done' or 'Not Done'.
+  * The status is optional. If the status is not provided, the default status is 'Not Done'.
 * The `CATEGORY` accepts non-empty strings that are alphanumeric with spaces. Category will be capitalised automatically.
 
-:exclamation: **Important:** Two identical Transactions with duplicated fields cannot be added into the transaction 
-book. The duplicated fields refers to `INDEX`, `AMOUNT`, `DESCRIPTION`, and `DATE` fields where combined it should 
-form a unique transaction.<br>
-> For consistency and to avoid redundancy, identical transactions with the same details across all fields will not be added to the transaction book. This ensures that each entry remains unique, preventing accidental duplicates and maintaining the clarity of transaction records. If a similar transaction occurs on a different occasion in the same day, we recommend users to tweak the desc field to reflect the specific context.<br>
+:exclamation: **Important:** Two identical Transactions with duplicated fields cannot be added into the transaction book. The duplicated fields refers to `INDEX` (where the person at the INDEX is the same), `AMOUNT`, `DESCRIPTION`, and `DATE` fields where combined it should form a unique transaction.<br>
+> For consistency and to avoid redundancy, identical transactions with the same details across all fields will not be added to the transaction book. This ensures that each entry remains unique, preventing accidental duplicates and maintaining the clarity of transaction records. If a similar transaction occurs on a different occasion in the same day with the same contact, we recommend users to tweak the desc field to reflect the specific context.<br>
 >
-> For example:<br> - `addTxn 1 amt/2.50 desc/sean owes me for morning latte`<br>- `addTxn 1 amt/2.50 desc/sean owes me for afternoon latte`
+> For example:<br> - `addTxn 1 amt/2.50 desc/sean owes me for morning latte`<br> - `addTxn 1 amt/2.50 desc/sean owes me for afternoon latte`
 
-:bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
-:bulb: **Tip:** A transaction can have any number of categories (including 0)<br>
-:bulb: **Tip:** Positive Amount Transaction indicates someone owes <ins>_the user_</ins> an amount.<br>
-:bulb: **Tip:** Negative Amount Transaction indicates <ins>_the user_</ins> owes someone an amount.<br>
-:bulb: **Tip:** Categories can be keyed in both lower and upper case without worrying about duplication as it will be capitalised automatically.<br>
-:bulb: **Tip:** By default, a newly created transaction is set as undone - _e.g._ if the transaction is added as `addTxn 1 amt/12.3 desc/John owes me for dinner`, this transaction is not done, John still owes <ins>_the user_</ins>.
 
 Examples:
 
-* `addTxn 1 amt/12.3 desc/John owes me for dinner `
+* `addTxn 1 amt/12.3 desc/John owes me for dinner`
 * `addTxn 1 amt/-24.3 desc/I owe John for dinner date/10102024`
 * `addTxn 1 amt/-24.3 desc/I owe John for dinner date/10102024 cat/FOOD`
 
@@ -211,10 +209,11 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* Only the name is searched.
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`, `Rick` will not match `(Rick)`
+  * Names with special characters such as `John-lary` will be matched with `John-lary` but not `john` or `lary`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -266,6 +265,7 @@ Deletes the specified person from the address book.
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
+   * All transactions associated with the person will also be deleted.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
