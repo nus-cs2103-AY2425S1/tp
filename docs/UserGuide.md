@@ -48,7 +48,7 @@ student contact details!
     - [Enrolling a student : `enroll`](#enroll)
     - [Unenrolling a student : `unenroll`](#unenroll)
   - [ATTENDANCE](#attendance-commands)
-    - [Marking attendance : `attend-present`](#attend-present)
+    - [Marking presence : `attend-present`](#attend-present)
     - [Marking absence : `attend-absent`](#attend-absent)
     - [Clear attendance : `attend-clear`](#attend-clear)
   - [DATA](#data)
@@ -642,7 +642,7 @@ revert the change?<br>
 | Delete Course             | `course-delete c/COURSE_CODE n/NAME`<br>e.g.`course-delete c/CS3230`                                                                                                                                                |
 | Enroll Student            | `enroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`enroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                           |
 | Unenroll Student          | `unenroll m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`unenroll m/A1234567Y c/CS1101S  tut/T10`                                                                                                       |
-| Mark Attendance           | `attend attend m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
+| Mark Present           | `attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend attend m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
 | Mark Absence              | `attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-absent m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
 | Remove Attendance Session | `attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-remove m/A1234567Y c/CS1101S  tut/T10`                                                                                             |
 | Clear Attendance          | `attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`<br>e.g.`attend-clear m/A1234567Y c/CS1101S  tut/T10`                                                                                               |
