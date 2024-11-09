@@ -188,7 +188,7 @@ public class ParserUtilTest {
     public void parseTag_invalidValue_throwsParseException() {
         String tagWithInvalidValue = "key:$value";
         assertThrows(ParseException.class,
-                Tag.MESSAGE_TAG_NAMES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidValue));
+                Tag.MESSAGE_TAG_VALUES_SHOULD_BE_ALPHANUMERIC, () -> ParserUtil.parseTag(tagWithInvalidValue));
     }
 
     @Test
