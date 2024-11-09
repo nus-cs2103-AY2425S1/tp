@@ -23,6 +23,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -169,5 +170,18 @@ public class LogicManagerTest {
         // Verify that the model's state remains unchanged after the failure
         assertEquals(initialAddressBook, model.getAddressBook());
         assertEquals(initialUserPrefs, model.getUserPrefs());
+    }
+
+    @Test
+    public void execute_backupNotAvailable_showsBackupNotAvailableMessage() throws Exception {
+        // Ensure no backups exist at index 0
+
+        // Execute the restore command which should check backup availability
+        String restoreCommandText = "restore 0";
+        CommandResult result = logic.execute(restoreCommandText);
+
+        // Verify that the correct message is displayed
+        String expectedMessage = String.format(RestoreCommand.MESSAGE_BACKUP_NOT_AVAILABLE, 0);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 }

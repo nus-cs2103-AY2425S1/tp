@@ -211,4 +211,6 @@ public interface Model {
      * @throws IOException If an error occurs while accessing the backup directory.
      */
     String listAllBackups() throws IOException;
+
+    boolean isBackupAvailable(int index);
 }

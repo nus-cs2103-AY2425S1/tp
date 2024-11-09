@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -190,6 +191,21 @@ public class BackupManagerTest {
         // Check that the exception message is correct
         assertEquals("Backup file name exceeds the maximum length of 250 characters. Please shorten your description.",
                 exception.getMessage());
+    }
+
+    @Test
+    public void isBackupAvailable_backupExists_returnsTrue() throws IOException {
+        // Create a backup at index 0
+        int backupIndex = backupManager.createIndexedBackup(sourceFile, "testAction");
+
+        // Check if backup is available
+        assertTrue(backupManager.isBackupAvailable(backupIndex));
+    }
+
+    @Test
+    public void isBackupAvailable_backupDoesNotExist_returnsFalse() {
+        // Check for a backup at index 0 when none exists
+        assertFalse(backupManager.isBackupAvailable(0));
     }
 
 }

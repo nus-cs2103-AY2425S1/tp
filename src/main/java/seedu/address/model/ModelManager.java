@@ -444,4 +444,13 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && calendar.equals(otherModelManager.calendar);
     }
+
+    @Override
+    public boolean isBackupAvailable(int index) {
+        if (storage == null) {
+            return false;
+        }
+        return backupManager.isBackupAvailable(index);
+    }
+
 }

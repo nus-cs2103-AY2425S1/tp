@@ -256,6 +256,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isBackupAvailable(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void clearAddressBook() {
             throw new AssertionError("This method should not be called.");
         }

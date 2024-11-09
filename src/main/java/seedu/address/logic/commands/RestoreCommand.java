@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Objects;
 
 import seedu.address.commons.exceptions.DataLoadingException;
@@ -9,45 +8,68 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Represents a command to restore data from a specified backup file based on the provided index.
- * This command interacts with the Model to retrieve and replace the current data with that from the specified backup.
+ * Restores data from a specified backup file based on the provided index.
+ * Includes a confirmation mechanism to prevent accidental data loss.
  */
 public class RestoreCommand extends Command {
 
     public static final String COMMAND_WORD = "restore";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " <index>: Restores a backup by index.\n"
             + "Example: " + COMMAND_WORD + " 3";
+
+    public static final String MESSAGE_CONFIRMATION =
+            "Restoring a backup will overwrite the current patient records."
+                    + " Do you want to continue? (Y to restore, any other key to cancel)";
+
+    public static final String MESSAGE_CANCELLED =
+            "Restore operation cancelled. Consider creating a backup of your current records first.";
+
+    public static final String MESSAGE_BACKUP_REMINDER =
+            "It is recommended to create a backup of the current records before proceeding to prevent data loss.";
+
     public static final String MESSAGE_RESTORE_SUCCESS =
             "Data restored successfully from backup index %d.";
+
     public static final String MESSAGE_RESTORE_FAILURE =
             "Failed to restore from backup. Please ensure the index is correct.";
 
+    public static final String MESSAGE_BACKUP_NOT_AVAILABLE =
+            "Backup file at index %d is not available.";
+
     private final int index;
+    private final boolean isConfirmed;
 
     /**
      * Constructs a RestoreCommand to restore data from a backup file identified by the index.
      *
-     * @param index The index of the backup to restore.
+     * @param index       The index of the backup to restore.
+     * @param isConfirmed Whether the user has confirmed the restoration.
      */
-    public RestoreCommand(int index) {
+    public RestoreCommand(int index, boolean isConfirmed) {
         this.index = index;
+        this.isConfirmed = isConfirmed;
     }
 
-    /**
-     * Executes the RestoreCommand by attempting to restore data from the specified backup.
-     * If the operation is successful, a success message is returned. In case of failure,
-     * a CommandException with an appropriate message is thrown.
-     *
-     * @param model The model in which the data is restored from a backup.
-     * @return CommandResult indicating the success of the restore operation.
-     * @throws CommandException If an error occurs during the restoration process.
-     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Objects.requireNonNull(model);
 
+        // Check if the backup file is available
+        boolean isBackupAvailable = model.isBackupAvailable(index);
+        if (!isBackupAvailable) {
+            // Backup is not available; return a message indicating this
+            return new CommandResult(String.format(MESSAGE_BACKUP_NOT_AVAILABLE, index));
+        }
+
+        if (!isConfirmed) {
+            // Return a CommandResult indicating confirmation is required
+            return new CommandResult(MESSAGE_CONFIRMATION + "\n" + MESSAGE_BACKUP_REMINDER,
+                    false, false, true);
+        }
+
+        // Proceed with restoration if user confirms
         try {
-            Path backupPath = model.restoreBackup(index);
+            model.restoreBackup(index);
             return new CommandResult(String.format(MESSAGE_RESTORE_SUCCESS, index));
         } catch (IOException | DataLoadingException e) {
             throw new CommandException(MESSAGE_RESTORE_FAILURE, e);
@@ -55,26 +77,24 @@ public class RestoreCommand extends Command {
     }
 
     /**
-     * Checks if this RestoreCommand is equal to another object.
-     * Returns true if both objects are of the same class and their indexes match.
+     * Gets the index of the backup to restore.
      *
-     * @param other The object to compare to.
-     * @return true if the given object is equivalent to this command; false otherwise.
+     * @return The backup index.
      */
+    public int getIndex() {
+        return index;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof RestoreCommand
-                && index == ((RestoreCommand) other).index);
+                && index == ((RestoreCommand) other).index
+                && isConfirmed == ((RestoreCommand) other).isConfirmed);
     }
 
-    /**
-     * Computes the hash code for this RestoreCommand based on its index.
-     *
-     * @return The hash code for this command.
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(index);
+        return Objects.hash(index, isConfirmed);
     }
 }
