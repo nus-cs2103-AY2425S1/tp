@@ -168,6 +168,10 @@ Before diving into our features, do note that we set some specifications for nam
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Optiver`.
 
+* Letters preceding the `/` before parameters (if present) are prefixes that the app uses to determine that parameter. It is case-sensitive and thus
+  must be written as shown <br>
+  e.g. `t/` and `T/` will be read as different prefixes and thus cannot be used in place of another. 
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/Optiver t/financial` or as `n/Optiver`.
 
