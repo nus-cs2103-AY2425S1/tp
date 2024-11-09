@@ -48,6 +48,10 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_NRIC = """
+            A patient with this specified NRIC already exists in the address book.
+            Please note that NRICs must be unique
+            """;
 
     private final Person toAdd;
 
@@ -63,18 +67,13 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        //check if person already exists in database
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         //check if specified NRIC already exists in database
         List<Person> existingPersons = model.getAddressBook().getPersonList();
         Optional<Person> existingPersonWithSameNric = existingPersons.stream()
                         .filter(person -> person.getNric().equals(toAdd.getNric()))
                         .findAny();
         if (existingPersonWithSameNric.isPresent()) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_NRIC);
         }
 
         model.addPerson(toAdd);
