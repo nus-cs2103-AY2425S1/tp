@@ -337,6 +337,10 @@ With this addition, guardians and tutors will receive timely reminders or notifi
 Keeping track of fees is essential in the business aspect, so we plan to implement a detailed payment tracking system. 
 This feature will log due dates, total payment amounts, and any outstanding fees for each student, while also linking this information to the responsible guardian.
 
+#### 5. **Recurring Lessons**
+Recognizing that most tuition lessons occur weekly at the same time, we plan to introduce a feature that allows tutors to set lessons as either one-time sessions or recurring events. 
+Tutors will be able to stipulate the frequency of recurrence, whether weekly, bi-weekly, or custom intervals, to fit their specific scheduling needs.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
