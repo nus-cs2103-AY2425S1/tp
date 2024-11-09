@@ -52,7 +52,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addClient() throws Exception {
         Client client = new ClientBuilder().build();
-        System.out.println(ClientUtil.getAddContactCommand(client));
         AddContactCommand command = (AddContactCommand) parser.parseCommand(ClientUtil.getAddContactCommand(client));
         assertEquals(new AddContactCommand(client), command);
     }
@@ -60,7 +59,6 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addVendor() throws Exception {
         Vendor vendor = new VendorBuilder().build();
-        System.out.println(VendorUtil.getAddContactCommand(vendor));
         AddContactCommand command = (AddContactCommand) parser.parseCommand(VendorUtil.getAddContactCommand(vendor));
         assertEquals(new AddContactCommand(vendor), command);
     }
