@@ -512,7 +512,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Priority level**: A level to rank patients in terms of their severity level
+* **Priority level**: A priority level is a value assigned to a patient to indicate the urgency of their medical condition. A priority level of 1 indicates a critical condition, 2 indicates a serious but non-critical condition, while 3 indicates a non-critical condition.
 * **Emergency contact**: A person who is preferably close to the patient and is designated to receive information in case of an emergency
 * **Task**: A task to be done for a specific patient
 
