@@ -17,6 +17,12 @@
     "email" : "lol@lol.com",
     "availableDate" : "2023-10-28",
     "involvedIn" : [ "Charity Run" ]
+  }, {
+    "name" : "John                  Doe",
+    "phone" : "98765432",
+    "email" : "johndoe@example.com",
+    "availableDate" : "2020-10-10",
+    "involvedIn" : [ ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
