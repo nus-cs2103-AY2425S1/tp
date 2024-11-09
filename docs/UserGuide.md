@@ -31,7 +31,7 @@ While learning our command structure is optional, we highly recommend reviewing 
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ezstates.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar ezstate.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br><br>
    ![Ui](images/Ui.png)<br><br>
 
@@ -42,7 +42,7 @@ While learning our command structure is optional, we highly recommend reviewing 
 
    * `buyer n/John Doe p/98765432 e/johnd@example.com` : Adds a buyer named `John Doe` to the Address Book.
 
-   * `delete John Doe` : Deletes the contact with name John Doe from the list.
+   * `delete 1` : Deletes the index you chose.(Eg in this case 1 would be Alex Yeoh according to the picture below).
 
    * `clear` : Deletes all contacts.
 
@@ -93,21 +93,21 @@ The prefixes used in EZSTATES are universal across all commands <br> _(i.e. have
 </div>
 <br>
 
-| Prefix | Meaning | Location    | Constraints | Remarks | Example |
-|--------|---------|-------------|-------------|---------|---------|
-| n/     | name    | Client      |             |         |         |
-| p/     | phone   | Client      |             |         |         |
-| e/     | email   | Client      |             |         |         |
-| t/     | tag     | Client      |             |         |         |
-| d/     | date    | Appointment |             |         |         |
-| fr/    | from    | Appointment |             |         |         |
-| to/    | to      | Appointment |             |         |         |
-| pr/    | price   | Listing     |             |         |         |
-| ar/    | area    | Listing     |             |         |         |
-| add/   | address | Listing     |             |         |         |
-| reg/   | region  | Listing     |             |         |         |
-| sell/  | seller  | Listing     |             |         |         |
-| buy/   | buyer   | Listing     |             |         |         |
+| Prefix | Meaning | Location    | Constraints | Remarks                                                               | Example |
+|--------|---------|-------------|-------------|-----------------------------------------------------------------------|---------|
+| n/     | name    | Client      |             |                                                                       |         |
+| p/     | phone   | Client      |             |                                                                       |         |
+| e/     | email   | Client      |             |                                                                       |         |
+| t/     | tag     | Client      |             |                                                                       |         |
+| d/     | date    | Appointment |             |                                                                       |         |
+| fr/    | from    | Appointment |             |                                                                       |         |
+| to/    | to      | Appointment |             |                                                                       |         |
+| pr/    | price   | Listing     |             |                                                                       |         |
+| ar/    | area    | Listing     |             |                                                                       |         |
+| add/   | address | Listing     |             |                                                                       |         |
+| reg/   | region  | Listing     |             |                                                                       |         |
+| sell/  | seller  | Listing     |             |                                                                       |         |
+| buy/   | buyer   | Listing     |             | In addlistingbuyers, buy is used instead of buyer to refer to buyers. |         |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -357,7 +357,9 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Input**: `editclient 1 p/97774444`
       >
-      > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: [owner][friend]!
+      > **Output**: 
+      > Successfully edited Bobby.
+      > Phone number: 97774444 and Email: bobby123@gmail.com!
       >
       > ---
       >
@@ -365,7 +367,9 @@ Commands for creating, updating, and deleting buyers and sellers.
       >
       > **Input**: `editclient 1 t/`
       >
-      > **Output**: Successfully edited Bobby; Phone: 97774444; Email: bobby123@gmail.com; Appointment: -; Tags: !
+      > **Output**: 
+      > Successfully edited Bobby. 
+      > Phone number: 97774444 and Email: bobby123@gmail.com!
       >
       > ---
 
