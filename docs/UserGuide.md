@@ -610,7 +610,10 @@ The data in the TrackMate application are saved in the hard disk automatically a
 
 ### 4.7 Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+The TrackMate data are automatically saved as JSON files at the following locations:
+- `[JAR file location]/data/addressbook.json`
+- `[JAR file location]/data/tutorials.json`
+- `[JAR file location]/data/assignments.json`
 
 <box type="warning" seamless>
 <b>Caution:</b>
