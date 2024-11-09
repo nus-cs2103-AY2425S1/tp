@@ -4,11 +4,10 @@
   pageNav: 3
 ---
 
+# HR Helper User Guide
+
 <!-- * Table of Contents -->
 <page-nav-print />
-
-
-# HR Helper User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
