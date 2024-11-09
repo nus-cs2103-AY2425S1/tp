@@ -17,7 +17,7 @@ public class Frequency {
     }
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Frequency can only be 1, 3, 6 or 12 months";
+            "Frequency can only be 1, 3, 6 or 12 months and cannot be blank";
 
     public final String value;
     public final Months[] months;
