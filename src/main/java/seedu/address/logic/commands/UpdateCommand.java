@@ -87,6 +87,8 @@ public class UpdateCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // TODO: add handling for integer overflow here,
+        //  OR specify in UG that integers for index beyond max int are considered out of bounds.
         if (indexToUpdate.getZeroBased() >= model.getEventListLength()
                 || indexToUpdate.getZeroBased() < 0) {
             throw new CommandException(MESSAGE_INDEX_OUT_OF_BOUNDS);
