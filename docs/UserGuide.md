@@ -367,7 +367,7 @@ Expected output:
 2 persons listed!
 ```
 You should see something like this:<br></br>
-![result for 'find alex david'](images/findAlexDavidResult.png)
+![result for 'Find_Patient_Example'](images/FindPatientExample.png)
 <br></br>
 
 #### 6.2.5 Deleting a patient: `delete`
@@ -517,7 +517,7 @@ Listed all persons
 New task added: Eat paracetamol 1000mg
 ```
 You should see something like this:<br></br>
-![Add_Task_Example_1](images/AddTaskExample1.png)
+![result for 'Add_Task_Example_1'](images/AddTaskExample1.png)
 
 Expected output (Second example):
 ```
@@ -525,7 +525,7 @@ Expected output (Second example):
 New task added: Clear Diapers
 ```
 You should see something like this:<br></br>
-![Add_Task_Example_2](images/AddTaskExample2.png)
+![result for 'Add_Task_Example_2'](images/AddTaskExample2.png)
 <br></br>
 
 #### 6.3.2 Deleting a task: `deletetask`
