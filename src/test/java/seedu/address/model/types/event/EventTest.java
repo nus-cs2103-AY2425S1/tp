@@ -4,11 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ART_EXHIBIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOOK_FAIR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ART_EXHIBIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOOK_FAIR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_ART_EXHIBIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_BOOK_FAIR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CULTURE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.ANIME;
@@ -42,14 +40,8 @@ public class EventTest {
                 .withStartTime(VALID_START_TIME_ART_EXHIBIT).withTags(VALID_TAG_CULTURE).build();
         assertTrue(ART_EXHIBIT.isSameEvent(editedArtExhibit));
 
-        // different name, location, or startTime -> returns false
+        // different name -> returns false
         editedArtExhibit = new EventBuilder(ART_EXHIBIT).withName(VALID_NAME_BOOK_FAIR).build();
-        assertFalse(ART_EXHIBIT.isSameEvent(editedArtExhibit));
-
-        editedArtExhibit = new EventBuilder(ART_EXHIBIT).withAddress(VALID_ADDRESS_BOOK_FAIR).build();
-        assertFalse(ART_EXHIBIT.isSameEvent(editedArtExhibit));
-
-        editedArtExhibit = new EventBuilder(ART_EXHIBIT).withStartTime(VALID_START_TIME_BOOK_FAIR).build();
         assertFalse(ART_EXHIBIT.isSameEvent(editedArtExhibit));
 
         // name differs in case, all other attributes same -> returns false
