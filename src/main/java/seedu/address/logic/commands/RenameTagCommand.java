@@ -15,7 +15,7 @@ public class RenameTagCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames an existing tag.\n"
             + "Example: " + COMMAND_WORD + " t/bride's side t/groom's side";
 
-    public static final String MESSAGE_SUCCESS = "Tag has been renamed.";
+    public static final String MESSAGE_SUCCESS = "Tag has been renamed. All contacts are listed out.";
     public static final String MESSAGE_DUPLICATE = "This tag already exists:\n";
 
     public static final String MESSAGE_NONEXISTENT = "This tag does not exist:\n";
@@ -69,6 +69,7 @@ public class RenameTagCommand extends UndoableCommand {
 
         model.renameTag(existingTag, newTagName);
         model.editTagInPersons(existingTag, newTagName);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateTagList();
 
         return new CommandResult(MESSAGE_SUCCESS);
