@@ -15,10 +15,10 @@ participant "m:Model" as Model MODEL_COLOR
 participant "member:Member" as Member MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("delete_member 1")
 activate LogicManager
 
-LogicManager -> Parser : parseCommand("delete 1")
+LogicManager -> Parser : parseCommand("delete_member 1")
 activate Parser
 
 create DeleteCommandParser
