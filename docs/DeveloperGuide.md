@@ -463,13 +463,13 @@ testers are expected to do more *exploratory* testing.
 
    2. Open a command window. Run the `java -version` command to ensure you are using Java 17.
 
-   3. Launch the jar file using the `java -jar` command. The window size may not be optimum.
+   3. Launch the jar file using the `java -jar contactsforgood.jar` command. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   2. Re-launch the app using the `java -jar` command.<br>
+   2. Re-launch the app using the `java -jar contactsforgood.jar` command.<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a person
