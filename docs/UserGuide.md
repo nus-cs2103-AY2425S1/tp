@@ -138,31 +138,14 @@ Multiple allergies can be added using amultiple "al|" prefix
 </div>
 
 Examples:
-<ol>
-<li>
+* `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
+   e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
+   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
+     Next-of-Kin Name, Next-of-Kin Phone, Risk Level, Existing Conditions, Notes and his two allergies.
+* `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
+   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` adds a patient Lincoln Park with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
+     and his allergy.
 
-`addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
-e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
-al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`
-<ul>
-<li>
-Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
-Next-of-Kin Name, Next-of-Kin Phone, Risk Level, Existing Conditions, Notes and his two allergies.
-</li>
-</ul>
-</li>
-<li>
-
-`addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
-  e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat`
-</li>
-<ul>
-<li>
-Adds a patient Lincoln Park with his NRIC, Sex, Date-of-Birth, Phone, Email, Address, Blood Type,
-and his allergy.
-</li>
-</ul>
-</ol>
 For more information on each individual parameter click here
 
 ### Editing a patient: `edit`
@@ -196,26 +179,9 @@ are current allergies of the patient
 
 
 Examples:
-<ol>
-<li>
+* `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N.
+* `edit S9758366N p|91234123 a|Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918` edits the phone and address of the patient with NRIC S9758366N.
 
-`edit S9758366N n|Abraham Lee d|1997-10-28`
-<ul>
-<li>
-Edits the name and date-of-birth of the patient with NRIC S9758366N.
-</li>
-</ul>
-</li>
-<li>
-
-`edit S9758366N p|91234123 a|Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918`
-</li>
-<ul>
-<li>
-Edits the phone and address of the patient with NRIC S9758366N.
-</li>
-</ul>
-</ol>
 For more information on each individual parameter click here
 
 ### Listing all patients : `home`
@@ -243,9 +209,8 @@ All parameters are compulsory
 </div>
 
 
-Example: `bookappt S9758366N dt|2024-12-29 13:00 h|Vaccination`
-<br>
-Books a Vaccination appointment for the given patient by NRIC at the specified time.
+Example:
+* `bookappt S9758366N dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the given patient by NRIC at the specified time.
 
 For more information on each individual parameter click here
 
