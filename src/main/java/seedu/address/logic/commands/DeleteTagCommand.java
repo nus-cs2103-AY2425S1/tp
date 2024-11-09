@@ -65,6 +65,7 @@ public class DeleteTagCommand extends UndoableCommand {
         }
 
         Set<Tag> tagsSuccessfullyDeleted = handleDelete(model);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return createCommandResult(tagsSuccessfullyDeleted);
     }
 
