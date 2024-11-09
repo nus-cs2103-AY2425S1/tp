@@ -34,6 +34,7 @@ public class BackupManager {
             Pattern.compile(BACKUP_FILE_REGEX);
 
     private static final int MAX_BACKUPS = 10; // indexed from 0 to 9
+    private static final int MAX_FILENAME_LENGTH = 250;
     private final Path backupDirectory;
     private int currentIndex;
 
@@ -118,6 +119,14 @@ public class BackupManager {
     public int createIndexedBackup(Path sourcePath, String actionDescription) throws IOException {
         String timestamp = LocalDateTime.now().format(FILE_TIMESTAMP_FORMATTER);
         String backupFileName = String.format("%d_%s_%s.json", currentIndex, actionDescription, timestamp);
+
+        // Check if the file name exceeds the limit
+        if (backupFileName.length() > MAX_FILENAME_LENGTH) {
+            throw new IOException("Backup file name exceeds the maximum length of "
+                    + MAX_FILENAME_LENGTH
+                    + " characters. Please shorten your description.");
+        }
+
         Path backupPath = backupDirectory.resolve(backupFileName);
 
         // Delete existing backup at currentIndex if it exists

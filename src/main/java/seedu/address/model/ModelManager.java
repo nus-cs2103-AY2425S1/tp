@@ -345,7 +345,10 @@ public class ModelManager implements Model {
             logger.info("Manual backup created at index " + backupIndex + ": " + actionDescription);
             return backupIndex;
         } catch (IOException e) {
-            logger.warning("Manual backup failed: " + e.getMessage());
+            // Handle long file name error
+            if (e.getMessage().contains("maximum length")) {
+                throw new CommandException("Failed to create backup: " + e.getMessage());
+            }
             throw new CommandException("Failed to create manual backup: " + e.getMessage());
         }
     }
