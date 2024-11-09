@@ -219,9 +219,13 @@ Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL �
 * Each criterion can have more than one keyword. e.g., `n/alice bob hans`
 * The search is case-insensitive. e.g., `n/hans` will match `Hans`
 * The order of the keywords does not matter. e.g., `n/Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g., `n/Han` will not match `Hans`
 * Persons matching at least one keyword for **every specified criteria** will be returned.
   e.g., `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person
+* Each criterion is matched based on the following:
+  * Name, Detail, Study Group Tag: Only full words will be matched e.g. `n/Han` will not match `Hans`, and `d/assign` will not match `To be assigned`.
+  * Email: Any substring will be matched e.g. `e/han` will match `hans@example.com`.
+  * Age: Only ages contained by the input age(s) and/or range(s) of ages will be matched e.g. `a/17 21-25` will match `17` and `25` but not `26`.
+  * Gender: Only exact genders will be matched e.g. `g/m` will not match `f` and `F`, but `g/m f` will match all gender.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
