@@ -330,7 +330,7 @@ Examples:
 *  `edit z/1 p/91234567 e/johndoe@example.com` <br>
    **Output**: <br>
    Edited Person: John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
-*  `edit z/2 n/Betsy Crower` <br>
+*  `edit z/2` <br>
    **Output**: <br>
    At least one field to edit must be provided.
 * `edit z/1 p/91234567 e/johndoe@example.com` <br>
