@@ -302,7 +302,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC6 - Sort
 **MSS**
 1. User enters sort contact command with the field name.
-2. Cher shows list of contacts sorted alphabetically by name.
+2. Cher shows list of contacts sorted in ASCII order by each character in the name.
 3. Cher shows success message that list has been sorted by name.<br>
    Use case ends.
 
@@ -395,35 +395,35 @@ testers are expected to do more *exploratory* testing.
 2. Sorting list by name
    1. Test case: `sort name` <br>
             Expected: Feedback box will show message: `Sorted by name`
-            Contact entries will show list sorted alphabetically by name, 
+            Contact entries will show list sorted in ASCII order by each character in the name, 
             in the following order: anna, Benet, Charlie
 3. Sorting list by role
    1. Prerequisites: <br>
           List all persons using the `list` command.
    2. Test case: `sort role` <br>
           Expected: Feedback box will show message: `Sorted by role`
-          Contact entries will show list sorted alphabetically by role 
+          Contact entries will show list sorted in ASCII order by each character in the role 
           (parents then students), in the following order: anna, Charlie, Benet
 4. Sorting list by phone
     1. Prerequisites: <br>
        List all persons using the `list` command.
     2. Test case: `sort phone` <br>
        Expected: Feedback box will show message: `Sorted by phone`
-       Contact entries will show list sorted alphabetically by phone number,
+       Contact entries will show list sorted in ASCII order by each character in the phone number,
        in the following order: anna, Benet, Charlie
 5. Sorting list by email
     1. Prerequisites: <br>
        List all persons using the `list` command.
     2. Test case: `sort email` <br>
        Expected: Feedback box will show message: `Sorted by email`
-       Contact entries will show list sorted alphabetically by email address,
+       Contact entries will show list sorted in ASCII order by each character in the email address,
        in the following order: Charlie, Benet, anna 
 6. Sorting list by address
     1. Prerequisites: <br>
        List all persons using the `list` command.
     2. Test case: `sort name` <br>
        Expected: Feedback box will show message: `Sorted by address`
-       Contact entries will show list sorted alphabetically by address,
+       Contact entries will show list sorted in ASCII order by each character in the address,
        in the following order: Charlie, anna, Benet
 7. Sorting list by invalid field
     1. Prerequisites: <br>
