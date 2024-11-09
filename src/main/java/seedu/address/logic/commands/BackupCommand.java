@@ -19,6 +19,10 @@ public class BackupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Backup successfully stored at ";
 
+    public static final String NO_DATA_FILE = "No data file found to backup. " +
+            "If this is your first time starting the program " +
+            "or you have deleted the data file try another command first.";
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Path backupPath = model.getBackupAddressBookFilePath();
@@ -33,7 +37,7 @@ public class BackupCommand extends Command {
                 FileUtil.createIfMissing(backupPath);
                 copy(originalPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
             } else {
-                throw new CommandException("No data file found to backup. If this is your first time starting the program or you have deleted the data file try another command first.");
+                throw new CommandException(NO_DATA_FILE);
             }
         } catch (IOException e) {
             throw new CommandException(e.getMessage());
