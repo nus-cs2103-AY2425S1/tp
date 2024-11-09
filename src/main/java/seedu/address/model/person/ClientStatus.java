@@ -11,7 +11,7 @@ public class ClientStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Client status must be either “active”, “unresponsive”,"
-            + " “potential” or “old” (case insensitive).";
+            + " “potential”, “old” or “blacklisted” (case insensitive).";
     public static final String CLIENT_STATUS_KEY = "client status";
     private static final String ACTIVE = "active";
     private static final String OLD = "old";
