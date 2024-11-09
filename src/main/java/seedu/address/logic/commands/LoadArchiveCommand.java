@@ -70,7 +70,7 @@ public class LoadArchiveCommand extends Command {
             return false;
         }
 
-        LoadArchiveCommand otherDeleteCommand = (LoadArchiveCommand) other;
-        return archiveFilename.equals(otherDeleteCommand.archiveFilename);
+        LoadArchiveCommand otherLoadArchiveCommand = (LoadArchiveCommand) other;
+        return archiveFilename.equals(otherLoadArchiveCommand.archiveFilename);
     }
 }

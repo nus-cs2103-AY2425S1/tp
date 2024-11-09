@@ -41,4 +41,19 @@ public class ArchiveCommand extends Command {
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ArchiveCommand)) {
+            return false;
+        }
+
+        ArchiveCommand otherArchiveCommand = (ArchiveCommand) other;
+        return filename.equals(otherArchiveCommand.filename);
+    }
 }
