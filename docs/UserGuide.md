@@ -202,7 +202,7 @@ A person can have any number of notes (including 0)
 - The index **must be a positive integer** 1, 2, 3, …​
 - The note must be comprised of alphanumeric characters or spaces.
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
-- Notes are case-sensitive usually but are case-insensitive when duplicate check is done.
+- Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
 
 Examples:
 
@@ -222,7 +222,7 @@ Format: `editnote INDEX i/NOTE_INDEX n/NOTE`
 - The index and note index **must be positive integers** 1, 2, 3, …​
 - The note must be comprised of alphanumeric characters or spaces.
 - Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
-- Notes are case-sensitive usually but are case-insensitive when duplicate check is done.
+- Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
 
 Examples:
 
