@@ -144,13 +144,14 @@ This example shows how a typical command might look in MediBase3, with three mai
 
 #### Example:
 >```
-> add n/John Doe i/S1234567A d/2000-01-01 g/M p/98765432 
+> edit S1234567A n/John Doe i/S8234567B d/2000-01-01 g/M p/98765432 
 > e/johnd@example.com a/311, Clementi Ave 2, #02-25
 >```
 
-- **Command:** `add`
+- **Command:** `edit`
+- **Preamble:** `S1234567A`
 - **Prefix:** `n/` (name), `i/` (NRIC), `d/` (date of birth), `g/` (gender), `p/` (phone), `e/` (email), `a/` (address)
-- **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `M`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
+- **Parameter:** `John Doe`, `S8234567B`, `2000-01-01`, `M`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
 
 ### A First Look at MediBase3
 
