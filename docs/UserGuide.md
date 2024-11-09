@@ -13,6 +13,10 @@ Welcome to VolunSync! We've created this friendly Human Resource Management Syst
 <b>DO NOT</b> modify the data files in the `data` folder. Doing so may result in unexpected behaviour when using VolunSync and you may lose your data permanently.
 </div>
 
+Please read the following sections before using VolunSync:
+- [Command Format Guidelines](#command-format-guidelines)
+- [Input Constraints](#input-constraints)
+
 <div style="page-break-after: always;"></div>
 
 ## Learn About Commands Supported By VolunSync
@@ -20,6 +24,7 @@ Welcome to VolunSync! We've created this friendly Human Resource Management Syst
 The command words are shown beside their corresponding commands below. The command words should be used before the parameters when entering commands in VolunSync.
 
 1. [Command Format Guidelines](#command-format-guidelines)
+1. [Input Constraints](#input-constraints)
 1. [General Commands](#general-commands)
    1. [Viewing help](#viewing-help--help) `help`
    1. [Listing all volunteers and events](#listing-all-volunteers-and-events--list) `list`
@@ -97,7 +102,7 @@ Let's get you started with VolunSync! Just follow these simple steps:
 
     * `exit` : Exits the app.
 
-1. Refer to the [Command Format](#command-format-guidelines) below for details of each command.
+1. Refer to the [Command Format](#command-format-guidelines) below for details of each command, and the [Input Constraints](#input-constraints) for the details of what inputs are accepted by VolunSync.
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
 
@@ -135,6 +140,33 @@ Let's go over some simple guidelines that will help you use VolunSync easily:
 </div>
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
+
+<div style="page-break-after: always;"></div>
+
+## Input Constraints
+
+Volunsync has certain constraints on the inputs that can be entered. 
+
+VolunSync generally only accepts **English alphabets** and **numbers** within the input field.
+
+Specifically, only the following characters are allowed:
+- Alphabets: `A-Z`, `a-z`
+- Numbers: `0-9`
+- At sign: `@` (for email addresses only)
+- Dot: `.` (for email addresses only)
+- Hyphen: `-` (for dates only)
+- Comma: `,` (for separating multiple dates only)
+- Colon: `:` (for separating hours and minutes in time only)
+- slash: `/` (for separating command words and parameters only)
+
+All other characters are not allowed and will result in an error message.
+
+Some examples include:
+- Special characters: `é`, `ñ`, `ç`
+- Punctuation marks: `!`, `?`, `:`
+- Mathematical symbols: `+`, `-`, `=`
+- Other languages' characters: `你`, `ـز`, `あ`
+
 
 <div style="page-break-after: always;"></div>
 
