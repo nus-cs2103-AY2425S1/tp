@@ -616,6 +616,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 * **AAC**: Active Ageing Centre. A recreational centre that supports elderly in the area.
 * **Befriending Program**: Program which elderly signs up for to receive support from an AAC.
+* **AIC**: Agency for Integrated Care. A statutory board under the Ministry of Health in Singapore.
 
 --------------------------------------------------------------------------------------------------------------------
 

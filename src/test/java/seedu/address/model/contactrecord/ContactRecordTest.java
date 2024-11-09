@@ -24,10 +24,10 @@ public class ContactRecordTest {
         // null tag contact date
         assertThrows(NullPointerException.class, () -> ContactRecord.isValidContactRecord(null));
 
-        // invalid date in contact record
         // valid date in contact record
         assertTrue(ContactRecord.isValidContactRecord("2020-01-01"));
 
+        // Invalid Month
         assertFalse(ContactRecord.isValidContactRecord("2020-13-01"));
 
         // Invalid Day

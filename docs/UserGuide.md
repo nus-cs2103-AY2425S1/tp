@@ -75,7 +75,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 
 Field | Description                                                                                                                                        | Constraints, Examples
 --------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------
-**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Valid, government issued NRIC. e.g., `S1803269D`
+**NRIC** | National Registration Identity Card number of the elderly.                                                                                         | Must be valid (i.e. issued by the Singapore Government). e.g., `S1803269D`
 **Name** | Name of the elderly.                                                                                                                               | Any word consisting only of alphabets, numbers or spaces. e.g., `John Doe`, `Alice`, `Bob`
 **Phone Number** | Phone number of the elderly.                                                                                                                       | Any number, 3 digits or longer. e.g., `98765432`, `91234567`
 **Email** | Email address of the elderly.                                                                                                                      | Any valid email address. e.g., `bob@gmail.com`
@@ -253,7 +253,7 @@ Exits the program.
 Format: `exit`
 
 ### Navigating the Command History
-You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys.
+You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys. Before using the arrow keys, ensure that the command box is in focus (i.e. you have just clicked on the command box).
 
 ### Duplicate detection
 Duplicate entries (elderly) are entries with the same NRIC (case-insensitive). ContactMate will not allow duplicate entries, and will stop you from adding (`add`) or editing (`edit`) an elderly if it would result in a duplicate entry.
