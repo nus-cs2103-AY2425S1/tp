@@ -458,8 +458,9 @@ Format: `backup`
 
 **:information_source: Notes about the `backup` command:**<br>
 
-* Creates a backup save of the current BlitzBiz data
+* Creates a backup save of the current BlitzBiz data.
 * Backup BlitzBiz data will be saved as a JSON file at `[JAR file location]/backup/addressbook.json`.
+* Cannot backup if there is no data file at the data storage location `[JAR file location]/data/addressbook.json`.
 * If a `addressbook.json` file already exists in the backup folder it will be overwritten.
 * The backup file can be used in order to restore the BlitzBiz data in case of data loss, or to transfer the data to another device.
 * Users can safely move or copy the backup file to another device, without worrying above negative consequences.
