@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
+import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
 
 /**
  * List out all the wedding tags
@@ -39,7 +40,10 @@ public class AddWeddingCommand extends Command {
             + PREFIX_DATE + "11/03/2025 ";
 
     public static final String MESSAGE_SUCCESS = "New Wedding added: %1$s";
-    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_WEDDING = """
+            This wedding already exists in the wedding book.
+            In the case that you are trying to add a wedding with the exact same names:
+            We suggest adding an additional character or number to differentiate the different weddings.""";
 
     private final Wedding toAdd;
 
@@ -87,7 +91,13 @@ public class AddWeddingCommand extends Command {
         Wedding normalizedWedding = new Wedding(new WeddingName(names[0] + " & " + names[1]),
                 toAdd.getVenue(), toAdd.getDate());
 
-        model.addWedding(normalizedWedding);
+        // Allowed to be added as we catch the exception
+        try {
+            model.addWedding(normalizedWedding);
+        } catch (DuplicateWeddingException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(normalizedWedding)));
     }
 
