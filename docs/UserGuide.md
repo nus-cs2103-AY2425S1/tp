@@ -120,7 +120,7 @@ Format: `clear`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 
 <br>
-**This command deletes all clients from the main client list permanently. This cannot be undone.** If you are using this command, be very sure that you know what you are doing!
+**This command deletes all clients from the main client list only. This cannot be undone.** If you are using this command, be very sure that you know what you are doing! This command does not delete clients from the archived list.  It does not delete clients from the archived list.
 
 </div>
 
