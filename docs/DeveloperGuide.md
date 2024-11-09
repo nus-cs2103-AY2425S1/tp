@@ -1038,7 +1038,7 @@ Deleting an existing appointment from a patient
 
    Expected: No appointment is deleted. An error message is shown, indicating that the specified appointment does not exist for the patient.
 
-4. Other incorrect commands to try: `delAllergy`, `delAllergy i/S1234567A`, `delAppt i/S1234567A @t/1100-1230`, `delAppt i/S1234567A @d/2024-05-19`, , `delAppt @t/0000-1234 @d/2024-05-19`
+4. Other incorrect commands to try: `delAppt`, `delAppt i/S1234567A`, `delAppt i/S1234567A @t/1100-1230`, `delAppt i/S1234567A @d/2024-05-19`, , `delAppt @t/0000-1234 @d/2024-05-19`
 
    Expected: An error message is shown, indicating that the command format is incorrect.
 
