@@ -141,10 +141,10 @@ Format: `sort [s/SORT_OPTION]`
   * Role contacts are sorted by the relevant criterion. 
   * Non-role contacts are placed at the back.
 
-<box type="tip" seamless>
+<box type="info" seamless>
 
-**Tip:** Supported sort options include:
-* `name`: Sorts contacts alphabetically by name.
+**Supported sort options include**:
+* `name`: Sorts contacts alphabetically by name [^1].
 * `hours`: Sorts volunteers by hours contributed (in descending order).
 * `donations`: Sorts donors by donation amount (in descending order).
 * `end_date`: Sorts partners by partnership end date (from earliest to latest).
@@ -154,6 +154,8 @@ Examples:
 * `sort`
 * `sort s/name`
 * `sort s/hours`
+
+[^1]: For names with numbers, sorting follows **alphabetical order first**, then **numerical order** (e.g. "alfred" < "alfred2" < "ben")
 
 ### Editing a person : `edit`
 
