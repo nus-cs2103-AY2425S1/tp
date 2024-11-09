@@ -47,7 +47,7 @@ public class JsonAdaptedAmount {
      * @throws IllegalValueException if the string is not a valid amount
      */
     public Amount toModelType() throws IllegalValueException {
-        if (!Amount.isValidAmount(amount)) {
+        if (amount == null || !Amount.isValidAmount(amount)) {
             throw new IllegalValueException(Amount.MESSAGE_CONSTRAINTS);
         }
         return new Amount(amount);
