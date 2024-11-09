@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
@@ -40,6 +41,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -49,9 +51,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 public class EditCommandParserTest {
 
     private static final String GROUP_EMPTY = " " + PREFIX_GROUP;
-
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -162,7 +161,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
+        // major
         userInput = targetIndex.getOneBased() + MAJOR_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_MAJOR_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -217,5 +216,32 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_duplicateGroups_throwsParseException() {
+        // Test input with duplicate group names
+        String input = "1 g/ group 1 g/ group 1";
+
+        // Expect a ParseException to be thrown due to duplicate groups
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
+
+    @Test
+    public void parse_duplicateGroupsDifferentCase_throwsParseException() {
+        // Test input with duplicate group names in different cases
+        String input = "1 g/ group 1 g/ GROUP 1";
+
+        // Expect a ParseException to be thrown due to duplicate groups
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
+
+    @Test
+    public void parse_duplicateGroupsWithSpace_throwsParseException() {
+        // Test input with duplicate group names with differing spaces between words
+        String input = "1 g/ group 1 g/ group     1";
+
+        // Expect a ParseException to be thrown due to duplicate groups
+        assertThrows(ParseException.class, () -> parser.parse(input));
     }
 }
