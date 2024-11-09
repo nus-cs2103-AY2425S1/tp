@@ -5,10 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -22,13 +22,14 @@ import seedu.address.model.healthservice.HealthService;
 public class Appt {
     public static final String DATETIME_MESSAGE_CONSTRAINTS = "Invalid date and time. "
             + "Please enter a valid date and time.";
-    public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("yyyy-MM-dd")
+    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("uuuu-MM-dd")
             .optionalStart()
             .appendLiteral(' ')
             .optionalEnd()
             .appendPattern("HH:mm")
             .toFormatter();
+    public static final DateTimeFormatter STRICT_FORMATTER = FORMATTER.withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Comparator to compare two appointments by their date and time.
@@ -108,17 +109,7 @@ public class Appt {
      */
     public static boolean isValidDateTime(String trimmedDateTime) {
         try {
-            // Extract the date part from the input string
-            LocalDate date = LocalDate.parse(trimmedDateTime.split(" ")[0]);
-
-            // Check if the date is valid
-            YearMonth yearMonth = YearMonth.of(date.getYear(), date.getMonth());
-            if (date.getDayOfMonth() > yearMonth.lengthOfMonth()) {
-                return false;
-            }
-
-            // Parse the full date and time to ensure the format is correct
-            LocalDateTime.parse(trimmedDateTime, FORMATTER);
+            LocalDateTime.parse(trimmedDateTime, STRICT_FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;

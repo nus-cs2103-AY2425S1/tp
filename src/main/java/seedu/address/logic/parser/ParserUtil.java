@@ -316,7 +316,7 @@ public class ParserUtil {
         if (!Appt.isValidDateTime(dateTime)) {
             throw new ParseException(Appt.DATETIME_MESSAGE_CONSTRAINTS);
         }
-        return LocalDateTime.parse(trimmedDateTime, Appt.FORMATTER);
+        return LocalDateTime.parse(trimmedDateTime, Appt.STRICT_FORMATTER);
     }
 
     /**
