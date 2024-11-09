@@ -341,7 +341,7 @@ Format: `archive-list`
 
 <div markdown="span" class="alert alert-primary">:information_source: **Note:**
 <br>
-The archive list is a purely read-only list. You can only manipulate it using the command `unarchive`.
+The archive list is a purely read-only list. You can only use two commands while viewing it: `unarchive` (to unarchive a client) and `list` (to navigate back to the main client list).
 <br>
 Other commands will require you to navigate back to the main client list first using the `list` command.
 </div>
