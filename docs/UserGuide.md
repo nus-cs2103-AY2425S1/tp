@@ -241,6 +241,7 @@ Format: `sort ORDER [n/] [i/] [tut/TUTORIAL]`
 - `n/` indicates sorting according to name.
 - `i/` indicates sorting according to student id.
 - `tut/TUTORIAL` indicates sorting according to tutorial attendance for a specific tutorial.
+- At least one sorting criterion `[n/]`, `[i/]`, `[tut/TUTORIAL]` must be present. `sort ORDER` is an invalid command.
 
 Examples:
 
