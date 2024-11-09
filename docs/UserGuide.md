@@ -170,6 +170,10 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [d/DETAIL] [t/ADD_TAG]… [-t/DELETE_TAG]…`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Any extra duplicate study group tags in the input will be ignored automatically
+</div>
+
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided.
