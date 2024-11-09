@@ -412,11 +412,11 @@ testers are expected to do more *exploratory* testing.
        Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
     3. Test case: `batch-edit t/tag1 t/tag3` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
-       Contact entries will show a list of contacts that has been changed: `test person 1`, `test person 2`,
+       Contact entries will show a list of contacts that currently has `[tag3]`; `test person 1`, `test person 2`,
        `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
-    4. Test case: `batch-edit t/tag2 t/tag3` <br>
-       Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag3]` <br>
-       Contact entries will only show `test person 3`.
+    4. Test case: `batch-edit t/tag2 t/tag4` <br>
+       Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag4]` <br>
+       Contact entries will show a list of contacts that currently has `[tag4]`; `test person 3`.
 
 ### Saving data
 
