@@ -291,7 +291,7 @@ Example:
 
 <box type="tip" seamless>
 
-**Tip:** For ease of use, first list out people in the group using the `search` command, then remove the person using this command.
+**Tip:** For ease of use, first list out the people in the group using the `search` command, then remove persons using this command.
 </box>
 
 
