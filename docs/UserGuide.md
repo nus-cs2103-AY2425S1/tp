@@ -139,6 +139,7 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 * **Phone numbers** should only contain numbers, and it should be at least 3 digits long.
 * **Emails** should be of the format local-part@domain.
 * **Relationships** should only contain alphabetic characters, and it should not be blank.
+* If you want to use special characters such as `d/o` or `s/o` in `name`, please omit the `/` and enter `so` and `do` instead.
 </box>
 
 Valid Example:
@@ -171,6 +172,7 @@ Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 * Each of the optional fields can only be specified at most once. <br>
 e.g. `edit 1 -n Carmen -n Betsy` is an invalid command.
 * Existing values will be updated to the input values.
+* If you want to use special characters such as `d/o` or `s/o` in `name`, please omit the `/` and enter `so` and `do` instead.
 </box>
 
 Valid Example (One field edited):
