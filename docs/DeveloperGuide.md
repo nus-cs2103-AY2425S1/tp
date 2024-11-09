@@ -317,58 +317,64 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `MediContacts` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Add a patient**
 
 **MSS**
 
 1.  User requests to add a patient
-2.  AddressBook adds the patient
+2.  MediContacts adds the patient
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given patient is a duplicate already in the AddressBook.
+* 1a. The given patient is a duplicate already in MediContacts.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1b. The given name uses the wrong format.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1c. The given phone number uses the wrong format.
 
-    * 1c1. AddressBook shows an error message.
+    * 1c1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1d. The given email uses the wrong format.
 
-    * 1d1. AddressBook shows an error message.
+    * 1d1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1e. The given address uses the wrong format.
 
-    * 1e1. AddressBook shows an error message.
+    * 1e1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1f. The given date of birth uses the wrong format.
 
-    * 1f1. AddressBook shows an error message.
+    * 1f1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1g. The given gender uses the wrong format.
 
-    * 1g1. AddressBook shows an error message.
+    * 1g1. MediContacts shows an error message.
+
+      Use case ends.
+
+* 1h. The given tag(s) uses the wrong format.
+
+    * 1h1. MediContacts shows an error message.
 
       Use case ends.
 
@@ -377,47 +383,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a doctor
-2.  AddressBook adds the doctor
+2.  MediContacts adds the doctor
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given doctor is a duplicate already in the AddressBook.
+* 1a. The given doctor is a duplicate already in the MediContacts.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1b. The given name uses the wrong format.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1c. The given phone number uses the wrong format.
 
-    * 1c1. AddressBook shows an error message.
+    * 1c1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1d. The given email uses the wrong format.
 
-    * 1d1. AddressBook shows an error message.
+    * 1d1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1e. The given address uses the wrong format.
 
-    * 1e1. AddressBook shows an error message.
+    * 1e1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1f. The given speciality uses the wrong format.
 
-    * 1f1. AddressBook shows an error message.
+    * 1f1. MediContacts shows an error message.
 
       Use case ends.
+
+* 1g. The given tag(s) uses the wrong format.
+
+    * 1g1. MediContacts shows an error message.
+    
+        Use case ends.
 
 <a name="list-patient-anchor-point"></a>
 **Use case: UC03 - List all patients**
@@ -425,17 +437,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list patients
-2.  AddressBook shows a list of all patients previously added
+2.  MediContacts shows a list of all patients previously added
 
     Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-    * 2a1. AddressBook shows a message to indicate list is empty. 
-     
-      Use case ends.
 
 <a name="list-doctor-anchor-point"></a>
 **Use case: UC04 - List all doctors**
@@ -443,25 +447,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list doctors
-2.  AddressBook shows a list of all doctors previously added
+2.  MediContacts shows a list of all doctors previously added
 
     Use case ends.
 
-**Extensions**
+<a name="list-patient-anchor-point"></a>
+**Use case: UC05 - List all doctors and patients**
 
-* 2a. The list is empty.
+**MSS**
 
-    * 2a1. AddressBook shows a message to indicate list is empty.
+1.  User requests to list all doctors and patients
+2.  MediContacts shows a list of all doctors and patients previously added
 
-      Use case ends.
+    Use case ends.
 
 <a name="find-patient-anchor-point"></a>
-**Use case: UC05 - Find a patient**
+**Use case: UC06 - Find a patient**
 
 **MSS**
 
 1.  User requests to find a specific patient
-2.  AddressBook shows a list of all patients with matching names
+2.  MediContacts shows a list of all patients with matching names
 
     Use case ends.
 
@@ -469,23 +475,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given name uses the wrong format.
 
-    * 1a1. AddressBook shows an error message.
-
-      Use case ends.
-
-* 2a. There are no patients with matching names.
-
-    * 2a1. AddressBook shows a message to indicate no matches found.
+    * 1a1. MediContacts shows an error message.
 
       Use case ends.
 
 <a name="find-doctor-anchor-point"></a>
-**Use case: UC06 - Find a doctor**
+**Use case: UC07 - Find a doctor**
 
 **MSS**
 
 1.  User requests to find a specific doctor
-2.  AddressBook shows a list of all doctors with matching names
+2.  MediContacts shows a list of all doctors with matching names
 
     Use case ends.
 
@@ -493,24 +493,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given name uses the wrong format.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. MediContacts shows an error message.
 
       Use case ends.
 
-* 2a. There are no doctors with matching names.
-
-    * 2a1. AddressBook shows a message to indicate no matches found.
-
-      Use case ends.
-
-**Use case: UC07 - Delete a patient**
+**Use case: UC08 - Delete a patient**
 
 **MSS**
 
-1.  User requests to either [list patients (UC03)](#list-patient-anchor-point) or [find a patient (UC05)](#find-patient-anchor-point)
-2.  AddressBook shows a list of patients
+1.  User requests to either [list patients (UC03)](#list-patient-anchor-point) or [find a patient (UC06)](#find-patient-anchor-point)
+2.  MediContacts shows a list of patients
 3.  User requests to delete a specific patient in the list
-4.  AddressBook deletes the patient
+4.  MediContacts deletes the patient
 
     Use case ends.
 
@@ -522,18 +516,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. MediContacts shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC08 - Delete a doctor**
+**Use case: UC09 - Delete a doctor**
 
 **MSS**
 
-1.  User requests to either [list doctors (UC04)](#list-doctor-anchor-point) or [find a doctor (UC06)](#find-doctor-anchor-point)
-2.  AddressBook shows a list of doctors
+1.  User requests to either [list doctors (UC04)](#list-doctor-anchor-point) or [find a doctor (UC07)](#find-doctor-anchor-point)
+2.  MediContacts shows a list of doctors
 3.  User requests to delete a specific doctor in the list
-4.  AddressBook deletes the doctor
+4.  MediContacts deletes the doctor
 
     Use case ends.
 
@@ -545,78 +539,54 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. MediContacts shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC09 - Add an appointment**
+**Use case: UC10 - Add an appointment**
 
 **MSS**
 
 1.  User requests to add an appointment
-2.  AddressBook adds the appointment
+2.  MediContacts adds the appointment
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given appointment is a duplicate already in the AddressBook.
+* 1a. The given appointment is a duplicate already in the MediContacts.
 
-    * 1a1. AddressBook shows an error message.
+    * 1a1. MediContacts shows an error message.
+
+      Use case ends.
+
+* 1b. The given appointment clashes with an existing appointment with the given doctor or patient.
+
+    * 1b1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1b. The given patient name uses the wrong format.
 
-    * 1b1. AddressBook shows an error message.
+    * 1b1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1c. The given doctor name uses the wrong format.
 
-    * 1c1. AddressBook shows an error message.
+    * 1c1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1d. The given date uses the wrong format.
 
-    * 1d1. AddressBook shows an error message.
+    * 1d1. MediContacts shows an error message.
 
       Use case ends.
 
 * 1e. The given time uses the wrong format.
 
-    * 1e1. AddressBook shows an error message.
-
-      Use case ends.
-
-<a name="list-appt-anchor-point"></a>
-**Use case: UC10 - List all appointments scheduled at a certain date and time**
-
-**MSS**
-
-1.  User requests to list appointments scheduled at a certain date and time
-2.  AddressBook shows a list of all appointments with matching date and time
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given date uses the wrong format.
-
-    * 1a1. AddressBook shows an error message.
-
-      Use case ends.
-
-* 1b. The given time uses the wrong format.
-
-    * 1b1. AddressBook shows an error message.
-
-      Use case ends.
-
-* 2a. There are no appointments with matching date and time.
-
-    * 2a1. AddressBook shows a message to indicate no matches found.
+    * 1e1. MediContacts shows an error message.
 
       Use case ends.
 
@@ -624,72 +594,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
-2.  AddressBook shows a list of appointments
-3.  User requests to delete a specific appointment in the list
-4.  AddressBook deletes the appointment
+1. User requests to delete an appointment with the given unique ID.
+2. MediContacts deletes the appointment.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given unique ID is invalid.
 
-  Use case ends.
+  * 3a1. MediContacts shows an error message.
 
-* 3a. The given index is invalid.
+   Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+*  1b. The appointment with the given unique ID does not exist.
 
-      Use case resumes at step 2.
+  * 3b1. MediContacts shows an error message.
 
-**Use case: UC12 - Mark an appointment as done**
+   Use case ends.
 
-**MSS**
-
-1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
-2.  AddressBook shows a list of appointments
-3.  User requests to mark a specific appointment in the list
-4.  AddressBook marks the appointment as done
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC13 - Mark an appointment as undone**
-
-**MSS**
-
-1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
-2.  AddressBook shows a list of appointments
-3.  User requests to unmark a specific appointment in the list
-4.  AddressBook marks the appointment as undone
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
+*{More to be added as more features get added}*
 
 ### Non-Functional Requirements
 
