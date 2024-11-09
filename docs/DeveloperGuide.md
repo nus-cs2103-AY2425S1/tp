@@ -405,13 +405,13 @@ methods of `UniqueCompanyList` that manipulates its `internalList`.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                                   | I want to …​                                                | So that I can…​                                                       |
-|----------|-----------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
-| `* * *`  | new user                                                  | see usage instructions                                      | refer to instructions when I forget how to use the App                |
-| `* * *`  | user that types fast                                      | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
-| `*`      | user who prefers less screen clutter                      | toggle list view to be less detailed / more general         |                                                                       |
-| `* *`    | user                                                      | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
-| `* * *`  | STEM major planning to apply for internships              | find a specific company by name                             | retrieve info without having to go through the entire list            |
+| Priority | As a …​                                                     | I want to …​                                                | So that I can…​                                                       |
+|----------|-------------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------------------|
+| `* * *`  | new user                                                    | see usage instructions                                      | refer to instructions when I forget how to use the App                |
+| `* * *`  | user that types fast                                        | utilize an easy to use CLI interface                        | be more efficient while using the app                                 |
+| `*`      | user who prefers less screen clutter                        | toggle list view to be less detailed / more general         |                                                                       |
+| `* *`    | user                                                        | export my data out of InternBuddy                           | have a data backup and/or share company information with fellow peers |
+| `* * *`  | STEM major planning to apply for internships                | find a specific company by name                             | retrieve info without having to go through the entire list            |
 | `* *`    | STEM major planning to apply for internships                | add additional info about the company                       |                                                                       |
 | `* *`    | STEM major planning to apply for internships                | update the information for a specific company               | ensure my information is up-to-date                                   |
 | `*`      | STEM major planning to apply for internships                | add referral contacts to companies                          | remember to include them when applying                                |
@@ -446,31 +446,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. User provides incomplete required information for the company (name or email).
     * 1a1. InternBuddy shows an error message.
 
-      Use case restarts at step 1.
+      Use case resumes at step 1.
 
 * 1b. User specifies an optional company information that is empty (address, contact number, or tags).
     * 1b1. InternBuddy shows an error message.
 
-      Use case restarts at step 1.
+      Use case resumes at step 1.
 
-* 1c. User provided email is in wrong format.
+* 1c. User specified parameter is in wrong format.
     * 1c1. InternBuddy shows an error message.
 
-      Use case restarts at step 1.
+      Use case resumes at step 1.
 
-* 1d. User provided contact number is in wrong format.
-    * 1d1. InternBuddy shows an error message.
-
-      Use case restarts at step 1.
-
-* 1e. User provides an already saved company.
+* 1d. User provides an already saved company.
     * 1e1. InternBuddy shows an error message.
 
-      Use case restarts at step 1.
-
-* 1f. User decides not to add the company.
-
-  Use case ends.
+      Use case resumes at step 1.
 
 **<a id="uc02"></a>Use case: UC02 - List all saved companies**
 
@@ -484,34 +475,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. The list is empty.
-     * 1a1. InternBuddy shows a message to indicate that the list is empty
+     * 1a1. InternBuddy shows a message to indicate that the list is empty.
 
        Use case ends.
 
-**<a id="uc03"></a>Use case: UC03 - Find a company by name**
+**<a id="uc03"></a>Use case: UC03 - Find a company by keyword (name, tag, or application name)**
 
 **MSS**
 
-1.  User searches for a company's name.
+1.  User searches for a company using a keyword.
 2.  InternBuddy shows the matching company(s).
+
+    Use case ends.
 
 **Extension**
 
-* 1a. The list is empty.
-    * 1a1. InternBuddy shows an error message that the list is empty.
+* 1a. User did not provide a keyword to search.
+    * 1a1. InternBuddy shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
-* 1b. User did not provide a name to search.
-    * 1b1. InternBuddy shows an error message.
-
-      Use case restarts at step 1.
-
-* 1c. User decides not to find a company.
-
-  Use case ends.
-
-* 2b. No companies with matching name found.
+* 2b. No companies with matching keywords found.
     * 2b1. InternBuddy shows an error message to indicate no matches found.
 
       Use case ends.
@@ -520,8 +504,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>
-2.  User requests to delete a specific company in the list.
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>.
+2.  User requests to delete a specific company in the list by its index on the list.
 3.  InternBuddy deletes the company.
 
     Use case ends.
@@ -530,76 +514,222 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The list is empty.
 
-  Use case ends.
+  Use case resumes at step 1.
 
-* 2a. User decides not to delete a company.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-    * 3a1. InternBuddy shows an error message.
+* 2a. The given index is invalid.
+    * 2a1. InternBuddy shows an error message.
 
     Use case resumes at step 2.
 
 **<a id="uc05"></a>Use case: UC05 - Edit company information**
 
-1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>
-2.  User requests to edit a specific company in the list.
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>.
+2.  User requests to edit a specific company in the list by its index on the list.
 3.  InternBuddy edits the company.
+
+    Use case ends.
+
+**Extensions**
 
 * 1a. The list is empty.
 
-  Use case ends.
+  Use case resumes at step 1.
 
-* 2a. User provides updated information in the wrong format.
+* 2a. The given index is invalid.
     * 2a1. InternBuddy shows an error message.
 
   Use case resumes at step 2.
 
-* 2b. User provides already existing information.
+* 2c. User attempts to change the name to another existing company
+    * 2c1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+* 2c. User provides updated information in the wrong format.
+    * 2c1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+**<a id="uc06"></a>Use case: UC06 - Adding a company to favourites**
+
+**MSS**
+
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>.
+2.  User requests to favourite a specific company in the list by its index on the list.
+3.  InternBuddy adds the company to favourites.
+4.  InternBuddy shows the list of companies with the specified company now at the top with other favourited companies.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case resumes at step 1.
+
+* 2a. The given index is invalid.
+    * 2a1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+ 
+* 2b. The company is already favourited.
     * 2b1. InternBuddy shows an error message.
 
   Use case resumes at step 2.
 
-* 2c. User decides not to edit a company.
+**<a id="uc07"></a>Use case: UC07 - Removing a company from favourites**
 
-  Use case ends.
+**MSS**
 
-* 3a. The given index is invalid.
-    * 3a1. InternBuddy shows an error message.
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>.
+2.  User requests to unfavourite a specific company in the list by its index on the list.
+3.  InternBuddy removes the company from favourites.
+4.  InternBuddy shows the list of companies with the specified company now being below any other favourited companies (if any).
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case resumes at step 1.
+
+* 2a. The given index is invalid.
+    * 2a1. InternBuddy shows an error message.
 
   Use case resumes at step 2.
 
-**<a id="uc06"></a>Use case: UC06 - Edit company application status**
+* 2b. The company is already unfavourited.
+    * 2b1. InternBuddy shows an error message.
+
+  Use case resumes at step 2.
+
+**<a id="uc08"></a>Use case: UC08 - Adding an application to a company**
+
+**MSS**
+
+1.  User requests to add an application to a specific company in the list by its index on the list.
+2.  InternBuddy adds the application to the company.
+
+**Extensions**
+
+* 1a. User provides incomplete required information for the application (name or description).
+    * 1a1. InternBuddy shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. User specifies an optional company information that is empty (application status)
+    * 1b1. InternBuddy shows an error message.
+
+      Use case resumes at step 1.
+
+* 1c. User specified parameter is in wrong format.
+    * 2c1. InternBuddy shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The status of the company is not `APPLIED`.
+    * 2a1. InternBuddy sets the status of the company to `APPLIED`.
+  
+      Use case ends.
+
+**<a id="uc09"></a>Use case: UC09 - Remove an application from a company**
+
+**MSS**
+
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>.
+2.  User requests to remove an application from a specific company at a specific index from the list of applications belonging to the company; where the company is
+    specified with using its index on the list of companies.
+3.  InternBuddy removes the application from the company.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case resumes at step 1.
+
+* 2a. The given index for the application or the company is invalid.
+    * 2a1. InternBuddy shows an error message.
+
+      Use case resumes at step 2.
+
+* 3a. The company has no applications left after the application is removed.
+    * 3a1. InternBuddy sets the status of the company to `CLOSED`.
+
+      Use case ends.
+ 
+**<a id="uc10"></a>Use case: UC10 - Edit company application status**
+
+**MSS**
 
 1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)
-2.  User requests to edit a specific company in the list.
+2.  User requests to update the status of an application from a specific company at a specific index from the list of applications belonging to the company; where the company is
+    specified with using its index on the list of companies.
 3.  InternBuddy edits the company.
+
+**Extensions**
 
 * 1a. The list is empty.
 
-  Use case ends.
+  Use case resumes at step 1.
 
-* 2a. User provides updated information in the wrong format.
+* 2a. The given index for the application or the company is invalid.
     * 2a1. InternBuddy shows an error message.
 
-  Use case resumes at step 2.
-
-* 2b. User provides updated information that already exists.
+      Use case resumes at step 2.
+ 
+* 2b. User updated application status is invalid
     * 2b1. InternBuddy shows an error message.
 
-  Use case resumes at step 2.
+      Use case resumes at step 2.
 
-* 2c. User decides not to edit a company.
+**<a id="uc-11"></a>Use case: UC11 - View full application details of a company**
 
-  Use case ends.
+**MSS**
 
-* 3a. The given index is invalid.
-    * 3a1. InternBuddy shows an error message.
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)
+2.  User requests to view the full application details of a company by its given index in the list.
+3.  InternBuddy shows the application details of the company.
 
-  Use case resumes at step 2.
+**Extensions**
 
-*{More to be added}*
+* 1a. The list is empty.
+
+  Use case resumes at step 1.
+
+* 2a. The given index for the application or the company is invalid.
+    * 2a1. InternBuddy shows an error message.
+
+      Use case resumes at step 2.
+
+**<a id="uc-12"></a>Use case: UC12 - Clear all saved companies**
+
+**MSS**
+
+1.  User requests to clear all companies.
+2.  InternBuddy deletes all saved companies.
+
+Use case ends.
+
+**<a id="uc-13"></a>Use case: UC13 - Requesting for help**
+
+**MSS**
+
+1.  User requests for help.
+2.  InternBuddy displays help information to the user.
+
+Use case ends.
+
+**<a id="uc-14"></a>Use case: UC14 - Exiting the app**
+
+**MSS**
+
+1.  User requests to exit the app.
+2.  InternBuddy terminates.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
