@@ -13,7 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified using it's displayed index from KonTActs.
  */
 public class DeleteCommand extends Command {
 
