@@ -38,7 +38,7 @@ the process of accessing and updating resident student details. What's more, Dor
     - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Manual saving : `export`](#manual-saving-export)
     - [Manual data restoration : `import`](#manual-data-restoration-import)
-- [FAQ](#FAQ)
+- [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
 - [Field constraints](#field-constraints)
@@ -224,7 +224,7 @@ Format: `clear`
 
 ### Cleaning graduated students : `clean`
 
-Removes all graduated students from the address book based on the current year and their graduation year.
+Removes all graduated students from the address book by removing all students with GRADUATION_YEAR fields earlier than the current year.
 
 Format: `clean`
 
@@ -302,7 +302,7 @@ The following screenshot shows the results of executing `import fp/./data/11-08-
 
 ### Editing the data file
 
-DorManagerPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+DorManagerPro data are saved automatically as a JSON file `[JAR file location]/data/DorManagerPro.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning"
 seamless>
