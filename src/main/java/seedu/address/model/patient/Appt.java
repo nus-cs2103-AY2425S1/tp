@@ -2,8 +2,10 @@ package seedu.address.model.patient;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
@@ -106,9 +108,21 @@ public class Appt {
      */
     public static boolean isValidDateTime(String trimmedDateTime) {
         try {
+            // Extract the date part from the input string
+            LocalDate date = LocalDate.parse(trimmedDateTime.split(" ")[0]);
+
+            // Check if the date is valid
+            YearMonth yearMonth = YearMonth.of(date.getYear(), date.getMonth());
+            if (date.getDayOfMonth() > yearMonth.lengthOfMonth()) {
+                return false;
+            }
+
+            // Parse the full date and time to ensure the format is correct
             LocalDateTime.parse(trimmedDateTime, FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
+            return false;
+        } catch (DateTimeException e) {
             return false;
         } catch (IllegalArgumentException e) {
             return false;
