@@ -421,3 +421,11 @@ _Details coming soon ..._
 | **Unfavourite Contact** | `favourite INDEX`(on already favourited person) <br> e.g., `favourite 123`                                                                                               |
 | **Favourite Contact**   | `favourite`<br> e.g., `favourite`                                                                                                                                        |
 | **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
+--------------------------------------------------------------------------------------------------------------------
+## Planned Enhancement:
+### Editing and deleting log entries
+Currently RealConnect does not support editing or deleting history logs. This feature is designed as such due to the nature of logging, of which modification or postmortem addition is not encouraged. However to tolerate user mistakes such as accidental wrong input, editing and deleting of log will be implemented and added to RealConnect.
+### Editing and deleting of properties
+### More flexible date input formatting
+### Confirmation upon unusual input when adding properties
+Currently RealConnect accepts any non-negative integer values for property attributes number of bathrooms and bedrooms. Additional confirmation dialog will be implemented in the future to prompt the user to confirm unusually large input like 2000 bathrooms, to mitigate the chance of user mistakes.
