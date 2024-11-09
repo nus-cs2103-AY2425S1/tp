@@ -226,6 +226,9 @@ Examples:
 > ###### ⚠️ **Warning**
 > The view window is optimized as a pop-up, hence while there is no limit to word entries, multiple long entries (i.e., above 50 characters) may be truncated.
 
+> ###### 💡 **Tip**
+> If lower sections in the detail window are not displayed in full due to small screen size or long list length, resize the window or using the scroll bar for better visual experience.
+
 ### Adding a Property: `addProperty`
 
 Add a property listing to an existing person in the address book.
