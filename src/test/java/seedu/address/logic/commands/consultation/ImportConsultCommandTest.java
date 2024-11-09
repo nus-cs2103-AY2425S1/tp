@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.consultation.ImportConsultCommand.MESSAGE_EMPTY_FILE;
-import static seedu.address.logic.commands.consultation.ImportConsultCommand.MESSAGE_INVALID_FILE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
