@@ -165,9 +165,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * Existing values will be updated to the input values.
 * When editing tags, the tags specified using `t/` will be added to the contact (cumulatively).
 * Tags can also be removed using the delete tag `dt/` prefix, followed by the tag name.
+  * Any `dt/` arguments will **take priority** over any `t/` options, so `t/seller dt/seller` will **delete the `seller` tag**
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
-  * Note that this option **can not be used** if you **specify any other tags (e.g `t/ t/buyer`)**
+  * This option **can not be used** with any other tag options (i.e `t/seller dt/buyer`)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
