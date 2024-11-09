@@ -3,6 +3,8 @@ package seedu.address.logic.commands.consultation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.consultation.ImportConsultCommand.MESSAGE_EMPTY_FILE;
+import static seedu.address.logic.commands.consultation.ImportConsultCommand.MESSAGE_INVALID_FILE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
@@ -22,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Name;
@@ -110,6 +113,11 @@ public class ImportConsultCommandTest {
     }
 
     @Test
+    public void getCommandType() {
+        assertEquals(CommandType.CONSULT, importCommand.getCommandType());
+    }
+
+    @Test
     public void execute_emptyFile_throwsCommandException() throws IOException {
         // Create a custom ImportConsultCommand that uses testDir instead of data dir
         ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
@@ -121,7 +129,7 @@ public class ImportConsultCommandTest {
         createCsvFile("");
         filesToCleanup.add(testCsvPath);
         assertThrows(CommandException.class,
-                ImportConsultCommand.MESSAGE_EMPTY_FILE, () -> testCommand.execute(modelStub));
+                MESSAGE_EMPTY_FILE, () -> testCommand.execute(modelStub));
     }
 
     @Test
@@ -233,13 +241,70 @@ public class ImportConsultCommandTest {
         assertEquals(expected.normalize(), actual.normalize());
     }
 
-    private void createCsvFile(String content) throws IOException {
-        // Ensure parent directories exist
-        Files.createDirectories(testCsvPath.getParent());
-
-        // Create and write file
-        Files.writeString(testCsvPath, content);
+    @Test
+    public void execute_onlyEmptyLines_throwsCommandException() throws IOException {
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
+        createCsvFile(VALID_HEADER + "\n\n   \n\t\n");
         filesToCleanup.add(testCsvPath);
+        assertThrows(CommandException.class,
+                MESSAGE_EMPTY_FILE, () -> testCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_incompleteLine_recordsError() throws Exception {
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
+        createCsvFile(VALID_HEADER + "\n2024-10-20,14:00");
+        filesToCleanup.add(testCsvPath);
+
+        CommandResult result = testCommand.execute(modelStub);
+        assertTrue(result.getFeedbackToUser().contains("error.csv"));
+        assertEquals(0, modelStub.consultations.size());
+    }
+
+    @Test
+    public void testEscapeSpecialCharacters() {
+        // Test null input
+        assertEquals("", importCommand.escapeSpecialCharacters(null));
+
+        // Test normal string
+        String normal = "Regular text";
+        assertEquals(normal, importCommand.escapeSpecialCharacters(normal));
+
+        // Test string with quotes and commas
+        String complex = "Text with \"quotes\" and ,commas,";
+        String escaped = importCommand.escapeSpecialCharacters(complex);
+        assertTrue(escaped.startsWith("\""));
+        assertTrue(escaped.endsWith("\""));
+        assertTrue(escaped.contains("\"\"quotes\"\""));
+    }
+
+    @Test
+    public void testUnescapeSpecialCharacters() {
+        // Test null input
+        assertEquals("", importCommand.unescapeSpecialCharacters(null));
+
+        // Test normal string
+        String normal = "Regular text";
+        assertEquals(normal, importCommand.unescapeSpecialCharacters(normal));
+
+        // Test quoted string
+        String quoted = "\"Text with \"\"quotes\"\" and ,commas,\"";
+        String unescaped = importCommand.unescapeSpecialCharacters(quoted);
+        assertEquals("Text with \"quotes\" and ,commas,", unescaped);
+
+        // Test string without quotes
+        String noQuotes = "Text without quotes";
+        assertEquals(noQuotes, importCommand.unescapeSpecialCharacters(noQuotes));
     }
 
     @Test
@@ -258,6 +323,15 @@ public class ImportConsultCommandTest {
         ImportConsultCommand importCommand = new ImportConsultCommand("consults.csv");
         CommandResult result = importCommand.execute(modelStub);
         assertEquals(String.format(ImportConsultCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
+    }
+
+    private void createCsvFile(String content) throws IOException {
+        // Ensure parent directories exist
+        Files.createDirectories(testCsvPath.getParent());
+
+        // Create and write file
+        Files.writeString(testCsvPath, content);
+        filesToCleanup.add(testCsvPath);
     }
 
     private class ModelStubWithConsultations extends ModelStub {

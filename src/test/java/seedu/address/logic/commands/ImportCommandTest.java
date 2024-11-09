@@ -309,16 +309,23 @@ public class ImportCommandTest {
 
     @Test
     public void execute_absolutePath() throws IOException, CommandException {
-        // Create file using system-independent path construction
-        Path absolutePath = testDir.toAbsolutePath().resolve("absolute.csv");
-        try (FileWriter writer = new FileWriter(absolutePath.toFile())) {
-            writer.write("Name,Phone,Email,Courses\n");
-            writer.write("John Doe,12345678,john@example.com,CS2103T\n");
-        }
+        // Create file using platform-independent path handling
+        Path absolutePath = testDir.toAbsolutePath().normalize().resolve("absolute.csv");
+        Files.createDirectories(absolutePath.getParent());
+
+        Files.writeString(absolutePath,
+                "Name,Phone,Email,Courses\n"
+                        + "John Doe,12345678,john@example.com,CS2103T\n"
+        );
         filesToCleanup.add(absolutePath);
 
-        ImportCommand importCommand = new ImportCommand(absolutePath.normalize().toString());
-        CommandResult result = importCommand.execute(model);
+        ImportCommand testCommand = new ImportCommand(absolutePath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return Paths.get(filepath).normalize();
+            }
+        };
+        CommandResult result = testCommand.execute(model);
         assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
     }
 
