@@ -292,14 +292,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Tuition Center Administrators        | log and track communication history with parents, teachers and students                     | ensure continuity in communication                                       |
 
 
-### Use cases
-
-### System: EduTuTu
-
----
 
 
 ---
+## Use cases
 
 #### **Use Case UC01: Add Student**
 **Actor**: Administrator
@@ -377,7 +373,7 @@ Use case ends.
 **Main Success Scenario (MSS)**:
 1. Administrator first searches for the student using the find command.
 2. EduTuTu displays a list of students with unique indices.
-3. Administrator types the command to mark a student's fees as paid, including the student index and date:
+3. Administrator types the command to mark a student's fees as paid, including the student index and date.
 4. EduTuTu validates the student index and date format.
 5. EduTuTu updates the student's record and logs the payment confirmation.
 
@@ -394,6 +390,32 @@ Use case ends.
     - **Use case resumes from step 1.**
 
 ---
+
+
+#### **Use Case UC06: Unmark Fees as Paid**
+**Actor**: Administrator
+
+**Main Success Scenario (MSS)**:
+1. Administrator first searches for the student using the `find` command.
+2. EduTuTu displays a list of students with unique indices.
+3. Administrator types the command to unmark a student's fees as paid, including the student index and date.
+4. EduTuTu validates the student index and month format.
+5. EduTuTu updates the student’s record, removing the payment record for the specified month, and logs the removal confirmation.
+
+Use case ends.
+
+**Extensions**:
+
+- **3a. Invalid Index Entered**:
+    - 3a1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+- **3b. Invalid Date Format or Month**:
+    - 3b1. EduTuTu logs an error message.
+    - **Use case resumes from step 1.**
+
+---
+
 
 ### Non-Functional Requirements
 
@@ -465,11 +487,11 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: No persons in the list.
 
    1. Test case: `add n/Mario St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2105`<br>
-      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. There will be a new Person Card shown in the UI.
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. 
    2. Test case: `add n/Mario  St p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2106`<br>
-      Expected: No person added. Error details shown in the status message. Status bar remains the same, no new person card added.
+      Expected: No person added. Error details shown in the status message. Status bar remains the same.
    3. Test case: `add n/Alice d/o Sally p/92645273 a/222 greenwood ave e/ben@yahoo.com f/200 c/CS2107`<br>
-      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message. There will be a new Person Card shown in the UI.
+      Expected: A person is added with all fields shown in the list. Details of the person added will be shown in the status message.
 
 ### Editing a person
 
@@ -478,13 +500,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `edit 1 c/CS2106`<br>
-      Expected: The first contact is updated with the new course code. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The first contact is updated with the new course code. Details of the updated contact shown in the status message.
    2. Test case: `edit 0 c/CS2106`<br>
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
    3. Test case: `edit 1 f/200`<br>
-      Expected: The second contact is updated with the new fee. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The second contact is updated with the new fee. Details of the updated contact shown in the status message.
    4. Test case: `edit 2 f/200 c/CS2106`<br>
-      Expected: The second contact is updated with the new fee and course code. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The second contact is updated with the new fee and course code. Details of the updated contact shown in the status message.
    5. Other incorrect edit commands to try: `edit`, `edit x`, `edit x f/200` (where x is larger than the list size)<br>
       Expected: Similar to 2nd test case above.
 
@@ -584,7 +606,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `markpaid 1 m/2024-12`<br>
-      Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message. The person card in the UI is updated.
+      Expected: The first person is marked as paid for 2024-12. Details of the updated contact shown in the status message.
    1. Test case: `markpaid 0 m/2023-10`<br>
       Expected: No person is updated. Error details shown in the status message. Status bar remains the same.
 

@@ -29,7 +29,7 @@ administrators.
    - [2.11 Displaying Pie Chart of Class Distribution](#211-displaying-pie-chart-of-class-distribution-pie)
    - [2.12 Displaying Bar Chart](#212-displaying-bar-chart-bar)
    - [2.13 Viewing Command History](#213-viewing-command-history-arrow-keys)
-   - [2.14 View Student Details](#214-view-student-details-info)
+   - [2.14 View Student Details](#214-viewing-student-details-info)
    - [2.15 Editing the Data File](#215-editing-the-data-file)
    - [2.16 Saving the Data](#216-saving-the-data)
    - [2.17 Exiting the Program](#217-exiting-the-program-exit)
@@ -96,16 +96,16 @@ administrators.
 
 * `n/` is for name, `p/` is for phone number, `e/` is for email, `a/` is for address, `f/` is for fees, `c/` is for class ID, and `t/` is for tags.
 
-* The commands help, list, exit, and clear do not accept parameters; any provided parameters will be disregarded.  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* The commands help, list, exit, pie, bar and clear do not accept parameters; any provided parameters will be disregarded.  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* EduTuTu allows the handling of only alphanumeric characters and spaces. Emojis are not supported.
+* EduTuTu allows the handling of alphanumeric characters, some special characters and spaces . Emojis are not supported.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 ### Field Constraints
 * Names support alphanumeric characters and spaces. In addition, it supports the addition of special characters of common name formats.
 
-* Phone numbers accepts hyphen between the numbers and + (for country code) as special characters.
+* Phone numbers accepts hyphen and spaces between the numbers and + (for country code) as special characters.
 
 * Fees accepts only a maximum of only 9 digits due to integer overflow constraints.
 
@@ -227,7 +227,9 @@ Deletes the specified person from the address book.
 
 Updates the [payment status](#payment-status) of a student to completed.
 
-**[Command Format](#command-format):** `markpaid INDEX m/MONTH_PAID`
+**[Command Format](#command-format):** `markpaid INDEX m/MONTH_PAID` & `markpaid all m/MONTH_PAID`
+
+
 
 **[Command Word Alias](#command-word-alias):** `mp`
 
@@ -236,6 +238,8 @@ Updates the [payment status](#payment-status) of a student to completed.
 * The `MONTH_PAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The [index](#index) **must be within the range** of the number of people in the list.
 * The year must be within 1900 to 2100 inclusive, and the month must be within 01 to 12 inclusive.
+* The `markpaid all m/MONTH_PAID` command marks all students as paid for the specified month.
+* Can accept multiple months as input.
 
 **Example Usage:**
 
@@ -267,13 +271,12 @@ Updates the [payment status](#payment-status) of a student to completed.
 
 ***
 
-Here's the markdown for the `unmarkpaid` feature following your provided format:
 
 ### 2.5 Unmarking a Payment Date: `unmarkpaid`
 
 Updates the [payment status](#payment-status) of a student by removing the completed status for a specific month.
 
-**[Command Format](#command-format):** `unmarkpaid INDEX m/MONTH_UNPAID`
+**[Command Format](#command-format):** `unmarkpaid INDEX m/MONTH_UNPAID` & `unmarkpaid all m/MONTH_PAID`
 
 **[Command Word Alias](#command-word-alias):** `ump`
 
@@ -282,6 +285,8 @@ Updates the [payment status](#payment-status) of a student by removing the compl
 * The `MONTH_UNPAID` should be in the format `YYYY-MM` (e.g., `2024-10` for October 2024).
 * The [index](#index) **must be within the range** of the number of people in the list.
 * The year must be within 1900 to 2100 inclusive, and the month must be within 01 to 12 inclusive.
+* The `unmarkpaid all m/MONTH_PAID` command removes the payment status of all students with the specified month.
+* Can accept multiple months as input.
 
 **Example Usage:**
 
@@ -327,7 +332,7 @@ Edits an existing person in the address book.
 * When editing [tags](#tags), the existing [tags](#tags) of the person will be removed, i.e., adding of [tags](#tags) is not cumulative.
 * You can remove all the person’s [tags](#tags) by typing `t/` without specifying any [tags](#tags) after it.
 
-**Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com m/2024-10,2024-11`
+**Example Usage:** `edit 1 p/91088511 e/wongwaihin7@gmail.com m/2024-10`
 
 
 <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
@@ -402,20 +407,20 @@ The `find` command allows you to list persons by their names, [Class IDs](#class
 
 **[Command Word Alias](#command-word-alias):** `f`
 
-- **By Name Prefix:** `find n/NAME_PREFIX [MORE_NAME_PREFIXES]`
-- **By Phone Number Prefix:** `find p/PHONE_PREFIX [MORE_PHONE_PREFIXES]`
-- **By Address Prefix:** `find a/ADDRESS_PREFIX [MORE_ADDRESS_PREFIXES]`
-- **By Email Prefix:** `find e/EMAIL_PREFIX [MORE_EMAIL_PREFIXES]`
+- **By Name Substring:** `find n/NAME_SUBSTRING [MORE_NAME_SUBSTRING]`
+- **By Phone Number Prefix:** `find p/PHONE_SUBSTRING [MORE_PHONE_SUBSTRING]`
+- **By Address Substring:** `find a/ADDRESS_SUBSTRING [MORE_ADDRESS_SUBSTRING]`
+- **By Email Substring:** `find e/EMAIL_SUBSTRING [MORE_EMAIL_SUBSTRING]`
 - **By Fees (Exact Match):** `find f/FEES [MORE_FEES]`
-- **By Class ID:** `find c/CLASSID [MORE_CLASSIDS]`
-- **By Months Paid:** `find mp/YEAR-MONTH [MORE_YEARS-MONTHS]`
-- **By Months Not Paid:** `find !mp/YEAR-MONTH [MORE_YEARS-MONTHS]`
+- **By Class ID Substring:** `find c/CLASSID_SUBSTRING [MORE_CLASSIDS_SUBSTRING]`
+- **By Months Paid:** `find m/YEAR-MONTH [MORE_YEARS-MONTHS]`
+- **By Months Not Paid:** `find !m/YEAR-MONTH [MORE_YEARS-MONTHS]`
 
 
 **Examples of Combined Searches**
-- **By Name and Phone Prefix:** `find n/NAME_PREFIX [MORE_NAME_PREFIXES] p/PHONE_PREFIX [MORE_PHONE_PREFIXES]`
-- **By Email and Address Prefix:** `find e/EMAIL_PREFIX [MORE_EMAIL_PREFIXES] a/ADDRESS_PREFIX [MORE_ADDRESS_PREFIXES]`
-- **By Name, Class ID, and Fees:** `find n/NAME_PREFIX [MORE_NAME_PREFIXES] c/CLASSID [MORE_CLASSIDS] f/FEES [MORE_FEES]`
+- **By Name and Phone Substring:** `find n/NAME_SUBSTRING [MORE_NAME_SUBSTRING] p/PHONE_SUBSTRING [MORE_PHONE_SUBSTRING]`
+- **By Email and Address Substring:** `find e/EMAIL_SUBSTRING [MORE_EMAIL_SUBSTRING] a/ADDRESS_SUBSTRING [MORE_ADDRESS_SUBSTRING]`
+- **By Name, Class ID, and Fees:** `find n/NAME_SUBSTRING [MORE_NAME_SUBSTRING] c/CLASSID_SUBSTRING [MORE_CLASSID_SUBSTRING] f/FEES [MORE_FEES]`
 
 **Notes:**
 - Searches are case-insensitive. For example, `serangoon` will match `Serangoon`.
@@ -601,7 +606,7 @@ Allows users to quickly access previously entered commands using the up and down
 
 Displays the detailed information of a student in the list.
 
-**[Command Format](#command-format):** `info`
+**[Command Format](#command-format):** `info INDEX`
 
 * Shows the detailed information of the person at the specified `INDEX`.
 * `INDEX` refers to the index number shown in the displayed person list.
@@ -803,26 +808,26 @@ Method 2:
 <div style="page-break-after: always;"></div>
 
 ## Command summary
+Here's the updated table with the **Unmark Paid** action added:
 
-| Action                      | Format, Examples                                                                                                                                                      |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Bar Chart**               | `bar`                                                                                                                                                                 |
-| **Clear**                   | `clear`                                                                                                                                                               |
-| **Delete**                  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`      |
-| **Exit**                    | `exit`                                                                                                                                                                |
-| **Help**                    | `help`                                                                                                                                                                |
-| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find n/James Jake`                                                                                                          |
-| **List**                    | `list`                                                                                                                                                                |
-| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br> e.g., `markpaid 1 m/2024-10` (Marks the payment for October 2024 as completed for the student at index 1)                             |
-| **Pie Chart**               | `pie`                                                                                                                                                                 |
-| **Undo**                    | `undo`<br> Reverts the last action taken                                                                                                                              |
-| **Redo**                    | `redo`<br> Reapplies the last action that was undone                                                                                                                  |
-| **Viewing Command History** | *No command needed*<br> Use the arrow keys to navigate through previous commands                                                                                      |
-| **Viewing Student Details**  | `info INDEX` <br> Displays detailed information of a specific student at the given `INDEX` in a new window                                                            |
-| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                                                                            |
-| **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                                                                                    |
-
-
+| Action                      | Format                                                                                                                                          |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> |
+| **Bar Chart**               | `bar`                                                                                                                                                       |
+| **Clear**                   | `clear`                                                                                                                                                     |
+| **Delete**                  | `delete INDEX`<br>                                                                                                                              |
+| **Edit**                    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [c/CLASS_ID] [f/FEES] [m/MONTH_PAID] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> |
+| **Exit**                    | `exit`                                                                                                                                                      |
+| **Help**                    | `help`                                                                                                                                                      |
+| **Find**                    | `find KEYWORD [MORE_KEYWORDS]`<br>                                                                                                      |
+| **List**                    | `list`                                                                                                                                                      |
+| **Mark Paid**               | `markpaid INDEX YEAR_MONTH`<br>                                                                                                        |
+| **Unmark Paid**             | `unmarkpaid INDEX YEAR_MONTH`<br>                                                                                                       |
+| **Pie Chart**               | `pie`                                                                                                                                                       |
+| **Undo**                    | `undo`<br>                                                                                                                                                  |
+| **Redo**                    | `redo`<br>                                                                                                                                                  |
+| **Viewing Command History** | *No command needed, just the use of arrow keys*<br>                                                                                                         |
+| **Viewing Student Details**  | `info INDEX` <br>                                                                                                                                           |
+| **Editing the Data File**   | *No command*<br> Direct editing of the data JSON file (backup recommended)                                                                                  |
+| **Saving the Data**         | *Automatic*<br> Data is saved automatically to the storage file after each command                                                                          |
 [Back to Table of Contents](#table-of-contents)
