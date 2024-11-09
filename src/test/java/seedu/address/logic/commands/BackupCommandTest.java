@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -95,11 +96,13 @@ public class BackupCommandTest {
         CommandResult result = backupCommand.execute(model);
 
         // Verify that the command result is as expected
-        String expectedMessagePrefix = "Backup ";
-        String expectedMessageSuffix = " is created successfully.";
         String feedback = result.getFeedbackToUser();
-        assertTrue(feedback.startsWith(expectedMessagePrefix), "Feedback should start with 'Backup '");
-        assertTrue(feedback.endsWith(expectedMessageSuffix), "Feedback should end with ' is created successfully.'");
+
+        // Expected message format: "Backup {index} is created successfully.\nDescription: {description}"
+        // Since we don't know the exact index, we'll use a regex to match the pattern
+        String expectedPattern =
+                "Backup \\d+ is created successfully\\.\\nDescription: " + Pattern.quote(actionDescription);
+        assertTrue(feedback.matches(expectedPattern), "Feedback should match the expected pattern.");
 
         // Verify that the backup file was created in the backup directory
         try (Stream<Path> files = Files.list(backupDirectoryPath)) {
@@ -108,7 +111,8 @@ public class BackupCommandTest {
 
             // Optionally, verify that the backup file has the correct name pattern
             String backupFileName = backupFiles.get(0).getFileName().toString();
-            assertTrue(backupFileName.matches("\\d+_testBackup_.*\\.json"),
+            String fileNamePattern = "\\d+_" + Pattern.quote(actionDescription) + "_.*\\.json";
+            assertTrue(backupFileName.matches(fileNamePattern),
                     "Backup file name should match the expected pattern.");
         }
     }

@@ -16,7 +16,7 @@ public class BackupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Creates a backup with an optional action description.\n"
             + "Example: " + COMMAND_WORD + " myBackup";
-    public static final String MESSAGE_SUCCESS = "Backup %d is created successfully.";
+    public static final String MESSAGE_SUCCESS = "Backup %d is created successfully.\nDescription: %s";
 
     private final String actionDescription;
 
@@ -40,7 +40,10 @@ public class BackupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         int backupIndex = model.backupData(actionDescription); // Get the index used
-        String message = String.format(MESSAGE_SUCCESS, backupIndex);
+        String description = actionDescription == null || actionDescription.isBlank()
+                ? "manual_backup"
+                : actionDescription;
+        String message = String.format(MESSAGE_SUCCESS, backupIndex, description);
         return new CommandResult(message);
     }
 
