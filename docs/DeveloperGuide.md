@@ -899,6 +899,24 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `listo 100` <br>
        Expected: No change to the order list. Error details shown in the status message. Status bar remains the same.
 
+### Filter orders by status.
+
+1. Filtering order list to display all `pending` orders.
+    1. Prerequisites: 
+        - All orders under a customer are listed using the `listorder` command with at least 1 order listed.
+        - Example `listorder 1`.
+
+    2. Test case: `filterorder pending` <br>
+       Expected: Only pending orders remains in the order list. A success message shown in the status message.
+
+2. Filtering order list to display all `completed` orders. using command aliases.
+    1. Prerequisites:
+        - All orders under a customer are listed using the `listorder` command with at least 1 order listed.
+        - Example `listorder 1`.
+       
+    2. Test case: `filterorder completed` <br>
+       Expected: Only completed orders remains in the order list. A success message shown in the status message.
+
 ### Editing an existing order
 
 1. Editing an order while all orders under a customer are being shown.
