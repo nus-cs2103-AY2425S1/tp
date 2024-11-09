@@ -21,6 +21,8 @@ Class Name
 Class Phone
 Class Tag
 Class Bookmark
+Class Remark
+Class ApplicationStatus
 Class DifficultyTag
 Class SalaryTag
 Class PeriodTag
@@ -51,6 +53,8 @@ Company *--> Email
 Company *--> Bookmark
 Company *--> CareerPageUrl
 Company *--> Address
+Company *--> Remark
+Company *--> ApplicationStatus
 Company *--> "*" Tag
 
 Tag <|-- SalaryTag

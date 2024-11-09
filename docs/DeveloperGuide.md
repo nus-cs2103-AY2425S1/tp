@@ -66,7 +66,7 @@ The sections below provide more details of each component.
 
 ### UI Component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java).
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -78,7 +78,7 @@ The UI consists of multiple components, including the `MainWindow`, `CommandBox`
 
 ### Logic Component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
@@ -105,9 +105,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g., during testing.
 
 ### Model Component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
@@ -121,14 +121,14 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="600" />
 
 </box>
 
 
 ### Storage Component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -147,7 +147,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Bookmark feature
+
 
 ...
 
@@ -193,7 +194,6 @@ TechConnect assists students in managing and organizing their internship and job
 | `* *`    | user                                                    | bookmark a company                              | prioritize companies that I’m particularly interested in                          |
 | `* *`    | user                                                    | edit information of a company                   | keep company data up-to-date                                                      |
 | `* *`    | user                                                    | list all bookmarked companies                   | easily access my top-priority companies                                           |
-| `*`      | user with many companies in the address book            | filter companies by tag or status               | narrow down my list based on specific criteria (e.g., high salary, applied)       |
 | `*`      | user                                                    | update application status for a company         | track my progress with each company                                               |
 | `*`      | user                                                    | clear all entries                               | start over with a fresh list when needed                                          |
 
@@ -248,6 +248,11 @@ TechConnect assists students in managing and organizing their internship and job
 * 1b. The input format is incorrect.
     * 1b1. TC displays an error message.
     * Use case resumes at step 1.
+
+* 1c. The company is edited to an existing company in the address book.
+    * 1c1. TC displays an error message.
+    * Use case resumes at step 1.
+    
 
 ---
 
@@ -317,7 +322,7 @@ TechConnect assists students in managing and organizing their internship and job
 
 ## **Appendix: Instructions for Manual Testing**
 
-<box type="info" seamless />
+<box type="info" seamless>
 
 **Note:** These instructions provide a starting point for exploratory testing. Testers should expand beyond the provided cases to ensure robust coverage.
 
@@ -344,7 +349,6 @@ TechConnect assists students in managing and organizing their internship and job
 2. **Deleting a Company**:
     - Use `delete INDEX` to remove a specific company.
     - **Expected Result**: Company is removed, and a success message is shown.
-
     - **Edge Cases**:
         - `delete 0`: Displays an error message.
         - `delete x` (where `x` exceeds list size): Displays an error message.
@@ -358,10 +362,10 @@ TechConnect assists students in managing and organizing their internship and job
 1. **Bookmarking a Company**:
     - Use `bookmark INDEX` to mark a company as bookmarked.
     - **Expected Result**: Company appears in the bookmarked list.
-    - **Edge Case**: Attempting to bookmark an already bookmarked company should display a notification.
+    - **Edge Case**: Attempting to bookmark an already bookmarked company should display a message informing users that the company is already bookmarked.
 
 2. **Finding Companies**:
-    - Use `find TAG/NAME` to search.
+    - Use `find NAME` or `find TAG` to search.
     - **Expected Result**: Only companies matching the search criteria are displayed.
-    - **Edge Case**: Searching for non-existent terms should display a "No matches found" message.
+    - **Edge Case**: Searching for non-existent terms should display a "There is no company that suits your keyword!" message.
 ---
