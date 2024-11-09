@@ -56,8 +56,8 @@ EventCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
-VolunteerCard ..> Model
-EventCard ..> Model
+VolunteerCard .right.> Model
+EventCard .right.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

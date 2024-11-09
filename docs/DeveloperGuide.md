@@ -398,7 +398,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Double-click the jar file to launch VolunSync. <br/>
    Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
-   <br/><img src="images/ui.png" width="400" />
+   <br/><img src="images/Ui.png" width="400" />
 
    3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start)
 
