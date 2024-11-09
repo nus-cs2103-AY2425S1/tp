@@ -164,7 +164,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
 
     * `createP n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Patient named John Doe to the Address Book.
 
-    * `deleteP z/2` : Deletes the Patient with ID = 2.
+    * `delete z/2` : Deletes the Patient with ID = 2.
 
     * `clear` : Deletes all persons.
 
@@ -577,21 +577,21 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                                                          | Format, Examples                                                                                                                                          |
-|-----------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help-help)**                                  | `help` <br> Shows help page                                                                                                                               |
-| **[Create Doctor](#creating-and-adding-a-doctor-created)**      | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
-| **[Create Patient](#creating-and-adding-a-patient-createp)**    | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                     |
-| **[Delete Person](#deleting-a-person-deletep)**                 | `deleteP z/PERSON_ID` <br> e.g., `deleteP z/2`                                                                                                            |
-| **[Add Notes](#add-a-remark-to-a-patient-addr)**                | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
-| **[List](#listing-all-persons-list)**                           | `list` <br> Shows all persons in address book                                                                                                             |
-| **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
-| **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                                       |
-| **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                           |
-| **[View History](#view-history-of-a-person-view)**              | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                                 |
-| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                          |
-| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**      | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                           |
-| **[Delete Appointment](#delete-appointment-deletea)**           | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                          |
-| **[Clear](#clearing-all-entries-clear)**                        | `clear` <br> Clears all entries                                                                                                                           |
-| **[Exit](#exiting-the-program-exit)**                           | `exit` <br> Exits the program                                                                                                                             |
+| Action                                                         | Format, Examples                                                                                                                                        |
+|----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help-help)**                                 | `help` <br> Shows help page                                                                                                                             |
+| **[Create Doctor](#creating-and-adding-a-doctor-created)**     | `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` |
+| **[Create Patient](#creating-and-adding-a-patient-createp)**   | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                   |
+| **[Delete Person](#deleting-a-person-delete)**                 | `delete z/PERSON_ID` <br> e.g., `delete z/2`                                                                                                            |
+| **[Add Notes](#add-a-remark-to-a-patient-addr)**               | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                             |
+| **[List](#listing-all-persons-list)**                          | `list` <br> Shows all persons in address book                                                                                                           |
+| **[Edit](#editing-a-person-edit)**                             | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                            |
+| **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**     | `get KEYWORD` <br> e.g., `get john`                                                                                                                     |
+| **[Add Appointment](#adding-an-appointment-adda)**             | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                         |
+| **[View History](#view-history-of-a-person-view)**             | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                               |
+| **[Check Appointment](#check-appointments-of-a-person-checka)** | `checkA z/PERSON_ID y/DATE` <br> e.g., `checkA z/1 y/2024-12-31`                                                                                        |
+| **[Mark Appointment](#mark-appointment-of-a-doctor-mark)**     | `mark  z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `mark x/2024-12-31 15:23 z/00 z/01`                                                                         |
+| **[Delete Appointment](#delete-appointment-deletea)**          | `deleteA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID` <br> e.g., `deleteA x/2024-12-31 15.23 z/00 z/01`                                                        |
+| **[Clear](#clearing-all-entries-clear)**                       | `clear` <br> Clears all entries                                                                                                                         |
+| **[Exit](#exiting-the-program-exit)**                          | `exit` <br> Exits the program                                                                                                                           |
 
