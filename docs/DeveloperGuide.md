@@ -435,44 +435,112 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### **Launch and shutdown**
 
-1. Initial launch
+1. **Initial launch**
+    1. Download the jar file and copy it into an empty folder.
+    2. Open a command terminal, navigate to the folder containing the jar file, and run `java -jar planpal.jar`.
+    3. Expected: The GUI opens with sample contacts preloaded. The window size may not be optimum.
 
-   1. Download the jar file and copy into an empty folder
+2. **Saving window preferences**
+    1. Resize the window to an optimum size. Move the window to a different location.
+    2. Close the application by typing `exit`.
+    3. Re-launch the app by running `java -jar planpal.jar` in the terminal.
+    4. Expected: The most recent window size and location are retained.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+3. **Closing the app**
+    1. Type `exit` in the command box and press Enter.
+    2. Expected: The application closes without errors.
 
-1. Saving window preferences
+---
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### **Contact management**
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+1. **Adding a new contact**
+    1. Test case: `add n/John Doe p/98765432 e/johndoe@example.com a/123 Clementi Rd, #04-01 t/johndoe r/vendor`
+        - Expected: A new contact "John Doe" is added. Details of the added contact are displayed in the status message.
+    2. Test case: `add n/John Doe`
+        - Expected: Error message displayed indicating missing mandatory fields.
 
-1. _{ more test cases …​ }_
+2. **Editing a contact**
+    1. Prerequisite: At least one contact exists in the list.
+    2. Test case: `edit 1 p/91234567 e/johndoe_new@example.com`
+        - Expected: Updates the phone number and email of the first contact. The updated details are displayed in the contact list.
+    3. Test case: `edit 1`
+        - Expected: Error message indicating no fields were specified for updating.
 
-### Deleting a person
+3. **Finding contacts**
+    1. Test case: `find-name John`
+        - Expected: Displays all contacts whose name contains "John" (case-insensitive).
+    2. Test case: `find-role vendor`
+        - Expected: Displays all contacts with the "vendor" role.
+    3. Test case: `find-role unknown`
+        - Expected: Does not change the contacts displayed, instead prints out the available roles for search
 
-1. Deleting a person while all persons are being shown
+4. **Deleting a contact**
+    1. Prerequisite: At least two contacts exist in the list.
+    2. Test case: `delete 2`
+        - Expected: Deletes the second contact in the list. Status message displays the details of the deleted contact.
+    3. Test case: `delete 0`
+        - Expected: Error message indicating invalid command.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+---
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+### **Event management**
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+1. **Adding a new event**
+    1. Test case: `new Career Fair`
+        - Expected: Adds a new event named "Career Fair" to the event list.
+    2. Test case: `new`
+        - Expected: Error message indicating invalid command.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. **Adding a contact to an event**
+    1. Prerequisite: An event and at least one contact exist.
+    2. Test case: `event-add ei/1 a/1`
+        - Expected: Adds the first contact to the first event with the "attendee" role. Status message confirms the addition.
+    3. Test case: `event-add ei/1`
+        - Expected: Error message indicating invalid command.
 
-1. _{ more test cases …​ }_
+3. **Removing a contact from an event**
+    1. Prerequisite: A contact has been added to an event.
+    2. Test case: `remove ei/1 ci/1`
+        - Expected: Removes the contact from the specified event. Status message confirms the removal.
+    3. Test case: `remove ei/1`
+        - Expected: Error message indicating invalid command.
 
-### Saving data
+4. **Deleting an event**
+    1. Prerequisite: At least one event exists in the list.
+    2. Test case: `erase 1`
+        - Expected: Deletes the first event. Status message confirms the deletion.
 
-1. Dealing with missing/corrupted data files
+---
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### **Search Mode**
 
-1. _{ more test cases …​ }_
+1. **Entering and using search mode**
+    1. Test case: `search-mode`
+        - Expected: Application enters search mode, displaying all contacts in a search panel.
+    2. Test case: `search n/John`
+        - Expected: Filters the contacts in the search panel to display only those matching the name "John."
+
+2. **Excluding contacts**
+    1. Prerequisite: At least one contact is displayed in the search results.
+    2. Test case: `exclude ci/1`
+        - Expected: Removes the first contact from the search results. Status message confirms exclusion.
+
+3. **Clearing exclusions**
+    1. Prerequisite: At least one contact is excluded.
+    2. Test case: `clear-excluded`
+        - Expected: All excluded contacts are restored to the search results.
+
+4. **Exiting search mode**
+    1. Test case: `exit-search`
+        - Expected: Application returns to normal mode.
+
+---
+
+### **Data management**
+
+1. **Automatic saving**
+    1. Test case: Add a new contact or edit an existing one. Close the application and re-launch it.
+        - Expected: Changes persist and are visible after re-launch.
