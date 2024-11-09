@@ -156,7 +156,7 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both hiredfiredpro data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both HiredFiredPro data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `HiredFiredProStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -350,7 +350,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 
 **Extensions**:
 - 1a. The list is empty 
-  - 1a1. HiredFiredPro displays a message indicating there are no candidates to delete.
+  - 1a1. HiredFiredPro displays an error message
     Use case ends.
 
 - 1b. An invalid index is entered: 
@@ -369,12 +369,6 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 2. HiredFiredPro retrieves and displays the list of candidates in alphabetical order.
 
     Use case ends.
-
-
-**Extensions**:
-- 2a. The list is empty 
-  - 2a1. HiredFiredPro displays a message indicating no candidates are currently listed.
-Use case ends.
 
 
 ---
@@ -435,6 +429,15 @@ Use case ends.
 
    Use case ends.
 
+**Extensions**:
+- 1a. Hiring Manager does not input either 'a' or 'd'
+    - 1a1. HiredFiredPro displays an error message.
+
+      Use case ends.
+- 1b. Hiring Manager inputs other characters other than 'a' or 'd' (eg 'sort x')
+    - 1b1. HiredFiredPro displays an error message.
+
+      Use case ends.
 
 ---
 
@@ -491,7 +494,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a candidate
 
-1. Adding a candidate to hiredfiredpro
+1. Adding a candidate to HiredFiredPro
 
     1. Test case: `add n/Adib j/Developer p/12345678 e/example@example i/1`<br>
        Expected: New candidate will be added at the end of the list ie. if there are 6 people in the list, he will be 7<sup>th<sup>
@@ -530,19 +533,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data folder.
 
-   1. Open the folder where hiredfiredpro.jar is located.
+   1. Open the folder where HiredFiredPro.jar is located.
 
    1. Data folder containing json file does not exist.
  
-   1. Upon making any changes to hiredfiredpro, data folder with json file will be created with updated information.
+   1. Upon making any changes to HiredFiredPro, data folder with json file will be created with updated information.
 
-1. Deleting existing hiredfiredpro.json file in existing data folder.
+1. Deleting existing HiredFiredPro.json file in existing data folder.
 
-   1. Open the folder where hiredfiredpro.jar is located. 
+   1. Open the folder where HiredFiredPro.jar is located. 
       
    1. Click into the data folder and delete the existing json file inside. There should only be one file in the data folder
 
-   1. Upon launching hiredfiredpro, our sample data of 6 people will be shown. Changes made up to that point will be discarded.
+   1. Upon launching HiredFiredPro, our sample data of 6 people will be shown. Changes made up to that point will be discarded.
 
 1. Saving data after changes are made.
 
@@ -552,7 +555,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Close the app.
 
-   1. Open the hiredfiredpro.json file which would be in the same folder as your jar file. <br>
+   1. Open the HiredFiredPro.json file which would be in the same folder as your jar file. <br>
       
    1. All changes made are reflected in the json file.
 
