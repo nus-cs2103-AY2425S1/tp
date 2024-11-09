@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person's emergency contact in the address book.
+ * Represents a Person's emergency contact in NovaCare.
  * Guarantees: immutable; is always valid
  */
 public class EmergencyContact {
