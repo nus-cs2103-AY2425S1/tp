@@ -47,6 +47,7 @@ public class EditClientCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        editPersonDescriptor.setIssueEdited(false);
         EditCarDescriptor editCarDescriptor = new EditCarDescriptor();
 
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
@@ -69,9 +70,8 @@ public class EditClientCommandTest {
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_RACHEL).withPhone(VALID_PHONE_BOB)
                 .withIssues(VALID_ISSUE_HUSBAND).build();
-
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_RACHEL)
-                .withPhone(VALID_PHONE_BOB).withIssues(VALID_ISSUE_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withIssues(VALID_ISSUE_HUSBAND).withIssueEdited(true).build();
         EditClientCommand editClientCommand = new EditClientCommand(
                 indexLastPerson, descriptor, new EditCarDescriptor(), true, false);
 
@@ -86,8 +86,10 @@ public class EditClientCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setIssueEdited(false);
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
-            new EditPersonDescriptor(),
+            descriptor,
             new EditCarDescriptor(),
             false, false);
         Person editedPerson = model.getFilteredPersonList()
@@ -108,7 +110,7 @@ public class EditClientCommandTest {
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_RACHEL).build();
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_RACHEL).build(),
+                new EditPersonDescriptorBuilder().withName(VALID_NAME_RACHEL).withIssueEdited(false).build(),
                 new EditCarDescriptor(), true, false);
 
         String expectedMessage = Messages.formatSuccessMessage(editedPerson,

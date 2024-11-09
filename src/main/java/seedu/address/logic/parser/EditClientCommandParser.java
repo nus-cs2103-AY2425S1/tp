@@ -75,6 +75,13 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
             isPersonEdited = true;
         }
+
+        if (argMultimap.getValue(PREFIX_ISSUE).isPresent()) {
+            editPersonDescriptor.setIssueEdited(true);
+        } else {
+            editPersonDescriptor.setIssueEdited(false);
+        }
+
         parseIssuesForEdit(argMultimap.getAllValues(PREFIX_ISSUE)).ifPresent(editPersonDescriptor::setIssues);
 
         if (argMultimap.getValue(PREFIX_VRN).isPresent()) {

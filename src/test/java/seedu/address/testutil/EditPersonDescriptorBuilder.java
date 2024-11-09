@@ -91,6 +91,14 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Issue} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withIssueEdited(boolean isIssueEdited) {
+        descriptor.setIssueEdited(isIssueEdited);
+        return this;
+    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
