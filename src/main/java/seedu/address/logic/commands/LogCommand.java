@@ -25,7 +25,7 @@ public class LogCommand extends Command {
             + "by the index number used in the last person listing. "
             + "If the date field is left empty the date on the entry will be on today by default (System date).\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_DATE + "[date] " + PREFIX_LOG + "non-empty log message"
+            + PREFIX_DATE + "[date] " + PREFIX_LOG + "non-empty log message\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LOG + "Met for price negotiation.\n"
             + "Example: " + COMMAND_WORD + " 2 "
