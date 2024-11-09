@@ -230,7 +230,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 1. User enters the event's details.
 2. User submits the event's details to the system.
 3. System checks if all required information is present, and that all information is valid.
-4. System creates the new event and confirms creation to the user. 
+4. System creates the new event and confirms creation to the user.
 <br/> Use Case Ends.
 
 **Extensions**:
