@@ -178,7 +178,7 @@ public class BackupManagerTest {
     }
 
     @Test
-    public void createIndexedBackup_descriptionTooLong_throwsIOException() throws IOException {
+    public void createIndexedBackup_descriptionTooLong_throwsIoException() throws IOException {
         // Create a description that causes the file name to exceed MAX_FILENAME_LENGTH
         String longDescription = "a".repeat(300); // Exceeds 250 characters
 

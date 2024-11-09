@@ -178,7 +178,9 @@ public class ModelManagerTest {
 
         // Check that the exception message is correct
         assertEquals(
-                "Failed to create backup: Backup file name exceeds the maximum length of 250 characters. Please shorten your description.",
+                "Failed to create backup:"
+                        + " Backup file name exceeds the maximum length of 250 characters."
+                        + " Please shorten your description.",
                 exception.getMessage()
         );
     }

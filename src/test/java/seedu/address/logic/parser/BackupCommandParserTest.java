@@ -3,14 +3,10 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.BackupCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 
 
 /**
@@ -54,7 +50,9 @@ public class BackupCommandParserTest {
 
         // Check that the exception message is correct
         assertEquals(
-                "Failed to create backup!! Backup file name exceeds the maximum length of 250 characters. Please shorten your description.",
+                "Failed to create backup!!"
+                        + " Backup file name exceeds the maximum length of 250 characters."
+                        + " Please shorten your description.",
                 exception.getMessage()
         );
     }
