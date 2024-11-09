@@ -30,7 +30,7 @@ public class DeleteYCommand extends Command {
 
     /**
      * Creates a DeleteYCommand to delete the specified {@code Person} once the confirmation is given.
-     * @param personToDelete
+     * @param personToDelete Person to be deleted.
      */
     public DeleteYCommand(Person personToDelete) {
         this.personToDelete = personToDelete;
@@ -39,7 +39,7 @@ public class DeleteYCommand extends Command {
 
     /**
      * Creates a DeleteYCommand to delete the specified {@code Wedding} once the confirmation is given.
-     * @param weddingToDelete
+     * @param weddingToDelete Wedding to be deleted.
      */
     public DeleteYCommand(Wedding weddingToDelete) {
         this.weddingToDelete = weddingToDelete;
@@ -80,6 +80,7 @@ public class DeleteYCommand extends Command {
         }
 
         if (!(weddingToDelete == null)) {
+
             model.deleteTagsWithWedding(weddingToDelete);
             model.deleteWedding(weddingToDelete);
             // Clear history of weddingToDelete from StaticContext once delete operation is done
@@ -89,6 +90,16 @@ public class DeleteYCommand extends Command {
         }
 
         if (!(personToDelete == null)) {
+
+            if (!(model.hasExactPerson(personToDelete))) {
+                StaticContext.clearStaticContext();
+                throw new CommandException("Delete operation failed. If you modified the person (any field) "
+                        + "before pressing y or n, either\n"
+                        + "1. Undo the modification and try again, or\n"
+                        + "2. Re-enter the modified person's details and delete again.\n"
+                        + "We have reset the delete operation to prevent accidental operations.");
+            }
+
             Person personToDeleteWithNoTag = model.personWithAllTagsRemoved(personToDelete);
             model.deletePerson(personToDeleteWithNoTag);
             // Clear history of personToDelete from StaticContext once delete operation is done

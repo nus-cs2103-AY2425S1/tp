@@ -54,4 +54,14 @@ public class StaticContext {
         return personToDelete == null && weddingToDelete == (null)
                 && !clearAddressBookPending && !clearWeddingBookPending;
     }
+
+    /**
+     * Clears the static context of everything.
+     */
+    public static void clearStaticContext() {
+        personToDelete = null;
+        weddingToDelete = null;
+        clearAddressBookPending = false;
+        clearWeddingBookPending = false;
+    }
 }
