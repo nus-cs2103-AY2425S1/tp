@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -249,12 +249,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -276,8 +270,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * administrator of a small Non-Governmental Organisation (NGO) of less than 20 full-time staff
 * responsible for managing a large network of donors, volunteers, and partners
-* combined total of approximately 200 contacts 
-* has a need to manage volunteers participation hours 
+* combined total of approximately 200 contacts
+* has a need to manage volunteers participation hours
 * comfortable using and editing human-readable text files for the management and storage of contact data
 * works independently as a single user on a personal machine with no need for multi-user setups or shared data
 * prefer desktop apps over other types
@@ -285,8 +279,8 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Our CLI-based contact management tool allows Non-Governmental Organisations (NGOs) to 
-manage contacts faster than a typical mouse/GUI driven app. 
+**Value proposition**: Our CLI-based contact management tool allows Non-Governmental Organisations (NGOs) to
+manage contacts faster than a typical mouse/GUI driven app.
 
 Staff of NGOs will be able to streamline operations
 such as sending mass emails to specific groups of users of their choice and visualising data about their contacts
@@ -297,41 +291,41 @@ without the need for expensive software or a high level of technical expertise.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                              | So that I can…​                                                                                         |
-|----------|--------------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-| ***      | NGO administrator | view all contacts in the contact list                                     | I can quickly find relevant information                                                                 |
-| ***      | NGO administrator | search for contacts by name, role                                         | I can quickly find relevant personnel                                                                   |
-| ***      | NGO administrator | create groups of contacts (e.g., volunteers, donors, partners)            | I can manage communications more efficiently                                                            |
-| ***      | NGO administrator | add a new volunteer's contact information                                 | I can add volunteers to my organisation                                                                 |
-| ***      | NGO administrator | set a volunteer's participation hours                                     | I can see volunteer's participation hours                                                               |
-| ***      | NGO administrator | edit a volunteer's information                                            | I can keep volunteer records up to date                                                                 |
-| ***      | NGO administrator | delete a volunteer's contact information                                  | I can remove irrelevant or erroneous entries                                                            |
-| **       | NGO administrator | sort contacts by alphabetical or insertion order                          | that I can easily locate and manage contacts efficiently.                                               |
-| **       | NGO administrator | see a dashboard of recent activity and upcoming tasks                     | I can have an overview of key engagements at a glance.                                                  |
-| **       | NGO administrator | merge duplicate contact entries                                           | I can maintain a clean and organized address book                                                       |
-| **       | NGO administrator | archive contacts who are no longer active                                 | I can keep the active contact list clean without deleting important data                                |
-| **       | NGO administrator | set communication preferences for each contact (e.g., email, SMS)         | I can ensure contacts are reached via their preferred channels                                          |
-| **       | NGO administrator | copy to clipboard a list of all emails of addressees in the current search | I can easily send out a mass email to relevant personnel                                                |
-| **       | NGO administrator | be able to send an email directly from the application                    | I do not need to copy the contact information out of the command line                                   |
-| **       | NGO administrator | be able to send templated emails from the application, with customizations | I can conveniently contact people I frequently contact about the same thing, with slight customizations |
-| **       | NGO administrator | export the contact list and engagement history to CSV or Excel            | I can share data with other team members or for reporting purposes.                                     |
+| Priority | As a …​                                    | I want to …​                                                               | So that…​                                                                          |
+|----------|--------------------------------------------|----------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| ***      | NGO administrator | view all contacts in the contact list                                      | I can quickly find relevant information                                                  |
+| ***      | NGO administrator | search for contacts by name, role                                          | I can quickly find relevant personnel                                                    |
+| ***      | NGO administrator | have different roles for contacts (e.g., volunteers, donors, partners)     | I can manage communications more efficiently                                             |
+| ***      | NGO administrator | add a new volunteer's contact information                                  | I can add volunteers to my organisation                                                  |
+| ***      | NGO administrator | set a volunteer's participation hours                                      | I can see volunteer's participation hours                                                |
+| ***      | NGO administrator | edit a volunteer's information                                             | I can keep volunteer records up to date                                                  |
+| ***      | NGO administrator | delete a volunteer's contact information                                   | I can remove irrelevant or erroneous entries                                             |
+| **       | NGO administrator | sort contacts by alphabetical or insertion order                           | I can easily locate and manage contacts efficiently                                      |
+| **       | NGO administrator | copy to clipboard a list of all emails of addressees in the current search | I can easily send out a mass email to relevant personnel                                 |
+| **       | NGO administrator | create groups (e.g. blood drive) which contain contacts                    | I can group contacts by their involvement in an event                                    |
+| **       | NGO administrator | see all contacts in a group                                                | I can easily see everyone who is involved in an event                                    |
+| **       | NGO administrator | add contacts to a group                                                    | I can easily add a new participant in an event to the existing group                     |
+| **       | NGO administrator | remove contacts from a group                                               | I can easily remove someone who is no longer involved in an event from an existing group |
+| **       | NGO administrator | delete a group                                                             | I can delete groups after the event has concluded to avoid clutter                       |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Search for person(s)**
 
 **MSS**
 
 1.  User searches for a person by name
-2.  AddressBook shows a list of persons which fit the criteria
+2.  CFG shows a list of persons which fit the criteria
 
     Use case ends.
 
 **Extensions**
 
 * 1a. User can also search by tag/role... etc.
+
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
@@ -342,15 +336,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CFG shows a list of relevant persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  CFG deletes the person
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
@@ -358,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. CFG shows an error message.
 
       Use case resumes at step 2.
 
@@ -367,15 +363,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CFG shows a list of relevant persons
 3.  User requests to add some number of volunteer hours to a specific person in the list
-4.  AddressBook adds the specified number of volunteer hours to the specified person's existing hours
+4.  CFG adds the specified number of volunteer hours to the specified person's existing hours
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+ 
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
@@ -383,7 +381,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. CFG shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The specified person is not a Volunteer
+
+    * 3b1. CFG shows an error message.
 
       Use case resumes at step 2.
 
@@ -392,22 +396,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CFG shows a list of relevant persons
 3.  User requests to get emails of persons on the list
-4.  AddressBook copies to the user's clipboard a list of all emails of persons on the list
+4.  CFG copies to the user's clipboard a list of all emails of persons on the list
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
   Use case ends.
 
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -486,3 +491,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+1. **Allow contacts to have multiple phone numbers**: Currently, contacts are only allowed to have one phone number.
+   Realistically, contacts may have multiple phone numbers (e.g. home number, office number), so we plan to allow for contacts to have multiple numbers attached to them.
