@@ -98,7 +98,7 @@ For more information on the format of `PARAMETERS`, please refer to [Input param
 1) Items in square brackets are optional:<br>
    - `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
 2) Parameters can be in any order: <br>
-   - `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`.
+   - `n/NAME w/WARD` is equivalent to `w/WARD n/NAME`.
 3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored: <br>
    - `help 123` is interpreted as `help`.
 4) Command word is not case-sensitive: <br>
@@ -161,7 +161,7 @@ Symbol     | Parameter    | Constraints
 
 Symbol     | Parameter                        | Constraints
 -----------|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**-**  | `INDEX`                          |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
+**-**  | `INDEX`                          |- Refers to the index number shown in the displayed patient list.<br>- **Must be a positive integer** 1, 2, 3, …​
 **-**  | `DATE`                           |- **Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.
 
 [Back to Table of Contents](#table-of-contents)
