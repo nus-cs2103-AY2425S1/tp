@@ -85,7 +85,7 @@ public class DeleteCommandTest {
         Person hiddenPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // ensures that notShownName is still in address book list
+        // ensures that notShownName is still in KonTAct list
         assertTrue(model.hasPerson(hiddenPerson));
 
         DeleteCommand deleteCommand = new DeleteCommand(hiddenPerson.getName());

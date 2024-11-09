@@ -72,7 +72,7 @@ To get started,
    * The GUI should now look something like this.<br>
    ![quick start GUI after commands](images/quickStartResultScreenshot.png)
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts. THIS IS AN IRREVERSIBLE ACTION.
 
 6. Refer to the [Features](#features) below for details of each command.
    <br><br>
@@ -86,7 +86,7 @@ To get started,
 | Action                                                          | Format, Examples                                                                                                                                                                            |
 |-----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-person-add)                                 | `add name/NAME email/EMAIL telegram/TELEGRAM [tag/TAG]…​ github/GITHUB` <br> e.g., `add name/James Ho email/jamesho@example.com telegram/@James tag/friend tag/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                     |
+| [**Clear**](#clearing-all-entries-clear)                        | `clear` <br> <b>This is an IRREVERSIBLE action!<b>                                                                                                                                          |
 | [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                            |
 | [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                          |
 | [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
@@ -178,6 +178,9 @@ Most commands in KonTActs come equipped with their equivalent shortcuts.
 
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extra parameters for commands that do not have said parameters in their command format will be treated as input for the previous parameter.<br>
+ e.g. if the command input is `delete name/John tag/student`, `John tag/student` will be considered as the NAME input.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -428,7 +431,7 @@ Finds persons whose names contain any of the given tag keywords.
 
 ### <i class="fa-solid fa-user-slash"></i> Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -461,7 +464,7 @@ Deletes the specified person from the address book.
 
 ### <i class="fa-brands fa-github"></i> Launching GitHub repository : `github`
 
-Launches GitHub repository of the specified person on the browser from the address book.
+Launches GitHub repository of the specified person on the browser from KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -476,8 +479,8 @@ Launches GitHub repository of the specified person on the browser from the addre
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Launches the GitHub repository of the specified person.
-* Person specified needs to have a GitHub username assigned in the Address Book.
-* The name refers to the full name of the person shown in the Address Book.
+* Person specified needs to have a GitHub username assigned in KonTActs.
+* The name refers to the full name of the person shown in KonTActs.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -494,7 +497,7 @@ Launches GitHub repository of the specified person on the browser from the addre
 
 ### <i class="fa-solid fa-eye"></i> Viewing a contact's full details : `view`
 
-Opens a window at the side with the full details of the specified person from the address book.
+Opens a window at the side with the full details of the specified person from KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -619,6 +622,7 @@ Order of contact details can be reset to default by calling `sort reset`.
 * The sort order persists between commands.
 * The sort order will reset when `sort reset` command is given.
 * The sorting is **case-insensitive**: upper and lower case are treated as the same values.
+* The sorting will be done based on the **lexicographical order** of the field, regardless of text or numbers.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -639,7 +643,13 @@ Order of contact details can be reset to default by calling `sort reset`.
 
 ### <i class="fa-solid fa-broom"></i> Clearing all entries : `clear`
 
-Clears all entries from the KonTActs.
+Clears all entries from KonTActs. 
+
+<box type="important">
+
+This action is <b><i><u>IRREVERSIBLE</u></i></b> and it <b><i><u>cannot be undone</u></i></b>! You would lose all the contacts if not [**exported**](#exporting-data-into-csv-file-export)! 
+
+</box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -751,7 +761,7 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 <md>**Examples:**</md>
 
-* `export path/data/group12.csv` will export the contacts in the Address book as a csv file (group12.csv at the 
+* `export path/data/group12.csv` will export the contacts in KonTActs as a csv file (group12.csv at the 
 relative path given)
 * Alternatively, `ex p/data/group12.csv` will do the exact same. It uses the shortcut command and parameter. 
   </box>

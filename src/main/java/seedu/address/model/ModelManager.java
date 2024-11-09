@@ -22,7 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of KonTActs data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -34,9 +34,9 @@ public class ModelManager implements Model {
     private final PredefinedAssignmentsData predefinedAssignmentsData;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given KonTActs and userPrefs.
      *
-     * @param addressBook               the address book
+     * @param addressBook               KonTActs
      * @param userPrefs                 the user prefs
      * @param predefinedAssignmentsData the predefined assignments data
      */
@@ -45,7 +45,7 @@ public class ModelManager implements Model {
                         ReadOnlyPredefinedAssignmentsData predefinedAssignmentsData) {
         requireAllNonNull(addressBook, userPrefs, predefinedAssignmentsData);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with KonTActs: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
