@@ -61,12 +61,12 @@ public class Student {
      * This defines a weaker notion of equality between two students.
      */
     public boolean isSameStudent(Student otherStudent) {
-        if (otherStudent == this) {
+        if (otherStudent.studentId == this.studentId) {
             return true;
         }
 
         return otherStudent != null
-                && otherStudent.getName().equals(getName());
+                && otherStudent.getStudentId().equals(getStudentId());
     }
 
     public void setAttendance(TutDate tutDate) {

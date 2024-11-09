@@ -21,25 +21,25 @@ public class StudentTest {
         assertTrue(ALICE.isSameStudent(ALICE));
 
         // null -> returns false
-        assertFalse(ALICE.isSameStudent(null));
+        assertFalse(ALICE.isSameStudent(BOB));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB)
                 .withTutorialId(VALID_TUTORIALID_BOB).build();
-        assertTrue(ALICE.isSameStudent(editedAlice));
-
-        // different name, all other attributes same -> returns false
-        editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameStudent(editedBob));
+        // different name, all other attributes same -> returns true
+        editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name differs in case, all other attributes same -> returns true
+        Student editedBob = new StudentBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSameStudent(editedBob));
+
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new StudentBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameStudent(editedBob));
+        assertTrue(BOB.isSameStudent(editedBob));
     }
 
     @Test

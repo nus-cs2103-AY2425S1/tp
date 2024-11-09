@@ -76,10 +76,6 @@ public class EditCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-        }
-
         // Check for duplicate student IDs if student ID is changed
 
         if (!editedStudent.getStudentId().equals(studentToEdit.getStudentId())) {
