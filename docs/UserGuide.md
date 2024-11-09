@@ -95,10 +95,25 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 
 </box>
 
+<box type="info" seamless>
+
+**Notes about this user guide:**<br>
+
+- Please refer to this user guide whenever you feel something is wrong with the application to determine whether it is a genuine problem.
+- The **client** referred to in this user guide is the property owner or landlord who has engaged you to rent out and manage their property.
+- The **rental information** referred to in this user guide consists of the details of the property being rented, including key information for example address, rental start date, and other relevant property details.
+- The **customer** (as part of the rental information) referred to in this user guide is the tenant of the property managed by the client.
+- **Monthly rent** is equivalent to **monthly rent amount**.
+- **Deposit** is equivalent to **deposit amount**.
+- **Customer list** is equivalent to **customers**.
+- **Rent due date** is equivalent to **rental monthly payment date**.
+
+</box>
+
 ## Command Summary
 <box type="info" seamless>
 
-**Please refer to "Notes about the command format" in [Features](#features) for a better understanding of the command format.**
+**Please refer to "Notes about the command format" in [Important Notes](#important-notes) for a better understanding of the command format.**
 
 </box>
 
@@ -127,14 +142,6 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 </d-table>
 
 ## Important keywords
-
-- The **client** referred to in this user guide is the property owner or landlord who has engaged you to rent out and manage their property.
-- The **rental information** referred to in this user guide consists of the details of the property being rented, including key information for example address, rental start date, and other relevant property details.
-- The **customer** (as part of the rental information) referred to in this user guide is the tenant of the property managed by the client.
-- **Monthly rent** is equivalent to **monthly rent amount**.
-- **Deposit** is equivalent to **deposit amount**.
-- **Customer list** is equivalent to **customers**.
-- **Rent due date** is equivalent to **rental monthly payment date**.
 
 ## Parameter Constraints Table
 
@@ -324,8 +331,8 @@ Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {
 
 **Example inputs**:
 1. `radd 1 a/140 Robinson Road, #03-05, Chow House m/3200 dd/10 d/0`
-2. `radd 1 a/Blk 26 Defu Lane 10 #01-190 e/31/10/2024 m/2350 dd/15`
-3. `radd 3 a/25 Jalan Sempadan #02-06 s/01/09/2024 e/31/08/2025 cl/Steven Lim dd/20 m/2750 d/8250`
+2. `radd 1 a/Blk 26 Defu Lane 10 #01-190 e/31/10/2024 m/2350 dd/15 cl/Dominic`
+3. `radd 3 a/25 Jalan Sempadan #02-06 s/01/09/2024 e/31/08/2025 cl/Steven Lim;Jessica dd/20 m/2750 d/8250`
 
 </box>
 
@@ -333,8 +340,8 @@ Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {
 
 **Example outputs**:
 1. `New rental information is added to the client: Address: 140 Robinson Road, #03-05, Chow House; Rental Start Date: —; Rental End Date: —; Rent Due Date: 10; Monthly Rent: $3200.00; Deposit: $0.00; Customer List: —`
-2. `New rental information is added to the client: Address: Blk 26 Defu Lane 10 #01-190; Rental Start Date: —; Rental End Date: 31 Oct 2024; Rent Due Date: 15; Monthly Rent: $2350.00; Deposit: —; Customer List: —`
-3. `New rental information is added to the client: Address: 25 Jalan Sempadan #02-06; Rental Start Date: 01 Sep 2024; Rental End Date: 31 Aug 2025; Rent Due Date: 20; Monthly Rent: $2750.00; Deposit: $8250.00; Customer List: Steven Lim`
+2. `New rental information is added to the client: Address: Blk 26 Defu Lane 10 #01-190; Rental Start Date: —; Rental End Date: 31 Oct 2024; Rent Due Date: 15; Monthly Rent: $2350.00; Deposit: —; Customer List: Dominic`
+3. `New rental information is added to the client: Address: 25 Jalan Sempadan #02-06; Rental Start Date: 01 Sep 2024; Rental End Date: 31 Aug 2025; Rent Due Date: 20; Monthly Rent: $2750.00; Deposit: $8250.00; Customer List: Steven Lim;Jessica`
 
 </box>
 
@@ -479,7 +486,7 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 
 **Example inputs**:
 1. `redit 1 r/1 a/10 North Bridge Rd #02-5125 m/3000 d/0`
-2. `redit 1 r/2 e/31/12/2024 dd/1`
+2. `redit 1 r/2 e/31/12/2024 dd/1 cl/Alice;Bob`
 3. `redit 3 r/1 s/01/01/2025 e/ d/12000 cl/Tan Eng Heng`
 
 </box>
@@ -488,7 +495,7 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 
 **Example outputs**:
 1. `Edited Client's Rental Information: Address: 10 North Bridge Rd #02-5125; Rental Start Date: 01 Apr 2018; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $3000.00; Deposit: $0.00; Customer List: Jackson;Yummi`
-2. `Edited Client's Rental Information: Address: Blk 112 Bishan Ave 5, #15-521; Rental Start Date: 01 Jan 2019; Rental End Date: 31 Dec 2024; Rent Due Date: 1; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Ryan Low;Matthew`
+2. `Edited Client's Rental Information: Address: Blk 112 Bishan Ave 5, #15-521; Rental Start Date: 01 Jan 2019; Rental End Date: 31 Dec 2024; Rent Due Date: 1; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Alice;Bob`
 3. `Edited Client's Rental Information: Address: Blk 8 Hougang Ave 10, #11-2411; Rental Start Date: 01 Jan 2025; Rental End Date: —; Rent Due Date: 15; Monthly Rent: $1500.00; Deposit: $12000.00; Customer List: Tan Eng Heng`
 
 </box>
