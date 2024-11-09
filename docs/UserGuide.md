@@ -397,6 +397,7 @@ Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 - The `INDEX` **must be a positive integer** 1, 2, 3, …​ 
 - Property tags are added in a case-insensitive manner. e.g `t/condo` or `t/CONDO` will both add the `CONDO` tag.
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
+- If multiple attributes are used `t/condo t/HDB...`, the **latest tag** is used instead.
 
 Examples:
 
