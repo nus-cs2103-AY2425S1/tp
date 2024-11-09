@@ -22,7 +22,7 @@ Main Features:
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 <!-- Quick start -->
 ## Quick start
@@ -57,7 +57,7 @@ Main Features:
 Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 <!-- Features -->
 ## Features
@@ -84,7 +84,8 @@ Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-<!-- Viewing help -->
+--- {.border-secondary}
+
 ### Viewing help : `help`
 
 Shows a message with a list of command words and explanation on how to access the help page.
@@ -93,8 +94,16 @@ Shows a message with a list of command words and explanation on how to access th
 
 Format: `help`
 
+--- {.border-secondary}
 
-<!-- Adding a person -->
+### Listing all persons and events : `list`
+
+Shows a list of all persons and events in the address book.
+
+Format: `list`
+
+--- {.border-secondary}
+
 ### Adding a person: `add p`
 
 Adds a person to the address book.
@@ -106,11 +115,16 @@ Format: `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
+<box type="info" seamless>
+
+**Note:** Two persons cannot have the same name, use disambiguation if needed
+eg: James (Office)
+</box>
+
 Examples:
 * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add p n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-<!-- Adding an event -->
 ### Adding an event: `add e`
 
 Adds an event to the address book.
@@ -122,15 +136,17 @@ Format: `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​`
 **Tip:** An event can have any number of tags (including 0)
 </box>
 
+<box type="info" seamless>
+
+**Note:** Two events cannot have the same name, use disambiguation if needed
+eg: Book Fair (Orchard)
+</box>
+
 Examples:
 * `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`
 * `add e n/Pizza Party a/Clementi Ave 2, #02-25 s/2024-12-01 10:30 t/Work`
 
-### Listing all persons and events : `list`
-
-Shows a list of all persons and events in the address book.
-
-Format: `list`
+--- {.border-secondary}
 
 ### Editing a person : `edit p`
 
@@ -138,7 +154,8 @@ Edits an existing person in the address book.
 
 Format: `edit p INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -155,7 +172,8 @@ Edits an existing event in the address book.
 
 Format: `edit e INDEX [n/NAME] [a/ADDRESS] [s/START TIME] [t/TAG]…​`
 
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
+* The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
@@ -165,6 +183,52 @@ Format: `edit e INDEX [n/NAME] [a/ADDRESS] [s/START TIME] [t/TAG]…​`
 Examples:
 *  `edit e 1 a/80 Blockhome Lane s/2024-12-15 08:30` Edits the address and starting time of the 1st event to be `80 Blockhome Lane` and `2024-12-15 08:30` respectively.
 *  `edit e 2 n/Summer Time Convention t/` Edits the name of the 2nd event to be `Summer Time Convention` and clears all existing tags.
+
+--- {.border-secondary}
+
+### Deleting a person : `delete p`
+
+Deletes the specified person from the address book.
+
+Format: `delete p INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete p 2` deletes the 2nd person in the address book.
+* `find p Betsy` followed by `delete p 1` deletes the 1st person in the results of the `find` command.
+
+Before and After:
+<div style="display: flex;">
+
+  <img src="images/deletePersonBefore.png" alt="result for 'delete p 2'" style="width: 50%; margin-right: 10px;">
+  <img src="images/deletePersonAfter.png" alt="result for 'delete p 2'" style="width: 50%;">
+</div>
+
+### Deleting an event : `delete e`
+
+Deletes the specified event from the address book.
+
+Format: `delete e INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed events list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete e 2` deletes the 2nd event in the address book.
+* `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
+
+Before and After:
+<div style="display: flex;">
+
+  <img src="images/deleteEventBefore.png" alt="result for 'delete e 2'" style="width: 50%; margin-right: 10px;">
+  <img src="images/deleteEventAfter.png" alt="result for 'delete e 2'" style="width: 50%;">
+</div>
+
+--- {.border-secondary}
 
 ### Locating persons by name: `find p`
 
@@ -202,6 +266,8 @@ Examples:
 * `find e Sentosa Party` returns `Sentosa Vacation`, `Beach Party`<br>
   ![result for 'find sentosa party'](images/findSentosaParty.png)
 
+--- {.border-secondary}
+
 ### Locating persons by tag: `search p`
 
 Finds persons whose tags contain any of the given keywords.
@@ -238,37 +304,7 @@ Examples:
 * `search e Summer Fashion` returns events with tags named `Summer` or `Fashion`<br>
   ![result for 'search Summer Fashion'](images/searchSummerFashionResult.png)
 
-### Deleting a person : `delete p`
-
-Deletes the specified person from the address book.
-
-Format: `delete p INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete p 2` deletes the 2nd person in the address book.
-  ![result for 'delete p 2'](images/deletePersonBefore.png)
-  ![result for 'delete p 2'](images/deletePersonAfter.png)
-* `find p Betsy` followed by `delete p 1` deletes the 1st person in the results of the `find` command.
-
-### Deleting an event : `delete e`
-
-Deletes the specified event from the address book.
-
-Format: `delete e INDEX`
-
-* Deletes the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed events list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete e 2` deletes the 2nd event in the address book.
-    ![result for 'delete e 2'](images/deleteEventBefore.png)
-    ![result for 'delete e 2'](images/deleteEventAfter.png)
-* `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
+--- {.border-secondary}
 
 ### Linking a person to an event : `link`
 
@@ -295,6 +331,8 @@ Examples:
 * `find p John` followed by `unlink 1 ev/Summer Time Convention` removes the link between the 1st person in the results of the `find` command and the event.
   ![result for 'unlink 2 ev/Summer Time Convention'](images/unlink2Summer.png)
 
+--- {.border-secondary}
+
 ### Display events in schedule : `schedule`
 
 If non-negative integer given, find all events happening in the next given number of days.
@@ -310,6 +348,16 @@ Examples:
 * `schedule -7` displays all events that happened in the past 7 days from the current date.
 * `schedule 2024-01-01` displays all events occurring on 1 Jan 2024.
 
+--- {.border-secondary}
+
+### Clearing all entries : `clear`
+
+Displays a confirmation, enter exactly "Yes" or "Y" to clear all entries from the address book.
+
+Format: `clear` then `y` or `yes`
+
+![result for 'clear' then `yes](images/clearAll.png)
+
 ### Clearing all persons : `clear p`
 
 Displays a confirmation, enter "yes" or "y" to clear all persons from the address book.
@@ -323,20 +371,15 @@ Displays a confirmation, enter "yes" or "y" to clear all events from the address
 
 Format: `clear e` then `y` or `yes`
 
-
-### Clearing all entries : `clear`
-
-Displays a confirmation, enter exactly "Yes" or "Y" to clear all entries from the address book.
-
-Format: `clear` then `y` or `yes`
-
-![result for 'clear' then `yes](images/clearAll.png)
+--- {.border-secondary}
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+--- {.border-secondary}
 
 ### Saving the data
 
@@ -353,14 +396,14 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## Troubleshooting
 
@@ -457,14 +500,14 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 </box>
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## Command summary
 

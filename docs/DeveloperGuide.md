@@ -287,25 +287,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Eventory is an application that allows you to plan events easily, whether you’re planning by yourself or collaborating with others. With Eventory, you’ll keep crucial details always at your fingertips and ensure that everyone is on the same page.
 
-Here are just some of the features of Eventory:
+Here are some of the features of Eventory:
 
-* **Tag** contacts and events
-* **Create custom notes** to store crucial information for each contact
-* Store and **view communication history**
-* Delegate responsibilities by **assigning tasks to contacts**
-* **Schedule messages** to contacts in advance
-* **Send bulk messages** to many contacts at once
+* **Add**, **Edit**, and **Delete** contacts and events
+* **Find** contacts and events by name and tag
+* **Link** contacts to events
 
-By enhancing collaboration and automating communication, Eventory reduces stress and helps you execute events smoothly and efficiently.
+By enhancing management and data processing, Eventory reduces stress and helps you execute events smoothly and efficiently.
 
 ### User stories
-
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 #### Important Note:
 * Not all features in the user stories have been implemented
 * For features that have been implemented, they may not work exactly as described in user stories
 * Features are not implemented strictly based on priority
-
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                          | I want to …​                                               | So that I can…​                                                            |
 |----------|--------------------------------------------------|------------------------------------------------------------|----------------------------------------------------------------------------|
@@ -338,8 +333,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | planner who does not check the application often | customise alerts and notifications                         | differentiate between notifications easily                                 |
 | `*`      | long time event organiser                        | archive inactive contacts without deleting them            | maintain a record of past interactions while keeping my active list clean. |
 
-*{More to be added}*
-
 ### Use Cases
 
 (For all use cases below, the **System** is the `Eventory` and the **Actor** is the `user`, unless specified otherwise)
@@ -365,31 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### **Use Case 2: Delete a person or event**
-
-**Main Success Scenario (MSS)**
-
-1. User requests to list persons and events.
-2. Eventory shows a list of persons and events.
-3. User requests to delete a specific person or event in the list.
-4. Eventory deletes the person or event.
-
-    *Use case ends.*
-
-**Extensions**
-
-- **2a.** The list is empty.
-  *Use case ends.*
-
-- **3a.** The given index is invalid.
-    - **3a1.** Eventory shows an error message.
-      *Use case resumes at step 2.*
-
-  *Use case ends.*
-
----
-
-#### **Use Case 3: Edit a person or event**
+#### **Use Case 2: Edit a person or event**
 
 **Main Success Scenario (MSS)**
 
@@ -414,6 +383,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
+#### **Use Case 3: Delete a person or event**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to list persons and events.
+2. Eventory shows a list of persons and events.
+3. User requests to delete a specific person or event in the list.
+4. Eventory deletes the person or event.
+
+   *Use case ends.*
+
+**Extensions**
+
+- **2a.** The list is empty.
+  *Use case ends.*
+
+- **3a.** The given index is invalid.
+    - **3a1.** Eventory shows an error message.
+      *Use case resumes at step 2.*
+
+  *Use case ends.*
+
+---
+
 #### **Use Case 4: Find a person or event by name**
 
 **Main Success Scenario (MSS)**
@@ -422,6 +415,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Eventory returns a list of relevant people and events.
 
    *Use case ends.*
+
+**Extensions**
 
 - **2a.** The list is empty.
 
@@ -438,13 +433,78 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    *Use case ends.*
 
+**Extensions**
+
 - **2a.** The list is empty.
 
   *Use case ends.*
 
 ---
 
-#### **Use Case 6: Clear Eventory**
+#### **Use Case 6: View events happening in the schedule**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to see their schedule.
+2. Eventory returns a list of events happening in a time period.
+
+   *Use case ends.*
+
+**Extensions**
+
+- **2a.** The list is empty.
+
+  *Use case ends.*
+
+---
+
+#### **Use Case 7: Link person to event**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to link person to event.
+2. Eventory does the linking.
+
+   *Use case ends.*
+
+**Extensions**
+
+- **2a.** The given index is invalid.
+    - **2a1.** Eventory shows an error message.
+      *Use case resumes at step 1.*
+
+- **2b.** The event does not exist.
+    - **2b1.** Eventory shows an error message.
+      *Use case resumes at step 1.*
+
+  *Use case ends.*
+
+---
+
+#### **Use Case 8: Unlink person to event**
+
+**Main Success Scenario (MSS)**
+
+1. User requests to unlink person from event.
+2. Eventory does the unlinking.
+
+   *Use case ends.*
+
+**Extensions**
+
+- **2a.** The given index is invalid.
+    - **2a1.** Eventory shows an error message.
+      *Use case resumes at step 1.*
+
+- **2b.** The event does not exist.
+    - **2b1.** Eventory shows an error message.
+      *Use case resumes at step 1.*
+
+  *Use case ends.*
+
+---
+
+#### **Use Case 9: Clear Eventory**
 
 **Main Success Scenario (MSS)**
 
@@ -455,7 +515,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### **Use Case 7: List contacts and events**
+#### **Use Case 10: List contacts and events**
 
 **Main Success Scenario (MSS)**
 
@@ -472,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### **Use Case 8: Request for help**
+#### **Use Case 11: Request for help**
 
 **Main Success Scenario (MSS)**
 
@@ -483,7 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### **Use Case 9: Exit programme**
+#### **Use Case 12: Exit programme**
 
 **Main Success Scenario (MSS)**
 
