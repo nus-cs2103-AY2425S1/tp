@@ -147,7 +147,7 @@ Format: `list`
 **Tips:** Negative balances are red. Positive and zero balances are green.
 </box>
 
-![result for `listt`](images/listResult.png =600x)
+![result for `list`](images/listResult.png =600x)
 
 #### Editing a client : `edit`
 
@@ -256,6 +256,7 @@ Format: `listt INDEX`
 
 Examples:
 * `list` followed by `listt 1` lists transactions for the 1st client in the application.
+  ![result for 'listt 1'](images/listt.png)
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st client in the results of the `find` command.
 
 #### Deleting Transactions for a specified client: `deletet`
