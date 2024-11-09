@@ -146,18 +146,18 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 <br> <br>
 #### Constraints of fields
 
-| Field            | Constraints                                | Example                                                                                                  |
-|------------------|--------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| **NAME**         | Up to 20 characters, no special characters | `Dominic`, `Stanley`, `Adi`                                                                              |
-| **PHONE_NUMBER** | Numeric                                    | `98989899`, `81092819`                                                                                   |
-| **EMAIL**        | Valid email format                         | `testing@gmail.com`,`example@gmail.com`                                                                  |
-| **ADDRESS**      | Valid address, should not be blank         | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                   |
-| **SKILLS**       | Comma-separated values                     | `Java, Python`, `C++`                                                                                    |
+| Field            | Constraints                                | Example                                                                                                 |
+|------------------|--------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **NAME**         | Up to 20 characters, no special characters | `Dominic`, `Stanley`, `Adi`, `83452124212`                                                               |
+| **PHONE_NUMBER** | Numeric                                    | `98989899`, `81092819`                                                                                  |
+| **EMAIL**        | Valid email format                         | `testing@gmail.com`,`example@gmail.com`                                                                 |
+| **ADDRESS**      | Valid address, should not be blank         | `Bukit Panjang Ring Rd`, `Ringer 9 St`                                                                  |
+| **SKILLS**       | Comma-separated values                     | `Java, Python`, `C++`                                                                                   |
 | **STATUS**       | Predefined statuses                        | `Applied`, `Screening`, `Interview Scheduled`, `Interviewed`, `Offer`, `Onboarding`, `Hired`, `Rejected` |
-| **EXPERIENCE**   | Valid experience, should not be blank      | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                            |
-| **DESIRED_ROLE** | Desired job position, should not be blank  | `Software Engineer`, `UI/UX Designer`                                                                    |
-| **NOTE**         | Any characters are accepted                | `Very confident`, `Confident`                                                                            |
-| **Tags**         | Optional and can be multiple               | `Must have`                                                                                              |
+| **EXPERIENCE**   | Valid experience, should not be blank      | `Student @ NUS`, `SWE of 5 years @ Google SG`                                                           |
+| **DESIRED_ROLE** | Desired job position, should not be blank  | `Software Engineer`, `UI/UX Designer`                                                                   |
+| **NOTE**         | Any characters are accepted                | `Very confident`, `Confident`                                                                           |
+| **Tags**         | Optional and can be multiple               | `Must have`                                                                                             |
 
 
 <strong>[Caution]</strong>: The required information except tags cannot be empty.
@@ -191,13 +191,14 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dr/DESIRED_ROLE s/SKILLS ex
 
 #### Image Example
 
-Command: ` add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends `
+Command: `add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends`
 
 
 **After the add command ran:**
 
 <img src="images/afteradd.png" alt="afteradd" width="800">
 
+<strong>[NOTE]</strong>: TalentSG allows you to add numerical values as there are laws which allow people to have numerical values as names. You can read more about this from this [article](https://www.thebump.com/a/baby-name-rules). 
 
 <strong>[Caution]</strong>: You cannot add the same candidate twice. (same name and phone)
 
@@ -548,6 +549,14 @@ Below is an example of the Report Bug pop-up window that will appear when you ac
 ### Archiving Data Files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Known Issues and Bugs
+
+1. Result/Feedback display uses a scroll bar. Few users reported feedback information shown is not wrapped but it can be easily tackled by using the scroll bar.
+2. 
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
