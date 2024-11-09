@@ -411,6 +411,7 @@ Furthermore, certain edits can cause the LegacyLink to behave in unexpected ways
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When creating 2 or more events that have the same name, start date, end date, and location**, it is possible for these events to have attendees which are subsets for each other, but not equal to each other. The remedy is to implement a more sophisticated duplicate event detection system to enhance user experience in the future.
 4. **Incorrect error message for invalid index in `edit` command**. Currently, the error message for invalid index such as `-1` (negative numbers), `0` and integer overflow is an invalid command instead of an index out of bounds. This is a known issue and will be addressed in an upcoming update to ensure that users receive more accurate and specific error messages when encountering invalid index values.
+5. **Truncation of text in the GUI**, fields with lengthy text, such as long names and address, can sometimes be truncated in the GUI. To avoid this, you can adjust the size of the window by dragging the sides to enlarge the window.
 
 --------------------------------------------------------------------------------------------------------------------
 
