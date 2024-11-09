@@ -114,19 +114,19 @@ _Refer to the [Features](#features) section for details of each command!_
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
+  e.g., `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/STUDY_GROUP_TAG]…` can be used as ` ` (i.e. 0 times), `t/1A`, `t/1B t/Control` etc.
+  e.g., `[t/STUDY_GROUP_TAG]…` can be used as ` ` (i.e. 0 times), `t/1A`, `t/1B t/Control` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
+  e.g., if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
@@ -212,12 +212,12 @@ Finds persons whose fields contain the given keywords.
 Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`
 
 * At least one of the optional criteria must be provided.
-* Each criterion can have more than one keyword. e.g. `n/alice bob hans`
-* The search is case-insensitive. e.g. `n/hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `n/Han` will not match `Hans`
+* Each criterion can have more than one keyword. e.g., `n/alice bob hans`
+* The search is case-insensitive. e.g., `n/hans` will match `Hans`
+* The order of the keywords does not matter. e.g., `n/Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g., `n/Han` will not match `Hans`
 * Persons matching at least one keyword for **every specified criteria** will be returned.
-  e.g. `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person
+  e.g., `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
