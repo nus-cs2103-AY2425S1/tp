@@ -138,7 +138,7 @@ Format:
 </box>
 
 Examples:
-* For this version, the username is `test` and password is `test`.
+* For this version, the username is `admin` and password is `12345678`.
 
 <img src = "images/HRHelperLoginOutput.png" width=500>
 
@@ -496,18 +496,18 @@ _Details coming soon ..._
 
 ## 5 Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Count**  | `count`: counts entire employee list<br> `count tag/TAG`: counts people in given tag<br>e.g. `count tag/Colleagues`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Sort**   | `sort TAG`<br> e.g., `sort managers`
-**Favorite** | `favorite INDEX`<br> e.g., `favorite 3`
-**List**   | `list`
-**Help**   | `help`
+| Action       | Format                                                                               | Examples                                                                                                |
+|--------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**    | `clear`                                                                              |                                                                                                         |
+| **Count**    | `count`: counts entire employee list<br> `count tag/TAG`: counts people in given tag | e.g. `count tag/Colleagues`                                                                             |
+| **Delete**   | `delete INDEX`                                                                       | e.g. `delete 3`                                                                                         |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`               | e.g. `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| **Favorite** | `favorite INDEX`                                                                     | e.g. `favorite 3`                                                                                       |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`                                                       | e.g. `find James Jake`                                                                                  |
+| **Help**     | `help`                                                                               |                                                                                                         |
+| **List**     | `list`                                                                               |                                                                                                         |
+| **Sort**     | `sort TAG`                                                                           | e.g. `sort managers`                                                                                    |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -523,3 +523,5 @@ Action     | Format, Examples
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When using `count` command**, follow the convention of `tag/TAG` and `name/NAME`, rather than the `t/TAG` and `n/NAME` used for other commands. Do be careful of this inconsistency.
+4. **Does not track maternity leave up to 6 months**, which is not part of annual leave.
+
