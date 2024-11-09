@@ -472,3 +472,5 @@ Exits EduManage.
 |    Java `17`     | The version of the Java programming language and development kit used to build EduManage. Download it [here](https://www.oracle.com/java/technologies/downloads/#java17).                                              |
 |       GUI        | Graphical User Interface (GUI); a visual interface that displays graphical elements (such as buttons, icons, and menus) to help users interact with the application, as opposed to a text-only command-line interface. |
 |    JSON file     | A text file that stores data in JavaScript Object Notation (JSON) format, which uses key-value pairs to organize information in a structured, readable way. Commonly used for data exchange between applications.      |
+
+[(Back to Top)](#edumanage-user-guide)

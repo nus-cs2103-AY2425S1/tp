@@ -62,6 +62,8 @@
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
+[(Back to Top)](#edumanage-developer-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 2. Design
@@ -197,6 +199,8 @@ The `Storage` component,
 ### 2.6 Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+[(Back to Top)](#edumanage-developer-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -431,6 +435,8 @@ extend the lifeline till the diagram’s end.
     - **Pros**: Increases flexibility, accommodating different date formats. 
     - **Cons**: Adds complexity in validation and interpretation, potentially leading to errors or inconsistencies in task display.
 
+[(Back to Top)](#edumanage-developer-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. Documentation, Logging, Testing, Configuration, Dev-Ops
@@ -440,6 +446,8 @@ extend the lifeline till the diagram’s end.
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+[(Back to Top)](#edumanage-developer-guide)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -879,6 +887,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Level**: The year and track of study a student is currently at, e.g. Secondary 3 Normal (Academic) (`S3 NA`).
 * **Subject**: The subject the student is receiving tuition for, e.g. `Math`, `English`, `Literature`. The Subject must correspond with the Level of the student.
 
+[(Back to Top)](#edumanage-developer-guide)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 6. Appendix: Instructions for Manual Testing
@@ -1004,6 +1014,8 @@ testers are expected to do more *exploratory* testing.
 4. Test case: `addtask n/alex yeoh t/  d/2024-11-06`<br>
    Expected: Similar to previous.
 
+[(Back to Top)](#edumanage-developer-guide)
+
 ***
 
 ## 7. Appendix: Planned Enhancements
@@ -1026,3 +1038,5 @@ A future version will include support for names with special characters to accom
 Currently, EduManage does not support multiple students with identical names. As a workaround, users can differentiate these
 students by adding numbering to their names (e.g., "John Doe 1," "John Doe 2"). We plan to accommodate this in the future by
 relying on `INDEX` instead of `n/NAME` or `NAME` for commands.
+
+[(Back to Top)](#edumanage-developer-guide)
