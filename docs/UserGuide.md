@@ -106,6 +106,7 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info"> :notebook: **Note:** Field Constraints
 - Names should only contain alphabets, hyphens, dots, commas, forward slash and spaces, and be between 1 and 100 characters long.
+- Although / is allowed in names, you should use it carefully, input like m/ g/ n/ will still be recognised as prefix and may lead to unexpected behaviour
 - Phone numbers should only contain numbers, and be exactly 8 digits long.
 - Gender should be either `male` or `female`.
 - Module should consist of alphanumeric characters and spaces only, and it should be between 1 and 30 characters long.
@@ -114,7 +115,7 @@ Format: `add n/NAME p/PHONE_NUMBER g/GENDER m/MODULE... [t/TAG]…​`
 
 Examples:
 * `add n/John Doe p/98765432 g/male m/Mathematics` : Adds a student named `John Doe` to StoreClass.
-* `add n/Betsy Crowe g/female p/1234567 m/Physics m/Chemistry t/OLevels t/new` : Adds a student named `Betsy Crowe` to StoreClass.
+* `add n/Betsy Crowe g/female p/12345678 m/Physics m/Chemistry t/OLevels t/new` : Adds a student named `Betsy Crowe` to StoreClass.
 
 
 ### Listing all students : `list`
@@ -127,12 +128,13 @@ Format: `list`
 
 You can edit an existing student in StoreClass.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE]... [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE]… [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* Similarly, when editing modules, the existing modules of the person will be removed i.e adding of modules is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -165,7 +167,7 @@ Examples:
 
 You can filter students who meet all specified conditions.
 
-Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
+Format: `filter [n/name] [p/phone] [g/gender] [t/tag]… [m/module]…`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
 * Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter except phone number.
@@ -285,9 +287,10 @@ You can assign a grade to a module that a student is taking.
 
 - Assigns a numerical grade (between 0 and 100) to the module identified by the `INDEX` number shown in the displayed person list.
 - `INDEX`: The index number of the student in the displayed person list (must be a positive integer).
-- `m/MODULE`: The module code to which the grade is assigned.
+- `m/MODULE`: The module code to which the grade is assigned. The module match is case-sensitive.
 - `s/GRADE`: The numerical grade (between 0 and 100) to assign to the module.
-- You can provide multiple `m/MODULE s/GRADE` pairs to assign grades to multiple modules in a single `grade` command.
+- You can provide multiple `m/MODULE s/GRADE` pairs to assign grades to multiple modules in a single `grade` command. 
+- The  `m/MODULE s/GRADE` pairs need not to be in order, see examples for illustration.
 - The grade can be any whole number between 0 and 100, inclusive.
 
 <div markdown="span" class="alert alert-info"> :notebook: **Important Note:**
@@ -297,13 +300,14 @@ You can assign a grade to a module that a student is taking.
 
 <div class="alert alert-primary">
 <img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> <strong>Tip:</strong>
-You can hover over each individual module to view the grades for that module.
+You can hover over each individual module for a while to view the grades for that module.
 </div>
 
 **Examples:**
 - `grade 1 m/Physics s/85` : assigns a grade of 85 to Physics for the first student.
 - `grade 2 m/Chemistry s/90` : assigns a grade of 90 to Chemistry for the second student.
 - `grade 3 m/English s/80 m/Chinese s/85` assigns a grade of 80 to English and 85 to Chinese for the third student.
+- `grade 1 m/Math m/Chinese s/100 s/90` will grade the first person's math to 100 and his Chinese to 90.
 
 
 ### Archiving data files `archive`
@@ -447,6 +451,7 @@ Furthermore, certain edits can cause the StoreClass to behave in unexpected ways
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When the UI window is set to a small size** certain element in the UI maybe hard to view. E.g. modules, long names... Hence, we recommend you to use a large screen and a large window size when using our product so that all the fields can be viewed clearly.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -458,7 +463,8 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [g/GENDER] [p/PHONE_NUMBER] [m/MODULE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]…`<br> e.g., `find James Jake`
+**Filter** | `filter [n/name] [p/phone] [g/gender] [t/tag]… [m/module]…`<br> e.g., `filter n/James`
 **Grade** | `grade INDEX [m/MODULE s/GRADE]`<br> e.g., `grade 1 m/History s/85`
 **Undo** | `undo`
 **Redo** | `redo`
@@ -466,4 +472,5 @@ Action | Format, Examples
 **Help** | `help`
 **Archive** | `archive pa/PATH`
 **Load** | `load pa/PATH`
+
 
