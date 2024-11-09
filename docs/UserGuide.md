@@ -83,7 +83,10 @@ Need a quick reference?
 * The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
   <box type="tip" seamless>
 
-**Note:** Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it 
+**Note:** Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it.  
+
+**Note:** The Command PopUp will try to remain fully visible on screen at all times even when the main window is partially 
+offscreen for your reading convenience.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -120,13 +123,15 @@ Need a quick reference?
 
 **Notes about command parameters:**<br>
 
-* `NAME` only accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
+* `NAME` **only** accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
   e.g. `Flora-Ann`. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
 
-* Adding and editing `NAME`s is **case-sensitive**. Although duplicate contact names are not allowed,     
+* `INDEX` must be a **must** be a **positive integer** (`1`, `2`, `3`, …) or it will be read as invalid command format rather than an index value error.
+
+* `NAME` is **case-sensitive**. Although duplicate contact names are not allowed,     
 e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
 
-* `TIME-TIME` should be in the format "HHmm-HHmm" and must be a valid time range within the same day  
+* `TIME-TIME` should be in the format `HHmm-HHmm` and must be a valid time range within the same day  
   e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
 
 * `TIME-TIME` time ranges cannot be a single point in time.
@@ -196,8 +201,8 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]..
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags, games and preferred times (including 0)   
-**Tip:** `TIME` should be in the form of `HHmm` and `pt/` time ranges must be within the same day (e.g. "2300-0100" is not allowed)
+**Tip:** A person can have any number of tags, games and preferred times (including 0).    
+**Tip:** `TIME` should be in the form of `HHmm` and `pt/` time ranges must be within the same day (e.g. "2300-0100" is not allowed).
 </box>
 
 Examples:
