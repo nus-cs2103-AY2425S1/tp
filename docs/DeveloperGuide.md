@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1h The given tag(s) uses the wrong format.
+* 1h. The given tag(s) uses the wrong format.
 
     * 1h1. MediContacts shows an error message.
 
