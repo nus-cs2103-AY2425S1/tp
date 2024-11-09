@@ -494,7 +494,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a candidate
 
-1. Adding a candidate to hiredfiredpro
+1. Adding a candidate to HiredFiredPro
 
     1. Test case: `add n/Adib j/Developer p/12345678 e/example@example i/1`<br>
        Expected: New candidate will be added at the end of the list ie. if there are 6 people in the list, he will be 7<sup>th<sup>
@@ -533,19 +533,19 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing data folder.
 
-   1. Open the folder where hiredfiredpro.jar is located.
+   1. Open the folder where HiredFiredPro.jar is located.
 
    1. Data folder containing json file does not exist.
  
-   1. Upon making any changes to hiredfiredpro, data folder with json file will be created with updated information.
+   1. Upon making any changes to HiredFiredPro, data folder with json file will be created with updated information.
 
-1. Deleting existing hiredfiredpro.json file in existing data folder.
+1. Deleting existing HiredFiredPro.json file in existing data folder.
 
-   1. Open the folder where hiredfiredpro.jar is located. 
+   1. Open the folder where HiredFiredPro.jar is located. 
       
    1. Click into the data folder and delete the existing json file inside. There should only be one file in the data folder
 
-   1. Upon launching hiredfiredpro, our sample data of 6 people will be shown. Changes made up to that point will be discarded.
+   1. Upon launching HiredFiredPro, our sample data of 6 people will be shown. Changes made up to that point will be discarded.
 
 1. Saving data after changes are made.
 
@@ -555,7 +555,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Close the app.
 
-   1. Open the hiredfiredpro.json file which would be in the same folder as your jar file. <br>
+   1. Open the HiredFiredPro.json file which would be in the same folder as your jar file. <br>
       
    1. All changes made are reflected in the json file.
 
