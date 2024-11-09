@@ -422,10 +422,17 @@ Use case ends.
 
 **MSS**
 
-1. User specifies keyword(s) of the name of the customer.
+1. User specifies keyword(s) of the name of the customer(s) they want to find.
 2. SellSavvy displays all customers whose names have at least one of the keywords.
 
 Use case ends.
+
+**Extensions**
+
+* 1a. SellSavvy cannot find any customers with at least one matching keyword.
+  * 1a1. SellSavvy tells the user that no related customers are found.
+
+  Use case ends.
 
 **Use case 5: Add an Order under a Customer**
 
@@ -598,6 +605,12 @@ Use case ends.
 
 * 1a. There is no such status with specified status keyword.
   * 1a1. SellSavvy displays an error message "Invalid command format!" and provides the available status keywords.
+
+  Use case ends.
+
+
+* 1a. There are no orders with the specified status.
+  * 1a1. SellSavvy tells the user that no related orders are found.
 
   Use case ends.
 
