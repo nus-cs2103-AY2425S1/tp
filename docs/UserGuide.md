@@ -288,7 +288,7 @@ Examples:
 
 Sorts all contacts in the contacts list by the specified attribute, from lowest to highest.
 
-Format `asort by/ [ATTRIBUTE]`
+Format `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: date, email, name, phone, role.
 
@@ -300,7 +300,7 @@ Examples:
 
 Sorts all deliveries in the delivery list of a contact by the specified attribute, from lowest to highest.
 
-Format `asort by/ [ATTRIBUTE]`
+Format `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: address, cost, date, eta, id, status.
 
