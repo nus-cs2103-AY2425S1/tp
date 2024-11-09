@@ -249,23 +249,28 @@ Example:
 * Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
 
 ### Selecting persons by index: `select`
-Select contacts from the address book by specifying their index numbers in the currently displayed list. Only the specified contacts will remain in view.
+Select contacts from the address book by specifying their index numbers in the currently displayed list. Only the 
+specified contacts will remain in view.
 
 Format: select INDEX [MORE_INDEXES]...
 
 Examples:
 
 * `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts.
-* `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show only these selected contacts.
+* `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show 
+  only these selected contacts.
 
 ### Editing tag in a batch: `batch-edit`
-Changes all contacts from cher with containing the specified tags with a new tag.
+Changes all contacts from cher with containing the specified tags with a new tag. After successful execution,
+Cher will show all the contacts containing the new tag.
 
 Format: `batch-edit t/OLDTAG t/NEWTAG`
 
 Examples:
 ![Batch delete example data](images/ForBatchDeleteExampleData.png)
 * `batch-edit t/friends t/fren` will change the `friends` tag of both `Alex Yeoh` and `Bernice Yu` to `fren`.
+* After successful execution, the contact list will show `Alex Yeoh`, `Bernice Yu` and `Charlotte Oliveiro` 
+  as they all have the `fren` tag.
 
 
 ### Clearing all entries : `clear`
