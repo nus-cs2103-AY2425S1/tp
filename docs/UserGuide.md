@@ -317,6 +317,7 @@ Action | Format, Examples
 **List** | `list`
 **Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`
 **Delete** | `delete [INDEX | INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`
+**Exit** | `exit`
 **Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`
 **Clear** | `clear` then `confirm`
 **Export** | `export FILENAME`<br> e.g., `export exported_email`
