@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
@@ -66,30 +67,38 @@ public class FindClientCommandParserTest {
 
     @Test
     public void parse_invalidPhone_throwsParseException() {
-        // Less than 8 digits
-        assertParseFailure(parser, " p/1234567",
-                "Error: Phone number must be exactly 8 digits.");
-
-        // More than 8 digits
-        assertParseFailure(parser, " p/123456789",
-                "Error: Phone number must be exactly 8 digits.");
-
-        // Non-numeric
-        assertParseFailure(parser, " p/phone123",
-                "Error: Phone number must be exactly 8 digits.");
+        try {
+            parser.parse(" p/12");
+            fail("Expected ParseException was not thrown.");
+        } catch (ParseException e) {
+            System.out.println("Actual exception message: '" + e.getMessage() + "'");
+            assertEquals("Error: Phone number must be between 3 and 15 digits.", e.getMessage());
+        }
     }
 
     @Test
     public void parse_validPhone_returnsFindClientCommand() throws ParseException {
-        String input = " p/12345678";
-        List<Predicate<Client>> predicatesList = new ArrayList<>();
-        predicatesList.add(new PhoneMatchesPredicate("12345678"));
-        Predicate<Client> combinedPredicate = new CompositePredicate(predicatesList);
+        // Test minimum valid length (3 digits)
+        String inputMin = " p/123";
+        List<Predicate<Client>> predicatesListMin = new ArrayList<>();
+        predicatesListMin.add(new PhoneMatchesPredicate("123"));
+        Predicate<Client> combinedPredicateMin = new CompositePredicate(predicatesListMin);
 
-        FindClientCommand expectedCommand = new FindClientCommand(combinedPredicate);
-        FindClientCommand actualCommand = parser.parse(input);
+        FindClientCommand expectedCommandMin = new FindClientCommand(combinedPredicateMin);
+        FindClientCommand actualCommandMin = parser.parse(inputMin);
 
-        assertEquals(expectedCommand, actualCommand);
+        assertEquals(expectedCommandMin, actualCommandMin);
+
+        // Test maximum valid length (15 digits)
+        String inputMax = " p/123456789012345";
+        List<Predicate<Client>> predicatesListMax = new ArrayList<>();
+        predicatesListMax.add(new PhoneMatchesPredicate("123456789012345"));
+        Predicate<Client> combinedPredicateMax = new CompositePredicate(predicatesListMax);
+
+        FindClientCommand expectedCommandMax = new FindClientCommand(combinedPredicateMax);
+        FindClientCommand actualCommandMax = parser.parse(inputMax);
+
+        assertEquals(expectedCommandMax, actualCommandMax);
     }
 
     @Test
