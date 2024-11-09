@@ -77,7 +77,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Displays a message if there is a data loading error.
      *
-     * @param model the model that is used
+     * @param model the model that is being used
      */
     public static CommandResult displayDataLoadErrorMessage(Model model) {
         requireNonNull(model);

@@ -5,5 +5,5 @@
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <TextArea fx:id="commandTextArea" promptText="Enter command here..."
-            wrapText="true" prefRowCount="1" />
+            wrapText="true" prefRowCount="1" minHeight="10" />
 </StackPane>
