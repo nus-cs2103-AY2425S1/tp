@@ -77,6 +77,8 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 
 **Notes about the Command Format:**<br>
 
+* Certain fields used in commands have specific constraints (e.g., format, length). For a full list of field requirements, please refer to the [Field Constraints](#field-constraints) section.
+
 * Words in `UPPER_CASE` need to be provided by you.<br>
     * e.g. in `add n/NAME`: if you want to add someone named John Doe, you'd type `add n/John Doe`.
 
@@ -95,6 +97,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
 * PDF Users
   * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
+
 
 ### Viewing help : `help`
 
@@ -115,7 +118,7 @@ Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/M
 
 <box type="info" seamless>
 
-**Info:** You can add multiple tags (or none at all).
+**Note:** You can add multiple tags (or none at all).
 </box>
 
 Examples:
@@ -320,7 +323,7 @@ Furthermore, certain edits can cause the UniLink to behave in unexpected ways (e
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`<br>Note: At least one of `TELEGRAM_HANDLE`, `PHONE` or `EMAIL` must be provided.
+**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`<br>Note: At least one of `TELEGRAM_HANDLE`, `PHONE` or `EMAIL` must be provided
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
@@ -328,5 +331,24 @@ Action     | Format, Examples
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
 **Import** | `import`
 **List**   | `list`
-**Switch** | `switch [THEME]`<br> e.g., `switch LIGHT`, `switch DARK`
+**Switch** | `switch THEME`<br> e.g., `switch LIGHT`, `switch DARK`
 **Help**   | `help`
+**Exit**   | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Field Constraints
+
+To ensure your commands work as expected, refer to the table below for guidance on each field’s requirements, including format and length. This way, you’ll know exactly how to input information like names, phone numbers, and other fields correctly. We’ve also included examples to make things easier!
+
+| **Field**       | **Constraints**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | **Examples**                                           |
+|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| NAME            | - Should only contain alphabets and spaces <br> - Should be between 1 and 70 characters long                                                                                                                                                                                                                                                                                                                                                                                                        | Alice Tan <br> Hubert Koh                              |
+| CONTACT TYPE    | - Should be 'WORK' or 'PERSONAL' <br> - Not case sensitive                                                                                                                                                                                                                                                                                                                                                                                                                                          | Work <br> personal                                     |
+| TELEGRAM_HANDLE | - Should begin with '@' <br> - Can contain alphabets, numbers, or underscores <br> - Between 5 and 32 characters (excluding '@')                                                                                                                                                                                                                                                                                                                                                                    | @kacey_lim <br> @Maxine123                             |
+| PHONE           | - May start with optional '+' followed by a country code <br> - Should contain only digits <br> - Between 3 and 15 digits long                                                                                                                                                                                                                                                                                                                                                                      | 999 <br> +6598765432                                   |
+| EMAIL           | - Must follow the 'local-part@domain' format <br> <br> **Local Part:** <br> - Can include letters, numbers, underscores (_), periods (.), and dashes (-) <br> - Must not start or end with a special character <br> <br> **Domain:** <br> - Must begin with '@', followed by domain labels separated by periods and dashes <br> - Each domain label must start and end with an alphabet or number <br> - Must end with a domain label of at least 2 characters following a period (e.g. .com, .edu) | ryan_teo@example.com <br> caleb-sim@email.edu.sg       |
+| MODULE          | - Should start with 2 to 4 letters, followed by 4 numbers <br> - May end with optional single letter or a dash and one letter                                                                                                                                                                                                                                                                                                                                                                       | CS2103-T <br> HSI1000                                  |
+| REMARK          | - Should be between 1 and 200 characters long and cannot be blank                                                                                                                                                                                                                                                                                                                                                                                                                                   | likes coffee in the morning <br> stays at Temasek Hall |
+| TAG             | - Should be a single word between 1 and 50 characters <br> - Can contain letters and numbers                                                                                                                                                                                                                                                                                                                                                                                                        | friend <br> 24h                                        |
+
