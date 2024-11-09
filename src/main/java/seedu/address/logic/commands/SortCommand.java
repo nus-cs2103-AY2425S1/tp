@@ -54,6 +54,10 @@ public class SortCommand extends Command {
     public static final String MESSAGE_UNKNOWN_ATTRIBUTE_INSPECT = "The delivery attribute specified is unknown! "
             + "Current attributes supported are: address, cost, date (default), eta, id, status";
 
+    public static final String MESSAGE_EMPTY_LIST_MAIN = "Unable to sort the contacts list because it is empty!";
+
+    public static final String MESSAGE_EMPTY_LIST_INSPECT = "Unable to sort the delivery list because it is empty!";
+
     private final String attribute;
     private final boolean isAscending;
 
@@ -71,6 +75,11 @@ public class SortCommand extends Command {
         requireNonNull(model);
 
         if (!AddressBookParser.getInspect()) {
+
+            if (model.getAddressBook().getPersonList().isEmpty()) {
+                throw new CommandException(MESSAGE_EMPTY_LIST_MAIN);
+            }
+
             switch (this.attribute) {
             case "date":
                 model.sortByDate();
@@ -101,6 +110,11 @@ public class SortCommand extends Command {
         } else {
             Person inspectedPerson = InspectWindow.getInspectedPerson();
             DeliveryList deliveryList = inspectedPerson.getDeliveryList();
+
+            if (deliveryList.size() == 0) {
+                throw new CommandException(MESSAGE_EMPTY_LIST_INSPECT);
+            }
+
             switch (this.attribute) {
             case "address":
                 deliveryList.sortByAddress();
