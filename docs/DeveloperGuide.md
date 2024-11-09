@@ -1253,7 +1253,7 @@ testers are expected to do more exploratory testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
+    1. run `java -jar RealConnect.jar` in the same directory Expected: Shows the GUI with a set of sample contacts. The window size may not be
        optimum.
 
 1. Saving window preferences

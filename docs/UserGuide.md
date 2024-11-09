@@ -253,7 +253,8 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. <br> Note that the list given by `find` may not be complete, therfore it is recommended to use `list` to display the full list, before carrying out operations on other contacts that may be hidden by `find` command.
+<br> Besides, commands that alter the ordering of the original list like `favourite` and `sort` will show the full list again.
 
 **Command Format:**
 `find KEYWORD [ADDITIONAL_KEYWORDS]`
