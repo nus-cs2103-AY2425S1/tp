@@ -93,6 +93,8 @@ public class CommandTestUtil {
     public static final String INVALID_SPECIALTY_DESC = " " + PREFIX_SPECIALTY
             + "ortho123"; // only alphabets allowed in specialties
     public static final String INVALID_DOB_DESC = " " + PREFIX_DOB + "2024/09/20/"; // dob must use DD-MM-YYYY format
+    public static final String INVALID_DOB_YEAR_DESC = " "
+            + PREFIX_DOB + "23-04-0000"; // dob must use DD-MM-YYYY format
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "G"; // gender must be either F or M or O
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "2024/09/20/"; // date must use DD-MM-YYYY format
     public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "9.00"; // time must use HHmm format
