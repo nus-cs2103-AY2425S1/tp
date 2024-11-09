@@ -22,8 +22,10 @@
 
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
-- **References to Other Team Projects (TPs)**:
-    - For our User Guide, we referred to the [AY2425S1-CS2103T-F14a-1 User Guide](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/docs/UserGuide.md) and adapted their Markbind layouts for constraint and tips boxes.
+- **References to Other Team Projects (TPs):**
+
+  - **User Guide**: We referred to the [AY2425S1-CS2103T-F14a-1 User Guide](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/docs/UserGuide.md) and adapted their Markbind layouts for constraint and tips boxes.
+  - **Developer Guide**: For the *Saving Data* section under the appendix, we referred to the [AY2425S1-CS2103T-F14a-1 Developer Guide](https://ay2425s1-cs2103t-f14a-1.github.io/tp/DeveloperGuide.html#saving-data) on how to handle missing or corrupted data files.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1052,11 +1054,18 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case: `unmarko 1`<br>
        Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
-   
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `addresbook.json` file in the `data` folder.
 
-1. _{ more test cases …​ }_
+    2. Test case: Delete the `addresbook.json` file, run SellSavvy and exit using the `exit` command.<br>
+       Expected: SellSavvy should create a new `addresbook.json` file with default data.
+
+    3. Test case: Delete the `data` folder together with the `addresbook.json` file, run SellSavvy and exit using the `exit` command.<br>
+       Expected: SellSavvy should create a new `data` folder and a new `addresbook.json` file inside the folder with default data.
+
+    4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number, run SellSavvy and exit using the `exit` command. 
+       Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty person list.
