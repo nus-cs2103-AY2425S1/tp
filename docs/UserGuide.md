@@ -218,6 +218,8 @@ Remarks:
 * The price per hour **must be a non-negative integer**.
 * The duration **must be a decimal number or an integer** in multiples of 0.5.
 * The duration have to be more than 0 and be at most 24.
+* Do not use any other special characters other than a single `.` for indicating decimal points if required. 
+* Not including the leading 0 (e.g. .5) or adding more leading 0s (e.g. 000.5) is equivalent to 0.5.
 * The duration of the lesson is specified by the `DURATION` in hours.
 * The student ID **must be a positive integer** 1, 2, 3, …​, within the range of the number of students in the address book.
 * The student location will automatically be set to the address of the student.
@@ -251,6 +253,8 @@ Remarks:
 * The index refers to the index number shown in the displayed lesson schedule.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * `INDEX` must be within the range of the displayed list.
+* If a `lesson find` operation was done prior to this, `INDEX` needs to be in the new range as a result of 
+  find.
 
 Examples:
 
