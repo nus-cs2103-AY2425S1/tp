@@ -34,13 +34,18 @@ public class StatusBarFooter extends UiPart<Region> {
         contactListForUi.addListener(
                 (ListChangeListener<? super Contact>) unused -> setContactListStatus(contactListForUi.size(),
                         allContactList.size()));
+
+        // @@author cth06-Github
         allContactList.addListener(
                 (ListChangeListener<? super Contact>) unused -> setContactListStatus(contactListForUi.size(),
                 allContactList.size()));
+        // @@author
     }
 
+    // @@author cth06-Github*/
     private void setContactListStatus(int contactCountListed, int contactCountAll) {
         contactListStatus.setText(contactCountListed + " out of " + contactCountAll
                 + " contacts listed");
     }
+    // @@author
 }

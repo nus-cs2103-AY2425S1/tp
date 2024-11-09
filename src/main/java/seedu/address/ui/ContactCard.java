@@ -93,6 +93,7 @@ public class ContactCard extends UiPart<Region> {
         });
     }
 
+    // @@author wuzengfu
     /**
      * Gets role label with id that corresponds to its role name.
      *
@@ -117,4 +118,5 @@ public class ContactCard extends UiPart<Region> {
         label.setId(id);
         return label;
     }
+    // @@author
 }
