@@ -7,6 +7,11 @@ import spleetwaise.commons.util.AppUtil;
 /**
  * Represents a Person's name in the address book. Guarantees: immutable; is valid as declared in
  * {@link #isValidName(String)}
+ *
+ * Note: Names are currently case-sensitive, meaning "John" and "john" will be considered different names. This behavior
+ * is due to the use of case-sensitive equality checks in the {@link #equals(Object)} method. In a future enhancement,
+ * we plan to make names case-insensitive to match real-world scenarios where capitalization is not considered
+ * significant for names.
  */
 public class Name {
 
