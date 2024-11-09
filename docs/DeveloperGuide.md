@@ -660,7 +660,13 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a student
 
->**Tip:** Replace "INVALID_ID" with "A12345678X" and "INVALID_TUT" with "T12345" for testing purpose
+>**Tip:** Replace "INVALID_ID" with "A12345678X" and "INVALID_TUT" with "T12345" for testing purpose here
+
+**Sample error message indicating that invalid command format:** Invalid command format!
+
+**Sample error message indicating that the student ID format is invalid:** Student ID should be in the format: 'A' followed by seven digits and an uppercase character.
+
+**Sample error message indicating that the tutorial ID format is invalid:** Tutorial class should be in the format of Txxxx where xxxx are four digits.
 
 1. Adding a student with all required details
     1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
@@ -682,7 +688,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Error message indicating that the student ID format is invalid.
 
     2. Test case: `addStu n/John Doe s/A1234567X c/INVALID_TUT`<br>
-       Expected: Error message indicating that the tutorial ID does not exist.
+       Expected: Error message indicating that the tutorial ID format is invalid.
 
     3. Test case: `addStu n/John Doe s/INVALID_ID c/INVALID_TUT`<br>
        Expected: Error message indicating that the student ID format is invalid. Invalid student ID format will be prioritised over invalid tutorial ID in this case.
