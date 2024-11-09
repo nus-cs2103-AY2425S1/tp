@@ -194,8 +194,8 @@ An **initial client** with the name: `Jason Lee`, phone number: `91231231` and e
 
 1. A client with the name: `Jason Lee`, phone number: `99998888` and email address `jasonlee@example.com`.
 2. A client with the name: `Jason Lee`, phone number: `91231231` and email address `NOTjasonlee@example.com`.
-3. A client with the name: `Jason Lee`, phone number: `-` and email address `jasonlee@example.com`.
-4. A client with the name: `Jason Lee`, phone number: `91231231` and email address `-`.
+3. A client with the name: `Jason Lee`, phone number: `—` and email address `jasonlee@example.com`.
+4. A client with the name: `Jason Lee`, phone number: `91231231` and email address `—`.
 5. A client with the name: `JASON LEE`, phone number: `91231231` and email address `jasonlee@example.com`.
 
 <box type="info" seamless>
