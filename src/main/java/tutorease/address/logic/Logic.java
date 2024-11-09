@@ -8,6 +8,7 @@ import tutorease.address.logic.commands.CommandResult;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.ReadOnlyTutorEase;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 
 /**
@@ -47,4 +48,7 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /** Returns an unmodifiable view of the filtered list of lessons */
+    ObservableList<Lesson> getFilteredLessonList();
 }

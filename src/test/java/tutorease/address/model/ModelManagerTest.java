@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.ALICE;
-import static tutorease.address.testutil.TypicalPersons.BENSON;
+import static tutorease.address.testutil.TypicalStudents.ALICE;
+import static tutorease.address.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +15,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import tutorease.address.commons.core.GuiSettings;
+import tutorease.address.logic.parser.exceptions.ParseException;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
+import tutorease.address.model.person.Person;
+import tutorease.address.testutil.LessonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 import tutorease.address.testutil.TutorEaseBuilder;
 
 public class ModelManagerTest {
@@ -94,6 +99,37 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteLesson_success() throws ParseException {
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        lessonSchedule.addLesson(lesson);
+        assertTrue(lessonSchedule.hasLesson(lesson));
+        lessonSchedule.deleteLesson(lesson);
+        assertFalse(lessonSchedule.hasLesson(lesson));
+    }
+
+    @Test
+    public void getLesson_success() throws ParseException {
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        lessonSchedule.addLesson(lesson);
+        assertTrue(lessonSchedule.hasLesson(lesson));
+        assertEquals(lesson, lessonSchedule.getLesson(0));
+    }
+
+    @Test
+    public void getLessonScheduleSize_success() throws ParseException {
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        assertEquals(0, lessonSchedule.getSize());
+        lessonSchedule.addLesson(lesson);
+        assertEquals(1, lessonSchedule.getSize());
+    }
+
+    @Test
     public void equals() {
         TutorEase tutorEase = new TutorEaseBuilder().withPerson(ALICE).withPerson(BENSON).build();
         TutorEase differentTutorEase = new TutorEase();
@@ -129,5 +165,64 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setTutorEaseFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(tutorEase, differentUserPrefs, lessonSchedule)));
+    }
+
+    @Test
+    public void deleteStudentLesson_oneStudent_success() throws ParseException {
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        Person student = lesson.getStudent();
+        lessonSchedule.addLesson(lesson);
+        assertTrue(lessonSchedule.hasLesson(lesson));
+        modelManager.deleteStudentLesson(student);
+        lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        assertFalse(lessonSchedule.hasLesson(lesson));
+    }
+
+    @Test
+    public void deleteStudentLesson_noStudent_success() throws ParseException {
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        LessonBuilder lessonBuilder = new LessonBuilder();
+        Lesson lesson = lessonBuilder.build();
+        Person student = lesson.getStudent();
+        assertEquals(0, lessonSchedule.getSize());
+        modelManager.deleteStudentLesson(student);
+        assertEquals(0, lessonSchedule.getSize());
+    }
+
+    @Test
+    public void deleteStudentLesson_multipleStudent_success() throws ParseException {
+        LessonSchedule lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+
+        // Create Alice's Lesson
+        LessonBuilder lessonBuilderAlice = new LessonBuilder();
+        Lesson lessonAlice = lessonBuilderAlice.build();
+
+        // Create Bob
+        StudentBuilder studentBuilder = new StudentBuilder().withName("Bob");
+        Person bob = studentBuilder.build();
+
+        // Create Bob's Lesson
+        LessonBuilder lessonBuilderBob = new LessonBuilder().withName(bob)
+                .withStartDateTime("02-02-2024 " + "12:00")
+                .withEndDateTime("02-02-2024 " + "13:00");
+        Lesson lessonBob = lessonBuilderBob.build();
+        assertEquals(bob, lessonBob.getStudent());
+
+        // Add both Alice's and Bob's lesson
+        modelManager.addLesson(lessonAlice);
+        modelManager.addLesson(lessonBob);
+        lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        assertEquals(2, lessonSchedule.getSize());
+        assertTrue(lessonSchedule.hasLesson(lessonAlice));
+        assertTrue(lessonSchedule.hasLesson(lessonBob));
+
+        // Only remove Bob's lesson so only Alice's remain
+        modelManager.deleteStudentLesson(bob);
+        lessonSchedule = new LessonSchedule(modelManager.getLessonSchedule());
+        assertEquals(1, lessonSchedule.getSize());
+        assertTrue(lessonSchedule.hasLesson(lessonAlice));
+        assertFalse(lessonSchedule.hasLesson(lessonBob));
     }
 }

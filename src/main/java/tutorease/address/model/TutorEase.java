@@ -10,8 +10,8 @@ import tutorease.address.model.person.Person;
 import tutorease.address.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the address-book level.
+ * Duplicates are not allowed (by .isSamePerson comparison).
  */
 public class TutorEase implements ReadOnlyTutorEase {
 
@@ -31,14 +31,14 @@ public class TutorEase implements ReadOnlyTutorEase {
     public TutorEase() {}
 
     /**
-     * Creates an TutorEase using the Persons in the {@code toBeCopied}
+     * Creates an TutorEase using the Persons in the {@code toBeCopied}.
      */
     public TutorEase(ReadOnlyTutorEase toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    // list overwrite operations
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -57,7 +57,7 @@ public class TutorEase implements ReadOnlyTutorEase {
         setPersons(newData.getPersonList());
     }
 
-    //// person-level operations
+    // person-level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -66,6 +66,35 @@ public class TutorEase implements ReadOnlyTutorEase {
         requireNonNull(person);
         return persons.contains(person);
     }
+
+    /**
+     * Returns true if there is another person in the address book with the same phone number as {@code person}.
+     */
+    public boolean hasSamePhone(Person person) {
+        requireNonNull(person);
+
+        for (Person existingPerson : persons) {
+            if (existingPerson.hasSamePhone(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if there is another person in the address book with the same email as {@code person}.
+     */
+    public boolean hasSameEmail(Person person) {
+        requireNonNull(person);
+
+        for (Person existingPerson : persons) {
+            if (existingPerson.hasSameEmail(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Adds a person to the address book.
@@ -87,7 +116,10 @@ public class TutorEase implements ReadOnlyTutorEase {
     }
 
     /**
-     * Returns the person with the given name.
+     * Returns the person with the specified name.
+     *
+     * @param name The name of the person to retrieve.
+     * @return The person with the specified name.
      */
     public Person getPerson(String name) {
         return persons.getPerson(name);

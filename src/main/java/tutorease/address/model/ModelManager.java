@@ -24,11 +24,13 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final LessonSchedule lessonSchedule;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Lesson> filteredLesson;
 
     /**
      * Initializes a ModelManager with the given tutorEase and userPrefs.
      */
-    public ModelManager(ReadOnlyTutorEase tutorEase, ReadOnlyUserPrefs userPrefs, LessonSchedule lessonSchedule) {
+    public ModelManager(ReadOnlyTutorEase tutorEase, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyLessonSchedule lessonSchedule) {
         requireAllNonNull(tutorEase, userPrefs, lessonSchedule);
 
         logger.fine("Initializing with address book: " + tutorEase + " and user prefs " + userPrefs
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.lessonSchedule = new LessonSchedule(lessonSchedule);
         filteredPersons = new FilteredList<>(this.tutorEase.getPersonList());
+        filteredLesson = new FilteredList<>(this.lessonSchedule.getLessonList());
     }
 
     public ModelManager() {
@@ -98,6 +101,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSamePhone(Person person) {
+        requireNonNull(person);
+        return tutorEase.hasSamePhone(person);
+    }
+
+    @Override
+    public boolean hasSameEmail(Person person) {
+        requireNonNull(person);
+        return tutorEase.hasSameEmail(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         tutorEase.removePerson(target);
     }
@@ -113,13 +128,14 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         tutorEase.setPerson(target, editedPerson);
+        lessonSchedule.updatePersonInLessons(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedTutorEase}
+     * {@code versionedTutorEase}.
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
@@ -152,18 +168,86 @@ public class ModelManager implements Model {
     //=========== LessonSchedule ================================================================================
 
     @Override
-    public LessonSchedule getLessonSchedule() {
+    public ReadOnlyLessonSchedule getLessonSchedule() {
         return lessonSchedule;
+    }
+
+
+    @Override
+    public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
+        this.lessonSchedule.resetData(lessonSchedule);
+    }
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLesson;
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLesson.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean filteredLessonListIsEmpty() {
+        return filteredLesson.isEmpty();
+    }
+
+    @Override
+    public int getFilteredPersonListSize() {
+        return filteredLesson.size();
     }
 
     @Override
     public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
         lessonSchedule.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+
+    @Override
+    public void deleteLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        lessonSchedule.deleteLesson(lesson);
+    }
+
+    @Override
+    public Lesson getLesson(int index) {
+        return lessonSchedule.getLesson(index);
+    }
+
+    @Override
+    public Lesson getFilteredLesson(int index) {
+        return filteredLesson.get(index);
     }
 
     @Override
     public boolean hasLessons(Lesson lesson) {
         requireNonNull(lesson);
         return lessonSchedule.hasLesson(lesson);
+    }
+
+    @Override
+    public int getLessonScheduleSize() {
+        return lessonSchedule.getSize();
+    }
+
+    @Override
+    public int getFilteredLessonListSize() {
+        return filteredLesson.size();
+    }
+
+    @Override
+    public void deleteStudentLesson(Person student) {
+        int currentIndex = 0;
+        while (currentIndex < this.getLessonScheduleSize()) {
+            Lesson lesson = this.getLesson(currentIndex);
+            if (student.equals(lesson.getStudent())) {
+                this.deleteLesson(lesson);
+            } else {
+                currentIndex++;
+            }
+        }
     }
 }

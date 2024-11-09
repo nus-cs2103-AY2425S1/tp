@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.testutil.Assert.assertThrows;
-import static tutorease.address.testutil.TypicalPersons.ALICE;
+import static tutorease.address.testutil.TypicalStudents.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -20,12 +20,13 @@ import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.ReadOnlyUserPrefs;
 import tutorease.address.model.TutorEase;
 import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 
 public class AddContactCommandTest {
 
@@ -37,7 +38,7 @@ public class AddContactCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new StudentBuilder().build();
 
         CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
 
@@ -46,9 +47,10 @@ public class AddContactCommandTest {
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
 
+
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new StudentBuilder().build();
         AddContactCommand addContactCommand = new AddContactCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
@@ -57,9 +59,34 @@ public class AddContactCommandTest {
     }
 
     @Test
+    public void execute_duplicatePhone_throwsCommandException() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person personWithDuplicatePhone = new StudentBuilder().withPhone("12345678").build();
+        Person newPerson = new StudentBuilder().withName("Alice").withPhone("12345678").build(); // Same phone number
+        CommandResult commandResult = new AddContactCommand(newPerson).execute(modelStub);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_PHONE, () ->
+                new AddContactCommand(personWithDuplicatePhone).execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person personWithDuplicateEmail = new StudentBuilder().withPhone("12345678")
+                .withEmail("test@example.com").build();
+        Person newPerson = new StudentBuilder().withName("Bob")
+                .withEmail("test@example.com").build(); // Same email address, but different phones and names.
+        CommandResult commandResult = new AddContactCommand(newPerson).execute(modelStub);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_DUPLICATE_EMAIL, () ->
+                new AddContactCommand(personWithDuplicateEmail).execute(modelStub));
+    }
+
+
+    @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Person alice = new StudentBuilder().withName("Alice").build();
+        Person bob = new StudentBuilder().withName("Bob").build();
         AddContactCommand addAliceCommand = new AddContactCommand(alice);
         AddContactCommand addBobCommand = new AddContactCommand(bob);
 
@@ -88,7 +115,7 @@ public class AddContactCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that have all the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -142,6 +169,16 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public boolean hasSamePhone(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -167,12 +204,66 @@ public class AddContactCommandTest {
         }
 
         @Override
+        public void setLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasLessons(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Lesson getLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Lesson getFilteredLesson(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getLessonScheduleSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredLessonListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteStudentLesson(Person student) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean filteredLessonListIsEmpty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getFilteredPersonListSize() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -205,6 +296,18 @@ public class AddContactCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasSamePhone(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::hasSamePhone);
+        }
+
+        @Override
+        public boolean hasSameEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(person::hasSameEmail);
         }
 
         @Override

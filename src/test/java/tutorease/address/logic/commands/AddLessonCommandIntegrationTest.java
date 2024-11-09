@@ -3,7 +3,7 @@ package tutorease.address.logic.commands;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
-import static tutorease.address.testutil.TypicalPersons.getTypicalTutorEase;
+import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,20 +14,18 @@ import tutorease.address.model.ModelManager;
 import tutorease.address.model.UserPrefs;
 import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Lesson;
-import tutorease.address.model.lesson.LocationIndex;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Person;
 import tutorease.address.testutil.LessonBuilder;
-import tutorease.address.testutil.TypicalPersons;
+import tutorease.address.testutil.TypicalStudents;
 
 public class AddLessonCommandIntegrationTest {
     private Model model;
-    private Person validPerson = TypicalPersons.ALICE;
-    private StudentId studentId = new StudentId("1");
-    private LocationIndex locationIndex = new LocationIndex("1");
-    private String startDateTime = "10-11-2024 02:18";
-    private String endDateTime = "10-11-2024 03:18";
+    private Person validPerson = TypicalStudents.ALICE;
+    private final StudentId studentId = new StudentId("1");
+    private final String startDateTime = "10-11-2024 02:18";
+    private final String endDateTime = "10-11-2024 03:18";
 
     public AddLessonCommandIntegrationTest() throws ParseException {
     }
@@ -47,8 +45,8 @@ public class AddLessonCommandIntegrationTest {
                 .build();
         expectedModel.addLesson(validLesson);
 
-        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getStartDateTime(),
-                        locationIndex, validLesson.getEndDateTime()), model,
+        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getFee(), validLesson.getStartDateTime(),
+                        validLesson.getEndDateTime()), model,
                 String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
                 expectedModel);
     }
@@ -61,7 +59,7 @@ public class AddLessonCommandIntegrationTest {
                 .withEndDateTime(endDateTime)
                 .build();
         model.addLesson(overlap);
-        assertCommandFailure(new AddLessonCommand(studentId, sdt, locationIndex, edt), model,
+        assertCommandFailure(new AddLessonCommand(studentId, overlap.getFee(), sdt, edt), model,
                 AddLessonCommand.MESSAGE_OVERLAP_LESSON);
     }
 }

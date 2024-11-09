@@ -8,21 +8,27 @@ import tutorease.address.model.Model;
 import tutorease.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds all persons whose name is contained in the keyword.
  */
-public class FindCommand extends Command {
-
+public class FindContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_NO_CONTACTS_FOUND = "No contacts found with the given keyword(s).";
+
+    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + COMMAND_WORD
+            + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    /**
+     * Creates a FindContactCommand to find contacts whose names match the specified keywords.
+     *
+     * @param predicate The predicate used to filter the list of contacts by matching names with keywords.
+     */
+    public FindContactCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -30,6 +36,12 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        int foundContacts = model.getFilteredPersonList().size();
+
+        if (foundContacts == 0) {
+            // No contacts found
+            return new CommandResult(MESSAGE_NO_CONTACTS_FOUND);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -41,12 +53,12 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof FindContactCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        FindContactCommand otherFindContactCommand = (FindContactCommand) other;
+        return predicate.equals(otherFindContactCommand.predicate);
     }
 
     @Override

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tutorease.address.logic.commands.CommandTestUtil.INVALID_LOCATION_INDEX_ZERO;
 import static tutorease.address.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_CHAR;
 import static tutorease.address.testutil.Assert.assertThrows;
 
@@ -21,7 +20,6 @@ public class StudentIdTest {
     @Test
     public void constructor_invalidStudentId_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new StudentId(INVALID_STUDENT_ID_CHAR));
-        assertThrows(IllegalArgumentException.class, () -> new StudentId(INVALID_LOCATION_INDEX_ZERO));
         assertThrows(IllegalArgumentException.class, () -> new StudentId(""));
     }
     @Test
@@ -53,5 +51,10 @@ public class StudentIdTest {
         assertFalse(studentId.equals(null));
         assertFalse(studentId.equals(5.0f));
         assertFalse(studentId.equals(new StudentId("2")));
+    }
+    @Test
+    public void toStringTest() throws ParseException {
+        StudentId studentId = new StudentId("1");
+        assertEquals("1", studentId.toString());
     }
 }

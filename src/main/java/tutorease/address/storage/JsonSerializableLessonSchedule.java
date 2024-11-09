@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.model.LessonSchedule;
+import tutorease.address.model.ReadOnlyLessonSchedule;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.lesson.Lesson;
 
@@ -25,6 +26,8 @@ public class JsonSerializableLessonSchedule {
 
     /**
      * Constructs a {@code JsonSerializableLessonSchedule} with the given lessons.
+     *
+     * @param lessons List of lessons.
      */
     @JsonCreator
     public JsonSerializableLessonSchedule(@JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
@@ -36,18 +39,20 @@ public class JsonSerializableLessonSchedule {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableLessonSchedule}.
      */
-    public JsonSerializableLessonSchedule(LessonSchedule source) {
+    public JsonSerializableLessonSchedule(ReadOnlyLessonSchedule source) {
         this.lessons.addAll(source.getLessonList().stream().map(JsonAdaptedLesson::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this lesson schedule into the model's {@code LessonSchedule} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @param tutorEase The tutorEase to read from.
+     * @throws IllegalValueException If there are overlapping lessons.
      */
     public LessonSchedule toModelType(ReadOnlyTutorEase tutorEase) throws IllegalValueException {
         requireNonNull(tutorEase);
         LessonSchedule lessonSchedule = new LessonSchedule();
+
         for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
             Lesson lesson = jsonAdaptedLesson.toModelType(tutorEase);
             if (lessonSchedule.hasLesson(lesson)) {

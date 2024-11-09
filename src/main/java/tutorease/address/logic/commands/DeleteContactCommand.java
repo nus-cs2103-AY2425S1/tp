@@ -1,7 +1,6 @@
 package tutorease.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tutorease.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static tutorease.address.logic.Messages.format;
 
 import java.util.List;
@@ -15,18 +14,21 @@ import tutorease.address.model.person.Person;
 /**
  * Deletes a contact identified by the index from the address book.
  */
-public class DeleteContactCommand extends Command {
-    public static final String COMMAND_WORD = "contact";
+public class DeleteContactCommand extends ContactCommand {
+    public static final String COMMAND_WORD = "delete";
 
-    public static final String SUB_COMMAND_WORD = "delete";
+    public static final String DELETE_COMMAND_STRING_FORMAT = "DeleteContactCommand"
+            + "{targetIndex=tutorease.address.commons.core."
+            + "index.Index{zeroBasedIndex=%d}}";
 
-    public static final String MESSAGE_USAGE = "contact delete: Deletes the contact identified by the index number "
+    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
+            + ": Deletes the contact identified by the index number "
             + "in the displayed contact list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: contact delete 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Contact [%1$s] deleted successfully.";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid.";
 
     private final Index targetIndex;
     /**
@@ -52,6 +54,7 @@ public class DeleteContactCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteStudentLesson(personToDelete);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, format(personToDelete)));
     }
@@ -72,9 +75,7 @@ public class DeleteContactCommand extends Command {
 
     @Override
     public String toString() {
-        return "DeleteContactCommand{"
-                + "targetIndex=" + targetIndex
-                + '}';
+        return String.format(DELETE_COMMAND_STRING_FORMAT, targetIndex.getZeroBased());
     }
 }
 

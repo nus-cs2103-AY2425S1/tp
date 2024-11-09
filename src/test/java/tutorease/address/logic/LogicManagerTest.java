@@ -6,9 +6,11 @@ import static tutorease.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorease.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static tutorease.address.logic.commands.CommandTestUtil.ROLE_DESC_AMY;
 import static tutorease.address.testutil.Assert.assertThrows;
+import static tutorease.address.testutil.TypicalLessons.MATH_LESSON;
 import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
-import static tutorease.address.testutil.TypicalPersons.AMY;
+import static tutorease.address.testutil.TypicalStudents.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -18,20 +20,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.CommandResult;
+import tutorease.address.logic.commands.ContactCommand;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.UserPrefs;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.person.Person;
 import tutorease.address.storage.JsonLessonScheduleStorage;
 import tutorease.address.storage.JsonTutorEaseStorage;
 import tutorease.address.storage.JsonUserPrefsStorage;
 import tutorease.address.storage.StorageManager;
-import tutorease.address.testutil.PersonBuilder;
+import tutorease.address.testutil.StudentBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -158,11 +164,35 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveTutorEase method by executing an add command
-        String addContactCommand = AddContactCommand.COMMAND_WORD + " " + AddContactCommand.SUB_COMMAND_WORD
-                + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addContactCommand = ContactCommand.COMMAND_WORD + " " + AddContactCommand.COMMAND_WORD
+                + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ROLE_DESC_AMY;
+        Person expectedPerson = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addContactCommand, CommandException.class, expectedMessage, expectedModel);
     }
+
+    /**
+     * Tests that the correct file path for TutorEase data is returned from the model.
+     * Ensures that the LogicManager correctly retrieves the file path for storing TutorEase data.
+     */
+    @Test
+    public void getTutorEaseFilePath_validPath_success() {
+        Path expectedPath = Path.of("data/tutorease.json");
+        assertEquals(expectedPath, logic.getTutorEaseFilePath()); // Ensure the model method was called
+    }
+
+    /**
+     * Tests that the filtered lesson list is updated correctly after adding a lesson.
+     * Ensures that the LogicManager retrieves the correct ObservableList with the added lesson.
+     */
+    @Test
+    public void getFilteredLessonList_addLesson_success() {
+        model.addLesson(MATH_LESSON);
+        ObservableList<Lesson> expectedList = FXCollections.observableArrayList(MATH_LESSON);
+        assertEquals(expectedList, logic.getFilteredLessonList());
+    }
+
+
+
 }

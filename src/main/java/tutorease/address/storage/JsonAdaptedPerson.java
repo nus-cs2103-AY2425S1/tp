@@ -12,9 +12,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.model.person.Address;
 import tutorease.address.model.person.Email;
+import tutorease.address.model.person.Guardian;
 import tutorease.address.model.person.Name;
 import tutorease.address.model.person.Person;
 import tutorease.address.model.person.Phone;
+import tutorease.address.model.person.Role;
+import tutorease.address.model.person.Student;
 import tutorease.address.model.tag.Tag;
 
 /**
@@ -28,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String role;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,11 +40,12 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("role") String role, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,6 +59,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        role = source.getRole().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +108,19 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-    }
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
+        }
+        final Role modelRole = new Role(role);
 
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        if (role.equals(Role.STUDENT)) {
+            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+        } else if (role.equals(Role.GUARDIAN)) {
+            return new Guardian(modelName, modelPhone, modelEmail, modelAddress, modelRole, modelTags);
+        } else {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+        }
+    }
 }

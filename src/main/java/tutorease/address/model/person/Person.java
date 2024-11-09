@@ -14,7 +14,7 @@ import tutorease.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
@@ -24,16 +24,18 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Role role;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Role role, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, role, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
         this.tags.addAll(tags);
     }
 
@@ -52,6 +54,14 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+    public String getAddressString() {
+        return address.toString();
+    }
+
+    public abstract Role getRole();
+    public abstract boolean isGuardian();
+    public abstract boolean isStudent();
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -72,6 +82,31 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+    /**
+     * Returns true if both persons have the same email address.
+     */
+    public boolean hasSameEmail(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getEmail() != null
+                && otherPerson.getEmail().equals(getEmail());
+    }
+
+    /**
+     * Returns true if both persons have the same phone number.
+     */
+    public boolean hasSamePhone(Person otherPerson) {
+        if (otherPerson == this) {
+            return true;
+        }
+
+        return otherPerson != null
+                && otherPerson.getPhone() != null
+                && otherPerson.getPhone().equals(getPhone());
     }
 
     /**
@@ -94,7 +129,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && role.equals(otherPerson.role);
     }
 
     @Override
@@ -111,7 +147,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("role", role)
                 .toString();
     }
-
 }

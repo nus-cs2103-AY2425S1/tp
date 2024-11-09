@@ -59,6 +59,11 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return lessonSchedulePath;
     }
 
+    /**
+     * Sets the file path of the lesson schedule data file.
+     *
+     * @param addressBookFilePath The new file path.
+     */
     public void setTutorEaseFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.tutorEaseFilePath = addressBookFilePath;

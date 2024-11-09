@@ -5,42 +5,98 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "role" : "Student",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "role" : "Student",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "role" : "Student",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "role" : "Student",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "role" : "Student",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "role" : "Student",
     "tags" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "role" : "Student",
     "tags" : [ ]
+  }, {
+    "name": "Alex Thompson",
+    "phone": "94351253",
+    "email": "alex.thompson@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "role": "Guardian",
+    "tags": ["parent", "supportive"]
+  }, {
+    "name": "Bradley Cooper",
+    "phone": "98765432",
+    "email": "bradley.cooper@example.com",
+    "address": "311, Clementi Ave 2, #02-25",
+    "role": "Guardian",
+    "tags": ["mentor", "familyFriend"]
+  }, {
+    "name": "Charlotte Green",
+    "phone": "95352563",
+    "email": "charlotte.green@example.com",
+    "address": "Wall Street",
+    "role": "Guardian",
+    "tags": []
+  }, {
+    "name": "David Johnson",
+    "phone": "87652533",
+    "email": "david.johnson@example.com",
+    "address": "10th Street",
+    "role": "Guardian",
+    "tags": ["mentor", "trustworthy"]
+  }, {
+    "name": "Emily Watson",
+    "phone": "9482224",
+    "email": "emily.watson@example.com",
+    "address": "Michigan Ave",
+    "role": "Guardian",
+    "tags": []
+  }, {
+    "name": "Felicia Tan",
+    "phone": "9482427",
+    "email": "felicia.tan@example.com",
+    "address": "Little Tokyo",
+    "role": "Guardian",
+    "tags": []
+  }, {
+    "name": "Gary Lee",
+    "phone": "9482442",
+    "email": "gary.lee@example.com",
+    "address": "4th Street",
+    "role": "Guardian",
+    "tags": []
   } ]
 }

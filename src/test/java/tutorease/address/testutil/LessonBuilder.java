@@ -2,13 +2,13 @@ package tutorease.address.testutil;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE;
-import static tutorease.address.logic.commands.CommandTestUtil.VALID_LOCATION_INDEX;
+import static tutorease.address.logic.commands.CommandTestUtil.VALID_FEE;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.EndDateTime;
+import tutorease.address.model.lesson.Fee;
 import tutorease.address.model.lesson.Lesson;
-import tutorease.address.model.lesson.LocationIndex;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.person.Person;
 
@@ -19,15 +19,15 @@ public class LessonBuilder {
     public static final String STUDENT = "Amy Bee";
 
     private Person student;
-    private LocationIndex locationIndex;
+    private Fee fee;
     private StartDateTime startDateTime;
     private EndDateTime endDateTime;
     /**
      * Creates a {@code LessonBuilder} with the default details.
      */
     public LessonBuilder() throws ParseException {
-        student = new PersonBuilder().withName(STUDENT).build();
-        locationIndex = new LocationIndex(VALID_LOCATION_INDEX);
+        student = new StudentBuilder().withName(STUDENT).build();
+        fee = new Fee(VALID_FEE);
         startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
         endDateTime = EndDateTime.createEndDateTime(VALID_END_DATE);
     }
@@ -38,14 +38,6 @@ public class LessonBuilder {
     public LessonBuilder withName(Person student) {
         requireNonNull(student);
         this.student = student;
-        return this;
-    }
-    /**
-     * Sets the LocationIndex of the {@code Lesson} that we are building.
-     */
-    public LessonBuilder withLocationIndex(String locationIndex) throws ParseException {
-        requireNonNull(locationIndex);
-        this.locationIndex = new LocationIndex(locationIndex);
         return this;
     }
     /**
@@ -68,6 +60,15 @@ public class LessonBuilder {
      * Builds the Lesson object.
      */
     public Lesson build() {
-        return new Lesson(student, locationIndex, startDateTime, endDateTime);
+        return new Lesson(student, fee, startDateTime, endDateTime);
+    }
+
+    /**
+     * Sets the fee of the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withFee(String fee) throws ParseException {
+        requireNonNull(fee);
+        this.fee = new Fee(fee);
+        return this;
     }
 }
