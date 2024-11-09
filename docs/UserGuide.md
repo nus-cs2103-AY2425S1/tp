@@ -402,6 +402,7 @@ Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **DateTime**: Must use _yyyy-MM-dd HH:mm_ format (e.g. 2024-12-31 23:59).
 * **Remark**: Optional, user can add remark details by adding `[r/Remark]` when calling the command.
   Empty remark will be added to the appointment if remark is not specified.
 * When adding appointment, the appointment detail will be added to the appointments list in both patient and doctor class.
@@ -428,7 +429,7 @@ Displays the history of an existing person with the specified `ID` in the MedDic
 Format: `view z/ID [x/DATE_TIME]`
 
 * **ID**: Must be valid, present in the MedDict database.
-* **DateTime**: Optional, user can view history of the patient on a specific date by adding `[x/DATE_TIME]` when calling the command.
+* **DateTime**: Optional, user can view history of the patient on a specific date by adding `[x/DATE_TIME]` when calling the command. Must use _yyyy-MM-dd HH:mm_ format (e.g. 2024-12-31 23:59).
 * A _notification message_ will be displayed if MedDict could not find any history or appointments associated with the person's ID.
 
 Examples:
@@ -473,6 +474,7 @@ Format: `marK z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **DateTime**: Must use _yyyy-MM-dd HH:mm_ format (e.g. 2024-12-31 23:59).
 * A _notification message_ will be displayed if MedDict could not find the appointment to mark.
 
 Examples:
@@ -495,6 +497,7 @@ Format: `deleteA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
+* **DateTime**: Must use _yyyy-MM-dd HH:mm_ format (e.g. 2024-12-31 23:59).
 * A _notification message_ will be displayed if MedDict could not find the appointment to delete.
 
 Examples:
