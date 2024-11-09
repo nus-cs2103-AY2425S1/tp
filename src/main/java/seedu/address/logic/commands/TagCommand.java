@@ -38,6 +38,7 @@ public class TagCommand extends UndoableCommand {
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Tagged guest(s):\n";
     public static final String MESSAGE_TAG_NOT_CREATED = "Tag(s) must be created first using 'newtag' command: ";
     public static final String MESSAGE_DUPLICATE_TAG = "Some guest(s) already have tag(s): ";
+    public static final String MESSAGE_INVALID_INDEX = "ERROR: Please enter a valid index (from 1 to ";
 
     private final List<Index> targetIndexes;
     private final Set<Tag> tags;
@@ -150,7 +151,7 @@ public class TagCommand extends UndoableCommand {
             throws CommandException {
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(String.format(TagCommand.MESSAGE_INVALID_INDEX + model.getFilteredPersonList().size() + ")"));
             }
             Person personToTag = lastShownList.get(targetIndex.getZeroBased());
             Set<Tag> newTags = new HashSet<>(personToTag.getTags());
