@@ -834,3 +834,6 @@ Common prerequisite: List all elderly using the `list` command.
    1. Delete the `data/contactmate.json` file.
    2. Launch the app.<br>
        Expected: The app should show a list of sample persons.
+
+3. **Mark elderly as called in the history view:** Currently, users can view the call history and profile view of the elderly in the history view together. This allows users to view the NRIC of the elderly, which may give the wrong impression that they can mark the elderly using NRIC as called in the history view (e.g. mark SXXXXXXXH). However, this is unintended as the history view is meant for viewing purposes only. We plan to provide the ability to mark the elderly whose details is specified in the history view as called.
+4. **Maintain the current filtered person list and index position after editing or adding an elderly contact:** If a user used the `find` command to filter the person list before editing or adding an elderly contact, the person list will reset to show all elderly. We plan to maintain the current filtered person list and index position after editing. Also, any added elderly will be appended to the back of the filtered list to maintain index position.
