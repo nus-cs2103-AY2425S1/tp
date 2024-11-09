@@ -130,7 +130,7 @@ public class HelpWindow extends UiPart<Stage> {
                 + "2. delete\n"
                 + "3. edit\n"
                 + "4. emergency\n"
-                + "5. delemergency\n"
+                + "5. deleteemergency\n"
                 + "6. priority\n"
                 + "7. deletelevel\n"
                 + "8. list\n"

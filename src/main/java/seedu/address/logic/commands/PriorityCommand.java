@@ -15,7 +15,8 @@ public class PriorityCommand extends Command {
             + "the index number used in the displayed person list.\n"
             + "Parameters: INDEX l/LEVEL (LEVEL must be 1, 2, or 3 or 'reset' for default level)\n"
             + "Example: priority 1 l/2\n"
-            + "Example: priority 2 l/reset";
+            + "Example: priority 2 l/reset\n"
+            + "Note: The `l/` prefix uses a lowercase 'l', not an uppercase 'I'.";
 
     public static final String MESSAGE_SUCCESS_RESET = "Priority level reset to default for %s";
     public static final String MESSAGE_SUCCESS_SET = "Priority level %d successfully set for %s";

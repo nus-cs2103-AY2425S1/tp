@@ -572,7 +572,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a task to a patient while all patients are being shown
 
-    1. Prerequisites: List all tasks using the `list` command. Patient should already exist in the list.
+    1. Prerequisites: Patient should already exist in the list.
 
     1. Test case: `addtask 1 d/Eat Medication`  
        Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
