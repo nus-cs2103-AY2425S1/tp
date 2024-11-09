@@ -166,8 +166,13 @@ public class FilterCommandParserTest {
         userInput = " invalid";
         assertParseFailure(parser, userInput, ParserUtil.MESSAGE_INVALID_INDEX);
 
-        userInput = " " + abModel.getFilteredPersonList().size() + 1;
-        assertParseFailure(parser, userInput, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Integer outOfBoundsIndexInt = abModel.getFilteredPersonList().size() + 1;
+        userInput = " " + outOfBoundsIndexInt;
+        assertParseFailure(
+                parser, userInput, String.format(
+                        Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        outOfBoundsIndexInt
+                ));
     }
 
     @Test

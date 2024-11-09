@@ -64,7 +64,9 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         CommandTestUtil.assertCommandFailure(
-                deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                deleteCommand, addressBookModel,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, outOfBoundIndex.getOneBased())
+        );
     }
 
     @Test
@@ -113,7 +115,9 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         CommandTestUtil.assertCommandFailure(
-                deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                deleteCommand, addressBookModel,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, outOfBoundIndex.getOneBased())
+        );
     }
 
     @Test
