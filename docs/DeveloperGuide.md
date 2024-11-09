@@ -15,7 +15,8 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+
 
 ---
 
@@ -595,6 +596,85 @@ testers are expected to do more _exploratory_ testing.
 
     1. Test case: `help`<br>
        **Expected:** Displays a message explaining how to access the help page.
+
+
+## **Appendix: Instructions for manual testing**
+
+Team Size: 5
+
+1. **Planned Enhancement: Support Non-Numeric Room Identifiers**  
+   Currently, room identifiers must follow the format `block-floor-room number` (e.g., `10-3-100`), and only numeric values are supported for each component. We plan to enhance this feature by allowing non-numeric values for the `block` and `room number`.
+
+   **Example Requirement**:
+   > Room identifier should be in the format `block-floor-room`, allowing non-numeric values for `block` and `room number`:
+   > - Example: `A-3-101B`, where `A` represents the block, `3` represents the floor, and `101B` represents the room number.
+
+   This change will add flexibility by supporting alphanumeric characters in the block and room sections.
+
+
+2. **Planned Enhancement: Partial Search for Session Names**  
+   Currently, users can only search for sessions by entering the exact first word of the session name using the `find_sessions` command. This can be inconvenient for users who want to list all sessions or search using only part of the session name.
+
+   **Example Requirement**:
+   > The `find_sessions` command should allow partial name searches so users can input only the first part of the session name to retrieve all matching sessions.
+   > - Example: Searching with the keyword "BAD" would show all sessions starting with "BAD," rather than requiring the exact first word.
+
+   This enhancement will improve user experience by making session searches more flexible and efficient.
+
+
+3. **Planned Enhancement: Flexible Member Search by Additional Fields and Partial Matching**  
+   Currently, users can only search for members by their full names, which can be challenging when managing a large number of members. Additionally, searching by room or other important fields, like the Telegram handle, is not supported.
+
+   **Example Requirement**:
+   > Expand the `find_members` command to support searching by additional fields, such as `block/floor/room number` and `Telegram handle`.  
+   > Allow partial name matching in `find_members` to accommodate long names.
+   > - Example: Users should be able to input a part of a member’s name, and the system will display all matching results.
+
+   These enhancements will improve the usability of the `find_members` command, making it easier to locate members efficiently by various identifiers or by partial names.
+
+
+4. **Planned Enhancement: Command Aliases for Improved Usability**  
+   The current command names (e.g., `add_session`, `add_member`) are lengthy and require the use of underscores, which can be cumbersome for users to type frequently.
+
+   **Example Requirement**:
+   > Introduce shorter command aliases as an alternative to full command names to reduce typing effort, especially for frequent actions.
+   > - Example: Instead of typing `add_member`, users could simply type `addm` to execute the same command.
+
+   This enhancement will streamline user interaction, making the application more efficient and user-friendly, especially for power users.
+
+
+5. **Planned Enhancement: `update_session` Command for Session Edits**  
+   Currently, session details—including members, session name, date, and points—are fixed upon creation and cannot be modified, which is problematic when adjustments are necessary. The current solution is to delete the session and create a new session with the updated details.
+
+   **Example Requirement**:
+   > Add an `update_session` command to allow users to modify session details after creation, such as adding or removing members, correcting session name or date, and adjusting session points if updated later.
+   > - Example: Users should be able to add a member who received a medical absence during the original session creation without creating a duplicate.
+
+   This enhancement will improve flexibility and reduce the need for users to recreate sessions from scratch when updates are required.
+
+
+6. **Planned Enhancement: Filter and Sort Members by Tags**  
+   The tag feature allows users to categorize members into different teams or groups, but it can become challenging to locate specific groups as the number of members increases.
+
+   **Example Requirement**:
+   > Implement a filter and sort feature for tags to help users manage members by groups or teams.
+   > - Example: `filter_members_by_tag Team A` would display only members tagged as "Team A," while `sort_members_by_tag` would group all members with similar tags together.
+
+   By adding these features, users can better manage and view group associations at scale.
+ 
+
+7. **Planned Enhancement: Preserve Points When Deleting a Session**  
+   Currently, deleting a session also removes the points associated with that session. While this may be the intended behavior for point tracking and the `delete_session` command, it can be problematic for users who want to keep a record of points earned without cluttering the UI with past sessions. As the number of sessions grows, users may find it increasingly difficult to manage sessions without removing essential points data.
+
+   **Example Requirement**:
+   > Allow sessions to be deleted with or without removing points previously awarded to members in those sessions.
+   > - Example: The user should be able to choose if deleting "Session A" should retain the points awarded to members during that session even after the session is removed from the list.
+
+   **Additional Suggestion**:
+   > Implement a command to manually adjust points for individual members, allowing users to make modifications directly as needed.
+   > - Example: The `adjust_points` command could allow manual changes to members’ points, streamlining point adjustments across various scenarios.
+
+   This enhancement would improve flexibility in point tracking, allowing users to manage sessions without losing historical points data and reducing the need to retain numerous sessions solely for tracking purposes.
 
 
 ---
