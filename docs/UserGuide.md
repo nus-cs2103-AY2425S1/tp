@@ -393,13 +393,13 @@ Takes you back to the main window.
 Format: `back`
 
 ### Clearing all entries : `clear`
-**<ins>When in the main or inspect window**
+**<ins>When in the main window**
 
 Clears all contacts from the contacts list.
 
 Format: `clear`
 
-**<ins>When in the main or inspect window**
+**<ins>When in the inspect window**
 
 `clear` does not work in the inspect window.
 
