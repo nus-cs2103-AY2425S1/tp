@@ -84,6 +84,11 @@ public class EditCommand extends Command {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
+        assert index != null : "Index must not be null";
+        assert index.getOneBased() > 0 : "Index must be a positive integer";
+
+        assert editPersonDescriptor != null : "Edit Person Descriptor should not be null";
+
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
@@ -107,6 +112,9 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        assert editedPerson != null : "Edited person should not be null";
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
@@ -115,7 +123,8 @@ public class EditCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+        assert personToEdit != null : "Person to edit cannot be null.";
+        assert editPersonDescriptor != null : "EditPersonDescriptor cannot be null.";
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());

@@ -104,33 +104,42 @@ public class AddCommandParser implements Parser<AddCommand> {
             logger.log(Level.FINE, "Parsing individual fields");
 
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            assert name != null : "Name parsing failed!";
             logger.log(Level.FINER, "Parsed name: {0}", name);
 
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            assert phone != null : "Phone parsing failed!";
             logger.log(Level.FINER, "Parsed phone: {0}", phone);
 
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+            assert email != null : "Email parsing failed!";
             logger.log(Level.FINER, "Parsed email: {0}", email);
 
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+            assert address != null : "Address parsing failed!";
             logger.log(Level.FINER, "Parsed address: {0}", address);
 
             DesiredRole desiredRole = ParserUtil.parseDesiredRole(argMultimap.getValue(PREFIX_DESIREDROLE).get());
+            assert desiredRole != null : "DesiredRole parsing failed!";
             logger.log(Level.FINER, "Parsed desiredRole: {0}", desiredRole);
 
             Skills skills = ParserUtil.parseSkills(argMultimap.getValue(PREFIX_SKILLS).get());
+            assert skills != null : "Skills parsing failed!";
             logger.log(Level.FINER, "Parsed skills: {0}", skills);
 
             Experience experience = ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get());
+            assert experience != null : "Experience parsing failed!";
             logger.log(Level.FINER, "Parsed experience: {0}", experience);
 
             Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
+            assert status != null : "Status parsing failed!";
             logger.log(Level.FINER, "Parsed status: {0}", status);
 
             // Parse optional note
             Note note;
             if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
                 note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+                assert note != null : "Note parsing failed!";
                 logger.log(Level.FINER, "Parsed note: {0}", note);
             } else {
                 note = new Note(""); // Default to empty note if not provided
@@ -138,6 +147,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
 
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+            assert tagList != null : "Tag parsing failed!";
             logger.log(Level.FINER, "Parsed tags: {0}", tagList);
 
             // Create a new Person object with all fields

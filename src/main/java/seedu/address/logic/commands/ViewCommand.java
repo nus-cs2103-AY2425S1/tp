@@ -33,13 +33,19 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert model != null : "Model should not be null";
+
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        assert lastShownList != null : "The filtered person list should not be null.";
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
+        assert personToView != null : "Person to view should not be null.";
+
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)));
     }
 

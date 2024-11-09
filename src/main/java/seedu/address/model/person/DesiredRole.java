@@ -25,6 +25,7 @@ public class DesiredRole {
      */
     public DesiredRole(String role) {
         requireNonNull(role);
+        assert role != null : "Role cannot be null";
         value = role.trim();
     }
 

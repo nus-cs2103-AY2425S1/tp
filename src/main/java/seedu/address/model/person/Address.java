@@ -26,6 +26,7 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
+        assert address != null : "Address cannot be null";
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
     }
