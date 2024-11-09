@@ -88,13 +88,13 @@ The image below shows the different components of HiredFiredPro.
 
 Parameter     | Notes
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**`NAME`**   | should contain only English alphabets and should not be blank
-**`JOB`**    | should be alphanumeric
+**`NAME`**   | should be alphanumeric and should not be blank
+**`JOB`**    | should be alphanumeric and should not be blank
 **`PHONE_NUMBER`**   | should only contain digits `0-9`, and it should be at least 3 digits long
 **`EMAIL`** | should be a valid email of the format `local-part@domain`
 **`SKILL`**   | should be alphanumeric 
 **`INTERVIEW_SCORE`**   | should be a number ranging from `0.0` to `10.0` with a maximum of a single decimal place, e.g. `5.5`, `8`, `10.0` are valid but `5.`, `6.55`, `11`, `.5` are invalid
-**`TAG`**   | should be alphanumeric and should not contain any spaces. `Hired`, `Rejected` or `Pending` also should not be manually added as tags
+**`TAG`**   | should be alphanumeric and should not contain any spaces. `hired`, `rejected` or `pending` also should not be manually added as tags
 **`INDEX`**   | refers to the index number shown in the displayed candidate list and **must be a positive integer**, i.e. 1, 2, 3, ...
 **`ORDER`**   | should be either `a` (ascending) or `d` (descending)
 
@@ -199,33 +199,33 @@ Examples:
 
 ### Hiring a candidate: `hire`
 
-Changes an existing candidate's status to "Hired" in HiredFiredPro.
+Changes an existing candidate's status to "hired" in HiredFiredPro.
 
 Format: `hire n/NAME j/JOB`
 
-* Changes the candidate's status to `Hired`.
+* Changes the candidate's status to `hired`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
-* Existing status will be updated to the `Hired` status.
+* Existing status will be updated to the `hired` status.
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `hire n/Hans j/Software Engineer` and `hire n/hans j/SOFTWARE engineer` will mark the candidate as hired.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `hire n/Alex Yeoh j/Software Engineer` and `hire n/alex yeoh j/SOFTWARE engineer` will mark the candidate as hired.
 </box>
 <br><br>
 
 ### Rejecting a candidate: `reject`
 
-Changes an existing candidate's status to "Rejected" in HiredFiredPro.
+Changes an existing candidate's status to "rejected" in HiredFiredPro.
 
 Format: `reject n/NAME j/JOB`
 
-* Changes the candidate's status to `Rejected`.
+* Changes the candidate's status to `rejected`.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
-* Existing status will be updated to the `Rejected` status.
+* Existing status will be updated to the `rejected` status.
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `reject n/Hans j/Software Engineer` and `reject n/hans j/SOFTWARE engineer` will mark the candidate as rejected.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `reject n/Alex Yeoh j/Software Engineer` and `reject n/alex yeoh j/SOFTWARE engineer` will mark the candidate as rejected.
 </box>
 <br><br>
 
@@ -235,13 +235,13 @@ Shows a candidate's status and details in HiredFiredPro.
 
 Format: `view n/NAME j/JOB`
 
-* Views the candidate's status (Hired / Rejected / Pending) and full details.
+* Views the candidate's status (hired / rejected / pending) and full details.
 * Both the name of the candidate and the job that he/she is applying for must be provided.
 * Details of the candidate being viewed will be displayed in the display panel.
 
 <box type="tip">
 
-**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `view n/Hans j/Software Engineer` and `view n/hans j/SOFTWARE engineer` will show the candidate's status and details.
+**Tip:** `NAME` and `JOB` are **case-insensitive**, i.e. Both `view n/Alex Yeoh j/Software Engineer` and `view n/alex yeoh j/SOFTWARE engineer` will show the candidate's status and details.
 </box>
 
 Examples:
@@ -287,7 +287,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd candidate in HiredFiredPro.
-* `find Betsy` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
+* `find bernice` followed by `delete 1` deletes the 1st candidate in the results of the `find` command.
 <br><br>
 
 ### Sorting candidates by interview scores: `sort`
