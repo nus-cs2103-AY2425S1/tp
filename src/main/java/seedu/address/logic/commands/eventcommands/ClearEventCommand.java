@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
@@ -35,9 +34,8 @@ public class ClearEventCommand extends ClearCommand {
         } else {
             setConfirmed(false);
             setPrompted(false);
-            model.setEventList(new AddressBook());
-            model.clearAllLinks();
-            return new CommandResult(MESSAGE_SUCCESS);
+            model.clearAllEvents();
+            return new CommandResult(MESSAGE_SUCCESS, false, false, true);
         }
     }
 

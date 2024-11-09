@@ -115,9 +115,11 @@ public interface Model {
     void unlinkPersonFromEvent(Person person, Event event);
 
     /**
-     * Removes any links to events from all persons.
+     * Removes all events from the address book.
      */
-    void clearAllLinks();
+    void clearAllEvents();
+
+    void clearAllPersons();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

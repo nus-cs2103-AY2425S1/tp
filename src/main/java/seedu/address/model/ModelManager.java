@@ -168,8 +168,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void clearAllLinks() {
-        addressBook.clearAllLinks();
+    public void clearAllEvents() {
+        addressBook.clearEvents(new AddressBook());
+    }
+
+    @Override
+    public void clearAllPersons() {
+        addressBook.clearPersons(new AddressBook());
     }
 
     //=========== Filtered Person List Accessors =============================================================

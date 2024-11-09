@@ -179,7 +179,12 @@ public class AddEventCommandTest {
         }
 
         @Override
-        public void clearAllLinks() {
+        public void clearAllEvents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAllPersons() {
             throw new AssertionError("This method should not be called.");
         }
 
