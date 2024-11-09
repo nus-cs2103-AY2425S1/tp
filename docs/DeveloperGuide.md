@@ -234,34 +234,6 @@ You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > t
    2. Test case: `edit 1 n/New Name` (where `New Name` is the updated name for the person)<br>
       Expected: The person's name updates in both the address and transaction lists and the UI (assuming no duplicates).
 
-### Adding/deleting a remark for a person
-
-1. Adding a remark for a person using the `remark` command while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   2. Test case: `remark 1 r/Likes to swim`<br>
-      Expected: First contact's remark is updated to "Likes to swim". Details of the updated contact shown in the status message. Timestamp in the status bar is updated.
-
-   3. Test case: `remark 0 r/Likes to swim`<br>
-      Expected: No person's remark is updated. Error details shown in the status message. Status bar remains the same.
-
-   4. Other incorrect remark commands to try: `remark`, `remark x r/Likes to swim` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-   
-2. Deleting a remark for a person using the `remark` command while all persons are being shown
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   2. Test case: `remark 1 r/`<br>
-      Expected: First contact's remark is deleted. Details of the contact shown in the status message.
-
-   3. Test case: `remark 1`<br>
-      Expected: First contact's remark is deleted (shortcut for users intending to empty remark). Details of the contact shown in the status message.
-
-   4. Test case: `remark 0 r/`<br>
-      Expected: No person's remark is deleted. Error details shown in the status message.
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
