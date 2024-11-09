@@ -43,8 +43,7 @@ public class PreferredTimeTest {
         assertFalse(PreferredTime.isValidPreferredTime("3435", false)); // second part only
         assertFalse(PreferredTime.isValidPreferredTime("2345 3456", false)); // no hyphen in between
         assertFalse(PreferredTime.isValidPreferredTime("2100-4500", false)); // invalid time range
-        assertFalse(PreferredTime.isValidPreferredTime("2300-1700", false)); // start time later than end time
-        assertFalse(PreferredTime.isValidPreferredTime("1200-1200", false)); // start time same as end time
+        assertFalse(PreferredTime.isValidPreferredTime("1200-1200", false)); // time point for non-find-time
 
 
         // valid preferred time
@@ -52,5 +51,8 @@ public class PreferredTimeTest {
         assertTrue(PreferredTime.isValidPreferredTime("1100-1300", true));
         // single time point allowed for FindTime range
         assertTrue(PreferredTime.isValidPreferredTime("1100-1100", true));
+        // overnight range allowed
+        assertTrue(PreferredTime.isValidPreferredTime("2300-1700", false));
+        assertTrue(PreferredTime.isValidPreferredTime("2300-1700", true));
     }
 }

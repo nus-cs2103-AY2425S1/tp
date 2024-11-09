@@ -30,6 +30,8 @@ public class PreferredTime {
     public final String preferredTime;
     public final LocalTime start;
     public final LocalTime end;
+    public final boolean isOvernight;
+    private final boolean isPoint;
 
 
     /**
@@ -49,6 +51,9 @@ public class PreferredTime {
 
         start = LocalTime.parse(matcher.group(1), TIME_FORMATTER);
         end = LocalTime.parse(matcher.group(2), TIME_FORMATTER);
+
+        isPoint = start.equals(end);
+        isOvernight = end.isBefore(start);
     }
 
     /**
@@ -83,11 +88,11 @@ public class PreferredTime {
 
         // if is FindTime, check that the start is no later than the end.
         if (isFindTime) {
-            return !LocalTime.parse(start, TIME_FORMATTER).isAfter(LocalTime.parse(end, TIME_FORMATTER));
+            return true;
         }
 
-        // otherwise check that the start is before the end.
-        return LocalTime.parse(start, TIME_FORMATTER).isBefore(LocalTime.parse(end, TIME_FORMATTER));
+        // otherwise check that the start is not equals to the end.
+        return !LocalTime.parse(start, TIME_FORMATTER).equals(LocalTime.parse(end, TIME_FORMATTER));
     }
 
     /**
@@ -97,7 +102,18 @@ public class PreferredTime {
      * @param other Another PreferredTime object to check if overlaps with.
      */
     public boolean overlaps(PreferredTime other) {
-        return !end.isBefore(other.start) && !start.isAfter(other.end);
+        if (isOvernight && other.isOvernight) {
+            return true;
+        } else if (isPoint && !other.isOvernight) {
+            return start.isBefore(other.end) && !end.isBefore(other.start);
+        } else if (isPoint) {
+            // finding point with an overnight range
+            return !start.isBefore(other.start) || end.isBefore(other.end);
+        } else if (isOvernight == other.isOvernight) {
+            return start.isBefore(other.end) && end.isAfter(other.start);
+        } else {
+            return start.isBefore(other.end) || end.isAfter(other.start);
+        }
     }
 
     @Override
