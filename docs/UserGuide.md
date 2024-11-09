@@ -129,7 +129,7 @@ Examples:
 ![Example for Add Student Command](images/addStudentExample.png)
 ### Viewing a student: `view_student`
 
-Displays all the details of a student in the details panel.
+Displays all the details of a student in the details panel.<br> 
 
 Format: `view_student INDEX`
 
@@ -140,6 +140,8 @@ Format: `view_student INDEX`
 
 Constraints:
 * Index must exist in the current displayed student list.
+* Only one index can be supplied at a time. If additional indices are provided after the first valid index, they will be ignored.
+  (e.g: `view_student 1 2 3` will be identical in behaviour to `view_student 1`)
 
 Examples:
 * `list` followed by `view_student 2` displays the 2nd student in the list.
