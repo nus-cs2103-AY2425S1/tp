@@ -412,6 +412,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **PlanPal**: A software system designed to manage contact information specifically for student event planners, supporting functions like adding, updating, and deleting contacts, with data stored locally.
 * **CLI (Command Line Interface)**: A text-based user interface where the user interacts with the system by typing commands.
+* **GUI (Graphical User Interface)**: A icon-based user interface where the user interacts with the system through visual indicators and graphical icons.
 * **Contact**: An individual or entity whose information is stored in PlanPal, typically including name, phone number, email, address, role, and optionally a Telegram handle.
 * **Role**: A category assigned to a contact to indicate their relationship to an event, such as "attendee," "vendor," "volunteer," or "sponsor".
 * **Tag**: A label that is applied to a contact to categorize them (e.g., as an attendee, vendor, volunteer, or sponsor) for easy organization and filtering.
