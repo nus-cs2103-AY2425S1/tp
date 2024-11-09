@@ -36,7 +36,7 @@ Whether it be 5 staff members or 500 employees, HR Helper has the capability to 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds a contact named `John Doe` to the HR Helper list.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -85,8 +85,7 @@ Format:
 **Tip:** Press `Enter` to go to the next field!
 
 Examples:
-* For this version, the username is `admin` and password is `12345678`.
-* For faster testing purposes, the username is `test` and password is `test`.
+* For this version, the username is `test` and password is `test`.
 
 <img src = "images/HRHelperLoginOutput.png" width=300>
 
