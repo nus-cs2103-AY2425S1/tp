@@ -95,6 +95,10 @@ The application will throw an error if you attempt to create two users with the 
 A person can have any number of tags (including 0)
 </div>
 
+- Note that Name, Phone Number, Email and Address are compulsory fields. 
+- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
+particularly sensitive as compared to Identification Number etc.
+
 Examples:
 
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -197,7 +201,8 @@ A person can have any number of notes (including 0)
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
 - The note must be comprised of alphanumeric characters or spaces.
-- Notes are case-insensitive
+- Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
+- Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
 
 Examples:
 
@@ -216,7 +221,8 @@ Format: `editnote INDEX i/NOTE_INDEX n/NOTE`
   displayed person.
 - The index and note index **must be positive integers** 1, 2, 3, …​
 - The note must be comprised of alphanumeric characters or spaces.
-- Notes are case-insensitive
+- Duplicate notes are not allowed. E.g. `High profile client` is treated the same as `high profile client`
+- Notes are stored as case-sensitive but are case-insensitive when duplicate check is done.
 
 Examples:
 
