@@ -129,7 +129,6 @@ public interface Model {
 
     void updateFilteredGroupList(Predicate<Group> groupName);
 
-
     /**
      * Returns an unmodifiable view of the groups list
      */
