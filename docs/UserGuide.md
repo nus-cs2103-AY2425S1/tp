@@ -99,15 +99,15 @@ Insert example command picture
 Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
 
 **Command Format:**  
-`add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>] [t/<Tag>]`
+`add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>]…​ [t/<Tag>]…​`
 
-- `n/` Full name (mandatory)
-- `p/` Phone number (mandatory)
-- `a/` Address (mandatory)
-- `b/` Birthday (optional)
-- `e/` Email (optional)
-- `r/` Remark (optional)
-- `t/` Tag (optional)
+- `n/` Full name (mandatory) (exact duplicate not allowed, case-sensitive)
+- `p/` Phone number (mandatory) (duplicate allowed)
+- `a/` Address (mandatory) (duplicate allowed)
+- `b/` Birthday (optional) (duplicate allowed)
+- `e/` Email (optional) (duplicate allowed)
+- `r/` Remark (optional) (multiple allowed but only the last one will be recorded) (duplicate allowed)
+- `t/` Tag (optional) (multiple allowed and all will be added) (duplicate allowed)
 
 <div markdown="span" class="alert alert-primary">💡 <strong>Tip:</strong> 
 A person can have any number of tags (including 0)
@@ -162,6 +162,7 @@ Edits an existing person in the address book.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+- Note that edit tag will overwrite exist list of tags to the new list of tags entered. Make sure to copy the existing tags you want to keep when editing.
 - Note that history and property **cannot be edited**
 
 
@@ -181,7 +182,8 @@ Format: `log INDEX [d/DATE] l/LOG`
 * Adds a new history entry to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 * Date is optional, and must be no earlier than the date of creation of the person, and not in the future, if to be included.
 * If date is not included the date of the history entry to be added will be today, system time, by default.
-* Date format must be in `yyyy-mm-dd`.
+* Date format **must** be in `yyyy-mm-dd`.
+* Log message **cannot be empty**.
 
 Examples:
 * `log 1 d/2024-08-08 l/meet up` add a log entry to the first person in the address book, `meet up` on 2024-08-08.
@@ -194,15 +196,18 @@ Examples:
 
 ### Remarking a person : `remark`
 
-Add or edit remark to an existing person in the address book.
+Add or edit remark to an existing person in the address book. Note that although multiple remarks may be entered, 
+only the last (most up to date one) will be recorded.
 
-Format: `remark INDEX r/REMARK`
+Format: `remark INDEX r/REMARK]…​`
 
 * Add or edit remark to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​, and cannot exceed the number of persons in the address book.
 
 Examples:
 * `remark 1 r/remark message` adds remark message `remark message` to the 1st person, existing remark will be overwritten.
   ![result for 'remark 1 r/remark message'](images/Remark.png)
+* `remark 1 r/first remark r/second remark` adds remark message `second remark` to the first person.
+  ![result for 'remark 1 r/remark message'](images/MultipleRemark.png)
 
 ### Single page person view: `view`
 
@@ -268,7 +273,9 @@ Finds persons whose names contain any of the given keywords.
 
 ### Marking a person as favourite: `favourite`
 
-Mark a specific person from the address book as favourite by assigning a special favourite label.
+Mark a specific person from the address book as favourite by assigning a special favourite tag.
+Using this command on an already favourited person will remove the person from favourite 
+by removing the special favourite tag.
 
 Format: `favourite INDEX`
 
@@ -344,17 +351,18 @@ Stores a contact’s birthday
 **Command Format:**  
 `birthday <ContactID> d/<Birthday Date>`
 
-- `d/` The contact’s birthday in `MM-DD` or `YYYY-MM-DD` format.
+- `d/` The contact’s birthday `YYYY-MM-DD` format.
 
 **Examples:**
 - `birthday 123 d/1990-05-15`
-- `birthday 456 d/09-25`
 
 ---
 
 ### Birthday Reminder
 
 Displays a contacts' birthday if they are happening within a week from the system's current date.
+Note that the reminder is only shown when the application is launched,
+any command feedback shown will clear the reminder. To view the reminder again restart the application.
 
 **Command Format:**
 None, as it is an automatic feature.
