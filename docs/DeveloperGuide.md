@@ -406,12 +406,6 @@ Use case ends.
   
   Use case ends.
 
-
-* 2b. SellSavvy detects that there are no customers with the specified index.
-    * 2a1. SellSavvy displays an error that the customer index is invalid.
-
-  Use case ends.
-
 **Use case 4: Find the Customer by their Name**
 
 * **System**: SellSavvy
@@ -603,7 +597,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a. There is no such status with specified status keyword.
+* 1a. The specified status keyword is not a valid status.
   * 1a1. SellSavvy displays an error message "Invalid command format!" and provides the available status keywords.
 
   Use case ends.
