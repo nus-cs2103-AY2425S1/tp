@@ -270,7 +270,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * values tools that allow for rapid data entry and retrieval
 * requires robust search capabilities to quickly find patient or doctor information
 
-**Value proposition**: manage contacts and appointments faster than a typical GUI driven app
+**Value proposition**: streamlines clinic operations by organizing personnel records and simplifying appointment scheduling
 
 
 ### User stories
