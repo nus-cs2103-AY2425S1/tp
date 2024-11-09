@@ -461,8 +461,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+<a name="list-patient-anchor-point"></a>
+**Use case: UC05 - List all doctors and patients**
+
+**MSS**
+
+1.  User requests to list all doctors and patients
+2.  MediContacts shows a list of all doctors and patients previously added
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. MediContacts shows a message to indicate list is empty.
+
+      Use case ends.
+
 <a name="find-patient-anchor-point"></a>
-**Use case: UC05 - Find a patient**
+**Use case: UC06 - Find a patient**
 
 **MSS**
 
@@ -486,7 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 <a name="find-doctor-anchor-point"></a>
-**Use case: UC06 - Find a doctor**
+**Use case: UC07 - Find a doctor**
 
 **MSS**
 
@@ -509,11 +527,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC07 - Delete a patient**
+**Use case: UC08 - Delete a patient**
 
 **MSS**
 
-1.  User requests to either [list patients (UC03)](#list-patient-anchor-point) or [find a patient (UC05)](#find-patient-anchor-point)
+1.  User requests to either [list patients (UC03)](#list-patient-anchor-point) or [find a patient (UC06)](#find-patient-anchor-point)
 2.  MediContacts shows a list of patients
 3.  User requests to delete a specific patient in the list
 4.  MediContacts deletes the patient
@@ -532,11 +550,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC08 - Delete a doctor**
+**Use case: UC09 - Delete a doctor**
 
 **MSS**
 
-1.  User requests to either [list doctors (UC04)](#list-doctor-anchor-point) or [find a doctor (UC06)](#find-doctor-anchor-point)
+1.  User requests to either [list doctors (UC04)](#list-doctor-anchor-point) or [find a doctor (UC07)](#find-doctor-anchor-point)
 2.  MediContacts shows a list of doctors
 3.  User requests to delete a specific doctor in the list
 4.  MediContacts deletes the doctor
@@ -555,7 +573,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC09 - Add an appointment**
+**Use case: UC10 - Add an appointment**
 
 **MSS**
 
@@ -597,7 +615,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 <a name="list-appt-anchor-point"></a>
-**Use case: UC10 - List all appointments scheduled at a certain date and time**
+**Use case: UC11 - List all appointments scheduled at a certain date and time**
 
 **MSS**
 
@@ -626,11 +644,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC11 - Delete an appointment**
+**Use case: UC12 - Delete an appointment**
 
 **MSS**
 
-1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
+1.  User requests to [list appointments (UC11)](#list-appt-anchor-point)
 2.  MediContacts shows a list of appointments
 3.  User requests to delete a specific appointment in the list
 4.  MediContacts deletes the appointment
@@ -649,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC12 - Mark an appointment as done**
+**Use case: UC13 - Mark an appointment as done**
 
 **MSS**
 
@@ -672,7 +690,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC13 - Mark an appointment as undone**
+**Use case: UC14 - Mark an appointment as undone**
 
 **MSS**
 
