@@ -229,9 +229,9 @@ The designated names for each component of the User Interface will be used consi
 
 * **Student Id:** Every student will be assigned to a student id before being added to a system. Take note that the student id is unique and is an easy way to identify a student.
   
-* **Tutorial Classes allocated to student:** This component appears just below the student id. The component displays the list of tutorial classes that the student is allocated to.
-* Tutorial classes are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
-* However, if there are no tutorial classes added to the student. Then it will display "No Tutorial Assigned" instead. 
+* **Tutorial Class allocated to student:** This component appears just below the student id. The component displays the tutorial class that the student is allocated to.
+* Tutorial class are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
+* However, if there are no tutorial class added to the student. Then it will display "No Tutorial Assigned" instead. 
 
 * **Attendance Tag:** The attendance tag displays all of the dates in which the student has attended the tutorial class. 
 * The tag uses a datetime format of the form `yyyy/mm/dd`.
