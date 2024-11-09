@@ -41,7 +41,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             Set<Tag> tagSet = Tag.stringToTagSet(tagString);
             return new FilterCommand(tagSet);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(e.getMessage());
         }
     }
 }

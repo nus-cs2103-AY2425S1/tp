@@ -23,6 +23,12 @@ public class TagTest {
     }
 
     @Test
+    public void constructor_tagNamedAll_throwsIllegalArgumentException() {
+        String invalidTagName = "all";
+        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
+    }
+
+    @Test
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
