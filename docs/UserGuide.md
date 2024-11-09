@@ -48,7 +48,7 @@ WardWatch (WW) is a **desktop app targeted towards doctors and nurses for managi
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wardwatch.jar` command to run the application.<br>
 
 A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+<img src="images/Ui.png" alt="Ui" style="pointer-events: none;">
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -161,8 +161,6 @@ However, dates exceeding the maximum possible (e.g., the 32nd of any month) will
 - `makeappt 1 a/Surgery s/31-02-2024-12-00 e/31-02-2024-11-00` is adjusted to `makeappt 1 a/Surgery s/29-02-2024-12-00 e/29-02-2024-11-00` (February 2024 has only 29 days).
 - `makeappt 1 a/Surgery s/32-01-2024-10-00 e/32-01-2024-11-00` will trigger an error, as no month can have a 32nd day.
 
-Invalid dates within a possible range are corrected automatically, while dates exceeding the month’s limit prompt an error.
-
 </box>
 
 ### Other Parameters
@@ -183,7 +181,7 @@ Symbol     | Parameter   | Constraints
 
 Shows a pop-up message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" alt="help message" style="pointer-events: none;">
 
 Format: `help`
 
@@ -207,7 +205,7 @@ Format: `exit`
 
 ### Adding a patient: `add`
 
-![add patient result](images/add.png)
+<img src="images/add.png" alt="add patient result" style="pointer-events: none;">
 
 Adds a patient to WardWatch.
 
@@ -226,7 +224,7 @@ Examples:
 
 ### Editing a patient : `edit`
 
-![edit patient result](images/edit.png)
+<img src="images/edit.png" alt="edit patient result" style="pointer-events: none;">
 
 Edits an existing person in WardWatch.
 
@@ -245,7 +243,7 @@ Examples:
 
 ### Deleting a patient : `delete`
 
-![delete patient result'](images/delete.png)
+<img src="images/delete.png" alt="delete patient result" style="pointer-events: none;">
 
 Deletes the specified person from WardWatch.
 
@@ -301,7 +299,8 @@ Examples:
 * `find w/ B1` returns all patients in ward B1
 * `find m/ Dave` returns an empty list
 * `find n/ alice benson` returns `Alice Pauline`, `Benson Meier`<br>
-  ![result for 'find n/ alice benson'](images/findAliceBensonResult.png)
+  <img src="images/findAliceBensonResult.png" alt="find n/ alice benson" style="pointer-events: none;">
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -317,7 +316,7 @@ Format: `view INDEX`
 Examples:
 
 * `view 1` to view the 1st patient's details.
-  ![result for 'view 1'](images/viewResult.png)
+<img src="images/viewResult.png" alt="result for 'view 1'" style="pointer-events: none;">
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -355,7 +354,7 @@ Examples:
 
 ### Adding an Appointment to a patient: `makeappt`
 
-![makeappt for patient result'](images/makeappt.png)
+<img src="images/makeappt.png" alt="makeappt for patient result" style="pointer-events: none;">
 
 Makes an appointment for a person.
 
@@ -395,7 +394,7 @@ Format: `delappt INDEX`
 
 ### Show appointments on a specific date: `scheduledate`
 
-![scheduledate result](images/scheduledate.png)
+<img src="images/scheduledate.png" alt="scheduledate result" style="pointer-events: none;">
 
 Lists all the appointments on a specific date.
 
