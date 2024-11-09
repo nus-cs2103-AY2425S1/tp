@@ -371,12 +371,6 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
     Use case ends.
 
 
-**Extensions**:
-- 2a. The list is empty 
-  - 2a1. HiredFiredPro displays a message indicating no candidates are currently listed.
-Use case ends.
-
-
 ---
 
 ### Use Case 4: View Candidate Status
