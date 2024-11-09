@@ -31,7 +31,7 @@
     
     4.7 [**Locating employee by name**](#4-7-locating-employees-by-name-find)
 
-    4.8 [**Deleting an employe**](#4-8-deleting-an-employee-delete)
+    4.8 [**Deleting an employee**](#4-8-deleting-an-employee-delete)
 
     4.9 [**Sorting employees**](#4-9-sorting-employees-sort)
 
@@ -230,7 +230,7 @@ Format: `count`(for counting the filtered list), `count tag/TAG`(for counting em
 
 Examples:
 * `count`
-* `count tag/Colleagues`
+* `count tag/Communications`
 
 <img src = "" width=500 alt="output">
 
