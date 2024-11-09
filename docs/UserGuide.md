@@ -136,7 +136,7 @@ form a unique transaction.<br>
 
 :bulb: **Tip:** The index aligns with the address book including when it is filtered. <br>
 :bulb: **Tip:** If the transaction happened on the current day, the date parameter can be omitted.<br>
-:bulb: **Tip:** A person can have any number of categories (including 0)<br>
+:bulb: **Tip:** A transaction can have any number of categories (including 0)<br>
 :bulb: **Tip:** Positive Amount Transaction indicates someone owes <ins>_the user_</ins> an amount.<br>
 :bulb: **Tip:** Negative Amount Transaction indicates <ins>_the user_</ins> owes someone an amount.<br>
 :bulb: **Tip:** Categories can be keyed in both lower and upper case without worrying about duplication as it will be capitalised automatically.<br>
