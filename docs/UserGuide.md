@@ -351,8 +351,9 @@ Examples:
 * `assign v/3 e/2` assigns the third volunteer on the volunteer list to the list of participants of the second event on the event list.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-The system checks if the volunteer is free on that date, and if they are already signed up for another event at the same time.<br>
-If that is the case, they cannot be assigned to this event.
+The system checks if the volunteer is free on that date, and if they are already signed up for another event on the same day.<br>
+If that is the case, they cannot be assigned to this event.<br>
+**Volunteers cannot sign up for multiple events on the same day.**
 </div>
 
 ![Assign Volunteer Demo](images/commandDemo/AssignVolunteerDemo.png)
@@ -551,6 +552,10 @@ Don't worry about saving - VolunSync automatically saves everything you do! Ever
    - **Don't** modify the data files in the `data` folder
    - Doing so may result in unexpected behaviour when using VolunSync, such as the app crashing
    - You may lose your data permanently
+
+1. **Assigning Volunteers To Multiple Events on the Same Day**
+   - Volunteers cannot sign up for multiple events on the same day
+   - If you try to assign a volunteer to an event on a day they're already signed up for another event, you'll see an error message
 
 These known issues are actively being worked on, and we are continuously improving VolunSync to provide a better experience. Please stay tuned for future updates!
 
