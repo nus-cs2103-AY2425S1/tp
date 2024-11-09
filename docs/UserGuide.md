@@ -158,7 +158,9 @@ Format: `group [g/GROUPNAME] [s/STUDENTNAME]…​`
 
 ![Group](images/Group.png)
 
-Examples:
+Examples: 
+> **Note:**
+> Commands are not meant to be typed in order
 
 - If the GoonBook contains `Bob` and `Tom` and a group called `Meow`
 - `group g/StudyGroup1 s/Bob s/Tom` groups `Bob` and `Tom`

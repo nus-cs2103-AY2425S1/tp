@@ -21,6 +21,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "2. delete\n"
             + "3. tag\n"
             + "4. untag\n"
+            + "5. edit\n"
             + "6. find\n"
             + "7. help\n"
             + "8. list\n"
