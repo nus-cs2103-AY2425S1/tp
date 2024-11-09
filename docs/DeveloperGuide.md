@@ -350,7 +350,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a. SellSavvy detects required details missing.
+* 1a. SellSavvy detects there are required parameters missing.
   * 1a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
@@ -396,8 +396,14 @@ Use case ends.
 
 **Extensions**
 
-* 2a. SellSavvy detects that there are no customers with the specified index.
-  * 2a1. SellSavvy displays an error that the customer index is invalid. 
+* 2a. SellSavvy detects customer index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. SellSavvy detects that there are no customers with the specified index.
+  * 2b1. SellSavvy displays an error that the customer index is invalid. 
   
   Use case ends.
 
@@ -439,7 +445,7 @@ Use case ends.
 
 **Extensions**
 
-* 2a. SellSavvy detects required details missing.
+* 2a. SellSavvy detects there are required parameters missing or the customer index is non-positive.
     * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
@@ -479,8 +485,14 @@ Use case ends.
 
 **Extensions**
 
-* 2a. SellSavvy detects that there are no customers with the specified index.
-    * 2a1. SellSavvy displays an error that the customer index is invalid.
+* 2a. SellSavvy detects the customer index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. SellSavvy detects that there are no customers with the specified index.
+    * 2b1. SellSavvy displays an error that the customer index is invalid.
 
     Use case ends.
 
@@ -501,14 +513,20 @@ Use case ends.
 
 **Extensions**
 
-* 2a.  The specified order is already marked as "Completed".
-    * 2a1. SellSavvy displays a message stating that the order is already marked as completed.
+* 2a. SellSavvy detects that the order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b.  The specified order is already marked as "Completed".
+    * 2b1. SellSavvy displays a message stating that the order is already marked as completed.
 
     Use case ends.
 
 
-* 2b. There are no orders with the specified index.
-  * 2b1. SellSavvy displays an error that the order index is invalid.
+* 2c. There are no orders with the specified index.
+  * 2c1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
 
@@ -529,14 +547,20 @@ Use case ends.
 
 **Extensions**
 
-* 2a.  The specified order is not marked as “Completed” in the first place.
-    * 2a1. SellSavvy displays a message stating that the order is not marked as completed in the first place.
+* 2a. SellSavvy detects that the order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
 
-* 2b. There are no orders with the specified index.
-    * 2b1. SellSavvy displays an error that the order index is invalid.
+* 2b.  The specified order is not marked as “Completed” in the first place.
+    * 2b1. SellSavvy displays a message stating that the order is not marked as completed in the first place.
+
+  Use case ends.
+
+
+* 2c. There are no orders with the specified index.
+    * 2c1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
 
@@ -555,9 +579,16 @@ Use case ends.
 
 Use case ends.
 
+**Extensions**
 
-* 2a. There are no orders with the specified index.
-    * 2a1. SellSavvy displays an error that the order index is invalid.
+* 2a. SellSavvy detects that the order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. There are no orders with the specified index.
+    * 2b1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
 
@@ -577,7 +608,7 @@ Use case ends.
 
 **Extensions**
 
-* 1a. The specified status keyword is not a valid status.
+* 1a. The status keyword is missing or invalid.
   * 1a1. SellSavvy displays an error and provides the available status keywords.
 
   Use case ends.
