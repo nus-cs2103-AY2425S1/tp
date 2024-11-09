@@ -31,7 +31,8 @@ public class AddProjectCommand extends Command {
             + PREFIX_SKILL + "Java";
 
     public static final String MESSAGE_SUCCESS = "New project added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PROJECT = "This project already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PROJECT = "This project already exists in the address book."
+            + " The project id must be unique.";
 
     private final Project toAdd;
 
