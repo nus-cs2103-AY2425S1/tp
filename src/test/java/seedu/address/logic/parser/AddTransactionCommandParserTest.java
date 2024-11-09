@@ -75,7 +75,7 @@ public class AddTransactionCommandParserTest {
     public void parse_blankParts_failure() {
 
         //blank description
-        String userInputWithBlankDescription = "1" + PREFIX_DESCRIPTION + WHITE_SPACE + VALID_AMOUNT_INPUT
+        String userInputWithBlankDescription = "1" + WHITE_SPACE + PREFIX_DESCRIPTION + WHITE_SPACE + VALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + VALID_DATE_INPUT;
         assertParseFailure(parser, userInputWithBlankDescription, MESSAGE_EMPTY_DESCRIPTION);
 
