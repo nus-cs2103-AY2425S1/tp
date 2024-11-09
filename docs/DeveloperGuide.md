@@ -1232,6 +1232,8 @@ otherwise)
 ### More flexible date input formatting
 ### Confirmation upon unusual input when adding properties
 * Currently RealConnect accepts any non-negative integer values for property attributes number of bathrooms and bedrooms. Additional confirmation dialog will be implemented in the future to prompt the user to confirm unusually large input like 2000 bathrooms, to mitigate the chance of user mistakes.
+### Allow closing App by clicking close button
+* RealConnect as a CLI App currently support closing the application by command `exit`, force closing by clicking the close button of the window while person detail window is up may cause the detail card window to not close properly. In the future our team will focus on the GUI interaction more to resolve this issue.
 
 --------------------------------------------------------------------------------------------------------------------
 
