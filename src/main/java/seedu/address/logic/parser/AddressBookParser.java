@@ -19,10 +19,10 @@ import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.GroupCommand;
-import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupsCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -90,9 +90,10 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
-        case GroupsCommand.COMMAND_WORD:
-            return new GroupsCommand();
+            
+        case ListGroupsCommand.COMMAND_WORD:
+            command = new ListGroupsCommand();
+            break;
 
         case GroupCommand.COMMAND_WORD:
             return new GroupCommandParser().parse(arguments);

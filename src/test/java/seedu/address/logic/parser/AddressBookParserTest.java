@@ -26,9 +26,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.GroupCommand;
-import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupsCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -61,7 +61,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_groups() throws Exception {
-        assertTrue(parser.parseCommand(GroupsUtil.groupsCommand()) instanceof GroupsCommand);
+        assertTrue(parser.parseCommand(GroupsUtil.groupsCommand()) instanceof ListGroupsCommand);
     }
 
     @Test

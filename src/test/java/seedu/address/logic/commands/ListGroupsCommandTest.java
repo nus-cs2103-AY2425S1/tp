@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  * Contains integration tests (interaction with the Model) and unit tests for
  * GroupsCommand.
  */
-public class GroupsCommandTest {
+public class ListGroupsCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -31,16 +31,16 @@ public class GroupsCommandTest {
 
     @Test
     public void execute_groupsWhileEmpty_showsEmptyGroups() {
-        CommandResult expectedResult = new CommandResult(GroupsCommand.MESSAGE_NOGROUPS, false, false);
-        assertCommandSuccess(new GroupsCommand(), model, expectedResult, expectedModel);
+        CommandResult expectedResult = new CommandResult(ListGroupsCommand.MESSAGE_NOGROUPS, false, false);
+        assertCommandSuccess(new ListGroupsCommand(), model, expectedResult, expectedModel);
     }
     // TODO MORE TESTS
 
     @Test
     public void execute_groupsWhileNotEmpty_showsNotEmptyGroups() {
-        CommandResult expectedResult = new CommandResult(GroupsCommand.MESSAGE_SUCCESS, false, false);
+        CommandResult expectedResult = new CommandResult(ListGroupsCommand.MESSAGE_SUCCESS, false, false);
         List<Person> people = model.getFilteredPersonList();
         model.addGroup(new Group("abc", people));
-        assertCommandSuccess(new GroupsCommand(), model, expectedResult, expectedModel);
+        assertCommandSuccess(new ListGroupsCommand(), model, expectedResult, expectedModel);
     }
 }
