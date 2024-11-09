@@ -347,7 +347,7 @@ To view the contacts currently excluded from search results, use the `check-excl
 Format: `check-excluded`
 
 Example:
-- `checkexcluded` displays the list of excluded contacts.
+- `check-excluded` displays the list of excluded contacts.
   ![FeaturesSearchModeCheckExcluded.png](images%2FAppImages%2FFeaturesSearchModeCheckExcluded.png)
 
 #### Clearing Excluded Contacts : `clear-excluded` or `clx`
