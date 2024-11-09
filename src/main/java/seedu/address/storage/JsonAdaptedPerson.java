@@ -24,6 +24,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String TOO_MANY_TAGS = "Person has more than 6 tags!";
 
     private final String id;
     private final String name;
@@ -77,8 +78,12 @@ class JsonAdaptedPerson {
         final PersonId modelId = new PersonId(id);
 
         final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        try {
+            for (JsonAdaptedTag tag : tags) {
+                personTags.add(tag.toModelType());
+            }
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
         }
 
         if (name == null) {
@@ -87,7 +92,14 @@ class JsonAdaptedPerson {
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+
+        final Name modelName;
+        try {
+            modelName = new Name(name);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -95,7 +107,14 @@ class JsonAdaptedPerson {
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+
+        final Phone modelPhone;
+        try {
+            modelPhone = new Phone(phone);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -103,7 +122,14 @@ class JsonAdaptedPerson {
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+
+        final Email modelEmail;
+        try {
+            modelEmail = new Email(email);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -111,7 +137,14 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+
+        final Address modelAddress;
+        try {
+            modelAddress = new Address(address);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelId, modelName, modelPhone, modelEmail, modelAddress, modelTags);
