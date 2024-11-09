@@ -368,6 +368,8 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+* Worried about losing your data? You can just `undo` this command!
+
 <br>
 
 ### Undoing previous command : `undo`
