@@ -327,19 +327,30 @@ To support clear organization, we’ll also implement a tagging system that link
 
 #### 2. **Find Students by Subjects or Grade Levels**
 To support easy organization and access, we’re introducing a categorization system that allows you to sort students by their enrolled subjects and grade levels. 
-This enhancement will help tutors quickly filter students and manage their academic needs more efficiently.
+This enhancement will help you quickly filter students and manage their academic needs more efficiently.
 
 #### 3. **Exam Date Management**
 We understand the importance of staying prepared for exams, so we’re adding a feature to track upcoming exam dates for each student. 
-With this addition, guardians and tutors will receive timely reminders or notifications, ensuring students are ready and supported in their preparation.
+With this addition, guardians and you will receive timely reminders or notifications, ensuring students are ready and supported in their preparation.
 
 #### 4. **Fee and Payment Tracking**
 Keeping track of fees is essential in the business aspect, so we plan to implement a detailed payment tracking system. 
 This feature will log due dates, total payment amounts, and any outstanding fees for each student, while also linking this information to the responsible guardian.
 
 #### 5. **Recurring Lessons**
-Recognizing that most tuition lessons occur weekly at the same time, we plan to introduce a feature that allows tutors to set lessons as either one-time sessions or recurring events. 
-Tutors will be able to stipulate the frequency of recurrence, whether weekly, bi-weekly, or custom intervals, to fit their specific scheduling needs.
+Recognizing that most tuition lessons occur weekly at the same time, we plan to introduce a feature that allows you to set lessons as either one-time sessions or recurring events. 
+You will be able to stipulate the frequency of recurrence, whether weekly, bi-weekly, or custom intervals, to fit their specific scheduling needs.
+
+#### 6. **Overlapping Lesson Time Handling**
+We recognize the need for clarity around overlapping lesson scheduling. Options for managing overlaps will include:
+
+* Allowing overlapping sessions for group lessons or pair lessons.
+* Enabling you to customize settings for overlap permissions based on the type of lesson.
+
+#### 7. **Enhanced Name Field Support**
+To accommodate users with names that contain special characters, such as commas, we plan to update the application to allow names with these characters. 
+In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
