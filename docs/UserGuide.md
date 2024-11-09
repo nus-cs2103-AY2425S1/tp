@@ -123,7 +123,7 @@ A contact can have any number of roles (including 0), and the Telegram username 
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/betsyyy r/attendee r/sponsor`
+* `add n/Betsy Crowe e/bc@gmail.com a/New Street p/1234567 t/betsyyy r/sponsor`
 
 ![Successfully added a contact](images/AppImages/FeaturesAddCommand.png)
 
