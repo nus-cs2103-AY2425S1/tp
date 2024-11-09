@@ -5,7 +5,7 @@ title: Kay Hian's Project Portfolio Page
 
 ### Project: ResearchRoster
 
-ResearchRoster is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+ResearchRoster is a desktop application designed for researchers managing large groups of study participants. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
@@ -13,8 +13,6 @@ Given below are my contributions to the project.
   * What it does: allows the user to randomly assign a list of persons into study groups.
   * Justification: As our product is targeted at researchers, we anticipate the need to quickly and fairly assign participants to study groups. This feature allows the user to assign an entire list of participants in one command call.
   * Highlight: a bonus feature of this command is the ability to assign all persons in the displayed list to a single study group by inputting only one study group name.
-
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=f08-2)
 

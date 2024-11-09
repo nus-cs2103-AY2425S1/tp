@@ -5,7 +5,7 @@ title: Prisha's Project Portfolio Page
 
 ### Project: ResearchRoster
 
-ResearchRoster is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+ResearchRoster is a desktop application designed for researchers managing large groups of study participants. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
@@ -14,7 +14,7 @@ Given below are my contributions to the project.
   * Justification: This feature improves the product significantly as the exported emails can help researchers to more conveniently contact a group of participants.
   * Highlights: This feature supports exporting of filtered or unfiltered lists of participants. This command helped me learn a lot more about the Java File class.
 
-* **Code contributed**: [RepoSense link]()
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2425s1.github.io/tp-dashboard/?search=f08-2)
 
 * **Project management**:
   * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
