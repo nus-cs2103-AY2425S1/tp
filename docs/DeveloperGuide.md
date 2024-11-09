@@ -441,14 +441,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The list is empty.
-
-    * 2a1. MediContacts shows a message to indicate list is empty. 
-     
-      Use case ends.
-
 <a name="list-doctor-anchor-point"></a>
 **Use case: UC04 - List all doctors**
 
@@ -459,14 +451,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The list is empty.
-
-    * 2a1. MediContacts shows a message to indicate list is empty.
-
-      Use case ends.
-
 <a name="list-patient-anchor-point"></a>
 **Use case: UC05 - List all doctors and patients**
 
@@ -476,14 +460,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  MediContacts shows a list of all doctors and patients previously added
 
     Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-    * 2a1. MediContacts shows a message to indicate list is empty.
-
-      Use case ends.
 
 <a name="find-patient-anchor-point"></a>
 **Use case: UC06 - Find a patient**
@@ -503,12 +479,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 2a. There are no patients with matching names.
-
-    * 2a1. MediContacts shows a message to indicate no matches found.
-
-      Use case ends.
-
 <a name="find-doctor-anchor-point"></a>
 **Use case: UC07 - Find a doctor**
 
@@ -524,12 +494,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The given name uses the wrong format.
 
     * 1a1. MediContacts shows an error message.
-
-      Use case ends.
-
-* 2a. There are no doctors with matching names.
-
-    * 2a1. MediContacts shows a message to indicate no matches found.
 
       Use case ends.
 
@@ -643,7 +607,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
    Use case ends.
 
-*  1b. The given unique ID does not exist (unable to find appointment with unique ID).
+*  1b. The appointment with the given unique ID does not exist.
 
   * 3b1. MediContacts shows an error message.
 
