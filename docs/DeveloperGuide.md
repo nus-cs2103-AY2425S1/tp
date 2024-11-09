@@ -652,9 +652,16 @@ Prerequisites: <prerequisites>
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Ensure you have Java `17` or above installed in your Computer by opening up your terminal application (for macOS it's called `Terminal`, and for Windows: `Command Prompt`), followed by executing `java -version`.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
+   1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
+
+   1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
+
+   1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in.
+
+   1. Use the `java -jar internbuddy.jar` command to run the application.<br>
+      Expected: Shows the GUI with a set of sample contacts. The window size may not be optimal.
 
 1. Saving window preferences
 
@@ -674,11 +681,11 @@ Prerequisites: <prerequisites>
 
 1. Add a company to favourites
 
-   1. Prerequisites: The company to test is not favourited (ie: The "star" in the top-right corner of the company panel is not yellow)
+   1. Prerequisites: The company to test is not favourited (ie: The "star" in the top-right corner of the company panel is not yellow).
 
    1. Test case: `fav INDEX` <br>
-      Expected: The company corresponding to `INDEX` is now favourited (The "star" in the top-right corner of the company panel is yellow)
-      A message showing the favourite company is displayed in the results box
+      Expected: The company corresponding to `INDEX` is now favourited (The "star" in the top-right corner of the company panel is yellow).
+      A message showing the favourite company is displayed in the results box.
 
         <box type="info" seamless>
 
@@ -720,11 +727,10 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
 1. Add a new company to InternBuddy
 
-   1. Prerequisites: The company to add is not already present in the company list (ie: using `list` command does not show a company with the same name)
+   1. Prerequisites: The company to add is not already present in the company list (ie: using `list` command does not show a company with the same name).
 
    1. Test case: `add n/NAME e/EMAIL` <br>
-      Expected: The company with the `NAME` and `EMAIL` is added to the end of the company list. Details of the company are shown in the
-      results box. The added company also should have the status `INTERESTED` and is not favourited.
+      Expected: The company with the `NAME` and `EMAIL` is added to the end of the company list. Details of the company are shown in the results box. The added company also should have the status `INTERESTED` and is not favourited.
 
    1. Try adding using optional fields: `add n/NAME e/EMAIL p/PHONE_NUMBER`, `add n/NAME e/EMAIL t/TAG t/OTHER_TAG`, `...` <br>
       Expected: Similar to previous test, except now it shows the other optional fields added.
@@ -734,7 +740,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
 1. Add an already existing company to InternBuddy
 
-   1. Prerequisites: The added company to test already exists in the company list (ie: you can find the company with the same name from the company list after using `list`)
+   1. Prerequisites: The added company to test already exists in the company list (ie: you can find the company with the same name from the company list after using `list`).
 
    1. Test case: `add n/SAME_NAME e/EMAIL` (where `SAME_NAME` is the name of another exiting company) <br>
       Expected: No company is added. Error message indicating the company is already present is shown in the result box.
@@ -814,8 +820,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 1. Edit the status of an application
 
    1. Test case: `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APP_STATUS` <br>
-      Expected: The application corresponding to `APPLICATION_INDEX` for the company at `COMPANY_INDEX` of the list has its
-      application status changed to `APP_STATUS`.
+      Expected: The application corresponding to `APPLICATION_INDEX` for the company at `COMPANY_INDEX` of the list has its application status changed to `APP_STATUS`.
 
    1. Try invalid command formats: `update`, `update COMPANY_INDEX app/APPLICATION_INDEX as/APP_STATUS`, `update c/COMPANY_INDEX app/APPLICATION_INDEX as/INVALID_APP_STATUS` <br>
       Expected: No application is updated. An error message with details is displayed in the results box.
@@ -827,8 +832,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
    1. Prerequisites: The company corresponding to `COMPANY_INDEX` has multiple applications.
 
    1. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
-      Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed. A message containing the details
-      of the removed application is displayed in the results box.
+      Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed. A message containing the details of the removed application is displayed in the results box.
 
    1. Try invalid fields: `withdraw`, `withdraw COMPANY_INDEX app/APP_INDEX`, `withdraw c/INVALID_INDEX app/APP_INDEX`, `...` <br>
       Expected: No application is removed. An error message with details should be displayed in the results box.
@@ -839,8 +843,7 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
 
     1. Test case: `withdraw c/COMPANY_INDEX app/APP_INDEX` <br>
        Expected: The application corresponding to `APP_INDEX` for the company at `COMPANY_INDEX` is removed.
-       The application status of the company is changed to `CLOSED`. A message containing the details
-       of the removed application is displayed in the results box.
+       The application status of the company is changed to `CLOSED`. A message containing the details of the removed application is displayed in the results box.
 
 ### Saving data
 

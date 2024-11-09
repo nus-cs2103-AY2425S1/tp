@@ -104,9 +104,10 @@ Before continuing, here are some important information you need to know about th
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
 
-1. Copy/move the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
 
-1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in
+1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in.
+
 1. Use the `java -jar internbuddy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
