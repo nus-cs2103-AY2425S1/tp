@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ClinicConnectSystem is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClinicConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ClinicConnect can get your patient management tasks done faster than traditional GUI applications.
 
 * Table of Contents
 {:toc}
@@ -39,9 +39,11 @@ ClinicConnectSystem is a **desktop app for managing contacts, optimized for use 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## ClinicConnect System Features
+## ClinicConnect Features
 
-These features are designed to help you manage patient info seamlessly. Appointment info, patient details are centralized this platform.
+ClinicConnect is designed to streamline clinic processes with various functionalities to book appointments and manage patient details effectively. These features allow you to perform a range of operations, from adding new patient records, managing patient details, scheduling appointments, filtering health services and customizing data to enhance productivity. 
+
+The following sections will delve into the individual features, providing detailed descriptions and guidance on how to utilize each function to make the most out of the system's capabilities. 
 
 ### Legend
 These boxes might offer some additional information of different types:
@@ -64,9 +66,6 @@ Provides you with tips to use our system more effectively.
 
 * Items in square brackets are optional.<br>
   e.g `n|NAME [al|ALLERGY` can be used as `n|John Doe al|friend` or as `n|John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[al|ALLERGY]…​` can be used as ` ` (i.e. 0 times), `al|Nuts`, `al|Wheat al|Penicillin` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n|NAME p|PHONE_NUMBER`, `p|PHONE_NUMBER n|NAME` is also acceptable.
@@ -190,9 +189,9 @@ Shows a list of all patients in the ClinicConnect System.
 
 Format: `home`
 
-### Booking an appointment: `bookappt`
+### Booking an upcoming appointment: `bookappt`
 
-Book an appointment for an existing patient in the system for a health service provided by the clinic.
+Book an upcoming appointment for an existing patient in the system for a health service provided by the clinic.
 
 Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 
@@ -201,7 +200,7 @@ Format: `bookappt NRIC dt|APPOINTMENT_DATE_TIME h|HEALTH_SERVICE`
 **:information_source: Important:**<br>
 <ul>
 <li>
-NRIC provided must be a valid NRIC in the system.
+NRIC provided must be a valid NRIC in the system
 </li>
 <li>
 All parameters are compulsory
@@ -216,7 +215,7 @@ For more information on each individual parameter click here
 
 ### Delete Appointment : `deleteappt`
 
-Identifies the specific patient using NRIC and deletes the appointment specified.
+Identifies a specific patient using NRIC and deletes the appointment specified.
 
 Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 
@@ -224,7 +223,7 @@ Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 **:information_source: Important:**<br>
 <ul>
 <li>
-NRIC provided must be a valid NRIC in the system.
+NRIC provided must be a valid NRIC in the system
 </li>
 <li>
 All parameters are compulsory
@@ -249,7 +248,7 @@ When end date and health service is specified, it returns all appointments from 
 When end date is specified, it returns all appointments from today's date to end-date.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-To retrieve appointments on a single date e.g. 2024/10/20, the user can input the same start and end date
+To retrieve appointments on a single date e.g. 2024/10/20, you can input the same start and end date
 
 `filter sd|2024-10-20 ed|2024-10-10`
 </div>
