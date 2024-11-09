@@ -56,6 +56,8 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_NAME_DENTAL = "Dental";
     public static final String VALID_APPOINTMENT_DATE_DENTAL = "2024-12-25";
     public static final String VALID_APPOINTMENT_TIMEPERIOD_DENTAL = "1000-1200";
+    public static final String VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT = "1200-1300";
+    public static final String VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF = "0900-1000";
     public static final String VALID_APPOINTMENT_NAME_PHYSIO = "Physio";
     public static final String VALID_APPOINTMENT_DATE_PHYSIO = "2024-01-01";
     public static final String VALID_APPOINTMENT_TIMEPERIOD_PHYSIO = "1235-1500";
