@@ -327,7 +327,7 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 * **Person List View**: Also referred to as "`personList` view", this is the display that shows the list of elderly in ContactMate. By default, it is displayed when you start the application and is also displayed after using the `list` or `find` commands.
 
 
-* **History List View**: Also referred to as "`historyList` view", this is the display that shows the contact records and profile view of a specific elderly. It is displayed after using the `history` command.
+* **History List View**: This is the display that shows the contact records and profile view of a specific elderly. It is displayed after using the `history` command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
