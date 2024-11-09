@@ -72,18 +72,16 @@ public class CancelLessonCommand extends Command {
             for (Student groupStudent : studentsInGroup) {
                 model.setStudent(groupStudent, groupStudent.withoutMakeupLesson(makeupLessonOptional.get()));
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS,
-                    date.toDisplay(), startTime, Messages.format(studentToUpdate)));
-        }
+        } else {
+            // cancelling a regular lesson
+            if (!studentToUpdate.matchesLesson(date, startTime)) {
+                throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, Messages.format(studentToUpdate)));
+            }
 
-        // cancelling a regular lesson
-        if (!studentToUpdate.matchesLesson(date, startTime)) {
-            throw new CommandException(String.format(MESSAGE_LESSON_NOT_FOUND, Messages.format(studentToUpdate)));
-        }
-
-        CancelledLesson cancelledLesson = new CancelledLesson(date);
-        for (Student groupStudent : studentsInGroup) {
-            model.setStudent(groupStudent, groupStudent.withAddedCancelledLesson(cancelledLesson));
+            CancelledLesson cancelledLesson = new CancelledLesson(date);
+            for (Student groupStudent : studentsInGroup) {
+                model.setStudent(groupStudent, groupStudent.withAddedCancelledLesson(cancelledLesson));
+            }
         }
 
         model.commitStudentDirectory();
