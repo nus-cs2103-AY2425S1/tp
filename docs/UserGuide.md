@@ -203,6 +203,7 @@ Marks the specified elderly from the current person list as called.
 
 ContactMate will update the list to show the new next contact date of the elderly and sort the list accordingly.
 You can also mark the specified elderly as called on a specific date and add notes.
+It is allowed to mark the same elderly multiple times on the same day.
 
 Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
@@ -222,7 +223,6 @@ Examples:
 ### Getting call history : `history`
 
 Shows a list of call dates and corresponding notes for the specified elderly, sorted from the latest to the oldest date.
-
 Format: `history INDEX/NRIC`
 
 * Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
@@ -285,6 +285,14 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactMate home folder.
 
+**Q**: Why can't I execute certain commands like `mark S2208201I` when the displayed person list is empty after a `find` command?<br>
+**A**: Some commands that refer to an existing elderly by index or NRIC will not work if it didn't exist in the displayed person list. To execute these commands, you can use the `list` command to return to the main person list view.
+
+**Q**: Why are the `delete`, `edit` and `mark` commands are restricted in the history list view?<br>
+**A**: These commands are restricted in the history list view to prevent unintended modifications to an elder's details. To modify an elder's information accurately, you can use the `list` command to return to the main person list view. 
+
+**Q**: Why can't I `mark S2208201I` when I am currently viewing the contact records of the elderly with NRIC `S2208201I`? <br>
+**A**: The `mark` command requires you to be in the main person list rather in the individual history list view. It ensures that all-elderly related commands function as expected and to avoid confusion. 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
