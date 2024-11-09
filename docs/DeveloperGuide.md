@@ -295,7 +295,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | HR manager | add new employee profiles                                    | keep the data current.                                                              |
 | `* * *`  | HR manager | delete an employee                                           | remove entries that I no longer need.                                               |
 | `* * *`  | HR manager | find an employee by name                                     | locate details of employee quickly.                                                 |
-| `* * *`  | HR manager | Automate data entry from existing spreadsheets               | save time on repetitive tasks.                                                      |
 | `* *`    | HR manager | find an employee by department                               | find information regarding the department without having to go through all entries. |
 | `* *`    | HR manager | Set permissions for different team members                   | ensure sensitive data is only accessible to authorised users.                       |
 | `* *`    | HR manager | Export employee data in multiple formats                     | easily share it with stakeholders.                                                  |
