@@ -282,6 +282,11 @@ Finds persons whose tags contain any of the given keywords.
 
 Format: `search p KEYWORD [MORE_KEYWORDS]`
 
+<box type="info" seamless>
+
+**Note:** Persons without tags cannot be located using `search p`.
+</box>
+
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * The order of the keywords does not matter. e.g. `Work Friends` will match `Friends Work`
 * Only the tag name is searched.
@@ -299,6 +304,11 @@ Examples:
 Finds events whose tags contain any of the given keywords.
 
 Format: `search e KEYWORD [MORE_KEYWORDS]`
+
+<box type="info" seamless>
+
+**Note:** Events without tags cannot be located using `search e`.
+</box>
 
 * The search is case-insensitive. e.g `friends` will match `Friends`
 * The order of the keywords does not matter. e.g. `Summer Fashion` will match `Fashion Summer`
