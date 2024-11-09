@@ -158,7 +158,7 @@ A **valid** `CLIENT_TYPE` should:
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01  d/likes bubble tea c/Investment`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town d/Loves travelling c/Investment c/Healthcare `
+* `add n/Betsy Crowe p/12345678 e/betsycrowe@example.com a/Yishun Town d/Loves travelling c/Investment c/Healthcare `
 
 Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/likes bubble tea c/Investment`:
 ![result for 'add'](images/result_for_add.png)
@@ -325,11 +325,11 @@ Format:
 A **valid** `NAME` for add should:
 * Not be empty.
 * Be a valid name that exists in the list of clients.
-* For eg. Typing `radd John Doe` when there is no client with the name `John Doe` will throw an error.
+* For eg. Typing `radd n/John Doe` when there is no client with the name `John Doe` will throw an error.
 * Be a prefix match of the client name.
   * `n/John Doe` will **add a reminder** for `John Doe` if there is `John Doe` and `John Doey` in the contact list.
   * `n/John Doe` will **throw an error** if there is `John Doe` and `John Doey` in the contact list.
-  * to add a reminder for `John Doe`, type `radd John Doe$`
+  * to add a reminder for `John Doe`, type `radd n/John Doe$`
 
 A **valid** `DATETIME` for add should:
 * Not be empty.
