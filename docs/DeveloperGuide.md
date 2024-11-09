@@ -335,6 +335,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+* 2c. A patient with the user input NRIC already exists in the address book.
+
+    * 2c1. The system shows an error message indicating the existence of a duplicate patient.
+
+      Use case resumes at step 2.
+
 ---
 
 ### **Use case: Edit a person's information**
@@ -354,6 +360,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given NRIC is invalid.
 
     * 2a1. The system shows an error message.
+
+      Use case ends.
+
+* 2b. The edited NRIC already exists in the address book.
+
+    * 2b1. The system shows an error message.
 
       Use case ends.
 
