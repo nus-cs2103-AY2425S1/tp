@@ -342,45 +342,43 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. Doctor submits new patient information
-2. WardWatch displays information of new patient
+2. WardWatch displays a success message containing information of new patient
 
    Use case ends.
 
 **Extensions**
 
-* 1a. The information format entered is invalid
+* 1a. The information entered is invalid
 
     * 1a1. WardWatch shows an invalid patient information error message.
 
       Use case resumes at step 1.
 
+* 1b. The format of the input is invalid
+    * 1b1. WardWatch shows an invalid format error message.
+        
+      Use case resumes at step 1.
+
 **Use case: UC02 - Delete a patient**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
-
-1. Doctor request to list patients
-2. WardWatch shows a list of patients
-3. Doctor request to delete a specific patient from the list
-4. WardWatch deletes the patient
+1. Doctor requests to delete a specific patient from the displayed list
+2. WardWatch deletes the patient
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 1a. Doctor request to delete invalid patient
 
-    * 2a1. WardWatch shows an empty list
+    * 1a1. WardWatch shows an invalid patient message.
 
-      Use case ends.
-
-* 3a. The given field is invalid
-
-    * 2a1. WardWatch shows an invalid field message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: UC03 - Update a patient**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
 
 1. Doctor submits new patient information of specific patient
@@ -390,9 +388,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The information format entered is invalid
+* 1a. The information entered is invalid
 
-    * 1a1. WardWatch shows an invalid format error message.
+    * 1a1. WardWatch shows an invalid patient information error message.
+
+      Use case resumes at step 1.
+
+* 1b. The format of the input is invalid
+    * 1b1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
@@ -407,48 +410,46 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The search field is invalid.
-    * 2a1. WardWatch shows an invalid field error message.
+* 2a. Doctor tries to do an invalid search
+    * 2a1. WardWatch shows an invalid search error message.
         
         Use case resumes at step 1.
 
 * 2b. There is no patient that matches the search
 
-    * 2b1. WardWatch shows that there is no matching patient.
+    * 2b1. WardWatch shows that there are no matching patients.
 
         Use case ends.
 
+* 2c. The format of the input is invalid
+    * 2c1. WardWatch shows an invalid format error message.
+
+      Use case resumes at step 1.
+
 **Use case: UC05 - View patient**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
 
-1. Doctor request to list patients
-2. WardWatch shows a list of patients
-3. Doctor request to view a specific patient from the list
-4. WardWatch displays information about the specific patient
+1. Doctor request to view a specific patient from the list
+2. WardWatch displays information about the specific patient
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty
+* 1a. Doctor request to view invalid patient
 
-    * 2a1. WardWatch shows that list is empty
+    * 1a1. WardWatch shows an invalid patient message.
 
-      Use case ends.
-
-* 3a. The patient entered does not exist
-
-    * 3a1. WardWatch shows an invalid index error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: UC06 - List patients**
 
 **MSS**
 
-1. Doctor request to list patients
-2. WardWatch shows a list of patients
+1. Doctor request to list all patients
+2. WardWatch shows a list of all patients
 
    Use case ends.
 
@@ -457,13 +458,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty
 
     * 2a1. WardWatch shows that list is empty
-
-      Use case ends.
-
-* 2b. System is unable to retrieve the patient list.
-
-    * 2b1. WardWatch displays an error message indicating the failure to load the patient list.
-    * 2b2. The doctor is prompted to try again later or contact support.
 
       Use case ends.
 
@@ -471,68 +465,60 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. Doctor submits new Appointment information tied to a patient
-2. WardWatch displays Appointment information tied to that patient
+1. Doctor submits new Appointment information for a patient
+2. WardWatch displays success message with the updated patient information
     
     Use case ends.
 
 **Extensions**
 
-* 1a. The information format entered is invalid
+* 1a. The information entered is invalid
 
-    * 1a1. WardWatch shows an invalid description error message.
+    * 1a1. WardWatch shows an invalid Appointment information error message.
 
       Use case resumes at step 1.
 
-* 2a. The Appointment date format is invalid.
-
-    * 2a1. WardWatch shows an invalid date format error message.
+* 1b. The format of the input is invalid
+    * 1b1. WardWatch shows an invalid format error message.
 
       Use case resumes at step 1.
 
 **Use case: UC08 - Delete Appointment**
 
+**Preconditions**: WardWatch is displaying a non-empty list of patients
 **MSS**
 
-1. Doctor request appointments for a specific date
-2. WardWatch displays Appointments for the day
-3. Doctor request to delete a specific appointment tied to a patient
-4. WardWatch deletes specified appointment
+1. Doctor request to delete an Appointment tied to a patient
+2. WardWatch deletes specified appointment
 
    Use case ends.
 
 **Extensions**
 
-* 3a. The delete appointment command format entered is invalid
+* 1a. The delete appointment command format entered is invalid
 
     * 1a1. WardWatch shows an incorrect format error message.
 
-      Use case resumes at step 3.
-  
-* 3b. The Appointment does not exist
-*
-    * 2a1. WardWatch shows an appointment does not exist error message.
+      Use case resumes at step 1.
 
-      Use case resumes at step 3.
+* 1b. Doctor requests to delete an Appointment from an invalid patient
+
+    * 1b1. WardWatch shows an invalid patient message.
+  
+* 1c. Doctor requests to delete a non-existing Appointment from a patient
+*
+    * 1c1. WardWatch shows patient does not have Appointment error message.
+
+      Use case resumes at step 1.
 
 **Use case: UC09 - Change Appointment**
 
 **MSS**
 
-1. Doctor request to delete a specific appointment tied to a patient
-2. WardWatch deletes Appointment
-3. Doctor submits new Appointment information tied to a patient
-4. WardWatch displays Appointment information tied to that patient
+1. Doctor <ins> deletes existing Appointment(UC08) </ins>
+2. Doctor <ins> adds new Appointment with updated details(UC07) </ins>
 
    Use case ends.
-
-**Extensions**
-
-* 3a. The information format entered is invalid
-
-    * 3a1. WardWatch shows an incorrect appointment format error message.
-
-      Use case resumes at step 1.
 
 **Use case: UC10 - See Schedule for a certain day**
 
@@ -601,8 +587,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. WardWatch shows a notes is already empty error message.
 
       Use case resumes at step 1.
-
-
 
 
 
