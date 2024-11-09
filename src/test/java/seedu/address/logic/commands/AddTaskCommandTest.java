@@ -156,6 +156,20 @@ public class AddTaskCommandTest {
         assertTrue(addTask1Command.equals(addTask2Command));
     }
 
+    @Test
+    public void equals_sameDescriptionDifferentCapitalization_returnsTrue() {
+        Task task1 = new TaskBuilder().withDescription("Buy meds").build();
+        Task task2 = new TaskBuilder().withDescription("buy meds").build(); // Different capitalization
+
+        Index index = Index.fromOneBased(1);
+
+        AddTaskCommand addTaskCommand1 = new AddTaskCommand(index, task1.getDescription());
+        AddTaskCommand addTaskCommand2 = new AddTaskCommand(index, task2.getDescription());
+
+        // Different capitalization in descriptions, should still return true
+        assertTrue(addTaskCommand1.equals(addTaskCommand2));
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */
