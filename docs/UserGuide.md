@@ -176,9 +176,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* When editing remark, the existing remark of the person will be removed i.e adding of remark is not cumulative.
+* You can remove the person’s remark by typing `r/` without specifying any remark after it.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* You can remove the person’s remark by typing `r/` without specifying any remark after it.
 
 Examples:
 
