@@ -232,11 +232,15 @@ TechConnect assists students in managing and organizing their internship and job
 **Extensions**:
 
 * 1a. The input format is incorrect.
+
     * 1a1. TC displays an error message.
+  
     * Use case resumes at step 1.
 
 * 2a. The company already exists in the list.
+
     * 2a1. TC notifies the user and does not add a duplicate entry.
+  
     * Use case ends.
 
 ---
@@ -255,16 +259,24 @@ TechConnect assists students in managing and organizing their internship and job
 **Extensions**:
 
 * 1a. The specified company does not exist.
+
     * 1a1. TC displays an error message.
+  
     * Use case ends.
 
 * 1b. The input format is incorrect.
+
     * 1b1. TC displays an error message.
+  
     * Use case resumes at step 1.
 
 * 1c. User tries to edit the name of the company which matches another existing company.
+
     * 1c1. TC displays an error message as no duplicate company names allowed.
+
     * Use case resumes at step 1.
+    
+
 ---
 
 **Use Case: UC3 - Bookmark a Company**
@@ -281,7 +293,9 @@ TechConnect assists students in managing and organizing their internship and job
 **Extensions**:
 
 * 1a. The company is already bookmarked.
+
     * 1a1. TC notifies the user that the company is already bookmarked.
+  
     * Use case ends.
 
 ---
@@ -300,7 +314,9 @@ TechConnect assists students in managing and organizing their internship and job
 **Extensions**:
 
 * 1a. No companies match the search criteria.
+
     * 1a1. TC displays a message indicating no matches found.
+  
     * Use case ends.
 
 ---
@@ -341,41 +357,55 @@ TechConnect assists students in managing and organizing their internship and job
 ### Launch and Shutdown
 
 1. **Initial Launch**:
-    - Download the latest `.jar` file and save it to a new folder.
-    - Run the app by double-clicking the `.jar` file.
-    - **Expected Result**: The GUI opens with sample data displayed.
+   - Download the latest `.jar` file and save it to a new folder.
+   - Run the app by double-clicking the `.jar` file.
+   - **Expected Result**: The GUI opens with sample data displayed.
+
 
 2. **Saving Window Preferences**:
-    - Resize the application window and move it to a preferred location.
-    - Close and re-open the app by double-clicking the `.jar` file.
-    - **Expected Result**: Window size and position are retained.
+   - Resize the application window and move it to a preferred location.
+   - Close and re-open the app by double-clicking the `.jar` file.
+   - **Expected Result**: Window size and position are retained.
 
 ### Adding and Deleting Companies
 
 1. **Adding a Company**:
+
     - Use the `add` command with company details (e.g., `add n/Google p/98765432 ...`).
+   
     - **Expected Result**: New company is added and displayed in the list.
 
 2. **Deleting a Company**:
+
     - Use `delete INDEX` to remove a specific company.
+   
     - **Expected Result**: Company is removed, and a success message is shown.
+   
     - **Edge Cases**:
         - `delete 0`: Displays an error message.
         - `delete x` (where `x` exceeds list size): Displays an error message.
 
 3. **Editing a Company**:
+
     - Use `edit INDEX` with updated information (e.g., `edit 1 p/91234567`).
+   
     - **Expected Result**: Company details are updated in the list.
 
 ### Bookmarking and Finding Companies
 
 1. **Bookmarking a Company**:
+
     - Use `bookmark INDEX` to mark a company as bookmarked.
+   
     - **Expected Result**: Company appears in the bookmarked list.
+   
     - **Edge Case**: Attempting to bookmark an already bookmarked company should display a message informing users that the company is already bookmarked.
 
 2. **Finding Companies**:
+
     - Use `find NAME` or `find TAG` to search.
+   
     - **Expected Result**: Only companies matching the search criteria are displayed.
+   
     - **Edge Case**: Searching for non-existent terms should display a "There is no company that suits your keyword!" message.
 ---

@@ -35,13 +35,13 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 ---
 ## Glossary
 
-| Term                     | Definition                                                                                                                                                                                   |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Command Line Interface (CLI)** | A text-based user interface that allows users to type commands to perform specific tasks, rather than using graphical elements like buttons.                                         |
-| **Graphical User Interface (GUI)** | A visual interface that includes graphical elements (such as windows, icons, and buttons) for users to interact with applications.                                                    |
+| Term                                  | Definition                                                                                                                                                                        |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Command Line Interface (CLI)**      | A text-based user interface that allows users to type commands to perform specific tasks, rather than using graphical elements like buttons.                                      |
+| **Graphical User Interface (GUI)**    | A visual interface that includes graphical elements (such as windows, icons, and buttons) for users to interact with applications.                                                |
 | **JSON (JavaScript Object Notation)** | A lightweight data-interchange format often used for data storage and communication between applications. TechConnect saves data in JSON format for easy access and modification. |
-| **Parameter**            | Information or input provided to a command to specify how it should operate. For example, in `add n/NAME`, `NAME` is a parameter that specifies the company name to add.                    |
-| **Jar File (.jar)**      | A Java ARchive file, which is a package file format used to distribute Java applications. Running the `.jar` file will start the TechConnect application.                                  |
+| **Parameter**                         | Information or input provided to a command to specify how it should operate. For example, in `add n/NAME`, `NAME` is a parameter that specifies the company name to add.          |
+| **Jar File (.jar)**                   | A Java Archive file, which is a package file format used to distribute Java applications. Running the `.jar` file will start the TechConnect application.                         |
 ---
 ## Quick start
 
@@ -53,7 +53,8 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar techconnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui.png](images%2FUi.png)
+
+    <img src="images/Ui.png" alt="Ui" width="400" height="300"/>
 
 5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -77,14 +78,15 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 ## Features
 ### Notes about the Command Format
 
-| Format Note                                                                                                                                                                                                                      | Example                                                                                                                                                                             |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Words in `UPPER_CASE` are parameters to be supplied by the user.                                                                                                                                                                 | e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.                                                                                                   |
-| Items in square brackets are optional.                                                                                                                                                                                           | e.g., `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.                                                                                                        |
-| Items with `…` after them can be used multiple times, including zero times.                                                                                                                                                      | e.g., `[t/TAG]…` can be used as ` ` (i.e., 0 times), `t/bigTech`, `t/bigTech t/BigCompany`, etc.                                                                                    |
-| Parameters can be in any order.                                                                                                                                                                                                  | e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.                                                                                 |
-| Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.                                                                                                 | e.g., if the command specifies `help 123`, it will be interpreted as `help`.                                                                                                        |
-| If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.            | N/A                                                                                                                                                                                 |
+| Format Note                                                                                                                                                                                                             | Example                                                                                             |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| Words in `UPPER_CASE` are parameters to be supplied by the user.                                                                                                                                                        | e.g., in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.                   |
+| Items in square brackets are optional.                                                                                                                                                                                  | e.g., `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.                        |
+| Items with `…` after them can be used multiple times, including zero times.                                                                                                                                             | e.g., `[t/TAG]…` can be used as ` ` (i.e., 0 times), `t/bigTech`, `t/bigTech t/BigCompany`, etc.    |
+| Parameters can be in any order.                                                                                                                                                                                         | e.g., if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable. |
+| Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.                                                                                        | e.g., if the command specifies `help 123`, it will be interpreted as `help`.                        |
+| If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application. | N/A                                                                                                 |
+| Commands are case-sensitive.                                                                                                                                                                                            | e.g., `ADD` will not work when trying to add a company, use `add` instead.                          |
 ---
 ### Viewing help : `help`
 
@@ -114,17 +116,11 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL r/REMARK
 add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 
 cp/www.google-career-url.com r/Dream job
 ```
-**Outcome**:
-
-<img src="images/AddCommandOutcome.png" alt="AddCommandOutcome" width="400" height="300"/>
 
 ```
 add n/Meta t/bigTech e/meta@example.com a/Newgate Prison 
 p/1234567 t/salary_high cp/www.meta-career-url.com r/Leading tech company
 ```
-**Outcome**:
-
-<img src="images/AddCommandOutcome.png" alt="AddCommandOutcome2" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -302,16 +298,6 @@ edit 1 p/91234567 e/grab@example.com
 ```
 Edits the phone number and email address of the 1st company to be `91234567` and `grab@example.com` respectively.
 
-**Outcome**:
-
-**Before**
-
-<img src="images/EditBefore.png" alt="EditBefore" width="400" height="300"/>
-
-**After**
-
-<img src="images/EditAfter.png" alt="EditAfter" width="400" height="300"/>
-
 [Back to Table of Contents](#table-of-contents)
 
 --- 
@@ -336,30 +322,10 @@ remark 2 r/Has good internship opportunities
 ```
 Edits the remark of the 2nd company to `Has good internship opportunities`.
 
-**Outcome**:
-
-**Before**
-
-<img src="images/RemarkBefore.png" alt="RemarkBefore" width="400" height="300"/>
-
-**After**
-
-<img src="images/RemarkAfter.png" alt="RemarkAfter" width="400" height="300"/>
-
 ```
 remark 3 r/
 ```
 Removes the remark from the 3rd company.
-
-**Outcome**:
-
-**Before**
-
-<img src="images/RemoveRemarkBefore.png" alt="RemarkBefore" width="400" height="300"/>
-
-**After**
-
-<img src="images/RemoveRemarkAfter.png" alt="RemarkBefore" width="400" height="300"/>
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -448,7 +414,7 @@ modifies the application status of the company at index 1 to `Applied`.
 ```
 status 2 as/
 ``` 
-Removes the remark from the 2nd company.
+Removes the application status from the 2nd company.
 
 **Outcome**
 
@@ -543,4 +509,5 @@ Furthermore, certain edits can cause the TechConnect to behave in unexpected way
 | **List bookmarked companies** | `bmlist`                                                                                                                                                                                                                                                |
 | **Add application status**    | `status INDEX as/STATUS` <br>e.g., `status 2 as/Round 2 of interview`                                                                                                                                                                                   |
 | **Help**                      | `help`                                                                                                                                                                                                                                                  |
+
 [Back to Table of Contents](#table-of-contents)
