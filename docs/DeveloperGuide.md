@@ -9,13 +9,8 @@ title: Developer Guide
 {:toc}
 
 ## **Acknowledgements**
-MediBase3 is designed based on the AddressBook-Level3 project created by [SE-EDU](https://se-education.org).
 
-Generative AI tools (ChatGPT, Copilot) were used for creating test cases, writing detailed Javadocs and some code refactoring. 
-
-The following Java libraries were also used in the development of MediBase3:
-- [JavaFX](https://openjfx.io/) for the GUI
-- [JUnit 5](https://junit.org/junit5/) for testing
+* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 [Back to Table of Contents](#table-of-contents)
 ## **Setting up, getting started**
@@ -165,6 +160,15 @@ This section describes some noteworthy details on how certain features are imple
 
 This command enables the addition of an `Appointment` for a specified `Person` in the `Model`. Its implementation involves coordinated updates between the `Model` and UI.
 
+As a refresher, this is the addAppt command as described in the User Guide:
+
+> **Format**: 
+> `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
+> 
+> **Example**:
+> `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` schedules a `Dental` appointment for the patient with `NRIC` `S1234567A` on `2024-10-27`, from `1100` to `1200`.
+> 
+
 #### Overview
 
 When executed, this command parses user input and creates an internal representation of the appointment data. The sequence proceeds as follows:
@@ -179,7 +183,7 @@ When executed, this command parses user input and creates an internal representa
    The model replaces the old `Person` with this modified version in the address book, which then updates the internal list of appointments to include the new entry.
 
 4. **Automatic UI Refresh:**  
-   The `AppointmentListPanel` UI component, which observes changes in the list of appointments, detects the addition and refreshes its display. The UI then reflects this change by showing a new `AppointmentCard` for the recently added appointment.
+   The `AppointmentListPanel` object (controlling the `Panel` encompassing the `Appointmnet List` UI component), which observes changes in the list of appointments, detects the addition and refreshes its display. The UI then reflects this change by showing a new Appointment Card for the recently added appointment.
 
 {: .alert .alert-primary}
 > :bulb: **Tip:**
@@ -188,7 +192,7 @@ When executed, this command parses user input and creates an internal representa
 
 #### Sequence Diagram
 
-When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates the a new `AddApptCommand` with the arguments `AppointmnetName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
+When `addAppt` command is keyed in by the user, `AddApptCommandParser#parse()` generates a new `AddApptCommand` with the arguments `AppointmnetName`, `AppointmentTime`, `AppointmentDate`, and `Nric` retrieved from the user command string. This diagram shows a high-level sequence of what happens when a valid `AddApptCommand` is executed:
 
 ![AddApptCommandSequence](images/AddApptCommandSequenceDiagram.png)
 
@@ -313,27 +317,24 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​           | I want to …​                                                                | So that I can…​                                                                                                                                                       |
-|----------|-------------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `* * *`  | doctor            | add new records                                                             | keep track of my existing patients' details                                                                                                                           |
-| `* * *`  | doctor            | delete records                                                              | remove entries of patients no longer existing                                                                                                                         |
-| `* * *`  | doctor            | edit records                                                                | amend outdated information in the patients' record                                                                                                                    |
-| `* * *`  | busy doctor       | search for a patient by name                                                | quickly access their records                                                                                                                                          |
-| `* * *`  | busy doctor       | search for a patient by NRIC                                                | quickly access their records                                                                                                                                          |
-| `* * *`  | doctor            | schedule an appointment with a patient                                      | manage my daily workload effectively                                                                                                                                  |
-| `* * *`  | doctor            | delete an appointment with a patient                                        | cancel an appointment                                                                                                                                                 |
-| `* * *`  | doctor            | list all records                                                            | look through all contacts                                                                                                                                             |
-| `* *`    | doctor            | view all my appointments                                                    | know the appointments I have on a certain day                                                                                                                         |
-| `* *`    | meticulous doctor | remove a medical condition from a patient's record                          | retrieve the most accurate and up-to-date version of my patient's information, reflecting their current health status                                                 |
-| `* *`    | meticulous doctor | remove an allergy from a patient's record                                   | ensure my patient's medical information is current and accurate, which helps me make better decisions when prescribing medication and avoid unnecessary complications |
-| `* *`    | meticulous doctor | assign a specific condition to a patient                                    | pay extra care to it during consultation and diagnosis                                                                                                                |
-| `* *`    | meticulous doctor | assign a specific allergy to a patient                                      | pay extra care when prescribing medication                                                                                                                            |
-| `*`      | focused doctor    | want to search patients by medical condition                                | focus on those with similar treatment plans                                                                                                                           |
-| `*`      | busy doctor       | assign priority level to a patient                                          | manage urgent cases more effectively                                                                                                                                  |
-| `*`      | busy doctor       | view all my urgent cases                                                    | attend to those with urgent needs first                                                                                                                               |
-| `*`      | doctor            | press [↑] to fill the command-line-box with the previous command I keyed in | amend errors in the last command I typed easily                                                                                                                       |
-| `*`      | doctor            | clear all sample data                                                       | insert my own patient details into MediBase3                                                                                                                          |
-| `*`      | doctor            | access the user guide easily                                                | quickly understand how to use the application's feature                                                                                                               |
+| Priority | As a …​           | I want to …​                                                                | So that I can…​                                        |
+|----------|-------------------|-----------------------------------------------------------------------------|--------------------------------------------------------|
+| `* * *`  | doctor            | add new records                                                             | keep track of my existing patients' details            |
+| `* * *`  | doctor            | delete records                                                              | remove entries of patients no longer existing          |
+| `* * *`  | doctor            | edit records                                                                | amend outdated information in the patients' record     |
+| `* * *`  | busy doctor       | search for a patient by name                                                | quickly access their records                           |
+| `* * *`  | busy doctor       | search for a patient by NRIC                                                | quickly access their records                           |
+| `* * *`  | doctor            | schedule an appointment with a patient                                      | manage my daily workload effectively                   |
+| `* * *`  | doctor            | delete an appointment with a patient                                        | cancel an appointment                                  |
+| `* * *`  | doctor            | list all records                                                            | look through all contacts                              |
+| `* *`    | doctor            | view all my appointments                                                    | know the appointments I have on a certain day          |
+| `* *`    | meticulous doctor | assign a specific condition to a patient                                    | pay extra care to it during consultation and diagnosis |
+| `*`      | focused doctor    | want to search patients by medical condition                                | focus on those with similar treatment plans            |
+| `*`      | busy doctor       | assign priority level to a patient                                          | manage urgent cases more effectively                   |
+| `*`      | busy doctor       | view all my urgent cases                                                    | attend to those with urgent needs first                |
+| `*`      | meticulous doctor | know a patients' allergy                                                    | pay extra care when prescribing medication             |
+| `*`      | doctor            | press [↑] to fill the command-line-box with the previous command I keyed in | amend errors in the last command I typed easily        |
+
 [Back to Table of Contents](#table-of-contents)
 ### Use cases
 
@@ -724,19 +725,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 
-* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
+* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
 
 * **Appointment**: A scheduled meeting between a patient and a doctor, encompassing a specific date, time period and description.
 
-* **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
+* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
 * **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient. It should start with a letter (S, T, G, F or M), followed by 7 digits, and end with a letter.
 
 * **Priority**: Indicates the urgency of a patient’s condition, with values like none, low, medium, or high to assist doctors in managing urgent cases.
 
-* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
+* **Person**: The base object that represents each patient.
 
-* **Patient List**: A list of patients and their details displayed on the left hand side of the application.
+* **AddressBook**: The underlying class that holds the all `Person` records.
+
+* **Manager**: Any implementation of the following:
+    
+    * **Model**: The interface that controls the changes to `AddressBook`.
+
+    * **Logic**: The interface that controls the creation and dispatch of a `Command`.
+
+    * **Storage**: The interface that controls the reading and saving of any data to disk.
+
+* **Parser**: Any class that parses a given input into appropriate arguments.
+
+* **Panel**: A section of the graphical user interface that displays a certain item such as:
+
+    * **Patient List**: A list of patients and their details displayed on the left hand side of the application.
+
+    * **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
+
+    * **Command Box:** Where you can type and enter commands.
+
+    * **Result Display:** Shows the result of the command you entered.
+
+    * **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
+
+    * **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
+
+* **Card**: An entry in a List Panel.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -774,15 +801,15 @@ Adding a patient while all patients are being shown
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the patient list. 
 
-   2. Test case: `add n/John Doe i/S1234567Z g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
+   2. Test case: `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
        
       Expected: A new patient with the details provided will be added to the patient list. A success message is shown with the added patient's details.
     
-   3. Test case: `add n/John Doe i/S1234567Z`
+   3. Test case: `add n/John Doe i/S1234567A`
 
       Expected: No patient is added to the patient list. An error message is shown with details of the error.
 
-   4. Other incorrect add commands to try: `add`, `add S1234567Z`
+   4. Other incorrect add commands to try: `add`, `add S1234567A`
       
       Expected: Similar to previous.
 
@@ -1046,7 +1073,7 @@ Deleting an existing appointment from a patient
 
    Expected: No appointment is deleted. An error message is shown, indicating that the specified appointment does not exist for the patient.
 
-4. Other incorrect commands to try: `delAppt`, `delAppt i/S1234567A`, `delAppt i/S1234567A @t/1100-1230`, `delAppt i/S1234567A @d/2024-05-19`, , `delAppt @t/0000-1234 @d/2024-05-19`
+4. Other incorrect commands to try: `delAllergy`, `delAllergy i/S1234567A`, `delAppt i/S1234567A @t/1100-1230`, `delAppt i/S1234567A @d/2024-05-19`, , `delAppt @t/0000-1234 @d/2024-05-19`
 
    Expected: An error message is shown, indicating that the command format is incorrect.
 
