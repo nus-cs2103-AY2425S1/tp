@@ -279,7 +279,7 @@ The following screenshots shows the results of executing `export`
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
 
-Format: `import f/FILE_PATH`
+Format: `import fp/FILE_PATH`
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
@@ -333,10 +333,10 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE e/EMAIL [a/ADDRESS] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROOM_NUMBER] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [g/GRADUATION_YEAR] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [g/GRADUATION_YEAR] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
 **List**   | `list`
 **Help**   | `help`
@@ -344,7 +344,7 @@ Action     | Format, Examples
 **Undo**   | `undo`
 **Exit**   | `exit`
 **Export** | `export`
-**Import** | `import f/FILE_PATH` <br> e.g., `import f/./data/SaveFile4.json`
+**Import** | `import fp/FILE_PATH` <br> e.g., `import fp/./data/SaveFile4.json`
 
 --------------------------------------------------------------------------------------------------------------------
 
