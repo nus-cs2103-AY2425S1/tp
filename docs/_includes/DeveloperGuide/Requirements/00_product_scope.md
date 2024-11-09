@@ -1,12 +1,12 @@
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: University Students in Singapore
 
-- has a need to manage a significant number of contacts
+- has a need to manage a significant number of contacts and transactions
 - prefer desktop apps over other types
 - can type fast
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
-- is a student with a need track the transactions made on a daily basis due to frequent splitting of bills with saved contacts
+- has a need to track transactions with friends and saved contacts
 
-**Value proposition**: Simplifies expense tracking for students, making it easy to split and manage shared costs with clarity and peace of mind.
+**Value proposition**: Make it easy for university students to track transactions with friends and contacts saved in the address book.
