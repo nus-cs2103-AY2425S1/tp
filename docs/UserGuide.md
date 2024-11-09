@@ -286,6 +286,14 @@ Prudy allows flexibility in date inputs for February due to the variable number 
 In the following [Command](#5-commands-overview) section below, arguments and flags enclosed in square brackets <code>[]</code> are optional, while those suffixed with <code>…</code> can be used any number of times. For example, in the command <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​</code>, the <code>[t/TAG]</code> part is optional and can be omitted if not needed. Furthermore, you can input multiple <code>[t/TAG]</code> in the above command.
 </box>
 
+### 4.5 Common Error Messages
+
+| Error message                                 | Remedy                                                                                    |
+|-----------------------------------------------|-------------------------------------------------------------------------------------------|
+| The client index provided is invalid          | Ensure the specified index is within the valid range, likely it has exceeded the maximum. |
+| Policy can only be Life, Health, or Education | Ensure the policy type is spelled correctly and that the subsequent prefix is accurate.   |
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## 5. Commands Overview
