@@ -201,6 +201,7 @@ public class ModelManager implements Model {
     @Override
     public boolean renameTag(Tag existingTag, String newTagName) {
         boolean isSuccessful = addressBook.renameTag(existingTag, newTagName);
+        tagFilters.remove(existingTag);
         return isSuccessful;
     }
 
