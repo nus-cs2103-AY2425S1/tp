@@ -10,9 +10,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ConcreteCommand;
 import seedu.address.logic.commands.FileAccessCommand;
-import seedu.address.logic.commands.ImportCommand;
+import seedu.address.logic.commands.Undoable;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -59,12 +58,10 @@ public class LogicManager implements Logic {
         assert command.isExecuted() : "Command should be executed.";
         assert commandResult != null : "CommandResult should not be null.";
 
-        // Push the command to the undo stack if it is a ConcreteCommand and successfully executed
+        // Push the command to the undo stack if it is undoable and successfully executed
         // No need to check for success as the command will exit through an exception if it fails
-        if (command instanceof ConcreteCommand) {
-            model.pushToUndoStack((ConcreteCommand) command);
-        } else if (command instanceof ImportCommand) {
-            model.clearUndoStack();
+        if (command instanceof Undoable) {
+            model.pushToUndoStack((Undoable) command);
         }
 
         try {
