@@ -35,6 +35,23 @@ public class DateTest {
     }
 
     @Test
+    public void isBefore_success() {
+        Date firstDate = new Date(DATETIME_VALID);
+        Date secondDate = new Date("2024-12-13 12:00");
+
+        assertTrue(firstDate.isBefore(secondDate));
+    }
+
+    @Test
+    public void isBefore_sameDate_success() {
+        Date firstDate = new Date(DATETIME_VALID);
+        Date secondDate = new Date(DATETIME_VALID);
+
+        // same -> not strictly before
+        assertTrue(firstDate.isBefore(secondDate));
+    }
+
+    @Test
     public void equals() {
         Date validDate = new Date(DATETIME_VALID);
 
