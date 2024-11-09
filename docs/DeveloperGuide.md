@@ -9,6 +9,8 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -49,6 +51,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -66,13 +70,17 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103-F11-2/tp/blob/master/src/main/java/tutorease/address/ui/Ui.java)
 
-<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
+<puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component" />
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `LessonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`,  
+`LessonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class  
+which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103-F11-2/tp/blob/master/src/main/java/tutorease/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103-F11-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,6 +90,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Lesson` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -97,9 +107,11 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `DeleteContactCommandParser` and `ContactCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 How the `Logic` component works:
 
@@ -128,6 +140,8 @@ These simple commands are omitted in the Parser classes diagram to enhance clari
 However, their behaviour varies slightly depending on the function. For example, `ArgumentMultimap` is used exclusively in parsers for add, delete, and edit commands, 
 while `ArgumentTokenizer` is only used in parsers for add and edit commands. Not specifying every parser reduces clutter and conveys the high-level message concisely.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -149,6 +163,8 @@ The `Model` component,
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -280,6 +296,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -306,11 +324,11 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 ### First time user
 
-| As a                         | I want to                                                    | So that I can                                              | Priority |
-|------------------------------|--------------------------------------------------------------|------------------------------------------------------------|----------|
-| Potential user exploring app | Have a guided tour showing the functions upon first opening  | Have a better idea and navigate easily when using the app. | 3        |
-| Potential user exploring app | See the test data inside the app (i.e. address book release) | Easily see how the app functions when it is in use.        | 3        |
-| New user to the app          | Purge all test data                                          | Start writing in my own data                               | 3        |
+| As a                         | I want to                                                    | So that I can                                                       | Priority |
+|------------------------------|--------------------------------------------------------------|---------------------------------------------------------------------|----------|
+| Potential user exploring app | Have a guided tour showing the functions upon first opening  | Have a better idea and <br/>navigate easily when using <br/>the app | 3        |
+| Potential user exploring app | See the test data inside the app (i.e. address book release) | Easily see how the app functions <br/>when it is in use             | 3        |
+| New user to the app          | Purge all test data                                          | Start writing in my own data                                        | 3        |
 
 ### Beginner to the software
 
@@ -330,32 +348,32 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 ### A little bit familiar with the software
 
-| As a  | I want to                                                                | So that I can                                                        | Priority |
-|-------|--------------------------------------------------------------------------|----------------------------------------------------------------------|----------|
-| Tutor | Mark a lesson as completed or cancelled                                  | Maintain accurate records of attendance and lesson statuses.         | 2        |
-| Tutor | Be able to make my lesson slots repeat every week                        | Avoid creating the same lesson slot every week                       | 2        |
-| Tutor | Keep track of my students' homework (i.e., done status, deadline)        | Track the progress of my students and keep them accountable          | 2        |
-| Tutor | Change the lesson slot just for that week/all subsequent weeks           | Easily reschedule lessons                                            | 2        |
-| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | Avoid troubling students to reschedule after agreeing on a time slot | 2        |
-| Tutor | Keep track of when and how much each student/guardian needs to pay       | Collect my fees timely and accurately                                | 2        |
-| Tutor | Tag students under their guardian                                        | Track total fees to collect                                          | 2        |
-| Tutor | Automatically update the amount of fee I collect after a lesson          | Avoid manually update and track fees                                 | 2        |
-| Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                         | 2        |
+| As a  | I want to                                                                | So that I can                                                             | Priority |
+|-------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|----------|
+| Tutor | Mark a lesson as completed or cancelled                                  | Maintain accurate records of attendance <br/>and lesson statuses          | 2        |
+| Tutor | Be able to make my lesson slots repeat every week                        | Avoid creating the same lesson slot every week                            | 2        |
+| Tutor | Keep track of my students' homework (i.e., done status, deadline)        | Track the progress of my students and <br/>keep them accountable          | 2        |
+| Tutor | Change the lesson slot just for that week/all subsequent weeks           | Easily reschedule lessons                                                 | 2        |
+| Tutor | Know if I have accidentally scheduled a class at a conflicting time slot | Avoid troubling students to reschedule after <br/>agreeing on a time slot | 2        |
+| Tutor | Keep track of when and how much each student/guardian needs to pay       | Collect my fees timely and accurately                                     | 2        |
+| Tutor | Tag students under their guardian                                        | Track total fees to collect                                               | 2        |
+| Tutor | Automatically update the amount of fee I collect after a lesson          | Avoid manually update and track fees                                      | 2        |
+| Tutor | Batch delete all scheduled lessons with a student                        | Remove all students' classes                                              | 2        |
 
 ### Expert user
 
-| As a  | I want to                                                                | So that I can                                                                      | Priority |
-|-------|--------------------------------------------------------------------------|------------------------------------------------------------------------------------|----------|
-| Tutor | Export student progress reports (compiled lesson descriptions)           | Provide detailed updates to their guardians every term/semester                    | 3        |
-| Tutor | Set reminders for upcoming lessons                                       | Prepare for a lesson and will not miss any                                         | 3        |
-| Tutor | Set reminders to collect payment                                         | Collect my fees on time                                                            | 3        |
-| Tutor | View a history of all my previous lessons with each student              | Reference past lessons and track long-term progress                                | 3        |
-| Tutor | Autofill commands with what is expected next                             | Avoid re-typing long commands                                                      | 3        |
-| Tutor | Export previous years' data into a file                                  | Manage each year separately and not overcrowd my data                              | 3        |
-| Tutor | Generate monthly or weekly reports of my hours worked/earnings           | Track my productivity and workload                                                 | 3        |
-| Tutor | Know what I need to bring/prepare for all my lessons in the upcoming day | Adequately prepare for each lesson and ensure my students have necessary materials | 3        |
-| Tutor | Tag various students under the same lesson slot for group lessons        | Cater to different lesson types and optimize time                                  | 3        |
-| Tutor | Manage multiple locations for students                                   | Adjust if students have multiple locations for tuition                             | 3        |
+| As a  | I want to                                                                | So that I can                                                                                | Priority |
+|-------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|----------|
+| Tutor | Export student progress reports (compiled lesson descriptions)           | Provide detailed updates to their <br/>guardians every term/semester                         | 3        |
+| Tutor | Set reminders for upcoming lessons                                       | Prepare for a lesson and will not miss any                                                   | 3        |
+| Tutor | Set reminders to collect payment                                         | Collect my fees on time                                                                      | 3        |
+| Tutor | View a history of all my previous lessons with each student              | Reference past lessons and track <br/>long-term progress                                     | 3        |
+| Tutor | Autofill commands with what is expected next                             | Avoid re-typing long commands                                                                | 3        |
+| Tutor | Export previous years' data into a file                                  | Manage each year separately and not <br/>overcrowd my data                                   | 3        |
+| Tutor | Generate monthly or weekly reports of my hours worked/earnings           | Track my productivity and workload                                                           | 3        |
+| Tutor | Know what I need to bring/prepare for all my lessons in the upcoming day | Adequately prepare for each lesson <br/>and ensure my students <br/>have necessary materials | 3        |
+| Tutor | Tag various students under the same lesson slot for group lessons        | Cater to different lesson types <br/>and optimize time                                       | 3        |
+| Tutor | Manage multiple locations for students                                   | Adjust if students have multiple locations <br/>for tuition                                  | 3        |
 
 ### Use cases
 
@@ -486,6 +504,29 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
     * **1a2.** Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
+
+**Use Case: UC08 - Find lessons with a specific name keyword**
+
+**MSS**:
+
+1. Tutor keys in a keyword in the required field to find lessons with student names that contain this keyword.
+1. TutorEase lists the lessons with the given keyword.  
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Use case resumes from Step 2.
+
+* **1b**. No lessons found matching the entered keyword.
+    * **1b1**. TutorEase displays a message: "No lessons found with the given keyword(s)."
+    * **1b2**. Tutor enters a new keyword or cancels the search.  
+      Use case resumes from Step 2 or ends if cancelled.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
