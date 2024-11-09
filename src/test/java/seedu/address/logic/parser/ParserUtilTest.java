@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,6 +35,8 @@ public class ParserUtilTest {
     private static final String INVALID_DATE_1 = "2024-10-32";
     private static final String INVALID_DATE_2 = "2024-13-12";
     private static final String INVALID_DATE_3 = "2024-1-12";
+    private static final String INVALID_DATE_4 = "2024-09-31";
+    private static final String INVALID_DATE_5 = "2023-02-29";
     private static final String INVALID_YEAR_MONTH = "2020-13";
     private static final String INVALID_YEAR_MONTH_2 = "11-2020";
 
@@ -46,7 +49,9 @@ public class ParserUtilTest {
     private static final String VALID_AMOUNT_1 = "100";
     private static final String VALID_AMOUNT_2 = "100.5";
     private static final String VALID_AMOUNT_3 = "100.55";
-    private static final String VALID_DATE = "2024-10-30";
+    private static final String VALID_DATE_1 = "2024-10-30";
+    private static final String VALID_DATE_2 = "0000-10-30";
+    private static final String VALID_DATE_3 = "-0001-10-30";
     private static final String VALID_YEAR_MONTH = "2020-12";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -241,16 +246,24 @@ public class ParserUtilTest {
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_1));
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_2));
         assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_3));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_4));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_DATE_5));
+
     }
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsLocalDate() throws ParseException {
-        assertEquals(LocalDate.parse(VALID_DATE, DateTimeUtil.DEFAULT_DATE_PARSER),
-                ParserUtil.parseDate(VALID_DATE));
+        assertEquals(LocalDate.parse(VALID_DATE_1, DateTimeUtil.DEFAULT_DATE_PARSER),
+                ParserUtil.parseDate(VALID_DATE_1));
+        assertEquals(LocalDate.parse(VALID_DATE_2, DateTimeUtil.DEFAULT_DATE_PARSER),
+                ParserUtil.parseDate(VALID_DATE_2));
+        assertEquals(LocalDate.parse(VALID_DATE_3, DateTimeUtil.DEFAULT_DATE_PARSER),
+                ParserUtil.parseDate(VALID_DATE_3));
     }
     @Test
     public void parseDate_validValueWithWhitespace_returnsLocalDate() throws Exception {
-        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        assertEquals(LocalDate.parse(VALID_DATE, DateTimeUtil.DEFAULT_DATE_PARSER),
+        String dateWithWhitespace = WHITESPACE + VALID_DATE_1 + WHITESPACE;
+        assertEquals(LocalDate.parse(VALID_DATE_1, DateTimeUtil.DEFAULT_DATE_PARSER
+                        .withResolverStyle(ResolverStyle.STRICT)),
                 ParserUtil.parseDate(dateWithWhitespace));
     }
 
