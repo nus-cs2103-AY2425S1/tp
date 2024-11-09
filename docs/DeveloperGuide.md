@@ -315,6 +315,24 @@ The name of the JSON file is the time of export.
 
 The following sequence diagram shows how a `export` command goes through the `Logic` component:
 
+### Design considerations:
+
+**Aspect: The name of the JSON file on `export`
+
+* **Alternative 1:** Use a generic format such as `SAVE_FILE_1`, `SAVE_FILE_2`
+    * Pros: Easy for the user to know at first glance which save file was created latest as well as the chronological order of their creation.
+    * Cons: Does not tell the user at what time they actually exported the save file or contents of the save file.
+
+* **Alternative 2 (current implementation):** The time of the device's system at the moment of `export`
+    * Pros: Allows for pinpoint of exact save files as no two files can be exported at the same time.
+    * Cons: Takes longer to manually understand the name of the save file when trying to locate a specific one, 
+  especially when multiple `exports` happen within a short period of time. Also has no mention of contents of JSON file.
+
+* **Alternative 3:** A brief summary of the file such as `FIRST-Alex_Jones LENGTH-20`
+    * Pros: Easy for the user to know at first glance which save file contains what.
+    * Cons: Does not tell the user at what time they actually exported the save file. Also has no indication of the 
+  chronology of creation of the files, and hence no information on which file was the last to be created. Additionally,
+  it would become complicated when exporting files with similar data.
 
 ## Import feature
 
@@ -330,11 +348,21 @@ Step 1. The user executes `import fp/./data/SaveFile3.json`
 
 Step 2. The 
 
+The following sequence diagram shows how a `import` command goes through the `Logic` component:
+
 ### Design considerations:
 
-*Aspect: The exact format of the FILE_PATH parameter
+**Aspect: The exact format of the `FILE_PATH` parameter**
 
-The following sequence diagram shows how a `import` command goes through the `Logic` component:
+* **Alternative 1:** Take in only the name of the JSON file in the data folder of the home folder.
+    * Pros: Shorter command for the user to type. It is also considerably less complicated than alternative 2, making it more accessible to non-technical users.
+    * Cons: Limits the ability of import to only the contents of the data folder. Also requires user to move any JSON file they may want to `import` into the data folder.
+
+* **Alternative 2 (current implementation):** Require the user to type in the full file path of the JSON file they wish to `import`.
+    * Pros: Allow greater flexibility for user to import JSON files from any location of the device.
+    * Cons: Significantly longer command for the user to type. Requires user to have prior knowledge of what the JSON's filepath is, increasing complexity.
+
+
 
 
 
