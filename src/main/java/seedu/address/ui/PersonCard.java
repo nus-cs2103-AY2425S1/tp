@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Person;
 
 /**
@@ -33,13 +34,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
     private FlowPane tags;
     @FXML
     private Label telegram;
     @FXML
     private Label github;
+    @FXML
+    private FlowPane weekLabel;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -49,7 +50,6 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
         telegram.setText(person.getTelegram().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -58,6 +58,27 @@ public class PersonCard extends UiPart<Region> {
             github.setText(person.getGithub().toString());
         } else {
             github.setText("GitHub username unspecified");
+        }
+
+        Label labelOfWeek = new Label("Weeks attended: ");
+        if (!person.getWeeksPresent().isEmpty()) {
+            labelOfWeek.getStyleClass().add("information-label");
+            weekLabel.getChildren().add(labelOfWeek);
+
+            for (int week = 0; week <= ParserUtil.MAX_WEEK; week++) {
+                Label weekLabelNode = new Label(String.valueOf(week));
+
+                if (person.getWeeksPresent().contains(week)) {
+                    weekLabelNode.getStyleClass().add("week-number-marked");
+                } else {
+                    weekLabelNode.getStyleClass().add("week-number-unmarked");
+                }
+                weekLabel.getChildren().add(weekLabelNode);
+            }
+        } else {
+            labelOfWeek = new Label("No weeks attended");
+            labelOfWeek.getStyleClass().add("information-label");
+            weekLabel.getChildren().add(labelOfWeek);
         }
     }
 

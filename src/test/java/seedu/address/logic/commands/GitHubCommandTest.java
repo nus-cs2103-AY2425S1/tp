@@ -180,7 +180,7 @@ public class GitHubCommandTest {
         }
 
         @Override
-        public float maxScore(String assignment) {
+        public float getMaxScore(String assignment) {
             throw new AssertionError("This method should not be called");
         }
 

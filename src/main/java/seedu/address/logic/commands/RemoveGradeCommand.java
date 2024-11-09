@@ -20,7 +20,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
@@ -29,9 +28,13 @@ import seedu.address.model.tag.Tag;
  */
 public class RemoveGradeCommand extends Command {
     public static final String COMMAND_WORD = "removeGrade";
+    public static final String COMMAND_WORD_LOWER_CASE = "removegrade";
+
+    public static final String COMMAND_WORD_SHORT_FORM = "rg";
+
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD
-                    + ": Removes a grade of an assignment from the person.\n"
+                    "Removes a grade of an assignment from the person.\n"
+                        + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
                     + "Parameters: "
                     + PREFIX_NAME
                     + "NAME "
@@ -43,7 +46,14 @@ public class RemoveGradeCommand extends Command {
                     + PREFIX_NAME
                     + "John Doe "
                     + PREFIX_ASSIGNMENT
-                    + "Ex09";
+                    + "Ex01\n"
+                    + "Example: "
+                    + COMMAND_WORD_SHORT_FORM
+                    + " "
+                    + PREFIX_NAME.getShortPrefix()
+                    + "John Doe "
+                    + PREFIX_ASSIGNMENT.getShortPrefix()
+                    + "Ex01";
 
     public static final String MESSAGE_SUCCESS = "Assignment %1$s removed from %2$s";
     public static final String MESSAGE_FAILURE = "Assignment %s does not exist for %s.";
@@ -64,7 +74,6 @@ public class RemoveGradeCommand extends Command {
     static Person createPersonWithRemovedGrade(Person person, String assignmentName) {
         assert person != null;
         Name name = person.getName();
-        Phone phone = person.getPhone();
         Email email = person.getEmail();
         Set<Tag> tags = person.getTags();
         Telegram telegram = person.getTelegram();
@@ -74,7 +83,7 @@ public class RemoveGradeCommand extends Command {
         Map<String, Assignment> assignment = person.getAssignment();
         assignment.remove(assignmentName);
 
-        return new Person(name, phone, email, telegram, github, assignment, weeksAttended, tags);
+        return new Person(name, email, telegram, github, assignment, weeksAttended, tags);
     }
 
     @Override

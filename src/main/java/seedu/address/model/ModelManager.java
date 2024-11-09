@@ -162,7 +162,6 @@ public class ModelManager implements Model {
 
     @Override
     public void updateSortedPersonList(Comparator<Person> comparator) {
-        requireNonNull(comparator);
         sortedPersons.setComparator(comparator);
     }
 
@@ -184,33 +183,38 @@ public class ModelManager implements Model {
 
     //=========== Predefined assignments accessors =============================================================
 
+    @Override
     public boolean hasAssignment(String name) {
         return predefinedAssignmentsData.hasAssignment(name);
     }
 
-    public float maxScore(String assignment) {
-        return predefinedAssignmentsData.maxScore(assignment);
+
+    @Override
+    public float getMaxScore(String assignment) {
+        return predefinedAssignmentsData.getMaxScore(assignment);
     }
 
+    @Override
     public String getAssignmentName(String name) {
         return predefinedAssignmentsData.getAssignmentName(name);
     }
 
+    @Override
     public boolean hasName(Name name) {
         return addressBook.hasName(name);
     }
 
+    @Override
     public ReadOnlyPredefinedAssignmentsData getPredefinedAssignments() {
         return predefinedAssignmentsData;
     }
 
+    @Override
     public Github getGitHubUsername(Name name) {
         return addressBook.getGitHubUsername(name);
     }
 
-    /**
-     * Replace all person in currently with new data
-     */
+    @Override
     public void replaceAllPersons(List<Person> persons) {
         AddressBook updatedList = new AddressBook();
         updatedList.setPersons(persons);

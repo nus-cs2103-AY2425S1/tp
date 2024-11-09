@@ -22,10 +22,13 @@ import seedu.address.model.tag.Tag;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports person data to a CSV file.\n"
-            + "Parameters: FILE_PATH"
-            + "[" + PREFIX_PATH + "FILE_PATH]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
+    public static final String COMMAND_WORD_SHORT_FORM = "ex";
+
+    public static final String MESSAGE_USAGE = "Exports person data to a CSV file.\n"
+        + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
+        + "Parameters: " + PREFIX_PATH + "FILE_PATH\n"
+        + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv\n"
+        + "Example: " + COMMAND_WORD_SHORT_FORM + " " + PREFIX_PATH.getShortPrefix() + "data/persons.csv";
 
     private final String filePath;
 
@@ -61,7 +64,7 @@ public class ExportCommand extends Command {
      */
     private CommandResult writeData(CSVWriter writer, List<Person> persons) {
         // Define CSV header.
-        String[] header = {"Name", "Phone", "Email", "Telegram", "Tags", "Github", "Assignments", "WeeksPresent"};
+        String[] header = {"Name", "Email", "Telegram", "Tags", "Github", "Assignments", "WeeksPresent"};
         writer.writeNext(header);
 
         // Write each person data to CSV file.
@@ -74,7 +77,6 @@ public class ExportCommand extends Command {
             // Prepare the person's data as a string array for CSV.
             String[] record = {
                 person.getName().toString(),
-                person.getPhone().toString(),
                 person.getEmail().toString(),
                 person.getTelegram().toString(),
                 String.join(",", person.getTags().stream().map(Tag::toString).toArray(String[]::new)),

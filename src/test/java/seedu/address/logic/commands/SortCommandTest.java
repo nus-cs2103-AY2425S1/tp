@@ -40,12 +40,16 @@ public class SortCommandTest {
         SortCommand firstCommand = new SortCommand(firstComparator);
         SortCommand secondCommand = new SortCommand(secondComparator);
 
+        SortCommand firstResetCommand = new SortCommand(null);
+        SortCommand secondResetCommand = new SortCommand(null);
+
         // same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
         // sane value -> returns true
         SortCommand firstCommandCopy = new SortCommand(firstComparator);
         assertTrue(firstCommand.equals(firstCommandCopy));
+        assertTrue(firstResetCommand.equals(secondResetCommand));
 
         // different types -> returns false
         assertFalse(firstCommand.equals(1));
@@ -55,6 +59,8 @@ public class SortCommandTest {
 
         // different comparator -> returns false
         assertFalse(firstCommand.equals(secondCommand));
+        assertFalse(firstCommand.equals(firstResetCommand));
+        assertFalse(firstResetCommand.equals(firstCommand));
     }
 
     @Test
@@ -63,6 +69,10 @@ public class SortCommandTest {
         SortCommand sortCommand = new SortCommand(comparator);
         String expected = SortCommand.class.getCanonicalName() + "{comparator=" + comparator + "}";
         assertEquals(expected, sortCommand.toString());
+
+        SortCommand resetCommand = new SortCommand(null);
+        String expectedReset = SortCommand.class.getCanonicalName() + "{comparator=null}";
+        assertEquals(expectedReset, resetCommand.toString());
     }
 
     @Test
@@ -75,6 +85,10 @@ public class SortCommandTest {
         expectedModel.updateSortedPersonList(comparator);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        SortCommand resetCommand = new SortCommand(null);
+        expectedModel.updateSortedPersonList(null);
+        assertCommandSuccess(resetCommand, model, SortCommand.RESET_MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -89,6 +103,10 @@ public class SortCommandTest {
         expectedModel.updateSortedPersonList(comparator);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        SortCommand resetCommand = new SortCommand(null);
+        expectedModel.updateSortedPersonList(null);
+        assertCommandSuccess(resetCommand, model, SortCommand.RESET_MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -109,6 +127,12 @@ public class SortCommandTest {
 
         expectedModel.updateSortedPersonList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+        SortCommand resetCommand = new SortCommand(null);
+        String expectedResetMessage = SortCommand.RESET_MESSAGE_SUCCESS;
+
+        assertCommandSuccess(resetCommand, model, expectedResetMessage, expectedModel);
+
     }
 
 

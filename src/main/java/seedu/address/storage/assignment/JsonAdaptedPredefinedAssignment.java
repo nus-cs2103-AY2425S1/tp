@@ -26,4 +26,8 @@ class JsonAdaptedPredefinedAssignment {
     public String getName() {
         return name;
     }
+
+    public Float getMaxScore() {
+        return maxScore;
+    }
 }

@@ -9,11 +9,16 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
+{{ newPage }}
+
 ---
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+* We took references from [OpenCSV](https://opencsv.sourceforge.net/) for import and export commands.
+* ChatGPT was used to check for errors and generate some test cases.
+* We referred to our TA's usage of "newPage" and "newPageBetween" [here](https://github.com/AY2324S2-CS2103T-F13-1/tp) to set our pagination for the User and Developer Guide
 
 ---
 
@@ -22,6 +27,8 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ---
+
+{{ newPageBetween }}
 
 ## **Design**
 
@@ -50,9 +57,11 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+{{ newPage }}
+
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete n/John`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -61,11 +70,15 @@ Each of the four main components (also shown in the diagram above),
 - defines its _API_ in an `interface` with the same name as the Component.
 - implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+{{ newPage }}
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+{{ newPage }}
 
 ### UI component
 
@@ -84,6 +97,8 @@ The `UI` component,
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 - depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+{{ newPage }}
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -92,14 +107,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
+{{ newPage }}
+
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete n/John")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+
 
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
+
+{{ newPage }}
 
 How the `Logic` component works:
 
@@ -109,14 +129,18 @@ How the `Logic` component works:
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
+
 
 How the parsing works:
 
 - When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+{{ newPage }}
 
 ### Model component
 
@@ -139,6 +163,8 @@ The `Model` component,
 
 </box>
 
+{{ newPage }}
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -151,115 +177,21 @@ The `Storage` component,
 - inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 ---
 
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-- `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-- `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-- `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-- **Alternative 1 (current choice):** Saves the entire address book.
-
-  - Pros: Easy to implement.
-  - Cons: May have performance issues in terms of memory usage.
-
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  - Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ---
+
+{{ newPage }}
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -284,6 +216,8 @@ _{Explain here how the data archiving feature will be implemented}_
 - is reasonably comfortable using CLI apps
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+{{ newPage }}
 
 ### User stories
 
@@ -321,6 +255,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | new user         | use a help function to check what this app offers                      | I can easily have the details of the commands to use in my fingertips.                                               |
 | `*`      | CS2030S TA       | create automatic flags to indicate if a student's work is marked       | I can monitor grading deadlines so that I can stay on top of my responsibilities without missing any critical dates. |
 
+{{ newPage }}
+
 ### Use cases
 
 (For all use cases below, the **System** is the `KonTActs` and the **Actor** is the `user`, unless specified otherwise)
@@ -348,16 +284,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
+{{ newPage }}
+
 **Use case: UC02 - Delete contacts**
 
 **Precondition**
 
-1. The task that the user wants to delete exists.
+1. The contact that the user wants to delete exists.
 
 **MSS**
 
-1. User indicates to delete a task.
-2. KonTActs deletes the tasks and indicates success.
+1. User indicates to delete a contact.
+2. KonTActs deletes the contact and indicates success.
 
    Use case ends.
 
@@ -372,6 +310,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case resumes from step 2.
 
 <br>
+
+{{ newPage }}
 
 **Use case: UC03 - Add grades of students**
 
@@ -401,6 +341,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     <br>
 
+{{ newPage }}
+
 **Use case: UC04 - View Contact**
 
 **MSS**
@@ -426,11 +368,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**Use case: UC05 - Update contacts**
+{{ newPage }}
+
+**Use case: UC05 - Edit contacts**
 
 **MSS**
 
-1. TA chooses to update a contact’s details.
+1. TA chooses to edit a contact’s details.
 2. KonTActs requests the contact’s identifier.
 3. TA enters the identifier of the contact to update.
 4. KonTActs displays the current details and requests the changes.
@@ -444,12 +388,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. KonTActs identifies that there is no such contact.
 
   - 3a1. KonTActs requests for the correct data.
-  - 3a2. TA enters the correct data.
+  - 3a2. TA enters the new data.
   - Steps 3a1-3a2 are repeated until the data entered are correct.
 
     Use case resumes from step 4.
+  
+- 4a. KonTActs identifies that the data to be updated is invalid.
+
+    - 4a1. KonTActs requests for the correct data.
+    - 4a2. TA enters new data
+    - Steps 4a1-4a2 are repeated until the data entered are correct.
+
+      Use case resumes from step 5.
 
 <br>
+
+{{ newPage }}
 
 **Use case: UC06 - Filter Contact List**
 
@@ -476,6 +430,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - \*a1. KonTActs stops the filter operation and returns to the unfiltered contact list by using list
 
 <br>
+
+{{ newPage }}
 
 **Use case: UC07 - Create shortcut for commands**
 
@@ -516,6 +472,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     <br>
 
+{{ newPage }}
+
 **Use case: UC08 - Sort students based on proficiency**
 
 **Precondition**
@@ -528,30 +486,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User chooses to sort the students based on their proficiency.
 2. User enters the sort command.
 3. KonTActs returns the list of students in the sorted order.
+
    Use case ends.
 
    <br>
 
 **Use case: UC09 - Export contacts**
 
+**Precondition**
+
+1. User must have permission to write to the provided path.
+2. User must have enough storage to store the output file.
+
 **MSS**
 
 1. User chooses to export the contact list.
-2. KonTActs requests for the file path.
-3. User gives the file path.
-4. KonTActs exports the contact list in CSV format and shows successful export.
+2. User provides the file path. 
+3. KonTActs exports the contact list in CSV format and shows the number of people successfully exported.
 
    Use case ends.
 
 **Extensions**
 
-- 2a. User selects an unsupported format.
+- 2a. User enters an invalid path (e.g .pdf).
 
-  - 2a1. KonTActs displays an error message and provides the list of formats that are supported.
+  - 2a1. KonTActs displays an error message and request for user to provide a valid file path (e.g. must end with .csv)
+  - 2a2. User provides new file path
+  - Step 2a1-2a2 are repeated until file path is valid
 
     Use case resumes from step 3.
 
     <br>
+
+{{ newPage }}
 
 **Use case: UC10 - Request for help**
 
@@ -576,7 +543,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Precondition**
 
-1. The student that the user wants to tag exists.
+1. The student that the user wants to tag is in KonTActs.
 
 **MSS**
 
@@ -591,13 +558,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - 3a. KonTActs detects an error in the entered data.
 
-  - 3a1. KonTActs requests for the correct data.
+  - 3a1. KonTActs displays error message.
   - 3a2. User enters new data.
   - Steps 3a1-3a2 are repeated until the data entered are correct.
 
-    Use case resumes from step 3.
+    Use case resumes from step 4.
 
     <br>
+
+{{ newPage }}
 
 **Use case: UC12 - View last modification date of contact details**
 
@@ -620,27 +589,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     <br>
 
-**Use case: UC13 - Import contacts**
+{{ newPage }}
+
+**Use case: UC13 - Import contacts from CSV file**
+
+**Precondition**
+
+1. The file is in CSV format and ends with .csv
+2. The file contains valid data of at least 1 person
+3. The header of the file is in a specific sequence 
+("Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent")
+4. Current user have permissions to access and read the file
 
 **MSS**
 
 1. User chooses to import the contact list.
-2. KonTActs requests for the file path.
-3. User gives the desired file (by its path).
-4. KonTActs import the contact list from the specified file path and shows successful import.
+2. User gives the desired file (by its path).
+3. KonTActs import the contact list from the specified file path and shows successful import.
 
    Use case ends.
 
 **Extensions**
 
-- 3a. KonTActs detects an unsupported, corrupted file or a file without the valid headers.
+- 2a. KonTActs detects an unsupported, corrupted file or a file without the valid headers.
 
-  - 3a1. KonTActs indicates it is unable to import from that file and requests for a new file.
-  - 3a2. User gives a new file.
-  - Steps 3a1 - 3a2 are repeated until KonTActs is able to import contacts from the file.
+  - 2a1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+  - 2a2. User provides a new file path
+  - Steps 2a1 - 2a2 are repeated until KonTActs is able to import contacts from the file.
 
-    Use case resumes from step 4.
+    Use case resumes from step 3.
 
+- 2b. KonTActs detects invalid content in CSV file (e.g. Name/Email that does not comply with requirement, 
+Duplicate names)
+
+    - 2b1. KonTActs indicates it is unable to import from that file and gives a more specific error message.
+    - 2b2. User provides a new file path or update their CSV file
+    - Steps 2b1 - 2b2 are repeated until KonTActs is able to import contacts from the file.
+
+      Use case resumes from step 3.
+  
 - \*a. At any time, User chooses to cancel the import.
 
   - \*a1. KonTActs stops the import.
@@ -648,6 +635,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
     <br>
+
+{{ newPage }}
 
 **Use case: UC14 - Create automatic flags for students’ work if marked**
 
@@ -659,6 +648,8 @@ Actor: TA
 2. KonTActs creates a flag to show the student’s work as marked.
 
    Use case ends.
+
+{{ newPage }}
 
 ### Non-Functional Requirements
 
@@ -677,15 +668,17 @@ Actor: TA
 13. Searching for or filtering contacts should take less than 5 seconds.
 14. Stored contacts are persisted between sessions.
 
+{{ newPage }}
+
 ### Glossary
 
 * **Contact**: An individual (e.g. student) stored in the system, typically having details regarding them such as their name, github username and etc.
 
-* **Easy to use for new users**: intuitive commands that are easy to understand and UI that is easy to navigate.
+* **Easy to use for new users**: Intuitive commands that are easy to understand and UI that is easy to navigate.
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
 
-* **Average typing speed**: about 40 words per minute.
+* **Average typing speed**: About 40 words per minute.
 
 * **Uptime**: The system should be operational during that period of time.
 
@@ -694,6 +687,8 @@ Actor: TA
 * **Proper documentation**: A detailed user and developer guide which helps future users and developers to understand and use the code.
 
 * **Typical usage**: Normal or expected usage patterns of the application, such as the frequency of adding, deleting, or viewing contacts during everyday use.
+
+{{ newPage }}
 
 ---
 

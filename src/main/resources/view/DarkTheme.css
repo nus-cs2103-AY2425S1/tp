@@ -132,17 +132,6 @@
     -fx-text-fill: #010504;
 }
 
-.hyperlink {
-    -fx-font-family: "Segoe UI"; /* Inherit font-family */
-    -fx-font-size: 13px;        /* Inherit font-size */
-    -fx-text-fill: #E2F1E7;     /* Change to a lighter color for hyperlinks */
-    -fx-underline: true;        /* Ensure hyperlink is underlined */
-}
-
-.hyperlink:hover {
-    -fx-text-fill: #2b4274;     /* Change color on hover */
-}
-
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }
@@ -372,6 +361,12 @@
     -fx-font-size: 20;
 }
 
+#weekLabel .information-label {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: D6BD98;
+    -fx-font-size: 12;
+}
+
 #weekLabel .week-number-marked {
     -fx-text-fill: white;
     -fx-background-color: green;
@@ -391,6 +386,7 @@
 }
 
 #fieldLabel {
+    -fx-font-family: "Segoe UI";
     -fx-text-fill: D6BD98;
 }
 

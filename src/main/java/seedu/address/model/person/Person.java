@@ -22,7 +22,6 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
     private final Github github;
 
@@ -37,14 +36,12 @@ public class Person {
      */
     public Person(
             Name name,
-            Phone phone,
             Email email,
             Telegram telegram,
             Set<Tag> tags,
             Github github) {
 
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.tags.addAll(tags);
@@ -59,17 +56,15 @@ public class Person {
      */
     public Person(
             Name name,
-            Phone phone,
             Email email,
             Telegram telegram,
             Set<Tag> tags,
             Github github,
             Map<String, Assignment> assignment) {
-        requireAllNonNull(name, phone, email, telegram, tags, github, assignment);
+        requireAllNonNull(name, email, telegram, tags, github, assignment);
         this.github = github;
         this.telegram = telegram;
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
         this.assignment.putAll(assignment);
@@ -80,7 +75,6 @@ public class Person {
      * Constructs a new Person object
      *
      * @param name the name of the person.
-     * @param phone the phone number of the person.
      * @param email the email of the person.
      * @param telegram the telegram ID of the person.
      * @param github the github username of the person.
@@ -88,18 +82,16 @@ public class Person {
      * @param tags the tags for that person.
      */
     public Person(Name name,
-                  Phone phone,
                   Email email,
                   Telegram telegram,
                   Github github,
                   Map<String, Assignment> assignment,
                   Set<Integer> weeksPresent,
                   Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, telegram, tags, github);
+        requireAllNonNull(name, email, telegram, tags, github);
         this.github = github;
         this.telegram = telegram;
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
         this.assignment.putAll(assignment);
@@ -110,7 +102,6 @@ public class Person {
      * Creates a Person object
      *
      * @param name the name of the person.
-     * @param phone the phone number of the person.
      * @param email the email of the person.
      * @param telegram the telegram of the person.
      * @param github the github of the person.
@@ -118,17 +109,15 @@ public class Person {
      * @param tags the tags for that person.
      */
     public Person(Name name,
-                  Phone phone,
                   Email email,
                   Telegram telegram,
                   Github github,
                   Set<Integer> weeksPresent,
                   Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, telegram, tags, github);
+        requireAllNonNull(name, email, telegram, tags, github);
         this.github = github;
         this.telegram = telegram;
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
         this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
@@ -137,10 +126,6 @@ public class Person {
 
     public Name getName() {
         return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
     }
 
     public Email getEmail() {
@@ -227,7 +212,6 @@ public class Person {
 
         return
                 name.equals(otherPerson.name)
-                        && phone.equals(otherPerson.phone)
                         && email.equals(otherPerson.email)
                         && telegram.equals(otherPerson.telegram)
                         && tags.equals(otherPerson.tags)
@@ -237,14 +221,13 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, tags);
+        return Objects.hash(name, email, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("phone", phone)
                 .add("email", email)
                 .add("telegram", telegram)
                 .add("tags", tags)

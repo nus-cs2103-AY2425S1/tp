@@ -136,22 +136,22 @@ mark {
 
   /* Reduce font size when printing */
   h1 {
-      font-size: 1.2rem !important;
+      font-size: 1.4rem !important;
   }
   h2 {
-      font-size: 1.0rem !important;
+      font-size: 1.2rem !important;
   }
   h3 {
-      font-size: 0.9rem !important;
+      font-size: 1.1rem !important;
   }
   h4 {
-      font-size: 0.8rem !important;
+      font-size: 1.0rem !important;
   }
   h5 {
-      font-size: 0.7rem !important;
+      font-size: 0.9rem !important;
   }
   body {
-      font-size: 0.65rem !important;
+      font-size: 0.85rem !important;
   }
   .btn {
       font-size: 0.65rem !important;
@@ -168,3 +168,24 @@ h5,
 h6 {
   color: #e46c0a;
 }
+
+/*@@author swaminathanViswa -resued
+ Reused from https://github.com/AY2324S2-CS2103T-F13-1/tp/blob/206f041b65d9f0e6e13ac3011d16d77d577ae3d3/docs/stylesheets/main.css
+ With minor modifications*/
+
+ /* Font size for table of contents on print pdf version */
+.page-nav-print {
+    font-size: 1.5em;
+}
+
+.rounded-image {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fit-container {
+    width: 100%;
+    object-fit: contain;
+}
+
+/*@@author swaminathanViswa */

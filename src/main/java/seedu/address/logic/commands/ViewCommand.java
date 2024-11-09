@@ -17,22 +17,30 @@ import seedu.address.model.person.Person;
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views details of a contact.\n"
-                    + "Parameters: "
-                    + PREFIX_NAME
-                    + "NAME\n"
-                    + "Example: "
-                    + COMMAND_WORD
-                    + " "
-                    + PREFIX_NAME + "JohnDoe";
+    public static final String COMMAND_WORD_SHORT_FORM = "v";
 
-    public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact ";
-    public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact ";
+    public static final String MESSAGE_USAGE = "Views details of a contact.\n"
+            + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
+            + "Parameters: "
+            + PREFIX_NAME
+            + "NAME\n"
+            + "Example: "
+            + COMMAND_WORD
+            + " "
+            + PREFIX_NAME + "John Doe\n"
+            + "Example: "
+            + COMMAND_WORD_SHORT_FORM
+            + " "
+            + PREFIX_NAME.getShortPrefix() + "John Doe";
+
+    public static final String VIEW_ACKNOWLEDGMENT = "Viewing contact";
+    public static final String CLOSE_VIEW_ACKNOWLEDGMENT = "Closing view of contact";
     private static final ViewCommand closeView = new ViewCommand();
     private static final CommandResult closeViewResult = new CommandResult(CLOSE_VIEW_ACKNOWLEDGMENT, null, true);
-
+    private static ListChangeListener<Person> listener;
     private final Name personName;
     private final boolean isClose;
+
 
     /**
      * @param name Name of the contact.
@@ -57,6 +65,9 @@ public class ViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (listener != null) {
+            model.getAddressBook().getPersonList().removeListener(listener);
+        }
         if (isClose) {
             return closeViewResult;
         }
@@ -66,15 +77,22 @@ public class ViewCommand extends Command {
             throw new CommandException("Person " + personName + " not in address book");
         }
 
+        return createCommandResult(model);
+    }
+
+    private CommandResult createCommandResult(Model model) {
         ObjectProperty<Person> person = new SimpleObjectProperty<>(model.getPerson(personName).orElseThrow());
-        model.getAddressBook().getPersonList().addListener((ListChangeListener<Person>) change -> {
+        listener = change -> {
             while (change.next()) {
-                if (change.wasAdded() || change.wasRemoved()) {
+                if (change.wasRemoved()) {
                     person.set(null);
-                    model.getPerson(personName).ifPresentOrElse(person::set, () -> {});
+                    model.getPerson(personName).ifPresentOrElse(
+                            person::set, () -> model.getAddressBook().getPersonList().removeListener(listener));
+
                 }
             }
-        });
+        };
+        model.getAddressBook().getPersonList().addListener(listener);
         return new CommandResult(VIEW_ACKNOWLEDGMENT, person, false);
     }
 

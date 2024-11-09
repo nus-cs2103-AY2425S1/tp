@@ -8,6 +8,19 @@ import seedu.address.logic.commands.exceptions.CommandException;
  * Parses CSV row data, validating headers and ensuring proper formatting.
  */
 public class CsvRowParser {
+    private static final String MESSAGE_INVALID_HEADERS = "CSV header is empty/contains empty values, please ensure"
+        + " all headers are valid.\n"
+        + CORRECT_HEADER_USAGE;
+
+    private static final String MESSAGE_INVALID_EXTRA_COLUMNS = "There are extra columns!\n"
+        + "Please ensure there is only 7 corresponding header/data columns\n"
+        + CORRECT_HEADER_USAGE;
+
+    private static final String MESSAGE_INVALID_INSUFFICIENT_COLUMNS = "There are lesser columns in header than "
+        + "expected!\n" + CORRECT_HEADER_USAGE;
+
+    private static final String MESSAGE_INVALID_HEADER_DEFINITION = "Header is defined incorrectly!\n"
+        + CORRECT_HEADER_USAGE;
 
     /**
      * Checks if all fields in a row are empty.
@@ -33,9 +46,7 @@ public class CsvRowParser {
      */
     public static void checkHeaders(String[] headers, String[] expectedHeaders) throws CommandException {
         if (headers.length == 0) {
-            throw new CommandException("CSV header is empty/contains empty values, please ensure"
-                + " all headers are valid.\n"
-                + CORRECT_HEADER_USAGE);
+            throw new CommandException(MESSAGE_INVALID_HEADERS);
         }
 
         for (int i = 0; i < headers.length; i++) {
@@ -43,25 +54,22 @@ public class CsvRowParser {
         }
 
         for (String header : headers) {
-            if (header.isEmpty() && headers.length <= 8) {
-                throw new CommandException("CSV header is empty/contains empty values, please ensure"
-                    + " all headers are valid.\n"
-                    + CORRECT_HEADER_USAGE);
+            if (header.isEmpty() && headers.length < 7) {
+                throw new CommandException(MESSAGE_INVALID_HEADERS);
             }
         }
 
         if (headers.length > expectedHeaders.length) {
-            throw new CommandException("There are extra columns!\n"
-                + "Please ensure there is only be 8 corresponding header/data columns\n" + CORRECT_HEADER_USAGE);
+            throw new CommandException(MESSAGE_INVALID_EXTRA_COLUMNS);
         }
 
         if (headers.length < expectedHeaders.length) {
-            throw new CommandException("There are lesser columns in header than expected!\n" + CORRECT_HEADER_USAGE);
+            throw new CommandException(MESSAGE_INVALID_INSUFFICIENT_COLUMNS);
         }
 
         for (int i = 0; i < headers.length; i++) {
             if (!headers[i].trim().equalsIgnoreCase(expectedHeaders[i])) {
-                throw new CommandException("Header is defined incorrectly!\n" + CORRECT_HEADER_USAGE);
+                throw new CommandException(MESSAGE_INVALID_HEADER_DEFINITION);
             }
         }
     }

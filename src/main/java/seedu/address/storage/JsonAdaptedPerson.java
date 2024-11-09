@@ -17,7 +17,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
@@ -30,7 +29,6 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
-    private final String phone;
     private final String email;
     private final String telegram;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -42,14 +40,13 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdapte dPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
                              @JsonProperty("email") String email,
                              @JsonProperty("telegram") String telegram, @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("github") String github,
                              @JsonProperty("assignment") Map<String, Assignment> assignments,
                              @JsonProperty("attendance") List<Integer> attendance) {
         this.name = name;
-        this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         if (tags != null) {
@@ -69,7 +66,6 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
         email = source.getEmail().value;
         telegram = source.getTelegram().value;
         tags.addAll(source.getTags().stream()
@@ -99,14 +95,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
-
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -139,7 +127,7 @@ class JsonAdaptedPerson {
         Set<Integer> modelAttendance = new HashSet<>(attendance); // Convert List to Set for the model
 
         return new Person(
-                modelName, modelPhone, modelEmail,
+                modelName, modelEmail,
                 modelTelegram, modelGithub, modelAssignment, modelAttendance, modelTags);
     }
 
