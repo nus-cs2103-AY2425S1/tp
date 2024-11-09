@@ -35,7 +35,8 @@ public class ParserUtilTest {
     private static final String INVALID_DATE_2 = "2024-13-12";
     private static final String INVALID_DATE_3 = "2024-1-12";
     private static final String INVALID_YEAR_MONTH = "2020-13";
-    private static final String INVALID_YEAR_MONTH_2 = "11-2020";
+    private static final String INVALID_YEAR_MONTH_2 = "0001-00";
+    private static final String INVALID_YEAR_MONTH_3 = "11-2020";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -48,6 +49,8 @@ public class ParserUtilTest {
     private static final String VALID_AMOUNT_3 = "100.55";
     private static final String VALID_DATE = "2024-10-30";
     private static final String VALID_YEAR_MONTH = "2020-12";
+    private static final String VALID_YEAR_MONTH_2 = "0000-01";
+    private static final String VALID_YEAR_MONTH_3 = "-0001-01";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -260,16 +263,26 @@ public class ParserUtilTest {
     }
     @Test
     public void parseYearMonth_invalidValue_throwsParseException() {
+        // invalid month
         assertThrows(ParseException.class, () -> ParserUtil.parseYearMonth(INVALID_YEAR_MONTH));
         assertThrows(ParseException.class, () -> ParserUtil.parseYearMonth(INVALID_YEAR_MONTH_2));
+        // wrong format
+        assertThrows(ParseException.class, () -> ParserUtil.parseYearMonth(INVALID_YEAR_MONTH_3));
     }
+
     @Test
     public void parseYearMonth_validValueWithoutWhitespace_returnsYearMonth() throws Exception {
         assertEquals(YearMonth.parse(VALID_YEAR_MONTH), ParserUtil.parseYearMonth(VALID_YEAR_MONTH));
+        assertEquals(YearMonth.parse(VALID_YEAR_MONTH_2), ParserUtil.parseYearMonth(VALID_YEAR_MONTH_2));
+        assertEquals(YearMonth.parse(VALID_YEAR_MONTH_3), ParserUtil.parseYearMonth(VALID_YEAR_MONTH_3));
     }
     @Test
     public void parseYearMonth_validValueWithWhitespace_returnsTrimmedYearMonth() throws Exception {
         String yearMonthWithWhitespace = WHITESPACE + VALID_YEAR_MONTH + WHITESPACE;
         assertEquals(YearMonth.parse(VALID_YEAR_MONTH), ParserUtil.parseYearMonth(yearMonthWithWhitespace));
+        String yearMonthWithWhitespace2 = WHITESPACE + VALID_YEAR_MONTH_2 + WHITESPACE;
+        assertEquals(YearMonth.parse(VALID_YEAR_MONTH_2), ParserUtil.parseYearMonth(yearMonthWithWhitespace2));
+        String yearMonthWithWhitespace3 = WHITESPACE + VALID_YEAR_MONTH_3 + WHITESPACE;
+        assertEquals(YearMonth.parse(VALID_YEAR_MONTH_3), ParserUtil.parseYearMonth(yearMonthWithWhitespace3));
     }
 }

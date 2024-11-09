@@ -26,6 +26,8 @@ public class SummaryCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_START_MONTH + "2024-09 " + PREFIX_END_MONTH + "2024-12";
 
     public static final String MESSAGE_SUCCESS = "The total amount of transactions from %s to %s is: %s";
+    public static final String MESSAGE_NO_TRANSACTIONS_FOUND = "No transactions found from %s to %s";
+
     private final TransactionDatePredicate predicate;
 
     /**
@@ -44,6 +46,10 @@ public class SummaryCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, COMMAND_WORD));
         }
         model.updateTransactionListPredicate(predicate);
+        if (model.getFilteredTransactionList().isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_NO_TRANSACTIONS_FOUND, predicate.getFormattedStartDate(),
+                    predicate.getFormattedEndDate()));
+        }
         double summary = model.getFilteredTransactionList().stream().mapToDouble(Transaction::getAmount).sum();
         String sumString;
         if (summary < 0) {
