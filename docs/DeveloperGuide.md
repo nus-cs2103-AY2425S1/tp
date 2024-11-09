@@ -306,7 +306,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 3. Cher shows success message that list has been sorted by name.<br>
 Use case ends
 
-#### Use case: UC6 - Batch edit
+#### Use case: UC7 - Batch edit
 **MSS**
 1. User enters a command to edit all contacts with specific tags to new tag.
 2. Cher will change all contacts containing specified tags to the new tag.
@@ -383,6 +383,40 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Batch deleting a group of people
+1. Deleting a group of people.
+   1. Prerequisites: <br>
+   Execute the following:
+      - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
+      - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
+      - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+      - List all persons using the `list` command.
+   2. Test case: `batch-delete t/tag3` <br>
+      Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
+   3. Test case: `batch-delete t/tag1 t/tag2` <br>
+      Expected: `test person 3` will be deleted. Feedback box will show detail of deleted person.
+   4. Test case: `batch-delete t/tag1` <br>
+      Expected: `test person 1`, `test person 2` will be deleted as `test person 3` is already deleted from the
+      previous test case `iii`. Feedback box will show detail of deleted person.
+
+### Batch editing a group of people's tag
+1. Changing a common tag among group of people.
+    1. Prerequisites: <br>
+       Execute the following:
+        - add n/test person 1 s/m r/student p/12345678 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 2 s/m r/student p/12543 a/address e/sdgs@dfsh.dsfvc  t/tag1
+        - add n/test person 3 s/m r/student p/2634364 a/address e/sdgs@dfsh.dsfvc  t/tag1 t/tag2
+        - List all persons using the `list` command.
+    2. Test case: `batch-edit t/tag3 t/tag4` <br>
+       Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
+    3. Test case: `batch-edit t/tag1 t/tag3` <br>
+       Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
+       Contact entries will show a list of contacts that has been changed: `test person 1`, `test person 2`,
+       `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
+    4. Test case: `batch-edit t/tag2 t/tag3` <br>
+       Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag3]` <br>
+       Contact entries will only show `test person 3`.
 
 ### Saving data
 
