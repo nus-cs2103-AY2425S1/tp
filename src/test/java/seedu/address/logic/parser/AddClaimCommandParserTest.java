@@ -48,6 +48,14 @@ public class AddClaimCommandParserTest {
         // no policy type
         assertParseFailure(parser, INDEX_FIRST_CLIENT.getOneBased()
                 + CommandTestUtil.CLAIM_STATUS_PENDING + CommandTestUtil.CLAIM_DESC, expectedMessage);
+
+        // missing claim description
+        assertParseFailure(parser, INDEX_FIRST_CLIENT.getOneBased() + CommandTestUtil.POLICY_TYPE_DESC_HEALTH
+                + CommandTestUtil.CLAIM_STATUS_PENDING, expectedMessage);
+
+        // missing claim status
+        assertParseFailure(parser, INDEX_FIRST_CLIENT.getOneBased() + CommandTestUtil.POLICY_TYPE_DESC_HEALTH
+                + CommandTestUtil.CLAIM_DESC, expectedMessage);
     }
 
     @Test
