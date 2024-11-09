@@ -246,7 +246,7 @@ public class ParserUtil {
      * Parses a {@code String remark} into an {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code remark} is invalid.
+     * @throws ParseException If the given {@code remark} is invalid.
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
@@ -263,7 +263,7 @@ public class ParserUtil {
      *
      * @param args The args to validate.
      * @param errorMessage The error message to use in the exception if validation fails.
-     * @throws ParseException if {@code args} is empty or contains only whitespace.
+     * @throws ParseException If {@code args} is empty or contains only whitespace.
      */
     public static void validateNonEmptyArgs(String args, String errorMessage) throws ParseException {
         if (args.trim().isEmpty()) {
@@ -278,7 +278,7 @@ public class ParserUtil {
      * @param argMultimap The map of arguments to check.
      * @param prefix The prefix to validate.
      * @param errorMessage The error message to use in the exception if validation fails.
-     * @throws ParseException if the specified {@code prefix} is not present in {@code argMultimap}.
+     * @throws ParseException If the specified {@code prefix} is not present in {@code argMultimap}.
      */
     public static void validatePrefixExists(ArgumentMultimap argMultimap, Prefix prefix, String errorMessage)
             throws ParseException {
@@ -293,7 +293,7 @@ public class ParserUtil {
      *
      * @param argMultimap The argument multimap to retrieve the preamble from.
      * @return The parsed {@code Index}
-     * @throws ParseException if the preamble is empty or contains an invalid index.
+     * @throws ParseException If the preamble is empty or contains an invalid index.
      */
     public static Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
         String preamble = argMultimap.getPreamble().trim();
