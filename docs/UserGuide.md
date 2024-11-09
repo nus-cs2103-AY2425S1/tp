@@ -114,6 +114,21 @@ for the team of AddressBook-Level 3.
 
 </box>
 
+<box type="info" seamless>
+
+**Notes about this user guide:**<br>
+
+- Please refer to this user guide whenever you feel something is wrong with the application to determine whether it is a genuine problem.
+- The **client** referred to in this user guide is the property owner or landlord who has engaged you to rent out and manage their property.
+- The **rental information** referred to in this user guide consists of the details of the property being rented, including key information for example address, rental start date, and other relevant property details.
+- The **customer** (as part of the rental information) referred to in this user guide is the tenant of the property managed by the client.
+- **Monthly rent** is equivalent to **monthly rent amount**.
+- **Deposit** is equivalent to **deposit amount**.
+- **Customer list** is equivalent to **customers**.
+- **Rent due date** is equivalent to **rental monthly payment date**.
+
+</box>
+
 ## Command Summary
 
 <box type="tip" seamless>
@@ -146,24 +161,27 @@ for the team of AddressBook-Level 3.
 
 </d-table>
 
+## Important keywords
+
 ## Parameter Constraints Table
 
 <d-table>
 
-| Parameters            | Description                                       | Constraints                                                                                                                                                                                                                                                                                                                                                           | Examples                                            |
-|-----------------------|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
-| `[NAME]`              | Client's name                                     | `Alphanumeric Characters`                                                                                                                                                                                                                                                                                                                                             | `Jason 1 Lee`, `Phua Chu Kang 2` , `123456789`      |
-| `[PHONE_NUMBER]`      | Client's phone number                             | `At least 3 Numeric Characters` without spaces.                                                                                                                                                                                                                                                                                                                       | `999`, `98123333` , `123123`                        |
-| `[EMAIL]`             | Client's email address                            | Two segments delimited by `@`. <br/> **First** segment to include `Alphanumeric` with optionally `+_.-` characters. <br/> **Second** segment to include `Alphanumeric` with optionally `-` character but to include a valid top-level domain (TLD). <br/> **Both** segments must only start with `Alphanumeric` characters excluding `_` and must not contain spaces. | `jasonlee@example.com`, `user.name+tag@example.com` |
-| `[TAG...]`            | Client's tags                                     | Only accepts `alphanumeric characters` without spaces.                                                                                                                                                                                                                                                                                                                | `FRIENDS`, `ANNOYING` , `LOVERBOY`                  |
-| `[ADDRESS]`           | Client's rental address                           | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
-| `[RENTAL_START_DATE]` | Client's rental start date                        | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
-| `[RENTAL_END_DATE]`   | Client's rental start date                        | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
-| `[MONTHLY_RENT_AMT]`  | Client's rent due day of the month                | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
-| `[DEPOSIT_AMT]`       | Client's rental deposit amount                    | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
-| `[CUSTOMER_LIST]`     | Client's rental customer list                     | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
-| `[CLIENT_INDEX]`      | Client index on the client list panel             | Only accepts a `Positive` number from `1` up till the `last index` shown on the list. The last index on the list must be less than or equals to `2147483647`.                                                                                                                                                                                                         | `1`                                                 |
-| `[RENTAL_INDEX]`      | Rental index on the rental information list panel | Only accepts a `Positive` number from `1` up till the `last index` shown on the list. The last index on the list must be less than or equals to `2147483647`.                                                                                                                                                                                                         | `1`                                                 |
+| Parameter name      | Description                                                                                                                             | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Examples                                                   | 
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
+| `NAME`              | Client's name                                                                                                                           | `Alphanumeric Characters`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `Jason 1 Lee`, `Phua Chu Kang 2`, `123456789`              |
+| `PHONE_NUMBER`      | Client's phone number                                                                                                                   | `At least 3 Numeric Characters` without spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `999`, `98123333`, `123123`                                |
+| `EMAIL`             | Client's email address                                                                                                                  | Two segments delimited by `@`. <br/> **First** segment to include `Alphanumeric` with optionally `+_.-` characters. <br/> **Second** segment to include `Alphanumeric` with optionally `-` character but to include a valid top-level domain (TLD). <br/> **Both** segments must only start with `Alphanumeric` characters excluding `_` and must not contain spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `jasonlee@example.com`, `user.name+tag@example.com`        |
+| `TAG`               | Client's tags                                                                                                                           | Only accepts `alphanumeric characters` without spaces.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `FRIENDS`, `ANNOYING`, `LOVERBOY`                          |
+| `ADDRESS`           | The address of the property managed by your client.                                                                                     | The value of `ADDRESS` can consist of any combination of `Unicode` characters, with a minimum length of one character.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `59 Ubi Ave 1 #06-05`, `18 Upper Boon Keng Road #01-1137`  |
+| `RENTAL_START_DATE` | The specific date (including day, month, and year) on which the rental period for the property, under your client's management, begins. | The value of `RENTAL_START_DATE` can be empty (no value is provided after the prefix `s/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENTAL_START_DATE` is not empty (a value is provided after the prefix `s/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be in the format `dd/mm/yyyy`, where `dd` represents the day, `mm` represents the month, and `yyyy` represents the year.<br>**2.** It must represents a valid date and fall within the range of `01/01/1900` to `31/12/2099`.<br>**3.** If the value of `RENTAL_END_DATE` is also specified and not empty, then the date represented by the value of `RENTAL_START_DATE` should be the same date or earlier than the date represented by the value of `RENTAL_END_DATE`.                                | `01/01/2024`, `01/06/2024`                                 |
+| `RENTAL_END_DATE`   | The specific date (including day, month, and year) on which the rental period for the property, under your client's management, ends.   | The value of `RENTAL_END_DATE` can be empty (no value is provided after the prefix `e/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENTAL_END_DATE` is not empty (a value is provided after the prefix `e/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be in the format `dd/mm/yyyy`, where `dd` represents the day, `mm` represents the month, and `yyyy` represents the year.<br>**2.** It must represents a valid date and fall within the range of `01/01/1900` to `31/12/2099`.<br>**3.** If the value of `RENTAL_START_DATE` is also specified and not empty, then the date represented by the value of `RENTAL_END_DATE` should be the same date or later than the date represented by the value of `RENTAL_START_DATE`.                                    | `31/12/2027`, `01/02/2026`                                 |
+| `RENT_DUE_DATE`     | The specific day (of the month) on which the rent payment is due for the property managed by your client.                               | The value of `RENT_DUE_DATE` can be empty (no value is provided after the prefix `dd/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `RENT_DUE_DATE` is not empty (a value is provided after the prefix `dd/` for the specified command), it must adhere to the following conditions:<br>**1.** It must be an integer within the range of `1` to `31`.<br>**2.** It must not have leading zeroes (for example, `01` or `001` are not valid).                                                                                                                                                                                                                                                                                                                                                                          | `1`, `15`, `30`                                            |
+| `MONTHLY_RENT`      | The monthly rent amount for the property managed by your client.                                                                        | The value of `MONTHLY_RENT` can be empty (no value is provided after the prefix `m/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `MONTHLY_RENT` is not empty (a value is provided after the prefix `m/` for the specified command), it must adhere to the following conditions: <br>**1.** It must be a number greater than or equal to 0.<br>**2.** If it is a decimal, it must have exactly 2 decimal places (for example, `100.`, `100.0` or `100.001` are not valid).<br>**3.** It must not have leading zeroes (for example, `0100` or `00100` are not valid).                                                                                                                                                                                                                                                 | `1000`, `1000.00`, `0`                                     |
+| `DEPOSIT`           | The security deposit amount for the property managed by your client, paid by the tenant at the start of the lease.                      | The value of `DEPOSIT` can be empty (no value is provided after the prefix `d/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `DEPOSIT` is not empty (a value is provided after the prefix `d/` for the specified command), it must adhere to the following conditions: <br>**1.** It must be a number greater than or equal to 0.<br>**2.** If it is a decimal, it must have exactly 2 decimal places (for example, `100.`, `100.0` or `100.001` are not valid).<br>**3.** It must not have leading zeroes (for example, `0100` or `00100` are not valid).                                                                                                                                                                                                                                                           | `2000`, `2000.00`, `0`                                     |
+| `CUSTOMER_LIST`     | The name(s) of the tenant(s) for the property managed by your client.                                                                   | The value of `CUSTOMER_LIST` can be empty (no value is provided after the prefix `cl/` for the specified command), in which case it will be treated as an unspecified value (`—`).<br>However, if the value of `CUSTOMER_LIST` is not empty (a value is provided after the prefix `cl/` for the specified command), it must adhere to the following conditions:<br>**1.** It can consist of any combination of `Unicode` characters.<br>**2.** It must have a length of at least one character.<br>**3.** If it does not contain a `;` character (semicolon), it represents the name of a single tenant.<br>**4.** If it contains the `;` character(s) (semicolon), it is treated as a list of tenant names, with each name separated by a `;` and name cannot be empty.<br>**5.** If it contains the `;` character(s) (semicolon), `;` should not appear at the beginning or end of the value. | `David Ng`, `Steven Ang 2;David Tan`, `123, Dexter;Joshua` |
+| `CLIENT_INDEX`      | Client index on the client list panel                                                                                                   | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `1`                                                        |
+| `RENTAL_INDEX`      | Rental index on the rental information list panel                                                                                       | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `1`                                                        |
 
 </d-table>
 
@@ -171,6 +189,7 @@ for the team of AddressBook-Level 3.
 
 **Additional constraints:** For future enhancements and improvements to the parameter constraints, please visit
 our [developer guide](https://ay2425s1-cs2103t-t15-1.github.io/tp/DeveloperGuide.html#appendix-future-enhancements).
+
 </box>
 
 ## Duplicate Client Detection
@@ -214,6 +233,41 @@ An **initial client** with the name: `Jason Lee`, phone number: `91231231` and e
 
 </box>
 
+## Duplicate Rental Information Detection
+
+Rental information is considered a **duplicate** **if and only if** the `ADDRESS` parameter is **exactly the same**, including case sensitivity.
+
+This is to allow you to have a greater flexibility of manipulating the rental information.
+
+**For example:**
+
+<box type="info" light>
+
+An **initial rental information** with the address `201 Bukit Batok Street 21 #10-163`, rental start date `01/01/2024` and monthly rent amount `3200`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified.
+
+</box>
+
+<box type="success" light>
+
+The following are **NOT DUPLICATES** of the initial rental information:
+
+1. Rental information with the address `201 BUKIT BATOK STREET 21 #10-163`, rental start date `01/01/2024` and monthly rent amount `3200`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified (as `—`).
+2. Rental information with the address `201 BUKIT Batok Street 21 #10-163`, rental start date `01/01/2024` and monthly rent amount `3500`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified (as `—`).
+3. Rental information with the address `201 Bukit BATOK Street 21 #10-163`, rental start date `01/01/2024`, monthly rent amount `3200` and rental end date `31/12/2024`. The values for rent due date, deposit amount, and customer list are unspecified (as `—`).
+4. Rental information with the address `201 BuKiT BaToK StReEt 21 #10-163`, rental start date `01/01/2024`, monthly rent amount `3200`, rental end date `31/12/2024`, rent due date `10`. The values for deposit amount and customer list are unspecified (as `—`).
+5. Rental information with the address `201 bukit batok street 21 #10-163`, rental start date `01/06/2024` and monthly rent amount `3200`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified (as `—`).
+
+</box>
+
+<box type="wrong" light>
+
+The following are **DUPLICATES** of the initial rental information:
+
+1. Rental information with the address `201 Bukit Batok Street 21 #10-163`, rental start date `01/02/2024` and monthly rent amount `3300`. The values for rental end date, rent due date, deposit amount, and customer list are unspecified.
+2. Rental information with the address `201 Bukit Batok Street 21 #10-163` and rental start date `01/12/2024`. The values for monthly rent amount, rental end date, rent due date, deposit amount, and customer list are unspecified.
+
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -254,7 +308,8 @@ Format: `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}…​`
 **Constraints:**
 
 1. A client must have at least **either** **one phone number** or **one email address**.
-   </box>
+
+</box>
 
 <box type="tip" seamless>
 
@@ -315,8 +370,8 @@ Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {
 **Example inputs**:
 
 1. `radd 1 a/140 Robinson Road, #03-05, Chow House m/3200 dd/10 d/0`
-2. `radd 1 a/Blk 26 Defu Lane 10 #01-190 e/31/10/2024 m/2350 dd/15`
-3. `radd 3 a/25 Jalan Sempadan #02-06 s/01/09/2024 e/31/08/2025 cl/Steven Lim dd/20 m/2750 d/8250`
+2. `radd 1 a/Blk 26 Defu Lane 10 #01-190 e/31/10/2024 m/2350 dd/15 cl/Dominic`
+3. `radd 3 a/25 Jalan Sempadan #02-06 s/01/09/2024 e/31/08/2025 cl/Steven Lim;Jessica dd/20 m/2750 d/8250`
 
 </box>
 
@@ -325,8 +380,8 @@ Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {
 **Example outputs**:
 
 1. `New rental information is added to the client: Address: 140 Robinson Road, #03-05, Chow House; Rental Start Date: —; Rental End Date: —; Rent Due Date: 10; Monthly Rent: $3200.00; Deposit: $0.00; Customer List: —`
-2. `New rental information is added to the client: Address: Blk 26 Defu Lane 10 #01-190; Rental Start Date: —; Rental End Date: 31 Oct 2024; Rent Due Date: 15; Monthly Rent: $2350.00; Deposit: —; Customer List: —`
-3. `New rental information is added to the client: Address: 25 Jalan Sempadan #02-06; Rental Start Date: 01 Sep 2024; Rental End Date: 31 Aug 2025; Rent Due Date: 20; Monthly Rent: $2750.00; Deposit: $8250.00; Customer List: Steven Lim`
+2. `New rental information is added to the client: Address: Blk 26 Defu Lane 10 #01-190; Rental Start Date: —; Rental End Date: 31 Oct 2024; Rent Due Date: 15; Monthly Rent: $2350.00; Deposit: —; Customer List: Dominic`
+3. `New rental information is added to the client: Address: 25 Jalan Sempadan #02-06; Rental Start Date: 01 Sep 2024; Rental End Date: 31 Aug 2025; Rent Due Date: 20; Monthly Rent: $2750.00; Deposit: $8250.00; Customer List: Steven Lim;Jessica`
 
 </box>
 
@@ -416,7 +471,8 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 * A client's `NAME`, `PHONE_NUMBER` and `EMAIL` will be replaced by the provided value in the command, given that it is
   not a [duplicate](#duplicate-client-detection).
 * All the client's existing `TAG`s will be removed and replaced by the provided value in the command.
-  </box>
+  
+</box>
 
 <box type="tip" seamless>
 
@@ -427,7 +483,8 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 * You can **remove** all the client's existing tags by providing an empty input after `t/`.
 * A client's name with special characters, such as `Ravi S/O Ramasamy` will not be accepted. Please omit any special
   character within the name such as `Ravi SO Ramasamy`.
-  </box>
+ 
+</box>
 
 <box type="info" light>
 
@@ -490,7 +547,7 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 **Example inputs**:
 
 1. `redit 1 r/1 a/10 North Bridge Rd #02-5125 m/3000 d/0`
-2. `redit 1 r/2 e/31/12/2024 dd/1`
+2. `redit 1 r/2 e/31/12/2024 dd/1 cl/Alice;Bob`
 3. `redit 3 r/1 s/01/01/2025 e/ d/12000 cl/Tan Eng Heng`
 
 </box>
@@ -500,7 +557,7 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
 **Example outputs**:
 
 1. `Edited Client's Rental Information: Address: 10 North Bridge Rd #02-5125; Rental Start Date: 01 Apr 2018; Rental End Date: 31 Dec 2024; Rent Due Date: 15; Monthly Rent: $3000.00; Deposit: $0.00; Customer List: Jackson;Yummi`
-2. `Edited Client's Rental Information: Address: Blk 112 Bishan Ave 5, #15-521; Rental Start Date: 01 Jan 2019; Rental End Date: 31 Dec 2024; Rent Due Date: 1; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Ryan Low;Matthew`
+2. `Edited Client's Rental Information: Address: Blk 112 Bishan Ave 5, #15-521; Rental Start Date: 01 Jan 2019; Rental End Date: 31 Dec 2024; Rent Due Date: 1; Monthly Rent: $2700.00; Deposit: $8100.00; Customer List: Alice;Bob`
 3. `Edited Client's Rental Information: Address: Blk 8 Hougang Ave 10, #11-2411; Rental Start Date: 01 Jan 2025; Rental End Date: —; Rent Due Date: 15; Monthly Rent: $1500.00; Deposit: $12000.00; Customer List: Tan Eng Heng`
 
 </box>
@@ -718,7 +775,8 @@ Please set up the following commands before proceeding with the example inputs a
 11. Press `↓ down-arrow key` on the keyboard.
 12. Press `↓ down-arrow key` on the keyboard.
 13. Press `↓ down-arrow key` on the keyboard.
-    </box>
+
+</box>
 
 <box type="success" light>
 
@@ -767,9 +825,22 @@ Entering the `↹ Tab key` will help to fill or append to the command input with
 <box type="info" seamless>
 
 **Note:**
+* You should not rely on autofill too much as this feature is meant to provide some simple helps only, may not be fully accurate.
+* Autofill only help you to get "started" with typing.
+* Autofill for prefix is not fully customized for each command, it may have extra prefix that is not used by the command.
+* Autofill for prefix may not be working for some commands which does not require extra parameters such as `list`, or command that does not need prefix such as `cdelete`.
 
-* You should not rely on autofill too much as this feature is meant to provide some simple helps only.
-* Autofill for prefix may not be working for some commands which does not require extra parameters.
+</box>
+
+<box type="info" theme="warning" light>
+
+**List of helping words** (separated by comma (,)):
+1. For autofills for **command name**:
+   * cadd, cdelete, cedit, clear, exit, export, find, help, import, list, radd, redit, rdelete, rview, sort.
+2. For autofills for **prefix**:
+   * e/, n/, p/, k/, t/, a/, cl/, d/, dd/, e/, m/, s/, c/, r/.
+3. For autofills for **value of prefix**:
+   * Block, Blk, Ave, Avenue, Tan, Lim, Lee, Ng, Ong, Wong, Goh, Chua, Chan, Koh, Teo, Ang, Yeo, Tay, Ho, Low, Toh, Sim, Chong, Chia, Seah, Sarah, Sofia, Sofea, Sophia, Hana, Hannah, Alyssa, Emily, Emma, Charlotte, Chloe, Alesha, Alicia, Amanda, Sofie, Sophie, Elizabeth, Natalie, Aisyah, Aishah, Olivia, Leia, Keira, Kiera, Haley, Haily, Megan, Ethan, Aden, Aiden, Aidan, Eden, Nathan, Nathaniel, Lucas, Isaac, Caleb, Evan, Matthew, Josh, Joshua, Adam, Asher, Jayden, Rayyan, Julian, Julien, Ian, Cayden, Kayden, Luke, Matthias, Matthew, George, Gabriel, Winston, block, BLOCK, BLK, AVE, AVENUE, Steven, David, Rayan, Ryan.
 
 </box>
 
