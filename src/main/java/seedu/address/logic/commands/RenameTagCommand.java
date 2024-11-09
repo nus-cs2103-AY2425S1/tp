@@ -49,7 +49,7 @@ public class RenameTagCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        ObservableList<Person> persons = model.getPersonList();
+        ObservableList<Person> persons = model.getFilteredPersonList();
         boolean found = false;
         boolean duplicates = false;
         for (int i = 0; i < persons.size(); i++) {
@@ -71,14 +71,20 @@ public class RenameTagCommand extends Command {
         }
         model.updateFilteredPersonList(PREDICATE_DO_NOT_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         if (!found) {
             throw new CommandException(String.format(MESSAGE_TAG_NOT_FOUND, oldTag));
-        } if (duplicates) {
+        }
+        if (duplicates) {
             return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, newTag)
                     + String.format(MESSAGE_DUPLICATES, newTag));
         } else {
             return new CommandResult(String.format(MESSAGE_RENAME_TAG_SUCCESS, newTag));
         }
+    }
+
+    public void updatePersonTag(String oldTag, String newTag, Person person) {
+
     }
 
     @Override
