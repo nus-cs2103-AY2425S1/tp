@@ -14,15 +14,18 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getParentOnlyAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
@@ -33,35 +36,36 @@ public class BatchUnmarkCommandTest {
 
     @Test
     public void execute_unfilteredListWithStudents_success() {
-        String expectedMessage = String.format(BatchUnmarkCommand.MESSAGE_BATCH_UNMARK_SUCCESS);
+        String expectedMessage = String.format(BatchUnmarkCommand.MESSAGE_BATCH_UNMARK_SUCCESS, "Alice Pauline, "
+                + "Benson Meier, " + "Carl Kurz, Elle Meyer, Fiona Kunz");
         BatchUnmarkCommand batchUnmarkCommand = new BatchUnmarkCommand();
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Student newAlice = new StudentBuilder().withName("Alice Pauline")
+        Student newAlice = new StudentBuilder().withName("Alice Pauline").withSex("F")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
                 .withTags("friends").withAttendanceCount("2").build();
-        Student newBenson = new StudentBuilder().withName("Benson Meier")
+        Student newBenson = new StudentBuilder().withName("Benson Meier").withSex("M")
                 .withRole("Student").withAttendanceCount("2")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withEmail("johnd@example.com").withPhone("98765432")
                 .withTags("owesMoney", "friends").build();
-        Student newCarl = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
+        Student newCarl = new StudentBuilder().withName("Carl Kurz").withSex("M").withPhone("95352563")
                 .withRole("Student").withAttendanceCount("2")
                 .withEmail("heinz@example.com").withAddress("wall street").build();
-        Person newDaniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+        Person newDaniel = new PersonBuilder().withName("Daniel Meier").withSex("M").withPhone("87652533")
                 .withRole("Parent")
                 .withEmail("cornelia@example.com").withAddress("10th street")
                 .withTags("friends").build();
-        Student newElle = new StudentBuilder().withName("Elle Meyer").withPhone("9482224")
+        Student newElle = new StudentBuilder().withName("Elle Meyer").withSex("F").withPhone("9482224")
                 .withRole("student").withAttendanceCount("2")
                 .withEmail("cornelia@example.com").withAddress("michegan ave").build();
-        Person newCarlMeier = new PersonBuilder().withName("Carl Meier").withPhone("876452533")
+        Person newCarlMeier = new PersonBuilder().withName("Carl Meier").withSex("M").withPhone("876452533")
                 .withRole("Parent")
                 .withEmail("cornelia@example.com").withAddress("10th street").withTags("omg").build();
-        Student newFiona = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
+        Student newFiona = new StudentBuilder().withName("Fiona Kunz").withSex("F").withPhone("9482427")
                 .withRole("sTuDenT").withAttendanceCount("2")
                 .withEmail("lydia@example.com").withAddress("little tokyo").build();
-        Person newGeorge = new PersonBuilder().withName("George Best").withPhone("9482442")
+        Person newGeorge = new PersonBuilder().withName("George Best").withSex("M").withPhone("9482442")
                 .withRole("parent")
                 .withEmail("anna@example.com").withAddress("4th street").build();
         expectedModel.setPerson(ALICE, newAlice);
@@ -85,12 +89,12 @@ public class BatchUnmarkCommandTest {
 
     @Test
     public void execute_filteredListWithStudents_success() {
-        String expectedMessage = String.format(BatchUnmarkCommand.MESSAGE_BATCH_UNMARK_SUCCESS);
+        String expectedMessage = String.format(BatchUnmarkCommand.MESSAGE_BATCH_UNMARK_SUCCESS, "Alice Pauline");
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate("Alice");
         model.updateFilteredPersonList(predicate);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        Student newAlice = new StudentBuilder().withName("Alice Pauline")
+        Student newAlice = new StudentBuilder().withName("Alice Pauline").withSex("F")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
                 .withTags("friends").withAttendanceCount("2").build();
@@ -113,29 +117,38 @@ public class BatchUnmarkCommandTest {
     @Test
     public void createNewStudentWithUnmarkedAttendance_success() {
         BatchUnmarkCommand batchUnmarkCommand = new BatchUnmarkCommand();
-        Student student = new StudentBuilder().withName("Alice Pauline")
+        Student student = new StudentBuilder().withName("Alice Pauline").withSex("F")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
                 .withTags("fren").withAttendanceCount("3").build();
         Student unmarkedStudent = batchUnmarkCommand.createNewStudentWithUnmarkedAttendance(student);
-        Student expectedStudent = new StudentBuilder().withName("Alice Pauline")
+        Student expectedStudent = new StudentBuilder().withName("Alice Pauline").withSex("F")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
                 .withTags("fren").withAttendanceCount("2").build();
         assertEquals(expectedStudent, unmarkedStudent);
 
-        Student zeroAttendanceStudent = new StudentBuilder().withName("Paul Pauline")
+        Student zeroAttendanceStudent = new StudentBuilder().withName("Paul Pauline").withSex("M")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
                 .withTags("fren").withAttendanceCount("0").build();
         Student unmarkedZeroAttendanceStudent = batchUnmarkCommand
                 .createNewStudentWithUnmarkedAttendance(zeroAttendanceStudent);
-        Student expectedZeroAttendanceUnmarkedStudent = new StudentBuilder().withName("Paul Pauline")
+        Student expectedZeroAttendanceUnmarkedStudent = new StudentBuilder().withName("Paul Pauline").withSex("M")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
                 .withTags("fren").withAttendanceCount("0").build();
         assertEquals(expectedZeroAttendanceUnmarkedStudent, unmarkedZeroAttendanceStudent);
 
+    }
+
+    @Test
+    public void testFormatUnmarkedStudents_multipleStudents_returnsFormattedString() throws Exception {
+        String expectedString = "Alice Pauline, Benson Meier";
+        List<Student> students = new ArrayList();
+        students.add(ALICE);
+        students.add(BENSON);
+        assertEquals(expectedString, BatchUnmarkCommand.formatUnmarkedStudents(students));
     }
 
     @Test

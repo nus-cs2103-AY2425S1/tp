@@ -19,8 +19,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonContainsTagsPredicate;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.predicates.PersonContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StudentBuilder;
@@ -53,16 +53,16 @@ class BatchEditCommandTest {
         PersonContainsTagsPredicate predicate = new PersonContainsTagsPredicate(Set.of(friendsTag));
         BatchEditCommand batchEditCommand = new BatchEditCommand(friendsTag, frenTag, predicate);
 
-        Student changedAlice = new StudentBuilder().withName("Alice Pauline")
+        Student changedAlice = new StudentBuilder().withName("Alice Pauline").withSex("F")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
                 .withPhone("94351253").withRole("student")
                 .withTags("fren").withAttendanceCount("3").build();
-        Student changedBenson = new StudentBuilder().withName("Benson Meier")
+        Student changedBenson = new StudentBuilder().withName("Benson Meier").withSex("M")
                 .withRole("Student").withAttendanceCount("3")
                 .withAddress("311, Clementi Ave 2, #02-25")
                 .withEmail("johnd@example.com").withPhone("98765432")
                 .withTags("owesMoney", "fren").build();
-        Person changedDaniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
+        Person changedDaniel = new PersonBuilder().withName("Daniel Meier").withSex("M").withPhone("87652533")
                 .withRole("Parent")
                 .withEmail("cornelia@example.com").withAddress("10th street")
                 .withTags("fren").build();

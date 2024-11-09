@@ -19,9 +19,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AttendanceCount;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 
 
 public class UnmarkCommandTest {
@@ -36,7 +36,8 @@ public class UnmarkCommandTest {
         String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_PERSON_SUCCESS,
                 Messages.getNameOnly(personToUnmark));
 
-        Person newPerson = new Person(personToUnmark.getName(), personToUnmark.getRole(), personToUnmark.getPhone(),
+        Person newPerson = new Person(personToUnmark.getName(), personToUnmark.getSex(), personToUnmark.getRole(),
+                personToUnmark.getPhone(),
                 personToUnmark.getEmail(), personToUnmark.getAddress(), personToUnmark.getTags(),
                 new AttendanceCount(incrementedAttendanceCount.toString()));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

@@ -17,7 +17,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.BatchDeleteCommand;
-import seedu.address.model.person.PersonContainsTagsPredicate;
+import seedu.address.model.person.predicates.PersonContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 

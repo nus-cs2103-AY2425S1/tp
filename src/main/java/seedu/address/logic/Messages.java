@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.prefix.Prefix;
 import seedu.address.model.person.Person;
 
 /**
@@ -43,6 +43,8 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
+                .append("; Sex: ")
+                .append(person.getSex())
                 .append("; Role: ")
                 .append(person.getRole())
                 .append("; Phone: ")

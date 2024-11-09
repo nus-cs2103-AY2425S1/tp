@@ -11,8 +11,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonContainsTagsPredicate;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.predicates.PersonContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -91,6 +91,7 @@ public class BatchEditCommand extends Command {
         withoutOldTag.add(newTag);
         return new Person(
                 person.getName(),
+                person.getSex(),
                 person.getRole(),
                 person.getPhone(),
                 person.getEmail(),
@@ -107,6 +108,7 @@ public class BatchEditCommand extends Command {
         withoutOldTag.add(newTag);
         return new Student(
                 student.getName(),
+                student.getSex(),
                 student.getRole(),
                 student.getPhone(),
                 student.getEmail(),

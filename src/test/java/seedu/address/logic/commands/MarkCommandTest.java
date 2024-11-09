@@ -19,9 +19,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AttendanceCount;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 
 public class MarkCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -36,7 +36,8 @@ public class MarkCommandTest {
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
                     Messages.getNameOnly(studentToMark));
 
-        Student newPerson = new Student(studentToMark.getName(), studentToMark.getRole(), studentToMark.getPhone(),
+        Student newPerson = new Student(studentToMark.getName(), studentToMark.getSex(), studentToMark.getRole(),
+                studentToMark.getPhone(),
                 studentToMark.getEmail(), studentToMark.getAddress(), studentToMark.getTags(),
                 new AttendanceCount(incrementedAttendanceCount.toString()));
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

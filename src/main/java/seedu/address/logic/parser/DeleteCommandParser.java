@@ -13,10 +13,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.prefix.PrefixHandler;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 
@@ -25,6 +26,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
+    private PrefixHandler prefixHandler = new PrefixHandler();
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
@@ -40,7 +42,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
 
-        String argumentType = getArgumentType(argMultimap);
+        String argumentType = prefixHandler.getArgumentType(argMultimap);
+        System.out.println(argumentType);
 
         switch (argumentType) {
 
@@ -74,28 +77,4 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     }
 
-
-    public String getArgumentType(ArgumentMultimap argMultimap) {
-
-        if (!argMultimap.getPreamble().isEmpty()) {
-            return "INDEX";
-        }
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            return "NAME";
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            return "PHONE";
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            return "EMAIL";
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            return "ADDRESS";
-        }
-        if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
-            return "TAG";
-        }
-
-        return "DEFAULT";
-    }
 }

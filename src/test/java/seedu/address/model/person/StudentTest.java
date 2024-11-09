@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -75,6 +76,10 @@ public class StudentTest {
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different sex -> returns false
+        editedAlice = new StudentBuilder(ALICE).withSex(VALID_SEX_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different address -> returns false
         editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -86,9 +91,10 @@ public class StudentTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", role=" + ALICE.getRole()
-                + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
-                + ", tags=" + ALICE.getTags() + ", attendanceCount=" + ALICE.getAttendanceCount() + "}";
+        String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", sex=" + ALICE.getSex()
+                + ", role=" + ALICE.getRole() + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail()
+                + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
+                + ", attendanceCount=" + ALICE.getAttendanceCount() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
