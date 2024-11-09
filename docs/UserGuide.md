@@ -110,6 +110,8 @@ data_coNdUctorS is a **desktop address book application for managing contact det
 
 * The COMMAND_WORD is case-insensitive. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
 
+* A limit of 1000 characters //& REPHRASE IF NEEDED
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
