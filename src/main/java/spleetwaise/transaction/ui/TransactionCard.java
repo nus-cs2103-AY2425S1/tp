@@ -8,8 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.TilePane;
 import spleetwaise.commons.ui.UiPart;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -18,13 +18,6 @@ import spleetwaise.transaction.model.transaction.Transaction;
  */
 public class TransactionCard extends UiPart<Region> {
     private static final String FXML = "TransactionListCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX. As a consequence, UI
-     * elements' variable names cannot be set to such keywords or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
 
     public final Transaction transaction;
 
@@ -43,7 +36,7 @@ public class TransactionCard extends UiPart<Region> {
     @FXML
     private Label dayMonth;
     @FXML
-    private FlowPane categories;
+    private TilePane categories;
 
     /**
      * Creates a {@code TransactionCard} with the given {@code Transaction} and index to display.
@@ -72,12 +65,18 @@ public class TransactionCard extends UiPart<Region> {
             amount.setStyle("-fx-text-fill: green;");
         }
         amount.setText("$" + transaction.getAmount().toString());
+
+        // Configure TilePane for categories
+        categories.setPrefColumns(3); // Set number of columns before wrapping
+        categories.setHgap(5);
+        categories.setVgap(5);
+
         transaction.getCategories().stream()
                 .sorted(Comparator.comparing(category -> category.category))
                 .forEach(category -> {
                     Label categoryLabel = new Label(category.category);
-                    categoryLabel.setWrapText(true);
-                    categoryLabel.setPrefWidth(60); // Adjust this width as needed
+                    categoryLabel.setMaxWidth(80); // Set a max width for each label
+                    categoryLabel.setWrapText(true); // Enable text wrapping within each category
                     categories.getChildren().add(categoryLabel);
                 });
     }
