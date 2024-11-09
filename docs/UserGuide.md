@@ -254,6 +254,13 @@ Otherwise, the command will not be executed and display an error message in Resu
 In NovaCare, these commands will allow you to modify your list of patients to suit your needs.
 <br></br>
 
+<box type="info" seamless>
+
+**Note:**
+* For all commands, parts of the command in square brackets are optional parameters that can be included in or omitted from the command. 
+  * For example: `[t/TAG]`
+</box>
+
 #### 6.2.1 Adding a patient: `add`
 
 Adds a patient's details to the system.
@@ -783,6 +790,6 @@ As you read through the user guide, you may come across some terms that are unfa
 | **Index**          | An index is a unique number assigned to each item in a GUI list to identify and reference the item.                                                                                |
 | **Tag**            | A tag is a label that is assigned to a patient to take note of their medical conditions.                                                                                           |
 | **Priority Level** | A priority level is a value assigned to a patient to indicate the urgency of their medical condition. 1 indicates a critical condition while 3 indicates a non-critical condition. |
-| **[word]**         | Words in square brackets are optional parameters that can be included in the command.                                                                                              |
+| **[Word]**         | Words in square brackets are optional parameters that can be included in the command.                                                                                              |
 
 [⬆️ Back to Table of Contents](#table-of-contents)
