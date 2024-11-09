@@ -38,6 +38,8 @@ public class AgeTest {
         assertTrue(Age.isValidAge("27")); // between lower and upper limit
         assertTrue(Age.isValidAge("0")); // lower limit
         assertTrue(Age.isValidAge("150")); // upper limit
+        assertTrue(Age.isValidAge("00001")); // leading zero input
+        assertTrue(Age.isValidAge("00000")); // leading zero input with value 0
     }
 
     @Test
