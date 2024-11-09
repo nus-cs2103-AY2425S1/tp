@@ -23,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.testutil.ModelStub;
@@ -244,6 +245,27 @@ public class ExportConsultCommandTest {
         Path anotherExpected = Paths.get(System.getProperty("user.home"), anotherFilename + ".csv");
         Path anotherActual = exportCommand.getHomeFilePath(anotherFilename);
         assertEquals(anotherExpected, anotherActual);
+    }
+
+    @Test
+    public void execute_filenameWithWildcard_throwsCommandException() throws IOException {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test*", false, dataDir);
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportConsultCommand.INVALID_FILENAME_MESSAGE, '*'));
+    }
+
+    @Test
+    public void execute_filenameWithForwardSlash_throwsCommandException() throws IOException {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test/file", false, dataDir);
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportConsultCommand.INVALID_FILENAME_MESSAGE, '/'));
+    }
+
+    @Test
+    public void execute_filenameWithBackslash_throwsCommandException() throws IOException {
+        ExportConsultCommand exportCommand = new ExportConsultCommand("test\\file", false, dataDir);
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '\\'));
     }
 
     private class ModelStubWithConsultations extends ModelStub {

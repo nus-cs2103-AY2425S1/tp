@@ -624,6 +624,27 @@ public class ExportCommandTest {
         assertTrue(lines.get(1).contains(sampleStudent.getName().fullName));
     }
 
+    @Test
+    public void execute_filenameWithWildcard_throwsCommandException() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test*", false, dataDir);
+        assertThrows(CommandException.class,
+                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '*'), () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void execute_filenameWithForwardSlash_throwsCommandException() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test/file", false, dataDir);
+        assertThrows(CommandException.class,
+                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '/'), () -> exportCommand.execute(model));
+    }
+
+    @Test
+    public void execute_filenameWithBackslash_throwsCommandException() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test\\file", false, dataDir);
+        assertThrows(CommandException.class,
+                String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '\\'), () -> exportCommand.execute(model));
+    }
+
     /**
      * Helper method to throw a fail
      * @param message Error message to pass to AssertionError

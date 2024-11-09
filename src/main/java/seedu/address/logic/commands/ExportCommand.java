@@ -25,7 +25,6 @@ public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
     public static final String FORCE_FLAG = "-f";
     public static final CommandType COMMAND_TYPE = CommandType.STUDENT;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the current list of students to a CSV file. "
             + "Parameters: FILENAME " + "[" + FORCE_FLAG + "] "
             + "\nExample: " + COMMAND_WORD + " students"
@@ -37,6 +36,9 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_HOME_FILE_EXISTS =
             "File %1$s already exists in home directory. Use -f flag to overwrite.";
     public static final String MESSAGE_SUCCESS_WITH_COPY = "Exported %1$d students to %2$s and %3$s";
+    public static final String INVALID_CHARS = "*/\\";
+    public static final String INVALID_FILENAME_MESSAGE =
+            "Filename cannot contain '%s'. Only alphanumeric characters, spaces, and basic punctuation are allowed.";
     private static final Logger logger = LogsCenter.getLogger(ExportCommand.class);
 
     private final String filename;
@@ -79,9 +81,29 @@ public class ExportCommand extends Command {
         return Paths.get(System.getProperty("user.home"), filename + ".csv");
     }
 
+    /**
+     * Validates if filename is valid
+     *
+     * @param filename String representing filename to be validated
+     */
+    private void validateFilename(String filename) throws CommandException {
+        // Check for invalid characters
+        for (char c : INVALID_CHARS.toCharArray()) {
+            if (filename.indexOf(c) >= 0) {
+                throw new CommandException(String.format(INVALID_FILENAME_MESSAGE, c));
+            }
+        }
+
+        // Additional validation to ensure it's just a filename
+        if (Paths.get(filename).getNameCount() > 1) {
+            throw new CommandException("Filename cannot contain path components");
+        }
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert model != null : "Model cannot be null";
+        validateFilename(filename);
         List<Student> studentList = model.getFilteredStudentList();
         logger.info("Starting export for " + studentList.size() + " students");
 
