@@ -6,7 +6,7 @@ Participant ":LogicManager" as logic LOGIC_COLOR
 Participant ":AddressBookParser" as abp LOGIC_COLOR
 Participant ":TransactionBookParser" as tbp LOGIC_COLOR
 Participant ":AddCommandParser" as acp LOGIC_COLOR
-Participant ":command:AddCommand" as ac LOGIC_COLOR
+Participant "command:AddCommand" as ac LOGIC_COLOR
 
 [-> logic : execute
 activate logic
