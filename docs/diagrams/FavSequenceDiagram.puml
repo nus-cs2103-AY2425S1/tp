@@ -53,14 +53,14 @@ activate XXFavCommand
 XXFavCommand -> Model : get companyToEdit
 activate Model
 
-Model -> XXFavCommand : companyToEdit
+Model --> XXFavCommand : companyToEdit
 deactivate Model
 
 create Company
 XXFavCommand -> Company : create (un)favourited Company
 activate Company
 
-Company -> XXFavCommand : editedCompany
+Company --> XXFavCommand : editedCompany
 deactivate Company
 
 XXFavCommand -> Model : setCompany(companyToEdit, editedCompany)

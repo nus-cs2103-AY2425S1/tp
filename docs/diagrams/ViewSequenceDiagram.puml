@@ -53,14 +53,14 @@ activate ViewCommand
 ViewCommand -> Model : get companyToView
 activate Model
 
-Model -> ViewCommand : companyToView
+Model --> ViewCommand : companyToView
 deactivate Model
 
 create CompanyToViewPredicate
 ViewCommand -> CompanyToViewPredicate : new CompanyToViewPredicate(companyToView)
 activate CompanyToViewPredicate
 
-CompanyToViewPredicate -> ViewCommand : p
+CompanyToViewPredicate --> ViewCommand : p
 deactivate CompanyToViewPredicate
 
 ViewCommand -> Model : viewAppDetails(companyToView)
