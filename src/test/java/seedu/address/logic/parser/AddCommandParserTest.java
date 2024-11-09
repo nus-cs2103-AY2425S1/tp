@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC_2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC_3;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_RELATIONSHIP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -147,6 +149,12 @@ public class AddCommandParserTest {
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + RELATIONSHIP_DESC_BOB,
+                Phone.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC_2 + EMAIL_DESC_BOB + RELATIONSHIP_DESC_BOB,
+                Phone.MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC_3 + EMAIL_DESC_BOB + RELATIONSHIP_DESC_BOB,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
