@@ -350,7 +350,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
 
 **Extensions**:
 - 1a. The list is empty 
-  - 1a1. HiredFiredPro displays a message indicating there are no candidates to delete.
+  - 1a1. HiredFiredPro displays an error message
     Use case ends.
 
 - 1b. An invalid index is entered: 
