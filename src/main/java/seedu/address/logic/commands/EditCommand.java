@@ -23,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
@@ -85,8 +86,10 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Model modelWithoutPersonToEdit = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        modelWithoutPersonToEdit.deletePerson(personToEdit);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (modelWithoutPersonToEdit.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
