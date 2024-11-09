@@ -175,6 +175,8 @@ Adds a person to the address book.
 
 Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDDING]…​`
 
+* **People in Wedlinker cannot have the same names**
+  * So, if `John Doe` is already in Wedlinker, adding another `John Doe` with different details will not work
 * If the tags or weddings specified in the add command do not exist yet, they will be created
 
 <box type="tip" seamless>
