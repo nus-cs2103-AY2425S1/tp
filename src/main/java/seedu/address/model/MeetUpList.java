@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.LogicManager;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.UniqueMeetUpList;
 
@@ -17,7 +16,9 @@ import seedu.address.model.meetup.UniqueMeetUpList;
  * Duplicates are not allowed (by .isSameMeetUp comparison)
  */
 public class MeetUpList implements ReadOnlyMeetUpList {
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+
+    private final Logger logger = LogsCenter.getLogger(MeetUpList.class);
+
     private final UniqueMeetUpList meetUps;
 
     /*
@@ -31,7 +32,8 @@ public class MeetUpList implements ReadOnlyMeetUpList {
         meetUps = new UniqueMeetUpList();
     }
 
-    public MeetUpList() {}
+    public MeetUpList() {
+    }
 
     /**
      * Creates an MeetUpList using the meetUps in the {@code toBeCopied}
@@ -48,6 +50,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      * {@code meetUps} must not contain duplicate meetUps.
      */
     public void setMeetUps(List<MeetUp> meetUps) {
+        requireNonNull(meetUps);
         this.meetUps.setMeetUps(meetUps);
     }
 
@@ -74,6 +77,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      * The meetUp must not already exist in the meet up list.
      */
     public void addMeetUp(MeetUp m) {
+        logger.info(String.format("Adding [%s] to meet up list", m.getSubject()));
         meetUps.add(m);
     }
 
@@ -84,7 +88,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public void setMeetUp(MeetUp target, MeetUp editedMeetUp) {
         requireNonNull(editedMeetUp);
-
+        logger.info(String.format("Replacing meet up with its edited form in meet up list"));
         meetUps.setMeetUp(target, editedMeetUp);
     }
 
@@ -93,6 +97,7 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      * {@code key} must exist in the meet up list.
      */
     public void removeMeetUp(MeetUp key) {
+        logger.info(String.format("Removing [%s] from meet up list", key.getSubject()));
         meetUps.remove(key);
     }
 

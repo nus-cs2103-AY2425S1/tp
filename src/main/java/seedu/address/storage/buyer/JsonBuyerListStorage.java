@@ -74,7 +74,7 @@ public class JsonBuyerListStorage implements BuyerListStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        logger.info("Saving meetup list");
+        logger.info("Saving buyer list");
         JsonUtil.saveJsonFile(new JsonSerializableBuyerList(buyerList), filePath);
     }
 

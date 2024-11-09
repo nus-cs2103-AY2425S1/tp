@@ -14,7 +14,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 /**
@@ -50,7 +50,7 @@ public class JsonAdaptedMeetUp {
      * Converts a given {@code MeetUp} into this class for Jackson use.
      */
     public JsonAdaptedMeetUp(MeetUp source) {
-        name = source.getName().toString();
+        name = source.getSubject().toString();
         info = source.getInfo().toString();
         from = source.getFrom().toString();
         to = source.getTo().toString();
@@ -72,12 +72,12 @@ public class JsonAdaptedMeetUp {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Name.class.getSimpleName()));
+                    Subject.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!Subject.isValidSubject(name)) {
+            throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Subject modelName = new Subject(name);
 
         if (info == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -92,8 +92,11 @@ public class JsonAdaptedMeetUp {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     From.class.getSimpleName()));
         }
-        if (!From.isValidFrom(from)) {
-            throw new IllegalValueException(From.MESSAGE_CONSTRAINTS);
+        if (!From.isValidFormat(from)) {
+            throw new IllegalValueException(From.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!From.isValidDateTime(from)) {
+            throw new IllegalValueException(From.MESSAGE_CONSTRAINTS_DATETIME);
         }
         final From modelFrom = new From(from);
 
@@ -101,10 +104,17 @@ public class JsonAdaptedMeetUp {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     To.class.getSimpleName()));
         }
-        if (!To.isValidTo(to)) {
-            throw new IllegalValueException(To.MESSAGE_CONSTRAINTS);
+        if (!To.isValidFormat(to)) {
+            throw new IllegalValueException(To.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!To.isValidDateTime(to)) {
+            throw new IllegalValueException(To.MESSAGE_CONSTRAINTS_DATETIME);
         }
         final To modelTo = new To(to);
+
+        if (!modelTo.isValidToFrom(modelFrom)) {
+            throw new IllegalValueException(To.MESSAGE_CONSTRAINTS_TO_FROM);
+        }
 
         final Set<AddedBuyer> modelAddedBuyers = new HashSet<>(meetUpAddedBuyers);
         return new MeetUp(modelName, modelInfo, modelFrom, modelTo, modelAddedBuyers);

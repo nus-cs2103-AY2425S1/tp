@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_NET
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_PITCH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_NETWORKING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_PITCH;
 
@@ -24,32 +24,32 @@ import seedu.address.model.meetup.MeetUp;
 public class TypicalMeetUps {
 
     public static final MeetUp FIRST_MEETUP = new MeetUpBuilder()
-            .withName("Client Meet Up")
+            .withSubject("Client Meet Up")
             .withInfo("Talk to clients and gather requirements")
             .withFrom("2024-12-01 12:00")
             .withTo("2024-12-01 14:00")
             .withAddedBuyers("Alex Yeoh").build();
     public static final MeetUp SECOND_MEETUP = new MeetUpBuilder()
-            .withName("Contract Negotiation")
+            .withSubject("Contract Negotiation")
             .withInfo("Finalise contract")
             .withFrom("2024-10-01 08:00")
             .withTo("2024-10-01 11:00")
             .withAddedBuyers("Patrick").build();
     public static final MeetUp THIRD_MEETUP = new MeetUpBuilder()
-            .withName("Sales Closure")
+            .withSubject("Sales Closure")
             .withInfo("Discuss compensation and settle on payments")
             .withFrom("2024-10-01 15:00")
             .withTo("2024-10-01 17:00")
             .withAddedBuyers("Betty Ho").build();
     public static final MeetUp FOURTH_MEETUP = new MeetUpBuilder()
-            .withName("Meet Up with Amelia")
+            .withSubject("Meet Up with Amelia")
             .withInfo("Discuss potential sale with her")
             .withFrom("2024-11-01 07:00")
             .withTo("2024-11-01 10:00")
             .withAddedBuyers("Amelia Neo").build();
 
     public static final MeetUp FITH_MEETUP = new MeetUpBuilder()
-            .withName("Property Pitch Superday")
+            .withSubject("Property Pitch Superday")
             .withInfo("Pitching to potential clients on current property listing during event")
             .withFrom("2024-10-02 07:00")
             .withTo("2024-10-04 19:00")
@@ -57,13 +57,13 @@ public class TypicalMeetUps {
 
     // Manually added - MeetUp's details found in {@code CommandTestUtil}
     public static final MeetUp NETWORKING_MEETUP = new MeetUpBuilder()
-            .withName(VALID_MEETUP_NAME_NETWORKING)
+            .withSubject(VALID_MEETUP_SUBJECT_NETWORKING)
             .withInfo(VALID_MEETUP_INFO_NETWORKING)
             .withFrom(VALID_MEETUP_FROM_NETWORKING)
             .withTo(VALID_MEETUP_TO_NETWORKING)
             .withAddedBuyers(VALID_MEETUP_ADDED_PERSON_BETTY).build();
     public static final MeetUp PITCH_MEETUP = new MeetUpBuilder()
-            .withName(VALID_MEETUP_NAME_PITCH)
+            .withSubject(VALID_MEETUP_SUBJECT_PITCH)
             .withInfo(VALID_MEETUP_INFO_PITCH)
             .withFrom(VALID_MEETUP_FROM_PITCH)
             .withTo(VALID_MEETUP_TO_PITCH)

@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyPropertyList;
 
 /**
- * Represents a storage for {@link seedu.address.model.Property}.
+ * Represents a storage for {@link seedu.address.model.PropertyList}.
  */
 public interface PropertyListStorage {
 
@@ -26,7 +26,7 @@ public interface PropertyListStorage {
     Optional<ReadOnlyPropertyList> readPropertyList() throws DataLoadingException;
 
     /**
-     * @see #getPropertyFilePath()
+     * @see #getPropertyListFilePath()
      */
     Optional<ReadOnlyPropertyList> readPropertyList(Path filePath) throws DataLoadingException;
 

@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.LogicManager;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.UniquePropertyList;
 
@@ -17,7 +16,7 @@ import seedu.address.model.property.UniquePropertyList;
  * Duplicates are not allowed (by .isSameProperty comparison)
  */
 public class PropertyList implements ReadOnlyPropertyList {
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private final Logger logger = LogsCenter.getLogger(PropertyList.class);
 
     private final UniquePropertyList properties;
 
@@ -32,7 +31,8 @@ public class PropertyList implements ReadOnlyPropertyList {
         properties = new UniquePropertyList();
     }
 
-    public PropertyList() {}
+    public PropertyList() {
+    }
 
     /**
      * Creates an PropertyList using the properties in the {@code toBeCopied}
@@ -74,8 +74,9 @@ public class PropertyList implements ReadOnlyPropertyList {
      * Adds a property to the meet up list.
      * The property must not already exist in the meet up list.
      */
-    public void addProperty(Property m) {
-        properties.add(m);
+    public void addProperty(Property p) {
+        logger.info(String.format("Adding [%s] to property list", p.getAddress()));
+        properties.add(p);
     }
 
     /**
@@ -86,6 +87,7 @@ public class PropertyList implements ReadOnlyPropertyList {
      */
     public void setProperty(Property target, Property editedProperty) {
         requireNonNull(editedProperty);
+        logger.info(String.format("Replacing property with its edited form in property list"));
         properties.setProperty(target, editedProperty);
     }
 
@@ -94,6 +96,7 @@ public class PropertyList implements ReadOnlyPropertyList {
      * {@code key} must exist in the meet up list.
      */
     public void removeProperty(Property key) {
+        logger.info(String.format("Removing [%s] from property list", key.getLandlordName()));
         properties.remove(key);
     }
 

@@ -67,7 +67,7 @@ public class Messages {
      */
     public static String format(MeetUp meetup) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(meetup.getName())
+        builder.append(meetup.getSubject())
                 .append("; Info: ")
                 .append(meetup.getInfo())
                 .append("; From: ")
@@ -91,7 +91,7 @@ public class Messages {
                 .append(property.getAddress())
                 .append("; Asking price: ")
                 .append(property.getAskingPrice())
-                .append("; Property type")
+                .append("; Property type: ")
                 .append(property.getPropertyType());
         return builder.toString();
     }

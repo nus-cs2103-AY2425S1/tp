@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETUPS;
 
@@ -27,7 +27,7 @@ import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 
 
@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed meet-up list. "
             + "Existing meet-up will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_FROM + "YYYY-MM-DD HH:mm] "
             + "[" + PREFIX_TO + "YYYY-MM-DD HH:mm] "
@@ -55,8 +55,9 @@ public class EditCommand extends Command {
             + PREFIX_ADDED_BUYER + "David Li ";
 
     public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited meet-up: %1$s";
-    public static final String MESSAGE_MEETUP_NOT_EDITED = "Please check for missing fields or invalid format.";
+    public static final String MESSAGE_MEETUP_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
+    public static final String MESSAGE_INVALID_TO_FROM = "TO ($1%s) must be after FROM ($2%s)";
 
     private final Index targetIndex;
     private final EditMeetUpDescriptor editMeetUpDescriptor;
@@ -88,6 +89,11 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEETUP);
         }
 
+        if (!editedMeetUp.hasValidToFrom()) {
+            throw new CommandException(String.format(MESSAGE_INVALID_TO_FROM,
+                    editedMeetUp.getTo(), editedMeetUp.getFrom()));
+        }
+
         model.setMeetUp(meetUpToEdit, editedMeetUp);
         model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
         return new CommandResult(String.format(MESSAGE_EDIT_MEETUP_SUCCESS, Messages.format(editedMeetUp)),
@@ -100,15 +106,16 @@ public class EditCommand extends Command {
      */
     private static MeetUp createEditedMeetUp(MeetUp meetUpToEdit,
                                              EditMeetUpDescriptor editMeetUpDescriptor) {
-        assert meetUpToEdit != null;
+        requireNonNull(meetUpToEdit);
+        requireNonNull(editMeetUpDescriptor);
 
-        Name updatedName = editMeetUpDescriptor.getName().orElse(meetUpToEdit.getName());
+        Subject updatedSubject = editMeetUpDescriptor.getSubject().orElse(meetUpToEdit.getSubject());
         Info updatedInfo = editMeetUpDescriptor.getInfo().orElse(meetUpToEdit.getInfo());
         From updatedFrom = editMeetUpDescriptor.getFrom().orElse(meetUpToEdit.getFrom());
         To updatedTo = editMeetUpDescriptor.getTo().orElse(meetUpToEdit.getTo());
         Set<AddedBuyer> updatedAddedBuyers = editMeetUpDescriptor.getAddedBuyers()
                 .orElse(meetUpToEdit.getAddedBuyers());
-        return new MeetUp(updatedName, updatedInfo, updatedFrom, updatedTo, updatedAddedBuyers);
+        return new MeetUp(updatedSubject, updatedInfo, updatedFrom, updatedTo, updatedAddedBuyers);
     }
 
     @Override
@@ -141,7 +148,7 @@ public class EditCommand extends Command {
      * corresponding field value of the meet-up.
      */
     public static class EditMeetUpDescriptor {
-        private Name name;
+        private Subject subject;
         private Info info;
         private From from;
         private To to;
@@ -155,7 +162,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code addedBuyers} is used internally.
          */
         public EditMeetUpDescriptor(EditMeetUpDescriptor toCopy) {
-            setName(toCopy.name);
+            setSubject(toCopy.subject);
             setInfo(toCopy.info);
             setFrom(toCopy.from);
             setTo(toCopy.to);
@@ -166,15 +173,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyMeetUpFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, info, from, to);
+            return CollectionUtil.isAnyNonNull(subject, info, from, to);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setSubject(Subject subject) {
+            this.subject = subject;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<Subject> getSubject() {
+            return Optional.ofNullable(subject);
         }
 
         public void setInfo(Info info) {
@@ -232,7 +239,7 @@ public class EditCommand extends Command {
             EditMeetUpDescriptor otherEditMeetUpDescriptor =
                     (EditMeetUpDescriptor) other;
 
-            return Objects.equals(name, otherEditMeetUpDescriptor.name)
+            return Objects.equals(subject, otherEditMeetUpDescriptor.subject)
                     && Objects.equals(info, otherEditMeetUpDescriptor.info)
                     && Objects.equals(from, otherEditMeetUpDescriptor.from)
                     && Objects.equals(to, otherEditMeetUpDescriptor.to)
@@ -242,7 +249,7 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
+                    .add("subject", subject)
                     .add("info", info)
                     .add("from", from)
                     .add("to", to)

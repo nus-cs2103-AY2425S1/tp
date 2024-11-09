@@ -1,5 +1,7 @@
 package seedu.address.model.property;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -12,7 +14,11 @@ import seedu.address.commons.util.ToStringBuilder;
 public class AddressContainsKeywordsPredicate implements Predicate<Property> {
     private final List<String> keywords;
 
+    /**
+     * Landlord name must be present and not null.
+     */
     public AddressContainsKeywordsPredicate(List<String> keywords) {
+        requireNonNull(keywords);
         this.keywords = keywords;
     }
 

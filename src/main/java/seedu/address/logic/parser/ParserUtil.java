@@ -15,7 +15,7 @@ import seedu.address.model.buyer.Phone;
 import seedu.address.model.meetup.AddedBuyer;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
-import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.Subject;
 import seedu.address.model.meetup.To;
 import seedu.address.model.property.Address;
 import seedu.address.model.property.AskingPrice;
@@ -131,22 +131,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String meetUpSubject} into a {@code Subject}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code meetUpName} is invalid.
+     * @throws ParseException if the given {@code meetUpSubject} is invalid.
      */
-    public static Name parseMeetUpName(String meetUpName) throws ParseException {
-        requireNonNull(meetUpName);
-        String trimmedName = meetUpName.trim();
-        if (!Name.isValidMeetUpName(trimmedName)) {
-            throw new ParseException(seedu.address.model.meetup.Name.MESSAGE_CONSTRAINTS);
+    public static Subject parseMeetUpSubject(String meetUpSubject) throws ParseException {
+        requireNonNull(meetUpSubject);
+        String trimmedSubject = meetUpSubject.trim();
+        if (!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new Subject(trimmedSubject);
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String meetUpInfo} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code meetUpInfo} is invalid.
@@ -161,7 +161,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code From}.
+     * Parses a {@code String meetUpFrom} into a {@code From}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code meetUpFrom} is invalid.
@@ -169,14 +169,17 @@ public class ParserUtil {
     public static From parseMeetUpFrom(String meetUpFrom) throws ParseException {
         requireNonNull(meetUpFrom);
         String trimmedFrom = meetUpFrom.trim();
-        if (!From.isValidFrom(trimmedFrom)) {
-            throw new ParseException(seedu.address.model.meetup.From.MESSAGE_CONSTRAINTS);
+        if (!From.isValidFormat(trimmedFrom)) {
+            throw new ParseException(From.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!From.isValidDateTime(trimmedFrom)) {
+            throw new ParseException(From.MESSAGE_CONSTRAINTS_DATETIME);
         }
         return new From(meetUpFrom);
     }
 
     /**
-     * Parses a {@code String name} into a {@code From}.
+     * Parses a {@code String meetUpTo} into a {@code From}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code meetUpFrom} is invalid.
@@ -184,8 +187,11 @@ public class ParserUtil {
     public static To parseMeetUpTo(String meetUpTo) throws ParseException {
         requireNonNull(meetUpTo);
         String trimmedTo = meetUpTo.trim();
-        if (!To.isValidTo(trimmedTo)) {
-            throw new ParseException(seedu.address.model.meetup.To.MESSAGE_CONSTRAINTS);
+        if (!To.isValidFormat(trimmedTo)) {
+            throw new ParseException(To.MESSAGE_CONSTRAINTS_FORMAT);
+        }
+        if (!To.isValidDateTime(trimmedTo)) {
+            throw new ParseException(To.MESSAGE_CONSTRAINTS_DATETIME);
         }
         return new To(meetUpTo);
     }
@@ -199,7 +205,7 @@ public class ParserUtil {
     public static AddedBuyer parseAddedBuyer(String addedBuyer) throws ParseException {
         requireNonNull(addedBuyer);
         String trimmedAddedBuyer = addedBuyer.trim();
-        if (!AddedBuyer.isValidBuyerName(trimmedAddedBuyer)) {
+        if (!AddedBuyer.isValidName(trimmedAddedBuyer)) {
             throw new ParseException(AddedBuyer.MESSAGE_CONSTRAINTS);
         }
         return new AddedBuyer(trimmedAddedBuyer);

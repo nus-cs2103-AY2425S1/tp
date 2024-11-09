@@ -26,8 +26,9 @@ Class Tag
 
 Class UniqueMeetUpList
 Class MeetUp
-Class "Name" as Subject
+Class Subject
 Class Info
+Class "{abstract}\nDateTime" as DateTime
 Class From
 Class To
 Class AddedBuyer
@@ -84,6 +85,9 @@ MeetUp *--> Info
 MeetUp *--> From
 MeetUp *--> To
 MeetUp *--> "*" AddedBuyer
+AddedBuyer -up-|> Name
+From --|> DateTime
+To --|> DateTime
 
 Buyer -[hidden]up--> I
 UniqueBuyerList -[hidden]right-> I
@@ -103,10 +107,11 @@ LandlordPhone -[hidden]right-> Address
 Address -[hidden]right-> AskingPrice
 AskingPrice -[hidden]right-> PropertyType
 
+Buyer -[hidden]left-> MeetUp
+AddedBuyer -[hidden]right-> Subject
 Subject -[hidden]right-> Info
 Info -[hidden]right-> From
 From -[hidden]right-> To
-To -[hidden]right-> AddedBuyer
 
 ModelManager --> "~* filtered" Buyer
 ModelManager --> "~* filtered" Property

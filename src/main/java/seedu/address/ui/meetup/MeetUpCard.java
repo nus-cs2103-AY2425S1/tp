@@ -1,6 +1,6 @@
 package seedu.address.ui.meetup;
 
-import java.util.Comparator;
+import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -43,19 +43,17 @@ public class MeetUpCard extends UiPart<Region> {
     /**
      * Creates a {@code MeetUpCode} with the given {@code MeetUp} and index to display.
      */
-    public MeetUpCard(MeetUp meetUp, int displayedIndex, boolean doesItOverlap) {
+    public MeetUpCard(MeetUp meetUp, int displayedIndex, boolean doesTimeOverlap, List<Label> styledBuyerLabels) {
         super(FXML);
         this.meetUp = meetUp;
         id.setText(displayedIndex + ". ");
-        name.setText(meetUp.getName().toString());
+        name.setText(meetUp.getSubject().toString());
         info.setText(meetUp.getInfo().toString());
         from.setText(meetUp.getFrom().toPrettyString());
         to.setText(meetUp.getTo().toPrettyString());
-        meetUp.getAddedBuyers().stream()
-                .sorted(Comparator.comparing(buyer -> buyer.addedBuyerName))
-                .forEach(addedBuyer -> addedBuyers.getChildren().add(new Label(addedBuyer.addedBuyerName)));
+        addedBuyers.getChildren().addAll(styledBuyerLabels);
 
-        if (doesItOverlap) {
+        if (doesTimeOverlap) {
             from.setStyle("-fx-text-fill: red;");
             to.setStyle("-fx-text-fill: red;");
         } else {

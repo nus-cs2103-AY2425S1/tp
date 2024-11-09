@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showMeetUpAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
+import static seedu.address.testutil.meetup.TypicalMeetUps.FIRST_MEETUP;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
 import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
@@ -19,8 +20,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.buyer.ClearCommand;
 import seedu.address.logic.commands.meetup.EditCommand.EditMeetUpDescriptor;
 import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
@@ -142,6 +143,19 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidToFrom_failure() {
+        EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder(FIRST_MEETUP)
+                .withTo("2024-12-01 12:00").build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(
+                EditCommand.MESSAGE_INVALID_TO_FROM,
+                descriptor.getTo().get(),
+                descriptor.getFrom().get()
+        ));
     }
 
     /**

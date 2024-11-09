@@ -15,7 +15,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class MeetUp {
 
     // Identity fields
-    private final Name name;
+    private final Subject subject;
     private final Info info;
     private final From from;
     private final To to;
@@ -24,9 +24,9 @@ public class MeetUp {
     /**
      * Every field must be present and not null.
      */
-    public MeetUp(Name name, Info info, From from, To to, Set<AddedBuyer> addedBuyers) {
-        requireAllNonNull(name, info, from, to, addedBuyers);
-        this.name = name;
+    public MeetUp(Subject subject, Info info, From from, To to, Set<AddedBuyer> addedBuyers) {
+        requireAllNonNull(subject, info, from, to, addedBuyers);
+        this.subject = subject;
         this.info = info;
         this.from = from;
         this.to = to;
@@ -43,9 +43,16 @@ public class MeetUp {
         }
 
         return otherMeetUp != null
-                && otherMeetUp.getName().equals(getName())
+                && otherMeetUp.getSubject().equals(getSubject())
                 && otherMeetUp.getFrom().equals(getFrom())
                 && otherMeetUp.getTo().equals(getTo());
+    }
+
+    /**
+     * Returns true if the relationship between To and From is valid.
+     */
+    public boolean hasValidToFrom() {
+        return to.isValidToFrom(from);
     }
 
     /**
@@ -64,7 +71,7 @@ public class MeetUp {
         }
 
         MeetUp otherMeetUp = (MeetUp) other;
-        return name.equals(otherMeetUp.name)
+        return subject.equals(otherMeetUp.subject)
                 && info.equals(otherMeetUp.info)
                 && from.equals(otherMeetUp.from)
                 && to.equals(otherMeetUp.to)
@@ -74,13 +81,13 @@ public class MeetUp {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, info, from, to, addedBuyers);
+        return Objects.hash(subject, info, from, to, addedBuyers);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("subject", subject)
                 .add("info", info)
                 .add("from", from)
                 .add("to", to)
@@ -88,8 +95,8 @@ public class MeetUp {
                 .toString();
     }
 
-    public Name getName() {
-        return this.name;
+    public Subject getSubject() {
+        return this.subject;
     }
 
     public Info getInfo() {

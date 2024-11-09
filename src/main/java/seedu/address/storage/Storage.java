@@ -19,6 +19,19 @@ import seedu.address.storage.property.PropertyListStorage;
  */
 public interface Storage extends BuyerListStorage, UserPrefsStorage, MeetUpListStorage, PropertyListStorage {
 
+    /**
+     * Saves all data at once for convenience.
+     * This method saves the data from the provided buyer list, meetup list,
+     * and property list to the respective data files.
+     *
+     * @param buyerList the list of buyers to save
+     * @param meetUpList the list of meetups to save
+     * @param propertyList the list of properties to save
+     * @throws IOException if an I/O error occurs during the save operation
+     */
+    void saveAddressBook(ReadOnlyBuyerList buyerList, ReadOnlyMeetUpList meetUpList,
+                         ReadOnlyPropertyList propertyList) throws IOException;
+
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 

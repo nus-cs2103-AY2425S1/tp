@@ -53,9 +53,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveBuyerList(model.getBuyerList());
-            storage.saveMeetUpList(model.getMeetUpList());
-            storage.savePropertyList(model.getPropertyList());
+            storage.saveAddressBook(model.getBuyerList(), model.getMeetUpList(), model.getPropertyList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -68,6 +66,10 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyBuyerList getBuyerList() {
         return model.getBuyerList();
+    }
+    @Override
+    public ObservableList<Buyer> getUnfilteredBuyerList() {
+        return model.getUnfilteredBuyerList();
     }
 
     @Override
@@ -84,7 +86,10 @@ public class LogicManager implements Logic {
     public ReadOnlyMeetUpList getMeetUpList() {
         return model.getMeetUpList();
     }
-
+    @Override
+    public ObservableList<MeetUp> getUnfilteredMeetUpList() {
+        return model.getUnfilteredMeetUpList();
+    }
     @Override
     public ObservableList<MeetUp> getFilteredMeetUpList() {
         return model.getFilteredMeetUpList();
@@ -99,7 +104,10 @@ public class LogicManager implements Logic {
     public ReadOnlyPropertyList getPropertyList() {
         return model.getPropertyList();
     }
-
+    @Override
+    public ObservableList<Property> getUnfilteredPropertyList() {
+        return model.getUnfilteredPropertyList();
+    }
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
         return model.getFilteredPropertyList();

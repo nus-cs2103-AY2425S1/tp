@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_ADDED_PE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_NETWORKING;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_SUBJECT_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_PITCH;
 import static seedu.address.testutil.meetup.TypicalMeetUps.NETWORKING_MEETUP;
@@ -31,7 +31,7 @@ public class MeetUpTest {
 
         // name, from, to same but info different -> returns true
         MeetUp editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP)
-                .withName(VALID_MEETUP_NAME_PITCH)
+                .withSubject(VALID_MEETUP_SUBJECT_PITCH)
                 .withFrom(VALID_MEETUP_FROM_PITCH)
                 .withTo(VALID_MEETUP_TO_PITCH)
                 .withAddedBuyers(VALID_MEETUP_ADDED_PERSON_ALEX).build();
@@ -39,13 +39,28 @@ public class MeetUpTest {
 
         // name differs in case, all other attributes same -> returns false
         editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP)
-                .withName(VALID_MEETUP_NAME_NETWORKING.toLowerCase()).build();
+                .withSubject(VALID_MEETUP_SUBJECT_NETWORKING.toLowerCase()).build();
         assertFalse(NETWORKING_MEETUP.isSameMeetUp(editedNetWorkingMeetUp));
 
         // name have trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_MEETUP_NAME_NETWORKING + " ";
-        editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP).withName(nameWithTrailingSpaces).build();
+        String nameWithTrailingSpaces = VALID_MEETUP_SUBJECT_NETWORKING + " ";
+        editedNetWorkingMeetUp = new MeetUpBuilder(NETWORKING_MEETUP).withSubject(nameWithTrailingSpaces).build();
         assertFalse(NETWORKING_MEETUP.isSameMeetUp(editedNetWorkingMeetUp));
+    }
+
+    @Test
+    public void hasValidToFrom() {
+        // to after from returns true
+        MeetUp validMeetUp = new MeetUpBuilder(PITCH_MEETUP).build();
+        assertTrue(validMeetUp.hasValidToFrom());
+
+        // to same as from returns false
+        MeetUp invalidMeetUp1 = new MeetUpBuilder(PITCH_MEETUP).withTo(VALID_MEETUP_FROM_PITCH).build();
+        assertFalse(invalidMeetUp1.hasValidToFrom());
+
+        // to before from returns false
+        MeetUp invalidMeetUp2 = new MeetUpBuilder(PITCH_MEETUP).withFrom("2024-09-11 13:30").build();
+        assertFalse(invalidMeetUp2.hasValidToFrom());
     }
 
     @Test
@@ -67,7 +82,7 @@ public class MeetUpTest {
         assertFalse(PITCH_MEETUP.equals(NETWORKING_MEETUP));
 
         // different name -> returns false
-        MeetUp editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withName(VALID_MEETUP_NAME_NETWORKING).build();
+        MeetUp editedPitchMeetUp = new MeetUpBuilder(PITCH_MEETUP).withSubject(VALID_MEETUP_SUBJECT_NETWORKING).build();
         assertFalse(PITCH_MEETUP.equals(editedPitchMeetUp));
 
         // different info -> returns false
@@ -89,7 +104,7 @@ public class MeetUpTest {
 
     @Test
     public void toStringMethod() {
-        String expected = MeetUp.class.getCanonicalName() + "{name=" + PITCH_MEETUP.getName() + ", info="
+        String expected = MeetUp.class.getCanonicalName() + "{subject=" + PITCH_MEETUP.getSubject() + ", info="
                 + PITCH_MEETUP.getInfo() + ", from=" + PITCH_MEETUP.getFrom() + ", to=" + PITCH_MEETUP.getTo()
                 + ", addedBuyers=" + PITCH_MEETUP.getAddedBuyers() + "}";
         assertEquals(expected, PITCH_MEETUP.toString());

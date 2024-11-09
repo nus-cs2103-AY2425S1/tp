@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Collection;
@@ -35,7 +35,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO, PREFIX_ADDED_BUYER);
+                ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT, PREFIX_INFO, PREFIX_FROM, PREFIX_TO,
+                        PREFIX_ADDED_BUYER);
 
         Index index;
 
@@ -46,12 +47,12 @@ public class EditCommandParser implements Parser<EditCommand> {
                     EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBJECT, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
 
         EditCommand.EditMeetUpDescriptor editMeetUpDescriptor = new EditCommand.EditMeetUpDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editMeetUpDescriptor.setName(ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.getValue(PREFIX_SUBJECT).isPresent()) {
+            editMeetUpDescriptor.setSubject(ParserUtil.parseMeetUpSubject(argMultimap.getValue(PREFIX_SUBJECT).get()));
         }
         if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
             editMeetUpDescriptor.setInfo(ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get()));

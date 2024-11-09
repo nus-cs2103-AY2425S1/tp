@@ -21,34 +21,6 @@ public class ToTest {
     }
 
     @Test
-    public void isValidTo() {
-        // null to
-        assertThrows(NullPointerException.class, () -> To.isValidTo(null));
-
-        // invalid to
-        assertFalse(To.isValidTo("")); // empty string
-        assertFalse(To.isValidTo(" ")); // spaces only
-        assertFalse(To.isValidTo("123456Hi")); // invalid format
-        assertFalse(To.isValidTo("2024-01-01 23:59 hello")); // invalid format
-        assertFalse(To.isValidTo("12 Jan 2024")); // invalid format
-        assertFalse(To.isValidTo("2024 01 01 23:59")); // invalid format
-        assertFalse(To.isValidTo("2024/01/01 23:59")); // invalid format
-        assertFalse(To.isValidTo("01-01-2024 23:59")); // invalid format
-        assertFalse(To.isValidTo("23:59 2024-01-01")); // invalid format
-        assertFalse(To.isValidTo("23:59")); // missing date
-        assertFalse(To.isValidTo("2024-01-01")); // missing time
-        assertFalse(To.isValidTo("2024-15-01 23:59")); // invalid month
-        assertFalse(To.isValidTo("2024-01-32 23:59")); // invalid day
-        assertFalse(To.isValidTo("2024-01-01 24:59")); // invalid time
-
-        // valid to
-        assertTrue(To.isValidTo("2024-12-31 23:59")); // last day of the year
-        assertTrue(To.isValidTo("2024-01-01 00:00")); // first day of the year
-        assertTrue(To.isValidTo("2022-06-25 14:30")); // past date
-        assertTrue(To.isValidTo("2050-10-01 10:28")); // future date
-    }
-
-    @Test
     public void equals() {
         To to = new To("2024-06-25 14:30");
 
@@ -66,6 +38,26 @@ public class ToTest {
 
         // different values -> returns false
         assertFalse(to.equals(new To("2024-10-15 13:30")));
+    }
+
+    @Test
+    public void isValidToFrom() {
+        To to = new To("2024-06-25 14:30");
+
+        // null -> returns false
+        assertFalse(to.isValidToFrom(null));
+
+        // same values -> returns false
+        From from1 = new From("2024-06-25 14:30");
+        assertFalse(to.isValidToFrom(from1));
+
+        // to before from -> returns false
+        From from2 = new From("2024-06-25 15:30");
+        assertFalse(to.isValidToFrom(from2));
+
+        // to after from -> returns true
+        From from3 = new From("2024-06-25 11:30");
+        assertTrue(to.isValidToFrom(from3));
     }
 
     @Test

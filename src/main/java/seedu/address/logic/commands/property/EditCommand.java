@@ -87,7 +87,8 @@ public class EditCommand extends Command {
 
     private static Property createEditedProperty(Property propertyToEdit,
                                                  EditPropertyDescriptor editPropertyDescriptor) {
-        assert propertyToEdit != null;
+        requireNonNull(propertyToEdit);
+        requireNonNull(editPropertyDescriptor);
 
         LandlordName updatedLandlordName = editPropertyDescriptor.getLandlordName()
                 .orElse(propertyToEdit.getLandlordName());

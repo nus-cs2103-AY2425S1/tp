@@ -14,10 +14,11 @@ public class CliSyntax {
 
 
     /* Prefix definitions for meet-up class */
+    public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
     public static final Prefix PREFIX_INFO = new Prefix("i/");
     public static final Prefix PREFIX_FROM = new Prefix("f/");
     public static final Prefix PREFIX_TO = new Prefix("t/");
-    public static final Prefix PREFIX_ADDED_BUYER = new Prefix("a/");
+    public static final Prefix PREFIX_ADDED_BUYER = new Prefix("n/");
 
     /* Prefix definitions for property class */
     public static final Prefix PREFIX_ASKING_PRICE = new Prefix("s/");

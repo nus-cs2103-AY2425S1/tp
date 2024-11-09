@@ -34,6 +34,9 @@ public interface Logic {
      */
     ReadOnlyBuyerList getBuyerList();
 
+    /** Returns an unmodifiable view of the unfiltered list of buyers */
+    ObservableList<Buyer> getUnfilteredBuyerList();
+
     /** Returns an unmodifiable view of the filtered list of buyers */
     ObservableList<Buyer> getFilteredBuyerList();
 
@@ -49,6 +52,9 @@ public interface Logic {
      */
     ReadOnlyMeetUpList getMeetUpList();
 
+    /** Returns an unmodifiable view of the unfiltered list of meet-ups */
+    ObservableList<MeetUp> getUnfilteredMeetUpList();
+
     /** Returns an unmodifiable view of the filtered list of meet ups */
     ObservableList<MeetUp> getFilteredMeetUpList();
 
@@ -63,6 +69,9 @@ public interface Logic {
      * @see seedu.address.model.Model#getMeetUpList()
      */
     ReadOnlyPropertyList getPropertyList();
+
+    /** Returns an unmodifiable view of the unfiltered list of properties */
+    ObservableList<Property> getUnfilteredPropertyList();
 
     /** Returns an unmodifiable view of the filtered list of meet ups */
     ObservableList<Property> getFilteredPropertyList();

@@ -1,7 +1,8 @@
 package seedu.address.logic.parser.meetup;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_FIND_MEETUP_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FIND_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FIND_PREFIX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_FIND_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.meetup.FindCommand.MESSAGE_USAGE;
@@ -14,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.meetup.FindCommand;
 import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
-
+import seedu.address.model.meetup.Subject;
 
 public class FindCommandParserTest {
 
@@ -38,8 +39,14 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidSubjectFormat_failParse() {
+        assertParseFailure(parser, INVALID_MEETUP_FIND_DESC,
+                String.format(Subject.MESSAGE_CONSTRAINTS, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgsWrongTag_failParse() {
-        assertParseFailure(parser, INVALID_FIND_MEETUP_DESC,
+        assertParseFailure(parser, INVALID_MEETUP_FIND_PREFIX_DESC,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 

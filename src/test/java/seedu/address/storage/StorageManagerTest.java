@@ -59,6 +59,26 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void addressBookSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to
+         * {@link JsonBuyerListStorage} class, {@link JsonMeetUpListStorage} class and {@link JsonPropertyListStorage}
+         * class through {@link StorageManager#saveAddressBook}..
+         *
+         */
+        BuyerList originalBuyerList = getTypicalBuyerList();
+        MeetUpList originalMeetUpList = getTypicalMeetUpList();
+        PropertyList originalPropertyList = getTypicalPropertyList();
+        storageManager.saveAddressBook(originalBuyerList, originalMeetUpList, originalPropertyList);
+        ReadOnlyBuyerList retrievedBuyerList = storageManager.readBuyerList().get();
+        ReadOnlyMeetUpList retrievedMeetUpList = storageManager.readMeetUpList().get();
+        ReadOnlyPropertyList retrievedPropertyList = storageManager.readPropertyList().get();
+        assertEquals(originalBuyerList, new BuyerList(retrievedBuyerList));
+        assertEquals(originalMeetUpList, new MeetUpList(retrievedMeetUpList));
+        assertEquals(originalPropertyList, new PropertyList(retrievedPropertyList));
+    }
+
+    @Test
     public void buyerListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the

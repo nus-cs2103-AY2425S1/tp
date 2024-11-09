@@ -3,7 +3,7 @@ package seedu.address.testutil.meetup;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDED_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.Set;
@@ -30,12 +30,12 @@ public class MeetUpUtil {
      */
     public static String getMeetUpDetails(MeetUp meetUp) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + meetUp.getName().toString() + " ");
+        sb.append(PREFIX_SUBJECT + meetUp.getSubject().toString() + " ");
         sb.append(PREFIX_INFO + meetUp.getInfo().toString() + " ");
         sb.append(PREFIX_FROM + meetUp.getFrom().toString() + " ");
         sb.append(PREFIX_TO + meetUp.getTo().toString() + " ");
         meetUp.getAddedBuyers().stream().forEach(
-                s -> sb.append(PREFIX_ADDED_BUYER + s.addedBuyerName + " ")
+                s -> sb.append(PREFIX_ADDED_BUYER + s.fullName + " ")
         );
         return sb.toString();
     }
@@ -45,7 +45,7 @@ public class MeetUpUtil {
      */
     public static String getEditMeetUpDescriptorDetails(EditMeetUpDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name).append(" "));
+        descriptor.getSubject().ifPresent(subject -> sb.append(PREFIX_SUBJECT).append(subject).append(" "));
         descriptor.getInfo().ifPresent(info -> sb.append(PREFIX_INFO).append(info).append(" "));
         descriptor.getFrom().ifPresent(from -> sb.append(PREFIX_FROM).append(from).append(" "));
         descriptor.getTo().ifPresent(to -> sb.append(PREFIX_TO).append(to).append(" "));
@@ -54,7 +54,7 @@ public class MeetUpUtil {
             if (addedBuyers.isEmpty()) {
                 sb.append(PREFIX_ADDED_BUYER);
             } else {
-                addedBuyers.forEach(s -> sb.append(PREFIX_ADDED_BUYER).append(s.addedBuyerName).append(" "));
+                addedBuyers.forEach(s -> sb.append(PREFIX_ADDED_BUYER).append(s.fullName).append(" "));
             }
         }
         return sb.toString();

@@ -44,6 +44,7 @@ public class DeleteCommand extends Command {
 
         MeetUp meetUpToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteMeetUp(meetUpToDelete);
+        assert(!model.hasMeetUp(meetUpToDelete)); // verify meet up successfully deleted
         return new CommandResult(String.format(MESSAGE_DELETE_MEETUP_SUCCESS, Messages.format(meetUpToDelete)),
                 false, false, true, false, false);
     }

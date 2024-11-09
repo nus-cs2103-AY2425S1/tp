@@ -46,7 +46,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 4, 0, true);
+    public static final Version VERSION = new Version(1, 5, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -58,7 +58,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing BuyerList ]===========================");
+        logger.info("=============================[ Initializing ABCLI ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -85,9 +85,9 @@ public class MainApp extends Application {
      * or an empty buyer list will be used instead if errors occur when reading {@code storage}'s buyer list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getBuyerListFilePath());
-        logger.info("Using meetUp file : " + storage.getMeetUpListFilePath());
-        logger.info("Using property file : " + storage.getPropertyListFilePath());
+        logger.info("Using buyer data file : " + storage.getBuyerListFilePath());
+        logger.info("Using meetUp data file : " + storage.getMeetUpListFilePath());
+        logger.info("Using property data file : " + storage.getPropertyListFilePath());
 
         Optional<ReadOnlyBuyerList> buyerListOptional;
         Optional<ReadOnlyMeetUpList> meetUpListOptional;
@@ -114,9 +114,7 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getMeetUpListFilePath()
                         + " populated with a sample MeetUpList.");
             }
-
             initialMeetUpList = meetUpListOptional.orElseGet(SampleMeetUpDataUtil::getSampleMeetUpList);
-
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getMeetUpListFilePath() + " could not be loaded."
                     + " Will be starting with an empty MeetUpList.");
@@ -129,9 +127,7 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getPropertyListFilePath()
                         + " populated with a sample PropertyList.");
             }
-
             initialPropertyList = propertyListOptional.orElseGet(SamplePropertyDataUtil::getSamplePropertyList);
-
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getPropertyListFilePath() + " could not be loaded."
                     + " Will be starting with an empty PropertyList.");
@@ -218,13 +214,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting BuyerList " + MainApp.VERSION);
+        logger.info("Starting ABCLI " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping BuyerList ] =============================");
+        logger.info("============================ [ Stopping ABCLI ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

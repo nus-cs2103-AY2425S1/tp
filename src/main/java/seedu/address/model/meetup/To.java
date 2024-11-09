@@ -1,66 +1,37 @@
 package seedu.address.model.meetup;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
- * Represents a meetup's starting time in the buyer list.
+ * Represents a meetup's starting time in the meet up list.
+ * Guarantees: immutable;
  */
-public class To {
+public class To extends DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Time should only be in the format YYYY-MM-DD HH:mm";
+    public static final String MESSAGE_CONSTRAINTS_FORMAT =
+            "To date-time provided should only be in the format: YYYY-MM-DD HH:mm";
 
-    /*
-     * The time format must strictly follow the above format
-     */
-    public static final String VALIDATION_REGEX =
-            "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]$";
-
-    public final LocalDateTime value;
+    public static final String MESSAGE_CONSTRAINTS_DATETIME =
+            "To date-time provided is invalid";
+    public static final String MESSAGE_CONSTRAINTS_TO_FROM =
+            "To date-time must occur after from date-time";
 
     /**
-     * Constructs a {@code MeetUpToType}.
+     * Constructs a {@code To}.
      *
      * @param to A valid string that can transformed to a date.
      */
     public To(String to) {
-        requireNonNull(to);
-        checkArgument(isValidTo(to), MESSAGE_CONSTRAINTS);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.value = LocalDateTime.parse(to, formatter);
+        super(to);
     }
 
     /**
-     * Returns true if a given string is a valid end timing.
+     * Ret
      */
-    public static boolean isValidTo(String test) {
-        return test.matches(VALIDATION_REGEX);
-    }
+    public boolean isValidToFrom(From from) {
+        if (from == null) {
+            return false;
+        }
 
-    /**
-     * Returns pretty formatted LocalDateTime String
-     */
-    public String toPrettyString() {
-        // Define the formatter with the desired pattern
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy (h:mma)");
-
-        // Format the LocalDateTime object
-        String formattedDateTime = value.format(formatter);
-
-        // Convert "AM"/"PM" to lowercase
-        formattedDateTime = formattedDateTime.replace("AM", "am").replace("PM", "pm");
-        return formattedDateTime;
-    }
-
-    @Override
-    public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String formattedDateTime = value.format(formatter);
-        return formattedDateTime;
+        return this.value.isAfter(from.value);
     }
 
     @Override
@@ -83,10 +54,4 @@ public class To {
         return value.hashCode();
     }
 
-    /**
-     * Getter method for LocalDateTime value.
-     */
-    public LocalDateTime getDateTime() {
-        return value;
-    }
 }

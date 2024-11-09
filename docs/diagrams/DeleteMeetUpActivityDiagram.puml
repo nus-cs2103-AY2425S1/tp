@@ -1,0 +1,40 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User checks current mode of AbcliParser;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([mode is MeetUp])
+else ([else])
+    :User inputs `switch m`;
+    :AbcliParser creates a
+    BMPCommandParser;
+    :BMPCommandParser creates a
+    SwitchParserModeCommandParser;
+    :SwitchParserModeCommandParser
+    parses the input;
+    :SwitchParserModeCommandParser
+    creates a SwitchParserModeCommand
+    with mode ParserMode.MEETUP;
+    :LogicManager executes the
+    SwitchParserModeCommand;
+    :currentMode of AbcliParser
+    is changed to ParserMode.MEETUP;
+endif
+:User inputs `delete 1`;
+:AbcliParser creates a MeetUpCommandParser;
+:MeetUpCommandParser creates a
+DeleteCommandParser;
+:DeleteCommandParser parses the input;
+:DeleteCommandParser creates a DeleteCommand
+of type MeetUp;
+:LogicManager executes the DeleteCommand;
+:MeetUp of index 1 is deleted;
+stop
+
+@enduml

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.buyer.AddCommand;
+import seedu.address.logic.commands.buyer.ClearCommand;
 import seedu.address.logic.commands.buyer.DeleteCommand;
 import seedu.address.logic.commands.buyer.EditCommand;
 import seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor;
@@ -78,7 +80,7 @@ public class BuyerCommandParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(FindCommand.COMMAND_WORD + " "
+        Matcher matcher = BASIC_COMMAND_FORMAT.matcher(FindCommand.COMMAND_WORD + " " + PREFIX_NAME
                 + keywords.stream().collect(Collectors.joining(" ")));
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -92,6 +94,11 @@ public class BuyerCommandParserTest {
     @Test
     public void parseCommand_view() throws Exception {
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD, "") instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_clear() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, "") instanceof ClearCommand);
     }
 
     @Test
