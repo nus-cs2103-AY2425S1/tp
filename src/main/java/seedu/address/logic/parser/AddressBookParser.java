@@ -75,8 +75,10 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
         if (ClearCommand.isPrompted()) {
-            if (commandWord.equalsIgnoreCase("y") || commandWord.equalsIgnoreCase("yes")) {
+            if (commandWord.equals("Y") || commandWord.equals("Yes")) {
                 return new ClearCommandParser().parseClear();
+            } else if (userInput.trim().isEmpty()) {
+                return new ClearCommandParser().parseAbort();
             } else {
                 return new ClearCommandParser().parseAbort();
             }

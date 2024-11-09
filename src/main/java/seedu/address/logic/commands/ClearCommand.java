@@ -19,7 +19,7 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
     public static final String MESSAGE_CONFIRMATION = "Are you sure you want to clear all your contacts and events?\n"
-            + "Type \"y\" to confirm or any key to abort.";
+            + "Type \"Y\" or \"Yes\" to confirm or any key to abort.";
 
     public static final String MESSAGE_ABORTED = "Clear command aborted.";
 
