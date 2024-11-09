@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- GitHub copilot was used by Li Yifeng as an auto-complete tool during most of the coding
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,7 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* stores a history of concrete commands (commands that can be undone) executed successfully by the user, which allows the user to undo commands.
+* stores a history of undoable commands executed successfully by the user, which allows the user to undo commands.
 * only depends on the Logic component due to the undo feature.
 
 <box type="info" seamless>
@@ -163,12 +163,12 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The undo mechanism is facilitated by the abstract class `ConcreteCommand`. 
-It extends `Command` and has the `undo()` method. The `undo()` method is called when the user executes the `undo` command. 
+The undo mechanism is facilitated by the interface `Undoable`.
+It has the `undo()` method. The `undo()` method is called when the user executes the `undo` command. 
 The `undo()` method reverses the effects of the command that was previously executed.
-The `undo()` method is implemented in the concrete command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
+The `undo()` method is implemented in the undoable command classes, such as `AddCommand`, `DeleteCommand`, `EditCommand`, etc.
 
-The `Model` component stores a history of executed concrete commands in a stack.
+The `Model` component stores a history of executed undoable commands in a stack.
 When a command is executed successfully, the command is pushed onto the stack.
 When the user executes the `undo` command, the `Model` component pops the last command from the stack and calls the `undo()` method of the command.
 
@@ -236,7 +236,7 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-The `clean` command extends `ConcreteCommand`. The `clean` command deletes the contacts whose `GradYear` field is earlier
+The `clean` command extends `Command` and implements `Undoable`. The `clean` command deletes the contacts whose `GradYear` field is earlier
 than the current year, deleting contacts who have graduated from the address book.
 The `clean` command is undoable.
 
