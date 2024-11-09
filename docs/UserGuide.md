@@ -38,7 +38,7 @@ the process of accessing and updating resident student details. What's more, Dor
     - [Exiting the program : `exit`](#exiting-the-program-exit)
     - [Manual saving : `export`](#manual-saving-export)
     - [Manual data restoration : `import`](#manual-data-restoration-import)
-- [FAQ](#FAQ)
+- [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
 - [Field constraints](#field-constraints)
