@@ -8,8 +8,7 @@
 ## **Acknowledgements**
 
 * This project is built on the AddressBook-Level3 (AB3) project created by the [SE-EDU initiative](https://se-education.org).
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* 3rd-party Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -257,12 +256,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `person-delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -408,7 +401,7 @@ Priorities:
       Use case resumes at step 1.</panel>
 
 * 3a. The student with matriculation number does not exist.
-    * 2a1. System shows an error message, "Student does not exist."
+  * 2a1. System shows an error message, "Student does not exist."
       Use case resumes at step 1.</panel>
 
 <panel header="#### Use case: Edit a contact" expanded>
@@ -886,8 +879,6 @@ testers are expected to do more _exploratory_ testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -903,9 +894,8 @@ testers are expected to do more _exploratory_ testing.
    1. Other incorrect delete commands to try: `person-delete`, `person-delete x`, `...` (where x is a matriculation number of student that does not exist)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Adding, Deleting, and Editing courses
+
 Similar to adding, deleting and editing persons, but with courses.
 For adding, the command is `course-add c/CS2103T n/Software Engineering`.
 For deleting, the command is `course-delete c/CS2103T`.
@@ -931,28 +921,26 @@ For editing, the command is `course-edit c/CS2103T n/Software Engineering II`.
 
     1. Prerequisites: Ensure that a _student_ object has been created but a course with course code _CS3233_ has not been created
 
-    2. Test case: Test case: `enroll m/A2345678Y c/CHUNITHM tut/T17`
+    2. Test case: `enroll m/A2345678Y c/CHUNITHM tut/T17`
 
         Expected: An error message will be displayed to the user and no enrollment will occur as the course code entered has an invalid format.
 
-    3. Test case: Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
+    3. Test case: `enroll m/A2345678Y c/CS3233 tut/T17`
 
        Expected: An error message will be displayed to the user and no enrollment will occur as no such course with course code exists on TAHub.
-
-3. _{ more test cases... }_
 
 ### Managing Attendance
 
 1. Marking students as present
     1. Prerequisites:  Ensure that both student and course objects have been created and the student is enrolled into
-   a valid tutorial of the course.(In this case, the student object with matriculation number A0286651Y, the course
+   a valid tutorial of the course. (In this case, the student object with matriculation number A0286651Y, the course
    object with course code MA1521 must already be created and the student must be enrolled in tutorial T17)
     2. Test case: `attend-present m/A0286651Y c/MA1521 tut/T17` <br>
 Expected: Student marked present. Success message shown.
 
 2. Marking students as absent
     1. Prerequisites: Ensure that both student and course objects have been created and the student is enrolled into
-       a valid tutorial of the course.(In this case, the student object with matriculation number A0286651Y, the course
+       a valid tutorial of the course. (In this case, the student object with matriculation number A0286651Y, the course
        object with course code MA1521 must already be created and the student must be enrolled in tutorial T17)
     2. Test case: `attend-absent m/A0286651Y c/MA1521 tut/T17` <br>
 Expected: Student marked absent. Success message shown.
@@ -967,7 +955,10 @@ Expected: Attendance cleared. Success message shown.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Prerequisites: TAHub Contacts must have been run at least once with a data-modifying operation.
+   2. Test case: **missing** file(s) - delete one or more of the `.json` files in `./data` <br>
+      **Expected**: TAHub Contacts automatically loads a set of sample data to replace the missing data.
+      (This behavior is meant to be used for loading sample data when first running the program)
+   3. Test case: **corrupted** file(s) - corrupt one or more of the `.json` files in `./data`,
+      for instance, by deleting the trailing `}` and invalidating the JSON format. <br>
+      **Expected**: TAHub Contacts loads with empty data.
