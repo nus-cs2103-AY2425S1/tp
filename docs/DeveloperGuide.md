@@ -730,6 +730,32 @@ testers are expected to do more *exploratory* testing.
 
    4. Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
 
+### Listing all customers
+
+1. Listing all customers with or without aliases.
+
+    1. Test case: `listcustomer` <br>
+       Expected: All customers are listed. A success message shown in the status message.
+
+    2. Test case: `listc` <br>
+       Expected: All customers are listed. A success message shown in the status message.
+
+### Finding customers by name.
+
+1. Finding customers with one keyword.
+
+    1. Test case: `findcustomer bernice` <br>
+       Expected: 
+        1. All customers with 'bernice' in their names are listed. A success message shown in the status message.
+        2. If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
+       
+2. Finding customers with multiple keywords using command aliases.
+
+    1. Test case: `findc alex david` <br>
+       Expected:
+        1. All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
+        2. If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
+   
 ### Editing an existing customer
 
 1. Editing a customer while all customers are being shown.
