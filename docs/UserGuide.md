@@ -102,7 +102,7 @@ Edits an existing student in the contact list.
 
 Format: `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
-- Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, …​).
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -113,86 +113,6 @@ Examples:
 
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
-
-### Marking student as present : `mark`
-
-Marks specified tutorial attendance as present of the student by the index number.
-
-Format: `mark INDEX tut/TUTORIAL`
-
-- Marks the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** `1, 2, 3, …`​ .
-- `TUTORIAL` can be in the format of:
-  - A positive number between 1 - 12 (inclusive) e.g. `1`.
-  - A list of numbers e.g. `[1,3,5]`.
-  - A range of two numbers e.g. `3-6`. 
-
-Examples:
-
-- `mark 1 tut/1` Marks the 1st student in the contact list as attended for tutorial 1.
-- `mark 1 tut/1-3` Marks the 1st student in the contact list as attended for tutorials 1 to 3.
-- `mark 1 tut/[2,4,12]` Marks the 1st student in the contact list as attended for tutorials 2, 4 and 12.
-
-Visual Effect:
-
-- After the command `mark 1 tut/1`, tutorial box 1 of the 1st student will turn green.
-
-  |Before|After|
-  |---|---|
-  |![Before](images/MarkBefore.png)|![After](images/MarkAfter.png)|
-
-### Marking student as absent : `unmark`
-
-Marks specified tutorial attendance as absent of the student by the index number.
-
-Format: `unmark INDEX tut/TUTORIAL`
-
-- Marks the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** `1, 2, 3, …​`.
-- `TUTORIAL` can be in the format of:
-    - A positive number between 1 - 12 (inclusive) e.g. `1`.
-    - A list of numbers e.g. `[1,3,5]`.
-    - A range of two numbers e.g. `3-6`.
-
-Examples:
-
-- `unmark 1 tut/1` Marks the 1st student in the contact list as absent for tutorial 1.
-- `unmark 1 tut/1-3` Marks the 1st student in the contact list as absent for tutorials 1 to 3.
-- `unmark 1 tut/[2,4,12]` Marks the 1st student in the contact list as absent for tutorials 2, 4 and 12.
-
-Visual Effect:
-
-The specified tutorial box of the specified student will turn <span style="color:red">red</span>.
-
-<div markdown="block" class="alert alert-info">
-
->[!NOTE]
->To reduce visual clutter, an image will not be provided.
-
-### Resetting student's attendance : `reset`
-
-Resets specified tutorial attendance of the student by the index number.
-
-Format: `reset INDEX tut/TUTORIAL`
-
-- Resets the attendance of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** `1, 2, 3, …​`.
-- `TUTORIAL` can be in the format of:
-    - A positive number between 1 - 12 (inclusive) e.g. `1`.
-    - A list of numbers e.g. `[1,3,5]`.
-    - A range of two numbers e.g. `3-6`.
-
-Examples:
-
-- `reset 1 tut/1` Resets the attendance of the 1st student in the contact list for tutorial 1.
-- `reset 1 tut/1-3` Resets the attendance of the 1st student in the contact list for tutorials 1 to 3.
-- `reset 1 tut/[2,4,12]` Resets the attendance of the 1st student in the contact list for tutorials 2, 4 and 12.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Faster attendance updating:**<br>
-You can use the `mark`, `unmark` and `reset` commands with the wildcard `*` to update the attendance of all currently displayed students in the address book at once.
-- `mark * tut/1` marks all students as attended for tutorial 1.
-- `unmark * tut/1` marks all students as absent for tutorial 1.
-- `reset * tut/1` resets the attendance of all students for tutorial 1.
-</div>
 
 ### Locating students by name or tag: `find`
 
@@ -218,11 +138,102 @@ Examples:
 - `find alex t/colleagues` returns `Alex Yeoh` and all contacts marked with tag `colleagues`<br>
   ![result for 'find alex t/colleagues'](images/findAlexColleaguesResult.png)
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Updated index:**<br>
+After a `find` command, the **next** command's `INDEX` will refer to the index in the displayed list.
+</div>
+
+### Marking student as present : `mark`
+
+Marks specified tutorial attendance as present of the student by the index number.
+
+Format: `mark INDEX tut/TUTORIAL`
+
+- Marks the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, …​).
+- `TUTORIAL` can be in the format of:
+  - A positive number between 1 - 12 (inclusive) e.g. `1`.
+  - A list of numbers e.g. `[1,3,5]`.
+  - A range of two numbers e.g. `3-6`. 
+
+Examples:
+
+- `mark 1 tut/1` Marks the 1st student in the contact list as attended for tutorial 1.
+- `mark 1 tut/1-3` Marks the 1st student in the contact list as attended for tutorials 1 to 3.
+- `mark 1 tut/[2,4,12]` Marks the 1st student in the contact list as attended for tutorials 2, 4 and 12.
+
+Visual Effect:
+
+- After the command `mark 1 tut/1`, tutorial box 1 of the 1st student will turn <span style="color:green">green</span>.
+
+  |Before|After|
+  |---|---|
+  |![Before](images/MarkBefore.png)|![After](images/MarkAfter.png)|
+
+### Marking student as absent : `unmark`
+
+Marks specified tutorial attendance as absent of the student by the index number.
+
+Format: `unmark INDEX tut/TUTORIAL`
+
+- Marks the student at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** (1, 2, 3, ...).
+- `TUTORIAL` can be in the format of:
+    - A positive number between 1 - 12 (inclusive) e.g. `1`.
+    - A list of numbers e.g. `[1,3,5]`.
+    - A range of two numbers e.g. `3-6`.
+
+Examples:
+
+- `unmark 1 tut/1` Marks the 1st student in the contact list as absent for tutorial 1.
+- `unmark 1 tut/1-3` Marks the 1st student in the contact list as absent for tutorials 1 to 3.
+- `unmark 1 tut/[2,4,12]` Marks the 1st student in the contact list as absent for tutorials 2, 4 and 12.
+
+Visual Effect:
+
+The specified tutorial box of the specified student will turn <span style="color:red">red</span>.
+
+|:exclamation: *To reduce visual clutter, an image will not be provided*.|
+---
+
+### Resetting student's attendance : `reset`
+
+Resets specified tutorial attendance of the student by the index number.
+
+Format: `reset INDEX tut/TUTORIAL`
+
+- Resets the attendance of the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** (1, 2, 3, ...).
+- `TUTORIAL` can be in the format of:
+    - A positive number between 1 - 12 (inclusive) e.g. `1`.
+    - A list of numbers e.g. `[1,3,5]`.
+    - A range of two numbers e.g. `3-6`.
+
+Examples:
+
+- `reset 1 tut/1` Resets the attendance of the 1st student in the contact list for tutorial 1.
+- `reset 1 tut/1-3` Resets the attendance of the 1st student in the contact list for tutorials 1 to 3.
+- `reset 1 tut/[2,4,12]` Resets the attendance of the 1st student in the contact list for tutorials 2, 4 and 12.
+
+Visual Effect:
+
+The specified tutorial box of the specified student will turn <span style="color:grey">grey</span>.
+
+|:exclamation: *To reduce visual clutter, an image will not be provided*.|
+---
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Faster attendance updating:**<br>
+You can use the `mark`, `unmark` and `reset` commands with the wildcard `*` to update the attendance of all currently displayed students in the contact list at once.
+- `mark * tut/1` marks all students as attended for tutorial 1.
+- `unmark * tut/1` marks all students as absent for tutorial 1.
+- `reset * tut/1` resets the attendance of all students for tutorial 1.
+</div>
+
 ### Sorting students : `sort`
 
 Sorts the displayed list of students by either name, student id or tutorial attendance. The sorting order will be maintained while edits to the list are made.
 
-Format: `sort ORDER [n/][i/][tut/TUTORIAL]`
+Format: `sort ORDER [n/] [i/] [tut/TUTORIAL]`
 
 - `ORDER` indicates whether the sorted list is **ascending** or **descending**.
 - **Ascending** is represented with integer 1.
@@ -236,24 +247,30 @@ Examples:
 - `sort -1 i/` sorts the student list in descending order according to student id.
 - `sort 1 tut/3` sorts the student list in ascending order according to tutorial 3 attendance.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Updated index:**<br>
+After a `sort` command, the **next** command's `INDEX` will refer to the index in the displayed list.
+</div>
+
 ### Deleting a student : `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified student from the contact list.
 
 Format: `delete INDEX`
 
 - Deletes the student at the specified `INDEX`.
-- The index refers to the index number shown in the displayed student list.
-- The index **must be a positive integer** 1, 2, 3, …​
+- The index refers to the index number shown in the current displayed contact list.
+- The index **must be a positive integer** e.g. 1, 2, 3, …​
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd student in the address book.
+- `list` followed by `delete 2` deletes the 2nd student in the current displayed contact list.
 - `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the contact list.
 
 Format: `clear`
 
@@ -265,15 +282,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ConTActs data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ConTActs data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ConTActs will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ConTActs to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ---
@@ -284,14 +301,14 @@ Click on each command to jump to their subsection.
 | Action                                            | Format, Examples                                                                                                                                                            |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Help](#viewing-help--help)**                   | `help`                                                                                                                                                                      |
-| **[Add](#adding-a-student--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/CS1101 t/colleague`                            |
+| **[Add](#adding-a-student--add)**                  | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/John Doe i/E0000000 p/98765432 e/johnd@example.com t/CS1101S`                            |
 | **[List](#listing-all-students--list)**            | `list`                                                                                                                                                                      |
 | **[Edit](#editing-a-student--edit)**               | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                     |
 | **[Mark](#marking-student-as-attended--mark)**     | `mark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list (e.g.,`tut/[1,3,7]`) or range (e.g.,`tut/1-12`) <br> e.g., `mark 2 tut/1` |
 | **[Unmark](#marking-student-as-absent--unmark)**   | `unmark INDEX tut/TUTORIAL` <br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list or range<br> e.g., `unmark 2 tut/1`                                     |
 | **[Reset](#resetting-students-attendance--reset)** | `reset INDEX tut/TUTORIAL`<br> - `INDEX`: integer or `*` for all <br> - `TUTORIAL`: integer, list or range <br> e.g., `reset 2 tut/1`                                       |
 | **[Find](#locating-students-by-name--find)**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                  |
-| **[Sort](#sorting-students--sort)**                | `sort ORDER [n/][i/][tut/]`<br> e.g., `sort -1 i/`                                                                                                                          |
+| **[Sort](#sorting-students--sort)**                | `sort ORDER [n/] [i/] [tut/]`<br> e.g., `sort -1 i/`                                                                                                                          |
 | **[Delete](#deleting-a-student--delete)**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                         |
 | **[Clear](#clearing-all-entries--clear)**         | `clear`                                                                                                                                                                     |
 | **[Exit](#exiting-the-program--exit)**            | `exit`                                                                                                                                                                      |
