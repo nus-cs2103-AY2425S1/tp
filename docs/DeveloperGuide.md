@@ -691,7 +691,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+
 
 ### Deleting a student
 
@@ -708,12 +708,13 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prequisites: Invalid data. For example, create edit a existing student json file with a invalid phone number by adding `@`
+   2. Launch the jar file. Expected behaviour is that EduLog is now completely empty, with no students and lessons.
 
-1. _{ more test cases …​ }_
+
