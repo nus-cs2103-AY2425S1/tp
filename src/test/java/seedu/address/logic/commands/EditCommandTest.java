@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -24,7 +24,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.list.GroupList;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Major;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Year;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -56,10 +62,10 @@ public class EditCommandTest {
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withStudentId(VALID_STUDENTID_BOB)
-                .withGroups(VALID_TAG_HUSBAND).build();
+                .withGroups(VALID_GROUP_ONE).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withStudentId(VALID_STUDENTID_BOB).withGroups(VALID_TAG_HUSBAND).build();
+                .withStudentId(VALID_STUDENTID_BOB).withGroups(VALID_GROUP_ONE).build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
@@ -129,6 +135,16 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INDEX_UPPERBOUND_ERROR);
     }
 
+    @Test
+    public void execute_editEmptyList_failure() {
+        Model emptyModel = new ModelManager();
+        Index index = Index.fromOneBased(1);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(index, descriptor);
+
+        assertCommandFailure(editCommand, emptyModel, Messages.MESSAGE_EDIT_EMPTY_ERROR);
+    }
+
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
@@ -179,6 +195,52 @@ public class EditCommandTest {
         String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
                 + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
+    }
+
+    @Test
+    public void isAnyFieldEdited_nameFieldSet_returnsTrue() {
+        // Test when only the name field is set
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setName(new Name("Dylan Goh"));
+
+        // The name field is set, so it should return true
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_someFieldsSet_returnsTrue() {
+        // Test when some fields are set
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setName(new Name("Dylan Goh"));
+        descriptor.setMajor(Major.makeMajor("Arts"));
+        descriptor.setYear(Year.makeYear("3"));
+
+        // This should return true
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_allFieldsSet_returnsTrue() {
+        // Test when all fields are set
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+        descriptor.setName(new Name("Dylan Goh"));
+        descriptor.setStudentId(new StudentId("A1234567B"));
+        descriptor.setEmail(Email.makeEmail(""));
+        descriptor.setMajor(Major.makeMajor("Arts"));
+        descriptor.setYear(Year.makeYear("3"));
+        descriptor.setGroups(new GroupList());
+
+        // This should return true
+        assertTrue(descriptor.isAnyFieldEdited());
+    }
+
+    @Test
+    public void isAnyFieldEdited_noFieldsSet_returnsFalse() {
+        // Test when no fields are set
+        EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
+
+        // No fields are edited, should return false
+        assertFalse(descriptor.isAnyFieldEdited());
     }
 
 }

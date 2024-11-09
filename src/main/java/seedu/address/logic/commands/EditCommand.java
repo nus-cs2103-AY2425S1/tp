@@ -158,6 +158,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code groups} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            assert toCopy != null : "The person to be copied should not be null";
             setName(toCopy.name);
             setStudentId(toCopy.studentId);
             setEmail(toCopy.email);
@@ -228,9 +229,9 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable {@code GroupList}, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code groups} is null.
          */
         public Optional<GroupList> getGroups() {
             return (groups != null) ? Optional.of(groups.makeListUnmodifiable()) : Optional.empty();

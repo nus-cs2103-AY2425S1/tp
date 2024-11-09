@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MAJOR_DESC;
@@ -13,14 +16,12 @@ import static seedu.address.logic.commands.CommandTestUtil.MAJOR_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAJOR_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
@@ -40,6 +41,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -48,10 +50,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_GROUP;
-
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+    private static final String GROUP_EMPTY = " " + PREFIX_GROUP;
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -100,13 +99,13 @@ public class EditCommandParserTest {
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_STUDENTID_DESC + EMAIL_DESC_AMY, StudentId.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
+        // while parsing {@code PREFIX_GROUP} alone will reset the groups of the {@code Person} being edited,
+        // parsing it together with a valid group results in error
+        assertParseFailure(parser, "1" + GROUP_DESC_TWO + GROUP_DESC_ONE + GROUP_EMPTY,
                 Group.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
+        assertParseFailure(parser, "1" + GROUP_DESC_TWO + GROUP_EMPTY + GROUP_DESC_ONE,
                 Group.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+        assertParseFailure(parser, "1" + GROUP_EMPTY + GROUP_DESC_TWO + GROUP_DESC_ONE,
                 Group.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
@@ -119,11 +118,11 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + STUDENTID_DESC_BOB + YEAR_DESC_AMY
-                + EMAIL_DESC_AMY + MAJOR_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+                + EMAIL_DESC_AMY + MAJOR_DESC_AMY + NAME_DESC_AMY + GROUP_DESC_TWO;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withStudentId(VALID_STUDENTID_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_MAJOR_AMY)
-                .withYear(VALID_YEAR_AMY).withGroups(VALID_TAG_FRIEND).build();
+                .withYear(VALID_YEAR_AMY).withGroups(VALID_GROUP_TWO).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -162,15 +161,15 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
+        // major
         userInput = targetIndex.getOneBased() + MAJOR_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_MAJOR_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withGroups(VALID_TAG_FRIEND).build();
+        // groups
+        userInput = targetIndex.getOneBased() + GROUP_DESC_TWO;
+        descriptor = new EditPersonDescriptorBuilder().withGroups(VALID_GROUP_TWO).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -193,8 +192,8 @@ public class EditCommandParserTest {
 
         // mulltiple valid fields repeated
         userInput = targetIndex.getOneBased() + STUDENTID_DESC_AMY + MAJOR_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + STUDENTID_DESC_AMY + MAJOR_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + STUDENTID_DESC_BOB + MAJOR_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+                + GROUP_DESC_TWO + STUDENTID_DESC_AMY + MAJOR_DESC_AMY + EMAIL_DESC_AMY + GROUP_DESC_TWO
+                + STUDENTID_DESC_BOB + MAJOR_DESC_BOB + EMAIL_DESC_BOB + GROUP_DESC_ONE;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID, PREFIX_NETID,
@@ -211,11 +210,38 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetGroups_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = targetIndex.getOneBased() + GROUP_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withGroups().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_duplicateGroups_throwsParseException() {
+        // Test input with duplicate group names
+        String input = "1 g/ group 1 g/ group 1";
+
+        // Expect a ParseException to be thrown due to duplicate groups
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
+
+    @Test
+    public void parse_duplicateGroupsDifferentCase_throwsParseException() {
+        // Test input with duplicate group names in different cases
+        String input = "1 g/ group 1 g/ GROUP 1";
+
+        // Expect a ParseException to be thrown due to duplicate groups
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
+
+    @Test
+    public void parse_duplicateGroupsWithSpace_throwsParseException() {
+        // Test input with duplicate group names with differing spaces between words
+        String input = "1 g/ group 1 g/ group     1";
+
+        // Expect a ParseException to be thrown due to duplicate groups
+        assertThrows(ParseException.class, () -> parser.parse(input));
     }
 }

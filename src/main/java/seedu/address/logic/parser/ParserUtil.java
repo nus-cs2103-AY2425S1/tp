@@ -206,22 +206,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String group} into a {@code Group}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code group} is invalid.
      */
-    public static Group parseGroup(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Group.isValidGroupName(trimmedTag)) {
+    public static Group parseGroup(String group) throws ParseException {
+        requireNonNull(group);
+        String trimmedGroup = group.trim();
+        if (!Group.isValidGroupName(trimmedGroup)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
-        return new Group(trimmedTag);
+        return new Group(trimmedGroup);
     }
 
     /**
-     * Parses {@code Collection<String> groups} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> groups} into a {@code Set<Group>}.
      */
     public static GroupList parseGroups(Collection<String> groups) throws ParseException {
         requireNonNull(groups);

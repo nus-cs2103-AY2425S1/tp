@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MAJOR_DESC;
@@ -16,14 +18,12 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
@@ -52,26 +52,26 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withGroups(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withGroups(VALID_GROUP_TWO).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + STUDENTID_DESC_BOB + EMAIL_DESC_BOB
-                + MAJOR_DESC_BOB + YEAR_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + MAJOR_DESC_BOB + YEAR_DESC_BOB + GROUP_DESC_TWO, new AddCommand(expectedPerson));
 
 
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withGroups(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        // multiple groups - all accepted
+        Person expectedPersonMultipleGroups = new PersonBuilder(BOB).withGroups(VALID_GROUP_TWO, VALID_GROUP_ONE)
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + STUDENTID_DESC_BOB + EMAIL_DESC_BOB + MAJOR_DESC_BOB + YEAR_DESC_BOB
-                        + TAG_DESC_HUSBAND,
-                new AddCommand(expectedPersonMultipleTags));
+                        + GROUP_DESC_ONE,
+                new AddCommand(expectedPersonMultipleGroups));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonGroupValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + STUDENTID_DESC_BOB + EMAIL_DESC_BOB
-                + MAJOR_DESC_BOB + TAG_DESC_FRIEND;
+                + MAJOR_DESC_BOB + GROUP_DESC_TWO;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -136,7 +136,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // zero groups
         Person expectedPerson = new PersonBuilder(AMY).withGroups().build();
         assertParseSuccess(parser, NAME_DESC_AMY + STUDENTID_DESC_AMY + EMAIL_DESC_AMY + MAJOR_DESC_AMY
                         + YEAR_DESC_AMY,
@@ -164,23 +164,23 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + STUDENTID_DESC_BOB + EMAIL_DESC_BOB + MAJOR_DESC_BOB
-                + TAG_DESC_HUSBAND, Name.MESSAGE_CONSTRAINTS);
+                + GROUP_DESC_ONE, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_STUDENTID_DESC + EMAIL_DESC_BOB + MAJOR_DESC_BOB
-                + TAG_DESC_HUSBAND, StudentId.MESSAGE_CONSTRAINTS);
+                + GROUP_DESC_ONE, StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + STUDENTID_DESC_BOB + INVALID_EMAIL_DESC + MAJOR_DESC_BOB
-                + TAG_DESC_HUSBAND, Email.MESSAGE_CONSTRAINTS);
+                + GROUP_DESC_ONE, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + STUDENTID_DESC_BOB + EMAIL_DESC_BOB + INVALID_MAJOR_DESC
-                + TAG_DESC_HUSBAND, Major.MESSAGE_CONSTRAINTS);
+                + GROUP_DESC_ONE, Major.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid group
         assertParseFailure(parser, NAME_DESC_BOB + STUDENTID_DESC_BOB + EMAIL_DESC_BOB + MAJOR_DESC_BOB
-                + INVALID_GROUP_DESC + VALID_TAG_FRIEND, Group.MESSAGE_CONSTRAINTS);
+                + INVALID_GROUP_DESC + VALID_GROUP_TWO, Group.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + STUDENTID_DESC_BOB + EMAIL_DESC_BOB + INVALID_MAJOR_DESC,
@@ -188,7 +188,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + STUDENTID_DESC_BOB + EMAIL_DESC_BOB
-                + MAJOR_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + MAJOR_DESC_BOB + GROUP_DESC_ONE + GROUP_DESC_TWO,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

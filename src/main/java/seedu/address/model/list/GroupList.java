@@ -31,6 +31,7 @@ public class GroupList implements Iterable<Group> {
      * @param groups A set of groups to initialize the GroupList.
      */
     public GroupList(Set<Group> groups) {
+        assert groups != null : "groups in GroupList should not be null";
         this.groups = new HashSet<>(groups);
         this.isModifiable = true;
     }
