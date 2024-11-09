@@ -39,9 +39,9 @@ ClinicConnect is a **desktop app for managing contacts, optimized for use via a 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## ClinicConnect System Features
+## ClinicConnect Features
 
-The system is designed to streamline clinic processes with various functionalities to book appointments and manage patient details effectively. These features allow you to perform a range of operations, from adding new patient records, managing patient details, scheduling appointments, filtering health services and customizing data to enhance productivity. 
+ClinicConnect is designed to streamline clinic processes with various functionalities to book appointments and manage patient details effectively. These features allow you to perform a range of operations, from adding new patient records, managing patient details, scheduling appointments, filtering health services and customizing data to enhance productivity. 
 
 The following sections will delve into the individual features, providing detailed descriptions and guidance on how to utilize each function to make the most out of the system's capabilities. 
 
