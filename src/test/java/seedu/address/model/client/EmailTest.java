@@ -69,7 +69,8 @@ public class EmailTest {
     @Test
     public void equals() {
         Email email = new Email("valid@email");
-
+        Email emptyEmail = new Email();
+        
         // same values -> returns true
         assertTrue(email.equals(new Email("valid@email")));
 
@@ -81,6 +82,9 @@ public class EmailTest {
 
         // different types -> returns false
         assertFalse(email.equals(5.0f));
+
+        // value check with no value
+        assertFalse(email.equals(emptyEmail));
 
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
