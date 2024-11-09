@@ -816,30 +816,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Set and view suggestions for tags**
-
-**MSS**
-
-1. User requests suggestions for types of tags.
-
-2. PROperty analyzes existing contacts and interactions.
-
-3. PROperty provides a list of suggested tags.
-
-4. User reviews and applies relevant tags to contacts.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. PROperty lacks sufficient data to provide suggestions.
-  
-  - 2a1. PROperty informs the user and suggests manual tag creation.
-    
-    Use case ends.
-
----
-
 **Use case: View a guide on application features**
 
 **MSS**
