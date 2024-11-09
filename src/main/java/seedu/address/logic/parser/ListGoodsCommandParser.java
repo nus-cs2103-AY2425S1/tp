@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ListGoodsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
@@ -37,6 +38,11 @@ public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_GOODS_NAME, PREFIX_NAME);
         Predicate<GoodsReceipt> predicate = null;
+
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, ListGoodsCommand.MESSAGE_USAGE));
+        }
 
         // check for the three optional inputs and chain if needed
         if (arePrefixesPresent(argMultimap, PREFIX_GOODS_NAME)) {
