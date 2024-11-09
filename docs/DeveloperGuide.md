@@ -393,23 +393,22 @@ Use case ends.
 
 **MSS**
 
-1. User wants to delete a customer.
-2. User finds the customer index from the list.
-3. User deletes the customer by their index.
-4. SellSavvy updates the displayed list of customers and indicates that delete is successful.
+1. User finds the customer index from the list.
+2. User deletes the customer by their index.
+3. SellSavvy updates the displayed list of customers and indicates that delete is successful.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. SellSavvy detects that there are no customers with the specified index.
-  * 3a1. SellSavvy displays an error that the customer index is invalid. 
+* 2a. SellSavvy detects that there are no customers with the specified index.
+  * 2a1. SellSavvy displays an error that the customer index is invalid. 
   
   Use case ends.
 
 
-* 3b. SellSavvy detects that there are no customers with the specified index.
-    * 3a1. SellSavvy displays an error that the customer index is invalid.
+* 2b. SellSavvy detects that there are no customers with the specified index.
+    * 2a1. SellSavvy displays an error that the customer index is invalid.
 
   Use case ends.
 
@@ -423,9 +422,8 @@ Use case ends.
 
 **MSS**
 
-1. User wants to search for a specific customer.
-2. User specifies keyword(s) of the name of the customer
-3. SellSavvy displays all customers whose names have at least one of the keywords.
+1. User specifies keyword(s) of the name of the customer.
+2. SellSavvy displays all customers whose names have at least one of the keywords.
 
 Use case ends.
 
@@ -440,38 +438,37 @@ Use case ends.
 
 **MSS**
 
-1. User wants to add an order under a specific customer.
-2. User finds the customer index from the list.
-3. User adds the customer using the index, specifying the details of the order.
-4. SellSavvy adds the order under the customer.
-5. SellSavvy confirms the addition by displaying the newly added order's details and customer's list of orders.
+1. User finds the customer index from the list.
+2. User adds the customer using the index, specifying the details of the order.
+3. SellSavvy adds the order under the customer.
+4. SellSavvy confirms the addition by displaying the newly added order's details and customer's list of orders.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. SellSavvy detects required details missing.
-    * 3a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
+* 2a. SellSavvy detects required details missing.
+    * 2a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
 
   Use case ends.
 
 
-* 3b. SellSavvy detects that there is a parameter not satisfying its constraint.
-    * 3b1. SellSavvy states the constraint of the invalid parameter.
+* 2b. SellSavvy detects that there is a parameter not satisfying its constraint.
+    * 2b1. SellSavvy states the constraint of the invalid parameter.
 
   Use case ends
 
 
-* 3c. SellSavvy detects that there are no customers with the specified index.
-    * 3c1. SellSavvy displays an error that the customer index is invalid.
+* 2c. SellSavvy detects that there are no customers with the specified index.
+    * 2c1. SellSavvy displays an error that the customer index is invalid.
 
   Use case ends.
 
 
-* 4a. SellSavvy detects that there is an existing pending order under the customer with a similar details.
-    * 4a1. SellSavvy gives a warning that an order with a similar details already exists.
+* 3a. SellSavvy detects that there is an existing pending order under the customer with a similar details.
+    * 3a1. SellSavvy gives a warning that an order with a similar details already exists.
 
-  Use case resumes from step 5.
+  Use case resumes from step 4.
 
 **Use case 6: List a Customer's Orders**
 
@@ -484,18 +481,17 @@ Use case ends.
 
 **MSS**
 
-1. User wants to view all orders made by a specific customer.
-2. User finds the customer index from the customer list.
-3. User inputs command to list all orders, by the index of customer in customer list.
-4. SellSavvy retrieves a list of all orders made by specified customer.
-5. SellSavvy displays the orders in a list in GUI.
+1. User finds the customer index from the customer list.
+2. User inputs command to list all orders, by the index of customer in customer list.
+3. SellSavvy retrieves a list of all orders made by specified customer.
+4. SellSavvy displays the orders in a list in GUI.
 
 Use case ends.
 
 **Extensions**
 
-* 3a. SellSavvy detects that there are no customers with the specified index.
-    * 3a1. SellSavvy displays an error that the customer index is invalid.
+* 2a. SellSavvy detects that there are no customers with the specified index.
+    * 2a1. SellSavvy displays an error that the customer index is invalid.
 
     Use case ends.
 
@@ -510,23 +506,22 @@ Use case ends.
 
 **MSS**
 
-1. User wants to mark an order by a customer as completed.
-2. User finds the order they want to mark as completed.
-3. User specifies the index of the order.
-4. SellSavvy updates the status of the order and indicates that the action is successful.
+1. User finds the order they want to mark as completed.
+2. User specifies the index of the order.
+3. SellSavvy updates the status of the order and indicates that the action is successful.
 
 Use case ends.
 
 **Extensions**
 
-* 3a.  The specified order is already marked as "Completed".
-    * 3a1. SellSavvy displays a message stating that the order is already marked as completed.
+* 2a.  The specified order is already marked as "Completed".
+    * 2a1. SellSavvy displays a message stating that the order is already marked as completed.
 
     Use case ends.
 
 
-* 3b. There are no orders with the specified index.
-  * 3b1. SellSavvy displays an error that the order index is invalid.
+* 2b. There are no orders with the specified index.
+  * 2b1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
 
@@ -541,23 +536,22 @@ Use case ends.
 
 **MSS**
 
-1. User wants to remove "Completed" Marking from Order due to mistake.
-2. User finds the order they want to mark as completed.
-3. User specifies the index of the order.
-4. SellSavvy updates the status of the order and indicates that the action is successful.
+1. User finds the order they want to mark as completed.
+2. User specifies the index of the order.
+3. SellSavvy updates the status of the order and indicates that the action is successful.
 
 Use case ends.
 
 **Extensions**
 
-* 3a.  The specified order is not marked as “Completed” in the first place.
-    * 3a1. SellSavvy displays a message stating that the order is not marked as completed in the first place.
+* 2a.  The specified order is not marked as “Completed” in the first place.
+    * 2a1. SellSavvy displays a message stating that the order is not marked as completed in the first place.
 
   Use case ends.
 
 
-* 3b. There are no orders with the specified index.
-    * 3b1. SellSavvy displays an error that the order index is invalid.
+* 2b. There are no orders with the specified index.
+    * 2b1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
 
@@ -572,16 +566,15 @@ Use case ends.
 
 **MSS**
 
-1. User wants to delete an order.
-2. User finds the order they want to delete.
-3. User deletes the order by their index.
-4. SellSavvy updates the displayed list of orders that the action is successful.
+1. User finds the order they want to delete.
+2. User deletes the order by their index.
+3. SellSavvy updates the displayed list of orders that the action is successful.
 
 Use case ends.
 
 
-* 3a. There are no orders with the specified index.
-    * 3a1. SellSavvy displays an error that the order index is invalid.
+* 2a. There are no orders with the specified index.
+    * 2a1. SellSavvy displays an error that the order index is invalid.
 
   Use case ends.
 
@@ -596,16 +589,15 @@ Use case ends.
 
 **MSS**
 
-1. User wants to filter an order list.
-2. User filters the order list of the customer by the status keyword.
-3. SellSavvy displays the orders with specified status in a list in GUI.
+1. User filters the order list of the customer by the status keyword.
+2. SellSavvy displays the orders with specified status in a list in GUI.
 
 Use case ends.
 
 **Extensions**
 
-* 2a. There is no such status with specified status keyword.
-  * 2a1. SellSavvy displays an error message "Invalid command format!" and provides the available status keywords.
+* 1a. There is no such status with specified status keyword.
+  * 1a1. SellSavvy displays an error message "Invalid command format!" and provides the available status keywords.
 
   Use case ends.
 
