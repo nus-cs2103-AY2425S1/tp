@@ -2,9 +2,9 @@ package tuteez.logic.parser;
 
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
 
 import tuteez.commons.core.index.Index;
-import tuteez.logic.commands.AddLessonCommand;
 import tuteez.logic.commands.DeleteCommand;
 import tuteez.logic.parser.exceptions.ParseException;
 import tuteez.model.person.Name;
@@ -20,20 +20,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        validateBasicCommandFormat(args);
+        validateNonEmptyArgs(args, DeleteCommand.MESSAGE_USAGE);
         if (args.trim().matches("-?\\d+")) {
             Index index = parsePersonIndex(args);
             return new DeleteCommand(index);
         } else {
             Name name = ParserUtil.parseName(args);
             return new DeleteCommand(name);
-        }
-    }
-
-    private void validateBasicCommandFormat(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddLessonCommand.MESSAGE_USAGE));
         }
     }
 

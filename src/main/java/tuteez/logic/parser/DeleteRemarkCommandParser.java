@@ -8,6 +8,8 @@ import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_REMARK_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_REMARK_INDEX_PREFIX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK_INDEX;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
+import static tuteez.logic.parser.ParserUtil.validatePrefixExists;
 
 import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.DeleteRemarkCommand;
@@ -25,28 +27,15 @@ public class DeleteRemarkCommandParser implements Parser<DeleteRemarkCommand> {
      */
     public DeleteRemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        validateBasicCommandFormat(args);
+        validateNonEmptyArgs(args, DeleteRemarkCommand.MESSAGE_USAGE);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK_INDEX);
-        validatePrefixExists(argMultimap);
+        validatePrefixExists(argMultimap, PREFIX_REMARK_INDEX, MESSAGE_MISSING_REMARK_INDEX_PREFIX);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_REMARK_INDEX);
 
         Index personIndex = parsePersonIndex(argMultimap);
 
         return createDeleteRemarkCommand(personIndex, argMultimap);
-    }
-
-    private void validateBasicCommandFormat(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRemarkCommand.MESSAGE_USAGE));
-        }
-    }
-
-    private void validatePrefixExists(ArgumentMultimap argMultimap) throws ParseException {
-        if (!argMultimap.getValue(PREFIX_REMARK_INDEX).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_MISSING_REMARK_INDEX_PREFIX));
-        }
     }
 
     private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {

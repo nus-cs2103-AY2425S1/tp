@@ -10,6 +10,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        validateBasicCommandFormat(args);
+        validateNonEmptyArgs(args, EditCommand.MESSAGE_USAGE);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -133,11 +134,5 @@ public class EditCommandParser implements Parser<EditCommand> {
                     String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, preamble)));
         }
         return index;
-    }
-
-    private void validateBasicCommandFormat(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
     }
 }

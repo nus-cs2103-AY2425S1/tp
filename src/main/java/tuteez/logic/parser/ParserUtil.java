@@ -1,6 +1,7 @@
 package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -253,4 +254,35 @@ public class ParserUtil {
         }
         return new Remark(trimmedRemark);
     }
+
+    /**
+     * Validates that the provided {@code String args} is not empty or only whitespace.
+     * If invalid, throws a {@code ParseException} with the provided {@code errorMessage}.
+     *
+     * @param args The args to validate.
+     * @param errorMessage The error message to use in the exception if validation fails.
+     * @throws ParseException if {@code args} is empty or contains only whitespace.
+     */
+    public static void validateNonEmptyArgs(String args, String errorMessage) throws ParseException {
+        if (args.trim().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+        }
+    }
+
+    /**
+     * Validates that the specified {@code Prefix} exists in the given {@code ArgumentMultimap}.
+     * If the prefix is missing, throws a {@code ParseException} with the provided {@code errorMessage}.
+     *
+     * @param argMultimap The map of arguments to check.
+     * @param prefix The prefix to validate.
+     * @param errorMessage The error message to use in the exception if validation fails.
+     * @throws ParseException if the specified {@code prefix} is not present in {@code argMultimap}.
+     */
+    public static void validatePrefixExists(ArgumentMultimap argMultimap, Prefix prefix, String errorMessage)
+            throws ParseException {
+        if (!argMultimap.getValue(prefix).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
+        }
+    }
+
 }
