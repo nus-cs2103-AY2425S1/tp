@@ -110,6 +110,12 @@ If you’re comfortable typing, MindMap can help you get contact management task
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="warning" seamless>
+
+Our application uses Singapore’s NRIC system extensively. To ensure NRICs are valid, we’ve included a simple verification feature. You can test this feature with sample NRIC number/FIN from the [provided list](#sample-nric). 
+
+</box>
+
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -340,7 +346,7 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
 | **Help**      | Displays help message                | `help`                                                                    |                                                                                      |
 
 
- #### Additional Notes
+ ### Additional Notes
 
 * **Parameters**:
     - `n/NAME` - Full name of the patient.
@@ -363,4 +369,27 @@ Furthermore, certain edits can cause the MindMap to behave in unexpected ways (e
     - **Help** shows a guide for using all commands.
 
 ---
+
+## **Sample NRICs**
+
+<box type="important">
+
+The NRICs listed below are provided solely for testing and validation purposes within this application. Although randomly selected, some NRICs may correspond to real individuals. 
+
+This data is not to be used for any purposes beyond application testing. Unauthorized use or misuse of these NRICs is strictly prohibited and may be subject to legal consequences. We are not responsible for any misuse of this information outside its intended scope.
+
+</box>
+
+| **Index** | **Sample NRIC** |
+|-----------|-----------------|
+| 1         | S0088873G       |
+| 2         | T6498231H       |
+| 3         | F3135002Q       |
+| 4         | G7512224T       |
+| 5         | S0556162J       |
+| 6         | T8346779C       |
+| 7         | F0333341T       |
+| 8         | G7191281M       |
+| 9         | S4998948B       |
+| 10        | T3692411F       |
 
