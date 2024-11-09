@@ -36,8 +36,6 @@ public class BackupManager {
     private static final int MAX_BACKUPS = 10; // indexed from 0 to 9
     private static final int MAX_FILENAME_LENGTH = 250;
     private final Path backupDirectory;
-    private int currentIndex;
-
 
     /**
      * Constructs a {@code BackupManager} with the specified backup directory.
@@ -55,31 +53,6 @@ public class BackupManager {
         if (!Files.exists(backupDirectory)) {
             Files.createDirectories(backupDirectory);
             logger.info("Created backup directory at: " + backupDirectory);
-        }
-        initializeCurrentIndex();
-    }
-
-    /**
-     * Initializes the current index to the next available position based on existing backups.
-     * Starts from the index following the oldest backup.
-     *
-     * @throws IOException If an error occurs while accessing the backup directory.
-     */
-    private void initializeCurrentIndex() throws IOException {
-        try (Stream<Path> backups = Files.list(backupDirectory)) {
-            List<Path> sortedBackups = backups
-                    .filter(Files::isRegularFile)
-                    .sorted(Comparator.comparing(this::getFileTimestamp)) // Sort by timestamp
-                    .collect(Collectors.toList());
-
-            if (sortedBackups.isEmpty()) {
-                currentIndex = 0;
-            } else {
-                // Find the oldest backup by timestamp and use its index for the next overwrite
-                Path oldestBackup = sortedBackups.get(0);
-                int oldestIndex = extractIndex(oldestBackup);
-                currentIndex = (oldestIndex + 1) % MAX_BACKUPS;
-            }
         }
     }
 
@@ -118,7 +91,37 @@ public class BackupManager {
      */
     public int createIndexedBackup(Path sourcePath, String actionDescription) throws IOException {
         String timestamp = LocalDateTime.now().format(FILE_TIMESTAMP_FORMATTER);
-        String backupFileName = String.format("%d_%s_%s.json", currentIndex, actionDescription, timestamp);
+
+        int usedIndex;
+
+        try (Stream<Path> backups = Files.list(backupDirectory)) {
+            List<Path> backupFiles = backups
+                    .filter(Files::isRegularFile)
+                    .collect(Collectors.toList());
+
+            int numberOfBackups = backupFiles.size();
+
+            if (numberOfBackups < MAX_BACKUPS) {
+                // Find the highest existing index and increment
+                int highestIndex = backupFiles.stream()
+                        .mapToInt(this::extractIndex)
+                        .max()
+                        .orElse(-1);
+                usedIndex = highestIndex + 1;
+            } else {
+                // Find the oldest backup
+                Path oldestBackup = backupFiles.stream()
+                        .min(Comparator.comparing(this::getFileTimestamp))
+                        .orElseThrow(() -> new IOException("No backups found"));
+
+                usedIndex = extractIndex(oldestBackup);
+                // Delete the oldest backup
+                Files.deleteIfExists(oldestBackup);
+                logger.info("Deleted oldest backup at index " + usedIndex + ": " + oldestBackup);
+            }
+        }
+
+        String backupFileName = String.format("%d_%s_%s.json", usedIndex, actionDescription, timestamp);
 
         // Check if the file name exceeds the limit
         if (backupFileName.length() > MAX_FILENAME_LENGTH) {
@@ -129,38 +132,11 @@ public class BackupManager {
 
         Path backupPath = backupDirectory.resolve(backupFileName);
 
-        // Delete existing backup at currentIndex if it exists
-        deleteBackupByIndex(currentIndex);
-
         // Copy source to the backup path
         Files.copy(sourcePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
-        logger.info("Backup created with index: " + currentIndex);
-
-        int usedIndex = currentIndex;
-        // Update currentIndex
-        currentIndex = (currentIndex + 1) % MAX_BACKUPS;
+        logger.info("Backup created with index: " + usedIndex);
 
         return usedIndex;
-    }
-
-    /**
-     * Deletes a backup file by index if it exists.
-     *
-     * @param index The index of the backup to delete.
-     * @throws IOException If an error occurs during file deletion.
-     */
-    private void deleteBackupByIndex(int index) throws IOException {
-        try (Stream<Path> backups = Files.list(backupDirectory)) {
-            backups.filter(path -> extractIndex(path) == index)
-                    .forEach(path -> {
-                        try {
-                            Files.deleteIfExists(path);
-                            logger.info("Deleted old backup at index " + index + ": " + path);
-                        } catch (IOException e) {
-                            logger.warning("Failed to delete backup: " + path + " - " + e.getMessage());
-                        }
-                    });
-        }
     }
 
     /**

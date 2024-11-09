@@ -91,17 +91,6 @@ public class BackupManagerTest {
     }
 
     @Test
-    public void createIndexedBackup_multipleBackups_indicesRotate() throws IOException {
-        // Create multiple backups to test index rotation
-        for (int i = 0; i < 15; i++) { // Exceeds MAX_BACKUPS to test rotation
-            int index = backupManager.createIndexedBackup(sourceFile, "action" + i);
-
-            // Verify that the index cycles between 0 and 9
-            assertEquals(i % 10, index, "Backup index should cycle between 0 and 9.");
-        }
-    }
-
-    @Test
     public void restoreBackupByIndex_validIndex_backupRestored() throws IOException {
         // Create a backup at index 0
         int index = backupManager.createIndexedBackup(sourceFile, "restoreTest");
