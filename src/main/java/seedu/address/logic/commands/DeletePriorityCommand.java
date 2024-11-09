@@ -9,7 +9,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PriorityLevel;
 
 /**
- * Deletes the priority level of an existing person in the address book.
+ * Deletes the priority level of an existing patient in the address book.
  */
 public class DeletePriorityCommand extends Command {
 
@@ -24,16 +24,16 @@ public class DeletePriorityCommand extends Command {
     /**
      * Constructs a new {@code DeletePriorityCommand} with the specified index.
      *
-     * @param index the index of the person in the list whose priority level will be reset.
+     * @param index the index of the patient in the list whose priority level will be reset.
      */
     public DeletePriorityCommand(int index) {
         this.index = index;
     }
 
     /**
-     * Executes the deletion of the priority level on the specified person in the address book.
+     * Executes the deletion of the priority level on the specified patient in the address book.
      *
-     * @param model the model in which the person will be updated.
+     * @param model the model in which the patient will be updated.
      * @return a command result that includes a success message.
      * @throws CommandException if the index provided is out of bounds.
      */

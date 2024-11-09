@@ -24,8 +24,8 @@ public class DeleteEmergencyContactCommand extends Command {
     public static final String COMMAND_WORD = "deleteemergency";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the emergency contact details of the person identified "
-            + "by the index number used in the last person listing.\n"
+            + ": Deletes the emergency contact details of the patient identified "
+            + "by the index number used in the last patient listing.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS = "Removed emergency contact (%1$s, %2$s) from "
@@ -34,7 +34,7 @@ public class DeleteEmergencyContactCommand extends Command {
     private final Index index;
 
     /**
-     * @param index of the person in the filtered person list to delete the emergency contact details
+     * @param index of the patient in the filtered patient list to delete the emergency contact details
      */
     public DeleteEmergencyContactCommand(Index index) {
         requireAllNonNull(index);
@@ -42,7 +42,7 @@ public class DeleteEmergencyContactCommand extends Command {
     }
 
     /**
-     * Executes the command to delete the emergency contact of a specified person.
+     * Executes the command to delete the emergency contact of a specified patient.
      *
      * @param model The model to operate on.
      * @return A CommandResult with the appropriate success or error message.
@@ -69,9 +69,9 @@ public class DeleteEmergencyContactCommand extends Command {
     }
 
     /**
-     * Validates that the specified index is within the bounds of the displayed person list.
+     * Validates that the specified index is within the bounds of the displayed patient list.
      *
-     * @param lastShownList The list of persons currently displayed.
+     * @param lastShownList The list of patients currently displayed.
      * @throws CommandException if the index is out of bounds.
      */
     private void validateIndexWithinBounds(List<Person> lastShownList) throws CommandException {
@@ -81,9 +81,9 @@ public class DeleteEmergencyContactCommand extends Command {
     }
 
     /**
-     * Checks if a person does not have an emergency contact.
+     * Checks if a patient does not have an emergency contact.
      *
-     * @param person The person whose emergency contact status is being checked.
+     * @param person The patient whose emergency contact status is being checked.
      * @return true if no emergency contact exists or the contact details are empty; false otherwise.
      */
     private boolean isNoEmergencyContact(Person person) {
@@ -93,9 +93,9 @@ public class DeleteEmergencyContactCommand extends Command {
     }
 
     /**
-     * Creates a copy of the given person with an empty emergency contact.
+     * Creates a copy of the given patient with an empty emergency contact.
      *
-     * @param personToEdit The original person to edit.
+     * @param personToEdit The original patient to edit.
      * @return A new Person object with an empty emergency contact.
      */
     private Person createPersonWithoutEmergencyContact(Person personToEdit) {
