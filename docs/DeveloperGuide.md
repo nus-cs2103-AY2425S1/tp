@@ -275,10 +275,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 * Pros: Provides immediate feedback without requiring extra navigation, allowing users to stay focused on the main UI area.
 * Cons: Only shows the most recent undo/redo action, so it may be limited in providing historical context.
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -317,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | `* * *`  | Insurance agent                | quickly retrieve a client’s insurance policy details                                                                                    | efficiently provide relevant information during meetings or calls                                 |
 | `* * *`  | Insurance agent                | store all my client contact information in one place                                                                                    | easily access their details and communicate with them without searching across multiple platforms |
-| `* * *`  | Insurance agent                | track clients' claims and their status                                                                                                  | ensure all client issues are addressed promptly and effectively                                   |
+| `* * *`  | Insurance agent                | track the status of client's claims                                                                                                     | ensure all client issues are addressed promptly and effectively                                   |
 | `* * *`  | Insurance agent                | remove clients who are no longer insured under my policies                                                                              | declutter Prudy                                                                                   |
 | `* * *`  | New user                       | see a list of available commands                                                                                                        | have a brief idea of the app capabilities                                                         |
 | `* * *`  | Insurance agent                | add new claims or resolve old ones                                                                                                      | organize my actionables.                                                                          |
@@ -416,15 +412,25 @@ Note: For all use cases below, if the user enters an invalid input, or there is 
 ### Non-Functional Requirements
 
 1.**Platform Compatibility**: Should work on any mainstream OS with Java 17 or above installed.
+
 2.**Performance**: Should be able to hold up to 1000 clients without noticeable sluggishness in typical usage.
+
 3.**Efficiency**: A user with average typing speed should be able to perform tasks faster using commands than using a mouse-based interface.
+
 4.**Ease of Use**: Core functions should be intuitive enough for a new user to learn within 30 minutes.
+
 5.**Response Time**: Basic commands (e.g., add client, update client) should provide feedback within 1 second.
+
 6.**Memory Usage**: The app should not exceed 500MB of memory usage.
+
 7.**Error Messaging**: Should provide clear error messages that guide the user in correcting invalid inputs.
+
 8.**Data Persistence**: All client data should be saved and remain intact between application sessions to prevent data loss.
+
 9.**Reliability**: The application should handle typical user errors gracefully without crashing or requiring a restart.
+
 10.**Documentation**: Basic user instructions and command descriptions should be available to help new users understand and use core features effectively.
+
 11.**Backup**: Users should be able to easily save a copy of all data manually to prevent accidental loss.
 
 
@@ -465,9 +471,8 @@ testers are expected to do more *exploratory* testing.
 
 #### Initial Launch
 
-1. **Step**: Download the jar file and copy it into an empty folder.
-2. **Step**: Double-click the jar file to launch the application.
-3. **Expected**: The GUI should display with a set of sample contacts. Note that the window size may need adjustment.
+1. Refer to the guide [_Setting Up and Getting Started_](SettingUp.md).
+2. **Expected**: The GUI should display with a set of sample contacts. Note that the window size may need adjustment.
 
 ### Saving Window Preferences
 
