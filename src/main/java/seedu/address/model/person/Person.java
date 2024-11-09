@@ -183,6 +183,15 @@ public class Person {
     }
 
     /**
+     * Removes the specified wedding from this person's assigned weddings.
+     *
+     * @param wedding The wedding to remove.
+     */
+    public void removeWedding(Wedding wedding) {
+        weddings.remove(wedding);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

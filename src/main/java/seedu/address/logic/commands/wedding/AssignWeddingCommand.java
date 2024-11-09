@@ -107,10 +107,20 @@ public class AssignWeddingCommand extends Command {
             Wedding editedWedding = wedding.clone();
             String type = entry.getValue();
             switch (type) {
-            case "p1" -> editedWedding.setPartner1(personToEdit);
-            case "p2" -> editedWedding.setPartner2(personToEdit);
-            case "g" -> editedWedding.addToGuestList(personToEdit);
-            default -> { }
+            case "p1":
+                editedWedding.getPartner1().removeWedding(model.getWedding(wedding));
+                editedWedding.setPartner1(personToEdit);
+                break;
+            case "p2":
+                editedWedding.getPartner2().removeWedding(model.getWedding(wedding));
+                editedWedding.setPartner2(personToEdit);
+                break;
+            case "g":
+                personToEdit.removeWedding(model.getWedding(wedding));
+                editedWedding.addToGuestList(personToEdit);
+                break;
+            default:
+                break;
             }
             model.setWedding(wedding, editedWedding);
         }
