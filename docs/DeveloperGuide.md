@@ -564,7 +564,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: None
 
     1. Test case: `add e n/Tech Fair a/Suntec City s/2024-10-15 14:30 t/fun`<br>
-       Expected: Event named Tech Fair is added to the list under Events. The status message shows the successful creation of the event and its details. 
+       Expected: Event named Tech Fair is added to the list under Events. The status message shows the successful creation of the event and its details.
 
     1. Test case: `add e n/fail`<br>
        Expected: No event is added. Error details shown in the status message. Status bar remains the same.
@@ -672,19 +672,19 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Effort**
 
 ### Project Scope and Difficulty
-This project was significantly more demanding than the Address Book 3 (AB3) reference project due to the difficulty of 
-managing multiple entity types and broader scope. While AB3 focuses on a single entity type (Persons), 
+This project was significantly more demanding than the Address Book 3 (AB3) reference project due to the difficulty of
+managing multiple entity types and broader scope. While AB3 focuses on a single entity type (Persons),
 Eventory expands upon this through the addition of Events and linking between the two types. This increases the 
-difficulty of implementation of features such as deleting due to dependencies between entities, needing a more solid 
+difficulty of implementation of features such as deleting due to dependencies between entities, needing a more solid
 data model and careful planning surrounding the logic parts of the application.
 
 ### Challenges Faced
 
-* **Entity Linking:** Creating relationships between the entities of Contacts and Events through the linking raised 
+* **Entity Linking:** Creating relationships between the entities of Contacts and Events through the linking raised
 significant issues, especially in maintaining data consistency
 * **Testing and Code Coverage:** Maintaining high test coverage in such a highly abstracted and complicated system proved
 challenging, adding to the workload of the project
-* **Clear Communication:** Maintaining clear communication added to the difficulty of the project due to differences in 
+* **Clear Communication:** Maintaining clear communication added to the difficulty of the project due to differences in
 perspective, methodologies and context between each team member that could lead to misunderstandings.
 
 ### Effort Required
@@ -708,7 +708,7 @@ test classes from scratch.
 
 ### Conclusion
 The project called for a lot of cooperation and work. Despite this, it results in a robust application
-that addresses many issues faced by event planning companies. It reflects the teams strength in being able to deliver 
+that addresses many issues faced by event planning companies. It reflects the teams strength in being able to deliver
 even when there are significant challenges.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -717,11 +717,11 @@ even when there are significant challenges.
 
 **Team Size: 5**
 
-The following planned enhancements address known feature flaws identified during the PE-D phase. Each enhancement 
+The following planned enhancements address known feature flaws identified during the PE-D phase. Each enhancement
 specifically describes the feature flaw and the proposed solution, providing details on how the feature will be improved.
 This section lists _ planned enhancements, adhering to the team size x 2 limit.
 
 1. **Enhance Error Handling**
    1. **Feature Flaw:** Current error messages are generic, with no specifics on the issue
-   2. **Proposed Fix:** Improve the parser to be able to identify specific issues 
+   2. **Proposed Fix:** Improve the parser to be able to identify specific issues
    3. **Expected Outcome:** Improved ease of usage for users
