@@ -727,9 +727,9 @@ MediBase3 data are saved automatically as a JSON file located at: `[JAR file loc
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
 > 
-> When editing the data file, ensure that the application is not running as it might prevent the changes from being saved correctly.
+> When editing the data file, ensure that the application is not running as it might prevent the changes from being reflected correctly.
 > 
-> If your changes to the data file makes its format invalid, MediBase3 will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+> If your changes to the data file make its format invalid, MediBase3 will discard all data and start with an empty data file on the next run. Hence, it is recommended to take a backup of the file before editing it.
 >
 > Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
