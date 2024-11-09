@@ -26,7 +26,7 @@
           <children>
             <Label fx:id="helpMessage" text="Label"/>
             <Hyperlink fx:id="userGuideLink"
-                       text="https://ay2425s1-cs2103t-f15-1.github.io/tp/UserGuide.html(Click me)" />
+                       text="https://ay2425s1-cs2103t-f15-1.github.io/tp/UserGuide.html (Click me)" />
             <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
               <HBox.margin>
                 <Insets left="5.0" />
