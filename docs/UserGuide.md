@@ -3,37 +3,40 @@ layout: page
 title: User Guide
 ---
 
-# CareLink User Guide
 
 # CareLink User Guide
 
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Viewing Help: `help`](#viewing-help--help)
-  - [Adding a Person: `add`](#adding-a-person-add)
-  - [Linking a Patient and a Caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
-  - [Deleting a Link Between Patient and Caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
-  - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
-  - [Listing All Persons: `list`](#listing-all-persons--list)
-  - [Editing a Person: `edit`](#editing-a-person--edit)
-  - [Locating Persons by Name, NRIC, Role, or Tags: `find`](#locating-persons-by-name-nric-role-or-tags-find)
-  - [Managing Appointments](#managing-appointments)
-    - [Adding an Appointment: `addapp`](#adding-an-appointment-addapp)
-    - [Editing an Appointment: `editapp`](#editing-an-appointment-editapp)
-    - [Updating the Status of an Appointment: `updatestatus`](#updating-status-of-an-appointment-updatestatus)
-    - [Deleting an Appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
-    - [Locating Appointments by Date-Time Range: `findapp`](#locating-appointments-by-date-time-range-findapp)
-  - [Deleting a Person: `delete`](#deleting-a-person--delete)
-  - [Clearing All Entries: `clear confirm`](#clearing-all-entries-clear-confirm)
-  - [Exiting the Program: `exit`](#exiting-the-program--exit)
-  - [Saving the Data](#saving-the-data)
-  - [Editing the Data File](#editing-the-data-file)
-  - [Archiving Data Files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
-- [Command Summary](#command-summary)
+- [CareLink User Guide](#carelink-user-guide)
+  - [Quick start](#quick-start)
+  - [Features](#features)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Adding a person: `add`](#adding-a-person-add)
+    - [Linking a patient and a caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
+    - [Deleting a link between patient and a caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
+    - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
+    - [Listing all persons : `list`](#listing-all-persons--list)
+    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Locating persons by name, NRIC, phone, email, role, or tags: `find`](#locating-persons-by-name-nric-phone-email-role-or-tags-find)
+    - [Prefixes:](#prefixes)
+    - [Examples:](#examples)
+    - [Managing Appointments](#managing-appointments)
+      - [Adding an appointment: `addapp`](#adding-an-appointment-addapp)
+      - [Editing an appointment: `editapp`](#editing-an-appointment-editapp)
+      - [Updating Status of an appointment: `updatestatus`](#updating-status-of-an-appointment-updatestatus)
+      - [Deleting an appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
+      - [Locating appointments by date-time range: `findapp`](#locating-appointments-by-date-time-range-findapp)
+      - [Examples:](#examples-1)
+    - [Deleting a person : `delete`](#deleting-a-person--delete)
+    - [Clearing all entries: `clear confirm`](#clearing-all-entries-clear-confirm)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+  - [FAQ](#faq)
+  - [Known issues](#known-issues)
+  - [Command summary](#command-summary)
 
-CareLink is a desktop address book application targeted towards independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
+CareLink is a desktop application designed for independent geriatricians managing elderly patients with chronic conditions. The application features a Command Line Interface (CLI) optimized for users who can type fast and prefer CLI over GUI, allowing efficient management of multiple patients.
 
 ## Quick start
 
