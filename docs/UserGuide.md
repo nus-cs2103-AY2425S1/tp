@@ -168,8 +168,6 @@ Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 >
 > The address and attendance fields are optional when creating a student.
 > If not specified, attendance will default to 0.
-> 
-> Studen
 
 Example:
 * `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321` Adds a student with:
