@@ -267,20 +267,20 @@ Examples:
   **Output**: <br>
 This patient already exists.
 
-### [Deleting a Person](#command-summary): `deleteP`
+### [Deleting a Person](#command-summary): `delete`
 
 Deletes the person with the specified `ID` from the MedDict database.
 
-Format: `deleteP z/PERSON_ID`
+Format: `delete z/PERSON_ID`
 
 * **PERSON_ID**: Must be valid, present in the MedDict database.
 * A _notification message_ will be displayed if MedDict could not delete the person with the given ID.
 
 Examples:
-* `deleteP 0` <br>
+* `delete z/2` <br>
   **Output**: <br>
   Successfully deleted the person.
-* `deleteP 2` <br>
+* `delete z/2` <br>
   **Output**: <br>
   Unable to delete the person, check the ID entered!
 
