@@ -681,10 +681,10 @@ assignments are present for a person, separate them within the same entry using 
 
 ```
 "Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent"
-"Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","Ex01 | 3.0","5"
-"Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","",""
-"Charlotte Oliveiro","charlotte@example.com","@charlotte","[friend],[colleague]","Charlotte","",""
-"David Li","lidavid@example.com","@david","[family]","david","",""
+"Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","Ex02 | 5.0,Ex01 | 5.0","3"
+"Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","Ex02 | 5.0",""
+"Charlotte Oliveiro","charlotte@example.com","@charlotte","[neighbours]","Charlotte","",""
+"David Li","lidavid@example.com","@david","[family]","david","","5,6,10"
 "Irfan Ibrahim","irfan@example.com","@irfan","[classmates]","Irfan","",""
 "Roy Balakrishnan","royb@example.com","@roy","[colleagues]","Roy","",""
 ```
