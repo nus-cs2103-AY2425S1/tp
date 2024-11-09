@@ -778,6 +778,7 @@ Adds an assignment and its grades to a contact.
 * If `assignment.json` is missing from `/data`, KonTActs will load a default assignment database.
 * `assignment.json` needs to be manually created in `/data`.
 * Each assignment must have a unique `ASSIGNMENT_NAME`.
+* If `SCORE` has more than 2 decimal places, its display will be truncated to 2 decimal places.
 
   </box>
 
