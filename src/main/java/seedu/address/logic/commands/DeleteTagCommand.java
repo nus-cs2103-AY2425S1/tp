@@ -121,7 +121,7 @@ public class DeleteTagCommand extends UndoableCommand {
     private Set<Tag> handleDelete(Model model) {
         Set<Tag> tagsSuccessfullyDeleted = model.deleteTags(tags);
         for (Tag tag : tags) {
-            model.removeTagFromPersons(tag); // Remove from all persons
+            deletedSet.put(tag, model.removeTagFromPersons(tag));
         }
         return tagsSuccessfullyDeleted;
     }
