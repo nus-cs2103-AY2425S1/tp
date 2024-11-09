@@ -270,11 +270,11 @@ Adds a patient's details to the system.
 
 **Note:**
 * Upon adding a patient the default priority is set to *3*. 
-  * Users can change the priority level using the [`priority` command](#628-adding-priority-level-priority).
-* To update emergency contact details, use the [`emergency` command](#626-adding-emergency-contact-emergency).
+  * Users can change the priority level using the [`priority` command](#6-2-8-adding-priority-level-priority).
+* To update emergency contact details, use the [`emergency` command](#6-2-6-adding-emergency-contact-emergency).
 * A patient will not be added if the name and phone number is already in the system.
-* Refer to [Parameter Information](#61-parameter-information) for the limitations of each parameter.
-* As mentioned in [Parameter Information](#61-parameter-information), our team recommends users to use the specific filler fields for unknown phone/email/address fields. Using your own fields in place is allowed in this version, but will be subjected to your **own risk** of **data loss** or **inaccuracy**. **Please proceed with caution**.
+* Refer to [Parameter information](#6-1-parameter-information) for the limitations of each parameter.
+* As mentioned in [Parameter information](#6-1-parameter-information), our team recommends users to use the specific filler fields for unknown phone/email/address fields. Using your own fields in place is allowed in this version, but will be subjected to your **own risk** of **data loss** or **inaccuracy**. **Please proceed with caution**.
 </box>
 
 <box type="tip" seamless>
@@ -289,7 +289,7 @@ Adds a patient's details to the system.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tags as `Diabetic` to the system.
-* `add n/Jarell p/000 e/unknown@x.com a/unknown address` adds a patient named `Jarell` with phone number `000`, email `unknown@x.com`, address `unknown address` and no tags. As mentioned in [Parameter Information](#61-parameter-information), phone/email/address fields are unknown, hence they are filled with the recommended filler fields.
+* `add n/Jarell p/000 e/unknown@x.com a/unknown address` adds a patient named `Jarell` with phone number `000`, email `unknown@x.com`, address `unknown address` and no tags. As mentioned in [Parameter information](#6-1-parameter-information), phone/email/address fields are unknown, hence they are filled with the recommended filler fields.
 
 Expected output:
 ```
