@@ -3,10 +3,10 @@ layout: page
 title: User Guide
 ---
 
-PawPatrol is a **desktop app to help veterinary clinics manage their patient data**. It allows the clinic to add and edit two types of
+PawPatrol is a **desktop app to help veterinary clinics in Singapore to manage their patient data**. It allows the clinic to add and edit two types of
 entities, owners and pets. PawPatrol also allows the user to link owners to pets, allowing the user
 to easily see at a glance which pets belong to which owner. It is optimised
-for use via a **Command Line Interface** (CLI) which improves speed of usage while still having the user-friendliness of a Graphical User Interface (GUI).
+for use via a **Command Line Interface (CLI)** which improves speed of usage while still having the user-friendliness of a **Graphical User Interface (GUI)**.
 If you can type fast, PawPatrol can manage pet owner and pet data faster than traditional organisation apps.
 
 * Table of Contents
