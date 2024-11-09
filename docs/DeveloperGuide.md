@@ -276,11 +276,32 @@ _{Explain here how the data archiving feature will be implemented}_
 ## **Planned Enhancements**
 
 ### `Last edited` functionality
-Currently, there is no way to tell when a patient was last edited. This information might be crucial in a healthcare setting where the healthcare professional may need to know how recent the information is.<br>
-**Planned implementation**<br>
+Currently, there is no way to tell when a patient was last edited. This information might be crucial in a healthcare setting where the healthcare professional may need to know how recent the information is.<br><br>
+**Planned implementation**<br><br>
 We can make it such that a `Person` object contains a `LocalDateTime` field called `lastEdited` that keeps track of when the `Person` was last updated. This field will be updated whenever a new `Person` is created, be it from the `add` command or any of the other commands that edits a `Person`.
+<br><br>
 
+### Make "Index does not exist" error message more specific
+Currently, whenever a user enters a command that requires `INDEX` as a parameter, such as the `view` or `delete` command, and enters an index that is greater than the number of patients in the displayed list, WardWatch will show the general `invalid command format` message followed by the command usage message. <br><br>
+**Planned implementation**<br><br>
+We plan to add more specific error messages in the case where users pass in an index that is not shows in the displayed patients list. 
+In the case where the index passed in is greater than the largest index in the displayed patient list, the error message `The index provided does not refer to any patient in the displayed list, please check the displayed list again!` will be shown
+In the case where the index passed in is negative, the error message `INDEX provided must be a positive integer, please try again!` will be shown
+<br><br>
 
+### Add appointment title and description and `viewappt` command
+Currently, our `makeappt` command only allows users to create appointments with a short description. This prevents users from adding too much information to the current description which may be restrictive.<br><br>
+**Planned implementation**<br><br>
+We plan to separate appointment title and description which gives users more flexibility. Appointment title will just be a short description such as `Surgery` or `Medical checkup` and support a character limit of 40. Appointment description will be for additional information about the appointment that the user may want to add. The appointment description will support a much longer character limit of 300 but will now be shown in the appointment list panel as the long inputs may cause issues with the UI. <br>
+As such we will also implement a `viewappt` command that allows users to view all information about the appointment including the new appointment description.
+<br><br>
+
+### Add command shortcut for longer commands
+Currently, some of the commands in WardWatch such as `scheduleall` and `scheduledate` are very long and may be hard to type for users. <br><br>
+**Planned implementation**<br><br>
+We plan to add command shortcuts for longer commands such as `sAll` and `sDate` for the commands `scheduleall` and `scheduledate` respectively. These command shortcuts will work alongside the original commands, meaning that whether the user types in `sAll` or `scheduleall`, wardwatch will recognise both as the `scheduleall` command. <br>
+This is so that seasoned and more advanced users have the option to optimise their workflow by utilising the command shortcuts while newer users still have the option of using the more intuitive sounding commands which reduces the learning curve.
+<br><br>
 
 
 --------------------------------------------------------------------------------------------------------------------
