@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Age {
 
     public static final String MESSAGE_CONSTRAINTS = "Age should only contain a non-negative integer, "
-            + "between 0 and 150 (inclusive)!";
+            + "between 0 and 150 (both inclusive)!";
 
     /*
      * The age must be a non-negative integer.

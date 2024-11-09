@@ -143,11 +143,11 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…​`
+Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`
 
 * Email, gender and study group tags are **case-insensitive**
 * Valid entries for gender are M/m/F/f
-* Age must be a positive integer less than 150
+* Age must be a non-negative integer between 0 and 150 (both inclusive)
 * Two contacts are considered **duplicates** if they share the same **email** address
 
 Examples:
@@ -164,7 +164,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…​`
+Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
