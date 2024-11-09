@@ -8,16 +8,16 @@ AddressBook *-down-> "1" UniquePersonList
 
 UniquePersonList -right-> Person
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Relationship
+Person --> Phone
+Person --> Email
+Person --> Relationship
+Person --> Name
 
 EventBook *-right-> "1" ObservableList
 EventBook *-right-> "1" ObservableList
 
 
-
+Event --> Name
 Event  --> "1" LocalDate
 Event  --> "*" Person
 Event  --> "1" Address
