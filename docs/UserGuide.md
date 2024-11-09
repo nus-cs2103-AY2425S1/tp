@@ -135,7 +135,7 @@ _Refer to the [Features](#features) section for details of each command!_
 
 Shows a popup window with a clickable link to the User Guide.
 
-![help message](images/helpMessage.png)
+<img src="images/helpMessage.png" width="400px">
 
 Format: `help`
 
