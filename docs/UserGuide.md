@@ -55,7 +55,7 @@ CareLink is a desktop application designed for independent geriatricians managin
 
    - `list` : Lists all contacts.
 
-   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   - `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient` : Adds a contact named `John Doe` to the Address Book.
 
    - `delete S6483749D` : Deletes the person with NRIC `S6483749D`.
 
