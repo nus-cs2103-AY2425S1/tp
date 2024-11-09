@@ -44,7 +44,9 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
 1. Copy the file to the folder you want to use as the _home folder_ for your GoonBook.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar goonbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+   <br>
    ![Ui](images/Ui.png)
 
    Examples:
@@ -207,7 +209,7 @@ Finds groups whose names contain any of the given keywords.
 Format: `findGroup KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g `class` will match `Class`
-- The order of the keywords does not matter. e.g. `class A` will match `A class`
+- The order of the keywords do not matter. e.g. `class A` will match `A class`
 - Only the group name is searched.
 - Only full words will be matched e.g. `class` will not match `clas`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
@@ -218,7 +220,7 @@ Format: `findGroup KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 - `findGroup 19S13` returns `19S13`
-- `findGroup GroupA GroupB` returns `GroupA`, `GroupB<br>
+- `findGroup GroupA GroupB` returns `GroupA`, GroupB<br>
 
 <div style="page-break-after: always"></div>
 
