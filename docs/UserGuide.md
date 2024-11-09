@@ -225,7 +225,7 @@ Format: `finddel ITEM [MORE_ITEMS]`
 
 Examples:
 * `finddel Chair` returns any delivery that contains the item chair.
-* `find Chair Desk` returns any delivery that contains the item chair, desk, or both.
+* `finddel Chair Desk` returns any delivery that contains the item chair, desk, or both.
 
 ### Archiving a contact or delivery : `archive`
 **<ins>When in the main window**
