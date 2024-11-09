@@ -145,6 +145,7 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 | `[RENTAL_INDEX]`      | Rental index on the rental information list panel | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                            | `1`                                                 |
 
 </d-table>
+
 <box type="warning" light>
 
 For future enhancements and improvements of parameter constraints, please visit our [developer guide](https://ay2425s1-cs2103t-t15-1.github.io/tp/DeveloperGuide.html#appendix-future-enhancements).
