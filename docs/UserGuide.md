@@ -167,7 +167,7 @@ Examples:
 
 Rates the specified restaurant from the address book.
 
-Format: `rate INDEX [r/RATING]`
+Format: `rate INDEX r/[RATING]`
 
 * Edits the restaurant's rating at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing rating will be updated.
@@ -176,7 +176,7 @@ Format: `rate INDEX [r/RATING]`
 
 Examples:
 *  `rate 1 r/2` Edits the rating of the 1st restaurant to be `2`.
-*  `rate 2 r/2` Edits the rating of the 2nd restaurant to be `No Rating`.
+*  `rate 2 r/ ` Edits the rating of the 2nd restaurant to be `No Rating`.
 
 ### Searching for restaurants by price: `price`
 
@@ -271,12 +271,12 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 1 p/98765432 e/swensens@plsreply.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATING] [t/TAG]…​`<br> e.g.,`edit 1 p/98765432 e/swensens@plsreply.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Mala`
 **Tag** | `tags KEYWORD [MORE_KEYWORDS]`<br> e.g., `tags Chinese`
 **List** | `list`
 **Help** | `help`
-**Rating** | `rate INDEX [r/RATING]`<br> e.g.`rate 1 r/2`
+**Rating** | `rate INDEX r/[RATING]`<br> e.g.`rate 1 r/2`
 **Price** | `price PRICE_LABEL [MORE_PRICE_LABELS]`<br> e.g., `price $ $$`
 **Favourite** | `fav INDEX`<br> e.g., `fav 1`
 **Un-Favourite** | `unfav INDEX`<br> e.g., `unfav 1`
