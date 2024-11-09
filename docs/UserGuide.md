@@ -84,7 +84,7 @@ Provides you with tips to use our system more effectively.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Opens a separate window detailing a summary of the commands avaliable and their functions.
 
 ![help message](images/helpMessage.png)
 
