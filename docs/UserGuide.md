@@ -153,7 +153,7 @@ Remarks:
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `/t` without specifying any tags after it.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * `ROLE` is not editable!
 * All constraints from `contact add` command still stands with `contact edit` command.
 
@@ -344,7 +344,7 @@ the data of your previous TutorEase home folder.
 
  Action             | Format, Examples                                                                                                                                                      
 --------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add Contact**    | `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `contact add n/James Ho p/22224444 e/jamesho@example.com r/Student a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Add Contact**    | `contact add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/Role[t/TAG]…​` <br> e.g., `contact add n/James Ho p/22224444 e/jamesho@example.com r/Student a/123, Clementi Rd, 1234665 t/friend t/colleague` 
  **Clear**          | `clear`                                                                                                                                                               
  **Delete Contact** | `contact delete INDEX`<br> e.g., `contact delete 3`                                                                                                                                   
  **Edit Contact**   | `contact edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`contact edit 2 n/James Lee e/jameslee@example.com`                                           
