@@ -5,6 +5,8 @@ title: User Guide
 
 SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/), **a desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still offering the benefits of a Graphical User Interface (GUI). Designed to streamline expense tracking for students, SpleetWaise makes it easy to record and monitor both personal and shared expenses with contacts saved in the address book. With features to keep track of balances with friends, it eliminates the confusion often associated with managing shared costs, providing a clear, organised view of who has owes what. If you can type fast, SpleetWaise lets you handle your contact and expense management tasks more efficiently than traditional GUI apps, offering students a stress-free way to manage their expenses and shared balances with contacts.
 
+:exclamation: **Disclaimer:** Our app currently focuses on supporting NUS students based in Singapore and the English language only. The app may not be suitable for other students outside of Singapore or users who prefer other languages. If users choose to use the app outside of these parameters, it may behave unexpectedly or not as intended.
+
 * Table of Contents
 {:toc}
 
