@@ -512,7 +512,7 @@ Use case ends.
     * 1a1. GamerBook notifies user the correct input format.
 
       Use case ends.
-* 1b. User enters only the start of the range.
+* 1b. User enters only the starting time.
     * 1b1. GamerBook returns all contacts that overlaps with the single time point.
 
       Use case ends.
