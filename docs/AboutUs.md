@@ -55,7 +55,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/chenle228.png" width="200px">
 
 [[github](https://github.com/chenle228)]
-[[portfolio](team/chenle.md)]
+[[portfolio](team/chenle228.md)]
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines
