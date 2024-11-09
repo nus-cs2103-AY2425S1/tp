@@ -6,7 +6,7 @@
 
 # SellSavvy User Guide
 
-SellSavvy is a lightweight and convenient desktop application for **managing your customers' contacts and their orders**, aiming to streamline your online drop-shipping management. It offers a centralised platform to **organise customer contacts, track order deliveries and store the data**. 
+SellSavvy is a lightweight and convenient desktop application for tech-savvy independent sellers/dropshipping business owners to **manage their customers' contacts and their orders**, aiming to streamline their online drop-shipping management. It offers a centralised platform to **organise customer contacts, track order deliveries and store the data**. 
 
 SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your drop-shipping management tasks done faster than traditional GUI apps.
 

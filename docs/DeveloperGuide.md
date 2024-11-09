@@ -319,12 +319,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
+For **all** use cases, the system is **SellSavvy** and the actor is the **user**.
+
 ### Use cases
 
 **Use case 1: View List of Customers**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC01 - View List of Customers
 
 **MSS**
@@ -337,8 +337,6 @@ Use case ends.
 
 **Use case 2: Add a Customer**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC02 - Add Customer
 * **Guarantees**:
   * Customer will be added to customer list if input parameters are valid.
@@ -384,8 +382,6 @@ Use case ends.
 
 **Use case 3: Delete Customer and All Orders Related to The Customer**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC03 - Delete Customer and All Orders related to the customer
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
@@ -408,8 +404,6 @@ Use case ends.
 
 **Use case 4: Find the Customer by their Name**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC04 - Find the Customer by their Name
 * **Guarantees**:
   * All customers displayed will have at least one of the specified keywords in their name.
@@ -430,8 +424,6 @@ Use case ends.
 
 **Use case 5: Add an Order under a Customer**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC06 - Add an Order under a Customer
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
@@ -473,8 +465,6 @@ Use case ends.
 
 **Use case 6: List a Customer's Orders**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC06 - List a Customer's Orders
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
@@ -498,8 +488,6 @@ Use case ends.
 
 **Use case 7: Mark Order as Completed**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC07 - Mark Order as Completed
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
@@ -528,8 +516,6 @@ Use case ends.
 
 **Use case 8: Remove "Completed" Marking from Order**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC08 - Remove "Completed" Marking from Order
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
@@ -558,8 +544,6 @@ Use case ends.
 
 **Use case 9: Delete an order**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC09 - Delete an Order
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
@@ -581,8 +565,6 @@ Use case ends.
 
 **Use case 10: Filter order list by order status**
 
-* **System**: SellSavvy
-* **Actor**: User
 * **Use Case**: UC10 - Filter an Order List by Order Status
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
