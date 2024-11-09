@@ -178,10 +178,6 @@ public class ModelManager implements Model {
         this.lessonSchedule.resetData(lessonSchedule);
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
-     * {@code versionedTutorEase}.
-     */
     @Override
     public ObservableList<Lesson> getFilteredLessonList() {
         return filteredLesson;
@@ -191,6 +187,16 @@ public class ModelManager implements Model {
     public void updateFilteredLessonList(Predicate<Lesson> predicate) {
         requireNonNull(predicate);
         filteredLesson.setPredicate(predicate);
+    }
+
+    @Override
+    public boolean filteredLessonListIsEmpty() {
+        return filteredLesson.isEmpty();
+    }
+
+    @Override
+    public int getFilteredPersonListSize() {
+        return filteredLesson.size();
     }
 
     @Override
