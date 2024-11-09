@@ -674,48 +674,48 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a customer
 
-**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with dupliacte/similar names. You are advised to follow the test cases in order. <br> 
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order. <br> 
 
 **Tips:** All the prerequisites below will be fulfilled if you start off with the default sample data and follow the test cases in sequence.
 
 1. Adding a unique customer with all parameters specified.
 
-    1. Prerequisites: Customer with name `John Doe` or other similar name does not already exist in the addressbook.
+    1. Prerequisites: Customer with name `John Doe` or other similar name does not already exist in the address book.
 
     2. Test case: `addcustomer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`<br>
        Expected: The customer is successfully added. Details of the added customer shown in the status message.
 
 2. Adding a unique customer with all parameters specified using command aliases.
 
-    1. Prerequisites: Customer with name `Betsy Crowe` or other similar name does not already exist in the addressbook.
+    1. Prerequisites: Customer with name `Betsy Crowe` or other similar name does not already exist in the address book.
    
     2. Test case: `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` <br>
        Expected: The customer is successfully added. Details of the added customer shown in the status message.
    
 3. Adding a customer with exact same name.
 
-   1. Prerequisites: Customer with name `Betsy Crowe` already exist in the addressbook.
+   1. Prerequisites: Customer with name `Betsy Crowe` already exist in the address book.
 
    2. Test case: `addcustomer n/Betsy Crowe t/friend e/betsycrowe@duplicate.com a/Newgate Prison p/12345678 t/criminal` <br>
       Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
 
 4. Adding a customer with a [similar name](#similar) and without the optional `tag` field.
 
-    1. Prerequisites: Customer with name `Betsy Crowe` but not `Betsy crowe` already exist in the addressbook.
+    1. Prerequisites: Customer with name `Betsy Crowe` but not `Betsy crowe` already exist in the address book.
 
     2. Test case: `addcustomer n/Betsy crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567` <br>
        Expected: The customer is successfully added. A warning and details of the added customer shown in the status message.
 
 5. Adding a customer with duplicate tags.
 
-    1. Prerequisites: Customer with name `Yu Sutong` or other similar name does not already exist in the addressbook.
+    1. Prerequisites: Customer with name `Yu Sutong` or other similar name does not already exist in the address book.
 
     2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
        Expected: The customer is successfully added with one of the duplicated tag ignored. Details of the added customer shown in the status message.
 
 6. Adding a customer with [similar tags](#similar).
 
-    1. Prerequisites: Customer with name `Foo Chao` or other similar name does not already exist in the addressbook.
+    1. Prerequisites: Customer with name `Foo Chao` or other similar name does not already exist in the address book.
 
     2. Test case: `addcustomer n/Foo Chao t/VVIP t/vvip e/su@example.com a/69, Sembawang Road. #01-01  p/12345678` <br>
        Expected: The customer is successfully added with both similar tags.A warning and details of the added customer shown in the status message.
@@ -746,15 +746,15 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `findcustomer bernice` <br>
        Expected: 
-        1. All customers with 'bernice' in their names are listed. A success message shown in the status message.
-        2. If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
+       - All customers with 'bernice' in their names are listed. A success message shown in the status message.
+       - If you are using the default sample data, the customer `Bernice Yu` will be listed in the customer list.
        
 2. Finding customers with multiple keywords using command aliases.
 
     1. Test case: `findc alex david` <br>
        Expected:
-        1. All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
-        2. If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
+       - All customers with `alex` or `david` in their names are listed. A success message shown in the status message.
+       - If you are using the default sample data, the customer `Alex Yeo` and `David Li` will be listed in the customer list.
    
 ### Editing an existing customer
 
@@ -828,6 +828,142 @@ testers are expected to do more *exploratory* testing.
    4. Other incorrect `deletecustomer` commands to try: `deletecustomer`, `deletecustomer x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+2. Deleting a customer from a filtered customer list using command aliases.
+
+    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
+       Example: `findcustomer john`
+
+    2. Test case: `deletec 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+    3. Test case: `deletec 0`<br>
+       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+
+### Adding an order
+
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with duplicate/similar names. You are advised to follow the test cases in order. <br>
+
+1. Adding a unique order with all parameters specified while all customers is being shown.
+
+    1. Prerequisites: At least 1 customer is displayed in the customer list. No duplicate/similar order under the first customer.
+
+    2. Test case: `addorder 1 i/Lamp d/20-11-2024 q/3`<br>
+       Expected: The order is successfully added. Details of the added order shown in the status message. Customer's order listed in the order list.
+
+2. Adding a unique order with optional field omitted using command aliases when the customer list is filtered.
+
+    1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
+       Example: `findcustomer bernice`
+
+    2. Test case: `addo 1 i/Books d/02-03-2026` <br>
+       Expected: The order is successfully added. Details of the added order shown in the status message. Customer's order listed in the order list.
+
+3. Adding an order with missing compulsory field(s).
+
+    1. Prerequisites: At least 1 customer is displayed in the customer list.
+
+    2. Test case: `addorder 1 i/books` <br>
+
+    3. Expected: No order is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `addo 1 q/100` <br>
+
+    5. Expected: No order is added. Error details shown in the status message. Status bar remains the same.
+
+4. Adding a [similar order](#similar).
+
+    1. Prerequisites: At least 1 customer is displayed in the customer list. No duplicate/similar order under the first customer.
+
+    2. Test case: `addo 1 i/books d/02-03-2026` <br>
+       Expected: The order is successfully added.A warning and details of the added order shown in the status message. Customer's order listed in the order list.
+
+### Listing all orders under a customer.
+
+1. Listing all orders with or without aliases.
+
+    1. Prerequisites: At least 2 customers and at most 99 customers is displayed in the customer list.
+   
+    2. Test case: `listorder 1` <br>
+       Expected: All orders under the first customer are listed. A success message shown in the status message.
+
+    3. Test case: `listo 2` <br>
+       Expected: All orders under the second customer are listed. A success message shown in the status message.
+   
+    4. Test case: `listo 100` <br>
+       Expected: No change to the order list. Error details shown in the status message. Status bar remains the same.
+
+### Editing an existing order
+
+1. Editing an order while all customers are being shown.
+
+    1. Prerequisites: All customers are listed using the `listcustomer` command with at least 1 customer listed.
+
+    2. Test case: `editcustomer 1 p/91234567 e/johndoe@example.com` <br>
+       Expected: The customer is successfully edited. Details of the edited customer shown in the status message.
+
+2. Editing a customer in a filtered list using command aliases.
+
+    1. Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
+       Example: `findcustomer john`
+
+    2. Test case: `editc 1 n/Betsy Crower t/` <br>
+       Expected: The customer is successfully edited with all tags removed. Details of the edited customer shown in the status message. The displayed customer list got unfiltered.
+
+3. Editing a customer to an exact same name as an existing customer.
+
+    1. Prerequisites:
+        - Customer with name `Betsy Crowe` already exist in the address book.
+        - At least 1 customer is listed.
+        - The customer to be edited is not `Betsy Crowe`.
+
+    2. Test case: `editcustomer 1 n/Betsy Crowe` <br>
+       Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
+
+4. Editing a customer to a [similar name](#similar) as an existing customer.
+
+    1. 1. Prerequisites:
+        - Customer with name `Betsy Crowe` but not `betsy crowe` already exist in the address book.
+        - At least 1 customer is listed.
+        - The customer to be edited is not `Betsy Crowe`.
+    2. Test case: `editcustomer 1 n/betsy crowe` <br>
+       Expected: The customer is successfully edit. A warning and details of the edited customer shown in the status message.
+
+5. Editing a customer to have duplicate tags.
+
+    1. Prerequisites: At least one customer is listed.
+
+    2. Test case: `editcustomer 1 t/friends t/friends` <br>
+       Expected: The customer's tag is successfully edited with one of the duplicated tag ignored. Details of the edited customer shown in the status message.
+
+6. Editing a customer to have [similar tags](#similar).
+
+    1. Prerequisites: At least one customer is listed.
+
+    2. Test case: `editcustomer 1 t/Friends t/friends` <br>
+       Expected: The customer is successfully edited with both similar tags.A warning and details of the added customer shown in the status message.
+
+7. Editing a customer with invalid inputs.
+    1. Prerequisites: At least one customer is listed.
+
+    2. Test case: `editcustomer 1 n/@#$%` <br>
+
+    3. Expected: No customer is edited. Error details shown in the status message. Status bar remains the same.
+
+### Deleting a customer
+
+1. Deleting a customer while all customers are being shown.
+
+    1. Prerequisites: List all customers using the `listcustomer` command with at least 1 customer listed.
+
+    2. Test case: `deletecustomer 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+    3. Test case: `deletecustomer 0`<br>
+       Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect `deletecustomer` commands to try: `deletecustomer`, `deletecustomer x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
 2. Deleting a customer from a filtered list using command aliases.
 
     1. Prerequisites: Prerequisites: Customers filtered using `findcustomer` command with at least 1 customer listed.
@@ -838,6 +974,7 @@ testers are expected to do more *exploratory* testing.
 
     3. Test case: `deletec 0`<br>
        Expected: No customer is deleted. Error details shown in the status message. Status bar remains the same.
+
 
 ### Saving data
 
