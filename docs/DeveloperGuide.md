@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 1h The given tag/s uses the wrong format.
+* 1h The given tag(s) uses the wrong format.
 
     * 1h1. MediContacts shows an error message.
 
@@ -424,6 +424,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1f1. MediContacts shows an error message.
 
       Use case ends.
+
+* 1g. The given tag(s) uses the wrong format.
+
+    * 1g1. MediContacts shows an error message.
+    
+        Use case ends.
 
 <a name="list-patient-anchor-point"></a>
 **Use case: UC03 - List all patients**
