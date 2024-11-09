@@ -227,8 +227,8 @@ Format: `addAttendance INDEX ad/[DATE] ar/[REASON]`
 * The date **must be in the form of DD-MM-YYYY** and within the current year.
 
 Examples:
-* `addAttendance 1 ad/[24-09-2024] ar/[Sick]` to add the date where the 1st person in the list is absent and the reason.
-* `addAttendance 1 ad/[24-09-2024] ar/` to delete the attendance from the 1st person in the list.
+* `addAttendance 1 ad/24-09-2024 ar/Sick` to add the date where the 1st person in the list is absent and the reason.
+* `addAttendance 1 ad/24-09-2024 ar/` to delete the attendance from the 1st person in the list.
 
 ### Adding an Exam : `addExam`
 
