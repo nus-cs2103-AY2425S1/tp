@@ -28,7 +28,7 @@ public class AssignCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a volunteer to an event.\n"
             + "Parameters: "
             + ASSIGN_VOLUNTEER_PREFIX_NAME + "VOLUNTEER_INDEX "
-            + ASSIGN_EVENT_PREFIX_NAME + "EVENT_INDEX "
+            + ASSIGN_EVENT_PREFIX_NAME + "EVENT_INDEX\n"
             + "Example: " + COMMAND_WORD + " "
             + ASSIGN_VOLUNTEER_PREFIX_NAME + "2 "
             + ASSIGN_EVENT_PREFIX_NAME + "3 ";
