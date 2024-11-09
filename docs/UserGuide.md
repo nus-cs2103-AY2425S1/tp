@@ -285,7 +285,7 @@ Deletes a patient and his/her details from MediBase3.
 > 
 > * Deletes the patient with the specified `NRIC` from MediBase3.
 > * The `NRIC` provided must be the full NRIC of the patient to be deleted.
-    >   - e.g. `S1234567A` (not partial, like `S123`).
+>   - e.g. `S1234567A` (not partial, like `S123`).
 > * Refer to [Parameter Details](#parameter-details) for NRIC constraints.
 
 **Example**:
