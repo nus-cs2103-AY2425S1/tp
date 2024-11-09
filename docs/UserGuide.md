@@ -6,7 +6,7 @@
 
 # Medicontact
 
-Medicontact is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Medicontact is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediContact can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -112,7 +112,13 @@ Adds a person to the address book.
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Hospital p/12345678 t/patient b/20 s/Female`
 * `add n/Evie Sage p/88888888 e/eviesage@example.com a/Hickory Forest b/23 s/Female ap/11/11/2024 1100`
 
-<img src="images/addEvie.png" width="800">
+**Input**<br>
+
+<img src="images/addCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/addCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -175,11 +181,17 @@ Deletes the specified person from the address book.
 
 **Examples**:
 
-* `list` followed by `delete Alex Yeoh` followed by clicking `OK `deletes the person with name `Alex Yeoh` in the address book.
+* `list` followed by `delete Evie Sage` followed by clicking `OK `deletes the person with name `Evie Sage` in the address book.
 * `list` followed by `delete 2` followed by clicking `OK` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` followed by clicking `OK` deletes the 1st person in the results of the `find` command.<br>
 
-<img src="images/deleteExpected.png" width="800">
+**Input**<br>
+
+<img src="images/deleteCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/deleteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -204,7 +216,13 @@ Edits an existing person in the address book.
 *  `edit John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
 *  `edit John Doe n/Betsy Crower t/ ap/` Edits the name of John Doe to be `Betsy Crower` and clears all existing tags and appointments.
 
-<img src="images/editJohn.png" width="800">
+**Input**<br>
+
+<img src="images/editCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/editCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -242,11 +260,16 @@ Filter persons whose age and/or appointment dates are within the specified range
 * `filter b/70-79 ap/01/01/2025 - 01/01/2026`
 * `filter b/70-79 t/medication t/Dr Tan`<br>
 
-<img src="images/filterResult.png" width="800">
+**Input**<br>
+
+<img src="images/filterCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/filterCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
-
 
 ### Locating persons by name or phone number: `find`
 
@@ -269,7 +292,13 @@ Examples:
 
 * `find olive 87438` returns `87438807`, `Charlotte Oliveiro`
 
-<img src="images/findResult.png" width="800">
+**Input**<br>
+
+<img src="images/findCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/findCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -411,7 +440,13 @@ Shows an alphabetically sorted list of all persons in the address book.
 * No other parameters should be supplied.
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
-<img src="images/listResult.png" width="800">
+**Input**<br>
+
+<img src="images/listCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/listCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -426,7 +461,13 @@ Shows a list of all starred persons in the address book.
 * No other parameters should be supplied aside from `*`.
 * You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
 
-<img src="images/listStarResult.png" width="800">
+**Input**<br>
+
+<img src="images/listStarCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/listStarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -435,12 +476,12 @@ Shows a list of all starred persons in the address book.
 
 Edits an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
 
-**Format**: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
+**Format**: `note NAME [ap/PREVIOUS APPOINTMENTS] [m/MEDICATION] [r/REMARK]…​`
 
 * Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the fields must be provided.
 * When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
-* You can remove all the person’s appointments by typing `ap/` without
+* You can remove all the person’s previous appointments by typing `ap/` without
   specifying any appointments after it.
 * You can remove all the person’s medications by typing `m/` without
     specifying any medications after it.
@@ -451,10 +492,17 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 *  `note John Doe ap/01/01/2023 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
 *  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
-<img src="images/noteResult.png" width="800">
+**Input**<br>
+
+<img src="images/noteCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/noteCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
+
 
 ### Sorting list based on Appointment Dates : `sort`
 
@@ -465,7 +513,13 @@ remain sorted alphabetically at the end of the list.
 
 * No other parameters should be supplied.
 
-<img src="images/sortResult.png" width="800">
+**Input**<br>
+
+<img src="images/sortCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/sortCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -487,7 +541,13 @@ Stars the specified person from the address book into favourites.
 * `list` followed by `star 2` stars the 2nd person in the address book.
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
 
-<img src="images/starResult.png" width="800">
+**Input**<br>
+
+<img src="images/starCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/starCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -510,7 +570,13 @@ Unstars the specified person from the address book removing them from favourites
 * `list` followed by `unstar 2` unstars the 2nd person in the address book.
 * `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
-<img src="images/unstarResult.png" width="800">
+**Input**<br>
+
+<img src="images/unstarCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/unstarCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
@@ -533,7 +599,13 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 *  `view John Doe`
 *  `view 1` shows all details of the 1st person's details including notes.
 
-<img src="images/viewResult.png" width="800">
+**Input**<br>
+
+<img src="images/viewCommand_input.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;"><br>
+
+**Output**<br>
+
+<img src="images/viewCommand_output.png" width="800" style="border: 2px solid lightgrey; border-radius: 10px;">
 
 <br>
 <br>
