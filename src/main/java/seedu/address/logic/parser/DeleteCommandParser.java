@@ -36,24 +36,30 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 try {
                     int start = Integer.parseInt(range[0].trim());
                     int end = Integer.parseInt(range[1].trim());
+                    if (start <= 0 || end <= 0) {
+                        throw new ParseException("Invalid input: Must be positive integer");
+                    }
                     // Check for valid range
                     if (start > end) {
-                        throw new ParseException("Invalid range: " + part);
+                        throw new ParseException("Invalid range: "
+                                + "The end index must be greater than or equal to the start index");
                     }
                     for (int i = start; i <= end; i++) {
                         indices.add(ParserUtil.parseIndex(String.valueOf(i)));
                     }
-                } catch (NumberFormatException | ParseException e) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_INVALID_RANGE), e);
+                } catch (NumberFormatException e) {
+                    throw new ParseException("Invalid input: Must be positive integer", e);
                 }
             } else {
                 // Handle individual index
                 try {
+                    int index = Integer.parseInt(part.trim());
+                    if (index <= 0) {
+                        throw new ParseException("Invalid input: Must be positive integer");
+                    }
                     indices.add(ParserUtil.parseIndex(part.trim()));
-                } catch (ParseException e) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), e);
+                } catch (NumberFormatException e) {
+                    throw new ParseException("Invalid input: Must be positive integer", e);
                 }
             }
         }
