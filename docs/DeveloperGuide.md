@@ -391,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1. Operation of PlanPal must be done through CLI
+1. PlanPal must have a consistent command-line interface design adhering to standard CLI usability conventions
 2. PlanPal should not have multiple users on a shared computer
 3. PlanPal should only support a single user
 4. PlanPal data should be stored locally
