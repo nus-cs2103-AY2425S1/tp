@@ -292,7 +292,7 @@ Examples:
 * `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
 The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
-![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
+![ImportCommandExampleUsage.png](images/ImportCommandExampleUsage.png)
 
 > <span style="color:MediumSeaGreen"> TIP! </span> <br>
 >
