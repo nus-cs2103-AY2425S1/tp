@@ -590,6 +590,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 1b. The given appointment clashes with an existing appointment with the given doctor or patient.
+
+    * 1b1. MediContacts shows an error message.
+
+      Use case ends.
+
 * 1b. The given patient name uses the wrong format.
 
     * 1b1. MediContacts shows an error message.
@@ -614,37 +620,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-<a name="list-appt-anchor-point"></a>
-**Use case: UC11 - List all appointments scheduled at a certain date and time**
-
-**MSS**
-
-1.  User requests to list appointments scheduled at a certain date and time
-2.  MediContacts shows a list of all appointments with matching date and time
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The given date uses the wrong format.
-
-    * 1a1. MediContacts shows an error message.
-
-      Use case ends.
-
-* 1b. The given time uses the wrong format.
-
-    * 1b1. MediContacts shows an error message.
-
-      Use case ends.
-
-* 2a. There are no appointments with matching date and time.
-
-    * 2a1. MediContacts shows a message to indicate no matches found.
-
-      Use case ends.
-
-**Use case: UC12 - Delete an appointment**
+**Use case: UC11 - Delete an appointment**
 
 **MSS**
 
@@ -667,53 +643,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC13 - Mark an appointment as done**
 
-**MSS**
 
-1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
-2.  MediContacts shows a list of appointments
-3.  User requests to mark a specific appointment in the list
-4.  MediContacts marks the appointment as done
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. MediContacts shows an error message.
-
-      Use case resumes at step 2.
-
-**Use case: UC14 - Mark an appointment as undone**
-
-**MSS**
-
-1.  User requests to [list appointments (UC10)](#list-appt-anchor-point)
-2.  MediContacts shows a list of appointments
-3.  User requests to unmark a specific appointment in the list
-4.  MediContacts marks the appointment as undone
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. MediContacts shows an error message.
-
-      Use case resumes at step 2.
-
-*{More to be added}*
+*{More to be added as more features get added}*
 
 ### Non-Functional Requirements
 
