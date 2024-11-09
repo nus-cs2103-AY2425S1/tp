@@ -368,7 +368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC4 - Delete a person**
+**Use case: UC4 - Delete a tag from a person contact**
 
 **MSS**
 
