@@ -113,6 +113,10 @@ Need a quick reference?
 
 * Adding and editing `NAME`s is case-sensitive. Although duplicate contact names are not allowed,     
 e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
+
+* `TIME-TIME` should be in the format "HHmm-HHmm" and must be a valid time range within the same day  
+  e.g. `1700-2200`
+
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
