@@ -258,7 +258,6 @@ _Details coming soon ..._
 | **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`      |
 | **Delete member**  | `delete_member INDEX`<br> e.g., `delete_member 3`                                                                                                               |
 | **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX...​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                 |
-| **Update session** | `update_session INDEX s/NAME [d/DATE] [p/POINTS] [m/INDEX]...`<br> e.g., `update_session 1 s/Updated Name d/25 Oct 2024 p/5`                                    |
 | **Delete session** | `delete_session s/NAME m/INDEX...`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                               |
 | **Find members**   | `find_members KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_members James Jake`                                                                                      |
 | **Find sessions**  | `find_sessions KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_sessions Team meeting`                                                                                  |
