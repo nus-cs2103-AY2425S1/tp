@@ -38,6 +38,7 @@ The command words are shown beside their corresponding commands below. The comma
    1. [Removing available dates from a volunteer](#removing-available-dates-from-a-volunteer-v-unfree) `/v unfree`
    1. [Assigning a volunteer to event](#assigning-a-volunteer-to-event-assign) `assign`
    1. [Unassigning a volunteer from an event](#unassigning-a-volunteer-from-an-event-unassign) `unassign`
+   1. [Listing all events a volunteer is participating in](#listing-all-events-a-volunteer-is-participating-in-v-view) `/v view`
 1. [Managing Events](#event-related-commands)
    1. [Adding an event](#adding-an-event-e-new) `/e new`
    1. [Finding events by name](#finding-events-by-name--e-find) `/e find`
