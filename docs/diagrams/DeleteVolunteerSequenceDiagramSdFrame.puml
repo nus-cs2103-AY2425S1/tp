@@ -18,7 +18,7 @@ activate VolunteerCommandParser
 VolunteerCommandParser --> AddressBookParser
 deactivate VolunteerCommandParser
 
-AddressBookParser -> VolunteerCommandParser : parseCommand("del 1")
+AddressBookParser -> VolunteerCommandParser : parseCommand("/v del 1")
 activate VolunteerCommandParser
 
 

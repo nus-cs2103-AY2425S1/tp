@@ -132,6 +132,7 @@ Let's go over some simple guidelines that will help you use VolunSync easily:
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * When copying multi-line commands from this guide, make sure the spaces between lines remain intact, especially if you're using a PDF version.
+* INDEX parameters accept a maximum positive value of `2147483647` any larger value would result in an invalid command format.
 </div>
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)

@@ -15,7 +15,7 @@ title: Developer Guide
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+Refer to the guide [Setting up and getting started](https://ay2425s1-cs2103t-w12-2.github.io/tp/SettingUp.html).
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -288,9 +288,6 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 <div style="page-break-after: always;"></div>
 
 **Extensions**:
-- 2a. No volunteers and/or events are found.
-  - 2ai. System notifies user and prompts user to create a new volunteer ([UC02 - Create Volunteer](#uc02-create-volunteer)) and / or event ([UC01 - Create Event](#uc01-create-event)).<br/>
-   Use Case Ends.<br/><br/>
 - 5a. Volunteer is already assigned to the event.
   - 5ai. System notifies user.
   - 5aii. Volunteer remains assigned to the event.<br/>
@@ -307,7 +304,7 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 
 **Description**: Search for an event by their name.
 
-**Preconditions**: NA
+**Preconditions**: There are some events in the system.
 
 **MSS**:
 1. User enters a keyword to search for.
@@ -356,7 +353,7 @@ This diagram shows the main actor (Management Staff) and their interactions with
 ### Non-Functional Requirements
 
 1. The system should work on any mainstream OS with Java 17 or above.
-2. The system should be able to handle up to 1000 volunteers, events, and donors without noticeable performance degradation.
+2. The system should be able to handle up to 1000 volunteers and events without noticeable performance degradation.
 3. A user should be able to perform common tasks (add, delete, view) within 5 seconds for typical usage.
 4. The system should have a simple and intuitive command-line interface that minimizes the learning curve for new users.
 5. System response time for any action should be less than 1 second for all operations.
@@ -397,7 +394,7 @@ testers are expected to do more *exploratory* testing.
    1. Download the jar file and copy into an empty folder
 
    2. Double-click the jar file to launch VolunSync. <br/>
-   Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimum.
+   Expected: The GUI is displayed with a set of sample contacts as shown below. The window size may not be optimal.
    <br/><img src="images/ui.png" width="400" />
 
    3. Should double-clicking the jar file not launch the application, you may wish to try [running the jar file from the command line](UserGuide.md#quick-start)
