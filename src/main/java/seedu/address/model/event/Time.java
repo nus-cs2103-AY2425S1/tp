@@ -15,7 +15,7 @@ public class Time {
     public static final String MESSAGE_CONSTRAINTS = "Start time should be before end time!";
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
 
     /**
      * Constructs a {@code Time}.

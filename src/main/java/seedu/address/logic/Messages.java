@@ -29,7 +29,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_CONFIRM_COMMAND = "Please input Y/N to confirm your operation!";
     public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time field! "
             + "Please follow the format: "
-            + "\"t/YYYY-MM-DD HH:mm to YYYY-MM-DD HH:mm\""
+            + "\"t/YYYY-MM-DD HH:mm to YYYY-MM-DD HH:mm\"\n"
             + "And make sure the date is a valid date in the calender!";
     public static final String MESSAGE_INVALID_CELEBRITY_FORMAT = "Celebrity name cannot be blank";
     public static final String MESSAGE_INVALID_EVENT_CONTACT_FORMAT = "Contact name cannot be blank";

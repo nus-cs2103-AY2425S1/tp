@@ -45,7 +45,7 @@ public class JsonAdaptedTime {
      * @throws IllegalValueException if there were any data constraints violated in the adapted time.
      */
     public Time toModelType() throws IllegalValueException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
 
         if (startTime == null || endTime == null) {
             throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
