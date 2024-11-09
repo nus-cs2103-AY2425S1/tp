@@ -84,7 +84,10 @@ public class EditCommand extends Command {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
+        assert index != null : "Index must not be null";
         assert index.getOneBased() > 0 : "Index must be a positive integer";
+
+        assert editPersonDescriptor != null : "Edit Person Descriptor should not be null";
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);

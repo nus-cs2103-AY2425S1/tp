@@ -30,13 +30,9 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert model != null: "Model should not be null";
 
-        // Update the filtered person list based on the predicate
-        try {
-            model.updateFilteredPersonList(predicate);
-        } catch (Exception e) {
-            throw new CommandException("Error occurred while finding persons with specified keywords.");
-        }
+        model.updateFilteredPersonList(predicate);
 
         assert model.getFilteredPersonList() != null : "Filtered person list should not be null after update";
 

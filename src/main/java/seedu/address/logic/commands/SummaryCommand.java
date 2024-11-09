@@ -25,15 +25,7 @@ public class SummaryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        requireNonNull(model.getAddressBook()); // Ensure AddressBook is not null
-
-        // Retrieve list of persons and check if it's empty
-        var personList = model.getAddressBook().getPersonList();
-        assert personList != null : "Person list should not be null.";
-
-        if (personList.isEmpty()) {
-            throw new CommandException("The address book contains no applicants to summarize.");
-        }
+        assert model != null : "Model should not be null";
 
         // Initialize a map with all statuses set to 0
         Map<String, Long> statusCounts = new HashMap<>();
