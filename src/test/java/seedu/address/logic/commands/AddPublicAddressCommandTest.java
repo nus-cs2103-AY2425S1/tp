@@ -7,10 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_MAIN_STRING;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_NOT_IN_ADDRESS_BOOK;
 import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_BTC_SUB_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB;
+import static seedu.address.testutil.TypicalPublicAddresses.VALID_PUBLIC_ADDRESS_ETH_SUB_STRING;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.addresses.BtcAddress;
+import seedu.address.model.addresses.EthAddress;
 import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressesComposition;
@@ -62,50 +65,85 @@ public class AddPublicAddressCommandTest {
         assertCommandSuccess(addPublicAddressCommand, model, expectedMessage, expectedModel);
     }
 
-    // EP: valid index, invalid label (duplicate)
+    // EP: valid index, invalid label, valid public address (duplicate)
     @Test
     public void execute_duplicateAddressLabel_throwsCommandException() {
-        Person personToAddAddress = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
+        final String duplicateLabel = "main";
 
         // Create the first descriptor with a valid address
-
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(new EthAddress(VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING, duplicateLabel));
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         // Create the second descriptor with the same address
         EditPersonDescriptor duplicateDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition duplicatePublicAddresses = new PublicAddressesComposition()
-            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(new EthAddress(VALID_PUBLIC_ADDRESS_ETH_SUB_STRING, duplicateLabel));
         duplicateDescriptor.setPublicAddresses(duplicatePublicAddresses);
 
         // Create the first command
         AddPublicAddressCommand firstCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
 
-
         // Create the second command
-
         AddPublicAddressCommand duplicateCommand =
             new AddPublicAddressCommand(INDEX_FIRST_PERSON, duplicateDescriptor);
 
         try {
             firstCommand.execute(model);
         } catch (CommandException ce) {
-            // Ignore any exceptions from first command
+            throw new AssertionError("Execution of first command should not fail.", ce);
+        }
+
+        // Expected message
+        String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS_LABEL,
+            String.format(
+                PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
+                duplicateLabel,
+                Network.ETH
+            )
+        );
+
+        assertCommandFailure(duplicateCommand, model, expectedMessage);
+    }
+
+    // EP: valid index, valid label, invalid public address (duplicate)
+    @Test
+    public void execute_duplicateAddress_throwsCommandException() {
+
+        final String duplicateAddressString = VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING;
+
+        // Create the first descriptor with a valid address
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
+                .addPublicAddress(new EthAddress(duplicateAddressString, "main"));
+        editPersonDescriptor.setPublicAddresses(publicAddresses);
+
+        // Create the second descriptor with the same address
+        EditPersonDescriptor duplicateDescriptor = new EditPersonDescriptor();
+        PublicAddressesComposition duplicatePublicAddresses = new PublicAddressesComposition()
+                .addPublicAddress(new EthAddress(duplicateAddressString, "sub"));
+        duplicateDescriptor.setPublicAddresses(duplicatePublicAddresses);
+
+        // Create the first command
+        AddPublicAddressCommand firstCommand =
+                new AddPublicAddressCommand(INDEX_FIRST_PERSON, editPersonDescriptor);
+
+        // Create the second command
+        AddPublicAddressCommand duplicateCommand =
+                new AddPublicAddressCommand(INDEX_FIRST_PERSON, duplicateDescriptor);
+
+        try {
+            firstCommand.execute(model);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of first command should not fail.", ce);
         }
 
         // Expected message
         String expectedMessage = String.format(AddPublicAddressCommand.MESSAGE_DUPLICATE_PUBLIC_ADDRESS,
-
-
-            String.format(
-                PublicAddressesComposition.MESSAGE_DUPLICATE_LABEL,
-                VALID_PUBLIC_ADDRESS_BTC_MAIN.getLabel(),
-                Network.BTC
-            )
+                duplicateAddressString.toLowerCase()
         );
 
         assertCommandFailure(duplicateCommand, model, expectedMessage);
@@ -116,10 +154,9 @@ public class AddPublicAddressCommandTest {
     public void execute_invalidPersonIndex_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         PublicAddressesComposition publicAddresses = new PublicAddressesComposition()
-            .addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
+            .addPublicAddress(VALID_PUBLIC_ADDRESS_ETH_SUB);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         AddPublicAddressCommand addPublicAddressCommand =

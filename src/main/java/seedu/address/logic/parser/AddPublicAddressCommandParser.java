@@ -6,15 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_NETWORK;
 
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AbstractEditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.AddPublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.addresses.Network;
 import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.addresses.PublicAddressesComposition;
 
@@ -75,12 +72,11 @@ public class AddPublicAddressCommandParser implements Parser<AddPublicAddressCom
         String publicAddressLabelString =
             argMultimap.getValue(PREFIX_PUBLIC_ADDRESS_LABEL).get(); // okay as prefixes are confirmed to be present
 
-        Network network = ParserUtil.parseNetwork(networkString);
         PublicAddress publicAddress = ParserUtil.parsePublicAddress(publicAddressString,
             publicAddressLabelString, networkString);
 
         PublicAddressesComposition publicAddresses =
-            new PublicAddressesComposition((Map.of(network, Set.of(publicAddress))));
+            new PublicAddressesComposition().addPublicAddress(publicAddress);
         editPersonDescriptor.setPublicAddresses(publicAddresses);
 
         return new AddPublicAddressCommand(index, editPersonDescriptor);
