@@ -35,7 +35,9 @@ public class CommandTextFlow extends TextFlow {
         details.setFont(Font.font("Comfortaa", FontWeight.NORMAL, 14));
         details.setFill(Color.grayRgb(210));
         getChildren().add(details);
-        this.setHeight(47);
+        this.setHeight(45);
+        this.setMinHeight(45);
+        this.setMaxHeight(45);
 
         // Set padding for the entire flow
         setPadding(new Insets(2, 10, 2, 10));
