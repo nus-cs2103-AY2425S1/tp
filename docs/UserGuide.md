@@ -5,6 +5,8 @@ title: User Guide
 
 SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addressbook-level3/), **a desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still offering the benefits of a Graphical User Interface (GUI). Designed to streamline expense tracking for students, SpleetWaise makes it easy to record and monitor both personal and shared expenses with contacts saved in the address book. With features to keep track of balances with friends, it eliminates the confusion often associated with managing shared costs, providing a clear, organised view of who has owes what. If you can type fast, SpleetWaise lets you handle your contact and expense management tasks more efficiently than traditional GUI apps, offering students a stress-free way to manage their expenses and shared balances with contacts.
 
+:exclamation: **Disclaimer:** Our app currently focuses on supporting NUS students based in Singapore and the English language only. The app may not be suitable for other students outside of Singapore or users who prefer other languages. If users choose to use the app outside of these parameters, it may behave unexpectedly or not as intended.
+
 * Table of Contents
 {:toc}
 
@@ -60,6 +62,10 @@ SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addre
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Parameters' input that collide with existing prefixes may cause error to be thrown.<br>
+  e.g. `editTxn 1 desc/John owes me for our afternoon date/meeting` may not be accepted as `date/` is a prefix in editTxn command.<br>
+  **Tip:** Use `\/` to add parameter inputs that contain `/` character. e.g. `editTxn 1 desc/John owes me for our afternoon date\/meeting`
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -83,27 +89,15 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​`
 
-* The `NAME` input allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs.
-  * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
-    - `John Doe` (letters and space)
-    - `Betsy O'Connor` (apostrophe)
-    - `Jean-Luc` (hyphen)
-    - `J.P. Morgan` (period)
-    - `John s/o Tan` (slash)
-    - `Anne-Marie & Sons` (ampersand and hyphen)
-    - `John "Johnny" Doe` (quotation marks)
-    - `Richard (Rick) Roe` (parentheses)
-  * Invalid inputs include those that contain special characters such as `*`, `@`, `#`, `!`, `^`, `%`, `$`, or any characters from Arabic, or Latin scripts like `Æ` or Chinese characters.
-    - `peter*` (contains `*`)
-    - `john@doe` (contains `@`)
-    - `王小明` (non-Latin characters like Chinese)
-    - `X Æ A-12` (non-Latin characters like `Æ` or Arabic `عبد العزيز`)
+* The `NAME` input allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs (non-exhaustive).
+  * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), comma (`,`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
+  * Invalid inputs may include those that contain special characters such as `*`, `@`, `#`, `!`, `^`, `%`, `$`, or other characters that are not English, such as Arabic, Chinese or Latin scripts like `Æ`.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person with an Indian name containing "d/o" denoting "daughter of" can be added as `add n/Genevieve d/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+A person with an Indian name containing "d/o" denoting "daughter of" can be added as `add n/Genevieve d\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
