@@ -16,10 +16,19 @@ public class BackCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Returned to main window";
 
+    public static final String MESSAGE_INVALID_COMMAND = "This command cannot be ran in the main window!";
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        String message = MESSAGE_SUCCESS;
+
+        if (!AddressBookParser.getInspect()) {
+            message = MESSAGE_INVALID_COMMAND;
+        }
+
         AddressBookParser.setInspect(false);
-        return new CommandResult(MESSAGE_SUCCESS, null, false, false, false, true);
+        return new CommandResult(message, null, false, false, false, true);
     }
 }
