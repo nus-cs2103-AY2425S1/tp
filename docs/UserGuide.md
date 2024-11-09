@@ -224,7 +224,7 @@ Format: `clear`
 
 ### Cleaning graduated students : `clean`
 
-Removes all graduated students from the address book based on the current year and their graduation year.
+Removes all graduated students from the address book by removing all students with GRADUATION_YEAR fields earlier than the current year.
 
 Format: `clean`
 
