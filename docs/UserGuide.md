@@ -31,6 +31,7 @@ title: User Guide
     - [Exiting the program : `exit`](#exiting-the-program--exit)
     - [Saving the data](#saving-the-data)
     - [Editing the data file](#editing-the-data-file)
+    - [NRIC constraints](#nric-constraints)
   - [FAQ](#faq)
   - [Known issues](#known-issues)
   - [Command summary](#command-summary)
@@ -103,6 +104,19 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME nric/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS role/ROLE [t/TAG]…`
+Field Constraints:
+- `NAME`: Must start with an alphanumeric character, followed by alphanumeric characters and spaces
+- `PHONE`: Must contain only numbers and be at least 3 digits long
+- `EMAIL`: Must be of the format local-part@domain where:
+  1. Local-part can contain alphanumeric characters and these special characters: + _ . -
+  2. Local-part cannot start or end with special characters
+  3. Domain must:
+     - End with a domain label at least 2 characters long
+     - Have domain labels that start and end with alphanumeric characters
+     - Have domain labels with alphanumeric characters, separated only by hyphens
+- `ADDRESS`: Must not start with a whitespace and cannot be blank
+- `ROLE`: Must be either 'PATIENT' or 'CAREGIVER'
+- `NRIC`: NRIC constraints are in NRIC constraints section
 
 **The role must be either a patient or a caregiver**
 
@@ -471,7 +485,15 @@ If your changes to the data file makes its format invalid, CareLink will discard
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-
+### NRIC constraints
+NRIC should adhere to the following format and constraints:
+1. The NRIC must be 9 characters long.
+2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
+   - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
+   - 'F' and 'G' are for Foreigners.
+3. The next 7 characters must be digits.
+4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
+5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 ---
 
 ## FAQ
