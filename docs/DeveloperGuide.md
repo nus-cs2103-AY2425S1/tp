@@ -13,7 +13,6 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -249,11 +248,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -316,20 +312,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ContactsForGood (CFG)` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Search for person(s)**
 
 **MSS**
 
 1.  User searches for a person by name
-2.  AddressBook shows a list of persons which fit the criteria
+2.  CFG shows a list of persons which fit the criteria
 
     Use case ends.
 
 **Extensions**
 
 * 1a. User can also search by tag/role... etc.
+
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
@@ -340,15 +338,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CFG shows a list of relevant persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  CFG deletes the person
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
@@ -356,7 +356,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. CFG shows an error message.
 
       Use case resumes at step 2.
 
@@ -365,15 +365,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CFG shows a list of relevant persons
 3.  User requests to add some number of volunteer hours to a specific person in the list
-4.  AddressBook adds the specified number of volunteer hours to the specified person's existing hours
+4.  CFG adds the specified number of volunteer hours to the specified person's existing hours
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+  
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
@@ -381,7 +383,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. CFG shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The specified person is not a Volunteer
+
+    * 3b1. CFG shows an error message.
 
       Use case resumes at step 2.
 
@@ -390,22 +398,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  CFG shows a list of relevant persons
 3.  User requests to get emails of persons on the list
-4.  AddressBook copies to the user's clipboard a list of all emails of persons on the list
+4.  CFG copies to the user's clipboard a list of all emails of persons on the list
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User could also search for persons by name/tag/role... etc. (UC01)
+* 1a. User could also <ins>search for persons by name/tag/role... etc. (UC01)</ins>
+
+  Use case resumes at step 2.
 
 * 2a. The list is empty.
 
   Use case ends.
 
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
