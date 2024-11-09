@@ -860,34 +860,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Explore all features**
-
-**MSS**
-
-1. User navigates through the application's feature tour.
-
-2. PROperty guides the user step-by-step through each feature.
-
-3. User interacts with the features as they are presented.
-   
-   Use case ends.
-
-**Extensions**
-
-- 1a. User opts to skip the feature tour.
-  
-  - 1a1. PROperty exits the tour.
-    
-    Use case ends.
-
-- 3a. User encounters an issue during the tour.
-  
-  - 3a1. PROperty provides troubleshooting tips.
-    
-    Use case resumes at step 2.
-
----
-
 **Use case: Find and sort multiple tags at once**
 
 **MSS**
