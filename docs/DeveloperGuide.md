@@ -482,10 +482,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. BlitzBiz displays error message to inform user
         that end time provided must be after start time
     * 3c2. User enters again with a later end time than start time
-      Step 3c1 is repeated until end time is later than start time.
+      Steps 3b1 is repeated until the format entered is correct.
       Use case resumes from step 4.
 
-* 4a. No contacts with schedules in the given range are found
+* 4a. No contacts with schedules in the given range are founc
     * 4a1. BlitzBiz informs the user that there were no matches found.
       Use case ends.
 *{More to be added}*
