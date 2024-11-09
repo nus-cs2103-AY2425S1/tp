@@ -834,3 +834,11 @@ Common prerequisite: List all elderly using the `list` command.
    1. Delete the `data/contactmate.json` file.
    2. Launch the app.<br>
        Expected: The app should show a list of sample persons.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+1. **Standardise uppercase for NRIC displayed in the person card:** If using lowercase NRIC when adding elderly: `add i/s5305394G n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7`, it is displayed as `s5305394G` in the person card (no change in case). We plan to standardise the displayed NRIC to be in uppercase in the person card for easier reading for users: `S5305394G`.
+2. **Accept more possible characters for name field:** The current constraint for the name field is alphanumeric characters and spaces which could be too restrictive if users want to add elderly with names that include other special characters (e.g. `João da Silva` or `Arjun Singh s/o Vijay Singh`)
+

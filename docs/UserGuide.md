@@ -222,7 +222,7 @@ Format: `history INDEX/NRIC`
 
 * Shows the call history and profile view of the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
-* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the current person list.
+* The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the displayed person list.
 
 Examples:
 * `list` followed by `history 2` shows the call history and profile view of the 2nd elderly in ContactMate.
