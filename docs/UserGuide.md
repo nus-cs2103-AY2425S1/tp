@@ -188,7 +188,7 @@ First-time users are strongly encouraged to read the Getting Started section bef
    Some example commands you can try:
 
 * `list` : Lists all contacts.
-* `addTut c/CS2103T id/T1001` : Adds a tutorial of name `CS2103T` and tutorial id `T1001`.
+* `addTut c/CS2103T c/T1001` : Adds a tutorial of name `CS2103T` and tutorial id `T1001`.
 * `add n/Samson  s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
 * `markAtt s/A1234567X c/T1001 d/2024-01-24`: Adds student of id `A1234567X` attendance to the tutorial id `T1001` on the date `2024-01-24`.
 * `clear` : Deletes all contacts.
@@ -229,9 +229,9 @@ The designated names for each component of the User Interface will be used consi
 
 * **Student Id:** Every student will be assigned to a student id before being added to a system. Take note that the student id is unique and is an easy way to identify a student.
   
-* **Tutorial Classes allocated to student:** This component appears just below the student id. The component displays the list of tutorial classes that the student is allocated to.
-* Tutorial classes are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
-* However, if there are no tutorial classes added to the student. Then it will display "No Tutorial Assigned" instead. 
+* **Tutorial Class allocated to student:** This component appears just below the student id. The component displays the tutorial class that the student is allocated to.
+* Tutorial class are presented in the form of TXXXX, where "T" refers to a constant letter signifying that it is a tutorial and "X" refers to any integer between 0 and 9.
+* However, if there are no tutorial class added to the student. Then it will display "No Tutorial Assigned" instead. 
 
 * **Attendance Tag:** The attendance tag displays all of the dates in which the student has attended the tutorial class. 
 * The tag uses a datetime format of the form `yyyy/mm/dd`.
@@ -272,7 +272,7 @@ Essentially they are to be supplied by the user.
 | `STUDENT_ID`          | `s/`             | Specifies the Student ID of a student. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with a letter `A`, followed by exactly 7 digits, and end with a letter.</li><li>Each `STUDENT_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                   |
 | `TUTORIAL_NAME`       | `tn/`            | Specifies the name of a tutorial. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `TUTORIAL_ID`         | `c/`             | Specifies the Tutorial ID of a tutorial. <br/><br/> **Requirements:** <ul><li>IDs must contain only alphanumeric characters.</li><li>The ID must start with the letter `T`, followed by exactly 4 digits.</li><li>Each `TUTORIAL_ID` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                     |
-| `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                               |
+| `ASSIGNMENT_TITLE`    | `n/`             | Specifies the name of an assignment. <br/><br/> **Requirements:** <ul><li>Names must contain only alphanumeric characters and whitespaces.</li><li>Each `ASSIGNMENT_TITLE` must be unique.</li><li>`ASSIGNMENT_TITLE` is case sensitive.</li></ul>                                                                                                                                                                                                                                                                                                                                                 |
 | `ASSIGNMENT_DUE_DATE` | `d/`             | Specifies the due date of an assignment. <br/><br/> **Requirements:** <ul><li>The Assignment Due Date must contain only numerical digits, whitespace, and the hyphen `-` character.</li><li>The Assignment Due Date should be in the format of `yyyy-MM-dd`, followed by a whitespace and the time in `HHmm` format.</li><li>The format is strictly `yyyy-MM-dd HHmm`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li><li>`HH` represents the hour (in 24-hour format).</li><li>`mm` represents the minute.</li></ul></li></ul> |
 | `ATTENDANCE_DATE`     | `d/`             | Specifies the attendance date of a student. <br/><br/> **Requirements:** <ul><li>The attendance date must contain only numerical digits and hyphen `-` characters.</li><li>The attendance date should be in the format of `yyyy-MM-dd`.</li><li>The format is strictly `yyyy-MM-dd`, where:<ul><li>`yyyy` represents the year.</li><li>`MM` represents the month.</li><li>`dd` represents the day.</li></ul></li></ul>                                                                                                                                                                             |
 | `KEYWORD`             | Not Applicable   | Specifies the keywords to search for when finding students. <br/><br/> **Requirements:** <ul><li>Can contain alphanumeric characters and any special characters.</li><li>Whitespace characters will be treated as part of the `KEYWORD`.</li><li>The special character `/` will be ignored.</li>                                                                                                                                                                                                                                                                                                   |
@@ -399,7 +399,7 @@ Example:
 
 > Adds a tutorial with a specified tutorial name and tutorial id to the TrackMate application.
  
-Format: `addTut tn/[TUTORIAL NAME] id/[TUTORIAL ID]`
+Format: `addTut tn/[TUTORIAL NAME] c/[TUTORIAL ID]`
 
 Command Details & Constraints:
 * Adds the tutorial based on its `TUTORIAL_NAME` and `TUTORIAL_ID`
@@ -409,7 +409,7 @@ and `X` must be an integer between 0 and 9.
 * All parameters are required to adhere to their [respective constraints](#3-3-2-parameters).
 
 Example:
-1. `addTut tn/CS2103T id/T1001` adds a tutorial with Tutorial Name `CS2103T` and Tutorial ID `T1001`, provided that there is
+1. `addTut tn/CS2103T c/T1001` adds a tutorial with Tutorial Name `CS2103T` and Tutorial ID `T1001`, provided that there is
 no other tutorial with the Tutorial ID `T1001`.
 
 #### 4.2.2 Delete a tutorial: `deleteTut`
@@ -573,7 +573,7 @@ Example:
 
 > View a single student's details in a formatted and organized manner.
 
-**Method -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
+**Method -  Using GUI**: Double-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
 
 #### 4.5.2 Clearing all data: `clear`
 
@@ -610,7 +610,10 @@ The data in the TrackMate application are saved in the hard disk automatically a
 
 ### 4.7 Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+The TrackMate data are automatically saved as JSON files at the following locations:
+- `[JAR file location]/data/addressbook.json`
+- `[JAR file location]/data/tutorials.json`
+- `[JAR file location]/data/assignments.json`
 
 <box type="warning" seamless>
 <b>Caution:</b>
