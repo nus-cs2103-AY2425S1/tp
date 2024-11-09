@@ -351,7 +351,7 @@ Use case ends.
 **Extensions**
 
 * 1a. SellSavvy detects required details missing.
-  * 1a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
+  * 1a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
@@ -440,7 +440,7 @@ Use case ends.
 **Extensions**
 
 * 2a. SellSavvy detects required details missing.
-    * 2a1. SellSavvy displays an error message “Invalid command format!” and states the command format.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
 
   Use case ends.
 
@@ -578,7 +578,7 @@ Use case ends.
 **Extensions**
 
 * 1a. The specified status keyword is not a valid status.
-  * 1a1. SellSavvy displays an error message "Invalid command format!" and provides the available status keywords.
+  * 1a1. SellSavvy displays an error and provides the available status keywords.
 
   Use case ends.
 
