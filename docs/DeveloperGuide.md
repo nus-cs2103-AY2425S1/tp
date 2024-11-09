@@ -268,11 +268,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+* [Documentation guide](https://ay2425s1-cs2103t-w09-1.github.io/tp/Documentation.html)
+* [Testing guide](https://ay2425s1-cs2103t-w09-1.github.io/tp/Testing.html)
+* [Logging guide](https://ay2425s1-cs2103t-w09-1.github.io/tp/Logging.html)
+* [Configuration guide](https://ay2425s1-cs2103t-w09-1.github.io/tp/Configuration.html)
+* [DevOps guide](https://ay2425s1-cs2103t-w09-1.github.io/tp/DevOps.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
