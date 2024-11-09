@@ -332,7 +332,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS)**:
 1. CCA Leader inputs the `add_member` command with required details (name, room number, telegram and tags (optional)).
-    - Example: `add_member n/John Doe r/4/3/301 t/johndoe123 tag/logistics`
+    - Example: `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics`
 2. Hall Pointer validates the entered details for the new member.
 3. Hall Pointer adds the member to the system and displays a success message.
 4. The new member is displayed in the GUI.
