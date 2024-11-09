@@ -152,7 +152,7 @@ For future enhancements and improvements of parameter constraints, please visit 
 
 ## Duplicate Client Detection
 
-A client is only considered as duplicate **if and only if** the entire parameter `[NAME]`, `[PHONE_NUMBER]` and `[EMAIL_ADDRESS]` are **exactly the same**.
+A client is only considered as duplicate **if and only if** the entire parameter `[NAME]` and at least **ONE** of the `[PHONE_NUMBER]` or `[EMAIL_ADDRESS]` are **exactly the same**.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
