@@ -1,10 +1,10 @@
 ---
 layout: page
-title: User Guide
+title: PROperty User Guide
 ---
 
 PROperty is a **desktop app for property agents managing contacts and their property listings,
-optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+optimized for use via a Command Line Interface** [(CLI)](#technical-terms) while still having the benefits of a Graphical User Interface [(GUI)](#technical-terms).
 If you can type fast, PROperty can get your contact and property management tasks done faster than traditional GUI apps.
 
 PROperty is useful for property agents because it saves their time by allowing easy tracking of contacts,
@@ -13,21 +13,24 @@ simpler to use while being even more functional than alternatives on the market.
 
 ## Table of Contents
 * [Quick start](#quick-start)
+  * [Step 1: Check if Your Computer is Ready](#step-1-check-if-your-computer-is-ready)
+  * [Step 2: Install PROperty](#step-2-install-property)
+  * [Step 3: Try Your First Commands](#step-3-try-your-first-commands)
 * [Features](#features)
     * [Adding a client: `add`](#adding-a-client-add)
-    * [Editing a client : `edit`](#editing-a-client--edit)    
-    * [Deleting a client : `delete`](#deleting-a-client--delete)
-    * [Listing all clients : `list`](#listing-all-clients--list)
-    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
-    * [Showing property listings of a client : `show`](#showing-property-listings-of-a-client--show)
+    * [Editing a client: `edit`](#editing-a-client--edit)    
+    * [Deleting a client: `delete`](#deleting-a-client--delete)
+    * [Listing all clients: `list`](#listing-all-clients--list)
+    * [Sorting all clients: `sort`](#sorting-all-clients--sort)
+    * [Showing property listings of a client: `show`](#showing-property-listings-of-a-client--show)
     * [Locating clients by name: `find`](#locating-clients-by-name-find)
     * [Locating clients by tag: `findtag`](#locating-clients-by-tag-findtag)
-    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    * [Managing Remarks : `remark`](#managing-remarks--remark)
-    * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
-    * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
-    * [Exporting your contacts : `export`](#exporting-your-contacts--export)
-    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Clearing all entries: `clear`](#clearing-all-entries--clear)
+    * [Managing Remarks: `remark`](#managing-remarks--remark)
+    * [Adding a property listing: `listing add`](#adding-a-property-listing--listing-add)
+    * [Deleting a property listing: `listing delete`](#deleting-a-property-listing--listing-delete)
+    * [Exporting your contacts: `export`](#exporting-your-contacts--export)
+    * [Exiting the program: `exit`](#exiting-the-program--exit)
     * [Open help menu: `help`](#open-help-menu-help)
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
@@ -43,33 +46,53 @@ simpler to use while being even more functional than alternatives on the market.
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your computer. If not, you can download Java `17` [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
+### Step 1: Check if Your Computer is Ready
+First, we need to make sure your computer has [Java](#technical-terms) 17 installed. Here's how to check:
 
-2. Download the latest `PROperty.jar` file from [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your PROperty.
+1. Open your computer's terminal:
+   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter.
+   - **For Mac**: Press Command + Space, type `terminal`, and press Enter.
+2. In the black terminal window that appears, type the following command:
+   ```
+   java --version
+   ```
+   and press Enter.
+3. What you should see:
+   - ✅ If you see "java 17" or "openjdk 17" (or any number above 17), you're ready to go!
+   - ❌ If you see "command not found" or a java version below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
-4. Double-click on the `PROperty.jar` file to run it
-   - **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
+### Step 2: Install PROperty
 
-- A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-![Ui](images/user-guide-images/Ui.png)
+1. Download PROperty:
+   - Click [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases) to download the latest PROperty.
+   - Look for a [JAR](#technical-terms) file named `PROperty.jar` and click on it to download.
+2. Create a home folder for PROperty:
+   - Create a new folder on your computer named `PROperty`.
+   - Copy the downloaded `PROperty.jar` file into this folder.
+3. Start PROperty:
+   - Double-click on the `PROperty.jar` file to run it.
+     **For advanced users:** Open a command terminal, `cd` into the folder you put the JAR file in, and use the `java -jar PROperty.jar` command to run the application.<br>
+   - You should see the PROperty window appear as follows below! Note how the app contains some sample data.<br>
 
-5. Type "commands" in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-   
-   * `list` : Lists all clients in your address book.
-   
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
-   
-   * `delete 3` : Deletes the 3rd client shown in your current list.
-   
-   * `clear` : Deletes all clients.
-   
-   * `exit` : Exits the app.
+   ![Ui](images/user-guide-images/Ui.png)
 
-6. Refer to the [Features](#features) below for details of each command.
+### Step 3: Try Your First Commands
+
+Now that PROperty is running, let's try using the different commands available. All you have to do is to type the command in the command box and press Enter to execute it. 
+Some example commands you can try are:
+
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
+
+
+* `edit 1 n/Mary Jane p/12345678 e/maryj@example.com a/Mary street, block 321, #02-02` : Edits the client with index 1 in PROperty.
+
+
+* `listing add 2 t/HDB a/Adam street, block 456, #03-03` : Adds a listing for the client with index 2 in PROperty.
+
+
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -78,6 +101,8 @@ simpler to use while being even more functional than alternatives on the market.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+
+* The current command format supports English only.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -106,7 +131,8 @@ Adds a client to PROperty.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​`
 
-- `NAME` and `PHONE_NUMBER` fields must be provided.
+- `NAME` and `PHONE_NUMBER` fields must be provided. 
+-  Client tags are added in a case-insensitive manner. e.g `t/buyer` or `t/BUYER` will both add the `Buyer` tag.
 -  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -118,7 +144,8 @@ Examples:
 1. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/looking for HDB` adds a client named `John Doe` with a phone number of `98765432`, an email of `johnd@example.com`, an address of `John street, block 123, #01-01` and a remark of `looking for HDB`.
 
 
-2. `add n/Betsy Crowe t/condo e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567` adds a client named `Betsy Crowe` with a tag of `Condo`, and email of `betsycrowe@example.com`, an address of `Flatbush Avenue, block 81, #02-02` and a phone number of `1234567`.
+2. `add n/Betsy Crowe t/landlord e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567` adds a client named `Betsy Crowe` with a tag of `Landlord`, and email of `betsycrowe@example.com`, an address of `Flatbush Avenue, block 81, #02-02` and a phone number of `1234567`.
+
 
 Visual example of correct output [Example `1.`]:
 
@@ -252,7 +279,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * By default, the find command conduct a general search for the individual. Hence, 
 the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* A client's name, phone nunmber, address, email and tag can be searched.
+* A client's name, phone number, address, email and tag can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -367,7 +394,8 @@ Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 
 - Adds a property listing to the client specified by `INDEX`
 - The `INDEX` refers to the index number shown in the displayed client list.
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​ 
+- Property tags are added in a case-insensitive manner. e.g `t/condo` or `t/CONDO` will both add the `CONDO` tag.
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
 
 Examples:
@@ -394,10 +422,11 @@ Format: `listing delete INDEX LISTING_INDEX`
 
 Examples:
 
-1. `listing delete 1 1` deletes the `1st` property listing from the client with index `1`.
+- `listing delete 1 1` deletes the 1st property listing from the client with index `1`.
 
 
-2. `listing delete 2 3` deletes the `3rd` property listing from the client with index `2`. 
+- `listing delete 2 3` deletes the 3rd property listing from the client with index `2`.
+
 
 Visual example of correct output [Example `1.`]:
 
@@ -458,7 +487,7 @@ PROperty data are saved in the hard disk automatically after any command that ch
 
 ### Editing the data file
 
-PROperty data are saved automatically as a JSON file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file.
+PROperty data are saved automatically as a [JSON](#technical-terms) file `[JAR file location]/data/property.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, PROperty will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -526,6 +555,14 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+
+### Technical Terms
+- **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
+- **CSV**: Comma-Separated Values, a simple file format used to store tabular data, where each line of the file is a data record with fields separated by commas.
+- **GUI**: Graphical User Interface, a user interface that allows users to interact with the application through graphical elements such as buttons, text fields, and menus.
+- **JAR**: Java ARchive, a package file format that aggregates many Java class files and associated resources (text, images) into one file to distribute application software or libraries on the Java platform.
+- **Java**: A high-level, object-oriented programming language used for building cross-platform applications.
+- **JSON**: JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. JSON is commonly used for transmitting data in web applications.
 
 ### Property Tags
 - **HDB**: Public housing flats governed by the Housing & Development Board.
