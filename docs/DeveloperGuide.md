@@ -338,7 +338,7 @@ The `fav`/`unfav` command allows users to mark specified a `Company` as favourit
 will appear at the top of the company list at all times along with other favourited companies (provided that they are not hidden by other commands like `find`).
 
 The `fav` command is facilitated by `FavCommand` and `FavCommandParser`. Similarly, `unfav` command is facilitated by
-`UnfavCommand` and `UnfavCommandParser`. For brevity, we refer to both using `XXFavCommand` and `XXFavCommanParser`
+`UnfavCommand` and `UnfavCommandParser`. For brevity, we refer to both using `XXFavCommand` and `XXFavCommandParser`
 Since they function similarly.
 
 The following methods and operations are involved:
@@ -615,7 +615,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **CLI**: Command Line Interface, a method of interacting with software using typed commands rather than a graphical interface.
-* **PR**: Pull Request, a request submitted by a contributor to merge code changes into a repository's main codebase, commonly used in GitHub for code reviews and collaboration.
 * **CSV**: Comma Separated Values, a text file format that uses commas to separate values, and newlines to separate records.
 * **JSON**: JavaScript Object Notation, a lightweight data-interchange [format](https://www.json.org/json-en.html).
 

@@ -346,13 +346,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `inc` will match `Inc`
 * The order of the keywords does not matter. e.g. `Ltd Pte` will match `Pte Ltd`
-* Only the name is searched.
-* Only full words will be matched e.g. `Inc` will not match `Incorporated`
-* companies matching at least one keyword will be returned (i.e. `OR` search).
+* Partial keywords will be matched e.g. `Inc` will match `Incorporated`
+* Companies matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Tech Bro` will return `Good Tech`, `Bro Inc`
 
 Examples:
-* `find Inc` returns `inc` and `Apple Inc`
+* `find Inc` returns `inc`, `Incorporated` and `Apple Inc`
 * `find apple facebook` returns `Apple`, `Facebook`<br>
   ![result for 'find apple facebook'](images/findAppleFacebookResult.png)
 
@@ -413,7 +412,7 @@ Removes an internship record for an existing company in the address book.
 
 Format: `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`
 
-* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
+* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `COMPANY_INDEX`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
