@@ -2,8 +2,8 @@
 layout: page
 title: User Guide
 ---
-# Real Connect
-Real Connect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Real Connect can get your contact management tasks done faster than traditional GUI apps.
+# RealConnect
+RealConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Real Connect can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
   {:toc}
@@ -331,11 +331,11 @@ Exits the program.
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data of RealConnect are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data of RealConnect are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
