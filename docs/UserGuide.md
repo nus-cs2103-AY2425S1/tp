@@ -29,8 +29,8 @@ You can refer to the [FAQ](#frequently-asked-questions-quick-start) section belo
 
 4. Open a command terminal, enter `cd Downloads/NAME_OF_YOUR_FOLDER`. Then, enter `java -jar teacherspet.jar` to run the application.<br>
    A window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
-   
-   <img width="1000" alt="image" src="https://github.com/user-attachments/assets/eba34e61-93a6-4ccd-afad-1e3eb37560d2">
+
+![Example UI](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -141,7 +141,7 @@ Continuing from the previous example in `add`, you could try this
 *  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st student to be `Science` and `e1234567` respectively.
 *  `edit 2 n/Betsy Tan g/` Edits the name of the 2nd student to be `Betsy Tan` and clears all of Betsy's groups.
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/e3ba5f4a-e849-4f62-ae7e-5718de7d0db5">
+![edit_example](images/edit_success.png)
 
 ---
 
@@ -175,7 +175,7 @@ Format: `list`
 
 Here is an example of what you might see, our lists would be different, of course!:
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/c9d071e2-9e10-4a43-a86c-3414bb0035f9">
+![list_example](images/list_success.png)
 
 ---
 
@@ -183,7 +183,7 @@ Here is an example of what you might see, our lists would be different, of cours
 
 You can view a list of students in the same group(s)
 
-<span style="color:#4CAF50;">Format: show KEYWORDS</span>
+Format: show KEYWORDS
 
 * The KEYWORDS is the name of the group you would like to search for in your current list. For instance, use `group 1` (for group 1) …​
 * The search is case-insensitive. e.g., `group 1` will match `GROUP 1`.
@@ -196,7 +196,7 @@ You can search for substrings within the content, but the search will only retur
 Here is an example you could try:
 * `show group 2` returns students who are in groups containing the words `group` or `2` (or both).
 
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/2861ca50-565a-48ad-91ed-29f3ef29dbe8">
+![show_example](images/show_success.png)
 
 ---
 
@@ -218,7 +218,7 @@ Examples:
 * `find n/ John` returns students with names containing `John`.
 * `find id/ A1234567E A2345678B` returns students with student IDs `A1234567E` or `A2345678B`.
 * `find n/ alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find n/ alex david'](images/findAlexDavidResult.png)
+  ![result for 'find n/ alex david'](images/find_example.png)
 * `find n/ Alice id/ A1234567E` returns students whose name contains `Alice` or whose student ID is `A1234567E`.
 
 ---
@@ -249,7 +249,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the list.
-* `find /n Nic` followed by `delete 1` deletes the 1st student named Nic.
+* `find n/ Nic` followed by `delete 1` deletes the 1st student named Nic.
 
 Expected Results:
 * If successful, you will be notified on which student you have deleted.
