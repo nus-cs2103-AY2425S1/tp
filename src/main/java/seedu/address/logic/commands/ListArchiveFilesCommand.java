@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -26,13 +27,13 @@ public class ListArchiveFilesCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(ListArchiveFilesCommand.class);
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         Path archiveDir = model.getArchiveDirectoryPath();
         if (!Files.exists(archiveDir)) {
             logger.info("No archive directory found.");
-            return new CommandResult(MESSAGE_NO_ARCHIVE);
+            throw new CommandException(MESSAGE_NO_ARCHIVE);
         }
 
         List<String> archiveFiles = new ArrayList<>();
@@ -43,11 +44,11 @@ public class ListArchiveFilesCommand extends Command {
             }
         } catch (IOException e) {
             logger.severe("Failed to list archive files: " + e.getMessage());
-            return new CommandResult(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_FAILURE);
         }
 
         if (archiveFiles.isEmpty()) {
-            return new CommandResult(MESSAGE_NO_ARCHIVE);
+            throw new CommandException(MESSAGE_NO_ARCHIVE);
         }
 
         String resultMessage = String.join("\n", archiveFiles);

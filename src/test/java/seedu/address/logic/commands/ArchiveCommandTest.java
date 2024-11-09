@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -59,10 +60,8 @@ public class ArchiveCommandTest {
     @Test
     public void execute_emptyAddressBook_failure() {
         Model model = new ModelManagerStubThrowingIoException();
-        Model expectedModel = new ModelManagerStubThrowingIoException();
 
-        assertCommandSuccess(new ArchiveCommand(new Filename("")), model, ArchiveCommand.MESSAGE_FAILURE,
-                expectedModel);
+        assertCommandFailure(new ArchiveCommand(new Filename("")), model, ArchiveCommand.MESSAGE_FAILURE);
     }
 
     @Test

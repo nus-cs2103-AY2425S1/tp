@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.io.IOException;
@@ -40,16 +41,14 @@ public class ListArchiveFilesCommandTest {
     }
 
     @Test
-    public void execute_noArchiveDirectory_success() throws IOException {
+    public void execute_noArchiveDirectory_failure() throws IOException {
         Files.deleteIfExists(archiveDir);
-        assertCommandSuccess(new ListArchiveFilesCommand(), model, ListArchiveFilesCommand.MESSAGE_NO_ARCHIVE,
-                model);
+        assertCommandFailure(new ListArchiveFilesCommand(), model, ListArchiveFilesCommand.MESSAGE_NO_ARCHIVE);
     }
 
     @Test
-    public void execute_noArchiveFiles_success() {
-        assertCommandSuccess(new ListArchiveFilesCommand(), model, ListArchiveFilesCommand.MESSAGE_NO_ARCHIVE,
-                model);
+    public void execute_noArchiveFiles_failure() {
+        assertCommandFailure(new ListArchiveFilesCommand(), model, ListArchiveFilesCommand.MESSAGE_NO_ARCHIVE);
     }
 
     @Test

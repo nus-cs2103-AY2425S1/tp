@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.filename.Filename;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -37,13 +38,13 @@ public class LoadArchiveCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         Path archiveFile = Paths.get(model.getArchiveDirectoryPath().toString(), archiveFilename.toString());
         if (!FileUtil.isFileExists(archiveFile)) {
             logger.info("Archive file not found: " + archiveFilename);
-            return new CommandResult(String.format(MESSAGE_NOT_FOUND, archiveFilename));
+            throw new CommandException(String.format(MESSAGE_NOT_FOUND, archiveFilename));
         }
 
         try {
@@ -52,7 +53,7 @@ public class LoadArchiveCommand extends Command {
             model.setAddressBook(addressBook);
         } catch (IOException | DataLoadingException e) {
             logger.severe("Failed to load archive file: " + e.getMessage());
-            return new CommandResult(String.format(MESSAGE_FAILURE, archiveFilename));
+            throw new CommandException(String.format(MESSAGE_FAILURE, archiveFilename));
         }
 
         logger.info("Loaded archive file: " + archiveFilename);

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 
 import seedu.address.commons.core.filename.Filename;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -30,13 +31,13 @@ public class ArchiveCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         try {
             model.archiveAddressBook(filename);
         } catch (IOException e) {
-            return new CommandResult(MESSAGE_FAILURE);
+            throw new CommandException(MESSAGE_FAILURE);
         }
 
         return new CommandResult(MESSAGE_SUCCESS);
