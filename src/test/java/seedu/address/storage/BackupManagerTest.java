@@ -26,12 +26,6 @@ import org.junit.jupiter.api.io.TempDir;
  */
 public class BackupManagerTest {
 
-    @TempDir
-    public Path temporaryFolder;
-    private BackupManager backupManager;
-    private Path backupDirectory;
-    private Path sourceFile;
-
     private static final DateTimeFormatter FILE_TIMESTAMP_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
     private static final String BACKUP_FILE_REGEX =
@@ -39,6 +33,11 @@ public class BackupManagerTest {
     private static final Pattern BACKUP_FILE_PATTERN =
             Pattern.compile(BACKUP_FILE_REGEX);
 
+    @TempDir
+    public Path temporaryFolder;
+    private BackupManager backupManager;
+    private Path backupDirectory;
+    private Path sourceFile;
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -247,7 +246,7 @@ public class BackupManagerTest {
         }
         return LocalDateTime.MIN;
     }
-    
+
     @Test
     public void isBackupAvailable_invalidIndex_returnsFalse() {
         // Check for a backup with a negative index
