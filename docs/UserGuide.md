@@ -60,6 +60,10 @@ SpleetWaise builds on [AddressBook Level 3 (AB3)](https://se-education.org/addre
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Parameters' input that collide with existing prefixes may cause error to be thrown.<br>
+  e.g. `editTxn 1 desc/John owes me for our afternoon date/meeting` may not be accepted as `date/` is a prefix in editTxn command.<br>
+  **Tip:** Use `\/` to add parameter inputs that contain `/` character. e.g. `editTxn 1 desc/John owes me for our afternoon date\/meeting`
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -100,10 +104,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​`
     - `X Æ A-12` (non-Latin characters like `Æ` or Arabic `عبد العزيز`)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person with an Indian name containing "d/o" denoting "daughter of" can be added as `add n/Genevieve d/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+A person with an Indian name containing "d/o" denoting "daughter of" can be added as `add n/Genevieve d\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 </div>
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
