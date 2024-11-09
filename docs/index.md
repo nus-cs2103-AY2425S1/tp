@@ -26,7 +26,7 @@ With ClinicConnect, you can:
 ## **Use *ClinicConnect* today, and watch as all your clinic admin-related headaches fade away**
 
 * If you are interested in using ClinicConnectSystem, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#quick-start).
-* If you are interested about developing ClinicConnectSystem, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.
+* If you are interested in developing ClinicConnectSystem, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.
 
 
 ## **Acknowledgements**

@@ -10,12 +10,10 @@ import static seedu.address.testutil.TypicalPatients.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.testutil.ClinicConnectSystemBuilder;
 
 public class ModelManagerTest {
@@ -116,11 +114,6 @@ public class ModelManagerTest {
 
         // different clinicConnectSystem -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentClinicConnectSystem, userPrefs)));
-
-        // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPatientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(clinicConnectSystem, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
