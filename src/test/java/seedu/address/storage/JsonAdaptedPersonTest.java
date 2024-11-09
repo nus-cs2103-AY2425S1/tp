@@ -2,10 +2,12 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.model.person.Birthday.EMPTY_BIRTHDAY;
 import static seedu.address.model.person.Birthday.MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.NO_BIRTHDAY_BENSON;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +30,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_BIRTHDAY = "not a date";
     private static final String TOO_LATE_BIRTHDAY = LocalDate.now().plusDays(5).toString();
+    private static final String EMPTY_BIRTHDAY = "";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_DATE_OF_CREATION = LocalDate.now().plusDays(100).toString();
     private static final String VALID_LOG_MESSAGE = "message";
@@ -210,5 +213,14 @@ public class JsonAdaptedPersonTest {
                 VALID_DATE_OF_CREATION, VALID_HISTORY, VALID_PROPERTIES);
 
         assertThrows(IllegalValueException.class, MESSAGE_INVALID_BIRTHDAY_AFTER_PRESENT, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyBirthdayFormat_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_REMARK, EMPTY_BIRTHDAY, VALID_TAGS,
+                VALID_DATE_OF_CREATION, VALID_HISTORY, VALID_PROPERTIES);
+        assertEquals(NO_BIRTHDAY_BENSON, person.toModelType());
     }
 }
