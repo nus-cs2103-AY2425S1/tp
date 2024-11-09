@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyObjectProperty;
@@ -157,42 +158,63 @@ public class ModelManager implements Model {
 
     @Override
     public void setClientBook(ReadOnlyClientBook clientBook) {
+        logger.fine("Setting new ClientBook data");
         this.clientBook.resetData(clientBook);
     }
 
     @Override
     public ReadOnlyClientBook getClientBook() {
+        logger.fine("Retrieving ClientBook data");
         return clientBook;
     }
 
     @Override
     public boolean hasClient(Client client) {
         requireNonNull(client);
-        return clientBook.hasClient(client);
+        boolean exists = clientBook.hasClient(client);
+        logger.fine("Checking existence of client: " + client + " - Exists: " + exists);
+        return exists;
+    }
+
+    @Override
+    public boolean sameEmailExists(Client client) {
+        requireNonNull(client);
+        boolean exists = clientBook.sameEmailExists(client);
+        logger.fine("Checking existence of duplicate email: " + client + " - Exists: " + exists);
+        return exists;
     }
 
     @Override
     public void deleteClient(Client target) {
+        requireNonNull(target);
+        logger.info("Deleting client: " + target);
         clientBook.removeClient(target);
+        assert !hasClient(target) : "Client should no longer exist after deletion";
+
         try {
             JsonClientBookStorage jsonClientBookStorage = new JsonClientBookStorage(clientBookFilePath);
             jsonClientBookStorage.saveClientBook(clientBook);
+            logger.fine("ClientBook saved successfully after deletion.");
         } catch (IOException e) {
-            System.out.println("Error while saving ClientBook: " + e.getMessage());
+            logger.log(Level.SEVERE, "Error while saving ClientBook after deletion: " + e.getMessage(), e);
         }
     }
 
     @Override
     public void addClient(Client client) {
+        requireNonNull(client);
+        logger.info("Adding client: " + client);
         clientBook.addClient(client);
+        assert hasClient(client) : "Client should exist after addition";
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
     @Override
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
-
+        logger.info("Updating client: " + target + " to " + editedClient);
         clientBook.setClient(target, editedClient);
+        assert hasClient(editedClient) : "Edited client should exist after update";
     }
 
     //=========== Filtered Client List Accessors =============================================================
@@ -203,12 +225,28 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Client> getFilteredClientList() {
+        logger.fine("Retrieving filtered client list");
         return filteredClients;
+    }
+
+    /**
+     * Checks if the filtered client list is empty.
+     *
+     * <p>This method can be used to determine whether there are any clients currently
+     * available in the filtered list, which may be useful for conditional UI rendering or
+     * other logic that depends on the presence of clients.</p>
+     *
+     * @return {@code true} if the filtered client list is empty, {@code false} otherwise.
+     */
+    @Override
+    public boolean isFilteredClientListEmpty() {
+        return filteredClients.isEmpty();
     }
 
     @Override
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
+        logger.fine("Updating filtered client list with new predicate");
         filteredClients.setPredicate(predicate);
     }
 
@@ -279,6 +317,20 @@ public class ModelManager implements Model {
         return filteredProperties;
     }
 
+    /**
+     * Checks if the filtered property list is empty.
+     *
+     * <p>This method can be used to determine whether there are any properties currently
+     * available in the filtered list, which may be useful for conditional UI rendering or
+     * other logic that depends on the presence of properties.</p>
+     *
+     * @return {@code true} if the filtered property list is empty, {@code false} otherwise.
+     */
+    @Override
+    public boolean isFilteredPropertyListEmpty() {
+        return filteredProperties.isEmpty();
+    }
+
     @Override
     public void updateFilteredPropertyList(Predicate<Property> predicate) {
         requireNonNull(predicate);
@@ -326,6 +378,20 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Meeting> getFilteredMeetingList() {
         return filteredMeetings;
+    }
+
+    /**
+     * Checks if the filtered meeting list is empty.
+     *
+     * <p>This method can be used to determine whether there are any meetings currently
+     * available in the filtered list, which may be useful for conditional UI rendering or
+     * other logic that depends on the presence of meetings.</p>
+     *
+     * @return {@code true} if the filtered meeting list is empty, {@code false} otherwise.
+     */
+    @Override
+    public boolean isFilteredMeetingListEmpty() {
+        return filteredMeetings.isEmpty();
     }
 
     @Override

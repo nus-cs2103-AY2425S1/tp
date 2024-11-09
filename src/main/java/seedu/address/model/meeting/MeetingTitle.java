@@ -13,7 +13,7 @@ public class MeetingTitle {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Titles should only contain alphanumeric characters and spaces. It should not be blank and "
-                    + "it should not exceed 100 characters (excluding starting and ending whitespaces)";
+                    + "it should not exceed 100 characters (excluding starting and ending whitespaces).";
 
     /*
      * The first character of the title must not be a whitespace,
@@ -33,7 +33,7 @@ public class MeetingTitle {
         requireNonNull(meetingTitle);
         checkArgument(isValidMeetingTitle(meetingTitle), MESSAGE_CONSTRAINTS);
         this.value = meetingTitle;
-        logger.info("MeetingTitle created: " + this);
+        logger.info("MeetingTitle created.");
     }
 
     /**

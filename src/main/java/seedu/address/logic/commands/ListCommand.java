@@ -16,15 +16,17 @@ public abstract class ListCommand extends Command {
 
     /**
      * Usage message to guide users on how to use the 'list' command. It provides examples of listing
-     * buyers, sellers, clients, or properties from the database, and clarifies the allowed keys.
+     * buyers, sellers, clients, properties, or meetings from the address book, and clarifies the allowed keys.
      */
     public static final String MESSAGE_USAGE = String.format(
-            "%s: Lists all existing properties, sellers, buyers, or clients in the database.\n"
-                    + "Parameters: k/KEY\nRestrictions: KEY must be one of the following: "
-                    + "\"buyers\", \"sellers\", \"clients\", \"properties\" or \"meetings\".\n"
-                    + "Only these 5 types of records are stored in the database.",
+            "%s: Shows a list of all existing buyers, sellers, clients (i.e., buyers and sellers), "
+                    + "properties, or meetings in the address book.\n"
+                    + "Parameters: k/KEY\nRestrictions:\n\tKey must be one of the following: "
+                    + "\"buyers\", \"sellers\", \"clients\", \"properties\", or \"meetings\" (case-insensitive).\n"
+                    + "\tOnly these 5 types of records are stored in the address book.",
             COMMAND_WORD
     );
+
 
 
     /**
@@ -33,6 +35,8 @@ public abstract class ListCommand extends Command {
      * (e.g., buyers, sellers, clients, or properties).
      */
     public static final String MESSAGE_SUCCESS = "Listed all %1$s";
+
+    public static final String MESSAGE_SUCCESS_EMPTY_LIST = "There are no %1$s yet!";
 
     /**
      * Executes the list command to retrieve and display a specific category of records from the model.

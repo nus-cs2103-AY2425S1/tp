@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
@@ -18,19 +15,8 @@ import seedu.address.model.client.Phone;
  */
 public abstract class AddClientCommand extends Command {
 
-    /**
-     * A string describing the expected parameters for adding a client.
-     * Includes name, phone number, and email.
-     */
-    public static final String CLIENT_PARAMETERS = String.format(
-            "%sNAME %sPHONE %sEMAIL",
-            PREFIX_NAME,
-            PREFIX_PHONE,
-            PREFIX_EMAIL
-    );
-
     public static final String CLIENT_RESTRICTIONS = String.format(
-            "Restrictions: %s\n%s\n%s",
+            "Restrictions: \n\t%s\n\t%s\n\t%s",
             NameWithoutNumber.MESSAGE_CONSTRAINTS,
             Phone.MESSAGE_CONSTRAINTS,
             Email.MESSAGE_CONSTRAINTS

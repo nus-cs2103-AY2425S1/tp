@@ -26,12 +26,13 @@ public class DeletePropertyCommand extends Command {
     public static final String MESSAGE_USAGE = String.format(
             "%s: Deletes the property unit identified by its postal code and unit number.\n"
                     + "Parameters: %sPOSTAL_CODE %sUNIT_NUMBER\n"
-                    + "Restrictions: POSTAL_CODE must follow the Singapore postal code format "
-                    + "i.e. be a 6 digit integer (between 000000 to 999999)\n"
-                    + "UNIT_NUMBER must be in the format (XXX-XXX)",
+                    + "Restrictions:\n"
+                    + "\t%s\n\t%s",
             COMMAND_WORD,
             PREFIX_POSTALCODE,
-            PREFIX_UNITNUMBER
+            PREFIX_UNITNUMBER,
+            PostalCode.MESSAGE_CONSTRAINTS,
+            Unit.MESSAGE_CONSTRAINTS
     );
 
 
@@ -57,7 +58,7 @@ public class DeletePropertyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model, "Model cannot be null");
-        model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTY);
+        model.updateFilteredPropertyList(Model.PREDICATE_SHOW_ALL_PROPERTIES);
 
         logger.log(Level.INFO, "Executing DeletePropertyCommand with postalCode={0}, unitNumber={1}",
                 new Object[]{postalCode, unitNumber});

@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.model.client.Phone;
 
@@ -13,14 +12,11 @@ import seedu.address.model.client.Phone;
  */
 public abstract class DeleteClientCommand extends Command {
 
-    /** Command parameter format for phone. */
-    public static final String CLIENT_PARAMETERS = String.format("%sPHONE", PREFIX_PHONE);
-
     /**
      * Command restrictions indicating that the phone number must be an
      * 8-digit positive integer starting with 8 or 9.
      */
-    public static final String CLIENT_RESTRICTIONS = String.format("Restrictions: %s", Phone.MESSAGE_CONSTRAINTS);
+    public static final String CLIENT_RESTRICTIONS = String.format("Restrictions: \n\t%s", Phone.MESSAGE_CONSTRAINTS);
 
 
     /** The phone number of the client to delete. */

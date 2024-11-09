@@ -26,7 +26,7 @@ public class FilterClientCommandParser implements Parser<FilterClientCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
-        if (ParserUtil.hasExcessToken(args, PREFIX_NAME)) {
+        if (ParserUtil.hasExcessTokenName(args, PREFIX_NAME)) {
             logger.warning("Excess prefixes.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterClientCommand.MESSAGE_USAGE));
         }

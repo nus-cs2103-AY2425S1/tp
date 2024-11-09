@@ -35,7 +35,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
 
         // Verify there are no duplicate prefixes in the input
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
-        if (ParserUtil.hasExcessToken(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
+        if (ParserUtil.hasExcessTokenName(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL)) {
             logger.warning("Excess prefixes.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSellerCommand.MESSAGE_USAGE));
         }

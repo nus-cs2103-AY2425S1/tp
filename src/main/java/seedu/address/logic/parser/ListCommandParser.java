@@ -34,20 +34,13 @@ public class ListCommandParser implements Parser<ListCommand> {
         requireNonNull(args);
         logger.info("Parsing list command with arguments: " + args);
 
+        // Tokenize the arguments and perform initial validation checks
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_KEY);
+
+        validateArgumentsFormat(argMultimap, args);
+
+        // Parse the key argument
         String keyArg = argMultimap.getValue(PREFIX_KEY).orElse("");
-
-        if (keyArg.isEmpty()) {
-            logger.warning("No key argument provided for list command");
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        }
-        if (ParserUtil.hasExcessToken(args, PREFIX_KEY)) {
-            logger.warning("Excess prefixes.");
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
-        }
-
         String keyArgLower = keyArg.toLowerCase();
         logger.info("Key argument received: " + keyArgLower);
 
@@ -84,22 +77,35 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListMeetingsCommand();
 
         default:
-            // Assert that the keyArg is not any of the valid keys
-            assert !keyArgLower.equals(ListClientsCommand.KEY_WORD.toLowerCase())
-                    && !keyArgLower.equals(ListBuyersCommand.KEY_WORD.toLowerCase())
-                    && !keyArgLower.equals(ListSellersCommand.KEY_WORD.toLowerCase())
-                    && !keyArgLower.equals(ListPropertiesCommand.KEY_WORD.toLowerCase())
-                    && !keyArgLower.equals(ListMeetingsCommand.KEY_WORD.toLowerCase())
-                    : "Key argument should not match any valid keys: "
-                    + ListClientsCommand.KEY_WORD + ", "
-                    + ListBuyersCommand.KEY_WORD + ", "
-                    + ListSellersCommand.KEY_WORD + ", "
-                    + ListPropertiesCommand.KEY_WORD + ", "
-                    + ListMeetingsCommand.KEY_WORD;
-
             logger.warning("Invalid key argument: " + keyArg);
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Validates the format of the arguments in the ArgumentMultimap.
+     *
+     * @param argMultimap The tokenized arguments map.
+     * @param args        The original input arguments string.
+     * @throws ParseException if there are duplicate prefixes, missing prefixes, or excess tokens.
+     */
+    private void validateArgumentsFormat(ArgumentMultimap argMultimap, String args) throws ParseException {
+        requireNonNull(argMultimap, "ArgumentMultimap cannot be null.");
+
+        // Check for duplicate PREFIX_KEY
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_KEY);
+
+        // Check for excess tokens beyond the specified prefix
+        if (ParserUtil.hasExcessToken(args, PREFIX_KEY)) {
+            logger.warning("Excess tokens detected in input: " + args);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
+
+        // Check if PREFIX_KEY is present
+        if (argMultimap.getValue(PREFIX_KEY).isEmpty()) {
+            logger.warning("Missing required PREFIX_KEY in input: " + args);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
     }
 }

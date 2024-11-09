@@ -36,7 +36,6 @@ import seedu.address.model.meeting.Meeting;
 import seedu.address.testutil.ClientBookBuilder;
 import seedu.address.testutil.MeetingBookBuilder;
 
-
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -212,7 +211,6 @@ public class ModelManagerTest {
         modelManager = new ModelManager(new UserPrefs(),
                 new PropertyBook(), new ClientBook(), meetingBook);
 
-        // Apply predicate to only include meetings with the title "Meeting at Bedok"
         Predicate<Meeting> predicate = meeting -> meeting.getMeetingTitle().equals(MEETING_BEDOK.getMeetingTitle());
         modelManager.updateFilteredMeetingList(predicate);
 
@@ -248,25 +246,19 @@ public class ModelManagerTest {
         MeetingBook differentMeetingBook = new MeetingBook();
         UserPrefs userPrefs = new UserPrefs();
 
-        // same values -> returns true
         modelManager = new ModelManager(userPrefs, propertyBook, clientBook, meetingBook);
         ModelManager modelManagerCopy = new ModelManager(userPrefs, propertyBook, clientBook, meetingBook);
         assertTrue(modelManager.equals(modelManagerCopy));
 
-        // same object -> returns true
         assertTrue(modelManager.equals(modelManager));
 
-        // null -> returns false
         assertFalse(modelManager.equals(null));
 
-        // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different client book -> returns false
         assertFalse(modelManager.equals(new ModelManager(userPrefs, new PropertyBook(),
                 differentClientBook, differentMeetingBook)));
 
-        // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setClientBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(differentUserPrefs, new PropertyBook(),
@@ -275,59 +267,37 @@ public class ModelManagerTest {
 
     @Test
     public void getReadOnlyDisplayMode_returnsReadOnlyObjectPropertyType() {
-        // Assert that getReadOnlyDisplayMode() returns an instance of ReadOnlyObjectProperty<DisplayMode>
-        assertTrue(
-                modelManager.getReadOnlyDisplayMode() instanceof ReadOnlyObjectProperty<?>,
-                "Expected result to be an instance of ReadOnlyObjectProperty<DisplayMode>"
-        );
+        assertTrue(modelManager.getReadOnlyDisplayMode() instanceof ReadOnlyObjectProperty<?>);
     }
 
     @Test
     public void getReadOnlyDisplayMode_isObservable() {
-        // Assert that getReadOnlyDisplayMode() returns an instance of Observable
-        assertTrue(
-                modelManager.getReadOnlyDisplayMode() instanceof Observable,
-                "Expected result to be an instance of Observable"
-        );
+        assertTrue(modelManager.getReadOnlyDisplayMode() instanceof Observable);
     }
+
     @Test
     public void getReadOnlyDisplayMode_isImmutable() {
-        // Get the read-only display mode property
         ReadOnlyObjectProperty<ModelManager.DisplayMode> displayModeProperty = modelManager.getReadOnlyDisplayMode();
-
-        // Check that the property cannot be cast to a WritableObjectValue
-        assertFalse(displayModeProperty instanceof WritableObjectValue, "Expected display mode to not be writable");
+        assertFalse(displayModeProperty instanceof WritableObjectValue);
     }
+
     @Test
     public void setDisplayClients_setsDisplayModeToClients() {
-        // Set display mode to CLIENTS
         modelManager.setDisplayClients();
-        assertEquals(
-                ModelManager.DisplayMode.CLIENTS, modelManager.getReadOnlyDisplayMode().getValue(),
-                "Expected display mode to be CLIENTS"
-        );
+        assertEquals(ModelManager.DisplayMode.CLIENTS, modelManager.getReadOnlyDisplayMode().getValue());
     }
 
     @Test
     public void setDisplayProperties_setsDisplayModeToProperties() {
-        // Set display mode to PROPERTIES
         modelManager.setDisplayProperties();
-        assertEquals(
-                ModelManager.DisplayMode.PROPERTIES, modelManager.getReadOnlyDisplayMode().getValue(),
-                "Expected display mode to be PROPERTIES"
-        );
+        assertEquals(ModelManager.DisplayMode.PROPERTIES, modelManager.getReadOnlyDisplayMode().getValue());
     }
 
     @Test
     public void setDisplayMeetings_setsDisplayModeToMeetings() {
-        // Set display mode to MEETINGS
         modelManager.setDisplayMeetings();
-        assertEquals(
-                ModelManager.DisplayMode.MEETINGS, modelManager.getReadOnlyDisplayMode().getValue(),
-                "Expected display mode to be MEETINGS"
-        );
+        assertEquals(ModelManager.DisplayMode.MEETINGS, modelManager.getReadOnlyDisplayMode().getValue());
     }
-
 
     @Test
     public void testBuyerPredicate() {
@@ -343,18 +313,13 @@ public class ModelManagerTest {
 
         Client mockSeller = new Seller(nameSeller, phoneSeller, emailSeller);
 
-        assertTrue(PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockBuyer), "Buyer should pass the buyer predicate");
+        assertTrue(PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockBuyer));
 
-        // Predicate should return false for  (when client is a buyer)
-        assertFalse(
-                PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockSeller),
-                "Seller should not pass the buyer predicate"
-        );
+        assertFalse(PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockSeller));
     }
 
     @Test
     public void testSellerPredicate() {
-        // Mocking the buyer and seller details
         NameWithoutNumber nameBuyer = mock(NameWithoutNumber.class);
         Phone phoneBuyer = mock(Phone.class);
         Email emailBuyer = mock(Email.class);
@@ -367,13 +332,8 @@ public class ModelManagerTest {
 
         Client mockSeller = new Seller(nameSeller, phoneSeller, emailSeller);
 
-        // Predicate should return true for sellers
-        assertTrue(PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockSeller), "Seller should pass the seller predicate");
+        assertTrue(PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockSeller));
 
-        // Predicate should return false for buyers (when client is a buyer)
-        assertFalse(
-                PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockBuyer),
-                "Buyer should not pass the seller predicate"
-        );
+        assertFalse(PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockBuyer));
     }
 }
