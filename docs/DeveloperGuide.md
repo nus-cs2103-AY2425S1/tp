@@ -412,15 +412,25 @@ Note: For all use cases below, if the user enters an invalid input, or there is 
 ### Non-Functional Requirements
 
 1.**Platform Compatibility**: Should work on any mainstream OS with Java 17 or above installed.
+
 2.**Performance**: Should be able to hold up to 1000 clients without noticeable sluggishness in typical usage.
+
 3.**Efficiency**: A user with average typing speed should be able to perform tasks faster using commands than using a mouse-based interface.
+
 4.**Ease of Use**: Core functions should be intuitive enough for a new user to learn within 30 minutes.
+
 5.**Response Time**: Basic commands (e.g., add client, update client) should provide feedback within 1 second.
+
 6.**Memory Usage**: The app should not exceed 500MB of memory usage.
+
 7.**Error Messaging**: Should provide clear error messages that guide the user in correcting invalid inputs.
+
 8.**Data Persistence**: All client data should be saved and remain intact between application sessions to prevent data loss.
+
 9.**Reliability**: The application should handle typical user errors gracefully without crashing or requiring a restart.
+
 10.**Documentation**: Basic user instructions and command descriptions should be available to help new users understand and use core features effectively.
+
 11.**Backup**: Users should be able to easily save a copy of all data manually to prevent accidental loss.
 
 
