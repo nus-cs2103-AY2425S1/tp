@@ -427,7 +427,7 @@ Use case ends.
 
 #### Use Case: UC3 - Find a Contact by Name
 **MSS**
-1. User try to find a contact by name.
+1. User finds a contact by name.
 2. GamerBook shows the corresponding contact.
 Use case ends.
 
