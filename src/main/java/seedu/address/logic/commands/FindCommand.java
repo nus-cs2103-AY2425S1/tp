@@ -37,6 +37,7 @@ public class FindCommand extends UndoableCommand {
         requireNonNull(model);
         previousPredicate = model.getCurrentPredicate();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.clearFilterSet();
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
