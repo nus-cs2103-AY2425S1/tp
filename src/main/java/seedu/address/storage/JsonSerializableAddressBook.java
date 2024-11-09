@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -47,11 +49,19 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        Set<String> seenNames = new HashSet<>();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
+            String trimmedName = person.getName().fullName.trim();
+
+            if (seenNames.contains(trimmedName)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
+            seenNames.add(trimmedName);
             addressBook.addPerson(person);
         }
         return addressBook;
