@@ -573,7 +573,7 @@ Example:
 
 > View a single student's details in a formatted and organized manner.
 
-**Method -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
+**Method -  Using GUI**: Double-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
 
 #### 4.5.2 Clearing all data: `clear`
 
