@@ -375,11 +375,11 @@ such as contact information, address and other basic personal data.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​              | I want to …​                       | So that I can…​                                                                                                   |
+| Priority | As a …​              | I want to …​                       | So that …​                                                                                                        |
 |--------|----------------------|------------------------------------|-------------------------------------------------------------------------------------------------------------------|
 | `* * *` | user                 | add a new patient                  | I can create new patient records                                                                                  |
 | `* * *` | user                 | edit a record after submitting it  | I can make modifications to erroneous records which may have been submitted after keying a command in too quickly |
-| `* * *` | user                 | delete a patient's record          | remove entries that I no longer need                                                                              |
+| `* * *` | user                 | delete a patient's record          | I can remove entries that I no longer need                                                                        |
 | `* * *` | user                 | search for a patient by name or ID | I can quickly access their information when needed                                                                |
 | `* * *` | user                 | backup data 	                      | Patients data can be restored should the records be corrupted                                                     |
 | `* * ` | first-time user      | get help within the application    | I can understand how to use the commands                                                                          |
@@ -409,6 +409,10 @@ Extensions:
 
 - 1a. Patient information contains fields with incorrect format.
     - 1a1. ClinicBuddy provides an error message informing the user of the error.
+    - Use case ends.
+  
+- 2a. The NRIC of the patient already exist.
+    - 2a1. ClinicBuddy provides an error message informing the user that the NRIC exists.
     - Use case ends.
   
 <div style="page-break-after: always;"></div>
