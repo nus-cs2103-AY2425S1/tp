@@ -300,38 +300,43 @@ By enhancing collaboration and automating communication, Eventory reduces stress
 
 ### User stories
 
+#### Important Note:
+* Not all features in the user stories have been implemented
+* For features that have been implemented, they may not work exactly as described in user stories
+* Features are not implemented strictly based on priority
+
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                          | I want to …​                                               | So that I can…​                                                            |
 |----------|--------------------------------------------------|------------------------------------------------------------|----------------------------------------------------------------------------|
 | `* * *`  | new user                                         | see a list of commands                                     | quickly use it as reference                                                |
-| `* * *`  | Meticulous planner                               | add, edit, and delete contacts                             | maintain only a list of essential contacts                                 |
-| `* * *`  | Efficiency-focused user                          | search by name                                             | save time in looking for specific contacts                                 |
-| `* * *`  | Frequent user                                    | save and load all my data                                  | Use the application across multiple sessions                               |
-| `* *`    | Easily overwhelmed planner                       | see priorities of work to be done                          | better manage my time                                                      |
-| `* *`    | Team member                                      | share contacts with others                                 | I can work with others more effectively                                    |
-| `* *`    | Frequent user                                    | import and export contacts                                 | migrate between working platforms                                          |
-| `* *`    | Detail-oriented planner                          | add custom notes to each contact                           | keep track of specific details                                             |
-| `*`      | Tech-savvy user                                  | use keyboard shortcuts                                     | Achieve my goals more efficiently                                          |
-| `*`      | Impatient person                                 | easily use commands                                        | I can do my work quickly and without frustration                           |
-| `*`      | user with many clients                           | share my schedule                                          | Share my availability with clients                                         |
-| `*`      | Bilingual user                                   | Translate notes                                            | I can work in different languages with different clients                   |
-| `*`      | Event planner                                    | see who is in charge of a venue                            | quickly contact them for bookings                                          |
-| `*`      | Planning supervisor                              | Set permissions for team members                           | so that we can collaborate at any level                                    |
-| `*`      | Planner of multiple events                       | Separate contacts based on event                           | contact relevant people more quickly                                       |
-| `*`      | event planner                                    | I want to see contact's occupations                        | I know who may be relevant to my event                                     |
-| `*`      | Safety-conscious event organiser                 | Store emergency contact details for team members           | quickly reach them in case of an emergency                                 |
-| `*`      | Large event organiser                            | Send bulk messages to multiple contacts at once            | save time when sending updates or reminders                                |
-| `*`      | Organiser                                        | Schedule messages in advance                               | Send reminders to vendors                                                  |
-| `*`      | Busy planner                                     | Receive delivery confirmations and read receipts           | be sure my contacts have received important information                    |
-| `*`      | Detailed planner                                 | Assign tasks to individual contacts                        | know who is responsible for each task                                      |
-| `*`      | Event Organiser                                  | Track the history of events a contact has been involved in | have a reference of their past contributions                               |
-| `*`      | Organiser with many contacts                     | Sort contact by their latest interaction or by tags        | quickly access the most relevant contacts                                  |
-| `* *`    | Frequent event organiser                         | view available venues for hosting my event                 | save time searching for suitable venues                                    |
-| `*`      | Event planner                                    | view contacts on a map                                     | plan location based events                                                 |
-| `*`      | Large scale event planner                        | Create relationship mappings between contacts              | understand and leverage connections within my network                      |
-| `*`      | Planner who does not check the application often | Customise alerts and notifications                         | differentiate between notifications easily                                 |
-| `*`      | Long time event organiser                        | Archive inactive contacts without deleting them            | maintain a record of past interactions while keeping my active list clean. |
+| `* * *`  | meticulous planner                               | add, edit, and delete contacts                             | maintain only a list of essential contacts                                 |
+| `* * *`  | efficiency-focused user                          | search by name                                             | save time in looking for specific contacts                                 |
+| `* * *`  | frequent user                                    | save and load all my data                                  | Use the application across multiple sessions                               |
+| `* *`    | easily overwhelmed planner                       | see priorities of work to be done                          | better manage my time                                                      |
+| `* *`    | team member                                      | share contacts with others                                 | work with others more effectively                                          |
+| `* *`    | frequent user                                    | import and export contacts                                 | migrate between working platforms                                          |
+| `* *`    | detail-oriented planner                          | add custom notes to each contact                           | keep track of specific details                                             |
+| `*`      | tech-savvy user                                  | use keyboard shortcuts                                     | achieve my goals more efficiently                                          |
+| `*`      | impatient person                                 | easily use commands                                        | do my work quickly and without frustration                                 |
+| `*`      | user with many clients                           | share my schedule                                          | share my availability with clients                                         |
+| `*`      | bilingual user                                   | translate notes                                            | work in different languages with different clients                         |
+| `*`      | event planner                                    | see who is in charge of a venue                            | quickly contact them for bookings                                          |
+| `*`      | planning supervisor                              | set permissions for team members                           | so that we can collaborate at any level                                    |
+| `*`      | planner of multiple events                       | separate contacts based on event                           | contact relevant people more quickly                                       |
+| `*`      | event planner                                    | see contact's occupations                                  | know who may be relevant to my event                                       |
+| `*`      | safety-conscious event organiser                 | store emergency contact details for team members           | quickly reach them in case of an emergency                                 |
+| `*`      | large event organiser                            | send bulk messages to multiple contacts at once            | save time when sending updates or reminders                                |
+| `*`      | organiser                                        | schedule messages in advance                               | send reminders to vendors                                                  |
+| `*`      | busy planner                                     | receive delivery confirmations and read receipts           | be sure my contacts have received important information                    |
+| `*`      | detailed planner                                 | assign tasks to individual contacts                        | know who is responsible for each task                                      |
+| `*`      | event organiser                                  | track the history of events a contact has been involved in | have a reference of their past contributions                               |
+| `*`      | organiser with many contacts                     | sort contact by their latest interaction or by tags        | quickly access the most relevant contacts                                  |
+| `* `     | frequent event organiser                         | view available venues for hosting my event                 | save time searching for suitable venues                                    |
+| `*`      | event planner                                    | view contacts on a map                                     | plan location based events                                                 |
+| `*`      | large scale event planner                        | create relationship mappings between contacts              | understand and leverage connections within my network                      |
+| `*`      | planner who does not check the application often | customise alerts and notifications                         | differentiate between notifications easily                                 |
+| `*`      | long time event organiser                        | archive inactive contacts without deleting them            | maintain a record of past interactions while keeping my active list clean. |
 
 *{More to be added}*
 

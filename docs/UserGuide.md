@@ -35,7 +35,7 @@ Main Features:
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eventory.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Launch](images/launch.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -274,7 +274,7 @@ Examples:
 
 Creates a link between a person and event which will appear in the person's details.
 
-Format: `link INDEX EVENT_NAME`
+Format: `link INDEX ev/EVENT_NAME`
 
 Examples:
 * `list` followed by `link 2 ev/Winter Time Convention` links the 2nd person in the address book to the event.
@@ -286,7 +286,7 @@ Examples:
 
 Removes an existing link between a person and an event, so the event no longer appears in the person's details.
 
-Format: `unlink INDEX EVENT_NAME`
+Format: `unlink INDEX ev/EVENT_NAME`
 
 Examples:
 
@@ -299,7 +299,7 @@ Examples:
 
 If non-negative integer given, find all events happening in the next given number of days.
 If negative integer given, find all events that happened in the past given number of days.
-Lists all events with the given date, or f
+Lists all events happening on the given date.
 
 Format: `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD`
 
@@ -326,7 +326,7 @@ Format: `clear e` then `y` or `yes`
 
 ### Clearing all entries : `clear`
 
-Displays a confirmation, enter "yes" or "y" to clear all entries from the address book.
+Displays a confirmation, enter exactly "Yes" or "Y" to clear all entries from the address book.
 
 Format: `clear` then `y` or `yes`
 
@@ -440,7 +440,7 @@ cd "~/My Folder"
 
 <box type="important" seamless icon=":question:">
 
-"I get an error when I try to run the command java -jar addressbook.jar."
+"I get an error when I try to run the command java -jar eventory.jar."
 
 </box>
 
