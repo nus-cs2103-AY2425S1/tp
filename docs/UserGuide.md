@@ -90,7 +90,8 @@ for the team of AddressBook-Level 3.
 
 * Items in square brackets `[]` are **mandatory** to have **at least one of them**, you should not use omit any of them
   in a command.<br>
-  E.g. `cedit` can be used as `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432` or `cedit 1 n/Steven Tan p/98765432`.
+  E.g. `cedit` can be used as `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`
+  or `cedit 1 n/Steven Tan p/98765432`.
 
 * Items in curly brackets `{}` are **optional**, you may choose not to have them in your command.<br>
   E.g. `radd` can be used as `radd 1 a/140 Robinson Road, #03-05, Chow House`
@@ -228,7 +229,8 @@ Format: `help`
 
 <box type="tip" seamless>
 
-**Tip:** Alternatively, you can press the button at the top of the navigation button bar to view the help page, or simply press `f11`.
+**Tip:** Alternatively, you can press the button at the top of the navigation button bar to view the help page, or
+simply press `f11`.
 
 ![helpButton](images/helpButton.png)
 
@@ -535,7 +537,8 @@ information, including rental information.
 **Tips:**
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
-* For `[k/KEYWORD]`, `[n/NAME]`, `[p/PHONE_NUMBER]` and `[e/EMAIL]`, partial input will be matched with any of the fields, if any.
+* For `[k/KEYWORD]`, `[n/NAME]`, `[p/PHONE_NUMBER]` and `[e/EMAIL]`, partial input will be matched with any of the
+  fields, if any.
   <br>E.g. `Han` will match <code><b>Han</b>s</code>
 * For `[t/TAG]` only the full input will be matched with a tag, if any.
   <br>E.g. `Friend` will only match with `Friend`.
@@ -594,7 +597,7 @@ Format: `cdelete CLIENT_INDEX`
 **Example inputs:**:
 
 1. `cdelete 7` to delete the client at index 7.
-   * `y` to confirm deletion of the 7th client in the list.
+    * `y` to confirm deletion of the 7th client in the list.
 
 ![cdeleteUi1](images/cdeleteUi1.png)
 
