@@ -362,7 +362,7 @@ and the **Actor** is the `user`, unless specified otherwise)
   
       Use case ends. 
 
-**Use case: Add a company **
+**Use case: Add a company**
 
 **MSS**
 
@@ -378,7 +378,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
       Use case ends.
 
-**Use case: List companies **
+**Use case: List companies**
 
 **MSS**
 
@@ -393,7 +393,7 @@ and the **Actor** is the `user`, unless specified otherwise)
 
     Use case ends.
 
-**Use case: View company **
+**Use case: View company**
 
 **MSS**
 
@@ -489,6 +489,10 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-* Job
-  * Support screening candidates via more advanced requirement (salary range, number of skills)
-
+* **Improve `screen job` functionality**: Currently, this command is only able to screen contacts that have roles which is a sub-string of the job name. 
+We plan to expand on this functionality by allowing users to add parameters to modify the way screen works. Examples being to 
+screen by how well the contact's skill match up to the job's requirements or to specify whether partial role matches are fine. 
+* **Enable support for `find job`**:   
+* **Enable support for `find company`**  
+* **Enable support for `edit job`**  
+* **Enable support for `edit company`**  
