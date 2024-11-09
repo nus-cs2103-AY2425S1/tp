@@ -660,27 +660,32 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a student
 
+>**Tip:** Replace "INVALID_ID" with "A12345678X" and "INVALID_TUT" with "T12345" for testing purpose
+
 1. Adding a student with all required details
     1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
 
-    2. Test case: `addStu n/John Doe s/A1234567X t/T1001`<br>
+    2. Test case: `addStu n/John Doe s/A1234567X c/T1001`<br>
        Expected: A new student named "John Doe" with student ID "A1234567X" is added to tutorial "T1001". Confirmation message is displayed with the student's details.
 
 2. Adding a student with missing compulsory fields
 
-    1. Test case: `addStu n/John Doe t/T1001`<br>
-       Expected: Error message indicating that the student ID is missing.
+    1. Test case: `addStu n/John Doe c/T1001`<br>
+       Expected: Error message indicating that invalid command format will output.
 
-    2. Test case: `addStu s/A1234567X t/T1001`<br>
-       Expected: Error message indicating that the student's name is missing.
+    2. Test case: `addStu s/A1234567X c/T1001`<br>
+       Expected: Error message indicating that invalid command format will output.
 
 3. Adding a student with invalid data
 
-    1. Test case: `addStu n/John Doe s/INVALID_ID t/T1001`<br>
+    1. Test case: `addStu n/John Doe s/INVALID_ID c/T1001`<br>
        Expected: Error message indicating that the student ID format is invalid.
 
-    2. Test case: `addStu n/John Doe s/A1234567X t/INVALID_TUT`<br>
+    2. Test case: `addStu n/John Doe s/A1234567X c/INVALID_TUT`<br>
        Expected: Error message indicating that the tutorial ID does not exist.
+
+    3. Test case: `addStu n/John Doe s/INVALID_ID c/INVALID_TUT`<br>
+       Expected: Error message indicating that the student ID format is invalid. Invalid student ID format will be prioritised over invalid tutorial ID in this case.
 
 ### Editing a student
 
