@@ -61,7 +61,7 @@
 
 <h1 style="color: #964B00;"> <i class="fas fa-book icon"></i> MATER User Guide </h1>
 
-Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in car workshops**. MATER is specially optimised for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
+Welcome to MATER, a **desktop app designed for efficient management of client and vehicle information in vehicle workshops in Singapore**. MATER is specially optimised for users who prefer quick interactions through a Graphical User Interface (GUI) while benefiting from the powerful speed of command-based navigation for faster workflows.
 
 <!-- * Table of Contents -->
 <page-nav-print />
