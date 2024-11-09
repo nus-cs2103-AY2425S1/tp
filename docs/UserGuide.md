@@ -426,7 +426,7 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [ps/PROJECT_STATUS] [py/PAYMENT_STATUS] [cs/CLIENT_STATUS] [d/DEADLINE]`<br> e.g., `find n/James Jake ps/completed py/paid`
 **Blacklist** | `blacklist INDEX`
-**Whitelist** | `whitelist INDEX`
+**Whitelist** | `whitelist INDEX cs/NEW_CLIENT_STATUS`
 **Blacklist list** | `blacklist`
 **Whitelist list** | `whitelist`
 **Sort** | `sort FIELD ORDER` <br> e.g., `sort name ascending` or `sort deadline descending`
