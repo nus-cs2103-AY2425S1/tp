@@ -325,13 +325,6 @@ public class ImportConsultCommandTest {
     }
 
     @Test
-    public void execute_ioExceptionOnRead_throwsCommandException() throws IOException {
-        Path testFile = testDir.resolve("test.csv");
-        Files.writeString(testFile, VALID_HEADER + "\n" + VALID_CONSULT);
-        testFile.toFile().setReadOnly();
-    }
-
-    @Test
     public void resolveFilePath_existingDirectPath_returnsDirectPath() throws IOException {
         // Create a file in the current directory
         Path directPath = Paths.get("test.csv");
