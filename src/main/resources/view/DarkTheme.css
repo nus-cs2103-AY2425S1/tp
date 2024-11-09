@@ -10,6 +10,7 @@
     -fx-opacity: 0.9;
 }
 
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -130,6 +131,11 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
+}
+
+.cell_small_label_no_color {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
 }
 
 .stack-pane {
@@ -376,6 +382,20 @@
 #weddings .label {
     -fx-text-fill: white;
     -fx-background-color: #228B22;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#vendor {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#vendor .label {
+    -fx-text-fill: white;
+    -fx-background-color: #550000;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

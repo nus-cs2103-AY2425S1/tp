@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -42,7 +43,7 @@ public class AddVendorCommandTest {
         AddVendorCommandTest.ModelStub modelStub = new AddVendorCommandTest.ModelStubWithPerson(validVendor);
 
         assertThrows(CommandException.class,
-                AddVendorCommand.MESSAGE_DUPLICATE_PERSON, () -> addVendorCommand.execute(modelStub));
+                Messages.MESSAGE_DUPLICATE_PERSON, () -> addVendorCommand.execute(modelStub));
     }
 
     @Test
@@ -146,12 +147,12 @@ public class AddVendorCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public Tag getTag(Tag targetTag) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Vendor> getFilteredVendorList() {
+        public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -201,6 +202,11 @@ public class AddVendorCommandTest {
         }
 
         @Override
+        public Wedding getWedding(Wedding targetWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -212,6 +218,16 @@ public class AddVendorCommandTest {
 
         @Override
         public void deleteTag(Tag toDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -252,6 +268,11 @@ public class AddVendorCommandTest {
 
         @Override
         public void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPersonListByTask(Predicate<Task> task) {
             throw new AssertionError("This method should not be called.");
         }
 

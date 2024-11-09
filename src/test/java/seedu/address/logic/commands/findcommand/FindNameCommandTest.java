@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-import static seedu.address.logic.commands.findcommand.FindNameCommand.MESSAGE_FIND_NAME_PERSON_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -20,6 +18,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -61,7 +60,7 @@ public class FindNameCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindNameCommand command = new FindNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -72,7 +71,9 @@ public class FindNameCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        String expectedMessage = String.format(MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindNameCommand command = new FindNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -82,7 +83,9 @@ public class FindNameCommandTest {
     @Test
     public void execute_partialMatchKeyword_correctPersonFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("ell");
-        String expectedMessage = String.format(MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindNameCommand command = new FindNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -92,7 +95,9 @@ public class FindNameCommandTest {
     @Test
     public void execute_partialMatchKeyword_multiplePersonsFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("e");
-        String expectedMessage = String.format(MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString());
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_NAME_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindNameCommand command = new FindNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -102,7 +107,7 @@ public class FindNameCommandTest {
     @Test
     public void execute_absentPartialMatchKeyword_noPersonFound() {
         NameContainsKeywordsPredicate predicate = preparePredicate("x");
-        String expectedMessage = MESSAGE_FIND_PERSON_UNSUCCESSFUL;
+        String expectedMessage = Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
         FindNameCommand command = new FindNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

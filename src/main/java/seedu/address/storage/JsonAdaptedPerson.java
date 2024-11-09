@@ -15,12 +15,14 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.Todo;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -33,8 +35,9 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final boolean isVendor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final List<JsonAdaptedWedding> weddings = new ArrayList<>();
+    private final List<WeddingName> weddings = new ArrayList<>();
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
@@ -44,8 +47,9 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("weddings") List<JsonAdaptedWedding> weddings,
-            @JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+            @JsonProperty("weddings") List<WeddingName> weddings,
+            @JsonProperty("tasks") List<JsonAdaptedTask> tasks,
+            @JsonProperty("isVendor") boolean isVendor) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -59,6 +63,7 @@ class JsonAdaptedPerson {
         if (weddings != null) {
             this.weddings.addAll(weddings);
         }
+        this.isVendor = isVendor;
 
     }
 
@@ -74,11 +79,12 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         weddings.addAll(source.getWeddings().stream()
-                .map(JsonAdaptedWedding::new)
+                .map(Wedding::getWeddingName)
                 .collect(Collectors.toList()));
         tasks.addAll(source.getTasks().stream()
                 .map(this::mapToJsonAdaptedTask)
                 .collect(Collectors.toList()));
+        isVendor = source.isVendor();
     }
 
     protected String getName() {
@@ -101,12 +107,20 @@ class JsonAdaptedPerson {
         return tags;
     }
 
-    protected List<JsonAdaptedWedding> getWeddings() {
+    protected List<WeddingName> getWeddings() {
         return weddings;
     }
 
     protected List<JsonAdaptedTask> getTasks() {
         return tasks;
+    }
+
+    protected boolean isVendor() {
+        return this.isVendor;
+    }
+
+    protected boolean hasTasks() {
+        return !this.tasks.isEmpty();
     }
 
     /**
@@ -126,6 +140,7 @@ class JsonAdaptedPerson {
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Stores blank weddings with only the wedding name.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
@@ -143,11 +158,11 @@ class JsonAdaptedPerson {
             personTasks.add(task.toModelType());
         }
 
-        for (JsonAdaptedWedding wedding : weddings) {
-            if (!Wedding.isValidWeddingName(wedding.getWeddingName())) {
-                throw new IllegalValueException(Wedding.MESSAGE_CONSTRAINTS);
+        for (WeddingName weddingName : weddings) {
+            if (!Wedding.isValidWeddingName(weddingName.toString())) {
+                throw new IllegalValueException(WeddingName.MESSAGE_CONSTRAINTS);
             }
-            personWeddings.add(wedding.toModelType());
+            personWeddings.add(new Wedding(weddingName));
         }
 
         if (name == null) {
@@ -183,6 +198,9 @@ class JsonAdaptedPerson {
         final Set<Wedding> modelWeddings = new HashSet<>(personWeddings);
         final Set<Task> modelTasks = new HashSet<>(personTasks);
 
+        if (isVendor) {
+            return new Vendor(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
+        }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelWeddings, modelTasks);
     }
 

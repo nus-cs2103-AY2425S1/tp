@@ -4,9 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.findcommand.FindCommand.MESSAGE_FIND_PERSON_UNSUCCESSFUL;
-import static seedu.address.logic.commands.findcommand.FindTagCommand.MESSAGE_FIND_TAG_PERSON_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -16,6 +13,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -56,7 +54,7 @@ public class FindTagCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_FIND_PERSON_UNSUCCESSFUL);
+        String expectedMessage = String.format(Messages.MESSAGE_FIND_PERSON_UNSUCCESSFUL);
         TagContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindTagCommand command = new FindTagCommand(predicate);
         expectedModel.updateFilteredPersonListByTag(predicate);
@@ -66,12 +64,14 @@ public class FindTagCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends");
-        String expectedMessage = String.format(MESSAGE_FIND_TAG_PERSON_SUCCESS, predicate.getDisplayString());
+        TagContainsKeywordsPredicate predicate = preparePredicate("florist");
+        String expectedMessage = String.format(
+                Messages.MESSAGE_FIND_TAG_PERSON_SUCCESS, predicate.getDisplayString()
+        );
         FindTagCommand command = new FindTagCommand(predicate);
         expectedModel.updateFilteredPersonListByTag(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
     /**

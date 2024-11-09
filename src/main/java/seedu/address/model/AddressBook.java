@@ -3,13 +3,15 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.UniqueVendorList;
 import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -25,7 +27,6 @@ import seedu.address.model.wedding.Wedding;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueVendorList vendors;
     private final UniqueTagList tags;
     private final UniqueTaskList tasks;
     private final UniqueWeddingList weddings;
@@ -39,7 +40,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        vendors = new UniqueVendorList();
         tags = new UniqueTagList();
         tasks = new UniqueTaskList();
         weddings = new UniqueWeddingList();
@@ -67,7 +67,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setVendors(newData.getVendorList());
         setTags(newData.getTagList());
         setWeddings(newData.getWeddingList());
         setTasks(newData.getTaskList());
@@ -79,14 +78,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
-    }
-
-    /**
-     * Replaces the contents of the vendor list with {@code vendors}.
-     * {@code vendors} must not contain duplicate vendors.
-     */
-    public void setVendors(List<Vendor> vendors) {
-        this.vendors.setVendors(vendors);
     }
 
     /**
@@ -134,6 +125,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns a person in the model that has the same name
+     */
+    public Person getPerson(Person person) {
+        requireNonNull(person);
+        return persons.asUnmodifiableObservableList().stream().filter(person::isSamePerson).findFirst().orElse(null);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -147,7 +146,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasVendor(Person person) {
         requireNonNull(person);
-        return vendors.contains(person);
+        return persons.containsVendor(person);
     }
 
     /**
@@ -155,7 +154,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the vendor list.
      */
     public void addVendor(Person p) {
-        vendors.add(p);
+        setPerson(p, new Vendor(p));
     }
 
     /**
@@ -163,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeVendor(Person key) {
-        vendors.remove(key);
+        setPerson(key, new Person(key));
     }
 
     //// tag-level operations
@@ -193,6 +192,44 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Updates the completion status of a task in the Wedlinker.
+     * The task must already exist in the Wedlinker.
+     *
+     * @param task A {@code Task} object to update.
+     * @param markAsCompleted True to mark the task as completed, false to unmark it as completed.
+     */
+    private void updateTaskCompletionStatus(Task task, boolean markAsCompleted) {
+        requireNonNull(task);
+        if (!tasks.contains(task)) {
+            throw new NoSuchElementException(Messages.MESSAGE_TASK_NOT_FOUND_IN_AB);
+        }
+        Task taskToUpdate = tasks.getTask(task);
+        if (markAsCompleted) {
+            taskToUpdate.markAsDone();
+        } else {
+            taskToUpdate.markAsUndone();
+        }
+        tasks.setTask(task, taskToUpdate);
+    }
+    /**
+     * Marks a task in the Wedlinker.
+     * The task must already exist in the Wedlinker.
+     * @param task A {@code Task} object to be marked.
+     */
+    public void markTask(Task task) {
+        updateTaskCompletionStatus(task, true);
+    }
+
+    /**
+     * Unmarks a task in the Wedlinker.
+     * The task must already exist in the Wedlinker.
+     * @param task A {@code Task} object to be Unmarked.
+     */
+    public void unmarkTask(Task task) {
+        updateTaskCompletionStatus(task, false);
     }
 
     /**
@@ -252,6 +289,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns wedding object with the same name
+     */
+    public Wedding getWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return weddings.getWedding(wedding);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -284,6 +329,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTag(Tag key) {
         tags.remove(key);
+    }
+
+    /**
+     * Returns {@code Tag} object with the same {@code TagName}.
+     */
+    public Tag getTag(Tag target) {
+        requireNonNull(target);
+        return tags.getTag(target);
     }
 
     /**
@@ -330,7 +383,6 @@ public class AddressBook implements ReadOnlyAddressBook {
                 if (!this.hasWedding(wedding)) {
                     this.addWedding(wedding);
                 }
-                wedding.increasePeopleCount();
             }
         }
     }
@@ -341,17 +393,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("tags", tags)
+                .add("tasks", tasks)
+                .add("weddings", weddings)
                 .toString();
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Vendor> getVendorList() {
-        return vendors.asUnmodifiableObservableList();
     }
 
     @Override
@@ -381,11 +431,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && tags.equals(otherAddressBook.tags)
+                && tasks.equals(otherAddressBook.tasks)
+                && weddings.equals(otherAddressBook.weddings);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, tags, tasks, weddings);
     }
 }

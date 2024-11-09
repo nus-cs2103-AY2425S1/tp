@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
@@ -105,9 +104,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered vendors list */
-    ObservableList<Vendor> getFilteredVendorList();
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code personPredicate}.
      * @throws NullPointerException if {@code personPredicate} is null.
@@ -125,6 +121,12 @@ public interface Model {
      * @throws NullPointerException if {@code weddingPredicate} is null.
      */
     void updateFilteredPersonListByWedding(Predicate<Wedding> weddingPredicate);
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code taskPredicate}.
+     * @throws NullPointerException if {@code taskPredicate} is null.
+     */
+    void updateFilteredPersonListByTask(Predicate<Task> taskPredicate);
 
     /**
      * Returns true if a tag with the same name as {@code toAdd} exists in the Wedlinker.
@@ -151,6 +153,21 @@ public interface Model {
      * The tag must exist in the Wedlinker.
      */
     void deleteTag(Tag toDelete);
+
+    /** Returns a target tag from the model. */
+    Tag getTag(Tag tag);
+
+    /**
+     * Marks the given task as done.
+     * The task must exist in the Wedlinker.
+     */
+    void markTask(Task task);
+
+    /**
+     * Unmarks the given task to become not undone.
+     * The task must exist in the Wedlinker.
+     */
+    void unmarkTask(Task task);
 
     /**
      * Returns true if a task with the same name as {@code toAdd} exists in the Wedlinker.
@@ -198,7 +215,19 @@ public interface Model {
      */
     void addWedding(Wedding toAdd);
 
+    /**
+     * Sets the target {@code Wedding} with an updated {@code Wedding}.
+     * @param target The initial {@code Wedding}.
+     * @param editedWedding The updated {@code Wedding}
+     */
     void setWedding(Wedding target, Wedding editedWedding);
+
+    /**
+     * Get the target {@code Wedding}.
+     *
+     * @return
+     */
+    Wedding getWedding(Wedding target);
 
     /**
      * Deletes the given wedding.

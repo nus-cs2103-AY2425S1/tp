@@ -22,6 +22,14 @@ public class Vendor extends Person {
     }
 
     /**
+     * Creates a Vendor from an existing person
+     */
+    public Vendor(Person person) {
+        super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags(),
+                person.getWeddings(), person.getTasks());
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two vendors.
      */
@@ -32,6 +40,19 @@ public class Vendor extends Person {
         // can add additional check to check if task is the same for both vendors
         return otherVendor != null
                 && otherVendor.getName().equals(getName());
+    }
+
+    /**
+     * Checks whether the number of tasks assigned is greater than 0
+     */
+    @Override
+    public boolean hasTasks() {
+        return !this.getTasks().isEmpty();
+    }
+
+    @Override
+    public boolean isVendor() {
+        return true;
     }
 
     /**

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
@@ -26,7 +26,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Vendor> filteredVendors;
     private final FilteredList<Tag> filteredTags;
     private final FilteredList<Wedding> filteredWeddings;
 
@@ -43,7 +42,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredVendors = new FilteredList<>(this.addressBook.getVendorList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         filteredWeddings = new FilteredList<>(this.addressBook.getWeddingList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
@@ -109,9 +107,6 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
-        if (addressBook.hasVendor(target)) {
-            addressBook.removeVendor(target);
-        }
     }
 
     @Override
@@ -144,7 +139,6 @@ public class ModelManager implements Model {
         addressBook.removeVendor(person);
     }
 
-
     @Override
     public void addTag(Tag tag) {
         addressBook.addTag(tag);
@@ -166,6 +160,31 @@ public class ModelManager implements Model {
     @Override
     public void deleteTag(Tag target) {
         addressBook.removeTag(target);
+
+        // No need to check force as this is not accessed through commands, but must remove from person
+        for (Person person : getFilteredPersonList()) {
+            HashSet<Tag> personTags = new HashSet<>(person.getTags());
+            if (personTags.contains(target)) {
+                personTags.remove(target);
+                Person newPerson = new Person(
+                        person.getName(),
+                        person.getPhone(),
+                        person.getEmail(),
+                        person.getAddress(),
+                        personTags,
+                        person.getWeddings(),
+                        person.getTasks()
+                );
+                setPerson(person, newPerson);
+            }
+        }
+        updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public Tag getTag(Tag target) {
+        requireNonNull(target);
+        return addressBook.getTag(target);
     }
 
     @Override
@@ -173,6 +192,21 @@ public class ModelManager implements Model {
         addressBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
+
+    @Override
+    public void markTask(Task task) {
+        requireNonNull(task);
+        addressBook.markTask(task);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void unmarkTask(Task task) {
+        requireNonNull(task);
+        addressBook.unmarkTask(task);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
@@ -213,6 +247,11 @@ public class ModelManager implements Model {
         addressBook.removeWedding(target);
     }
 
+    @Override
+    public Wedding getWedding(Wedding target) {
+        requireNonNull(target);
+        return addressBook.getWedding(target);
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -222,11 +261,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
-    }
-
-    @Override
-    public ObservableList<Vendor> getFilteredVendorList() {
-        return filteredVendors;
     }
 
     @Override
@@ -262,6 +296,13 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
+
+    @Override
+    public void updateFilteredPersonListByTask(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(person -> person.getTasks().stream().anyMatch(predicate));
+    }
+
     @Override
     public ObservableList<Wedding> getFilteredWeddingList() {
         return filteredWeddings;

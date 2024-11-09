@@ -1,9 +1,11 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,7 +19,6 @@ import seedu.address.model.wedding.Wedding;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -42,6 +43,27 @@ public class Person {
         this.tags.addAll(tags);
         this.weddings.addAll(weddings);
         this.tasks.addAll(tasks);
+    }
+
+    /**
+     * Create new person with the same details as an existing person
+     */
+    public Person(Person person) {
+        this.name = person.getName();
+        this.phone = person.getPhone();
+        this.email = person.getEmail();
+        this.address = person.getAddress();
+        this.tags.addAll(person.getTags());
+        this.weddings.addAll(person.getWeddings());
+        this.tasks.addAll(person.getTasks());
+    }
+
+    /**
+     * Creates a Person with only a name and all other fields blank
+     */
+    public static Person makePersonWithName(Name name) {
+        return new Person(name, new Phone(""), new Email(""), new Address(""),
+                new HashSet<>(), new HashSet<>(), new HashSet<>());
     }
 
     public Name getName() {
@@ -69,6 +91,18 @@ public class Person {
     }
 
     /**
+     * Returns a task if it exists in this person's task list.
+     */
+    public Task getTask(Task task) throws NoSuchElementException {
+        for (Task eachTask : tasks) {
+            if (eachTask.isSameTask(task)) {
+                return eachTask;
+            }
+        }
+        throw new NoSuchElementException("Task not found in this person's assigned tasks.");
+    }
+
+    /**
      * Returns an immutable task set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -77,11 +111,75 @@ public class Person {
     }
 
     /**
+     * Returns false, as a Person object should not have tasks assigned
+     */
+    public boolean hasTasks() {
+        return false;
+    }
+
+    /**
+     * Removes all tasks from the Person's task list
+     */
+    public void clearTasks() {
+        this.tasks.clear();
+    }
+
+    /**
+     * Checks if this person has the specified task assigned.
+     *
+     * @param task The task to check.
+     * @return true if the specified task is assigned to this person, false otherwise.
+     */
+    public boolean hasTask(Task task) {
+        for (Task eachTask : tasks) {
+            if (eachTask.isSameTask(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Removes the specified task from this person's assigned tasks.
+     *
+     * @param task The task to remove.
+     */
+    public void removeTask(Task task) {
+        tasks.remove(task);
+    }
+
+    /**
      * Returns an immutable wedding set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Wedding> getWeddings() {
         return Collections.unmodifiableSet(weddings);
+    }
+
+    /**
+     * Replaces the original set of weddings with a new specified one.
+     */
+    public void setWeddings(Set<Wedding> newWedding) {
+        weddings.clear();
+        weddings.addAll(newWedding);
+    }
+
+    /**
+     * Replaces the old wedding with a specified new wedding. As weddings are internally stored in a set,
+     * this can only be done by removing the old wedding and adding a new one.
+     */
+    public void setWedding(Wedding oldWedding, Wedding newWedding) {
+        assert weddings.contains(oldWedding);
+        weddings.remove(oldWedding);
+        weddings.add(newWedding);
+    }
+
+    /**
+     * Adds a wedding to a person's wedding list
+     */
+    public void addWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        weddings.add(wedding);
     }
 
     /**
@@ -95,6 +193,10 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public boolean isVendor() {
+        return false;
     }
 
     /**

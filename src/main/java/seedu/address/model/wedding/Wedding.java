@@ -5,27 +5,17 @@ import java.util.ArrayList;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
-
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents a Wedding in the system.
  * Guarantees: immutable; name is valid as declared in {@link #isValidWeddingName(String)}
  */
 public class Wedding {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
-                    + "and they should not be blank. Wedding names are case sensitive.";
-
-    /**
-     * Validation regex checks that first character of the wedding name must not be a whitespace,
-     * so that " " (a blank string) is not a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*";
     private final WeddingName weddingName;
-    private int peopleCount;
     private Person partner1;
     private Person partner2;
-    private ArrayList<Person> guestList;
+    private ArrayList<Person> guestList = new ArrayList<>();
     private Address address;
     private String date;
 
@@ -36,18 +26,16 @@ public class Wedding {
     public Wedding(WeddingName weddingName) {
         requireNonNull(weddingName);
         this.weddingName = weddingName;
-        this.peopleCount = 0;
     }
 
     /**
      * Constructs a {@code Wedding} with the specified {@code weddingName}
      * @param weddingName A valid {@code WeddingName}
      */
-    public Wedding(WeddingName weddingName, int peopleCount, Person partner1, Person partner2,
+    public Wedding(WeddingName weddingName, Person partner1, Person partner2,
                    ArrayList<Person> guestList, Address address, String date) {
         requireNonNull(weddingName);
         this.weddingName = weddingName;
-        this.peopleCount = peopleCount;
         this.partner1 = partner1;
         this.partner2 = partner2;
         this.guestList = guestList;
@@ -59,7 +47,7 @@ public class Wedding {
      * Returns true if a given string is a valid wedding name.
      */
     public static boolean isValidWeddingName(String checkName) {
-        return checkName.matches(VALIDATION_REGEX);
+        return checkName.matches(WeddingName.VALIDATION_REGEX);
     }
 
     /**
@@ -71,19 +59,26 @@ public class Wedding {
     }
 
     /**
-     * Returns people count associated with wedding
-     * @return peopleCount ({@code int}) of the wedding
-     */
-    public int getPeopleCount() {
-        return this.peopleCount;
-    }
-
-    /**
      * Returns partner1 associated with wedding
      * @return A {@code Person} object of the partner1 of the wedding
      */
     public Person getPartner1() {
         return this.partner1;
+    }
+
+    /**
+     * Sets partner1 in this wedding
+     * @param partner1 A {@code Person} object to be set as {@code partner1}
+     */
+    public void setPartner1(Person partner1) {
+        this.partner1 = partner1;
+    }
+
+    /**
+     * Returns whether the wedding has a partner 1
+     */
+    public boolean hasPartner1() {
+        return this.partner1 != null;
     }
 
     /**
@@ -95,12 +90,80 @@ public class Wedding {
     }
 
     /**
+     * Sets partner2 in this wedding
+     * @param partner2 A {@code Person} object to be set as {@code partner2}
+     */
+    public void setPartner2(Person partner2) {
+        this.partner2 = partner2;
+    }
+
+    /**
+     * Returns whether the wedding has a partner 2
+     */
+    public boolean hasPartner2() {
+        return this.partner2 != null;
+    }
+
+    /**
      * Returns guest list associated with wedding
      *
      * @return An {@code ArrayList<Person>} object of the guest list of the wedding
      */
     public ArrayList<Person> getGuestList() {
         return this.guestList;
+    }
+
+    /**
+     * Adds {@code Person} to guest list in this wedding
+     *
+     * @param person An {@code Person} object of the guest list of the wedding
+     */
+    public void addToGuestList(Person person) {
+        this.guestList.add(person);
+    }
+
+    /**
+     * Replaces a person in the guest list with a new person
+     */
+    public void setGuest(Person oldPerson, Person newPerson) {
+        int index = guestList.indexOf(oldPerson);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        guestList.set(index, newPerson);
+    }
+
+    /**
+     * Checks if the wedding has a given person as either of the partners or in the guest list.
+     */
+    public boolean hasPerson(Person person) {
+        return (person.isSamePerson(partner1)
+                || person.isSamePerson(partner2)
+                || guestList.stream().anyMatch(person::isSamePerson));
+    }
+
+    /**
+     * Returns the Wedding's copy of a person
+     */
+    public Person getPerson(Person person) {
+        return person.isSamePerson(partner1) ? partner1
+                : person.isSamePerson(partner2) ? partner2
+                : guestList.stream().filter(person::isSamePerson).findFirst().orElse(null);
+    }
+
+    /**
+     * Removes the given person from anywhere in the wedding (partner 1, partner 2, or guest list)
+     */
+    public void removePerson(Person person) {
+        if (person.isSamePerson(partner1)) {
+            partner1 = null;
+        } else if (person.isSamePerson(partner2)) {
+            partner2 = null;
+        } else {
+            Person match = guestList.stream().filter(person::isSamePerson).findFirst().orElse(null);
+            guestList.remove(match);
+        }
     }
 
     /**
@@ -124,16 +187,9 @@ public class Wedding {
      * @return An {@code int} with the number of people assigned to the wedding
      */
     public int getNumPersonsForWedding() {
-        return this.peopleCount;
-    }
-
-
-    public void increasePeopleCount() {
-        peopleCount++;
-    }
-
-    public void decreasePeopleCount() {
-        peopleCount--;
+        return (partner1 == null ? 0 : 1)
+                + (partner2 == null ? 0 : 1)
+                + guestList.size();
     }
 
     /**
@@ -141,7 +197,7 @@ public class Wedding {
      * wedding can be deleted if {@code peopleCount} is 0.
      */
     public boolean canBeDeleted() {
-        return (peopleCount == 0);
+        return (getNumPersonsForWedding() == 0);
     }
 
     @Override
@@ -178,5 +234,14 @@ public class Wedding {
     @Override
     public String toString() {
         return '[' + weddingName.toString() + ']';
+    }
+
+    @Override
+    public Wedding clone() {
+        try {
+            return (Wedding) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new Wedding(weddingName, partner1, partner2, guestList, address, date);
+        }
     }
 }

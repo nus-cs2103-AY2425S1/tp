@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -29,7 +28,7 @@ public class AssignVendorCommandTest {
         Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(AssignVendorCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_ADD_VENDOR_SUCCESS,
                 personToAssign.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -53,18 +52,15 @@ public class AssignVendorCommandTest {
 
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
         assertCommandFailure(assignVendorCommand, model,
-                String.format(AssignVendorCommand.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
+                String.format(Messages.MESSAGE_DUPLICATE_VENDOR, personToAssign.getName()));
     }
 
-    @Disabled // disabled, to figure out why it doesn't work
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
-
         Person personToAssign = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         AssignVendorCommand assignVendorCommand = new AssignVendorCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(AssignVendorCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(Messages.MESSAGE_ADD_VENDOR_SUCCESS,
                 personToAssign.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());

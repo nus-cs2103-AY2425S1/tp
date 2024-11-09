@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.person.EditCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -71,6 +72,7 @@ public class CommandTestUtil {
     public static final String VALID_WEDDING_AMY = VALID_NAME_AMY.split(" ")[0] + "'s Wedding";
     public static final String VALID_WEDDING_BOB = VALID_NAME_BOB.split(" ")[0] + "'s Wedding";
     public static final String VALID_WEDDING_CLIVE = VALID_NAME_CLIVE.split(" ")[0] + "'s Wedding";
+    public static final String VALID_WEDDING_DOMINIC = VALID_NAME_DOMINIC.split(" ")[0] + "'s Wedding";
     public static final String VALID_TASK_TODO = "todo: Different Task";
 
 
@@ -210,7 +212,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the task at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showTaskAtIndex(Model model, Index targetIndex) {

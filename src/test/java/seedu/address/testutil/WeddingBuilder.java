@@ -89,7 +89,7 @@ public class WeddingBuilder {
     }
 
     public Wedding build() {
-        return new Wedding(weddingName, peopleCount, partner1, partner2, guestList, address, date);
+        return new Wedding(weddingName, partner1, partner2, guestList, address, date);
     }
 
 }

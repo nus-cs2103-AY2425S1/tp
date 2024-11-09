@@ -1,8 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_NOTHING_TO_PERFORM_ON;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -18,10 +17,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.person.AddCommand;
+import seedu.address.logic.commands.person.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -40,7 +39,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -55,19 +54,19 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand);
     }
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, String.format(MESSAGE_NOTHING_TO_PERFORM_ON, "contacts", "delete"));
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, Messages.MESSAGE_LIST_PERSON_SUCCESS, model);
     }
 
     @Test
@@ -110,8 +109,8 @@ public class LogicManagerTest {
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertParseException(String inputCommand, String expectedMessage) {
-        assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
+    private void assertParseException(String inputCommand) {
+        assertCommandFailure(inputCommand, ParseException.class, Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**

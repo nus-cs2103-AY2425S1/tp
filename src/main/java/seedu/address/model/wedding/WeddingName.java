@@ -3,27 +3,29 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Represents a {@code Wedding}'s name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class WeddingName {
     public static final String MESSAGE_CONSTRAINTS =
-            "Wedding names should only contain alphanumeric characters, spaces or apostrophes, "
-                    + "and they should not be blank. Wedding names are case sensitive.";
+            "Wedding names should only contain alphanumeric characters, spaces or the following characters: /.,'&:(). "
+                    + "\nWedding names should not be blank and are case sensitive.";
 
     /**
      * Validation regex checks that first character of the wedding name must not be a whitespace,
      * so that " " (a blank string) is not a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} /.,'&:()]*";
     private final String weddingName;
 
     /**
      * Constructs a {@code WeddingName}
      * @param name A valid name for a wedding.
      */
-    public WeddingName(String name) {
+    public WeddingName(@JsonProperty("weddingName") String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         weddingName = name;

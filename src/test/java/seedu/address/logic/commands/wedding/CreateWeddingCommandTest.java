@@ -24,7 +24,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Vendor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
 import seedu.address.model.wedding.Wedding;
@@ -42,7 +41,7 @@ public class CreateWeddingCommandTest {
         Wedding validWedding = new Wedding(VALID_WEDDING_NAME_AMY_WEDDING);
 
         CommandResult commandResult = new CreateWeddingCommand(validWedding).execute(modelStub);
-        assertEquals(String.format(CreateWeddingCommand.MESSAGE_SUCCESS, Messages.format(validWedding)),
+        assertEquals(String.format(Messages.MESSAGE_CREATE_WEDDING_SUCCESS, Messages.format(validWedding)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validWedding), modelStub.weddingsAdded);
     }
@@ -54,7 +53,7 @@ public class CreateWeddingCommandTest {
         ModelStub modelStub = new ModelStubWithWedding(validWedding);
 
         assertThrows(CommandException.class,
-                CreateWeddingCommand.MESSAGE_DUPLICATE_WEDDING, () -> createWeddingCommand.execute(modelStub));
+                Messages.MESSAGE_DUPLICATE_WEDDING, () -> createWeddingCommand.execute(modelStub));
     }
 
     @Test
@@ -146,17 +145,17 @@ public class CreateWeddingCommandTest {
         }
 
         @Override
-        public void setTag(Tag target, Tag editedWedding) {
+        public void setTag(Tag target, Tag editedTag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Tag getTag(Tag targetTag) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Vendor> getFilteredVendorList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -211,6 +210,11 @@ public class CreateWeddingCommandTest {
         }
 
         @Override
+        public void updateFilteredPersonListByTask(Predicate<Task> task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -231,8 +235,23 @@ public class CreateWeddingCommandTest {
         }
 
         @Override
+        public Wedding getWedding(Wedding targetWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void deleteTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void markTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unmarkTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+
         }
 
 
@@ -240,6 +259,7 @@ public class CreateWeddingCommandTest {
         public ObservableList<Tag> getFilteredTagList() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public void updateFilteredWeddingList(Predicate<Wedding> predicate) {
             throw new AssertionError("This method should not be called.");

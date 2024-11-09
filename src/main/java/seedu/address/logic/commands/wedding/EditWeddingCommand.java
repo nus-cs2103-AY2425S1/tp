@@ -2,7 +2,9 @@ package seedu.address.logic.commands.wedding;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.ArrayList;
@@ -38,14 +40,12 @@ public class EditWeddingCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters (optional parameters in square brackets): INDEX (must be a positive integer) "
             + "[" + PREFIX_WEDDING + "WEDDING]"
-            + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
+            + "[" + PREFIX_ADDRESS + "ADDRESS]"
+            + "[" + PREFIX_DATE + "DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_WEDDING + "Mr and Mrs John Tan "
             + PREFIX_ADDRESS + "12 College Ave West";
 
-    public static final String MESSAGE_EDIT_WEDDING_SUCCESS = "Edited Wedding: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_WEDDING = "This wedding already exists in the address book.";
 
     private final Index index;
     private final EditWeddingDescriptor editWeddingDescriptor;
@@ -67,27 +67,38 @@ public class EditWeddingCommand extends Command {
         requireNonNull(model);
         List<Wedding> lastShownList = model.getFilteredWeddingList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_NOTHING_TO_PERFORM_ON, "weddings", COMMAND_WORD));
+        } else if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
-        editWeddingDescriptor.getPartner1Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner1(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
-        editWeddingDescriptor.getPartner2Index().ifPresent(
-                index -> editWeddingDescriptor.setPartner2(model.getFilteredPersonList().get(index.getZeroBased()))
-        );
-        editWeddingDescriptor.setPeopleCount(weddingToEdit.getPeopleCount());
+
         editWeddingDescriptor.setGuestList(weddingToEdit.getGuestList());
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
 
         if (!weddingToEdit.isSameWedding(editedWedding) && model.hasWedding(editedWedding)) {
-            throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_WEDDING);
         }
 
         model.setWedding(weddingToEdit, editedWedding);
         model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
-        return new CommandResult(String.format(MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
+
+        // Update wedding for all people in wedding
+        if (editedWedding.hasPartner1()) {
+            editedWedding.getPartner1().setWedding(weddingToEdit, editedWedding);
+        }
+        if (editedWedding.hasPartner2()) {
+            editedWedding.getPartner2().setWedding(weddingToEdit, editedWedding);
+        }
+        for (Person person : editedWedding.getGuestList()) {
+            person.setWedding(weddingToEdit, editedWedding);
+        }
+
+        // Update person list to show the latest wedding objects
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(Messages.MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding)));
     }
 
     /**
@@ -98,14 +109,13 @@ public class EditWeddingCommand extends Command {
         assert weddingToEdit != null;
 
         WeddingName updatedWeddingName = editWeddingDescriptor.getWeddingName().orElse(weddingToEdit.getWeddingName());
-        int peopleCount = editWeddingDescriptor.getPeopleCount().orElse(0);
         Person partner1 = editWeddingDescriptor.getPartner1().orElse(weddingToEdit.getPartner1());
         Person partner2 = editWeddingDescriptor.getPartner2().orElse(weddingToEdit.getPartner2());
         ArrayList<Person> guestlist = editWeddingDescriptor.getGuestList().orElse(weddingToEdit.getGuestList());
         Address updatedAddress = editWeddingDescriptor.getAddress().orElse(weddingToEdit.getAddress());
         String date = editWeddingDescriptor.getDate().orElse(weddingToEdit.getDate());
 
-        return new Wedding(updatedWeddingName, peopleCount, partner1, partner2, guestlist, updatedAddress, date);
+        return new Wedding(updatedWeddingName, partner1, partner2, guestlist, updatedAddress, date);
     }
 
     @Override
@@ -137,7 +147,6 @@ public class EditWeddingCommand extends Command {
      */
     public static class EditWeddingDescriptor {
         private WeddingName weddingName;
-        private int peopleCount = -1; //if -1, means no change
         private Index partner1Index;
         private Index partner2Index;
         private Person partner1;
@@ -163,8 +172,7 @@ public class EditWeddingCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(weddingName, partner1Index, partner2Index, address, date)
-                    || this.peopleCount != -1;
+            return CollectionUtil.isAnyNonNull(weddingName, partner1Index, partner2Index, address, date);
         }
 
         public void setWeddingName(WeddingName weddingName) {
@@ -173,14 +181,6 @@ public class EditWeddingCommand extends Command {
 
         public Optional<WeddingName> getWeddingName() {
             return Optional.ofNullable(weddingName);
-        }
-
-        public Optional<Integer> getPeopleCount() {
-            return Optional.of(peopleCount); //doesn't need ofNullable because init count = 0
-        }
-
-        public void setPeopleCount(int peopleCount) {
-            this.peopleCount = peopleCount;
         }
 
         public Optional<Person> getPartner1() {
@@ -199,16 +199,8 @@ public class EditWeddingCommand extends Command {
             this.partner2 = partner2;
         }
 
-        public Optional<Index> getPartner1Index() {
-            return Optional.ofNullable(partner1Index);
-        }
-
         public void setPartner1Index(Index partner1Index) {
             this.partner1Index = partner1Index;
-        }
-
-        public Optional<Index> getPartner2Index() {
-            return Optional.ofNullable(partner2Index);
         }
 
         public void setPartner2Index(Index partner2Index) {
@@ -251,7 +243,6 @@ public class EditWeddingCommand extends Command {
             }
 
             return Objects.equals(weddingName, otherEditWeddingDescriptor.weddingName)
-                    && Objects.equals(peopleCount, otherEditWeddingDescriptor.peopleCount)
                     && Objects.equals(partner1, otherEditWeddingDescriptor.partner1)
                     && Objects.equals(partner2, otherEditWeddingDescriptor.partner2)
                     && Objects.equals(address, otherEditWeddingDescriptor.address)
@@ -262,7 +253,6 @@ public class EditWeddingCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("weddingName", weddingName)
-                    .add("peopleCount", peopleCount)
                     .add("partner1", partner1)
                     .add("partner2", partner2)
                     .add("address", address)
