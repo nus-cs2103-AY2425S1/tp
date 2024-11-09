@@ -598,6 +598,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 3c1. ContactMate shows an error message with the correct date format.
     * Use case resumes from step 3\.
 
+<br/><br/>
 ### Non-Functional Requirements
 
 1. A user with above-average typing speed (> 40 Words Per Minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -847,5 +848,5 @@ Common prerequisite: List all elderly using the `list` command.
 ## **Appendix: Planned Enhancements**
 
 1. **Standardise uppercase for NRIC displayed in the person card:** If using lowercase NRIC when adding elderly: `add i/s5305394G n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7`, it is displayed as `s5305394G` in the person card (no change in case). We plan to standardise the displayed NRIC to be in uppercase in the person card for easier reading for users: `S5305394G`.
-2. **Accept more possible characters for name field:** The current constraint for the name field is alphanumeric characters and spaces which could be too restrictive if users want to add elderly with names that include other special characters (e.g. `João da Silva` or `Arjun Singh s/o Vijay Singh`)
+2. **Accept more possible characters for name field:** The current constraint for the name field is alphanumeric characters and spaces which could be too restrictive if users want to add elderly with names that include other special characters (e.g. `João da Silva` or `Arjun Singh s/o Vijay Singh`). We plan to include common characters used in names such as diacritics (e.g. `ç`, `ñ`, `é`, `ü`), punctuation and symbols (e.g. `-`, `'`, `.`, `/`), and extended latin characters (e.g. `ø`, `å`, `ð`).
 
