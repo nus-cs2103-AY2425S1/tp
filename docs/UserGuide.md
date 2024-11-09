@@ -361,9 +361,14 @@ Finds patients whose name contains any of the given keywords.
 Examples:
 * `find John` returns any patient that has the name John inside, for instance `john` and `John Doe`
 * `find alex david` returns any patient with names containing either "Alex" or "David". This means it will return any patient whose name includes either "Alex" or "David" as part of their name, for instance, `Alex Yeoh` or `David Li`<br>
-<br> 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-    <div style="text-align: center;"><i>Screenshot of NovaCare after running the `find alex david` command.</i></div><br>
+
+Expected output:
+```
+2 persons listed!
+```
+You should see something like this:<br></br>
+![result for 'find alex david'](images/findAlexDavidResult.png)
+<br></br>
 
 #### 6.2.5 Deleting a patient: `delete`
 
@@ -506,7 +511,7 @@ Examples:
 * `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in the system.
 * `find John doe` followed by `addtask 1 d/Clear Diapers` adds a task `Clear Diapers` to the 1st-indexed patient in the resultant list produced from the `find` command.
 
-Expected output:
+Expected output (First example):
 ```
 Listed all persons
 New task added: Eat paracetamol 1000mg
@@ -514,14 +519,14 @@ New task added: Eat paracetamol 1000mg
 You should see something like this:<br></br>
 ![Add_Task_Example_1](images/AddTaskExample1.png)
 
-Expected output:
+Expected output (Second example):
 ```
 1 persons listed!
 New task added: Clear Diapers
 ```
 You should see something like this:<br></br>
 ![Add_Task_Example_2](images/AddTaskExample2.png)
-<br>
+<br></br>
 
 #### 6.3.2 Deleting a task: `deletetask`
 
