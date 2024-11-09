@@ -19,17 +19,14 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_CHILD, PREFIX_PARENT);
 
-        if (!argMultiMap.getPreamble().isEmpty()) {
+        if (!argMultiMap.getPreamble().isEmpty() || argMultiMap.getValue(PREFIX_CHILD).isEmpty()
+                || argMultiMap.getValue(PREFIX_PARENT).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_CHILD, PREFIX_PARENT);
 
-        Name child = argMultiMap.getValue(PREFIX_CHILD).map(Name::new)
-                .orElseThrow(() -> new ParseException(String.format(
-                        MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE)));
-        Name parent = argMultiMap.getValue(PREFIX_PARENT).map(Name::new)
-                .orElseThrow(() -> new ParseException(String.format(
-                        MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE)));
+        Name child = ParserUtil.parseName(argMultiMap.getValue(PREFIX_CHILD).get());
+        Name parent = ParserUtil.parseName(argMultiMap.getValue(PREFIX_PARENT).get());
 
         return new LinkCommand(child, parent);
     }
