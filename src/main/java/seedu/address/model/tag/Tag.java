@@ -12,8 +12,8 @@ import java.util.Optional;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}\\s]+";
+    public static final String MESSAGE_CONSTRAINTS = "Tag names cannot be blank.";
+    public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String tagName;
 
