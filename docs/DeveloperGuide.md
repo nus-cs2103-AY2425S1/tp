@@ -613,4 +613,13 @@ This section outlines proposed improvements to address known feature flaws ident
      * `username-2@example.com` :white_check_mark:
      * `username-3@example.com` :white_check_mark:
      * `username4@test.example.org"` :white_check_mark:
-     * `username1@example` :x:
+     * `username1@example` :x:<br></br>
+2. **Implement more robust phone number validation:**
+   * Currently, NovaCare's phone number validation only requires for entries to be numeric, and at least 3 digits long. This means that the system accepts phone number entries that exceed the upper limit of possible phone number lengths, and also disallows entries that try and input country code, i.e. `+6512345678`, since phone numbers must be strictly numeric. This flaw could cause data entry errors, especially for international contacts.
+   * As phone numbers are both used in a patient's phone field and in the emergency contact number field, this flaw affects two fields in the addressbook.
+   * We plan to enhance the phone number validation logic to allow the usage of the `+` character only as the first character of the phone number, and to limit the length of the phone number entered.
+   * For example:
+     * `+6512345678` :white_check_mark:
+     * `+601123456789` :white_check_mark:
+     * `111+111` :x:
+     * `11111111111111111111` :x:<br></br>
