@@ -132,21 +132,21 @@ Before continuing, here are some important information you need to know about th
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                              |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action       | Format, Examples                                                                                                                                                                  |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
-| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                     |
-| **Clear**    | `clear`                                                                                                                                                                       |
-| **Delete**   | `delete INDEX`                                                                                                                                                                |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                     |
-| **Exit**     | `exit`                                                                                                                                                                        |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                     |
-| **Help**     | `help`                                                                                                                                                                        |
-| **List**     | `list`                                                                                                                                                                        |
+| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
+| **Clear**    | `clear`                                                                                                                                                                           |
+| **Delete**   | `delete INDEX`                                                                                                                                                                    |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
+| **Exit**     | `exit`                                                                                                                                                                            |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
+| **Help**     | `help`                                                                                                                                                                            |
+| **List**     | `list`                                                                                                                                                                            |
 | **Reopen**   | `reopen INDEX`                                                                                                                                                                    |
-| **View**     | `view INDEX`                                                                                                                                                                  |
-| **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                        |
-| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                               |
+| **View**     | `view INDEX`                                                                                                                                                                      |
+| **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                            |
+| **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                                   |
 
 [back to top](#internbuddy-user-guide)
 
@@ -242,7 +242,7 @@ and will be `APPLIED` if not specified.
 
 <box type="tip" seamless>
 
-**Tip:** applying to a company automatically changes the company's status to `applied`.
+**Tip:** applying to a company automatically changes the company's status to `APPLIED`. (This is not the same as `APPLICATION_STATUS`)
 </box>
 
 Examples:
@@ -409,6 +409,12 @@ The index refers to the index number shown in the displayed company list. The in
 **tip:** `APPLICATION_STATUS` can only take the values `APPLIED`, `OA`, `INTERVIEWED`, `OFFERED`, `ACCEPTED`, `REJECTED`
 </box>
 
+<box type="info" seamless>
+
+**Note**: Currently, InternBuddy does not check if the `APPLICATION_STATUS` you provide is different from the current value. Therefore, please
+check that you have put the correct `APPLICATION_STATUS` to ensure that you correctly update it.
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Withdrawing application for a company: `withdraw`
@@ -447,17 +453,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+InternBuddy data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+InternBuddy data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Warning:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, InternBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause InternBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -494,6 +500,9 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If running `java -jar internbuddy.jar` gives error**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
+1. **Indicating multiple `APPLICATION_STATUS` in `apply` command**, if you specify more than one `APPLICATION_STATUS` (eg: `apply n/SWE Intern d/Requires Java as/APPLIED as/OA`) will result in InternBuddy in applying the last `APPLICATION_STATUS` (`OA` in the given example); provided that the last `APPLICATION_STATUS` is valid.
+1. **Indicating multiple parameters in `update` command**, if you specify multiple parameters with the same prefix, only the right most parameter will be used by InternBuddy. <br>
+   For instance, `update c/1 app/2 as/OA c/2 app/3 app/4 as/REJECTED` will be read the same as `update c/2 app/4 as/REJECTED` and will run if the read values are valid. 
 
 [back to top](#internbuddy-user-guide)
 
