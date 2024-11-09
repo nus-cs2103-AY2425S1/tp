@@ -18,7 +18,7 @@
         <padding>
             <Insets top="5" right="5" bottom="5" left="15"/>
         </padding>
-        <VBox alignment="CENTER" spacing="5" minWidth="70" maxWidth="50" GridPane.columnIndex="0">
+        <VBox alignment="CENTER" spacing="5" minWidth="70" maxWidth="70" GridPane.columnIndex="0">
             <Label fx:id="dayMonth" styleClass="transaction-month"/>
             <Label fx:id="year" styleClass="transaction-year"/>
         </VBox>
@@ -28,7 +28,7 @@
                 <Label fx:id="name" styleClass="transaction-name" wrapText="true"/>
                 <ImageView fx:id="done"/>
             </HBox>
-            <TilePane fx:id="categories" minWidth="80" hgap="5" vgap="5" prefColumns="3"/>
+            <TilePane fx:id="categories"/>
             <Label fx:id="description" styleClass="transaction-description" wrapText="true"/>
         </VBox>
 

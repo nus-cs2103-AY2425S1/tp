@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -65,19 +66,14 @@ public class TransactionCard extends UiPart<Region> {
             amount.setStyle("-fx-text-fill: green;");
         }
         amount.setText("$" + transaction.getAmount().toString());
-
-        // Configure TilePane for categories
-        categories.setPrefColumns(3); // Set number of columns before wrapping
-        categories.setHgap(5);
-        categories.setVgap(5);
-
         transaction.getCategories().stream()
                 .sorted(Comparator.comparing(category -> category.category))
                 .forEach(category -> {
-                    Label categoryLabel = new Label(category.category);
-                    categoryLabel.setMaxWidth(80); // Set a max width for each label
-                    categoryLabel.setWrapText(true); // Enable text wrapping within each category
-                    categories.getChildren().add(categoryLabel);
+                    Label newLabel = new Label(category.category);
+                    newLabel.setWrapText(true);
+                    newLabel.setAlignment(Pos.CENTER);
+                    newLabel.setMaxWidth(150);
+                    categories.getChildren().add(newLabel);
                 });
     }
 }
