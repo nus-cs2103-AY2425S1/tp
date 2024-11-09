@@ -9,10 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Address should have the following format: "
-            + "ADDRESS LINE, s<POSTAL CODE>. "
-            + "Address line has to be at least 5 characters.\n"
-            + "Postal code has to be 6 numbers.\n";
+    public static final String MESSAGE_CONSTRAINTS = "Address has to take in [address line], s[postal code]. "
+            + "Address line has to be at least 5 characters, "
+            + "postal code has to be 6 numbers.";
 
     /*
      * The first character of the address must not be a whitespace,
