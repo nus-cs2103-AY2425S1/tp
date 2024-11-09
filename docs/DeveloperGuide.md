@@ -189,7 +189,8 @@ The `add` command allows users to add new patients. The command requires:
 - **Diagnosis** – Patient's Diagnosis
 - **Medication** - Patient's Medication
 
-[//]: # (<puml src="diagrams/AddAppointmentSequenceDiagram.puml" alt="AddAppointmentSequenceDiagram" />)
+Here is an activity diagram that summarises the key steps taken.
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
 
 #### 1. Parsing User Input
 The **`AddCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
