@@ -6,7 +6,9 @@
 
 # LogiLink User Guide
 
-LogiLink allows you to manage your contacts on your desktop with keyboard commands. If you type fast, you can complete your contact management tasks faster with LogiLink than with mouse-based apps.
+LogiLink allows you, as a logistics coordinator, to manage your contacts on your desktop with keyboard commands. 
+
+If you type fast, you can complete your contact management tasks faster with LogiLink than with mouse-based apps.
 
 <!-- * Table of Contents -->
 * [Quick start](#quick-start)
@@ -96,7 +98,12 @@ the app.
 ### Viewing help : `help`
 **<ins>When in the main or inspect window**
 
-Shows a help window with a list of available commands for the current window. You can click on any command button to automatically enter it into the command box.
+Shows a help window with a list of commonly used commands for the current window. You can click on any command button to automatically enter it into the command box.
+
+Note: 
+* Does not show an exhaustive list of all available commands, only the most helpful. 
+
+<box type="tip" seamless>
 
 **Tip**: You can use the TAB, ENTER and ESC keys to navigate the help window.
 
@@ -114,6 +121,13 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01, S123456 r/client`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com r/worker a/Newgate Prison, S123456 p/1234567 t/criminal`
+
+<br>
+Note: 
+
+* `NAME` is required to be unique, most users will not save 2 `Alex` into their contacts, they will distinguish them.
+* `EMAIL` and `PHONE` can be duplicated to give the user freedom, but there will be a warning.
+
 
 **<ins>When in the inspect window**
 
@@ -182,7 +196,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * **Case-insensitive search**: The search does not distinguish between upper or lower case. e.g `hans` will match `Hans`
 * **Keyword order does not matter**: You can enter keywords in any order. e.g. `Hans Bo` will match `Bo Hans`
 * **Only names are searched**: The search only looks at the contact's name, not other details like phone number or address.
-* **Matches full words only**: e.g. `Han` will not match `Hans`
+* **Matches partial words**: e.g. `Han` will match `Hans`
 * **"OR" search**: If a contact's name contains any of the keywords, it will be shown. e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -337,6 +351,8 @@ Format: `inspect [INDEX]`
 
 Examples:
 * `list` followed by `inspect 1` inspects the 1st contact in the contacts list.
+
+![inspect_window](images/Ui2.png)
 
 **<ins>When in the inspect window**
 
