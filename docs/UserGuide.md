@@ -350,6 +350,9 @@ Command detail & constraints:
 - Each student must have a unique student ID within the system.
 - Duplicate name with different student ID is allowed
 
+Note:
+- Execute `addStu` command after `find` command will return the full list of students in TrackMate application
+
 **Examples:**
 
 - `addStu n/Samson s/A1234567X c/T1001` : Adds a student named "Samson" with the student ID "A1234567X" and assigns them to tutorial ID "T1001".
@@ -372,6 +375,9 @@ Command detail & constraints
 - Existing values will be updated to the input values.
 - When a student’s tutorial class is updated, their attendance record will remain intact, as attendance is tracked at the module level, not by individual tutorial groups. This ensures that any classes the student attended before the change are still recorded accurately.
 
+Note:
+- Execute `edit` command after `find` command will edit the student data based on the filtered list after `find` command
+
 **Examples:**
 
 - `edit 1 n/Samson Chew s/A1234567M` : Edits the name and student ID of the 1st student to be "Samson Chew" and "A1234567M" respectively.
@@ -389,6 +395,10 @@ Command Details & Constraints:
 * No prefix is required for `deleteStu` command.
 * The command should only consist of exactly two words: `deleteStu` and a valid `INDEX`
 * All parameters are required to adhere to their [respective constraints](#332-parameters).
+
+Note:
+- Execute `deleteStu` command after `find` command will delete the student data based on the filtered list after `find` command
+
 
 Example:
 1. `deleteStu 1` deletes the first person in the list displayed.
@@ -409,6 +419,8 @@ Command Details & Constraints:
 Example:
 1. `find John` returns john and John Doe
 2. `find alex david` returns Alex Yeoh, David Li
+
+
 
 #### 4.1.5 Listing students: `list`
 <a id="listing-students-list"></a>
