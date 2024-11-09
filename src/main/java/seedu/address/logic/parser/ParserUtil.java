@@ -13,6 +13,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
@@ -137,11 +138,23 @@ public class ParserUtil {
     public static LocalDate parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+
+        // Parse date, then check if tbe date and format are valid
+        LocalDate parsedDate;
+
         try {
-            return LocalDate.parse(trimmedDate, DateTimeFormatter.ISO_LOCAL_DATE);
+            parsedDate = LocalDate.parse(trimmedDate, formatter);
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format. Please use YYYY-MM-DD.");
+            throw new ParseException("Invalid date format or invalid date. Please provide a correct date in YYYY-MM-DD format.");
         }
+
+        // Check if date is in the future.
+        if (parsedDate.isAfter(LocalDate.now())) {
+            throw new ParseException("The date provided should not be in the future.");
+        }
+
+        return parsedDate;
     }
 
     /**
