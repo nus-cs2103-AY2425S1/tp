@@ -561,9 +561,11 @@ Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
 
 ### Sorting all entries : `sort`
 
-Sorts all entries in the application according to name in alphabetical order.
+Sorts all entries in the application according to name in alphabetical order. The sorting is case-insensitive.
 
 Format: `sort`
+
+![sortUi](images/sortUi.png)
 
 <div style="text-align: right;">
   <a href="#command-summary">
