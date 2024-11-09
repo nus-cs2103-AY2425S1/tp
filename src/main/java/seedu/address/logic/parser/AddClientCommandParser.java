@@ -50,7 +50,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
         if (isOnePrefixPresent(argMultimap, PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL)
                 && !arePrefixesPresent(argMultimap, PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                                    AddClientCommand.VEHICLE_DETAILS_MISSING));
+                    AddClientCommand.VEHICLE_DETAILS_MISSING));
         } else if (arePrefixesPresent(argMultimap, PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL)) {
             isCarPresent = true;
         }

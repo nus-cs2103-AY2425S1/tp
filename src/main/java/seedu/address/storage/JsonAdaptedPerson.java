@@ -169,6 +169,10 @@ class JsonAdaptedPerson {
         return client;
     }
 
+    /**
+     * Checks if any car details are missing
+     * @throws IllegalValueException if any car details are missing
+     */
     public void checkForMissingCarField() throws IllegalValueException {
         // If any car details are missing, throw an exception
         if (vin == null) {
@@ -190,6 +194,10 @@ class JsonAdaptedPerson {
         }
     }
 
+    /**
+     * Checks if all car details are valid
+     * @throws IllegalValueException if any car details are invalid
+     */
     public void checkValidCarFields() throws IllegalValueException {
         if (!Vin.isValidVin(vin)) {
             throw new IllegalValueException(Vin.MESSAGE_CONSTRAINTS);

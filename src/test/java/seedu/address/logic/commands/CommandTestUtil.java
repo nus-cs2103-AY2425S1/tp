@@ -71,11 +71,11 @@ public class CommandTestUtil {
     public static final String ISSUE_DESC_FRIEND = " " + PREFIX_ISSUE + VALID_ISSUE_FRIEND;
     public static final String ISSUE_DESC_HUSBAND = " " + PREFIX_ISSUE + VALID_ISSUE_HUSBAND;
     public static final String CAR_DESC_A = " " + PREFIX_VRN + VALID_CAR_VRN_A + " " + PREFIX_VIN
-                                            + VALID_CAR_VIN_A + " " + PREFIX_MAKE + VALID_CAR_MAKE_A
-                                            + " " + PREFIX_MODEL + VALID_CAR_MODEL_A;
+            + VALID_CAR_VIN_A + " " + PREFIX_MAKE + VALID_CAR_MAKE_A
+            + " " + PREFIX_MODEL + VALID_CAR_MODEL_A;
     public static final String CAR_DESC_B = " " + PREFIX_VRN + VALID_CAR_VRN_B + " "
-                                            + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MAKE
-                                            + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + VALID_CAR_MODEL_B;
+            + PREFIX_VIN + VALID_CAR_VIN_B + " " + PREFIX_MAKE
+            + VALID_CAR_MAKE_B + " " + PREFIX_MODEL + VALID_CAR_MODEL_B;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
