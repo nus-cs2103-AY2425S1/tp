@@ -23,7 +23,7 @@ HR Helper is a **desktop app for managing employees, optimized for use via a Com
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src = "images/Ui.png" width=500>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -101,7 +101,6 @@ Format: `help`
 
 Examples:
 
-`need to update picture`
 <img src = "images/helpMessage.png" width=300> 
 
 **Warning:** Clicking on the link will leave HR Helper.
@@ -273,8 +272,10 @@ Format: `favorite INDEX`
 * Favorites the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-
+  
 <box type="tip" seamless>
+<img src = "images/favorite.png" width=500>
+
 
 **Tip:** Use favorite for high-priority contacts, making them easier to locate with filtering or sorting.
 </box>
@@ -323,7 +324,8 @@ The **Person Details Window** allows HR personnel to view and edit detailed info
     - Select a person from the **Person List**.
     - Press the `Enter` key to open the **Person Details Window**.
 
-![Person Details Window](images/persondetailswindow.png)
+<img src = "images/persondetailswindow.png" width=300>
+
 
 - **Name:** Editable text field displaying the employee's full name.
 - **Phone:** Editable text field for the employee's contact number.
