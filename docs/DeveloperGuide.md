@@ -775,13 +775,9 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix: Planned Enhancements**
 ### Description fields for events
 Introduce a description field for each event, allowing users to add more detailed notes about the event's context, objectives, special requirements, or unique features.
-#### Current Workaround:
-Users may use tags or the event name itself to add essential details about the event.
 
 ### Association note
 Allow users to add a short note to an association between a vendor and an event. This note can serve as a custom message or reminder specific to the event-vendor relationship, such as special instructions, deadlines, or contract details.
-#### Current Workaround:
-Users might add a tag to either the event or vendor to represent unique notes.
 
 ### Fine-grained find command
 Enhance the find command to support more specific search criteria. Users can specify particular fields to search within, such as name, tag, or description. This feature will make finding items more precise and adaptable to different user needs.
