@@ -102,7 +102,7 @@ Refer to the feature list below for detailed information of each command that is
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -146,7 +146,7 @@ This command adds a person named Betsy Crowe with the phone number 98262123, ema
 Invalid Examples:
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12`
 
-This command will not result in the following error message since the phone number must be at least 3 digits long.
+This command will result in the following error message since the phone number must be at least 3 digits long.
 
 
 ![addPersonCommandFailure.png](images/addPersonCommandFailure.png)
@@ -162,12 +162,19 @@ Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+*  `edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively. Note: this assumes that the address book contains at least 1 person.
+*  `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`. Note: this assumes that the address book contains at least 2 people.
 * `Before:`
 * ![](images/beforeEditCommandExample.png)
 * `After:`
 * ![](images/afterEditCommandExample.png)
+
+Invalid Examples:
+* `edit 1` 
+
+This command will result in the following error message since at least one of the optional fields must be provided. Note: this assumes that the address book contains at least 1 person.
+
+* ![](images/invalidEditCommandExample.png)
 
 ### Locating persons by name: `find`
 
@@ -207,7 +214,7 @@ Examples:
 
 ### Clearing all persons : `clear -p`
 
-Clears all persons from the contact book.
+Clears all persons from the address book.
 
 Format: `clear -p`
 
@@ -232,27 +239,34 @@ Format: `list -e`
 
 Adds an event to the event book.
 
-Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION -a ATTENDEES` <br>
+Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION [-a ATTENDEES]` <br>
 **Note:** Dates are in (yyyy-mm-dd) format.
+
 
 <box type="tip" seamless>
 
 **Tip:** All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
 
 **Tip:** Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
-Note that the indexes are seperated by **spaces**.
+Note that the indexes are seperated by **spaces**
 </box>
 
 Examples:
 * `event -n Get Together Party -sd 2023-10-25 -ed 2023-10-27 -l MBS` adds a get together party event to the event book.
 * `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3` creates the birthday party event and adds the first 3 people in the contacts book to the event.
 
+Invalid examples:
+* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1, 2, 3` 
+
+This command will result in the following error message since the list of indexes must be separated by whitespaces, not anything else like commas.
+
+* ![](images/invalidEventCommandExample.png)
 
 ### Updating an event: `update`
 
 Updates the details of an existing event in the address book.
 
-Format: `update -i INDEX -n NEW_NAME -sd NEW_START_DATE -ed NEW_END_DATE -l NEW_LOCATION -a NEW_ATTENDEES_INDICES -r REMOVED_ATTENDEES_INDICES`
+Format: `update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [-l NEW_LOCATION] [-a NEW_ATTENDEES_INDICES] [-r REMOVED_ATTENDEES_INDICES]`
 
 **Note:** Dates are in (yyyy-mm-dd) format.
 
@@ -272,6 +286,8 @@ Examples:
 Exits the program.
 
 Format: `exit`
+
+**Note:** the command is case-sensitive, the exact word 'exit' must be used.
 
 ### Saving the data
 
@@ -316,6 +332,7 @@ Action     | Format, Examples
 **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear Person Book**  | `clear -p`
 **Add Event**     | `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION -a ATTENDEES` <br> e.g., `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3`
+**Cancel Event**  | `cancel INDEX` <br> e.g., `cancel 1`
 **Edit Event**     | `update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [-l NEW_LOCATION] [-a NEW_ATTENDEES_INDICES] [-r REMOVED_ATTENDEES_INDICES`] <br> e.g., `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -a 1 2 4 5 -r 3 6`
 **List Events**   | `list -e`
 **Clear Events**  | `clear -e`
