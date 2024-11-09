@@ -2,11 +2,15 @@ package seedu.address.storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.Messages;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Time;
 
 /**
@@ -47,7 +51,18 @@ public class JsonAdaptedTime {
             throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
 
-        return new Time(LocalDateTime.parse(startTime, formatter), LocalDateTime.parse(endTime, formatter));
+        Time time;
+        try {
+            time = new Time(LocalDateTime.parse(startTime, formatter.withResolverStyle(ResolverStyle.STRICT)),
+                    LocalDateTime.parse(endTime, formatter.withResolverStyle(ResolverStyle.STRICT)));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME_FORMAT);
+        }
+
+        if (!time.isValidTime()) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
+        return time;
     }
 
 }

@@ -1,5 +1,7 @@
 package seedu.address.model.event;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -22,11 +24,16 @@ public class Time {
      * @param endTime A valid end time
      */
     public Time(LocalDateTime startTime, LocalDateTime endTime) {
+        requireAllNonNull(startTime, endTime);
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
     public static boolean isValidTime(LocalDateTime startTime, LocalDateTime endTime) {
+        return startTime.isBefore(endTime);
+    }
+
+    public boolean isValidTime() {
         return startTime.isBefore(endTime);
     }
 
