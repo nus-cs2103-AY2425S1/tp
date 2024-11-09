@@ -62,7 +62,7 @@ faster than traditional GUI apps.
   e.g. `[s/SKILLS]…​` can be used as ` ` (i.e. 0 times), `s/Python`, `s/Python s/Cuda` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -83,7 +83,7 @@ Format: `help`
 
 Adds a contact to the address book.
 
-Format: `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILLS]…​`
+Format: `add contact n/NAME p/PHONE e/EMAIL r/ROLE [s/SKILLS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A contact can have any number of skills (including 0)
@@ -372,7 +372,7 @@ _Details coming soon ..._
 | **Match**          | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                           |
 | **Unmatch**        | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                       |
 | **View Company**   | `view company INDEX` <br> e.g., `view company 1`                                                                                                                                 |
-| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                                  |
+| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                                         |
 | **Find Contact**   | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`                                                                                                       |
 | **Help**           | `help`                                                                                                                                                                           |
 | **Exit**           | `exit`                                                                                                                                                                           |
