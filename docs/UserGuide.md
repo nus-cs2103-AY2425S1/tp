@@ -105,7 +105,7 @@ Adds a new contact with details such as name, phone number, physical address, bi
 - `p/` Phone number (mandatory) (duplicate allowed)
 - `a/` Address (mandatory) (duplicate allowed)
 - `b/` Birthday (optional) (duplicate allowed)
-- `e/` Email (optional) (duplicate allowed)
+- `e/` Email (mandatory) (duplicate allowed)
 - `r/` Remark (optional) (multiple allowed but only the last one will be recorded) (duplicate allowed)
 - `t/` Tag (optional) (multiple allowed and all will be added) (duplicate allowed)
 
