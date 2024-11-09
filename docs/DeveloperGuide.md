@@ -9,11 +9,13 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Refer to the [_home page_](index.md)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -48,6 +50,8 @@ The bulk of the app's work is done by the following four components:
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-after: always;"></div>
+
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
@@ -65,6 +69,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T08-2/tp/tree/master/src/main/java/keycontacts/ui/Ui.java)
@@ -81,6 +87,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -115,18 +123,22 @@ How the parsing works:
 * When called upon to parse a user command, the `KeyContactsParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `KeyContactsParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T08-2/tp/tree/master/src/main/java/keycontacts/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="600" />
+<puml src="diagrams/ModelClassDiagram.puml" width="900" />
 
 
 The `Model` component,
 
-* stores the versioned student directory data i.e., all `StudentDirectory` objects (which each represent a single version of the student directory)
+* stores the versioned student directory data i.e., a list of `StudentDirectory` objects (which each represent a single version of the student directory)
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 
 ### Storage component
@@ -145,6 +157,8 @@ The `Storage` component,
 Classes used by multiple components are in the `keycontacts.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -180,6 +194,8 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoStudentDirectory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous student directory state, and restores the student directory to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
@@ -213,6 +229,8 @@ The `redo` command does the opposite — it calls `Model#redoStudentDirector
 **Note:** If the `currentStatePointer` is at index `studentDirectoryStateList.size() - 1`, pointing to the latest student directory state, then there are no undone StudentDirectory states to restore. The `redo` command uses `Model#canRedoStudentDirectory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the student directory, such as `list`, will not call `Model#commitStudentDirectory()`. Thus, the `studentDirectoryStateList` remains unchanged.
 
@@ -286,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user         | view the list of commands                                   | know what commands I can run                 |
 | `* * *`  | user             | add a piano piece to a student                              | track what piece they are working on         |
 | `* * *`  | user             | save a student’s address                                    | know where to travel for tutoring            |
-| `* * *`  | user             | see the grade level of a student                            | be more prepared for lessons                 |
+| `* * *`  | user             | see the grade level of a student                            | tailor the lesson to their proficiency       |
 | `* * *`  | user             | save a person's contact                                     | contact them easily for tutoring             |
 | `* * *`  | user             | undo my last command                                        | revert the effects of a wrong command        |
 | `* * *`  | user             | redo a command that I undid                                 | revert the effects of a wrong undo           |
@@ -312,11 +330,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `KeyContacts` and the **Actor** is the `user`, unless specified otherwise)
 
-#### Use case: Add a student
+#### Use case: Add a student (UC01)
 
 **MSS**
 
-1. User enters the command to add a student, including their details.
+1. User requests to add a student, including their details.
 2. KeyContacts adds the student and notifies the user.
 
    Use case ends.
@@ -335,11 +353,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Edit a student
+#### Use case: Edit a student (UC02)
 
 **MSS**
 
-1. User enters the command to edit a student with new data.
+1. User requests to edit a student with new data.
 2. KeyContacts edits the student and notifies the user.
 
    Use case ends.
@@ -354,11 +372,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Delete a student
+<div style="page-break-after: always;"></div>
+
+#### Use case: Delete a student (UC03)
 
 **MSS**
 
-1. User enters command to delete a student.
+1. User requests to delete a student.
 2. KeyContacts deletes the student from the list and notifies the user.
 
    Use case ends.
@@ -373,22 +393,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Clear the student directory
+#### Use case: Clear the student directory (UC04)
 
 **MSS**
 
-1. User enters command to clear the student directory.
+1. User requests clear the student directory.
 2. KeyContacts clears the student directory.
 
    Use case ends.
 
 ---
 
-#### Use case: View a list of all students
+#### Use case: View a list of all students (UC05)
 
 **MSS**
 
-1. User enters command to view a list of all students.
+1. User requests to view a list of all students.
 2. KeyContacts displays the list of students to the user.
 
    Use case ends.
@@ -398,14 +418,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. KeyContacts detects an error while retrieving the list.
     * 1a1. KeyContacts shows an error message.
     * Use case ends.
-    *
+  
 ---
 
-#### Use case: Find a student
+#### Use case: Find a student (UC06)
 
 **MSS**
 
-1. User enters the command to find a student, providing one or more search terms.
+1. User requests to find a student, providing one or more search terms.
 2. KeyContacts displays the students that fit the search term.
 3. User scrolls through the displayed list to find the student they are looking for. 
 
@@ -421,11 +441,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Sort students
+<div style="page-break-after: always;"></div>
+
+#### Use case: Sort students (UC07)
 
 **MSS**
 
-1. User enters the command to sort, providing the sorting details. 
+1. User requests to sort the students, providing the sorting details. 
 2. KeyContacts displays the students sorted in the given order.
 
    Use case ends.
@@ -440,11 +462,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Schedule a student's regular lesson
+#### Use case: Schedule a student's regular lesson (UC08)
 
 **MSS**
 
-1. User enters command to schedule a student's regular lesson, including the day of the week, starting time and ending time.
+1. User requests to schedule a student's regular lesson, including the day of the week, starting time and ending time.
 2. KeyContacts schedules the regular lesson at the given day and time period for the student with the associated index and notifies the user.
 
    Use case ends.
@@ -457,13 +479,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Steps 1a1-1a2 are repeated until the data entered are correct.
   * Use case resumes from step 2.
 
+<br>
+
+* 1b. KeyContacts detects a lesson that clashes with the regular lesson.
+    * 1b1. KeyContacts informs the user of the clash.
+    * 1b2. User enters new data.
+    * Steps 1b1-1b2 are repeated until a clash is no longer detected.
+    * Use case resumes from step 2.
+
 ---
 
-#### Use case: Assign piano piece to a student
+#### Use case: Assign piano piece to a student (UC09)
 
 **MSS**
 
-1. User enters command to assign piano pieces to a student.
+1. User requests to assign piano pieces to a student.
 2. KeyContacts assigns the piano pieces to the student and notifies the user.
 
    Use case ends.
@@ -477,11 +507,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Use case resumes from step 2.
 ---
 
-#### Use case: Unassign piano pieces from a student
+<div style="page-break-after: always;"></div>
+
+#### Use case: Unassign piano pieces from a student (UC10)
 
 **MSS**
 
-1. User enters command to unassign piano pieces from a student.
+1. User requests to unassign piano pieces from a student.
 2. KeyContacts unassigns the piano pieces from the student and notifies the user.
 
    Use case ends.
@@ -490,17 +522,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. KeyContacts detects an error in the entered data.
     * 1a1. KeyContacts requests for the correct data.
-    * 1a2. User enters new data.
+    * 1a2. User enters a new day, start time and or end time.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
     * Use case resumes from step 2.
 
 ---
 
-#### Use case: View the calendar
+#### Use case: View the calendar (UC11)
 
 **MSS**
 
-1. User enters command to view the calendar for a specified week.
+1. User requests to view the calendar for a specified week.
 2. KeyContacts displays the calendar view for the given week.
 
    Use case ends.
@@ -515,11 +547,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Schedule a make-up lesson
+#### Use case: Schedule a make-up lesson (UC12)
 
 **MSS**
 
-1. User enters command to schedule a make-up lesson.
+1. User requests to schedule a make-up lesson.
 2. KeyContacts schedules the make-up lesson and notifies the user.
 
    Use case ends.
@@ -531,13 +563,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a2. User enters new data.
     * Steps 1a1-1a2 are repeated until the data entered are correct.
     * Use case resumes from step 2.
+
+<br>
+
+* 1b. KeyContacts detects a clash with the make-up lesson.
+  * 1b1. KeyContacts informs the user of the clash.
+  * 1b2. User enters a new date and or time.
+  * Steps 1b1-1b2 are repeated until no clashes are detected.
+  * Use case resumes from step 2.
+
 ---
 
-#### Use case: Cancel a lesson session
+<div style="page-break-after: always;"></div>
+
+#### Use case: Cancel a lesson session (UC13)
 
 **MSS**
 
-1. User enters command to cancel a lesson session.
+1. User requests to cancel a lesson session.
 2. KeyContacts cancels the lesson session and notifies the user.
 
    Use case ends.
@@ -552,11 +595,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Uncancel a lesson session
+#### Use case: Uncancel a lesson session (UC14)
 
 **MSS**
 
-1. User enters command to uncancel a lesson session.
+1. User requests to uncancel a lesson session.
 2. KeyContacts uncancels the lesson session and notifies the user.
 
    Use case ends.
@@ -569,24 +612,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Steps 1a1-1a2 are repeated until the data entered are correct.
     * Use case resumes from step 2.
 
+<br>
+
+* 1b. KeyContacts detects a make-up lesson that clashes with the uncancelled lesson.
+    * 1b1. KeyContacts informs the user of the clash.
+    * 1b2. ==!!User requests to cancel the clashing make-up lesson (UC13)!!==.
+    * Use case resumes from step 1.
+
 ---
 
-#### Use case: View the list of commands
+#### Use case: View the list of commands (UC15)
 
 **MSS**
 
-1. User enters command to view the list of commands.
+1. User requests to view the list of commands.
 2. KeyContacts displays the dialog box with a link to the user guide.
 
    Use case ends.
 
 ---
 
-#### Use case: Undo the last command
+#### Use case: Undo the last command (UC16)
 
 **MSS**
 
-1. User enters command to undo the last command.
+1. User requests to undo the last command.
 2. KeyContacts undoes the last command.
 
    Use case ends.
@@ -597,11 +647,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Redo the last undone command
+<div style="page-break-after: always;"></div>
+
+#### Use case: Redo the last undone command (UC17)
 
 **MSS**
 
-1. User enters command to redo the last undone command.
+1. User requests to redo the last undone command.
 2. KeyContacts redoes the last undone command.
 
    Use case ends.
@@ -612,11 +664,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-#### Use case: Exit
+#### Use case: Exit (UC18)
 
 **MSS**
 
-1. User enters command to exit KeyContacts.
+1. User requests to exit KeyContacts.
 2. KeyContacts closes.
 
    Use case ends.
@@ -624,10 +676,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  **Cross-Platform Compatibility**: Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  **Performance**: Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  **Optimised for CLI Users**: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  **Performance**: Should be able to hold up to 100 persons without a noticeable sluggishness in performance for typical usage.
+3.  **Optimised for CLI Users**: A user with above average typing speed (50 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  **CLI Responsiveness**: Commands executed through the CLI should respond within 1 second under normal load (e.g. with 100 contacts).
-5.  **UI Responsiveness**: The UI must remain responsive when updating large datasets, such as when displaying a list of contacts, without causing significant delays in interactions.
+5.  **UI Responsiveness**: The UI must remain responsive when updating large datasets, such as when displaying a list of contacts, without causing delays of more than 1 second in interactions.
 6.  **Data Persistence**: Data must persist between sessions, even during unexpected shutdowns and crashes.
 7.  **Error Recovery**: In cases of missing or corrupted data files, the app should gracefully handle errors, offering the user the option to restore defaults or attempt recovery without crashing.
 8.  **Data Security**: The application should ensure that private contact details are not accidentally exposed or shared without the user’s consent.
@@ -644,6 +696,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **User preferences**: The GUI settings and student directory data file path, stored in the `preferences.json` data file.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -710,7 +764,9 @@ testers are expected to do more *exploratory* testing.
    
     3. Test case: `assign 2 pn/Waltz pn/Etude`<br>
        **Expected**: "Waltz" and "Etude" are assigned to the second student.
-   
+
+<div style="page-break-after: always;"></div>
+
 ### Unassigning Piano Pieces from a Student
 1. Unassign piano pieces
 
@@ -760,6 +816,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `view dt/01-12-2024` <br>
       **Expected**: The schedule for the week containing December 1, 2024, is displayed, showing all lessons for that period.
+
 ### Finding Students
 1. Find by name
 
@@ -770,6 +827,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `find n/John gl/ABRSM`<br>
     **Expected**: Students with "John" in their name and "ABRSM" in their grade level are displayed.
+
+<div style="page-break-after: always;"></div>
 
 ### Sorting Students
 1. Sort by name in ascending order
@@ -810,8 +869,17 @@ testers are expected to do more *exploratory* testing.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
-To be added in v1.6
+
+1. Update the checking for clashing lessons such that past make-up lessons do not affect the scheduling of regular lessons.
+2. Allow regular lessons to stretch across multiple days (e.g 22:00 to 24:00).
+3. Improve sorting to compare alphabetically instead of by ASCII value.
+4. Allow the editing of existing group names.
+5. Improve the clarity of the undo feature by specifying the command that was undone.
+6. Improve the calendar view to display long names more clearly.
+7. Improve calendar view to indicate if a regular lesson was cancelled for that week.
 
 ---
 
