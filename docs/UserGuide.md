@@ -5,15 +5,15 @@ pageNav: 3
 ---
 <h2 style="color: #FF6347;">NovaCare</h2>
 
-A **desktop app for private nurses to manage patients, optimized for use via a Command Line Interface** [(CLI)](#glossary) while still having the benefits of a Graphical User Interface [(GUI)](#glossary).
+A **desktop app for private nurses to manage patients, optimized for use via a Command Line Interface** [(CLI)](#10-glossary) while still having the benefits of a Graphical User Interface [(GUI)](#10-glossary).
 Tailored to handle the demanding workload of private nurses managing numerous patients, NovaCare is built for speed—ideal for users who type quickly, enabling faster patient management than traditional GUI-based applications.
 
 In this guide, users will be able to learn the following details:
 
 1) **Set up NovaCare** using **Mac/Linux** or **Windows**.
 2) **Explore and use features** that are available in NovaCare to add and delete your first private patient details and task details.
-3) Quickly learn and master various [commands](#command-summary) and actions available in NovaCare.
-4) General [FAQs](#faq) (Frequently asked questions) of NovaCare.
+3) Quickly learn and master various [commands](#9-command-summary) and actions available in NovaCare.
+4) General [FAQs](#7-faq) (Frequently asked questions) of NovaCare.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Table of Contents
@@ -67,9 +67,9 @@ In this guide, users will be able to learn the following details:
 This user guide is tailored for new and existing users of NovaCare.
 
 
-If you are new to NovaCare, we recommend you to start with the [Quick Start](#quick-start) section.
+If you are new to NovaCare, we recommend you to start with the [Quick Start](#3-quick-start) section.
 
-If you are an existing user looking for a specific feature, you can jump to the [Features](#features) section or [Command Summary](#command-summary) section.
+If you are an existing user looking for a specific feature, you can jump to the [Features](#6-features) section or [Command Summary](#9-command-summary) section.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -156,7 +156,7 @@ Here will be a basic guide on how to use the application.
       > `add n/Johnson p/98765432 e/johnson123@gmail.com a/123, Clementi Rd, 1234665 t/Diabetic`
 
 4. **Edit patient information**:
-   * Type the following command in the command box and press Enter to **edit a patients's information**:
+   * Type the following command in the command box and press Enter to **edit a patient's information**:
       > `edit 1 p/91234567`
 
 5. **Delete a patient**:
@@ -171,7 +171,7 @@ Here will be a basic guide on how to use the application.
     * Type the following command in the command box and press Enter to **exit the program**:
         > `exit`
 
-Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#6-features) below for details of each command.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -187,14 +187,13 @@ This section provides a detailed explanation of the features available in NovaCa
 
 * All command in NovaCare follows a specific structure. The command structure is as follows:
   `COMMAND prefix/PARAMETERS…​`
-  * `e.g. add n/John Tan p/98765432 e/john@gmail.com a/123, Clementi Rd, 1234665`
-
+  e.g. `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `add` is the `COMMAND`, `n/`, `p/` and `e/` are `prefixes` and `NAME`, `PHONE_NUMBER`, `EMAIL` and `ADDRESS` are `PARAMETERS`.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets `[]` are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/Diabetic` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Diabetic` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Diabetic`, `t/Diabetic t/Allergic to shellfish` etc.
@@ -251,10 +250,10 @@ Adds a patient's details to the system.
 
 **Note:**
 * Upon adding a patient the default priority is set to *3*. 
-  * Users can change the priority level using the [`priority` command](#adding-priority-level-priority).
-* To update emergency contact details, use the [`emergency` command](#adding-emergency-contact-emergency).
+  * Users can change the priority level using the [`priority` command](#628-adding-priority-level-priority).
+* To update emergency contact details, use the [`emergency` command](#626-adding-emergency-contact-emergency).
 * A patient will not be added if the name and phone number is already in the system.
-* Refer to [Parameter Information](#parameter-information) for the limitations of each parameter.
+* Refer to [Parameter Information](#61-parameter-information) for the limitations of each parameter.
 </box>
 
 <box type="tip" seamless>
@@ -267,7 +266,12 @@ Adds a patient's details to the system.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tagges as `Diabetic` to the system.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tags as `Diabetic` to the system.
+
+Expected output:
+```
+New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+```
 <br></br>
 
 #### 6.2.2 Listing all patients: `list`
@@ -278,6 +282,11 @@ Shows a list of all patients in the system.
 
 Example:
 * `list` lists and displays all the patients in the system.
+
+Expected output:
+```
+Listed all persons
+```
 <br></br>
 
 #### 6.2.3 Editing a patient: `edit`
@@ -292,7 +301,7 @@ Edits an existing patient's details in the system.
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the patient will be removed i.e. adding of tags is not cumulative.
 * You can remove all the patient’s tags by typing `t/` without
   specifying any tags after it.
 </box>
@@ -300,6 +309,12 @@ Edits an existing patient's details in the system.
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+
+Expected output:
+```
+Edited Person: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+Edited Person: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
+```
 <br></br>
 
 #### 6.2.4 Locating patients by name: `find`
@@ -311,7 +326,7 @@ Finds patients whose name contains any of the given keywords.
 <box type="info" seamless>
 
 **Note:**
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -343,6 +358,11 @@ Deletes the specified patient and tasks associated to that patient from the syst
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the system.
 * `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
+
+Expected output:
+```
+Deleted Person: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+```
 <br></br>
 
 #### 6.2.6 Adding emergency contact: `emergency`
@@ -361,6 +381,11 @@ Adds an emergency contact and details to a patient in the system.
 
 Example:
 * `emergency 1 n/Tom Tan p/91237171` adds an emergency contact `Tom Tan` with contact number `91237171` to the 1st-indexed patient in the patient list.
+
+Expected output:
+```
+Added emergency contact to John Doe: Tom Tan, 91237171
+```
 <br></br>
 
 #### 6.2.7 Deleting emergency contact: `deleteemergency`
@@ -379,11 +404,16 @@ Deletes an emergency contact and its details from a patient in the system.
 
 Example:
 * `deleteemergency 1` deletes the emergency contact of the 1st-indexed patient in the patient list.
+
+Expected output:
+```
+Removed emergency contact (Tom Tan, 91237171) from John Doe
+```
 <br></br>
 
 #### 6.2.8 Adding priority level: `priority`
 
-Adds an priority level to a patient in the system.
+Adds a priority level to a patient in the system.
 
 :pencil: Format: `priority INDEX l/PRIORITY_LEVEL`
 
@@ -398,6 +428,11 @@ Adds an priority level to a patient in the system.
 
 Example:
 * `priority 1 l/2` adds priority level `2` to 1st-indexed patient in the patient list.
+
+Expected output:
+```
+Priority level 2 successfully set for John Doe
+```
 <br></br>
 
 #### 6.2.9 Deleting priority level: `deletelevel`
@@ -411,12 +446,17 @@ Delete a priority level to a patient in the system, resetting it to the default 
 **Note:**
 * Delete the current priority level at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​.
 </box>
 
 Examples:
 * `deletelevel 1` deletes priority level of the 1st-indexed patient in the patient list.
-* `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3S.
+* `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3.
+
+Expected output:
+```
+Priority level reset to default for John Doe
+```
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
@@ -441,9 +481,17 @@ Adds a task to a patient in the system.
 Examples:
 * `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in the system.
 * `find John doe` followed by `addtask 1 d/Clear diapers` adds a task `Clear diapers` to the 1st-indexed patient in the resultant list produced from the `find` command.
-<br></br>
-  ![Patient List](images/PersonListExample.png)
-  ![Task List](images/TaskListExample.png)
+
+Expected output:
+```
+Listed all persons
+New task added: Eat paracetamol 1000mg
+```
+Expected output:
+```
+New task added: Clear diapers
+```
+
 <br></br>
 
 #### 6.3.2 Deleting a task: `deletetask`
@@ -462,6 +510,11 @@ Deletes a task for a patient in the system.
 
 Example:
 * `deletetask 1` deletes the 1st-indexed task in the task list.
+
+Expected output:
+```
+Deleted Task: Eat paracetamol 1000mg for Betsy Crower
+```
 <br></br>
 
 #### 6.3.3 Marking a Task: `marktask`
@@ -480,6 +533,11 @@ Marks a task at a specific index.
 
 Example:
 * `marktask 1` marks the 1st-indexed task in the task list as `Complete`.
+
+Expected output:
+```
+Marked task as complete: Clear diapers for John Doe
+```
 <br></br>
 
 #### 6.3.4 Unmarking a Task: `unmarktask`
@@ -498,7 +556,12 @@ Unmarks a task at a specific index.
 
 Example:
 * `unmarktask 1` marks the 1st-indexed task in the task list as `Incomplete`.
-  <br></br>
+
+Expected output:
+```
+Marked task as incomplete: Clear diapers for John Doe
+```
+<br></br>
 
 #### 6.3.5 Finding a Task: `findtask`
 
@@ -507,7 +570,12 @@ Finds all task for a particular patient specific index.
 :pencil: Format: `findtask INDEX`
 
 Example:
-* `findtask1 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
+* `findtask 1` finds and displays all tasks for the 1st-indexed patient in the patient list.
+
+Expected output:
+```
+1 tasks listed!
+```
 <br></br>
 
 #### 6.3.6 Listing Tasks: `listtask`
@@ -518,6 +586,11 @@ List all tasks for all patients in the system.
 
 Example:
 * `listtask` lists and displays all tasks in the system.
+
+Expected output:
+```
+Listed all tasks
+```
 <br></br>
 
 #### 6.3.7 Listing Incomplete Tasks: `listincomplete`
@@ -529,6 +602,11 @@ List all incomplete tasks for all patients in the system.
 Example:
 * `listincomplete` lists and displays all incomplete tasks in the system.
 
+Expected output:
+```
+Listed all incomplete tasks
+```
+
 [⬆️ Back to Table of Contents](#table-of-contents)
 
 ### 6.4 General commands
@@ -537,7 +615,7 @@ In NovaCare, these are the default commands for getting help, clearing and savin
 
 #### 6.4.1 Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 <box type="info" seamless>
@@ -569,6 +647,11 @@ Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
 
 Example:
 * `clear` clears all available data in NovaCare, both patients and tasks.
+
+Expected output:
+```
+Address book has been cleared!
+```
 <br></br>
 
 #### 6.4.3 Exiting the program: `exit`
@@ -579,6 +662,8 @@ Exits the program.
 
 Example:
 * `exit` automatically saves and exit NovaCare.
+
+Expected output: NovaCare will automatically close the window.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
