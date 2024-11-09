@@ -84,18 +84,16 @@ Adds a member to Hall Pointer.
 
 Format: `add_member n/NAME r/BLOCK/FLOOR/ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​`
 
-<box type="tip" seamless>
+> **Tip:** A member can have any number of tags (including 0).
 
-**Tip:** A member can have any number of tags (including 0)
-
-</box>
+> **Note:** The `NAME` field should not contain leading spaces or slashes (`/`) at the start or end. Slashes are only allowed in specific contexts like "s/o" within a name, such as `John Doe s/o Jane Doe`. Ensure names follow this format to prevent errors.
 
 Examples:
 
 - `add_member n/John Doe r/4-3-301 t/johndoe123`
-- `add_member n/Betsy Crowe r/2-5-120 t/betsy_crowe tag/logistics`
+- `add_member n/Betsy Crowe s/o Alice Crowe r/2-5-120 t/betsy_crowe tag/logistics`
 
-### Listing all members : ` list`
+### Listing all members : `list`
 
 Shows a list of all members in Hall Pointer.
 
