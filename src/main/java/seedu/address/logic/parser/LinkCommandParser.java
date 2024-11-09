@@ -34,6 +34,8 @@ public class LinkCommandParser implements Parser<LinkPersonCommand> {
                     pe);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT);
+
         if (!argMultimap.getValue(PREFIX_EVENT).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkPersonCommand.MESSAGE_USAGE));
         }

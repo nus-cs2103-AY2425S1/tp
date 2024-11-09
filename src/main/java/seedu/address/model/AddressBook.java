@@ -203,6 +203,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         personEventManager.removeEvent(key);
     }
 
+    public void clearAllLinks() {
+        setPersonEventManager(new PersonEventManager());
+    }
+
     /**
      * Returns the event with the specified name.
      */
@@ -288,5 +292,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Map<Event, ArrayList<Person>> getPersonEventAssociationMap() {
         return personEventManager.getEventPersonMap();
     }
-
 }

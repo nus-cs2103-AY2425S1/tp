@@ -36,6 +36,7 @@ public class ClearEventCommand extends ClearCommand {
             setConfirmed(false);
             setPrompted(false);
             model.setEventList(new AddressBook());
+            model.clearAllLinks();
             return new CommandResult(MESSAGE_SUCCESS);
         }
     }
