@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: PROperty User Guide
 ---
 
 PROperty is a **desktop app for property agents managing contacts and their property listings,
@@ -18,19 +18,19 @@ simpler to use while being even more functional than alternatives on the market.
   * [Step 3: Try Your First Commands](#step-3-try-your-first-commands)
 * [Features](#features)
     * [Adding a client: `add`](#adding-a-client-add)
-    * [Editing a client : `edit`](#editing-a-client--edit)    
-    * [Deleting a client : `delete`](#deleting-a-client--delete)
-    * [Listing all clients : `list`](#listing-all-clients--list)
-    * [Sorting all clients : `sort`](#sorting-all-clients--sort)
-    * [Showing property listings of a client : `show`](#showing-property-listings-of-a-client--show)
+    * [Editing a client: `edit`](#editing-a-client--edit)    
+    * [Deleting a client: `delete`](#deleting-a-client--delete)
+    * [Listing all clients: `list`](#listing-all-clients--list)
+    * [Sorting all clients: `sort`](#sorting-all-clients--sort)
+    * [Showing property listings of a client: `show`](#showing-property-listings-of-a-client--show)
     * [Locating clients by name: `find`](#locating-clients-by-name-find)
     * [Locating clients by tag: `findtag`](#locating-clients-by-tag-findtag)
-    * [Clearing all entries : `clear`](#clearing-all-entries--clear)
-    * [Managing Remarks : `remark`](#managing-remarks--remark)
-    * [Adding a property listing : `listing add`](#adding-a-property-listing--listing-add)
-    * [Deleting a property listing : `listing delete`](#deleting-a-property-listing--listing-delete)
-    * [Exporting your contacts : `export`](#exporting-your-contacts--export)
-    * [Exiting the program : `exit`](#exiting-the-program--exit)
+    * [Clearing all entries: `clear`](#clearing-all-entries--clear)
+    * [Managing Remarks: `remark`](#managing-remarks--remark)
+    * [Adding a property listing: `listing add`](#adding-a-property-listing--listing-add)
+    * [Deleting a property listing: `listing delete`](#deleting-a-property-listing--listing-delete)
+    * [Exporting your contacts: `export`](#exporting-your-contacts--export)
+    * [Exiting the program: `exit`](#exiting-the-program--exit)
     * [Open help menu: `help`](#open-help-menu-help)
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
@@ -127,7 +127,8 @@ Adds a client to PROperty.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​`
 
-- `NAME` and `PHONE_NUMBER` fields must be provided.
+- `NAME` and `PHONE_NUMBER` fields must be provided. 
+-  Client tags are added in a case-insensitive manner. e.g `t/buyer` or `t/BUYER` will both add the `Buyer` tag.
 -  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -139,7 +140,7 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/looking for HDB` adds a client named `John Doe` with a phone number of `98765432`, an email of `johnd@example.com`, an address of `John street, block 123, #01-01` and a remark of `looking for HDB`.
 
 
-* `add n/Betsy Crowe t/condo e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567` adds a client named `Betsy Crowe` with a tag of `Condo`, and email of `betsycrowe@example.com`, an address of `Flatbush Avenue, block 81, #02-02` and a phone number of `1234567`.
+* `add n/Betsy Crowe t/landlord e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567` adds a client named `Betsy Crowe` with a tag of `Landlord`, and email of `betsycrowe@example.com`, an address of `Flatbush Avenue, block 81, #02-02` and a phone number of `1234567`.
 
 Visual example of correct output:
 
@@ -273,7 +274,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * By default, the find command conduct a general search for the individual. Hence, 
 the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* A client's name, phone nunmber, address, email and tag can be searched.
+* A client's name, phone number, address, email and tag can be searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * clients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
@@ -389,7 +390,8 @@ Format: `listing add INDEX t/PROPERTY_TAG a/LISTING_ADDRESS`
 
 - Adds a property listing to the client specified by `INDEX`
 - The `INDEX` refers to the index number shown in the displayed client list.
-- The `INDEX` **must be a positive integer** 1, 2, 3, …​
+- The `INDEX` **must be a positive integer** 1, 2, 3, …​ 
+- Property tags are added in a case-insensitive manner. e.g `t/condo` or `t/CONDO` will both add the `CONDO` tag.
 - Refer to the [Tag Table](#tag-table) for a complete list of property tags.
 
 Examples:
@@ -416,10 +418,10 @@ Format: `listing delete INDEX LISTING_INDEX`
 
 Examples:
 
-- `listing delete 1 1` deletes the `1st` property listing from the client with index `1`.
+- `listing delete 1 1` deletes the 1st property listing from the client with index `1`.
 
 
-- `listing delete 2 3` deletes the `3rd` property listing from the client with index `2`.
+- `listing delete 2 3` deletes the 3rd property listing from the client with index `2`.
 
 Visual example of correct output:
 
@@ -548,6 +550,14 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+
+### Technical Terms
+- **CLI**: Command-Line Interface, a text-based interface used to interact with software by typing commands.
+- **CSV**: Comma-Separated Values, a simple file format used to store tabular data, where each line of the file is a data record with fields separated by commas.
+- **GUI**: Graphical User Interface, a user interface that allows users to interact with the application through graphical elements such as buttons, text fields, and menus.
+- **JAR**: Java ARchive, a package file format that aggregates many Java class files and associated resources (text, images) into one file to distribute application software or libraries on the Java platform.
+- **Java**: A high-level, object-oriented programming language used for building cross-platform applications.
+- **JSON**: JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. JSON is commonly used for transmitting data in web applications.
 
 ### Property Tags
 - **HDB**: Public housing flats governed by the Housing & Development Board.
