@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -135,7 +136,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        addressBook.sortByName();
         return filteredPersons;
     }
 
@@ -148,8 +148,14 @@ public class ModelManager implements Model {
             return -1;
         }
         addressBook.sortByAppointments();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         assert !filteredPersons.isEmpty() : "Filtered person list should not be empty after sorting.";
         return 1;
+    }
+
+    @Override
+    public void sortByName() {
+       addressBook.sortByName();
     }
 
     @Override
