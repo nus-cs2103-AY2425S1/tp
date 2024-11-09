@@ -23,7 +23,7 @@ public class SortCommand extends Command {
             + "[role] "
             + "[phone] "
             + "[email] "
-            + "[address] "
+            + "[address]\n "
             + "Example: " + COMMAND_WORD
             + " name";
 

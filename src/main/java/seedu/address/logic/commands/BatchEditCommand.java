@@ -22,10 +22,10 @@ public class BatchEditCommand extends Command {
     public static final String COMMAND_WORD = "batch-edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Change the specified tag with new tag"
-            + "Parameters:"
-            + PREFIX_TAG + "OLDTAG" + " "
-            + PREFIX_TAG + "NEWTAG\n"
+            + ": Change the specified tag with new tag\n"
+            + "Parameters: "
+            + PREFIX_TAG + "OLD_TAG" + " "
+            + PREFIX_TAG + "NEW_TAG\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "sec2 " + PREFIX_TAG + "sec3";
 

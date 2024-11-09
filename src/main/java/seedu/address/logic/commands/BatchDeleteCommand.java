@@ -23,11 +23,11 @@ public class BatchDeleteCommand extends Command {
     public static final String COMMAND_WORD = "batch-delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Delete all person with specified tag"
+            + ": Delete all person with specified tag(s)\n"
             + "Parameters: "
             + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "TAG...";
+            + PREFIX_TAG + "sec 4";
 
     public static final String MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS = "Deleted: %1$s\n";
     public static final String MESSAGE_BATCH_DELETE_NO_PERSON_WITH_TAG = "No person with Tag= %s is found";
