@@ -15,6 +15,12 @@ pageNav: 3
 ### Use of Generative AI
 Generative AI tools, including ChatGPT, were heavily used for creating detailed Javadocs, commit messages, test suite creation and occasional code refactoring throughout the development of ClientGrid.
 
+### Mockito
+[Mockito](https://site.mockito.org/) has been used to mock unit tests.
+
+### AB3
+Aspects of the original [AB3](https://nus-cs2103-ay2425s1.github.io/tp/) has been reused in our code.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -35,7 +41,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -63,13 +69,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -80,11 +86,11 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+<puml src="diagrams/LogicClassDiagram.puml" width="800"/>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("deletebuyer p/91234567")` API call as an example.
 
@@ -107,7 +113,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddBuyerCommandParser`, `AddMeetingCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="850" />
 
@@ -122,7 +128,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-T16-2/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="850" />
 
@@ -207,7 +213,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ClientGrid` and the **Actor** is the `real estate agent`, unless specified otherwise)
 
-**Use case: UC1 - List existing buyers, sellers, clients (i.e., buyers and sellers combined), properties, or meetings in ClientGrid**
+**Use case: UC1 - List existing buyers, sellers, clients (i.e. buyers and sellers combined), properties, or meetings in ClientGrid**
 
 MSS:
 1. Real estate agent requests to view a list of buyers, sellers, clients (i.e., buyers and sellers combined), properties, or meetings.
@@ -217,12 +223,16 @@ MSS:
 Extensions:
 
 * 1a. ClientGrid detects that there are no existing records for the specified key.
+
     * 1a1. ClientGrid responds by indicating that there are no existing entries for that key yet.
+  
       Use case ends.
 
 * 1b. ClientGrid detects an invalid key, multiple keys, or additional inputs beyond the valid command.
-    * 1b1. ClientGrid displays an error message informing the real estate agent of the correct command usage, specifying that only one of the following valid keys is allowed: `buyers`, `sellers`, `clients`, `properties`, or `meetings`.
-      Use case ends.
+
+    * 1b1. ClientGrid displays an error message informing the real estate agent of the correct command usage, specifying that only one of the following valid keys is allowed: `buyers`, `sellers`, `clients`, `properties`, or `meetings`. 
+  
+       Use case ends.
 
 **Use case: UC2 - Add Buyer/ Seller**
 
@@ -449,6 +459,13 @@ Extensions:
 * **Matching Price**: The true price of the property given by the average of the property's lowest Ask price and highest Bid price.
 --------------------------------------------------------------------------------------------------------------------
 
+## **Planned Enhancements**
+
+### Team size: 5
+
+1. ClientGrid fully supports adding buyer (`addbuyer` command) and seller (`addseller` command) names with special characters, accommodating the diverse naming conventions agents encounter. Whether a name includes hyphens (like “Anna-Marie”), cultural identifiers (like "d/o" or "b/o"), or symbols like exclamation marks, ClientGrid captures these accurately. This feature allows agents to store client details without compromise, ensuring names are recorded precisely.
+2. ClientGrid's `filterclient` command will allow it to search for any part of a client’s name, rather than only names that start with the specified input. For example, entering "bob" would retrieve all clients with "bob" anywhere in their names.
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
@@ -483,8 +500,3 @@ testers are expected to do more *exploratory* testing.
 
    1. Use the `exit` command or press the red button at the top left hand corner of the application window to close the application.
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_

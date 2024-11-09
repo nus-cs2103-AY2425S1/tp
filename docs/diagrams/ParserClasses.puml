@@ -21,10 +21,10 @@ Class Prefix
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> ClientGridParser
 
-ClientGridParser .down.> XYZCommandParser: <<create>>
+ClientGridParser .down.> XYZCommandParser: create
 
-XYZCommandParser ..> XYZCommand : <<create>>
-ClientGridParser ..> Command : <<use>>
+XYZCommandParser ..> XYZCommand : create
+ClientGridParser ..> Command : use
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
