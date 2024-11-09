@@ -79,7 +79,7 @@ Clientele+ seamlessly combines client contacts, payment tracking and more in one
 
 Field | Accepted input values | Examples | Exceptions
 ----------|-----------------------|----------|-----------
-`NAME` | Any valid English name. Alphanumeric characters, spaces and dashes are allowed. | `John Doe`, `Jean Mary-Jane`, `Jackie  Chan` | None
+`NAME` | Any valid English name. Alphanumeric characters, spaces and dashes are allowed to account for scenarios where clients may prefer to use a username or pseudonym instead of their real name. | `Josh1248`, `Jean Mary-Jane`, `Jackie  Chan` | None
 `PHONE_NUMBER` | Must consist of digits (0 to 9), but spaces and dashes are allowed. | `9143 9032`, `872-233-8554`, `987223414` | None
 `EMAIL` | Must be a in a valid email format (no underscores): `somestring@domain.topleveldomain` | `jemma22@github.com`, `rahulSingh@rocket.net`, `cassie@finance.morganstanley.com` | None
 `ADDRESS` | Any non-empty string | `Singapore`, `42 Wallaby Way, Sydney` | None
