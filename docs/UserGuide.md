@@ -115,7 +115,10 @@ Need a quick reference?
 e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
 
 * `TIME-TIME` should be in the format "HHmm-HHmm" and must be a valid time range within the same day  
-  e.g. `1700-2200`
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+
+* `TIME-TIME` time ranges cannot be a single point in time.
+  e.g. `1200-1200` is not a valid time range.
 
 </box>
 --------------------------------------------------------------------------------------------------------------------
