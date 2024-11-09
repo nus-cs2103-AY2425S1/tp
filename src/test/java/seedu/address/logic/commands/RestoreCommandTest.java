@@ -63,6 +63,42 @@ public class RestoreCommandTest {
     }
 
     @Test
+    public void execute_restoreSuccessful_returnsSuccessMessage() throws Exception {
+        // Setup
+        Path addressBookFilePath = temporaryFolder.resolve("addressBook.json");
+        Path userPrefsFilePath = temporaryFolder.resolve("userPrefs.json");
+        Path backupDirectoryPath = temporaryFolder.resolve("backups");
+        Files.createDirectories(backupDirectoryPath);
+
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
+
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
+
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage.setBackupManager(new BackupManager(backupDirectoryPath));
+
+        Model model = new ModelManager(new AddressBook(), userPrefs, storage);
+
+        int backupIndex = 0;
+
+        // Create a backup
+        storage.saveAddressBook(model.getAddressBook());
+        model.backupData("test backup");
+
+        // Create RestoreCommand with isConfirmed = true
+        RestoreCommand restoreCommand = new RestoreCommand(backupIndex, true);
+
+        // Execute the command
+        CommandResult result = restoreCommand.execute(model);
+
+        // Verify that the restore was successful
+        String expectedMessage = String.format(RestoreCommand.MESSAGE_RESTORE_SUCCESS, backupIndex);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+    }
+
+    @Test
     public void equals() {
         RestoreCommand restoreCommand1 = new RestoreCommand(1, false);
         RestoreCommand restoreCommand2 = new RestoreCommand(1, true);
