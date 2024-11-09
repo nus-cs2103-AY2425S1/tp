@@ -51,11 +51,9 @@ class PeriodTag extends Tag {
 
         try {
             // Attempt to convert the input string to a valid InternshipPeriod enum value.
-            System.out.println(period);
             InternshipPeriod.valueOf(period.toUpperCase(Locale.ROOT));
             return year >= 2000 && year <= 2500;
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
             return false;
         }
     }
