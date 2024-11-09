@@ -123,12 +123,12 @@ offscreen for your reading convenience.
 
 **Notes about command parameters:**<br>
 
-* `NAME` only accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
+* `NAME` **only** accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
   e.g. `Flora-Ann`. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
 
-* `INDEX` must be a **must** be a **positive integer** (`1`, `2`, `3`, …) or it will be read as invalid command format.
+* `INDEX` must be a **must** be a **positive integer** (`1`, `2`, `3`, …) or it will be read as invalid command format rather than an index value error.
 
-* Adding and editing `NAME` is **case-sensitive**. Although duplicate contact names are not allowed,     
+* `NAME` is **case-sensitive**. Although duplicate contact names are not allowed,     
 e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
 
 * `TIME-TIME` should be in the format `HHmm-HHmm` and must be a valid time range within the same day  
