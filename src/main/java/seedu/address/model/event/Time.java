@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS = "Start time should be before end time!";
+    public static final String MESSAGE_CONSTRAINTS = "Start time should be before end time";
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");

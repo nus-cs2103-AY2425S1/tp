@@ -27,10 +27,9 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_CONFIRM_COMMAND = "Please input Y/N to confirm your operation!";
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Invalid time field! "
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Incorrect time field! "
             + "Please follow the format: "
-            + "\"t/YYYY-MM-DD HH:mm to YYYY-MM-DD HH:mm\"\n"
-            + "And make sure the date is a valid date in the calender!";
+            + "\"t/YYYY-MM-DD HH:mm to YYYY-MM-DD HH:mm\"";
     public static final String MESSAGE_INVALID_CELEBRITY_FORMAT = "Celebrity name cannot be blank";
     public static final String MESSAGE_INVALID_EVENT_CONTACT_FORMAT = "Contact name cannot be blank";
 
