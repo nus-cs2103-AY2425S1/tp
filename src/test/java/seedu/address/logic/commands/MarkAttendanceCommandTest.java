@@ -114,6 +114,23 @@ public class MarkAttendanceCommandTest {
         assertTrue(ar.getAttendance().equals(attendance));
     }
 
+    @Test
+    public void execute_duplicateStudents_throwsCommandException() {
+        Student student1 = new StudentBuilder().withName("John Doe").withStudentNumber("A0191222D").build();
+        Student student2 = new StudentBuilder().withName("John Doe").withStudentNumber("A0191223E").build();
+        ModelStubWithDuplicateStudents modelStub = new ModelStubWithDuplicateStudents(student1, student2);
+
+        Attendance attendance = new Attendance("p");
+        LocalDate date = LocalDate.of(2023, 10, 9);
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John Doe"), date, attendance,
+                Optional.empty());
+
+        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_DUPLICATE_STUDENT,
+                "A0191222D, A0191223E", "John Doe");
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(modelStub));
+    }
+
     /**
      * A Model stub that contains a single student.
      */
@@ -201,6 +218,22 @@ public class MarkAttendanceCommandTest {
         @Override
         public ObservableList<Student> getAllStudentsByName(Name name) {
             return FXCollections.observableArrayList();
+        }
+    }
+
+    private class ModelStubWithDuplicateStudents extends ModelStub {
+        private final List<Student> students;
+
+        ModelStubWithDuplicateStudents(Student... students) {
+            requireNonNull(students);
+            this.students = List.of(students);
+        }
+
+        @Override
+        public ObservableList<Student> getAllStudentsByName(Name name) {
+            return students.stream()
+                    .filter(s -> s.getName().equals(name))
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
         }
     }
 }
