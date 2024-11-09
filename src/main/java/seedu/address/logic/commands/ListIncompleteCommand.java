@@ -11,11 +11,17 @@ public class ListIncompleteCommand extends Command {
 
     public static final String COMMAND_WORD = "listincomplete";
     public static final String MESSAGE_SUCCESS = "Listed all incomplete tasks";
+    public static final String MESSAGE_NO_INCOMPLETE_TASKS = "There are no incomplete tasks";
 
     @Override
     public CommandResult execute(Model model) {
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         model.updateFilteredTaskList(task -> !task.isCompleteProperty().get());
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        if (model.getFilteredTaskList().isEmpty()) {
+            return new CommandResult(MESSAGE_NO_INCOMPLETE_TASKS);
+        } else {
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
     }
 }

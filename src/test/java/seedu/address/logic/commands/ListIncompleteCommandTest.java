@@ -30,7 +30,8 @@ public class ListIncompleteCommandTest {
     public void execute_noTasks_listIsEmpty() {
         // Ensure no tasks are in the filtered list
         model.updateFilteredTaskList(task -> false);
-        assertCommandSuccess(new ListIncompleteCommand(), model, ListIncompleteCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListIncompleteCommand(), model,
+                ListIncompleteCommand.MESSAGE_NO_INCOMPLETE_TASKS, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredTaskList());
     }
 

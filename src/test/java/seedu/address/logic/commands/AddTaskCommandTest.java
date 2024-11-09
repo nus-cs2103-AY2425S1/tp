@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -50,7 +50,7 @@ public class AddTaskCommandTest {
         AddTaskCommand addTaskCommand = new AddTaskCommand(outOfBoundIndex, "Take medication");
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX), () ->
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX), () ->
                         addTaskCommand.execute(model));
     }
 
