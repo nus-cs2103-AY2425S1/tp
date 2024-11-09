@@ -252,7 +252,6 @@ Otherwise, the command will not be executed and display an error message in Resu
 
 ### 6.2 Patient Commands
 In NovaCare, these commands will allow you to modify your list of patients to suit your needs.
-<br></br>
 
 <box type="info" seamless>
 
@@ -297,7 +296,7 @@ New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 
 New person added: Betsy Crowe; Phone: 12345678; Email: betsycrowe@example.com; Address: Blk 50 Tampines Street 21, #08-281; Tags: [Diabetic]
 New person added: Richard Lim; Phone: 22222222; Email: richardlim@example.com; Address: Blk 2 Pasir Ris Street 11, #02-445; Tags: [Asthmatic][Allergic to shellfish]
 ```
-<br></br>
+<br>
 
 #### 6.2.2 Listing all patients: `list`
 
@@ -312,7 +311,7 @@ Expected output:
 ```
 Listed all persons
 ```
-<br></br>
+<br>
 
 #### 6.2.3 Editing a patient: `edit`
 
@@ -340,7 +339,7 @@ Expected output:
 Edited Person: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
 Edited Person: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
 ```
-<br></br>
+<br>
 
 #### 6.2.4 Locating patients by name: `find`
 
@@ -388,7 +387,7 @@ Expected output:
 ```
 Deleted Person: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
 ```
-<br></br>
+<br>
 
 #### 6.2.6 Adding emergency contact: `emergency`
 
@@ -411,7 +410,7 @@ Expected output:
 ```
 Added emergency contact to John Doe: Tom Tan, 91237171
 ```
-<br></br>
+<br>
 
 #### 6.2.7 Deleting emergency contact: `deleteemergency`
 
@@ -434,7 +433,7 @@ Expected output:
 ```
 Removed emergency contact (Tom Tan, 91237171) from John Doe
 ```
-<br></br>
+<br>
 
 #### 6.2.8 Adding priority level: `priority`
 
@@ -458,7 +457,7 @@ Expected output:
 ```
 Priority level 2 successfully set for John Doe
 ```
-<br></br>
+<br>
 
 #### 6.2.9 Deleting priority level: `deletelevel`
 
@@ -487,7 +486,7 @@ Priority level reset to default for John Doe
 
 ### 6.3 Task commands
 In NovaCare, these commands will allow you to modify your list of tasks, with each task being specific to each patient to suit your needs.
-<br></br>
+<br>
 
 #### 6.3.1 Adding a task: `addtask`
 
@@ -505,18 +504,24 @@ Adds a task to a patient in the system.
 
 Examples:
 * `list` followed by `addtask 2 d/Eat paracetamol 1000mg` adds a task to the 2nd-indexed patient in the system.
-* `find John doe` followed by `addtask 1 d/Clear diapers` adds a task `Clear diapers` to the 1st-indexed patient in the resultant list produced from the `find` command.
+* `find John doe` followed by `addtask 1 d/Clear Diapers` adds a task `Clear Diapers` to the 1st-indexed patient in the resultant list produced from the `find` command.
 
 Expected output:
 ```
 Listed all persons
 New task added: Eat paracetamol 1000mg
 ```
+You should see something like this:<br></br>
+![Add_Task_Example_1](images/AddTaskExample1.png)
+
 Expected output:
 ```
-New task added: Clear diapers
+1 persons listed!
+New task added: Clear Diapers
 ```
-<br></br>
+You should see something like this:<br></br>
+![Add_Task_Example_2](images/AddTaskExample2.png)
+<br>
 
 #### 6.3.2 Deleting a task: `deletetask`
 
@@ -539,7 +544,7 @@ Expected output:
 ```
 Deleted Task: Eat paracetamol 1000mg for Betsy Crower
 ```
-<br></br>
+<br>
 
 #### 6.3.3 Marking a Task: `marktask`
 
@@ -562,7 +567,7 @@ Expected output:
 ```
 Marked task as complete: Clear diapers for John Doe
 ```
-<br></br>
+<br>
 
 #### 6.3.4 Unmarking a Task: `unmarktask`
 
@@ -585,7 +590,7 @@ Expected output:
 ```
 Marked task as incomplete: Clear diapers for John Doe
 ```
-<br></br>
+<br>
 
 #### 6.3.5 Finding a Task: `findtask`
 
@@ -600,7 +605,7 @@ Expected output:
 ```
 1 tasks listed!
 ```
-<br></br>
+<br>
 
 #### 6.3.6 Listing Tasks: `listtask`
 
@@ -615,7 +620,7 @@ Expected output:
 ```
 Listed all tasks
 ```
-<br></br>
+<br>
 
 #### 6.3.7 Listing Incomplete Tasks: `listincomplete`
 
@@ -632,6 +637,7 @@ Listed all incomplete tasks
 ```
 
 [⬆️ Back to Table of Contents](#table-of-contents)
+<br></br>
 
 ### 6.4 General commands
 In NovaCare, these are the default commands for getting help, clearing and saving your patient and task data.
@@ -676,7 +682,7 @@ Expected output:
 ```
 Address book has been cleared!
 ```
-<br></br>
+<br>
 
 #### 6.4.3 Exiting the program: `exit`
 
@@ -690,6 +696,7 @@ Example:
 Expected output: NovaCare will automatically close the window.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
+<br></br>
 
 ### 6.5 Data Management
 
