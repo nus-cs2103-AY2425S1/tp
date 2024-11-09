@@ -28,9 +28,9 @@ If you would like to skip to any specific part of the User Guide, you can refer 
 
 <div style="page-break-after: always;"></div>
 
-## 🛠️ Quick Start 🛠️
+## Quick Start
 
-This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#-quick-start-beginner-friendly-detailed-) or scroll past this section.
+This section is for users who are experienced in installing and using Java executables. If you require a more detailed Quick Start guide, please click [here](#quick-start-beginner-friendly-detailed) or scroll past this section.
 
 1. Ensure you have Java `17` or above installed in your device.
 
@@ -40,7 +40,7 @@ This section is for users who are experienced in installing and using Java execu
 
 4. Open a command terminal, `cd` into the folder you put the `.jar` file in, and use the `java -jar addressbook.jar` command to run the application.<br><br>
    After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the Operating System (OS) and the presence of data.<br>
-   <img src="images/StartUpPage.png" alt="MacOS Start-Up" style="width: 36%;" />
+   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 36%;" />
    <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -56,11 +56,11 @@ This section is for users who are experienced in installing and using Java execu
 
    * `exit` : Exits the app.
 
-6. That's all for the setup! If you require a more detailed set-up guide, you can scroll down to our [detailed quick start guide](#-quick-start-beginner-friendly-detailed-). Otherwise, you can refer to the [Features Section below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
+6. That's all for the setup! If you require a more detailed set-up guide, you can scroll down to our [detailed quick start guide](#quick-start-beginner-friendly-detailed). Otherwise, you can refer to the [Features Section below](#features) for details of each command, alternatively, check out the [summary of commands here!](#command-summary)
 
 <div style="page-break-after: always;"></div>
 
-## 🛠️⚙️ Quick Start (beginner-friendly, detailed) ⚙️🛠️
+## Quick Start (beginner-friendly, detailed)
 
 If you are less experienced in installing and using Java executables, no worries! The set-up is relatively simple 😉, and we will be guiding you with each step.
 
@@ -154,7 +154,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
            ```
            ---
    After completing the above, the application should open with a Graphical User Interface (GUI) similar to the one below should appear in a few seconds. Note that the interface may vary slightly depending on the Operating System (OS) and the presence of data.<br>
-   <img src="images/StartUpPage.png" alt="MacOS Start-Up" style="width: 36%;" />
+   <img src="images/StartUpPage.png" alt="macOS Start-Up" style="width: 36%;" />
    <img src="images/StartUpPageSamples.png" alt="Sample Start-Up" style="width: 45%;" /><br><br>
 5. If you've reached this step, **🎉 CONGRATULATIONS!!! 🎉 MedDict has been installed successfully on your device!**<br>
    What's next is to try out some of MedDict's commands. Type the command in the command box by clicking on the empty bar at the top, typing a command and pressing Enter on your keyboard to execute it. (e.g. typing `help` and pressing Enter will open the help window.) <br>
@@ -253,7 +253,7 @@ Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 * **EMAIL**: Must follow standard email format 'local-part@domain.com', where the local part contains only alphanumeric characters and certain special characters,
   but cannot start or end with these special characters (+_.-). The domain consists of labels separated by periods,
   ending with a label at least two characters long, with each label starting and ending with an alphanumeric character and allowing hyphens in between.
-* * **ADDRESS**: Address of the doctor.
+* **ADDRESS**: Address of the patient.
 * **Note**: Duplicate patients (same name, phone, or email) are not allowed.
 * A _notification message_ will be displayed if MedDict could not create the patient with the given information.
 
@@ -301,7 +301,7 @@ Examples:
    **Output**: <br>
    Unable to add remarks! Check the ID entered!
 
-### (Listing All Persons(#command-summary): `list`
+### [Listing All Persons](#command-summary): `list`
 
 Displays a list of all persons in the address book.
 
@@ -369,7 +369,7 @@ Finds a doctor or patient whose names contain any of the given keywords.
 
 Format: `find KEYWORD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -396,6 +396,9 @@ Adds an appointment to an existing patient with the specified `PATIENT_ID` and d
 
 Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
 
+<div class="alert alert-block alert-warning">
+    <strong>Warning!</strong> Usually, the order of parameters in the command do not matter. However, in this case, do take extra effort to ensure you key in z/PATIENT_ID before z/DOCTOR_ID. Remember, the patient always comes first! 😉
+</div>
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
@@ -403,8 +406,7 @@ Format: `addA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME [r/REMARK]`
   Empty remark will be added to the appointment if remark is not specified.
 * When adding appointment, the appointment detail will be added to the appointments list in both patient and doctor class.
 * Each appointment must be scheduled at a unique time to prevent overlap for both the patient and the doctor.
-* A _notification message_ will be output if there is failure in adding the appointments.
-
+* A _notification message_ will be displayed if MedDict could not add the appointment successfully.
 Examples:
 *  `addA z/0 z/1 x/2024-12-31 15:23 r/Third physiotherapy session` <br>
    **Output**: <br>
@@ -465,6 +467,10 @@ Marks appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE
 
 Format: `marK z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
 
+<div class="alert alert-block alert-warning">
+    <strong>Warning!</strong> Usually, the order of parameters in the command do not matter. However, in this case, do take extra effort to ensure you key in z/PATIENT_ID before z/DOCTOR_ID. Remember, the patient always comes first! 😉
+</div>
+
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
 * A _notification message_ will be displayed if MedDict could not find the appointment to mark.
@@ -482,6 +488,10 @@ Examples:
 Deletes appointment associated with the specified `PATIENT_ID`, `DOCTOR_ID`, `DATE_TIME` from the MedDict database.
 
 Format: `deleteA z/PATIENT_ID z/DOCTOR_ID x/DATE_TIME`
+
+<div class="alert alert-block alert-warning">
+    <strong>Warning!</strong> Usually, the order of parameters in the command do not matter. However, in this case, do take extra effort to ensure you key in z/PATIENT_ID before z/DOCTOR_ID. Remember, the patient always comes first! 😉
+</div>
 
 * **Patient ID**: Must be valid, present in the MedDict database, and an _even integer_ (0, 2, 4, …​).
 * **Doctor ID**: Must be valid, present in the MedDict database, and an _odd integer_ (1, 3, 5, …​).
@@ -530,12 +540,13 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
 
 ## FAQ
 
 **Q**: I am left-clicking to open the file but nothing happens / there is an error message!<br>
-**A**: To open and run MedDict, please refer to the [Quick Start Guide](#-quick-start-)!
+**A**: To open and run MedDict, please refer to the [Quick Start Guide](#quick-start)!
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -543,10 +554,10 @@ _Details coming soon ..._
 **Q**: I want to update my version of MedDict with the newest version, how do I transfer my data? Is that possible?<br>
 **A**: No worries, you can easily transfer your data! Refer to the steps below.
 
-1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#-quick-start-beginner-friendly-detailed-))
+1. Navigate to the folder where you saved the `.jar` file. (Similar to steps in the [Detailed Quick Start Guide](#quick-start-beginner-friendly-detailed))
 2. In that folder, find a folder titled data (e.g. `C:\Users\YourName\Documents\MedDict\data`)
 3. Inside the folder, there should be a file titled addressbook.json, copy or backup this file into a safe location. (e.g. `C:\Users\YourName\Documents\MedDict\data\addressbook.json`)
-4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#-quick-start-) if needed)
+4. Download the new release or version of MedDict (you can refer to the [Quick Start Guide](#quick-start) if needed)
 5. Open / run the application once.
 6. Close the application.
 7. Go to where the new MedDict `.jar` file is located in, and repeat steps 2 to 3.
@@ -570,7 +581,7 @@ _Details coming soon ..._
 | **[Create Patient](#creating-and-adding-a-patient-createp)**    | `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street`                     |
 | **[Delete Person](#deleting-a-person-deletep)**                 | `deleteP z/PERSON_ID` <br> e.g., `deleteP z/2`                                                                                                            |
 | **[Add Notes](#add-a-remark-to-a-patient-addr)**                | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
-| **[List](#listing-all-personscommand-summary-list)**            | `list` <br> Shows all persons in address book                                                                                                             |
+| **[List](#listing-all-persons-list)**                           | `list` <br> Shows all persons in address book                                                                                                             |
 | **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
 | **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                                       |
 | **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                           |
