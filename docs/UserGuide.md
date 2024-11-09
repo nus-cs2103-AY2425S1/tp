@@ -141,7 +141,7 @@ The parameter `NAME` only accepts alphabetic characters and spaces. The app will
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected.
-(e.g. 30-02-24 will return 29-02-24)
+(e.g. 30-02-2024 will return 29-02-2024)
 </div>
 
 **Examples:**
@@ -160,7 +160,7 @@ The parameter `PATIENT_NAME` and `DOCTOR_NAME` are case-sensitive, and must be a
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 The parameter `DATE` only accepts a valid date which is less than 32. For months with less than 31 days, entering a date that is too large but below 32 will be automatically corrected.
-(e.g. 30-02-24 will return 29-02-24)
+(e.g. 30-02-2024 will return 29-02-2024)
 </div>
 
 **Examples:**
@@ -291,7 +291,7 @@ MediContacts data are saved in the hard disk automatically after any command mod
 
 ### Editing the data file
 
-MediContacts data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcomed to update the data directly by editing that data file.
+MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the jar file. Advanced users are welcomed to update the data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, MediContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
