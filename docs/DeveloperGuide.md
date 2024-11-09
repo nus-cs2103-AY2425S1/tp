@@ -624,26 +624,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to [list appointments (UC11)](#list-appt-anchor-point)
-2.  MediContacts shows a list of appointments
-3.  User requests to delete a specific appointment in the list
-4.  MediContacts deletes the appointment
+1. User requests to delete an appointment with the given unique ID.
+2. MediContacts deletes the appointment.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The given unique ID is invalid.
 
-  Use case ends.
+  * 3a1. MediContacts shows an error message.
 
-* 3a. The given index is invalid.
+   Use case ends.
 
-    * 3a1. MediContacts shows an error message.
+*  1b. The given unique ID does not exist (unable to find appointment with unique ID).
 
-      Use case resumes at step 2.
+  * 3b1. MediContacts shows an error message.
 
-
+   Use case ends.
 
 *{More to be added as more features get added}*
 
