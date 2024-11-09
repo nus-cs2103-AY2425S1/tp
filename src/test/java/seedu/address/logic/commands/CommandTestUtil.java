@@ -93,7 +93,10 @@ public class CommandTestUtil {
     public static final String VALID_AMOUNT_INPUT = " " + PREFIX_AMOUNT + VALID_AMOUNT;
     public static final String VALID_OTHER_PARTY_INPUT = " " + PREFIX_OTHER_PARTY + VALID_OTHER_PARTY;
     public static final String VALID_DATE_INPUT = " " + PREFIX_DATE + VALID_DATE;
-    public static final String INVALID_DATE_INPUT = " " + PREFIX_DATE + "22-10-2024"; // incorrect date format
+    public static final String INCORRECT_DATE_FORMAT_INPUT = " " + PREFIX_DATE + "22-9-2024";
+    public static final String INVALID_DATE_INPUT = " " + PREFIX_DATE + "2023-02-29";
+    public static final String WHITE_SPACE = " ";
+
 
 
     /**

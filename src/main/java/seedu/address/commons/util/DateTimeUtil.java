@@ -13,5 +13,4 @@ public class DateTimeUtil {
             .withResolverStyle(ResolverStyle.STRICT);
     public static final DateTimeFormatter DEFAULT_MONTH_FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM")
             .withResolverStyle(ResolverStyle.STRICT);
-
 }
