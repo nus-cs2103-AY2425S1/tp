@@ -254,29 +254,24 @@ Books a Vaccination appointment for the given patient by NRIC at the specified t
 
 For more information on each individual parameter click here
 
-### Listing all patients : `list`
-
-Shows a list of all patients in the address book.
-
-Format: `list`
-
-
 ### Delete Appointment : `deleteappt`
 
 Identifies the specific patient using NRIC and deletes the appointment specified.
 
 Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 
-<box type="info" seamless>
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+<ul>
+<li>
+NRIC provided must be a valid NRIC in the system.
+</li>
+<li>
+All parameters are compulsory
+</li></ul>
+</div>
 
-**Important:** </br>
-
-* NRIC provided must be a valid NRIC currently in the system.
-* All parameters are compulsory.
-
-</box>
-
-Examples:
+Example:
 * `deleteappt T01234567A dt|2024-11-05 16:00`
 
 ### Filter appointments : `filter`
@@ -293,14 +288,12 @@ When start date and end date are specified, it returns all appointments from sta
 When end date and health service is specified, it returns all appointments from today's date to end date which matches the specified health service.
 When end date is specified, it returns all appointments from today's date to end-date.
 
-<box type="tip" seamless>
-
-**Tip:** <br>
-
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To retrieve appointments on a single date e.g. 2024/10/20, the user can input the same start and end date
-`filter sd|2024-10-20 ed|2024-10-10`
 
-</box>
+`filter sd|2024-10-20 ed|2024-10-10`
+</div>
+
 
 Examples:
 *  `filter sd|2012-10-01 ed|2012-11-01 h|blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
@@ -313,15 +306,12 @@ Identifies the specific patient using NRIC and shows the full profile of the pat
 
 Format: `view NRIC`
 
-<box type="info" seamless>
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
+NRIC provided must be a valid NRIC currently in the system.
+</div>
 
-**Important:** </br>
-
-* NRIC provided must be a valid NRIC currently in the system.
-
-</box>
-
-Examples:
+Example:
 * `view T0123456A`
 
 ### Locating patients by name: `find`
