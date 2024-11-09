@@ -351,6 +351,10 @@ We recognize the need for clarity around overlapping lesson scheduling. Options 
 To accommodate users with names that contain special characters, such as commas, we plan to update the application to allow names with these characters. 
 In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
 
+#### 8. **Past Lesson Management**
+To enhance lesson organization, we plan to introduce features that clearly distinguish past lessons. This will include options to automatically hide completed lessons or display them in a different color for easy identification.
+You will also be able to toggle the visibility of past lessons, allowing them to focus on upcoming schedules while still being able to reference completed sessions if needed.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
