@@ -210,8 +210,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | General user                             | View event details per volunteer       | See which events a volunteer participated in                                         |
 | `*`      | HR department employee                   | View volunteer participation history   | Track volunteer engagement with past events                                          |
 | `*`      | General user                             | Toggle view options for events         | Customize how events are displayed in the app                                        |
-| `*`      | General user                             | Dark mode                              | Enhance the app's user experience for those who prefer a darker interface            |
-| `*`      | General user                             | Accessibility features                 | Improve usability for visually impaired users through larger fonts and color changes |
+| `*`      | General user                             | Toggle Dark mode                       | Enhance the app's user experience for those who prefer a darker interface            |
+| `*`      | General user                             | Toggle Accessibility features          | Improve usability for visually impaired users through larger fonts and color changes |
 
 <div style="page-break-after: always;"></div>
 
@@ -230,15 +230,16 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 1. User enters the event's details.
 2. User submits the event's details to the system.
 3. System checks if all required information is present, and that all information is valid.
-4. System creates the new event and confirms creation to the user.
+4. System creates the new event and confirms creation to the user. 
+<br/> Use Case Ends.
 
 **Extensions**:
 - 3a. Information provided is incomplete or invalid.
   - 3ai. System displays error and returns to step 1.
-    Use Case Ends.
+    <br/> Use Case Ends.
 - 4a. Event creation fails.
   - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
-    Use Case Ends.
+    <br/> Use Case Ends.
 
 **Guarantees**:
 - New event is stored in the system if all required information is present and valid.
@@ -256,15 +257,15 @@ For the following use cases, the `Actors` are defined as the Management Staff of
 2. User submits the volunteer's details to the system.
 3. System checks if all required information is present, and that all information is valid.
 4. System creates the new event and confirms creation to the user.
-   Use Case Ends.
+   <br/> Use Case Ends.
 
 **Extensions**:
 - 3a. Information provided is incomplete or invalid.
    - 3ai. System displays error and returns to step 1.
-     Use Case Ends.
+     <br/> Use Case Ends.
 - 4a. Volunteer creation fails.
    - 4ai. System notifies user and the user can edit the event details, returning to step 2 afterward.
-     Use Case Ends.
+     <br/> Use Case Ends.
 
 **Guarantees**:
 - New volunteer is stored in the system if all required information is present and valid.
