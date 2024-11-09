@@ -9,7 +9,7 @@
 WedLinker is your **essential desktop app for managing wedding-related contacts**, designed specifically for professional wedding planners.
 **With a powerful Command Line Interface (CLI)**, WedLinker streamlines contact management through quick, intuitive commands. This means you can accomplish your tasks faster than with traditional GUI apps, giving you more time to focus on what matters most—creating memorable experiences for your clients.
 
-While WedLinker excels with its CLI for speed, it still offers the valuable visual elements of a Graphical User Interface (GUI). The GUI provides an organised and intuitive layout, making it easy to visualise your contacts, weddings, and tasks at a glance.
+While WedLinker excels with its CLI for speed, it still offers the valuable visual elements of a Graphical User Interface (GUI). The GUI provides an organised and intuitive layout, making it easy to manage your contacts, weddings, and tasks at a glance.
 This combination of efficiency and clarity ensures that you can manage your wedding planning responsibilities with ease and precision.
 
 <!-- * Table of Contents -->
@@ -136,7 +136,8 @@ Format: `find PREFIX KEYWORD [KEYWORD]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
 * The prefix that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
-* The search will return partial matches and full matches.
+* The keyword after the prefix must be specified and cannot be empty.
+* The search will return partial matches and full matches for each keyword.
 * Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate prefix. 
 * Only the first prefix entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
@@ -144,7 +145,7 @@ Format: `find PREFIX KEYWORD [KEYWORD]…​`
 * `find p/973` returns all Contacts whose phone number contains 973
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
 ![result for 'find n/alex n/david'](images/findCommandName.png)
-* `find t/friends` returns all Contacts tagged with 'friends' <br>
+* `find t/guest` returns all Contacts tagged with 'guest' <br>
 ![result for `find t/guest](images/findCommandTag.png)
 * `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
 
@@ -238,7 +239,7 @@ Format: `create-tag t/TAGNAME`
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
 * Contacts can share Tags.
 
-### Assign tag to contact : `tag`
+### Assigning tag to contact : `tag`
 
 Assigns a `Tag` to the specified person in WedLinker
 
@@ -250,7 +251,7 @@ Format: `tag INDEX t/TAGNAME [f/]`
 * The `Tag` must exists in WedLinker before it can be assigned.
 * If the `Tag` does not exist, you can use `f/` to force the creation and assignment of the `Tag`.
 
-### Unassign tag to contacts : `untag`
+### Unassigning tag from contacts : `untag`
 
 Untags a `Tag` from a specified person in WedLinker
 
@@ -283,7 +284,7 @@ Format: `create-wedding w/WEDDINGNAME`
 * Weddings are unique in WedLinker, there would not be any duplicated Weddings.
 * Contacts can be assigned to the Wedding using the [assign-wedding](#assign-contact-to-a-wedding--assign-wedding) command.
 
-### Assign contact to a Wedding : `assign-wedding`
+### Assigning contact to a Wedding : `assign-wedding`
 
 Assigns a contact to a `Wedding`.
 
@@ -295,7 +296,7 @@ Format: `assign-wedding INDEX w/WEDDINGNAME`
 * The `Wedding` must exists in WedLinker before it can be assigned.
 * If the `Wedding` does not exist, you can use `f/` to force the creation and assignment of the `Wedding`.
 
-### Edit Wedding details : `edit-wedding`
+### Editing Wedding details : `edit-wedding`
 
 Edits the details of a `Wedding`.
 
@@ -305,7 +306,7 @@ Format: `edit-wedding INDEX [w/WEDDINGNAME] [a/ADDRESS]`
 * The index **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
-### Unassign contacts from a Wedding : `unassign-wedding`
+### Unassigning contacts from a Wedding : `unassign-wedding`
 
 Unassigns a contact from a `Wedding` in WedLinker.
 
@@ -338,7 +339,7 @@ Format: `create-task tk/TASKDESCRIPTION [REMARKS]`
 * Tasks are unique in WedLinker, there would not be any duplicated tasks.
 * Tasks can be assigned to a contact using the [assign-task](#assigning-a-task-to-a-contact--assign-task-) command.
 
-### Delete a Task : `delete-task`
+### Deleting a Task : `delete-task`
 
 Deletes a `Task` from WedLinker
 
@@ -357,7 +358,7 @@ Format: `assign-task PERSONINDEX TASKINDEX`
 * The `TASKINDEX` refers to the index of the task shown under the **Tasks** column
 * The indexes **must be positive integers** 1, 2, 3, …​.
 
-### Un-assigning a Task from a contact : `unassign-task` 
+### Unassigning a Task from a contact : `unassign-task` 
 
 Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON`
 
@@ -366,7 +367,7 @@ Format: `unassign-task PERSONINDEX TASKINDEX_OFPERSON`
 * The `TASKINDEX_OFPERSON` is the index of the task associated with the selected person.
 * The indexes **must be positive integers** 1, 2, 3, …​.
 
-### Mark a task as completed : `mark-task` 
+### Marking a task as completed : `mark-task` 
 
 Format: `mark-task TASKINDEX`
 
@@ -374,7 +375,7 @@ Format: `mark-task TASKINDEX`
 * The index correspond to the index of the task when in the [list-tasks](#listing-all-tasks--list-tasks) view.
 * The index **must be a positive integers** 1, 2, 3, …​.
 
-### Un-mark a task  : `unmark-task` 
+### Unmarking a task  : `unmark-task` 
 
 Format: `unmark-task TASKINDEX`
 
