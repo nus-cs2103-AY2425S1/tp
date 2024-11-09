@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_TAG_LIST_SIZE;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,6 +37,9 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        if (tags.size() > 6) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_TAG_LIST_SIZE);
+        }
         this.tags.addAll(tags);
     }
 
@@ -49,6 +53,9 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        if (tags.size() > 6) {
+            throw new IllegalArgumentException(MESSAGE_INVALID_TAG_LIST_SIZE);
+        }
         this.tags.addAll(tags);
 
     }

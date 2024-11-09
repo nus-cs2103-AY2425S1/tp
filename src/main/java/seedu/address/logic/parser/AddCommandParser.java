@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_TAG_LIST_SIZE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -55,13 +54,12 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage()));
         }
 
-        if (tagSet.size() > 6) {
-            throw new ParseException(MESSAGE_INVALID_TAG_LIST_SIZE);
+        try {
+            Person person = new Person(name, phone, email, address, tagSet);
+            return new AddCommand(person);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
-
-        Person person = new Person(name, phone, email, address, tagSet);
-
-        return new AddCommand(person);
     }
 
     /**
