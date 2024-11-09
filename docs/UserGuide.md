@@ -86,9 +86,15 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-warning">**Caution:**
+*Names:*
 Names must be alphanumeric and all contacts must have unique names.
+Names with symbols like "s/o" and "d/o" will not be allowed. Please write names without these symbols.
+Names with additional white spaces in between words will be taken as it is.
 
 The application will throw an error if you attempt to create two users with the same names
+
+*Phone Numbers:*
+Only Singapore phone numbers are allowed by the application. Meaning, that only phone numbers starting with the number 6, 8 or 9 and is exactly 8 digits in total is allowed.
 </div>
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
@@ -227,7 +233,7 @@ Examples:
 
 Deletes a note from a person in the address book.
 
-Format: `deletnote INDEX i/NOTE_INDEX`
+Format: `deletenote INDEX i/NOTE_INDEX`
 
 - Delete a note from the person at the specified `INDEX` and specified `NOTE_INDEX`.
 - The index (i.e. `INDEX`) refers to the index number shown in the displayed person list.
