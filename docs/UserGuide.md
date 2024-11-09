@@ -741,7 +741,7 @@ _Details coming soon ..._
 | **Add**                      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ` <br> e.g., `add n/James Ho p/94391857 e/jamesho@gmail.com a/123, Clementi Rd, 1234665 t/Diabetic` |
 | **Edit**                     | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> e.g., `edit 1 p/91234567 e/john13432@gmail.com`                                       |
 | **Change Priority**          | `priority INDEX l/PRIORITY_LEVEL` <br> e.g., `priority 1 l/2`                                                                                            |
-| **Delete Priority**          | `priority INDEX l/reset` <br> e.g., `priority 2 l/reset`                                                                                                 |
+| **Delete Priority**          | `priority INDEX l/reset` or `deletelevel INDEX` <br> e.g., `priority 2 l/reset` or `deletelevel 2`                                                       |
 | **Add Emergency Contact**    | `emergency INDEX n/EMERGENCY CONTACT NAME p/EMERGENCY CONTACT NUMBER` <br> e.g., `emergency 1 n/tom tan p/91237171`                                      |
 | **Delete Emergency Contact** | `deleteemergency INDEX` <br> e.g., `deleteemergency 1`                                                                                                   |
 | **List**                     | `list`                                                                                                                                                   |
