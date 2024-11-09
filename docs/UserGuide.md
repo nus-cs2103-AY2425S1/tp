@@ -6,7 +6,7 @@ pageNav: 3
 
 # HiredFiredPro User Guide
 
-HiredFiredPro is a **desktop app for managing interviews, optimized for use via a Command  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HiredFiredPro can get your interview management tasks done faster than traditional GUI apps.
+HiredFiredPro is a desktop app to help hiring managers like you **streamline your hiring process** by simplifying interview management. It is **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HiredFiredPro can get your interview management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 * [About This Document](#about-this-document)
@@ -261,11 +261,11 @@ Finds candidates whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is **case-insensitive**. e.g. `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
+* The search is **case-insensitive**. e.g. `bernice` will match `Bernice`.
+* The order of the keywords does not matter. e.g. `Yu Bernice` will match `Bernice Yu`.
+* Only full words will be matched e.g. `Bern` will not match `Bernice`.
 * Candidates matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+  e.g. `Bernice Yeoh` will return `Alex Yeoh`, `Bernice Yu`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
