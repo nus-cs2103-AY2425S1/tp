@@ -128,7 +128,7 @@ Shows a list of all [Tasks](#task-features) in the WedLinker
 
 Format: `list-tasks`
 
-### Locating contacts by any field, similar to a search function: `find`
+### Locating contacts by field: `find`
 
 Finds all persons based on the specified keywords (case-insensitive) after the prefix representing the field, and displays them as a list with index numbers.
 
@@ -215,7 +215,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from WedLiker.
+Deletes the specified person from WedLinker.
 
 Format: `delete INDEX`
 
