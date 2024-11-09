@@ -83,6 +83,8 @@ public class AssignWeddingCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
+        Set<Wedding> modelWeddings = new HashSet<>();
+
         for (Map.Entry<Wedding, String> entry : weddingsToAdd.entrySet()) {
             Wedding wedding = entry.getKey();
 
@@ -98,8 +100,11 @@ public class AssignWeddingCommand extends Command {
                 }
             }
 
+            // Work with the model's copy of the wedding
+            wedding = model.getWedding(wedding);
+
             // Check if person is already assigned to the wedding
-            if (model.getWedding(wedding).hasPerson(personToEdit)) {
+            if (wedding.hasPerson(personToEdit)) {
                 throw new CommandException(String.format(
                         MESSAGE_WEDDING_ALREADY_ASSIGNED, personToEdit.getName()
                 ));
@@ -108,25 +113,29 @@ public class AssignWeddingCommand extends Command {
             String type = entry.getValue();
             switch (type) {
             case "p1":
-                editedWedding.getPartner1().removeWedding(model.getWedding(wedding));
-                editedWedding.setPartner1(personToEdit);
+                if (editedWedding.hasPartner1()) {
+                    model.getPerson(editedWedding.getPartner1()).removeWedding(wedding);
+                }
+                editedWedding.setPartner1(model.getPerson(personToEdit));
                 break;
             case "p2":
-                editedWedding.getPartner2().removeWedding(model.getWedding(wedding));
-                editedWedding.setPartner2(personToEdit);
+                if (editedWedding.hasPartner1()) {
+                    model.getPerson(editedWedding.getPartner2()).removeWedding(wedding);
+                }
+                editedWedding.setPartner2(model.getPerson(personToEdit));
                 break;
             case "g":
-                personToEdit.removeWedding(model.getWedding(wedding));
-                editedWedding.addToGuestList(personToEdit);
+                editedWedding.addToGuestList(model.getPerson(personToEdit));
                 break;
             default:
                 break;
             }
             model.setWedding(wedding, editedWedding);
+            modelWeddings.add(editedWedding);
         }
 
         Set<Wedding> updatedWeddings = new HashSet<>(personToEdit.getWeddings());
-        updatedWeddings.addAll(weddingsToAdd.keySet());
+        updatedWeddings.addAll(modelWeddings);
 
         Person editedPerson;
         if (personToEdit instanceof Vendor) {
