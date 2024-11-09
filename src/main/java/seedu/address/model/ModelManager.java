@@ -353,21 +353,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Triggers a backup for a specified action, including the target person’s details.
-     *
-     * @param actionDescription A description for the action being backed up.
-     * @param target            The person involved in the action.
-     */
-    protected void triggerBackup(String actionDescription, Person target) {
-        try {
-            int index = backupManager.createIndexedBackup(storage.getAddressBookFilePath(), actionDescription);
-            logger.info("Backup triggered for action: " + actionDescription + " at index " + index);
-        } catch (IOException e) {
-            logger.warning("Backup failed for action: " + actionDescription + " - " + e.getMessage());
-        }
-    }
-
-    /**
      * Restores data from a backup file specified by its index.
      *
      * @param index The index of the backup to restore.
