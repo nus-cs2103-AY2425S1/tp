@@ -217,7 +217,7 @@ Format: `delete company INDEX`
 * Deletes the company at the specified `INDEX`.
 * The index refers to the index number shown in the displayed company list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Deleting a company with jobs attributed to it also causes those jobs to be deleted. Any contacts that matched to those jobs will have their match removed as well.
+* Deleting a company with jobs attributed to it also causes those jobs to be deleted. Any contacts that matched to those jobs will not be deleted, however they will be unmatched with those job.
 
 Examples:
 * `list company` followed by `delete company 2` deletes the 2nd company in the address book.
