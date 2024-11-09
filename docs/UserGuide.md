@@ -6,7 +6,12 @@
 
 # HR Helper User Guide
 
-HR Helper is a **desktop app for managing employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HR Helper can get your employee management tasks done faster than traditional GUI apps.
+HR Helper is a **desktop app for managing employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+HR Helper is mainly targeted at **fledgling companies** (e.g start-ups), who want to have an easy-to-use, intuitive human resource manager.
+With its gentle learning curve and versatility, it can be easily picked up by anyone, and used by any type of company.
+
+Whether it be 5 staff members or 500 employees, HR Helper has the capability to accommodate a wide range of company sizes and is sure to be an asset to your companies' management system! 
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,20 +22,21 @@ HR Helper is a **desktop app for managing employees, optimized for use via a Com
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T16-1/tp/releases/tag/v1.5).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your HR Helper.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar HRHelper.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    <img src = "images/Ui.png" width=500>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   
+2. Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -109,7 +115,7 @@ Examples:
 
 Adds an employee to the HR Helper.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/FAVORITE] [d/DEPARTMENT] [l/LEAVE]`
 
 `Add picture of expected output here`
 
@@ -145,7 +151,7 @@ Example:
 
 Counts number of persons.
 
-Format: `count`(for counting entire list), `count tag/TAG`(for counting persons with given TAG)
+Format: `count`(for counting the filtered list), `count t/TAG`(for counting persons with given TAG)
 
 * If counting the entire list, use `count`.
 * If counting persons with specified TAG, add TAG to end of the command.
@@ -157,11 +163,11 @@ Format: `count`(for counting entire list), `count tag/TAG`(for counting persons 
 
 Examples:
 * `count`
-* `count tag/Colleagues`
+* `count t/Colleagues`
 
 `picture`
 
-**Warning:** When using count tag/TAG, ensure that the tag exists and is spelled accurately; otherwise, the command may return zero results.
+**Warning:** When using count t/TAG, ensure that the TAG exists and is spelled accurately; otherwise, the command may return zero results.
 
 ### Editing a person : `edit`
 
@@ -282,7 +288,7 @@ Format: `favorite INDEX`
 
 Examples:
 * `list` followed by `favorite 2` favorites the 2nd person in the address book.
-* `find Betsy` followed by `favorite 1` deletes the 1st person in the results of the `find` command.
+* `find Betsy` followed by `favorite 1` favorites the 1st person in the results of the `find` command.
 
 `Add picture of expected output here`
 
