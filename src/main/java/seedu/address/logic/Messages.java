@@ -16,12 +16,12 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The client index provided is invalid";
 
     public static final String MESSAGE_INVALID_TRANSACTION_DISPLAYED_INDEX =
             "The transaction index provided is invalid";
     public static final String MESSAGE_PERSONS_FOUND_OVERVIEW =
-            "Listed %d person(s) whose names or companies contain any of the keywords: %s";
+            "Listed %d client(s) whose names or companies contain any of the keywords: %s";
     public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "Listed %1$d transaction(s) of %2$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -34,13 +34,13 @@ public class Messages {
             + "Date format: YYYY-MM-DD";
     public static final String MESSAGE_INVALID_MONTH_FORMAT = "Incorrect month format or invalid month!\n"
             + "Month format: YYYY-MM\n"
-            + "Valid month is between [1, 12]. Valid year is a positive integer.";
+            + "Valid month is between [1, 12]. Valid year is an integer.";
     public static final String MESSAGE_INVALID_DATE_RANGE = "Invalid date range!\n"
             + "Start date must be before or equal to end date";
     public static final String MESSAGE_MUST_BE_TRANSACTION_LIST = "%1$s must only be used in transaction list view!\n"
             + "Use listt command to switch to transaction list view of selected client.";
-    public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in person list view!\n"
-            + "Use list command to switch to person list view.";
+    public static final String MESSAGE_MUST_BE_PERSON_LIST = "%1$s must only be used in client list view!\n"
+            + "Use list command to switch to client list view.";
 
     public static final String MESSAGE_EMPTY_DESCRIPTION = "Description should not be blank!";
     public static final String MESSAGE_EMPTY_AMOUNT = "Amount should not be blank!";
@@ -48,7 +48,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_DATE = "Date should not be blank!";
 
     public static final String MESSAGE_EMPTY_PERSON_LIST =
-            "Current person list is empty!\n" + "%1$s command must only be used on non-empty person list.";
+            "Current client list is empty!\n" + "%1$s command must only be used on non-empty client list.";
 
     public static final String MESSAGE_EMPTY_TRANSACTION_LIST =
             "Invalid command: The current transaction list is empty.";
