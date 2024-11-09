@@ -8,12 +8,12 @@ import seedu.ddd.commons.util.AppUtil;
  * Represents the description of a {@code Event} in the add
  */
 public class Description {
-    public static final String MESSAGE_CONSTRAINTS =
-            "The description of a event cannot be empty.";
+    public static final String MESSAGE_CONSTRAINTS = "The description of a event can take any values that does"
+            + " not contain \"/\", and it should not be blank.";
     /*
      * Checks that there is at least one non-whitespace character
      */
-    public static final String VALIDATION_REGEX = ".*\\S.*";
+    public static final String VALIDATION_REGEX = "^[^\\s/][^/]*$";
 
     public final String description;
 
