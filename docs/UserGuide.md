@@ -120,7 +120,7 @@ _Refer to the [Features](#features) section for details of each command!_
   e.g., `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g., `[t/STUDY_GROUP_TAG]…` can be used as ` ` (i.e. 0 times), `t/1A`, `t/1B t/Control` etc.
+  e.g., `[t/STUDY_GROUP_TAG]…` can be used as ` ` (i.e., 0 times), `t/1A`, `t/1B t/Control` etc.
 
 * Parameters can be in any order.<br>
   e.g., if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
@@ -171,7 +171,7 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [d/DETAIL] [t/ADD_TAG]
 * At least one of the optional fields must be provided.
 * When editing tags:
   * Prefix:`[t/ADD-TAG]`
-    - the added tags will be **appended** to the list of existing tags i.e. adding of tags does not overwrite existing tags.
+    - the added tags will be **appended** to the list of existing tags (i.e., adding of tags does not overwrite existing tags).
     - if the tag name you entered to add **already exists**, the edit will be successful, but you will get the warning:
       `You tried adding an already existing study group tag.`
   * Prefix: `[-t/DELETE-TAG]`
