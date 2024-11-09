@@ -416,7 +416,7 @@ Delete a priority level to a patient in the system, resetting it to the default 
 
 Examples:
 * `deletelevel 1` deletes priority level of the 1st-indexed patient in the patient list.
-* `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3S.
+* `priority 1 l/reset` resets the priority level of the 1st-indexed patient in the patient list to level 3.
 
 [⬆️ Back to Table of Contents](#table-of-contents)
 
