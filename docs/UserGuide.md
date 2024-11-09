@@ -119,8 +119,8 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 | [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                        | `sort name`                                                      |
 | [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                       | -                                                                |
 | [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                   | -                                                                |
-| [**import**](#importing-data-import)                                        | Import all client's details             | `import`                                                                                                                                                      | -                                                                |
-| [**export**](#exporting-data-export)                                        | Export all client's details             | `export`                                                                                                                                                      | -                                                                |
+| [**import**](#importing-data-import)                                        | Import data from an external file       | `import`                                                                                                                                                      | -                                                                |
+| [**export**](#exporting-data-export)                                        | Export all TrueRental's data            | `export`                                                                                                                                                      | -                                                                |
 | [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                       | -                                                                |
 | [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                        | -                                                                |
 
@@ -480,7 +480,7 @@ Format: `find [k/KEYWORD]... [n/NAME]... [p/PHONE_NUMBER]... [e/EMAIL]... [t/TAG
 
 <box type="info" light>
 
-Example inputs:
+**Example inputs**:
 1. `find n/Jason`
 2. `find k/912`
 3. `find n/Jason Lee p/91231231`
@@ -489,7 +489,7 @@ Example inputs:
 
 <box type="success" light>
 
-Example outputs:
+**Example outputs**:
 1. `3 persons listed!`. It will return every client with the name called `jason`.
 2. `3 persons listed!`. It will return every client with the keyword `912` within all its attributes.
 3. `3 persons listed!`. It will return every client with the name `Jason Lee` and phone number `91231231`.
@@ -508,23 +508,25 @@ Example outputs:
 
 Deletes the specified client from TrueRental.
 
-<!--TODO: Nathan-->
-
 Format: `cdelete CLIENT_INDEX`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
-
-</box>
-
+**Note**: 
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
 * Deletes the client at the specified `CLIENT_INDEX` and all related rental information.
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
+</box>
+
+<box type="success" light>
+
+**Examples**:
 * `list` followed by `cdelete 2` deletes the 2nd client in the address book.
 * `find Betsy` followed by `cdelete 1` deletes the 1st client in the results of the `find` command.
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -536,25 +538,26 @@ Examples:
 
 Deletes the specified rental information from the specified client
 
-<!--TODO: Nathan-->
-
-
 Format: `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`
 
 <box type="info" seamless>
 
-**Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
-
-</box>
-
+**Note**: 
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
 * Deletes the rental information at the specified `RENTAL_INDEX` from the client at the specified `CLIENT_INDEX`.
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list.
 * `RENTAL_INDEX` refers to the index number shown in the displayed rental information list when the `rview` command is run. (i.e. `rview CLIENT_INDEX`)
 * `CLIENT_INDEX` and `RENTAL_INDEX` **must be positive integers** 1, 2, 3, …​
 
-Examples:
+</box>
+
+<box type="success" light>
+
+**Examples**:
 * `list` followed by `rdelete c/2 r/1` deletes the 1st rental information from the 2nd client in the address book.
 * `find Betsy` followed by `rdelete c/1 r/2` deletes the 2nd rental information from the 1st client in the results of the `find` command.
+
+</box>
 
 ### Sorting all entries : `sort`
 
@@ -636,7 +639,7 @@ Please set up the following commands before proceeding with the example inputs a
 6. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is shown in the command box.
 7. Expected: `cadd n/John Doe p/99887766 e/johndoe@example.com` is still shown in the command box, because there
    are no more previous commands.
-8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in
+8. Expected: `radd 1 a/BLK 1 Bishan s/01/01/2024 e/31/12/2024 dd/15 m/2700 d/8100 cl/Steven;David` is shown in the command box.
 9. Expected: `cadd n/Amy Tan p/99887766` is shown in the command box.
 10. Expected: `rview 1` is shown in the command box.
 11. Expected: `list` is shown in the command box.
@@ -719,7 +722,24 @@ Entering the `↹ Tab key` will help to fill or append to the command input with
 
 Imports and overwrite all existing data from a `.json` file.
 
-<!--TODO: Nathan-->
+Format: `import`
+
+<box type="important" seamless>
+
+**Constraints**:
+* Only `.json` files can be imported.
+* The chosen file must have the correct format.
+
+</box>
+
+<box type="info" seamless>
+
+**Note**:
+* Importing data will delete all current data in the address book. It is recommended to back up the current data via the `export` command.
+* Confirmation required. Type `y` for **yes** and `n` for **no**.
+* A new window will be opened that prompts for a file. ![import file window](images/importFileWindow.png)
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
@@ -731,13 +751,21 @@ Imports and overwrite all existing data from a `.json` file.
 
 Exports all data within TrueRental into a `.json` file.
 
+Format: `export`
+
 <box type="info" seamless>
 
 **Note**: Confirmation required. Type `y` for **yes** and `n` for **no**.
 
 </box>
 
-<!--TODO: Nathan-->
+<box type="info" seamless>
+
+**Note**:
+* Address book data can only be exported as `.json` files.
+* A new window will be opened that prompts for a file. ![export file window](images/exportFileWindow.png)
+
+</box>
 
 <div style="text-align: right;">
   <a href="#command-summary">
