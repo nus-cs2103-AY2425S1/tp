@@ -19,7 +19,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Code quality
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
-
 ### Ng Kay Hian
 
 <img src="images/k-hian.png" width="200px">
