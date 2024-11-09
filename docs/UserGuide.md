@@ -441,6 +441,7 @@ Format: `sort [n/ASC or DESC] [p/ASC or DESC] [a/ASC or DESC] [gl/ASC or DESC] [
 * The order of prefixes DOES matter. If there are ties in the first field, later fields will be used to tie-break.
 * Only name, phone number, address, grade level and group are valid fields to sort by.
 * The sorting order must be `ASC` or  `DESC`, and is case-insensitive.
+* At least one of the optional fields must be provided.
 
 To clear the sorting conditions, use the command `sort clear`.
 
