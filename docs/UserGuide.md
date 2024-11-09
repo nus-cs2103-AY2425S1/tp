@@ -17,69 +17,67 @@ In this comprehensive user guide, we will take you to experience a full journey 
 
 ## Table of Content
 
-[1. Introduction](#introduction)
-- [1.1 What is TrackMate-NUS](#what-is-trackmate)
-- [1.2 User Proficiency and Expectations](#user-proficiency-and-expectations)
-- [1.3 Why This Guide Matters](#why-this-guide-matters)
+[1. Introduction](#1-introduction)
+- [1.1 What is TrackMate-NUS](#1-1-what-is-trackmate)
+- [1.2 User Proficiency and Expectations](#1-2-user-proficiency-and-expectations)
+- [1.3 Why This Guide Matters](#1-3-why-this-guide-matters)
 
-[2. How to use this User Guide](#how-to-use-this-user-guide)
-- [2.1 Navigating the Document](#navigating-the-document)
-- [2.2 Sections](#sections)
+[2. How to use this User Guide](#2-how-to-use-this-user-guide)
+- [2.1 Navigating the Document](#2-1-navigating-the-document)
+- [2.2 Sections](#2-2-sections)
 
-[3. Getting Started](#getting-started)
-- [3.1 Installation](#installation)
-- [3.2 Graphical User Interface Layout](#graphical-user-interface-layout)
-  - [3.2.1 User Interface Overview](#user-interface-overview)
-  - [3.2.2 Additional UI Components](#additional-ui-components)
-- [3.3 How to use TrackMate commands](#how-to-use-track-mate-nus-commands)
-  - [3.3.1 Parameter Prefixes](#parameter-prefixes)
-  - [3.3.2 Parameters](#parameters)
-  - [3.3.3 Command Format](#command-format)
+[3. Getting Started](#3-getting-started)
+- [3.1 Installation](#3-1-installation)
+- [3.2 Graphical User Interface Layout](#3-2-graphical-user-interface-layout)
+  - [3.2.1 User Interface Overview](#3-2-1-user-interface-overview)
+  - [3.2.2 Additional UI Components](#3-2-2-additional-ui-components)
+- [3.3 How to use TrackMate commands](#3-3-how-to-use-trackmate-commands)
+  - [3.3.1 Parameter Prefixes](#3-3-1-parameter-prefixes)
+  - [3.3.2 Parameters](#3-3-2-parameters)
+  - [3.3.3 Command Format](#3-3-3-command-format)
 
-[4. Commands](#commands)
-- [4.1 Student Data Related Commands](#student-data-commands)
-  - [4.1.1 Adding a student: `add`](#adding-a-student-add)
-  - [4.1.2 Editing a student: `edit`](#editing-a-student-edit)
-  - [4.1.3 Deleting a student: `deleteStu`](#deleting-a-student-deleteStu)
-  - [4.1.4 Finding students: `find`](#finding-students)
-  - [4.1.5 Listing students: `list`](#listing-students-list)
-- [4.2 Tutorial Data Related Commands](#tutorial-data-commands)
-  - [4.2.1 Adding a tutorial: `addTut`](#adding-a-tutorial-addTut)
-  - [4.2.2 Deleting a tutorial: `deleteTut`](#deleting-a-tutorial-deleteTut)
-  - [4.2.3 Listing tutorials: `listTut`](#listing-tutorials-listTut)
-- [4.3 Assignment Data Related Commands](#assignment-data-commands)
-  - [4.3.1 Adding an assignment: `addAsg`](#adding-an-assigment-addAsg)
-  - [4.3.2 Deleting an assignment: `deleteTut`](#deleting-an-assignment-deleteAsg)
-  - [4.3.3 Listing assignments: `listAsg`](#listing-assignments-listAsg)
-  - [4.3.4 Marking an assignment: `markAsg`](#marking-an-assignment-markAsg)
-  - [4.3.5 Unmarking an assignment: `unmarkAsg`](#unmarking-an-assignment-unmarkAsg)
-  - [4.3.6 Checking an assignment: `checkAsg`](#checking-an-assignment-checkAsg)
-- [4.4 Attendance Data Related Commands](#attendance-data-commands)
-  - [4.4.1 Marking an attendance: `addAtt`](#adding-an-assigment-addAsg)
-  - [4.4.2 Unmarking an attendance: `deleteAtt`](#deleting-an-assignment-deleteAsg)
-- [4.5 General Commands](#general-commands)
-  - [4.5.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
-  - [4.5.2 Clearing all data: `clear`](#clearing-all-data)
-  - [4.5.3 Exiting the program: `exit`](#exiting-the-program-exit)
-  - [4.5.4 Viewing help: `help`](#viewing-help-help)
-- [4.6 Saving the Data](#saving-the-data)
-- [4.7 Editing the Data File](#editing-the-data-file)
+[4. Commands](#4-commands)
+- [4.1 Student Data Related Commands](#4-1-student-data-commands)
+  - [4.1.1 Adding a student: `addStu`](#4-1-1-adding-a-student-addstu)
+  - [4.1.2 Editing a student: `edit`](#4-1-2-edit-existing-student-detail-edit)
+  - [4.1.3 Deleting a student: `deleteStu`](#4-1-3-delete-a-student-deletestu)
+  - [4.1.4 Finding students: `find`](#4-1-4-find-students-find)
+  - [4.1.5 Listing students: `list`](#4-1-5-listing-students-list)
+- [4.2 Tutorial Data Related Commands](#4-2-tutorial-data-related-commands)
+  - [4.2.1 Adding a tutorial: `addTut`](#4-2-1-adding-a-tutorial-addtut)
+  - [4.2.2 Deleting a tutorial: `deleteTut`](#4-2-2-delete-a-tutorial-deletetut)
+  - [4.2.3 Listing tutorials: `listTut`](#4-2-3-list-tutorials-listtut)
+- [4.3 Assignment Data Related Commands](#4-3-assignment-data-related-commands)
+  - [4.3.1 Adding an assignment: `addAsg`](#4-3-1-adding-an-assignment-addasg)
+  - [4.3.2 Deleting an assignment: `deleteAsg`](#4-3-2-delete-an-assignment-deleteasg)
+  - [4.3.3 Listing assignments: `listAsg`](#4-3-3-list-assignments-listasg)
+  - [4.3.4 Marking an assignment: `markAsg`](#4-3-4-mark-an-assignment-markasg)
+  - [4.3.5 Unmarking an assignment: `unmarkAsg`](#4-3-5-unmark-an-assignment-unmarkasg)
+  - [4.3.6 Checking an assignment: `checkAsg`](#4-3-6-check-an-assignment-checkasg)
+- [4.4 Attendance Data Related Commands](#4-4-attendance-data-related-commands)
+  - [4.4.1 Marking an attendance: `markAtt`](#4-4-1-marking-an-attendance-markatt)
+  - [4.4.2 Unmarking an attendance: `unmarkAtt`](#4-4-2-unmarking-an-attendance-deleteatt)
+- [4.5 General Commands](#4-5-general-commands)
+  - [4.5.1 Viewing a Student on the Student Card](#4-5-1-viewing-a-student-on-the-student-card)
+  - [4.5.2 Clearing all data: `clear`](#4-5-2-clearing-all-data-clear)
+  - [4.5.3 Exiting the program: `exit`](#4-5-3-exiting-the-program-exit)
+  - [4.5.4 Viewing help: `help`](#4-5-4-viewing-help-help)
+- [4.6 Saving the Data](#4-6-saving-the-data)
+- [4.7 Editing the Data File](#4-7-editing-the-data-file)
 
-[5. FAQ](#faq)
+[5. FAQ](#5-faq)
 
-[6. Known issues](#known-issues)
+[6. Known issues](#6-known-issues)
 
-[7. Glossary](#glossary)
+[7. Glossary](#7-glossary)
 
-[8. Command summary](#command-summary)
+[8. Command summary](#8-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 1. Introduction
-<a id="introduction"></a>
 
 ### 1.1 What is TrackMate
-<a id="what-is-trackmate"></a>
 
 TrackMate is a desktop application specifically designed for teaching assistants (TAs) who work at the School of
 Computing (SoC) of National University of Singapore (NUS). By providing an efficient solution to manage student data,
@@ -141,16 +139,16 @@ information on how to interpret icons, formatting, and instructions provided thr
 
 Written below is a detailed overview of the main sections in this User Guide and what you can expect from each section.
 
-- [Installation](#installation): New to TrackMate? Visit this section for a straightforward, step-by-step guide on installing the application.
+- [Installation](#3-1-installation): New to TrackMate? Visit this section for a straightforward, step-by-step guide on installing the application.
 
 
-- [Commands](#commands): Dive into the details of TrackMate's commands, with thorough explanations and practical examples to help you master command usage.
+- [Commands](#4-commands): Dive into the details of TrackMate's commands, with thorough explanations and practical examples to help you master command usage.
 
 
-- [Command Summary](#command-summary): Designed for experienced users, this section provides a quick-reference list of all supported commands.
+- [Command Summary](#8-command-summary): Designed for experienced users, this section provides a quick-reference list of all supported commands.
 
 
-- [FAQ](#faq): If you have questions or encounter issues, this section covers frequently asked questions to help you resolve common concerns.
+- [FAQ](#5-faq): If you have questions or encounter issues, this section covers frequently asked questions to help you resolve common concerns.
 
 
 <box type="info" seamless>
@@ -203,8 +201,8 @@ First-time users are strongly encouraged to read the Getting Started section bef
 * `clear` : Deletes all contacts.
 * `exit` : Exits the app.
 
-10. Refer to the [Command Section](#commands) below for details of
-    all commands supported by TrackMate. Alternatively, refer to the [Command Summary](#command-summary) for a quick summary.
+10. Refer to the [Command Section](#4-commands) below for details of
+    all commands supported by TrackMate. Alternatively, refer to the [Command Summary](#8-command-summary) for a quick summary.
 
 ### 3.2 Graphical User Interface Layout:
 <a id="graphical-user-interface-layout"></a>
@@ -328,7 +326,7 @@ To understand how a full command is interpreted, we will utilise the following e
 <a id="commands"></a>
 
 This section provides comprehensive guidance on how to use each command, detailing their functionalities and
-usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters)
+usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#3-3-2-parameters)
 section for detailed information
 
 ### 4.1 Student Data Commands:
@@ -388,7 +386,7 @@ Command Details & Constraints:
 * The `INDEX` must not exceed the number of student in the displayed list.
 * No prefix is required for `deleteStu` command.
 * The command should only consist of exactly two words: `deleteStu` and a valid `INDEX`
-* All parameters are required to adhere to their [respective constraints](#332-parameters).
+* All parameters are required to adhere to their [respective constraints](#3-3-2-parameters).
 
 Example:
 1. `deleteStu 1` deletes the first person in the list displayed.
@@ -430,7 +428,7 @@ Command Details & Constraints:
 * The `TUTORIAL_ID` should be alphanumeric with the following format `TXXXX` where `T` signifies that it is a tutorial code
 and `X` must be an integer between 0 and 9.
 * There cannot be tutorial classes of the same `TUTORIAL_ID` in the list even when their `TUTORIAL_NAME` is different.
-* All parameters are required to adhere to their [respective constraints](#332-parameters).
+* All parameters are required to adhere to their [respective constraints](#3-3-2-parameters).
 
 Example:
 1. `addTut tn/CS2103T id/T1001` adds a tutorial with Tutorial Name `CS2103T` and Tutorial ID `T1001`, provided that there is
@@ -446,7 +444,7 @@ Command Details & Constraints:
 * Deletes the tutorial based on the `TUTORIAL_ID`
   * The `TUTORIAL_ID` must exist in the tutorial list.
 * Prefix is required for `deleteTut` command.
-* All parameters are required to adhere to their [respective constraints](#332-parameters).
+* All parameters are required to adhere to their [respective constraints](#3-3-2-parameters).
 
 Example:
 1. `deleteTut c/T1001` deletes the tutorial with Tutorial ID `T1001`, provided the tutorial exists.
@@ -485,7 +483,7 @@ Example:
 2. `addAsg n/CS2101 CA1 d/2024-09-23 1200`
 
 
-#### 4.3.2 Delete an assigment: `deleteAsg`
+#### 4.3.2 Delete an assignment: `deleteAsg`
 <a id="deleting-an-assignment-deleteAsg"></a>
 
 > Delete a specified assignment from the TrackMate application.
@@ -496,7 +494,7 @@ Command Details & Constraints:
 * Deletes the assignment based on the `ASSIGNMENT_TITLE`
   * The `ASSIGNMENT_TITLE` must exist in the assignment list.
 * Prefix is required for `deleteAsg` command.
-* All parameters are required to adhere to their [respective constraints](#332-parameters).
+* All parameters are required to adhere to their [respective constraints](#3-3-2-parameters).
 
 Example:
 1. `deleteAsg n/CS2101 CA3` deletes the assignment with Assignment Name `Assignment CS2101 CA3`, provided the assignment exists.
