@@ -229,8 +229,7 @@ Format: `find-event EVENT_INDEX`
 * Event must exist in PlanPal.
 
 Examples:
-* `find-event Sumo Bot Festival`
-* `find-event RC Horror Night`
+* `find-event 1`
 
 #### Adding a Contact to an Event : `event-add` or `ea`
 Adds a contact to an event with a specified role.
