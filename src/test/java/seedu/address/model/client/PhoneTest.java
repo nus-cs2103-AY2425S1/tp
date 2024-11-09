@@ -41,6 +41,7 @@ public class PhoneTest {
     @Test
     public void equals() {
         Phone phone = new Phone("999");
+        Phone emptyPhone = new Phone();
 
         // same values -> returns true
         assertTrue(phone.equals(new Phone("999")));
@@ -53,6 +54,9 @@ public class PhoneTest {
 
         // different types -> returns false
         assertFalse(phone.equals(5.0f));
+
+        // value check with no value
+        assertFalse(phone.equals(emptyPhone));
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));
