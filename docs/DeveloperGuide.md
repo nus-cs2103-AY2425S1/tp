@@ -398,15 +398,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to edit details of a specific person.
 
-2. PROperty displays the current details of the person.
+2. User inputs desired edits.
 
-3. User updates the desired fields.
+3. PROperty validates the new details.
 
-4. PROperty validates the new details.
+4. PROperty saves the updated details.
 
-5. PROperty saves the updated details.
-
-6. PROperty confirms that the person's details have been updated.
+5. PROperty confirms that the person's details have been updated.
    
    Use case ends.
 
@@ -418,13 +416,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
-- 4a. The new details are invalid.
+- 3a. The new details are invalid.
   
-  - 4a1. PROperty shows an error message indicating the invalid fields.
+  - 3a1. PROperty shows an error message indicating the invalid fields.
   
-  - 4a2. PROperty prompts the user to re-enter the details.
+  - 3a2. PROperty prompts the user to re-enter the details.
     
-    Use case resumes at step 3.
+    Use case resumes at step 2.
 
 ---
 
@@ -434,13 +432,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User selects a person to add a remark.
 
-2. PROperty displays an input field for the remark.
+2. User enters the remark.
 
-3. User enters the remark.
+3. PROperty saves the remark to the person's details.
 
-4. PROperty saves the remark to the person's details.
-
-5. PROperty confirms that the remark has been added.
+4. PROperty confirms that the remark has been added.
    
    Use case ends.
 
@@ -452,10 +448,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
-- 3a. The remark is empty.
+- 2a. The remark is empty.
   
-  - 3a1. PROperty removes the remark from the specified person.
+  - 2a1. PROperty removes the remark from the specified person instead.
 
+---
+
+**Use case: Remove remarks from a person**
+
+**MSS**
+
+1. User selects a person to remove remark.
+
+2. User enters empty remark.
+
+3. PROperty removes the existing remark (if any) from the person's details.
+
+4. PROperty confirms that the remark has been removed.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. The specified person does not exist.
+
+    - 1a1. PROperty shows an error message.
+
+      Use case ends.
 
 ---
 
