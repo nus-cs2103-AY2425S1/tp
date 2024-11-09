@@ -593,6 +593,7 @@ Order of contact details can be reset to default by calling `sort reset`.
 * The sort order persists between commands.
 * The sort order will reset when `sort reset` command is given.
 * The sorting is **case-insensitive**: upper and lower case are treated as the same values.
+* The sorting will be done based on the **lexicographical order** of the field, regardless of text or numbers.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
