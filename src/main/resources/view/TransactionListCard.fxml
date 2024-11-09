@@ -2,14 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" minWidth="200" prefWidth="300">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -20,7 +18,7 @@
         <padding>
             <Insets top="5" right="5" bottom="5" left="15"/>
         </padding>
-        <VBox alignment="CENTER" spacing="5" minWidth="70" maxWidth="50" GridPane.columnIndex="0">
+        <VBox alignment="CENTER" spacing="5" minWidth="70" maxWidth="70" GridPane.columnIndex="0">
             <Label fx:id="dayMonth" styleClass="transaction-month"/>
             <Label fx:id="year" styleClass="transaction-year"/>
         </VBox>
@@ -30,7 +28,7 @@
                 <Label fx:id="name" styleClass="transaction-name" wrapText="true"/>
                 <ImageView fx:id="done"/>
             </HBox>
-            <FlowPane fx:id="categories"/>
+            <TilePane fx:id="categories"/>
             <Label fx:id="description" styleClass="transaction-description" wrapText="true"/>
         </VBox>
 

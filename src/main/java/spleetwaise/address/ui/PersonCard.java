@@ -3,10 +3,11 @@ package spleetwaise.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.TilePane;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.commons.ui.UiPart;
 
@@ -41,7 +42,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane tags;
+    private TilePane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -57,6 +58,12 @@ public class PersonCard extends UiPart<Region> {
         remark.setText(person.getRemark().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label newLabel = new Label(tag.tagName);
+                    newLabel.setWrapText(true);
+                    newLabel.setAlignment(Pos.CENTER);
+                    newLabel.setMaxWidth(150);
+                    tags.getChildren().add(newLabel);
+                });
     }
 }
