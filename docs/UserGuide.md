@@ -307,6 +307,12 @@ del-client INDEX
   Deletes the 3rd client in MATER.
 
 
+<box type="info" seamless>
+
+**Note:** Checked-in clients can be deleted via `del-client`, to facilitate quicker removal of clients who are no longer using the workshop's services.
+
+</box>
+
 ---
 
 <h3 style="color: #1877F2;">Adding a Car to a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-car</span></h3>
