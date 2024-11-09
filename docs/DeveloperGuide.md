@@ -459,9 +459,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an **empty folder** in which the app is allowed to create files.
 
-   2. Open a command window. Run the `java -version` command to ensure you are using Java 17
+   2. Open a command window. Run the `java -version` command to ensure you are using Java 17.
 
    3. Launch the jar file using the `java -jar` command. The window size may not be optimum.
 
