@@ -272,7 +272,7 @@ In Prudy, arguments ensure that the command functions as expected. Without corre
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Note on February Dates:**  
+**Note:**  
 Prudy allows flexibility in date inputs for February due to the variable number of days (28 or 29) depending on the year. If an invalid date between the maximum day of February and `02/31` is entered, Prudy will automatically adjust it to the maximum valid date for February in that year.
 
 **Examples:**
@@ -280,7 +280,7 @@ Prudy allows flexibility in date inputs for February due to the variable number 
 * `02/30/2024` and `02/31/2024` will be automatically converted to `02/29/2024`.
 </div>
 
-<div type="info" seamless>
+<box type="info" seamless>
 
 **Info:**
 In the following [Command](#5-commands-overview) section below, arguments and flags enclosed in square brackets <code>[]</code> are optional, while those suffixed with <code>…</code> can be used any number of times. For example, in the command <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​</code>, the <code>[t/TAG]</code> part is optional and can be omitted if not needed. Furthermore, you can input multiple <code>[t/TAG]</code> in the above command.
@@ -319,13 +319,19 @@ Shows a message explaining how to **access the help page**.
 ![help message](images/helpMessage.png)
 
 **Format:** 
-```help```
+
+```
+help
+```
 
 #### 5.1.2 Clearing All Entries: `clear`
 **Clears all entries** from Prudy, resetting the data.
 
 **Format:** 
-```clear```
+
+```
+clear
+```
 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FADBD8; margin-bottom: 16px;">
 
@@ -337,7 +343,10 @@ This action is destructive and irreversible.
 **Exits** the program.
 
 **Format:** 
-```exit```
+
+```
+exit
+```
 
 #### 5.1.4 Saving the Data
 Prudy **automatically saves data** to the hard disk after every command that modifies the data. Manual saving is **not required**.
@@ -388,12 +397,12 @@ A client can have any number of tags (including 0).
 
 **Examples:**
 * `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/owesMoney`
+* `add-client n/Betsy Crowe t/friend e/betsycrowe@example.com a/Yishun Street 22, Block 245, #04-02 p/1234567 t/owesMoney`
   
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * `NAME` currently does not accept special characters such as `/`, `@`, and `,`. This functionality will be added in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
 </div>
 
@@ -406,7 +415,11 @@ New client added: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS; Tags: TAG
 #### 5.2.2 Listing All Clients: `list-clients`
 Shows a **list of all clients** in Prudy.
 
-**Format:** `list-clients`
+**Format:**
+
+```
+list-clients
+```
 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
 
@@ -419,7 +432,10 @@ This command is useful for finding the `INDEX` of a specific client. `INDEX` is 
 **Filters clients** based on the specified parameters.
 
 **Format:** 
-```find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…```
+
+```
+find-client [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]…
+```
 
 | **Parameter Name** | **Description**               | **Requirements**                                | **Required** |
 |--------------------|-------------------------------|-------------------------------------------------|--------------|
@@ -432,7 +448,7 @@ This command is useful for finding the `INDEX` of a specific client. `INDEX` is 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * At least one of the optional fields must be provided.
 * The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
@@ -463,13 +479,16 @@ This command modifies the main client list display as well.<br>
 **Edits an existing client** in Prudy. **Does not edit his/her policies**. See [editing a policy](#5-3-3-editing-a-policy-edit-policy) for more info on the command.
 
 **Format:** 
-```edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​```
+
+```
+edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​
+```
 
 | **Parameter Name** | **Description**                   | **Requirements**                              | **Required** |
 |--------------------|-----------------------------------|-----------------------------------------------|--------------|
 | INDEX              | The index of the client in the displayed client list. | Positive integer, must correspond to a valid client index | yes          |
 | n/NAME             | Client’s full name                | Any alphanumerics and spaces                  | no           |
-| p/PHONE            | Client’s phone number             | 8-digit number starting with 8 or 9           | no           |
+| p/PHONE            | Client’s phone number             |3-15 digit number inclusive of country code without preceding '+         | no           |
 | e/EMAIL            | Client’s email address            | Standard format (e.g., user@example.com)      | no           |
 | a/ADDRESS          | Client’s address                  | Any alphanumerics and symbols                 | no           |
 | t/TAG              | Custom descriptor or label        | Any alphanumerics                             | no           |
@@ -478,7 +497,7 @@ This command modifies the main client list display as well.<br>
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:** 
+**Note:** 
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, **the existing tags of the client will be removed** i.e. adding of tags is not cumulative.
@@ -498,7 +517,10 @@ Edited client: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS, Tags: TAG
 **Deletes a specified client** at the specified `INDEX`.
 
 **Format:** 
-```delete-client INDEX```
+
+```
+delete-client INDEX
+```
 
 | **Parameter Name** | **Description**                               | **Requirements**                              | **Required** |
 |--------------------|-----------------------------------------------|-----------------------------------------------|--------------|
@@ -540,7 +562,7 @@ add-policy INDEX pt/POLICY_TYPE [pa/PREMIUM_AMOUNT] [ca/COVERAGE_AMOUNT] [ed/EXP
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * A client cannot have two or more policies with the same type.
 * This command will create a policy with default values for unspecified parameters. For example, if `PREMIUM_AMOUNT` is not specified, it will create a policy with default premiums (The default premium differs for different type of policies).
 </div>
@@ -574,7 +596,7 @@ delete-policy INDEX pt/POLICY_TYPE…
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * This command will not work if the specified policy to be deleted does not exist in Prudy.
 * `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
 </div>
@@ -623,7 +645,7 @@ Policies Left:
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
 * At least one of the optional parameters must be indicated.
 * Only the specified parameters will be edited. The other parameters not specified will not be changed.
@@ -658,7 +680,7 @@ list-policies INDEX
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * No filtering or sorting is applied by this command.
 * The command shows all policies regardless of type or expiry date.
 </div>
@@ -686,7 +708,7 @@ list-expiring-policies [DAYS]
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * Non-negative `DAYS` arguments will result in an error.
 * Preceding zeros in the `DAYS` argument will be ignored. For example, `list-expiring-policies 0023` and `list-expiring-policies 023` will both be treated as `list-expiring-policies 23`.
 </div>
@@ -735,7 +757,7 @@ add-claim INDEX pt/POLICY_TYPE s/CLAIM_STATUS d/CLAIM_DESCRIPTION
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * This command will not allow adding a claim if the client has no policy of the specified type.
 * This command will not allow adding a claim if a similar claim already exists. This is to prevent accidental adding of duplicate claims. 
 * Two claims are consider similar if they have the same `CLAIM_STATUS` and `CLAIM_DESCRIPTION`.
@@ -775,7 +797,7 @@ delete-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
 * `CLAIM_INDEX` is the position of the claim in the policy's claim list.
 * If the specified client, policy type, or claim does not exist, an error message will be shown.
@@ -819,7 +841,7 @@ edit-claim INDEX pt/POLICY_TYPE c/CLAIM_INDEX [s/CLAIM_STATUS] [d/CLAIM_DESCRIPT
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * `POLICY_TYPE` is case-insensitive and can be either `life`, `health`, or `education`.
 * `CLAIM_INDEX` is the position of the claim in the policy's claim list.
 * `CLAIM_STATUS` here is the updated claim status of the claim to be edited (e.g., `approved`, `pending`, or `rejected`).
@@ -863,7 +885,7 @@ list-claims INDEX pt/POLICY_TYPE
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Notes:**
+**Note:**
 * The claims are listed in the order they were added.
 * No filtering or sorting is applied by this command; it shows all existing claims.
 * The `list-claims` command does not alter the main client list display. Instead, it only shows the claim details in the message output box at the top. This behavior is different from `list-clients`, which modifies the main display.
