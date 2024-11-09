@@ -373,14 +373,14 @@ public class ExportConsultCommandTest {
         String filenameWithPath = "parent.child.file";
         ExportConsultCommand exportCommand = new ExportConsultCommand(filenameWithPath, false, dataDir);
 
-        Assertions.assertThrows(CommandException.class, () -> exportCommand.execute(model),
+        assertThrows(CommandException.class, () -> exportCommand.execute(model),
                 "Filename cannot contain path components");
 
         // Also test with explicit path separator
         String explicitPath = "parent" + File.separator + "child" + File.separator + "file";
         ExportConsultCommand exportCommand2 = new ExportConsultCommand(explicitPath, false, dataDir);
 
-        Assertions.assertThrows(CommandException.class, () -> exportCommand2.execute(model),
+        assertThrows(CommandException.class, () -> exportCommand2.execute(model),
                 "Filename cannot contain path components");
     }
 }
