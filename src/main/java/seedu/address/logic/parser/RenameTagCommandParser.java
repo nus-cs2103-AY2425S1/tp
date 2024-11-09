@@ -49,7 +49,10 @@ public class RenameTagCommandParser implements Parser<RenameTagCommand> {
      * @param arguments The raw input string containing the arguments.
      * @return A list of strings extracted from the input arguments, corresponding to the tag names.
      */
-    private List<String> parseArgumentsToList(String arguments) {
+    private List<String> parseArgumentsToList(String arguments) throws ParseException {
+        if (!arguments.trim().matches("^(t/.*)?$")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        }
         String lowerCaseArguments = arguments.toLowerCase();
         ArgumentMultimap tokenisedArguments = ArgumentTokenizer.tokenize(lowerCaseArguments, PREFIX_TAG);
         List<String> argumentsAsList = tokenisedArguments.getAllValues(PREFIX_TAG);
