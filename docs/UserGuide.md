@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# <img src="images/logo.png" width="100"/>Medicontact 
+# <img src="images/health-report.png" width="90"/>Medicontact 
 
 Medicontact is a desktop app to help **small GP Clinics in Singapore for manage patient contacts**. It is centered around typed commands. If you can type fast, MediContact can get your contact management tasks done faster than traditional apps.
 
