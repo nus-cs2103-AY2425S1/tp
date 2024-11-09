@@ -127,6 +127,10 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 
 <box type="tip" seamless>
 
+**Note:** Names which are very long may not be fully displayed in the detailed person view, as displaying it would
+compromise the aesthetic of the User Interface and overall user experience. The person can still be identified through
+other information such as their phone number, email, and relationship.
+
 **Tip:** 
 * All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present.
 * **Names** should only contain alphanumeric characters and spaces, and it should not be blank.
