@@ -11,11 +11,12 @@
 
         <VBox spacing="10" styleClass="vbox-border">
             <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true"/>
+            <FlowPane fx:id="level" />
+            <FlowPane fx:id="subjects" />
+            <FlowPane fx:id="lessonTimes" />
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
             <Label fx:id="emergencyContact" styleClass="cell_small_label" text="\$emergencyContact" wrapText="true"/>
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true" />
-            <FlowPane fx:id="subjects" />
-            <FlowPane fx:id="lessonTimes" />
         </VBox>
 
         <Separator styleClass="custom-separator" />

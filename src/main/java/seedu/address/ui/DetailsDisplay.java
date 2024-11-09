@@ -41,7 +41,7 @@ public class DetailsDisplay extends UiPart<Region> {
     @FXML
     private FlowPane subjects;
     @FXML
-    private Label level;
+    private FlowPane level;
     @FXML
     private Label tasks;
     @FXML
@@ -58,10 +58,11 @@ public class DetailsDisplay extends UiPart<Region> {
         emergencyContact.setText("Emergency Contact: " + student.getEmergencyContact().value);
         address.setText("Address: " + student.getAddress().value);
         note.setText(student.getNote().value);
+        level.getChildren().add(new Label(student.getLevel().levelName));
         student.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
-                        .add(new Label(student.getLevel().levelName + " " + subject.subjectName)));
+                        .add(new Label(subject.subjectName)));
         tasks.setText(student.getTaskList().toDescription());
         student.getLessonTimes().forEach(lessonTime ->
                 lessonTimes.getChildren().add(new Label(lessonTime.toString())));

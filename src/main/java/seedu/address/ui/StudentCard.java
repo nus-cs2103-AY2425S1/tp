@@ -43,7 +43,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane subjects;
     @FXML
-    private Label level;
+    private FlowPane level;
     @FXML
     private Label tasks;
     @FXML
@@ -61,10 +61,11 @@ public class StudentCard extends UiPart<Region> {
         emergencyContact.setText("Emergency Contact: " + student.getEmergencyContact().value);
         address.setText("Address: " + student.getAddress().value);
         note.setText("Note: " + student.getNote().value);
+        level.getChildren().add(new Label(student.getLevel().levelName));
         student.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
                 .forEach(subject -> subjects.getChildren()
-                        .add(new Label(student.getLevel().levelName + " " + subject.subjectName)));
+                        .add(new Label(subject.subjectName)));
         tasks.setText("Tasks: " + student.getTaskList().size());
         student.getLessonTimes().forEach(lessonTime ->
                 lessonTimes.getChildren().add(new Label(lessonTime.toString())));
