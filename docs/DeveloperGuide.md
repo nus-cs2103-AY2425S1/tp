@@ -45,8 +45,9 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-The bulk of the app's work is done by the following four components:
+The bulk of the app's work is done by the following five components:
 
+* [**`Authentication`**](#ui-component): Authenticates the user.
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
@@ -60,7 +61,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the five main components except Authentication (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
@@ -70,6 +71,16 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+### Authentication component
+
+Here's a partial class diagram of the `Authentication` component:
+
+<puml src="diagrams/AbstractedAuthenticationClassDiagram.puml" width="450" />
+
+The `Authentication` component,
+
+* checks if user is authorised to access HR Helper.
 
 ### UI component
 
@@ -287,31 +298,31 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​    | I want to …​                                              | So that I can…​                                                                     |
-|----------|------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `* * *`  | HR manager | access help resources directly within the app             | troubleshoot issues without external assistance.                                    |
-| `* * *`  | HR manager | sign into my account                                      | keep my data secure and verified.                                                   |
-| `* * *`  | HR manager | add new employee profiles                                 | keep the data current.                                                              |
-| `* * *`  | HR manager | delete an employee                                        | remove entries that I no longer need.                                               |
-| `* * *`  | HR manager | find an employee by name                                  | locate details of employee quickly.                                                 |
-| `* * *`  | HR manager | find an employee by department                            | find information regarding the department without having to go through all entries. |
-| `* * *`  | HR manager | export employee data in multiple formats                  | easily share it with stakeholders.                                                  |
-| `* * *`  | HR manager | track employee annual leave                               | manage staffing levels effectively.                                                 |
-| `* * *`  | HR manager | favorite employees                                        | track promotions and role changes                                                   |
-| `* *`    | HR manager | create custom tags for employee data                      | capture information specific to my company's needs.                                 |
-| `* *`    | HR manager | search employee data with custom tags                     | quickly find relevant groups of employees.                                          |
+| Priority | As a …​  | I want to …​                                              | So that I can…​                                                                     |
+|----------|----------|-----------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | HR staff | access help resources directly within the app             | troubleshoot issues without external assistance.                                    |
+| `* * *`  | HR staff | sign into my account                                      | keep my data secure and verified.                                                   |
+| `* * *`  | HR staff | add new employee profiles                                 | keep the data current.                                                              |
+| `* * *`  | HR staff | delete an employee                                        | remove entries that I no longer need.                                               |
+| `* * *`  | HR staff | find an employee by name                                  | locate details of employee quickly.                                                 |
+| `* * *`  | HR staff | find an employee by department                            | find information regarding the department without having to go through all entries. |
+| `* * *`  | HR staff | export employee data in multiple formats                  | easily share it with stakeholders.                                                  |
+| `* * *`  | HR staff | track employee annual leave                               | manage staffing levels effectively.                                                 |
+| `* * *`  | HR staff | favorite employees                                        | track promotions and role changes                                                   |
+| `* *`    | HR staff | create custom tags for employee data                      | capture information specific to my company's needs.                                 |
+| `* *`    | HR staff | search employee data with custom tags                     | quickly find relevant groups of employees.                                          |
 
 
 ### Use cases
 
-(For all use cases below, the **System** is the `HRHelper` and the **Actor** is the `HR staff`, unless specified otherwise)
+(For all use cases below, the **System** is the `HR Helper` and the **Actor** is the `HR staff`, unless specified otherwise)
 
 **Use case: Authentication**
 
 **MSS**
 
 1.  HR staff opens up HRHelper
-2.  HRHelper prompts for HR staff to enter Username and Password
+2.  HR Helper prompts for HR staff to enter Username and Password
 3.  HR staff keys in Username and Password
 4.  Authentication is successful, program continues
 
@@ -325,14 +336,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 * 3b. Username/Password is empty.
-  * 3b1. HRHelper prompts HR staff to enter username/password.
+  * 3b1. HR Helper prompts HR staff to enter username/password.
   * 3b2. HR staff keys in Username and Password .
   * 3b3. Correct Username and Password is entered.
   
     Use case resumes from step 4.
 
 * 3c. Username and Password do not match.
-  * 3c1. HRHelper requests for Username or Password again.
+  * 3c1. HR Helper requests for Username or Password again.
   * 3c2. Correct Username and Password is entered.
   
     Use case resumes from step 4.
@@ -344,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  HR staff requests to add a specific employee in the list
-2.  HRHelper adds the employee.]
+2.  HR Helper adds the employee.
 
     Use case ends.
 
@@ -369,9 +380,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  HR staff requests to list employees
-2.  HRHelper shows a list of employees
+2.  HR Helper shows a list of employees
 3.  HR staff requests to delete a specific employee in the list
-4.  HRHelper deletes the employee
+4.  HR Helper deletes the employee
 
     Use case ends.
 
@@ -381,9 +392,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given index is invalid.
+* 3a. The given index is invalid.
 
-  * 2a1. HR Helper shows an error message.
+  * 3a1. HR Helper shows an error message.
     
     Use case resumes at step 2.
 
@@ -395,9 +406,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  HR staff requests to list employees
-2.  HRHelper shows a list of employees
+2.  HR Helper shows a list of employees
 3.  HR staff requests to search for a specific employee in the list (by name/contact/other information etc.)
-4.  HRHelper shows the employee/employees matching the description
+4.  HR Helper shows the employee/employees matching the description
 
     Use case ends.
 
@@ -407,13 +418,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The given description is invalid.
+* 3a. The given description is invalid.
 
-    * 2a1. HR Helper shows an error message.
+    * 3a1. HR Helper shows an error message.
 
       Use case resumes at step 2.
 
-* 3a. HRHelper gives HR staff the option to view the given employee.
+* 4a. HR Helper gives HR staff the option to view the given employee.
 
   Use case ends.
 
@@ -422,9 +433,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage.
 3.  HR staff with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should be able to return search within 5 seconds
+4.  HR Helper should be able to return search within 5 seconds
 5.  Employees' data should be easily found with a quick search
-6.  Only authorized HR staff should have access to the HR Helper system
+6.  Only authorized HR staff should have access to HR Helper
 
 
 ### Glossary
@@ -491,6 +502,15 @@ testers are expected to do more *exploratory* testing.
 
 ## Planned enhancements
 
+Team size: 5
+
 1. HR staff can change their username and password to keep their account secure. 
 2. HR staff can track maternity leave of up to 6 months.
 3. add enhancement here
+4. add enhancement here
+5. add enhancement here
+6. add enhancement here
+7. add enhancement here
+8. add enhancement here
+9. add enhancement here
+10. add enhancement here
