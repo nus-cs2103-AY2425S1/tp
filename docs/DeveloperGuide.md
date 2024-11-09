@@ -23,7 +23,7 @@
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
 - **References to Other Team Projects (TPs)**:
-    - For our User Guide, we referred to the [AY2425S1-CS2103T-F14a-1 User Guide](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/docs/UserGuide.md) and adapted their Markbind layouts for constraint and tips boxes.
+    - For our User Guide, we referred to the [AY2425S1-CS2103T-F14a-1 User Guide](https://github.com/AY2425S1-CS2103T-F14a-1/tp/blob/master/docs/UserGuide.md) and adapted their Markbind layouts for constraints and tips boxes.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -356,8 +356,8 @@ Use case ends.
   Use case ends.
 
 
-* 1b. SellSavvy detects that there is a parameter not satisfying its constraint.
-  * 1b1. SellSavvy states the constraint of the invalid parameter.
+* 1b. SellSavvy detects that there is a parameter not satisfying its constraints.
+  * 1b1. SellSavvy states the constraints of the invalid parameter.
 
   Use case ends
 
@@ -375,7 +375,7 @@ Use case ends.
 
 
 * 2b. SellSavvy detects that the new customer has tags with similar names.
-  * 2b1. SellSavvy gives a warning that there are similar tags in the new customer.
+  * 2b1. SellSavvy gives a warning that there are similar tags on the new customer.
   
   Use case resumes from step 3.
 
@@ -427,7 +427,66 @@ Use case ends.
 
   Use case ends.
 
-**Use case 5: Add an Order under a Customer**
+**Use case 5: Edit a Customer's Details**
+
+* **Use Case**: UC05 - Edit a Customer's Details
+* **Preconditions**: There are customers displayed in the customer list.
+* **Guarantees**:
+  * The specified customer's details will be overwritten if the input parameters are valid.
+
+**MSS**
+
+1. User finds the index of the customer they want to edit.
+2. User specifies the customer index along with modifications they want to make to the customer's details.
+3. SellSavvy updates the list with the modifications made to the customer.
+4. SellSavvy confirms the modification by stating the updated customer's details.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The customer index is missing or non-positive.
+  * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. SellSavvy detects that there are no customers with the specified index.
+    * 2b1. SellSavvy displays an error that the customer index is invalid.
+
+  Use case ends.
+
+
+* 2c. There are no customer details specified for modification.
+  * 2c1. SellSavvy tells the user that at least one field has to be edited.
+
+  Use case ends.
+
+
+* 2d. SellSavvy detects that the updated fields do not satisfy its constraints.
+    * 2d1. SellSavvy states the constraints of the invalid parameter.
+
+  Use case ends
+
+
+* 2e. SellSavvy detects that a customer with identical name already exists.
+    * 2e1. SellSavvy displays an error that the customer already exists.
+
+  Use case ends.
+
+
+* 3a. SellSavvy detects that the new name of the customer is similar to that of an existing customer.
+    * 3a1. SellSavvy gives a warning that a customer with a similar name already exists.
+
+  Use case resumes from step 4.
+
+
+* 3b. SellSavvy detects that there are tags with similar names among the updated tags.
+    * 3b1. SellSavvy gives a warning that there are similar tags on the customer.
+
+  Use case resumes from step 4.
+
+**Use case 6: Add an Order under a Customer**
 
 * **Use Case**: UC06 - Add an Order under a Customer
 * **Preconditions**: There are customers displayed in the customer list.
@@ -451,8 +510,8 @@ Use case ends.
   Use case ends.
 
 
-* 2b. SellSavvy detects that there is a parameter not satisfying its constraint.
-    * 2b1. SellSavvy states the constraint of the invalid parameter.
+* 2b. SellSavvy detects that there is a parameter not satisfying its constraints.
+    * 2b1. SellSavvy states the constraints of the invalid parameter.
 
   Use case ends
 
@@ -468,9 +527,9 @@ Use case ends.
 
   Use case resumes from step 4.
 
-**Use case 6: List a Customer's Orders**
+**Use case 7: List a Customer's Orders**
 
-* **Use Case**: UC06 - List a Customer's Orders
+* **Use Case**: UC07 - List a Customer's Orders
 * **Preconditions**: There are customers displayed in the customer list.
 * **Guarantees**:
     * Orders made by specific customer will be displayed as a list, if input parameters are valid.
@@ -496,9 +555,9 @@ Use case ends.
 
     Use case ends.
 
-**Use case 7: Mark Order as Completed**
+**Use case 8: Mark Order as Completed**
 
-* **Use Case**: UC07 - Mark Order as Completed
+* **Use Case**: UC08 - Mark Order as Completed
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Specified order will be marked as “Completed” if the input parameters are valid.
@@ -530,9 +589,9 @@ Use case ends.
 
   Use case ends.
 
-**Use case 8: Remove "Completed" Marking from Order**
+**Use case 9: Remove "Completed" Marking from Order**
 
-* **Use Case**: UC08 - Remove "Completed" Marking from Order
+* **Use Case**: UC09 - Remove "Completed" Marking from Order
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Specified order will be reverted to "Pending" status if the input parameters are valid.
@@ -564,9 +623,9 @@ Use case ends.
 
   Use case ends.
 
-**Use case 9: Delete an order**
+**Use case 10: Delete an order**
 
-* **Use Case**: UC09 - Delete an Order
+* **Use Case**: UC10 - Delete an Order
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * An order made by the customer will be deleted if input parameters are valid.
@@ -592,9 +651,9 @@ Use case ends.
 
   Use case ends.
 
-**Use case 10: Filter order list by order status**
+**Use case 11: Filter order list by order status**
 
-* **Use Case**: UC10 - Filter an Order List by Order Status
+* **Use Case**: UC11 - Filter an Order List by Order Status
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Orders with specified status under the customer will be displayed as a list, if input parameters are valid.
