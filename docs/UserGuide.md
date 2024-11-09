@@ -490,18 +490,18 @@ _Details coming soon ..._
 
 ## 5 Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Count**  | `count`: counts entire employee list<br> `count tag/TAG`: counts people in given tag<br>e.g. `count tag/Colleagues`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Sort**   | `sort TAG`<br> e.g., `sort managers`
-**Favorite** | `favorite INDEX`<br> e.g., `favorite 3`
-**List**   | `list`
-**Help**   | `help`
+| Action       | Format                                                                               | Examples                                                                                                |
+|--------------|--------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`                              | e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**    | `clear`                                                                              |                                                                                                         |
+| **Count**    | `count`: counts entire employee list<br> `count tag/TAG`: counts people in given tag | e.g. `count tag/Colleagues`                                                                             |
+| **Delete**   | `delete INDEX`                                                                       | e.g. `delete 3`                                                                                         |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`               | e.g. `edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| **Favorite** | `favorite INDEX`                                                                     | e.g. `favorite 3`                                                                                       |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`                                                       | e.g. `find James Jake`                                                                                  |
+| **Help**     | `help`                                                                               |                                                                                                         |
+| **List**     | `list`                                                                               |                                                                                                         |
+| **Sort**     | `sort TAG`                                                                           | e.g. `sort managers`                                                                                    |
 
 --------------------------------------------------------------------------------------------------------------------
 
