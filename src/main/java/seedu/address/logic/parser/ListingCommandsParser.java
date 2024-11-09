@@ -26,7 +26,8 @@ public class ListingCommandsParser {
         final Matcher listingMatcher = LISTING_COMMAND_FORMAT.matcher(args.trim());
 
         if (!listingMatcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Valid listing commands are 'listing add' or 'listing delete'"));
         }
 
         final String listingCommandWord = listingMatcher.group("commandWord").trim();

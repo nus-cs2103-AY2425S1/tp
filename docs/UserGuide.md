@@ -165,6 +165,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * Tags can also be removed using the delete tag `dt/` prefix, followed by the tag name.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
+  * Note that this option **can not be used** if you **specify any other tags (e.g `t/ t/buyer`)**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
