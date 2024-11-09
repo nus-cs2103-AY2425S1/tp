@@ -12,7 +12,10 @@ and easily filtering them according to tailor-made categories relevant to proper
 simpler to use while being even more functional than alternatives on the market.
 
 ## Table of Contents
-* [Quick start](#quick-start)
+* [User Guide Essentials](#user-guide-essentials)
+    * [Icon Legend](#icon-legend)
+    * [Locating Information Quickly](#locating-information-quickly)
+* [Quick Start](#quick-start)
   * [Step 1: Check if Your Computer is Ready](#step-1-check-if-your-computer-is-ready)
   * [Step 2: Install PROperty](#step-2-install-property)
   * [Step 3: Try Your First Commands](#step-3-try-your-first-commands)
@@ -35,16 +38,45 @@ simpler to use while being even more functional than alternatives on the market.
 * [Saving the data](#saving-the-data)
 * [Editing the data file](#editing-the-data-file)
 * [FAQ](#faq)
-* [Known issues](#known-issues)
-* [Command summary](#command-summary)
+* [Known Issues](#known-issues)
+* [Command Summary](#command-summary)
 * [Tag Table](#tag-table)
 * [Glossary](#glossary)
+    * [Technical Terms](#technical-terms)
     * [Property Tags](#property-tags)
     * [Client Tags](#client-tags)
 
 --------------------------------------------------------------------------------------------------------------------
+## User Guide Essentials
 
-## Quick start
+### Icon Legend
+
+This section helps you understand the icons you’ll encounter in the User Guide
+
+| **Icons**               | **Meaning**                                      |
+|-------------------------|--------------------------------------------------|
+| :information_source:    | Key details to be aware of.                      |
+| :bulb:                  | Helpful tips for better use.                     |
+| :exclamation:           | Crucial information! Please read carefully.      | 
+
+
+
+### Locating Information Quickly
+This section outlines the topics covered in each part of the guide, helping you quickly find the information you need. Feel free to jump to the sections that are most relevant to you.
+
+1. [Quick start](#quick-start) – Learn how to set up PROperty in a few simple steps. 
+2. [Features](#features) – Understand the full range of capabilities PROperty offers. 
+3. [FAQ](#faq) – Find answers to common questions from other users. 
+4. [Command Summary](#command-summary) – A quick reference to all commands available for easy access.
+5. [Tag Table](#tag-table) – View a comprehensive list of tags and their descriptions to enhance your understanding of PROperty’s categorisation.
+6. [Glossary](#glossary) – Get familiar with key terms and definitions used throughout the guide.
+7. [_Back to Top_](#table-of-contents) – Easily return to the table of contents with this shortcut.
+
+[_Back to Top_](#table-of-contents)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick Start
 
 ### Step 1: Check if Your Computer is Ready
 First, we need to make sure your computer has [Java](#technical-terms) 17 installed. Here's how to check:
@@ -61,6 +93,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
 3. What you should see:
    - ✅ If you see "java 17" or "openjdk 17" (or any number above 17), you're ready to go!
    - ❌ If you see "command not found" or a java version below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+
+[_Back to Top_](#table-of-contents)
 
 ### Step 2: Install PROperty
 
@@ -80,6 +114,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
     
 ![Ui](images/user-guide-images/Ui.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Step 3: Try Your First Commands
 
 Now that PROperty is running, let's try using the different commands available. All you have to do is to type the command in the command box and press Enter to execute it. 
@@ -95,6 +131,8 @@ Some example commands you can try are:
 
 
 Refer to the [Features](#features) below for details of each command.
+
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,6 +164,7 @@ Refer to the [Features](#features) below for details of each command.
 
 </div>
 
+[_Back to Top_](#table-of-contents)
 
 ### Adding a client: `add`
 
@@ -153,6 +192,8 @@ Examples:
 Visual example of correct output [Example `1.`]:
 
 ![AddCommandShowcase.png](images/user-guide-images/AddCommandShowcase.png)
+
+[_Back to Top_](#table-of-contents)
 
 ### Editing a client : `edit`
 
@@ -191,6 +232,8 @@ Visual example of correct output [Example `1.`]:
 
 ![EditCommandShowcase.png](images/user-guide-images/EditCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Deleting a client : `delete`
 
 Deletes the specified client from the PROperty.
@@ -216,6 +259,8 @@ Visual example of correct output [Example `1.`]:
 
 ![DeleteCommandShowcase.png](images/user-guide-images/DeleteCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Listing all clients : `list`
 
 Shows a list of all clients in the PROperty.
@@ -234,6 +279,8 @@ Visual example of correct output:
 
 ![ListCommandShowcase.png](images/user-guide-images/ListCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Sorting all clients : `sort`
 
 Sorts the list of all clients in PROperty by name in alphabetical order.
@@ -251,6 +298,8 @@ Example:
 Visual example of correct output [Example `1.`]:
 
 ![SortCommandShowcase.png](images/user-guide-images/SortCommandShowcase.png)
+
+[_Back to Top_](#table-of-contents)
 
 ### Showing property listings of a client : `show`
 
@@ -276,6 +325,8 @@ Examples:
 Visual example of correct output [Example `1.`]:
 
 ![Show Command](images/user-guide-images/ShowCommandShowcase.png)
+
+[_Back to Top_](#table-of-contents)
 
 ### Locating clients by name: `find`
 
@@ -320,6 +371,8 @@ Visual example of correct output (Specific Find) [Example `2.`]:
 
 ![SpecificFindCommandShowcase.png](images/user-guide-images/SpecificFindCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Locating clients by tag: `findtag`
 
 Finds clients whose tags contain any of the given words.
@@ -346,6 +399,8 @@ Visual example of correct output [Example `1.`]:
 
 ![Find tag command](images/user-guide-images/FindtagCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the PROperty.
@@ -364,6 +419,8 @@ Visual example of correct output [Example `1.`]:
 
 ![ClearCommandShowcase.png](images/user-guide-images/ClearCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Managing Remarks : `remark`
 
 Adds/removes a remark from a client in PROperty.
@@ -373,6 +430,7 @@ Format: `remark INDEX r/[REMARKS]`
 * Adds a remark `REMARKS` to the client at `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If there are multiple remark inputs, only the last one will be added.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 If `[REMARKS]` of `r/` is left blank (e.g `remark 1 r/`), the remark will be deleted entirely
@@ -385,6 +443,9 @@ Examples:
 
 2. `remark 1 r/` deletes the remark of client at index `1`.
 
+
+3. `remark 1 r/Prefers Bukit Timah area r/Prefers Jurong area` only adds remark "Prefers Jurong area" to the client at index `1`.
+
 Visual example of correct output [Example `1.`]:
 
 ![RemarkAddCommandShowcase](images/user-guide-images/RemarkAddCommandShowcase.png)
@@ -392,6 +453,13 @@ Visual example of correct output [Example `1.`]:
 Visual example of correct output [Example `2.`]:
 
 ![RemarkRemoveCommandShowcase](images/user-guide-images/RemarkRemoveCommandShowcase.png)
+
+Visual example of correct output [Example `3.`]:
+
+![MultipleRemarkAddCommandShowcase](images/user-guide-images/MultipleRemarkAddCommandShowcase.png)
+
+[_Back to Top_](#table-of-contents)
+
 
 ### Adding a property listing : `listing add`
 
@@ -417,6 +485,8 @@ Visual example of correct output [Example `1.`]:
 
 ![ListingAddCommandShowcase.png](images/user-guide-images/ListingAddCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Deleting a property listing : `listing delete`
 
 Deletes the property listing with index `LISTING_INDEX` from the client specified by `INDEX` 
@@ -440,6 +510,8 @@ Visual example of correct output [Example `1.`]:
 
 ![ListingDeleteCommandShowcase.png](images/user-guide-images/ListingDeleteCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Exporting your contacts : `export`
 
 Exports your contacts and their relevant data to a Comma-Separated Value (CSV) file format.
@@ -461,6 +533,8 @@ Visual example of correct output [Example `1.`]:
 
 ![ExportCommandShowcase](images/user-guide-images/ExportCommandShowcase.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -472,6 +546,8 @@ Format: `exit`
 Example:
 
 1. `exit` exits PROperty.
+
+[_Back to Top_](#table-of-contents)
 
 ### Open help menu: `help`
 
@@ -489,9 +565,13 @@ Visual example of correct output:
 ![help message](images/user-guide-images/HelpMessageShowcase.png)
 ![help message](images/user-guide-images/HelpMessageShowcase2.png)
 
+[_Back to Top_](#table-of-contents)
+
 ### Saving the data
 
 PROperty data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[_Back to Top_](#table-of-contents)
 
 ### Editing the data file
 
@@ -502,6 +582,7 @@ If your changes to the data file makes its format invalid, PROperty will discard
 Furthermore, certain edits can cause the PROperty to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -522,16 +603,20 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 **Q**: Is there a way to restore a deleted client?<br>
 **A**: Unfortunately, it is not possible to restore a deleted client. We strongly recommend that you regularly save a backup of your clients to prevent accidental data loss.
 
+[_Back to Top_](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+[_Back to Top_](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 | Action             | Format, Examples                                                                                                                                                            |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -551,6 +636,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 | **Export**         | `export`                                                                                                                                                                    |
 | **Sort**           | `sort`                                                                                                                                                                      |
 
+[_Back to Top_](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Tag Table
@@ -559,6 +646,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Property | HDB, CONDO, RESIDENTIAL, LANDED, EC, COMMERCIAL, RETAIL, INDUSTRIAL, OFFICE, WAREHOUSE, SHOPHOUSE, TERRACE, SEMIDET, BUNGALOW, DETACHED, GCB, PENTHOUSE, MIXED, SERVAPT, DORM |
 | Client   | BUYER, SELLER, LANDLORD, TENANT, DEVELOPER, INVESTOR, MANAGER, CONTRACTOR                                                                                                 |
+
+[_Back to Top_](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -571,6 +660,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **JAR**: Java ARchive, a package file format that aggregates many Java class files and associated resources (text, images) into one file to distribute application software or libraries on the Java platform.
 - **Java**: A high-level, object-oriented programming language used for building cross-platform applications.
 - **JSON**: JavaScript Object Notation, a lightweight data-interchange format that is easy for humans to read and write, and easy for machines to parse and generate. JSON is commonly used for transmitting data in web applications.
+
+[_Back to Top_](#table-of-contents)
 
 ### Property Tags
 - **HDB**: Public housing flats governed by the Housing & Development Board.
@@ -594,6 +685,8 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **SERVAPT**: Furnished serviced apartments, typically with extended-stay services.
 - **DORM**: Dormitories, often used as shared housing for students or workers.
 
+[_Back to Top_](#table-of-contents)
+
 ### Client Tags
 - **BUYER**: Prospective property purchasers.
 - **SELLER**: Property owners seeking to sell.
@@ -603,3 +696,5 @@ Furthermore, certain edits can cause the PROperty to behave in unexpected ways (
 - **INVESTOR**: Individuals or groups acquiring property for financial gain.
 - **MANAGER**: Those managing property operations, tenant relations, or maintenance.
 - **CONTRACTOR**: Professionals providing construction, renovation, or repair services.
+
+[_Back to Top_](#table-of-contents)
