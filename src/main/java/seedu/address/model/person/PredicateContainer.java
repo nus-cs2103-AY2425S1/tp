@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Contains all predicates for FindCommand
@@ -192,7 +193,7 @@ public class PredicateContainer {
      * @param argMultimap ArgumentMultimap to extract from
      * @return {@code PredicateContainer} with {@code Predicate} after parsing added.
      */
-    public static PredicateContainer extractFromArgumentMultimap(ArgumentMultimap argMultimap) {
+    public static PredicateContainer extractFromArgumentMultimap(ArgumentMultimap argMultimap) throws ParseException {
         PredicateContainer predicateContainer = new PredicateContainer();
         predicateContainer.addNameContainsKeywordsPredicateusingArgMultimap(argMultimap);
         predicateContainer.addPhoneContainsKeywordsPredicateusingArgMultimap(argMultimap);

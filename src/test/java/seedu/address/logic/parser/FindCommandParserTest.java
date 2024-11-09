@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.FindCommandParser.MESSAGE_NO_KEYWORD;
+import static seedu.address.logic.parser.FindCommandParser.MESSAGE_NO_PREFIX;
 
 import java.util.Arrays;
 
@@ -105,12 +107,21 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_empty_keywords() {
-        assertParseFailure(parser, "all", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    public void parse_no_prefix() {
+        assertParseFailure(parser, "all", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_PREFIX));
 
-        assertParseFailure(parser, "ph", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "ph", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_PREFIX));
 
-        assertParseFailure(parser, "e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "e", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_PREFIX));
+    }
+
+    @Test
+    public void parse_no_keywords() {
+        assertParseFailure(parser, "all n/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "ph p/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "e e/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
     }
 
 }

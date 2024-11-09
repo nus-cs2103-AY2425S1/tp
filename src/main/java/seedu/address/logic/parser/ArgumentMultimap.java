@@ -92,4 +92,40 @@ public class ArgumentMultimap {
                 && getValue(PREFIX_EMAIL).isEmpty() && getValue(PREFIX_DEPARTMENT).isEmpty()
                 && getValue(PREFIX_ROLE).isEmpty();
     }
+
+    /**
+     * Checks if the {@code argumentMultimap} contains any empty string mapped to any of the prefixes
+     * required for FindCommand.
+     * Prefix required for FindCommand includes "n/", "p/", "e/", "d/", "/r".
+     *
+     * @return True if at least one empty string is mapped to a prefix.
+     */
+    public boolean hasEmptyCommandPrefix() {
+        List<String> listOfNameKeywords = getAllValues(PREFIX_NAME);
+        if (!listOfNameKeywords.isEmpty()) {
+            String firstNameKeyword = listOfNameKeywords.get(0);
+            return firstNameKeyword.trim().isEmpty();
+        }
+        List<String> listOfPhoneKeywords = getAllValues(PREFIX_PHONE);
+        if (!listOfPhoneKeywords.isEmpty()) {
+            String firstPhoneKeyword = listOfPhoneKeywords.get(0);
+            return firstPhoneKeyword.trim().isEmpty();
+        }
+        List<String> listOfEmailKeywords = getAllValues(PREFIX_EMAIL);
+        if (!listOfEmailKeywords.isEmpty()) {
+            String firstEmailKeyword = listOfEmailKeywords.get(0);
+            return firstEmailKeyword.trim().isEmpty();
+        }
+        List<String> listOfDepartmentKeywords = getAllValues(PREFIX_DEPARTMENT);
+        if (!listOfDepartmentKeywords.isEmpty()) {
+            String firstDepartmentKeyword = listOfDepartmentKeywords.get(0);
+            return firstDepartmentKeyword.trim().isEmpty();
+        }
+        List<String> listOfRoleKeywords = getAllValues(PREFIX_ROLE);
+        if (!listOfRoleKeywords.isEmpty()) {
+            String firstRoleKeyword = listOfRoleKeywords.get(0);
+            return firstRoleKeyword.trim().isEmpty();
+        }
+        return false;
+    }
 }

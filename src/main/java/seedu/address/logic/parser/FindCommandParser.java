@@ -19,6 +19,8 @@ import seedu.address.model.person.PredicateContainer;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+    public static final String MESSAGE_NO_PREFIX = "Missing prefix! At least one prefix is required!";
+    public static final String MESSAGE_NO_KEYWORD = "Missing keyword after prefix! It cannot be empty!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -39,8 +41,12 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         if (argMultimap.hasNoFindCommandPrefix()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, FindCommandParser.MESSAGE_NO_PREFIX));
+        }
+        if (argMultimap.hasEmptyCommandPrefix()) {
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, FindCommandParser.MESSAGE_NO_KEYWORD));
         }
 
         PredicateContainer predicateContainer = PredicateContainer.extractFromArgumentMultimap(argMultimap);
