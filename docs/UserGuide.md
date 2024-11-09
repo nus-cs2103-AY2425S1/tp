@@ -81,7 +81,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​`
 
 * The `NAME` input allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs.
   * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
