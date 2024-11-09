@@ -1622,18 +1622,19 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 <d-table>
 
-| Parameter        | Description           | Additional Constraints                                                                          | Examples               | 
-|------------------|-----------------------|-------------------------------------------------------------------------------------------------|------------------------|
-| `[NAME]`         | Client's name         | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;` | `Ravi S/O Ramasamy`    |
-| `[PHONE_NUMBER]` | Client's phone number | Accommodate country code, which includes, but not limited to `+65`.                             | `12345678901234567890` |
-| `[TAG]...`       | Client's tag          | Limit up to `20 characters`                                                                     | `12345678901234567890` |
+| Parameter        | Description            | Additional Constraints                                                                                                                                          | Examples               | 
+|------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
+| `[NAME]`         | Client's name          | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`                                                                 | `Ravi S/O Ramasamy`    |
+| `[PHONE_NUMBER]` | Client's phone number  | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`             |
+| `[EMAIL]`        | Client's email address | Accommodate well-established email companies only.                                                                                                              | `test@gmail.com`       |
+| `[TAG...]`       | Client's tag           | Limit up to `20 characters`                                                                                                                                     | `12345678901234567890` |
 
 </d-table>
 
 #### `cedit` Command.
 
-The current version of `cedit` only supports replacing all tags with the updated tag provided by the `cedit` command.
-In the future, there will be an update to the `cedit` command, where the client is able to choose which tag to retain as well as which tag to edit.
+The current version of `cedit` only supports replacing **all tags** with the **updated tag** provided by the `cedit` command.
+In the future, there will be an update to the `cedit` command, where the client is able to choose which tag to **retain** as well as which tag to **edit**.
 
 #### \[Proposed\] Undo/redo feature
 
