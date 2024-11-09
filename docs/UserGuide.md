@@ -153,23 +153,37 @@ Here will be a basic guide on how to use the application.
 
 3. **Add a patient**:
    * Type the following command in the command box and press Enter to **add a patient**:
-      > `add n/Johnson p/98765432 e/johnson123@gmail.com a/123, Clementi Rd, 1234665 t/Diabetic`
+      > `add n/Johnson p/11111111 e/johnson123@gmail.com a/123 Clementi Rd, 1234665 t/Diabetic`
+   * This example command adds a new patient named `Johnson` with phone number `11111111`, email `johnson123@gmail.com`, address `123 Clementi Rd, 1234665` and tagged as `Diabetic` to the system!
+<br></br>  
 
 4. **Edit patient information**:
    * Type the following command in the command box and press Enter to **edit a patient's information**:
       > `edit 1 p/91234567`
+   * This example command edits the phone number of patient at index 1 of the addressbook, in this case being the patient `Johnson` who was just added!
+<br></br>
 
 5. **Delete a patient**:
    * Type the following command in the command box and press Enter to **delete a patient**:
-      > `delete 1`
+      > `delete 1
+   * This example command deletes the patient at index 1 of the addressbook!
+<br></br>
 
-6. **Add a task**:
+6. **Add another patient**:
+    * Type the following command in the command box and press Enter to **add a patient**:
+      > `add n/Lily p/22222222 e/lily@gmail.com a/456 Bishan St, 222222 t/Asthmatic`
+    * This example command adds a new patient named `Lily` with phone number `22222222`, email `lily@gmail.com@gmail.com a/123`, address `456 Bishan St, 222222` and tagged as `Asthmatic` to the system!
+<br></br>
+
+7. **Add a task**:
     * Type the following command in the command box and press Enter to **add a task to the patient**:
-        > `addtask 1 d/Eat paracetamol 1000mg`
-
-7. **Exit**:
+       > `addtask 1 d/Eat paracetamol 1000mg`
+    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of the addressbook, in this case being the patient `Lily` who was just added! 
+<br></br>
+   
+8. **Exit**:
     * Type the following command in the command box and press Enter to **exit the program**:
-        > `exit`
+       > `exit`
 
 Refer to the [Features](#6-features) below for details of each command.
 
