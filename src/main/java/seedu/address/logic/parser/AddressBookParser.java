@@ -57,6 +57,15 @@ public class AddressBookParser {
      */
     public Command parseCommand(String userInput) throws ParseException {
 
+        if (ClearCommand.isPrompted()) {
+            String trimmedInput = userInput.trim();
+            if (trimmedInput.equals("Y") || trimmedInput.equals("Yes")) {
+                return new ClearCommandParser().parseClear();
+            } else {
+                return new ClearCommandParser().parseAbort();
+            }
+        }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -73,14 +82,6 @@ public class AddressBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
-
-        if (ClearCommand.isPrompted()) {
-            if (commandWord.equalsIgnoreCase("y") || commandWord.equalsIgnoreCase("yes")) {
-                return new ClearCommandParser().parseClear();
-            } else {
-                return new ClearCommandParser().parseAbort();
-            }
-        }
 
         switch (commandWord) {
 

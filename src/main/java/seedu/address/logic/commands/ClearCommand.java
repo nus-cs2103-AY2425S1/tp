@@ -14,12 +14,12 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
     public static final String MESSAGE_USAGE = "Use \"clear\" to clear all persons and events.\n"
-            + "Use \"clear p\" or \"clear e\" to specify persons or events to be cleared.";
+            + "Use exactly \"clear p\" or \"clear e\" to specify persons or events to be cleared.";
 
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
     public static final String MESSAGE_CONFIRMATION = "Are you sure you want to clear all your contacts and events?\n"
-            + "Type \"y\" to confirm or any key to abort.";
+            + "Type \"Y\" or \"Yes\" to confirm or any key to abort.";
 
     public static final String MESSAGE_ABORTED = "Clear command aborted.";
 
