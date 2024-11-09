@@ -40,7 +40,8 @@ Actor: New User
 1.  A user requests to list persons
 2.  The system shows a list of persons
 3.  The user requests to delete a specific person in the list
-4.  The system deletes the person<br>Use case ends.<br>
+4.  The system deletes the person
+   <br>Use case ends.<br>
 
 **Extensions**
 - **2a.** The list is empty.
