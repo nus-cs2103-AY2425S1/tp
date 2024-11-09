@@ -62,18 +62,18 @@ public class TagCommand extends Command {
         // Union of existing tags and new tags
         addedTags.addAll(personToTag.getTags());
 
-        // Creating new Person
-        Person newPerson = new Person(personToTag.getId(), personToTag.getName(), personToTag.getPhone(),
-                personToTag.getEmail(), personToTag.getAddress(), addedTags);
+        try {
+            // Creating new Person
+            Person newPerson = new Person(personToTag.getId(), personToTag.getName(), personToTag.getPhone(),
+                    personToTag.getEmail(), personToTag.getAddress(), addedTags);
 
-        if (newPerson.getTags().size() > 6) {
-            throw new CommandException("Each person can only have up to 6 tags!");
+            // Updating addressBook
+            model.setPerson(personToTag, newPerson);
+            model.getActiveTags().incrementTags(addedTags);
+            return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, personToTag.getName(), addedTagsString));
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
         }
-
-        // Updating addressBook
-        model.setPerson(personToTag, newPerson);
-        model.getActiveTags().incrementTags(addedTags);
-        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, personToTag.getName(), addedTagsString));
     }
 
 
