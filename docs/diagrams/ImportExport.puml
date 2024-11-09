@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+title Import Command and Parser UML Diagram
+package Logic {
+    package Commands {
+        Class "{abstract}\nCommand" as Command
+        Class ImportCommand
+        Class CommandResult
+    }
+
+    package Parsers {
+        Class ImportCommandParser
+    }
+}
+
+package Model {
+    Class Course
+    Class Student
+}
+
+' Command relationships
+Command <|-- ImportCommand
+Command ..> CommandResult : produces >
+
+ImportCommandParser ..> ImportCommand : creates >
+
+' Model relationships
+ImportCommand ..> Student : creates >
+ImportCommand ..> Course : creates >
+
+' Group visibility for logical structure
+ImportCommand ..> CommandResult
+@enduml

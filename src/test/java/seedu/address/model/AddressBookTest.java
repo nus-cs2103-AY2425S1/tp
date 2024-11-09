@@ -244,7 +244,8 @@ public class AddressBookTest {
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName()
                 + "{students=" + addressBook.getStudentList()
-                + ", consults=" + addressBook.getConsultList() + "}";
+                + ", consults=" + addressBook.getConsultList()
+                + ", lessons=" + addressBook.getLessonList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 

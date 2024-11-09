@@ -1,0 +1,82 @@
+@startuml
+!include ../style.puml
+skinparam ArrowFontStyle plain
+
+title AddToLessonCommand Sequence Diagram
+
+box Logic
+Participant ":LogicManager" as LogicManager LOGIC_COLOR
+Participant ":AddressBookParser" as addressBookParser LOGIC_COLOR_T3
+Participant ":AddToLessonCommandParser" as AddToLessonCommandParser LOGIC_COLOR_T2
+Participant ":AddToLessonCommand" as AddToLessonCommand LOGIC_COLOR_T1
+end box
+
+box Model MODEL_COLOR_T1
+Participant ":Model" as model MODEL_COLOR
+end box
+
+-[UI_COLOR]> LogicManager : execute("addtolesson 1 n/John Doe i/3")
+activate LogicManager LOGIC_COLOR
+
+'Logic manager calls AddressBookParser and passes the command
+LogicManager -[LOGIC_COLOR]> addressBookParser : parseCommand("addtolesson 1 n/John Doe i/3")
+activate addressBookParser LOGIC_COLOR_T3
+
+'AddressBookParser creates an instance of the parser
+create AddToLessonCommandParser
+addressBookParser -[LOGIC_COLOR_T3]> AddToLessonCommandParser : AddToLessonCommandParser(arguments)
+activate AddToLessonCommandParser LOGIC_COLOR_T2
+
+AddToLessonCommandParser --[LOGIC_COLOR_T2]> addressBookParser
+deactivate AddToLessonCommandParser
+
+' AddressBookParser calls the parse command
+addressBookParser -[LOGIC_COLOR_T3]> AddToLessonCommandParser : parse("addtolesson 1 n/John Doe i/3")
+activate AddToLessonCommandParser LOGIC_COLOR_T2
+
+'Within the parse command, the parser creates an instance of the command
+create AddToLessonCommand
+AddToLessonCommandParser --[LOGIC_COLOR_T2]> AddToLessonCommand : AddToLessonCommand(index, studentNames, indices)
+activate AddToLessonCommand LOGIC_COLOR_T1
+
+AddToLessonCommand --[LOGIC_COLOR]> AddToLessonCommandParser
+deactivate AddToLessonCommand LOGIC_COLOR_T1
+
+'parser returns the command to the AddressBookParser
+AddToLessonCommandParser --[LOGIC_COLOR_T2]> addressBookParser : AddToLessonCommand
+deactivate AddToLessonCommandParser
+
+AddToLessonCommandParser --[hidden]> addressBookParser : AddToLessonCommand
+destroy AddToLessonCommandParser
+
+addressBookParser --[LOGIC_COLOR_T3]> LogicManager : AddToLessonCommand
+deactivate addressBookParser
+
+'LogicManager calls command.execute
+LogicManager -[LOGIC_COLOR]> AddToLessonCommand : execute(model)
+activate AddToLessonCommand LOGIC_COLOR_T1
+
+'get filteredLessonList
+AddToLessonCommand -[LOGIC_COLOR]> model : getFilteredLessonList()
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> AddToLessonCommand
+deactivate model
+
+'get filteredStudentList
+AddToLessonCommand -[LOGIC_COLOR]> model : filteredStudentList()
+activate model MODEL_COLOR
+
+model -[MODEL_COLOR]-> AddToLessonCommand
+deactivate model
+
+'After adding students, return new lesson
+AddToLessonCommand --[LOGIC_COLOR]> LogicManager : CommandResult
+deactivate AddToLessonCommand LOGIC_COLOR_T1
+AddToLessonCommand --[hidden]> LogicManager : CommandResult
+destroy AddToLessonCommand
+
+[<-[UI_COLOR]-LogicManager : CommandResult
+
+
+@enduml

@@ -333,59 +333,68 @@ removefromconsult 1 n/John Doe
     * Cons: Higher memory usage for modifications
 
 
-### \[Proposed\] Data Archiving / Export Feature
+### Data Import / Export Feature
 
-[//]: # (_{Explain here how the data archiving feature will be implemented}_)
+The import/export feature allows TAs to archive and transfer their data in CSV format. This functionality is implemented for both students and consultations.
 
-The export feature allows TAs to export their current list of students to a CSV file for external use. This feature is particularly useful for creating backups, sharing data with other applications, or generating reports.
+#### Implementation
 
-#### Proposed Implementation
+The feature is implemented through four main command classes:
+* `ExportCommand`: Exports student data to CSV
+* `ExportConsultCommand`: Exports consultation data to CSV
+* `ImportCommand`: Imports student data from CSV
+* `ImportConsultCommand`: Imports consultation data from CSV
 
-The export functionality is implemented through the `ExportCommand` class which converts the current student list into CSV format and saves it to a file in the project's `data` folder. It is then ready for further use, which could be in the form of a download/import functionality in a separate feature.
+Each export command follows this workflow:
+1. Validates filename input
+2. Creates `data` directory if needed
+3. Writes data to CSV in `data` directory
+4. Copies file to home directory
+5. Handles file overwrite with force flag
 
-Currently, the exported CSV includes the following student information:
-- Name
-- Phone number
-- Email address
-- Enrolled courses (semicolon separated)
+Each import command follows this workflow:
+1. Validates input file existence and format
+2. Parses CSV header
+3. Processes entries line by line
+4. Validates each entry
+5. Logs errors to `error.csv`
 
-#### Implementation Details
-
-1. File Handling
-The system aims to implement several safety features:
-- Creates a `data` directory if it does not exist
-- Validates filename for illegal characters
-- Prevents accidental file overwriting
-- Properly escapes special characters in CSV output
-2. Force Flag
-The `-f` flag allows overwriting of existing files:
+Example sequences:
 ```
-export students     // Creates a new file students.csv
-export students     // Warns the user
-export -f students  // Overwrites the students.csv file
+Student CSV format:
+Name,Phone,Email,Courses
+John Doe,12345678,john@example.com,CS2103T;CS2101
+
+Consultation CSV format:
+Date,Time,Students
+2024-10-20,14:00,John Doe;Jane Doe
 ```
 
 #### Design Considerations
 
-**Aspect: Export File Format**
-
+**Aspect: File Format**
 * **Alternative 1 (current choice)**: CSV format
-    * Pros: Wide compatibility, easy to read/edit
-    * Cons: Limited formatting options
-
+    * Pros: Widely compatible, human-readable, easy to edit
+    * Cons: Limited structure, requires careful escaping
 * **Alternative 2**: JSON format
-    * Pros: Preserves data structures better
-    * Cons: Less user-friendly for direct editing
+    * Pros: Maintains data structure, less escaping needed
+    * Cons: Less human-readable, harder to edit manually
+
+**Aspect: Error Handling**
+* **Alternative 1 (current choice)**: Log errors to separate file
+    * Pros: Clear error reporting, allows partial imports
+    * Cons: Requires managing additional files
+* **Alternative 2**: Fail entire import on any error
+    * Pros: Ensures data consistency
+    * Cons: Less flexible, requires perfect input
 
 **Aspect: File Location**
-
-* **Alternative 1 (current choice)**: Fixed `data` directory
-    * Pros: Consistent location, prevents scattered files
-    * Cons: Less flexibility for users
-
-* **Alternative 2**: User-specified directory
-    * Pros: More user control
-    * Cons: More complex input validation needed
+* **Alternative 1 (current choice)**: Both data and home directory
+    * Pros: Convenient access, automatic backup
+    * Cons: Duplicate files, more complex implementation
+* **Alternative 2**: Single location
+    * Pros: Simpler implementation
+    * Cons: Less convenient for users
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -469,225 +478,490 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **<u>Use case: UC1 - Add a student</u>**
 
 **MSS:**
-
 1. User requests to add a student by providing the necessary details (name, contact, courses, email).
 2. TAHub validates the inputs.
 3. TAHub adds the student with the provided details.
-4. The GUI displays the updated student list.
-5. Use case ends.
+4. TAHub displays the updated student list. 
+<br>
+Use case ends.
 
 **Extensions:**
 * 2a. One or more input parameters are missing or invalid.
     * 2a1. TAHub shows an error message indicating the missing or invalid field(s).
-    * 2a2. Use case resumes at step 1.
-
-
-* 2b. The student already exists (both name and contact match an existing student).
+    <br>
+    Use case ends.
+* 2b. Duplicate Student Exists (Student name matches an existing student).
     * 2b1. TAHub shows a duplicate error message.
-    * 2b2. Use case resumes at step 1.
+    <br>
+    Use case ends.
 
-<br>
 
 **<u>Use case: UC2 - Find students by Course</u>**
 
 **MSS:**
-
 1. User requests to find students enrolled in a particular course.
 2. TAHub shows a list of students enrolled in that particular course.
-3. Use case ends.
+<br>
+Use case ends.
 
 **Extensions:**
-
 * 2a. There are no students enrolled in the given course.
-    * 2a1. TAHub will show a message indicating there are no students found.
-    * 2a2. Use case continues from 3.
-
-
+    * 2a1. TAHub shows a message indicating there are no students found.
+    <br>
+    Use case ends.
 * 2b. There are multiple courses containing the given string as a prefix.
-    * 2b1. TAHub will display a list of all students enrolled in those courses.
-    * 2b2. Use case continues from 3.
+    * 2b1. TAHub displays a list of all students enrolled in those courses.
+    <br>
+    Use case ends.
 
-<br>
 
 **<u>Use case: UC3 - Find student by name</u>**
 
 **MSS:**
-
 1. User requests to find a student by name.
 2. TAHub displays a list of students whose names contain the input string as a prefix.
-3. Use case ends.
+<br>
+Use case ends.
 
 **Extensions:**
-
 * 2a. The list is empty.
   * 2a1. TAHub displays a message that there were no students found.
-  * 2a2. Use case ends.
-
-<br>
+  <br>
+  Use case ends.
 
 **<u>Use case: UC4 - Edit Student Information</u>**
 
-**Precondition:** The Edited Student exists in Database
+**Precondition:** The Student exists in TAHub.
 
 **MSS:**
-
 1. User requests to edit a student's information by providing the index and necessary details (name, contact, courses, email).
 2. TAHub validates the inputs.
 3. TAHub updates the student with the provided details.
 4. TAHub displays the updated student's information.
-5. Use case ends.
+<br>
+Use case ends.
 
 **Extensions:**
-
 * 2a. One or more input parameters are missing or invalid.
   * 2a1. TAHub shows an error message indicating the missing or invalid field(s).
-  * 2a2. User enters new data.
-  * 2a3. Steps 3a1-3a2 are repeated until the data entered are correct.<br>
-  Use case resumes from step 3
+  <br>
+  Use case ends.
 
-<br>
 
-**<u>Use case: UC5 - Delete Student by Index</u>**
+**<u>Use case: UC5 - Delete Student</u>**
+
+**Precondition:** The Student exists in TAHub.
 
 **MSS:**
 
 1. User requests to delete a specific student in the list by index.
 2. TAHub verifies the given index.
 3. TAHub deletes the student at the index in the list.
-4. Use case ends.
+<br>
+Use case ends.
 
 **Extensions:**
-
 * 2a. The given index is invalid.
   * 2a1. TAHub shows an error message stating that the index is invalid.
-  * 2a2. Use case ends.
+  <br>
+  Use case ends.
 
-<br>
 
-**<u>Use case: UC6 - Export Student List</u>**
+**<u>Use case: UC6 - Export Student Data</u>**
 
-**MSS**
+**MSS:**
+1. User requests to export student data with desired filename.
+2. TAHub validates filename.
+3. TAHub creates CSV file in data directory.
+4. TAHub copies file to home directory.
+5. TAHub shows number of students exported.
 
-1. TA enters export command with desired filename
-2. System validates filename
-3. System creates CSV file
-4. System writes current student list to file
-5. Success message shows number of students exported
-
-**Extensions**
-
+**Extensions:**
 * 2a. Invalid filename
-    * 2a1. System shows error message about invalid characters
-    * 2a2. Use case resumes from step 1
-
-* 3a. File already exists
-    * 3a1. System shows error message suggesting force flag
-    * 3a2. Use case resumes from step 1
-
-* 3b. Directory creation fails
-    * 3b1. System shows error message about directory creation
-    * 3b2. Use case ends
-
-* 4a. Write operation fails
-    * 4a1. System shows error message about write failure
-    * 4a2. Use case ends
-
-**<u>Use case: UC7 - Create a Consultation</u>**
-
-**MSS**
-
-1. User enters: `addconsult d/2024-10-20 t/14:00`
-2. System validates date and time are
-   - In valid format
-   - Not in the past
-   - Not already booked
-3. System creates consultation
-4. Success message shown
-
-**Extensions**
-
-* 1a. Invalid date/time format
-    * 1a1. System shows error message
-    * 1a2. Use case ends
-
-* 1b. Date/time already booked
-    * 1b1. System shows conflict error
-    * 1b2. Use case ends
-
-**<u>Use case: UC8 - Add Student to Consultation</u>**
-
-**MSS**
-
-1. TA lists existing consultations
-   - If no future consultations exist, system shows an appropriate message
-2. TA selects consultation
-3. TA adds student
-4. System updates consultation
-
-**Extensions**
-
-* 1a. No existing consultations
-    * 1a1. System shows message that no future consultations are available
-    * 1a2. Use case ends
-
-* 2a. Invalid consultation selection
-    * 2a1. System shows error message
-    * 2a2. Use case resumes from step 1
-
-* 3a. Student does not exist in system
-    * 3a1. System shows error message that student cannot be found
-    * 3a2. Use case resumes from step 3
-
-* 3b. Student already in consultation
-    * 3b1. System shows error message that student is already registered
-    * 3b2. Use case resumes from step 3
-
-**<u>Use case: UC9 - Delete Consultation</u>**
-
-**MSS**
-
-1. TA lists existing consultations
-2. TA enters command to delete specific consultation(s) by index
-3. System removes the consultation(s)
-4. Success message shown with deleted consultation details
-
-**Extensions**
-
-* 1a. No existing consultations
-    * 1a1. System shows message that no consultations are available
-    * 1a2. Use case ends
-
-* 2a. Invalid consultation index
-    * 2a1. System shows error message listing invalid indices
-    * 2a2. Use case resumes from step 2
-
-**<u>Use case: UC10 - Remove Students from Consultation</u>**
-
-**MSS**
-
-1. TA lists existing consultations
-2. TA selects consultation by index
-3. TA specifies students to remove by name
-4. System validates student existence in consultation
-5. System removes specified students from consultation 
-6. Success message shown
-
-**Extensions**
-
-* 2a. Invalid consultation index
-    * 2a1. System shows error message
-    * 2a2. Use case resumes from step 2
-
-* 3a. Student not found in system
-    * 3a1. System shows error message identifying missing student
-    * 3a2. Use case resumes from step 3
-
-* 4a. Student not in consultation
-    * 4a1. System shows error message that student is not in consultation
-    * 4a2. Use case resumes from step 3
+    * 2a1. TAHub shows error message about invalid characters.
+    <br>
+    Use case ends.
+* 3a. File already exists.
+    * 3a1. TAHub shows error message suggesting force flag.
+    <br>
+    Use case ends.
+* 3b. Directory creation fails.
+    * 3b1. TAHub shows error message about directory creation.
+    <br>
+    Use case ends.
+* 4a. Write operation fails.
+    * 4a1. TAHub shows error message about write failure.
+    <br>
+    Use case ends.
 
 
-*{More to be added}*
+**<u>Use case: UC7 - Import Student Data</u>**
+
+**MSS:**
+1. User requests to import student data with CSV filename.
+2. TAHub validates file exists and is readable.
+3. TAHub reads CSV header and validates format.
+4. TAHub processes each row and adds valid students.
+5. TAHub shows number of students imported and any errors.
+<br>
+Use case ends.
+
+**Extensions:**
+* 2a. File not found.
+  * 2a1. TAHub shows error message about missing file.
+  <br>
+  Use case ends.
+
+* 3a. Invalid header format.
+  * 3a1. TAHub shows error message about expected format.
+  <br>
+  Use case ends.
+
+* 4a. Invalid data in rows.
+  * 4a1. TAHub logs invalid entries to error.csv.
+  * 4a2. TAHub continues processing remaining rows.
+  * 4a3. Success message includes count of errors.
+  <br>
+  Use case ends.
+
+
+**<u>Use case: UC8 - Refresh Student List</u>**
+
+**Guarantees:**
+1. Overall Student List will be displayed.
+
+**MSS:**
+1. User requests to refresh student list.
+2. TAHub refreshes and displays the student list.
+<br>
+Use case ends.
+
+
+**<u>Use case: UC9 - Create a Consultation</u>**
+
+**MSS:**
+1. User requests to add a consultation by providing the necessary details (date, time).
+2. TAHub validates the inputs.
+3. TAHub adds the consultation with the provided details.
+4. TAHub displays the updated consultation list.
+<br>
+Use case ends.
+
+**Extensions:**
+* 2a. One or more input parameters are missing or invalid.
+    * 2a1. TAHub shows an error message indicating the missing or invalid fields. 
+    <br>
+    Use case ends.
+* 2b. Duplicate consultation Exists (Consultation date & time matches an existing consultation)
+    * 2b1. TAHub shows a duplicate error message.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC10 - Add Student to Consultation</u>**
+
+**Precondition:** The Consultation exists in TAHub.
+
+**MSS:**
+1. User requests to add a specific student to the consultation by providing the necessary details (Consultation Index, Student Index, Student Name)
+2. TAHub validates the inputs.
+3. TAHub adds the student to the consultation.
+4. TAHub displays the updated consultation list.
+<br>
+Use case ends.
+
+**Extensions:**
+* 2a. Invalid Consultation Index.
+    * 2a1. TAHub shows an error message stating that the Consultation Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Invalid Student Index.
+  * 2b1. TAHub shows an error message stating that the Student Index is invalid.
+    <br>
+    Use case ends.
+* 2c. Student Name not Found in Student List.
+  * 2c1. TAHub shows an error message stating that the Student does not exist.
+    <br>
+    Use case ends.
+* 2d. Student is already in consultation
+  * 2d1. TAHub shows an error message stating that the Student is already in the consultation.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC11 - Remove Student from Consultation</u>**
+
+**Precondition:** The Consultation exists in TAHub.
+
+**MSS:**
+1. User requests to remove a specific student from the consultation by providing the necessary details (Consultation Index, Student Name)
+2. TAHub validates the inputs.
+3. TAHub removes the student from the consultation.
+4. TAHub displays the updated consultation list.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Consultation Index.
+  * 2a1. TAHub shows an error message stating that the Consultation Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Student Name not Found in Student List.
+  * 2b1. TAHub shows an error message stating that the Student does not exist.
+    <br>
+    Use case ends.
+* 2c. Student is not in consultation.
+  * 2c1. TAHub shows an error message stating that the Student is not in the consultation.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC12 - Delete Consultation</u>**
+
+**Precondition:** The Consultation exists in TAHub.
+
+**MSS:**
+1. User requests to delete a specific consultation by providing the necessary details (Consultation Index).
+2. TAHub verifies the Consultation Index.
+3. TAHub deletes the consultation at the index in the Consultation List.
+<br>
+Use case ends.
+
+**Extensions:**
+* 2a. Invalid Consultation Index.
+  * 2a1. TAHub shows an error message stating that the Consultation Index is invalid.
+  <br>
+  Use case ends.
+
+
+**<u>Use case: UC13 - Export Consultation Data</u>**
+
+**MSS:**
+1. User requests to export consultation data with desired filename.
+2. TAHub validates filename.
+3. TAHub creates CSV file with consultation data.
+4. TAHub copies file to home directory.
+5. Success message shows number of consultations exported.
+<br>
+Use case ends.
+
+**Extensions:**
+* [Same extensions as UC6]
+
+
+**<u>Use case: UC14 - Import Consultation Data</u>**
+
+**MSS:**
+1. User requests to import consultation data with CSV filename.
+2. TAHub validates file exists and is readable.
+3. TAHub reads CSV header and validates format.
+4. TAHub processes each row:
+    - Validates date and time format.
+    - Checks student existence in TAHub.
+    - Creates consultation entries.
+5. TAHub shows number of consultations imported and any errors.
+<br>
+Use case ends.
+
+**Extensions:**
+* 2a. File not found.
+    * 2a1. TAHub shows error message about missing file.
+    <br>
+    Use case ends.
+* 3a. Invalid header format.
+    * 3a1. TAHub shows error message about expected format
+    <br>
+    Use case ends.
+
+* 4a. Invalid data in rows
+    * 4a1. TAHub logs invalid entries to error.csv.
+    * 4a2. TAHub continues processing remaining rows.
+    * 4a3. Error types include:
+        - Invalid date/time format.
+        - Student not found in TAHub.
+        - Duplicate consultation.
+    * 4a4. Success message includes count of errors.
+  <br>
+  Use case ends.
+
+
+**<u>Use case: UC15 - Refresh Consultation List</u>**
+
+**Guarantees:**
+1. Overall Consultation List will be displayed.
+
+**MSS:**
+1. User requests to refresh consultation list.
+2. TAHub refreshes and displays the consultation list.
+   <br>
+   Use case ends.
+
+
+**<u>Use case: UC16 - Create a Lesson</u>**
+
+**MSS:**
+1. User requests to add a lesson by providing the necessary details (date, time).
+2. TAHub validates the inputs.
+3. TAHub adds the lesson with the provided details.
+4. TAHub displays the updated lesson list.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. One or more input parameters are missing or invalid.
+  * 2a1. TAHub shows an error message indicating the missing or invalid fields.
+    <br>
+    Use case ends
+* 2b. Duplicate Lesson Exists (Lesson date & time matches an existing lesson)
+  * 2b1. TAHub shows a duplicate error message.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC17 - Add Student to Lesson</u>**
+
+**Precondition:** The Lesson exists in TAHub.
+
+**MSS:**
+1. User requests to add a specific student to the lesson by providing the necessary details (Lesson Index, Student Index, Student Name)
+2. TAHub validates the inputs.
+3. TAHub adds the student to the lesson.
+4. TAHub displays the updated lesson list.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Invalid Student Index.
+  * 2b1. TAHub shows an error message stating that the Student Index is invalid.
+    <br>
+    Use case ends.
+* 2c. Student Name not Found in Student List.
+  * 2c1. TAHub shows an error message stating that the Student does not exist.
+    <br>
+    Use case ends.
+* 2d. Student is already in lesson.
+  * 2d1. TAHub shows an error message stating that the Student is already in the lesson.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC18 - Remove Student from Lesson</u>**
+
+**Precondition:** The Lesson exists in TAHub.
+
+**MSS:**
+1. User requests to remove a specific student from the lesson by providing the necessary details (Lesson Index, Student Name)
+2. TAHub validates the inputs.
+3. TAHub removes the student from the lesson.
+4. TAHub displays the updated lesson list.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Student Name not Found in Student List.
+  * 2b1. TAHub shows an error message stating that the Student does not exist.
+    <br>
+    Use case ends.
+* 2c. Student is not in lesson
+  * 2c1. TAHub shows an error message stating that the Student is not in the lesson.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC19 - Delete Lesson</u>**
+
+**Precondition:** The Lesson exists in TAHub.
+
+**MSS:**
+1. User requests to delete a specific lesson by providing the necessary details (Lesson Index).
+2. TAHub verifies the Lesson Index.
+3. TAHub deletes the lesson at the index in the Lesson List.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC20 - Mark Student Attendance in Lesson</u>**
+
+**Precondition:** The Student & Lesson exists in TAHub. Student is already in the Lesson.
+
+**MSS:**
+1. User requests to mark a specific student's attendance in the lesson by providing the necessary details (Lesson Index, Student Name, Attendance)
+2. TAHub validates the inputs.
+3. TAHub marks the student's attendance in the lesson.
+4. TAHub displays the updated student attendance.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Student is not in lesson.
+  * 2b1. TAHub shows an error message stating that the Student is not in the lesson.
+    <br>
+    Use case ends.
+* 2c. Invalid Attendance.
+  * 2c1. TAHub shows an error message stating that the Attendance is invalid.
+    <br>
+    Use case ends.
+
+
+**<u>Use case: UC21 - Mark Student Participation in Lesson</u>**
+
+**Precondition:** The Student & Lesson exists in TAHub. Student is already in the Lesson.
+
+**MSS:**
+1. User requests to mark a specific student's participation in the lesson by providing the necessary details (Lesson Index, Student Name, Participation)
+2. TAHub validates the inputs.
+3. TAHub marks the student's participation in the lesson.
+4. TAHub displays the updated student attendance & participation.
+   <br>
+   Use case ends.
+
+**Extensions:**
+* 2a. Invalid Lesson Index.
+  * 2a1. TAHub shows an error message stating that the Lesson Index is invalid.
+    <br>
+    Use case ends.
+* 2b. Student is not in lesson.
+  * 2b1. TAHub shows an error message stating that the Student is not in the lesson.
+    <br>
+    Use case ends.
+* 2c. Invalid Participation.
+  * 2c1. TAHub shows an error message stating that the Participation is invalid.
+    <br>
+    Use case ends.
+* 2d. Participation Score is Positive & Valid.
+  * 2d1. TAHub marks the student's attendance as Present
+    <br>
+    Use case resumes from step 3.
+
+
+**<u>Use case: UC22 - Refresh Lesson List</u>**
+
+**Guarantees:**
+1. Overall Lesson List will be displayed.
+
+**MSS:**
+1. User requests to refresh lesson list.
+2. TAHub refreshes and displays the lesson list.
+   <br>
+   Use case ends.
 
 ### Non-Functional Requirements
 
@@ -705,10 +979,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
+* **Attendance**: Student's Presence/Absence for a Lesson
+* **Consultation**: A scheduled meeting between TA and students for academic discussions
+* **Lesson**: An Official Tutorial/Lab coordinated by TA
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Participation**: Student's Score for performance in a Lesson
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **TA**: Teaching assistant
-* **Student Record**: A collection of data fields that stores information about a student, including their name, contact information, course enrollment, and other relevant details (e.g., performance data or group assignments).
+* **Student***: A Person with Name, Contact, Email & Courses
+* **Student Record**: A collection of data fields that stores information about a student, including their name, contact information, course enrollment
+* **TA**: Teaching Assistant
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -737,6 +1016,78 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 3. _{ more test cases …​ }_
+
+### Adding a student
+1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
+    Expected: Student `TestOne` is added to the list. Details of the added student is shown.
+2. Test case: `add n/TestOne p/11111111`<br>
+   Expected: No student is added. Error details shown.
+3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
+   Expected: No student is added. Error details shown.
+4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
+   Expected: No student is added. Error details shown.
+
+### Finding a student (by course)
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
+   Expected: Displays students details with course `CS2103T`.
+3. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` does not Exist)<br>
+   Expected: No Students Found. Displays 0 students.
+4. Test case: `find c/1234`
+   Expected: No Students Found. Error details shown.
+5. Test case: `find c/CS2103T;CS2109S`
+   Expected: Displays students enrolled in either CS2103T or CS2109S.
+6. Test case: `find c/CS2103T c/CS2109S`
+   Expected: Displays students enrolled in both CS2103T and CS2109S.
+
+
+### Finding a student (by name)
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
+   Expected: Displays students details with name `TestOne`.
+3. Test case: `find n/TestOne` (Assuming Students with name `TestOne` does not Exist)<br>
+   Expected: No Students Found. Displays 0 students.
+4. Test case: `find n/Test1`
+   Expected: No Students Found. Error details shown.
+5.	Test case: `find n/John;Doe`
+   Expected: Displays students with either John or Doe in their names.
+6.	Test case: `find n/John n/Doe`
+   Expected: Displays students with both John and Doe in their names.
+
+### Editing a student
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+2. Test case: `edit 1 n/TestOne p/11111111`<br>
+   Expected: 1st student is edited. Details of the edited student is shown.
+3. Test case: `edit 2 e/test1@example.com c/CS2103T`<br>
+   Expected: 2nd student is edited. Details of the edited student is shown.
+4. Test case: `edit 2 n/Test 2`<br>
+   Expected: No student is edited. Error details shown.
+5. Test case: `edit 1 c/CS2103T;CS2109S`
+   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
+6. Test case: `edit 1 c/CS2103T c/CS2109S`
+   Expected: The first student’s previous courses are removed, and the courses are replaced with both CS2103T and CS2109S. Confirmation message is shown.
+5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+   Expected: No student is edited. Error details shown.
+
+### Deleting a student
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+2. Test case: `delete 1`<br>
+   Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
+3. Test case: `delete 0`<br>
+   Expected: No student is deleted. Error details shown in the status message.
+4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: No student is deleted. Error details shown in the status message.
+5. Test case: `delete 1;2`
+   Expected: Both the 1st and 2nd students are deleted from the list. Confirmation message is shown.
+
+
+2. { more test cases …​ }_
+
+### Student Test Cases
 
 ### Adding a student
 1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
@@ -791,12 +1142,223 @@ testers are expected to do more *exploratory* testing.
 4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
    Expected: No student is deleted. Error details shown in the status message.
 
-2. { more test cases …​ }_
+### Lesson Test Cases
+
+### Adding a lesson: `addlesson`
+
+1. Test case: `addlesson d/2024-10-20 t/14:00`  
+   Expected: Lesson with date 2024-10-20 and time 14:00 is added to the list. Details of the added lesson are shown.
+2. Test case: `addlesson d/2024-10-20`  
+   Expected: No lesson is added. Error details shown.
+3. Test case: `addlesson t/14:00`  
+   Expected: No lesson is added. Error details shown.
+4. Test case: `addlesson d/2024-10-20 t/14:00` (when a lesson with the same date and time already exists)  
+   Expected: No lesson is added. Error message about duplicate lesson shown.
+
+### Adding a student to a lesson: `addtolesson`
+
+1. Prerequisites: At least one lesson and one student exist in the list.
+
+2. Test case: `addtolesson 1 n/TestOne`  
+   Expected: Student TestOne is added to the first lesson. Confirmation message is shown.
+3. Test case: `addtolesson 1 i/2` (assuming the student at index 2 exists)  
+   Expected: The student at index 2 is added to the first lesson. Confirmation message is shown.
+4. Test case: `addtolesson 1 n/NonExistentStudent`  
+   Expected: No student is added. Error message about student not found shown.
+5. Test case: `addtolesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
+   Expected: No student is added. Error details shown.
+6.	Test case: `addtolesson 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are added to the first lesson. Confirmation message is shown.
+
+
+### Removing a student from a lesson: `removefromlesson`
+
+1. Prerequisites: At least one lesson with one or more students exists in the list.
+
+2. Test case: `removefromlesson 1 n/TestOne`  
+   Expected: Student TestOne is removed from the first lesson. Confirmation message is shown.
+3. Test case: `removefromlesson 1 i/2` (assuming the student at index 2 exists in the lesson)  
+   Expected: The student at index 2 is removed from the first lesson. Confirmation message is shown.
+4. Test case: `removefromlesson 1 n/NonExistentStudent`  
+   Expected: No student is removed. Error message about student not found shown.
+5. Test case: `removefromlesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
+   Expected: No student is removed. Error details shown.
+6. Test case: `removefromlesson 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are removed from the first lesson. Confirmation message is shown.
+
+### Marking attendance in a lesson: `marka`
+
+1. Test case: `marka 1 n/TestOne a/1`  
+   Expected: Student `TestOne` is marked as attended for the first lesson. Confirmation message is shown.
+2. Test case: `marka 1 n/TestOne a/0`  
+   Expected: Student `TestOne` is marked as absent for the first lesson. Confirmation message is shown.
+3. Test case: `marka 1 n/John Doe n/Jane Doe a/1`  
+   Expected: Students `John Doe` and `Jane Doe` are both marked as attended for the first lesson. Confirmation message is shown.
+4. Test case: `marka 1 n/John Doe n/Jane Doe a/0`  
+   Expected: Students `John Doe` and `Jane Doe` are both marked as absent for the first lesson. Confirmation message is shown.
+5. Test case: `marka 1 n/NonExistentStudent a/1`  
+   Expected: No attendance is marked. Error message about student not found is shown.
+6. Test case: `marka 2 n/TestOne a/1` (where lesson at index 2 doesn’t exist)  
+   Expected: No attendance is marked. Error message about lesson not found is shown.
+
+### Marking participation in a lesson: `markp`
+
+1. Test case: `markp 1 n/TestOne pt/10`  
+   Expected: Student `TestOne` is marked with a participation score of 10 for the first lesson, and attendance is set to true. Confirmation message is shown.
+2. Test case: `markp 1 n/TestOne pt/0`  
+   Expected: Student `TestOne` is marked with a participation score of 0 for the first lesson. Attendance remains unchanged. Confirmation message is shown.
+3. Test case: `markp 1 n/John Doe n/Jane Doe pt/15`  
+   Expected: Students `John Doe` and `Jane Doe` are both marked with a participation score of 15 for the first lesson, and their attendance is set to true. Confirmation message is shown.
+4. Test case: `markp 1 n/NonExistentStudent pt/10`  
+   Expected: No participation is marked. Error message about student not found is shown.
+5. Test case: `markp 2 n/TestOne pt/10` (where lesson at index 2 doesn’t exist)  
+   Expected: No participation is marked. Error message about lesson not found is shown.
+6. Test case: `markp 1 n/TestOne pt/101`  
+   Expected: No participation is marked. Error message about invalid participation score is shown (as the score exceeds the valid range of 0-100).
+7. Test case: `markp 1 n/TestOne pt/-1`  
+   Expected: No participation is marked. Error message about invalid participation score is shown (as the score is below the valid range of 0-100).
+
+### Removing a lesson: `deletelesson`
+
+1. Prerequisites: At least one lesson exists in the list.
+
+2. Test case: `deletelesson 1`
+   Expected: The first lesson is removed from the list. Confirmation message is shown.
+3. Test case: `deletelesson 0`  
+   Expected: No lesson is removed. Error details shown.
+4. Other incorrect remove commands: `deletelesson`, `deletelesson x` (where x is larger than the list size)  
+   Expected: No lesson is removed. Error details shown.
+5. Test case: `deletelesson 1;2`
+   Expected: Both the 1st and 2nd lessons are deleted from the list. Confirmation message is shown.
+
+### Consultation Test Cases
+
+### Adding a consultation: `addconsult`
+
+1. Test case: `addconsult d/2024-10-20 t/14:00`  
+   Expected: Consultation on 2024-10-20 at 14:00 is added. Confirmation message is shown.
+2. Test case: `addconsult d/2024-10-20`  
+   Expected: No consultation is added. Error details shown.
+3. Test case: `addconsult t/14:00`  
+   Expected: No consultation is added. Error details shown.
+4. Test case: `addconsult d/2024-10-20 t/14:00` (when a consultation with the same date and time exists)  
+   Expected: No consultation is added. Error message about duplicate consultation shown.
+
+### Listing all consultations: `listconsult`
+
+1. Prerequisites: At least one consultation exists.
+2. Test case: `listconsult`  
+   Expected: Displays a list of all consultations.
+
+### Adding students to a consultation: `addtoconsult`
+
+1. Prerequisites: At least one consultation and one student exist.
+
+2. Test case: `addtoconsult 1 n/TestOne`  
+   Expected: Student TestOne is added to the first consultation. Confirmation message is shown.
+3. Test case: `addtoconsult 1 i/2` (assuming the student at index 2 exists)  
+   Expected: The student at index 2 is added to the first consultation. Confirmation message is shown.
+4. Test case: `addtoconsult 1 n/NonExistentStudent`  
+   Expected: No student is added. Error message about student not found shown.
+5. Test case: `addtoconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
+   Expected: No student is added. Error details shown.
+6.	Test case: `addtoconsult 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are added to the first consultation. Confirmation message is shown.
+
+### Removing students from a consultation: `removefromconsult`
+
+1. Prerequisites: At least one consultation with one or more students exists.
+
+2. Test case: `removefromconsult 1 n/TestOne`  
+   Expected: Student TestOne is removed from the first consultation. Confirmation message is shown.
+3. Test case: `removefromconsult 1 i/2` (assuming the student at index 2 exists in the consultation)  
+   Expected: The student at index 2 is removed from the first consultation. Confirmation message is shown.
+4. Test case: `removefromconsult 1 n/NonExistentStudent`  
+   Expected: No student is removed. Error message about student not found shown.
+5. Test case: `removefromconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
+   Expected: No student is removed. Error details shown.
+6. Test case: `removefromconsult 1 n/TestOne i/2`
+   Expected: Both TestOne and the student at index 2 are removed from the first consultation. Confirmation message is shown.
+
+### Deleting consultations: `deleteconsult`
+
+1. Prerequisites: At least one consultation exists.
+
+2. Test case: `deleteconsult 1`  
+   Expected: The first consultation is deleted. Confirmation message is shown.
+3. Test case: `deleteconsult 0`  
+   Expected: No consultation is deleted. Error details shown.
+4. Other incorrect delete commands: `deleteconsult`, `deleteconsult x` (where x is larger than the list size)  
+   Expected: No consultation is deleted. Error details shown.
+5. Test case: `deleteconsult 1;2`
+   Expected: Both the 1st and 2nd consultations are deleted from the list. Confirmation message is shown.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. If you encounter an unexpected empty TAHub (no students, consults or lessons) upon startup or your data
+is replaced by sample data, your data file may be corrupted.
+   2. If you wish to try and salvage your data, **do not** perform any command yet. **This will overwrite your data.**
+   3. Copy your data file to make a safe backup first, and rename it something other than `addressbook`. You can open
+this file to view your data in JSON format.
+   4. TAHub will generate a new data file with sample data. In the meantime, if you are experienced
+with JSON, you can attempt to recover your data file by fixing issues in the file, usually syntax/formatting.
 
-2. _{ more test cases …​ }_
+### Exporting data
+
+#### Exporting student data
+1. Prerequisites: List all students using the `list` command. Multiple students should be in the list.
+
+2. Test case: `export students`<br>
+   Expected: CSV file created in data directory and home directory. Success message shows number of students exported.
+
+3. Test case: `export test.file`<br>
+   Expected: Error message about invalid filename characters.
+
+4. Test case: `export students` (when students.csv already exists)<br>
+   Expected: Error message suggesting force flag usage.
+
+5. Test case: `export -f students`<br>
+   Expected: Existing file overwritten. Success message shows number of students exported.
+
+#### Exporting consultation data
+1. Prerequisites: List all consultations using the `listconsults` command. Multiple consultations should be in the list.
+
+2. Test case: `exportconsult sessions`<br>
+   Expected: CSV file created with consultation data. Success message shows number of consultations exported.
+
+3. Test case: `exportconsult sessions` (when file exists)<br>
+   Expected: Error message suggesting force flag usage.
+
+4. Other incorrect export commands to try: `exportconsult`, `exportconsult /test`, `exportconsult test.csv`<br>
+   Expected: Error messages about invalid format/filename.
+
+### Importing data
+
+#### Importing student data
+1. Prerequisites: Prepare a valid CSV file with header "Name,Phone,Email,Courses"
+
+2. Test case: `import students.csv` (with valid data)<br>
+   Expected: Students imported successfully. Success message shows number of students imported.
+
+3. Test case: `import nonexistent.csv`<br>
+   Expected: Error message about file not found.
+
+4. Test case: Import file with invalid rows (wrong format, duplicate students)<br>
+   Expected: Some students imported. Error.csv created with invalid entries. Success message shows counts of successes and failures.
+
+#### Importing consultation data
+1. Prerequisites: Prepare a valid CSV file with header "Date,Time,Students"
+
+2. Test case: `importconsult sessions.csv` (with valid data)<br>
+   Expected: Consultations imported successfully. Success message shows number of consultations imported.
+
+3. Test case: Import file with invalid dates or times<br>
+   Expected: Invalid entries logged to error.csv. Success message shows counts.
+
+4. Test case: Import file with nonexistent students<br>
+   Expected: Entries with invalid students logged to error.csv. Success message shows counts.
+
+5. Other incorrect import commands to try: `importconsult`, `importconsult /test.csv`, `importconsult ../test.csv`<br>
+   Expected: Error messages about invalid format or file location.
