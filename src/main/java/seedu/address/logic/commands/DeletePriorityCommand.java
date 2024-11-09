@@ -15,7 +15,7 @@ public class DeletePriorityCommand extends Command {
 
     public static final String COMMAND_WORD = "deletelevel";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Resets the priority level for a patient identified by "
-            + "the index number used in the displayed person list.\n"
+            + "the index number used in the displayed patient list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
