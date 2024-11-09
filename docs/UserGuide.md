@@ -283,38 +283,20 @@ You can check your Java version by running `java -version` in the command termin
 
 ## Command summary
 
-<<<<<<< Updated upstream
-| Action              | Format, Examples                                                                                                                                                                              |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action              | Format, Examples                                                                                                                                                                            |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS t/TRIAGE [tag/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/criminal t/friend` |
-| **Add Remark**      | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`                                                                                                                    |
-| **Add Appointment** | `appointment NRIC app/DD-MM-YYYY HH:MM` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`                                                                                               |
-| **Change Triage**   | `triage NRIC t/TRIAGE` <br> e.g., `triage S1234567A t/1`                                                                                                                                      |
-| **Clear**           | `clear`                                                                                                                                                                                       |
-| **Delete**          | `delete NRIC`<br> e.g., `delete S1234567A`                                                                                                                                                    |
-| **Edit**            | `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                     |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                    |
-| **List**            | `list`                                                                                                                                                                                        |
-| **Schedule**        | `schedule`                                                                                                                                                                                    |
-| **Log**             | `log NRIC DD-MM-YYYY HH:MM INFO(non-empty)` <br> e.g., `log S1234567A 25-12-2024 14:30 Patient has been discharged`                                                                           |                                             |
-| **View**            | `view`                                                                                                                                                                                        |
-| **Help**            | `help`                                                                                                                                                                                        |
-| **Exit**            | `exit`                                                                                                                                                                                        |
-=======
-| Action              | Format, Examples                                                                                                                                                                   |
-|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/criminal t/friend` |
-| **Add Remark**      | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`                                                                                                         |
-| **Add Appointment** | `appointment NRIC app/DD-MM-YYYY HH:MM` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`                                                                                    |
-| **Clear**           | `clear`                                                                                                                                                                            |
-| **Delete**          | `delete NRIC`<br> e.g., `delete S1234567A`                                                                                                                                         |
-| **Edit**            | `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                       |
-| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                         |
-| **List**            | `list`                                                                                                                                                                             |
-| **Schedule**        | `schedule`                                                                                                                                                                         |
-| **Log**             | `log NRIC DD-MM-YYYY HH:MM INFO(non-empty)` <br> e.g., `log S1234567A 25-12-2024 14:30 Patient has been discharged`                                                                |                                             |
-| **View**            | `view`                                                                                                                                                                             |
-| **Help**            | `help`                                                                                                                                                                             |
-| **Exit**            | `exit`                                                                                                                                                                             |
+| **Add Remark**      | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`                                                                                                                  |
+| **Add Appointment** | `appointment NRIC app/DD-MM-YYYY HH:MM` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`                                                                                             |
+| **Change Triage**   | `triage NRIC t/TRIAGE` <br> e.g., `triage S1234567A t/1`                                                                                                                                    |
+| **Clear**           | `clear`                                                                                                                                                                                     |
+| **Delete**          | `delete NRIC`<br> e.g., `delete S1234567A`                                                                                                                                                  |
+| **Edit**            | `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TRIAGE] [tag/TAG]…​`<br> e.g.,`edit S1234567A n/James Lee e/jameslee@example.com`                                           |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| **List**            | `list`                                                                                                                                                                                      |
+| **Schedule**        | `schedule`                                                                                                                                                                                  |
+| **Log**             | `log NRIC DD-MM-YYYY HH:MM INFO(non-empty)` <br> e.g., `log S1234567A 25-12-2024 14:30 Patient has been discharged`                                                                         |                                             |
+| **View**            | `view`                                                                                                                                                                                      |
+| **Help**            | `help`                                                                                                                                                                                      |
+| **Exit**            | `exit`                                                                                                                                                                                      |
 
->>>>>>> Stashed changes
