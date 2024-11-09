@@ -18,7 +18,7 @@ The user guide contains formatting to highlight important info. The standards us
 * **Underline \+ Bold**: Keywords
 * <span style="color:red">RED COLOR</span>: Caution, take note
 * *Italics*: Technical terms available in glossary
-* Hyperlink: Links to another section of the user guide, or a relevant page.
+* [Hyperlink](#note-user-guide-formatting): Links to another section of the user guide, or a relevant page.
 
 ---
 
@@ -63,13 +63,13 @@ Start here if you are new to HRConnect.
 
 1. Ensure you have **[Java](#java) 17 or above** installed in your computer.
 
-2. Download the latest .jar file from \[here\](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
+2. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your HRConnect. **This folder will be used to store saved data and preferences.**
 
 4. **Double click the .jar file** in the folder you placed.
 
-A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.
+A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.
 
 ![ui example](images/uiExample.png)
 
@@ -608,7 +608,7 @@ List of certain technical terms / uncommon words used in this user guide.
 
 ### Java
 - The programming language HRConnect is based on.
-- It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) and installed before attempting to run HRConnect.
+- It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) (scroll down to get to the Java 17 downloads) and installed before attempting to run HRConnect.
 
 ### JSON
 - JavaScript Object Notation, a format for storing and transferring data.
