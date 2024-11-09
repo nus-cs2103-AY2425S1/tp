@@ -78,10 +78,11 @@ NUStates combines the power of **CLI efficiency** with the clarity of **GUI visu
 4. Open a command terminal:
     - **Windows**: Press `Win + R`, type `cmd`, and press `Enter`.
     - **macOS**: Press `Cmd + Space`, type `Terminal`, and press `Enter`.
+    - **Linux**: Press `Ctrl + Alt + T`.
 
 5. Navigate to the folder where you put the `NUStates.jar` file by using the `cd` command:
     - **Windows**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd C:\Users\JohnDoe\Desktop\NUStates`
-    - **macOS**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
+    - **macOS/Linux**: Type `cd` followed by the path to the folder where `NUStates.jar` is located. eg. `cd /Users/JohnDoe/Desktop/NUStates`
 
 6. Run the application by typing `java -jar nustates.jar` in the terminal and pressing `Enter`.
 
@@ -481,6 +482,13 @@ Format `unpin INDEX`
 
 ### Command history: Up and Down arrow keys
 NUStates keeps a history of the commands you have entered. You can navigate through this history using the up and down arrow keys.
+
+<box type="note" seamless>
+
+**Note:**
+
+Invalid commands will not be saved in the command history.
+</box>
 
 - **Up Arrow Key**: Pressing the up arrow key will cycle through the previous commands you have entered, starting from the most recent one.
 - **Down Arrow Key**: Pressing the down arrow key will cycle forward through the command history, allowing you to revisit commands you have skipped over.
