@@ -2,11 +2,11 @@
 layout: page
 title: User Guide
 ---
-
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# Real Connect
+Real Connect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Real Connect can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -25,26 +25,42 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
+
+## Command Structure
+Real Connect uses the following intuitive structure for the most of its functions:
+##### Commands on existing users
+E.g. `add`: `<Command> <X/parameter...>`
+
+##### Commands on Non-existing users
+E.g. `addProperty`: `<Command> <Index> <X/parameter>`
+
+##### Functional commands
+E.g. `help`: `<Command>`
+
+> X is a placeholder for prefixes
+
+Insert example command picture
+
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
@@ -53,6 +69,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters to the functions may have specific requirements. More information can be found here. [See Parameter Requirements](#parameter-requirements)
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -74,9 +92,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ---
 
+
+
 ### Adding a person: `add`
 
-Adds a new contact with details such as name, phone number, physical address, birthday, email, social media handles, and remarks.
+Adds a new contact with details such as name, phone number, physical address, birthday, email, and remarks.
 
 **Command Format:**  
 `add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>] [t/<Tag>]`
@@ -141,7 +161,7 @@ Edits an existing person in the address book.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 - Note that history and property **cannot be edited**
 
 
@@ -198,6 +218,8 @@ Examples:
 *   `view 1` Shows the person located as index position 1 in the address book.
     ![result for 'ViewWindow'](images/ViewWindow.png)
 
+> ###### ⚠️ **Warning**
+> The view window is optimized as a pop-up, hence while there is no limit to word entries, multiple long entries (i.e., above 50 characters) may be truncated.
 
 ### Adding a Property: `addProperty`
 
@@ -250,7 +272,7 @@ Mark a specific person from the address book as favourite by assigning a special
 
 Format: `favourite INDEX`
 
-* Mark the person at the specified `INDEX` as favourite. 
+* Mark the person at the specified `INDEX` as favourite.
 * If the person is already marked favourite, the person is removed from favourite.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
@@ -361,6 +383,16 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Parameter Requirements
+| Paramter   | Requirement        | Example                                                                              |
+|------------|--------------------|--------------------------------------------------------------------------------------|
+| Name       | Only Alpha-numeric | ❌ Shanmugam S/O Balakrishnan <br> ✅ Shanmugam Son of Balakrishnan<br/>✅ Chris Paul 3 |
+| Row 2 Cell | Row 2 Cell         | Row 2 Cell                                                                           |
+| Row 3 Cell | Row 3 Cell         | Row 3 Cell                                                                           |
+| Row 4 Cell | Row 4 Cell         | Row 4 Cell                                                                           |
+
+
+--------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 | Action                 | Format, Examples                                                                                                                                                         |
