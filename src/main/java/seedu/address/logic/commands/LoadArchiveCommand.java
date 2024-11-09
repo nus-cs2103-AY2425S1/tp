@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
@@ -11,6 +10,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.filename.Filename;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -41,7 +41,7 @@ public class LoadArchiveCommand extends Command {
         requireNonNull(model);
 
         Path archiveFile = Paths.get(model.getArchiveDirectoryPath().toString(), archiveFilename.toString());
-        if (!Files.exists(archiveFile)) {
+        if (!FileUtil.isFileExists(archiveFile)) {
             logger.info("Archive file not found: " + archiveFilename);
             return new CommandResult(String.format(MESSAGE_NOT_FOUND, archiveFilename));
         }

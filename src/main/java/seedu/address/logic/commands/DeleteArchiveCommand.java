@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.filename.Filename;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.model.Model;
 
 /**
@@ -38,7 +39,7 @@ public class DeleteArchiveCommand extends Command {
         requireNonNull(model);
 
         Path archiveFile = Paths.get(model.getArchiveDirectoryPath().toString(), archiveFilename.toString());
-        if (!Files.exists(archiveFile)) {
+        if (!FileUtil.isFileExists(archiveFile)) {
             logger.info("Archive file not found: " + archiveFilename);
             return new CommandResult(String.format(MESSAGE_NOT_FOUND, archiveFilename));
         }

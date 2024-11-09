@@ -20,6 +20,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.filename.Filename;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.model.person.Person;
 
 /**
@@ -125,9 +126,10 @@ public class ModelManager implements Model {
                 .replace(":", "-"); // : is not allowed in filenames in Windows
         String archiveFilename = source.getFileName().toString().replace(".json", "") + "-"
                 + timestamp + (filename.toString().isEmpty() ? "" : "-" + filename) + ".json";
+
         Path destination = Paths.get(this.getArchiveDirectoryPath().toString(), archiveFilename);
 
-        Files.createDirectories(destination.getParent());
+        FileUtil.createParentDirsOfFile(destination);
         Files.copy(source, destination, REPLACE_EXISTING);
         logger.info("Address book has been archived!");
     }
