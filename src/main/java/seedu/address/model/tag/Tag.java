@@ -12,7 +12,7 @@ import java.util.Optional;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tag names cannot be blank.";
+    public static final String MESSAGE_CONSTRAINTS = "Tag name cannot be blank.";
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
     public final String tagName;
