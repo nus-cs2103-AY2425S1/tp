@@ -8,7 +8,7 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":AddTransactionCommandParser" as AddTransactionCommandParser LOGIC_COLOR
 participant "a:AddTransactionCommand" as AddTransactionCommand LOGIC_COLOR
 participant "t:ArrayList<Transaction>" as TransactionList LOGIC_COLOR
-participant "p:Person" as Person LOGIC_COLOR
+participant "p:Client" as Client LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -44,7 +44,7 @@ deactivate AddressBookParser
 LogicManager -> AddTransactionCommand : execute()
 activate AddTransactionCommand
 
-AddTransactionCommand -> Model : addTransactionToPerson(1)
+AddTransactionCommand -> Model : addTransactionToClient(1)
 activate Model
 Model --> AddTransactionCommand
 deactivate Model

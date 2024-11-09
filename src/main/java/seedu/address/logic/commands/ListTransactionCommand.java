@@ -10,17 +10,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.IsSelectedPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.IsSelectedPredicate;
+
 
 /**
- * Lists all transactions for the selected person.
+ * Lists all transactions for the selected client.
  */
 public class ListTransactionCommand extends Command {
     public static final String COMMAND_WORD = "listt";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists the transactions of the person identified by "
-            + "the index number used in the displayed person list.\n"
+            + ": Lists the transactions of the client identified by "
+            + "the index number used in the displayed client list.\n"
             + "Parameter: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Listed %1$d transaction(s) for %2$s";
@@ -29,7 +30,7 @@ public class ListTransactionCommand extends Command {
     private final Logger logger = LogsCenter.getLogger(ListTransactionCommand.class);
 
     /**
-     * @param index the index of the person to view transactions of.
+     * @param index the index of the client to view transactions of.
      */
     public ListTransactionCommand(Index index) {
         requireNonNull(index);
@@ -42,21 +43,21 @@ public class ListTransactionCommand extends Command {
 
         if (model.getIsViewTransactions()) {
             logger.fine("CommandException caused by attempt to use listt command in transaction view.");
-            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, COMMAND_WORD));
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_CLIENT_LIST, COMMAND_WORD));
         }
 
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
         if (lastShownList.isEmpty()) {
-            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, COMMAND_WORD));
+            throw new CommandException(String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, COMMAND_WORD));
         }
         if (index.getZeroBased() >= lastShownList.size()) {
-            logger.fine("CommandException caused by invalid person index provided.");
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            logger.fine("CommandException caused by invalid client index provided.");
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person selected = lastShownList.get(index.getZeroBased());
-        assert selected != null : "Person should not be null";
-        model.updateFilteredPersonList(new IsSelectedPredicate(model, index));
+        Client selected = lastShownList.get(index.getZeroBased());
+        assert selected != null : "Client should not be null";
+        model.updateFilteredClientList(new IsSelectedPredicate(model, index));
         model.updateTransactionList(selected.getTransactions());
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 selected.getTransactions().size(), Messages.format(selected)));

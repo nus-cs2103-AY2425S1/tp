@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_MONTH;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Transaction;
-import seedu.address.model.person.TransactionDatePredicate;
+import seedu.address.model.client.Transaction;
+import seedu.address.model.client.TransactionDatePredicate;
 
 /**
  * Summarizes the transactions whose dates range between the first day of start month and the last day of end month.

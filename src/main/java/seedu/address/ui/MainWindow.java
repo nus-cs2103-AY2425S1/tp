@@ -31,7 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private ClientListPanel clientListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TransactionListPanel transactionListPanel;
@@ -43,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane clientListPanelPlaceholder;
 
     @FXML
     private StackPane transactionListPanelPlaceholder;
@@ -114,8 +114,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        clientListPanel = new ClientListPanel(logic.getFilteredClientList());
+        clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
         transactionListPanelPlaceholder.setVisible(false);
 
@@ -169,8 +169,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public ClientListPanel getClientListPanel() {
+        return clientListPanel;
     }
 
     /**
@@ -185,8 +185,8 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (logic.isViewTransactions()) {
-                personListPanelPlaceholder.setVisible(false);
-                personListPanelPlaceholder.setManaged(false);
+                clientListPanelPlaceholder.setVisible(false);
+                clientListPanelPlaceholder.setManaged(false);
 
                 transactionListPanel = new TransactionListPanel(logic.getFilteredTransactionList());
                 transactionListPanelPlaceholder.getChildren().clear();
@@ -197,8 +197,8 @@ public class MainWindow extends UiPart<Stage> {
             } else {
                 transactionListPanelPlaceholder.setVisible(false);
                 transactionListPanelPlaceholder.setManaged(false);
-                personListPanelPlaceholder.setVisible(true);
-                personListPanelPlaceholder.setManaged(true);
+                clientListPanelPlaceholder.setVisible(true);
+                clientListPanelPlaceholder.setManaged(true);
             }
 
             if (commandResult.isShowHelp()) {

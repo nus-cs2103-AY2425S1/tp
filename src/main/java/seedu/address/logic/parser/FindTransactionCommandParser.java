@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.TransactionContainsKeywordsPredicate;
+import seedu.address.model.client.TransactionContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindTransactionCommand object

@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.testutil.TypicalClients.CARL;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.time.YearMonth;
 
@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.TransactionDatePredicate;
+import seedu.address.model.client.TransactionDatePredicate;
 
 public class SummaryCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -59,10 +59,10 @@ public class SummaryCommandTest {
         TransactionDatePredicate predicate = new TransactionDatePredicate(
                 YearMonth.parse("2024-08"), YearMonth.parse("2024-08"));
         SummaryCommand summaryCommand = new SummaryCommand(predicate);
-        showPersonAtIndex(expectedModel, Index.fromOneBased(3));
+        showClientAtIndex(expectedModel, Index.fromOneBased(3));
         expectedModel.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionListPredicate(predicate);
-        showPersonAtIndex(model, Index.fromOneBased(3));
+        showClientAtIndex(model, Index.fromOneBased(3));
         model.updateTransactionList(CARL.getTransactions());
         assertCommandSuccess(summaryCommand, model, String.format(SummaryCommand.MESSAGE_SUCCESS,
                 predicate.getFormattedStartDate(), predicate.getFormattedEndDate(), "-$1000.00"), expectedModel);
@@ -71,10 +71,10 @@ public class SummaryCommandTest {
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         predicate = new TransactionDatePredicate(YearMonth.parse("2024-08"), YearMonth.parse("2024-11"));
         SummaryCommand summaryCommandMultipleMonths = new SummaryCommand(predicate);
-        showPersonAtIndex(expectedModel, Index.fromOneBased(3));
+        showClientAtIndex(expectedModel, Index.fromOneBased(3));
         expectedModel.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionListPredicate(predicate);
-        showPersonAtIndex(model, Index.fromOneBased(3));
+        showClientAtIndex(model, Index.fromOneBased(3));
         model.updateTransactionList(CARL.getTransactions());
         assertCommandSuccess(summaryCommandMultipleMonths, model, String.format(SummaryCommand.MESSAGE_SUCCESS,
                         predicate.getFormattedStartDate(), predicate.getFormattedEndDate(), "-$1100.00"),
@@ -82,7 +82,7 @@ public class SummaryCommandTest {
     }
 
     @Test
-    public void execute_personListView_throwsCommandException() {
+    public void execute_clientListView_throwsCommandException() {
         SummaryCommand summaryCommand = new SummaryCommand(
                 new TransactionDatePredicate(YearMonth.parse("2024-08"), YearMonth.parse("2024-08")));
         String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, "summary");

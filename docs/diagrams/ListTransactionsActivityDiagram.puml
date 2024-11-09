@@ -4,7 +4,7 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
 :User executes listt command;
-:Model updates person list;
+:Model updates client list;
 :GUI displays transactions list;
 
 'Since the beta syntax does not support placing the condition outside the
@@ -16,8 +16,8 @@ if () then ([deletet or summary command])
 else ([else])
     if () then ([list command])
         :Model clears transactions list;
-        :Model updates person list;
-        :GUI displays person list;
+        :Model updates client list;
+        :GUI displays client list;
     else ([other commands])
         :Exception thrown;
     endif
