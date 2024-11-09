@@ -33,7 +33,7 @@ title: User Guide
     - [Editing the data file](#editing-the-data-file)
     - [NRIC constraints](#nric-constraints)
   - [FAQ](#faq)
-  - [Known issues](#known-issues)
+  - [Known Issues](#known-issues)
   - [Command summary](#command-summary)
 
 CareLink is a desktop application designed for independent geriatricians managing elderly patients with chronic conditions. The application features a Command Line Interface (CLI) optimized for users who can type fast and prefer CLI over GUI, allowing efficient management of multiple patients.
@@ -503,10 +503,13 @@ NRIC should adhere to the following format and constraints:
 
 ---
 
-## Known issues
+## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Multiple Monitor Setup**: The GUI may open off-screen when switching from multi-monitor to single-monitor setup.
+   - Solution: Delete `preferences.json` and restart the application.
+
+2. **Help Window**: After minimizing the Help Window, using the `help` command, `Help` menu, or `F1` shortcut will not open a new window.
+   - Solution: Manually restore the minimized Help Window.
 
 ---
 
