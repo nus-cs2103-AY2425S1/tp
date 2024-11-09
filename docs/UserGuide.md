@@ -276,6 +276,7 @@ Eg. `t/friend t/family`
 
 Displays all persons in KonTActs.
 
+
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
 <md>**Format: `list`**</md>
@@ -902,4 +903,5 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When using excel to edit telegram username**, typing "@" will trigger the command function which will output a "Function is not valid" error. The remedy is to prefix the telegram username with an apostrophe `'` to escape from the command function. For example: typing `'@james`.
 ![excel known issue](images/excelKnownIssue.png)
+4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
 --------------------------------------------------------------------------------------------------------------------
