@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. User re-enters the phone number and/or email.
 
       Steps 3a1-3a2 are repeated until the data entered is correct.
-      Use case resumes at step 3 if the details are re-entered.
+      Use case resumes at step 4 if the details entered are correct.
 
 * 3b. User omits one or more required fields (name, phone number, email or address).
 
