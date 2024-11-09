@@ -162,6 +162,8 @@ Edits an existing person in the address book.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
+- You can remove the person’s remark by typing `r/` without remark message.
+- You can remove the person’s birthday by typing `b/` without birthday date.
 - Note that edit tag will overwrite exist list of tags to the new list of tags entered. Make sure to copy the existing tags you want to keep when editing.
 - Note that history and property **cannot be edited**
 
