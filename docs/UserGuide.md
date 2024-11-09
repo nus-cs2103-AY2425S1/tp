@@ -402,7 +402,7 @@ Finds persons whose names contain any of the given tag keywords.
 
 ### <i class="fa-solid fa-user-slash"></i> Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -435,7 +435,7 @@ Deletes the specified person from the address book.
 
 ### <i class="fa-brands fa-github"></i> Launching GitHub repository : `github`
 
-Launches GitHub repository of the specified person on the browser from the address book.
+Launches GitHub repository of the specified person on the browser from KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -450,8 +450,8 @@ Launches GitHub repository of the specified person on the browser from the addre
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * Launches the GitHub repository of the specified person.
-* Person specified needs to have a GitHub username assigned in the Address Book.
-* The name refers to the full name of the person shown in the Address Book.
+* Person specified needs to have a GitHub username assigned in KonTActs.
+* The name refers to the full name of the person shown in KonTActs.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -468,7 +468,7 @@ Launches GitHub repository of the specified person on the browser from the addre
 
 ### <i class="fa-solid fa-eye"></i> Viewing a contact's full details : `view`
 
-Opens a window at the side with the full details of the specified person from the address book.
+Opens a window at the side with the full details of the specified person from KonTActs.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -730,7 +730,7 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 <md>**Examples:**</md>
 
-* `export path/data/group12.csv` will export the contacts in the Address book as a csv file (group12.csv at the 
+* `export path/data/group12.csv` will export the contacts in KonTActs as a csv file (group12.csv at the 
 relative path given)
   </box>
 

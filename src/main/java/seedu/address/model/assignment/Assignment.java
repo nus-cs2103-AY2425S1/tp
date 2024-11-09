@@ -1,7 +1,7 @@
 package seedu.address.model.assignment;
 
 /**
- * Represents an Assignment in the address book.
+ * Represents an Assignment in KonTActs.
  */
 public class Assignment {
     private String assignmentName;
