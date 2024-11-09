@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -174,7 +175,7 @@ public class ParserUtil {
         if (trimmedKeywords.length() == 0) {
             throw new ParseException(String.format(FindCommand.MESSAGE_EMPTY_CRITERIA, prefix));
         }
-        return new HashSet<String>(Set.of(trimmedKeywords.split("\\s+")));
+        return new HashSet<String>(new HashSet<>(Arrays.asList(trimmedKeywords.split("\\s+"))));
     }
 
     /**
