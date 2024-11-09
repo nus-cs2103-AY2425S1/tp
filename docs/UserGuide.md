@@ -40,13 +40,13 @@ Main Features:
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all contacts and events.
 
-   * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the address nook.
 
    * `delete p 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts and events.
 
    * `exit` : Exits the app.
 
@@ -56,6 +56,14 @@ Main Features:
 
 Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 </box>
+
+--- {.border-primary .thick}
+
+<!-- Terminology -->
+## Terminology
+In this guide, the following terms are used:
+- **Contact(s)** and **Person(s)**: These terms are used interchangeably and refer to the individuals stored in Eventory.
+- **Address book**: Refer to the list of contacts and events in Eventory.
 
 --- {.border-primary .thick}
 
@@ -78,7 +86,7 @@ Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -90,9 +98,9 @@ Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 
 Shows a message with a list of command words and explanation on how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 --- {.border-secondary}
 
@@ -310,11 +318,14 @@ Examples:
 
 Creates a link between a person and event which will appear in the person's details.
 
-Format: `link INDEX ev/EVENT_NAME`
+Format: `link INDEX_OF_PERSON ev/EVENT_NAME`
+
+* Links the person at the specified index `INDEX_OF_PERSON` to an event of the specified name `EVENT_NAME`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
 
 Examples:
 * `list` followed by `link 2 ev/Winter Time Convention` links the 2nd person in the address book to the event.
-  ![result for 'link 2 ev/Winter Time Convention'](images/link2Winter.png)
 * `find p John` followed by `link 1 ev/Summer Time Convention` links the 1st person in the results of the `find` command to the event.
   ![result for 'link 1 ev/Summer Time Convention'](images/link2Summer.png)
 
@@ -322,12 +333,15 @@ Examples:
 
 Removes an existing link between a person and an event, so the event no longer appears in the person's details.
 
-Format: `unlink INDEX ev/EVENT_NAME`
+Format: `unlink INDEX_OF_PERSON ev/EVENT_NAME`
+
+* Unlinks the person at the specified index `INDEX_OF_PERSON` from an event of the specified name `EVENT_NAME`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
 
 Examples:
 
 * `list` followed by `unlink 2 ev/Winter Time Convention` removes the link between the 3rd person in the address book and the event.
-  ![result for 'unlink 2 ev/Winter Time Convention'](images/unlink2Winter.png)
 * `find p John` followed by `unlink 1 ev/Summer Time Convention` removes the link between the 1st person in the results of the `find` command and the event.
   ![result for 'unlink 2 ev/Summer Time Convention'](images/unlink2Summer.png)
 
@@ -335,9 +349,9 @@ Examples:
 
 ### Display events in schedule : `schedule`
 
-If non-negative integer given, find all events happening in the next given number of days.
-If negative integer given, find all events that happened in the past given number of days.
-Lists all events happening on the given date.
+- If non-negative integer given, find all events happening in the next given number of days.
+- If negative integer given, find all events that happened in the past given number of days.
+- If date time is given, find all events happening on the given date.
 
 Format: `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD`
 
@@ -352,7 +366,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Displays a confirmation, enter exactly "Y" or "Yes" to clear all entries from the address book.
+Displays a confirmation, enter exactly "Y" or "Yes" to clear all persons and events from the address book.
 
 Format: `clear` then `Y` or `Yes`
 
@@ -383,17 +397,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Eventory data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Eventory data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Eventory will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause Eventory to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 --- {.border-primary .thick}
@@ -506,29 +520,30 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **The UI components move around slightly** when clicking "Contact", "Events", and pressing the `tab` key. This does not affect the function of the app, it is caused by JavaFX, the rendering software.
+3. **The UI components move around slightly** when clicking "Contacts", "Events", and pressing the `tab` key. This does not affect the function of the app, it is caused by JavaFX, the rendering software.
 
 --- {.border-primary .thick}
 
 ## Command summary
 
-| Action                   | Format, Examples                                                                                                                                                          |
-|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Person**           | `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add p n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Add Event**            | `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​` <br> e.g., `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`                                                 |
-| **Clear**                | `clear`                                                                                                                                                                   |
-| **Clear Person**         | `clear p`                                                                                                                                                                 |
-| **Clear Event**          | `clear e`                                                                                                                                                                 |
-| **Delete Person**        | `delete p INDEX`<br> e.g., `delete p 3`                                                                                                                                   |
-| **Delete Event**         | `delete e INDEX`<br> e.g., `delete e 3`                                                                                                                                   |
-| **Edit Person**          | `edit p INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit p 2 n/James Lee e/jameslee@example.com`                                           |
-| **Edit Event**           | `edit e INDEX [n/NAME] [a/ADDRESS] [s/START_TIME] [t/TAG]`<br> e.g.,`edit e 2 n/Summer t/fashion`                                                                         |
-| **Find Person**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p James Jake`                                                                                                              |
-| **Find Event**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e Sentosa`                                                                                                                 |
-| **Schedule**             | `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD` <br> e.g.,`schedule 7`,`schedule -5`,`schedule 2024-10-15`                                                             |
-| **Search Person by Tag** | `search p KEYWORD [MORE_KEYWORDS]`<br> e.g., `search p Friends`                                                                                                           |
-| **Search Event by Tag**  | `search e KEYWORD [MORE_KEYWORDS]`<br> e.g., `search e Summer`                                                                                                            |
-| **Link**                 | `link INDEX ev/` <br> e.g., `link 1 ev/Winter Convention`                                                                                                                 |
-| **Unlink**               | `unlink INDEX ev/EVENT_NAME` <br> e.g., `unlink 1 ev/Winter Convention`                                                                                                   |
-| **List**                 | `list`                                                                                                                                                                    |
-| **Help**                 | `help`                                                                                                                                                                    |
+| Action                   | Format, Examples                                                                                                                                                |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**           | `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add p n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd t/friend t/colleague` |
+| **Add Event**            | `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​` <br> e.g., `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`                                       |
+| **Clear**                | `clear` then `Y` or `Yes`                                                                                                                                       |
+| **Clear Person**         | `clear p` then `Y` or `Yes`                                                                                                                                     |
+| **Clear Event**          | `clear e` then `Y` or `Yes`                                                                                                                                     |
+| **Delete Person**        | `delete p INDEX`<br> e.g., `delete p 3`                                                                                                                         |
+| **Delete Event**         | `delete e INDEX`<br> e.g., `delete e 3`                                                                                                                         |
+| **Edit Person**          | `edit p INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit p 2 n/James Lee e/jameslee@example.com`                                 |
+| **Edit Event**           | `edit e INDEX [n/NAME] [a/ADDRESS] [s/START_TIME] [t/TAG]`<br> e.g.,`edit e 2 n/Summer t/fashion`                                                               |
+| **Find Person**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p James Jake`                                                                                                    |
+| **Find Event**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e Sentosa`                                                                                                       |
+| **Schedule**             | `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD` <br> e.g.,`schedule 7`,`schedule -5`,`schedule 2024-10-15`                                                   |
+| **Search Person by Tag** | `search p KEYWORD [MORE_KEYWORDS]`<br> e.g., `search p Friends`                                                                                                 |
+| **Search Event by Tag**  | `search e KEYWORD [MORE_KEYWORDS]`<br> e.g., `search e Summer`                                                                                                  |
+| **Link**                 | `link INDEX_OF_PERSON ev/EVENT_NAME` <br> e.g., `link 1 ev/Winter Convention`                                                                                   |
+| **Unlink**               | `unlink INDEX_OF_PERSON ev/EVENT_NAME` <br> e.g., `unlink 1 ev/Winter Convention`                                                                               |
+| **List**                 | `list`                                                                                                                                                          |
+| **Help**                 | `help`                                                                                                                                                          |
+| **Exit**                 | `exit`                                                                                                                                                          |
