@@ -25,11 +25,12 @@ public class HelpWindow extends UiPart<Stage> {
                     + "3: delete (p/e)\n"
                     + "4: find (p/e)\n"
                     + "5: search (p/e)\n"
-                    + "6: list (p/e)\n"
+                    + "6: list \n"
                     + "7: schedule\n"
                     + "8: link\n"
-                    + "9: clear (p/e)\n"
-                    + "10: exit";
+                    + "9: unlink\n"
+                    + "10: clear (p/e)\n"
+                    + "11: exit";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

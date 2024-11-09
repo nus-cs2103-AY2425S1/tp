@@ -6,18 +6,23 @@
 
 # Eventory User Guide
 
-Eventory is a **desktop app for managing contacts and events, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Eventory is a **desktop app for managing contacts and events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 Main Features:
-- Manage big and complex contact webs with numerous information fields, with ability to save critical details
-- Schedule and manage daily tasks across large teams, track their completion
-- Have advanced automated messaging tools, send and schedule reminders/updates in bulk
+* Enhanced Contact Management
+    * Store All Your Contacts: Add phone numbers, emails, addresses, and tags
+    * Contact Linking: Add contacts to events
+    * Advanced Filters: Filter by name and tag
+* Comprehensive Event Management
+    * Track All Your Events: Add locations, start dates, and tags
+    * Timeline View: Countdown for upcoming events
+    * Advanced Filters: Filter by name, tag, or date
 
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 <!-- Quick start -->
 ## Quick start
@@ -28,9 +33,9 @@ Main Features:
 
 3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar eventory.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Launch](images/launch.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -52,7 +57,7 @@ Main Features:
 Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 <!-- Features -->
 ## Features
@@ -79,17 +84,26 @@ Refer to [Troubleshooting](#troubleshooting) for help on setting up.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-<!-- Viewing help -->
+--- {.border-secondary}
+
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message with a list of command words and explanation on how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
+--- {.border-secondary}
 
-<!-- Adding a person -->
+### Listing all persons and events : `list`
+
+Shows a list of all persons and events in the address book.
+
+Format: `list`
+
+--- {.border-secondary}
+
 ### Adding a person: `add p`
 
 Adds a person to the address book.
@@ -101,11 +115,16 @@ Format: `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
+<box type="info" seamless>
+
+**Note:** Two persons cannot have the same name, use disambiguation if needed
+eg: James (Office)
+</box>
+
 Examples:
 * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add p n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-<!-- Adding an event -->
 ### Adding an event: `add e`
 
 Adds an event to the address book.
@@ -117,15 +136,17 @@ Format: `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​`
 **Tip:** An event can have any number of tags (including 0)
 </box>
 
+<box type="info" seamless>
+
+**Note:** Two events cannot have the same name, use disambiguation if needed
+eg: Book Fair (Orchard)
+</box>
+
 Examples:
 * `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`
 * `add e n/Pizza Party a/Clementi Ave 2, #02-25 s/2024-12-01 10:30 t/Work`
 
-### Listing all persons and events : `list`
-
-Shows a list of all persons and events in the address book.
-
-Format: `list`
+--- {.border-secondary}
 
 ### Editing a person : `edit p`
 
@@ -133,7 +154,8 @@ Edits an existing person in the address book.
 
 Format: `edit p INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -150,7 +172,8 @@ Edits an existing event in the address book.
 
 Format: `edit e INDEX [n/NAME] [a/ADDRESS] [s/START TIME] [t/TAG]…​`
 
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list.
+* The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
@@ -160,6 +183,52 @@ Format: `edit e INDEX [n/NAME] [a/ADDRESS] [s/START TIME] [t/TAG]…​`
 Examples:
 *  `edit e 1 a/80 Blockhome Lane s/2024-12-15 08:30` Edits the address and starting time of the 1st event to be `80 Blockhome Lane` and `2024-12-15 08:30` respectively.
 *  `edit e 2 n/Summer Time Convention t/` Edits the name of the 2nd event to be `Summer Time Convention` and clears all existing tags.
+
+--- {.border-secondary}
+
+### Deleting a person : `delete p`
+
+Deletes the specified person from the address book.
+
+Format: `delete p INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete p 2` deletes the 2nd person in the address book.
+* `find p Betsy` followed by `delete p 1` deletes the 1st person in the results of the `find` command.
+
+Before and After:
+<div style="display: flex;">
+
+  <img src="images/deletePersonBefore.png" alt="result for 'delete p 2'" style="width: 50%; margin-right: 10px;">
+  <img src="images/deletePersonAfter.png" alt="result for 'delete p 2'" style="width: 50%;">
+</div>
+
+### Deleting an event : `delete e`
+
+Deletes the specified event from the address book.
+
+Format: `delete e INDEX`
+
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed events list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete e 2` deletes the 2nd event in the address book.
+* `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
+
+Before and After:
+<div style="display: flex;">
+
+  <img src="images/deleteEventBefore.png" alt="result for 'delete e 2'" style="width: 50%; margin-right: 10px;">
+  <img src="images/deleteEventAfter.png" alt="result for 'delete e 2'" style="width: 50%;">
+</div>
+
+--- {.border-secondary}
 
 ### Locating persons by name: `find p`
 
@@ -197,6 +266,8 @@ Examples:
 * `find e Sentosa Party` returns `Sentosa Vacation`, `Beach Party`<br>
   ![result for 'find sentosa party'](images/findSentosaParty.png)
 
+--- {.border-secondary}
+
 ### Locating persons by tag: `search p`
 
 Finds persons whose tags contain any of the given keywords.
@@ -233,43 +304,13 @@ Examples:
 * `search e Summer Fashion` returns events with tags named `Summer` or `Fashion`<br>
   ![result for 'search Summer Fashion'](images/searchSummerFashionResult.png)
 
-### Deleting a person : `delete p`
-
-Deletes the specified person from the address book.
-
-Format: `delete p INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete p 2` deletes the 2nd person in the address book.
-  ![result for 'delete p 2'](images/deletePersonBefore.png)
-  ![result for 'delete p 2'](images/deletePersonAfter.png)
-* `find p Betsy` followed by `delete p 1` deletes the 1st person in the results of the `find` command.
-
-### Deleting an event : `delete e`
-
-Deletes the specified event from the address book.
-
-Format: `delete e INDEX`
-
-* Deletes the event at the specified `INDEX`.
-* The index refers to the index number shown in the displayed events list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete e 2` deletes the 2nd event in the address book.
-    ![result for 'delete e 2'](images/deleteEventBefore.png)
-    ![result for 'delete e 2'](images/deleteEventAfter.png)
-* `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
+--- {.border-secondary}
 
 ### Linking a person to an event : `link`
 
 Creates a link between a person and event which will appear in the person's details.
 
-Format: `link INDEX EVENT_NAME`
+Format: `link INDEX ev/EVENT_NAME`
 
 Examples:
 * `list` followed by `link 2 ev/Winter Time Convention` links the 2nd person in the address book to the event.
@@ -281,7 +322,7 @@ Examples:
 
 Removes an existing link between a person and an event, so the event no longer appears in the person's details.
 
-Format: `unlink INDEX EVENT_NAME`
+Format: `unlink INDEX ev/EVENT_NAME`
 
 Examples:
 
@@ -290,16 +331,32 @@ Examples:
 * `find p John` followed by `unlink 1 ev/Summer Time Convention` removes the link between the 1st person in the results of the `find` command and the event.
   ![result for 'unlink 2 ev/Summer Time Convention'](images/unlink2Summer.png)
 
-### Schedule an event : `schedule`
+--- {.border-secondary}
 
-Lists all events with the given date, or find all events happening within the given number of days.
+### Display events in schedule : `schedule`
+
+If non-negative integer given, find all events happening in the next given number of days.
+If negative integer given, find all events that happened in the past given number of days.
+Lists all events happening on the given date.
 
 Format: `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD`
 
 Examples:
 
-* `schedule 2024-01-01` displays all events occurring on 1 Jan 2024.
 * `schedule 7` displays all events happening within 7 days from the current date.
+* `schedule 0` displays all events happening on this day.
+* `schedule -7` displays all events that happened in the past 7 days from the current date.
+* `schedule 2024-01-01` displays all events occurring on 1 Jan 2024.
+
+--- {.border-secondary}
+
+### Clearing all entries : `clear`
+
+Displays a confirmation, enter exactly "Yes" or "Y" to clear all entries from the address book.
+
+Format: `clear` then `y` or `yes`
+
+![result for 'clear' then `yes](images/clearAll.png)
 
 ### Clearing all persons : `clear p`
 
@@ -314,20 +371,15 @@ Displays a confirmation, enter "yes" or "y" to clear all events from the address
 
 Format: `clear e` then `y` or `yes`
 
-
-### Clearing all entries : `clear`
-
-Displays a confirmation, enter "yes" or "y" to clear all entries from the address book.
-
-Format: `clear` then `y` or `yes`
-
-![result for 'clear' then `yes](images/clearAll.png)
+--- {.border-secondary}
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+--- {.border-secondary}
 
 ### Saving the data
 
@@ -344,14 +396,14 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## Troubleshooting
 
@@ -431,15 +483,15 @@ cd "~/My Folder"
 
 <box type="important" seamless icon=":question:">
 
-"I get an error when I try to run the command java -jar addressbook.jar."
+"I get an error when I try to run the command java -jar eventory.jar."
 
 </box>
 
 <box type="tip" seamless>
 
-Check the file name: Ensure you’re using the exact name of the .jar file. If the file you downloaded has a different name, use that exact name in the command instead:
+Check the file name: Ensure you’re using the exact name of the .jar file. If the file has a different name, or was renamed, use that exact name in the command instead:
 ```
-java -jar differentname.jar
+java -jar "DifferentName.jar"
 ```
 <box type="info" light>
 If you receive a "Permission denied" error, ensure you have permissions to access the folder and file. Try running the terminal as an administrator (on Windows) or using sudo before the command on macOS/Linux.
@@ -448,14 +500,14 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 </box>
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
---------------------------------------------------------------------------------------------------------------------
+--- {.border-primary .thick}
 
 ## Command summary
 
@@ -472,9 +524,10 @@ Java not recognized: If you get an error like "java is not recognized as an inte
 | **Edit Event**           | `edit e INDEX [n/NAME] [a/ADDRESS] [s/START_TIME] [t/TAG]`<br> e.g.,`edit e 2 n/Summer t/fashion`                                                                         |
 | **Find Person**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p James Jake`                                                                                                              |
 | **Find Event**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e Sentosa`                                                                                                                 |
+| **Schedule**             | `schedule NUMBER_OF_DAYS` or `schedule YYYY-MM-DD` <br> e.g.,`schedule 7`,`schedule -5`,`schedule 2024-10-15`                                                             |
 | **Search Person by Tag** | `search p KEYWORD [MORE_KEYWORDS]`<br> e.g., `search p Friends`                                                                                                           |
 | **Search Event by Tag**  | `search e KEYWORD [MORE_KEYWORDS]`<br> e.g., `search e Summer`                                                                                                            |
 | **Link**                 | `link INDEX ev/` <br> e.g., `link 1 ev/Winter Convention`                                                                                                                 |
-| **List**                 | `list`                                                                                                                                                                    |
 | **Unlink**               | `unlink INDEX ev/EVENT_NAME` <br> e.g., `unlink 1 ev/Winter Convention`                                                                                                   |
+| **List**                 | `list`                                                                                                                                                                    |
 | **Help**                 | `help`                                                                                                                                                                    |
