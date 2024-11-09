@@ -1069,3 +1069,19 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number, run SellSavvy and exit using the `exit` command. 
        Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty person list.
+
+## **Appendix: Planned Enhancements**
+
+**Team size: 4**
+
+1. **Change the `CUSTOMER_INDEX` of `addorder` command to be optional when a customer's order list is open** <br>
+    - **Problem:** Currently, we made the customer's index needed to be specified for `addorder` when the customer's order list is open but related commands like `editorder` and `filterorder` do not require a customer's index to be supplied.
+    - **Solution:** We planned to make the customer's index for `addorder` optional when a particular customer's order list is already displayed.
+    - **Rationale:** User to remember the customer's index which seems unnecessary.
+
+2. **Allows detection of wrong prefix for commands**
+    - **Problem:** Currently, we only detect the relevant prefix for each command and treat every other prefix as part of the input.
+    - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
+    - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used instead of treating it as part of the parameters.
+    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening.
+    - 
