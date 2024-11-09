@@ -63,7 +63,7 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        setAccelerators();
+        //setAccelerators();
 
         helpWindow = new HelpWindow();
     }
@@ -72,9 +72,10 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    /*
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F11")); // changed
-    }
+    }*/
 
     /**
      * Sets the accelerator of a MenuItem.
