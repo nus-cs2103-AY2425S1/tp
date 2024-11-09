@@ -12,7 +12,6 @@ import spleetwaise.address.logic.commands.ExitCommand;
 import spleetwaise.address.logic.commands.FindCommand;
 import spleetwaise.address.logic.commands.HelpCommand;
 import spleetwaise.address.logic.commands.ListCommand;
-import spleetwaise.address.logic.commands.RemarkCommand;
 import spleetwaise.commons.core.LogsCenter;
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
@@ -67,9 +66,6 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

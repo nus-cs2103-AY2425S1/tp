@@ -81,7 +81,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​`
 
 * The `NAME` input allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs.
   * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
@@ -176,9 +176,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* When editing remark, the existing remark of the person will be removed i.e adding of remark is not cumulative.
+* You can remove the person’s remark by typing `r/` without specifying any remark after it.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* You can remove the person’s remark by typing `r/` without specifying any remark after it.
 
 Examples:
 
@@ -262,24 +263,6 @@ Examples:<br>
   ![result fpr 'filterTxn 1'](images/filterTxnAlexYeohResult.png)
 * `filterTxn 2 amt/5.5` returns all transactions with the person `Bernice Yu` with amount `5.50`. Given that `2` is the index of `Bernice Yu` in the displayed person list.<br>
   ![result for 'filterTxn 2 amt/5.5'](images/filterTxnBerniceYuAmt55Result.png)
-
-### Adding/Deleting Remarks for a person : `remark`
-
-Add/Delete remarks for the specified person from the address book.
-
-Format: `remark INDEX r/REMARK`
-
-* Add/delete remarks for the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-
-* `list` followed by `remark 2 r/remark for person 2` adds remarks for the 2nd person in the address book.
-* `list` followed by `remark 1 r/` deletes the remarks for the 1st person in the address book.
-* `find Betsy` followed by `remark 1 r/remark for betsy` adds remarks for the 1st person in the results of the `find`
-  command.
-* `find Betsy` followed by `remark 1 r/` deletes the remarks for the 1st person in the results of the `find` command.
 
 ### Deleting a person : `delete`
 
@@ -417,7 +400,6 @@ _Details coming soon ..._
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                        |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                    |
 | **List**   | `list`                                                                                                                                                                                                                        |
-| **Remark** | `remark INDEX r/REMARK`                                                                                                                                                                                                       |
 | **Help**   | `help`                                                                                                                                                                                                                        |
 
 --------------------------------------------------------------------------------------------------------------------

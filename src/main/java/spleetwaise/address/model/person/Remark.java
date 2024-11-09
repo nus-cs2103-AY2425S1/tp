@@ -2,16 +2,11 @@ package spleetwaise.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import spleetwaise.commons.util.AppUtil;
-
 /**
- * Represents a Person's remark in the address book. Guarantees: immutable; is valid as declared in
- * {@link #isValidRemark(String)}
+ * Represents a Person's remark in the address book. Guarantees: immutable;
  */
 public class Remark {
-    public static final int MAX_LENGTH = 120;
-    public static final String MESSAGE_CONSTRAINTS = "Remarks should not be blank or more than " + MAX_LENGTH
-            + " characters.";
+    public static final String MESSAGE_CONSTRAINTS = "Remarks should not be blank";
     public final String value;
 
     /**
@@ -19,16 +14,7 @@ public class Remark {
      */
     public Remark(String remark) {
         requireNonNull(remark);
-        String trimmedRemark = remark.trim();
-        AppUtil.checkArgument(isValidRemark(trimmedRemark), MESSAGE_CONSTRAINTS);
-        value = trimmedRemark;
-    }
-
-    /**
-     * Returns true if a given string is a valid remark (allows empty string "").
-     */
-    public static boolean isValidRemark(String test) {
-        return test.trim().length() <= MAX_LENGTH;
+        value = remark.trim();
     }
 
     @Override

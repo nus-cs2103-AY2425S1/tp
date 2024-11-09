@@ -42,4 +42,11 @@ public class BaseParserUtil {
     public static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+    /**
+     * Escapes slashes in the input string.
+     */
+    public static String parseEscapedSlashes(String input) {
+        return input.replace("\\/", "/");
+    }
 }
