@@ -217,7 +217,7 @@ Adds a session to Hall Pointer and associates it with specified members.
 
 **Constraints:**<br>
 
-- **Unique Session Name and Date Combination**: Each session name combined with its date must be unique. This ensures that each session is distinct and prevents duplicate records. If you have multiple similar sessions, consider naming them sequentially (e.g., "Rehearsal 1", "Rehearsal 2").
+- **Unique Session Name**: Each session name must be unique. This ensures that each session is distinct and prevents duplicate records. If you have multiple similar sessions, consider naming them sequentially (e.g., "Rehearsal 1", "Rehearsal 2").
 
 </box>
 
