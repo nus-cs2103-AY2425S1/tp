@@ -30,6 +30,7 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter all persons whose details contain all "
             + "the specified keywords (case-insensitive) as condition and display them as  a list with index numbers.\n"
+            + "At least one optional field must be given.\n"
             + "Parameters: [n/NAME] [p/PHONE] [g/GENDER] [t/TAG]... [m/MODULE]...\n"
             + "Example: " + COMMAND_WORD + " n/Alex m/Chemistry";
 
