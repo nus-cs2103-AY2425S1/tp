@@ -102,10 +102,10 @@ Adds a new contact with details such as name, phone number, physical address, bi
 `add n/<Full Name> p/<Phone Number> a/<Address> [b/<Birthday>] e/<Email> [r/<Remark>]…​ [t/<Tag>]…​`
 
 - `n/` Full name (mandatory) (exact duplicate not allowed, case-sensitive)
-- `p/` Phone number (mandatory) (duplicate allowed)
-- `a/` Address (mandatory) (duplicate allowed)
+- `p/` Phone number (mandatory) (duplicate allowed as shared organization contact number may be used)
+- `a/` Address (mandatory) (duplicate allowed as shared organization address may be used)
 - `b/` Birthday (optional) (duplicate allowed)
-- `e/` Email (mandatory) (duplicate allowed)
+- `e/` Email (mandatory) (duplicate allowed as shared organization email may be used)
 - `r/` Remark (optional) (multiple allowed but only the last one will be recorded) (duplicate allowed)
 - `t/` Tag (optional) (multiple allowed and all will be added) (duplicate allowed)
 
