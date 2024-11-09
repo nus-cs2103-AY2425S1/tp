@@ -13,7 +13,7 @@ import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteClaimsCommand;
+import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.logic.commands.DeleteClientCommand;
 import seedu.address.logic.commands.DeletePoliciesCommand;
 import seedu.address.logic.commands.EditClaimCommand;
@@ -101,8 +101,8 @@ public class PrudyParser {
         case DeletePoliciesCommand.COMMAND_WORD:
             return new DeletePoliciesCommandParser().parse(arguments);
 
-        case DeleteClaimsCommand.COMMAND_WORD:
-            return new DeleteClaimsCommandParser().parse(arguments);
+        case DeleteClaimCommand.COMMAND_WORD:
+            return new DeleteClaimCommandParser().parse(arguments);
 
         case AddClaimCommand.COMMAND_WORD:
             return new AddClaimCommandParser().parse(arguments);
