@@ -38,7 +38,7 @@ public class AssignCommand extends Command {
             + "Parameters: "
             + "INDEX (must be a positive integer) or KEYWORD (the name of contact) "
             + "[" + PREFIX_ROLE + "ROLE] "
-            + "[" + PREFIX_WEDDING + "WEDDING...]\n"
+            + "[" + PREFIX_WEDDING + "WEDDING_INDEX]...\n"
             + "Example: \n" + COMMAND_WORD
             + " Alex Yeoh " + PREFIX_ROLE + "food vendor\n"
             + COMMAND_WORD + " Alex Yeoh " + PREFIX_WEDDING + "1\n"
@@ -50,11 +50,12 @@ public class AssignCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_ROLE = "This role has already been assigned to %1$s.";
 
-    public static final String MESSAGE_DUPLICATE_WEDDING = "Person has already been assigned to wedding(s).";
+    public static final String MESSAGE_DUPLICATE_WEDDING = "Person has already been assigned to the "
+            + "following wedding(s):";
 
     public static final String MESSAGE_ASSIGN_EMPTY_PERSON_LIST_ERROR = "There is no person to assign.";
 
-    public static final String MESSAGE_CLIENT_ASSIGN_ERROR = "Person is already a client of the wedding";
+    public static final String MESSAGE_CLIENT_ASSIGN_ERROR = "Person is already a client of this wedding:";
 
     public static final String MESSAGE_ASSIGN_EMPTY_WEDDING_LIST_ERROR =
             "There is no wedding to assign as the wedding list is empty.\n"
@@ -65,8 +66,9 @@ public class AssignCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to assign.\n"
-                    + "Find the index from the list below and type edit INDEX ...\n"
-                    + "Example: " + COMMAND_WORD + " 1 ...";
+                    + "Find the index from the list below and type: assign INDEX " + "[" + PREFIX_ROLE + "ROLE] "
+                    + "[" + PREFIX_WEDDING + "WEDDING_INDEX]...\n"
+                    + "Example: " + COMMAND_WORD + " 1 " + PREFIX_ROLE + "florist " + PREFIX_WEDDING + "1";
     private final Index index;
     private final NameMatchesKeywordPredicate predicate;
     private final PersonWithRoleDescriptor personWithRoleDescriptor;
@@ -100,20 +102,9 @@ public class AssignCommand extends Command {
         Person assignedPerson;
         if (weddingIndices != null) {
             checkValidWeddingIndices(model);
-            // Check if person is client of any of the weddings they're being assigned to
-            List<Wedding> weddings = model.getFilteredWeddingList();
-            for (Index index : weddingIndices) {
-                Wedding wedding = weddings.get(index.getZeroBased());
-                // Check if person is client of the wedding
-                if (personToAssign.getOwnWedding() != null && personToAssign.getOwnWedding().isSameWedding(wedding)) {
-                    throw new CommandException(MESSAGE_CLIENT_ASSIGN_ERROR);
-                }
-                // Check if person is already assigned to the wedding
-                if (personToAssign.isAssignedToWedding(wedding)) {
-                    throw new CommandException(MESSAGE_DUPLICATE_WEDDING);
-                }
-            }
-            generateWeddingJobs(model);
+            checkIsClientOfWedding(model, personToAssign);
+            checkIsAssignedWeddings(model, personToAssign);
+            assignWeddingJobs(model);
             assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
             model.setPerson(personToAssign, assignedPerson);
             model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
@@ -194,8 +185,8 @@ public class AssignCommand extends Command {
         // if the role is null -> r/ prefix was not specified, retain original role
         // if role is Optional -> update role
         Optional<Role> updatedRole = personWithRoleDescriptor.getRole() == null
-                                    ? personToAddRole.getRole()
-                                    : personWithRoleDescriptor.getRole();
+                ? personToAddRole.getRole()
+                : personWithRoleDescriptor.getRole();
         Wedding ownWedding = personToAddRole.getOwnWedding();
 
         Person person = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
@@ -234,11 +225,50 @@ public class AssignCommand extends Command {
     }
 
     /**
-     * Associates the person with wedding jobs based on the provided indices.
+     * Check if person is client of wedding to assign
+     *
+     * @param model {@code Model} which the command should operate on
+     * @throws CommandException if the list is empty or if the index is invalid
+     */
+    public void checkIsClientOfWedding(Model model, Person personToAssign) throws CommandException {
+        List<Wedding> weddings = model.getFilteredWeddingList();
+        for (Index index : weddingIndices) {
+            Wedding wedding = weddings.get(index.getZeroBased());
+            if (personToAssign.getOwnWedding() != null && personToAssign.getOwnWedding().isSameWedding(wedding)) {
+                throw new CommandException(MESSAGE_CLIENT_ASSIGN_ERROR + "\n" + Messages.format(wedding));
+            }
+        }
+    }
+
+    /**
+     * Check if weddings are already assigned to person
+     *
+     * @param model {@code Model} which the command should operate on
+     * @throws CommandException if the list is empty or if the index is invalid
+     */
+    public void checkIsAssignedWeddings(Model model, Person personToAssign) throws CommandException {
+        List<Wedding> weddings = model.getFilteredWeddingList();
+        Set<Wedding> assignedWeddings = new HashSet<>();
+        for (Index index : weddingIndices) {
+            Wedding wedding = weddings.get(index.getZeroBased());
+            // Check if person is already assigned to the wedding
+            if (personToAssign.isAssignedToWeddingNonClient(wedding)) {
+                assignedWeddings.add(wedding); // Append wedding details
+            }
+        }
+        // If there are any assigned weddings, throw an exception with the full message
+        if (!assignedWeddings.isEmpty()) {
+            // Remove the trailing comma and space
+            throw new CommandException(MESSAGE_DUPLICATE_WEDDING + "\n" + Messages.format(assignedWeddings));
+        }
+    }
+
+    /**
+     * Assigns the person with wedding jobs based on the provided indices.
      *
      * @param model The model containing the list of weddings.
      */
-    public void generateWeddingJobs(Model model) {
+    public void assignWeddingJobs(Model model) {
         List<Wedding> weddingList = model.getFilteredWeddingList();
 
         for (Index index : weddingIndices) {

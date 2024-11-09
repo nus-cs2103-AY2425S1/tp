@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,11 +44,13 @@ public class DeleteCommand extends Command {
                     + "Find the index from the list below and type delete INDEX\n"
                     + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_PERSON_IS_CLIENT =
-            "Cannot delete this person as they are a client in a wedding.\n"
-            + "Please delete their wedding first.";
+            """
+                    Cannot delete this person as they are a client in the following wedding:\s
+                    %1$s
+                    Please delete their wedding first.""";
 
     public static final String MESSAGE_PERSON_NOT_ASSIGNED_WEDDING =
-            "Cannot unassign wedding(s) from this person because they are not assigned to the specified wedding(s)";
+            "Cannot remove wedding job(s) from this person because they are not assigned to the following wedding(s):";
 
     private final Index targetIndex;
     private final NameMatchesKeywordPredicate predicate;
@@ -83,14 +86,14 @@ public class DeleteCommand extends Command {
         if (isDeleteWedding) {
             checkValidWeddingIndices(model);
             // check if person was assigned to those weddings
-            checkPersonIsAssignedWeddings(personToDelete, model);
+            checkIsAssignedWeddings(model, personToDelete);
             // delete those weddings
             removeWeddingJobs(personToDelete, model);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Reset filter
             return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                     Messages.format(personToDelete)));
         } else {
-            validatePersonIsNotClient(personToDelete, model);
+            validatePersonIsNotClient(personToDelete);
             model.deletePerson(personToDelete);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Reset filter
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
@@ -135,9 +138,10 @@ public class DeleteCommand extends Command {
      *
      * @throws CommandException if the person is a client in a wedding
      */
-    private void validatePersonIsNotClient(Person person, Model model) throws CommandException {
+    private void validatePersonIsNotClient(Person person) throws CommandException {
         if (person.getOwnWedding() != null) {
-            throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
+            throw new CommandException(String.format(MESSAGE_PERSON_IS_CLIENT,
+                    Messages.format(person.getOwnWedding())));
         }
     }
 
@@ -163,21 +167,26 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Checks if person is assigned to weddings before attempting to remove them.
+     * Checks if person is even assigned to weddings before attempting to remove them.
      *
      * @param personToDelete person to check assigned weddings
      * @param model The model containing the list of weddings.
      * @throws CommandException if person is not assigned weddings
      */
-    public void checkPersonIsAssignedWeddings(Person personToDelete, Model model) throws CommandException {
-        List<Wedding> weddingList = model.getFilteredWeddingList();
+    public void checkIsAssignedWeddings(Model model, Person personToDelete) throws CommandException {
+        List<Wedding> weddings = model.getFilteredWeddingList();
+        Set<Wedding> weddingsNotAssigned = new HashSet<>();
         for (Index index : weddingIndices) {
-            Wedding wedding = weddingList.get(index.getZeroBased());
-            if (!personToDelete.isAssignedToWeddingNonClient(wedding)) {
-                throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
+            Wedding weddingToRemove = weddings.get(index.getZeroBased());
+            // Check if person is already assigned to the wedding
+            if (!personToDelete.isAssignedToWeddingNonClient(weddingToRemove)) {
+                weddingsNotAssigned.add(weddingToRemove);
             }
         }
-
+        if (!weddingsNotAssigned.isEmpty()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING
+                    + "\n" + Messages.format(weddingsNotAssigned));
+        }
     }
 
     /**
