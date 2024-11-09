@@ -1,7 +1,6 @@
 {
   "baseUrl": "",
-  "titlePrefix": "MyProduct",
-  "titleSuffix": "AddressBook Level-3",
+  "titleSuffix": "ContactsForGood",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"
