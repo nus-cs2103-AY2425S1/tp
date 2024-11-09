@@ -653,7 +653,11 @@ testers are expected to do more *exploratory* testing.
 2. Deleting all graduated students when only some persons are being shown, or when no people are shown.
    1. Prerequisites: Multiple persons in the list, with at least 1 person with `GradYear` field earlier than the current year. Find a specific student with the `find` command, typing `find n/NAME`, replacing NAME with the name of any person in the address book.
    2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br>
-      Expected: All persons with `GradYear` field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted. However, if none of the graduated students have name NAME, the view does not change, as we continue to see the view of the address book after applying `find n\NAME`. Use `list` to see the effects of the deletion.
+      Expected: All persons with `GradYear` field YEAR - 1 or earlier deleted from the address book. Status message informs the user that graduated students have been deleted. However, if none of the graduated students have name NAME, the view does not change, as we continue to see the view of the address book after applying `find n\NAME`. Use `list` to see the effects of the deletion. An example is shown below with screenshots.
+      1. It is currently 2024. Alex is the only student with GradYear 2023 or earlier. ![step 1](images/CleanManualTestingAfterFindStep1.png)
+      2. We execute `find n/Bernice`, such that only Bernice is in the view. ![step 2](images/CleanManualTestingAfterFindStep2.png)
+      3. We execute `clean`. The view remains the same. ![step 3](images/CleanManualTestingAfterFindStep2.png)
+      4. We execute `list` and see that Alex is deleted. ![step 4](images/CleanManualTestingAfterFindStep4.png)
 3. Attempting to delete all graduated students when there are none.
    1. Prerequisites: No persons present in the address book with `GradYear` field earlier than the current year.
    2. Test case: `clean`, executed in YEAR, where YEAR is the current year. <br> 
