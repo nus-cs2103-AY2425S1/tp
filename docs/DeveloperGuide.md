@@ -509,7 +509,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 **MSS**:
 
-1. Tutor keys in a keyword in the required field to find lessons whose names contain this keyword.
+1. Tutor keys in a keyword in the required field to find lessons with student names that contain this keyword.
 1. TutorEase lists the lessons with the given keyword.  
    Use case ends.
 
