@@ -507,7 +507,7 @@ NUStates will highlight any specific errors in the command entered by the user. 
 ![highlight_error_feature](images/highlightErrorFeature.png)
 
 - **Unknown Command**: If the command entered is not recognized by NUStates, it will highlight the invalid command keyword and provide a message indicating that the command is unknown.
-- **Missing Preamble Value**: If required preamble value is invalid (e.g., non-positive values where positive numbers are expected), NUStates will highlight the invalid preamble value and provide a message indicating the expected format.
+- **Missing Index Value**: If required index value is invalid (e.g., non-positive values where positive numbers are expected), NUStates will not highlight any specific part of the command but will provide a message indicating the correct format.
 - **Invalid Parameter Values**: If any parameter values are invalid (e.g., non-numeric values where numbers are expected), NUStates will highlight the invalid values and provide a message indicating the expected format.
 - **Invalid Command Format and Other Errors**: For incorrect command format and other errors, NUStates will not highlight any specific part of the command but will provide a message indicating the correct format. This includes missing parameters, incorrect command structure, and other general errors.
 
@@ -517,7 +517,12 @@ Examples:
   - Cause: The command `ad` is not recognised.
   - Highlight: The `ad` part is highlighted.
 
-2. **Invalid Preamble Value**:
+2. **Missing Index Value**:
+  - Command entered: `addBuy ht/h bp/999999 pc/999111 un/10-01`
+  - Cause: The required person index is missing.
+  - Highlight: No specific part is highlighted.
+
+2. **Invalid Index Value**:
   - Command entered: `addBuy -22 ht/c pc/999111 un/10-01 bp/1000000`
   - Cause: The person index `-22` is invalid.
   - Highlight: The invalid `-22` part is highlighted.
