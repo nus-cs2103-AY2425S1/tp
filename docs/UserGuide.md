@@ -81,13 +81,13 @@ This user guide provides an overview for HR staff on the usage of HR Helper.
    
 2. Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all employees.
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds an employee named `John Doe` to the HR Helper list.
 
    * `delete 3` : Deletes the 3rd employee shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all employees.
 
    * `exit` : Exits the app.
 
@@ -188,7 +188,7 @@ Examples:
 
 ### 4.4 Listing all employees : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all employees in HR Helper.
 
 Format: `list`
 
@@ -212,10 +212,10 @@ Example:
 
 Counts number of employees.
 
-Format: `count`(for counting the filtered list), `count tag/TAG`(for counting persons with given TAG)
+Format: `count`(for counting the filtered list), `count tag/TAG`(for counting employees with given TAG)
 
 * If counting the entire list, use `count`.
-* If counting persons with specified TAG, add TAG to end of the command.
+* If counting employees with specified TAG, add TAG to end of the command.
 
 <box type="tip" seamless>
 
@@ -266,7 +266,7 @@ Examples:
 
 ### 4.7 Locating employees by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds employees whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -274,7 +274,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 <box type="tip" seamless>
@@ -297,7 +297,7 @@ Examples:
 
 ### 4.8 Deleting an employee : `delete`
 
-Deletes the specified employee from the address book.
+Deletes the specified employee from HR Helper.
 
 Format: `delete INDEX`
 
@@ -311,7 +311,7 @@ Format: `delete INDEX`
 </box>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd employee in the address book.
+* `list` followed by `delete 2` deletes the 2nd employee in HR Helper.
 * `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 <img src = "" width=500 alt="output">
@@ -324,13 +324,13 @@ Examples:
 
 ### 4.9 Sorting Employees: `sort`
 
-Sorts the displayed contacts based on specified tags.
+Sorts the displayed employees based on specified tags.
 
 Format: `sort TAG`
 
-* Sorts the contacts according to the specified tags.
+* Sorts the employees according to the specified tags.
 * You can specify multiple tags for sorting.
-* If no tags are specified, all contacts will be displayed in their original order.
+* If no tags are specified, all employees will be displayed in their original order.
 
 <box type="tip" seamless>
 
@@ -338,8 +338,8 @@ Format: `sort TAG`
 </box>
 
 Examples:
-* `sort friend` Sorts and displays all contacts tagged as friend.
-* `sort friend family` Sorts and displays contacts tagged as either friend or family.
+* `sort friend` Sorts and displays all employees tagged as friend.
+* `sort friend family` Sorts and displays employees tagged as either friend or family.
 
 <img src = "" width=500 alt="output">
 
@@ -351,7 +351,7 @@ Examples:
 
 ### 4.10 Favoriting an employee : `favorite`
 
-Favorites the specified employee from the address book.
+Favorites the specified employee from HR Helper.
 
 Format: `favorite INDEX`
 
@@ -363,24 +363,24 @@ Format: `favorite INDEX`
 
 <img src = "images/favorite.png" width=500 alt="description">
 
-**Tip:** Use favorite for high-priority contacts, making them easier to locate with filtering or sorting.
+**Tip:** Use favorite for high-priority employees, making them easier to locate with filtering or sorting.
 </box>
 
 Examples:
-* `list` followed by `favorite 2` favorites the 2nd employee in the address book.
+* `list` followed by `favorite 2` favorites the 2nd employee in HR Helper.
 * `find Betsy` followed by `favorite 1` favorites the 1st employee in the results of the `find` command.
 
 <img src = "" width=500 alt="output">
 
 <box type="warning" seamless>
 
-**Warning:** Avoid favoriting too many contacts, as an excessive number of favorites can make it challenging to identify key contacts quickly.
+**Warning:** Avoid favoriting too many employees, as an excessive number of favorites can make it challenging to identify key employees quickly.
 </box>
 
 
 ### 4.11 Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from HR Helper.
 
 Format: `clear`
 
