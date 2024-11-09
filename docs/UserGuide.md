@@ -10,13 +10,14 @@
 
 <br>
 
-EduContacts is a **desktop app for educators in tertiary institutions to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, EduContacts can get your contact management tasks done faster than traditional GUI apps. For educators who may be less experienced with command-based tools, EduContacts also includes user-friendly and intuitive features and guidance, making it accessible for all users.
+EduContacts is a **desktop app for educators in tertiary institutions to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). For expert users familiar with command-based tools, EduContacts can get your contact management tasks done faster than traditional GUI apps. For new users, EduContacts also includes user-friendly and intuitive features and guidance, making it user-friendly and accessible for all users.
 
 <br>
 <!-- * Table of Contents -->
 
-1. [Quick start](#quick-start)
-2. [Features](#features)
+1. [Guidance Icons Legend](#guidance-icons-legend)
+2. [Quick start](#quick-start)
+3. [Features](#features)
     - [Viewing help : `help`](#viewing-help-help)
     - [Adding a person: `add`](#adding-a-person-add)
     - [Listing all persons : `list`](#listing-all-persons-list)
@@ -28,10 +29,27 @@ EduContacts is a **desktop app for educators in tertiary institutions to manage 
     - [Finding a person: `find`](#finding-a-person--find)
     - [Clearing all entries : `clear`](#clearing-all-entries-clear)
     - [Exiting the program : `exit`](#exiting-the-program-exit)
-3. [FAQ](#faq)
-4. [Known issues](#known-issues)
-5. [Command summary](#command-summary)
+4. [FAQ](#faq)
+5. [Known issues](#known-issues)
+6. [Command summary](#command-summary)
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## Guidance Icons Legend
+
+**Legend:**
+<box type="tip" seamless>
+
+**Tip:**  Helpful suggestions to improve your experience or maximize efficiency.</box>
+
+<box type="info" seamless>
+
+**Note:**  Important information or details to keep in mind for correct usage.</box>
+
+<box type="warning" seamless>
+
+**Warning:** Critical cautions to prevent errors, potential issues, or data loss.</box>
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -139,8 +157,9 @@ Format:
 ```bash
 help
 ```
-![help message](images/helpMessage.png)
 
+The help window will display the help message as shown in the screenshot below:
+![help message](images/helpMessage.png)
 Alternatively, you can click the button on the top right hand corner as indicated here:
 ![alternative_help](images/alternativeHelp.png)
 
@@ -158,7 +177,7 @@ add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE
 Examples:
 * `add 87654321 n/Betsy Crowe r/Student e/betsycrowe@example.com a/Blk 30 Geylang Street 29, #06-40 p/1234567 c/Business Analytics` will add a person named `Betsy Crowe` with student ID of `87654321` to EduContacts.
 * `add 12345678 n/John Doe p/98981212 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student` will add a person named `John Doe` with student ID of `12345678` to EduContacts.
-* `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics r/Student` will add a person named `Benson Boon` with student ID of `71271222` to EduContacts.
+* `add 71271222 n/Benson Boon p/89229191 e/benson@example.com a/Blk 12 Benson Street c/Economics r/Student` will add a person named `Benson Boon` with student ID of `71271222` to EduContacts (the response message of this command is shown in the screenshot below).
 
   ![result for 'add command result'](images/addCommandResult.png)
 
@@ -172,6 +191,7 @@ Format:
 ```bash
 list
 ```
+The response message of this command is shown in the screenshot below:
 ![result for 'list command result'](images/listCommandResult.png)
 
 <br>
@@ -187,7 +207,7 @@ module ID m/MODULE
 
 Examples:
 * `module 12345678 m/GEA1000` will add a module `GEA1000` to a person with student ID of `12345678`.
-* `module 13131313 m/CS2103T` will add a module `CS2103T` to a person with student ID of `13131313`.
+* `module 13131313 m/CS2103T` will add a module `CS2103T` to a person with student ID of `13131313` (the response message of this command is shown in the screenshot below).
 
   ![result for 'add module result'](images/addModule.png)
 
@@ -209,7 +229,7 @@ edit ID [FIELD_TO_EDIT_PREFIX] [NEW_VALUE]
 
 Examples:
 *  `edit 12345678 m/CS2103T CS2101` will edit a person with student ID of `12345678` by replacing the old module `CS2103T` with the new module `CS2101`.
-*  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science`.
+*  `edit 12121212 c/Computer Science` will edit a person with student ID of `12121212` by editing their course to `Computer Science` (the response message of this command is shown in the screenshot below).
 
    ![result for 'edit command result'](images/editCommandResult.png)
 
@@ -272,7 +292,7 @@ Examples:
 * `filter n/John` will return a list of all persons with `John` in their name e.g. `john` and `John Doe`.
 * `filter m/CS2103T` will return a list of all persons with module `CS2103T`.
 * `filter c/Computer Science` will return a list of all persons with course `Computer Science`.
-* `filter n/alex david` will return a list of all persons with `alex` or `david` in their name e.g.  `Alex Yeoh`, `David Li`.
+* `filter n/alex david` will return a list of all persons with `alex` or `david` in their name e.g.  `Alex Yeoh`, `David Li` (the result of this command is shown in the screenshot below).
 
   ![result for 'find alex david'](images/filterAlexDavidResult.png)
 <br>
@@ -285,11 +305,11 @@ To return to display the full list of persons, use the `list` command.
 
 </box>
 
-### Deleting a person : `delete`
+### Deleting a person/module : `delete`
 
-Deletes the specified person from EduContacts.
+Deletes the specified person/module from EduContacts. This command has 2 formats.
 
-Format:
+Format 1:
 ```bash
 delete ID
 ```
@@ -298,10 +318,21 @@ delete ID
 
 Examples:
 * `delete 15151515` will delete a person with student ID of `15151515` from EduContacts.
-* `delete 71271222` will delete a person with student ID of `71271222` from EduContacts.
+* `delete 71271222` will delete a person with student ID of `71271222` from EduContacts (the response message of this command is shown in the screenshot below).
 
   ![result for 'delete_71271222'](images/deleteCommandResult.png)
 
+Format 2:
+```bash
+delete ID m/MODULE
+```
+
+* Deletes a module from the person with the specified student ID.
+
+Examples: 
+* `delete 13131313 m/CS2103T` will delete the module `CS2103T` from a person with student ID of `13131313` (the result of this command is shown in the screenshot below).
+
+  ![result for 'delete_13131313'](images/deleteModuleResult.png)
 <div style="page-break-after: always;"></div>
 
 ### Finding a person : `find`
@@ -402,11 +433,11 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add ID n/NAME p/PHONE e/EMAIL a/ADDRESS c/COURSE r/ROLE` <br> e.g., `add 12345678 n/John Doe p/99999999 e/johndoe@example.com a/123 Jane Doe Road c/Computer Science r/Student`
 **Clear**  | `clear`
-**Delete** | `delete ID`<br> e.g., `delete 12345678`
+**Delete** | `delete ID`<br> e.g., `delete 12345678` <br> <br> `delete ID m/MODULE` <br> e.g., `delete 12345678 m/CS2103T`
 **Edit**   | `edit ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/COURSE] [r/ROLE]…​`<br> e.g.,`edit 12345678 p/91234567 e/johndoe@example.com`
 **Grade**  | `grade ID m/MODULE g/GRADE` <br> e.g. `grade 12345678 m/CS2103T g/A`
 **Add Module** | `module ID [m/MODULE]` <br> e.g., `add 12345678 m/CS2103T`
 **Filter**   | `filter [n/NAME] [c/COURSE] [m/MODULE]`<br> e.g., `filter n/James Jake`
 **Find**   | `find ID`<br> e.g., `find 12345678`
 **List**   | `list`
-**Help**   | `help`
+
