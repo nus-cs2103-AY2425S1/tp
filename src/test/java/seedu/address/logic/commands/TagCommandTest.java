@@ -74,7 +74,7 @@ public class TagCommandTest {
 
         Set<Tag> tagSet = SampleDataUtil.getTagSet("tag1", "tag2", "tag3", "tag4", "tag5", "tag6");
         TagCommand command = new TagCommand(index, tagSet);
-        String expectedMessage = "Each person can only have up to 6 tags!";
+        String expectedMessage = "A contact can only have up to 6 tags";
         assertCommandFailure(command, model, expectedMessage);
     }
 
