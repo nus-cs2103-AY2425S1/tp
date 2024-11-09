@@ -220,8 +220,8 @@ public class AutoSuggestionTextField extends TextField {
         suggestionPopup.show(this, location.getX(), location.getY());
         double height = calculateListViewHeight(textFlowItems);
         double width = calculateListViewWidth(textFlowItems);
-        suggestionList.setPrefHeight(height + 10);
-        suggestionList.setMaxHeight(height + 10);
+        suggestionList.setPrefHeight(height);
+        suggestionList.setMaxHeight(height);
         suggestionList.setPrefWidth(width);
     }
 
@@ -248,9 +248,9 @@ public class AutoSuggestionTextField extends TextField {
      * @return The calculated total height.
      */
     private double calculateListViewHeight(ObservableList<TextFlow> items) {
-        double totalHeight = 1;
+        double totalHeight = 2;
         for (TextFlow item : items) {
-            totalHeight += 46;
+            totalHeight += 51;
         }
         return totalHeight;
     }

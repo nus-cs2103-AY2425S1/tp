@@ -54,22 +54,25 @@ Refer to the [Features](#features) below for more details.
 Our graphical user interface (GUI) consists of several parts, refer to the image below.
 
 1. **Menu Option**: By clicking the buttons here around the top right, you can exit the app or open the help window.
+
 2. **Command Input Box**: You may input commands here.
+
 3. **Result Display Panel**: Results of command execution and error messages are displayed here.
-4. **Person Cards Panel**: Person cards are listed here.
+
+4. **Person Cards Panel**: Person cards are listed here. 
    ![UiTut](images/UiTut.png)
 
-### Command Popup!
+### Command PopUp
 
 ![CommandPopUp](images/commandpopup.png)
 
-Our Command Suggestion Pop-Up helps you find the command you need with ease.
+Our Command Suggestion PopUp helps you find the command you need with ease.
 
-When you start typing in the command box and have **at least one** character entered, the pop-up will appear, suggesting possible commands to complete your input. 
+When you start typing in the command box and have **at least one** character entered, the PopUp will appear, suggesting possible commands to complete your input. 
 
-Each suggestion includes the correct command format and any required details to use it effectively.
+Each suggestion includes the command name, command format and any required details to use it effectively.
 
-To scroll through the suggestions:
+To cycle through the suggestions:
 * Press `shift + up` or `shift + down` and the **current selection** will be highlighted in **blue**.  
   _In the image the **current selection** would be `editgame`._
 
@@ -78,6 +81,10 @@ Quickly complete your commands!
 
 Need a quick reference?
 * The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
+  <box type="tip" seamless>
+
+**Note:** Autocompleting will overwrite **ALL** text in the **Command Input Box**. Be careful when using it 
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -86,6 +93,9 @@ Need a quick reference?
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
+
+* Commands are **case-sensitive** and also fully **lowercase**  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.  
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -113,7 +123,7 @@ Need a quick reference?
 * `NAME` only accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
   e.g. `Flora-Ann`. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
 
-* Adding and editing `NAME`s is case-sensitive. Although duplicate contact names are not allowed,     
+* Adding and editing `NAME`s is **case-sensitive**. Although duplicate contact names are not allowed,     
 e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
 
 * `TIME-TIME` should be in the format "HHmm-HHmm" and must be a valid time range within the same day  
@@ -295,7 +305,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is **case-insensitive**. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -315,7 +325,7 @@ Finds persons whose games' names contain any of the given keywords.
 
 Format: `findgame KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `lol` will match `LoL`
+* The search is **case-insensitive**. e.g `lol` will match `LoL`
 * The order of the keywords does not matter. e.g. `Impact Genshin` will match `Genshin Impact`
 * Only the name of games is searched.
 * Only full words will be matched e.g. `Legends` will not match `Legend`
