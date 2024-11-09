@@ -377,8 +377,6 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TutorEase` and the **Actor** is the `user`, unless specified otherwise)
-
 **Use Case: UC01 - Add contact**
 
 **MSS**:
