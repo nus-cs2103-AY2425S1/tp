@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FavouriteCommandParser" as FavouriteCommandParser LOGIC_COLOR
+participant "f:FavouriteCommand" as FavouriteCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+alt execute("favourite 1")
+[-> LogicManager : execute("favourite 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("favourite 1")
+activate AddressBookParser
+
+create FavouriteCommandParser
+AddressBookParser -> FavouriteCommandParser
+activate FavouriteCommandParser
+
+FavouriteCommandParser --> AddressBookParser
+deactivate FavouriteCommandParser
+
+AddressBookParser -> FavouriteCommandParser : parse("1")
+activate FavouriteCommandParser
+
+create FavouriteCommand
+FavouriteCommandParser -> FavouriteCommand
+activate FavouriteCommand
+
+FavouriteCommandParser --> AddressBookParser : f
+deactivate FavouriteCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> FavouriteCommand : execute()
+FavouriteCommand -> Model : setPerson(person1, person1withFavouriteTag)
+activate Model
+Model --> FavouriteCommand
+deactivate Model
+FavouriteCommand --> LogicManager
+deactivate FavouriteCommand
+
+else execute("favourite")
+[-> LogicManager : execute("favourite")
+
+LogicManager -> AddressBookParser : parseCommand("favourite")
+activate AddressBookParser
+
+create FavouriteCommandParser
+AddressBookParser -> FavouriteCommandParser
+activate FavouriteCommandParser
+
+FavouriteCommandParser --> AddressBookParser
+deactivate FavouriteCommandParser
+
+AddressBookParser -> FavouriteCommandParser : parse("")
+activate FavouriteCommandParser
+
+create FavouriteCommand
+FavouriteCommandParser -> FavouriteCommand
+activate FavouriteCommand
+
+FavouriteCommandParser --> AddressBookParser : f
+deactivate FavouriteCommandParser
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> FavouriteCommand : execute()
+FavouriteCommand -> Model : sortPersonsFavourite()
+activate Model
+Model --> FavouriteCommand
+deactivate Model
+FavouriteCommand --> LogicManager
+deactivate FavouriteCommand
+
+end
+
+return
+@enduml
