@@ -457,11 +457,12 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 
 ### Search Mode Summary
 
-| Action                   | Format, Examples                                               |
-|--------------------------|----------------------------------------------------------------|
-| **Enter Search Mode**    | `search-mode` or `sm`                                          |
-| **Search Contacts**      | `search`                                                       |
-| **Exclude Contact**      | `exclude ci/INDEX [MORE_INDEXES]...` <br> e.g., `exclude ci/2` |
-| **Check Excluded Contacts** | `check-excluded` or `chx`                                      |
-| **Clear Excluded Contacts** | `clear-excluded` or `clx`                                      |
-| **Exit Search Mode**     | `exit-search` or `es`                                          |
+| Action                        | Format, Examples                                               |
+|-------------------------------|----------------------------------------------------------------|
+| **Enter Search Mode**         | `search-mode` or `sm`                                          |
+| **Search Contacts**           | `search`                                                       |
+| **Exclude Contact**           | `exclude ci/INDEX [MORE_INDEXES]...` <br> e.g., `exclude ci/2` |
+| **Check Excluded Contacts**   | `check-excluded` or `chx`                                      |
+| **Clear Excluded Contacts**   | `clear-excluded` or `clx`                                      |
+| **Add All Selected Contacts** | `add-all EVENT_INDEX` or `aa EVENT_INDEX`                      |
+| **Exit Search Mode**          | `exit-search` or `es`                                          |
