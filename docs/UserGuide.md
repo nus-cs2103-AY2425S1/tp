@@ -167,7 +167,7 @@ Examples:
 
 Rates the specified restaurant from the address book.
 
-Format: `rate INDEX r/RATING`
+Format: `rate INDEX r/[RATING]`
 
 * Edits the restaurant's rating at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index **must be a positive integer** 1, 2, 3, …​
 * Existing rating will be updated.
