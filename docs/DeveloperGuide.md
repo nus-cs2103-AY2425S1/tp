@@ -9,8 +9,13 @@ title: Developer Guide
 {:toc}
 
 ## **Acknowledgements**
+MediBase3 is designed based on the AddressBook-Level3 project created by [SE-EDU](https://se-education.org).
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Generative AI tools (ChatGPT, Copilot) were used for creating test cases, writing detailed Javadocs and some code refactoring. 
+
+The following Java libraries were also used in the development of MediBase3:
+- [JavaFX](https://openjfx.io/) for the GUI
+- [JUnit 5](https://junit.org/junit5/) for testing
 
 [Back to Table of Contents](#table-of-contents)
 ## **Setting up, getting started**
@@ -769,15 +774,15 @@ Adding a patient while all patients are being shown
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the patient list. 
 
-   2. Test case: `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
+   2. Test case: `add n/John Doe i/S1234567Z g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
        
       Expected: A new patient with the details provided will be added to the patient list. A success message is shown with the added patient's details.
     
-   3. Test case: `add n/John Doe i/S1234567A`
+   3. Test case: `add n/John Doe i/S1234567Z`
 
       Expected: No patient is added to the patient list. An error message is shown with details of the error.
 
-   4. Other incorrect add commands to try: `add`, `add S1234567A`
+   4. Other incorrect add commands to try: `add`, `add S1234567Z`
       
       Expected: Similar to previous.
 
