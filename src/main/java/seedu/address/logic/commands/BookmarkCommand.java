@@ -18,7 +18,7 @@ public class BookmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "bookmark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": bookmarks the company based on the index"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": bookmarks the company based on the index "
             + "in the list of contacts.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
