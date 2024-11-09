@@ -454,7 +454,7 @@ unless specified otherwise)
 **Extensions**
 
 * 1a. There is no students in the app.
-    * 1a1. TAchy displays a "no students" message.
+    * 1a1. TAchy displays an error message.
 
       Use case ends.
 
@@ -688,6 +688,11 @@ unless specified otherwise)
     * 1b4. TAchy records the new remark.
 
       Use case resumes at step 2.
+
+### Planned Enhancements:
+Team size: 5
+
+1. Update Result display box to enable wrapping, and be of greater vertical length, so that users do not need to scroll in order to read the result display box.
 
 
 ### Non-Functional Requirements
