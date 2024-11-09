@@ -30,7 +30,9 @@
                 <Label fx:id="name" styleClass="transaction-name" wrapText="true"/>
                 <ImageView fx:id="done"/>
             </HBox>
-            <FlowPane fx:id="categories"/>
+            <FlowPane fx:id="categories" minWidth="80" prefWrapLength="80">
+                <Label text="Sample Category" wrapText="true" prefWidth="60"/>
+            </FlowPane>
             <Label fx:id="description" styleClass="transaction-description" wrapText="true"/>
         </VBox>
 

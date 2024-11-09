@@ -74,6 +74,11 @@ public class TransactionCard extends UiPart<Region> {
         amount.setText("$" + transaction.getAmount().toString());
         transaction.getCategories().stream()
                 .sorted(Comparator.comparing(category -> category.category))
-                .forEach(category -> categories.getChildren().add(new Label(category.category)));
+                .forEach(category -> {
+                    Label categoryLabel = new Label(category.category);
+                    categoryLabel.setWrapText(true);
+                    categoryLabel.setPrefWidth(60); // Adjust this width as needed
+                    categories.getChildren().add(categoryLabel);
+                });
     }
 }
