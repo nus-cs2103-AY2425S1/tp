@@ -147,8 +147,22 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Special tag feature
+### TagBuilder Class
 
+The `TagBuilder` class acts as a single entry point for creating different types of tags based on user input. It ensures backward compatibility by maintaining a centralized `build` method for tag creation. This approach allows for:
+- **Backward Compatibility**: The `TagBuilder` preserves the original design where tags were treated as a single entity with one entry point.
+- **Extensibility**: New specialized tags can be introduced without modifying the other parts of the codebase's logic, as all tag creation logic is encapsulated in `TagBuilder`.
+- **Centralized Logic**: The logic to determine tag types (e.g., `DifficultyTag`, `SalaryTag`, etc.) based on user inputs is managed in one place, making the code more maintainable. This is particularly useful
+    in our CLI app where the user inputs could be anything where tag types are determined during run time.
+
+Below is a sample sequence diagram
+
+<puml src="diagrams/TagBuilder.puml" width="600" />
+
+
+---
+
+Each feature is implemented with careful consideration of compatibility and extensibility, allowing the codebase to evolve while supporting existing functionality.
 
 
 **[Developer Notes]** For a more complete integration with the User Guide commands and example use cases, developers may wish to review the parsing logic in `XYZCommandParser` classes, specifically how tags and parameters are handled. This includes cases for special tags (e.g., `t/salary_HIGH`, `t/wlb_MEDIUM`), as outlined in the User Guide.
@@ -294,13 +308,12 @@ TechConnect assists students in managing and organizing their internship and job
 ### Non-Functional Requirements
 
 1. Should work on all mainstream operating systems (Windows, macOS, Linux) with Java 17 or later installed.
-2. The application should run efficiently with up to 1000 company entries and 10,000 tags without a noticeable performance degradation.
+2. The application should run efficiently with up to 100 company entries and 100 tags without a noticeable performance degradation.
 3. Application data should be saved locally in JSON format, ensuring user privacy.
 4. The application should have a user-friendly interface with clear command structure and informative error messages.
 5. Modifications should be automatically saved, preventing data loss if the app closes unexpectedly.
 6. Should be modular, following Java coding standards, for ease of maintenance and updates.
 7. TechConnect should work offline to allow users to manage applications without an internet connection.
-8. Data storage requirements should be minimal, under 10MB per 1000 company entries.
 
 ---
 
