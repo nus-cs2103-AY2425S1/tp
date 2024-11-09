@@ -40,7 +40,7 @@ public class ExportCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "format\\csv";
     public static final String SUCCESS_MESSAGE = "The address book has been exported to "
-            + "/data/addressbook.%1$s in the specified format.";
+            + "./data/addressbook.%1$s in the specified format.";
 
     public static final String FAILURE_MESSAGE = "Error exporting address book to %1$s";
     public static final String BACKWARD_SLASH_REGEX = "\\\\";
