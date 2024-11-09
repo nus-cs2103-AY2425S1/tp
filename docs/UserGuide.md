@@ -273,18 +273,22 @@ Adds a patient's details to the system.
 <box type="tip" seamless>
 
 **Tip:**
-* A patient can have any number of tags (including 0)
-* A patient can have multiple tags with no spaces between them.
+* A patient can have any number of tags (including 0).
+* A patient can have multiple tags.
 * Use `edit` command if you made a mistake in adding a patient.
+* Input parameters can be written in any order.
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tagged as `Diabetic` to the system.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/12345678 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `12345678` and tagged as `Diabetic` to the system.
+* `add n/Richard Lim e/richardlim@example.com a/Blk 2 Pasir Ris Street 11, #02-445 p/22222222 t/Asthmatic t/Allergic to shellfish` adds a patient named `Richard Lim` with email `richardlim@example.com`, address `Blk 2 Pasir Ris Street 11, #02-445`, phone number `22222222` and tagged as `Asthmatic` and `Allergic to shellfish` to the system.
 
 Expected output:
 ```
-New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
+New person added: Betsy Crowe; Phone: 12345678; Email: betsycrowe@example.com; Address: Blk 50 Tampines Street 21, #08-281; Tags: [Diabetic]
+New person added: Richard Lim; Phone: 22222222; Email: richardlim@example.com; Address: Blk 2 Pasir Ris Street 11, #02-445; Tags: [Asthmatic][Allergic to shellfish]
 ```
 <br></br>
 
