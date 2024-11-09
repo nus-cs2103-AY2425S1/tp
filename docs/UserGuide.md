@@ -159,9 +159,10 @@ Whether you're a workshop owner, a mechanic, or an administrative staff member r
 
 - **Client:** A person who uses the services of the workshop. In MATER, a client is someone whose personal details are stored and managed.
 - **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX1234C`, where:
-  - `X` represents an alphabet letter.
-  - `1234` represents a four-digit number.
-  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
+  - `XXX` represents 1 to 3 alphabet letters.
+  - `1234` represents a number up to 4-digits.
+  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore). Find the correct checksum [here](https://carplatemart.sg/simple-checksum/).
+
 - **VIN (Vehicle Identification Number):** A unique 17-character alphanumeric code assigned to each vehicle by the manufacturer, used to identify individual motor vehicles.
 - **Checksum Letter:** The final character in a VRN, calculated based on the other characters to ensure the VRN's validity.
 - **Issue:** A problem or maintenance task associated with a client's car. Issues can be recorded in MATER for tracking and management purposes.
@@ -264,6 +265,12 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 </box>
 
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field, you can use the following [link](https://carplatemart.sg/simple-checksum/) to check if checksum letter for the `vrn` is correct.
+
+</box>
+
 **Examples:**
 
 - `add-client n/Turritopsis Dohrnii p/98889888 e/turritopsis@gmail.com a/Block 450 Clementi Ave 3 #14-20 Singapore 120450`
@@ -329,6 +336,12 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL
 - `vrn` is validated by checksum and invalid `vrn` provided will be rejected by MATER.
 - The client must not already have a car.
 
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field, you can use the following [link](https://carplatemart.sg/simple-checksum/) to check if checksum letter for the `vrn` is correct.
+
+</box>
+
 **Examples:**
 
 - `add-car 1 vrn/SJH9514P vin/KMH45678901234567 make/Toyota model/Corolla`
@@ -361,6 +374,12 @@ del-car INDEX
 **Examples:**
 
 - `del-car 1`
+
+<box type="info" seamless>
+
+**Note:** Checked-In client's Cars cannot be deleted via `del-car`.
+
+</box>
 
 
 ---
@@ -396,6 +415,12 @@ edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] 
 - Existing values will be updated to the input values.
 - When editing issues, the existing issues of the client will be replaced with the new issues.
 - To remove all issues from the client, type `i/` without specifying any issues after it.
+
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field, you can use the following [link](https://carplatemart.sg/simple-checksum/) to check if checksum letter for the `vrn` is correct.
+
+</box>
 
 **Examples:**
 

@@ -42,17 +42,17 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> "0..1" Car
+Person --> "0..1" Car
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-Person *--> "*" Issue
 
 Car *--> Vrn
 Car *--> Vin
 Car *--> CarMake
 Car *--> CarModel
+Car *--> "*" Issue
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I

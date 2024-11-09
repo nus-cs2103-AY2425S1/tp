@@ -315,16 +315,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | mechanic          | be able to add new cars to the list                                                   | accommodate new clients                                                |
 | `* * *`  | mechanic          | edit the client's details                                                             | make changes if needed                                                 |
 | `* * *`  | mechanic          | delete clients data                                                                   | remove unneeded data                                                   |
-| `* *`    | frequent CLI user | be able to customize commands and shortcuts                                           | tweak my experience/improve productivity                               |
-| `* *`    | mechanic          | generate reports on the most common issues faced by cars of a specific model          |                                                                        |
+| `* * *`  | mechanic          | list all clients                                                                      | quickly check the list of clients                                      |
+| `* * *`  | mechanic          | see what issues each car has                                                          | be able to work correctly on the car                                 |
 | `* *`    | user              | have a good user interface                                                            | use the app with greater ease                                          |
-| `* *`    | mechanic          | track how long I have taken for each issue                                            | not waste too much time on a single issue                              |
-| `* *`    | mechanic          | receive the most urgent issues                                                        | focus on the issues from the most important to the least               |
-| `* *`    | mechanic          | be notified when a returning client's car is brought in                               | check their car's history before starting any new work                 |
-| `* *`    | admin             | flag vehicles as priority                                                             | inform the mechanic on which vehicles to work on first                 |
-| `* *`    | mechanic          | know who did work on what car                                                         | pinpoint the working staff if there were issues with a repair job      |
-| `* *`    | mechanic          | categorize issues based on severity                                                   | prioritize the most critical repairs and address urgent problems first |
-| `* *`    | mechanic          | add notes/statements belonging to certain cars as they may be important               |                                                                        |
+| `*`    | frequent CLI user | be able to customize commands and shortcuts                                           | tweak my experience/improve productivity                               |
+| `*`    | mechanic          | generate reports on the most common issues faced by cars of a specific model          | so that I can identify and address recurring problems efficiently.      |
+| `*`    | mechanic          | track how long I have taken for each issue                                            | not waste too much time on a single issue                              |
+| `*`    | mechanic          | receive the most urgent issues                                                        | focus on the issues from the most important to the least               |
+| `*`    | mechanic          | be notified when a returning client's car is brought in                               | check their car's history before starting any new work                 |
+| `*`    | admin             | flag vehicles as priority                                                             | inform the mechanic on which vehicles to work on first                 |
+| `*`    | mechanic          | know who did work on what car                                                         | pinpoint the working staff if there were issues with a repair job      |
+| `*`    | mechanic          | categorize issues based on severity                                                   | prioritize the most critical repairs and address urgent problems first |
+| `*`    | mechanic          | add notes/statements belonging to certain cars as they may be important    | so that I can keep track of important information and provide better service or maintenance.|
 | `*`      | mechanic          | list out all cars which are "unserviced"                                              | to know how much workload I have left                                  |
 | `*`      | mechanic          | be able to see when marks like "serviced" or "unserviced" were added                  | cover an absent/on-leave coworker if needed                            |
 | `*`      | mechanic          | have access to the full history log of each car that includes all visits and services | quickly check on the logs of cars                                      |
@@ -345,8 +347,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given Client's particulars is invalid.
+* 1a. User does not provide any of the required fields.
     * 1a1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+* 1b. The given Client or Car already exists.
+    * 1b1. MATER shows an error message.
+
+      Use case resumes from step 1.
+
+* 1a. The given Client's particulars is invalid.
+    * 1c1. MATER shows an error message.
 
       Use case resumes from step 1.
 
@@ -375,9 +387,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-
-* 2a. The given index is invalid.
+* 2a. User does not provide an index field.
     * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+* 2b. The given index is invalid.
+    * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
@@ -397,26 +413,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-
-* 2a. The given index is invalid.
+* 2a. User does not provide any of the required fields.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-
-* 2b. The given field tag is invalid.
+* 2b. The given index is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2c. The given new value is invalid.
+* 2c. The given field tag is invalid.
     * 2c1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-* 2d. The given new value causes a duplicate Client or Car.
+
+* 2d. The given new value is invalid.
     * 2d1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+* 2e. The given new value causes a duplicate Client or Car.
+    * 2e1. MATER shows an error message.
 
       Use case resumes from step 2.
 
@@ -437,8 +457,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. The Client does not have a Car associated to them.
+* 2a. User does not provide an index field.
     * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+* 2b. The Client does not have a Car associated to them.
+    * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
@@ -458,9 +483,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-
-* 2a. The given index is invalid.
+* 2a. User does not provide an index field.
     * 2a1. MATER shows an error message.
+
+      Use case resumes from step 2.
+      
+* 2b. The given index is invalid.
+    * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
@@ -480,21 +509,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-
-* 2a. The given index is invalid.
+* 2a. User does not provide any of the required fields.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-
-* 2b. The given Car details is invalid.
+* 2b. The given index is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
 
-* 2c. The Client already has a Car associated to them.
+* 2c. The given Car details is invalid.
     * 2c1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+* 2d. The Client already has a Car associated to them.
+    * 2d1. MATER shows an error message.
 
       Use case resumes from step 2.
 
@@ -514,29 +546,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-
-* 2a. The Client does not have a Car associated to them.
+* 2a. User does not provide an index field.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-
-* 2b. The given index is invalid.
+* 2b. The Client does not have a Car associated to them.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-* 2c. The Client's Car is checked in.
+* 2c. The given index is invalid.
     * 2c1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-**Use case: UC9 - Filter Clients by keywords**
+* 2d. The Client's Car is checked in.
+    * 2d1. MATER shows an error message.
+
+      Use case resumes from step 2.
+
+**Use case: UC9 - Find Clients by keywords**
 
 **MSS**
 
-1.  User requests to filter Clients by keywords.
-2.  MATER shows the list of filtered Clients and displays a confirmation message.
+1.  User requests to find Clients by keywords.
+2.  MATER shows the list of found Clients and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User does not provide any of the required fields.
+    * 1a1. MATER shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Clear all Clients**
+
+**MSS**
+
+1.  User requests to clear all Clients.
+2.  MATER clears all Clients and displays a confirmation message.
+
+    Use case ends.
+
+**Use case: UC11 - Exit the application**
+
+**MSS**
+
+1.  User requests to exit the application.
+2.  MATER exits the application.
 
     Use case ends.
 
@@ -575,7 +635,15 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### List of VRNs to use for testing
+You can use your own VRNs that follow the format in the User Guide.
+- **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX1234C`, where:
+  - `XXX` represents 1 to 3 alphabet letters starting.
+  - `1234` represents a number up to 4-digits.
+  - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
+
+ or use the list of VRNs provided below.
+
+### List of possible VRNs to use for testing
 - SJH9514P
 - SH8942L
 - S6780S
@@ -595,14 +663,31 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   - **Option 1: Open MATER by Double-Clicking**
+     - Go to the folder where you saved the `.jar` file.
+     - **On Windows or Linux**: Double-click the `.jar` file to open it.
+     - **On Mac**: Right-click the `.jar` file, select “Open With,” and choose Java.
+
+   - **Option 2: Open MATER from the Terminal**  
+     - Open the **command prompt** (Windows) or **terminal** (Mac/Linux).
+     - Use the `cd` command to go to the folder where you saved the `.jar` file. For example, type:
+       ```shell
+       cd path/to/your/folder
+       ```
+     - Then, type the following command and press Enter:
+       ```shell
+       java -jar mater.jar
+       ```
+
+   1. Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by following the steps in the `Initial Launch` section.<br>
        Expected: The most recent window size and location is retained.
+
 
 ### Adding a Client
 
@@ -613,7 +698,7 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`  
       **Expected:** A new client named `John Doe` is added to the list. Details of the added client are shown in the status message.
 
-   1. **Test case:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (same command again)  
+   - **Subsequent Command:** `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (same command again)  
       **Expected:** No client is added. Error message displayed indicating that the client already exists.
 
 2. **Adding a client with a car**
@@ -623,9 +708,14 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`  
       **Expected:** A new client named `Betsy Crowe` with a car is added to the list. Details of the added client and car are shown in the status message.
 
-   1. **Test case:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla` (same command again)  
+   - **Subsequent Command:** `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla` (same command again)  
       **Expected:** No client is added. Error message indicating that the client already exists.
 
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field, you can use the following [link](https://carplatemart.sg/simple-checksum/) to check if checksum letter for the `vrn` is correct.
+
+</box>
 
 ### Adding a Car to a Client
 
@@ -636,7 +726,7 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`  
       **Expected:** A car is added to `John Doe`. Details of the added car are shown in the status message.
 
-   1. **Test case:** `add-car 1 vrn/SJL5678B vin/1HGCM82633A004353 make/Ford model/Focus`  
+   - **Subsequent Command:** `add-car 1 vrn/SJH9514P vin/1HGCM82633A004353 make/Ford model/Focus`  
       **Expected:** No car is added. Error message indicating that the client already has a car.
 
 2. **Adding a car to a client who already has a car**
@@ -652,6 +742,12 @@ testers are expected to do more *exploratory* testing.
 
    1. **Test case:** `add-car 10 vrn/SJH9514P vin/1HGCM82633A004355 make/Nissan model/Altima`  
       **Expected:** No car is added. Error message indicating that the client index is out of bounds.
+
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field, you can use the following [link](https://carplatemart.sg/simple-checksum/) to check if checksum letter for the `vrn` is correct.
+
+</box>
 
 ### Deleting a Client
 
@@ -730,7 +826,7 @@ testers are expected to do more *exploratory* testing.
 
    1. **Test case:** `edit 1 n/John Doe p/98765432`<br>
       **Expected:** First client's name and phone number are edited. Details of the edited client are shown in the status message. 
-   2. **Test case:** `edit 2 n/John Doe p/98765432`<br>
+   - **Subsequent Command:** `edit 2 n/John Doe p/98765432`<br>
       **Expected:** No client is added. Error message displayed indicating that the client already exists.
 
 2. **Editing a client's car details**
@@ -739,13 +835,19 @@ testers are expected to do more *exploratory* testing.
 
    1. **Test case:** `edit 1 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** First client's car vrn and vin are edited. Details of the edited car are shown in the status message.
-   2. **Test case:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
+   - **Subsequent Command:** `edit 2 vrn/SJH9514P vin/1HGCM82633A004352 make/Honda model/Civic`<br>
       **Expected:** No car is added. Error message displayed indicating that the car already exists.
 3. **Editing a non-existent client's details**
    1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Confirm that client to edit does not exist.
 
    2. **Test case:** `edit 10 n/John Doe p/98765432`<br>
       **Expected:** No client is edited. Error details shown in the status message.
+
+<box type="tip" seamless>
+
+If you are having trouble entering the `vrn` field, you can use the following [link](https://carplatemart.sg/simple-checksum/) to check if checksum letter for the `vrn` is correct.
+
+</box>
 
 ### Viewing a Client
 
@@ -779,5 +881,25 @@ testers are expected to do more *exploratory* testing.
    1. **Test case:** `find SJH9514P`<br>
       **Expected:** All clients with the car VRN SJH9514P is listed.
    
-   2. **Test case:** `find SJH9514L`<br> (SJH9514L car doesn't exist)
+   2. **Test case:** `find SJH9514L`<br> (SJH9514L car or 'SJH9514L' as client's name doesn't exist)
       **Expected:** No clients are Listed. List will not be populated
+
+## Appendix: Planned Enhancements
+
+Team size: 5 members
+
+1. **List Clients in alphabetical order**: Clients are currently listed in the order they were added. When the list is long, it can be hard to find a specific client. We plan to implement a feature to list clients in alphabetical order to make it easier to find a specific client.
+
+2. **List Checked-In Clients on the top of the list**: Currently, checked-in clients are listed in the order they were added. We plan to implement a feature to list checked-in clients at the top of the list to make it easier to identify which clients are currently checked in.
+
+3. **Add a feature to manage Issues directly**: Currently, the app only allows users to add, edit, and delete clients and cars and manage Issues through their commands. We plan to add a feature to manage issues directly. This will allow users to add, edit, and delete issues for each client.
+
+4. **Enhance `add-car` to include issue reporting**: Currently, the app only allows users to add cars to clients. We plan to enhance the `add-car` command to enable users to report issues directly when adding cars. This will allow users to document issues concurrently as they add cars to clients.
+
+5. **Allow users to have multiple cars**: Currently, each client can only have one car. We plan to allow users to have multiple cars for each client. This will allow users to keep track of multiple cars for each client.
+
+6. **Add support for foreign vehicles**: Currently, the app only supports vehicles with Singaporean VRNs. We plan to add support for foreign vehicles. This will allow users to add vehicles with foreign VRNs to the app.
+
+7. **Update functionality of Check such that it doesn't reset the list**: Currently, when a user checks in/out a client after the `find` command, the list is reset to its full state. We plan to update the functionality of Check such that it doesn't reset the list. This will allow users to check in/out clients without changing the list.
+
+8. **Add support for duplicate client handling**: Currently, the criteria for duplicate clients are based on the client's name. We plan to add support for duplicate client handling based on other criteria such as phone number, email, and address. This will allow users to add clients with the same name but different phone numbers, emails, and addresses.
