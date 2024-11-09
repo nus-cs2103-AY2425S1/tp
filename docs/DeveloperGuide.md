@@ -624,6 +624,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Remarks**
+
+This use case describes a planned feature that has not yet been implemented.
 
 #### **Use Case: UC14 - Track study progress**
 * *Preconditions:* user has added progress status to person(s) record previously
