@@ -424,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  HR staff with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should be able to return search within 5 seconds
 5.  Employees' data should be easily found with a quick search
-6.  Only authorized HR staff should have access to the data
+6.  Only authorized HR staff should have access to the HR Helper system
 
 
 ### Glossary
@@ -491,4 +491,6 @@ testers are expected to do more *exploratory* testing.
 
 ## Planned enhancements
 
-1. add enhancements here
+1. HR staff can change their username and password to keep their account secure. 
+2. HR staff can track maternity leave of up to 6 months.
+3. add enhancement here
