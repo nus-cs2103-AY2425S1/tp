@@ -145,6 +145,10 @@ Adds a person to the address book.
 
 Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have any number of study group tags (including 0), and any extra duplicate study group tags will be ignored automatically
+</div>
+
 * Email, gender and study group tags are **case-insensitive**
 * Valid entries for gender are M/m/F/f
 * Age must be a non-negative integer between 0 and 150 (both inclusive)
