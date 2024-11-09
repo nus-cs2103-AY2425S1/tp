@@ -9,8 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -66,6 +65,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -82,6 +83,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -114,6 +117,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -126,6 +131,8 @@ The `Model` component,
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -205,6 +212,8 @@ Criteria are segregated by data field, and each criteria is independently evalua
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -404,14 +413,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The criteria is missing from the given input.
 
-    * 1a1. ResearchRoster shows a message indicating the filtered list is empty.
-    * 1a2. ResearchRoster shows an empty filtered list.
+    * 2a1. ResearchRoster shows an error message.
 
       Use case restarts.
 
 * 2a. No person records that matches the criteria.
 
-    * 2a1. ResearchRoster shows an error message.
+    * 2a1. ResearchRoster shows a message indicating the filtered list is empty.
+    * 2a2. ResearchRoster shows an empty filtered list.
 
       Use case ends.
 
@@ -527,9 +536,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The list is empty.
 
-  Use case ends.
+    * 3a1. ResearchRoster shows a message indicating that there are no persons to export.
+
+      Use case ends.
+
+* 3b. The given filename is invalid.
+
+    * 3b1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
 
 * 4a. ResearchRoster is unable to write to the text file.
 
@@ -654,6 +671,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
+#### **Use case: UC16 - Clear listed persons**
+* *Preconditions:* user has added person(s) previously
+* *Guarantees:* listed persons are removed from the system
+
+MSS
+
+1.  User requests a list of persons ([UC05](#use-case-uc05---list-all-persons), [UC06](#use-case-uc06---find-persons-by-criteria)).
+2.  ResearchRoster shows the list of persons.
+3.  User requests to clear the listed persons from the system.
+4.  ResearchRoster requests confirmation.
+5.  User gives confirmation.
+6.  ResearchRoster clears listed persons from the system.
+
+    Use case ends.
+
+Extensions
+
+* 3a. The list is empty.
+
+    * 3a1. ResearchRoster shows a message indicating that there are no persons to clear.
+
+      Use case ends.
+
+* 4a. User does not give confirmation and instead requests something else.
+
+  Use case ends.
+
+#### **Use case: UC17 - Exit**
+* *Preconditions:* ResearchRoster is running
+* *Guarantees:* ResearchRoster will be exited and closed
+
+MSS
+
+1.  User requests to exit.
+2.  ResearchRoster exits and closes.
+
+    Use case ends.
+
+
 ### Non-Functional Requirements
 
 #### General requirements
@@ -746,10 +802,10 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
-   
+
    1. Open a command window. Run the `java -version` command to ensure that you are using Java 17.
 
-   1. Launch the jar file using the `java -jar` command. Use double-clicking as a last resort.<br> 
+   1. Launch the jar file using the `java -jar` command. Use double-clicking as a last resort.<br>
    Expected: Shows the GUI with a set of sample contacts.
 
 1. Saving window preferences
@@ -761,8 +817,8 @@ testers are expected to do more *exploratory* testing.
 
 1. Exiting
     1. Test case: `exit`<br>
-       Expected: Exit message is displayed, followed by the application closing. 
-   
+       Expected: Exit message is displayed, followed by the application closing.
+
 
 ### Adding a person: `add`
 
@@ -776,12 +832,12 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add n/Emma Lee e/emma@gmail.com`<br>
        Expected: Error message "Invalid command format!" is displayed due to missing mandatory fields.
-   
+
 ### Editing a person : `edit`
 
 1. Edits an existing person in the address book
 
-    1. Test case: `edit 1 n/Betsy Crower t/1B -t/2B`<br> 
+    1. Test case: `edit 1 n/Betsy Crower t/1B -t/2B`<br>
        Expected: Edits the name of the 1st person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`.
 
     1. Test case: `edit 1`<br>
@@ -836,8 +892,19 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `export data/MyEmailsList`<br>
        Expected: Exports current listed persons' emails to `MyEmailsList.txt` in the `data` directory.
+
     1. Test case: `find g/f` followed by `export female_emails`<br>
          Expected: Exports only the emails of female persons.
+
+### Clearing listed participants : `clear` then `confirm`
+
+1. Clears the listed persons from the address book.
+
+    1. Test case: `list` followed by `clear` then `confirm`<br>
+       Expected: Clears the entire address book.
+
+    1. Test case: `find g/f` followed by `clear` then `confirm`<br>
+       Expected: Clears all female persons from the address book.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -307,15 +307,10 @@
 #commandTypeLabel {
     -fx-font-size: 11px;
     -fx-text-fill: #F70D1A;
-    -fx-background-color: green;
 }
 
-#commandTextArea .content{
-    -fx-background-color: transparent, #1d2e28, transparent, #1d2e28;
-    -fx-background-radius: 0;
-}
-
-#commandTextArea {
+#commandTextField {
+    -fx-background-color: #1d2e28;
     -fx-background-insets: 0;
     -fx-border-color: #1d2e28 #1d2e28 #57846a #1d2e28;
     -fx-border-insets: 0;
@@ -324,7 +319,6 @@
     -fx-font-size: 13pt;
     -fx-text-fill: #FFFFFF;
 }
-
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);

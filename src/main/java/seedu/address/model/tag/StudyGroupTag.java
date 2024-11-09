@@ -54,7 +54,7 @@ public class StudyGroupTag {
 
     @Override
     public int hashCode() {
-        return studyGroupName.hashCode();
+        return studyGroupName.toLowerCase().hashCode();
     }
 
     /**

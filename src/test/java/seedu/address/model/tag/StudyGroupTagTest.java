@@ -1,8 +1,12 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -56,6 +60,21 @@ public class StudyGroupTagTest {
         // invalid tag name
         assertFalse(StudyGroupTag.isValidStudyGroupName("study Group")); // space within tag name
         assertFalse(StudyGroupTag.isValidStudyGroupName("study_Group")); // underscore within tag name
+    }
+
+    @Test
+    public void hashCodeEquals() {
+        StudyGroupTag studyGroupTagLower = new StudyGroupTag("case");
+        StudyGroupTag studyGroupTagUpper = new StudyGroupTag("CASE");
+
+        // study groups treated cases-insensitively
+        assertEquals(studyGroupTagLower.hashCode(), studyGroupTagUpper.hashCode());
+
+        // study groups treated case-insensitively by Set
+        Set<StudyGroupTag> studyGroupTagSet = new HashSet<>();
+        studyGroupTagSet.add(studyGroupTagLower);
+        studyGroupTagSet.addAll(Set.of(studyGroupTagUpper));
+        assertEquals(Set.of(studyGroupTagLower), studyGroupTagSet);
     }
 
 }

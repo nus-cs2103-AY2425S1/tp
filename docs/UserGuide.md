@@ -18,12 +18,16 @@ This user guide will walk you through:
 
 By the end of this guide, you'll be a ResearchRoster pro, saving time and streamlining your research process.​
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -48,6 +52,8 @@ By the end of this guide, you'll be a ResearchRoster pro, saving time and stream
    <br>5.1 Type in `java -jar "researchroster.jar"`.
    <br>5.2 Press `Enter` to run the command.
 
+<div style="page-break-after: always;"></div>
+
 ### Introduction to the GUI
 
 Upon running ResearchRoster, a GUI similar to below should be displayed.
@@ -63,6 +69,8 @@ Upon running ResearchRoster, a GUI similar to below should be displayed.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 ResearchRoster provides sample data upon first run.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### CLI Tutorial
 
@@ -82,6 +90,8 @@ Below are some example commands for you to try out!
 _Refer to the [Features](#features) section for details of each command!_
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -272,8 +282,8 @@ ResearchRoster data is saved in the hard disk automatically after any command th
 ResearchRoster data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ResearchRoster will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ResearchRoster to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -295,6 +305,8 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
