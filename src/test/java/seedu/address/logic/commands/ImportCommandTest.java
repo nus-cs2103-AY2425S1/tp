@@ -424,4 +424,22 @@ public class ImportCommandTest {
         CommandResult result = importCommand.execute(model);
         assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
     }
+
+    @Test
+    public void execute_dataDirectoryPath_success() throws IOException, CommandException {
+        // Create test file in data directory
+        Path dataDir = Paths.get("data");
+        Files.createDirectories(dataDir);
+        Path testFile = dataDir.resolve("students.csv");
+
+        try (FileWriter writer = new FileWriter(testFile.toFile())) {
+            writer.write("Name,Phone,Email,Courses\n");
+            writer.write("John Doe,12345678,john@example.com,CS2103T\n");
+        }
+        filesToCleanup.add(testFile);
+
+        ImportCommand importCommand = new ImportCommand("students.csv");
+        CommandResult result = importCommand.execute(model);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
+    }
 }

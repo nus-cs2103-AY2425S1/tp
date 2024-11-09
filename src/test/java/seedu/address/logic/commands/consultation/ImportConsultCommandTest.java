@@ -8,12 +8,14 @@ import static seedu.address.testutil.TypicalStudents.ALICE;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -35,17 +37,50 @@ public class ImportConsultCommandTest {
     private static final String NONEXISTENT_STUDENT = "2024-10-20,14:00,Nonexistent Student";
 
     @TempDir
-    public Path tempDir;
+    public Path temporaryFolder;
 
-    private ImportConsultCommand importCommand;
-    private Path testCsvPath;
+    private Path testDir;
+    private Path projectDir;
     private ModelStubWithConsultations modelStub;
+    private List<Path> filesToCleanup;
+    private Path testCsvPath;
+    private ImportConsultCommand importCommand;
 
     @BeforeEach
     public void setUp() throws IOException {
-        testCsvPath = tempDir.resolve("test.csv");
+        // Create project directory inside temp folder
+        projectDir = temporaryFolder.resolve("project");
+        Files.createDirectories(projectDir);
+
+        // Create test directory as sibling to project dir
+        testDir = temporaryFolder.resolve("test-files");
+        Files.createDirectories(testDir);
+
+        testCsvPath = testDir.resolve("test.csv");
         importCommand = new ImportConsultCommand(testCsvPath.toString());
         modelStub = new ModelStubWithConsultations();
+        filesToCleanup = new ArrayList<>();
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        // Clean up test files
+        for (Path file : filesToCleanup) {
+            Files.deleteIfExists(file);
+        }
+
+        // Clean up test directory
+        if (Files.exists(testDir)) {
+            Files.walk(testDir)
+                    .sorted((a, b) -> b.compareTo(a))
+                    .forEach(path -> {
+                        try {
+                            Files.delete(path);
+                        } catch (IOException e) {
+                            // Ignore deletion errors during cleanup
+                        }
+                    });
+        }
     }
 
     @Test
@@ -72,52 +107,102 @@ public class ImportConsultCommandTest {
 
     @Test
     public void execute_emptyFile_throwsCommandException() throws IOException {
+        // Create a custom ImportConsultCommand that uses testDir instead of data dir
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
         createCsvFile("");
+        filesToCleanup.add(testCsvPath);
         assertThrows(CommandException.class,
-                ImportConsultCommand.MESSAGE_EMPTY_FILE, () -> importCommand.execute(modelStub));
+                ImportConsultCommand.MESSAGE_EMPTY_FILE, () -> testCommand.execute(modelStub));
     }
 
     @Test
     public void execute_invalidHeader_throwsCommandException() throws IOException {
+        // Create a custom ImportConsultCommand that uses testDir instead of data dir
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
         createCsvFile("Invalid,Header,Format\n" + VALID_CONSULT);
+        filesToCleanup.add(testCsvPath);
         assertThrows(CommandException.class,
-                ImportConsultCommand.MESSAGE_INVALID_HEADER, () -> importCommand.execute(modelStub));
+                ImportConsultCommand.MESSAGE_INVALID_HEADER, () -> testCommand.execute(modelStub));
     }
 
     @Test
     public void execute_validConsultation_success() throws IOException, CommandException {
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
         createCsvFile(VALID_HEADER + "\n" + VALID_CONSULT);
-        CommandResult result = importCommand.execute(modelStub);
+        filesToCleanup.add(testCsvPath);
+        CommandResult result = testCommand.execute(modelStub);
         assertEquals(String.format(ImportConsultCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
         assertEquals(1, modelStub.consultations.size());
     }
 
     @Test
     public void execute_invalidDate_recordsError() throws IOException, CommandException {
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
         createCsvFile(VALID_HEADER + "\n" + INVALID_DATE);
-        CommandResult result = importCommand.execute(modelStub);
+        filesToCleanup.add(testCsvPath);
+        CommandResult result = testCommand.execute(modelStub);
         assertTrue(result.getFeedbackToUser().contains("error.csv"));
         assertEquals(0, modelStub.consultations.size());
     }
 
     @Test
     public void execute_invalidTime_recordsError() throws IOException, CommandException {
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
         createCsvFile(VALID_HEADER + "\n" + INVALID_TIME);
-        CommandResult result = importCommand.execute(modelStub);
+        filesToCleanup.add(testCsvPath);
+        CommandResult result = testCommand.execute(modelStub);
         assertTrue(result.getFeedbackToUser().contains("error.csv"));
         assertEquals(0, modelStub.consultations.size());
     }
 
     @Test
     public void execute_nonexistentStudent_recordsError() throws IOException, CommandException {
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
         createCsvFile(VALID_HEADER + "\n" + NONEXISTENT_STUDENT);
-        CommandResult result = importCommand.execute(modelStub);
+        filesToCleanup.add(testCsvPath);
+        CommandResult result = testCommand.execute(modelStub);
         assertTrue(result.getFeedbackToUser().contains("error.csv"));
         assertEquals(0, modelStub.consultations.size());
     }
 
     @Test
     public void execute_duplicateConsultation_recordsError() throws IOException, CommandException {
+        ImportConsultCommand testCommand = new ImportConsultCommand(testCsvPath.toString()) {
+            @Override
+            protected Path resolveFilePath(String filepath) {
+                return testCsvPath;
+            }
+        };
         // Create a consultation with the same date and time as our test constants
         Consultation existingConsult = new ConsultationBuilder()
                 .withDate("2024-10-20")
@@ -128,8 +213,9 @@ public class ImportConsultCommandTest {
 
         // Try to import the same consultation
         createCsvFile(VALID_HEADER + "\n" + VALID_CONSULT);
+        filesToCleanup.add(testCsvPath);
 
-        CommandResult result = importCommand.execute(modelStub);
+        CommandResult result = testCommand.execute(modelStub);
         assertTrue(result.getFeedbackToUser().contains("error.csv"));
         assertEquals(1, modelStub.consultations.size()); // Size should not change
     }
@@ -146,6 +232,22 @@ public class ImportConsultCommandTest {
         try (FileWriter writer = new FileWriter(testCsvPath.toFile())) {
             writer.write(content);
         }
+    }
+
+    @Test
+    public void execute_dataDirectoryPath_success() throws IOException, CommandException {
+        // Create test file in data directory
+        Path dataDir = Paths.get("data");
+        Files.createDirectories(dataDir);
+        Path testFile = dataDir.resolve("consults.csv");
+
+        try (FileWriter writer = new FileWriter(testFile.toFile())) {
+            writer.write(VALID_HEADER + "\n");
+            writer.write(VALID_CONSULT + "\n");
+        }
+        ImportConsultCommand importCommand = new ImportConsultCommand("consults.csv");
+        CommandResult result = importCommand.execute(modelStub);
+        assertEquals(String.format(ImportConsultCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
     }
 
     private class ModelStubWithConsultations extends ModelStub {
