@@ -20,7 +20,8 @@ tasks done faster than traditional GUI apps.
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` installed on your Computer. Instructions to download the correct Java version for different devices can be found at the following links:
+   [[Instructions for Mac Users](https://se-education.org/guides/tutorials/javaInstallationMac.html), [Instructions for Windows Users](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html)]
 
 1. Download the latest `PlanPerfect.jar` file from [here](https://github.com/AY2425S1-CS2103T-T12-2/tp/releases).
 
@@ -35,7 +36,7 @@ tasks done faster than traditional GUI apps.
 
    **If you are struggling with step 3 and/or 4, verify that you followed these steps correctly:**
     1. Create an empty folder on your Desktop called 'PlanPerfect'.
-    2. Copy the PandaBot.jar file in this folder.
+    2. Copy the PlanPerfect.jar file in this folder.
     3. Open a command terminal, such as terminal on MacOS devices or Command Prompt on Windows devices.
     4. Access the PlanPerfect folder by inputting `cd Desktop/PlanPerfect` and then hitting the Enter key.
     5. Type `java -jar PlanPerfect.jar` to launch the PlanPerfect application
@@ -163,6 +164,7 @@ Edits an existing contact in the address book.
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown next to a contact's name in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values only for the fields for which a new value is provided.
+* You cannot edit a contact's phone number to one that is held by another contact.
   
 <box type="info" seamless>
 
@@ -278,6 +280,7 @@ Examples:
 * `filter t/foodCaterer bartender` returns all contacts tagged with both `foodCaterer` AND `bartender`.
 * `filter t/foodCaterer` returns all contacts tagged with the tag `foodCaterer`.<br>
 
+<br><br/>
 <div style="page-break-after: always;"></div>
 
 #### Deleting a contact : `delete`
@@ -302,6 +305,12 @@ Format: `sort`
 
 Sorts the contacts in the current view in alphabetical order.
 
+<box type="warning" seamless>
+
+**Caution:**
+You will not be able to recover the previous sorting of your contacts after the running the `sort` command.
+
+</box>
 
 <br><br/>
 #### Clearing all entries : `clear`
@@ -340,8 +349,23 @@ Adds a wedding to PlanPerfect with the specified date. Optionally allows users t
 
   **Caution:**
   If you want to pre-assign contacts when adding a wedding, you are encouraged to use `list` to view all contacts BEFORE using the `addw` command to add a new wedding. Not doing so will mean that you are only able to add contacts from the current wedding being viewed into the new wedding.
-  </box>
+  
+</box>
+
+<box type="info" seamless>
+
+**Note:**
+
+* Inputs to the `DATE` parameter with invalid months (MM) or years (YYYY) will be rejected. 
+* For days (DD), the parameter will only accept values in the range 01, 02, ..., 31. If all three inputs
+are valid, but the date is not possible, the input will be automatically corrected to the nearest valid date
+before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/23)
+* Any other invalid inputs to the `DATE` parameter will be rejected.
+
+</box>
+
 Examples:
+
 * `addw n/Arif and Sonali Wedding d/30/04/2025`
 * `addw n/Daniel and Jane Wedding d/23/09/2025 c/1 3 4`
 
@@ -369,12 +393,25 @@ Edits the name and/or date in the wedding at the specified `WEDDING_INDEX`.
 **Note:** 
 Assigning/removing of contacts from a wedding (editing wedding contacts) is to be done using the `assign` and 
   `unassign` commands.
+
 </box>
 
 <box type="warning" seamless>
 
 **Caution:**
 The edited wedding name provided must not be the name of a pre-existing wedding in PlanPerfect.
+
+</box>
+
+<box type="info" seamless>
+
+**Note:**
+
+* Inputs to the `DATE` parameter with invalid months (MM) or years (YYYY) will be rejected.
+* For days (DD), the parameter will only accept values in the range 01, 02, ..., 31. If all three inputs
+  are valid, but the date is not possible, the input will be automatically corrected to the nearest valid date
+  before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/23)
+* Any other invalid inputs to the `DATE` parameter will be rejected.
 
 </box>
 
