@@ -145,9 +145,9 @@ Format: `sort [s/SORT_OPTION]`
 
 **Tip:** Supported sort options include:
 * `name`: Sorts contacts alphabetically by name.
-* `hours`: Sorts volunteers by hours contributed.
-* `donations`: Sorts donors by donation amount
-* `end_date`: Sorts partners by partnership end date.
+* `hours`: Sorts volunteers by hours contributed (in descending order).
+* `donations`: Sorts donors by donation amount (in descending order).
+* `end_date`: Sorts partners by partnership end date (from earliest to latest).
 </box>
 
 Examples:
