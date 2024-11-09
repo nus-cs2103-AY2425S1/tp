@@ -19,7 +19,7 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
     public static final String SHORT_COMMAND_WORD = "v";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a view of the specified client whose name"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a view of the specified client whose name "
             + "contain any of "
             + "the specified keywords (case-insensitive) and display them as a popup modal.\n"
             + "Parameters: NAME\n"
