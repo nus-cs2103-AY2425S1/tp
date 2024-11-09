@@ -13,9 +13,20 @@
 </pic>
 </center>
 
-KonTActs is a **desktop app for managing your contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+KonTActs is a **desktop app designed for CS2030S teaching assistants (TAs) who works at the National University of Singapore, School of Computing.
 
-KonTActs streamlines contact management, helping you keep track of students, professors, and fellow TAs more effectively than traditional GUI apps.
+KonTActs streamlines contact management, helping you keep track of your students contact information more effectively compared to traditional GUI apps. 
+
+KonTActs **main features** includes: 
+1. Attendance tracking: Track student's weekly attendance.
+2. Assignment tracking: Add and manage student's assignment and grades.
+3. Contact detail storing: Store and manage student's contact information 
+4. Quick access to GitHub: Quickly access a student's GitHub repository.
+
+KonTActs **optimization features**:
+1. Fast typist: Uses a **Command Line Interface** (CLI) to navigate the application alongside a Graphical User Interface (GUI).
+2. Shortcut commands: Shortcut commands to boost productivity
+3. Terminal-like: Easily access previous commands  
 
 
 
@@ -98,7 +109,7 @@ To get started,
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Parameter shortcuts
 
-All parameters in KonTActs come equipped with their equivalent shortcuts.
+Most parameters in KonTActs come equipped with their equivalent shortcuts.
 
 | Parameter     | Shortcut |
 |---------------|----------|
@@ -113,13 +124,20 @@ All parameters in KonTActs come equipped with their equivalent shortcuts.
 | `order/`      | `o/`     |
 | `path/`       | `p/`     |
 
+<box type="success" icon=":fa-solid-lightbulb:" light>
+
+All commands supports shortcut parameters as long as they require the parameter. 
+
+This is illustrated in the examples of the individual commands. 
+</box>
+
 --------------------------------------------------------------------------------------------------------------------
 {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Command shortcuts
 
-All commands in KonTActs come equipped with their equivalent shortcuts.
+Most commands in KonTActs come equipped with their equivalent shortcuts.
 
 | Command       | Shortcut |
 |---------------|----------|
@@ -203,6 +221,16 @@ Adds a person's contact detail to KonTActs.
 
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
+<md>**Name restrictions**</md>
+1. Names should only contain alphanumeric characters and whitespaces only. Special characters are not allowed.
+2. Names should be **unique**. Duplicate names cannot exist in the same database. Please refer to the [faq](#faq) on this issue.
+
+Eg. `n/John` or `name/john`
+
+</box>
+
+<box type="warning" icon=":fa-solid-circle-exclamation:" light>
+
 <md>**Email restrictions**</md>
 Emails should be of the format `local-part@domain` and adhere to the following constraints:
 1. `local-part` should only contain alphanumeric characters and `+`, `_` , `.` , `-`. 
@@ -213,7 +241,7 @@ The `domain name` must:
     - have each domain label start and end with alphanumeric characters
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
-Eg. `t/friend t/family`
+Eg. `e/john@abc.com` or `email/john@abc.com`
 
 </box>
 
@@ -263,8 +291,8 @@ Eg. `t/friend t/family`
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-* `add n/John Doe e/johnd@example.com telegram/@john github/swag-john33` adds John Doe's contact details with no tags.
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com telegram/@Betsy t/criminal github/betsy-29` adds Betsy Crowe's contact details with a friend and criminal tag.
+* `add name/John Doe email/johnd@example.com telegram/@john github/swag-john33` adds John Doe's contact details with no tags.
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com tele/@Betsy t/criminal g/betsy-29` uses shortcut commands to add Betsy Crowe's contact details with a friend and criminal tag.
 </box>
 
 
@@ -312,10 +340,10 @@ Edits an existing person detail in KonTActs.
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-*  `edit 1 e/johndoe@example.com` Edits the email address of the 1st person to be `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-*  `edit 1 github/cool-james12 n/James` Edits the name of the 1st person to `James` and github username to `cool-james12`.
-*  `edit 2 telegram/@Mary n/Mary` Edits the name of the 2nd person to `Mary` and telegram ID to `@Mary`.
+*  `edit 1 email/johndoe@example.com` Edits the email address of the 1st person to be `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags. It uses shortcut parameters.
+*  `edit 1 github/cool-james12 name/James` Edits the name of the 1st person to `James` and github username to `cool-james12`.
+*  `e 2 tele/@Mary n/Mary` Edits the name of the 2nd person to `Mary` and telegram ID to `@Mary`. It uses shortcut command and parameters.
 </box>
 
 {{ newPage }}
@@ -333,7 +361,7 @@ Find all persons whose names contains any of the given keywords.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Shortcut: `f KEYWORD [MORE_KEYWORDS]`**</md>
+<md>**Shortcut: `fd KEYWORD [MORE_KEYWORDS]`**</md>
 </box>
 
 
@@ -350,7 +378,7 @@ Find all persons whose names contains any of the given keywords.
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-* `find John` returns `john` and `John Doe`
+* `fd John` returns `john` and `John Doe` using the shortcut command.
 * `find alex charlotte` returns `Alex Yeoh`, `Charlotte`<br>
   ![result for 'find alex charlotte'](images/findAlexCharlotte.png)
 </box>
@@ -389,7 +417,8 @@ Finds persons whose names contain any of the given tag keywords.
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-* `filter t/friends` returns any contact tagged with `friends`<br>
+* `f t/homies` returns any contact tagged with `homies`. It uses the shortcut command and parameter.<br>
+* `filter tag/friends` returns any contact tagged with `friends`<br>
   ![result for 'filter t/friend t/family'](images/filterFriendsTagByFilter.png)
 </box>
 
@@ -421,9 +450,9 @@ Deletes the specified person from the address book.
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-* `list` followed by `delete n/Betsy` deletes the person with the name `Betsy`.
-* `find Betsy` followed by `delete Alex` will not delete the person named `Alex`.
-* `delete n/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
+* `list` followed by `rm n/Betsy` deletes the person with the name `Betsy`. It uses the shortcut command and parameter.
+* `find Betsy` followed by `delete n/Alex` will not delete the person named `Alex` as `Alex` does not appear in the contact list.
+* `delete name/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
 </box>
 
 {{ newPage }}
@@ -454,7 +483,7 @@ Launches GitHub repository of the specified person on the browser from the addre
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-
+* `git name/James` launches the GitHub repository of the person named `James`, using the GitHub username assigned to `James`. It uses the shortcut command.
 * `github n/Harry` launches the GitHub repository of the person named `Harry`, using the GitHub username assigned to `Harry`.
   ![github use case for launching Harry's repository](images/githubUsage.png)
 </box>
@@ -490,9 +519,9 @@ Opens a window at the side with the full details of the specified person from th
 
 <md>**Examples:**</md>
 
-* `view n/John Doe` opens a window at the side showing the full details of the person named `John Doe`.
-* Calling `view n/John Doe` followed by `view` closes the window showing the full contact details of `John Doe`.
-  ![viewing John Doe's contact detail in the view window](images/quickStartLaunchScreenshot.png)
+* `view name/Alex Yeoh` opens a window at the side showing the full details of the person named `Alex Yeoh`.
+![viewing Alex Yeoh's contact detail in the view window](images/quickStartLaunchScreenshot.png)
+* Calling `v n/John Doe` followed by `view` closes the window showing the full contact details of `John Doe`. It uses the shortcut command and parameter.
   </box>
 
 {{ newPage }}
@@ -524,9 +553,9 @@ Marks a student as present for a particular week.
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-
-* `mark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as present for week 0.
-  ![result for mark](images/markAlexPresent.png)  
+* `mark name/Alex Yeoh week/0` marks the student named `Alex Yeoh` as present for week 0.
+  ![result for mark](images/markAlexPresent.png)
+* `m n/Harry w/3` marks the student named `Harry` as present for week 3. It uses the shortcut command and parameter.
 </box>
   {{ newPage }}
 
@@ -558,9 +587,9 @@ Unmarks a student as present for a particular week.
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-
-* `unmark n/Alex Yeoh w/0` marks the student named `Alex Yeoh` as absent for week 0.
+* `unmark name/Alex Yeoh week/0` marks the student named `Alex Yeoh` as absent for week 0.
   ![result for unmark](images/markAlexAbsent.png)
+* `um n/Harry w/3` marks the student named `Harry` as absent for week 3. It uses the shortcut command and parameter.
   </box>
 
 {{ newPage }}
@@ -646,7 +675,9 @@ Imports contacts based on CSV file
 <md>**Examples:**</md>
 
 * `import path/data/group12.csv` will import the contacts found from the CSV (group12.csv from relative path given)
-  </box>
+* Alternatively, `im p/data/group12.csv` will do the exact same. It uses the shortcut command and parameter.
+
+</box>
 
 <box type="definition" icon=":fa-solid-book:" light>
 
@@ -722,6 +753,7 @@ Exports contacts based on contacts and their details stored in KonTActs.
 
 * `export path/data/group12.csv` will export the contacts in the Address book as a csv file (group12.csv at the 
 relative path given)
+* Alternatively, `ex p/data/group12.csv` will do the exact same. It uses the shortcut command and parameter. 
   </box>
 
 {{ newPage }}
@@ -803,8 +835,9 @@ Example with the following assignment.json file:
   ]
 }
 ```
-`addGrade n/JohnDoe a/Ex01 s/5` will add an assignment name
+`addGrade name/JohnDoe assignment/Ex01 score/5` will add an assignment name
 Assignment01 with score 5 to contact JohnDoe.
+Alternatively, `ag n/JohnDoe a/Ex01 s/5` will do the same using the shortcut command and parameters.
 
 `addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
 as the input score is greater than the max, as specified in the `assignment.json` file.
@@ -843,7 +876,7 @@ Removes an assignment and its grades from a contact.
 
 Assuming John Doe has `Ex01` assignment with a score of `5`.
 
-Calling `removeGrade n/John Doe a/Ex01` will remove the `Ex01` assignment from contact John Doe.
+Calling `removeGrade name/John Doe assignment/Ex01` will remove the `Ex01` assignment from contact John Doe. Alternatively, `rg n/John Doe a/Ex01` will do the same with the shortcut command and paramter.
 
 Calling `removeGrade n/John Doe a/Ex01` again will throw an error since the assignment has already been removed.
 To add a new assignment, refer to [`addGrade`](#adding-grades-to-a-contact-addgrade) command above.
@@ -869,7 +902,7 @@ Exits the program.
 
 KonTActs data are automatically saved in the hard disk after every command that changes data. You do not need to save the data manually.
 
-However, it is always good practice to have a local backup :D You can do this with the [export](#exporting-data-into-csv-file-export) command.
+However, it is always good practice to have a local backup :D. You can do this with the [export](#exporting-data-into-csv-file-export) command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -894,6 +927,11 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KonTActs home folder. Alternatively, you can use the [export](#exporting-data-into-csv-file-export) command to export the data into a CSV file and [import](#importing-data-from-csv-file-import) the CSV file into your other device.
 
+**Q**: Why are duplicate names not allowed?<br>
+**A**: KonTActs identifies the students by their unique name to add grades or take attendance internally. This makes it not possible for KonTActs to accept duplicate names.
+
+Furthermore, we believe that duplicate names are better managed based on how the tutor identifies them. Different people have different method of remembering people with the same name. For instance, given two `John`s, a tutor might identify them physically as `John 1` and `John 2` or by their surname, `John Doe` and `John Tan` . This identification should also be reflected in KonTActs to make it easy to distinguish the two students.
+
 {{ newPage }}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -905,4 +943,5 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 3. **When using excel to edit telegram username**, typing "@" will trigger the command function which will output a "Function is not valid" error. The remedy is to prefix the telegram username with an apostrophe `'` to escape from the command function. For example: typing `'@james`.
 ![excel known issue](images/excelKnownIssue.png)
 4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
+5. Names that contains the `/` characters will cause konTActs to show an error message although a person can legally have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the `/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name should be added as `Kumar SO Mahesh`
 --------------------------------------------------------------------------------------------------------------------
