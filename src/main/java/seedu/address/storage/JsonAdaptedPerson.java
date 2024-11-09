@@ -78,6 +78,10 @@ class JsonAdaptedPerson {
         final PersonId modelId = new PersonId(id);
 
         final List<Tag> personTags = new ArrayList<>();
+
+        if (tags.size() > 6) {
+            throw new IllegalValueException(TOO_MANY_TAGS);
+        }
         try {
             for (JsonAdaptedTag tag : tags) {
                 personTags.add(tag.toModelType());
