@@ -874,13 +874,33 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Planned Enhancements**
 
-1. Update the checking for clashing lessons such that past make-up lessons do not affect the scheduling of regular lessons.
-2. Allow regular lessons to stretch across multiple days (e.g 22:00 to 24:00).
-3. Improve sorting to compare alphabetically instead of by ASCII value.
-4. Allow the editing of existing group names.
-5. Improve the clarity of the undo feature by specifying the command that was undone.
-6. Improve the calendar view to display long names more clearly.
-7. Improve calendar view to indicate if a regular lesson was cancelled for that week.
+**Note:** Team size 5
+
+1. **Update the checking for clashing lessons such that past make-up lessons do not affect the scheduling of regular lessons.** Currently, make-up lessons in the past cause clashes when scheduling regular lessons. The planned enhancement will cause clashes to only be detected with lessons that occur in the future.
+
+<br>
+
+2. **Allow regular lessons to stretch across multiple days (e.g 22:00 to 24:00).** Currently, lessons are unable to span multiple dates as they store a date/day, start time and end time. This can be expanded to allow lessons that stretch across multiple days by splitting the date/day field into start date/day and end date/day fields.
+
+<br>
+
+3. **Improve sorting to compare alphabetically instead of by ASCII value.** Sorting is currently done by ASCII values but this may be unintuitive behaviour. The planned enhancement will have lower-case and upper-case letters treated the same, meaning the sort will be case-insensitive.
+
+<br>
+
+4. **Allow the editing of existing group names.** Currently, there is no way to update the name of a group across an entire group of students. The planned enhancement would be to add a new command to perform this.
+
+<br>
+
+5. **Improve the clarity of the undo feature by specifying the command that was undone.** The undo feature currently has no indication of what command was undone. The planned enhancement is to show the exact command that was undone in the returned message from running the command.
+
+<br>
+
+6. **Improve the calendar view to display long names more clearly.** The calendar view currently struggles to display long names, resulting in ellipses and an inability to view the entire student name or group name. The planned enhancement is to make the student or group name more clearly visible by wrapping the text.
+
+<br>
+
+7. **Improve calendar view to indicate if a regular lesson was cancelled for that week.** The calendar view currently has no indication of when a student's regular lesson is if it is cancelled on the week that is being viewed. This can cause confusion among the tutors as they may observe a clash with the lesson despite not seeing it in the schedule. The planned enhancement is to show all regular lessons but with an indication of its cancellation status.
 
 ---
 
