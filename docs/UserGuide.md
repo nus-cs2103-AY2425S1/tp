@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# Medicontact
+# <img src="images/health-report.png" width="90"/>Medicontact 
 
-Medicontact is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Medicontact is a desktop app to help **small GP Clinics in Singapore for manage patient contacts**. It is centered around typed commands and meant for healthcare administrative staff. If you can type fast, MediContact can get your contact management tasks done faster than traditional apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,7 +17,7 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 1. Ensure you have Java `17` or above installed in your Computer. Instructions for Java `17` are available [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html).
 
-1. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.4). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
+1. Download the `MediContact.jar` file from [here](https://github.com/AY2425S1-CS2103T-T10-1/tp/releases/tag/v1.5). Scroll all the way down to see **Assets** and click on `MediContact.jar` to install. 
 
 1. Copy the file to the folder you want to use as the _home folder_ for MediContact. We recommend naming this folder `MediContact`. Place `MediContact.jar` in this folder.
 
@@ -80,6 +80,8 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 
 
@@ -114,6 +116,8 @@ Adds a person to the address book.
 
 <img src="images/addEvie.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -141,6 +145,8 @@ the action will be aborted, and the address book will remain unchanged.
 * Keyboard commands such as “Enter,” “Return,” and “Space” act as shortcuts to select the OK button, while “Esc” triggers the cancel button.
 
 <img src="images/clearConfirmation.png" width="800">
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 <br>
@@ -181,6 +187,8 @@ Deletes the specified person from the address book.
 
 <img src="images/deleteExpected.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -206,6 +214,8 @@ Edits an existing person in the address book.
 
 <img src="images/editJohn.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -215,6 +225,10 @@ Edits an existing person in the address book.
 Exits the program.
 
 **Format**: `exit`
+
+[Return to Table of Contents](#table-of-contents)
+
+<br>
 
 <br>
 
@@ -244,6 +258,8 @@ Filter persons whose age and/or appointment dates are within the specified range
 
 <img src="images/filterResult.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -271,6 +287,8 @@ Examples:
 
 <img src="images/findResult.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -286,6 +304,8 @@ Shows you a help window with useful resources which includes:
 **Format**: `help`
 
 <img src="images/helpWindow.png" width="800">
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 <br>
@@ -399,6 +419,10 @@ The following is an example of a valid JSON file content.
   
 - To add more patient data to the `"persons"` array include the following after `"starredStatus" : " " }`. You may add as many patient data as needed. Remember each patient data must be enclosed with `{}` and seperated by a comma `,`
 
+[Return to Table of Contents](#table-of-contents)
+
+<br>
+
 <br>
 
 
@@ -412,6 +436,8 @@ Shows an alphabetically sorted list of all persons in the address book.
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
 <img src="images/listResult.png" width="800">
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 <br>
@@ -427,6 +453,8 @@ Shows a list of all starred persons in the address book.
 * You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
 
 <img src="images/listStarResult.png" width="800">
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 <br>
@@ -453,6 +481,8 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 
 <img src="images/noteResult.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -466,6 +496,8 @@ remain sorted alphabetically at the end of the list.
 * No other parameters should be supplied.
 
 <img src="images/sortResult.png" width="800">
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 <br>
@@ -488,6 +520,8 @@ Stars the specified person from the address book into favourites.
 * `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
 
 <img src="images/starResult.png" width="800">
+
+[Return to Table of Contents](#table-of-contents)
 
 <br>
 <br>
@@ -512,6 +546,8 @@ Unstars the specified person from the address book removing them from favourites
 
 <img src="images/unstarResult.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -535,6 +571,8 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 
 <img src="images/viewResult.png" width="800">
 
+[Return to Table of Contents](#table-of-contents)
+
 <br>
 <br>
 
@@ -542,17 +580,25 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+[Return to Table of Contents](#table-of-contents)
+
+<br>
+
 <br>
 
 ### Exporting the data
 
 - Locate file `addressbook.json` under the folder `data` in the same directory as `MediContact.jar`. `addressbook.json` will reflect the latest data. Simply download it.
 
-  <box type="warning" seamless>
+<box type="warning" seamless>
 
-  **Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
+**Warning**: Any manual modification to `addressbook.json` will be reflected in the application though it is **not recommended** to manually edit `addressbook.json` due to the potential of mistakes in formatting which would result in data not showing in the UI. In case of this, upon reversing the wrong modifications, UI should return to normal.
 
-  </box>
+</box>
+
+[Return to Table of Contents](#table-of-contents)
+
+<br>
 
 <br>
 
@@ -567,6 +613,10 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
+[Return to Table of Contents](#table-of-contents)
+
+<br>
+
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -576,12 +626,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+[Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+[Return to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -605,6 +659,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` |
 | **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |
 
+[Return to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Summary of parameter constraints
@@ -625,3 +681,5 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Phone number**       | Should only contain numbers. Should be exactly 8 digits long.<br>Valid example: `12345678` |
 | **Sex**                | Should be alphanumeric. Should not be blank.<br>Valid example: `Female` |
 | **Tags**               | Should be alphanumeric.<br>Valid example: `Patient`          |
+
+[Return to Table of Contents](#table-of-contents)
