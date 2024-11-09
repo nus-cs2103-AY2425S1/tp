@@ -279,12 +279,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Our CLI-based contact management tool allows Non-Governmental Organisations (NGOs) to
-manage contacts faster than a typical mouse/GUI driven app.
+**Value proposition**: 
 
-Staff of NGOs will be able to streamline operations
-such as sending mass emails to specific groups of users of their choice and visualising data about their contacts
-without the need for expensive software or a high level of technical expertise.
+ContactsForGood (CFG) helps NGO administrators efficiently manage donors, volunteers, and partners by organising contacts 
+and tracking engagement. With its typing-focused interface and offline, editable data, CFG hopes to streamline contact 
+management, allowing administrators to focus on outreach and mission-critical tasks.
 
 
 ### User stories
@@ -435,18 +434,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-| **Term**                      | **Definition**                                                                                                          |
-|-------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| Mainstream OS                 | Windows, Linux, Unix, MacOS                                                                                             |
-| Private contact detail        | A contact detail that is not meant to be shared with others                                                             |
-| Engagement History            | A record of past interactions, such as donations, volunteer participation associated with a contact                     |
-| Human-Readable Format         | A file format that can be easily understood and edited by people without specialized software (e.g., plain text or CSV) |
-| Volunteer Participation Hours | A record of the number of hours a volunteer has contributed to activities or events                                     |
-| Tag                           | A keyword or label applied to a contact for easier filtering or searching                                               |
-| Search Query                  | A user-provided input (e.g., name or role) to filter contacts in the list                                               |
-| Role                          | A Volunteer, Donor or Partner                                                                                           |
-| Group                         | A named collection of contacts, allowing users to filter or perform actions on specific subsets of people easily.       |
-| Partner                       | A contact who represents their company or organization as the main point of communication and collaboration.            |
+| **Term**              | **Definition**                                                                                                                |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| Mainstream OS         | Windows, Linux, Unix, MacOS                                                                                                   |
+| Human-Readable Format | A file format that can be easily understood and edited by people without specialized software (e.g., plain text or CSV)       |
+| Volunteer Hours       | A record of the number of hours a volunteer has contributed to activities or events                                           |
+| Tag                   | A keyword or label applied to a contact for easier filtering or searching                                                     |
+| Search Query          | A user-provided input (e.g. name or role) to filter contacts in the list                                                      |
+| Role                  | A Volunteer, Donor or Partner                                                                                                 |
+| Group                 | A named collection of contacts, allowing users to view specific subsets of people easily.                                     |
+| Partner               | A contact who represents their company or organization as the main point of communication and collaboration.                  |
+| Remote Server         | A computer or system located on a network (e.g., the internet) that provides services or resources to other devices remotely. |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
