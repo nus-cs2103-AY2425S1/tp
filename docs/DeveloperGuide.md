@@ -66,7 +66,7 @@ The sections below provide more details of each component.
 
 ### UI Component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java).
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java).
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -78,7 +78,7 @@ The UI consists of multiple components, including the `MainWindow`, `CommandBox`
 
 ### Logic Component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
@@ -105,9 +105,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g., during testing.
 
 ### Model Component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" width="600" />
 
 
 The `Model` component,
@@ -121,14 +121,14 @@ The `Model` component,
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
+<puml src="diagrams/BetterModelClassDiagram.puml" width="600" />
 
 </box>
 
 
 ### Storage Component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F10-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -147,7 +147,8 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Bookmark feature
+
 
 ...
 
@@ -317,7 +318,7 @@ TechConnect assists students in managing and organizing their internship and job
 
 ## **Appendix: Instructions for Manual Testing**
 
-<box type="info" seamless />
+<box type="info" seamless>
 
 **Note:** These instructions provide a starting point for exploratory testing. Testers should expand beyond the provided cases to ensure robust coverage.
 
@@ -363,5 +364,5 @@ TechConnect assists students in managing and organizing their internship and job
 2. **Finding Companies**:
     - Use `find TAG/NAME` to search.
     - **Expected Result**: Only companies matching the search criteria are displayed.
-    - **Edge Case**: Searching for non-existent terms should display a "No matches found" message.
+    - **Edge Case**: Searching for non-existent terms should display a "There is no company that suits your keyword!" message.
 ---
