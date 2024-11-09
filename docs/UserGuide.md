@@ -802,13 +802,13 @@ Example with the following assignment.json file:
   ]
 }
 ```
-`addGrade n/JohnDoe asgn/Ex01 s/5` will add an assignment name
+`addGrade n/JohnDoe a/Ex01 s/5` will add an assignment name
 Assignment01 with score 5 to contact JohnDoe.
 
-`addGrade n/JohnDoe asgn/Ex01 s/12` will not add the assignment to contact JohnDoe
+`addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
 as the input score is greater than the max, as specified in the `assignment.json` file.
 
-`addGrade n/JohnDoe asgn/Ex05 s/5` will not add the assignment to contact JohnDoe
+`addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
 as the assignment is not specified `assignment.json`
    </box>
 
@@ -842,9 +842,9 @@ Removes an assignment and its grades from a contact.
 
 Assuming John Doe has `Ex01` assignment with a score of `5`.
 
-Calling `removeGrade n/John Doe asgn/Ex01` will remove the `Ex01` assignment from contact John Doe.
+Calling `removeGrade n/John Doe a/Ex01` will remove the `Ex01` assignment from contact John Doe.
 
-Calling `removeGrade n/John Doe asgn/Ex01` again will throw an error since the assignment has already been removed.
+Calling `removeGrade n/John Doe a/Ex01` again will throw an error since the assignment has already been removed.
 To add a new assignment, refer to [`addGrade`](#adding-grades-to-a-contact-addgrade) command above.
 
 </box>
