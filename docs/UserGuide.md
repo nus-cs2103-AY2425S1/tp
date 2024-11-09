@@ -251,20 +251,20 @@ Flags are generally derived from the first letter of the data type, making them 
 
 **Arguments** are the **values provided for each flag** in a command. They must meet **certain requirements** to be valid. Here, some are **case-insensitive** to allow more flexibility in inputs. Here’s a list of common arguments in Prudy and their expected formats:
 
-| Flag  | Expected Argument         | Description                      | Requirements                                           | Case-Sensitivity        |
-|-------|----------------------------|----------------------------------|--------------------------------------------------------|------------------------|
-| `n/`  | Client’s Full Name         | Full name of the client          | Any alphanumerics and spaces                           | yes              |
-| `p/`  | Phone                      | Contact number                   | 3-15 digit number                                      | NIL               |
-| `e/`  | Email                      | Email address                    | Standard format (e.g., user@example.com)               | yes                    |
-| `a/`  | Address                    | Client’s address                 | Any alphanumerics and symbols                          | yes                   |
-| `t/`  | Tags                       | Custom descriptor of client      | Any alphanumerics                                      | yes                 |
-| `pt/` | Policy Type                | Type of insurance policy         | Predefined types (e.g., life, health, education)       | no                   |
-| `pa/` | Policy Premium Amount      | Premium amount for the policy    | Positive decimal number (up to 2 decimal places)       | NIL                     |
-| `ca/` | Policy Coverage Amount     | Coverage amount of the policy    | Positive decimal number                                | NIL                 |
-| `ed/` | Policy Expiry Date         | Expiry date of the policy        | Date format: MM/dd/yyyy                                | NIL                   |
-| `s/`  | Claim Status               | Status of the claim              | Predefined statuses (e.g., pending, approved, rejected) | no                       |
-| `d/`  | Claim Description          | Description of the claim         | Any alphanumerics and symbol                           | yes                |
-| `c/`  | Claim Index                | Claim index for reference        | Positive integer                                       | NIL               |
+| Flag  | Expected Argument         | Description                      | Requirements                                                          | Case-Sensitivity        |
+|-------|----------------------------|----------------------------------|-----------------------------------------------------------------------|------------------------|
+| `n/`  | Client’s Full Name         | Full name of the client          | Any alphanumerics and spaces                                          | yes              |
+| `p/`  | Phone                      | Contact number                   | 3-15 digit number (you may include country code without preceding '+') | NIL               |
+| `e/`  | Email                      | Email address                    | Standard format (e.g., user@example.com)                              | yes                    |
+| `a/`  | Address                    | Client’s address                 | Any alphanumerics and symbols                                         | yes                   |
+| `t/`  | Tags                       | Custom descriptor of client      | Any alphanumerics                                                     | yes                 |
+| `pt/` | Policy Type                | Type of insurance policy         | Predefined types (e.g., life, health, education)                      | no                   |
+| `pa/` | Policy Premium Amount      | Premium amount for the policy    | Positive decimal number (up to 2 decimal places)                      | NIL                     |
+| `ca/` | Policy Coverage Amount     | Coverage amount of the policy    | Positive decimal number                                               | NIL                 |
+| `ed/` | Policy Expiry Date         | Expiry date of the policy        | Date format: MM/dd/yyyy                                               | NIL                   |
+| `s/`  | Claim Status               | Status of the claim              | Predefined statuses (e.g., pending, approved, rejected)               | no                       |
+| `d/`  | Claim Description          | Description of the claim         | Any alphanumerics and symbol                                          | yes                |
+| `c/`  | Claim Index                | Claim index for reference        | Positive integer                                                      | NIL               |
 
 
 In Prudy, arguments ensure that the command functions as expected. Without correct arguments, Prudy may display an error message indicating the input is invalid.
@@ -360,13 +360,13 @@ Adds a **new client** to Prudy.
 add-client n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]…​
 ```
 
-| **Parameter Name** | **Description**           | **Requirements**                              | **Required** |
-|--------------------|---------------------------|-----------------------------------------------|--------------|
-| n/NAME             | Client’s full name        | Any alphanumerics and spaces                 | yes          |
-| p/PHONE            | Client’s phone number     | 8-digit number starting with 8 or 9          | yes          |
-| e/EMAIL            | Client’s email address    | Standard format (e.g., user@example.com)     | yes          |
-| a/ADDRESS          | Client’s address          | Any alphanumerics and symbols                | yes          |
-| t/TAG              | Custom descriptor or label| Any alphanumerics                            | no           |
+| **Parameter Name** | **Description**           | **Requirements**                                                 | **Required** |
+|--------------------|---------------------------|------------------------------------------------------------------|--------------|
+| n/NAME             | Client’s full name        | Any alphanumerics and spaces                                     | yes          |
+| p/PHONE            | Client’s phone number     | 3-15 digit number inclusive of country code without preceding '+' | yes          |
+| e/EMAIL            | Client’s email address    | Standard format (e.g., user@example.com)                         | yes          |
+| a/ADDRESS          | Client’s address          | Any alphanumerics and symbols                                    | yes          |
+| t/TAG              | Custom descriptor or label| Any alphanumerics                                                | no           |
 
 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
@@ -384,23 +384,26 @@ A client can have any number of tags (including 0).
 
 🔔
 **Notes:**
-We are aware that `NAME` currently does not accept special characters such as `/`, `@`, and `,`, and will be adding this functionality in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
+* `NAME` currently does not accept special characters such as `/`, `@`, and `,`. This functionality will be added in coming updates. For more information on the requirements of each arguments, refer back to [Arguments](#4-4-arguments).
 </div>
 
 **On success:**
 ```shell
-success!
+New client added: NAME; Phone: PHONE; Email: EMAIL; Address: ADDRESS; Tags: TAG
 ```
 
-**Errors:**
-```shell
-invalid output
-```
 
 #### 5.2.2 Listing All Clients: `list-clients`
 Shows a **list of all clients** in Prudy.
 
 **Format:** `list-clients`
+
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FCF3CF; margin-bottom: 16px;">
+
+💡
+**Tip:**
+This command is useful for finding the `INDEX` of a specific client. `INDEX` is used in many other commands in Prudy!
+</div>
 
 #### 5.2.3 Filtering Clients: `find-client`
 **Filters clients** based on the specified parameters.
@@ -411,7 +414,7 @@ Shows a **list of all clients** in Prudy.
 | **Parameter Name** | **Description**               | **Requirements**                                | **Required** |
 |--------------------|-------------------------------|-------------------------------------------------|--------------|
 | n/NAME             | Client’s full name            | Any alphanumerics and spaces                    | no           |
-| p/PHONE            | Client’s phone number         | 8-digit number starting with 8 or 9             | no           |
+| p/PHONE            | Client’s phone number         | 3-15 digit number inclusive of country code without preceding '+'     | no           |
 | e/EMAIL            | Client’s email address        | Standard format (e.g., user@example.com)        | no           |
 | a/ADDRESS          | Client’s address              | Any alphanumerics and symbols                   | no           |
 | pt/POLICY_TYPE     | Type of insurance policy      | Predefined types (e.g., life, health, education)| no           |
@@ -432,8 +435,7 @@ Shows a **list of all clients** in Prudy.
 
 **Examples:**
 * `find-client n/John` returns `john` and `John Doe`
-* `find-client n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find n/alex david'](images/findAlexDavidResult.png)
+* `find-client n/alex david` returns `Alex Yeoh`, `David Li`
 
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #FADBD8; margin-bottom: 16px;">
 
@@ -441,6 +443,10 @@ Shows a **list of all clients** in Prudy.
 For the next few commands, an INDEX parameter is required. This INDEX is based on the current list of clients shown in Prudy.
             This means that if Prudy has 2 clients: <code>Alex</code> and <code>Bernice</code> given in that order, and you did <code>find-client n/bernice</code> to filter out <code>Alex</code>. An INDEX of <code>1</code> will refer to <code>Bernice</code> instead of <code>Alex</code>.
 </div>
+
+**On success:**
+This command modifies the main client list display as well.<br>
+![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 #### 5.2.4 Editing a Client: `edit-client`
 
