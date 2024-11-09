@@ -24,6 +24,17 @@ public class ListCommandParserTest {
             fail("ParseException should not have been thrown: " + e.getMessage());
         }
     }
+
+    @Test
+    public void parse_returnsListCommand_upperCase() {
+        try {
+            Command result = parser.parse("LIST");
+            assertNotNull(result);
+        } catch (ParseException e) {
+            fail("ParseException should not have been thrown: " + e.getMessage());
+        }
+    }
+
     @Test
     public void parse_returnsListCommand_mixCase() {
         try {
@@ -33,6 +44,7 @@ public class ListCommandParserTest {
             fail("ParseException should not have been thrown: " + e.getMessage());
         }
     }
+
     @Test
     public void parse_returnsListCommand_trailingSpace() {
         try {
@@ -48,6 +60,7 @@ public class ListCommandParserTest {
         assertParseFailure(parser, "list all",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }
+
     @Test
     public void parse_throwsParseException_withSpaces() {
         assertParseFailure(parser, "  6   5 list %     ",

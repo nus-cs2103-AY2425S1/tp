@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.list.GroupList;
 import seedu.address.testutil.PersonBuilder;
 
 public class GroupContainsKeywordsPredicateTest {
@@ -81,6 +83,54 @@ public class GroupContainsKeywordsPredicateTest {
                 "Science"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withStudentId("A9900990L")
                 .withEmail("e1234567@u.nus.edu").withMajor("Computer Science").withGroups("group 1").build()));
+    }
+
+    @Test
+    void testHasPrefixMatch_matchFound() {
+        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.emptyList());
+        List<String> keywords = new ArrayList<>(List.of("gro"));
+        Group group1 = new Group("group 1");
+
+        GroupList groups = new GroupList();
+        groups.addGroup(group1);
+
+        assertTrue(predicate.hasPrefixMatch(keywords, groups));
+    }
+
+    @Test
+    void testHasPrefixMatch_matchNotFound() {
+        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.emptyList());
+        List<String> keywords = new ArrayList<>(List.of("1"));
+        Group group1 = new Group("group 1");
+
+        GroupList groups = new GroupList();
+        groups.addGroup(group1);
+
+        assertFalse(predicate.hasPrefixMatch(keywords, groups));
+    }
+
+    @Test
+    void testHasWordInList_matchFound() {
+        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.emptyList());
+        List<String> keywords = new ArrayList<>(List.of("1"));
+        Group group1 = new Group("group 1");
+
+        GroupList groups = new GroupList();
+        groups.addGroup(group1);
+
+        assertTrue(predicate.hasWordInList(keywords, groups));
+    }
+
+    @Test
+    void testHasWordInList_matchNotFound() {
+        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.emptyList());
+        List<String> keywords = new ArrayList<>(List.of("gro"));
+        Group group1 = new Group("group 1");
+
+        GroupList groups = new GroupList();
+        groups.addGroup(group1);
+
+        assertFalse(predicate.hasWordInList(keywords, groups));
     }
 
     @Test
