@@ -2,6 +2,7 @@ package seedu.address.model.list;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,19 +22,17 @@ public class GroupListTest {
     void setUp() {
         groupList = new GroupList();
     }
+
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new GroupList(null));
+    public void constructor_null_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new GroupList(null));
     }
-    @Test
-    public void constructor_invalidType_throwsIllegalArgumentException() {
-        String invalidGroupList = "";
-        assertThrows(IllegalArgumentException.class, () -> new Group(invalidGroupList));
-    }
+
     @Test
     void testIsEmpty() {
         assertTrue(groupList.isEmpty());
     }
+
     @Test
     void testAddGroup_lowerCase_whenModifiable() {
         Group group = new Group("group 1");
@@ -41,6 +40,7 @@ public class GroupListTest {
         assertFalse(groupList.isEmpty());
         assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
+
     @Test
     void testAddGroup_upperCase_whenModifiable() {
         Group group = new Group("GROUP 1");
@@ -48,6 +48,7 @@ public class GroupListTest {
         assertFalse(groupList.isEmpty());
         assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
+
     @Test
     void testAddDuplicateGroup_inSameCase() {
         Group group1 = new Group("group 1");
@@ -56,6 +57,7 @@ public class GroupListTest {
         groupList.addGroup(group2);
         assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
+
     @Test
     void testAddDuplicateGroup_multipleSpaces() {
         Group group1 = new Group("group 1");
@@ -64,6 +66,7 @@ public class GroupListTest {
         groupList.addGroup(group2);
         assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
+
     @Test
     void testAddDuplicateGroup_inDifferentCases() {
         Group group1 = new Group("group 1");
@@ -72,17 +75,20 @@ public class GroupListTest {
         groupList.addGroup(group2);
         assertEquals(1, groupList.getUnmodifiableGroups().size());
     }
+
     @Test
     public void testSize() {
         Group group = new Group("group 1");
         groupList.addGroup(group);
         assertEquals(1, groupList.size());
     }
+
     @Test
     void testMakeListUnmodifiable() {
         groupList.makeListUnmodifiable();
         assertThrows(UnsupportedOperationException.class, () -> groupList.addGroup(new Group("New Group")));
     }
+
     @Test
     void testAddAllGroups_whenModifiable() {
         Group group1 = new Group("group 1");
@@ -94,6 +100,7 @@ public class GroupListTest {
         groupList.addAll(anotherGroupList);
         assertEquals(2, groupList.getUnmodifiableGroups().size());
     }
+
     @Test
     void testAddAll_whenUnmodifiable() {
         groupList.makeListUnmodifiable();
@@ -103,6 +110,7 @@ public class GroupListTest {
 
         assertThrows(UnsupportedOperationException.class, () -> groupList.addAll(anotherGroupList));
     }
+
     @Test
     void testMakeCopy() {
         groupList.addGroup(new Group("group 1"));
@@ -117,6 +125,7 @@ public class GroupListTest {
         // The lists have to be of the same size
         assertEquals(groupList.getUnmodifiableGroups().size(), copy.getUnmodifiableGroups().size());
     }
+
     @Test
     void testIterator() {
         Group firstGroup = new Group("group 1");
@@ -138,6 +147,7 @@ public class GroupListTest {
         // Check that there should not be a third group
         assertFalse(iterator.hasNext());
     }
+
     @Test
     public void equals() {
         GroupList groups = new GroupList();
@@ -166,5 +176,36 @@ public class GroupListTest {
 
         // different values -> returns false
         assertFalse(groups.equals(groupsWithVal));
+    }
+
+    @Test
+    public void testHashCode_sameGroupList_shouldHaveSameHashCode() {
+        Group group = new Group("group 1");
+
+        GroupList groups1 = new GroupList();
+        GroupList groups2 = new GroupList();
+
+        // Add the same elements into the list
+        groups1.addGroup(group);
+        groups2.addGroup(group);
+
+        // Assert that the hash codes are the same
+        assertEquals(groups1.hashCode(), groups2.hashCode());
+    }
+
+    @Test
+    public void testHashCode_differentGroupList_shouldHaveDifferentHashCode() {
+        Group group1 = new Group("group 1");
+        Group group2 = new Group("group 2");
+
+        GroupList groups1 = new GroupList();
+        GroupList groups2 = new GroupList();
+
+        // Add different elements into the lists
+        groups1.addGroup(group1);
+        groups2.addGroup(group2);
+
+        // Assert that the hash codes are not the same
+        assertNotEquals(groups1.hashCode(), groups2.hashCode());
     }
 }

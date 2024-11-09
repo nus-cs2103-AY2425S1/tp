@@ -158,6 +158,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code groups} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            assert toCopy != null : "The person to be copied should not be null";
             setName(toCopy.name);
             setStudentId(toCopy.studentId);
             setEmail(toCopy.email);

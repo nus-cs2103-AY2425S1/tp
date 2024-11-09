@@ -22,14 +22,27 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
     private static final Logger logger = LogsCenter.getLogger(GroupContainsKeywordsPredicate.class);
     private final List<String> keywords;
 
+    /**
+     * Constructs a {@code GroupContainsKeywordsPredicate} with the specified list of keywords.
+     *
+     * <p>This constructor ensures that the list of keywords is not {@code null}, throwing an
+     * {@code AssertionError} if {@code keywords} is {@code null}. The keywords will be used
+     * to filter or match against the group names or other criteria in the predicate.
+     *
+     * @param keywords A {@code List<String>} of keywords to be used in the predicate.
+     * @throws AssertionError If {@code keywords} is {@code null}.
+     */
     public GroupContainsKeywordsPredicate(List<String> keywords) {
+        assert keywords != null : "Keywords cannot be null";
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         try {
+            assert person != null : "Person cannot be null";
             GroupList groupList = person.getGroupList();
+
             if (groupList == null) {
                 return false;
             }
