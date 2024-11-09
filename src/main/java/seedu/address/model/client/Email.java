@@ -81,8 +81,12 @@ public class Email {
 
         Email otherEmail = (Email) other;
 
-        if (value == null || otherEmail.value == null) {
+        if (value == null && otherEmail.value == null) {
             return true;
+        }
+
+        if (value == null || otherEmail.value == null) {
+            return false;
         }
 
         return value.equals(otherEmail.value);
