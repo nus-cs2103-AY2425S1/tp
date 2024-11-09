@@ -123,6 +123,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        editPersonFromAllGroups(target, editedPerson);
     }
 
     @Override
@@ -256,6 +257,39 @@ public class ModelManager implements Model {
         // Remove all empty groups from the address book
         for (Group emptyGroup : emptyGroups) {
             addressBook.removeGroup(emptyGroup);
+        }
+
+        // Update the filtered group list if necessary
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    /**
+     * Updates the details of a person in all groups.
+     *
+     * @param oldPerson The person to be updated in the groups.
+     * @param newPerson The updated person with new details to replace the old person in the groups.
+     */
+    private void editPersonFromAllGroups(Person oldPerson, Person newPerson) {
+        // Iterate over a copy of the group list to avoid ConcurrentModificationException
+        for (Group group : new ArrayList<>(addressBook.getGroupList())) {
+            List<Person> members = new ArrayList<>(group.getMembers());
+            boolean updated = false;
+
+            // Check if the group contains the person with the old name
+            for (int i = 0; i < members.size(); i++) {
+                if (members.get(i).equals(oldPerson)) {
+                    // Replace the old person with the new person
+                    members.set(i, newPerson);
+                    updated = true;
+                    break;
+                }
+            }
+
+            if (updated) {
+                // Update the group with the modified member list
+                Group updatedGroup = new Group(group.getGroupName().toString(), members);
+                addressBook.setGroup(group, updatedGroup);
+            }
         }
 
         // Update the filtered group list if necessary
