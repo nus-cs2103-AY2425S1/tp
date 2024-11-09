@@ -62,6 +62,12 @@ Whether it be 5 staff members or 500 employees, HR Helper has the capability to 
 ## 2 About
 
 This user guide provides an overview for HR staff on the usage of HR Helper.
+It starts off with the simple steps you need to take to install the app, to ensure you have a smooth experience getting
+started.
+Afterward, it runs through the various commands available at your disposable to so you can use the app to its fullest 
+potential.
+Finally, frequently asked questions as well as known issues will be displayed so you can clarify any queries you might 
+have.
 
 --------------------------------------------------------------------------------------------------------------------
 
