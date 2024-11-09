@@ -78,7 +78,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setNextOfKin(ParserUtil.parseName(argMultimap.getValue(PREFIX_NEXT_OF_KIN).get()));
         }
         if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT).get()));
+            editPersonDescriptor.setEmergencyContact(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT).get()));
         }
         parseSubjectsForEdit(argMultimap.getAllValues(PREFIX_SUBJECT)).ifPresent(editPersonDescriptor::setSubjects);
         // parse optional tags
