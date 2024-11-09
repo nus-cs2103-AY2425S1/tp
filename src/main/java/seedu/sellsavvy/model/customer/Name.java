@@ -17,13 +17,13 @@ public class Name {
                     + "Names should have alphanumeric characters before and after the symbol, "
                     + "and it should not be blank.\n"
                     + "Relationship indicator using \"S/O\" or \"D/O\" can be included but should be wrapped "
-                    + "with spaces, and followed with the name of the customer with stated relationship.";
+                    + "with a single space, and followed with the name of the customer with stated relationship.";
 
     /*
      * The first character of a name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String ALPHANUMERIC_WITH_SPACE = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String ALPHANUMERIC_WITH_SPACE = "[\\p{Alnum}]([\\p{Alnum} ]*[\\p{Alnum}])?";
     public static final String NAME_REGEX = ALPHANUMERIC_WITH_SPACE + "((,\\s|'|-)" + ALPHANUMERIC_WITH_SPACE + ")?";
     public static final String RELATIONSHIP_REGEX = "\\s(S/O|D/O)\\s" + NAME_REGEX;
     public static final String VALIDATION_REGEX = "^" + NAME_REGEX + "(" + RELATIONSHIP_REGEX + ")?$";
