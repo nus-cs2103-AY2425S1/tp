@@ -408,18 +408,18 @@ Format: `clear`
 <table>
     <tr><th>Command</th><th>Parameter</th><th>Acceptable inputs</th></tr>
     <tr><th colspan="3">General</th></tr>
-    <tr><td>View</td><td colspan="2">No parameters required</td></tr>
-    <tr><td>Clear</td><td colspan="2">No parameters required</td></tr>
-    <tr><td>Help</td><td colspan="2">No parameters required</td></tr>
+    <tr><th>View</th><td colspan="2">No parameters required</td></tr>
+    <tr><th>Clear</th><td colspan="2">No parameters required</td></tr>
+    <tr><th>Help</th><td colspan="2">No parameters required</td></tr>
     <tr>
-        <td>Delete</td>
+        <th>Delete</th>
         <td>Index</td>
         <td>Positive integers only.
             <br>Integers less than 1 will cause an invalid command format error.
             <br>Integers greater than the number of contacts displayed in the given mode are invalid.</td>
     </tr>
     <tr><th colspan="3">Buyer</th></tr>
-    <tr><td rowspan="5">Add</td><td>Name</td><td>Alphanumeric characters and space, should not be blank</td></tr>
+    <tr><th rowspan="5">Add</th><td>Name</td><td>Alphanumeric characters and space, should not be blank</td></tr>
     <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
     <tr>
         <td>Email</td>
@@ -438,27 +438,38 @@ Format: `clear`
     </tr>
     <tr><td>Tag</td><td>Tags names should only contain alphanumeric and dashes</td></tr>
     <tr>
-        <td rowspan="2">Edit</td>
+        <th rowspan="2">Edit</th>
         <td>Index</td><td>Refer to General > Delete > Index</td>
     </tr>
     <tr><td colspan="2">The remaining parameters are the same as that for Buyer > Add</tr>
-    <tr><td>Find</td><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
+    <tr><th>Find</th><td>Name</td><td>Prepend the prefix "n/" before the name to be searched. For constraints on the name, refer to Buyer > Add > Name</td></tr>
     <tr><th colspan="3">MeetUp</th></tr>
     <tr>
-    <td rowspan="5">Add</td>
-    <td>Subject</td><td>Subjects should only contain alphanumeric characters and spaces, and it should not be blank</td>
+    <th rowspan="5">Add</th>
+    <td>Subject</td><td>Alphanumeric characters and spaces,should not be blank</td>
     </tr>
     <tr><td>Info</td><td>Must have at least one non-whitespace character</td></tr>
     <tr><td>From</td><td rowspan="2">Format: YYYY-MM-DD HH:mm</td></tr>
     <tr><td>To</td></tr>
     <tr><td>Added Buyers</td><td>Alphanumeric characters and spaces, should not be blank</td></tr>
-    <tr>
-        <td rowspan="2">Edit</td>
-        <td>Index</td><td>Refer to General > Delete > Index</td>
-    </tr>
+    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
     <tr><td colspan="2">The remaining parameters are the same as that for MeetUp > Add</tr>
-    <tr><td>Find</td><td>Subject</td><td>Prepend the prefix "s/" before the subject to be searched. For constraints on the subject, refer to MeetUp > Add > Subject</td></tr>
+    <tr><th>Find</th><td>Subject</td><td>Prepend the prefix "s/" before the subject to be searched. For constraints on the subject, refer to MeetUp > Add > Subject</td></tr>
     <tr><th colspan="3">Property</th></tr>
+    <tr><th rowspan="5">Add</th><td>Landlord Name</td><td>Alphanumeric characters and spaces,should not be blank</td></tr>
+    <tr><td>Phone</td><td>Numbers, at least 3 digits long</td></tr>
+    <tr>
+        <td>Asking Price</td>
+        <td>It should be a positive integer more than 0 and not be blank. 
+            <br>It can contain commas at the right positions (exactly 3 digits after each comma) 
+            <br>E.g. 10,000 and 10000 are both accepted but 1,0000 is NOT accepted). </td>
+    </tr>
+    <tr><td>Address</td><td>Can take any values, and it should not be blank</td></tr>
+    <tr><td>Property Type</td><td>Can take any values, and it should not be blank</td></tr>
+    <tr><th rowspan="2">Edit</th><td>Index</td><td>Refer to General > Delete > Index</td></tr>
+    <tr><td colspan="2">The remaining parameters are the same as that for Property > Add</tr>
+    <tr><th rowspan="2">Find</th><td>Landlord Name</td><td>Prepend the prefix "n/" before the landlord's name to be searched. For constraints on the landlord's name, refer to Property > Add > Landlord Name</td></tr>
+    <tr><td>Address</td><td>Prepend the prefix "a/" before the address to be searched. For constraints on the address, refer to Property > Add > Address</td></tr>
 </table>
 
 --------------------------------------------------------------------------------------------------------------------
