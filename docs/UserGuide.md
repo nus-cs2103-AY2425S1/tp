@@ -92,7 +92,7 @@ tasks done faster than traditional GUI apps.
 * Providing unexpected parameters for commands that do not take in parameters (such as `help`, `list`, `sort`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Commands are executed relative to current view. The current view could either be a list of all contacts saved in your PlanPerfect application (accessed using the `list` command) or only contacts assigned to a particular wedding (accessed using the `view` command).
+* The commands `filter` and `unassign` are executed relative to current view. The current view could either be a list of all contacts saved in your PlanPerfect application (accessed using the `list` command) or only contacts assigned to a particular wedding (accessed using the `view` command).
   * Example 1:  Using the `filter` command to find florists while in the all contacts view will list ALL florists in 
     your contacts. However, if you are in a wedding view, using `filter` to find 
     florists will only list florists assigned to that wedding.
@@ -128,6 +128,8 @@ Shows a message with basic usage instructions for PlanPerfect. The link to this 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG1 TAG2 ...]`
 
 Adds a contact to the address book.
+
+* Address field cannot contain " n/", " p/", " e/", " a/", " t/" as these sequences of characters are reserved for parameter prefixes.
 
 <box type="info" seamless>
 
@@ -238,6 +240,13 @@ Finds contacts whose names contain any of the given keywords.
 * Contacts matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
+<box type="info" seamless>
+
+**Note:**
+Execution of `find` will **always** search within all contacts, not just contacts in the current filtered or wedding view. If a `view` or `filter` command had been executed prior to the execution of `find`, the displayed list will include contacts in the "all contacts" view.
+
+</box>
+
 Examples:
 * `find John` returns `john` and `John Doe`.
 * `find alex david` returns `Alex Yeoh`, `David Li`.
@@ -255,6 +264,15 @@ Filters contacts who are tagged with all of the given tags.
 * Contacts matching all tags will be returned (i.e. `AND` search).
 * The search for tags is case-insensitive. eg. filtering by tag `Photographer` will also show contacts tagged with `photographer`.
 * If used inside a wedding view, only contacts assigned to that wedding (with that tag) are displayed.
+
+<box type="info" seamless>
+
+**Note:**
+Successive use of `filter` commands is not cumulative. That is, suppose `filter t/foodCaterer` is input, followed by `filter t/bartender`, the displayed list will contain contacts tagged with `bartender`, rather than contacts tagged with both `foodCaterer` and `bartender`.
+<br><br/>
+Execution of `filter` is **always** relative to the current view (all contacts OR wedding view). If a `find` command had been executed prior to the execution of `filter`, the displayed list will include contacts in the current view tagged with the provided tag(s), instead of only contacts returned by the previous `find` command. 
+
+</box>
 
 Examples:
 * `filter t/foodCaterer bartender` returns all contacts tagged with both `foodCaterer` AND `bartender`.
@@ -467,6 +485,8 @@ User preferences are saved in the JSON file `[JAR file location]/preferences.jso
 **Q**: What if PlanPerfect opens off-screen after moving it to a secondary monitor?  
 **A**: If this happens, delete the `preferences.json` file in the PlanPerfect folder and restart the app to reset the screen position.
 
+**Q**: What if my contact or wedding name contains symbols such as @, (, ) and /?
+**A**: PlanPerfect currently only supports alphanumeric contact and wedding names. We understand that there are names containing these characters, and plan to include support for these characters in a future release.
 
 <br><br/>
 
