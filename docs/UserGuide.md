@@ -290,7 +290,7 @@ Examples:
 
 Format: `favourite`
 
-* Bring all persons marked as favourite to the front.
+* Bring all persons marked as favourite to the front. Note that when the list is modified, e.g. some contacts are unfavourited, the user needs to use `favourite` command again to sort by favourite in the modified person list.
 
 Examples:
 * `favourite` followed by `favourite 2` brings the previously 2nd person who has been marked to the front (1st).
