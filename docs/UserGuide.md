@@ -1,3 +1,4 @@
+---
 layout: default.md
 title: "User Guide"
 pageNav: 3
@@ -58,7 +59,7 @@ TechConnect is a **desktop app for managing internship applications, optimized f
 5. Type the command in the command box and press Enter to execute it. e.g., typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     - `list` : Lists all companies.
-    - `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com` : Adds a company named `Google` to the Address Book.
+    - `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com r/Search engine giant t/Tech` : Adds a company named `Google` to the Address Book.
     - `bookmark 1` : Bookmarks the 1st company shown in the current list.
     - `bmlist` : Shows a list of all the bookmarked companies in the address book.
     - `edit 2 p/91234567 e/grab@example.com` : Edits the phone number and email address of the 2nd company to be 91234567 and grab@example.com respectively.
@@ -193,7 +194,7 @@ cp/www.shopee-career-url.com t/period_summer_2025
 with whatever value you input. Example ```t/helloworld``` creates a tag called "helloworld"
 
 Other Invalid tag example:
-- . Trying to create a tag like ```t/mytag_high``` will fail as we will treat your tag value
+- Trying to create a tag like ```t/mytag_high``` will fail as we will treat your tag value
 as ```mytag_high``` and the underscore is not a alphanumeric character
 
 [Back to Table of Contents](#table-of-contents)
@@ -492,18 +493,18 @@ Furthermore, certain edits can cause the TechConnect to behave in unexpected way
 
 ## Command summary
 
-| Action                        | Format, Examples                                                                                                                                                                                                                                          |
-|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL [r/REMARK] [t/TAG]…​`<br>e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cp/www.jamesho-career.com r/Looking forward to applying t/friend t/colleague` |
-| **Bookmark**                  | `bookmark INDEX`<br>e.g., `bookmark 2`                                                                                                                                                                                                                    |
-| **Remove bookmark**           | `removebm INDEX`<br>e.g., `removebm 2`                                                                                                                                                                                                                    |
-| **Clear**                     | `clear`                                                                                                                                                                                                                                                   |
-| **Delete**                    | `delete INDEX`<br>e.g., `delete 3`                                                                                                                                                                                                                        |
-| **Edit**                      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG]…​`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                           |
-| **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 2 r/Has good internship opportunities`                                                                                                                                                                           |
-| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                                                                                 |
-| **List**                      | `list`                                                                                                                                                                                                                                                    |
-| **List bookmarked companies** | `bmlist`                                                                                                                                                                                                                                                  |
-| **Add application status**    | `status INDEX as/STATUS` <br>e.g., `status 2 as/Round 2 of interview`                                                                                                                                                                                     |
-| **Help**                      | `help`                                                                                                                                                                                                                                                    |
+| Action                        | Format, Examples                                                                                                                                                                                                                                        |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                       | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS cp/CAREER_PAGE_URL r/REMARK [t/TAG]…​`<br>e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 cp/www.jamesho-career.com r/Looking forward to applying t/friend t/colleague` |
+| **Bookmark**                  | `bookmark INDEX`<br>e.g., `bookmark 2`                                                                                                                                                                                                                  |
+| **Remove bookmark**           | `removebm INDEX`<br>e.g., `removebm 2`                                                                                                                                                                                                                  |
+| **Clear**                     | `clear`                                                                                                                                                                                                                                                 |
+| **Delete**                    | `delete INDEX`<br>e.g., `delete 3`                                                                                                                                                                                                                      |
+| **Edit**                      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG]…​`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                         |
+| **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 2 r/Has good internship opportunities`                                                                                                                                                                         |
+| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                                                                               |
+| **List**                      | `list`                                                                                                                                                                                                                                                  |
+| **List bookmarked companies** | `bmlist`                                                                                                                                                                                                                                                |
+| **Add application status**    | `status INDEX as/STATUS` <br>e.g., `status 2 as/Round 2 of interview`                                                                                                                                                                                   |
+| **Help**                      | `help`                                                                                                                                                                                                                                                  |
 [Back to Table of Contents](#table-of-contents)
