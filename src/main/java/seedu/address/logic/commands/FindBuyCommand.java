@@ -16,7 +16,7 @@ public class FindBuyCommand extends Command {
     public static final String COMMAND_WORD = "findBuy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a particular property that a person "
-            + "wants to buy, by any of its fields (housing type, postal code, unit number, buying price, tags).\n "
+            + "wants to buy, by any of its fields (housing type, postal code, unit number, buying price, tags).\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " condo 533221 01-21";
 

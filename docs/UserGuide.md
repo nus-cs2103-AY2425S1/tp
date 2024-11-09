@@ -151,7 +151,7 @@ Lists all the commands the address book supports.
 
 ![list of_commands](images/commandsMessage.png)
 
-Format: `help`
+Format: `commands`
 
 ### Viewing overall statistics : `stats`
 
