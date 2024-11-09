@@ -3,37 +3,40 @@ layout: page
 title: User Guide
 ---
 
-# CareLink User Guide
 
 # CareLink User Guide
 
-- [Quick Start](#quick-start)
-- [Features](#features)
-  - [Viewing Help: `help`](#viewing-help--help)
-  - [Adding a Person: `add`](#adding-a-person-add)
-  - [Linking a Patient and a Caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
-  - [Deleting a Link Between Patient and Caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
-  - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
-  - [Listing All Persons: `list`](#listing-all-persons--list)
-  - [Editing a Person: `edit`](#editing-a-person--edit)
-  - [Locating Persons by Name, NRIC, Role, or Tags: `find`](#locating-persons-by-name-nric-role-or-tags-find)
-  - [Managing Appointments](#managing-appointments)
-    - [Adding an Appointment: `addapp`](#adding-an-appointment-addapp)
-    - [Editing an Appointment: `editapp`](#editing-an-appointment-editapp)
-    - [Updating the Status of an Appointment: `updatestatus`](#updating-status-of-an-appointment-updatestatus)
-    - [Deleting an Appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
-    - [Locating Appointments by Date-Time Range: `findapp`](#locating-appointments-by-date-time-range-findapp)
-  - [Deleting a Person: `delete`](#deleting-a-person--delete)
-  - [Clearing All Entries: `clear confirm`](#clearing-all-entries-clear-confirm)
-  - [Exiting the Program: `exit`](#exiting-the-program--exit)
-  - [Saving the Data](#saving-the-data)
-  - [Editing the Data File](#editing-the-data-file)
-  - [Archiving Data Files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
-- [FAQ](#faq)
-- [Known Issues](#known-issues)
-- [Command Summary](#command-summary)
+- [CareLink User Guide](#carelink-user-guide)
+  - [Quick start](#quick-start)
+  - [Features](#features)
+    - [Viewing help : `help`](#viewing-help--help)
+    - [Adding a person: `add`](#adding-a-person-add)
+    - [Linking a patient and a caregiver: `link`](#linking-a-patient-and-a-caregiver-link)
+    - [Deleting a link between patient and a caregiver: `deletelink`](#deleting-a-link-between-patient-and-a-caregiver-deletelink)
+    - [Adding Notes to a Person: `addnote`](#adding-notes-to-a-person-addnote)
+    - [Listing all persons : `list`](#listing-all-persons--list)
+    - [Editing a person : `edit`](#editing-a-person--edit)
+    - [Locating persons by name, NRIC, phone, email, role, or tags: `find`](#locating-persons-by-name-nric-phone-email-role-or-tags-find)
+    - [Prefixes:](#prefixes)
+    - [Examples:](#examples)
+    - [Managing Appointments](#managing-appointments)
+      - [Adding an appointment: `addapp`](#adding-an-appointment-addapp)
+      - [Editing an appointment: `editapp`](#editing-an-appointment-editapp)
+      - [Updating Status of an appointment: `updatestatus`](#updating-status-of-an-appointment-updatestatus)
+      - [Deleting an appointment: `deleteapp`](#deleting-an-appointment-deleteapp)
+      - [Locating appointments by date-time range: `findapp`](#locating-appointments-by-date-time-range-findapp)
+      - [Examples:](#examples-1)
+    - [Deleting a person : `delete`](#deleting-a-person--delete)
+    - [Clearing all entries: `clear confirm`](#clearing-all-entries-clear-confirm)
+    - [Exiting the program : `exit`](#exiting-the-program--exit)
+    - [Saving the data](#saving-the-data)
+    - [Editing the data file](#editing-the-data-file)
+    - [NRIC constraints](#nric-constraints)
+  - [FAQ](#faq)
+  - [Known Issues](#known-issues)
+  - [Command summary](#command-summary)
 
-CareLink is a desktop address book application targeted towards independent Geriatricians managing elderly patients with chronic conditions, someone who can type fast, prefers CLI over GUI, and often needs to manage several patients.
+CareLink is a desktop application designed for independent geriatricians managing elderly patients with chronic conditions. The application features a Command Line Interface (CLI) optimized for users who can type fast and prefer CLI over GUI, allowing efficient management of multiple patients.
 
 ## Quick start
 
@@ -41,7 +44,7 @@ CareLink is a desktop address book application targeted towards independent Geri
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your CareLink.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar carelink.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -52,7 +55,7 @@ CareLink is a desktop address book application targeted towards independent Geri
 
    - `list` : Lists all contacts.
 
-   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   - `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient` : Adds a contact named `John Doe` to the Address Book.
 
    - `delete S6483749D` : Deletes the person with NRIC `S6483749D`.
 
@@ -76,8 +79,8 @@ CareLink is a desktop address book application targeted towards independent Geri
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-- Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+- Items with `…`​ after them can be used multiple times including zero times.<br> e.g. `[t/TAG]…​` means you can add: no tags (i.e. 0 times), one tag (`t/friend`), or multiple tags where each tag must have its own `t/` prefix (`t/friend t/family t/elderly`)
+
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -100,9 +103,23 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS r/ROLE [t/TAG]…​`
+Format: `add n/NAME nric/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS role/ROLE [t/TAG]…`
 
-**The role must be either a patient or a caregiver**
+Field Constraints:
+- `NAME`: Must start with an alphanumeric character, followed by alphanumeric characters and spaces
+- `PHONE`: Must contain only numbers and be at least 3 digits long
+- `EMAIL`: Must be of the format local-part@domain where:
+  1. Local-part can contain alphanumeric characters and these special characters: + _ . -
+  2. Local-part cannot start or end with special characters
+  3. Domain must:
+     - End with a domain label at least 2 characters long
+     - Have domain labels that start and end with alphanumeric characters
+     - Have domain labels with alphanumeric characters, separated only by hyphens
+- `ADDRESS`: Must not start with a whitespace and cannot be blank
+- `ROLE`: Must be either 'PATIENT' or 'CAREGIVER'
+- `NRIC`: NRIC constraints are in NRIC constraints section
+
+**The role must be either a patient or a caregiver or both**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -110,7 +127,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-- `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient`
+- `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain t/diabetic role/patient`
 
 An example for adding a patient to the address book is given below.
 ![add Patient Command](images/addPatient.png)
@@ -118,8 +135,24 @@ An example for adding a patient to the address book is given below.
 Once the command succeeds, the person will be added to the address book and the following message will be displayed.
 ![add Patient Succeeds](images/addPatientSucceed.png)
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+
+
+Possible Errors:
+- `This person already exists in the address book` - Displayed when trying to add a person with an NRIC that already exists
+- `Roles should only be 'PATIENT' or 'CAREGIVER'` - When an invalid role is provided
+
+- `Missing required field:` - Displayed when any required field is not provided (name, NRIC, phone, email, address, or role)
+
+NRIC should adhere to the following format and constraints:
+1. The NRIC must be 9 characters long.
+2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
+  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
+  - 'F' and 'G' are for Foreigners.
+3. The next 7 characters must be digits.
+4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
+5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
+
 
 ### Linking a patient and a caregiver: `link`
 
@@ -137,6 +170,15 @@ An example of using CareLink to link a patient and a caregiver is given below.
 
 Once the command succeeds, the patient will be linked with the caregiver and the following message will be displayed.
 ![Link command success](images/linkcommandsucceed.png)
+
+Possible Errors:
+- `This link already exists in CareLink` - When attempting to create a link that already exists
+- `Cannot link same people` - When trying to link a person to themselves
+- `Incorrect NRIC. Caregiver and Patient not found` - When both NRICs cannot be found in CareLink
+- `Incorrect NRIC. Patient not found` - When the patient's NRIC cannot be found
+- `Incorrect NRIC. Caregiver not found` - When the caregiver's NRIC cannot be found
+- `Incorrect roles. The patient NRIC must correspond to a patient, and the caregiver NRIC must correspond to a caregiver.` - When the roles don't match the specified NRICs
+
 
 ### Deleting a link between patient and a caregiver: `deletelink`
 
@@ -172,6 +214,10 @@ An example of using CareLink to add notes to a person is given below.
 Once the command succeeds, the notes will be added to the person and the following message will be displayed.
 ![AddNote command success](images/AddNoteSuccessExample.png)
 
+Possible Errors:
+- `This link does not exist in CareLink` - When trying to delete a link that doesn't exist
+- `Incorrect NRIC. Person not found` - When either the patient's or caregiver's NRIC cannot be found
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in Care Link App.
@@ -195,6 +241,11 @@ Examples:
 
 - `edit S1234567D p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with `S1234567D` to be `91234567` and `johndoe@example.com` respectively.
 - `edit S6483749D n/Betsy Crower t/` Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
+
+Possible Errors:
+- `Incorrect NRIC. Person not found` - When the specified NRIC doesn't exist in CareLink
+- `At least one field to edit must be provided.` - When no fields to edit are specified
+- `This person already exists in the address book.` - When editing would result in a duplicate person
 
 ### Locating persons by name, NRIC, phone, email, role, or tags: `find`
 
@@ -230,11 +281,18 @@ An example of using the find command in CareLink is given below.
 Once the command succeeds, the persons found will be displayed providing comprehensive information about the persons.
 ![Find command success](images/findcommandsucceed.png)
 
+Possible Errors:
+- `Invalid command format! `
+find: Finds all persons based on the specified criteria and displays them as a list with index numbers. Search is case-insensitive.
+Parameters: [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...
+At least one parameter must be provided. You do not need to include all parameters.
+
 ### Managing Appointments
 
 #### Adding an appointment: `addapp`
 
-Adds an appointment for a person in CareLink.
+**Adds an appointment for a person in CareLink.**
+
 
 Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
@@ -246,12 +304,12 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
   - Appointment must be in the future
   - Must not overlap with existing appointments
 
-Examples:
+**Examples:**
 
 - `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
 - `addapp nric/S9876543B d/15/03/2025 start/14:30 end/16:00` adds a 90-minute appointment on March 15th, 2025
 
-Common errors and their meanings:
+**Common errors and their meanings:**
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g 01/01/2025)
@@ -262,10 +320,11 @@ Common errors and their meanings:
 
 #### Editing an appointment: `editapp`
 
-Edits an existing appointment for a person in CareLink
+**Edits an existing appointment for a person in CareLink**
 
 Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`
 
+**Constraints**
 - The `NRIC` must belong to a person already in CareLink
 - `DATE` must be in the format DD/MM/YYYY (e.g 01/01/2025)
 - `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g 14:30)
@@ -274,14 +333,16 @@ Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_T
   - Appointment must be in the future
   - Must not overlap with existing appointments
 
-Examples:
+**Examples:**
 
 - `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` changes the appointment date, timings remain the same
 - `editapp nric/S1234567D d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, appointment remains on the same day.
 
-Common errors and their meanings:
 
+**Common errors and their meanings:**
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
+- `This appointment does not exist in CareLink` - The specified appointment cannot be found
+- `At least one field to edit must be provided.` - You must specify at least one field to change
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g 01/01/2025)
 - `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g 14:30)
 - `Start time must be before end time` - Check your edited appointment times
@@ -290,7 +351,7 @@ Common errors and their meanings:
 
 #### Updating Status of an appointment: `updatestatus`
 
-Updates the status of an existing appointment. The status can be `PENDING` or `COMPLETED`.
+**Updates the status of an existing appointment. The status can be `PENDING` or `COMPLETED`.**
 
 Format: `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS`
 
@@ -300,7 +361,7 @@ Format: `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS`
 - The `STATUS` must be either `PENDING` or `COMPLETED`. It is case insensistive.
 - The appointment must exist at the specified date and time for the person
 
-Examples:
+**Examples:**
 
 - `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 1st, 2025 at 10:00
 - `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/pending` updates the status to pending for the appointment on January 1st, 2025 at 10:00
@@ -308,6 +369,9 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To change the status of an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
 </div>
+
+
+**Common errors and their meanings:**
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g. 01/01/2025)
@@ -317,7 +381,7 @@ To change the status of an appointment, you only need the start time. The end ti
 
 #### Deleting an appointment: `deleteapp`
 
-Deletes an existing appointment for a person in CareLink.
+**Deletes an existing appointment for a person in CareLink.**
 
 Format: `deleteapp nric/NRIC d/DATE start/START_TIME`
 
@@ -335,7 +399,7 @@ Examples:
 To delete an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
 </div>
 
-Common errors and their meanings:
+**Common errors and their meanings:**
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g. 01/01/2025)
@@ -344,7 +408,7 @@ Common errors and their meanings:
 
 #### Locating appointments by date-time range: `findapp`
 
-Finds and lists appointment that falls within the specified date-time range. The command displays detailed information about the appointments such as the patient's name, phone, email, NRIC, caregivers, tags, and the appointment's start and end dates and times.
+**Finds and lists appointment that falls within the specified date-time range**. The command displays detailed information about the appointments such as the patient's name, phone, email, NRIC, caregivers, tags, and the appointment's start and end dates and times.
 
 **Format**: `findapp sdate/START_DATE start/START_TIME edate/END_DATE end/END_TIME​`
 
@@ -362,9 +426,14 @@ Finds and lists appointment that falls within the specified date-time range. The
 An example of the result obtained from the `findapp` command is given below.
 ![Find Appointment command example](images/findappointment.png)
 
+**Possible Errors:**
+- `Invalid date. Please use the DD/MM/YYYY format` - When the date format is incorrect
+- `Invalid time. Please use the HH:MM format` - When the time format is incorrect
+
+
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+**Deletes the specified person from the address book.**
 
 Format: `delete NRIC`
 
@@ -383,9 +452,13 @@ Notice the NRIC used in the example belongs to `David LI`.
 Once the command succeeds, notice that David is removed and hence no longer displayed.
 ![result for 'delete S6483749D'](images/deleteDavidResult.png)
 
+**Possible Errors:**
+- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
+
+
 ### Clearing all entries: `clear confirm`
 
-Clears all entries from the address book after receiving confirmation.
+**Clears all entries from the address book after receiving confirmation.**
 
 **Warning**: This command will permanently delete all entries from the address book. Ensure that you want to proceed before executing this command.
 
@@ -402,27 +475,32 @@ Clears all entries from the address book after receiving confirmation.
 
 ### Exiting the program : `exit`
 
-Exits the program.
+**Exits the program.**
 
 Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ Carelink data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Carelink data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, CareLink will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
+### NRIC constraints
+NRIC should adhere to the following format and constraints:
+1. The NRIC must be 9 characters long.
+2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
+   - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
+   - 'F' and 'G' are for Foreigners.
+3. The next 7 characters must be digits.
+4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
+5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
 ---
 
 ## FAQ
@@ -432,10 +510,13 @@ _Details coming soon ..._
 
 ---
 
-## Known issues
+## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+1. **Multiple Monitor Setup**: The GUI may open off-screen when switching from multi-monitor to single-monitor setup.
+   - Solution: Delete `preferences.json` and restart the application.
+
+2. **Help Window**: After minimizing the Help Window, using the `help` command, `Help` menu, or `F1` shortcut will not open a new window.
+   - Solution: Manually restore the minimized Help Window.
 
 ---
 
@@ -443,7 +524,7 @@ _Details coming soon ..._
 
 | Action                 | Format, Examples                                                                                                                                                                                                |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`                                              |
+| **Add**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient`                            |
 | **Link**               | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                                                                     |
 | **Deletelink**         | `deletelink patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `deletelink patient/S6283947C caregiver/S6382947A`                                                                                         |
 | **Addnote**            | `addnote nric/NRIC note/NOTES` <br> e.g. `addnote nric/S6283947C note/stopped taking XYZ medication on ABC day`                                                                                                 |
