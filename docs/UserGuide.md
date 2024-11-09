@@ -56,10 +56,10 @@ faster than traditional GUI apps.
   e.g. if the command specifies `adD CONTact`, it will be interpreted as `add contact`. 
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [s/SKILL]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
+  e.g. `n/NAME [s/SKILLS]` can be used as `n/John Doe s/Python` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[s/SKILL]…​` can be used as ` ` (i.e. 0 times), `s/Python`, `s/Python s/Cuda` etc.
+  e.g. `[s/SKILLS]…​` can be used as ` ` (i.e. 0 times), `s/Python`, `s/Python s/Cuda` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -147,7 +147,7 @@ Format: `list all`
 
 Edits an existing contact in the address book.
 
-Format: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`
+Format: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILLS]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
