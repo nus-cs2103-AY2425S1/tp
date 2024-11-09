@@ -553,12 +553,6 @@ Example:
 
 1. `help` results in a popup window which contains all the commands in PROperty for easy reference during use.
 
-Visual example of correct output:
-
-![HelpCommandShowcase.png](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase.png)
-![help message](images/user-guide-images/HelpMessageShowcase2.png)
-
 [_Back to Top_](#table-of-contents)
 
 ### Saving the data
