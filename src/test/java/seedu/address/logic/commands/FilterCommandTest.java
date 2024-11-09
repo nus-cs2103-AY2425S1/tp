@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -62,11 +61,11 @@ public class FilterCommandTest {
 
     @Test
     public void execute_tagNotCreated_failure() {
-        String expectedMessage = "Tag [friends] must be created before being used to filter.";
+        String expectedMessage = "Tag(s) must be created first using 'newtag' command: [friends]";
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(FRIENDS);
         FilterCommand filterCommand = new FilterCommand(tagSet, new HashSet<>());
-        assertCommandFailure(filterCommand, model, expectedMessage);
+        assertCommandSuccess(filterCommand, model, expectedMessage, model);
     }
 
     @Test
@@ -130,10 +129,11 @@ public class FilterCommandTest {
         FilterCommand filterCommand = new FilterCommand(tagSet, new HashSet<>());
         assertCommandSuccess(filterCommand, model, expectedMessage, expectedModel);
 
-        expectedMessage = "Tag [family] must be created before being used to filter.";
+        expectedMessage = "Tag(s) must be created first using 'newtag' command: [family]\n"
+                + "The following tags are already being filtered: [friends]";
         tagSet.add(FAMILY);
         FilterCommand newFilterCommand = new FilterCommand(tagSet, new HashSet<>());
-        assertCommandFailure(newFilterCommand, model, expectedMessage);
+        assertCommandSuccess(newFilterCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

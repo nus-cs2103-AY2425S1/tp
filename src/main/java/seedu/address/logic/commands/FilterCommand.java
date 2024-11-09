@@ -101,7 +101,7 @@ public class FilterCommand extends UndoableCommand {
         finalMessage.append(successMessage);
         finalMessage.append(failureMessage);
 
-        return new CommandResult(finalMessage.toString());
+        return new CommandResult(finalMessage.toString().trim());
     }
 
     private void updateSuccessMessage(Model model) {
