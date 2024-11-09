@@ -3,6 +3,7 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinParam defaultFontSize 16
 
 Package Model as ModelPackage <<Rectangle>>{
 Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
@@ -41,10 +42,10 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> "1" ContactType
-Person *--> "1" TelegramHandle
-Person *--> "1" ModuleName
+Person *--> "0...1" TelegramHandle
+Person *--> "0...1" ModuleName
 Person *--> "1" Name
-Person *--> "1" Remark
+Person *--> "0...1" Remark
 Person *--> "0...1"Phone
 Person *--> "0...1"Email
 Person *--> "*" Tag
@@ -55,4 +56,8 @@ UniquePersonList -[hidden]right-> I
 Name -[hidden]right-> Phone
 
 ModelManager --> "~* filtered" Person
+
+note right of Person
+    A person must have at least one of Phone, Email or TelegramHandle
+end note
 @enduml

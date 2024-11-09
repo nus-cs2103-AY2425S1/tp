@@ -230,19 +230,19 @@ University students meet people from many different places (e.g. different class
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​  | I want to …​                                                                         | So that I can…​                                                        |
-|----------|----------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user | easily access usage instructions                                                     | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user     | add new contacts with their details (eg. name, phone number, email, telegram handle) | keep track of my contacts in the app                                   |
-| `* * *`  | user     | delete a contact                                                                     | remove entries that I no longer need                                   |
-| `* * *`  | user     | find a person by name or telegram handle                                             | locate details of persons without having to go through the entire list |
-| `* * *`  | user     | edit contact details (e.g. phone number, email)                                      | so that I can keep the information up to date                          |
-| `* *`    | student  | add a new contact with multiple tags (e.g., CCA, classmate)                          | categorise them based on different associations                        |
-| `* *`    | student  | categorise contacts into different contact types (eg. work, personal)                | organise people according to my needs                                  |
-| '* *'.   | student  | be able to filter my contacts based off different contact types                      | find my contacts faster                                                |
-| `* *`    | student  | tag contacts with multiple categories                                                | find them easily in different contexts                                 |
-| `* *`    | student  | import contacts from csv files                                                       | quickly add a large number of contacts without entering them manually  |
-| `*`      | student  | receive reminders to reach out to contacts I haven’t communicated with in a while    | maintain my connections                                                |
+| Priority | As a …​  | I want to …​                                                                          | So that I can…​                                                         |
+|----------|----------|---------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `* * *`  | new user | easily access usage instructions                                                      | refer to instructions when I forget how to use the App                  |
+| `* * *`  | student  | add new contacts with their details (eg. name, telegram handle, contact type, module) | keep track of my university contacts in the app                         |
+| `* * *`  | student  | delete a contact                                                                      | remove entries that I no longer need for university                     |
+| `* * *`  | student  | find a person by name, telegram handle or tag                                         | locate details of persons without having to go through the entire list  |
+| `* * *`  | student  | edit contact details (e.g. phone number, email)                                       | so that I can keep the information of my university contacts up to date |
+| `* *`    | student  | add a new contact with multiple tags (e.g., CCA, classmate)                           | categorise them based on different associations                         |
+| `* *`    | student  | categorise contacts into different contact types (eg. work, personal)                 | organise people according to my needs                                   |
+| `* *`    | student  | be able to filter my contacts based off different contact types                       | find my contacts faster                                                 |
+| `* *`    | student  | tag contacts with multiple categories                                                 | find them easily in different contexts                                  |
+| `* *`    | student  | import contacts from csv files                                                        | quickly add a large number of contacts without entering them manually   |
+| `*`      | student  | receive reminders to reach out to contacts I haven’t communicated with in a while     | maintain my connections                                                 |
 
 
 ### Use cases
@@ -254,36 +254,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to add a new contact
-2.  User enters the required contact details:
-    * Name `n/NAME`
-    * Contact type `ct/CONTACT_TYPE` - e.g., `WORK`, `SCHOOL`, or `PERSONAL`
-    * At least one of:
-      * Telegram handle `h/TELEGRAM_HANDLE`
-      * Phone number `p/PHONE`
-      * Email address `e/EMAIL`
-    * Optional fields:
-      * Module `m/MODULE_NAME`
-      * Remark `r/REMARK`
-      * Tags `t/TAG`, such as `classmate` or `friend`
-3. `UniLink` validates the entered details 
-4. `UniLink` adds the new contact
-5. `UniLink` displays the updated contact list
+2.  User enters the required contact details
+3.  UniLink validates the entered details 
+4.  UniLink adds the new contact
+5.  UniLink displays the updated contact list
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The entered data is invalid
-  * 2a1. UniLink shows an error message indicating fields that could be incorrect (e.g., invalid email).
-  * 2a2. User re-enters the correct data
+* 3a. The entered data is invalid
+  * 3a1. UniLink shows an error message indicating fields that could be incorrect.
+  * 3a2. User re-enters the new data
 
-    Steps 2a1-2a2 are repeated until the data entered is correct.
+    Steps 3a1-3a2 are repeated until the data entered is correct.
 
-    Use case resumes from step 3.
+    Use case resumes from step 4.
 
-* 2b. User enters a duplicate contact.
+* 3b. User enters a duplicate contact.
 
-    * 2b1. UniLink shows an error message indicating the contact already exists. 
+    * 3b1. UniLink shows an error message indicating the contact already exists. 
 
       Use case ends.
 
@@ -294,8 +284,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons
 2.  UniLink shows a list of persons
-3.  User requests to delete a specific person in the list by providing the person's index
-4.  UniLink deletes the specified person from the list and displays a confirmation message
+3.  User requests to delete a specific person in the list
+4.  UniLink deletes the specified person from the list
 
     Use case ends.
 
@@ -317,10 +307,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons
 2.  UniLink shows a list of persons
-3.  User requests to edit a specific person in the list by providing the person’s index
+3.  User requests to edit a specific person in the list
 4.  User enters the new details for the contact to be updated
 5.  UniLink updates the contact
-6.  UniLink displays the updated contact list with a confirmation message
+6.  UniLink displays the updated contact list
 
     Use case ends.
 
@@ -336,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 4a. The entered data is invalid (e.g., incorrect format or missing required fields)
+* 4a. The entered data is invalid
     * 4a1. UniLink shows an error message
     * 4a2. User re-enters the new data
 
@@ -353,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to view the list of persons
-2.  `UniLink` shows the full list of persons with basic contact details.
+2.  UniLink shows the full list of persons with basic contact details.
 
     Use case ends.
 
@@ -368,7 +358,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to switch theme
-2. `UniLink` changes the theme to the specified option (e.g., light or dark mode)
+2. UniLink changes the theme to the specified option (e.g., light or dark mode)
 
     Use case ends.
 
@@ -386,15 +376,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to find contacts by name
 2.  User enters a keyword representing part or all of a contact’s name
-3.  `UniLink` shows a list of persons with names containing the keyword
+3.  UniLink shows a list of persons with names containing the keyword
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The entered data is invalid (e.g., blank keyword)
+* 2a. The entered data is invalid
     * 2a1. UniLink shows an error message
-    * 2a2. User re-enters a valid keyword
+    * 2a2. User re-enters a new keyword
 
       Steps 2a1-2a2 are repeated until the data entered is correct.
 
@@ -407,14 +397,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to filter contacts by contact type
-2. User specifies the contact type they want to filter by (e.g., `WORK`, `SCHOOL`, `PERSONAL`)
-3. `UniLink` shows a list of contacts that match the specified contact type
+2. User specifies the contact type they want to filter by
+3. UniLink shows a list of contacts that match the specified contact type
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The specified contact type is invalid (e.g., a type that does not exist)
+* 2a. The specified contact type is invalid
 
     * 2a1. UniLink shows an error message indicating the contact type is invalid
 
