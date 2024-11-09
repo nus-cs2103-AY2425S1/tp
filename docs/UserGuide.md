@@ -232,15 +232,15 @@ Format: `createD n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 * A _notification message_ will be displayed if MedDict could not create the doctor with the given information.
 
 Examples:
-* `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
+* `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br>
   **Output**: <br>
     Successfully created a new doctor with ID: #1 : <br>
-    Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: Specialist in physiotherapy
+    Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: 
 
-* `createD n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
+* `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br>
   **Output**: <br>
   This doctor already exists.
-
+  
 
 ### [Creating and Adding a Patient](#command-summary): `createP`
 
