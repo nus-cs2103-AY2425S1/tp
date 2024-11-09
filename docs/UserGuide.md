@@ -195,7 +195,7 @@ Examples:
 
 ### Mark attendance for a single student: `mark`
 
-Marks the attendance of a specified student. 
+Marks the attendance of a specified student.
 
 Format: `mark INDEX`
 
@@ -208,7 +208,7 @@ Example:
 
 ### Unmark attendance for a single student: `unmark`
 
-Unmarks the attendance of a specified student. 
+Unmarks the attendance of a specified student.
 
 Format: `unmark INDEX`
 
@@ -221,7 +221,7 @@ Example:
 
 ### Reset attendance: `reset-att`
 
-Resets the attendance count of all students in displayed list to 0. 
+Resets the attendance count of all students in displayed list to 0.
 
 Format: `reset-att`
 
@@ -231,7 +231,7 @@ To reset the attendance count of all students to 0, enter `list` to get a list o
 
 ### Mark attendance for a group of students: `batch-mark`
 
-Marks attendance for all students in the displayed list. 
+Marks attendance for all students in the displayed list.
 
 Format: `batch-mark`
 
@@ -241,7 +241,7 @@ Example:
 
 ### Unmark attendance for a group of students: `batch-unmark`
 
-Unmarks attendance for all students in the displayed list. 
+Unmarks attendance for all students in the displayed list.
 
 Format: `batch-unmark`
 
@@ -257,7 +257,7 @@ Examples:
 
 * `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts. The person at index 2 and 4 will be selected. The feedback box will display:
   "Selected Person(s): [Name of person at index 2 and 4]" (e.g., "Selected Person(s): John Doe, Alice Tan").
-* `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show 
+* `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show
   only these selected contacts. The person at index 3, 5 and 7 will be selected. The feedback box will display:
   "Selected Person(s): [Name of person at index 3, 5 and 7]" (e.g., "Selected Person(s): John Doe, Alice Tan, Joshua Chou").
 
@@ -265,9 +265,9 @@ Where INDEX refers to the position of the person in the currently displayed list
 - INDEX is a positive integer that refers to the position of a person in the list (starting from 1).
 - You can specify multiple indexes separated by spaces to select more than one person at a time.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** To increase efficiency when performing actions on multiple persons, 
-consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations. 
-For example: - `select 1 2 3` followed by `delete` will delete persons at indexes 1, 2, and 3. 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** To increase efficiency when performing actions on multiple persons,
+consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations.
+For example: - `select 1 2 3` followed by `delete` will delete persons at indexes 1, 2, and 3.
 - `select 4 5 6` followed by `batch-mark` will mark attendance for all selected persons. </div>
 
 ### Editing tag in a batch: `batch-edit`
@@ -279,7 +279,7 @@ Format: `batch-edit t/OLDTAG t/NEWTAG`
 Examples:
 ![Batch delete example data](images/ForBatchDeleteExampleData.png)
 * `batch-edit t/friends t/fren` will change the `friends` tag of both `Alex Yeoh` and `Bernice Yu` to `fren`.
-* After successful execution, the contact list will show `Alex Yeoh`, `Bernice Yu` and `Charlotte Oliveiro` 
+* After successful execution, the contact list will show `Alex Yeoh`, `Bernice Yu` and `Charlotte Oliveiro`
   as they all have the `fren` tag.
 
 
@@ -340,6 +340,6 @@ Action | Format, Examples
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
 **Batch Mark** | `batch-mark`
 **Batch Unmark** | `batch-unmark`
-**Reset Attendance** | `reset-att` 
+**Reset Attendance** | `reset-att`
 **List** | `list`
 **Help** | `help`

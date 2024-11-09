@@ -324,7 +324,7 @@ Use case ends
 1. User enters the select command with a list of indexes.
 2. Cher verifies that each index corresponds to a valid contact in the current list.
 3. Cher highlights or marks the selected contacts.
-4. Cher displays the selected contacts to the user.  
+4. Cher displays the selected contacts to the user.
    Use case ends.
 
 **Extensions**
@@ -332,7 +332,7 @@ Use case ends
     - 1a1. Cher shows an error message with the list of invalid indexes.
       Use case ends.
 * 1b. User enters an index that is not displayed in the current displayed list.
-    - 1b1. Cher shows an error indicating the index is not displayed.  
+    - 1b1. Cher shows an error indicating the index is not displayed.
       Use case ends.
 
 #### Use case: UC9 - Filter and then select contacts
@@ -341,18 +341,18 @@ Use case ends
 1. User enters a filter command with criteria to narrow down the displayed list of contacts (e.g., by tags or names).
 2. Cher filters and displays only the contacts that match the specified criteria.
 3. User enters the select command with specific indexes from the filtered list.
-4. Cher highlights and displays the selected contacts to the user.  
+4. Cher highlights and displays the selected contacts to the user.
    Use case ends.
 
 **Extensions**
 * 1a. Cher detects an error in user input for the filter criteria.
-    - 1a1. Cher shows an error message and provides the correct filter input format.  
+    - 1a1. Cher shows an error message and provides the correct filter input format.
       Use case ends.
 * 3a. Cher detects an invalid index or indexes outside the filtered list.
-    - 3a1. Cher displays an error message indicating the invalid indexes.  
+    - 3a1. Cher displays an error message indicating the invalid indexes.
       Use case ends.
 * 3b. No contacts match the filter criteria.
-    - 3b1. Cher shows a message that no contacts matched the criteria.  
+    - 3b1. Cher shows a message that no contacts matched the criteria.
       Use case ends.
 
 
@@ -449,7 +449,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `batch-edit t/tag3 t/tag4` <br>
        Expected: Feedback box will show error: `No person with Tag= [[tag3]] is found`
     3. Test case: `batch-edit t/tag1 t/tag3` <br>
-       Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`. 
+       Expected: Feedback box will show message: `Tag Changed: [tag1] -> [tag3]`.
        Contact entries will show a list of contacts that currently has `[tag3]`; `test person 1`, `test person 2`,
        `test person 3`, for this test assuming other contacts does not have the `[tag1]` as their tag.
     4. Test case: `batch-edit t/tag2 t/tag4` <br>
