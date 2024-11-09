@@ -318,6 +318,44 @@ Use case ends
     - 1a1. Cher shows correct input format. <br>
       Use case ends.
 
+#### Use case: UC8 - Select contacts by index
+
+**MSS**
+1. User enters the select command with a list of indexes.
+2. Cher verifies that each index corresponds to a valid contact in the current list.
+3. Cher highlights or marks the selected contacts.
+4. Cher displays the selected contacts to the user.  
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects an invalid or out-of-range index.
+    - 1a1. Cher shows an error message with the list of invalid indexes.
+      Use case ends.
+* 1b. User enters an index that is not displayed in the current displayed list.
+    - 1b1. Cher shows an error indicating the index is not displayed.  
+      Use case ends.
+
+#### Use case: UC9 - Filter and then select contacts
+
+**MSS**
+1. User enters a filter command with criteria to narrow down the displayed list of contacts (e.g., by tags or names).
+2. Cher filters and displays only the contacts that match the specified criteria.
+3. User enters the select command with specific indexes from the filtered list.
+4. Cher highlights and displays the selected contacts to the user.  
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects an error in user input for the filter criteria.
+    - 1a1. Cher shows an error message and provides the correct filter input format.  
+      Use case ends.
+* 3a. Cher detects an invalid index or indexes outside the filtered list.
+    - 3a1. Cher displays an error message indicating the invalid indexes.  
+      Use case ends.
+* 3b. No contacts match the filter criteria.
+    - 3b1. Cher shows a message that no contacts matched the criteria.  
+      Use case ends.
+
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -417,6 +455,48 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `batch-edit t/tag2 t/tag4` <br>
        Expected: Feedback box will show message: `Tag Changed: [tag2] -> [tag4]` <br>
        Contact entries will show a list of contacts that currently has `[tag4]`; `test person 3`.
+
+### Selecting Persons
+
+1. Select one person while all persons are being shown:
+    1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+    2. Test case: `select 2` where N > 2
+        - Expected: Contacts at indexes 2 is selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at index 2]" (e.g., "Selected Person(s): John Doe"). No errors are shown.
+
+2. Select multiple persons while all persons are being shown:
+   1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+   2. Test case: `select 1 2 4` where N > 4
+       - Expected: Contacts at indexes 1, 2, and 3 are selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at indexes 1, 2, and 4]" (e.g., "Selected Person(s): John Doe, Jane Smith, Bob Lee"). No errors are shown.
+   3. Test case: `select 1 7` where N > 7
+       - Expected: Similar to the previous. Contacts at indexes 1, 2 are selected and displayed in the contact list. The feedback box displays: "Selected Person(s): [Names of contacts at indexes 1 and 2]" (e.g., "Selected Person(s): John Doe, Bob Lee"). No errors are shown.
+
+3. Select with invalid indexes that do not match the currently displayed person list
+    1. Prerequisites: List N persons using the `list` command. Multiple persons are displayed in the list.
+    2. Test case: `select 7` where N < 6
+       - Expected: The feedback box will display an error message: "The following indexes are invalid: 7." No changes are made to the contact list, and it remains as originally displayed.
+    3. Test case: `select 6 20 40` where N < 6
+       - Expected: Similar to the previous. The feedback box will display an error message: "The following indexes are invalid: 6, 20, 40." No changes are made to the contact list, and it remains as originally displayed.
+
+### Testing the Main Window
+
+1. Open the Main Window:
+   1. Prerequisites: Ensure that the application has started and the main window is initialized.
+   2. Test case: Launch the application and wait for the main window to appear.
+      - Expected: The main window should appear on the screen, showing the application layout with the menu bar, the person list panel, result display area (Feedback Box), command box, and status bar footer. No errors should be shown.
+   3. Test case: Try the functionalities of the UI, follow Selecting Persons 2.2
+      - Expected: Same as Selecting Persons 2.2 Expected. The Ui components should function without errors. The corresponding persons should be highlighted or indicated as selected in the UI.
+
+### Testing the Help Window
+
+1. Open the Help Window:
+   1. Prerequisites: Ensure that the main window is open and the application is running.
+   2. Test case: Press F1 or click the "Help" menu item, then click the dropdown menu button.
+      - Expected: The help window should appear, displaying the message: "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html". No errors should be shown, and the user guide should be loaded in the web view.
+
+2. Focus on an already opened Help Window:
+   1. Prerequisites: Ensure that the help window is open.
+   2. Test case: Press F1 again or click the "Help" menu item while the help window is already showing.
+      - Expected: The help window should gain focus and bring itself to the front. The URL "Refer to the user guide: https://ay2425s1-cs2103t-w13-1.github.io/tp/UserGuide.html" should remain displayed in the help message label.
 
 ### Saving data
 
