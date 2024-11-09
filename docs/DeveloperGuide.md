@@ -9,8 +9,13 @@ title: Developer Guide
 {:toc}
 
 ## **Acknowledgements**
+MediBase3 is designed based on the AddressBook-Level3 project created by [SE-EDU](https://se-education.org).
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Generative AI tools (ChatGPT, Copilot) were used for creating test cases, writing detailed Javadocs and some code refactoring. 
+
+The following Java libraries were also used in the development of MediBase3:
+- [JavaFX](https://openjfx.io/) for the GUI
+- [JUnit 5](https://junit.org/junit5/) for testing
 
 [Back to Table of Contents](#table-of-contents)
 ## **Setting up, getting started**

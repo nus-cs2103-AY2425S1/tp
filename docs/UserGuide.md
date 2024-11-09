@@ -176,7 +176,6 @@ Here are some basic commands to get you started.
 [Back to Table of Contents](#table-of-contents)
 
 
-
 You’re now ready to start using MediBase3.  
 For a detailed list of features and instructions, see the [Features](#features) section.  
 For additional assistance or common questions, please refer to our [FAQ](#faq) section.
