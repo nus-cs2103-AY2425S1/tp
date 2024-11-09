@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -172,9 +171,12 @@ public class DeleteCommand extends Command {
      * @throws CommandException if person is not assigned weddings
      */
     public void checkIsAssignedWeddings(Model model, Person personToDelete) throws CommandException {
-        List<Wedding> weddings = model.getFilteredWeddingList();
+        List<Wedding> weddingList = model.getFilteredWeddingList();
         for (Index index : weddingIndices) {
-            throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
+            Wedding wedding = weddingList.get(index.getZeroBased());
+            if (!personToDelete.isAssignedToWeddingNonClient(wedding)) {
+                throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
+            }
         }
     }
 
