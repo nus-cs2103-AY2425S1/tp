@@ -108,8 +108,17 @@ Need a quick reference?
 
 **Notes about command parameters:**<br>
 
-* `NAME` only accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`  
-  e.g. Flora-Ann. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
+* `NAME` only accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
+  e.g. `Flora-Ann`. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
+
+* Adding and editing `NAME`s is case-sensitive. Although duplicate contact names are not allowed,     
+e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
+
+* `TIME-TIME` should be in the format "HHmm-HHmm" and must be a valid time range within the same day  
+  e.g. `1700-2200` is a valid time range whereas `2300-0100` is not a valid time range.
+
+* `TIME-TIME` time ranges cannot be a single point in time.
+  e.g. `1200-1200` is not a valid time range.
 
 </box>
 --------------------------------------------------------------------------------------------------------------------
@@ -176,7 +185,7 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GAME]... [t/TAG]..
 <box type="tip" seamless>
 
 **Tip:** A person can have any number of tags, games and preferred times (including 0)   
-**Tip:** Preferred time `pt/` TIME-TIME should be in the form of "HHmm-HHmm" and a valid time range that is not overnight
+**Tip:** `TIME` should be in the form of `HHmm` and `pt/` time ranges must be within the same day (e.g. "2300-0100" is not allowed)
 </box>
 
 Examples:
