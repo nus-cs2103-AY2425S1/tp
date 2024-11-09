@@ -30,8 +30,10 @@ public class Status {
      */
     public Status(String status) {
         requireNonNull(status);
+        assert status != null : "Status should not be null";
         checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
         value = status;
+        assert isValidStatus(value) : "Status should match one of the valid options";
     }
 
     /**

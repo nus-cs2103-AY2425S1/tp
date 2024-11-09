@@ -24,15 +24,18 @@ public class DesiredRole {
      * @param role A desired role.
      */
     public DesiredRole(String role) {
+        assert role != null : "Role cannot be null";
         requireNonNull(role);
         value = role.trim();
+        assert isValidDesiredRole(value) : "Desired role is not valid according to the required format";
     }
 
     /**
      * Returns true if a given string is a valid desired role.
      */
     public static boolean isValidDesiredRole(String test) {
-        return test != null && test.matches(VALIDATION_REGEX);
+        assert test != null : "String for validation cannot be null";
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

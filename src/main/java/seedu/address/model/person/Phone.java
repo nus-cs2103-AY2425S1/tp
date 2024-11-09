@@ -22,8 +22,10 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
+        assert phone != null : "Phone number should not be null";
         checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
+        assert isValidPhone(value) : "Phone number should be valid as per regex " + VALIDATION_REGEX;
     }
 
     /**

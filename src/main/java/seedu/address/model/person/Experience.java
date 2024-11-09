@@ -26,8 +26,10 @@ public class Experience {
      * @param experience A valid experience description.
      */
     public Experience(String experience) {
+        assert experience != null : "Experience cannot be null";
         requireNonNull(experience);
         checkArgument(isValidExperience(experience), MESSAGE_CONSTRAINTS);
+        assert isValidExperience(experience) : "Experience is not valid";
         value = experience;
     }
 
@@ -35,6 +37,7 @@ public class Experience {
      * Returns true if a given string is a valid experience description.
      */
     public static boolean isValidExperience(String test) {
+        assert test != null : "String for experience validation cannot be null";
         return test.matches(VALIDATION_REGEX);
     }
 
