@@ -10,14 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphabets, hyphens, dots, commas, "
+            "Names should only contain alphabets, hyphens, dots, commas, forward slash"
                     + "and spaces, and be between 1 and 100 characters.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^(?=.*[\\p{L}\\p{N}])[\\p{L}\\-\\., ]{1,100}$";
+    public static final String VALIDATION_REGEX = "^(?=.*[\\p{L}\\p{N}])[\\p{L}\\-\\., /]{1,100}$";
     private static final int MIN_LENGTH = 1;
     private static final int MAX_LENGTH = 100;
 

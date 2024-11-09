@@ -115,6 +115,12 @@ public interface Model {
     void redoAddressBook();
 
     /**
+     * Update and initializes the address book with a given address book.
+     * This clears and updates the entire undo/redo stack.
+     */
+    void updateAddressBook(ReadOnlyAddressBook addressBook);
+
+    /**
      * Returns {@code true} if there are states to undo in the address book.
      *
      * @return {@code true} if undo is possible, {@code false} otherwise.

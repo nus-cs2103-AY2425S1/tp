@@ -211,6 +211,12 @@ public class GradeCommandTest {
         public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void undoAddressBook() {
             throw new AssertionError("This method should not be called.");
@@ -247,6 +253,16 @@ public class GradeCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            //do nothing, but needed since it is called in the default stub.
+        }
+
+        @Override
+        public void saveAddressBook() {
+            //do nothing, but needed since it is called in the default stub.
         }
     }
 }

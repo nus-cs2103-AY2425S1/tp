@@ -143,6 +143,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateAddressBook(ReadOnlyAddressBook addressBook) {
+        versionedAddressBook.resetData(addressBook);
+        versionedAddressBook.update(addressBook);
+    }
+
+    @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -158,6 +164,7 @@ public class ModelManager implements Model {
     @Override
     public void clearAddressBook() {
         versionedAddressBook.clear();
+        this.setAddressBook(new AddressBook());
         logger.info("Cleared the address book.");
     }
 

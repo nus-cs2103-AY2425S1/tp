@@ -178,37 +178,75 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation Overview
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo functionality is implemented in the `VersionedAddressBook`, which extends the basic `AddressBook` to include versioning capabilities. This is achieved by maintaining an internal history of address book states. The history is stored in a list (`addressBookStateList`), and the current state is tracked by the `currentStatePointer`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The key operations involved in undo/redo are:
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+- **`VersionedAddressBook#save()`**: Saves the current state of the address book into the history list.
+- **`VersionedAddressBook#undo()`**: Restores the address book to the previous state.
+- **`VersionedAddressBook#redo()`**: Restores the address book to a previously undone state.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+These operations are available to the rest of the system through the `Model` interface, specifically:
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+- `Model#saveAddressBook()`
+- `Model#undoAddressBook()`
+- `Model#redoAddressBook()`
+
+---
+
+## How Undo/Redo Works
+
+The mechanism functions as follows:
+
+1. **Save**: Every modification to the address book, such as `add`, `delete`, or `edit` commands, triggers a save operation to save the current state of the address book.
+
+2. **Undo**: The undo operation moves the `currentStatePointer` backward and restores the previous state. If no more undo operations can be performed (i.e., if the pointer is at the start of the history), the operation fails and returns an error.
+
+3. **Redo**: The redo operation moves the `currentStatePointer` forward and restores the next state that was undone. If there are no undone states, the operation fails and returns an error.
+
+---
+
+### Example Flow
+
+Here is how undo and redo would work through a sequence of user actions:
+
+---
+
+#### Step 1. Initial State
+Upon launching the application, the `VersionedAddressBook` is initialized with the default state (an empty address book, for example). This state is stored in the `addressBookStateList` as the first entry, and the `currentStatePointer` points to this state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+---
+
+#### Step 2. Performing a Deletion
+When a user executes the `delete` command (e.g., `delete 5`), the current state of the address book is saved before the change is made. This ensures that the delete action is reversible. The new state of the address book (with the 5th person deleted) is then stored in the history.
+
+The `saveAddressBook()` operation is called internally, and the `currentStatePointer` is moved forward to point to the newly saved state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+---
+
+#### Step 3. Performing an Addition
+Next, if a user executes an `add` command (e.g., `add n/David ...`), a new state of the address book is created. As before, `saveAddressBook()` is invoked to save the new state, and the `currentStatePointer` is shifted to this new state.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#saveAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+---
+
+#### Step 4. Undoing the Addition
+If the user decides to undo the most recent action (the `add` command), the `undo` operation will restore the address book to the state before the addition. Internally, `undoAddressBook()` is called, which moves the `currentStatePointer` backward and restores the state.
+
+If the pointer is already at the first state (the initial state), attempting to undo will return an error.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -217,7 +255,10 @@ than attempting to perform the undo.
 
 </div>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+#### Undo Sequence Diagram
+The following sequence diagram shows how the undo operation works across the `Logic` and `Model` components:
+
+`Logic`:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
@@ -225,7 +266,7 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 </div>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+`Model`:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
@@ -235,34 +276,46 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+---
+
+#### Step 5. Redoing the Addition
+If the user decides to redo the action after undoing it, the `redo` operation will restore the state that was undone. The `redoAddressBook()` method is invoked, which moves the `currentStatePointer` forward to the next state in history and restores that state.
+
+As with undo, if the pointer is at the last state in the list, trying to redo will return an error.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+#### Redo Sequence Diagram
+The following sequence diagram shows how the redo operation works across the `Logic` and `Model` components:
 
 ![UndoRedoState5](images/UndoRedoState5.png)
+
+---
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
 
-**Aspect: How undo & redo executes:**
+---
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+## Design Considerations
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+Here are the important aspects of the undo/redo implementation:
 
-_{more aspects and alternatives to be added}_
+- **Saving Mechanism:** Each modification to the address book (like `add`, `delete`, or `edit`) triggers a call to `saveAddressBook()`. This function stores the current state of the address book and updates the `currentStatePointer`. However, commands that do not modify the address book (such as `list`, `find`, or `filter`) do not trigger a call to `saveAddressBook()`, and therefore do not modify the history.
 
-### \[Proposed\] Data archiving
+- **Undo/Redo Pointer Management:** The `currentStatePointer` is moved backward during undo and forward during redo. If no more states can be undone or redone, appropriate error messages are returned.
+
+- **Memory Considerations:** Since each address book state is stored in memory, excessive changes could increase memory usage. The current implementation keeps track of all states but might need optimization in the future, depending on the application’s use case.
+
+- **State Purging:** After calling `undo`, when a command that modifies the address book is executed (such as `add`, `delete`, or `edit`), the states after the current one are purged to ensure consistency. This prevents errors from conflicting history states. Additionally, after calls to `archive` and `load`, the history is also purged to ensure consistency between different data files.
+
+---
+
+
+
+### Data archiving
 
 The archive and load feature is achieved through `ArchiveCommand` and `LoadCommand` which both extend the `Command` class. When such command is executed, the LogicManager will update the Storage when necessary.
 
@@ -292,9 +345,11 @@ The following sequence diagram illustrate how an archive operation is processed 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ArchiveCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. Some details like parameters of function is omitted for simplicity.
 
+</div>
+
 **Scenario 3 Loading from a file**
 
-In this scenario, the user is trying to load the an address book from a file named `archiveFile1.json`. He enters the command `load pa/archiveFile1.json`. The data in the current working address book will be discarded. The data in `archiveFile1.json` will be loaded into the working address book.
+In this scenario, the user is trying to load the address book from a file named `archiveFile1.json`. He enters the command `load pa/archiveFile1.json`. The data in the current working address book will be discarded. The data in `archiveFile1.json` will be loaded into the working address book.
 ![Load](images/Load.png)
 
 The following sequence diagram illustrate how an archive operation is processed under `Logic` component.
@@ -302,6 +357,8 @@ The following sequence diagram illustrate how an archive operation is processed 
 ![LoadSequenceDiagram](images/LoadSequenceDiagram-Logic.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `LoadCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram. Some details like parameters of function is omitted for simplicity.
+
+</div>
 
 -------------------------------------------------------------------------------
 
@@ -434,7 +491,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 1.  User requests to <u>list students (UC1)</u>.
 2. User selects the specific student from the list to update.
 3. User enters the new information.
-4. StoreClass updates the student's details and display a success message. </br>
+4. StoreClass updates the student's details and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -452,7 +509,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 1. User requests to <u>list students (UC1)</u>.
 2. User selects the specific student to record a grade.
 3. User enters the grade information.
-4. StoreClass updates the student's grades and display a success message. </br>
+4. StoreClass updates the student's grades and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -471,7 +528,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 2. User selects one or more students to be categorized.
 3. StoreClass requests for the group to assign the students to.
 4. User selects the group.
-5. StoreClass categorize the student(s) and display a success message. </br>
+5. StoreClass categorize the student(s) and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -491,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 2. User selects one or more students to be tagged.
 3. StoreClass requests for the tag(s) to assign the students to.
 4. User enters the tag(s)
-5. StoreClass applies the tags to the selected student(s) and display a success message. </br>
+5. StoreClass applies the tags to the selected student(s) and display a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -499,8 +556,8 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 * 4a. StoreClass detects an invalid tag(s).
 
     * 4a1. StoreClass requests a valid tag.
-    * 4a2. User enters a valid tag. </br>
-      Steps 4a1-4a2 are repeated until a valid tag is entered. </br>
+    * 4a2. User enters a valid tag. <br>
+      Steps 4a1-4a2 are repeated until a valid tag is entered. <br>
       Use case resumes from step 6.
 
 #### **Use case 9: Archive Student Data**
@@ -511,7 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 2.  StoreClass requests confirmation for archiving.
 3. User confirms.
 4. StoreClass archives the students data and removes them from the current interface.
-5. StoreClass displays a success message. </br>
+5. StoreClass displays a success message. <br>
     Use case ends.
 
 **Extensions**
@@ -531,7 +588,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 1.  User chooses to export student data.
 2.  StoreClass requests confirmation for exporting.
 3. User confirms.
-4. StoreClass exports the students data and displays a success message. </br>
+4. StoreClass exports the students data and displays a success message. <br>
    Use case ends.
 
 **Extensions**
@@ -548,7 +605,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 
 1.  User performs an action/command.
 2.  User chooses to undo the action.
-3. StoreClass reverses the action and displays a success message. </br>
+3. StoreClass reverses the action and displays a success message. <br>
    Use case ends.
 
 **Extensions**
@@ -564,12 +621,12 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
 **Main Success Scenario**
 
 1.  User request to filter a list of student based on specified conditions.
-2.  StoreClass displays all students that match all conditions. </br>
+2.  StoreClass displays all students that match all conditions. <br>
     Use case ends.
 
 **Extensions**
 * 1a. No matching student found.
-    * 1a1. StoreClass display a message indicating that no students match the search query. </br>
+    * 1a1. StoreClass display a message indicating that no students match the search query. <br>
       Use case ends.
   
 ### Non-Functional Requirements
