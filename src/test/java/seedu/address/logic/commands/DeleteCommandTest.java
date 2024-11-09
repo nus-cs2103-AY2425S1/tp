@@ -29,23 +29,23 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIdUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON);
-        DeleteCommand deletePatientCommand = new DeleteCommand(personToDelete.getId());
+        DeleteCommand deleteCommand = new DeleteCommand(personToDelete.getId());
 
         String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIdUnfilteredList_throwsCommandException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         int outOfBoundId = model.getFilteredPersonList().get(model.getFilteredPersonList().size() - 1).getId() + 2;
-        DeleteCommand deletePatientCommand = new DeleteCommand(outOfBoundId);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundId);
 
-        assertCommandFailure(deletePatientCommand, model, DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE);
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE);
     }
 
     @Test
@@ -54,7 +54,7 @@ public class DeleteCommandTest {
         showPersonOfId(model, model.getFilteredPersonList().get(INDEX_FIRST_PERSON).getId());
         Person personToDelete = model.getFilteredPersonById(model.getFilteredPersonList(),
                 model.getFilteredPersonList().get(INDEX_FIRST_PERSON).getId());
-        DeleteCommand deletePatientCommand = new DeleteCommand(model
+        DeleteCommand deleteCommand = new DeleteCommand(model
                 .getFilteredPersonList().get(INDEX_FIRST_PERSON).getId());
 
         String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
@@ -63,7 +63,7 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
-        assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -91,9 +91,9 @@ public class DeleteCommandTest {
     @Test
     public void toStringMethod() {
         int targetId = 1;
-        DeleteCommand deletePatientCommand = new DeleteCommand(targetId);
+        DeleteCommand deleteCommand = new DeleteCommand(targetId);
         String expected = DeleteCommand.class.getCanonicalName() + "{person Id=" + targetId + "}";
-        assertEquals(expected, deletePatientCommand.toString());
+        assertEquals(expected, deleteCommand.toString());
     }
 
     /**
