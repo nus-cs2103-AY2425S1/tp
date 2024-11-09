@@ -434,7 +434,7 @@ Priorities: High (must have) - `Essential`, Medium (nice to have) - `Typical`, L
     - 1a1. HiredFiredPro displays an error message.
 
       Use case ends.
-- 1b. Hiring Manager inputs other characters other than 'a' or 'b' (eg 'sort x')
+- 1b. Hiring Manager inputs other characters other than 'a' or 'd' (eg 'sort x')
     - 1b1. HiredFiredPro displays an error message.
 
       Use case ends.
