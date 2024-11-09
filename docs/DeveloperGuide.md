@@ -493,3 +493,9 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+1. **Allow contacts to have multiple phone numbers**: Currently, contacts are only allowed to have one phone number.
+   Realistically, contacts may have multiple phone numbers (e.g. home number, office number), so we plan to allow for contacts to have multiple numbers attached to them.
