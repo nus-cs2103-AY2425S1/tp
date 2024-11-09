@@ -151,7 +151,8 @@ public class TagCommand extends UndoableCommand {
             throws CommandException {
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(String.format(TagCommand.MESSAGE_INVALID_INDEX + model.getFilteredPersonList().size() + ")"));
+                throw new CommandException(String.format(TagCommand.MESSAGE_INVALID_INDEX
+                        + model.getFilteredPersonList().size() + ")"));
             }
             Person personToTag = lastShownList.get(targetIndex.getZeroBased());
             Set<Tag> newTags = new HashSet<>(personToTag.getTags());
