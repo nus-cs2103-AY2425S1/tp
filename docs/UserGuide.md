@@ -55,7 +55,7 @@ In this comprehensive user guide, we will take you to experience a full journey 
   - [4.3.5 Unmarking an assignment: `unmarkAsg`](#unmarking-an-assignment-unmarkAsg)
   - [4.3.6 Checking an assignment: `checkAsg`](#checking-an-assignment-checkAsg)
 - [4.4 Attendance Data Related Commands](#attendance-data-commands)
-  - [4.4.1 Marking an attendance: `addAtt`](#adding-an-assigment-addAsg)
+  - [4.4.1 Marking an attendance: `markAtt`](#adding-an-assigment-addAsg)
   - [4.4.2 Unmarking an attendance: `deleteAtt`](#deleting-an-assignment-deleteAsg)
 - [4.5 General Commands](#general-commands)
   - [4.5.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
@@ -198,8 +198,7 @@ First-time users are strongly encouraged to read the Getting Started section bef
 * `list` : Lists all contacts.
 * `addTut c/CS2103T id/T1001` : Adds a tutorial of name `CS2103T` and tutorial id `T1001`.
 * `add n/Samson  s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
-* `addAtt s/A1234567X c/T1001 d/2024-01-24`: Adds student of id `A1234567X` attendance to the tutorial id `T1001` on the da
-  date `2024-01-24`.
+* `markAtt s/A1234567X c/T1001 d/2024-01-24`: Adds student of id `A1234567X` attendance to the tutorial id `T1001` on the date `2024-01-24`.
 * `clear` : Deletes all contacts.
 * `exit` : Exits the app.
 
@@ -371,6 +370,7 @@ Command detail & constraints
 - Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index must be a positive integer 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+- When a student’s tutorial class is updated, their attendance record will remain intact, as attendance is tracked at the module level, not by individual tutorial groups. This ensures that any classes the student attended before the change are still recorded accurately.
 
 **Examples:**
 
@@ -580,10 +580,11 @@ Command Details & Constraints:
 * Mark the student attendance based on student ID and tutorial ID
 * The tutorial ID given must exist in the tutorial list.
 * Date is optional (default date is today)
+* Marking a student's attendance for the same date repeatedly is allowed.
 
 Example:
-1. `markAtt s/A01234567X c/T1001 d/2024-02-21` marks the attendance of student with student ID A01234567X in tutorial class T1001 on 2024/02/21.
-2. `markAtt s/A01234567X c/T1001` marks the attendance of student with student ID A01234567X in tutorial class T1001 on today's date.
+1. `markAtt s/A1234567X c/T1001 d/2024-02-21` marks the attendance of student with student ID A1234567X in tutorial class T1001 on 2024/02/21.
+2. `markAtt s/A1234567X c/T1001` marks the attendance of student with student ID A1234567X in tutorial class T1001 on today's date.
 
 #### 4.4.2 Unmarking an attendance: `deleteAtt`
 <a id="unmarking-an-attendance-add"></a>

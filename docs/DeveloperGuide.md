@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+We follow the project design and documentation structure of AB3.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -398,6 +398,13 @@ An alternative design is to implement a single DeleteCommand that can handle del
 We chose Alternative 1 because it promotes modularity, clarity, and maintainability. By having separate commands and parsers for each
 entity type, we can encapsulate the specific logic and validation required for each. This separation makes the codebase more organized and easier to extend or
 modify. Although there is some code duplication, the benefits of clarity and reduced complexity outweigh the drawbacks.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Future Enhancements**
+
+1. In the current implementation of the attendance marking feature, the system does not validate the dates entered by users. This allows users to mark attendance
+for tutorial dates that have not yet occurred. In future updates, the system will include a date validity check to ensure attendance can only be marked for past or current dates.
 
 --------------------------------------------------------------------------------------------------------------------
 

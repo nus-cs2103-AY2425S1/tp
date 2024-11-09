@@ -62,6 +62,10 @@ public class PresentDates {
         dates.remove(tutDate);
     }
 
+    public void setPresentDatesEmpty() {
+        this.dates.clear();
+    }
+
     public ObservableSet<TutDate> getDates() {
         return dates;
     }
