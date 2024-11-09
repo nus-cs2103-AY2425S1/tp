@@ -6,7 +6,7 @@ pageNav: 3
 
 # data_coNdUctorS User Guide
 
-data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It is optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
+data_coNdUctorS is a **desktop address book application (app) for managing contacts of NUS CCA members**. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, data_coNdUctorS can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print/>
@@ -19,10 +19,10 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103-F09-1/tp/releases/tag/v1.5).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar data_coNdUctorS.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note the app's User Interface (UI) design and how the app contains some sample data:
    ![Ui](images/main_window_ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -38,32 +38,47 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 
     * `exit` : Exits the app.
 
-6. Refer to the [Features](#Feature-Details) below for details of each command.
+6. Refer to the [Features](#Feature-Details) below for more information of each command and UI features.
 
 
 ## Summary of Features
 ### Command summary
+//& TO CHOOSE WHICH TABLE (PLEASE SEE VIA THE WEBSITE NOT BY .md)
 
-| Action                                                 | Format, Examples                                                                                                                                                                                                                                                                                       |
-|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Add](#adding-a-contact-add)**                       | `add n/NAME th/TELEGRAM_HANDLE ss/STUDENT_STATUS e/EMAIL r/ROLE…​ [nn/NICKNAME]` <br> e.g., `add n/James Ho th/jamesho123 ss/undergraduate 3 e/jamesho@example.com r/Admin r/President`                                                                                                                |
-| **[Clear](#clearing-all-entries-clear)**               | `clear`                                                                                                                                                                                                                                                                                                |
-| **[Delete](#deleting-a-contact-delete)**               | `delete INDEX` e.g. `delete 3`  <br> `delete FULL_NAME` e.g. `delete James Ho` <br> `delete n/FULL_NAME` e.g. `delete n/James Ho`                                                                                                                                                                        |
-| **[Edit](#editing-a-contact-edit)**                    | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br>`edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` <br/> e.g.,`edit James Ho n/James Lee` |
-| **[Find](#locating-contacts-by-contact-details-find)** | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                                                                                                                                                   |
-| **[List](#listing-all-contacts-list)**                 | `list`                                                                                                                                                                                                                                                                                                 |
-| **[Help](#viewing-help-help)**                         | `help`                                                                                                                                                                                                                                                                                                 |
+| Action                                                                               | Format, Examples                                                                                                                                                                                                                                                                                       |
+|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-contact-add)**<br>adds a contact</br>                              | `add n/NAME th/TELEGRAM_HANDLE ss/STUDENT_STATUS e/EMAIL r/ROLE…​ [nn/NICKNAME]` <br> e.g., `add n/James Ho th/jamesho123 ss/undergraduate 3 e/jamesho@example.com r/Admin r/President`                                                                                                                |
+| **[Edit](#editing-a-contact-edit)**<br>edits a contact</br>                          | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br>`edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` <br/> e.g.,`edit James Ho n/James Lee` |
+| **[Delete](#deleting-a-contact-delete)**<br>deletes a contact</br>                   | `delete INDEX` e.g. `delete 3`  <br> `delete FULL_NAME` e.g. `delete James Ho` <br> `delete n/FULL_NAME` e.g. `delete n/James Ho`                                                                                                                                                                      |
+| **[Find](#locating-contacts-by-contact-details-find)**<br>shows specific<br>contacts | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                                                                                                                                                   |
+| **[List](#listing-all-contacts-list)**<br>shows all contacts</br>                    | `list`                                                                                                                                                                                                                                                                                                 |
+| **[Help](#viewing-help-help)**<br>provides more details<br>on commands' usage        | `help`                                                                                                                                                                                                                                                                                                 |
+| **[Clear](#clearing-all-entries-clear)**<br>clears all contacts</br>                 | `clear`                                                                                                                                                                                                                                                                                                |
+| **[Exit](#exiting-the-program-exit)**<br>exits the app</br>                          | `exit`                                                                                                                                                                                                                                                                                                 |
+
+
+
+| Action                                                 | Function                        | Format, Examples                                                                                                                                                                                    |
+|--------------------------------------------------------|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Add](#adding-a-contact-add)**                       | adds a contact                  | `add n/NAME th/TELEGRAM_HANDLE ss/STUDENT_STATUS e/EMAIL r/ROLE…​ [nn/NICKNAME]` <br> e.g., `add n/James Ho th/jamesho123 ss/undergraduate 3 e/jamesho@example.com r/Admin r/President`                                                                                                              |
+| **[Edit](#editing-a-contact-edit)**                    | edits a contact                 | `edit INDEX [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br>`edit FULL_NAME [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` <br/> e.g.,`edit James Ho n/James Lee` |
+| **[Delete](#deleting-a-contact-delete)**               | deletes a contact               | `delete INDEX` e.g. `delete 3`  <br> `delete FULL_NAME` e.g. `delete James Ho` <br> `delete n/FULL_NAME` e.g. `delete n/James Ho`                                                                                                                                                                    |
+| **[Find](#locating-contacts-by-contact-details-find)** | finds specific contact          | `find [n/NAME] [th/TELEGRAM_HANDLE] [e/EMAIL] [ss/STUDENT_STATUS] [r/ROLE]…​ [nn/NICKNAME]`<br> e.g.,`find n/jam lee r/admin r/vice president nn/jl`                                                                                                                                                 |
+| **[List](#listing-all-contacts-list)**                 | displays all contacts | `list`                                                                                                                                                                                                                                                                                               |
+| **[Help](#viewing-help-help)**                         | explains commands      | `help`                                                                                                                                                                                                                                                                                               |
+| **[Clear](#clearing-all-entries-clear)**               | clears all contacts             | `clear`                                                                                                                                                                                                                                                                                              |
+| **[Exit](#exiting-the-program-exit)**                  | exits the app                   | `exit`                                                                                                                                                                                                                                                                                               |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Terminologies for command line
-![Description for Command Line](images/commandLineDescription.png)
 
 ## Feature Details
 
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
+![Description for Command Line](images/commandLineDescription.png)
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -79,7 +94,7 @@ data_coNdUctorS is a **desktop app for managing contacts of NUS CCA members. It 
 
 * Extraneous parameters for commands that do not take in parameters (such as `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.<br>
-  Refer to [listing all contacts](#listing-all-contacts-list) section for more details about `list` command.
+//& ARE HELP AND LIST CONSIDERED "COMMANDS THAT DO NOT TAKE IN PARAMETERS?"
 
 * The COMMAND_WORD is case-insensitive. (eg. add; ADD; aDd are all interpreted as ADD FEATURE)
 
@@ -281,19 +296,25 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 --------------------------------------------------------------------------------------------------------------------
 
+//& TO REVIEW IF EDITS IS OKAY
 ## What is considered as invalid contacts
 
-There must not be duplicate fields. For example, if there is a contact with the following data:
+There must not be duplicate fields. For example, if there are contacts with the following data:
 
-`n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny`
+`n/John Doe th/johndoe e/johnd@example.com ss/undergraduate 3 r/Admin r/President nn/Johnny` <br>
+`n/Zachary Tan th/zac_Tan e/zacTan@example.com ss/phd r/Marketing`
 
-![example john doe](images/ExampleJohnDoe.png)
+![example john doe](images/ExampleJohnDoe.png) //& NEED TO CHANGE PICTURE IF EDITS ARE OKAY
 
+//& ADDRESSING ISSUE 235
 The follow cases will fail / succeed if you try to enter an add / edit command with the following fields: 
-1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname` Nickname must be **unique**
-    * **Fail:** `n/John Doe nn/Johnny ...`
-    * **Fail:** `n/Jane Hoe nn/Johnny ...` there is already a Nickname Johnny
-    * **Success:** `n/John Doe nn/notJohnny ...`
+1. Must not have same `Name` and `Nickname`, but can have same `Name` and different `Nickname`. Nickname must be **unique**. Names cannot be the same name if both contacts have no nickname (i.e. empty nicknames)
+    * **Fail:** `n/John Doe nn/Johnny ...` &rarr; there is already a Name John Doe and Nickname Johnny
+    * **Fail:** `n/Jane Hoe nn/Johnny ...` &rarr; there is already a Nickname Johnny
+    * **Success:** `n/John Doe nn/notJohnny ...` &rarr; same Name but different Nickname is allowed
+    * **Fail:** `n/Zachary Tan ...` &rarr; &rarr; same Name and both having no Nickname are not allowed
+//& SHOULD RECONSIDER PRESENTATION OF INFORMATION HMM
+
 2. Must not have the same `Telegram Handle`. Each Telegram Handle must be **unique**
     * **Fail:** `th/johndoe ...`
 3. Must not have the same `Email`. Each Email must be **unique**
@@ -313,7 +334,7 @@ The follow cases will fail / succeed if you try to enter an add / edit command w
 | [**ROLE**](#role)                       | `r/`    | `President`<br/> `Events (External)`                                                                                |
 | [**NICKNAME**](#nickname)               | `nn/`   | `genie34 ;)`                                                                                                        |
 
-*_By default, all fields must be non-empty when prefix is specified._
+*_By default, all fields must be non-empty when prefix is specified except for nickname field_ //& CHECK IF OKAY
 
 ### Name
 - Must contain alphabets and spaces only, with the following exceptions:
@@ -331,7 +352,7 @@ The follow cases will fail / succeed if you try to enter an add / edit command w
 - LOCAL_PART 
   - Must only contain alphabets, numbers, and special characters `+_.-`.
   - Must not start or end with any special characters.
-- DOMAIN 
+- DOMAIN //& EDIT TO ADDRESS ISSUE 247
   - Domains must be made up of domain labels separated by periods.
   - Domains must end with a domain label at least 2 characters long.
   - Each domain label must only contain alphabets, numbers, and `-`, if any.
