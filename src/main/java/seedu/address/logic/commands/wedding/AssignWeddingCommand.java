@@ -119,7 +119,7 @@ public class AssignWeddingCommand extends Command {
                 editedWedding.setPartner1(model.getPerson(personToEdit));
                 break;
             case "p2":
-                if (editedWedding.hasPartner1()) {
+                if (editedWedding.hasPartner2()) {
                     model.getPerson(editedWedding.getPartner2()).removeWedding(wedding);
                 }
                 editedWedding.setPartner2(model.getPerson(personToEdit));
