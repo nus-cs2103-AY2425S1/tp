@@ -361,7 +361,7 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 2a. The patient already exists in MediBase3.
+* 2a. The user provides an existing patient in MediBase3.
 
     * 2a1. MediBase3 informs user of the error.
   
@@ -386,23 +386,23 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-    * 3a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
   
         Use case resumes at step 2.
 
 
-* 3b. User provides a field that is not in the expected format.
+* 2b. User provides a field that is not in the expected format.
 
-    * 3b1. MediBase3 informs user of the error.
+    * 2b1. MediBase3 informs user of the error.
   
         Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2c. User provides multiple instances of the same field for the patient.
 
-    * 3b1. MediBase3 informs user of the error.
+    * 2c1. MediBase3 informs user of the error.
   
         Use case resumes at step 2.
 
@@ -413,15 +413,15 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 **MSS:**
 1. User requests to find a patient by with a specific keyword in their name
 2. MediBase3 checks each patient's name in the list that contains the keyword
-4. MediBase3 shows the selected patient information that match the criteria
+3. MediBase3 shows the selected patient information that match the criteria
 
    Use case ends
 
 **Extensions:**
 
-* 4a. No patient found with the given name.
+* 2a. No patient found with the given name.
 
-    * 4a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
   
         Use case ends.
 
@@ -431,17 +431,16 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **MSS:**
 1. User requests to find a patient by NRIC
-2. MediBase3 request for search requirements
-3. User provides the details required to search for the patient
-4. MediBase3 shows the selected patient information
+2. User provides the details required to search for the patient
+3. MediBase3 shows the selected patient information
 
    Use case ends
 
 **Extensions:**
 
-* 4a. No patient found with the given NRIC.
+* 2a. User provides a non-existing patient detail.
 
-    * 4a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
 
         Use case ends.
 
@@ -452,15 +451,15 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 **MSS:**
 1. User requests to find a patient by with a specific keyword in their medical condition
 2. MediBase3 checks each patient's medical condition in the list that contains the keyword
-4. MediBase3 shows the selected patient information that match the criteria
+3. MediBase3 shows the selected patient information that match the criteria
 
    Use case ends
 
 **Extensions:**
 
-* 4a. No patient found with the given medical condition.
+* 2a. No patient found with the given medical condition.
 
-    * 4a1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
 
       Use case ends.
 
@@ -474,6 +473,13 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
    Use case ends
 
+**Extensions:**
+
+* 2a. Medibase is unable to list patient details
+
+    * 2a1. MediBase3 does not show any patients.
+
+      Use case ends.
 ---
 
 **Use case:** UC7 - List Patients By Priority
@@ -485,6 +491,13 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
    Use case ends.
 
+**Extensions:**
+
+* 2a. User provides invalid patient details.
+
+    * 2a1. MediBase3 does not show any patients.
+
+      Use case ends.
 ---
  
 **Use case:** UC8 - Add Appointment
@@ -498,15 +511,15 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User provides a field that is not in the expected format.
+* 2a. User provides a field that is not in the expected format.
 
-    * 3a1. MediBase3 informs the user of the error.
+    * 2a1. MediBase3 informs the user of the error.
   
       Use case resumes at step 2.
 
-* 3b. User provides multiple instances of the same field for the appointment.
+* 2b. User provides multiple instances of the same field for the appointment.
 
-    * 3b1. MediBase3 informs the user of the error.
+    * 2b1. MediBase3 informs the user of the error.
   
       Use case resumes at step 2.
 
@@ -523,15 +536,15 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User provides a field that is not in the expected format.
+* 2a. User provides a field that is not in the expected format.
 
-    * 3a1. MediBase3 informs the user of the error.
+    * 2a1. MediBase3 informs the user of the error.
 
       Use case resumes at step 2.
 
-* 3b. User provides multiple instances of the same field for the medical condition.
+* 2b. User provides multiple instances of the same field for the medical condition.
 
-    * 3b1. MediBase3 informs the user of the error.
+    * 2b1. MediBase3 informs the user of the error.
 
       Use case resumes at step 2.
 
@@ -548,15 +561,15 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User provides a field that is not in the expected format.
+* 2a. User provides a field that is not in the expected format.
 
-    * 3a1. MediBase3 informs the user of the error.
+    * 2a1. MediBase3 informs the user of the error.
   
       Use case ends.
 
-* 3b. User provides multiple instances of the same field for the medical condition.
+* 2b. User provides multiple instances of the same field for the medical condition.
 
-    * 3b1. MediBase3 informs the user of the error.
+    * 2b1. MediBase3 informs the user of the error.
 
       Use case ends.
 
@@ -598,23 +611,23 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-  * 3a1. MediBase3 informs user of the error.
-
-    Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-  * 3b1. MediBase3 informs user of the error.
+  * 2a1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-  * 3b1. MediBase3 informs user of the error.
+  * 2b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+  * 2c1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
@@ -631,23 +644,23 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-  * 3a1. MediBase3 informs user of the error.
-
-    Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-  * 3b1. MediBase3 informs user of the error.
+  * 2a1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-  * 3b1. MediBase3 informs user of the error.
+  * 2b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+  * 2c1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
@@ -664,23 +677,23 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-  * 3a1. MediBase3 informs user of the error.
-
-    Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-  * 3b1. MediBase3 informs user of the error.
+  * 2a1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-  * 3b1. MediBase3 informs user of the error.
+  * 2b1. MediBase3 informs user of the error.
+
+    Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+  * 2c1. MediBase3 informs user of the error.
 
     Use case resumes at step 2.
 
@@ -697,23 +710,23 @@ Priorities: High (must have) - :star: :star: :star:, Medium (nice to have) - :st
 
 **Extensions:**
 
-* 3a. User updates a non-existing patient.
+* 2a. User provides a non-existing patient detail.
 
-    * 3a1. MediBase3 informs user of the error.
-
-      Use case resumes at step 2.
-
-
-* 3b. User provides a field that is not in the expected format.
-
-    * 3b1. MediBase3 informs user of the error.
+    * 2a1. MediBase3 informs user of the error.
 
       Use case resumes at step 2.
 
 
-* 3c. User provides multiple instances of the same field for the patient.
+* 2b. User provides a field that is not in the expected format.
 
-    * 3b1. MediBase3 informs user of the error.
+    * 2b1. MediBase3 informs user of the error.
+
+      Use case resumes at step 2.
+
+
+* 2c. User provides multiple instances of the same field for the patient.
+
+    * 2b1. MediBase3 informs user of the error.
 
       Use case resumes at step 2.
 
