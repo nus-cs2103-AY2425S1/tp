@@ -310,15 +310,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`<br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C`
-**List** | `list`
-**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`
-**Delete** | `delete [INDEX | INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`
-**Exit** | `exit`
-**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`
-**Clear** | `clear` then `confirm`
-**Export** | `export FILENAME`<br> e.g., `export exported_email`
-**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`
+Action | Format, Examples                                                                                                                                          
+--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help** | `help`                                                                                                                                                    
+**Add** | `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`<br> e.g., `add n/James Ho e/jamesho@example.com g/M a/30 d/to be assigned  t/1A t/3C` 
+**List** | `list`                                                                                                                                                    
+**Edit** | `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DELETE_TAG]…`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com t/1A t/1B`          
+**Delete** | `delete [INDEX \| INDEX-INDEX]…`<br> e.g., `delete 3 6 10-15 20 30-40`                                                                                    
+**Exit** | `exit`                                                                                                                                                    
+**Find** | `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`<br> e.g., `find n/James Jake`                                    
+**Clear** | `clear` then `confirm`                                                                                                                                    
+**Export** | `export FILENAME`<br> e.g., `export exported_email`                                                                                                       
+**Assign** | `assign STUDY_GROUP [STUDY_GROUP …]`<br> e.g., `assign P90-Control P90-Experiment`                                                                        
