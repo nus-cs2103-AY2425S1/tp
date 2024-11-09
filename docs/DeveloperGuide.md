@@ -398,7 +398,7 @@ Use case ends.
   * 1a1. GamerBook notifies user that the command was entered incorrectly.
   
     Use case ends.
-* 1b. User tries to add a duplicate contact.
+* 1b. User attempts to add a duplicate contact.
     * 1b1. GamerBook notifies the user that the contact already exists.
   
       Use case ends.
@@ -448,7 +448,7 @@ Use case ends.
 Use case ends.
 
 **Extensions**
-* 1a. User tries to tag a contact that does not exist.
+* 1a. User attempts to tag a contact that does not exist.
     * 1a1. GamerBook notifies the user that the contact cannot be found.
 
       Use case ends.
@@ -464,7 +464,7 @@ Use case ends.
    Use case ends.
 
 **Extensions**
-* 1a. User tries to list contacts when none exist.
+* 1a. User attempts to list contacts when none exist.
     * 1a1. GamerBook notifies the user that no contacts are available.
 
       Use case ends.
@@ -476,7 +476,7 @@ Use case ends.
    Use case ends.
 
 **Extensions**
-* 1a. User tries to edit a game that does not exist.
+* 1a. User attempts to edit a game that does not exist.
     * 1a1. GamerBook notifies the user that the game could not be found.
 
       Use case ends.
