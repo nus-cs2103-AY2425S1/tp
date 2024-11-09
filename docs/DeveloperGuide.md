@@ -323,9 +323,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | nurse    | edit the address for each patient                  | reflect changes in the event that the information was keyed in wrongly         |
 
 
-
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `NovaCare` and the **Actor** is the `nurses`, unless specified otherwise)
