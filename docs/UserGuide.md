@@ -108,8 +108,8 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
 3. Start PROperty:
    - Open your computer's terminal in the folder where PROperty is by either:
      - **For Windows:** `Shift+Rightclick` in the folder where PROperty is and clicking on "Open PowerShell Window Here"
-     - **For Mac:** `Control + Click` in the folder where PROperty is and clicking on "Open In Terminal" 
-   - Type `java -jar PROperty.jar` into your command line and press "Enter"
+     - **For Mac:** `Control + Click` on the folder where PROperty is and clicking on "New Terminal at Folder" 
+   - Type `java -jar PROperty.jar` into your computer's terminal and press "Enter"
 
     
 ![Ui](images/user-guide-images/Ui.png)
@@ -142,7 +142,7 @@ Refer to the [Features](#features) below for details of each command.
 
 **:information_source: Notes about the command format:**<br>
 
-* PROperty currently only supports English 
+* PROperty currently only supports English.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -173,11 +173,11 @@ Adds a client to PROperty.
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​`
 
 - `NAME` and `PHONE_NUMBER` fields must be provided.
-  - `NAME` can only contain **alphanumeric and spaces**
+  - `NAME` can only contain **alphanumeric and spaces**.
 -  Client tags are added in a case-insensitive manner. e.g `t/buyer` or `t/BUYER` will both add the `Buyer` tag.
 -  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
-- A client is considered the "same" as another client based on the values in: `NAME`, `PHONE_NUMBER`, `EMAIL`, `ADDRESS`, `CLIENT_TAG`
-  - Note that values are **case-sensitive**
+- A client is considered the "same" as another client based on the values in: `NAME`, `PHONE_NUMBER`, `EMAIL`, `ADDRESS`, `CLIENT_TAG`.
+  - Note that values are **case-sensitive**.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including no tags)
@@ -209,12 +209,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * Existing values will be updated to the input values.
 * When editing tags, the tags specified using `t/` will be added to the contact (cumulatively).
 * Tags can also be removed using the delete tag `dt/` prefix, followed by the tag name.
-  * Any `dt/` arguments will **take priority** over any `t/` options, so `t/seller dt/seller` will **delete the `seller` tag**
-  * If you specify a tag that does not exist, it will do nothing (e.g `dt/missing_tag`)
+  * Any `dt/` arguments will **take priority** over any `t/` options, so `t/seller dt/seller` will **delete the `seller` tag**.
+  * If you specify a tag that does not exist, it will do nothing (e.g `dt/missing_tag`).
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
-  * This option **can not be used** with any other tag options (i.e `t/seller dt/buyer`)
-* `NAME` can only contain **alphanumeric and spaces**
+  * This option **can not be used** with any other tag options (i.e `t/seller dt/buyer`).
+* `NAME` can only contain **alphanumeric and spaces**.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
@@ -269,7 +269,7 @@ Shows a list of all clients in the PROperty.
 
 Format: `list`
 
-- `list` shows the clients in the order they were added into PROperty
+- `list` shows the clients in the order they were added into PROperty.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `list` for a quick overview of all your contacts. 
