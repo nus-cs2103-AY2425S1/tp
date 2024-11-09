@@ -684,6 +684,14 @@ public class ExportCommandTest {
                 "Filename cannot contain path components");
     }
 
+    @Test
+    public void validateFilename_multiplePathComponents_throwsCommandException() {
+        String filenameWithPath = "parent" + File.separator + "file";
+        ExportCommand exportCommand = new ExportCommand(filenameWithPath, false, dataDir);
+        Assertions.assertThrows(CommandException.class, () -> exportCommand.execute(model),
+                "Filename cannot contain path components");
+    }
+
     /**
      * Helper method to throw a fail
      * @param message Error message to pass to AssertionError
