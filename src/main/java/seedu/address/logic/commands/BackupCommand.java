@@ -29,8 +29,12 @@ public class BackupCommand extends Command {
 
     private void backup(Path originalPath, Path backupPath) throws CommandException {
         try {
-            FileUtil.createIfMissing(backupPath);
-            copy(originalPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+            if (FileUtil.isFileExists(originalPath)) {
+                FileUtil.createIfMissing(backupPath);
+                copy(originalPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+            } else {
+                throw new CommandException("No data file found to backup. If this is your first time starting the program or you have deleted the data file try another command first.");
+            }
         } catch (IOException e) {
             throw new CommandException(e.getMessage());
         }
