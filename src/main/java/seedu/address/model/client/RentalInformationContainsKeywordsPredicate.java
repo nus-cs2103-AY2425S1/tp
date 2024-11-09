@@ -40,9 +40,8 @@ public class RentalInformationContainsKeywordsPredicate implements Predicate<Cli
                                                         rentalInformation.getRentalStartDate().toString(), keyword)
                                                 || StringUtil.containsIgnoreCase(
                                                         rentalInformation.getRentalEndDate().toString(), keyword)
-                                                || rentalInformation.getCustomerList().getCustomerList().stream()
-                                                        .anyMatch(customer ->
-                                                                StringUtil.containsIgnoreCase(customer, keyword))
+                                                || StringUtil.containsIgnoreCase(
+                                                        rentalInformation.getCustomerList().toString(), keyword)
                                 ));
             }
         }
