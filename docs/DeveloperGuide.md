@@ -205,33 +205,20 @@ During this parsing process:
 - A `Person` instance is created to hold the relevant fields.
 
 #### 2. Executing the Command
-The **`AddCommand`** class performs the following steps to add a patient:
+The **`AddCommand`** class performs the following when adding a patient:
 
-1. **Update Existing Patient Record**:
-    - The new `Person` instance will be added to the existing patient record in the **Model**.
+1. **Update Existing Patient Record**:  
+   The new `Person` instance will be added to the existing patient record in the **Model**.
 
-2. **Display appropriate warnings**
-    - The command will also check for the presence of special characters in the `Ward` and `ID` fields. An appropriate warning will be displayed if they are present.
+#### 3. Exceptions and warnings
 
-[//]: # (#### 3. Handling Invalid Date Inputs)
+The **`AddCommand`** class enforces validation rules to ensure non-duplicates and potential incorrect input fields.
 
-[//]: # (The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:)
+- **Ensuring non-duplicates**:
+  Check that the new person added does not already exist in WardWatch, i.e. does not already exist a person with same `ID`.
 
-[//]: # ()
-[//]: # (- **Format Verification**:)
-
-[//]: # (    - **Parser** checks if the date format follows `DD-MM-YYYY-HH-mm`.)
-
-[//]: # (    - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.)
-
-[//]: # ()
-[//]: # (- **Conflict Checking**:)
-
-[//]: # (    - **Command** checks if the new appointment overlaps with any existing appointments for the patient.)
-
-[//]: # (    - If there is an overlap, an error message is thrown, preventing the appointment from being created.)
-
-[//]: # (    - If no overlap exists, the new appointment overrides any previous appointment.)
+- **Warnings**
+  The command will also check for the presence of *special characters* in the `Ward` and `ID` fields. An appropriate warning will be displayed if they are present.
 
 ### Add Appointment Feature
 
@@ -271,7 +258,7 @@ The **`MakeAppointmentCommand`** class performs the following steps to add an ap
 The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:
 
 - **Format Verification**:
-    - **Parser** checks if the date format follows `DD-MM-YYYY-HH-mm`.
+    - **Parser** checks if the date format follows `dd-MM-yyyy-HH-mm`.
     - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.
 
 - **Conflict Checking**:
