@@ -49,9 +49,9 @@ The image below shows the different components of HiredFiredPro.
 ![HiredFiredPro_layout](images/UI-Layout.png)
 
 * **Command Input Line:** You can type your commands here and execute them by pressing Enter.
-* **Result panel:** Displays the results of the command that has been executed.
-* **Candidate panel:** Displays the complete or filtered list of candidates.
-* **Display panel:** Displays the details of a candidate.
+* **Result Panel:** Displays the results of the command that has been executed.
+* **Candidate Panel:** Displays the complete or filtered list of candidates.
+* **Display Panel:** Displays the details of a candidate.
 <br><br>
 
 ### Command Format
@@ -181,6 +181,11 @@ Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [s/SKILL]… [i/INTERVI
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags/skills, the existing tags/skills of the candidate will be removed i.e. adding of tags/skills is not cumulative.
+
+<box type="info">
+
+**Note:** Details of the candidate who has been edited will be displayed in the display panel.
+</box>
 
 <box type="tip">
 
