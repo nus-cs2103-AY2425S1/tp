@@ -161,6 +161,7 @@ This is to allow the user to have a greater flexibility of manipulating the clie
 <box type="info" light>
 
 An **initial client** with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`
+
 </box>
 
 <box type="success" light>
@@ -172,10 +173,13 @@ An **initial client** with the name: `Jason Lee`, phone number: `91231231` and e
 3. A client with the name: `Jason Lee`, phone number: `-` and email address `jasonlee@example.com`.
 4. A client with the name: `Jason Lee`, phone number: `91231231` and email address `-`.
 5. A client with the name: `JASON LEE`, phone number: `91231231` and email address `jasonlee@example.com`.
+
 <box type="info" seamless>
 
 **Note:** `-` signifies an empty parameter without any characters.
+
 </box>
+
 </box>
 
 <box type="wrong" light>
@@ -183,6 +187,7 @@ An **initial client** with the name: `Jason Lee`, phone number: `91231231` and e
 **Duplicates:**
 
 1. A client with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
