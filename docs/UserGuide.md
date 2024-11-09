@@ -61,7 +61,7 @@ To get started,
    * The GUI should now look something like this.<br>
    ![quick start GUI after commands](images/quickStartResultScreenshot.png)
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts. THIS IS AN IRREVERSIBLE ACTION.
 
 6. Refer to the [Features](#features) below for details of each command.
    <br><br>
@@ -75,7 +75,7 @@ To get started,
 | Action                                                          | Format, Examples                                                                                                                                                                            |
 |-----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-person-add)                                 | `add name/NAME email/EMAIL telegram/TELEGRAM [tag/TAG]…​ github/GITHUB` <br> e.g., `add name/James Ho email/jamesho@example.com telegram/@James tag/friend tag/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                     |
+| [**Clear**](#clearing-all-entries-clear)                        | `clear` <br> <b>This is an IRREVERSIBLE action!<b>                                                                                                                                          |
 | [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                            |
 | [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                          |
 | [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
@@ -160,6 +160,9 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Extra parameters for commands that do not have said parameters in their command format will be treated as input for the previous parameter.<br>
+ e.g. if the command input is `delete name/John tag/student`, `John tag/student` will be considered as the NAME input.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
@@ -275,6 +278,7 @@ Eg. `t/friend t/family`
 ### <i class="fa-solid fa-list"></i> Listing all persons : `list`
 
 Displays all persons in KonTActs.
+
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -589,6 +593,7 @@ Order of contact details can be reset to default by calling `sort reset`.
 * The sort order persists between commands.
 * The sort order will reset when `sort reset` command is given.
 * The sorting is **case-insensitive**: upper and lower case are treated as the same values.
+* The sorting will be done based on the **lexicographical order** of the field, regardless of text or numbers.
   </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -609,7 +614,13 @@ Order of contact details can be reset to default by calling `sort reset`.
 
 ### <i class="fa-solid fa-broom"></i> Clearing all entries : `clear`
 
-Clears all entries from the KonTActs.
+Clears all entries from KonTActs. 
+
+<box type="important">
+
+This action is <b><i><u>IRREVERSIBLE</u></i></b> and it <b><i><u>cannot be undone</u></i></b>! You would lose all the contacts if not [**exported**](#exporting-data-into-csv-file-export)! 
+
+</box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -622,7 +633,7 @@ Clears all entries from the KonTActs.
 
 ### <i class="fa-solid fa-file-import"></i> Importing data from CSV file : `import`
 
-Imports contacts based on CSV file. Importing a file will replace ALL existing contacts
+Imports contacts based on CSV file
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -637,6 +648,7 @@ Imports contacts based on CSV file. Importing a file will replace ALL existing c
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * File path can be relative or absolute, but must end with .csv
+* Importing a file will delete **ALL** existing contacts before adding the contacts from the file
 </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
@@ -679,10 +691,10 @@ assignments are present for a person, separate them within the same entry using 
 
 ```
 "Name","Email","Telegram","Tags","Github","Assignments","WeeksPresent"
-"Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","Ex01 | 3.0","5"
-"Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","",""
-"Charlotte Oliveiro","charlotte@example.com","@charlotte","[friend],[colleague]","Charlotte","",""
-"David Li","lidavid@example.com","@david","[family]","david","",""
+"Alex Yeoh","alexyeoh@example.com","@alex","[friends]","Alex","Ex02 | 5.0,Ex01 | 5.0","3"
+"Bernice Yu","berniceyu@example.com","@bernice","[colleagues],[friends]","Bernice","Ex02 | 5.0",""
+"Charlotte Oliveiro","charlotte@example.com","@charlotte","[neighbours]","Charlotte","",""
+"David Li","lidavid@example.com","@david","[family]","david","","5,6,10"
 "Irfan Ibrahim","irfan@example.com","@irfan","[classmates]","Irfan","",""
 "Roy Balakrishnan","royb@example.com","@roy","[colleagues]","Roy","",""
 ```
@@ -776,6 +788,7 @@ Adds an assignment and its grades to a contact.
 * If `assignment.json` is missing from `/data`, KonTActs will load a default assignment database.
 * `assignment.json` needs to be manually created in `/data`.
 * Each assignment must have a unique `ASSIGNMENT_NAME`.
+* If `SCORE` has more than 2 decimal places, its display will be truncated to 2 decimal places.
 
   </box>
 
@@ -800,13 +813,13 @@ Example with the following assignment.json file:
   ]
 }
 ```
-`addGrade n/JohnDoe asgn/Ex01 s/5` will add an assignment name
+`addGrade n/JohnDoe a/Ex01 s/5` will add an assignment name
 Assignment01 with score 5 to contact JohnDoe.
 
-`addGrade n/JohnDoe asgn/Ex01 s/12` will not add the assignment to contact JohnDoe
+`addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
 as the input score is greater than the max, as specified in the `assignment.json` file.
 
-`addGrade n/JohnDoe asgn/Ex05 s/5` will not add the assignment to contact JohnDoe
+`addGrade n/JohnDoe a/Ex05 s/5` will not add the assignment to contact JohnDoe
 as the assignment is not specified `assignment.json`
    </box>
 
@@ -824,7 +837,7 @@ Removes an assignment and its grades from a contact.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `removeGrade n/NAME assignment/ASSIGNMENT_NAME`**</md>
+<md>**Format: `removeGrade name/NAME assignment/ASSIGNMENT_NAME`**</md>
 
 </box>
 
@@ -840,9 +853,9 @@ Removes an assignment and its grades from a contact.
 
 Assuming John Doe has `Ex01` assignment with a score of `5`.
 
-Calling `removeGrade n/John Doe asgn/Ex01` will remove the `Ex01` assignment from contact John Doe.
+Calling `removeGrade n/John Doe a/Ex01` will remove the `Ex01` assignment from contact John Doe.
 
-Calling `removeGrade n/John Doe asgn/Ex01` again will throw an error since the assignment has already been removed.
+Calling `removeGrade n/John Doe a/Ex01` again will throw an error since the assignment has already been removed.
 To add a new assignment, refer to [`addGrade`](#adding-grades-to-a-contact-addgrade) command above.
 
 </box>
@@ -901,4 +914,5 @@ KonTActs data are saved automatically as a JSON file `[JAR file location]/data/k
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **When using excel to edit telegram username**, typing "@" will trigger the command function which will output a "Function is not valid" error. The remedy is to prefix the telegram username with an apostrophe `'` to escape from the command function. For example: typing `'@james`.
 ![excel known issue](images/excelKnownIssue.png)
+4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
 --------------------------------------------------------------------------------------------------------------------
