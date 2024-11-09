@@ -121,8 +121,24 @@ An example for adding a patient to the address book is given below.
 Once the command succeeds, the person will be added to the address book and the following message will be displayed.
 ![add Patient Succeeds](images/addPatientSucceed.png)
 
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+
+
+Possible Errors:
+- `This person already exists in the address book` - Displayed when trying to add a person with an NRIC that already exists
+- `Roles should only be 'PATIENT' or 'CAREGIVER'` - When an invalid role is provided
+
+- `Missing required field:` - Displayed when any required field is not provided (name, NRIC, phone, email, address, or role)
+
+NRIC should adhere to the following format and constraints:
+1. The NRIC must be 9 characters long.
+2. The first character must be one of the following letters: 'S', 'T', 'F', or 'G'. (case-insensitive)
+  - 'S' and 'T' are for Singapore Citizens and Permanent Residents.
+  - 'F' and 'G' are for Foreigners.
+3. The next 7 characters must be digits.
+4. The last character must be an uppercase letter, which serves as a checksum to validate the NRIC.
+5. The checksum is computed based on a specific algorithm using the 7 digits of the NRIC.
+
 
 ### Linking a patient and a caregiver: `link`
 
@@ -140,6 +156,15 @@ An example of using CareLink to link a patient and a caregiver is given below.
 
 Once the command succeeds, the patient will be linked with the caregiver and the following message will be displayed.
 ![Link command success](images/linkcommandsucceed.png)
+
+Possible Errors:
+- `This link already exists in CareLink` - When attempting to create a link that already exists
+- `Cannot link same people` - When trying to link a person to themselves
+- `Incorrect NRIC. Caregiver and Patient not found` - When both NRICs cannot be found in CareLink
+- `Incorrect NRIC. Patient not found` - When the patient's NRIC cannot be found
+- `Incorrect NRIC. Caregiver not found` - When the caregiver's NRIC cannot be found
+- `Incorrect roles. The patient NRIC must correspond to a patient, and the caregiver NRIC must correspond to a caregiver.` - When the roles don't match the specified NRICs
+
 
 ### Deleting a link between patient and a caregiver: `deletelink`
 
@@ -175,6 +200,10 @@ An example of using CareLink to add notes to a person is given below.
 Once the command succeeds, the notes will be added to the person and the following message will be displayed.
 ![AddNote command success](images/AddNoteSuccessExample.png)
 
+Possible Errors:
+- `This link does not exist in CareLink` - When trying to delete a link that doesn't exist
+- `Incorrect NRIC. Person not found` - When either the patient's or caregiver's NRIC cannot be found
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in Care Link App.
@@ -198,6 +227,11 @@ Examples:
 
 - `edit S1234567D p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with `S1234567D` to be `91234567` and `johndoe@example.com` respectively.
 - `edit S6483749D n/Betsy Crower t/` Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
+
+Possible Errors:
+- `Incorrect NRIC. Person not found` - When the specified NRIC doesn't exist in CareLink
+- `At least one field to edit must be provided.` - When no fields to edit are specified
+- `This person already exists in the address book.` - When editing would result in a duplicate person
 
 ### Locating persons by name, NRIC, phone, email, role, or tags: `find`
 
@@ -232,6 +266,12 @@ An example of using the find command in CareLink is given below.
 
 Once the command succeeds, the persons found will be displayed providing comprehensive information about the persons.
 ![Find command success](images/findcommandsucceed.png)
+
+Possible Errors:
+- `Invalid command format! `
+find: Finds all persons based on the specified criteria and displays them as a list with index numbers. Search is case-insensitive.
+Parameters: [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...
+At least one parameter must be provided. You do not need to include all parameters.
 
 ### Managing Appointments
 
@@ -283,8 +323,9 @@ Examples:
 - `editapp nric/S1234567D d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, appointment remains on the same day.
 
 Common errors and their meanings:
-
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
+- `This appointment does not exist in CareLink` - The specified appointment cannot be found
+- `At least one field to edit must be provided.` - You must specify at least one field to change
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g 01/01/2025)
 - `Invalid time` - Make sure to use HH:MM format in 24-hour time (e.g 14:30)
 - `Start time must be before end time` - Check your edited appointment times
@@ -365,6 +406,11 @@ Finds and lists appointment that falls within the specified date-time range. The
 An example of the result obtained from the `findapp` command is given below.
 ![Find Appointment command example](images/findappointment.png)
 
+Possible Errors:
+- `Invalid date. Please use the DD/MM/YYYY format` - When the date format is incorrect
+- `Invalid time. Please use the HH:MM format` - When the time format is incorrect
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -385,6 +431,10 @@ Notice the NRIC used in the example belongs to `David LI`.
 
 Once the command succeeds, notice that David is removed and hence no longer displayed.
 ![result for 'delete S6483749D'](images/deleteDavidResult.png)
+
+Possible Errors:
+- `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
+
 
 ### Clearing all entries: `clear confirm`
 
