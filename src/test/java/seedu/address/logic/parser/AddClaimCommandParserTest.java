@@ -26,6 +26,7 @@ public class AddClaimCommandParserTest {
                 PolicyType.HEALTH);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
     @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE);
@@ -43,7 +44,20 @@ public class AddClaimCommandParserTest {
 
         // only index
         assertParseFailure(parser, String.valueOf(INDEX_FIRST_CLIENT.getOneBased()), expectedMessage);
+
+        // no policy type
+        assertParseFailure(parser, INDEX_FIRST_CLIENT.getOneBased()
+                + CommandTestUtil.CLAIM_STATUS_PENDING + CommandTestUtil.CLAIM_DESC, expectedMessage);
+
+        // missing claim description
+        assertParseFailure(parser, INDEX_FIRST_CLIENT.getOneBased() + CommandTestUtil.POLICY_TYPE_DESC_HEALTH
+                + CommandTestUtil.CLAIM_STATUS_PENDING, expectedMessage);
+
+        // missing claim status
+        assertParseFailure(parser, INDEX_FIRST_CLIENT.getOneBased() + CommandTestUtil.POLICY_TYPE_DESC_HEALTH
+                + CommandTestUtil.CLAIM_DESC, expectedMessage);
     }
+
     @Test
     public void parse_invalidClaimDescription_failure() {
         String expectedMessage = Claim.MESSAGE_CONSTRAINTS;
