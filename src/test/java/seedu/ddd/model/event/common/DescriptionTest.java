@@ -1,11 +1,11 @@
 package seedu.ddd.model.event.common;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 
 public class DescriptionTest {
 
@@ -14,14 +14,21 @@ public class DescriptionTest {
         assertThrows(NullPointerException.class, () -> new Description(null));
     }
 
-    //Assumption: The null input have been filtered out.
     @Test
     public void isValidDescriptionTest() {
-        String testDescription1 = "";
-        String testDescription2 = "A normal description";
+        // null input
+        assertThrows(java.lang.IllegalArgumentException.class, () -> new Description(""));
 
-        assertThrows(java.lang.IllegalArgumentException.class, () -> new Description(testDescription1));
-        assertEquals(new Description(testDescription2).toString(), testDescription2);
+        // invalid description
+        assertFalse(Description.isValidDescription("/Wedding at the beach")); // starts with a forward slash
+        assertFalse(Description.isValidDescription("Bridal/shower event")); // contains a forward slash
+
+
+        // valid addresses
+        assertTrue(Description.isValidDescription("Wedding ceremony at church"));
+        assertTrue(Description.isValidDescription("W")); // one character
+        assertTrue(Description.isValidDescription("Romantic beachside wedding event"));
+
     }
 
     @Test
