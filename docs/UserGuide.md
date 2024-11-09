@@ -713,8 +713,8 @@ Furthermore, certain edits can cause the TrackMate to behave in unexpected ways 
 | **Mark Assignment**   | `markAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `markAsg 1 n/Assignment 1`                                        |
 | **Unmark Assignment** | `unmarkAsg INDEX n/ASSIGNMENT TITLE`<br> e.g., `unmarkAsg 1 n/Assignment 1`                                    |
 | **Check Assignment**  | `checkAsg n/ASSIGNMENT TITLE`<br> e.g., `checkAsg n/Assignment 1`                                              |
-| **Mark Attendance**   | `markAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `attend s/A01234567X c/T1001 d/2024-02-21`      |
-| **Unmark Attendance** | `deleteAtt s/STUDENT ID c/TUTORIAL ID d/TUTORIAL DATE`<br> e.g., `deleteAtt s/A01234567X c/T1001 d/2024-02-21` |
+| **Mark Attendance**   | `markAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`<br> e.g., `markAtt s/A1234567X c/T1001 d/2024-02-21`      |
+| **Unmark Attendance** | `deleteAtt s/STUDENT_ID c/TUTORIAL ID [d/ATTENDANCE_DATE]`<br> e.g., `deleteAtt s/A01234567X c/T1001 d/2024-02-21` |
 | **Clear**             | `clear`                                                                                                        |
 | **Help**              | `help`                                                                                                         |
 | **Exit**              | `exit`                                                                                                         |
