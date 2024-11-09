@@ -28,6 +28,7 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <VBox spacing="5">
+        <FlowPane fx:id="level" />
         <FlowPane fx:id="subjects" />
         <FlowPane fx:id="lessonTimes" />
       </VBox>
