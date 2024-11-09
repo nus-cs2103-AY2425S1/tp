@@ -259,11 +259,11 @@ Format: `createP n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 
 Examples:
-* `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
+* `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br>
   **Output**: <br> 
     Successfully created a new patient with ID: #0 : <br>
-    John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
-* `createP n/Dr Jane p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street r/physiotherapy` <br>
+    John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags:
+* `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br>
   **Output**: <br>
 This patient already exists.
 
