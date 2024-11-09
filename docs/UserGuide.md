@@ -225,7 +225,7 @@ Expected output:
 Examples:
 
 - `add n/John Doe p/98765432 e/johnd@example.com c/CS2103/T, block 123, #01-01`
-- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/criminal`
+- `add n/Betsy Crowe t/friend e/betsycrowe@example.com c/CS1231S p/1234567 t/needs help`
 
 ### Listing all persons : `list`
 
