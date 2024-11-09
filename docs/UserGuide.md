@@ -222,17 +222,18 @@ Examples:
 
 ### Getting call history : `history`
 
-Shows a list of call dates and corresponding notes for the specified elderly, sorted from the latest to the oldest date.
+Shows a list of call dates and corresponding notes for the specified elderly, sorted from the latest to the oldest date and the profile view of the elderly which includes their details.
+
 Format: `history INDEX/NRIC`
 
-* Shows the call history of the elderly at the specified `INDEX` or `NRIC`.
+* Shows the call history and profile view of the elderly at the specified `INDEX` or `NRIC`.
 * The `INDEX` refers to the index number shown in the displayed person list. It must be a **positive integer** (e.g., 1, 2, 3, …​) and fall within the range of the list shown.
 * The `NRIC` used to select the elderly must be a valid, government issued NRIC and must exist in the current person list.
 
 Examples:
-* `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
-* `find Betsy` followed by `history 1` shows the call history of the 1st elderly in the results of the `find` command.
-* `history S7495552E` shows the call history of the elderly with NRIC `S7495552E`.
+* `list` followed by `history 2` shows the call history and profile view of the 2nd elderly in ContactMate.
+* `find Betsy` followed by `history 1` shows the call history and profile view of the 1st elderly in the results of the `find` command.
+* `history S7495552E` shows the call history and profile view of the elderly with NRIC `S7495552E`.
   ![result for 'history S7495552E'](images/historyRoy.png)
 
 ### Clearing all entries : `clear`
@@ -293,6 +294,43 @@ Furthermore, certain edits can cause ContactMate to behave in unexpected ways (e
 
 **Q**: Why can't I `mark S2208201I` when I am currently viewing the contact records of the elderly with NRIC `S2208201I`? <br>
 **A**: The `mark` command requires you to be in the main person list rather in the individual history list view. It ensures that all-elderly related commands function as expected and to avoid confusion. 
+
+**Q**: How do I save my data?<br>
+**A**: ContactMate ensures your data is saved automatically after every command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **CLI (Command Line Interface)**: A text-based user interface that allows users to interact with the system by typing commands.
+
+
+* **GUI (Graphical User Interface)**: A visual interface that enables users to interact with the system through graphical elements like buttons, menus, and icons.
+
+
+* **Command Box**: The text box in the GUI where you can type commands to interact with ContactMate.
+
+
+* **Index**: A number to used to identify a specific record (elderly) in the list. For instance, "1" refers to the first record in the list.
+
+
+* **Field**: A specific attribute or property of an elderly. For example, fields might include Name, Email, or Phone Number.
+
+
+* **Parameter**: Specific data (e.g. `NAME`, `DATE`, `NOTES`) that you provide when using commands to modify its behaviour. Some parameters are mandatory, while others are optional, depending on the command.
+
+
+* **Backup**: A copy of data stored separately to protect against loss or accidental deletion. Backups ensure data can be restored in case of unexpected issues.
+
+
+* **JSON**: Known as JavaScript Object Notation, JSON is a lightweight, text-based data format that is easy for both humans and machines to read and write.
+
+
+* **Profile View**: A display that shows all the details of a specific elderly.
+
+
+* **Person List View**: Also referred to as "`personList` view", this is the display that shows the list of elderly in ContactMate. By default, it is displayed when you start the application and is also displayed after using the `list` or `find` commands.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
