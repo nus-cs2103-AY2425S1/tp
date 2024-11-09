@@ -133,7 +133,8 @@ Adds a client to PROperty.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMARKS]…​`
 
-- `NAME` and `PHONE_NUMBER` fields must be provided. 
+- `NAME` and `PHONE_NUMBER` fields must be provided.
+  - `NAME` can only contain **alphanumeric and spaces**
 -  Client tags are added in a case-insensitive manner. e.g `t/buyer` or `t/BUYER` will both add the `Buyer` tag.
 -  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
 
@@ -170,6 +171,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/client_TAG] [dt/
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
   * This option **can not be used** with any other tag options (i.e `t/seller dt/buyer`)
+* `NAME` can only contain **alphanumeric and spaces**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `t/` to add new tags and `dt/` to delete specific tags from a person. 
