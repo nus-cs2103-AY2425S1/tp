@@ -1,6 +1,12 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.FindCommandParser.MESSAGE_NO_KEYWORD;
@@ -122,6 +128,16 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "ph p/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
 
         assertParseFailure(parser, "e e/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "all d/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        assertParseFailure(parser, "ph e/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_NO_KEYWORD));
+
+        String args = "all n/John";
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_DEPARTMENT, PREFIX_ROLE);
+        assertFalse(argMultimap.hasEmptyCommandPrefix());
     }
 
 }
