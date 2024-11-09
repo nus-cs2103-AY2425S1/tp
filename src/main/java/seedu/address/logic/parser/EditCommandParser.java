@@ -32,14 +32,12 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            if (index.getZeroBased() <= 0) {
-                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
         } catch (ParseException pe) {
-            if (pe.getMessage().contains("Index")) {
-                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, pe);
+            if (pe.getMessage().equals(ParserUtil.MESSAGE_INVALID_INDEX)) {
+                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
             }
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL);
