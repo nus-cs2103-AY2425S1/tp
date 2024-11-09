@@ -24,7 +24,7 @@ public class RatingCommand extends Command {
             + "by the index number used in the last restaurant listing. "
             + "Existing rating will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_RATING + "[RATING]\n"
+            + PREFIX_RATING + "RATING\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_RATING + "10";
 
