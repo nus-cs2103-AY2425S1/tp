@@ -18,7 +18,7 @@
 - **Libraries Utilized**:
     - [JavaFX](https://openjfx.io/): Used for building a responsive graphical user interface.
     - [Jackson](https://github.com/FasterXML/jackson): Used for JSON data processing.
-    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability.
+    - [JUnit5](https://github.com/junit-team/junit5): Used for testing to ensure code reliability. <br>
 
 - **AI Assistance**: The *SellSavvy* logo was generated with ChatGPT 4.0.
 
@@ -615,9 +615,8 @@ Use case ends.
 2. Should be able to hold up to 100 customers and/or 1000 orders without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Should be able to be used offline (i.e. without internet connection)
-5. Should provide clear error messages to indicate issues to the user.
-6. Should log user inputs and errors for analysis and debugging.
-7. The system should respond within 2 seconds from any user input.
+5. Should log user inputs and errors for analysis and debugging.
+6. The system should respond within 2 seconds from any user input.
 
 ### Glossary
 
@@ -629,6 +628,7 @@ Use case ends.
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
+<a id="similar"></a>
 * **Similar names**: Names which are identical if whitespaces and case sensitivity are ignored.
 * **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
@@ -671,7 +671,64 @@ testers are expected to do more *exploratory* testing.
    1.  Re-launch the app by double-clicking the jar file.<br>
        Expected: The newest order added is retained.
 
-1. _{ more test cases …​ }_
+
+### Adding a customer
+
+**Note:** Some of the test cases may depend on previous test cases, especially those on testing customers with dupliacte/similar names. You are advised to follow the test cases in order. <br> 
+
+**Tips:** All the prerequisites below will be fulfilled if you start off with the default sample data and follow the test cases in sequence.
+
+1. Adding a unique customer with all parameters specified.
+
+    1. Prerequisites: Customer with name `John Doe` or other similar name does not already exist in the addressbook.
+
+    2. Test case: `addcustomer n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney`<br>
+       Expected: The customer is successfully added. 
+
+2. Adding a unique customer with all parameters specified with command aliases.
+
+    1. Prerequisites: Customer with name `Betsy Crowe` or other similar name does not already exist in the addressbook.
+   
+    2. Test case: `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` <br>
+       Expected: The customer is successfully added.
+   
+3. Adding a customer with exact same name.
+
+   1. Prerequisites: Customer with name `Betsy Crowe` already exist in the addressbook.
+
+   2. Test case: `addcustomer n/Betsy Crowe t/friend e/betsycrowe@duplicate.com a/Newgate Prison p/12345678 t/criminal` <br>
+      Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
+
+4. Adding a customer with a [similar name](#similar) and without the optional `tag` field.
+
+    1. Prerequisites: Customer with name `Betsy Crowe` but not `Betsy crowe` already exist in the addressbook.
+
+    2. Test case: `addcustomer n/Betsy crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567` <br>
+       Expected: The customer is successfully added with a warning given.
+
+5. Adding a customer with duplicate tags.
+
+    1. Prerequisites: Customer with name `Yu Sutong` or other similar name does not already exist in the addressbook.
+
+    2. Test case: `addcustomer n/Yu Sutong t/vvip t/vvip e/su@example.com a/Newgate Prison p/12345678` <br>
+       Expected: The customer is successfully added with one of the duplicated tag ignored.
+
+6. Adding a customer with [similar tags](#similar).
+
+    1. Prerequisites: Customer with name `Foo Chao` or other similar name does not already exist in the addressbook.
+
+    2. Test case: `addcustomer n/Foo Chao t/VVIP t/vvip e/su@example.com a/69, Sembawang Road. #01-01  p/12345678` <br>
+       Expected: The customer is successfully added with both similar tags with a warning given.
+
+7. Add a customer with missing compulsory field.
+
+   1. Test case: `addcustomer n/Lim Kai Xuan e/su@example.com a/69, Sembawang Road. #01-01` <br>
+   
+   2. Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
+
+   3. Test case: `addcustomer n/Lim Kai Xuan e/su@example.com p/12345678` <br>
+
+   4. Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
    
 ### Deleting a customer
 
