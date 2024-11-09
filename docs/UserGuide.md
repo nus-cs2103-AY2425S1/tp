@@ -103,7 +103,7 @@ the process of accessing and updating resident student details. What's more, Dor
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `undo`, `clean` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -123,15 +123,17 @@ A help window will pop up containing basic introduction to the three core featur
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
+Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 
 > <span style="color:Gray"> NOTE! </span> <br>
 >
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
 > * A person can have up to 10 tags (including 0).
 > * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
-> * `PHONE_NUMBER` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
 > * `EMAIL` should be of the format local-part@domain
+> * You cannot set emergency contact details when adding a person. Use the `edit` command to add emergency contact details.
+> * You cannot set graduation year when adding a person. Use the `edit` command to add graduation year.
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
 > <span style="color:Tomato"> WARNING! </span> <br>
@@ -160,7 +162,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [g/GRADUATION_YEAR] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -175,7 +177,7 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/TAG`
+Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 
 * any possible orders and combinations of the 3 parameters name, phone number and room number are applicable
 
@@ -331,11 +333,11 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find [n/NAME] [p/PHONE_NUMBER] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**   | `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
 **List**   | `list`
 **Help**   | `help`
 **Clean**  | `clean`
