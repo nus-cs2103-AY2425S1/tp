@@ -19,9 +19,9 @@ public class BackupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Backup successfully stored at ";
 
-    public static final String NO_DATA_FILE = "No data file found to backup. " +
-            "If this is your first time starting the program " +
-            "or you have deleted the data file try another command first.";
+    public static final String NO_DATA_FILE = "No data file found to backup. "
+            + "If this is your first time starting the program "
+            + "or you have deleted the data file try another command first.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
