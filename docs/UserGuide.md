@@ -21,27 +21,27 @@
     
     4.2 [**Viewing help**](#4-2-viewing-help-help)
 
-    4.3 [**Adding a staff**](#4-3-adding-an-staff-add)
+    4.3 [**Adding an employee**](#4-3-adding-an-employee-add)
 
-    4.4 [**Listing all staff**](#4-4-listing-all-staff-list)
+    4.4 [**Listing all employees**](#4-4-listing-all-employees-list)
 
-    4.5 [**Counting staff**](#4-5-counting-staff-count)
+    4.5 [**Counting employees**](#4-5-counting-employees-count)
 
-    4.6 [**Editing an staff**](#4-6-editing-a-staff-edit)
+    4.6 [**Editing an employee**](#4-6-editing-an-employee-edit)
     
-    4.7 [**Locating staff by name**](#4-7-locating-employees-by-name-find)
+    4.7 [**Locating employee by name**](#4-7-locating-employees-by-name-find)
 
-    4.8 [**Deleting a staff**](#4-8-deleting-a-staff-delete)
+    4.8 [**Deleting an employe**](#4-8-deleting-an-employee-delete)
 
-    4.9 [**Sorting staff**](#4-9-sorting-staff-sort)
+    4.9 [**Sorting employees**](#4-9-sorting-employees-sort)
 
-    4.10 [**Favoriting a staff**](#4-10-favoriting-a-staff-favorite)
+    4.10 [**Favoriting an employee**](#4-10-favoriting-an-employee-favorite)
 
     4.11 [**Clearing all entries**](#4-11-clearing-all-entries-clear)
 
     4.12 [**Exiting HR Helper**](#4-12-exiting-hr-helper-exit)
 
-    4.13 [**Staff details window**](#4-13-staff-details-window)
+    4.13 [**Employee details window**](#4-13-employee-details-window)
 
 5. [**Command Summary**](#5-command-summary)
 6. [**FAQ**](#6-faq)
@@ -50,7 +50,7 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## 1 Introduction
-HR Helper is a **desktop app for managing staff**, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+HR Helper is a **desktop app for managing employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 HR Helper is mainly targeted at **fledgling companies** (e.g start-ups), who want to have an easy-to-use, intuitive human resource manager.
 With its gentle learning curve and versatility, it can be easily picked up by anyone, and used by any type of company.
@@ -81,13 +81,13 @@ This user guide provides an overview for HR staff on the usage of HR Helper.
    
 2. Some example commands you can try:
 
-   * `list` : Lists all staff.
+   * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds a staff named `John Doe` to the HR Helper list.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds a contact named `John Doe` to the HR Helper list.
 
-   * `delete 3` : Deletes the 3rd staff shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all staff information.
+   * `clear` : Deletes all contacts.
 
    * `exit` : Exits the app.
 
@@ -163,15 +163,15 @@ Examples:
 </box>
 
 
-### 4.3 Adding a staff : `add`
+### 4.3 Adding an employee : `add`
 
-Adds a staff to HR Helper.
+Adds an employee to the HR Helper.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/FAVORITE] [d/DEPARTMENT] [l/LEAVE]`
 
 <box type="tip" seamless>
 
-**Tip:** A staff can have any number of tags (including 0)
+**Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -182,23 +182,23 @@ Examples:
 
 <box type="warning" seamless>
 
-**Warning:** Duplicate staff with the same name cannot be added.
+**Warning:** Duplicate employees with the same name cannot be added.
 </box>
 
 
-### 4.4 Listing all staff : `list`
+### 4.4 Listing all employees : `list`
 
-Shows a list of all staff in HR Helper.
+Shows a list of all persons in the address book.
 
 Format: `list`
 
 <box type="tip" seamless>
 
-**Tip:** `list` can be used to show all staff after using the `find` command.
+**Tip:** `list` can be used to show all employees after using the `find` command.
 </box>
 
 Example:
-* `list` shows all staff.
+* `list` shows all employees.
 
 <img src = "" width=500 alt="output">
 
@@ -208,14 +208,14 @@ Example:
 </box>
 
 
-### 4.5 Counting staff : `count`
+### 4.5 Counting employees : `count`
 
-Counts number of staff.
+Counts number of employees.
 
-Format: `count`(for counting the filtered list), `count tag/TAG`(for counting staff with given TAG)
+Format: `count`(for counting the filtered list), `count tag/TAG`(for counting persons with given TAG)
 
 * If counting the entire list, use `count`.
-* If counting staff with specified TAG, add TAG to end of the command.
+* If counting persons with specified TAG, add TAG to end of the command.
 
 <box type="tip" seamless>
 
@@ -234,17 +234,17 @@ Examples:
 </box>
 
 
-### 4.6 Editing a staff : `edit`
+### 4.6 Editing an employee : `edit`
 
-Edits an existing staff in the HR Helper.
+Edits an existing employee in the HR Helper.
 
 Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
 
-* Edits the staff at the specified `INDEX`. The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the staff will be removed i.e adding of tags is not cumulative.
-* You can remove all the staff’s tags by typing `t/` without
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
 <box type="tip" seamless>
@@ -253,8 +253,8 @@ Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boo
 </box>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st staff to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd staff to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 <img src = "" width=500 alt="output">
 
@@ -264,9 +264,9 @@ Examples:
 </box>
 
 
-### 4.7 Locating staff by name: `find`
+### 4.7 Locating employees by name: `find`
 
-Finds staff whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -295,14 +295,14 @@ Examples:
 </box>
 
 
-### 4.8 Deleting a staff : `delete`
+### 4.8 Deleting an employee : `delete`
 
-Deletes the specified staff from HR Helper.
+Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the staff at the specified `INDEX`.
-* The index refers to the index number shown in the displayed staff list.
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
@@ -311,8 +311,8 @@ Format: `delete INDEX`
 </box>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd staff in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st staff in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 <img src = "" width=500 alt="output">
 
@@ -322,15 +322,15 @@ Examples:
 </box>
 
 
-### 4.9 Sorting staff: `sort`
+### 4.9 Sorting Employees: `sort`
 
-Sorts the displayed staff based on specified tags.
+Sorts the displayed contacts based on specified tags.
 
 Format: `sort TAG`
 
-* Sorts the staff according to the specified tags.
+* Sorts the contacts according to the specified tags.
 * You can specify multiple tags for sorting.
-* If no tags are specified, all staff will be displayed in their original order.
+* If no tags are specified, all contacts will be displayed in their original order.
 
 <box type="tip" seamless>
 
@@ -338,8 +338,8 @@ Format: `sort TAG`
 </box>
 
 Examples:
-* `sort friend` Sorts and displays all staff tagged as friend.
-* `sort friend family` Sorts and displays staff tagged as either friend or family.
+* `sort friend` Sorts and displays all contacts tagged as friend.
+* `sort friend family` Sorts and displays contacts tagged as either friend or family.
 
 <img src = "" width=500 alt="output">
 
@@ -349,38 +349,38 @@ Examples:
 </box>
 
 
-### 4.10 Favoriting a staff : `favorite`
+### 4.10 Favoriting an employee : `favorite`
 
-Favorites the specified person from HR Helper.
+Favorites the specified person from the address book.
 
 Format: `favorite INDEX`
 
-* Favorites the staff at the specified `INDEX`.
-* The index refers to the index number shown in the displayed staff list.
+* Favorites the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
   
 <box type="tip" seamless>
 
 <img src = "images/favorite.png" width=500 alt="description">
 
-**Tip:** Use favorite for high-priority staff, making them easier to locate with filtering or sorting.
+**Tip:** Use favorite for high-priority contacts, making them easier to locate with filtering or sorting.
 </box>
 
 Examples:
-* `list` followed by `favorite 2` favorites the 2nd staff in HR Helper.
-* `find Betsy` followed by `favorite 1` favorites the 1st staff in the results of the `find` command.
+* `list` followed by `favorite 2` favorites the 2nd person in the address book.
+* `find Betsy` followed by `favorite 1` favorites the 1st person in the results of the `find` command.
 
 <img src = "" width=500 alt="output">
 
 <box type="warning" seamless>
 
-**Warning:** Avoid favoriting too many staff, as an excessive number of favorites can make it challenging to identify key staff quickly.
+**Warning:** Avoid favoriting too many contacts, as an excessive number of favorites can make it challenging to identify key contacts quickly.
 </box>
 
 
 ### 4.11 Clearing all entries : `clear`
 
-Clears all entries from HR Helper.
+Clears all entries from the address book.
 
 Format: `clear`
 
@@ -417,24 +417,24 @@ Format: `exit`
 </box>
 
 
-### 4.13 Staff Details Window
+### 4.13 Employee Details Window
 
-The **Staff Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
+The **Employee Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
 
 - **Keyboard Shortcut:**
-    - Select a staff from the **Staff List**.
-    - Press the `Enter` key to open the **Staff Details Window**.
+    - Select a person from the **Person List**.
+    - Press the `Enter` key to open the **Person Details Window**.
 
 <img src = "images/persondetailswindow.png" width=500>
 
 
-- **Name:** Editable text field displaying the staff's full name.
-- **Phone:** Editable text field for the staff's contact number.
-- **Email:** Editable text field for the staff's email address.
-- **Address:** Editable text field for the staff's residential or mailing address.
-- **Department:** Editable text field indicating the staff's department within the organization.
-- **Leave:** Editable text field showing the remaining leave days available to the staff.
-- **Favorite:** Checkbox to mark the staff as a favorite for quick access.
+- **Name:** Editable text field displaying the employee's full name.
+- **Phone:** Editable text field for the employee's contact number.
+- **Email:** Editable text field for the employee's email address.
+- **Address:** Editable text field for the employee's residential or mailing address.
+- **Department:** Editable text field indicating the employee's department within the organization.
+- **Leave:** Editable text field showing the remaining leave days available to the employee.
+- **Favorite:** Checkbox to mark the employee as a favorite for quick access.
 
 **Editing Information**
 
@@ -448,7 +448,7 @@ The **Staff Details Window** allows HR personnel to view and edit detailed infor
 
 - **Save Changes:**
     - Press the `Enter` key to save all modifications.
-    - The window will close, and changes will reflect in the **Staff List**.
+    - The window will close, and changes will reflect in the **Person List**.
 
 - **Cancel Changes:**
     - Press the `Esc` key to discard all changes and close the window without saving.
@@ -479,7 +479,7 @@ HR Helper data are saved automatically as a JSON file `[JAR file location]/data/
 
 **Warning:**
 If your changes to the data file makes its format invalid, HR Helper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause HR Helper to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -494,7 +494,7 @@ Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
-**Count**  | `count`: counts entire staff list<br> `count tag/TAG`: counts people in given tag<br>e.g. `count tag/Colleagues`
+**Count**  | `count`: counts entire personel list<br> `count tag/TAG`: counts people in given tag<br>e.g. `count tag/Colleagues`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
@@ -516,4 +516,4 @@ Action     | Format, Examples
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **When using `count` command**, the `count` command follows a different convention than others, where `tag/TAG` and `name/NAME` are employed rather than `t/TAG` and `n/NAME`.
+3. **Add issues here**
