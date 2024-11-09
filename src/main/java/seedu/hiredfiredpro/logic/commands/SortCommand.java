@@ -9,43 +9,76 @@ import seedu.hiredfiredpro.model.Model;
 import seedu.hiredfiredpro.model.person.Person;
 
 /**
- * Represents a command to sort the candidate list by interview score.
- * The sort order can be either ascending or descending.
- * Usage:
- * - Parameters: 'a' for ascending or 'd' for descending
- * - Example: sort a
- * The command will sort the list of candidates based on their interview scores
- * and update the model with the sorted list.
+ * Sorts the person list and lists persons in ascending or descending order based on interview scores.
  */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the candidate list by interview score.\n"
-            + "Parameters: a (ascending) or d (descending)\n"
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the candidate list based on interview scores "
+            + "in ascending or descending order.\n"
+            + "Parameters: [a/d] (a for ascending, d for descending)\n"
             + "Example: " + COMMAND_WORD + " a";
 
-    public static final String MESSAGE_SUCCESS = "Sorted candidate list by interview score in %s order";
+    public static final String MESSAGE_SORT_PERSON_SUCCESS = "Sorted based on interview scores, in %s order.";
+    public static final String MESSAGE_UNKNOWN_ORDER = "Order %s is not valid for this command. "
+            + "Valid orders are 'a' for ascending or 'd' for descending.";
 
-    private final boolean isAscending;
+    public static final String ASCENDING_SHORT = "a";
+    public static final String DESCENDING_SHORT = "d";
+    public static final String ASCENDING_WORD = "ascending";
+    public static final String DESCENDING_WORD = "descending";
 
-    public SortCommand(boolean isAscending) {
-        this.isAscending = isAscending;
+    private final String order;
+    private final Comparator<Person> comparator;
+
+    /**
+     * Creates a SortCommand to sort the person list based on interview scores.
+     * @param order the sorting order ('a' for ascending, 'd' for descending)
+     */
+    public SortCommand(String order) {
+        this.order = order;
+        this.comparator = createComparator(order);
     }
 
-    public boolean isAscending() {
-        return isAscending;
+    /**
+     * Creates the appropriate comparator based on the sort order.
+     */
+    private Comparator<Person> createComparator(String order) {
+        Comparator<Person> baseComparator = (
+                p1, p2) -> Float.compare(p1.getInterviewScore().toFloat(), p2.getInterviewScore().toFloat());
+        return order.equals(ASCENDING_SHORT) ? baseComparator : baseComparator.reversed();
+    }
+
+    /**
+     * Gets the full word representation of the sort order.
+     */
+    private String getOrderWord(String order) {
+        return order.equals(ASCENDING_SHORT)
+                ? ASCENDING_WORD
+                : order.equals(DESCENDING_SHORT)
+                ? DESCENDING_WORD
+                : null;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Comparator<Person> comparator = (p1, p2) -> {
-            int comparison = Float.compare(p1.getInterviewScore().toFloat(), p2.getInterviewScore().toFloat());
-            return isAscending ? comparison : -comparison;
-        };
+
+        String orderWord = getOrderWord(order);
+        if (orderWord == null) {
+            throw new CommandException(String.format(MESSAGE_UNKNOWN_ORDER, order));
+        }
 
         model.updateSortedPersonList(comparator);
+        return new CommandResult(String.format(MESSAGE_SORT_PERSON_SUCCESS, orderWord));
+    }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, isAscending ? "ascending" : "descending"));
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortCommand // instanceof handles nulls
+                && order.equals(((SortCommand) other).order)
+                && comparator.equals(((SortCommand) other).comparator));
     }
 }
