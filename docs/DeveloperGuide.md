@@ -331,10 +331,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC03 - Update Details of Person**
+**Use Case: UC03 - Update details of Guest**
 
 **MSS**
-1. User selects an entry to update together with the fields to be updated.
+1. User selects Guest to update along with the fields to be updated.
 2. System saves the changes and notifies user of success.
 
    Use case ends.
@@ -350,12 +350,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1c. The new details result in a duplicate Person (i.e. same name, phone number and type)
-    * 1c1. System tells the user the Person already exists
+* 1c. The new details result in a duplicate Guest (i.e. same name, phone number and type)
+    * 1c1. System tells the user the Guest already exists
 
       Use case ends.
 
-**Use Case: UC04 - Delete a Guest**
+**Use Case: UC04 - Update details of Vendor**
+
+**MSS**
+1. User selects a Vendor to update along with the fields to be updated.
+2. System saves the changes and notifies user of success.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+    * 1a1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+* 1b. The new details are incomplete or invalid.
+    * 1b1. System shows an error message and requests the user to re-enter the details.
+
+      Use case resumes at step 1.
+
+* 1c. The new details result in a duplicate Vendor (i.e. same name, phone number and type)
+    * 1c1. System tells the user the Vendor already exists
+
+      Use case ends.
+
+**Use Case: UC05 - Delete a Guest**
 
 **MSS**
 1. User requests to delete a Guest entry.
@@ -374,7 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC05 - Delete a Vendor**
+**Use Case: UC06 - Delete a Vendor**
 
 **MSS**
 1. User requests to delete a Vendor entry.
@@ -393,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC06 - Find Guests and Vendor with a particular field**
+**Use Case: UC07 - Find Guests and Vendor with a particular field**
 
 **MSS**
 1. User requests to find Guest and Vendor entries with a specified field (e.g., by category, name, RSVP status).
@@ -412,7 +436,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC07 - Get statistics**
+**Use Case: UC08 - Get statistics**
 
 **MSS**
 1. User requests to get statistics of entries.
@@ -427,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use Case: UC08 - Clear all entries**
+**Use Case: UC09 - Clear all entries**
 
 **MSS**
 1. User requests to clear all entries.
