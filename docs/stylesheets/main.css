@@ -93,6 +93,10 @@ mark {
   border-left: 1px solid lightgrey;
 }
 
+.page-nav-print {
+  font-size: 14px;
+}
+
 @media screen and (max-width: 1299.98px) {
   #page-nav {
     display: none;
