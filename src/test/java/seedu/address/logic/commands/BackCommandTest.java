@@ -21,6 +21,6 @@ public class BackCommandTest {
     @Test
     public void execute_inMainWindow_staysMainWindow() {
         AddressBookParser.setInspect(false);
-        assertCommandSuccess(new BackCommand(), model, BackCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new BackCommand(), model, BackCommand.MESSAGE_INVALID_COMMAND, expectedModel);
     }
 }
