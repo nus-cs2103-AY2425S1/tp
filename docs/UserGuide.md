@@ -5,7 +5,7 @@ title: User Guide
 
 HRConnect is a desktop app designed to streamline the allocation of human resources to projects within a company.
 
-It is optimized for rapid use by HR professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect can get your HR management tasks done faster than traditional GUI apps.
+It is optimized for rapid use by office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-heavy apps.
 
 ---
 
@@ -15,10 +15,9 @@ The user guide contains formatting to highlight important info. The standards us
 
 * `code typeface`: Commands or command formats
 * **Bold:** Essential information
-* **Underline \+ Bold**: Keywords
 * <span style="color:red">RED COLOR</span>: Caution, take note
-* *Italics*: Technical terms available in glossary
 * [Hyperlink](#note-user-guide-formatting): Links to another section of the user guide, or a relevant page.
+* [*Italics + Hyperlink*](#note-user-guide-formatting): Technical terms available in glossary
 
 ---
 
@@ -63,11 +62,11 @@ Start here if you are new to HRConnect.
 
 1. Ensure you have **[Java](#java) 17 or above** installed in your computer.
 
-2. Download the latest .jar file from [here](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your HRConnect. **This folder will be used to store saved data and preferences.**
 
-4. **Double click the .jar file** in the folder you placed.
+4. **Double click the `.jar` file** in the folder you placed.
 
 A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.
 
@@ -539,7 +538,7 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The user should delete the `preferences.json` file created by the application (in the same folder as the `HRConnect.jar` file) before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 [Return to Top](#table-of-contents)
@@ -607,7 +606,7 @@ List of certain technical terms / uncommon words used in this user guide.
 - A digital interface in which a user interacts with graphical components such as icons, buttons, and menus. Example: Windows 11, most websites
 
 ### Java
-- The programming language HRConnect is based on.
+- The programming language HRConnect is primarily developed with.
 - It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) (scroll down to get to the Java 17 downloads) and installed before attempting to run HRConnect.
 
 ### JSON
