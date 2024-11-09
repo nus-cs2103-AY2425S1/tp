@@ -188,12 +188,10 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleView() {
-        viewPersonWindow = new ViewPersonWindow(logic.getPersonList());
-        if (!viewPersonWindow.isViewShowing()) {
-            viewPersonWindow.show();
-        } else {
-            viewPersonWindow.focus();
+        if (viewPersonWindow == null) {
+            viewPersonWindow = new ViewPersonWindow(logic.getPersonList());
         }
+        viewPersonWindow.showPerson();
     }
 
     public PersonListPanel getPersonListPanel() {
