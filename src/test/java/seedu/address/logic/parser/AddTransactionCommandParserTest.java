@@ -1,8 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_AMOUNT;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_DATE;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_DESCRIPTION;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_OTHER_PARTY;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 //import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_INPUT;
+import static seedu.address.logic.commands.CommandTestUtil.INCORRECT_DATE_FORMAT_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT;
@@ -13,6 +18,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_INPUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OTHER_PARTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OTHER_PARTY_INPUT;
+import static seedu.address.logic.commands.CommandTestUtil.WHITE_SPACE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -31,6 +41,7 @@ public class AddTransactionCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
+
         //no index specified
         String userInputWithNoIndex = VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT + VALID_OTHER_PARTY_INPUT
                 + VALID_DATE_INPUT;
@@ -61,6 +72,31 @@ public class AddTransactionCommandParserTest {
     }
 
     @Test
+    public void parse_blankParts_failure() {
+
+        //blank description
+        String userInputWithBlankDescription = "1" + PREFIX_DESCRIPTION + WHITE_SPACE + VALID_AMOUNT_INPUT
+                + VALID_OTHER_PARTY_INPUT + VALID_DATE_INPUT;
+        assertParseFailure(parser, userInputWithBlankDescription, MESSAGE_EMPTY_DESCRIPTION);
+
+        //blank amount
+        String userInputWithBlankAmount = "1" + VALID_DESCRIPTION_INPUT + WHITE_SPACE + PREFIX_AMOUNT + WHITE_SPACE
+                + VALID_OTHER_PARTY_INPUT + VALID_DATE_INPUT;
+        assertParseFailure(parser, userInputWithBlankAmount, MESSAGE_EMPTY_AMOUNT);
+
+        //blank other party
+        String userInputWithBlankOtherParty = "1" + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
+                + WHITE_SPACE + PREFIX_OTHER_PARTY + WHITE_SPACE + VALID_DATE_INPUT;
+        assertParseFailure(parser, userInputWithBlankOtherParty, MESSAGE_EMPTY_OTHER_PARTY);
+
+        //blank date
+        String userInputWithBlankDate = "1" + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
+                + VALID_OTHER_PARTY_INPUT + WHITE_SPACE + PREFIX_DATE + WHITE_SPACE;
+        assertParseFailure(parser, userInputWithBlankDate, MESSAGE_EMPTY_DATE);
+    }
+
+
+    @Test
     public void parse_invalidPreamble_failure() {
 
         String userInputWithNoIndex = " " + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT + VALID_OTHER_PARTY_INPUT
@@ -85,6 +121,15 @@ public class AddTransactionCommandParserTest {
         String userInputWithInvalidAmount = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + INVALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + VALID_DATE_INPUT;
         assertParseFailure(parser, userInputWithInvalidAmount, Transaction.MESSAGE_CONSTRAINTS);
+    }
+
+
+    @Test
+    public void parse_incorrectDateFormat_failure() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInputWithInvalidDate = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
+                + VALID_OTHER_PARTY_INPUT + INCORRECT_DATE_FORMAT_INPUT;
+        assertParseFailure(parser, userInputWithInvalidDate, MESSAGE_INVALID_DATE_FORMAT);
     }
 
 
