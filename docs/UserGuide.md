@@ -168,7 +168,7 @@ Format: `findcustomer KEYWORD [MORE_KEYWORDS]`<br>
 Examples:
 * `findcustomer John` returns `john` and `John Doe`
 * `findc alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'findc alex david'](images/findAlexDavidResult.png)
 
 <box type="important">
 
@@ -212,6 +212,7 @@ Examples:
 * `addorder 2 i/Lamp d/20-11-2024 q/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd customer in the address book.
 * `addo 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first customer in the address book.
 * `findcustomer Betsy` followed by `addorder 1 i/Bottles d/12-12-2002 q/1` adds an order under the 1st customer in the results of the `findcustomer` command.
+  ![result for adding order](images/addOrder.png)
 <a id="order-constraints"></a>
 
 <box type="important">
@@ -238,7 +239,7 @@ Format: `listorder INDEX`<br>
 Examples:
 * `listcustomer` followed by `listorder 2` lists all orders of the 2nd customer in the address book.
 * `findcustomer Betsy` followed by `listo 1` lists all orders of the 1st customer from the list of customers found with "Betsy".
-
+  ![result for 'listo 1'](images/listOrder.png)
 <box type="important">
 
 ##### Constraints
@@ -303,6 +304,7 @@ Format: `markorder ORDER_INDEX`<br>
 Examples:
 * `markorder 1` marks the order with index 1 from the displayed order list as completed.
 * `listorder 1` followed by `marko 2` selects the 1st customer in the address book and marks the 2nd order under the 1st customer as completed.
+  ![result for 'marko 1'](images/markOrder.png)
 
 <box type="important">
 
@@ -345,7 +347,7 @@ Format: `filterorder ORDER_STATUS`<br>
 Examples:
 * `filterorder Pending` filters the currently displayed order list for all orders with the `Pending` status, resulting in a list of pending orders under the selected customer being displayed.
 * `listorder 1` followed by `filtero completed` displays the list of all completed orders under the 1st customer in the address book.
-  ![result for filtering completed order'](images/filterCompletedOrders.png)
+  ![result for 'filtero completed'](images/filterOrderCompleted.png)
 
 <box type="important">
 
