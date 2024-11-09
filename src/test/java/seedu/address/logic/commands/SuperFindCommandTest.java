@@ -54,6 +54,7 @@ public class SuperFindCommandTest {
         Model expectedModel = new ModelManager(model.getCampusConnect(), new UserPrefs());
         expectedModel.updateFilteredPersonList(predicate);
 
+        // should return all persons
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -78,6 +79,7 @@ public class SuperFindCommandTest {
         Model expectedModel = new ModelManager(model.getCampusConnect(), new UserPrefs());
         expectedModel.updateFilteredPersonList(predicate);
 
+        // should return all persons
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -90,7 +92,7 @@ public class SuperFindCommandTest {
         Model expectedModel = new ModelManager(model.getCampusConnect(), new UserPrefs());
         expectedModel.updateFilteredPersonList(predicate);
 
-        // should return no person
+        // should return all persons
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -127,7 +129,7 @@ public class SuperFindCommandTest {
         Model expectedModel = new ModelManager(model.getCampusConnect(), new UserPrefs());
         expectedModel.updateFilteredPersonList(predicate);
 
-        // should only return Persons with no tag
+        // should return all persons
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
