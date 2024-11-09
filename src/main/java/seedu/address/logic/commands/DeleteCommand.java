@@ -44,13 +44,12 @@ public class DeleteCommand extends Command {
                     + "Find the index from the list below and type delete INDEX\n"
                     + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_PERSON_IS_CLIENT =
-            """
-                    Cannot delete this person as they are a client in the following wedding:\s
-                    %1$s
-                    Please delete their wedding first.""";
+            "Cannot delete this person as they are a client in a wedding.\n"
+                    + "Please delete their wedding first.";
+
 
     public static final String MESSAGE_PERSON_NOT_ASSIGNED_WEDDING =
-            "Cannot remove wedding job(s) from this person because they are not assigned to the following wedding(s):";
+            "Cannot unassign wedding(s) from this person because they are not assigned to the specified wedding(s)";
 
     private final Index targetIndex;
     private final NameMatchesKeywordPredicate predicate;
@@ -140,8 +139,7 @@ public class DeleteCommand extends Command {
      */
     private void validatePersonIsNotClient(Person person) throws CommandException {
         if (person.getOwnWedding() != null) {
-            throw new CommandException(String.format(MESSAGE_PERSON_IS_CLIENT,
-                    Messages.format(person.getOwnWedding())));
+            throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
         }
     }
 
@@ -175,17 +173,8 @@ public class DeleteCommand extends Command {
      */
     public void checkIsAssignedWeddings(Model model, Person personToDelete) throws CommandException {
         List<Wedding> weddings = model.getFilteredWeddingList();
-        Set<Wedding> weddingsNotAssigned = new HashSet<>();
         for (Index index : weddingIndices) {
-            Wedding weddingToRemove = weddings.get(index.getZeroBased());
-            // Check if person is already assigned to the wedding
-            if (!personToDelete.isAssignedToWeddingNonClient(weddingToRemove)) {
-                weddingsNotAssigned.add(weddingToRemove);
-            }
-        }
-        if (!weddingsNotAssigned.isEmpty()) {
-            throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING
-                    + "\n" + Messages.format(weddingsNotAssigned));
+            throw new CommandException(MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
         }
     }
 

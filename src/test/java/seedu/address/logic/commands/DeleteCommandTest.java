@@ -79,8 +79,7 @@ public class DeleteCommandTest {
         personToDelete.setOwnWedding(wedding);
 
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, null);
-        assertCommandFailure(deleteCommand, model, String.format(DeleteCommand.MESSAGE_PERSON_IS_CLIENT,
-                Messages.format(wedding)));
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_IS_CLIENT);
     }
 
     @Test
@@ -211,8 +210,7 @@ public class DeleteCommandTest {
         Set<Index> invalidWeddingIndices = Set.of(Index.fromOneBased(2)); // Non-assigned wedding index
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, null, invalidWeddingIndices);
 
-        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_NOT_ASSIGNED_WEDDING
-            + "\n" + Messages.format(elleWeddingCopy));
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_NOT_ASSIGNED_WEDDING);
     }
 
     @Test
