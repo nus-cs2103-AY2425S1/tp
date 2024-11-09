@@ -36,10 +36,10 @@ public class AddCommand extends Command {
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add a new transaction.\n"
             + "Parameters: " + "INDEX (must be a positive integer) " + PREFIX_AMOUNT + "AMOUNT " + PREFIX_DESCRIPTION
-            + "DESCRIPTION " + "[" + PREFIX_DATE + "DATE] " + "[" + PREFIX_STATUS
-            + "STATUS] " + PREFIX_CATEGORY + "FOOD\n" + "Example: " + COMMAND_WORD
-            + " 1 " + PREFIX_AMOUNT + "10.00 " + PREFIX_DESCRIPTION + "Paid John for lunch " + PREFIX_DATE
-            + "23012024 " + PREFIX_CATEGORY + "FOOD " + PREFIX_STATUS + "Not Done";
+            + "DESCRIPTION " + "[" + PREFIX_DATE + "DATE] " + "[" + PREFIX_CATEGORY + "CATEGORY] " + "["
+            + PREFIX_STATUS + "STATUS]\n" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_AMOUNT + "10.00 "
+            + PREFIX_DESCRIPTION + "Paid John for lunch " + PREFIX_DATE + "23012024 " + PREFIX_CATEGORY + "FOOD "
+            + PREFIX_STATUS + "Not " + "Done";
 
     private final Transaction transaction;
 
