@@ -51,11 +51,11 @@ public class ParserUtil extends BaseParserUtil {
      */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
-        description = description.trim();
-        if (!Description.isValidDescription(description)) {
+        String trimmedDescription = ParserUtil.parseEscapedSlashes(description.trim());
+        if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Description(description);
+        return new Description(trimmedDescription);
     }
 
     /**
