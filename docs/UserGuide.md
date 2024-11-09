@@ -188,13 +188,8 @@ First-time users are strongly encouraged to read the Getting Started section bef
    Some example commands you can try:
 
 * `list` : Lists all contacts.
-<<<<<<< HEAD
-* `addTut c/CS2103T id/T1001` : Adds a tutorial of name `CS2103T` and tutorial id `T1001`.
-* `addStu n/Samson s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
-=======
 * `addTut c/CS2103T c/T1001` : Adds a tutorial of name `CS2103T` and tutorial id `T1001`.
-* `add n/Samson  s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
->>>>>>> fe7a195039dff2f88c66801eb4ee09b2f6ce3558
+* `addStu n/Samson s/A1234567X c/T1001` : Adds a student to the application and assigns him to tutorial with tutorial id `T1001`.
 * `markAtt s/A1234567X c/T1001 d/2024-01-24`: Adds student of id `A1234567X` attendance to the tutorial id `T1001` on the date `2024-01-24`.
 * `clear` : Deletes all contacts.
 * `exit` : Exits the app.
