@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -185,5 +186,17 @@ public class ModelManagerTest {
         );
     }
 
+    @Test
+    public void isBackupAvailable_backupDoesNotExist_returnsFalse() {
+        // Check for a backup at an index that was not created
+        assertFalse(modelManager.isBackupAvailable(0));
+    }
+
+    @Test
+    public void restoreBackup_backupNotAvailable_throwsIoException() {
+        // Attempt to restore a backup that doesn't exist
+        int backupIndex = 0;
+        assertThrows(IOException.class, () -> modelManager.restoreBackup(backupIndex));
+    }
 
 }

@@ -227,7 +227,6 @@ public class ModelManager implements Model {
      */
     @Override
     public void deletePerson(Person target) {
-        triggerBackup("delete_" + target.getName().fullName, target);
         addressBook.removePerson(target);
         calendar.deleteAppointment(target);
     }
@@ -445,4 +444,13 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(otherModelManager.filteredPersons)
                 && calendar.equals(otherModelManager.calendar);
     }
+
+    @Override
+    public boolean isBackupAvailable(int index) {
+        if (storage == null) {
+            return false;
+        }
+        return backupManager.isBackupAvailable(index);
+    }
+
 }

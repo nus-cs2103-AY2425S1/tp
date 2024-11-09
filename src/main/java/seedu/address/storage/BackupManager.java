@@ -304,4 +304,23 @@ public class BackupManager {
             return FileTime.fromMillis(0);
         }
     }
+
+    /**
+     * Checks whether a backup file exists at the specified index.
+     * This method scans the backup directory to determine if a backup
+     * corresponding to the given index is available.
+     *
+     * @param index The index of the backup to check.
+     * @return {@code true} if a backup exists at the specified index, {@code false} otherwise.
+     * @throws IOException If an error occurs while accessing the backup directory.
+     */
+    public boolean isBackupAvailable(int index) {
+        try (Stream<Path> backups = Files.list(backupDirectory)) {
+            return backups.anyMatch(path -> extractIndex(path) == index);
+        } catch (IOException e) {
+            logger.warning("Failed to check backup availability: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

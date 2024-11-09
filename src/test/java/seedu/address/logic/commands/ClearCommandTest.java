@@ -55,7 +55,15 @@ public class ClearCommandTest {
         ModelManagerWithBackupCount expectedModel =
                 (ModelManagerWithBackupCount) createModelWithAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        String description = "clear";
+        int expectedBackupIndex = 1;
+
+        // Increment backup count in expected model
+        expectedModel.backupData(description);
+
+        String expectedMessage = String.format(ClearCommand.MESSAGE_SUCCESS, expectedBackupIndex, description);
+
+        assertCommandSuccess(new ClearCommand(), model, expectedMessage, expectedModel);
 
         // Verify a backup was created before clearing
         assertEquals(1, model.getBackupCount(), "Backup should be created once before clearing");
@@ -72,7 +80,15 @@ public class ClearCommandTest {
                 (ModelManagerWithBackupCount) createModelWithAddressBook(getTypicalAddressBook());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        String description = "clear";
+        int expectedBackupIndex = 1;
+
+        // Increment backup count in expected model
+        expectedModel.backupData(description);
+
+        String expectedMessage = String.format(ClearCommand.MESSAGE_SUCCESS, expectedBackupIndex, description);
+
+        assertCommandSuccess(new ClearCommand(), model, expectedMessage, expectedModel);
 
         // Verify a backup was created before clearing
         assertEquals(1, model.getBackupCount(), "Backup should be created once before clearing");

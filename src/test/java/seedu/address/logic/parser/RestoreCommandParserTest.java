@@ -18,7 +18,7 @@ public class RestoreCommandParserTest {
     @Test
     public void parse_validIndex_returnsRestoreCommand() throws Exception {
         int index = 3;
-        RestoreCommand expectedCommand = new RestoreCommand(index);
+        RestoreCommand expectedCommand = new RestoreCommand(index, false);
         RestoreCommand actualCommand = parser.parse(" " + index);
         assertEquals(expectedCommand, actualCommand);
     }
@@ -31,8 +31,12 @@ public class RestoreCommandParserTest {
         // Negative index
         assertThrows(ParseException.class, () -> parser.parse("-1"));
 
-        // Index out of range
+        // Index out of range (negative)
+        assertThrows(ParseException.class, () -> parser.parse("-5"));
+
+        // Index out of range (too large)
         assertThrows(ParseException.class, () -> parser.parse("10"));
+        assertThrows(ParseException.class, () -> parser.parse("100"));
     }
 
     @Test
