@@ -398,8 +398,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. PlanPal should not rely on external database
 6. PlanPal should work on Windows, Linux and OS-X systems
 7. PlanPal should not depend on a remote server
-8. Third party frameworks/libraries/services used must be
-9. Free, open source and have permissive licence terms
+8. Third party frameworks/libraries/services used must be free, open source and have permissive licence terms
 10. Do not require installation by user
 11. Do not violate other constraints
 12. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
