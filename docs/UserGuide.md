@@ -147,7 +147,7 @@ Format: `list all`
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILL]…​`
+Format: `edit contact INDEX [n/NAME] [p/PHONE] [e/EMAIL] [s/SKILL]…​`
 
 * Edits the contact at the specified `INDEX`. The index refers to the index number shown in the displayed contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -157,8 +157,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILL]…​`
     specifying any skills after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower s/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing skills.
+*  `edit contact 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st contact to be `91234567` and `johndoe@example.com` respectively.
+*  `edit contact 2 n/Betsy Crower s/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing skills.
 
 ### Locating contacts by name : `find`
 
@@ -354,25 +354,25 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                 |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**    | `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com r/copywriter s/MSWord`                        |
-| **Add Job**        | `add job n/NAME c/COMPANY s/SALARY d/DESCRIPTION [r/REQUIREMENT]…​` <br> e.g., `add job n/Software Engineer c/Google s/2000 d/Needs to know AI r/Python`                         |
+| Action             | Format, Examples                                                                                                                                                              |
+|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**    | `add contact n/NAME p/PHONE_NUMBER e/EMAIL r/ROLE [s/SKILL]…​` <br> e.g., `add contact n/James Ho p/22224444 e/jamesho@example.com r/copywriter s/MSWord`                     |
+| **Add Job**        | `add job n/NAME c/COMPANY s/SALARY d/DESCRIPTION [r/REQUIREMENT]…​` <br> e.g., `add job n/Software Engineer c/Google s/2000 d/Needs to know AI r/Python`                      |
 | **Add Company**    | `add company n/NAME a/ADDRESS b/BILLING_DATE p/PHONE` <br> e.g., `add company n/Google a/70 Pasir Panjang Rd #03-71 Mapletree Business City II, Singapore 117371 b/5 p/65218000` |
-| **List Contacts**  | `list contact`                                                                                                                                                                   |
-| **List Jobs**      | `list job`                                                                                                                                                                       |
-| **List Companies** | `list company`                                                                                                                                                                   |
-| **Clear**          | `clear`                                                                                                                                                                          |
-| **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`                                                                                                                              |
-| **Delete Job**     | `delete job INDEX` <br> e.g., `delete job 2`                                                                                                                                     |
-| **Delete Company** | `delete company INDEX` <br> e.g., `delete company 2`                                                                                                                             |
-| **Screen Job**     | `screen job INDEX` <br> e.g., `screen job 1`                                                                                                                                     |
-| **Match**          | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                           |
-| **Unmatch**        | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                       |
-| **View Company**   | `view company INDEX` <br> e.g., `view company 1`                                                                                                                                 |
-| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                      |
-| **Find Contact**   | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`                                                                                                       |
-| **Help**           | `help`                                                                                                                                                                           |
-| **Exit**           | `exit`                                                                                                                                                                           |
-| **Stats**          | `stats`                                                                                                                                                                          |
+| **List Contacts**  | `list contact`                                                                                                                                                                |
+| **List Jobs**      | `list job`                                                                                                                                                                    |
+| **List Companies** | `list company`                                                                                                                                                                |
+| **Clear**          | `clear`                                                                                                                                                                       |
+| **Delete Contact** | `delete contact INDEX`<br> e.g., `delete contact 3`                                                                                                                           |
+| **Delete Job**     | `delete job INDEX` <br> e.g., `delete job 2`                                                                                                                                  |
+| **Delete Company** | `delete company INDEX` <br> e.g., `delete company 2`                                                                                                                          |
+| **Screen Job**     | `screen job INDEX` <br> e.g., `screen job 1`                                                                                                                                  |
+| **Match**          | `match CONTACT_INDEX JOB_INDEX` <br> e.g., `match 1 2`                                                                                                                        |
+| **Unmatch**        | `unmatch CONTACT_INDEX JOB_INDEX` <br> e.g., `unmatch 3 2`                                                                                                                    |
+| **View Company**   | `view company INDEX` <br> e.g., `view company 1`                                                                                                                              |
+| **Edit Contact**   | `edit contact INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit contact 2 n/James Lee e/jameslee@example.com`                                               |
+| **Find Contact**   | `find contact KEYWORD [MORE_KEYWORDS]`<br> e.g., `find contact James Jake`                                                                                                    |
+| **Help**           | `help`                                                                                                                                                                        |
+| **Exit**           | `exit`                                                                                                                                                                        |
+| **Stats**          | `stats`                                                                                                                                                                       |
 
