@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,8 +81,7 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        String jsonFilePath = "data/addressbook.json";
-
+        String jsonFilePath = DEFAULT_FILEPATH + DEFAULT_FILENAME + ".json";
         try {
             List<Map<String, String>> jsonData = readAndParseJson(jsonFilePath);
             Set<String> headers = extractHeaders(jsonData);
