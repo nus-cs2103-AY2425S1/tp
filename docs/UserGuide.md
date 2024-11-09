@@ -163,9 +163,15 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 
+<box type="tip" seamless>
+
+**Tip:**
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
+* Each of the optional fields can only be specified at most once. <br>
+e.g. `edit 1 -n Carmen -n Betsy` is an invalid command.
 * Existing values will be updated to the input values.
+</box>
 
 Valid Example (One field edited):
 * `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
@@ -180,6 +186,11 @@ Invalid Example:
 * `edit 1` 
 * This command will result in the following error message since at least one of the optional fields must be provided.
 ![EditPersonInvalid1.png](images/EditPersonInvalid1.png)
+
+Invalid Example (Multiple parameters:
+* `edit 1 -n Carmen -n Betsy -p 12345678 -p 87654321 -e example@email.com -e example@gmail.com -rs Brother -rs Mother`
+* This command will result in the following error message since each value should be edited at most once.
+![EditPersonInvalid2.png](images/EditPersonInvalid2.png)
 
 Invalid Example (Duplicate Persons):
 * Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` exists as the first contact.
@@ -284,6 +295,7 @@ Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION
 
 **Tip:** 
 * All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
+* The optional field `-a` can only be specified at most once.
 * Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
 Note that the indexes are separated by **spaces**.
 </box>
@@ -302,6 +314,11 @@ Invalid Example:
 * This command will result in the following error message since the list of indexes must be separated by whitespaces, not anything else like commas.
 ![EventCommandInvalid1.png](images/EventCommandInvalid1.png)
 
+Invalid Example:
+* `event -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -l Times Square -a 1 2 -a 4 5`
+* This command will result in the following error message since the optional field `-a` is specified more than once.
+![EventCommandInvalid2.png](images/EventCommandInvalid2.png)
+
 ### Updating an event: `update`
 
 Updates the details of an existing event in the address book.
@@ -318,6 +335,8 @@ remove attendees from an event, and can be used together with the `-a` flag. If 
 will be adding the person first, then removing them, i.e. they will not be present in the attendee list after the command executes.
 * Indexes supplied to the `NEW_ATTENDEES_INDICIES`  and `REMOVED_ATTENDEES INDICES` parameters must be based on existing contacts indexing in the Address Book.
 * Note that the indexes are separated by **spaces**.
+* Each of the optional fields can only be specified at most once. <br>
+e.g. `update -i 1 -n Birthday Party -n Dinner Party -a 1 -a 2` is an invalid command.
 </box>
 
 Valid Example (One field updated):
@@ -327,6 +346,11 @@ Valid Example (One field updated):
 Valid Example (Multiple field updated):
 * `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
 ![UpdateEventExample2.png](images/UpdateEventExample2.png)
+
+Invalid Example:
+* `update -i 3 -n New Year's Party -n Christmas Celebration -a 1 2 -a 4 5`
+* This command will result in the following error message since the optional fields `-n` and `-a` are specified more than once.
+![UpdateEventInvalid2.png](images/UpdateEventInvalid2.png)
 
 ### Clearing all events : `clear -e`
 
