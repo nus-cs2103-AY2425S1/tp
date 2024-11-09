@@ -101,10 +101,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` Component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a patient).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a patient).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -289,7 +289,7 @@ In future releases, additional features may be implemented.
 * Used to typing to fill out user information
 * Is comfortable using CLI
 
-**Value proposition**: 
+**Value proposition**:
 provides a patient management system for nurses to use which is faster than GUI/mouse driven apps
 
 
@@ -551,35 +551,24 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
-   
-   1. Open a terminal and navigate to the folder containing the jar file.
+   2. Open a terminal and navigate to the folder containing the jar file.
+   3. Run the command `java -jar NovaCare.jar`<br>Expected: The app launches with a set of sample patients. The window size may not be optimal.
 
-    1. Run the command `java -jar NovaCare.jar`<br>
-       Expected: The app launches with a set of sample patients. The window size may not be optimal.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   2. Re-launch the app by running the command `java -jar NovaCare.jar`.<br>Expected: The most recent window size and location is retained.
 
-   1. Re-launch the app by running the command `java -jar NovaCare.jar`.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+3._{ more test cases …​ }_
 
 ### Deleting a Patient
 
 1. Deleting a patient while all patients are being shown
 
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `delete 0`<br>
-      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+   2. Test case: `delete 1`<br>Expected: First contact is deleted from the list. Details of the deleted patient shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `delete 0`<br>Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>Expected: Similar to previous.
 
 ### Saving data
 
@@ -592,30 +581,54 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a task to a patient while all patients are being shown
 
-    1. Prerequisites: Patient should already exist in the list.
-
-    1. Test case: `addtask 1 d/Eat Medication`  
-       Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `addtask 0 d/Eat Medication`  
-       Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
-
-    1. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)  
-       Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
+   1. Prerequisites: Patient should already exist in the list.
+   2. Test case: `addtask 1 d/Eat Medication`<br>Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `addtask 0 d/Eat Medication`<br>Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
+   4. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
 
 ### Changing Priority Level
 
 1. Changing a priority level of a patient
 
-    1. Prerequisites: List all patients using the `list` command. Patient should already exist in the list.
-
-    1. Test case: `priority 1 l/2`  
-       Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated.
-
-    1. Test case: `priority 0 l/2`  
-       Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
-
-    1. Other incorrect priority commands to try: `priority`, `priority x l/`, `priority 1 l/` (where x is an invalid patient ID or the priority level is missing or invalid)  
-       Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
+   1. Prerequisites: List all patients using the `list` command. Patient should already exist in the list.
+   2. Test case: `priority 1 l/2`<br>Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `priority 0 l/2`<br>Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
+   4. Other incorrect priority commands to try: `priority`, `priority x l/`, `priority 1 l/` (where x is an invalid patient ID or the priority level is missing or invalid)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
 
 For additional commands and further testing guidelines, refer to Help section in NovaCare.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+This section outlines proposed improvements to address known feature flaws identified during testing and user feedback. Each planned enhancement targets a specific limitation in the current implementation, aiming to improve data accuracy, user experience, and overall system reliability. Below, we detail the issues and outline precise changes, including examples, to demonstrate how each improvement will better meet user needs.
+
+1. **Implement stricter email validation:**
+   * Currently, NovaCare's email validation only requires two alphanumeric characters for the `DOMAIN`, allowing invalid email formats such as `username@example`. This flaw compromises data accuracy and can lead to incorrect contact details, which is critical in a healthcare setting where reliable communication is essential.
+   * We plan to enhance the email validation logic to enforce a domain format of `<subdomain>.<top-level domain>`, in which the top-level domain label must be at least 2 characters long. Each domain label must start and end with alphanumeric characters and consist of alphanumeric characters, separated only by hyphens, if any.
+   * For example:
+     * :white_check_mark: `username1@example.sg`
+     * :white_check_mark: `username-2@example.com`
+     * :white_check_mark: `username-3@example.com`
+     * :white_check_mark: `username4@test.example.org"`
+     * :x: `username1@example`<br></br>
+2. **Implement more robust phone number validation:**
+   * Currently, NovaCare's phone number validation only requires for entries to be numeric, and at least 3 digits long. This means that the system accepts phone number entries that exceed the upper limit of possible phone number lengths, and also disallows entries that try and input country code, i.e. `+6512345678`, since phone numbers must be strictly numeric. This flaw could cause data entry errors, especially for international contacts.
+   * As phone numbers are both used in a patient's phone field and in the emergency contact number field, this flaw affects two fields in the addressbook.
+   * We plan to enhance the phone number validation logic to allow the usage of the `+` character only as the first character of the phone number, and to limit the length of the phone number entered.
+   * For example:
+     * :white_check_mark: `+6512345678`
+     * :white_check_mark: `+601123456789`
+     * :x: `111+111`
+     * :x: `11111111111111111111`<br></br>
+3. **Implement more robust name validation:**
+    * Currently, names in NovaCare can only contain alphanumeric characters and spaces, limiting inclusivity by excluding names with special characters such as hyphens or slashes. This flaw may reduce inclusivity, which is essential for a healthcare application.
+    * As names are both used in a patient's name field and in the emergency contact name field, this flaw affects two fields in the addressbook.
+    * We plan to enhance the name validation logic to allow the usage of the `-` and `/` character, but not as the first or lsat characters of any word in the name.
+    * For example:
+      * :white_check_mark: `Simon Andy-Fletcher`
+      * :white_check_mark: `Ravi s/o Indra`
+      * :x: `Timothy /Ng`
+      * :x: `-Lim En An`<br></br>

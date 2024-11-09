@@ -34,7 +34,7 @@ In this guide, users will be able to learn the following details:
       - 6.2.6 [Adding emergency contact](#6-2-6-adding-emergency-contact-emergency)
       - 6.2.7 [Deleting emergency contact](#6-2-7-deleting-emergency-contact-deleteemergency)
       - 6.2.8 [Adding priority level](#6-2-8-adding-priority-level-priority)
-      - 6.2.9 [Deleting priority level](#6-2-9-deleting-priority-level-deletelevel) 
+      - 6.2.9 [Deleting priority level](#6-2-9-deleting-priority-level-deletelevel)
     - 6.3 [Task commands](#6-3-task-commands)
       - 6.3.1 [Adding a task](#6-3-1-adding-a-task-addtask)
       - 6.3.2 [Deleting a task](#6-3-2-deleting-a-task-deletetask)
@@ -58,7 +58,6 @@ In this guide, users will be able to learn the following details:
    - 9.2 [Task-Related Commands](#9-2-task-related-commands)
    - 9.3 [Other Commands](#9-3-other-commands)
 10. [Glossary](#10-glossary)
-      
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -155,7 +154,7 @@ Here will be a basic guide on how to use the application.
    * Type the following command in the command box and press Enter to **add a patient**:
       > `add n/Johnson p/11111111 e/johnson123@gmail.com a/123 Clementi Rd, 1234665 t/Diabetic`
    * This example command adds a new patient named `Johnson` with phone number `11111111`, email `johnson123@gmail.com`, address `123 Clementi Rd, 1234665` and tagged as `Diabetic` to the system!
-<br></br>  
+<br></br>
 
 4. **Edit patient information**:
    * Type the following command in the command box and press Enter to **edit a patient's information**:
@@ -178,9 +177,9 @@ Here will be a basic guide on how to use the application.
 7. **Add a task**:
     * Type the following command in the command box and press Enter to **add a task to the patient**:
        > `addtask 1 d/Eat paracetamol 1000mg`
-    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of the addressbook, in this case being the patient `Lily` who was just added! 
+    * This example command adds a new task `Eat paracetamol 1000mg` for the patient at index 1 of the addressbook, in this case being the patient `Lily` who was just added!
 <br></br>
-   
+
 8. **Exit**:
     * Type the following command in the command box and press Enter to **exit the program**:
        > `exit`
@@ -256,7 +255,7 @@ In NovaCare, these commands will allow you to modify your list of patients to su
 <box type="info" seamless>
 
 **Note:**
-* For all commands, parts of the command in square brackets are optional parameters that can be included in or omitted from the command. 
+* For all commands, parts of the command in square brackets are optional parameters that can be included in or omitted from the command.
   * For example: `[t/TAG]`
 * Conversely, parts of the command not in square brackets are compulsory fields.
 </box>
@@ -270,7 +269,7 @@ Adds a patient's details to the system.
 <box type="info" seamless>
 
 **Note:**
-* Upon adding a patient the default priority is set to *3*. 
+* Upon adding a patient the default priority is set to *3*.
   * Users can change the priority level using the [`priority` command](#628-adding-priority-level-priority).
 * To update emergency contact details, use the [`emergency` command](#626-adding-emergency-contact-emergency).
 * A patient will not be added if the name and phone number is already in the system.
@@ -296,7 +295,7 @@ Expected output:
 ```
 New patient added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
 New patient added: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; Address: Blk 50 Tampines Street 21, #08-281; Tags: [Diabetic]
-New patient added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags: 
+New patient added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags:
 ```
 <br>
 
@@ -339,7 +338,7 @@ Examples:
 Expected output:
 ```
 Edited Patient: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
-Edited Patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
+Edited Patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags:
 ```
 <br>
 
@@ -389,7 +388,7 @@ Deletes the specified patient and tasks associated to that patient from the syst
 <box type="warning" seamless>
 
 **Warning:**
-Deleting a patient will also **delete all tasks associated with that patient**. 
+Deleting a patient will also **delete all tasks associated with that patient**.
 </box>
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the system.
@@ -457,7 +456,7 @@ Adds a priority level to a patient in the system.
 
 **Note:**
 * Adds a priority level at the specified `INDEX`.
-* The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`. 
+* The `l/` prefix refers to the lowercase letter `l`, not the uppercase letter `I`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The priority level **must be a positive integer** and only from **1, 2, 3**
@@ -690,7 +689,7 @@ Clears all patient and tasks entry from NovaCare.
 <box type="warning" seamless>
 
 **Warning:**
-Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare. 
+Using this command will **CLEAR ALL PATIENT AND TASK RECORDS** in the NovaCare.
 **This action is irreversible!**
 </box>
 
