@@ -983,11 +983,11 @@ This appendix provides an overview of the effort and complexity involved in modi
    
 ### Storage
 1. With the addition of the `Appointment` class, we had to learn how the JSON format worked, and how we could utilise its functionalities to allow for the successful storing and reading of data, now that every `Person` has an `Appointment` field.
-2. It was necessary to get a basic understanding of how Json files work. Upon creating our new Json class that adapts to appointment, a weak understanding of @JsonCreator property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
+2. It was necessary to get a basic understanding of how JSON files work. Upon creating our new Json class that adapts to appointment, a weak understanding of `@JsonCreator` property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
 
 ### UI
 1. UI Design required good understanding and identification of the relevant dependencies on the corresponding .fxml and .css files.
 2. To restructure and customise the UI, a firm understanding of UI elements such as the HBox, VBox and Stackpanes is necessary to layout the UI elements according. There was particularly a struggle understanding the effects of the growing Hbox and Vbox, as the space occupied is unexpected.
-3. Choice or colour to make the app aesthetic is also non-trivial
-4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements
+3. Choice or colour to make the app aesthetic is also non-trivial as it is difficult to find matching colours that are aesthetic.
+4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements.
 
