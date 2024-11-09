@@ -33,8 +33,7 @@ public class DesiredRole {
      * Returns true if a given string is a valid desired role.
      */
     public static boolean isValidDesiredRole(String test) {
-        assert test != null : "String for validation cannot be null";
-        return test.matches(VALIDATION_REGEX);
+        return test != null && test.matches(VALIDATION_REGEX);
     }
 
     @Override
