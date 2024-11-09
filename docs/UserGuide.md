@@ -11,22 +11,23 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
    1. [Viewing help](#viewing-help--help)
    2. [Adding a person](#adding-a-person-add)
    3. [Listing all persons](#listing-all-persons--list)
-   4. [Editing a person](#editing-a-person--edit)
-   5. [Grouping students together](#grouping-students-together-group)
-   6. [Locating persons by name](#locating-persons-by-name-find)
-   7. [Locating groups by name](#locating-groups-by-name-findgroup)
-   8. [Adding a tag](#adding-a-tag-tag)
-   9. [Deleting a tag](#deleting-a-tag-untag)
-   10. [Deleting a person](#deleting-a-person-delete)
-   11. [Deleting a group](#deleting-a-group-deletegroup)
-   12. [Import students](#import-students-import-csv_file_location)
-   13. [Export students](#export-students-export)
-   14. [Clearing all entries](#clearing-all-entries--clear)
-   15. [Exiting the program](#exiting-the-program--exit)
-   16. [Saving the data](#saving-the-data)
-   17. [Editing the data file](#editing-the-data-file)
-   18. [Exported csv data file location](#exported-csv-data-file-location)
-   19. [Archiving data files](#archiving-data-files-coming-in-v20)
+   4. [Listing all groups](#listing-all-groups--listgroups)
+   5. [Editing a person](#editing-a-person--edit)
+   6. [Grouping students together](#grouping-students-together-group)
+   7. [Locating persons by name](#locating-persons-by-name-find)
+   8. [Locating groups by name](#locating-groups-by-name-findgroup)
+   9. [Adding a tag](#adding-a-tag-tag)
+   10. [Deleting a tag](#deleting-a-tag-untag)
+   11. [Deleting a person](#deleting-a-person-delete)
+   12. [Deleting a group](#deleting-a-group-deletegroup)
+   13. [Import students](#import-students-import-csv_file_location)
+   14. [Export students](#export-students-export)
+   15. [Clearing all entries](#clearing-all-entries--clear)
+   16. [Exiting the program](#exiting-the-program--exit)
+   17. [Saving the data](#saving-the-data)
+   18. [Editing the data file](#editing-the-data-file)
+   19. [Exported csv data file location](#exported-csv-data-file-location)
+   20. [Archiving data files](#archiving-data-files-coming-in-v20)
 3. [FAQ](#faq)
 4. [Known issues](#known-issues)
 5. [Command summary](#command-summary)
@@ -134,6 +135,16 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 ![List](images/List.png)
+
+<div style="page-break-after: always"></div>
+
+## Listing all groups : `listGroups`
+
+Shows a list of all groups in the Goon Book.
+
+Format: `listGroups`
+
+![List](images/ListGroup.png)
 
 <div style="page-break-after: always"></div>
 
@@ -381,13 +392,14 @@ _Details coming soon ..._
 | **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                    |
 | **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
 | **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER][c/CLASS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee c/4L`                           |
-| **Export**       | `export`                                                                                                               |
+| **Export Students** | `export`                                                                                                               |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                             |
 | **Find Group**   | `findGroup [g/GROUP_NAME]` <br> e.g., `findGroup g/studygroup1`                                                        |
 | **Delete Group** | `deleteGroup [g/GROUP_NAME]` <br> e.g., `deleteGroup g/studygroup1`                                                    |
-| **Group**        | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie s/Martin s/Jianbing s/Shaun s/Wenjie` |
+| **Create Group** | `group [g/GROUP_NAME] [s/STUDENT_NAMES]` <br> e.g., `group g/studygroup1 s/Annie s/Martin s/Jianbing s/Shaun s/Wenjie` |
 | **Import**       | `import FILELOCATION` <br> e.g., `import /users/shaun/desktop/tp/test.csv`                                             |
-| **List**         | `list`                                                                                                                 |
+| **List Students**| `list`                                                                                                                 |
+| **List Groups**  | `listGroups`                                                                                                           |
 | **Tag**          | `tag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                       |
 | **Untag**        | `untag [STUDENT_INDEX] [t/TAG_NAME]` <br> e.g., `tag 2 t/HighAchiever t/SecondTag`                                     |
 | **Help**         | `help`                                                                                                                 |
