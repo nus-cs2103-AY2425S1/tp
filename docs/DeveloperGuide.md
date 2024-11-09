@@ -1265,11 +1265,11 @@ monthly payment date, monthly rent amount, deposit amount and customers will be 
 
 #### Find a [_clients_](#glossary-client)
 
-<!-- TODO!! @Nathan --> 
+<!-- TODO!! @Nathan -->
 
 #### Find a client's [_rental information_](#glossary-rental-information)
 
-<!-- TODO!! @Nathan --> 
+<!-- TODO!! @Nathan -->
 
 #### Deleting a [_client_](#glossary-client)
 
@@ -1609,14 +1609,6 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
     2. Test case: `exit`
        Expected: The application will exit and be closed safely.
 
-#### Saving data
-
-<!-- TODO!! @Anybody --> 
-
-1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ### Appendix: Future Enhancements
@@ -1625,7 +1617,7 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
 
 <d-table>
 
-| Parameter        | Description            | Additional Constraints                                                                                                                                          | Examples               | 
+| Parameter        | Description            | Additional Constraints                                                                                                                                          | Examples               |
 |------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
 | `[NAME]`         | Client's name          | Accommodate special characters in names, which includes, but not limited to `/` , `'`, `.`, `;`                                                                 | `Ravi S/O Ramasamy`    |
 | `[PHONE_NUMBER]` | Client's phone number  | Accommodate country code, which includes, but not limited to `+65` and limit to a certain number of characters such as 8 characters only for Singapore numbers. | `98765421`             |
