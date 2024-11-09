@@ -69,23 +69,33 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
-| Action                                                             | Format, Examples                                                                                                                                                                                 |
-|--------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **[Help](#viewing-help-help)**                                     | `help`                                                                                                                                                                                           |
-| **[Add](#adding-a-contact-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June`     |
-| **[Delete](#deleting-a-contact-del-followed-by-y-or-n)**           | `del n/NAME` followed by `y` or `n`<br> e.g., `del n/John Doe` followed by `y`                                                                                                                   |
-| **[Edit](#editing-a-contact-edit)**                                | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                                 |
-| **[List](#listing-all-contacts-list)**                             | `list`                                                                                                                                                                                           |
+| Action                                                             | Format, Examples                                                                                                                                                                            |
+|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help-help)**                                     | `help`                                                                                                                                                                                      |
+| **[Add](#adding-a-contact-add)**                                   | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June & James`          |
+| **[Delete](#deleting-a-contact-del-followed-by-y-or-n)**           | `del n/NAME` followed by `y` or `n`<br> e.g., `del n/John Doe` followed by `y`                                                                                                              |
+| **[Edit](#editing-a-contact-edit)**                                | `edit n/NAME [new/NEW_NAME] [p/NEW_PHONE] [e/NEW_EMAIL] [a/NEW_ADDRESS] [j/NEW_JOB]`<br> e.g.,`edit n/John new/James Lee e/jameslee@example.com`                                            |
+| **[List](#listing-all-contacts-list)**                             | `list`                                                                                                                                                                                      |
 | **[Add Wedding](#adding-a-wedding-add-wed--aw)**                   | `add-wed w/NAME & NAME v/VENUE d/DATE` or `aw w/NAME & NAME v/VENUE d/DATE` <br> e.g., `add-wed w/ John & June v/Orchard Hotel d/12/12/2030` or `aw w/ John & June v/Orchard Hotel d/12/12/2030` |
-| **[Delete Wedding](#deleting-a-wedding-del-wed--dw)**              | `del-wed w/NAME & NAME` or `dw w/NAME & NAME` followed by `y` or `n`<br> e.g., `del-wed w/John Loh & Jean Tan` or `dw w/John Loh & Jean Tan` followed by `y`                                                                                                                             |
-| **[List Weddings](#listing-all-weddings-list-wed--lw)**            | `list-wed` or `lw`                                                                                                                                                                               |
-| **[Add Tag](#adding-tags-to-a-contact-tag-add--ta)**               | `tag-add n/NAME t/TAG...` or `ta n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James`                                                               |
-| **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James`                                                               |
-| **[Filter](#filtering-contacts-by-name-and-job-filter--fil)**      | `filter n/KEYWORD` or `filter j/KEYWORD` or `fil n/KEYWORD` <br> e.g., `filter n/John` or `filter j/Photographer` or `fil n/Harry`                                                               |
-| **[View Wedding](#view-wedding-view-wed--vw)**                     | `view-wed NAME & NAME` or `vw NAME & NAME` <br> e.g., `view-wed John & Sarah` or `vw John & Sarah`                                                                                               |
-| **[Clear](#clearing-all-entries-clear-ab--cab-and-clear-wb--cwb)** | `clear-ab` or `cab` for address book and `clear-wb` or `cwb` for wedding book followed by `y` or `n`                                                                                             |
-| **[Exit](#exiting-the-program-exit)**                              | `exit`                                                                                                                                                                                           |
+| **[Delete Wedding](#deleting-a-wedding-del-wed--dw)**              | `del-wed w/NAME & NAME` or `dw w/NAME & NAME` followed by `y` or `n`<br> e.g., `del-wed w/John Loh & Jean Tan` or `dw w/John Loh & Jean Tan` followed by `y`                                |
+| **[List Weddings](#listing-all-weddings-list-wed--lw)**            | `list-wed` or `lw`                                                                                                                                                                          |
+| **[Add Tag](#adding-tags-to-a-contact-tag-add--ta)**               | `tag-add n/NAME t/TAG...` or `ta n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June & James` or `ta n/John Doe t/June & James`                                                          |
+| **[Deleting Tags](#deleting-tags-from-a-contact-tag-del--td)**     | `tag-del n/NAME t/TAG...` or `td n/NAME t/TAG...` <br> e.g., `tag-del n/John Doe t/June & James` or `td n/John Doe t/June & James`                                                          |
+| **[Filter](#filtering-contacts-by-name-and-job-filter--fil)**      | `filter n/KEYWORD` or `filter j/KEYWORD` or `fil n/KEYWORD` <br> e.g., `filter n/John` or `filter j/Photographer` or `fil n/Harry`                                                          |
+| **[View Wedding](#view-wedding-view-wed--vw)**                     | `view-wed NAME & NAME` or `vw NAME & NAME` <br> e.g., `view-wed John & Sarah` or `vw John & Sarah`                                                                                          |
+| **[Clear](#clearing-all-entries-clear-ab--cab-and-clear-wb--cwb)** | `clear-ab` or `cab` for address book and `clear-wb` or `cwb` for wedding book followed by `y` or `n`                                                                                        |
+| **[Exit](#exiting-the-program-exit)**                              | `exit`                                                                                                                                                                                      |
 --------------------------------------------------------------------------------------------------------------------
+
+<box type="important" seamless>
+
+**IMPORTANT:**
+
+* Feel free to use this table and navigate to the features that interests you by clicking on the action words 😁 
+
+* 
+</box>
+
 ## Features
 
 <box type="info" seamless>
@@ -94,6 +104,8 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* KnottyPlanners do not accept any empty parameters, hence, please add in a placeholder value that you choose to replace an empty input (e.g. `p/000` or `a/nil` ).
 
 * Tags in KnottyPlanners are used exclusively to tag person to wedding, hence both wedding name and tag names should be 2 person names separated with a & (e.g. `John Loh & Jean Tan`, `Stacy & Sam`).
 
@@ -139,7 +151,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 **IMPORTANT:**
 
 * If you are worried about adding duplicated people, fret not! KnottyPlanners will alert you when an identical person is added
-* We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊
+* We will also alert you when you add a different person with the same name, we need your help to change their input name in these situations 😊 (e.g.`John 1` or `John from school`)    
 
 </box>
 
@@ -274,6 +286,7 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 * `dw w/NAME & NAME` MUST BE followed by either of the two commands, otherwise, following delete commands may be affected.
 * The wedding must be entered exactly as it was saved in the wedding book to successfully delete it.
+* As we do not have an edit wedding command, you will have to delete and add back the wedding if you would like to change wedding parameters
 
 </box>
 
@@ -320,6 +333,8 @@ Format: `tag-add n/NAME t/TAG...` / `ta n/NAME t/TAG...`
 * The name of the tag must match the wedding that you want to add the contact to.
 
 * You can add one contact to multiple weddings in one go by specifying multiple tags in your command.
+
+* If multiple tags of the same wedding are added, KnottyPlanners will only process one and ignore the other tags for you. 
 
 </box>
 
