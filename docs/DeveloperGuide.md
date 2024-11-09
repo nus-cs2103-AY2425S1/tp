@@ -422,6 +422,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
   * 3c1. ContactMate shows an error message with the correct date format.  
   * Use case resumes from step 3\.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC02 \- List elderly contacts by priority**  
 **Actor: Staff**  
@@ -436,6 +437,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
       Use case ends.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC03 \- List individual elderly call history**  
 **Actor: Staff**  
@@ -461,6 +463,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
     * Use case resumes from step 2\.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC04 \- Delete elderly from the call list**  
 **Actor: Staff**  
@@ -486,6 +489,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
     * Use case resumes from step 2\.
 
+<br/><br/>
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
 **Actor: Staff**  
@@ -514,6 +518,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 	* 1d1. ContactMate shows a warning message that the elderly added has a matching name, phone number or email.  
 	* Use case resumes from step 2\.
 
+<br/><br/>
 **System: ContactMate**     
 **Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**      
 **Actor: Staff**    
@@ -548,6 +553,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2e1. ContactMate shows a warning message that the elderly has a matching name, phone number or email.
     * Use case resumes from step 3\.
 
+<br/><br/>
 **System: ContactMate**     
 **Use case: UC07 \- Search elderly by name or NRIC**    
 **Actor: Staff**  
@@ -562,6 +568,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
     Use case ends.
 
+<br/><br/>
 **System: ContactMate**      
 **Use case: UC08 \- Mark an elderly as called, given that elderly's name**      
 **Actor: Staff**        
