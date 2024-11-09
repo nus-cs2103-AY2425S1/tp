@@ -97,8 +97,8 @@ The table below provides a brief explanation of each parameter associated with a
 |---------------------|-------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
 | `NAME`              | The name of the person.                                           | - Must only contain alphanumeric characters and spaces <br/> - Compulsory field                                        | `John Doe`, `Elizabeth Chua`                                               |
 | `GENDER`            | The gender of the person.                                         | - Must be either `male` or `female`<br/> - Compulsory field                                                            | `male`, `female`                                                           |
-| `PHONE_NUMBER`      | The contact number of the person.                                 | - Must be exactly 8 digits long as according to Singapore's phone numbers - Compulsory field                           | `98765432`, `12345678`                                                     |
-| `EMAIL`             | The email address of the person.                                  | - Must be in the format `example@domain.com`<br/> - Compulsory field                                                   | `johnd@example.com`, `elizchua@yahoo.com`                                  |
+| `PHONE_NUMBER`      | The contact number of the person.                                 | - Must be exactly 8 digits long as according to Singapore's phone numbers<br/> - Compulsory field                      | `98765432`, `12345678`                                                     |
+| `EMAIL`             | The email address of the person.                                  | - Must be in the format `example@domain`<br/> - Compulsory field <br/> - Top-Level Domain optional                     | `johnd@example.com`, `elizchua@yahoo.com`                                  |
 | `ADDRESS`           | The residential address of the person.                            | - Any value is allowed <br/> - Compulsory field                                                                        | `311, Clementi Ave 2, #02-25`, `Blk 30 Lorong 3 Serangoon Gardens, #07-18` |
 | `SUBJECT`           | The subject taught by the teacher or taken by the student.        | - Must only contain alphanumeric characters and spaces <br/> - Compulsory field                                        | `Physics`, `English`                                                       |
 | `CLASSES`           | The classes associated with the person.                           | - Must only contain alphanumeric characters <br/> - Multiple classes are separates by a comma <br/> - Compulsory field | `7A`, `5A, 8C`                                                             |
@@ -117,7 +117,7 @@ The table below provides a brief explanation of each parameter associated with a
   e.g. in `add /name NAME`, `NAME` is a parameter which can be used as `add /name John Doe`.
 >
 >* Items in square brackets are optional.<br>
-  e.g `edit [/name NAME] [/contact PHONE_NUMBER]` can be used as `edit /name John` or as `edit /contact 94567732` or as `edit /name John /contact 94567732`.
+  e.g `edit INDEX [/name NAME] [/contact PHONE_NUMBER]` can be used as `edit 1 /name John` or as `edit 2 /contact 94567732` or as `edit /name John /contact 94567732`.
 >
 > * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[/tag TAG]…​` can be used as ` ` (i.e. 0 times), `/tag friend`, `/tag friend /tag family` etc.
@@ -147,6 +147,10 @@ Under the `File` menu, select `Change Theme` button to switch between the 2 diff
 
 ![change themes](images/Changing-Themes.png)
 
+### Command History:
+
+Allows users to view the previous commands entered in the command box by pressing the `Up` and `Down` arrow keys.
+
 ### Adding a student: `student`
 
 Adds a student to EduConnect.
@@ -164,6 +168,8 @@ Format: `student /name NAME /gender GENDER /contact PHONE_NUMBER /email EMAIL [/
 >
 > The address and attendance fields are optional when creating a student.
 > If not specified, attendance will default to 0.
+> 
+> Studen
 
 Example:
 * `student /name John Doe /gender male /contact 98765432 /email johnd@example.com /address 311, Clementi Ave 2, #02-25 /subject Physics /classes 7A,7B /attendance 0 /nok Bob Doe /emergency 87654321` Adds a student with:
@@ -214,7 +220,7 @@ Format: `list`
 
 Edits an existing student or teacher in EduConnect.
 
-Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tags TAGS] [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`
+Format: `edit INDEX [/name NAME] [/gender GENDER] [/contact PHONE] [/email EMAIL] [/address ADDRESS] [/subject SUBJECT] [/classes CLASSES] [/tag TAG] [/nok NEXT_OF_KIN] [/emergency EMERGENCY_CONTACT]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
