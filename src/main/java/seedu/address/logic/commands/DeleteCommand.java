@@ -18,13 +18,17 @@ import seedu.address.model.person.Person;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD_SHORT_FORM = "rm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the name shown in the displayed person list.\n"
+    public static final String MESSAGE_USAGE =
+        "Deletes the person identified by the name shown in the displayed person list.\n"
+            + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe";
+            + PREFIX_NAME + "John Doe\n"
+            + "Example: " + COMMAND_WORD_SHORT_FORM + " "
+            + PREFIX_NAME.getShortPrefix() + "John Doe";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 

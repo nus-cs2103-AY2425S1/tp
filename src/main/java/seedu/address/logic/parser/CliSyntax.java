@@ -6,14 +6,14 @@ package seedu.address.logic.parser;
 public class CliSyntax {
 
     /* Prefix definitions */
-    public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_ASSIGNMENT = new Prefix("asgn/");
-    public static final Prefix PREFIX_SCORE = new Prefix("s/");
-    public static final Prefix PREFIX_TELEGRAM = new Prefix("telegram/");
-    public static final Prefix PREFIX_GITHUB = new Prefix("github/");
-    public static final Prefix PREFIX_WEEK = new Prefix("w/");
-    public static final Prefix PREFIX_SORTORDER = new Prefix("order/");
-    public static final Prefix PREFIX_PATH = new Prefix("path/");
+    public static final Prefix PREFIX_NAME = new Prefix("name/", "n/");
+    public static final Prefix PREFIX_EMAIL = new Prefix("email/", "e/");
+    public static final Prefix PREFIX_TAG = new Prefix("tag/", "t/");
+    public static final Prefix PREFIX_ASSIGNMENT = new Prefix("assignment/", "a/");
+    public static final Prefix PREFIX_SCORE = new Prefix("score/", "s/");
+    public static final Prefix PREFIX_TELEGRAM = new Prefix("telegram/", "tele/");
+    public static final Prefix PREFIX_GITHUB = new Prefix("github/", "g/");
+    public static final Prefix PREFIX_WEEK = new Prefix("week/", "w/");
+    public static final Prefix PREFIX_SORTORDER = new Prefix("order/", "o/");
+    public static final Prefix PREFIX_PATH = new Prefix("path/", "p/");
 }

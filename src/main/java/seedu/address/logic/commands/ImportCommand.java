@@ -24,17 +24,20 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports person data from a CSV file.\n"
-        + "Parameters: FILE_PATH"
-        + "[" + PREFIX_PATH + "FILE_PATH]\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv";
+    public static final String COMMAND_WORD_SHORT_FORM = "im";
+
+    public static final String MESSAGE_USAGE = "Imports person data from a CSV file.\n"
+        + "Command: " + COMMAND_WORD + " or " + COMMAND_WORD_SHORT_FORM + "\n"
+        + "Parameters: " + PREFIX_PATH + "FILE_PATH\n"
+        + "Example: " + COMMAND_WORD + " " + PREFIX_PATH + "data/persons.csv\n"
+        + "Example: " + COMMAND_WORD_SHORT_FORM + " " + PREFIX_PATH.getShortPrefix() + "data/persons.csv";
     public static final String CORRECT_HEADER_USAGE =
         "Header of CSV file should be Name, Email, Telegram, Tags, Github, Assignments, WeeksPresent"
             + " (Case insensitive, Order sensitive)";
+    public static final String MESSAGE_READING_ERROR = "Error reading from the CSV file path: ";
     private static final String MESSAGE_INVALID_CSV = "Invalid CSV format, ensure that all necessary data are present.";
     private static final String MESSAGE_MISSING_PERSON_DATA = "There is no person data present.";
     private static final String MESSAGE_NULL_FIELDS = "Please ensure that there is no null fields";
-
     private final String csvFilePath;
 
     /**
@@ -79,20 +82,20 @@ public class ImportCommand extends Command {
             }
             model.replaceAllPersons(newPersons);
         } catch (IOException e) {
-            throw new CommandException("Error reading from the CSV file path: " + e.getMessage()
+            throw new CommandException(MESSAGE_READING_ERROR + e.getMessage()
                 + "\nPlease check file path provided again");
         } catch (DuplicatePersonException e) {
-            throw new CommandException("Error reading from the CSV file " + e.getMessage()
+            throw new CommandException(MESSAGE_READING_ERROR + e.getMessage()
                 + "\nPlease ensure that there are no duplicate person in the CSV file");
         } catch (CsvValidationException | CommandException e) {
-            throw new CommandException("Error reading from the CSV file: " + e.getMessage());
+            throw new CommandException(MESSAGE_READING_ERROR + e.getMessage());
         } catch (NullPointerException e) {
             throw new CommandException(MESSAGE_NULL_FIELDS);
         }
 
         // Replace all existing person with those present in the CSV file.
 
-        return new CommandResult(String.format("Successfully imported %d persons.", newPersons.size()));
+        return new CommandResult(String.format("Successfully imported %d person.", newPersons.size()));
     }
 
 
