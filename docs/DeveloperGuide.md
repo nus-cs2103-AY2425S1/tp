@@ -171,7 +171,7 @@ This section describes some noteworthy details on how certain features are imple
 
 **Target User Profile**:
 
-* Students or recent graduates who are actively looking for job opportunities, specifically internships in the tech industry.
+* Students who are actively looking for internship opportunities specifically in the tech industry.
 * Users who prefer using a desktop app over mobile or web applications.
 * Users comfortable with typing commands, benefiting from a Command Line Interface (CLI) for faster data entry.
 * Users looking for an organized way to manage a list of companies, contact statuses, and related job application data.
@@ -249,6 +249,9 @@ TechConnect assists students in managing and organizing their internship and job
     * 1b1. TC displays an error message.
     * Use case resumes at step 1.
 
+* 1c. User tries to edit the name of the company which matches another existing company.
+    * 1c1. TC displays an error message as no duplicate company names allowed.
+    * Use case resumes at step 1.
 ---
 
 **Use Case: UC3 - Bookmark a Company**
@@ -361,7 +364,7 @@ TechConnect assists students in managing and organizing their internship and job
     - **Edge Case**: Attempting to bookmark an already bookmarked company should display a notification.
 
 2. **Finding Companies**:
-    - Use `find TAG/NAME` to search.
+    - Use `find` to search.
     - **Expected Result**: Only companies matching the search criteria are displayed.
     - **Edge Case**: Searching for non-existent terms should display a "No matches found" message.
 ---

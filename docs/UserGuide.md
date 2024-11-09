@@ -130,12 +130,12 @@ p/1234567 t/salary_high cp/www.meta-career-url.com r/Leading tech company
 ### Special Tag Values
 
 When using the `add` command, certain **tags** have special values.
-Each Company can only have 1 tag for each type (can't have 2 Salary Tags)
-any extra tags will be ignored
+Each Company can only have 1 tag for each type (e.g. can't have 2 Salary Tags)
+**only the first tag value will be recorded** and any extra tags will be ignored
 
 Below are the supported categories:
 
-##### Salary, Work-Life Balance, and Interview Difficulty Tags
+##### 1. Salary, Work-Life Balance, and Interview Difficulty Tags
 
 These tags represent qualitative levels. The valid VALUES for these tags are:
 
@@ -162,7 +162,7 @@ add n/Google p/98765432 e/google@example.com a/John street, block 123,
 
 ---
 
-##### **Period Tag**
+##### 2. **Period Tag**
 
 The **`Period`** tag is used to specify:
 
@@ -190,11 +190,11 @@ cp/www.shopee-career-url.com t/period_summer_2025
 
 - Only alphanumeric characters are allowed in the tag
 - If you attempt to create tags with values that aren't in the supported list given above, the tag will appear
-with whatever value you input. Example ```t/helloworld``` creates a tag called "helloworld"
+with whatever value you input. Example ```t/helloworld``` creates a tag called "helloworld".
 
 Other Invalid tag example:
-- . Trying to create a tag like ```t/mytag_high``` will fail as we will treat your tag value
-as ```mytag_high``` and the underscore is not a alphanumeric character
+- Trying to create a tag like ```t/mytag_high``` or ```t/mytag high```  will fail as we will treat your tag value
+as ```mytag_high``` and ```mytag high``` and the underscore/spacing is not a alphanumeric character
 
 [Back to Table of Contents](#table-of-contents)
 
