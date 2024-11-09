@@ -302,7 +302,7 @@ Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
 - Adds or updates a grade for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - `TEST_NAME` refers to the name of the test (e.g. Midterm Exam).
-- `SCORE` refers to the score obtained by the person, which must be between 0 and 100.
+- `SCORE` refers to the score obtained by the person, which must be between 0 and 100 inclusive.
 - `WEIGHTAGE` refers to the weightage of the test in percentage, which must be greater than 0 and less than or equal to 100.
 - If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
 
