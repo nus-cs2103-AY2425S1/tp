@@ -645,6 +645,35 @@ public class ExportCommandTest {
                 String.format(ExportCommand.INVALID_FILENAME_MESSAGE, '\\'), () -> exportCommand.execute(model));
     }
 
+    @Test
+    public void writeCsvFile_nullPath_throwsAssertionError() throws IOException {
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+
+        assertThrows(AssertionError.class, () ->
+                exportCommand.writeCsvFile(null, model.getFilteredStudentList()));
+    }
+
+    @Test
+    public void writeCsvFile_nullStudentList_throwsAssertionError() throws IOException {
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+        Path dataFile = dataDir.resolve("test.csv");
+
+        assertThrows(AssertionError.class, () ->
+                exportCommand.writeCsvFile(dataFile, null));
+    }
+
+    @Test
+    public void coursesToString_nullCourses_throwsAssertionError() {
+        Student sampleStudent = createSampleStudent();
+        model.addStudent(sampleStudent);
+        ExportCommand exportCommand = new ExportCommand("test", false, dataDir);
+
+        assertThrows(AssertionError.class, () ->
+                exportCommand.coursesToString(null));
+    }
+
     /**
      * Helper method to throw a fail
      * @param message Error message to pass to AssertionError

@@ -177,7 +177,13 @@ public class ExportCommand extends Command {
         return escapedData;
     }
 
-    private void writeCsvFile(Path filePath, List<Student> studentList) throws IOException {
+    /**
+     * Writes all Students in a given List into a CSV file saved at filePath
+     * @param filePath Location to save CSV file
+     * @param studentList List of Students whose details should be saved
+     * @throws IOException Throws IO Exception
+     */
+    public void writeCsvFile(Path filePath, List<Student> studentList) throws IOException {
         assert filePath != null : "File path cannot be null";
         assert studentList != null : "Student list cannot be null";
         logger.fine("Writing CSV file to: " + filePath);
@@ -200,7 +206,12 @@ public class ExportCommand extends Command {
         }
     }
 
-    private String coursesToString(Set<Course> courses) {
+    /**
+     * Helper function that collects a set of Courses into a string for exporting
+     * @param courses Set of Courses to be collected into a string
+     * @return String representing a set of Courses
+     */
+    public String coursesToString(Set<Course> courses) {
         assert courses != null : "Courses set cannot be null";
         return courses.stream()
                 .map(Course::toString)
