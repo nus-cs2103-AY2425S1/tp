@@ -119,7 +119,7 @@ Field Constraints:
 - `ROLE`: Must be either 'PATIENT' or 'CAREGIVER'
 - `NRIC`: NRIC constraints are in NRIC constraints section
 
-**The role must be either a patient or a caregiver**
+**The role must be either a patient or a caregiver or both**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
