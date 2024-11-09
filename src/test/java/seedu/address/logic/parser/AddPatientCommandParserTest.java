@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DOB_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DOB_YEAR_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -236,6 +237,13 @@ public class AddPatientCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_DOB_DESC + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 DateOfBirth.MESSAGE_CONSTRAINTS);
+
+        // invalid date of birth year
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + INVALID_DOB_YEAR_DESC + GENDER_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                DateOfBirth.MESSAGE_CONSTRAINTS);
+
+
 
         // invalid gender
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

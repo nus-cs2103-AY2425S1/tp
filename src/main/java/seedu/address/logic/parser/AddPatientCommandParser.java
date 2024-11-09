@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.format.DateTimeParseException;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -49,7 +50,12 @@ public class AddPatientCommandParser implements Parser<AddPatientCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        DateOfBirth dob = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
+        DateOfBirth dob = null;
+        try {
+            dob = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DOB).get());
+        } catch (DateTimeParseException e) {
+            throw new ParseException(String.format(DateOfBirth.MESSAGE_CONSTRAINTS, AddPatientCommand.MESSAGE_USAGE));
+        }
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
