@@ -699,13 +699,3 @@ Team size: 5
 * **Support for Special Characters in Contact Names**: The current address book functionality does not support certain special characters, such as "d/o" (daughter of). We plan to enhance the address book to allow the use of special characters in person names to better accommodate a wider range of user inputs. This will ensure that users from diverse cultural backgrounds, can accurately input and save their names without encountering errors.
 
 * **Error Handling for Invalid Contact Names in Search**: Currently, when a user attempts to find a contact using an invalid name (e.g., one containing special characters), the search is executed without displaying an error message. This can lead to confusion as no feedback is provided regarding the invalid input. We plan to improve this behavior by implementing a validation check for invalid contact names during the search operation. If a user attempts to search with an invalid name (such as "find -/Bob"), an error message will be displayed to inform the user that the name contains invalid characters
-
-
-
-
-
-
-
-
-
-
