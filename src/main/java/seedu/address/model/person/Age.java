@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Age {
     public static final String MESSAGE_CONSTRAINTS =
-           "Age should only contain numbers and should be between 1 to 999 inclusive";
+           "Age should only contain numbers and should be between 0 to 999 inclusive";
 
     /**
      * The first character of the address must not be a whitespace,
@@ -39,7 +39,7 @@ public class Age {
      */
     public static boolean isValidAge(String test) {
         String toTest = test.replaceFirst(REMOVE_STARTING_ZEROES_REGEX, "");
-        return toTest.matches(VALIDATION_REGEX) && parseInt(toTest) > 0 && parseInt(toTest) <= 999;
+        return toTest.matches(VALIDATION_REGEX) && parseInt(toTest) >= 0 && parseInt(toTest) <= 999;
     }
 
 

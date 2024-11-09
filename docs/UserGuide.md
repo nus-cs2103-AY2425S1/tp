@@ -148,7 +148,7 @@ Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [ap
 * Gender is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
 * NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier
 * Phone numbers should only contain numbers, and it should be `3-10` digits long.
-* Addresses can take any values. Case-sensitive.
+* Addresses can take any values except a whitespace followed by a character and '/' (Eg. 'samplepark a/fe' is not allowed). Case-sensitive.
 * Emails should be of the format local-part@domain. Case-sensitive.
 * Appointments should be in a format of `dd/MM/yyyy HH:mm`.
 * Tags are alphanumeric. Case-sensitive.
@@ -350,6 +350,7 @@ Format: `hours [o/OPENINGHOURS] [c/CLOSINGHOURS]`
 
 * Opening & Closing hours have to be of the format `HH:mm`.
 * Default Opening & Closing hours are `00:00` & `23:59` respectively.
+* Opening hours must fall before Closing hours.
 * If an argument is empty, it will set the hours to default.
 * All current appointments must fall within new operating hours for update to take effect.
 
