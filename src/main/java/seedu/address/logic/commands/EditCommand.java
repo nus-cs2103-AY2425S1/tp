@@ -142,9 +142,11 @@ public class EditCommand extends Command {
         Education updatedEducation = editPersonDescriptor.getEducation().orElse(personToEdit.getEducation());
         Grade updatedGrade = personToEdit.getGrade(); // edit command does not allow editing grade
         Name updatedParentName = personToEdit.getParentName(); // edit command does not allow editing parent name
+        boolean updatedIsPinned = personToEdit.isPinned(); // edit command does not allow editing is pinned
+        boolean updatedIsArchived = personToEdit.isArchived(); // edit command does not allow editing is archived
 
         return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedLessonTime, updatedEducation,
-                updatedGrade, updatedParentName, updatedTags);
+                updatedGrade, updatedParentName, updatedTags, updatedIsPinned, updatedIsArchived);
     }
 
     @Override
