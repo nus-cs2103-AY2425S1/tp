@@ -20,8 +20,8 @@ Class I #FFFFFF
 
 AbModelManager .up.|> AbModel
 TbModelManager .up.|> TbModel
-Model .down.|> AbModel
-Model .down.|> TbModel
+Model -down-|> AbModel
+Model -down-|> TbModel
 
 Class HiddenOutside #FFFFFF
 HiddenOutside .down.> Model
