@@ -164,20 +164,21 @@ Finds members whose names contain any of the given keywords.
 
 **Format:** `find_members KEYWORD [MORE_KEYWORDS]`
 
-<box type="tip" seamless>
+- **Case-Insensitive Search**: The search is case-insensitive, so `hans` will match `Hans`.
+- **Order of Keywords**: The order of the keywords does not matter, so `Hans Bo` will match both `Bo Hans` and `Hans Bo`.
+- **Full Word Matching**: Only full words will be matched, so `Han` will not match `Hans`.
+- **OR Search**: Members matching at least one keyword will be returned, using an OR search. For example, `Hans Bo` will return both `Hans Gruber` and `Bo Yang`.
 
-- The search is case-insensitive. e.g., `hans` will match `Hans`.
-- The order of keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
-- Only full words will be matched; e.g., `Han` will not match `Hans`.
-- Members matching at least one keyword will be returned (i.e., `OR` search).
+<box type="info" seamless>
+
+**Note:** The `find_members` command does not stack filters. Each use of `find_members` filters the **original full list** rather than further filtering any previously filtered list. If you need more specific results, combine keywords in a single `find_members` command.
 
 </box>
 
 **Examples:**
 
-- `find_members John` returns `John Doe`.
-- `find_members alex david` returns `Alex Yeoh` and `David Li`.
-
+- `find_members John` returns `john` and `John Doe`
+- `find_members alex david` returns `Alex Yeoh` and `David Li`<br>
   ![result for 'find_members alex david'](images/findAlexDavidResult.png)
 
 ---
