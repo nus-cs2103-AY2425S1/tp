@@ -330,7 +330,7 @@ For **all** use cases, the system is **SellSavvy** and the actor is the **user**
 **MSS**
 
 1.  User chooses to view the list of customers.
-2.  SellSavvy retrieves all customers from the database.
+2.  SellSavvy retrieves all customers from the data file.
 3.  SellSavvy displays all customers along with their details.
 
 Use case ends.
@@ -432,7 +432,7 @@ Use case ends.
 **MSS**
 
 1. User finds the customer index from the list.
-2. User adds the customer using the index, specifying the details of the order.
+2. User adds the order by specifying the customer using the index and details of the order.
 3. SellSavvy adds the order under the customer.
 4. SellSavvy confirms the addition by displaying the newly added order's details and customer's list of orders.
 
@@ -472,8 +472,8 @@ Use case ends.
 
 **MSS**
 
-1. User finds the customer index from the customer list.
-2. User inputs command to list all orders, by the index of customer in customer list.
+1. User finds the index of the customer in the customer list whose orders they want to view.
+2. User inputs command to list all orders under the index of customer.
 3. SellSavvy retrieves a list of all orders made by specified customer.
 4. SellSavvy displays the orders in a list in GUI.
 
@@ -552,7 +552,7 @@ Use case ends.
 **MSS**
 
 1. User finds the order they want to delete.
-2. User deletes the order by their index.
+2. User deletes the order by its index.
 3. SellSavvy updates the displayed list of orders that the action is successful.
 
 Use case ends.
