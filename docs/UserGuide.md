@@ -81,6 +81,15 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="warning" seamless>
+
+**Handling Errors In User Input:**
+* First checks for valid command. 
+* Then checks for presence of fields for that command.
+* Lastly checks if the command is run in the correct view (client VS transaction view).
+
+</box>
+
 ### General Commands
 
 #### Viewing help : `help`
@@ -154,7 +163,7 @@ Format: `list`
 **Tips:** Negative balances are red. Positive and zero balances are green.
 </box>
 
-![result for `listt`](images/listResult.png =600x)
+![result for `list`](images/listResult.png =600x)
 
 #### Editing a client : `edit`
 
@@ -171,7 +180,7 @@ Format: `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]
 
 <box type="warning" seamless>
 
-**Note:** `edit` can only be used in person list view.
+**Note:** `edit` can only be used in client list view.
 </box>
 
 Examples:
@@ -193,7 +202,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 <box type="warning" seamless>
 
-**Note:** `find` can only be used in person list view.
+**Note:** `find` can only be used in client list view.
 </box>
 
 Examples:
@@ -213,7 +222,7 @@ Format: `delete INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `delete` can only be used in person list view.
+**Note:** `delete` can only be used in client list view.
 </box>
 
 Examples:
@@ -238,7 +247,7 @@ e.g. `0.5`
 
 <box type="warning" seamless>
 
-**Note:** `addt` can only be used in person list view.
+**Note:** `addt` can only be used in client list view.
 </box>
 
 Examples:
@@ -258,11 +267,12 @@ Format: `listt INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `listt` can only be used in person list view.
+**Note:** `listt` can only be used in client list view.
 </box>
 
 Examples:
 * `list` followed by `listt 1` lists transactions for the 1st client in the application.
+  ![result for 'listt 1'](images/listt.png)
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st client in the results of the `find` command.
 
 #### Deleting Transactions for a specified client: `deletet`
@@ -380,7 +390,7 @@ Delete | `delete INDEX`
 
 **Transaction Commands**
 
-For Person List View | Format
+For Client List View | Format
 --------------------|--------
 Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 List Transactions | `listt INDEX`
