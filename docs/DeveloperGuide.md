@@ -324,6 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 2.
 
+*a. At any time, User chooses to cancel adding a contact Use case ends.
 
 ### **Use case 2: Delete contact**
 
