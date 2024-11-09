@@ -449,8 +449,17 @@ Format: `addAsg n/ASSIGNMENT_TITLE d/yyyy-MM-dd HHmm`
 
 Command Details & Constraints:
 * Create a new assignment with title ASSIGNMENT_TITLE and the specified due date.
-* Due date is in the format yyyy-MM-dd HHmm.
+* Assignment title specified cannot be empty.
 * Duplicate assignment titles are not allowed.
+  * Assignment titles are case-sensitive, where `Assignment 1` is different from `assignment 1`.
+  * e.g.: Command `addAsg n/Assignment 1 d/2024-05-05 1200` and `addAsg n/assignment 1 d/2024-05-05 1200` are allowed one after another.
+* The due date must be in the format `yyyy-MM-dd HHmm` and represent a valid date and time.
+  * Due date is valid if it corresponds to an actual date and time.
+    * `2024-02-30 1200` is invalid as 30th February does not exist.
+    * `2024-02-29 1200` is valid as 29th February 2024 exists.
+    * `2024-02-02 2401` and `2024-02-02 2400` are both invalid timings.
+  * A due date that has already passed is allowed, as tutors may need to add past assignments for record-keeping purposes.
+
 
 Example:
 1. `addAsg n/CS2103T Assignment 2 d/2024-10-25 2359`
@@ -486,6 +495,9 @@ Command Details & Constraints:
   * number of students who have completed the assignment
 
 
+>**Tip:** For sections 4.3.4 and 4.3.5, before using the `mark` and `unmark` commands, users should first run the `listAsg` command to view assignment names.
+
+
 #### 4.3.4 Mark an assignment: `markAsg`
 
 > Mark the status of the given assignment for the student at specified index as completed.
@@ -496,6 +508,7 @@ Command Details & Constraints:
 * Using the given index of the student, TrackMate will mark his/her assignment status as completed.
 * Assignment with the given title must exist.
 * Student at the specified index must exist.
+* Regardless of the previous assignment status, this command will show successful message for the ease of usage.
 
 Example:
 1. `markAsg 1 n/CS2103T Assignment 2`
@@ -512,6 +525,7 @@ Command Details & Constraints:
 * Using the given index of the student, TrackMate will mark his/her assignment status as not completed.
 * Assignment with the given title must exist.
 * Student at the specified index must exist.
+* Regardless of the previous assignment status, this command will show successful message for the ease of usage.
 
 Example:
 1. `unmarkAsg 1 n/CS2103T Assignment 2`
