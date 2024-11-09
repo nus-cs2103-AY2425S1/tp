@@ -6,13 +6,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the KonTActs.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
-    public static final String MESSAGE_USAGE = "Clears all entries from the address book.\n"
+    public static final String MESSAGE_SUCCESS = "KonTActs has been cleared!";
+    public static final String MESSAGE_USAGE = "Clears all entries from the KonTActs.\n"
         + "Command: " + COMMAND_WORD + "\n"
         + "Example: " + "clear";
 
