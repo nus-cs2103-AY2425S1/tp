@@ -52,13 +52,13 @@
 
           <!-- Right section for command box and result display -->
           <VBox HBox.hgrow="ALWAYS">
-            <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER" prefHeight="105" >
               <padding>
                 <Insets bottom="5" left="10" right="10" top="5" />
               </padding>
             </StackPane>
 
-            <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" >
               <padding>
                 <Insets bottom="5" left="10" right="10" top="5" />
               </padding>
