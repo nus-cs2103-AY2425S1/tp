@@ -109,7 +109,7 @@ Each command consists of a **command word**, and zero or more **parameters**.<br
   **Example:** If the command specifies `help 123`, it will be interpreted as `help`.
 
 
-<box type="warning" light seamless >
+<box type="warning" light >
 
 **Caution:**
 
@@ -126,7 +126,7 @@ If you are using a PDF version of this document, be careful when copying and pas
 A student has a **name**, **phone number**, **address**, **grade level** and optionally, a **group**. <br> Students with
 the same group name _(case-insensitive)_ will have synced [lessons](#lesson-commands).
 
-<box type="tip" light seamless >
+<box type="tip" light >
 
 **Note:**
 
@@ -156,6 +156,7 @@ Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS gl/GRADE_LEVEL [g/GROUP]`
 
 Examples:
 * `add n/John Doe p/98765432 a/John street, block 123, #01-01 gl/LCM 1`
+* `add n/Mary Sue p/87654321 a/Mary avenue, block 51, #10-10 gl/ABRSM 1 g/Mary's Group`
 
 <br>
 <br>
@@ -186,7 +187,7 @@ revert your action.
 
 Edits an existing student in the student directory.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [gl/GRADE_LEVEL] [g/GROUP]`
 
 * Edits the student at the specified `INDEX`.
 * If the group is left blank (`g/`), the student will be removed from any existing group.
@@ -195,8 +196,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [gl/GRADE_LEVEL] [g
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 n/Jane Doe p/91234567` Edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
-
+*  `edit 1 n/Jane Doe p/91234567` edits the name and phone number of the 1st student to be `Jane Doe` and `91234567` respectively.
+*  `edit 1 n/Penelope g/` removes the 1st student from their group, while also editing their name to be `Penelope`
 <br>
 <br>
 
@@ -210,7 +211,7 @@ Format: `assign INDEX pn/PIECE_NAME...`
 * Existing values will remain unchanged.
 
 Examples:
-*  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
+*  `assign 1 pn/Etude pn/Moonlight Sonata` adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
 
 <br>
 <br>
@@ -226,8 +227,8 @@ Format: `unassign INDEX [pn/PIECE_NAME]...`
 * If no piano pieces are provided, all piano pieces will be unassigned from the student.
 
 Examples:
-*  `unassign 1 pn/Etude pn/Moonlight Sonata` Removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
-
+*  `unassign 1 pn/Etude pn/Moonlight Sonata` removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
+*  `unassign 2` clears all the 2nd student's piano pieces.
 <br>
 <br>
 
@@ -250,7 +251,7 @@ Listed below are the currently supported lesson commands.
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **[Schedule](#scheduling-a-regular-lesson-schedule)** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.`schedule 1 d/Monday st/12:00 et/14:00`
-**[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 d/25-12-2022 st/12:00 et/14:00`
+**[Makeup](#scheduling-a-makeup-lesson-makeup)** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.`makeup 1 dt/25-12-2022 st/12:00 et/14:00`
 **[Cancel](#cancelling-a-lesson-cancel)** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g. `cancel 1 dt/14-10-2024 st/12:00`
 **[Uncancel](#uncancelling-a-cancelled-regular-lesson-uncancel)** |  `uncancel INDEX dt/DATE` <br> e.g. `uncancel 1 dt/14-10-2024`
 
@@ -284,10 +285,10 @@ Format: `makeup INDEX dt/DATE st/START_TIME et/END_TIME`
 * Schedules the makeup lesson for the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * Makeup lessons are shared across students in the same group.
 * `DATE` must be a valid date in the format `DD-MM-YYYY`.
-* `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`), and `START_TIME` must be before `END_TIME`.
+* `START_TIME` and `END_TIME` must be in 24-hour format (`HH:MM`) and `START_TIME` must be before `END_TIME`.
 
 Examples:
-* `makeup 1 dt/25-12-2022 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2022, 12-2pm for the 1st student.
+* `makeup 1 dt/25-12-2024 st/12:00 et/14:00` Schedules a makeup lesson on 25th December 2024, 12-2pm for the 1st student.
 
 <br>
 <br>
@@ -307,7 +308,15 @@ Format: `cancel INDEX dt/DATE st/START_TIME`
 
 
 Example:
-* `cancel 1 dt/15-10-2024 st/16:00` Cancels a lesson on 15-10-2024 (which is a Tuesday), starting at 4pm for the 1st student.
+* `cancel 1 dt/15-10-2024 st/16:00` Cancels a lesson on 15-10-2024, starting at 4pm for the 1st student.
+
+<box type="info" light theme="primary">
+
+**Tip:**
+
+The cancel command supports canceling both regular and makeup lessons!<br>
+Canceled makeup lessons will be removed, while canceled regular lessons appear as a list of dates in the displayed list.
+</box>
 
 <br> 
 <br>
@@ -429,7 +438,7 @@ Clears all entries from the student directory.
 
 Format: `clear`
 
-<box type="warning" light seamless >
+<box type="warning" light >
 
 **Caution:**
 
