@@ -911,7 +911,6 @@ testers are expected to do more *exploratory* testing.
     2. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar EduManage.jar` command to run the application.
        Expected: A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
        ![Ui](images/Ui.png)
-       
        <br>
 
 2. Saving window preferences
