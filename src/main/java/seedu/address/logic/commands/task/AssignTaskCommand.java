@@ -112,11 +112,7 @@ public class AssignTaskCommand extends Command {
         if (other == this) {
             return true;
         }
-
-        if (!(other instanceof AssignTaskCommand otherCommand)) {
-            return false;
-        }
-
+        AssignTaskCommand otherCommand = (AssignTaskCommand) other;
         return personIndex.equals(otherCommand.personIndex) && taskIndexes.equals(otherCommand.taskIndexes);
     }
 }

@@ -74,9 +74,7 @@ public class DeleteTaskCommand extends Command {
         if (other == this) {
             return true;
         }
-        if (!(other instanceof DeleteTaskCommand otherIndex)) {
-            return false;
-        }
+        DeleteTaskCommand otherIndex = (DeleteTaskCommand) other;
         return targetIndex.equals(otherIndex.targetIndex);
     }
 
