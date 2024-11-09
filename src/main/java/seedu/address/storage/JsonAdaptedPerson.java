@@ -79,9 +79,6 @@ class JsonAdaptedPerson {
         appointments.addAll(source.getAppointments().stream()
                 .map(JsonAdaptedAppointment::new)
                 .collect(Collectors.toList()));
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -160,8 +157,8 @@ class JsonAdaptedPerson {
                 modelEmail,
                 modelAddress,
                 modelRemark,
-                modelAppointments,
-                modelTags);
+                modelAppointments
+        );
     }
 
     public String getId() {

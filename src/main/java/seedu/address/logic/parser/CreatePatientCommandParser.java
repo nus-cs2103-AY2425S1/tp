@@ -49,7 +49,7 @@ public class CreatePatientCommandParser implements Parser<CreatePatientCommand> 
         Remark remark = new Remark("");
         Set<Tag> tagList = new HashSet<>();
 
-        Person patient = new Person(name, role, phone, email, address, remark, tagList);
+        Person patient = new Person(name, role, phone, email, address, remark);
 
 
         return new CreatePatientCommand(patient);

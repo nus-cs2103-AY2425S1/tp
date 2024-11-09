@@ -51,7 +51,7 @@ public class CreateDoctorCommandParser implements Parser<CreateDoctorCommand> {
         Remark remark = new Remark("");
         Set<Tag> tagList = new HashSet<>();
 
-        Person doctor = new Person(name, role, phone, email, address, remark, tagList);
+        Person doctor = new Person(name, role, phone, email, address, remark);
 
 
         return new CreateDoctorCommand(doctor);

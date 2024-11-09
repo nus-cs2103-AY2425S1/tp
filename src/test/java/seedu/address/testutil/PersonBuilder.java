@@ -60,7 +60,6 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         remark = personToCopy.getRemark();
-        tags = new HashSet<>(personToCopy.getTags());
         id = personToCopy.getId();
     }
 
@@ -113,10 +112,10 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, role, phone, email, address, remark, tags);
+        return new Person(name, role, phone, email, address, remark);
     }
     public Person buildWithDefaultId() {
-        return new Person(name, id, role, phone, email, address, remark, tags);
+        return new Person(name, id, role, phone, email, address, remark);
     }
 
 
@@ -124,7 +123,7 @@ public class PersonBuilder {
      * Builds a patient class
      */
     public Person buildPatient() {
-        return new Person(name, role, phone, email, address, remark, tags);
+        return new Person(name, role, phone, email, address, remark);
     }
 
     /**
@@ -132,7 +131,7 @@ public class PersonBuilder {
      */
     public Person buildPatientWithChosenIdAndAppointment(int patientId, int doctorId, LocalDateTime appointmentTime,
                                                          String remarks) {
-        Person newPerson = new Person(name, patientId, DEFAULT_PATIENT_ROLE, phone, email, address, remark, tags);
+        Person newPerson = new Person(name, patientId, DEFAULT_PATIENT_ROLE, phone, email, address, remark);
         newPerson.addAppointment(appointmentTime, patientId, doctorId, remarks);
         return newPerson;
     }
@@ -142,7 +141,7 @@ public class PersonBuilder {
      */
     public Person buildDoctorWithChosenIdAndAppointment(int patientId, int doctorId, LocalDateTime appointmentTime,
                                                          String remarks) {
-        Person newPerson = new Person(name, doctorId, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
+        Person newPerson = new Person(name, doctorId, DEFAULT_DOCTOR_ROLE, phone, email, address, remark);
         newPerson.addAppointment(appointmentTime, patientId, doctorId, remarks);
         return newPerson;
     }
@@ -151,7 +150,7 @@ public class PersonBuilder {
      * Builds a doctor class
      */
     public Person buildDoctor() {
-        return new Person(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark, tags);
+        return new Person(name, DEFAULT_DOCTOR_ROLE, phone, email, address, remark);
     }
 
 }

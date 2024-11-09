@@ -184,10 +184,7 @@ If anytime throughout the set-up, you feel lost or feel like you may require mor
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `n/NAME [e/EMAIL]` can be used as `n/John Doe e/johnd@example.com` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -235,7 +232,7 @@ Examples:
 * `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br>
   **Output**: <br>
     Successfully created a new doctor with ID: #1 : <br>
-    Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street; Tags: 
+    Dr Jane Smith; Phone: 87654321; Email: dr.jane.smith@hospital.com; Address: 456 Elm Street;
 
 * `createD n/Dr Jane Smith p/87654321 e/dr.jane.smith@hospital.com a/456 Elm Street` <br>
   **Output**: <br>
@@ -262,7 +259,7 @@ Examples:
 * `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br>
   **Output**: <br> 
     Successfully created a new patient with ID: #0 : <br>
-    John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags:
+    John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street;
 * `createP n/John Doe p/98765432 e/johndoe@example.com a/123 Baker Street` <br>
   **Output**: <br>
 This patient already exists.
@@ -316,20 +313,18 @@ Examples:
 
 Edits an existing person with the specified `ID` in the database.
 
-Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
 * **ID**: The Person ID must be valid, present in the MedDict database, and an _integer_ (0, 1, 2, …​).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * Editing the person with the same details as the existing detail is not allowed.
 * A _notification message_ will be displayed if MedDict could not edit the person with the given ID.
 
 Examples:
 *  `edit z/1 p/91234567 e/johndoe@example.com` <br>
    **Output**: <br>
-   Edited Person: John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street; Tags: No known allergies
+   Edited Person: John Doe; Phone: 98765432; Email: johndoe@example.com; Address: 123 Baker Street;
 *  `edit z/2 n/Betsy Crower` <br>
    **Output**: <br>
    At least one field to edit must be provided.
@@ -582,7 +577,7 @@ _Details coming soon ..._
 | **[Delete Person](#deleting-a-person-deletep)**                 | `deleteP z/PERSON_ID` <br> e.g., `deleteP z/2`                                                                                                            |
 | **[Add Notes](#add-a-remark-to-a-patient-addr)**                | `addR z/PATIENT_ID r/REMARK` <br> e.g., `addR z/0 r/cancer`                                                                                               |
 | **[List](#listing-all-persons-list)**                           | `list` <br> Shows all persons in address book                                                                                                             |
-| **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
+| **[Edit](#editing-a-person-edit)**                              | `edit z/ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br> e.g., `edit z/2 p/91234567 e/johndoe@example.com`                              |
 | **[Get ID](#getting-id-of-doctor-or-patient-by-name-get)**      | `get KEYWORD` <br> e.g., `get john`                                                                                                                       |
 | **[Add Appointment](#adding-an-appointment-adda)**              | `addA x/DATE_TIME z/PATIENT_ID z/DOCTOR_ID r/REMARK` <br> e.g., `addA x/2024-12-31 15:23 z/0 z/1 r/Third physiotherapy session`                           |
 | **[View History](#view-history-of-a-person-view)**              | `view z/PERSON_ID [x/DATE_TIME]` <br> e.g., `view z/0 x/2024-12-31 15:23`                                                                                 |

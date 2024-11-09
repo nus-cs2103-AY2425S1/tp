@@ -502,18 +502,17 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Comman prefixes
-| Prefix Constant              | Abbreviation |
-|------------------------------|--------------|
-| `PREFIX_NAME`                | `n/`         |
-| `PREFIX_PHONE`               | `p/`         |
-| `PREFIX_EMAIL`               | `e/`         |
-| `PREFIX_ADDRESS`             | `a/`         |
-| `PREFIX_TAG`                 | `t/`         |
-| `PREFIX_REMARK`              | `r/`         |
-| `PREFIX_DATE`                | `x/`         |
-| `PREFIX_DAY_DATE`            | `y/`         |
-| `PREFIX_ID`                  | `z/`         |
+### Command prefixes
+| Prefix Constant  | Abbreviation |
+|------------------|--------------|
+| `PREFIX_NAME`    | `n/`         |
+| `PREFIX_PHONE`   | `p/`         |
+| `PREFIX_EMAIL`   | `e/`         |
+| `PREFIX_ADDRESS` | `a/`         |
+| `PREFIX_REMARK`  | `r/`         |
+| `PREFIX_DATE`    | `x/`         |
+| `PREFIX_DAY_DATE` | `y/`         |
+| `PREFIX_ID`      | `z/`         |
 
 
 ### Launch and shutdown

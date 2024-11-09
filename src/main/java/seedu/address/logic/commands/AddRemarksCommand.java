@@ -88,7 +88,7 @@ public class AddRemarksCommand extends Command {
                 patientToAddRemarks.getId(), patientToAddRemarks.getRole(), patientToAddRemarks.getPhone(),
                 patientToAddRemarks.getEmail(), patientToAddRemarks.getAddress(),
                 patientToAddRemarks.addRemarks(additionalRemarks.getValue()),
-                patientToAddRemarks.getAppointments(), patientToAddRemarks.getTags());
+                patientToAddRemarks.getAppointments());
     }
     @Override
     public boolean equals(Object other) {
