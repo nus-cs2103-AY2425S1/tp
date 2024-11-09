@@ -264,6 +264,7 @@ Examples:
 > When sorting by attributes such as subject or class, only the first item in the list of subjects or classes is considered. For instance:
 > * If a student has subjects listed as "Math, Physics, Chemistry", the `sort subject` command will use "Math" as the primary sorting key. 
 > * Similarly, if a teacher is associated with classes "5A, 7C, 8B", the `sort class` command will use "5A" as the sorting key.
+
 ### Undoing the last command : `undo`
 
 Reverts the most recent change made to the address book.
