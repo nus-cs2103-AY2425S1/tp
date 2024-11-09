@@ -286,12 +286,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extension**
 
-* 1a. The necessary details are missing from the given input.
+* 1a. The necessary details are invalid or missing from the given input.
 
     * 1a1. ResearchRoster shows an error message.
 
       Use case restarts.
+  
+* 1b. User attempts to add an existing person (of duplicate email address).
 
+    * 1b1. ResearchRoster shows an error message.
+
+      Use case restarts.
 
 #### **Use case: UC02 - Delete a person**
 * *Preconditions:* user has added person(s) previously
@@ -344,12 +349,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The changes to make are missing from the given input.
+* 3b. The changes to make are invalid or missing from the given input.
 
     * 3b1. ResearchRoster shows an error message.
 
       Use case resumes at step 2.
 
+* 3c. User attempts to edit a person into another existing person (of duplicate email address).
+
+    * 3c1. ResearchRoster shows an error message.
+
+      Use case resumes at step 2.
 
 #### **Use Case: UC04 - Edit records in bulk**
 * *Preconditions:* user has added person(s) previously
