@@ -58,8 +58,12 @@
     -fx-text-fill: #2e7d32; /* dark emerald green */
 }
 
+.context-menu {
+    -fx-background-color: #57a83f;
+}
+
 .button:hover {
-    -fx-background-color: #66bb6a; /* medium emerald green */
+    -fx-background-color: #2e7d32; /* medium emerald green */
 }
 
 .button:pressed, .button:default:hover:pressed {
