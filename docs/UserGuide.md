@@ -170,6 +170,7 @@ Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
 * Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter.
+* Filtering by `grade` is not supported.
 * Students matching all the given conditions will be returned (i.e. `AND` search).
 
 <div markdown="span" class="alert alert-danger">⚠️ **Warning:**
