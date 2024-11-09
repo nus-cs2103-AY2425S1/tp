@@ -16,7 +16,8 @@ import seedu.address.model.person.exceptions.TimeParseException;
  * Default opening and closing hours are 00:00 and 23:59 respectively.
  */
 public class OperatingHours {
-    public static final String MESSAGE_CONSTRAINTS = "Both opening time and closing time should be in format HH:mm.";
+    public static final String MESSAGE_CONSTRAINTS = "Both opening time and closing time should be in format HH:mm."
+            + " Opening time must fall before Closing time in the same day";
     private static final LocalTime DEFAULT_OPENING_HOURS = LocalTime.of(0, 0);
     private static final LocalTime DEFAULT_CLOSING_HOURS = LocalTime.of(23, 59);
 
