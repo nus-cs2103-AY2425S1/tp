@@ -187,6 +187,7 @@ public class ModelManager implements Model {
                                     new EditCommand.EditStudentDescriptor();
                             editStudentDescriptor.setTutorialId(TutorialId.none());
                             Student editedStudent = createEditedStudent(s, editStudentDescriptor);
+                            editedStudent.setPresentDatesEmpty();
                             addressBook.setStudent(s, editedStudent);
                         }));
         return tutorials.deleteTutorial(tutorial);
