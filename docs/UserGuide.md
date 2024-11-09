@@ -312,10 +312,13 @@ _Details coming soon ..._
 
 ---
 
-## Known issues
+## Known Issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen. The remedy is to delete the `preferences.json` file created by the application before running it again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu or keyboard shortcut `F1`) again, the original Help Window will remain minimized. Manually restore the minimized Help Window.
+1. **Integer Overflow Limitation**: HallPointer does not handle integer overflow, which could lead to incorrect data behavior if extremely large numbers are used (e.g., points or room numbers that exceed typical ranges). Users are advised to avoid excessively high values as this may disrupt the app’s functionality. While unlikely in standard use, such inputs could be considered abnormal or potentially malicious.
+
+2. **Multiple Screens Issue**: If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+3. **Help Window Minimization**: If you minimize the Help Window and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
 
