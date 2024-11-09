@@ -208,7 +208,7 @@ Note:
 
 Examples:
 * `list` followed by `delete v/2` deletes the 2nd vendor in EventTory.
-* `find e/Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
+* `find e/ Wedding` followed by `delete e/1` deletes the 1st event shown in the results of the `find` command.
 
 ### Listing Vendors & Events : `list`
 
@@ -283,7 +283,7 @@ Examples:
 
 Finds vendors or events whose attributes contain any of the space-separated keywords provided.
 
-Format: `find v/KEYWORD [MORE_KEYWORDS]` or `find e/KEYWORD [MORE_KEYWORDS]`
+Format: `find v/ KEYWORD [MORE_KEYWORDS]` or `find e/ KEYWORD [MORE_KEYWORDS]`
 
 Note:
 * The search is case-insensitive. e.g. `party` will match `Party`
@@ -296,8 +296,8 @@ Note:
 * If no matches are found, the user will be informed and the current view will remain unchanged.
 
 Examples:
-* `find v/catering` returns `catering` and `Catering Solutions`
-* `find e/party wedding` returns `Birthday Party` and `John's Wedding`<br>
+* `find v/ catering` returns `catering` and `Catering Solutions`
+* `find e/ party wedding` returns `Birthday Party` and `John's Wedding`<br>
 
 ### Clearing All Entries : `clear`
 
@@ -369,7 +369,7 @@ Therefore, edit the data file only if you are confident that you can update it c
 | **View**     | `view v/INDEX` or `view e/INDEX`<br> e.g. `view v/1`                                                                                                                                                                                              |
 | **Assign**   | `assign INDEX` <br> e.g. `assign 1`                                                                                                                                                                                                               |
 | **Unassign** | `unassign INDEX` <br> e.g. `unassign 1`                                                                                                                                                                                                           |
-| **Find**     | -`find v/KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/Catering Band`, `find e/wedding banquet`                                                                                                       |
+| **Find**     | -`find v/ KEYWORD [MORE_KEYWORDS]…` or,<br>-`find e/ KEYWORD [MORE_KEYWORDS]…`<br><br> e.g., `find v/ Catering Band`, `find e/ wedding banquet`                                                                                                    |
 | **Clear**    | `clear`                                                                                                                                                                                                                                           |
 | **Help**     | `help`                                                                                                                                                                                                                                            |
 | **Exit**     | `exit`                                                                                                                                                                                                                                            |
