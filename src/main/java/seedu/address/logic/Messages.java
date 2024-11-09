@@ -55,15 +55,18 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
-                .append("; Phone: ")
+                .append("\nPhone: ")
                 .append(person.getPhone())
-                .append("; Email: ")
+                .append("\nEmail: ")
                 .append(person.getEmail())
-                .append("; Address: ")
+                .append("\nAddress: ")
                 .append(person.getAddress())
-                .append("; Emergency Contacts: ");
-        person.getEmergencyContacts().forEach(builder::append);
-        builder.append("; Tags: ");
+                .append("\nEmergency Contact(s): ");
+        person.getEmergencyContacts().forEach(x -> {
+            builder.append(x);
+            builder.append("\n");
+        });
+        builder.append("\nTags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
