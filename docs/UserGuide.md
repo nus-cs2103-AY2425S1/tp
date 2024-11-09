@@ -226,6 +226,8 @@ Format: `bookmark INDEX`
 - The index refers to the index number shown in the displayed company list.
 - The index **must be a positive integer** 1, 2, 3, …​, 
   - a negative integer will result in an invalid command message.
+- Only one company can be bookmarked at a time using the command.
+  - `bookmark 1 2 3` will result in an invalid command error message.
 
 **Example**:
 ```dtd
@@ -284,7 +286,7 @@ bmlist
 
 Edits an existing company in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG]`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG] …​`
 
 - Edits the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 - The index **must be a positive integer** 1, 2, 3, …​
@@ -367,7 +369,7 @@ Removes the remark from the 3rd company.
 
 Finds companies whose names or tags contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]…​`
 
 - The search is case-insensitive. e.g., `google` will match `Google`
 - The order of the keywords does not matter. e.g., `Google Amazon` will match `Amazon Google`
@@ -409,7 +411,7 @@ Examples:
 
 - `list` followed by `delete 2` deletes the 2nd company in the address book.
 - `find Google` followed by `delete 1` deletes the 1st company in the results of the `find` command.
-- 
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -535,7 +537,7 @@ Furthermore, certain edits can cause the TechConnect to behave in unexpected way
 | **Delete**                    | `delete INDEX`<br>e.g., `delete 3`                                                                                                                                                                                                                      |
 | **Edit**                      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [cp/CAREER_PAGE_URL] [t/TAG]…​`<br>e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                         |
 | **Remark**                    | `remark INDEX r/REMARK`<br>e.g., `remark 2 r/Has good internship opportunities`                                                                                                                                                                         |
-| **Find**                      | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`                                                                                                                                                                                               |
+| **Find**                      | `find KEYWORD [MORE_KEYWORDS]…​`<br>e.g., `find James Jake`                                                                                                                                                                                             |
 | **List**                      | `list`                                                                                                                                                                                                                                                  |
 | **List bookmarked companies** | `bmlist`                                                                                                                                                                                                                                                |
 | **Add application status**    | `status INDEX as/STATUS` <br>e.g., `status 2 as/Round 2 of interview`                                                                                                                                                                                   |

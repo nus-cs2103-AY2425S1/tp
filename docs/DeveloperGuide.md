@@ -194,7 +194,6 @@ TechConnect assists students in managing and organizing their internship and job
 | `* *`    | user                                                    | bookmark a company                              | prioritize companies that I’m particularly interested in                          |
 | `* *`    | user                                                    | edit information of a company                   | keep company data up-to-date                                                      |
 | `* *`    | user                                                    | list all bookmarked companies                   | easily access my top-priority companies                                           |
-| `*`      | user with many companies in the address book            | filter companies by tag or status               | narrow down my list based on specific criteria (e.g., high salary, applied)       |
 | `*`      | user                                                    | update application status for a company         | track my progress with each company                                               |
 | `*`      | user                                                    | clear all entries                               | start over with a fresh list when needed                                          |
 
@@ -249,6 +248,11 @@ TechConnect assists students in managing and organizing their internship and job
 * 1b. The input format is incorrect.
     * 1b1. TC displays an error message.
     * Use case resumes at step 1.
+
+* 1c. The company is edited to an existing company in the address book.
+    * 1c1. TC displays an error message.
+    * Use case resumes at step 1.
+    
 
 ---
 
@@ -345,7 +349,6 @@ TechConnect assists students in managing and organizing their internship and job
 2. **Deleting a Company**:
     - Use `delete INDEX` to remove a specific company.
     - **Expected Result**: Company is removed, and a success message is shown.
-
     - **Edge Cases**:
         - `delete 0`: Displays an error message.
         - `delete x` (where `x` exceeds list size): Displays an error message.
@@ -359,10 +362,10 @@ TechConnect assists students in managing and organizing their internship and job
 1. **Bookmarking a Company**:
     - Use `bookmark INDEX` to mark a company as bookmarked.
     - **Expected Result**: Company appears in the bookmarked list.
-    - **Edge Case**: Attempting to bookmark an already bookmarked company should display a notification.
+    - **Edge Case**: Attempting to bookmark an already bookmarked company should display a message informing users that the company is already bookmarked.
 
 2. **Finding Companies**:
-    - Use `find TAG/NAME` to search.
+    - Use `find NAME` or `find TAG` to search.
     - **Expected Result**: Only companies matching the search criteria are displayed.
     - **Edge Case**: Searching for non-existent terms should display a "There is no company that suits your keyword!" message.
 ---
