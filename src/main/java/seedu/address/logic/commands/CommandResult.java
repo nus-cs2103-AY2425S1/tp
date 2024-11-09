@@ -28,6 +28,8 @@ public class CommandResult {
 
     private boolean showCommand = false;
 
+    private boolean isDelete = false;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -38,6 +40,12 @@ public class CommandResult {
         this.personToShow = null;
         this.personToEdit = null;
         this.export = export;
+    }
+
+    public CommandResult(String feedbackToUser, boolean isDelete, Person originalPerson) {
+        this(feedbackToUser, false, false, false);
+        this.isDelete = isDelete;
+        this.personToEdit = originalPerson;
     }
 
     /**
@@ -51,6 +59,8 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this(feedbackToUser, showHelp, exit, false);
     }
+
+
 
     //@@author tayxuenye-reused
     //Written by ChatGPT
@@ -91,6 +101,10 @@ public class CommandResult {
 
     public boolean isExport() {
         return export;
+    }
+
+    public boolean isDeleteCommand() {
+        return isDelete;
     }
 
     @Override
