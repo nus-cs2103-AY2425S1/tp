@@ -436,18 +436,18 @@ the data of your previous AcademyAssist folder.<br><br>
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                                    |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**   | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` <br><br> e.g., `add n\John Doe i\T384859A yg\3 p/81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
-| **Delete Student**| `delete STUDENT_ID`<br><br> e.g., `delete S00001`                                                                                                                                                   |
-| **Edit Student**  | `edit STUDENT_ID FIELD\NEW_VALUE`<br> e.g.,`edit S00001 a\New_Address`                                                                                                                              |
-| **List Students** | `list`                                                                                                                                                                                              |
-| **View Student**  | `detail STUDENT_ID`<br><br> e.g., `detail S00001`                                                                                                                                                   |
-| **Find Student**  | `find NAME [MORE_NAMES]`<br><br> e.g., `find John Jane`                                                                                                                                             |
-| **Filter Students**| `filter FIELD\VALUE`<br><br> e.g., `filter yg\2`                                                                                                                                                    |
-| **Add Subject**   | `addsubject STUDENT_ID s\SUBJECT`<br><br> e.g., `addsubject S00003 Science`                                                                                                                         |
-| **Track Subjects**| `tracksubject`                                                                                                                                                                                      |
-| **Sort Students** | `sort s\FIELD`<br><br> e.g., `sort s\name`                                                                                                                                                          |
-| **Clear Data**    | `clear`                                                                                                                                                                                             |
-| **Get Help**      | `help`                                                                                                                                                                                              |
-| **Exit**          | `exit`                                                                                                                                                                                              |
+| Action            | Format, Examples                                                                                                                                                                                     |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**   | `add n\NAME i\NRIC yg\YEARGROUP p\PHONE e\EMAIL a\ADDRESS s\SUBJECT [s\MORE_SUBJECTS]...` <br><br> e.g., `add n\John Doe i\T3840859A yg\3 p\81003999 e\johndoe@gmail.com a\9 Smith Street s\Science` |
+| **Delete Student**| `delete STUDENT_ID`<br><br> e.g., `delete S00001`                                                                                                                                                    |
+| **Edit Student**  | `edit STUDENT_ID FIELD\NEW_VALUE`<br> e.g.,`edit S00001 a\New_Address`                                                                                                                               |
+| **List Students** | `list`                                                                                                                                                                                               |
+| **View Student**  | `detail STUDENT_ID`<br><br> e.g., `detail S00001`                                                                                                                                                    |
+| **Find Student**  | `find NAME [MORE_NAMES]`<br><br> e.g., `find John Jane`                                                                                                                                              |
+| **Filter Students**| `filter FIELD\VALUE`<br><br> e.g., `filter yg\2`                                                                                                                                                     |
+| **Add Subject**   | `addsubject STUDENT_ID s\SUBJECT`<br><br> e.g., `addsubject S00003 Science`                                                                                                                          |
+| **Track Subjects**| `tracksubject`                                                                                                                                                                                       |
+| **Sort Students** | `sort by\FIELD`<br><br> e.g., `sort by\name`                                                                                                                                                         |
+| **Clear Data**    | `clear`                                                                                                                                                                                              |
+| **Get Help**      | `help`                                                                                                                                                                                               |
+| **Exit**          | `exit`                                                                                                                                                                                               |
