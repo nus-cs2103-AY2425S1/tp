@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -195,7 +196,8 @@ public class TagCommandTest {
         tags.add(BRIDES_SIDE);
         TagCommand tagCommand = new TagCommand(indexList, tags);
 
-        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_INVALID_INDEX
+                + model.getFilteredPersonList().size() + ")");
     }
 
     /**
@@ -267,7 +269,8 @@ public class TagCommandTest {
         tags.add(BRIDES_SIDE);
         TagCommand tagCommand = new TagCommand(indexList, tags);
 
-        assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(tagCommand, model, TagCommand.MESSAGE_INVALID_INDEX
+                + model.getFilteredPersonList().size() + ")");
 
         UndoCommand undoCommand = new UndoCommand();
         String expectedUndoMessage = UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND;
