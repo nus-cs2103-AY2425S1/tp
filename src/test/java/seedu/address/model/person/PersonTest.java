@@ -15,6 +15,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMERGENCY_CONTACT_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_CHRIS;
@@ -23,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CHRIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CHRIS;
@@ -42,6 +44,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.InvalidPersonTypeException;
 import seedu.address.model.tag.Tag;
@@ -69,6 +72,11 @@ public class PersonTest {
         public Person withResetAttendance() {
             return null;
         }
+
+        @Override
+        public int getDaysAttendedValue() throws CommandException {
+            return 0;
+        }
     }
     private final PersonStub personStubAmy = new PersonStub(new Name(VALID_NAME_AMY),
         new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
@@ -81,8 +89,36 @@ public class PersonTest {
     }
 
     @Test
-    public void isSamePerson_throwsInvalidPersonTypeException() {
-        assertThrows(InvalidPersonTypeException.class, () -> personStubAmy.isSamePerson(personStubAmy));
+    public void isSamePerson() {
+        // Same object -> returns true
+        assertTrue(personStubAmy.isSamePerson(personStubAmy));
+
+        // Different object, same identity fields -> returns true
+        PersonStub personStubAmyCopy = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_AMY),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertTrue(personStubAmy.isSamePerson(personStubAmyCopy));
+
+        // Different object, different email, same phone -> returns true
+        PersonStub personStubAmyEdited = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_AMY), new Email(VALID_EMAIL_CHRIS),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertTrue(personStubAmy.isSamePerson(personStubAmyEdited));
+
+        // Different object, same email, different phone -> returns true
+        personStubAmyEdited = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_AMY),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertTrue(personStubAmy.isSamePerson(personStubAmyEdited));
+
+        // Different object, different email, different phone -> returns false
+        personStubAmyEdited = new PersonStub(new Name(VALID_NAME_AMY),
+            new Gender(VALID_GENDER_AMY), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
+            new Address(VALID_ADDRESS_AMY), new HashSet<>(), new HashSet<>(), new HashSet<>());
+        assertFalse(personStubAmy.isSamePerson(personStubAmyEdited));
+
+        // Null object -> returns false
+        assertFalse(personStubAmy.isSamePerson(null));
 
     }
 
@@ -181,14 +217,16 @@ public class PersonTest {
             new Gender(VALID_GENDER_CHRIS), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
             new Address(VALID_ADDRESS_CHRIS), SampleDataUtil.getTagSet("friends"),
             SampleDataUtil.getSubjectSet(VALID_SUBJECT_CHRIS),
-            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null);
+            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS),
+                null, null, null);
         assertEquals(TEACHER_CHRIS, createdChris);
 
         Person createdMichael = Person.createPerson(STUDENT_TYPE, new Name(VALID_NAME_MICHAEL),
             new Gender(VALID_GENDER_MICHAEL), new Phone(VALID_PHONE_MICHAEL), new Email(VALID_EMAIL_MICHAEL),
             new Address(VALID_ADDRESS_MICHAEL), SampleDataUtil.getTagSet(),
             SampleDataUtil.getSubjectSet(VALID_SUBJECT_MICHAEL),
-            SampleDataUtil.getClassSet(VALID_CLASSES_MICHAEL), new DaysAttended(VALID_ATTENDANCE_MICHAEL));
+            SampleDataUtil.getClassSet(VALID_CLASSES_MICHAEL), new DaysAttended(VALID_ATTENDANCE_MICHAEL),
+                new Name(VALID_NEXT_OF_KIN_MICHAEL), new Phone(VALID_EMERGENCY_CONTACT_MICHAEL));
         assertEquals(STUDENT_MICHAEL, createdMichael);
 
         assertThrows(InvalidPersonTypeException.class, () -> Person.createPerson("INVALID_TYPE",
@@ -196,7 +234,7 @@ public class PersonTest {
             new Gender(VALID_GENDER_CHRIS), new Phone(VALID_PHONE_CHRIS), new Email(VALID_EMAIL_CHRIS),
             new Address(VALID_ADDRESS_CHRIS), SampleDataUtil.getTagSet("friends"),
             SampleDataUtil.getSubjectSet(VALID_SUBJECT_CHRIS),
-            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null));
+            SampleDataUtil.getClassSet(VALID_CLASSES_CHRIS), null, null, null));
     }
 
     @Test
@@ -204,6 +242,10 @@ public class PersonTest {
         assertThrows(InvalidPersonTypeException.class, () -> personStubAmy.getType());
     }
 
+    @Test
+    public void message_format_throwsInvalidPersonTypeException() {
+        assertThrows(InvalidPersonTypeException.class, () -> Messages.format(personStubAmy));
+    }
     @Test
     public void getDaysAttended_returnsNull() {
         assertEquals(null, personStubAmy.getDaysAttended());

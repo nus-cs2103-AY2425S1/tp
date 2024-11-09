@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.beans.property.IntegerProperty;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,23 +15,31 @@ public class Student extends Person {
 
     public static final String STUDENT_TYPE = "student";
     private final DaysAttended daysAttended;
+    private final Name nextOfKinName;
+    private final Phone emergencyContact;
 
     /**
      * Every field must be present and not null.
      *
-     * @param name     Name of the student
-     * @param gender    Gender of the student
-     * @param phone    Phone number of the student
-     * @param email    Email of the student
-     * @param address  Address of the student
-     * @param tags     Tags associated with the student
-     * @param subjects  Subject the student is taking
-     * @param classes  Set of class names the student is attending
+     * @param name             Name of the student
+     * @param gender           Gender of the student
+     * @param phone            Phone number of the student
+     * @param email            Email of the student
+     * @param address          Address of the student
+     * @param tags             Tags associated with the student
+     * @param subjects         Subject the student is taking
+     * @param classes          Set of class names the student is attending
+     * @param daysAttended     Number of days the student attended
+     * @param nextOfKinName    Name of the student's next of kin
+     * @param emergencyContact Emergency contact number
      */
     public Student(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
-                   Set<Subject> subjects, Set<String> classes, DaysAttended daysAttended) {
+                   Set<Subject> subjects, Set<String> classes, DaysAttended daysAttended,
+                   Name nextOfKinName, Phone emergencyContact) {
         super(name, gender, phone, email, address, tags, subjects, classes);
         this.daysAttended = daysAttended;
+        this.nextOfKinName = nextOfKinName;
+        this.emergencyContact = emergencyContact;
     }
 
     @Override
@@ -38,9 +47,23 @@ public class Student extends Person {
         return daysAttended;
     }
 
+    @Override
+    public int getDaysAttendedValue() {
+        return daysAttended.getValue();
+    }
+
+    public Name getNextOfKinName() {
+        return nextOfKinName;
+    }
+
+    public Phone getEmergencyContact() {
+        return emergencyContact;
+    }
+
     public IntegerProperty daysAttendedProperty() {
         return daysAttended.daysAttendedProperty();
     }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -57,7 +80,11 @@ public class Student extends Person {
                 .append("; Classes: ")
                 .append(String.join(", ", getClasses()))
                 .append("; Days attended: ")
-                .append(getDaysAttended());
+                .append(getDaysAttended())
+                .append("; Next of Kin: ")
+                .append(getNextOfKinName())
+                .append("; Emergency Contact: ")
+                .append(getEmergencyContact());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -86,13 +113,15 @@ public class Student extends Person {
                 && otherStudent.getSubjects().equals(getSubjects())
                 && otherStudent.getClasses().equals(getClasses())
                 && otherStudent.getTags().equals(getTags())
-                && otherStudent.getDaysAttended().equals(getDaysAttended());
+                && otherStudent.getDaysAttended().equals(getDaysAttended())
+                && otherStudent.getNextOfKinName().equals(getNextOfKinName())
+                && otherStudent.getEmergencyContact().equals(getEmergencyContact());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getGender(), getPhone(), getEmail(), getAddress(),
-            getSubjects(), getClasses(), getTags(), getDaysAttended());
+                getSubjects(), getClasses(), getTags(), getDaysAttended(), getNextOfKinName(), getEmergencyContact());
     }
 
     /**
@@ -105,7 +134,7 @@ public class Student extends Person {
         DaysAttended updatedDaysAttended = daysAttended.incremented();
 
         return Person.createPerson(STUDENT_TYPE, getName(), getGender(), getPhone(), getEmail(), getAddress(),
-                getTags(), getSubjects(), getClasses(), updatedDaysAttended);
+                getTags(), getSubjects(), getClasses(), updatedDaysAttended, getNextOfKinName(), getEmergencyContact());
     }
 
     /**
@@ -114,11 +143,11 @@ public class Student extends Person {
      *
      * @return A new {@code Person} instance representing the student with decremented attendance.
      */
-    public Person withDecrementedAttendance() {
+    public Person withDecrementedAttendance() throws CommandException {
         DaysAttended updatedDaysAttended = daysAttended.decremented();
 
         return Person.createPerson(STUDENT_TYPE, getName(), getGender(), getPhone(), getEmail(), getAddress(),
-                getTags(), getSubjects(), getClasses(), updatedDaysAttended);
+                getTags(), getSubjects(), getClasses(), updatedDaysAttended, getNextOfKinName(), getEmergencyContact());
     }
 
     /**
@@ -131,21 +160,7 @@ public class Student extends Person {
         DaysAttended updatedDaysAttended = daysAttended.reset();
 
         return Person.createPerson(STUDENT_TYPE, getName(), getGender(), getPhone(), getEmail(), getAddress(),
-                getTags(), getSubjects(), getClasses(), updatedDaysAttended);
-    }
-
-    /**
-     * Returns true if both are students with the same name and email address.
-     * This defines a weaker notion of equality between two persons.
-     */
-    @Override
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
-            return true;
-        }
-
-        return otherPerson instanceof Student
-            && otherPerson.getName().equals(getName()) && otherPerson.getEmail().equals(getEmail());
+                getTags(), getSubjects(), getClasses(), updatedDaysAttended, getNextOfKinName(), getEmergencyContact());
     }
 
     @Override

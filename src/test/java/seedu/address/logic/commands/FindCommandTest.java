@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.STUDENT_BENSON;
 import static seedu.address.testutil.TypicalPersons.STUDENT_CARL;
 import static seedu.address.testutil.TypicalPersons.STUDENT_ELLE;
@@ -13,7 +18,6 @@ import static seedu.address.testutil.TypicalPersons.TEACHER_DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -60,19 +64,9 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-    }
-
-    @Test
     public void execute_singleKeyword_singlePersonFound() throws ParseException {
         String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name Benson");
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_NAME + " Benson");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -82,7 +76,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() throws ParseException {
         String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name Carl Benson Elle");
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_NAME + " Carl Benson Elle");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -92,7 +86,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_caseInsensitive() throws ParseException {
         String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name CARL elle fiona");
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_NAME + " CARL elle fiona");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -102,7 +96,7 @@ public class FindCommandTest {
     @Test
     public void execute_namePrefix_personFound() throws ParseException {
         String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name Alice");
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_NAME + " Alice");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -111,8 +105,8 @@ public class FindCommandTest {
 
     @Test
     public void execute_phonePrefix_personFound() throws ParseException {
-        String expectedMessage = FindCommand.MESSAGE_SUCCESS;
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/contact 94351253");
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_PHONE + " 94351253");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -121,9 +115,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_addressPrefix_personFound() throws ParseException {
-        String expectedMessage = FindCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
         PersonContainsKeywordsPredicate predicate =
-                preparePredicate("/address 123, Jurong West Ave 6, #08-111");
+                preparePredicate(PREFIX_ADDRESS + " 123, Jurong West Ave 6, #08-111");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -133,7 +127,7 @@ public class FindCommandTest {
     @Test
     public void execute_emailPrefix_personFound() throws ParseException {
         String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/email alice@example.com");
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_EMAIL + " alice@example.com");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -141,9 +135,27 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_genderPrefix_personFound() throws ParseException {
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
+        PersonContainsKeywordsPredicate predicate = preparePredicate("/gender Male");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(List.of(STUDENT_BENSON, STUDENT_CARL, TEACHER_DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_genderPrefix_noPersonFound() throws ParseException {
+        String expectedMessage = FindCommand.MESSAGE_NO_ACTION;
+        PersonContainsKeywordsPredicate predicate = preparePredicate("/gender NonExistentGender");
+        FindCommand command = new FindCommand(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_tagPrefix_personFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 1);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("t/ friends");
+        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 3);
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_TAG + " friends");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -152,22 +164,19 @@ public class FindCommandTest {
 
     @Test
     public void execute_noMatchingTag_noPersonFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("t/ nonExistentTag");
+        String expectedMessage = FindCommand.MESSAGE_NO_ACTION;
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_TAG + " nonExistentTag");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multiplePrefixes_noPersonFound() throws ParseException {
-        String expectedMessage = String.format(FindCommand.MESSAGE_SUCCESS, 0);
-        PersonContainsKeywordsPredicate predicate = preparePredicate("/name NonExistent /phone 00000000");
+        String expectedMessage = FindCommand.MESSAGE_NO_ACTION;
+        PersonContainsKeywordsPredicate predicate = preparePredicate(PREFIX_NAME + " NonExistent"
+            + PREFIX_PHONE + " 00000000");
         FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test

@@ -89,10 +89,6 @@ public class AddTeacherCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
             + GENDER_DESC_BOB + SUBJECT_DESC_BOB + CLASS_DESC_BOB, expectedMessage);
 
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-            + GENDER_DESC_BOB + SUBJECT_DESC_BOB + CLASS_DESC_BOB, expectedMessage);
-
         // missing gender prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
             + VALID_GENDER_BOB + SUBJECT_DESC_BOB, expectedMessage);

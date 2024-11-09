@@ -38,6 +38,12 @@
       <HBox fx:id="daysAttendedContainer">
         <Label fx:id="daysAttended" styleClass="cell_small_label" text="\$daysAttended" />
       </HBox>
+      <HBox fx:id="nextOfKinContainer">
+        <Label fx:id="nextOfKin" styleClass="cell_small_label" text="\$nextOfKin" />
+      </HBox>
+      <HBox fx:id="emergencyContactContainer">
+        <Label fx:id="emergencyContact" styleClass="cell_small_label" text="\$emergencyContact" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>

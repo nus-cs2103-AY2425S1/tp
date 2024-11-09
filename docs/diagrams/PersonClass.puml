@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-class Person {
+abstract class Person {
     -name: Name
     -phone: Phone
     -email: Email

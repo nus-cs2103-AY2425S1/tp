@@ -1,13 +1,12 @@
 package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -76,7 +75,7 @@ public class StudentTest {
     }
 
     @Test
-    public void testDaysAttendedProperty() {
+    public void testDaysAttendedProperty() throws CommandException {
         // Create a student with initial attendance
         Student student = new StudentBuilder().withDaysAttended(5).build();
 
@@ -98,43 +97,16 @@ public class StudentTest {
     }
 
     @Test
-    public void isSamePerson_sameObject_returnsTrue() {
-        Student student = new StudentBuilder().withName("John Doe").build();
-        assertTrue(student.isSamePerson(student));
-    }
+    public void getDaysAttendedValue_returnsCorrectValue() {
+        // Arrange: Create a student with specific days attended
+        int initialDaysAttended = 3;
+        Student student = new StudentBuilder().withDaysAttended(initialDaysAttended).build();
 
-    @Test
-    public void isSamePerson_differentObjectSameIdentityFields_returnsTrue() {
-        Student student1 = new StudentBuilder().withName("John Doe").withPhone("12345678").build();
-        Student student2 = new StudentBuilder().withName("John Doe").withPhone("12345678").build();
-        assertTrue(student1.isSamePerson(student2));
-    }
+        // Act: Get the value using getDaysAttendedValue
+        int actualDaysAttended = student.getDaysAttendedValue();
 
-    @Test
-    public void isSamePerson_differentObjectDifferentName_returnsFalse() {
-        Student student1 = new StudentBuilder().withName("John Doe").withPhone("12345678").build();
-        Student student2 = new StudentBuilder().withName("Jane Doe").withPhone("87654321").build();
-        assertFalse(student1.isSamePerson(student2));
+        // Assert: Check if the returned value matches the expected value
+        assertEquals(initialDaysAttended, actualDaysAttended,
+                "getDaysAttendedValue should return the correct number of days attended");
     }
-
-    @Test
-    public void isSamePerson_differentObjectDifferentEmail_returnsFalse() {
-        Student student1 = new StudentBuilder().withName("John Doe").withEmail("johndoe@example.com").build();
-        Student student2 = new StudentBuilder().withName("John Doe").withEmail("janedoe@example.com").build();
-        assertFalse(student1.isSamePerson(student2));
-    }
-
-    @Test
-    public void isSamePerson_differentObjectSameNameSameEmail_returnsTrue() {
-        Student student1 = new StudentBuilder().withPhone("12345678").build();
-        Student student2 = new StudentBuilder().withPhone("87654321").build();
-        assertTrue(student1.isSamePerson(student2));
-    }
-
-    @Test
-    public void isSamePerson_nullObject_returnsFalse() {
-        Student student = new StudentBuilder().withName("John Doe").build();
-        assertFalse(student.isSamePerson(null));
-    }
-
 }

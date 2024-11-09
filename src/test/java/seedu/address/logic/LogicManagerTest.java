@@ -7,8 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDANCE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSES_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.EMERGENCY_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_MICHAEL;
+import static seedu.address.logic.commands.CommandTestUtil.NOK_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_MICHAEL;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_MICHAEL;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -22,6 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -171,10 +174,25 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addStudentCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_MICHAEL + GENDER_DESC_MICHAEL
                 + PHONE_DESC_MICHAEL + EMAIL_DESC_MICHAEL + ADDRESS_DESC_MICHAEL + SUBJECT_DESC_MICHAEL
-                + CLASSES_DESC_MICHAEL + ATTENDANCE_DESC_MICHAEL;
+                + CLASSES_DESC_MICHAEL + ATTENDANCE_DESC_MICHAEL + NOK_DESC_MICHAEL + EMERGENCY_DESC_MICHAEL;
         Student expectedStudent = new StudentBuilder(STUDENT_MICHAEL).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedStudent);
         assertCommandFailure(addStudentCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void executeUnmarkAttendanceZeroAttendanceThrowsCommandException() {
+        // Arrange: Create and add a student with zero days attended to the model
+        Student studentWithZeroAttendance = new StudentBuilder().withName("Zero Attendance Student")
+                .withDaysAttended(0).build();
+        model.addPerson(studentWithZeroAttendance);
+
+        // Prepare the unmark command for this student
+        Index studentIndex = Index.fromZeroBased(model.getFilteredPersonList().indexOf(studentWithZeroAttendance));
+        String unmarkCommand = "unmark " + (studentIndex.getOneBased());
+
+        // Act & Assert: Execute the command and expect a CommandException with the correct message
+        assertCommandFailure(unmarkCommand, CommandException.class, Messages.MESSAGE_INVALID_ATTENDANCE);
     }
 }

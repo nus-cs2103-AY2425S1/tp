@@ -41,15 +41,7 @@ public class DeleteCommand extends Command {
     public CommandResult executeCommand(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> personsToDelete = new ArrayList<>();
-
-        for (Index index : targetIndexArray) {
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
-                    + ": " + index.getOneBased());
-            }
-            personsToDelete.add(lastShownList.get(index.getZeroBased()));
-        }
+        List<Person> personsToDelete = getPersonsToDelete(lastShownList);
 
         StringBuilder deletedPersons = new StringBuilder();
         for (Person personToDelete : personsToDelete) {
@@ -58,6 +50,24 @@ public class DeleteCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons.toString().trim()));
+    }
+
+    private List<Person> getPersonsToDelete(List<Person> lastShownList) throws CommandException {
+        List<Person> personsToDelete = new ArrayList<>();
+
+        for (Index index : targetIndexArray) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX
+                    + ": " + index.getOneBased());
+            }
+            Person personToDelete = lastShownList.get(index.getZeroBased());
+            if (personsToDelete.contains(personToDelete)) {
+                throw new CommandException(Messages.MESSAGE_DUPLICATE_PERSON_DISPLAYED_INDEX
+                    + ": " + index.getOneBased());
+            }
+            personsToDelete.add(personToDelete);
+        }
+        return personsToDelete;
     }
 
     @Override

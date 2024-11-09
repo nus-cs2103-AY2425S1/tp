@@ -23,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DaysAttended;
 import seedu.address.model.person.Email;
@@ -49,11 +50,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + " PHONE] "
             + "[" + PREFIX_EMAIL + " EMAIL] "
             + "[" + PREFIX_ADDRESS + " ADDRESS] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]"
-            + "[" + PREFIX_CLASSES + "CLASS]"
+            + "[" + PREFIX_SUBJECT + " SUBJECT]"
+            + "[" + PREFIX_CLASSES + " CLASS]"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + " johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -85,8 +86,10 @@ public class EditCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Model modelWithoutPersonToEdit = new ModelManager(model.getAddressBook(), model.getUserPrefs());
+        modelWithoutPersonToEdit.deletePerson(personToEdit);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (modelWithoutPersonToEdit.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -107,14 +110,18 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        DaysAttended updatedDaysAttended = editPersonDescriptor.getDaysAttended().orElse(personToEdit
-            .getDaysAttended());
+        DaysAttended updatedDaysAttended = editPersonDescriptor.getDaysAttended()
+                .orElse(personToEdit.getDaysAttended());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
         Set<String> updatedClasses = editPersonDescriptor.getClasses().orElse(personToEdit.getClasses());
+        Name updatedNextOfKin = editPersonDescriptor.getNextOfKin().orElse(personToEdit.getNextOfKinName());
+        Phone updatedEmergencyContact = editPersonDescriptor.getEmergencyContact()
+                .orElse(personToEdit.getEmergencyContact());
 
         return Person.createPerson(personToEdit.getType(), updatedName, updatedGender, updatedPhone, updatedEmail,
-            updatedAddress, updatedTags, updatedSubjects, updatedClasses, updatedDaysAttended);
+                updatedAddress, updatedTags, updatedSubjects, updatedClasses, updatedDaysAttended,
+                updatedNextOfKin, updatedEmergencyContact);
     }
 
     @Override
@@ -156,6 +163,8 @@ public class EditCommand extends Command {
         private Set<Subject> subjects;
         private Set<String> classes;
         private DaysAttended daysAttended;
+        private Name nextOfKin;
+        private Phone emergencyContact;
 
         public EditPersonDescriptor() {}
 
@@ -173,6 +182,8 @@ public class EditCommand extends Command {
             setSubjects(toCopy.subjects);
             setClasses(toCopy.classes);
             setDaysAttended(toCopy.daysAttended);
+            setNextOfKin(toCopy.nextOfKin);
+            setEmergencyContact(toCopy.emergencyContact);
         }
 
 
@@ -181,8 +192,26 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, classes, subjects, gender);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, classes, subjects, gender, nextOfKin,
+                    emergencyContact);
         }
+
+        public void setNextOfKin(Name nextOfKin) {
+            this.nextOfKin = nextOfKin;
+        }
+
+        public Optional<Name> getNextOfKin() {
+            return Optional.ofNullable(nextOfKin);
+        }
+
+        public void setEmergencyContact(Phone emergencyContact) {
+            this.emergencyContact = emergencyContact;
+        }
+
+        public Optional<Phone> getEmergencyContact() {
+            return Optional.ofNullable(emergencyContact);
+        }
+
 
         public void setName(Name name) {
             this.name = name;

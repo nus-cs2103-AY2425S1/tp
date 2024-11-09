@@ -1,9 +1,14 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.logging.Logger;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.ModelManager;
 
 /**
  * Represents a Person's days attended in the address book.
@@ -12,6 +17,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 public class DaysAttended {
 
     public static final String MESSAGE_CONSTRAINTS = "Days attended should be a non-negative integer";
+    public static final String DEFAULT_INPUT_VALUE = "0";
+    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final IntegerProperty daysAttended;
 
     /**
@@ -25,6 +32,7 @@ public class DaysAttended {
     }
 
     public int getValue() {
+        logger.info("Getting integer value of days attended.");
         return daysAttended.get();
     }
 
@@ -74,6 +82,7 @@ public class DaysAttended {
      * @return A new {@code DaysAttended} instance representing the updated days attended.
      */
     public DaysAttended incremented() {
+        logger.info("Incrementing days attended.");
         return new DaysAttended(getValue() + 1);
     }
 
@@ -84,6 +93,7 @@ public class DaysAttended {
      *         or 0 if the current days attended is 0.
      */
     public DaysAttended decremented() {
+        logger.info("Decrementing days attended.");
         int newDays = Math.max(getValue() - 1, 0);
         return new DaysAttended(newDays);
     }
@@ -94,6 +104,7 @@ public class DaysAttended {
      * @return A new {@code DaysAttended} instance with days attended set to 0.
      */
     public DaysAttended reset() {
+        logger.info("Resetting days attended.");
         return new DaysAttended(0);
     }
 
@@ -101,6 +112,7 @@ public class DaysAttended {
      * Returns the property of the days attended.
      */
     public IntegerProperty daysAttendedProperty() {
+        requireNonNull(daysAttended);
         return daysAttended;
     }
 }
