@@ -694,11 +694,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. The system should be designed to allow the addition of new features, such as supporting other user types (e.g., nurses, staff) or integrating external systems, with minimal changes to the core codebase.
-4. The system must securely store patient and doctor information to comply with healthcare data privacy regulations, such as HIPAA.
-5. The system should log all user actions, such as adding, deleting, or modifying records. Logs should be stored for a minimum of 6 months and be accessible to authorized administrators for auditing purposes.
-6. The system should provide a response time of less than 2 seconds for any user interaction under normal load (i.e., up to 1000 patients and 500 doctors).
+2. The system should be designed to allow the addition of new features, such as supporting other user types (e.g., nurses, staff) or integrating external systems, with minimal changes to the core codebase.
+3. The system must securely store patient and doctor information to comply with healthcare data privacy regulations, such as HIPAA.
+4. The system should log all user actions, such as adding, deleting, or modifying records. Logs should be stored for a minimum of 6 months and be accessible to authorized administrators for auditing purposes.
+5. The system should provide a response time of less than 2 seconds for any user interaction under normal load (i.e., up to 1000 patients and 500 doctors).
 
 
 ### Glossary
@@ -755,7 +754,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding an appointment for a doctor and patient
 
-    1. Prerequisites: Ensure at least one doctor and one patient are added to the system.
+    1. Prerequisites: Ensure at least one doctor and one patient are added to the system. The patient or doctor to be deleted should not have any appointments.
 
     1. Test case: `add-appt pn/John Doe dn/Jane Doe d/23-04-1987 t/1100`  
        Expected: Appointment is successfully added for the doctor and patient. Confirmation message shows details of the appointment.
