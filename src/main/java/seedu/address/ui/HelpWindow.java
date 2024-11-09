@@ -65,8 +65,8 @@ public class HelpWindow extends UiPart<Stage> {
                 createFeature(
                         "Adding a Client: add",
                         "Add a new client to your database with detailed information.",
-                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS fi\\FINANCIALINFO \n s\\SOCIALMEDIAHANDLE"
-                        + "[t\\TAG] [t\\TAG:value]…\u200B",
+                        "add n\\NAME p\\PHONE e\\EMAIL a\\ADDRESS [fi\\FINANCIALINFO] \n [s\\SOCIALMEDIAHANDLE]"
+                        + "[t\\TAG]…\u200B [t\\TAG:value]…\u200B",
                         "add n\\Acme Corp p\\91234567 e\\contact@acme.com a\\123 Business Ave, Suite 100, "
                                 + "\n Metropolis t\\industry:tech t\\size:enterprise "
                                 + "fi\\Annual contract: €50,000 s\\@acmecorp"
@@ -93,7 +93,7 @@ public class HelpWindow extends UiPart<Stage> {
                         "Editing Client Information: edit",
                         "Update existing client details.",
                         "edit INDEX [n\\NAME] [p\\PHONE] [e\\EMAIL] [a\\ADDRESS] [fi\\FINANCIALINFO]"
-                                + " \n [s\\SOCIALMEDIAHANDLE] " + "[t\\TAG] [t\\TAG:value]…\u200B",
+                                + " \n [s\\SOCIALMEDIAHANDLE] " + "[t\\TAG]…\u200B [t\\TAG:value]…\u200B",
                         "edit 1 p\\98765432 e\\newemail@acme.com"
                 ),
                 createFeature(
