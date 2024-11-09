@@ -483,7 +483,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. User re-enters the priority level.
 
       Steps 2a1-2a2 are repeated until a valid priority level is provided.
-      Use case resumes at step 2 if the priority level is correct.
+      Use case resumes at step 3 if the priority level is correct.
 
 **Use Case: UC08 - Reset Priority**
 
