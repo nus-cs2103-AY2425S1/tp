@@ -246,7 +246,7 @@ These are the overview of Prudy's commands, please refer to [Commands Overview](
 | `p/`  | Phone                      | Contact number                   | 3-15 digit number                                       | NIL               |
 | `e/`  | Email                      | Email address                    | Standard format (e.g., user@example.com)                | yes                    |
 | `a/`  | Address                    | Client’s address                 | Any alphanumeric and symbol                             | yes                   |
-| `t/`  | Tags                       | Custom descriptor of client      | Letters only                                            | yes                 |
+| `t/`  | Tags                       | Custom descriptor of client      | Any alphanumeric                                          | yes                 |
 | `pt/` | Policy Type                | Type of insurance policy         | Predefined types (e.g., life, health, education)        | no                   |
 | `pa/` | Policy Premium Amount      | Premium amount for the policy    | Positive decimal number (up to 2 decimal places)        | NIL                     |
 | `ca/` | Policy Coverage Amount     | Coverage amount of the policy    | Positive decimal number                                 | NIL                 |
