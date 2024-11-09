@@ -90,10 +90,9 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ListGroupsCommand.COMMAND_WORD:
-            command = new ListGroupsCommand();
-            break;
+            return new ListGroupsCommand();
 
         case GroupCommand.COMMAND_WORD:
             return new GroupCommandParser().parse(arguments);
