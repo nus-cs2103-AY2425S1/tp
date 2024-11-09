@@ -366,6 +366,7 @@ Format: `remark INDEX r/[REMARKS]`
 * Adds a remark `REMARKS` to the client at `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* If there are multiple remark inputs, only the last one will be added.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 If `[REMARKS]` of `r/` is left blank (e.g `remark 1 r/`), the remark will be deleted entirely
@@ -378,6 +379,9 @@ Examples:
 
 2. `remark 1 r/` deletes the remark of client at index `1`.
 
+
+3. `remark 1 r/Prefers Bukit Timah area r/Prefers Jurong area` only adds remark "Prefers Jurong area" to the client at index `1`.
+
 Visual example of correct output [Example `1.`]:
 
 ![RemarkAddCommandShowcase](images/user-guide-images/RemarkAddCommandShowcase.png)
@@ -385,6 +389,10 @@ Visual example of correct output [Example `1.`]:
 Visual example of correct output [Example `2.`]:
 
 ![RemarkRemoveCommandShowcase](images/user-guide-images/RemarkRemoveCommandShowcase.png)
+
+Visual example of correct output [Example `3.`]:
+
+![MultipleRemarkAddCommandShowcase](images/user-guide-images/MultipleRemarkAddCommandShowcase.png)
 
 ### Adding a property listing : `listing add`
 
