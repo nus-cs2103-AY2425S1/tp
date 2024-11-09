@@ -291,7 +291,7 @@ MediContacts data are saved in the hard disk automatically after any command mod
 
 ### Editing the data file
 
-MediContacts data are saved automatically as a JSON file `~/data/addressbook.json`, where ~ is the directory the user is running the jar file. Advanced users are welcomed to update the data directly by editing that data file.
+MediContacts data are saved automatically as a JSON file `[WORKING DIRECTORY]/data/addressbook.json`, where [WORKING DIRECTORY] is the directory the user is running the jar file. Advanced users are welcomed to update the data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, MediContacts will discard all data and start with an empty data file at the next run. Hence, it is recommended to save a backup of the file before editing it.<br>
