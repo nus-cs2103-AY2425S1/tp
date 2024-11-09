@@ -80,7 +80,7 @@ Medicontact is a desktop app to help **small GP Clinics in Singapore for manage 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 
@@ -116,7 +116,7 @@ Adds a person to the address book.
 
 <img src="images/addEvie.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -146,7 +146,7 @@ the action will be aborted, and the address book will remain unchanged.
 
 <img src="images/clearConfirmation.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -187,7 +187,7 @@ Deletes the specified person from the address book.
 
 <img src="images/deleteExpected.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -214,7 +214,7 @@ Edits an existing person in the address book.
 
 <img src="images/editJohn.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -226,7 +226,7 @@ Exits the program.
 
 **Format**: `exit`
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 
@@ -258,7 +258,7 @@ Filter persons whose age and/or appointment dates are within the specified range
 
 <img src="images/filterResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -287,7 +287,7 @@ Examples:
 
 <img src="images/findResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -305,7 +305,7 @@ Shows you a help window with useful resources which includes:
 
 <img src="images/helpWindow.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -419,7 +419,7 @@ The following is an example of a valid JSON file content.
   
 - To add more patient data to the `"persons"` array include the following after `"starredStatus" : " " }`. You may add as many patient data as needed. Remember each patient data must be enclosed with `{}` and seperated by a comma `,`
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 
@@ -437,7 +437,7 @@ Shows an alphabetically sorted list of all persons in the address book.
 
 <img src="images/listResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -454,7 +454,7 @@ Shows a list of all starred persons in the address book.
 
 <img src="images/listStarResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -481,7 +481,7 @@ Edits an existing person's note in the address book, which contains `PREVIOUS AP
 
 <img src="images/noteResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -497,7 +497,7 @@ remain sorted alphabetically at the end of the list.
 
 <img src="images/sortResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -521,7 +521,7 @@ Stars the specified person from the address book into favourites.
 
 <img src="images/starResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -546,7 +546,7 @@ Unstars the specified person from the address book removing them from favourites
 
 <img src="images/unstarResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -571,7 +571,7 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 
 <img src="images/viewResult.png" width="800">
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 <br>
@@ -580,7 +580,7 @@ Views the person's note at the specified `INDEX` or with the specified `NAME`.
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 
@@ -596,7 +596,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 </box>
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 
@@ -613,7 +613,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 <br>
 
@@ -626,7 +626,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -635,7 +635,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -659,7 +659,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` |
 | **View**   | `view INDEX` or `view NAME` <br/> e.g., `view 3`, `view Alex Yeoh` |
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -682,4 +682,4 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Sex**                | Should be alphanumeric. Should not be blank.<br>Valid example: `Female` |
 | **Tags**               | Should be alphanumeric.<br>Valid example: `Patient`          |
 
-[Return to Table of Contents](#table-of-contents)
+[Return to Table of Contents](#medicontact)
