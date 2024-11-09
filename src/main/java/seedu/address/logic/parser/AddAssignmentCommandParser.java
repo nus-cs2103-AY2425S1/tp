@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Assignment;
@@ -32,6 +33,10 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
 
         String title = argMultimap.getValue(PREFIX_NAME).get();
         String dueDateString = argMultimap.getValue(PREFIX_DUEDATE).get();
+
+        if (title.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_EMPTY_ASSIGNMENT_TITLE);
+        }
 
         LocalDateTime dueDate;
         dueDate = ParserUtil.parseDueDate(dueDateString);

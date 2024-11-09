@@ -44,6 +44,10 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
 
         String title = argMultimap.getValue(PREFIX_NAME).get();
 
+        if (title.isEmpty()) {
+            throw new ParseException(Messages.MESSAGE_EMPTY_ASSIGNMENT_TITLE);
+        }
+
         Assignment assignment = new Assignment(title, LocalDateTime.now());
         return new MarkAssignmentCommand(index.getZeroBased(), assignment);
     }
