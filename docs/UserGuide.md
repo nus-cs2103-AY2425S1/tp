@@ -40,7 +40,7 @@ GoonBook Level 3 (AB3) is a **desktop app for managing students, optimized for u
 
 - If you are on MacOS do note you may need to download a specific JDK 17 version. More on this [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html#programming-language).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W08-4/tp/releases/tag/v1.5).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your GoonBook.
 
