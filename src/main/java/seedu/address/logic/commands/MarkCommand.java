@@ -30,7 +30,10 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the attendance of person by index number";
+            + ": Marks the attendance of person by index number\n"
+            + "Parameter: INDEX\n"
+            + "Example: mark 1\n"
+            + "Note that you cannot mark a parent";
 
     public static final String MESSAGE_MARK_PERSON_SUCCESS = "Marked attendance for: %1$s";
     public static final String MESSAGE_CANNOT_MARK_PARENT = "You can't mark attendance for a parent";

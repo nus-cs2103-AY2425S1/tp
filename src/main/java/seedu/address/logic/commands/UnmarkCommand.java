@@ -30,7 +30,10 @@ public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unmarks the attendance of person by index number";
+            + ": Unmarks the attendance of person by index number\n"
+            + "Parameter: INDEX\n"
+            + "Example: unmark 1\n"
+            + "Note that you cannot unmark a parent.";
 
     public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Unmarked attendance for: %1$s";
     public static final String MESSAGE_CANNOT_MARK_PARENT = "You can't unmark attendance for a parent";

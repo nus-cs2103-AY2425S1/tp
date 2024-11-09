@@ -22,7 +22,7 @@ public class BatchEditCommand extends Command {
     public static final String COMMAND_WORD = "batch-edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Change the specified tag with new tag\n"
+            + ": Changes the specified tag with new tag\n"
             + "Parameters: "
             + PREFIX_TAG + "OLD_TAG" + " "
             + PREFIX_TAG + "NEW_TAG\n"
@@ -30,7 +30,7 @@ public class BatchEditCommand extends Command {
             + PREFIX_TAG + "sec2 " + PREFIX_TAG + "sec3";
 
     public static final String MESSAGE_BATCH_EDIT_EACH_PERSON_CHANGED = "Tag Changed: %s -> %s";
-    public static final String MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG = "No person with Tag= %s is found";
+    public static final String MESSAGE_BATCH_EDIT_NO_PERSON_WITH_TAG = "No person with Tag(s) %s is found";
 
     private final Tag oldTag;
     private final Tag newTag;
