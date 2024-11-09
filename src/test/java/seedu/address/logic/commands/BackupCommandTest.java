@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -32,6 +34,8 @@ public class BackupCommandTest {
     private static final Path MISSING_BACKUP_ADDRESSBOOK = MISSING_BACKUP_FILE.resolve("backupMissingAddressBook.json");
 
     private static final Path TYPICAL_ADDRESSBOOK = TEST_DATA_FOLDER.resolve("typicalAddressBook.json");
+
+    private static final Path ADDRESSBOOK_NOT_PRESENT = TEST_DATA_FOLDER.resolve("nonExistentAddressBook.json");
 
     private void deleteIfPresent(Path file) {
         try {
@@ -72,6 +76,17 @@ public class BackupCommandTest {
 
         assertCommandSuccess(backupCommand, model, expectedMessage, model);
         checkIfIdentical(orignalAddressBook, backupAddressBook);;
+    }
+
+    @Test
+    public void execute_orinalDataFileDoesNotExist_throwsCommandException() {
+        Path orignalAddressBook = ADDRESSBOOK_NOT_PRESENT;
+        Path backupAddressBook = BACKUP_ADDRESSBOOK_PRESENT;
+        Model model = new ModelStub(orignalAddressBook, backupAddressBook);
+        String expectedMessage = BackupCommand.NO_DATA_FILE;
+        BackupCommand backupCommand = new BackupCommand();
+
+        assertThrows(CommandException.class, expectedMessage, () -> backupCommand.execute(model));
     }
 
     private class ModelStub implements Model {
