@@ -608,40 +608,185 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
+    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts and events. The window size may not be optimum.
+    2. Should double-clicking the jar file not launch the application, you may try running the jar file from the command line, instructions can be found in the [User Guide](UserGuide.md) under Quick Start.
 1. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Exiting the application
+    1.  Click the "X" button located in the top right corner of the window or type the "exit" command to exit the application.
 
-### Deleting a person
+### Adding an event
 
-1. Deleting a person while all persons are being shown
+1. Add an event while all events are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: None
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `add e n/Tech Fair a/Suntec City s/2024-10-15 14:30 t/fun`<br>
+       Expected: Event named Tech Fair is added to the list under Events. The status message shows the successful creation of the event and its details.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `add e n/fail`<br>
+       Expected: No event is added. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect add event commands to try: `add e`, `add e n/name s/2025-12-02 20:00`, `...`<br>
+       Expected: Similar to previous.
+
+### Deleting an event
+
+1. Deleting an event while all events are being shown
+
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+
+    1. Test case: `delete e 1`<br>
+       Expected: First event is deleted from the list. Details of the deleted event shown in the status message.
+
+    1. Test case: `delete e 0`<br>
+       Expected: No event is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete e`, `delete e x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+### Finding an event by name
+
+1. Finding an event by name while all events are being shown
+
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+
+    1. Test case: `find e party`<br>
+       Expected: All events with the word "party" in their name are displayed in the list. Status message shows how many events were found.
+       The search is case-insensitive and is not partial.
+
+    1. Test case: `find e beach barbeque`<br>
+       Expected: All events with the word "party" and or "barbeque" in their name are displayed in the list. Status message shows how many events were found.
+
+   1. Test case: `find e`<br>
+      Expected: No event is found. Error details shown in the status message. Status bar remains the same.
+
+### Searching a contact by tag
+
+1. Searching a contact while all contacts are being shown
+
+    1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
+
+    1. Test case: `search p friend`<br>
+       Expected: All contacts with the word "friend" in their tags are displayed in the list. Status message shows how many contacts were found.
+       The search is case-insensitive and is not partial.
+
+    1. Test case: `search p friend colleague`<br>
+       Expected: All contacts with the word "friend" and or "colleague" in their tags are displayed in the list. Status message shows how many contacts were found.
+
+   1. Test case: `search p`<br>
+      Expected: No contact is found. Error details shown in the status message. Status bar remains the same.
+
+### Searching an event by tag
+
+1. Searching an event while all events are being shown
+
+    1. Prerequisites: List all events using the `list` command. Multiple events in the list.
+
+    1. Test case: `search e fun`<br>
+       Expected: All events with the word "fun" in their tags are displayed in the list. Status message shows how many events were found.
+       The search is case-insensitive and is not partial.
+
+    1. Test case: `search e fun food`<br>
+       Expected: All events with the word "fun" and or "food" in their tags are displayed in the list. Status message shows how many events were found.
+
+    1. Test case: `search e`<br>
+       Expected: No event is found. Error details shown in the status message. Status bar remains the same.
+
+### Linking a contact to an event
+
+1. Linking a contact to an event while all contacts and events are being shown
+
+    1. Prerequisites: List all contacts and events using the `list` command. One contact and one event in the list. The event in the event list is named Company Meeting.
+
+    1. Test case: `link 1 ev/Company Meeting`<br>
+       Expected: Links the first contact to the event named Company Meeting. Details of the linked event shown in the status message.
+       Status bar updates to show the event under the first contact.
+
+    1. Test case: `link 1 ev/Not Company Meeting`<br>
+       Expected: No link is made between the contact and event. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `link`, `link x ev/Company Meeting`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Unlinking a contact to an event
 
-### Saving data
+1. Unlinking a contact to an event while all contacts and events are being shown
 
-1. Dealing with missing/corrupted data files
+    1. Prerequisites: List all contacts and events using the `list` command. One contact and one event in the list. The event in the event list is named Company Meeting and is linked to the contact.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: `unlink 1 ev/Company Meeting`<br>
+       Expected: Unlinks the first contact to the event named Company Meeting. Details of the unlinked event shown in the status message.
+       Status bar updates to remove the event under the first contact.
 
-1. _{ more test cases …​ }_
+    1. Test case: `unlink 1 ev/Not Company Meeting`<br>
+       Expected: No link is destroyed between the contact and event. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `unlink`, `unlink x ev/Company Meeting`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+### Project Scope and Difficulty
+This project was significantly more demanding than the Address Book 3 (AB3) reference project due to the difficulty of
+managing multiple entity types and broader scope. While AB3 focuses on a single entity type (Persons),
+Eventory expands upon this through the addition of Events and linking between the two types. This increases the 
+difficulty of implementation of features such as deleting due to dependencies between entities, needing a more solid
+data model and careful planning surrounding the logic parts of the application.
+
+### Challenges Faced
+
+* **Entity Linking:** Creating relationships between the entities of Contacts and Events through the linking raised
+significant issues, especially in maintaining data consistency
+* **Testing and Code Coverage:** Maintaining high test coverage in such a highly abstracted and complicated system proved
+challenging, adding to the workload of the project
+* **Clear Communication:** Maintaining clear communication added to the difficulty of the project due to differences in
+perspective, methodologies and context between each team member that could lead to misunderstandings.
+
+### Effort Required
+The project required approximately **1.4x** the effort used in AB3, largely due to the aforementioned challenges faced.
+
+### Achievements
+In spite of the difficulties, we have successfully done the following:
+* Create a scalable and systemic structure that meets the needs of event planning organizations
+* Attain a respectable test coverage level for key functionalities
+* Implemented an intuitive and user-friendly interface that maintains the fast operation time
+* Incorporated new features such as linking and searching by tag name, extending the basic features of AB3
+
+### Reuse and Libraries
+This project uses several libraries which supports critical functionality:
+1.  **JUnit 5:** Utilised in unit testing, speeding up the efficiency of the testing process, improving code quality
+2.  **JavaFX:** Utilised in building the Graphical User Interface (GUI), improving the time taken to implement a user interface
+
+For example, the tests folder uses JUnit 5 heavily to conduct tests. Our work involving tests consists of a significant
+part of the workload. By using JUnit 5, we are able to save an estimated **15-20%** of effort and time as compared to building
+test classes from scratch.
+
+### Conclusion
+The project called for a lot of cooperation and work. Despite this, it results in a robust application
+that addresses many issues faced by event planning companies. It reflects the teams strength in being able to deliver
+even when there are significant challenges.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+**Team Size: 5**
+
+The following planned enhancements address known feature flaws identified during the PE-D phase. Each enhancement
+specifically describes the feature flaw and the proposed solution, providing details on how the feature will be improved.
+This section lists _ planned enhancements, adhering to the team size x 2 limit.
+
+1. **Enhance Error Handling**
+   1. **Feature Flaw:** Current error messages are generic, with no specifics on the issue
+   2. **Proposed Fix:** Improve the parser to be able to identify specific issues
+   3. **Expected Outcome:** Improved ease of usage for users
