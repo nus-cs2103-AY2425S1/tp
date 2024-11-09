@@ -323,6 +323,7 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
 Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`
 
+**Constraints**
 - The `NRIC` must belong to a person already in CareLink
 - `DATE` must be in the format DD/MM/YYYY (e.g 01/01/2025)
 - `START_TIME` and `END_TIME` must be in 24-hour format HH:MM (e.g 14:30)
@@ -335,6 +336,7 @@ Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_T
 
 - `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` changes the appointment date, timings remain the same
 - `editapp nric/S1234567D d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, appointment remains on the same day.
+
 
 **Common errors and their meanings:**
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
