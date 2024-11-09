@@ -163,5 +163,25 @@ public class ModelManagerTest {
         assertTrue(backupCreated, "A new backup file should be created.");
     }
 
+    @Test
+    public void backupData_descriptionTooLong_throwsCommandException() throws IOException {
+        // Create a description longer than the maximum allowed length
+        String longDescription = "a".repeat(300); // Exceeds 250 characters
+
+        // Ensure the address book is saved so the source file exists
+        storage.saveAddressBook(modelManager.getAddressBook());
+
+        // Attempt to perform backup with long description
+        CommandException exception = assertThrows(CommandException.class, () -> {
+            modelManager.backupData(longDescription);
+        });
+
+        // Check that the exception message is correct
+        assertEquals(
+                "Failed to create backup: Backup file name exceeds the maximum length of 250 characters. Please shorten your description.",
+                exception.getMessage()
+        );
+    }
+
 
 }
