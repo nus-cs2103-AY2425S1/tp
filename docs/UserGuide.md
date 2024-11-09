@@ -13,9 +13,9 @@
 </pic>
 </center>
 
-KonTActs is a **desktop app designed for CS2030S teaching assistants (TAs) who works at the National University of Singapore, School of Computing.
+KonTActs is a **desktop app designed for CS2030S Teaching Assistants (TAs) who works at the National University of Singapore, School of Computing.
 
-KonTActs streamlines contact management, helping you keep track of your students contact information more effectively compared to traditional GUI apps. 
+KonTActs streamlines contact management, helping you keep track of your students contact, attendance and assignment information more effectively compared to traditional GUI apps. 
 
 KonTActs **main features** includes: 
 1. Attendance tracking: Track student's weekly attendance.
@@ -109,7 +109,7 @@ To get started,
 --------------------------------------------------------------------------------------------------------------------
 ## <i class="fa-solid fa-bolt-lightning"></i> Parameter shortcuts
 
-Most parameters in KonTActs come equipped with their equivalent shortcuts.
+All parameters in KonTActs come equipped with their equivalent shortcuts.
 
 | Parameter     | Shortcut |
 |---------------|----------|
@@ -292,7 +292,7 @@ Eg. `t/friend t/family`
 
 <md>**Examples:**</md>
 * `add name/John Doe email/johnd@example.com telegram/@john github/swag-john33` adds John Doe's contact details with no tags.
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com tele/@Betsy t/criminal g/betsy-29` uses shortcut commands to add Betsy Crowe's contact details with a friend and criminal tag.
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com tele/@Betsy t/criminal g/betsy-29` uses shortcut parameters to add Betsy Crowe's contact details with a friend and criminal tag.
 </box>
 
 
@@ -451,7 +451,7 @@ Deletes the specified person from the address book.
 
 <md>**Examples:**</md>
 * `list` followed by `rm n/Betsy` deletes the person with the name `Betsy`. It uses the shortcut command and parameter.
-* `find Betsy` followed by `delete n/Alex` will not delete the person named `Alex` as `Alex` does not appear in the contact list.
+* `find Betsy` followed by `delete n/Alex` will not delete the person named `Alex` as `Alex` does not appear in the filtered list.
 * `delete name/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
 </box>
 
@@ -483,8 +483,8 @@ Launches GitHub repository of the specified person on the browser from the addre
 <box type="definition" icon=":fa-solid-book:" light>
 
 <md>**Examples:**</md>
-* `git name/James` launches the GitHub repository of the person named `James`, using the GitHub username assigned to `James`. It uses the shortcut command.
-* `github n/Harry` launches the GitHub repository of the person named `Harry`, using the GitHub username assigned to `Harry`.
+* `git n/James` launches the GitHub repository of the person named `James`, using the GitHub username assigned to `James`. It uses the shortcut command.
+* `github name/Harry` launches the GitHub repository of the person named `Harry`, using the GitHub username assigned to `Harry`.
   ![github use case for launching Harry's repository](images/githubUsage.png)
 </box>
 
@@ -835,8 +835,7 @@ Example with the following assignment.json file:
   ]
 }
 ```
-`addGrade name/JohnDoe assignment/Ex01 score/5` will add an assignment name
-Assignment01 with score 5 to contact JohnDoe.
+`addGrade name/JohnDoe assignment/Ex01 score/5` will add an assignment name `Ex01` with score 5 to contact JohnDoe.
 Alternatively, `ag n/JohnDoe a/Ex01 s/5` will do the same using the shortcut command and parameters.
 
 `addGrade n/JohnDoe a/Ex01 s/12` will not add the assignment to contact JohnDoe
@@ -943,5 +942,5 @@ Furthermore, we believe that duplicate names are better managed based on how the
 3. **When using excel to edit telegram username**, typing "@" will trigger the command function which will output a "Function is not valid" error. The remedy is to prefix the telegram username with an apostrophe `'` to escape from the command function. For example: typing `'@james`.
 ![excel known issue](images/excelKnownIssue.png)
 4. **Certain fields such as email are not displayed on the list view**, and can only be seen via `view`. This is intended so that the list view does not become cluttered with too much information.
-5. Names that contains the `/` characters will cause konTActs to show an error message although a person can legally have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the `/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name should be added as `Kumar SO Mahesh`
+5. Names that contains the `/` characters will cause konTActs to show an error message although a person can legally have `/` in their legal name such as `Kumar S/O Mahesh`. This is a limitation within konTActs as it uses the `/` charcter internally. The solution for this is to totally omit the `/` altogether. In this case, the name may be added as `Kumar SO Mahesh` or `Kumar son of Mahesh` depending on your preference.
 --------------------------------------------------------------------------------------------------------------------
