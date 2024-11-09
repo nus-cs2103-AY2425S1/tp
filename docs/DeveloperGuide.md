@@ -564,9 +564,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. All data is written to file specified in `preferences.json`
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. By default, the data is saved in the file `"addressBookFilePath" : "data\\addressbook.json"`.
+   2. Whenever a command is used to modify the data (e.g., `add`, `delete`, `edit`), the data is saved into the file indicated in `preferences.json`.
 
 ### Adding a Task
 
