@@ -605,9 +605,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 companies without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  The system should respond to user commands without noticeable lag for most operations.
-5.  The application should allow for seamless data export in common formats (e.g., CSV or JSON) for external backup or sharing.
+3. Should be able to store up to 1000 companies with up to 1000 applications each.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. The system should respond to user commands without noticeable lag for most operations.
+6. The application should allow for seamless data export in common formats (e.g., CSV or JSON) for external backup or sharing.
 
 *{More to be added}*
 
@@ -900,3 +901,9 @@ The inverse of adding to favourites. The "star" in the top-right corner should c
       ```
 
 [back to top](#internbuddy-developer-guide)
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. Expanding the set of special characters allowed in the `NAME` field to support a wider range of company names and applications. Currently, only alphanumeric characters are permitted, which means names like "Ernst & Young" and "UI/UX developer" cannot be accurately represented.

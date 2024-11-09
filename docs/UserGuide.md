@@ -171,18 +171,21 @@ Before diving into our features, do note that we set some specifications for nam
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* `NAME` would be the company's name, InternBuddy only allows alphanumeric characters (letters and numbers) to represent it. <br>
+* `NAME` would be the company's name, InternBuddy only allows alphanumeric characters (letters and numbers only) and spaces to represent it. <br>
   e.g. `7Eleven` is allowed but not `7-Eleven` because `-` is neither a letter nor a number.
 
 * `PHONE_NUMBER` is the company's phone number. Company phone numbers should be at least 3 digits long, does not take into account the `+` prefix and must be all numbers.
   e.g. `85092323`, `0122345677`
 
-* InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters again (letters and numbers). The following special characters `+ - _ .` are allowed in `local-part` but note that:
+* InternBuddy defines `EMAIL` as `local-part@domain`, where `local-part` and `domain` can only consist of alphanumeric characters as well (letters and numbers only). The following special characters `+ - _ .` are allowed in `local-part` but note that:
     1. `local-part` can't begin or end with any special characters.
     2. `local-part` can't have consecutive special characters in it.
     3. The only special characters allowed in `domain` are periods (`.`) are allowed in `domain` and follows the 2 rules for `local-part` above.
+    4. Each word between periods in `domain` (e.g. `nus` and `edu` in `nus.edu`) must be at least 2 characters long.
 
     e.g. `abc-123+spam@nus.edu.sg`
+
+* `TAG` acts like a label or a category that you assign to a company, it must be a single word and use only alphanumeric characters, meaning no spaces or special symbols.
 
 * Commands are **case-sensitive**, meaning they must be typed exactly as shown. <br>
   e.g. to use the `add` command to add a company, type `add n/Tencent e/tencent@gmail.com`. Variations like `ADD ...`, `Add ...`, or `adD ...` will not work.
@@ -346,7 +349,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `inc` will match `Inc`
 * The order of the keywords does not matter. e.g. `Ltd Pte` will match `Pte Ltd`
-* Only the name is searched.
 * Only full words will be matched e.g. `Inc` will not match `Incorporated`
 * companies matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Tech Bro` will return `Good Tech`, `Bro Inc`
@@ -490,6 +492,8 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If running `java -jar internbuddy.jar` gives error**, such as terminal displaying an error, ensure that Java 17 or higher is installed. Run `java -version` to check your version. For Mac users, check if you have followed the advisory given [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html).
+4. `INDEX`, `COMPANY_INDEX`, and `APPLICATION_INDEX` parameters are designed to support managing up to 1000 companies, each with 1000 applications. Entering values beyond this range (e.g., greater than 1000) may lead to undefined behavior, so please ensure indexes stay within the specified bounds.
+5. The error message for the `EMAIL` field in a company's details does not specify the exact reason for format violations (e.g., each segment of the domain name between periods must be at least 2 characters long). For detailed formatting rules and examples, please refer to the user guide.
 
 [back to top](#internbuddy-user-guide)
 
