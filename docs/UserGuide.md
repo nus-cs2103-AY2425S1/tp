@@ -4,11 +4,11 @@ title: User Guide
 ---
 ## Overview
 ClinicBuddy aims to enhance the patient management process for small clinics, creating a platform to track patient
-information such as their treatment, contact information, visit records and future appointments while still having the
+information such as their contact information and appointment while still having the
 benefits of a Graphical User Interface (GUI).
 
 - **Patient Records Management:** Add, update, delete, and view patient details such as name, age, contact information, and appointments.
-- **Appointment Scheduling:** Easily track patient appointments with scheduling and reminder features.
+- **Appointment Scheduling:** Easily track patient appointments with scheduling features.
 - **Backup and Restore:** Securely save and retrieve patient records with manual and automated backup options, ensuring data recovery in case of accidental deletion.
 - **Search and Filter:** Quickly locate patient records by name, NRIC, or appointment date, making it easy to manage large numbers of patients.
 - **Custom Operating Hours:** Set and adjust clinic operating hours, with automatic verification of scheduled appointments within these hours.
@@ -143,16 +143,17 @@ Adds a patient to the address book.
 
 Format: `add n/NAME a/AGE g/GENDER i/NRIC c/CONTACT_NUMBER e/EMAIL h/ADDRESS [apt/APPOINTMENT] [t/TAG]…​`
 
-* Names must contain alphanumeric characters and spaces.
-* Age should only contain numbers and should be between `1-3` digits long inclusive.
-* Gender is for biological gender and should only contain `M` for Male or `F` for Female.
-* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter.
+* Names must contain alphanumeric characters and spaces. Case-sensitive
+* Age should only contain numbers and should be between 0-999 inclusive.
+* Gender is for biological gender and should only contain `M` for Male or `F` for Female. Case-insensitive.
+* NRIC must start with `S`, `T`, `F`, `G` or `M`, with 7 numbers and then ending with a letter. It is case-insensitive and used as a unique identifier
 * Phone numbers should only contain numbers, and it should be `3-10` digits long.
-* Addresses can take any values.
-* Emails should be of the format local-part@domain.
+* Addresses can take any values. Case-sensitive.
+* Emails should be of the format local-part@domain. Case-sensitive.
 * Appointments should be in a format of `dd/MM/yyyy HH:mm`.
-* Tags are alphanumeric.
-* Appointments are made in 15 minute intervals starting from given time
+* Tags are alphanumeric. Case-sensitive.
+* Appointments are made in 15 minute intervals starting from given time and cannot be made after 14 minutes before closing time.
+* Appointments cannot carry over into the next day. (Eg. an Appointment from 23:58 to 00:13 will not be allowed)
 * Appointments can accept other date-time formats such as `dd-MM-yyyy HH:mm` , `dd MM yyyy HH:mm`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
@@ -532,7 +533,7 @@ the data of your previous AddressBook home folder.
 5. The `restore` command overwrites current patient records with backup data. This could lead to unintentional loss of recent changes. <br>
    **Solution:** Always create a new **backup before performing a restore to preserve current records.
 6. Updating operating hours will fail if there are existing appointments outside the new hours. <br>
-   **Solution:** `Reschedule` or `delete` appointments that fall outside the proposed hours before making the update.
+   **Solution:** Use the `deleteappt` command to delete or `update` appointments that fall outside the proposed hours before making the update.
 7. If multiple backups have similar descriptions, it may be challenging to distinguish between them.
    **Solution:** Use unique and specific descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
 
