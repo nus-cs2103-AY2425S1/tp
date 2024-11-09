@@ -360,14 +360,14 @@ Format: `clear` then `Y` or `Yes`
 
 ### Clearing all persons : `clear p`
 
-Displays a confirmation, enter "Y" or "Yes" to clear all persons from the address book.
+Displays a confirmation, enter exactly "Y" or "Yes" to clear all persons from the address book.
 
 Format: `clear p` then `Y` or `Yes`
 
 
 ### Clearing all events : `clear e`
 
-Displays a confirmation, enter "Y" or "Yes" to clear all events from the address book.
+Displays a confirmation, enter exactly "Y" or "Yes" to clear all events from the address book.
 
 Format: `clear e` then `Y` or `Yes`
 
