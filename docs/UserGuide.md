@@ -267,7 +267,7 @@ Adds a patient's details to the system.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` adds a patient named `John Doe`, with phone number `98765432`, email `johnd@example.com` and address `John street, block 123, #01-01` into the system.
-* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tagges as `Diabetic` to the system.
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Blk 50 Tampines Street 21, #08-281 p/1234567 t/Diabetic` adds a patient named `Betsy Crowe` with email `betsycrowe@example.com`, address `Blk 50 Tampines Street 21, #08-281`, phone number `1234567` and tagged as `Diabetic` to the system.
 <br></br>
 
 #### 6.2.2 Listing all patients: `list`
