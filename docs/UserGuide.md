@@ -152,7 +152,9 @@ For future enhancements and improvements of parameter constraints, please visit 
 
 ## Duplicate Client Detection
 
-A client is only considered as **duplicate** **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]` and `[EMAIL_ADDRESS]` are **exactly the same**.
+A client is only considered as **duplicate** **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]` and `[EMAIL_ADDRESS]` are **exactly the same** (including case sensitivity).
+
+This is to allow the user to have a greater flexibility of manipulating the client's information.
 
 **For example:** All the clients stated below the initial client are **NOT CONSIDERED** as duplicates.
 
@@ -169,7 +171,7 @@ An **initial client** with the name: `Jason Lee`, phone number: `91231231` and e
 2. A client with the name: `Jason Lee`, phone number: `91231231` and email address `NOTjasonlee@example.com`.
 3. A client with the name: `Jason Lee`, phone number: `-` and email address `jasonlee@example.com`.
 4. A client with the name: `Jason Lee`, phone number: `91231231` and email address `-`.
-
+5. A client with the name: `JASON LEE`, phone number: `91231231` and email address `jasonlee@example.com`.
 <box type="info" seamless>
 
 **Note:** `-` signifies an empty parameter without any characters.
@@ -183,8 +185,8 @@ An **initial client** with the name: `Jason Lee`, phone number: `91231231` and e
 1. A client with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`.
 </box>
 
-
 --------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 ### Viewing help : `help`
