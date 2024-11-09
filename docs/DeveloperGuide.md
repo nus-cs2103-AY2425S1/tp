@@ -14,7 +14,10 @@
 <!-- Acknowledgements -->
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on AddressBook-Level3 created by the [SE-EDU initiative](https://se-education.org/).
+The appendixes are referenced from [AY2425S1-CS2103T-W12-2](https://ay2425s1-cs2103t-w12-2.github.io/tp/DeveloperGuide.html).
+
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +55,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete p 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -92,7 +95,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete p 1")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
@@ -156,110 +159,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
-
-This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
---------------------------------------------------------------------------------------------------------------------
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -307,7 +206,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                         | see a list of commands                                     | quickly use it as reference                                                |
 | `* * *`  | meticulous planner                               | add, edit, and delete contacts                             | maintain only a list of essential contacts                                 |
 | `* * *`  | efficiency-focused user                          | search by name                                             | save time in looking for specific contacts                                 |
-| `* * *`  | frequent user                                    | save and load all my data                                  | Use the application across multiple sessions                               |
+| `* * *`  | frequent user                                    | save and load all my data                                  | use the application across multiple sessions                               |
 | `* *`    | easily overwhelmed planner                       | see priorities of work to be done                          | better manage my time                                                      |
 | `* *`    | team member                                      | share contacts with others                                 | work with others more effectively                                          |
 | `* *`    | frequent user                                    | import and export contacts                                 | migrate between working platforms                                          |
@@ -508,8 +407,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS)**
 
-1. User requests to clear Eventory contacts and events.
-2. Eventory removes all contacts and events in memory.
+1. User requests to clear data in Eventory by specifying one of the following options:
+    - Clear all contacts and events.
+    - Clear only contacts.
+    - Clear only events.
+2. Eventory prompts the user with a confirmation message.
+3. User confirms the action:
+    - If the user confirms, Eventory executes the clear command and removes the selected data (contacts, events, or both) from memory.
+    - If the user declines, Eventory aborts the clear command without removing any data.
 
     *Use case ends.*
 
@@ -582,14 +487,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 6a. `Essential` The system should avoid any discriminatory language or culturally sensitive imagery in user messages or templates, ensuring a respectful environment for all users.
 - 6b. `Novel` The contact mapping feature should not use any personal data without user consent, ensuring compliance with privacy regulations like GDPR.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **MSS:** Also known as Main Success Story. It is the scenario that a user should abide by when using the programme
 * **API:** Also known as Application Programming Interface. It is the set of rules that allow different software to communicate with each other.
+
+---
+
+### Requirements yet to be implemented
+
+**1. Keyboard Shortcut for Quick View Switching**
+- Currently, the app requires users to rely on GUI mouse clicks to switch between "Contacts" and "Events" views, which slows down navigation in a CLI environment. 
+- To improve the efficiency of the interface, a keyboard shortcut or CLI command should be added to allow seamless switching between these views. 
+- This will enhance the CLI-friendliness of the app and speed up user navigation.
+
+**2. Automated Communication for Event Contacts**
+- Currently, there is no option for users to send messages directly to contacts linked to an event, making communication difficult when managing events. 
+- A messaging feature should be implemented to allow users to send bulk messages to all contacts associated with a particular event. 
+- Additionally, the feature should support both instant and scheduled messaging, so users can plan communications in advance and keep participants informed easily.
+
+**3. Batch Import and Export for Contacts and Events**
+- Currently, the system does not support batch import or export of contacts and events, limiting its scalability for users who need to manage large data sets. 
+- A feature should be introduced to allow users to import and export contacts and events using formats like CSV or JSON. 
+- This would streamline data management and make it easier for users to transfer large quantities of data between systems.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -620,11 +542,11 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. Exiting the application
-    1.  Click the "X" button located in the top right corner of the window or type the "exit" command to exit the application.
+    1.  Click the "X" button located in the top right corner of the window or type the `exit` command to exit the application.
 
 ### Adding an event
 
-1. Add an event while all events are being shown
+* Add an event while all events are being shown
 
     1. Prerequisites: None
 
@@ -639,7 +561,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting an event
 
-1. Deleting an event while all events are being shown
+* Deleting an event while all events are being shown
 
     1. Prerequisites: List all events using the `list` command. Multiple events in the list.
 
@@ -654,7 +576,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding an event by name
 
-1. Finding an event by name while all events are being shown
+* Finding an event by name while all events are being shown
 
     1. Prerequisites: List all events using the `list` command. Multiple events in the list.
 
@@ -670,7 +592,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Searching a contact by tag
 
-1. Searching a contact while all contacts are being shown
+* Searching a contact while all contacts are being shown
 
     1. Prerequisites: List all contacts using the `list` command. Multiple contacts in the list.
 
@@ -686,7 +608,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Searching an event by tag
 
-1. Searching an event while all events are being shown
+* Searching an event while all events are being shown
 
     1. Prerequisites: List all events using the `list` command. Multiple events in the list.
 
@@ -784,9 +706,41 @@ even when there are significant challenges.
 
 The following planned enhancements address known feature flaws identified during the PE-D phase. Each enhancement
 specifically describes the feature flaw and the proposed solution, providing details on how the feature will be improved.
-This section lists _ planned enhancements, adhering to the team size x 2 limit.
+This section lists 9 planned enhancements, adhering to the team size x 2 limit.
 
-1. **Enhance Error Handling**
-   1. **Feature Flaw:** Current error messages are generic, with no specifics on the issue
-   2. **Proposed Fix:** Improve the parser to be able to identify specific issues
-   3. **Expected Outcome:** Improved ease of usage for users
+### 1. **Enhance Error Handling**
+   1. **Feature Flaw:** Current error messages are generic, with no specifics on the issue.
+   2. **Proposed Fix:** Improve the parser to be able to identify specific issues.
+   3. **Expected Outcome:** Improved ease of usage for users.
+
+### 2. **Auto-Switch Views After Modifications**
+   1. **Feature Flaw:** After adding, editing, or deleting an event or contact, the view does not automatically switch to the relevant tab.
+   2. **Proposed Fix:** Implement logic to automatically toggle to the appropriate view after executing an event- or contact-related command.
+   3. **Expected Outcome:** Users will have immediate visual feedback after actions, reducing confusion and enhancing workflow.
+
+### 3. **Enhanced Duplicate Handling for Contacts and Events**
+1. **Feature Flaw:** Contacts with the same name are flagged as duplicates, even if they have different phone numbers or emails. Similarly, events with the same name are considered duplicates, even if they have different locations or start times.
+2. **Proposed Fix:** Allow contacts with the same name to be distinguished by phone number and/or email. For events, allow different locations and/or start times for events with the same name.
+3. **Expected Outcome:** This will improve organization by allowing contacts and events with the same name but different details. It will accommodate real-world scenarios more effectively.
+
+### 4. **Case-Insensitive Matching for Names and Tags**
+   1. **Feature Flaw:** Names and tags are case-sensitive, leading to issues when searching, adding, or editing entries with different cases.
+   2. **Proposed Fix:** Make the handling of names and tags case-insensitive throughout the app.
+   3. **Expected Outcome:** Users will have a more intuitive experience, as names and tags will be recognized regardless of letter case, minimizing errors.
+
+### 5. **Simplified Tagging for Multiple Tags**
+   1. **Feature Flaw:** Multiple tags require individual tag flags, which is cumbersome.
+   2. **Proposed Fix:** Allow users to enter multiple tags with a single flag, separated by spaces (e.g., `t/tag1 tag2 tag3`).
+   3. **Expected Outcome:** This will streamline the process of adding multiple tags, enhancing usability and reducing redundant typing.
+
+### 6. **Support for Hyphenated Names**
+   1. **Feature Flaw:** Names currently only accept alphanumeric characters and spaces, excluding hyphenated names.
+   2. **Proposed Fix:** Update validation to allow hyphens in names, enabling entry of more varied name formats.
+   3. **Expected Outcome:** This will accommodate real-world name formats, making the app more versatile for users.
+
+### 7. **Partial Matching for Find and Search**
+   1. **Feature Flaw:** The current find and search feature only supports exact word matching for names and tags.
+   2. **Proposed Fix:** Extend the find and search functionality to allow partial matching within words (e.g., "sun" for "sundown race").
+   3. **Expected Outcome:** This improvement will make find and search results more flexible and relevant, especially for users who may not remember the exact wording.
+
+These planned enhancements aim to address known issues and improve the overall usability, reliability, and user experience of **Eventory**.
