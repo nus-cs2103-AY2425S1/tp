@@ -454,7 +454,7 @@ unless specified otherwise)
 **Extensions**
 
 * 1a. There is no students in the app.
-    * 1a1. TAchy displays a "no students" message.
+    * 1a1. TAchy displays an error message.
 
       Use case ends.
 
@@ -689,6 +689,11 @@ unless specified otherwise)
 
       Use case resumes at step 2.
 
+### Planned Enhancements:
+Team size: 5
+
+1. Update Result display box to enable wrapping, and be of greater vertical length, so that users do not need to scroll in order to read the result display box.
+
 
 ### Non-Functional Requirements
 
@@ -738,6 +743,32 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
+### Adding a student
+
+1. **Adding a student with valid details**
+    1. Test case: `add_student n/John Doe p/98765432 e/johnd@example.com`<br>
+       Expected: A new student named "John Doe" with the specified phone number and email is added to the student list. Status message indicates successful addition.
+    2. Test case: `add_student n/Betsy Crowe p/91234567 e/betsycrowe@example.com t/friend`<br>
+       Expected: A new student named "Betsy Crowe" with a "friend" tag is added. Status message shows the addition success message.
+
+2. **Adding a student with invalid details**
+    1. Test case: `add_student n/John Doe p/phone e/johnd@example.com`<br>
+       Expected: No student is added. Error message shown, indicating invalid phone number format.
+    2. Other incorrect add commands to try: `add_student`, `add_student n/ e/`, `add_student n/John Doe e/invalid-email`<br>
+       Expected: No student is added. Error messages shown, indicating which fields are invalid.
+
+### Viewing a student
+
+1. **Viewing a specific student**
+    1. Prerequisites: 1 or more students listed using the `list` command.
+    2. Test case: `view_student 2`<br>
+       Expected: Detailed view of the second student in the list is displayed.
+    3. Test case: `view_student 0`<br>
+       Expected: No student is displayed. Error message shown in the status bar.
+    4. Test case: `view_student x` (where `x` is greater than the list size)<br>
+       Expected: No student is displayed. Error message indicating the index is out of bounds.
+
+
 
 ### Deleting a student
 
@@ -753,3 +784,83 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `delete_student`, `delete_student x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Editing a student
+
+1. **Editing a student’s details with valid inputs**
+    1. Prerequisites: A student list containing at least one student.
+    2. Test case: `edit_student si/1 p/98765432`<br>
+       Expected: The first student's phone number is updated to "98765432". Success message shown in the status bar.
+    3. Test case: `edit_student si/1 n/John Smith t/friend`<br>
+       Expected: The first student's name is changed to "John Smith", and a "friend" tag is added.
+
+2. **Editing a student’s details with invalid inputs**
+    1. Test case: `edit_student si/1 p/invalidphone`<br>
+       Expected: No changes made. Error message indicates invalid phone number format.
+    2. Test case: `edit_student si/2 n/`<br>
+       Expected: No changes made. Error message shown, indicating name cannot be blank.
+
+### Finding students by name
+
+1. **Finding students with existing names**
+    1. Prerequisites: The student list has multiple students with varying names.
+    2. Test case: `find John`<br>
+       Expected: Students with "John" in their names are listed. Status message shows number of matches.
+    3. Test case: `find alex david`<br>
+       Expected: Students with names containing either "alex" or "david" are listed.
+
+2. **Finding students with no matches**
+    1. Test case: `find nonexistent`<br>
+       Expected: No students are listed. Status message indicates no matches found.
+
+### Adding an assignment
+
+1. **Adding a valid assignment**
+    1. Prerequisites: The student list includes at least one student.
+    2. Test case: `add_assignment si/1 an/Assignment 1 ms/100`<br>
+       Expected: An assignment named "Assignment 1" with a maximum score of 100 is added to the first student. Success message displayed.
+
+2. **Adding an invalid assignment**
+    1. Test case: `add_assignment si/1 an/AssignmentWithInvalidCharacters@ ms/100`<br>
+       Expected: No assignment is added. Error message shown, indicating invalid characters in assignment name.
+    2. Test case: `add_assignment si/1 an/ValidName ms/-10`<br>
+       Expected: No assignment is added. Error message shown, indicating invalid score format.
+
+### Marking and unmarking an assignment
+
+1. **Marking an assignment as submitted**
+    1. Prerequisites: The student list includes at least one student with at least one assignment.
+    2. Test case: `mark si/1 ai/1`<br>
+       Expected: The first assignment for the first student is marked as submitted. Success message displayed.
+
+2. **Unmarking an assignment as submitted**
+    1. Test case: `unmark si/1 ai/1`<br>
+       Expected: The submission status for the first assignment of the first student is reset. Success message displayed. Note that if there was a grade assigned to the assignment previously, it will be reset. 
+
+### Grading an assignment
+
+1. **Grading an assignment with valid score**
+    1. Prerequisites: The student list includes at least one student with at least one assignment.
+    2. Test case: `grade si/1 ai/1 s/80`<br>
+       Expected: The score of the first assignment for the first student is set to 80. Success message displayed. Note that if there was already an assigned grade to the assignment, it will be overwritten.
+
+2. **Grading an assignment with invalid score**
+    1. Test case: `grade si/1 ai/1 s/300` (assuming max score is 100)<br>
+       Expected: No changes made. Error message displayed indicating the score is out of bounds.
+
+### Clearing all data
+
+1. **Clearing all entries**
+    1. Test case: `clear`<br>
+       Expected: All students and assignments are removed from the app. Success message shown, indicating the data has been cleared.
+
+### Viewing help
+
+1. **Displaying help message**
+    1. Test case: `help`<br>
+       Expected: A help window is displayed, showing a link to the user guide where detailed usage instructions are provided.
+
+2. **Testing help command in different contexts**
+    1. Prerequisites: The app is open and a student list is displayed.
+    2. Test case: Execute `help` while in the main screen or after performing other commands like `list` or `find`.<br>
+       Expected: Help window is shown, and the app remains in the current state without affecting the student list.

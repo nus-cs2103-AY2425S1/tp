@@ -19,23 +19,25 @@ management tasks done faster than traditional GUI apps.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `TAchy.jar` file from [here](https://github.com/AY2425S1-CS2103-F11-1/tp/releases).
+2. Download the latest `TAchy.jar` file from [here](https://github.com/AY2425S1-CS2103-F11-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for TAchy.
+3. Copy the file to the folder you want to use as the _home folder_ for TAchy.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAchy.jar` command to
    run the application.
 <br> By default, it should be saved in your Downloads folder. <br>
    - For Windows users: Type `cd Downloads`, and press `Enter`.
-   - For MacOS users: Type `cd ~/Downloads`, and press `Enter`.
-   - For Linux users: Type `cd ~/Downloads`, and press `Enter`.
+   - For MacOS and Linux users: Type `cd ~/Downloads`, and press `Enter`.
+<br> However, if you have saved your file in another location, navigate to that location. <br>
+   - For Windows users: Replace `{FILE_PATH}` with the location where the file is stored, type `cd {FILE_PATH}`, and press `Enter`.
+   - For MacOS and Linux users: Replace `{FILE_PATH}` with the location where the file is stored, type `cd ~/{FILE_PATH}`, and press `Enter`.
 
-1. Type the command `java -jar TAchy.jar` into the terminal to run the application.
+5. Type the command `java -jar TAchy.jar` into the terminal to run the application.
 <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all students.
@@ -55,19 +57,23 @@ management tasks done faster than traditional GUI apps.
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
 Term           | Explanation
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**CLI**   | `A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.`
-**GUI**  | `A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.`
-**Assignment**         | `An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.`
-**Index**| `The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.`
-**Score**  | `The score represents the grade a student receives for a specific assignment.`
-**Remark**          | `A remark allows the tutor to record important notes or comments about a student for reference.`
+**CLI**   | A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.
+**GUI**  | A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.
+**Assignment**         | An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.
+**Index**| The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.
+**Score**  | The score represents the grade a student receives for a specific assignment.
+**Remark**          | A remark allows the tutor to record important notes or comments about a student for reference.
+**Unmark**          | An Unmark command will cause a previously submitted Assignment to be reset to "not submitted". If the assignment was previously graded, the score will be reset by default.
+**Mark**            | A Mark command will cause an unsubmitted Assignment to be marked as Submitted. The grade will remain as "not submitted yet", until a Grade Command is performed.
+**Grade**           | A Grade command will assign a score to an assignment. This score must be within the valid range of 0 to the maximum score of the assignment. When the grade command executes, the submission status of the assignment will also be marked as "submitted". 
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -123,7 +129,7 @@ Examples:
 ![Example for Add Student Command](images/addStudentExample.png)
 ### Viewing a student: `view_student`
 
-Displays all the details of a student in the details panel.
+Displays all the details of a student in the details panel.<br> 
 
 Format: `view_student INDEX`
 
@@ -134,6 +140,8 @@ Format: `view_student INDEX`
 
 Constraints:
 * Index must exist in the current displayed student list.
+* Only one index can be supplied at a time. If additional indices are provided after the first valid index, they will be ignored.
+  (e.g: `view_student 1 2 3` will be identical in behaviour to `view_student 1`)
 
 Examples:
 * `list` followed by `view_student 2` displays the 2nd student in the list.
@@ -241,6 +249,7 @@ Examples:
 ### Editing an assignment: `edit_assignment`
 
 Edits an assignment belonging to a student based on the student's index number and the assignment's index.
+If an assignment is edited, but the details remain identical, TAchy will not treat this as an error. Instead,TAchy has been designed to allow for the assignment to be overwritten with the exact details.
 
 Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`
 
