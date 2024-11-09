@@ -70,7 +70,6 @@ public class EmailTest {
     public void equals() {
         Email email = new Email("valid@email");
         Email emptyEmail = new Email();
-        
         // same values -> returns true
         assertTrue(email.equals(new Email("valid@email")));
 
