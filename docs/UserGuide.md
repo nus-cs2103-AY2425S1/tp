@@ -27,7 +27,7 @@ GRUB is a quick and efficient solution to search for local dining options, tailo
 
    * `list` : Lists all restaurants.
 
-   * `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01` : Adds a restaurant named `Swensens` to the Address Book.
+   * `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01 pr/$` : Adds a restaurant named `Swensens` to the Address Book.
 
    * `delete 3` : Deletes the 3rd restaurant shown in the current list.
 
