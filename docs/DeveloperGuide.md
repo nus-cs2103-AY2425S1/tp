@@ -310,6 +310,24 @@ Given below is a sequence diagram to highlight the differences in implementation
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
+### Log Command
+Log command add a log entry to person at given index.
+Given below is a sequence diagram of favourite command usage.
+
+![ViewSequenceDiagram](images/LogCommandSequenceDiagram.png)
+![ViewSequenceDiagram](images/LogWithDateSequenceDiagram.png)
+
+
+### Favourite Command
+Favourite command given different parameter can favourite/unfavourite a person in the list at the given index, or sort the list by Favourite.
+Given below is a sequence diagram of favourite command usage.
+
+![ViewSequenceDiagram](images/FavouriteCommandSequenceDiagram.png)
+![ViewSequenceDiagram](images/favouriteSort.png)
+
+<div markdown="span" class="alert alert-info">:information_source: <strong>Note:</strong> The lifeline for `FavouriteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_

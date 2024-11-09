@@ -16,10 +16,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("log 1 l/message")
+[-> LogicManager : execute("log 1 d/date l/message")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("log 1 l/message")
+LogicManager -> AddressBookParser : parseCommand("log 1 d/date l/message")
 activate AddressBookParser
 
 create LogCommandParser
@@ -29,7 +29,7 @@ activate LogCommandParser
 LogCommandParser --> AddressBookParser
 deactivate LogCommandParser
 
-AddressBookParser -> LogCommandParser : parse("1 l/message")
+AddressBookParser -> LogCommandParser : parse("1 d/date l/message")
 activate LogCommandParser
 
 create LogCommand
@@ -52,7 +52,7 @@ LogicManager -> LogCommand : execute(m)
 activate LogCommand
 
 create History
-LogCommand -> History : History.addActivity(personToEdit.getHistory(), LocalDate.now(), message)
+LogCommand -> History : History.addActivity(personToEdit.getHistory(), date, message)
 activate History
 
 History --> LogCommand : editedHistory

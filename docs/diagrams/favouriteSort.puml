@@ -7,19 +7,16 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FavouriteCommandParser" as FavouriteCommandParser LOGIC_COLOR
 participant "f:FavouriteCommand" as FavouriteCommand LOGIC_COLOR
-participant "Person" as Person LOGIC_COLOR
-participant "r:CommandResult" as CommandResult LOGIC_COLOR
-
 end box
 
 box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("favourite 1")
+[-> LogicManager : execute("favourite")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("favourite 1")
+LogicManager -> AddressBookParser : parseCommand("favourite")
 activate AddressBookParser
 
 create FavouriteCommandParser
@@ -29,7 +26,7 @@ activate FavouriteCommandParser
 FavouriteCommandParser --> AddressBookParser
 deactivate FavouriteCommandParser
 
-AddressBookParser -> FavouriteCommandParser : parse("1")
+AddressBookParser -> FavouriteCommandParser : parse("")
 activate FavouriteCommandParser
 
 create FavouriteCommand
@@ -46,28 +43,10 @@ AddressBookParser --> LogicManager
 deactivate AddressBookParser
 
 LogicManager -> FavouriteCommand : execute()
-
-create Person
-FavouriteCommand -> Person : new(other_fields_in_personToEdit, newTagSet_presence_of_FAVOURITE_TAG_toggled)
-activate Person
-
-Person --> FavouriteCommand : editedPerson
-deactivate Person
-
-
-FavouriteCommand -> Model : setPerson(personToEdit, editedPerson)
+FavouriteCommand -> Model : sortPersonsFavourite()
 activate Model
 Model --> FavouriteCommand
 deactivate Model
-
-
-
-create CommandResult
-FavouriteCommand -> CommandResult
-activate CommandResult
-
-CommandResult --> FavouriteCommand
-deactivate CommandResult
 FavouriteCommand --> LogicManager
 deactivate FavouriteCommand
 
