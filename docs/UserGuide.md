@@ -262,7 +262,7 @@ Format: `addremark INDEX r/REMARK` to add a remark to the student at the specifi
 </box>
 
 Examples:
-* `remark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
+* `addremark 1 r/Great progress in Math` Adds the remark "Great progress in Math" to the first student.
 
 ### Deleting a Remark: `deleteremark` or `delrmk`
 
