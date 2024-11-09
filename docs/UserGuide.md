@@ -423,7 +423,7 @@ Clears all entries from the address book.
 
 ### <i class="fa-solid fa-file-import"></i> Importing data from CSV file `import`
 
-Imports contacts based on CSV file. Importing a file will replace ALL existing contacts
+Imports contacts based on CSV file
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
@@ -433,6 +433,7 @@ Imports contacts based on CSV file. Importing a file will replace ALL existing c
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 * File path can be relative or absolute, but must end with .csv
+* Importing a file will delete **ALL** existing contacts before adding the contacts from the file
 </box>
 
 <box type="definition" icon=":fa-solid-book:" light>
