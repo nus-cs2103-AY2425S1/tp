@@ -4,21 +4,69 @@
   pageNav: 3
 ---
 
+<!-- * Table of Contents -->
+<page-nav-print />
+
+
 # HR Helper User Guide
 
+--------------------------------------------------------------------------------------------------------------------
+
+### An Overview of the User Guide:
+1. [**Introduction**](#1-introduction)
+2. [**About**](#2-about)
+3. [**Starting HR Helper**](#3-starting-hr-helper)
+4. [**Features of HR Helper**](#4-features-of-hr-helper)
+   
+    4.1 [**Authentication**](#41-authentication-)
+    
+    4.2 [**Viewing help**](#42-viewing-help--help)
+
+    4.3 [**Adding an employee**](#43-adding-an-employee--add)
+
+    4.4 [**Listing all employees**](#44-listing-all-employees--list)
+
+    4.5 [**Counting employees**](#45-counting-employees--count)
+
+    4.6 [**Editing an employee**](#46-editing-an-employee--edit)
+    
+    4.7 [**Locating employee by name**](#47-locating-employees-by-name-find)
+
+    4.8 [**Deleting an employe**](#48-deleting-an-employee--delete)
+
+    4.9 [**Sorting employees**](#49-sorting-employees-sort)
+
+    4.10 [**Favoriting an employee**](#410-favoriting-an-employee--favorite)
+
+    4.11 [**Clearing all entries**](#411-clearing-all-entries--clear)
+
+    4.12 [**Exiting HR Helper**](#412-exiting-hr-helper--exit)
+
+    4.13 [**Employee details window**](#413-employee-details-window)
+
+5. [**Command Summary**](#5-command-summary)
+6. [**FAQ**](#6-faq)
+7. [**Known Issues**](#7-known-issues)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 1 Introduction
 HR Helper is a **desktop app for managing employees, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 HR Helper is mainly targeted at **fledgling companies** (e.g start-ups), who want to have an easy-to-use, intuitive human resource manager.
 With its gentle learning curve and versatility, it can be easily picked up by anyone, and used by any type of company.
 
-Whether it be 5 staff members or 500 employees, HR Helper has the capability to accommodate a wide range of company sizes and is sure to be an asset to your companies' management system! 
-
-<!-- * Table of Contents -->
-<page-nav-print />
+Whether it be 5 staff members or 500 employees, HR Helper has the capability to accommodate a wide range of company sizes and is sure to be an asset to your companies' management system!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 2 About
+
+This user guide provides an overview for HR staff on the usage of HR Helper.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 3 Starting HR Helper
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -44,13 +92,9 @@ Whether it be 5 staff members or 500 employees, HR Helper has the capability to 
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
-2. Refer to the [Person Detail Window](#person-details-window) below for the format of each command.
-3. Refer to the [Command summary](#command-summary) below for the format of each command.
-
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 4 Features of HR Helper
 
 <box type="info" seamless>
 
@@ -74,7 +118,7 @@ Whether it be 5 staff members or 500 employees, HR Helper has the capability to 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Authentication:
+### 4.1 Authentication :
 
 Login to HR Helper with your username and password.
 
@@ -94,7 +138,7 @@ Examples:
 We plan to implement adding more users in the future.
 
 
-### Viewing help : `help`
+### 4.2 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -110,7 +154,7 @@ Examples:
 
 **Warning:** Clicking on the link will leave HR Helper.
 
-### Adding a person: `add`
+### 4.3 Adding an employee : `add`
 
 Adds an employee to the HR Helper.
 
@@ -129,7 +173,7 @@ Examples:
 
 **Warning:** Duplicate employees with the same name cannot be added.
 
-### Listing all persons : `list`
+### 4.4 Listing all employees : `list`
 
 Shows a list of all persons in the address book.
 
@@ -146,9 +190,9 @@ Example:
 
 **Warning:** Use this command before other commands like delete or edit to ensure you’re modifying the correct entry.
 
-### Counting persons : `count`
+### 4.5 Counting employees : `count`
 
-Counts number of persons.
+Counts number of employees.
 
 Format: `count`(for counting the filtered list), `count tag/TAG`(for counting persons with given TAG)
 
@@ -168,9 +212,9 @@ Examples:
 
 **Warning:** When using count t/TAG, ensure that the TAG exists and is spelled accurately; otherwise, the command may return zero results.
 
-### Editing a person : `edit`
+### 4.6 Editing an employee : `edit`
 
-Edits an existing person in the address book.
+Edits an existing employee in the HR Helper.
 
 Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
 
@@ -194,7 +238,7 @@ Examples:
 
 **Warning:** Changes overwrite current data. Double-check inputs before saving.
 
-### Locating persons by name: `find`
+### 4.7 Locating employees by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -221,7 +265,7 @@ Examples:
 
 **Warning:** The find command only searches names. Ensure that names are correctly spelled.
 
-### Deleting a person : `delete`
+### 4.8 Deleting an employee : `delete`
 
 Deletes the specified person from the address book.
 
@@ -244,7 +288,7 @@ Examples:
 
 **Warning:** This action is irreversible. Use list before delete to confirm the index.
 
-### Sorting Contacts: `sort`
+### 4.9 Sorting Employees: `sort`
 
 Sorts the displayed contacts based on specified tags.
 
@@ -268,7 +312,7 @@ Examples:
 **Warning:** Sorting by multiple tags may combine various groups, which can affect other commands relying on order.
 
 
-### Favoriting a person : `favorite`
+### 4.10 Favoriting an employee : `favorite`
 
 Favorites the specified person from the address book.
 
@@ -293,7 +337,7 @@ Examples:
 
 **Warning:** Avoid favoriting too many contacts, as an excessive number of favorites can make it challenging to identify key contacts quickly.
 
-### Clearing all entries : `clear`
+### 4.11 Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
@@ -308,9 +352,9 @@ Format: `clear`
 
 **Warning:** This action is irreversible. Back up data if necessary before clearing.
 
-### Exiting the program : `exit`
+### 4.12 Exiting HR Helper : `exit`
 
-Exits the program.
+Exits HR Helper.
 
 Format: `exit`
 
@@ -321,9 +365,9 @@ Format: `exit`
 
 **Warning:** Exiting abruptly may interrupt ongoing processes. Use the exit command instead of closing the window directly to ensure a clean shutdown.
 
-### Person Details Window
+### 4.13 Employee Details Window
 
-The **Person Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
+The **Employee Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
 
 - **Keyboard Shortcut:**
     - Select a person from the **Person List**.
@@ -392,21 +436,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
+## 5 Command summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -420,3 +450,18 @@ Action     | Format, Examples
 **Favorite** | `favorite INDEX`<br> e.g., `favorite 3`
 **List**   | `list`
 **Help**   | `help`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 6 FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 7 Known issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **Add issues here**

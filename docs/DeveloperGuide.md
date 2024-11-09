@@ -13,7 +13,13 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+**Use of Generative AI**
+
+Generative AI tools, including ChatGPT, was sparingly used for code refactoring throughout the development of HR Helper.
+
+**AB3**
+
+Aspects of the original AB3 has been reused in our code.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -123,7 +129,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the HR Helper data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -249,13 +255,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -288,37 +287,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​    | I want to …​                                                 | So that I can…​                                                                     |
-|----------|------------|--------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `* * *`  | new user   | see usage instructions                                       | refer to instructions when I forget how to use the HRHelper app.                    |
-| `* * *`  | HR manager | sign into my account                                         | keep my data secure and verified.                                                   |
-| `* * *`  | HR manager | add new employee profiles                                    | keep the data current.                                                              |
-| `* * *`  | HR manager | delete an employee                                           | remove entries that I no longer need.                                               |
-| `* * *`  | HR manager | find an employee by name                                     | locate details of employee quickly.                                                 |
-| `* *`    | HR manager | find an employee by department                               | find information regarding the department without having to go through all entries. |
-| `* *`    | HR manager | Set permissions for different team members                   | ensure sensitive data is only accessible to authorised users.                       |
-| `* *`    | HR manager | Export employee data in multiple formats                     | easily share it with stakeholders.                                                  |
-| `* *`    | HR manager | Create and manage employee onboarding checklists             | ensure all necessary steps are completed for new hires.                             |
-| `*`      | HR manager | Categorise employees by teams or projects                    | manage group data more effectively.                                                 |
-| `*`      | HR manager | Link employee profiles to training and certification records | track development and compliance needs.                                             |
-| `*`      | HR manager | Review historical changes made to employee profiles          | track data integrity and compliance.                                                |
-| `*`      | HR manager | Integrate the app with our existing HR tools                 | streamline processes and reduce data entry errors.                                  |
-| `*`      | HR manager | Archive profiles of former employees                         | maintain an organized database without clutter.                                     |
-| `*`      | HR manager | Access the app on mobile devices                             | manage employee data on the go.                                                     |
-| `*`      | HR manager | Set reminders for performance review cycles                  | ensure timely evaluations.                                                          |
-| `*`      | HR manager | Access help resources directly within the app                | troubleshoot issues without external assistance.                                    |
-| `*`      | HR manager | Track employee attendance and leave requests                 | manage staffing levels effectively.                                                 |
-| `*`      | HR manager | Create custom fields for employee data                       | capture information specific to my company's needs.                                 |
-| `*`      | HR manager | Search employee data with custom fields                      | quickly find relevant groups of employees.                                          |
-| `*`      | HR manager | Link employee records to health and safety training          | compliance requirements are easily met.                                             |
-| `*`      | HR manager | Set up automated reminders for employee training renewals    | ensure everyone stays compliant.                                                    |
-| `*`      | HR manager | Integrate employee feedback forms                            | gather insights and improve workplace culture.                                      |
-| `*`      | HR manager | Manage document uploads                                      | have all relevant files in one place.                                               |
-| `*`      | HR manager | Receive alerts for data discrepancies or errors              | maintain data accuracy and integrity.                                               |
-| `*`      | HR manager | Track promotions and role changes                            | keep employee profiles up to date.                                                  |
-| `*`      | HR manager | Customize my dashboard                                       | prioritize my tasks effectively.                                                    |
+| Priority | As a …​    | I want to …​                                              | So that I can…​                                                                     |
+|----------|------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `* * *`  | HR manager | access help resources directly within the app             | troubleshoot issues without external assistance.                                    |
+| `* * *`  | HR manager | sign into my account                                      | keep my data secure and verified.                                                   |
+| `* * *`  | HR manager | add new employee profiles                                 | keep the data current.                                                              |
+| `* * *`  | HR manager | delete an employee                                        | remove entries that I no longer need.                                               |
+| `* * *`  | HR manager | find an employee by name                                  | locate details of employee quickly.                                                 |
+| `* * *`  | HR manager | find an employee by department                            | find information regarding the department without having to go through all entries. |
+| `* * *`  | HR manager | export employee data in multiple formats                  | easily share it with stakeholders.                                                  |
+| `* * *`  | HR manager | track employee annual leave                               | manage staffing levels effectively.                                                 |
+| `* * *`  | HR manager | favorite employees                                        | track promotions and role changes                                                   |
+| `* *`    | HR manager | create custom tags for employee data                      | capture information specific to my company's needs.                                 |
+| `* *`    | HR manager | search employee data with custom tags                     | quickly find relevant groups of employees.                                          |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -329,83 +311,93 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  HR staff opens up HRHelper
-2.  HRHelper prompts for user to enter Username and Password
+2.  HRHelper prompts for HR staff to enter Username and Password
 3.  HR staff keys in Username and Password
-4.  Authentication is successful, program continues.
-
-    Use case ends.
-
-**Extensions**
-* 3a. User closes Authentication screen
-  * 3a 1. HR Helper closes.
-  * 3a 2. Use case ends.
-* 3b. Username/Password is empty
-  * 3b 1. HRHelper prompts HR staff to enter username/password
-  * 3b 2. HR staff keys in Username and Password 
-  * 3b 3. Correct Username and Password is entered, use case resumes from step 4
-* 3c. Username and Password do not match
-  * 3c 1. HRHelper requests for Username or Password again
-  * 3c 2. Correct Username and Password is entered, use case resumes from step 4
-
-**Use case: Add a person**
-
-**MSS**
-
-1.  User requests to add a specific person in the list
-2.  HRHelper adds the person
+4.  Authentication is successful, program continues
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The user does not have the authority to add the person.
+* 3a. HR staff closes Authentication screen.
+  * 3a1. HR Helper closes.
+    
+    Use case ends.
 
-  Use case ends.
+* 3b. Username/Password is empty.
+  * 3b1. HRHelper prompts HR staff to enter username/password.
+  * 3b2. HR staff keys in Username and Password .
+  * 3b3. Correct Username and Password is entered.
+  
+    Use case resumes from step 4.
 
-* 2a. HRHelper reconfirms the decision with the user.
+* 3c. Username and Password do not match.
+  * 3c1. HRHelper requests for Username or Password again.
+  * 3c2. Correct Username and Password is entered.
+  
+    Use case resumes from step 4.
 
-  Use case ends.
+**Use case: Add an employee**
 
-
-**Use case: Delete a person**
+**Preconditions**: HR staff is logged in.
 
 **MSS**
 
-1.  User requests to list persons
-2.  HRHelper shows a list of staff members
-3.  User requests to delete a specific person in the list
-4.  HRHelper deletes the person
+1.  HR staff requests to add a specific employee in the list
+2.  HRHelper adds the employee.]
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The user does not have the authority to delete the person.
+* 1a. HR Helper detects an error in the name/phone number/email format provided by the HR staff.
+  * 1a1. HR Helper requests for the correct data of the new employee.
+  * 1a2. HR staff enters new data.
+  * Steps 1a1-1a2 are repeated until the data entered are correct.
+    
+    Use case ends.
 
-  Use case ends.
+* 1b. The employee is already in the system.
+  * 1b1. HR Helper informs the HR staff that the employee already exists in the HR Helper and does not add the duplicate employee.
 
-* 2a. The list is empty.
+    Use case ends.
 
-  Use case ends.
+**Use case: Delete an employee**
 
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
-
-* 4a. HRHelper reconfirms the decision with the user.
-
-  Use case ends.
-
-**Use case: Search a person**
+**Preconditions**: HR staff is logged in.
 
 **MSS**
 
-1.  User requests to list persons
-2.  HRHelper shows a list of staff members
-3.  User requests to search for a specific person in the list (by name/contact/other information etc.)
-4.  HRHelper shows the person/people matching the description
+1.  HR staff requests to list employees
+2.  HRHelper shows a list of employees
+3.  HR staff requests to delete a specific employee in the list
+4.  HRHelper deletes the employee
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+  Use case ends.
+
+* 2a. The given index is invalid.
+
+  * 2a1. HR Helper shows an error message.
+    
+    Use case resumes at step 2.
+
+
+**Use case: Search an employee**
+
+**Preconditions**: HR staff is logged in.
+
+**MSS**
+
+1.  HR staff requests to list employees
+2.  HRHelper shows a list of employees
+3.  HR staff requests to search for a specific employee in the list (by name/contact/other information etc.)
+4.  HRHelper shows the employee/employees matching the description
 
     Use case ends.
 
@@ -417,22 +409,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The given description is invalid.
 
-    * 2a1. AddressBook shows an error message.
+    * 2a1. HR Helper shows an error message.
 
       Use case resumes at step 2.
 
-* 3a. HRHelper gives user the option to view the given person
+* 3a. HRHelper gives HR staff the option to view the given employee.
 
   Use case ends.
 
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should be able to hold up to 1000 employees without a noticeable sluggishness in performance for typical usage.
+3.  HR staff with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should be able to return search within 5 seconds
-5.  Users' data should be easily found with a quick search
-6.  Only authorized HR personnel should have access to the data
+5.  Employees' data should be easily found with a quick search
+6.  Only authorized HR staff should have access to the data
 
 
 ### Glossary
@@ -494,3 +486,9 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Planned enhancements
+
+1. add enhancements here
