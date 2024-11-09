@@ -827,7 +827,7 @@ Removes an assignment and its grades from a contact.
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
-<md>**Format: `removeGrade n/NAME assignment/ASSIGNMENT_NAME`**</md>
+<md>**Format: `removeGrade name/NAME assignment/ASSIGNMENT_NAME`**</md>
 
 </box>
 
