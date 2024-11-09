@@ -14,7 +14,7 @@ class JsonAdaptedGroup {
     private final String groupName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedGroup} with the given {@code groupName}.
      */
     @JsonCreator
     public JsonAdaptedGroup(String groupName) {
@@ -22,7 +22,7 @@ class JsonAdaptedGroup {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
         groupName = source.groupName;
@@ -34,9 +34,9 @@ class JsonAdaptedGroup {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted group object into the model's {@code Group} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted group.
      */
     public Group toModelType() throws IllegalValueException {
         if (!Group.isValidGroupName(groupName)) {

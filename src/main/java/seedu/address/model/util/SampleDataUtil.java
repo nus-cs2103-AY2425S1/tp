@@ -52,7 +52,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a {@code GroupList} containing the list of strings given.
      */
     public static GroupList getGroupList(String... strings) {
         return new GroupList(Arrays.stream(strings)

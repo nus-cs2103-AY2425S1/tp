@@ -229,9 +229,9 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable {@code GroupList}, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code groups} is null.
          */
         public Optional<GroupList> getGroups() {
             return (groups != null) ? Optional.of(groups.makeListUnmodifiable()) : Optional.empty();

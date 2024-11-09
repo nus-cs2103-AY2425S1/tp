@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -38,6 +39,11 @@ public class GroupContainsKeywordsPredicateTest {
 
         // different person -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
+    }
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(AssertionError.class, () -> new GroupContainsKeywordsPredicate(null));
     }
 
     @Test

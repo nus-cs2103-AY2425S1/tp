@@ -23,7 +23,7 @@ public class GroupTest {
 
     @Test
     public void testIsValidGroupName_null_throwsNullPointerException() {
-        // null tag name
+        // null group name
         assertThrows(NullPointerException.class, () -> Group.isValidGroupName(null));
     }
 
