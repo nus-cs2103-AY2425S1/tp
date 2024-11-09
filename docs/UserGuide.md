@@ -395,18 +395,20 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-| Action                 | Format, Examples                                                                                                                                                         |
-|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Contact**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [r/REMARK] [t/TAG]`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
-| **Clear All Contacts** | `clear`                                                                                                                                                                  |
-| **Delete Contact**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                      |
-| **Edit Contact**       | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                              |
-| **Find Contacts**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                                     |
-| **List All Contacts**  | `list`                                                                                                                                                                   |
-| **Help**               | `help`                                                                                                                                                                   |
-| **Sort Contacts**      | `sort asc/desc`<br> e.g., `sort asc`                                                                                                                                     |
-| **Log Interaction**    | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
-| **Add/Edit Remark**    | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
-| **View Contact**       | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
-| **Favourite Contact**  | `favourite [INDEX]`<br> e.g., `favourite 123` or `favourite`                                                                                                             |
-| **Add/Edit Birthday**  | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
+| Action                  | Format, Examples                                                                                                                                                         |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Contact**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [r/REMARK] [t/TAG]`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` |
+| **Clear All Contacts**  | `clear`                                                                                                                                                                  |
+| **Delete Contact**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                      |
+| **Edit Contact**        | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [b/BIRTHDAY] [t/TAG]`<br> e.g., `edit 2 n/James Lee e/jameslee@example.com`                              |
+| **Find Contacts**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find John`                                                                                                                     |
+| **List All Contacts**   | `list`                                                                                                                                                                   |
+| **Help**                | `help`                                                                                                                                                                   |
+| **Sort Contacts**       | `sort asc/desc`<br> e.g., `sort asc`                                                                                                                                     |
+| **Log Interaction**     | `log INDEX [d/DATE] l/<InteractionDetails>`<br> e.g., `log 123 d/2024-09-16 l/Discussed property updates`                                                                |
+| **Add/Edit Remark**     | `remark INDEX r/<remark message>`<br> e.g., `remark 1 r/Interested in waterfront property`                                                                               |
+| **View Contact**        | `view INDEX`<br> e.g., `view 123`                                                                                                                                        |
+| **Favourite Contact**   | `favourite INDEX`(on not favourited person)<br> e.g., `favourite 123`                                                                                                    |
+| **Unfavourite Contact** | `favourite INDEX`(on already favourited person) <br> e.g., `favourite 123`                                                                                               |
+| **Favourite Contact**   | `favourite`<br> e.g., `favourite`                                                                                                                                        |
+| **Add/Edit Birthday**   | `birthday INDEX b/<yyyy-mm-dd>`<br> e.g., `birthday 1 r/2001-03-04`                                                                                                      |
