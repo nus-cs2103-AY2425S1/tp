@@ -626,6 +626,7 @@ Use case resumes at step 3.
 * **Parser**: A component that interprets user commands and converts them into actions or objects that the system can process.
 * **MSS (Main Success Scenario)**: The primary sequence of steps in a use case where everything proceeds as expected without any errors.
 * **JAR File**: Java ARchive file; a package file format that bundles Java class files and associated metadata for distribution.
+* **Prerequisite**: Compulsory requirements to fulfil before every manual testing action
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -645,14 +646,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Prerequisites: Download the jar file and copy into an empty folder
+   1. Prerequisite: Download the jar file and copy into an empty folder
 
    2. Test case: Double-click the jar file
       Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 2. Saving window preferences
 
-   1. Prerequisites: Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Prerequisite: Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    2. Test case: Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
@@ -667,10 +668,11 @@ testers are expected to do more *exploratory* testing.
 
 **Sample error message indicating that the tutorial ID format is invalid:** Tutorial class should be in the format of Txxxx where xxxx are four digits.
 
-1. Adding a student with all required details
-    1. Prerequisites: Ensure that the tutorial T1001 exists in the system.
+>**Prerequisite:** Ensure that the tutorial T1001 exists in the system.
 
-    2. Test case: `addStu n/John Doe s/A1234567X c/T1001`<br>
+1. Adding a student with all required details
+
+    1. Test case: `addStu n/John Doe s/A1234567X c/T1001`<br>
        Expected: A new student named "John Doe" with student ID "A1234567X" is added to tutorial "T1001". Confirmation message is displayed with the student's details.
 
 2. Adding a student with missing compulsory fields
@@ -694,11 +696,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Editing a student
 
+>**Prerequisite 1:** At least one student exists in the list. For example, a student at index 1.
+
+>**Prerequisite 2:** Ensure that the tutorial T1001 exists in the system.
+
+>**Prerequisite 3:** Ensure that no student with student ID "A7654321X" exists in the system.
+
 1. Editing a student's details
 
-    1. Prerequisites: At least one student exists in the list. For example, a student at index 1.
-
-    2. Test case: `edit 1 n/Jane Smith s/A7654321X t/T2001`<br>
+    1. Test case: `edit 1 n/Jane Smith s/A7654321X c/T2001`<br>
        Expected: Student at index 1 is updated with the new name "Jane Smith", student ID "A7654321X", and assigned to tutorial "T2001". Confirmation message is displayed with the updated details.
 
 2. Editing a student with some fields missing
@@ -706,24 +712,21 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `edit 1 n/Jane Smith`<br>
        Expected: Only the name of the student at index 1 is updated to "Jane Smith". Other details remain unchanged.
 
-3. Editing a student with invalid index
+3. Editing a student with invalid command format
 
     1. Test case: `edit 0 n/Jane Smith`<br>
-       Expected: Error message indicating that the student index provided is invalid.
-
-    2. Test case: `edit 999 n/Jane Smith` (assuming there are fewer than 999 students)<br>
-       Expected: Error message indicating that the student index provided is invalid.
+       Expected: Error message indicating that the command format is invalid.
 
 ### Deleting a student
 
+>**Prerequisite:** List all students using the `list` command. Multiple students in the list.
+
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
-
-    2. Test case: `deleteStu 1`<br>
+    1. Test case: `deleteStu 1`<br>
      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    3. Test case: `deleteStu 0`<br>
+    2. Test case: `deleteStu 0`<br>
      Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
 2. Other incorrect delete commands to try: `deleteStu`, `deleteStu x`, `...` (where x is larger than the list size)<br>
@@ -739,11 +742,11 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking attendance
 
+>**Prerequisite:** Student with ID "A1234567X" exists and is assigned to tutorial "T1001".
+
 1. Marking a student's attendance for a tutorial session
 
-    1. Prerequisites: Student with ID "A1234567X" exists and is assigned to tutorial "T1001".
-
-    2. Test case: `markAtt s/A1234567X t/T1001 d/2023-10-21`<br>
+    1. Test case: `markAtt s/A1234567X t/T1001 d/2023-10-21`<br>
        Expected: Attendance for student "A1234567X" on "2023-10-21" is marked as present in tutorial "T1001". Confirmation message is displayed.
 
 2. Marking attendance for a student not in the tutorial
