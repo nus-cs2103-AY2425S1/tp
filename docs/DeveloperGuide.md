@@ -438,7 +438,7 @@ Use case ends.
 
 1. User finds the index of the customer they want to edit.
 2. User specifies the customer index along with modifications they want to make to the customer's details.
-3. SellSavvy updates the list with the modifications made to the customer.
+3. SellSavvy updates the customer list with the modifications made to the customer.
 4. SellSavvy confirms the modification by stating the updated customer's details.
 
 Use case ends.
@@ -489,7 +489,7 @@ Use case ends.
 **Use case 6: Add an Order under a Customer**
 
 * **Use Case**: UC06 - Add an Order under a Customer
-* **Preconditions**: There are customers displayed in the customer list.
+* **Preconditions**: There are orders displayed in the customer's list.
 * **Guarantees**:
     * A new pending order will be added under the specified customer, if input parameters are valid.
 
@@ -530,7 +530,7 @@ Use case ends.
 **Use case 7: List a Customer's Orders**
 
 * **Use Case**: UC07 - List a Customer's Orders
-* **Preconditions**: There are customers displayed in the customer list.
+* **Preconditions**: There are orders displayed in the customer's list.
 * **Guarantees**:
     * Orders made by specific customer will be displayed as a list, if input parameters are valid.
 
@@ -558,7 +558,7 @@ Use case ends.
 **Use case 8: Mark Order as Completed**
 
 * **Use Case**: UC08 - Mark Order as Completed
-* **Preconditions**: A customer's list of orders is being displayed.
+* **Preconditions**: There are orders displayed in the customer's list.
 * **Guarantees**:
     * Specified order will be marked as “Completed” if the input parameters are valid.
 
@@ -592,7 +592,7 @@ Use case ends.
 **Use case 9: Remove "Completed" Marking from Order**
 
 * **Use Case**: UC09 - Remove "Completed" Marking from Order
-* **Preconditions**: A customer's list of orders is being displayed.
+* **Preconditions**: There are orders displayed in the customer's list.
 * **Guarantees**:
     * Specified order will be reverted to "Pending" status if the input parameters are valid.
 
@@ -626,7 +626,7 @@ Use case ends.
 **Use case 10: Delete an order**
 
 * **Use Case**: UC10 - Delete an Order
-* **Preconditions**: A customer's list of orders is being displayed.
+* **Preconditions**: There are orders displayed in the customer's list.
 * **Guarantees**:
     * An order made by the customer will be deleted if input parameters are valid.
 
@@ -651,9 +651,56 @@ Use case ends.
 
   Use case ends.
 
-**Use case 11: Filter order list by order status**
+**Use case 11: Edit an Order's Details**
 
-* **Use Case**: UC11 - Filter an Order List by Order Status
+* **Use Case**: UC11 - Edit a Order's Details
+* **Preconditions**: There are orders displayed in the customer's list.
+* **Guarantees**:
+    * The specified order's details will be overwritten if the input parameters are valid.
+
+**MSS**
+
+1. User finds the index of the order they want to edit.
+2. User specifies the order index along with modifications they want to make to the order's details.
+3. SellSavvy updates the order list with the modifications made to the customer.
+4. SellSavvy confirms the modification by stating the updated order's details.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The order index is missing or non-positive.
+    * 2a1. SellSavvy displays an error about the format and states the command format.
+
+  Use case ends.
+
+
+* 2b. SellSavvy detects that there are no orders with the specified index.
+    * 2b1. SellSavvy displays an error that the order index is invalid.
+
+  Use case ends.
+
+
+* 2c. There are no order details specified for modification.
+    * 2c1. SellSavvy tells the user that at least one field has to be edited.
+
+  Use case ends.
+
+
+* 2d. SellSavvy detects that the updated fields do not satisfy its constraints.
+    * 2d1. SellSavvy states the constraints of the invalid parameter.
+
+  Use case ends
+
+
+* 3a. SellSavvy detects that the updated order has similar details to another existing order under the same customer.
+    * 3a1. SellSavvy gives a warning that the customer already has an order with similar details.
+
+  Use case resumes from step 4.
+
+**Use case 12: Filter order list by order status**
+
+* **Use Case**: UC12 - Filter an Order List by Order Status
 * **Preconditions**: A customer's list of orders is being displayed.
 * **Guarantees**:
     * Orders with specified status under the customer will be displayed as a list, if input parameters are valid.
@@ -698,7 +745,7 @@ Use case ends.
 * **Order**: Agreement made by customers with user on delivery of product
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Status**: The current fulfilment condition of the delivery of an order, namely completed or pending.
-* **Similar names**: Names which are identical if whitespaces and case sensitivity are ignored.
+* **Similar names (for customers, orders and tags)**: Names which are identical if whitespaces and case sensitivity are ignored.
 * **Similar details (orders)**: Orders with identical date, quantity and status along with similar item names.
 
 --------------------------------------------------------------------------------------------------------------------
