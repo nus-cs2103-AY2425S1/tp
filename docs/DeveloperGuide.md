@@ -327,8 +327,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy doctor       | assign priority level to a patient                                          | manage urgent cases more effectively                                                                                                                                  |
 | `*`      | busy doctor       | view all my urgent cases                                                    | attend to those with urgent needs first                                                                                                                               |
 | `*`      | doctor            | press [↑] to fill the command-line-box with the previous command I keyed in | amend errors in the last command I typed easily                                                                                                                       |
-| `*`      | new user          | clear all sample data                                                       | insert my own patient details into MediBase3                                                                                                                          |
-| `*`      | new user          | access the user guide easily                                                | quickly understand how to use the application's feature                                                                                                               |
+| `*`      | doctor            | clear all sample data                                                       | insert my own patient details into MediBase3                                                                                                                          |
+| `*`      | doctor            | access the user guide easily                                                | quickly understand how to use the application's feature                                                                                                               |
 [Back to Table of Contents](#table-of-contents)
 ### Use cases
 
