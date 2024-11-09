@@ -404,60 +404,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes from step 2.
 
 * *a. At any time, User chooses to stop adding a profile.
+
   Use case ends.
 
-**Use Case: UC02 - Add room number to profile**
+**Use Case: UC02 - Edit profile**
 
 **Precondition: There is at least one profile added into DorManagerPro**
 
 **MSS:**
 
-1. User requests to add room number information to a specific profile.
-2. DorManagerPro updates the profile to include the room number.
-
-   Use case ends.
-
-**Extensions:**
-
-* 1a. DorManagerPro detects an error in the command format.
-    * 1a1. DorManagerPro requests for the correct command format.
-    * 1a2. User enters command again.
-
-  Steps 1a1-1a2 are repeated until the command is correct.
-  Use case resumes from step 2.
-
-* 1b. DorManagerPro cannot find the specified profile to update.
-    * 1b1. DorManagerPro requests for a profile that exists to update.
-    * 1b2. User specifies profile again.
-
-  Steps 1b1-1b2 are repeated until the command is correct.
-  Use case resumes from step 2.
-
-* 1c. DorManagerPro detects that the room capacity is already full.
-    * 1c1. DorManagerPro requests for a room number that is not already occupied.
-    * 1c2. User specifies room number again.
-
-  Steps 1c1-1c2 are repeated until a valid room number is provided.
-  Use case resumes from step 2.
-
-* 1d. DorManagerPro detects invalid parameters specified by user.
-    * 1d1. DorManagerPro requests for valid parameters.
-    * 1d2. User re-supplies parameters.
-
-  Steps 1d1-1d2 are repeated until the parameters are valid.
-  Use case resumes from step 2.
-
-* *a. At any time, User chooses to stop adding a room number.
-  Use case ends.
-
-**Use Case: UC03 - Add emergency contact to profile**
-
-**Precondition: There is at least one profile added into DorManagerPro**
-
-**MSS:**
-
-1. User requests to add emergency contact information to a specific profile.
-2. DorManagerPro updates the profile to include the emergency contact.
+1. User requests to edit or add additional information for a specific profile. This can be the name, phone number, email address, address, emergency contact details, graduation year or tags 
+2. DorManagerPro updates the profile with the new or updated information.
 
    Use case ends.
 
@@ -484,7 +441,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Steps 1c1-1c2 are repeated until the parameters are valid.
   Use case resumes from step 2.
 
-* *a. At any time, User chooses to stop adding an emergency contact.
+* *a. At any time, User chooses to stop editing.
+
+  Use case ends.
+
+**Use Case: UC03 - Delete all graduated students**
+
+**Precondition: There is at least one graduated student profile added into DorManagerPro**
+
+**MSS:**
+
+1. User requests to delete all graduated students from the DorManagerPro address book.
+2. DorManagerPro deletes all students with graduation years earlier than the current year.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* 1b. DorManagerPro cannot find any students who have graduated.
+    * 1b1. DorManagerPro displays an error message informing the user all students in the address book have yet to graduate.
+    
+  Use case ends.
+
+* *a. At any time, User chooses to stop deleting all graduated students.
+
   Use case ends.
 
 **Use Case: UC04 - View profiles**
@@ -517,6 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case resumes from step 4.
 
 * *a. At any time, User chooses to stop viewing a profile.
+
   Use case ends.
 
 **Use Case: UC05 - Delete a profile**
@@ -555,13 +543,99 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Steps 1c1-1c2 are repeated until the parameters are valid.
   Use case resumes from step 2.
 
-* 3a. User expresses they do not want to delete the profile after all.
-    * 3a1. DorManagerPro acknowledges the rejection.
+* 2a. User expresses they do not want to delete the profile after all.
+    * 2a1. DorManagerPro acknowledges the rejection.
 
   Use case ends.
 
 * *a. At any time, User chooses to stop deleting a profile.
+
   Use case ends.
+
+
+**Use Case: UC06 - Undoing an action**
+
+**Precondition: There is at least one undoable action in the current session of DorManagerPro that has yet to be undone**
+
+**MSS:**
+
+1. User requests to undo the latest undoable action.
+2. DorManagerPro restores the app to the state it was before the latest undoable action was carried out.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+  * 1a1. DorManagerPro requests for the correct command format.
+  * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* 1b. DorManagerPro detects that there are no undoable actions in the current session of DorManagerPro that has yet to be undone.
+  * 1b1. DorManagerPro displays an error message informing the user that there are no undoable actions.
+
+  Use case ends.
+
+* *a. At any time, User chooses to stop undoing an action.
+
+  Use case ends.
+
+**Use Case: UC07 - Exporting the current data**
+
+**MSS:**
+
+1. User requests to export the current data.
+2. DorManagerPro exports the current data to a json file.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+  * 1a1. DorManagerPro requests for the correct command format.
+  * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop exporting the current data.
+
+  Use case ends.
+
+**Use Case: UC08 - Importing data from a json file**
+
+**Precondition: There is a json file in the valid format required to load to the address book**
+
+**MSS:**
+
+1. User requests to import data from a json file, specifying a file path to the json file.
+2. DorManagerPro displays all profiles loaded from the imported json file.
+
+   Use case ends.
+
+**Extensions:**
+
+* 1a. DorManagerPro detects an error in the command format.
+    * 1a1. DorManagerPro requests for the correct command format.
+    * 1a2. User enters command again.
+
+  Steps 1a1-1a2 are repeated until the command is correct.
+  Use case resumes from step 2.
+
+* 1b. DorManagerPro detects an invalid file path or file format specified by user.
+    * 1b1. DorManagerPro requests for valid file path.
+    * 1b2. User re-supplies file path.
+
+  Steps 1b1-1b2 are repeated until the parameters are valid.
+  Use case resumes from step 2.
+
+* *a. At any time, User chooses to stop importing.
+
+  Use case ends.
+
+
 
 ### Non-Functional Requirements
 
