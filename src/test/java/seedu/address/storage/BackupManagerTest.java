@@ -177,6 +177,19 @@ public class BackupManagerTest {
         assertEquals("Unknown", actionDescription, "Invalid filenames should return 'Unknown' as action description");
     }
 
+    @Test
+    public void createIndexedBackup_descriptionTooLong_throwsIoException() throws IOException {
+        // Create a description that causes the file name to exceed MAX_FILENAME_LENGTH
+        String longDescription = "a".repeat(300); // Exceeds 250 characters
 
+        // Attempt to create backup with long description
+        IOException exception = assertThrows(IOException.class, () -> {
+            backupManager.createIndexedBackup(sourceFile, longDescription);
+        });
+
+        // Check that the exception message is correct
+        assertEquals("Backup file name exceeds the maximum length of 250 characters. Please shorten your description.",
+                exception.getMessage());
+    }
 
 }

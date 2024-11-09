@@ -9,6 +9,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class BackupCommandParser implements Parser<BackupCommand> {
 
+    private static final int MAX_DESCRIPTION_LENGTH = 250; // Arbitrary limit for action description
+
     /**
      * Parses the given {@code String} of arguments and returns a BackupCommand object for execution.
      * If no description is provided, a default naming convention will be used by the BackupCommand.
@@ -20,6 +22,11 @@ public class BackupCommandParser implements Parser<BackupCommand> {
     @Override
     public BackupCommand parse(String args) throws ParseException {
         String actionDescription = args.trim();
+        if (actionDescription.length() > MAX_DESCRIPTION_LENGTH) {
+            throw new ParseException("Failed to create backup!! Backup file name exceeds the maximum length of "
+                    + MAX_DESCRIPTION_LENGTH
+                    + " characters. Please shorten your description.");
+        }
         if (actionDescription.isEmpty()) {
             actionDescription = null; // Use null to signal default naming in BackupCommand
         }
