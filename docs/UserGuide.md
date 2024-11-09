@@ -337,6 +337,7 @@ Expected output:
 Performs aggregation operation on the current filtered list of people.
 
 Format: `aggGrade OPERATION [n/TEST_NAME]`
+
 `OPERATION` can be:
 
 - `var`: Taking **variance**
