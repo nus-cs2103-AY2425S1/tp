@@ -1,13 +1,16 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
@@ -147,16 +150,21 @@ public class ParserUtil {
 
     /**
      * Parses {@code String dateTime} into a {@code Date}
-     * @param datetime A string containing the datetime string
+     * @param datetimeString A string containing the datetime string
      *
      * @throws ParseException if the given {@code dateTime} does not match the format
      */
-    public static Date parseDateTimeValues(String datetime) throws ParseException {
-        requireNonNull(datetime);
+    public static Date parseDateTimeValues(String datetimeString) throws ParseException {
+        requireNonNull(datetimeString);
         Date date;
         try {
-            date = new Date(datetime);
+            date = new Date(datetimeString);
         } catch (DateTimeException e) {
+            // Provide failure logs
+            Logger logger = LogsCenter.getLogger(ParserUtil.class);
+            String errorMessage = e.getMessage();
+            logger.info(errorMessage);
+
             throw new ParseException(Date.MESSAGE_INVALID_FORMAT);
         }
 
@@ -178,9 +186,9 @@ public class ParserUtil {
     /**
      * Parses a string of datetime to a valid arrival date.
      */
-    public static Date parseArrivalDate(String datetime, Date procurmentDate) throws ParseException {
+    public static Date parseArrivalDate(String datetime, Date procurementDate) throws ParseException {
         Date d = parseDateTimeValues(datetime);
-        if (d.isBefore(procurmentDate)) {
+        if (d.isBefore(procurementDate)) {
             throw new ParseException(MESSAGE_ARRIVAL_DATE_CONSTRAINT);
         }
 
