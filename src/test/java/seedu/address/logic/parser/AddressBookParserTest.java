@@ -64,7 +64,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_groups() throws Exception {
-        assertTrue(parser.parseCommand(GroupsUtil.groupsCommand()) instanceof GroupsCommand);
+        assertTrue(parser.parseCommand(GroupsUtil.groupsCommand()) instanceof ListGroupsCommand);
     }
 
     @Test
