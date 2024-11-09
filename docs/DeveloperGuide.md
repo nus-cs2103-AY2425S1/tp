@@ -510,22 +510,44 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a client
 
-1. Deleting a person while all persons are being shown
+1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Listing transactions for a client
+
+1. Listing transactions while all clients are being shown.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `listt 1`<br>
+       Expected: Transactions for the first client are shown. Details of the selected client shown in the status message. 
+
+    3. Test case: `listt 0`<br>
+       Expected: UI still shows the full client list. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect listt commands to try: `listt`, `listt x` (where x is larger than the list size), `listt hello`<br>
+       Expected: Similar to previous.
+
+2. Listing transactions in transactions view.
+
+    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+    2. Test case: `listt x`<br>
+       Expected: UI still shows the transactions list. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 

@@ -81,6 +81,15 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="warning" seamless>
+
+**Handling Errors In User Input:**
+* First checks for valid command. 
+* Then checks for presence of fields for that command.
+* Lastly checks if the command is run in the correct view (client VS transaction view).
+
+</box>
+
 ### General Commands
 
 #### Viewing help : `help`
