@@ -45,6 +45,7 @@ public class Amount {
      * @return Returns true if the test string passes the regex check and is non-zero value
      */
     public static boolean isValidAmount(String test) {
+        requireNonNull(test);
         return test.trim().matches(VALIDATION_REGEX) && new BigDecimal(test.trim()).compareTo(BigDecimal.ZERO) != 0;
     }
 
