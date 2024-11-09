@@ -146,6 +146,8 @@ Before continuing, here are some important information you need to know about th
 | **Reopen**   | `reopen INDEX`                                                                                                                                                                    |
 | **View**     | `view INDEX`                                                                                                                                                                  |
 | **Update**   | `update c/COMPANY_INDEX app/APPLICATION_INDEX as/APPLICATION_STATUS`<br> e.g.,`update c/1 app/1 as/OA`                                                                        |
+| **Favourite**| `fav COMPANY_INDEX` |
+| **Unfavourite**| `unfav COMPANY_INDEX` |
 | **Withdraw** | `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`<br> e.g., `withdraw c/3 app/1`                                                                                               |
 
 [back to top](#internbuddy-user-guide)
