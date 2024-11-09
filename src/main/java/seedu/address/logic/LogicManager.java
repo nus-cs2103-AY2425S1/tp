@@ -72,6 +72,10 @@ public class LogicManager implements Logic {
         return model.getFilteredPersonList();
     }
 
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return model.getUnfilteredPersonList();
+    }
+
     public ObservableList<Person> getOnlyClientList() {
         return model.getOnlyClientList();
     }

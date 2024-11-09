@@ -129,6 +129,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    ObservableList<Person> getUnfilteredPersonList();
+
     ObservableList<Person> getOnlyClientList();
 
     ObservableList<Person> getOnlyEmployeeList();
