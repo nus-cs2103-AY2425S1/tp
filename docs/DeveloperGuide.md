@@ -299,6 +299,10 @@ The following sequence diagram shows how the user can get previous command:
 The following activity diagram summarizes what happens when a user interacts with this feature:
 ![CommandTextHistoryActivityDiagram](images/CommandTextHistoryActivityDiagram.png)
 
+#### Future Improvements:
+
+* Implement a feature to clear the command history.
+
 ### NRIC Validation
 NRICs are stored in the `Nric` class. The method `Nric#isValidNric(String nric)` is used to validate the NRIC.
 
@@ -316,10 +320,6 @@ Thereafter, the NRIC is checked for its validity using the checksum algorithm th
    * If the first letter is `F` or `G`: The checksum mapping is `0=X, 1=W, 2=U, 3=T, 4=R, 5=Q, 6=P, 7=N, 8=M, 9=L, 10=K`.
    * For example, if the remainder is `3` and the first letter is `S`, the checksum alphabet is `H`.
 6. Check if the last letter of the NRIC is the same as the checksum alphabet. If it is, the NRIC is valid, otherwise, it is invalid.
-
-#### Future Improvements:
-
-* Implement a feature to clear the command history.
 
 --------------------------------------------------------------------------------------------------------------------
 
