@@ -420,7 +420,7 @@ Example:
 
 1. `export` exports your current client data in PROperty into a CSV file.
 
-Visual example of correct output [Example `1.`]:
+Visual example of correct output: [Example `1.`]
 
 ![ExportCommandShowcase](images/user-guide-images/ExportCommandShowcase.png)
 
