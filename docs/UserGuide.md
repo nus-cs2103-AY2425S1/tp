@@ -377,7 +377,7 @@ Examples:
 
 2. `listing add 2 t/HDB a/Clementi Road 321` adds a property listing to the client at index `2` with a listing type of `HDB` and address of `Clementi Road 321`. 
 
-Visual example of correct output: [Example `1.`]
+Visual example of correct output [Example `1.`]:
 
 ![ListingAddCommandShowcase.png](images/user-guide-images/ListingAddCommandShowcase.png)
 
@@ -399,7 +399,7 @@ Examples:
 
 2. `listing delete 2 3` deletes the `3rd` property listing from the client with index `2`. 
 
-Visual example of correct output: [Example `1.`]
+Visual example of correct output [Example `1.`]:
 
 ![ListingDeleteCommandShowcase.png](images/user-guide-images/ListingDeleteCommandShowcase.png)
 
@@ -420,7 +420,7 @@ Example:
 
 1. `export` exports your current client data in PROperty into a CSV file.
 
-Visual example of correct output: [Example `1.`]
+Visual example of correct output [Example `1.`]:
 
 ![ExportCommandShowcase](images/user-guide-images/ExportCommandShowcase.png)
 
