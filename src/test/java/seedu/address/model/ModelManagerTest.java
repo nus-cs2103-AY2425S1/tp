@@ -369,4 +369,66 @@ public class ModelManagerTest {
                 .findFirst()
                 .orElse(null);
     }
+
+    @Test
+    public void editPerson_personInMultipleGroups_personUpdatedInAllGroups() {
+        // Set up the model manager with test data
+        ModelManager modelManager = new ModelManager();
+        Person oldPerson = new PersonBuilder().withName("John Doe").build();
+        Person newPerson = new PersonBuilder().withName("John Smith").build();
+        Person otherPerson1 = new PersonBuilder().withName("Jane Smith").build();
+        Person otherPerson2 = new PersonBuilder().withName("Bob Lee").build();
+        modelManager.addPerson(oldPerson);
+        modelManager.addPerson(otherPerson1);
+        modelManager.addPerson(otherPerson2);
+
+        // Create groups
+        Group groupWithOldPersonOnly = new Group("GroupWithOldPerson", Arrays.asList(oldPerson));
+        Group groupWithOldPersonAndOthers = new Group("GroupMixed", Arrays.asList(oldPerson, otherPerson1));
+        Group groupUnaffected = new Group("GroupUnaffected", Arrays.asList(otherPerson2));
+
+        modelManager.addGroup(groupWithOldPersonOnly);
+        modelManager.addGroup(groupWithOldPersonAndOthers);
+        modelManager.addGroup(groupUnaffected);
+
+        // Edit the person
+        modelManager.setPerson(oldPerson, newPerson);
+
+        // Assertions
+        // Old person should no longer exist in any group
+        assertFalse(modelManager.getAddressBook().getGroupList().stream()
+                .anyMatch(group -> group.getMembers().contains(oldPerson)));
+
+        // New person should exist in all groups where the old person was
+        assertTrue(modelManager.getAddressBook().getGroupList().stream()
+                .anyMatch(group -> group.getMembers().contains(newPerson)));
+
+        // Group with old person only should now have the new person only
+        Group updatedGroupWithOldPersonOnly = modelManager.getAddressBook().getGroupList().stream()
+                .filter(group -> group.getGroupName().toString().equals("GroupWithOldPerson"))
+                .findFirst()
+                .orElse(null);
+        assertNotNull(updatedGroupWithOldPersonOnly);
+        assertEquals(1, updatedGroupWithOldPersonOnly.getMembers().size());
+        assertTrue(updatedGroupWithOldPersonOnly.getMembers().contains(newPerson));
+
+        // Group with old person and others should now have the new person and retain others
+        Group updatedGroupMixed = modelManager.getAddressBook().getGroupList().stream()
+                .filter(group -> group.getGroupName().toString().equals("GroupMixed"))
+                .findFirst()
+                .orElse(null);
+        assertNotNull(updatedGroupMixed);
+        assertEquals(2, updatedGroupMixed.getMembers().size());
+        assertTrue(updatedGroupMixed.getMembers().contains(newPerson));
+        assertTrue(updatedGroupMixed.getMembers().contains(otherPerson1));
+
+        // Unaffected group should remain unchanged
+        Group unaffectedGroup = modelManager.getAddressBook().getGroupList().stream()
+                .filter(group -> group.getGroupName().toString().equals("GroupUnaffected"))
+                .findFirst()
+                .orElse(null);
+        assertNotNull(unaffectedGroup);
+        assertEquals(1, unaffectedGroup.getMembers().size());
+        assertTrue(unaffectedGroup.getMembers().contains(otherPerson2));
+    }
 }
