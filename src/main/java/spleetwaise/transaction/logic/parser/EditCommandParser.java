@@ -1,8 +1,6 @@
 package spleetwaise.transaction.logic.parser;
 
 import static spleetwaise.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static spleetwaise.address.logic.parser.ParserUtil.parsePhone;
 import static spleetwaise.transaction.logic.commands.EditCommand.MESSAGE_USAGE;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -16,7 +14,6 @@ import java.util.Set;
 
 import spleetwaise.address.logic.parser.ArgumentMultimap;
 import spleetwaise.address.logic.parser.ArgumentTokenizer;
-import spleetwaise.address.model.person.Phone;
 import spleetwaise.commons.core.index.Index;
 import spleetwaise.commons.logic.parser.Parser;
 import spleetwaise.commons.logic.parser.exceptions.ParseException;
@@ -36,7 +33,13 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_CATEGORY);
+                        args,
+                        //PREFIX_PHONE,
+                        PREFIX_AMOUNT,
+                        PREFIX_DESCRIPTION,
+                        PREFIX_DATE,
+                        PREFIX_CATEGORY
+                );
 
         // Parse index
         Index index;
@@ -48,14 +51,18 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // Parse descriptors
         argMultimap.verifyNoDuplicatePrefixesFor(
-                PREFIX_PHONE, PREFIX_AMOUNT, PREFIX_DESCRIPTION, PREFIX_DATE);
+                //PREFIX_PHONE,
+                PREFIX_AMOUNT,
+                PREFIX_DESCRIPTION,
+                PREFIX_DATE
+        );
 
         EditTransactionDescriptor editTransactionDescriptor = new EditTransactionDescriptor();
 
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            Phone phone = parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-            editTransactionDescriptor.setPerson(ParserUtil.getPersonFromPhone(phone));
-        }
+        //if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+        //  Phone phone = parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        //  editTransactionDescriptor.setPerson(ParserUtil.getPersonFromPhone(phone));
+        //}
 
         if (argMultimap.getValue(PREFIX_AMOUNT).isPresent()) {
             Amount amount = ParserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
