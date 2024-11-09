@@ -57,6 +57,8 @@ PersonCard ..> Model
 AppointmentCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
+PersonListPanel -[hidden]down->PersonCard
+PersonCard -[hidden]left->Model
 
 PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
