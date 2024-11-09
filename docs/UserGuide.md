@@ -349,12 +349,12 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 Stores a contact’s birthday
 
 **Command Format:**  
-`birthday <ContactID> d/<Birthday Date>`
+`birthday INDEX b/<Birthday Date>`
 
-- `d/` The contact’s birthday `YYYY-MM-DD` format.
+- `b/` The contact’s birthday `yyyy-mm-dd` format.
 
 **Examples:**
-- `birthday 123 d/1990-05-15`
+- `birthday 123 b/1990-05-15`
 
 ---
 
