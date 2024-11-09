@@ -341,8 +341,8 @@ Format: `unmark INDEX…​`
 * the indexes entered must be unique.
 
 Example:
-* `unmark 2` educes the attendance of the student at index 2 in EduConnect by 1.
-* `unmark 1 2 3` reduces the attendance of the 1st, 2nd, and 3rd students in the list by 1.
+* `unmark 2` reduces the attendance of the student at index 2 in EduConnect by 1.
+* `unmark 1 2 3` reduces the attendance of the 1st, 2nd and 3rd students in the list by 1.
 
 ### Reset attendance of all students : `resetAttendance`
 
