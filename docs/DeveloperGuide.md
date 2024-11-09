@@ -13,7 +13,9 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+* [AB3](https://github.com/nus-cs2103-AY2425S1/tp) for being the base of our project.
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* [imPoster](https://github.com/AY2021S2-CS2103T-T12-4/tp), a CS2103T senior group where we adapted our `MainWindow.fxml` code from.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +52,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `:remove 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `:remove -i 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
@@ -90,9 +92,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(":remove 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute(":remove -i 1")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:remove 1` Command" />
+<puml src="diagrams/DeleteSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:remove -i 1` Command" />
 
 <box type="info" seamless>
 
@@ -103,7 +105,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to remove a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -143,7 +145,7 @@ The `Model` component,
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
-The `Storage` component,
+The `Storage` component
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
@@ -176,11 +178,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `:remove 5` command to add the 5th person in the address book. The `:remove` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `:remove 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `:remove -i 5` command to add the 5th person in the address book. The `:remove` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `:remove -i 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add -n David …​` to add a new person. The `:add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `:add -n David …​` to add a new person. The `:add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -216,11 +218,11 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 <puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `:redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `:redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </box>
 
@@ -246,16 +248,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `:remove`, just save the person being deleted).
+    * Pros: Will use less memory (e.g. for `:remove`, just save the person being removed).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 
-### Delete Feature
+### Remove Feature
 
 #### Implementation
-The Delete feature allows deletion of a person from the address book. The user can delete a person by specifying the index of the person to delete. The user can also delete multiple persons by specifying multiple indexes of the persons to delete.
+The remove feature allows removal of a person from the address book. The user can remove a person by specifying the index of the person to remove. The user can also remove multiple persons by specifying multiple indexes of the persons to remove.
 
-How the Delete Feature `:remove -i INDEX1, INDEX2...` works:
+How the remove Feature works:
+Format: `:remove -i INDEX1, INDEX2...`
 
 The `DeleteCommand` class has a method `DeleteCommand#execute(Model model)` that calls the ModelManager.\
 The `ModelManager` class has a method `ModelManager#deletePerson(Person target)` that calls the `AddressBook` class.\
@@ -265,9 +268,9 @@ The `AddressBook` class has a method `AddressBook#removePerson(Person key)` that
 The following class diagram shows the relationships between the classes involved in the delete feature:
 <puml src="diagrams/DeleteClassDiagram.puml" />
 
-The following sequence diagram shows how a delete operation goes through the `Logic` component:
+The following sequence diagram shows how a remove operation goes through the `Logic` component:
 
-<puml src="diagrams/DeleteMultipleSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:remove 1, 2, 3` Command" />
+<puml src="diagrams/DeleteMultipleSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:remove -i 1, 2, 3` Command" />
 
 Similarly, how a delete operation goes through the `Model` component is shown below:
 
@@ -278,13 +281,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Design considerations:**
 
-**Aspect: How delete executes:**
+**Aspect: How remove executes:**
 
-* **Alternative 1 (current choice):** Deletes the person by index.
+* **Alternative 1 (current choice):** Removes the person by index.
     * Pros: Easy to implement.
-    * Cons: Requires the user to know the index of the person to delete.
+    * Cons: Requires the user to know the index of the person to remove.
 
-* **Alternative 2:** Deletes the person by name.
+* **Alternative 2:** Removes the person by name.
     * Pros: More user-friendly as the user can specify the name.
     * Cons: Requires additional logic to handle duplicate names.
 
@@ -293,23 +296,23 @@ The following activity diagram summarizes what happens when a user executes a ne
 #### Implementation
 
 The add feature allows a person to be added to the address book. It accepts parameters name, phone, address, email,
-remark and tag. The name parameter is compulsory, while the rest are optional. Multiple tags are accepted for one 
+remark and tag. The name parameter is compulsory, while the rest are optional. Multiple tags are accepted for one
 person.
 
-The add feature follows the delete feature in that `AddCommand` calls `ModelManager`, which calls the `AddressBook`
+The add feature follows the remove feature in that `AddCommand` calls `ModelManager`, which calls the `AddressBook`
 class, which adds a person to the `UniquePersonList` class. Therefore, the class and activity diagram will be omitted
 for conciseness.
 
 The following sequence diagram shows how an add operation goes through the `Logic` component:
 
-<puml src="diagrams/AddSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `TODO` Command" />
+<puml src="diagrams/AddSequenceDiagram-Logic.puml" alt="Interactions Inside the Logic Component for the `:add` Command" />
 
 The parsing process is described in detail in this sequence diagram:
 
-<puml src="diagrams/AddSequenceDiagram-Tokenise.puml" alt="Interactions Inside the Logic Component for the `:remove 1, 2, 3` Command" />
+<puml src="diagrams/AddSequenceDiagram-Tokenise.puml" alt="Interactions Inside the Logic Component for parsing" />
 
 The following sequence diagrams give examples of how a compulsory parameter, an optional parameter and a parameter that
-accepts multiple values at once is parsed. 
+accepts multiple values at once is parsed.
 
 A compulsory parameter like `Name` is parsed as follows.
 
@@ -324,7 +327,7 @@ Finally, a parameter that accepts multiple values at once like `Tag` is parsed a
 <puml src="diagrams/AddSequenceDiagram-ParseTags.puml" alt="Interactions Inside the Logic Component when parsing a collection of tags" />
 
 
-Similar to the delete feature, how an add operation goes through the `Model` component is shown below:
+Similar to the remove feature, how an add operation goes through the `Model` component is shown below:
 <puml src="diagrams/AddSequenceDiagram-Model.puml" alt="AddSequenceDiagram-Model" />
 
 ### Export Feature
@@ -419,10 +422,10 @@ The encryption mechanism is managed by the `EncryptionManager` class. This compo
 ```java
 // Encryption
 String jsonData = JsonUtil.toJsonString(new JsonSerializableAddressBook(addressBook));
-byte[] encryptedData = EncryptionManager.encrypt(jsonData, this.keyPath);
+        byte[] encryptedData = EncryptionManager.encrypt(jsonData, this.keyPath);
 
 // Decryption
-jsonData = EncryptionManager.decrypt(encryptedData, this.keyPath);
+        jsonData = EncryptionManager.decrypt(encryptedData, this.keyPath);
 ```
 #### Example Usage Scenario
 
@@ -456,7 +459,7 @@ The following sequence diagram shows how the encryption process works:
     - If a hacker gains access to the JKS file containing the encryption keys, they could decrypt sensitive data. This represents a fundamental limitation of local storage, as the security of the keys relies on the local file system's security.
 
 2. **Alternative Storage Locations**:
-   - Storing the JKS file in the `JAVA_HOME/lib/security/cacerts` directory is an option, but this depends on the user’s configuration and permissions. Users might not have their `JAVA_HOME` path set correctly, which can lead to access issues.
+    - Storing the JKS file in the `JAVA_HOME/lib/security/cacerts` directory is an option, but this depends on the user’s configuration and permissions. Users might not have their `JAVA_HOME` path set correctly, which can lead to access issues.
 
 3. **Security Through Obscurity**:
     - While relying on obscurity—such as using less common paths for the JKS file—can add a layer of security, it should not be the sole defense mechanism. Obscurity alone does not adequately protect against determined attacks.
@@ -503,17 +506,17 @@ The password management mechanism is handled by the `PasswordManager` class. Thi
 ```java
 // Saving a new password on initial startup
 if (PasswordManager.readPassword(null) == null) {
-    String newPassword = scanner.nextLine();
-    PasswordManager.savePassword(newPassword, null);
-}
+        String newPassword = scanner.nextLine();
+        PasswordManager.savePassword(newPassword, null);
+        }
 
 // Verifying the password on subsequent starts
-String inputPassword = scanner.nextLine();
-if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
-    // Handle correct password
-} else {
-   // Handle wrong password
-}
+        String inputPassword = scanner.nextLine();
+        if (PasswordManager.isPasswordCorrect(inputPassword, null)) {
+        // Handle correct password
+        } else {
+        // Handle wrong password
+        }
 ```
 
 #### Example Usage Scenario
@@ -581,7 +584,7 @@ The following sequence diagram illustrates how the password management process o
 | `* * *`  | first-time user                            | add contacts to my contact book                                  | store my contacts                                                         |
 | `* * *`  | user                                       | add contacts to my contact book using only partial details       | store contacts that I may not have full information about                 |
 | `* * *`  | user                                       | see all my contacts                                              | see and manage my contacts                                                |
-| `* * *`  | user                                       | delete contacts                                                  | remove contacts I do not need anymore                                     |
+| `* * *`  | user                                       | remove contacts                                                  | remove contacts I do not need anymore                                     |
 | `* *`    | first-time user                            | see sample contacts                                              | explore the app's features without adding real data                       |
 | `* *`    | first-time user                            | clear sample data and start fresh                                | input my real contacts securely                                           |
 | `* *`    | first-time user                            | view a tutorial on the app                                       | learn how to use the app quickly                                          |
@@ -602,7 +605,7 @@ The following sequence diagram illustrates how the password management process o
 | `*`      | user                                       | multi-select contacts for deletion                               | manage my list more efficiently                                           |
 | `*`      | frequent user                              | navigate command history with arrow keys                         | quickly fill the search field and modify and execute previous commands    |
 | `*`      | power user                                 | export my contact list to CSV or JSON format                     | use it in other tools or projects                                         |
-| `*`      | programmer                                 | configure my shortcuts to be similar to my IDE shortcuts         | switch between my IDE and CipherContacts more effectively                 |
+| `*`      | programmer                                 | configure my shortcuts to be similar to my IDE shortcuts         | switch between my IDE and VBook more effectively                 |
 | `*`      | frequent user                              | pin important contacts                                           | have them appear at the top of my list for easy access                    |
 | `*`      | long time user                             | archive old contacts                                             | clean up my contact book without having to delete contacts                |                                          |
 
@@ -610,14 +613,35 @@ The following sequence diagram illustrates how the password management process o
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a person**
+
+**MSS**
+
+1.  User requests to add a specific person to the addressbook.
+2.  VBook adds the person.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. One or more of the inputted parameters are invalid.
+
+    * 1a1. VBook shows an error message.
+
+      Use case resumes at step 2.
+* 1b. The name of the requested person is the same as an existing person in the addressbook.
+    * 1b1. VBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Remove a person**
 
 **MSS**
 
 1.  User requests to list persons
 2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+3.  User requests to remove a specific person in the list
+4.  AddressBook removes the person
 
     Use case ends.
 
@@ -641,12 +665,23 @@ The following sequence diagram illustrates how the password management process o
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Known Issues**
+
+### Failing tests on Windows when run more than once
+
+1. In `EncryptionManagerTest.java`, temporary files are created before and deleted after each test for the Encryption and Export tests. Without this cleanup, subsequent runs of `./gradlew test` will fail.
+2. However, on Windows machine, the test will throw a `java.nio.file.FileSystemException` exception when attempting to delete the files due to the difference in how Windows processes manage files. [(Stackoverflow issue)](https://stackoverflow.com/questions/40706380/failed-to-delete-a-file-in-windows-using-java/40707174#40707174)
+3. A current workaround is to check if the OS is Windows, and skip the file deletion on cleanup. This has been implemented in our tests.
+4. However, before starting subsequent tests, you will need to manually delete the temporary `*test.key` files and `test` folder created, both in the root directory of {{ jarFile }}.
+5. This issue does not exist on Mac and Linux machines.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -667,38 +702,40 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Open a command terminal, change directory (`cd`) into the folder you put the `{{ jarFile }}` file in, and use the `java -jar {{ jarFile }}` command to run the application.<br>
+
+```shell
+cd path/to/vbook
+java -jar {{ jarFile }}
+```
 
 1. Saving window preferences
 
     1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+    1. Re-launch the app by using the same command above.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Removing a person
 
-### Deleting a person
-
-1. Deleting a person while all persons are being shown
+1. Removing a person while all persons are being shown
 
     1. Prerequisites: List all persons using the `:list` command. Multiple persons in the list.
 
-    1. Test case: `:remove 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `:remove -i 1`<br>
+       Expected: First contact is removed from the list. Details of the removed contact shown in the status message.
 
-    1. Test case: `:remove 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `:remove -i 0`<br>
+       Expected: No person is removed. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `:remove`, `:remove x`, `...` (where x is larger than the list size)<br>
+    1. Other incorrect remove commands to try: `:remove -i`, `:remove -i x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites: There is an existing /data/addressbook.json file in the home folder of the .jar file.
+    2. Delete the /data/addressbook.json file. Close the address book and open it again.
 
-1. _{ more test cases …​ }_
+       Expected: The data is replaced with the sample data that shows when the app is first open.
