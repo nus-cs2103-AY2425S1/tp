@@ -4,7 +4,7 @@
 ---
 # WardWatch User Guide
 
-WardWatch (WW) is a **desktop app for managing patients information in hospitals**, optimized for use via a [Command Line Interface (CLI)](#glossary) while still having the benefits of a [Graphical User Interface (GUI)](#glossary). If you can type fast, WW can get your patient management tasks done faster than traditional GUI apps.
+WardWatch (WW) is a **desktop app targeted towards doctors and nurses for managing patients information in hospitals**, optimized for use via a [Command Line Interface (CLI)](#glossary) while still having the benefits of a [Graphical User Interface (GUI)](#glossary). If you can type fast, WW can get your patient management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 
@@ -47,8 +47,8 @@ WardWatch (WW) is a **desktop app for managing patients information in hospitals
 3. Copy the file to the folder you want to use as the _home folder_ for the WardWatch application.
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar wardwatch.jar` command to run the application.<br>
 
-GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-![Ui](images/Ui.png)
+A GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -89,7 +89,7 @@ For more information on the format of `PARAMETERS`, please refer to [Input param
 1) Items in square brackets are optional:<br>
    - `n/NAME [d/DIAGNOSIS]` can be used as `n/John Doe d/diabetes` or as `n/John Doe`.
 2) Parameters can be in any order: <br>
-   - `n/NAME p/PHONE_NUMBER` is equivalent to `p/PHONE_NUMBER n/NAME`.
+   - `n/NAME w/WARD` is equivalent to `w/WARD n/NAME`.
 3) Extra parameters for commands without parameters (such as `help`, `list`, `exit` and `clear`) will be ignored: <br>
    - `help 123` is interpreted as `help`.
 4) Command word is not case-sensitive: <br>
@@ -105,7 +105,7 @@ For more information on the format of `PARAMETERS`, please refer to [Input param
 
 **Caution:**
 If your changes to the data file makes its format invalid, WardWatch will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the WardWatch to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause WardWatch to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 [Back to Table of Contents](#table-of-contents)
@@ -167,11 +167,11 @@ Invalid dates within a possible range are corrected automatically, while dates e
 
 ### Other Parameters
 
-
-| Symbol | Parameter | Constraints                                                                                                      |
-| ------ | --------- | ---------------------------------------------------------------------------------------------------------------- |
-| **-**  | `INDEX`   | - Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, … |
-| **-**  | `DATE`    | -**Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.         |
+Symbol     | Parameter   | Constraints
+-----------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**-**  | `INDEX`     |- Refers to the index number shown in the displayed patient list.<br>- **Must be a positive integer** 1, 2, 3, …​
+**-**  | `DATE`      |- **Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.
+**-**  | `KEYWORD`   |- Cannot be empty.<br>- Accepts any character.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -209,7 +209,7 @@ Format: `exit`
 
 ![add patient result](images/add.png)
 
-Adds a patient to the address book.
+Adds a patient to WardWatch.
 
 Format: `add n/NAME i/ID w/WARD [d/DIAGNOSIS] [m/MEDICATION]`
 
@@ -228,7 +228,7 @@ Examples:
 
 ![edit patient result](images/edit.png)
 
-Edits an existing person in the address book.
+Edits an existing person in WardWatch.
 
 Format: `edit INDEX [n/NAME] [i/ID] [w/WARD] [d/DIAGNOSIS] [m/MEDICATION]`
 
@@ -238,9 +238,8 @@ Format: `edit INDEX [n/NAME] [i/ID] [w/WARD] [d/DIAGNOSIS] [m/MEDICATION]`
 * View parameter constraints [here](#input-parameters)!
 
 Examples:
-
-* `edit 1 i/P12345 w/A2` Edits the patient ID and ward of the 1st person to be `P12345` and `A2` respectively.
-* `edit 2 n/Betsy Crower m/Paracetamol` Edits the name and medication of the 2nd person to be `Betsy Crower` and `Panadol`
+*  `edit 1 i/P12345 w/A2` Edits the patient ID and ward of the 1st person to be `P12345` and `A2` respectively.
+*  `edit 2 n/Betsy Crower m/Paracetamol` Edits the name and medication of the 2nd person to be `Betsy Crower` and `Paracetamol`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -248,15 +247,14 @@ Examples:
 
 ![delete patient result'](images/delete.png)
 
-Deletes the specified person from the address book.
+Deletes the specified person from WardWatch.
 
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 
 Examples:
-
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in WardWatch.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 [Back to Table of Contents](#table-of-contents)
@@ -325,7 +323,7 @@ Examples:
 
 ### Adding notes to a patient : `addnotes`
 
-Adds notes to an existing person in the address book.
+Adds notes to an existing person in WardWatch.
 
 Format: `addnotes INDEX pn/NOTES`
 
@@ -342,7 +340,7 @@ Examples:
 
 ### Deleting notes from a patient : `delnotes`
 
-Deletes notes from an existing person in the address book.
+Deletes notes from an existing person in WardWatch.
 
 Format: `delnotes INDEX`
 
@@ -373,16 +371,21 @@ Format: `makeappt INDEX a/DESCRIPTION s/START e/END`
   * Note that attempting to overwrite an appointment will still require the new appointment to not overlap any existing ones, including the appointment that is about to be overwritten.
 * View parameter constraints [here](#input-parameters)!
 
+<box type="info" seamless>
+
+**Note:** To reduce ambiguity, indexes in the appointments list begins with an "A", i.e. `A1`, to reduce ambiguity from the indexes in the patients list.
+</box>
+
 Examples:
 
 * `list` followed by `makeappt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
-  1st person in the address book that is on the *23rd of October 2024 from 12pm to 3pm*.
+  1st person in WardWatch that is on the *23rd of October 2024 from 12pm to 3pm*.
 
 [Back to Table of Contents](#table-of-contents)
 
 ### Deleting an Appointment from a patient: `delappt`
 
-Deletes an appointment from a person
+Deletes an appointment from a person.
 
 Format: `delappt INDEX`
 
@@ -424,6 +427,12 @@ Format: `scheduleall`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WardWatch home folder.
 
+**Q**: I want to edit an appointment, but there is no command for it. What now?<br>
+**A**: Although you could use the `makeappt` command to overwrite an existing appointment, we do not recommend this method. Instead, we suggest deleting the existing appointment with `delappt` first before using `makeappt` to create a new appointment with the edited details.
+
+**Q**: My patient's details are too long and gets cut off when displayed. How do I see it in full?<br>
+**A**: To see the full details of a patient, please use the `view` command.
+
 [Back to Table of Contents](#table-of-contents)
 
 ---
@@ -442,7 +451,7 @@ Format: `scheduleall`
 # Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 [Back to Table of Contents](#table-of-contents)
 
