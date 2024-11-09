@@ -217,8 +217,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 MSS:
 1. Real estate agent requests to view a list of buyers, sellers, clients (i.e., buyers and sellers combined), properties, or meetings.
-2. ClientGrid displays the corresponding list.
-   Use case ends.
+2. ClientGrid displays the corresponding list. 
+
+Use case ends.
 
 Extensions:
 
