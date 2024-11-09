@@ -89,10 +89,12 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​`
 
-* The `NAME` input allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs (non-exhaustive).
+* The `NAME` input is case-sensitive and allows a wide variety of characters but has some restrictions. Below are examples of valid and invalid inputs (non-exhaustive).
   * Valid inputs include those that contain **letters, numbers, spaces, and certain special characters** such as apostrophes (`'`), hyphens (`-`), periods (`.`), comma (`,`), slashes (`/`), ampersands (`&`), quotation marks (`"`), and parentheses (`()`). 
   * Invalid inputs may include those that contain special characters such as `*`, `@`, `#`, `!`, `^`, `%`, `$`, or other characters that are not English, such as Arabic, Chinese or Latin scripts like `Æ`.
 * The `REMARK` input should be a string of words with a limit of 120 characters.
+
+:exclamation: **Important:** Two identical person with duplicated fields cannot be added into the address book. The duplicated fields refers to `NAME` and `PHONE_NUMBER` fields where combined it should form a unique person.<br>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person with an Indian name containing "s/o" denoting "son of" can be added as `add n/John s\/o Jason p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
