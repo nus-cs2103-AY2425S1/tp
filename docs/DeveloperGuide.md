@@ -243,8 +243,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -285,7 +283,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user    | list all job listings                |
 | `* * *`  | user    | create a job listing                 |  
 | `* * *`  | user    | remove a job listing                 | remove job listing information that I no longer need |
-| `* * *`  | user    | filter contacts based on job listing | focus on contacting talents that fits the job        |
+| `* * *`  | user    | screen contacts based on job listing | focus on contacting talents that fits the job        |
 | `* * *`  | user    | list all companies                   |                                                      |
 | `* * *`  | user    | create a company                     | group and organize contacts and job listings         |
 | `* * *`  | user    | delete a company                     | remove company information that I no longer need     |
