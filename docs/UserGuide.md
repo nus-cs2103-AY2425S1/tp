@@ -104,6 +104,9 @@ benefits of a Graphical User Interface (GUI).
 
 <div markdown="block" class="alert alert-info">
 
+* Commands are in lower-case
+  e.g. `add` is allowed, while `Add` or `aDD` will not be recognised.
+
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 

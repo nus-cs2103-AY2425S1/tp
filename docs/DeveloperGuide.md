@@ -639,7 +639,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 <div style="page-break-after: always;"></div>
 
@@ -659,7 +658,6 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
 <div style="page-break-after: always;"></div>
 
@@ -669,4 +667,30 @@ testers are expected to do more *exploratory* testing.
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Planned Enhancements**
+
+Team size : 5
+
+1. **Make invalid command message more specific** : The current error message when one of the fields entered is empty or incorrect is `Invalid Command Format!`, which is too general. We plan to make the error message point out the incorrect field: `Gender Field is missing.` when adding a patient without specifying their gender.
+
+2. **Create reminders for appointments** : Currently ClinicBuddy only shows if a patient's appointment is today or has ended or is in the future by changing the text colour. We plan to include reminder features such as a box next to the appointment that shows the days / hours / minutes to the appointment. Example : `Appointment : 08 November 2024 10:30 - 10:45 (10 Days, 3 Hours, 20 minutes)`.
+
+3. **Set appointment length** : Currently appointments are in 15 minute blocks and unable to be changed. We plan to allow the user to set the appointment time of a patient: `update 1 apttime/20` sets the appointment time of the patient in index `1` to `20` minutes. The new appointment must not clash with another existing appointment before updating the appointment duration.
+
+4. **Set multiple appointments** : ClinicBuddy only supports one appointment per patient, which is not suitable for patients that have multiple appointments for their different conditions. We plan to change the Appointment class such that it can accommodate multiple appointments: `update 1 apt/10/10/2024 10:30 10/12/2024 10:30` sets two appointments at 10 October 2024 10:30 and 10 December 2024 10:30 respectively.
+
+5. **Allow multiple appointments in same timings** : ClinicBuddy disallows clash in appointment timings, which is not suitable for clinics with multiple doctors present. We plan to let users set the number of doctors in the clinic and allow up to the number of doctors present for appointments to overlap at any given time: `doctors 2` sets the number of doctors available to `2`and there can only be up to `2` appointments overlap at any given time.
+
+6. **Proper NRIC Checksum** : ClinicBuddy validates an NRIC by checking if it follows the basic format as shown in the User Guide. We plan to implement the [NRIC checksum validation algorithm](https://userapps.support.sap.com/sap/support/knowledge/en/2572734) to ensure that the NRIC provided is properly verified.
+
+7. **Allow Text Overflow in Patient Details** : ClinicBuddy does not support text overflow when displaying patient details. Too long `Name`,`Tag`, `Address` and `Email` will cause the respective text to be truncated. We intend to set a hard limit to the length of the above-mentioned fields with text-wrapping to ensure that they are fully displayed.
+
+8. **Sort Patient Details by Chronological Order** : ClinicBuddy currently displays patient details in order of details added. We plan to display patients who have appointments on the day itself to appear first, in chronological order, followed by patients with upcoming appointments in chronological order, and then patients whose appointments have passed: Suppose it is `12 November 2024`. Patient `John` whose appointment is on `12 November 2024 12:30` will appear first in the list, followed by `Jane` whose appointment is on `14 November 2024 13:30` and lastly `Dane` whose appointment was on `10 October 2024 10:30`.
+
+9. **Allow Commands to be case-insensitive** : Commands are currently lower-case sensitive, meaning that `add` is recognised as an `AddCommand` while `Add` is not recognised.
+
+10. **Patient History** : ClinicBuddy only stores the latest appointment for each patient, any updates to appointment will cause it to be overwritten and the original appointment deleted permanently. We plan to track appointment history by making the appointment display in the patient details to have a dropdown list showing their previous appointment.
+
