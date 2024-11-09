@@ -1084,4 +1084,3 @@ testers are expected to do more *exploratory* testing.
     - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
     - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used instead of treating it as part of the parameters.
     - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening.
-    - 
