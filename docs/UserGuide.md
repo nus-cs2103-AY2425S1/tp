@@ -126,7 +126,6 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 * Duplicate contacts cannot be added to the list.
 * Names are case-sensitive. For example, “Alice” and “alice” are considered distinct names.
 * Names should only contain alphanumeric characters and spaces, and it should not be blank.
-* In cases where two people share the same name, differentiate them by appending a number or changing the capitalization (e.g., “Mary” and “Mary 2”).
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -313,6 +312,8 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CampusConnect home folder.
 
+**Q**: How can I add contacts with the same name?<br>
+**A**: If two contacts share the same name, you can differentiate them by adding a number or adjusting the capitalization. For example, use “Mary” and “Mary 2” or “John” and “john” to keep each entry unique.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known Issues
