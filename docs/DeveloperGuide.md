@@ -461,9 +461,8 @@ testers are expected to do more *exploratory* testing.
 
 #### Initial Launch
 
-1. **Step**: Download the jar file and copy it into an empty folder.
-2. **Step**: Double-click the jar file to launch the application.
-3. **Expected**: The GUI should display with a set of sample contacts. Note that the window size may need adjustment.
+1. Refer to the guide [_Setting Up and Getting Started_](SettingUp.md).
+2. **Expected**: The GUI should display with a set of sample contacts. Note that the window size may need adjustment.
 
 ### Saving Window Preferences
 
