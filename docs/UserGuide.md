@@ -302,7 +302,7 @@ The following screenshot shows the results of executing `import fp/./data/11-08-
 
 ### Editing the data file
 
-DorManagerPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+DorManagerPro data are saved automatically as a JSON file `[JAR file location]/data/DorManagerPro.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning"
 seamless>
