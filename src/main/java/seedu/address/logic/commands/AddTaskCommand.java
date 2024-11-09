@@ -67,7 +67,7 @@ public class AddTaskCommand extends Command {
         }
 
         AddTaskCommand otherAddTaskCommand = (AddTaskCommand) other;
-        return taskDescription.equals(otherAddTaskCommand.taskDescription)
+        return taskDescription.equalsIgnoreCase(otherAddTaskCommand.taskDescription)
                 && target.equals(otherAddTaskCommand.target);
     }
 }

@@ -4,14 +4,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<?import javafx.scene.control.Hyperlink?>
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="true" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -21,35 +22,39 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <VBox alignment="CENTER" fx:id="helpMessageContainer">
-        <HBox alignment="CENTER">
-          <children>
-            <Label fx:id="helpMessage" text="Label"/>
-            <Hyperlink fx:id="userGuideLink"
-                       text="https://ay2425s1-cs2103t-f15-1.github.io/tp/UserGuide.html (Click me)" />
-            <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
-              <HBox.margin>
-                <Insets left="5.0" />
-              </HBox.margin>
-            </Button>
-          </children>
-        </HBox>
-        <VBox fx:id="helpCommandsContainer">
-          <children>
-            <Label fx:id="helpCommands" text="Label">
-              <VBox.margin>
-                <Insets right="5.0" />
-              </VBox.margin>
-            </Label>
-          </children>
-        </VBox>
-        <opaqueInsets>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </opaqueInsets>
-        <padding>
-          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-        </padding>
-      </VBox>
+      <!-- Wrap VBox in a ScrollPane for scrollable content -->
+      <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity">
+        <content>
+          <VBox fx:id="helpMessageContainer" minHeight="-Infinity" minWidth="-Infinity">
+            <HBox alignment="CENTER_LEFT">
+              <children>
+                <Label fx:id="helpMessage" minHeight="-Infinity" minWidth="-Infinity" text="Label" />
+                <Hyperlink fx:id="userGuideLink" minHeight="-Infinity" minWidth="-Infinity" text="https://ay2425s1-cs2103t-f15-1.github.io/tp/UserGuide.html (Click me)" />
+                <Button fx:id="copyButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+                  <HBox.margin>
+                    <Insets left="5.0" />
+                  </HBox.margin>
+                </Button>
+              </children>
+            </HBox>
+            <VBox fx:id="helpCommandsContainer">
+              <children>
+                <Label fx:id="helpCommands" text="Label">
+                  <VBox.margin>
+                    <Insets right="5.0" />
+                  </VBox.margin>
+                </Label>
+              </children>
+            </VBox>
+            <opaqueInsets>
+              <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+            </opaqueInsets>
+            <padding>
+              <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+            </padding>
+          </VBox>
+        </content>
+      </ScrollPane>
     </Scene>
   </scene>
 </fx:root>

@@ -81,7 +81,7 @@ public class Task {
 
         Task otherTask = (Task) other;
         return patient.equals(otherTask.patient)
-                && description.equals(otherTask.description);
+                && description.equalsIgnoreCase(otherTask.description);
     }
 
     @Override
