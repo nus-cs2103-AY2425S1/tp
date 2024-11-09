@@ -458,7 +458,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Use case resumes from Step 2.
 
 * **1b**. No contacts found matching the entered keyword.
-    * **1b1**. TutorEase displays a message: "No contacts found with the given keyword(s)."  
+    * **1b1**. TutorEase displays an error message, telling no contacts have been found with the given keyword.  
     * **1b2**. Tutor enters a new keyword or cancels the search.  
       Use case resumes from Step 2 or ends if cancelled.  
 
@@ -534,7 +534,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 * **1b**. No lessons found matching the entered keyword.  
-    * **1b1**. TutorEase displays a message: "No lessons found with the given keyword(s)."
+    * **1b1**. TutorEase displays an error message, telling Tutor that no lessons have been found with the given keyword.
     * **1b2**. Tutor enters a new keyword or cancels the search.  
       Use case resumes from Step 2 or ends if cancelled.
 
