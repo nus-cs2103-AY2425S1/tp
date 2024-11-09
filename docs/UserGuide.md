@@ -121,7 +121,7 @@ Refer to the [Features](#features) below for details of each command.
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be left out (i.e. used 0 times), used as `t/friend`, `t/friend t/family` etc.
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -155,9 +155,12 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
 
 - Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
 - Phone Number must be: [*Numeric*](#numeric), no spaces, at least 3 digits long
-- Email must be: A valid email address
+- Email must be: of the format `local-part@domain` and follow these constraints:
+  - The local-part should only contain alphanumeric characters and the special characters +_.-
+  - The local-part may not start or end with special characters.
+  - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods (e.g. `u.nus.edu`).
 - Address must be: Any characters are valid
-- Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces
+- Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces, within 50 characters
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An employee can have any number of tags (including 0) and any number of skills (including 0)
@@ -218,22 +221,22 @@ Finds employees who has **at least one skill or tag matching** at least one of t
 
 Format: `filter [s/SKILL]... [t/TAG]...`
 
-- The search is case-insensitive. e.g `s/webdev` will match `s/WebDev`.
-- The order of the search items does not matter. e.g. `s/frontend s/backend t/swe t/devops` will also match contacts with `skills={backend, frontend}` or `tags={devops, swe}`.
+- The search is case-insensitive. e.g. `s/webdev` will match `s/WebDev`.
+- The order of the search items does not matter. e.g. `s/frontend s/backend t/swe t/devops` will also match contacts with `t/swe s/frontend t/devops s/backend`.
 - Only the skills and tags are searched.
-- Only full words will be matched e.g. `s/database` will not match `skills={databases}`.
-- Employees who have at least one skill or tag matching at least one search item will be returned (i.e. `OR` search).
-  e.g. `s/frontend t/swe` will return `skills={frontend, uiux}, tags={designer}`, `skills={backend, database, api}, tags={swe, devops}`, and `skills={frontend, backend}, tags={swe}`
+- Only full words will be matched. e.g. `s/database` will not match the skill `databases`.
+- All employees who have at least one skill or tag matching any one search item will be returned.
 
 Examples:
 
-- `filter s/frontend` returns `skills={frontend}, tags={designer}` and `skills={frontend, uiux}, tags={designer, pm}`
-- `filter s/frontend t/swe` returns `skills={Frontend, UIUX}, tags={designer}`, `skills={Backend}, tags={swe}`<br>
-  ![result for 'filter s/frontend t/swe'](images/filterAlexCharlotte.png)
+- `filter s/frontend` returns all employees with the skill `frontend`.
+- `filter s/frontend t/swe` returns all employees who have either the skill `frontend`, the tag `swe`, or both.
 
 Expected output:
 - System message noting success
 - Employees with skills above shown in the displayed employee list
+- Result for `filter t/colleagues`:
+![result for 'filter t/colleagues'](images/filterColleagues.png)
 
 [Return to Top](#table-of-contents)
 
@@ -243,10 +246,10 @@ Expected output:
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
+- Only full words will be matched. e.g. `Han` will not match `Hans`
 - Employees matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -351,7 +354,7 @@ Expected output:
 
 **Edits an existing project** in the address book.
 
-Format: `editproject INDEX [n/NAME] [s/SKILL]…​`
+Format: `editproject INDEX [pn/NAME] [s/SKILL]…​`
 
 - Edits the project at the specified `INDEX`. The index refers to the index number shown in the displayed project list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
@@ -359,11 +362,11 @@ Format: `editproject INDEX [n/NAME] [s/SKILL]…​`
 - When editing skills, the existing skills of the project will be removed i.e adding of skills is not cumulative.
 - You can remove all the project’s skills by typing `s/` without
   specifying any skills after it.
-- You cannot edit an project's id. More specifically, you are not allowed to specify `id/PROJECTID` in the `edit` command.
+- You cannot edit a project's id. More specifically, you are not allowed to specify `pid/PROJECTID` in the `edit` command.
 
 Examples:
 
-- `editproject 1 pn/Aplha ` Edits the project name to be `Aphla`.
+- `editproject 1 pn/ALPHA ` Edits the project name to be `ALPHA`.
 - `editproject 2 s/Cybersecurity` Edits the skill of the 2nd project to be `Cybersecurity`.
 
 Expected output:
@@ -379,9 +382,9 @@ Finds projects whose **names contain any of the given keywords**.
 Format: `findproject KEYWORD [MORE_KEYWORDS]`
 
 - The search is case-insensitive. e.g. `Project` will match `project`
-- The order of the keywords does not matter. e.g `Project Alpha` will match `Alpha Project`
+- The order of the keywords does not matter. e.g. `Project Alpha` will match `Alpha Project`
 - Only the project name is searched.
-- Only full words will be matched e.g. `Proj` does not match `Project`
+- Only full words will be matched. e.g. `Proj` does not match `Project`
 - Any project matching at least one keyword will be returned. e.g. `Project` will return `Project Alpha` and `Project Beta`, etc
 
 Examples:
@@ -443,6 +446,7 @@ Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
 - The `PROJECT_ID` must belong to an existing project.
 - The `EMPLOYEE_ID` must belong to an existing person.
+- There must not be an existing assignment with the same `PROJECT_ID` and `EMPLOYEE_ID`.
 
 Examples:
 
@@ -563,14 +567,14 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ### Project Commands
 
-| Action             | Format, Examples                                                                                   |
-|--------------------|----------------------------------------------------------------------------------------------------|
-| **Add Project**    | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`          |
-| **Clear Projects** | `clearproject`                                                                                     |
-| **Delete Project** | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                  |
-| **Edit Project**   | `editproject INDEX [n/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity` |
-| **Find Projects**  | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                           |
-| **List Projects**  | `listprojects`                                                                                     |
+| Action             | Format, Examples                                                                                    |
+|--------------------|-----------------------------------------------------------------------------------------------------|
+| **Add Project**    | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`           |
+| **Clear Projects** | `clearproject`                                                                                      |
+| **Delete Project** | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                   |
+| **Edit Project**   | `editproject INDEX [pn/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity` |
+| **Find Projects**  | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                            |
+| **List Projects**  | `listprojects`                                                                                      |
 
 [Return to Top](#table-of-contents)
 
