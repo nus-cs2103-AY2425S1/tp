@@ -362,6 +362,8 @@ Format: `makeappt INDEX a/DESCRIPTION s/START e/END`
   * Note that attempting to overwrite an appointment will still require the new appointment to not overlap any existing ones, including the appointment that is about to be overwritten.
 * View parameter constraints [here](#input-parameters)!
 
+*Note: To reduce ambiguity, indexes in the appointments list begins with an "A", i.e. `A1`, to reduce ambiguity from the indexes in the patients list.*
+
 Examples:
 * `list` followed by `makeappt 1 a/Surgery s/23-10-2024-12-00 e/23-10-2024-15-00` adds a `Surgery` appointment to the
   1st person in the address book that is on the *23rd of October 2024 from 12pm to 3pm*.
