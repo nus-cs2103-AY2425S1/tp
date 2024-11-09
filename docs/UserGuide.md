@@ -9,7 +9,17 @@ It is optimized for rapid use by office professionals who are skilled at typing,
 
 ---
 
-## Note: User Guide Formatting
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note on copying commands from PDF version of User Guide:**<br>
+
+If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes on User Guide formatting:**<br>
 
 The user guide contains formatting to highlight important info. The standards used are as follows:
 
@@ -18,6 +28,8 @@ The user guide contains formatting to highlight important info. The standards us
 * <span style="color:red">RED COLOR</span>: Caution, take note
 * [Hyperlink](#note-user-guide-formatting): Links to another section of the user guide, or a relevant page.
 * [*Italics + Hyperlink*](#note-user-guide-formatting): Technical terms available in glossary
+
+</div>
 
 ---
 
@@ -60,13 +72,14 @@ The user guide contains formatting to highlight important info. The standards us
 
 Start here if you are new to HRConnect.
 
-1. Ensure you have **[Java](#java) 17 or above** installed in your computer.
+1. Ensure you have **[*Java*](#java) 17 or above** installed in your computer.
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your HRConnect. **This folder will be used to store saved data and preferences.**
 
-4. **Double click the `.jar` file** in the folder you placed.
+4. **Double click the `.jar` file** in the folder you placed. 
+   - (If this does not work: Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.)
 
 A GUI similar to the screenshot below should appear in a few seconds. Note how the app contains some sample data.
 
@@ -80,7 +93,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `listemployees` : Lists all employees.
 
-   - `add id/1 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   - `add id/6 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    - `delete 3` : Deletes the 3rd contact in the displayed list.
 
@@ -88,7 +101,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `listprojects`: Lists all projects.
 
-   - `addproject pid/3 pn/Project Charlie`: Adds a project named `Project Charlie`.
+   - `addproject pid/3 pn/Project Charlie s/Backend`: Adds a project named `Project Charlie` with skill  `Backend`.
 
    - `deleteproject 3`: Deletes the 3rd project in the displayed project list.
 
@@ -115,21 +128,19 @@ Refer to the [Features](#features) below for details of each command.
 **:information_source: Notes about the command format:**<br>
 
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  - e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 - Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  - e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be left out (i.e. used 0 times), used as `t/friend`, `t/friend t/family` etc.
+  - e.g. `[t/TAG]…​` can be left out (i.e. used 0 times), used as `t/friend`, `t/friend t/family` etc.
 
-- Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+- Items can be in any order.<br>
+  e.g. `n/NAME p/PHONE_NUMBER` and `p/PHONE_NUMBER n/NAME` are the same.
 
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `listemployees`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- Unnecessary parameters (i.e. not mentioned in command format) will be ignored.<br>
 
-- If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 ### Viewing help : `help`
@@ -303,7 +314,7 @@ Expected output:
 
 **Adds a new project** to HRConnect.
 
-Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
+Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME [s/SKILL]...`
 
 - Project Id must be: [*Numeric*](#numeric), no spaces, unique amongst projects
 
@@ -311,11 +322,12 @@ Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
   > Project IDs are compared numerically. `0001` is treated the same as `1`.
 
 - Project Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
+- Skills must be: [*Alphanumeric*](#alphanumeric), no spaces, within 50 characters
 
 Examples:
 
 - `addproject pid/1 pn/Project Alpha`
-- `addproject pid/2 pn/Website UI Overhaul`
+- `addproject pid/2 pn/Website UI Overhaul s/Frontend s/React`
 
 Expected output:
 - System message noting success and id \+ name of project added
@@ -366,7 +378,7 @@ Format: `editproject INDEX [pn/NAME] [s/SKILL]…​`
 
 Examples:
 
-- `editproject 1 pn/ALPHA ` Edits the project name to be `ALPHA`.
+- `editproject 1 pn/ALPHA ` Edits the project name of the 1st project to be `ALPHA`.
 - `editproject 2 s/Cybersecurity` Edits the skill of the 2nd project to be `Cybersecurity`.
 
 Expected output:
@@ -439,7 +451,7 @@ Expected output:
 
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
-- Assignment Id must be: [Numeric](#numeric), no spaces, unique amongst assignments
+- Assignment Id must be: [*Numeric*](#numeric), no spaces, unique amongst assignments
 
   > [!NOTE]
   > Assignment IDs are compared numerically. `0001` is treated the same as `1`.
@@ -553,28 +565,29 @@ When editing employee and project IDs directly in the data file, take extra caut
 
 ### Employee Commands
 
-| Action                          | Format, Examples                                                                                                                                                                                                        |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Employee**                | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/1 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
-| **Clear Employees**             | `clear`                                                                                                                                                                                                                 |
-| **Delete Employee**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                     |
+| Action                          | Format, Examples                                                                                                                                                                                                         |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Employee**                | `add id/EMPLOYEEID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​` <br> e.g., `add id/6 n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague s/database s/backend` |
+| **Clear Employees**             | `clear`                                                                                                                                                                                                                  |
+| **Delete Employee**             | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
 | **Edit Employee**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
-| **Filter Employees (by skill)** | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                    |
-| **Find Employees (by name)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                              |
-| **List Employees**              | `listemployees`                                                                                                                                                                                                         |
+| **Filter Employees (by skill)** | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
+| **Find Employees (by name)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
+| **List Employees**              | `listemployees`                                                                                                                                                                                                          |
 
 [Return to Top](#table-of-contents)
 
 ### Project Commands
 
-| Action             | Format, Examples                                                                                    |
-|--------------------|-----------------------------------------------------------------------------------------------------|
-| **Add Project**    | `addproject pid/PROJECT_ID pn/PROJECT_NAME`<br> e.g., `addproject pid/1 pn/Project Alpha`           |
-| **Clear Projects** | `clearproject`                                                                                      |
-| **Delete Project** | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                   |
-| **Edit Project**   | `editproject INDEX [pn/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity` |
-| **Find Projects**  | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                            |
-| **List Projects**  | `listprojects`                                                                                      |
+| Action                          | Format, Examples                                                                                                  |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| **Add Project**                 | `addproject pid/PROJECT_ID pn/PROJECT_NAME [s/SKILL]...`<br> e.g., `addproject pid/1 pn/Project Alpha s/Frontend` |
+| **Clear Projects**              | `clearproject`                                                                                                    |
+| **Delete Project**              | `deleteproject INDEX`<br> e.g., `deleteproject 2`                                                                 |
+| **Edit Project**                | `editproject INDEX [pn/NAME] [s/SKILL]…​`<br> e.g.,`editproject 1 pn/Project Alpha s/Cybersecurity`               |
+| **Find Projects**               | `findproject KEYWORD [MORE_KEYWORDS]`<br> e.g., `findproject Alpha Beta`                                          |
+| **List Projects**               | `listprojects`                                                                                                    |
+| **List All Members of Project** | `listprojectmembers pn/PROJECT_NAME` <br> e.g., `listprojectmembers pn/Project Alpha`                             |
 
 [Return to Top](#table-of-contents)
 
