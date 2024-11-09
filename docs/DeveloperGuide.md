@@ -296,14 +296,33 @@ provides a patient management system for nurses to use which is faster than GUI/
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                            | So that I can…​                      |
-|----------|---------|-----------------------------------------|--------------------------------------|
-| `* * *`  | nurse   | add in emergency contact numbers        | refer to them during an emergency    |
-| `* * *`  | nurse   | delete emergency contact numbers        | remove irrelevant emergency contacts |
-| `* * *`  | nurse   | update a patient’s category             | reflect changes in their care status |
-| `* * *`  | nurse   | assign multiple categories to a patient | quickly identify the care level      |
-| `* * *`  | nurse   | add tasks                               | track what task needs to be done     |
-| `* * *`  | nurse   | delete tasks                            | remove irrelevant tasks              |
+| Priority | As a …​  | I want to …​                                       | So that I can…​                                                                |
+|----------|----------|----------------------------------------------------|--------------------------------------------------------------------------------|
+| `* * *`  | nurse    | add in emergency contact numbers                   | refer to them during an emergency                                              |
+| `* * *`  | nurse    | delete emergency contact numbers                   | remove irrelevant emergency contacts                                           |
+| `* * *`  | nurse    | assign multiple categories to a patient            | quickly identify the care level                                                |
+| `* * *`  | nurse    | add tasks                                          | track what task needs to be done                                               |
+| `* * *`  | nurse    | delete tasks                                       | remove irrelevant tasks                                                        |
+| `* * *`  | nurse    | assign priority levels to patients                 | recognize which patients need more immediate attention                         |
+| `* * *`  | nurse    | add tags to patients                               | recognize the allergies for each patient                                       |
+| `* * `   | nurse    | change the priority level for each patient         | reflect changes in their care status                                           |
+| `* * `   | nurse    | reset the priority level for each patient          | reflect changes in their care status                                           |
+| `* *`    | nurse    | edit the name for each patient                     | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | nurse    | edit the phone number for each patient             | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | nurse    | edit the emergency contact for each patient        | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | nurse    | edit tags for each patient                         | reflect changes in their allergies                                             |
+| `* *`    | nurse    | find a patient by their name                       | access their details quickly without scrolling through the list                |
+| `* *`    | nurse    | find tasks by their description                    | access patients with the same task quickly without scrolling through the list  |
+| `* *`    | nurse    | list tasks that are incomplete                     | prioritize my work during the shift                                            |
+| `* *`    | nurse    | list tasks that are complete                       | double check that my the tasks that I have marked complete are indeed complete |
+| `* *`    | nurse    | mark tasks as complete                             | update the tasks that I have completed                                         |
+| `* *`    | nurse    | unmark tasks                                       | to unmark the tasks that I have accidentally marked as completed               |
+| `*`      | nurse    | have the ability to clear all data from the system | reset the system for a new set of patients efficiently                         |
+| `*`      | nurse    | be able to exit the program using a command        | quickly close the application when done                                        |
+| `*`      | nurse    | edit the email for each patient                    | reflect changes in the event that the information was keyed in wrongly         |
+| `*`      | nurse    | edit the address for each patient                  | reflect changes in the event that the information was keyed in wrongly         |
+
+
 
 *{More to be added}*
 
