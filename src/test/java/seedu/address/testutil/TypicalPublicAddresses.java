@@ -32,9 +32,12 @@ public class TypicalPublicAddresses {
     //testing purposes
     public static final String INVALID_PUBLIC_ADDRESS_INVALID_CHAR_STRING = "0x!@#$%^&*()";
     public static final String INVALID_PUBLIC_ADDRESS_TOO_LONG_STRING =
-        "0x0B1C9E1Fb5Ec797c7f0134641810E9A7ca14d2wjrenlkewrngilsdfjdshfsdkfewrkhgnilwerkngiwrengiwrhngirwengiwrengiwer".toLowerCase();
-    public static final String VALID_PUBLIC_ADDRESS_ONLY_NUMBERS_STRING = "0123456789012345678901234567890123456789".toLowerCase();
-    public static final String VALID_PUBLIC_ADDRESS_ONLY_CHARS_STRING = "0123456789abcdef0123456789abcdef01234567".toLowerCase();
+        "0x0B1C9E1Fb5Ec797c7f0134641810E9A7ca14d2wjrenlkewrngilsdfjdshfsdkfewrkhgnilwerkngiwrengiwrhngirwengiwrengiwer"
+            .toLowerCase();
+    public static final String VALID_PUBLIC_ADDRESS_ONLY_NUMBERS_STRING =
+        "0123456789012345678901234567890123456789".toLowerCase();
+    public static final String VALID_PUBLIC_ADDRESS_ONLY_CHARS_STRING = "0123456789abcdef0123456789abcdef01234567"
+        .toLowerCase();
 
     public static final PublicAddress VALID_PUBLIC_ADDRESS_ETH_MAIN =
         new EthAddress(VALID_PUBLIC_ADDRESS_ETH_MAIN_STRING, "main");

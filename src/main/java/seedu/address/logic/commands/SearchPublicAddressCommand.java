@@ -43,7 +43,7 @@ public class SearchPublicAddressCommand extends Command {
         requireAllNonNull(publicAddressString);
 
 
-        this.publicAddressString = publicAddressString;
+        this.publicAddressString = publicAddressString.toLowerCase();
 
 
     }
