@@ -28,7 +28,6 @@ public class Note {
     public Note(String note) {
         assert note != null : "Note cannot be null";
         requireNonNull(note);
-        assert isValidNote(note) : "Note is not valid";
         assert note.length() <= MAX_LENGTH : "Note exceeds maximum length of 200 characters";
         value = note;
     }
