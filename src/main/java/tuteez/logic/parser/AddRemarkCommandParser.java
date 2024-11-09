@@ -3,7 +3,9 @@ package tuteez.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static tuteez.logic.Messages.MESSAGE_MISSING_REMARK_PREFIX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_REMARK;
-import static tuteez.logic.parser.ParserUtil.*;
+import static tuteez.logic.parser.ParserUtil.parsePersonIndex;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
+import static tuteez.logic.parser.ParserUtil.validatePrefixExists;
 
 import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.AddRemarkCommand;

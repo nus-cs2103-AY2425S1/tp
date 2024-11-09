@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.logic.Messages.MESSAGE_DUPLICATE_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_LESSON_INDEX_FORMAT;
-import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX;
-import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
-import static tuteez.logic.parser.ParserUtil.*;
+import static tuteez.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static tuteez.logic.parser.ParserUtil.parsePersonIndex;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
+import static tuteez.logic.parser.ParserUtil.validatePrefixExists;
 
 import java.util.ArrayList;
 import java.util.List;
