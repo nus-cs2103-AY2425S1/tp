@@ -173,7 +173,7 @@ WedLinker data are saved in the hard disk automatically after any command that c
 
 ### Editing the data file
 
-WedLinker data are saved automatically as a JSON file `[JAR file location]/data/WedLinker.json`. Advanced users are welcome to update data directly by editing that data file.
+WedLinker data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -424,7 +424,7 @@ Action     | Format, Examples
 **Assign Wedding**    | `assign-wedding PERSON_INDEX w/WEDDING…​` or `asw PERSON_INDEX w/WEDDING…​` <br> e.g., `asw 2 w/Casey's Wedding w/Wedding August 29th`
 **Clear**  | `clear`
 **Create Tag**  | `create-tag t/TAG` or `ctag t/TAG` <br> e.g., `create-tag t/photographer`
-**Create Task**  | `create-task tk/TASK_TYPE TASK_DETAILS` or `ctask tk/TASK_TYPE TASK_DETAILS` <br> e.g., `create-task tk/todo Order Wedding Cake` <br> `create-task tk/event Meet Caterer /from 2024-11-19 /to 2024-11-20` <br> `create-task tk/deadline Book Venue /by 2025-02-01`
+**Create Task**  | `create-task tk/TASK_DESCRIPTION [REMARKS]` or `ctask tk/TASK_DESCRIPTION [REMARKS]` <br> e.g., `create-task tk/todo Order Wedding Cake` <br> `create-task tk/event Meet Caterer /from 2024-11-19 /to 2024-11-20` <br> `create-task tk/deadline Book Venue /by 2025-02-01`
 **Create Wedding**  | `create-wedding w/WEDDING` or `cw w/WEDDING` <br> e.g., `cw w/JJ's Wedding`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Tag** | `delete-tag t/TAG` or `dtag t/TAG` <br> e.g., `delete-tag t/photographer`
