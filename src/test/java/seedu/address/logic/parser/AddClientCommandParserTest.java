@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.CAR_DESC_B;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.EMPTY_ISSUE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ISSUE_DESC;
@@ -51,7 +52,6 @@ import seedu.address.model.car.CarMake;
 import seedu.address.model.car.CarModel;
 import seedu.address.model.car.Vin;
 import seedu.address.model.car.Vrn;
-import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -68,17 +68,19 @@ public class AddClientCommandParserTest {
         Person expectedPerson = new PersonBuilder(BOB).withIssues(VALID_ISSUE_FRIEND).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ISSUE_DESC_FRIEND, new AddClientCommand(expectedPerson));
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + ISSUE_DESC_FRIEND, AddClientCommand.MESSAGE_NO_CAR_TO_ADD_ISSUES);
 
+        // i/ but no issue
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ADDRESS_DESC_BOB + EMPTY_ISSUE_DESC, AddClientCommand.MESSAGE_NO_CAR_TO_ADD_ISSUES);
 
         // multiple issues - all accepted
         Person expectedPersonMultipleIssues = new PersonBuilder(BOB).withIssues(VALID_ISSUE_FRIEND, VALID_ISSUE_HUSBAND)
                 .build();
-        assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + ISSUE_DESC_HUSBAND + ISSUE_DESC_FRIEND,
-                new AddClientCommand(expectedPersonMultipleIssues));
+                AddClientCommand.MESSAGE_NO_CAR_TO_ADD_ISSUES);
     }
 
     /*
@@ -281,7 +283,7 @@ public class AddClientCommandParserTest {
 
         // invalid issue
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_ISSUE_DESC + VALID_ISSUE_FRIEND, Issue.MESSAGE_CONSTRAINTS);
+                + INVALID_ISSUE_DESC + VALID_ISSUE_FRIEND, AddClientCommand.MESSAGE_NO_CAR_TO_ADD_ISSUES);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,

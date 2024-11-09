@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VIN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VRN;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -61,10 +62,11 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Issue> issueList = ParserUtil.parseIssues(argMultimap.getAllValues(PREFIX_ISSUE));
         Person person;
 
+        // If Client has a Car. Issues also can be added to it, if any.
         if (isCarPresent) {
+            Set<Issue> issueList = ParserUtil.parseIssues(argMultimap.getAllValues(PREFIX_ISSUE));
             System.out.println("Car is present" + argMultimap.getValue(PREFIX_VRN).get());
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
             String vrn = argMultimap.getValue(PREFIX_VRN).orElse("");
@@ -72,12 +74,19 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
             String make = argMultimap.getValue(PREFIX_MAKE).orElse("");
             String model = argMultimap.getValue(PREFIX_MODEL).orElse("");
 
+            // Create Car and Issues.
             Car car = ParserUtil.parseCar(vrn, vin, make, model);
             person = new Person(name, phone, email, address, issueList, car);
-        } else {
-            person = new Person(name, phone, email, address, issueList);
+            return new AddClientCommand(person);
         }
 
+        // If Client does not have a Car, but user tries to add issues to it.
+        if (arePrefixesPresent(argMultimap, PREFIX_ISSUE)) {
+            throw new ParseException(AddClientCommand.MESSAGE_NO_CAR_TO_ADD_ISSUES);
+        }
+
+        // If Client does not have a Car, and user does not try to add issues to it.
+        person = new Person(name, phone, email, address, new HashSet<>());
         return new AddClientCommand(person);
     }
 
