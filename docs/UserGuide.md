@@ -59,10 +59,10 @@ Our graphical user interface (GUI) consists of several parts, refer to the image
 
 3. **Result Display Panel**: Results of command execution and error messages are displayed here.
 
-4. **Person Cards Panel**: Person cards are listed here.
+4. **Person Cards Panel**: Person cards are listed here. 
    ![UiTut](images/UiTut.png)
 
-### Command PopUp!
+### Command PopUp
 
 ![CommandPopUp](images/commandpopup.png)
 
@@ -72,7 +72,7 @@ When you start typing in the command box and have **at least one** character ent
 
 Each suggestion includes the command name, command format and any required details to use it effectively.
 
-To scroll through the suggestions:
+To cycle through the suggestions:
 * Press `shift + up` or `shift + down` and the **current selection** will be highlighted in **blue**.  
   _In the image the **current selection** would be `editgame`._
 
