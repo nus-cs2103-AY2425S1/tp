@@ -194,7 +194,7 @@ Example:
 
 Counts number of employees.
 
-Format: `count`(for counting the filtered list), `count t/TAG`(for counting persons with given TAG)
+Format: `count`(for counting the filtered list), `count tag/TAG`(for counting persons with given TAG)
 
 * If counting the entire list, use `count`.
 * If counting persons with specified TAG, add TAG to end of the command.
@@ -206,7 +206,7 @@ Format: `count`(for counting the filtered list), `count t/TAG`(for counting pers
 
 Examples:
 * `count`
-* `count t/Colleagues`
+* `count tag/Colleagues`
 
 `picture`
 
