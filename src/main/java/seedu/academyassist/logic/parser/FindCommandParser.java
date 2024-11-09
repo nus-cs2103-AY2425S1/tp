@@ -13,6 +13,8 @@ import seedu.academyassist.model.person.NameContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+    private static final String SPECIAL_CHARACTERS = "-/'";
+    private static final String VALIDATION_REGEX = "[a-zA-Z" + SPECIAL_CHARACTERS + "\\s]{1,255}$";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -26,10 +28,9 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        boolean isMoreThanHundredChar = trimmedArgs.length() > 100;
-        boolean isAlphabetic = trimmedArgs.matches("[a-zA-Z\\s]+");
+        boolean isValidNameFormat = trimmedArgs.matches(VALIDATION_REGEX);
 
-        if (isMoreThanHundredChar || !isAlphabetic) {
+        if (!isValidNameFormat) {
             throw new ParseException(MESSAGE_INVALID_NAME_FORMAT);
         }
 
