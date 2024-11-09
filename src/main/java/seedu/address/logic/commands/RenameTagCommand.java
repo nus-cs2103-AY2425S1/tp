@@ -83,10 +83,6 @@ public class RenameTagCommand extends Command {
         }
     }
 
-    public void updatePersonTag(String oldTag, String newTag, Person person) {
-
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
