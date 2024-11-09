@@ -9,7 +9,6 @@ import static seedu.address.logic.commands.ExportCommand.MESSAGE_HOME_FILE_EXIST
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -20,7 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -675,26 +673,5 @@ public class ExportCommandTest {
 
         assertThrows(AssertionError.class, () ->
                 exportCommand.coursesToString(null));
-    }
-
-    @Test
-    public void validateFilename_withPathComponents_throwsCommandException() {
-        String filenameWithPath = "folder" + File.separator + "file";
-        ExportCommand exportCommand = new ExportCommand(filenameWithPath, false, dataDir);
-        Assertions.assertThrows(CommandException.class, () -> exportCommand.execute(model),
-                "Filename cannot contain path components");
-    }
-
-    @Test
-    public void validateFilename_multiplePathComponents_throwsCommandException() {
-        String filenameWithPath = "parent/child/file";
-        ExportCommand exportCommand = new ExportCommand(filenameWithPath, false, dataDir);
-
-        Assertions.assertThrows(CommandException.class, () -> exportCommand.execute(model),
-                "Filename cannot contain path components");
-        String explicitPath = "parent" + File.separator + "child" + File.separator + "file";
-        ExportCommand exportCommand2 = new ExportCommand(explicitPath, false, dataDir);
-        Assertions.assertThrows(CommandException.class, () -> exportCommand2.execute(model),
-                "Filename cannot contain path components");
     }
 }

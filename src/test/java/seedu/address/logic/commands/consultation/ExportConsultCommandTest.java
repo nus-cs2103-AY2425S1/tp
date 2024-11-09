@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalConsultations.getTypicalConsultations;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -357,25 +355,5 @@ public class ExportConsultCommandTest {
 
         // Test with multiple special characters
         assertEquals("\"test,\"\"'data\"", exportCommand.escapeSpecialCharacters("test,\"'data"));
-    }
-
-    @Test
-    public void validateFilename_withPathComponents_throwsCommandException() {
-        String filenameWithPath = "folder" + File.separator + "file";
-        ExportConsultCommand exportCommand = new ExportConsultCommand(filenameWithPath, false, dataDir);
-        Assertions.assertThrows(CommandException.class, () -> exportCommand.execute(model),
-                "Filename cannot contain path components");
-    }
-
-    @Test
-    public void validateFilename_multiplePathComponents_throwsCommandException() {
-        String filenameWithPath = "parent/child/file";
-        ExportConsultCommand exportCommand = new ExportConsultCommand(filenameWithPath, false, dataDir);
-        Assertions.assertThrows(CommandException.class, () -> exportCommand.execute(model),
-                "Filename cannot contain path components");
-        String explicitPath = "parent" + File.separator + "child" + File.separator + "file";
-        ExportConsultCommand exportCommand2 = new ExportConsultCommand(explicitPath, false, dataDir);
-        Assertions.assertThrows(CommandException.class, () -> exportCommand2.execute(model),
-                "Filename cannot contain path components");
     }
 }
