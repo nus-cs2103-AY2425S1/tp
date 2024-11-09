@@ -258,6 +258,7 @@ In NovaCare, these commands will allow you to modify your list of patients to su
 **Note:**
 * For all commands, parts of the command in square brackets are optional parameters that can be included in or omitted from the command. 
   * For example: `[t/TAG]`
+* Conversely, parts of the command not in square brackets are compulsory fields.
 </box>
 
 #### 6.2.1 Adding a patient: `add`
