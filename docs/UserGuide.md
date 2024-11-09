@@ -46,19 +46,14 @@ These features are designed to help you manage patient info seamlessly. Appointm
 ### Legend
 These boxes might offer some additional information of different types:
 
-<box type="info" seamless>
-
-**Important:**
+<div markdown="block" class="alert alert-info">
+**:information_source: Important:**<br>
 Highlights important information that you should know.
+</div>
 
-</box>
-
-<box type="tip" seamless>
-
-**Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Provides you with tips to use our system more effectively.
-
-</box>
+</div>
 
 <div markdown="block" class="alert alert-info">
 
