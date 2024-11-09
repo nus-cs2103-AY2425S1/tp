@@ -2,6 +2,7 @@
   layout: default.md
   title: "User Guide"
   pageNav: 3
+
 ---
 
 # LegacyLink User Guide
@@ -98,6 +99,9 @@ Refer to the feature list below for detailed information of each command that is
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* All commands are case-sensitive. <br>
+e.g. The command `Help` is different from `help` and therefore, results in an `Unknown command` error
 </panel>
 
 ### Viewing help : `help`
@@ -137,19 +141,20 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 
 Valid Examples:
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123`
+* This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
+![AddCommanFailureInvalidPhone.png](images/AddCommanFailureInvalidPhone.png)
 
-This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
-
-
-![addPersonCommandSuccess.png](images/addPersonCommandSuccess.png)
-
-Invalid Examples:
+Invalid Examples (Invalid Phone Number):
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12`
-
-This command will not result in the following error message since the phone number must be at least 3 digits long.
-
-
+* This command will not result in the following error message since the phone number must be at least 3 digits long.
 ![addPersonCommandFailure.png](images/addPersonCommandFailure.png)
+
+Invalid Examples (Duplicate Persons):
+* Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` already exists.
+* Typing the following command `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be added.
+* The following error message will be shown:
+![addDuplicatePersonsError.png](images/addDuplicatePersonsError.png)
+
 
 ### Editing a person : `edit`
 
@@ -161,13 +166,19 @@ Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
-*  `edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+Valid Examples (One field edited):
 *  `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
-* `Before:`
-* ![](images/beforeEditCommandExample.png)
-* `After:`
-* ![](images/afterEditCommandExample.png)
+![EditPersonExample1.png](images/EditPersonExample1.png)
+
+Valid Examples (Multiple fields edited):
+*  `edit 1 -p 91234567 -e johndoe@example.com -rs Father` Edits the phone number, email and relationship of the 1st person to be `91234567`, `johndoe@example.com` and `Father` respectively.
+![EditPersonExample2.png](images/EditPersonExample2.png)
+
+Invalid Examples (Duplicate Persons):
+* Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` exists as the first contact.
+* Attempting to edit another contact: <br> e.g. `edit 2 -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be edited. 
+* The following error message will be shown:
+![AddCommandDuplicate.png](images/AddCommandDuplicate.png)
 
 ### Locating persons by name: `find`
 
@@ -175,12 +186,18 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+<box type="tip" seamless>
+
+**Tip:**
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If no person is found, none of the contacts will be displayed and `0 Persons Listed` is shown to the user.
+* You are recommended to execute `list -p` after `find` command to restore the original list.
+</box>
 
 Examples:
 * `find John` returns anyone with "John" as part of their name
@@ -198,12 +215,8 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list -p` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `Before:`
-* ![](images/beforeDeleteCommandExample.png)
-* `After:`
-* ![](images/afterDeleteCommandExample.png)
 
 ### Clearing all persons : `clear -p`
 
@@ -237,9 +250,9 @@ Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION
 
 <box type="tip" seamless>
 
-**Tip:** All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
-
-**Tip:** Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
+**Tip:** 
+* All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
+* Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
 Note that the indexes are seperated by **spaces**.
 </box>
 
@@ -256,16 +269,23 @@ Format: `update -i INDEX -n NEW_NAME -sd NEW_START_DATE -ed NEW_END_DATE -l NEW_
 
 **Note:** Dates are in (yyyy-mm-dd) format.
 
-**Tip:** The initial `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
+<box type="tip" seamless>
+
+**Tip:** 
+* The initial `INDEX` parameter is required, while the rest of the parameters are optional. The `-r` flag allows you to
 remove attendees from an event, and can be used together with the `-a` flag. If you add and remove the same index, the result
 will be adding the person first, then removing them, i.e. they will not be present in the attendee list after the command executes.
-Indexes supplied to the `NEW_ATTENDEES_INDICIES`  and `REMOVED_ATTENDEES INDICES` parameters must be based on existing contacts indexing in the Address Book.
-Note that the indexes are seperated by **spaces**.
+* Indexes supplied to the `NEW_ATTENDEES_INDICIES`  and `REMOVED_ATTENDEES INDICES` parameters must be based on existing contacts indexing in the Address Book.
+* Note that the indexes are separated by **spaces**.
+</box>
 
-Examples:
-* `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -a 1 2 4 5 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
-* `update -i 1 -l NUS` updates only the location of the first event.
+Valid Examples (One field updated):
+* `update -i 1 -l NUS UTown` only updates the location of the first event to `NUS UTown`.
+![UpdateEventExample1](images/UpdateEventExample1.png)
 
+Valid Examples (Multiple field updated):
+* `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
+![UpdateEventExample2.png](images/UpdateEventExample2.png)
 
 ### Exiting the program : `exit`
 

@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User views all contacts (UC-3).
+1.  User views all contacts [UC-3](#use-case-3-view-all-contacts).
 2.  System shows a list of persons.
 3.  User requests to delete a specific contact in the list.
 4.  System deletes the person.
@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case 3: View all contacts**
+#### **Use case 3: View all contacts**
 
 **MSS**
 
@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User lists all contacts (UC-3).
+1. User lists all contacts [UC-3](#use-case-3-view-all-contacts).
 2. User selects contact to update.
 3. User can edit name / phone number / email / relationship of contact.
 4. System registers the changes.
@@ -428,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User lists all events(UC-7).
+1. User lists all events [UC-7](#use-case-7-view-all-events).
 2. System shows a list of events.
 3. User selects an event to delete.
 4. User confirms their intention and the event is deleted.
@@ -450,8 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *a. If the user exits the application without confirming, the event is kept and the use case ends.
 
-**Use case 7: View all events**
-
+#### Use Case 7: View All Events
 **MSS**
 
 1. User lists all events.
@@ -465,7 +464,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User views all events(UC-7).
+1. User views all events [UC-7](#use-case-7-view-all-events).
 2. User selects event to edit.
 3. User changes the relevant event details.
 4. User saves the information.
@@ -630,7 +629,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is edited in the contact. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect add commands to try: `edit`, `edit x` (where x is larger than the list size), <br>
-      Expected: Expected: No person is edited in the contact. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is edited in the contact. Error details shown in the status message. Status bar remains the same.
 
 2. Editing a person, where result causes duplicate persons.
 
