@@ -75,11 +75,11 @@ If you’re a CCA leader who values speed, organization, and reliability, HallPo
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g., in `add_member n/NAME`, `NAME` is a parameter that can be used as `add_member n/John Doe`.
 - Items in square brackets are optional.<br>
-  e.g., `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g., `n/NAME [tag/TAG]` can be used as `n/John Doe tag/friend` or as `n/John Doe`.
 - Items with `…`​ after them can be used multiple times, including zero times.<br>
-  e.g., `[t/TAG]…​` can be used as ` ` (i.e., 0 times), `t/friend`, `t/friend t/family`, etc.
+  e.g., `[tag/TAG]…​` can be used as ` ` (i.e., 0 times), `tag/friend`, `tag/friend tag/family`, etc.
 - Parameters can be in any order.<br>
-  e.g., if the command specifies `n/NAME tg/TELEGRAM`, `tg/TELEGRAM n/NAME` is also acceptable.
+  e.g., if the command specifies `n/NAME t/TELEGRAM`, `t/TELEGRAM n/NAME` is also acceptable.
 - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored.<br>
   e.g., if the command specifies `help 123`, it will be interpreted as `help`.
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines, as space characters surrounding line-breaks may be omitted when copied over to the application.
