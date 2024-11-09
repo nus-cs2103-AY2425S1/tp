@@ -20,7 +20,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "<<Viewing help>>\n"
             + "Format: help\n\n"
             + "<<Adding a person>>\n"
-            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/REMARK a/ADDRESS [t/TAG]\n\n"
+            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL r/REMARK a/ADDRESS t/TRIAGE [tag/TAG]\n\n"
             + "<<Adding a remark>>\n"
             + "Format: remark NRIC r/REMARK\n\n"
             + "<<Listing all persons>>\n"
@@ -28,7 +28,9 @@ public class HelpWindow extends UiPart<Stage> {
             + "<<Adding an appointment>>\n"
             + "Format: appointment NRIC app/APPOINTMENT\n\n"
             + "<<Editing a person>>\n"
-            + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [r/REMARK] [a/ADDRESS] [t/TAG]\n\n"
+            + "Format: edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [r/REMARK] [a/ADDRESS] [t/TRIAGE] [tag/TAG]\n\n"
+            + "<<Changing Triage Stages>>\n"
+            + "Format: triage NRIC t/TRIAGE\n\n"
             + "<<Locating persons by name>>\n"
             + "Format: find KEYWORD [MORE_KEYWORDS]\n\n"
             + "<<Deleting a person>>\n"
@@ -44,7 +46,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Format: exit\n\n"
             + "List of SHORTCUT Commands: \n"
             + "add -> a | appointment -> appt | clear -> c | delete -> d | edit -> ed | exit -> ex\n"
-            + "find -> f | help -> h | list -> l | remark -> r | sort -> s | view -> v\n\n"
+            + "find -> f | help -> h | list -> l | remark -> r | sort -> s | view -> v | triage -> t\n\n"
             + "Refer to the user guide: "
             + USERGUIDE_URL;
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
