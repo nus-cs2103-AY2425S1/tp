@@ -18,10 +18,10 @@ box Model MODEL_COLOR_T1
 participant "model:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("attend s/A1234567U\nc/T1001 d/2024-02-21")
+[-> LogicManager : execute("markAtt s/A1234567U\nc/T1001 d/2024-02-21")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("attend s/A1234567U\nc/T1001 d/2024-02-21")
+LogicManager -> AddressBookParser : parseCommand("markAtt s/A1234567U\nc/T1001 d/2024-02-21")
 activate AddressBookParser
 
 create AttendCommandParser

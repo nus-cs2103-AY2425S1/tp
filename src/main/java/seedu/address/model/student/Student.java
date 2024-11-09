@@ -90,6 +90,10 @@ public class Student {
                 && otherStudentId.equals(getStudentId());
     }
 
+    public void setPresentDatesEmpty() {
+        presentDates.get().setPresentDatesEmpty();
+    }
+
     public boolean hasCompletedAssignment() {
         return hasCompletedAssignment;
     }
