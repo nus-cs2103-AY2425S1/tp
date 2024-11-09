@@ -19,7 +19,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/seahminlong.md)]
 
 * Role: Developer
-* Responsibilities: 
+* Responsibilities:
   * Scheduling & tracking
   * In charge of `Logic`
 
@@ -49,7 +49,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/justin-yeo.png" width="200px">
 
-[[github](http://github.com/Justin-Yeo)] 
+[[github](http://github.com/Justin-Yeo)]
 [[portfolio](team/justinyeo.md)]
 
 * Role: Developer
