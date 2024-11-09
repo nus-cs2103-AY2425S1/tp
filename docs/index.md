@@ -15,8 +15,6 @@
 ## Welcome to Eventory: Your Event Directory
 Eventory is a **desktop app for managing contacts and events**.
 
-#### Say goodbye to using 3 different apps just to plan events.
-
 <div style="display: flex; gap: 20px;">
     <a href="UserGuide.html#quick-start">
         <img src="images/getstartedblue.svg" alt="Get Started" width="450" height="150">
