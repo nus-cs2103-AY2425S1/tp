@@ -290,7 +290,8 @@ At least one parameter must be provided. You do not need to include all paramete
 
 #### Adding an appointment: `addapp`
 
-Adds an appointment for a person in CareLink.
+**Adds an appointment for a person in CareLink.**
+
 
 Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
 
@@ -302,12 +303,12 @@ Format: `addapp nric/NRIC d/DATE start/START_TIME end/END_TIME`
   - Appointment must be in the future
   - Must not overlap with existing appointments
 
-Examples:
+**Examples:**
 
 - `addapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00` adds a one-hour appointment on January 1st, 2025
 - `addapp nric/S9876543B d/15/03/2025 start/14:30 end/16:00` adds a 90-minute appointment on March 15th, 2025
 
-Common errors and their meanings:
+**Common errors and their meanings:**
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g 01/01/2025)
@@ -318,7 +319,7 @@ Common errors and their meanings:
 
 #### Editing an appointment: `editapp`
 
-Edits an existing appointment for a person in CareLink
+**Edits an existing appointment for a person in CareLink**
 
 Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_TIME] [newend/END_TIME]`
 
@@ -330,12 +331,12 @@ Format: `editapp nric/NRIC d/DATE start/START_TIME [newd/DATE] [newstart/START_T
   - Appointment must be in the future
   - Must not overlap with existing appointments
 
-Examples:
+**Examples:**
 
 - `editapp nric/S1234567D d/01/01/2025 start/10:00 end/11:00 newd/02/01/2025` changes the appointment date, timings remain the same
 - `editapp nric/S1234567D d/02/01/2025 start/10:00 end/11:00 newstart/08:00  newend/09:00` Shifts the appointment timing forward, appointment remains on the same day.
 
-Common errors and their meanings:
+**Common errors and their meanings:**
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
 - `This appointment does not exist in CareLink` - The specified appointment cannot be found
 - `At least one field to edit must be provided.` - You must specify at least one field to change
@@ -347,7 +348,7 @@ Common errors and their meanings:
 
 #### Updating Status of an appointment: `updatestatus`
 
-Updates the status of an existing appointment. The status can be `PENDING` or `COMPLETED`.
+**Updates the status of an existing appointment. The status can be `PENDING` or `COMPLETED`.**
 
 Format: `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS`
 
@@ -357,7 +358,7 @@ Format: `updatestatus nric/NRIC d/DATE start/START_TIME status/STATUS`
 - The `STATUS` must be either `PENDING` or `COMPLETED`. It is case insensistive.
 - The appointment must exist at the specified date and time for the person
 
-Examples:
+**Examples:**
 
 - `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/completed` updates the status to completed for the appointment on January 1st, 2025 at 10:00
 - `updatestatus nric/S1234567D d/01/01/2025 start/10:00 status/pending` updates the status to pending for the appointment on January 1st, 2025 at 10:00
@@ -365,6 +366,9 @@ Examples:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To change the status of an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
 </div>
+
+
+**Common errors and their meanings:**
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g. 01/01/2025)
@@ -374,7 +378,7 @@ To change the status of an appointment, you only need the start time. The end ti
 
 #### Deleting an appointment: `deleteapp`
 
-Deletes an existing appointment for a person in CareLink.
+**Deletes an existing appointment for a person in CareLink.**
 
 Format: `deleteapp nric/NRIC d/DATE start/START_TIME`
 
@@ -392,7 +396,7 @@ Examples:
 To delete an appointment, you only need the start time. The end time is not required since CareLink can identify the appointment uniquely by the person, date, and start time.
 </div>
 
-Common errors and their meanings:
+**Common errors and their meanings:**
 
 - `Incorrect NRIC. Person not found` - Check that the NRIC exists in CareLink
 - `Invalid date` - Make sure to use DD/MM/YYYY format (e.g. 01/01/2025)
@@ -401,7 +405,7 @@ Common errors and their meanings:
 
 #### Locating appointments by date-time range: `findapp`
 
-Finds and lists appointment that falls within the specified date-time range. The command displays detailed information about the appointments such as the patient's name, phone, email, NRIC, caregivers, tags, and the appointment's start and end dates and times.
+**Finds and lists appointment that falls within the specified date-time range**. The command displays detailed information about the appointments such as the patient's name, phone, email, NRIC, caregivers, tags, and the appointment's start and end dates and times.
 
 **Format**: `findapp sdate/START_DATE start/START_TIME edate/END_DATE end/END_TIME​`
 
@@ -419,14 +423,14 @@ Finds and lists appointment that falls within the specified date-time range. The
 An example of the result obtained from the `findapp` command is given below.
 ![Find Appointment command example](images/findappointment.png)
 
-Possible Errors:
+**Possible Errors:**
 - `Invalid date. Please use the DD/MM/YYYY format` - When the date format is incorrect
 - `Invalid time. Please use the HH:MM format` - When the time format is incorrect
 
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+**Deletes the specified person from the address book.**
 
 Format: `delete NRIC`
 
@@ -445,13 +449,13 @@ Notice the NRIC used in the example belongs to `David LI`.
 Once the command succeeds, notice that David is removed and hence no longer displayed.
 ![result for 'delete S6483749D'](images/deleteDavidResult.png)
 
-Possible Errors:
+**Possible Errors:**
 - `The patient NRIC provided is not found` - When the specified NRIC does not exist in CareLink
 
 
 ### Clearing all entries: `clear confirm`
 
-Clears all entries from the address book after receiving confirmation.
+**Clears all entries from the address book after receiving confirmation.**
 
 **Warning**: This command will permanently delete all entries from the address book. Ensure that you want to proceed before executing this command.
 
@@ -468,7 +472,7 @@ Clears all entries from the address book after receiving confirmation.
 
 ### Exiting the program : `exit`
 
-Exits the program.
+**Exits the program.**
 
 Format: `exit`
 
