@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -61,6 +63,28 @@ public class ArchiveCommandTest {
 
         assertCommandSuccess(new ArchiveCommand(new Filename("")), model, ArchiveCommand.MESSAGE_FAILURE,
                 expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ArchiveCommand archiveFirstCommand = new ArchiveCommand(new Filename("test1"));
+        ArchiveCommand archiveSecondCommand = new ArchiveCommand(new Filename("test2"));
+
+        // same object -> returns true
+        assertTrue(archiveFirstCommand.equals(archiveFirstCommand));
+
+        // same values -> returns true
+        ArchiveCommand archiveFirstCommandCopy = new ArchiveCommand(new Filename("test1"));
+        assertTrue(archiveFirstCommand.equals(archiveFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(archiveFirstCommand.equals("test1"));
+
+        // null -> returns false
+        assertFalse(archiveFirstCommand.equals(null));
+
+        // different command -> returns false
+        assertFalse(archiveFirstCommand.equals(archiveSecondCommand));
     }
 
     /**
