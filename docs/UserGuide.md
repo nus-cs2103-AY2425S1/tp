@@ -95,6 +95,10 @@ The application will throw an error if you attempt to create two users with the 
 A person can have any number of tags (including 0)
 </div>
 
+- Note that Name, Phone Number, Email and Address are compulsory fields. 
+- We believe it is reasonable that a customer or business contacts will need to provide these fields as they are not 
+particularly sensitive as compared to Identification Number etc.
+
 Examples:
 
 - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
