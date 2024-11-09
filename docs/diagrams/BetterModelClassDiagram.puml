@@ -11,6 +11,7 @@ UniquePersonList -right-> Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
+Person *--> Relationship
 
 EventBook *-right-> "1" ObservableList
 EventBook *-right-> "1" ObservableList
