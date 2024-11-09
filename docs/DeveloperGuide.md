@@ -318,6 +318,81 @@ Use case ends
     - 1a1. Cher shows correct input format. <br>
       Use case ends.
 
+#### Use case: UG8 - Mark attendance
+**MSS**
+1. User enters mark command with the index of a specific contact.
+2. Cher increases the attendance count of the specified contact by 1.
+3. Cher shows success message that the attendance of the specified contact have been marked.
+4. Cher shows the list of all contacts. <br>
+   Use case ends. 
+
+**Extensions**
+* 1a. Cher detects an error in the input.
+   - 1a1. Cher shows the correct input format. <br>
+     Use case ends.
+* 1b. Cher detects that the specified contact is not a student.
+   - 1b1. Cher shows the error message that attendance for the specified contact cannot be marked. <br>
+     Use case ends.
+
+#### Use case: UG9 - Unmark attendance
+**MSS**
+1. User enters unmark command with the index of a specific contact.
+2. Cher decreases the attendance count of the specified contact by 1.
+3. Cher shows success message that the attendance of the specified contact have been unmarked.
+4. Cher shows the list of all contacts. <br>
+   User case ends.
+
+**Extensions**
+* 1a. Cher detects an error in the input.
+  - 1a1. Cher shows the correct inout format. <br>
+  Use case ends. 
+* 1b. Cher detects that the specified contact is not a student.
+  - 1b1. Cher shows error message that the attendance of the specified contact cannot be unmarked. <br>
+  Use case ends. 
+* 1c. Cher detects that the attendance count of the specified contact is already at 0.
+  - 1c1. Cher shows error message that the attebdabce count is already at 0. <br>
+  Use case ends.
+
+#### Use case: UG10 - Reset attendance 
+**MSS**
+1. User enters the reset attendance command.
+2. Cher resets the attendance count of all students in list to 0.
+3. Cher shows the success message with the names of students whose attendance have been reset.
+4. Cher shows the list of all contacts. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
+    Use case ends.
+
+#### Use case: UG11 - Mark group attendance
+**MSS**
+1. User enters the batch-mark command.
+2. Cher increases the attendance count of all students in the list by 1.
+3. Cher shows the success message with the names of all students whose attendance have been marked.
+4. Cher shows the list of all contacts. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
+    Use case ends.
+
+#### Use case: UG12 - Unmark group attendance
+**MSS**
+1. User enters the batch-unmark command.
+2. Cher ignores students whose attendance count is already 0 and decreases the attendance count of other students by 1.
+3. Cher shows the sucess message with the names of students whose attendance have been unmarked, including those whose attendance count is initially 0. <br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects that there is no student in the list.
+  - 1a1. Cher shows error message that there is no student in the list. <br>
+    Use case ends. 
+
+     
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
