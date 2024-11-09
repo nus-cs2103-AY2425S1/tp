@@ -14,7 +14,7 @@ public class DesiredRole {
     /*
      * The first character of the desired role must not be a whitespace.
      */
-    public static final String VALIDATION_REGEX = ".+";
+    public static final String VALIDATION_REGEX = "^(?=.{3,})(?!\\s*$)[\\p{L}0-9 ,.-]*$";
 
     public final String value;
 
