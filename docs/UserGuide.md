@@ -3,10 +3,23 @@ layout: page
 title: User Guide
 ---
 
-Address Book Command Line Interface (ABCLI) is a **desktop app made specially for Real Estate Agents to manage contacts and is optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a real estate agent and can type fast, ABCLI can get your contact management tasks done faster than traditional GUI apps.
+**Address Book Command Line Interface (ABCLI)** is a desktop application tailored for **real estate agents** who value the speed and efficiency of managing workflows through a **Command Line Interface (CLI)**. With the added support of a Graphical User Interface (GUI) for visual clarity, ABCLI empowers agents to handle contacts, schedule meetings, and organize property details significantly faster than traditional GUI-only applications. If you are a fast-typing real estate agent, ABCLI is designed to keep up with your speed, boosting your productivity.
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+## Application Overview
+
+ABCLI is divided into three core modes, each dedicated to a key aspect of a real estate agent workflows:
+
+* **[Buyer Mode](#Buyers)**: Organize prospective buyers with details like budget, contact info, and tags for effective monitoring and follow-up.
+
+* **[Meet Up Mode](#Meet Ups)**: Schedule and manage meet-ups with buyers, track attendees, and avoid scheduling conflicts.
+
+* **[Property Mode](#Properties)**: Store property listings, including landlord details, asking price, and property type for quick and easy references.
+
+These modes allow real estate agents to handle buyers, meet-ups, and property listings at a rapid pace, ensuring an efficient, covenient and integrated workflow for those who thrive on speed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +49,10 @@ Address Book Command Line Interface (ABCLI) is a **desktop app made specially fo
    * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+**Before you start**, ABCLI comes pre-populated with example data. We encourage you to practice the commands on this sample data to get familiar with the app. Once you are comfortable, you can use the `clear` command in each mode to reset the data in the respective modes.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -153,6 +170,10 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL b/BUDGET [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A buyer can have any number of tags (including 0)
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Buyer's budget cannot exceed `9223372036854775807`. Refer to [known issues](#known-issues) for more information.
 </div>
 
 Examples:
@@ -338,9 +359,13 @@ Format: `view`
 
 Adds a property to the property list.
 
+Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+
 * New properties must have unique addresses and must not be duplicate addresses of existing properties.
 
-Format: `add n/LANDLORD_NAME p/PHONE_NUMBER a/ADDRESS s/ASKING_PRICE t/PROPERTY_TYPE`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Property's asking price cannot exceed `9223372036854775807`. Refer to [known issues](#known-issues) for more information.
+</div>
 
 Examples:
 * `add n/John p/87152433 a/Paya Lebar s/200,000 t/Condominium`
@@ -425,6 +450,9 @@ Format: `clear`
 
 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+
+3. **If you input a budget or asking price that exceeds** `9223372036854775807`, the command will silently fail, and no error message will be shown. This is due to exceeding the maximum value for a 64-bit integer. A planned enhancement will add a validation check to prevent input beyond a maximum realistic range.
 
 --------------------------------------------------------------------------------------------------------------------
 
