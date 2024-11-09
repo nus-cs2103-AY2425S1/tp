@@ -66,7 +66,6 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
 
         // If Client has a Car. Issues also can be added to it, if any.
         if (isCarPresent) {
-            Set<Issue> issueList = ParserUtil.parseIssues(argMultimap.getAllValues(PREFIX_ISSUE));
             System.out.println("Car is present" + argMultimap.getValue(PREFIX_VRN).get());
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_VRN, PREFIX_VIN, PREFIX_MAKE, PREFIX_MODEL);
             String vrn = argMultimap.getValue(PREFIX_VRN).orElse("");
@@ -75,6 +74,7 @@ public class AddClientCommandParser implements Parser<AddClientCommand> {
             String model = argMultimap.getValue(PREFIX_MODEL).orElse("");
 
             // Create Car and Issues.
+            Set<Issue> issueList = ParserUtil.parseIssues(argMultimap.getAllValues(PREFIX_ISSUE));
             Car car = ParserUtil.parseCar(vrn, vin, make, model);
             person = new Person(name, phone, email, address, issueList, car);
             return new AddClientCommand(person);
