@@ -289,6 +289,11 @@ Example:
 * `removeFromGroup g/blood drive 2024 m/1 2 5 6` removes the persons at index 1, 2, 5 and 6 of
   the current list in view from the existing group named `blood drive`.
 
+<box type="tip" seamless>
+
+**Tip:** For ease of use, first list out people in the group using the `search` command, then remove the person using this command.
+</box>
+
 
 ### Editing a group's name : `editGroupName`
 
