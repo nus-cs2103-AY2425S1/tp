@@ -173,16 +173,16 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 * secondary school teachers, often working independently, managing their classes and responsibilities on their own.
 * secondary school teachers who manage multiple classes of different levels
-* have a need to track and organise details of students and parents/guardians (e.g. phone numbers, emails, addresses)
-* have a need to efficiently access information regarding students and parents/guardians for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks, payment)
-* have a need to edit data regarding students and parents/guardians in case of updates
+* have a need to track and organise details of students and parents (e.g. phone numbers, emails, addresses)
+* have a need to efficiently access information regarding students and parents for communication during various situations (e.g. parent-teacher meetings, emergencies, administrative tasks, payment)
+* have a need to edit data regarding students and parents in case of updates
 
 **Target user profile 2**: Secondary School Tuition Teachers working under administrations
 
 * secondary school tuition teachers who work alongside or under the supervision of education administrators or managers.
 * secondary school tuition teachers who manage multiple classes across various subjects
 * have a need to track and organise details of students (e.g. phone numbers, emails, addresses)
-* Parent/Guardian contacts are overseen by institution admin staff
+* Parent contacts are overseen by institution admin staff
 * have a need to efficiently access information regarding students for communication during various situations (e.g. emergencies, administrative tasks, class schedules)
 * have a need to edit data regarding students in case of updates
 
@@ -301,10 +301,10 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 
 #### Use case: UC6 - Sort
 **MSS**
-1. User enters sort contact command with the predicate name.
+1. User enters sort contact command with the field name.
 2. Cher shows list of contacts sorted alphabetically by name.
 3. Cher shows success message that list has been sorted by name.<br>
-Use case ends
+   Use case ends.
 
 #### Use case: UC6 - Batch edit
 **MSS**
@@ -383,6 +383,54 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+### Sorting persons
+
+1. Prerequisites: <br>
+       Execute the following:
+        - add n/Charlie s/m r/student p/567893 a/Bukit batok e/nus@dfsh.dsfvc  t/tag1
+        - add n/anna s/f r/parent p/23456 a/Jurong e/sutd@dfsh.dsfvc  t/tag1
+        - add n/Benet s/m r/student p/346826 a/Pungol e/rjc@dfsh.dsfvc  t/tag1 t/tag2
+        - List all persons using the `list` command.
+2. Sorting list by name
+   1. Test case: `sort name` <br>
+            Expected: Feedback box will show message: `Sorted by name`
+            Contact entries will show list sorted alphabetically by name, 
+            in the following order: anna, Benet, Charlie
+3. Sorting list by role
+   1. Prerequisites: <br>
+          List all persons using the `list` command.
+   2. Test case: `sort role` <br>
+          Expected: Feedback box will show message: `Sorted by role`
+          Contact entries will show list sorted alphabetically by role 
+          (parents then students), in the following order: anna, Charlie, Benet
+4. Sorting list by phone
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort phone` <br>
+       Expected: Feedback box will show message: `Sorted by phone`
+       Contact entries will show list sorted alphabetically by phone number,
+       in the following order: anna, Benet, Charlie
+5. Sorting list by email
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort email` <br>
+       Expected: Feedback box will show message: `Sorted by email`
+       Contact entries will show list sorted alphabetically by email address,
+       in the following order: Charlie, Benet, anna 
+6. Sorting list by address
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort name` <br>
+       Expected: Feedback box will show message: `Sorted by address`
+       Contact entries will show list sorted alphabetically by address,
+       in the following order: Charlie, anna, Benet
+7. Sorting list by invalid field
+    1. Prerequisites: <br>
+       List all persons using the `list` command.
+    2. Test case: `sort k` <br>
+       Expected: Feedback box will show error: `Invalid command format! sort: Sorts the list by given predicate. <br>
+       Parameters: [name] [role] [phone] [email] [address] Example: sort name`
 
 ### Saving data
 

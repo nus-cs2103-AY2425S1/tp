@@ -131,15 +131,16 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Sorting persons by name: `sort`
+### Sorting persons: `sort`
 
-Sorts list of persons alphabetically by specified predicate.
+Sorts list of persons alphabetically by specified field.
 
-Format: `sort PREDICATE`
+Format: `sort [name] [role] [phone] [email] [address]`
 
+* Exactly one of the optional fields is required
 * Sorts the list alphabetically by given predicate.
-* The predicate refers to attributes used to sort the list by.
-* The predicate **must be a valid attribute** name, role, phone, email and address only
+* The field refers to attributes used to sort the list by.
+* The field **must be a valid attribute** name, role, phone, email and address only
 
 Examples:
 * `sort name` sorts the list alphabetically by name.
@@ -313,13 +314,14 @@ Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
+**Add** | `add n/NAME s/SEX r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Batch-Edit**| `batch-edit t/OLDTAG t/NEWTAG`<br> e.g. `batch-delete t/friends t/frens`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [s/SEX] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]...`<br> e.g., `find James Jake`
+**Sort** | `sort [name] [role] [phone] [email] [address] `<br> Only one optional field should be given e.g., `sort name`
 **Select** | `select INDEX [MORE_INDEXES]...`<br> e.g., `select 1 2`
 **Mark** | `mark INDEX` <br> e.g., `mark 2`
 **Unmark** | `unmark INDEX` <br> e.g., `unmark 3`
