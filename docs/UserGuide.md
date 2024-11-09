@@ -249,16 +249,26 @@ Example:
 * Enter `select 1 2 3` and then `batch-unmark` unmarks the attendance of entries 1, 2 and 3
 
 ### Selecting persons by index: `select`
-Select contacts from the address book by specifying their index numbers in the currently displayed list. Only the 
-specified contacts will remain in view.
+The `select` command allows users to select one or more persons from the displayed list of persons in the address book. Once a person is selected, the application highlights the selected person(s) in the UI and displays their names in the feedback box.
 
 Format: select INDEX [MORE_INDEXES]...
 
 Examples:
 
-* `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts.
+* `select 1 2` will select the contacts at index `1` and `2` in the displayed list, showing only those contacts. The person at index 2 and 4 will be selected. The feedback box will display:
+  "Selected Person(s): [Name of person at index 2 and 4]" (e.g., "Selected Person(s): John Doe, Alice Tan").
 * `select 3 5 7` will select the contacts at indexes `3`, `5`, and `7` in the displayed list, filtering to show 
-  only these selected contacts.
+  only these selected contacts. The person at index 3, 5 and 7 will be selected. The feedback box will display:
+  "Selected Person(s): [Name of person at index 3, 5 and 7]" (e.g., "Selected Person(s): John Doe, Alice Tan, Joshua Chou").
+
+Where INDEX refers to the position of the person in the currently displayed list of persons.
+- INDEX is a positive integer that refers to the position of a person in the list (starting from 1).
+- You can specify multiple indexes separated by spaces to select more than one person at a time.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:** To increase efficiency when performing actions on multiple persons, 
+consider combining the `select` command with other commands like `delete`, `mark`, or `batch-mark` for group operations. 
+For example: - `select 1 2 3` followed by `delete` will delete persons at indexes 1, 2, and 3. 
+- `select 4 5 6` followed by `batch-mark` will mark attendance for all selected persons. </div>
 
 ### Editing tag in a batch: `batch-edit`
 Changes all contacts from cher with containing the specified tags with a new tag. After successful execution,
