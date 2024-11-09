@@ -112,7 +112,11 @@ Adds a member to Hall Pointer.
 
 <box type="warning" seamless>
 
-**Note:** The `NAME` field should not contain leading spaces or slashes (`/`) at the start or end. Slashes are only allowed in specific contexts like "s/o" within a name, such as `John Doe s/o Jane Doe`. Ensure names follow this format to prevent errors.
+**Constraints:**<br>
+
+- **Unique Name**: Each member must have a unique name. This is necessary to prevent confusion between members and to ensure accurate tracking.
+- **Unique Telegram Handle**: Each member must have a unique Telegram handle, as this is a personal identifier for each user.
+- **Shared Rooms Allowed**: Multiple members can be assigned to the same room to accommodate shared living arrangements.
 
 </box>
 
@@ -209,8 +213,13 @@ Adds a session to Hall Pointer and associates it with specified members.
 
 </box>
 
-- The `INDEX` refers to the index number shown in the displayed member list and **must be a positive integer** (1, 2, 3, …).
-- If one or more `INDEX` values are provided, the session will be associated with those members.
+<box type="warning" seamless>
+
+**Constraints:**<br>
+
+- **Unique Session Name and Date Combination**: Each session name combined with its date must be unique. This ensures that each session is distinct and prevents duplicate records. If you have multiple similar sessions, consider naming them sequentially (e.g., "Rehearsal 1", "Rehearsal 2").
+
+</box>
 
 **Examples:**
 
