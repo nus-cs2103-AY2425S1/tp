@@ -118,7 +118,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS d/DESCRIPTION c/CLIENT_TYPE
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01  d/likes bubble tea c/Investment`
-* `add n/Betsy Crowe p/1234567 e/betsycrowe@example.com a/Yishun Town d/Loves travelling c/Investment c/Healthcare `
+* `add n/Betsy Crowe p/12345678 e/betsycrowe@example.com a/Yishun Town d/Loves travelling c/Investment c/Healthcare `
 
 Result for `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/likes bubble tea c/Investment`:
 ![result for 'add'](images/result_for_add.png)
