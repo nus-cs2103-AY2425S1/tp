@@ -104,6 +104,7 @@ Format: `help`
 Adds a person to the address book.
 
 Format: `add n/NAME nric/NRIC p/PHONE_NUMBER e/EMAIL a/ADDRESS role/ROLE [t/TAG]…`
+
 Field Constraints:
 - `NAME`: Must start with an alphanumeric character, followed by alphanumeric characters and spaces
 - `PHONE`: Must contain only numbers and be at least 3 digits long
