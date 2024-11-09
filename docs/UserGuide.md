@@ -39,6 +39,8 @@ HR Helper is a **desktop app for managing employees, optimized for use via a Com
    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+2. Refer to the [Person Detail Window](#person-details-window) below for the format of each command.
+3. Refer to the [Command summary](#command-summary) below for the format of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -70,28 +72,47 @@ HR Helper is a **desktop app for managing employees, optimized for use via a Com
 
 Login to HR Helper with your username and password.
 
-For this version, the username is `admin` and password is `12345678`.
-For faster testing purposes, the username is `test` and password is `test`.
+Format:
 
-![help message](images/authentication.png)
+<img src = "images/authentication.png" width=300>
+
+**Tip:** Press `Enter` to go to the next field!
+
+Examples:
+* For this version, the username is `admin` and password is `12345678`.
+* For faster testing purposes, the username is `test` and password is `test`.
+
+<img src = "images/HRHelperLoginOutput.png" width=300>
+
+**Warning:** Keep your credentials secure.
 
 We plan to implement adding more users in the future.
 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
+<box type="tip" seamless>
+
+**Tip:** Use the help command anytime to quickly refresh on command usage.
+
+Examples:
+
+`need to update picture`
+<img src = "images/helpMessage.png" width=300> 
+
+**Warning:** Clicking on the link will leave HR Helper.
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds an employee to the HR Helper.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
+
+`Add picture of expected output here`
 
 <box type="tip" seamless>
 
@@ -102,11 +123,24 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/true d/Operations l/12`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Road p/1234567 t/lazy f/true d/Marketing l/10`
 
+**Warning:** Duplicate employees with the same name cannot be added.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+<box type="tip" seamless>
+
+**Tip:** `list` can be used to show all employees after using the `find` command.
+
+Example:
+`Add picture of example here`
+
+`Add picture of expected output here`
+
+**Warning:** Use this command before other commands like delete or edit to ensure you’re modifying the correct entry.
 
 ### Counting persons : `count`
 
@@ -117,9 +151,18 @@ Format: `count`(for counting entire list), `count tag/TAG`(for counting persons 
 * If counting the entire list, use `count`.
 * If counting persons with specified TAG, add TAG to end of the command.
 
+<box type="tip" seamless>
+
+**Tip:** Use count with tags to quickly assess team sizes within specific departments or roles
+</box>
+
 Examples:
 * `count`
 * `count tag/Colleagues`
+
+`picture`
+
+**Warning:** When using count tag/TAG, ensure that the tag exists and is spelled accurately; otherwise, the command may return zero results.
 
 ### Editing a person : `edit`
 
@@ -134,9 +177,18 @@ Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boo
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
+<box type="tip" seamless>
+
+**Tip:** To remove all tags, use t/ without specifying tags (e.g., edit 1 t/).
+</box>
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+`picture`
+
+**Warning:** Changes overwrite current data. Double-check inputs before saving.
 
 ### Locating persons by name: `find`
 
@@ -151,10 +203,19 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+<box type="tip" seamless>
+
+**Tip:** Use partial keywords to broaden your search (e.g., find Jo matches John and Joan).
+</box>
+
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+`picture`
+
+**Warning:** The find command only searches names. Ensure that names are correctly spelled.
 
 ### Deleting a person : `delete`
 
@@ -166,9 +227,18 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="tip" seamless>
+
+**Tip:** Use delete carefully, especially after sorting or filtering, as index positions may change.
+</box>
+
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+`picture`
+
+**Warning:** This action is irreversible. Use list before delete to confirm the index.
 
 ### Sorting Contacts: `sort`
 
@@ -180,9 +250,19 @@ Format: `sort TAG`
 * You can specify multiple tags for sorting.
 * If no tags are specified, all contacts will be displayed in their original order.
 
+<box type="tip" seamless>
+
+**Tip:** For large lists, use sort with commonly used tags to improve data visibility.
+</box>
+
 Examples:
 * `sort friend` Sorts and displays all contacts tagged as friend.
 * `sort friend family` Sorts and displays contacts tagged as either friend or family.
+
+`picture`
+
+**Warning:** Sorting by multiple tags may combine various groups, which can affect other commands relying on order.
+
 
 ### Favoriting a person : `favorite`
 
@@ -194,9 +274,18 @@ Format: `favorite INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="tip" seamless>
+
+**Tip:** Use favorite for high-priority contacts, making them easier to locate with filtering or sorting.
+</box>
+
 Examples:
 * `list` followed by `favorite 2` favorites the 2nd person in the address book.
 * `find Betsy` followed by `favorite 1` deletes the 1st person in the results of the `find` command.
+
+`Add picture of expected output here`
+
+**Warning:** Avoid favoriting too many contacts, as an excessive number of favorites can make it challenging to identify key contacts quickly.
 
 ### Clearing all entries : `clear`
 
@@ -204,11 +293,27 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+<box type="tip" seamless>
+
+**Tip:** Use clear only when resetting the database is intentional.
+</box>
+
+`picture`
+
+**Warning:** This action is irreversible. Back up data if necessary before clearing.
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
+<box type="tip" seamless>
+
+**Tip:** Use exit only after confirming that all changes have been saved, as the program automatically saves data with each command.
+</box>
+
+**Warning:** Exiting abruptly may interrupt ongoing processes. Use the exit command instead of closing the window directly to ensure a clean shutdown.
 
 ### Person Details Window
 
@@ -261,16 +366,16 @@ The **Person Details Window** allows HR personnel to view and edit detailed info
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HR Helper data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HR Helper data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, HR Helper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
