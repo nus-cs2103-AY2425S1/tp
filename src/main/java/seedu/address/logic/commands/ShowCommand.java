@@ -37,6 +37,7 @@ public class ShowCommand extends Command {
         if (matchedStudents == 0) {
             return new CommandResult(Messages.MESSAGE_NO_STUDENTS_FOUND);
         }
+
         return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, matchedStudents));
     }
 

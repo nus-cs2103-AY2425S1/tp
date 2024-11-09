@@ -30,13 +30,16 @@ public class ShowCommandParser implements Parser<ShowCommand> {
             String trimmedArgs = args.trim();
             String[] inputs = trimmedArgs.split("\\s+");
             List<String> keywords = Arrays.asList(inputs);
+
             // Check if arguments are empty
             if (inputs[0].isEmpty()) {
                 throw new ParseException(MESSAGE_INVALID_NUMBER_OF_ARGS);
             }
+
             if (!trimmedArgs.matches(VALIDATION_REGEX)) {
                 throw new ParseException(MESSAGE_INVALID_ARGUMENTS);
             }
+
             return new ShowCommand(new GroupContainsKeywordsPredicate(keywords));
         } catch (ParseException pe) {
             String errorMessage = String.format("%s \n%s",
