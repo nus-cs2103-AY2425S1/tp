@@ -483,7 +483,7 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`*
 Marks a student in a particular course and tutorial group as having missed a session (was **absent**).
 
 <box type="definition" seamless><md>
-Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
+Format: **`attend-absent m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
 | **Examples** |
@@ -499,7 +499,7 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`*
 Removes the last attendance session record of a student in a particular course and tutorial group.
 
 <box type="definition" seamless><md>
-Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
+Format: **`attend-remove m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
 | **Examples** |
@@ -517,7 +517,7 @@ Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`*
 Clears the attendance of a student in a particular course and tutorial group.
 
 <box type="definition" seamless><md>
-Format: **`attend-present m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
+Format: **`attend-clear m/MATRICULATION_NUMBER c/COURSE_CODE tut/TUTORIAL_ID`**
 </md></box>
 
 | **Examples** |
