@@ -8,11 +8,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.TransactionContainsKeywordsPredicate;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.TransactionContainsKeywordsPredicate;
 
 /**
- * Finds and lists all transactions for any person whose description contains any of the argument keywords.
+ * Finds and lists all transactions for any client whose description contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindTransactionCommand extends Command {
@@ -42,12 +42,12 @@ public class FindTransactionCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, COMMAND_WORD));
         }
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-        Person targetPerson = lastShownList.get(0);
+        List<Client> lastShownList = model.getFilteredClientList();
+        Client targetClient = lastShownList.get(0);
         model.updateTransactionListPredicate(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_TRANSACTIONS_LISTED_OVERVIEW,
-                        model.getFilteredTransactionList().size(), Messages.format(targetPerson)));
+                        model.getFilteredTransactionList().size(), Messages.format(targetClient)));
     }
 
     @Override

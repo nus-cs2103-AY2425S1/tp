@@ -9,11 +9,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Transaction;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Transaction;
 
 /**
- * Deletes a transaction from a person's transaction list using its specified index.
+ * Deletes a transaction from a client's transaction list using its specified index.
  */
 public class DeleteTransactionCommand extends Command {
     public static final String COMMAND_WORD = "deletet";
@@ -24,7 +24,7 @@ public class DeleteTransactionCommand extends Command {
 
     public static final String MESSAGE_DELETE_TRANSACTION_SUCCESS = "Deleted transaction %1$s \nfrom %2$s";
 
-    private static final Index CURRENT_PERSON = Index.fromOneBased(1);
+    private static final Index CURRENT_CLIENT = Index.fromOneBased(1);
     private final Index index;
 
 
@@ -35,17 +35,17 @@ public class DeleteTransactionCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Client> lastShownList = model.getFilteredClientList();
 
         if (!model.getIsViewTransactions()) {
             throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, COMMAND_WORD));
         }
 
-        if (CURRENT_PERSON.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (CURRENT_CLIENT.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Person selected = lastShownList.get(CURRENT_PERSON.getZeroBased());
+        Client selected = lastShownList.get(CURRENT_CLIENT.getZeroBased());
         List<Transaction> transactions = new ArrayList<>(model.getFilteredTransactionList());
 
         if (transactions.isEmpty()) {

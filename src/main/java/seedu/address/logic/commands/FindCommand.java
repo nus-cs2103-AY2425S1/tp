@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_FOUND_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_CLIENTS_FOUND_OVERVIEW;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.client.ClientContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name or company contains any of the argument keywords.
+ * Finds and lists all clients in address book whose name or company contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
@@ -18,14 +18,14 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons whose names or companies contain any of "
+            + ": Finds all clients whose names or companies contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie Microsoft";
 
-    private final PersonContainsKeywordsPredicate predicate;
+    private final ClientContainsKeywordsPredicate predicate;
 
-    public FindCommand(PersonContainsKeywordsPredicate predicate) {
+    public FindCommand(ClientContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -34,12 +34,12 @@ public class FindCommand extends Command {
         requireNonNull(model);
 
         if (model.getIsViewTransactions()) {
-            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, COMMAND_WORD));
+            throw new CommandException(String.format(Messages.MESSAGE_MUST_BE_CLIENT_LIST, COMMAND_WORD));
         }
 
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredClientList(predicate);
         return new CommandResult(
-                String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, model.getFilteredPersonList().size(),
+                String.format(MESSAGE_CLIENTS_FOUND_OVERVIEW, model.getFilteredClientList().size(),
                         predicate.getKeywordsAsString()));
     }
 

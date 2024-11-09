@@ -25,13 +25,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddTransactionCommand;
-import seedu.address.model.person.Transaction;
+import seedu.address.model.client.Transaction;
 
 public class AddTransactionCommandParserTest {
 
@@ -117,7 +117,7 @@ public class AddTransactionCommandParserTest {
 
     @Test
     public void parse_invalidAmount_failure() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_CLIENT;
         String userInputWithInvalidAmount = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + INVALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + VALID_DATE_INPUT;
         assertParseFailure(parser, userInputWithInvalidAmount, Transaction.MESSAGE_CONSTRAINTS);
@@ -126,7 +126,7 @@ public class AddTransactionCommandParserTest {
 
     @Test
     public void parse_incorrectDateFormat_failure() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_CLIENT;
         String userInputWithInvalidDate = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + INCORRECT_DATE_FORMAT_INPUT;
         assertParseFailure(parser, userInputWithInvalidDate, MESSAGE_INVALID_DATE_FORMAT);
@@ -135,7 +135,7 @@ public class AddTransactionCommandParserTest {
 
     @Test
     public void parse_invalidDate_failure() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_CLIENT;
         String userInputWithInvalidDate = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + INVALID_DATE_INPUT;
         assertParseFailure(parser, userInputWithInvalidDate, MESSAGE_INVALID_DATE_FORMAT);
@@ -144,7 +144,7 @@ public class AddTransactionCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND_CLIENT;
         String userInput = targetIndex.getOneBased() + VALID_DESCRIPTION_INPUT + VALID_AMOUNT_INPUT
                 + VALID_OTHER_PARTY_INPUT + VALID_DATE_INPUT;
 

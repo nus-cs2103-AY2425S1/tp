@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEmptyPersonList;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showEmptyClientList;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,43 +23,43 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Transaction;
-import seedu.address.model.person.TransactionDateComparator;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Transaction;
+import seedu.address.model.client.TransactionDateComparator;
 
 public class AddTransactionCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTransactionCommand(INDEX_FIRST_PERSON, null));
+    public void constructor_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTransactionCommand(INDEX_FIRST_CLIENT, null));
     }
 
 
     @Test
     public void execute_filteredList_success() {
 
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showClientAtIndex(model, INDEX_FIRST_CLIENT);
+        Client clientToEdit = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
-        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_CLIENT, transactionToAdd);
 
-        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
+        List<Transaction> transactions = new ArrayList<>(clientToEdit.getTransactions());
         transactions.add(transactionToAdd);
         transactions.sort(new TransactionDateComparator());
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getCompany(), clientToEdit.getPhone(),
+                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), transactions);
 
         String expectedMessage = String.format(AddTransactionCommand.MESSAGE_ADD_TRANSACTION_SUCCESS,
-                Messages.format(transactionToAdd), Messages.format(editedPerson));
+                Messages.format(transactionToAdd), Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personToEdit, editedPerson);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        expectedModel.setClient(clientToEdit, editedClient);
+        showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
 
         assertCommandSuccess(addTransactionCommand, model, expectedMessage, expectedModel);
     }
@@ -67,40 +67,40 @@ public class AddTransactionCommandTest {
     @Test
     public void execute_unfilteredList_success() {
 
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Client clientToEdit = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
-        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_CLIENT, transactionToAdd);
 
-        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
+        List<Transaction> transactions = new ArrayList<>(clientToEdit.getTransactions());
         transactions.add(transactionToAdd);
         transactions.sort(new TransactionDateComparator());
 
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getCompany(), clientToEdit.getPhone(),
+                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), transactions);
 
         String expectedMessage = String.format(AddTransactionCommand.MESSAGE_ADD_TRANSACTION_SUCCESS,
-                Messages.format(transactionToAdd), Messages.format(editedPerson));
+                Messages.format(transactionToAdd), Messages.format(editedClient));
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setPerson(personToEdit, editedPerson);
+        expectedModel.setClient(clientToEdit, editedClient);
 
         assertCommandSuccess(addTransactionCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_emptyList_throwCommandException() {
-        showEmptyPersonList(model);
+        showEmptyClientList(model);
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
 
-        Index outOfBoundIndex = INDEX_FIRST_PERSON;
+        Index outOfBoundIndex = INDEX_FIRST_CLIENT;
 
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(outOfBoundIndex, transactionToAdd);
 
-        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_PERSON_LIST, "addt");
+        String expectedMessage = String.format(Messages.MESSAGE_EMPTY_CLIENT_LIST, "addt");
 
         assertCommandFailure(addTransactionCommand, model, expectedMessage);
 
@@ -109,19 +109,19 @@ public class AddTransactionCommandTest {
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
 
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_CLIENT;
 
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getClientList().size());
 
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(outOfBoundIndex, transactionToAdd);
 
-        assertCommandFailure(addTransactionCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addTransactionCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -130,20 +130,20 @@ public class AddTransactionCommandTest {
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
 
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
 
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(outOfBoundIndex, transactionToAdd);
 
-        assertCommandFailure(addTransactionCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(addTransactionCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_transactionListView_throwsCommandException() {
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
-        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
+        AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_CLIENT, transactionToAdd);
         model.setIsViewTransactions(true);
-        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "addt");
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_CLIENT_LIST, "addt");
         assertCommandFailure(addTransactionCommand, model, expectedMessage);
     }
 
@@ -157,14 +157,14 @@ public class AddTransactionCommandTest {
         Transaction t2 = new Transaction("sell raw materials", 200,
                 "Company XYZ", LocalDate.parse("2024-10-16", DateTimeUtil.DEFAULT_DATE_PARSER));
 
-        AddTransactionCommand addT1Command = new AddTransactionCommand(INDEX_FIRST_PERSON, t1);
-        AddTransactionCommand addT2Command = new AddTransactionCommand(INDEX_FIRST_PERSON, t2);
+        AddTransactionCommand addT1Command = new AddTransactionCommand(INDEX_FIRST_CLIENT, t1);
+        AddTransactionCommand addT2Command = new AddTransactionCommand(INDEX_FIRST_CLIENT, t2);
 
         // same object -> returns true
         assertTrue(addT1Command.equals(addT1Command));
 
         // same values -> returns true
-        AddTransactionCommand addT1CommandCopy = new AddTransactionCommand(INDEX_FIRST_PERSON, t1);
+        AddTransactionCommand addT1CommandCopy = new AddTransactionCommand(INDEX_FIRST_CLIENT, t1);
         assertTrue(addT1Command.equals(addT1CommandCopy));
 
         // different types -> returns false
@@ -173,7 +173,7 @@ public class AddTransactionCommandTest {
         // null -> returns false
         assertFalse(addT1Command.equals(null));
 
-        // different person -> returns false
+        // different client -> returns false
         assertFalse(addT1Command.equals(addT2Command));
     }
 

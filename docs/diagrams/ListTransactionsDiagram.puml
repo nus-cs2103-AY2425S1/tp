@@ -30,7 +30,7 @@ deactivate AddressBookParser
 LogicManager -> ListTransactionCommand : execute()
 activate ListTransactionCommand
 
-ListTransactionCommand -> Model : updateFilteredPersonList()
+ListTransactionCommand -> Model : updateFilteredClientList()
 activate Model
 
 Model --> ListTransactionCommand

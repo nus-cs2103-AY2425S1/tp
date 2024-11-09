@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindTransactionCommand;
-import seedu.address.model.person.TransactionContainsKeywordsPredicate;
+import seedu.address.model.client.TransactionContainsKeywordsPredicate;
 
 public class FindTransactionCommandParserTest {
     private FindTransactionCommandParser parser = new FindTransactionCommandParser();

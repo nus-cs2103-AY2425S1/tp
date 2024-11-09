@@ -11,7 +11,7 @@ import java.time.YearMonth;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SummaryCommand;
-import seedu.address.model.person.TransactionDatePredicate;
+import seedu.address.model.client.TransactionDatePredicate;
 
 public class SummaryCommandParserTest {
     private SummaryCommandParser parser = new SummaryCommandParser();

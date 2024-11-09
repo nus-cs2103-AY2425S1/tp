@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.model.person.Transaction;
+import seedu.address.model.client.Transaction;
 
 /**
  * Json for {@code Transaction}.

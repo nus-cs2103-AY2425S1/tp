@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TRANSACTION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TRANSACTION;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Transaction;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Transaction;
 public class DeleteTransactionCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -28,21 +28,21 @@ public class DeleteTransactionCommandTest {
     public void execute_filteredList_success() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
-        Person personToDeleteFrom = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        List<Transaction> transactions = personToDeleteFrom.getTransactions();
+        showClientAtIndex(model, INDEX_FIRST_CLIENT);
+        showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
+        Client clientToDeleteFrom = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        List<Transaction> transactions = clientToDeleteFrom.getTransactions();
         model.updateTransactionList(transactions);
         List<Transaction> expectedTransactions = new ArrayList<>(transactions);
 
         Transaction deletedTransaction = expectedTransactions.remove(INDEX_FIRST_TRANSACTION.getZeroBased());
 
-        Person editedPerson = new Person(personToDeleteFrom.getName(), personToDeleteFrom.getCompany(),
-                personToDeleteFrom.getPhone(), personToDeleteFrom.getEmail(), personToDeleteFrom.getAddress(),
-                personToDeleteFrom.getTags(), expectedTransactions);
+        Client editedClient = new Client(clientToDeleteFrom.getName(), clientToDeleteFrom.getCompany(),
+                clientToDeleteFrom.getPhone(), clientToDeleteFrom.getEmail(), clientToDeleteFrom.getAddress(),
+                clientToDeleteFrom.getTags(), expectedTransactions);
         String expectedMessage = String.format(DeleteTransactionCommand.MESSAGE_DELETE_TRANSACTION_SUCCESS,
-                Messages.format(deletedTransaction), Messages.format(editedPerson));
-        expectedModel.setPerson(personToDeleteFrom, editedPerson);
+                Messages.format(deletedTransaction), Messages.format(editedClient));
+        expectedModel.setClient(clientToDeleteFrom, editedClient);
 
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
         assertCommandSuccess(deleteTransactionCommand, model, expectedMessage, expectedModel);
@@ -50,7 +50,7 @@ public class DeleteTransactionCommandTest {
 
     @Test
     public void execute_emptyFilteredTransactionList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showClientAtIndex(model, INDEX_FIRST_CLIENT);
         List<Transaction> transactions = new ArrayList<>();
         model.updateTransactionList(transactions);
 
@@ -64,8 +64,8 @@ public class DeleteTransactionCommandTest {
     public void execute_unfilteredListFailure_throwsCommandException() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
+        showClientAtIndex(model, INDEX_FIRST_CLIENT);
+        showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
         model.setIsViewTransactions(true);
 
         String expectedMessage = Messages.MESSAGE_EMPTY_TRANSACTION_LIST;
@@ -75,7 +75,7 @@ public class DeleteTransactionCommandTest {
     }
 
     @Test
-    public void execute_personListView_throwsCommandException() {
+    public void execute_clientListView_throwsCommandException() {
         DeleteTransactionCommand deleteTransactionCommand = new DeleteTransactionCommand(INDEX_FIRST_TRANSACTION);
         String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, "deletet");
         assertCommandFailure(deleteTransactionCommand, model, expectedMessage);

@@ -19,7 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Transaction;
+import seedu.address.model.client.Transaction;
 
 /**
  * Parses input arguments and creates a new AddTransactionCommand object.
