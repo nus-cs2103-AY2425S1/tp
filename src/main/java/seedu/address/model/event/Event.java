@@ -102,20 +102,20 @@ public class Event {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Event)) {
+        if (!(other instanceof Event otherEvent)) {
             return false;
         }
 
-        Event otherEvent = (Event) other;
-        if (((venue == null) && (otherEvent.venue != null)) || ((venue != null) && (otherEvent.venue == null))) {
-            return false;
-        }
-        if (venue == null && otherEvent.venue == null) {
+        if (venue == null) {
+            if (otherEvent.venue != null) {
+                return false;
+            }
             return name.equals(otherEvent.name)
                     && time.equals(otherEvent.time)
                     && celebrity.equals(otherEvent.celebrity)
                     && contacts.equals(otherEvent.contacts);
         }
+
         return name.equals(otherEvent.name)
                 && time.equals(otherEvent.time)
                 && venue.equals(otherEvent.venue)
