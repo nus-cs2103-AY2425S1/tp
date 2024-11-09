@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person's priority level in the address book.
+ * Represents a Person's priority level in NovaCare.
  * Guarantees: immutable; is always valid as it is checked during construction.
  */
 public class PriorityLevel {

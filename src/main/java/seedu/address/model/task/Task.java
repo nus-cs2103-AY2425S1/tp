@@ -9,7 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Represents a Task in the address book.
+ * Represents a Task in NovaCare.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
