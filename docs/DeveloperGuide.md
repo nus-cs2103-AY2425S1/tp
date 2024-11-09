@@ -42,14 +42,6 @@ Given below is a quick overview of main components and how they interact with ea
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
-### Storage Component
-
-The Storage component is responsible for reading and writing data to the local storage. It includes classes for handling user preferences and the hall pointer data.
-
-Here is the UML diagram for the Storage component:
-
-<puml src="diagrams/StorageClassDiagram.puml" width="600" />
-
 The bulk of the app's work is done by the following four components:
 
 - [**`UI`**](#ui-component): The UI of the App.
