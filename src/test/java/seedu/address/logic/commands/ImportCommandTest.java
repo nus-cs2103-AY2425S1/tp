@@ -449,4 +449,18 @@ public class ImportCommandTest {
         CommandResult result = importCommand.execute(model);
         assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
     }
+
+    @Test
+    public void resolveFilePath_existingDirectPath_returnsDirectPath() throws IOException {
+        // Create a file in the current directory
+        Path directPath = Paths.get("test.csv");
+        Files.writeString(directPath, "test content");
+        filesToCleanup.add(directPath);
+
+        ImportCommand testCommand = new ImportCommand("test.csv");
+        Path resolved = testCommand.resolveFilePath("test.csv");
+        assertEquals(directPath.normalize(), resolved);
+
+        Files.deleteIfExists(directPath); // Clean up immediately
+    }
 }

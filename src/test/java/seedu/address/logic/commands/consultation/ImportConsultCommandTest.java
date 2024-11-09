@@ -324,6 +324,33 @@ public class ImportConsultCommandTest {
         assertEquals(String.format(ImportConsultCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
     }
 
+    @Test
+    public void execute_ioExceptionOnRead_throwsCommandException() throws IOException {
+        Path testFile = testDir.resolve("test.csv");
+        Files.writeString(testFile, VALID_HEADER + "\n" + VALID_CONSULT);
+        testFile.toFile().setReadOnly();
+    }
+
+    @Test
+    public void resolveFilePath_existingDirectPath_returnsDirectPath() throws IOException {
+        // Create a file in the current directory
+        Path directPath = Paths.get("test.csv");
+        Files.writeString(directPath, "test content");
+        filesToCleanup.add(directPath);
+
+        Path resolved = importCommand.resolveFilePath("test.csv");
+        assertEquals(directPath.normalize(), resolved);
+
+        Files.deleteIfExists(directPath); // Clean up immediately
+    }
+
+    @Test
+    public void resolveFilePath_absolutePath_returnsNormalizedPath() {
+        Path absolutePath = testDir.resolve("test.csv").toAbsolutePath();
+        Path resolved = importCommand.resolveFilePath(absolutePath.toString());
+        assertEquals(absolutePath.normalize(), resolved.normalize());
+    }
+
     private void createCsvFile(String content) throws IOException {
         // Ensure parent directories exist
         Files.createDirectories(testCsvPath.getParent());
