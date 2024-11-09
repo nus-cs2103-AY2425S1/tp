@@ -33,19 +33,14 @@ public class FindTransactionCommandTest {
         TransactionContainsKeywordsPredicate secondPredicate =
                 new TransactionContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindTransactionCommand findFirstCommand =
-                new FindTransactionCommand(Index.fromOneBased(1), firstPredicate);
-        FindTransactionCommand findSecondCommand =
-                new FindTransactionCommand(Index.fromOneBased(1), secondPredicate);
-        FindTransactionCommand findThirdCommand =
-                new FindTransactionCommand(Index.fromOneBased(2), secondPredicate);
+        FindTransactionCommand findFirstCommand = new FindTransactionCommand(firstPredicate);
+        FindTransactionCommand findSecondCommand = new FindTransactionCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindTransactionCommand findFirstCommandCopy =
-                new FindTransactionCommand(Index.fromOneBased(1), firstPredicate);
+        FindTransactionCommand findFirstCommandCopy = new FindTransactionCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -56,8 +51,6 @@ public class FindTransactionCommandTest {
 
         // different predicate -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
-        // different index -> returns false
-        assertFalse(findSecondCommand.equals(findThirdCommand));
     }
 
     @Test
@@ -65,9 +58,17 @@ public class FindTransactionCommandTest {
         // Find transactions of Carl
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 0, Messages.format(CARL));
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindTransactionCommand command = new FindTransactionCommand(Index.fromOneBased(3), predicate);
+        FindTransactionCommand command = new FindTransactionCommand(predicate);
+        // set person list to contain only the target person
+        showPersonAtIndex(model, Index.fromOneBased(3));
         showPersonAtIndex(expectedModel, Index.fromOneBased(3));
+        // set isViewTransactions to true
+        model.setIsViewTransactions(true);
+        expectedModel.setIsViewTransactions(true);
+        // update transaction list to contain only the target person's transactions
+        model.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionList(CARL.getTransactions());
+        // find transactions in expectedModel
         expectedModel.updateTransactionListPredicate(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredTransactionList());
@@ -78,20 +79,28 @@ public class FindTransactionCommandTest {
         // Find transactions of Carl
         String expectedMessage = String.format(MESSAGE_TRANSACTIONS_LISTED_OVERVIEW, 2, Messages.format(CARL));
         TransactionContainsKeywordsPredicate predicate = preparePredicate("raw materials invest");
-        FindTransactionCommand command = new FindTransactionCommand(Index.fromOneBased(3), predicate);
+        FindTransactionCommand command = new FindTransactionCommand(predicate);
+        // set person list to contain only the target person
+        showPersonAtIndex(model, Index.fromOneBased(3));
         showPersonAtIndex(expectedModel, Index.fromOneBased(3));
+        // set isViewTransactions to true
+        model.setIsViewTransactions(true);
+        expectedModel.setIsViewTransactions(true);
+        // update transaction list to contain only the target person's transactions
+        model.updateTransactionList(CARL.getTransactions());
         expectedModel.updateTransactionList(CARL.getTransactions());
+        // find transactions in expectedModel
         expectedModel.updateTransactionListPredicate(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(CARL.getTransactions(), model.getFilteredTransactionList());
     }
 
     @Test
-    public void execute_transactionListView_throwsCommandException() {
+    public void execute_personListView_throwsCommandException() {
         TransactionContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindTransactionCommand command = new FindTransactionCommand(Index.fromOneBased(3), predicate);
-        model.setIsViewTransactions(true);
-        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_PERSON_LIST, "findt");
+        FindTransactionCommand command = new FindTransactionCommand(predicate);
+        model.setIsViewTransactions(false);
+        String expectedMessage = String.format(Messages.MESSAGE_MUST_BE_TRANSACTION_LIST, "findt");
         assertCommandFailure(command, model, expectedMessage);
     }
 
@@ -99,8 +108,7 @@ public class FindTransactionCommandTest {
     public void toStringMethod() {
         TransactionContainsKeywordsPredicate predicate =
                 new TransactionContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindTransactionCommand findTransactionCommand =
-                new FindTransactionCommand(Index.fromOneBased(1), predicate);
+        FindTransactionCommand findTransactionCommand = new FindTransactionCommand(predicate);
         String expected = FindTransactionCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findTransactionCommand.toString());
     }

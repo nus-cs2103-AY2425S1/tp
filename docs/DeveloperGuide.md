@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Clientell Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -190,28 +190,20 @@ The following activity diagram shows how the user should use some of our transac
 
 <puml src="diagrams/ListTransactionsActivityDiagram.puml" width="550" />
 
-### Find Transactions `findt INDEX KEYWORD [KEYWORDS]`
+### Find Transactions `findt KEYWORD [KEYWORDS]`
 
 #### Implementation
 
-The find transactions command allows for users to find transactions for the specified person whose descriptions match one of the keywords. 
+The find transactions command allows for users to find transactions whose descriptions match one of the keywords. 
+The search space is the current transaction list. Therefore, it can only be used in transaction view. 
 
-When the command is used, `Model#updateTransactionList()` is called to update the transaction list to the transactions of the specified person. 
-`Model#updateFilteredPersonList()` is called to update the person list to just contain that specified person. 
-
-It also implements the following operations:
+It implements the following operations:
 
 * `Model#updateTransactionListPredicate(Predicate<Transaction>)` — Updates the transaction list to contain transactions that match any of the keywords.
 
-The following sequence diagram shows an example execution of command `findt 1 ...`, where `...` represents any number of keywords.
+The following sequence diagram shows an example execution of command `findt keys`, where `keys` represents any number of keywords.
 
-<puml src="diagrams/FindTransactionsDiagram.puml" width="600" />
-
-#### Side Effects
-
-Same as `listt`, `findt` also changes the person list to preserve the setting that the only person in the person list is the specified person whose transactions are currently shown.
-
-As a result, operations on the transactions (e.g. `deletet` and `summary`) can be performed on the transactions list, without specifying the person index, regardless of the transaction list being generated from `listt` or `findt`.
+<puml src="diagrams/FindTransactionsDiagram.puml" />
 
 ### \[Proposed\] Undo/redo feature
 
@@ -518,22 +510,44 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a client
 
-1. Deleting a person while all persons are being shown
+1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Listing transactions for a client
+
+1. Listing transactions while all clients are being shown.
+
+    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
+
+    2. Test case: `listt 1`<br>
+       Expected: Transactions for the first client are shown. Details of the selected client shown in the status message. 
+
+    3. Test case: `listt 0`<br>
+       Expected: UI still shows the full client list. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect listt commands to try: `listt`, `listt x` (where x is larger than the list size), `listt hello`<br>
+       Expected: Similar to previous.
+
+2. Listing transactions in transactions view.
+
+    1. Prerequisites: List transactions for a client using the `listt INDEX` command.
+
+    2. Test case: `listt x`<br>
+       Expected: UI still shows the transactions list. Error details shown in the status message. Status bar remains the same.
 
 ### Saving data
 
@@ -542,3 +556,8 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+1. Overload `listt` to not take in an index in transaction list view, to view the whole transactions list for the selected person.

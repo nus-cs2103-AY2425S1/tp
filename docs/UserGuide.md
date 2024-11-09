@@ -81,6 +81,15 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="warning" seamless>
+
+**Handling Errors In User Input:**
+* First checks for valid command. 
+* Then checks for presence of fields for that command.
+* Lastly checks if the command is run in the correct view (client VS transaction view).
+
+</box>
+
 ### General Commands
 
 #### Viewing help : `help`
@@ -111,12 +120,22 @@ Format: `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A client can have any number of tags (including 0)
+**Tips:** <br>
+
+* A client can have any number of tags (including 0).<br>
+
+* Names are automatically formatted for you (i.e natural name casing, name ordinals, excess spacing).<br>
+
+* Phone numbers can also take in additional info (i.e `(+XXX)` in front for country codes, `[Note]` behind for any notes).<br>
+
+* Phone numbers also allow up to 1 space between numbers to cater to your formatting style (e.g `123 45 678` and `1234 5678` allowed and recorded verbatim).<br>
 </box>
 
 Examples:
 * `add n/John Doe c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal c/XYZ Co.`
+* `add n/jOhN   dOE xvii c/ABC Inc. p/98765432 e/johnd@example.com a/John street, block 123, #01-01` (This name is recorded as `John Doe XVII`)
+* `add n/John Doe c/ABC Inc. p/(+65) 987 654 32 [HP] e/johnd@example.com a/John street, block 123, #01-01` (This phone number is recorded exactly as  `(+65) 987 654 32 [HP]`)
 
 #### Listing all clients : `list`
 
@@ -125,16 +144,16 @@ Shows a list of all clients in the application, together with their current fina
 Format: `list`
 <box type="tip" seamless>
 
-Negative balances are red. Positive balances are green.
+**Tips:** Negative balances are red. Positive and zero balances are green.
 </box>
 
-![result for `listt`](images/listResult.png =600x)
+![result for `list`](images/listResult.png =600x)
 
 #### Editing a client : `edit`
 
 Edits an existing client in the application.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -145,7 +164,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <box type="warning" seamless>
 
-**Note:** `edit` can only be used in person list view.
+**Note:** `edit` can only be used in client list view.
 </box>
 
 Examples:
@@ -167,7 +186,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 <box type="warning" seamless>
 
-**Note:** `find` can only be used in person list view.
+**Note:** `find` can only be used in client list view.
 </box>
 
 Examples:
@@ -187,7 +206,7 @@ Format: `delete INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `delete` can only be used in person list view.
+**Note:** `delete` can only be used in client list view.
 </box>
 
 Examples:
@@ -203,15 +222,16 @@ Format: `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 * Adds a transaction to the client at the specified `INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The amount should be a number of up to two decimal places containing only digits (`0 - 9`) and one decimal point (`.`) if needed.
-e.g. `10, 100.5, 1000.55`
-* If the amount includes a decimal point, there should be at least one digit before the decimal point. 
+* The amount should be a number of up to two decimal places containing only digits (`0 - 9`), one decimal point (`.`) if needed and one minus sign (`-`) if needed.
+e.g. `10, -100.5, 1000.55`
+* If the amount includes a decimal point, there should be at least one digit before and one digit after the decimal point. 
 e.g. `0.5`
+* If the amount includes a minus sign, the minus sign should be the first character e.g. `-100`
 * The date should be in the format `YYYY-MM-DD` e.g. `2024-12-20`
 
 <box type="warning" seamless>
 
-**Note:** `addt` can only be used in person list view.
+**Note:** `addt` can only be used in client list view.
 </box>
 
 Examples:
@@ -231,11 +251,12 @@ Format: `listt INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `listt` can only be used in person list view.
+**Note:** `listt` can only be used in client list view.
 </box>
 
 Examples:
 * `list` followed by `listt 1` lists transactions for the 1st client in the application.
+  ![result for 'listt 1'](images/listt.png)
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st client in the results of the `find` command.
 
 #### Deleting Transactions for a specified client: `deletet`
@@ -253,21 +274,13 @@ Format: `deletet INDEX`
 
 Examples:
 * `listt 1` followed by `deletet 1` loads the transaction list for the first client, then deletes the first transaction.
-* `findt 1 flowers` followed by `deletet 1` loads the list of transactions containing 'flowers' for the first client, then deletes the first transaction
-in the results of the `findt` command.
 
-#### Finding Transactions by description for a specified client: `findt`
+#### Finding Transactions by description: `findt`
 
-For a given client, finds all transactions with descriptions matching any of the given keywords.
+In a transaction list, finds all transactions with descriptions matching any of the given keywords.
 
-Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
+Format: `findt KEYWORD [MORE_KEYWORDS]`
 
-`INDEX`:
-* Only search for transactions of the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
-* The index must be a positive integer 1, 2, 3, …​
-
-`KEYWORD`:
 * The search is case-insensitive. e.g. `invest` will match `Invest`
 * The order of the keywords does not matter. e.g. `invest material` will match `Material Invest`
 * Only the description is searched.
@@ -277,12 +290,28 @@ Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
 
 <box type="warning" seamless>
 
-**Note:** `findt` can only be used in person list view.
+**Note:** `findt` can only be used in transaction list view.
 </box>
 
 Examples:
-* `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
-![result for 'findt 1 materials invest'](images/findt.png =600x)
+* `listt 1` followed by `findt materials invest` returns `Invest` and `Buy raw materials`, which are transactions of person 1.
+
+#### Summarising transactions within month range: `summary`
+
+In a transaction list, summarises the transactions' amount within the specified month range and displays them.
+
+Format: `summary s/START_MONTH e/END_MONTH`
+* `START_MONTH` and `END_MONTH` should be in the format `YYYY-MM` e.g. `2024-10`
+* The `START_MONTH` should be before or equal to the `END_MONTH`
+* The transactions whose date falls within the first day of `START_MONTH` and the last day of `END_MONTH` (inclusive) will be summarised.
+
+<box type="warning" seamless>
+
+**Note:** `summary` can only be used in transaction list view.
+</box>
+
+Examples:
+* `listt 1` followed by `summary s/2024-09 e/2024-10` summarises the transactions of person 1 within the month of September and October 2024.
 
 ### Data Management
 
@@ -335,25 +364,26 @@ Furthermore, certain edits can cause the Clientell to behave in unexpected ways 
 
 ## Command Summary
 
-Client Commands | Format
+Client Commands | Format |
 ---------------|--------
-Add | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
+Add | `add n/NAME c/COMPANY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 List | `list`
 Find | `find KEYWORD [MORE_KEYWORDS]`
-Edit | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+Edit | `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 Delete | `delete INDEX`
 
 **Transaction Commands**
 
-For Person List View | Format
+For Client List View | Format
 --------------------|--------
 Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 List Transactions | `listt INDEX`
-Find Transactions | `findt INDEX KEYWORD [MORE_KEYWORDS]`
 
 For Transaction List View | Format
 --------------------|--------
 Delete Transaction | `deletet INDEX`
+Find Transactions | `findt KEYWORD [MORE_KEYWORDS]`
+Summarise Transactions | `summary s/START_MONTH e/END_MONTH`
 
 General Commands | Format
 ----------------|--------
