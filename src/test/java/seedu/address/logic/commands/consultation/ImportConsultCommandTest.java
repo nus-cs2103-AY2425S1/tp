@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -56,10 +57,13 @@ public class ImportConsultCommandTest {
         testDir = temporaryFolder.resolve("test-files");
         Files.createDirectories(testDir);
 
+        // Use resolve instead of direct path construction for cross-platform compatibility
         testCsvPath = testDir.resolve("test.csv");
-        importCommand = new ImportConsultCommand(testCsvPath.toString());
         modelStub = new ModelStubWithConsultations();
         filesToCleanup = new ArrayList<>();
+
+        // Create command with normalized path
+        importCommand = new ImportConsultCommand(testCsvPath.normalize().toString());
     }
 
     @AfterEach
@@ -222,10 +226,11 @@ public class ImportConsultCommandTest {
 
     @Test
     public void resolveFilePath_homeDirectory() {
-        String homeFilePath = "~/test.csv";
-        Path expected = Paths.get(System.getProperty("user.home"), "test.csv");
-        Path actual = importCommand.resolveFilePath(homeFilePath);
-        assertEquals(expected, actual);
+        // Use system-independent path
+        String filename = "test.csv";
+        Path expected = Paths.get(System.getProperty("user.home")).resolve(filename);
+        Path actual = importCommand.resolveFilePath("~" + File.separator + filename);
+        assertEquals(expected.normalize(), actual.normalize());
     }
 
     private void createCsvFile(String content) throws IOException {
@@ -236,7 +241,7 @@ public class ImportConsultCommandTest {
 
     @Test
     public void execute_dataDirectoryPath_success() throws IOException, CommandException {
-        // Create test file in data directory
+        // Create test file in data directory using system-independent paths
         Path dataDir = Paths.get("data");
         Files.createDirectories(dataDir);
         Path testFile = dataDir.resolve("consults.csv");
@@ -245,6 +250,8 @@ public class ImportConsultCommandTest {
             writer.write(VALID_HEADER + "\n");
             writer.write(VALID_CONSULT + "\n");
         }
+        filesToCleanup.add(testFile);
+
         ImportConsultCommand importCommand = new ImportConsultCommand("consults.csv");
         CommandResult result = importCommand.execute(modelStub);
         assertEquals(String.format(ImportConsultCommand.MESSAGE_SUCCESS, 1, 0), result.getFeedbackToUser());
