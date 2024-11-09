@@ -34,17 +34,16 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
+            + PREFIX_TAG + "Buyer "
             + PREFIX_REMARK + "Loves large houses";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String HELP_ADD_COMMAND = "Add Command \n"
             + "- Format: add n/NAME p/NUMBER [e/EMAIL] [a/ADDRESS] [t/PERSON_TAG] [r/REMARK]\n"
-            + "- Example: add n/John Doe p/12345678 t/Student\n"
+            + "- Example: add n/John Doe p/12345678 t/Buyer\n"
             + "- Items in the [square brackets] are optional and can be input in any order!\n"
-            + "- The list of valid PERSON_TAG are:: BUYER, SELLER, LANDLORD, TENANT, \n"
+            + "- The list of valid PERSON_TAG are: BUYER, SELLER, LANDLORD, TENANT, \n"
             + "  DEVELOPER, INVESTOR, MANAGER, CONTRACTOR";
     private final Person toAdd;
 
