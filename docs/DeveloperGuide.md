@@ -459,6 +459,67 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Marking attendance for a person 
+
+1. Marking the attendance of a selected student while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains a person with the role Student at index 1 and a person with the role Parent at index 2. 
+  
+   1. Test case: `mark 1`<br>
+      Expected: The attendance field of the first contact is incremented by 1. Name of the contact is shown in the status message. The list of all contacts is shown. 
+
+   1. Test case: `mark 0`<br>
+      Expected: Error details shown in the status message.
+
+   1. Test case: `mark 2`<br>
+      Expected: Similar to previous.
+
+### Unmarking attendance for a person
+
+1. Unmarking the attendance of a selected student while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains a person with the role Student and attendance count of 1 at index 1, a person with the role Student      and  attendance count of 0 at index 2, and a person with the role Parent at index 3. 
+
+   1. Test case: `unmark 1`<br>
+   Expected: The attendance field of the first contact is decremented by 1. Name of the contact is shown in the status message. The list of all contacts is shown. 
+
+   1. Test case: `unmark 2` <br>
+   Expected: Attendance field of the person remains at 0. Error details shown in the satus message.
+
+   1. Test case: `unmark 2`<br>
+   Expected: Error details shown in the status message. 
+
+### Resetting attendance
+
+1. Resetting the attendance count of all students in list while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student.
+  
+   1. Test case: `reset-att` <br>
+      Expected: The attendance field of all students in the list resets to 0. Name(s) of student(s) whose attendance is reset is shown in the status message. The list of all contacts is shown.
+
+### Marking attendance for a group of persons
+
+1. Marking the attendance of all students in list while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student.
+
+   1. Test case: `batch-mark`<br>
+      Expected: The attendance count of all students in the list increases by 1. Names of students whose attendance is marked are shown in the status message. The list of all contacts is shown. 
+
+### Unmarking attendance for a group of persons
+
+1. Unmarking the attendance of all students in list while all persons are shown
+
+   1. Prerequisites: List all persons using the `list` command. The list contains at least 1 person with the role Student and attendance count of more than 0 and 1 person with the role Student and the attendance count of 0.
+
+   1. Test case: `batch-unmark`<br>
+      Expected: The attendance count of all students whose attendance count was originally at 0 remain at 0. The attendance count of all other students in the list decreases by 1. Names of all students whose attendance is unmarked (including those whose attendance count remained at 0) are shown. The list of all contacts is shown.
+
+   
+
+
+
 ### Saving data
 
 1. Dealing with missing/corrupted data files
