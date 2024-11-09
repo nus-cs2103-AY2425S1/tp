@@ -71,8 +71,9 @@ public class AssignTaskCommand extends Command {
         List<Task> lastShownTaskList = model.getFilteredTaskList();
 
 
-        if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (personIndex.getZeroBased() >= lastShownPersonList.size() || personIndex.getZeroBased() < 0) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    1, lastShownPersonList.size()));
         }
 
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
@@ -86,8 +87,9 @@ public class AssignTaskCommand extends Command {
         Set<Task> tasksToAdd = new HashSet<>();
         Set<Task> updatedTasks = new HashSet<>(personToEdit.getTasks());
         for (Index taskIndex : taskIndexes) {
-            if (taskIndex.getZeroBased() >= lastShownTaskList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            if (taskIndex.getZeroBased() >= lastShownTaskList.size() || taskIndex.getZeroBased() < 0) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                        taskIndex.getOneBased(), 1, lastShownTaskList.size()));
             }
             Task newTask = lastShownTaskList.get(taskIndex.getZeroBased());
             if (updatedTasks.contains(newTask)) {
@@ -111,11 +113,10 @@ public class AssignTaskCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AssignTaskCommand)) {
+        if (!(other instanceof AssignTaskCommand otherCommand)) {
             return false;
         }
 
-        AssignTaskCommand otherCommand = (AssignTaskCommand) other;
         return personIndex.equals(otherCommand.personIndex) && taskIndexes.equals(otherCommand.taskIndexes);
     }
 }

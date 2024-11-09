@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.commands.task.MarkTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -29,7 +29,7 @@ public class TaskAssignmentParserUtil {
         }
 
         try {
-            Index personIndex = ParserUtil.parseIndex(splitArgs[0]);
+            Index personIndex = Index.oneBasedNoConstraints(Integer.parseInt(splitArgs[0].trim()));
             Set<Index> secondaryIndexes = parseMultipleIndexes(splitArgs, 1);
             return new ParsedCommandData(personIndex, secondaryIndexes);
         } catch (ParseException pe) {
@@ -54,7 +54,7 @@ public class TaskAssignmentParserUtil {
                 indexes.add(index);
             }
         } catch (NumberFormatException nfe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, (Object) args), nfe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkTaskCommand.MESSAGE_USAGE));
         }
         return indexes;
     }
