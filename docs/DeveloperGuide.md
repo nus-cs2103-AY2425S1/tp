@@ -165,6 +165,16 @@ This section describes some noteworthy details on how certain features are imple
 
 This command enables the addition of an `Appointment` for a specified `Person` in the `Model`. Its implementation involves coordinated updates between the `Model` and UI.
 
+As a refresher, this is the addAppt command as described in the User Guide:
+
+> **Format**: 
+> `addAppt APPOINTMENT_NAME i/NRIC @d/APPOINTMENT_DATE @t/APPOINTMENT_TIME`
+> 
+> **Example**:
+> `addAppt Dental i/S1234567A @d/2024-10-27 @t/1100-1200` schedules a `Dental` appointment for the patient with `NRIC` `S1234567A` on `2024-10-27`, from `1100` to `1200`.
+> 
+
+
 #### Overview
 
 When executed, this command parses user input and creates an internal representation of the appointment data. The sequence proceeds as follows:
@@ -724,19 +734,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 
-* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
+* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose".
 
 * **Appointment**: A scheduled meeting between a patient and a doctor, encompassing a specific date, time period and description.
 
-* **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
+* **Medical Condition**: A diagnosis or health issue assigned to a patient, such as "Diabetes Type 2" or "Hypertension." This helps track and manage a patient's health status.
 
 * **NRIC**: National Registration Identity Card, a unique 9-character identifier used to distinguish each patient. It should start with a letter (S, T, G, F or M), followed by 7 digits, and end with a letter.
 
 * **Priority**: Indicates the urgency of a patient’s condition, with values like none, low, medium, or high to assist doctors in managing urgent cases.
 
-* **Allergy**: A specific substance or condition that a patient has a sensitivity or adverse reaction to, such as "Peanuts" or "Lactose."
+* **Person**: The base object that represents each patient.
 
-* **Patient List**: A list of patients and their details displayed on the left hand side of the application.
+* **AddressBook**: The underlying class that holds the all `Person` records.
+
+* **Manager**: Any implementation of the following:
+    
+    * **Model**: The interface that controls the changes to `AddressBook`.
+
+    * **Logic**: The interface that controls the creation and dispatch of a `Command`.
+
+    * **Storage**: The interface that controls the reading and saving of any data to disk.
+
+* **Parser**: Any class that parses a given input into appropriate arguments.
+
+* **Panel**: A section of the graphical user interface that displays a certain item such as:
+
+    * **Patient List**: A list of patients and their details displayed on the left hand side of the application.
+
+    * **Appointment List**: A list of appointments of all patients, displayed chronologically on the right hand side of the application.
+
+    * **Command Box:** Where you can type and enter commands.
+
+    * **Result Display:** Shows the result of the command you entered.
+
+    * **Menu (File/Help):** Provides additional options for managing the app (e.g., exit, access help).
+
+    * **Data Storage Location Footer:** Displays the location where patient and appointment data are stored.
+
+* **Card**: An entry in a List Panel.
 
 [Back to Table of Contents](#table-of-contents)
 
