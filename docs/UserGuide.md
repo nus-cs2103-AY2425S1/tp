@@ -50,18 +50,18 @@ This app is a desktop app for managing candidates and job roles, **optimised for
 ## Command Summary
 
 
-| Action      | Format, Examples                                                                                                                                                                                                            |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123 Clementi Rd, 1234665 s/Java t/friend` |
-| **Clear**   | `clear`                                                                                                                                                                                                                     |
-| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                         |
-| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Active`                                              |
-| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                       |
-| **List**    | `list`                                                                                                                                                                                                                      |
-| **Help**    | `help`                                                                                                                                                                                                                      |
-| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                             |
-| **Filter**  | `filter STATUS`<br> e.g., `filter Shortlisted`                                                                                                                                                                              |
-| **Summary** | `summary`                                                                                                                                                                                                                   |
+| Action      | Format, Examples                                                                                                                                                                                                                                                                                              |
+|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/SKILLS st/STATUS note/NOTE ex/EXPERIENCE dr/DESIRED_ROLE [t/TAG]...` <br> e.g., `add n/Jason Bill p/90065432 e/jason@example.com a/31, Clementi Ave 4, #02-20 dr/Software Engineer s/Java, Python, C++ ex/CTO at Google st/Applied note/Responsible t/friends` |
+| **Clear**   | `clear`                                                                                                                                                                                                                                                                                                       |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                                           |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/SKILLS] [st/STATUS] [note/NOTE] [ex/EXPERIENCE] [dr/DESIRED_ROLE] [t/TAG]...`<br> e.g., `edit 2 n/James Lee st/Applied`                                                                                                                               |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`                                                                                                                                                                                                                                                         |
+| **List**    | `list`                                                                                                                                                                                                                                                                                                        |
+| **Help**    | `help`                                                                                                                                                                                                                                                                                                        |
+| **View**    | `view INDEX`<br> e.g., `view 2`                                                                                                                                                                                                                                                                               |
+| **Filter**  | `filter STATUS`<br> e.g., `filter Applied`                                                                                                                                                                                                                                                                    |
+| **Summary** | `summary`                                                                                                                                                                                                                                                                                                     |
 
 Detailed information can be found under [Features](#features).
 
@@ -116,7 +116,7 @@ Throughout this guide, you'll encounter several symbols. Refer to these symbols 
 
 7. **Try Out Example Commands**:
     - `list` : Lists all Applicant.
-    - `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Active note/Great candidate ex/5 years in HR dr/Software Engineer` : Adds a Applicant named `John Doe` to TalentSG.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/123 Main St s/Java,Python st/Applied note/Great candidate ex/5 years in HR dr/Software Engineer` : Adds a Applicant named `John Doe` to TalentSG.
     - `delete 3` : Deletes the 3rd applicant shown in the current list.
     - `clear` : Deletes all applicant.
     - `exit` : Exits the app.
@@ -403,7 +403,7 @@ Filters candidates based on their status.
 
 #### Image Example
 
-Command: `filter screening`
+Command: `filter Screening`
 
 **Before the filter command ran:**
 
