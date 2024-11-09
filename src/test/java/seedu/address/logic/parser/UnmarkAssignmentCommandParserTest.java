@@ -27,6 +27,13 @@ public class UnmarkAssignmentCommandParserTest {
     }
 
     @Test
+    public void parse_emptyTitle_throwsParseException() throws Exception {
+        String userInput = "1 " + PREFIX_NAME;
+
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
+    }
+
+    @Test
     public void parse_missingParts_throwsParseException() {
         // No name provided
         assertThrows(ParseException.class, () -> parser.parse("1"));
