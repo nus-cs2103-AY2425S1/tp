@@ -115,6 +115,8 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+A help window will pop up containing basic introduction to the three core features `add`, `edit` and `delete`.
+
 ![help message](images/helpMessage.png)
 
 ### Adding a person: `add`
@@ -173,7 +175,7 @@ Examples:
 
 ### Finding a person: `find`
 
-Format: ‘find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/TAG’
+Format: `find n/NAME p/PHONE_NUMBER r/ROOM_NUMBER t/TAG`
 
 * any possible orders and combinations of the 3 parameters name, phone number and room number are applicable
 
@@ -228,7 +230,7 @@ Format: `clean`
 >
 > If you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command-undo) for details!
 
-Examples of usage:
+Example:
 
 `clean`, executed in 2024.
 
@@ -240,7 +242,7 @@ This deletes all students who graduate in 2023 or earlier.
 
 Undoes the previous command that changes the data in the address book.
 
-Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`.
+Commands that can be undone are `add`, `delete`, `edit`, `clear`, `clean`, `import`.
 
 Format: `undo`
 
@@ -260,19 +262,41 @@ The `export` command will directly and immediately save the contents of the data
 
 Format: `export`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+> This exports the data of DorManagerPro to a file `NOW.json` into the data folder of the home folder. 
+> `NOW` is the time at the point of `export`, in the format MM-dd-yyyy-HHmmssPM.
+
+Example:
+
+`export`
+
+The following screenshots shows the results of executing `export`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
+![ExportToFolderExample.png](images/ExportToFolderExample.png)
+
 ### Manual data restoration: `import`
 The `import` command allows users to restore data from any one save file into the application.
 
 Format: `import f/FILE_PATH`
 
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * `FILE_PATH` must correspond to an actual json file in the device.
+> * Use as `.` a folder to refer to the home folder.  (e.g. `./data/SaveFile.json` refers to `SaveFile.json` in the data folder of the home folder)
+
 Examples:
 
 * `import fp/C:/SaveFile3.json` imports data from the file at `C:/SaveFile3.json` into the application.
+* `import fp/./data/SaveFile4.json` imports data from the file `SaveFile4.json` from the `data` folder of the home folder (`.` in the file path refers to the home folder) into the application.
 
-<box type="tip" seamless>
+The following screenshot shows the results of executing `import fp/./data/11-08-2024-051337AM.json`
+![ExportCommandExample.png](images/ExportCommandExampleUsage.png)
 
-**Tip:** Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
-</box>
+> <span style="color:MediumSeaGreen"> TIP! </span> <br>
+>
+> Importing data will replace all currently existing data in the application with the data in the save file, so do make a backup before importing.
+> However, if you mistakenly entered this command, you can undo it with the `undo` command. See [undo](#undoing-the-previous-command--undo) for details!
+
 
 ### Editing the data file
 
@@ -323,6 +347,21 @@ Action     | Format, Examples
 
 ### Name
 
+Format: `name` where `name` is a sequence of characters corresponding to a student's name
+
+Constraints:
+* `name` can contain any alphanumeric character or whitespace.
+* `name` can contain hyphens, commas and apostrophes.
+* `name` can be 1 to 300 characters long.
+  
+Duplicate handling:
+* Two resident student contacts with the same name are not allowed
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> * Duplicate handling rationale: It is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
+> * Case-insensitive: `John Doe` is treated the same as `john doe`
+
 ### Phone number
 
 Format: `+c a d`, where `c` is an optional country code, `a` is an optional area code, and `d` is a compulsory number.
@@ -342,6 +381,23 @@ Duplicate handling:
 > * Duplicate handling rationale: Phone numbers are unique to each individual
 
 ### Email
+
+Format: `l@d`, where `l` is the local part of the email and `d` is the domain of the email.
+
+Constraints:
+* The local-part `l` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+* The domain name `d` is made up of domain labels separated by periods. 
+* The domain name `d` must end with a domain label at least 2 characters long.
+* Each domain label must start and end with alphanumeric characters 
+* Each domain label must  consist of alphanumeric characters, separated only by hyphens, if any.
+* `l`, `@` and `d` are not supposed to be separated by whitespace.
+
+Duplicate handling:
+* Two resident student contacts with the same emails are not allowed.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Email constraints are based on the Email Format of the International Organisation for Standardisation.
+> * Duplicate handling rationale: Emails are unique to each individual
 
 ### Address
 

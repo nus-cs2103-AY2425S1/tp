@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes all people whose graduation date has passed.
  */
-public class CleanCommand extends ConcreteCommand {
+public class CleanCommand extends Command implements Undoable {
 
     public static final String COMMAND_WORD = "clean";
 
