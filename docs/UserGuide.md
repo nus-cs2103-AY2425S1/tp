@@ -168,8 +168,7 @@ You can filter students who meet all specified conditions.
 Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
 * The filter is case-insensitive. eg `hans` will match `Hans`.
 * At least one of the optional fields must be provided.
-* Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter except phone number.
-* At least 3 digits of number must be provided to filter phone number and it will return all matching numbers that contains specified number.
+* Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter.
 * Students matching all the given conditions will be returned (i.e. `AND` search).
 
 <div markdown="span" class="alert alert-danger">⚠️ **Warning:**
