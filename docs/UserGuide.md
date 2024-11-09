@@ -85,15 +85,15 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-warning">**Caution:**
-*Names:*
+<div markdown="span" class="alert alert-warning">
+**Names:**
 Names must be alphanumeric and all contacts must have unique names.
 Names with symbols like "s/o" and "d/o" will not be allowed. Please write names without these symbols.
 Names with additional white spaces in between words will be taken as it is.
 
 The application will throw an error if you attempt to create two users with the same names
 
-*Phone Numbers:*
+**Phone Numbers:**
 Only Singapore phone numbers are allowed by the application. Meaning, that only phone numbers starting with the number 6, 8 or 9 and is exactly 8 digits in total is allowed.
 </div>
 
@@ -121,6 +121,7 @@ Edits an existing person in the address book.
 
 <div markdown="span" class="alert alert-warning">**Caution:**
 Keep in mind that names must be alphanumeric and unique.
+All constraints from `add` command are the same in the `edit` command.
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -365,6 +366,15 @@ Examples:
 
 - `toggle` changes the application theme.
 
+### Navigating Command History : 
+
+Easily cycle through your previous **successfully executed** commands by using the Up and Down arrow keys on your keyboard.
+
+Format: `Up arrow`
+
+- Up Arrow: Pressing the Up arrow key allows you to scroll backward through your command history, one command at a time.
+- Down Arrow: Pressing the Down arrow key moves forward through your command history, allowing you to revisit more recent commands.
+
 ### Clear all entries : `clear`
 
 Clears all entries from the address book.
@@ -409,24 +419,25 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action         | Format, Examples                                                                                                                                                          |
-|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**        | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`     |
-| **List**       | `list`                                                                                                                                                                    |
-| **Edit**       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
-| **Find**       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                |
-| **Delete**     | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                       |
-| **Deletetag**  | `deletetag INDEX t/TAG` <br> e.g. `deletetag 1 t/Client`                                                                                                                  |
-| **Addnote**    | `addnote INDEX n/NOTE` <br> e.g. `addnote 1 n/Customer 1`                                                                                                                 |
-| **Editnote**   | `editnote INDEX i/NOTE_INDEX n/NOTE` <br> e.g. `editnote 1 i/1 n/Customer 1`                                                                                              |
-| **Deletenote** | `deletenote INDEX i/NOTE_INDEX` <br> e.g. `deletenote 1 i/1`                                                                                                              |
-| **View**       | `view INDEX` <br> e.g. `view 1`                                                                                                                                           |
-| **Pin**        | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                             |
-| **Unpin**      | `unpin INDEX` <br> e.g. `unpin 1`                                                                                                                                         |
-| **Undo**       | `undo`                                                                                                                                                                    |
-| **Redo**       | `redo`                                                                                                                                                                    |
-| **Toggle**     | `toggle`                                                                                                                                                                  |
-| **Export**     | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                              |
-| **Import**     | `import f/FILETYPE p/PATH` <br> e.g. `import f/vcf p/myVcf.vcf`                                                                                                           |
-| **Clear**      | `clear`                                                                                                                                                                   |
-| **Help**       | `help`                                                                                                                                                                    |
+| Action              | Format, Examples                                                                                                                                                      |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **List**            | `list`                                                                                                                                                                |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Deletetag**       | `deletetag INDEX t/TAG` <br> e.g. `deletetag 1 t/Client`                                                                                                              |
+| **Addnote**         | `addnote INDEX n/NOTE` <br> e.g. `addnote 1 n/Customer 1`                                                                                                             |
+| **Editnote**        | `editnote INDEX i/NOTE_INDEX n/NOTE` <br> e.g. `editnote 1 i/1 n/Customer 1`                                                                                          |
+| **Deletenote**      | `deletenote INDEX i/NOTE_INDEX` <br> e.g. `deletenote 1 i/1`                                                                                                          |
+| **View**            | `view INDEX` <br> e.g. `view 1`                                                                                                                                       |
+| **Pin**             | `pin INDEX` <br> e.g. `pin 1`                                                                                                                                         |
+| **Unpin**           | `unpin INDEX` <br> e.g. `unpin 1`                                                                                                                                     |
+| **Undo**            | `undo`                                                                                                                                                                |
+| **Redo**            | `redo`                                                                                                                                                                |
+| **Toggle**          | `toggle`                                                                                                                                                              |
+| **Export**          | `export f/FILETYPE` <br> e.g. `export f/csv`                                                                                                                          |
+| **Import**          | `import f/FILETYPE p/PATH` <br> e.g. `import f/vcf p/myVcf.vcf`                                                                                                       |
+| **Command History** | `up arrow` (only for successfully executed commands)                                                                                                                  |
+| **Clear**           | `clear`                                                                                                                                                               |
+| **Help**            | `help`                                                                                                                                                                |
