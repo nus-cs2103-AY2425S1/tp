@@ -154,7 +154,7 @@ public class ModelManager implements Model {
 
     @Override
     public void sortByName() {
-       addressBook.sortByName();
+        addressBook.sortByName();
     }
 
     @Override
