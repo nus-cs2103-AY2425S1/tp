@@ -5,7 +5,7 @@ title: User Guide
 
 HRConnect is a desktop app designed to streamline the allocation of human resources to projects within a company.
 
-It is optimized for rapid use by office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-heavy apps.
+It is optimized for rapid use by project managers and office professionals who are skilled at typing, while still providing the benefits of a [*Graphical User Interface*](#graphical-user-interface) (GUI). If you prefer typing, HRConnect allows you to perform human resource management tasks much faster than other mouse-heavy apps.
 
 ---
 
@@ -171,7 +171,7 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
   - The local-part may not start or end with special characters.
   - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods (e.g. `u.nus.edu`).
 - Address must be: Any characters are valid
-- Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces, within 50 characters
+- Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces, each should be 50 characters or less
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An employee can have any number of tags (including 0) and any number of skills (including 0)
