@@ -87,7 +87,7 @@ their contacts into 'work', 'personal' and 'school' contacts to better manage th
   e.g. `[t/TAG]…​` can be left blank, or used like `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` will also work.
+  e.g. if the command specifies `n/NAME p/PHONE`, `p/PHONE n/NAME` will also work.
 
 * Anything after certain commands such as `help`, `list`, `exit` and `clear` will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -109,9 +109,9 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
+Format: `add n/NAME ct/CONTACT_TYPE [h/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`
 
-* At least one of `TELEGRAM_HANDLE`, `PHONE_NUMBER` or `EMAIL` must be provided to add a contact.
+* At least one of `TELEGRAM_HANDLE`, `PHONE` or `EMAIL` must be provided to add a contact.
 
 <box type="info" seamless>
 
@@ -320,10 +320,10 @@ Furthermore, certain edits can cause the UniLink to behave in unexpected ways (e
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`
+**Add**    | `add n/NAME ct/CONTACT_TYPE [t/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​` <br> e.g., `add n/James Ho h/@james_ho p/22224444 e/jamesho@example.com ct/work t/friend t/colleague`<br>Note: At least one of `TELEGRAM_HANDLE`, `PHONE` or `EMAIL` must be provided.
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE_NUMBER] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [ct/CONTACT TYPE] [t/TELEGRAM_HANDLE] [p/PHONE] [e/EMAIL] [m/MODULE] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee h/@jamesss e/jameslee@example.com`
 **Find**   | `find NAME [MORE_NAME_KEYWORDS]`<br> e.g., `find James Jake` <br><br> `findtele TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLE_KEYWORDS]`<br> e.g., `findtele @james_lake`<br><br> `findtag TAG [MORE_TAG_KEYWORDS]`<br> e.g., `findtag friend`
 **Filter** | `filter [CONTACT_TYPE]`<br> e.g., `filter WORK`, `filter PERSONAL`
 **Import** | `import`
