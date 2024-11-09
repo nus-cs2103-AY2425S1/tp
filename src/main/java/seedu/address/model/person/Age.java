@@ -27,7 +27,7 @@ public class Age {
     public Age(String age) {
         requireNonNull(age);
         checkArgument(isValidAge(age), MESSAGE_CONSTRAINTS);
-        this.value = age;
+        this.value = age.replaceFirst("0{0," + (age.length() - 1) + "}", "");
     }
 
     /**
