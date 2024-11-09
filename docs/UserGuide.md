@@ -176,6 +176,8 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/client_TAG] [r/REMAR
   - `NAME` can only contain **alphanumeric and spaces**
 -  Client tags are added in a case-insensitive manner. e.g `t/buyer` or `t/BUYER` will both add the `Buyer` tag.
 -  Refer to the [Tag Table](#tag-table) for a complete list of client tags.
+- A client is considered the "same" as another client based on the values in: `NAME`, `PHONE_NUMBER`, `EMAIL`, `ADDRESS`, `CLIENT_TAG`
+  - Note that values are **case-sensitive**
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including no tags)
