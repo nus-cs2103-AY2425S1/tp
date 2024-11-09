@@ -26,7 +26,7 @@ public class Name {
     public static final String ALPHANUMERIC_WITH_SPACE = "[\\p{Alnum}]([\\p{Alnum} ]*[\\p{Alnum}])?";
     public static final String NAME_REGEX = ALPHANUMERIC_WITH_SPACE + "((,\\s|'|-)" + ALPHANUMERIC_WITH_SPACE + ")?";
     public static final String RELATIONSHIP_REGEX = "\\s(S/O|D/O)\\s" + NAME_REGEX;
-    public static final String VALIDATION_REGEX = "^" + NAME_REGEX + "(" + RELATIONSHIP_REGEX + ")?$";
+    public static final String VALIDATION_REGEX = "^" + NAME_REGEX + "(" + RELATIONSHIP_REGEX + ")?[ ]*$";
 
     public final String fullName;
 
