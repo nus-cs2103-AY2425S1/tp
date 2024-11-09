@@ -231,6 +231,10 @@ Examples:
 > ###### 💡 **Tip**
 > If lower sections in the detail window are not displayed in full due to small screen size or long list length, resize the window or using the scroll bar for better visual experience.
 
+> ###### 💡 **Tip**
+> You can resize the detail window to extremely small size in case it blocks view of other windows.
+
+
 ### Adding a Property: `addProperty`
 
 Add a property listing to an existing person in the address book.
@@ -258,8 +262,14 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords. <br> Note that the list given by `find` may not be complete, therfore it is recommended to use `list` to display the full list, before carrying out operations on other contacts that may be hidden by `find` command.
-<br> Besides, commands that alter the ordering of the original list like `favourite` and `sort` will show the full list again.
+Finds persons whose names contain any of the given keywords. <br> 
+
+> ###### ⚠️ **Warning**
+> Commands that alter the ordering of the original list like `favourite` and `sort` will show the full list again.
+
+
+> ###### 💡 **Tip**
+> Note that the list given by `find` may not be complete, therfore it is recommended to use `list` to display the full list, before carrying out operations on other contacts that may be hidden by `find` command.
 
 **Command Format:**
 `find KEYWORD [ADDITIONAL_KEYWORDS]`
@@ -332,6 +342,10 @@ Clears all entries from the address book.
 
 Exits the program.
 
+> ###### ⚠️ **Warning**
+> Users are strongly encouraged to use `exit` command to close the application when there is a person detail window active. Closing by clicking the close button may cause the detail window to not automatically closed.
+
+
 **Command Format:**  
 `exit`
 
@@ -343,10 +357,9 @@ AddressBook data of RealConnect are saved in the hard disk automatically after a
 
 AddressBook data of RealConnect are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: <strong>Caution:</strong>
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+> ###### ⚠️ **Warning**
+> If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
 
 ---
 
@@ -368,6 +381,10 @@ Stores a contact’s birthday
 
 Displays a contacts' birthday if they are happening within a week from the system's current date.
 Note that the reminder is only shown when the application is launched,
+any command feedback shown will clear the reminder. To view the reminder again restart the application.
+
+> ###### 💡 **Tip**
+> Note that the reminder is only shown when the application is launched,
 any command feedback shown will clear the reminder. To view the reminder again restart the application.
 
 **Command Format:**
