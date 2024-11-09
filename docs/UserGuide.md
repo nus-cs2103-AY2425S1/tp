@@ -560,7 +560,7 @@ delete-policy INDEX pt/POLICY_TYPE…
 🔔
 **Notes:**
 * This command will not work if the specified policy to be deleted does not exist in Prudy.
-* `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`
+* `POLICY_TYPE` is case-insensitive, and can be either `life`, `health`, or `education`.
 </div>
 
 
@@ -576,11 +576,17 @@ More than one policy can be deleted using a single `delete-client` command.
 * `delete-policy 2 pt/health pt/education` deletes the Health and Education policy from the 2nd client.
 
 **On success:**
-<br>
-It will display the clients remaining policies.
+
+If client still has remaining policies:
 ```shell
 Policies Left: 1. Policy type: POLICY_TYPE | Premium amount: PREMIUM_AMOUNT | Coverage amount: COVERAGE_AMOUNT | Expiry date: EXPIRY_DATE | Claims:
         Status: CLAIM_STATUS, Description: CLAIM_DESCRIPTION
+```
+
+If client has no remaining policies:
+```shell
+Policies Left:
+
 ```
 
 #### 5.3.3 Editing a Policy: `edit-policy`
@@ -674,10 +680,12 @@ list-expiring-policies [DAYS]
 * `list-expiring-policies 10` lists all policies expiring within 10 days.
 
 **On success:**
+
 No policies expiring:
 ```shell
 No policies expiring within the next DAYS day(s)!
 ```
+
 Policies expiring:
 ```shell
 The following policies are expiring within DAYS day(s):
