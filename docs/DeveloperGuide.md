@@ -911,7 +911,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Editing an order in a filtered order list using command aliases.
 
-    1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed.
+    1. Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
        Example: `filterorder pending`
 
     2. Test case: `edito 2 q/22` <br>
@@ -937,7 +937,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting an order
 
-1. Deleting a customer while all orders under a customer are being shown.
+1. Deleting an order while all orders under a customer are being shown.
 
     1. Prerequisites: List all customers using the `listorder 1` command with at least 1 order listed.
 
@@ -952,7 +952,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting an order from a filtered list using command aliases.
 
-    1. Prerequisites: Prerequisites: Customers filtered using `filterorder` command with at least 1 order listed.
+    1. Prerequisites: Prerequisites: Orders filtered using `filterorder` command with at least 1 order listed. <br>
        Example: `filterorder pending`
 
     2. Test case: `deleteo 1`<br>
@@ -961,7 +961,80 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `deleteo 0`<br>
        Expected: No order is deleted. Error details shown in the status message. Status bar remains the same.
 
+### Marking an order as completed
 
+1. Marking an order as completed while all orders under a customer are being shown.
+
+    1. Prerequisites:
+       - List all customers using the `listorder 1` command with at least 1 order listed.
+       - The first order's status is not `completed`.
+
+    2. Test case: `markorder 1`<br>
+       Expected: First order is marked as completed. Details of the marked order shown in the status message.
+
+    3. Test case: `markorder 0`<br>
+       Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect `markorder` commands to try: `markorder`, `markorder x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Marking an order from a filtered list as completed using command aliases.
+
+   1. Prerequisites:
+       - Prerequisites: Orders filtered using `filterorder pending` command with at least 1 order listed. <br>
+
+   2. Test case: `marko 1`<br>
+      Expected: First order is marked as completed. Details of the marked order shown in the status message. The marked order will disappear from the filtered order list as it is no longer `pending`.
+
+   3. Test case: `marko 0`<br>
+      Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
+   
+3. Marking an already completed order as completed.
+
+    1. Prerequisites:
+        - Prerequisites: At least 1 order listed. <br>
+        - The first order's status is `completed`.
+
+    2. Test case: `marko 1`<br>
+       Expected: No order is marked as completed. Error details shown in the status message. Status bar remains the same.
+
+### Reverts an order to pending status.
+
+1. Reverting an order to pending status while all orders under a customer are being shown.
+
+    1. Prerequisites:
+        - List all customers using the `listorder 1` command with at least 1 order listed.
+        - The first order's status is not `pending`.
+
+    2. Test case: `unmarkorder 1`<br>
+       Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message.
+
+    3. Test case: `unmarkorder 0`<br>
+       Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect `unmarkorder` commands to try: `unmarkorder`, `unmarkorder x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
+2. Reverting an order from a filtered list to pending status using command aliases.
+
+    1. Prerequisites:
+        - Prerequisites: Orders filtered using `filterorder completed` command with at least 1 order listed. <br>
+
+    2. Test case: `unmarko 1`<br>
+       Expected: First order is reverted to pending status. Details of the unmarked order shown in the status message. The unmarked order will disappear from the filtered order list as it is no longer `completed`.
+
+    3. Test case: `unmarko 0`<br>
+       Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
+
+3. Reverting an order which is already pending to pending.
+
+    1. Prerequisites:
+        - Prerequisites: At least 1 order listed. <br>
+        - The first order's status is `pending`.
+
+    2. Test case: `unmarko 1`<br>
+       Expected: No order is reverted to pending status. Error details shown in the status message. Status bar remains the same.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
