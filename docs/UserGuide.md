@@ -285,7 +285,7 @@ Format: `deleteTxn INDEX`
 
 Examples:
 
-* `listTxn` followed by `delete 2` deletes the 2nd person in the address book.
+* `listTxn` followed by `deleteTxn 2` deletes the 2nd transaction in the transaction book.
 * `filterTxn 1` followed by `delete 1` deletes the 1st transaction in the results of the `filterTxn` command.
 
 ### Clearing all entries of AddressBook and TransactionBook: `clear`
