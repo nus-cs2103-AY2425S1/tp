@@ -20,7 +20,7 @@ public class SearchModeSearchCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Searches for all contacts whose fields contain the specified keywords (case-insensitive) "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: [FLAG] [MORE_KEYWORDS]...\n"
+            + "Parameters: [FLAG][MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " n/Amy Bob Charlie";
 
     public static final String MESSAGE_SUCCESS = "Added %1$s Contacts who fit search parameter.";
