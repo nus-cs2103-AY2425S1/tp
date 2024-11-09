@@ -11,6 +11,7 @@ Actor: New User
 1. The new user clicks on "Help" at top bar of the application.
 2. The system displays usage instructions in a browser.
 3. The user reviews the instructions.
+   <br>Use case ends.<br>
 
 **Extensions**
 - **2a.** The user can switch between different sections of the instructions (e.g., FAQs, How-to sections, etc.).
@@ -24,11 +25,12 @@ Actor: New User
 2. The system validates the input (e.g., checks for valid email format, non-empty fields).
 3. The system saves the new person to the address book and displays a success message.
 4. The new person is added to the list.
+   <br>Use case ends.<br>
 
 **Extensions**
-- **4a.** The system detects an invalid email format or phone number.
-  - 4a1. The system shows an error message.
-  - 4a2. The user have to restart from step 1.
+- **2a.** The system detects an invalid email format or phone number.
+  - 2a1. The system shows an error message.
+  - 2a2. The user have to restart from step 1.
 
 ---
 
@@ -39,6 +41,7 @@ Actor: New User
 2.  The system shows a list of persons
 3.  The user requests to delete a specific person in the list
 4.  The system deletes the person
+   <br>Use case ends.<br>
 
 **Extensions**
 - **2a.** The list is empty.
@@ -54,6 +57,7 @@ Actor: New User
 **MSS**
 1. A user requests to search for a person by first or last name.
 2. The system performs a search and displays matched person's details.
+   <br>Use case ends.<br>
 
 **Extensions**
 - **2a.** The system finds no match.
@@ -75,6 +79,7 @@ Actor: New User
 3. The user requests to mark or unmark the selected expense.
 4. The system updates the status of the expense.
 5. The system displays a success message indicating the change.
+   <br>Use case ends.<br>
 
 ---
 
@@ -84,15 +89,17 @@ Actor: New User
 1. A user requests to list all person.
 2. The user requests to filter transaction by a specific person in the list
 3. The system displays how much the user owe to the selected person.
+   <br>Use case ends.<br>
 
 ---
 
 **UC07 - View Summary of Expenses and Balances**
 
 **MSS**
-1. A user chooses to view a summary of all expenses and balances.
+1. A user view a summary of all expenses and balances.
 2. The system calculates the total expenses, balances, and individual amounts owed.
 3. The system displays the summary to the user in a tabular format.
+   <br>Use case ends.<br>
 
 **Extensions**
 - **3a.** The user requests a filtered summary (e.g., by date or category).
