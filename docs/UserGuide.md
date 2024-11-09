@@ -6,9 +6,9 @@ pageNav: 3
 
 # TAHub User Guide
 
-TAHub Level 3 (TAHub) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TAHub can get your contact management tasks done faster than traditional GUI apps.
+TAHub Level 3 (TAHub) is a **desktop app for Teaching Assistants (TAs) to efficiently manage student-related information**, optimized for use via a Command Line Interface (CLI) while still offering the benefits of a Graphical User Interface (GUI). If you can type fast, TAHub can handle your tasks faster than traditional GUI apps.
 
-This app is designed for Teaching Assistants (TAs) who are experienced with using the CLI and are comfortable with command-based interactions. However, if you're new to the CLI and still want to try TAHub, there’s a detailed **Quick Start** section to help you get started smoothly and become familiar with the commands.
+Designed to streamline the workload of TAs, TAHub goes beyond basic contact management by including powerful features such as **calculating aggregate scores**, **marking attendance**, and **tracking grades**. These functionalities make it an essential tool for TAs looking to manage student records and assessments effectively. If you're new to CLI-based apps, a comprehensive **Quick Start** section is available to help you get up to speed quickly and confidently.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -306,7 +306,7 @@ Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 - Adds or updates a grade for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - `TEST_NAME` refers to the name of the test (e.g. Midterm Exam). The test name will be automatically converted to lowercase.
 - `SCORE` refers to the score obtained by the person, which must be between 0 and 100 inclusive.
-- `WEIGHTAGE` refers to the weightage of the test in percentage, which must be greater than 0 and less than or equal to 100.
+- `WEIGHTAGE` refers to the weightage of the test in percentage, which must be between 0 and 100 inclusive. Weightages of 0 are allowed for tests that are formative in nature.
 - If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
 
 Examples:
