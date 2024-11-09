@@ -20,9 +20,10 @@ information such as their treatment, contact information, visit records and futu
 4. <b>Search</b> patient by NRIC or Name
 5. <b>Backup</b> patient records automatically
 6. <b>Book</b> appointments for patients
-7. <b>Find</b> bookings on a specific date
-8. <b>Update</b> appointments
-9. <b>Restore</b> backup file
+7. <b>Delete</b> appointments for patients
+8. <b>Find</b> bookings on a specific date
+9. <b>Update</b> appointments
+10. <b>Restore</b> backup file
 
 For detailed usage instructions, please refer to the [User Guide](https://ay2425s1-cs2103t-f11-3.github.io/tp/UserGuide.html)
 
