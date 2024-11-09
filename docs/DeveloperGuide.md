@@ -37,18 +37,10 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/Main.java) and [`MainApp`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/MainApp.java)) is in charge of the app launch and shut down.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
-
-### Storage Component
-
-The Storage component is responsible for reading and writing data to the local storage. It includes classes for handling user preferences and the hall pointer data.
-
-Here is the UML diagram for the Storage component:
-
-<puml src="diagrams/StorageClassDiagram.puml" width="600" />
 
 The bulk of the app's work is done by the following four components:
 
@@ -78,7 +70,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -95,7 +87,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -130,7 +122,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -151,7 +143,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://ay2425s1-cs2103t-w14-3.github.io/tree/master/src/main/java/hallpointer/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-W14-3/tp/blob/master/src/main/java/hallpointer/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -292,31 +284,30 @@ _{more aspects and alternatives to be added}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​         | I want to …​                                                     | So that I can …​                                                        | Remarks/Notes                                                                         |
-| -------- | --------------- |------------------------------------------------------------------| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+|----------|-----------------|------------------------------------------------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
 | `* * *`  | First-time user | Explore the app using sample data                                | I can understand its features without manually entering data            |                                                                                       |
 | `* * *`  | First-time user | See a guide on how to use the app                                | I can better understand its functionalities                             |                                                                                       |
 | `* * *`  | First-time user | Save the changes I made                                          | I won’t have to redo my work after reopening the app                    |                                                                                       |
 | `* * *`  | First-time user | See sample data with a predefined structure                      | I have a format to follow when inputting my own data                    |                                                                                       |
 | `* * *`  | First-time user | Delete all data in the app                                       | I can start over when I make a mistake and remove sample data           |                                                                                       |
-| `* * *`  | User            | Add new users to the app                                         | I can track points for new Hall members                                 |                                                                                       |
-| `* * *`  | User            | Delete existing users from the app                               | I can stop tracking points for ex-Hall members                          |                                                                                       |
+| `* * *`  | User            | Add new Hall members to the app                                  | I can track points for new Hall members                                 |                                                                                       |
+| `* * *`  | User            | Delete ex-Hall members from the app                              | I can stop tracking points for ex-Hall members                          |                                                                                       |
 | `* * *`  | User            | Customize point allocation criteria                              | I can reward members based on different participation criteria          | E.g., different point weights for different activities                                |
-| `* * *`  | Frequent user   | Add or delete points for each member                             | I can track the overall participation status in the CCA                 |                                                                                       |
+| `* * *`  | Frequent user   | Add or delete points for each Hall member                        | I can track the overall participation status in the CCA                 |                                                                                       |
 | `* * *`  | Frequent user   | Adjust attendance records if there are any errors                | I can fix mistakes and maintain accurate records                        |                                                                                       |
-| `* * *`  | Frequent user   | Filter the data to see members with low attendance               | I can identify which members need attention                             |                                                                                       |
 | `* * *`  | User            | Update member details (e.g., name, contact)                      | I can keep the member database up to date                               |                                                                                       |
-| `* *`    | First-time user | Import data from an existing Google Sheets document or csv file  | I can quickly upload my data without manual entry                       |                                                                                       |
 | `* *`    | Frequent user   | Automatically track attendance at each session                   | I don't need to manually mark attendance for each session               | Using QR codes? That would need some kind of integration though, would be complicated |
 | `* *`    | Frequent user   | See a breakdown of points for each member quickly                | I can monitor attendance records without navigating multiple screens    |                                                                                       |
 | `* *`    | Frequent user   | Export attendance data                                           | I can share participation reports with other stakeholders if needed     |                                                                                       |
 | `* *`    | User            | Bulk update attendance or points for multiple members            | I can efficiently manage large groups                                   |                                                                                       |
 | `* *`    | User            | Set up custom attendance categories (e.g., Excused, Late)        | I can categorize different types of attendance                          |                                                                                       |
-| `* *`    | User            | View analytics or visual reports of attendance and participation | I can see trends and member engagement at a glance                      | Charts or graphs to visualize data                                                    |
+| `*`      | User            | View analytics or visual reports of attendance and participation | I can see trends and member engagement at a glance                      | Charts or graphs to visualize data                                                    |
 | `*`      | User            | Sort members by name                                             | I can locate a member easily                                            |                                                                                       |
 | `*`      | Frequent user   | Automatically save changes without manual intervention           | I don’t lose progress if I forget to click save                         | Auto-save feature                                                                     |
 | `*`      | Expert user     | Perform all actions using the CLI                                | I can interact with the app more efficiently without relying on the GUI |                                                                                       |
 | `*`      | Expert user     | Automate repetitive tasks, such as attendance updates            | I can save time by reducing manual input                                |                                                                                       |
 | `*`      | User            | Add notes for each member                                        | I can track special situations or reasons for absences                  |                                                                                       |
+| `*`      | First-time user | Import data from an existing Google Sheets document or csv file  | I can quickly upload my data without manual entry                       |                                                                                       |
 
 ### Use cases
 
@@ -333,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Main Success Scenario (MSS)**:
 1. CCA Leader inputs the `add_member` command with required details (name, room number, telegram and tags (optional)).
-    - Example: `add_member n/John Doe r/4/3/301 t/johndoe123 tag/logistics`
+    - Example: `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics`
 2. Hall Pointer validates the entered details for the new member.
 3. Hall Pointer adds the member to the system and displays a success message.
 4. The new member is displayed in the GUI.
