@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class JsonAdaptedParent extends JsonAdaptedPerson {
 
-    private final List<String> childrensNames;
+    private final List<String> childrensNames = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given details.
@@ -33,7 +33,9 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isPinned") boolean isPinned,
             @JsonProperty("isArchived") boolean isArchived) {
         super("Parent", name, phone, email, address, tags, isPinned, isArchived);
-        this.childrensNames = childrensNames;
+        if (childrensNames != null) {
+            childrensNames.addAll(childrensNames);
+        }
     }
 
     /**
@@ -41,7 +43,7 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
      */
     public JsonAdaptedParent(Parent source) {
         super(source);
-        this.childrensNames = source.getChildrensNames().stream().map(n -> n.fullName).toList();
+        childrensNames.addAll(source.getChildrensNames().stream().map(n -> n.fullName).toList());
     }
 
     @Override
@@ -92,7 +94,12 @@ public class JsonAdaptedParent extends JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Name> modelChildrensNames = new HashSet<>(childrensNames.stream().map(Name::new).toList());
+        final List<Name> personChildrensNames = new ArrayList<>();
+        for (String childName : childrensNames) {
+            personChildrensNames.add(new Name(childName));
+        }
+
+        final Set<Name> modelChildrensNames = new HashSet<>(personChildrensNames);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Parent(modelName, modelPhone, modelEmail, modelAddress, modelChildrensNames, modelTags,
