@@ -50,6 +50,7 @@ student contact details!
   - [ATTENDANCE](#attendance-commands)
     - [Marking presence : `attend-present`](#attend-present)
     - [Marking absence : `attend-absent`](#attend-absent)
+    - [Remove last attendance : `attend-remove`](#attend-remove)
     - [Clear attendance : `attend-clear`](#attend-clear)
   - [DATA](#data)
     - [Saving the data](#saving-the-data)
