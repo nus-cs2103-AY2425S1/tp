@@ -51,28 +51,28 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
 
 
 1. Open your computer's terminal:
-   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter
-   - **For Mac**: Press Command + Space, type `terminal`, and press Enter
-2. In the black terminal window that appears, type exactly:
+   - **For Windows**: Press the Windows key + R, type `cmd`, and press Enter.
+   - **For Mac**: Press Command + Space, type `terminal`, and press Enter.
+2. In the black terminal window that appears, type the following command:
    ```
    java --version
    ```
-   and press Enter
+   and press Enter.
 3. What you should see:
    - ✅ If you see "java 17" or "openjdk 17" (or any number above 17), you're ready to go!
-   - ❌ If you see "command not found" or a number below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
+   - ❌ If you see "command not found" or a java version below 17, visit [Java's download page](https://www.oracle.com/java/technologies/downloads/#java17) to install Java 17
 
 ### Step 2: Install PROperty
 
 
 1. Download PROperty:
-   - Click [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases) to download the latest PROperty
-   - Look for the file named `PROperty.jar` and click on it to download
+   - Click [here](https://github.com/AY2425S1-CS2103T-F15-3/tp/releases) to download the latest PROperty.
+   - Look for the file named `PROperty.jar` and click on it to download.
 2. Create a home folder for PROperty:
-   - Create a new folder on your computer named `PROperty`
-   - Copy the downloaded `PROperty.jar` file into this folder
+   - Create a new folder on your computer named `PROperty`.
+   - Copy the downloaded `PROperty.jar` file into this folder.
 3. Start PROperty:
-   - Double-click on the `PROperty.jar` file to run it
+   - Double-click on the `PROperty.jar` file to run it.
      **For advanced users:** Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar PROperty.jar` command to run the application.<br>
    - You should see the PROperty window appear as follows below! Note how the app contains some sample data.<br>
 
