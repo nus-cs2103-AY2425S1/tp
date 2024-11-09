@@ -160,7 +160,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -358,7 +358,7 @@ Duplicate handling:
 * Two resident student contacts with the same name are not allowed
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
+> * Constraint rationale: Extremely long names would be difficult to process and display in the profile screen. 
 > * Duplicate handling rationale: It is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
 > * Case-insensitive: `John Doe` is treated the same as `john doe`
 
@@ -407,6 +407,31 @@ Duplicate handling:
 
 ### Emergency contact name
 
+Format: `emergencyName` where `emergencyName` is a sequence of characters corresponding to a student's name
+
+Constraints:
+Same as [Name](#name)
+
+Duplicate handling:
+* Two residents can have the same emergency contact with the same name.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Same as [Name](#name)
+> * Duplicate handling rationale: It is possible for two residents to have the same emergency contact.
+> * Case-insensitive: `John Doe` is treated the same as `john doe`
+
 ### Emergency contact phone number
+
+Format: same as [Phone number](#phone-number)
+
+Constraints:
+Same as [Phone number](#phone-number)
+
+Duplicate handling:
+* Two residents can have the same emergency contact with the same phone number.
+> <span style="color:Gray"> NOTE! </span> <br>
+>
+> * Constraint rationale: Same as [Phone number](#phone-number)
+> * Duplicate handling rationale: It is possible for two residents to have the same emergency contact.
 
 ### Graduation year
