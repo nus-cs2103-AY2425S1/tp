@@ -27,20 +27,22 @@ public class PhoneTest {
         // invalid phone numbers
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
+        assertFalse(Phone.isValidPhone("phone")); // non-numeric
+        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("(+9999) 93121534")); // with country code too long
         assertFalse(Phone.isValidPhone("(+) 93121534")); // with blank country code
+        assertFalse(Phone.isValidPhone("93  121534")); // with more than 1 space
         assertFalse(Phone.isValidPhone("93121534 [Office And Others]")); // with note > 10 chars
 
         // valid phone numbers
         assertTrue(Phone.isValidPhone("91")); // short phone number
         assertTrue(Phone.isValidPhone("9312 1534")); // spaces allowed
-        assertTrue(Phone.isValidPhone("93  121534")); // with more than 1 space
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("(+999) 93121534")); // with country code length 3
         assertTrue(Phone.isValidPhone("93121534 [Office]")); // with note
         assertTrue(Phone.isValidPhone("(+999) 93121534 [Office]")); // with both country code and note
         assertTrue(Phone.isValidPhone("93121534 [Not Office]")); // with note = 10 chars
-        assertTrue(Phone.isValidPhone("124!@#$%^&*()_+{}ASDFGHJKasdfg033123")); // with characters
+        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
 
     @Test

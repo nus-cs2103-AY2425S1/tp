@@ -52,7 +52,7 @@ public class Name {
                 String word = words[i];
 
                 // Check if it's the last word and is a Roman numeral
-                if (i == words.length - 1 && isSimpleRomanNumeral(word)) {
+                if (i == words.length - 1 && isRomanNumeral(word)) {
                     formattedName.append(word.toUpperCase());
                 } else {
                     // Regular name word - capitalize first letter only
@@ -70,22 +70,41 @@ public class Name {
         return formattedName.toString();
     }
     /**
-     * Verifies whether a {@code String} is a Roman numeral less than 10.
+     * Verifies whether a {@code String} is a Roman numeral.
      *
      * @param word Any word.
      */
-    private static boolean isSimpleRomanNumeral(String word) {
+    private static boolean isRomanNumeral(String word) {
         // Convert to uppercase for checking
         word = word.toUpperCase();
 
-        // Only allow I and V
-        if (!word.matches("^[IV]+$")) {
+        // Check if the word only contains valid Roman numeral characters
+        if (!word.matches("^[IVXLCDM]+$")) {
             return false;
         }
 
-        // Valid patterns for numbers 1-9:
-        // I, II, III, IV, V, VI, VII, VIII, IX
-        return word.matches("^(I{1,3}|IV|V|VI{1,3}|IX)$");
+        // Additional validation rules for Roman numerals
+        // Check for valid patterns and combinations
+        if (word.matches(".*I{4,}.*")
+                || word.matches(".*V{2,}.*")
+                || word.matches(".*X{4,}.*")
+                || word.matches(".*L{2,}.*")
+                || word.matches(".*C{4,}.*")
+                || word.matches(".*D{2,}.*")
+                || word.matches(".*M{4,}.*")) {
+            return false;
+        }
+
+        // Check for invalid sequences
+        if (word.matches(".*I[LCDM].*")
+                || word.matches(".*V[XLCDM].*")
+                || word.matches(".*X[CDM].*")
+                || word.matches(".*L[CDM].*")
+                || word.matches(".*D[M].*")) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
