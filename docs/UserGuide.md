@@ -294,9 +294,9 @@ Examples:
 
 Expected output:
 ```
-New person added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
-New person added: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; Address: Blk 50 Tampines Street 21, #08-281; Tags: [Diabetic]
-New person added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags: 
+New patient added: John Doe; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+New patient added: Betsy Crowe; Phone: 1234567; Email: betsycrowe@example.com; Address: Blk 50 Tampines Street 21, #08-281; Tags: [Diabetic]
+New patient added: Jarell; Phone: 000; Email: unknown@x.com; Address: unknown address; Tags: 
 ```
 <br>
 
@@ -311,7 +311,7 @@ Example:
 
 Expected output:
 ```
-Listed all persons
+Listed all patients
 ```
 <br>
 
@@ -338,8 +338,8 @@ Examples:
 
 Expected output:
 ```
-Edited Person: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
-Edited Person: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
+Edited Patient: John Doe; Phone: 91234567; Email: johndoe@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+Edited Patient: Betsy Crower; Phone: 98765432; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: 
 ```
 <br>
 
@@ -366,7 +366,7 @@ Examples:
 
 Expected output:
 ```
-2 persons listed!
+2 patients listed!
 ```
 You should see something like this:<br></br>
 ![result for 'Find_Patient_Example'](images/FindPatientExample.png)
@@ -392,7 +392,7 @@ Examples:
 
 Expected output:
 ```
-Deleted Person: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
+Deleted Patient: John Doe; Phone: 91245555; Email: johnd@example.com; Address: 311, Clementi Ave 2, #02-25; Tags: [Diabetic]
 ```
 <br>
 
@@ -522,7 +522,7 @@ Examples:
 
 Expected output (First example):
 ```
-Listed all persons
+Listed all patients
 New task added: Eat paracetamol 1000mg
 ```
 You should see something like this:<br></br>
@@ -530,7 +530,7 @@ You should see something like this:<br></br>
 
 Expected output (Second example):
 ```
-1 persons listed!
+1 patient listed!
 New task added: Clear Diapers
 ```
 You should see something like this:<br></br>
