@@ -25,7 +25,7 @@ public class Name {
      * becomes a valid input.
      */
     public static final String VALIDATION_REGEX =
-            "[\\p{Alnum}][\\p{Alnum} ]*(?i)( s/o | d/o )?(?-i)[ ]*[\\p{Alnum}][\\p{Alnum} ]*";
+            "[\\p{Alnum}][\\p{Alnum} ]*(?i)( s/o\\s+\\p{Alnum}+| d/o\\s+\\p{Alnum}+)?(?-i)[\\p{Alnum} ]*";
 
     public final String fullName;
 
