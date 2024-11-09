@@ -2,25 +2,49 @@
 !include ../style.puml
 skinparam ArrowFontStyle plain
 
-Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
-Participant ":TransactionBookParser" as tbp LOGIC_COLOR
-Participant ":AddCommandParser" as acp LOGIC_COLOR
-Participant "command:AddCommand" as ac LOGIC_COLOR
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":TransactionBookParser" as TransactionBookParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant "command:AddCommand" as AddCommand LOGIC_COLOR
 
-[-> logic : execute
-activate logic
-logic -> abp ++: parseCommand(commandText)
-abp --> logic --: null
 
-logic -> tbp ++: parseCommand(commandText)
-create acp
-tbp -> acp
-tbp -> acp ++: parse(arguments)
-create ac
-acp -> ac ++: transaction
-ac --> acp --
-acp --> tbp --: command
-tbp --> logic --: command
+[-> LogicManager : execute(commandText)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(commandText)
+activate AddressBookParser
+
+AddressBookParser --> LogicManager : null
+deactivate AddressBookParser
+
+LogicManager -> TransactionBookParser : parseCommand(commandText)
+activate TransactionBookParser
+
+create AddCommandParser
+TransactionBookParser -> AddCommandParser : AddCommandParser()
+activate AddCommandParser
+
+AddCommandParser --> TransactionBookParser
+deactivate AddCommandParser
+
+TransactionBookParser -> AddCommandParser : parse(arguments)
+activate AddCommandParser
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(transaction)
+activate AddCommand
+
+AddCommand --> AddCommandParser :
+deactivate AddCommand
+
+AddCommandParser --> TransactionBookParser : command
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> TransactionBookParser
+destroy AddCommandParser
+
+TransactionBookParser --> LogicManager : command
+deactivate AddressBookParser
 
 @enduml
