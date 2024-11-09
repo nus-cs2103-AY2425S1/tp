@@ -304,6 +304,40 @@ results based on the specified criteria.
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="FindSequenceDiagram" />
 
+## Export feature
+
+### Implementation
+
+Step 1: The user executes `export`
+
+Step 2: The `export` command exports all data currently contained by DorManagerPro to a JSON file in the data folder.
+The name of the JSON file is the time of export.
+
+The following sequence diagram shows how a `export` command goes through the `Logic` component:
+
+
+## Import feature
+
+### Implementation
+
+The `import` command implements `Undoable`. The `import` command deletes the contacts whose `GradYear` field is earlier
+than the current year, deleting contacts who have graduated from the address book.
+The `clean` command is undoable.
+
+Given below is an example usage scenario and how the `import` command behaves at each step.
+
+Step 1. The user executes `import fp/./data/SaveFile3.json`
+
+Step 2. The 
+
+### Design considerations:
+
+*Aspect: The exact format of the FILE_PATH parameter
+
+The following sequence diagram shows how a `import` command goes through the `Logic` component:
+
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
