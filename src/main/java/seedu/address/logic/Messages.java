@@ -48,7 +48,7 @@ public class Messages {
     public static final String MESSAGE_EMPTY_DATE = "Date should not be blank!";
 
     public static final String MESSAGE_EMPTY_PERSON_LIST =
-            "Current person list is empty!\n" + "%1$s command must only be used on non-empty person list.";
+            "Current client list is empty!\n" + "%1$s command must only be used on non-empty client list.";
 
     public static final String MESSAGE_EMPTY_TRANSACTION_LIST =
             "Invalid command: The current transaction list is empty.";
