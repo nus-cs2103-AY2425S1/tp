@@ -54,20 +54,23 @@ Refer to the [Features](#features) below for more details.
 Our graphical user interface (GUI) consists of several parts, refer to the image below.
 
 1. **Menu Option**: By clicking the buttons here around the top right, you can exit the app or open the help window.
+
 2. **Command Input Box**: You may input commands here.
+
 3. **Result Display Panel**: Results of command execution and error messages are displayed here.
+
 4. **Person Cards Panel**: Person cards are listed here.
    ![UiTut](images/UiTut.png)
 
-### Command Popup!
+### Command PopUp!
 
 ![CommandPopUp](images/commandpopup.png)
 
-Our Command Suggestion Pop-Up helps you find the command you need with ease.
+Our Command Suggestion PopUp helps you find the command you need with ease.
 
-When you start typing in the command box and have **at least one** character entered, the pop-up will appear, suggesting possible commands to complete your input. 
+When you start typing in the command box and have **at least one** character entered, the PopUp will appear, suggesting possible commands to complete your input. 
 
-Each suggestion includes the correct command format and any required details to use it effectively.
+Each suggestion includes the command name, command format and any required details to use it effectively.
 
 To scroll through the suggestions:
 * Press `shift + up` or `shift + down` and the **current selection** will be highlighted in **blue**.  
@@ -79,6 +82,7 @@ Quickly complete your commands!
 Need a quick reference?
 * The suggestion will stay open as you finish your command so u can reference it in case you forget any syntax.
 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -86,6 +90,9 @@ Need a quick reference?
 <box type="info" seamless>
 
 **Notes about the command format:**<br>
+
+* Commands are case-sensitive!  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.  
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
