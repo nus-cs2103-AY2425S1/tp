@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list persons(UC02)
 2.  User requests to delete a specific person in the list
-3.  AddressBook deletes the person
+3.  PlanPal deletes the person
 
     Use case ends.
 
@@ -366,27 +366,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a.  PlanPal detects that the command given is invalid
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. PlanPal shows an error message.
 
       Use case resumes at step 2.
 
 **UC04 List Contacts by Role**
 
 **MSS**
-1. User requests to list contacts by role.
-2. PlanPal shows the contacts grouped by their assigned role (attendee, vendor, volunteer, sponsor).
+
+1. User requests to filter contacts by role.
+2. PlanPal displays a list of contacts matching the specified role.
+
+   Use case ends.
 
 **Extensions**
-* 1a. PlanPal detects that the command given is invalid
-    * 1a1. AddressBook shows an error message.
 
-        Use case resumes at step 1.
+* 1a. PlanPal detects that the command given is invalid.
+    * 1a1. PlanPal shows an error message indicating that the command syntax is incorrect.
 
+      Use case resumes at step 1.
 
-* 2a. No contacts are found for the requested role.
-    * 2a1. PlanPal shows a message: "No contacts found for the specified role."
+* 2a. No contacts are found for the specified role.
+    * 2a1. PlanPal displays a message that no users were found. 
 
-        Use case ends.
+      Use case ends.
 
 
 ### Non-Functional Requirements
