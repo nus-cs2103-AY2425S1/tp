@@ -155,7 +155,7 @@ Format: `edit INDEX [n/NAME] [c/COMPANY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]
 
 <box type="warning" seamless>
 
-**Note:** `edit` can only be used in person list view.
+**Note:** `edit` can only be used in client list view.
 </box>
 
 Examples:
@@ -177,7 +177,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 <box type="warning" seamless>
 
-**Note:** `find` can only be used in person list view.
+**Note:** `find` can only be used in client list view.
 </box>
 
 Examples:
@@ -197,7 +197,7 @@ Format: `delete INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `delete` can only be used in person list view.
+**Note:** `delete` can only be used in client list view.
 </box>
 
 Examples:
@@ -222,7 +222,7 @@ e.g. `0.5`
 
 <box type="warning" seamless>
 
-**Note:** `addt` can only be used in person list view.
+**Note:** `addt` can only be used in client list view.
 </box>
 
 Examples:
@@ -242,7 +242,7 @@ Format: `listt INDEX`
 
 <box type="warning" seamless>
 
-**Note:** `listt` can only be used in person list view.
+**Note:** `listt` can only be used in client list view.
 </box>
 
 Examples:
@@ -364,7 +364,7 @@ Delete | `delete INDEX`
 
 **Transaction Commands**
 
-For Person List View | Format
+For Client List View | Format
 --------------------|--------
 Add Transaction | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE`
 List Transactions | `listt INDEX`
