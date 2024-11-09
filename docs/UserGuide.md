@@ -18,31 +18,31 @@
 3. [**Starting HR Helper**](#3-starting-hr-helper)
 4. [**Features of HR Helper**](#4-features-of-hr-helper)
    
-    4.1 [**Authentication**](#41-authentication-)
+    4.1 [**Authentication**](#4-1-authentication)
     
-    4.2 [**Viewing help**](#42-viewing-help--help)
+    4.2 [**Viewing help**](#4-2-viewing-help-help)
 
-    4.3 [**Adding an employee**](#43-adding-an-employee--add)
+    4.3 [**Adding an employee**](#4-3-adding-an-employee-add)
 
-    4.4 [**Listing all employees**](#44-listing-all-employees--list)
+    4.4 [**Listing all employees**](#4-4-listing-all-employees-list)
 
-    4.5 [**Counting employees**](#45-counting-employees--count)
+    4.5 [**Counting employees**](#4-5-counting-employees-count)
 
-    4.6 [**Editing an employee**](#46-editing-an-employee--edit)
+    4.6 [**Editing an employee**](#4-6-editing-an-employee-edit)
     
-    4.7 [**Locating employee by name**](#47-locating-employees-by-name-find)
+    4.7 [**Locating employee by name**](#4-7-locating-employees-by-name-find)
 
-    4.8 [**Deleting an employe**](#48-deleting-an-employee--delete)
+    4.8 [**Deleting an employe**](#4-8-deleting-an-employee-delete)
 
-    4.9 [**Sorting employees**](#49-sorting-employees-sort)
+    4.9 [**Sorting employees**](#4-9-sorting-employees-sort)
 
-    4.10 [**Favoriting an employee**](#410-favoriting-an-employee--favorite)
+    4.10 [**Favoriting an employee**](#4-10-favoriting-an-employee-favorite)
 
-    4.11 [**Clearing all entries**](#411-clearing-all-entries--clear)
+    4.11 [**Clearing all entries**](#4-11-clearing-all-entries-clear)
 
-    4.12 [**Exiting HR Helper**](#412-exiting-hr-helper--exit)
+    4.12 [**Exiting HR Helper**](#4-12-exiting-hr-helper-exit)
 
-    4.13 [**Employee details window**](#413-employee-details-window)
+    4.13 [**Employee details window**](#4-13-employee-details-window)
 
 5. [**Command Summary**](#5-command-summary)
 6. [**FAQ**](#6-faq)
@@ -118,24 +118,29 @@ This user guide provides an overview for HR staff on the usage of HR Helper.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+
 ### 4.1 Authentication :
 
 Login to HR Helper with your username and password.
 
 Format:
 
-<img src = "images/authentication.png" width=300>
+<img src = "images/authentication.png" width=500>
+
+<box type="tip" seamless>
 
 **Tip:** Press `Enter` to go to the next field!
+</box>
 
 Examples:
 * For this version, the username is `test` and password is `test`.
 
-<img src = "images/HRHelperLoginOutput.png" width=300>
+<img src = "images/HRHelperLoginOutput.png" width=500>
+
+<box type="warning" seamless>
 
 **Warning:** Keep your credentials secure.
-
-We plan to implement adding more users in the future.
+</box>
 
 
 ### 4.2 Viewing help : `help`
@@ -147,20 +152,23 @@ Format: `help`
 <box type="tip" seamless>
 
 **Tip:** Use the help command anytime to quickly refresh on command usage.
+</box>
 
 Examples:
 
-<img src = "images/helpMessage.png" width=300> 
+<img src = "images/helpMessage.png" width=500 alt="output"> 
+
+<box type="warning" seamless>
 
 **Warning:** Clicking on the link will leave HR Helper.
+</box>
+
 
 ### 4.3 Adding an employee : `add`
 
 Adds an employee to the HR Helper.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/FAVORITE] [d/DEPARTMENT] [l/LEAVE]`
-
-`Add picture of expected output here`
 
 <box type="tip" seamless>
 
@@ -171,7 +179,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 f/true d/Operations l/12`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Road p/1234567 t/lazy f/true d/Marketing l/10`
 
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
+
 **Warning:** Duplicate employees with the same name cannot be added.
+</box>
+
 
 ### 4.4 Listing all employees : `list`
 
@@ -182,13 +196,18 @@ Format: `list`
 <box type="tip" seamless>
 
 **Tip:** `list` can be used to show all employees after using the `find` command.
+</box>
 
 Example:
-`Add picture of example here`
+* `list` shows all employees.
 
-`Add picture of expected output here`
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** Use this command before other commands like delete or edit to ensure you’re modifying the correct entry.
+</box>
+
 
 ### 4.5 Counting employees : `count`
 
@@ -208,9 +227,13 @@ Examples:
 * `count`
 * `count tag/Colleagues`
 
-`picture`
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** When using count t/TAG, ensure that the TAG exists and is spelled accurately; otherwise, the command may return zero results.
+</box>
+
 
 ### 4.6 Editing an employee : `edit`
 
@@ -234,9 +257,13 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-`picture`
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** Changes overwrite current data. Double-check inputs before saving.
+</box>
+
 
 ### 4.7 Locating employees by name: `find`
 
@@ -261,9 +288,13 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-`picture`
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** The find command only searches names. Ensure that names are correctly spelled.
+</box>
+
 
 ### 4.8 Deleting an employee : `delete`
 
@@ -284,9 +315,13 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-`picture`
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** This action is irreversible. Use list before delete to confirm the index.
+</box>
+
 
 ### 4.9 Sorting Employees: `sort`
 
@@ -307,9 +342,12 @@ Examples:
 * `sort friend` Sorts and displays all contacts tagged as friend.
 * `sort friend family` Sorts and displays contacts tagged as either friend or family.
 
-`picture`
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** Sorting by multiple tags may combine various groups, which can affect other commands relying on order.
+</box>
 
 
 ### 4.10 Favoriting an employee : `favorite`
@@ -323,8 +361,8 @@ Format: `favorite INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
   
 <box type="tip" seamless>
-<img src = "images/favorite.png" width=500>
 
+<img src = "images/favorite.png" width=500 alt="description">
 
 **Tip:** Use favorite for high-priority contacts, making them easier to locate with filtering or sorting.
 </box>
@@ -333,9 +371,13 @@ Examples:
 * `list` followed by `favorite 2` favorites the 2nd person in the address book.
 * `find Betsy` followed by `favorite 1` favorites the 1st person in the results of the `find` command.
 
-`Add picture of expected output here`
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** Avoid favoriting too many contacts, as an excessive number of favorites can make it challenging to identify key contacts quickly.
+</box>
+
 
 ### 4.11 Clearing all entries : `clear`
 
@@ -348,9 +390,16 @@ Format: `clear`
 **Tip:** Use clear only when resetting the database is intentional.
 </box>
 
-`picture`
+Examples:
+* `clear` resets the database in HR Helper.
+
+<img src = "" width=500 alt="output">
+
+<box type="warning" seamless>
 
 **Warning:** This action is irreversible. Back up data if necessary before clearing.
+</box>
+
 
 ### 4.12 Exiting HR Helper : `exit`
 
@@ -363,7 +412,11 @@ Format: `exit`
 **Tip:** Use exit only after confirming that all changes have been saved, as the program automatically saves data with each command.
 </box>
 
+<box type="warning" seamless>
+
 **Warning:** Exiting abruptly may interrupt ongoing processes. Use the exit command instead of closing the window directly to ensure a clean shutdown.
+</box>
+
 
 ### 4.13 Employee Details Window
 
@@ -373,7 +426,7 @@ The **Employee Details Window** allows HR personnel to view and edit detailed in
     - Select a person from the **Person List**.
     - Press the `Enter` key to open the **Person Details Window**.
 
-<img src = "images/persondetailswindow.png" width=300>
+<img src = "images/persondetailswindow.png" width=500>
 
 
 - **Name:** Editable text field displaying the employee's full name.
@@ -425,7 +478,7 @@ HR Helper data are saved automatically as a JSON file `[JAR file location]/data/
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file makes its format invalid, HR Helper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
