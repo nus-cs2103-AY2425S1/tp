@@ -11,7 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_CONSTRAINTS = "Invalid tag. You may only use the following tags: "
-            + "Buyer, Seller, Landlord, Tenant";
+            + "Buyer, Seller, Landlord, Tenant, Developer, Investor, Manager, Contractor";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;

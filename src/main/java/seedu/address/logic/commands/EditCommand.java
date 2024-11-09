@@ -58,7 +58,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String HELP_EDIT_COMMAND = "Edit Command \n"
             + "- Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [dt/TAG] [r/REMARK]\n"
-            + "- Example: edit 1 p/87654321 t/Tutor dt/Student"
+            + "- Example: edit 1 p/87654321 t/Buyer dt/Landlord "
             + "- INDEX is the index of the customer displayed. Items in the [square brackets] are optional"
             + " and can be input in any order! TAG can be both a tag to be added or removed, depending on"
             + " the prefix for the item.";

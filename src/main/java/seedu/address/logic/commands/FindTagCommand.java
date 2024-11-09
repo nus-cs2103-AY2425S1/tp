@@ -21,7 +21,7 @@ public class FindTagCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tags match any of the "
             + "specified tag names (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: TAG [MORE_TAGS]...\n"
-            + "Example: " + COMMAND_WORD + " friend family colleague";
+            + "Example: " + COMMAND_WORD + " buyer seller landlord";
     public static final String HELP_FINDTAG_COMMAND = "Findtag Command\n"
             + "- Format: findtag TAG [MORE_TAGS]\n"
             + "- Example: findtag HDB Condo\n"
