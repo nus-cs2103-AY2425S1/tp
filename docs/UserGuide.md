@@ -102,7 +102,7 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 
 </box>
 
-<d-table searchable>
+<d-table>
 
 | Commands                                                                    | Description                             | Format                                                                                                                                                         | Examples                                                                     | 
 |-----------------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
@@ -126,8 +126,33 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 
 </d-table>
 
-## Parameter Constraints
-<!-- TODO: Parameter constraints table -->
+## Parameter Constraints Table
+<d-table>
+
+| Parameters            | Description                                       | Constraints                                                                                                                                                                                                                                                                                                                                                           | Examples                                            | 
+|-----------------------|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| `[NAME]`              | Client's name                                     | `Alphanumeric Characters`                                                                                                                                                                                                                                                                                                                                             | `Jason 1 Lee`, `Phua Chu Kang 2` , `123456789`      |
+| `[PHONE_NUMBER]`      | Client's phone number                             | `At least 3 Numeric Characters` without spaces.                                                                                                                                                                                                                                                                                                                       | `999`, `98123333` , `123123`                        |
+| `[EMAIL]`             | Client's email address                            | Two segments delimited by `@`. <br/> **First** segment to include `Alphanumeric` with optionally `+_.-` characters. <br/> **Second** segment to include `Alphanumeric` with optionally `-` character but to include a valid top-level domain (TLD). <br/> **Both** segments must only start with `Alphanumeric` characters excluding `_` and must not contain spaces. | `jasonlee@example.com`, `user.name+tag@example.com` |
+| `[TAG]...`            | Client's tags                                     | Only accepts `alphanumeric characters` without spaces.                                                                                                                                                                                                                                                                                                                | `FRIENDS`, `ANNOYING` , `LOVERBOY`                  |
+| `[ADDRESS]`           | Client's rental address                           | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[RENTAL_START_DATE]` | Client's rental start date                        | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[RENTAL_END_DATE]`   | Client's rental start date                        | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[MONTHLY_RENT_AMT]`  | Client's rent due day of the month                | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[DEPOSIT_AMT]`       | Client's rental deposit amount                    | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[CUSTOMER_LIST]`     | Client's rental customer list                     | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[CLIENT_INDEX]`      | Client index on the client list panel             | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                            | `1`                                                 |
+| `[RENTAL_INDEX]`      | Rental index on the rental information list panel | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                            | `1`                                                 |
+
+</d-table>
+<box type="tip" light>
+
+For future enhancements and improvements of parameter constraints, please visit our [developer guide](https://ay2425s1-cs2103t-t15-1.github.io/tp/DeveloperGuide.html#appendix-future-enhancements).
+</box>
+
+## Duplicate Client Detection
+
+A client is only considered as duplicate **if and only if** the entire parameter `[NAME]`, `[PHONE_NUMBER]` and `[EMAIL_ADDRESS]` are **exactly the same**.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
@@ -155,14 +180,16 @@ Format: `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}…​`
 
 <box type="important" seamless>
 
-**Constraints:** A client must have at least **either** **one phone number** or **one email address**.
-
+**Constraints:** 
+1. A client must have at least **either** **one phone number** or **one email address**.
 </box>
 
 <box type="tip" seamless>
 
 <!--TODO: CLARIFY IF SHOULD WE CAP IN THE APP ITSELF? OR SHOULD WE LET IT BE "INFINITE" -->
-**Tip:** A client can have any number of tags, ranging from 0 to infinity.
+**Tip:** 
+1. A client can have any number of tags, ranging from 0 to infinity.
+2. A client's name with special characters, such as `Ravi S/O Ramasamy` will not be accepted. Please omit any special character within the name such as `Ravi SO Ramasamy`.
 
 </box>
 
@@ -300,7 +327,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 * The `CLIENT_INDEX` refers to the index number shown in the displayed client list and must be a positive integer starting from 1.
 * A client **name** cannot be empty.
 * A client must have at least **either** **one phone number** or **one email address**.
-
+* Editing a client's tag will remove all existing tags and replace with the newly updated tags.
 </box>
 
 <box type="tip" seamless>
@@ -308,7 +335,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 **Tip:** 
 * You can **remove** a client's existing phone number or email address by providing an empty input after `p/` or `e/` respectively.
 * You can **remove** a client's existing tags by providing an empty input after `t/`.
-
+* A client's name with special characters, such as `Ravi S/O Ramasamy` will not be accepted. Please omit any special character within the name such as `Ravi SO Ramasamy`.
 </box>
 
 <box type="info" light>
