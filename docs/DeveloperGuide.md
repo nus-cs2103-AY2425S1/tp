@@ -17,7 +17,7 @@ _{ list here sources of all reused/adapted ideas, code, documentation, and third
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -64,7 +64,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic Component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -98,7 +98,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
-How the `Logic` component works:
+How the `Logic` Component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
@@ -120,7 +120,7 @@ How the parsing works:
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
-The `Model` component,
+The `Model` Component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the address book data i.e., all `Task` objects (which are contained in a `UniqueTaskList` object).
@@ -138,7 +138,7 @@ The `Model` component,
 </box>
 
 
-### Storage component
+### Storage Component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -149,7 +149,7 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
@@ -159,7 +159,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] Undo/Redo feature
 
 #### Proposed Implementation
 
@@ -237,9 +237,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
 
-#### Design considerations:
+#### Design Considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How Undo & Redo Executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
@@ -250,7 +250,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Data Archiving
 
 The data archiving feature allows for the backup and restoration of data by compressing it into a single archive file (e.g., `.zip`). This feature can be useful for storage and data retrieval.
 
@@ -266,7 +266,7 @@ In future releases, additional features may be implemented.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-Ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -278,49 +278,50 @@ In future releases, additional features may be implemented.
 
 ## **Appendix: Requirements**
 
-### Product scope
+### Product Scope
 
-**Target user profile**:
+**Target User Profile**:
 
-* nurse in the healthcare industry managing patients
-* has many patients across different wards with varying care levels
+* Private nurse in the healthcare industry managing patients
+* Has many patients across different wards with varying care levels (priority levels)
+  * where each patient has varying tasks
 * Mainly done in desktop app
 * Used to typing to fill out user information
-* is comfortable using CLI
+* Is comfortable using CLI
 
 **Value proposition**: 
 provides a patient management system for nurses to use which is faster than GUI/mouse driven apps
 
 
-### User stories
+### User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​  | I want to …​                                       | So that I can…​                                                                |
 |----------|----------|----------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *`  | nurse    | add in emergency contact numbers                   | refer to them during an emergency                                              |
-| `* * *`  | nurse    | delete emergency contact numbers                   | remove irrelevant emergency contacts                                           |
-| `* * *`  | nurse    | assign multiple categories to a patient            | quickly identify the care level                                                |
-| `* * *`  | nurse    | add tasks                                          | track what task needs to be done                                               |
-| `* * *`  | nurse    | delete tasks                                       | remove irrelevant tasks                                                        |
-| `* * *`  | nurse    | assign priority levels to patients                 | recognize which patients need more immediate attention                         |
-| `* * *`  | nurse    | add tags to patients                               | recognize the allergies for each patient                                       |
-| `* * `   | nurse    | change the priority level for each patient         | reflect changes in their care status                                           |
-| `* * `   | nurse    | reset the priority level for each patient          | reflect changes in their care status                                           |
-| `* *`    | nurse    | edit the name for each patient                     | reflect changes in the event that the information was keyed in wrongly         |
-| `* *`    | nurse    | edit the phone number for each patient             | reflect changes in the event that the information was keyed in wrongly         |
-| `* *`    | nurse    | edit the emergency contact for each patient        | reflect changes in the event that the information was keyed in wrongly         |
-| `* *`    | nurse    | edit tags for each patient                         | reflect changes in their allergies                                             |
-| `* *`    | nurse    | find a patient by their name                       | access their details quickly without scrolling through the list                |
-| `* *`    | nurse    | find tasks by their description                    | access patients with the same task quickly without scrolling through the list  |
-| `* *`    | nurse    | list tasks that are incomplete                     | prioritize my work during the shift                                            |
-| `* *`    | nurse    | list tasks that are complete                       | double check that my the tasks that I have marked complete are indeed complete |
-| `* *`    | nurse    | mark tasks as complete                             | update the tasks that I have completed                                         |
-| `* *`    | nurse    | unmark tasks                                       | to unmark the tasks that I have accidentally marked as completed               |
-| `*`      | nurse    | have the ability to clear all data from the system | reset the system for a new set of patients efficiently                         |
-| `*`      | nurse    | be able to exit the program using a command        | quickly close the application when done                                        |
-| `*`      | nurse    | edit the email for each patient                    | reflect changes in the event that the information was keyed in wrongly         |
-| `*`      | nurse    | edit the address for each patient                  | reflect changes in the event that the information was keyed in wrongly         |
+| `* * *`  | Nurse    | add in emergency contact numbers                   | refer to them during an emergency                                              |
+| `* * *`  | Nurse    | delete emergency contact numbers                   | remove irrelevant emergency contacts                                           |
+| `* * *`  | Nurse    | assign multiple categories to a patient            | quickly identify the care level                                                |
+| `* * *`  | Nurse    | add tasks                                          | track what task needs to be done                                               |
+| `* * *`  | Nurse    | delete tasks                                       | remove irrelevant tasks                                                        |
+| `* * *`  | Nurse    | assign priority levels to patients                 | recognize which patients need more immediate attention                         |
+| `* * *`  | Nurse    | add tags to patients                               | recognize the allergies for each patient                                       |
+| `* * `   | Nurse    | change the priority level for each patient         | reflect changes in their care status                                           |
+| `* * `   | Nurse    | reset the priority level for each patient          | reflect changes in their care status                                           |
+| `* *`    | Nurse    | edit the name for each patient                     | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | Nurse    | edit the phone number for each patient             | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | Nurse    | edit the emergency contact for each patient        | reflect changes in the event that the information was keyed in wrongly         |
+| `* *`    | Nurse    | edit tags for each patient                         | reflect changes in their allergies                                             |
+| `* *`    | Nurse    | find a patient by their name                       | access their details quickly without scrolling through the list                |
+| `* *`    | Nurse    | find tasks by their description                    | access patients with the same task quickly without scrolling through the list  |
+| `* *`    | Nurse    | list tasks that are incomplete                     | prioritize my work during the shift                                            |
+| `* *`    | Nurse    | list tasks that are complete                       | double check that my the tasks that I have marked complete are indeed complete |
+| `* *`    | Nurse    | mark tasks as complete                             | update the tasks that I have completed                                         |
+| `* *`    | Nurse    | unmark tasks                                       | to unmark the tasks that I have accidentally marked as completed               |
+| `*`      | Nurse    | have the ability to clear all data from the system | reset the system for a new set of patients efficiently                         |
+| `*`      | Nurse    | be able to exit the program using a command        | quickly close the application when done                                        |
+| `*`      | Nurse    | edit the email for each patient                    | reflect changes in the event that the information was keyed in wrongly         |
+| `*`      | Nurse    | edit the address for each patient                  | reflect changes in the event that the information was keyed in wrongly         |
 
 
 ### Use cases
@@ -534,7 +535,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -545,7 +546,7 @@ testers are expected to do more *exploratory* testing.
 
 </box>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
@@ -562,7 +563,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a Patient
 
 1. Deleting a patient while all patients are being shown
 
@@ -598,7 +599,7 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)  
        Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
 
-### Changing Priority
+### Changing Priority Level
 
 1. Changing a priority level of a patient
 
