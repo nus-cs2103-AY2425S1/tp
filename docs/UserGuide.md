@@ -23,7 +23,7 @@ any traditional point-and-click management app.
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/CampusConnect/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-4/tp/releases/).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CampusConnect.
 
@@ -75,26 +75,29 @@ any traditional point-and-click management app.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+**Notes about duplicate contacts:**<br>
+* A contact is considered a duplicate of another if it has the same Name, Phone or Email as the other contact.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 Action     | Format, Examples
 :--------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------:
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find by contact information**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
-**Delete tag** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
-**Add tag** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
-**Categorize tag** | `cattag t/TAG [t/MORE_TAGS…]​ CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
-**Undo action** | `undo`
-**Redo action** | `redo`
-**List**   | `list`
-**Help**   | `help`
-
+**[Add](#adding-a-person-add)**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho p/91231234 e/jamesho@example.com t/friend t/classmate`
+**[Clear](#clearing-all-entries-clear)**  | `clear`
+**[Delete](#deleting-a-person-delete)** | `delete INDEX`<br> e.g., `delete 3`
+**[Edit](#editing-a-person-edit)**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Find by contact information](#finding-persons-by-contact-information-find)**   | `find PREFIX/KEYWORD [PREFIX/MORE_KEYWORDS]…​`<br> e.g., `find n/James t/floorball`   
+**[Delete tag](#deleting-a-persons-tag-deltag)** | `deltag INDEX t/KEYWORD` <br> e.g. `deltag 1 t/friend`
+**[Add tag](#adds-tags-to-a-specific-person-addtag)** | `addtag INDEX t/KEYWORD [t/MORE_TAGS]…​` <br> e.g. `addtag 1 t/friend t/classmate`
+**[Categorize tag](#categorizing-a-tag-cattag)** | `cattag t/TAG [t/MORE_TAGS…​] CATEGORY` <br> e.g. `cattag t/floorball t/mahjong activity`
+**[Undo action](#undo-a-command-undo)** | `undo`
+**[Redo action](#redo-a-command-redo)** | `redo`
+**[List](#listing-all-persons-list)**   | `list`
+**[Help](#viewing-help-help)**   | `help` 
 --------------------------------------------------------------------------------------------------------------------
+## Commands
 
 ### Viewing help : `help`
 
@@ -106,7 +109,7 @@ When clicked, this hyperlink will show the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a person to CampusConnect.
 
@@ -118,6 +121,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
 </box>
 
 * The phone number must follow the Singaporean convention: have 8 digits, start with 6, 8, or 9, and consist only of numbers.
+* Duplicate contacts cannot be added to the list.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com`
@@ -141,12 +145,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed, i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* After editing the contact, it should not be a duplicate of another contact.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by contact information: `find`
+### Finding persons by contact information : `find`
 
 Finds persons whose names, email address, contact number, or tag contain any of the given keywords.
 
@@ -184,7 +189,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in CampusConnect.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adds tags to a specific person : `addtag`
+### Adding tags to a specific person : `addtag`
 
 Adds the specified person's tag.
 
@@ -211,6 +216,7 @@ Format: `deltag INDEX t/TAG`
 * The index **must be a positive integer** 1, 2, 3, …​
 * Only one tag can be deleted at a time.
 * The list of the tag will be updated accordingly.
+
 Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
@@ -241,9 +247,9 @@ Format: `cattag t/TAG [t/MORE_TAGS]…​ CATEGORY`
 * Only one category is allowed to be entered per command, i.e. `cattag t/tag1 acads t/tag2 general` is not allowed.
 
 Examples:
-* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and color of `t/CS2100` become `Gold`.
-* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with color `Blue`. 
-* Not-yet categorized tags have color `Grey` by default.
+* `cattag t/CS2100 acads` categorizes the tag `CS2100` under `Academics` and display colour of the tag`CS2100` becomes `Gold`.
+* `cattag t/floorball t/mahjong activity` categorizes both tags `floorball` and `mahjong` under `Activities` with colour `Blue`. 
+* Newly created tags (by [`add`](#adding-a-person-add) or [`addtag`](#adds-tags-to-a-specific-person--addtag)) will have category `General` and colour `Grey` by default.
 
 ![cattag response image](images/cattagResponse.png)
 ### Undo a command : `undo`
@@ -254,14 +260,16 @@ Format: `undo`
 
 * Reverts the state of CampusConnect to the one before the most recent command, if any.
 * When the oldest version of CampusConnect is reached, `undo` command will cause an exception to be thrown
+* Only commands that modify the data of CampusConnect can be undone. Commands such as `list` and `find` will not be undone.
 
-### Redo a command: `redo`
+### Redo a command : `redo`
 
 Reapplies a command that was previously undone by `undo`.
 
 Format: `redo`
 
 * Advances CampusConnect to the state it was in before the most recent `undo` command, if any.
+* Only commands that modify the data of CampusConnect can be redone. Commands such as `list` and `find` will not be redone.
 * Note: If a new command (excluding `redo` or `undo`) is executed after an `undo`, the redo history is cleared, and further `redo` will not be possible.
 
 ### Clearing all entries : `clear`
@@ -302,7 +310,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.

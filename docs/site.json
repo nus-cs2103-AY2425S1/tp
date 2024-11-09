@@ -1,8 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "CampusConnect",
-  "titleSuffix": "CampusConnect Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/CampusConnectLogo.png",
   "style": {
     "codeTheme": "light"
   },

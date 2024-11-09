@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# CampusConnect Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -14,6 +14,8 @@
 ## **Acknowledgements**
 
 * Our name, **CampusConnect**, was inspired by the NUS internship portal [**TalentConnect**](https://nus-csm.symplicity.com/).
+* Our **CampusConnect** logo reuses the [**NUS logo**](https://nus.edu.sg/identity/guidelines/logo-colour-and-background)
+* Our help window icon uses a cartoon representation of the [**NUS mascot on the NUS main reddit page**](https://www.reddit.com/r/nus/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -250,23 +252,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo & redo executes**
 
 * **Alternative 1 (current choice):** Saves the entire CampusConnect.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
+* **Alternative 2:** Each command that changes the state stores the change that it has made.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+  * Cons: Difficult and tedious to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,7 +278,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:  university students   
+**Target user profile**:  NUS undergraduate students
    
 * has a need to manage a significant number of contacts  
 * prefer desktop apps over other types   
@@ -510,7 +504,15 @@ before the command was executed.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **GUI**: The *Graphical User Interface*, through which the user can input commands and view contacts and tags.
+* **Field**: An attribute possessed by a contact, namely Phone number, Tags, Name and Email.
+* **Prefix**: An identifier used in commands to indicate which field is referred to. For the 4 fields Phone, Name, Tags and Email,
+    the *prefixes* would be `p/`, `t/`, `n/` and `e/` respectively.
+* **Duplicate Contact**: A contact that has the same Phone, Email or Name as another contact.
+* **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories.
+* **Person List**: The scrollable list of contacts in the GUI displaying all contacts and the respective values for their fields.
+* **Commands affected by `undo` and `redo`**: These refer to all commands that affect the *state* of the Tag List and Contact List
+  in **CampusConnect** and exclude `list` and `find`, as they do not alter the state of the contact or tag list.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -540,32 +542,63 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    1. Test case: `delete 1`<br>
+       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete 0`<br>
+       Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Categorizing a tag
+
+1. Categorizing an existing tag
+   1. Prerequisites: Ensure that the tag `CS2103` exists and is under a category other than `Academics` (Gold).
+   2. Test case: `cattag t/CS2103 acads` </br>
+      Expected: Success message is shown. All occurrences of the tag `CS2103` in the person list on the bottom left and tag list on the bottom right are set to `Academics` category. Colour of tag `CS2103` set to Gold.
+2. Attempting to categorize a non-existent tag
+   1. Prerequisites: Ensure that tag `A` does not exist yet.
+   2. Test case: `cattag t/A activity` </br>
+      Expected: Error message "`Tag not found: [A]`" is shown, indicating that tag `A` does not exist.
+3. Attempting to categorize to an invalid category
+   1. Prerequisites: Ensure that tag `CS2103` is still present.
+   2. Test case: `cattag t/CS2103 foo` </br>
+      Expected: Error message "`Invalid category: foo`" is shown.
+4. Attempting to categorize an **invalid tag** to an **invalid category**
+   1. Prerequisites: Ensure that tag `A` does not exist yet.
+   2. Test case: `cattag t/A foo` </br>
+      Expected: Error message "`Invalid category: foo`" is shown. Message for invalid tag is not shown for this case.
+
+### Undoing the last operation
+
+1. Undoing an execution that modifies the CampusConnect data
+
+   1. Prerequisites: Perform any operation that modifies the state (all executions except for list and find) to ensure there is an action to undo.
+
+   1. Test case: undo 
+      Expected: The last operation is undone, restoring the previous state. The list updates accordingly, and a status message confirms the undo action.
+
+   1. Test case: undo immediately after starting the application (with no operations performed)
+      Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
 
 ### Adding a tag
-1. Deleting a tag while all tags are being shown
+1. Adding a tag while all tags are being shown
+
    1. Prerequisites: There are 2 person in the list. First person on the list has tag `CS2100`, second person has tags `floortball` and `friends`. 
+
    1. Test case: `addtag 1 t/CS2040S`<br>
       Expected: The first person now has 2 tags `CS2100` and `CS2040S`. The tag lists are updated accordingly.
+      
    1. Test case: `addtag 2 t/homie t/homie`
       Expected: The second person now has 3 tags `floortball`, `friends` and `homie`. 
+      
    1. With the following test case:
       1. `addtag 1 t/CS2040s`
       1. Test case: `addtag 1 t/CS2030s t/CS2040S`
@@ -574,31 +607,60 @@ testers are expected to do more *exploratory* testing.
       1. Test case: `addtag 2` <br>
          Expected: No new tag added. Error details shown in the status message. All status bar remain the same.
 
+### Finding a person
 
-### Saving data
+1. Finding a person with tags
 
-1. Dealing with missing/corrupted data files
+    1. Assumption: Pick any 2 tags (or substring of the tags) present in any contact in the contact list. Call these x and y.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Test case: `find t/x` where `x` is the substring/tag chosen<br> 
+       Expected: All contacts with tags containing x will be displayed with a success message.
 
-1. _{ more test cases …​ }_
+    1. Test case: `find t/x t/y` where `x` and `y` are the substrings/tags chosen<br>
+       Expected: The contact(s) with tags containing x or y will be displayed with a success message.
 
+1. Finding a person with multiple fields
+
+    1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
+   
+    1. Assumption: Pick any name and tag within the same contact. Call these name x and tag y.
+   
+    1. Test case: `find n/x t/y` where `x` and `y` are the name and tag chosen<br>
+       Expected: The contact(s) with name containing x and tags containing y will be displayed with a success message.
+
+1. Other incorrect find commands to try: `find`, `find x` (with no prefix)<br>
+   Expected: No filtering of contacts will occur and an error message will be displayed.
+
+### Deleting a tag from a person
+
+1. Deleting a tag.
+
+    1. Prerequisites: There are contacts with tags in the contact list. Add some if this is not the case.
+
+    1. Assumption: Pick any contact with at least one tag. Let `i` be the index (one-based) of this contact and `x` be the name of the tag.
+
+    1. Test case: `deltag i t/x` where `i` is the index and `x` is the tag chosen<br>
+       Expected: The tag x will be deleted from person i and the tag will also disappear from the Tag List. A success message will be displayed.
+
+1. Other incorrect delete tag commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
+   Expected: No deleting of tags will occur and an error message will be displayed.
+   
 --------------------------------------------------------------------------------------------------------------------
-## **Future features**
+## **Appendix: Future features**
 Below is a list of features that we feel would further enhance the user experience.
 
-  | Feature                                                                         | Description                                                                         |
-  |---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-  | Clustering of tags                                                              | Group tags of the same categories together in the UI's display of the tags list.    |
-  | Pin contacts                                                                    | Keep selected contacts constantly shown at the top of the contacts list.            |
-  | Customize category colors                                                       | Change the colors of the categories to the user's preference.                       |
-  | Multiple numbers per contact                                                    | Allow more than one number per contact to accommodate multiple contact numbers.     |
-  | Custom fields for contacts                                                      | Add custom fields to the contacts added.                                            |
-  | Custom shortcut commands                                                        | Add custom shortcut commands to streamline actions within the application.          |
-  | Delete tag from all contacts                                                    | Remove a specific tag from all contacts at once.                                    |
-  | Dark mode                                                                       | Include a dark mode theme for easier viewing in low light conditions.               |
-  | Copy contact information                                                        | Enable copying of contact information to reduce errors from manual copying.         |
-  | Export contacts                                                                 | Provide an option to export contact information for easier sharing.                 |
+  |                                    Feature                                     | Description                                                                        |
+  |:------------------------------------------------------------------------------:|------------------------------------------------------------------------------------|
+  |                               Clustering of tags                               | Group tags of the same categories together in the UI's display of the tags list.   |
+  |                                  Pin contacts                                  | Keep selected contacts constantly shown at the top of the contacts list.           |
+  |                           Customize category colors                            | Change the colors of the categories to the user's preference.                      |
+  |                          Multiple numbers per contact                          | Allow more than one number per contact to accommodate multiple contact numbers.    |
+  |                           Custom fields for contacts                           | Add custom fields to the contacts added.                                           |
+  |                            Custom shortcut commands                            | Add custom shortcut commands to streamline actions within the application.         |
+  |                          Delete tag from all contacts                          | Remove a specific tag from all contacts at once.                                   |
+  |                                   Dark mode                                    | Include a dark mode theme for easier viewing in low light conditions.              |
+  |                            Copy contact information                            | Enable copying of contact information to reduce errors from manual copying.        |
+  |                                Export contacts                                 | Provide an option to export contact information for easier sharing.                |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -620,3 +682,6 @@ in the GUI required a restructuring of our GUI files (under the `ui` folder) and
 implementing this system was not easy but it did provide better tag customisation and control than AB3.
 
 Most commands implemented used the given `Command` classes as a reference, but modified them to adapt the respective `execute()` methods for the command.
+
+On top of all these, we had also modified the GUI, which required us to familiarise and work through the 
+quirks of JavaFX.
