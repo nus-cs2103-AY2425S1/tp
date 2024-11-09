@@ -27,7 +27,7 @@ GRUB is a quick and efficient solution to search for local dining options, tailo
 
    * `list` : Lists all restaurants.
 
-   * `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01` : Adds a restaurant named `Swensens` to the Address Book.
+   * `add n/Swensens p/61234567 e/swensens@goreply.com a/NUS street, COM 5, #01-01 pr/$` : Adds a restaurant named `Swensens` to the Address Book.
 
    * `delete 3` : Deletes the 3rd restaurant shown in the current list.
 
@@ -268,7 +268,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 -----------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 t/Halal`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pr/PRICE [r/RATING] [t/TAG]…​` <br> e.g., `add n/Mala Cold Pot t/Chinese e/foodsoyum@hotandspicy.com a/Changi Prison p/99991111 pr/$ t/Halal`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pr/PRICE] [r/RATING] [t/TAG]…​`<br> e.g.,`edit 1 p/98765432 e/swensens@plsreply.com`
