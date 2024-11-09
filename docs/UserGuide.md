@@ -74,13 +74,13 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
   E.g. in `cadd n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items without brackets are **mandatory**, you must provide a value.<br>
-  E.g. `n/NAME` for `cadd`, `c/CLIENT_INDEX` and `a/ADDRESS` for `radd`.
+  E.g. `n/NAME` for `cadd`, `CLIENT_INDEX` and `a/ADDRESS` for `radd`.
 
 * Items in square brackets `[]` are **mandatory** to have **at least one of them**, you should not use omit any of them in a command.<br>
   E.g `cedit` can be used as `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432` or `cedit 1 n/Steven Tan p/98765432`.
 
 * Items in curly brackets `{}` are **optional**, you may choose not to have them in your command.<br>
-  E.g `radd` can be used as `radd c/1 a/BLK 123 Bishan` or `radd c/1 a/BLK 123 Bishan m/3500`.
+  E.g `radd` can be used as `radd 1 a/140 Robinson Road, #03-05, Chow House` or `radd 1 a/140 Robinson Road, #03-05, Chow House m/3200 dd/10 d/0`.
 
 * Items with `...`​ after them can be used multiple times.<br>
   E.g. `k/KEYWORDS` for `find` can be used as `find k/Steven Tan k/98765432` (2 times), `find k/98765432` (1 time), etc.
@@ -102,34 +102,97 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 
 </box>
 
-<d-table searchable>
+<d-table>
 
-| Commands                                                                    | Description                             | Format                                                                                                                                                         | Examples                                                                     | 
-|-----------------------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| [**help**](#viewing-help-help)                                              | Show manual                             | `help`                                                                                                                                                         | -                                                                            |
-| [**cadd**](#adding-a-client-cadd)                                           | Add a client                            | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}...`                                                                                                            | `cadd n/Steven Tan e/steventan@abc.com p/98765432`                           |
-| [**radd**](#adding-a-rental-information-for-a-client-radd)                  | Add rental information to a client      | `radd c/CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {cl/CUSTOMER_LIST}`                   | `radd c/3 a/65 Den Road s/2024-09-01 e/2025-08-30 c/Steven Lim dd/20 m/2750` |
-| [**list**](#listing-all-clients-list)                                       | List all clients                        | `list`                                                                                                                                                         | -                                                                            |
-| [**rview**](#listing-rental-information-of-a-client-rview)                  | View rental information of a client     | `rview CLIENT_INDEX`                                                                                                                                           | `rview 1`                                                                    |
-| [**cedit**](#editing-a-client-cedit)                                        | Edit a client                           | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`                                                                                            | `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`                        |
-| [**redit**](#editing-a-client-s-rental-information-redit)                   | Edit rental information for a client    | `redit c/CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]` | `redit c/1 r/1 a/65 Anderson Road m/3000 d/0`                                |
-| [**find**](#locating-clients-find)                                          | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG]...`                                                                                 | `find k/Tan n/Steven Tan p/98765432`                                         |
-| [**cdelete**](#deleting-a-client-cdelete)                                   | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                         | `cdelete 3`                                                                  |
-| [**rdelete**](#deleting-a-rental-information-rdelete)                       | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                        | `rdelete c/1 r/2`                                                            |
-| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                         | `sort name`                                                                  |
-| [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                        | -                                                                            |
-| [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                    | -                                                                            |
-| [**import**](#importing-data-import)                                        | Import data from and external file      | `import`                                                                                                                                                       | -                                                                            |
-| [**export**](#exporting-data-export)                                        | Export address book data                | `export`                                                                                                                                                       | -                                                                            |
-| [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                        | -                                                                            |
-| [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                         | -                                                                            |
+| Commands                                                                    | Description                             | Format                                                                                                                                                        | Examples                                                         | 
+|-----------------------------------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+| [**help**](#viewing-help-help)                                              | Show manual                             | `help`                                                                                                                                                        | -                                                                |
+| [**cadd**](#adding-a-client-cadd)                                           | Add a client                            | `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}...`                                                                                                           | `cadd n/Steven Tan e/steventan@abc.com p/98765432`               |
+| [**radd**](#adding-a-rental-information-for-a-client-radd)                  | Add rental information to a client      | `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {cl/CUSTOMER_LIST}`                    | `radd 1 a/Blk 26 Defu Lane 10 #01-190 e/31/10/2024 m/2350 dd/15` |
+| [**list**](#listing-all-clients-list)                                       | List all clients                        | `list`                                                                                                                                                        | -                                                                |
+| [**rview**](#listing-rental-information-of-a-client-rview)                  | View rental information of a client     | `rview CLIENT_INDEX`                                                                                                                                          | `rview 1`                                                        |
+| [**cedit**](#editing-a-client-cedit)                                        | Edit a client                           | `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]...`                                                                                           | `cedit 1 n/Steven Tan e/steventan@abc.com p/98765432`            |
+| [**redit**](#editing-a-client-s-rental-information-redit)                   | Edit rental information for a client    | `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`  | `redit 1 r/1 a/10 North Bridge Rd #02-5125 m/3000 d/0`           |
+| [**find**](#locating-clients-find)                                          | Find information                        | `find [k/KEYWORDS...] [n/NAME...] [p/PHONE_NUMBER...] [e/EMAIL...] [t/TAG]...`                                                                                | `find k/Tan n/Steven Tan p/98765432`                             |
+| [**cdelete**](#deleting-a-client-cdelete)                                   | Delete a client                         | `cdelete CLIENT_INDEX`                                                                                                                                        | `cdelete 3`                                                      |
+| [**rdelete**](#deleting-a-rental-information-rdelete)                       | Delete rental information from a client | `rdelete c/CLIENT_INDEX r/RENTAL_INDEX`                                                                                                                       | `rdelete c/1 r/2`                                                |
+| [**sort**](#sorting-all-entries-sort)                                       | Sort clients by name                    | `sort`                                                                                                                                                        | `sort name`                                                      |
+| [**↑up ↓down arrow key**](#command-history-up-arrow-key-and-down-arrow-key) | Navigate command history                | `↑ up-arrow key` and `↓ down-arrow key`                                                                                                                       | -                                                                |
+| [**↹ Tab key**](#autofill-tab-key)                                          | Autofill value                          | `↹ Tab key`                                                                                                                                                   | -                                                                |
+| [**import**](#importing-data-import)                                        | Import data from an external file       | `import`                                                                                                                                                      | -                                                                |
+| [**export**](#exporting-data-export)                                        | Export all TrueRental's data            | `export`                                                                                                                                                      | -                                                                |
+| [**clear**](#clearing-all-entries-clear)                                    | Clear all client's details'             | `clear`                                                                                                                                                       | -                                                                |
+| [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                        | -                                                                |
 
 </d-table>
 
-## Parameter Constraints
-<!-- TODO: Parameter constraints table -->
+## Parameter Constraints Table
+<d-table>
+
+| Parameters            | Description                                       | Constraints                                                                                                                                                                                                                                                                                                                                                           | Examples                                            | 
+|-----------------------|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------|
+| `[NAME]`              | Client's name                                     | `Alphanumeric Characters`                                                                                                                                                                                                                                                                                                                                             | `Jason 1 Lee`, `Phua Chu Kang 2` , `123456789`      |
+| `[PHONE_NUMBER]`      | Client's phone number                             | `At least 3 Numeric Characters` without spaces.                                                                                                                                                                                                                                                                                                                       | `999`, `98123333` , `123123`                        |
+| `[EMAIL]`             | Client's email address                            | Two segments delimited by `@`. <br/> **First** segment to include `Alphanumeric` with optionally `+_.-` characters. <br/> **Second** segment to include `Alphanumeric` with optionally `-` character but to include a valid top-level domain (TLD). <br/> **Both** segments must only start with `Alphanumeric` characters excluding `_` and must not contain spaces. | `jasonlee@example.com`, `user.name+tag@example.com` |
+| `[TAG]...`            | Client's tags                                     | Only accepts `alphanumeric characters` without spaces.                                                                                                                                                                                                                                                                                                                | `FRIENDS`, `ANNOYING` , `LOVERBOY`                  |
+| `[ADDRESS]`           | Client's rental address                           | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[RENTAL_START_DATE]` | Client's rental start date                        | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[RENTAL_END_DATE]`   | Client's rental start date                        | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[MONTHLY_RENT_AMT]`  | Client's rent due day of the month                | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[DEPOSIT_AMT]`       | Client's rental deposit amount                    | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[CUSTOMER_LIST]`     | Client's rental customer list                     | <!-- TODO @GSL -->                                                                                                                                                                                                                                                                                                                                                    | <!-- TODO @GSL -->                                  |
+| `[CLIENT_INDEX]`      | Client index on the client list panel             | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                            | `1`                                                 |
+| `[RENTAL_INDEX]`      | Rental index on the rental information list panel | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                            | `1`                                                 |
+
+</d-table>
+
+<box type="warning" light>
+
+For future enhancements and improvements of parameter constraints, please visit our [developer guide](https://ay2425s1-cs2103t-t15-1.github.io/tp/DeveloperGuide.html#appendix-future-enhancements).
+</box>
+
+## Duplicate Client Detection
+
+A client is only considered as **duplicate** **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]` and `[EMAIL_ADDRESS]` are **exactly the same** (including case sensitivity).
+
+This is to allow the user to have a greater flexibility of manipulating the client's information.
+
+**For example:** All the clients stated below the initial client are **NOT CONSIDERED** as duplicates.
+
+<box type="info" light>
+
+An **initial client** with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`
+
+</box>
+
+<box type="success" light>
+
+**Not Duplicates:**
+
+1. A client with the name: `Jason Lee`, phone number: `99998888` and email address `jasonlee@example.com`.
+2. A client with the name: `Jason Lee`, phone number: `91231231` and email address `NOTjasonlee@example.com`.
+3. A client with the name: `Jason Lee`, phone number: `-` and email address `jasonlee@example.com`.
+4. A client with the name: `Jason Lee`, phone number: `91231231` and email address `-`.
+5. A client with the name: `JASON LEE`, phone number: `91231231` and email address `jasonlee@example.com`.
+
+<box type="info" seamless>
+
+**Note:** `-` signifies an empty parameter without any characters.
+
+</box>
+
+</box>
+
+<box type="wrong" light>
+
+**Duplicates:**
+
+1. A client with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 ### Viewing help : `help`
@@ -155,14 +218,16 @@ Format: `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}…​`
 
 <box type="important" seamless>
 
-**Constraints:** A client must have at least **either** **one phone number** or **one email address**.
-
+**Constraints:** 
+1. A client must have at least **either** **one phone number** or **one email address**.
 </box>
 
 <box type="tip" seamless>
 
 <!--TODO: CLARIFY IF SHOULD WE CAP IN THE APP ITSELF? OR SHOULD WE LET IT BE "INFINITE" -->
-**Tip:** A client can have any number of tags, ranging from 0 to infinity.
+**Tip:** 
+1. A client can have any number of tags, ranging from 0 to infinity.
+2. A client's name with special characters, such as `Ravi S/O Ramasamy` will not be accepted. Please omit any special character within the name such as `Ravi SO Ramasamy`.
 
 </box>
 
@@ -196,7 +261,7 @@ Format: `cadd n/NAME [p/PHONE_NUMBER] [e/EMAIL] {t/TAG}…​`
 
 Adds a rental information for the specific client to TrueRental.
 
-Format: `radd CLIENT_INDEX a/ADDRESS [s/RENTAL_START_DATE] [e/RENTAL_END_DATE] [dd/RENT_DUE_DATE] [m/MONTHLY_RENT] [d/DEPOSIT] [cl/CUSTOMER_LIST]`
+Format: `radd CLIENT_INDEX a/ADDRESS {s/RENTAL_START_DATE} {e/RENTAL_END_DATE} {dd/RENT_DUE_DATE} {m/MONTHLY_RENT} {d/DEPOSIT} {cl/CUSTOMER_LIST}`
 
 <box type="important" seamless>
 
@@ -300,7 +365,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 * The `CLIENT_INDEX` refers to the index number shown in the displayed client list and must be a positive integer starting from 1.
 * A client **name** cannot be empty.
 * A client must have at least **either** **one phone number** or **one email address**.
-
+* Editing a client's tag will remove all existing tags and replace with the newly updated tags.
 </box>
 
 <box type="tip" seamless>
@@ -308,7 +373,7 @@ Format: `cedit CLIENT_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`
 **Tip:** 
 * You can **remove** a client's existing phone number or email address by providing an empty input after `p/` or `e/` respectively.
 * You can **remove** a client's existing tags by providing an empty input after `t/`.
-
+* A client's name with special characters, such as `Ravi S/O Ramasamy` will not be accepted. Please omit any special character within the name such as `Ravi SO Ramasamy`.
 </box>
 
 <box type="info" light>
@@ -589,7 +654,7 @@ Please set up the following commands before proceeding with the example inputs a
   </a>
 </div>
 
-### Autofill: `Tab key`
+### Autofill: `↹ Tab key`
 
 Autofills command name, prefix and value of prefix.
 
