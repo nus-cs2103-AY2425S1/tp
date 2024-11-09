@@ -83,9 +83,9 @@ This user guide provides an overview for HR staff on the usage of HR Helper.
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds a contact named `John Doe` to the HR Helper list.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney f/ d/HR l/12 1` : Adds an employee named `John Doe` to the HR Helper list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd employee shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -171,7 +171,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/FAVORITE] 
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip:** An employee can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -240,11 +240,11 @@ Edits an existing employee in the HR Helper.
 
 Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boolean] [d/DEPARTMENT] [l/LEAVE]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
+* You can remove all the employee’s tags by typing `t/` without
     specifying any tags after it.
 
 <box type="tip" seamless>
@@ -253,8 +253,8 @@ Format: `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​ [f/Boo
 </box>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st employee to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd employee to be `Betsy Crower` and clears all existing tags.
 
 <img src = "" width=500 alt="output">
 
@@ -297,12 +297,12 @@ Examples:
 
 ### 4.8 Deleting an employee : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified employee from the address book.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
@@ -311,8 +311,8 @@ Format: `delete INDEX`
 </box>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd employee in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st employee in the results of the `find` command.
 
 <img src = "" width=500 alt="output">
 
@@ -351,12 +351,12 @@ Examples:
 
 ### 4.10 Favoriting an employee : `favorite`
 
-Favorites the specified person from the address book.
+Favorites the specified employee from the address book.
 
 Format: `favorite INDEX`
 
-* Favorites the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Favorites the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
 * The index **must be a positive integer** 1, 2, 3, …​
   
 <box type="tip" seamless>
@@ -367,8 +367,8 @@ Format: `favorite INDEX`
 </box>
 
 Examples:
-* `list` followed by `favorite 2` favorites the 2nd person in the address book.
-* `find Betsy` followed by `favorite 1` favorites the 1st person in the results of the `find` command.
+* `list` followed by `favorite 2` favorites the 2nd employee in the address book.
+* `find Betsy` followed by `favorite 1` favorites the 1st employee in the results of the `find` command.
 
 <img src = "" width=500 alt="output">
 
@@ -422,8 +422,8 @@ Format: `exit`
 The **Employee Details Window** allows HR personnel to view and edit detailed information about each employee efficiently. This guide provides a concise overview of how to use this feature effectively.
 
 - **Keyboard Shortcut:**
-    - Select a person from the **Person List**.
-    - Press the `Enter` key to open the **Person Details Window**.
+    - Select a employee from the **Employee List**.
+    - Press the `Enter` key to open the **Employee Details Window**.
 
 <img src = "images/persondetailswindow.png" width=500>
 
@@ -448,7 +448,7 @@ The **Employee Details Window** allows HR personnel to view and edit detailed in
 
 - **Save Changes:**
     - Press the `Enter` key to save all modifications.
-    - The window will close, and changes will reflect in the **Person List**.
+    - The window will close, and changes will reflect in the **Employee List**.
 
 - **Cancel Changes:**
     - Press the `Esc` key to discard all changes and close the window without saving.
