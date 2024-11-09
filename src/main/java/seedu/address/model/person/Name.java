@@ -26,10 +26,9 @@ public class Name {
      * @param name A valid name.
      */
     public Name(String name) {
-        assert name != null : "Name cannot be null";
         requireNonNull(name);
+        assert name != null : "Name cannot be null";
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        assert isValidName(name) : "Name is not valid";
         fullName = name;
     }
 
@@ -37,7 +36,6 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        assert test != null : "Test string for name validation cannot be null";
         return test.matches(VALIDATION_REGEX);
     }
 

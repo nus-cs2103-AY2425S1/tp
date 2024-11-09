@@ -26,7 +26,6 @@ public class Skills {
         assert skills != null : "Skills should not be null";
         checkArgument(isValidSkillsString(skills), MESSAGE_CONSTRAINTS);
         value = skills;
-        assert isValidSkillsString(value) : "Skills should match the expected pattern";
     }
 
     /**

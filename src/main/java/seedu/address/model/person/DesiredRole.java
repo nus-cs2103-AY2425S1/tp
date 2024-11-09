@@ -24,10 +24,9 @@ public class DesiredRole {
      * @param role A desired role.
      */
     public DesiredRole(String role) {
-        assert role != null : "Role cannot be null";
         requireNonNull(role);
+        assert role != null : "Role cannot be null";
         value = role.trim();
-        assert isValidDesiredRole(value) : "Desired role is not valid according to the required format";
     }
 
     /**

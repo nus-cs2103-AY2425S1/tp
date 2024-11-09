@@ -39,10 +39,9 @@ public class Email {
      * @param email A valid email address.
      */
     public Email(String email) {
-        assert email != null : "Email cannot be null";
         requireNonNull(email);
+        assert email != null : "Email cannot be null";
         checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        assert isValidEmail(email) : "Email is not valid according to the format";
         value = email;
     }
 
@@ -50,7 +49,6 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        assert test != null : "String for validation cannot be null";
         return test.matches(VALIDATION_REGEX);
     }
 

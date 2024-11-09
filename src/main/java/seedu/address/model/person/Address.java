@@ -25,10 +25,9 @@ public class Address {
      * @param address A valid address.
      */
     public Address(String address) {
-        assert address != null : "Address cannot be null";
         requireNonNull(address);
+        assert address != null : "Address cannot be null";
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        assert isValidAddress(address) : "Address does not match the required format";
         value = address;
     }
 
@@ -36,7 +35,6 @@ public class Address {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        assert test != null : "String for validation cannot be null";
         return test.matches(VALIDATION_REGEX);
     }
 
