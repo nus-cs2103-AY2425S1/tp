@@ -557,6 +557,10 @@ Don't worry about saving - VolunSync automatically saves everything you do! Ever
    - Volunteers cannot sign up for multiple events on the same day
    - If you try to assign a volunteer to an event on a day they're already signed up for another event, you'll see an error message
 
+1. **Creating Events that Span Multiple Days**
+   - Events that span multiple days are not supported
+   - You can only create events that start and end on the same day
+
 These known issues are actively being worked on, and we are continuously improving VolunSync to provide a better experience. Please stay tuned for future updates!
 
 [Back To Top :arrow_heading_up:](#learn-about-commands-supported-by-volunsync)
