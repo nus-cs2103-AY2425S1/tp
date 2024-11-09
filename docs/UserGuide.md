@@ -145,14 +145,44 @@ This project is built on top of [AddressBook-Level3 Project](https://se-educatio
 | `[RENTAL_INDEX]`      | Rental index on the rental information list panel | Only accepts `Positive Integer` up till the `last index` shown on the list                                                                                                                                                                                                                                                                                            | `1`                                                 |
 
 </d-table>
-<box type="tip" light>
+<box type="warning" light>
 
 For future enhancements and improvements of parameter constraints, please visit our [developer guide](https://ay2425s1-cs2103t-t15-1.github.io/tp/DeveloperGuide.html#appendix-future-enhancements).
 </box>
 
 ## Duplicate Client Detection
 
-A client is only considered as duplicate **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]` and `[EMAIL_ADDRESS]` are **exactly the same**.
+A client is only considered as **duplicate** **if and only if** all three parameters `[NAME]`, `[PHONE_NUMBER]` and `[EMAIL_ADDRESS]` are **exactly the same**.
+
+**For example:** All the clients stated below the initial client are **NOT CONSIDERED** as duplicates.
+
+<box type="info" light>
+
+An **initial client** with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`
+</box>
+
+<box type="success" light>
+
+**Not Duplicates:**
+
+1. A client with the name: `Jason Lee`, phone number: `99998888` and email address `jasonlee@example.com`.
+2. A client with the name: `Jason Lee`, phone number: `91231231` and email address `NOTjasonlee@example.com`.
+3. A client with the name: `Jason Lee`, phone number: `-` and email address `jasonlee@example.com`.
+4. A client with the name: `Jason Lee`, phone number: `91231231` and email address `-`.
+
+<box type="info" seamless>
+
+**Note:** `-` signifies an empty parameter without any characters.
+</box>
+</box>
+
+<box type="wrong" light>
+
+**Duplicates:**
+
+1. A client with the name: `Jason Lee`, phone number: `91231231` and email address `jasonlee@example.com`.
+</box>
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
