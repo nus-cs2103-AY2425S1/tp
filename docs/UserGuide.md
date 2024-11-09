@@ -146,13 +146,13 @@ Adds a person to the address book.
 Format: `add n/NAME e/EMAIL g/GENDER a/AGE [d/DETAIL] [t/STUDY_GROUP_TAG]…`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of study group tags (including 0), and any extra duplicate study group tags will be ignored automatically
+A person can have any number of study group tags (including 0), and any extra duplicate study group tags will be ignored automatically.
 </div>
 
-* Email, gender and study group tags are **case-insensitive**
-* Valid entries for gender are M/m/F/f
-* Age must be a non-negative integer between 0 and 150 (both inclusive)
-* Two contacts are considered **duplicates** if they share the same **email** address
+* Email, gender and study group tags are **case-insensitive**.
+* Valid entries for gender are M/m/F/f.
+* Age must be a non-negative integer between 0 and 150 (both inclusive).
+* Two contacts are considered **duplicates** if they share the same **email** address.
 
 Examples:
 * `add n/John Doe e/johnd@example.com g/M a/30 d/to be assigned t/1A t/2B`
@@ -171,11 +171,11 @@ Edits an existing person in the address book.
 Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [d/DETAIL] [t/ADD_TAG]… [-t/DELETE_TAG]…`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Any extra duplicate study group tags in the input will be ignored automatically
+Any extra duplicate study group tags in the input will be ignored automatically.
 </div>
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …
+* The index **must be a positive integer** (e.g., 1, 2, 3, …).
 * At least one of the optional fields must be provided.
 * When editing tags:
   * Prefix:`[t/ADD-TAG]`
@@ -190,7 +190,7 @@ Any extra duplicate study group tags in the input will be ignored automatically
 
 Examples:
 *  `edit 1 a/29 e/johndoe@example.com` Edits the age and email address of the 1st person to be `29` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/1B -t/2B` Edits the name of the 2nd person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`
+*  `edit 2 n/Betsy Crower t/1B -t/2B` Edits the name of the 2nd person to be `Betsy Crower`, adds a new tag `1B` and deletes existing tag `2B`.
 
 ### Deleting persons : `delete`
 
@@ -198,8 +198,8 @@ Deletes the specified person(s) from the address book.
 
 Format: `delete [INDEX | INDEX-INDEX]…`
 
-* Deletes the person at the specified `INDEX` or range of indices
-* The index must be within the range
+* Deletes the person at the specified `INDEX` or range of indices.
+* The index must be within the number of participants in the list.
 * When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
 
 Examples:
@@ -220,11 +220,11 @@ Finds persons whose fields contain the given keywords.
 Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`
 
 * At least one of the optional criteria must be provided.
-* Each criterion can have more than one keyword. e.g., `n/alice bob hans`
-* The search is case-insensitive. e.g., `n/hans` will match `Hans`
-* The order of the keywords does not matter. e.g., `n/Hans Bo` will match `Bo Hans`
+* Each criterion can have more than one keyword. e.g., `n/alice bob hans`.
+* The search is case-insensitive. e.g., `n/hans` will match `Hans`.
+* The order of the keywords does not matter. e.g., `n/Hans Bo` will match `Bo Hans`.
 * Persons matching at least one keyword for **every specified criteria** will be returned.
-  e.g., `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person
+  e.g., `n/Alice Bob g/f` will return `{Alice Wang, …, Female, …}` person but not `{Bob Tan, …, Male, …}` person.
 * Each criterion is matched based on the following:
   * Name, Detail, Study Group Tag: Only full words will be matched e.g. `n/Han` will not match `Hans`, and `d/assign` will not match `To be assigned`.
   * Email: Any substring will be matched e.g. `e/han` will match `hans@example.com`.
@@ -232,11 +232,11 @@ Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL �
   * Gender: Only exact genders will be matched e.g. `g/m` will not match `f` and `F`, but `g/m f` will match all genders.
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/roy li alex e/example.com g/m t/1A 1B 2B` returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`<br>
+* `find n/John` returns `john` and `John Doe`.
+* `find n/roy li alex e/example.com g/m t/1A 1B 2B` returns records for `Alex Yeoh`, `David Li` and `Roy Balakrishnan`.<br>
   ![result for 'find' multiple](images/findMultipleCriteria.png)
 
-* `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`
+* `find a/30 40 50-60` returns all persons who are either `30`, `40`, or whose ages are `between 50 and 60`.
 
 ### Clearing listed persons : `clear`
 
