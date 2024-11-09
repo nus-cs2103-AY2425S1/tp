@@ -370,7 +370,7 @@ Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
 
 - Adds or updates attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - `DATE_TIME` refers to the date and time of attendance that you want to add or edit. It must be written in the format `dd/MM/yyyy HH:mm`.
-- `ATTENDANCE` refers to the attendance status, which must be either `Attended` or `Absent`. They are case-sensitive.
+- `ATTENDANCE` refers to the attendance status, which must be either `Attended` or `Absent`. They are not case-sensitive.
 - If the attendance record for `DATE_TIME` already exists, it will be updated with the new `ATTENDANCE`.
 
 Examples:
