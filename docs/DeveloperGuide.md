@@ -289,7 +289,7 @@ In future releases, additional features may be implemented.
 * Used to typing to fill out user information
 * Is comfortable using CLI
 
-**Value proposition**: 
+**Value proposition**:
 provides a patient management system for nurses to use which is faster than GUI/mouse driven apps
 
 
@@ -550,13 +550,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder. 
-   2. Open a terminal and navigate to the folder containing the jar file. 
+   1. Download the jar file and copy into an empty folder.
+   2. Open a terminal and navigate to the folder containing the jar file.
    3. Run the command `java -jar NovaCare.jar`<br>Expected: The app launches with a set of sample patients. The window size may not be optimal.
 
 2. Saving window preferences
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window. 
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by running the command `java -jar NovaCare.jar`.<br>Expected: The most recent window size and location is retained.
 
 3._{ more test cases …​ }_
@@ -581,9 +581,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a task to a patient while all patients are being shown
 
-   1. Prerequisites: Patient should already exist in the list. 
-   2. Test case: `addtask 1 d/Eat Medication`<br>Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated. 
-   3. Test case: `addtask 0 d/Eat Medication`<br>Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same. 
+   1. Prerequisites: Patient should already exist in the list.
+   2. Test case: `addtask 1 d/Eat Medication`<br>Expected: Task "Eat Medication" is added to the task list for the patient with ID 1. Details of the added task are shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `addtask 0 d/Eat Medication`<br>Expected: No task is added. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
    4. Other incorrect add task commands to try: `addtask`, `addtask x d/`, `addtask 1 d/` (where x is an invalid patient ID or description is missing)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
 
 ### Changing Priority Level
@@ -591,8 +591,8 @@ testers are expected to do more *exploratory* testing.
 1. Changing a priority level of a patient
 
    1. Prerequisites: List all patients using the `list` command. Patient should already exist in the list.
-   2. Test case: `priority 1 l/2`<br>Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated. 
-   3. Test case: `priority 0 l/2`<br>Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same. 
+   2. Test case: `priority 1 l/2`<br>Expected: Priority level 2 is assigned to the patient with ID 1. Details of the priority update are shown in the status message. Timestamp in the status bar is updated.
+   3. Test case: `priority 0 l/2`<br>Expected: No priority is assigned. Error details are shown in the status message indicating an invalid patient ID. Status bar remains the same.
    4. Other incorrect priority commands to try: `priority`, `priority x l/`, `priority 1 l/` (where x is an invalid patient ID or the priority level is missing or invalid)<br>Expected: Similar to previous. Error details are shown in the status message explaining the issue with the command input.
 
 For additional commands and further testing guidelines, refer to Help section in NovaCare.
@@ -605,7 +605,7 @@ Team size: 5
 
 This section outlines proposed improvements to address known feature flaws identified during testing and user feedback. Each planned enhancement targets a specific limitation in the current implementation, aiming to improve data accuracy, user experience, and overall system reliability. Below, we detail the issues and outline precise changes, including examples, to demonstrate how each improvement will better meet user needs.
 
-1. **Implement stricter email validation:** 
+1. **Implement stricter email validation:**
    * Currently, NovaCare's email validation only requires two alphanumeric characters for the `DOMAIN`, allowing invalid email formats such as `username@example`. This flaw compromises data accuracy and can lead to incorrect contact details, which is critical in a healthcare setting where reliable communication is essential.
    * We plan to enhance the email validation logic to enforce a domain format of `<subdomain>.<top-level domain>`, in which the top-level domain label must be at least 2 characters long. Each domain label must start and end with alphanumeric characters and consist of alphanumeric characters, separated only by hyphens, if any.
    * For example:
