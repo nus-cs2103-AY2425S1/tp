@@ -573,6 +573,7 @@ Preconditions: Installed the application
     - 3a1. TP displays a message indicating no students found.
 
       Use case ends.
+
 ### Non-functional requirements
 
 1. The system shall be capable of handling an increase in users (up to 10,000) without requiring a complete redesign.
