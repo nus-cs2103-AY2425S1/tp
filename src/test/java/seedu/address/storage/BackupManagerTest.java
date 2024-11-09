@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +31,14 @@ public class BackupManagerTest {
     private BackupManager backupManager;
     private Path backupDirectory;
     private Path sourceFile;
+
+    private static final DateTimeFormatter FILE_TIMESTAMP_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS");
+    private static final String BACKUP_FILE_REGEX =
+            "(\\d+)_(.*?)_(\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3})\\.json";
+    private static final Pattern BACKUP_FILE_PATTERN =
+            Pattern.compile(BACKUP_FILE_REGEX);
+
 
     @BeforeEach
     public void setUp() throws IOException {
@@ -195,6 +208,50 @@ public class BackupManagerTest {
     public void isBackupAvailable_backupDoesNotExist_returnsFalse() {
         // Check for a backup at index 0 when none exists
         assertFalse(backupManager.isBackupAvailable(0));
+    }
+
+    @Test
+    public void createIndexedBackup_maxBackupsReached_overwritesOldestBackup() throws IOException {
+        // Create MAX_BACKUPS backups to reach the limit
+        for (int i = 0; i < 10; i++) {
+            backupManager.createIndexedBackup(sourceFile, "action" + i);
+        }
+
+        // Capture the oldest backup's index and timestamp
+        Path oldestBackup = Files.list(backupDirectory)
+                .min(Comparator.comparing(this::getFileTimestamp))
+                .orElseThrow(() -> new IOException("No backups found"));
+
+        int oldestIndex = backupManager.extractIndex(oldestBackup);
+
+        // Create one more backup to trigger overwrite
+        int newIndex = backupManager.createIndexedBackup(sourceFile, "newAction");
+
+        // Verify that the oldest backup was overwritten
+        assertEquals(oldestIndex, newIndex, "New backup should overwrite the oldest backup's index");
+
+        // Ensure that the total number of backups does not exceed MAX_BACKUPS
+        long backupCount = Files.list(backupDirectory).count();
+        assertEquals(10, backupCount, "Total number of backups should not exceed 10");
+    }
+
+    /**
+     * Helper method to get the timestamp of a backup file for comparison.
+     */
+    private LocalDateTime getFileTimestamp(Path backupPath) {
+        String filename = backupPath.getFileName().toString();
+        Matcher matcher = BACKUP_FILE_PATTERN.matcher(filename);
+        if (matcher.matches()) {
+            String timestampStr = matcher.group(3);
+            return LocalDateTime.parse(timestampStr, FILE_TIMESTAMP_FORMATTER);
+        }
+        return LocalDateTime.MIN;
+    }
+    
+    @Test
+    public void isBackupAvailable_invalidIndex_returnsFalse() {
+        // Check for a backup with a negative index
+        assertFalse(backupManager.isBackupAvailable(-1));
     }
 
 }
