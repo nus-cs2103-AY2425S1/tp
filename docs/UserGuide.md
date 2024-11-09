@@ -106,11 +106,11 @@ e.g. The command `Help` is different from `help` and therefore, results in an `U
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 ### Listing all persons : `list -p`
 
@@ -122,6 +122,8 @@ Format: `list -p`
 
 **Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
 </box>
+
+![ListCommand.png](images/ListCommand.png)
 
 ### Adding a person: `add`
 
@@ -142,11 +144,12 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 Valid Examples:
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123`
 * This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
-![AddCommanFailureInvalidPhone.png](images/AddCommanFailureInvalidPhone.png)
+![AddCommandFailureInvalidPhone.png](images/AddCommandFailureInvalidPhone.png)
 
 Invalid Examples (Invalid Phone Number):
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12`
-* This command will not result in the following error message since the phone number must be at least 3 digits long.
+* This command will result in the following error message since the phone number must be at least 3 digits long.
+
 ![addPersonCommandFailure.png](images/addPersonCommandFailure.png)
 
 Invalid Examples (Duplicate Persons):
@@ -167,7 +170,8 @@ Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 * Existing values will be updated to the input values.
 
 Valid Examples (One field edited):
-*  `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+* `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
+* Note: this assumes that the address book contains at least 1 person.
 ![EditPersonExample1.png](images/EditPersonExample1.png)
 
 Valid Examples (Multiple fields edited):
@@ -179,6 +183,11 @@ Invalid Examples (Duplicate Persons):
 * Attempting to edit another contact: <br> e.g. `edit 2 -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be edited. 
 * The following error message will be shown:
 ![AddCommandDuplicate.png](images/AddCommandDuplicate.png)
+
+Invalid Examples:
+* `edit 1` 
+* This command will result in the following error message since at least one of the optional fields must be provided.
+![EditPersonInvalid1.png](images/EditPersonInvalid1.png)
 
 ### Locating persons by name: `find`
 
@@ -199,10 +208,18 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * You are recommended to execute `list -p` after `find` command to restore the original list.
 </box>
 
-Examples:
-* `find John` returns anyone with "John" as part of their name
-* `find benny williamson` returns anyone with `Benny` OR `Williamson` as part of their name<br>
-  ![result for 'find benny williamson'](images/findBennyWilliamsonResult.png)
+Valid Examples (Found 1 person):
+* `find John` returns anyone with `John` as part of their name
+![FindCommandExample1.png](images/FindCommandExample1.png)
+
+Valid Examples (Found multiple person):
+* `find Alex David` returns anyone with `Alex` OR `David` as part of their name<br>
+![FindCommandExample2.png](images/FindCommandExample2.png)
+
+Valid Examples (Found no person)
+* `find Magnus` 
+* Note: since there are no `Magnus` in the contact, 0 person is listed.
+![FindCommandExample3.png](images/FindCommandExample3.png)
 
 ### Deleting a person : `delete`
 
@@ -214,15 +231,23 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+<box type="warning" seamless>
+
+**Warning:**
+* No confirmation message is displayed.
+* This action is irreversible, you will have to use `add` command to add the contact again. 
+</box>
+
 Examples:
 * `list -p` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all persons : `clear -p`
 
-Clears all persons from the contact book.
+Clears all persons from the address book.
 
 Format: `clear -p`
+![ClearPersonCommand.png](images/ClearPersonCommand.png)
 
 ### Clearing all events : `clear -e`
 
@@ -245,27 +270,32 @@ Format: `list -e`
 
 Adds an event to the event book.
 
-Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION -a ATTENDEES` <br>
+Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION [-a ATTENDEES]` <br>
 **Note:** Dates are in (yyyy-mm-dd) format.
+
 
 <box type="tip" seamless>
 
 **Tip:** 
 * All parameters `EVENT_NAME`, `EVENT_START_DATE`, `EVENT_END_DATE`, `LOCATION` must be present but `ATTENDEES` is optional.
 * Indexes supplied to the `ATTENDEES` parameter must be based on existing contacts indexing in the Address Book.
-Note that the indexes are seperated by **spaces**.
+Note that the indexes are separated by **spaces**.
 </box>
 
 Examples:
 * `event -n Get Together Party -sd 2023-10-25 -ed 2023-10-27 -l MBS` adds a get together party event to the event book.
 * `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3` creates the birthday party event and adds the first 3 people in the contacts book to the event.
 
+Invalid examples:
+* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1, 2, 3`
+* This command will result in the following error message since the list of indexes must be separated by whitespaces, not anything else like commas.
+
 
 ### Updating an event: `update`
 
 Updates the details of an existing event in the address book.
 
-Format: `update -i INDEX -n NEW_NAME -sd NEW_START_DATE -ed NEW_END_DATE -l NEW_LOCATION -a NEW_ATTENDEES_INDICES -r REMOVED_ATTENDEES_INDICES`
+Format: `update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [-l NEW_LOCATION] [-a NEW_ATTENDEES_INDICES] [-r REMOVED_ATTENDEES_INDICES]`
 
 **Note:** Dates are in (yyyy-mm-dd) format.
 
@@ -293,6 +323,8 @@ Exits the program.
 
 Format: `exit`
 
+**Note:** the command is case-sensitive, the exact word 'exit' must be used.
+
 ### Saving the data
 
 LegacyLink data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -306,6 +338,7 @@ LegacyLink data are saved automatically as a JSON file `[JAR file location]/data
 **Caution:**
 If your changes to the data file makes its format invalid, LegacyLink will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the LegacyLink to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -321,6 +354,7 @@ Furthermore, certain edits can cause the LegacyLink to behave in unexpected ways
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **When creating 2 or more events that have the same name, start date, end date, and location**, it is possible for these events to have attendees which are subsets for each other, but not equal to each other. The remedy is to implement a more sophisticated duplicate event detection system to enhance user experience in the future.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -335,6 +369,7 @@ Action     | Format, Examples
 **Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear Person Book**  | `clear -p`
 **Add Event**     | `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION -a ATTENDEES` <br> e.g., `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3`
+**Cancel Event**  | `cancel INDEX` <br> e.g., `cancel 1`
 **Edit Event**     | `update -i INDEX [-n NEW_NAME] [-sd NEW_START_DATE] [-ed NEW_END_DATE] [-l NEW_LOCATION] [-a NEW_ATTENDEES_INDICES] [-r REMOVED_ATTENDEES_INDICES`] <br> e.g., `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -a 1 2 4 5 -r 3 6`
 **List Events**   | `list -e`
 **Clear Events**  | `clear -e`

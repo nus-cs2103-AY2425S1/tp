@@ -38,7 +38,8 @@ public class EventCommandParser implements Parser<EventCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EventCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_LOCATION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_START_DATE,
+                PREFIX_END_DATE, PREFIX_LOCATION, PREFIX_ATTENDEES);
         String name = argMultimap.getValue(PREFIX_NAME).get().trim();
         try {
             LocalDate startDate = LocalDate.parse(argMultimap.getValue(PREFIX_START_DATE).get().trim());
