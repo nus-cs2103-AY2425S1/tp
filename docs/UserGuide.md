@@ -154,18 +154,33 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM_NUMBER] [a/ADDRESS] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE_NUMBER] [g/GRADUATION_YEAR] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* * Once `ADDRESS`, `ROOM_NUMBER`, `EMERGENCY_NAME`, `EMERGENCY_PHONE`, and/or `GRADUATION_YEAR` has been specified, you cannot remove these fields.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
   specifying any tags after it.
 
+[!Note]
+> * A person can have up to 10 tags (including 0).
+> * `NAME` and `EMERGENCY_NAME` consist of alphabets, numbers, dashes (-) and apostrophes (').
+> * `PHONE_NUMBER` and `EMERGENCY_PHONE_NUMBER` consist of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
+> * `EMAIL` should be of the format `local-part@domain`.
+> * `ROOM_NUMBER` should be of the format `##-####`, where # refers to integer values. 
+> * `GRADUATION_YEAR` should be of the format `2YYY`.
+> * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
+
+> [!Warning]
+> If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
+> If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
+
+
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 en/Betsy Crower ep/+65 91235678 t/` Edits the name and phone number of the emergency contact of the 2nd person to be `Betsy Crower` and `+65 91235678` respectively, and clears all existing tags.
 
 ### Finding a person: `find`
 
@@ -331,20 +346,76 @@ Constraints:
 
 Duplicate handling:
 * Two resident student contacts with the same phone numbers are not allowed.
+
 > [!Note]
 > Constraint rationale: Phone number constraints are based on the upper and lower limit of country codes, area codes, and number digit lengths.
-> Duplicate handling rationale: Phone numbers are unique to each individual
+> 
+> Duplicate handling rationale: Phone numbers are unique to each individual.
 
 ### Email
 
 ### Address
 
+Format: String of any value.
+
+Constraints:
+* The first character of the string cannot be a whitespace.
+
+Duplicate handling:
+* Any number of students can have the same address.
+
+> [!Note]
+> Constraint rationale: A whitespace cannot be the first character of the string, such that " " cannot be a valid input.
+> 
+> Duplicate handling rationale: The same address can have multiple residents. Records of students who have graduated and who lived in the address can also be maintained.
+
 ### Tags
 
+Format: Alphanumeric string.
+
+Constraints:
+* Only alphanumeric characters and whitespaces are allowed.
+* 100 characters cannot be exceeded.
+
+Duplicate handling:
+* Any number of students can have the same tag.
+
+> [!Note]
+> Constraint rationale: The character limit ensures that the tag is concise for easy referencing. Whitespaces are allowed to define more complex positions that the person may hold, such as "Volleyball captain".
+
+
 ### Room number
+
+Format: `FF-RRRR`, where `FF` is the floor number, and `RRRR` is the unit number.
+
+Constraints:
+* `FF` is a floor number 2 digits long.
+* `RRRR` is a unit number 4 digits long.
+* `FF` and `RRRR` is separated with a single dash.
+
+Duplicate handling:
+* Any number of students can have the same room number.
+
+> [!Note]
+> Constraint rationale: 2 and 4 digits are provided respectively to floor and unit numbers to accommodate dormitories with many floors and/or units.
+> 
+> Duplicate handling rationale: The same room can have multiple residents. Records of students who have graduated and who lived in the room can also be maintained.
+
 
 ### Emergency contact name
 
 ### Emergency contact phone number
 
 ### Graduation year
+
+Format: `2YYY` to represent the year of graduation.
+
+Constraints:
+* Start the graduation year with `2`.
+* The next 3 digits are positive integers.
+
+Duplicate handling:
+* Any number of students can have the same graduation year.
+
+> [!Note]
+> Constraint rationale: The first digit of graduation year is set to 2 to minimise typos.
