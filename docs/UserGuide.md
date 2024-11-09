@@ -269,10 +269,21 @@ Flags are generally derived from the first letter of the data type, making them 
 
 In Prudy, arguments ensure that the command functions as expected. Without correct arguments, Prudy may display an error message indicating the input is invalid.
 
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Note on February Dates:**  
+Prudy allows flexibility in date inputs for February due to the variable number of days (28 or 29) depending on the year. If an invalid date between the maximum day of February and `02/31` is entered, Prudy will automatically adjust it to the maximum valid date for February in that year.
+
+**Examples:**
+* `02/31/2023` and `02/29/2023` will be automatically converted to `02/28/2023`.
+* `02/30/2024` and `02/31/2024` will be automatically converted to `02/29/2024`.
+</div>
+
 <div type="info" seamless>
 
 **Info:**
-In the following commands section below, arguments and flags enclosed in square brackets <code>[]</code> are optional, while those suffixed with <code>…</code> can be used any number of times. For example, in the command <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​</code>, the <code>[t/TAG]</code> part is optional and can be omitted if not needed. Furthermore, you can input multiple <code>[t/TAG]</code> in the above command.
+In the following [Command](#5-commands-overview) section below, arguments and flags enclosed in square brackets <code>[]</code> are optional, while those suffixed with <code>…</code> can be used any number of times. For example, in the command <code>add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​</code>, the <code>[t/TAG]</code> part is optional and can be omitted if not needed. Furthermore, you can input multiple <code>[t/TAG]</code> in the above command.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -288,19 +299,18 @@ Prudy uses a command-line interface with **four primary categories** of commands
 3. **Policy Management Commands**: Commands to manage policies for each client, including adding, editing, and deleting policies.
 4. **Claims Management Commands**: Commands for managing client claims, including adding, editing, and deleting claims.
 
+<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
+
+🔔
+**Notes:**
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, and `clear`) will be ignored. e.g., if the command specifies `help 123`, it will be interpreted as `help`.
+</div>
+
 ---
 
 ### 5.1 General Commands
 
 These commands help with **general navigation**, displaying help information, saving data, and exiting the program.
-
-<div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
-
-🔔
-**Note:**
-Extraneous parameters for commands that do not take in parameters (such as <code>help</code>, <code>list</code>, <code>exit</code>, and <code>clear</code>) will be ignored.
-e.g., if the command specifies <code>help 123</code>, it will be interpreted as <code>help</code>.
-</div>
 
 
 #### 5.1.1 Viewing Help : `help`
