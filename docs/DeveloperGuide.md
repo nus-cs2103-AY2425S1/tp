@@ -661,5 +661,20 @@ Team Size: 5
    > - Example: `filter_members_by_tag Team A` would display only members tagged as "Team A," while `sort_members_by_tag` would group all members with similar tags together.
 
    By adding these features, users can better manage and view group associations at scale.
+ 
+
+7. **Planned Enhancement: Preserve Points When Deleting a Session**  
+   Currently, deleting a session also removes the points associated with that session. While this may be the intended behavior for point tracking and the `delete_session` command, it can be problematic for users who want to keep a record of points earned without cluttering the UI with past sessions. As the number of sessions grows, users may find it increasingly difficult to manage sessions without removing essential points data.
+
+   **Example Requirement**:
+   > Allow sessions to be deleted with or without removing points previously awarded to members in those sessions.
+   > - Example: The user should be able to choose if deleting "Session A" should retain the points awarded to members during that session even after the session is removed from the list.
+
+   **Additional Suggestion**:
+   > Implement a command to manually adjust points for individual members, allowing users to make modifications directly as needed.
+   > - Example: The `adjust_points` command could allow manual changes to members’ points, streamlining point adjustments across various scenarios.
+
+   This enhancement would improve flexibility in point tracking, allowing users to manage sessions without losing historical points data and reducing the need to retain numerous sessions solely for tracking purposes.
+
 
 ---
