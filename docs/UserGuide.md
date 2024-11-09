@@ -82,6 +82,15 @@ Adds a person to TalentHub.
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+<div markdown="block" class="alert alert-info"> 
+
+**:information_source: Person constraints:**<br>
+
+- A person's name must be unique (case-insensitive).
+
+- A person's phone number must be unique.
+</div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags or none at all!
 The address and email address fields are also optional!
@@ -114,6 +123,15 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+
+<div markdown="block" class="alert alert-info"> 
+
+**:information_source: Person constraints:**<br>
+
+- A person's name must be unique (case-insensitive).
+
+- A person's phone number must be unique.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
@@ -220,6 +238,13 @@ Typing `Y` or `y` and pressing enter would clear all entries in TalentHub and re
 Adds an event to TalentHub.
 
 Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…​`
+
+<div markdown="block" class="alert alert-info"> 
+
+**:information_source: Event constraints:**<br>
+
+- The celebrity and all points of contacts must be existing persons in TalentHub.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An event can have any number of points of contact or none at all!
