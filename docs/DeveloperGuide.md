@@ -400,10 +400,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7. PlanPal should not depend on a remote server
 8. Third party frameworks/libraries/services used must be free, open source and have permissive licence terms
 10. Do not require installation by user
-11. Do not violate other constraints
-12. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
-13. PlanPal should be packaged into a single JAR file
-14. JAR file should not be above 100MB
+11. PlanPal should work well for standard screen resolutions 1920x1080 and higher and for screen scales 150%
+12. PlanPal should be packaged into a single JAR file
+13. JAR file should not be above 100MB
 
 *{More to be added}*
 
