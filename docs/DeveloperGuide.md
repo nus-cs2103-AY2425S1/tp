@@ -10,8 +10,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well} 
+* ChatGPT by OpenAI was used by BuffWuff1712 to generate the Tag Table and Glossary sections within the Developer Guide, as well as the JavaDocs for code written by BuffWuff1712
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
