@@ -79,7 +79,7 @@ Provides you with tips to use our system more effectively.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Opens a separate window detailing a summary of the commands avaliable and their functions.
 
 ![help message](images/helpMessage.png)
 
@@ -109,8 +109,9 @@ ClinicConnect does not allow two patients with the same NRIC to exist in the sys
 Use this command to quickly add a patient with only the required information.
 </div>
 
-Example: 
-* `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666` adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone No.
+Example: `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
+<br>
+Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
 
 For more information on each individual parameter click here
 
@@ -273,24 +274,6 @@ NRIC provided must be a valid NRIC currently in the system.
 Example:
 * `view T0123456A`
 
-### Locating patients by name: `find`
-
-Finds patients whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Patients matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
 ### Deleting a patient : `delete`
 
 Deletes the patient with the specified NRIC from the address book.
@@ -348,12 +331,17 @@ _Details coming soon ..._
 
 ## Command summary
 
- Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                  
-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**    | `add n\|NAME i\|NRIC s\|SEX d\|DATE_OF_BIRTH p\|PHONE_NUMBER` <br> e.g., `add n\|Abraham Tan i\|S9758366N s\|M d\|1997-10-27 p\|87596666`                                                                                                                                                                                                                                                                         
- **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                                                                           
- **Delete** | `delete S0123456Z`<br> e.g., `delete S0123456Z`                                                                                                                                                                                                                                                                                                                                                                   
- **Edit**   | `edit NRIC \[n\|NAME] \[i\|NRIC] \[s\|SEX] \[d\|DATE_OF_BIRTH] \[p\|PHONE_NO] \[e\|EMAIL] \[a\|ADDRESS] \[b\|BLOOD_TYPE] \[nokn\|NEXT_OF_KIN_NAME] \[nokp\|NEXT_OF_KIN_PHONE] \[al\|ALLERGY]…​ \[rmal\|ALLERGY_TO_BE_REMOVED]…​ \[rl\|RISK_LEVEL] \[ec\|EXISTING_CONDITIONS] \[no\|NOTES]`<br> e.g., `edit S9758366N p\|91234123 a\|Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918` 
- **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                                                                                                                        
- **Home**   | `home`                                                                                                                                                                                                                                                                                                                                                                                                            
- **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                                                            
+ Action     | Format, Examples                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ **Add**    | `add n\|NAME i\|NRIC s\|SEX d\|DATE_OF_BIRTH p\|PHONE_NUMBER` <br> e.g., <br> `add n\|Abraham Tan i\|S9758366N s\|M d\|1997-10-27 p\|87596666`                                                                                                                                                                                                                                                                                                                                                                       
+ **Addf**   | `addf n\|NAME i\|NRIC s\|SEX d\|DATE OF BIRTH p\|PHONE NUMBER [e\|EMAIL] [a\|ADDRESS] [b\|BLOOD TYPE] [nokn\|NEXT-OF-KIN NAME] [nokp\|NEXT-OF-KIN PHONE NUMBER] [al\|ALLERGIES]…​ [rl\|HEALTH RISK LEVEL] [ec\|EXISTING CONDITIONS] [no\|ADDITIONAL NOTES]` <br> e.g., <br> `addf n\|Abraham Tan i\|S9758366N s\|M d\|1997-10-27 p\|87596666 e\|abrahamtan@gmail.com a\|Blk 123, NUS Road, S123123 b\|A+ nokn\|Lincoln Tan nokp\|91234567 al\|nuts al\|shellfish rl\|HIGH ec\|Diabetes no\|Patient needs extra care` 
+ **Bookappt** | `bookappt NRIC dt\|APPOINTMENT_DATE_TIME h\|HEALTH_SERVICE` <br> e.g., <br> `bookappt S9758366N dt\|2024-12-29 13:30 h\|Vaccination`                                                                                                                                                                                                                                                                                                                                                                                 
+ **Clear**  | `clear`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+ **Deleteappt** | `deleteappt NRIC dt\|APPOINTMENT_DATE_TIME ` <br> e.g., <br> `deleteappt S9758366N dt\|2024-12-29 13:30`                                                                                                                                                                                                                                                                                                                                                                                                             
+ **Delete** | `delete NRIC`<br> e.g., `delete S0123456Z`                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+ **Edit**   | `edit NRIC [n\|NAME] \[i\|NRIC] \[s\|SEX] \[d\|DATE_OF_BIRTH] \[p\|PHONE_NO] \[e\|EMAIL] \[a\|ADDRESS] \[b\|BLOOD_TYPE] \[nokn\|NEXT_OF_KIN_NAME] \[nokp\|NEXT_OF_KIN_PHONE] \[al\|ALLERGY]…​ \[rmal\|ALLERGY_TO_BE_REMOVED]…​ \[rl\|RISK_LEVEL] \[ec\|EXISTING_CONDITIONS] \[no\|NOTES]`<br> e.g., `edit S9758366N p\|91234123 a\|Blk 918A, Pasir Ris Drive, #13-102, Singapore 911918`                                                                                                                             
+ **Exit** | 
+ **Fiter**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+ **Home**   | `home`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+ **View** |
+ **Help**   | `help`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
