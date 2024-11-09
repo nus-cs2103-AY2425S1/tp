@@ -359,8 +359,8 @@ Adds a wedding to PlanPerfect with the specified date. Optionally allows users t
 * Inputs to the `DATE` parameter with invalid months (MM) or years (YYYY) will be rejected. 
 * For days (DD), the parameter will only accept values in the range 01, 02, ..., 31. If all three inputs
 are valid, but the date is not possible, the input will be automatically corrected to the nearest valid date
-before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/24)
-* Any other invalid inputs to the `DATE` parameter will be rejected
+before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/23)
+* Any other invalid inputs to the `DATE` parameter will be rejected.
 
 </box>
 
@@ -410,8 +410,8 @@ The edited wedding name provided must not be the name of a pre-existing wedding 
 * Inputs to the `DATE` parameter with invalid months (MM) or years (YYYY) will be rejected.
 * For days (DD), the parameter will only accept values in the range 01, 02, ..., 31. If all three inputs
   are valid, but the date is not possible, the input will be automatically corrected to the nearest valid date
-  before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/24)
-* Any other invalid inputs to the `DATE` parameter will be rejected
+  before it. (e.g. 30/02/24 will return 29/02/24, 30/02/23 will return 28/02/23)
+* Any other invalid inputs to the `DATE` parameter will be rejected.
 
 </box>
 
