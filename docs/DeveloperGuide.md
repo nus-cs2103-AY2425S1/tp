@@ -322,15 +322,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. Tagging a contact with a role
-  * 1a1. User specifies what role the contact belongs to
+* 2a. Tagging a contact with a role
+  * 2a1. User specifies what role the contact belongs to
     Use case resumes from 3.
 
     Use case ends.
 
 
-* 1b. Adding Telegram Contact
-  * 1b1. User specifies the Telegram username that the contact belongs to
+* 2b. Adding Telegram Contact
+  * 2b1. User specifies the Telegram username that the contact belongs to
 
   * Use case resumes from 3.
 
