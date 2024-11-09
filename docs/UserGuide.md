@@ -485,7 +485,7 @@ HR Helper data are saved automatically as a JSON file `[JAR file location]/data/
 
 **Warning:**
 If your changes to the data file makes its format invalid, HR Helper will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause HR Helper to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -514,7 +514,7 @@ _Details coming soon ..._
 ## 6 FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HR Helper home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -522,5 +522,6 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **Does not track maternity leave up to 6 months**, which is not part of annual leave.
-4. **Add issues here**
+3. **When using `count` command**, follow the convention of `tag/TAG` and `name/NAME`, rather than the `t/TAG` and `n/NAME` used for other commands. Do be careful of this inconsistency.
+4. **Does not track maternity leave up to 6 months**, which is not part of annual leave.
+
