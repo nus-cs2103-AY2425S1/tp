@@ -214,12 +214,14 @@ public class MainWindow extends UiPart<Stage> {
         viewWindowPlaceholder.getChildren().clear();
         viewWindowPlaceholder.getChildren().add(viewWindow.getRoot());
         viewWindowPlaceholder.setManaged(true);
+        viewWindowPlaceholder.setVisible(true);
     }
 
     @FXML
     private void closeView() {
         viewWindowPlaceholder.getChildren().clear();
-        viewWindowPlaceholder.setManaged(false);
+        viewWindowPlaceholder.setVisible(false);
+        personListPanelPlaceholder.requestLayout();
     }
 
     public PersonListPanel getPersonListPanel() {

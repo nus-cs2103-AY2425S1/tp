@@ -401,3 +401,7 @@
     -fx-font-size: 35px;
     -fx-text-fill: white;
 }
+
+#viewPane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
