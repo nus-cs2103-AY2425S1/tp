@@ -362,8 +362,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to delete a patient.
-2. NovaCare prompts the user to enter patient details.
-3. User inputs the required patient details.
+2. NovaCare prompts the user to enter patient ID.
+3. User inputs the required patient ID.
 4. NovaCare outputs a message showing successful patient deletion.
 
    Use case ends.
@@ -372,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. NovaCare cannot find the patient.
 
-    * 3a1. NovaCare prompts the user to enter valid patient details.
+    * 3a1. NovaCare prompts the user to enter valid patient ID.
     * 3a2. User re-enters the patient details.
 
       Steps 3a1-3a2 are repeated until a valid patient record is found.
@@ -550,15 +550,18 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   
+   1. Open a terminal and navigate to the folder containing the jar file.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    1. Run the command `java -jar NovaCare.jar`<br>
+       Expected: The app launches with a set of sample patients. The window size may not be optimal.
 
 1. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by running the command `java -jar NovaCare.jar`.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -580,9 +583,10 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. All data is written to file specified in `preferences.json`
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. By default, the data is saved in the file `"addressBookFilePath" : "data\\addressbook.json"`.
+   2. Whenever a command is used to modify the data (e.g., `add`, `delete`, `edit`), the data is saved into the file indicated in `preferences.json`.
 
 ### Adding a Task
 

@@ -386,6 +386,11 @@ Deletes the specified patient and tasks associated to that patient from the syst
 * The index **must be a positive integer** 1, 2, 3, …​
 </box>
 
+<box type="warning" seamless>
+
+**Warning:**
+Deleting a patient will also **delete all tasks associated with that patient**. 
+</box>
 Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the system.
 * `find john doe` followed by `delete 1` deletes the 1st-indexed patient in the resultant list produced from the `find` command.
@@ -725,7 +730,7 @@ NovaCare data are saved automatically as a JSON file `[JAR file location]/data/a
 
 <box type="warning" seamless>
 
-**Caution:**
+**Warning:**
 If your changes to the data file makes its format invalid, NovaCare will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the NovaCare to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
