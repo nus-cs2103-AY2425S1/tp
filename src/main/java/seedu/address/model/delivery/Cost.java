@@ -32,17 +32,17 @@ public class Cost {
         checkArgument(isValidCost(cost), MESSAGE_CONSTRAINTS);
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
         decimalFormat.setMinimumFractionDigits(2);
-        value = "$" + decimalFormat.format(Float.parseFloat(cost.substring(1)));
+        value = "$" + decimalFormat.format(Double.parseDouble(cost.substring(1)));
     }
 
     /**
-     * Returns the current cost {@code String} as a float value.
+     * Returns the current cost {@code String} as a double value.
      */
-    public float asFloat() {
+    public double asDouble() {
         try {
             DecimalFormat decimalFormat = new DecimalFormat();
             Number parsedCost = decimalFormat.parse(this.value.substring(1));
-            return parsedCost.floatValue();
+            return parsedCost.doubleValue();
         } catch (ParseException e) {
             // This should never happen since we have already verified that the cost is valid.
             throw new InvalidCostException(MESSAGE_INVALID_COST_STRING);
