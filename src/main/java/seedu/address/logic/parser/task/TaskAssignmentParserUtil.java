@@ -32,7 +32,7 @@ public class TaskAssignmentParserUtil {
             Index personIndex = Index.oneBasedNoConstraints(Integer.parseInt(splitArgs[0].trim()));
             Set<Index> secondaryIndexes = parseMultipleIndexes(splitArgs, 1);
             return new ParsedCommandData(personIndex, secondaryIndexes);
-        } catch (ParseException pe) {
+        } catch (ParseException | NumberFormatException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, messageUsage), pe);
         }
     }

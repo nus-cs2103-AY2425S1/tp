@@ -1,8 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -64,7 +63,8 @@ public class AssignTaskCommandTest {
 
         // Assert: Command should throw a CommandException for invalid person index
         assertThrows(
-                CommandException.class, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> command.execute(model)
+                CommandException.class, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        1, model.getFilteredPersonList().size()), () -> command.execute(model)
         );
     }
 
@@ -81,7 +81,8 @@ public class AssignTaskCommandTest {
 
         // Assert: Command should throw a CommandException for invalid task index
         assertThrows(
-                CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, () -> command.execute(model)
+                CommandException.class, String.format(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX,
+                        10, 1, model.getFilteredTaskList().size()), () -> command.execute(model)
         );
     }
 
@@ -118,19 +119,16 @@ public class AssignTaskCommandTest {
         AssignTaskCommand command2 = new AssignTaskCommand(INDEX_SECOND, Set.of(INDEX_SECOND));
 
         // same object -> returns true
-        assertTrue(command1.equals(command1));
+        assertEquals(command1, command1);
 
         // same values -> returns true
         AssignTaskCommand command1Copy = new AssignTaskCommand(INDEX_FIRST, Set.of(INDEX_FIRST));
-        assertTrue(command1.equals(command1Copy));
-
-        // different types -> returns false
-        assertFalse(command1.equals(1));
+        assertEquals(command1, command1Copy);
 
         // null -> returns false
-        assertFalse(command1.equals(null));
+        assertNotEquals(null, command1);
 
         // different values -> returns false
-        assertFalse(command1.equals(command2));
+        assertNotEquals(command1, command2);
     }
 }
