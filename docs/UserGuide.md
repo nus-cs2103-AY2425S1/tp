@@ -61,7 +61,7 @@ To get started,
    * The GUI should now look something like this.<br>
    ![quick start GUI after commands](images/quickStartResultScreenshot.png)
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts. THIS IS AN IRREVERSIBLE ACTION.
 
 6. Refer to the [Features](#features) below for details of each command.
    <br><br>
@@ -75,7 +75,7 @@ To get started,
 | Action                                                          | Format, Examples                                                                                                                                                                            |
 |-----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-person-add)                                 | `add name/NAME email/EMAIL telegram/TELEGRAM [tag/TAG]…​ github/GITHUB` <br> e.g., `add name/James Ho email/jamesho@example.com telegram/@James tag/friend tag/colleague github/james-cool` |
-| [**Clear**](#clearing-all-entries-clear)                        | `clear`                                                                                                                                                                                     |
+| [**Clear**](#clearing-all-entries-clear)                        | `clear` <br> <b>This is an IRREVERSIBLE action!<b>                                                                                                                                          |
 | [**Delete**](#deleting-a-person-delete)                         | `delete name/NAME`<br> e.g., `delete name/James`                                                                                                                                            |
 | [**Edit**](#editing-a-person-edit)                              | `edit INDEX [name/NAME] [email/EMAIL] [telegram/TELEGRAM] [tag/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 name/James Lee email/jameslee@example.com`                                          |
 | [**Find**](#finding-persons-by-name-find)                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
@@ -610,7 +610,13 @@ Order of contact details can be reset to default by calling `sort reset`.
 
 ### <i class="fa-solid fa-broom"></i> Clearing all entries : `clear`
 
-Clears all entries from the KonTActs.
+Clears all entries from KonTActs. 
+
+<box type="important">
+
+This action is <b><i><u>IRREVERSIBLE</u></i></b> and it <b><i><u>cannot be undone</u></i></b>! You would lose all the contacts if not [**exported**](#exporting-data-into-csv-file-export)! 
+
+</box>
 
 <box type="definition" icon=":fa-solid-spell-check:" light>
 
