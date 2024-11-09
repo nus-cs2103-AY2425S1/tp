@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_FAILURE;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_FILE_EXISTS;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_HOME_FILE_EXISTS;
@@ -686,17 +687,14 @@ public class ExportCommandTest {
 
     @Test
     public void validateFilename_multiplePathComponents_throwsCommandException() {
-        String filenameWithPath = "parent" + File.separator + "file";
+        String filenameWithPath = "parent/child/file";
         ExportCommand exportCommand = new ExportCommand(filenameWithPath, false, dataDir);
+
         Assertions.assertThrows(CommandException.class, () -> exportCommand.execute(model),
                 "Filename cannot contain path components");
-    }
-
-    /**
-     * Helper method to throw a fail
-     * @param message Error message to pass to AssertionError
-     */
-    private void fail(String message) {
-        throw new AssertionError(message);
+        String explicitPath = "parent" + File.separator + "child" + File.separator + "file";
+        ExportCommand exportCommand2 = new ExportCommand(explicitPath, false, dataDir);
+        Assertions.assertThrows(CommandException.class, () -> exportCommand2.execute(model),
+                "Filename cannot contain path components");
     }
 }
