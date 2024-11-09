@@ -167,7 +167,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [b/BUDGET] [t/TAG]…​`
 
 * Edits the buyer at the specified `INDEX`. The index refers to the index number shown in the displayed buyer list. 
 * The index refers to the index number shown in the **displayed buyer list**.
-* The index must be a positive integer: 1, 2, 3, …​
+* The index must be a positive integer: 1, 2, 3, …. ​If the index is not a positive integer, the error message shown will be `invalid command format`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the buyer will be removed i.e adding of tags is not cumulative.
@@ -270,7 +270,7 @@ Format: `edit INDEX [s/MEETUP_SUBJECT] [i/MEETUP_INFO] [f/MEETUP_FROM] [t/MEETUP
 
 * Edits the meet-up at the specified `INDEX`.
 * The index refers to the index number shown in the **displayed meet-up list**. 
-* The index must be a positive integer 1, 2, 3, …​
+* The index must be a positive integer 1, 2, 3, …​. If the index is not a positive integer, the error message shown will be `invalid command format`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing buyers, the existing buyers will be removed i.e adding of buyers is not cumulative
@@ -353,7 +353,7 @@ Format: `edit INDEX [n/LANDLORD_NAME] [p/PHONE_NUMBER] [a/ADDRESS] [s/ASKING_PRI
 
 * Edits the buyer at the specified `INDEX`. 
 * The index refers to the index number shown in the **displayed property list**. 
-* The index must be a positive integer 1, 2, 3, …​
+* The index must be a positive integer 1, 2, 3, …​. ​If the index is not a positive integer, the error message shown will be `invalid command format`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -425,6 +425,8 @@ Format: `clear`
 
 
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+
+3. **The JAR file cannot be opened with double-click on some apple devices**. If the JAR file fails to open, use a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.
 
 --------------------------------------------------------------------------------------------------------------------
 

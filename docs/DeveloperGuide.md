@@ -513,8 +513,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be
-       optimum.
+    1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar abcli.jar` command to run the application.  
+    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -658,20 +658,25 @@ Expected: Properties with addresses containing the keywords "Aljunied," "Marsili
    1. Under the `data` section, add a new parameter into one of the entries in any file.  
       Expected: The program will ignore any saved data from that file and open an empty file.
 
-## **Appendix: Glossary**
 
+## **Appendix: Planned Enhancements**
+
+### Support for special characters in names
+* We plan to add support for special characters in names such as Lupita Nyong'o, Adib S/O Tharman etc.
+
+### Restriction of property types
+* Property types will be given restrictions in the future such that nonsensical types will not be accepted.
+
+### Improved duplication detection
+* Person duplication detection will be changed from the current method of matching names to checking for a repeated phone number OR email as these are more unique identifiers.
+
+## **Appendix: Glossary**
 ### Glossary
 1. **ABCLI**  
 Our product name.
 
 1. **CLI**  
 The command line interface is a way to interact with a computer by typing text commands instead of using a mouse to click on icons.
-
-1. **Command Line**  
-A text box where you enter commands.
-
-1. **Database Management System (DBMS)**  
-A Database Management System (DBMS) is software that allows users to create, manage, and manipulate databases efficiently. It provides tools for data storage, retrieval, and security, enabling multiple users to access and interact with data in an organized way.
 
 1. **Flag**  
 In our context, a flag is something preceded by a /, but is not the initial command. e.g in `add n/NAME`,  `n/` is a flag but `add` is not.
@@ -682,17 +687,11 @@ Graphical user interface. The screen you see when opening the application.
 1. **JAR file**  
 A JAR (Java ARchive) file is a compressed package that bundles multiple Java classes and resources for easier distribution and deployment. It can also be executable if it contains a Main-Class entry, allowing it to be run directly on any system with a Java Runtime Environment (JRE).
 
-1. [**Java**](https://www.java.com/en/)  
-A programming language.
-
 1. **JavaFX**  
 JavaFX is a Java library used to build rich, interactive graphical user interfaces (GUIs) for desktop applications. It provides tools for designing and styling UI components and supports modern features like 2D/3D graphics, animation, and media playback.
 
 1. **Non-Functional Requirement**  
 A non-functional requirement specifies criteria that judge the operation of a system, such as performance, reliability, and usability. Unlike functional requirements, it focuses on how a system performs rather than what it does.
-
-1. **Object-Oriented Programming (OOP)**  
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects," which contain data and methods to manipulate that data. It emphasizes principles like encapsulation, inheritance, and polymorphism to build modular, reusable, and organized code.
 
 1. **Parameter**  
 A value that you need to provide for the command to work. e.g in `add n/NAME`, `NAME` is a parameter.
@@ -702,6 +701,3 @@ PlantUML is a tool that allows users to create diagrams, such as UML diagrams, b
 
 1. **Use Case**  
 A use case describes a specific way that a user interacts with a system to achieve a goal, often outlining steps from start to finish. It helps clarify system requirements by detailing the actions, conditions, and outcomes for each interaction scenario.
-
-1. [**Windows**](https://en.wikipedia.org/wiki/Microsoft_Windows)  
-An operating system.
