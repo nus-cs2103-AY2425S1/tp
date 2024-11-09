@@ -661,7 +661,7 @@ testers are expected to do more *exploratory* testing.
 
 1. **Export contact list to a file**
    1. **Prerequisites:** Have a list of contacts available to export.
-   2. **Test case:** Run the `export` command
+   2. **Test case:** Run the `export format\csv` command
    3. **Expected:** Contacts are exported to a file in CSV format. Verify that all contact details are present in the file.
 
 ### Saving data
