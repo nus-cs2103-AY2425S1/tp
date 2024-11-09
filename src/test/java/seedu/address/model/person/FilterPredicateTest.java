@@ -72,16 +72,6 @@ public class FilterPredicateTest {
     }
 
     @Test
-    public void test_noValueSpecifiedCondition_returnFalse() {
-        FilterPersonDescriptor descriptor = new FilterPersonDescriptor();
-        descriptor.setModules(Set.of());
-        descriptor.setTags(Set.of());
-        FilterPredicate predicate = preparePredicate(descriptor);
-        assertFalse(predicate.test(new PersonBuilder().withModules("CS1101S").build()));
-        assertFalse(predicate.test(new PersonBuilder().withTags("student").build()));
-    }
-
-    @Test
     public void test_moreThanOneConditionSatisfied_returnTrue() {
         FilterPersonDescriptor descriptor = new FilterPersonDescriptor();
         descriptor.setName(new Name("Alice"));

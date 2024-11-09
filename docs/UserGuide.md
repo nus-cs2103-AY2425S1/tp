@@ -176,6 +176,7 @@ Format: `filter [n/name] [p/phone] [g/gender] [t/tag]... [m/module]...`
 * Only full words will be matched e.g. `Han` will not match `Hans`, same to all parameter.
 * Filtering by `grade` is not supported.
 * Students matching all the given conditions will be returned (i.e. `AND` search).
+* Filters with empty tag will return all students.
 
 <div markdown="span" class="alert alert-danger">⚠️ **Warning:**
 Each parameter can only contain one keyword.
