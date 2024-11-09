@@ -267,13 +267,15 @@ Shows a list of all clients in the PROperty.
 
 Format: `list`
 
+- `list` shows the clients in the order they were added into PROperty
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:** 
 Use `list` for a quick overview of all your contacts. 
 </div>
 
 Example:
 
-1. `list` shows your full client listing in PROperty.
+1. `list` shows your full client listing in the order they were added in PROperty.
 
 Visual example of correct output:
 
