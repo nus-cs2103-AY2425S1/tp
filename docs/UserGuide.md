@@ -462,8 +462,8 @@ Action     | Format, Examples
 **Delete** | `delete INDEX` or `delete NAME`<br> e.g., `delete 3` or `delete James Ho`
 **Display**| `display INDEX` or display `NAME` <br> e.g., `display 1` or display `John Doe`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tg/TELEGRAM_USERNAME] [t/TAG]…​ [l/LESSON]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com t/Math l/sunday 1000-1100`
-**Add Remark** | `addremark INDEX r/REMARK` to add a remark to student at `INDEX`<br> e.g., `remark 1 r/Great progress in Math`
-**Delete Remark** |  `deleteremark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from the student at `INDEX`<br> e.g., `remark 1 ri/2` to delete the second remark of student 1.
+**Add Remark** | `addremark INDEX r/REMARK` to add a remark to student at `INDEX`<br> e.g., `addremark 1 r/Great progress in Math`
+**Delete Remark** |  `deleteremark INDEX ri/REMARK_INDEX` to delete the remark at `REMARK_INDEX` from the student at `INDEX`<br> e.g., `deleteremark 1 ri/2` to delete the second remark of student 1.
 **Add Lesson** | `addlesson INDEX l/LESSON [l/LESSON]…​`<br> e.g., `addlesson 1 l/Monday 0900-1100`
 **Delete Lesson** | `deletelesson INDEX li/LESSON_INDEX [li/LESSON_INDEX]…​`<br> e.g., `deletelesson 1 li/1`
 **Find**   | `find [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [t/TAG_KEYWORDS] [ld/LESSON_DAY_KEYWORDS] [lt/LESSON_TIME_KEYWORDS]`<br> e.g., `find n/James jake t/science`
