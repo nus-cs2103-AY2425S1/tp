@@ -64,12 +64,16 @@ management tasks done faster than traditional GUI apps.
 
 Term           | Explanation
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**CLI**   | `A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.`
-**GUI**  | `A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.`
-**Assignment**         | `An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.`
-**Index**| `The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.`
-**Score**  | `The score represents the grade a student receives for a specific assignment.`
-**Remark**          | `A remark allows the tutor to record important notes or comments about a student for reference.`
+**CLI**   | A command-line interface (CLI) is a text-based interface that allows users to interact with programs, in this case TAchy, by typing commands.
+**GUI**  | A graphical user interface (GUI) is a visual interface where users interact with programs using graphical elements like icons, buttons, and menus.
+**Assignment**         | An assignment in TAchy refers to a task or piece of work assigned by the tutor (the user) to students.
+**Index**| The index of a student represents their position in the currently displayed list, starting from 1 for the first student at the top.
+**Score**  | The score represents the grade a student receives for a specific assignment.
+**Remark**          | A remark allows the tutor to record important notes or comments about a student for reference.
+**Unmark**          | An Unmark command will cause a previously submitted Assignment to be reset to "not submitted". If the assignment was previously graded, the score will be reset by default.
+**Mark**            | A Mark command will cause an unsubmitted Assignment to be marked as Submitted. The grade will remain as "not submitted yet", until a Grade Command is performed.
+**Grade**           | A Grade command will assign a score to an assignment. This score must be within the valid range of 0 to the maximum score of the assignment. When the grade command executes, the submission status of the assignment will also be marked as "submitted". 
+
 
 --------------------------------------------------------------------------------------------------------------------
 ## Features
