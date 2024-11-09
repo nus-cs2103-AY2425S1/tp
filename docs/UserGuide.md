@@ -33,7 +33,7 @@ By the end of this guide, you'll be a ResearchRoster pro, saving time and stream
 
 ### Installation
 
-1. Download the `.jar` file of the latest release, from [here](https://github.com/AY2425S1-CS2103T-F08-2/tp/releases).
+1. Download the `.jar` file of the latest release, as stated [here](https://github.com/AY2425S1-CS2103T-F08-2/tp/releases).
 
 2. Move the `.jar` file into an empty folder.
 
@@ -117,7 +117,7 @@ _Refer to the [Features](#features) section for details of each command!_
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
+  e.g. `n/NAME [t/STUDY_GROUP_TAG]` can be used as `n/John Doe t/1A` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/STUDY_GROUP_TAG]…` can be used as ` ` (i.e. 0 times), `t/1A`, `t/1B t/Control` etc.
@@ -171,12 +171,12 @@ Format: `edit INDEX [n/NAME] [e/EMAIL] [g/GENDER] [a/AGE] [t/ADD_TAG]… [-t/DEL
 * At least one of the optional fields must be provided.
 * When editing tags:
   * Prefix:`[t/ADD-TAG]`
-    - the added tags will be **appended** to the list of existing tags i.e adding of tags does not overwrite existing tags.
-    - if the tag name you entered to add **already exists**, the edit will be successful but you will get the warning:
+    - the added tags will be **appended** to the list of existing tags i.e. adding of tags does not overwrite existing tags.
+    - if the tag name you entered to add **already exists**, the edit will be successful, but you will get the warning:
       `You tried adding an already existing study group tag.`
   * Prefix: `[-t/DELETE-TAG]`
     - the tags specified will be **deleted** from the list of existing tags.
-    - if the tag name you entered to delete **does not exist**, the edit will be successful but you will get the warning:
+    - if the tag name you entered to delete **does not exist**, the edit will be successful, but you will get the warning:
       `You tried removing a nonexistent study group tag.`
 * When editing **all other fields** : Existing values will be updated to the input values.
 
@@ -186,7 +186,7 @@ Examples:
 
 ### Deleting persons : `delete`
 
-Deletes the specified persons from the address book.
+Deletes the specified person(s) from the address book.
 
 Format: `delete [INDEX | INDEX-INDEX]…`
 
@@ -212,7 +212,7 @@ Finds persons whose fields contain the given keywords.
 Format: `find [n/NAME …] [e/EMAIL …] [g/GENDER …] [a/AGE …] [d/DETAIL …] [t/STUDY_GROUP_TAGS …]`
 
 * At least one of the optional criteria must be provided.
-* Each criteria can have more than one keyword. e.g. `n/alice bob hans`
+* Each criterion can have more than one keyword. e.g. `n/alice bob hans`
 * The search is case-insensitive. e.g. `n/hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `n/Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `n/Han` will not match `Hans`
@@ -267,10 +267,10 @@ Format: `assign STUDY_GROUP [STUDY_GROUP …]`
 * Input study group names must not have duplicates.
 
 Examples:
-* `list` followed by `assign P90-Placebo P90-Experimental` assigns every person in the addressbook to either `P90-Placebo` or `P90-Experimental` study group, but not both.<br>
+* `list` followed by `assign P90-Placebo P90-Experimental` assigns every person in the address book to either `P90-Placebo` or `P90-Experimental` study group, but not both.<br>
   ![result for 'assign P90-Placebo P90-Experimental'](images/assignP90Result.png)
 
-* `find g/M` followed by `assign Male-Group` assigns every male in the addressbook to `Male-Group` study group.<br>
+* `find g/M` followed by `assign Male-Group` assigns every male in the address book to `Male-Group` study group.<br>
   ![result for 'assign Male-Group'](images/assignMaleGroupResult.png)
 
 ### Saving the data
@@ -283,7 +283,7 @@ ResearchRoster data is saved automatically as a JSON file `[JAR file location]/d
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ResearchRoster will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the ResearchRoster to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the ResearchRoster to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
