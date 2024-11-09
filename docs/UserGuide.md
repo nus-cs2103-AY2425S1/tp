@@ -90,7 +90,7 @@ If you’re a CCA leader who values speed, organization, and reliability, HallPo
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Displays instructions for accessing the help page, which includes an alphabetical list of all available commands for quick and easy reference.
 
 ![help message](images/helpMessage.png)
 
@@ -171,7 +171,7 @@ Finds members whose names contain any of the given keywords.
 
 <box type="info" seamless>
 
-**Note:** The `find_members` command does not stack filters. Each use of `find_members` filters the **original full list** rather than further filtering any previously filtered list. If you need more specific results, combine keywords in a single `find_members` command.
+**Note:** The `find_members` command does not stack filters. Each use of `find_members` filters the **original full list** rather than further filtering any previously filtered list.
 
 </box>
 
@@ -224,25 +224,24 @@ Adds a session to Hall Pointer and associates it with specified members.
 
 **Examples:**
 
-- `list_members` followed by `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3` Adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with the members at indexes 1 and 3 in the displayed list.
+- `list_members` followed by `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3` adds a session named "Rehearsal" on 24 Oct 2024 worth 2 points, associated with the members at indexes 1 and 3 in the displayed list.
 
 ---
 
-### Locating members with associated sessions by name: `find_sessions`
+### Locating Members with Associated Sessions by Name: `find_sessions`
 
 This command finds members who have attended sessions with names that contain any of the specified keywords.
 
 **Format:** `find_sessions KEYWORD [MORE_KEYWORDS]`
 
-<box type="tip" seamless>
-
-- **Case-Insensitive Search:** The search is case-insensitive. For example, `meeting` will match `Meeting`.
-- **Order of Keywords:** The order of keywords does not affect the search results. For example, `AGM meeting` will match sessions with names containing either `AGM` or `meeting`.
-- **Full Word Matching:** Only full words are matched; e.g., `team` will not match `tea`.
-- **OR Search:** Members with sessions that match at least one keyword will be returned. For example, searching `AGM meeting` will return members with sessions named `AGM meeting` or `team meeting`.
-- **Independence from Displayed Members:** The search includes all members in HallPointer, not just those currently displayed.
-
-</box>
+> **Tips:**
+>
+> - **Case-Insensitive Search:** The search is case-insensitive. For example, `meeting` will match `Meeting`.
+> - **Order of Keywords:** The order of keywords does not affect the search results. For example, `AGM meeting` will match sessions with names containing either `AGM` or `meeting`.
+> - **Full Word Matching:** Only full words are matched; e.g., `team` will not match `tea`.
+> - **OR Search:** Members with sessions that match at least one keyword will be returned. For example, `find_sessions AGM meeting` will return members with sessions named `AGM meeting` or `team meeting`.
+> - **Independence from Displayed Members:** The search includes all members in HallPointer, not just those currently displayed.
+> - **Duplicate Session Display:** If multiple members are associated with the same session (e.g., "team bonding"), `find_sessions` will display this session once for each member who attended it. This behavior ensures all keyword matches are fully shown and is not a bug.
 
 **Examples:**
 
@@ -300,6 +299,12 @@ HallPointer data is saved automatically as a JSON file at `[JAR file location]/d
 ---
 
 ### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
+---
+
+### Modification of sessions across all members `[coming in v2.0]`
 
 _Details coming soon ..._
 
