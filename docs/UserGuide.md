@@ -730,8 +730,22 @@ Entering the `↹ Tab key` will help to fill or append to the command input with
 <box type="info" seamless>
 
 **Note:**
-* You should not rely on autofill too much as this feature is meant to provide some simple helps only.
-* Autofill for prefix may not be working for some commands which does not require extra parameters.
+* You should not rely on autofill too much as this feature is meant to provide some simple helps only, may not be fully accurate.
+* Autofill only help you to get "started" with typing.
+* Autofill for prefix is not fully customized for each command, it may have extra prefix that is not used by the command.
+* Autofill for prefix may not be working for some commands which does not require extra parameters such as `list`, or command that does not need prefix such as `cdelete`.
+
+</box>
+
+<box type="info" theme="warning" light>
+
+**List of helping words** (separated by comma (,)):
+1. For autofills for **command name**:
+   * cadd, cdelete, cedit, clear, exit, export, find, help, import, list, radd, redit, rdelete, rview, sort.
+2. For autofills for **prefix**:
+   * e/, n/, p/, k/, t/, a/, cl/, d/, dd/, e/, m/, s/, c/, r/.
+3. For autofills for **value of prefix**:
+   * Block, Blk, Ave, Avenue, Tan, Lim, Lee, Ng, Ong, Wong, Goh, Chua, Chan, Koh, Teo, Ang, Yeo, Tay, Ho, Low, Toh, Sim, Chong, Chia, Seah, Sarah, Sofia, Sofea, Sophia, Hana, Hannah, Alyssa, Emily, Emma, Charlotte, Chloe, Alesha, Alicia, Amanda, Sofie, Sophie, Elizabeth, Natalie, Aisyah, Aishah, Olivia, Leia, Keira, Kiera, Haley, Haily, Megan, Ethan, Aden, Aiden, Aidan, Eden, Nathan, Nathaniel, Lucas, Isaac, Caleb, Evan, Matthew, Josh, Joshua, Adam, Asher, Jayden, Rayyan, Julian, Julien, Ian, Cayden, Kayden, Luke, Matthias, Matthew, George, Gabriel, Winston, block, BLOCK, BLK, AVE, AVENUE, Steven, David, Rayan, Ryan.
 
 </box>
 
