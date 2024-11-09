@@ -352,24 +352,24 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Displays a confirmation, enter exactly "Yes" or "Y" to clear all entries from the address book.
+Displays a confirmation, enter exactly "Y" or "Yes" to clear all entries from the address book.
 
-Format: `clear` then `y` or `yes`
+Format: `clear` then `Y` or `Yes`
 
 ![result for 'clear' then `yes](images/clearAll.png)
 
 ### Clearing all persons : `clear p`
 
-Displays a confirmation, enter "yes" or "y" to clear all persons from the address book.
+Displays a confirmation, enter "Y" or "Yes" to clear all persons from the address book.
 
-Format: `clear p` then `y` or `yes`
+Format: `clear p` then `Y` or `Yes`
 
 
 ### Clearing all events : `clear e`
 
-Displays a confirmation, enter "yes" or "y" to clear all events from the address book.
+Displays a confirmation, enter "Y" or "Yes" to clear all events from the address book.
 
-Format: `clear e` then `y` or `yes`
+Format: `clear e` then `Y` or `Yes`
 
 --- {.border-secondary}
 
