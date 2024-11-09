@@ -637,7 +637,7 @@ testers are expected to do more *exploratory* testing.
 
 You can use your own VRNs that follow the format in the User Guide.
 - **VRN (Vehicle Registration Number):** The unique identifier assigned to a vehicle upon registration. In Singapore, it typically follows the format `XXX1234C`, where:
-  - `XXX` represents 1 to 3 alphabet letters starting.
+  - `XXX` represents 1 to 3 alphabet letters.
   - `1234` represents a number up to 4-digits.
   - `C` represents a checksum letter as defined by the [Land Transport Authority (LTA)](https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Singapore).
 
