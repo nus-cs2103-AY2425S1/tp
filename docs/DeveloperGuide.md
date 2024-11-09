@@ -609,17 +609,26 @@ This section outlines proposed improvements to address known feature flaws ident
    * Currently, NovaCare's email validation only requires two alphanumeric characters for the `DOMAIN`, allowing invalid email formats such as `username@example`. This flaw compromises data accuracy and can lead to incorrect contact details, which is critical in a healthcare setting where reliable communication is essential.
    * We plan to enhance the email validation logic to enforce a domain format of `<subdomain>.<top-level domain>`, in which the top-level domain label must be at least 2 characters long. Each domain label must start and end with alphanumeric characters and consist of alphanumeric characters, separated only by hyphens, if any.
    * For example:
-     * `username1@example.sg` :white_check_mark:
-     * `username-2@example.com` :white_check_mark:
-     * `username-3@example.com` :white_check_mark:
-     * `username4@test.example.org"` :white_check_mark:
-     * `username1@example` :x:<br></br>
+     * :white_check_mark: `username1@example.sg`
+     * :white_check_mark: `username-2@example.com`
+     * :white_check_mark: `username-3@example.com`
+     * :white_check_mark: `username4@test.example.org"`
+     * :x: `username1@example`<br></br>
 2. **Implement more robust phone number validation:**
    * Currently, NovaCare's phone number validation only requires for entries to be numeric, and at least 3 digits long. This means that the system accepts phone number entries that exceed the upper limit of possible phone number lengths, and also disallows entries that try and input country code, i.e. `+6512345678`, since phone numbers must be strictly numeric. This flaw could cause data entry errors, especially for international contacts.
    * As phone numbers are both used in a patient's phone field and in the emergency contact number field, this flaw affects two fields in the addressbook.
    * We plan to enhance the phone number validation logic to allow the usage of the `+` character only as the first character of the phone number, and to limit the length of the phone number entered.
    * For example:
-     * `+6512345678` :white_check_mark:
-     * `+601123456789` :white_check_mark:
-     * `111+111` :x:
-     * `11111111111111111111` :x:<br></br>
+     * :white_check_mark: `+6512345678`
+     * :white_check_mark: `+601123456789`
+     * :x: `111+111`
+     * :x: `11111111111111111111`<br></br>
+3. **Implement more robust name validation:**
+    * Currently, names in NovaCare can only contain alphanumeric characters and spaces, limiting inclusivity by excluding names with special characters such as hyphens or slashes. This flaw may reduce inclusivity, which is essential for a healthcare application.
+    * As names are both used in a patient's name field and in the emergency contact name field, this flaw affects two fields in the addressbook.
+    * We plan to enhance the name validation logic to allow the usage of the `-` and `/` character, but not as the first or lsat characters of any word in the name.
+    * For example:
+      * :white_check_mark: `Simon Andy-Fletcher`
+      * :white_check_mark: `Ravi s/o Indra`
+      * :x: `Timothy /Ng`
+      * :x: `-Lim En An`<br></br>
