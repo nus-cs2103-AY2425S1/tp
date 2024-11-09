@@ -47,6 +47,11 @@ public class PaidCommandParser implements Parser<PaidCommand> {
             throw new ParseException(PaidCommand.MESSAGE_NO_FREQUENCY);
         }
 
+        if (!argMultimap.getValue(PREFIX_FREQUENCY).isEmpty()) {
+            throw new ParseException("Please enter a frequency (1, 3, 6, 12)");
+        }
+
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent() || argMultimap.getValue(PREFIX_PHONE).isPresent()
                 || argMultimap.getValue(PREFIX_EMAIL).isPresent() || argMultimap.getValue(PREFIX_ADDRESS).isPresent()
                 || argMultimap.getValue(PREFIX_BIRTHDAY).isPresent() || argMultimap.getValue(PREFIX_TAG).isPresent()) {
