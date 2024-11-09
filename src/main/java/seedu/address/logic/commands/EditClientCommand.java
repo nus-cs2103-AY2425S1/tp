@@ -143,6 +143,11 @@ public class EditClientCommand extends Command {
             throw new CommandException(MESSAGE_NO_CAR_TO_EDIT_ISSUES);
         }
 
+        // check if there is a car to edit issues to
+        if (editPersonDescriptor.getIssueEdited() && personToEdit.getCar() == null) {
+            throw new CommandException(MESSAGE_NO_CAR_TO_EDIT_ISSUES);
+        }
+
         // check if person was checked in.
         if (personToEdit.isServicing()) {
             editedPerson.setServicing();
@@ -218,6 +223,7 @@ public class EditClientCommand extends Command {
         private Address address;
         private Set<Issue> issues;
         private Car car;
+        private Boolean isIssueEdited;
 
         public EditPersonDescriptor() {}
 
@@ -232,6 +238,7 @@ public class EditClientCommand extends Command {
             setAddress(toCopy.address);
             setIssues(toCopy.issues);
             setCar(toCopy.car);
+            setIssueEdited(toCopy.isIssueEdited);
         }
 
         /**
@@ -243,6 +250,14 @@ public class EditClientCommand extends Command {
 
         public void setName(Name name) {
             this.name = name;
+        }
+
+        public void setIssueEdited(Boolean isIssueEdited) {
+            this.isIssueEdited = isIssueEdited;
+        }
+
+        public Boolean getIssueEdited() {
+            return isIssueEdited;
         }
 
         public Optional<Name> getName() {
@@ -327,6 +342,7 @@ public class EditClientCommand extends Command {
                     .add("address", address)
                     .add("issues", issues)
                     .add("car", car)
+                    .add("isIssueEdited", isIssueEdited)
                     .toString();
         }
     }
