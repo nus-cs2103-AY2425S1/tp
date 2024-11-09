@@ -1187,7 +1187,7 @@ otherwise)
 
 2. **Performance:**
   - The app should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-  - The search and sort functions should return results within 2 seconds for the average number of contacts.
+  - The search and sort functions should return results within 2 seconds for 50 contacts.
 
 3. **Efficiency**
   - A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
