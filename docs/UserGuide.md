@@ -20,7 +20,7 @@ BlitzBiz is capable of tracking multiple modes of contact and schedule related m
 1. Ensure you have Java `17` or above installed in your Computer (the Oracle version can be accessed [here](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)).
 For Mac users, please ensure you have this specific distribution, which can be installed by following this guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases/tag/v1.4).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your BlitzBiz application.
 
@@ -125,7 +125,7 @@ Examples:
 * Adding a contact with only a social media handle. <br>
 `add n/Adam An t/customer ig/theAdamAn`
 * Adding a contact with a tag. <br>
-`add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/supplier`
+`add n/Betsy Crowe t/friend e/betsycrowe@example.com p/12345678 t/supplier`
 * Adding a contact with only an email address. <br>
 `add n/Charlie Chan t/investor e/charlieChan@example.com`
 * Adding a contact with a schedule. <br>
@@ -192,15 +192,9 @@ Format: `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
 
 
 Examples:
-*  Adds the handle `[ig-charlotteo]` to the third contact Charlotte. <br>
-   `socialMedia 3 ig/charlotteo` <br>
-   ![result for 'rename tag1'](images/socialMediaResult1.png)
 *  Updates the first contact Alex's social media to `[cs-alexsells]`. <br>
    `socialMedia 1 cs/alexsells` <br>
    ![result for 'rename tag2'](images/socialMediaResult2.png)
-*  Updates the second contact Bernice's social media to `[fb-berniceyu]`. <br>
-   `socialMedia 2 fb/berniceyu` <br>
-   ![result for 'social media 3'](images/socialMediaResult3.png)
 
 #### Scheduling Contacts : `schedule`
 
@@ -323,20 +317,9 @@ Format: `sort {n/[ORDER], sch/[ORDER]}`
 Examples:
 * Sort by persons names alphabetically in ascending order <br>
   `sort n/`
-* Sort by schedule in ascending order <br>
-  `sort sch/`
-* Sort by persons names alphabetically in ascending order. <br>
-  `sort n/ascending` <br>
-  ![result for 'sort and sort ascending'](images/sortResult.png)
-* Sort by persons names alphabetically in descending order. <br>
-  `sort n/descending`<br>
-  ![result for 'sort descending'](images/sortDescendingResult.png)
 * Sort by schedule in ascending order. <br>
   `sort sch/ascending` <br>
   ![result for 'sort and sort ascending'](images/sortByScheduleAsc.png)
-* Sort by schedule in descending order. <br>
-  `sort sch/descending` <br>
-  ![result for 'sort descending'](images/sortByScheduleDesc.png)
 
 #### Filter persons by tag : `filter`
 
@@ -357,12 +340,8 @@ Format: `filter [t/TAG]...`
 </div>
 
 Examples:
-* `filter t/friends` will filter for contacts that has tag `friends`<br>
-  ![result for 'filter_friends'](images/filterFriendsResult.png)
-* `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`<br>
+* `filter t/friends t/colleagues` will filter for contacts that has both tags `friends` and `colleagues`. In this example, only one contact has both tags provided.<br>
   ![result for 'filter_friends'](images/filterMultipleTags.png)
-* `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
-  ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
 
 #### Locating persons by name : `find`
 
@@ -417,9 +396,9 @@ Examples:
 `search b/2024-11-11 12:00`
 * Search for the list of persons with schedules before 2024-11-12 12:00. <br>
 `search en/2024-11-12 12:00`
-* Search for the list of persons with schedules between 2024-11-11 12:00 and 2024-11-12 12:00. <br>
-`search b/2024-11-11 12:00 en/2024-11-12 12:00` <br>
-  ![result for 'search b/2024-11-11 12:00 en/2024-11-12 12:00'](images/searchCommandSuccess.png)
+* Search for the list of persons with schedules between 2024-10-21 04:00 and 2024-10-27 23:59. <br>
+`search b/2024-10-21 04:00 en/2024-10-27 23:59` <br>
+  ![result for 'search b/2024-10-21 04:00 en/2024-10-27 23:59'](images/searchCommandSuccess.png)
 
 ### Utility Features
 
@@ -542,7 +521,7 @@ to `[JAR file location]/data` in your new computer.
 |---------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **[Add](#adding-a-person--add)**                        | `add n/NAME <p/PHONE_NUMBER e/EMAIL a/ADDRESS [cs/CAROUSELL_HANDLE] [fb/FACEBOOK_HANDLE] [ig/INSTAGRAM_HANDLE]> [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **[Edit](#editing-a-person--edit)**                     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                                                                                                       |
-| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                                                         |
+| **[Social Media](#adding-social-media--socialmedia)**   | `socialMedia INDEX [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername`                                                                                                                                                                                             |
 | **[Schedule](#scheduling-contacts--schedule)**          | `schedule INDEX [sn/SCHEDULE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]` <br> e.g., `schedule 1 sn/appointment sd/2024-12-12 st/12:00`                                                                                                                                                           |
 | **[Rename Tag](#renaming-a-tag--renameTag)**            | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`                                                                                                                                                                                                                          |
 | **[Delete](#deleting-a-person--delete)**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                                               |

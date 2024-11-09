@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `BlitzBiz` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a contact**
+**Use case: UC01 - Delete a contact**
 
 **MSS**
 
@@ -364,7 +364,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Add a contact**
+**Use case: UC02 - Restore a contact**
+Preconditions: User has deleted a contact
+
+**MSS**
+
+1. User restores the deleted contact
+2. The contact is restored to BlitzBiz
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The contact has been added back using the add command
+    * 2a1. BlitzBiz shows an error message.
+
+    Use case ends.
+
+**Use case: UC03 - Add a contact**
 
 **MSS**
 
@@ -390,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       *a2. User confirms the cancellation.
       Use case ends.
 
-**Use case: Find contacts by name**
+**Use case: UC04 - Find contacts by name**
 
 **MSS**
 
@@ -412,6 +429,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. There are no contacts containing the prefix in their name.
       4a1. BlitzBiz informs the user that there were no matches found.
       Use case ends.
+
+**Use case: UC05 - Rename Tag**
+
+**MSS**
+
+1.  User requests to rename a tag
+2.  BlitzBiz requests for the old and new tag names
+3.  User enters old and new tag names
+4.  BlitzBiz renames all the tags with the old tag name to the new tag name
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command.
+       Steps 3a1-3a2 are repeated until the command format entered is correct.
+       Use case resumes from step 4.
+
+* 3b. The new tag does not follow requirements.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command with new tag.
+       Steps 3a1-3a2 are repeated until the new tag entered is valid.
+       Use case resumes from step 4.
+
+* 4a. There are no tags with the old tag name.
+  4a1. BlitzBiz informs the user that there were no matches found.
+  Use case ends.
+
+* 4b. There are contacts with both the old tag and new tag.
+  4b1. BlitzBiz informs the user that contacts which will result in duplicated tags will not be updated.
+
+**Use case: UC06 - Social Media**
+
+**MSS**
+
+1.  User requests to add a social media handle to a contact
+2.  BlitzBiz requests for the social media platform and handle name
+3.  User enters social media platform and handle name
+4.  BlitzBiz adds the social media to the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The command does not follow the correct format.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command.
+       Steps 3a1-3a2 are repeated until the command format entered is correct.
+       Use case resumes from step 4.
+
+* 3b. The handle does not follow requirements.
+    *  3a1. BlitzBiz displays an error message.
+       3a2. User enters new command with new handle.
+       Steps 3a1-3a2 are repeated until the handle entered is valid.
+       Use case resumes from step 4.
 
 **Use case: Filter contact list by tag(s)**
 
@@ -445,7 +519,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User enters field to sort by and order to sort by
 4. BlitzBiz displays the sorted list
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -454,11 +528,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. User enter more than one field to sort by
     * 3b1. BlitzBiz displays error message to inform user
-        that it can only sort by one field
+      that it can only sort by one field
     * 3a2. User enters again with only one field to sort by
-        Steps 3b1 is repeated until the format entered is correct.
-        Use case resumes from step 4.
-  
+      Steps 3b1 is repeated until the format entered is correct.
+      Use case resumes from step 4.
+
 **Use case: Search for contacts by schedules**
 
 **MSS**
@@ -480,7 +554,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3c. User enters an end time before start time
     * 3c1. BlitzBiz displays error message to inform user
-        that end time provided must be after start time
+      that end time provided must be after start time
     * 3c2. User enters again with a later end time than start time
       Steps 3b1 is repeated until the format entered is correct.
       Use case resumes from step 4.
@@ -488,6 +562,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 4a. No contacts with schedules in the given range are founc
     * 4a1. BlitzBiz informs the user that there were no matches found.
       Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
