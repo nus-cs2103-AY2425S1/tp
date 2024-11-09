@@ -26,13 +26,12 @@
    1. [Appendix: Requirements](#appendix-requirements)
    2. [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
    3. [Appendix: Efforts](#appendix-efforts)
-<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org). If you would like to contribute code to this project, see [se-education.org](https://se-education.org/#contributing-to-se-edu) for more info.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -180,6 +179,48 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Patient Feature
+
+#### Overview
+The `add` command allows users to add new patients. The command requires:
+- **Name** – Patient's name.
+- **ID** – Patient's unique ID.
+- **Ward** – Patient's Ward
+- **Diagnosis** – Patient's Diagnosis
+- **Medication** - Patient's Medication
+
+Here is an activity diagram that summarises the key steps taken.
+<puml src="diagrams/AddActivityDiagram.puml" alt="AddActivityDiagram" />
+
+#### 1. Parsing User Input
+The **`AddCommandParser`** class is responsible for parsing user input. It uses `ArgumentTokenizer` to tokenize the input string, extracting:
+- **Name** – Patient's name.
+- **ID** – Patient's unique ID.
+- **Ward** – Patient's Ward
+- **Diagnosis** – Patient's Diagnosis
+- **Medication** - Patient's Medication
+
+The parser will check that the compulsory `Name`, `ID`, and `Ward` fields are present, and that there are no duplicate parameters included in the input string. The optional `Diagnosis` and `Medication` fields will be parsed as empty strings if they are not included in the input string.
+
+During this parsing process:
+- A `Person` instance is created to hold the relevant fields.
+
+#### 2. Executing the Command
+The **`AddCommand`** class performs the following when adding a patient:
+
+1. **Update Existing Patient Record**:  
+   The new `Person` instance will be added to the existing patient record in the **Model**.
+
+#### 3. Exceptions and warnings
+
+The **`AddCommand`** class enforces validation rules to ensure non-duplicates and potential incorrect input fields.
+
+- **Ensuring non-duplicates**:
+  Check that the new person added does not already exist in WardWatch, i.e. does not already exist a person with same `ID`.
+
+- **Warnings**
+  The command will also check for the presence of *special characters* in the `Ward` and `ID` fields. An appropriate warning will be displayed if they are present.
+
 ### Add Appointment Feature
 
 #### Overview
@@ -218,7 +259,7 @@ The **`MakeAppointmentCommand`** class performs the following steps to add an ap
 The **`MakeAppointmentCommandParser`** and **`MakeAppointmentCommand`** classes enforce validation rules to ensure correct date formats and scheduling logic:
 
 - **Format Verification**:
-    - **Parser** checks if the date format follows `DD-MM-YYYY-HH-mm`.
+    - **Parser** checks if the date format follows `dd-MM-yyyy-HH-mm`.
     - **Parser** also ensures the **Start Date** is before or equal to the **End Date**.
 
 - **Conflict Checking**:
@@ -942,11 +983,11 @@ This appendix provides an overview of the effort and complexity involved in modi
    
 ### Storage
 1. With the addition of the `Appointment` class, we had to learn how the JSON format worked, and how we could utilise its functionalities to allow for the successful storing and reading of data, now that every `Person` has an `Appointment` field.
-2. It was necessary to get a basic understanding of how Json files work. Upon creating our new Json class that adapts to appointment, a weak understanding of @JsonCreator property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
+2. It was necessary to get a basic understanding of how JSON files work. Upon creating our new Json class that adapts to appointment, a weak understanding of `@JsonCreator` property caused initial bugs where appointment information had issues being retrieved from the Json file format. This bug was eventually fixed with greater understanding of Json.
 
 ### UI
 1. UI Design required good understanding and identification of the relevant dependencies on the corresponding .fxml and .css files.
 2. To restructure and customise the UI, a firm understanding of UI elements such as the HBox, VBox and Stackpanes is necessary to layout the UI elements according. There was particularly a struggle understanding the effects of the growing Hbox and Vbox, as the space occupied is unexpected.
-3. Choice or colour to make the app aesthetic is also non-trivial
-4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements
+3. Choice or colour to make the app aesthetic is also non-trivial as it is difficult to find matching colours that are aesthetic.
+4. The setting of result boxes also required consideration, as too long or short may cause data to not be represented clearly, due to the text overflowing. It is also a tradeoff for space with the other elements.
 
