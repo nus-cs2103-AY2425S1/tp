@@ -32,7 +32,6 @@ public class CheckAssignmentCommandParser implements Parser<CheckAssignmentComma
         }
 
         String title = argMultimap.getValue(PREFIX_NAME).get();
-
         if (title.isEmpty()) {
             throw new ParseException(Messages.MESSAGE_EMPTY_ASSIGNMENT_TITLE);
         }

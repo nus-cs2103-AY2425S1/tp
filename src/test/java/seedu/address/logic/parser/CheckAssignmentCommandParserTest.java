@@ -28,7 +28,7 @@ public class CheckAssignmentCommandParserTest {
 
     @Test
     public void parse_emptyTitle_throwsParseException() throws Exception {
-        String userInput = "1 " + PREFIX_NAME;
+        String userInput = " " + PREFIX_NAME;
 
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
