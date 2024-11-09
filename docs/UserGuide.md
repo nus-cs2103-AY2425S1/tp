@@ -337,7 +337,7 @@ Format: **`person-delete m/MATRICULATION_NUMBER​​`**
 
 <box type="warning">
 
-Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [data format](#data-formats)!
+Reminder: where used, course **code** and **name**, and tutorial **code** must follow the [:fa-solid-link: data format](#data-formats)!
 </box>
 
 <a name="course-add">
@@ -393,7 +393,7 @@ Format: **`course-delete c/COURSE_CODE`**
 | :--- |
 | `course-delete c/CS1101S` |
 
-<box type="warning">
+<box type="important">
 
 **Caution:** Deleting a course will also delete all tutorial groups, attendance and student associations related to the course.
 </box>
@@ -453,10 +453,10 @@ Each student has an attendance record associated with each unique course and tut
 This record is to be edited over the duration of a semester, where you can mark and unmark
 attendance for for each consecutive session.
 
-<box typ="warning">
+<box type="warning">
 
 Reminder: where used, course **code** and **name**, and tutorial **code** must exist
-and follow the [data format](#data-formats)!
+and follow the [:fa-solid-link: data format](#data-formats)!
 
 The particular student **must** also be enrolled in that course and corresponding tutorial.
 </box>
