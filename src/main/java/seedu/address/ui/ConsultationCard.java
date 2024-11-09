@@ -71,7 +71,11 @@ public class ConsultationCard extends UiPart<Region> {
         }
 
         // Ui Doesn't Properly Update Unless this Line of Code is run
-        Platform.runLater(() -> cardPane.getParent().requestLayout());
+        Platform.runLater(() -> {
+            if (cardPane.getParent() != null) {
+                cardPane.getParent().requestLayout();
+            }
+        });
     }
 
     private void createLabel(Student student) {
