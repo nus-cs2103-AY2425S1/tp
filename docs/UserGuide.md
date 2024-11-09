@@ -172,7 +172,7 @@ Examples:
 ##### Find Contacts by Role: `find-role` or `fr`
 Finds contacts who have the specified role.
 
-Format: `find-role ROLE`
+Format: `find-role ROLE [MORE_ROLES]...`
 
 * The search is case-insensitive (e.g., `attendee` matches `Attendee`).
 * Only full words will be matched (e.g., `attend` will not match `attendee`).
@@ -445,7 +445,7 @@ Use the `up` and `down` arrow keys to navigate through your command history. Pre
 | **Delete Contact**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                           |
 | **Edit Contact**     | `edit INDEX <n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TELEGRAM_USERNAME r/ROLE…​>`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                      |
 | **Find by Name**     | `find-name KEYWORD [MORE_KEYWORDS]...` or `fn KEYWORD [MORE_KEYWORDS]...` <br> e.g., `find-name James Jake`                                                                                                                   |
-| **Find by Role**     | `find-role ROLE [MORE_ROLES]` or `fr ROLE [MORE_ROLES]` <br> e.g., `find-role sponsor`                                                                                                                                        |
+| **Find by Role**     | `find-role ROLE [MORE_ROLES]...` or `fr ROLE [MORE_ROLES]...` <br> e.g., `find-role sponsor`                                                                                                                                  |
 | **Add Event**        | `new EVENT_NAME` <br> e.g., `new Sumo Bot Festival`                                                                                                                                                                           |
 | **Add Contact to Event** | `event-add ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]...` or <br>`ea ei/EVENT_INDEX <a/ or s/ or ve/ or vo/>CONTACT_INDEX, [MORE_CONTACT_INDICES]` <br> e.g., `e.g. event-add ei/1 a/1,2,3` |
 | **Find Contacts in Event** | `find-event EVENT_INDEX` or `fe EVENT_INDEX` <br> e.g., `find-event 1`                                                                                                                                                        |
