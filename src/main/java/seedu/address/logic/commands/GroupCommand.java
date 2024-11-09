@@ -31,6 +31,8 @@ public class GroupCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Group %s created with %d student(s)";
     public static final String MESSAGE_DUPLICATE_GROUP = "Group name already taken!!";
     public static final String EMPTY_STUDENT = "Please do not enter an empty string for student name!";
+
+    public static final String EMPTY_GROUP_NAME = "Please enter a valid group name that is not blank!";
     public static final String DUPLICATE_STUDENT_FOUND = "Duplicate student found in input: %s";
     public static final String STUDENTS_NOT_FOUND = "The following students could not be found: %s";
     private final String groupName;
@@ -53,6 +55,10 @@ public class GroupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
+        if (groupName.isEmpty()) {
+            throw new CommandException(EMPTY_GROUP_NAME);
+        }
 
         if (model.hasGroupName(new Group(groupName, List.of()))) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);

@@ -145,6 +145,16 @@ public class GroupCommandTest {
     }
 
     @Test
+    public void execute_emptyGroupName_throwsCommandException() {
+        List<String> studentNames = new ArrayList<>();
+        String groupName = "";
+
+        GroupCommand groupCommand = new GroupCommand(groupName, studentNames);
+
+        assertCommandFailure(groupCommand, model, GroupCommand.EMPTY_GROUP_NAME);
+    }
+
+    @Test
     public void equals() {
         final GroupCommand standardCommand = new GroupCommand(VALID_GROUP_NAME, VALID_STUDENTS);
 
