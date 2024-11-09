@@ -435,6 +435,15 @@ Use case ends.
 
    Use case ends.
 
+**Extensions**:
+- 1a. Hiring Manager does not input either 'a' or 'd'
+    - 1a1. HiredFiredPro displays an error message.
+
+      Use case ends.
+- 1b. Hiring Manager inputs other characters other than 'a' or 'b'
+    - 1b1. HiredFiredPro displays an error message.
+
+      Use case ends.
 
 ---
 
