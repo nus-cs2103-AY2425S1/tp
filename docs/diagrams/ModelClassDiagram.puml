@@ -59,12 +59,12 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 Prudy *--> "1" UniqueClientList
 UniqueClientList --> "~* all" Client
-Client *--> Name
-Client *--> Phone
-Client *--> Email
-Client *--> Address
+Client *--> "1" Name
+Client *--> "1" Phone
+Client *--> "1" Email
+Client *--> "1" Address
 Client *--> "*" Tag
-Client *--> PolicySet
+Client *--> "1" PolicySet
 
 PolicySet --> "0..1" LifePolicy
 PolicySet --> "0..1" HealthPolicy

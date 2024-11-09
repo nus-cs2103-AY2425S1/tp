@@ -14,10 +14,10 @@ UniqueClientList -right-> Client
 
 Client -up-> "*" Tag
 
-Client *--> Name
-Client *--> Phone
-Client *--> Email
-Client *--> Address
-Client *--> PolicySet
+Client *--> "1" Name
+Client *--> "1" Phone
+Client *--> "1" Email
+Client *--> "1" Address
+Client *--> "1" PolicySet
 
 @enduml
