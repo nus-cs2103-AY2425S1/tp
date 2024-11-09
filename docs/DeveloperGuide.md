@@ -558,40 +558,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Set reminders linked to contacts**
-
-**MSS**
-
-1. User selects a contact to set a reminder for.
-
-2. PROperty prompts the user to enter reminder details (date, time, message).
-
-3. User enters the reminder details.
-
-4. PROperty saves the reminder linked to the contact.
-
-5. PROperty confirms that the reminder has been set.
-   
-   Use case ends.
-
-**Extensions**
-
-- 1a. The specified contact does not exist.
-  
-  - 1a1. PROperty shows an error message.
-    
-    Use case ends.
-
-- 3a. The reminder details are incomplete or invalid.
-  
-  - 3a1. PROperty shows an error message indicating the issue.
-  
-  - 3a2. PROperty prompts the user to re-enter the reminder details.
-    
-    Use case resumes at step 2.
-
----
-
 **Use case: View upcoming reminders/events**
 
 **MSS**
@@ -609,34 +575,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2a. There are no upcoming reminders/events.
   
   - 2a1. PROperty informs the user that there are no upcoming reminders/events.
-    
-    Use case ends.
-
----
-
-**Use case: Undo an action**
-
-**MSS**
-
-1. User requests to undo the last action.
-
-2. PROperty reverses the last action performed.
-
-3. PROperty confirms that the action has been undone.
-   
-   Use case ends.
-
-**Extensions**
-
-- 1a. There is no action to undo.
-  
-  - 1a1. PROperty informs the user that there is nothing to undo.
-    
-    Use case ends.
-
-- 2a. The last action cannot be undone (e.g., permanent changes).
-  
-  - 2a1. PROperty informs the user that the action cannot be undone.
     
     Use case ends.
 
@@ -742,49 +680,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Sort contacts in different ways**
+**Use case: Sort contacts in alphabetical order**
 
 **MSS**
 
-1. User requests to sort contacts by a specific attribute (e.g., name, date added, tag).
+1. User requests to sort contacts.
 
-2. PROperty sorts the contact list based on the selected attribute.
+2. PROperty sorts the contact list in alphabetical order.
 
 3. PROperty displays the sorted list.
    
    Use case ends.
-
-**Extensions**
-
-- 1a. The specified attribute is invalid.
-  
-  - 1a1. PROperty shows an error message.
-    
-    Use case ends.
-
----
-
-**Use case: Reuse last searches and view search history**
-
-**MSS**
-
-1. User requests to view search history.
-
-2. PROperty displays a list of recent searches.
-
-3. User selects a previous search to reuse.
-
-4. PROperty performs the search and displays the results.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. There is no search history.
-  
-  - 2a1. PROperty informs the user that there is no search history.
-    
-    Use case ends.
 
 ---
 
@@ -836,36 +742,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Find and sort multiple tags at once**
-
-**MSS**
-
-1. User requests to search for contacts using multiple tags.
-
-2. PROperty filters contacts that match all specified tags.
-
-3. User requests to sort the filtered contacts by a chosen attribute.
-
-4. PROperty sorts and displays the contacts.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. No contacts match all the specified tags.
-  
-  - 2a1. PROperty informs the user that no contacts were found.
-    
-    Use case ends.
-
-- 3a. The sorting attribute is invalid.
-  
-  - 3a1. PROperty shows an error message.
-    
-    Use case ends.
-
----
-
 **Use case: Press TAB to auto-suggest commands and attributes**
 
 **MSS**
@@ -898,60 +774,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: See multiple attributes in the command box**
-
-**MSS**
-
-1. User initiates a command that requires multiple attributes.
-
-2. PROperty displays placeholders or prompts for each required attribute.
-
-3. User fills in the attributes as guided.
-
-4. PROperty executes the command with the provided attributes.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. User skips an attribute.
-  
-  - 2a1. PROperty prompts the user to fill in the missing attribute.
-    
-    Use case resumes at step 3.
-
-- 3a. An attribute value is invalid.
-  
-  - 3a1. PROperty shows an error message indicating the invalid attribute.
-  
-  - 3a2. User corrects the attribute.
-    
-    Use case resumes at step 3.
-
----
-
-**Use case: Have appropriate color highlighting for attributes**
-
-**MSS**
-
-1. User types a command with attributes in the command box.
-
-2. PROperty highlights each attribute and its value in different colors.
-
-3. User easily identifies each part of the command.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. The color scheme is not suitable for the user.
-  
-  - 2a1. User adjusts the color settings in preferences.
-    
-    Use case resumes at step 1.
-
----
-
 **Use case: See error messages clearly**
 
 **MSS**
@@ -971,28 +793,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 3a. Error message overlaps with other interface elements.
   
   - 3a1. PROperty adjusts the layout to ensure visibility.
-    
-    Use case resumes at step 3.
-
----
-
-**Use case: Tag certain contacts to show at the top**
-
-**MSS**
-
-1. User selects contacts to prioritize.
-
-2. User tags them with a special tag (e.g., "Favorite").
-
-3. PROperty adjusts the contact list to display tagged contacts at the top.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. User wants to prioritize multiple tags.
-  
-  - 2a1. PROperty allows setting priority levels for tags.
     
     Use case resumes at step 3.
 
@@ -1023,36 +823,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 2a1. PROperty allows multiple tags per contact.
     
     Use case resumes at step 3.
-
----
-
-**Use case: Set and see upcoming appointments**
-
-**MSS**
-
-1. User adds appointments linked to contacts or tags.
-
-2. PROperty saves the appointments with dates and times.
-
-3. User requests to view upcoming events.
-
-4. PROperty displays events in chronological order.
-   
-   Use case ends.
-
-**Extensions**
-
-- 1a. Event details are incomplete.
-  
-  - 1a1. PROperty prompts the user to complete all required fields.
-    
-    Use case resumes at step 1.
-
-- 3a. No upcoming events are scheduled.
-  
-  - 3a1. PROperty informs the user.
-    
-    Use case ends.
 
 ---
 
@@ -1104,30 +874,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ---
 
-**Use case: Reuse last searches and view search history**
-
-**MSS**
-
-1. User accesses the search history feature.
-
-2. PROperty displays a list of recent searches.
-
-3. User selects a previous search.
-
-4. PROperty executes the search and displays results.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. Search history is empty.
-  
-  - 2a1. PROperty informs the user.
-    
-    Use case ends.
-
----
-
 **Use case: Remove tags from contacts easily**
 
 **MSS**
@@ -1149,70 +895,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - 2a. Contact has no tags.
   
   - 2a1. PROperty informs the user.
-    
-    Use case ends.
-
----
-
-**Use case: View multiple attributes in the command box**
-
-**MSS**
-
-1. User starts typing a command that accepts multiple attributes.
-
-2. PROperty displays a dynamic template showing all possible attributes.
-
-3. User fills in the attributes as needed.
-
-4. PROperty validates and executes the command.
-   
-   Use case ends.
-
-**Extensions**
-
-- 3a. User skips optional attributes.
-  
-  - 3a1. PROperty proceeds with the provided attributes.
-    
-    Use case resumes at step 4.
-
-- 4a. Required attributes are missing.
-  
-  - 4a1. PROperty shows an error message.
-  
-  - 4a2. User adds the missing attributes.
-    
-    Use case resumes at step 3.
-
----
-
-**Use case: Set reminders and see upcoming events**
-
-**MSS**
-
-1. User sets a reminder or schedules an event linked to a contact.
-
-2. PROperty saves the reminder/event details.
-
-3. User requests to view upcoming reminders/events.
-
-4. PROperty displays a chronological list.
-   
-   Use case ends.
-
-**Extensions**
-
-- 2a. Reminder/event details are invalid.
-  
-  - 2a1. PROperty shows an error message.
-  
-  - 2a2. User corrects the details.
-    
-    Use case resumes at step 1.
-
-- 3a. No upcoming reminders/events.
-  
-  - 3a1. PROperty informs the user.
     
     Use case ends.
 
@@ -1271,8 +953,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **Undo Feature**: A function that allows the user to reverse the last action taken, preventing accidental loss or changes to information.
 
-- **Attribute Placeholder**: A prompt or template shown in the command box that indicates where the user should input specific information in a command.
-
 - **Contact**: An entry in the PROperty representing a person, including their personal and professional information.
 
 - **Reminder/Event List**: A chronological list displaying upcoming reminders or events set by the user.
@@ -1280,8 +960,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - **Search History**: A record of previous search queries entered by the user, allowing for quick reuse of past searches.
 
 - **Highlighting Errors**: Visual cues provided by the application (such as underlines or color changes) to indicate mistakes in command input.
-
-- **Attribute Placeholder**: A visual guide in the command box showing the required and optional attributes for a command.
 
 - **Priority Tagging**: The act of marking certain contacts to appear at the top of the contact list for quick access.
 
