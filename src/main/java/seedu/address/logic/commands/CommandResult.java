@@ -42,6 +42,9 @@ public class CommandResult {
         this.export = export;
     }
 
+    /**
+     * Constructs a {@code CommandResult} meant for "delete" and "clear" commands
+     */
     public CommandResult(String feedbackToUser, boolean isDelete, Person originalPerson) {
         this(feedbackToUser, false, false, false);
         this.isDelete = isDelete;
