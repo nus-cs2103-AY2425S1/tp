@@ -231,7 +231,7 @@ Examples:
 **<ins>When in the main window**
 
 Archives the specified contact(s) from the contacts list.<br>
-Archived contact(s) will be less visible and moved to the bottom of the list.
+Archived contact(s) will be less visible (greyed out) and moved to the bottom of the list.
 
 Format: `archive [INDEXES]...`
 
@@ -288,6 +288,8 @@ Examples:
 
 Sorts all contacts in the contacts list by the specified attribute, from lowest to highest.
 
+Archived contacts will be sorted separately from unarchived contacts, and appear at the bottom of the contacts list.
+
 Format `asort by/ ATTRIBUTE`
 
 * Attributes you can sort by: date, email, name, phone, role.
@@ -299,6 +301,8 @@ Examples:
 **<ins>When in the inspect window**
 
 Sorts all deliveries in the delivery list of a contact by the specified attribute, from lowest to highest.
+
+Archived deliveries will be sorted separately from unarchived deliveries, and appear at the bottom of the delivery list.
 
 Format `asort by/ ATTRIBUTE`
 
