@@ -245,15 +245,18 @@ public class ModelManager implements Model {
     public void editTagInPersons(Tag existingTag, String newTagName) {
         List<Person> persons = getFullPersonList();
         for (Person person : persons) {
+            Set<Tag> updatedTags = new HashSet<>();
             Set<Tag> tags = new HashSet<>(person.getTags());
             for (Tag tag : tags) {
                 if (!tag.equals(existingTag)) {
+                    updatedTags.add(tag);
                     continue;
                 }
                 tag.setTagName(newTagName);
+                updatedTags.add(tag);
             }
             Person newPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
-                    person.getRsvpStatus(), tags);
+                    person.getRsvpStatus(), updatedTags);
             setPerson(person, newPerson);
         }
     }
