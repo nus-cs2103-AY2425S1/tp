@@ -839,9 +839,10 @@ list-claims INDEX pt/POLICY_TYPE
 <div style="border: 1px solid #e0e0e0; padding: 16px; border-radius: 8px; background-color: #D6EAF8; margin-bottom: 16px;">
 
 🔔
-**Note:**
+**Notes:**
 * The claims are listed in the order they were added.
 * No filtering or sorting is applied by this command; it shows all existing claims.
+* The `list-claims` command does not alter the main client list display. Instead, it only shows the claim details in the message output box at the top. This behavior is different from `list-clients`, which modifies the main display.
 </div>
 
 **Examples:**
