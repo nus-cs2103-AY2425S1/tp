@@ -54,8 +54,10 @@ public class AgeContainsKeywordsPredicate implements Predicate<Person> {
             // Check for range
             var matcher = RANGE_PATTERN.matcher(keyword);
             if (matcher.matches()) {
-                int lowerBound = Integer.parseInt(matcher.group(1));
-                int upperBound = Integer.parseInt(matcher.group(2));
+                int bound1 = Integer.parseInt(matcher.group(1));
+                int bound2 = Integer.parseInt(matcher.group(2));
+                int lowerBound = Math.min(bound1, bound2);
+                int upperBound = Math.max(bound1, bound2);
                 return age >= lowerBound && age <= upperBound;
             } else {
                 // Check for individual age
