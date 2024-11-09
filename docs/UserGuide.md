@@ -130,7 +130,7 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 **Tip:** 
 * All parameters `NAME`, `PHONE_NUMBER`, `EMAIL`, `RELATIONSHIP` must be present.
 * **Names** should only contain alphanumeric characters and spaces, and it should not be blank.
-* **Phone numbers** should only contain numbers, and it should be at least 3 digits long.
+* **Phone numbers** should only contain numbers, and it should be at least 3 digits and at most 15 digits long.
 * **Emails** should be of the format local-part@domain.
 * **Relationships** should only contain alphabetic characters, and it should not be blank.
 </box>
