@@ -118,7 +118,7 @@ Adds a contact to the address book.
 Format: `add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TELEGRAM_USERNAME] [r/ROLE]…​`
 
 <div markdown="span" class="alert alert-primary">**Note:**
-A contact can have any number of roles (including 0), and the Telegram username is optional.
+A contact can have any number of roles (including 0), and the Telegram username is optional. The roles must be one of the following: attendee, vendor, volunteer and sponsor.
 </div>
 
 Examples:
