@@ -122,7 +122,8 @@ public class MarkAttendanceCommandTest {
 
         Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
-        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John Doe"), date, attendance, Optional.empty());
+        MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John Doe"), date, attendance,
+                Optional.empty());
 
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_DUPLICATE_STUDENT,
                 "A0191222D, A0191223E", "John Doe");

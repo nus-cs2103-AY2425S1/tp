@@ -28,7 +28,8 @@ public class DeleteAttendanceCommandParserTest {
 
         DeleteAttendanceCommand expectedCommand = new DeleteAttendanceCommand(name, date, Optional.of(studentNumber));
 
-        String userInput = " " + PREFIX_NAME + "John Doe " + PREFIX_DATE + "2023-10-09 " + PREFIX_STUDENT_NUMBER + "A0123456L";
+        String userInput = " " + PREFIX_NAME + "John Doe " + PREFIX_DATE + "2023-10-09 "
+                + PREFIX_STUDENT_NUMBER + "A0123456L";
         DeleteAttendanceCommand command = parser.parse(userInput);
 
         assertEquals(expectedCommand, command);

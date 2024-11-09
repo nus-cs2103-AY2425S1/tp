@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -10,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -22,6 +24,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.StudentBuilder;
+
 
 public class DeleteAttendanceCommandTest {
 
@@ -119,7 +122,8 @@ public class DeleteAttendanceCommandTest {
         Student student2 = new StudentBuilder().withName("John Doe").withStudentNumber("A0191223E").build();
         ModelStubWithDuplicateStudents modelStub = new ModelStubWithDuplicateStudents(student1, student2);
 
-        DeleteAttendanceCommand command = new DeleteAttendanceCommand(new Name("John Doe"), validDate, Optional.empty());
+        DeleteAttendanceCommand command = new DeleteAttendanceCommand(new Name("John Doe"), validDate,
+                Optional.empty());
 
         String expectedMessage = String.format(DeleteAttendanceCommand.MESSAGE_DUPLICATE_STUDENT,
                 "A0191222D, A0191223E", "John Doe");

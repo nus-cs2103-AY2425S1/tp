@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -41,7 +43,8 @@ public class DeleteAttendanceAllCommandTest {
         DeleteAttendanceAllCommand command = new DeleteAttendanceAllCommand(validTutorialGroup, validDate);
         CommandResult result = command.execute(model);
 
-        String expectedMessage = String.format(DeleteAttendanceAllCommand.MESSAGE_SUCCESS, validTutorialGroup, validDate);
+        String expectedMessage = String.format(DeleteAttendanceAllCommand.MESSAGE_SUCCESS, validTutorialGroup,
+                validDate);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertTrue(student1.getAttendanceRecord().isEmpty());
         assertTrue(student2.getAttendanceRecord().isEmpty());
