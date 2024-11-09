@@ -59,16 +59,16 @@ public class BatchMarkCommandTest {
                 .withRole("Parent")
                 .withEmail("cornelia@example.com").withAddress("10th street")
                 .withTags("friends").build();
-        Student newElle = new StudentBuilder().withName("Elle Meyer").withSex("F").withPhone("9482224")
+        Student newElle = new StudentBuilder().withName("Elle Meyer").withSex("F").withPhone("94822244")
                 .withRole("student").withAttendanceCount("4")
                 .withEmail("cornelia@example.com").withAddress("michegan ave").build();
-        Person newCarlMeier = new PersonBuilder().withName("Carl Meier").withSex("M").withPhone("876452533")
+        Person newCarlMeier = new PersonBuilder().withName("Carl Meier").withSex("M").withPhone("87645253")
                 .withRole("Parent")
                 .withEmail("cornelia@example.com").withAddress("10th street").withTags("omg").build();
-        Student newFiona = new StudentBuilder().withName("Fiona Kunz").withSex("F").withPhone("9482427")
+        Student newFiona = new StudentBuilder().withName("Fiona Kunz").withSex("F").withPhone("94824272")
                 .withRole("sTuDenT").withAttendanceCount("4")
                 .withEmail("lydia@example.com").withAddress("little tokyo").build();
-        Person newGeorge = new PersonBuilder().withName("George Best").withSex("M").withPhone("9482442")
+        Person newGeorge = new PersonBuilder().withName("George Best").withSex("M").withPhone("94822442")
                 .withRole("parent")
                 .withEmail("anna@example.com").withAddress("4th street").build();
         expectedModel.setPerson(ALICE, newAlice);
