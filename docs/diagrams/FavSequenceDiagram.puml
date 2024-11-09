@@ -79,6 +79,9 @@ deactivate CommandResult
 XXFavCommand --> LogicManager : r
 deactivate XXFavCommand
 
+XXFavCommand -[hidden]-> LogicManager
+destroy XXFavCommand
+
 [<-- LogicManager
 deactivate LogicManager
 @enduml

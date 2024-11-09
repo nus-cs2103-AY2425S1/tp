@@ -193,7 +193,7 @@ Step 4. The changes are committed to the address book by calling `AddressBook#se
 
 <puml src="diagrams/ApplyCommandSequence.puml" alt="ApplyCommandSequence" />
 
-Below displays an activity diagram that explains roughly what happens when a user tries to add an applcation:
+Below displays an activity diagram that explains roughly what happens when a user tries to add an application:
 <puml src="diagrams/ApplyCommandActivity.puml" alt="ApplyCommandActivity" />
 
 #### Design considerations:
@@ -234,7 +234,7 @@ Step 4. The changes are committed to the address book using `AddressBook#setComp
 
 <puml src="diagrams/UpdateCommandSequence.puml" alt="UpdateCommandSequence" />
 
-Below displays an activity diagram that explains roughly what happens when a user tries to add an applcation:
+Below displays an activity diagram that explains roughly what happens when a user tries to add an application:
 <puml src="diagrams/UpdateCommandActivity.puml" alt="UpdateCommandActivity" />
 
 #### Design considerations:
@@ -366,12 +366,12 @@ the old company in its `UniqueCompanyList` sorting by `isFavourite` in the proce
 
 * **Alternative 1 (current choice):** Uniformly ensure that companies are always sorted by favourites in all
 methods of `UniqueCompanyList` that manipulates its `internalList`.
-* Pros: Simple to implement and ensures that favourited companies always remain on top.
-* Cons: Some time cost is incurred for all commands that modify the company list as list is always sorted by favourites.
+   * Pros: Simple to implement and ensures that favourited companies always remain on top.
+   * Cons: Some time cost is incurred for all commands that modify the company list as list is always sorted by favourites.
 
 * **Alternative 2:** Have a specific method in `AddressBook` that sorts the companies.
-* Pros: More flexible which allows different methods of sorting the future.
-* Cons: More effort by developers to ensure that the list is sorted by favourites when it should be. 
+   * Pros: More flexible which allows different methods of sorting the future.
+   * Cons: More effort by developers to ensure that the list is sorted by favourites when it should be. 
 
 [back to top](#internbuddy-developer-guide)
 
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `InternBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add a company**
+**<a id="uc01"></a>Use case: UC01 - Add a company**
 
 **MSS**
 
@@ -516,11 +516,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC04 - Delete a saved company**
+**<a id="uc04"></a>Use case: UC04 - Delete a saved company**
 
 **MSS**
 
-1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>
 2.  User requests to delete a specific company in the list.
 3.  InternBuddy deletes the company.
 
@@ -532,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2a. User decides not to edit a company.
+* 2a. User decides not to delete a company.
 
   Use case ends.
 
@@ -541,9 +541,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
-**Use case: UC05 - Edit company information**
+**<a id="uc05"></a>Use case: UC05 - Edit company information**
 
-1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)</ins>
 2.  User requests to edit a specific company in the list.
 3.  InternBuddy edits the company.
 
@@ -570,9 +570,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes at step 2.
 
-**Use case: UC06 - Edit company application status**
+**<a id="uc06"></a>Use case: UC06 - Edit company application status**
 
-1.  User requests to [list saved companies (UC03)](#uc02) or [find a company (UC04)](#uc03)
+1.  User requests to <ins>[list saved companies (UC02)](#uc02)</ins> or <ins>[find a company (UC03)](#uc03)
 2.  User requests to edit a specific company in the list.
 3.  InternBuddy edits the company.
 
