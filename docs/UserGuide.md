@@ -309,6 +309,7 @@ seamless>
 
 **Caution:**
 If your changes to the data file makes its format invalid, DorManagerPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Similarly, when trying to import a invalid JSON file, DorManagerPro will raise an error and disallow the import to go through to prevent invalid data.<br>
 Furthermore, certain edits can cause the DorManagerPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
