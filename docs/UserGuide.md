@@ -108,9 +108,11 @@ Need a quick reference?
 
 **Notes about command parameters:**<br>
 
-* `NAME` only accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`  
-  e.g. Flora-Ann. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
+* `NAME` only accepts alphanumeric characters and spaces. We acknowledge that names can contain special characters like `-` or `/`.  
+  e.g. `Flora-Ann`. We ask that users workaround this issue by using spaces or other alternatives to name contacts.
 
+* Adding and editing `NAME`s is case-sensitive. Although duplicate contact names are not allowed,     
+e.g. adding two separate contacts `Bobby Ang` and `bobby ang` would be allowed.
 </box>
 --------------------------------------------------------------------------------------------------------------------
 
