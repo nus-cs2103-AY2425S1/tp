@@ -136,6 +136,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [g/GENDER] [m/MODULE]... [t/TAG]…​`
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="span" class="alert alert-danger">⚠️ **Warning:**
+Editing modules will cause grades to disappear.
+</div>
+
 Examples:
 *  `edit 1 p/91234567` : Edits the phone number of the 1st person to be `91234567`.
 *  `edit 2 n/Betsy Crower t/` : Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
