@@ -21,12 +21,7 @@ ContactMate is a **desktop app for managing clients (Singaporeans and Permanent 
          1. Hold down the `Command` key and press `Space` (<kbd>&#x2318; Cmd</kbd> + <kbd>Space</kbd>).
          2. Type `Terminal` and press `Enter`.
    1. In the terminal, type `java --version` and press `Enter`.
-   2. If you have Java `17` or above installed, you should see a message like this. Referencing the first line (`openjdk XX.0.12 2024-07-16 LTS`), `XX` should be `17` or above.
-    ```
-       openjdk 17.0.12 2024-07-16 LTS
-       OpenJDK Runtime Environment Corretto-17.0.12.7.1 (build 17.0.12+7-LTS)
-       OpenJDK 64-Bit Server VM Corretto-17.0.12.7.1 (build 17.0.12+7-LTS, mixed mode, sharing)
-      ```
+   2. If you have Java `17` or above installed, you should see a message containing something like this, (`openjdk XX.0.12 2024-07-16 LTS`), where `XX` should be `17` or above.
     3. If you do not have Java `17` or above installed, proceed to Step 2, otherwise, skip to Step 3.
 2. Install Java `17` using the following steps.
    1. Go to [this link](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
