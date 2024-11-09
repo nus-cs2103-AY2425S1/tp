@@ -23,7 +23,12 @@ public class StorageManager implements Storage {
     private final LessonScheduleStorage lessonScheduleStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code TutorEaseStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code TutorEaseStorage}, {@code UserPrefsStorage} and
+     * {@code LessonScheduleStorage}.
+     *
+     * @param tutorEaseStorage the storage for TutorEase data.
+     * @param userPrefsStorage the storage for user preferences data.
+     * @param lessonScheduleStorage the storage for lesson schedule data.
      */
     public StorageManager(TutorEaseStorage tutorEaseStorage, UserPrefsStorage userPrefsStorage,
                           LessonScheduleStorage lessonScheduleStorage) {
@@ -80,37 +85,17 @@ public class StorageManager implements Storage {
     }
 
     // ================ LessonSchedule methods ==============================
-    /**
-     * Returns the file path of the lesson schedule data file.
-     */
     @Override
     public Path getLessonScheduleFilePath() {
         return lessonScheduleStorage.getLessonScheduleFilePath();
     }
 
-    /**
-     * Reads the lesson schedule from the default file path.
-     *
-     * @param tutorEase It cannot be null.
-     * @return An {@code Optional} containing the {@code LessonSchedule} if the file exists, otherwise an empty {@code
-     * Optional}.
-     * @throws DataLoadingException If there was any problem reading from the file.
-     */
     @Override
     public Optional<ReadOnlyLessonSchedule> readLessonSchedule(ReadOnlyTutorEase tutorEase)
             throws DataLoadingException {
         return readLessonSchedule(lessonScheduleStorage.getLessonScheduleFilePath(), tutorEase);
     }
 
-    /**
-     * Reads the lesson schedule from the specified file path.
-     *
-     * @param filePath It cannot be null.
-     * @param tutorEase It cannot be null.
-     * @return An {@code Optional} containing the {@code LessonSchedule} if the file exists, otherwise an empty {@code
-     * Optional}.
-     * @throws DataLoadingException If there was any problem reading from the file.
-     */
     @Override
     public Optional<ReadOnlyLessonSchedule> readLessonSchedule(Path filePath, ReadOnlyTutorEase tutorEase) throws
             DataLoadingException {
@@ -118,24 +103,11 @@ public class StorageManager implements Storage {
         return lessonScheduleStorage.readLessonSchedule(filePath, tutorEase);
     }
 
-    /**
-     * Saves the given {@code LessonSchedule} to the storage.
-     *
-     * @param lessonSchedule It cannot be null.
-     * @throws IOException If there was any problem writing to the file.
-     */
     @Override
     public void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule) throws IOException {
         saveLessonSchedule(lessonSchedule, lessonScheduleStorage.getLessonScheduleFilePath());
     }
 
-    /**
-     * Saves the given {@code LessonSchedule} to the storage.
-     *
-     * @param lessonSchedule It cannot be null.
-     * @param filePath It cannot be null.
-     * @throws IOException if there was any problem writing to the file.
-     */
     @Override
     public void saveLessonSchedule(ReadOnlyLessonSchedule lessonSchedule, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
