@@ -32,8 +32,8 @@ benefits of a Graphical User Interface (GUI).
     - [Saving Data](#saving-the-data)
     - [Editing the Data File](#editing-the-data-file)
     - [Backup Records](#backup-the-records--backup)
-        - [Manual Backup](#how-manual-backup-works)
-        - [Automated Backup](#automated-backup-)
+        - [Manual Backup](#manual-backup-save-your-current-data)
+        - [Automated Backup](#automated-backup-ensure-data-safety-with-minimal-effort)
     - [Listing Backups](#listing-all-backups--listbackups)
     - [Restoring Backups](#restoring-data-from-backups--restore)
     - [Exiting the Program](#exiting-the-program--exit)
@@ -74,9 +74,9 @@ benefits of a Graphical User Interface (GUI).
 
     * `backup update John's age` : Creates a backup with a specific descriptive naming.
    
-    * `backup` : Creates a backup by default naming.
+    * `backup` : Creates a backup by default naming (`manual_backup`).
    
-    * `restore 0` : Restores backup file from the /backups/ path with the naming starts with index 0.
+    * `restore 0` : Prompts a confirmation message and restore backup file from the /backups/ path with the naming starts with index 0 by typing `Y'.
    
     * `listbackups` : Lists all available backup files in the /backups/ path.
 
@@ -214,13 +214,13 @@ Examples:
 * `list` followed by `delete 1` deletes the first patient in the list.
 * `find Betsy` followed by `delete 1` deletes the first patient in the results of the `find` command.
 
-![delete](images/delete%20patient.png)
+![delete](images/deletepatient.png)
 
 ### Clearing all entries : `clear`
 
 Clears all entries from ClinicBuddy.
 
-![clear](images/clear%20entries.png)
+![clear](images/clearentries.png)
 
 Format: `clear`
 
@@ -345,92 +345,108 @@ save manually.
 
 ### Backup the records : `backup`
 
-The `backup` feature allows you to manually create a backup of your current patient records with a specific descriptive naming.
-This is useful if you want to save the state of your current data at a specific point in time.
+ClinicBuddy ensures the security and recovery of patient records through manual and automated backup options.
+These are useful to save the state of your current data at a specific point in time.
 
-Format: `backup [DESCRIPTION]`
+#### **Manual Backup: Save your current data**
+- The `backup` command allows users to manually save a copy of their current patient records.
 
-#### **How Manual Backup Works:**
+- Key Features:
+  - **Description Option:** You can add a meaningful description to identify the backup.
+  - **Indexed Backups:** Backup files are automatically assigned an index (0–9).
+  - **Automated Deletion:** Only the latest 10 backups are retained to optimize storage.
 
-- Creates a manual backup of the current patient records.
-- An optional `DESCRIPTION` can be provided for clarity of the content in the backup file to help user to identify the backup file effectively.
-- Without `DESCRIPTION`, the system will name the backup file using the default name: `manual_backup`.
-- Each backup file is assigned an index number from `0` to `9` and the index cycles back to `0` after reaching `9`.
-- Each backup file is also assigned the timestamp of the creation time.
-- The system retains only the 10 most recent backups, older backups are automatically overwritten.
-- These backups are stored in:
-  ```
-  [Application Directory]/backups/
-  ```
+- How Manual Backup Works:
+  - **Basic Command:** Input `backup` to create a backup with a default description (`manual_backup`).
+  - **Custom Description:** Use `backup DESCRIPTION` to label your backup with details about changes.
+  - **File Location:** Backups are stored in `[Application Directory]/backups/`.
+  - Each backup file is assigned the timestamp of creation time and an index number from `0` to `9`.
+  - The index will reset to `0` after reaching `9`, **overwriting** the oldest backup file.
+  
 - Naming Format:
   ```
-  <INDEX>_<DESCRIPTION>_<TIMESTAMP>.json
+  INDEX_DESCRIPTION_TIMESTAMP.json
   ```
 - Example:
   ```
   3_After updating John's contact info_2024-10-30_15-45-00-000.json
   ```
 
-![backup](images/backup.png)
+<div markdown="span" class="alert alert-primary">:bulb:
+**Important Notes:** <br>
+- Use clear and unique descriptions to distinguish backup files. <br>
+- A backup name is limited to 250 characters only.
+ </div>
 
-#### **Automated Backup:** 🚨
-- Whenever a patient record is deleted or cleared, ClinicBuddy automatically creates a backup of all patient records before the deletion. 
-- This helps to ensure that no data is permanently lost in case of an accidental deletion.
-- Backups are stored in the same location as the manual backup which is the /backups/ folder within the application directory.
+![manual_backup](images/manualbackup.png)
+
+#### **Automated Backup: Ensure data safety with minimal effort**
+- ClinicBuddy automatically creates backups during critical operations:
+    - **Before Deleting a Patient:** A backup is created before any record deletion.
+    - **Before Clearing Patient Record:** A backup is generated when all patient data is cleared.
+
+- How Automated Backup Works:
+    - **Description Naming:** Backups are labeled with the action, such as `delete_<name>` or `clear`.
+    - **No User Action Required:** These backups are generated automatically and stored in the same `/backups/` folder.
+    - **Formatting:** Automated backups also follow the indexed system (0–9) and contain the timestamp of creation time.
   ```
   0_delete_John Doe_2024-10-30_18-05-29-745.json
   ```
   ```
   1_clear_2024-10-30_18-05-29-745.json
   ```
+![delete_patient](images/deletepatient.png)
+![clear_entries-](images/clearentries.png)
 
 ### Listing all backups : `listbackups`
-Displays a list of all available backups along with their details.
 
 Format: `listbackups`
 
-#### **How ListBackups works:**
-- Shows all backups stored in the /backups/ directory.
-- Each backup is displayed with its index, description, and creation timestamp in a specific format.
+#### How listbackups works:
+- The `listbackups` command displays all saved backups, including their:
+    - **Index:** Identifies each backup. 
+    - **Description:** Explains the backup's purpose. 
+    - **Timestamp:** Shows when the backup was created.
+    - The backup list displayed will be sorted in descending by the timestamp.
 - Example:
   ```
   Available backups:
-  0 [delete_John Doe] Created on: 30 Jan 2024 18:05:29
-  1 [manual_backup] Created on: 13 May 2024 09:52:10
-  2 [clinicbuddy] Created on: 21 Jul 2024 13:20:07
+  2 [delete_John Doe] Created on: 30 Nov 2024 18:05:29
+  1 [manual_backup] Created on: 13 Jul 2024 09:52:10
+  0 [clinicbuddy] Created on: 21 May 2024 13:20:07
   ```
-- The date format used is dd MMM yyyy HH:mm:ss.
-- Only the 10 most recent backups are available for storage efficiency.
+
+<div markdown="span" class="alert alert-primary">:bulb:
+**Important Note:** <br>
+The date format used is dd MMM yyyy HH:mm:ss.
+ </div>
 
 ![listbackups](images/listbackups.png)
 
 ### Restoring data from backups : `restore`
 
-The `restore` feature allows you to recover patient records from a specific backup file by the index in its name.
-This is useful in case of unintended data loss or errors.
+The `restore` command allows users to revert to a previous backup file using its index. This feature is essential for recovering data after accidental changes or deletions.
 
-Format: `restore <INDEX>`
+Format: `restore INDEX`
 
-#### **How Restore Works:**
-
-- Restores the patient records from the backup with the specified `INDEX`.
-- The `INDEX` must correspond to a valid backup file in the /backups/ directory.
-- Providing an invalid `INDEX` will result in an error message.
-- Use the `listbackups` command to view available backups and their indices.
+#### How Restore Works:
+- **View Available Backups:** Use the listbackups command to display all backup files. 
+- **Restore Command:** Enter restore INDEX to restore the backup with the specified index. 
+- **Confirmation Prompt:** You will be asked to confirm before proceeding with the restoration.
 - Example:
   ```
   restore 2
   ```
-- This will restore the patient records from the backup file with index 2.
+  
+<div markdown="span" class="alert alert-primary">:bangbang:
+**Warnings:** <br>
+- Restoring a backup overwrites all current patient records.<br>
+- Create a manual backup before restoring to preserve recent changes.<br>
+- Restoring without confirmation is not allowed, preventing accidental data loss.
+ </div>
 
-**Important Notes:**
-- Restoring from a backup will **overwrite** the current patient records in ClinicBuddy.
-- Ensure that you want to discard any changes made since the backup before performing a restore.
-- Ensure any recent changes are backed up before performing a restore.
-- The `restore` command will restore the entire set of patient records from the backup.
-- It is safe to create a backup for current data before performing a restore.
-
-![restore](images/restore.png)
+![confirmation](images/confirmation.png)
+![resto re](images/restore.png)
 
 ### Exiting the program : `exit`
 
@@ -447,16 +463,13 @@ Format: `exit`
 the data of your previous AddressBook home folder.
 
 **Q**: What should I do if I accidentally delete a patient record? <br>
-**A**: If a patient record is accidentally deleted, you can use the `restore` command to retrieve it from a backup file. Ensure you have created regular backups to make this possible.
+**A**: If a patient record is accidentally deleted, you can use the `restore` command to retrieve it from a backup file.
 
 **Q**: Can I customize the operating hours of ClinicBuddy? <br>
 **A**: Yes! You can use the `hours` command to set custom opening and closing times. Note that all existing appointments must fall within these new hours for the change to take effect.
 
 **Q**: What happens if I update a patient’s information incorrectly? <br>
-**A**: If an error occurs during an update, you can re-update the patient's details with the correct information. Alternatively, restoring data from a recent backup may help recover the previous details.
-
-**Q**: Does ClinicBuddy automatically save changes? <br>
-**A**: Yes, ClinicBuddy automatically saves all changes to the data file after every command that modifies patient records. There’s no need to manually save changes.
+**A**: If an error occurs during an update, you can re-update the patient's details with the correct information. Alternatively, restoring data from a recent backup may help recover the previous details.  Ensure you have created regular backups to make this possible.
 
 **Q**: How can I view a history of my backups? <br>
 **A**: Use the `listbackups` command to see all available backups with timestamps. This feature can help you select the correct backup if you need to restore data.
@@ -469,6 +482,16 @@ the data of your previous AddressBook home folder.
 
 **Q**: What if I forget the command formats?<br>
 **A**: You can use the `help` command in ClinicBuddy for a quick reference or refer back to this user guide. This guide includes command formats and examples to assist you.
+
+**Q**: Can I cancel a restore operation if I change my mind?<br>
+**A**: Yes. The restore operation prompts for confirmation. If you cancel the operation by typing anything other than `Y`, no changes will be made to your current records.
+
+**Q**: How are backups sorted in the listbackups command?<br>
+**A**: Backups are listed in descending order by their creation timestamp, with the most recent backup appearing at the top.
+
+**Q**: Is there a limit on the number of backups I can store?
+**A**: Yes. ClinicBuddy retains only the 10 most recent backups for storage efficiency. Older backups are automatically overwritten when a new backup is created.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -487,8 +510,18 @@ the data of your previous AddressBook home folder.
    **Solution:** Always create a new **backup before performing a restore to preserve current records.
 6. Updating operating hours will fail if there are existing appointments outside the new hours. <br>
    **Solution:** `Reschedule` or `delete` appointments that fall outside the proposed hours before making the update.
-7. If multiple backups have similar descriptions, it may be challenging to distinguish between them.
+7. If multiple backups have similar descriptions, it may be challenging to distinguish between them.<br>
    **Solution:** Use unique and specific descriptions that include the patient names or specific changes to make backups more identifiable. Moreover, you can also refer to the time of the creation time.
+8. Backup descriptions longer than 250 characters will cause the operation to fail.<br>
+   **Solution:** Ensure backup descriptions are concise and do not exceed the character limit.
+9. Attempting to restore from an invalid or unavailable index results in an error.<br>
+   **Solution:** Use the `listbackups` command to verify available backup indexes before attempting a restore.
+10. When the backup limit (10 files) is reached, older backups are automatically overwritten without warning.<br>
+    **Solution:** Move older backups to a different folder if they need to be retained.
+11. The backup list is sorted by timestamp but may not match user expectations (e.g., expecting sorting by index).<br>
+    **Solution:** Understand that backups are sorted by creation time, not index, to locate backups accurately.
+12. The restore operation requires confirmation, but users might overlook this step, causing confusion.<br>
+    **Solution:** Pay attention to the confirmation message and respond as instructed (Y to confirm or any other key to cancel).
 
 --------------------------------------------------------------------------------------------------------------------
 
