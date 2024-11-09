@@ -173,18 +173,25 @@ Format: `del n/NAME` followed by `y` or `n`
 
 </box>
 
-<div style="display: flex; justify-content: space-between;">
-  <div style="text-align: center; width: 33%;">
-    <img src="images/deleteMsg.png" alt="delete message" style="width: 100%;">
-    <div>Confirmation Prompt</div>
+<div style="display: flex; flex-direction: column;">
+  <div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 65%;">
+      <img src="images/deleteMsg.png" alt="delete message" style="width: 100%;">
+      <div></div>
+    </div>
+    <div style="text-align: center; width: 33%;">
+      <div>MUST BE followed by y or n command</div>
+    </div>
   </div>
-  <div style="text-align: center; width: 33%;">
-    <img src="images/deleteYMsg.png" alt="deleteY message" style="width: 100%;">
-    <div>Success</div>
-  </div>
-  <div style="text-align: center; width: 33%;">
-    <img src="images/deleteNMsg.png" alt="deleteN message" style="width: 100%;">
-    <div>Cancel Operation</div>
+  <div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 50%;">
+      <img src="images/deleteYMsg.png" alt="deleteY message" style="width: 100%;">
+      <div>Success</div>
+    </div>
+    <div style="text-align: center; width: 50%;">
+      <img src="images/deleteNMsg.png" alt="deleteN message" style="width: 100%;">
+      <div>Cancel Operation</div>
+    </div>
   </div>
 </div>
 
@@ -277,18 +284,25 @@ Format: `del-wed w/NAME & NAME` / `dw w/NAME & NAME` followed by `y` or `n`
 
 </box>
 
-<div style="display: flex; justify-content: space-between;">
-  <div style="text-align: center; width: 33%;">
-    <img src="images/deleteWeddingMsg.png" alt="delete wedding message" style="width: 100%;">
-    <div>Confirmation Prompt</div>
+<div style="display: flex; flex-direction: column;">
+  <div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 65%;">
+      <img src="images/deleteWeddingMsg.png" alt="delete message" style="width: 100%;">
+      <div></div>
+    </div>
+    <div style="text-align: center; width: 33%;">
+      <div>MUST BE followed by y or n command</div>
+    </div>
   </div>
-  <div style="text-align: center; width: 33%;">
-    <img src="images/deleteWeddingYMsg.png" alt="delete wedding message success" style="width: 100%;">
-    <div>Success</div>
-  </div>
-  <div style="text-align: center; width: 33%;">
-    <img src="images/deleteWeddingNMsg.png" alt="delete wedding message cancel" style="width: 100%;">
-    <div>Cancel Operation</div>
+  <div style="display: flex; justify-content: space-between;">
+    <div style="text-align: center; width: 50%;">
+      <img src="images/deleteWeddingYMsg.png" alt="deleteY message" style="width: 100%;">
+      <div>Success</div>
+    </div>
+    <div style="text-align: center; width: 50%;">
+      <img src="images/deleteWeddingNMsg.png" alt="deleteN message" style="width: 100%;">
+      <div>Cancel Operation</div>
+    </div>
   </div>
 </div>
 
@@ -382,6 +396,8 @@ Format: `filter n/KEYWORD... j/KEYWORD...` / `fil n/KEYWORD... j/KEYWORD...`
 <box type="tip" seamless>
 
 **Tip:** You can filter by multiple name and/or job fields at once!
+**Tip:** Keep in mind that partial matches within the name (e.g., middle or last names alone) won’t return results.
+To ensure a match, start from the beginning of the full name or first name.
 
 </box>
 
