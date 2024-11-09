@@ -11,7 +11,7 @@ import seedu.address.model.person.Nric;
  */
 public class AppointmentCommandParser implements Parser<AppointmentCommand> {
 
-    private static final String APPOINTMENT_PREFIX = "a/";
+    private static final String APPOINTMENT_PREFIX = "app/";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AppointmentCommand
@@ -24,7 +24,7 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         // Split the arguments into components
         String[] argParts = trimmedArgs.split("\\s+");
 
-        // Check if the input has exactly 3 parts: INDEX, a/DATE, TIME
+        // Check if the input has exactly 3 parts: NRIC, app/DATE, TIME
         if (argParts.length != 3 || !argParts[1].startsWith(APPOINTMENT_PREFIX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
@@ -36,7 +36,7 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
 
         try {
             // Argument parts validation
-            dayString = argParts[1].substring(2, 12);
+            dayString = argParts[1].substring(4, 14);
 
             // Extract day, month, and year
             dayPart = dayString.substring(0, 2);
@@ -108,7 +108,7 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         }
 
         // Extract and validate the appointment date and time
-        String appointmentDateTime = trimmedArgs.substring(trimmedArgs.indexOf(APPOINTMENT_PREFIX) + 2).trim();
+        String appointmentDateTime = trimmedArgs.substring(trimmedArgs.indexOf(APPOINTMENT_PREFIX) + 4).trim();
 
         // If appointmentDateTime is not valid, throw an error
         if (appointmentDateTime.isEmpty()) {
