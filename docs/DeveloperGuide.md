@@ -427,7 +427,23 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.              
       Use case resumes from Step 2.
 
-**Use Case: UC04 - Find contacts with a specific name keyword**
+**Use Case: UC04 - Edit contacts**
+
+**MSS**:
+
+1. Tutor keys in required fields to edit a contact.
+1. TutorEase edits the contact.
+   Use case ends.
+
+**Extensions**:
+
+* **1a**. TutorEase detects bad or wrongly formatted inputs.
+    * **1a1**. TutorEase prompts Tutor with correct format.
+    * **1a2**. Tutor enters new data.  
+      Steps 1a1 to 1a2 are repeated until the data entered are correct.              
+      Use case resumes from Step 2.
+
+**Use Case: UC05 - Find contacts with a specific name keyword**
 
 **MSS**:
 
@@ -448,7 +464,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
     * **1b2**. Tutor enters a new keyword or cancels the search.  
       Use case resumes from Step 2 or ends if cancelled.  
 
-**Use Case: UC05 - Add lesson for student**  
+**Use Case: UC06 - Add lesson for student**  
 **MSS:**
 
 1. Tutor keys in required fields to add student contact.
@@ -469,7 +485,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC06 - Delete lesson for student**  
+**Use Case: UC07 - Delete lesson for student**  
 **MSS:**
 
 1. Tutor keys in required fields to delete student contact.
@@ -490,7 +506,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1b1 to 1b2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC07 - List all lessons**  
+**Use Case: UC08 - List all lessons**  
 **MSS:**
 
 1. Tutor keys in required fields to list all lessons.
@@ -505,11 +521,11 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
 
-**Use Case: UC08 - Find lessons by student names**  
+**Use Case: UC09 - Find lessons by student names**  
 **MSS:**
 
-1. Tutor keys in a keyword in the required field to find lessons with students whose names contain any of the specified keywords.
-1. TutorEase lists lessons with student names that contain the given keyword.    
+1. Tutor keys in a keyword in the required field, to find lessons with students whose names contain any of the specified keywords.
+1. TutorEase lists lessons that match the requirement.    
    Use case ends.
 
 **Extensions:**
@@ -524,7 +540,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
     * **1b2**. Tutor enters a new keyword or cancels the search.  
       Use case resumes from Step 2 or ends if cancelled.
 
-*Use Case: UC09 - Clear all entries**  
+*Use Case: UC10 - Clear all entries**  
 **MSS:**
 
 1. Tutor keys in clear command.
@@ -538,6 +554,7 @@ Priorities: MVP (must have), 2 (nice to have), 3 (unlikely to have)
     * **1a2.** Tutor enters new data.  
       Steps 1a1 to 1a2 are repeated until the data entered are correct.  
       Use case resumes from Step 2.
+
 
 <div style="page-break-after: always;"></div>
 
