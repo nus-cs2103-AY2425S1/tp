@@ -1571,7 +1571,7 @@ Value of the input command changes from "redit cl/Jayden a/Blk" to "redit cl/Jay
     1. Prerequisites: List all _clients_ using the `list` command. Multiple _clients_ in the list.
 
     2. Test case: `sort`<br>
-       Expected: Client list will be sorted in alphabetical order by name. The sorting is case-insensitive. A command success message for name will be displayed in the result display box.
+       Expected: Client list will be sorted in alphabetical order by name. A command success message for name will be displayed in the result display box.
 
 #### Clear
 
