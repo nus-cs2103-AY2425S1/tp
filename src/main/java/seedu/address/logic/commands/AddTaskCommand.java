@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,7 +41,7 @@ public class AddTaskCommand extends Command {
         requireNonNull(model);
 
         if (target.getZeroBased() >= model.getFilteredPersonList().size()) {
-            throw new CommandException(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person patient = model.getFilteredPersonList().get(target.getZeroBased());
