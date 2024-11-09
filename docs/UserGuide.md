@@ -159,10 +159,11 @@ Symbol     | Parameter    | Constraints
 
 ### Other Parameters
 
-Symbol     | Parameter                        | Constraints
------------|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**-**  | `INDEX`                          |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
-**-**  | `DATE`                           |- **Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.
+Symbol     | Parameter   | Constraints
+-----------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
+**-**  | `INDEX`     |- Refers to the index number shown in the displayed person list.<br>- **Must be a positive integer** 1, 2, 3, …​
+**-**  | `DATE`      |- **Must be of the form `dd-MM-yyyy`**, where `dd` is the day, `MM` is the month, and `yyyy` is the year.
+**-**  | `KEYWORD`   |- Cannot be empty.<br>- Accepts any character.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -410,6 +411,12 @@ Format: `scheduleall`
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WardWatch home folder.
+
+**Q**: I want to edit an appointment, but there is no command for it. What now?<br>
+**A**: Although you could use the `makeappt` command to overwrite an existing appointment, we do not recommend this method. Instead, we suggest deleting the existing appointment with `delappt` first before using `makeappt` to create a new appointment with the edited details.
+
+**Q**: My patient's details are too long and gets cut off when displayed. How do I see it in full?<br>
+**A**: To see the full details of a patient, please use the `view` command.
 
 [Back to Table of Contents](#table-of-contents)
 
