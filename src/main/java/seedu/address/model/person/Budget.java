@@ -24,6 +24,9 @@ public class Budget {
 
         assert !budget.isEmpty();
 
+        // Fixes "00000X.XXX" preceding zeros
+        budget = budget.replaceFirst("^0+(?!$)", "");
+
         // Fixes "."
         if (budget.equals(".")) {
             value = "0.00";
