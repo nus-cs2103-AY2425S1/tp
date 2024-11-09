@@ -144,7 +144,7 @@ Format: `find PREFIX KEYWORD [KEYWORD]…​`
 * `find p/973` returns all Contacts whose phone number contains 973
 * `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
 ![result for 'find n/alex n/david'](images/findCommandName.png)
-* `find t/friends` returns all Contacts tagged with 'guest' <br>
+* `find t/friends` returns all Contacts tagged with 'friends' <br>
 ![result for `find t/guest](images/findCommandTag.png)
 * `find w/Casey's Wedding` returns all Contacts involved with Casey's Wedding <br>
 
@@ -301,7 +301,7 @@ Edits the details of a `Wedding`.
 
 Format: `edit-wedding INDEX [w/WEDDINGNAME] [a/ADDRESS]`
 
-* Edits the specific `Wedding` at the INDEX when in [list-wedding](#listing-all-weddings-list-weddings) view.
+* Edits the specific `Wedding` at the INDEX when in [list-weddings](#listing-all-weddings-list-weddings) view.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * Existing values in the specified fields will be overwritten with the specified values.
 
@@ -385,7 +385,7 @@ Format: `unmark-task TASKINDEX`
 ## Vendor Features
 
 ### Assigning a Vendor : `assign-vendor`
-Format: `assign-venor PERSONINDEX`
+Format: `assign-vendor PERSONINDEX`
 
 * Assigns an existing `Person` at the specified `Index` to become a `Vendor`.
 * The `Vendor` now can have `Tasks` assigned to it.
@@ -393,7 +393,7 @@ Format: `assign-venor PERSONINDEX`
 * The index **must be a positive integer** 1, 2, 3, …​.
 
 ### Unassigning a Vendor : `unassign-vendor`
-Format: `unassign-venor PERSONINDEX`
+Format: `unassign-vendor PERSONINDEX`
 
 * Unassigns a `Vendor` at the specified `Index` such that the `Person` is no longer a `Vendor`. `Tasks` can no longer be assigned to this `Person`. 
 * The index refers to the index number shown in the displayed person list.
