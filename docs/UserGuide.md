@@ -20,6 +20,7 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 ## Table of Contents
 - [Quick Start](#quick-start-non-technical-users)
 - [Command Summary](#command-summary)
+- [Parameter Constraints](#parameter-constraints)
 - [Features](#features)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
@@ -86,6 +87,49 @@ Command Line Interface (CLI) allows you to type text commands to perform specifi
 | **[Clear](#clearing-all-entries-clear-ab--cab-and-clear-wb--cwb)** | `clear-ab` or `cab` for address book and `clear-wb` or `cwb` for wedding book followed by `y` or `n`                                                                                             |
 | **[Exit](#exiting-the-program-exit)**                              | `exit`                                                                                                                                                                                           |
 --------------------------------------------------------------------------------------------------------------------
+
+### Parameter Constraints
+The table below provides a brief explanation of each parameter encountered in the command summary above. It also details the constraints of each parameter used in a command.
+
+<box type="important" seamless>
+
+**IMPORTANT:** Please ensure that all parameters adhere to the constraints mentioned below. If you choose not to do so, the command will not be executed and error messages will be shown.
+
+</box>
+
+<box type="info" seamless>
+
+**Autoformatting in KnottyPlanners:**<br>
+
+* KnottyPlanners aligns with industry standards by automatically formatting the `NAME`, `JOB`, `TAG` and `WEDDING NAME` fields.
+
+* For each field:
+    - The first letter of each word is auto-capitalised.
+    - Leading and trailing spaces are trimmed.
+    - Extra spaces in between words are trimmed to 1 space..
+
+* Examples:
+    - `li sirui` is formatted to `Li Sirui`
+    - `  Wedding Photographer ` is formatted to `Wedding Photographer`
+    - `Adam &    Harry` is formatted to `Adam & Harry` 
+
+</box>
+
+
+| Parameter | Prefix | Definition | Case-sensitvity | Constraints | Examples |
+|--------------------|-|-----------------------------------------------------------------------------------------------------------|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`             | `n/` | Name of the person. | Case-insensitive | - Only alphanumeric characters, spaces, `/`, and `.` are allowed. <br> - Should not be blank. <br> - If the name contains a `-`, a possible workaround is to replace the `-` with an empty spacing. | :+1: `Muhammad Ali` <br>:+1: `Henry s/o Nathan` <br>:+1: `Robert Downey Jr.` <br>:x: `Trent Alexander-Arnold` <br>:x: `@JohnnyBoi` |
+| `PHONE`            | `p/` | Phone number of the person. | NA | - Only numbers and `+` are allowed. <br> - Should be at least 3 digits long. <br> - Should not be blank. <br> - There is no limit on the maximum length of phone numbers accepted to accommodate international phone numbers as well. | :+1: `98765432` <br>:+1: `+65 9876 5432` <br>:x: `1234 5678 (HP) 1111-3333 (Office)` |
+| `EMAIL`            | `e/` | Email address of the person. | Case-sensitive | - Should be in the format `local-part@domain`. <br> - `local-part` should only contain alphanumeric characters and the special characters `+`, `_`, `.`, `-`. `local-part` may not start or end with any special characters, or contain consecutive special characters. <br> - `domain` must be at least 2 characters long, start and end with alphanumeric characters. <br> - Should not be blank. <br> | :+1: `gary@yahoo.com` <br>:x: `henry` <br>:x: `j++a@rocketmail.com` |
+| `ADDRESS`          | `a/` | Address of the person. | Case-sensitive | - All values are allowed. <br> - Should not be blank. | :+1: `Woodlands Dr 71, Blk 680C, #08-12, S721767` |
+| `JOB`              | `j/` | Occupation of the person. | Case-insensitive | - All values are allowed.<br> - Should not be blank. | :+1: `DJ` |
+| `TAG`              | `t/` | A tag is the wedding associated with that person. | Case-insensitive. | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank. | :+1: `Ahmad & Esther` <br> :+1: `Kattar d/o Hanif & Xavier Lee` <br> :x: `Jerry and Stacy` <br> :x: `Farah x Adam` |
+| `WEDDING NAME`     | `w/` | Name of a wedding. | Case-insensitive. | - Only alphanumeric characters spaces, `/`, `.` and `&` are allowed. <br> - Should be in the format `NAME & NAME`. <br> - Should not be blank. | :+1: `Henry & Terry`<br> :+1: `Eubanks Jr. & Ayesha` <br> :x: `Nwakame Dickson` <br> :x: `Siti n Syafie` |
+| `VENUE`            | `v/` | Location of the wedding. | Case-sensitive | - All values are allowed. <br> - Should not be blank. | :+1: `Fullerton Hotel, Ballroom 1, #01-05` |
+| `DATE`             | `d/` | Date of the wedding. | NA | - Should be in the format `DD/MM/YYY`. <br> - Only numbers and `/` are allowed. <br> - Should not be blank. | :+1: `12/12/2025` <br>:x: `12th June 2021` <br>:x: `12th June 2021` |
+
+
+
 ## Features
 
 <box type="info" seamless>
