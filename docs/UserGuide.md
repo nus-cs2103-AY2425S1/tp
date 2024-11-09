@@ -348,7 +348,7 @@ We recognize the need for clarity around overlapping lesson scheduling. Options 
 * Enabling you to customize settings for overlap permissions based on the type of lesson.
 
 #### 7. **Enhanced Name Field Support**
-To accommodate users with names that contain special characters, such as commas, we plan to update the application to allow names with these characters. 
+To accommodate contacts with names that contain special characters, such as commas, we plan to update the application to allow names with these characters. 
 In the future, the system will support a wider variety of name formats, making it more inclusive and user-friendly.
 
 #### 8. **Past Lesson Management**
