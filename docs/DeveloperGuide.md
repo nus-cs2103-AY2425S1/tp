@@ -696,7 +696,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3. The system should be designed to allow the addition of new features, such as supporting other user types (e.g., nurses, staff) or integrating external systems, with minimal changes to the core codebase.
-4. The system must securely store patient and doctor information to comply with healthcare data privacy standards, such as HIPAA.
+4. The system must securely store patient and doctor information to comply with healthcare data privacy regulations, such as HIPAA.
 5. The system should log all user actions, such as adding, deleting, or modifying records. Logs should be stored for a minimum of 6 months and be accessible to authorized administrators for auditing purposes.
 6. The system should provide a response time of less than 2 seconds for any user interaction under normal load (i.e., up to 1000 patients and 500 doctors).
 
@@ -704,7 +704,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Healthcare Data Privacy Regulations**: Laws and standards that govern the storage and access to patient and doctor data. Examples include HIPAA.
 * **HIPAA**: The Health Insurance Portability and Accountability Act, a regulation in the U.S. that mandates secure handling of personal health information.
 * **Audit**: A record of all changes made in the system, including who made the changes and when.
