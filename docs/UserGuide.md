@@ -100,7 +100,7 @@ Refer to the feature list below for detailed information of each command that is
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-* All commands are case-sensitive. <br>
+* All commands are **case-sensitive**. <br>
 e.g. The command `Help` is different from `help` and therefore, results in an `Unknown command` error
 </panel>
 
@@ -123,7 +123,7 @@ Format: `list -p`
 **Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
 </box>
 
-![ListCommand.png](images/ListCommand.png)
+![ListPersonCommand.png](images/ListPersonCommand.png)
 
 ### Adding a person: `add`
 
@@ -141,23 +141,21 @@ Format: `add -n NAME -p PHONE_NUMBER -e EMAIL -rs RELATIONSHIP`
 * **Relationships** should only contain alphabetic characters, and it should not be blank.
 </box>
 
-Valid Examples:
+Valid Example:
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123`
 * This command adds a person named Betsy Crowe with the phone number 98262123, email betsycrowe@example.com, and the relationship Mother to the address book.
-![AddCommandFailureInvalidPhone.png](images/AddCommandFailureInvalidPhone.png)
+![AddCommandExample1.png](images/AddCommandExample1.png)
 
-Invalid Examples (Invalid Phone Number):
+Invalid Example (Invalid Phone Number):
 * `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 12`
 * This command will result in the following error message since the phone number must be at least 3 digits long.
+![AddCommandFailureInvalidPhone.png](images/AddCommandFailureInvalidPhone.png)
 
-![addPersonCommandFailure.png](images/addPersonCommandFailure.png)
-
-Invalid Examples (Duplicate Persons):
+Invalid Example (Duplicate Persons):
 * Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` already exists.
 * Typing the following command `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be added.
 * The following error message will be shown:
-![addDuplicatePersonsError.png](images/addDuplicatePersonsError.png)
-
+![AddCommandDuplicate.png](images/AddCommandDuplicate.png)
 
 ### Editing a person : `edit`
 
@@ -169,25 +167,25 @@ Format: `edit INDEX [-n NAME] [-p PHONE] [-e EMAIL] [-rs RELATIONSHIP]`
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Valid Examples (One field edited):
+Valid Example (One field edited):
 * `edit 2 -n Betsy Crower` Edits the name of the 2nd person to be `Betsy Crower`.
 * Note: this assumes that the address book contains at least 1 person.
 ![EditPersonExample1.png](images/EditPersonExample1.png)
 
-Valid Examples (Multiple fields edited):
+Valid Example (Multiple fields edited):
 *  `edit 1 -p 91234567 -e johndoe@example.com -rs Father` Edits the phone number, email and relationship of the 1st person to be `91234567`, `johndoe@example.com` and `Father` respectively.
 ![EditPersonExample2.png](images/EditPersonExample2.png)
 
-Invalid Examples (Duplicate Persons):
-* Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` exists as the first contact.
-* Attempting to edit another contact: <br> e.g. `edit 2 -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be edited. 
-* The following error message will be shown:
-![AddCommandDuplicate.png](images/AddCommandDuplicate.png)
-
-Invalid Examples:
+Invalid Example:
 * `edit 1` 
 * This command will result in the following error message since at least one of the optional fields must be provided.
 ![EditPersonInvalid1.png](images/EditPersonInvalid1.png)
+
+Invalid Example (Duplicate Persons):
+* Assuming the contact `add -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` exists as the first contact.
+* Attempting to edit another contact: <br> e.g. `edit 2 -n Betsy Crowe -rs Mother -e betsycrowe@example.com -p 98262123` will result in a duplicate entry and the person will not be edited.
+* The following error message will be shown:
+  ![EditPersonDuplicateExample.png](images/EditPersonDuplicateExample.png)
 
 ### Locating persons by name: `find`
 
@@ -208,15 +206,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * You are recommended to execute `list -p` after `find` command to restore the original list.
 </box>
 
-Valid Examples (Found 1 person):
+Valid Example (Found 1 person):
 * `find John` returns anyone with `John` as part of their name
 ![FindCommandExample1.png](images/FindCommandExample1.png)
 
-Valid Examples (Found multiple person):
+Valid Example (Found multiple person):
 * `find Alex David` returns anyone with `Alex` OR `David` as part of their name<br>
 ![FindCommandExample2.png](images/FindCommandExample2.png)
 
-Valid Examples (Found no person)
+Valid Example (Found no person)
 * `find Magnus` 
 * Note: since there are no `Magnus` in the contact, 0 person is listed.
 ![FindCommandExample3.png](images/FindCommandExample3.png)
@@ -238,22 +236,28 @@ Format: `delete INDEX`
 * This action is irreversible, you will have to use `add` command to add the contact again. 
 </box>
 
-Examples:
-* `list -p` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+Valid Example:
+* `list -p` followed by `delete 1` deletes the 1st person in the address book.
+![DeleteCommandExample1.png](images/DeleteCommandExample1.png)
+
+Valid Example:
+* `find Charlotte` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* Assumes that only 1 person named `Charlotte` is found by the `find` command.
+![DeleteCommandExample2.png](images/DeleteCommandExample2.png)
 
 ### Clearing all persons : `clear -p`
 
 Clears all persons from the address book.
 
+<box type="warning" seamless>
+
+**Warning:**
+* No confirmation message is displayed.
+* This action is irreversible, you will have to use `add` command to add all the contacts again.
+</box>
+
 Format: `clear -p`
 ![ClearPersonCommand.png](images/ClearPersonCommand.png)
-
-### Clearing all events : `clear -e`
-
-Clears all events from the event book.
-
-Format: `clear -e`
 
 ### Listing all events : `list -e`
 
@@ -265,6 +269,8 @@ Format: `list -e`
 
 **Tip:** Preceding, trailing and intermediate whitespaces will still result in a successful command.
 </box>
+
+![ListEventCommand.png](images/ListEventCommand.png)
 
 ### Adding an event: `event`
 
@@ -282,14 +288,19 @@ Format: `event -n EVENT_NAME -sd EVENT_START_DATE -ed EVENT_END_DATE -l LOCATION
 Note that the indexes are separated by **spaces**.
 </box>
 
-Examples:
-* `event -n Get Together Party -sd 2023-10-25 -ed 2023-10-27 -l MBS` adds a get together party event to the event book.
-* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3` creates the birthday party event and adds the first 3 people in the contacts book to the event.
+Valid Example:
+* `event -n Get Together Party -sd 2023-10-25 -ed 2023-10-27 -l MBS`. <br> 
+Adds a "Get together party" event to the event book.
+![EventCommandExample1.png](images/EventCommandExample1.png)
 
-Invalid examples:
+* `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1 2 3`. <br> 
+Creates the birthday party event and adds the first 3 people in the contacts book to the event.
+![EventCommandExample2.png](images/EventCommandExample2.png)
+
+Invalid Example:
 * `event -n Birthday Party -sd 2023-10-15 -ed 2023-10-15 -l Home -a 1, 2, 3`
 * This command will result in the following error message since the list of indexes must be separated by whitespaces, not anything else like commas.
-
+![EventCommandInvalid1.png](images/EventCommandInvalid1.png)
 
 ### Updating an event: `update`
 
@@ -309,21 +320,39 @@ will be adding the person first, then removing them, i.e. they will not be prese
 * Note that the indexes are separated by **spaces**.
 </box>
 
-Valid Examples (One field updated):
+Valid Example (One field updated):
 * `update -i 1 -l NUS UTown` only updates the location of the first event to `NUS UTown`.
 ![UpdateEventExample1](images/UpdateEventExample1.png)
 
-Valid Examples (Multiple field updated):
+Valid Example (Multiple field updated):
 * `update -i 3 -n New Year's Party -sd 2025-01-01 -ed 2025-01-02 -l Marine Parade Road #12-34 -r 3 6` updates the 3rd event, reflecting all the provided details.
 ![UpdateEventExample2.png](images/UpdateEventExample2.png)
+
+### Clearing all events : `clear -e`
+
+Clears all events from the event book.
+
+<box type="warning" seamless>
+
+**Warning:**
+* No confirmation message is displayed.
+* This action is irreversible, you will have to use `event` command to add all the events again.
+</box>
+
+Format: `clear -e`
+![ClearEventCommand.png](images/ClearEventCommand.png)
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+<box type="warning" seamless>
 
-**Note:** the command is case-sensitive, the exact word 'exit' must be used.
+**Warning:**
+* No confirmation message is displayed.
+</box>
+
+Format: `exit`
 
 ### Saving the data
 
