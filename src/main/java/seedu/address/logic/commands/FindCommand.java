@@ -30,7 +30,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        assert model != null: "Model should not be null";
+        assert model != null : "Model should not be null";
 
         model.updateFilteredPersonList(predicate);
 
