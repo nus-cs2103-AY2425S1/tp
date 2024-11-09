@@ -230,7 +230,7 @@ Examples:
 
 ### Filtering transactions: `filterTxn`
 
-Filter transactions with a any combination of the following parameters:
+Filter transactions with any combination of the following parameters:
 * the specified person identified by their index in the displayed person list
 * and/or amount 
 * and/or description 
