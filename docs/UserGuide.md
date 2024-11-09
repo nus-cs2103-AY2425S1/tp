@@ -161,6 +161,9 @@ All commands in KonTActs come equipped with their equivalent shortcuts.
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Extra parameters for commands that do not have said parameters in their command format will be treated as input for the previous parameter.<br>
+ e.g. if the command input is `delete name/John tag/student`, `John tag/student` will be considered as the NAME input.
+
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
   </box>
 
