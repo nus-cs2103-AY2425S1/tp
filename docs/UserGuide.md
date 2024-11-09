@@ -216,6 +216,7 @@ Adds a lesson tied to a student with start and end date time.
 
 Format: `lesson add sid/STUDENTID f/PRICEPERHOUR d/STARTDATETIME h/DURATION`
 
+<<<<<<< HEAD
 Field          | Optional/Compulsory | Prefix | Remarks
 ---------------|---------------------|--------|-----------------------------------------
 `STUDENTID`    | Compulsory          | sid/   | 1. Add a lesson with the student at specified `STUDENTID`.<br> 2. `STUDENTID` refers to the index number shown in the displayed contact list.<br> 3. The student ID **must be a positive integer** 1, 2, 3, …​, within the range of the number of students in the address book.<br>
@@ -255,6 +256,8 @@ Remarks:
 * The index refers to the index number shown in the displayed lesson schedule.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * `INDEX` must be within the range of the displayed list.
+* If a `lesson find` operation was done prior to this, `INDEX` needs to be in the new range as a result of 
+  find.
 
 Examples:
 
