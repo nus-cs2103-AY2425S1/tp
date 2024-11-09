@@ -345,8 +345,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User chooses to delete a patient.
-2. NovaCare prompts the user to enter patient details.
-3. User inputs the required patient details.
+2. NovaCare prompts the user to enter patient ID.
+3. User inputs the required patient ID.
 4. NovaCare outputs a message showing successful patient deletion.
 
    Use case ends.
@@ -355,7 +355,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. NovaCare cannot find the patient.
 
-    * 3a1. NovaCare prompts the user to enter valid patient details.
+    * 3a1. NovaCare prompts the user to enter valid patient ID.
     * 3a2. User re-enters the patient details.
 
       Steps 3a1-3a2 are repeated until a valid patient record is found.
