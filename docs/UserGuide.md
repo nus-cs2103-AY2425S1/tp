@@ -247,6 +247,7 @@ Examples:
 ### Editing an assignment: `edit_assignment`
 
 Edits an assignment belonging to a student based on the student's index number and the assignment's index.
+If an assignment is edited, but the details remain identical, TAchy will not treat this as an error. Instead,TAchy has been designed to allow for the assignment to be overwritten with the exact details.
 
 Format: `edit_assignment si/INDEX ai/INDEX [an/NEW_ASSIGNMENT_NAME] [ms/NEW_MAX_SCORE]`
 
