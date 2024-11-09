@@ -422,6 +422,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 1a. The input command was invalid (i.e. spelling error, etc.).
+
+    * 1a1. System tells the user the command is unrecognised.
+
+      Use case ends.
+
+**Use Case: UC08 - Clear all entries**
+
+**MSS**
+1. User requests to clear all entries.
+2. System clears all entries.
+
+   Use case ends.
+
+**Extensions**
+* 1a. The input command was invalid (i.e. spelling error, etc.).
+
     * 1a1. System tells the user the command is unrecognised.
 
       Use case ends.
