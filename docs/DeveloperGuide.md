@@ -648,6 +648,32 @@ _Similar to UC10 except without extension 2b._
 
       Use case ends.
 
+
+**Use case: UC18 - Edit a person's information**
+
+**MSS**
+
+1.  Actor performs <u>list all people (UC2)</u>.
+2.  Actor requests to edit the details of a specific person.
+3.  System shows details of the newly edited person.
+
+    Use case ends.
+
+**Extensions**
+
+- 2a. The specified person is invalid.
+
+    - 2a1. System shows an error message.
+
+      Use case ends.
+
+- 2b. The details entered are invalid.
+
+    - 2b1. System shows an error message.
+
+      Use case ends.
+
+
 ### Non-Functional Requirements
 
 1.  The system should work on any _mainstream OS_ as long as it has Java `17` or above installed.
