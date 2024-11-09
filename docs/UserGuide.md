@@ -186,7 +186,7 @@ Search persons whose fields match the keywords given.
 
 Format: `search PREFIX/KEYWORD [MORE_PREFIX/KEYWORD]…`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * Search is restricted to the fields indicated by the provided prefixes.
 * The order of the prefixes provided does not affect search results. e.g. `search n/alex t/friends` will return the same result as `search t/friends n/alex`.
 * Only full words will be matched e.g. `friend` will not match `friends`.
@@ -355,10 +355,6 @@ ContactsForGood data are saved automatically as a JSON file `[JAR file location]
 If your changes to the data file makes its format invalid, ContactsForGood will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ContactsForGood to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
