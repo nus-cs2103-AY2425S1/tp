@@ -781,10 +781,10 @@ If you are having trouble entering the `vrn` field, you can use the following [l
 1. **Attempting to delete a car from client without a car**
 
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` without a car.
-   
+
    1. **Test case:** `del-car 1`<br>
          **Expected:** No car is deleted. Error details shown in the status message.
-   
+
 2. **Deleting a car from a client with a car**
     1. **Prerequisites:** Ensure the client list is displayed using the `list` command. Suppose the client at index `1` is `John Doe` with a car that is not checked in.
 
