@@ -128,7 +128,22 @@ public class AssignTaskCommandTest {
         // null -> returns false
         assertNotEquals(null, command1);
 
-        // different values -> returns false
+        // different personIndex -> returns false
         assertNotEquals(command1, command2);
+
+        // different taskIndexes -> returns false
+        AssignTaskCommand commandDifferentTasks = new AssignTaskCommand(INDEX_FIRST, Set.of(INDEX_SECOND));
+        assertNotEquals(command1, commandDifferentTasks);
+
+        // different personIndex but same taskIndexes -> returns false
+        AssignTaskCommand commandDifferentPersonSameTasks = new AssignTaskCommand(INDEX_SECOND, Set.of(INDEX_FIRST));
+        assertNotEquals(command1, commandDifferentPersonSameTasks);
+
+        // same personIndex, multiple taskIndexes -> returns true
+        AssignTaskCommand commandWithMultipleTasks = new AssignTaskCommand(INDEX_FIRST,
+                Set.of(INDEX_FIRST, INDEX_SECOND));
+        AssignTaskCommand commandWithMultipleTasksCopy = new AssignTaskCommand(INDEX_FIRST,
+                Set.of(INDEX_FIRST, INDEX_SECOND));
+        assertEquals(commandWithMultipleTasks, commandWithMultipleTasksCopy);
     }
 }
