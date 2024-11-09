@@ -25,11 +25,8 @@ Our application allows you to perform multiple operations that suits your needs 
 This project is built on top of [AddressBook-Level3 Project](https://se-education.org/). Special thanks and appreciation
 for the team of AddressBook-Level 3.
 
-<!-- * Table of Contents -->
+## Table of Contents
 <page-nav-print />
-<!--TODO: TOC -->
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
@@ -160,8 +157,6 @@ for the team of AddressBook-Level 3.
 | [**exit**](#exiting-the-application-exit)                                   | Exit the application                    | `exit`                                                                                                                                                       | -                                                                |
 
 </d-table>
-
-## Important keywords
 
 ## Parameter Constraints Table
 
@@ -528,7 +523,8 @@ Format: `redit CLIENT_INDEX r/RENTAL_INDEX [a/ADDRESS] [s/RENTAL_START_DATE] [e/
   starting from 1.
 * The `RENTAL_INDEX` refers to the client's rental index number shown in the displayed rental information list (
   run `rview CLIENT_INDEX` to display the rental information list) and must be a positive integer starting from 1.
-* The value of **address** for the rental information cannot be empty (if a/ is specified in the input).
+* You cannot and should not edit the value of `ADDRESS` to be empty, as it is required to not be empty.
+* Editing a parameter will remove its existing value and replace with the newly specified value.
 
 </box>
 
@@ -817,7 +813,7 @@ Entering the `↹ Tab key` will help to fill or append to the command input with
 
 **Constraints:**
 
-* The value being autofilled depends on the available helping words specified by TrueRental.
+* The available value for autofill depends on the helping words specified by TrueRental (please refer to the **List of helping words** after **Note** for all available helping words).
 * Autofill is not customized for every single prefix, all prefixes will have same set of value for autofill.
 
 </box>
