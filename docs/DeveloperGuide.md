@@ -57,7 +57,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -166,7 +166,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The find command allows the user to filter the list of contacts by (at least one) criteria applied to data field(s) (`Name`, `Email`, `Gender`, `Age`, `Detail` and/or `StudyGroupTags`). Each field correspond to one criteria, and can consist of one or more keywords. The list of persons in the `AddressBook` is filtered, then displayed to the user.
+The find command allows the user to filter the list of contacts by (at least one) criteria applied to data field(s) (`Name`, `Email`, `Gender`, `Age`, `Detail` and/or `StudyGroupTags`). Each field correspond to one criterion, and can consist of one or more keywords. The list of persons in the `AddressBook` is filtered, then displayed to the user.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** `n/Alice Bob` is a single criteria, while `n/Alice e/@example.com` is two criteria.
 
@@ -180,7 +180,7 @@ The user executes a find command with some inputs, for e.g., `find n/Alex Bernic
 
 </div>
 
-For each criteria, a `Predicate` is initialised in the `Model` component as shown below:
+For each criterion, a `Predicate` is initialised in the `Model` component as shown below:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram-PredicateModel.png)
 
@@ -191,13 +191,13 @@ The `PredicateGroup` consist of one or more `Predicate`. The following sequence 
 #### Design Considerations:
 
 **Aspect: Handling multiple criteria**<br>
-Criteria are segregated by data field, and each criteria is independently evaluated.
+Criteria are segregated by data field, and each criterion is independently evaluated.
 
 * **Alternative 1 (current choice):**  For a person to be included, they must _satisfy all criteria_.
   * Pros: Allow the find command to filter very specific criteria that must all be fulfilled, enabling more accurate results.
   * Cons: May return fewer results, especially when using multiple criteria.
 
-* **Alternative 2:** For a person to be included, they only need to _satisfy one criteria_.
+* **Alternative 2:** For a person to be included, they only need to _satisfy one criterion_.
   * Pros: Returns wider range of results, potentially finding more relevant person records.
   * Cons: Less specific when finding for exact match.
 
@@ -252,7 +252,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | user       | delete contacts                                                                       | remove old contacts that I no longer need                                             |
 | `* * *` | researcher | clear participant information in bulk                                                 | quickly clear old groups of participants                                              |
 | `* * *` | researcher | search for participants based on criteria(s) (i.e., study group and/or other details) | quickly locate specific groups of participants                                        |
-| `* * *` | researcher | add and delete tags to and from a specific exisitng participant                       | effectively update the participants' study group for organization                     |
+| `* * *` | researcher | add and delete tags to and from a specific existing participant                       | effectively update the participants' study group for organization                     |
 | `* * *` | user       | exit the program                                                                      | clear up my processes                                                                 |
 | `* * *` | user       | filter contacts by any attribute                                                      | view my contacts by specific groups                                                   |
 | `* * *` | researcher | find participants using multiple criteria                                             | view specific participants of interest                                                |
@@ -411,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The criteria is missing from the given input.
+* 1a. Criteria are missing from the given input.
 
     * 2a1. ResearchRoster shows an error message.
 
@@ -618,7 +618,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case restarts.
 
-* *a. At any time, User chooses to cancels the session reminder.
+* *a. At any time, User chooses to cancel the session reminder.
 
     * *a1. ResearchRoster shows a message confirming reminder is cancelled.
 
@@ -783,7 +783,7 @@ MSS
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **UI**: User Interface - The medium through which users interact with a system, encompassing both graphical (*GUI*) and text-based (*CLI*) elements
 * **GUI**: Graphical User Interface - A visual-based interface where users interact with the system through graphical elements like icons and windows
@@ -915,7 +915,7 @@ testers are expected to do more *exploratory* testing.
 
 * As we were building off of AB3, we were able to reuse the model package and the existing commands.
 * In the beginning of our project (v1.2), this saved us time and effort as it was easy to build an MVP from an already functioning product (AB3) by making basic modifications to suit our product.
-* We were also able to reuse the extensive test cases and utility in the testutil package, which saved us a lot of effort. Future test cases and utility were also designed after these existing ones.
+* We were also able to reuse the extensive test cases and utility in the `testutil` package, which saved us a lot of effort. Future test cases and utility were also designed after these existing ones.
 * However, challenges arose when we wanted to refine our MVP features to better suit ResearchRoster (v1.3) and add new features unlike what AB3 had (v1.3, v1.4, v1.5).
 * This was because we had to carefully look through the AB3 code to fully understand how it worked, in order to figure out how we can modify it, work with it, or work around it to implement changes and new features.
 * This resulted in us putting in a high amount of effort to maintain good OOP and use/build off the existing classes and methods in AB3, rather than simply creating new classes, methods and solutions that may have overlapped with existing classes and methods.
