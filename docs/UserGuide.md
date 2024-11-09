@@ -209,7 +209,7 @@ Adds a session to Hall Pointer and associates it with specified members.
 
 <box type="tip" seamless>
 
-**Tip:** **Points** should be between 0 and 100. A maximum of 100 points can be awarded to any session.
+**Tip:** **Points** should be an integer between 0 and 100. A maximum of 100 points can be awarded to any session.
 
 </box>
 
