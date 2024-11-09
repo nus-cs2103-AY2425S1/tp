@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ContactMate is a **desktop app for managing clients at Active Ageing Centres (AACs), optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactMate can get your contact management tasks done faster than traditional GUI apps.
+ContactMate is a **desktop app for managing clients (Singaporeans and Permanent Residents) at Active Ageing Centres (AACs), optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactMate can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
