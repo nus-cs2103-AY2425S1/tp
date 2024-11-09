@@ -452,7 +452,23 @@ Note: For all use cases below, if the user enters an invalid input, or there is 
 * **Activity Diagram**: A UML diagram that represents workflows or processes in the app, illustrating the sequence of actions and decision points for a particular operation.
 * **Facade Pattern**: A design pattern used to simplify complex system interactions by providing a unified interface that acts as a "facade" for multiple components, reducing dependencies between components.
 
+__________________________________
 
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Change policy from FlowPane to Label in the UI:** Currently, when the window is widened, the next FlowPane container will be placed beside instead of below, 2 rows of policies to appear on the same row as shown below.
+We plan to make it a label to solve the issue.
+   
+<img src="images/img.png" width="1000px">
+
+2. **Include more policy types:** Currently there are only 3 policy types. We plan to include all the policies that Prudential offers in our app.
+3. **Add feature to identify missing parameters:** Currently, if a user enters a command with missing parameters, it will tell the user that the command is invalid.
+We plan to make Prudy inform the user which parameters they left out instead of throwing a general error message.
+4. **Add feature to ensure emails contain a valid domain:** Currently Prudy only checks if email contains both local part and domain.
+We plan to enhance the checks by checking if the domain is valid i.e. contains both domain name and top level domain.
+5. 
 
 --------------------------------------------------------------------------------------------------------------------
 

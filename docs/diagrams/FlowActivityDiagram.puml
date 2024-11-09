@@ -14,31 +14,32 @@ if () then ([known command])
         ExitCommand;
         :Prudy closes;
         stop
-    elseif () then ([HelpCommand])
-        :HelpCommand
-        is created;
-        :Execute
-        HelpCommand;
-        :UI displays
-        help window;
-        stop
-    else ([other command])
-        :Corresponding parser parses
-        the arguments of the command;
-                if () then ([valid format])
-                    :Command is created;
-                    :Execute Command;
-                    :UI displays success message;
-                    stop
-                else ([else])
-                    :UI displays error message;
-                    stop
-                endif
+    else ([else])
+        if () then ([HelpCommand])
+            :HelpCommand
+            is created;
+            :Execute
+            HelpCommand;
+            :UI displays
+            help window;
+            stop
+        else ([other command])
+            :Corresponding parser parses
+            the arguments of the command;
+            if () then ([valid format])
+                :Command is created;
+                :Execute Command;
+                :UI displays success message;
+                stop
+            else ([else])
+                :UI displays error message;
+                stop
+            endif
+        endif
     endif
-
 else ([else])
     :UI displays error message;
     stop
-    endif
+endif
 
 @enduml
