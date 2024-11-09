@@ -104,7 +104,7 @@ You should be greeted by the GUI, which you will see in the next section.
 >
 >**Overview of the Graphics User Interface**
 
-Once MediBase3 is running, you will see the main interface, as seen in the image above. It is segmented into different **panel**s. Here’s an overview of the key panels:
+Once MediBase3 is running, you will see the main interface, as seen in the image above. It is segmented into different panels. Here’s an overview of the key panels:
 
 - **Command Box:** Where you can type and enter commands.
 - **Result Display:** Shows the result of the command you entered.
@@ -149,8 +149,8 @@ This example shows how a typical command might look in MediBase3, with three mai
 >```
 
 - **Command:** `add`
-- **Prefix:** `n/` (name), `i/` (NRIC), `d` (date of birth), `g` (gender), `p/` (phone), `e/` (email), `a/` (address)
-- **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `g`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
+- **Prefix:** `n/` (name), `i/` (NRIC), `d/` (date of birth), `g/` (gender), `p/` (phone), `e/` (email), `a/` (address)
+- **Parameter:** `John Doe`, `S1234567A`, `2000-01-01`, `M`, `98765432`, `johndoe@example.com`, `311, Clementi Ave 2, #02-25`
 
 ### A First Look at MediBase3
 
@@ -205,9 +205,9 @@ the constraints of each parameter when used in a command.
 | `EMAIL`            | Email address of the patient.                                                                              | - Should be in the format `local-part@domain`. <br> - Should not be blank. <br> - The `local-part` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The `local-part` may not start or end with any special characters. <br> - The `domain` must be at least 2 characters long, start and end with alphanumeric characters. | :white_check_mark: `raj@gmail.com`<br>:x: `raj`                                                                                   |
 | `ADDRESS`          | Address of the patient.                                                                                    | - Any value is allowed. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                                    | :white_check_mark: `Orchard Road, Block 124, #02-01`                                                                              |
 | `PHONE`            | Phone number of the patient.                                                                               | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - There is no limit on the length of phone number accepted, in order to accommodate international phone numbers.                                                                                                                                                                | :white_check_mark: `98765432`<br>:x: `+65 9876 5432`                                                                              |
-| `ALLERGY`          | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters long <br> - Should not be blank.                                                                                                                                                                                                                                                                     | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                     |
+| `ALLERGY`          | Allergy of the patient.                                                                                    | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters in length <br> - Should not be blank.                                                                                                                                                                                                                                                                | :white_check_mark: `Peanuts`<br>:x: `Pe@nuts`                                                                                     |
 | `PRIORITY`         | Priority of the patient.                                                                                   | - Should only contain `NONE`, `LOW`, `MEDIUM` or `HIGH`. <br> - Case-insensitive. <br> - Should not be blank.                                                                                                                                                                                                                                                                          | :white_check_mark: `NONE` <br> :white_check_mark: `high` <br> :x: `Highpriority`                                                  |
-| `CONDITION`        | Medical Condition of the patient.                                                                          | - Should contain only alphabets or alphanumerics. <br> - It must be no more than 30 characters. <br> - Should not be blank.                                                                                                                                                                                                                                                            | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp`                                                                      |
+| `CONDITION`        | Medical Condition of the patient.                                                                          | - Only alphanumeric characters are allowed.<br> - Should not exceed 30 characters in length <br> - Should not be blank.                                                                                                                                                                                                                                                                | :white_check_mark: `High Blood Pressure` <br> :x: `@high-bp`                                                                      |
 | `APPOINTMENT_DATE` | Appointment date of the patient.                                                                           | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank.                                                                                                                                                                                                                                                                                                                    | :white_check_mark: `2024-10-27` <br> :x: `2022/10/27` <br> :x: `2024-02-31`                                                       |
 | `APPOINTMENT_TIME` | Appointment time of the patient.                                                                           | - Must be in the format `HHMM-HHMM` (24-hour clock interval). <br> - Time format should be (start time - end time) with start time earlier than end time. <br> - Start and end times should not equal. <br> - Should not be blank.                                                                                                                                                     | :white_check_mark: `0900-1100` <br> :white_check_mark: `2330-2359` <br> :x: `0900-0900` <br> :x: `1400-1300` <br> :x: `2200-0000` |
 | `APPOINTMENT_NAME` | Description of the appointment with the patient.                                                           | - Must be no more than 30 characters. <br> - Only alphanumeric characters are allowed. <br> - Should not be blank                                                                                                                                                                                                                                                                      | :white_check_mark: `Dental` <br> :white_check_mark: `FollowUp1` <br> :x: `Follow-up#1`                                            |
@@ -223,7 +223,7 @@ the constraints of each parameter when used in a command.
 > e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
 >
 > * Items in square brackets are optional.
->  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
+>  e.g `edit NRIC [n/NAME] [i/NRIC] [d/DOB] [g/GENDER] [p/PHONE] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
 >
 > * Items with `…` after them can be used multiple times.
 >  e.g. `c/CONDITION…` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
@@ -253,7 +253,7 @@ the constraints of each parameter when used in a command.
 
 Adds a patient and his/her relevant details to MediBase3.
 
-**Format**: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE e/EMAIL a/ADDRESS`
+**Format**: `add n/NAME i/NRIC d/DOB g/GENDER p/PHONE e/EMAIL a/ADDRESS`
 
 {: .alert .alert-info}
 > :information_source: **Notes:**
@@ -264,7 +264,7 @@ Adds a patient and his/her relevant details to MediBase3.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the purpose and constraints of each parameter.
 
 **Examples**:
-* `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number, email and address provided into MediBase3.
+* `add n/John Doe i/S1234567A d/2002-12-12 g/M p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` adds a patient named `John Doe` with the respective NRIC, gender, date of birth, phone number, email and address provided into MediBase3.
 
 <div style="page-break-after: always;"></div>
 
