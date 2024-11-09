@@ -116,7 +116,9 @@ First, we need to make sure your computer has [Java](#technical-terms) 17 instal
 
 ### Step 3: Try Your First Commands
 
-Now that PROperty is running, let's try using the different commands available. All you have to do is to type the command in the command box and press Enter to execute it. 
+Now that PROperty is running, let's try using the different commands available. 
+We recommend you use a window size of at least 1920 x 1080 pixels to ensure all elements are displayed correctly.
+All you have to do is to type the command in the command box and press Enter to execute it. 
 Some example commands you can try are:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named `John Doe` to PROperty.
