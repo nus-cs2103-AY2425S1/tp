@@ -641,3 +641,12 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. **Add more precise functionality to the `clean` command**. The `clean` command currently does not allow removal of 
+students who have graduated in the current year, as it can only detect the graduation year but not the month. We plan to 
+add support for storing a more specific graduation date, such that we can accurately remove students who have graduated immediately after their graduation.
