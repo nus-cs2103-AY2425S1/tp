@@ -355,6 +355,9 @@ In the future, the system will support a wider variety of name formats, making i
 To enhance lesson organization, we plan to introduce features that clearly distinguish past lessons. This will include options to automatically hide completed lessons or display them in a different color for easy identification.
 You will also be able to toggle the visibility of past lessons, allowing them to focus on upcoming schedules while still being able to reference completed sessions if needed.
 
+#### 9. **Support for Decimal Places in Fees**
+To provide more flexibility in fee management, we plan to introduce support for decimal places in fee amounts.
+This will allow you to input and manage fees with greater precision, catering to scenarios where fees are calculated to fractional values (e.g., for hourly rates or partial payments).
 
 --------------------------------------------------------------------------------------------------------------------
 
