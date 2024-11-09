@@ -508,7 +508,7 @@ _Details coming soon ..._
 - **JSON** (JavaScript Object Notation): A lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. InternBuddy uses JSON to store its data files.
 - **Index**: A number used to identify the position of a company or application in a list. InternBuddy commands often require an index to reference a specific company or application.
 - **Home Folder**: The directory where InternBuddy stores its data and related files on your computer.
-- **APPLIED / OA / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
+- **APPLIED / OA (Online Assessment) / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
 - **Backup**: A copy of the data file created to prevent loss of information. The backup can be used to restore the AddressBook in case of accidental data loss.
 - **JSON File Location**: The file path where InternBuddy stores its data, which can be manually edited or transferred to another computer.
 - **Company**: Refers to an entity in the AddressBook. We refer to any contact in our AddressBook as Company.
