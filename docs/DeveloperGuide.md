@@ -324,15 +324,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. Tagging a contact with a role
   * 2a1. User specifies what role the contact belongs to
+    
     Use case resumes from 3.
-
-    Use case ends.
-
 
 * 2b. Adding Telegram Contact
   * 2b1. User specifies the Telegram username that the contact belongs to
 
-  * Use case resumes from 3.
+    Use case resumes from 3.
 
 **UC02: Listing Contacts**
 
@@ -343,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions:**
 * 2a PlanPal detects error in process to list user
-  * 2a1 PlanPal shows an error message that the command was called wrongly.
+  * 2a1 PlanPal shows an error message that the command was called wrongly
 
     Use case ends.
 
@@ -360,13 +358,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The list is empty
 
   Use case ends.
 
 * 3a.  PlanPal detects that the command given is invalid
-
-    * 3a1. PlanPal shows an error message.
+    * 3a1. PlanPal shows an error message
 
       Use case resumes at step 2.
 
@@ -374,20 +371,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to filter contacts by role.
-2. PlanPal displays a list of contacts matching the specified role.
+1. User requests to filter contacts by role
+2. PlanPal displays a list of contacts matching the specified role
 
    Use case ends.
 
 **Extensions**
 
-* 1a. PlanPal detects that the command given is invalid.
-    * 1a1. PlanPal shows an error message indicating that the command syntax is incorrect.
+* 1a. PlanPal detects that the command given is invalid
+    * 1a1. PlanPal shows an error message indicating that the command syntax is incorrect
 
       Use case resumes at step 1.
 
-* 2a. No contacts are found for the specified role.
-    * 2a1. PlanPal displays a message that no users were found. 
+* 2a. No contacts are found for the specified role
+    * 2a1. PlanPal displays a message that no users were found
 
       Use case ends.
 
