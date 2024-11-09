@@ -420,7 +420,7 @@ All Prefixes/Parameters should:
 Not be blank
 </li>
 <li>
-Not be started with a whitespace
+Not start with a whitespace
 </li>
 <li>
 Should follow the format given below
