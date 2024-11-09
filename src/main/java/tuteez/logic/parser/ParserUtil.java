@@ -1,7 +1,7 @@
 package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tuteez.logic.Messages.*;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -283,6 +283,32 @@ public class ParserUtil {
         if (!argMultimap.getValue(prefix).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
         }
+    }
+
+    /**
+     * Parses the person index from the provided {@code ArgumentMultimap}.
+     * Validates that the preamble contains a valid index and throws a {@code ParseException} if invalid.
+     *
+     * @param argMultimap The argument multimap to retrieve the preamble from.
+     * @return The parsed {@code Index}.
+     * @throws ParseException if the preamble is empty or contains an invalid index.
+     */
+     public static Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
+        String preamble = argMultimap.getPreamble().trim();
+
+        if (preamble.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_INDEX));
+        }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(preamble);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, preamble)));
+        }
+        return index;
     }
 
 }

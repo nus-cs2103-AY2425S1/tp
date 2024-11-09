@@ -9,9 +9,7 @@ import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
-import static tuteez.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
-import static tuteez.logic.parser.ParserUtil.validatePrefixExists;
+import static tuteez.logic.parser.ParserUtil.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,24 +38,6 @@ public class DeleteLessonCommandParser implements Parser<LessonCommand> {
         Index personIndex = parsePersonIndex(argMultimap);
 
         return createDeleteLessonCommand(personIndex, argMultimap);
-    }
-
-    private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
-        String preamble = argMultimap.getPreamble().trim();
-
-        if (preamble.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_MISSING_PERSON_INDEX));
-        }
-
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(preamble);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, preamble)));
-        }
-        return index;
     }
 
     private DeleteLessonCommand createDeleteLessonCommand(Index personIndex, ArgumentMultimap argMultimap)

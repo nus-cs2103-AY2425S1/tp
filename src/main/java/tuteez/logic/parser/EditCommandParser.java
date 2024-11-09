@@ -1,15 +1,13 @@
 package tuteez.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
-import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static tuteez.logic.parser.ParserUtil.parsePersonIndex;
 import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
 
 import java.util.Collection;
@@ -116,23 +114,5 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
-    }
-
-    private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
-        String preamble = argMultimap.getPreamble().trim();
-
-        if (preamble.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_MISSING_PERSON_INDEX));
-        }
-
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(preamble);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, preamble)));
-        }
-        return index;
     }
 }
