@@ -320,10 +320,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | doctor            | list all records                                                            | look through all contacts                              |
 | `* *`    | doctor            | view all my appointments                                                    | know the appointments I have on a certain day          |
 | `* *`    | meticulous doctor | assign a specific condition to a patient                                    | pay extra care to it during consultation and diagnosis |
+| `* *`    | meticulous doctor | assign a specific allergy to a patient                                      | pay extra care when prescribing medication             |
 | `*`      | focused doctor    | want to search patients by medical condition                                | focus on those with similar treatment plans            |
 | `*`      | busy doctor       | assign priority level to a patient                                          | manage urgent cases more effectively                   |
 | `*`      | busy doctor       | view all my urgent cases                                                    | attend to those with urgent needs first                |
-| `*`      | meticulous doctor | know a patients' allergy                                                    | pay extra care when prescribing medication             |
 | `*`      | doctor            | press [↑] to fill the command-line-box with the previous command I keyed in | amend errors in the last command I typed easily        |
 
 [Back to Table of Contents](#table-of-contents)
