@@ -54,7 +54,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_edit_invalidTagModification_throwsParseException() {
+    public void parseCommand_editInvalidTagModification_throwsParseException() {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
 
