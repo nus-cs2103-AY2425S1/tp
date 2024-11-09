@@ -83,10 +83,6 @@ public class AddApptCommandTest {
         Person targetPerson = model.getFilteredPersonList().get(0);
         Nric nric = targetPerson.getNric();
 
-        AddApptCommand addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
-                                                           VALID_APPOINTMENT_NAME_AMY,
-                                                           VALID_APPOINTMENT_DATE_AMY,
-                                                           VALID_APPOINTMENT_TIMEPERIOD_AMY);
         ArrayList<String> currentSerializedAppointmentLists =
                 new ArrayList<>(targetPerson.getAppointments()
                                             .stream()
@@ -94,6 +90,11 @@ public class AddApptCommandTest {
                                                       + x.getAppointmentDate() + ":"
                                                       + x.getAppointmentTimePeriod())
                                             .toList());
+
+        AddApptCommand addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
+                                                           VALID_APPOINTMENT_NAME_AMY,
+                                                           VALID_APPOINTMENT_DATE_AMY,
+                                                           VALID_APPOINTMENT_TIMEPERIOD_DENTAL);
         String expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
                               + VALID_APPOINTMENT_DATE_AMY + ":"
                               + VALID_APPOINTMENT_TIMEPERIOD_DENTAL;
@@ -108,6 +109,10 @@ public class AddApptCommandTest {
         assertCommandSuccess(addApptCommand, model, expectedMessage, expectedModel);
 
         // Before
+        addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
+                                            VALID_APPOINTMENT_NAME_AMY,
+                                            VALID_APPOINTMENT_DATE_AMY,
+                                            VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF);
         expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
                        + VALID_APPOINTMENT_DATE_AMY + ":"
                        + VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF;
@@ -117,11 +122,15 @@ public class AddApptCommandTest {
                                                        .build();
         expectedMessage = String.format(AddApptCommand.MESSAGE_SUCCESS_4S, nric.value,
                                         VALID_APPOINTMENT_NAME_AMY, VALID_APPOINTMENT_DATE_AMY,
-                                        VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT);
+                                        VALID_APPOINTMENT_TIMEPERIOD_DENTAL_BEF);
         expectedModel.setPerson(model.getFilteredPersonList().get(0), newApptPerson);
         assertCommandSuccess(addApptCommand, model, expectedMessage, expectedModel);
 
         // After
+        addApptCommand = new AddApptCommand(new NricMatchesPredicate(nric),
+                                            VALID_APPOINTMENT_NAME_AMY,
+                                            VALID_APPOINTMENT_DATE_AMY,
+                                            VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT);
         expectedAppt = VALID_APPOINTMENT_NAME_AMY + ":"
                        + VALID_APPOINTMENT_DATE_AMY + ":"
                        + VALID_APPOINTMENT_TIMEPERIOD_DENTAL_AFT;
