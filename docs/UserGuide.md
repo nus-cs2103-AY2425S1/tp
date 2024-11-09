@@ -333,15 +333,18 @@ Furthermore, certain edits can cause the DorManagerPro to behave in unexpected w
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE e/EMAIL [a/ADDRESS] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROOM_NUMBER] [en/EMERGENCY_NAME] [ep/EMERGENCY_PHONE] [g/GRADUATION_YEAR] [t/TAG]…​` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find [n/NAME] [p/PHONE] [r/ROOM_NUMBER] [t/TAG]…​` <br> e.g., `find p/+123 12345 n/Alice Lee r/08-1234 t/friend`
 **List**   | `list`
 **Help**   | `help`
 **Clean**  | `clean`
 **Undo**   | `undo`
+**Exit**   | `exit`
+**Export** | `export`
+**Import** | `import f/FILE_PATH` <br> e.g., `import f/./data/SaveFile4.json`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -349,7 +352,7 @@ Action     | Format, Examples
 
 ### Name
 
-Format: `name` where `name` is a sequence of characters corresponding to a student's name
+Format: A sequence of alphanumeric characters corresponding to a student's name
 
 Constraints:
 * `name` can contain any alphanumeric character or whitespace.
@@ -360,7 +363,7 @@ Duplicate handling:
 * Two resident student contacts with the same name are not allowed
 > <span style="color:Gray"> NOTE! </span> <br>
 >
-> * Constraint rationale: Extremely long names would be difficult to process and display in the profile screen. 
+> * Constraint rationale: Extremely long names would be difficult to process and display in the profile screen. It is rather common to use hyphens, commas and apostrophes to separate different sections of the name.
 > * Duplicate handling rationale: It is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
 > * Case-insensitive: `John Doe` is treated the same as `john doe`
 
@@ -409,7 +412,7 @@ Duplicate handling:
 
 ### Emergency contact name
 
-Format: `emergencyName` where `emergencyName` is a sequence of characters corresponding to a student's emergency contact name
+Format: A sequence of alphanumeric characters corresponding to a student's emergency contact name
 
 Constraints:
 Same as [Name](#name)
