@@ -225,7 +225,7 @@ Adds a person's contact detail to KonTActs.
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**Name restrictions**</md>
-1. Names should only contain alphanumeric characters and whitespaces only. Special characters are not allowed.
+1. Names should only contain English alphanumeric characters and whitespaces only. Special characters are not allowed.
 2. Names should be **unique**. Duplicate names cannot exist in the same database. Please refer to the [faq](#faq) on this issue.
 
 Eg. `n/John` or `name/john`
@@ -236,13 +236,13 @@ Eg. `n/John` or `name/john`
 
 <md>**Email restrictions**</md>
 Emails should be of the format `local-part@domain` and adhere to the following constraints:
-1. `local-part` should only contain alphanumeric characters and `+`, `_` , `.` , `-`. 
+1. `local-part` should only contain English alphanumeric characters and `+`, `_` , `.` , `-`. 
 2. `local-part` may not start or end with any special characters.
 3. This is followed by an `@` and then a `domain` name. The domain name is made up of domain labels separated by periods.
 The `domain name` must:
     - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    - have each domain label start and end with English alphanumeric characters
+    - have each domain label consist of English alphanumeric characters, separated only by hyphens, if any.
 
 Eg. `e/john@abc.com` or `email/john@abc.com`
 
@@ -256,7 +256,7 @@ A person can have any number of tags (including 0)
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**Tag restrictions**</md>
-* Tags must be a single word containing only alphanumeric characters (no spaces or special symbols are allowed).
+* Tags must be a single word containing only English alphanumeric characters (no spaces or special symbols are allowed).
 * To specify multiple tags, separate each tag parameter with a space.
 
 Eg. `t/friend t/family`
@@ -266,7 +266,7 @@ Eg. `t/friend t/family`
 <box type="warning" icon=":fa-solid-circle-exclamation:" light>
 
 <md>**Telegram username restrictions**</md>
-* Usernames must start with an `@`, and can only contain underscores (`_`) and alphanumeric characters.
+* Usernames must start with an `@`, and can only contain underscores (`_`) and English alphanumeric characters.
 
 </box>
 
@@ -276,7 +276,7 @@ Eg. `t/friend t/family`
 
 <md>**GitHub username restrictions**</md>
 * Length of username must between 1 and 39 characters
-* Can contain only alphanumeric characters and hyphens ('-').
+* Can contain only English alphanumeric characters and hyphens ('-').
 * Hyphens cannot appear at the start or end, nor consecutively within the username
 
 **Valid examples**
