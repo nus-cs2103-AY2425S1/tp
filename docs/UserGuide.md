@@ -77,6 +77,7 @@ To use **EZSTATE**, type commands in the command box and press `Enter`. Here are
 
    * `exit` : Exits the app.
 
+<br>
 <div class="note" markdown="span">
 Explore the Features section for a full list of commands and their uses.
 </div>
@@ -100,13 +101,13 @@ Commands in **EZSTATE** follow the same structure:
 
 #### Reference Types
 
-| Reference | Meaning                                  | Constraints                                                     | Remarks                                                                                                        |
+| REFERENCE | Meaning                                  | Constraints                                                     | Remarks                                                                                                        |
 |-----------|------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | INDEX     | INDEX of a client or a listing in a list | INDEX are positive integers that are `one-based` (i.e. `>= 1`). | Commonly used in edit and delete clients/listings to make reference to these objects in their respective lists |
 
 #### Prefix Notation
 
-Prefixes follow the same structure
+Prefixes follow the same structure:
 
 `prefix/Value`
 
@@ -124,26 +125,23 @@ Optional fields can be omitted and the command will still be executed successful
 
 #### Prefix Types
 
-<div class="note" markdown="span">
 The prefixes used in **EZSTATE** are universal across all commands <br> _(i.e. have the same constraints and remarks)_
-</div>
-<br>
 
-| Prefix | Meaning | Location       | Constraints | Remarks                                                                                           | Example                                                                                 |
-|--------|---------|----------------|-------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
-| n/     | name    | Client/Listing |             | -                                                                                                 |                                                                                         |
-| p/     | phone   | Client         |             | -                                                                                                 |                                                                                         |
-| e/     | email   | Client         |             | -                                                                                                 |                                                                                         |
-| t/     | tag     | Client         |             | -                                                                                                 |                                                                                         |
-| d/     | date    | Appointment    |             | Unique to `apt` command.                                                                          |                                                                                         |
-| fr/    | from    | Appointment    |             | Unique to `apt` command.                                                                                                 |                                                                                         |
-| to/    | to      | Appointment    |             | Unique to `apt` command.                                                                                                |                                                                                         |
-| pr/    | price   | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
-| ar/    | area    | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
-| add/   | address | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
-| reg/   | region  | Listing        |             | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1                                                                                        |
-| sell/  | seller  | Listing        |             | In `listing`, sell is used instead of seller to refer to the seller of the listing.               | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1 |
-| buy/   | buyer   | Listing        |             | In `addlistingbuyers` and `removelistingbuyers`, buy is used instead of buyer to refer to buyers. | addlistingbuyers 1 buy/Charlotte Oliveiro                                               |
+| Prefix | Meaning | Location       | Remarks                                                                                           | Example                                                                                 |
+|--------|---------|----------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| n/     | name    | Client/Listing | -                                                                                                 |                                                                                         |
+| p/     | phone   | Client         | -                                                                                                 |                                                                                         |
+| e/     | email   | Client         | -                                                                                                 |                                                                                         |
+| t/     | tag     | Client         | -                                                                                                 |                                                                                         |
+| d/     | date    | Appointment    | Unique to `apt` command.                                                                          |                                                                                         |
+| fr/    | from    | Appointment    | Unique to `apt` command.                                                                          |                                                                                         |
+| to/    | to      | Appointment    | Unique to `apt` command.                                                                          |                                                                                         |
+| pr/    | price   | Listing        | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1 |
+| ar/    | area    | Listing        | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1 |
+| add/   | address | Listing        | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1 |
+| reg/   | region  | Listing        | Unique to `listing` command.                                                                      | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1 |
+| sel/   | seller  | Listing        | In `listing`, sel is used instead of seller to refer to the seller of the listing.                | listing n/Warton House pr/4000 ar/1000 add/123 PASIR RIS (S)123456 reg/east sel/2 buy/1 |
+| buy/   | buyer   | Listing        | In `addlistingbuyers` and `removelistingbuyers`, buy is used instead of buyer to refer to buyers. | addlistingbuyers 1 buy/Charlotte Oliveiro                                               |
 
 --------------------------------------------------------------------------------------------------------------------
 
