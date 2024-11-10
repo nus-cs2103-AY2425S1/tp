@@ -433,6 +433,10 @@ Format: `undo`
 * Undo works only on commands that alter the contents of SocialBook e.g. add, edit, delete, clear, addappt, deleteappt, editappt, addscheme, deletescheme, archive, unarchive
 * Undo can be called multiple times till there is no longer a previous command to execute.
 
+<box type="info" seamless>
+If you exit and reopen the app, undo would not work to undo past commands that were executed before the app was exited.
+</box>
+
 Examples:
 * `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
 * `clear` followed by `undo` will retrieve back the uncleared SocialBook.

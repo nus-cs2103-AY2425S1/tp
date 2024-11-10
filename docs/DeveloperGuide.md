@@ -158,46 +158,30 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo feature
 
-#### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo mechanism is facilitated by `Command` and `LogicManager`. `LogicManager` stores previously executed commands using a `CommandHistory` object. `Command` has the following operation:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `Command#undo()` — To be overridden by commands that are determined to be action commands.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 1. The user launches the application for the first time.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command gets stored in `CommandHistory` object in `LogicManager`.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** If a command fails its execution, it will not be added to `CommandHistory` to be saved as a past command.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
+Step 4. The user now decides that deleting the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will extract the latest command excluding `undo` and call the `undo()` of the latest command.
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+**Note:** If there is no past command to undo, an error message will be thrown to the user that this is the case rather
 than attempting to perform the undo.
 
 </box>
@@ -212,48 +196,9 @@ The following sequence diagram shows how an undo operation goes through the `Log
 
 </box>
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -275,173 +220,155 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * is a social worker tasked with helping low-income families
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of people
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: streamlines the process of social workers contacting and assisting families
+**Value proposition**: streamlines the process of social workers contacting and assisting people
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​       | I can …​                                                     | So that I can…​                                                                |
-|----------|---------------|--------------------------------------------------------------|--------------------------------------------------------------------------------|
-| `* * *`  | new user      | view the how to guide                                        | familiarise myself with the functionalities of the app.                        |
-| `* * *`  | social worker | add information of different families                        | keep track of families requiring assistance in one place.                      |
-| `* * *`  | social worker | view the information of different families I have added      | retrieve their information more quickly.                                       |
-| `* * *`  | social worker | delete the information of a family                           | remove the data of a family that I no longer need to keep track of.            |
-| `* * *`  | social worker | edit a family's information                                  | keep their information up-to-date for future use.                              |
-| `* *`    | social worker | tag families                                                 | manage and organize families according to their needs.                         |
-| `* *`    | social worker | filter through the list of families                          | navigate the contact list more efficiently.                                    |
-| `* *`    | social worker | sort families                                                | view families in a more suitable order.                                        |
-| `* *`    | social worker | toggle between list view and individual family view          | focus on a specific family's information when I need to.                       |
-| `* *`    | social worker | create custom command aliases for frequently used commands   | execute commands faster and reduce my typing effort.                           |
-| `* *`    | social worker | archive families that no longer need assistance              | keep my contact list focused on active cases.                                  |
-| `* *`    | social worker | see the overall statistics of families based on location     | allocate my manpower better to areas with more help needed.                    |
-| `*`      | social worker | synchronize the app with my personal calendar                | view all my appointments and reminders in one place.                           |
-| `*`      | social worker | attach documents or images to family profiles                | make all relevant information accessible within each family’s contact details. |
-| `*`      | social worker | generate and export reports on family progress or case notes | share updates with my team or supervisors efficiently.                         |
-| `*`      | social worker | share contacts                                               | allow multiple parties to assist the families at once.                         |
+| Priority | As a …​       | I can …​                                              | So that I can…​                                                   |
+|----------|---------------|-------------------------------------------------------|-------------------------------------------------------------------|
+| `* * *`  | new user      | view the help manual                                  | familiarise myself with the functionalities of the app.           |
+| `* * *`  | social worker | add information of different people                   | keep track of people requiring assistance in one place.           |
+| `* * *`  | social worker | view the information of different people I have added | retrieve their information more quickly.                          |
+| `* * *`  | social worker | delete the information of people                      | remove the data of people that I no longer need to keep track of. |
+| `* * *`  | social worker | edit a person's information                           | keep their information up-to-date for future use.                 |
+| `* *`    | social worker | tag a person                                          | manage and organize people according to their needs.              |
+| `* *`    | social worker | filter through the list of people                     | navigate the persons list more efficiently.                       |
+| `* *`    | social worker | sort people                                           | view people in a more suitable order.                             |
+| `* *`    | social worker | compile important personal details                    | quickly disseminate information to these people.                  |
+| `* *`    | social worker | archive people that no longer need assistance         | keep my contact list focused on active cases.                     |
+| `* *`    | social worker | see the overall statistics for people                 | better determine the progress I have or need to make.             |
+| `* *`    | social worker | schedule appointments I have with these people        | view all my appointments in one place.                            |
+| `* *`    | social worker | determine which schemes a person is eligible for      | help this person apply for said schemes.                          |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `SocialBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add new family**
+**Use case: UC01 - Add new person**
 
 **MSS:**
 
-1. User enters the command to add a family with the specified details
-2. SocialBook adds the family and displays the newly added family
+1. User enters the command to add a person with their specified details.
+2. SocialBook adds the person and displays the newly added person with the rest of the unarchived people.
 
     Use case ends.
 
 **Extensions:**
 
-* 2a. SocialBook detects missing or invalid input.
+* 1a. SocialBook detects missing or invalid input.
 
-    * 2a1. SocialBook displays an error message and prompts the user to try again
+    * 1a1. SocialBook displays an error message that suggest what a correct input should look like.
 
-    * 2a2. User corrects the input and enters the command again
+    * 1a2. User corrects the input and enters the command again.
     
-        Steps 2a1-2a2 are repeated until the user enters the correct input
+        Steps 1a1-1a2 are repeated until the user enters a correct input.
 
         Use case ends.
 
-* 2b. SocialBook detects a duplicate family entry.
+* 1b. SocialBook detects a duplicate person entry.
 
-    * 2b1. SocialBook displays an error message showing the duplicated family
+    * 1b1. SocialBook displays an error message indicating such a person already exists.
+  
+    * 1b2. User corrects the input and enters the command again.
+
+      Steps 1b1-1b2 are repeated until the user enters a correct input.
   
         Use case ends.
 
 
-**Use case: View information of different families**
+**Use case: UC02 - View information of all people**
 
 **MSS:**
 
-1. User enters the command to view all families
-2. SocialBook displays all families whose info has been added
+1. User enters the command to view all people.
+2. SocialBook displays all people currently stored and their information.
 
     Use case ends.
 
-**Extensions:** 
 
-* 2a. No families have been added to SocialBook yet.
-
-    * 2a1. SocialBook displays a message to inform the user that no family has been added by them yet
-        
-        Use case ends.
-
-
-**Use case: Delete information of different families**
+**Use case: UC03 - Delete information of different people**
 
 **MSS:**
 
-1. User indicates family whose member they want to delete
-2. SocialBook displays all family members in that family
-3. User selects and deletes the member
-4. SocialBook removes the member’s details from the display
+1. User indicates people they want to delete.
+2. SocialBook removes these people’s details from the display.
 
     Use case ends.
 	
 **Extensions:**
 
-* 1a. SocialBook detects no such family exist in the list.
+* 1a. SocialBook detects missing or invalid input.
 
-    * 1a1. SocialBook informs user that no such family exist in the list
+    * 1a1. SocialBook displays an error message that suggest what a correct input should look like.
+
+    * 1a2. User corrects the input and enters the command again.
+
+      Steps 1a1-1a2 are repeated until the user enters a correct input.
+
+      Use case ends.
+
+* 1b. SocialBook detects person indicated by input does not exist. 
+  
+    * 1b1. SocialBook informs user that at least one such person indicated to be deleted does not exist in the list.
 	    
-        Use case ends.
+    * 1b2. User corrects the input and enters the command again.
 
-* 3a. User selects the primary contact of the family to be deleted.
-	
-    * 3a1. SocialBook informs user they cannot delete primary contact and to swap it to someone else if they wish to do so
+      Steps 1b1-1b2 are repeated until the user enters a correct input.
 
-        Use case ends.
+      Use case ends.
 
 
-**Use case: Display command manual** 
+**Use case: Display help manual** 
 
 **MSS:**
 
-1. User keys in command to open command manual
-2. SocialBook displays command manual
-3. User keys in command to close command manual
-4. SocialBook displays previously shown screen
+1. User keys in command to open help manual.
+2. SocialBook displays help manual.
+3. User keys in command to close help manual.
+4. SocialBook displays previously shown screen.
 	
     Use case ends.
 
 **Extensions:**
 
-* 1a. User chooses more detailed manual.
+* 1a. User chooses more detailed manual for specific command.
 
-    * 1a1. SocialBook displays detailed command manual
+    * 1a1. SocialBook displays detailed command manual.
 
-    * 1a2. User keys in command to close command manual
+    * 1a2. User keys in command to close command manual.
 
-    * 1a3. SocialBook displays previously shown screen
+    * 1a3. SocialBook displays previously shown screen.
 
     Use case ends.
 
 	
-**Use case: Edit existing information of a family**
+**Use case: Edit existing information of a person**
 
 **MSS:**
 
-1. User chooses which information fields to update
-2. User only enters the fields he wishes to update
-3. SocialBook only updates the fields which user had updated and displays all information about the family
+1. User indicates what to edit for the specified information fields and for whom.
+2. SocialBook updates the fields for that person with user's input.
 
     Use case ends.
 
 **Extensions:**
 
-* 2a. SocialBook suggests a list of fields as user is typing input.
+* 1a. SocialBook detects an error in the entered data.
 
-    * 2a1. User enters one field
-    
-    * 2a2. SocialBook shows possible fields to be updated
-
-    * 2a3. User types finishes the field he wishes to update
-
-    * 2a4. SocialBook stops showing possible fields
-
-    * 2a5. User enters updated value
-        
-        If User chooses to update other fields, repeat step 2a1-2a4.
-        Otherwise, use case resumes from step 3.
-
-  * 3a. SocialBook detects an error in the entered data.
-
-      * 3a1. SocialBook should not update any fields
+    * 1a1. SocialBook should not update any fields.
   
-      * 3a2. SocialBook displays errors encountered with respect to the field
+    * 1a2. SocialBook displays errors encountered with respect to the field.
     
-          Use case ends.
+        Use case ends.
 
 
 ### Non-Functional Requirements
@@ -451,8 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  The system should be usable by a novice and does not require prior training.
 5.  Data that is to be deleted from the system is removed completely and not stored elsewhere.
-6.  The project is expected to adhere to the breadth-first iterative development.
-7.  Each command should take at most 10 seconds to executed.
+6.  Each command should take at most 10 seconds to executed.
 
 ### Glossary
 
@@ -479,9 +405,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   2. Change directory to the folder the jar file is in.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Run the jar file using `java -jar socialbook.jar`.  Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -490,24 +417,25 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutting down app
+   1. Type in `exit` as the input or click the x on top left of app.
+        Expected: App stops and closes.
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list all/` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete 1,2`<br>
+      Expected: First and second contact is deleted from the list. Names of the deleted people shown in the display message.
+   2. Test case: `delete 1,1,1,2`<br>
+      Expected: First and second contact is deleted from the list. Names of the deleted people shown in the display message. 
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details about invalid format shown in the display message.
+   4. Test case: `delete 1,10000`<br>
+      Expected: No person is deleted. Error details about invalid index shown in the display message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
