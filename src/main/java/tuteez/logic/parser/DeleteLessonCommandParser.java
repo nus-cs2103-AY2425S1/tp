@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static tuteez.logic.Messages.MESSAGE_DUPLICATE_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_INVALID_LESSON_INDEX_FORMAT;
-import static tuteez.logic.Messages.MESSAGE_INVALID_PERSON_INDEX_FORMAT;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX;
 import static tuteez.logic.Messages.MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX;
-import static tuteez.logic.Messages.MESSAGE_MISSING_PERSON_INDEX;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tuteez.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static tuteez.logic.parser.ParserUtil.parsePersonIndex;
+import static tuteez.logic.parser.ParserUtil.validateNonEmptyArgs;
+import static tuteez.logic.parser.ParserUtil.validatePrefixExists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,44 +33,12 @@ public class DeleteLessonCommandParser implements Parser<LessonCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON_INDEX);
 
-        validateBasicCommandFormat(args);
-        validatePrefixExists(argMultimap);
+        validateNonEmptyArgs(args, DeleteLessonCommand.MESSAGE_USAGE);
+        validatePrefixExists(argMultimap, PREFIX_LESSON_INDEX, MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX);
 
         Index personIndex = parsePersonIndex(argMultimap);
 
         return createDeleteLessonCommand(personIndex, argMultimap);
-    }
-
-    private void validateBasicCommandFormat(String args) throws ParseException {
-        if (args.trim().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteLessonCommand.MESSAGE_USAGE));
-        }
-    }
-
-    private void validatePrefixExists(ArgumentMultimap argMultimap) throws ParseException {
-        if (!argMultimap.getValue(PREFIX_LESSON_INDEX).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_MISSING_LESSON_INDEX_FIELD_PREFIX));
-        }
-    }
-
-    private Index parsePersonIndex(ArgumentMultimap argMultimap) throws ParseException {
-        String preamble = argMultimap.getPreamble().trim();
-
-        if (preamble.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_MISSING_PERSON_INDEX));
-        }
-
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(preamble);
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    String.format(MESSAGE_INVALID_PERSON_INDEX_FORMAT, preamble)));
-        }
-        return index;
     }
 
     private DeleteLessonCommand createDeleteLessonCommand(Index personIndex, ArgumentMultimap argMultimap)
