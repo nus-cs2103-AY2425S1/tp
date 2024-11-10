@@ -8,7 +8,6 @@ Real Connect Developer Guide
 - [Setting up, getting started](#setting-up-getting-started)
 - [Design](#design)
   - [Architecture](#architecture)
-  - [How the architecture components interact with each other](#how-the-architecture-components-interact-with-each-other)
   - [UI component](#ui-component)
   - [Logic component](#logic-component)
   - [Model component](#model-component)
