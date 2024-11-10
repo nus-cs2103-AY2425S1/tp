@@ -200,15 +200,9 @@ Deletes the specified person(s) from the address book.
 
 Format: `delete [INDEX | LowerBound-UpperBound]…`
 
-<<<<<<< HEAD
-* Deletes the person at the specified `INDEX` or range of indices.
-* At least one of the optional fields must be provided.
-* All input indices must be within the range.
-=======
 * At least one index or index range must be provided.
 * Deletes the person at the specified `INDEX` or range of indices.
 * The index must be within the number of participants in the list.
->>>>>>> master
 * When using ranges, ensure there are **no spaces** around the hyphen (e.g., `1-5` is valid, while `1 - 5` is not).
 
 Examples:
