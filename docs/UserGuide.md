@@ -289,7 +289,7 @@
 
 <div class="content">
 
-<strong>1. </strong>**Download** and **install** [Java `17`](https://www.oracle.com/java/technologies/downloads/#java17) if you don't have it installed. We don't support other versions.
+<strong>1. </strong>**Download** and **install** [Java `17`](https://www.oracle.com/java/technologies/downloads/#java17) if you don't have it installed. We don't officially support other versions but it may work.
 
 <div class="sub-content">
 
