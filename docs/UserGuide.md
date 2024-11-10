@@ -316,6 +316,13 @@ A **person** is a patient with several fields. The fields and their correspondin
 | **Tag(s)**       | `t/`   | Yes      | Yes      |
 
 You can identify these patients uniquely by their **patient ID (PID)** for easy reference. 
+The PID can be seen at the top of their information card.
+
+<br><sbr>
+
+<img src="images/personexample.png" width="500">
+
+<br><sbr>
 
 <br>
 
@@ -531,6 +538,18 @@ An **appointment** is defined by several fields. The fields and their correspond
 | **Date and Time**   | `d/`   | No       | No       |
 | **Sickness**        | `s/`   | Yes      | No       |
 | **Medicine**        | `m/`   | Yes      | No       |
+
+You can identify these appointments uniquely by their **Appointment ID (AID)** for easy reference.
+The AID can be seen at the top of their information card.
+
+<br><sbr>
+
+<img src="images/appointmentexample.png" width="500">
+
+<br><sbr>
+
+The number indicated beside the appointment name is the PID of the person who has the appointment.
+
 
 You can manage the appointments through different commands, which can be seen in the table below:
 
