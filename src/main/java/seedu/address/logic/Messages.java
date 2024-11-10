@@ -26,7 +26,7 @@ public class Messages {
     public static final String MESSAGE_BUYERS_LISTED_OVERVIEW = "%1$d buyers listed!";
 
     // MeetUp
-    public static final String MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX = "The meetup index provided is invalid";
+    public static final String MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX = "The meet-up index provided is invalid";
     public static final String MESSAGE_MEETUPS_LISTED_OVERVIEW = "%1$d meet-ups listed!";
 
     // Property
