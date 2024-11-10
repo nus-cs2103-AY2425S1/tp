@@ -52,6 +52,17 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Each parameter is preceded by a **prefix**, which indicates the type of data the parameter represents.  
+  For example:
+    - `n/` is the prefix for `NAME`, as in `add n/John Doe`.
+    - `p/` is the prefix for `PHONE_NUMBER`, as in `add p/12345678`.
+
+* Any unrecognized parameter's prefix will be treated as part of the value for the preceding valid prefix. This means that care should be taken to use only the correct prefixes when entering commands to avoid unexpected behavior.
+    For example:
+    - Correct: `add n/John Doe p/12345678`
+    - Incorrect: `add n/John Doe xyz/12345678` (Here, `xyz/12345678` will be treated as part of the name value, which
+      will result in an error)
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -59,13 +70,19 @@ ContactsForGood (CFG) is a **desktop app for managing contacts, optimized for us
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * An `INDEX` refers to the person at the index number shown in the **last displayed person list**.<br>
-  The index **must be a positive integer** 1, 2, 3, …​ and must be
-  within range of the last displayed person list.
+  The index must meet the following conditions:
+
+  1. **Correct Format**:  
+     The index **must be a positive integer** (e.g., 1, 2, 3, …). Non-numeric or improperly formatted inputs (e.g., `-1`, `abc`, `1.5`) will be deemed as incorrect format.
+
+  2. **Valid Index**:  
+     The index must be within the range of the last displayed person list. Indices that are numeric but refer to non-existent entries in the list (e.g., `999` when the list has only 10 people) will be deemed as invalid indices.
 
 * `INDICES` takes in multiple `INDEX`s<br>
   * In this case, each `INDEX` can be a single number (e.g., `2`) or a closed range (e.g., `5-9`)
   * Each `INDEX` is separated by spaces (e.g. of an `INDICES`, `1 2 3 5-9`).
-  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, but `5 - 9` or `5 -9` or `5- 9` is invalid).
+  * **Note:** In a closed range, there must be no spaces between the numbers and the hyphen (e.g., `5-9` is correct, 
+    but `5 - 9` or `5 -9` or `5- 9` is incorrect).
   * `INDICES` expects at least one `INDEX` unless the `INDICES` item is optional.
 
 * Parameters can be in any order.<br>
@@ -121,16 +138,31 @@ Format: `add [r/ROLE] n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​
 - `ADDRESS`: The contact's physical address.
 - `TAG` (Optional): Additional tags associated with the contact.
 - Role-specific fields(not required for `Person`)
-    - **Volunteer**: `h/HOURS` :required for volunteers, representing contributed hours.
-    - **Donor**: `d/DONATED_AMOUNT` :required for donors, representing total donation amount in thousands of USD.
-    - **Partner**: `ped/PARTNERSHIP_END_DATE` :required for partners, representing the partnership's end date. The
-      date should be in the **YYYY-MM-DD** format and must be a valid date (e.g., 2024-11-07).
+  - **Volunteer**: 
+    -  `h/HOURS` :required for volunteers, representing contributed hours.
+  - **Donor**:
+  - `d/DONATED_AMOUNT`: Required for donors, representing the total donation amount in thousands of USD.
+      - The amount can include **up to two decimal places** for precision (e.g., `123.45` represents 123,450 USD).
+      - The amount is always displayed in thousands of dollars. For very large numbers, **scientific notation** will 
+        be used automatically (e.g., `12345678` will be displayed as `1.2345678E7`, equivalent to 12,345,678 thousand USD)
+  - **Partner**: 
+    - `ped/PARTNERSHIP_END_DATE` (Required): Represents the partnership's end date.
+      - The date must be in the **YYYY-MM-DD** format.
+      - The date **must be a valid date**:
+          - A valid date is one that has existed in the past or will exist in the future. Both past and future dates are accepted as long as they are actual calendar dates.
+          - Examples of **valid dates**:
+              - `2023-03-15` (Past date).
+              - `2025-10-20` (Future date).
+          - Examples of **invalid dates**:
+              - `2021-02-29` (February 29 does not exist in 2021 because it is not a leap year).
+              - `2023-03-33` (March does not have 33 days).
 
 Note:
-Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of
-`Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT`
-is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
-If the specified role does not match with the specified field, the add command will be deemed invalid.
+1. Role-specific fields must correspond to the type of the role. For example, if you add a contact with role of
+    `Volunteer`, you must also provide `h/HOURS`. Similarly, if the role of the contact is `Donor`, `d/DONATED_AMOUNT`
+    is required, and for `Partner`, `ped/PARTNERSHIP_END_DATE` must be provided.  
+    If the specified role does not match with the specified field, the add command will be deemed invalid.
+2. **Contact Uniqueness**: Contacts are distinguished **by their names only**. This means duplicate names are not allowed in the address book. However, multiple contacts can share the same phone number or email address if their names are unique.
 
 
 <box type="tip" seamless>
