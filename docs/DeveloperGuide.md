@@ -589,8 +589,8 @@ unless specified otherwise)
 
 ### Planned Enhancements:
 Team size: 5
-1. **Update Result display box to enable wrapping and be of greater vertical length:** So that users do not need to scroll in order to read the result display box.
-2. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
+1. **Update Result display box to enable wrapping and be of greater vertical length:** So that users do not need to scroll in order to read the result display box and will be able to see the full result if the result is too long to fit in the box.
+3. **Make tag names wrap if it exceeds the UI display:** The current display of tag names results in them exceeding the UI display if they are too long. Although it can be mitigated by enlarging the window size, it relies on using the mouse, which is not CLI-friendly.
 3. **Display student information in the window after the Add Student command:** The current implementation does not display the student information in the window after the Add Student command, unlike other commands like the Edit Student command. This should be fixed to maintain consistency.
 4. **Display more accurate error messages for unexpected prefixes and '/'s:** The current implementation will display a ```Index should be a non-zero unsigned integer and cannot be blank``` error message for a command that contains prefixes or '/'s that are not expected e.g. ```edit_student si/1 r/math```. However, it should display the command's respective invalid command message to facilitate better understanding.
 5. **Enable Edit Assignment Command to edit graded assignment without losing its submission status and score:** The current implementation of the Edit Assignment command will reset the assignment's submission status and score to default values if the assignment is already graded. This should be fixed to allow the user to edit the assignment without losing its submission status and score.
