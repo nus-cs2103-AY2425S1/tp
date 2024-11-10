@@ -749,7 +749,7 @@ close
 undo
 ```
 - Reverts all changes of the previous command.
-- **Note:** This command can only be used after a permanent change has been made. The commands that `undo` works on are:
+- **Note:** This command is only used on the latest command which made a permanent change to the list of clients. If there have been no previous permanent changes, this command will not work at all. The commands that `undo` works on are:
   - add
   - edit
   - delete
