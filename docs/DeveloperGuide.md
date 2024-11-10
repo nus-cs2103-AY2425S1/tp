@@ -37,7 +37,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -69,13 +70,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/CampusConnect/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -86,7 +87,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -129,7 +130,8 @@ The structure is simple:
 * They also contain their own respective error messages.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/model/Model.java)
+
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -152,7 +154,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/CampusConnect/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2425S1-CS2103T-F14a-4/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -385,10 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 
 * 1b. Contact to find does not exist.
-    * 1b1. CampusConnect shows error message.
-    * 1b2. User enters input again.
-
-      Steps 1b1-1b2 repeat until input format is valid.
+    * 1b1. CampusConnect shows empty contact list.
 
       Use case ends.
 
@@ -456,16 +455,8 @@ before the command was executed.
    Use case ends
 
 **Extensions**
-* 1a. Input format is invalid.
+* 1a. No earlier data to revert.
     * 1a1. CampusConnect shows error message.
-    * 1a2. User enters input again.
-
-      Steps 1a1-1a2 repeat until input format is valid.
-
-      Use case ends.
-
-* 1b. No earlier data to revert.
-    * 1b1. CampusConnect shows error message.
 
       Use case ends.
 
@@ -480,16 +471,8 @@ before the command was executed.
    Use case ends.
 
 **Extensions:**
-* 1a. Invalid Input Format:
-    * 1a1. CampusConnect displays an error message indicating the input format is invalid.
-    * 1a2. The user re-enters the input.
-
-      Steps 1a1-1a2 repeat until the input format is valid.
-
-      Use case ends.
-
-* 1b. No More Commands to Redo:
-    * 1b1. CampusConnect displays an error message indicating that there are no more commands to redo.
+* 1a. No More Commands to Redo:
+    * 1a1. CampusConnect displays an error message indicating that there are no more commands to redo.
 
       Use case ends.
 
@@ -513,7 +496,7 @@ before the command was executed.
 * **Duplicate Contact**: A contact is considered a duplicate if it shares the same phone number, email, or name with another contact. 
     Phone numbers and emails are unique identifiers, so allowing duplicates could cause confusion, such as accidentally contacting the wrong person. 
     Unique names also help maintain organization, with small variations (e.g., capitalization or adding a number) used to distinguish individuals with the same name.
-* **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories.
+* **Tag List**: The scrollable list in the GUI displaying all unique tags and their colour-coded categories. The execution of `find` commands do not change the content of tag lists. 
 * **Person List**: The scrollable list of contacts in the GUI displaying all contacts and the respective values for their fields.
 * **Commands affected by `undo` and `redo`**: These refer to all commands that affect the *state* of the Tag List and Contact List
   in **CampusConnect** and exclude `list` and `find`, as they do not alter the state of the contact or tag list.
@@ -592,11 +575,28 @@ testers are expected to do more *exploratory* testing.
    1. Test case: undo immediately after starting the application (with no operations performed)
       Expected: No undo operation is performed. An error message appears in the status message, indicating there is no action to undo.
 
+### Adding a tag
+1. Adding a tag while all tags are being shown
+
+   1. Prerequisites: There are 2 person in the list. First person on the list has tag `CS2100`, second person has tags `floortball` and `friends`. 
+
+   1. Test case: `addtag 1 t/CS2040S`<br>
+      Expected: The first person now has 2 tags `CS2100` and `CS2040S`. The tag lists are updated accordingly.
+      
+   1. Test case: `addtag 2 t/homie t/homie`
+      Expected: The second person now has 3 tags `floortball`, `friends` and `homie`. 
+      
+   1. With the following test case:
+      1. `addtag 1 t/CS2040s`
+      1. Test case: `addtag 1 t/CS2030s t/CS2040S`
+      1. Test case: `addtag 0 t/volleyball` <br>
+      1. Test case: `addtag 3 t/homie` <br>
+      1. Test case: `addtag 2` <br>
+         Expected: No new tag added. Error details shown in the status message..
+
 ### Finding a person
 
 1. Finding a person with tags
-
-    1. Prerequisites: There are contacts in the contact list. Add some if this is not the case.
 
     1. Assumption: Pick any 2 tags (or substring of the tags) present in any contact in the contact list. Call these x and y.
 
@@ -631,24 +631,34 @@ testers are expected to do more *exploratory* testing.
 
 1. Other incorrect delete tag commands to try: `deltag`, `deltag M t/x` (where M is larger than the list size or smaller than 0), `deltag 1 x`<br>
    Expected: No deleting of tags will occur and an error message will be displayed.
-   
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Planned enhancements**
+
+Team size: 5
+
+1. Change the font color for tags: Currently, the font color for `GENERAL` tags is grey, making them less noticeable. We plan to use a higher-contrast font color to make tags more prominent and easier to read.
+2. Allow adding overseas phone number: The app currently supports only Singaporean phone number. We aim to expand functionality to include valid international numbers, complete with country codes.
+3. Allow certain special characters: We currently only allow alphanumeric characters and whitespaces. We plan to support additional characters, such as hyphens, to better accommodate real-world naming conventions.
+4. Make duplicate contact error message more specific: : The current error message for duplicate contacts, “This person already exists in CampusConnect,” is too general. We plan to enhance it by specifying the name of the existing contact that duplicates the one the user is attempting to add.
+
 --------------------------------------------------------------------------------------------------------------------
 ## **Appendix: Future features**
 Below is a list of features that we feel would further enhance the user experience.
 
-  |                                    Feature                                     | Description                                                                        |
-  |:------------------------------------------------------------------------------:|------------------------------------------------------------------------------------|
-  |                               Clustering of tags                               | Group tags of the same categories together in the UI's display of the tags list.   |
-  |                                  Pin contacts                                  | Keep selected contacts constantly shown at the top of the contacts list.           |
-  |                           Customize category colors                            | Change the colors of the categories to the user's preference.                      |
-  |                          Multiple numbers per contact                          | Allow more than one number per contact to accommodate multiple contact numbers.    |
-  |                           Custom fields for contacts                           | Add custom fields to the contacts added.                                           |
-  |                            Custom shortcut commands                            | Add custom shortcut commands to streamline actions within the application.         |
-  |                          Delete tag from all contacts                          | Remove a specific tag from all contacts at once.                                   |
-  |                                   Dark mode                                    | Include a dark mode theme for easier viewing in low light conditions.              |
-  |                            Copy contact information                            | Enable copying of contact information to reduce errors from manual copying.        |
-  |                                Export contacts                                 | Provide an option to export contact information for easier sharing.                |
-
+  |              Feature               | Description                                                                      |
+  |:----------------------------------:|----------------------------------------------------------------------------------|
+  |         Clustering of tags         | Group tags of the same categories together in the UI's display of the tags list. |
+  |            Pin contacts            | Keep selected contacts constantly shown at the top of the contacts list.         |
+  |     Customize category colors      | Change the colors of the categories to the user's preference.                    |
+  |    Multiple numbers per contact    | Allow more than one number per contact to accommodate multiple contact numbers.  |
+  |     Custom fields for contacts     | Add custom fields to the contacts added.                                         |
+  |      Custom shortcut commands      | Add custom shortcut commands to streamline actions within the application.       |
+  |    Delete tag from all contacts    | Remove a specific tag from all contacts at once.                                 |
+  |             Dark mode              | Include a dark mode theme for easier viewing in low light conditions.            |
+  |      Copy contact information      | Enable copying of contact information to reduce errors from manual copying.      |
+  |          Export contacts           | Provide an option to export contact information for easier sharing.              |
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Effort**

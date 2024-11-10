@@ -28,8 +28,8 @@ any traditional point-and-click management app.
 1. Copy the file to the folder you want to use as the _home folder_ for your CampusConnect.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar CampusConnect.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   A GUI similar to the below should appear in a few seconds. Note how the app does not contain any sample data.<br>
+   ![EmptyUi](images/EmptyUi.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -38,7 +38,7 @@ any traditional point-and-click management app.
 
    * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` with phone number `98765432` and email `johnd@example.com` to CampusConnect.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 1` : Deletes the 1st contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -79,6 +79,20 @@ any traditional point-and-click management app.
 * A contact is considered a duplicate of another if it has the same Name, Phone or Email as the other contact.
 * 
 
+**Notes about case sensitivity:**<br>
+* Names, emails and tags are case-sensitive. 
+
+**Notes about format of fields:**<br>
+* Names should only contain alphanumeric characters and spaces
+* Phone numbers should only contain numbers, start with 6, 8 or 9, and it must be 8 digits long
+* Emails should be of the format `local-part@domain` and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-)
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+   The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+* Tag names should be alphanumeric. Tags that have multiple words can be separated by a hyphen (-)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -97,7 +111,6 @@ Action     | Format, Examples
 **[Redo action](#redo-a-command-redo)** | `redo`
 **[List](#listing-all-persons-list)**   | `list`
 **[Help](#viewing-help-help)**   | `help` 
-
 --------------------------------------------------------------------------------------------------------------------
 ## Commands
 
@@ -224,9 +237,6 @@ Format: `deltag INDEX t/TAG`
 Examples:
 * `deltag 1 t/friend` 
 deletes the friend tag of the first person in the list.
-
-Disallowed examples:
-* `deltag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
 
 ### Categorizing a tag : `cattag`
 
