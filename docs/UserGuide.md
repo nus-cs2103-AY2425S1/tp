@@ -158,9 +158,9 @@ Before diving into our features, do note that we set some specifications for nam
 
 <box type="warning" seamless>
 
-**Note about extra parameters:** We advise that you follow the command format of each command strictly (some exceptions apply) to avoid
-unexpected behaviour when running commands. This means you **should not** put extra parameters unless allowed, and you **should
-not** put parameters that are not recognised by the command.
+**Note about extra parameters:** We advise that you follow the command format of each command **strictly** (some [exceptions](#param-exceptions) apply) to avoid any
+unexpected behaviour when running commands. This means you **should not** put extra parameters unless mentioned, and you **should
+not** put any parameters or prefixes that are not recognised by the command.
 
 </box>
 
@@ -312,17 +312,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <box type="tip" seamless>
 
-**tip:** InternBuddy will show what changes you have made to company in the results box, so that you can verify that you
+**Tip:** InternBuddy will show the changes you have made to the selected company in the results box, so that you can verify that you
 have made the right edits!
 </box>
 
 <box type="info" seamless>
 
 **Note about `edit` command**: 
-* Currently, InternBuddy does not check if the parameters you provide are exactly same as it
-the existing parameters for that company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
-* After running the `edit` command, the view will return to showing the full list of companies, so do be mindful when running consecutive edits to prevent changing the wrong
-Company's information.
+* Currently, InternBuddy does not check if the parameters you provide are exactly the same as the existing parameters for 
+the selected company. So please be mindful when entering your inputs, especially if you are making small changes (eg: `PHONE: 98765432 -> 98675432`).
+* If you are current in the filtered view of a `find` or `view` command, an execution of `edit` command will return the application
+view to the full list of companies. Hence, please be mindful when running consecutive edits to prevent accidental changes to wrong company.
 </box>
 
 
@@ -499,9 +499,9 @@ _Details coming soon ..._
 **Q**: Must I install java 17 or above to use InternBuddy? <br>
 **A**: Yes, InternBuddy uses libraries implemented in java 17 or above, it will not work without it.
 
-**Q**: Do I have to follow the order of parameters specified by the commands? <br>
-**A**: If the parameter has a prefix (eg: `n/NAME`), you can specify them in any order you like! However, parameters with no prefix (eg: `INDEX`)
-must appear as the first input after the command.
+**Q**: <a id="param-exceptions"></a>Do I have to follow the order of parameters specified by the commands? <br>
+**A**: If the parameter has a prefix (eg: `n/NAME`), you can specify them in any order you like! (eg: `add n/NAME e/EMAIL` and `add e/EMAIL n/NAME` are both allowed) <br>
+However, parameters with no prefix (eg: `INDEX`) must appear as the first parameter after the command. (eg: `edit INDEX n/NAME` is valid but `edit n/NAME INDEX` is not)
 
 **Q**: How do I add a new company with multiple tags? <br>
 **A**: To add a company with multiple tags, use the add command with multiple t/ tags. Example: `add n/Google LLC e/contact@google.com t/tech t/FAANG t/software`
