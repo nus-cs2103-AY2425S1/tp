@@ -34,7 +34,7 @@ public class AssignWeddingCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds one or multiple weddings to the person identified "
             + "by the index number used in the last person listing.\n"
-            + "Wedding names are case sensitive.\n"
+            + "Wedding names are case insensitive.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_WEDDING + "WEDDING [p1/] [p2/] + ... "
             + PREFIX_WEDDING + "WEDDING [p1/] [p2/] (can specify multiple weddings)\n"
