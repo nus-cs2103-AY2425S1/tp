@@ -70,7 +70,7 @@ First, we need to make sure your computer has Java 17 installed. Here's how to c
     ```
     java -jar BakeBuddy.jar
     ```
-   You should see the BakeBuddy window appear as follows!
+   You should see the BakeBuddy window appear as follows in the next page!
 
 ## **Step 3: Try Your First Commands**
 
@@ -81,10 +81,10 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 3. For detailed command information, refer to the [Features](#features) section which contains comprehensive documentation for each command
 
 ![screenshot](images/Screenshot-5.png)
-
+\
 <div style="page-break-after: always;"></div>
 
-# **List of Commands**
+# **Glossary and Command Formats**
 
 <div markdown="block" class="alert alert-info">
 
@@ -96,8 +96,8 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -106,10 +106,34 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+**Parameter Reference:**
+* `INDEX`: Positive integer (1, 2, 3, ...)
+* `NAME`: Name of person/item (Only alphanumerical characters)
+* `PHONE_NUMBER`: Phone number (Unique in the contacts list and more than 3 digits)
+* `EMAIL`: Email address
+* `ADDRESS`: Physical address
+* `INFORMATION`: Additional customer details (Only alphanumerical characters)
+* `INGREDIENTS_SUPPLIED`: List of ingredients' name (for suppliers)
+* `COST`: Numeric value
+* `PASTRYID`: Product identification numbers from the pastry catalogue
+* `INGREDIENTID`: Product identification numbers from the ingredient catalogue
+* `TAG`: Category or label (Only a single word can be used as a tag)
+* `REMARK`: Additional comments
+
+**Format Notes:**
+* `[parameter]`: Optional parameter
+* `parameter...`: Parameter can be repeated
+* Parameters can be entered in any order
+* Commands and parameter prefixes are case-sensitive
+
 </div>
 
-## **Contact Management**
-### **General Contacts**
+<div style="page-break-after: always;"></div>
+
+# **List of Commands**
+
+## **General Contact Management**
 
 | Command                                   | Format                                                                      | Example                                                              |
 |-------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
@@ -121,17 +145,11 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [List](#list-command)                     | `list`                                                                      | `list`                                                               |
 | [Remark](#remark-command)                 | `remark INDEX r/REMARK`                                                     | `remark 1 r/Regular customer`                                        |
 
-<div style="page-break-after: always;"></div>
-#### Customer Specific
+## **Customer and Supplier Specific Contact Management**
 
 | Command | Format                                                                               | Example |
 | --- |--------------------------------------------------------------------------------------| --- |
 | [Add Customer](#add-customer-command) | `addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG]...` | `addCustomer n/Tim p/81234567 i/Allergic to peanuts` |
-
-### **Supplier Specific**
-
-| Command | Format                                                                                  | Example |
-| --- |-----------------------------------------------------------------------------------------| --- |
 | [Add Supplier](#add-supplier-command) | `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS s/INGREDIENTS_SUPPLIED [t/TAG]...` | `addSupplier n/tim p/81234567 s/salt, chocolate` |
 
 <div style="page-break-after: always;"></div>
@@ -139,19 +157,19 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 ## **Order Management**
 ### **Customer Orders**
 
-| Command | Format                                                                                  | Example |
-| --- |-----------------------------------------------------------------------------------------| --- |
-| [Add Customer Order](#add-customer-order-command) | `addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDSs]... [r/REMARK]` | `addCustomerOrder n/John p/98765432 o/1 2 3 r/Delivery at 6pm` |
-| [Delete Customer Order](#delete-customer-order-command) | `deleteCustomerOrder INDEX`                                                             | `deleteCustomerOrder 2` |
-| [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX`                                                               | `markCustomerOrder 1` |
-| [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                             | `unmarkCustomerOrder 1` |
+| Command | Format                                                                                | Example |
+| --- |---------------------------------------------------------------------------------------| --- |
+| [Add Customer Order](#add-customer-order-command) | `addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYIDSs]... [r/REMARK]` | `addCustomerOrder n/John p/98765432 o/1 2 3 r/Delivery at 6pm` |
+| [Delete Customer Order](#delete-customer-order-command) | `deleteCustomerOrder INDEX`                                                           | `deleteCustomerOrder 2` |
+| [Mark Customer Order](#mark-customer-order-command) | `markCustomerOrder INDEX`                                                             | `markCustomerOrder 1` |
+| [Unmark Customer Order](#unmark-customer-order-command) | `unmarkCustomerOrder INDEX`                                                           | `unmarkCustomerOrder 1` |
 
 <div style="page-break-after: always;"></div>
 #### **Supply Orders**
 
 | Command | Format                                                                  | Example |
 | --- |-------------------------------------------------------------------------| --- |
-| [Add Supply Order](#add-supply-order-command) | `addSupplyOrder n/NAME p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs]...` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
+| [Add Supply Order](#add-supply-order-command) | `addSupplyOrder n/NAME p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTIDs]...` | `addSupplyOrder n/John p/98765432 o/1 2 3` |
 | [Delete Supply Order](#delete-supply-order-command) | `deleteSupplyOrder INDEX`                                               | `deleteSupplyOrder 1` |
 | [Mark Supply Order](#mark-supply-order-command) | `markSupplyOrder INDEX`                                                 | `markSupplyOrder 1` |
 | [Unmark Supply Order](#unmark-supply-order-command) | `unmarkSupplyOrder INDEX`                                               | `unmarkSupplyOrder 1` |
@@ -185,26 +203,6 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 | [Clear](#clear-all-command) | `clear` | `clear` |
 | [Exit](#exit-command)       | `exit` | `exit` |
 
-**Parameter Reference:**
-* `INDEX`: Positive integer (1, 2, 3, ...)
-* `NAME`: Name of person/item (Only alphanumerical characters)
-* `PHONE_NUMBER`: Phone number (Unique in the contacts list and more than 3 digits)
-* `EMAIL`: Email address
-* `ADDRESS`: Physical address
-* `INFORMATION`: Additional customer details (Only alphanumerical characters)
-* `INGREDIENTS_SUPPLIED`: List of ingredients (for suppliers)
-* `COST`: Numeric value
-* `PRODUCTID`: Product identification numbers
-* `TAG`: Category or label (Only a single word can be used as a tag)
-* `REMARK`: Additional comments
-
-**Format Notes:**
-* `[parameter]`: Optional parameter
-* `parameter...`: Parameter can be repeated
-* Parameters can be entered in any order
-* Commands and parameter prefixes are case-sensitive
-* Parameter values are case-insensitive
-
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -216,7 +214,7 @@ Now that BakeBuddy is running, let's add your first items. In the BakeBuddy wind
 For Customer Orders:
 1. First run `viewPastryCatalogue` to see all available pastries and their IDs
 2. Keep the catalogue visible while typing your `addCustomerOrder` command
-3. Reference the IDs from the catalogue for the `o/PRODUCTID` parameter
+3. Reference the IDs from the catalogue for the `o/PASTRYID` parameter
 4. Example workflow:
    ```
    > viewPastryCatalogue
@@ -227,7 +225,7 @@ For Customer Orders:
 For Supply Orders:
 1. First run `viewIngredientCatalogue` to see all ingredients and their IDs
 2. Keep the catalogue visible while typing your `addSupplyOrder` command
-3. Reference the IDs from the catalogue for the `o/PRODUCTID` parameter
+3. Reference the IDs from the catalogue for the `o/INGREDIENTID` parameter
 4. Example workflow:
    ```
    > viewIngredientCatalogue
@@ -326,13 +324,6 @@ For the best experience:
   - Must follow standard email format (xxx@xxx.xxx)
   - Special characters allowed: . _ - @
 
-
-
---------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
-
-# **Glossary**
-
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
@@ -390,12 +381,12 @@ To view the new order in the customer's contact details:<br>
 </div>
 
 ```bash
-addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTID]... [r/REMARK]
+addCustomerOrder [n/NAME] p/PHONE_NUMBER o/PASTRYID [MORE_PASTRYID]... [r/REMARK]
 ```
 - **Parameters:**
   - `n/NAME`: (Optional) The customer's name. This has to be alphanumerical.
   - `p/PHONE_NUMBER`: The customer's phone number. This has to be unique in the contacts list and have more than 3 digits.
-  - `o/PRODUCTID`: One or more pastry IDs for the items being ordered.
+  - `o/PASTRYID`: One or more pastry IDs for the items being ordered.
   - `r/REMARK`: (Optional) Information about the customer order.
 
 **Example:**
@@ -487,12 +478,12 @@ To view the new order in the supplier's contact details: <br>
 </div>
 
 ```bash
-addSupplyOrder [n/NAME] p/PHONE_NUMBER o/PRODUCTID [MORE_PRODUCTIDs]... [r/REMARK]
+addSupplyOrder [n/NAME] p/PHONE_NUMBER o/INGREDIENTID [MORE_INGREDIENTID]... [r/REMARK]
 ```
 - **Parameters:**
     - `n/NAME`: (Optional) The supplier's name. This has to be alphanumerical.
     - `p/PHONE_NUMBER`: The phone number of the supplier. This has to be unique in the contacts list and have more than 3 digits.
-    - `o/PRODUCTID`: One or more product IDs for the items being supplied.
+    - `o/INGREDIENTID`: One or more product IDs for the items being supplied.
     - `r/REMARK`: (Optional) Information about the customer order.
 
 **Example:**
