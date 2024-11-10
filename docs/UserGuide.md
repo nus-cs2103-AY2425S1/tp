@@ -126,6 +126,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Each sequence of words not separated by `;` or a prefix will be used as a search. This means that `jam ho` will not match `James Ho`
 * If a semicolon was used to separate searches, students matching at least one keyword will be returned (i.e. `OR` search). 
 * If a prefix was used to separate searches, students matching all keywords will be returned (i.e. `AND` search).
+* If no names are provided to the find command (i.e. `find n/`), all students will be listed.
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -134,6 +135,7 @@ Examples:
 * `find n/alex n/david` returns `Alex David`, if a student with that name exists
 * `find c/CS2103T c/CS2100` will return students who are taking both `CS2103T` and `CS2100`
 * `find n/alex c/cs2103t;cs2100` will return all students whose names contain `alex` and are taking at least one of `CS2103T` or `CS2101`.
+* `find n/` will return all students.
 
 ### Deleting a student : `delete`
 
