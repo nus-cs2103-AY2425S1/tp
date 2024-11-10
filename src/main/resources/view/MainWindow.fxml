@@ -39,7 +39,7 @@
 
                 <HBox prefHeight="9999" styleClass="pane-with-border">
                     <!-- Person List -->
-                    <VBox fx:id="personList" minWidth="400" prefWidth="400" style="-fx-background-color: #343434;"
+                    <VBox fx:id="personList" minWidth="600" prefWidth="600" style="-fx-background-color: #343434;"
                           styleClass="pane-with-border" VBox.vgrow="ALWAYS" focusTraversable="true">
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10"/>
