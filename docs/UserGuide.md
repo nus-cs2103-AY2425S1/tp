@@ -249,7 +249,7 @@ Format: `tag INDEX t/TAGNAME [f/]`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​.
 * The `Tag` must exists in WedLinker before it can be assigned.
-* If the `Tag` does not exist, you can use `f/` to force the creation and assignment of the `Tag`.
+* If the `Tag` does not exist, you can use `f/` to force the creation and assignment of the `Tag`. The `f/` tag should appear after all the tags specified by `t/TAGNAME` in the command.
 
 ### Unassigning tag from contacts : `untag`
 
