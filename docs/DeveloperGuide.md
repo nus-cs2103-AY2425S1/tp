@@ -1044,6 +1044,20 @@ The current error message can be confusing for non-technical users who do not kn
 integer limit, such as `104890385925902379`.
 Clearer error messages can help to mitigate such confusion.
 
+**<u>Make `find c/` throw an error</u>**
+
+**Description**
+
+Currently, `find c/` does not throw an error. Instead, it runs successfully but always
+returns 0 students.
+This should be changed so an appropriate error message is shown (courses cannot be empty).
+
+**Rationale**
+
+A user might expect `find c/` to find students who are taking no courses.
+However, this is not the case, and will result in confusion.<br>
+Hence, this command should not execute successfully.
+
 ### Glossary
 
 * **Attendance**: Student's Presence/Absence for a Lesson
