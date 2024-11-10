@@ -135,10 +135,10 @@ Finds all persons based on the specified keywords (case-insensitive) after the l
 Format: `find LABEL KEYWORD [KEYWORD]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`.
-* The LABEL that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
+* The label that corresponds to the field you want to search should be specified. e.g. use `find n/Alex` to search by name, use `find e/alex@gmail.com` to search by email.
 * The search will return partial matches and full matches.
 * Only one field can be searched at a time, but multiple keywords can be searched for the same field by using the by placing each keyword after the appropriate label. 
-* Only the first LABEL entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
+* Only the first label entered will be used for the search. For example, if you enter find `find n/Alex a/`, the search will only look for matches in the name field and ignore the address field.
 * The order of the keywords does not matter. e.g. `n/Hans n/Bo` will return the same contacts as `n/Bo n/Hans`.
 
 * `find p/973` returns all Contacts whose phone number contains 973
@@ -198,47 +198,47 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDD
 To add a contact to WedLinker, type `add` followed by details such as the name, phone number, and email.
 
 Examples:
-* To add a contact named John Doe with a phone number of 98765432, email johnd@example.com, and address XYZ Floral Services, type:
+* To add a contact named John Doe with a phone number of 98765432, email johnd@example.com, and address XYZ Floral Services, enter the command:
   * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
-* To add a contact named Betsy Crowe with a phone number of 1234567, with tags Photographer and Guest, type:
+* To add a contact named Betsy Crowe with a phone number of 1234567, with tags Photographer and Guest, enter the command:
   * `add n/Betsy Crowe p/1234567 t/Photographer t/Guest`
 
 ### Editing a person : `edit`
 
 Use the edit command to edit details of an existing contact in WedLinker.
 
-Format: `edit POSITION_NUM [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+Format: `edit PERSON_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
-To edit the details of an existing contact in WedLinker, type `edit` followed by the contact's position number in the contact list, and details you wish to update, such as the name, phone number, and email.
+To edit the details of an existing contact in WedLinker, type `edit` followed by the person's position number in the contact list, and details you wish to update, such as the name, phone number, and email.
 
-* The `POSITION_NUM` **must be a positive integer** 1, 2, 3, …​
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing details will be updated to the input values.
 
 Examples:
-* To change the phone number of the first contact to 91234567, type:  
+* To change the phone number of the first contact to 91234567, enter the command:  
   * `edit 1 p/91234567`
-* To change the name and address of the second contact, type:
+* To change the name and address of the second contact, enter the command:
   * `edit 2 n/Betsy Crower`
   * This updates the contact's name to `Betsy Crower` and address to `XYZ Flower Shop`
 
 ### Deleting a person : `delete`
 
-Use the delete command to remove a contact from WedLiker.
+Use the delete command to remove a contact from WedLinker.
 
-Format: `delete POSITION_NUM`
+Format: `delete PERSON_NUMBER`
 
-To remove a contact to WedLinker, type `delete` followed by the contact's position number in the contact list
+To remove a contact to WedLinker, type `delete` followed by the person's position number in the contact list
 
-* The `POSITION_NUM` **must be a positive integer** 1, 2, 3, …​
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * To delete the second contact in WedLinker:
-  * First, type `list`, 
-  * Then, type `delete 2`
-* To delete the first contact found when searching for the name `Betsy`, type:
-  * First, type `find n/Betsy`
-  * Then, type`delete 1` 
+  * First, enter the command: `list`, 
+  * Then, enter the command: `delete 2`
+* To delete the first contact found when searching for the name `Betsy`:
+  * First, enter the command: `find n/Betsy`
+  * Then, enter the command: `delete 1` 
 
 ## Tag Features
 
@@ -252,46 +252,59 @@ To create a tag, type `tag` followed by the name of the tag.
 
 * The `TAGNAME` is alphanumeric and can contain whitespaces.
 * Tags are unique in WedLinker, there would not be any duplicated Tags.
-* Contacts can share Tags.
+* Multiple contacts can share the same tag.
 
 Examples:
-* To create a tag named `Florist`, type:
+* To create a tag named `Florist`, enter the command:
     * `create-tag t/Florist`
 
 ### Assign tag to contact : `tag`
 
 Use the tag command when you want to assign a `tag` to a specific contact in WedLinker.
 
-Format: `tag INDEX t/TAGNAME [f/]`
+Format: `tag PERSON_NUMBER t/TAGNAME [f/]`
 
-To assign a tag to a contact, type `tag` followed by the contact's position number in the contact list
+To assign a tag to a contact, type `tag` followed by the person's position number in the contact list
 
-* Tag a specified contact based on the `INDEX` with a `Tag`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
 * The `Tag` must exists in WedLinker before it can be assigned.
-* If the `Tag` does not exist, you can use `f/` to force the creation and assignment of the `Tag`.
+* If the `Tag` does not exist, you can use the label `f/` to force the creation and assignment of the `Tag`.
+
+Examples:
+* To assign the tag named `Florist` to the first person in the list, enter the command:
+    * `tag 1 t/Florist`
+* To assign a new tag named `Musician` (that doesn't currently exist) to the second person in the list, enter the command:
+    * `tag 2 t/Musician f/`
 
 ### Unassign tag to contacts : `untag`
 
-Untags a `Tag` from a specified person in WedLinker
+Use the untag command when you want to remove a `Tag` from a specific contact in WedLinker
 
-Format: `untag INDEX t/TAGNAME`
+Format: `untag PERSON_NUMBER t/TAGNAME`
 
-* Untag a specified contact based on their `INDEX` with a `Tag`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+To remove a tag from a contact, type `untag` followed by the person's position number in the contact list
+
+* The `PERSON_NUMBER` **must be a positive integer** 1, 2, 3, …​.
+
+Examples:
+* To remove the tag named `Florist` from the first person in the list, enter the command:
+    * `untag 1 t/Florist`
 
 ### Deleting a tag : `delete-tag`
 
-Deletes a `Tag` from WedLinker.
+Use the delete-tag command to delete a tag you no longer have a use for.
 
 Format: `delete-tag t/TAGNAME [f/]`
 
-* Deletes a `Tag` from WedLinker.
+To delete a tag from WedLinker, type `delete-tag` followed by the name of the tag
+
 * The `Tag` must exists in WedLinker.
 * The `Tag` cannot be assigned to any contacts.
-* If the `Tag` is in used, you can use `f/` to force the deletion of the `Tag` and unassign this tag from all contacts.
+* If the `Tag` is currently being used, you can use `f/` to force its deletion and remove the tag from all contacts.
+
+Examples:
+* To delete the tag named `Florist` from WedLinker, enter the command:
+    * `delete-tag t/Florist`
 
 ## Wedding Features
 
@@ -467,7 +480,7 @@ Action     | Format, Examples
 **Help**   | `help`
 **List**   | `list`
 **List Weddings**   | `list-weddings` or `lw`
-**List Tasks**   | `list-tasks` or `lt`
+**List Tasks**   | `list-tasks` or `ltasks`
 **Mark Task**   | `mark-task TASKINDEX [ADDITIONAL_TASKINDEX...]` or `mtask TASKINDEX [ADDITIONAL_TASKINDEX...]` <br> e.g., `mark-task 1 ` <br>  `mark-task 1 2 3`
 **Tag**   | `tag INDEX [t/TAG]…​` <br> e.g., `tag 2 t/florist t/photographer`
 **Unassign Wedding**    | `unassign-wedding PERSON_INDEX w/WEDDING…​` or `uw PERSON_INDEX w/WEDDING…​` <br> e.g., `uw 2 w/John's Wedding`
