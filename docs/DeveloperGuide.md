@@ -456,6 +456,7 @@ Use case ends.
 - **2a. No Students Enrolled in Classes**:
     - 2a1. EduTuTu logs a message indicating that no data is available for display.
     - **Use case ends.**
+
 ---
 
 #### **Use Case UC09: Display Monthly Payment Bar Chart**
@@ -858,7 +859,11 @@ This section lists planned enhancements to address known feature flaws. These en
 
 9. **Enable handling of larger fees**  
    **Current Issue:** Currently, the fees field only accepts up to 9 integers to prevent integer overflow.  
-   **Planned Enhancement:** Modify EduTuTu to allow the storage of larger fees.
+   **Planned Enhancement:** Modify EduTuTu to allow the storage of larger fees & fees in the form of floats.
+
+10. **Enable handling for more special characters in names**  
+    **Current Issue:** Users may encounter issues when entering names with comma.  
+    **Planned Enhancement:** Modify EduTuTu to allow the storage of names with more special characters.
  
 These planned enhancements aim to improve usability, data validation, and user feedback within EduTuTu, addressing known issues while maintaining a smooth user experience.
 
