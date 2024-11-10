@@ -20,12 +20,22 @@ If you can type fast, UGTeach can get your contact management tasks done **faste
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
+   * To check the version of java that you have, open a command terminal and run the command `java -version`.
+   * Look for a line that starts with java version. It should display a number, such as 17.0.2. 
+   * Ensure that the version number is 17 or higher.
+   * If Java is not installed, visit the [official Java download page](https://www.oracle.com/java/technologies/downloads/#java17) to download and install the latest version of Java.
+   * After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-F14a-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your address book.
+   * By default, the jar file would be in the Downloads folder.
 
 4. Open a command terminal, `cd` into the folder that you put the jar file in.
+   * To open the command terminal, open the terminal app for Linux/macOS users, and Windows
+     Powershell for Windows Users.
+   * If you have not moved the jar file, type `cd Downloads` to navigate to the Downloads folder.
+   
 
 5. Use the `java -jar ugteach.jar` command to run the application.<br><br>
    A GUI similar to the image shown below should appear in a few seconds. Note how the app contains some sample data.
