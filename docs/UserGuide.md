@@ -33,7 +33,7 @@ SellSavvy is **optimized for users who prefer Command Line Interface** (CLI) whi
 
    * `addcustomer n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a customer named `John Doe` to the displayed customer list.
 
-   * `deletecustomer 3` : Deletes the 3rd customer contact shown in the displayed customer list.
+   * `deletecustomer 3` : Deletes the 3rd customer's contact and order list shown in the displayed customer list and order list.
 
    * `listorder 1` : Lists all orders under the 1st customer as a displayed order list.
    
@@ -187,12 +187,12 @@ Examples:
 
 ### Deleting a customer : `deletecustomer`
 
-Deletes the specified customer from the address book.
+Deletes the specified customer contact and order list from the address book.
 
 Command aliases: `deletec`<br>
 Format: `deletecustomer CUSTOMER_INDEX`
 Examples:
-* `listcustomer` followed by `deletecustomer 2` deletes the 2nd customer in the address book.
+* `listcustomer` followed by `deletecustomer 2` deletes the 2nd customer contact and order list in the address book.
 * `findcustomer Betsy` followed by `deletec 1` deletes the 1st customer in the results of the `find` command.
 
 <box type="important">
@@ -314,6 +314,7 @@ Examples:
 * Marks a pending order under the selected customer at the specified `ORDER_INDEX` as completed.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The status of the order **must be `Pending`** before marking the order.
 
 </box>
 
@@ -335,6 +336,7 @@ Examples:
 * Reverts a completed order under the selected customer at the specified `ORDER_INDEX` to pending.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
+* The status of the order **must be `Completed`** before unmarking the order. 
 
 </box>
 
@@ -355,7 +357,7 @@ Examples:
 
 * A customer's order list must first be displayed before filtering their order list.
 * Filters the selected customer's order list for orders that match the `ORDER_STATUS`.
-* The order status **must be a valid status**. e.g. Completed, Pending.
+* The `ORDER_STATUS` **must be a valid status**, which is either `Pending` or `Completed`.
 * `ORDER_STATUS` is case-insensitive. e.g. `completed` is the same as `Completed`.
 
 </box>
@@ -421,17 +423,17 @@ _Details coming soon ..._
 | Action                                | Command                     | Format and Examples                                                                                                                                                                 |
 |---------------------------------------|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add a customer**                    | `addcustomer`, `addc`       | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br> e.g. `addcustomer n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add an order**                      | `addorder`, `addo`          | `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                  |
 | **Clear**                             | `clear`                     |                                                                                                                                                                                     |
 | **Delete a customer**                 | `deletecustomer`, `deletec` | `deletecustomer CUSTOMER_INDEX`<br> e.g., `deletecustomer 3`                                                                                                                        |
-| **Edit a customer**                   | `editcustomer`, `editc`     | `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                |
-| **Find customer(s)**                  | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                           |
-| **List all customers**                | `listcustomer`, `listc`     |                                                                                                                                                                                     |
-| **Add an order**                      | `addorder`, `addo`          | `addorder CUSTOMER_INDEX i/ITEM d/DATE [q/QUANTITY]`<br> e.g. `addorder 2 i/Lamp d/20-11-2024 q/3`                                                                                  |
-| **List all orders**                   | `listorder`, `listo`        | `listorder CUSTOMER_INDEX`<br> e.g. `listorder 3`                                                                                                                                   |
 | **Delete an order**                   | `deleteorder`, `deleteo`    | `deleteorder ORDER_INDEX`<br> e.g. `deleteorder 2`                                                                                                                                  |
+| **Edit a customer**                   | `editcustomer`, `editc`     | `editcustomer CUSTOMER_INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g. `editcustomer 2 n/James Lee e/jameslee@example.com`                                |
 | **Edit an order**                     | `editorder`, `edito`        | `editorder ORDER_INDEX [i/ITEM] [d/DATE] [q/QUANTITY]` <br> e.g. `editorder 1 i/Light bulb d/21-11-2025`                                                                            |
+| **Exit**                              | `exit`                      |                                                                                                                                                                                     |
+| **Filter orders by status**           | `filterorder`, `filtero`    | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                         |
+| **Find customer(s)**                  | `findcustomer`, `findc`     | `findcustomer KEYWORD [MORE_KEYWORDS]`<br> e.g. `findcustomer James Jake`                                                                                                           |
+| **Help**                              | `help`                      |                                                                                                                                                                                     |
+| **List all customers**                | `listcustomer`, `listc`     |                                                                                                                                                                                     |
+| **List all orders**                   | `listorder`, `listo`        | `listorder CUSTOMER_INDEX`<br> e.g. `listorder 3`                                                                                                                                   |
 | **Mark an order as completed**        | `markorder`, `marko`        | `markorder ORDER_INDEX`<br> e.g. `markorder 2`                                                                                                                                      |                                                                                                                                                                                                                                           
 | **Revert an order to pending status** | `unmarkorder`, `unmarko`    | `unmarkorder ORDER_INDEX`<br> e.g., `unmarkorder 2`                                                                                                                                 |
-| **Filter orders by status**           | `filterorder`, `filtero`    | `filterorder ORDER_STATUS`<br> e.g. `filterorder Completed`                                                                                                                         |
-| **Help**                              | `help`                      |                                                                                                                                                                                     |
-| **Exit**                              | `exit`                      |                                                                                                                                                                                     |
