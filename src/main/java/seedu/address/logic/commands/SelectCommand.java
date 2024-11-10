@@ -23,7 +23,7 @@ public class SelectCommand extends Command {
     public static final String COMMAND_WORD = "select";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Selects the persons based on the indexes "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Selects the persons based on the indexes \n"
             + "Parameters: INDEX [MORE_INDEXES]...\n"
             + "Example: " + COMMAND_WORD + " 1 2 7";
 
