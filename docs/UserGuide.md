@@ -64,9 +64,15 @@ Highlights important information that you should know.
 Provides you with tips to use our system more effectively.
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Provides you with warnings about potential issues you might encounter.
+</div>
+
+Before we proceed with the commands, here are some important points to note on their formatting. These points will also be repeated in the [command parameter summary](#command-parameters-summary) for you to refer to easily at any point in time.
+
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Important:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n|NAME`, `NAME` is a parameter which can be used as `add n|John Doe`.
@@ -148,8 +154,8 @@ Use this command to quickly add a patient with only the required information.
 </div>
 
 Example: 
-* `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
-Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
+* Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number
+  * `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -178,19 +184,17 @@ Multiple allergies can be added using multiple "al|" prefixes
 </div>
 
 Examples:
-* `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
-   e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
-   al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care` adds a patient named Abraham Tan with all fields and two allergies
-* `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
-   e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat` adds a patient named Lincoln Park with compulsory fields and some optional fields
+* Adds a patient named Abraham Tan with all fields and two allergies 
+  * `addf n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666
+     e|abramhamtan@gmail.com a|Blk 123, NUS Road, S123123 b|A+ nokn|Licoln Tan nokp|91234567
+     al|nuts al|shellfish rl|HIGH ec|Diabetes no|Patient needs extra care`
+* Adds a patient named Lincoln Park with compulsory fields and some optional fields 
+  * `addf n|Lincoln Park i|S9751269M s|M d|1980-04-01 p|87296619
+     e|linkinpark@gmail.com a|Blk 516, Clementi Road, S661836 b|AB- al|wheat`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
-<<<<<<< HEAD
-### Viewing patients full profile: `view`
-=======
 ### Viewing a patient's full profile: `view`
->>>>>>> 1fe142ea9195666318148b7c08383da3d0a7ae74
 
 Displays all information of an existing patient in the system with the corresponding NRIC.
 
@@ -199,7 +203,8 @@ Format: `view NRIC`
 ![view result](images/viewResult.png)
 
 Example:
-* `view T0123456A` displays all information of the patient with NRIC T0123456A.
+* View all information of patient with NRIC T0123456A 
+  * `view T0123456A` 
 
 ### Editing a patient: `edit`
 
@@ -210,19 +215,6 @@ Format: `edit NRIC [n|NAME] [i|NRIC] [s|SEX] [d|DATE_OF_BIRTH] [p|PHONE_NUMBER] 
 [ec|EXISTING_CONDITIONS] [no|NOTES]`
 
 ![edit message](images/editResult.png)
-
-<div markdown="block" class="alert alert-info">
-**:information_source: Important:**<br>
-<ul>
-<li>
-</li>
-<li>
-</li>
-<li>
-Not all parameters are compulsory
-</li>
-</ul>
-</div>
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Important:**<br>
@@ -250,8 +242,10 @@ are current allergies of the patient
 </div>
 
 Examples:
-* `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N
-* `edit S9758366N al|wheat al|eggs rmal|fish` edits the allergies of the patient with NRIC S9758366N (add wheat and egg allergies and remove fish allergy)
+* Edits the name and date-of-birth of the patient with NRIC S9758366N
+  * `edit S9758366N n|Abraham Lee d|1997-10-28` edits the name and date-of-birth of the patient with NRIC S9758366N
+* Edits the allergies of the patient with NRIC S9758366N where wheat and egg allergies are added and fish allergy is removed
+  * `edit S9758366N al|wheat al|eggs rmal|fish`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -285,7 +279,8 @@ Appointments can only be booked for future dates and times
 </div>
 
 Example:
-* `bookappt T0123456A dt|2024-12-29 13:00 h|Vaccination` books a Vaccination appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+* Books an appoinment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+  * `bookappt T0123456A dt|2024-12-29 13:00 h|Vaccination`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -298,7 +293,8 @@ Format: `deleteappt NRIC dt|APPOINTMENT_DATE_TIME`
 ![deleteappt message](images/deleteapptResult.png)
 
 Example:
-* `deleteappt T0123456A dt|2024-12-29 13:00` deletes the appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+* Deletes the appointment for the patient with NRIC T0123456A on 29 Dec 2024 at 1:00pm.
+  * `deleteappt T0123456A dt|2024-12-29 13:00`
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -310,25 +306,30 @@ Format: `filter [sd|START DATE] ed|END DATE [h|HEALTH SERVICE]`
 
 ![filter result](images/filterResult.png)
 
-Start date and health service parameters are optional.
-End date parameter is compulsory.
+<div markdown="block" class="alert alert-info">
 
-When all parameters are specified, it returns all appointments from start-date to end-date which matches the specified health service.
-When start date and end date are specified, it returns all appointments from start date to end date.
-When end date and health service is specified, it returns all appointments from today's date to end date which matches the specified health service.
-When end date is specified, it returns all appointments from today's date to end-date.
+**:information_source: Important:**<br>
+
+* Specify the start and end date to display appointments from the start to the end date
+* Specify the end date to display appointments from today's date to end date
+* Specify the health service to display appointments that matches the health service
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 To retrieve appointments on a single date e.g. 2024/10/20, you can input the same start and end date
 
-`filter sd|2024-10-20 ed|2024-10-10`
+`filter sd|2024-10-10 ed|2024-10-10`
 </div>
 
-
 Examples:
-*  `filter sd|2012-10-01 ed|2012-11-01 h|blood test` filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
-*  `filter ed|2024-12-12 h|vaccination` filters the vaccination appointments from today's date to Dec 12 2024.
-*  `filter sd|2012-10-01 ed|2012-11-01` filters all appointments from Oct 01 2012 to Nov 01 2012.
+* Filters the blood test appointments of patients from Oct 01 2012 to Nov 01 2012.
+  * `filter sd|2012-10-01 ed|2012-11-01 h|blood test`
+* Filters the vaccination appointments from today's date to Dec 12 2024.
+  *  `filter ed|2024-12-12 h|vaccination`
+* Filters all appointments from Oct 01 2012 to Nov 01 2012.
+  * `filter sd|2012-10-01 ed|2012-11-01`
+* Filters all appointments from today's date to Oct 01 2028
+  *  `filter ed|2028-10-01` 
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
@@ -341,7 +342,8 @@ Format: `delete NRIC`
 ![delete message](images/deleteResult.png)
 
 Example:
-* `delete T0123456A` deletes the patient with NRIC T0123456A from ClinicConnect.
+* Deletes the patient with NRIC T0123456A from ClinicConnect
+  * `delete T0123456A`
 
 ### Clearing all entries : `clear`
 
@@ -377,10 +379,6 @@ ClinicConnectSystem data are saved automatically as a JSON file `[JAR file locat
 If your changes to the data file makes its format invalid, ClinicConnectSystem will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the ClinicConnectSystem to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
@@ -463,7 +461,7 @@ Should follow the specifications given below:
       <td style="text-align:center;">4</td>
       <td style="text-align:center;">Birthdate</td>
       <td style="text-align:center;">d|</td>
-      <td>Should follow the format YYYY-MM-DD. Should not be after today's date.</td>
+      <td>Should be a valid calendar date and follow the format YYYY-MM-DD. Should not be after today's date.</td>
     </tr>
     <tr>
       <td style="text-align:center;">5</td>
@@ -475,7 +473,7 @@ Should follow the specifications given below:
       <td style="text-align:center;">6</td>
       <td style="text-align:center;">Date and Time</td>
       <td style="text-align:center;">dt|</td>
-      <td>Should follow the format YYYY-MM-DD HH:MM. Should not be before the current date and time.</td>
+      <td>Should be a valid calendar date followed by a valid time in the format YYYY-MM-DD HH:MM. Should not be before the current date and time.</td>
     </tr>
     <tr>
       <td style="text-align:center;">7</td>
@@ -524,7 +522,7 @@ Should follow the specifications given below:
       <td style="text-align:center;">13</td>
       <td style="text-align:center;">NRIC</td>
       <td style="text-align:center;">i|</td>
-      <td>Should be 9 digit uppercase sequence with an alphabet at the start and at the end. Starting character should either be an uppercase "S", "T", "F", "G" or "M", followed by 7 numbers and ending with an uppercase alphabet.</td>
+      <td>Should be 9 character uppercase sequence with an alphabet at the start and at the end. Starting character should either be an uppercase "S", "T", "F", "G" or "M", followed by 7 numbers and ending with an uppercase alphabet.</td>
     </tr>
     <tr>
       <td style="text-align:center;">14</td>
@@ -560,13 +558,13 @@ Should follow the specifications given below:
       <td style="text-align:center;">19</td>
       <td style="text-align:center;">Start Date</td>
       <td style="text-align:center;">sd|</td>
-      <td>Should follow the format YYYY-MM-DD.</td>
+      <td>Should be a valid calendar date and follow the format YYYY-MM-DD.</td>
     </tr>
     <tr>
       <td style="text-align:center;">20</td>
       <td style="text-align:center;">End Date</td>
       <td style="text-align:center;">ed|</td>
-      <td>Should follow the format YYYY-MM-DD.</td>
+      <td>Should be a valid calendar date and follow the format YYYY-MM-DD.</td>
     </tr>
   </tbody>
 </table>
