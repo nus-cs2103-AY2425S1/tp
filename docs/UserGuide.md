@@ -73,11 +73,15 @@ UniVerse is more than just a **desktop app for managing contacts**—it is a pla
 - Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+- Note that name cannot include prefixes that are already part of our commands.
+
 - Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 - Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+- Work experience parameter `[w/WORK_EXPERIENCE]` can only be used one time. <br>
 
 - Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -117,9 +121,9 @@ Parameters:
 
 - `n/NAME`: Full name of the contact.
 - `p/PHONE_NUMBER`: 8-15 digit phone number.
-- `e/EMAIL`: Email address in a valid format.
+- `e/EMAIL`: Email address in `local-part@domain` format.
 - `a/ADDRESS`: Contact's address.
-- `u/UNIVERSITY`: University name.
+- `u/UNIVERSITY`: University name. It is case-sensitive.
 - `m/MAJOR`: Major or field of study.
 - `b/BIRTHDATE`: Date of birth in `dd-mm-yyyy` format.
 - `[w/WORK_EXPERIENCE]`: Work experience in the format `ROLE,COMPANY,YEAR`, where role, company and year are capitalised.
@@ -151,7 +155,7 @@ addi in/INDEX i/INTEREST...
 ```
 
 - `in/INDEX`: Contact's position in the list.
-- `i/INTEREST...`: Interests to add. Can add multiple interests.
+- `i/INTEREST...`: Interests to add. Can add multiple interests. Note that length of interest can be 20 characters each.
 
 Example:
 
@@ -319,8 +323,11 @@ Examples:
 
 #### Finding Contacts by University: `findu`
 
-Finds contacts with a specific university.
+Finds contacts with a specific university from the currently displayed list.
 
+<box type="tip" seamless>
+**Tip:** University name is case-sensitive.
+</box>
 Format:
 ```
 findu u/UNIVERSITY
@@ -348,7 +355,7 @@ The `findu` command operates based on the **current list of contacts displayed**
 
 #### Finding Contacts by Major: `findm`
 
-Finds contacts with a specific major.
+Finds contacts with a specific major from the currently displayed list.
 
 Format:
 
