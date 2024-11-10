@@ -1617,6 +1617,11 @@ command.
 In the future, there will be an update to the `cedit` command, where the client is able to choose which tag to **retain
 ** as well as which tag to **edit**.
 
+#### `sort` Command.
+
+The current version of `sort` is case-sensitive.
+In the future, there will be an update to the `sort` command, where the sorting will be case-insensitive.
+
 #### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
