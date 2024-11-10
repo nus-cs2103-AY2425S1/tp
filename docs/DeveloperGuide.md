@@ -344,8 +344,6 @@ Use case ends.
   1b1. TAHub ignores the entry and notifies the TA.  
   Use case ends.
 
-**Actors:** Teaching Assistant
-
 ---
 
 ### **2\. Use Case: View Student Contact Information**
@@ -365,8 +363,6 @@ Use case ends.
 * **1a.** TA enters a number that is out of bounds or not a number.  
   1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
   Use case ends.
-
-**Actors:** Teaching Assistant
 
 ---
 
@@ -391,8 +387,6 @@ Use case ends.
   1b1. TAHub overwrites the previous grade and notifies the TA.  
   Use case ends.
 
-**Actors:** Teaching Assistant
-
 ---
 
 ### **4\. Use Case: View Student Grades**
@@ -412,8 +406,6 @@ Use case ends.
 * **1a.** TA enters a number that is out of bounds or not a number.  
   1a1. TAHub notifies the TA with an error message (e.g., "Index out of bounds" or "Please input a number").  
   Use case ends.
-
-**Actors:** Teaching Assistant
 
 ---
 
@@ -438,8 +430,6 @@ Use case ends.
 * **1b.** TA attempts to record attendance for a date where attendance has already been marked.  
   1b1. TAHub overwrites the previous attendance and notifies the TA.  
   Use case ends.
-
-**Actors:** Teaching Assistant
 
 ---
 
