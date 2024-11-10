@@ -19,7 +19,7 @@ ABCLI is divided into three core modes, each dedicated to a key aspect of a real
 
 * **[Property Mode](#Properties)**: Store property listings, including landlord details, asking price, and property type for quick and easy references.
 
-These modes allow real estate agents to handle buyers, meet-ups, and property listings at a rapid pace, ensuring an efficient, covenient and integrated workflow for those who thrive on speed.
+These modes allow real estate agents to handle buyers, meet-ups, and property listings at a rapid pace, ensuring an efficient, convenient and integrated workflow for those who thrive on speed.
 
 --------------------------------------------------------------------------------------------------------------------
 
