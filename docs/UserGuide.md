@@ -9,17 +9,18 @@ pageNav: 3
 
 # HallPointer User Guide
 
-HallPointer is a **dedicated desktop app designed specifically for CCA leaders in hall environments** to efficiently manage and track members' information with ease and accuracy. Unlike general-purpose applications like Excel, HallPointer offers a streamlined, single-step platform that is optimized for quick command-based input and offers a more intuitive experience through its integration of both CLI and GUI elements.
+Welcome to HallPointer, your one-stop go-to tool as a leader for managing CCA (Co-Curricular Activity) members in a hall setting. This guide will help you get started with using HallPointer, so you can **easily keep track of member details, attendance, assigned points and more**—all without the hassle of traditional spreadsheets.
 
-With HallPointer, you can easily track member details such as names, Telegram handles, room numbers, points earned, and session attendance, all in one organized space. The app maintains built-in logic for tracking and updating member information, reducing the risk of manual errors and eliminating the need for complex formulas or repetitive data entry. By automating key management tasks and ensuring data consistency, HallPointer frees up time for CCA leaders, allowing them to focus on what truly matters—building a vibrant and engaged community.
+HallPointer is **crafted to prioritize simplicity and efficiency**. Whether you’re tracking member attendance, organizing contact details, or updating points, HallPointer’s mix of easy-to-use commands and real-time visual feedback makes usage simple and straightforward, even if you’re not a tech expert. Plus, built-in checks ensure accuracy, preventing you from wasting your precious time on hunting down data entry errors.
 
-If you’re a CCA leader who values speed, organization, and reliability, HallPointer is the perfect tool to simplify your workflow and enhance your member tracking processes.
+This guide will walk you through HallPointer’s main features and show you step-by-step how to use it effectively. By the end, you’ll know how to make the most of HallPointer’s tools, **saving time and allowing you to focus on what truly matters**—building a vibrant and engaged community.
 
 ---
 
 ## Table of Contents
 
-- [Quick start](#quick-start)
+- [Getting Started Quickly](#quick-start)
+- [Command summary](#command-summary)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - [Adding a member: `add_member`](#adding-a-member-add_member)
@@ -27,9 +28,9 @@ If you’re a CCA leader who values speed, organization, and reliability, HallPo
   - [Updating a member : `update_member`](#updating-a-member--update_member)
   - [Locating members by name: `find_members`](#locating-members-by-name-find_members)
   - [Deleting a member : `delete_member`](#deleting-a-member--delete_member)
-  - [Adding a Session: `add_session`](#adding-a-session-add_session)
+  - [Adding a session: `add_session`](#adding-a-session-add_session)
   - [Locating members with associated sessions by name: `find_sessions`](#locating-members-with-associated-sessions-by-name-find_sessions)
-  - [Deleting a Session: `delete_session`](#deleting-a-session-delete_session)
+  - [Deleting a session: `delete_session`](#deleting-a-session-delete_session)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Exiting the program : `exit`](#exiting-the-program--exit)
   - [Saving the data](#saving-the-data)
@@ -37,13 +38,15 @@ If you’re a CCA leader who values speed, organization, and reliability, HallPo
   - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
-- [Command summary](#command-summary)
+
 
 ---
 
-## Quick start
+## Getting Started Quickly
 
-1. Ensure you have Java `17` or above installed on your computer.
+1. **Make sure Java is installed:**\
+Check that Java `17` or above is installed by opening a command terminal and typing `java -version` before pressing Enter.\
+If it is not installed, download and install the right one for your system by following the appropriate guide before continuing: [Windows](https://se-education.org/guides/tutorials/javaInstallationWindows.html), [Mac](https://se-education.org/guides/tutorials/javaInstallationMac.html), [Linux](https://se-education.org/guides/tutorials/javaInstallationLinux.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/ay2425s1-cs2103t-w14-3/tp/releases/latest).
 
@@ -63,6 +66,24 @@ If you’re a CCA leader who values speed, organization, and reliability, HallPo
    - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) section below for details on each command.
+
+---
+
+## Command summary
+
+| Action             | Format, Examples                                                                                                                                                |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add member**     | `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague` |
+| **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`      |
+| **Delete member**  | `delete_member INDEX`<br> e.g., `delete_member 3`                                                                                                               |
+| **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX...​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                 |
+| **Delete session** | `delete_session s/NAME m/INDEX...`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                               |
+| **Find members**   | `find_members KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_members James Jake`                                                                                      |
+| **Find sessions**  | `find_sessions KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_sessions Team meeting`                                                                                  |
+| **List**           | `list`                                                                                                                                                          |
+| **Clear**          | `clear`                                                                                                                                                         |
+| **Help**           | `help`                                                                                                                                                          |
+| **Exit**           | `exit`                                                                                                                                                          |
 
 ---
 
@@ -324,21 +345,3 @@ _Details coming soon ..._
 2. **Multiple Screens Issue**: If you move the application to a secondary screen and later switch to using only the primary screen, the GUI may open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 3. **Help Window Minimization**: If you minimize the Help Window and then run the `help` command again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
----
-
-## Command summary
-
-| Action             | Format, Examples                                                                                                                                                |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add member**     | `add_member n/NAME r/BLOCK-FLOOR-ROOM_NUMBER t/TELEGRAM_HANDLE [tag/TAG]…​​` <br> e.g., `add_member n/James Ho r/4-3-301 t/jamesho123 tag/friend tag/colleague` |
-| **Update member**  | `update_member INDEX [n/NAME] [r/BLOCK-FLOOR-ROOM_NUMBER] [t/TELEGRAM_HANDLE] [tag/TAG]…​…​`<br> e.g.,`update_member 2 n/James Lee r/5-2-203 t/jameslee99`      |
-| **Delete member**  | `delete_member INDEX`<br> e.g., `delete_member 3`                                                                                                               |
-| **Add session**    | `add_session s/NAME d/DATE p/POINTS m/INDEX...​` <br> e.g., `add_session s/Rehearsal d/24 Oct 2024 p/2 m/1 m/3`                                                 |
-| **Delete session** | `delete_session s/NAME m/INDEX...`<br> e.g., `delete_session s/Rehearsal m/1 m/3`                                                                               |
-| **Find members**   | `find_members KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_members James Jake`                                                                                      |
-| **Find sessions**  | `find_sessions KEYWORD [MORE_KEYWORDS]`<br> e.g., `find_sessions Team meeting`                                                                                  |
-| **List**           | `list`                                                                                                                                                          |
-| **Clear**          | `clear`                                                                                                                                                         |
-| **Help**           | `help`                                                                                                                                                          |
-| **Exit**           | `exit`                                                                                                                                                          |
