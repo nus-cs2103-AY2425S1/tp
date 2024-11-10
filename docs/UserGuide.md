@@ -117,7 +117,8 @@ Need a quick reference?
 <box type="info" seamless>
 
 * **Commands Are Case-Sensitive and All Lowercase**  
-  Make sure to type commands exactly as shown. e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
+  Make sure to type commands exactly as shown.  
+  e.g. `clear` is recognised as a command but not `Clear` or `cLEar`
 
 
 * **Copying Commands from PDF**  
