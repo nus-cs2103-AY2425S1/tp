@@ -408,7 +408,7 @@ Examples:
 
 ## Importing and Exporting Data
 
-### Import students: `import CSV_FILE_LOCATION`
+### Import students: `import`
 
 Imports and adds new NON-DUPLICATE students from a .csv file into GoonBook.
 
@@ -423,6 +423,7 @@ Format: `import CSV_FILE_LOCATION`
 - Tags in the csv file are to be seperated with a space.
 - Will show user data corrupted error if parse or data is not formatted right.
 - Will show user cannot find error if no or invalid file location is given.
+- Will show user invalid file format, must be .csv if a valid file which is not a .csv is entered.
 
 ![Import](images/Import.png)
 
