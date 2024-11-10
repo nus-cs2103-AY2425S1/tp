@@ -12,6 +12,7 @@ import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -27,7 +28,11 @@ public class CommandBox extends UiPart<Region> {
     private static final Map<String, String> commandSyntaxMap = new HashMap<>();
     private static final Map<String, List<String>> commandParameterOrder = new HashMap<>();
     private static final Map<String, String> parameterMap = new HashMap<>();
-
+    private static final String DEFAULT_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt;"
+            + " -fx-text-fill: white;";
+    private static final String INPUT_NEEDED_STYLE = "-fx-font-family: 'Segoe UI'; -fx-font-size: 13pt;"
+            + " -fx-text-fill: #fb5252;";
+    private boolean isProgrammaticChange = false;
 
     @FXML
     private TextField commandTextField;
@@ -46,7 +51,7 @@ public class CommandBox extends UiPart<Region> {
         commandSyntaxMap.put("archive", "archive [DESCRIPTION]");
         commandSyntaxMap.put("clear", "clear");
         commandSyntaxMap.put("delete", "delete INDEX [ec/EMERGENCY_CONTACT_INDEX]");
-        commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/ECINDEX "
+        commandSyntaxMap.put("edit", "edit INDEX n/NAME p/PHONE e/EMAIL a/ADDRESS ec/EMERGENCY_CONTACT_INDEX "
                 + "ecname/EMERGENCY_CONTACT_NAME ecrs/EMERGENCY_CONTACT_RELATIONSHIP dname/DOCTOR_NAME "
                 + "dphone/DOCTOR_PHONE demail/DOCTOR_EMAIL t/TAG");
         commandSyntaxMap.put("find", "find KEYWORD [MORE_KEYWORDS]");
@@ -71,7 +76,6 @@ public class CommandBox extends UiPart<Region> {
         parameterMap.put("dphone/", "dphone/DOCTOR_PHONE");
         parameterMap.put("demail/", "demail/DOCTOR_EMAIL");
         parameterMap.put("t/", "t/TAG");
-        parameterMap.put("ec/", "ec/ECINDEX");
         parameterMap.put("ec/", "ec/EMERGENCY_CONTACT_INDEX");
 
         // Initialize command-specific parameter order
@@ -102,11 +106,122 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-
+        // Listen for ANY text changes to reset ALL styles
         commandTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            setStyleToDefault();
+            resetStyle();
+            commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS); // Remove error class too
+
             handleTextChanged(newValue);
         });
+
+        // Add control key handler
+        commandTextField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.CONTROL) {
+                handleControlPressed();
+                event.consume();
+            }
+        });
+    }
+    private void resetStyle() {
+        commandTextField.setStyle(DEFAULT_STYLE);
+    }
+
+
+    private String findShortestCommandMatch(String partial) {
+        if (partial.isEmpty()) {
+            return null;
+        }
+
+        String shortestMatch = null;
+
+        // Changed to require exact case matching
+        for (String command : commandSyntaxMap.keySet()) {
+            if (command.startsWith(partial)) {
+                if (shortestMatch == null || command.length() < shortestMatch.length()) {
+                    shortestMatch = command;
+                }
+            }
+        }
+
+        return shortestMatch;
+    }
+
+    private void handleControlPressed() {
+        // Trim excess spaces but keep the input intact
+        String input = commandTextField.getText().replaceAll("\\s+$", ""); // Remove trailing spaces
+
+        // First check for single word commands
+        if (!input.contains(" ")) {
+            String match = findShortestCommandMatch(input.trim());
+            if (match != null) {
+                if (match.equals(input)) {
+                    // Check if command requires INDEX
+                    String syntax = commandSyntaxMap.get(match);
+                    if (syntax.contains("INDEX")) {
+                        commandTextField.setStyle(INPUT_NEEDED_STYLE);
+                        return;
+                    }
+                    // If no INDEX needed, proceed with parameter autocomplete
+                    String nextParam = getNextParameter(match, match);
+                    if (nextParam != null) {
+                        String nextPrefix = nextParam.substring(0, nextParam.indexOf('/') + 1);
+                        commandTextField.setText(match + " " + nextPrefix);
+                        commandTextField.positionCaret(commandTextField.getText().length());
+                    }
+                } else {
+                    // Just complete the command
+                    commandTextField.setText(match);
+                    commandTextField.positionCaret(match.length());
+                }
+            }
+            return;
+        }
+
+        // Check if input sequence is valid before proceeding with any autocomplete
+        if (!isValidPreSlashSequence(input)) {
+            return; // Do not autocomplete if sequence is invalid
+        }
+
+        String[] parts = input.split("\\s+");
+        String command = parts[0];
+        String lastPart = parts[parts.length - 1];
+
+        // If last part ends with a slash, turn red (user needs to input value)
+        if (lastPart.endsWith("/")) {
+            commandTextField.setStyle(INPUT_NEEDED_STYLE);
+            return;
+        }
+
+        // Check if the last part contains a valid prefix and value
+        if (lastPart.contains("/")) {
+            String prefix = lastPart.substring(0, lastPart.indexOf('/') + 1);
+            String value = lastPart.substring(lastPart.indexOf('/') + 1).trim();
+
+            // If there's a value after the slash
+            if (!value.isEmpty()) {
+                String nextParam = getNextParameter(command, input.trim());
+                if (nextParam != null) {
+                    String nextPrefix = nextParam.substring(0, nextParam.indexOf('/') + 1);
+                    // Always add just one space before new parameter
+                    commandTextField.setText(input.trim() + " " + nextPrefix);
+                    commandTextField.positionCaret(commandTextField.getText().length());
+                }
+                return;
+            }
+        }
+
+        // Rest of parameter autocompletion
+        if (!commandSyntaxMap.containsKey(command)) {
+            return;
+        }
+
+        String nextParam = getNextParameter(command, input.trim());
+        if (nextParam != null) {
+            String nextPrefix = nextParam.substring(0, nextParam.indexOf('/') + 1);
+            // Always add just one space
+            commandTextField.setText(input.trim() + " " + nextPrefix);
+            commandTextField.positionCaret(commandTextField.getText().length());
+        }
     }
 
     private boolean isValidPreSlashSequence(String input) {
@@ -117,15 +232,30 @@ public class CommandBox extends UiPart<Region> {
 
         String fullSyntax = commandSyntaxMap.get(command);
 
-        // If syntax contains INDEX, replace it with the actual input value if present
         if (fullSyntax.contains("INDEX") || fullSyntax.contains("KEYWORD")) {
             String[] inputParts = input.trim().split("\\s+");
             if (inputParts.length > 1) {
-                // Replace INDEX with the actual value from input
-                fullSyntax = fullSyntax.replace("INDEX", inputParts[1]);
-            } else {
-                fullSyntax = fullSyntax.replace("KEYWORD", inputParts[1]);
+                if (fullSyntax.contains("INDEX")) {
+                    fullSyntax = fullSyntax.replace("INDEX", inputParts[1]);
+                } else {
+                    fullSyntax = fullSyntax.replace("KEYWORD", inputParts[1]);
+                }
             }
+        }
+
+        // Find the longest matching prefix in the input
+        String longestPrefix = null;
+        int longestPrefixLength = 0;
+        for (String prefix : parameterMap.keySet()) {
+            if (input.contains(prefix) && prefix.length() > longestPrefixLength) {
+                longestPrefix = prefix;
+                longestPrefixLength = prefix.length();
+            }
+        }
+
+        // If no prefix found or input is shorter than what we found so far
+        if (longestPrefix == null) {
+            return true; // Allow typing to continue
         }
 
         int inputSlashPos = input.indexOf('/');
@@ -160,19 +290,26 @@ public class CommandBox extends UiPart<Region> {
         for (String part : parts) {
             int slashIndex = part.indexOf('/');
             if (slashIndex != -1) {
-                // Extract the potential prefix (everything up to and including the slash)
-                String potentialPrefix = part.substring(0, slashIndex + 1);
+                // Find the longest valid prefix that matches this part
+                String longestPrefix = null;
+                int longestLength = 0;
 
-                // Only validate if it's one of our known command prefixes
-                if (validPrefixes.contains(potentialPrefix)) {
-                    // If this is a valid prefix, it should be at the start of the part
-                    if (!part.startsWith(potentialPrefix)) {
-                        return true; // Invalid structure
+                for (String prefix : validPrefixes) {
+                    if (part.startsWith(prefix) && prefix.length() > longestLength) {
+                        longestPrefix = prefix;
+                        longestLength = prefix.length();
                     }
+                }
+
+                // If we found a valid prefix
+                if (longestPrefix != null) {
                     // Check if there are any more slashes after this valid prefix
                     if (part.indexOf('/', slashIndex + 1) != -1) {
                         return true; // Invalid structure
                     }
+                } else {
+                    // No valid prefix found for this part with a slash
+                    return true;
                 }
             }
         }
@@ -205,38 +342,24 @@ public class CommandBox extends UiPart<Region> {
         return true;
     }
 
-    private boolean startsWithValidPrefix(String part) {
-        for (String prefix : parameterMap.keySet()) {
-            if (part.startsWith(prefix)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void handleTextChanged(String input) {
-
-        System.out.println("Input received: '" + input + "'");
-        System.out.println("Ends with space: " + input.endsWith(" "));
-
         if (input.trim().isEmpty()) {
             suggestionLabel.setVisible(false);
             return;
         }
 
-        // New section for command suggestions
-        if (!input.contains(" ")) { // If we haven't typed a space yet
+        // New section for command suggestions - removed toLowerCase()
+        if (!input.contains(" ")) {
             StringBuilder suggestions = new StringBuilder();
             boolean foundMatch = false;
 
-            // Sort the commands for consistent display
             List<String> commands = new ArrayList<>(commandSyntaxMap.keySet());
             Collections.sort(commands);
 
             for (String command : commands) {
-                if (command.startsWith(input.trim().toLowerCase())) {
+                if (command.startsWith(input.trim())) {
                     if (foundMatch) {
-                        suggestions.append(" | "); // Separator between commands
+                        suggestions.append(" | ");
                     }
                     suggestions.append(commandSyntaxMap.get(command));
                     foundMatch = true;
@@ -282,74 +405,62 @@ public class CommandBox extends UiPart<Region> {
 
         // Regular handling for slash-parameter commands
         if (hasInvalidParameterStructure(input)) {
-            System.out.println("Invalid parameter structure detected");
             suggestionLabel.setVisible(false);
             return;
         }
 
         if (!isValidPreSlashSequence(input)) {
-            System.out.println("Invalid pre-slash sequence");
             suggestionLabel.setVisible(false);
             return;
         }
 
-        System.out.println("Command: " + command);
-
-        // Find the last parameter prefix in the input
-        String currentPrefix = null;
+        // Find the last parameter prefix in the input with longest match
+        String longestPrefix = null;
         int lastPrefixPos = -1;
+        int longestPrefixLength = 0;
         String restOfInput = "";
 
         for (String prefix : parameterMap.keySet()) {
             int pos = input.lastIndexOf(prefix);
-            System.out.println("Checking prefix: " + prefix + " at position: " + pos);
-            if (pos > lastPrefixPos) {
-                if (hasProperSpaceBeforePrefix(input, prefix)) {
-                    lastPrefixPos = pos;
-                    currentPrefix = prefix;
-                    restOfInput = input.substring(pos + prefix.length());
-                    System.out.println("Found valid prefix: " + prefix + " with rest of input: '" + restOfInput + "'");
-                }
+            if (pos > -1 && hasProperSpaceBeforePrefix(input, prefix) && prefix.length() > longestPrefixLength) {
+                lastPrefixPos = pos;
+                longestPrefix = prefix;
+                longestPrefixLength = prefix.length();
+                restOfInput = input.substring(pos + prefix.length());
             }
         }
 
         // We just typed the command
         if (input.trim().equals(command)) {
-            System.out.println("Just command typed");
             suggestionLabel.setText(commandSyntaxMap.get(command));
             suggestionLabel.setVisible(true);
             return;
         }
 
         // If no valid prefix with proper spacing found, hide suggestion
-        if (currentPrefix == null) {
-            System.out.println("No valid prefix found");
+        if (longestPrefix == null) {
             suggestionLabel.setVisible(false);
             return;
         }
 
         // If we just typed a properly spaced prefix
         if (restOfInput.trim().isEmpty()) {
-            System.out.println("Empty rest of input - showing parameter value");
-            String paramValue = parameterMap.get(currentPrefix).substring(currentPrefix.length());
+            String paramValue = parameterMap.get(longestPrefix).substring(longestPrefix.length());
             String beforePrefix = input.substring(0, lastPrefixPos);
-            suggestionLabel.setText(beforePrefix + currentPrefix + paramValue);
+            suggestionLabel.setText(beforePrefix + longestPrefix + paramValue);
             suggestionLabel.setVisible(true);
             return;
         }
 
         // If we're typing a value (not ended with space)
         if (!input.endsWith(" ")) {
-            System.out.println("Currently typing value - hiding suggestion");
             suggestionLabel.setVisible(false);
             return;
         }
 
         // If we just pressed space after completing a value
         if (input.endsWith(" ")) {
-            System.out.println("Space detected - getting next parameter");
             String nextParam = getNextParameter(command, input.trim());
-            System.out.println("Next parameter found: " + nextParam);
             if (nextParam != null) {
                 suggestionLabel.setText(input.trim() + " " + nextParam);
                 suggestionLabel.setVisible(true);
@@ -357,48 +468,46 @@ public class CommandBox extends UiPart<Region> {
             }
         }
 
-        System.out.println("Reached end - hiding suggestion");
         suggestionLabel.setVisible(false);
     }
 
     private String getNextParameter(String command, String currentInput) {
-        System.out.println("Getting next parameter for command: " + command);
-        System.out.println("Current input: " + currentInput);
-
         List<String> paramOrder = commandParameterOrder.get(command);
         if (paramOrder == null) {
-            System.out.println("No parameter order found for command");
             return null;
         }
 
-        String currentPrefix = null;
-        int lastPrefixPos = -1;
+        // Create a set of completed prefixes
+        Set<String> completedPrefixes = new HashSet<>();
 
+        // Split input into parts and process each part in order
+        String[] parts = currentInput.split("\\s+");
+        for (int i = 1; i < parts.length; i++) {
+            String part = parts[i];
+            // Find the longest matching prefix for this part
+            String matchedPrefix = null;
+            for (String prefix : paramOrder) {
+                if (part.startsWith(prefix) && (matchedPrefix == null || prefix.length() > matchedPrefix.length())) {
+                    matchedPrefix = prefix;
+                }
+            }
+
+            // If we found a prefix and there's a value after it, mark it as completed
+            if (matchedPrefix != null) {
+                String value = part.substring(matchedPrefix.length());
+                if (!value.isEmpty()) {
+                    completedPrefixes.add(matchedPrefix);
+                }
+            }
+        }
+
+        // Find the first uncompleted parameter in the order
         for (String prefix : paramOrder) {
-            int pos = currentInput.lastIndexOf(prefix);
-            System.out.println("Checking prefix: " + prefix + " at position: " + pos);
-            if (pos > lastPrefixPos) {
-                lastPrefixPos = pos;
-                currentPrefix = prefix;
-                System.out.println("Found current prefix: " + currentPrefix);
+            if (!completedPrefixes.contains(prefix)) {
+                return parameterMap.get(prefix);
             }
         }
 
-        if (currentPrefix == null && !paramOrder.isEmpty()) {
-            String firstParam = parameterMap.get(paramOrder.get(0));
-            System.out.println("No current prefix found - returning first parameter: " + firstParam);
-            return firstParam;
-        }
-
-        for (int i = 0; i < paramOrder.size() - 1; i++) {
-            if (paramOrder.get(i).equals(currentPrefix)) {
-                String nextParam = parameterMap.get(paramOrder.get(i + 1));
-                System.out.println("Found next parameter: " + nextParam);
-                return nextParam;
-            }
-        }
-
-        System.out.println("No next parameter found");
         return null;
     }
 
@@ -411,16 +520,15 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            isProgrammaticChange = true; // Flag that this is a programmatic change
             commandTextField.setText("");
+            isProgrammaticChange = false; // Reset the flag
             suggestionLabel.setVisible(false);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
     }
 
-    private void setStyleToDefault() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
-    }
 
     private void setStyleToIndicateCommandFailure() {
         if (!commandTextField.getStyleClass().contains(ERROR_STYLE_CLASS)) {
