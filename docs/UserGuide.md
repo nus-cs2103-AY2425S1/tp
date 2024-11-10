@@ -20,7 +20,7 @@ This guide will walk you through HallPointer’s main features and show you step
 ## Table of Contents
 
 - [Getting Started Quickly](#quick-start)
-- [Command summary](#command-summary)
+- [Command Summary](#command-summary)
 - [Features](#features)
   - [Viewing help : `help`](#viewing-help--help)
   - [Adding a member: `add_member`](#adding-a-member-add_member)
@@ -60,20 +60,23 @@ Move the downloaded `.jar` file into the _home folder_ where you want to store y
 - A window should appear after a few seconds, showing the HallPointer app’s user interface (UI). Note that the app comes with some sample data to help you get started.<br>
    ![Ui](images/Ui.png)
 
-5. Type commands in the command box and press Enter to execute them. For example, typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. **Explore the Sample Data:**
+- Below the menu, you will see a **command box**. You can type commands in this box and press Enter to execute them.
+- For example, typing `help` and pressing Enter will show a help window with instructions.\
+Here are some example commands you can try:
 
    - `list` : Lists all members.
-   - `add_member n/John Doe r/4-3-301 t/johndoe123 tag/logistics` : Adds a member named `John Doe` to HallPointer.
+   - `add_member n/May Doe r/4-3-301 t/maydoe123 tag/logistics` : Adds a member named `May Doe` to HallPointer.
    - `delete_member 3` : Deletes the 3rd member shown in the current list.
    - `clear` : Deletes all members.
    - `exit` : Exits the app.
 
-6. Refer to the [Features](#features) section below for details on each command.
+6. **Learn more about the commands:**\
+Refer to the [Command Summary](#command-summary) seciton below for a quick overview of each command, and to the [Features](#features) section below for further details for each command.
 
 ---
 
-## Command summary
+## Command Summary
 
 | Action             | Format, Examples                                                                                                                                                |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
