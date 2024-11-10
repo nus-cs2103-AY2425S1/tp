@@ -170,6 +170,9 @@ public class ParserUtil {
             logger.fine("ParseException caused by invalid amount or incorrect amount format.");
             throw new ParseException(Messages.MESSAGE_INVALID_AMOUNT);
         }
+
+        Transaction.verifyAmountIsWithinRange(amount);
+
         return amount;
     }
 

@@ -1,10 +1,12 @@
 package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_AMOUNT_OUT_OF_RANGE;
 
 import java.time.LocalDate;
 
 import seedu.address.logic.Messages;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Client's transaction in the address book.
@@ -38,6 +40,19 @@ public class Transaction {
      */
     public static boolean isValidAmount(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Throws a {@code ParseException} if the amount is out of range.
+     */
+    public static void verifyAmountIsWithinRange(double amount) throws ParseException {
+        double minAmount = -Math.pow(10, 9);
+        double maxAmount = Math.pow(10, 9);
+
+        if (amount < minAmount || amount > maxAmount) {
+            throw new ParseException(MESSAGE_AMOUNT_OUT_OF_RANGE);
+        }
+
     }
 
     public String getDescription() {

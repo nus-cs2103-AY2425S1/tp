@@ -52,6 +52,9 @@ public class Messages {
 
     public static final String MESSAGE_EMPTY_TRANSACTION_LIST =
             "Invalid command: The current transaction list is empty.";
+
+    public static final String MESSAGE_AMOUNT_OUT_OF_RANGE =
+            "Amount should be between -1 billion (-1000000000) to 1 billion (1000000000)!";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
