@@ -104,9 +104,10 @@ Before continuing, here are some important information you need to know about th
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases) (scroll down to assets to find it!).
 
-1. Copy/move the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy/move the file to the folder you want to use as the _home folder_ for your InternBuddy application.
 
-1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in
+1. Open a command terminal, run the `cd` command to change your directory to the folder you put the jar file in.
+
 1. Use the `java -jar internbuddy.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -349,12 +350,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `inc` will match `Inc`
 * The order of the keywords does not matter. e.g. `Ltd Pte` will match `Pte Ltd`
-* Only full words will be matched e.g. `Inc` will not match `Incorporated`
-* companies matching at least one keyword will be returned (i.e. `OR` search).
+* Partial keywords will be matched e.g. `Inc` will match `Incorporated`
+* Companies matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Tech Bro` will return `Good Tech`, `Bro Inc`
 
 Examples:
-* `find Inc` returns `inc` and `Apple Inc`
+* `find Inc` returns `inc`, `Incorporated` and `Apple Inc`
 * `find apple facebook` returns `Apple`, `Facebook`<br>
   ![result for 'find apple facebook'](images/findAppleFacebookResult.png)
 
@@ -415,7 +416,7 @@ Removes an internship record for an existing company in the address book.
 
 Format: `withdraw c/COMPANY_INDEX app/APPLICATION_INDEX`
 
-* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
+* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `COMPANY_INDEX`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
