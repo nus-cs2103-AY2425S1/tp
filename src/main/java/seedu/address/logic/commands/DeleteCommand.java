@@ -41,8 +41,8 @@ public class DeleteCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_EMAIL + " johndoe@example.com";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
