@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * Based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -393,9 +394,9 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 ### Use cases
 
-**System: ContactMate**  
-**Use case: UC01 \- Mark elderly as called**  
-**Actor: Staff**  
+(For all use cases below, the **System** is `ContactMate` and the **Actor** is `Staff`, unless specified otherwise)
+
+**Use case: UC01 \- Mark elderly as called**\
 **Guarantees:** 
 
 * Marks elderly’s details to contact book only if input has no errors.
@@ -423,9 +424,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
   * Use case resumes from step 3\.
 
 <br/><br/>
-**System: ContactMate**  
-**Use case: UC02 \- List elderly contacts by priority**  
-**Actor: Staff**  
+**Use case: UC02 \- List elderly contacts by priority**\
 **Guarantees:** 
 
 * List of elderly sorted by priority of who to call next will be shown.
@@ -437,9 +436,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
       Use case ends.
 
-**System: ContactMate**  
-**Use case: UC03 \- List individual elderly call history**  
-**Actor: Staff**  
+<br/><br/>
+**Use case: UC03 \- List individual elderly call history**\
 **Guarantees:** 
 
 * Elderly call history will be listed only if the input has no errors.
@@ -462,9 +460,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
     * Use case resumes from step 2\.
 
-**System: ContactMate**  
-**Use case: UC04 \- Delete elderly from the call list**  
-**Actor: Staff**  
+<br/><br/>
+**Use case: UC04 \- Delete elderly from the call list**\
 **Guarantees:** 
 
 * Delete elderly from the contact list only if input has no errors.
@@ -487,9 +484,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2b1. ContactMate shows an error message, explaining that the elderly does not exist.
     * Use case resumes from step 2\.
 
-**System: ContactMate**  
-**Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
-**Actor: Staff**  
+<br/><br/>
+**Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**\
 **Guarantees:** 
 
 * Adds elderly to contact book only if input has no errors.
@@ -515,9 +511,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 	* 1d1. ContactMate shows a warning message that the elderly added has a matching name, phone number or email.  
 	* Use case resumes from step 2\.
 
-**System: ContactMate**     
-**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**      
-**Actor: Staff**    
+<br/><br/> 
+**Use case: UC06 \- Edit an elderly who is in the system, with appropriate details and fields**\
 **Guarantees:**
 
 * Edits the elderly in the contact book only if input has no errors.
@@ -549,9 +544,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * 2e1. ContactMate shows a warning message that the elderly has a matching name, phone number or email.
     * Use case resumes from step 3\.
 
-**System: ContactMate**     
-**Use case: UC07 \- Search elderly by name or NRIC**    
-**Actor: Staff**  
+<br/><br/>
+**Use case: UC07 \- Search elderly by name or NRIC** \
 **Guarantees:**
 
 * Shows the filtered list of elderly that matches the name or NRIC.
@@ -563,9 +557,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
     Use case ends.
 
-**System: ContactMate**      
-**Use case: UC08 \- Mark an elderly as called, given that elderly's name**      
-**Actor: Staff**        
+<br/><br/>  
+**Use case: UC08 \- Mark an elderly as called, given that elderly's name**       \
 **Guarantees:**     
 
 * Marks the elderly as called only if the input has no errors.
