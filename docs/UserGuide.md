@@ -38,7 +38,7 @@ Let’s begin and get you up to speed with AgentAssist!
    - 5.4 [General Commands](#54-general-commands)
    - 5.5 [Saving Data](#55-saving-data)
    - 5.6 [Modifying the Data File](#56-modifying-the-data-file)
-   - 5.7 [Modifying the Window Size](#57-modifying-the-window-size)
+   - 5.7 [Modifying the Preferences File](#57-modifying-the-window-size)
 6. [FAQ](#6-faq)
 7. [Known Issues](#7-known-issues)
 8. [Command Summary](#8-command-summary)
@@ -321,7 +321,7 @@ Refer to the table below for more details.
 
 > 💡 **Pro Tip:**
 > 
-> Indexes will when the current list view changes!
+> Indexes will change when the current list view changes!
 > 
 > Ensure that the index supplied is accurate to the current view.
 
@@ -824,11 +824,13 @@ The data in AgentAssist is automatically saved as a [JSON](https://developer.moz
 >
 > Incorrect data modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the data file if you're confident in doing so correctly.** 
 
-## 5.7 Modifying the Window Size
+## 5.7 Modifying the Preferences File
 The window size settings for AgentAssist is automatically saved as a [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) file at `[JAR file location]/preferences.json`. Advanced users are welcome to update the window size directly by editing that preferences file.
 - Note: The minimum window size for AgentAssist is fixed at 800x600.
 > ⚠️ **Danger:**
 > If the window size is set too large, the application will render incorrectly. 
+> 
+> Incorrect preference modifications may also cause unexpected behavior. Do take note that no warnings will be given. **Only modify the preferences file if you're confident in doing so correctly.**
 
 [↑ Return to Table of Contents](#table-of-contents)
 
@@ -864,7 +866,7 @@ Each status type is visually distinguished in the UI: Urgent is denoted by a red
 3. **When inputting names that use `/`**, this can cause an `invalid command` error to be shown or even unintended attributes for the client added. Avoid using `/`, and spell out the names in full, for cases like 'Ramesh s/o Ravichandran', change it to 'Ramesh Son Of Ravichandran'
 4.  **Using non-english text input can cause visual bugs**. This release fully supports English text input only. Using non-English characters or text—especially those with right-to-left direction, like Arabic—may result in display problems, including incorrect text alignment, direction, and character rendering. We are actively working to expand support for international languages in future releases.
 5. **For index based commands**, negative inputs and inputs larger than 2147483647 result in inconsistent error messages. We are actively working on resolving this inconsistency in future releases.
-6. **When using the edit command**, an edit that results in no change to the client is a considered valid command. We are actively working to expand the warnings to notify the user of this scenario in future releases.
+6. **For the edit command**, edits that do not result in changes to client details are currently considered valid. We are working on adding warnings to notify users of unchanged edits in future releases.
 
 
 [↑ Return to Table of Contents](#table-of-contents)
