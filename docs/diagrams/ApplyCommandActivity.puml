@@ -18,12 +18,13 @@ else ([Valid command])
     :Adds application to the company;
 
     if () then ([else])
-        :Change company status to "APPLIED";
+        :Changes company status to "APPLIED";
     else ([Company status is "APPLIED"])
     endif
+    :Displays updated company in current list view;
+    :Displays success message;
 
 endif
-:Display updated company in current list view;
 
 stop
 @enduml
