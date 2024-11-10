@@ -120,7 +120,7 @@ PlantUML, the lifeline continues till the end of diagram.
 
 </box>
 
-Several commands share the similarity of editing a person, so an abstract `AbstractEditCommand` class is created to
+Other commands share the similarity of editing a person, so an abstract `AbstractEditCommand` class is created to
 handle these commands:
 
 Here is a class diagram showing the classes related to the `AbstractEditCommand`:
