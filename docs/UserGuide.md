@@ -17,7 +17,7 @@ This means that you can do everything by simply typing commands into the command
 If you can type fast, and you need to manage celebrities and their schedules, **TalentHub** is the app for you!
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 ---
 
@@ -44,11 +44,11 @@ If you can type fast, and you need to manage celebrities and their schedules, **
 
    - `clear all` : Deletes all events and persons after receiving confirmation from you.
 
-<div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
-Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
-</div>
+    <div markdown="span" class="alert alert-primary">:warning: **Caution!** <br>
+    Running this command will clear all your data in TalentHub. This action is irreversible after confirmation.
+    </div>
 
-  - `exit` : Exits the app.
+    - `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -88,10 +88,22 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
+**:information_source: Person constraints:**<br>
+
+- A person's name must be unique (case-sensitive).
+
+- A person's name can only contain alphanumeric characters and spaces.
+
+- A person's phone number must be unique.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
 **:information_source:Optionals** <br>
 
 A person can have any number of tags or none at all!
 The address and email address fields are also optional!
+
 </div>
 
 Examples:
@@ -129,6 +141,17 @@ Format: `edit person INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…�
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Person constraints:**<br>
+
+- A person's name must be unique (case-sensitive).
+
+- A person's name can only contain alphanumeric characters and spaces.
+
+- A person's phone number must be unique.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can delete a person's tags, email or address by leaving their fields empty, like `t/`, `e/` or `a/` respectively!
@@ -238,10 +261,18 @@ Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…�
 
 <div markdown="block" class="alert alert-info">
 
+**:information_source: Event constraints:**<br>
+
+- The celebrity and all points of contacts must be existing persons in TalentHub.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
 **:information_source:Optionals** <br>
 
 An event can have any number of points of contact or none at all!
 The venue field is also optional!
+
 </div>
 
 Examples:
@@ -274,6 +305,13 @@ Format: `edit event INDEX [n/NAME] [t/TIME] [v/VENUE] [c/CELEBRITY] [p/POINTS OF
 - Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Event constraints:**<br>
+
+- The celebrity and all points of contacts must be existing persons in TalentHub.
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can delete a event's venue or points of contact by leaving their fields empty, like `v/`, `p/` respectively!
@@ -476,10 +514,9 @@ Furthermore, certain edits can cause TalentHub to behave in unexpected ways (e.g
 
 ### Managing Contacts
 
-
 | Action     | Format                                                                                 | Examples                                                                                             |
 | ---------- |----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| **Add**    | `add person n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`<br>                     | e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
+| **Add**    | `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>                 | e.g., `add person n/Jake Doe p/98765432 e/jaked@example.com a/123, Clementi Rd, 1234665 t/Celebrity` |
 | **Delete** | `delete person INDEX`<br>                                                              | e.g., `delete person 3`                                                                              |
 | **Edit**   | `edit person INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br>      | e.g., `edit person 1 n/James Lee e/jameslee@example.com`                                             |
 | **Filter** | `filter person TAG`<br>                                                                | e.g., `filter person Celebrity`                                                                      |
