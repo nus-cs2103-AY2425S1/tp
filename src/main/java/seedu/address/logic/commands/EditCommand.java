@@ -148,6 +148,11 @@ public class EditCommand extends Command {
             Customer editedCustomer = new Customer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedInformation,
                     updatedRemark, updatedTags);
 
+            // Update each order with the new editedCustomer
+            for (Order order : retainedOrders) {
+                order.setOriginalPerson(editedCustomer);
+                order.setPerson(new Person(editedCustomer));
+            }
             editedCustomer.setOrders(retainedOrders);
             return editedCustomer;
         } else if (personToEdit instanceof Supplier) {
@@ -156,11 +161,22 @@ public class EditCommand extends Command {
             Supplier editedSupplier = new Supplier(updatedName, updatedPhone, updatedEmail, updatedAddress,
                     updatedIngredients, updatedRemark, updatedTags);
 
+            // Update each order with the new editedSupplier
+            for (Order order : retainedOrders) {
+                order.setOriginalPerson(editedSupplier);
+                order.setPerson(new Person(editedSupplier));
+            }
+
             editedSupplier.setOrders(retainedOrders);
             return editedSupplier;
         }
 
         Person editedPerson = new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        // Update each order with the new editedPerson
+        for (Order order : retainedOrders) {
+            order.setOriginalPerson(editedPerson);
+            order.setPerson(new Person(editedPerson));
+        }
         editedPerson.setOrders(retainedOrders);
         return editedPerson;
     }
