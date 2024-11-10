@@ -197,7 +197,7 @@ Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [w/WEDD
 
 * A person's name must contain only alphanumeric characters, spaces, or the following characters: / . -
 * A person can have any number of tags or weddings (including 0)
-
+ 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/XYZ Floral Services`
 * `add n/Betsy Crowe e/betsycrowe@example.com a/ABC Photo Studio p/1234567 t/Photographer`
