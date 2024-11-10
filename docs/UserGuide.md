@@ -211,7 +211,7 @@ Format: `filter [n\NAME] [t\TAG]…​`
 * `t\TAG` specifies a tag to filter by. You can provide multiple tags.
 * Filter is not case-sensitive.
 * If both `n\NAME` and `t\TAG` are provided, the command will display contacts matching both the name and tags.
-* If no parameters are provided, an unfiltered list of contacts will be displayed.
+* Filter only temporarily modifies the list of contacts displayed, so if you use `filter` and then `edit`, your original unfiltered list of contacts will be displayed after.
 
 Examples:
 * `filter n\John` filters and displays all contacts whose names contain "John".
@@ -232,10 +232,13 @@ Examples:
 ### Advanced filtering of your contacts: `advfilter`
 
 Filters contacts by tag values, with an operator.
-Format: `advfilter [t\TAG] [operator] [value]`
+
+Format: `advfilter t\TAG OPERATOR VALUE`
+
 * Filters the contact list by tags values, comparing with the operator.
 * Advfilter is not case-sensitive.
 * Available operators include: `=, !=, <, <=, >, >=`
+* Advfilter only temporarily modifies the list of contacts displayed, so if you use `advfilter` and then `edit`, your original unfiltered list of contacts will be displayed after.
 
 Examples:
 * `advfilter t\premium > 1000` would show all contacts that have the tag of premium, and a value of more than 1000 for that tag
@@ -256,10 +259,14 @@ Examples:
 ### Sorting contacts: `sort`
 
 Sort contacts by tag values, in ascending or descending order.
-Format: `sort [t\TAG] [asc/desc]`
+
+Format: `sort t\TAG DIRECTION`
+
 * Sorts the contact list by tags values according to specified sort order.
-* Numeric-only tag values are of lower sort value than alpha-numeric tag values.
+* Available directions include `asc` (ascending) and `desc` (descending).
+* Numeric-only tag values are of lower sort value than alphanumeric tag values.
 * Empty tag values will always appear at the end of the list regardless of sort order.
+* Sort only temporarily modifies the list of contacts displayed, so if you use `sort` and then `edit`, your original unsorted list of contacts will be displayed after.
 
 Examples:
 * `sort t\premium asc` would show all contacts that have the tag of premium, beginning with the contact that has the smallest
@@ -376,8 +383,8 @@ Action     | Format, Examples
 **List**   | `list`
 **Help**   | `help`
 **Filter** | `filter [n\NAME] [t\TAG]…​`<br> e.g., `filter n\John t\client t\friend`
-**Advanced Filter** | `advfilter [t\TAG] [operator] [value]…​`<br> e.g., `advfilter t\premium > 1000`
-**Sort** | `sort [t\TAG] [asc/desc]…`<br> e.g., `sort t\premium asc`
+**Advanced Filter** | `advfilter t\TAG OPERATOR VALUE…​`<br> e.g., `advfilter t\premium > 1000`
+**Sort** | `sort t\TAG DIRECTION`<br> e.g., `sort t\premium asc`
 **Export** | `export format\EXPORT_FORMAT`<br> e.g., `export format\csv`
 
 --------------------------------------------------------------------------------------------------------------------
