@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+This section provides a guide for performing manual testing on the data_coNdUctorS application. Each test case includes expected results and possible error messages for invalid inputs.
 
 <box type="info" seamless>
 
@@ -519,19 +519,69 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: Multiple contacts with different names and roles are present in the contact list.
    
-   1. Test case `find n/John r/Admin`<br>
-      Expected Contacts matching "John" with role "Admin" are displayed in the list. Status message shows "Found contacts matching criteria."
+   1. Test case: `find n/John r/Admin`<br>
+      Expected: Contacts matching "John" with role "Admin" are displayed in the list. Status message shows "Found contacts matching criteria."
 
-   1. Test case `find n/FULL_NAME_NOT_IN_LIST r/Admin`<br>
-      Expected No contacts are displayed. Status message shows "No contacts found matching the criteria."
+   1. Test case: `find n/FULL_NAME_NOT_IN_LIST r/Admin`<br>
+      Expected: No contacts are displayed. Status message shows "No contacts found matching the criteria."
 
    1. Other incorrect find commands to try `find`, `find n/NOT_FULL_NAME r/ROLE_NOT_IN_LIST`<br>
-      Expected If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
+      Expected: If no contacts match, a message appears indicating no contacts found. If an invalid role is entered, an error message displays: "Error: Invalid role specified."
       
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Automatic Data Saving
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Application is running, and a contact has been added, edited, or deleted.
+   
+   1. Test case: Close and reopen the application.<br>
+      Expected: The changes made to contacts persist after reopening. The saved contacts appear as they were before closing the app.
 
-1. _{ more test cases …​ }_
+2. Data File Integrity
+
+   1. Prerequisites: The data file (`addressbook.json`) is accessible for manual editing.
+   
+   1. Test case: Manually edit the JSON file to include an invalid format or structure (e.g., remove a required field).<br>
+      Expected: Upon launching, the application detects the corrupted data and either resets to an empty state or prompts an error message like "Error: Invalid data format detected. Data reset to empty state."
+
+### GUI Components
+
+1. Pagination
+
+   1. Prerequisites: Add enough contacts to exceed a single page (e.g., 11 or more contacts as each page displays 10).
+   
+   1. Test case: Use pagination controls (next, previous) or page navigation to view contacts on multiple pages.<br>
+      Expected: Pagination controls work as expected, allowing the user to navigate through the contact list. The status bar reflects the current page and total contacts.
+
+2. Footer Status Bar
+
+   1. Prerequisites: Add or delete a contact to observe changes in the footer.
+   
+   1. Test case: Add a contact, then delete a different contact.<br>
+      Expected: The footer updates in real-time, displaying the current total contacts and the path of the data file. Status message shows the results of the last action.
+
+### Additional Notes
+
+1. Testing Edge Cases
+
+   1. Prerequisites: Application is running with an open contact list.
+   
+   1. Test case: Add or edit a contact with special characters in fields, very long inputs, or boundary values (e.g., maximum allowed length for fields).<br>
+      Expected: The application handles special characters, lengthy inputs, and boundary values without crashing or error. If any input exceeds limits, a message such as "Error: Input exceeds allowed length" is shown.
+
+2. Common Mistakes
+
+   1. Prerequisites: Application is open and ready for input.
+   
+   1. Test case: Enter commonly mistaken commands or leave required fields blank (e.g., `delete` with no index, `find` with no criteria).<br>
+      Expected: Error messages are clear and descriptive, guiding the user to correct the input format. Status bar remains unaffected by failed commands.
+
+3. Data Reset
+
+   1. Prerequisites: The application has saved data that the user wishes to reset.
+   
+   1. Test case: Delete or replace the data JSON file and restart the application.<br>
+      Expected: The app initialises with an empty contact list, and a message indicates that no saved data was found, prompting a fresh start.
+
+This appendix provides a comprehensive approach to testing the data_coNdUctorS app, ensuring each core feature and edge case is addressed. Error messages will appear on the screen if incorrect inputs are entered, helping users to correct their input efficiently.
+
