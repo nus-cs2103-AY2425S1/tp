@@ -17,8 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
+import static seedu.address.testutil.TypicalIndexes.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -223,6 +222,32 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
     }
 
+
+    @Test
+    public void executeCallsScreenDuplicate_hasDuplicateFullName_failure() {
+        // set firstContactInFilteredList to have the same full name as second contact
+        Contact firstContactInFilteredList = model.getFilteredContactList().get(INDEX_FIRST_CONTACT.getZeroBased());
+        Contact secondContactInFilteredList = model.getFilteredContactList().get(INDEX_SECOND_CONTACT.getZeroBased());
+        Name firstName = firstContactInFilteredList.getName();
+
+        Contact editedContact = new ContactBuilder(secondContactInFilteredList)
+                        .withName(firstName.toString())
+                        .withNickname(VALID_NICKNAME_AMY).build();
+
+        Model modelWithTwoNames = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        modelWithTwoNames.setContact(modelWithTwoNames.getFilteredContactList().get(1), editedContact);
+
+        // Now try to execute the editCommand onto modelWithTwoFullNames
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder(firstContactInFilteredList)
+                .withName(VALID_NAME_BOB)
+                .build();
+        EditCommand editCommand = new EditCommand(firstName, descriptor);
+        assertCommandFailure(editCommand, modelWithTwoNames,
+                String.format(
+                    Messages.MESSAGE_DUPLICATE_NAME, firstName.fullName,
+                    EditCommand.COMMAND_WORD));
+    }
+
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
@@ -293,16 +318,14 @@ public class EditCommandTest {
         assertNotEquals(standardNameCommand, otherNameCommand);
     }
 
-    /*
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditContactDescriptor editContactDescriptor = new EditContactDescriptor();
         EditCommand editCommand = new EditCommand(index, editContactDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editContactDescriptor="
+        String expected = EditCommand.class.getCanonicalName() + "{targetIndex=" + index + ", editContactDescriptor="
                 + editContactDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
-    */
 
 }
