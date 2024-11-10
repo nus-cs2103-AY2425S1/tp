@@ -74,6 +74,12 @@ and make planning a breeze — so you can focus more on what matters and spend l
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<box type="warning" seamless>
+
+**Caution:**
+All commands that use the indices shown in the displayed contact list can also be used in the displayed event list but the displayed contact list in this case refers to the last viewed displayed contact list (and vice versa).
+</box>
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
