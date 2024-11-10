@@ -369,6 +369,8 @@ Parameters:
 
 **Warnings**:
 - At least one space is needed between `add` and `-d`.
+- At least one space is needed between `-d` and the first parameter.
+- At least one space is needed between parameters.
 - A warning will be given if the user tries to add a duplicate delivery.
 - A delivery is considered duplicate and will not be added again if it has the same `DELIVERY_DATE_TIME`, `SUPPLIER`, `PRODUCT`, `QUANTITY`, `COST` and `STATUS` as an existing delivery.
     - Comparison between different `PRODUCT`is case-sensitive.
@@ -412,9 +414,9 @@ Format: `mark -d INDEX STATUS`
 
 Parameters:
 
-- `INDEX`: The index of the delivery to be marked in the displayed list. It must be a number between 1 and smaller than the total number of deliveries displayed (inclusive), and cannot be blank.
+- `INDEX`: The index of the delivery to be marked in the displayed list. It must be a number between 1 and the total number of deliveries displayed (inclusive), and cannot be blank.
 - `STATUS`: The status of delivery. It must be one of the following values: `PENDING`, `DELIVERED`, `CANCELLED`, and cannot be blank.
-    -  `STATUS` is case-insensitive so `pending`, `delivered`, `cancelled` can be accepted as well.
+
 
 </box>
 
@@ -422,6 +424,9 @@ Parameters:
 
 **Warnings**:
 - At least one space is needed between `mark` and `-d`.
+- At least one space is needed between `-d` and `INDEX`.
+- At least one space is needed between `INDEX` and `STATUS.
+- `STATUS` is not case-sensitive. `pending`, `delivered`, `cancelled` can be accepted as well.
 - An error message will be given if the user tries to mark a delivery with a status that is the same as the existing status.
 
 </box>
@@ -432,7 +437,7 @@ Examples:
 
 Expected output:
 - Delivery at index 2 of the displayed list has status shown as DELIVERED, assuming it has a different status initially. Otherwise, an error message will be shown.
-- Delivery at index 1 of the displayed list has status shown as CANCELLED, assuming it has a different status initially and there is at least one delivery in the displayed list. Otherwise, an error message will be shown.
+- Delivery at index 1 of the displayed list has status shown as CANCELLED, assuming it has a different status initially and there is at least one delivery in the displayed list after the find command is executed. Otherwise, an error message will be shown.
 
 #### Here's how it would look like in the app:
 ![mark delivery command](images/markDeliveryCommand.png)
@@ -531,8 +536,8 @@ Format: `upcoming aft/DELIVERY_DATE_TIME bef/DELIVERY_DATE_TIME`
 
 Parameters:
 
-- `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which only deliveries with status`PENDING` after this date and time would be displayed. It must be in dd-mm-yyyy hh:mm format.
-- `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` before this date and time would be displayed. It must be in dd-mm-yyyy hh:mm format.
+- `aft/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the start date and time in which only deliveries with status`PENDING` after this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
+- `bef/DELIVERY_DATE_TIME`: `DELIVERY_DATE_TIME` is the end date and time in which deliveries with status `PENDING` before this date and time would be displayed. It must be in dd-MM-yyyy hh:mm format.
 
 **Tip:**
 - You can provide both parameters!
@@ -543,8 +548,9 @@ Parameters:
 
 **Warnings**:
 - At least one space is needed between `upcoming` and the first parameter.
+- When using more than one parameter, at least one space is needed between parameters.
 - At least one parameter must be provided.
-- If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive)
+- If both parameters are provided, then only deliveries with status`PENDING` and `DELIVERY_DATE_TIME` between the two specified parameters are displayed (not inclusive).
 
 </box>
 
