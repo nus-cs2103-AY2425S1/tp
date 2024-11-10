@@ -348,10 +348,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case ends.
 
 
-**Use Case 2: View Person Details**
+**Use Case 2: Find Person Details**
 
 **System**: CareLink
-**Use Case**: UC02 - View Patient Details
+**Use Case**: UC02 - Find Patient Details
 **Actor**: Geriatrician (Fred)
 
 **Preconditions**
@@ -362,7 +362,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 - The correct person's information is displayed without errors.
 
 **Main Success Scenario (MSS)**
-1. Fred enters command to `view` a person's details.
+1. Fred enters command to `find` a person's details.
 2. CareLink retrieves the person's details.
 3. CareLink displays the person's details to Fred.
 4. Use case ends.
@@ -376,31 +376,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use Case 3: Adding a Caregiver and Linking to an Existing Patient**
 
 **System**: CareLink
-**Use Case**: UC03 - Adding a Caregiver and Linking to an Existing Patient
+**Use Case**: UC03 - Link Caregiver to an Existing Patient
 **Actor**: Geriatrician (Fred)
 
 ### Preconditions
 - Fred is logged into CareLink.
 
 ### Guarantees
-- Caregiver details are saved only if the input data is valid.
-- Duplicates are not created
-- The caregiver is correctly linked to the specified patient.
+- The caregiver is correctly linked to the specified patient, and vice versa.
 
 ### MSS
-1. Fred enters command to `add person` and enters the necessary details, including the patient ID.
+1. Fred enters command to `link` a caregiver to a patient and enters the necessary details, including the caregiver's and patient's NRIC.
 2. CareLink validates all input details against criteria.
-3. CareLink saves the caregiver's details and links them to the specified patient ID.
-4. CareLink confirms the addition and linking with a success message.
+3. CareLink links the caregiver to the specified patient NRIC.
+4. CareLink confirms the link with a success message.
 5. Use case ends.
 
 ### Extensions
-- **2a. Validation Fails**:
-    - 2a.1: If any validation fails, CareLink displays an error message, and the caregiver is not added.
+- **2a. Specified Caregiver NRIC Does Not Exist**:
+    - 2a.1: CareLink displays an error message, and link not formed.
     - Use case ends.
 
-- **2b. Specified Patient ID Does Not Exist**:
-    - 2b.1: If the specified patient ID does not exist, CareLink displays an error message.
+- **2b. Specified Patient NRIC Does Not Exist**:
+    - 2b.1: CareLink displays an error message, and link not formed.
     - Use case ends.
 
 **Use Case 4: Update Person Details**
@@ -423,11 +421,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions
 - **2a. Record Does Not Exist**:
-    - 2a.1: If the record does not exist, CareLink informs Fred.
+    - 2a.1: CareLink informs Fred.
     - Use case ends.
 
 - **2b. Input Validation Fails**:
-    - 2b.1: If input validation fails, CareLink displays an error message and does not update the record.
+    - 2b.1: CareLink displays an error message and does not update the record.
     - Use case ends.
 
 **Use Case 5: Delete Person Details**
@@ -451,7 +449,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions
 - **2a. Person Does Not Exist**:
-    - 2a.1: If no person record matches the given details, CareLink displays an error message.
+    - 2a.1: CareLink displays an error message.
     - Use case ends.
 
 **Use Case 6: Filter Data by Medical Condition**
@@ -476,11 +474,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions
 - **3a. Invalid Condition**:
-    - 3a.1: If Fred enters a medical condition that doesn't exist in the system, CareLink displays an error message and prompts Fred to re-enter the condition.
+    - 3a.1: CareLink displays an error message and prompts Fred to re-enter the condition.
     - Use case resumes from step 3.
 
 - **4a. No Data Found for Condition**:
-    - 4a.1: If no patient data exists for the specified condition, CareLink informs Fred that no records were found.
+    - 4a.1: CareLink informs Fred that no records were found.
     - Use case ends.
 
 **Use Case 7: Filter Data by Patients**
@@ -505,11 +503,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Extensions
 - **3a. Invalid Patient Identifier**:
-    - 3a.1: If Fred enters an invalid patient identifier, CareLink displays an error message and prompts Fred to re-enter the identifier.
+    - 3a.1: CareLink displays an error message and prompts Fred to re-enter the identifier.
     - Use case resumes from step 3.
 
 - **4a. No Data Found for Patients**:
-    - 4a.1: If no patient data exists for the specified patients, CareLink informs Fred that no records were found.
+    - 4a.1: CareLink informs Fred that no records were found.
     - Use case ends.
 
 **Use Case 8: Schedule Appointments**
@@ -545,18 +543,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case ends
 
 - **2b. Invalid Appointment Time**:
-    - 2b.1: Start time is after or equal to end time
-    - CareLink displays an error message that the appointment times are invalid
+    - 2b.1: CareLink displays an error message that the appointment times are invalid
     - Use case ends
 
 - **2c. Past Appointment Time**:
-    - 2c.1: Appointment start time is in the past
-    - CareLink displays an error message that appointments must be in the future
+    - 2c.1: CareLink displays an error message that appointments must be in the future
     - Use case ends
 
 - **2d. Duplicate Appointment**:
-    - 2d.1: The person already has an appointment at the specified time
-    - CareLink displays an error message about the conflicting appointment
+    - 2d.1: CareLink displays an error message about the conflicting appointment
     - Use case ends
 
 **Use Case 9: Edit Existing Appointments**
@@ -594,18 +589,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     - Use case ends
 
 - **2b. Invalid Appointment Time**:
-    - 2b.1: Start time is after or equal to end time
-    - CareLink displays an error message that the appointment times are invalid
+    - 2b.1: CareLink displays an error message that the appointment times are invalid
     - Use case ends
 
 - **2c. Past Appointment Time**:
-    - 2c.1: Appointment start time is in the past
-    - CareLink displays an error message that appointments must be in the future
+    - 2c.1: CareLink displays an error message that appointments must be in the future
     - Use case ends
 
 - **2d. Duplicate Appointment**:
-    - 2d.1: The person already has an appointment at the specified time
-    - CareLink displays an error message about the conflicting appointment
+    - 2d.1: CareLink displays an error message about the conflicting appointment
     - Use case ends
 
 
