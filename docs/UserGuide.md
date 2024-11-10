@@ -8,7 +8,8 @@ allowing them to focus more on patient care and less on paperwork. By seamlessly
 with the visual ease of a Graphical User Interface (GUI)**, PhysioPal provides a powerful and intuitive way to manage patient records,
 schedule appointments, and track payments all in one place. Designed to resolve common challenges—like long search times, duplicate records,
 and scheduling conflicts—PhysioPal simplifies client management with rapid commands for quick data entry, automated reminders, and a clear
-snapshot of all patient details. The result is a faster, more organised workflow that enables physiotherapists to deliver an exceptional
+snapshot of all patient details. **PhysioPal supports only the English language**, ensuring clear and consistent communication across all its features.
+The result is a faster, more organised workflow that enables physiotherapists to deliver an exceptional
 experience to their clients without being weighed down by administrative burdens.
 
 * Table of Contents
@@ -209,6 +210,11 @@ You can schedule multiple appointments using the `d/` prefix for each date and t
 * The given date and time must fall on a weekday and on the hour between 0900 and 1600 inclusive.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
 * When scheduling appointments, the existing schedules of the person will be removed i.e adding of schedules is not cumulative.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Repeated parameters for `DATE_AND_TIME`,
+such as `schedule John Doe d/2024-11-11 1200 note/first d/2024-11-11 1200 note/second`, will be ignored, with only the first instance being processed.
+
+</div>
 
 Examples:
 * `schedule John Doe d/2024-10-14 1200 note/first appointment`
