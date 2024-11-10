@@ -41,7 +41,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the full name in the address book. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: NAME (must be an exact match) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -59,6 +59,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_CHANGE_DETECTED = "No change detected, please try again.";
 
     private final Name name;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -78,14 +79,16 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
         if (!model.hasName(name)) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
+        }
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         Person personToEdit = lastShownList.stream()
-                .filter(person -> person.getName().equals(name))
+                .filter(person -> person.getName().toString().equalsIgnoreCase(name.toString()))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME));
 
@@ -93,6 +96,10 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (personToEdit.equals(editedPerson)) {
+            throw new CommandException(MESSAGE_NO_CHANGE_DETECTED);
         }
 
         model.setPerson(personToEdit, editedPerson);

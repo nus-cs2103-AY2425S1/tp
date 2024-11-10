@@ -42,7 +42,8 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean containsName(Name toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(person -> person.getName().equals(toCheck));
+        return internalList.stream().anyMatch(
+                person -> person.getName().toString().equalsIgnoreCase(toCheck.toString()));
     }
 
     /**

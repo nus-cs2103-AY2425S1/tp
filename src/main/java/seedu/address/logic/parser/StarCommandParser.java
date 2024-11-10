@@ -31,13 +31,15 @@ public class StarCommandParser implements Parser<StarCommand> {
             return new StarCommand(index);
         } catch (ParseException pe) {
 
-            try {
-                Name name = ParserUtil.parseName(trimmedArgs);
-                return new StarCommand(name);
-            } catch (ParseException pe2) {
-
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, StarCommand.MESSAGE_USAGE), pe2);
+            if (trimmedArgs.matches("[^\\d]*")) {
+                try {
+                    Name name = ParserUtil.parseName(trimmedArgs);
+                    return new StarCommand(name);
+                } catch (ParseException pe2) {
+                    throw new ParseException(pe2.getMessage(), pe2);
+                }
+            } else {
+                throw new ParseException(ParserUtil.MESSAGE_INVALID_INDEX);
             }
         }
     }

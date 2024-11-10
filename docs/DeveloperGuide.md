@@ -291,19 +291,17 @@ Furthermore, it can provide easy categorisation and filtering of patients.
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​         | I want to …​                                                  | So that I can…​                                               |
-| -------- | -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|----------| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | `* * *`  | New user       | add a new contact with multiple phone numbers (e.g. home, mobile, email address) | manage patient contact information and have multiple options for reaching them in an emergency. |
 | `* * *`  | User           | delete a contact                                             | remove outdated or incorrect contact information             |
 | `* * *`  | User           | list all contacts in one dashboard                           | easily view all the contacts that I have added.              |
 | `* * *`  | User           | find the patient contact by a keyword                        | I can search the patients’ contact instantly.                |
 | `* *`    | User           | edit an existing patient contact                             | I can update their details when necessary.                   |
-| `* *`    | User           | click on the patient contact in a dashboard                  | I can view more details and retrieve information faster during busy hours. |
 | `* *`    | User           | see all the texts and UI clearly                             | I don’t have to squint my eyes                               |
 | `* *`    | User           | import contacts from a file                                  | I can quickly fill in the address book with existing contact information. |
 | `* *`    | User           | export contacts to a file securely                           | I can share them with other authorized personnel or have a backup. |
 | `* *`    | Silly user     | receive confirmation before deleting a contact               | I don’t accidentally delete important information            |
 | `* *`    | User           | sort the patients according to appointment dates             | I can easily know which are the latest upcoming appointments |
-| `* *`    | User           | automatically see my frequently or recently accessed contacts in the dashboard | I can find them more easily.                                 |
 | `* *`    | User           | add a contact to my favorite list                            | I can quickly access important contacts                      |
 | `* *`    | User           | see alerts of duplicate contacts in the app                  | I can keep the contact list clean and avoid redundancy and confusion |
 | `* *`    | User           | tag patients with recurring appointments                     | I know those who need regular follow ups                     |
@@ -312,17 +310,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | User           | filter patients based on appointment dates                   | I can contact and remind them.                               |
 | `*`      | Potential user | see the app populated with some sample commands              | I can easily learn how to use the app.                       |
 | `*`      | User           | use the app to work offline                                  | I can use it even when there is no internet connection.      |
-| `*`      | User           | save addresses                                               | I have their location readily available.                     |
-| `*`      | User           | filter patients based on age groups                          | I can prioritize certain medical procedures                  |
-| `*`      | User           | export details of patients filtered by different criterias   | I can share them easily                                      |
-| `*`      | User           | view when each contact was added or last updated             | I know how up-to-date the information is                     |
-| `*`      | User           | set reminders to follow-up with certain contacts             | I can ensure good and punctual communication with patients.  |
-| `*`      | User           | print patient contact information directly from my address book | I can have a physical record if needed.                      |
-| `*`      | User           | archive inactive patient contacts rather than delete them    | I can keep their records without cluttering my contact list  |
-| `*`      | Expert user    | organise the patients into different albums                  | I can search for them in an organized way based on certain categories. |
-| `*`      | User           | manually log contact history with patients                   | I have a record of all communications and their corresponding dates |
-| `*`      | User           | receive alerts when a patient’s contact information hasn’t been updated in 5 years | I can reach out to check if it is updated                    |
-| `*`      | User           | set privacy preferences for each patient                     | their personal data is protected and only able to be accessed by authorized staff |
 
 ### Use cases
 
@@ -332,9 +319,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add contact.
-2. User inputs the contact details.
-3. MediContact adds the contact.
+1.  User requests to add contact
+2.  User inputs the contact details
+3.  User requests to add the contact
+4.  Medicontact adds the contact
 
     Use case ends.
 
@@ -579,7 +567,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-  
 ### Non-Functional Requirements
 
 1. Technical:
@@ -690,10 +677,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: Confirmation dialog is triggered. <br><br>If confirmed, first contact is deleted from the list. Message reflecting delete action successful is shown.
       <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -704,11 +691,11 @@ testers are expected to do more *exploratory* testing.
        John Doe is an existing contact
 
     1. Test case: `delete John Doe`<br>
-       Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+       Expected: Confirmation dialog is triggered. <br><br>If confirmed, John Doe is deleted from the list. Message reflecting delete action successful is shown.
        <br><br>If cancelled, no person is deleted, message reflecting delete action being cancelled is shown.
 
     1. Test case: `delete Jane Doe`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+       Expected: No person is deleted. Error details shown in the status message.
 
 ### Editing a person
 
@@ -721,6 +708,12 @@ testers are expected to do more *exploratory* testing.
 
     3. Other test cases to try: `edit John Doe a/6 Sunny Road`, `edit John Doe b/35`, etc<br>
        Expected: Similar to previous results with relevant fields changed
+
+    4. Test case: `edit John Doe n/John Doe`<br>
+       Expected: Error message reflecting no changes detected
+
+    5. Test case: `edit John Doe n/John Doe b/35` (given that John Doe's age is not 35) <br>
+       Expected: Contact with name `John Doe` has age updated to 35
 
 2. Editing a non-existent person's field
 
@@ -807,8 +800,6 @@ testers are expected to do more *exploratory* testing.
 
     2. Test case to try: `find somebody`, `find somebody 99999999`
        <br>Expected: Message displays that no one matches the criteria and list of contacts remain the same.
-
-### Importing an address book
 
 ### Listing contacts
 

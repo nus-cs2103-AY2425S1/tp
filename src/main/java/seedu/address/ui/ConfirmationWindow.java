@@ -43,11 +43,11 @@ public class ConfirmationWindow extends UiPart<Stage> {
         alert.setContentText(contentText);
 
         alert.getDialogPane()
-                .setStyle("-fx-background-color: #e0f7fa; -fx-font-size: 14px;");
+                .setStyle("-fx-background-color: derive(#CAE9FF, 50%); -fx-font-size: 16px;");
         alert.getDialogPane().lookupButton(ButtonType.OK)
-                .setStyle("-fx-background-color: #005b96; -fx-text-fill: #ffffff;");
+                .setStyle("-fx-background-color: #1B4965; -fx-text-fill: #ffffff;");
         alert.getDialogPane().lookupButton(ButtonType.CANCEL)
-                .setStyle("-fx-background-color: #99DDF8; -fx-text-fill: #000000;");
+                .setStyle("-fx-background-color: #5FA8D3; -fx-text-fill: #000000;");
 
         // Center the dialog on the main application window and make it modal.
         Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();

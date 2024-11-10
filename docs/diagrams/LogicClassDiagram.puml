@@ -24,6 +24,9 @@ Class HiddenModel #FFFFFF
 package Storage {
 }
 
+package Ui {
+}
+
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
@@ -39,6 +42,8 @@ LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
+Command .right.> Ui
+note right of Ui: Only used for \nDeleteCommand\n and ClearCommand
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
 Logic ..> CommandResult

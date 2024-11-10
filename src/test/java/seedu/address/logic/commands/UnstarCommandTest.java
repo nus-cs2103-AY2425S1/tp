@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -59,7 +60,7 @@ public class UnstarCommandTest {
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         UnstarCommand unstarCommand = new UnstarCommand(invalidIndex);
 
-        assertCommandFailure(unstarCommand, model, StarCommand.MESSAGE_INVALID_INDEX);
+        assertCommandFailure(unstarCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -95,14 +96,15 @@ public class UnstarCommandTest {
         Name invalidName = new Name("Nonexistent Name");
         UnstarCommand unstarCommand = new UnstarCommand(invalidName);
 
-        assertCommandFailure(unstarCommand, model, String.format(UnstarCommand.MESSAGE_PERSON_NOT_FOUND, invalidName));
+        assertCommandFailure(unstarCommand, model, String.format(
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME, invalidName));
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         UnstarCommand unstarCommand = new UnstarCommand(outOfBoundIndex);
-        assertCommandFailure(unstarCommand, model, UnstarCommand.MESSAGE_INVALID_INDEX);
+        assertCommandFailure(unstarCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

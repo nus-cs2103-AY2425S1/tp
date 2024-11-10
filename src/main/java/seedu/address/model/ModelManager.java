@@ -135,6 +135,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        addressBook.sortByName();
         return filteredPersons;
     }
 

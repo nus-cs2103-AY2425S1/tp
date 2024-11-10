@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
@@ -30,14 +31,14 @@ public class UnstarCommand extends Command {
     public static final String COMMAND_WORD = "unstar";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unstars the person identified by the name or index in the address book.\n"
+            + ": Unstars the person identified by the full name or index in the address book.\n"
             + "Parameters: NAME or INDEX (must match exactly one person or be a valid index)\n"
             + "Example: " + COMMAND_WORD + " John Doe\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNSTAR_PERSON_SUCCESS = "Unstarred Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
-    public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "The person's index provided is invalid";
     public static final String MESSAGE_ALREADY_UNSTARRED = "%1$s is not starred";
 
     private final Name targetName;
@@ -68,16 +69,16 @@ public class UnstarCommand extends Command {
 
         if (targetName != null) {
             Optional<Person> personOptional = lastShownList.stream()
-                    .filter(person -> person.getName().equals(targetName))
+                    .filter(person -> person.getName().toString().equalsIgnoreCase(targetName.toString()))
                     .findFirst();
 
             if (personOptional.isEmpty()) {
-                throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
             }
             personToUnstar = personOptional.get();
         } else {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(MESSAGE_INVALID_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             personToUnstar = lastShownList.get(targetIndex.getZeroBased());
         }
