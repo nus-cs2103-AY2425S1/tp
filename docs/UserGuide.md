@@ -770,7 +770,7 @@ help
 ```
 - Opens up a dialog box that provides:
     - **Command summary table** with command format and basic examples
-    - **Hyperlink to the User Guide**
+    - **Link to the User Guide**
 
 
 
