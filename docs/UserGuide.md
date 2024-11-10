@@ -32,19 +32,24 @@ A GUI similar to the below should appear in a few seconds. Note how the app cont
 ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   </br>
+   Here are some example commands you can try with the sample data:
 
-   * `list -c` : Lists all clients.
+  * `list -c` : Lists all clients.
 
-   * `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 d/2024-12-15 t/budget t/pets` : Adds a client named `Jane Doe` to DDD.
+  * `clear` : Deletes all contacts.
 
-   * `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` : Adds a vendor named `ABC Catering` to DDD.
+  * `add -e n/Amazing Wedding des/by the beach d/2025-01-01 c/0 v/1` : Adds an event named `Amazing Wedding` to DDD.
 
-   * `delete 2` : Deletes the 2nd contact shown in the current list.
+  * `add -c n/Jane Doe p/91234567 e/jane.doe@example.com a/Blk 231 Sembawang St 4 t/budget t/pets` : Adds a client named `Jane Doe` to DDD.
 
-   * `clear` : Deletes all contacts.
+  * `add -v n/ABC Catering p/98765432 e/contact@abccatering.com a/Blk 123 Bukit Merah St 7 s/catering t/vegetarian t/budget` : Adds a vendor named `ABC Catering` to DDD.
 
-   * `exit` : Exits the app.
+  * `delete 2` : Deletes the 2nd contact shown in the current list.
+
+  * `clear` : Deletes all contacts.
+
+  * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -196,7 +201,7 @@ Notes:
 * `des/DESCRIPTION` should only be specified if `-e` is specified.
 * If no flags are present, the default behaviour is to list all contacts. e.g. `list asiodhainsd` will be treated as `list` as there are no `-c`, `-v`, or `-e` flags.
 * All user input in between flags are ignored. e.g. `list ajsdbnsad -c asjidna n/Jane` will be treated as `list -c n/jane`
-* The name keyword search is case-insensitive. e.g `hans` will match `Hans`.
+* The name keyword search is case-insensitive. e.g. `hans` will match `Hans`.
 * Only full words will be matched e.g. `Han` will not match `Hans`.
 * Contacts matching all fields keyword will be returned (i.e. `AND` search). e.g. `list -c n/Jane p/91234567` will list all clients with name `Jane` **AND** phone number `91234567`.
 * Searching by address will list all contacts with addresses that include the keywords. e.g. `list a/Blk 123` will list contacts with address `Blk 123` and `Blk 456` because`Blk 456` contains the word `Blk`.
@@ -497,9 +502,9 @@ In case you need more information on the command parameters, here's a more compr
 
 ### Flags
 
-Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
+Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG` to specify which type of record to edit (e.g. `list -c` to list clients).
 
-* `-c`: flag to specify client related commmands
+* `-c`: flag to specify client related commands
 * `-v`: flag to specify vendor related commands
 * `-e`: flag to specify event related commands
 
@@ -519,7 +524,7 @@ Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` 
       <td>Name of contact/event</td>
       <td>
         <ul>
-          <li>should only lphanumeric characters or spaces</li>
+          <li>should only alphanumeric characters or spaces, and it should not be blank</li>
         </ul>
       </td>
     </tr>
@@ -592,7 +597,7 @@ Some commands can be applied on clients, vendors and events. Use `-CONTAC_FLAG` 
       <td>Tag associated with contact</td>
       <td>
         <ul>
-          <li>should only contain alphanumeric characters or dashses</li>
+          <li>should only contain alphanumeric characters or dashes</li>
         </ul>
       </td>
     </tr>
