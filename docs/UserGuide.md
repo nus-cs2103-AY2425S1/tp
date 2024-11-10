@@ -74,6 +74,45 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about input formats:**<br>
+
+* Client's name must be unique (case-sensitive). Clients with the same name cannot be added to 
+the system twice.
+    - entering the command:
+      * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+      * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street, 
+        different block, different unit`
+      will not be allowed.
+    - However, clients with the same name spelling but different case can be added. Entering:
+        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+          different block, different unit`
+      will successfully add both `John Doe` and `John doe` to the case management system.
+
+* Client's phone number must not contain any spaces or special characters.
+    - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
+    - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
+
+* Client's email address should be of the format local-part@domain and adhere to the following constraints:
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+     The domain name must:
+      - end with a domain label at least 2 characters long
+      - have each domain label start and end with alphanumeric characters
+      - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+* Client's addresses can take any values, and it should not be blank
+
+* Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
+
+* Client's logs' date must be in the format `yyyy-MM-dd HH:mm` 
+  - Acceptable date format: `2022-12-12 14:00`
+  - Unacceptable date format: `2022-12-12`, `14:00`, `2022-12-12 14:00:00`, `2022-12-12 2:00 PM`
+
+</div>
+
 ### Viewing help : `help`
 
 Opens up your default browser and displays the CareConnect user guide webpage.
@@ -87,13 +126,46 @@ Adds a client to the case management system.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0)
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about input formats:**<br>
+
+* Client's name must be unique (case-sensitive). Clients with the same name cannot be added to
+  the system twice.
+    - entering the command:
+        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
+          different block, different unit`
+          will not be allowed.
+    - However, clients with the same name spelling but different case can be added. Entering:
+        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+          different block, different unit`
+          will successfully add both `John Doe` and `John doe` to the case management system.
+
+* Client's phone number must not contain any spaces or special characters.
+    - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
+    - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
+
+* Client's email address should be of the format local-part@domain and adhere to the following constraints:
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+       The domain name must:
+        - end with a domain label at least 2 characters long
+        - have each domain label start and end with alphanumeric characters
+        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+* Client's addresses can take any values, and it should not be blank
+
+* Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
+</div>
 
 ### Listing all beneficiaries : `list`
 
@@ -132,15 +204,51 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about input formats:**<br>
+
+* Client's name must be unique (case-sensitive). Clients with the same name cannot be added to
+  the system twice.
+    - entering the command:
+        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        * followed by, `add n/John Doe p/12345678 e/differentEmail@example.com a/different street,
+          different block, different unit`
+          will not be allowed.
+    - However, clients with the same name spelling but different case can be added. Entering:
+        * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+        * followed by, `add n/John doe p/12345678 e/differentEmail@example.com a/different street,
+          different block, different unit`
+          will successfully add both `John Doe` and `John doe` to the case management system.
+    - The same applies to `edit` commands, users cannot change the name of a client to a name
+      that already exists (case-sensitive) in the system.
+
+* Client's phone number must not contain any spaces or special characters.
+    - Acceptable phone number format: `12345678`, `91234567263842938`, `6512345678`
+    - Unacceptable phone number format: `123 456 789`, `9123-4567`, `1-888-888`, `+065 91234567`
+
+* Client's email address should be of the format local-part@domain and adhere to the following constraints:
+    1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+    2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+       The domain name must:
+        - end with a domain label at least 2 characters long
+        - have each domain label start and end with alphanumeric characters
+        - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+* Client's addresses can take any values, and it should not be blank
+
+* Client's tag names should be alphanumeric. They should not contain any spaces or special characters.
+</div>
+
 ### Tagging a client: `tag`
 
 Tags a client in the case management system.
 
 Format: `tag INDEX t/TAG_NAME`
 
-* Adds the tag to the client at the specific `INDEX`.
-* The tag must not contain any spaces
+* Adds the tag to the client at the specific `INDEX`
+* The tag names should be alphanumeric. They should not contain any spaces or special characters.
 * Only one tag can be added at once
+* Adding a tag that has the same tag name as a pre-existing tag will override the original tag
 
 Example:
 - `tag 1 t/urgent`
@@ -151,7 +259,7 @@ Untags a client in the case management system.
 
 Format: `untag INDEX t/TAG`
 
-* Removes the tag from the client at the specific `INDEX`.
+* Removes the tag from the client at the specific `INDEX`
 * Only one tag can be removed at once
 * If the tag is not found, a warining will be displayed
 
@@ -166,6 +274,8 @@ Format: `setappointment INDEX d/[YYYY-MM-DD]`
 
 * Sets appointment date for the client at the specific `INDEX`
 * If the date is left empty, the current appointment date will be removed
+* Setting the appointment date to the same date will override the original date, no changes will 
+  be made effectively
 
 Example:
 - `setappointment 1 d/2024-11-23`
@@ -188,15 +298,15 @@ Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS] t/TAG [MORE_TA
   * e.g. `elderly` will match `elderly`
   * e.g. `urg` will not match `urgent`
 * For name searching, beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
-  - e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  * e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * For address and tags searching, beneficiaries must match all keywords to be returns (i.e `AND` search)
-  - This is to search as a filtering function 
-  - e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags
-  - e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`
+  * This is to search as a filtering function 
+  * e.g. `find t/urgent elderly` will return clients with both the `urgent` and `elderly` tags
+  * e.g. `find a/clementi ave` will return clients whose address contains both `clementi` and `ave`
 
 * If multiple parameters are used, only those matching all parameters will be returned
     to help quickly filter and narrow down searches
-    - e.g. `find n/Hans Bo a/serangoon` will return 
+  * e.g. `find n/Hans Bo a/serangoon` will return 
         1. `Hans Gruber` who has the address `Serangoon street 2, blk 111`
         2. `Bo Yang` who has the address `Blk 777 Serangoon Ave 1`
         3.  It will **not** return `John Hans` who has the address `9 Bishan Road, 302534`
