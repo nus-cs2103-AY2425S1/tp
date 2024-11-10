@@ -152,6 +152,7 @@ Format: `find person KEYWORD [MORE_KEYWORDS]`
 - Only full words will be matched. e.g. `Han` will not match `Hans`
 - Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Exact spacing must be used `Bernice Yu` is not the same as `Bernice  Yu`.
 
 Examples:
 
