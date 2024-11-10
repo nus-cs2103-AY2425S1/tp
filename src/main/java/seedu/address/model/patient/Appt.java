@@ -22,14 +22,6 @@ import seedu.address.model.healthservice.HealthService;
 public class Appt {
     public static final String DATETIME_MESSAGE_CONSTRAINTS = "Invalid date and time. "
             + "Please enter a valid date and time.";
-    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-            .appendPattern("uuuu-MM-dd")
-            .optionalStart()
-            .appendLiteral(' ')
-            .optionalEnd()
-            .appendPattern("HH:mm")
-            .toFormatter();
-    public static final DateTimeFormatter STRICT_FORMATTER = FORMATTER.withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Comparator to compare two appointments by their date and time.
@@ -42,6 +34,15 @@ public class Appt {
      */
     public static final Comparator<Appt> DATETIME_COMPARATOR = (appt1, appt2) -> appt1.getDateTime()
             .compareTo(appt2.getDateTime());
+
+    private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+        .appendPattern("uuuu-MM-dd")
+        .optionalStart()
+        .appendLiteral(' ')
+        .optionalEnd()
+        .appendPattern("HH:mm")
+        .toFormatter();
+    public static final DateTimeFormatter STRICT_FORMATTER = FORMATTER.withResolverStyle(ResolverStyle.STRICT);
 
     private final LocalDateTime dateTime;
     private final HealthService healthService;
