@@ -146,7 +146,7 @@ Use this command to quickly add a patient with only the required information.
 
 Example: 
 * `add n|Abraham Tan i|S9758366N s|M d|1997-10-27 p|87596666`
-Adds a patient Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
+Adds a patient named Abraham Tan with his NRIC, Sex, Date-of-Birth and Phone Number.
 
 For more information on each individual parameter click [here](#command-parameters-summary).
 
