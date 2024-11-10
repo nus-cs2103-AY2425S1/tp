@@ -21,5 +21,12 @@ It is optimized for CLI users so that frequent tasks can be done faster by typin
 - [Developer Guide](ay2425s1-cs2103t-f14a-2.github.io/tp/DeveloperGuide)
 - [About Us](ay2425s1-cs2103t-f14a-2.github.io/tp/AboutUs)
 
+## Site Map (testing)
+- [Project website](https://ay2425s1-cs2103t-f14a-2.github.io/tp/)
+- [User Guide](https://ay2425s1-cs2103t-f14a-2.github.io/tp/UserGuide.html)
+- [Developer Guide](https://ay2425s1-cs2103t-f14a-2.github.io/tp/DeveloperGuide.html)
+- [About Us](https://ay2425s1-cs2103t-f14a-2.github.io/tp/AboutUs.html)
+
+
 ## Credits & Acknowledgement
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
