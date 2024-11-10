@@ -116,7 +116,6 @@ public class ParserUtil {
 
         return new Ingredients(ingredientList);
     }
-
     /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
@@ -133,6 +132,8 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
+
+
 
     /**
      * Parses a {@code String information} into an {@code Information}.

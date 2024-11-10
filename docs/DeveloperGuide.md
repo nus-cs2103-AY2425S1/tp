@@ -494,7 +494,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 - **2a. The provided phone number is already associated with an existing customer.**
     - 2a1. System shows an error message indicating a duplicate phone number.
-    - 2a2. Use case ends.
+    - 2a2. User is prompted to input another phone number.
+    - 2a3. User provides a new phone number.
+    - 2a4. Use case resumes from step 2.
 
 - **2b. One or more mandatory fields (e.g., name, phone) are missing.**
     - 2b1. System shows an error message indicating which fields are missing.
