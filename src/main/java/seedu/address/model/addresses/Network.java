@@ -8,5 +8,6 @@ public enum Network {
     ETH,
     SOL;
 
-    public static final String MESSAGE_CONSTRAINTS = "Network not supported. Currently supported: BTC, ETH, SOL";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Network is blank or not supported. Currently supported: BTC, ETH, SOL";
 }

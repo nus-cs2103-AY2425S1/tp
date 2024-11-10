@@ -353,7 +353,7 @@ testers are expected to do more _exploratory_ testing.
 3. Try adding a public address to a user by entering
    `add 1 c/BTC l/default pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 
-4. Try retrieving the public address by entering `retrievepa 1 c/BTC` or `retrievepa 1 c/BTC l/default`.
+4. Try retrieving the public address by entering `retrievepa l/default` or `retrievepa l/default c/BTC`.
 
 5. Try editing the public address by entering `editpa 1 c/BTC l/default pa/bc1q5y5960gr9vnjlmwfst232z07surun7rey5svu9`.
 

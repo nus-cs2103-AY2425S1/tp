@@ -358,5 +358,25 @@ public class PublicAddressesCompositionTest {
             composition.containsPublicAddressStringAmongAllNetworks(null));
     }
 
+    @Test
+    public void getOnePublicAddress_success() {
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        composition.addPublicAddress(VALID_PUBLIC_ADDRESS_BTC_MAIN);
 
+        assertEquals(VALID_PUBLIC_ADDRESS_BTC_MAIN, composition.getOnePublicAddress());
+    }
+
+    @Test
+    public void getAllPublicAddresses_success() {
+        PublicAddressesComposition composition = new PublicAddressesComposition();
+        Set <PublicAddress> addresses = Set.of(
+                VALID_PUBLIC_ADDRESS_BTC_MAIN,
+                VALID_PUBLIC_ADDRESS_BTC_SUB,
+                VALID_PUBLIC_ADDRESS_ETH_MAIN
+        );
+
+        addresses.forEach(composition::addPublicAddress);
+
+        assertEquals(addresses, new HashSet<>(composition.getAllPublicAddresses()));
+    }
 }

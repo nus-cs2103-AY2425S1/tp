@@ -6,6 +6,7 @@ import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,6 +28,8 @@ public class PublicAddressesComposition {
 
     public static final String MESSAGE_DUPLICATE_LABEL =
         "Label %1$s under the network %2$s already exists.";
+
+    public static final String MESSAGE_DUPLICATE_PUBLIC_ADDRESS = "Invalid: duplicate label or public address\n%1$s\n";
 
     private final Map<Network, Set<PublicAddress>> publicAddresses;
 
@@ -113,6 +116,30 @@ public class PublicAddressesComposition {
                 Map.Entry::getKey,
                 entry -> new HashSet<>(entry.getValue())
             ));
+    }
+
+    /**
+     * Returns one public address in any network.
+     * Should never be called when there are no public addresses.
+     *
+     * @return An unmodifiable set of public addresses for all networks.
+     */
+    public PublicAddress getOnePublicAddress() {
+        assert !publicAddresses.isEmpty();
+        Set<PublicAddress> firstSet = publicAddresses.entrySet().iterator().next().getValue();
+        assert !firstSet.isEmpty();
+        return firstSet.iterator().next();
+    }
+
+    /**
+     * Returns all the public addresses across all networks
+     *
+     * @return An unmodifiable set of public addresses for all networks.
+     */
+    public List<PublicAddress> getAllPublicAddresses() {
+        return publicAddresses.values().stream()
+            .flatMap(Set::stream)
+            .collect(Collectors.toList());
     }
 
     /**
