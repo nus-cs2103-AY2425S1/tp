@@ -9,7 +9,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
- ## Glossary
+## Glossary
 
 * Command Line Interface (CLI): All instructions are done via typing into a textbox at the bottom of your screen
 * Command Terminal:
@@ -21,8 +21,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 
 --------------------------------------------------------------------------------------------------------------------
 
-
- ## Quick start
+## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
    1. You can check which version of Java you are currently running by entering `java -version` into a command terminal.
@@ -62,7 +61,7 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 
 --------------------------------------------------------------------------------------------------------------------
 
- ## Features
+## Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -88,17 +87,17 @@ Financial Assurance Revolutionary Telemarketer (F.A.R.T) is a **desktop app for 
 
 --------------------------------------------------------------------------------------------------------------------
 
- ## Validation Rules
+## Validation Rules
 
 Do note these rules when attempting to interact with the various commands below. Inputs that do not follow the rules will not be accepted by the F.A.R.T. address book and the inputted data will not be added to the client list. Note that for all commands, spaces at the start of any input will be cut off e.g. inputting `n/        John Doe`will result in F.A.R.T. reading it as `n/John Doe`.
 
- #### Name
+#### Name
 * Valid inputs: Alphanumeric characters, with or without spaces e.g. `Martin`, `Martin Luther King`, `John`, `J0hn`
 * Common invalid inputs:
   * The slash character `/`, e.g. `S/O`
   * The period character `.`, e.g. `Jr.`
 
- #### Phone Number
+#### Phone Number
 * Valid inputs: Numerical characters starting with either 3, 6, 8 or 9 (Singaporean numbers). The input must be exactly 8 characters long e.g. `91234567`, `81234567`
 * Common invalid inputs:
   * A non-Singaporean phone number e.g. `51234567`
@@ -106,7 +105,7 @@ Do note these rules when attempting to interact with the various commands below.
   * Adding the country code at the beginning e.g. `+6581234567`
   * Adding a space in between the numbers e.g. `8123 4567`
 
- #### Email
+#### Email
 
 For all parts of the input that accept special characters, they cannot be placed at the start or at the end. Special characters can only appear at most once consecutively.
 * Valid inputs: `local-part@domain`, e.g. `john.doe@example.com`, `j_ohn@example.edu.org`, `john123@e-mail.com`, where:
@@ -120,18 +119,18 @@ For all parts of the input that accept special characters, they cannot be placed
   * Missing `@` character e.g. `johnexample.com`
   * Last two characters not being alphanumeric e.g. `john@example.c`
   
- #### Birthday
+#### Birthday
 
 * Valid inputs: Numerical characters in the format `DD MM YYYY`. Valid dates should be used e.g. `01 01 2000`, `02 03 2004`
 * Common invalid inputs:
   * Incorrect format e.g. `01/01/2000`, `01 31 2000`, `01 01 04`
   * Invalid dates e.g. `31 02 2000`, `32 01 2000`
 
- #### Address
+#### Address
 
 * Valid inputs: This field accepts a string of any characters as its input e.g. `John Street, Block 123, #01-01`, `Pro+fessional Building, Level 3, Unit 30`, `東京都豊島区東池袋1-22-10　ヒューマックスパビリオン`
 
- #### Tag(s)
+#### Tag(s)
 
 * Valid inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label e.g. `\t friend`, `\t colleague \t neighbour`
 * Invalid inputs:
@@ -140,7 +139,7 @@ For all parts of the input that accept special characters, they cannot be placed
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Viewing help : `help`
+### Viewing help : `help`
 
 Need help navigating F.A.R.T? This command opens a window that has all you need.
 
@@ -150,7 +149,7 @@ Format: `help`
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Viewing a client's details
+### Viewing a client's details
 * When the app starts, a placeholder on the right panel will prompt you to select a client on the list.
 * **Double-click** on a client in the client list to bring up a more detailed view of the client, including information like address and birthday. This will bring up something similar to the below.
 ![detailedView.png](images/detailedView.png)
@@ -166,7 +165,7 @@ The displayed client will persist and edits will not be reflected until you sele
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Adding a client: `add`
+### Adding a client: `add`
 
 Met a potential client or someone new? This command adds a client to the F.A.R.T book.
 
@@ -187,7 +186,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Listing all clients : `list`
+### Listing all clients : `list`
 
 Need to have a quick view of everyone in your F.A.R.T book or reset it after filtering? This command displays a list of all clients in the F.A.R.T book.
 
@@ -195,7 +194,7 @@ Format: `list`
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Editing a client : `edit`
+### Editing a client : `edit`
 
 Need to update a client's details? This command edits an existing client in the F.A.R.T book.
 
@@ -214,7 +213,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Locating clients by attribute: `find`
+### Locating clients by attribute: `find`
 
 Need to quickly find a client by their address or something other than their name? Use this command to find clients whose attributes contain any of the given keywords.
 
@@ -232,7 +231,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Deleting a client : `delete`
+### Deleting a client : `delete`
 
 Need to remove someone from your list? This command deletes the specified client from the F.A.R.T book.
 
@@ -253,7 +252,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Clearing all entries : `clear`
+### Clearing all entries : `clear`
 
 Want to get rid of all clients or the sample data we've provided? This command clears all entries from the F.A.R.T book.
 
@@ -266,7 +265,7 @@ Format: `clear`
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Marking a client as paid: `paid`
+### Marking a client as paid: `paid`
 
 Need to track client policy payments for the current period? This command marks the specified client from the F.A.R.T book as paid.
 
@@ -292,7 +291,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Marking a client as unpaid: `unpaid`
+### Marking a client as unpaid: `unpaid`
 
 Need to manually mark a client that has yet to pay? This command marks the specified client from the F.A.R.T book as unpaid.
 
@@ -312,7 +311,7 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Uploading a client's profile picture \[WINDOWS ONLY\]
+### Uploading a client's profile picture \[WINDOWS ONLY\]
 
 Too many clients? Keep track of their faces by uploading a profile picture of them.
 
@@ -332,7 +331,7 @@ Format: `upload INDEX`
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Exiting the program : `exit`
+### Exiting the program : `exit`
 
 Done with F.A.R.T.? This command closes the program. Your data is automatically saved.
 
@@ -340,7 +339,7 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Visual Features
+### Visual Features
 F.A.R.T has some handy visual cues that highlight certain clients.
 
 | Feature                   | Details                                                                                                                                                                                                                                                                                                                  | Examples                                                                                                                       |
@@ -352,13 +351,13 @@ If you would like to disable these visual features, click on the `File` tab at t
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Saving the data
+### Saving the data
 
 F.A.R.T data is saved in your computer automatically after any command that changes the data. There is no need to save manually. The location of where the data is stored is specified at the bottom status bar of the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
- ### Editing the data file
+### Editing the data file
 
 F.A.R.T data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -368,14 +367,14 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 
 --------------------------------------------------------------------------------------------------------------------
 
- ## FAQ
+## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install this app in the other computer and overwrite the empty data file it creates, with the file that contains the data of your previous F.A.R.T home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
- ## Known Issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 1. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -384,7 +383,7 @@ If your changes to the data file makes its format invalid, F.A.R.T will discard 
 
 --------------------------------------------------------------------------------------------------------------------
 
- ## Command summary
+## Command summary
 
 | Action     | Format, Examples                                                                                                                                                                                |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
