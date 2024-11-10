@@ -41,12 +41,7 @@ public class Date {
      * Checks if this date is strictly before another date.
      */
     public boolean isBefore(Date otherDate) {
-        // Check for date equality first
-        if (this.dateTime.equals(otherDate.dateTime)) {
-            return true;
-        }
-
-        return this.dateTime.isBefore(otherDate.dateTime);
+        return !dateTime.isAfter(otherDate.dateTime);
     }
 
     /**
