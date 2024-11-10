@@ -30,8 +30,8 @@ import seedu.address.model.Model;
  * 3. The data and headers are then written to the CSV file (writeCsvFile).
  */
 public class ExportCommand extends Command {
-    public static final int DISTANCE_TO_TAG_FRONT = 6;
-    public static final int DISTANCE_TO_TAG_BACK = 3;
+    public static final int DISTANCE_TO_TAG_FRONT = 2;
+    public static final int DISTANCE_TO_TAG_BACK = 2;
 
     public static final String COMMAND_WORD = "export";
 
@@ -101,20 +101,22 @@ public class ExportCommand extends Command {
      */
     static String parseTags(String tagString) {
         // Remove leading and trailing whitespace
-        tagString = tagString.trim().replaceAll("\\r", "");
-
+        tagString = tagString.replaceAll("\\\\r|\\\\n", "")
+                             .replaceAll("\\\\\"", "")
+                             .replaceAll("\\b : null\\b", "")
+                             .trim();
         // Check if the string starts with { and ends with }
         if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
             // Remove the outer braces
-            tagString = tagString.substring(DISTANCE_TO_TAG_FRONT, tagString.length() - DISTANCE_TO_TAG_BACK);
+            tagString = tagString.substring(DISTANCE_TO_TAG_FRONT, tagString.length() - DISTANCE_TO_TAG_BACK).trim();
 
             // Split by : and take the first part
             String[] parts = tagString.split(":");
-            if (parts.length > 0) {
+            String trimmedKey = parts[0].trim()
+                    .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
+                    .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
+            if (parts.length > 1) {
                 // Trim and remove quotes from the tag name
-                String trimmedKey = parts[0].trim()
-                        .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
-                        .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
                 String trimmedValue = parts[1].trim()
                         .replaceAll(INVERTED_COMMA_REGEX, EMPTY_STRING)
                         .replaceAll(BACKWARD_SLASH_REGEX, EMPTY_STRING);
