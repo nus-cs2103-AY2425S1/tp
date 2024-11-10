@@ -117,27 +117,43 @@ Examples:
 
 ### Listing all contacts : `list contact`
 
-Shows a list of all contacts in the address book.
+Shows all contacts in the address book in the contact list.
 
 Format: `list contact`
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all contacts are already displayed, nothing will appear to be changed. 
+</div>
+
 ### Listing all jobs : `list job`
 
-Shows a list of all jobs in the address book.
+Shows all jobs in the address book in the job list.
 
 Format: `list job`
 
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all jobs are already displayed, nothing will appear to be changed. 
+</div>
+
 ### Listing all companies : `list company`
 
-Shows a list of all companies in the address book.
+Shows all companies in the address book in the company list.
 
 Format: `list company`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all companies are already displayed, nothing will appear to be changed. 
+</div>
 
 ### Listing all entities : `list all`
 
 Show all contact, jobs and companies in the address book.
 
 Format: `list all`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:** 
+If all contacts, jobs and companies are already displayed, nothing will appear to be changed. 
+</div>
 
 ### Editing a contact : `edit`
 
@@ -284,9 +300,9 @@ Format: `view company INDEX`
 * Views all contacts and jobs associated with a company at the specified `INDEX`.
 * The index refers to the index number shown in the displayed company list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* Note: It is not necessary to display all contacts and jobs before using this command; the command will work regardless of whether lists are fully shown.
+* Note: It _is not necessary to display all contacts and jobs before using this command; the command will work regardless of whether lists are fully shown.
 
-Examples:
+Examples_:
 * If a job is from a company at index 1, `view company 1` will show the job
 in the job list.
 * If a job is from a company at index 2 and the job is matched with a contact,
