@@ -782,6 +782,7 @@ Commands for managing property listings and associating clients with listings.
 >
 > ---
 
+
 #### Remove Buyers from Listing
 - **Command:** `removelistingbuyers INDEX buy/BUYER INDEX [buy/MORE_BUYER_INDEXES...]`
 - **Description:** Removes buyers associated with a specified listing.
