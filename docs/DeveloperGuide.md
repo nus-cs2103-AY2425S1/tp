@@ -212,7 +212,7 @@ The following activity diagram summarizes what happens when a user executes an a
 * Need a system that provides quick access to relevant client information, including financial plans, policy expiration dates, and client details.
 * Often handle tasks that involve tracking insurance policies, renewals, and financial documents.
 
-**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (eg. Track insurance policies) as well as create reminders for meet ups with them. Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information of their clients and important dates their clients.
+**Value proposition**: Our product provides independent financial advisors with a streamlined tool to manage client details (e.g. Track insurance policies) as well as create reminders for meet ups with them. Optimized for simplicity and efficiency, this product makes the lives of financial advisors easier by offering easier access to relevant information of their clients and important dates their clients.
 
 
 ### User stories
@@ -554,7 +554,7 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Checking if changes in data are saved
-   1. Use any of the data changing commands eg.`add` `delete` `edit`.
+   1. Use any of the data changing commands e.g.`add` `delete` `edit`.
    2. Exit ClientHub with `exit` or closing the window.
    3. Re-launch the app by double-clicking the jar file. <br>
       Expected: Changes made previously are loaded into the displayed data
