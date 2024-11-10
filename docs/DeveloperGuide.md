@@ -15,7 +15,9 @@
 
 ChatGPT was heavily used to help create test case templates, although the ideas behind the test cases were mostly thought by the developers.
 <br>
-We would also like to acknowledge group CS-2103T-W14-1 as we followed a similar format for the command explanations in the user guide based on their user guide.
+We would also like to acknowledge group CS2103T-W14-1 as we followed a similar format for the command explanations in the user guide based on their user guide, 
+and group CS2103-F10-2 as we followed their test cases for saving data based on their developer guide.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -159,27 +161,23 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 ## **Planned Enhancements**
 Do note we have 4 members in our group.
 
-### 1. Being able to add new Insurance Plan Types
-Users currently cannot create their own types of insurance plans. Thus, in a future update, we will allow users to create
-their own Insurance Plan Types to add to their clients. Do note that as these plans are created by users and not validated
-by us, we will not be held liable for any unintended record-keeping issues such as claim ID not being validated correctly
-or the claim amount not being calculated correctly.
-
-### 2. addClaim ID
-Adding of a claim ID can be added to many users. This will be fixed in a future version such that claim ID is unique across
+### 1. addClaim ID
+A single claim ID can be added to multiple users. i.e. `B1100` can be added to both client `A` and client `B` with no error. This will be fixed in a future version such that claim ID is unique across
 all clients.
 
-### 3. addClaim amount
-Claim amount can currently exceed 1 million. In future, a restriction will be placed on the claim amount such that if
-the claim amount is over 1 million, it will be rejected with an appropriate error message.
+### 2. addClaim amount
+Claim amount can currently exceed 1 million. In the future, a restriction will be placed on the claim amount such that if
+the claim amount is over 1 million, it will be rejected with an appropriate error message. This is in line with our restriction on claim amount (claim amount cannot exceed 1 million)
 
-### 4. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
+### 3. Add command and Edit Command does not allow clients to have same names yet allows two people to have the same contact details.
 Currently, the way the system checks if a person is a duplicate is simply by checking if the person has the same
 name or not. However, in future versions, we are planning to check if all details are the same before flagging it as a
 duplicate. This is because 2 people can share numbers, address and emails (eg a parent and child) or 2 clients can have
 the same full name with different contact details but it will be unreasonably rare for clients to have the same name,
 number, email and addresses simultaneously.
 
+### 4. Flexible Command Keywords.
+Command keywords are currently case-sensitive i.e. `add` is a valid command but `Add` is not. For user convenience, we will make command keywords case-insensitive in a future update.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -482,17 +480,27 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Delete `config.json` and re-launch the app. Expected: New `config.json` created. Existing data is not affected.
+
+   2. Delete `preferences.json` and re-launch the app. Expected: New `preferences.json` created. Existing data is not affected. 
+   
+   3. Edit the line `"addressBookFilePath"` : `"data/addressbook.json"` to `"addressBookFilePath"` : `"data/data.json"` and re-launch the app. Expected: App starts on clean slate (i.e. with sample data only). 
+
+   4. Delete `data/` or `data/addressbook.json`. Expected: New `data/addressbook.json` created. App starts on clean slate (i.e. with sample data only).
+
+2. Dealing with corrupted data files 
+   1. Add a new field `"newField" : "newField"` to a client. Expected: All data is lost. The app starts on a clean slate.
+   2. Remove `"remark"` field from a client. Expected: The client with the missing `"remark"` field is lost. The rest of the contacts still exist in the contact list.
