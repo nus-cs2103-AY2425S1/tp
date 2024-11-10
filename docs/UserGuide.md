@@ -74,6 +74,8 @@ The EZSTATE GUI is organized into **5** key components:
 * `List Card`: Displays key information about clients or listings, depending on the user's command.
 * `Chat Window`: Serves as a helpful assistant, offering guidance and support through interactive communication.
 
+With a clear understanding of the GUI, let's move on to how you can interact with EZSTATE using [basic commands](#basic-commands).
+
 ### Basic Commands
 To use EZSTATE, type commands in the command box and press `Enter`. Here are a few to try:
 
@@ -91,15 +93,9 @@ To use EZSTATE, type commands in the command box and press `Enter`. Here are a f
 
    * `exit` : Exits the app.
 
-<br>
-<div class="note" markdown="span">
-Explore the [Features](#features) section for a full list of commands and their uses.
-</div>
+Once you've tried out these basic commands, it's helpful to understand [how they are organized](#command-structure). This will make it easier to navigate and use the commands in EZSTATE effectively, and to grasp how each part functions.
 
 ### Command Structure
-
-In this section, we will explore the command structure in EZSTATE before delving into the [Features](#features) section. 
-<br>
 
 Understanding the command structure in EZSTATE is essential for efficient navigation and use of the app’s features. 
 Each command in EZSTATE is designed to follow a **clear, consistent format**, allowing you to manage clients, listings, and appointments with precision and speed. 
