@@ -519,7 +519,7 @@ Some commands can be applied on clients, vendors and events. Use `-CONTACT_FLAG`
       <td>Name of contact/event</td>
       <td>
         <ul>
-          <li>should only lphanumeric characters or spaces</li>
+          <li>should only alphanumeric characters or spaces, and it should not be blank</li>
         </ul>
       </td>
     </tr>
