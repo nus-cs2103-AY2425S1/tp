@@ -694,9 +694,9 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `addc n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` <br>
        Expected: The customer is successfully added. Details of the added customer shown in the status message.
    
-3. Adding a customer with exact same name.
+3. Adding a customer with an identical name.
 
-   1. Prerequisites: Customer with name `Betsy Crowe` already exist in the address book.
+   1. Prerequisites: Customer with name `Betsy Crowe` already exists in the address book.
 
    2. Test case: `addcustomer n/Betsy Crowe t/friend e/betsycrowe@duplicate.com a/Newgate Prison p/12345678 t/criminal` <br>
       Expected: No customer is added. Error details shown in the status message. Status bar remains the same.
@@ -771,7 +771,7 @@ testers are expected to do more *exploratory* testing.
        Example: `findcustomer john`
 
     2. Test case: `editc 1 n/Betsy Crower t/` <br>
-       Expected: The customer is successfully edited with all tags removed. Details of the edited customer shown in the status message. The displayed customer list got unfiltered.
+       Expected: The customer is successfully edited with all tags removed. Details of the edited customer shown in the status message. The displayed customer list becomes unfiltered and all customers are displayed.
 
 3. Editing a customer to an exact same name as an existing customer.
 
@@ -1059,7 +1059,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `addresbook.json` file in the `data` folder.
+    1. Prerequisite: You have not edited the `preferences.json` file. There is a folder named `data` in the same directory as the jar file, and there is a `addressbook.json` file in the `data` folder.
 
     2. Test case: Delete the `addressbook.json` file. Then, run SellSavvy and exit using the `exit` command.<br>
        Expected: SellSavvy should create a new `addressbook.json` file with default data.
@@ -1068,7 +1068,7 @@ testers are expected to do more *exploratory* testing.
        Expected: SellSavvy should create a new `data` folder and a new `addressbook.json` file inside the folder with default data.
 
     4. Test case: Corrupt the `addressbook.json` file by changing its contents to an invalid format, e.g., add a non-numeric character to one of the customer's phone number. Then, run SellSavvy and exit using the `exit` command.<br>
-       Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty person list.
+       Expected: SellSavvy should discard all data in the file and start with an `addressbook.json` file with an empty customer list.
 
 ## **Appendix: Planned Enhancements**
 
@@ -1077,10 +1077,10 @@ testers are expected to do more *exploratory* testing.
 1. **Change the `CUSTOMER_INDEX` of `addorder` command to be optional when a customer's order list is open** <br>
     - **Problem:** Currently, we made the customer's index needed to be specified for `addorder` when the customer's order list is open but related commands like `editorder` and `filterorder` do not require a customer's index to be supplied.
     - **Solution:** We planned to make the customer's index for `addorder` optional when a particular customer's order list is already displayed.
-    - **Rationale:** Requiring the user to remember the customer's index seems unnecessary.
+    - **Rationale:** Requiring the user to remember the customer's index may be unnecessary and would facilitate user convenience.
 
 2. **Allows detection of wrong prefix for commands**
-    - **Problem:** Currently, we only detect the relevant prefix for each command and treat every other prefix as part of the input.
+    - **Problem:** Currently, we only detect the relevant prefix for each command and treat all other irrelevant prefixes as part of a parameter input.
     - **Example:** User tries to edit an existing order using `edito 1 d/01-12-2023 n/item`. An error message informs user that date is wrong.
-    - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used instead of treating it as part of the parameters while allowing users to key in prefix such as `n/` or `a/` via the use of special symbols such as `\`.
-    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict the users from typing inputs with prefix such as `n/` or `a/` hence we will need to add the functionality to do it as well.
+    - **Solution:** Add the functionality to detect such errors and inform the user of the wrong prefix used, instead of treating it as part of the parameters. We also considered allowing users to key in prefixes such as `n/` or `a/` as string inputs via the use of special symbols, possibly using a symbol such as `\`.
+    - **Rationale:** Keying in a wrong prefix is a fairly common user mistake and the existing error message does not seem to match the actual error happening. Detecting prefix may restrict users from typing inputs with prefix such as `n/` or `a/` as parameter string inputs, hence we will need to add the functionality to do it as well.
