@@ -25,7 +25,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-    private boolean showFullDetails;
 
     @FXML
     private HBox cardPane;
@@ -47,7 +46,7 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex, boolean showFullDetails) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
@@ -59,17 +58,5 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        this.showFullDetails = showFullDetails;
-
-        setLabelsToWrapText();
-    }
-
-    private void setLabelsToWrapText() {
-        id.setWrapText(showFullDetails);
-        name.setWrapText(showFullDetails);
-        phone.setWrapText(showFullDetails);
-        address.setWrapText(showFullDetails);
-        email.setWrapText(showFullDetails);
-        role.setWrapText(showFullDetails);
     }
 }

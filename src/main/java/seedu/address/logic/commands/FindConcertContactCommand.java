@@ -64,10 +64,7 @@ public class FindConcertContactCommand extends Command {
         model.updateFilteredConcertContactList(predicate);
 
         return new CommandResult(String.format(Messages.MESSAGE_CONCERT_CONTACTS_LISTED_OVERVIEW,
-                model.getFilteredConcertContactList().size()),
-                false, false, true,
-                false, false, true,
-                false, false, false);
+                model.getFilteredConcertContactList().size()), false, false, true);
     }
 
     private Person getPersonFromIndex(Model model) throws CommandException {

@@ -39,9 +39,7 @@ public class FindConcertCommand extends Command {
         requireNonNull(model);
         model.updateFilteredConcertList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CONCERTS_LISTED_OVERVIEW, model.getFilteredConcertList().size()),
-                false, true, false,
-                false, false, false);
+                String.format(Messages.MESSAGE_CONCERTS_LISTED_OVERVIEW, model.getFilteredConcertList().size()));
     }
 
     @Override
