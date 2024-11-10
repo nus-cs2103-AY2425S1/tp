@@ -63,7 +63,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+The component **`Main`** (consisting of classes [`Main`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
 
 - At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 - At shut down, it shuts down the other components and invokes cleanup methods where necessary.
@@ -104,7 +104,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `EmployeeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -151,7 +151,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2425S1-CS2103T-T15-4/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="600" />
 
@@ -238,25 +238,20 @@ HRConnect provides fast access to employee, project, and candidate contact detai
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                                      | I want to …​                                                                     | So that I can…​                                                                     |
-| -------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+|----------|--------------------------------------------------------------|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | `* * *`  | new user                                                     | see usage instructions and tips                                                  | refer to instructions and tips when I forget how to use the App                     |
-| `* * *`  | user                                                         | add a new employee                                                               |                                                                                     |
-| `* * *`  | user                                                         | add a new project                                                                |                                                                                     |
-| `* * *`  | user                                                         | add a new job candidate                                                          |                                                                                     |
-| `* * *`  | user                                                         | remove an employee                                                               | remove entries that I no longer need                                                |
-| `* * *`  | user                                                         | remove a project                                                                 | remove entries that I no longer need                                                |
-| `* * *`  | user                                                         | remove a job candidate                                                           | remove entries that I no longer need                                                |
-| `* * *`  | user                                                         | search for employee details by name or ID                                        | locate employee details without having to go through the entire list                |
-| `* * *`  | user                                                         | search for project details by name or ID                                         | locate project details without having to go through the entire list                 |
-| `* * *`  | user                                                         | search for job candidates by name or ID                                          | locate candidate details without having to go through the entire list               |
-| `* * *`  | user                                                         | assign employees to projects                                                     | update manpower allocation                                                          |
-| `* * *`  | user                                                         | un-assign employees to projects                                                  | update manpower allocation                                                          |
-| `* *`    | user                                                         | search for employees by skill sets                                               | find employees with desired skills without having to go through the entire list     |
-| `* *`    | user                                                         | search for projects by description                                               | find projects that match a description without having to go through the entire list |
-| `* *`    | user                                                         | search for job candidates by interview status                                    | track the number of candidates at each stage of the hiring pipeline                 |
-| `* *`    | user                                                         | update employee details                                                          | update an entry without having to delete and re-create it                           |
-| `* *`    | user                                                         | update project details                                                           | update an entry without having to delete and re-create it                           |
-| `* *`    | user                                                         | update job candidate details                                                     | update an entry without having to delete and re-create it                           |
+| `* * *`  | manager / lead                                               | add a new employee                                                               |                                                                                     |
+| `* * *`  | project manager                                              | add a new project                                                                |                                                                                     |
+| `* * *`  | manager / lead                                               | remove an employee                                                               | remove entries that I no longer need                                                |
+| `* * *`  | project manager                                              | remove a project                                                                 | remove entries that I no longer need                                                |
+| `* * *`  | manager / lead                                               | search for employee details by name or ID                                        | locate employee details without having to go through the entire list                |
+| `* * *`  | project manager                                              | search for project details by name or ID                                         | locate project details without having to go through the entire list                 |
+| `* * *`  | project manager                                              | assign employees to projects                                                     | update manpower allocation                                                          |
+| `* * *`  | project manager                                              | un-assign employees to projects                                                  | update manpower allocation                                                          |
+| `* *`    | manager / lead                                               | search for employees by skill sets                                               | find employees with desired skills without having to go through the entire list     |
+| `* *`    | project manager                                              | search for projects by description                                               | find projects that match a description without having to go through the entire list |
+| `* *`    | manager / lead                                               | update employee details                                                          | update an entry without having to delete and re-create it                           |
+| `* *`    | project manager                                              | update project details                                                           | update an entry without having to delete and re-create it                           |
 | `* *`    | user                                                         | hide private contact details                                                     | minimize chance of someone else seeing them by accident                             |
 | `* *`    | user managing many employees                                 | categorize employees by their departments                                        | organize employees based on their department                                        |
 | `* *`    | user managing many employees                                 | categorize employees into talent pools by skill sets                             | organize employees based on their skills                                            |
@@ -403,8 +398,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list skills the employees in the company have.
 2. HRConnect shows a list of skills.
 3. User selects a few skills.
-4. User requests to list all employees with all of the skills selected.
-5. HRConnect lists all employees with all of the skills selected.
+4. User requests to list all employees with all the skills selected.
+5. HRConnect lists all employees with all the skills selected.
 
    Use case ends.
 
@@ -467,8 +462,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the .jar file and store it in an empty folder.
 
-   1. Double-click the .jar file  
-      - Expected: Shows the GUI with a set of sample contacts, projects, and assignments. The window size may not be optimum.
+   2.  Open a command terminal, use the command `cd [folder path]` to navigate into the folder you put the `.jar` file in, and use the command `java -jar HRConnect.jar` to run the application.)
+       * Expected: Shows the GUI with a set of sample contacts, projects, and assignments. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -496,9 +491,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Using / Testing other commands in HRConnect
 
-   1. Refer to the [User Guide "Features" section](https://ay2425s1-cs2103t-t15-4.github.io/tp/UserGuide.html#features) for formats, examples, and expected outputs for each command.
-   2. Enter the commands with the provided format and parameter limitations.
+   1. Refer to the [User Guide "Features" section](https://ay2425s1-cs2103t-t15-4.github.io/tp/UserGuide.html#features) for an exhaustive list of commands.
+   2. Valid command formats, command examples, parameter limitations, and expected outputs are provided.
+   3. Enter the commands with the provided format and parameter limitations.
       - Expected: The output performs the same as the listed expected output.
+   4. Enter the commands not following the provided format or violating parameter limitations.
+      - An appropriate error message is thrown.
 
 ### Saving data
 
