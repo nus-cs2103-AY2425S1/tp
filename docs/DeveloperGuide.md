@@ -284,10 +284,10 @@ Some commands such as `clear`, `cdelete` and `rdelete` prompts the user for conf
 How confirmation prompts work:
 
 * The `CommandResult` class now has different types:
-    * **`ORDINARY`**: A regular result, representing a command's success.
-    * **`SHOW_HELP`**: The help window should be shown to the user.
-    * **`EXIT`**: The app should exit.
-    * **`PROMPT`**: The app should prompt the user for confirmation.
+  * **`ORDINARY`**: A regular result, representing a command's success.
+  * **`SHOW_HELP`**: The help window should be shown to the user.
+  * **`EXIT`**: The app should exit.
+  * **`PROMPT`**: The app should prompt the user for confirmation.
 * There is a new `Supplier<CommandResult>` field in the `CommandResult` class, which will be applied when the user
   confirms the prompt.
 * In commands that will prompt for confirmation, the `execute` method returns a `CommandResult` that contains an
@@ -296,6 +296,26 @@ How confirmation prompts work:
   a confirmation.
 * `LogicManager` also keeps track of the most recent `CommandResult`. When a confirmation is obtained, it will apply
   the supplier in the previous `CommandResult`.
+
+### Importing and Exporting data
+
+The user is able to import data from and export data to external files.
+
+How import and export work:
+
+* A <ins>[`FileChooser`](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html)</ins> resides in 
+  the `MainWindow` container.
+* The `CommandResult` class now has two new types:
+  * **`IMPORT`**: The `FileChooser` window should be shown to the user to choose a file for import.
+  * **`EXPORT`**: The `FileChooser` window should be shown to the user to choose a file for export.
+* `CommandResult` of the above types store an extra `Supplier<CommandResult>` that will be applied if import or export
+  was successful.
+* The `MainWindow` detects if a result returned by `LogicManager` is of type `IMPORT` or `EXPORT`, and shows the
+  correct `FileChooser` window based on the type.
+* After the user chooses a file, `MainWindow` passes the file to `LogicManager` by calling the `processFile` method.
+* `LogicManager` passes the file to the `Storage` component to import or export data via the `readAddressBook` and
+  `saveAddressBook` methods.
+* If the import or export was successful, `LogicManager` applies the supplier in the most recent `CommandResult`.
 
 --------------------------------------------------------------------------------------------------------------------
 
