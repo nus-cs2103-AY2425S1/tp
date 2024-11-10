@@ -1144,3 +1144,4 @@ Team size: 5
 
   Currently, all fields are mandatory when adding a patient. However, there could be cases where the patient does not have an email address or phone number.
   It would be ideal to make certain fields optional as it allows for more flexibility when adding patient details. However, the NRIC field should remain mandatory since it is the unique identifier for each patient which ensures that duplicate patients cannot be added.
+  
