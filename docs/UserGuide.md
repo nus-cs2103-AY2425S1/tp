@@ -275,7 +275,7 @@ This would add three units of product ID 1 to the order.
 </div>
 
 ### **Add Contact Command**
-Adds a new contact to the bakery’s database.
+Adds a new contact to the bakery’s database. This will be useful for other important contacts such as the delivery men and bakery assistants.
 
 ```bash
 addContact n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]

@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.SupplyOrderList;
+import seedu.address.model.person.Person;
 
 /**
  * Deletes a supply order at the specified index.
@@ -38,9 +40,16 @@ public class DeleteSupplyOrderCommand extends Command {
         }
 
         Order order = supplyOrderList.getOrder(targetIndex - 1);
-        order.getOriginalPerson().removeOrder(order);
+
+        Person person = order.getOriginalPerson();
+        person.removeOrder(order);
 
         supplyOrderList.removeOrder(targetIndex - 1);
+
+        // Update personList
+        model.setPerson(person, person);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLY_ORDER_SUCCESS, targetIndex));
     }
 
