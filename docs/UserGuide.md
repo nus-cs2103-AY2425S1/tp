@@ -107,7 +107,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `clearproject` : Deletes all projects.
 
-   - `assign aid/1 pid/3 id/1` : Assigns `John Doe` to `Project Charlie`.
+   - `assign aid/1 pid/3 id/1` : Assigns `Bernice Yu` to `Project Charlie`.
 
    - `listassignments` : Lists all assignments.
 
@@ -160,11 +160,12 @@ Format: `help`
 Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [s/SKILL]…​`
 
 - Employee Id must be: [*Numeric*](#numeric), no spaces, unique amongst employees
-
-  > [!NOTE]
-  > Employee IDs are compared numerically. `0001` is treated the same as `1`.
+  - Employee IDs uniquely identify each employee.
+  - Employee IDs are compared numerically. `0001` is treated the same as `1`.
 
 - Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
+  - Names which require special characters can be spelt out in full. e.g. `Nagaratnam s/o Suppiah` can be spelt out as `Nagaratnam son of Suppiah`
+
 - Phone Number must be: [*Numeric*](#numeric), no spaces, at least 3 digits long
 - Email must be: of the format `local-part@domain` and follow these constraints:
   - The local-part should only contain alphanumeric characters and the special characters +_.-
@@ -172,6 +173,14 @@ Format: `add id/EMPLOYEE_ID n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [
   - This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods (e.g. `u.nus.edu`).
 - Address must be: Any characters are valid
 - Skills and tags must be: [*Alphanumeric*](#alphanumeric), no spaces, each should be 50 characters or fewer
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note employee details:**<br>
+
+Since each employee is uniquely identified by their employee ID, users can add employees who share the same name, or who have a common department phone number, email, or address.
+
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An employee can have any number of tags (including 0) and any number of skills (including 0)
@@ -317,12 +326,11 @@ Expected output:
 Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME [s/SKILL]...`
 
 - Project Id must be: [*Numeric*](#numeric), no spaces, unique amongst projects
-
-  > [!NOTE]
-  > Project IDs are compared numerically. `0001` is treated the same as `1`.
+  - Project IDs uniquely identify each project.
+  - Project IDs are compared numerically. `0001` is treated the same as `1`.
 
 - Project Name must be: [*Alphanumeric*](#alphanumeric), spaces allowed
-- Skills must be: [*Alphanumeric*](#alphanumeric), no spaces, within 50 characters
+- Skills must be: [*Alphanumeric*](#alphanumeric), no spaces, each should be 50 characters or fewer
 
 Examples:
 
@@ -354,6 +362,7 @@ Shows a list of **all project members**.
 Format: `listprojectmembers pn/PROJECT_NAME`
 
 - PROJECT_NAME is case-sensitive. e.g. `Project` will not match `project`
+- Only the full project name will be matched. e.g. `Project` or `Alpha` will not match `Project Alpha`
 
 Expected output:
 - System message noting success, including number of members listed
@@ -452,9 +461,8 @@ Expected output:
 Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
 
 - Assignment Id must be: [*Numeric*](#numeric), no spaces, unique amongst assignments
-
-  > [!NOTE]
-  > Assignment IDs are compared numerically. `0001` is treated the same as `1`.
+  - Assignment IDs uniquely identify each assignment.
+  - Assignment IDs are compared numerically. `0001` is treated the same as `1`.
 
 - The `PROJECT_ID` must belong to an existing project.
 - The `EMPLOYEE_ID` must belong to an existing person.
