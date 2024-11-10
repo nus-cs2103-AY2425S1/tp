@@ -704,12 +704,11 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `delete-appt UNIQUE_ID` (Appointment already deleted)  
        Expected: Error message indicating the appointment does not exist.
 
-2. Deleting an appointment with an invalid id
+1. Deleting an appointment using an invalid id.
 
-    1. Test case: `delete-appt UNIQUE_ID`  
-       Expected: Error message indicating an invalid id. No appointment is deleted.
+   1. Test case: `delete-appt UNIQUE_ID` (`UNIQUE_ID` is not a positive integer)  
+   Expected: Error message indicating an invalid id. No appointment is deleted.
 
-1. _{ more test cases …​ }_
 
 ### Saving data
 
