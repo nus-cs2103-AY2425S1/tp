@@ -19,7 +19,6 @@ BakeBuddy is a desktop application that streamlines your bakery operations by he
 - 👥 Customers and their orders
 - 📦 Suppliers and ingredients
 - 📋 Order tracking and fulfillment
-- 🗄️ Inventory management
 
 ## Why Choose BakeBuddy?
 
@@ -157,16 +156,6 @@ Refer to the [List of Commands](#list-of-commands) on the next page (which is gr
 
 <div style="page-break-after: always;"></div>
 
-### Inventory Management
-
-| Command | Format | Example |
-| --- | --- | --- |
-| [Check Ingredient Stock](#check-ingredient-stock-command) | `checkIngredientStock INGREDIENT` | `checkIngredientStock Flour` |
-| [Check Pastry Stock](#check-pastry-stock-command) | `checkPastryStock PASTRY` | `checkPastryStock Croissant` |
-| [View Inventory](#view-inventory-command) | `viewInventory` | `viewInventory` |
-
-<div style="page-break-after: always;"></div>
-
 ### General Commands
 
 | Command                     | Format | Example |
@@ -256,6 +245,20 @@ This would add three units of product ID 1 to the order.
 ### Q6: How do I tag Contact?
 
 
+### Q7: Are the command case sensitive?
+
+### Q8: Ui Alignment table center row.
+
+### Q9 minimise screen some are hide open wide screen
+
+### Q10 Unrealistically long email and phone number
+
+### Q11 the order list is sorted in such a way pending order first
+
+### Q12 Add collection date to remark and quantity to remark as well
+
+### Q13 how to view all customers
+
 ## Glossary
 
 --------------------------------------------------------------------------------------------------------------------
@@ -308,14 +311,14 @@ addContact n/Tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, 0
 Adds a new customer to the bakery’s customer database.
 
 ```bash
-addCustomer n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [i/INFORMATION] [t/TAG] [t/MORETAGS...]
+addCustomer n/NAME p/PHONE_NUMBER i/INFORMATION [e/EMAIL] [a/ADDRESS] [t/TAG] [t/MORETAGS...]
 ```
 - **Parameters:**
   - `n/NAME`: The customer's name. This has to be alphanumerical.
   - `p/PHONE_NUMBER`: The customer's phone number. This has to be unique in the contacts list and have more than 3 digits.
+  - `i/INFORMATION`: (Optional) Additional information of the customer such as dietary preference (Alphanumerical).
   - `e/EMAIL`: (Optional) The customer's email address.
   - `a/ADDRESS`: (Optional) The customer's address.
-  - `s/INFORMATION`: (Optional) Additional information of the customer such as dietary preference (Alphanumerical).
   - `t/TAG`: (Optional) Tags for additional customer information. Only a single word can be used as a tag. Can have multiple prefixes.
 
 **Example:**
@@ -390,20 +393,20 @@ bakery owner will sell it for, and a list of ingredients required to make it.
 
 For example, typing **addPastry Croissant 3.50 Flour Cream Sugar** would add a pastry named "Croissant" priced at $3.50, 
 with "Flour," "Cream," and "Sugar" listed as its ingredients. By using this command, bakery owners can easily track of 
-all their pastries and ingredient needs, making it more convenient for bakery owners to manage their inventory.
+all their pastries and ingredient needs, making it more convenient for bakery owners to manage their list of pastries.
 
 ### **Add Supplier Command**
 Adds a new supplier to the bakery’s supplier database.
 
 ```bash
-addSupplier n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [s/INGREDIENTS_SUPPLIED] [t/TAG] [t/MORETAGS...]
+addSupplier n/NAME p/PHONE_NUMBER s/INGREDIENTS_SUPPLIED [e/EMAIL] [a/ADDRESS] [t/TAG] [t/MORETAGS...]
 ```
 - **Parameters:**
     - `n/NAME`: The supplier's name. This has to be alphanumerical.
     - `p/PHONE_NUMBER`: The supplier's phone number. This has to be unique in the contacts list and have more than 3 digits.
+    - `s/INGREDIENTS_SUPPLIED`: List of ingredients supplied, comma separated
     - `e/EMAIL`: (Optional) The supplier's email address.
     - `a/ADDRESS`: (Optional) The supplier's address.
-    - `s/INGREDIENTS_SUPPLIED`: (Optional) List of ingredients supplied, comma separated
     - `t/TAG`: (Optional) Tags for additional supplier information. Only a single word can be used as a tag. Can have multiple prefixes.
 
 **Example:**
@@ -420,7 +423,7 @@ include a tag for additional information.
 For example, typing **addSupplier n/tim p/81234567 e/emily@example.com a/456 Cupcake Road, Block 123, #03-04 s/salt, chocolate** 
 will add a supplier named "Tim" with phone number "81234567," email "emily@example.com," located at "456 Cupcake Road, Block 123, #03-04," 
 and supplying "salt" and "chocolate" as the supplied ingredients for the bakery. This command simplifies the tracking 
-of supplier contacts and ingredient sources, helping bakery owners efficiently manage supplier relationships and inventory.
+of supplier contacts and ingredient sources, helping bakery owners efficiently manage supplier relationships.
 
 ### **Add Supply Order Command**
 Adds a supplier order by providing the supplier's name, phone number and the product IDs from the ingredient catalogue.
@@ -455,52 +458,6 @@ For example, typing **addSupplyOrder n/John Doe p/98765432 o/1 2 3** creates a s
 "John Doe" with phone number "98765432," ordering products with IDs "1," "2," and "3" from the ingredient catalogue.
 This command helps bakery owners efficiently manage incoming supplies, track supply orders by product ID, and streamline 
 the ordering process for necessary ingredients.
-
-### **Check Ingredient Stock Command**
-Check the stock in the inventory for a certain ingredient.
-
-```bash
-checkIngredientStock INGREDIENT
-```
-- **Parameters:**
-    - `INGREDIENT`: The name of the ingredient to be checked.
-
-**Example:**
-```bash
-checkIngredientStock Flour
-```
-![Check Ingredient Stock.png](images%2FCheck%20Ingredient%20Stock.png)
-
-The Check Ingredient Stock Command allows bakery owners to verify the current stock level of a specified ingredient in 
-their inventory. This command requires the ingredient's name and will display the available quantity for that ingredient 
-if it is in stock. 
-
-For example, typing **checkIngredientStock Flour** checks the inventory for the "Flour" ingredient and returns the 
-quantity available if there is sufficient stock. This command helps bakery owners keep track of ingredient levels, 
-ensuring they have sufficient ingredients to make pastries for customers and can plan pastry orders when needed.
-
-### **Check Pastry Stock Command**
-Check the stock in the inventory for a certain pastry.
-
-```bash
-checkPastryStock PASTRY
-```
-- **Parameters:**
-    - `PASTRY`: The name of the pastry to be checked.
-
-**Example:**
-```bash
-checkPastryStock Croissant
-```
-![Check Pastry Stock.png](images%2FCheck%20Pastry%20Stock.png)
-
-The Check Pastry Stock Command allows bakery owners to verify the availability of a specific pastry in their inventory.
-This command requires only the pastry's name and will display whether there is sufficient stock to meet potential
-customer demand.
-
-For example, typing **checkPastryStock Croissant** checks the inventory for "Croissant" pastry and returns the quantity
-available if there are sufficient pastries. This command helps bakery owners ensure they can fulfill customer orders
-by maintaining the right stock levels for popular pastries.
 
 ### **Clear All Command**
 Removes all entries from the bakery’s address book, including customers, suppliers, and any related information.
@@ -603,8 +560,7 @@ find KEYWORD [MORE_KEYWORDS]
 - **Parameters:**
     - `KEYWORD`: The keyword to search for.
     - `[MORE_KEYWORDS]`: Additional keywords to search for.
-    - 
-* Use the list command to return to the full contact listlist
+* Use the list command to return to the full contact `list`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
@@ -705,7 +661,7 @@ For instance, entering removeIngredient Flour will delete the ingredient "Flour"
 
 
 ### **Remove Pastry Command**
-Removes an exisiting pastry from the bakery's pastry catalogue.
+Removes an existing pastry from the bakery's pastry catalogue.
 
 ```bash
 removePastry NAME
@@ -768,22 +724,6 @@ viewIngredientCatalogue
 The View Ingredient Catalogue Command provides a detailed list of all ingredients, including their IDs, names, and costs. This command ensures that bakery owners have a complete overview of the ingredients, helping in efficient decision-making.
 
 For instance, typing viewIngredientCatalogue displays the full catalogue for ingredient, enabling the bakery to verify all available ingredients in the catalogue.
-
-### **View Inventory Command**
-Displays the current list of ingredients available in the bakery’s inventory. It is in the format of "ID, Name, Units".
-
-```bash
-viewInventory
-```
-
-**Example:**
-```bash
-viewInventory
-```
-![viewInventory.png](images%2FviewInventory.png)
-The View Inventory Command provides a detailed overview of the current inventory, including the stock levels of each ingredient. This command helps bakery owners manage stock efficiently, avoiding shortages or overstocking.
-
-For instance, typing viewInventory displays the inventory with the ingredient names, IDs, and available quantities, offering a clear snapshot of the bakery's stock levels.
 
 ### **View PastryCatalogue Command**
 Displays the current list of pastries available in the bakery’s pastry catalogue.
