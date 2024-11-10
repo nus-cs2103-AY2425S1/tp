@@ -25,7 +25,7 @@ Equipped with features like **attendance marking**, **contact management**, **co
 
 1. Download the latest `ccaconnect.jar` file from [here](https://github.com/AY2425S1-CS2103T-F11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data
+1. Copy the file to the folder you want to use as the _home folder_ for CCAConnect. This folder will also be used by CCAConnect to store data.
 
 1. Open a command terminal, and change the current working directory to the folder where `ccaconnect.jar` was placed in. E.g. If you placed `ccaconnect.jar` in the `~/Desktop/CCA` folder, type in the following command:
     ```dtd
@@ -104,25 +104,25 @@ add n/NAME p/PHONE_NUMBER e/EMAIL t/TELEGRAM [r/ROLE]…​ [f/ or nf/ (NOT BOTH
 
 #### Parameters
 
-| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                     |
-|----------------|--------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                           |
-| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                  |
-| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                            |
-| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                   |
-| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                    |
-|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                |
-|                | `nf/`  | No          | Represents the non-favouriting of a contact.<br> This keyword should be included to optionally indicate that the contact is not a favourite contact. Contacts are not favourite by default. |
+| Parameter      | Prefix | Compulsory? | Remarks                                                                                                                                                                                         |
+|----------------|--------|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `NAME`         | `n/`   | Yes         | Represents the name of a contact.<br/> Should contain non-numeric characters and spaces, and should not be blank.                                                                               |
+| `PHONE_NUMBER` | `p/`   | Yes         | Represents the phone number of a contact.<br/> Should be a valid Singapore phone number (i.e. have 8 digits and start with 3, 6, 8, or 9).                                                      |
+| `EMAIL`        | `e/`   | Yes         | Represents the email of a contact.<br/> Should be a valid email address (follow the restrictions provided in the error message).                                                                |
+| `TELEGRAM`     | `t/`   | Yes         | Represents the telegram handle of a contact.<br/> Should be alphanumeric characters, and be between 5-32 characters long.                                                                       |
+| `ROLE`         | `r/`   | No          | Represents the role(s) held by the contact.<br/> Should be between 1-20 characters long.                                                                                                        |
+|                | `f/`   | No          | Represents the favouriting of a contact.<br/> This keyword should be included only if you intend for this contact to be a favourite contact.                                                    |
+|                | `nf/`  | No          | Represents the non-favouriting of a contact.<br> This keyword should be included to optionally indicate that the contact is not a favourite contact.<br> Contacts are not favourite by default. |
 
 * Both `f/` and `nf/` cannot be present in the command at once. 
 * Both `f/` and `nf/` can be absent in the command, in which the contact is not favourited by default.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
-A person is uniquely identified by his/her **telegram handle**
+A person is uniquely identified by his/her **telegram handle**.
 </div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
-A person can have any number of roles (including 0)
+A person can have any number of roles (including 0).
 </div>
 
 #### Example
@@ -132,7 +132,7 @@ A person can have any number of roles (including 0)
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book. <br/>
-This can be used to reset the list of contacts back to its unfiltered state
+This can be used to reset the list of contacts back to its unfiltered state.
 
 #### Format
 ```
@@ -202,12 +202,12 @@ When using `find`, at least **one** of the optional parameters must be included.
 
 | Parameter         | Prefix | Compulsory? | Remarks                                                                                                                                                                    |
 |-------------------|--------|-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `NAMEKEYWORD`     | `n/`   | No          | Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name                                                                                 |
+| `NAMEKEYWORD`     | `n/`   | No          | Represents the name to be searched.<br/> `NAMEKEYWORD` can be a partial match for the name.                                                                                |
 | `ROLEKEYWORD`     | `r/`   | No          | Represents the role to be searched.<br/> `ROLEKEYWORD` has to match exactly with the role. <br/> Contacts with roles matching at least one `ROLEKEYWORD` will be returned. |
-| `TELEGRAMKEYWORD` | `t/`   | No          | Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle                                                        |
-|                   | `f/`   | No          | Represents finding all contacts that have been favourited                                                                                                                  |
+| `TELEGRAMKEYWORD` | `t/`   | No          | Represents the telegram handle to be searched.<br/> `TELEGRAMKEYWORD` has to match exactly with the telegram handle.                                                       |
+|                   | `f/`   | No          | Represents finding all contacts that have been favourited.                                                                                                                 |
 
-* The search is case-insensitive for all parameters. E.g `hans` will match `Hans`
+* The search is case-insensitive for all parameters. E.g `hans` will match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
@@ -216,24 +216,24 @@ Invalid parameters will be accepted and 0 people will be returned.
 
 #### Example
 ##### Usage: Find by name
-* `find n/david` returns `David Li`<br>
+* `find n/david` returns `David Li`.<br>
   ![result for 'find n/david'](images/findDavidLiResult.png)
 
 ##### Usage: Find by role
-* `find r/treasurer` returns `Irfan Ibrahim` who has a role `Treasurer`<br>
+* `find r/treasurer` returns `Irfan Ibrahim` who has a role `Treasurer`.<br>
   ![result for 'find r/treasurer'](images/findTreasurerResult.png)
 
 ##### Usage: Find by telegram
-* `find t/alexyeoh` returns `Alex Yeoh` who has the telegram handle `alexYeoh`<br>
+* `find t/alexyeoh` returns `Alex Yeoh` who has the telegram handle `alexYeoh`.<br>
   ![result for 'find t/alexyeoh'](images/findAlexYeohResult.png)
 
 ##### Usage: Find by favourite
-* `find f/` returns 1 favourite contact<br>
+* `find f/` returns 1 favourite contact.<br>
   ![result for 'find f/'](images/findFavouriteResult.png)
 
 ##### Usage: Find composition
 Composing all 4 types of search will give an `OR` search, a contact that has at least one matching criteria will be returned.
-* `find n/david f/` returns all contacts with a name that partially matches `david`, **OR** are favourited contacts
+* `find n/david f/` returns all contacts with a name that partially matches `david`, **OR** are favourited contacts.
 
 ### Sorting the contacts: `sort`
 
@@ -244,7 +244,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 `sort ORDER`
 
 #### Alias
-`so` can be used in place of `sort`
+`so` can be used in place of `sort`.
 
 #### Parameters
 
@@ -253,7 +253,7 @@ Sorting works together with the `find` command, meaning that if you sort after r
 | `ORDER`   |        | Yes         | `ORDER` can only take the form of 3 possible options:<br/> `asc` - sorts by name in ascending order. <br/> `desc` - sorts by name in descending order. <br/> `og` - sorts by name in the original order, based on the initial positioning of the contacts. |
 
 ### Example
-* `sort asc` sorts the current list of contacts by name, in ascending order
+* `sort asc` sorts the current list of contacts by name, in ascending order.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**<br/>
 Even though `sort` orders the list of contacts in alphabetical order of their names, this action is case-insensitive. This means that the letters `A` and `a` will be treated equally, for instance.
@@ -277,7 +277,7 @@ delete INDEX
 |-----------|--------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `INDEX`   |        | Yes         | Deletes the person at the specified `INDEX`.<br/> It must be a positive unsigned integer and must not exceed the size of the displayed contact list. | 
 
-* The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`
+* The index refers to the index number shown in the displayed person list. This can change having previously used commands such as `find` or `sort`.
 
 #### Examples
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -324,21 +324,21 @@ mark t/TELEGRAM…​ d/DATE
 
 #### Example
 
-**Please note the following code will display a different GUI if used on a different day (other than 7th November 2024)**
+**Please note the following code will display a different GUI if used on a different day (other than 7th November 2024)**.
 
 * `mark t/alexYeoh t/berniceYu d/2024-11-07`
 
   ![result of command `mark t/alexYeoh t/berniceYu d/2024-11-07`](images/MarkCommandResult.png)
 
-* Mark attendance of contact with telegram `alexYeoh`, `berniceYu` first, then input command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07`
+* Mark attendance of contact with telegram `alexYeoh`, `berniceYu` first, then input command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07`.
 
   ![result of command `mark t/alexYeoh t/berniceYu t/charlotte d/2024-11-07` if Alex and Bernice's attendance is marked before.png](images/RepeatedMarkCommandResult.png)  
 
-* Mark attendance of a non-member contact `mark t/davidLi d/2024-11-07`
+* Mark attendance of a non-member contact `mark t/davidLi d/2024-11-07`.
 
   ![result of command `mark t/davidLi d/2024-11-07`](images/MarkNonMemberCommandResult.png)
 
-* Mark attendance from a list with non-exist telegrams `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`
+* Mark attendance from a list with non-exist telegrams `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`.
 
   ![result of command `mark t/alexYeoh t/berniceYu t/jerryNotexist d/2024-11-07`](images/MarkNonExistCommandResult.png)
 
@@ -379,7 +379,7 @@ clear
 ```
 
 #### Alias
-`c` can be used in place of `clear`
+`c` can be used in place of `clear`.
 
 
 ### Viewing a specific contact : `view`
@@ -398,7 +398,7 @@ view t/TELEGRAM_HANDLE
 | `TELEGRAM` | `t/`   | Yes         | `TELEGRAM` must match exactly alphabetically to the telegram handle of the contact that is being marked. <br/> Note that `TELEGRAM` is not case-sensitive.<br/> |
 
 Examples:
-* `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`<br>
+* `view t/bob12` displays page containing all the information of the person with telegram handle `@bob12`.<br>
 ![result for `view t/bob12`](images/viewBob12.png)
 
 ### Exiting the program : `exit`
@@ -427,7 +427,7 @@ switch PROFILE
 ```
 
 #### Alias
-`sw` can be used in place of `switch`
+`sw` can be used in place of `switch`.
 
 #### Parameters
 <a id="switch-remarks"></a>
@@ -437,8 +437,8 @@ switch PROFILE
 | `PROFILE` |        | Yes         | `PROFILE` specifies the profile that `switch` will attempt to switch to.<br/> `PROFILE` must be between 1 and 30 characters, and can only contain letters (a-z, A-Z), numbers (0-9), hyphens (-), and underscores (_).<br/> `PROFILE` names are **case-insensitive** and treated as lowercase. |
 
 #### Example
-  - `switch john-doe` switches to a profile named 'john-doe'
-  - `sw ALICE` switches to a profile named 'alice'
+  - `switch john-doe` switches to a profile named 'john-doe'.
+  - `sw ALICE` switches to a profile named 'alice'.
   - `switch` lists all available profiles that you can switch to, if they exist.
 
 ### Deleting a profile: `deleteProfile`
@@ -451,7 +451,7 @@ deleteProfile PROFILE
 ```
 
 #### Alias
-`delp` can be used in place of `deleteProfile`
+`delp` can be used in place of `deleteProfile`.
 
 #### Parameters
 
@@ -463,8 +463,8 @@ deleteProfile PROFILE
 #### Example
 This is a logical sequence of commands, assuming your current profile is addressbook:
 * `deleteProfile addressbook` is not allowed because `addressbook` is the active profile.
-* `sw alice` switches the current profile to `alice`
-* `delp addressbook` deletes the `addressbook` profile after switching to 'alice'
+* `sw alice` switches the current profile to `alice`.
+* `delp addressbook` deletes the `addressbook` profile after switching to 'alice'.
 
 
 ### Saving the data
