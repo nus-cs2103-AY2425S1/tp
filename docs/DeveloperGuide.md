@@ -75,7 +75,7 @@ There are two ways to run tests.
 
    **Tip:**
    Optionally, you can follow the guide [_[se-edu/guides] Using Checkstyle_](https://se-education.org/guides/tutorials/checkstyle.html) to find how to use the CheckStyle within IDEA e.g., to report problems _as_ you write code.
-   
+
    </box>
 
 1. **Set up CI**
@@ -166,7 +166,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : 
+**API** :
 [`Logic.java`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
@@ -223,7 +223,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : 
+**API** :
 [`Model.java`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="890" />
@@ -251,7 +251,7 @@ each `Person` needing their own `Tag` objects.<br>
 
 ### Storage component
 
-**API** : 
+**API** :
 [`Storage.java`](https://github.com/AY2425S1-CS2103T-T15-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
@@ -729,7 +729,7 @@ Adding a client while all clients are being shown.
 
 <box type="warning">
 
-**Prerequisite**: List all _clients_ using the `list` command. Multiple _clients_ in the list. <br> Please input this command `cadd n/Alice Peng p/81239999 e/alicepeng@example.com` to ensure that there is already a client with the name `Alice Peng` with phone number `81239999` and email address `alicepeng@example.com`. 
+**Prerequisite**: List all _clients_ using the `list` command. Multiple _clients_ in the list. <br> Please input this command `cadd n/Alice Peng p/81239999 e/alicepeng@example.com` to ensure that there is already a client with the name `Alice Peng` with phone number `81239999` and email address `alicepeng@example.com`.
 
 <box type="info" light>
 
@@ -1198,7 +1198,7 @@ is displayed in the result display box.
 
 </box>
 
-</box> 
+</box>
 
 <box type="info" seamless>
 
@@ -1211,7 +1211,7 @@ command success message is displayed in the result display box.
 
 </box>
 
-</box> 
+</box>
 
 <box type="info" seamless>
 
@@ -1224,7 +1224,7 @@ address. Error details will be displayed in the result display box.
 
 </box>
 
-</box> 
+</box>
 
 <box type="info" seamless>
 
@@ -1236,7 +1236,7 @@ No client's information will be edited as 0 is an invalid index. Error details w
 
 </box>
 
-</box> 
+</box>
 
 <box type="info" seamless>
 
