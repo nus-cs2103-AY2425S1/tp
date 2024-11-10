@@ -82,7 +82,7 @@ Running this command will clear all your data in TalentHub. This action is irrev
 
 ### Adding a person: `add person`
 
-Adds a person to TalentHub.
+Adds a person to TalentHub. 
 
 Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -91,7 +91,8 @@ Format: `add person n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 **:information_source:Optionals** <br>
 
 A person can have any number of tags or none at all!
-The address and email address fields are also optional!
+The address and email address fields are also optional! 
+Current implementation does not require the person to be added to have the celebrity tag attached to their name.
 </div>
 
 Examples:
@@ -242,7 +243,8 @@ Format: `add event n/NAME t/TIME [v/VENUE] c/CELEBRITY [p/POINTS OF CONTACT]…�
 **:information_source:Optionals** <br>
 
 An event can have any number of points of contact or none at all!
-The venue field is also optional!
+The venue field is also optional! 
+When adding a person to the point of contacts list, only the first tag will be listed in the point of contact list.
 </div>
 
 Examples:
