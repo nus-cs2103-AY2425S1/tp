@@ -71,15 +71,15 @@ the process of accessing and updating resident student details. What's more, Dor
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+  * `list` : Lists all contacts.
 
-    * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
+  * `add n/John Doe p/+65 98765432 e/johnd@example.com r/01-1008 a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the DorManagerPro address book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+  * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-    * `clear` : Deletes all contacts.
+  * `clear` : Deletes all contacts.
 
-    * `exit` : Exits the app.
+  * `exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -130,14 +130,14 @@ Format: `add n/NAME p/PHONE e/EMAIL [r/ROOM_NUMBER] [a/ADDRESS] [t/TAG]...`
 > * `ROOM_NUMBER`, `ADDRESS` AND `TAG` are optional.
 > * A person can have up to 10 tags (including 0).
 > * `NAME` consists of alphabets, numbers, dashes (-) and apostrophes (').
-> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number. 
+> * `PHONE` consists of an optional country code indicated with a plus (+), an optional area code and a compulsory number.
 > * `EMAIL` should be of the format local-part@domain
 > * You cannot set emergency contact details when adding a person. Use the `edit` command to add emergency contact details.
 > * You cannot set graduation year when adding a person. Use the `edit` command to add graduation year.
 > * Refer to [Field constraints](#field-constraints) for more details on accepted values for each field.
 
 > <span style="color:Tomato"> WARNING! </span> <br>
-> 
+>
 > * If there are duplicate names, i.e if a person in the DorManagerPro address book already has the specified `NAME`, an error will be thrown. This is because it is very rare for two people to have the exact same name down to the surname. Instead, we allow numerals to denote different people with the same name.
 > * If there are duplicate phone numbers, i.e if a person in the DorManagerPro address book already has the specified `PHONE_NUMBER`, an error will be thrown. This is because no two people have the same phone number.
 > * If there are duplicate emails, i.e if a person in the DorManagerPro address book already has the specified `EMAIL`, an error will be thrown. This is because no two people have the same email address.
@@ -175,24 +175,24 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Finding a person : `find`
+### Finding a person: `find`
 
 Format: `find n/NAME p/PHONE r/ROOM_NUMBER t/TAG`
 
-**Tip:** any possible orders and combinations of the 4 parameters NAME, PHONE_NUMBER, ROOM_NUMBER, and TAG are applicable
+**Tip:** any possible orders and combinations of the 4 parameters NAME, PHONE, ROOM_NUMBER, and TAG are applicable
 
 
 * The name search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords in name search does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* In the name search persons matching at least one keyword will be returned (i.e. `OR` search).
+* In the name search, persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-* Only full words will be matched for ROOM_NUMBER and PHONE_NUMBER, the arguments
-  should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER 
-* Order of the TAGs do not matter `t/friends t/colleagues` works the same
+* Only full words will be matched, for ROOM_NUMBER and PHONE the arguments
+  should be exactly the same as the person's ROOM_NUMBER and PHONE_NUMBER
+* Order of the TAGs do not matter, `t/friends t/colleagues` works the same
   as `t/colleagues t/friends`
-* Tag search is case-sensitive `Friends` will not match `friends`
-* In tag search the contacts have to contain all the specified TAGs in order to match
+* Tag search is case-sensitive, `Friends` will not match `friends`
+* In tag search, the contacts have to contain all the specified TAGs in order to match
 
 Examples:
 * `find p/94509592 n/Alex Jones r/08-1234 t/friends t/colleagues`  
@@ -361,7 +361,7 @@ Constraints:
 * `name` can contain any alphanumeric character or whitespace.
 * `name` can contain hyphens, commas and apostrophes.
 * `name` can be 1 to 300 characters long.
-  
+
 Duplicate handling:
 * Two resident student contacts with the same name are not allowed
 > <span style="color:Gray"> NOTE! </span> <br>
@@ -394,9 +394,9 @@ Format: `l@d`, where `l` is the local part of the email and `d` is the domain of
 
 Constraints:
 * The local-part `l` should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-* The domain name `d` is made up of domain labels separated by periods. 
+* The domain name `d` is made up of domain labels separated by periods.
 * The domain name `d` must end with a domain label at least 2 characters long.
-* Each domain label must start and end with alphanumeric characters 
+* Each domain label must start and end with alphanumeric characters
 * Each domain label must  consist of alphanumeric characters, separated only by hyphens, if any.
 * `l`, `@` and `d` are not supposed to be separated by whitespace.
 
