@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.FilterContactTypeCommand;
-import seedu.address.logic.commands.FindTelegramHandleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContactType;
 import seedu.address.model.person.ContactTypePredicate;
