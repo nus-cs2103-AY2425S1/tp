@@ -80,6 +80,11 @@ If you don't have Java, see this installation [guide](https://docs.oracle.com/en
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
+**Additional Notes**
+
+* When specifying an index, it should be between 1 and 2147483647, inclusive. The current error message
+may not reflect this requirement, but changes for clarification are planned in the future.
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.

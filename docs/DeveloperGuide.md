@@ -1028,6 +1028,22 @@ Allow more special characters such as `/` and `-` to be used in student names.
 It is possible for students' legal names to contain `-` (e.g. Mary-Ann) or `/` (e.g. S/O).
 Relaxing current restrictions to allow such characters will allow such names to be input.
 
+**<u>Add clearer error message for integers/indexes </u>**
+
+**Description**
+
+Currently, when an invalid or sufficiently large number is given as an index, the error message says:<br>
+Index is not an unsigned non-zero integer.
+This should be changed to specify the requirement that indexes should be between
+1 and `Integer.MAX_VALUE`.
+
+**Rationale**
+
+The current error message can be confusing for non-technical users who do not know what
+*unsigned* means, and misleading when it also shows for large inputs that exceed Java's
+integer limit, such as `104890385925902379`.
+Clearer error messages can help to mitigate such confusion.
+
 ### Glossary
 
 * **Attendance**: Student's Presence/Absence for a Lesson
