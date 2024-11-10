@@ -33,14 +33,11 @@ public class BackupCommand extends Command {
 
     private void backup(Path originalPath, Path backupPath) throws CommandException {
         try {
-            if (FileUtil.isFileExists(originalPath)) {
-                FileUtil.createIfMissing(backupPath);
-                copy(originalPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
-            } else {
-                throw new CommandException(NO_DATA_FILE);
-            }
-        } catch (IOException e) {
-            throw new CommandException(e.getMessage());
+            FileUtil.createIfMissing(backupPath);
+            copy(originalPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+        }catch (IOException e) {
+            throw new CommandException(NO_DATA_FILE);
         }
     }
+
 }
