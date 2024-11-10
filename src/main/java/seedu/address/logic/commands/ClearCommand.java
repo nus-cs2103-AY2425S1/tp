@@ -11,7 +11,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_CONFIRMATION = "Are you sure you want to permanently clear all your contacts? "
-            + "\nType 'Y'/'Yes' to confirm, or any other input to cancel";
+            + "\nType 'Y'/'Yes' (case-insensitive) to confirm, or any other input to cancel";
 
     @Override
     public CommandResult execute(Model model) {
