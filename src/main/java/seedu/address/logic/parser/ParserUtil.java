@@ -26,7 +26,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_ATTENDANCE =
             "Invalid attendance entry. Please enter 1/Y/y for yes and 0/N/n for no.";
     public static final String MESSAGE_INVALID_PARTICIPATION =
-            "Participation should be between 0-100 inclusive.";
+            "Participation should be an integer between 0-100 inclusive.";
 
     /**
      * Parses a {@code String date} into a {@code Date}.

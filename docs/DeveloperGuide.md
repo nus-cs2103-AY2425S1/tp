@@ -1024,7 +1024,7 @@ testers are expected to do more *exploratory* testing.
 
 3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
    Expected: No student is added. Error details shown.
-   
+
 4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
    Expected: No student is added. Error details shown.
 
@@ -1211,17 +1211,11 @@ testers are expected to do more *exploratory* testing.
 2. Test case: `removefromlesson 1 n/TestOne`  
    Expected: Student TestOne is removed from the first lesson. Confirmation message is shown.
 
-3. Test case: `removefromlesson 1 i/2` (assuming the student at index 2 exists in the lesson)  
-   Expected: The student at index 2 is removed from the first lesson. Confirmation message is shown.
-
-4. Test case: `removefromlesson 1 n/NonExistentStudent`  
+3. Test case: `removefromlesson 1 n/NonExistentStudent`  
    Expected: No student is removed. Error message about student not found shown.
 
-5. Test case: `removefromlesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
+4. Test case: `removefromlesson 2 n/TestOne` (where lesson at index 2 doesn’t exist)  
    Expected: No student is removed. Error details shown.
-
-6. Test case: `removefromlesson 1 n/TestOne i/2`
-   Expected: Both TestOne and the student at index 2 are removed from the first lesson. Confirmation message is shown.
 
 ### Marking attendance in a lesson: `marka`
 
@@ -1330,17 +1324,12 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `removefromconsult 1 n/TestOne`  
    Expected: Student TestOne is removed from the first consultation. Confirmation message is shown.
-3. Test case: `removefromconsult 1 i/2` (assuming the student at index 2 exists in the consultation)  
-   Expected: The student at index 2 is removed from the first consultation. Confirmation message is shown.
 
-4. Test case: `removefromconsult 1 n/NonExistentStudent`  
+3. Test case: `removefromconsult 1 n/NonExistentStudent`  
    Expected: No student is removed. Error message about student not found shown.
 
-5. Test case: `removefromconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
+4. Test case: `removefromconsult 2 n/TestOne` (where consultation at index 2 doesn’t exist)  
    Expected: No student is removed. Error details shown.
-
-6. Test case: `removefromconsult 1 n/TestOne i/2`
-   Expected: Both TestOne and the student at index 2 are removed from the first consultation. Confirmation message is shown.
 
 ### Deleting consultations: `deleteconsult`
 
