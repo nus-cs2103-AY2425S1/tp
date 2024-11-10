@@ -37,6 +37,25 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_preamblePresent_throwsParseException() {
+        // EP: preamble present
+        assertParseFailure(parser, " preamble",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // preamble with valid name arguments specified
+        assertParseFailure(parser, " preamble n/Alice Ben",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // preamble with valid day arguments specified
+        assertParseFailure(parser, " preamble d/Monday Tuesday",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+
+        // preamble with valid name and day arguments specified
+        assertParseFailure(parser, " preamble n/Alice Ben d/Monday Tuesday",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_invalidInput_throwsParseException() {
         // EP: invalid input
         assertParseFailure(parser, " hello",
