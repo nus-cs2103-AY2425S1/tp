@@ -260,9 +260,57 @@ Finds students whose names contain any of the given keywords *and* their tuition
 
 <div style="page-break-after: always;"></div>
 
+### Recording unpaid tuition fee of a student: `owe`
+
+Records the tuition fee that the student is unable to pay immediately after the lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student when he/she pays for the outstanding fees at a later time.
+
+**Format:** `owe INDEX hr/HOURS_OWED`
+
+**Example:**
+* `owe 1 hr/1.5` updates the tuition fee owed by the 1st student in the list.
+
+**Output:**
+![oweResult.png](images/oweResult.png)
+
+<box type="important" header="##### Constraints">
+
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX must be a positive integer** 1, 2, 3, …​
+* **HOURS_OWED** must be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
+</box>
+
+<box type="tip" header="##### Tips">
+
+* In case you made a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT to your preference.
+
+</box>
+
+<div style="page-break-after: always;"></div>
+
+### Settling outstanding fees from students: `settle`
+
+Settles the amount repaid by the student and adds it to the paid amount. To record payment which is not related to the owed amount, you may use the [`pay` command](#receiving-payment-from-a-student-pay).
+
+**Format:** `settle INDEX amount/AMOUNT`
+
+**Example:**
+* `settle 1 amount/50.00`
+
+**Output:**
+![settleResult.png](images/settleResult.png)
+
+<box type="important" header="##### Constraints">
+
+* The **INDEX** refers to the index number shown in the displayed student list.
+* The **INDEX** **must be a positive integer** 1, 2, 3, …​
+* **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
+
+</box>
+
 ### Receiving payment from a student: `pay`
 
-Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
+Updates the amount of tuition fee paid by the specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pays for the outstanding fees.
 
 **Format:** `pay INDEX hr/HOURS_PAID`
 
@@ -288,53 +336,6 @@ Updates the amount of tuition fee paid by the specified student after a lesson. 
 
 <div style="page-break-after: always;"></div>
 
-### Recording unpaid tuition fee of a student: `owe`
-
-Updates the amount of tuition fee owed by a specified student after a lesson. You should use the [`settle` command](#settling-outstanding-fees-from-students-settle) to settle the tuition fee owed by the student after he/she pay for the outstanding fees.
-
-**Format:** `owe INDEX hr/HOURS_OWED`
-
-**Example:** 
-* `owe 1 hr/1.5` updates the tuition fee owed by the 1st student in the list.
-
-**Output:**
-![oweResult.png](images/oweResult.png)
-
-<box type="important" header="##### Constraints">
-
-* The **INDEX** refers to the index number shown in the displayed student list.
-* The **INDEX must be a positive integer** 1, 2, 3, …​
-* **HOURS_OWED** must be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-
-</box>
-
-<box type="tip" header="##### Tips">
-
-* In case you made a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student-edit) to fix the OWE_AMOUNT to your preference.
-
-</box>
-
-<div style="page-break-after: always;"></div>
-
-### Settling outstanding fees from students: `settle`
-
-Updates the amount of tuition fee paid and the amount of tuition fee owed by the student after the student pays for his/her outstanding tuition fees.
-
-**Format:** `settle INDEX amount/AMOUNT`
-
-**Example:**
-* `settle 1 amount/50.00`
-
-**Output:**
-![settleResult.png](images/settleResult.png)
-
-<box type="important" header="##### Constraints">
-
-* The **INDEX** refers to the index number shown in the displayed student list.
-* The **INDEX** **must be a positive integer** 1, 2, 3, …​
-* **AMOUNT** must be a positive value and must not be more than **OWED_AMOUNT**.
-
-</box>
 
 ### Showing income data: `income`
 
