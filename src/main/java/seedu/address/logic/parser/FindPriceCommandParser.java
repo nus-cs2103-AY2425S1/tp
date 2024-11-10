@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PRICE_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
 import seedu.address.logic.commands.FindPriceCommand;
+import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.restaurant.PriceContainsKeywordsPredicate;
 
@@ -23,6 +25,11 @@ public class FindPriceCommandParser implements Parser<FindPriceCommand> {
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPriceCommand.MESSAGE_USAGE));
+        }
+
+        if (!args.contains("$")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_PRICE_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
 
         String[] tagKeywords = trimmedArgs.split("\\s+");
