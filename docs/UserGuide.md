@@ -132,7 +132,8 @@ For all parts of the input that accept special characters, they cannot be placed
 
 #### Tag(s)
 
-* Valid inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label e.g. `\t friend`, `\t colleague \t neighbour`
+Aside from normal tags, F.A.R.T. also provides specialised tags. For more information, refer to the [Visual Features](#visual-features) below.
+* Valid inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label e.g. `t/ friend`, `t/ colleague t/ neighbour`
 * Invalid inputs:
   * Dropping of the `t/` label e.g. `t/colleague neighbour`
   * Non-alphanumeric characters e.g. `t/#1friend`
@@ -176,8 +177,9 @@ A client can have any number of tags (including 0) but only maximum of 1 address
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/8234567 b/11 09 2001 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com b/11 09 2001 a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/81234567 b/11 09 2001 t/criminal`
+* `add n/Charlie Chen Cao Cong p/88888888 b/01 02 2003 e/charliechen88@huat.com t/mahjong`
 
 **Note:**
 1. As mentioned in the Validation Rules, only valid email addresses (in the form `local-part@domain`) and **Singapore** phone numbers are accepted.

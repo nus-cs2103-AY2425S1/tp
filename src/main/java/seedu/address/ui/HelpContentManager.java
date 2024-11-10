@@ -84,7 +84,7 @@ public class HelpContentManager {
                 Validation Rules: Email, Birthday
                  Email
                  For all parts of the input that allow special characters, they cannot appear
-                 at the start or end, and they can only be used consecutively at most once.
+                 at the start or end, and they can only be used consecutively at most once.\n
                  Valid Inputs: In the format `local-part@domain`, e.g. `john.doe@example.com`,
                  `j_ohn@example.edu.org`, `john123@e-mail.com`.
                  * `local-part`: Alphanumeric characters, plus `+`, `_`, `.`, `-`.
@@ -110,6 +110,8 @@ public class HelpContentManager {
                  Valid Inputs: Accepts any string of characters, e.g., `John Street, Block 123, #01-01`,
                  `Pro+fessional Building, Level 3, Unit 30`, `東京都豊島区東池袋1-22-10 ヒューマックスパビリオン`.\n
                  Tag(s)
+                 Aside from normal tags, F.A.R.T. also provides specialised tags. For more
+                 information, refer to the Visual Features section.\n
                  Valid Inputs: Alphanumeric characters. To include multiple tags, repeat the `t/` label,
                  e.g., `t/friend`, `t/colleague t/neighbour`.
                  Invalid Inputs:
@@ -151,6 +153,8 @@ public class HelpContentManager {
                  street, block 123, #01-01 b/11 09 2001`\n
                  `add n/Betsy Crowe t/friend e/betsycrowe@example.com
                  a/Newgate Prison p/8234567 b/11 09 2001 t/criminal`\n
+                 `add n/Charlie Chen Cao Cong p/88888888 b/01 02 2003
+                 e/charliechen88@huat.com t/mahjong`\n
                  Note:
                  1. As mentioned in the Validation Rules, only Singapore phone numbers and
                  valid email addresses (in the form `local-part@domain`) are accepted.\n
