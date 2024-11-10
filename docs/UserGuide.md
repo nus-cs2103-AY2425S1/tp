@@ -36,6 +36,8 @@ have.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 3 Starting HR Helper
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -66,6 +68,8 @@ have.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 4 Features of HR Helper
 
 <box type="info" seamless>
@@ -90,6 +94,7 @@ have.
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.1 Authentication
 
@@ -114,6 +119,7 @@ Examples:
 **Warning:** Keep your credentials secure.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.2 Viewing help : `help`
 
@@ -135,6 +141,7 @@ Examples:
 **Warning:** Navigating to the link will not close HR Helper. Do not leave your device unattended.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.3 Adding an employee : `add`
 
@@ -158,6 +165,7 @@ Examples:
 **Warning:** Duplicate employees with the same name cannot be added.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.4 Listing all employees : `list`
 
@@ -180,6 +188,7 @@ Example:
 **Warning:** Use this command before other commands like delete or edit to ensure you’re modifying the correct entry.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.5 Counting employees : `count`
 
@@ -206,6 +215,7 @@ Examples:
 **Warning:** When using count t/TAG, ensure that the TAG exists and is spelled accurately; otherwise, the command may return zero results.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.6 Editing an employee : `edit`
 
@@ -236,6 +246,7 @@ Examples:
 **Warning:** Changes overwrite current data. Double-check inputs before saving.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.7 Locating employees by name : `find`
 
@@ -267,6 +278,7 @@ Examples:
 **Warning:** The find command only searches names. Ensure that names are correctly spelled.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.8 Deleting an employee : `delete`
 
@@ -294,6 +306,7 @@ Examples:
 **Warning:** This action is irreversible. Use list before delete to confirm the index.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.9 Sorting Employees : `sort`
 
@@ -321,6 +334,7 @@ Examples:
 **Warning:** Sorting by multiple tags may combine various groups, which can affect other commands relying on order.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.10 Favoriting an employee : `favorite`
 
@@ -348,6 +362,7 @@ Examples:
 **Warning:** Avoid favoriting too many employees, as an excessive number of favorites can make it challenging to identify key employees quickly.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.11 Clearing all entries : `clear`
 
@@ -370,6 +385,7 @@ Examples:
 **Warning:** This action is irreversible. Back up data if necessary before clearing.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.12 Exiting HR Helper : `exit`
 
@@ -387,6 +403,7 @@ Format: `exit`
 **Warning:** Exiting abruptly may interrupt ongoing processes. Use the exit command instead of closing the window directly to ensure a clean shutdown.
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### 4.13 Employee Details Window
 
@@ -437,6 +454,7 @@ The **Employee Details Window** allows HR personnel to view and edit detailed in
     - If invalid data is entered, an error dialog will appear prompting correction.
     - Follow the on-screen instructions to rectify any issues.
 
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
@@ -458,6 +476,8 @@ Furthermore, certain edits can cause HR Helper to behave in unexpected ways (e.g
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## 5 Command summary
 
