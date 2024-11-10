@@ -1,8 +1,7 @@
 package seedu.address.logic.commands.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_TASK_NOT_FOUND_IN_CONTACT;
@@ -64,13 +63,15 @@ public class UnassignTaskCommandTest {
         UnassignTaskCommand command = new UnassignTaskCommand(Index.fromOneBased(10), Set.of(INDEX_FIRST));
 
         // Command should throw a CommandException for invalid person index
-        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () -> command.execute(model));
+        assertThrows(CommandException.class, String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                1, model.getFilteredPersonList().size()), () -> command.execute(model));
     }
 
     @Test
     public void execute_invalidTaskIndex_throwsCommandException() {
         // Use a valid vendor but with an invalid task index
-        UnassignTaskCommand command = new UnassignTaskCommand(Index.fromZeroBased(0), Set.of(Index.fromOneBased(10)));
+        UnassignTaskCommand command = new UnassignTaskCommand(Index.fromZeroBased(0),
+                Set.of(Index.fromOneBased(10)));
 
         // Command should throw a CommandException for invalid task index
         assertThrows(
@@ -96,19 +97,34 @@ public class UnassignTaskCommandTest {
         UnassignTaskCommand command2 = new UnassignTaskCommand(INDEX_SECOND, Set.of(INDEX_SECOND));
 
         // same object -> returns true
-        assertTrue(command1.equals(command1));
+        assertEquals(command1, command1);
 
         // same values -> returns true
         UnassignTaskCommand command1Copy = new UnassignTaskCommand(INDEX_FIRST, Set.of(INDEX_FIRST));
-        assertTrue(command1.equals(command1Copy));
-
-        // different types -> returns false
-        assertFalse(command1.equals(1));
+        assertEquals(command1, command1Copy);
 
         // null -> returns false
-        assertFalse(command1.equals(null));
+        assertNotEquals(null, command1);
 
         // different values -> returns false
-        assertFalse(command1.equals(command2));
+        assertNotEquals(command1, command2);
+
+        //different type -> false
+        UnassignTaskCommand command = new UnassignTaskCommand(INDEX_FIRST, Set.of(INDEX_FIRST));
+        String differentType = "not a command";
+        assertNotEquals(command, differentType);
+    }
+
+    @Test
+    public void execute_taskNotFoundInPerson_throwsCommandException() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Person personWithDifferentTask = new PersonBuilder().withName("Person with no Task").build();
+        model.setPerson(firstPerson, personWithDifferentTask);
+        Task unrelatedTask = new Task("Unrelated Task");
+        model.addTask(unrelatedTask);
+
+        // try to unassign a task that the person does not have
+        UnassignTaskCommand command = new UnassignTaskCommand(INDEX_FIRST, Set.of(INDEX_FIRST));
+        assertThrows(CommandException.class, MESSAGE_TASK_NOT_FOUND_IN_CONTACT, () -> command.execute(model));
     }
 }
